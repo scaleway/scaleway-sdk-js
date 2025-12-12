@@ -1,12 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone} from '@scaleway/sdk-client'
+import type { Zone as ScwZone } from '@scaleway/sdk-client'
 
-
-export type DHCPEntryType =
-  | 'unknown'
-  | 'reservation'
-  | 'lease'
+export type DHCPEntryType = 'unknown' | 'reservation' | 'lease'
 
 export type GatewayNetworkStatus =
   | 'unknown'
@@ -73,11 +69,7 @@ export type ListPATRulesRequestOrderBy =
   | 'public_port_asc'
   | 'public_port_desc'
 
-export type PATRuleProtocol =
-  | 'unknown'
-  | 'both'
-  | 'tcp'
-  | 'udp'
+export type PATRuleProtocol = 'unknown' | 'both' | 'tcp' | 'udp'
 
 export interface DHCP {
   /**
@@ -158,7 +150,6 @@ export interface DHCP {
   zone: ScwZone
 }
 
-
 export interface IpamConfig {
   /**
    * Defines whether the default route is enabled on that Gateway Network.
@@ -169,7 +160,6 @@ export interface IpamConfig {
    */
   ipamIpId: string
 }
-
 
 export interface GatewayNetwork {
   /**
@@ -226,7 +216,6 @@ export interface GatewayNetwork {
   zone: ScwZone
 }
 
-
 export interface GatewayType {
   /**
    * Public Gateway type name.
@@ -241,7 +230,6 @@ export interface GatewayType {
    */
   zone: ScwZone
 }
-
 
 export interface IP {
   /**
@@ -285,7 +273,6 @@ export interface IP {
    */
   zone: ScwZone
 }
-
 
 export type CreateDHCPRequest = {
   /**
@@ -350,7 +337,6 @@ export type CreateDHCPRequest = {
   dnsLocalName?: string
 }
 
-
 export interface CreateGatewayNetworkRequestIpamConfig {
   /**
    * Enabling the default route also enables masquerading.
@@ -361,7 +347,6 @@ export interface CreateGatewayNetworkRequestIpamConfig {
    */
   ipamIpId?: string
 }
-
 
 export interface DHCPEntry {
   /**
@@ -401,7 +386,6 @@ export interface DHCPEntry {
    */
   zone: ScwZone
 }
-
 
 export interface Gateway {
   /**
@@ -486,7 +470,6 @@ export interface Gateway {
   zone: ScwZone
 }
 
-
 export interface PATRule {
   /**
    * PAT rule ID.
@@ -526,7 +509,6 @@ export interface PATRule {
   zone: ScwZone
 }
 
-
 export interface SetDHCPEntriesRequestEntry {
   /**
    * MAC address to give a static entry to. A matching entry will be upgraded to a reservation, and a matching reservation will be updated.
@@ -537,7 +519,6 @@ export interface SetDHCPEntriesRequestEntry {
    */
   ipAddress: string
 }
-
 
 export interface SetPATRulesRequestRule {
   /**
@@ -558,7 +539,6 @@ export interface SetPATRulesRequestRule {
   protocol: PATRuleProtocol
 }
 
-
 export interface UpdateGatewayNetworkRequestIpamConfig {
   /**
    * Enabling the default route also enables masquerading.
@@ -569,7 +549,6 @@ export interface UpdateGatewayNetworkRequestIpamConfig {
    */
   ipamIpId?: string
 }
-
 
 export type CreateDHCPEntryRequest = {
   /**
@@ -589,7 +568,6 @@ export type CreateDHCPEntryRequest = {
    */
   ipAddress: string
 }
-
 
 export type CreateGatewayNetworkRequest = {
   /**
@@ -639,7 +617,6 @@ Note: this setting is ignored when passing `ipam_config`.
   ipamConfig?: CreateGatewayNetworkRequestIpamConfig
 }
 
-
 export type CreateGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -683,7 +660,6 @@ export type CreateGatewayRequest = {
   bastionPort?: number
 }
 
-
 export type CreateIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -698,7 +674,6 @@ export type CreateIPRequest = {
    */
   tags?: string[]
 }
-
 
 export type CreatePATRuleRequest = {
   /**
@@ -727,7 +702,6 @@ export type CreatePATRuleRequest = {
   protocol?: PATRuleProtocol
 }
 
-
 export type DeleteDHCPEntryRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -739,7 +713,6 @@ export type DeleteDHCPEntryRequest = {
   dhcpEntryId: string
 }
 
-
 export type DeleteDHCPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -750,7 +723,6 @@ export type DeleteDHCPRequest = {
    */
   dhcpId: string
 }
-
 
 export type DeleteGatewayNetworkRequest = {
   /**
@@ -767,7 +739,6 @@ export type DeleteGatewayNetworkRequest = {
   cleanupDhcp: boolean
 }
 
-
 export type DeleteGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -783,7 +754,6 @@ export type DeleteGatewayRequest = {
   cleanupDhcp: boolean
 }
 
-
 export type DeleteIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -794,7 +764,6 @@ export type DeleteIPRequest = {
    */
   ipId: string
 }
-
 
 export type DeletePATRuleRequest = {
   /**
@@ -807,7 +776,6 @@ export type DeletePATRuleRequest = {
   patRuleId: string
 }
 
-
 export type EnableIPMobilityRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -818,7 +786,6 @@ export type EnableIPMobilityRequest = {
    */
   gatewayId: string
 }
-
 
 export type GetDHCPEntryRequest = {
   /**
@@ -831,7 +798,6 @@ export type GetDHCPEntryRequest = {
   dhcpEntryId: string
 }
 
-
 export type GetDHCPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -842,7 +808,6 @@ export type GetDHCPRequest = {
    */
   dhcpId: string
 }
-
 
 export type GetGatewayNetworkRequest = {
   /**
@@ -855,7 +820,6 @@ export type GetGatewayNetworkRequest = {
   gatewayNetworkId: string
 }
 
-
 export type GetGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -866,7 +830,6 @@ export type GetGatewayRequest = {
    */
   gatewayId: string
 }
-
 
 export type GetIPRequest = {
   /**
@@ -879,7 +842,6 @@ export type GetIPRequest = {
   ipId: string
 }
 
-
 export type GetPATRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -890,7 +852,6 @@ export type GetPATRuleRequest = {
    */
   patRuleId: string
 }
-
 
 export type ListDHCPEntriesRequest = {
   /**
@@ -931,7 +892,6 @@ export type ListDHCPEntriesRequest = {
   type?: DHCPEntryType
 }
 
-
 export interface ListDHCPEntriesResponse {
   /**
    * DHCP entries in this page.
@@ -942,7 +902,6 @@ export interface ListDHCPEntriesResponse {
    */
   totalCount: number
 }
-
 
 export type ListDHCPsRequest = {
   /**
@@ -979,7 +938,6 @@ export type ListDHCPsRequest = {
   hasAddress?: string
 }
 
-
 export interface ListDHCPsResponse {
   /**
    * First page of DHCP configuration objects.
@@ -990,7 +948,6 @@ export interface ListDHCPsResponse {
    */
   totalCount: number
 }
-
 
 export type ListGatewayNetworksRequest = {
   /**
@@ -1031,7 +988,6 @@ export type ListGatewayNetworksRequest = {
   status?: GatewayNetworkStatus
 }
 
-
 export interface ListGatewayNetworksResponse {
   /**
    * GatewayNetworks on this page.
@@ -1043,7 +999,6 @@ export interface ListGatewayNetworksResponse {
   totalCount: number
 }
 
-
 export type ListGatewayTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1051,14 +1006,12 @@ export type ListGatewayTypesRequest = {
   zone?: ScwZone
 }
 
-
 export interface ListGatewayTypesResponse {
   /**
    * Available types of Public Gateway.
    */
   types: GatewayType[]
 }
-
 
 export type ListGatewaysRequest = {
   /**
@@ -1107,7 +1060,6 @@ export type ListGatewaysRequest = {
   privateNetworkId?: string
 }
 
-
 export interface ListGatewaysResponse {
   /**
    * Gateways on this page.
@@ -1118,7 +1070,6 @@ export interface ListGatewaysResponse {
    */
   totalCount: number
 }
-
 
 export type ListIPsRequest = {
   /**
@@ -1159,7 +1110,6 @@ export type ListIPsRequest = {
   isFree?: boolean
 }
 
-
 export interface ListIPsResponse {
   /**
    * IP addresses on this page.
@@ -1170,7 +1120,6 @@ export interface ListIPsResponse {
    */
   totalCount: number
 }
-
 
 export type ListPATRulesRequest = {
   /**
@@ -1203,7 +1152,6 @@ export type ListPATRulesRequest = {
   protocol?: PATRuleProtocol
 }
 
-
 export interface ListPATRulesResponse {
   /**
    * Array of PAT rules matching the filter.
@@ -1214,7 +1162,6 @@ export interface ListPATRulesResponse {
    */
   totalCount: number
 }
-
 
 export type MigrateToV2Request = {
   /**
@@ -1227,7 +1174,6 @@ export type MigrateToV2Request = {
   gatewayId: string
 }
 
-
 export type RefreshSSHKeysRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1238,7 +1184,6 @@ export type RefreshSSHKeysRequest = {
    */
   gatewayId: string
 }
-
 
 export type SetDHCPEntriesRequest = {
   /**
@@ -1255,14 +1200,12 @@ export type SetDHCPEntriesRequest = {
   dhcpEntries?: SetDHCPEntriesRequestEntry[]
 }
 
-
 export interface SetDHCPEntriesResponse {
   /**
    * List of DHCP entries.
    */
   dhcpEntries: DHCPEntry[]
 }
-
 
 export type SetPATRulesRequest = {
   /**
@@ -1279,14 +1222,12 @@ export type SetPATRulesRequest = {
   patRules: SetPATRulesRequestRule[]
 }
 
-
 export interface SetPATRulesResponse {
   /**
    * List of PAT rules.
    */
   patRules: PATRule[]
 }
-
 
 export type UpdateDHCPEntryRequest = {
   /**
@@ -1302,7 +1243,6 @@ export type UpdateDHCPEntryRequest = {
    */
   ipAddress?: string
 }
-
 
 export type UpdateDHCPRequest = {
   /**
@@ -1367,7 +1307,6 @@ export type UpdateDHCPRequest = {
   dnsLocalName?: string
 }
 
-
 export type UpdateGatewayNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1406,7 +1345,6 @@ Note: this setting is ignored when passing `ipam_config`.
   ipamConfig?: UpdateGatewayNetworkRequestIpamConfig
 }
 
-
 export type UpdateGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1442,7 +1380,6 @@ export type UpdateGatewayRequest = {
   enableSmtp?: boolean
 }
 
-
 export type UpdateIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1465,7 +1402,6 @@ export type UpdateIPRequest = {
    */
   gatewayId?: string
 }
-
 
 export type UpdatePATRuleRequest = {
   /**
@@ -1494,7 +1430,6 @@ export type UpdatePATRuleRequest = {
   protocol?: PATRuleProtocol
 }
 
-
 export type UpgradeGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1509,5 +1444,3 @@ export type UpgradeGatewayRequest = {
    */
   type?: string
 }
-
-

@@ -1,5 +1,9 @@
-
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+} from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   KeyRotationPolicy,
@@ -45,9 +49,15 @@ const unmarshalKeyUsage = (data: unknown): KeyUsage => {
   }
 
   return {
-    asymmetricEncryption: data.asymmetric_encryption ? data.asymmetric_encryption : undefined,
-    asymmetricSigning: data.asymmetric_signing ? data.asymmetric_signing : undefined,
-    symmetricEncryption: data.symmetric_encryption ? data.symmetric_encryption : undefined,
+    asymmetricEncryption: data.asymmetric_encryption
+      ? data.asymmetric_encryption
+      : undefined,
+    asymmetricSigning: data.asymmetric_signing
+      ? data.asymmetric_signing
+      : undefined,
+    symmetricEncryption: data.symmetric_encryption
+      ? data.symmetric_encryption
+      : undefined,
   } as KeyUsage
 }
 
@@ -71,7 +81,9 @@ export const unmarshalKey = (data: unknown): Key => {
     region: data.region,
     rotatedAt: unmarshalDate(data.rotated_at),
     rotationCount: data.rotation_count,
-    rotationPolicy: data.rotation_policy ? unmarshalKeyRotationPolicy(data.rotation_policy) : undefined,
+    rotationPolicy: data.rotation_policy
+      ? unmarshalKeyRotationPolicy(data.rotation_policy)
+      : undefined,
     state: data.state,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -122,7 +134,9 @@ export const unmarshalEncryptResponse = (data: unknown): EncryptResponse => {
   } as EncryptResponse
 }
 
-const unmarshalListAlgorithmsResponseAlgorithm = (data: unknown): ListAlgorithmsResponseAlgorithm => {
+const unmarshalListAlgorithmsResponseAlgorithm = (
+  data: unknown,
+): ListAlgorithmsResponseAlgorithm => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListAlgorithmsResponseAlgorithm' failed as data isn't a dictionary.`,
@@ -136,7 +150,9 @@ const unmarshalListAlgorithmsResponseAlgorithm = (data: unknown): ListAlgorithms
   } as ListAlgorithmsResponseAlgorithm
 }
 
-export const unmarshalListAlgorithmsResponse = (data: unknown): ListAlgorithmsResponse => {
+export const unmarshalListAlgorithmsResponse = (
+  data: unknown,
+): ListAlgorithmsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListAlgorithmsResponse' failed as data isn't a dictionary.`,
@@ -144,7 +160,10 @@ export const unmarshalListAlgorithmsResponse = (data: unknown): ListAlgorithmsRe
   }
 
   return {
-    algorithms: unmarshalArrayOfObject(data.algorithms, unmarshalListAlgorithmsResponseAlgorithm),
+    algorithms: unmarshalArrayOfObject(
+      data.algorithms,
+      unmarshalListAlgorithmsResponseAlgorithm,
+    ),
   } as ListAlgorithmsResponse
 }
 
@@ -210,17 +229,11 @@ const marshalKeyRotationPolicy = (
 const marshalKeyUsage = (
   request: KeyUsage,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'symmetric_encryption',
-      value: request.symmetricEncryption,
-    },
-    {param: 'asymmetric_encryption',
-      value: request.asymmetricEncryption,
-    },
-    {param: 'asymmetric_signing',
-      value: request.asymmetricSigning,
-    },
+    { param: 'symmetric_encryption', value: request.symmetricEncryption },
+    { param: 'asymmetric_encryption', value: request.asymmetricEncryption },
+    { param: 'asymmetric_signing', value: request.asymmetricSigning },
   ]),
 })
 
@@ -232,10 +245,16 @@ export const marshalCreateKeyRequest = (
   name: request.name,
   origin: request.origin,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  rotation_policy: ((request.rotationPolicy !== undefined) ?  marshalKeyRotationPolicy(request.rotationPolicy, defaults): undefined),
+  rotation_policy:
+    request.rotationPolicy !== undefined
+      ? marshalKeyRotationPolicy(request.rotationPolicy, defaults)
+      : undefined,
   tags: request.tags,
   unprotected: request.unprotected,
-  usage: ((request.usage !== undefined) ?  marshalKeyUsage(request.usage, defaults): undefined),
+  usage:
+    request.usage !== undefined
+      ? marshalKeyUsage(request.usage, defaults)
+      : undefined,
 })
 
 export const marshalDecryptRequest = (
@@ -283,7 +302,10 @@ export const marshalUpdateKeyRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  rotation_policy: ((request.rotationPolicy !== undefined) ?  marshalKeyRotationPolicy(request.rotationPolicy, defaults): undefined),
+  rotation_policy:
+    request.rotationPolicy !== undefined
+      ? marshalKeyRotationPolicy(request.rotationPolicy, defaults)
+      : undefined,
   tags: request.tags,
 })
 

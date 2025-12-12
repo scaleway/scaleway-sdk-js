@@ -8,8 +8,8 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL,} from './content.gen.js'
+import type { WaitForOptions, ApiLocality } from '@scaleway/sdk-client'
+import { SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL } from './content.gen.js'
 import {
   marshalAddOptionServerRequest,
   unmarshalBMCAccess,
@@ -109,18 +109,17 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      zones: [
-        'fr-par-1',
-        'fr-par-2',
-        'nl-ams-1',
-        'nl-ams-2',
-        'pl-waw-2',
-        'pl-waw-3',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'nl-ams-1',
+      'nl-ams-2',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
+
   protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
     this.client.fetch<ListServersResponse>(
       {
@@ -132,7 +131,10 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['status', request.status],
           ['tags', request.tags],
@@ -140,7 +142,7 @@ export class API extends ParentAPI {
       },
       unmarshalListServersResponse,
     )
-  
+
   /**
    * List Elastic Metal servers for an Organization. List Elastic Metal servers for a specific Organization.
    *
@@ -150,7 +152,6 @@ export class API extends ParentAPI {
   listServers = (request: Readonly<ListServersRequest> = {}) =>
     enrichForPagination('servers', this.pageOfListServers, request)
 
-  
   /**
    * Get a specific Elastic Metal server. Get full details of an existing Elastic Metal server associated with the ID.
    *
@@ -165,7 +166,7 @@ export class API extends ParentAPI {
       },
       unmarshalServer,
     )
-  
+
   /**
    * Waits for {@link Server} to be in a final state.
    *
@@ -178,13 +179,16 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Server>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!SERVER_TRANSIENT_STATUSES_BAREMETAL.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !SERVER_TRANSIENT_STATUSES_BAREMETAL.includes(res.status),
+          )),
       this.getServer,
       request,
       options,
     )
 
-  
   /**
    * Create an Elastic Metal server. Create a new Elastic Metal server. Once the server is created, proceed with the [installation of an OS](#post-3e949e).
    *
@@ -204,7 +208,6 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Update an Elastic Metal server. Update the server associated with the ID. You can update parameters such as the server's name, tags, description and protection flag. Any parameters left null in the request body are not updated.
    *
@@ -224,7 +227,6 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Install an Elastic Metal server. Install an Operating System (OS) on the Elastic Metal server with a specific ID.
    *
@@ -244,7 +246,6 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Return server metrics. Get the ping status of the server associated with the ID.
    *
@@ -260,7 +261,6 @@ export class API extends ParentAPI {
       unmarshalGetServerMetricsResponse,
     )
 
-  
   /**
    * Delete an Elastic Metal server. Delete the server associated with the ID.
    *
@@ -276,7 +276,6 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Reboot an Elastic Metal server. Reboot the Elastic Metal server associated with the ID, use the `boot_type` `rescue` to reboot the server in rescue mode.
    *
@@ -296,7 +295,6 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Start an Elastic Metal server. Start the server associated with the ID.
    *
@@ -316,7 +314,6 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Stop an Elastic Metal server. Stop the server associated with the ID. The server remains allocated to your account and all data remains on the local storage of the server.
    *
@@ -334,8 +331,9 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
-  protected pageOfListServerEvents = (request: Readonly<ListServerEventsRequest>) =>
+  protected pageOfListServerEvents = (
+    request: Readonly<ListServerEventsRequest>,
+  ) =>
     this.client.fetch<ListServerEventsResponse>(
       {
         method: 'GET',
@@ -343,12 +341,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListServerEventsResponse,
     )
-  
+
   /**
    * List server events. List event (i.e. start/stop/reboot) associated to the server ID.
    *
@@ -358,14 +359,15 @@ export class API extends ParentAPI {
   listServerEvents = (request: Readonly<ListServerEventsRequest>) =>
     enrichForPagination('events', this.pageOfListServerEvents, request)
 
-  
   /**
    * Get default partitioning schema. Get the default partitioning schema for the given offer ID and OS ID.
    *
    * @param request - The request {@link GetDefaultPartitioningSchemaRequest}
    * @returns A Promise of Schema
    */
-  getDefaultPartitioningSchema = (request: Readonly<GetDefaultPartitioningSchemaRequest>) =>
+  getDefaultPartitioningSchema = (
+    request: Readonly<GetDefaultPartitioningSchemaRequest>,
+  ) =>
     this.client.fetch<Schema>(
       {
         method: 'GET',
@@ -378,25 +380,23 @@ export class API extends ParentAPI {
       unmarshalSchema,
     )
 
-  
   /**
    * Validate client partitioning schema. Validate the incoming partitioning schema from a user before installing the server. Return default ErrorCode if invalid.
    *
    * @param request - The request {@link ValidatePartitioningSchemaRequest}
    */
-  validatePartitioningSchema = (request: Readonly<ValidatePartitioningSchemaRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: JSON.stringify(
-          marshalValidatePartitioningSchemaRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/validate`,
-      },
-    )
+  validatePartitioningSchema = (
+    request: Readonly<ValidatePartitioningSchemaRequest>,
+  ) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalValidatePartitioningSchemaRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/validate`,
+    })
 
-  
   /**
    * Start BMC access. Start BMC (Baseboard Management Controller) access associated with the ID.
 The BMC (Baseboard Management Controller) access is available one hour after the installation of the server.
@@ -419,7 +419,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalBMCAccess,
     )
 
-  
   /**
    * Get BMC access. Get the BMC (Baseboard Management Controller) access associated with the ID, including the URL and login information needed to connect.
    *
@@ -435,21 +434,17 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalBMCAccess,
     )
 
-  
   /**
    * Stop BMC access. Stop BMC (Baseboard Management Controller) access associated with the ID.
    *
    * @param request - The request {@link StopBMCAccessRequest}
    */
   stopBMCAccess = (request: Readonly<StopBMCAccessRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
+    })
 
-  
   /**
    * Update IP. Configure the IP address associated with the server ID and IP ID. You can use this method to set a reverse DNS for an IP address.
    *
@@ -469,7 +464,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalIP,
     )
 
-  
   /**
    * Add server option. Add an option, such as Private Networks, to a specific server.
    *
@@ -489,7 +483,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalServer,
     )
 
-  
   /**
    * Delete server option. Delete an option from a specific server.
    *
@@ -505,14 +498,15 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalServer,
     )
 
-  
   /**
    * Migrate server offer. Migrate server with hourly offer to monthly offer.
    *
    * @param request - The request {@link MigrateServerToMonthlyOfferRequest}
    * @returns A Promise of Server
    */
-  migrateServerToMonthlyOffer = (request: Readonly<MigrateServerToMonthlyOfferRequest>) =>
+  migrateServerToMonthlyOffer = (
+    request: Readonly<MigrateServerToMonthlyOfferRequest>,
+  ) =>
     this.client.fetch<Server>(
       {
         method: 'POST',
@@ -521,7 +515,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalServer,
     )
 
-  
   protected pageOfListOffers = (request: Readonly<ListOffersRequest> = {}) =>
     this.client.fetch<ListOffersResponse>(
       {
@@ -530,13 +523,16 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         urlParams: urlParams(
           ['name', request.name],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['subscription_period', request.subscriptionPeriod],
         ),
       },
       unmarshalListOffersResponse,
     )
-  
+
   /**
    * List offers. List all available Elastic Metal server configurations.
    *
@@ -546,7 +542,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
   listOffers = (request: Readonly<ListOffersRequest> = {}) =>
     enrichForPagination('offers', this.pageOfListOffers, request)
 
-  
   /**
    * Get offer. Get details of an offer identified by its offer ID.
    *
@@ -562,7 +557,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalOffer,
     )
 
-  
   /**
    * Get option. Return specific option for the ID.
    *
@@ -578,7 +572,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalOption,
     )
 
-  
   protected pageOfListOptions = (request: Readonly<ListOptionsRequest> = {}) =>
     this.client.fetch<ListOptionsResponse>(
       {
@@ -588,12 +581,15 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
           ['name', request.name],
           ['offer_id', request.offerId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListOptionsResponse,
     )
-  
+
   /**
    * List options. List all options matching with filters.
    *
@@ -603,8 +599,9 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
   listOptions = (request: Readonly<ListOptionsRequest> = {}) =>
     enrichForPagination('options', this.pageOfListOptions, request)
 
-  
-  protected pageOfListSettings = (request: Readonly<ListSettingsRequest> = {}) =>
+  protected pageOfListSettings = (
+    request: Readonly<ListSettingsRequest> = {},
+  ) =>
     this.client.fetch<ListSettingsResponse>(
       {
         method: 'GET',
@@ -612,13 +609,19 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
         ),
       },
       unmarshalListSettingsResponse,
     )
-  
+
   /**
    * List all settings. Return all settings for a Project ID.
    *
@@ -628,7 +631,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
   listSettings = (request: Readonly<ListSettingsRequest> = {}) =>
     enrichForPagination('settings', this.pageOfListSettings, request)
 
-  
   /**
    * Update setting. Update a setting for a Project ID (enable or disable).
    *
@@ -648,7 +650,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       unmarshalSetting,
     )
 
-  
   protected pageOfListOS = (request: Readonly<ListOSRequest> = {}) =>
     this.client.fetch<ListOSResponse>(
       {
@@ -657,12 +658,15 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         urlParams: urlParams(
           ['offer_id', request.offerId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListOSResponse,
     )
-  
+
   /**
    * List available OSes. List all OSes that are available for installation on Elastic Metal servers.
    *
@@ -672,7 +676,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
   listOS = (request: Readonly<ListOSRequest> = {}) =>
     enrichForPagination('os', this.pageOfListOS, request)
 
-  
   /**
    * Get OS with an ID. Return the specific OS for the ID.
    *
@@ -687,8 +690,6 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
       },
       unmarshalOS,
     )
-
-  
 }
 
 /**
@@ -699,24 +700,26 @@ export class PrivateNetworkAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      zones: [
-        'fr-par-2',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: ['fr-par-2'],
+  })
+
   /**
    * Add a server to a Private Network.
    *
    * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
-  addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) =>
+  addServerPrivateNetwork = (
+    request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>,
+  ) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
         body: JSON.stringify(
-          marshalPrivateNetworkApiAddServerPrivateNetworkRequest(request, this.client.settings),
+          marshalPrivateNetworkApiAddServerPrivateNetworkRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -725,18 +728,22 @@ export class PrivateNetworkAPI extends ParentAPI {
       unmarshalServerPrivateNetwork,
     )
 
-  
   /**
    * Set multiple Private Networks on a server.
    *
    * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
-  setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) =>
+  setServerPrivateNetworks = (
+    request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>,
+  ) =>
     this.client.fetch<SetServerPrivateNetworksResponse>(
       {
         body: JSON.stringify(
-          marshalPrivateNetworkApiSetServerPrivateNetworksRequest(request, this.client.settings),
+          marshalPrivateNetworkApiSetServerPrivateNetworksRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
@@ -745,8 +752,9 @@ export class PrivateNetworkAPI extends ParentAPI {
       unmarshalSetServerPrivateNetworksResponse,
     )
 
-  
-  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
+  protected pageOfListServerPrivateNetworks = (
+    request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {},
+  ) =>
     this.client.fetch<ListServerPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -755,7 +763,10 @@ export class PrivateNetworkAPI extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['private_network_id', request.privateNetworkId],
           ['project_id', request.projectId],
           ['server_id', request.serverId],
@@ -763,30 +774,32 @@ export class PrivateNetworkAPI extends ParentAPI {
       },
       unmarshalListServerPrivateNetworksResponse,
     )
-  
+
   /**
    * List the Private Networks of a server.
    *
    * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
-  listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
-    enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request)
+  listServerPrivateNetworks = (
+    request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {},
+  ) =>
+    enrichForPagination(
+      'serverPrivateNetworks',
+      this.pageOfListServerPrivateNetworks,
+      request,
+    )
 
-  
   /**
    * Delete a Private Network.
    *
    * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
-  deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
-      },
-    )
-
-  
+  deleteServerPrivateNetwork = (
+    request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>,
+  ) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+    })
 }
-

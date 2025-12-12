@@ -8,8 +8,11 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,MODEL_TRANSIENT_STATUSES as MODEL_TRANSIENT_STATUSES_INFERENCE,} from './content.gen.js'
+import type { WaitForOptions, ApiLocality } from '@scaleway/sdk-client'
+import {
+  DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,
+  MODEL_TRANSIENT_STATUSES as MODEL_TRANSIENT_STATUSES_INFERENCE,
+} from './content.gen.js'
 import {
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
@@ -60,14 +63,13 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-      ],
-    })
-  
-  protected pageOfListDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
+
+  protected pageOfListDeployments = (
+    request: Readonly<ListDeploymentsRequest> = {},
+  ) =>
     this.client.fetch<ListDeploymentsResponse>(
       {
         method: 'GET',
@@ -77,14 +79,17 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListDeploymentsResponse,
     )
-  
+
   /**
    * List inference deployments. List all your inference deployments.
    *
@@ -94,7 +99,6 @@ export class API extends ParentAPI {
   listDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
     enrichForPagination('deployments', this.pageOfListDeployments, request)
 
-  
   /**
    * Get a deployment. Get the deployment for the given ID.
    *
@@ -109,7 +113,7 @@ export class API extends ParentAPI {
       },
       unmarshalDeployment,
     )
-  
+
   /**
    * Waits for {@link Deployment} to be in a final state.
    *
@@ -122,13 +126,16 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Deployment>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE.includes(res.status),
+          )),
       this.getDeployment,
       request,
       options,
     )
 
-  
   /**
    * Create a deployment. Create a new inference deployment related to a specific model.
    *
@@ -148,7 +155,6 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  
   /**
    * Update a deployment. Update an existing inference deployment.
    *
@@ -168,7 +174,6 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  
   /**
    * Delete a deployment. Delete an existing inference deployment.
    *
@@ -184,7 +189,6 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  
   /**
    * Get the CA certificate. Get the CA certificate used for the deployment of private endpoints.
 The CA certificate will be returned as a PEM file.
@@ -192,19 +196,16 @@ The CA certificate will be returned as a PEM file.
    * @param request - The request {@link GetDeploymentCertificateRequest}
    * @returns A Promise of Blob
    */
-  getDeploymentCertificate = (request: Readonly<GetDeploymentCertificateRequest>) =>
-    this.client.fetch<Blob>(
-      {
-        method: 'GET',
-        path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificate`,
-        urlParams: urlParams(
-          ['dl', 1],
-        ),
-        responseType: 'blob',
-      },
-    )
+  getDeploymentCertificate = (
+    request: Readonly<GetDeploymentCertificateRequest>,
+  ) =>
+    this.client.fetch<Blob>({
+      method: 'GET',
+      path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificate`,
+      urlParams: urlParams(['dl', 1]),
+      responseType: 'blob',
+    })
 
-  
   /**
    * Create an endpoint. Create a new Endpoint related to a specific deployment.
    *
@@ -224,7 +225,6 @@ The CA certificate will be returned as a PEM file.
       unmarshalEndpoint,
     )
 
-  
   /**
    * Update an endpoint. Update an existing Endpoint.
    *
@@ -244,21 +244,17 @@ The CA certificate will be returned as a PEM file.
       unmarshalEndpoint,
     )
 
-  
   /**
    * Delete an endpoint. Delete an existing Endpoint.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
   deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+    })
 
-  
   protected pageOfListModels = (request: Readonly<ListModelsRequest> = {}) =>
     this.client.fetch<ListModelsResponse>(
       {
@@ -268,14 +264,17 @@ The CA certificate will be returned as a PEM file.
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListModelsResponse,
     )
-  
+
   /**
    * List models. List all available models.
    *
@@ -285,7 +284,6 @@ The CA certificate will be returned as a PEM file.
   listModels = (request: Readonly<ListModelsRequest> = {}) =>
     enrichForPagination('models', this.pageOfListModels, request)
 
-  
   /**
    * Get a model. Get the model for the given ID.
    *
@@ -300,7 +298,7 @@ The CA certificate will be returned as a PEM file.
       },
       unmarshalModel,
     )
-  
+
   /**
    * Waits for {@link Model} to be in a final state.
    *
@@ -313,13 +311,16 @@ The CA certificate will be returned as a PEM file.
     options?: Readonly<WaitForOptions<Model>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!MODEL_TRANSIENT_STATUSES_INFERENCE.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !MODEL_TRANSIENT_STATUSES_INFERENCE.includes(res.status),
+          )),
       this.getModel,
       request,
       options,
     )
 
-  
   /**
    * Import a model. Import a new model to your model library.
    *
@@ -339,21 +340,17 @@ The CA certificate will be returned as a PEM file.
       unmarshalModel,
     )
 
-  
   /**
    * Delete a model. Delete an existing model from your model library.
    *
    * @param request - The request {@link DeleteModelRequest}
    */
   deleteModel = (request: Readonly<DeleteModelRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/models/${validatePathParam('modelId', request.modelId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/models/${validatePathParam('modelId', request.modelId)}`,
+    })
 
-  
   protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest>) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
@@ -362,12 +359,15 @@ The CA certificate will be returned as a PEM file.
         urlParams: urlParams(
           ['include_disabled_types', request.includeDisabledTypes],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListNodeTypesResponse,
     )
-  
+
   /**
    * List available node types. List all available node types. By default, the node types returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -376,7 +376,4 @@ The CA certificate will be returned as a PEM file.
    */
   listNodeTypes = (request: Readonly<ListNodeTypesRequest>) =>
     enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
-
-  
 }
-

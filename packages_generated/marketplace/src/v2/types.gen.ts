@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone} from '@scaleway/sdk-client'
-
+import type { Zone as ScwZone } from '@scaleway/sdk-client'
 
 export type ListImagesRequestOrderBy =
   | 'name_asc'
@@ -17,21 +16,15 @@ export type ListLocalImagesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
-export type ListVersionsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListVersionsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type LocalImageType =
-  | 'unknown_type'
-  | 'instance_local'
-  | 'instance_sbs'
+export type LocalImageType = 'unknown_type' | 'instance_local' | 'instance_sbs'
 
 export interface Category {
   id: string
   name: string
   description: string
 }
-
 
 export interface Image {
   /**
@@ -73,7 +66,6 @@ This label can be used in the image field of the server creation request.
   label: string
 }
 
-
 export interface LocalImage {
   /**
    * Version you will typically use to define an image in an API call.
@@ -101,7 +93,6 @@ export interface LocalImage {
   type: LocalImageType
 }
 
-
 export interface Version {
   /**
    * UUID of this version.
@@ -125,11 +116,9 @@ export interface Version {
   publishedAt?: Date
 }
 
-
 export type GetCategoryRequest = {
   categoryId: string
 }
-
 
 export type GetImageRequest = {
   /**
@@ -138,28 +127,23 @@ export type GetImageRequest = {
   imageId: string
 }
 
-
 export type GetLocalImageRequest = {
   localImageId: string
 }
 
-
 export type GetVersionRequest = {
   versionId: string
 }
-
 
 export type ListCategoriesRequest = {
   pageSize?: number
   page?: number
 }
 
-
 export interface ListCategoriesResponse {
   categories: Category[]
   totalCount: number
 }
-
 
 export type ListImagesRequest = {
   /**
@@ -188,12 +172,10 @@ export type ListImagesRequest = {
   includeEol: boolean
 }
 
-
 export interface ListImagesResponse {
   images: Image[]
   totalCount: number
 }
-
 
 export type ListLocalImagesRequest = {
   /**
@@ -240,12 +222,10 @@ export type ListLocalImagesRequest = {
   type?: LocalImageType
 }
 
-
 export interface ListLocalImagesResponse {
   localImages: LocalImage[]
   totalCount: number
 }
-
 
 export type ListVersionsRequest = {
   imageId: string
@@ -254,10 +234,7 @@ export type ListVersionsRequest = {
   orderBy?: ListVersionsRequestOrderBy
 }
 
-
 export interface ListVersionsResponse {
   versions: Version[]
   totalCount: number
 }
-
-

@@ -7,21 +7,15 @@ import type {
   HostingStatus,
 } from './types.gen.js'
 
-
 /** Lists transient statutes of the enum {@link BackupStatus}. */
-export const BACKUP_TRANSIENT_STATUSES: BackupStatus[] = [
-  'restoring',
-]
+export const BACKUP_TRANSIENT_STATUSES: BackupStatus[] = ['restoring']
 
 /** Lists transient statutes of the enum {@link DomainAvailabilityStatus}. */
-export const DOMAIN_AVAILABILITY_TRANSIENT_STATUSES: DomainAvailabilityStatus[] = [
-  'validating',
-]
+export const DOMAIN_AVAILABILITY_TRANSIENT_STATUSES: DomainAvailabilityStatus[] =
+  ['validating']
 
 /** Lists transient statutes of the enum {@link DomainStatus}. */
-export const DOMAIN_TRANSIENT_STATUSES: DomainStatus[] = [
-  'validating',
-]
+export const DOMAIN_TRANSIENT_STATUSES: DomainStatus[] = ['validating']
 
 /** Lists transient statutes of the enum {@link HostingStatus}. */
 export const HOSTING_TRANSIENT_STATUSES: HostingStatus[] = [
@@ -30,4 +24,3 @@ export const HOSTING_TRANSIENT_STATUSES: HostingStatus[] = [
   'migrating',
   'updating',
 ]
-

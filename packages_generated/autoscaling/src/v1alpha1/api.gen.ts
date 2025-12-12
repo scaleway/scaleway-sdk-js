@@ -70,7 +70,6 @@ export class API extends ParentAPI {
       unmarshalInstanceGroup,
     )
 
-  
   /**
    * Create Instance group. Create a new Instance group. You must specify a `template_id`, capacity and Load Balancer object.
    *
@@ -90,8 +89,9 @@ export class API extends ParentAPI {
       unmarshalInstanceGroup,
     )
 
-  
-  protected pageOfListInstanceGroups = (request: Readonly<ListInstanceGroupsRequest> = {}) =>
+  protected pageOfListInstanceGroups = (
+    request: Readonly<ListInstanceGroupsRequest> = {},
+  ) =>
     this.client.fetch<ListInstanceGroupsResponse>(
       {
         method: 'GET',
@@ -99,12 +99,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListInstanceGroupsResponse,
     )
-  
+
   /**
    * List Instance groups. List all Instance groups, for a Scaleway Organization or Scaleway Project. By default, the Instance groups returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -112,9 +115,12 @@ export class API extends ParentAPI {
    * @returns A Promise of ListInstanceGroupsResponse
    */
   listInstanceGroups = (request: Readonly<ListInstanceGroupsRequest> = {}) =>
-    enrichForPagination('instanceGroups', this.pageOfListInstanceGroups, request)
+    enrichForPagination(
+      'instanceGroups',
+      this.pageOfListInstanceGroups,
+      request,
+    )
 
-  
   /**
    * Update Instance group. Update the parameters of an existing Instance group, specified by its `instance_group_id`.
    *
@@ -134,21 +140,17 @@ export class API extends ParentAPI {
       unmarshalInstanceGroup,
     )
 
-  
   /**
    * Delete  Instance group. Delete an existing Instance group, specified by its `instance_group_id`. Deleting an Instance group is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteInstanceGroupRequest}
    */
   deleteInstanceGroup = (request: Readonly<DeleteInstanceGroupRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-groups/${validatePathParam('instanceGroupId', request.instanceGroupId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-groups/${validatePathParam('instanceGroupId', request.instanceGroupId)}`,
+    })
 
-  
   /**
    * Create Instance template. Create a new Instance template. This specifies the details of the Instance (commercial type, zone, image, volumes etc.) that will be in the Instance group.
    *
@@ -168,7 +170,6 @@ export class API extends ParentAPI {
       unmarshalInstanceTemplate,
     )
 
-  
   /**
    * Update Instance template. Update an Instance template, such as its commercial offer type, image or volume template.
    *
@@ -188,7 +189,6 @@ export class API extends ParentAPI {
       unmarshalInstanceTemplate,
     )
 
-  
   /**
    * Get Instance template. Get an existing Instance template from its `template_id`.
    *
@@ -204,22 +204,20 @@ export class API extends ParentAPI {
       unmarshalInstanceTemplate,
     )
 
-  
   /**
    * Delete Instance template. Delete an existing Instance template. This action is permanent and cannot be undone.
    *
    * @param request - The request {@link DeleteInstanceTemplateRequest}
    */
   deleteInstanceTemplate = (request: Readonly<DeleteInstanceTemplateRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-templates/${validatePathParam('templateId', request.templateId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-templates/${validatePathParam('templateId', request.templateId)}`,
+    })
 
-  
-  protected pageOfListInstanceTemplates = (request: Readonly<ListInstanceTemplatesRequest> = {}) =>
+  protected pageOfListInstanceTemplates = (
+    request: Readonly<ListInstanceTemplatesRequest> = {},
+  ) =>
     this.client.fetch<ListInstanceTemplatesResponse>(
       {
         method: 'GET',
@@ -227,22 +225,30 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListInstanceTemplatesResponse,
     )
-  
+
   /**
    * List Instance templates. List all Instance templates, for a Scaleway Organization or Scaleway Project. By default, the Instance templates returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListInstanceTemplatesRequest}
    * @returns A Promise of ListInstanceTemplatesResponse
    */
-  listInstanceTemplates = (request: Readonly<ListInstanceTemplatesRequest> = {}) =>
-    enrichForPagination('instanceTemplates', this.pageOfListInstanceTemplates, request)
+  listInstanceTemplates = (
+    request: Readonly<ListInstanceTemplatesRequest> = {},
+  ) =>
+    enrichForPagination(
+      'instanceTemplates',
+      this.pageOfListInstanceTemplates,
+      request,
+    )
 
-  
   /**
    * Create scaling policy. Create a new scaling policy. You must specify a `policy_id`, capacity and Load Balancer object.
    *
@@ -262,7 +268,6 @@ export class API extends ParentAPI {
       unmarshalInstancePolicy,
     )
 
-  
   /**
    * Update scaling policy. Update the parameters of an existing scaling policy, specified by its `policy_id`.
    *
@@ -282,8 +287,9 @@ export class API extends ParentAPI {
       unmarshalInstancePolicy,
     )
 
-  
-  protected pageOfListInstancePolicies = (request: Readonly<ListInstancePoliciesRequest>) =>
+  protected pageOfListInstancePolicies = (
+    request: Readonly<ListInstancePoliciesRequest>,
+  ) =>
     this.client.fetch<ListInstancePoliciesResponse>(
       {
         method: 'GET',
@@ -292,12 +298,15 @@ export class API extends ParentAPI {
           ['instance_group_id', request.instanceGroupId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListInstancePoliciesResponse,
     )
-  
+
   /**
    * List scaling policies. List all scaling policies, for a Scaleway Organization or Scaleway Project. By default, the policies returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -307,7 +316,6 @@ export class API extends ParentAPI {
   listInstancePolicies = (request: Readonly<ListInstancePoliciesRequest>) =>
     enrichForPagination('policies', this.pageOfListInstancePolicies, request)
 
-  
   /**
    * Get scaling policy. Retrieve information about an existing scaling policy, specified by its `policy_id`. Its full details are returned in the response object.
    *
@@ -323,22 +331,20 @@ export class API extends ParentAPI {
       unmarshalInstancePolicy,
     )
 
-  
   /**
    * Delete scaling policy. Delete an existing scaling policy, specified by its `policy_id`. Deleting a scaling policy is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteInstancePolicyRequest}
    */
   deleteInstancePolicy = (request: Readonly<DeleteInstancePolicyRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-policies/${validatePathParam('policyId', request.policyId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-policies/${validatePathParam('policyId', request.policyId)}`,
+    })
 
-  
-  protected pageOfListInstanceGroupEvents = (request: Readonly<ListInstanceGroupEventsRequest>) =>
+  protected pageOfListInstanceGroupEvents = (
+    request: Readonly<ListInstanceGroupEventsRequest>,
+  ) =>
     this.client.fetch<ListInstanceGroupEventsResponse>(
       {
         method: 'GET',
@@ -346,21 +352,27 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListInstanceGroupEventsResponse,
     )
-  
+
   /**
    * List events. List all events for a given Instance group. By default, the events are ordered by creation date in descending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListInstanceGroupEventsRequest}
    * @returns A Promise of ListInstanceGroupEventsResponse
    */
-  listInstanceGroupEvents = (request: Readonly<ListInstanceGroupEventsRequest>) =>
-    enrichForPagination('instanceEvents', this.pageOfListInstanceGroupEvents, request)
-
-  
+  listInstanceGroupEvents = (
+    request: Readonly<ListInstanceGroupEventsRequest>,
+  ) =>
+    enrichForPagination(
+      'instanceEvents',
+      this.pageOfListInstanceGroupEvents,
+      request,
+    )
 }
-

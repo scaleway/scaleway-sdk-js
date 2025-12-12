@@ -7,11 +7,8 @@ import type {
   PrivateNetworkStatus,
 } from './types.gen.js'
 
-
 /** Lists transient statutes of the enum {@link CertificateStatus}. */
-export const CERTIFICATE_TRANSIENT_STATUSES: CertificateStatus[] = [
-  'pending',
-]
+export const CERTIFICATE_TRANSIENT_STATUSES: CertificateStatus[] = ['pending']
 
 /** Lists transient statutes of the enum {@link InstanceStatus}. */
 export const INSTANCE_TRANSIENT_STATUSES: InstanceStatus[] = [
@@ -33,4 +30,3 @@ export const LB_TRANSIENT_STATUSES: LbStatus[] = [
 export const PRIVATE_NETWORK_TRANSIENT_STATUSES: PrivateNetworkStatus[] = [
   'pending',
 ]
-

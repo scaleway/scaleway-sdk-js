@@ -1,7 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+} from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   EndpointPrivateNetworkDetails,
@@ -33,7 +38,9 @@ import type {
   UpdateUserRequest,
 } from './types.gen.js'
 
-const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateNetworkDetails => {
+const unmarshalEndpointPrivateNetworkDetails = (
+  data: unknown,
+): EndpointPrivateNetworkDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`,
@@ -45,15 +52,16 @@ const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateN
   } as EndpointPrivateNetworkDetails
 }
 
-const unmarshalEndpointPublicDetails = (data: unknown): EndpointPublicDetails => {
+const unmarshalEndpointPublicDetails = (
+  data: unknown,
+): EndpointPublicDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EndpointPublicDetails' failed as data isn't a dictionary.`,
     )
   }
 
-  return {
-  } as EndpointPublicDetails
+  return {} as EndpointPublicDetails
 }
 
 export const unmarshalEndpoint = (data: unknown): Endpoint => {
@@ -67,8 +75,12 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     dnsRecords: data.dns_records,
     id: data.id,
     port: data.port,
-    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
-    publicNetwork: data.public_network ? unmarshalEndpointPublicDetails(data.public_network) : undefined,
+    privateNetwork: data.private_network
+      ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
+      : undefined,
+    publicNetwork: data.public_network
+      ? unmarshalEndpointPublicDetails(data.public_network)
+      : undefined,
   } as Endpoint
 }
 
@@ -139,7 +151,9 @@ export const unmarshalUser = (data: unknown): User => {
   } as User
 }
 
-export const unmarshalListClustersResponse = (data: unknown): ListClustersResponse => {
+export const unmarshalListClustersResponse = (
+  data: unknown,
+): ListClustersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`,
@@ -176,7 +190,10 @@ const unmarshalNodeType = (data: unknown): NodeType => {
   }
 
   return {
-    availableVolumeTypes: unmarshalArrayOfObject(data.available_volume_types, unmarshalNodeTypeVolumeType),
+    availableVolumeTypes: unmarshalArrayOfObject(
+      data.available_volume_types,
+      unmarshalNodeTypeVolumeType,
+    ),
     beta: data.beta,
     clusterRange: data.cluster_range,
     description: data.description,
@@ -188,7 +205,9 @@ const unmarshalNodeType = (data: unknown): NodeType => {
   } as NodeType
 }
 
-export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResponse => {
+export const unmarshalListNodeTypesResponse = (
+  data: unknown,
+): ListNodeTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`,
@@ -201,7 +220,9 @@ export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResp
   } as ListNodeTypesResponse
 }
 
-export const unmarshalListUsersResponse = (data: unknown): ListUsersResponse => {
+export const unmarshalListUsersResponse = (
+  data: unknown,
+): ListUsersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`,
@@ -214,7 +235,9 @@ export const unmarshalListUsersResponse = (data: unknown): ListUsersResponse => 
   } as ListUsersResponse
 }
 
-const unmarshalVersionAvailableSettingBooleanProperty = (data: unknown): VersionAvailableSettingBooleanProperty => {
+const unmarshalVersionAvailableSettingBooleanProperty = (
+  data: unknown,
+): VersionAvailableSettingBooleanProperty => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VersionAvailableSettingBooleanProperty' failed as data isn't a dictionary.`,
@@ -226,7 +249,9 @@ const unmarshalVersionAvailableSettingBooleanProperty = (data: unknown): Version
   } as VersionAvailableSettingBooleanProperty
 }
 
-const unmarshalVersionAvailableSettingFloatProperty = (data: unknown): VersionAvailableSettingFloatProperty => {
+const unmarshalVersionAvailableSettingFloatProperty = (
+  data: unknown,
+): VersionAvailableSettingFloatProperty => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VersionAvailableSettingFloatProperty' failed as data isn't a dictionary.`,
@@ -241,7 +266,9 @@ const unmarshalVersionAvailableSettingFloatProperty = (data: unknown): VersionAv
   } as VersionAvailableSettingFloatProperty
 }
 
-const unmarshalVersionAvailableSettingIntegerProperty = (data: unknown): VersionAvailableSettingIntegerProperty => {
+const unmarshalVersionAvailableSettingIntegerProperty = (
+  data: unknown,
+): VersionAvailableSettingIntegerProperty => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VersionAvailableSettingIntegerProperty' failed as data isn't a dictionary.`,
@@ -256,7 +283,9 @@ const unmarshalVersionAvailableSettingIntegerProperty = (data: unknown): Version
   } as VersionAvailableSettingIntegerProperty
 }
 
-const unmarshalVersionAvailableSettingStringProperty = (data: unknown): VersionAvailableSettingStringProperty => {
+const unmarshalVersionAvailableSettingStringProperty = (
+  data: unknown,
+): VersionAvailableSettingStringProperty => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VersionAvailableSettingStringProperty' failed as data isn't a dictionary.`,
@@ -269,7 +298,9 @@ const unmarshalVersionAvailableSettingStringProperty = (data: unknown): VersionA
   } as VersionAvailableSettingStringProperty
 }
 
-const unmarshalVersionAvailableSetting = (data: unknown): VersionAvailableSetting => {
+const unmarshalVersionAvailableSetting = (
+  data: unknown,
+): VersionAvailableSetting => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VersionAvailableSetting' failed as data isn't a dictionary.`,
@@ -277,13 +308,21 @@ const unmarshalVersionAvailableSetting = (data: unknown): VersionAvailableSettin
   }
 
   return {
-    boolProperty: data.bool_property ? unmarshalVersionAvailableSettingBooleanProperty(data.bool_property) : undefined,
+    boolProperty: data.bool_property
+      ? unmarshalVersionAvailableSettingBooleanProperty(data.bool_property)
+      : undefined,
     description: data.description,
-    floatProperty: data.float_property ? unmarshalVersionAvailableSettingFloatProperty(data.float_property) : undefined,
+    floatProperty: data.float_property
+      ? unmarshalVersionAvailableSettingFloatProperty(data.float_property)
+      : undefined,
     hotConfigurable: data.hot_configurable,
-    intProperty: data.int_property ? unmarshalVersionAvailableSettingIntegerProperty(data.int_property) : undefined,
+    intProperty: data.int_property
+      ? unmarshalVersionAvailableSettingIntegerProperty(data.int_property)
+      : undefined,
     name: data.name,
-    stringProperty: data.string_property ? unmarshalVersionAvailableSettingStringProperty(data.string_property) : undefined,
+    stringProperty: data.string_property
+      ? unmarshalVersionAvailableSettingStringProperty(data.string_property)
+      : undefined,
   } as VersionAvailableSetting
 }
 
@@ -295,13 +334,18 @@ const unmarshalVersion = (data: unknown): Version => {
   }
 
   return {
-    availableSettings: unmarshalArrayOfObject(data.available_settings, unmarshalVersionAvailableSetting),
+    availableSettings: unmarshalArrayOfObject(
+      data.available_settings,
+      unmarshalVersionAvailableSetting,
+    ),
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
     version: data.version,
   } as Version
 }
 
-export const unmarshalListVersionsResponse = (data: unknown): ListVersionsResponse => {
+export const unmarshalListVersionsResponse = (
+  data: unknown,
+): ListVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,
@@ -324,8 +368,7 @@ const marshalEndpointSpecPrivateNetworkDetails = (
 const marshalEndpointSpecPublicDetails = (
   request: EndpointSpecPublicDetails,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
-})
+): Record<string, unknown> => ({})
 
 const marshalCreateClusterRequestVolumeSpec = (
   request: CreateClusterRequestVolumeSpec,
@@ -338,15 +381,24 @@ const marshalCreateClusterRequestVolumeSpec = (
 const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'public_network',
-      value: (request.publicNetwork !== undefined) ? marshalEndpointSpecPublicDetails(request.publicNetwork, defaults)
-      : undefined,
+    {
+      param: 'public_network',
+      value:
+        request.publicNetwork !== undefined
+          ? marshalEndpointSpecPublicDetails(request.publicNetwork, defaults)
+          : undefined,
     },
-    {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
-      : undefined,
+    {
+      param: 'private_network',
+      value:
+        request.privateNetwork !== undefined
+          ? marshalEndpointSpecPrivateNetworkDetails(
+              request.privateNetwork,
+              defaults,
+            )
+          : undefined,
     },
   ]),
 })
@@ -355,7 +407,10 @@ export const marshalCreateClusterRequest = (
   request: CreateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  endpoints:
+    request.endpoints !== undefined
+      ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults))
+      : undefined,
   name: request.name || randomName('kafk'),
   node_amount: request.nodeAmount,
   node_type: request.nodeType,
@@ -364,7 +419,10 @@ export const marshalCreateClusterRequest = (
   tags: request.tags,
   user_name: request.userName,
   version: request.version,
-  volume: ((request.volume !== undefined) ?  marshalCreateClusterRequestVolumeSpec(request.volume, defaults): undefined),
+  volume:
+    request.volume !== undefined
+      ? marshalCreateClusterRequestVolumeSpec(request.volume, defaults)
+      : undefined,
 })
 
 export const marshalCreateEndpointRequest = (
@@ -372,7 +430,7 @@ export const marshalCreateEndpointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cluster_id: request.clusterId,
-  endpoint:  marshalEndpointSpec(request.endpoint, defaults),
+  endpoint: marshalEndpointSpec(request.endpoint, defaults),
 })
 
 export const marshalUpdateClusterRequest = (

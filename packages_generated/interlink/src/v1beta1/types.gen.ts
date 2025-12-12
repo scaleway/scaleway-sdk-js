@@ -1,13 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
-
-export type BgpStatus =
-  | 'unknown_bgp_status'
-  | 'up'
-  | 'down'
-  | 'disabled'
+export type BgpStatus = 'unknown_bgp_status' | 'up' | 'down' | 'disabled'
 
 export type DedicatedConnectionStatus =
   | 'unknown_status'
@@ -19,9 +14,7 @@ export type DedicatedConnectionStatus =
   | 'deleted'
   | 'locked'
 
-export type LinkKind =
-  | 'hosted'
-  | 'self_hosted'
+export type LinkKind = 'hosted' | 'self_hosted'
 
 export type LinkStatus =
   | 'unknown_link_status'
@@ -57,13 +50,9 @@ export type ListLinksRequestOrderBy =
   | 'status_asc'
   | 'status_desc'
 
-export type ListPartnersRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
+export type ListPartnersRequestOrderBy = 'name_asc' | 'name_desc'
 
-export type ListPopsRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
+export type ListPopsRequestOrderBy = 'name_asc' | 'name_desc'
 
 export type ListRoutingPoliciesRequestOrderBy =
   | 'created_at_asc'
@@ -86,12 +75,10 @@ export interface BgpConfig {
   ipv6: string
 }
 
-
 export interface Range {
   start: number
   end: number
 }
-
 
 export interface PartnerHost {
   /**
@@ -108,14 +95,12 @@ export interface PartnerHost {
   disapprovedReason?: string
 }
 
-
 export interface SelfHost {
   /**
    * Dedicated physical connection supporting the link.
    */
   connectionId: string
 }
-
 
 export interface DedicatedConnection {
   /**
@@ -175,7 +160,6 @@ export interface DedicatedConnection {
    */
   region: ScwRegion
 }
-
 
 export interface Link {
   /**
@@ -276,7 +260,6 @@ export interface Link {
   region: ScwRegion
 }
 
-
 export interface Partner {
   /**
    * Unique identifier of the partner.
@@ -307,7 +290,6 @@ export interface Partner {
    */
   updatedAt?: Date
 }
-
 
 export interface Pop {
   /**
@@ -347,7 +329,6 @@ export interface Pop {
    */
   region: ScwRegion
 }
-
 
 export interface RoutingPolicy {
   /**
@@ -396,7 +377,6 @@ export interface RoutingPolicy {
   region: ScwRegion
 }
 
-
 export type AttachRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -412,7 +392,6 @@ export type AttachRoutingPolicyRequest = {
   routingPolicyId: string
 }
 
-
 export type AttachVpcRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -427,7 +406,6 @@ export type AttachVpcRequest = {
    */
   vpcId: string
 }
-
 
 export type CreateLinkRequest = {
   /**
@@ -484,7 +462,6 @@ export type CreateLinkRequest = {
   routingPolicyV6Id?: string
 }
 
-
 export type CreateRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -516,7 +493,6 @@ export type CreateRoutingPolicyRequest = {
   isIpv6: boolean
 }
 
-
 export type DeleteLinkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -528,7 +504,6 @@ export type DeleteLinkRequest = {
   linkId: string
 }
 
-
 export type DeleteRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -539,7 +514,6 @@ export type DeleteRoutingPolicyRequest = {
    */
   routingPolicyId: string
 }
-
 
 export type DetachRoutingPolicyRequest = {
   /**
@@ -556,7 +530,6 @@ export type DetachRoutingPolicyRequest = {
   routingPolicyId: string
 }
 
-
 export type DetachVpcRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -567,7 +540,6 @@ export type DetachVpcRequest = {
    */
   linkId: string
 }
-
 
 export type DisableRoutePropagationRequest = {
   /**
@@ -580,7 +552,6 @@ export type DisableRoutePropagationRequest = {
   linkId: string
 }
 
-
 export type EnableRoutePropagationRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -591,7 +562,6 @@ export type EnableRoutePropagationRequest = {
    */
   linkId: string
 }
-
 
 export type GetDedicatedConnectionRequest = {
   /**
@@ -604,7 +574,6 @@ export type GetDedicatedConnectionRequest = {
   connectionId: string
 }
 
-
 export type GetLinkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -615,7 +584,6 @@ export type GetLinkRequest = {
    */
   linkId: string
 }
-
 
 export type GetPartnerRequest = {
   /**
@@ -628,7 +596,6 @@ export type GetPartnerRequest = {
   partnerId: string
 }
 
-
 export type GetPopRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -640,7 +607,6 @@ export type GetPopRequest = {
   popId: string
 }
 
-
 export type GetRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -651,7 +617,6 @@ export type GetRoutingPolicyRequest = {
    */
   routingPolicyId: string
 }
-
 
 export type ListDedicatedConnectionsRequest = {
   /**
@@ -700,7 +665,6 @@ export type ListDedicatedConnectionsRequest = {
   popId?: string
 }
 
-
 export interface ListDedicatedConnectionsResponse {
   /**
    * List of connections on current page.
@@ -711,7 +675,6 @@ export interface ListDedicatedConnectionsResponse {
    */
   totalCount: number
 }
-
 
 export type ListLinksRequest = {
   /**
@@ -792,7 +755,6 @@ export type ListLinksRequest = {
   connectionId?: string
 }
 
-
 export interface ListLinksResponse {
   /**
    * List of links on the current page.
@@ -803,7 +765,6 @@ export interface ListLinksResponse {
    */
   totalCount: number
 }
-
 
 export type ListPartnersRequest = {
   /**
@@ -828,7 +789,6 @@ export type ListPartnersRequest = {
   popIds?: string[]
 }
 
-
 export interface ListPartnersResponse {
   /**
    * List of partners on current page.
@@ -839,7 +799,6 @@ export interface ListPartnersResponse {
    */
   totalCount: number
 }
-
 
 export type ListPopsRequest = {
   /**
@@ -880,7 +839,6 @@ export type ListPopsRequest = {
   dedicatedAvailable?: boolean
 }
 
-
 export interface ListPopsResponse {
   /**
    * List of PoPs on the current page.
@@ -891,7 +849,6 @@ export interface ListPopsResponse {
    */
   totalCount: number
 }
-
 
 export type ListRoutingPoliciesRequest = {
   /**
@@ -932,12 +889,10 @@ export type ListRoutingPoliciesRequest = {
   ipv6?: boolean
 }
 
-
 export interface ListRoutingPoliciesResponse {
   routingPolicies: RoutingPolicy[]
   totalCount: number
 }
-
 
 export type SetRoutingPolicyRequest = {
   /**
@@ -953,7 +908,6 @@ export type SetRoutingPolicyRequest = {
    */
   routingPolicyId: string
 }
-
 
 export type UpdateLinkRequest = {
   /**
@@ -977,7 +931,6 @@ export type UpdateLinkRequest = {
    */
   peerAsn?: number
 }
-
 
 export type UpdateRoutingPolicyRequest = {
   /**
@@ -1005,5 +958,3 @@ export type UpdateRoutingPolicyRequest = {
    */
   prefixFilterOut?: string[]
 }
-
-

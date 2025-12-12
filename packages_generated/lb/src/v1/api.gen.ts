@@ -8,8 +8,11 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,} from './content.gen.js'
+import type { WaitForOptions, ApiLocality } from '@scaleway/sdk-client'
+import {
+  CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,
+  LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,
+} from './content.gen.js'
 import {
   unmarshalAcl,
   marshalAddBackendServersRequest,
@@ -230,20 +233,19 @@ export class ZonedAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      zones: [
-        'fr-par-1',
-        'fr-par-2',
-        'nl-ams-1',
-        'nl-ams-2',
-        'nl-ams-3',
-        'pl-waw-1',
-        'pl-waw-2',
-        'pl-waw-3',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: [
+      'fr-par-1',
+      'fr-par-2',
+      'nl-ams-1',
+      'nl-ams-2',
+      'nl-ams-3',
+      'pl-waw-1',
+      'pl-waw-2',
+      'pl-waw-3',
+    ],
+  })
+
   protected pageOfListLbs = (request: Readonly<ZonedApiListLbsRequest> = {}) =>
     this.client.fetch<ListLbsResponse>(
       {
@@ -254,14 +256,17 @@ export class ZonedAPI extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListLbsResponse,
     )
-  
+
   /**
    * List Load Balancers. List all Load Balancers in the specified zone, for a Scaleway Organization or Scaleway Project. By default, the Load Balancers returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -271,7 +276,6 @@ export class ZonedAPI extends ParentAPI {
   listLbs = (request: Readonly<ZonedApiListLbsRequest> = {}) =>
     enrichForPagination('lbs', this.pageOfListLbs, request)
 
-  
   /**
    * Create a Load Balancer. Create a new Load Balancer. Note that the Load Balancer will be created without frontends or backends; these must be created separately via the dedicated endpoints.
    *
@@ -291,7 +295,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalLb,
     )
 
-  
   /**
    * Get a Load Balancer. Retrieve information about an existing Load Balancer, specified by its Load Balancer ID. Its full details, including name, status and IP address, are returned in the response object.
    *
@@ -306,7 +309,7 @@ export class ZonedAPI extends ParentAPI {
       },
       unmarshalLb,
     )
-  
+
   /**
    * Waits for {@link Lb} to be in a final state.
    *
@@ -319,13 +322,14 @@ export class ZonedAPI extends ParentAPI {
     options?: Readonly<WaitForOptions<Lb>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!LB_TRANSIENT_STATUSES_LB.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(!LB_TRANSIENT_STATUSES_LB.includes(res.status))),
       this.getLb,
       request,
       options,
     )
 
-  
   /**
    * Update a Load Balancer. Update the parameters of an existing Load Balancer, specified by its Load Balancer ID. Note that the request type is PUT and not PATCH. You must set all parameters.
    *
@@ -345,24 +349,18 @@ export class ZonedAPI extends ParentAPI {
       unmarshalLb,
     )
 
-  
   /**
    * Delete a Load Balancer. Delete an existing Load Balancer, specified by its Load Balancer ID. Deleting a Load Balancer is permanent, and cannot be undone. The Load Balancer's flexible IP address can either be deleted with the Load Balancer, or kept in your account for future use.
    *
    * @param request - The request {@link ZonedApiDeleteLbRequest}
    */
   deleteLb = (request: Readonly<ZonedApiDeleteLbRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
-        urlParams: urlParams(
-          ['release_ip', request.releaseIp],
-        ),
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
+      urlParams: urlParams(['release_ip', request.releaseIp]),
+    })
 
-  
   /**
    * Migrate a Load Balancer. Migrate an existing Load Balancer from one commercial type to another. Allows you to scale your Load Balancer up or down in terms of bandwidth or multi-cloud provision.
    *
@@ -382,7 +380,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalLb,
     )
 
-  
   protected pageOfListIPs = (request: Readonly<ZonedApiListIPsRequest> = {}) =>
     this.client.fetch<ListIpsResponse>(
       {
@@ -393,14 +390,17 @@ export class ZonedAPI extends ParentAPI {
           ['ip_type', request.ipType],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListIpsResponse,
     )
-  
+
   /**
    * List IP addresses. List the Load Balancer flexible IP addresses held in the account (filtered by Organization ID or Project ID). It is also possible to search for a specific IP address.
    *
@@ -410,7 +410,6 @@ export class ZonedAPI extends ParentAPI {
   listIPs = (request: Readonly<ZonedApiListIPsRequest> = {}) =>
     enrichForPagination('ips', this.pageOfListIPs, request)
 
-  
   /**
    * Create an IP address. Create a new Load Balancer flexible IP address, in the specified Scaleway Project. This can be attached to new Load Balancers created in the future.
    *
@@ -430,7 +429,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalIp,
     )
 
-  
   /**
    * Get an IP address. Retrieve the full details of a Load Balancer flexible IP address.
    *
@@ -446,21 +444,17 @@ export class ZonedAPI extends ParentAPI {
       unmarshalIp,
     )
 
-  
   /**
    * Delete an IP address. Delete a Load Balancer flexible IP address. This action is irreversible, and cannot be undone.
    *
    * @param request - The request {@link ZonedApiReleaseIpRequest}
    */
   releaseIp = (request: Readonly<ZonedApiReleaseIpRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
+    })
 
-  
   /**
    * Update an IP address. Update the reverse DNS of a Load Balancer flexible IP address.
    *
@@ -480,8 +474,9 @@ export class ZonedAPI extends ParentAPI {
       unmarshalIp,
     )
 
-  
-  protected pageOfListBackends = (request: Readonly<ZonedApiListBackendsRequest>) =>
+  protected pageOfListBackends = (
+    request: Readonly<ZonedApiListBackendsRequest>,
+  ) =>
     this.client.fetch<ListBackendsResponse>(
       {
         method: 'GET',
@@ -490,12 +485,15 @@ export class ZonedAPI extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListBackendsResponse,
     )
-  
+
   /**
    * List the backends of a given Load Balancer. List all the backends of a Load Balancer, specified by its Load Balancer ID. By default, results are returned in ascending order by the creation date of each backend. The response is an array of backend objects, containing full details of each one including their configuration parameters such as protocol, port and forwarding algorithm.
    *
@@ -505,7 +503,6 @@ export class ZonedAPI extends ParentAPI {
   listBackends = (request: Readonly<ZonedApiListBackendsRequest>) =>
     enrichForPagination('backends', this.pageOfListBackends, request)
 
-  
   /**
    * Create a backend for a given Load Balancer. Create a new backend for a given Load Balancer, specifying its full configuration including protocol, port and forwarding algorithm.
    *
@@ -525,7 +522,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Get a backend of a given Load Balancer. Get the full details of a given backend, specified by its backend ID. The response contains the backend's full configuration parameters including protocol, port and forwarding algorithm.
    *
@@ -541,7 +537,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Update a backend of a given Load Balancer. Update a backend of a given Load Balancer, specified by its backend ID. Note that the request type is PUT and not PATCH. You must set all parameters.
    *
@@ -561,21 +556,17 @@ export class ZonedAPI extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Delete a backend of a given Load Balancer. Delete a backend of a given Load Balancer, specified by its backend ID. This action is irreversible and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteBackendRequest}
    */
   deleteBackend = (request: Readonly<ZonedApiDeleteBackendRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
+    })
 
-  
   /**
    * Add a set of backend servers to a given backend. For a given backend specified by its backend ID, add a set of backend servers (identified by their IP addresses) it should forward traffic to. These will be appended to any existing set of backend servers for this backend.
    *
@@ -586,7 +577,10 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
-          marshalZonedApiAddBackendServersRequest(request, this.client.settings),
+          marshalZonedApiAddBackendServersRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -595,18 +589,22 @@ export class ZonedAPI extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Remove a set of servers for a given backend. For a given backend specified by its backend ID, remove the specified backend servers (identified by their IP addresses) so that it no longer forwards traffic to them.
    *
    * @param request - The request {@link ZonedApiRemoveBackendServersRequest}
    * @returns A Promise of Backend
    */
-  removeBackendServers = (request: Readonly<ZonedApiRemoveBackendServersRequest>) =>
+  removeBackendServers = (
+    request: Readonly<ZonedApiRemoveBackendServersRequest>,
+  ) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
-          marshalZonedApiRemoveBackendServersRequest(request, this.client.settings),
+          marshalZonedApiRemoveBackendServersRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'DELETE',
@@ -615,7 +613,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Define all backend servers for a given backend. For a given backend specified by its backend ID, define the set of backend servers (identified by their IP addresses) that it should forward traffic to. Any existing backend servers configured for this backend will be removed.
    *
@@ -626,7 +623,10 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
-          marshalZonedApiSetBackendServersRequest(request, this.client.settings),
+          marshalZonedApiSetBackendServersRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
@@ -635,7 +635,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Update a health check for a given backend. Update the configuration of the health check performed by a given backend to verify the health of its backend servers, identified by its backend ID. Note that the request type is PUT and not PATCH. You must set all parameters.
    *
@@ -646,7 +645,10 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<HealthCheck>(
       {
         body: JSON.stringify(
-          marshalZonedApiUpdateHealthCheckRequest(request, this.client.settings),
+          marshalZonedApiUpdateHealthCheckRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
@@ -655,8 +657,9 @@ export class ZonedAPI extends ParentAPI {
       unmarshalHealthCheck,
     )
 
-  
-  protected pageOfListFrontends = (request: Readonly<ZonedApiListFrontendsRequest>) =>
+  protected pageOfListFrontends = (
+    request: Readonly<ZonedApiListFrontendsRequest>,
+  ) =>
     this.client.fetch<ListFrontendsResponse>(
       {
         method: 'GET',
@@ -665,12 +668,15 @@ export class ZonedAPI extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListFrontendsResponse,
     )
-  
+
   /**
    * List frontends of a given Load Balancer. List all the frontends of a Load Balancer, specified by its Load Balancer ID. By default, results are returned in ascending order by the creation date of each frontend. The response is an array of frontend objects, containing full details of each one including the port they listen on and the backend they are attached to.
    *
@@ -680,7 +686,6 @@ export class ZonedAPI extends ParentAPI {
   listFrontends = (request: Readonly<ZonedApiListFrontendsRequest>) =>
     enrichForPagination('frontends', this.pageOfListFrontends, request)
 
-  
   /**
    * Create a frontend in a given Load Balancer. Create a new frontend for a given Load Balancer, specifying its configuration including the port it should listen on and the backend to attach it to.
    *
@@ -700,7 +705,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalFrontend,
     )
 
-  
   /**
    * Get a frontend. Get the full details of a given frontend, specified by its frontend ID. The response contains the frontend's full configuration parameters including the backend it is attached to, the port it listens on, and any certificates it has.
    *
@@ -716,7 +720,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalFrontend,
     )
 
-  
   /**
    * Update a frontend. Update a given frontend, specified by its frontend ID. You can update configuration parameters including its name and the port it listens on. Note that the request type is PUT and not PATCH. You must set all parameters.
    *
@@ -736,22 +739,20 @@ export class ZonedAPI extends ParentAPI {
       unmarshalFrontend,
     )
 
-  
   /**
    * Delete a frontend. Delete a given frontend, specified by its frontend ID. This action is irreversible and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteFrontendRequest}
    */
   deleteFrontend = (request: Readonly<ZonedApiDeleteFrontendRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+    })
 
-  
-  protected pageOfListRoutes = (request: Readonly<ZonedApiListRoutesRequest> = {}) =>
+  protected pageOfListRoutes = (
+    request: Readonly<ZonedApiListRoutesRequest> = {},
+  ) =>
     this.client.fetch<ListRoutesResponse>(
       {
         method: 'GET',
@@ -760,12 +761,15 @@ export class ZonedAPI extends ParentAPI {
           ['frontend_id', request.frontendId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListRoutesResponse,
     )
-  
+
   /**
    * List all routes. List all routes for a given frontend. The response is an array of routes, each one  with a specified backend to direct to if a certain condition is matched (based on the value of the SNI field or HTTP Host header).
    *
@@ -775,7 +779,6 @@ export class ZonedAPI extends ParentAPI {
   listRoutes = (request: Readonly<ZonedApiListRoutesRequest> = {}) =>
     enrichForPagination('routes', this.pageOfListRoutes, request)
 
-  
   /**
    * Create a route. Create a new route on a given frontend. To configure a route, specify the backend to direct to if a certain condition is matched (based on the value of the SNI field or HTTP Host header).
    *
@@ -795,7 +798,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalRoute,
     )
 
-  
   /**
    * Get a route. Retrieve information about an existing route, specified by its route ID. Its full details, origin frontend, target backend and match condition, are returned in the response object.
    *
@@ -811,7 +813,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalRoute,
     )
 
-  
   /**
    * Update a route. Update the configuration of an existing route, specified by its route ID.
    *
@@ -831,21 +832,17 @@ export class ZonedAPI extends ParentAPI {
       unmarshalRoute,
     )
 
-  
   /**
    * Delete a route. Delete an existing route, specified by its route ID. Deleting a route is permanent, and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteRouteRequest}
    */
   deleteRoute = (request: Readonly<ZonedApiDeleteRouteRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
+    })
 
-  
   /**
    * Get usage statistics of a given Load Balancer.
    *
@@ -858,15 +855,14 @@ export class ZonedAPI extends ParentAPI {
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/stats`,
-        urlParams: urlParams(
-          ['backend_id', request.backendId],
-        ),
+        urlParams: urlParams(['backend_id', request.backendId]),
       },
       unmarshalLbStats,
     )
 
-  
-  protected pageOfListBackendStats = (request: Readonly<ZonedApiListBackendStatsRequest>) =>
+  protected pageOfListBackendStats = (
+    request: Readonly<ZonedApiListBackendStatsRequest>,
+  ) =>
     this.client.fetch<ListBackendStatsResponse>(
       {
         method: 'GET',
@@ -874,12 +870,15 @@ export class ZonedAPI extends ParentAPI {
         urlParams: urlParams(
           ['backend_id', request.backendId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListBackendStatsResponse,
     )
-  
+
   /**
    * List backend server statistics. List information about your backend servers, including their state and the result of their last health check.
    *
@@ -887,9 +886,12 @@ export class ZonedAPI extends ParentAPI {
    * @returns A Promise of ListBackendStatsResponse
    */
   listBackendStats = (request: Readonly<ZonedApiListBackendStatsRequest>) =>
-    enrichForPagination('backendServersStats', this.pageOfListBackendStats, request)
+    enrichForPagination(
+      'backendServersStats',
+      this.pageOfListBackendStats,
+      request,
+    )
 
-  
   protected pageOfListAcls = (request: Readonly<ZonedApiListAclsRequest>) =>
     this.client.fetch<ListAclResponse>(
       {
@@ -899,12 +901,15 @@ export class ZonedAPI extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListAclResponse,
     )
-  
+
   /**
    * List ACLs for a given frontend. List the ACLs for a given frontend, specified by its frontend ID. The response is an array of ACL objects, each one representing an ACL that denies or allows traffic based on certain conditions.
    *
@@ -914,7 +919,6 @@ export class ZonedAPI extends ParentAPI {
   listAcls = (request: Readonly<ZonedApiListAclsRequest>) =>
     enrichForPagination('acls', this.pageOfListAcls, request)
 
-  
   /**
    * Create an ACL for a given frontend. Create a new ACL for a given frontend. Each ACL must have a name, an action to perform (allow or deny), and a match rule (the action is carried out when the incoming traffic matches the rule).
    *
@@ -934,7 +938,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalAcl,
     )
 
-  
   /**
    * Get an ACL. Get information for a particular ACL, specified by its ACL ID. The response returns full details of the ACL, including its name, action, match rule and frontend.
    *
@@ -950,7 +953,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalAcl,
     )
 
-  
   /**
    * Update an ACL. Update a particular ACL, specified by its ACL ID. You can update details including its name, action and match rule.
    *
@@ -970,21 +972,17 @@ export class ZonedAPI extends ParentAPI {
       unmarshalAcl,
     )
 
-  
   /**
    * Delete an ACL. Delete an ACL, specified by its ACL ID. Deleting an ACL is irreversible and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteAclRequest}
    */
   deleteAcl = (request: Readonly<ZonedApiDeleteAclRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
+    })
 
-  
   /**
    * Define all ACLs for a given frontend. For a given frontend specified by its frontend ID, define and add the complete set of ACLS for that frontend. Any existing ACLs on this frontend will be removed.
    *
@@ -1004,7 +1002,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalSetAclsResponse,
     )
 
-  
   /**
    * Create an SSL/TLS certificate. Generate a new SSL/TLS certificate for a given Load Balancer. You can choose to create a Let's Encrypt certificate, or import a custom certificate.
    *
@@ -1015,7 +1012,10 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Certificate>(
       {
         body: JSON.stringify(
-          marshalZonedApiCreateCertificateRequest(request, this.client.settings),
+          marshalZonedApiCreateCertificateRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -1024,8 +1024,9 @@ export class ZonedAPI extends ParentAPI {
       unmarshalCertificate,
     )
 
-  
-  protected pageOfListCertificates = (request: Readonly<ZonedApiListCertificatesRequest>) =>
+  protected pageOfListCertificates = (
+    request: Readonly<ZonedApiListCertificatesRequest>,
+  ) =>
     this.client.fetch<ListCertificatesResponse>(
       {
         method: 'GET',
@@ -1034,12 +1035,15 @@ export class ZonedAPI extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListCertificatesResponse,
     )
-  
+
   /**
    * List all SSL/TLS certificates on a given Load Balancer. List all the SSL/TLS certificates on a given Load Balancer. The response is an array of certificate objects, which are by default listed in ascending order of creation date.
    *
@@ -1049,7 +1053,6 @@ export class ZonedAPI extends ParentAPI {
   listCertificates = (request: Readonly<ZonedApiListCertificatesRequest>) =>
     enrichForPagination('certificates', this.pageOfListCertificates, request)
 
-  
   /**
    * Get an SSL/TLS certificate. Get information for a particular SSL/TLS certificate, specified by its certificate ID. The response returns full details of the certificate, including its type, main domain name, and alternative domain names.
    *
@@ -1064,7 +1067,7 @@ export class ZonedAPI extends ParentAPI {
       },
       unmarshalCertificate,
     )
-  
+
   /**
    * Waits for {@link Certificate} to be in a final state.
    *
@@ -1077,13 +1080,16 @@ export class ZonedAPI extends ParentAPI {
     options?: Readonly<WaitForOptions<Certificate>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!CERTIFICATE_TRANSIENT_STATUSES_LB.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !CERTIFICATE_TRANSIENT_STATUSES_LB.includes(res.status),
+          )),
       this.getCertificate,
       request,
       options,
     )
 
-  
   /**
    * Update an SSL/TLS certificate. Update the name of a particular SSL/TLS certificate, specified by its certificate ID.
    *
@@ -1094,7 +1100,10 @@ export class ZonedAPI extends ParentAPI {
     this.client.fetch<Certificate>(
       {
         body: JSON.stringify(
-          marshalZonedApiUpdateCertificateRequest(request, this.client.settings),
+          marshalZonedApiUpdateCertificateRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
@@ -1103,34 +1112,35 @@ export class ZonedAPI extends ParentAPI {
       unmarshalCertificate,
     )
 
-  
   /**
    * Delete an SSL/TLS certificate. Delete an SSL/TLS certificate, specified by its certificate ID. Deleting a certificate is irreversible and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteCertificateRequest}
    */
   deleteCertificate = (request: Readonly<ZonedApiDeleteCertificateRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+    })
 
-  
-  protected pageOfListLbTypes = (request: Readonly<ZonedApiListLbTypesRequest> = {}) =>
+  protected pageOfListLbTypes = (
+    request: Readonly<ZonedApiListLbTypesRequest> = {},
+  ) =>
     this.client.fetch<ListLbTypesResponse>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb-types`,
         urlParams: urlParams(
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListLbTypesResponse,
     )
-  
+
   /**
    * List all Load Balancer offer types. List all the different commercial Load Balancer types. The response includes an array of offer types, each with a name, description, and information about its stock availability.
    *
@@ -1140,7 +1150,6 @@ export class ZonedAPI extends ParentAPI {
   listLbTypes = (request: Readonly<ZonedApiListLbTypesRequest> = {}) =>
     enrichForPagination('lbTypes', this.pageOfListLbTypes, request)
 
-  
   /**
    * Create a subscriber. Create a new subscriber, either with an email configuration or a webhook configuration, for a specified Scaleway Project.
    *
@@ -1160,7 +1169,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalSubscriber,
     )
 
-  
   /**
    * Get a subscriber. Retrieve information about an existing subscriber, specified by its subscriber ID. Its full details, including name and email/webhook configuration, are returned in the response object.
    *
@@ -1176,8 +1184,9 @@ export class ZonedAPI extends ParentAPI {
       unmarshalSubscriber,
     )
 
-  
-  protected pageOfListSubscriber = (request: Readonly<ZonedApiListSubscriberRequest> = {}) =>
+  protected pageOfListSubscriber = (
+    request: Readonly<ZonedApiListSubscriberRequest> = {},
+  ) =>
     this.client.fetch<ListSubscriberResponse>(
       {
         method: 'GET',
@@ -1187,13 +1196,16 @@ export class ZonedAPI extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListSubscriberResponse,
     )
-  
+
   /**
    * List all subscribers. List all subscribers to Load Balancer alerts. By default, returns all subscribers to Load Balancer alerts for the Organization associated with the authentication token used for the request.
    *
@@ -1203,7 +1215,6 @@ export class ZonedAPI extends ParentAPI {
   listSubscriber = (request: Readonly<ZonedApiListSubscriberRequest> = {}) =>
     enrichForPagination('subscribers', this.pageOfListSubscriber, request)
 
-  
   /**
    * Update a subscriber. Update the parameters of a given subscriber (e.g. name, webhook configuration, email configuration), specified by its subscriber ID.
    *
@@ -1223,21 +1234,17 @@ export class ZonedAPI extends ParentAPI {
       unmarshalSubscriber,
     )
 
-  
   /**
    * Delete a subscriber. Delete an existing subscriber, specified by its subscriber ID. Deleting a subscriber is permanent, and cannot be undone.
    *
    * @param request - The request {@link ZonedApiDeleteSubscriberRequest}
    */
   deleteSubscriber = (request: Readonly<ZonedApiDeleteSubscriberRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/subscription/${validatePathParam('subscriberId', request.subscriberId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/subscription/${validatePathParam('subscriberId', request.subscriberId)}`,
+    })
 
-  
   /**
    * Subscribe a subscriber to alerts for a given Load Balancer. Subscribe an existing subscriber to alerts for a given Load Balancer.
    *
@@ -1257,7 +1264,6 @@ export class ZonedAPI extends ParentAPI {
       unmarshalLb,
     )
 
-  
   /**
    * Unsubscribe a subscriber from alerts for a given Load Balancer. Unsubscribe a subscriber from alerts for a given Load Balancer. The subscriber is not deleted, and can be resubscribed in the future if necessary.
    *
@@ -1273,8 +1279,9 @@ export class ZonedAPI extends ParentAPI {
       unmarshalLb,
     )
 
-  
-  protected pageOfListLbPrivateNetworks = (request: Readonly<ZonedApiListLbPrivateNetworksRequest>) =>
+  protected pageOfListLbPrivateNetworks = (
+    request: Readonly<ZonedApiListLbPrivateNetworksRequest>,
+  ) =>
     this.client.fetch<ListLbPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -1282,33 +1289,46 @@ export class ZonedAPI extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListLbPrivateNetworksResponse,
     )
-  
+
   /**
    * List Private Networks attached to a Load Balancer. List the Private Networks attached to a given Load Balancer, specified by its Load Balancer ID. The response is an array of Private Network objects, giving information including the status, configuration, name and creation date of each Private Network.
    *
    * @param request - The request {@link ZonedApiListLbPrivateNetworksRequest}
    * @returns A Promise of ListLbPrivateNetworksResponse
    */
-  listLbPrivateNetworks = (request: Readonly<ZonedApiListLbPrivateNetworksRequest>) =>
-    enrichForPagination('privateNetwork', this.pageOfListLbPrivateNetworks, request)
+  listLbPrivateNetworks = (
+    request: Readonly<ZonedApiListLbPrivateNetworksRequest>,
+  ) =>
+    enrichForPagination(
+      'privateNetwork',
+      this.pageOfListLbPrivateNetworks,
+      request,
+    )
 
-  
   /**
    * Attach a Load Balancer to a Private Network. Attach a specified Load Balancer to a specified Private Network, defining a static or DHCP configuration for the Load Balancer on the network.
    *
    * @param request - The request {@link ZonedApiAttachPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
    */
-  attachPrivateNetwork = (request: Readonly<ZonedApiAttachPrivateNetworkRequest>) =>
+  attachPrivateNetwork = (
+    request: Readonly<ZonedApiAttachPrivateNetworkRequest>,
+  ) =>
     this.client.fetch<PrivateNetwork>(
       {
         body: JSON.stringify(
-          marshalZonedApiAttachPrivateNetworkRequest(request, this.client.settings),
+          marshalZonedApiAttachPrivateNetworkRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -1317,25 +1337,25 @@ export class ZonedAPI extends ParentAPI {
       unmarshalPrivateNetwork,
     )
 
-  
   /**
    * Detach Load Balancer from Private Network. Detach a specified Load Balancer from a specified Private Network.
    *
    * @param request - The request {@link ZonedApiDetachPrivateNetworkRequest}
    */
-  detachPrivateNetwork = (request: Readonly<ZonedApiDetachPrivateNetworkRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: JSON.stringify(
-          marshalZonedApiDetachPrivateNetworkRequest(request, this.client.settings),
+  detachPrivateNetwork = (
+    request: Readonly<ZonedApiDetachPrivateNetworkRequest>,
+  ) =>
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalZonedApiDetachPrivateNetworkRequest(
+          request,
+          this.client.settings,
         ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/detach-private-network`,
-      },
-    )
-
-  
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/detach-private-network`,
+    })
 }
 
 /**
@@ -1348,15 +1368,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-        'pl-waw',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
+
   protected pageOfListLbs = (request: Readonly<ListLbsRequest> = {}) =>
     this.client.fetch<ListLbsResponse>(
       {
@@ -1367,14 +1382,17 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListLbsResponse,
     )
-  
+
   /**
    * List load balancers.
    *
@@ -1384,7 +1402,6 @@ export class API extends ParentAPI {
   listLbs = (request: Readonly<ListLbsRequest> = {}) =>
     enrichForPagination('lbs', this.pageOfListLbs, request)
 
-  
   /**
    * Create a load balancer.
    *
@@ -1404,7 +1421,6 @@ export class API extends ParentAPI {
       unmarshalLb,
     )
 
-  
   /**
    * Get a load balancer.
    *
@@ -1419,7 +1435,7 @@ export class API extends ParentAPI {
       },
       unmarshalLb,
     )
-  
+
   /**
    * Waits for {@link Lb} to be in a final state.
    *
@@ -1432,13 +1448,14 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Lb>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!LB_TRANSIENT_STATUSES_LB.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(!LB_TRANSIENT_STATUSES_LB.includes(res.status))),
       this.getLb,
       request,
       options,
     )
 
-  
   /**
    * Update a load balancer.
    *
@@ -1458,24 +1475,18 @@ export class API extends ParentAPI {
       unmarshalLb,
     )
 
-  
   /**
    * Delete a load balancer.
    *
    * @param request - The request {@link DeleteLbRequest}
    */
   deleteLb = (request: Readonly<DeleteLbRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
-        urlParams: urlParams(
-          ['release_ip', request.releaseIp],
-        ),
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
+      urlParams: urlParams(['release_ip', request.releaseIp]),
+    })
 
-  
   /**
    * Migrate a load balancer.
    *
@@ -1495,7 +1506,6 @@ export class API extends ParentAPI {
       unmarshalLb,
     )
 
-  
   protected pageOfListIPs = (request: Readonly<ListIPsRequest> = {}) =>
     this.client.fetch<ListIpsResponse>(
       {
@@ -1506,14 +1516,17 @@ export class API extends ParentAPI {
           ['ip_type', request.ipType],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListIpsResponse,
     )
-  
+
   /**
    * List IPs.
    *
@@ -1523,7 +1536,6 @@ export class API extends ParentAPI {
   listIPs = (request: Readonly<ListIPsRequest> = {}) =>
     enrichForPagination('ips', this.pageOfListIPs, request)
 
-  
   /**
    * Create an IP.
    *
@@ -1543,7 +1555,6 @@ export class API extends ParentAPI {
       unmarshalIp,
     )
 
-  
   /**
    * Get an IP.
    *
@@ -1559,21 +1570,17 @@ export class API extends ParentAPI {
       unmarshalIp,
     )
 
-  
   /**
    * Delete an IP.
    *
    * @param request - The request {@link ReleaseIpRequest}
    */
   releaseIp = (request: Readonly<ReleaseIpRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
+    })
 
-  
   /**
    * Update an IP.
    *
@@ -1593,7 +1600,6 @@ export class API extends ParentAPI {
       unmarshalIp,
     )
 
-  
   protected pageOfListBackends = (request: Readonly<ListBackendsRequest>) =>
     this.client.fetch<ListBackendsResponse>(
       {
@@ -1603,12 +1609,15 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListBackendsResponse,
     )
-  
+
   /**
    * List backends in a given load balancer.
    *
@@ -1618,7 +1627,6 @@ export class API extends ParentAPI {
   listBackends = (request: Readonly<ListBackendsRequest>) =>
     enrichForPagination('backends', this.pageOfListBackends, request)
 
-  
   /**
    * Create a backend in a given load balancer.
    *
@@ -1638,7 +1646,6 @@ export class API extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Get a backend in a given load balancer.
    *
@@ -1654,7 +1661,6 @@ export class API extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Update a backend in a given load balancer.
    *
@@ -1674,21 +1680,17 @@ export class API extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Delete a backend in a given load balancer.
    *
    * @param request - The request {@link DeleteBackendRequest}
    */
   deleteBackend = (request: Readonly<DeleteBackendRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
+    })
 
-  
   /**
    * Add a set of servers in a given backend.
    *
@@ -1708,7 +1710,6 @@ export class API extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Remove a set of servers for a given backend.
    *
@@ -1728,7 +1729,6 @@ export class API extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Define all servers in a given backend.
    *
@@ -1748,7 +1748,6 @@ export class API extends ParentAPI {
       unmarshalBackend,
     )
 
-  
   /**
    * Update an health check for a given backend.
    *
@@ -1768,7 +1767,6 @@ export class API extends ParentAPI {
       unmarshalHealthCheck,
     )
 
-  
   protected pageOfListFrontends = (request: Readonly<ListFrontendsRequest>) =>
     this.client.fetch<ListFrontendsResponse>(
       {
@@ -1778,12 +1776,15 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListFrontendsResponse,
     )
-  
+
   /**
    * List frontends in a given load balancer.
    *
@@ -1793,7 +1794,6 @@ export class API extends ParentAPI {
   listFrontends = (request: Readonly<ListFrontendsRequest>) =>
     enrichForPagination('frontends', this.pageOfListFrontends, request)
 
-  
   /**
    * Create a frontend in a given load balancer.
    *
@@ -1813,7 +1813,6 @@ export class API extends ParentAPI {
       unmarshalFrontend,
     )
 
-  
   /**
    * Get a frontend.
    *
@@ -1829,7 +1828,6 @@ export class API extends ParentAPI {
       unmarshalFrontend,
     )
 
-  
   /**
    * Update a frontend.
    *
@@ -1849,21 +1847,17 @@ export class API extends ParentAPI {
       unmarshalFrontend,
     )
 
-  
   /**
    * Delete a frontend.
    *
    * @param request - The request {@link DeleteFrontendRequest}
    */
   deleteFrontend = (request: Readonly<DeleteFrontendRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+    })
 
-  
   protected pageOfListRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
     this.client.fetch<ListRoutesResponse>(
       {
@@ -1873,12 +1867,15 @@ export class API extends ParentAPI {
           ['frontend_id', request.frontendId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListRoutesResponse,
     )
-  
+
   /**
    * List all backend redirections.
    *
@@ -1888,7 +1885,6 @@ export class API extends ParentAPI {
   listRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
     enrichForPagination('routes', this.pageOfListRoutes, request)
 
-  
   /**
    * Create a backend redirection.
    *
@@ -1908,7 +1904,6 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
-  
   /**
    * Get single backend redirection.
    *
@@ -1924,7 +1919,6 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
-  
   /**
    * Edit a backend redirection.
    *
@@ -1944,21 +1938,17 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
-  
   /**
    * Delete a backend redirection.
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
   deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+    })
 
-  
   /**
    * Get usage statistics of a given load balancer.
    *
@@ -1971,15 +1961,14 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/stats`,
-        urlParams: urlParams(
-          ['backend_id', request.backendId],
-        ),
+        urlParams: urlParams(['backend_id', request.backendId]),
       },
       unmarshalLbStats,
     )
 
-  
-  protected pageOfListBackendStats = (request: Readonly<ListBackendStatsRequest>) =>
+  protected pageOfListBackendStats = (
+    request: Readonly<ListBackendStatsRequest>,
+  ) =>
     this.client.fetch<ListBackendStatsResponse>(
       {
         method: 'GET',
@@ -1987,12 +1976,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['backend_id', request.backendId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListBackendStatsResponse,
     )
-  
+
   /**
    * List backend server statistics.
    *
@@ -2000,9 +1992,12 @@ export class API extends ParentAPI {
    * @returns A Promise of ListBackendStatsResponse
    */
   listBackendStats = (request: Readonly<ListBackendStatsRequest>) =>
-    enrichForPagination('backendServersStats', this.pageOfListBackendStats, request)
+    enrichForPagination(
+      'backendServersStats',
+      this.pageOfListBackendStats,
+      request,
+    )
 
-  
   protected pageOfListAcls = (request: Readonly<ListAclsRequest>) =>
     this.client.fetch<ListAclResponse>(
       {
@@ -2012,12 +2007,15 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListAclResponse,
     )
-  
+
   /**
    * List ACL for a given frontend.
    *
@@ -2027,7 +2025,6 @@ export class API extends ParentAPI {
   listAcls = (request: Readonly<ListAclsRequest>) =>
     enrichForPagination('acls', this.pageOfListAcls, request)
 
-  
   /**
    * Create an ACL for a given frontend.
    *
@@ -2047,7 +2044,6 @@ export class API extends ParentAPI {
       unmarshalAcl,
     )
 
-  
   /**
    * Get an ACL.
    *
@@ -2063,7 +2059,6 @@ export class API extends ParentAPI {
       unmarshalAcl,
     )
 
-  
   /**
    * Update an ACL.
    *
@@ -2083,21 +2078,17 @@ export class API extends ParentAPI {
       unmarshalAcl,
     )
 
-  
   /**
    * Delete an ACL.
    *
    * @param request - The request {@link DeleteAclRequest}
    */
   deleteAcl = (request: Readonly<DeleteAclRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
+    })
 
-  
   /**
    * Create a TLS certificate. Generate a new TLS certificate using Let's Encrypt or import your certificate.
    *
@@ -2117,8 +2108,9 @@ export class API extends ParentAPI {
       unmarshalCertificate,
     )
 
-  
-  protected pageOfListCertificates = (request: Readonly<ListCertificatesRequest>) =>
+  protected pageOfListCertificates = (
+    request: Readonly<ListCertificatesRequest>,
+  ) =>
     this.client.fetch<ListCertificatesResponse>(
       {
         method: 'GET',
@@ -2127,12 +2119,15 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListCertificatesResponse,
     )
-  
+
   /**
    * List all TLS certificates on a given load balancer.
    *
@@ -2142,7 +2137,6 @@ export class API extends ParentAPI {
   listCertificates = (request: Readonly<ListCertificatesRequest>) =>
     enrichForPagination('certificates', this.pageOfListCertificates, request)
 
-  
   /**
    * Get a TLS certificate.
    *
@@ -2157,7 +2151,7 @@ export class API extends ParentAPI {
       },
       unmarshalCertificate,
     )
-  
+
   /**
    * Waits for {@link Certificate} to be in a final state.
    *
@@ -2170,13 +2164,16 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Certificate>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!CERTIFICATE_TRANSIENT_STATUSES_LB.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !CERTIFICATE_TRANSIENT_STATUSES_LB.includes(res.status),
+          )),
       this.getCertificate,
       request,
       options,
     )
 
-  
   /**
    * Update a TLS certificate.
    *
@@ -2196,21 +2193,17 @@ export class API extends ParentAPI {
       unmarshalCertificate,
     )
 
-  
   /**
    * Delete a TLS certificate.
    *
    * @param request - The request {@link DeleteCertificateRequest}
    */
   deleteCertificate = (request: Readonly<DeleteCertificateRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+    })
 
-  
   protected pageOfListLbTypes = (request: Readonly<ListLbTypesRequest> = {}) =>
     this.client.fetch<ListLbTypesResponse>(
       {
@@ -2218,12 +2211,15 @@ export class API extends ParentAPI {
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb-types`,
         urlParams: urlParams(
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListLbTypesResponse,
     )
-  
+
   /**
    * List all load balancer offer type.
    *
@@ -2233,7 +2229,6 @@ export class API extends ParentAPI {
   listLbTypes = (request: Readonly<ListLbTypesRequest> = {}) =>
     enrichForPagination('lbTypes', this.pageOfListLbTypes, request)
 
-  
   /**
    * Create a subscriber, webhook or email.
    *
@@ -2253,7 +2248,6 @@ export class API extends ParentAPI {
       unmarshalSubscriber,
     )
 
-  
   /**
    * Get a subscriber.
    *
@@ -2269,8 +2263,9 @@ export class API extends ParentAPI {
       unmarshalSubscriber,
     )
 
-  
-  protected pageOfListSubscriber = (request: Readonly<ListSubscriberRequest> = {}) =>
+  protected pageOfListSubscriber = (
+    request: Readonly<ListSubscriberRequest> = {},
+  ) =>
     this.client.fetch<ListSubscriberResponse>(
       {
         method: 'GET',
@@ -2280,13 +2275,16 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListSubscriberResponse,
     )
-  
+
   /**
    * List all subscriber.
    *
@@ -2296,7 +2294,6 @@ export class API extends ParentAPI {
   listSubscriber = (request: Readonly<ListSubscriberRequest> = {}) =>
     enrichForPagination('subscribers', this.pageOfListSubscriber, request)
 
-  
   /**
    * Update a subscriber.
    *
@@ -2316,21 +2313,17 @@ export class API extends ParentAPI {
       unmarshalSubscriber,
     )
 
-  
   /**
    * Delete a subscriber.
    *
    * @param request - The request {@link DeleteSubscriberRequest}
    */
   deleteSubscriber = (request: Readonly<DeleteSubscriberRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/subscriber/${validatePathParam('subscriberId', request.subscriberId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/subscriber/${validatePathParam('subscriberId', request.subscriberId)}`,
+    })
 
-  
   /**
    * Subscribe a subscriber to a given load balancer.
    *
@@ -2350,7 +2343,6 @@ export class API extends ParentAPI {
       unmarshalLb,
     )
 
-  
   /**
    * Unsubscribe a subscriber from a given load balancer.
    *
@@ -2366,8 +2358,9 @@ export class API extends ParentAPI {
       unmarshalLb,
     )
 
-  
-  protected pageOfListLbPrivateNetworks = (request: Readonly<ListLbPrivateNetworksRequest>) =>
+  protected pageOfListLbPrivateNetworks = (
+    request: Readonly<ListLbPrivateNetworksRequest>,
+  ) =>
     this.client.fetch<ListLbPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -2375,12 +2368,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListLbPrivateNetworksResponse,
     )
-  
+
   /**
    * List attached private network of load balancer.
    *
@@ -2388,9 +2384,12 @@ export class API extends ParentAPI {
    * @returns A Promise of ListLbPrivateNetworksResponse
    */
   listLbPrivateNetworks = (request: Readonly<ListLbPrivateNetworksRequest>) =>
-    enrichForPagination('privateNetwork', this.pageOfListLbPrivateNetworks, request)
+    enrichForPagination(
+      'privateNetwork',
+      this.pageOfListLbPrivateNetworks,
+      request,
+    )
 
-  
   /**
    * Add load balancer on instance private network.
    *
@@ -2410,22 +2409,16 @@ export class API extends ParentAPI {
       unmarshalPrivateNetwork,
     )
 
-  
   /**
    * Remove load balancer of private network.
    *
    * @param request - The request {@link DetachPrivateNetworkRequest}
    */
   detachPrivateNetwork = (request: Readonly<DetachPrivateNetworkRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/detach`,
-      },
-    )
-
-  
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/detach`,
+    })
 }
-
