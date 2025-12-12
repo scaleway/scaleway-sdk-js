@@ -1609,6 +1609,26 @@ export type HostingApiListHostingsRequest = {
 }
 
 
+export type HostingApiMigrateControlPanelRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Hosting ID to migrate to a new control panel.
+   */
+  hostingId: string
+  /**
+   * Control panel will migrate the hosting to a new server.
+   */
+  controlPanelName: string
+  /**
+   * Migration.
+   */
+  offerId: string
+}
+
+
 export type HostingApiRemoveCustomDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
