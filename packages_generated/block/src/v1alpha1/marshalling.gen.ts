@@ -1,7 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+  unmarshalMoney,
+} from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Reference,
@@ -68,7 +74,9 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
-    parentVolume: data.parent_volume ? unmarshalSnapshotParentVolume(data.parent_volume) : undefined,
+    parentVolume: data.parent_volume
+      ? unmarshalSnapshotParentVolume(data.parent_volume)
+      : undefined,
     projectId: data.project_id,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,
@@ -117,7 +125,9 @@ export const unmarshalVolume = (data: unknown): Volume => {
   } as Volume
 }
 
-export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResponse => {
+export const unmarshalListSnapshotsResponse = (
+  data: unknown,
+): ListSnapshotsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`,
@@ -139,13 +149,17 @@ const unmarshalVolumeType = (data: unknown): VolumeType => {
 
   return {
     pricing: data.pricing ? unmarshalMoney(data.pricing) : undefined,
-    snapshotPricing: data.snapshot_pricing ? unmarshalMoney(data.snapshot_pricing) : undefined,
+    snapshotPricing: data.snapshot_pricing
+      ? unmarshalMoney(data.snapshot_pricing)
+      : undefined,
     specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
     type: data.type,
   } as VolumeType
 }
 
-export const unmarshalListVolumeTypesResponse = (data: unknown): ListVolumeTypesResponse => {
+export const unmarshalListVolumeTypesResponse = (
+  data: unknown,
+): ListVolumeTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVolumeTypesResponse' failed as data isn't a dictionary.`,
@@ -158,7 +172,9 @@ export const unmarshalListVolumeTypesResponse = (data: unknown): ListVolumeTypes
   } as ListVolumeTypesResponse
 }
 
-export const unmarshalListVolumesResponse = (data: unknown): ListVolumesResponse => {
+export const unmarshalListVolumesResponse = (
+  data: unknown,
+): ListVolumesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVolumesResponse' failed as data isn't a dictionary.`,
@@ -202,22 +218,27 @@ export const marshalCreateVolumeRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('vol'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  tags: request.tags,  
+  tags: request.tags,
   ...resolveOneOf([
-    {param: 'from_empty',
-      value: (request.fromEmpty !== undefined) ? marshalCreateVolumeRequestFromEmpty(request.fromEmpty, defaults)
-      : undefined,
+    {
+      param: 'from_empty',
+      value:
+        request.fromEmpty !== undefined
+          ? marshalCreateVolumeRequestFromEmpty(request.fromEmpty, defaults)
+          : undefined,
     },
-    {param: 'from_snapshot',
-      value: (request.fromSnapshot !== undefined) ? marshalCreateVolumeRequestFromSnapshot(request.fromSnapshot, defaults)
-      : undefined,
-    },
-  ]),  
-  ...resolveOneOf([
-    {param: 'perf_iops',
-      value: request.perfIops,
+    {
+      param: 'from_snapshot',
+      value:
+        request.fromSnapshot !== undefined
+          ? marshalCreateVolumeRequestFromSnapshot(
+              request.fromSnapshot,
+              defaults,
+            )
+          : undefined,
     },
   ]),
+  ...resolveOneOf([{ param: 'perf_iops', value: request.perfIops }]),
 })
 
 export const marshalExportSnapshotToObjectStorageRequest = (

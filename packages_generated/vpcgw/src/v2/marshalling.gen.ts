@@ -1,7 +1,11 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+} from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   GatewayNetwork,
@@ -89,7 +93,10 @@ export const unmarshalGateway = (data: unknown): Gateway => {
     bastionPort: data.bastion_port,
     canUpgradeTo: data.can_upgrade_to,
     createdAt: unmarshalDate(data.created_at),
-    gatewayNetworks: unmarshalArrayOfObject(data.gateway_networks, unmarshalGatewayNetwork),
+    gatewayNetworks: unmarshalArrayOfObject(
+      data.gateway_networks,
+      unmarshalGatewayNetwork,
+    ),
     id: data.id,
     ipv4: data.ipv4 ? unmarshalIP(data.ipv4) : undefined,
     isLegacy: data.is_legacy,
@@ -126,7 +133,9 @@ export const unmarshalPatRule = (data: unknown): PatRule => {
   } as PatRule
 }
 
-export const unmarshalAddBastionAllowedIPsResponse = (data: unknown): AddBastionAllowedIPsResponse => {
+export const unmarshalAddBastionAllowedIPsResponse = (
+  data: unknown,
+): AddBastionAllowedIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AddBastionAllowedIPsResponse' failed as data isn't a dictionary.`,
@@ -138,7 +147,9 @@ export const unmarshalAddBastionAllowedIPsResponse = (data: unknown): AddBastion
   } as AddBastionAllowedIPsResponse
 }
 
-export const unmarshalListGatewayNetworksResponse = (data: unknown): ListGatewayNetworksResponse => {
+export const unmarshalListGatewayNetworksResponse = (
+  data: unknown,
+): ListGatewayNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGatewayNetworksResponse' failed as data isn't a dictionary.`,
@@ -146,7 +157,10 @@ export const unmarshalListGatewayNetworksResponse = (data: unknown): ListGateway
   }
 
   return {
-    gatewayNetworks: unmarshalArrayOfObject(data.gateway_networks, unmarshalGatewayNetwork),
+    gatewayNetworks: unmarshalArrayOfObject(
+      data.gateway_networks,
+      unmarshalGatewayNetwork,
+    ),
     totalCount: data.total_count,
   } as ListGatewayNetworksResponse
 }
@@ -165,7 +179,9 @@ const unmarshalGatewayType = (data: unknown): GatewayType => {
   } as GatewayType
 }
 
-export const unmarshalListGatewayTypesResponse = (data: unknown): ListGatewayTypesResponse => {
+export const unmarshalListGatewayTypesResponse = (
+  data: unknown,
+): ListGatewayTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGatewayTypesResponse' failed as data isn't a dictionary.`,
@@ -177,7 +193,9 @@ export const unmarshalListGatewayTypesResponse = (data: unknown): ListGatewayTyp
   } as ListGatewayTypesResponse
 }
 
-export const unmarshalListGatewaysResponse = (data: unknown): ListGatewaysResponse => {
+export const unmarshalListGatewaysResponse = (
+  data: unknown,
+): ListGatewaysResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListGatewaysResponse' failed as data isn't a dictionary.`,
@@ -203,7 +221,9 @@ export const unmarshalListIPsResponse = (data: unknown): ListIPsResponse => {
   } as ListIPsResponse
 }
 
-export const unmarshalListPatRulesResponse = (data: unknown): ListPatRulesResponse => {
+export const unmarshalListPatRulesResponse = (
+  data: unknown,
+): ListPatRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPatRulesResponse' failed as data isn't a dictionary.`,
@@ -216,7 +236,9 @@ export const unmarshalListPatRulesResponse = (data: unknown): ListPatRulesRespon
   } as ListPatRulesResponse
 }
 
-export const unmarshalSetBastionAllowedIPsResponse = (data: unknown): SetBastionAllowedIPsResponse => {
+export const unmarshalSetBastionAllowedIPsResponse = (
+  data: unknown,
+): SetBastionAllowedIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetBastionAllowedIPsResponse' failed as data isn't a dictionary.`,
@@ -228,7 +250,9 @@ export const unmarshalSetBastionAllowedIPsResponse = (data: unknown): SetBastion
   } as SetBastionAllowedIPsResponse
 }
 
-export const unmarshalSetPatRulesResponse = (data: unknown): SetPatRulesResponse => {
+export const unmarshalSetPatRulesResponse = (
+  data: unknown,
+): SetPatRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetPatRulesResponse' failed as data isn't a dictionary.`,
@@ -313,7 +337,9 @@ export const marshalSetPatRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
-  pat_rules:  request.patRules.map(elt => marshalSetPatRulesRequestRule(elt, defaults)),
+  pat_rules: request.patRules.map(elt =>
+    marshalSetPatRulesRequestRule(elt, defaults),
+  ),
 })
 
 export const marshalUpdateGatewayNetworkRequest = (

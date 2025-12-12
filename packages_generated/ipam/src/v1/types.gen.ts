@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone} from '@scaleway/sdk-client'
-
+import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 
 export type ListIPsRequestOrderBy =
   | 'created_at_desc'
@@ -65,7 +64,6 @@ export interface Resource {
   name?: string
 }
 
-
 export interface Reverse {
   /**
    * Reverse domain name.
@@ -76,7 +74,6 @@ export interface Reverse {
    */
   address?: string
 }
-
 
 export interface Source {
   /**
@@ -104,7 +101,6 @@ export interface Source {
   vpcId?: string
 }
 
-
 export interface CustomResource {
   /**
    * MAC address of the custom resource.
@@ -115,7 +111,6 @@ export interface CustomResource {
    */
   name?: string
 }
-
 
 export interface IP {
   /**
@@ -168,7 +163,6 @@ export interface IP {
   zone?: ScwZone
 }
 
-
 export type AttachIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -183,7 +177,6 @@ export type AttachIPRequest = {
    */
   resource: CustomResource
 }
-
 
 export type BookIPRequest = {
   /**
@@ -216,7 +209,6 @@ export type BookIPRequest = {
   resource?: CustomResource
 }
 
-
 export type DetachIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -232,7 +224,6 @@ export type DetachIPRequest = {
   resource: CustomResource
 }
 
-
 export type GetIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -243,7 +234,6 @@ export type GetIPRequest = {
    */
   ipId: string
 }
-
 
 export type ListIPsRequest = {
   /**
@@ -339,12 +329,10 @@ export type ListIPsRequest = {
   sourceVpcId?: string
 }
 
-
 export interface ListIPsResponse {
   totalCount: number
   ips: IP[]
 }
-
 
 export type MoveIPRequest = {
   /**
@@ -365,7 +353,6 @@ export type MoveIPRequest = {
   toResource?: CustomResource
 }
 
-
 export type ReleaseIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -377,7 +364,6 @@ export type ReleaseIPRequest = {
   ipId: string
 }
 
-
 export type ReleaseIPSetRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -385,7 +371,6 @@ export type ReleaseIPSetRequest = {
   region?: ScwRegion
   ipIds?: string[]
 }
-
 
 export type UpdateIPRequest = {
   /**
@@ -405,5 +390,3 @@ export type UpdateIPRequest = {
    */
   reverses?: Reverse[]
 }
-
-

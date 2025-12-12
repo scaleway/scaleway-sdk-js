@@ -1,7 +1,10 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region as ScwRegion, Zone as ScwZone} from '@scaleway/sdk-client'
-
+import type {
+  Money,
+  Region as ScwRegion,
+  Zone as ScwZone,
+} from '@scaleway/sdk-client'
 
 export type ListPublicCatalogProductsRequestProductType =
   | 'unknown_product_type'
@@ -14,9 +17,6 @@ export type ListPublicCatalogProductsRequestProductType =
   | 'managed_inference'
   | 'generative_apis'
   | 'load_balancer'
-  | 'secret_manager'
-  | 'key_manager'
-  | 'managed_redis_database'
 
 export type ListPublicCatalogProductsRequestStatus =
   | 'unknown_status'
@@ -49,22 +49,6 @@ export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'arm64'
   | 'riscv'
   | 'apple_silicon'
-
-export type PublicCatalogProductPropertiesObjectStorageClassTypeStorageClass =
-  | 'unknown_storage_class'
-  | 'standard'
-  | 'glacier'
-  | 'onezone_ia'
-
-export type PublicCatalogProductPropertiesObjectStorageInternetTrafficTypeTrafficType =
-  | 'unknown_traffic_type'
-  | 'ingress'
-  | 'egress'
-  | 'alliance'
-
-export type PublicCatalogProductPropertiesObjectStorageRestoreTypeRestoreType =
-  | 'unknown_restore_type'
-  | 'standard'
 
 export type PublicCatalogProductStatus =
   | 'unknown_status'
@@ -134,14 +118,12 @@ export interface PublicCatalogProductPropertiesHardwareCPUPhysical {
   benchmark: number
 }
 
-
 export interface PublicCatalogProductPropertiesHardwareCPUVirtual {
   /**
    * The number of vCPUs.
    */
   count: number
 }
-
 
 export interface PublicCatalogProductPropertiesHardwareCPU {
   /**
@@ -174,7 +156,6 @@ export interface PublicCatalogProductPropertiesHardwareCPU {
   threads: number
 }
 
-
 export interface PublicCatalogProductPropertiesHardwareGPU {
   /**
    * A human-readable description of the GPU.
@@ -189,7 +170,6 @@ export interface PublicCatalogProductPropertiesHardwareGPU {
    */
   type: string
 }
-
 
 export interface PublicCatalogProductPropertiesHardwareNetwork {
   /**
@@ -210,7 +190,6 @@ export interface PublicCatalogProductPropertiesHardwareNetwork {
   maxPublicBandwidth: number
 }
 
-
 export interface PublicCatalogProductPropertiesHardwareRAM {
   /**
    * A human-readable description of the RAM.
@@ -226,7 +205,6 @@ export interface PublicCatalogProductPropertiesHardwareRAM {
   type: string
 }
 
-
 export interface PublicCatalogProductPropertiesHardwareStorage {
   /**
    * A human-readable description of the storage.
@@ -237,39 +215,6 @@ export interface PublicCatalogProductPropertiesHardwareStorage {
    */
   total: number
 }
-
-
-export interface PublicCatalogProductPropertiesObjectStorageClassType {
-  /**
-   * The storage class.
-   */
-  storageClass: PublicCatalogProductPropertiesObjectStorageClassTypeStorageClass
-}
-
-
-export interface PublicCatalogProductPropertiesObjectStorageInternetTrafficType {
-  /**
-   * The type of internet traffic.
-   */
-  trafficType: PublicCatalogProductPropertiesObjectStorageInternetTrafficTypeTrafficType
-}
-
-
-export interface PublicCatalogProductPropertiesObjectStorageRegionTrafficType {
-  /**
-   * The destination region for the region traffic.
-   */
-  regionDestination: string
-}
-
-
-export interface PublicCatalogProductPropertiesObjectStorageRestoreType {
-  /**
-   * The type of restore.
-   */
-  restoreType: PublicCatalogProductPropertiesObjectStorageRestoreTypeRestoreType
-}
-
 
 export interface PublicCatalogProductPropertiesAppleSilicon {
   /**
@@ -282,7 +227,6 @@ export interface PublicCatalogProductPropertiesAppleSilicon {
   serverType: string
 }
 
-
 export interface PublicCatalogProductPropertiesBlockStorage {
   /**
    * @deprecated The minimum size of storage volume for this product in bytes. Deprecated.
@@ -293,7 +237,6 @@ export interface PublicCatalogProductPropertiesBlockStorage {
    */
   maxVolumeSize?: number
 }
-
 
 export interface PublicCatalogProductPropertiesDedibox {
   /**
@@ -306,7 +249,6 @@ export interface PublicCatalogProductPropertiesDedibox {
   offerId: number
 }
 
-
 export interface PublicCatalogProductPropertiesElasticMetal {
   /**
    * The range of the Elastic Metal server.
@@ -318,13 +260,11 @@ export interface PublicCatalogProductPropertiesElasticMetal {
   offerId: string
 }
 
-
 export interface PublicCatalogProductPropertiesGenerativeApis {
   reasoning: boolean
   supportedApis: string[]
   consumptionMode: PublicCatalogProductPropertiesGenerativeApisConsumptionMode
 }
-
 
 export interface PublicCatalogProductPropertiesHardware {
   /**
@@ -349,7 +289,6 @@ export interface PublicCatalogProductPropertiesHardware {
   gpu?: PublicCatalogProductPropertiesHardwareGPU
 }
 
-
 export interface PublicCatalogProductPropertiesInstance {
   /**
    * The range of the Instance server.
@@ -365,14 +304,7 @@ export interface PublicCatalogProductPropertiesInstance {
   recommendedReplacementOfferIds: string[]
 }
 
-
-export interface PublicCatalogProductPropertiesKeyManager {
-}
-
-
-export interface PublicCatalogProductPropertiesLoadBalancer {
-}
-
+export interface PublicCatalogProductPropertiesLoadBalancer {}
 
 export interface PublicCatalogProductPropertiesManagedInference {
   /**
@@ -381,48 +313,12 @@ export interface PublicCatalogProductPropertiesManagedInference {
   instanceGpuName: string
 }
 
-
-export interface PublicCatalogProductPropertiesManagedRedisDatabase {
-}
-
-
-export interface PublicCatalogProductPropertiesObjectStorage {
-  /**
-   * The properties related to Object Storage class.
-   *
-   * One-of ('type'): at most one of 'class', 'restore', 'internetTraffic', 'regionTraffic' could be set.
-   */
-  class?: PublicCatalogProductPropertiesObjectStorageClassType
-  /**
-   * The properties related to Object Storage restore operations.
-   *
-   * One-of ('type'): at most one of 'class', 'restore', 'internetTraffic', 'regionTraffic' could be set.
-   */
-  restore?: PublicCatalogProductPropertiesObjectStorageRestoreType
-  /**
-   * The properties related to Object Storage internet traffic.
-   *
-   * One-of ('type'): at most one of 'class', 'restore', 'internetTraffic', 'regionTraffic' could be set.
-   */
-  internetTraffic?: PublicCatalogProductPropertiesObjectStorageInternetTrafficType
-  /**
-   * The properties related to Object Storage region traffic.
-   *
-   * One-of ('type'): at most one of 'class', 'restore', 'internetTraffic', 'regionTraffic' could be set.
-   */
-  regionTraffic?: PublicCatalogProductPropertiesObjectStorageRegionTrafficType
-}
-
-
-export interface PublicCatalogProductPropertiesSecretManager {
-}
-
+export interface PublicCatalogProductPropertiesObjectStorage {}
 
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
   kgCo2Equivalent?: number
   m3WaterUsage?: number
 }
-
 
 export interface PublicCatalogProductLocality {
   /**
@@ -451,14 +347,12 @@ export interface PublicCatalogProductLocality {
   datacenter?: string
 }
 
-
 export interface PublicCatalogProductPrice {
   /**
    * The retail price of the product.
    */
   retailPrice?: Money
 }
-
 
 export interface PublicCatalogProductProperties {
   /**
@@ -468,81 +362,63 @@ export interface PublicCatalogProductProperties {
   /**
    * The properties of Dedibox products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   dedibox?: PublicCatalogProductPropertiesDedibox
   /**
    * The properties of Elastic Metal products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   elasticMetal?: PublicCatalogProductPropertiesElasticMetal
   /**
    * The properties of Apple Silicon products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   appleSilicon?: PublicCatalogProductPropertiesAppleSilicon
   /**
    * The properties of Instance products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   instance?: PublicCatalogProductPropertiesInstance
   /**
    * The properties of Block Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   blockStorage?: PublicCatalogProductPropertiesBlockStorage
   /**
    * The properties of Object Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   objectStorage?: PublicCatalogProductPropertiesObjectStorage
   /**
    * The properties of Managed Inference products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   managedInference?: PublicCatalogProductPropertiesManagedInference
   /**
    * The properties of Generative APIs products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   generativeApis?: PublicCatalogProductPropertiesGenerativeApis
   /**
    * The properties of Load Balancer products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer' could be set.
    */
   loadBalancer?: PublicCatalogProductPropertiesLoadBalancer
-  /**
-   *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
-   */
-  secretManager?: PublicCatalogProductPropertiesSecretManager
-  /**
-   * The properties of Managed Redis Database products.
-   *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
-   */
-  managedRedisDatabase?: PublicCatalogProductPropertiesManagedRedisDatabase
-  /**
-   *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager' could be set.
-   */
-  keyManager?: PublicCatalogProductPropertiesKeyManager
 }
-
 
 export interface PublicCatalogProductUnitOfMeasure {
   unit: PublicCatalogProductUnitOfMeasureCountableUnit
   size: number
 }
-
 
 export interface PublicCatalogProduct {
   /**
@@ -603,7 +479,6 @@ export interface PublicCatalogProduct {
   badges: PublicCatalogProductProductBadge[]
 }
 
-
 export interface ListPublicCatalogProductsResponse {
   /**
    * The list of products.
@@ -614,7 +489,6 @@ export interface ListPublicCatalogProductsResponse {
    */
   totalCount: number
 }
-
 
 export type PublicCatalogApiListPublicCatalogProductsRequest = {
   /**
@@ -658,5 +532,3 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    */
   status?: ListPublicCatalogProductsRequestStatus[]
 }
-
-

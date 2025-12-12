@@ -1,11 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone} from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 
-
-export type AutoscalerEstimator =
-  | 'unknown_estimator'
-  | 'binpacking'
+export type AutoscalerEstimator = 'unknown_estimator' | 'binpacking'
 
 export type AutoscalerExpander =
   | 'unknown_expander'
@@ -35,10 +32,7 @@ export type ClusterStatus =
   | 'locked'
   | 'pool_required'
 
-export type ClusterTypeAvailability =
-  | 'available'
-  | 'scarce'
-  | 'shortage'
+export type ClusterTypeAvailability = 'available' | 'scarce' | 'shortage'
 
 export type ClusterTypeResiliency =
   | 'unknown_resiliency'
@@ -122,11 +116,7 @@ export type PoolVolumeType =
   | 'sbs_5k'
   | 'sbs_15k'
 
-export type Runtime =
-  | 'unknown_runtime'
-  | 'docker'
-  | 'containerd'
-  | 'crio'
+export type Runtime = 'unknown_runtime' | 'docker' | 'containerd' | 'crio'
 
 export interface MaintenanceWindow {
   /**
@@ -139,6 +129,10 @@ export interface MaintenanceWindow {
   day: MaintenanceWindowDayOfTheWeek
 }
 
+export interface PoolUpgradePolicy {
+  maxUnavailable: number
+  maxSurge: number
+}
 
 export interface CreateClusterRequestPoolConfigUpgradePolicy {
   /**
@@ -151,7 +145,6 @@ export interface CreateClusterRequestPoolConfigUpgradePolicy {
   maxSurge?: number
 }
 
-
 export interface ClusterAutoUpgrade {
   /**
    * Defines whether auto upgrade is enabled for the cluster.
@@ -163,10 +156,9 @@ export interface ClusterAutoUpgrade {
   maintenanceWindow?: MaintenanceWindow
 }
 
-
 export interface ClusterAutoscalerConfig {
   /**
-   * Forbid cluster autoscaler to scale down the cluster, defaults to false.
+   * Disable the cluster autoscaler.
    */
   scaleDownDisabled: boolean
   /**
@@ -178,15 +170,15 @@ export interface ClusterAutoscalerConfig {
    */
   estimator: AutoscalerEstimator
   /**
-   * Kubernetes autoscaler strategy to fit pods into nodes, see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders for details.
+   * Type of node group expander to be used in scale up.
    */
   expander: AutoscalerExpander
   /**
-   * Ignore DaemonSet pods when calculating resource utilization for scaling down, defaults to false.
+   * Ignore DaemonSet pods when calculating resource utilization for scaling down.
    */
   ignoreDaemonsetsUtilization: boolean
   /**
-   * Detect similar node groups and balance the number of nodes between them, defaults to false.
+   * Detect similar node groups and balance the number of nodes between them.
    */
   balanceSimilarNodeGroups: boolean
   /**
@@ -194,19 +186,18 @@ export interface ClusterAutoscalerConfig {
    */
   expendablePodsPriorityCutoff: number
   /**
-   * How long a node should be unneeded before it is eligible for scale down, defaults to 10 minutes.
+   * How long a node should be unneeded before it is eligible to be scaled down.
    */
   scaleDownUnneededTime: string
   /**
-   * Node utilization level, defined as a sum of requested resources divided by allocatable capacity, below which a node can be considered for scale down.
+   * Node utilization level, defined as a sum of requested resources divided by capacity, below which a node can be considered for scale down.
    */
   scaleDownUtilizationThreshold: number
   /**
-   * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node, defaults to 600 (10 minutes).
+   * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node.
    */
   maxGracefulTerminationSec: number
 }
-
 
 export interface ClusterOpenIDConnectConfig {
   /**
@@ -238,505 +229,6 @@ export interface ClusterOpenIDConnectConfig {
    */
   requiredClaim: string[]
 }
-
-
-export interface PoolUpgradePolicy {
-  maxUnavailable: number
-  maxSurge: number
-}
-
-
-export interface ACLRuleRequest {
-  /**
-   * IP subnet to allow.
-   *
-   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
-   */
-  ip?: string
-  /**
-   * Only one rule with this field set to true can be added.
-   *
-   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
-   */
-  scalewayRanges?: boolean
-  /**
-   * Description of the ACL.
-   */
-  description: string
-}
-
-
-export interface ACLRule {
-  /**
-   * ID of the ACL rule.
-   */
-  id: string
-  /**
-   * IP subnet to allow.
-   *
-   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
-   */
-  ip?: string
-  /**
-   * Only one rule with this field set to true can be added.
-   *
-   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
-   */
-  scalewayRanges?: boolean
-  /**
-   * Description of the ACL.
-   */
-  description: string
-}
-
-
-export interface CreateClusterRequestAutoUpgrade {
-  /**
-   * Defines whether auto upgrade is enabled for the cluster.
-   */
-  enable: boolean
-  /**
-   * Maintenance window of the cluster auto upgrades.
-   */
-  maintenanceWindow?: MaintenanceWindow
-}
-
-
-export interface CreateClusterRequestAutoscalerConfig {
-  /**
-   * Forbid cluster autoscaler to scale down the cluster, defaults to false.
-   */
-  scaleDownDisabled?: boolean
-  /**
-   * How long after scale up the scale down evaluation resumes.
-   */
-  scaleDownDelayAfterAdd?: string
-  /**
-   * Type of resource estimator to be used in scale up.
-   */
-  estimator: AutoscalerEstimator
-  /**
-   * Kubernetes autoscaler strategy to fit pods into nodes, see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders for details.
-   */
-  expander: AutoscalerExpander
-  /**
-   * Ignore DaemonSet pods when calculating resource utilization for scaling down, defaults to false.
-   */
-  ignoreDaemonsetsUtilization?: boolean
-  /**
-   * Detect similar node groups and balance the number of nodes between them, defaults to false.
-   */
-  balanceSimilarNodeGroups?: boolean
-  /**
-   * Pods with priority below cutoff will be expendable. They can be killed without any consideration during scale down and they won't cause scale up. Pods with null priority (PodPriority disabled) are non expendable.
-   */
-  expendablePodsPriorityCutoff?: number
-  /**
-   * How long a node should be unneeded before it is eligible for scale down, defaults to 10 minutes.
-   */
-  scaleDownUnneededTime?: string
-  /**
-   * Node utilization level, defined as a sum of requested resources divided by allocatable capacity, below which a node can be considered for scale down.
-   */
-  scaleDownUtilizationThreshold?: number
-  /**
-   * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node, defaults to 600 (10 minutes).
-   */
-  maxGracefulTerminationSec?: number
-}
-
-
-export interface CreateClusterRequestOpenIDConnectConfig {
-  /**
-   * URL of the provider which allows the API server to discover public signing keys. Only URLs using the `https://` scheme are accepted. This is typically the provider's discovery URL without a path, for example "https://accounts.google.com" or "https://login.salesforce.com".
-   */
-  issuerUrl: string
-  /**
-   * A client ID that all tokens must be issued for.
-   */
-  clientId: string
-  /**
-   * JWT claim to use as the user name. The default is `sub`, which is expected to be the end user's unique identifier. Admins can choose other claims, such as `email` or `name`, depending on their provider. However, claims other than `email` will be prefixed with the issuer URL to prevent name collision.
-   */
-  usernameClaim?: string
-  /**
-   * Prefix prepended to username claims to prevent name collision (such as `system:` users). For example, the value `oidc:` will create usernames like `oidc:jane.doe`. If this flag is not provided and `username_claim` is a value other than `email`, the prefix defaults to `( Issuer URL )#` where `( Issuer URL )` is the value of `issuer_url`. The value `-` can be used to disable all prefixing.
-   */
-  usernamePrefix?: string
-  /**
-   * JWT claim to use as the user's group.
-   */
-  groupsClaim?: string[]
-  /**
-   * Prefix prepended to group claims to prevent name collision (such as `system:` groups). For example, the value `oidc:` will create group names like `oidc:engineering` and `oidc:infra`.
-   */
-  groupsPrefix?: string
-  /**
-   * Multiple key=value pairs describing a required claim in the ID token. If set, the claims are verified to be present in the ID token with a matching value.
-   */
-  requiredClaim?: string[]
-}
-
-
-export interface CreateClusterRequestPoolConfig {
-  /**
-   * Name of the pool.
-   */
-  name: string
-  /**
-   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). 'external' is a special node type used to provision instances from other cloud providers in a Kosmos Cluster.
-   */
-  nodeType: string
-  /**
-   * Placement group ID in which all the nodes of the pool will be created, placement groups are limited to 20 instances.
-   */
-  placementGroupId?: string
-  /**
-   * Defines whether the autoscaling feature is enabled for the pool.
-   */
-  autoscaling: boolean
-  /**
-   * Size (number of nodes) of the pool.
-   */
-  size: number
-  /**
-   * Defines the minimum size of the pool. Note that this field is only used when autoscaling is enabled on the pool.
-   */
-  minSize?: number
-  /**
-   * Defines the maximum size of the pool. Note that this field is only used when autoscaling is enabled on the pool.
-   */
-  maxSize?: number
-  /**
-   * Customization of the container runtime is available for each pool.
-   */
-  containerRuntime: Runtime
-  /**
-   * Defines whether the autohealing feature is enabled for the pool.
-   */
-  autohealing: boolean
-  /**
-   * Tags associated with the pool, see [managing tags](https://www.scaleway.com/en/docs/kubernetes/api-cli/managing-tags).
-   */
-  tags: string[]
-  /**
-   * Kubelet arguments to be used by this pool. Note that this feature is experimental.
-   */
-  kubeletArgs: Record<string, string>
-  /**
-   * Pool upgrade policy.
-   */
-  upgradePolicy?: CreateClusterRequestPoolConfigUpgradePolicy
-  /**
-   * Zone in which the pool's nodes will be spawned.
-   */
-  zone: ScwZone
-  /**
-   * * `l_ssd` is a local block storage which means your system is stored locally on your node's hypervisor. This type is not available for all node types
-* `sbs-5k` is a remote block storage which means your system is stored on a centralized and resilient cluster with 5k IOPS limits
-* `sbs-15k` is a faster remote block storage which means your system is stored on a centralized and resilient cluster with 15k IOPS limits
-* `b_ssd` is the legacy remote block storage which means your system is stored on a centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k` instead.
-   */
-  rootVolumeType: PoolVolumeType
-  /**
-   * System volume disk size.
-   */
-  rootVolumeSize?: number
-  /**
-   * Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
-   */
-  publicIpDisabled: boolean
-  /**
-   * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
-   */
-  securityGroupId?: string
-}
-
-
-export interface CreatePoolRequestUpgradePolicy {
-  maxUnavailable?: number
-  maxSurge?: number
-}
-
-
-export interface ExternalNodeCoreV1Taint {
-  key: string
-  value: string
-  effect: string
-}
-
-
-export interface ClusterType {
-  /**
-   * Cluster type name.
-   */
-  name: string
-  /**
-   * Cluster type availability.
-   */
-  availability: ClusterTypeAvailability
-  /**
-   * Maximum number of nodes supported by the offer.
-   */
-  maxNodes: number
-  /**
-   * Time period during which you can no longer switch to a lower offer.
-   */
-  commitmentDelay?: string
-  /**
-   * Value of the Service Level Agreement of the offer.
-   */
-  sla: number
-  /**
-   * Resiliency offered by the offer.
-   */
-  resiliency: ClusterTypeResiliency
-  /**
-   * Max RAM allowed for the control plane.
-   */
-  memory: number
-  /**
-   * Returns information if this offer uses dedicated resources.
-   */
-  dedicated: boolean
-  /**
-   * True if the offer allows activation of the audit log functionality. Please note that audit logs are sent to Cockpit.
-   */
-  auditLogsSupported: boolean
-  /**
-   * Maximum amount of data that can be stored in etcd for the offer.
-   */
-  maxEtcdSize: number
-}
-
-
-export interface Version {
-  /**
-   * Name of the Kubernetes version.
-   */
-  name: string
-  /**
-   * Label of the Kubernetes version.
-   */
-  label: string
-  /**
-   * Region in which this version is available.
-   */
-  region: ScwRegion
-  /**
-   * Supported Container Network Interface (CNI) plugins for this version.
-   */
-  availableCnis: CNI[]
-  /**
-   * Supported container runtimes for this version.
-   */
-  availableContainerRuntimes: Runtime[]
-  /**
-   * Supported feature gates for this version.
-   */
-  availableFeatureGates: string[]
-  /**
-   * Supported admission plugins for this version.
-   */
-  availableAdmissionPlugins: string[]
-  /**
-   * Supported kubelet arguments for this version.
-   */
-  availableKubeletArgs: Record<string, string>
-  /**
-   * Date from which this version will no longer be available for provisioning.
-   */
-  deprecatedAt?: Date
-  /**
-   * Date from which any remaining clusters on this version will begin to be forcibly upgraded to the next minor version.
-   */
-  endOfLifeAt?: Date
-  /**
-   * Date at which this version was made available by Kapsule product.
-   */
-  releasedAt?: Date
-}
-
-
-export interface Cluster {
-  /**
-   * Cluster ID.
-   */
-  id: string
-  /**
-   * Cluster type.
-   */
-  type: string
-  /**
-   * Cluster name.
-   */
-  name: string
-  /**
-   * Status of the cluster.
-   */
-  status: ClusterStatus
-  /**
-   * Kubernetes version of the cluster.
-   */
-  version: string
-  /**
-   * Region in which the cluster is deployed.
-   */
-  region: ScwRegion
-  /**
-   * ID of the Organization owning the cluster.
-   */
-  organizationId: string
-  /**
-   * ID of the Project owning the cluster.
-   */
-  projectId: string
-  /**
-   * Tags associated with the cluster.
-   */
-  tags: string[]
-  /**
-   * Container Network Interface (CNI) plugin running in the cluster.
-   */
-  cni: CNI
-  /**
-   * Cluster description.
-   */
-  description: string
-  /**
-   * Kubernetes API server URL of the cluster.
-   */
-  clusterUrl: string
-  /**
-   * Wildcard DNS resolving all the ready cluster nodes.
-   */
-  dnsWildcard: string
-  /**
-   * Date on which the cluster was created.
-   */
-  createdAt?: Date
-  /**
-   * Date on which the cluster was last updated.
-   */
-  updatedAt?: Date
-  /**
-   * Autoscaler configuration for the cluster, see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md for details.
-   */
-  autoscalerConfig?: ClusterAutoscalerConfig
-  /**
-   * Auto upgrade Kubernetes version of the cluster.
-   */
-  autoUpgrade?: ClusterAutoUpgrade
-  /**
-   * Defines whether a new Kubernetes version is available.
-   */
-  upgradeAvailable: boolean
-  /**
-   * List of enabled feature gates.
-   */
-  featureGates: string[]
-  /**
-   * List of enabled admission plugins.
-   */
-  admissionPlugins: string[]
-  /**
-   * This configuration enables to update the OpenID Connect configuration of the Kubernetes API server.
-   */
-  openIdConnectConfig?: ClusterOpenIDConnectConfig
-  /**
-   * Additional Subject Alternative Names for the Kubernetes API server certificate.
-   */
-  apiserverCertSans: string[]
-  /**
-   * Private network ID for internal cluster communication.
-   */
-  privateNetworkId?: string
-  /**
-   * Date on which it will be possible to switch to a smaller offer.
-   */
-  commitmentEndsAt?: Date
-  /**
-   * @deprecated Defines whether ACL is available on the cluster.
-   */
-  aclAvailable?: boolean
-  /**
-   * IAM group that nodes are members of (this field might be empty during early stage of cluster creation).
-   */
-  iamNodesGroupId: string
-  /**
-   * @deprecated Defines whether all pools are migrated to new images.
-   */
-  newImagesEnabled?: boolean
-  /**
-   * Subnet used for the Pod CIDR.
-   */
-  podCidr: string
-  /**
-   * Subnet used for the Service CIDR.
-   */
-  serviceCidr: string
-  /**
-   * IP used for the DNS Service.
-   */
-  serviceDnsIp: string
-}
-
-
-export interface Node {
-  /**
-   * Node ID.
-   */
-  id: string
-  /**
-   * Pool ID of the node.
-   */
-  poolId: string
-  /**
-   * Cluster ID of the node.
-   */
-  clusterId: string
-  /**
-   * Underlying instance ID. It is prefixed by instance type and location information (see https://pkg.go.dev/k8s.io/api/core/v1#NodeSpec.ProviderID).
-   */
-  providerId: string
-  /**
-   * Cluster region of the node.
-   */
-  region: ScwRegion
-  /**
-   * Name of the node.
-   */
-  name: string
-  /**
-   * @deprecated Public IPv4 address of the node.
-   */
-  publicIpV4?: string
-  /**
-   * @deprecated Public IPv6 address of the node.
-   */
-  publicIpV6?: string
-  /**
-   * @deprecated Conditions of the node. These conditions contain the Node Problem Detector conditions, as well as some in house conditions.
-   */
-  conditions?: Record<string, string>
-  /**
-   * Status of the node.
-   */
-  status: NodeStatus
-  /**
-   * Details of the error, if any occurred when managing the node.
-   */
-  errorMessage?: string
-  /**
-   * Date on which the node was created.
-   */
-  createdAt?: Date
-  /**
-   * Date on which the node was last updated.
-   */
-  updatedAt?: Date
-}
-
 
 export interface Pool {
   /**
@@ -817,9 +309,9 @@ export interface Pool {
   zone: ScwZone
   /**
    * * `l_ssd` is a local block storage which means your system is stored locally on your node's hypervisor. This type is not available for all node types
-* `sbs-5k` is a remote block storage which means your system is stored on a centralized and resilient cluster with 5k IOPS limits
-* `sbs-15k` is a faster remote block storage which means your system is stored on a centralized and resilient cluster with 15k IOPS limits
-* `b_ssd` is the legacy remote block storage which means your system is stored on a centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k` instead.
+   * `sbs-5k` is a remote block storage which means your system is stored on a centralized and resilient cluster with 5k IOPS limits
+   * `sbs-15k` is a faster remote block storage which means your system is stored on a centralized and resilient cluster with 15k IOPS limits
+   * `b_ssd` is the legacy remote block storage which means your system is stored on a centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k` instead.
    */
   rootVolumeType: PoolVolumeType
   /**
@@ -844,13 +336,491 @@ export interface Pool {
   region: ScwRegion
 }
 
+export interface ACLRuleRequest {
+  /**
+   * IP subnet to allow.
+   *
+   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
+   */
+  ip?: string
+  /**
+   * Only one rule with this field set to true can be added.
+   *
+   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
+   */
+  scalewayRanges?: boolean
+  /**
+   * Description of the ACL.
+   */
+  description: string
+}
+
+export interface ACLRule {
+  /**
+   * ID of the ACL rule.
+   */
+  id: string
+  /**
+   * IP subnet to allow.
+   *
+   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
+   */
+  ip?: string
+  /**
+   * Only one rule with this field set to true can be added.
+   *
+   * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
+   */
+  scalewayRanges?: boolean
+  /**
+   * Description of the ACL.
+   */
+  description: string
+}
+
+export interface CreateClusterRequestAutoUpgrade {
+  /**
+   * Defines whether auto upgrade is enabled for the cluster.
+   */
+  enable: boolean
+  /**
+   * Maintenance window of the cluster auto upgrades.
+   */
+  maintenanceWindow?: MaintenanceWindow
+}
+
+export interface CreateClusterRequestAutoscalerConfig {
+  /**
+   * Disable the cluster autoscaler.
+   */
+  scaleDownDisabled?: boolean
+  /**
+   * How long after scale up the scale down evaluation resumes.
+   */
+  scaleDownDelayAfterAdd?: string
+  /**
+   * Type of resource estimator to be used in scale up.
+   */
+  estimator: AutoscalerEstimator
+  /**
+   * Type of node group expander to be used in scale up.
+   */
+  expander: AutoscalerExpander
+  /**
+   * Ignore DaemonSet pods when calculating resource utilization for scaling down.
+   */
+  ignoreDaemonsetsUtilization?: boolean
+  /**
+   * Detect similar node groups and balance the number of nodes between them.
+   */
+  balanceSimilarNodeGroups?: boolean
+  /**
+   * Pods with priority below cutoff will be expendable. They can be killed without any consideration during scale down and they won't cause scale up. Pods with null priority (PodPriority disabled) are non expendable.
+   */
+  expendablePodsPriorityCutoff?: number
+  /**
+   * How long a node should be unneeded before it is eligible to be scaled down.
+   */
+  scaleDownUnneededTime?: string
+  /**
+   * Node utilization level, defined as a sum of requested resources divided by capacity, below which a node can be considered for scale down.
+   */
+  scaleDownUtilizationThreshold?: number
+  /**
+   * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node.
+   */
+  maxGracefulTerminationSec?: number
+}
+
+export interface CreateClusterRequestOpenIDConnectConfig {
+  /**
+   * URL of the provider which allows the API server to discover public signing keys. Only URLs using the `https://` scheme are accepted. This is typically the provider's discovery URL without a path, for example "https://accounts.google.com" or "https://login.salesforce.com".
+   */
+  issuerUrl: string
+  /**
+   * A client ID that all tokens must be issued for.
+   */
+  clientId: string
+  /**
+   * JWT claim to use as the user name. The default is `sub`, which is expected to be the end user's unique identifier. Admins can choose other claims, such as `email` or `name`, depending on their provider. However, claims other than `email` will be prefixed with the issuer URL to prevent name collision.
+   */
+  usernameClaim?: string
+  /**
+   * Prefix prepended to username claims to prevent name collision (such as `system:` users). For example, the value `oidc:` will create usernames like `oidc:jane.doe`. If this flag is not provided and `username_claim` is a value other than `email`, the prefix defaults to `( Issuer URL )#` where `( Issuer URL )` is the value of `issuer_url`. The value `-` can be used to disable all prefixing.
+   */
+  usernamePrefix?: string
+  /**
+   * JWT claim to use as the user's group.
+   */
+  groupsClaim?: string[]
+  /**
+   * Prefix prepended to group claims to prevent name collision (such as `system:` groups). For example, the value `oidc:` will create group names like `oidc:engineering` and `oidc:infra`.
+   */
+  groupsPrefix?: string
+  /**
+   * Multiple key=value pairs describing a required claim in the ID token. If set, the claims are verified to be present in the ID token with a matching value.
+   */
+  requiredClaim?: string[]
+}
+
+export interface CreateClusterRequestPoolConfig {
+  /**
+   * Name of the pool.
+   */
+  name: string
+  /**
+   * Node type is the type of Scaleway Instance wanted for the pool. Nodes with insufficient memory are not eligible (DEV1-S, PLAY2-PICO, STARDUST). 'external' is a special node type used to provision instances from other cloud providers in a Kosmos Cluster.
+   */
+  nodeType: string
+  /**
+   * Placement group ID in which all the nodes of the pool will be created, placement groups are limited to 20 instances.
+   */
+  placementGroupId?: string
+  /**
+   * Defines whether the autoscaling feature is enabled for the pool.
+   */
+  autoscaling: boolean
+  /**
+   * Size (number of nodes) of the pool.
+   */
+  size: number
+  /**
+   * Defines the minimum size of the pool. Note that this field is only used when autoscaling is enabled on the pool.
+   */
+  minSize?: number
+  /**
+   * Defines the maximum size of the pool. Note that this field is only used when autoscaling is enabled on the pool.
+   */
+  maxSize?: number
+  /**
+   * Customization of the container runtime is available for each pool.
+   */
+  containerRuntime: Runtime
+  /**
+   * Defines whether the autohealing feature is enabled for the pool.
+   */
+  autohealing: boolean
+  /**
+   * Tags associated with the pool, see [managing tags](https://www.scaleway.com/en/docs/kubernetes/api-cli/managing-tags).
+   */
+  tags: string[]
+  /**
+   * Kubelet arguments to be used by this pool. Note that this feature is experimental.
+   */
+  kubeletArgs: Record<string, string>
+  /**
+   * Pool upgrade policy.
+   */
+  upgradePolicy?: CreateClusterRequestPoolConfigUpgradePolicy
+  /**
+   * Zone in which the pool's nodes will be spawned.
+   */
+  zone: ScwZone
+  /**
+   * * `l_ssd` is a local block storage which means your system is stored locally on your node's hypervisor. This type is not available for all node types
+   * `sbs-5k` is a remote block storage which means your system is stored on a centralized and resilient cluster with 5k IOPS limits
+   * `sbs-15k` is a faster remote block storage which means your system is stored on a centralized and resilient cluster with 15k IOPS limits
+   * `b_ssd` is the legacy remote block storage which means your system is stored on a centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k` instead.
+   */
+  rootVolumeType: PoolVolumeType
+  /**
+   * System volume disk size.
+   */
+  rootVolumeSize?: number
+  /**
+   * Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
+   */
+  publicIpDisabled: boolean
+  /**
+   * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
+   */
+  securityGroupId?: string
+}
+
+export interface CreatePoolRequestUpgradePolicy {
+  maxUnavailable?: number
+  maxSurge?: number
+}
+
+export interface ExternalNodeCoreV1Taint {
+  key: string
+  value: string
+  effect: string
+}
+
+export interface ClusterType {
+  /**
+   * Cluster type name.
+   */
+  name: string
+  /**
+   * Cluster type availability.
+   */
+  availability: ClusterTypeAvailability
+  /**
+   * Maximum number of nodes supported by the offer.
+   */
+  maxNodes: number
+  /**
+   * Time period during which you can no longer switch to a lower offer.
+   */
+  commitmentDelay?: string
+  /**
+   * Value of the Service Level Agreement of the offer.
+   */
+  sla: number
+  /**
+   * Resiliency offered by the offer.
+   */
+  resiliency: ClusterTypeResiliency
+  /**
+   * Max RAM allowed for the control plane.
+   */
+  memory: number
+  /**
+   * Returns information if this offer uses dedicated resources.
+   */
+  dedicated: boolean
+  /**
+   * True if the offer allows activation of the audit log functionality. Please note that audit logs are sent to Cockpit.
+   */
+  auditLogsSupported: boolean
+  /**
+   * Maximum amount of data that can be stored in etcd for the offer.
+   */
+  maxEtcdSize: number
+}
+
+export interface Version {
+  /**
+   * Name of the Kubernetes version.
+   */
+  name: string
+  /**
+   * Label of the Kubernetes version.
+   */
+  label: string
+  /**
+   * Region in which this version is available.
+   */
+  region: ScwRegion
+  /**
+   * Supported Container Network Interface (CNI) plugins for this version.
+   */
+  availableCnis: CNI[]
+  /**
+   * Supported container runtimes for this version.
+   */
+  availableContainerRuntimes: Runtime[]
+  /**
+   * Supported feature gates for this version.
+   */
+  availableFeatureGates: string[]
+  /**
+   * Supported admission plugins for this version.
+   */
+  availableAdmissionPlugins: string[]
+  /**
+   * Supported kubelet arguments for this version.
+   */
+  availableKubeletArgs: Record<string, string>
+  /**
+   * Date from which this version will no longer be available for provisioning.
+   */
+  deprecatedAt?: Date
+  /**
+   * Date from which any remaining clusters on this version will begin to be forcibly upgraded to the next minor version.
+   */
+  endOfLifeAt?: Date
+  /**
+   * Date at which this version was made available by Kapsule product.
+   */
+  releasedAt?: Date
+}
+
+export interface Cluster {
+  /**
+   * Cluster ID.
+   */
+  id: string
+  /**
+   * Cluster type.
+   */
+  type: string
+  /**
+   * Cluster name.
+   */
+  name: string
+  /**
+   * Status of the cluster.
+   */
+  status: ClusterStatus
+  /**
+   * Kubernetes version of the cluster.
+   */
+  version: string
+  /**
+   * Region in which the cluster is deployed.
+   */
+  region: ScwRegion
+  /**
+   * ID of the Organization owning the cluster.
+   */
+  organizationId: string
+  /**
+   * ID of the Project owning the cluster.
+   */
+  projectId: string
+  /**
+   * Tags associated with the cluster.
+   */
+  tags: string[]
+  /**
+   * Container Network Interface (CNI) plugin running in the cluster.
+   */
+  cni: CNI
+  /**
+   * Cluster description.
+   */
+  description: string
+  /**
+   * Kubernetes API server URL of the cluster.
+   */
+  clusterUrl: string
+  /**
+   * Wildcard DNS resolving all the ready cluster nodes.
+   */
+  dnsWildcard: string
+  /**
+   * Date on which the cluster was created.
+   */
+  createdAt?: Date
+  /**
+   * Date on which the cluster was last updated.
+   */
+  updatedAt?: Date
+  /**
+   * Autoscaler config for the cluster.
+   */
+  autoscalerConfig?: ClusterAutoscalerConfig
+  /**
+   * Auto upgrade Kubernetes version of the cluster.
+   */
+  autoUpgrade?: ClusterAutoUpgrade
+  /**
+   * Defines whether a new Kubernetes version is available.
+   */
+  upgradeAvailable: boolean
+  /**
+   * List of enabled feature gates.
+   */
+  featureGates: string[]
+  /**
+   * List of enabled admission plugins.
+   */
+  admissionPlugins: string[]
+  /**
+   * This configuration enables to update the OpenID Connect configuration of the Kubernetes API server.
+   */
+  openIdConnectConfig?: ClusterOpenIDConnectConfig
+  /**
+   * Additional Subject Alternative Names for the Kubernetes API server certificate.
+   */
+  apiserverCertSans: string[]
+  /**
+   * Private network ID for internal cluster communication.
+   */
+  privateNetworkId?: string
+  /**
+   * Date on which it will be possible to switch to a smaller offer.
+   */
+  commitmentEndsAt?: Date
+  /**
+   * @deprecated Defines whether ACL is available on the cluster.
+   */
+  aclAvailable?: boolean
+  /**
+   * IAM group that nodes are members of (this field might be empty during early stage of cluster creation).
+   */
+  iamNodesGroupId: string
+  /**
+   * @deprecated Defines whether all pools are migrated to new images.
+   */
+  newImagesEnabled?: boolean
+  /**
+   * Subnet used for the Pod CIDR.
+   */
+  podCidr: string
+  /**
+   * Subnet used for the Service CIDR.
+   */
+  serviceCidr: string
+  /**
+   * IP used for the DNS Service.
+   */
+  serviceDnsIp: string
+}
+
+export interface Node {
+  /**
+   * Node ID.
+   */
+  id: string
+  /**
+   * Pool ID of the node.
+   */
+  poolId: string
+  /**
+   * Cluster ID of the node.
+   */
+  clusterId: string
+  /**
+   * Underlying instance ID. It is prefixed by instance type and location information (see https://pkg.go.dev/k8s.io/api/core/v1#NodeSpec.ProviderID).
+   */
+  providerId: string
+  /**
+   * Cluster region of the node.
+   */
+  region: ScwRegion
+  /**
+   * Name of the node.
+   */
+  name: string
+  /**
+   * @deprecated Public IPv4 address of the node.
+   */
+  publicIpV4?: string
+  /**
+   * @deprecated Public IPv6 address of the node.
+   */
+  publicIpV6?: string
+  /**
+   * @deprecated Conditions of the node. These conditions contain the Node Problem Detector conditions, as well as some in house conditions.
+   */
+  conditions?: Record<string, string>
+  /**
+   * Status of the node.
+   */
+  status: NodeStatus
+  /**
+   * Details of the error, if any occurred when managing the node.
+   */
+  errorMessage?: string
+  /**
+   * Date on which the node was created.
+   */
+  createdAt?: Date
+  /**
+   * Date on which the node was last updated.
+   */
+  updatedAt?: Date
+}
 
 export interface NodeMetadataCoreV1Taint {
   key: string
   value: string
   effect: string
 }
-
 
 export interface UpdateClusterRequestAutoUpgrade {
   /**
@@ -863,10 +833,9 @@ export interface UpdateClusterRequestAutoUpgrade {
   maintenanceWindow?: MaintenanceWindow
 }
 
-
 export interface UpdateClusterRequestAutoscalerConfig {
   /**
-   * Forbid cluster autoscaler to scale down the cluster, defaults to false.
+   * Disable the cluster autoscaler.
    */
   scaleDownDisabled?: boolean
   /**
@@ -878,15 +847,15 @@ export interface UpdateClusterRequestAutoscalerConfig {
    */
   estimator: AutoscalerEstimator
   /**
-   * Kubernetes autoscaler strategy to fit pods into nodes, see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders for details.
+   * Type of node group expander to be used in scale up.
    */
   expander: AutoscalerExpander
   /**
-   * Ignore DaemonSet pods when calculating resource utilization for scaling down, defaults to false.
+   * Ignore DaemonSet pods when calculating resource utilization for scaling down.
    */
   ignoreDaemonsetsUtilization?: boolean
   /**
-   * Detect similar node groups and balance the number of nodes between them, defaults to false.
+   * Detect similar node groups and balance the number of nodes between them.
    */
   balanceSimilarNodeGroups?: boolean
   /**
@@ -894,19 +863,18 @@ export interface UpdateClusterRequestAutoscalerConfig {
    */
   expendablePodsPriorityCutoff?: number
   /**
-   * How long a node should be unneeded before it is eligible for scale down, defaults to 10 minutes.
+   * How long a node should be unneeded before it is eligible to be scaled down.
    */
   scaleDownUnneededTime?: string
   /**
-   * Node utilization level, defined as a sum of requested resources divided by allocatable capacity, below which a node can be considered for scale down.
+   * Node utilization level, defined as a sum of requested resources divided by capacity, below which a node can be considered for scale down.
    */
   scaleDownUtilizationThreshold?: number
   /**
-   * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node, defaults to 600 (10 minutes).
+   * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node.
    */
   maxGracefulTerminationSec?: number
 }
-
 
 export interface UpdateClusterRequestOpenIDConnectConfig {
   /**
@@ -939,12 +907,10 @@ export interface UpdateClusterRequestOpenIDConnectConfig {
   requiredClaim?: string[]
 }
 
-
 export interface UpdatePoolRequestUpgradePolicy {
   maxUnavailable?: number
   maxSurge?: number
 }
-
 
 export type AddClusterACLRulesRequest = {
   /**
@@ -961,14 +927,12 @@ export type AddClusterACLRulesRequest = {
   acls?: ACLRuleRequest[]
 }
 
-
 export interface AddClusterACLRulesResponse {
   /**
    * ACLs that were added.
    */
   rules: ACLRule[]
 }
-
 
 export type AuthExternalNodeRequest = {
   /**
@@ -980,7 +944,6 @@ export type AuthExternalNodeRequest = {
    */
   poolId: string
 }
-
 
 export type CreateClusterRequest = {
   /**
@@ -1069,7 +1032,6 @@ export type CreateClusterRequest = {
   serviceDnsIp?: string
 }
 
-
 export type CreateExternalNodeRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1077,7 +1039,6 @@ export type CreateExternalNodeRequest = {
   region?: ScwRegion
   poolId: string
 }
-
 
 export type CreatePoolRequest = {
   /**
@@ -1142,9 +1103,9 @@ export type CreatePoolRequest = {
   zone?: ScwZone
   /**
    * * `l_ssd` is a local block storage which means your system is stored locally on your node's hypervisor. This type is not available for all node types
-* `sbs-5k` is a remote block storage which means your system is stored on a centralized and resilient cluster with 5k IOPS limits
-* `sbs-15k` is a faster remote block storage which means your system is stored on a centralized and resilient cluster with 15k IOPS limits
-* `b_ssd` is the legacy remote block storage which means your system is stored on a centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k` instead.
+   * `sbs-5k` is a remote block storage which means your system is stored on a centralized and resilient cluster with 5k IOPS limits
+   * `sbs-15k` is a faster remote block storage which means your system is stored on a centralized and resilient cluster with 15k IOPS limits
+   * `b_ssd` is the legacy remote block storage which means your system is stored on a centralized and resilient cluster. Consider using `sbs-5k` or `sbs-15k` instead.
    */
   rootVolumeType?: PoolVolumeType
   /**
@@ -1161,7 +1122,6 @@ export type CreatePoolRequest = {
   securityGroupId?: string
 }
 
-
 export type DeleteACLRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1172,7 +1132,6 @@ export type DeleteACLRuleRequest = {
    */
   aclId: string
 }
-
 
 export type DeleteClusterRequest = {
   /**
@@ -1188,7 +1147,6 @@ export type DeleteClusterRequest = {
    */
   withAdditionalResources: boolean
 }
-
 
 export type DeleteNodeRequest = {
   /**
@@ -1209,7 +1167,6 @@ export type DeleteNodeRequest = {
   replace: boolean
 }
 
-
 export type DeletePoolRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1220,7 +1177,6 @@ export type DeletePoolRequest = {
    */
   poolId: string
 }
-
 
 export interface ExternalNode {
   id: string
@@ -1239,12 +1195,10 @@ export interface ExternalNode {
   iamToken: string
 }
 
-
 export interface ExternalNodeAuth {
   nodeSecretKey: string
   metadataUrl: string
 }
-
 
 export type GetClusterKubeConfigRequest = {
   /**
@@ -1261,7 +1215,6 @@ export type GetClusterKubeConfigRequest = {
   redacted?: boolean
 }
 
-
 export type GetClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1273,14 +1226,12 @@ export type GetClusterRequest = {
   clusterId: string
 }
 
-
 export type GetNodeMetadataRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
 }
-
 
 export type GetNodeRequest = {
   /**
@@ -1293,7 +1244,6 @@ export type GetNodeRequest = {
   nodeId: string
 }
 
-
 export type GetPoolRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1305,7 +1255,6 @@ export type GetPoolRequest = {
   poolId: string
 }
 
-
 export type GetVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1316,7 +1265,6 @@ export type GetVersionRequest = {
    */
   versionName: string
 }
-
 
 export type ListClusterACLRulesRequest = {
   /**
@@ -1337,7 +1285,6 @@ export type ListClusterACLRulesRequest = {
   pageSize?: number
 }
 
-
 export interface ListClusterACLRulesResponse {
   /**
    * Total number of ACLs that exist for the cluster.
@@ -1348,7 +1295,6 @@ export interface ListClusterACLRulesResponse {
    */
   rules: ACLRule[]
 }
-
 
 export type ListClusterAvailableTypesRequest = {
   /**
@@ -1361,7 +1307,6 @@ export type ListClusterAvailableTypesRequest = {
   clusterId: string
 }
 
-
 export interface ListClusterAvailableTypesResponse {
   /**
    * Available cluster types for the cluster.
@@ -1372,7 +1317,6 @@ export interface ListClusterAvailableTypesResponse {
    */
   totalCount: number
 }
-
 
 export type ListClusterAvailableVersionsRequest = {
   /**
@@ -1385,14 +1329,12 @@ export type ListClusterAvailableVersionsRequest = {
   clusterId: string
 }
 
-
 export interface ListClusterAvailableVersionsResponse {
   /**
    * Available Kubernetes versions for the cluster.
    */
   versions: Version[]
 }
-
 
 export type ListClusterTypesRequest = {
   /**
@@ -1409,7 +1351,6 @@ export type ListClusterTypesRequest = {
   pageSize?: number
 }
 
-
 export interface ListClusterTypesResponse {
   /**
    * Total number of cluster-types.
@@ -1420,7 +1361,6 @@ export interface ListClusterTypesResponse {
    */
   clusterTypes: ClusterType[]
 }
-
 
 export type ListClustersRequest = {
   /**
@@ -1465,7 +1405,6 @@ export type ListClustersRequest = {
   privateNetworkId?: string
 }
 
-
 export interface ListClustersResponse {
   /**
    * Total number of clusters.
@@ -1476,7 +1415,6 @@ export interface ListClustersResponse {
    */
   clusters: Cluster[]
 }
-
 
 export type ListNodesRequest = {
   /**
@@ -1513,7 +1451,6 @@ export type ListNodesRequest = {
   status?: NodeStatus
 }
 
-
 export interface ListNodesResponse {
   /**
    * Total number of nodes.
@@ -1524,7 +1461,6 @@ export interface ListNodesResponse {
    */
   nodes: Node[]
 }
-
 
 export type ListPoolsRequest = {
   /**
@@ -1557,7 +1493,6 @@ export type ListPoolsRequest = {
   status?: PoolStatus
 }
 
-
 export interface ListPoolsResponse {
   /**
    * Total number of pools that exists for the cluster.
@@ -1569,7 +1504,6 @@ export interface ListPoolsResponse {
   pools: Pool[]
 }
 
-
 export type ListVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1577,14 +1511,12 @@ export type ListVersionsRequest = {
   region?: ScwRegion
 }
 
-
 export interface ListVersionsResponse {
   /**
    * Available Kubernetes versions.
    */
   versions: Version[]
 }
-
 
 export type MigratePoolsToNewImagesRequest = {
   /**
@@ -1594,7 +1526,6 @@ export type MigratePoolsToNewImagesRequest = {
   clusterId: string
   poolIds?: string[]
 }
-
 
 export interface NodeMetadata {
   id: string
@@ -1618,7 +1549,6 @@ export interface NodeMetadata {
   updaterBinPath: string
 }
 
-
 export type RebootNodeRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1629,7 +1559,6 @@ export type RebootNodeRequest = {
    */
   nodeId: string
 }
-
 
 export type ReplaceNodeRequest = {
   /**
@@ -1642,7 +1571,6 @@ export type ReplaceNodeRequest = {
   nodeId: string
 }
 
-
 export type ResetClusterAdminTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1653,7 +1581,6 @@ export type ResetClusterAdminTokenRequest = {
    */
   clusterId: string
 }
-
 
 export type SetClusterACLRulesRequest = {
   /**
@@ -1670,14 +1597,12 @@ export type SetClusterACLRulesRequest = {
   acls?: ACLRuleRequest[]
 }
 
-
 export interface SetClusterACLRulesResponse {
   /**
    * ACLs that were set.
    */
   rules: ACLRule[]
 }
-
 
 export type SetClusterTypeRequest = {
   /**
@@ -1693,7 +1618,6 @@ export type SetClusterTypeRequest = {
    */
   type: string
 }
-
 
 export type UpdateClusterRequest = {
   /**
@@ -1742,7 +1666,6 @@ export type UpdateClusterRequest = {
   apiserverCertSans?: string[]
 }
 
-
 export type UpdatePoolRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1786,7 +1709,6 @@ export type UpdatePoolRequest = {
   upgradePolicy?: UpdatePoolRequestUpgradePolicy
 }
 
-
 export type UpgradeClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1806,7 +1728,6 @@ export type UpgradeClusterRequest = {
   upgradePools: boolean
 }
 
-
 export type UpgradePoolRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1821,5 +1742,3 @@ export type UpgradePoolRequest = {
    */
   version: string
 }
-
-
