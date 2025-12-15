@@ -413,10 +413,6 @@ export interface PublicCatalogProductPropertiesSecretManager {
 }
 
 
-export interface PublicCatalogProductPropertiesSecretManager {
-}
-
-
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
   kgCo2Equivalent?: number
   m3WaterUsage?: number
