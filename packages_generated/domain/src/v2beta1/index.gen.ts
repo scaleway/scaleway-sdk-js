@@ -3,6 +3,7 @@
 export {
   API,
   RegistrarAPI,
+  UnauthenticatedRegistrarAPI,
 } from './api.gen.js'
 export * from './content.gen.js'
 export * from './marshalling.gen.js'
@@ -23,6 +24,7 @@ export type {
   ContactExtensionFRIndividualInfo,
   ContactExtensionFRMode,
   ContactExtensionFRTrademarkInfo,
+  ContactExtensionIT,
   ContactExtensionNL,
   ContactExtensionNLLegalForm,
   ContactLegalForm,
@@ -160,6 +162,7 @@ export type {
   RetryInboundTransferResponse,
   SSLCertificate,
   SSLCertificateStatus,
+  SearchAvailableDomainsConsoleResponse,
   SearchAvailableDomainsResponse,
   Task,
   TaskStatus,
@@ -167,6 +170,7 @@ export type {
   Tld,
   TldOffer,
   TransferInDomainRequestTransferRequest,
+  UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest,
   UpdateContactRequestQuestion,
   UpdateDNSZoneNameserversRequest,
   UpdateDNSZoneNameserversResponse,
