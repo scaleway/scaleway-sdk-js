@@ -34,6 +34,7 @@ export type {
   PublicCatalogProductPropertiesKeyManager,
   PublicCatalogProductPropertiesLoadBalancer,
   PublicCatalogProductPropertiesManagedInference,
+  PublicCatalogProductPropertiesManagedRedisDatabase,
   PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductPropertiesObjectStorageClassType,
   PublicCatalogProductPropertiesObjectStorageClassTypeStorageClass,

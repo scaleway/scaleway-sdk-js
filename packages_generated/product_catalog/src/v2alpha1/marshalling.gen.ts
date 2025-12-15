@@ -22,6 +22,7 @@ import type {
   PublicCatalogProductPropertiesKeyManager,
   PublicCatalogProductPropertiesLoadBalancer,
   PublicCatalogProductPropertiesManagedInference,
+  PublicCatalogProductPropertiesManagedRedisDatabase,
   PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductPropertiesSecretManager,
   PublicCatalogProductEnvironmentalImpactEstimation,
@@ -312,6 +313,17 @@ const unmarshalPublicCatalogProductPropertiesManagedInference = (data: unknown):
   } as PublicCatalogProductPropertiesManagedInference
 }
 
+const unmarshalPublicCatalogProductPropertiesManagedRedisDatabase = (data: unknown): PublicCatalogProductPropertiesManagedRedisDatabase => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesManagedRedisDatabase' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesManagedRedisDatabase
+}
+
 const unmarshalPublicCatalogProductPropertiesObjectStorage = (data: unknown): PublicCatalogProductPropertiesObjectStorage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -396,6 +408,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     keyManager: data.key_manager ? unmarshalPublicCatalogProductPropertiesKeyManager(data.key_manager) : undefined,
     loadBalancer: data.load_balancer ? unmarshalPublicCatalogProductPropertiesLoadBalancer(data.load_balancer) : undefined,
     managedInference: data.managed_inference ? unmarshalPublicCatalogProductPropertiesManagedInference(data.managed_inference) : undefined,
+    managedRedisDatabase: data.managed_redis_database ? unmarshalPublicCatalogProductPropertiesManagedRedisDatabase(data.managed_redis_database) : undefined,
     objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
     secretManager: data.secret_manager ? unmarshalPublicCatalogProductPropertiesSecretManager(data.secret_manager) : undefined,
   } as PublicCatalogProductProperties
