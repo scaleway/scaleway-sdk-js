@@ -67,6 +67,7 @@ import type {
   CreateHostingRequestDomainConfiguration,
   OfferOptionRequest,
   HostingApiCreateHostingRequest,
+  HostingApiMigrateControlPanelRequest,
   HostingApiRemoveCustomDomainRequest,
   HostingApiUpdateHostingRequest,
   MailAccountApiChangeMailAccountPasswordRequest,
@@ -940,6 +941,14 @@ export const marshalHostingApiCreateHostingRequest = (
   skip_welcome_email: request.skipWelcomeEmail,
   subdomain: request.subdomain,
   tags: request.tags,
+})
+
+export const marshalHostingApiMigrateControlPanelRequest = (
+  request: HostingApiMigrateControlPanelRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  control_panel_name: request.controlPanelName,
+  offer_id: request.offerId,
 })
 
 export const marshalHostingApiRemoveCustomDomainRequest = (
