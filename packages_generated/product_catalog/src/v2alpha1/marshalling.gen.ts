@@ -8,6 +8,10 @@ import type {
   PublicCatalogProductPropertiesHardwareNetwork,
   PublicCatalogProductPropertiesHardwareRAM,
   PublicCatalogProductPropertiesHardwareStorage,
+  PublicCatalogProductPropertiesObjectStorageClassType,
+  PublicCatalogProductPropertiesObjectStorageInternetTrafficType,
+  PublicCatalogProductPropertiesObjectStorageRegionTrafficType,
+  PublicCatalogProductPropertiesObjectStorageRestoreType,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
@@ -128,6 +132,54 @@ const unmarshalPublicCatalogProductPropertiesHardwareStorage = (data: unknown): 
     description: data.description,
     total: data.total,
   } as PublicCatalogProductPropertiesHardwareStorage
+}
+
+const unmarshalPublicCatalogProductPropertiesObjectStorageClassType = (data: unknown): PublicCatalogProductPropertiesObjectStorageClassType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesObjectStorageClassType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    storageClass: data.storage_class,
+  } as PublicCatalogProductPropertiesObjectStorageClassType
+}
+
+const unmarshalPublicCatalogProductPropertiesObjectStorageInternetTrafficType = (data: unknown): PublicCatalogProductPropertiesObjectStorageInternetTrafficType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesObjectStorageInternetTrafficType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    trafficType: data.traffic_type,
+  } as PublicCatalogProductPropertiesObjectStorageInternetTrafficType
+}
+
+const unmarshalPublicCatalogProductPropertiesObjectStorageRegionTrafficType = (data: unknown): PublicCatalogProductPropertiesObjectStorageRegionTrafficType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesObjectStorageRegionTrafficType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    regionDestination: data.region_destination,
+  } as PublicCatalogProductPropertiesObjectStorageRegionTrafficType
+}
+
+const unmarshalPublicCatalogProductPropertiesObjectStorageRestoreType = (data: unknown): PublicCatalogProductPropertiesObjectStorageRestoreType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesObjectStorageRestoreType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    restoreType: data.restore_type,
+  } as PublicCatalogProductPropertiesObjectStorageRestoreType
 }
 
 const unmarshalPublicCatalogProductPropertiesAppleSilicon = (data: unknown): PublicCatalogProductPropertiesAppleSilicon => {
@@ -268,6 +320,10 @@ const unmarshalPublicCatalogProductPropertiesObjectStorage = (data: unknown): Pu
   }
 
   return {
+    class: data.class ? unmarshalPublicCatalogProductPropertiesObjectStorageClassType(data.class) : undefined,
+    internetTraffic: data.internet_traffic ? unmarshalPublicCatalogProductPropertiesObjectStorageInternetTrafficType(data.internet_traffic) : undefined,
+    regionTraffic: data.region_traffic ? unmarshalPublicCatalogProductPropertiesObjectStorageRegionTrafficType(data.region_traffic) : undefined,
+    restore: data.restore ? unmarshalPublicCatalogProductPropertiesObjectStorageRestoreType(data.restore) : undefined,
   } as PublicCatalogProductPropertiesObjectStorage
 }
 
