@@ -24,6 +24,7 @@ export type {
   ContactExtensionFRIndividualInfo,
   ContactExtensionFRMode,
   ContactExtensionFRTrademarkInfo,
+  ContactExtensionIT,
   ContactExtensionNL,
   ContactExtensionNLLegalForm,
   ContactLegalForm,

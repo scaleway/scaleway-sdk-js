@@ -415,6 +415,12 @@ export interface ContactExtensionFR {
 }
 
 
+export interface ContactExtensionIT {
+  europeanCitizenship: string
+  taxCode: string
+}
+
+
 export interface ContactExtensionNL {
   legalForm: ContactExtensionNLLegalForm
   legalFormRegistrationNumber: string
@@ -525,6 +531,7 @@ export interface Contact {
   state: string
   extensionNl?: ContactExtensionNL
   status: ContactStatus
+  extensionIt?: ContactExtensionIT
 }
 
 
@@ -585,6 +592,7 @@ export interface NewContact {
   whoisOptIn: boolean
   state?: string
   extensionNl?: ContactExtensionNL
+  extensionIt?: ContactExtensionIT
 }
 
 
@@ -1715,6 +1723,7 @@ export type RegistrarApiUpdateContactRequest = {
   whoisOptIn?: boolean
   state?: string
   extensionNl?: ContactExtensionNL
+  extensionIt?: ContactExtensionIT
 }
 
 
