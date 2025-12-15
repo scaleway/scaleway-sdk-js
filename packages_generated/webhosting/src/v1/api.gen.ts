@@ -33,6 +33,7 @@ import {
   unmarshalHosting,
   marshalHostingApiAddCustomDomainRequest,
   marshalHostingApiCreateHostingRequest,
+  marshalHostingApiMigrateControlPanelRequest,
   marshalHostingApiRemoveCustomDomainRequest,
   marshalHostingApiUpdateHostingRequest,
   unmarshalHostingSummary,
@@ -109,6 +110,7 @@ import type {
   HostingApiGetHostingRequest,
   HostingApiGetResourceSummaryRequest,
   HostingApiListHostingsRequest,
+  HostingApiMigrateControlPanelRequest,
   HostingApiRemoveCustomDomainRequest,
   HostingApiResetHostingPasswordRequest,
   HostingApiUpdateHostingRequest,
@@ -1002,6 +1004,26 @@ export class HostingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-custom-domain`,
+      },
+      unmarshalHostingSummary,
+    )
+
+  
+  /**
+   * Migrate a hosting to a new control panel.. Migrate a hosting to a new control panel.
+   *
+   * @param request - The request {@link HostingApiMigrateControlPanelRequest}
+   * @returns A Promise of HostingSummary
+   */
+  migrateControlPanel = (request: Readonly<HostingApiMigrateControlPanelRequest>) =>
+    this.client.fetch<HostingSummary>(
+      {
+        body: JSON.stringify(
+          marshalHostingApiMigrateControlPanelRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/migrate-control-panel`,
       },
       unmarshalHostingSummary,
     )

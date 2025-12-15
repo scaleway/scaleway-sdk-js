@@ -9,6 +9,7 @@ import type {
   ContactExtensionFRTrademarkInfo,
   ContactExtensionEU,
   ContactExtensionFR,
+  ContactExtensionIT,
   ContactExtensionNL,
   ContactQuestion,
   Contact,
@@ -76,6 +77,7 @@ import type {
   RestoreDNSZoneVersionResponse,
   RetryInboundTransferResponse,
   AvailableDomain,
+  SearchAvailableDomainsConsoleResponse,
   SearchAvailableDomainsResponse,
   UpdateDNSZoneNameserversResponse,
   UpdateDNSZoneRecordsResponse,
@@ -200,6 +202,19 @@ const unmarshalContactExtensionFR = (data: unknown): ContactExtensionFR => {
   } as ContactExtensionFR
 }
 
+const unmarshalContactExtensionIT = (data: unknown): ContactExtensionIT => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ContactExtensionIT' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    europeanCitizenship: data.european_citizenship,
+    taxCode: data.tax_code,
+  } as ContactExtensionIT
+}
+
 const unmarshalContactExtensionNL = (data: unknown): ContactExtensionNL => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -245,6 +260,7 @@ export const unmarshalContact = (data: unknown): Contact => {
     emailStatus: data.email_status,
     extensionEu: data.extension_eu ? unmarshalContactExtensionEU(data.extension_eu) : undefined,
     extensionFr: data.extension_fr ? unmarshalContactExtensionFR(data.extension_fr) : undefined,
+    extensionIt: data.extension_it ? unmarshalContactExtensionIT(data.extension_it) : undefined,
     extensionNl: data.extension_nl ? unmarshalContactExtensionNL(data.extension_nl) : undefined,
     faxNumber: data.fax_number,
     firstname: data.firstname,
@@ -1177,6 +1193,19 @@ const unmarshalAvailableDomain = (data: unknown): AvailableDomain => {
   } as AvailableDomain
 }
 
+export const unmarshalSearchAvailableDomainsConsoleResponse = (data: unknown): SearchAvailableDomainsConsoleResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SearchAvailableDomainsConsoleResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availableDomains: unmarshalArrayOfObject(data.available_domains, unmarshalAvailableDomain),
+    exactMatchDomain: data.exact_match_domain ? unmarshalAvailableDomain(data.exact_match_domain) : undefined,
+  } as SearchAvailableDomainsConsoleResponse
+}
+
 export const unmarshalSearchAvailableDomainsResponse = (data: unknown): SearchAvailableDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1382,6 +1411,14 @@ const marshalContactExtensionFR = (
   ]),
 })
 
+const marshalContactExtensionIT = (
+  request: ContactExtensionIT,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  european_citizenship: request.europeanCitizenship,
+  tax_code: request.taxCode,
+})
+
 const marshalContactExtensionNL = (
   request: ContactExtensionNL,
   defaults: DefaultValues,
@@ -1412,6 +1449,7 @@ const marshalNewContact = (
   email_alt: request.emailAlt,
   extension_eu: ((request.extensionEu !== undefined) ?  marshalContactExtensionEU(request.extensionEu, defaults): undefined),
   extension_fr: ((request.extensionFr !== undefined) ?  marshalContactExtensionFR(request.extensionFr, defaults): undefined),
+  extension_it: ((request.extensionIt !== undefined) ?  marshalContactExtensionIT(request.extensionIt, defaults): undefined),
   extension_nl: ((request.extensionNl !== undefined) ?  marshalContactExtensionNL(request.extensionNl, defaults): undefined),
   fax_number: request.faxNumber,
   firstname: request.firstname,
@@ -1653,6 +1691,7 @@ export const marshalRegistrarApiUpdateContactRequest = (
   email_alt: request.emailAlt,
   extension_eu: ((request.extensionEu !== undefined) ?  marshalContactExtensionEU(request.extensionEu, defaults): undefined),
   extension_fr: ((request.extensionFr !== undefined) ?  marshalContactExtensionFR(request.extensionFr, defaults): undefined),
+  extension_it: ((request.extensionIt !== undefined) ?  marshalContactExtensionIT(request.extensionIt, defaults): undefined),
   extension_nl: ((request.extensionNl !== undefined) ?  marshalContactExtensionNL(request.extensionNl, defaults): undefined),
   fax_number: request.faxNumber,
   lang: request.lang,
