@@ -2,9 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 export {
   API,
-  RegistrarAPI,
-  UnauthenticatedRegistrarAPI,
-} from './api.gen.js'
+  RegistrarAPI} from './api.gen.js'
 export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
@@ -23,9 +21,7 @@ export type {
   ContactExtensionFRDunsInfo,
   ContactExtensionFRIndividualInfo,
   ContactExtensionFRMode,
-  ContactExtensionFRTrademarkInfo,
-  ContactExtensionIT,
-  ContactExtensionNL,
+  ContactExtensionFRTrademarkInfo,  ContactExtensionNL,
   ContactExtensionNLLegalForm,
   ContactLegalForm,
   ContactQuestion,
@@ -161,20 +157,16 @@ export type {
   RestoreDNSZoneVersionResponse,
   RetryInboundTransferResponse,
   SSLCertificate,
-  SSLCertificateStatus,
-  SearchAvailableDomainsConsoleResponse,
-  SearchAvailableDomainsResponse,
+  SSLCertificateStatus,  SearchAvailableDomainsResponse,
   Task,
   TaskStatus,
   TaskType,
   Tld,
   TldOffer,
-  TransferInDomainRequestTransferRequest,
-  UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest,
-  UpdateContactRequestQuestion,
+  TransferInDomainRequestTransferRequest,  UpdateContactRequestQuestion,
   UpdateDNSZoneNameserversRequest,
   UpdateDNSZoneNameserversResponse,
   UpdateDNSZoneRecordsRequest,
   UpdateDNSZoneRecordsResponse,
-  UpdateDNSZoneRequest,
+  UpdateDNSZoneRequest
 } from './types.gen.js'

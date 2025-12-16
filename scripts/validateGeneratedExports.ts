@@ -16,53 +16,85 @@ interface ValidationResult {
 
 async function validateExports(indexPath: string): Promise<ValidationResult> {
   const typesPath = indexPath.replace('index.gen.ts', 'types.gen.ts')
+  const apiPath = indexPath.replace('index.gen.ts', 'api.gen.ts')
   const removedExports: string[] = []
 
   try {
     // Read index.gen.ts
     const indexContent = readFileSync(indexPath, 'utf8')
-    const typesContent = readFileSync(typesPath, 'utf8')
+    let fixedContent = indexContent
 
-    // Extract exported types from index.gen.ts
-    const exportTypeMatch = indexContent.match(/export type \{([^}]+)\} from/)
-    if (!exportTypeMatch) {
-      return { file: indexPath, removedExports: [], isValid: true }
-    }
+    // Validate API exports
+    const exportApiMatch = indexContent.match(
+      /export \{([^}]+)\} from ['"]\.\/api\.gen\.js['"]/,
+    )
+    if (exportApiMatch) {
+      try {
+        const apiContent = readFileSync(apiPath, 'utf8')
+        const exportedApis = exportApiMatch[1]
+          .split(',')
+          .map(t => t.trim())
+          .filter(Boolean)
 
-    const exportedTypes = exportTypeMatch[1]
-      .split(',')
-      .map(t => t.trim())
-      .filter(Boolean)
+        // Extract all available API classes from api.gen.ts
+        const availableApis = new Set<string>()
+        const apiPattern = /export class (\w+) extends/g
+        let match: RegExpExecArray | null = apiPattern.exec(apiContent)
 
-    // Extract all available types/interfaces from types.gen.ts
-    const availableTypes = new Set<string>()
-    const typePattern = /export (?:type|interface) (\w+)(?:<| =| extends| \{)/g
-    let match: RegExpExecArray | null = typePattern.exec(typesContent)
+        while (match !== null) {
+          availableApis.add(match[1])
+          match = apiPattern.exec(apiContent)
+        }
 
-    while (match !== null) {
-      availableTypes.add(match[1])
-      match = typePattern.exec(typesContent)
-    }
-
-    // Find invalid exports
-    const invalidExports: string[] = []
-    for (const exportedType of exportedTypes) {
-      if (!availableTypes.has(exportedType)) {
-        invalidExports.push(exportedType)
+        // Find invalid API exports
+        for (const exportedApi of exportedApis) {
+          if (!availableApis.has(exportedApi)) {
+            const regex = new RegExp(`\\s*${exportedApi},?\\n?`, 'g')
+            fixedContent = fixedContent.replace(regex, '')
+            removedExports.push(exportedApi)
+          }
+        }
+      } catch {
+        // api.gen.ts might not exist, skip API validation
       }
     }
 
-    if (invalidExports.length === 0) {
-      return { file: indexPath, removedExports: [], isValid: true }
+    // Validate type exports
+    const exportTypeMatch = fixedContent.match(/export type \{([^}]+)\} from/)
+    if (exportTypeMatch) {
+      try {
+        const typesContent = readFileSync(typesPath, 'utf8')
+        const exportedTypes = exportTypeMatch[1]
+          .split(',')
+          .map(t => t.trim())
+          .filter(Boolean)
+
+        // Extract all available types/interfaces from types.gen.ts
+        const availableTypes = new Set<string>()
+        const typePattern =
+          /export (?:type|interface) (\w+)(?:<| =| extends| \{)/g
+        let match: RegExpExecArray | null = typePattern.exec(typesContent)
+
+        while (match !== null) {
+          availableTypes.add(match[1])
+          match = typePattern.exec(typesContent)
+        }
+
+        // Find invalid type exports
+        for (const exportedType of exportedTypes) {
+          if (!availableTypes.has(exportedType)) {
+            const regex = new RegExp(`\\s*${exportedType},?\\n?`, 'g')
+            fixedContent = fixedContent.replace(regex, '')
+            removedExports.push(exportedType)
+          }
+        }
+      } catch {
+        // types.gen.ts might not exist, skip type validation
+      }
     }
 
-    // Remove invalid exports from index.gen.ts
-    let fixedContent = indexContent
-    for (const invalidExport of invalidExports) {
-      // Remove the invalid export from the list
-      const regex = new RegExp(`\\s*${invalidExport},?\\n?`, 'g')
-      fixedContent = fixedContent.replace(regex, '')
-      removedExports.push(invalidExport)
+    if (removedExports.length === 0) {
+      return { file: indexPath, removedExports: [], isValid: true }
     }
 
     // Clean up trailing commas
