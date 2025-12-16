@@ -63,6 +63,7 @@
     },
     {
       "includes": ["vite.config.ts", "vitest.config.ts", "**/*.config.ts", "**/*.config.js"],
+      "excludes": ["packages_generated/**"],
       "linter": {
         "rules": {
           "style": {
