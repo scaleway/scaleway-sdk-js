@@ -1,5 +1,9 @@
-
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+  unmarshalMoney,
+} from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   IP,
@@ -253,7 +257,9 @@ const unmarshalOfferBandwidthInfo = (data: unknown): OfferBandwidthInfo => {
   } as OfferBandwidthInfo
 }
 
-const unmarshalOfferFailoverBlockInfo = (data: unknown): OfferFailoverBlockInfo => {
+const unmarshalOfferFailoverBlockInfo = (
+  data: unknown,
+): OfferFailoverBlockInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'OfferFailoverBlockInfo' failed as data isn't a dictionary.`,
@@ -261,7 +267,9 @@ const unmarshalOfferFailoverBlockInfo = (data: unknown): OfferFailoverBlockInfo 
   }
 
   return {
-    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : undefined,
+    onetimeFees: data.onetime_fees
+      ? unmarshalOffer(data.onetime_fees)
+      : undefined,
   } as OfferFailoverBlockInfo
 }
 
@@ -273,7 +281,9 @@ const unmarshalOfferFailoverIpInfo = (data: unknown): OfferFailoverIpInfo => {
   }
 
   return {
-    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : undefined,
+    onetimeFees: data.onetime_fees
+      ? unmarshalOffer(data.onetime_fees)
+      : undefined,
   } as OfferFailoverIpInfo
 }
 
@@ -323,23 +333,36 @@ const unmarshalOfferServerInfo = (data: unknown): OfferServerInfo => {
   }
 
   return {
-    availableOptions: unmarshalArrayOfObject(data.available_options, unmarshalOffer),
+    availableOptions: unmarshalArrayOfObject(
+      data.available_options,
+      unmarshalOffer,
+    ),
     bandwidth: data.bandwidth,
     commercialRange: data.commercial_range,
     connectivity: data.connectivity,
     cpus: unmarshalArrayOfObject(data.cpus, unmarshalCPU),
     disks: unmarshalArrayOfObject(data.disks, unmarshalDisk),
     memories: unmarshalArrayOfObject(data.memories, unmarshalMemory),
-    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : undefined,
-    persistentMemories: unmarshalArrayOfObject(data.persistent_memories, unmarshalPersistentMemory),
-    raidControllers: unmarshalArrayOfObject(data.raid_controllers, unmarshalRaidController),
+    onetimeFees: data.onetime_fees
+      ? unmarshalOffer(data.onetime_fees)
+      : undefined,
+    persistentMemories: unmarshalArrayOfObject(
+      data.persistent_memories,
+      unmarshalPersistentMemory,
+    ),
+    raidControllers: unmarshalArrayOfObject(
+      data.raid_controllers,
+      unmarshalRaidController,
+    ),
     rpnVersion: data.rpn_version,
     stock: data.stock,
     stockByDatacenter: data.stock_by_datacenter,
   } as OfferServerInfo
 }
 
-const unmarshalOfferServiceLevelInfo = (data: unknown): OfferServiceLevelInfo => {
+const unmarshalOfferServiceLevelInfo = (
+  data: unknown,
+): OfferServiceLevelInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'OfferServiceLevelInfo' failed as data isn't a dictionary.`,
@@ -348,7 +371,10 @@ const unmarshalOfferServiceLevelInfo = (data: unknown): OfferServiceLevelInfo =>
 
   return {
     antidos: data.antidos,
-    availableOptions: unmarshalArrayOfObject(data.available_options, unmarshalOffer),
+    availableOptions: unmarshalArrayOfObject(
+      data.available_options,
+      unmarshalOffer,
+    ),
     customization: data.customization,
     extraFailoverQuota: data.extra_failover_quota,
     git: data.git,
@@ -382,23 +408,43 @@ export const unmarshalOffer = (data: unknown): Offer => {
   }
 
   return {
-    antidosInfo: data.antidos_info ? unmarshalOfferAntiDosInfo(data.antidos_info) : undefined,
-    backupInfo: data.backup_info ? unmarshalOfferBackupInfo(data.backup_info) : undefined,
-    bandwidthInfo: data.bandwidth_info ? unmarshalOfferBandwidthInfo(data.bandwidth_info) : undefined,
+    antidosInfo: data.antidos_info
+      ? unmarshalOfferAntiDosInfo(data.antidos_info)
+      : undefined,
+    backupInfo: data.backup_info
+      ? unmarshalOfferBackupInfo(data.backup_info)
+      : undefined,
+    bandwidthInfo: data.bandwidth_info
+      ? unmarshalOfferBandwidthInfo(data.bandwidth_info)
+      : undefined,
     catalog: data.catalog,
-    failoverBlockInfo: data.failover_block_info ? unmarshalOfferFailoverBlockInfo(data.failover_block_info) : undefined,
-    failoverIpInfo: data.failover_ip_info ? unmarshalOfferFailoverIpInfo(data.failover_ip_info) : undefined,
+    failoverBlockInfo: data.failover_block_info
+      ? unmarshalOfferFailoverBlockInfo(data.failover_block_info)
+      : undefined,
+    failoverIpInfo: data.failover_ip_info
+      ? unmarshalOfferFailoverIpInfo(data.failover_ip_info)
+      : undefined,
     id: data.id,
-    licenseInfo: data.license_info ? unmarshalOfferLicenseInfo(data.license_info) : undefined,
+    licenseInfo: data.license_info
+      ? unmarshalOfferLicenseInfo(data.license_info)
+      : undefined,
     name: data.name,
     paymentFrequency: data.payment_frequency,
     pricing: data.pricing ? unmarshalMoney(data.pricing) : undefined,
     rpnInfo: data.rpn_info ? unmarshalOfferRPNInfo(data.rpn_info) : undefined,
     sanInfo: data.san_info ? unmarshalOfferSANInfo(data.san_info) : undefined,
-    serverInfo: data.server_info ? unmarshalOfferServerInfo(data.server_info) : undefined,
-    serviceLevelInfo: data.service_level_info ? unmarshalOfferServiceLevelInfo(data.service_level_info) : undefined,
-    storageInfo: data.storage_info ? unmarshalOfferStorageInfo(data.storage_info) : undefined,
-    usbStorageInfo: data.usb_storage_info ? unmarshalOfferStorageInfo(data.usb_storage_info) : undefined,
+    serverInfo: data.server_info
+      ? unmarshalOfferServerInfo(data.server_info)
+      : undefined,
+    serviceLevelInfo: data.service_level_info
+      ? unmarshalOfferServiceLevelInfo(data.service_level_info)
+      : undefined,
+    storageInfo: data.storage_info
+      ? unmarshalOfferStorageInfo(data.storage_info)
+      : undefined,
+    usbStorageInfo: data.usb_storage_info
+      ? unmarshalOfferStorageInfo(data.usb_storage_info)
+      : undefined,
   } as Offer
 }
 
@@ -556,13 +602,18 @@ export const unmarshalServer = (data: unknown): Server => {
     hasBmc: data.has_bmc,
     hostname: data.hostname,
     id: data.id,
-    interfaces: unmarshalArrayOfObject(data.interfaces, unmarshalNetworkInterface),
+    interfaces: unmarshalArrayOfObject(
+      data.interfaces,
+      unmarshalNetworkInterface,
+    ),
     ipv6Slaac: data.ipv6_slaac,
     isHds: data.is_hds,
     isOutsourced: data.is_outsourced,
     isRpnv2Member: data.is_rpnv2_member,
     level: data.level ? unmarshalServiceLevel(data.level) : undefined,
-    location: data.location ? unmarshalServerLocation(data.location) : undefined,
+    location: data.location
+      ? unmarshalServerLocation(data.location)
+      : undefined,
     offer: data.offer ? unmarshalOffer(data.offer) : undefined,
     options: unmarshalArrayOfObject(data.options, unmarshalServerOption),
     organizationId: data.organization_id,
@@ -607,7 +658,9 @@ export const unmarshalRpnV2Group = (data: unknown): RpnV2Group => {
     organizationId: data.organization_id,
     owner: data.owner,
     projectId: data.project_id,
-    rpnv1Group: data.rpnv1_group ? unmarshalRpnGroup(data.rpnv1_group) : undefined,
+    rpnv1Group: data.rpnv1_group
+      ? unmarshalRpnGroup(data.rpnv1_group)
+      : undefined,
     status: data.status,
     subnet: data.subnet ? unmarshalRpnV2GroupSubnet(data.subnet) : undefined,
     type: data.type,
@@ -750,7 +803,9 @@ export const unmarshalCanOrderResponse = (data: unknown): CanOrderResponse => {
   } as CanOrderResponse
 }
 
-export const unmarshalCreateFailoverIPsResponse = (data: unknown): CreateFailoverIPsResponse => {
+export const unmarshalCreateFailoverIPsResponse = (
+  data: unknown,
+): CreateFailoverIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateFailoverIPsResponse' failed as data isn't a dictionary.`,
@@ -763,7 +818,9 @@ export const unmarshalCreateFailoverIPsResponse = (data: unknown): CreateFailove
   } as CreateFailoverIPsResponse
 }
 
-const unmarshalGetIPv6BlockQuotasResponseQuota = (data: unknown): GetIPv6BlockQuotasResponseQuota => {
+const unmarshalGetIPv6BlockQuotasResponseQuota = (
+  data: unknown,
+): GetIPv6BlockQuotasResponseQuota => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetIPv6BlockQuotasResponseQuota' failed as data isn't a dictionary.`,
@@ -776,7 +833,9 @@ const unmarshalGetIPv6BlockQuotasResponseQuota = (data: unknown): GetIPv6BlockQu
   } as GetIPv6BlockQuotasResponseQuota
 }
 
-export const unmarshalGetIPv6BlockQuotasResponse = (data: unknown): GetIPv6BlockQuotasResponse => {
+export const unmarshalGetIPv6BlockQuotasResponse = (
+  data: unknown,
+): GetIPv6BlockQuotasResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetIPv6BlockQuotasResponse' failed as data isn't a dictionary.`,
@@ -784,12 +843,17 @@ export const unmarshalGetIPv6BlockQuotasResponse = (data: unknown): GetIPv6Block
   }
 
   return {
-    quotas: unmarshalArrayOfObject(data.quotas, unmarshalGetIPv6BlockQuotasResponseQuota),
+    quotas: unmarshalArrayOfObject(
+      data.quotas,
+      unmarshalGetIPv6BlockQuotasResponseQuota,
+    ),
     totalCount: data.total_count,
   } as GetIPv6BlockQuotasResponse
 }
 
-export const unmarshalGetRemainingQuotaResponse = (data: unknown): GetRemainingQuotaResponse => {
+export const unmarshalGetRemainingQuotaResponse = (
+  data: unknown,
+): GetRemainingQuotaResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetRemainingQuotaResponse' failed as data isn't a dictionary.`,
@@ -804,7 +868,9 @@ export const unmarshalGetRemainingQuotaResponse = (data: unknown): GetRemainingQ
   } as GetRemainingQuotaResponse
 }
 
-export const unmarshalGetRpnStatusResponse = (data: unknown): GetRpnStatusResponse => {
+export const unmarshalGetRpnStatusResponse = (
+  data: unknown,
+): GetRpnStatusResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetRpnStatusResponse' failed as data isn't a dictionary.`,
@@ -831,13 +897,19 @@ export const unmarshalInvoice = (data: unknown): Invoice => {
     paidAt: unmarshalDate(data.paid_at),
     paymentMethod: data.payment_method,
     status: data.status,
-    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : undefined,
-    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : undefined,
+    totalWithTaxes: data.total_with_taxes
+      ? unmarshalMoney(data.total_with_taxes)
+      : undefined,
+    totalWithoutTaxes: data.total_without_taxes
+      ? unmarshalMoney(data.total_without_taxes)
+      : undefined,
     transactionId: data.transaction_id,
   } as Invoice
 }
 
-export const unmarshalListFailoverIPsResponse = (data: unknown): ListFailoverIPsResponse => {
+export const unmarshalListFailoverIPsResponse = (
+  data: unknown,
+): ListFailoverIPsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListFailoverIPsResponse' failed as data isn't a dictionary.`,
@@ -850,7 +922,9 @@ export const unmarshalListFailoverIPsResponse = (data: unknown): ListFailoverIPs
   } as ListFailoverIPsResponse
 }
 
-const unmarshalListIPv6BlockSubnetsAvailableResponseSubnet = (data: unknown): ListIPv6BlockSubnetsAvailableResponseSubnet => {
+const unmarshalListIPv6BlockSubnetsAvailableResponseSubnet = (
+  data: unknown,
+): ListIPv6BlockSubnetsAvailableResponseSubnet => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListIPv6BlockSubnetsAvailableResponseSubnet' failed as data isn't a dictionary.`,
@@ -863,7 +937,9 @@ const unmarshalListIPv6BlockSubnetsAvailableResponseSubnet = (data: unknown): Li
   } as ListIPv6BlockSubnetsAvailableResponseSubnet
 }
 
-export const unmarshalListIPv6BlockSubnetsAvailableResponse = (data: unknown): ListIPv6BlockSubnetsAvailableResponse => {
+export const unmarshalListIPv6BlockSubnetsAvailableResponse = (
+  data: unknown,
+): ListIPv6BlockSubnetsAvailableResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListIPv6BlockSubnetsAvailableResponse' failed as data isn't a dictionary.`,
@@ -871,12 +947,17 @@ export const unmarshalListIPv6BlockSubnetsAvailableResponse = (data: unknown): L
   }
 
   return {
-    subnetAvailables: unmarshalArrayOfObject(data.subnet_availables, unmarshalListIPv6BlockSubnetsAvailableResponseSubnet),
+    subnetAvailables: unmarshalArrayOfObject(
+      data.subnet_availables,
+      unmarshalListIPv6BlockSubnetsAvailableResponseSubnet,
+    ),
     totalCount: data.total_count,
   } as ListIPv6BlockSubnetsAvailableResponse
 }
 
-export const unmarshalListIPv6BlocksResponse = (data: unknown): ListIPv6BlocksResponse => {
+export const unmarshalListIPv6BlocksResponse = (
+  data: unknown,
+): ListIPv6BlocksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListIPv6BlocksResponse' failed as data isn't a dictionary.`,
@@ -902,13 +983,19 @@ const unmarshalInvoiceSummary = (data: unknown): InvoiceSummary => {
     paidAt: unmarshalDate(data.paid_at),
     paymentMethod: data.payment_method,
     status: data.status,
-    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : undefined,
-    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : undefined,
+    totalWithTaxes: data.total_with_taxes
+      ? unmarshalMoney(data.total_with_taxes)
+      : undefined,
+    totalWithoutTaxes: data.total_without_taxes
+      ? unmarshalMoney(data.total_without_taxes)
+      : undefined,
     transactionId: data.transaction_id,
   } as InvoiceSummary
 }
 
-export const unmarshalListInvoicesResponse = (data: unknown): ListInvoicesResponse => {
+export const unmarshalListInvoicesResponse = (
+  data: unknown,
+): ListInvoicesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListInvoicesResponse' failed as data isn't a dictionary.`,
@@ -957,7 +1044,9 @@ const unmarshalRpnSanIp = (data: unknown): RpnSanIp => {
 
   return {
     ip: data.ip ? unmarshalIP(data.ip) : undefined,
-    rpnv2Group: data.rpnv2_group ? unmarshalRpnSanIpRpnV2Group(data.rpnv2_group) : undefined,
+    rpnv2Group: data.rpnv2_group
+      ? unmarshalRpnSanIpRpnV2Group(data.rpnv2_group)
+      : undefined,
     server: data.server ? unmarshalRpnSanIpServer(data.server) : undefined,
     type: data.type,
   } as RpnSanIp
@@ -989,7 +1078,9 @@ export const unmarshalListOSResponse = (data: unknown): ListOSResponse => {
   } as ListOSResponse
 }
 
-export const unmarshalListOffersResponse = (data: unknown): ListOffersResponse => {
+export const unmarshalListOffersResponse = (
+  data: unknown,
+): ListOffersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`,
@@ -1015,12 +1106,18 @@ const unmarshalRefundSummary = (data: unknown): RefundSummary => {
     method: data.method,
     refundedAt: unmarshalDate(data.refunded_at),
     status: data.status,
-    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : undefined,
-    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : undefined,
+    totalWithTaxes: data.total_with_taxes
+      ? unmarshalMoney(data.total_with_taxes)
+      : undefined,
+    totalWithoutTaxes: data.total_without_taxes
+      ? unmarshalMoney(data.total_without_taxes)
+      : undefined,
   } as RefundSummary
 }
 
-export const unmarshalListRefundsResponse = (data: unknown): ListRefundsResponse => {
+export const unmarshalListRefundsResponse = (
+  data: unknown,
+): ListRefundsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRefundsResponse' failed as data isn't a dictionary.`,
@@ -1049,7 +1146,9 @@ const unmarshalRpnSanServer = (data: unknown): RpnSanServer => {
   } as RpnSanServer
 }
 
-export const unmarshalListRpnCapableSanServersResponse = (data: unknown): ListRpnCapableSanServersResponse => {
+export const unmarshalListRpnCapableSanServersResponse = (
+  data: unknown,
+): ListRpnCapableSanServersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnCapableSanServersResponse' failed as data isn't a dictionary.`,
@@ -1062,7 +1161,9 @@ export const unmarshalListRpnCapableSanServersResponse = (data: unknown): ListRp
   } as ListRpnCapableSanServersResponse
 }
 
-export const unmarshalListRpnCapableServersResponse = (data: unknown): ListRpnCapableServersResponse => {
+export const unmarshalListRpnCapableServersResponse = (
+  data: unknown,
+): ListRpnCapableServersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnCapableServersResponse' failed as data isn't a dictionary.`,
@@ -1088,14 +1189,18 @@ const unmarshalRpnGroupMember = (data: unknown): RpnGroupMember => {
     groupOwner: data.group_owner,
     id: data.id,
     owner: data.owner,
-    sanServer: data.san_server ? unmarshalRpnSanServer(data.san_server) : undefined,
+    sanServer: data.san_server
+      ? unmarshalRpnSanServer(data.san_server)
+      : undefined,
     server: data.server ? unmarshalServer(data.server) : undefined,
     speed: data.speed,
     status: data.status,
   } as RpnGroupMember
 }
 
-export const unmarshalListRpnGroupMembersResponse = (data: unknown): ListRpnGroupMembersResponse => {
+export const unmarshalListRpnGroupMembersResponse = (
+  data: unknown,
+): ListRpnGroupMembersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnGroupMembersResponse' failed as data isn't a dictionary.`,
@@ -1108,7 +1213,9 @@ export const unmarshalListRpnGroupMembersResponse = (data: unknown): ListRpnGrou
   } as ListRpnGroupMembersResponse
 }
 
-export const unmarshalListRpnGroupsResponse = (data: unknown): ListRpnGroupsResponse => {
+export const unmarshalListRpnGroupsResponse = (
+  data: unknown,
+): ListRpnGroupsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnGroupsResponse' failed as data isn't a dictionary.`,
@@ -1121,7 +1228,9 @@ export const unmarshalListRpnGroupsResponse = (data: unknown): ListRpnGroupsResp
   } as ListRpnGroupsResponse
 }
 
-export const unmarshalListRpnInvitesResponse = (data: unknown): ListRpnInvitesResponse => {
+export const unmarshalListRpnInvitesResponse = (
+  data: unknown,
+): ListRpnInvitesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnInvitesResponse' failed as data isn't a dictionary.`,
@@ -1161,7 +1270,9 @@ const unmarshalRpnSanSummary = (data: unknown): RpnSanSummary => {
   } as RpnSanSummary
 }
 
-export const unmarshalListRpnSansResponse = (data: unknown): ListRpnSansResponse => {
+export const unmarshalListRpnSansResponse = (
+  data: unknown,
+): ListRpnSansResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnSansResponse' failed as data isn't a dictionary.`,
@@ -1196,7 +1307,9 @@ const unmarshalRpnServerCapability = (data: unknown): RpnServerCapability => {
   } as RpnServerCapability
 }
 
-export const unmarshalListRpnServerCapabilitiesResponse = (data: unknown): ListRpnServerCapabilitiesResponse => {
+export const unmarshalListRpnServerCapabilitiesResponse = (
+  data: unknown,
+): ListRpnServerCapabilitiesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnServerCapabilitiesResponse' failed as data isn't a dictionary.`,
@@ -1209,7 +1322,9 @@ export const unmarshalListRpnServerCapabilitiesResponse = (data: unknown): ListR
   } as ListRpnServerCapabilitiesResponse
 }
 
-export const unmarshalListRpnV2CapableResourcesResponse = (data: unknown): ListRpnV2CapableResourcesResponse => {
+export const unmarshalListRpnV2CapableResourcesResponse = (
+  data: unknown,
+): ListRpnV2CapableResourcesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnV2CapableResourcesResponse' failed as data isn't a dictionary.`,
@@ -1231,7 +1346,9 @@ const unmarshalRpnV2Member = (data: unknown): RpnV2Member => {
 
   return {
     id: data.id,
-    rpnv1Group: data.rpnv1_group ? unmarshalRpnGroup(data.rpnv1_group) : undefined,
+    rpnv1Group: data.rpnv1_group
+      ? unmarshalRpnGroup(data.rpnv1_group)
+      : undefined,
     server: data.server ? unmarshalServer(data.server) : undefined,
     speed: data.speed,
     status: data.status,
@@ -1257,7 +1374,9 @@ const unmarshalLog = (data: unknown): Log => {
   } as Log
 }
 
-export const unmarshalListRpnV2GroupLogsResponse = (data: unknown): ListRpnV2GroupLogsResponse => {
+export const unmarshalListRpnV2GroupLogsResponse = (
+  data: unknown,
+): ListRpnV2GroupLogsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnV2GroupLogsResponse' failed as data isn't a dictionary.`,
@@ -1270,7 +1389,9 @@ export const unmarshalListRpnV2GroupLogsResponse = (data: unknown): ListRpnV2Gro
   } as ListRpnV2GroupLogsResponse
 }
 
-export const unmarshalListRpnV2GroupsResponse = (data: unknown): ListRpnV2GroupsResponse => {
+export const unmarshalListRpnV2GroupsResponse = (
+  data: unknown,
+): ListRpnV2GroupsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnV2GroupsResponse' failed as data isn't a dictionary.`,
@@ -1283,7 +1404,9 @@ export const unmarshalListRpnV2GroupsResponse = (data: unknown): ListRpnV2Groups
   } as ListRpnV2GroupsResponse
 }
 
-export const unmarshalListRpnV2MembersResponse = (data: unknown): ListRpnV2MembersResponse => {
+export const unmarshalListRpnV2MembersResponse = (
+  data: unknown,
+): ListRpnV2MembersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRpnV2MembersResponse' failed as data isn't a dictionary.`,
@@ -1312,7 +1435,9 @@ const unmarshalServerDisk = (data: unknown): ServerDisk => {
   } as ServerDisk
 }
 
-export const unmarshalListServerDisksResponse = (data: unknown): ListServerDisksResponse => {
+export const unmarshalListServerDisksResponse = (
+  data: unknown,
+): ListServerDisksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServerDisksResponse' failed as data isn't a dictionary.`,
@@ -1339,7 +1464,9 @@ const unmarshalServerEvent = (data: unknown): ServerEvent => {
   } as ServerEvent
 }
 
-export const unmarshalListServerEventsResponse = (data: unknown): ListServerEventsResponse => {
+export const unmarshalListServerEventsResponse = (
+  data: unknown,
+): ListServerEventsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServerEventsResponse' failed as data isn't a dictionary.`,
@@ -1365,7 +1492,10 @@ const unmarshalServerSummary = (data: unknown): ServerSummary => {
     expiredAt: unmarshalDate(data.expired_at),
     hostname: data.hostname,
     id: data.id,
-    interfaces: unmarshalArrayOfObject(data.interfaces, unmarshalNetworkInterface),
+    interfaces: unmarshalArrayOfObject(
+      data.interfaces,
+      unmarshalNetworkInterface,
+    ),
     isHds: data.is_hds,
     isOutsourced: data.is_outsourced,
     level: data.level ? unmarshalServiceLevel(data.level) : undefined,
@@ -1382,7 +1512,9 @@ const unmarshalServerSummary = (data: unknown): ServerSummary => {
   } as ServerSummary
 }
 
-export const unmarshalListServersResponse = (data: unknown): ListServersResponse => {
+export const unmarshalListServersResponse = (
+  data: unknown,
+): ListServersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServersResponse' failed as data isn't a dictionary.`,
@@ -1395,7 +1527,9 @@ export const unmarshalListServersResponse = (data: unknown): ListServersResponse
   } as ListServersResponse
 }
 
-export const unmarshalListServicesResponse = (data: unknown): ListServicesResponse => {
+export const unmarshalListServicesResponse = (
+  data: unknown,
+): ListServicesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServicesResponse' failed as data isn't a dictionary.`,
@@ -1408,7 +1542,9 @@ export const unmarshalListServicesResponse = (data: unknown): ListServicesRespon
   } as ListServicesResponse
 }
 
-export const unmarshalListSubscribableServerOptionsResponse = (data: unknown): ListSubscribableServerOptionsResponse => {
+export const unmarshalListSubscribableServerOptionsResponse = (
+  data: unknown,
+): ListSubscribableServerOptionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSubscribableServerOptionsResponse' failed as data isn't a dictionary.`,
@@ -1460,8 +1596,12 @@ export const unmarshalRefund = (data: unknown): Refund => {
     method: data.method,
     refundedAt: unmarshalDate(data.refunded_at),
     status: data.status,
-    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : undefined,
-    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : undefined,
+    totalWithTaxes: data.total_with_taxes
+      ? unmarshalMoney(data.total_with_taxes)
+      : undefined,
+    totalWithoutTaxes: data.total_without_taxes
+      ? unmarshalMoney(data.total_without_taxes)
+      : undefined,
   } as Refund
 }
 
@@ -1497,7 +1637,9 @@ const unmarshalPartition = (data: unknown): Partition => {
   } as Partition
 }
 
-export const unmarshalServerDefaultPartitioning = (data: unknown): ServerDefaultPartitioning => {
+export const unmarshalServerDefaultPartitioning = (
+  data: unknown,
+): ServerDefaultPartitioning => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerDefaultPartitioning' failed as data isn't a dictionary.`,
@@ -1527,7 +1669,9 @@ export const unmarshalServerInstall = (data: unknown): ServerInstall => {
   } as ServerInstall
 }
 
-export const unmarshalSubscribeStorageOptionsResponse = (data: unknown): SubscribeStorageOptionsResponse => {
+export const unmarshalSubscribeStorageOptionsResponse = (
+  data: unknown,
+): SubscribeStorageOptionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SubscribeStorageOptionsResponse' failed as data isn't a dictionary.`,
@@ -1623,7 +1767,10 @@ export const marshalInstallServerRequest = (
   license_offer_id: request.licenseOfferId,
   os_id: request.osId,
   panel_password: request.panelPassword,
-  partitions: ((request.partitions !== undefined) ?  request.partitions.map(elt => marshalInstallPartition(elt, defaults)): undefined),
+  partitions:
+    request.partitions !== undefined
+      ? request.partitions.map(elt => marshalInstallPartition(elt, defaults))
+      : undefined,
   root_password: request.rootPassword,
   ssh_key_ids: request.sshKeyIds,
   user_login: request.userLogin,
@@ -1785,7 +1932,9 @@ export const marshalUpdateRaidRequest = (
   request: UpdateRaidRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  raid_arrays:  request.raidArrays.map(elt => marshalUpdatableRaidArray(elt, defaults)),
+  raid_arrays: request.raidArrays.map(elt =>
+    marshalUpdatableRaidArray(elt, defaults),
+  ),
 })
 
 export const marshalUpdateReverseRequest = (

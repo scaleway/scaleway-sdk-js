@@ -1,5 +1,12 @@
-
-import { isJSONObject, marshalBlobToScwFile, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, unmarshalTimeSeries, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  marshalBlobToScwFile,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+  unmarshalMoney,
+  unmarshalTimeSeries,
+} from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   SchemaPartition,
@@ -98,7 +105,10 @@ const unmarshalSchemaDisk = (data: unknown): SchemaDisk => {
 
   return {
     device: data.device,
-    partitions: unmarshalArrayOfObject(data.partitions, unmarshalSchemaPartition),
+    partitions: unmarshalArrayOfObject(
+      data.partitions,
+      unmarshalSchemaPartition,
+    ),
   } as SchemaDisk
 }
 
@@ -151,7 +161,10 @@ export const unmarshalSchema = (data: unknown): Schema => {
 
   return {
     disks: unmarshalArrayOfObject(data.disks, unmarshalSchemaDisk),
-    filesystems: unmarshalArrayOfObject(data.filesystems, unmarshalSchemaFilesystem),
+    filesystems: unmarshalArrayOfObject(
+      data.filesystems,
+      unmarshalSchemaFilesystem,
+    ),
     raids: unmarshalArrayOfObject(data.raids, unmarshalSchemaRAID),
     zfs: data.zfs ? unmarshalSchemaZFS(data.zfs) : undefined,
   } as Schema
@@ -181,8 +194,7 @@ const unmarshalCertificationOption = (data: unknown): CertificationOption => {
     )
   }
 
-  return {
-  } as CertificationOption
+  return {} as CertificationOption
 }
 
 const unmarshalLicenseOption = (data: unknown): LicenseOption => {
@@ -209,7 +221,9 @@ const unmarshalPrivateNetworkOption = (data: unknown): PrivateNetworkOption => {
   } as PrivateNetworkOption
 }
 
-const unmarshalPublicBandwidthOption = (data: unknown): PublicBandwidthOption => {
+const unmarshalPublicBandwidthOption = (
+  data: unknown,
+): PublicBandwidthOption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PublicBandwidthOption' failed as data isn't a dictionary.`,
@@ -228,8 +242,7 @@ const unmarshalRemoteAccessOption = (data: unknown): RemoteAccessOption => {
     )
   }
 
-  return {
-  } as RemoteAccessOption
+  return {} as RemoteAccessOption
 }
 
 const unmarshalServerInstall = (data: unknown): ServerInstall => {
@@ -242,7 +255,9 @@ const unmarshalServerInstall = (data: unknown): ServerInstall => {
   return {
     hostname: data.hostname,
     osId: data.os_id,
-    partitioningSchema: data.partitioning_schema ? unmarshalSchema(data.partitioning_schema) : undefined,
+    partitioningSchema: data.partitioning_schema
+      ? unmarshalSchema(data.partitioning_schema)
+      : undefined,
     serviceUrl: data.service_url,
     serviceUser: data.service_user,
     sshKeyIds: data.ssh_key_ids,
@@ -259,15 +274,23 @@ const unmarshalServerOption = (data: unknown): ServerOption => {
   }
 
   return {
-    certification: data.certification ? unmarshalCertificationOption(data.certification) : undefined,
+    certification: data.certification
+      ? unmarshalCertificationOption(data.certification)
+      : undefined,
     expiresAt: unmarshalDate(data.expires_at),
     id: data.id,
     license: data.license ? unmarshalLicenseOption(data.license) : undefined,
     manageable: data.manageable,
     name: data.name,
-    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : undefined,
-    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : undefined,
-    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : undefined,
+    privateNetwork: data.private_network
+      ? unmarshalPrivateNetworkOption(data.private_network)
+      : undefined,
+    publicBandwidth: data.public_bandwidth
+      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
+      : undefined,
+    remoteAccess: data.remote_access
+      ? unmarshalRemoteAccessOption(data.remote_access)
+      : undefined,
     status: data.status,
   } as ServerOption
 }
@@ -308,7 +331,9 @@ export const unmarshalServer = (data: unknown): Server => {
     pingStatus: data.ping_status,
     projectId: data.project_id,
     protected: data.protected,
-    rescueServer: data.rescue_server ? unmarshalServerRescueServer(data.rescue_server) : undefined,
+    rescueServer: data.rescue_server
+      ? unmarshalServerRescueServer(data.rescue_server)
+      : undefined,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -349,8 +374,12 @@ export const unmarshalOS = (data: unknown): OS => {
     logoUrl: data.logo_url,
     name: data.name,
     password: data.password ? unmarshalOSOSField(data.password) : undefined,
-    servicePassword: data.service_password ? unmarshalOSOSField(data.service_password) : undefined,
-    serviceUser: data.service_user ? unmarshalOSOSField(data.service_user) : undefined,
+    servicePassword: data.service_password
+      ? unmarshalOSOSField(data.service_password)
+      : undefined,
+    serviceUser: data.service_user
+      ? unmarshalOSOSField(data.service_user)
+      : undefined,
     ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
     user: data.user ? unmarshalOSOSField(data.user) : undefined,
     version: data.version,
@@ -423,7 +452,9 @@ const unmarshalOfferOptionOffer = (data: unknown): OfferOptionOffer => {
   }
 
   return {
-    certification: data.certification ? unmarshalCertificationOption(data.certification) : undefined,
+    certification: data.certification
+      ? unmarshalCertificationOption(data.certification)
+      : undefined,
     enabled: data.enabled,
     id: data.id,
     license: data.license ? unmarshalLicenseOption(data.license) : undefined,
@@ -431,9 +462,15 @@ const unmarshalOfferOptionOffer = (data: unknown): OfferOptionOffer => {
     name: data.name,
     osId: data.os_id,
     price: data.price ? unmarshalMoney(data.price) : undefined,
-    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : undefined,
-    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : undefined,
-    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : undefined,
+    privateNetwork: data.private_network
+      ? unmarshalPrivateNetworkOption(data.private_network)
+      : undefined,
+    publicBandwidth: data.public_bandwidth
+      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
+      : undefined,
+    remoteAccess: data.remote_access
+      ? unmarshalRemoteAccessOption(data.remote_access)
+      : undefined,
     subscriptionPeriod: data.subscription_period,
   } as OfferOptionOffer
 }
@@ -488,12 +525,22 @@ export const unmarshalOffer = (data: unknown): Offer => {
     name: data.name,
     operationPath: data.operation_path,
     options: unmarshalArrayOfObject(data.options, unmarshalOfferOptionOffer),
-    persistentMemories: unmarshalArrayOfObject(data.persistent_memories, unmarshalPersistentMemory),
-    pricePerHour: data.price_per_hour ? unmarshalMoney(data.price_per_hour) : undefined,
-    pricePerMonth: data.price_per_month ? unmarshalMoney(data.price_per_month) : undefined,
+    persistentMemories: unmarshalArrayOfObject(
+      data.persistent_memories,
+      unmarshalPersistentMemory,
+    ),
+    pricePerHour: data.price_per_hour
+      ? unmarshalMoney(data.price_per_hour)
+      : undefined,
+    pricePerMonth: data.price_per_month
+      ? unmarshalMoney(data.price_per_month)
+      : undefined,
     privateBandwidth: data.private_bandwidth,
     quotaName: data.quota_name,
-    raidControllers: unmarshalArrayOfObject(data.raid_controllers, unmarshalRaidController),
+    raidControllers: unmarshalArrayOfObject(
+      data.raid_controllers,
+      unmarshalRaidController,
+    ),
     sharedBandwidth: data.shared_bandwidth,
     stock: data.stock,
     subscriptionPeriod: data.subscription_period,
@@ -510,18 +557,28 @@ export const unmarshalOption = (data: unknown): Option => {
   }
 
   return {
-    certification: data.certification ? unmarshalCertificationOption(data.certification) : undefined,
+    certification: data.certification
+      ? unmarshalCertificationOption(data.certification)
+      : undefined,
     id: data.id,
     license: data.license ? unmarshalLicenseOption(data.license) : undefined,
     manageable: data.manageable,
     name: data.name,
-    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : undefined,
-    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : undefined,
-    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : undefined,
+    privateNetwork: data.private_network
+      ? unmarshalPrivateNetworkOption(data.private_network)
+      : undefined,
+    publicBandwidth: data.public_bandwidth
+      ? unmarshalPublicBandwidthOption(data.public_bandwidth)
+      : undefined,
+    remoteAccess: data.remote_access
+      ? unmarshalRemoteAccessOption(data.remote_access)
+      : undefined,
   } as Option
 }
 
-export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwork => {
+export const unmarshalServerPrivateNetwork = (
+  data: unknown,
+): ServerPrivateNetwork => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`,
@@ -570,7 +627,9 @@ export const unmarshalBMCAccess = (data: unknown): BMCAccess => {
   } as BMCAccess
 }
 
-export const unmarshalGetServerMetricsResponse = (data: unknown): GetServerMetricsResponse => {
+export const unmarshalGetServerMetricsResponse = (
+  data: unknown,
+): GetServerMetricsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetServerMetricsResponse' failed as data isn't a dictionary.`,
@@ -595,7 +654,9 @@ export const unmarshalListOSResponse = (data: unknown): ListOSResponse => {
   } as ListOSResponse
 }
 
-export const unmarshalListOffersResponse = (data: unknown): ListOffersResponse => {
+export const unmarshalListOffersResponse = (
+  data: unknown,
+): ListOffersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`,
@@ -608,7 +669,9 @@ export const unmarshalListOffersResponse = (data: unknown): ListOffersResponse =
   } as ListOffersResponse
 }
 
-export const unmarshalListOptionsResponse = (data: unknown): ListOptionsResponse => {
+export const unmarshalListOptionsResponse = (
+  data: unknown,
+): ListOptionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListOptionsResponse' failed as data isn't a dictionary.`,
@@ -636,7 +699,9 @@ const unmarshalServerEvent = (data: unknown): ServerEvent => {
   } as ServerEvent
 }
 
-export const unmarshalListServerEventsResponse = (data: unknown): ListServerEventsResponse => {
+export const unmarshalListServerEventsResponse = (
+  data: unknown,
+): ListServerEventsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServerEventsResponse' failed as data isn't a dictionary.`,
@@ -649,7 +714,9 @@ export const unmarshalListServerEventsResponse = (data: unknown): ListServerEven
   } as ListServerEventsResponse
 }
 
-export const unmarshalListServerPrivateNetworksResponse = (data: unknown): ListServerPrivateNetworksResponse => {
+export const unmarshalListServerPrivateNetworksResponse = (
+  data: unknown,
+): ListServerPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`,
@@ -657,12 +724,17 @@ export const unmarshalListServerPrivateNetworksResponse = (data: unknown): ListS
   }
 
   return {
-    serverPrivateNetworks: unmarshalArrayOfObject(data.server_private_networks, unmarshalServerPrivateNetwork),
+    serverPrivateNetworks: unmarshalArrayOfObject(
+      data.server_private_networks,
+      unmarshalServerPrivateNetwork,
+    ),
     totalCount: data.total_count,
   } as ListServerPrivateNetworksResponse
 }
 
-export const unmarshalListServersResponse = (data: unknown): ListServersResponse => {
+export const unmarshalListServersResponse = (
+  data: unknown,
+): ListServersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServersResponse' failed as data isn't a dictionary.`,
@@ -675,7 +747,9 @@ export const unmarshalListServersResponse = (data: unknown): ListServersResponse
   } as ListServersResponse
 }
 
-export const unmarshalListSettingsResponse = (data: unknown): ListSettingsResponse => {
+export const unmarshalListSettingsResponse = (
+  data: unknown,
+): ListSettingsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSettingsResponse' failed as data isn't a dictionary.`,
@@ -688,7 +762,9 @@ export const unmarshalListSettingsResponse = (data: unknown): ListSettingsRespon
   } as ListSettingsResponse
 }
 
-export const unmarshalSetServerPrivateNetworksResponse = (data: unknown): SetServerPrivateNetworksResponse => {
+export const unmarshalSetServerPrivateNetworksResponse = (
+  data: unknown,
+): SetServerPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`,
@@ -696,7 +772,10 @@ export const unmarshalSetServerPrivateNetworksResponse = (data: unknown): SetSer
   }
 
   return {
-    serverPrivateNetworks: unmarshalArrayOfObject(data.server_private_networks, unmarshalServerPrivateNetwork),
+    serverPrivateNetworks: unmarshalArrayOfObject(
+      data.server_private_networks,
+      unmarshalServerPrivateNetwork,
+    ),
   } as SetServerPrivateNetworksResponse
 }
 
@@ -726,7 +805,9 @@ const marshalSchemaDisk = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   device: request.device,
-  partitions:  request.partitions.map(elt => marshalSchemaPartition(elt, defaults)),
+  partitions: request.partitions.map(elt =>
+    marshalSchemaPartition(elt, defaults),
+  ),
 })
 
 const marshalSchemaFilesystem = (
@@ -751,17 +832,22 @@ const marshalSchemaZFS = (
   request: SchemaZFS,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  pools:  request.pools.map(elt => marshalSchemaPool(elt, defaults)),
+  pools: request.pools.map(elt => marshalSchemaPool(elt, defaults)),
 })
 
 export const marshalSchema = (
   request: Schema,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  disks:  request.disks.map(elt => marshalSchemaDisk(elt, defaults)),
-  filesystems:  request.filesystems.map(elt => marshalSchemaFilesystem(elt, defaults)),
-  raids:  request.raids.map(elt => marshalSchemaRAID(elt, defaults)),
-  zfs: ((request.zfs !== undefined) ?  marshalSchemaZFS(request.zfs, defaults): undefined),
+  disks: request.disks.map(elt => marshalSchemaDisk(elt, defaults)),
+  filesystems: request.filesystems.map(elt =>
+    marshalSchemaFilesystem(elt, defaults),
+  ),
+  raids: request.raids.map(elt => marshalSchemaRAID(elt, defaults)),
+  zfs:
+    request.zfs !== undefined
+      ? marshalSchemaZFS(request.zfs, defaults)
+      : undefined,
 })
 
 const marshalCreateServerRequestInstall = (
@@ -770,7 +856,10 @@ const marshalCreateServerRequestInstall = (
 ): Record<string, unknown> => ({
   hostname: request.hostname,
   os_id: request.osId,
-  partitioning_schema: ((request.partitioningSchema !== undefined) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
+  partitioning_schema:
+    request.partitioningSchema !== undefined
+      ? marshalSchema(request.partitioningSchema, defaults)
+      : undefined,
   password: request.password,
   service_password: request.servicePassword,
   service_user: request.serviceUser,
@@ -783,18 +872,25 @@ export const marshalCreateServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  install: ((request.install !== undefined) ?  marshalCreateServerRequestInstall(request.install, defaults): undefined),
+  install:
+    request.install !== undefined
+      ? marshalCreateServerRequestInstall(request.install, defaults)
+      : undefined,
   name: request.name,
   offer_id: request.offerId,
   option_ids: request.optionIds,
   protected: request.protected,
   tags: request.tags,
-  user_data: request.userData,  
+  user_data: request.userData,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project_id',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
       value: request.projectId,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization_id',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
       value: request.organizationId,
     },
   ]),
@@ -813,13 +909,19 @@ export const marshalInstallServerRequest = async (
 ): Promise<Record<string, unknown>> => ({
   hostname: request.hostname,
   os_id: request.osId,
-  partitioning_schema: ((request.partitioningSchema !== undefined) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
+  partitioning_schema:
+    request.partitioningSchema !== undefined
+      ? marshalSchema(request.partitioningSchema, defaults)
+      : undefined,
   password: request.password,
   service_password: request.servicePassword,
   service_user: request.serviceUser,
   ssh_key_ids: request.sshKeyIds,
   user: request.user,
-  user_data: ((request.userData !== undefined) ?  await marshalBlobToScwFile(request.userData): undefined),
+  user_data:
+    request.userData !== undefined
+      ? await marshalBlobToScwFile(request.userData)
+      : undefined,
 })
 
 export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
@@ -890,5 +992,8 @@ export const marshalValidatePartitioningSchemaRequest = (
 ): Record<string, unknown> => ({
   offer_id: request.offerId,
   os_id: request.osId,
-  partitioning_schema: ((request.partitioningSchema !== undefined) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
+  partitioning_schema:
+    request.partitioningSchema !== undefined
+      ? marshalSchema(request.partitioningSchema, defaults)
+      : undefined,
 })

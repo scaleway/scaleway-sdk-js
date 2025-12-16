@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
-
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
 export type InstanceStatus =
   | 'unknown_status'
@@ -14,9 +13,7 @@ export type InstanceStatus =
   | 'locked'
   | 'snapshotting'
 
-export type ListDatabasesRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
+export type ListDatabasesRequestOrderBy = 'name_asc' | 'name_desc'
 
 export type ListInstancesRequestOrderBy =
   | 'created_at_asc'
@@ -34,9 +31,7 @@ export type ListSnapshotsRequestOrderBy =
   | 'expires_at_asc'
   | 'expires_at_desc'
 
-export type ListUsersRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
+export type ListUsersRequestOrderBy = 'name_asc' | 'name_desc'
 
 export type NodeTypeStock =
   | 'unknown_stock'
@@ -60,10 +55,7 @@ export type UserRoleRole =
   | 'db_admin'
   | 'sync'
 
-export type VolumeType =
-  | 'unknown_type'
-  | 'sbs_5k'
-  | 'sbs_15k'
+export type VolumeType = 'unknown_type' | 'sbs_5k' | 'sbs_15k'
 
 /**
  * Private Network details.
@@ -75,13 +67,10 @@ export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-
 /**
  * Public Access details.
  */
-export interface EndpointPublicNetworkDetails {
-}
-
+export interface EndpointPublicNetworkDetails {}
 
 export interface EndpointSpecPrivateNetworkDetails {
   /**
@@ -90,10 +79,7 @@ export interface EndpointSpecPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-
-export interface EndpointSpecPublicNetworkDetails {
-}
-
+export interface EndpointSpecPublicNetworkDetails {}
 
 export interface Endpoint {
   /**
@@ -122,7 +108,6 @@ export interface Endpoint {
   publicNetwork?: EndpointPublicNetworkDetails
 }
 
-
 export interface InstanceSnapshotSchedule {
   frequencyHours: number
   retentionDays: number
@@ -130,7 +115,6 @@ export interface InstanceSnapshotSchedule {
   nextUpdate?: Date
   lastRun?: Date
 }
-
 
 export interface Volume {
   /**
@@ -142,7 +126,6 @@ export interface Volume {
    */
   sizeBytes: number
 }
-
 
 export interface NodeTypeVolumeType {
   /**
@@ -167,7 +150,6 @@ export interface NodeTypeVolumeType {
   chunkSizeBytes: number
 }
 
-
 export interface UserRole {
   /**
    * Name of the preset role.
@@ -187,7 +169,6 @@ export interface UserRole {
   anyDatabase?: boolean
 }
 
-
 export interface EndpointSpec {
   /**
    *
@@ -201,11 +182,9 @@ export interface EndpointSpec {
   privateNetwork?: EndpointSpecPrivateNetworkDetails
 }
 
-
 export interface Database {
   name: string
 }
-
 
 export interface Instance {
   /**
@@ -266,7 +245,6 @@ export interface Instance {
   snapshotSchedule?: InstanceSnapshotSchedule
 }
 
-
 export interface NodeType {
   /**
    * Node type name identifier.
@@ -305,7 +283,6 @@ export interface NodeType {
    */
   instanceRange: string
 }
-
 
 export interface Snapshot {
   /**
@@ -358,7 +335,6 @@ export interface Snapshot {
   region: ScwRegion
 }
 
-
 export interface User {
   /**
    * Name of the user (Length must be between 1 and 63 characters. First character must be an alphabet character (a-zA-Z). Only a-zA-Z0-9_$- characters are accepted).
@@ -370,7 +346,6 @@ export interface User {
   roles: UserRole[]
 }
 
-
 export interface Version {
   /**
    * MongoDB® major engine version.
@@ -381,7 +356,6 @@ export interface Version {
    */
   endOfLifeAt?: Date
 }
-
 
 export type CreateEndpointRequest = {
   /**
@@ -397,7 +371,6 @@ export type CreateEndpointRequest = {
    */
   endpoint: EndpointSpec
 }
-
 
 export type CreateInstanceRequest = {
   /**
@@ -446,7 +419,6 @@ export type CreateInstanceRequest = {
   endpoints?: EndpointSpec[]
 }
 
-
 export type CreateSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -465,7 +437,6 @@ export type CreateSnapshotRequest = {
    */
   expiresAt?: Date
 }
-
 
 export type CreateUserRequest = {
   /**
@@ -486,7 +457,6 @@ export type CreateUserRequest = {
   password: string
 }
 
-
 export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -497,7 +467,6 @@ export type DeleteEndpointRequest = {
    */
   endpointId: string
 }
-
 
 export type DeleteInstanceRequest = {
   /**
@@ -510,7 +479,6 @@ export type DeleteInstanceRequest = {
   instanceId: string
 }
 
-
 export type DeleteSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -521,7 +489,6 @@ export type DeleteSnapshotRequest = {
    */
   snapshotId: string
 }
-
 
 export type DeleteUserRequest = {
   /**
@@ -538,7 +505,6 @@ export type DeleteUserRequest = {
   name: string
 }
 
-
 export type GetInstanceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -549,7 +515,6 @@ export type GetInstanceCertificateRequest = {
    */
   instanceId: string
 }
-
 
 export type GetInstanceRequest = {
   /**
@@ -562,7 +527,6 @@ export type GetInstanceRequest = {
   instanceId: string
 }
 
-
 export type GetSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -573,7 +537,6 @@ export type GetSnapshotRequest = {
    */
   snapshotId: string
 }
-
 
 export type ListDatabasesRequest = {
   /**
@@ -592,7 +555,6 @@ export type ListDatabasesRequest = {
   pageSize?: number
 }
 
-
 export interface ListDatabasesResponse {
   /**
    * List of the databases.
@@ -603,7 +565,6 @@ export interface ListDatabasesResponse {
    */
   totalCount: number
 }
-
 
 export type ListInstancesRequest = {
   /**
@@ -634,7 +595,6 @@ export type ListInstancesRequest = {
   pageSize?: number
 }
 
-
 export interface ListInstancesResponse {
   /**
    * List of all Database Instances available in an Organization or Project.
@@ -645,7 +605,6 @@ export interface ListInstancesResponse {
    */
   totalCount: number
 }
-
 
 export type ListNodeTypesRequest = {
   /**
@@ -660,7 +619,6 @@ export type ListNodeTypesRequest = {
   pageSize?: number
 }
 
-
 export interface ListNodeTypesResponse {
   /**
    * Types of the node.
@@ -671,7 +629,6 @@ export interface ListNodeTypesResponse {
    */
   totalCount: number
 }
-
 
 export type ListSnapshotsRequest = {
   /**
@@ -702,7 +659,6 @@ export type ListSnapshotsRequest = {
   pageSize?: number
 }
 
-
 export interface ListSnapshotsResponse {
   /**
    * List of all database snapshots available in an Organization or Project.
@@ -713,7 +669,6 @@ export interface ListSnapshotsResponse {
    */
   totalCount: number
 }
-
 
 export type ListUsersRequest = {
   /**
@@ -736,7 +691,6 @@ export type ListUsersRequest = {
   pageSize?: number
 }
 
-
 export interface ListUsersResponse {
   /**
    * List of users in a Database Instance.
@@ -748,7 +702,6 @@ export interface ListUsersResponse {
   totalCount: number
 }
 
-
 export type ListVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -758,7 +711,6 @@ export type ListVersionsRequest = {
   page?: number
   pageSize?: number
 }
-
 
 export interface ListVersionsResponse {
   /**
@@ -770,7 +722,6 @@ export interface ListVersionsResponse {
    */
   totalCount: number
 }
-
 
 export type RestoreSnapshotRequest = {
   /**
@@ -799,7 +750,6 @@ export type RestoreSnapshotRequest = {
   volumeType: VolumeType
 }
 
-
 export type SetUserRoleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -818,7 +768,6 @@ export type SetUserRoleRequest = {
    */
   roles?: UserRole[]
 }
-
 
 export type UpdateInstanceRequest = {
   /**
@@ -851,7 +800,6 @@ export type UpdateInstanceRequest = {
   isSnapshotScheduleEnabled?: boolean
 }
 
-
 export type UpdateSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -870,7 +818,6 @@ export type UpdateSnapshotRequest = {
    */
   expiresAt?: Date
 }
-
 
 export type UpdateUserRequest = {
   /**
@@ -891,7 +838,6 @@ export type UpdateUserRequest = {
   password?: string
 }
 
-
 export type UpgradeInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -908,5 +854,3 @@ export type UpgradeInstanceRequest = {
    */
   volumeSizeBytes?: number
 }
-
-

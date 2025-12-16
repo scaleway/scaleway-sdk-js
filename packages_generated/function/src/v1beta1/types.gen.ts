@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
-
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
 export type CronStatus =
   | 'unknown'
@@ -25,10 +24,7 @@ export type FunctionHttpOption =
   | 'enabled'
   | 'redirected'
 
-export type FunctionPrivacy =
-  | 'unknown_privacy'
-  | 'public'
-  | 'private'
+export type FunctionPrivacy = 'unknown_privacy' | 'public' | 'private'
 
 export type FunctionRuntime =
   | 'unknown_runtime'
@@ -67,10 +63,7 @@ export type FunctionRuntime =
   | 'rust185'
   | 'php84'
 
-export type FunctionSandbox =
-  | 'unknown_sandbox'
-  | 'v1'
-  | 'v2'
+export type FunctionSandbox = 'unknown_sandbox' | 'v1' | 'v2'
 
 export type FunctionStatus =
   | 'unknown'
@@ -82,9 +75,7 @@ export type FunctionStatus =
   | 'pending'
   | 'created'
 
-export type ListCronsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListCronsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListDomainsRequestOrderBy =
   | 'created_at_asc'
@@ -104,13 +95,9 @@ export type ListNamespacesRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListTokensRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListTriggersRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListTriggersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type NamespaceStatus =
   | 'unknown'
@@ -156,7 +143,6 @@ export interface SecretHashedValue {
   hashedValue: string
 }
 
-
 export interface TriggerMnqNatsClientConfig {
   /**
    * Name of the NATS subject the trigger listens to.
@@ -180,7 +166,6 @@ export interface TriggerMnqNatsClientConfig {
   mnqCredentialId?: string
 }
 
-
 export interface TriggerMnqSqsClientConfig {
   /**
    * Name of the SQS queue the trigger listens to.
@@ -200,7 +185,6 @@ export interface TriggerMnqSqsClientConfig {
   mnqCredentialId?: string
 }
 
-
 export interface TriggerSqsClientConfig {
   endpoint: string
   queueUrl: string
@@ -208,12 +192,10 @@ export interface TriggerSqsClientConfig {
   secretKey: string
 }
 
-
 export interface Secret {
   key: string
   value?: string
 }
-
 
 export interface CreateTriggerRequestMnqNatsClientConfig {
   /**
@@ -234,7 +216,6 @@ export interface CreateTriggerRequestMnqNatsClientConfig {
   mnqRegion: string
 }
 
-
 export interface CreateTriggerRequestMnqSqsClientConfig {
   /**
    * Name of the SQS queue the trigger should listen to.
@@ -250,14 +231,12 @@ export interface CreateTriggerRequestMnqSqsClientConfig {
   mnqRegion: string
 }
 
-
 export interface CreateTriggerRequestSqsClientConfig {
   endpoint: string
   queueUrl: string
   accessKey: string
   secretKey: string
 }
-
 
 export interface Cron {
   /**
@@ -286,7 +265,6 @@ export interface Cron {
   name: string
 }
 
-
 export interface Domain {
   /**
    * UUID of the domain.
@@ -314,7 +292,6 @@ export interface Domain {
   errorMessage?: string
 }
 
-
 export interface Runtime {
   name: string
   language: string
@@ -327,7 +304,6 @@ export interface Runtime {
   implementation: string
   logoUrl: string
 }
-
 
 export interface Function {
   /**
@@ -439,7 +415,6 @@ export interface Function {
   privateNetworkId?: string
 }
 
-
 export interface Namespace {
   /**
    * UUID of the namespace.
@@ -507,7 +482,6 @@ export interface Namespace {
   vpcIntegrationActivated?: boolean
 }
 
-
 export interface Token {
   /**
    * UUID of the token.
@@ -546,7 +520,6 @@ export interface Token {
    */
   expiresAt?: Date
 }
-
 
 export interface Trigger {
   /**
@@ -597,12 +570,10 @@ export interface Trigger {
   sqsConfig?: TriggerSqsClientConfig
 }
 
-
 export interface UpdateTriggerRequestSqsClientConfig {
   accessKey?: string
   secretKey?: string
 }
-
 
 export type CreateCronRequest = {
   /**
@@ -627,7 +598,6 @@ export type CreateCronRequest = {
   name?: string
 }
 
-
 export type CreateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -642,7 +612,6 @@ export type CreateDomainRequest = {
    */
   functionId: string
 }
-
 
 export type CreateFunctionRequest = {
   /**
@@ -714,7 +683,6 @@ export type CreateFunctionRequest = {
   privateNetworkId?: string
 }
 
-
 export type CreateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -747,7 +715,6 @@ export type CreateNamespaceRequest = {
   activateVpcIntegration?: boolean
 }
 
-
 export type CreateTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -774,7 +741,6 @@ export type CreateTokenRequest = {
    */
   expiresAt?: Date
 }
-
 
 export type CreateTriggerRequest = {
   /**
@@ -813,7 +779,6 @@ export type CreateTriggerRequest = {
   sqsConfig?: CreateTriggerRequestSqsClientConfig
 }
 
-
 export type DeleteCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -824,7 +789,6 @@ export type DeleteCronRequest = {
    */
   cronId: string
 }
-
 
 export type DeleteDomainRequest = {
   /**
@@ -837,7 +801,6 @@ export type DeleteDomainRequest = {
   domainId: string
 }
 
-
 export type DeleteFunctionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -848,7 +811,6 @@ export type DeleteFunctionRequest = {
    */
   functionId: string
 }
-
 
 export type DeleteNamespaceRequest = {
   /**
@@ -861,7 +823,6 @@ export type DeleteNamespaceRequest = {
   namespaceId: string
 }
 
-
 export type DeleteTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -872,7 +833,6 @@ export type DeleteTokenRequest = {
    */
   tokenId: string
 }
-
 
 export type DeleteTriggerRequest = {
   /**
@@ -885,7 +845,6 @@ export type DeleteTriggerRequest = {
   triggerId: string
 }
 
-
 export type DeployFunctionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -897,12 +856,10 @@ export type DeployFunctionRequest = {
   functionId: string
 }
 
-
 export interface DownloadURL {
   url: string
   headers: Record<string, string[]>
 }
-
 
 export type GetCronRequest = {
   /**
@@ -915,7 +872,6 @@ export type GetCronRequest = {
   cronId: string
 }
 
-
 export type GetDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -926,7 +882,6 @@ export type GetDomainRequest = {
    */
   domainId: string
 }
-
 
 export type GetFunctionDownloadURLRequest = {
   /**
@@ -939,7 +894,6 @@ export type GetFunctionDownloadURLRequest = {
   functionId: string
 }
 
-
 export type GetFunctionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -950,7 +904,6 @@ export type GetFunctionRequest = {
    */
   functionId: string
 }
-
 
 export type GetFunctionUploadURLRequest = {
   /**
@@ -967,7 +920,6 @@ export type GetFunctionUploadURLRequest = {
   contentLength: number
 }
 
-
 export type GetNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -978,7 +930,6 @@ export type GetNamespaceRequest = {
    */
   namespaceId: string
 }
-
 
 export type GetTokenRequest = {
   /**
@@ -991,7 +942,6 @@ export type GetTokenRequest = {
   tokenId: string
 }
 
-
 export type GetTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1002,7 +952,6 @@ export type GetTriggerRequest = {
    */
   triggerId: string
 }
-
 
 export type ListCronsRequest = {
   /**
@@ -1027,7 +976,6 @@ export type ListCronsRequest = {
   functionId: string
 }
 
-
 export interface ListCronsResponse {
   /**
    * Array of crons.
@@ -1038,7 +986,6 @@ export interface ListCronsResponse {
    */
   totalCount: number
 }
-
 
 export type ListDomainsRequest = {
   /**
@@ -1063,7 +1010,6 @@ export type ListDomainsRequest = {
   functionId: string
 }
 
-
 export interface ListDomainsResponse {
   /**
    * Array of domains.
@@ -1075,14 +1021,12 @@ export interface ListDomainsResponse {
   totalCount: number
 }
 
-
 export type ListFunctionRuntimesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
 }
-
 
 export interface ListFunctionRuntimesResponse {
   /**
@@ -1094,7 +1038,6 @@ export interface ListFunctionRuntimesResponse {
    */
   totalCount: number
 }
-
 
 export type ListFunctionsRequest = {
   /**
@@ -1131,7 +1074,6 @@ export type ListFunctionsRequest = {
   projectId?: string
 }
 
-
 export interface ListFunctionsResponse {
   /**
    * Array of functions.
@@ -1142,7 +1084,6 @@ export interface ListFunctionsResponse {
    */
   totalCount: number
 }
-
 
 export type ListNamespacesRequest = {
   /**
@@ -1175,7 +1116,6 @@ export type ListNamespacesRequest = {
   projectId?: string
 }
 
-
 export interface ListNamespacesResponse {
   namespaces: Namespace[]
   /**
@@ -1183,7 +1123,6 @@ export interface ListNamespacesResponse {
    */
   totalCount: number
 }
-
 
 export type ListTokensRequest = {
   /**
@@ -1212,12 +1151,10 @@ export type ListTokensRequest = {
   namespaceId?: string
 }
 
-
 export interface ListTokensResponse {
   tokens: Token[]
   totalCount: number
 }
-
 
 export type ListTriggersRequest = {
   /**
@@ -1256,7 +1193,6 @@ export type ListTriggersRequest = {
   projectId?: string
 }
 
-
 export interface ListTriggersResponse {
   /**
    * Total count of existing triggers (matching any filters specified).
@@ -1267,7 +1203,6 @@ export interface ListTriggersResponse {
    */
   triggers: Trigger[]
 }
-
 
 export type UpdateCronRequest = {
   /**
@@ -1295,7 +1230,6 @@ export type UpdateCronRequest = {
    */
   name?: string
 }
-
 
 export type UpdateFunctionRequest = {
   /**
@@ -1381,7 +1315,6 @@ For example, the following payload will delete the `TO_DELETE` secret environmen
   privateNetworkId?: string
 }
 
-
 export type UpdateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1409,7 +1342,6 @@ export type UpdateNamespaceRequest = {
   tags?: string[]
 }
 
-
 export type UpdateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1435,7 +1367,6 @@ export type UpdateTriggerRequest = {
   sqsConfig?: UpdateTriggerRequestSqsClientConfig
 }
 
-
 export interface UploadURL {
   /**
    * Upload URL to upload the function to.
@@ -1446,5 +1377,3 @@ export interface UploadURL {
    */
   headers: Record<string, string[]>
 }
-
-

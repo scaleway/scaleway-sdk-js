@@ -1,5 +1,8 @@
-
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+} from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Impact,
@@ -36,7 +39,9 @@ const unmarshalSkuImpact = (data: unknown): SkuImpact => {
     productCategory: data.product_category,
     serviceCategory: data.service_category,
     sku: data.sku,
-    totalSkuImpact: data.total_sku_impact ? unmarshalImpact(data.total_sku_impact) : undefined,
+    totalSkuImpact: data.total_sku_impact
+      ? unmarshalImpact(data.total_sku_impact)
+      : undefined,
   } as SkuImpact
 }
 
@@ -49,7 +54,9 @@ const unmarshalZoneImpact = (data: unknown): ZoneImpact => {
 
   return {
     skus: unmarshalArrayOfObject(data.skus, unmarshalSkuImpact),
-    totalZoneImpact: data.total_zone_impact ? unmarshalImpact(data.total_zone_impact) : undefined,
+    totalZoneImpact: data.total_zone_impact
+      ? unmarshalImpact(data.total_zone_impact)
+      : undefined,
     zone: data.zone,
   } as ZoneImpact
 }
@@ -63,7 +70,9 @@ const unmarshalRegionImpact = (data: unknown): RegionImpact => {
 
   return {
     region: data.region,
-    totalRegionImpact: data.total_region_impact ? unmarshalImpact(data.total_region_impact) : undefined,
+    totalRegionImpact: data.total_region_impact
+      ? unmarshalImpact(data.total_region_impact)
+      : undefined,
     zones: unmarshalArrayOfObject(data.zones, unmarshalZoneImpact),
   } as RegionImpact
 }
@@ -78,11 +87,15 @@ const unmarshalProjectImpact = (data: unknown): ProjectImpact => {
   return {
     projectId: data.project_id,
     regions: unmarshalArrayOfObject(data.regions, unmarshalRegionImpact),
-    totalProjectImpact: data.total_project_impact ? unmarshalImpact(data.total_project_impact) : undefined,
+    totalProjectImpact: data.total_project_impact
+      ? unmarshalImpact(data.total_project_impact)
+      : undefined,
   } as ProjectImpact
 }
 
-export const unmarshalImpactDataResponse = (data: unknown): ImpactDataResponse => {
+export const unmarshalImpactDataResponse = (
+  data: unknown,
+): ImpactDataResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ImpactDataResponse' failed as data isn't a dictionary.`,
@@ -93,11 +106,15 @@ export const unmarshalImpactDataResponse = (data: unknown): ImpactDataResponse =
     endDate: unmarshalDate(data.end_date),
     projects: unmarshalArrayOfObject(data.projects, unmarshalProjectImpact),
     startDate: unmarshalDate(data.start_date),
-    totalImpact: data.total_impact ? unmarshalImpact(data.total_impact) : undefined,
+    totalImpact: data.total_impact
+      ? unmarshalImpact(data.total_impact)
+      : undefined,
   } as ImpactDataResponse
 }
 
-export const unmarshalImpactReportAvailability = (data: unknown): ImpactReportAvailability => {
+export const unmarshalImpactReportAvailability = (
+  data: unknown,
+): ImpactReportAvailability => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ImpactReportAvailability' failed as data isn't a dictionary.`,
@@ -105,7 +122,10 @@ export const unmarshalImpactReportAvailability = (data: unknown): ImpactReportAv
   }
 
   return {
-    monthSummaryReports: unmarshalArrayOfObject(data.month_summary_reports, unmarshalDate),
+    monthSummaryReports: unmarshalArrayOfObject(
+      data.month_summary_reports,
+      unmarshalDate,
+    ),
   } as ImpactReportAvailability
 }
 

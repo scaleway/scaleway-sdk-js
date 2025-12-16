@@ -1,7 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+} from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Contract,
@@ -45,7 +50,9 @@ const unmarshalContract = (data: unknown): Contract => {
   } as Contract
 }
 
-export const unmarshalContractSignature = (data: unknown): ContractSignature => {
+export const unmarshalContractSignature = (
+  data: unknown,
+): ContractSignature => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ContractSignature' failed as data isn't a dictionary.`,
@@ -62,7 +69,9 @@ export const unmarshalContractSignature = (data: unknown): ContractSignature => 
   } as ContractSignature
 }
 
-const unmarshalQualificationAiMachine = (data: unknown): QualificationAiMachine => {
+const unmarshalQualificationAiMachine = (
+  data: unknown,
+): QualificationAiMachine => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationAiMachine' failed as data isn't a dictionary.`,
@@ -74,7 +83,9 @@ const unmarshalQualificationAiMachine = (data: unknown): QualificationAiMachine 
   } as QualificationAiMachine
 }
 
-const unmarshalQualificationArchiveData = (data: unknown): QualificationArchiveData => {
+const unmarshalQualificationArchiveData = (
+  data: unknown,
+): QualificationArchiveData => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationArchiveData' failed as data isn't a dictionary.`,
@@ -86,7 +97,9 @@ const unmarshalQualificationArchiveData = (data: unknown): QualificationArchiveD
   } as QualificationArchiveData
 }
 
-const unmarshalQualificationContainer = (data: unknown): QualificationContainer => {
+const unmarshalQualificationContainer = (
+  data: unknown,
+): QualificationContainer => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationContainer' failed as data isn't a dictionary.`,
@@ -98,7 +111,9 @@ const unmarshalQualificationContainer = (data: unknown): QualificationContainer 
   } as QualificationContainer
 }
 
-const unmarshalQualificationDeploySoftware = (data: unknown): QualificationDeploySoftware => {
+const unmarshalQualificationDeploySoftware = (
+  data: unknown,
+): QualificationDeploySoftware => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationDeploySoftware' failed as data isn't a dictionary.`,
@@ -110,7 +125,9 @@ const unmarshalQualificationDeploySoftware = (data: unknown): QualificationDeplo
   } as QualificationDeploySoftware
 }
 
-const unmarshalQualificationHostApplication = (data: unknown): QualificationHostApplication => {
+const unmarshalQualificationHostApplication = (
+  data: unknown,
+): QualificationHostApplication => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationHostApplication' failed as data isn't a dictionary.`,
@@ -122,7 +139,9 @@ const unmarshalQualificationHostApplication = (data: unknown): QualificationHost
   } as QualificationHostApplication
 }
 
-const unmarshalQualificationHostWebsite = (data: unknown): QualificationHostWebsite => {
+const unmarshalQualificationHostWebsite = (
+  data: unknown,
+): QualificationHostWebsite => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationHostWebsite' failed as data isn't a dictionary.`,
@@ -134,7 +153,9 @@ const unmarshalQualificationHostWebsite = (data: unknown): QualificationHostWebs
   } as QualificationHostWebsite
 }
 
-const unmarshalQualificationOtherUseCase = (data: unknown): QualificationOtherUseCase => {
+const unmarshalQualificationOtherUseCase = (
+  data: unknown,
+): QualificationOtherUseCase => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationOtherUseCase' failed as data isn't a dictionary.`,
@@ -146,7 +167,9 @@ const unmarshalQualificationOtherUseCase = (data: unknown): QualificationOtherUs
   } as QualificationOtherUseCase
 }
 
-const unmarshalQualificationSetScalewayEnvironment = (data: unknown): QualificationSetScalewayEnvironment => {
+const unmarshalQualificationSetScalewayEnvironment = (
+  data: unknown,
+): QualificationSetScalewayEnvironment => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationSetScalewayEnvironment' failed as data isn't a dictionary.`,
@@ -158,7 +181,9 @@ const unmarshalQualificationSetScalewayEnvironment = (data: unknown): Qualificat
   } as QualificationSetScalewayEnvironment
 }
 
-const unmarshalQualificationShareData = (data: unknown): QualificationShareData => {
+const unmarshalQualificationShareData = (
+  data: unknown,
+): QualificationShareData => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'QualificationShareData' failed as data isn't a dictionary.`,
@@ -178,16 +203,36 @@ const unmarshalQualification = (data: unknown): Qualification => {
   }
 
   return {
-    aiMachine: data.ai_machine ? unmarshalQualificationAiMachine(data.ai_machine) : undefined,
+    aiMachine: data.ai_machine
+      ? unmarshalQualificationAiMachine(data.ai_machine)
+      : undefined,
     architectureType: data.architecture_type,
-    archiveData: data.archive_data ? unmarshalQualificationArchiveData(data.archive_data) : undefined,
-    container: data.container ? unmarshalQualificationContainer(data.container) : undefined,
-    deploySoftware: data.deploy_software ? unmarshalQualificationDeploySoftware(data.deploy_software) : undefined,
-    hostApplication: data.host_application ? unmarshalQualificationHostApplication(data.host_application) : undefined,
-    hostWebsite: data.host_website ? unmarshalQualificationHostWebsite(data.host_website) : undefined,
-    otherUseCase: data.other_use_case ? unmarshalQualificationOtherUseCase(data.other_use_case) : undefined,
-    setScalewayEnvironment: data.set_scaleway_environment ? unmarshalQualificationSetScalewayEnvironment(data.set_scaleway_environment) : undefined,
-    shareData: data.share_data ? unmarshalQualificationShareData(data.share_data) : undefined,
+    archiveData: data.archive_data
+      ? unmarshalQualificationArchiveData(data.archive_data)
+      : undefined,
+    container: data.container
+      ? unmarshalQualificationContainer(data.container)
+      : undefined,
+    deploySoftware: data.deploy_software
+      ? unmarshalQualificationDeploySoftware(data.deploy_software)
+      : undefined,
+    hostApplication: data.host_application
+      ? unmarshalQualificationHostApplication(data.host_application)
+      : undefined,
+    hostWebsite: data.host_website
+      ? unmarshalQualificationHostWebsite(data.host_website)
+      : undefined,
+    otherUseCase: data.other_use_case
+      ? unmarshalQualificationOtherUseCase(data.other_use_case)
+      : undefined,
+    setScalewayEnvironment: data.set_scaleway_environment
+      ? unmarshalQualificationSetScalewayEnvironment(
+          data.set_scaleway_environment,
+        )
+      : undefined,
+    shareData: data.share_data
+      ? unmarshalQualificationShareData(data.share_data)
+      : undefined,
   } as Qualification
 }
 
@@ -204,12 +249,16 @@ export const unmarshalProject = (data: unknown): Project => {
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
-    qualification: data.qualification ? unmarshalQualification(data.qualification) : undefined,
+    qualification: data.qualification
+      ? unmarshalQualification(data.qualification)
+      : undefined,
     updatedAt: unmarshalDate(data.updated_at),
   } as Project
 }
 
-export const unmarshalCheckContractSignatureResponse = (data: unknown): CheckContractSignatureResponse => {
+export const unmarshalCheckContractSignatureResponse = (
+  data: unknown,
+): CheckContractSignatureResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CheckContractSignatureResponse' failed as data isn't a dictionary.`,
@@ -222,7 +271,9 @@ export const unmarshalCheckContractSignatureResponse = (data: unknown): CheckCon
   } as CheckContractSignatureResponse
 }
 
-export const unmarshalListContractSignaturesResponse = (data: unknown): ListContractSignaturesResponse => {
+export const unmarshalListContractSignaturesResponse = (
+  data: unknown,
+): ListContractSignaturesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListContractSignaturesResponse' failed as data isn't a dictionary.`,
@@ -230,12 +281,17 @@ export const unmarshalListContractSignaturesResponse = (data: unknown): ListCont
   }
 
   return {
-    contractSignatures: unmarshalArrayOfObject(data.contract_signatures, unmarshalContractSignature),
+    contractSignatures: unmarshalArrayOfObject(
+      data.contract_signatures,
+      unmarshalContractSignature,
+    ),
     totalCount: data.total_count,
   } as ListContractSignaturesResponse
 }
 
-export const unmarshalListProjectsResponse = (data: unknown): ListProjectsResponse => {
+export const unmarshalListProjectsResponse = (
+  data: unknown,
+): ListProjectsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListProjectsResponse' failed as data isn't a dictionary.`,
@@ -248,7 +304,9 @@ export const unmarshalListProjectsResponse = (data: unknown): ListProjectsRespon
   } as ListProjectsResponse
 }
 
-export const unmarshalProjectQualification = (data: unknown): ProjectQualification => {
+export const unmarshalProjectQualification = (
+  data: unknown,
+): ProjectQualification => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ProjectQualification' failed as data isn't a dictionary.`,
@@ -257,7 +315,9 @@ export const unmarshalProjectQualification = (data: unknown): ProjectQualificati
 
   return {
     projectId: data.project_id,
-    qualification: data.qualification ? unmarshalQualification(data.qualification) : undefined,
+    qualification: data.qualification
+      ? unmarshalQualification(data.qualification)
+      : undefined,
   } as ProjectQualification
 }
 
@@ -356,43 +416,76 @@ const marshalQualification = (
   request: Qualification,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  architecture_type: request.architectureType,  
+  architecture_type: request.architectureType,
   ...resolveOneOf([
-    {param: 'host_website',
-      value: (request.hostWebsite !== undefined) ? marshalQualificationHostWebsite(request.hostWebsite, defaults)
-      : undefined,
+    {
+      param: 'host_website',
+      value:
+        request.hostWebsite !== undefined
+          ? marshalQualificationHostWebsite(request.hostWebsite, defaults)
+          : undefined,
     },
-    {param: 'host_application',
-      value: (request.hostApplication !== undefined) ? marshalQualificationHostApplication(request.hostApplication, defaults)
-      : undefined,
+    {
+      param: 'host_application',
+      value:
+        request.hostApplication !== undefined
+          ? marshalQualificationHostApplication(
+              request.hostApplication,
+              defaults,
+            )
+          : undefined,
     },
-    {param: 'deploy_software',
-      value: (request.deploySoftware !== undefined) ? marshalQualificationDeploySoftware(request.deploySoftware, defaults)
-      : undefined,
+    {
+      param: 'deploy_software',
+      value:
+        request.deploySoftware !== undefined
+          ? marshalQualificationDeploySoftware(request.deploySoftware, defaults)
+          : undefined,
     },
-    {param: 'set_scaleway_environment',
-      value: (request.setScalewayEnvironment !== undefined) ? marshalQualificationSetScalewayEnvironment(request.setScalewayEnvironment, defaults)
-      : undefined,
+    {
+      param: 'set_scaleway_environment',
+      value:
+        request.setScalewayEnvironment !== undefined
+          ? marshalQualificationSetScalewayEnvironment(
+              request.setScalewayEnvironment,
+              defaults,
+            )
+          : undefined,
     },
-    {param: 'ai_machine',
-      value: (request.aiMachine !== undefined) ? marshalQualificationAiMachine(request.aiMachine, defaults)
-      : undefined,
+    {
+      param: 'ai_machine',
+      value:
+        request.aiMachine !== undefined
+          ? marshalQualificationAiMachine(request.aiMachine, defaults)
+          : undefined,
     },
-    {param: 'container',
-      value: (request.container !== undefined) ? marshalQualificationContainer(request.container, defaults)
-      : undefined,
+    {
+      param: 'container',
+      value:
+        request.container !== undefined
+          ? marshalQualificationContainer(request.container, defaults)
+          : undefined,
     },
-    {param: 'archive_data',
-      value: (request.archiveData !== undefined) ? marshalQualificationArchiveData(request.archiveData, defaults)
-      : undefined,
+    {
+      param: 'archive_data',
+      value:
+        request.archiveData !== undefined
+          ? marshalQualificationArchiveData(request.archiveData, defaults)
+          : undefined,
     },
-    {param: 'share_data',
-      value: (request.shareData !== undefined) ? marshalQualificationShareData(request.shareData, defaults)
-      : undefined,
+    {
+      param: 'share_data',
+      value:
+        request.shareData !== undefined
+          ? marshalQualificationShareData(request.shareData, defaults)
+          : undefined,
     },
-    {param: 'other_use_case',
-      value: (request.otherUseCase !== undefined) ? marshalQualificationOtherUseCase(request.otherUseCase, defaults)
-      : undefined,
+    {
+      param: 'other_use_case',
+      value:
+        request.otherUseCase !== undefined
+          ? marshalQualificationOtherUseCase(request.otherUseCase, defaults)
+          : undefined,
     },
   ]),
 })
@@ -401,7 +494,10 @@ export const marshalProjectApiSetProjectQualificationRequest = (
   request: ProjectApiSetProjectQualificationRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  qualification: ((request.qualification !== undefined) ?  marshalQualification(request.qualification, defaults): undefined),
+  qualification:
+    request.qualification !== undefined
+      ? marshalQualification(request.qualification, defaults)
+      : undefined,
 })
 
 export const marshalProjectApiUpdateProjectRequest = (

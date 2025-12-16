@@ -15,8 +15,7 @@ export const ContainerHealthCheckSpecHTTPProbe = {
   },
 }
 
-export const ContainerScalingOption = {
-}
+export const ContainerScalingOption = {}
 
 export const CreateContainerRequest = {
   privateNetworkId: {
