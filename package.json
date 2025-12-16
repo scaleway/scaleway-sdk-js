@@ -23,7 +23,7 @@
     "build:profile": "cross-env PROFILE=true pnpm run build",
     "commit": "npx git-cz -a",
     "doc": "typedoc",
-    "format": "biome format --write .",
+    "format": "biome format --write . --files-ignore-unknown=true --skip packages_generated",
     "format:check": "biome format .",
     "format:generated": "biome check --write --linter-enabled=false packages_generated",
     "validate:generated": "pnpm dlx tsx ./scripts/validateGeneratedExports.ts",
