@@ -26,6 +26,7 @@
     "format": "biome format --write .",
     "format:check": "biome format .",
     "format:generated": "biome check --write --linter-enabled=false packages_generated",
+    "validate:generated": "pnpm dlx tsx ./scripts/validateGeneratedExports.ts",
     "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
     "lint": "biome lint .",
     "check": "biome check .",
