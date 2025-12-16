@@ -4,7 +4,7 @@ import type { DatabaseStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link DatabaseStatus}. */
 export const DATABASE_TRANSIENT_STATUSES: DatabaseStatus[] = [
-  'creating',
-  'deleting',
-  'restoring',
+	'creating',
+	'deleting',
+	'restoring',
 ]
