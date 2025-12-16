@@ -54,6 +54,9 @@
   "overrides": [
     {
       "includes": ["packages_generated/**", "**/dist/**", "coverage/**", "**/examples/**", "**/*.gen.ts"],
+      "formatter": {
+        "enabled": false
+      },
       "linter": {
         "enabled": false
       }
