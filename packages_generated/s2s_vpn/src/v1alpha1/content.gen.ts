@@ -4,7 +4,7 @@ import type { VpnGatewayStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link VpnGatewayStatus}. */
 export const VPN_GATEWAY_TRANSIENT_STATUSES: VpnGatewayStatus[] = [
-  'configuring',
-  'provisioning',
-  'deprovisioning',
+	'configuring',
+	'provisioning',
+	'deprovisioning',
 ]

@@ -4,6 +4,6 @@ import type { FileSystemStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link FileSystemStatus}. */
 export const FILE_SYSTEM_TRANSIENT_STATUSES: FileSystemStatus[] = [
-  'creating',
-  'updating',
+	'creating',
+	'updating',
 ]

@@ -4,7 +4,7 @@ import type { JobRunState } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link JobRunState}. */
 export const JOB_RUN_TRANSIENT_STATUSES: JobRunState[] = [
-  'queued',
-  'scheduled',
-  'running',
+	'queued',
+	'scheduled',
+	'running',
 ]

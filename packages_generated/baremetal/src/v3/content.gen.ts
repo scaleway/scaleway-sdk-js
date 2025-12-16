@@ -4,4 +4,4 @@ import type { ServerPrivateNetworkStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link ServerPrivateNetworkStatus}. */
 export const SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES: ServerPrivateNetworkStatus[] =
-  ['attaching', 'detaching']
+	['attaching', 'detaching']

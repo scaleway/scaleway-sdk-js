@@ -4,10 +4,10 @@ import type { DeploymentStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link DeploymentStatus}. */
 export const DEPLOYMENT_TRANSIENT_STATUSES: DeploymentStatus[] = [
-  'creating',
-  'configuring',
-  'deleting',
-  'locking',
-  'unlocking',
-  'deploying',
+	'creating',
+	'configuring',
+	'deleting',
+	'locking',
+	'unlocking',
+	'deploying',
 ]
