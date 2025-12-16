@@ -4,14 +4,14 @@ import type { DeploymentStatus, ModelStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link DeploymentStatus}. */
 export const DEPLOYMENT_TRANSIENT_STATUSES: DeploymentStatus[] = [
-  'creating',
-  'deploying',
-  'deleting',
-  'scaling',
+	'creating',
+	'deploying',
+	'deleting',
+	'scaling',
 ]
 
 /** Lists transient statutes of the enum {@link ModelStatus}. */
 export const MODEL_TRANSIENT_STATUSES: ModelStatus[] = [
-  'preparing',
-  'downloading',
+	'preparing',
+	'downloading',
 ]

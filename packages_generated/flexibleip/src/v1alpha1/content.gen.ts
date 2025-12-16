@@ -4,12 +4,12 @@ import type { FlexibleIPStatus, MACAddressStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link FlexibleIPStatus}. */
 export const FLEXIBLE_IP_TRANSIENT_STATUSES: FlexibleIPStatus[] = [
-  'updating',
-  'detaching',
+	'updating',
+	'detaching',
 ]
 
 /** Lists transient statutes of the enum {@link MACAddressStatus}. */
 export const MAC_ADDRESS_TRANSIENT_STATUSES: MACAddressStatus[] = [
-  'updating',
-  'deleting',
+	'updating',
+	'deleting',
 ]

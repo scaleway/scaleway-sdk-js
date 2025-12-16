@@ -4,7 +4,7 @@ import type { DedicatedConnectionStatus, LinkStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link DedicatedConnectionStatus}. */
 export const DEDICATED_CONNECTION_TRANSIENT_STATUSES: DedicatedConnectionStatus[] =
-  ['configuring']
+	['configuring']
 
 /** Lists transient statutes of the enum {@link LinkStatus}. */
 export const LINK_TRANSIENT_STATUSES: LinkStatus[] = ['configuring']

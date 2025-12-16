@@ -7,5 +7,5 @@ export const PIPELINE_TRANSIENT_STATUSES: PipelineStatus[] = ['pending']
 
 /** Lists transient statutes of the enum {@link PurgeRequestStatus}. */
 export const PURGE_REQUEST_TRANSIENT_STATUSES: PurgeRequestStatus[] = [
-  'pending',
+	'pending',
 ]

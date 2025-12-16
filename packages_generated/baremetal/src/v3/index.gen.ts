@@ -4,13 +4,13 @@ export { PrivateNetworkAPI } from './api.gen.js'
 export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
-  ListServerPrivateNetworksRequestOrderBy,
-  ListServerPrivateNetworksResponse,
-  PrivateNetworkApiAddServerPrivateNetworkRequest,
-  PrivateNetworkApiDeleteServerPrivateNetworkRequest,
-  PrivateNetworkApiListServerPrivateNetworksRequest,
-  PrivateNetworkApiSetServerPrivateNetworksRequest,
-  ServerPrivateNetwork,
-  ServerPrivateNetworkStatus,
-  SetServerPrivateNetworksResponse,
+	ListServerPrivateNetworksRequestOrderBy,
+	ListServerPrivateNetworksResponse,
+	PrivateNetworkApiAddServerPrivateNetworkRequest,
+	PrivateNetworkApiDeleteServerPrivateNetworkRequest,
+	PrivateNetworkApiListServerPrivateNetworksRequest,
+	PrivateNetworkApiSetServerPrivateNetworksRequest,
+	ServerPrivateNetwork,
+	ServerPrivateNetworkStatus,
+	SetServerPrivateNetworksResponse,
 } from './types.gen.js'

@@ -4,9 +4,9 @@ import type { ClusterStatus } from './types.gen.js'
 
 /** Lists transient statutes of the enum {@link ClusterStatus}. */
 export const CLUSTER_TRANSIENT_STATUSES: ClusterStatus[] = [
-  'provisioning',
-  'configuring',
-  'deleting',
-  'autohealing',
-  'initializing',
+	'provisioning',
+	'configuring',
+	'deleting',
+	'autohealing',
+	'initializing',
 ]
