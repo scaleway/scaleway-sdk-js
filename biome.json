@@ -53,7 +53,7 @@
   },
   "overrides": [
     {
-      "includes": ["packages_generated/**", "**/dist/**", "coverage/**", "**/examples/**", "**/*.gen.ts"],
+      "includes": ["packages_generated/**", "**/dist/**", "coverage/**", "**/examples/**", "**/*.gen.ts", "scripts/templates/**"],
       "formatter": {
         "enabled": false
       },
@@ -62,7 +62,7 @@
       }
     },
     {
-      "includes": ["vite.config.ts", "vitest.config.ts", "**/*.config.ts", "**/*.config.js"],
+      "includes": ["vite.config.ts", "vitest.config.ts", "packages/**/*.config.ts", "packages/**/*.config.js"],
       "linter": {
         "rules": {
           "style": {

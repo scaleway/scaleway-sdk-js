@@ -23,6 +23,12 @@ import { snakeToSlug } from './helpers'
 
 type Scope = '@scaleway' | '@scaleway-internal'
 
+interface SdkPackageJson {
+  dependencies?: Record<string, string>
+  devDependencies?: Record<string, string>
+  [key: string]: unknown
+}
+
 const options: ParseArgsConfig['options'] = {
   'dry-run': { type: 'boolean', default: false },
   src: { type: 'string', default: 'packages_generated' },
@@ -78,7 +84,7 @@ function safeReadJson(path: string): unknown {
 }
 
 function writeJsonIfChanged(path: string, data: unknown) {
-  const newContent = JSON.stringify(data, null, 2) + '\n'
+  const newContent = `${JSON.stringify(data, null, 2)}\n`
   const oldContent = existsSync(path) ? readFileSync(path, 'utf8') : ''
   if (oldContent !== newContent) {
     if (DRY_RUN) {
@@ -95,8 +101,9 @@ function writeJsonIfChanged(path: string, data: unknown) {
 function walkHasGenFiles(root: string): boolean {
   if (!existsSync(root)) return false
   const stack = [root]
-  while (stack.length) {
-    const p = stack.pop()!
+  while (stack.length > 0) {
+    const p = stack.pop()
+    if (!p) break
     const st = statSync(p)
     if (st.isDirectory()) {
       for (const name of readdirSync(p)) stack.push(join(p, name))
@@ -162,7 +169,7 @@ function detectPackageScope(sdkPackageJsonPath: string): Scope {
     warn('⚠️  SDK package.json not found, using @scaleway scope')
     return '@scaleway'
   }
-  const sdkPackage = safeReadJson(sdkPackageJsonPath) as any
+  const sdkPackage = safeReadJson(sdkPackageJsonPath) as SdkPackageJson
   const deps: Record<string, string> = sdkPackage?.dependencies ?? {}
   const hasInternal = Object.keys(deps).some(k =>
     k.startsWith('@scaleway-internal/sdk-'),
@@ -180,7 +187,7 @@ function updateSdkPackageJson(
     return { added: [] }
   }
 
-  const sdkPackage = safeReadJson(sdkPackageJsonPath) as any
+  const sdkPackage = safeReadJson(sdkPackageJsonPath) as SdkPackageJson
   sdkPackage.dependencies = sdkPackage.dependencies ?? {}
   sdkPackage.devDependencies = sdkPackage.devDependencies ?? {}
 
