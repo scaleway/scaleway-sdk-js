@@ -82,7 +82,6 @@ export type {
   HostingApiGetHostingRequest,
   HostingApiGetResourceSummaryRequest,
   HostingApiListHostingsRequest,
-  HostingApiMigrateControlPanelRequest,
   HostingApiRemoveCustomDomainRequest,
   HostingApiResetHostingPasswordRequest,
   HostingApiUpdateHostingRequest,
