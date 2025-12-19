@@ -53,7 +53,10 @@
   },
   "overrides": [
     {
-      "includes": ["packages_generated/**", "**/dist/**", "coverage/**", "**/examples/**", "**/*.gen.ts", "scripts/templates/**"],
+      "includes": ["packages_generated/**", "**/dist/**", "coverage/**", "**/examples/**", "**/*.gen.ts", "scripts/templates/**", "packages/sdk/src/index.gen.ts"],
+      "formatter": {
+        "enabled": false
+      },
       "linter": {
         "enabled": false
       }

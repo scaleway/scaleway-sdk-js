@@ -21,6 +21,10 @@ const CONFIG_FILES = [
 function findConfigFiles(dir: string, fileList: string[] = []): string[] {
   const files = readdirSync(dir)
   for (const file of files) {
+    // Skip node_modules directories
+    if (file === 'node_modules') {
+      continue
+    }
     const filePath = join(dir, file)
     const stat = statSync(filePath)
     if (stat.isDirectory()) {
