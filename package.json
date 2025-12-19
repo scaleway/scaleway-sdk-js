@@ -15,7 +15,7 @@
     "generatePackages": "pnpm dlx tsx ./scripts/generatePackages.ts",
     "generateGlobalSdkPackage": "pnpm dlx tsx ./scripts/updateGlobalSdkPackage.ts",
     "setupNewProducts": "pnpm dlx tsx ./scripts/setupNewProducts.ts",
-    "prebuild": "pnpm run generatePackages && pnpm run generateAlias && pnpm biome format --write packages packages/sdk scripts",
+    "prebuild": "pnpm run generatePackages && pnpm run generateAlias && pnpm biome format --write --config-path scripts/templates/biome.generated.json 'packages_generated/**/*.config.ts' 'packages_generated/**/*.json' && pnpm biome format --write packages packages/sdk scripts",
     "build:packages": "pnpm turbo run build",
     "fix-import-extensions": "pnpm dlx tsx ./scripts/fix-import-extensions.ts",
     "build": "pnpm run build:packages && pnpm run fix-import-extensions",
