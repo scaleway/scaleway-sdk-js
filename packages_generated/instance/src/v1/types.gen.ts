@@ -174,6 +174,10 @@ export interface Volume {
 	 */
 	name: string
 	/**
+	 * @deprecated Show the volume NBD export URI (deprecated, will always be empty).
+	 */
+	exportUri?: string
+	/**
 	 * Volume disk size.
 	 */
 	size: number
