@@ -48,19 +48,35 @@ async function main(): Promise<void> {
 
   console.log(`Formatting ${configFiles.length} config file(s)...`)
 
-  // Format all config files at once
-  const filesArg = configFiles.map(f => `"${f}"`).join(' ')
-  try {
-    execSync(
-      `pnpm biome format --write --config-path scripts/templates/biome.generated.json ${filesArg}`,
-      { stdio: 'inherit' },
-    )
-  } catch (error) {
-    console.error(`Error formatting config files:`, error)
-    process.exit(1)
+  // Format files in batches to avoid command line length issues
+  // and handle errors gracefully
+  const batchSize = 50
+  let formattedCount = 0
+  let errorCount = 0
+
+  for (let i = 0; i < configFiles.length; i += batchSize) {
+    const batch = configFiles.slice(i, i + batchSize)
+    const filesArg = batch.map(f => `"${f}"`).join(' ')
+    try {
+      execSync(
+        `pnpm biome format --write --files-ignore-unknown=true ${filesArg}`,
+        { stdio: 'pipe' },
+      )
+      formattedCount += batch.length
+    } catch (error) {
+      // Continue with other files even if some fail
+      errorCount += batch.length
+      console.warn(`Warning: Failed to format ${batch.length} file(s)`)
+    }
   }
 
-  console.log('✅ Config files formatted successfully')
+  if (errorCount > 0) {
+    console.warn(
+      `⚠️  Formatted ${formattedCount} file(s), ${errorCount} file(s) had errors`,
+    )
+  } else {
+    console.log(`✅ Formatted ${formattedCount} config file(s) successfully`)
+  }
 }
 
 main().catch(error => {
