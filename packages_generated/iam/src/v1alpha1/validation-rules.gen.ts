@@ -73,7 +73,7 @@ export const CreateUserRequestMember = {
 		ignoreEmpty: true,
 	},
 	username: {
-		maxLength: 64,
+		maxLength: 150,
 		minLength: 2,
 		pattern: /^[a-zA-Z0-9@._-]+$/,
 	},
@@ -325,7 +325,7 @@ export const UpdateUserRequest = {
 
 export const UpdateUserUsernameRequest = {
 	username: {
-		maxLength: 64,
+		maxLength: 150,
 		minLength: 2,
 		pattern: /^[a-zA-Z0-9@._-]+$/,
 	},
