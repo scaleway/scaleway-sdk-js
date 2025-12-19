@@ -16,7 +16,8 @@
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 80,
-    "attributePosition": "auto"
+    "attributePosition": "auto",
+    "includes": ["**", "!**/*.gen.ts", "!packages_generated/**/*.ts", "!packages_generated/**/*.json", "!packages_generated/**/*.config.ts", "!packages/sdk/src/index.gen.ts"]
   },
   "javascript": {
     "formatter": {
