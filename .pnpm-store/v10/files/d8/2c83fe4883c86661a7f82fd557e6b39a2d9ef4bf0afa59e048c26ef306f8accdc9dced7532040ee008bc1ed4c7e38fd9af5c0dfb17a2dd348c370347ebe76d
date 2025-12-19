@@ -1,0 +1,808 @@
+import pc from 'picocolors';
+import util from 'node:util';
+import { getPackages } from '@manypkg/get-packages';
+import * as semver from 'semver';
+import semver__default, { validRange } from 'semver';
+import { highest, upperBoundOfRangeAWithinBoundsOfB } from 'sembear';
+import validateNpmPackageName from 'validate-npm-package-name';
+import parseGithubUrl from 'parse-github-url';
+import normalizePath from 'normalize-path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { exec } from 'tinyexec';
+import detectIndent from 'detect-indent';
+import pLimit from 'p-limit';
+
+function format(args, messageType, scope) {
+  let prefix = {
+    error: pc.red("error"),
+    success: pc.green("success"),
+    info: pc.cyan("info")
+  }[messageType];
+  let fullPrefix = "☔️ " + prefix + (scope === undefined ? "" : " " + scope);
+  return fullPrefix + util.format("", ...args).split("\n").join("\n" + fullPrefix + " ");
+}
+function error(message, scope) {
+  console.error(format([message], "error", scope));
+}
+function success(message, scope) {
+  console.log(format([message], "success", scope));
+}
+function info(message, scope) {
+  console.log(format([message], "info", scope));
+}
+
+const NORMAL_DEPENDENCY_TYPES = ["dependencies", "devDependencies", "optionalDependencies"];
+const DEPENDENCY_TYPES = ["dependencies", "devDependencies", "optionalDependencies", "peerDependencies"];
+function sortObject(prevObj) {
+  let newObj = {};
+  for (let key of Object.keys(prevObj).sort()) {
+    newObj[key] = prevObj[key];
+  }
+  return newObj;
+}
+function sortDeps(pkg) {
+  for (let depType of DEPENDENCY_TYPES) {
+    let prevDeps = pkg.packageJson[depType];
+    if (prevDeps) {
+      pkg.packageJson[depType] = sortObject(prevDeps);
+    }
+  }
+}
+function weakMemoize(func) {
+  let cache = new WeakMap();
+  return arg => {
+    if (cache.has(arg)) {
+      return cache.get(arg);
+    }
+    let ret = func(arg);
+    cache.set(arg, ret);
+    return ret;
+  };
+}
+let getMostCommonRangeMap = weakMemoize(function getMostCommonRanges(allPackages) {
+  let dependencyRangesMapping = new Map();
+  for (let [pkgName, pkg] of allPackages) {
+    for (let depType of NORMAL_DEPENDENCY_TYPES) {
+      let deps = pkg.packageJson[depType];
+      if (deps) {
+        for (let depName in deps) {
+          const depSpecifier = deps[depName];
+          if (!allPackages.has(depName)) {
+            if (!semver.validRange(deps[depName])) {
+              continue;
+            }
+            let dependencyRanges = dependencyRangesMapping.get(depName) || {};
+            const specifierCount = dependencyRanges[depSpecifier] || 0;
+            dependencyRanges[depSpecifier] = specifierCount + 1;
+            dependencyRangesMapping.set(depName, dependencyRanges);
+          }
+        }
+      }
+    }
+  }
+  let mostCommonRangeMap = new Map();
+  for (let [depName, specifierMap] of dependencyRangesMapping) {
+    const specifierMapEntryArray = Object.entries(specifierMap);
+    const [first] = specifierMapEntryArray;
+    const maxValue = specifierMapEntryArray.reduce((acc, value) => {
+      if (acc[1] === value[1]) {
+        // If all dependency ranges occurances are equal, pick the highest.
+        // It's impossible to infer intention of the developer
+        // when all ranges occur an equal amount of times
+        const highestRange = highest([acc[0], value[0]]);
+        return [highestRange, acc[1]];
+      }
+      if (acc[1] > value[1]) {
+        return acc;
+      }
+      return value;
+    }, first);
+    mostCommonRangeMap.set(depName, maxValue[0]);
+  }
+  return mostCommonRangeMap;
+});
+function versionRangeToRangeType(versionRange) {
+  if (versionRange.charAt(0) === "^") return "^";
+  if (versionRange.charAt(0) === "~") return "~";
+  return "";
+}
+function isArrayEqual(arrA, arrB) {
+  for (var i = 0; i < arrA.length; i++) {
+    if (arrA[i] !== arrB[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+function makeCheck(check) {
+  return check;
+}
+
+var EXTERNAL_MISMATCH = makeCheck({
+  validate: (workspace, allWorkspace) => {
+    let errors = [];
+    let mostCommonRangeMap = getMostCommonRangeMap(allWorkspace);
+    for (let depType of NORMAL_DEPENDENCY_TYPES) {
+      let deps = workspace.packageJson[depType];
+      if (deps) {
+        for (let depName in deps) {
+          let range = deps[depName];
+          let mostCommonRange = mostCommonRangeMap.get(depName);
+          if (mostCommonRange !== undefined && mostCommonRange !== range && validRange(range)) {
+            errors.push({
+              type: "EXTERNAL_MISMATCH",
+              workspace,
+              dependencyName: depName,
+              dependencyRange: range,
+              mostCommonDependencyRange: mostCommonRange
+            });
+          }
+        }
+      }
+    }
+    return errors;
+  },
+  fix: error => {
+    for (let depType of NORMAL_DEPENDENCY_TYPES) {
+      let deps = error.workspace.packageJson[depType];
+      if (deps && deps[error.dependencyName]) {
+        deps[error.dependencyName] = error.mostCommonDependencyRange;
+      }
+    }
+    return {
+      requiresInstall: true
+    };
+  },
+  print: error => `${error.workspace.packageJson.name} has a dependency on ${error.dependencyName}@${error.dependencyRange} but the most common range in the repo is ${error.mostCommonDependencyRange}, the range should be set to ${error.mostCommonDependencyRange}`,
+  type: "all"
+});
+
+var INTERNAL_MISMATCH = makeCheck({
+  validate: (workspace, allWorkspaces) => {
+    let errors = [];
+    for (let depType of NORMAL_DEPENDENCY_TYPES) {
+      let deps = workspace.packageJson[depType];
+      if (deps) {
+        for (let depName in deps) {
+          let range = deps[depName];
+          let dependencyWorkspace = allWorkspaces.get(depName);
+          if (dependencyWorkspace !== undefined && !range.startsWith("npm:") && !range.startsWith("workspace:") && !semver__default.satisfies(dependencyWorkspace.packageJson.version, range)) {
+            errors.push({
+              type: "INTERNAL_MISMATCH",
+              workspace,
+              dependencyWorkspace,
+              dependencyRange: range
+            });
+          }
+        }
+      }
+    }
+    return errors;
+  },
+  fix: error => {
+    for (let depType of NORMAL_DEPENDENCY_TYPES) {
+      let deps = error.workspace.packageJson[depType];
+      if (deps && deps[error.dependencyWorkspace.packageJson.name]) {
+        deps[error.dependencyWorkspace.packageJson.name] = versionRangeToRangeType(deps[error.dependencyWorkspace.packageJson.name]) + error.dependencyWorkspace.packageJson.version;
+      }
+    }
+    return {
+      requiresInstall: true
+    };
+  },
+  print: error => `${error.workspace.packageJson.name} has a dependency on ${error.dependencyWorkspace.packageJson.name}@${error.dependencyRange} but the version of ${error.dependencyWorkspace.packageJson.name} in the repo is ${error.dependencyWorkspace.packageJson.version} which is not within range of the depended on version, please update the dependency version`,
+  type: "all"
+});
+
+var INVALID_DEV_AND_PEER_DEPENDENCY_RELATIONSHIP = makeCheck({
+  type: "all",
+  validate: (workspace, allWorkspaces) => {
+    let errors = [];
+    let peerDeps = workspace.packageJson.peerDependencies;
+    let devDeps = workspace.packageJson.devDependencies || {};
+    if (peerDeps) {
+      for (let depName in peerDeps) {
+        if (!devDeps[depName]) {
+          let highestRanges = getMostCommonRangeMap(allWorkspaces);
+          let idealDevVersion = highestRanges.get(depName);
+          let isInternalDependency = allWorkspaces.has(depName);
+          if (isInternalDependency) {
+            idealDevVersion = "*";
+          } else if (idealDevVersion === undefined) {
+            idealDevVersion = peerDeps[depName];
+          }
+          errors.push({
+            type: "INVALID_DEV_AND_PEER_DEPENDENCY_RELATIONSHIP",
+            workspace,
+            peerVersion: peerDeps[depName],
+            dependencyName: depName,
+            devVersion: null,
+            idealDevVersion
+          });
+        } else if (semver__default.validRange(devDeps[depName]) &&
+        // TODO: we should probably error when a peer dep has an invalid range (in a seperate rule)
+        // (also would be good to do a bit more validation instead of just ignoring invalid ranges for normal dep types)
+        semver__default.validRange(peerDeps[depName]) && !upperBoundOfRangeAWithinBoundsOfB(devDeps[depName], peerDeps[depName])) {
+          let highestRanges = getMostCommonRangeMap(allWorkspaces);
+          let idealDevVersion = highestRanges.get(depName);
+          if (idealDevVersion === undefined) {
+            idealDevVersion = peerDeps[depName];
+          }
+          errors.push({
+            type: "INVALID_DEV_AND_PEER_DEPENDENCY_RELATIONSHIP",
+            workspace,
+            dependencyName: depName,
+            peerVersion: peerDeps[depName],
+            devVersion: devDeps[depName],
+            idealDevVersion
+          });
+        }
+      }
+    }
+    return errors;
+  },
+  fix: error => {
+    if (!error.workspace.packageJson.devDependencies) {
+      error.workspace.packageJson.devDependencies = {};
+    }
+    error.workspace.packageJson.devDependencies[error.dependencyName] = error.idealDevVersion;
+    return {
+      requiresInstall: true
+    };
+  },
+  print: error => {
+    if (error.devVersion === null) {
+      return `${error.workspace.packageJson.name} has a peerDependency on ${error.dependencyName} but it is not also specified in devDependencies, please add it there.`;
+    }
+    return `${error.workspace.packageJson.name} has a peerDependency on ${error.dependencyName} but the range specified in devDependency is not greater than or equal to the range specified in peerDependencies`;
+  }
+});
+
+var INVALID_PACKAGE_NAME = makeCheck({
+  type: "all",
+  validate: workspace => {
+    if (!workspace.packageJson.name) {
+      return [{
+        type: "INVALID_PACKAGE_NAME",
+        workspace,
+        errors: ["name cannot be undefined"]
+      }];
+    }
+    let validationErrors = validateNpmPackageName(workspace.packageJson.name);
+    let errors = [...(validationErrors.errors || []), ...(validationErrors.warnings || [])];
+    if (errors.length) {
+      return [{
+        type: "INVALID_PACKAGE_NAME",
+        workspace,
+        errors
+      }];
+    }
+    return [];
+  },
+  print: error => {
+    if (!error.workspace.packageJson.name) {
+      return `The package at ${JSON.stringify(error.workspace.relativeDir)} does not have a name`;
+    }
+    return `${error.workspace.packageJson.name} is an invalid package name for the following reasons:\n${error.errors.join("\n")}`;
+  }
+});
+
+var MULTIPLE_DEPENDENCY_TYPES = makeCheck({
+  validate: (workspace, allWorkspaces) => {
+    let dependencies = new Set();
+    let errors = [];
+    if (workspace.packageJson.dependencies) {
+      for (let depName in workspace.packageJson.dependencies) {
+        dependencies.add(depName);
+      }
+    }
+    for (let depType of ["devDependencies", "optionalDependencies"]) {
+      let deps = workspace.packageJson[depType];
+      if (deps) {
+        for (let depName in deps) {
+          if (dependencies.has(depName)) {
+            errors.push({
+              type: "MULTIPLE_DEPENDENCY_TYPES",
+              dependencyType: depType,
+              dependencyName: depName,
+              workspace
+            });
+          }
+        }
+      }
+    }
+    return errors;
+  },
+  type: "all",
+  fix: error => {
+    let deps = error.workspace.packageJson[error.dependencyType];
+    if (deps) {
+      delete deps[error.dependencyName];
+      if (Object.keys(deps).length === 0) {
+        delete error.workspace.packageJson[error.dependencyType];
+      }
+    }
+    return {
+      requiresInstall: true
+    };
+  },
+  print: error => `${error.workspace.packageJson.name} has a dependency and a ${error.dependencyType === "devDependencies" ? "devDependency" : "optionalDependency"} on ${error.dependencyName}, this is unnecessary, it should be removed from ${error.dependencyType}`
+});
+
+var ROOT_HAS_PROD_DEPENDENCIES = makeCheck({
+  type: "root",
+  validate: rootWorkspace => {
+    if (rootWorkspace.packageJson.dependencies) {
+      return [{
+        type: "ROOT_HAS_PROD_DEPENDENCIES",
+        workspace: rootWorkspace
+      }];
+    }
+    return [];
+  },
+  fix: error => {
+    error.workspace.packageJson.devDependencies = sortObject({
+      ...error.workspace.packageJson.devDependencies,
+      ...error.workspace.packageJson.dependencies
+    });
+    delete error.workspace.packageJson.dependencies;
+  },
+  print: () => {
+    return `the root package.json contains ${pc.yellow("dependencies")}, this is disallowed as ${pc.yellow("dependencies")} vs ${pc.green("devDependencies")} in a private package does not affect anything and creates confusion.`;
+  }
+});
+
+var UNSORTED_DEPENDENCIES = makeCheck({
+  type: "all",
+  validate: workspace => {
+    for (let depType of DEPENDENCY_TYPES) {
+      let deps = workspace.packageJson[depType];
+      if (deps && !isArrayEqual(Object.keys(deps), Object.keys(deps).sort())) {
+        return [{
+          type: "UNSORTED_DEPENDENCIES",
+          workspace
+        }];
+      }
+    }
+    return [];
+  },
+  fix: error => {
+    sortDeps(error.workspace);
+  },
+  print: error => `${error.workspace.packageJson.name}'s dependencies are unsorted, this can cause large diffs when packages are added, resulting in dependencies being sorted`
+});
+
+var INCORRECT_REPOSITORY_FIELD = makeCheck({
+  type: "all",
+  validate: (workspace, allWorkspaces, rootWorkspace, options) => {
+    let rootRepositoryField = rootWorkspace?.packageJson?.repository;
+    if (typeof rootRepositoryField === "string") {
+      let result = parseGithubUrl(rootRepositoryField);
+      if (result !== null && (result.host === "github.com" || result.host === "dev.azure.com")) {
+        let baseRepositoryUrl = "";
+        if (result.host === "github.com") {
+          baseRepositoryUrl = `${result.protocol}//${result.host}/${result.owner}/${result.name}`;
+        } else if (result.host === "dev.azure.com") {
+          baseRepositoryUrl = `${result.protocol}//${result.host}/${result.owner}/${result.name}/_git/${result.filepath}`;
+        }
+        if (workspace === rootWorkspace) {
+          let correctRepositoryField = baseRepositoryUrl;
+          if (rootRepositoryField !== correctRepositoryField) {
+            return [{
+              type: "INCORRECT_REPOSITORY_FIELD",
+              workspace,
+              currentRepositoryField: rootRepositoryField,
+              correctRepositoryField
+            }];
+          }
+        } else {
+          let correctRepositoryField = "";
+          if (result.host === "github.com") {
+            correctRepositoryField = `${baseRepositoryUrl}/tree/${options.defaultBranch}/${normalizePath(workspace.relativeDir)}`;
+          } else if (result.host === "dev.azure.com") {
+            correctRepositoryField = `${baseRepositoryUrl}?path=${normalizePath(workspace.relativeDir)}&version=GB${options.defaultBranch}&_a=contents`;
+          }
+          let currentRepositoryField = workspace.packageJson.repository;
+          if (correctRepositoryField !== currentRepositoryField) {
+            return [{
+              type: "INCORRECT_REPOSITORY_FIELD",
+              workspace,
+              currentRepositoryField,
+              correctRepositoryField
+            }];
+          }
+        }
+      }
+    }
+    return [];
+  },
+  fix: error => {
+    error.workspace.packageJson.repository = error.correctRepositoryField;
+  },
+  print: error => {
+    if (error.currentRepositoryField === undefined) {
+      return `${error.workspace.packageJson.name} does not have a repository field when it should be ${JSON.stringify(error.correctRepositoryField)}`;
+    }
+    return `${error.workspace.packageJson.name} has a repository field of ${JSON.stringify(error.currentRepositoryField)} when it should be ${JSON.stringify(error.correctRepositoryField)}`;
+  }
+});
+
+var WORKSPACE_REQUIRED = makeCheck({
+  validate: (workspace, allWorkspaces, root, opts) => {
+    if (opts.workspaceProtocol !== "require") return [];
+    let errors = [];
+    for (let depType of NORMAL_DEPENDENCY_TYPES) {
+      let deps = workspace.packageJson[depType];
+      if (deps) {
+        for (let depName in deps) {
+          if (allWorkspaces.has(depName) && !deps[depName].startsWith("workspace:")) {
+            errors.push({
+              type: "WORKSPACE_REQUIRED",
+              workspace,
+              depName,
+              depType
+            });
+          }
+        }
+      }
+    }
+    return errors;
+  },
+  fix: error => {
+    let deps = error.workspace.packageJson[error.depType];
+    if (deps && deps[error.depName]) {
+      deps[error.depName] = "workspace:^";
+    }
+    return {
+      requiresInstall: true
+    };
+  },
+  print: error => `${error.workspace.packageJson.name} has a dependency on ${error.depName} without using the workspace: protocol but this project requires using the workspace: protocol, please change it to workspace:^ or etc.`,
+  type: "all"
+});
+
+let checks = {
+  EXTERNAL_MISMATCH,
+  INTERNAL_MISMATCH,
+  INVALID_DEV_AND_PEER_DEPENDENCY_RELATIONSHIP,
+  INVALID_PACKAGE_NAME,
+  MULTIPLE_DEPENDENCY_TYPES,
+  ROOT_HAS_PROD_DEPENDENCIES,
+  UNSORTED_DEPENDENCIES,
+  INCORRECT_REPOSITORY_FIELD,
+  WORKSPACE_REQUIRED
+};
+
+class ExitError extends Error {
+  constructor(code) {
+    super(`The process should exit with code ${code}`);
+    this.code = code;
+  }
+}
+
+async function writePackage(pkg) {
+  let pkgRaw = await fs.readFile(path.join(pkg.dir, "package.json"), "utf-8");
+  let indent = detectIndent(pkgRaw).indent || "  ";
+  return fs.writeFile(path.join(pkg.dir, "package.json"), JSON.stringify(pkg.packageJson, null, indent) + (pkgRaw.endsWith("\n") ? "\n" : ""));
+}
+async function install(toolType, cwd) {
+  const cliRunners = {
+    lerna: "lerna",
+    npm: "npm",
+    pnpm: "pnpm",
+    root: "yarn",
+    rush: "rushx",
+    yarn: "yarn"
+  };
+  await exec(cliRunners[toolType], toolType === "npm" || toolType === "pnpm" ? ["install"] : toolType === "lerna" ? ["bootstrap", "--since", "HEAD"] : [], {
+    nodeOptions: {
+      cwd,
+      stdio: "inherit"
+    }
+  });
+}
+
+async function runCmd(args, cwd) {
+  let {
+    packages
+  } = await getPackages(cwd);
+  const exactMatchingPackage = packages.find(pkg => {
+    return pkg.packageJson.name === args[0] || pkg.relativeDir === args[0];
+  });
+  if (exactMatchingPackage) {
+    const {
+      exitCode
+    } = await exec("yarn", args.slice(1), {
+      nodeOptions: {
+        cwd: exactMatchingPackage.dir,
+        stdio: "inherit"
+      }
+    });
+    throw new ExitError(exitCode ?? 1);
+  }
+  const matchingPackages = packages.filter(pkg => {
+    return pkg.packageJson.name.includes(args[0]) || pkg.relativeDir.includes(args[0]);
+  });
+  if (matchingPackages.length > 1) {
+    error(`an identifier must only match a single package but "${args[0]}" matches the following packages: \n${matchingPackages.map(x => x.packageJson.name).join("\n")}`);
+    throw new ExitError(1);
+  } else if (matchingPackages.length === 0) {
+    error("No matching packages found");
+    throw new ExitError(1);
+  } else {
+    const {
+      exitCode
+    } = await exec("yarn", args.slice(1), {
+      nodeOptions: {
+        cwd: matchingPackages[0].dir,
+        stdio: "inherit"
+      }
+    });
+    throw new ExitError(exitCode ?? 1);
+  }
+}
+
+async function upgradeDependency([name, tag = "latest"]) {
+  // handle no name is missing
+  let {
+    packages,
+    tool,
+    rootPackage,
+    rootDir
+  } = await getPackages(process.cwd());
+  let isScope = name.startsWith("@") && !name.includes("/");
+  let newVersion = semver__default.validRange(tag) ? tag : null;
+  let packagesToUpdate = new Set();
+  let filteredPackages = packages.filter(({
+    packageJson
+  }) => {
+    let requiresUpdate = false;
+    DEPENDENCY_TYPES.forEach(t => {
+      let deps = packageJson[t];
+      if (!deps) return;
+      let packageNames = Object.keys(deps);
+      packageNames.forEach(pkgName => {
+        if (isScope && pkgName.startsWith(`${name}/`) || pkgName === name) {
+          requiresUpdate = true;
+          packagesToUpdate.add(pkgName);
+        }
+      });
+    });
+    return requiresUpdate;
+  });
+  if (rootPackage) {
+    let rootRequiresUpdate = false;
+    DEPENDENCY_TYPES.forEach(t => {
+      let deps = rootPackage.packageJson[t];
+      if (!deps) return;
+      let packageNames = Object.keys(deps);
+      packageNames.forEach(pkgName => {
+        if (isScope && pkgName.startsWith(`${name}/`) || pkgName === name) {
+          rootRequiresUpdate = true;
+          packagesToUpdate.add(pkgName);
+        }
+      });
+      if (rootRequiresUpdate) {
+        filteredPackages.push(rootPackage);
+      }
+    });
+  }
+  let newVersions = await Promise.all([...packagesToUpdate].map(async pkgName => {
+    if (!newVersion) {
+      let info = await getPackageInfo(pkgName);
+      let distTags = info["dist-tags"];
+      let version = distTags[tag];
+      return {
+        pkgName,
+        version
+      };
+    } else {
+      return {
+        pkgName,
+        version: newVersion
+      };
+    }
+  }));
+  filteredPackages.forEach(({
+    packageJson
+  }) => {
+    DEPENDENCY_TYPES.forEach(t => {
+      let deps = packageJson[t];
+      if (deps) {
+        newVersions.forEach(({
+          pkgName,
+          version
+        }) => {
+          if (deps[pkgName] && version) {
+            if (!newVersion) {
+              deps[pkgName] = `${versionRangeToRangeType(deps[pkgName])}${version}`;
+            } else {
+              deps[pkgName] = version;
+            }
+          }
+        });
+      }
+    });
+  });
+  await Promise.all([...filteredPackages].map(writePackage));
+  await install(tool.type, rootDir);
+}
+const npmRequestLimit = pLimit(40);
+function getPackageInfo(pkgName) {
+  return npmRequestLimit(async () => {
+    const getPackageJson = (await import('package-json')).default;
+    return getPackageJson(pkgName, {
+      allVersions: true
+    });
+  });
+}
+
+let npmLimit = pLimit(40);
+function getCorrectRegistry() {
+  let registry = process.env.npm_config_registry === "https://registry.yarnpkg.com" ? undefined : process.env.npm_config_registry;
+  return registry;
+}
+async function tagApackage(packageJson, tag, otpCode) {
+  // Due to a super annoying issue in yarn, we have to manually override this env variable
+  // See: https://github.com/yarnpkg/yarn/issues/2935#issuecomment-355292633
+  const envOverride = {
+    npm_config_registry: getCorrectRegistry()
+  };
+  let flags = [];
+  if (otpCode) {
+    flags.push("--otp", otpCode);
+  }
+  return await exec("npm", ["dist-tag", "add", `${packageJson.name}@${packageJson.version}`, tag, ...flags], {
+    nodeOptions: {
+      stdio: "inherit",
+      env: envOverride
+    }
+  });
+}
+async function npmTagAll([tag, _, otp]) {
+  let {
+    packages
+  } = await getPackages(process.cwd());
+  await Promise.all(packages.filter(({
+    packageJson
+  }) => packageJson.private !== true).map(({
+    packageJson
+  }) => npmLimit(() => tagApackage(packageJson, tag, otp))));
+}
+
+let defaultOptions = {
+  defaultBranch: "main"
+};
+let runChecks = (allWorkspaces, rootWorkspace, shouldFix, options) => {
+  let hasErrored = false;
+  let requiresInstall = false;
+  let ignoredRules = new Set(options.ignoredRules || []);
+  for (let [ruleName, check] of Object.entries(checks)) {
+    if (ignoredRules.has(ruleName)) {
+      continue;
+    }
+    if (check.type === "all") {
+      for (let [, workspace] of allWorkspaces) {
+        let errors = check.validate(workspace, allWorkspaces, rootWorkspace, options);
+        if (shouldFix && check.fix !== undefined) {
+          for (let error of errors) {
+            let output = check.fix(error, options) || {
+              requiresInstall: false
+            };
+            if (output.requiresInstall) {
+              requiresInstall = true;
+            }
+          }
+        } else {
+          for (let error$1 of errors) {
+            hasErrored = true;
+            error(check.print(error$1, options));
+          }
+        }
+      }
+    }
+    if (check.type === "root" && rootWorkspace) {
+      let errors = check.validate(rootWorkspace, allWorkspaces, options);
+      if (shouldFix && check.fix !== undefined) {
+        for (let error of errors) {
+          let output = check.fix(error, options) || {
+            requiresInstall: false
+          };
+          if (output.requiresInstall) {
+            requiresInstall = true;
+          }
+        }
+      } else {
+        for (let error$1 of errors) {
+          hasErrored = true;
+          error(check.print(error$1, options));
+        }
+      }
+    }
+  }
+  return {
+    requiresInstall,
+    hasErrored
+  };
+};
+let execLimit = pLimit(4);
+async function execCmd(args) {
+  let {
+    packages
+  } = await getPackages(process.cwd());
+  let highestExitCode = 0;
+  await Promise.all(packages.map(pkg => {
+    return execLimit(async () => {
+      const {
+        exitCode
+      } = await exec(args[0], args.slice(1), {
+        nodeOptions: {
+          cwd: pkg.dir,
+          stdio: "inherit"
+        }
+      });
+      highestExitCode = Math.max(exitCode ?? 1, highestExitCode);
+    });
+  }));
+  throw new ExitError(highestExitCode);
+}
+(async () => {
+  let things = process.argv.slice(2);
+  if (things[0] === "exec") {
+    return execCmd(things.slice(1));
+  }
+  if (things[0] === "run") {
+    return runCmd(things.slice(1), process.cwd());
+  }
+  if (things[0] === "upgrade") {
+    return upgradeDependency(things.slice(1));
+  }
+  if (things[0] === "npm-tag") {
+    return npmTagAll(things.slice(1));
+  }
+  if (things[0] !== "check" && things[0] !== "fix") {
+    error(`command ${things[0]} not found, only check, exec, run, upgrade, npm-tag and fix exist`);
+    throw new ExitError(1);
+  }
+  let shouldFix = things[0] === "fix";
+  let {
+    tool,
+    packages,
+    rootPackage,
+    rootDir
+  } = await getPackages(process.cwd());
+  let options = {
+    ...defaultOptions,
+    ...rootPackage?.packageJson.manypkg
+  };
+  let packagesByName = new Map(packages.map(x => [x.packageJson.name, x]));
+  if (rootPackage) {
+    packagesByName.set(rootPackage.packageJson.name, rootPackage);
+  }
+  let {
+    hasErrored,
+    requiresInstall
+  } = runChecks(packagesByName, rootPackage, shouldFix, options);
+  if (shouldFix) {
+    await Promise.all([...packagesByName].map(async ([pkgName, workspace]) => {
+      writePackage(workspace);
+    }));
+    if (requiresInstall) {
+      await install(tool.type, rootDir);
+    }
+    success(`fixed workspaces!`);
+  } else if (hasErrored) {
+    info(`the above errors may be fixable with yarn manypkg fix`);
+    throw new ExitError(1);
+  } else {
+    success(`workspaces valid!`);
+  }
+})().catch(err => {
+  if (err instanceof ExitError) {
+    process.exit(err.code);
+  } else {
+    error(err);
+    process.exit(1);
+  }
+});

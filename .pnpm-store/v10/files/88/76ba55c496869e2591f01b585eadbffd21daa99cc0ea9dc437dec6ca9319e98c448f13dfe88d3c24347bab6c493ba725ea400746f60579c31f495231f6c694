@@ -1,0 +1,84 @@
+{
+  "name": "babel-plugin-annotate-pure-calls",
+  "version": "0.5.0",
+  "description": "Babel plugin for annotating automatically pure function calls.",
+  "author": "Mateusz Burzyński <mateuszburzynski@gmail.com> (https://github.com/Andarist)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "main": "dist/babel-plugin-annotate-pure-calls.cjs.js",
+  "module": "dist/babel-plugin-annotate-pure-calls.esm.js",
+  "exports": {
+    ".": {
+      "types": {
+        "import": "./dist/babel-plugin-annotate-pure-calls.cjs.mjs",
+        "default": "./dist/babel-plugin-annotate-pure-calls.cjs.js"
+      },
+      "module": "./dist/babel-plugin-annotate-pure-calls.esm.js",
+      "import": "./dist/babel-plugin-annotate-pure-calls.cjs.mjs",
+      "default": "./dist/babel-plugin-annotate-pure-calls.cjs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andarist/babel-plugin-annotate-pure-calls.git"
+  },
+  "keywords": [
+    "babel",
+    "plugin",
+    "pure",
+    "side-effects",
+    "uglifyjs"
+  ],
+  "bugs": {
+    "url": "https://github.com/Andarist/babel-plugin-annotate-pure-calls/issues"
+  },
+  "homepage": "https://github.com/Andarist/babel-plugin-annotate-pure-calls#readme",
+  "peerDependencies": {
+    "@babel/core": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@preconstruct/cli": "^2.8.10",
+    "babel-plugin-tester": "^5.4.0",
+    "husky": "^0.14.3",
+    "jest": "^23.1.0",
+    "lint-staged": "^7.1.3",
+    "prettier": "^1.13.5"
+  },
+  "scripts": {
+    "build": "preconstruct build",
+    "pretest": "npm run build",
+    "test": "jest",
+    "precommit": "lint-staged",
+    "prepare": "npm run build",
+    "prepublish": "test $(npm -v | tr . '\\n' | head -n 1) -ge '4' || exit 1",
+    "preversion": "npm test",
+    "release:patch": "npm version patch && npm publish && git push --follow-tags",
+    "release:minor": "npm version minor && npm publish && git push --follow-tags",
+    "release:major": "npm version major && npm publish && git push --follow-tags"
+  },
+  "prettier": {
+    "lineWidth": 120,
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "all",
+    "proseWrap": "always"
+  },
+  "preconstruct": {
+    "exports": {
+      "importConditionDefaultExport": "default"
+    },
+    "___experimentalFlags_WILL_CHANGE_IN_PATCH": {
+      "importsConditions": true
+    }
+  }
+}

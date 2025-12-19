@@ -1,0 +1,324 @@
+pnpm install
+Scope: all 49 workspace projects
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+   ╭───────────────────────────────────────────────╮
+   │                                               │
+   │     Update available! 10.13.1 → 10.20.0.      │
+   │     Changelog: https://pnpm.io/v/10.20.0      │
+   │   To update, run: corepack use pnpm@10.20.0   │
+   │                                               │
+   ╰───────────────────────────────────────────────╯
+
+(node:20803) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+. prepare$ husky
+. prepare: Done
+Done in 2.6s using pnpm v10.13.1
+# Cleanup unused imports/variables in generated TS with dedicated config
+pnpm biome lint --write --unsafe --config-path scripts/templates/biome.generated.json packages_generated/
+packages_generated/audit_trail/dist/v1alpha1/types.gen.d.ts:78:39 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    76 │   | 'vpc_private_network'
+    77 │ export type SystemEventKind = 'unknown_kind' | 'cron' | 'notification'
+  > 78 │ export type AccountOrganizationInfo = {}
+       │                                       ^^
+    79 │ export interface AccountProjectInfo {
+    80 │   description: string
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/audit_trail/dist/v1alpha1/types.gen.d.ts:103:33 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    101 │   address: string
+    102 │ }
+  > 103 │ export type KeyManagerKeyInfo = {}
+        │                                 ^^
+    104 │ export type KubernetesACLInfo = {}
+    105 │ export type KubernetesClusterInfo = {}
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/audit_trail/dist/v1alpha1/types.gen.d.ts:104:33 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    102 │ }
+    103 │ export type KeyManagerKeyInfo = {}
+  > 104 │ export type KubernetesACLInfo = {}
+        │                                 ^^
+    105 │ export type KubernetesClusterInfo = {}
+    106 │ export interface KubernetesNodeInfo {
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/audit_trail/dist/v1alpha1/types.gen.d.ts:105:37 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    103 │ export type KeyManagerKeyInfo = {}
+    104 │ export type KubernetesACLInfo = {}
+  > 105 │ export type KubernetesClusterInfo = {}
+        │                                     ^^
+    106 │ export interface KubernetesNodeInfo {
+    107 │   id: string
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/audit_trail/src/v1alpha1/types.gen.ts:104:39 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    102 │ export type SystemEventKind = 'unknown_kind' | 'cron' | 'notification'
+    103 │ 
+  > 104 │ export type AccountOrganizationInfo = {}
+        │                                       ^^
+    105 │ 
+    106 │ export interface AccountProjectInfo {
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/audit_trail/src/v1alpha1/types.gen.ts:145:36 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    143 │ }
+    144 │ 
+  > 145 │ export type EdgeServicesPlanInfo = {}
+        │                                    ^^
+    146 │ 
+    147 │ export interface EdgeServicesRouteRulesInfo {
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/audit_trail/src/v1alpha1/types.gen.ts:171:33 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    169 │ }
+    170 │ 
+  > 171 │ export type KeyManagerKeyInfo = {}
+        │                                 ^^
+    172 │ 
+    173 │ export type KubernetesACLInfo = {}
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/audit_trail/src/v1alpha1/types.gen.ts:173:33 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    171 │ export type KeyManagerKeyInfo = {}
+    172 │ 
+  > 173 │ export type KubernetesACLInfo = {}
+        │                                 ^^
+    174 │ 
+    175 │ export type KubernetesClusterInfo = {}
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/audit_trail/src/v1alpha1/types.gen.ts:175:37 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    173 │ export type KubernetesACLInfo = {}
+    174 │ 
+  > 175 │ export type KubernetesClusterInfo = {}
+        │                                     ^^
+    176 │ 
+    177 │ export interface KubernetesNodeInfo {
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/autoscaling/dist/v1alpha1/marshalling.gen.cjs:299:7 lint/performance/noAccumulatingSpread ━━━━━━━━━━
+
+  ! Avoid the use of spread (`...`) syntax on accumulators.
+  
+    297 │   volumes: Object.entries(request.volumes).reduce(
+    298 │     (acc, [key, value]) => ({
+  > 299 │       ...acc,
+        │       ^^^^^^
+    300 │       [key]: marshalVolumeInstanceTemplate(value)
+    301 │     }),
+  
+  i Spread syntax should be avoided on accumulators (like those in `.reduce`) because it causes a time complexity of `O(n^2)`.
+  
+  i Consider methods such as .splice or .push instead.
+  
+
+packages_generated/autoscaling/dist/v1alpha1/marshalling.gen.cjs:358:7 lint/performance/noAccumulatingSpread ━━━━━━━━━━
+
+  ! Avoid the use of spread (`...`) syntax on accumulators.
+  
+    356 │   volumes: request.volumes !== void 0 ? Object.entries(request.volumes).reduce(
+    357 │     (acc, [key, value]) => ({
+  > 358 │       ...acc,
+        │       ^^^^^^
+    359 │       [key]: marshalVolumeInstanceTemplate(value)
+    360 │     }),
+  
+  i Spread syntax should be avoided on accumulators (like those in `.reduce`) because it causes a time complexity of `O(n^2)`.
+  
+  i Consider methods such as .splice or .push instead.
+  
+
+packages_generated/autoscaling/dist/v1alpha1/marshalling.gen.js:312:7 lint/performance/noAccumulatingSpread ━━━━━━━━━━
+
+  ! Avoid the use of spread (`...`) syntax on accumulators.
+  
+    310 │   volumes: Object.entries(request.volumes).reduce(
+    311 │     (acc, [key, value]) => ({
+  > 312 │       ...acc,
+        │       ^^^^^^
+    313 │       [key]: marshalVolumeInstanceTemplate(value),
+    314 │     }),
+  
+  i Spread syntax should be avoided on accumulators (like those in `.reduce`) because it causes a time complexity of `O(n^2)`.
+  
+  i Consider methods such as .splice or .push instead.
+  
+
+packages_generated/autoscaling/dist/v1alpha1/marshalling.gen.js:380:13 lint/performance/noAccumulatingSpread ━━━━━━━━━━
+
+  ! Avoid the use of spread (`...`) syntax on accumulators.
+  
+    378 │       ? Object.entries(request.volumes).reduce(
+    379 │           (acc, [key, value]) => ({
+  > 380 │             ...acc,
+        │             ^^^^^^
+    381 │             [key]: marshalVolumeInstanceTemplate(value),
+    382 │           }),
+  
+  i Spread syntax should be avoided on accumulators (like those in `.reduce`) because it causes a time complexity of `O(n^2)`.
+  
+  i Consider methods such as .splice or .push instead.
+  
+
+packages_generated/autoscaling/src/v1alpha1/marshalling.gen.ts:423:7 lint/performance/noAccumulatingSpread ━━━━━━━━━━
+
+  ! Avoid the use of spread (`...`) syntax on accumulators.
+  
+    421 │   volumes: Object.entries(request.volumes).reduce(
+    422 │     (acc, [key, value]) => ({
+  > 423 │       ...acc,
+        │       ^^^^^^
+    424 │       [key]: marshalVolumeInstanceTemplate(value, defaults),
+    425 │     }),
+  
+  i Spread syntax should be avoided on accumulators (like those in `.reduce`) because it causes a time complexity of `O(n^2)`.
+  
+  i Consider methods such as .splice or .push instead.
+  
+
+packages_generated/autoscaling/src/v1alpha1/marshalling.gen.ts:518:13 lint/performance/noAccumulatingSpread ━━━━━━━━━━
+
+  ! Avoid the use of spread (`...`) syntax on accumulators.
+  
+    516 │       ? Object.entries(request.volumes).reduce(
+    517 │           (acc, [key, value]) => ({
+  > 518 │             ...acc,
+        │             ^^^^^^
+    519 │             [key]: marshalVolumeInstanceTemplate(value, defaults),
+    520 │           }),
+  
+  i Spread syntax should be avoided on accumulators (like those in `.reduce`) because it causes a time complexity of `O(n^2)`.
+  
+  i Consider methods such as .splice or .push instead.
+  
+
+packages_generated/baremetal/dist/v1/types.gen.d.ts:125:35 lint/complexity/noBannedTypes ━━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    123 │   zfs?: SchemaZFS
+    124 │ }
+  > 125 │ export type CertificationOption = {}
+        │                                   ^^
+    126 │ export interface LicenseOption {
+    127 │   osId: string
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/baremetal/dist/v1/types.gen.d.ts:135:34 lint/complexity/noBannedTypes ━━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    133 │   bandwidthInBps: number
+    134 │ }
+  > 135 │ export type RemoteAccessOption = {}
+        │                                  ^^
+    136 │ export interface CreateServerRequestInstall {
+    137 │   /**
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/baremetal/src/v1/types.gen.ts:154:35 lint/complexity/noBannedTypes ━━━━━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    152 │ }
+    153 │ 
+  > 154 │ export type CertificationOption = {}
+        │                                   ^^
+    155 │ 
+    156 │ export interface LicenseOption {
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/baremetal/src/v1/types.gen.ts:168:34 lint/complexity/noBannedTypes ━━━━━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    166 │ }
+    167 │ 
+  > 168 │ export type RemoteAccessOption = {}
+        │                                  ^^
+    169 │ 
+    170 │ export interface CreateServerRequestInstall {
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+packages_generated/container/dist/v1beta1/validation-rules.gen.d.ts:13:46 lint/complexity/noBannedTypes ━━━━━━━━━━
+
+  ! Don't use '{}' as a type.
+  
+    11 │   }
+    12 │ }
+  > 13 │ export declare const ContainerScalingOption: {}
+       │                                              ^^
+    14 │ export declare const CreateContainerRequest: {
+    15 │   privateNetworkId: {
+  
+  i Prefer explicitly define the object shape. '{}' means "any non-nullable value".
+  
+
+The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
+Diagnostics not shown: 96.
+Checked 1326 files in 2s. Fixed 161 files.
+Found 4 errors.
+Found 112 warnings.
+lint ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+
+make: *** [format-generated] Error 1

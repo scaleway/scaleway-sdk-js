@@ -1,0 +1,1 @@
+{"version":3,"file":"ConfigCache.d.ts","sourceRoot":"","sources":["../src/ConfigCache.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,eAAe,EAAE,MAAM,yBAAyB,CAAC;AAsB1D,qBAAa,WAAW;IAEtB,OAAO,CAAC,MAAM,CAAC,cAAc,CAAgE;IAC7F,OAAO,CAAC,MAAM,CAAC,YAAY,CAAkC;IAE7D;;OAEG;IACH,OAAO,CAAC,MAAM,CAAC,YAAY;WAKb,gBAAgB,CAC5B,cAAc,EAAE,MAAM,EACtB,eAAe,CAAC,EAAE,MAAM,GAAG,SAAS,GACnC,eAAe;CAsEnB"}

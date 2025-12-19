@@ -1,0 +1,43 @@
+/**
+ * Adapted from deprecated package https://github.com/npm/gauge/blob/f8092518a47ac6a96027ae3ad97d0251ffe7643b/lib/index.js
+ */
+export declare class Gauge {
+    private _status;
+    private _paused;
+    private _disabled;
+    private _showing;
+    private _onScreen;
+    private _needsRedraw;
+    private _hideCursor;
+    private _fixedFramerate;
+    private _lastUpdateAt;
+    private _updateInterval;
+    private _themes;
+    private _theme;
+    private _gauge;
+    private _tty;
+    private _writeTo;
+    private _$$doRedraw;
+    private _$$handleSizeChange;
+    private _cleanupOnExit;
+    private _removeOnExit;
+    private redrawTracker;
+    constructor(arg1?: any, arg2?: any);
+    isEnabled(): boolean;
+    setTemplate(template: any): void;
+    private _computeTheme;
+    setThemeset(themes: any): void;
+    setTheme(theme: any): void;
+    private _requestRedraw;
+    getWidth(): number;
+    setWriteTo(writeTo: any, tty: any): void;
+    enable(): void;
+    disable(): void;
+    private _enableEvents;
+    private _disableEvents;
+    hide(cb?: () => void): any;
+    show(section?: string | object, completed?: number): void;
+    pulse(subsection?: string): void;
+    private _handleSizeChange;
+    private _doRedraw;
+}

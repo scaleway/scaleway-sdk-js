@@ -1,0 +1,2 @@
+import "./babel-plugin-annotate-pure-calls.cjs.js";
+export { _default as default } from "./babel-plugin-annotate-pure-calls.cjs.default.js";

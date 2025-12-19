@@ -1,0 +1,1 @@
+exports._default = require("./babel-plugin-annotate-pure-calls.cjs.js").default;

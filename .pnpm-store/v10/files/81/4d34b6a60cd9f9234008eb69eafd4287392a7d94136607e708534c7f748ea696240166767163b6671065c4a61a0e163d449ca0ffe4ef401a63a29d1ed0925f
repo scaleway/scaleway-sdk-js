@@ -1,0 +1,38 @@
+{
+  "name": "@emotion/eslint-plugin",
+  "version": "11.12.0",
+  "description": "ESLint rules for emotion",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "emotion"
+  ],
+  "author": "alex-pex <alexandre.paixao@stadline.com>",
+  "main": "dist/emotion-eslint-plugin.cjs.js",
+  "module": "dist/emotion-eslint-plugin.esm.js",
+  "exports": {
+    ".": {
+      "module": "./dist/emotion-eslint-plugin.esm.js",
+      "import": "./dist/emotion-eslint-plugin.cjs.mjs",
+      "default": "./dist/emotion-eslint-plugin.cjs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/emotion-js/emotion/tree/main/packages/eslint-plugin",
+  "peerDependencies": {
+    "eslint": "6 || 7 || 8"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^5.25.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^7.0.0",
+    "eslint": "^8.57.0",
+    "resolve-from": "^5.0.0"
+  }
+}

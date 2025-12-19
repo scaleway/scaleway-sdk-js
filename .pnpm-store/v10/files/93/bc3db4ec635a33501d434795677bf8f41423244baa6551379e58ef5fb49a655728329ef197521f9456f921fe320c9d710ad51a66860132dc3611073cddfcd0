@@ -1,0 +1,56 @@
+{
+  "name": "@scaleway/eslint-config-react",
+  "version": "4.0.9",
+  "description": "Scaleway React eslint shared config",
+  "keywords": [
+    "eslint",
+    "eslintconfig"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaleway/scaleway-lib",
+    "directory": "packages/eslint-config-react"
+  },
+  "exports": {
+    ".": "./index.mjs",
+    "./javascript": "./javascript.mjs",
+    "./typescript": "./typescript.mjs",
+    "./emotion": "./emotion.mjs",
+    "./shared": "./shared.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "javascript.mjs",
+    "typescript.mjs",
+    "shared.mjs",
+    "emotion.mjs"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/eslint-plugin": "11.12.0",
+    "@eslint/compat": "1.2.2",
+    "@eslint/eslintrc": "3.1.0",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-typescript": "18.0.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-deprecation": "3.0.0",
+    "eslint-plugin-eslint-comments": "3.2.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jsx-a11y": "6.10.1",
+    "eslint-plugin-react": "7.37.2",
+    "eslint-plugin-react-hooks": "5.0.0"
+  },
+  "peerDependencies": {
+    "eslint": ">= 9.7"
+  },
+  "devDependencies": {
+    "eslint": "9.13.0",
+    "typescript": "5.6.3"
+  }
+}
