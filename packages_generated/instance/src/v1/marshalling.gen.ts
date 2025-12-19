@@ -424,6 +424,7 @@ const unmarshalServer = (data: unknown): Server => {
 		bootType: data.boot_type,
 		commercialType: data.commercial_type,
 		creationDate: unmarshalDate(data.creation_date),
+		dns: data.dns,
 		dynamicIpRequired: data.dynamic_ip_required,
 		enableIpv6: data.enable_ipv6,
 		endOfService: data.end_of_service,

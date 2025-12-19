@@ -667,6 +667,10 @@ export interface Server {
 	 * True if the Instance type has reached end of service.
 	 */
 	endOfService: boolean
+	/**
+	 * Public DNS of the server.
+	 */
+	dns?: string
 }
 
 export interface VolumeTemplate {
