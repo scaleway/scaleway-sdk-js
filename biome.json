@@ -54,7 +54,7 @@
   },
   "overrides": [
     {
-      "includes": ["**/dist/**", "coverage/**", "**/examples/**", "**/*.gen.ts", "scripts/templates/**", "packages/sdk/src/index.gen.ts"],
+      "includes": ["**/dist/**", "coverage/**", "**/examples/**", "scripts/templates/**"],
       "formatter": {
         "enabled": false
       },
