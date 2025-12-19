@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+- **key_manager:** add scheduled_for_deletion state ([#2246](https://github.com/scaleway/scaleway-sdk-js/issues/2246)) ([7a35cdb](https://github.com/scaleway/scaleway-sdk-js/commit/7a35cdb2d2540b0dc9ab716fa7093549c60db23b))
+
+### Features
+
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- **key_manager:** add api to list algorithms ([#2330](https://github.com/scaleway/scaleway-sdk-js/issues/2330)) ([933e1ea](https://github.com/scaleway/scaleway-sdk-js/commit/933e1ea0bd5b5501792ccb647944d1d1004bb87d))
+- **key_manager:** update doc with asymmetric usage ([#2392](https://github.com/scaleway/scaleway-sdk-js/issues/2392)) ([2ba3308](https://github.com/scaleway/scaleway-sdk-js/commit/2ba3308d8e598856f9a79671170f7dec552454fc))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+
 # 1.5.0 (2025-10-29)
 
 ### Bug Fixes

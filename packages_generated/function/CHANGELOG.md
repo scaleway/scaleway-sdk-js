@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+- **serverless:** allow empty string for privateNetworkID in create ([#2223](https://github.com/scaleway/scaleway-sdk-js/issues/2223)) ([2513104](https://github.com/scaleway/scaleway-sdk-js/commit/2513104f91ac70978d75469c4205a3335839b97e))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+- **serverless:** deprecate activate_vpc_integration and update documentation ([#2318](https://github.com/scaleway/scaleway-sdk-js/issues/2318)) ([0a6e366](https://github.com/scaleway/scaleway-sdk-js/commit/0a6e3666b9dc6755a05f00912b1c80648c2f6923))
+- update generated APIs ([#2568](https://github.com/scaleway/scaleway-sdk-js/issues/2568)) ([2f69cad](https://github.com/scaleway/scaleway-sdk-js/commit/2f69cadbcd2ad5a9559dafc96e1bb447bbd13ff9))
+
 # 1.7.0 (2025-10-29)
 
 ### Bug Fixes

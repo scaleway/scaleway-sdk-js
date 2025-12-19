@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-interlink@1.2.0...@scaleway/sdk-interlink@2.1.0) (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- **interlink:** add display_name for pops ([#2528](https://github.com/scaleway/scaleway-sdk-js/issues/2528)) ([6d47490](https://github.com/scaleway/scaleway-sdk-js/commit/6d474906097a6f2f011675389a6ba0fb4cda5465))
+- **interlink:** add support for range ([#2561](https://github.com/scaleway/scaleway-sdk-js/issues/2561)) ([43e896e](https://github.com/scaleway/scaleway-sdk-js/commit/43e896e3d1691c2ae3d503d0201f4d94038ba4ab))
+- **interlink:** align routing_policy behavior with S2S_VPN ([#2398](https://github.com/scaleway/scaleway-sdk-js/issues/2398)) ([8c2303e](https://github.com/scaleway/scaleway-sdk-js/commit/8c2303e94c833168f5c20fe9ff5f6aa77b2ece57))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

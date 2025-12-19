@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+
+### Features
+
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+- **secret_manager:** add s2s_vpn to product ([#2536](https://github.com/scaleway/scaleway-sdk-js/issues/2536)) ([91c927f](https://github.com/scaleway/scaleway-sdk-js/commit/91c927fe7082e44a3439023de0a5aed6fc456d53))
+- **secret_manager:** add the region of the version ([#2505](https://github.com/scaleway/scaleway-sdk-js/issues/2505)) ([b526f49](https://github.com/scaleway/scaleway-sdk-js/commit/b526f49be9bd40cd040e175752e5e9c4a064eb4a))
+
 # 1.4.0 (2025-10-29)
 
 ### Features

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **block:** add volume_type filter to ListVolumesRequest ([#2595](https://github.com/scaleway/scaleway-sdk-js/issues/2595)) ([5b34b2c](https://github.com/scaleway/scaleway-sdk-js/commit/5b34b2c2817d5f844d2c140aa67c31b05404e546))
+- **block:** allow display of unpurged resources ([#2319](https://github.com/scaleway/scaleway-sdk-js/issues/2319)) ([868efe3](https://github.com/scaleway/scaleway-sdk-js/commit/868efe314a9a582f05fd74cd5d20636f1ca4ee00))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+- update generated APIs ([#2568](https://github.com/scaleway/scaleway-sdk-js/issues/2568)) ([2f69cad](https://github.com/scaleway/scaleway-sdk-js/commit/2f69cadbcd2ad5a9559dafc96e1bb447bbd13ff9))
+
 # 1.3.0 (2025-10-29)
 
 ### Features

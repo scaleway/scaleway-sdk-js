@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+- **rdb:** use BoolValue type for skip_size_retrieval option in ListDatabases endpoint ([#2552](https://github.com/scaleway/scaleway-sdk-js/issues/2552)) ([b79b520](https://github.com/scaleway/scaleway-sdk-js/commit/b79b5205178340ad404b827f2c231648eee6e015))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+- **rdb:** add skip_size_retrieval option to ListDatabases endpoint ([#2456](https://github.com/scaleway/scaleway-sdk-js/issues/2456)) ([a64b907](https://github.com/scaleway/scaleway-sdk-js/commit/a64b9075dddf95c2f103dd06ef5f2b8989a69702))
+- **rdb:** deprecate GetInstanceMetrics endpoint ([#2545](https://github.com/scaleway/scaleway-sdk-js/issues/2545)) ([59f27f4](https://github.com/scaleway/scaleway-sdk-js/commit/59f27f46213817f086daffd6d28caba6dff649dd))
+
 # 1.3.0 (2025-10-29)
 
 ### Features

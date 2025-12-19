@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+- **tem:** add dkim, spf and mx records in domain message ([#2417](https://github.com/scaleway/scaleway-sdk-js/issues/2417)) ([9a08609](https://github.com/scaleway/scaleway-sdk-js/commit/9a08609649d0130794ee67a4b16a18d1c2490486))
+- **tem:** add max subject len in email creation ([#2227](https://github.com/scaleway/scaleway-sdk-js/issues/2227)) ([495e94f](https://github.com/scaleway/scaleway-sdk-js/commit/495e94f6041ca0e7acf197e16eb4e8ede0dc733b))
+- **tem:** add mx records validation in get domain last status ([#2409](https://github.com/scaleway/scaleway-sdk-js/issues/2409)) ([05b2f56](https://github.com/scaleway/scaleway-sdk-js/commit/05b2f56148f84990c45d3d9eed538bd4949fcd45))
+- **tem:** remove the subject 6 char limitation ([#2580](https://github.com/scaleway/scaleway-sdk-js/issues/2580)) ([4ae5b05](https://github.com/scaleway/scaleway-sdk-js/commit/4ae5b05f222dfe5841639f0c7d962856a167970c))
+
 # 1.3.0 (2025-10-29)
 
 ### Features

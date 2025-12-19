@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- **datawarehouse:** add data warehouse to doc website ([#2540](https://github.com/scaleway/scaleway-sdk-js/issues/2540)) ([bfef9bf](https://github.com/scaleway/scaleway-sdk-js/commit/bfef9bf05397f6ee7b8eb7e7f75faeb325ceebd1))
+- **datawarehouse:** add Deployment.Status.deploying ([#2618](https://github.com/scaleway/scaleway-sdk-js/issues/2618)) ([59229f6](https://github.com/scaleway/scaleway-sdk-js/commit/59229f6de4f242ad3d2f7b22109e414e6aa6f0d8))
+- **datawarehouse:** update the visibility to public ([#2406](https://github.com/scaleway/scaleway-sdk-js/issues/2406)) ([a38b83e](https://github.com/scaleway/scaleway-sdk-js/commit/a38b83e50f63f7741285fe9ba065bb9af5f7f016))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+
 # 1.2.0 (2025-10-29)
 
 ### Features

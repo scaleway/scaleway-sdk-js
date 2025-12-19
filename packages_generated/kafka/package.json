@@ -1,6 +1,6 @@
 {
 	"name": "@scaleway/sdk-kafka",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"description": "Scaleway SDK kafka",
 	"license": "Apache-2.0",
 	"files": [
@@ -33,8 +33,8 @@
 		"build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
 	},
 	"dependencies": {
-		"@scaleway/sdk-std": "workspace:*",
-		"@scaleway/random-name": "5.1.2"
+		"@scaleway/random-name": "5.1.2",
+		"@scaleway/sdk-std": "workspace:*"
 	},
 	"peerDependencies": {
 		"@scaleway/sdk-client": "workspace:^"

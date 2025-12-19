@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Features
+
+- **audit_trail:** add authentication events in public API ([#2374](https://github.com/scaleway/scaleway-sdk-js/issues/2374)) ([9ca66aa](https://github.com/scaleway/scaleway-sdk-js/commit/9ca66aa435e2bdfdd8e1dffd78a90e44d140a343))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+
 # 1.2.0 (2025-10-29)
 
 ### Features

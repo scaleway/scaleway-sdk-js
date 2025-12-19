@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@1.4.0...@scaleway/sdk-cockpit@2.1.0) (2025-12-19)
+
+### Bug Fixes
+
+- **cockpit:** remove visibitiy none one managed alerts ([#2596](https://github.com/scaleway/scaleway-sdk-js/issues/2596)) ([5c157eb](https://github.com/scaleway/scaleway-sdk-js/commit/5c157eb080298428958fdc019e44666f3470f0bb))
+- **cockpit:** respect newline ([#2556](https://github.com/scaleway/scaleway-sdk-js/issues/2556)) ([0c40406](https://github.com/scaleway/scaleway-sdk-js/commit/0c40406e42547b2c5fc19eac8be2e89cd9954a04))
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- **cockpit:** add monthly usage ([#2592](https://github.com/scaleway/scaleway-sdk-js/issues/2592)) ([581cda2](https://github.com/scaleway/scaleway-sdk-js/commit/581cda2ca5b3f3100c3cdd14ee4aa603590f5458))
+- **cockpit:** add new Data-exporter endpoints + types ([#2577](https://github.com/scaleway/scaleway-sdk-js/issues/2577)) ([5af6be9](https://github.com/scaleway/scaleway-sdk-js/commit/5af6be9363d479f08d30da7803325dffced3bfcd))
+- **cockpit:** add rule status on ListAlert endpoint ([#2236](https://github.com/scaleway/scaleway-sdk-js/issues/2236)) ([afbf0f3](https://github.com/scaleway/scaleway-sdk-js/commit/afbf0f3a11c97872af66e9948cf5f4bb1f49096a))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+- update generated APIs ([#2568](https://github.com/scaleway/scaleway-sdk-js/issues/2568)) ([2f69cad](https://github.com/scaleway/scaleway-sdk-js/commit/2f69cadbcd2ad5a9559dafc96e1bb447bbd13ff9))
+
 # Change Log
 
 All notable changes to this project will be documented in this file.

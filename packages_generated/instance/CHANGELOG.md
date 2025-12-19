@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+- **instance/v1:** revert "remove field export_uri on the Instance API" ([#2673](https://github.com/scaleway/scaleway-sdk-js/issues/2673)) ([6d650d1](https://github.com/scaleway/scaleway-sdk-js/commit/6d650d13299d6b3458cdf93436e1b46f64aa3d68))
+- **instance:** expose the attaching state to help the Console team ([#2412](https://github.com/scaleway/scaleway-sdk-js/issues/2412)) ([36fadc9](https://github.com/scaleway/scaleway-sdk-js/commit/36fadc9d6803c8dc8de0c7159623abedf7de6c25))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- **instance:** add field zone for PrivateNIC/PrivateNetwork ([#2521](https://github.com/scaleway/scaleway-sdk-js/issues/2521)) ([14a52b1](https://github.com/scaleway/scaleway-sdk-js/commit/14a52b1350ef6d24be41266355ab84462045f2b0))
+- **instance:** add release IP to IPAM endpoint ([#2394](https://github.com/scaleway/scaleway-sdk-js/issues/2394)) ([32ebc5c](https://github.com/scaleway/scaleway-sdk-js/commit/32ebc5c9530ced7a81a53974c3a5509b2769851a))
+- **instance:** create MigrateVolume method ([#2257](https://github.com/scaleway/scaleway-sdk-js/issues/2257)) ([4b10007](https://github.com/scaleway/scaleway-sdk-js/commit/4b10007738ce676e6d8909af60aa9b5666739f3e))
+- **instance:** updated data field and new RPC ([#2411](https://github.com/scaleway/scaleway-sdk-js/issues/2411)) ([a38963c](https://github.com/scaleway/scaleway-sdk-js/commit/a38963cb721043e0c467469fd84affffdaac64b0))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+
 # 1.4.0 (2025-10-29)
 
 ### Bug Fixes

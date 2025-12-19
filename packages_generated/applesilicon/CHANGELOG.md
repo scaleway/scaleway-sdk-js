@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- **apple_silicon:** add missing servertype infos for PCU ([#2434](https://github.com/scaleway/scaleway-sdk-js/issues/2434)) ([0c1af30](https://github.com/scaleway/scaleway-sdk-js/commit/0c1af3083bf8f31447caf26d7616eeb311208a05))
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **apple_silicon:** add CI-CD runner configuration update API ([#2585](https://github.com/scaleway/scaleway-sdk-js/issues/2585)) ([9b8ee90](https://github.com/scaleway/scaleway-sdk-js/commit/9b8ee90f42e5f4b9e11f676ec941935d3329ea21))
+- **apple_silicon:** add CI-CD runner installation APIs ([#2440](https://github.com/scaleway/scaleway-sdk-js/issues/2440)) ([bd2e810](https://github.com/scaleway/scaleway-sdk-js/commit/bd2e810df231e57fa8c077f2e01745e5103add29))
+- **apple_silicon:** enable bulk order in public sdk ([#2234](https://github.com/scaleway/scaleway-sdk-js/issues/2234)) ([babbfe9](https://github.com/scaleway/scaleway-sdk-js/commit/babbfe98789b22774f04a43f49a7ce9fb9a43628))
+- **apple_silicon:** fix typo in applesilicon SDK comment ([#2238](https://github.com/scaleway/scaleway-sdk-js/issues/2238)) ([be0bbe9](https://github.com/scaleway/scaleway-sdk-js/commit/be0bbe908921b948de70bac7abed592e5957e2ef))
+- **applesilicon:** remove support for `runner_configuration` ([#2457](https://github.com/scaleway/scaleway-sdk-js/issues/2457)) ([5119374](https://github.com/scaleway/scaleway-sdk-js/commit/5119374aa5657ee80d994af276adb83c333d11ab))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+- update generated APIs ([#2568](https://github.com/scaleway/scaleway-sdk-js/issues/2568)) ([2f69cad](https://github.com/scaleway/scaleway-sdk-js/commit/2f69cadbcd2ad5a9559dafc96e1bb447bbd13ff9))
+
 # 1.5.0 (2025-10-29)
 
 ### Bug Fixes

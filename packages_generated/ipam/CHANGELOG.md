@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- improve config formatting and exclude sdk index ([#2675](https://github.com/scaleway/scaleway-sdk-js/issues/2675)) ([366c334](https://github.com/scaleway/scaleway-sdk-js/commit/366c334ad282325ec22bce95f6d90d8130081f1f))
+
+### Features
+
+- add extension .js for nodenext ([#2492](https://github.com/scaleway/scaleway-sdk-js/issues/2492)) ([592c46d](https://github.com/scaleway/scaleway-sdk-js/commit/592c46df916c5b8b35f26c13b626eee797970f5d))
+- **chore:** add automatic README generation for npm packages ([#2541](https://github.com/scaleway/scaleway-sdk-js/issues/2541)) ([7e8f769](https://github.com/scaleway/scaleway-sdk-js/commit/7e8f769eb14972abb26d6e207844f4a8653e7e90))
+- **ipam:** add scaleblock searchdb cluster ([#2317](https://github.com/scaleway/scaleway-sdk-js/issues/2317)) ([652228e](https://github.com/scaleway/scaleway-sdk-js/commit/652228eed6dab6b2168ea8ab61d71cbee137eb7d))
+- **ipam:** add support for `dtwh_deployment` ([#2575](https://github.com/scaleway/scaleway-sdk-js/issues/2575)) ([3a1800b](https://github.com/scaleway/scaleway-sdk-js/commit/3a1800bfcd759a1cff29061ae4f0af9d0186401d))
+- **ipam:** add support for `sedb_cluster` ([#2576](https://github.com/scaleway/scaleway-sdk-js/issues/2576)) ([b1e0e4d](https://github.com/scaleway/scaleway-sdk-js/commit/b1e0e4d2b6dfff03bd59cc002c6be66cbf65aebd))
+- **ipam:** make ips and macs sortable ([#2258](https://github.com/scaleway/scaleway-sdk-js/issues/2258)) ([47ebb47](https://github.com/scaleway/scaleway-sdk-js/commit/47ebb4799905a568c9706c4e979e7f612042c4f6))
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+
 # 1.5.0 (2025-10-29)
 
 ### Features

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2025-12-19)
+
+### Bug Fixes
+
+- exclude generated config files from biome formatting ([#2661](https://github.com/scaleway/scaleway-sdk-js/issues/2661)) ([e6b1391](https://github.com/scaleway/scaleway-sdk-js/commit/e6b1391483b1ff41d3fcbcb40a89a7f46e934663))
+
+### Features
+
+- publish packages as ESM only ([#2624](https://github.com/scaleway/scaleway-sdk-js/issues/2624)) ([8ab940d](https://github.com/scaleway/scaleway-sdk-js/commit/8ab940deadfbc8fc0d540148c51868dae63a74af))
+
 ## 2.0.0 (2025-01-XX)
 
 ### ⚠ BREAKING CHANGES
