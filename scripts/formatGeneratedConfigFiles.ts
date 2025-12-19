@@ -63,7 +63,7 @@ async function main(): Promise<void> {
         { stdio: 'pipe' },
       )
       formattedCount += batch.length
-    } catch (error) {
+    } catch (_error) {
       // Continue with other files even if some fail
       errorCount += batch.length
       console.warn(`Warning: Failed to format ${batch.length} file(s)`)
