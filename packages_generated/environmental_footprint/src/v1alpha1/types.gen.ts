@@ -13,6 +13,7 @@ export type ProductCategory =
 	| 'elastic_metal'
 	| 'instances'
 	| 'object_storage'
+	| 'load_balancer'
 
 export type ReportType = 'unknown_report_type' | 'monthly' | 'yearly'
 
@@ -21,6 +22,7 @@ export type ServiceCategory =
 	| 'baremetal'
 	| 'compute'
 	| 'storage'
+	| 'network'
 
 export interface Impact {
 	/**
