@@ -17,7 +17,7 @@ format-check:
 format-generated:
 	pnpm install
 	pnpm biome format --write packages_generated/
-	pnpm biome check --write --unsafe packages_generated/**/*.gen.ts
+	pnpm biome check --write --unsafe packages_generated/
 	pnpm dlx tsx ./scripts/validateGeneratedExports.ts
 
 typing:
