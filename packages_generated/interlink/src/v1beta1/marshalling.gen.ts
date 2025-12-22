@@ -1,6 +1,10 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+} from '@scaleway/sdk-client'
 import type {
   AttachRoutingPolicyRequest,
   AttachVpcRequest,
@@ -39,7 +43,9 @@ const unmarshalRange = (data: unknown): Range => {
   } as Range
 }
 
-export const unmarshalDedicatedConnection = (data: unknown): DedicatedConnection => {
+export const unmarshalDedicatedConnection = (
+  data: unknown,
+): DedicatedConnection => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DedicatedConnection' failed as data isn't a dictionary.`,
@@ -121,14 +127,18 @@ export const unmarshalLink = (data: unknown): Link => {
     name: data.name,
     organizationId: data.organization_id,
     partner: data.partner ? unmarshalPartnerHost(data.partner) : undefined,
-    peerBgpConfig: data.peer_bgp_config ? unmarshalBgpConfig(data.peer_bgp_config) : undefined,
+    peerBgpConfig: data.peer_bgp_config
+      ? unmarshalBgpConfig(data.peer_bgp_config)
+      : undefined,
     popId: data.pop_id,
     projectId: data.project_id,
     region: data.region,
     routingPolicyId: data.routing_policy_id,
     routingPolicyV4Id: data.routing_policy_v4_id,
     routingPolicyV6Id: data.routing_policy_v6_id,
-    scwBgpConfig: data.scw_bgp_config ? unmarshalBgpConfig(data.scw_bgp_config) : undefined,
+    scwBgpConfig: data.scw_bgp_config
+      ? unmarshalBgpConfig(data.scw_bgp_config)
+      : undefined,
     self: data.self ? unmarshalSelfHost(data.self) : undefined,
     status: data.status,
     tags: data.tags,
@@ -198,7 +208,9 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
   } as RoutingPolicy
 }
 
-export const unmarshalListDedicatedConnectionsResponse = (data: unknown): ListDedicatedConnectionsResponse => {
+export const unmarshalListDedicatedConnectionsResponse = (
+  data: unknown,
+): ListDedicatedConnectionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDedicatedConnectionsResponse' failed as data isn't a dictionary.`,
@@ -206,12 +218,17 @@ export const unmarshalListDedicatedConnectionsResponse = (data: unknown): ListDe
   }
 
   return {
-    connections: unmarshalArrayOfObject(data.connections, unmarshalDedicatedConnection),
+    connections: unmarshalArrayOfObject(
+      data.connections,
+      unmarshalDedicatedConnection,
+    ),
     totalCount: data.total_count,
   } as ListDedicatedConnectionsResponse
 }
 
-export const unmarshalListLinksResponse = (data: unknown): ListLinksResponse => {
+export const unmarshalListLinksResponse = (
+  data: unknown,
+): ListLinksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListLinksResponse' failed as data isn't a dictionary.`,
@@ -224,7 +241,9 @@ export const unmarshalListLinksResponse = (data: unknown): ListLinksResponse => 
   } as ListLinksResponse
 }
 
-export const unmarshalListPartnersResponse = (data: unknown): ListPartnersResponse => {
+export const unmarshalListPartnersResponse = (
+  data: unknown,
+): ListPartnersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPartnersResponse' failed as data isn't a dictionary.`,
@@ -250,7 +269,9 @@ export const unmarshalListPopsResponse = (data: unknown): ListPopsResponse => {
   } as ListPopsResponse
 }
 
-export const unmarshalListRoutingPoliciesResponse = (data: unknown): ListRoutingPoliciesResponse => {
+export const unmarshalListRoutingPoliciesResponse = (
+  data: unknown,
+): ListRoutingPoliciesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRoutingPoliciesResponse' failed as data isn't a dictionary.`,
@@ -258,7 +279,10 @@ export const unmarshalListRoutingPoliciesResponse = (data: unknown): ListRouting
   }
 
   return {
-    routingPolicies: unmarshalArrayOfObject(data.routing_policies, unmarshalRoutingPolicy),
+    routingPolicies: unmarshalArrayOfObject(
+      data.routing_policies,
+      unmarshalRoutingPolicy,
+    ),
     totalCount: data.total_count,
   } as ListRoutingPoliciesResponse
 }
@@ -289,14 +313,10 @@ export const marshalCreateLinkRequest = (
   routing_policy_v4_id: request.routingPolicyV4Id,
   routing_policy_v6_id: request.routingPolicyV6Id,
   tags: request.tags,
-  vlan: request.vlan,  
+  vlan: request.vlan,
   ...resolveOneOf([
-    {param: 'connection_id',
-      value: request.connectionId,
-    },
-    {param: 'partner_id',
-      value: request.partnerId,
-    },
+    { param: 'connection_id', value: request.connectionId },
+    { param: 'partner_id', value: request.partnerId },
   ]),
 })
 

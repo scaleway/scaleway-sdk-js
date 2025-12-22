@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,} from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -71,15 +71,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-        'pl-waw',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
+
   /**
    * Create a secret. Create a secret in a given region specified by the `region` parameter.
    *
@@ -99,7 +94,6 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
-  
   /**
    * Get metadata using the secret's ID. Retrieve the metadata of a secret specified by the `region` and `secret_id` parameters.
    *
@@ -115,7 +109,6 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
-  
   /**
    * Update metadata of a secret. Edit a secret's metadata such as name, tag(s), description and ephemeral policy. The secret to update is specified by the `secret_id` and `region` parameters.
    *
@@ -135,21 +128,17 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
-  
   /**
    * Delete a secret. Delete a given secret specified by the `region` and `secret_id` parameters.
    *
    * @param request - The request {@link DeleteSecretRequest}
    */
   deleteSecret = (request: Readonly<DeleteSecretRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+    })
 
-  
   protected pageOfListSecrets = (request: Readonly<ListSecretsRequest>) =>
     this.client.fetch<ListSecretsResponse>(
       {
@@ -161,7 +150,10 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['path', request.path],
           ['project_id', request.projectId],
           ['scheduled_for_deletion', request.scheduledForDeletion],
@@ -171,7 +163,7 @@ export class API extends ParentAPI {
       },
       unmarshalListSecretsResponse,
     )
-  
+
   /**
    * List secrets. Retrieve the list of secrets created within an Organization and/or Project. You must specify either the `organization_id` or the `project_id` and the `region`.
    *
@@ -181,7 +173,6 @@ export class API extends ParentAPI {
   listSecrets = (request: Readonly<ListSecretsRequest>) =>
     enrichForPagination('secrets', this.pageOfListSecrets, request)
 
-  
   /**
    * Browse secrets. Retrieve the list of secrets and folders for the given prefix. You must specify either the `organization_id` or the `project_id` and the `region`.
    *
@@ -196,7 +187,10 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['prefix', request.prefix],
           ['project_id', request.projectId],
           ['tags', request.tags],
@@ -206,7 +200,6 @@ export class API extends ParentAPI {
       unmarshalBrowseSecretsResponse,
     )
 
-  
   /**
    * Enable secret protection. Enable secret protection for a given secret specified by the `secret_id` parameter. Enabling secret protection means that your secret can be read and modified, but it cannot be deleted.
    *
@@ -224,7 +217,6 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
-  
   /**
    * Disable secret protection. Disable secret protection for a given secret specified by the `secret_id` parameter. Disabling secret protection means that your secret can be read, modified and deleted.
    *
@@ -242,25 +234,21 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
-  
   /**
    * Allow a product to use the secret.
    *
    * @param request - The request {@link AddSecretOwnerRequest}
    */
   addSecretOwner = (request: Readonly<AddSecretOwnerRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: JSON.stringify(
-          marshalAddSecretOwnerRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
-      },
-    )
+    this.client.fetch<void>({
+      body: JSON.stringify(
+        marshalAddSecretOwnerRequest(request, this.client.settings),
+      ),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
+    })
 
-  
   /**
    * Create a version. Create a version of a given secret specified by the `region` and `secret_id` parameters.
    *
@@ -280,7 +268,6 @@ export class API extends ParentAPI {
       unmarshalSecretVersion,
     )
 
-  
   /**
    * Get metadata of a secret's version using the secret's ID. Retrieve the metadata of a secret's given version specified by the `region`, `secret_id` and `revision` parameters.
    *
@@ -296,7 +283,6 @@ export class API extends ParentAPI {
       unmarshalSecretVersion,
     )
 
-  
   /**
    * Update metadata of a version. Edit the metadata of a secret's given version, specified by the `region`, `secret_id` and `revision` parameters.
    *
@@ -316,35 +302,36 @@ export class API extends ParentAPI {
       unmarshalSecretVersion,
     )
 
-  
   /**
    * Delete a version. Delete a secret's version and the sensitive data contained in it. Deleting a version is permanent and cannot be undone.
    *
    * @param request - The request {@link DeleteSecretVersionRequest}
    */
   deleteSecretVersion = (request: Readonly<DeleteSecretVersionRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}`,
+    })
 
-  
-  protected pageOfListSecretVersions = (request: Readonly<ListSecretVersionsRequest>) =>
+  protected pageOfListSecretVersions = (
+    request: Readonly<ListSecretVersionsRequest>,
+  ) =>
     this.client.fetch<ListSecretVersionsResponse>(
       {
         method: 'GET',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions`,
         urlParams: urlParams(
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['status', request.status],
         ),
       },
       unmarshalListSecretVersionsResponse,
     )
-  
+
   /**
    * List versions of a secret using the secret's ID. Retrieve the list of a given secret's versions specified by the `secret_id` and `region` parameters.
    *
@@ -354,7 +341,6 @@ export class API extends ParentAPI {
   listSecretVersions = (request: Readonly<ListSecretVersionsRequest>) =>
     enrichForPagination('versions', this.pageOfListSecretVersions, request)
 
-  
   /**
    * Access a secret's version using the secret's ID. Access sensitive data in a secret's version specified by the `region`, `secret_id` and `revision` parameters.
    *
@@ -370,20 +356,24 @@ export class API extends ParentAPI {
       unmarshalAccessSecretVersionResponse,
     )
 
-  
   /**
    * Access a secret's version using the secret's name and path. Access sensitive data in a secret's version specified by the `region`, `secret_name`, `secret_path` and `revision` parameters.
    *
    * @param request - The request {@link AccessSecretVersionByPathRequest}
    * @returns A Promise of AccessSecretVersionResponse
    */
-  accessSecretVersionByPath = (request: Readonly<AccessSecretVersionByPathRequest>) =>
+  accessSecretVersionByPath = (
+    request: Readonly<AccessSecretVersionByPathRequest>,
+  ) =>
     this.client.fetch<AccessSecretVersionResponse>(
       {
         method: 'GET',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets-by-path/versions/${validatePathParam('revision', request.revision)}/access`,
         urlParams: urlParams(
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
           ['secret_name', request.secretName],
           ['secret_path', request.secretPath],
         ),
@@ -391,7 +381,6 @@ export class API extends ParentAPI {
       unmarshalAccessSecretVersionResponse,
     )
 
-  
   /**
    * Enable a version. Make a specific version accessible. You must specify the `region`, `secret_id` and `revision` parameters.
    *
@@ -409,7 +398,6 @@ export class API extends ParentAPI {
       unmarshalSecretVersion,
     )
 
-  
   /**
    * Disable a version. Make a specific version inaccessible. You must specify the `region`, `secret_id` and `revision` parameters.
    *
@@ -427,7 +415,6 @@ export class API extends ParentAPI {
       unmarshalSecretVersion,
     )
 
-  
   protected pageOfListTags = (request: Readonly<ListTagsRequest> = {}) =>
     this.client.fetch<ListTagsResponse>(
       {
@@ -435,13 +422,19 @@ export class API extends ParentAPI {
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tags`,
         urlParams: urlParams(
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
         ),
       },
       unmarshalListTagsResponse,
     )
-  
+
   /**
    * List tags. List all tags associated with secrets within a given Project.
    *
@@ -451,21 +444,28 @@ export class API extends ParentAPI {
   listTags = (request: Readonly<ListTagsRequest> = {}) =>
     enrichForPagination('tags', this.pageOfListTags, request)
 
-  
-  protected pageOfListSecretTypes = (request: Readonly<ListSecretTypesRequest> = {}) =>
+  protected pageOfListSecretTypes = (
+    request: Readonly<ListSecretTypesRequest> = {},
+  ) =>
     this.client.fetch<ListSecretTypesResponse>(
       {
         method: 'GET',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secret-types`,
         urlParams: urlParams(
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
         ),
       },
       unmarshalListSecretTypesResponse,
     )
-  
+
   /**
    * List secret types. List all secret types created within a given Project.
    *
@@ -475,7 +475,6 @@ export class API extends ParentAPI {
   listSecretTypes = (request: Readonly<ListSecretTypesRequest> = {}) =>
     enrichForPagination('types', this.pageOfListSecretTypes, request)
 
-  
   /**
    * Restore a version. Restore a secret's version specified by the `region`, `secret_id` and `revision` parameters.
    *
@@ -493,7 +492,6 @@ export class API extends ParentAPI {
       unmarshalSecretVersion,
     )
 
-  
   /**
    * Restore a secret. Restore a secret and all its versions scheduled for deletion specified by the `region` and `secret_id` parameters.
    *
@@ -510,7 +508,4 @@ export class API extends ParentAPI {
       },
       unmarshalSecret,
     )
-
-  
 }
-

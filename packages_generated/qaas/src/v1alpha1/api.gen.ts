@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { WaitForOptions, } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,12 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,} from './content.gen.js'
+import {
+  BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,
+  JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,
+  PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,
+  SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,
+} from './content.gen.js'
 import {
   marshalCreateJobRequest,
   marshalCreateModelRequest,
@@ -116,7 +121,7 @@ export class API extends ParentAPI {
       },
       unmarshalJob,
     )
-  
+
   /**
    * Waits for {@link Job} to be in a final state.
    *
@@ -129,13 +134,14 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Job>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!JOB_TRANSIENT_STATUSES_QAAS.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(!JOB_TRANSIENT_STATUSES_QAAS.includes(res.status))),
       this.getJob,
       request,
       options,
     )
 
-  
   protected pageOfListJobs = (request: Readonly<ListJobsRequest> = {}) =>
     this.client.fetch<ListJobsResponse>(
       {
@@ -144,21 +150,26 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['tags', request.tags],  
-          ...Object.entries(resolveOneOf([
-            {param: 'session_id',
-              value: request.sessionId,
-            },
-            {default: this.client.settings.defaultProjectId,param: 'project_id',
-              value: request.projectId,
-            },
-          ])),
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          ['tags', request.tags],
+          ...Object.entries(
+            resolveOneOf([
+              { param: 'session_id', value: request.sessionId },
+              {
+                default: this.client.settings.defaultProjectId,
+                param: 'project_id',
+                value: request.projectId,
+              },
+            ]),
+          ),
         ),
       },
       unmarshalListJobsResponse,
     )
-  
+
   /**
    * List all jobs within a project or session. Retrieve information about all jobs within a given session.
    *
@@ -168,7 +179,6 @@ export class API extends ParentAPI {
   listJobs = (request: Readonly<ListJobsRequest> = {}) =>
     enrichForPagination('jobs', this.pageOfListJobs, request)
 
-  
   protected pageOfListJobResults = (request: Readonly<ListJobResultsRequest>) =>
     this.client.fetch<ListJobResultsResponse>(
       {
@@ -177,12 +187,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListJobResultsResponse,
     )
-  
+
   /**
    * List all results of a job. Retrieve all intermediate and final results of a job.
    *
@@ -192,7 +205,6 @@ export class API extends ParentAPI {
   listJobResults = (request: Readonly<ListJobResultsRequest>) =>
     enrichForPagination('jobResults', this.pageOfListJobResults, request)
 
-  
   /**
    * Create a job. Create a job to be executed inside a QPU session.
    *
@@ -212,7 +224,6 @@ export class API extends ParentAPI {
       unmarshalJob,
     )
 
-  
   /**
    * Update job information. Update job information about the provided **job ID**.
    *
@@ -232,7 +243,6 @@ export class API extends ParentAPI {
       unmarshalJob,
     )
 
-  
   /**
    * Cancel a job. Cancel the job corresponding to the provided **job ID**.
    *
@@ -250,21 +260,17 @@ export class API extends ParentAPI {
       unmarshalJob,
     )
 
-  
   /**
    * Delete a job. Delete the job corresponding to the provided **job ID**.
    *
    * @param request - The request {@link DeleteJobRequest}
    */
   deleteJob = (request: Readonly<DeleteJobRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}`,
+    })
 
-  
   /**
    * Get a job circuit. Retrieve the circuit of the provided **job ID**.
    *
@@ -280,7 +286,6 @@ export class API extends ParentAPI {
       unmarshalJobCircuit,
     )
 
-  
   /**
    * Get platform information. Retrieve information about the provided **platform ID**, such as provider name, technology, and type.
    *
@@ -296,8 +301,9 @@ export class API extends ParentAPI {
       unmarshalPlatform,
     )
 
-  
-  protected pageOfListPlatforms = (request: Readonly<ListPlatformsRequest> = {}) =>
+  protected pageOfListPlatforms = (
+    request: Readonly<ListPlatformsRequest> = {},
+  ) =>
     this.client.fetch<ListPlatformsResponse>(
       {
         method: 'GET',
@@ -307,7 +313,10 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['platform_technology', request.platformTechnology],
           ['platform_type', request.platformType],
           ['provider_name', request.providerName],
@@ -315,7 +324,7 @@ export class API extends ParentAPI {
       },
       unmarshalListPlatformsResponse,
     )
-  
+
   /**
    * List all available platforms. Retrieve information about all platforms.
    *
@@ -325,7 +334,6 @@ export class API extends ParentAPI {
   listPlatforms = (request: Readonly<ListPlatformsRequest> = {}) =>
     enrichForPagination('platforms', this.pageOfListPlatforms, request)
 
-  
   /**
    * Get session information. Retrieve information about the provided **session ID**, such as name and status.
    *
@@ -340,7 +348,7 @@ export class API extends ParentAPI {
       },
       unmarshalSession,
     )
-  
+
   /**
    * Waits for {@link Session} to be in a final state.
    *
@@ -353,14 +361,19 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Session>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!SESSION_TRANSIENT_STATUSES_QAAS.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !SESSION_TRANSIENT_STATUSES_QAAS.includes(res.status),
+          )),
       this.getSession,
       request,
       options,
     )
 
-  
-  protected pageOfListSessions = (request: Readonly<ListSessionsRequest> = {}) =>
+  protected pageOfListSessions = (
+    request: Readonly<ListSessionsRequest> = {},
+  ) =>
     this.client.fetch<ListSessionsResponse>(
       {
         method: 'GET',
@@ -368,15 +381,21 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['platform_id', request.platformId],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
           ['tags', request.tags],
         ),
       },
       unmarshalListSessionsResponse,
     )
-  
+
   /**
    * List all sessions. Retrieve information about all QPU sessions.
    *
@@ -386,7 +405,6 @@ export class API extends ParentAPI {
   listSessions = (request: Readonly<ListSessionsRequest> = {}) =>
     enrichForPagination('sessions', this.pageOfListSessions, request)
 
-  
   /**
    * Create a session. Create a new QPU session for the specified platform. Once ready, jobs can be sent to this session.
    *
@@ -406,7 +424,6 @@ export class API extends ParentAPI {
       unmarshalSession,
     )
 
-  
   /**
    * Update session information. Update session information of the provided **session ID**.
    *
@@ -426,7 +443,6 @@ export class API extends ParentAPI {
       unmarshalSession,
     )
 
-  
   /**
    * Terminate an existing session. Terminate a session by its unique ID and cancel all its attached jobs and bookings.
    *
@@ -444,22 +460,20 @@ export class API extends ParentAPI {
       unmarshalSession,
     )
 
-  
   /**
    * Delete an existing session. Delete a session by its unique ID and delete all its attached jobs and bookings.
    *
    * @param request - The request {@link DeleteSessionRequest}
    */
   deleteSession = (request: Readonly<DeleteSessionRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/qaas/v1alpha1/sessions/${validatePathParam('sessionId', request.sessionId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/qaas/v1alpha1/sessions/${validatePathParam('sessionId', request.sessionId)}`,
+    })
 
-  
-  protected pageOfListSessionACLs = (request: Readonly<ListSessionACLsRequest>) =>
+  protected pageOfListSessionACLs = (
+    request: Readonly<ListSessionACLsRequest>,
+  ) =>
     this.client.fetch<ListSessionACLsResponse>(
       {
         method: 'GET',
@@ -467,16 +481,18 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListSessionACLsResponse,
     )
-  
+
   listSessionACLs = (request: Readonly<ListSessionACLsRequest>) =>
     enrichForPagination('acls', this.pageOfListSessionACLs, request)
 
-  
   /**
    * Create a process. Create a new process for the specified application on a specified platform.
    *
@@ -496,7 +512,6 @@ export class API extends ParentAPI {
       unmarshalProcess,
     )
 
-  
   /**
    * Get process information. Retrieve information about the provided **process ID**, such as name, status and progress.
    *
@@ -511,7 +526,7 @@ export class API extends ParentAPI {
       },
       unmarshalProcess,
     )
-  
+
   /**
    * Waits for {@link Process} to be in a final state.
    *
@@ -524,14 +539,19 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Process>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!PROCESS_TRANSIENT_STATUSES_QAAS.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !PROCESS_TRANSIENT_STATUSES_QAAS.includes(res.status),
+          )),
       this.getProcess,
       request,
       options,
     )
 
-  
-  protected pageOfListProcesses = (request: Readonly<ListProcessesRequest> = {}) =>
+  protected pageOfListProcesses = (
+    request: Readonly<ListProcessesRequest> = {},
+  ) =>
     this.client.fetch<ListProcessesResponse>(
       {
         method: 'GET',
@@ -540,14 +560,20 @@ export class API extends ParentAPI {
           ['application_id', request.applicationId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
           ['tags', request.tags],
         ),
       },
       unmarshalListProcessesResponse,
     )
-  
+
   /**
    * List all processes. Retrieve information about all processes.
    *
@@ -557,7 +583,6 @@ export class API extends ParentAPI {
   listProcesses = (request: Readonly<ListProcessesRequest> = {}) =>
     enrichForPagination('processes', this.pageOfListProcesses, request)
 
-  
   /**
    * Update process information. Update process information of the provided **process ID**.
    *
@@ -577,7 +602,6 @@ export class API extends ParentAPI {
       unmarshalProcess,
     )
 
-  
   /**
    * Cancel a running process. Cancel a process by its unique ID. Intermediate results are still available.
    *
@@ -595,22 +619,20 @@ export class API extends ParentAPI {
       unmarshalProcess,
     )
 
-  
   /**
    * Delete an existing process. Delete a process by its unique ID and delete all its data.
    *
    * @param request - The request {@link DeleteProcessRequest}
    */
   deleteProcess = (request: Readonly<DeleteProcessRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/qaas/v1alpha1/processes/${validatePathParam('processId', request.processId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/qaas/v1alpha1/processes/${validatePathParam('processId', request.processId)}`,
+    })
 
-  
-  protected pageOfListProcessResults = (request: Readonly<ListProcessResultsRequest>) =>
+  protected pageOfListProcessResults = (
+    request: Readonly<ListProcessResultsRequest>,
+  ) =>
     this.client.fetch<ListProcessResultsResponse>(
       {
         method: 'GET',
@@ -618,12 +640,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListProcessResultsResponse,
     )
-  
+
   /**
    * List all results of a process. Retrieve all intermediate and final result of a process.
    *
@@ -631,9 +656,12 @@ export class API extends ParentAPI {
    * @returns A Promise of ListProcessResultsResponse
    */
   listProcessResults = (request: Readonly<ListProcessResultsRequest>) =>
-    enrichForPagination('processResults', this.pageOfListProcessResults, request)
+    enrichForPagination(
+      'processResults',
+      this.pageOfListProcessResults,
+      request,
+    )
 
-  
   /**
    * Get application information. Retrieve information about the provided **application ID**, such as name, type and compatible platforms.
    *
@@ -649,8 +677,9 @@ export class API extends ParentAPI {
       unmarshalApplication,
     )
 
-  
-  protected pageOfListApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
+  protected pageOfListApplications = (
+    request: Readonly<ListApplicationsRequest> = {},
+  ) =>
     this.client.fetch<ListApplicationsResponse>(
       {
         method: 'GET',
@@ -660,12 +689,15 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
         ),
       },
       unmarshalListApplicationsResponse,
     )
-  
+
   /**
    * List all available applications. Retrieve information about all applications.
    *
@@ -675,7 +707,6 @@ export class API extends ParentAPI {
   listApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
     enrichForPagination('applications', this.pageOfListApplications, request)
 
-  
   /**
    * Get booking information. Retrieve information about the provided **booking ID**, such as description, status and progress message.
    *
@@ -690,7 +721,7 @@ export class API extends ParentAPI {
       },
       unmarshalBooking,
     )
-  
+
   /**
    * Waits for {@link Booking} to be in a final state.
    *
@@ -703,14 +734,19 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Booking>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!BOOKING_TRANSIENT_STATUSES_QAAS.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !BOOKING_TRANSIENT_STATUSES_QAAS.includes(res.status),
+          )),
       this.getBooking,
       request,
       options,
     )
 
-  
-  protected pageOfListBookings = (request: Readonly<ListBookingsRequest> = {}) =>
+  protected pageOfListBookings = (
+    request: Readonly<ListBookingsRequest> = {},
+  ) =>
     this.client.fetch<ListBookingsResponse>(
       {
         method: 'GET',
@@ -718,14 +754,17 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['platform_id', request.platformId],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListBookingsResponse,
     )
-  
+
   /**
    * List all bookings according the filter. Retrieve information about all bookings of the provided **project ID** or ** platform ID**.
    *
@@ -735,7 +774,6 @@ export class API extends ParentAPI {
   listBookings = (request: Readonly<ListBookingsRequest> = {}) =>
     enrichForPagination('bookings', this.pageOfListBookings, request)
 
-  
   /**
    * Update booking information. Update booking information of the provided **booking ID**.
    *
@@ -755,7 +793,6 @@ export class API extends ParentAPI {
       unmarshalBooking,
     )
 
-  
   /**
    * Create a new model. Create and register a new model that can be executed through next jobs. A model can also be assigned to a Session.
    *
@@ -775,7 +812,6 @@ export class API extends ParentAPI {
       unmarshalModel,
     )
 
-  
   /**
    * Get model information. Retrieve information about of the provided **model ID**.
    *
@@ -791,7 +827,6 @@ export class API extends ParentAPI {
       unmarshalModel,
     )
 
-  
   protected pageOfListModels = (request: Readonly<ListModelsRequest> = {}) =>
     this.client.fetch<ListModelsResponse>(
       {
@@ -800,13 +835,19 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
         ),
       },
       unmarshalListModelsResponse,
     )
-  
+
   /**
    * List all models attached to the **project ID**. Retrieve information about all models of the provided **project ID**.
    *
@@ -815,7 +856,4 @@ export class API extends ParentAPI {
    */
   listModels = (request: Readonly<ListModelsRequest> = {}) =>
     enrichForPagination('models', this.pageOfListModels, request)
-
-  
 }
-

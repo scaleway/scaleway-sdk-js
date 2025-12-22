@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,10 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,} from './content.gen.js'
+import {
+  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,
+  EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,
+} from './content.gen.js'
 import {
   marshalBulkCreateBlocklistsRequest,
   marshalCreateDomainRequest,
@@ -102,13 +105,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
+
   /**
    * Send an email. You must specify the `region`, the sender and the recipient's information and the `project_id` to send an email from a checked domain.
    *
@@ -128,7 +128,6 @@ export class API extends ParentAPI {
       unmarshalCreateEmailResponse,
     )
 
-  
   /**
    * Get an email. Retrieve information about a specific email using the `email_id` and `region` parameters.
    *
@@ -143,7 +142,7 @@ export class API extends ParentAPI {
       },
       unmarshalEmail,
     )
-  
+
   /**
    * Waits for {@link Email} to be in a final state.
    *
@@ -156,13 +155,14 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Email>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!EMAIL_TRANSIENT_STATUSES_TEM.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(!EMAIL_TRANSIENT_STATUSES_TEM.includes(res.status))),
       this.getEmail,
       request,
       options,
     )
 
-  
   protected pageOfListEmails = (request: Readonly<ListEmailsRequest> = {}) =>
     this.client.fetch<ListEmailsResponse>(
       {
@@ -177,7 +177,10 @@ export class API extends ParentAPI {
           ['message_id', request.messageId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['search', request.search],
           ['since', request.since],
@@ -188,7 +191,7 @@ export class API extends ParentAPI {
       },
       unmarshalListEmailsResponse,
     )
-  
+
   /**
    * List emails. Retrieve the list of emails sent from a specific domain or for a specific Project or Organization. You must specify the `region`.
    *
@@ -198,7 +201,6 @@ export class API extends ParentAPI {
   listEmails = (request: Readonly<ListEmailsRequest> = {}) =>
     enrichForPagination('emails', this.pageOfListEmails, request)
 
-  
   /**
    * Email statuses. Get information on your emails' statuses.
    *
@@ -221,7 +223,6 @@ export class API extends ParentAPI {
       unmarshalStatistics,
     )
 
-  
   /**
    * Cancel an email. You can cancel the sending of an email if it has not been sent yet. You must specify the `region` and the `email_id` of the email you want to cancel.
    *
@@ -239,7 +240,6 @@ export class API extends ParentAPI {
       unmarshalEmail,
     )
 
-  
   /**
    * Register a domain in a project. You must specify the `region`, `project_id` and `domain_name` to register a domain in a specific Project.
    *
@@ -259,7 +259,6 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
-  
   /**
    * Get information about a domain. Retrieve information about a specific domain using the `region` and `domain_id` parameters. Monitor your domain's reputation and improve **average** and **bad** reputation statuses, using your domain's **Email activity** tab on the [Scaleway console](https://console.scaleway.com/transactional-email/domains) to get a more detailed report. Check out our [dedicated documentation](https://www.scaleway.com/en/docs/managed-services/transactional-email/reference-content/understanding-tem-reputation-score/) to improve your domain's reputation.
    *
@@ -274,7 +273,7 @@ export class API extends ParentAPI {
       },
       unmarshalDomain,
     )
-  
+
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -287,13 +286,14 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Domain>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_TEM.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_TEM.includes(res.status))),
       this.getDomain,
       request,
       options,
     )
 
-  
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}) =>
     this.client.fetch<ListDomainsResponse>(
       {
@@ -303,14 +303,17 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['status', request.status],
         ),
       },
       unmarshalListDomainsResponse,
     )
-  
+
   /**
    * List domains. Retrieve domains in a specific Project or in a specific Organization using the `region` parameter.
    *
@@ -320,7 +323,6 @@ export class API extends ParentAPI {
   listDomains = (request: Readonly<ListDomainsRequest> = {}) =>
     enrichForPagination('domains', this.pageOfListDomains, request)
 
-  
   /**
    * Delete a domain. You must specify the domain you want to delete by the `region` and `domain_id`. Deleting a domain is permanent and cannot be undone.
    *
@@ -338,7 +340,6 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
-  
   /**
    * Domain DNS check. Perform an immediate DNS check of a domain using the `region` and `domain_id` parameters.
    *
@@ -356,7 +357,6 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
-  
   /**
    * Display SPF, DKIM, DMARC and MX records status and potential errors. Display SPF, DKIM, DMARC and MX records status and potential errors, including the found records to make debugging easier.
    *
@@ -372,7 +372,6 @@ export class API extends ParentAPI {
       unmarshalDomainLastStatus,
     )
 
-  
   /**
    * Update a domain. Update a domain auto-configuration.
    *
@@ -392,7 +391,6 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
-  
   /**
    * Create a Webhook. Create a new Webhook triggered by a list of event types and pushed to a Scaleway SNS ARN.
    *
@@ -412,8 +410,9 @@ export class API extends ParentAPI {
       unmarshalWebhook,
     )
 
-  
-  protected pageOfListWebhooks = (request: Readonly<ListWebhooksRequest> = {}) =>
+  protected pageOfListWebhooks = (
+    request: Readonly<ListWebhooksRequest> = {},
+  ) =>
     this.client.fetch<ListWebhooksResponse>(
       {
         method: 'GET',
@@ -423,13 +422,16 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListWebhooksResponse,
     )
-  
+
   /**
    * List Webhooks. Retrieve Webhooks in a specific Project or in a specific Organization using the `region` parameter.
    *
@@ -439,7 +441,6 @@ export class API extends ParentAPI {
   listWebhooks = (request: Readonly<ListWebhooksRequest> = {}) =>
     enrichForPagination('webhooks', this.pageOfListWebhooks, request)
 
-  
   /**
    * Get information about a Webhook. Retrieve information about a specific Webhook using the `webhook_id` and `region` parameters.
    *
@@ -455,7 +456,6 @@ export class API extends ParentAPI {
       unmarshalWebhook,
     )
 
-  
   /**
    * Update a Webhook. Update a Webhook events type, SNS ARN or name.
    *
@@ -475,22 +475,20 @@ export class API extends ParentAPI {
       unmarshalWebhook,
     )
 
-  
   /**
    * Delete a Webhook. You must specify the Webhook you want to delete by the `region` and `webhook_id`. Deleting a Webhook is permanent and cannot be undone.
    *
    * @param request - The request {@link DeleteWebhookRequest}
    */
   deleteWebhook = (request: Readonly<DeleteWebhookRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
+    })
 
-  
-  protected pageOfListWebhookEvents = (request: Readonly<ListWebhookEventsRequest>) =>
+  protected pageOfListWebhookEvents = (
+    request: Readonly<ListWebhookEventsRequest>,
+  ) =>
     this.client.fetch<ListWebhookEventsResponse>(
       {
         method: 'GET',
@@ -502,14 +500,17 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['statuses', request.statuses],
         ),
       },
       unmarshalListWebhookEventsResponse,
     )
-  
+
   /**
    * List Webhook triggered events. Retrieve the list of Webhook events triggered from a specific Webhook or for a specific Project or Organization. You must specify the `region`.
    *
@@ -519,7 +520,6 @@ export class API extends ParentAPI {
   listWebhookEvents = (request: Readonly<ListWebhookEventsRequest>) =>
     enrichForPagination('webhookEvents', this.pageOfListWebhookEvents, request)
 
-  
   /**
    * List project settings. Retrieve the project settings including periodic reports.
    *
@@ -535,14 +535,15 @@ export class API extends ParentAPI {
       unmarshalProjectSettings,
     )
 
-  
   /**
    * Update project settings. Update the project settings including periodic reports.
    *
    * @param request - The request {@link UpdateProjectSettingsRequest}
    * @returns A Promise of ProjectSettings
    */
-  updateProjectSettings = (request: Readonly<UpdateProjectSettingsRequest> = {}) =>
+  updateProjectSettings = (
+    request: Readonly<UpdateProjectSettingsRequest> = {},
+  ) =>
     this.client.fetch<ProjectSettings>(
       {
         body: JSON.stringify(
@@ -555,7 +556,6 @@ export class API extends ParentAPI {
       unmarshalProjectSettings,
     )
 
-  
   protected pageOfListBlocklists = (request: Readonly<ListBlocklistsRequest>) =>
     this.client.fetch<ListBlocklistsResponse>(
       {
@@ -567,13 +567,16 @@ export class API extends ParentAPI {
           ['email', request.email],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['type', request.type],
         ),
       },
       unmarshalListBlocklistsResponse,
     )
-  
+
   /**
    * List blocklists. Retrieve the list of blocklists.
    *
@@ -583,7 +586,6 @@ export class API extends ParentAPI {
   listBlocklists = (request: Readonly<ListBlocklistsRequest>) =>
     enrichForPagination('blocklists', this.pageOfListBlocklists, request)
 
-  
   /**
    * Bulk create blocklists. Create multiple blocklists in a specific Project or Organization using the `region` parameter.
    *
@@ -603,47 +605,47 @@ export class API extends ParentAPI {
       unmarshalBulkCreateBlocklistsResponse,
     )
 
-  
   /**
    * Delete a blocklist. You must specify the blocklist you want to delete by the `region` and `blocklist_id`.
    *
    * @param request - The request {@link DeleteBlocklistRequest}
    */
   deleteBlocklist = (request: Readonly<DeleteBlocklistRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists/${validatePathParam('blocklistId', request.blocklistId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists/${validatePathParam('blocklistId', request.blocklistId)}`,
+    })
 
-  
   /**
    * Get information about subscribed offers. Retrieve information about the offers you are subscribed to using the `project_id` and `region` parameters.
    *
    * @param request - The request {@link ListOfferSubscriptionsRequest}
    * @returns A Promise of ListOfferSubscriptionsResponse
    */
-  listOfferSubscriptions = (request: Readonly<ListOfferSubscriptionsRequest> = {}) =>
+  listOfferSubscriptions = (
+    request: Readonly<ListOfferSubscriptionsRequest> = {},
+  ) =>
     this.client.fetch<ListOfferSubscriptionsResponse>(
       {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`,
-        urlParams: urlParams(
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
-        ),
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
       },
       unmarshalListOfferSubscriptionsResponse,
     )
 
-  
   /**
    * Update a subscribed offer.
    *
    * @param request - The request {@link UpdateOfferSubscriptionRequest}
    * @returns A Promise of OfferSubscription
    */
-  updateOfferSubscription = (request: Readonly<UpdateOfferSubscriptionRequest> = {}) =>
+  updateOfferSubscription = (
+    request: Readonly<UpdateOfferSubscriptionRequest> = {},
+  ) =>
     this.client.fetch<OfferSubscription>(
       {
         body: JSON.stringify(
@@ -656,7 +658,6 @@ export class API extends ParentAPI {
       unmarshalOfferSubscription,
     )
 
-  
   /**
    * List the available offers.. Retrieve the list of the available and free-of-charge offers you can subscribe to.
    *
@@ -672,7 +673,6 @@ export class API extends ParentAPI {
       unmarshalListOffersResponse,
     )
 
-  
   protected pageOfListPools = (request: Readonly<ListPoolsRequest> = {}) =>
     this.client.fetch<ListPoolsResponse>(
       {
@@ -680,13 +680,19 @@ export class API extends ParentAPI {
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools`,
         urlParams: urlParams(
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
         ),
       },
       unmarshalListPoolsResponse,
     )
-  
+
   /**
    * Get information about a sending pool.. Retrieve information about a sending pool, including its creation status and configuration parameters.
    *
@@ -696,25 +702,24 @@ export class API extends ParentAPI {
   listPools = (request: Readonly<ListPoolsRequest> = {}) =>
     enrichForPagination('pools', this.pageOfListPools, request)
 
-  
   /**
    * Get project resource consumption.. Get project resource consumption.
    *
    * @param request - The request {@link GetProjectConsumptionRequest}
    * @returns A Promise of ProjectConsumption
    */
-  getProjectConsumption = (request: Readonly<GetProjectConsumptionRequest> = {}) =>
+  getProjectConsumption = (
+    request: Readonly<GetProjectConsumptionRequest> = {},
+  ) =>
     this.client.fetch<ProjectConsumption>(
       {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/project-consumption`,
-        urlParams: urlParams(
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
-        ),
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
       },
       unmarshalProjectConsumption,
     )
-
-  
 }
-

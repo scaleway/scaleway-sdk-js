@@ -1,8 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+} from '@scaleway/sdk-client'
 import type {
   CreateNamespaceRequest,
   Image,
@@ -79,7 +84,9 @@ export const unmarshalTag = (data: unknown): Tag => {
   } as Tag
 }
 
-export const unmarshalListImagesResponse = (data: unknown): ListImagesResponse => {
+export const unmarshalListImagesResponse = (
+  data: unknown,
+): ListImagesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListImagesResponse' failed as data isn't a dictionary.`,
@@ -92,7 +99,9 @@ export const unmarshalListImagesResponse = (data: unknown): ListImagesResponse =
   } as ListImagesResponse
 }
 
-export const unmarshalListNamespacesResponse = (data: unknown): ListNamespacesResponse => {
+export const unmarshalListNamespacesResponse = (
+  data: unknown,
+): ListNamespacesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`,
@@ -124,12 +133,16 @@ export const marshalCreateNamespaceRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   is_public: request.isPublic,
-  name: request.name || randomName('ns'),  
+  name: request.name || randomName('ns'),
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project_id',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project_id',
       value: request.projectId,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization_id',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization_id',
       value: request.organizationId,
     },
   ]),

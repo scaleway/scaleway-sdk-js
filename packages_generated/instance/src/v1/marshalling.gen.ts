@@ -1,8 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMapOfObject, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+  unmarshalMapOfObject,
+} from '@scaleway/sdk-client'
 import type {
   ApplyBlockMigrationRequest,
   AttachServerFileSystemRequest,
@@ -247,7 +253,9 @@ const unmarshalImage = (data: unknown): Image => {
   return {
     arch: data.arch,
     creationDate: unmarshalDate(data.creation_date),
-    defaultBootscript: data.default_bootscript ? unmarshalBootscript(data.default_bootscript) : undefined,
+    defaultBootscript: data.default_bootscript
+      ? unmarshalBootscript(data.default_bootscript)
+      : undefined,
     extraVolumes: unmarshalMapOfObject(data.extra_volumes, unmarshalVolume),
     fromServer: data.from_server,
     id: data.id,
@@ -256,7 +264,9 @@ const unmarshalImage = (data: unknown): Image => {
     organization: data.organization,
     project: data.project,
     public: data.public,
-    rootVolume: data.root_volume ? unmarshalVolumeSummary(data.root_volume) : undefined,
+    rootVolume: data.root_volume
+      ? unmarshalVolumeSummary(data.root_volume)
+      : undefined,
     state: data.state,
     tags: data.tags,
     zone: data.zone,
@@ -416,18 +426,28 @@ const unmarshalServer = (data: unknown): Server => {
     dynamicIpRequired: data.dynamic_ip_required,
     enableIpv6: data.enable_ipv6,
     endOfService: data.end_of_service,
-    filesystems: unmarshalArrayOfObject(data.filesystems, unmarshalServerFilesystem),
+    filesystems: unmarshalArrayOfObject(
+      data.filesystems,
+      unmarshalServerFilesystem,
+    ),
     hostname: data.hostname,
     id: data.id,
     image: data.image ? unmarshalImage(data.image) : undefined,
     ipv6: data.ipv6 ? unmarshalServerIpv6(data.ipv6) : undefined,
-    location: data.location ? unmarshalServerLocation(data.location) : undefined,
+    location: data.location
+      ? unmarshalServerLocation(data.location)
+      : undefined,
     macAddress: data.mac_address,
-    maintenances: unmarshalArrayOfObject(data.maintenances, unmarshalServerMaintenance),
+    maintenances: unmarshalArrayOfObject(
+      data.maintenances,
+      unmarshalServerMaintenance,
+    ),
     modificationDate: unmarshalDate(data.modification_date),
     name: data.name,
     organization: data.organization,
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
     privateIp: data.private_ip,
     privateNics: unmarshalArrayOfObject(data.private_nics, unmarshalPrivateNIC),
     project: data.project,
@@ -435,7 +455,9 @@ const unmarshalServer = (data: unknown): Server => {
     publicIp: data.public_ip ? unmarshalServerIp(data.public_ip) : undefined,
     publicIps: unmarshalArrayOfObject(data.public_ips, unmarshalServerIp),
     routedIpEnabled: data.routed_ip_enabled,
-    securityGroup: data.security_group ? unmarshalSecurityGroupSummary(data.security_group) : undefined,
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroupSummary(data.security_group)
+      : undefined,
     state: data.state,
     stateDetail: data.state_detail,
     tags: data.tags,
@@ -444,7 +466,9 @@ const unmarshalServer = (data: unknown): Server => {
   } as Server
 }
 
-export const unmarshalAttachServerFileSystemResponse = (data: unknown): AttachServerFileSystemResponse => {
+export const unmarshalAttachServerFileSystemResponse = (
+  data: unknown,
+): AttachServerFileSystemResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AttachServerFileSystemResponse' failed as data isn't a dictionary.`,
@@ -456,7 +480,9 @@ export const unmarshalAttachServerFileSystemResponse = (data: unknown): AttachSe
   } as AttachServerFileSystemResponse
 }
 
-export const unmarshalAttachServerVolumeResponse = (data: unknown): AttachServerVolumeResponse => {
+export const unmarshalAttachServerVolumeResponse = (
+  data: unknown,
+): AttachServerVolumeResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AttachServerVolumeResponse' failed as data isn't a dictionary.`,
@@ -468,7 +494,9 @@ export const unmarshalAttachServerVolumeResponse = (data: unknown): AttachServer
   } as AttachServerVolumeResponse
 }
 
-export const unmarshalCreateImageResponse = (data: unknown): CreateImageResponse => {
+export const unmarshalCreateImageResponse = (
+  data: unknown,
+): CreateImageResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateImageResponse' failed as data isn't a dictionary.`,
@@ -515,7 +543,9 @@ export const unmarshalCreateIpResponse = (data: unknown): CreateIpResponse => {
   } as CreateIpResponse
 }
 
-export const unmarshalCreatePlacementGroupResponse = (data: unknown): CreatePlacementGroupResponse => {
+export const unmarshalCreatePlacementGroupResponse = (
+  data: unknown,
+): CreatePlacementGroupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreatePlacementGroupResponse' failed as data isn't a dictionary.`,
@@ -523,11 +553,15 @@ export const unmarshalCreatePlacementGroupResponse = (data: unknown): CreatePlac
   }
 
   return {
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
   } as CreatePlacementGroupResponse
 }
 
-export const unmarshalCreatePrivateNICResponse = (data: unknown): CreatePrivateNICResponse => {
+export const unmarshalCreatePrivateNICResponse = (
+  data: unknown,
+): CreatePrivateNICResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreatePrivateNICResponse' failed as data isn't a dictionary.`,
@@ -535,7 +569,9 @@ export const unmarshalCreatePrivateNICResponse = (data: unknown): CreatePrivateN
   }
 
   return {
-    privateNic: data.private_nic ? unmarshalPrivateNIC(data.private_nic) : undefined,
+    privateNic: data.private_nic
+      ? unmarshalPrivateNIC(data.private_nic)
+      : undefined,
   } as CreatePrivateNICResponse
 }
 
@@ -567,7 +603,9 @@ const unmarshalSecurityGroup = (data: unknown): SecurityGroup => {
   } as SecurityGroup
 }
 
-export const unmarshalCreateSecurityGroupResponse = (data: unknown): CreateSecurityGroupResponse => {
+export const unmarshalCreateSecurityGroupResponse = (
+  data: unknown,
+): CreateSecurityGroupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateSecurityGroupResponse' failed as data isn't a dictionary.`,
@@ -575,7 +613,9 @@ export const unmarshalCreateSecurityGroupResponse = (data: unknown): CreateSecur
   }
 
   return {
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroup(data.security_group)
+      : undefined,
   } as CreateSecurityGroupResponse
 }
 
@@ -600,7 +640,9 @@ const unmarshalSecurityGroupRule = (data: unknown): SecurityGroupRule => {
   } as SecurityGroupRule
 }
 
-export const unmarshalCreateSecurityGroupRuleResponse = (data: unknown): CreateSecurityGroupRuleResponse => {
+export const unmarshalCreateSecurityGroupRuleResponse = (
+  data: unknown,
+): CreateSecurityGroupRuleResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateSecurityGroupRuleResponse' failed as data isn't a dictionary.`,
@@ -612,7 +654,9 @@ export const unmarshalCreateSecurityGroupRuleResponse = (data: unknown): CreateS
   } as CreateSecurityGroupRuleResponse
 }
 
-export const unmarshalCreateServerResponse = (data: unknown): CreateServerResponse => {
+export const unmarshalCreateServerResponse = (
+  data: unknown,
+): CreateServerResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateServerResponse' failed as data isn't a dictionary.`,
@@ -645,7 +689,9 @@ const unmarshalSnapshot = (data: unknown): Snapshot => {
   }
 
   return {
-    baseVolume: data.base_volume ? unmarshalSnapshotBaseVolume(data.base_volume) : undefined,
+    baseVolume: data.base_volume
+      ? unmarshalSnapshotBaseVolume(data.base_volume)
+      : undefined,
     creationDate: unmarshalDate(data.creation_date),
     errorReason: data.error_reason,
     id: data.id,
@@ -681,7 +727,9 @@ const unmarshalTask = (data: unknown): Task => {
   } as Task
 }
 
-export const unmarshalCreateSnapshotResponse = (data: unknown): CreateSnapshotResponse => {
+export const unmarshalCreateSnapshotResponse = (
+  data: unknown,
+): CreateSnapshotResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateSnapshotResponse' failed as data isn't a dictionary.`,
@@ -694,7 +742,9 @@ export const unmarshalCreateSnapshotResponse = (data: unknown): CreateSnapshotRe
   } as CreateSnapshotResponse
 }
 
-export const unmarshalCreateVolumeResponse = (data: unknown): CreateVolumeResponse => {
+export const unmarshalCreateVolumeResponse = (
+  data: unknown,
+): CreateVolumeResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateVolumeResponse' failed as data isn't a dictionary.`,
@@ -706,7 +756,9 @@ export const unmarshalCreateVolumeResponse = (data: unknown): CreateVolumeRespon
   } as CreateVolumeResponse
 }
 
-export const unmarshalDetachServerFileSystemResponse = (data: unknown): DetachServerFileSystemResponse => {
+export const unmarshalDetachServerFileSystemResponse = (
+  data: unknown,
+): DetachServerFileSystemResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DetachServerFileSystemResponse' failed as data isn't a dictionary.`,
@@ -718,7 +770,9 @@ export const unmarshalDetachServerFileSystemResponse = (data: unknown): DetachSe
   } as DetachServerFileSystemResponse
 }
 
-export const unmarshalDetachServerVolumeResponse = (data: unknown): DetachServerVolumeResponse => {
+export const unmarshalDetachServerVolumeResponse = (
+  data: unknown,
+): DetachServerVolumeResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DetachServerVolumeResponse' failed as data isn't a dictionary.`,
@@ -730,7 +784,9 @@ export const unmarshalDetachServerVolumeResponse = (data: unknown): DetachServer
   } as DetachServerVolumeResponse
 }
 
-export const unmarshalExportSnapshotResponse = (data: unknown): ExportSnapshotResponse => {
+export const unmarshalExportSnapshotResponse = (
+  data: unknown,
+): ExportSnapshotResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ExportSnapshotResponse' failed as data isn't a dictionary.`,
@@ -768,7 +824,9 @@ const unmarshalDashboard = (data: unknown): Dashboard => {
   } as Dashboard
 }
 
-export const unmarshalGetDashboardResponse = (data: unknown): GetDashboardResponse => {
+export const unmarshalGetDashboardResponse = (
+  data: unknown,
+): GetDashboardResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetDashboardResponse' failed as data isn't a dictionary.`,
@@ -804,7 +862,9 @@ export const unmarshalGetIpResponse = (data: unknown): GetIpResponse => {
   } as GetIpResponse
 }
 
-export const unmarshalGetPlacementGroupResponse = (data: unknown): GetPlacementGroupResponse => {
+export const unmarshalGetPlacementGroupResponse = (
+  data: unknown,
+): GetPlacementGroupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetPlacementGroupResponse' failed as data isn't a dictionary.`,
@@ -812,7 +872,9 @@ export const unmarshalGetPlacementGroupResponse = (data: unknown): GetPlacementG
   }
 
   return {
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
   } as GetPlacementGroupResponse
 }
 
@@ -830,7 +892,9 @@ const unmarshalPlacementGroupServer = (data: unknown): PlacementGroupServer => {
   } as PlacementGroupServer
 }
 
-export const unmarshalGetPlacementGroupServersResponse = (data: unknown): GetPlacementGroupServersResponse => {
+export const unmarshalGetPlacementGroupServersResponse = (
+  data: unknown,
+): GetPlacementGroupServersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetPlacementGroupServersResponse' failed as data isn't a dictionary.`,
@@ -838,11 +902,16 @@ export const unmarshalGetPlacementGroupServersResponse = (data: unknown): GetPla
   }
 
   return {
-    servers: unmarshalArrayOfObject(data.servers, unmarshalPlacementGroupServer),
+    servers: unmarshalArrayOfObject(
+      data.servers,
+      unmarshalPlacementGroupServer,
+    ),
   } as GetPlacementGroupServersResponse
 }
 
-export const unmarshalGetPrivateNICResponse = (data: unknown): GetPrivateNICResponse => {
+export const unmarshalGetPrivateNICResponse = (
+  data: unknown,
+): GetPrivateNICResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetPrivateNICResponse' failed as data isn't a dictionary.`,
@@ -850,11 +919,15 @@ export const unmarshalGetPrivateNICResponse = (data: unknown): GetPrivateNICResp
   }
 
   return {
-    privateNic: data.private_nic ? unmarshalPrivateNIC(data.private_nic) : undefined,
+    privateNic: data.private_nic
+      ? unmarshalPrivateNIC(data.private_nic)
+      : undefined,
   } as GetPrivateNICResponse
 }
 
-export const unmarshalGetSecurityGroupResponse = (data: unknown): GetSecurityGroupResponse => {
+export const unmarshalGetSecurityGroupResponse = (
+  data: unknown,
+): GetSecurityGroupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetSecurityGroupResponse' failed as data isn't a dictionary.`,
@@ -862,11 +935,15 @@ export const unmarshalGetSecurityGroupResponse = (data: unknown): GetSecurityGro
   }
 
   return {
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroup(data.security_group)
+      : undefined,
   } as GetSecurityGroupResponse
 }
 
-export const unmarshalGetSecurityGroupRuleResponse = (data: unknown): GetSecurityGroupRuleResponse => {
+export const unmarshalGetSecurityGroupRuleResponse = (
+  data: unknown,
+): GetSecurityGroupRuleResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetSecurityGroupRuleResponse' failed as data isn't a dictionary.`,
@@ -878,7 +955,9 @@ export const unmarshalGetSecurityGroupRuleResponse = (data: unknown): GetSecurit
   } as GetSecurityGroupRuleResponse
 }
 
-export const unmarshalGetServerResponse = (data: unknown): GetServerResponse => {
+export const unmarshalGetServerResponse = (
+  data: unknown,
+): GetServerResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetServerResponse' failed as data isn't a dictionary.`,
@@ -890,7 +969,9 @@ export const unmarshalGetServerResponse = (data: unknown): GetServerResponse => 
   } as GetServerResponse
 }
 
-const unmarshalGetServerTypesAvailabilityResponseAvailability = (data: unknown): GetServerTypesAvailabilityResponseAvailability => {
+const unmarshalGetServerTypesAvailabilityResponseAvailability = (
+  data: unknown,
+): GetServerTypesAvailabilityResponseAvailability => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetServerTypesAvailabilityResponseAvailability' failed as data isn't a dictionary.`,
@@ -902,7 +983,9 @@ const unmarshalGetServerTypesAvailabilityResponseAvailability = (data: unknown):
   } as GetServerTypesAvailabilityResponseAvailability
 }
 
-export const unmarshalGetServerTypesAvailabilityResponse = (data: unknown): GetServerTypesAvailabilityResponse => {
+export const unmarshalGetServerTypesAvailabilityResponse = (
+  data: unknown,
+): GetServerTypesAvailabilityResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetServerTypesAvailabilityResponse' failed as data isn't a dictionary.`,
@@ -910,12 +993,17 @@ export const unmarshalGetServerTypesAvailabilityResponse = (data: unknown): GetS
   }
 
   return {
-    servers: unmarshalMapOfObject(data.servers, unmarshalGetServerTypesAvailabilityResponseAvailability),
+    servers: unmarshalMapOfObject(
+      data.servers,
+      unmarshalGetServerTypesAvailabilityResponseAvailability,
+    ),
     totalCount: data.total_count,
   } as GetServerTypesAvailabilityResponse
 }
 
-export const unmarshalGetSnapshotResponse = (data: unknown): GetSnapshotResponse => {
+export const unmarshalGetSnapshotResponse = (
+  data: unknown,
+): GetSnapshotResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetSnapshotResponse' failed as data isn't a dictionary.`,
@@ -927,7 +1015,9 @@ export const unmarshalGetSnapshotResponse = (data: unknown): GetSnapshotResponse
   } as GetSnapshotResponse
 }
 
-export const unmarshalGetVolumeResponse = (data: unknown): GetVolumeResponse => {
+export const unmarshalGetVolumeResponse = (
+  data: unknown,
+): GetVolumeResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'GetVolumeResponse' failed as data isn't a dictionary.`,
@@ -939,7 +1029,9 @@ export const unmarshalGetVolumeResponse = (data: unknown): GetVolumeResponse => 
   } as GetVolumeResponse
 }
 
-export const unmarshalListImagesResponse = (data: unknown): ListImagesResponse => {
+export const unmarshalListImagesResponse = (
+  data: unknown,
+): ListImagesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListImagesResponse' failed as data isn't a dictionary.`,
@@ -965,7 +1057,9 @@ export const unmarshalListIpsResponse = (data: unknown): ListIpsResponse => {
   } as ListIpsResponse
 }
 
-export const unmarshalListPlacementGroupsResponse = (data: unknown): ListPlacementGroupsResponse => {
+export const unmarshalListPlacementGroupsResponse = (
+  data: unknown,
+): ListPlacementGroupsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPlacementGroupsResponse' failed as data isn't a dictionary.`,
@@ -973,12 +1067,17 @@ export const unmarshalListPlacementGroupsResponse = (data: unknown): ListPlaceme
   }
 
   return {
-    placementGroups: unmarshalArrayOfObject(data.placement_groups, unmarshalPlacementGroup),
+    placementGroups: unmarshalArrayOfObject(
+      data.placement_groups,
+      unmarshalPlacementGroup,
+    ),
     totalCount: data.total_count,
   } as ListPlacementGroupsResponse
 }
 
-export const unmarshalListPrivateNICsResponse = (data: unknown): ListPrivateNICsResponse => {
+export const unmarshalListPrivateNICsResponse = (
+  data: unknown,
+): ListPrivateNICsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPrivateNICsResponse' failed as data isn't a dictionary.`,
@@ -991,7 +1090,9 @@ export const unmarshalListPrivateNICsResponse = (data: unknown): ListPrivateNICs
   } as ListPrivateNICsResponse
 }
 
-export const unmarshalListSecurityGroupRulesResponse = (data: unknown): ListSecurityGroupRulesResponse => {
+export const unmarshalListSecurityGroupRulesResponse = (
+  data: unknown,
+): ListSecurityGroupRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSecurityGroupRulesResponse' failed as data isn't a dictionary.`,
@@ -1004,7 +1105,9 @@ export const unmarshalListSecurityGroupRulesResponse = (data: unknown): ListSecu
   } as ListSecurityGroupRulesResponse
 }
 
-export const unmarshalListSecurityGroupsResponse = (data: unknown): ListSecurityGroupsResponse => {
+export const unmarshalListSecurityGroupsResponse = (
+  data: unknown,
+): ListSecurityGroupsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSecurityGroupsResponse' failed as data isn't a dictionary.`,
@@ -1012,12 +1115,17 @@ export const unmarshalListSecurityGroupsResponse = (data: unknown): ListSecurity
   }
 
   return {
-    securityGroups: unmarshalArrayOfObject(data.security_groups, unmarshalSecurityGroup),
+    securityGroups: unmarshalArrayOfObject(
+      data.security_groups,
+      unmarshalSecurityGroup,
+    ),
     totalCount: data.total_count,
   } as ListSecurityGroupsResponse
 }
 
-export const unmarshalListServerActionsResponse = (data: unknown): ListServerActionsResponse => {
+export const unmarshalListServerActionsResponse = (
+  data: unknown,
+): ListServerActionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServerActionsResponse' failed as data isn't a dictionary.`,
@@ -1029,7 +1137,9 @@ export const unmarshalListServerActionsResponse = (data: unknown): ListServerAct
   } as ListServerActionsResponse
 }
 
-export const unmarshalListServerUserDataResponse = (data: unknown): ListServerUserDataResponse => {
+export const unmarshalListServerUserDataResponse = (
+  data: unknown,
+): ListServerUserDataResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServerUserDataResponse' failed as data isn't a dictionary.`,
@@ -1041,7 +1151,9 @@ export const unmarshalListServerUserDataResponse = (data: unknown): ListServerUs
   } as ListServerUserDataResponse
 }
 
-export const unmarshalListServersResponse = (data: unknown): ListServersResponse => {
+export const unmarshalListServersResponse = (
+  data: unknown,
+): ListServersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServersResponse' failed as data isn't a dictionary.`,
@@ -1054,7 +1166,9 @@ export const unmarshalListServersResponse = (data: unknown): ListServersResponse
   } as ListServersResponse
 }
 
-const unmarshalServerTypeNetworkInterface = (data: unknown): ServerTypeNetworkInterface => {
+const unmarshalServerTypeNetworkInterface = (
+  data: unknown,
+): ServerTypeNetworkInterface => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerTypeNetworkInterface' failed as data isn't a dictionary.`,
@@ -1067,7 +1181,9 @@ const unmarshalServerTypeNetworkInterface = (data: unknown): ServerTypeNetworkIn
   } as ServerTypeNetworkInterface
 }
 
-const unmarshalServerTypeVolumeConstraintSizes = (data: unknown): ServerTypeVolumeConstraintSizes => {
+const unmarshalServerTypeVolumeConstraintSizes = (
+  data: unknown,
+): ServerTypeVolumeConstraintSizes => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerTypeVolumeConstraintSizes' failed as data isn't a dictionary.`,
@@ -1080,7 +1196,9 @@ const unmarshalServerTypeVolumeConstraintSizes = (data: unknown): ServerTypeVolu
   } as ServerTypeVolumeConstraintSizes
 }
 
-const unmarshalServerTypeCapabilities = (data: unknown): ServerTypeCapabilities => {
+const unmarshalServerTypeCapabilities = (
+  data: unknown,
+): ServerTypeCapabilities => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerTypeCapabilities' failed as data isn't a dictionary.`,
@@ -1116,14 +1234,19 @@ const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
   }
 
   return {
-    interfaces: unmarshalArrayOfObject(data.interfaces, unmarshalServerTypeNetworkInterface),
+    interfaces: unmarshalArrayOfObject(
+      data.interfaces,
+      unmarshalServerTypeNetworkInterface,
+    ),
     ipv6Support: data.ipv6_support,
     sumInternalBandwidth: data.sum_internal_bandwidth,
     sumInternetBandwidth: data.sum_internet_bandwidth,
   } as ServerTypeNetwork
 }
 
-const unmarshalServerTypeVolumeConstraintsByType = (data: unknown): ServerTypeVolumeConstraintsByType => {
+const unmarshalServerTypeVolumeConstraintsByType = (
+  data: unknown,
+): ServerTypeVolumeConstraintsByType => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerTypeVolumeConstraintsByType' failed as data isn't a dictionary.`,
@@ -1131,7 +1254,9 @@ const unmarshalServerTypeVolumeConstraintsByType = (data: unknown): ServerTypeVo
   }
 
   return {
-    lSsd: data.l_ssd ? unmarshalServerTypeVolumeConstraintSizes(data.l_ssd) : undefined,
+    lSsd: data.l_ssd
+      ? unmarshalServerTypeVolumeConstraintSizes(data.l_ssd)
+      : undefined,
   } as ServerTypeVolumeConstraintsByType
 }
 
@@ -1146,22 +1271,34 @@ const unmarshalServerType = (data: unknown): ServerType => {
     altNames: data.alt_names,
     arch: data.arch,
     blockBandwidth: data.block_bandwidth,
-    capabilities: data.capabilities ? unmarshalServerTypeCapabilities(data.capabilities) : undefined,
+    capabilities: data.capabilities
+      ? unmarshalServerTypeCapabilities(data.capabilities)
+      : undefined,
     endOfService: data.end_of_service,
     gpu: data.gpu,
-    gpuInfo: data.gpu_info ? unmarshalServerTypeGPUInfo(data.gpu_info) : undefined,
+    gpuInfo: data.gpu_info
+      ? unmarshalServerTypeGPUInfo(data.gpu_info)
+      : undefined,
     hourlyPrice: data.hourly_price,
     monthlyPrice: data.monthly_price,
     ncpus: data.ncpus,
-    network: data.network ? unmarshalServerTypeNetwork(data.network) : undefined,
-    perVolumeConstraint: data.per_volume_constraint ? unmarshalServerTypeVolumeConstraintsByType(data.per_volume_constraint) : undefined,
+    network: data.network
+      ? unmarshalServerTypeNetwork(data.network)
+      : undefined,
+    perVolumeConstraint: data.per_volume_constraint
+      ? unmarshalServerTypeVolumeConstraintsByType(data.per_volume_constraint)
+      : undefined,
     ram: data.ram,
     scratchStorageMaxSize: data.scratch_storage_max_size,
-    volumesConstraint: data.volumes_constraint ? unmarshalServerTypeVolumeConstraintSizes(data.volumes_constraint) : undefined,
+    volumesConstraint: data.volumes_constraint
+      ? unmarshalServerTypeVolumeConstraintSizes(data.volumes_constraint)
+      : undefined,
   } as ServerType
 }
 
-export const unmarshalListServersTypesResponse = (data: unknown): ListServersTypesResponse => {
+export const unmarshalListServersTypesResponse = (
+  data: unknown,
+): ListServersTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListServersTypesResponse' failed as data isn't a dictionary.`,
@@ -1174,7 +1311,9 @@ export const unmarshalListServersTypesResponse = (data: unknown): ListServersTyp
   } as ListServersTypesResponse
 }
 
-export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResponse => {
+export const unmarshalListSnapshotsResponse = (
+  data: unknown,
+): ListSnapshotsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`,
@@ -1187,7 +1326,9 @@ export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResp
   } as ListSnapshotsResponse
 }
 
-export const unmarshalListVolumesResponse = (data: unknown): ListVolumesResponse => {
+export const unmarshalListVolumesResponse = (
+  data: unknown,
+): ListVolumesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVolumesResponse' failed as data isn't a dictionary.`,
@@ -1200,7 +1341,9 @@ export const unmarshalListVolumesResponse = (data: unknown): ListVolumesResponse
   } as ListVolumesResponse
 }
 
-const unmarshalVolumeTypeCapabilities = (data: unknown): VolumeTypeCapabilities => {
+const unmarshalVolumeTypeCapabilities = (
+  data: unknown,
+): VolumeTypeCapabilities => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VolumeTypeCapabilities' failed as data isn't a dictionary.`,
@@ -1212,7 +1355,9 @@ const unmarshalVolumeTypeCapabilities = (data: unknown): VolumeTypeCapabilities 
   } as VolumeTypeCapabilities
 }
 
-const unmarshalVolumeTypeConstraints = (data: unknown): VolumeTypeConstraints => {
+const unmarshalVolumeTypeConstraints = (
+  data: unknown,
+): VolumeTypeConstraints => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VolumeTypeConstraints' failed as data isn't a dictionary.`,
@@ -1233,13 +1378,19 @@ const unmarshalVolumeType = (data: unknown): VolumeType => {
   }
 
   return {
-    capabilities: data.capabilities ? unmarshalVolumeTypeCapabilities(data.capabilities) : undefined,
-    constraints: data.constraints ? unmarshalVolumeTypeConstraints(data.constraints) : undefined,
+    capabilities: data.capabilities
+      ? unmarshalVolumeTypeCapabilities(data.capabilities)
+      : undefined,
+    constraints: data.constraints
+      ? unmarshalVolumeTypeConstraints(data.constraints)
+      : undefined,
     displayName: data.display_name,
   } as VolumeType
 }
 
-export const unmarshalListVolumesTypesResponse = (data: unknown): ListVolumesTypesResponse => {
+export const unmarshalListVolumesTypesResponse = (
+  data: unknown,
+): ListVolumesTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVolumesTypesResponse' failed as data isn't a dictionary.`,
@@ -1266,7 +1417,9 @@ export const unmarshalMigrationPlan = (data: unknown): MigrationPlan => {
   } as MigrationPlan
 }
 
-export const unmarshalServerActionResponse = (data: unknown): ServerActionResponse => {
+export const unmarshalServerActionResponse = (
+  data: unknown,
+): ServerActionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerActionResponse' failed as data isn't a dictionary.`,
@@ -1278,7 +1431,9 @@ export const unmarshalServerActionResponse = (data: unknown): ServerActionRespon
   } as ServerActionResponse
 }
 
-export const unmarshalServerCompatibleTypes = (data: unknown): ServerCompatibleTypes => {
+export const unmarshalServerCompatibleTypes = (
+  data: unknown,
+): ServerCompatibleTypes => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ServerCompatibleTypes' failed as data isn't a dictionary.`,
@@ -1302,7 +1457,9 @@ export const unmarshalSetImageResponse = (data: unknown): SetImageResponse => {
   } as SetImageResponse
 }
 
-export const unmarshalSetPlacementGroupResponse = (data: unknown): SetPlacementGroupResponse => {
+export const unmarshalSetPlacementGroupResponse = (
+  data: unknown,
+): SetPlacementGroupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetPlacementGroupResponse' failed as data isn't a dictionary.`,
@@ -1310,11 +1467,15 @@ export const unmarshalSetPlacementGroupResponse = (data: unknown): SetPlacementG
   }
 
   return {
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
   } as SetPlacementGroupResponse
 }
 
-export const unmarshalSetPlacementGroupServersResponse = (data: unknown): SetPlacementGroupServersResponse => {
+export const unmarshalSetPlacementGroupServersResponse = (
+  data: unknown,
+): SetPlacementGroupServersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetPlacementGroupServersResponse' failed as data isn't a dictionary.`,
@@ -1322,11 +1483,16 @@ export const unmarshalSetPlacementGroupServersResponse = (data: unknown): SetPla
   }
 
   return {
-    servers: unmarshalArrayOfObject(data.servers, unmarshalPlacementGroupServer),
+    servers: unmarshalArrayOfObject(
+      data.servers,
+      unmarshalPlacementGroupServer,
+    ),
   } as SetPlacementGroupServersResponse
 }
 
-export const unmarshalSetSecurityGroupResponse = (data: unknown): SetSecurityGroupResponse => {
+export const unmarshalSetSecurityGroupResponse = (
+  data: unknown,
+): SetSecurityGroupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetSecurityGroupResponse' failed as data isn't a dictionary.`,
@@ -1334,11 +1500,15 @@ export const unmarshalSetSecurityGroupResponse = (data: unknown): SetSecurityGro
   }
 
   return {
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroup(data.security_group)
+      : undefined,
   } as SetSecurityGroupResponse
 }
 
-export const unmarshalSetSecurityGroupRuleResponse = (data: unknown): SetSecurityGroupRuleResponse => {
+export const unmarshalSetSecurityGroupRuleResponse = (
+  data: unknown,
+): SetSecurityGroupRuleResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetSecurityGroupRuleResponse' failed as data isn't a dictionary.`,
@@ -1350,7 +1520,9 @@ export const unmarshalSetSecurityGroupRuleResponse = (data: unknown): SetSecurit
   } as SetSecurityGroupRuleResponse
 }
 
-export const unmarshalSetSecurityGroupRulesResponse = (data: unknown): SetSecurityGroupRulesResponse => {
+export const unmarshalSetSecurityGroupRulesResponse = (
+  data: unknown,
+): SetSecurityGroupRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetSecurityGroupRulesResponse' failed as data isn't a dictionary.`,
@@ -1362,7 +1534,9 @@ export const unmarshalSetSecurityGroupRulesResponse = (data: unknown): SetSecuri
   } as SetSecurityGroupRulesResponse
 }
 
-export const unmarshalSetServerResponse = (data: unknown): SetServerResponse => {
+export const unmarshalSetServerResponse = (
+  data: unknown,
+): SetServerResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetServerResponse' failed as data isn't a dictionary.`,
@@ -1374,7 +1548,9 @@ export const unmarshalSetServerResponse = (data: unknown): SetServerResponse => 
   } as SetServerResponse
 }
 
-export const unmarshalSetSnapshotResponse = (data: unknown): SetSnapshotResponse => {
+export const unmarshalSetSnapshotResponse = (
+  data: unknown,
+): SetSnapshotResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetSnapshotResponse' failed as data isn't a dictionary.`,
@@ -1386,7 +1562,9 @@ export const unmarshalSetSnapshotResponse = (data: unknown): SetSnapshotResponse
   } as SetSnapshotResponse
 }
 
-export const unmarshalUpdateImageResponse = (data: unknown): UpdateImageResponse => {
+export const unmarshalUpdateImageResponse = (
+  data: unknown,
+): UpdateImageResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdateImageResponse' failed as data isn't a dictionary.`,
@@ -1410,7 +1588,9 @@ export const unmarshalUpdateIpResponse = (data: unknown): UpdateIpResponse => {
   } as UpdateIpResponse
 }
 
-export const unmarshalUpdatePlacementGroupResponse = (data: unknown): UpdatePlacementGroupResponse => {
+export const unmarshalUpdatePlacementGroupResponse = (
+  data: unknown,
+): UpdatePlacementGroupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdatePlacementGroupResponse' failed as data isn't a dictionary.`,
@@ -1418,11 +1598,15 @@ export const unmarshalUpdatePlacementGroupResponse = (data: unknown): UpdatePlac
   }
 
   return {
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group
+      ? unmarshalPlacementGroup(data.placement_group)
+      : undefined,
   } as UpdatePlacementGroupResponse
 }
 
-export const unmarshalUpdatePlacementGroupServersResponse = (data: unknown): UpdatePlacementGroupServersResponse => {
+export const unmarshalUpdatePlacementGroupServersResponse = (
+  data: unknown,
+): UpdatePlacementGroupServersResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdatePlacementGroupServersResponse' failed as data isn't a dictionary.`,
@@ -1430,11 +1614,16 @@ export const unmarshalUpdatePlacementGroupServersResponse = (data: unknown): Upd
   }
 
   return {
-    servers: unmarshalArrayOfObject(data.servers, unmarshalPlacementGroupServer),
+    servers: unmarshalArrayOfObject(
+      data.servers,
+      unmarshalPlacementGroupServer,
+    ),
   } as UpdatePlacementGroupServersResponse
 }
 
-export const unmarshalUpdateSecurityGroupResponse = (data: unknown): UpdateSecurityGroupResponse => {
+export const unmarshalUpdateSecurityGroupResponse = (
+  data: unknown,
+): UpdateSecurityGroupResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdateSecurityGroupResponse' failed as data isn't a dictionary.`,
@@ -1442,11 +1631,15 @@ export const unmarshalUpdateSecurityGroupResponse = (data: unknown): UpdateSecur
   }
 
   return {
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group
+      ? unmarshalSecurityGroup(data.security_group)
+      : undefined,
   } as UpdateSecurityGroupResponse
 }
 
-export const unmarshalUpdateSecurityGroupRuleResponse = (data: unknown): UpdateSecurityGroupRuleResponse => {
+export const unmarshalUpdateSecurityGroupRuleResponse = (
+  data: unknown,
+): UpdateSecurityGroupRuleResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdateSecurityGroupRuleResponse' failed as data isn't a dictionary.`,
@@ -1458,7 +1651,9 @@ export const unmarshalUpdateSecurityGroupRuleResponse = (data: unknown): UpdateS
   } as UpdateSecurityGroupRuleResponse
 }
 
-export const unmarshalUpdateServerResponse = (data: unknown): UpdateServerResponse => {
+export const unmarshalUpdateServerResponse = (
+  data: unknown,
+): UpdateServerResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdateServerResponse' failed as data isn't a dictionary.`,
@@ -1470,7 +1665,9 @@ export const unmarshalUpdateServerResponse = (data: unknown): UpdateServerRespon
   } as UpdateServerResponse
 }
 
-export const unmarshalUpdateSnapshotResponse = (data: unknown): UpdateSnapshotResponse => {
+export const unmarshalUpdateSnapshotResponse = (
+  data: unknown,
+): UpdateSnapshotResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdateSnapshotResponse' failed as data isn't a dictionary.`,
@@ -1482,7 +1679,9 @@ export const unmarshalUpdateSnapshotResponse = (data: unknown): UpdateSnapshotRe
   } as UpdateSnapshotResponse
 }
 
-export const unmarshalUpdateVolumeResponse = (data: unknown): UpdateVolumeResponse => {
+export const unmarshalUpdateVolumeResponse = (
+  data: unknown,
+): UpdateVolumeResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'UpdateVolumeResponse' failed as data isn't a dictionary.`,
@@ -1498,14 +1697,10 @@ export const marshalApplyBlockMigrationRequest = (
   request: ApplyBlockMigrationRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  validation_key: request.validationKey,  
+  validation_key: request.validationKey,
   ...resolveOneOf([
-    {param: 'volume_id',
-      value: request.volumeId,
-    },
-    {param: 'snapshot_id',
-      value: request.snapshotId,
-    },
+    { param: 'volume_id', value: request.volumeId },
+    { param: 'snapshot_id', value: request.snapshotId },
   ]),
 })
 
@@ -1539,14 +1734,10 @@ const marshalVolumeTemplate = (
   id: request.id,
   name: request.name,
   size: request.size,
-  volume_type: request.volumeType,  
+  volume_type: request.volumeType,
   ...resolveOneOf([
-    {param: 'project',
-      value: request.project,
-    },
-    {param: 'organization',
-      value: request.organization,
-    },
+    { param: 'project', value: request.project },
+    { param: 'organization', value: request.organization },
   ]),
 })
 
@@ -1555,16 +1746,29 @@ export const marshalCreateImageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   arch: request.arch,
-  extra_volumes: ((request.extraVolumes !== undefined) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeTemplate(value, defaults) }), {}): undefined),
+  extra_volumes:
+    request.extraVolumes !== undefined
+      ? Object.entries(request.extraVolumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolumeTemplate(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
   name: request.name || randomName('img'),
   public: request.public,
   root_volume: request.rootVolume,
-  tags: request.tags,  
+  tags: request.tags,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project',
       value: request.project,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
       value: request.organization,
     },
   ]),
@@ -1576,12 +1780,16 @@ export const marshalCreateIpRequest = (
 ): Record<string, unknown> => ({
   server: request.server,
   tags: request.tags,
-  type: request.type,  
+  type: request.type,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project',
       value: request.project,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
       value: request.organization,
     },
   ]),
@@ -1594,12 +1802,16 @@ export const marshalCreatePlacementGroupRequest = (
   name: request.name || randomName('pg'),
   policy_mode: request.policyMode,
   policy_type: request.policyType,
-  tags: request.tags,  
+  tags: request.tags,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project',
       value: request.project,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
       value: request.organization,
     },
   ]),
@@ -1625,22 +1837,22 @@ export const marshalCreateSecurityGroupRequest = (
   name: request.name || randomName('sg'),
   outbound_default_policy: request.outboundDefaultPolicy,
   stateful: request.stateful,
-  tags: request.tags,  
+  tags: request.tags,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project',
       value: request.project,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
       value: request.organization,
     },
-  ]),  
+  ]),
   ...resolveOneOf([
-    {param: 'organization_default',
-      value: request.organizationDefault,
-    },
-    {param: 'project_default',
-      value: request.projectDefault,
-    },
+    { param: 'organization_default', value: request.organizationDefault },
+    { param: 'project_default', value: request.projectDefault },
   ]),
 })
 
@@ -1690,12 +1902,25 @@ export const marshalCreateServerRequest = (
   routed_ip_enabled: request.routedIpEnabled,
   security_group: request.securityGroup,
   tags: request.tags,
-  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeServerTemplate(value, defaults) }), {}): undefined),  
+  volumes:
+    request.volumes !== undefined
+      ? Object.entries(request.volumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolumeServerTemplate(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project',
       value: request.project,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
       value: request.organization,
     },
   ]),
@@ -1711,12 +1936,16 @@ export const marshalCreateSnapshotRequest = (
   size: request.size,
   tags: request.tags,
   volume_id: request.volumeId,
-  volume_type: request.volumeType,  
+  volume_type: request.volumeType,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project',
       value: request.project,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
       value: request.organization,
     },
   ]),
@@ -1728,22 +1957,22 @@ export const marshalCreateVolumeRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('vol'),
   tags: request.tags,
-  volume_type: request.volumeType,  
+  volume_type: request.volumeType,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project',
+    {
+      default: defaults.defaultProjectId,
+      param: 'project',
       value: request.project,
     },
-    {default: defaults.defaultOrganizationId,param: 'organization',
+    {
+      default: defaults.defaultOrganizationId,
+      param: 'organization',
       value: request.organization,
     },
-  ]),  
+  ]),
   ...resolveOneOf<number | string>([
-    {param: 'size',
-      value: request.size,
-    },
-    {param: 'base_snapshot',
-      value: request.baseSnapshot,
-    },
+    { param: 'size', value: request.size },
+    { param: 'base_snapshot', value: request.baseSnapshot },
   ]),
 })
 
@@ -1772,14 +2001,10 @@ export const marshalExportSnapshotRequest = (
 export const marshalPlanBlockMigrationRequest = (
   request: PlanBlockMigrationRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'volume_id',
-      value: request.volumeId,
-    },
-    {param: 'snapshot_id',
-      value: request.snapshotId,
-    },
+    { param: 'volume_id', value: request.volumeId },
+    { param: 'snapshot_id', value: request.snapshotId },
   ]),
 })
 
@@ -1797,7 +2022,19 @@ export const marshalServerActionRequest = (
   action: request.action,
   disable_ipv6: request.disableIpv6,
   name: request.name,
-  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalServerActionRequestVolumeBackupTemplate(value, defaults) }), {}): undefined),
+  volumes:
+    request.volumes !== undefined
+      ? Object.entries(request.volumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalServerActionRequestVolumeBackupTemplate(
+              value,
+              defaults,
+            ),
+          }),
+          {},
+        )
+      : undefined,
 })
 
 const marshalServerSummary = (
@@ -1837,7 +2074,10 @@ const marshalVolume = (
   name: request.name,
   organization: request.organization,
   project: request.project,
-  server: ((request.server !== undefined) ?  marshalServerSummary(request.server, defaults): undefined),
+  server:
+    request.server !== undefined
+      ? marshalServerSummary(request.server, defaults)
+      : undefined,
   size: request.size,
   state: request.state,
   tags: request.tags,
@@ -1861,15 +2101,30 @@ export const marshalSetImageRequest = (
 ): Record<string, unknown> => ({
   arch: request.arch,
   creation_date: request.creationDate,
-  default_bootscript: ((request.defaultBootscript !== undefined) ?  marshalBootscript(request.defaultBootscript, defaults): undefined),
-  extra_volumes: ((request.extraVolumes !== undefined) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }), {}): undefined),
+  default_bootscript:
+    request.defaultBootscript !== undefined
+      ? marshalBootscript(request.defaultBootscript, defaults)
+      : undefined,
+  extra_volumes:
+    request.extraVolumes !== undefined
+      ? Object.entries(request.extraVolumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolume(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
   from_server: request.fromServer,
   modification_date: request.modificationDate,
   name: request.name,
   organization: request.organization ?? defaults.defaultOrganizationId,
   project: request.project ?? defaults.defaultProjectId,
   public: request.public,
-  root_volume: ((request.rootVolume !== undefined) ?  marshalVolumeSummary(request.rootVolume, defaults): undefined),
+  root_volume:
+    request.rootVolume !== undefined
+      ? marshalVolumeSummary(request.rootVolume, defaults)
+      : undefined,
   state: request.state,
   tags: request.tags,
 })
@@ -1908,7 +2163,10 @@ export const marshalSetSecurityGroupRequest = (
   outbound_default_policy: request.outboundDefaultPolicy,
   project: request.project ?? defaults.defaultProjectId,
   project_default: request.projectDefault,
-  servers: ((request.servers !== undefined) ?  request.servers.map(elt => marshalServerSummary(elt, defaults)): undefined),
+  servers:
+    request.servers !== undefined
+      ? request.servers.map(elt => marshalServerSummary(elt, defaults))
+      : undefined,
   stateful: request.stateful,
   tags: request.tags,
 })
@@ -1948,7 +2206,12 @@ export const marshalSetSecurityGroupRulesRequest = (
   request: SetSecurityGroupRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  rules: ((request.rules !== undefined) ?  request.rules.map(elt => marshalSetSecurityGroupRulesRequestRule(elt, defaults)): undefined),
+  rules:
+    request.rules !== undefined
+      ? request.rules.map(elt =>
+          marshalSetSecurityGroupRulesRequestRule(elt, defaults),
+        )
+      : undefined,
 })
 
 const marshalImage = (
@@ -1957,8 +2220,14 @@ const marshalImage = (
 ): Record<string, unknown> => ({
   arch: request.arch,
   creation_date: request.creationDate,
-  default_bootscript: ((request.defaultBootscript !== undefined) ?  marshalBootscript(request.defaultBootscript, defaults): undefined),
-  extra_volumes:  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }), {}),
+  default_bootscript:
+    request.defaultBootscript !== undefined
+      ? marshalBootscript(request.defaultBootscript, defaults)
+      : undefined,
+  extra_volumes: Object.entries(request.extraVolumes).reduce(
+    (acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }),
+    {},
+  ),
   from_server: request.fromServer,
   id: request.id,
   modification_date: request.modificationDate,
@@ -1966,7 +2235,10 @@ const marshalImage = (
   organization: request.organization,
   project: request.project,
   public: request.public,
-  root_volume: ((request.rootVolume !== undefined) ?  marshalVolumeSummary(request.rootVolume, defaults): undefined),
+  root_volume:
+    request.rootVolume !== undefined
+      ? marshalVolumeSummary(request.rootVolume, defaults)
+      : undefined,
   state: request.state,
   tags: request.tags,
   zone: request.zone,
@@ -2058,7 +2330,8 @@ export const marshalSetServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   admin_password_encryption_ssh_key_id: request.adminPasswordEncryptionSshKeyId,
-  allowed_actions: ((request.allowedActions !== undefined) ?  request.allowedActions: undefined),
+  allowed_actions:
+    request.allowedActions !== undefined ? request.allowedActions : undefined,
   arch: request.arch,
   boot_type: request.bootType,
   commercial_type: request.commercialType,
@@ -2066,26 +2339,62 @@ export const marshalSetServerRequest = (
   dynamic_ip_required: request.dynamicIpRequired,
   enable_ipv6: request.enableIpv6,
   hostname: request.hostname,
-  image: ((request.image !== undefined) ?  marshalImage(request.image, defaults): undefined),
-  ipv6: ((request.ipv6 !== undefined) ?  marshalServerIpv6(request.ipv6, defaults): undefined),
-  location: ((request.location !== undefined) ?  marshalServerLocation(request.location, defaults): undefined),
-  maintenances: ((request.maintenances !== undefined) ?  request.maintenances.map(elt => marshalServerMaintenance(elt, defaults)): undefined),
+  image:
+    request.image !== undefined
+      ? marshalImage(request.image, defaults)
+      : undefined,
+  ipv6:
+    request.ipv6 !== undefined
+      ? marshalServerIpv6(request.ipv6, defaults)
+      : undefined,
+  location:
+    request.location !== undefined
+      ? marshalServerLocation(request.location, defaults)
+      : undefined,
+  maintenances:
+    request.maintenances !== undefined
+      ? request.maintenances.map(elt => marshalServerMaintenance(elt, defaults))
+      : undefined,
   modification_date: request.modificationDate,
   name: request.name,
   organization: request.organization ?? defaults.defaultOrganizationId,
-  placement_group: ((request.placementGroup !== undefined) ?  marshalPlacementGroup(request.placementGroup, defaults): undefined),
+  placement_group:
+    request.placementGroup !== undefined
+      ? marshalPlacementGroup(request.placementGroup, defaults)
+      : undefined,
   private_ip: request.privateIp,
-  private_nics: ((request.privateNics !== undefined) ?  request.privateNics.map(elt => marshalPrivateNIC(elt, defaults)): undefined),
+  private_nics:
+    request.privateNics !== undefined
+      ? request.privateNics.map(elt => marshalPrivateNIC(elt, defaults))
+      : undefined,
   project: request.project ?? defaults.defaultProjectId,
   protected: request.protected,
-  public_ip: ((request.publicIp !== undefined) ?  marshalServerIp(request.publicIp, defaults): undefined),
-  public_ips: ((request.publicIps !== undefined) ?  request.publicIps.map(elt => marshalServerIp(elt, defaults)): undefined),
+  public_ip:
+    request.publicIp !== undefined
+      ? marshalServerIp(request.publicIp, defaults)
+      : undefined,
+  public_ips:
+    request.publicIps !== undefined
+      ? request.publicIps.map(elt => marshalServerIp(elt, defaults))
+      : undefined,
   routed_ip_enabled: request.routedIpEnabled,
-  security_group: ((request.securityGroup !== undefined) ?  marshalSecurityGroupSummary(request.securityGroup, defaults): undefined),
+  security_group:
+    request.securityGroup !== undefined
+      ? marshalSecurityGroupSummary(request.securityGroup, defaults)
+      : undefined,
   state: request.state,
   state_detail: request.stateDetail,
   tags: request.tags,
-  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }), {}): undefined),
+  volumes:
+    request.volumes !== undefined
+      ? Object.entries(request.volumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolume(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
 })
 
 const marshalSnapshotBaseVolume = (
@@ -2100,7 +2409,10 @@ export const marshalSetSnapshotRequest = (
   request: SetSnapshotRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  base_volume: ((request.baseVolume !== undefined) ?  marshalSnapshotBaseVolume(request.baseVolume, defaults): undefined),
+  base_volume:
+    request.baseVolume !== undefined
+      ? marshalSnapshotBaseVolume(request.baseVolume, defaults)
+      : undefined,
   creation_date: request.creationDate,
   id: request.id,
   modification_date: request.modificationDate,
@@ -2125,7 +2437,16 @@ export const marshalUpdateImageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   arch: request.arch,
-  extra_volumes: ((request.extraVolumes !== undefined) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeImageUpdateTemplate(value, defaults) }), {}): undefined),
+  extra_volumes:
+    request.extraVolumes !== undefined
+      ? Object.entries(request.extraVolumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolumeImageUpdateTemplate(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
   name: request.name,
   public: request.public,
   tags: request.tags,
@@ -2216,9 +2537,21 @@ export const marshalUpdateServerRequest = (
   protected: request.protected,
   public_ips: request.publicIps,
   routed_ip_enabled: request.routedIpEnabled,
-  security_group: ((request.securityGroup !== undefined) ?  marshalSecurityGroupTemplate(request.securityGroup, defaults): undefined),
+  security_group:
+    request.securityGroup !== undefined
+      ? marshalSecurityGroupTemplate(request.securityGroup, defaults)
+      : undefined,
   tags: request.tags,
-  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeServerTemplate(value, defaults) }), {}): undefined),
+  volumes:
+    request.volumes !== undefined
+      ? Object.entries(request.volumes).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: marshalVolumeServerTemplate(value, defaults),
+          }),
+          {},
+        )
+      : undefined,
 })
 
 export const marshalUpdateSnapshotRequest = (
