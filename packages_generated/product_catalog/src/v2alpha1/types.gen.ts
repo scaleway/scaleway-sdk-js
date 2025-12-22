@@ -63,7 +63,6 @@ export type PublicCatalogProductPropertiesObjectStorageInternetTrafficTypeTraffi
   | 'unknown_traffic_type'
   | 'ingress'
   | 'egress'
-  | 'alliance'
 
 export type PublicCatalogProductPropertiesObjectStorageRestoreTypeRestoreType =
   | 'unknown_restore_type'
