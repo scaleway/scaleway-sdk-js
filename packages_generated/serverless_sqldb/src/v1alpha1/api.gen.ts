@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB,} from './content.gen.js'
+import { DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB } from './content.gen.js'
 import {
   marshalCreateDatabaseRequest,
   marshalRestoreDatabaseFromBackupRequest,
@@ -50,13 +50,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
+
   /**
    * Create a new Serverless SQL Database. You must provide the following parameters: `organization_id`, `project_id`, `name`, `cpu_min`, `cpu_max`. You can also provide `from_backup_id` to create a database from a backup.
    *
@@ -76,7 +73,6 @@ export class API extends ParentAPI {
       unmarshalDatabase,
     )
 
-  
   /**
    * Get a database information. Retrieve information about your Serverless SQL Database. You must provide the `database_id` parameter.
    *
@@ -91,7 +87,7 @@ export class API extends ParentAPI {
       },
       unmarshalDatabase,
     )
-  
+
   /**
    * Waits for {@link Database} to be in a final state.
    *
@@ -104,13 +100,16 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Database>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB.includes(res.status),
+          )),
       this.getDatabase,
       request,
       options,
     )
 
-  
   /**
    * Delete a database. Deletes a database. You must provide the `database_id` parameter. All data stored in the database will be permanently deleted.
    *
@@ -126,8 +125,9 @@ export class API extends ParentAPI {
       unmarshalDatabase,
     )
 
-  
-  protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest> = {}) =>
+  protected pageOfListDatabases = (
+    request: Readonly<ListDatabasesRequest> = {},
+  ) =>
     this.client.fetch<ListDatabasesResponse>(
       {
         method: 'GET',
@@ -138,12 +138,15 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
         ),
       },
       unmarshalListDatabasesResponse,
     )
-  
+
   /**
    * List your Serverless SQL Databases. List all Serverless SQL Databases for a given Scaleway Organization or Scaleway Project. By default, the databases returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field. For the `name` parameter, the value you include will be checked against the whole name string to see if it includes the string you put in the parameter.
    *
@@ -153,7 +156,6 @@ export class API extends ParentAPI {
   listDatabases = (request: Readonly<ListDatabasesRequest> = {}) =>
     enrichForPagination('databases', this.pageOfListDatabases, request)
 
-  
   /**
    * Update database information. Update CPU limits of your Serverless SQL Database. You must provide the `database_id` parameter.
    *
@@ -173,18 +175,22 @@ export class API extends ParentAPI {
       unmarshalDatabase,
     )
 
-  
   /**
    * Restore a database from a backup. Restore a database from a backup. You must provide the `backup_id` parameter.
    *
    * @param request - The request {@link RestoreDatabaseFromBackupRequest}
    * @returns A Promise of Database
    */
-  restoreDatabaseFromBackup = (request: Readonly<RestoreDatabaseFromBackupRequest>) =>
+  restoreDatabaseFromBackup = (
+    request: Readonly<RestoreDatabaseFromBackupRequest>,
+  ) =>
     this.client.fetch<Database>(
       {
         body: JSON.stringify(
-          marshalRestoreDatabaseFromBackupRequest(request, this.client.settings),
+          marshalRestoreDatabaseFromBackupRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -193,7 +199,6 @@ export class API extends ParentAPI {
       unmarshalDatabase,
     )
 
-  
   /**
    * Get a database backup information. Retrieve information about your Serverless SQL Database backup. You must provide the `backup_id` parameter.
    *
@@ -209,8 +214,9 @@ export class API extends ParentAPI {
       unmarshalDatabaseBackup,
     )
 
-  
-  protected pageOfListDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest>) =>
+  protected pageOfListDatabaseBackups = (
+    request: Readonly<ListDatabaseBackupsRequest>,
+  ) =>
     this.client.fetch<ListDatabaseBackupsResponse>(
       {
         method: 'GET',
@@ -226,7 +232,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDatabaseBackupsResponse,
     )
-  
+
   /**
    * List your Serverless SQL Database backups. List all Serverless SQL Database backups for a given Scaleway Project or Database. By default, the backups returned in the list are ordered by creation date in descending order, though this can be modified via the order_by field.
    *
@@ -236,7 +242,6 @@ export class API extends ParentAPI {
   listDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest>) =>
     enrichForPagination('backups', this.pageOfListDatabaseBackups, request)
 
-  
   /**
    * Export a database backup. Export a database backup providing a download link once the export process is completed. You must provide the `backup_id` parameter.
    *
@@ -253,7 +258,4 @@ export class API extends ParentAPI {
       },
       unmarshalDatabaseBackup,
     )
-
-  
 }
-

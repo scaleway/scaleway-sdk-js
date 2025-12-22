@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Zone as ScwZone, } from '@scaleway/sdk-client'
-
+import type { Money, Zone as ScwZone } from '@scaleway/sdk-client'
 
 export type AttachFailoverIPToMacAddressRequestMacType =
   | 'mac_type_unknown'
@@ -9,11 +8,7 @@ export type AttachFailoverIPToMacAddressRequestMacType =
   | 'kvm'
   | 'xen'
 
-export type BMCAccessStatus =
-  | 'unknown'
-  | 'creating'
-  | 'created'
-  | 'deleting'
+export type BMCAccessStatus = 'unknown' | 'creating' | 'created' | 'deleting'
 
 export type BackupStatus =
   | 'unknown_backup_status'
@@ -21,27 +16,13 @@ export type BackupStatus =
   | 'inactive'
   | 'ready'
 
-export type FailoverBlockVersion =
-  | 'unknown_version'
-  | 'ipv4'
-  | 'ipv6'
+export type FailoverBlockVersion = 'unknown_version' | 'ipv4' | 'ipv6'
 
-export type FailoverIPInterfaceType =
-  | 'unknown'
-  | 'normal'
-  | 'ipmi'
-  | 'virtual'
+export type FailoverIPInterfaceType = 'unknown' | 'normal' | 'ipmi' | 'virtual'
 
-export type FailoverIPStatus =
-  | 'unknown_status'
-  | 'ready'
-  | 'busy'
-  | 'locked'
+export type FailoverIPStatus = 'unknown_status' | 'ready' | 'busy' | 'locked'
 
-export type FailoverIPVersion =
-  | 'unknown_version'
-  | 'ipv4'
-  | 'ipv6'
+export type FailoverIPVersion = 'unknown_version' | 'ipv4' | 'ipv6'
 
 export type GetRpnStatusResponseStatus =
   | 'unknown_status'
@@ -59,20 +40,11 @@ export type IPSemantic =
   | 'redirect'
   | 'migration'
 
-export type IPStatus =
-  | 'unknown_status'
-  | 'ready'
-  | 'busy'
-  | 'locked'
+export type IPStatus = 'unknown_status' | 'ready' | 'busy' | 'locked'
 
-export type IPVersion =
-  | 'ipv4'
-  | 'ipv6'
+export type IPVersion = 'ipv4' | 'ipv6'
 
-export type IPv6BlockDelegationStatus =
-  | 'unknown_status'
-  | 'updating'
-  | 'done'
+export type IPv6BlockDelegationStatus = 'unknown_status' | 'updating' | 'done'
 
 export type InvoicePaymentMethod =
   | 'unknown_payment_method'
@@ -88,13 +60,9 @@ export type InvoiceStatus =
   | 'paid'
   | 'errored'
 
-export type ListFailoverIPsRequestOrderBy =
-  | 'ip_asc'
-  | 'ip_desc'
+export type ListFailoverIPsRequestOrderBy = 'ip_asc' | 'ip_desc'
 
-export type ListInvoicesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListInvoicesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListOSRequestOrderBy =
   | 'created_at_asc'
@@ -110,9 +78,7 @@ export type ListOffersRequestOrderBy =
   | 'price_asc'
   | 'price_desc'
 
-export type ListRefundsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListRefundsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListRpnCapableSanServersRequestOrderBy =
   | 'created_at_asc'
@@ -126,17 +92,11 @@ export type ListRpnGroupMembersRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
-export type ListRpnGroupsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListRpnGroupsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListRpnInvitesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListRpnInvitesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListRpnSansRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListRpnSansRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListRpnServerCapabilitiesRequestOrderBy =
   | 'created_at_asc'
@@ -150,9 +110,7 @@ export type ListRpnV2GroupLogsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
-export type ListRpnV2GroupsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListRpnV2GroupsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListRpnV2MembersRequestOrderBy =
   | 'created_at_asc'
@@ -163,21 +121,15 @@ export type ListRpnV2MembersRequestType =
   | 'rpnv1_group'
   | 'server'
 
-export type ListServerDisksRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListServerDisksRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListServerEventsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
-export type ListServersRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListServersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListServicesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListServicesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type LogAction =
   | 'unknown_log_action'
@@ -197,11 +149,7 @@ export type LogStatus =
   | 'in_progress'
   | 'error'
 
-export type MemoryType =
-  | 'ddr2'
-  | 'ddr3'
-  | 'ddr4'
-  | 'ddr5'
+export type MemoryType = 'ddr2' | 'ddr3' | 'ddr4' | 'ddr5'
 
 export type NetworkInterfaceInterfaceType =
   | 'unknown'
@@ -209,12 +157,7 @@ export type NetworkInterfaceInterfaceType =
   | 'ipmi'
   | 'virtual'
 
-export type OSArch =
-  | 'unknown_arch'
-  | 'amd64'
-  | 'x86'
-  | 'arm'
-  | 'arm64'
+export type OSArch = 'unknown_arch' | 'amd64' | 'x86' | 'arm' | 'arm64'
 
 export type OSType =
   | 'unknown_type'
@@ -225,10 +168,7 @@ export type OSType =
   | 'custom'
   | 'rescue'
 
-export type OfferAntiDosInfoType =
-  | 'minimal'
-  | 'preventive'
-  | 'curative'
+export type OfferAntiDosInfoType = 'minimal' | 'preventive' | 'curative'
 
 export type OfferCatalog =
   | 'all'
@@ -240,18 +180,11 @@ export type OfferCatalog =
   | 'admin'
   | 'inactive'
 
-export type OfferPaymentFrequency =
-  | 'monthly'
-  | 'oneshot'
+export type OfferPaymentFrequency = 'monthly' | 'oneshot'
 
-export type OfferSANInfoType =
-  | 'hdd'
-  | 'ssd'
+export type OfferSANInfoType = 'hdd' | 'ssd'
 
-export type OfferServerInfoStock =
-  | 'empty'
-  | 'low'
-  | 'available'
+export type OfferServerInfoStock = 'empty' | 'low' | 'available'
 
 export type PartitionFileSystem =
   | 'unknown'
@@ -265,10 +198,7 @@ export type PartitionFileSystem =
   | 'fat32'
   | 'ufs'
 
-export type PartitionType =
-  | 'primary'
-  | 'extended'
-  | 'logical'
+export type PartitionType = 'primary' | 'extended' | 'logical'
 
 export type RaidArrayRaidLevel =
   | 'no_raid'
@@ -291,9 +221,7 @@ export type RefundStatus =
   | 'paid'
   | 'errored'
 
-export type RescueProtocol =
-  | 'vnc'
-  | 'ssh'
+export type RescueProtocol = 'vnc' | 'ssh'
 
 export type RpnGroupMemberStatus =
   | 'unknown_rpn_member_status'
@@ -303,15 +231,9 @@ export type RpnGroupMemberStatus =
   | 'deleting'
   | 'deleted'
 
-export type RpnGroupType =
-  | 'unknown'
-  | 'local'
-  | 'shared'
+export type RpnGroupType = 'unknown' | 'local' | 'shared'
 
-export type RpnSanIpType =
-  | 'unknown'
-  | 'server_ip'
-  | 'rpnv2_subnet'
+export type RpnSanIpType = 'unknown' | 'server_ip' | 'rpnv2_subnet'
 
 export type RpnSanStatus =
   | 'unknown_status'
@@ -327,10 +249,7 @@ export type RpnV2GroupStatus =
   | 'updating'
   | 'deleting'
 
-export type RpnV2GroupType =
-  | 'unknown_type'
-  | 'standard'
-  | 'qinq'
+export type RpnV2GroupType = 'unknown_type' | 'standard' | 'qinq'
 
 export type RpnV2MemberStatus =
   | 'unknown_member_status'
@@ -339,13 +258,7 @@ export type RpnV2MemberStatus =
   | 'updating'
   | 'deleting'
 
-export type ServerDiskType =
-  | 'sata'
-  | 'ssd'
-  | 'sas'
-  | 'sshd'
-  | 'usb'
-  | 'nvme'
+export type ServerDiskType = 'sata' | 'ssd' | 'sas' | 'sshd' | 'usb' | 'nvme'
 
 export type ServerInstallStatus =
   | 'unknown'
@@ -370,10 +283,7 @@ export type ServerStatus =
   | 'rescue'
   | 'busy'
 
-export type ServiceLevelLevel =
-  | 'unknown'
-  | 'basic'
-  | 'business'
+export type ServiceLevelLevel = 'unknown' | 'basic' | 'business'
 
 export type ServiceProvisioningStatus =
   | 'unknown'
@@ -383,35 +293,27 @@ export type ServiceProvisioningStatus =
   | 'expiring'
   | 'expired'
 
-export type ServiceType =
-  | 'unknown_type'
-  | 'service'
-  | 'order'
+export type ServiceType = 'unknown_type' | 'service' | 'order'
 
 export interface OfferAntiDosInfo {
   type: OfferAntiDosInfoType
 }
 
-
 export interface OfferBackupInfo {
   size: number
 }
-
 
 export interface OfferBandwidthInfo {
   speed: number
 }
 
-
 export interface OfferLicenseInfo {
   boundToIp: boolean
 }
 
-
 export interface OfferRPNInfo {
   speed: number
 }
-
 
 export interface OfferSANInfo {
   /**
@@ -428,12 +330,10 @@ export interface OfferSANInfo {
   deviceType: OfferSANInfoType
 }
 
-
 export interface OfferStorageInfo {
   maxQuota: number
   size: number
 }
-
 
 export interface IP {
   /**
@@ -473,7 +373,6 @@ export interface IP {
    */
   status: IPStatus
 }
-
 
 export interface Offer {
   /**
@@ -570,7 +469,6 @@ export interface Offer {
   bandwidthInfo?: OfferBandwidthInfo
 }
 
-
 export interface NetworkInterface {
   /**
    * Card ID of the network interface.
@@ -593,7 +491,6 @@ export interface NetworkInterface {
    */
   ips: IP[]
 }
-
 
 export interface OS {
   /**
@@ -682,13 +579,11 @@ export interface OS {
   releasedAt?: Date
 }
 
-
 export interface ServerLocation {
   rack: string
   room: string
   datacenterName: string
 }
-
 
 export interface ServerOption {
   offer?: Offer
@@ -697,7 +592,6 @@ export interface ServerOption {
   expiredAt?: Date
   options: ServerOption[]
 }
-
 
 export interface ServiceLevel {
   /**
@@ -709,7 +603,6 @@ export interface ServiceLevel {
    */
   level: ServiceLevelLevel
 }
-
 
 export interface RpnSan {
   /**
@@ -780,7 +673,6 @@ export interface RpnSan {
   expiresAt?: Date
 }
 
-
 export interface RpnGroup {
   /**
    * Rpn group member ID.
@@ -820,12 +712,10 @@ export interface RpnGroup {
   projectId: string
 }
 
-
 export interface RpnV2GroupSubnet {
   address: string
   cidr: number
 }
-
 
 export interface Server {
   /**
@@ -930,7 +820,6 @@ export interface Server {
   isHds: boolean
 }
 
-
 export interface FailoverBlock {
   /**
    * ID of the failover block.
@@ -962,19 +851,16 @@ export interface FailoverBlock {
   gatewayIp: string
 }
 
-
 export interface RpnSanIpRpnV2Group {
   id: number
   name: string
 }
-
 
 export interface RpnSanIpServer {
   id: number
   hostname: string
   datacenterName: string
 }
-
 
 export interface RpnSanServer {
   /**
@@ -998,7 +884,6 @@ export interface RpnSanServer {
    */
   zone: ScwZone
 }
-
 
 export interface RpnV2Group {
   /**
@@ -1051,7 +936,6 @@ export interface RpnV2Group {
   rpnv1Group?: RpnGroup
 }
 
-
 export interface RpnV2Member {
   /**
    * RPN V2 member ID.
@@ -1083,7 +967,6 @@ export interface RpnV2Member {
   speed?: number
 }
 
-
 export interface ServerDisk {
   id: number
   connector: string
@@ -1091,7 +974,6 @@ export interface ServerDisk {
   capacity: number
   isAddon: boolean
 }
-
 
 export interface Service {
   /**
@@ -1132,12 +1014,10 @@ export interface Service {
   type: ServiceType
 }
 
-
 export interface GetIPv6BlockQuotasResponseQuota {
   quota: number
   cidr: number
 }
-
 
 export interface InstallPartition {
   /**
@@ -1161,7 +1041,6 @@ export interface InstallPartition {
    */
   connectors: string[]
 }
-
 
 export interface FailoverIP {
   /**
@@ -1218,12 +1097,10 @@ export interface FailoverIP {
   serverZone?: string
 }
 
-
 export interface ListIPv6BlockSubnetsAvailableResponseSubnet {
   address: string
   cidr: number
 }
-
 
 export interface IPv6Block {
   /**
@@ -1256,7 +1133,6 @@ export interface IPv6Block {
   delegationStatus: IPv6BlockDelegationStatus
 }
 
-
 export interface InvoiceSummary {
   id: number
   totalWithTaxes?: Money
@@ -1267,7 +1143,6 @@ export interface InvoiceSummary {
   paymentMethod: InvoicePaymentMethod
   transactionId: number
 }
-
 
 export interface RpnSanIp {
   /**
@@ -1292,7 +1167,6 @@ export interface RpnSanIp {
   type: RpnSanIpType
 }
 
-
 export interface RefundSummary {
   id: number
   totalWithTaxes?: Money
@@ -1302,7 +1176,6 @@ export interface RefundSummary {
   status: RefundStatus
   method: RefundMethod
 }
-
 
 export interface RpnGroupMember {
   /**
@@ -1342,7 +1215,6 @@ export interface RpnGroupMember {
    */
   owner: string
 }
-
 
 export interface RpnSanSummary {
   /**
@@ -1411,7 +1283,6 @@ export interface RpnSanSummary {
   expiresAt?: Date
 }
 
-
 export interface RpnServerCapability {
   /**
    * Server ID.
@@ -1459,7 +1330,6 @@ export interface RpnServerCapability {
   canJoinRpnv2Group: boolean
 }
 
-
 export interface Log {
   /**
    * RPN V2 log ID.
@@ -1491,7 +1361,6 @@ export interface Log {
   finishedAt?: Date
 }
 
-
 export interface ServerEvent {
   /**
    * ID of the event.
@@ -1506,7 +1375,6 @@ export interface ServerEvent {
    */
   date?: Date
 }
-
 
 export interface ServerSummary {
   /**
@@ -1587,7 +1455,6 @@ export interface ServerSummary {
   isHds: boolean
 }
 
-
 export interface CPU {
   /**
    * Name of CPU.
@@ -1607,7 +1474,6 @@ export interface CPU {
   frequency: number
 }
 
-
 export interface Disk {
   /**
    * Capacity of the disk.
@@ -1618,7 +1484,6 @@ export interface Disk {
    */
   type: ServerDiskType
 }
-
 
 export interface Memory {
   /**
@@ -1639,7 +1504,6 @@ export interface Memory {
   isEcc: boolean
 }
 
-
 export interface PersistentMemory {
   /**
    * Capacity of the persistent memory.
@@ -1655,7 +1519,6 @@ export interface PersistentMemory {
   model: string
 }
 
-
 export interface RaidController {
   /**
    * Model of the RAID controller.
@@ -1667,7 +1530,6 @@ export interface RaidController {
   raidLevel: string[]
 }
 
-
 export interface RaidArray {
   /**
    * The RAID level.
@@ -1678,7 +1540,6 @@ export interface RaidArray {
    */
   disks: ServerDisk[]
 }
-
 
 export interface Partition {
   /**
@@ -1707,7 +1568,6 @@ export interface Partition {
   connectors: string[]
 }
 
-
 export interface UpdatableRaidArray {
   /**
    * The RAID level.
@@ -1718,7 +1578,6 @@ export interface UpdatableRaidArray {
    */
   diskIds: number[]
 }
-
 
 export type AttachFailoverIPToMacAddressRequest = {
   /**
@@ -1739,7 +1598,6 @@ export type AttachFailoverIPToMacAddressRequest = {
   mac?: string
 }
 
-
 export type AttachFailoverIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1754,7 +1612,6 @@ export type AttachFailoverIPsRequest = {
    */
   fipsIds: number[]
 }
-
 
 export interface BMCAccess {
   /**
@@ -1778,7 +1635,6 @@ export interface BMCAccess {
    */
   status: BMCAccessStatus
 }
-
 
 export interface Backup {
   /**
@@ -1823,31 +1679,25 @@ export interface Backup {
   quotaFilesUsed: number
 }
 
-
 export type BillingApiCanOrderRequest = {
   projectId?: string
 }
-
 
 export type BillingApiDownloadInvoiceRequest = {
   invoiceId: number
 }
 
-
 export type BillingApiDownloadRefundRequest = {
   refundId: number
 }
-
 
 export type BillingApiGetInvoiceRequest = {
   invoiceId: number
 }
 
-
 export type BillingApiGetRefundRequest = {
   refundId: number
 }
-
 
 export type BillingApiListInvoicesRequest = {
   page?: number
@@ -1856,14 +1706,12 @@ export type BillingApiListInvoicesRequest = {
   projectId?: string
 }
 
-
 export type BillingApiListRefundsRequest = {
   page?: number
   pageSize?: number
   orderBy?: ListRefundsRequestOrderBy
   projectId?: string
 }
-
 
 export interface CanOrderResponse {
   canOrder: boolean
@@ -1876,7 +1724,6 @@ export interface CanOrderResponse {
   billingOk: boolean
 }
 
-
 export type CancelServerInstallRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1887,7 +1734,6 @@ export type CancelServerInstallRequest = {
    */
   serverId: number
 }
-
 
 export type CreateFailoverIPsRequest = {
   /**
@@ -1908,12 +1754,10 @@ export type CreateFailoverIPsRequest = {
   quantity: number
 }
 
-
 export interface CreateFailoverIPsResponse {
   totalCount: number
   services: Service[]
 }
-
 
 export type CreateServerRequest = {
   /**
@@ -1938,7 +1782,6 @@ export type CreateServerRequest = {
   datacenterName?: string
 }
 
-
 export type DeleteFailoverIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1949,7 +1792,6 @@ export type DeleteFailoverIPRequest = {
    */
   ipId: number
 }
-
 
 export type DeleteServerRequest = {
   /**
@@ -1962,7 +1804,6 @@ export type DeleteServerRequest = {
   serverId: number
 }
 
-
 export type DeleteServiceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1973,7 +1814,6 @@ export type DeleteServiceRequest = {
    */
   serviceId: number
 }
-
 
 export type DetachFailoverIPFromMacAddressRequest = {
   /**
@@ -1986,7 +1826,6 @@ export type DetachFailoverIPFromMacAddressRequest = {
   ipId: number
 }
 
-
 export type DetachFailoverIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1997,7 +1836,6 @@ export type DetachFailoverIPsRequest = {
    */
   fipsIds: number[]
 }
-
 
 export type GetBMCAccessRequest = {
   /**
@@ -2010,7 +1848,6 @@ export type GetBMCAccessRequest = {
   serverId: number
 }
 
-
 export type GetFailoverIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2022,7 +1859,6 @@ export type GetFailoverIPRequest = {
   ipId: number
 }
 
-
 export interface GetIPv6BlockQuotasResponse {
   /**
    * Quota for each CIDR of IPv6 block.
@@ -2033,7 +1869,6 @@ export interface GetIPv6BlockQuotasResponse {
    */
   totalCount: number
 }
-
 
 export type GetOSRequest = {
   /**
@@ -2054,7 +1889,6 @@ export type GetOSRequest = {
   projectId?: string
 }
 
-
 export type GetOfferRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2070,7 +1904,6 @@ export type GetOfferRequest = {
   projectId?: string
 }
 
-
 export type GetOrderedServiceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2078,7 +1911,6 @@ export type GetOrderedServiceRequest = {
   zone?: ScwZone
   orderedServiceId: number
 }
-
 
 export type GetRaidRequest = {
   /**
@@ -2091,7 +1923,6 @@ export type GetRaidRequest = {
   serverId: number
 }
 
-
 export type GetRemainingQuotaRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2102,7 +1933,6 @@ export type GetRemainingQuotaRequest = {
    */
   projectId?: string
 }
-
 
 export interface GetRemainingQuotaResponse {
   /**
@@ -2123,7 +1953,6 @@ export interface GetRemainingQuotaResponse {
   failoverBlockRemainingQuota: number
 }
 
-
 export type GetRescueRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2134,7 +1963,6 @@ export type GetRescueRequest = {
    */
   serverId: number
 }
-
 
 export interface GetRpnStatusResponse {
   /**
@@ -2147,7 +1975,6 @@ export interface GetRpnStatusResponse {
   operationsLeft?: number
 }
 
-
 export type GetServerBackupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2158,7 +1985,6 @@ export type GetServerBackupRequest = {
    */
   serverId: number
 }
-
 
 export type GetServerDefaultPartitioningRequest = {
   /**
@@ -2175,7 +2001,6 @@ export type GetServerDefaultPartitioningRequest = {
   osId: number
 }
 
-
 export type GetServerInstallRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2186,7 +2011,6 @@ export type GetServerInstallRequest = {
    */
   serverId: number
 }
-
 
 export type GetServerRequest = {
   /**
@@ -2199,7 +2023,6 @@ export type GetServerRequest = {
   serverId: number
 }
 
-
 export type GetServiceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2211,14 +2034,12 @@ export type GetServiceRequest = {
   serviceId: number
 }
 
-
 export type IPv6BlockApiCreateIPv6BlockRequest = {
   /**
    * ID of the project.
    */
   projectId?: string
 }
-
 
 export type IPv6BlockApiCreateIPv6BlockSubnetRequest = {
   /**
@@ -2235,14 +2056,12 @@ export type IPv6BlockApiCreateIPv6BlockSubnetRequest = {
   cidr: number
 }
 
-
 export type IPv6BlockApiDeleteIPv6BlockRequest = {
   /**
    * ID of the IPv6 block to delete.
    */
   blockId: number
 }
-
 
 export type IPv6BlockApiGetIPv6BlockQuotasRequest = {
   /**
@@ -2251,14 +2070,12 @@ export type IPv6BlockApiGetIPv6BlockQuotasRequest = {
   projectId?: string
 }
 
-
 export type IPv6BlockApiGetIPv6BlockRequest = {
   /**
    * ID of the project.
    */
   projectId?: string
 }
-
 
 export type IPv6BlockApiListIPv6BlockSubnetsAvailableRequest = {
   /**
@@ -2267,11 +2084,9 @@ export type IPv6BlockApiListIPv6BlockSubnetsAvailableRequest = {
   blockId: number
 }
 
-
 export type IPv6BlockApiListIPv6BlocksRequest = {
   projectId?: string
 }
-
 
 export type IPv6BlockApiUpdateIPv6BlockRequest = {
   /**
@@ -2283,7 +2098,6 @@ export type IPv6BlockApiUpdateIPv6BlockRequest = {
    */
   nameservers?: string[]
 }
-
 
 export type InstallServerRequest = {
   /**
@@ -2336,7 +2150,6 @@ export type InstallServerRequest = {
   ipId?: number
 }
 
-
 export interface Invoice {
   id: number
   totalWithTaxes?: Money
@@ -2348,7 +2161,6 @@ export interface Invoice {
   content: string
   transactionId: number
 }
-
 
 export type ListFailoverIPsRequest = {
   /**
@@ -2382,7 +2194,6 @@ false: return all failovers IP attached on server.
   onlyAvailable?: boolean
 }
 
-
 export interface ListFailoverIPsResponse {
   /**
    * Total count of matching failovers IP.
@@ -2393,7 +2204,6 @@ export interface ListFailoverIPsResponse {
    */
   failoverIps: FailoverIP[]
 }
-
 
 export interface ListIPv6BlockSubnetsAvailableResponse {
   /**
@@ -2406,18 +2216,15 @@ export interface ListIPv6BlockSubnetsAvailableResponse {
   totalCount: number
 }
 
-
 export interface ListIPv6BlocksResponse {
   totalCount: number
   ipv6Blocks: IPv6Block[]
 }
 
-
 export interface ListInvoicesResponse {
   totalCount: number
   invoices: InvoiceSummary[]
 }
-
 
 export interface ListIpsResponse {
   /**
@@ -2429,7 +2236,6 @@ export interface ListIpsResponse {
    */
   ips: RpnSanIp[]
 }
-
 
 export type ListOSRequest = {
   /**
@@ -2462,7 +2268,6 @@ export type ListOSRequest = {
   projectId?: string
 }
 
-
 export interface ListOSResponse {
   /**
    * Total count of matching OS.
@@ -2473,7 +2278,6 @@ export interface ListOSResponse {
    */
   os: OS[]
 }
-
 
 export type ListOffersRequest = {
   /**
@@ -2526,7 +2330,6 @@ export type ListOffersRequest = {
   isRpnSan?: boolean
 }
 
-
 export interface ListOffersResponse {
   /**
    * Total count of matching offers.
@@ -2538,12 +2341,10 @@ export interface ListOffersResponse {
   offers: Offer[]
 }
 
-
 export interface ListRefundsResponse {
   totalCount: number
   refunds: RefundSummary[]
 }
-
 
 export interface ListRpnCapableSanServersResponse {
   /**
@@ -2556,7 +2357,6 @@ export interface ListRpnCapableSanServersResponse {
   sanServers: RpnSanServer[]
 }
 
-
 export interface ListRpnCapableServersResponse {
   /**
    * Total count of rpn capable servers.
@@ -2567,7 +2367,6 @@ export interface ListRpnCapableServersResponse {
    */
   servers: Server[]
 }
-
 
 export interface ListRpnGroupMembersResponse {
   /**
@@ -2580,7 +2379,6 @@ export interface ListRpnGroupMembersResponse {
   members: RpnGroupMember[]
 }
 
-
 export interface ListRpnGroupsResponse {
   /**
    * Total count of rpn groups.
@@ -2591,7 +2389,6 @@ export interface ListRpnGroupsResponse {
    */
   rpnGroups: RpnGroup[]
 }
-
 
 export interface ListRpnInvitesResponse {
   /**
@@ -2604,7 +2401,6 @@ export interface ListRpnInvitesResponse {
   members: RpnGroupMember[]
 }
 
-
 export interface ListRpnSansResponse {
   /**
    * Total count of matching RPN SANs.
@@ -2615,7 +2411,6 @@ export interface ListRpnSansResponse {
    */
   rpnSans: RpnSanSummary[]
 }
-
 
 export interface ListRpnServerCapabilitiesResponse {
   /**
@@ -2628,7 +2423,6 @@ export interface ListRpnServerCapabilitiesResponse {
   servers: RpnServerCapability[]
 }
 
-
 export interface ListRpnV2CapableResourcesResponse {
   /**
    * Total count of matching rpn v2 capable resources.
@@ -2639,7 +2433,6 @@ export interface ListRpnV2CapableResourcesResponse {
    */
   servers: Server[]
 }
-
 
 export interface ListRpnV2GroupLogsResponse {
   /**
@@ -2652,7 +2445,6 @@ export interface ListRpnV2GroupLogsResponse {
   logs: Log[]
 }
 
-
 export interface ListRpnV2GroupsResponse {
   /**
    * Total count of matching rpn v2 groups.
@@ -2664,7 +2456,6 @@ export interface ListRpnV2GroupsResponse {
   rpnGroups: RpnV2Group[]
 }
 
-
 export interface ListRpnV2MembersResponse {
   /**
    * Total count of matching rpn v2 group members.
@@ -2675,7 +2466,6 @@ export interface ListRpnV2MembersResponse {
    */
   members: RpnV2Member[]
 }
-
 
 export type ListServerDisksRequest = {
   /**
@@ -2700,7 +2490,6 @@ export type ListServerDisksRequest = {
   orderBy?: ListServerDisksRequestOrderBy
 }
 
-
 export interface ListServerDisksResponse {
   /**
    * Total count of matching server disks.
@@ -2711,7 +2500,6 @@ export interface ListServerDisksResponse {
    */
   disks: ServerDisk[]
 }
-
 
 export type ListServerEventsRequest = {
   /**
@@ -2736,7 +2524,6 @@ export type ListServerEventsRequest = {
   orderBy?: ListServerEventsRequestOrderBy
 }
 
-
 export interface ListServerEventsResponse {
   /**
    * Total count of matching server events.
@@ -2747,7 +2534,6 @@ export interface ListServerEventsResponse {
    */
   events: ServerEvent[]
 }
-
 
 export type ListServersRequest = {
   /**
@@ -2776,7 +2562,6 @@ export type ListServersRequest = {
   search?: string
 }
 
-
 export interface ListServersResponse {
   /**
    * Total count of matching servers.
@@ -2787,7 +2572,6 @@ export interface ListServersResponse {
    */
   servers: ServerSummary[]
 }
-
 
 export type ListServicesRequest = {
   /**
@@ -2812,7 +2596,6 @@ export type ListServicesRequest = {
   projectId?: string
 }
 
-
 export interface ListServicesResponse {
   /**
    * Total count of matching services.
@@ -2823,7 +2606,6 @@ export interface ListServicesResponse {
    */
   services: Service[]
 }
-
 
 export type ListSubscribableServerOptionsRequest = {
   /**
@@ -2844,7 +2626,6 @@ export type ListSubscribableServerOptionsRequest = {
   pageSize?: number
 }
 
-
 export interface ListSubscribableServerOptionsResponse {
   /**
    * Total count of matching subscribable server options.
@@ -2856,16 +2637,13 @@ export interface ListSubscribableServerOptionsResponse {
   serverOptions: Offer[]
 }
 
-
 export interface OfferFailoverBlockInfo {
   onetimeFees?: Offer
 }
 
-
 export interface OfferFailoverIpInfo {
   onetimeFees?: Offer
 }
-
 
 export interface OfferServerInfo {
   bandwidth: number
@@ -2883,7 +2661,6 @@ export interface OfferServerInfo {
   stockByDatacenter: Record<string, OfferServerInfoStock>
 }
 
-
 export interface OfferServiceLevelInfo {
   supportTicket: boolean
   supportPhone: boolean
@@ -2898,14 +2675,12 @@ export interface OfferServiceLevelInfo {
   availableOptions: Offer[]
 }
 
-
 export interface Raid {
   /**
    * Details about the RAID controller.
    */
   raidArrays: RaidArray[]
 }
-
 
 export type RebootServerRequest = {
   /**
@@ -2918,7 +2693,6 @@ export type RebootServerRequest = {
   serverId: number
 }
 
-
 export interface Refund {
   id: number
   totalWithTaxes?: Money
@@ -2929,7 +2703,6 @@ export interface Refund {
   method: RefundMethod
   content: string
 }
-
 
 export interface Rescue {
   /**
@@ -2950,7 +2723,6 @@ export interface Rescue {
   protocol: RescueProtocol
 }
 
-
 export type RpnApiGetRpnStatusRequest = {
   /**
    * A project ID.
@@ -2965,7 +2737,6 @@ export type RpnApiGetRpnStatusRequest = {
    */
   rpnv2GroupId?: number
 }
-
 
 export type RpnApiListRpnServerCapabilitiesRequest = {
   /**
@@ -2986,7 +2757,6 @@ export type RpnApiListRpnServerCapabilitiesRequest = {
   projectId?: string
 }
 
-
 export type RpnSanApiAddIpRequest = {
   /**
    * RPN SAN ID.
@@ -2997,7 +2767,6 @@ export type RpnSanApiAddIpRequest = {
    */
   ipIds: number[]
 }
-
 
 export type RpnSanApiCreateRpnSanRequest = {
   /**
@@ -3010,7 +2779,6 @@ export type RpnSanApiCreateRpnSanRequest = {
   projectId?: string
 }
 
-
 export type RpnSanApiDeleteRpnSanRequest = {
   /**
    * RPN SAN ID.
@@ -3018,14 +2786,12 @@ export type RpnSanApiDeleteRpnSanRequest = {
   rpnSanId: number
 }
 
-
 export type RpnSanApiGetRpnSanRequest = {
   /**
    * RPN SAN ID.
    */
   rpnSanId: number
 }
-
 
 export type RpnSanApiListAvailableIpsRequest = {
   /**
@@ -3038,7 +2804,6 @@ export type RpnSanApiListAvailableIpsRequest = {
   type?: RpnSanIpType
 }
 
-
 export type RpnSanApiListIpsRequest = {
   /**
    * RPN SAN ID.
@@ -3049,7 +2814,6 @@ export type RpnSanApiListIpsRequest = {
    */
   type?: RpnSanIpType
 }
-
 
 export type RpnSanApiListRpnSansRequest = {
   /**
@@ -3070,7 +2834,6 @@ export type RpnSanApiListRpnSansRequest = {
   projectId?: string
 }
 
-
 export type RpnSanApiRemoveIpRequest = {
   /**
    * RPN SAN ID.
@@ -3082,14 +2845,12 @@ export type RpnSanApiRemoveIpRequest = {
   ipIds: number[]
 }
 
-
 export type RpnV1ApiAcceptRpnInviteRequest = {
   /**
    * The member ID.
    */
   memberId: number
 }
-
 
 export type RpnV1ApiAddRpnGroupMembersRequest = {
   /**
@@ -3105,7 +2866,6 @@ export type RpnV1ApiAddRpnGroupMembersRequest = {
    */
   sanServerIds?: number[]
 }
-
 
 export type RpnV1ApiCreateRpnGroupRequest = {
   /**
@@ -3126,7 +2886,6 @@ export type RpnV1ApiCreateRpnGroupRequest = {
   projectId?: string
 }
 
-
 export type RpnV1ApiDeleteRpnGroupMembersRequest = {
   /**
    * The rpn v1 group ID.
@@ -3138,7 +2897,6 @@ export type RpnV1ApiDeleteRpnGroupMembersRequest = {
   memberIds: number[]
 }
 
-
 export type RpnV1ApiDeleteRpnGroupRequest = {
   /**
    * Rpn v1 group ID.
@@ -3146,14 +2904,12 @@ export type RpnV1ApiDeleteRpnGroupRequest = {
   groupId: number
 }
 
-
 export type RpnV1ApiGetRpnGroupRequest = {
   /**
    * Rpn v1 group ID.
    */
   groupId: number
 }
-
 
 export type RpnV1ApiLeaveRpnGroupRequest = {
   /**
@@ -3165,7 +2921,6 @@ export type RpnV1ApiLeaveRpnGroupRequest = {
    */
   memberIds: number[]
 }
-
 
 export type RpnV1ApiListRpnCapableSanServersRequest = {
   /**
@@ -3186,7 +2941,6 @@ export type RpnV1ApiListRpnCapableSanServersRequest = {
   projectId?: string
 }
 
-
 export type RpnV1ApiListRpnCapableServersRequest = {
   /**
    * Page number.
@@ -3205,7 +2959,6 @@ export type RpnV1ApiListRpnCapableServersRequest = {
    */
   projectId?: string
 }
-
 
 export type RpnV1ApiListRpnGroupMembersRequest = {
   /**
@@ -3230,7 +2983,6 @@ export type RpnV1ApiListRpnGroupMembersRequest = {
   projectId?: string
 }
 
-
 export type RpnV1ApiListRpnGroupsRequest = {
   /**
    * Page number.
@@ -3249,7 +3001,6 @@ export type RpnV1ApiListRpnGroupsRequest = {
    */
   projectId?: string
 }
-
 
 export type RpnV1ApiListRpnInvitesRequest = {
   /**
@@ -3270,14 +3021,12 @@ export type RpnV1ApiListRpnInvitesRequest = {
   projectId?: string
 }
 
-
 export type RpnV1ApiRefuseRpnInviteRequest = {
   /**
    * The member ID.
    */
   memberId: number
 }
-
 
 export type RpnV1ApiRpnGroupInviteRequest = {
   /**
@@ -3294,7 +3043,6 @@ export type RpnV1ApiRpnGroupInviteRequest = {
   projectId?: string
 }
 
-
 export type RpnV1ApiUpdateRpnGroupNameRequest = {
   /**
    * Rpn v1 group ID.
@@ -3306,7 +3054,6 @@ export type RpnV1ApiUpdateRpnGroupNameRequest = {
   name?: string
 }
 
-
 export type RpnV2ApiAddRpnV2MembersRequest = {
   /**
    * RPN V2 group ID.
@@ -3317,7 +3064,6 @@ export type RpnV2ApiAddRpnV2MembersRequest = {
    */
   servers: number[]
 }
-
 
 export type RpnV2ApiCreateRpnV2GroupRequest = {
   /**
@@ -3338,14 +3084,12 @@ export type RpnV2ApiCreateRpnV2GroupRequest = {
   servers: number[]
 }
 
-
 export type RpnV2ApiDeleteRpnV2GroupRequest = {
   /**
    * RPN V2 group ID.
    */
   groupId: number
 }
-
 
 export type RpnV2ApiDeleteRpnV2MembersRequest = {
   /**
@@ -3358,14 +3102,12 @@ export type RpnV2ApiDeleteRpnV2MembersRequest = {
   memberIds: number[]
 }
 
-
 export type RpnV2ApiDisableRpnV2GroupCompatibilityRequest = {
   /**
    * RPN V2 group ID.
    */
   groupId: number
 }
-
 
 export type RpnV2ApiEnableRpnV2GroupCompatibilityRequest = {
   /**
@@ -3378,14 +3120,12 @@ export type RpnV2ApiEnableRpnV2GroupCompatibilityRequest = {
   rpnv1GroupId: number
 }
 
-
 export type RpnV2ApiGetRpnV2GroupRequest = {
   /**
    * RPN V2 group ID.
    */
   groupId: number
 }
-
 
 export type RpnV2ApiListRpnV2CapableResourcesRequest = {
   /**
@@ -3406,7 +3146,6 @@ export type RpnV2ApiListRpnV2CapableResourcesRequest = {
   projectId?: string
 }
 
-
 export type RpnV2ApiListRpnV2GroupLogsRequest = {
   /**
    * RPN V2 group ID.
@@ -3426,7 +3165,6 @@ export type RpnV2ApiListRpnV2GroupLogsRequest = {
   orderBy?: ListRpnV2GroupLogsRequestOrderBy
 }
 
-
 export type RpnV2ApiListRpnV2GroupsRequest = {
   /**
    * Page number.
@@ -3445,7 +3183,6 @@ export type RpnV2ApiListRpnV2GroupsRequest = {
    */
   projectId?: string
 }
-
 
 export type RpnV2ApiListRpnV2MembersRequest = {
   /**
@@ -3470,7 +3207,6 @@ export type RpnV2ApiListRpnV2MembersRequest = {
   type?: ListRpnV2MembersRequestType
 }
 
-
 export type RpnV2ApiUpdateRpnV2GroupNameRequest = {
   /**
    * RPN V2 group ID.
@@ -3481,7 +3217,6 @@ export type RpnV2ApiUpdateRpnV2GroupNameRequest = {
    */
   name?: string
 }
-
 
 export type RpnV2ApiUpdateRpnV2VlanForMembersRequest = {
   /**
@@ -3499,14 +3234,12 @@ Max: 3967.
   vlan?: number
 }
 
-
 export interface ServerDefaultPartitioning {
   /**
    * Default partitions.
    */
   partitions: Partition[]
 }
-
 
 export interface ServerInstall {
   osId: number
@@ -3517,7 +3250,6 @@ export interface ServerInstall {
   status: ServerInstallStatus
   panelUrl?: string
 }
-
 
 export type StartBMCAccessRequest = {
   /**
@@ -3534,7 +3266,6 @@ export type StartBMCAccessRequest = {
   ip: string
 }
 
-
 export type StartRescueRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -3550,7 +3281,6 @@ export type StartRescueRequest = {
   osId: number
 }
 
-
 export type StartServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -3561,7 +3291,6 @@ export type StartServerRequest = {
    */
   serverId: number
 }
-
 
 export type StopBMCAccessRequest = {
   /**
@@ -3574,7 +3303,6 @@ export type StopBMCAccessRequest = {
   serverId: number
 }
 
-
 export type StopRescueRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -3586,7 +3314,6 @@ export type StopRescueRequest = {
   serverId: number
 }
 
-
 export type StopServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -3597,7 +3324,6 @@ export type StopServerRequest = {
    */
   serverId: number
 }
-
 
 export type SubscribeServerOptionRequest = {
   /**
@@ -3614,7 +3340,6 @@ export type SubscribeServerOptionRequest = {
   optionId: number
 }
 
-
 export type SubscribeStorageOptionsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -3630,14 +3355,12 @@ export type SubscribeStorageOptionsRequest = {
   optionsIds: number[]
 }
 
-
 export interface SubscribeStorageOptionsResponse {
   /**
    * Services subscribe storage options.
    */
   services: Service[]
 }
-
 
 export type UpdateRaidRequest = {
   /**
@@ -3654,7 +3377,6 @@ export type UpdateRaidRequest = {
   raidArrays: UpdatableRaidArray[]
 }
 
-
 export type UpdateReverseRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -3669,7 +3391,6 @@ export type UpdateReverseRequest = {
    */
   reverse: string
 }
-
 
 export type UpdateServerBackupRequest = {
   /**
@@ -3694,7 +3415,6 @@ export type UpdateServerBackupRequest = {
   aclEnabled?: boolean
 }
 
-
 export type UpdateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -3714,7 +3434,6 @@ export type UpdateServerRequest = {
   enableIpv6?: boolean
 }
 
-
 export type UpdateServerTagsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -3729,5 +3448,3 @@ export type UpdateServerTagsRequest = {
    */
   tags?: string[]
 }
-
-

@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,11 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {RUNNER_TRANSIENT_STATUSES as RUNNER_TRANSIENT_STATUSES_APPLESILICON,SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,} from './content.gen.js'
+import {
+  RUNNER_TRANSIENT_STATUSES as RUNNER_TRANSIENT_STATUSES_APPLESILICON,
+  SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,
+  SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,
+} from './content.gen.js'
 import {
   marshalBatchCreateServersRequest,
   marshalCreateRunnerRequest,
@@ -91,13 +95,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      zones: [
-        'fr-par-3',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: ['fr-par-3'],
+  })
+
   /**
    * List server types. List all technical details about Apple silicon server types available in the specified zone. Since there is only one Availability Zone for Apple silicon servers, the targeted value is `fr-par-3`.
    *
@@ -113,7 +114,6 @@ export class API extends ParentAPI {
       unmarshalListServerTypesResponse,
     )
 
-  
   /**
    * Get a server type. Get technical details (CPU, disk size etc.) of a server type.
    *
@@ -129,7 +129,6 @@ export class API extends ParentAPI {
       unmarshalServerType,
     )
 
-  
   /**
    * Create a server. Create a new server in the targeted zone, specifying its configuration including name and type.
    *
@@ -149,7 +148,6 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Create multiple servers atomically. Create multiple servers in the targeted zone specifying their configurations. If the request cannot entirely be fulfilled, no servers are created.
    *
@@ -169,7 +167,6 @@ export class API extends ParentAPI {
       unmarshalBatchCreateServersResponse,
     )
 
-  
   protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
     this.client.fetch<ListServersResponse>(
       {
@@ -179,13 +176,16 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListServersResponse,
     )
-  
+
   /**
    * List all servers. List all servers in the specified zone. By default, returned servers in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -195,7 +195,6 @@ export class API extends ParentAPI {
   listServers = (request: Readonly<ListServersRequest> = {}) =>
     enrichForPagination('servers', this.pageOfListServers, request)
 
-  
   protected pageOfListOS = (request: Readonly<ListOSRequest> = {}) =>
     this.client.fetch<ListOSResponse>(
       {
@@ -204,13 +203,16 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['server_type', request.serverType],
         ),
       },
       unmarshalListOSResponse,
     )
-  
+
   /**
    * List all Operating Systems (OS). List all Operating Systems (OS). The response will include the total number of OS as well as their associated IDs, names and labels.
    *
@@ -220,7 +222,6 @@ export class API extends ParentAPI {
   listOS = (request: Readonly<ListOSRequest> = {}) =>
     enrichForPagination('os', this.pageOfListOS, request)
 
-  
   /**
    * Get an Operating System (OS). Get an Operating System (OS).  The response will include the OS's unique ID as well as its name and label.
    *
@@ -236,7 +237,6 @@ export class API extends ParentAPI {
       unmarshalOS,
     )
 
-  
   /**
    * Get a server. Retrieve information about an existing Apple silicon server, specified by its server ID. Its full details, including name, status and IP address, are returned in the response object.
    *
@@ -251,7 +251,7 @@ export class API extends ParentAPI {
       },
       unmarshalServer,
     )
-  
+
   /**
    * Waits for {@link Server} to be in a final state.
    *
@@ -264,13 +264,16 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Server>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!SERVER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !SERVER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status),
+          )),
       this.getServer,
       request,
       options,
     )
 
-  
   /**
    * Update a server. Update the parameters of an existing Apple silicon server, specified by its server ID.
    *
@@ -290,21 +293,17 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Delete a server. Delete an existing Apple silicon server, specified by its server ID. Deleting a server is permanent, and cannot be undone. Note that the minimum allocation period for Apple silicon-as-a-service is 24 hours, meaning you cannot delete your server prior to that.
    *
    * @param request - The request {@link DeleteServerRequest}
    */
   deleteServer = (request: Readonly<DeleteServerRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+    })
 
-  
   /**
    * Reboot a server. Reboot an existing Apple silicon server, specified by its server ID.
    *
@@ -322,7 +321,6 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
   /**
    * Reinstall a server. Reinstall an existing Apple silicon server (specified by its server ID) from a new image (OS). All the data on the disk is deleted and all configuration is reset to the default configuration values of the image (OS).
    *
@@ -342,12 +340,16 @@ export class API extends ParentAPI {
       unmarshalServer,
     )
 
-  
-  startConnectivityDiagnostic = (request: Readonly<StartConnectivityDiagnosticRequest>) =>
+  startConnectivityDiagnostic = (
+    request: Readonly<StartConnectivityDiagnosticRequest>,
+  ) =>
     this.client.fetch<StartConnectivityDiagnosticResponse>(
       {
         body: JSON.stringify(
-          marshalStartConnectivityDiagnosticRequest(request, this.client.settings),
+          marshalStartConnectivityDiagnosticRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -356,8 +358,9 @@ export class API extends ParentAPI {
       unmarshalStartConnectivityDiagnosticResponse,
     )
 
-  
-  getConnectivityDiagnostic = (request: Readonly<GetConnectivityDiagnosticRequest>) =>
+  getConnectivityDiagnostic = (
+    request: Readonly<GetConnectivityDiagnosticRequest>,
+  ) =>
     this.client.fetch<ConnectivityDiagnostic>(
       {
         method: 'GET',
@@ -366,7 +369,6 @@ export class API extends ParentAPI {
       unmarshalConnectivityDiagnostic,
     )
 
-  
   /**
    * Create a new runner configuration.
    *
@@ -386,7 +388,6 @@ export class API extends ParentAPI {
       unmarshalRunner,
     )
 
-  
   /**
    * Retrieve a runner configuration.
    *
@@ -401,7 +402,7 @@ export class API extends ParentAPI {
       },
       unmarshalRunner,
     )
-  
+
   /**
    * Waits for {@link Runner} to be in a final state.
    *
@@ -414,13 +415,16 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Runner>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!RUNNER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !RUNNER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status),
+          )),
       this.getRunner,
       request,
       options,
     )
 
-  
   protected pageOfListRunners = (request: Readonly<ListRunnersRequest> = {}) =>
     this.client.fetch<ListRunnersResponse>(
       {
@@ -429,14 +433,17 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['server_id', request.serverId],
         ),
       },
       unmarshalListRunnersResponse,
     )
-  
+
   /**
    * List runner configurations associated with a server.
    *
@@ -446,7 +453,6 @@ export class API extends ParentAPI {
   listRunners = (request: Readonly<ListRunnersRequest> = {}) =>
     enrichForPagination('runners', this.pageOfListRunners, request)
 
-  
   /**
    * Create a new runner configuration.
    *
@@ -466,21 +472,16 @@ export class API extends ParentAPI {
       unmarshalRunner,
     )
 
-  
   /**
    * Create a new runner configuration.
    *
    * @param request - The request {@link DeleteRunnerRequest}
    */
   deleteRunner = (request: Readonly<DeleteRunnerRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners/${validatePathParam('runnerId', request.runnerId)}`,
-      },
-    )
-
-  
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners/${validatePathParam('runnerId', request.runnerId)}`,
+    })
 }
 
 /**
@@ -491,15 +492,13 @@ export class PrivateNetworkAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      zones: [
-        'fr-par-1',
-        'fr-par-3',
-      ],
-    })
-  
-  getServerPrivateNetwork = (request: Readonly<PrivateNetworkApiGetServerPrivateNetworkRequest>) =>
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    zones: ['fr-par-1', 'fr-par-3'],
+  })
+
+  getServerPrivateNetwork = (
+    request: Readonly<PrivateNetworkApiGetServerPrivateNetworkRequest>,
+  ) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
         method: 'GET',
@@ -507,7 +506,7 @@ export class PrivateNetworkAPI extends ParentAPI {
       },
       unmarshalServerPrivateNetwork,
     )
-  
+
   /**
    * Waits for {@link ServerPrivateNetwork} to be in a final state.
    *
@@ -520,24 +519,34 @@ export class PrivateNetworkAPI extends ParentAPI {
     options?: Readonly<WaitForOptions<ServerPrivateNetwork>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON.includes(
+              res.status,
+            ),
+          )),
       this.getServerPrivateNetwork,
       request,
       options,
     )
 
-  
   /**
    * Add a server to a Private Network. Add an Apple silicon server to a Private Network.
    *
    * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
-  addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) =>
+  addServerPrivateNetwork = (
+    request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>,
+  ) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
         body: JSON.stringify(
-          marshalPrivateNetworkApiAddServerPrivateNetworkRequest(request, this.client.settings),
+          marshalPrivateNetworkApiAddServerPrivateNetworkRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -546,18 +555,22 @@ export class PrivateNetworkAPI extends ParentAPI {
       unmarshalServerPrivateNetwork,
     )
 
-  
   /**
    * Set multiple Private Networks on a server. Configure multiple Private Networks on an Apple silicon server.
    *
    * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
-  setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) =>
+  setServerPrivateNetworks = (
+    request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>,
+  ) =>
     this.client.fetch<SetServerPrivateNetworksResponse>(
       {
         body: JSON.stringify(
-          marshalPrivateNetworkApiSetServerPrivateNetworksRequest(request, this.client.settings),
+          marshalPrivateNetworkApiSetServerPrivateNetworksRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
@@ -566,8 +579,9 @@ export class PrivateNetworkAPI extends ParentAPI {
       unmarshalSetServerPrivateNetworksResponse,
     )
 
-  
-  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
+  protected pageOfListServerPrivateNetworks = (
+    request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {},
+  ) =>
     this.client.fetch<ListServerPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -577,7 +591,10 @@ export class PrivateNetworkAPI extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['private_network_id', request.privateNetworkId],
           ['project_id', request.projectId],
           ['server_id', request.serverId],
@@ -585,30 +602,32 @@ export class PrivateNetworkAPI extends ParentAPI {
       },
       unmarshalListServerPrivateNetworksResponse,
     )
-  
+
   /**
    * List the Private Networks of a server. List the Private Networks of an Apple silicon server.
    *
    * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
-  listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
-    enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request)
+  listServerPrivateNetworks = (
+    request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {},
+  ) =>
+    enrichForPagination(
+      'serverPrivateNetworks',
+      this.pageOfListServerPrivateNetworks,
+      request,
+    )
 
-  
   /**
    * Delete a Private Network.
    *
    * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
-  deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
-      },
-    )
-
-  
+  deleteServerPrivateNetwork = (
+    request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>,
+  ) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+    })
 }
-

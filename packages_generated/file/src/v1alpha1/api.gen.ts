@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE,} from './content.gen.js'
+import { FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE } from './content.gen.js'
 import {
   marshalCreateFileSystemRequest,
   marshalUpdateFileSystemRequest,
@@ -44,13 +44,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
+
   /**
    * Get filesystem details. Retrieve all properties and current status of a specific filesystem identified by its ID.
    *
@@ -65,7 +62,7 @@ export class API extends ParentAPI {
       },
       unmarshalFileSystem,
     )
-  
+
   /**
    * Waits for {@link FileSystem} to be in a final state.
    *
@@ -78,14 +75,19 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<FileSystem>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!FILE_SYSTEM_TRANSIENT_STATUSES_FILE.includes(res.status))),
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !FILE_SYSTEM_TRANSIENT_STATUSES_FILE.includes(res.status),
+          )),
       this.getFileSystem,
       request,
       options,
     )
 
-  
-  protected pageOfListFileSystems = (request: Readonly<ListFileSystemsRequest> = {}) =>
+  protected pageOfListFileSystems = (
+    request: Readonly<ListFileSystemsRequest> = {},
+  ) =>
     this.client.fetch<ListFileSystemsResponse>(
       {
         method: 'GET',
@@ -95,14 +97,17 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListFileSystemsResponse,
     )
-  
+
   /**
    * List all filesystems. Retrieve all filesystems in the specified region. By default, the filesystems listed are ordered by creation date in ascending order. This can be modified using the `order_by` field.
    *
@@ -112,8 +117,9 @@ export class API extends ParentAPI {
   listFileSystems = (request: Readonly<ListFileSystemsRequest> = {}) =>
     enrichForPagination('filesystems', this.pageOfListFileSystems, request)
 
-  
-  protected pageOfListAttachments = (request: Readonly<ListAttachmentsRequest> = {}) =>
+  protected pageOfListAttachments = (
+    request: Readonly<ListAttachmentsRequest> = {},
+  ) =>
     this.client.fetch<ListAttachmentsResponse>(
       {
         method: 'GET',
@@ -121,7 +127,10 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['filesystem_id', request.filesystemId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['resource_id', request.resourceId],
           ['resource_type', request.resourceType],
           ['zone', request.zone],
@@ -129,7 +138,7 @@ export class API extends ParentAPI {
       },
       unmarshalListAttachmentsResponse,
     )
-  
+
   /**
    * List filesystems attachments. List all existing attachments in a specified region.
 By default, the attachments listed are ordered by creation date in ascending order. This can be modified using the `order_by` field.
@@ -140,7 +149,6 @@ By default, the attachments listed are ordered by creation date in ascending ord
   listAttachments = (request: Readonly<ListAttachmentsRequest> = {}) =>
     enrichForPagination('attachments', this.pageOfListAttachments, request)
 
-  
   /**
    * Create a new filesystem. To create a new filesystem, you must specify a name, a size, and a project ID.
    *
@@ -160,21 +168,17 @@ By default, the attachments listed are ordered by creation date in ascending ord
       unmarshalFileSystem,
     )
 
-  
   /**
    * Delete a detached filesystem. You must specify the `filesystem_id` of the filesystem you want to delete.
    *
    * @param request - The request {@link DeleteFileSystemRequest}
    */
   deleteFileSystem = (request: Readonly<DeleteFileSystemRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems/${validatePathParam('filesystemId', request.filesystemId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems/${validatePathParam('filesystemId', request.filesystemId)}`,
+    })
 
-  
   /**
    * Update filesystem properties. Update the technical details of a filesystem, such as its name, tags or its new size.
    *
@@ -193,7 +197,4 @@ By default, the attachments listed are ordered by creation date in ascending ord
       },
       unmarshalFileSystem,
     )
-
-  
 }
-

@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,} from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -48,14 +48,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams'],
+  })
+
   /**
    * List events. Retrieve the list of Audit Trail events for a Scaleway Organization and/or Project. You must specify the `organization_id` and optionally, the `project_id`.
    *
@@ -70,8 +66,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['method_name', request.methodName],
           ['order_by', request.orderBy],
-          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['page_token', request.pageToken],
           ['principal_id', request.principalId],
           ['product_name', request.productName],
@@ -88,22 +91,30 @@ export class API extends ParentAPI {
       unmarshalListEventsResponse,
     )
 
-  
   /**
    * List authentication events. Retrieve the list of Audit Trail authentication events for a Scaleway Organization. You must specify the `organization_id`.
    *
    * @param request - The request {@link ListAuthenticationEventsRequest}
    * @returns A Promise of ListAuthenticationEventsResponse
    */
-  listAuthenticationEvents = (request: Readonly<ListAuthenticationEventsRequest> = {}) =>
+  listAuthenticationEvents = (
+    request: Readonly<ListAuthenticationEventsRequest> = {},
+  ) =>
     this.client.fetch<ListAuthenticationEventsResponse>(
       {
         method: 'GET',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/authentication-events`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
-          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['page_token', request.pageToken],
           ['recorded_after', request.recordedAfter],
           ['recorded_before', request.recordedBefore],
@@ -112,7 +123,6 @@ export class API extends ParentAPI {
       unmarshalListAuthenticationEventsResponse,
     )
 
-  
   listCombinedEvents = (request: Readonly<ListCombinedEventsRequest> = {}) =>
     this.client.fetch<ListCombinedEventsResponse>(
       {
@@ -120,8 +130,15 @@ export class API extends ParentAPI {
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/combined-events`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
-          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['page_token', request.pageToken],
           ['project_id', request.projectId],
           ['recorded_after', request.recordedAfter],
@@ -132,7 +149,6 @@ export class API extends ParentAPI {
       unmarshalListCombinedEventsResponse,
     )
 
-  
   /**
    * Retrieve the list of Scaleway resources for which you have Audit Trail events.
    *
@@ -144,14 +160,14 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/products`,
-        urlParams: urlParams(
-          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
-        ),
+        urlParams: urlParams([
+          'organization_id',
+          request.organizationId ?? this.client.settings.defaultOrganizationId,
+        ]),
       },
       unmarshalListProductsResponse,
     )
 
-  
   /**
    * Create an export job. Create an export job for a specified organization. This allows you to export audit trail events to a destination, such as an S3 bucket. The request requires the organization ID, a name for the export, and a destination configuration.
    *
@@ -171,22 +187,20 @@ export class API extends ParentAPI {
       unmarshalExportJob,
     )
 
-  
   /**
    * Delete an export job. Deletes an export job for a specified id.
    *
    * @param request - The request {@link DeleteExportJobRequest}
    */
   deleteExportJob = (request: Readonly<DeleteExportJobRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs/${validatePathParam('exportJobId', request.exportJobId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs/${validatePathParam('exportJobId', request.exportJobId)}`,
+    })
 
-  
-  protected pageOfListExportJobs = (request: Readonly<ListExportJobsRequest> = {}) =>
+  protected pageOfListExportJobs = (
+    request: Readonly<ListExportJobsRequest> = {},
+  ) =>
     this.client.fetch<ListExportJobsResponse>(
       {
         method: 'GET',
@@ -194,18 +208,22 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
-          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+          [
+            'organization_id',
+            request.organizationId ??
+              this.client.settings.defaultOrganizationId,
+          ],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['tags', request.tags],
         ),
       },
       unmarshalListExportJobsResponse,
     )
-  
+
   listExportJobs = (request: Readonly<ListExportJobsRequest> = {}) =>
     enrichForPagination('exportJobs', this.pageOfListExportJobs, request)
-
-  
 }
-
