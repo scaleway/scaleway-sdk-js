@@ -17,7 +17,7 @@
     "lineEnding": "lf",
     "lineWidth": 80,
     "attributePosition": "auto",
-    "includes": ["**", "!**/*.gen.ts", "!packages_generated/**/*.gen.ts", "!packages/sdk/src/index.gen.ts"]
+    "includes": ["**", "!**/*.gen.ts", "!packages/sdk/src/index.gen.ts"]
   },
   "javascript": {
     "formatter": {
@@ -54,7 +54,23 @@
   },
   "overrides": [
     {
-      "includes": ["**/dist/**", "coverage/**", "**/examples/**", "**/*.gen.ts", "scripts/templates/**", "packages/sdk/src/index.gen.ts"],
+      "includes": ["packages_generated/**/*.gen.ts"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": true,
+        "rules": {
+          "recommended": false,
+          "correctness": {
+            "noUnusedVariables": "error",
+            "noUnusedImports": "error"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/dist/**", "coverage/**", "**/examples/**", "packages/**/*.gen.ts", "scripts/**/*.gen.ts", "scripts/templates/**", "packages/sdk/src/index.gen.ts"],
       "formatter": {
         "enabled": false
       },
@@ -97,6 +113,11 @@
     },
     {
       "includes": ["packages_generated/**"],
+      "json": {
+        "formatter": {
+          "enabled": true
+        }
+      },
       "linter": {
         "rules": {
           "recommended": false,
