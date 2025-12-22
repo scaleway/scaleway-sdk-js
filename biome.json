@@ -17,7 +17,7 @@
     "lineEnding": "lf",
     "lineWidth": 80,
     "attributePosition": "auto",
-    "includes": ["**", "!**/*.gen.ts", "!packages_generated/**/*.ts", "!packages_generated/**/*.json", "!packages_generated/**/*.config.ts", "!packages/sdk/src/index.gen.ts"]
+    "includes": ["**", "!**/*.gen.ts", "!packages_generated/**/*.gen.ts", "!packages/sdk/src/index.gen.ts"]
   },
   "javascript": {
     "formatter": {
@@ -91,6 +91,34 @@
         "rules": {
           "style": {
             "useShorthandFunctionType": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["packages_generated/**"],
+      "linter": {
+        "rules": {
+          "recommended": false,
+          "correctness": {
+            "noUnusedVariables": "error",
+            "noUnusedImports": "error"
+          },
+          "style": {
+            "useNamingConvention": "off",
+            "noDefaultExport": "off"
+          },
+          "suspicious": {
+            "noShadowRestrictedNames": "off",
+            "noEmptyInterface": "off"
+          },
+          "performance": {
+            "noAccumulatingSpread": "off"
+          },
+          "complexity": {
+            "noExcessiveCognitiveComplexity": "off",
+            "noStaticOnlyClass": "off",
+            "noBannedTypes": "off"
           }
         }
       }
