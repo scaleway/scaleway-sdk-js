@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-ipam",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Scaleway SDK ipam",
   "license": "Apache-2.0",
   "files": [

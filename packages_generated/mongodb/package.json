@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-mongodb",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Scaleway SDK mongodb",
   "license": "Apache-2.0",
   "files": [

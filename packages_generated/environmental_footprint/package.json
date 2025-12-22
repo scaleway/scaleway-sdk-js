@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-environmental-footprint",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Scaleway SDK environmental-footprint",
   "license": "Apache-2.0",
   "files": [
