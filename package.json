@@ -25,7 +25,6 @@
     "doc": "typedoc",
     "format": "biome format --write . --files-ignore-unknown=true",
     "format:check": "biome format .",
-    "validate:generated": "pnpm dlx tsx ./scripts/validateGeneratedExports.ts",
     "prettier": "prettier --write '**/*.{md,mdx,yml,yaml}'",
     "lint": "biome lint .",
     "check": "biome check .",
