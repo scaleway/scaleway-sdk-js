@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,} from '@scaleway/sdk-client'
+import type { ApiLocality } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -84,21 +84,19 @@ export class NatsAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams'],
+  })
+
   /**
    * Create a NATS account. Create a NATS account associated with a Project.
    *
    * @param request - The request {@link NatsApiCreateNatsAccountRequest}
    * @returns A Promise of NatsAccount
    */
-  createNatsAccount = (request: Readonly<NatsApiCreateNatsAccountRequest> = {}) =>
+  createNatsAccount = (
+    request: Readonly<NatsApiCreateNatsAccountRequest> = {},
+  ) =>
     this.client.fetch<NatsAccount>(
       {
         body: JSON.stringify(
@@ -111,21 +109,17 @@ export class NatsAPI extends ParentAPI {
       unmarshalNatsAccount,
     )
 
-  
   /**
    * Delete a NATS account. Delete a NATS account, specified by its NATS account ID. Note that deleting a NATS account is irreversible, and any credentials, streams, consumer and stored messages belonging to this NATS account will also be deleted.
    *
    * @param request - The request {@link NatsApiDeleteNatsAccountRequest}
    */
   deleteNatsAccount = (request: Readonly<NatsApiDeleteNatsAccountRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
+    })
 
-  
   /**
    * Update the name of a NATS account. Update the name of a NATS account, specified by its NATS account ID.
    *
@@ -145,7 +139,6 @@ export class NatsAPI extends ParentAPI {
       unmarshalNatsAccount,
     )
 
-  
   /**
    * Get a NATS account. Retrieve information about an existing NATS account identified by its NATS account ID. Its full details, including name and endpoint, are returned in the response.
    *
@@ -161,8 +154,9 @@ export class NatsAPI extends ParentAPI {
       unmarshalNatsAccount,
     )
 
-  
-  protected pageOfListNatsAccounts = (request: Readonly<NatsApiListNatsAccountsRequest> = {}) =>
+  protected pageOfListNatsAccounts = (
+    request: Readonly<NatsApiListNatsAccountsRequest> = {},
+  ) =>
     this.client.fetch<ListNatsAccountsResponse>(
       {
         method: 'GET',
@@ -170,13 +164,16 @@ export class NatsAPI extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListNatsAccountsResponse,
     )
-  
+
   /**
    * List NATS accounts. List all NATS accounts in the specified region, for a Scaleway Organization or Project. By default, the NATS accounts returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -186,18 +183,22 @@ export class NatsAPI extends ParentAPI {
   listNatsAccounts = (request: Readonly<NatsApiListNatsAccountsRequest> = {}) =>
     enrichForPagination('natsAccounts', this.pageOfListNatsAccounts, request)
 
-  
   /**
    * Create NATS credentials. Create a set of credentials for a NATS account, specified by its NATS account ID.
    *
    * @param request - The request {@link NatsApiCreateNatsCredentialsRequest}
    * @returns A Promise of NatsCredentials
    */
-  createNatsCredentials = (request: Readonly<NatsApiCreateNatsCredentialsRequest>) =>
+  createNatsCredentials = (
+    request: Readonly<NatsApiCreateNatsCredentialsRequest>,
+  ) =>
     this.client.fetch<NatsCredentials>(
       {
         body: JSON.stringify(
-          marshalNatsApiCreateNatsCredentialsRequest(request, this.client.settings),
+          marshalNatsApiCreateNatsCredentialsRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -206,21 +207,19 @@ export class NatsAPI extends ParentAPI {
       unmarshalNatsCredentials,
     )
 
-  
   /**
    * Delete NATS credentials. Delete a set of credentials, specified by their credentials ID. Deleting credentials is irreversible and cannot be undone. The credentials can no longer be used to access the NATS account, and active connections using this credentials will be closed.
    *
    * @param request - The request {@link NatsApiDeleteNatsCredentialsRequest}
    */
-  deleteNatsCredentials = (request: Readonly<NatsApiDeleteNatsCredentialsRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials/${validatePathParam('natsCredentialsId', request.natsCredentialsId)}`,
-      },
-    )
+  deleteNatsCredentials = (
+    request: Readonly<NatsApiDeleteNatsCredentialsRequest>,
+  ) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials/${validatePathParam('natsCredentialsId', request.natsCredentialsId)}`,
+    })
 
-  
   /**
    * Get NATS credentials. Retrieve an existing set of credentials, identified by the `nats_credentials_id`. The credentials themselves are NOT returned, only their metadata (NATS account ID, credentials name, etc), are returned in the response.
    *
@@ -236,8 +235,9 @@ export class NatsAPI extends ParentAPI {
       unmarshalNatsCredentials,
     )
 
-  
-  protected pageOfListNatsCredentials = (request: Readonly<NatsApiListNatsCredentialsRequest> = {}) =>
+  protected pageOfListNatsCredentials = (
+    request: Readonly<NatsApiListNatsCredentialsRequest> = {},
+  ) =>
     this.client.fetch<ListNatsCredentialsResponse>(
       {
         method: 'GET',
@@ -246,23 +246,30 @@ export class NatsAPI extends ParentAPI {
           ['nats_account_id', request.natsAccountId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListNatsCredentialsResponse,
     )
-  
+
   /**
    * List NATS credentials. List existing credentials in the specified NATS account. The response contains only the metadata for the credentials, not the credentials themselves, which are only returned after a **Create Credentials** call.
    *
    * @param request - The request {@link NatsApiListNatsCredentialsRequest}
    * @returns A Promise of ListNatsCredentialsResponse
    */
-  listNatsCredentials = (request: Readonly<NatsApiListNatsCredentialsRequest> = {}) =>
-    enrichForPagination('natsCredentials', this.pageOfListNatsCredentials, request)
-
-  
+  listNatsCredentials = (
+    request: Readonly<NatsApiListNatsCredentialsRequest> = {},
+  ) =>
+    enrichForPagination(
+      'natsCredentials',
+      this.pageOfListNatsCredentials,
+      request,
+    )
 }
 
 /**
@@ -275,14 +282,10 @@ export class SnsAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams'],
+  })
+
   /**
    * Activate Topics and Events. Activate Topics and Events for the specified Project ID. Topics and Events must be activated before any usage. Activating Topics and Events does not trigger any billing, and you can deactivate at any time.
    *
@@ -302,7 +305,6 @@ export class SnsAPI extends ParentAPI {
       unmarshalSnsInfo,
     )
 
-  
   /**
    * Get Topics and Events info. Retrieve the Topics and Events information of the specified Project ID. information include the activation status and the Topics and Events API endpoint URL.
    *
@@ -314,14 +316,14 @@ export class SnsAPI extends ParentAPI {
       {
         method: 'GET',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-info`,
-        urlParams: urlParams(
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
-        ),
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
       },
       unmarshalSnsInfo,
     )
 
-  
   /**
    * Deactivate Topics and Events. Deactivate Topics and Events for the specified Project ID. You must delete all topics and credentials before this call or you need to set the force_delete parameter.
    *
@@ -341,18 +343,22 @@ export class SnsAPI extends ParentAPI {
       unmarshalSnsInfo,
     )
 
-  
   /**
    * Create Topics and Events credentials. Create a set of credentials for Topics and Events, specified by a Project ID. Credentials give the bearer access to topics, and the level of permissions can be defined granularly.
    *
    * @param request - The request {@link SnsApiCreateSnsCredentialsRequest}
    * @returns A Promise of SnsCredentials
    */
-  createSnsCredentials = (request: Readonly<SnsApiCreateSnsCredentialsRequest> = {}) =>
+  createSnsCredentials = (
+    request: Readonly<SnsApiCreateSnsCredentialsRequest> = {},
+  ) =>
     this.client.fetch<SnsCredentials>(
       {
         body: JSON.stringify(
-          marshalSnsApiCreateSnsCredentialsRequest(request, this.client.settings),
+          marshalSnsApiCreateSnsCredentialsRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -361,32 +367,35 @@ export class SnsAPI extends ParentAPI {
       unmarshalSnsCredentials,
     )
 
-  
   /**
    * Delete Topics and Events credentials. Delete a set of Topics and Events credentials, specified by their credentials ID. Deleting credentials is irreversible and cannot be undone. The credentials can then no longer be used to access Topics and Events.
    *
    * @param request - The request {@link SnsApiDeleteSnsCredentialsRequest}
    */
-  deleteSnsCredentials = (request: Readonly<SnsApiDeleteSnsCredentialsRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
-      },
-    )
+  deleteSnsCredentials = (
+    request: Readonly<SnsApiDeleteSnsCredentialsRequest>,
+  ) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
+    })
 
-  
   /**
    * Update Topics and Events credentials. Update a set of Topics and Events credentials. You can update the credentials' name, or their permissions.
    *
    * @param request - The request {@link SnsApiUpdateSnsCredentialsRequest}
    * @returns A Promise of SnsCredentials
    */
-  updateSnsCredentials = (request: Readonly<SnsApiUpdateSnsCredentialsRequest>) =>
+  updateSnsCredentials = (
+    request: Readonly<SnsApiUpdateSnsCredentialsRequest>,
+  ) =>
     this.client.fetch<SnsCredentials>(
       {
         body: JSON.stringify(
-          marshalSnsApiUpdateSnsCredentialsRequest(request, this.client.settings),
+          marshalSnsApiUpdateSnsCredentialsRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
@@ -395,7 +404,6 @@ export class SnsAPI extends ParentAPI {
       unmarshalSnsCredentials,
     )
 
-  
   /**
    * Get Topics and Events credentials. Retrieve an existing set of credentials, identified by the `credentials_id`. The credentials themselves, as well as their metadata (name, project ID etc), are returned in the response.
    *
@@ -411,8 +419,9 @@ export class SnsAPI extends ParentAPI {
       unmarshalSnsCredentials,
     )
 
-  
-  protected pageOfListSnsCredentials = (request: Readonly<SnsApiListSnsCredentialsRequest> = {}) =>
+  protected pageOfListSnsCredentials = (
+    request: Readonly<SnsApiListSnsCredentialsRequest> = {},
+  ) =>
     this.client.fetch<ListSnsCredentialsResponse>(
       {
         method: 'GET',
@@ -420,23 +429,30 @@ export class SnsAPI extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListSnsCredentialsResponse,
     )
-  
+
   /**
    * List Topics and Events credentials. List existing Topics and Events credentials in the specified region. The response contains only the metadata for the credentials, not the credentials themselves.
    *
    * @param request - The request {@link SnsApiListSnsCredentialsRequest}
    * @returns A Promise of ListSnsCredentialsResponse
    */
-  listSnsCredentials = (request: Readonly<SnsApiListSnsCredentialsRequest> = {}) =>
-    enrichForPagination('snsCredentials', this.pageOfListSnsCredentials, request)
-
-  
+  listSnsCredentials = (
+    request: Readonly<SnsApiListSnsCredentialsRequest> = {},
+  ) =>
+    enrichForPagination(
+      'snsCredentials',
+      this.pageOfListSnsCredentials,
+      request,
+    )
 }
 
 /**
@@ -449,14 +465,10 @@ export class SqsAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams'],
+  })
+
   /**
    * Activate Queues. Activate Queues for the specified Project ID. Queues must be activated before any usage such as creating credentials and queues. Activating Queues does not trigger any billing, and you can deactivate at any time.
    *
@@ -476,7 +488,6 @@ export class SqsAPI extends ParentAPI {
       unmarshalSqsInfo,
     )
 
-  
   /**
    * Get Queues info. Retrieve the Queues information of the specified Project ID. information include the activation status and the Queues API endpoint URL.
    *
@@ -488,14 +499,14 @@ export class SqsAPI extends ParentAPI {
       {
         method: 'GET',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-info`,
-        urlParams: urlParams(
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
-        ),
+        urlParams: urlParams([
+          'project_id',
+          request.projectId ?? this.client.settings.defaultProjectId,
+        ]),
       },
       unmarshalSqsInfo,
     )
 
-  
   /**
    * Deactivate Queues. Deactivate Queues for the specified Project ID. You must delete all queues and credentials before this call or you need to set the force_delete parameter.
    *
@@ -515,18 +526,22 @@ export class SqsAPI extends ParentAPI {
       unmarshalSqsInfo,
     )
 
-  
   /**
    * Create Queues credentials. Create a set of credentials for Queues, specified by a Project ID. Credentials give the bearer access to queues, and the level of permissions can be defined granularly.
    *
    * @param request - The request {@link SqsApiCreateSqsCredentialsRequest}
    * @returns A Promise of SqsCredentials
    */
-  createSqsCredentials = (request: Readonly<SqsApiCreateSqsCredentialsRequest> = {}) =>
+  createSqsCredentials = (
+    request: Readonly<SqsApiCreateSqsCredentialsRequest> = {},
+  ) =>
     this.client.fetch<SqsCredentials>(
       {
         body: JSON.stringify(
-          marshalSqsApiCreateSqsCredentialsRequest(request, this.client.settings),
+          marshalSqsApiCreateSqsCredentialsRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
@@ -535,32 +550,35 @@ export class SqsAPI extends ParentAPI {
       unmarshalSqsCredentials,
     )
 
-  
   /**
    * Delete Queues credentials. Delete a set of Queues credentials, specified by their credentials ID. Deleting credentials is irreversible and cannot be undone. The credentials can then no longer be used to access Queues.
    *
    * @param request - The request {@link SqsApiDeleteSqsCredentialsRequest}
    */
-  deleteSqsCredentials = (request: Readonly<SqsApiDeleteSqsCredentialsRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
-      },
-    )
+  deleteSqsCredentials = (
+    request: Readonly<SqsApiDeleteSqsCredentialsRequest>,
+  ) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
+    })
 
-  
   /**
    * Update Queues credentials. Update a set of Queues credentials. You can update the credentials' name, or their permissions.
    *
    * @param request - The request {@link SqsApiUpdateSqsCredentialsRequest}
    * @returns A Promise of SqsCredentials
    */
-  updateSqsCredentials = (request: Readonly<SqsApiUpdateSqsCredentialsRequest>) =>
+  updateSqsCredentials = (
+    request: Readonly<SqsApiUpdateSqsCredentialsRequest>,
+  ) =>
     this.client.fetch<SqsCredentials>(
       {
         body: JSON.stringify(
-          marshalSqsApiUpdateSqsCredentialsRequest(request, this.client.settings),
+          marshalSqsApiUpdateSqsCredentialsRequest(
+            request,
+            this.client.settings,
+          ),
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
@@ -569,7 +587,6 @@ export class SqsAPI extends ParentAPI {
       unmarshalSqsCredentials,
     )
 
-  
   /**
    * Get Queues credentials. Retrieve an existing set of credentials, identified by the `credentials_id`. The credentials themselves, as well as their metadata (name, project ID etc), are returned in the response.
    *
@@ -585,8 +602,9 @@ export class SqsAPI extends ParentAPI {
       unmarshalSqsCredentials,
     )
 
-  
-  protected pageOfListSqsCredentials = (request: Readonly<SqsApiListSqsCredentialsRequest> = {}) =>
+  protected pageOfListSqsCredentials = (
+    request: Readonly<SqsApiListSqsCredentialsRequest> = {},
+  ) =>
     this.client.fetch<ListSqsCredentialsResponse>(
       {
         method: 'GET',
@@ -594,22 +612,28 @@ export class SqsAPI extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListSqsCredentialsResponse,
     )
-  
+
   /**
    * List Queues credentials. List existing Queues credentials in the specified region. The response contains only the metadata for the credentials, not the credentials themselves.
    *
    * @param request - The request {@link SqsApiListSqsCredentialsRequest}
    * @returns A Promise of ListSqsCredentialsResponse
    */
-  listSqsCredentials = (request: Readonly<SqsApiListSqsCredentialsRequest> = {}) =>
-    enrichForPagination('sqsCredentials', this.pageOfListSqsCredentials, request)
-
-  
+  listSqsCredentials = (
+    request: Readonly<SqsApiListSqsCredentialsRequest> = {},
+  ) =>
+    enrichForPagination(
+      'sqsCredentials',
+      this.pageOfListSqsCredentials,
+      request,
+    )
 }
-

@@ -1,5 +1,9 @@
-
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+  unmarshalMoney,
+} from '@scaleway/sdk-client'
 import type {
   Discount,
   DiscountCoupon,
@@ -81,16 +85,24 @@ export const unmarshalInvoice = (data: unknown): Invoice => {
     startDate: unmarshalDate(data.start_date),
     state: data.state,
     stopDate: unmarshalDate(data.stop_date),
-    totalDiscount: data.total_discount ? unmarshalMoney(data.total_discount) : undefined,
+    totalDiscount: data.total_discount
+      ? unmarshalMoney(data.total_discount)
+      : undefined,
     totalTax: data.total_tax ? unmarshalMoney(data.total_tax) : undefined,
     totalTaxed: data.total_taxed ? unmarshalMoney(data.total_taxed) : undefined,
-    totalUndiscount: data.total_undiscount ? unmarshalMoney(data.total_undiscount) : undefined,
-    totalUntaxed: data.total_untaxed ? unmarshalMoney(data.total_untaxed) : undefined,
+    totalUndiscount: data.total_undiscount
+      ? unmarshalMoney(data.total_undiscount)
+      : undefined,
+    totalUntaxed: data.total_untaxed
+      ? unmarshalMoney(data.total_untaxed)
+      : undefined,
     type: data.type,
   } as Invoice
 }
 
-const unmarshalListConsumptionsResponseConsumption = (data: unknown): ListConsumptionsResponseConsumption => {
+const unmarshalListConsumptionsResponseConsumption = (
+  data: unknown,
+): ListConsumptionsResponseConsumption => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListConsumptionsResponseConsumption' failed as data isn't a dictionary.`,
@@ -110,7 +122,9 @@ const unmarshalListConsumptionsResponseConsumption = (data: unknown): ListConsum
   } as ListConsumptionsResponseConsumption
 }
 
-export const unmarshalListConsumptionsResponse = (data: unknown): ListConsumptionsResponse => {
+export const unmarshalListConsumptionsResponse = (
+  data: unknown,
+): ListConsumptionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListConsumptionsResponse' failed as data isn't a dictionary.`,
@@ -118,14 +132,19 @@ export const unmarshalListConsumptionsResponse = (data: unknown): ListConsumptio
   }
 
   return {
-    consumptions: unmarshalArrayOfObject(data.consumptions, unmarshalListConsumptionsResponseConsumption),
+    consumptions: unmarshalArrayOfObject(
+      data.consumptions,
+      unmarshalListConsumptionsResponseConsumption,
+    ),
     totalCount: data.total_count,
     totalDiscountUntaxedValue: data.total_discount_untaxed_value,
     updatedAt: unmarshalDate(data.updated_at),
   } as ListConsumptionsResponse
 }
 
-export const unmarshalListDiscountsResponse = (data: unknown): ListDiscountsResponse => {
+export const unmarshalListDiscountsResponse = (
+  data: unknown,
+): ListDiscountsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDiscountsResponse' failed as data isn't a dictionary.`,
@@ -138,7 +157,9 @@ export const unmarshalListDiscountsResponse = (data: unknown): ListDiscountsResp
   } as ListDiscountsResponse
 }
 
-export const unmarshalListInvoicesResponse = (data: unknown): ListInvoicesResponse => {
+export const unmarshalListInvoicesResponse = (
+  data: unknown,
+): ListInvoicesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListInvoicesResponse' failed as data isn't a dictionary.`,
@@ -166,7 +187,9 @@ const unmarshalListTaxesResponseTax = (data: unknown): ListTaxesResponseTax => {
   } as ListTaxesResponseTax
 }
 
-export const unmarshalListTaxesResponse = (data: unknown): ListTaxesResponse => {
+export const unmarshalListTaxesResponse = (
+  data: unknown,
+): ListTaxesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListTaxesResponse' failed as data isn't a dictionary.`,

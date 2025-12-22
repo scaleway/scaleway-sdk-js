@@ -1,12 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone, } from '@scaleway/sdk-client'
+import type { Zone as ScwZone } from '@scaleway/sdk-client'
 
-
-export type CommitmentType =
-  | 'duration_24h'
-  | 'renewed_monthly'
-  | 'none'
+export type CommitmentType = 'duration_24h' | 'renewed_monthly' | 'none'
 
 export type ConnectivityDiagnosticActionType =
   | 'reboot_server'
@@ -24,9 +20,7 @@ export type ListServerPrivateNetworksRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
-export type ListServersRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListServersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type RunnerConfigurationProvider =
   | 'unknown_provider'
@@ -83,25 +77,21 @@ export interface OSSupportedServerType {
   fastDeliveryAvailable: boolean
 }
 
-
 export interface GithubRunnerConfiguration {
   url: string
   token: string
   labels: string[]
 }
 
-
 export interface GitlabRunnerConfiguration {
   url: string
   token: string
 }
 
-
 export interface Commitment {
   type: CommitmentType
   cancelled: boolean
 }
-
 
 export interface OS {
   /**
@@ -158,14 +148,12 @@ export interface OS {
   supportedServerTypes: OSSupportedServerType[]
 }
 
-
 export interface RunnerConfiguration {
   name: string
   url: string
   token: string
   provider: RunnerConfigurationProvider
 }
-
 
 export interface RunnerConfigurationV2 {
   name: string
@@ -182,7 +170,6 @@ export interface RunnerConfigurationV2 {
   gitlabConfiguration?: GitlabRunnerConfiguration
 }
 
-
 export interface ServerTypeCPU {
   name: string
   coreCount: number
@@ -191,28 +178,23 @@ export interface ServerTypeCPU {
   threadsPerCore: number
 }
 
-
 export interface ServerTypeDisk {
   capacity: number
   type: string
 }
 
-
 export interface ServerTypeGPU {
   count: number
 }
-
 
 export interface ServerTypeMemory {
   capacity: number
   type: string
 }
 
-
 export interface ServerTypeNPU {
   count: number
 }
-
 
 export interface ServerTypeNetwork {
   publicBandwidthBps: number
@@ -220,11 +202,9 @@ export interface ServerTypeNetwork {
   defaultPublicBandwidth: number
 }
 
-
 export interface BatchCreateServersRequestBatchInnerCreateServerRequest {
   name: string
 }
-
 
 export interface Server {
   /**
@@ -325,7 +305,6 @@ export interface Server {
   appliedRunnerConfigurationIds: string[]
 }
 
-
 export interface ConnectivityDiagnosticServerHealth {
   lastCheckinDate?: Date
   isServerAlive: boolean
@@ -335,11 +314,9 @@ export interface ConnectivityDiagnosticServerHealth {
   isVncPortUp: boolean
 }
 
-
 export interface AppliedRunnerConfigurations {
   runnerConfigurationIds: string[]
 }
-
 
 export interface Runner {
   id: string
@@ -347,7 +324,6 @@ export interface Runner {
   status: RunnerStatus
   errorMessage: string
 }
-
 
 export interface ServerPrivateNetwork {
   /**
@@ -387,7 +363,6 @@ export interface ServerPrivateNetwork {
    */
   ipamIpIds: string[]
 }
-
 
 export interface ServerType {
   /**
@@ -432,11 +407,9 @@ export interface ServerType {
   npu?: ServerTypeNPU
 }
 
-
 export interface CommitmentTypeValue {
   commitmentType: CommitmentType
 }
-
 
 export type BatchCreateServersRequest = {
   /**
@@ -473,14 +446,12 @@ export type BatchCreateServersRequest = {
   requests?: BatchCreateServersRequestBatchInnerCreateServerRequest[]
 }
 
-
 export interface BatchCreateServersResponse {
   /**
    * List of created servers.
    */
   servers: Server[]
 }
-
 
 export interface ConnectivityDiagnostic {
   id: string
@@ -490,7 +461,6 @@ export interface ConnectivityDiagnostic {
   supportedActions: ConnectivityDiagnosticActionType[]
   errorMessage: string
 }
-
 
 export type CreateRunnerRequest = {
   /**
@@ -506,7 +476,6 @@ export type CreateRunnerRequest = {
    */
   runnerConfiguration: RunnerConfigurationV2
 }
-
 
 export type CreateServerRequest = {
   /**
@@ -551,7 +520,6 @@ export type CreateServerRequest = {
   appliedRunnerConfigurations?: AppliedRunnerConfigurations
 }
 
-
 export type DeleteRunnerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -562,7 +530,6 @@ export type DeleteRunnerRequest = {
    */
   runnerId: string
 }
-
 
 export type DeleteServerRequest = {
   /**
@@ -575,7 +542,6 @@ export type DeleteServerRequest = {
   serverId: string
 }
 
-
 export type GetConnectivityDiagnosticRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -583,7 +549,6 @@ export type GetConnectivityDiagnosticRequest = {
   zone?: ScwZone
   diagnosticId: string
 }
-
 
 export type GetOSRequest = {
   /**
@@ -596,7 +561,6 @@ export type GetOSRequest = {
   osId: string
 }
 
-
 export type GetRunnerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -607,7 +571,6 @@ export type GetRunnerRequest = {
    */
   runnerId: string
 }
-
 
 export type GetServerRequest = {
   /**
@@ -620,7 +583,6 @@ export type GetServerRequest = {
   serverId: string
 }
 
-
 export type GetServerTypeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -631,7 +593,6 @@ export type GetServerTypeRequest = {
    */
   serverType: string
 }
-
 
 export type ListOSRequest = {
   /**
@@ -656,7 +617,6 @@ export type ListOSRequest = {
   name?: string
 }
 
-
 export interface ListOSResponse {
   /**
    * Total number of OS.
@@ -667,7 +627,6 @@ export interface ListOSResponse {
    */
   os: OS[]
 }
-
 
 export type ListRunnersRequest = {
   /**
@@ -696,18 +655,15 @@ export type ListRunnersRequest = {
   pageSize?: number
 }
 
-
 export interface ListRunnersResponse {
   totalCount: number
   runners: Runner[]
 }
 
-
 export interface ListServerPrivateNetworksResponse {
   serverPrivateNetworks: ServerPrivateNetwork[]
   totalCount: number
 }
-
 
 export type ListServerTypesRequest = {
   /**
@@ -716,14 +672,12 @@ export type ListServerTypesRequest = {
   zone?: ScwZone
 }
 
-
 export interface ListServerTypesResponse {
   /**
    * Available server types.
    */
   serverTypes: ServerType[]
 }
-
 
 export type ListServersRequest = {
   /**
@@ -752,7 +706,6 @@ export type ListServersRequest = {
   pageSize?: number
 }
 
-
 export interface ListServersResponse {
   /**
    * Total number of servers.
@@ -763,7 +716,6 @@ export interface ListServersResponse {
    */
   servers: Server[]
 }
-
 
 export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /**
@@ -784,7 +736,6 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   ipamIpIds?: string[]
 }
 
-
 export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -800,7 +751,6 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   privateNetworkId: string
 }
 
-
 export type PrivateNetworkApiGetServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -809,7 +759,6 @@ export type PrivateNetworkApiGetServerPrivateNetworkRequest = {
   serverId: string
   privateNetworkId: string
 }
-
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /**
@@ -850,7 +799,6 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   ipamIpIds?: string[]
 }
 
-
 export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -866,7 +814,6 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   perPrivateNetworkIpamIpIds: Record<string, string[]>
 }
 
-
 export type RebootServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -877,7 +824,6 @@ export type RebootServerRequest = {
    */
   serverId: string
 }
-
 
 export type ReinstallServerRequest = {
   /**
@@ -894,11 +840,9 @@ export type ReinstallServerRequest = {
   osId?: string
 }
 
-
 export interface SetServerPrivateNetworksResponse {
   serverPrivateNetworks: ServerPrivateNetwork[]
 }
-
 
 export type StartConnectivityDiagnosticRequest = {
   /**
@@ -908,11 +852,9 @@ export type StartConnectivityDiagnosticRequest = {
   serverId: string
 }
 
-
 export interface StartConnectivityDiagnosticResponse {
   diagnosticId: string
 }
-
 
 export type UpdateRunnerRequest = {
   /**
@@ -928,7 +870,6 @@ export type UpdateRunnerRequest = {
    */
   runnerConfiguration: RunnerConfigurationV2
 }
-
 
 export type UpdateServerRequest = {
   /**
@@ -964,5 +905,3 @@ export type UpdateServerRequest = {
    */
   appliedRunnerConfigurations?: AppliedRunnerConfigurations
 }
-
-

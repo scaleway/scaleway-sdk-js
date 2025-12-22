@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone, } from '@scaleway/sdk-client'
-
+import type { Zone as ScwZone } from '@scaleway/sdk-client'
 
 export type GatewayNetworkStatus =
   | 'unknown_status'
@@ -52,11 +51,7 @@ export type ListPatRulesRequestOrderBy =
   | 'public_port_asc'
   | 'public_port_desc'
 
-export type PatRuleProtocol =
-  | 'unknown_protocol'
-  | 'both'
-  | 'tcp'
-  | 'udp'
+export type PatRuleProtocol = 'unknown_protocol' | 'both' | 'tcp' | 'udp'
 
 export interface GatewayNetwork {
   /**
@@ -105,7 +100,6 @@ export interface GatewayNetwork {
   zone: ScwZone
 }
 
-
 export interface IP {
   /**
    * IP address ID.
@@ -149,7 +143,6 @@ export interface IP {
   zone: ScwZone
 }
 
-
 export interface GatewayType {
   /**
    * Public Gateway type name.
@@ -164,7 +157,6 @@ export interface GatewayType {
    */
   zone: ScwZone
 }
-
 
 export interface Gateway {
   /**
@@ -249,7 +241,6 @@ export interface Gateway {
   zone: ScwZone
 }
 
-
 export interface PatRule {
   /**
    * PAT rule ID.
@@ -289,7 +280,6 @@ export interface PatRule {
   zone: ScwZone
 }
 
-
 export interface SetPatRulesRequestRule {
   /**
    * Public port to listen on. Uniquely identifies the rule, and a matching rule will be updated with the new parameters.
@@ -309,7 +299,6 @@ export interface SetPatRulesRequestRule {
   protocol: PatRuleProtocol
 }
 
-
 export type AddBastionAllowedIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -325,14 +314,12 @@ export type AddBastionAllowedIPsRequest = {
   ipRange: string
 }
 
-
 export interface AddBastionAllowedIPsResponse {
   /**
    * Ranges of IP addresses allowed to connect to the gateway's SSH bastion.
    */
   ipRanges: string[]
 }
-
 
 export type CreateGatewayNetworkRequest = {
   /**
@@ -360,7 +347,6 @@ export type CreateGatewayNetworkRequest = {
    */
   ipamIpId?: string
 }
-
 
 export type CreateGatewayRequest = {
   /**
@@ -401,7 +387,6 @@ export type CreateGatewayRequest = {
   bastionPort?: number
 }
 
-
 export type CreateIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -416,7 +401,6 @@ export type CreateIPRequest = {
    */
   tags?: string[]
 }
-
 
 export type CreatePatRuleRequest = {
   /**
@@ -445,7 +429,6 @@ export type CreatePatRuleRequest = {
   protocol?: PatRuleProtocol
 }
 
-
 export type DeleteBastionAllowedIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -461,7 +444,6 @@ export type DeleteBastionAllowedIPsRequest = {
   ipRange: string
 }
 
-
 export type DeleteGatewayNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -472,7 +454,6 @@ export type DeleteGatewayNetworkRequest = {
    */
   gatewayNetworkId: string
 }
-
 
 export type DeleteGatewayRequest = {
   /**
@@ -489,7 +470,6 @@ export type DeleteGatewayRequest = {
   deleteIp: boolean
 }
 
-
 export type DeleteIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -500,7 +480,6 @@ export type DeleteIPRequest = {
    */
   ipId: string
 }
-
 
 export type DeletePatRuleRequest = {
   /**
@@ -513,7 +492,6 @@ export type DeletePatRuleRequest = {
   patRuleId: string
 }
 
-
 export type GetGatewayNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -524,7 +502,6 @@ export type GetGatewayNetworkRequest = {
    */
   gatewayNetworkId: string
 }
-
 
 export type GetGatewayRequest = {
   /**
@@ -537,7 +514,6 @@ export type GetGatewayRequest = {
   gatewayId: string
 }
 
-
 export type GetIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -549,7 +525,6 @@ export type GetIPRequest = {
   ipId: string
 }
 
-
 export type GetPatRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -560,7 +535,6 @@ export type GetPatRuleRequest = {
    */
   patRuleId: string
 }
-
 
 export type ListGatewayNetworksRequest = {
   /**
@@ -597,7 +571,6 @@ export type ListGatewayNetworksRequest = {
   masqueradeEnabled?: boolean
 }
 
-
 export interface ListGatewayNetworksResponse {
   /**
    * GatewayNetworks on this page.
@@ -609,7 +582,6 @@ export interface ListGatewayNetworksResponse {
   totalCount: number
 }
 
-
 export type ListGatewayTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -617,14 +589,12 @@ export type ListGatewayTypesRequest = {
   zone?: ScwZone
 }
 
-
 export interface ListGatewayTypesResponse {
   /**
    * Available types of Public Gateway.
    */
   types: GatewayType[]
 }
-
 
 export type ListGatewaysRequest = {
   /**
@@ -677,7 +647,6 @@ export type ListGatewaysRequest = {
   includeLegacy?: boolean
 }
 
-
 export interface ListGatewaysResponse {
   /**
    * Gateways on this page.
@@ -688,7 +657,6 @@ export interface ListGatewaysResponse {
    */
   totalCount: number
 }
-
 
 export type ListIPsRequest = {
   /**
@@ -729,7 +697,6 @@ export type ListIPsRequest = {
   isFree?: boolean
 }
 
-
 export interface ListIPsResponse {
   /**
    * IP addresses on this page.
@@ -740,7 +707,6 @@ export interface ListIPsResponse {
    */
   totalCount: number
 }
-
 
 export type ListPatRulesRequest = {
   /**
@@ -773,7 +739,6 @@ export type ListPatRulesRequest = {
   protocol?: PatRuleProtocol
 }
 
-
 export interface ListPatRulesResponse {
   /**
    * Array of PAT rules matching the filter.
@@ -785,7 +750,6 @@ export interface ListPatRulesResponse {
   totalCount: number
 }
 
-
 export type RefreshSSHKeysRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -796,7 +760,6 @@ export type RefreshSSHKeysRequest = {
    */
   gatewayId: string
 }
-
 
 export type SetBastionAllowedIPsRequest = {
   /**
@@ -813,14 +776,12 @@ export type SetBastionAllowedIPsRequest = {
   ipRanges?: string[]
 }
 
-
 export interface SetBastionAllowedIPsResponse {
   /**
    * Ranges of IP addresses allowed to connect to the gateway's SSH bastion.
    */
   ipRanges: string[]
 }
-
 
 export type SetPatRulesRequest = {
   /**
@@ -837,14 +798,12 @@ export type SetPatRulesRequest = {
   patRules: SetPatRulesRequestRule[]
 }
 
-
 export interface SetPatRulesResponse {
   /**
    * List of PAT rules.
    */
   patRules: PatRule[]
 }
-
 
 export type UpdateGatewayNetworkRequest = {
   /**
@@ -868,7 +827,6 @@ export type UpdateGatewayNetworkRequest = {
    */
   ipamIpId?: string
 }
-
 
 export type UpdateGatewayRequest = {
   /**
@@ -901,7 +859,6 @@ export type UpdateGatewayRequest = {
   enableSmtp?: boolean
 }
 
-
 export type UpdateIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -924,7 +881,6 @@ export type UpdateIPRequest = {
    */
   gatewayId?: string
 }
-
 
 export type UpdatePatRuleRequest = {
   /**
@@ -953,7 +909,6 @@ export type UpdatePatRuleRequest = {
   protocol?: PatRuleProtocol
 }
 
-
 export type UpgradeGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -968,5 +923,3 @@ export type UpgradeGatewayRequest = {
    */
   type?: string
 }
-
-
