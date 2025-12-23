@@ -126,6 +126,10 @@ export const unmarshalImpactReportAvailability = (
       data.month_summary_reports,
       unmarshalDate,
     ),
+    yearlySummaryReports: unmarshalArrayOfObject(
+      data.yearly_summary_reports,
+      unmarshalDate,
+    ),
   } as ImpactReportAvailability
 }
 
