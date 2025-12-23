@@ -376,13 +376,21 @@ export interface ContactExtensionFR {
 
 export interface ContactExtensionIT {
   /**
-   * @deprecated
+   * @deprecated This option is useless anymore.
    */
   europeanCitizenship?: string
   /**
-   * @deprecated
+   * @deprecated Tax_code is renamed to pin.
    */
   taxCode?: string
+  /**
+   * Domain name registrant's Taxcode (mandatory / only optional when the trustee is used)
+
+If the requester:
+* is an Italian natural person it contains his/her Codice Fiscale (16 characters format).
+* For others than residents of IT it can contain a document number. (ID Card).
+* In all other cases it must be equal to VAT number (in the 16 characters format if nationality is IT) or the numeric Codice Fiscale.
+   */
   pin: string
 }
 
