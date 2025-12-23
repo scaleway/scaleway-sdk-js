@@ -120,6 +120,10 @@ export interface ImpactReportAvailability {
    * The list of calendar months for which impact reports are available.
    */
   monthSummaryReports: Date[]
+  /**
+   * The list of calendar years for which impact reports are available.
+   */
+  yearlySummaryReports: Date[]
 }
 
 export type UserApiDownloadImpactReportRequest = {
