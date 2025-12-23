@@ -130,6 +130,7 @@ export const unmarshalCustomerGateway = (data: unknown): CustomerGateway => {
     projectId: data.project_id,
     publicIpv4: data.public_ipv4,
     publicIpv6: data.public_ipv6,
+    region: data.region,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as CustomerGateway
