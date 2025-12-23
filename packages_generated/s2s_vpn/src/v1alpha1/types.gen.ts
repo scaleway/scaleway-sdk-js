@@ -264,6 +264,10 @@ export interface CustomerGateway {
    * AS Number of the customer gateway.
    */
   asn: number
+  /**
+   * Region of the customer gateway.
+   */
+  region: ScwRegion
 }
 
 export interface RoutingPolicy {
