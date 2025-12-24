@@ -265,6 +265,10 @@ export interface CustomerGateway {
    */
   asn: number
   /**
+   * List of connection ids of the customer gateway.
+   */
+  connectionIds: string[]
+  /**
    * Region of the customer gateway.
    */
   region: ScwRegion
@@ -392,6 +396,10 @@ export interface VpnGateway {
    * Autonomous System Number (ASN) of the VPN gateway, used by Border Gateway Protocol (BGP) to exchange routing information with the customer gateway.
    */
   asn: number
+  /**
+   * List of connection ids of the VPN gateway.
+   */
+  connectionIds: string[]
   /**
    * Zone where the VPN gateway resource is currently provisioned.
    */

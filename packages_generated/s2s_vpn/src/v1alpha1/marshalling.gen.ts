@@ -123,6 +123,7 @@ export const unmarshalCustomerGateway = (data: unknown): CustomerGateway => {
 
   return {
     asn: data.asn,
+    connectionIds: data.connection_ids,
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
@@ -194,6 +195,7 @@ export const unmarshalVpnGateway = (data: unknown): VpnGateway => {
 
   return {
     asn: data.asn,
+    connectionIds: data.connection_ids,
     createdAt: unmarshalDate(data.created_at),
     gatewayType: data.gateway_type,
     id: data.id,
