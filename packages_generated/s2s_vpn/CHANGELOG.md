@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-s2s-vpn@2.2.0...@scaleway/sdk-s2s-vpn@2.3.0) (2025-12-29)
+
+### Features
+
+- **s2s_vpn:** add customer gateway region ([#2694](https://github.com/scaleway/scaleway-sdk-js/issues/2694)) ([1fc0173](https://github.com/scaleway/scaleway-sdk-js/commit/1fc0173ea43f051dc6cb93f1a9362bab73b51df3))
+- **s2s_vpn:** return connection_ids with list of gws ([#2696](https://github.com/scaleway/scaleway-sdk-js/issues/2696)) ([ed0be19](https://github.com/scaleway/scaleway-sdk-js/commit/ed0be190a20f1bdfa5f4463d12e5d6666e63fc8c))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-s2s-vpn@2.1.1...@scaleway/sdk-s2s-vpn@2.2.0) (2025-12-22)
 
 ### Features

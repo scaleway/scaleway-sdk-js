@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.2.0...@scaleway/sdk-product-catalog@2.3.0) (2025-12-29)
+
+### Features
+
+- **product_catalog:** remove "alliance" Object Storage traffic ([#2689](https://github.com/scaleway/scaleway-sdk-js/issues/2689)) ([1ab86d7](https://github.com/scaleway/scaleway-sdk-js/commit/1ab86d7d7f2677a6743f08ad7d2d61c1a5f9af72))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.1.1...@scaleway/sdk-product-catalog@2.2.0) (2025-12-22)
 
 ### Features

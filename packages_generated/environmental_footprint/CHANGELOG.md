@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-environmental-footprint@2.3.0...@scaleway/sdk-environmental-footprint@2.4.0) (2025-12-29)
+
+### Features
+
+- **environmental_impact:** add yearly_summary_reports field to impact report availability messages ([#2695](https://github.com/scaleway/scaleway-sdk-js/issues/2695)) ([c8b169d](https://github.com/scaleway/scaleway-sdk-js/commit/c8b169d1f7b25e2379fbbddd8582348efc4561db))
+
 # [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-environmental-footprint@2.2.0...@scaleway/sdk-environmental-footprint@2.3.0) (2025-12-22)
 
 ### Features
