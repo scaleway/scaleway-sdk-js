@@ -527,6 +527,7 @@ export const marshalBatchCreateServersRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   commitment_type: request.commitmentType,
+  enable_kext: request.enableKext,
   enable_vpc: request.enableVpc,
   os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
@@ -630,6 +631,7 @@ export const marshalCreateServerRequest = (
         )
       : undefined,
   commitment_type: request.commitmentType,
+  enable_kext: request.enableKext,
   enable_vpc: request.enableVpc,
   name: request.name || randomName('as'),
   os_id: request.osId,
@@ -661,6 +663,7 @@ export const marshalReinstallServerRequest = (
   request: ReinstallServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  enable_kext: request.enableKext,
   os_id: request.osId,
 })
 
