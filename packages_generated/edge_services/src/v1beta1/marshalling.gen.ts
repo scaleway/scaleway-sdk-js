@@ -59,6 +59,7 @@ import type {
   ScalewayLbBackendConfig,
   ScalewayS3BackendConfig,
   ScalewayServerlessContainerBackendConfig,
+  ScalewayServerlessFunctionBackendConfig,
   SelectPlanRequest,
   SetHeadStageRequest,
   SetHeadStageRequestAddNewHeadStage,
@@ -142,6 +143,21 @@ const unmarshalScalewayServerlessContainerBackendConfig = (
   } as ScalewayServerlessContainerBackendConfig
 }
 
+const unmarshalScalewayServerlessFunctionBackendConfig = (
+  data: unknown,
+): ScalewayServerlessFunctionBackendConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScalewayServerlessFunctionBackendConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    functionId: data.function_id,
+    region: data.region,
+  } as ScalewayServerlessFunctionBackendConfig
+}
+
 export const unmarshalBackendStage = (data: unknown): BackendStage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -162,6 +178,11 @@ export const unmarshalBackendStage = (data: unknown): BackendStage => {
     scalewayServerlessContainer: data.scaleway_serverless_container
       ? unmarshalScalewayServerlessContainerBackendConfig(
           data.scaleway_serverless_container,
+        )
+      : undefined,
+    scalewayServerlessFunction: data.scaleway_serverless_function
+      ? unmarshalScalewayServerlessFunctionBackendConfig(
+          data.scaleway_serverless_function,
         )
       : undefined,
     updatedAt: unmarshalDate(data.updated_at),
@@ -911,6 +932,14 @@ const marshalScalewayServerlessContainerBackendConfig = (
   region: request.region,
 })
 
+const marshalScalewayServerlessFunctionBackendConfig = (
+  request: ScalewayServerlessFunctionBackendConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  function_id: request.functionId,
+  region: request.region,
+})
+
 export const marshalCreateBackendStageRequest = (
   request: CreateBackendStageRequest,
   defaults: DefaultValues,
@@ -936,6 +965,16 @@ export const marshalCreateBackendStageRequest = (
         request.scalewayServerlessContainer !== undefined
           ? marshalScalewayServerlessContainerBackendConfig(
               request.scalewayServerlessContainer,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'scaleway_serverless_function',
+      value:
+        request.scalewayServerlessFunction !== undefined
+          ? marshalScalewayServerlessFunctionBackendConfig(
+              request.scalewayServerlessFunction,
               defaults,
             )
           : undefined,
@@ -1137,6 +1176,16 @@ export const marshalUpdateBackendStageRequest = (
         request.scalewayServerlessContainer !== undefined
           ? marshalScalewayServerlessContainerBackendConfig(
               request.scalewayServerlessContainer,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'scaleway_serverless_function',
+      value:
+        request.scalewayServerlessFunction !== undefined
+          ? marshalScalewayServerlessFunctionBackendConfig(
+              request.scalewayServerlessFunction,
               defaults,
             )
           : undefined,
