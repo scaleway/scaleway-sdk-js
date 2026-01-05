@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-01-05)
+
+### Features
+
+- **edge_services:** add serverless function backend ([#2698](https://github.com/scaleway/scaleway-sdk-js/issues/2698)) ([20ebcff](https://github.com/scaleway/scaleway-sdk-js/commit/20ebcff8910c49972d0faf6fe23c59022f613d9a))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.1.1...@scaleway/sdk-edge-services@2.2.0) (2025-12-22)
 
 ### Features
