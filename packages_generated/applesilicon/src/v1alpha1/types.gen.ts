@@ -444,6 +444,10 @@ export type BatchCreateServersRequest = {
    * List of servers to create.
    */
   requests?: BatchCreateServersRequestBatchInnerCreateServerRequest[]
+  /**
+   * Enable kernel extensions in this install of mac OS.
+   */
+  enableKext: boolean
 }
 
 export interface BatchCreateServersResponse {
@@ -518,6 +522,10 @@ export type CreateServerRequest = {
    * Runner configurations to apply on the server, existing ones missing from the specified configuration will be removed from the server.
    */
   appliedRunnerConfigurations?: AppliedRunnerConfigurations
+  /**
+   * Enable kernel extensions in this install of mac OS.
+   */
+  enableKext: boolean
 }
 
 export type DeleteRunnerRequest = {
@@ -838,6 +846,10 @@ export type ReinstallServerRequest = {
    * Reinstall the server with the target OS, when no os_id provided the default OS for the server type is used.
    */
   osId?: string
+  /**
+   * Enable kernel extensions in this install of mac OS.
+   */
+  enableKext: boolean
 }
 
 export interface SetServerPrivateNetworksResponse {
