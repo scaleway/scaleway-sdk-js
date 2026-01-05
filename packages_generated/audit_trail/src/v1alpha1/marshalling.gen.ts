@@ -56,6 +56,9 @@ import type {
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
   SystemEvent,
+  VpcPrivateNetworkInfo,
+  VpcRouteInfo,
+  VpcSubnetInfo,
 } from './types.gen.js'
 
 const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
@@ -552,6 +555,49 @@ const unmarshalSecretManagerSecretVersionInfo = (
   } as SecretManagerSecretVersionInfo
 }
 
+const unmarshalVpcPrivateNetworkInfo = (
+  data: unknown,
+): VpcPrivateNetworkInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VpcPrivateNetworkInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    pushDefaultRoute: data.push_default_route,
+    vpcId: data.vpc_id,
+  } as VpcPrivateNetworkInfo
+}
+
+const unmarshalVpcRouteInfo = (data: unknown): VpcRouteInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VpcRouteInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    destination: data.destination,
+    nexthopPrivateNetworkKey: data.nexthop_private_network_key,
+    nexthopResourceKey: data.nexthop_resource_key,
+    vpcId: data.vpc_id,
+  } as VpcRouteInfo
+}
+
+const unmarshalVpcSubnetInfo = (data: unknown): VpcSubnetInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VpcSubnetInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    subnetCidr: data.subnet_cidr,
+    vpcId: data.vpc_id,
+  } as VpcSubnetInfo
+}
+
 export const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -679,6 +725,15 @@ export const unmarshalResource = (data: unknown): Resource => {
       : undefined,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
+    vpcPrivateNetworkInfo: data.vpc_private_network_info
+      ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info)
+      : undefined,
+    vpcRouteInfo: data.vpc_route_info
+      ? unmarshalVpcRouteInfo(data.vpc_route_info)
+      : undefined,
+    vpcSubnetInfo: data.vpc_subnet_info
+      ? unmarshalVpcSubnetInfo(data.vpc_subnet_info)
+      : undefined,
   } as Resource
 }
 
