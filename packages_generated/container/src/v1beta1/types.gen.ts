@@ -22,6 +22,8 @@ export type ContainerStatus =
   | 'creating'
   | 'pending'
   | 'created'
+  | 'locking'
+  | 'upgrading'
 
 export type CronStatus =
   | 'unknown'
@@ -31,6 +33,9 @@ export type CronStatus =
   | 'locked'
   | 'creating'
   | 'pending'
+  | 'locking'
+  | 'upgrading'
+  | 'rebalancing'
 
 export type DomainStatus =
   | 'unknown'
@@ -39,6 +44,9 @@ export type DomainStatus =
   | 'error'
   | 'creating'
   | 'pending'
+  | 'locked'
+  | 'locking'
+  | 'upgrading'
 
 export type ListContainersRequestOrderBy =
   | 'created_at_asc'
@@ -72,6 +80,8 @@ export type NamespaceStatus =
   | 'locked'
   | 'creating'
   | 'pending'
+  | 'locking'
+  | 'upgrading'
 
 export type TokenStatus =
   | 'unknown'
@@ -94,6 +104,9 @@ export type TriggerStatus =
   | 'error'
   | 'creating'
   | 'pending'
+  | 'locked'
+  | 'locking'
+  | 'upgrading'
 
 export interface ContainerHealthCheckSpecHTTPProbe {
   /**
