@@ -14,6 +14,8 @@ export const CONTAINER_TRANSIENT_STATUSES: ContainerStatus[] = [
   'deleting',
   'creating',
   'pending',
+  'locking',
+  'upgrading',
 ]
 
 /** Lists transient statutes of the enum {@link CronStatus}. */
@@ -21,6 +23,9 @@ export const CRON_TRANSIENT_STATUSES: CronStatus[] = [
   'deleting',
   'creating',
   'pending',
+  'locking',
+  'upgrading',
+  'rebalancing',
 ]
 
 /** Lists transient statutes of the enum {@link DomainStatus}. */
@@ -28,6 +33,8 @@ export const DOMAIN_TRANSIENT_STATUSES: DomainStatus[] = [
   'deleting',
   'creating',
   'pending',
+  'locking',
+  'upgrading',
 ]
 
 /** Lists transient statutes of the enum {@link NamespaceStatus}. */
@@ -35,6 +42,8 @@ export const NAMESPACE_TRANSIENT_STATUSES: NamespaceStatus[] = [
   'deleting',
   'creating',
   'pending',
+  'locking',
+  'upgrading',
 ]
 
 /** Lists transient statutes of the enum {@link TokenStatus}. */
@@ -45,4 +54,6 @@ export const TRIGGER_TRANSIENT_STATUSES: TriggerStatus[] = [
   'deleting',
   'creating',
   'pending',
+  'locking',
+  'upgrading',
 ]

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-01-05)
+
+### Features
+
+- **audit_trail:** add vpc resources info ([#2697](https://github.com/scaleway/scaleway-sdk-js/issues/2697)) ([414eec4](https://github.com/scaleway/scaleway-sdk-js/commit/414eec471a44b3ec9e727657b7a4814f513d6a60))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.1.1...@scaleway/sdk-audit-trail@2.2.0) (2025-12-22)
 
 ### Features
