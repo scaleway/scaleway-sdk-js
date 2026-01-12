@@ -639,7 +639,9 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
   return {
     badges: data.badges,
     description: data.description,
+    endOfGrowthAt: unmarshalDate(data.end_of_growth_at),
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    endOfSaleAt: unmarshalDate(data.end_of_sale_at),
     environmentalImpactEstimation: data.environmental_impact_estimation
       ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(
           data.environmental_impact_estimation,

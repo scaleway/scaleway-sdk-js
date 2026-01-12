@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.2.1 (2026-01-12)
+
+**Note:** Version bump only for package @scaleway/sdk-block
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-block@2.1.1...@scaleway/sdk-block@2.2.0) (2025-12-22)
 
 ### Features
