@@ -655,7 +655,9 @@ You can filter tokens by Project ID and token scopes.
     )
 
   /**
-   * List all Scaleway products that send metrics and/or logs to Cockpit.. List all Scaleway products that send metrics and/or logs to Cockpit.
+   * List Scaleway products. List all Scaleway products that send metrics and/or logs to Cockpit.
+Note that all of those products send at least metrics, but only a subset send logs to Cockpit.
+For more information, see https://www.scaleway.com/en/docs/cockpit/reference-content/cockpit-product-integration/.
    *
    * @param request - The request {@link RegionalApiListProductsRequest}
    * @returns A Promise of ListProductsResponse

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.5](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.1.4...@scaleway/sdk@3.1.5) (2026-01-12)
+
+**Note:** Version bump only for package @scaleway/sdk
+
 ## [3.1.4](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.1.3...@scaleway/sdk@3.1.4) (2026-01-05)
 
 **Note:** Version bump only for package @scaleway/sdk

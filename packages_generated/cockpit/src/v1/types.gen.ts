@@ -813,7 +813,7 @@ export type RegionalApiCreateDataSourceRequest = {
   /**
    * Data source type.
    */
-  type?: DataSourceType
+  type: DataSourceType
   /**
    * Default values are 31 days for metrics, 7 days for logs and traces.
    */
@@ -1087,6 +1087,10 @@ export type RegionalApiListContactPointsRequest = {
    */
   region?: ScwRegion
   /**
+   * ID of the Project containing the contact points to list.
+   */
+  projectId?: string
+  /**
    * Page number to return, from the paginated results.
    */
   page?: number
@@ -1094,10 +1098,6 @@ export type RegionalApiListContactPointsRequest = {
    * Total count of contact points to return per page.
    */
   pageSize?: number
-  /**
-   * ID of the Project containing the contact points to list.
-   */
-  projectId?: string
 }
 
 /**
@@ -1108,18 +1108,6 @@ export type RegionalApiListDataSourcesRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
-  /**
-   * Page number to return, from the paginated results.
-   */
-  page?: number
-  /**
-   * Number of data sources to return per page.
-   */
-  pageSize?: number
-  /**
-   * Sort order for data sources in the response.
-   */
-  orderBy?: ListDataSourcesRequestOrderBy
   /**
    * Project ID to filter for, only data sources from this Project will be returned.
    */
@@ -1132,6 +1120,18 @@ export type RegionalApiListDataSourcesRequest = {
    * Types to filter for (metrics, logs, traces), only data sources with matching types will be returned. If omitted, all types will be returned.
    */
   types?: DataSourceType[]
+  /**
+   * Page number to return, from the paginated results.
+   */
+  page?: number
+  /**
+   * Number of data sources to return per page.
+   */
+  pageSize?: number
+  /**
+   * Sort order for data sources in the response.
+   */
+  orderBy?: ListDataSourcesRequestOrderBy
 }
 
 /**
@@ -1165,6 +1165,14 @@ export type RegionalApiListTokensRequest = {
    */
   region?: ScwRegion
   /**
+   * ID of the Project the tokens belong to.
+   */
+  projectId?: string
+  /**
+   * Token scopes to filter for.
+   */
+  tokenScopes?: TokenScope[]
+  /**
    * Page number to return, from the paginated results.
    */
   page?: number
@@ -1176,14 +1184,6 @@ export type RegionalApiListTokensRequest = {
    * Order in which to return results.
    */
   orderBy?: ListTokensRequestOrderBy
-  /**
-   * ID of the Project the tokens belong to.
-   */
-  projectId?: string
-  /**
-   * Token scopes to filter for.
-   */
-  tokenScopes?: TokenScope[]
 }
 
 /**
