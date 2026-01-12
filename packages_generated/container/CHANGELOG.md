@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-01-12)
+
+### Features
+
+- **containers:** add missing statuses in v1beta1 + improve docs ([#2701](https://github.com/scaleway/scaleway-sdk-js/issues/2701)) ([e4da360](https://github.com/scaleway/scaleway-sdk-js/commit/e4da360b2bc2e7499c9bdce5e780e77dd917db8f))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@2.1.1...@scaleway/sdk-container@2.2.0) (2025-12-22)
 
 ### Features
