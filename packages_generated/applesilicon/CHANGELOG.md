@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-01-12)
+
+### Features
+
+- **apple_silicon:** enabled kext ([#2699](https://github.com/scaleway/scaleway-sdk-js/issues/2699)) ([356b721](https://github.com/scaleway/scaleway-sdk-js/commit/356b721e9ef09475b06486623d55bf45a7cd6464))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-applesilicon@2.1.1...@scaleway/sdk-applesilicon@2.2.0) (2025-12-22)
 
 ### Features

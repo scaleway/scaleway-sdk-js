@@ -601,6 +601,14 @@ export interface PublicCatalogProduct {
    */
   endOfLifeAt?: Date
   /**
+   * The end of growth date of the product.
+   */
+  endOfGrowthAt?: Date
+  /**
+   * The end of sale date of the product.
+   */
+  endOfSaleAt?: Date
+  /**
    * Different badges that can be associated with the product.
    */
   badges: PublicCatalogProductProductBadge[]
