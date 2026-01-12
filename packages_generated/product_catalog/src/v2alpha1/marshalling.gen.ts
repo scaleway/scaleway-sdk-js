@@ -26,6 +26,10 @@ import type {
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
   PublicCatalogProductPropertiesKeyManager,
+  PublicCatalogProductPropertiesKubernetes,
+  PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType,
+  PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType,
+  PublicCatalogProductPropertiesKubernetesKosmosNodeType,
   PublicCatalogProductPropertiesLoadBalancer,
   PublicCatalogProductPropertiesManagedInference,
   PublicCatalogProductPropertiesManagedRedisDatabase,
@@ -157,6 +161,44 @@ const unmarshalPublicCatalogProductPropertiesHardwareStorage = (
     description: data.description,
     total: data.total,
   } as PublicCatalogProductPropertiesHardwareStorage
+}
+
+const unmarshalPublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType =
+  (
+    data: unknown,
+  ): PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType => {
+    if (!isJSONObject(data)) {
+      throw new TypeError(
+        `Unmarshalling the type 'PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType' failed as data isn't a dictionary.`,
+      )
+    }
+
+    return {} as PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType
+  }
+
+const unmarshalPublicCatalogProductPropertiesKubernetesKosmosControlPlaneType =
+  (
+    data: unknown,
+  ): PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType => {
+    if (!isJSONObject(data)) {
+      throw new TypeError(
+        `Unmarshalling the type 'PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType' failed as data isn't a dictionary.`,
+      )
+    }
+
+    return {} as PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType
+  }
+
+const unmarshalPublicCatalogProductPropertiesKubernetesKosmosNodeType = (
+  data: unknown,
+): PublicCatalogProductPropertiesKubernetesKosmosNodeType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesKubernetesKosmosNodeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as PublicCatalogProductPropertiesKubernetesKosmosNodeType
 }
 
 const unmarshalPublicCatalogProductPropertiesObjectStorageClassType = (
@@ -348,6 +390,34 @@ const unmarshalPublicCatalogProductPropertiesKeyManager = (
   return {} as PublicCatalogProductPropertiesKeyManager
 }
 
+const unmarshalPublicCatalogProductPropertiesKubernetes = (
+  data: unknown,
+): PublicCatalogProductPropertiesKubernetes => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesKubernetes' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    kapsuleControlPlane: data.kapsule_control_plane
+      ? unmarshalPublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType(
+          data.kapsule_control_plane,
+        )
+      : undefined,
+    kosmosControlPlane: data.kosmos_control_plane
+      ? unmarshalPublicCatalogProductPropertiesKubernetesKosmosControlPlaneType(
+          data.kosmos_control_plane,
+        )
+      : undefined,
+    kosmosNode: data.kosmos_node
+      ? unmarshalPublicCatalogProductPropertiesKubernetesKosmosNodeType(
+          data.kosmos_node,
+        )
+      : undefined,
+  } as PublicCatalogProductPropertiesKubernetes
+}
+
 const unmarshalPublicCatalogProductPropertiesLoadBalancer = (
   data: unknown,
 ): PublicCatalogProductPropertiesLoadBalancer => {
@@ -515,6 +585,9 @@ const unmarshalPublicCatalogProductProperties = (
     keyManager: data.key_manager
       ? unmarshalPublicCatalogProductPropertiesKeyManager(data.key_manager)
       : undefined,
+    kubernetes: data.kubernetes
+      ? unmarshalPublicCatalogProductPropertiesKubernetes(data.kubernetes)
+      : undefined,
     loadBalancer: data.load_balancer
       ? unmarshalPublicCatalogProductPropertiesLoadBalancer(data.load_balancer)
       : undefined,
@@ -566,7 +639,9 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
   return {
     badges: data.badges,
     description: data.description,
+    endOfGrowthAt: unmarshalDate(data.end_of_growth_at),
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    endOfSaleAt: unmarshalDate(data.end_of_sale_at),
     environmentalImpactEstimation: data.environmental_impact_estimation
       ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(
           data.environmental_impact_estimation,
