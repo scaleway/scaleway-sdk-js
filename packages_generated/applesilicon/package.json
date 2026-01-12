@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-applesilicon",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Scaleway SDK applesilicon",
   "license": "Apache-2.0",
   "files": [
