@@ -323,6 +323,12 @@ export class API extends ParentAPI {
       unmarshalListHeadStagesResponse,
     )
 
+  /**
+   * List Head stage for your pipeline.. List Head stage for your pipeline.
+   *
+   * @param request - The request {@link ListHeadStagesRequest}
+   * @returns A Promise of ListHeadStagesResponse
+   */
   listHeadStages = (request: Readonly<ListHeadStagesRequest>) =>
     enrichForPagination('headStages', this.pageOfListHeadStages, request)
 
