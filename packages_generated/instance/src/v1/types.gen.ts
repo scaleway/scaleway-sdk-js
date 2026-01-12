@@ -1027,6 +1027,10 @@ export interface ServerType {
    */
   scratchStorageMaxSize?: number
   /**
+   * Maximum supported number of scratch volumes.
+   */
+  scratchStorageMaxVolumesCount: number
+  /**
    * The maximum bandwidth allocated to block storage access (in bytes per second).
    */
   blockBandwidth?: number

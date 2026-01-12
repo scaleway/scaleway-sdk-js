@@ -28,7 +28,7 @@ export type BackendServerStatsServerState =
 
 export type CertificateStatus = 'pending' | 'ready' | 'error'
 
-export type CertificateType = 'letsencryt' | 'custom'
+export type CertificateType = 'letsencryt' | 'custom' | 'letsencrypt'
 
 export type ForwardPortAlgorithm = 'roundrobin' | 'leastconn' | 'first'
 
