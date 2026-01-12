@@ -108,6 +108,12 @@ export type ResourceType =
   | 's2s_customer_gateway'
   | 's2s_routing_policy'
   | 's2s_connection'
+  | 'vpc_gw_gateway'
+  | 'vpc_gw_gateway_network'
+  | 'vpc_gw_dhcp'
+  | 'vpc_gw_dhcp_entry'
+  | 'vpc_gw_pat_rule'
+  | 'vpc_gw_ip'
 
 export type SystemEventKind = 'unknown_kind' | 'cron' | 'notification'
 
