@@ -952,6 +952,7 @@ export interface Dashboard {
   volumesBSsdTotalSize?: number
   privateNicsCount: number
   placementGroupsCount: number
+  volumesScratchCount: number
 }
 
 export interface PlacementGroupServer {

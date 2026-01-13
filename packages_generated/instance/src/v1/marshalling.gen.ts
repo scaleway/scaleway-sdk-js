@@ -821,6 +821,7 @@ const unmarshalDashboard = (data: unknown): Dashboard => {
     volumesCount: data.volumes_count,
     volumesLSsdCount: data.volumes_l_ssd_count,
     volumesLSsdTotalSize: data.volumes_l_ssd_total_size,
+    volumesScratchCount: data.volumes_scratch_count,
   } as Dashboard
 }
 
