@@ -874,6 +874,7 @@ export const marshalUpdatePoolRequest = (
   kubelet_args: request.kubeletArgs,
   max_size: request.maxSize,
   min_size: request.minSize,
+  security_group_id: request.securityGroupId,
   size: request.size,
   tags: request.tags,
   upgrade_policy:
