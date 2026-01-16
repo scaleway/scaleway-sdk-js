@@ -47,7 +47,8 @@ import { Testv1 } from '@scaleway/sdk-test'
 import { Vpcv2 } from '@scaleway/sdk-vpc'
 import { Vpcgwv1, Vpcgwv2 } from '@scaleway/sdk-vpcgw'
 import { Webhostingv1 } from '@scaleway/sdk-webhosting'
-export { createClient, createAdvancedClient } from '@scaleway/sdk-client'
+
+export { createAdvancedClient, createClient } from '@scaleway/sdk-client'
 
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Account' namespace instead (e.g., Account.v1).
