@@ -25,7 +25,7 @@ import { Instancev1 } from '@scaleway/sdk-instance'
 import { Interlinkv1beta1 } from '@scaleway/sdk-interlink'
 import { Iotv1 } from '@scaleway/sdk-iot'
 import { Ipamv1 } from '@scaleway/sdk-ipam'
-import { Jobsv1alpha1, Jobsv1alpha2 } from '@scaleway/sdk-jobs'
+import { Jobsv1alpha1 } from '@scaleway/sdk-jobs'
 import { K8Sv1 } from '@scaleway/sdk-k8s'
 import { Kafkav1alpha1 } from '@scaleway/sdk-kafka'
 import { KeyManagerv1alpha1 } from '@scaleway/sdk-key-manager'
@@ -47,7 +47,8 @@ import { Testv1 } from '@scaleway/sdk-test'
 import { Vpcv2 } from '@scaleway/sdk-vpc'
 import { Vpcgwv1, Vpcgwv2 } from '@scaleway/sdk-vpcgw'
 import { Webhostingv1 } from '@scaleway/sdk-webhosting'
-export { createClient, createAdvancedClient } from '@scaleway/sdk-client'
+
+export { createAdvancedClient, createClient } from '@scaleway/sdk-client'
 
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Account' namespace instead (e.g., Account.v1).
@@ -239,10 +240,9 @@ export const Ipam = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Jobs' namespace instead (e.g., Jobs.v1).
  */
-export { Jobsv1alpha1, Jobsv1alpha2 }
+export { Jobsv1alpha1 }
 export const Jobs = {
   v1alpha1: Jobsv1alpha1,
-  v1alpha2: Jobsv1alpha2,
 }
 
 /**
