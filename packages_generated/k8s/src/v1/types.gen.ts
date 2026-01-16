@@ -1707,10 +1707,6 @@ export type UpdatePoolRequest = {
    * New upgrade policy for the pool.
    */
   upgradePolicy?: UpdatePoolRequestUpgradePolicy
-  /**
-   * Security group ID in which all the nodes of the pool will be moved.
-   */
-  securityGroupId?: string
 }
 
 export type UpgradeClusterRequest = {

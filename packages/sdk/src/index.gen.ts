@@ -39,7 +39,6 @@ import { Rdbv1 } from '@scaleway/sdk-rdb'
 import { Redisv1 } from '@scaleway/sdk-redis'
 import { Registryv1 } from '@scaleway/sdk-registry'
 import { S2SVpnv1alpha1 } from '@scaleway/sdk-s2s-vpn'
-import { Searchdbv1alpha1 } from '@scaleway/sdk-searchdb'
 import { Secretv1beta1 } from '@scaleway/sdk-secret'
 import { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
 import { Temv1alpha1 } from '@scaleway/sdk-tem'
@@ -47,7 +46,8 @@ import { Testv1 } from '@scaleway/sdk-test'
 import { Vpcv2 } from '@scaleway/sdk-vpc'
 import { Vpcgwv1, Vpcgwv2 } from '@scaleway/sdk-vpcgw'
 import { Webhostingv1 } from '@scaleway/sdk-webhosting'
-export { createClient, createAdvancedClient } from '@scaleway/sdk-client'
+
+export { createAdvancedClient, createClient } from '@scaleway/sdk-client'
 
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Account' namespace instead (e.g., Account.v1).
@@ -348,14 +348,6 @@ export const Registry = {
 export { S2SVpnv1alpha1 }
 export const S2sVpn = {
   v1alpha1: S2SVpnv1alpha1,
-}
-
-/**
- * @deprecated Direct version exports are deprecated. Use the 'Searchdb' namespace instead (e.g., Searchdb.v1).
- */
-export { Searchdbv1alpha1 }
-export const Searchdb = {
-  v1alpha1: Searchdbv1alpha1,
 }
 
 /**
