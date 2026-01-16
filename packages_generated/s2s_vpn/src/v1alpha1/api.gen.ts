@@ -130,6 +130,7 @@ export class API extends ParentAPI {
           ['gateway_types', request.gatewayTypes],
           ['name', request.name],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
@@ -255,6 +256,7 @@ export class API extends ParentAPI {
           ['is_ipv6', request.isIpv6],
           ['name', request.name],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
@@ -445,6 +447,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',
@@ -542,6 +545,7 @@ export class API extends ParentAPI {
           ['ipv6', request.ipv6],
           ['name', request.name],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           [
             'page_size',

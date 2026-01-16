@@ -738,6 +738,10 @@ export type ListConnectionsRequest = {
    */
   projectId?: string
   /**
+   * Organization ID to filter for.
+   */
+  organizationId?: string
+  /**
    * Connection name to filter for.
    */
   name?: string
@@ -804,6 +808,10 @@ export type ListCustomerGatewaysRequest = {
    */
   projectId?: string
   /**
+   * Organization ID to filter for.
+   */
+  organizationId?: string
+  /**
    * Customer gateway name to filter for.
    */
   name?: string
@@ -845,6 +853,10 @@ export type ListRoutingPoliciesRequest = {
    * Project ID to filter for.
    */
   projectId?: string
+  /**
+   * Organization ID to filter for.
+   */
+  organizationId?: string
   /**
    * Routing policy name to filter for.
    */
@@ -911,6 +923,10 @@ export type ListVpnGatewaysRequest = {
    * Project ID to filter for.
    */
   projectId?: string
+  /**
+   * Organization ID to filter for.
+   */
+  organizationId?: string
   /**
    * VPN gateway name to filter for.
    */
