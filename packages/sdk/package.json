@@ -67,7 +67,6 @@
     "@scaleway/sdk-redis": "workspace:*",
     "@scaleway/sdk-registry": "workspace:*",
     "@scaleway/sdk-s2s-vpn": "workspace:*",
-    "@scaleway/sdk-searchdb": "workspace:*",
     "@scaleway/sdk-secret": "workspace:*",
     "@scaleway/sdk-serverless-sqldb": "workspace:*",
     "@scaleway/sdk-std": "workspace:*",
