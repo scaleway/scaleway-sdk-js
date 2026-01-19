@@ -193,7 +193,7 @@ export type CreateJobDefinitionRequest = {
    */
   imageUri: string
   /**
-   * @deprecated Deprecated in favor of startup_command.
+   * @deprecated Deprecated: please use startup_command instead.
    */
   command?: string
   /**
@@ -398,7 +398,7 @@ export type StartJobDefinitionRequest = {
   jobDefinitionId: string
   /**
    * @deprecated If empty or not defined, the image's default command is used.
-Deprecated in favor of startup_command.
+Deprecated: please use startup_command instead.
    */
   command?: string
   /**
@@ -471,7 +471,7 @@ export type UpdateJobDefinitionRequest = {
    */
   imageUri?: string
   /**
-   * @deprecated Deprecated in favor of startup_command.
+   * @deprecated Deprecated: please use startup_command instead.
    */
   command?: string
   /**
