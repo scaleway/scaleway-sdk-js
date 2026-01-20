@@ -134,6 +134,28 @@ describe('fetchAll', () => {
     )
     expect(Date.now() - startTime).toBeLessThanOrEqual(2 * delay + tolerance)
   })
+
+  it('iterate pages sequentially when sequential is true', async () => {
+    const input = [
+      [{ name: 'Alice' }, { name: 'Bob' }],
+      [{ name: 'Claire' }, { name: 'David' }],
+      [{ name: 'Eve' }],
+    ]
+    const delay = 20
+    const startTime = Date.now()
+    const result = await fetchAll(
+      'items',
+      fetchPages([...input], delay),
+      {},
+      undefined,
+      { sequential: true },
+    )
+    const elapsed = Date.now() - startTime
+
+    expect(result).toStrictEqual(input.flat())
+    // Sequential should take roughly delay * pages (more than parallel)
+    expect(elapsed).toBeGreaterThan(delay * 2) // At least 2 delays
+  })
 })
 
 describe('enrichForPagination', () => {

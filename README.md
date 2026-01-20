@@ -28,7 +28,7 @@ const client = createClient({
   defaultZone: 'fr-par-1',
 })
 
-const api = new Registry.v1.API(client)
+const api = new Registryv1.API(client)
 ```
 
 **For a simpler setup**, you could retrieve the profile from either the configuration file or the environment variables:

@@ -79,6 +79,17 @@ export const logRequest =
     obfuscate: RequestInterceptor = identity,
   ): RequestInterceptor =>
   async ({ request }) => {
+    if (shouldLog(LevelResolver[getLogger().logLevel], 'info')) {
+      const startTime = new Date()
+      const logPrefix = `${startTime.toISOString()}`
+      const { method, url } = request
+      getLogger().info(
+        `--------------- Scaleway SDK REQUEST ${identifier} ---------------
+${logPrefix}  ${method} ${url}
+---------------------------------------------------------`,
+      )
+    }
+
     if (shouldLog(LevelResolver[getLogger().logLevel], 'debug')) {
       getLogger().debug(
         `--------------- Scaleway SDK REQUEST ${identifier} ---------------
@@ -101,6 +112,16 @@ ${await dumpRequest(await obfuscate({ request }))}
 export const logResponse =
   (identifier: string): ResponseInterceptor =>
   async ({ response }) => {
+    if (shouldLog(LevelResolver[getLogger().logLevel], 'info')) {
+      const startTime = new Date()
+      const logPrefix = `${startTime.toISOString()}`
+      getLogger().info(
+        `--------------- Scaleway SDK RESPONSE ${identifier} ---------------
+${logPrefix}
+---------------------------------------------------------`,
+      )
+    }
+
     if (shouldLog(LevelResolver[getLogger().logLevel], 'debug')) {
       getLogger().debug(
         `--------------- Scaleway SDK RESPONSE ${identifier} ---------------

@@ -9,8 +9,9 @@
     "build": "tsc -p ./tsconfig.json"
   },
   "dependencies": {
-    "@scaleway/configuration-loader": "^1.0",
-    "@scaleway/sdk": "^2.0"
+    "@scaleway/configuration-loader": "workspace:*",
+    "@scaleway/sdk":"workspace:*",
+    "@scaleway/sdk-client": "workspace:*"
   },
   "devDependencies": {
     "serverless-scaleway-functions": "0.4.17",

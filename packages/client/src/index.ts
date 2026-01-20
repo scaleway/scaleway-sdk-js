@@ -28,5 +28,9 @@ export { AUTH_HEADER_KEY, SESSION_HEADER_KEY } from './scw/constants.js'
 export type { Money, ScwFile, TimeSeries } from './scw/custom-types.js'
 export { Decimal } from './scw/custom-types.js'
 export * as Errors from './scw/errors/standard'
+export type {
+  FetchAllOptions,
+  PaginatedContent,
+} from './scw/fetch/resource-paginator.js'
 export type { ApiLocality, Region, Zone } from './scw/locality.js'
 export { toApiLocality } from './scw/locality.js'

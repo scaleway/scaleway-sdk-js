@@ -1,6 +1,4 @@
-import { pMapIterable } from 'p-map'
-// import { AsyncRateLimiter } from '../../internal/async/rate-limiter'
-import { MAX_CONCURRENCY_REQUESTS } from '../../scw/constants'
+import { MAX_CONCURRENCY_REQUESTS } from '../constants'
 
 interface PaginationOptions {
   page?: number
@@ -19,7 +17,7 @@ export type FetchAllOptions = {
   /**
    * Number of pages to process in parallel
    * @type number
-   * @default @param MAX_CONCURRENCY_REQUESTS
+   * @default @param MAX_CONCURRENCY
    */
   concurrency?: number
 }
@@ -81,30 +79,31 @@ async function* pages<
       yield await fetcher({ ...request, page }).then(getList)
       page += 1
     }
+
     return
   }
 
-  // Create rate limiter for concurrent requests 50 requests per second
-  const maxConcurrent = options.concurrency || MAX_CONCURRENCY_REQUESTS
+  const pendingPromises: Promise<T[K]>[] = []
 
-  const pagePromises: (() => Promise<T[K]>)[] = []
-  for (let i = 2; i <= totalRequest; i++){
-    pagePromises.push(() => fetcher({ ...request, page: i }).then(getList))
+  while (page <= totalRequest) {
+    const completedPromise = pendingPromises.shift()
+    if (completedPromise) {
+      yield completedPromise
+    }
+
+    if (pendingPromises.length < MAX_CONCURRENCY_REQUESTS) {
+      // Wait for rate limit permission before starting new request
+
+      const promise = fetcher({ ...request, page }).then(getList)
+      pendingPromises.push(promise)
+      page++
+    }
   }
 
-  console.debug('page',{pagePromises})
-  // while (page <= totalRequest) {
-  //   pagePromises.push(() => fetcher({ ...request, page }).then(getList))
-  //   page++
-  // }
-
-  yield* pMapIterable(
-    pagePromises,
-    async getPromise => {
-      return getPromise()
-    },
-    { concurrency: maxConcurrent }
-  )
+  // Yield remaining promises
+  for (const promise of pendingPromises) {
+    yield promise
+  }
 }
 
 /**
