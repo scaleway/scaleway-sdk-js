@@ -5,3 +5,4 @@ export const userAgent = `scaleway-sdk-js/${version}`
 
 export const SESSION_HEADER_KEY = 'x-session-token'
 export const AUTH_HEADER_KEY = 'x-auth-token'
+export const MAX_CONCURRENCY_REQUESTS = 40 as const
