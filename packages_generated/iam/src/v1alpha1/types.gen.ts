@@ -1,10 +1,17 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
 
-export type BearerType = 'unknown_bearer_type' | 'user' | 'application'
 
-export type GracePeriodType = 'unknown_grace_period_type' | 'update_password' | 'set_mfa'
+export type BearerType =
+  | 'unknown_bearer_type'
+  | 'user'
+  | 'application'
+
+export type GracePeriodType =
+  | 'unknown_grace_period_type'
+  | 'update_password'
+  | 'set_mfa'
 
 export type ListAPIKeysRequestOrderBy =
   | 'created_at_asc'
@@ -32,15 +39,31 @@ export type ListGroupsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListJWTsRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'updated_at_asc' | 'updated_at_desc'
+export type ListJWTsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'updated_at_asc'
+  | 'updated_at_desc'
 
-export type ListLogsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListLogsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
-export type ListPermissionSetsRequestOrderBy = 'name_asc' | 'name_desc' | 'created_at_asc' | 'created_at_desc'
+export type ListPermissionSetsRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
+  | 'created_at_asc'
+  | 'created_at_desc'
 
-export type ListPoliciesRequestOrderBy = 'policy_name_asc' | 'policy_name_desc' | 'created_at_asc' | 'created_at_desc'
+export type ListPoliciesRequestOrderBy =
+  | 'policy_name_asc'
+  | 'policy_name_desc'
+  | 'created_at_asc'
+  | 'created_at_desc'
 
-export type ListQuotaRequestOrderBy = 'name_asc' | 'name_desc'
+export type ListQuotaRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
 
 export type ListSSHKeysRequestOrderBy =
   | 'created_at_asc'
@@ -50,9 +73,13 @@ export type ListSSHKeysRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListScimTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListScimTokensRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
-export type ListUserWebAuthnAuthenticatorsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListUserWebAuthnAuthenticatorsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
 export type ListUsersRequestOrderBy =
   | 'created_at_asc'
@@ -66,17 +93,40 @@ export type ListUsersRequestOrderBy =
   | 'username_asc'
   | 'username_desc'
 
-export type LocalityType = 'global' | 'region' | 'zone'
+export type LocalityType =
+  | 'global'
+  | 'region'
+  | 'zone'
 
-export type LogAction = 'unknown_action' | 'created' | 'updated' | 'deleted'
+export type LogAction =
+  | 'unknown_action'
+  | 'created'
+  | 'updated'
+  | 'deleted'
 
-export type LogResourceType = 'unknown_resource_type' | 'api_key' | 'user' | 'application' | 'group' | 'policy'
+export type LogResourceType =
+  | 'unknown_resource_type'
+  | 'api_key'
+  | 'user'
+  | 'application'
+  | 'group'
+  | 'policy'
 
-export type PermissionSetScopeType = 'unknown_scope_type' | 'projects' | 'organization' | 'account_root_user'
+export type PermissionSetScopeType =
+  | 'unknown_scope_type'
+  | 'projects'
+  | 'organization'
+  | 'account_root_user'
 
-export type SamlCertificateOrigin = 'unknown_certificate_origin' | 'scaleway' | 'identity_provider'
+export type SamlCertificateOrigin =
+  | 'unknown_certificate_origin'
+  | 'scaleway'
+  | 'identity_provider'
 
-export type SamlCertificateType = 'unknown_certificate_type' | 'signing' | 'encryption'
+export type SamlCertificateType =
+  | 'unknown_certificate_type'
+  | 'signing'
+  | 'encryption'
 
 export type SamlStatus =
   | 'unknown_saml_status'
@@ -85,9 +135,15 @@ export type SamlStatus =
   | 'missing_entity_id'
   | 'missing_single_sign_on_url'
 
-export type UserStatus = 'unknown_status' | 'invitation_pending' | 'activated'
+export type UserStatus =
+  | 'unknown_status'
+  | 'invitation_pending'
+  | 'activated'
 
-export type UserType = 'unknown_type' | 'owner' | 'member'
+export type UserType =
+  | 'unknown_type'
+  | 'owner'
+  | 'member'
 
 export interface ConnectionConnectedOrganization {
   id: string
@@ -95,11 +151,13 @@ export interface ConnectionConnectedOrganization {
   locked: boolean
 }
 
+
 export interface ConnectionConnectedUser {
   id: string
   username: string
   type: UserType
 }
+
 
 export interface QuotumLimit {
   /**
@@ -133,6 +191,7 @@ export interface QuotumLimit {
    */
   unlimited?: boolean
 }
+
 
 export interface JWT {
   /**
@@ -169,6 +228,7 @@ export interface JWT {
   userAgent: string
 }
 
+
 export interface RuleSpecs {
   /**
    * Names of permission sets bound to the rule.
@@ -192,12 +252,14 @@ export interface RuleSpecs {
   organizationId?: string
 }
 
+
 export interface ScimToken {
   id: string
   scimId: string
   createdAt?: Date
   expiresAt?: Date
 }
+
 
 export interface CreateUserRequestMember {
   /**
@@ -238,6 +300,7 @@ export interface CreateUserRequestMember {
   locale: string
 }
 
+
 export interface Connection {
   /**
    * Information about the connected organization.
@@ -248,6 +311,7 @@ export interface Connection {
    */
   user?: ConnectionConnectedUser
 }
+
 
 export interface APIKey {
   /**
@@ -308,6 +372,7 @@ export interface APIKey {
   creationIp: string
 }
 
+
 export interface Application {
   /**
    * ID of the application.
@@ -355,6 +420,7 @@ export interface Application {
   tags: string[]
 }
 
+
 export interface GracePeriod {
   /**
    * Type of grace period.
@@ -369,6 +435,7 @@ export interface GracePeriod {
    */
   expiresAt?: Date
 }
+
 
 export interface Group {
   /**
@@ -421,6 +488,7 @@ export interface Group {
   managed: boolean
 }
 
+
 export interface Log {
   /**
    * Log ID.
@@ -460,6 +528,7 @@ export interface Log {
   resourceId: string
 }
 
+
 export interface PermissionSet {
   /**
    * Id of the permission set.
@@ -482,6 +551,7 @@ export interface PermissionSet {
    */
   categories?: string[]
 }
+
 
 export interface Policy {
   /**
@@ -562,6 +632,7 @@ export interface Policy {
   noPrincipal?: boolean
 }
 
+
 export interface Quotum {
   /**
    * Name of the quota.
@@ -601,6 +672,7 @@ export interface Quotum {
   limits: QuotumLimit[]
 }
 
+
 export interface Rule {
   /**
    * Id of rule.
@@ -637,6 +709,7 @@ export interface Rule {
    */
   accountRootUserId?: string
 }
+
 
 export interface SSHKey {
   /**
@@ -677,6 +750,7 @@ export interface SSHKey {
   disabled: boolean
 }
 
+
 export interface SamlCertificate {
   /**
    * ID of the SAML certificate.
@@ -700,6 +774,7 @@ export interface SamlCertificate {
   expiresAt?: Date
 }
 
+
 export interface WebAuthnAuthenticator {
   /**
    * The ID of the authenticator.
@@ -718,6 +793,7 @@ export interface WebAuthnAuthenticator {
    */
   lastLoginAt?: Date
 }
+
 
 export interface User {
   /**
@@ -798,10 +874,12 @@ export interface User {
   locked: boolean
 }
 
+
 export interface SamlServiceProvider {
   entityId: string
   assertionConsumerServiceUrl: string
 }
+
 
 export type AddGroupMemberRequest = {
   /**
@@ -822,6 +900,7 @@ export type AddGroupMemberRequest = {
   applicationId?: string
 }
 
+
 export type AddGroupMembersRequest = {
   /**
    * ID of the group.
@@ -836,6 +915,7 @@ export type AddGroupMembersRequest = {
    */
   applicationIds?: string[]
 }
+
 
 export type AddSamlCertificateRequest = {
   /**
@@ -852,9 +932,11 @@ export type AddSamlCertificateRequest = {
   content: string
 }
 
+
 export type ClonePolicyRequest = {
   policyId: string
 }
+
 
 export type CreateAPIKeyRequest = {
   /**
@@ -883,6 +965,7 @@ export type CreateAPIKeyRequest = {
   description: string
 }
 
+
 export type CreateApplicationRequest = {
   /**
    * Name of the application to create (max length is 64 characters).
@@ -901,6 +984,7 @@ export type CreateApplicationRequest = {
    */
   tags?: string[]
 }
+
 
 export type CreateGroupRequest = {
   /**
@@ -921,6 +1005,7 @@ export type CreateGroupRequest = {
   tags?: string[]
 }
 
+
 export type CreateJWTRequest = {
   /**
    * ID of the user the JWT will be created for.
@@ -931,6 +1016,7 @@ export type CreateJWTRequest = {
    */
   referrer: string
 }
+
 
 export type CreatePolicyRequest = {
   /**
@@ -979,6 +1065,7 @@ export type CreatePolicyRequest = {
   noPrincipal?: boolean
 }
 
+
 export type CreateSSHKeyRequest = {
   /**
    * Name of the SSH key. Max length is 1000.
@@ -994,12 +1081,14 @@ export type CreateSSHKeyRequest = {
   projectId?: string
 }
 
+
 export type CreateScimTokenRequest = {
   /**
    * ID of the SCIM configuration.
    */
   scimId: string
 }
+
 
 export interface CreateScimTokenResponse {
   /**
@@ -1012,12 +1101,14 @@ export interface CreateScimTokenResponse {
   bearerToken: string
 }
 
+
 export type CreateUserMFAOTPRequest = {
   /**
    * User ID of the MFA OTP.
    */
   userId: string
 }
+
 
 export type CreateUserRequest = {
   /**
@@ -1042,12 +1133,14 @@ export type CreateUserRequest = {
   member?: CreateUserRequestMember
 }
 
+
 export type DeleteAPIKeyRequest = {
   /**
    * Access key to delete.
    */
   accessKey: string
 }
+
 
 export type DeleteApplicationRequest = {
   /**
@@ -1056,12 +1149,14 @@ export type DeleteApplicationRequest = {
   applicationId: string
 }
 
+
 export type DeleteGroupRequest = {
   /**
    * ID of the group to delete.
    */
   groupId: string
 }
+
 
 export type DeleteJWTRequest = {
   /**
@@ -1070,6 +1165,7 @@ export type DeleteJWTRequest = {
   jti: string
 }
 
+
 export type DeletePolicyRequest = {
   /**
    * Id of policy to delete.
@@ -1077,9 +1173,11 @@ export type DeletePolicyRequest = {
   policyId: string
 }
 
+
 export type DeleteSSHKeyRequest = {
   sshKeyId: string
 }
+
 
 export type DeleteSamlCertificateRequest = {
   /**
@@ -1088,12 +1186,14 @@ export type DeleteSamlCertificateRequest = {
   certificateId: string
 }
 
+
 export type DeleteSamlRequest = {
   /**
    * ID of the SAML configuration.
    */
   samlId: string
 }
+
 
 export type DeleteScimRequest = {
   /**
@@ -1102,12 +1202,14 @@ export type DeleteScimRequest = {
   scimId: string
 }
 
+
 export type DeleteScimTokenRequest = {
   /**
    * The SCIM token ID.
    */
   tokenId: string
 }
+
 
 export type DeleteUserMFAOTPRequest = {
   /**
@@ -1116,6 +1218,7 @@ export type DeleteUserMFAOTPRequest = {
   userId: string
 }
 
+
 export type DeleteUserRequest = {
   /**
    * ID of the user to delete.
@@ -1123,9 +1226,11 @@ export type DeleteUserRequest = {
   userId: string
 }
 
+
 export type DeleteWebAuthnAuthenticatorRequest = {
   authenticatorId: string
 }
+
 
 export type EnableOrganizationSamlRequest = {
   /**
@@ -1134,12 +1239,14 @@ export type EnableOrganizationSamlRequest = {
   organizationId?: string
 }
 
+
 export type EnableOrganizationScimRequest = {
   /**
    * ID of the Organization.
    */
   organizationId?: string
 }
+
 
 export interface EncodedJWT {
   /**
@@ -1155,6 +1262,7 @@ export interface EncodedJWT {
    */
   renewToken: string
 }
+
 
 export type FinishUserWebAuthnRegistrationRequest = {
   /**
@@ -1199,12 +1307,14 @@ export type FinishUserWebAuthnRegistrationRequest = {
   publicKeyAlgorithm: number
 }
 
+
 export interface FinishUserWebAuthnRegistrationResponse {
   /**
    * The ID of the new authenticator created.
    */
   authenticatorId: string
 }
+
 
 export type GetAPIKeyRequest = {
   /**
@@ -1213,12 +1323,14 @@ export type GetAPIKeyRequest = {
   accessKey: string
 }
 
+
 export type GetApplicationRequest = {
   /**
    * ID of the application to find.
    */
   applicationId: string
 }
+
 
 export type GetGroupRequest = {
   /**
@@ -1227,12 +1339,14 @@ export type GetGroupRequest = {
   groupId: string
 }
 
+
 export type GetJWTRequest = {
   /**
    * JWT ID of the JWT to get.
    */
   jti: string
 }
+
 
 export type GetLogRequest = {
   /**
@@ -1241,12 +1355,14 @@ export type GetLogRequest = {
   logId: string
 }
 
+
 export type GetOrganizationRequest = {
   /**
    * ID of the Organization.
    */
   organizationId?: string
 }
+
 
 export type GetOrganizationSamlRequest = {
   /**
@@ -1255,9 +1371,11 @@ export type GetOrganizationSamlRequest = {
   organizationId?: string
 }
 
+
 export type GetOrganizationScimRequest = {
   organizationId?: string
 }
+
 
 export type GetOrganizationSecuritySettingsRequest = {
   /**
@@ -1266,12 +1384,14 @@ export type GetOrganizationSecuritySettingsRequest = {
   organizationId?: string
 }
 
+
 export type GetPolicyRequest = {
   /**
    * Id of policy to search.
    */
   policyId: string
 }
+
 
 export type GetQuotumRequest = {
   /**
@@ -1284,12 +1404,14 @@ export type GetQuotumRequest = {
   organizationId?: string
 }
 
+
 export type GetSSHKeyRequest = {
   /**
    * ID of the SSH key.
    */
   sshKeyId: string
 }
+
 
 export type GetSamlCertificateRequest = {
   /**
@@ -1298,12 +1420,14 @@ export type GetSamlCertificateRequest = {
   certificateId: string
 }
 
+
 export type GetUserConnectionsRequest = {
   /**
    * ID of the user to list connections for.
    */
   userId: string
 }
+
 
 export interface GetUserConnectionsResponse {
   /**
@@ -1312,12 +1436,14 @@ export interface GetUserConnectionsResponse {
   connections: Connection[]
 }
 
+
 export type GetUserRequest = {
   /**
    * ID of the user to find.
    */
   userId: string
 }
+
 
 export type InitiateUserConnectionRequest = {
   /**
@@ -1326,12 +1452,14 @@ export type InitiateUserConnectionRequest = {
   userId: string
 }
 
+
 export interface InitiateUserConnectionResponse {
   /**
    * Token to be used in JoinUserConnection.
    */
   token: string
 }
+
 
 export type JoinUserConnectionRequest = {
   /**
@@ -1343,6 +1471,7 @@ export type JoinUserConnectionRequest = {
    */
   token: string
 }
+
 
 export type ListAPIKeysRequest = {
   /**
@@ -1403,6 +1532,7 @@ export type ListAPIKeysRequest = {
   accessKeys?: string[]
 }
 
+
 export interface ListAPIKeysResponse {
   /**
    * List of API keys.
@@ -1413,6 +1543,7 @@ export interface ListAPIKeysResponse {
    */
   totalCount: number
 }
+
 
 export type ListApplicationsRequest = {
   /**
@@ -1449,6 +1580,7 @@ export type ListApplicationsRequest = {
   tag?: string
 }
 
+
 export interface ListApplicationsResponse {
   /**
    * List of applications.
@@ -1460,6 +1592,7 @@ export interface ListApplicationsResponse {
   totalCount: number
 }
 
+
 export type ListGracePeriodsRequest = {
   /**
    * ID of the user to list grace periods for.
@@ -1467,12 +1600,14 @@ export type ListGracePeriodsRequest = {
   userId?: string
 }
 
+
 export interface ListGracePeriodsResponse {
   /**
    * List of grace periods.
    */
   gracePeriods: GracePeriod[]
 }
+
 
 export type ListGroupsRequest = {
   /**
@@ -1513,6 +1648,7 @@ export type ListGroupsRequest = {
   tag?: string
 }
 
+
 export interface ListGroupsResponse {
   /**
    * List of groups.
@@ -1523,6 +1659,7 @@ export interface ListGroupsResponse {
    */
   totalCount: number
 }
+
 
 export type ListJWTsRequest = {
   /**
@@ -1547,10 +1684,12 @@ export type ListJWTsRequest = {
   expired?: boolean
 }
 
+
 export interface ListJWTsResponse {
   jwts: JWT[]
   totalCount: number
 }
+
 
 export type ListLogsRequest = {
   /**
@@ -1591,6 +1730,7 @@ export type ListLogsRequest = {
   search?: string
 }
 
+
 export interface ListLogsResponse {
   /**
    * List of logs.
@@ -1601,6 +1741,7 @@ export interface ListLogsResponse {
    */
   totalCount: number
 }
+
 
 export type ListPermissionSetsRequest = {
   /**
@@ -1621,6 +1762,7 @@ export type ListPermissionSetsRequest = {
   organizationId?: string
 }
 
+
 export interface ListPermissionSetsResponse {
   /**
    * List of permission sets.
@@ -1631,6 +1773,7 @@ export interface ListPermissionSetsResponse {
    */
   totalCount: number
 }
+
 
 export type ListPoliciesRequest = {
   /**
@@ -1683,6 +1826,7 @@ export type ListPoliciesRequest = {
   policyIds?: string[]
 }
 
+
 export interface ListPoliciesResponse {
   /**
    * List of policies.
@@ -1693,6 +1837,7 @@ export interface ListPoliciesResponse {
    */
   totalCount: number
 }
+
 
 export type ListQuotaRequest = {
   /**
@@ -1717,6 +1862,7 @@ export type ListQuotaRequest = {
   quotumNames?: string[]
 }
 
+
 export interface ListQuotaResponse {
   /**
    * List of quota.
@@ -1727,6 +1873,7 @@ export interface ListQuotaResponse {
    */
   totalCount: number
 }
+
 
 export type ListRulesRequest = {
   /**
@@ -1743,6 +1890,7 @@ export type ListRulesRequest = {
   page?: number
 }
 
+
 export interface ListRulesResponse {
   /**
    * Rules of the policy.
@@ -1753,6 +1901,7 @@ export interface ListRulesResponse {
    */
   totalCount: number
 }
+
 
 export type ListSSHKeysRequest = {
   /**
@@ -1785,6 +1934,7 @@ export type ListSSHKeysRequest = {
   disabled?: boolean
 }
 
+
 export interface ListSSHKeysResponse {
   /**
    * List of SSH keys.
@@ -1796,6 +1946,7 @@ export interface ListSSHKeysResponse {
   totalCount: number
 }
 
+
 export type ListSamlCertificatesRequest = {
   /**
    * ID of the SAML configuration.
@@ -1803,12 +1954,14 @@ export type ListSamlCertificatesRequest = {
   samlId: string
 }
 
+
 export interface ListSamlCertificatesResponse {
   /**
    * List of SAML certificates.
    */
   certificates: SamlCertificate[]
 }
+
 
 export type ListScimTokensRequest = {
   /**
@@ -1829,6 +1982,7 @@ export type ListScimTokensRequest = {
   pageSize?: number
 }
 
+
 export interface ListScimTokensResponse {
   /**
    * List of SCIM tokens.
@@ -1839,6 +1993,7 @@ export interface ListScimTokensResponse {
    */
   totalCount: number
 }
+
 
 export type ListUserWebAuthnAuthenticatorsRequest = {
   /**
@@ -1859,6 +2014,7 @@ export type ListUserWebAuthnAuthenticatorsRequest = {
   pageSize?: number
 }
 
+
 export interface ListUserWebAuthnAuthenticatorsResponse {
   /**
    * The total number of authenticators.
@@ -1869,6 +2025,7 @@ export interface ListUserWebAuthnAuthenticatorsResponse {
    */
   authenticators: WebAuthnAuthenticator[]
 }
+
 
 export type ListUsersRequest = {
   /**
@@ -1905,6 +2062,7 @@ export type ListUsersRequest = {
   type?: UserType
 }
 
+
 export interface ListUsersResponse {
   /**
    * List of users.
@@ -1916,6 +2074,7 @@ export interface ListUsersResponse {
   totalCount: number
 }
 
+
 export type LockUserRequest = {
   /**
    * ID of the user to lock.
@@ -1923,9 +2082,11 @@ export type LockUserRequest = {
   userId: string
 }
 
+
 export interface MFAOTP {
   secret: string
 }
+
 
 export interface Organization {
   /**
@@ -1958,6 +2119,7 @@ export interface Organization {
   loginSamlEnabled: boolean
 }
 
+
 export interface OrganizationSecuritySettings {
   /**
    * Defines whether password renewal is enforced during first login.
@@ -1981,15 +2143,18 @@ export interface OrganizationSecuritySettings {
   maxApiKeyExpirationDuration?: string
 }
 
+
 export type ParseSamlMetadataRequest = {
   file: Blob
 }
+
 
 export interface ParseSamlMetadataResponse {
   singleSignOnUrl: string
   entityId: string
   signingCertificates: string[]
 }
+
 
 export type RemoveGroupMemberRequest = {
   /**
@@ -2010,6 +2175,7 @@ export type RemoveGroupMemberRequest = {
   applicationId?: string
 }
 
+
 export type RemoveUserConnectionRequest = {
   /**
    * ID of the user you want to manage the connection for.
@@ -2020,6 +2186,7 @@ export type RemoveUserConnectionRequest = {
    */
   targetUserId: string
 }
+
 
 export interface Saml {
   /**
@@ -2044,6 +2211,7 @@ export interface Saml {
   singleSignOnUrl: string
 }
 
+
 export interface Scim {
   /**
    * ID of the SCIM configuration.
@@ -2055,11 +2223,13 @@ export interface Scim {
   createdAt?: Date
 }
 
+
 export type SetGroupMembersRequest = {
   groupId: string
   userIds: string[]
   applicationIds: string[]
 }
+
 
 export type SetOrganizationAliasRequest = {
   /**
@@ -2072,6 +2242,7 @@ export type SetOrganizationAliasRequest = {
   alias: string
 }
 
+
 export type SetRulesRequest = {
   /**
    * Id of policy to update.
@@ -2083,12 +2254,14 @@ export type SetRulesRequest = {
   rules: RuleSpecs[]
 }
 
+
 export interface SetRulesResponse {
   /**
    * Rules of the policy.
    */
   rules: Rule[]
 }
+
 
 export type StartUserWebAuthnRegistrationRequest = {
   /**
@@ -2100,6 +2273,7 @@ export type StartUserWebAuthnRegistrationRequest = {
    */
   origin: string
 }
+
 
 export interface StartUserWebAuthnRegistrationResponse {
   /**
@@ -2124,12 +2298,14 @@ export interface StartUserWebAuthnRegistrationResponse {
   excludeCredentials: string[]
 }
 
+
 export type UnlockUserRequest = {
   /**
    * ID of the user to unlock.
    */
   userId: string
 }
+
 
 export type UpdateAPIKeyRequest = {
   /**
@@ -2150,6 +2326,7 @@ export type UpdateAPIKeyRequest = {
   expiresAt?: Date
 }
 
+
 export type UpdateApplicationRequest = {
   /**
    * ID of the application to update.
@@ -2169,6 +2346,7 @@ export type UpdateApplicationRequest = {
   tags?: string[]
 }
 
+
 export type UpdateGroupRequest = {
   /**
    * ID of the group to update.
@@ -2187,6 +2365,7 @@ export type UpdateGroupRequest = {
    */
   tags?: string[]
 }
+
 
 export type UpdateOrganizationLoginMethodsRequest = {
   /**
@@ -2210,6 +2389,7 @@ export type UpdateOrganizationLoginMethodsRequest = {
    */
   loginSamlEnabled?: boolean
 }
+
 
 export type UpdateOrganizationSecuritySettingsRequest = {
   /**
@@ -2237,6 +2417,7 @@ export type UpdateOrganizationSecuritySettingsRequest = {
    */
   maxApiKeyExpirationDuration?: string
 }
+
 
 export type UpdatePolicyRequest = {
   /**
@@ -2281,6 +2462,7 @@ export type UpdatePolicyRequest = {
   noPrincipal?: boolean
 }
 
+
 export type UpdateSSHKeyRequest = {
   sshKeyId: string
   /**
@@ -2292,6 +2474,7 @@ export type UpdateSSHKeyRequest = {
    */
   disabled?: boolean
 }
+
 
 export type UpdateSamlRequest = {
   /**
@@ -2308,6 +2491,7 @@ export type UpdateSamlRequest = {
   singleSignOnUrl?: string
 }
 
+
 export type UpdateUserPasswordRequest = {
   /**
    * ID of the user to update.
@@ -2318,6 +2502,7 @@ export type UpdateUserPasswordRequest = {
    */
   password: string
 }
+
 
 export type UpdateUserRequest = {
   /**
@@ -2350,6 +2535,7 @@ export type UpdateUserRequest = {
   locale?: string
 }
 
+
 export type UpdateUserUsernameRequest = {
   /**
    * ID of the user to update.
@@ -2360,6 +2546,7 @@ export type UpdateUserUsernameRequest = {
    */
   username: string
 }
+
 
 export type UpdateWebAuthnAuthenticatorRequest = {
   /**
@@ -2372,6 +2559,7 @@ export type UpdateWebAuthnAuthenticatorRequest = {
   authenticatorName?: string
 }
 
+
 export type ValidateUserMFAOTPRequest = {
   /**
    * User ID of the MFA OTP.
@@ -2383,9 +2571,12 @@ export type ValidateUserMFAOTPRequest = {
   oneTimePassword: string
 }
 
+
 export interface ValidateUserMFAOTPResponse {
   /**
    * List of recovery codes usable for this OTP method.
    */
   recoveryCodes: string[]
 }
+
+

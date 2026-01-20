@@ -1,5 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   AccountContractSignatureInfo,
   AccountContractSignatureInfoAccountContractInfo,
@@ -74,7 +75,9 @@ import type {
 
 const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ExportJobS3' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ExportJobS3' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -87,7 +90,9 @@ const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
 
 const unmarshalExportJobStatus = (data: unknown): ExportJobStatus => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ExportJobStatus' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ExportJobStatus' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -98,7 +103,9 @@ const unmarshalExportJobStatus = (data: unknown): ExportJobStatus => {
 
 export const unmarshalExportJob = (data: unknown): ExportJob => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ExportJob' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ExportJob' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -115,7 +122,9 @@ export const unmarshalExportJob = (data: unknown): ExportJob => {
 
 const unmarshalAlertRule = (data: unknown): AlertRule => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AlertRule' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AlertRule' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -128,7 +137,9 @@ const unmarshalAlertRule = (data: unknown): AlertRule => {
 
 export const unmarshalDisableAlertRulesResponse = (data: unknown): DisableAlertRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DisableAlertRulesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DisableAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -138,7 +149,9 @@ export const unmarshalDisableAlertRulesResponse = (data: unknown): DisableAlertR
 
 export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EnableAlertRulesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EnableAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -148,7 +161,9 @@ export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRul
 
 export const unmarshalListAlertRulesResponse = (data: unknown): ListAlertRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListAlertRulesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -157,9 +172,7 @@ export const unmarshalListAlertRulesResponse = (data: unknown): ListAlertRulesRe
   } as ListAlertRulesResponse
 }
 
-const unmarshalAccountContractSignatureInfoAccountContractInfo = (
-  data: unknown,
-): AccountContractSignatureInfoAccountContractInfo => {
+const unmarshalAccountContractSignatureInfoAccountContractInfo = (data: unknown): AccountContractSignatureInfoAccountContractInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AccountContractSignatureInfoAccountContractInfo' failed as data isn't a dictionary.`,
@@ -178,7 +191,9 @@ const unmarshalAccountContractSignatureInfoAccountContractInfo = (
 
 const unmarshalAccountContractSignatureInfo = (data: unknown): AccountContractSignatureInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AccountContractSignatureInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AccountContractSignatureInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -191,15 +206,20 @@ const unmarshalAccountContractSignatureInfo = (data: unknown): AccountContractSi
 
 const unmarshalAccountOrganizationInfo = (data: unknown): AccountOrganizationInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AccountOrganizationInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AccountOrganizationInfo' failed as data isn't a dictionary.`,
+    )
   }
 
-  return {} as AccountOrganizationInfo
+  return {
+  } as AccountOrganizationInfo
 }
 
 const unmarshalAccountProjectInfo = (data: unknown): AccountProjectInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AccountProjectInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AccountProjectInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -209,7 +229,9 @@ const unmarshalAccountProjectInfo = (data: unknown): AccountProjectInfo => {
 
 const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AccountUserInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AccountUserInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -220,7 +242,9 @@ const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
 
 const unmarshalAppleSiliconRunnerInfo = (data: unknown): AppleSiliconRunnerInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AppleSiliconRunnerInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AppleSiliconRunnerInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -231,7 +255,9 @@ const unmarshalAppleSiliconRunnerInfo = (data: unknown): AppleSiliconRunnerInfo 
 
 const unmarshalAppleSiliconServerInfo = (data: unknown): AppleSiliconServerInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AppleSiliconServerInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AppleSiliconServerInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -242,23 +268,31 @@ const unmarshalAppleSiliconServerInfo = (data: unknown): AppleSiliconServerInfo 
 
 const unmarshalAuditTrailAlertRuleInfo = (data: unknown): AuditTrailAlertRuleInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AuditTrailAlertRuleInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AuditTrailAlertRuleInfo' failed as data isn't a dictionary.`,
+    )
   }
 
-  return {} as AuditTrailAlertRuleInfo
+  return {
+  } as AuditTrailAlertRuleInfo
 }
 
 const unmarshalAuditTrailExportJobInfo = (data: unknown): AuditTrailExportJobInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AuditTrailExportJobInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AuditTrailExportJobInfo' failed as data isn't a dictionary.`,
+    )
   }
 
-  return {} as AuditTrailExportJobInfo
+  return {
+  } as AuditTrailExportJobInfo
 }
 
 const unmarshalBaremetalServerInfo = (data: unknown): BaremetalServerInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'BaremetalServerInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'BaremetalServerInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -269,7 +303,9 @@ const unmarshalBaremetalServerInfo = (data: unknown): BaremetalServerInfo => {
 
 const unmarshalBaremetalSettingInfo = (data: unknown): BaremetalSettingInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'BaremetalSettingInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'BaremetalSettingInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -279,7 +315,9 @@ const unmarshalBaremetalSettingInfo = (data: unknown): BaremetalSettingInfo => {
 
 const unmarshalEdgeServicesBackendStageInfo = (data: unknown): EdgeServicesBackendStageInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesBackendStageInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesBackendStageInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -289,7 +327,9 @@ const unmarshalEdgeServicesBackendStageInfo = (data: unknown): EdgeServicesBacke
 
 const unmarshalEdgeServicesCacheStageInfo = (data: unknown): EdgeServicesCacheStageInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesCacheStageInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesCacheStageInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -299,7 +339,9 @@ const unmarshalEdgeServicesCacheStageInfo = (data: unknown): EdgeServicesCacheSt
 
 const unmarshalEdgeServicesDNSStageInfo = (data: unknown): EdgeServicesDNSStageInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesDNSStageInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesDNSStageInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -309,7 +351,9 @@ const unmarshalEdgeServicesDNSStageInfo = (data: unknown): EdgeServicesDNSStageI
 
 const unmarshalEdgeServicesPipelineInfo = (data: unknown): EdgeServicesPipelineInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesPipelineInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesPipelineInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -319,15 +363,20 @@ const unmarshalEdgeServicesPipelineInfo = (data: unknown): EdgeServicesPipelineI
 
 const unmarshalEdgeServicesPlanInfo = (data: unknown): EdgeServicesPlanInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesPlanInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesPlanInfo' failed as data isn't a dictionary.`,
+    )
   }
 
-  return {} as EdgeServicesPlanInfo
+  return {
+  } as EdgeServicesPlanInfo
 }
 
 const unmarshalEdgeServicesRouteRulesInfo = (data: unknown): EdgeServicesRouteRulesInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesRouteRulesInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesRouteRulesInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -337,7 +386,9 @@ const unmarshalEdgeServicesRouteRulesInfo = (data: unknown): EdgeServicesRouteRu
 
 const unmarshalEdgeServicesRouteStageInfo = (data: unknown): EdgeServicesRouteStageInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesRouteStageInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesRouteStageInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -347,7 +398,9 @@ const unmarshalEdgeServicesRouteStageInfo = (data: unknown): EdgeServicesRouteSt
 
 const unmarshalEdgeServicesTLSStageInfo = (data: unknown): EdgeServicesTLSStageInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesTLSStageInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesTLSStageInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -357,7 +410,9 @@ const unmarshalEdgeServicesTLSStageInfo = (data: unknown): EdgeServicesTLSStageI
 
 const unmarshalEdgeServicesWAFStageInfo = (data: unknown): EdgeServicesWAFStageInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EdgeServicesWAFStageInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesWAFStageInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -381,7 +436,9 @@ const unmarshalInstancePrivateNetworkInterfaceInfo = (data: unknown): InstancePr
 
 const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'InstanceServerInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceServerInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -391,7 +448,9 @@ const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
 
 const unmarshalIpamIpInfo = (data: unknown): IpamIpInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'IpamIpInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'IpamIpInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -401,31 +460,42 @@ const unmarshalIpamIpInfo = (data: unknown): IpamIpInfo => {
 
 const unmarshalKeyManagerKeyInfo = (data: unknown): KeyManagerKeyInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'KeyManagerKeyInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'KeyManagerKeyInfo' failed as data isn't a dictionary.`,
+    )
   }
 
-  return {} as KeyManagerKeyInfo
+  return {
+  } as KeyManagerKeyInfo
 }
 
 const unmarshalKubernetesACLInfo = (data: unknown): KubernetesACLInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'KubernetesACLInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesACLInfo' failed as data isn't a dictionary.`,
+    )
   }
 
-  return {} as KubernetesACLInfo
+  return {
+  } as KubernetesACLInfo
 }
 
 const unmarshalKubernetesClusterInfo = (data: unknown): KubernetesClusterInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'KubernetesClusterInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesClusterInfo' failed as data isn't a dictionary.`,
+    )
   }
 
-  return {} as KubernetesClusterInfo
+  return {
+  } as KubernetesClusterInfo
 }
 
 const unmarshalKubernetesNodeInfo = (data: unknown): KubernetesNodeInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'KubernetesNodeInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesNodeInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -436,7 +506,9 @@ const unmarshalKubernetesNodeInfo = (data: unknown): KubernetesNodeInfo => {
 
 const unmarshalKubernetesPoolInfo = (data: unknown): KubernetesPoolInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'KubernetesPoolInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'KubernetesPoolInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -447,7 +519,9 @@ const unmarshalKubernetesPoolInfo = (data: unknown): KubernetesPoolInfo => {
 
 const unmarshalLoadBalancerAclInfo = (data: unknown): LoadBalancerAclInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'LoadBalancerAclInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerAclInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -457,7 +531,9 @@ const unmarshalLoadBalancerAclInfo = (data: unknown): LoadBalancerAclInfo => {
 
 const unmarshalLoadBalancerBackendInfo = (data: unknown): LoadBalancerBackendInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'LoadBalancerBackendInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerBackendInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -468,7 +544,9 @@ const unmarshalLoadBalancerBackendInfo = (data: unknown): LoadBalancerBackendInf
 
 const unmarshalLoadBalancerCertificateInfo = (data: unknown): LoadBalancerCertificateInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'LoadBalancerCertificateInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerCertificateInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -479,7 +557,9 @@ const unmarshalLoadBalancerCertificateInfo = (data: unknown): LoadBalancerCertif
 
 const unmarshalLoadBalancerFrontendInfo = (data: unknown): LoadBalancerFrontendInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'LoadBalancerFrontendInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerFrontendInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -490,7 +570,9 @@ const unmarshalLoadBalancerFrontendInfo = (data: unknown): LoadBalancerFrontendI
 
 const unmarshalLoadBalancerIpInfo = (data: unknown): LoadBalancerIpInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'LoadBalancerIpInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerIpInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -501,7 +583,9 @@ const unmarshalLoadBalancerIpInfo = (data: unknown): LoadBalancerIpInfo => {
 
 const unmarshalLoadBalancerLbInfo = (data: unknown): LoadBalancerLbInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'LoadBalancerLbInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerLbInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -511,7 +595,9 @@ const unmarshalLoadBalancerLbInfo = (data: unknown): LoadBalancerLbInfo => {
 
 const unmarshalLoadBalancerRouteInfo = (data: unknown): LoadBalancerRouteInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'LoadBalancerRouteInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'LoadBalancerRouteInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -522,7 +608,9 @@ const unmarshalLoadBalancerRouteInfo = (data: unknown): LoadBalancerRouteInfo =>
 
 const unmarshalSecretManagerSecretInfo = (data: unknown): SecretManagerSecretInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SecretManagerSecretInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SecretManagerSecretInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -533,7 +621,9 @@ const unmarshalSecretManagerSecretInfo = (data: unknown): SecretManagerSecretInf
 
 const unmarshalSecretManagerSecretVersionInfo = (data: unknown): SecretManagerSecretVersionInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SecretManagerSecretVersionInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SecretManagerSecretVersionInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -543,7 +633,9 @@ const unmarshalSecretManagerSecretVersionInfo = (data: unknown): SecretManagerSe
 
 const unmarshalVpcConnectorInfo = (data: unknown): VpcConnectorInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VpcConnectorInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VpcConnectorInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -554,7 +646,9 @@ const unmarshalVpcConnectorInfo = (data: unknown): VpcConnectorInfo => {
 
 const unmarshalVpcGwGatewayInfo = (data: unknown): VpcGwGatewayInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VpcGwGatewayInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VpcGwGatewayInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -566,7 +660,9 @@ const unmarshalVpcGwGatewayInfo = (data: unknown): VpcGwGatewayInfo => {
 
 const unmarshalVpcGwGatewayNetworkInfo = (data: unknown): VpcGwGatewayNetworkInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VpcGwGatewayNetworkInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VpcGwGatewayNetworkInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -578,7 +674,9 @@ const unmarshalVpcGwGatewayNetworkInfo = (data: unknown): VpcGwGatewayNetworkInf
 
 const unmarshalVpcPrivateNetworkInfo = (data: unknown): VpcPrivateNetworkInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VpcPrivateNetworkInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VpcPrivateNetworkInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -589,7 +687,9 @@ const unmarshalVpcPrivateNetworkInfo = (data: unknown): VpcPrivateNetworkInfo =>
 
 const unmarshalVpcRouteInfo = (data: unknown): VpcRouteInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VpcRouteInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VpcRouteInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -602,7 +702,9 @@ const unmarshalVpcRouteInfo = (data: unknown): VpcRouteInfo => {
 
 const unmarshalVpcSubnetInfo = (data: unknown): VpcSubnetInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VpcSubnetInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VpcSubnetInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -613,69 +715,35 @@ const unmarshalVpcSubnetInfo = (data: unknown): VpcSubnetInfo => {
 
 export const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Resource' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Resource' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
-    accountContractSignatureInfo: data.account_contract_signature_info
-      ? unmarshalAccountContractSignatureInfo(data.account_contract_signature_info)
-      : undefined,
-    accountOrganizationInfo: data.account_organization_info
-      ? unmarshalAccountOrganizationInfo(data.account_organization_info)
-      : undefined,
+    accountContractSignatureInfo: data.account_contract_signature_info ? unmarshalAccountContractSignatureInfo(data.account_contract_signature_info) : undefined,
+    accountOrganizationInfo: data.account_organization_info ? unmarshalAccountOrganizationInfo(data.account_organization_info) : undefined,
     accountProjectInfo: data.account_project_info ? unmarshalAccountProjectInfo(data.account_project_info) : undefined,
     accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : undefined,
-    appleSiliconRunnerInfo: data.apple_silicon_runner_info
-      ? unmarshalAppleSiliconRunnerInfo(data.apple_silicon_runner_info)
-      : undefined,
-    appleSiliconServerInfo: data.apple_silicon_server_info
-      ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info)
-      : undefined,
-    auditTrailAlertRuleInfo: data.audit_trail_alert_rule_info
-      ? unmarshalAuditTrailAlertRuleInfo(data.audit_trail_alert_rule_info)
-      : undefined,
-    auditTrailExportJobInfo: data.audit_trail_export_job_info
-      ? unmarshalAuditTrailExportJobInfo(data.audit_trail_export_job_info)
-      : undefined,
-    baremetalServerInfo: data.baremetal_server_info
-      ? unmarshalBaremetalServerInfo(data.baremetal_server_info)
-      : undefined,
-    baremetalSettingInfo: data.baremetal_setting_info
-      ? unmarshalBaremetalSettingInfo(data.baremetal_setting_info)
-      : undefined,
+    appleSiliconRunnerInfo: data.apple_silicon_runner_info ? unmarshalAppleSiliconRunnerInfo(data.apple_silicon_runner_info) : undefined,
+    appleSiliconServerInfo: data.apple_silicon_server_info ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info) : undefined,
+    auditTrailAlertRuleInfo: data.audit_trail_alert_rule_info ? unmarshalAuditTrailAlertRuleInfo(data.audit_trail_alert_rule_info) : undefined,
+    auditTrailExportJobInfo: data.audit_trail_export_job_info ? unmarshalAuditTrailExportJobInfo(data.audit_trail_export_job_info) : undefined,
+    baremetalServerInfo: data.baremetal_server_info ? unmarshalBaremetalServerInfo(data.baremetal_server_info) : undefined,
+    baremetalSettingInfo: data.baremetal_setting_info ? unmarshalBaremetalSettingInfo(data.baremetal_setting_info) : undefined,
     createdAt: unmarshalDate(data.created_at),
     deletedAt: unmarshalDate(data.deleted_at),
-    edgeServicesBackendStageInfo: data.edge_services_backend_stage_info
-      ? unmarshalEdgeServicesBackendStageInfo(data.edge_services_backend_stage_info)
-      : undefined,
-    edgeServicesCacheStageInfo: data.edge_services_cache_stage_info
-      ? unmarshalEdgeServicesCacheStageInfo(data.edge_services_cache_stage_info)
-      : undefined,
-    edgeServicesDnsStageInfo: data.edge_services_dns_stage_info
-      ? unmarshalEdgeServicesDNSStageInfo(data.edge_services_dns_stage_info)
-      : undefined,
-    edgeServicesPipelineInfo: data.edge_services_pipeline_info
-      ? unmarshalEdgeServicesPipelineInfo(data.edge_services_pipeline_info)
-      : undefined,
-    edgeServicesPlanInfo: data.edge_services_plan_info
-      ? unmarshalEdgeServicesPlanInfo(data.edge_services_plan_info)
-      : undefined,
-    edgeServicesRouteRulesInfo: data.edge_services_route_rules_info
-      ? unmarshalEdgeServicesRouteRulesInfo(data.edge_services_route_rules_info)
-      : undefined,
-    edgeServicesRouteStageInfo: data.edge_services_route_stage_info
-      ? unmarshalEdgeServicesRouteStageInfo(data.edge_services_route_stage_info)
-      : undefined,
-    edgeServicesTlsStageInfo: data.edge_services_tls_stage_info
-      ? unmarshalEdgeServicesTLSStageInfo(data.edge_services_tls_stage_info)
-      : undefined,
-    edgeServicesWafStageInfo: data.edge_services_waf_stage_info
-      ? unmarshalEdgeServicesWAFStageInfo(data.edge_services_waf_stage_info)
-      : undefined,
+    edgeServicesBackendStageInfo: data.edge_services_backend_stage_info ? unmarshalEdgeServicesBackendStageInfo(data.edge_services_backend_stage_info) : undefined,
+    edgeServicesCacheStageInfo: data.edge_services_cache_stage_info ? unmarshalEdgeServicesCacheStageInfo(data.edge_services_cache_stage_info) : undefined,
+    edgeServicesDnsStageInfo: data.edge_services_dns_stage_info ? unmarshalEdgeServicesDNSStageInfo(data.edge_services_dns_stage_info) : undefined,
+    edgeServicesPipelineInfo: data.edge_services_pipeline_info ? unmarshalEdgeServicesPipelineInfo(data.edge_services_pipeline_info) : undefined,
+    edgeServicesPlanInfo: data.edge_services_plan_info ? unmarshalEdgeServicesPlanInfo(data.edge_services_plan_info) : undefined,
+    edgeServicesRouteRulesInfo: data.edge_services_route_rules_info ? unmarshalEdgeServicesRouteRulesInfo(data.edge_services_route_rules_info) : undefined,
+    edgeServicesRouteStageInfo: data.edge_services_route_stage_info ? unmarshalEdgeServicesRouteStageInfo(data.edge_services_route_stage_info) : undefined,
+    edgeServicesTlsStageInfo: data.edge_services_tls_stage_info ? unmarshalEdgeServicesTLSStageInfo(data.edge_services_tls_stage_info) : undefined,
+    edgeServicesWafStageInfo: data.edge_services_waf_stage_info ? unmarshalEdgeServicesWAFStageInfo(data.edge_services_waf_stage_info) : undefined,
     id: data.id,
-    instancePrivateNetworkInterfaceInfo: data.instance_private_network_interface_info
-      ? unmarshalInstancePrivateNetworkInterfaceInfo(data.instance_private_network_interface_info)
-      : undefined,
+    instancePrivateNetworkInterfaceInfo: data.instance_private_network_interface_info ? unmarshalInstancePrivateNetworkInterfaceInfo(data.instance_private_network_interface_info) : undefined,
     instanceServerInfo: data.instance_server_info ? unmarshalInstanceServerInfo(data.instance_server_info) : undefined,
     ipamIpInfo: data.ipam_ip_info ? unmarshalIpamIpInfo(data.ipam_ip_info) : undefined,
     keyManagerKeyInfo: data.key_manager_key_info ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info) : undefined,
@@ -684,48 +752,24 @@ export const unmarshalResource = (data: unknown): Resource => {
     kubeClusterInfo: data.kube_cluster_info ? unmarshalKubernetesClusterInfo(data.kube_cluster_info) : undefined,
     kubeNodeInfo: data.kube_node_info ? unmarshalKubernetesNodeInfo(data.kube_node_info) : undefined,
     kubePoolInfo: data.kube_pool_info ? unmarshalKubernetesPoolInfo(data.kube_pool_info) : undefined,
-    loadBalancerAclInfo: data.load_balancer_acl_info
-      ? unmarshalLoadBalancerAclInfo(data.load_balancer_acl_info)
-      : undefined,
-    loadBalancerBackendInfo: data.load_balancer_backend_info
-      ? unmarshalLoadBalancerBackendInfo(data.load_balancer_backend_info)
-      : undefined,
-    loadBalancerCertificateInfo: data.load_balancer_certificate_info
-      ? unmarshalLoadBalancerCertificateInfo(data.load_balancer_certificate_info)
-      : undefined,
-    loadBalancerFrontendInfo: data.load_balancer_frontend_info
-      ? unmarshalLoadBalancerFrontendInfo(data.load_balancer_frontend_info)
-      : undefined,
-    loadBalancerIpInfo: data.load_balancer_ip_info
-      ? unmarshalLoadBalancerIpInfo(data.load_balancer_ip_info)
-      : undefined,
-    loadBalancerLbInfo: data.load_balancer_lb_info
-      ? unmarshalLoadBalancerLbInfo(data.load_balancer_lb_info)
-      : undefined,
-    loadBalancerRouteInfo: data.load_balancer_route_info
-      ? unmarshalLoadBalancerRouteInfo(data.load_balancer_route_info)
-      : undefined,
+    loadBalancerAclInfo: data.load_balancer_acl_info ? unmarshalLoadBalancerAclInfo(data.load_balancer_acl_info) : undefined,
+    loadBalancerBackendInfo: data.load_balancer_backend_info ? unmarshalLoadBalancerBackendInfo(data.load_balancer_backend_info) : undefined,
+    loadBalancerCertificateInfo: data.load_balancer_certificate_info ? unmarshalLoadBalancerCertificateInfo(data.load_balancer_certificate_info) : undefined,
+    loadBalancerFrontendInfo: data.load_balancer_frontend_info ? unmarshalLoadBalancerFrontendInfo(data.load_balancer_frontend_info) : undefined,
+    loadBalancerIpInfo: data.load_balancer_ip_info ? unmarshalLoadBalancerIpInfo(data.load_balancer_ip_info) : undefined,
+    loadBalancerLbInfo: data.load_balancer_lb_info ? unmarshalLoadBalancerLbInfo(data.load_balancer_lb_info) : undefined,
+    loadBalancerRouteInfo: data.load_balancer_route_info ? unmarshalLoadBalancerRouteInfo(data.load_balancer_route_info) : undefined,
     name: data.name,
     secmSecretInfo: data.secm_secret_info ? unmarshalSecretManagerSecretInfo(data.secm_secret_info) : undefined,
-    secmSecretVersionInfo: data.secm_secret_version_info
-      ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info)
-      : undefined,
-    secretManagerSecretInfo: data.secret_manager_secret_info
-      ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info)
-      : undefined,
-    secretManagerVersionInfo: data.secret_manager_version_info
-      ? unmarshalSecretManagerSecretVersionInfo(data.secret_manager_version_info)
-      : undefined,
+    secmSecretVersionInfo: data.secm_secret_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info) : undefined,
+    secretManagerSecretInfo: data.secret_manager_secret_info ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info) : undefined,
+    secretManagerVersionInfo: data.secret_manager_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secret_manager_version_info) : undefined,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
     vpcConnectorInfo: data.vpc_connector_info ? unmarshalVpcConnectorInfo(data.vpc_connector_info) : undefined,
     vpcGwGatewayInfo: data.vpc_gw_gateway_info ? unmarshalVpcGwGatewayInfo(data.vpc_gw_gateway_info) : undefined,
-    vpcGwGatewayNetworkInfo: data.vpc_gw_gateway_network_info
-      ? unmarshalVpcGwGatewayNetworkInfo(data.vpc_gw_gateway_network_info)
-      : undefined,
-    vpcPrivateNetworkInfo: data.vpc_private_network_info
-      ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info)
-      : undefined,
+    vpcGwGatewayNetworkInfo: data.vpc_gw_gateway_network_info ? unmarshalVpcGwGatewayNetworkInfo(data.vpc_gw_gateway_network_info) : undefined,
+    vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : undefined,
     vpcRouteInfo: data.vpc_route_info ? unmarshalVpcRouteInfo(data.vpc_route_info) : undefined,
     vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : undefined,
   } as Resource
@@ -733,7 +777,9 @@ export const unmarshalResource = (data: unknown): Resource => {
 
 const unmarshalAuthenticationEvent = (data: unknown): AuthenticationEvent => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AuthenticationEvent' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AuthenticationEvent' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -754,7 +800,9 @@ const unmarshalAuthenticationEvent = (data: unknown): AuthenticationEvent => {
 
 export const unmarshalListAuthenticationEventsResponse = (data: unknown): ListAuthenticationEventsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListAuthenticationEventsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListAuthenticationEventsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -765,7 +813,9 @@ export const unmarshalListAuthenticationEventsResponse = (data: unknown): ListAu
 
 const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -775,7 +825,9 @@ const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
 
 export const unmarshalEvent = (data: unknown): Event => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Event' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Event' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -799,7 +851,9 @@ export const unmarshalEvent = (data: unknown): Event => {
 
 const unmarshalSystemEvent = (data: unknown): SystemEvent => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SystemEvent' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SystemEvent' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -832,7 +886,9 @@ const unmarshalListCombinedEventsResponseCombinedEvent = (data: unknown): ListCo
 
 export const unmarshalListCombinedEventsResponse = (data: unknown): ListCombinedEventsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListCombinedEventsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListCombinedEventsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -843,7 +899,9 @@ export const unmarshalListCombinedEventsResponse = (data: unknown): ListCombined
 
 export const unmarshalListEventsResponse = (data: unknown): ListEventsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListEventsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListEventsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -854,7 +912,9 @@ export const unmarshalListEventsResponse = (data: unknown): ListEventsResponse =
 
 export const unmarshalListExportJobsResponse = (data: unknown): ListExportJobsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListExportJobsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListExportJobsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -865,7 +925,9 @@ export const unmarshalListExportJobsResponse = (data: unknown): ListExportJobsRe
 
 const unmarshalProductService = (data: unknown): ProductService => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ProductService' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ProductService' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -876,7 +938,9 @@ const unmarshalProductService = (data: unknown): ProductService => {
 
 const unmarshalProduct = (data: unknown): Product => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Product' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Product' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -888,7 +952,9 @@ const unmarshalProduct = (data: unknown): Product => {
 
 export const unmarshalListProductsResponse = (data: unknown): ListProductsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListProductsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListProductsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -899,7 +965,9 @@ export const unmarshalListProductsResponse = (data: unknown): ListProductsRespon
 
 export const unmarshalListSystemEventsResponse = (data: unknown): ListSystemEventsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListSystemEventsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListSystemEventsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -910,7 +978,9 @@ export const unmarshalListSystemEventsResponse = (data: unknown): ListSystemEven
 
 export const unmarshalSetEnabledAlertRulesResponse = (data: unknown): SetEnabledAlertRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SetEnabledAlertRulesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SetEnabledAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -918,7 +988,10 @@ export const unmarshalSetEnabledAlertRulesResponse = (data: unknown): SetEnabled
   } as SetEnabledAlertRulesResponse
 }
 
-const marshalExportJobS3 = (request: ExportJobS3, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalExportJobS3 = (
+  request: ExportJobS3,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   bucket: request.bucket,
   prefix: request.prefix,
   project_id: request.projectId,
@@ -931,9 +1004,12 @@ export const marshalCreateExportJobRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  tags: request.tags,
+  tags: request.tags,  
   ...resolveOneOf([
-    { param: 's3', value: request.s3 !== undefined ? marshalExportJobS3(request.s3, defaults) : undefined },
+    {param: 's3',
+      value: (request.s3 !== undefined) ? marshalExportJobS3(request.s3, defaults)
+      : undefined,
+    },
   ]),
 })
 

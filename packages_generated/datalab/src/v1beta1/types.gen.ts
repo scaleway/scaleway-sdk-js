@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type DatalabStatus =
   | 'unknown_status'
@@ -12,7 +13,9 @@ export type DatalabStatus =
   | 'locked'
   | 'deleted'
 
-export type ListClusterVersionsRequestOrderBy = 'name_asc' | 'name_desc'
+export type ListClusterVersionsRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
 
 export type ListDatalabsRequestOrderBy =
   | 'name_asc'
@@ -34,20 +37,35 @@ export type ListNodeTypesRequestOrderBy =
   | 'gpus_asc'
   | 'gpus_desc'
 
-export type ListNodeTypesRequestResourceType = 'all' | 'gpu' | 'cpu'
+export type ListNodeTypesRequestResourceType =
+  | 'all'
+  | 'gpu'
+  | 'cpu'
 
-export type ListNotebookVersionsRequestOrderBy = 'name_asc' | 'name_desc'
+export type ListNotebookVersionsRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
 
-export type NodeTypeStock = 'unknown_stock' | 'low_stock' | 'out_of_stock' | 'available'
+export type NodeTypeStock =
+  | 'unknown_stock'
+  | 'low_stock'
+  | 'out_of_stock'
+  | 'available'
 
-export type NodeTypeTarget = 'unknown_target' | 'notebook' | 'worker'
+export type NodeTypeTarget =
+  | 'unknown_target'
+  | 'notebook'
+  | 'worker'
 
-export type VolumeType = 'unknown_type' | 'sbs_5k'
+export type VolumeType =
+  | 'unknown_type'
+  | 'sbs_5k'
 
 export interface Volume {
   type: VolumeType
   size: number
 }
+
 
 /**
  * A cluster version.
@@ -79,6 +97,7 @@ export interface ClusterVersion {
   beta: boolean
 }
 
+
 export interface DatalabSparkMain {
   nodeType: string
   sparkUiUrl: string
@@ -86,11 +105,13 @@ export interface DatalabSparkMain {
   rootVolume?: Volume
 }
 
+
 export interface DatalabSparkWorker {
   nodeType: string
   nodeCount: number
   rootVolume?: Volume
 }
+
 
 /**
  * A notebook version.
@@ -122,14 +143,17 @@ export interface NotebookVersion {
   beta: boolean
 }
 
+
 export interface CreateDatalabRequestSparkMain {
   nodeType: string
 }
+
 
 export interface CreateDatalabRequestSparkWorker {
   nodeType: string
   nodeCount: number
 }
+
 
 /**
  * A cluster.
@@ -148,6 +172,7 @@ export interface Cluster {
    */
   versions: ClusterVersion[]
 }
+
 
 /**
  * A Data Lab resource.
@@ -223,6 +248,7 @@ export interface Datalab {
   notebookMasterUrl?: string
 }
 
+
 /**
  * A node type.
  */
@@ -277,6 +303,7 @@ export interface NodeType {
   targets: NodeTypeTarget[]
 }
 
+
 /**
  * A notebook.
  */
@@ -294,6 +321,7 @@ export interface Notebook {
    */
   versions: NotebookVersion[]
 }
+
 
 /**
  * A request to create a Data Lab.
@@ -345,6 +373,7 @@ export type CreateDatalabRequest = {
   privateNetworkId: string
 }
 
+
 /**
  * A request to delete a Data Lab.
  */
@@ -359,6 +388,7 @@ export type DeleteDatalabRequest = {
   datalabId: string
 }
 
+
 /**
  * A request to get information about a Data Lab.
  */
@@ -372,6 +402,7 @@ export type GetDatalabRequest = {
    */
   datalabId: string
 }
+
 
 /**
  * A request to list cluster versions.
@@ -395,6 +426,7 @@ export type ListClusterVersionsRequest = {
   orderBy?: ListClusterVersionsRequestOrderBy
 }
 
+
 /**
  * A response to list cluster versions.
  */
@@ -408,6 +440,7 @@ export interface ListClusterVersionsResponse {
    */
   totalCount: number
 }
+
 
 /**
  * A request to list Data Labs.
@@ -447,6 +480,7 @@ export type ListDatalabsRequest = {
   orderBy?: ListDatalabsRequestOrderBy
 }
 
+
 /**
  * A response to list Data Labs.
  */
@@ -460,6 +494,7 @@ export interface ListDatalabsResponse {
    */
   totalCount: number
 }
+
 
 /**
  * A request to list node types.
@@ -491,6 +526,7 @@ export type ListNodeTypesRequest = {
   resourceType?: ListNodeTypesRequestResourceType
 }
 
+
 /**
  * A response to list node types.
  */
@@ -504,6 +540,7 @@ export interface ListNodeTypesResponse {
    */
   totalCount: number
 }
+
 
 /**
  * A request to list notebook versions.
@@ -527,6 +564,7 @@ export type ListNotebookVersionsRequest = {
   orderBy?: ListNotebookVersionsRequestOrderBy
 }
 
+
 /**
  * A response to list notebook versions.
  */
@@ -540,6 +578,7 @@ export interface ListNotebookVersionsResponse {
    */
   totalCount: number
 }
+
 
 /**
  * A request to update a Data Lab.
@@ -570,3 +609,5 @@ export type UpdateDatalabRequest = {
    */
   nodeCount?: number
 }
+
+

@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ServiceInfo, WaitForOptions } from '@scaleway/sdk-client'
+import type { ServiceInfo, WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,10 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {
-  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,
-  SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,
-} from './content.gen.js'
+import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,} from './content.gen.js'
 import {
   marshalCloneDNSZoneRequest,
   marshalCreateDNSZoneRequest,
@@ -201,7 +198,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDNSZonesResponse,
     )
-
+  
   /**
    * List DNS zones. Retrieve the list of DNS zones you can manage and filter DNS zones associated with specific domain names.
    *
@@ -211,6 +208,7 @@ export class API extends ParentAPI {
   listDNSZones = (request: Readonly<ListDNSZonesRequest>) =>
     enrichForPagination('dnsZones', this.pageOfListDNSZones, request)
 
+  
   /**
    * Create a DNS zone. Create a new DNS zone specified by the domain name, the subdomain and the Project ID.
    *
@@ -220,7 +218,9 @@ export class API extends ParentAPI {
   createDNSZone = (request: Readonly<CreateDNSZoneRequest>) =>
     this.client.fetch<DNSZone>(
       {
-        body: JSON.stringify(marshalCreateDNSZoneRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateDNSZoneRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones`,
@@ -228,6 +228,7 @@ export class API extends ParentAPI {
       unmarshalDNSZone,
     )
 
+  
   /**
    * Update a DNS zone. Update the name and/or the Organizations for a DNS zone.
    *
@@ -237,7 +238,9 @@ export class API extends ParentAPI {
   updateDNSZone = (request: Readonly<UpdateDNSZoneRequest>) =>
     this.client.fetch<DNSZone>(
       {
-        body: JSON.stringify(marshalUpdateDNSZoneRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateDNSZoneRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}`,
@@ -245,6 +248,7 @@ export class API extends ParentAPI {
       unmarshalDNSZone,
     )
 
+  
   /**
    * Clone a DNS zone. Clone an existing DNS zone with all its records into a new DNS zone.
    *
@@ -254,7 +258,9 @@ export class API extends ParentAPI {
   cloneDNSZone = (request: Readonly<CloneDNSZoneRequest>) =>
     this.client.fetch<DNSZone>(
       {
-        body: JSON.stringify(marshalCloneDNSZoneRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCloneDNSZoneRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/clone`,
@@ -262,6 +268,7 @@ export class API extends ParentAPI {
       unmarshalDNSZone,
     )
 
+  
   /**
    * Delete a DNS zone. Delete a DNS zone and all its records.
    *
@@ -273,11 +280,14 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}`,
-        urlParams: urlParams(['project_id', request.projectId ?? this.client.settings.defaultProjectId]),
+        urlParams: urlParams(
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+        ),
       },
       unmarshalDeleteDNSZoneResponse,
     )
 
+  
   protected pageOfListDNSZoneRecords = (request: Readonly<ListDNSZoneRecordsRequest>) =>
     this.client.fetch<ListDNSZoneRecordsResponse>(
       {
@@ -295,7 +305,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDNSZoneRecordsResponse,
     )
-
+  
   /**
    * List records within a DNS zone. Retrieve a list of DNS records within a DNS zone that has default name servers.
 You can filter records by type and name.
@@ -306,6 +316,7 @@ You can filter records by type and name.
   listDNSZoneRecords = (request: Readonly<ListDNSZoneRecordsRequest>) =>
     enrichForPagination('records', this.pageOfListDNSZoneRecords, request)
 
+  
   /**
    * Update records within a DNS zone. Update records within a DNS zone that has default name servers and perform several actions on your records.
 
@@ -323,7 +334,9 @@ All edits will be versioned.
   updateDNSZoneRecords = (request: Readonly<UpdateDNSZoneRecordsRequest>) =>
     this.client.fetch<UpdateDNSZoneRecordsResponse>(
       {
-        body: JSON.stringify(marshalUpdateDNSZoneRecordsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateDNSZoneRecordsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/records`,
@@ -331,6 +344,7 @@ All edits will be versioned.
       unmarshalUpdateDNSZoneRecordsResponse,
     )
 
+  
   /**
    * List name servers within a DNS zone. Retrieve a list of name servers within a DNS zone and their optional glue records.
    *
@@ -342,11 +356,14 @@ All edits will be versioned.
       {
         method: 'GET',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/nameservers`,
-        urlParams: urlParams(['project_id', request.projectId]),
+        urlParams: urlParams(
+          ['project_id', request.projectId],
+        ),
       },
       unmarshalListDNSZoneNameserversResponse,
     )
 
+  
   /**
    * Update name servers within a DNS zone. Update name servers within a DNS zone and set optional glue records.
    *
@@ -356,7 +373,9 @@ All edits will be versioned.
   updateDNSZoneNameservers = (request: Readonly<UpdateDNSZoneNameserversRequest>) =>
     this.client.fetch<UpdateDNSZoneNameserversResponse>(
       {
-        body: JSON.stringify(marshalUpdateDNSZoneNameserversRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateDNSZoneNameserversRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/nameservers`,
@@ -364,6 +383,7 @@ All edits will be versioned.
       unmarshalUpdateDNSZoneNameserversResponse,
     )
 
+  
   /**
    * Clear records within a DNS zone. Delete all records within a DNS zone that has default name servers.<br/>
 All edits will be versioned.
@@ -380,6 +400,7 @@ All edits will be versioned.
       unmarshalClearDNSZoneRecordsResponse,
     )
 
+  
   /**
    * Export a raw DNS zone. Export a DNS zone with default name servers, in a specific format.
    *
@@ -387,13 +408,19 @@ All edits will be versioned.
    * @returns A Promise of Blob
    */
   exportRawDNSZone = (request: Readonly<ExportRawDNSZoneRequest>) =>
-    this.client.fetch<Blob>({
-      method: 'GET',
-      path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/raw`,
-      urlParams: urlParams(['dl', 1], ['format', request.format]),
-      responseType: 'blob',
-    })
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/raw`,
+        urlParams: urlParams(
+          ['dl', 1],
+          ['format', request.format],
+        ),
+        responseType: 'blob',
+      },
+    )
 
+  
   /**
    * Import a raw DNS zone. Import and replace the format of records from a given provider, with default name servers.
    *
@@ -403,7 +430,9 @@ All edits will be versioned.
   importRawDNSZone = (request: Readonly<ImportRawDNSZoneRequest>) =>
     this.client.fetch<ImportRawDNSZoneResponse>(
       {
-        body: JSON.stringify(marshalImportRawDNSZoneRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalImportRawDNSZoneRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/raw`,
@@ -411,6 +440,7 @@ All edits will be versioned.
       unmarshalImportRawDNSZoneResponse,
     )
 
+  
   /**
    * Import a DNS zone from another provider. Import and replace the format of records from a given provider, with default name servers.
    *
@@ -420,7 +450,9 @@ All edits will be versioned.
   importProviderDNSZone = (request: Readonly<ImportProviderDNSZoneRequest>) =>
     this.client.fetch<ImportProviderDNSZoneResponse>(
       {
-        body: JSON.stringify(marshalImportProviderDNSZoneRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalImportProviderDNSZoneRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/import-provider`,
@@ -428,6 +460,7 @@ All edits will be versioned.
       unmarshalImportProviderDNSZoneResponse,
     )
 
+  
   /**
    * Refresh a DNS zone. Refresh an SOA DNS zone to reload the records in the DNS zone and update the SOA serial.
 You can recreate the given DNS zone and its sub DNS zone if needed.
@@ -438,7 +471,9 @@ You can recreate the given DNS zone and its sub DNS zone if needed.
   refreshDNSZone = (request: Readonly<RefreshDNSZoneRequest>) =>
     this.client.fetch<RefreshDNSZoneResponse>(
       {
-        body: JSON.stringify(marshalRefreshDNSZoneRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRefreshDNSZoneRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/refresh`,
@@ -446,6 +481,7 @@ You can recreate the given DNS zone and its sub DNS zone if needed.
       unmarshalRefreshDNSZoneResponse,
     )
 
+  
   protected pageOfListDNSZoneVersions = (request: Readonly<ListDNSZoneVersionsRequest>) =>
     this.client.fetch<ListDNSZoneVersionsResponse>(
       {
@@ -458,7 +494,7 @@ You can recreate the given DNS zone and its sub DNS zone if needed.
       },
       unmarshalListDNSZoneVersionsResponse,
     )
-
+  
   /**
    * List versions of a DNS zone. Retrieve a list of a DNS zone's versions.<br/>
 The maximum version count is 100. If the count reaches this limit, the oldest version will be deleted after each new modification.
@@ -469,6 +505,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
   listDNSZoneVersions = (request: Readonly<ListDNSZoneVersionsRequest>) =>
     enrichForPagination('versions', this.pageOfListDNSZoneVersions, request)
 
+  
   protected pageOfListDNSZoneVersionRecords = (request: Readonly<ListDNSZoneVersionRecordsRequest>) =>
     this.client.fetch<ListDNSZoneVersionRecordsResponse>(
       {
@@ -481,7 +518,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       },
       unmarshalListDNSZoneVersionRecordsResponse,
     )
-
+  
   /**
    * List records from a given version of a specific DNS zone. Retrieve a list of records from a specific DNS zone version.
    *
@@ -491,6 +528,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
   listDNSZoneVersionRecords = (request: Readonly<ListDNSZoneVersionRecordsRequest>) =>
     enrichForPagination('records', this.pageOfListDNSZoneVersionRecords, request)
 
+  
   /**
    * Access differences from a specific DNS zone version. Access a previous DNS zone version to see the differences from another specific version.
    *
@@ -506,6 +544,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       unmarshalGetDNSZoneVersionDiffResponse,
     )
 
+  
   /**
    * Restore a DNS zone version. Restore and activate a version of a specific DNS zone.
    *
@@ -523,6 +562,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       unmarshalRestoreDNSZoneVersionResponse,
     )
 
+  
   /**
    * Get a DNS zone's TLS certificate. Get the DNS zone's TLS certificate. If you do not have a certificate, the output returns `no certificate found`.
    *
@@ -537,7 +577,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       },
       unmarshalSSLCertificate,
     )
-
+  
   /**
    * Waits for {@link SSLCertificate} to be in a final state.
    *
@@ -556,6 +596,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       options,
     )
 
+  
   /**
    * Create or get the DNS zone's TLS certificate. Create a new TLS certificate or retrieve information about an existing TLS certificate.
    *
@@ -565,7 +606,9 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
   createSSLCertificate = (request: Readonly<CreateSSLCertificateRequest>) =>
     this.client.fetch<SSLCertificate>(
       {
-        body: JSON.stringify(marshalCreateSSLCertificateRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateSSLCertificateRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/ssl-certificates`,
@@ -573,6 +616,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       unmarshalSSLCertificate,
     )
 
+  
   protected pageOfListSSLCertificates = (request: Readonly<ListSSLCertificatesRequest>) =>
     this.client.fetch<ListSSLCertificatesResponse>(
       {
@@ -587,7 +631,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       },
       unmarshalListSSLCertificatesResponse,
     )
-
+  
   /**
    * List a user's TLS certificates. List all the TLS certificates a user has created, specified by the user's Project ID and the DNS zone.
    *
@@ -597,6 +641,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
   listSSLCertificates = (request: Readonly<ListSSLCertificatesRequest>) =>
     enrichForPagination('certificates', this.pageOfListSSLCertificates, request)
 
+  
   /**
    * Delete a TLS certificate. Delete an existing TLS certificate specified by its DNS zone. Deleting a TLS certificate is permanent and cannot be undone.
    *
@@ -612,6 +657,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       unmarshalDeleteSSLCertificateResponse,
     )
 
+  
   /**
    * Get the DNS zone's TSIG key. Retrieve information about the TSIG key of a given DNS zone to allow AXFR requests.
    *
@@ -627,16 +673,21 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
       unmarshalGetDNSZoneTsigKeyResponse,
     )
 
+  
   /**
    * Delete the DNS zone's TSIG key. Delete an existing TSIG key specified by its DNS zone. Deleting a TSIG key is permanent and cannot be undone.
    *
    * @param request - The request {@link DeleteDNSZoneTsigKeyRequest}
    */
   deleteDNSZoneTsigKey = (request: Readonly<DeleteDNSZoneTsigKeyRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/tsig-key`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/tsig-key`,
+      },
+    )
+
+  
 }
 
 /**
@@ -663,7 +714,7 @@ export class RegistrarAPI extends ParentAPI {
       },
       unmarshalListTasksResponse,
     )
-
+  
   /**
    * List tasks. List all operations performed on the account.
 You can filter the list of tasks by domain name.
@@ -674,6 +725,7 @@ You can filter the list of tasks by domain name.
   listTasks = (request: Readonly<RegistrarApiListTasksRequest> = {}) =>
     enrichForPagination('tasks', this.pageOfListTasks, request)
 
+  
   protected pageOfListInboundTransfers = (request: Readonly<RegistrarApiListInboundTransfersRequest>) =>
     this.client.fetch<ListInboundTransfersResponse>(
       {
@@ -689,7 +741,7 @@ You can filter the list of tasks by domain name.
       },
       unmarshalListInboundTransfersResponse,
     )
-
+  
   /**
    * List inbound domain transfers. List all inbound transfer operations on the account.
 You can filter the list of inbound transfers by domain name.
@@ -700,6 +752,7 @@ You can filter the list of inbound transfers by domain name.
   listInboundTransfers = (request: Readonly<RegistrarApiListInboundTransfersRequest>) =>
     enrichForPagination('inboundTransfers', this.pageOfListInboundTransfers, request)
 
+  
   /**
    * Retry the inbound transfer of a domain. Request a retry for the transfer of a domain from another registrar to Scaleway Domains and DNS.
    *
@@ -709,7 +762,9 @@ You can filter the list of inbound transfers by domain name.
   retryInboundTransfer = (request: Readonly<RegistrarApiRetryInboundTransferRequest>) =>
     this.client.fetch<RetryInboundTransferResponse>(
       {
-        body: JSON.stringify(marshalRegistrarApiRetryInboundTransferRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiRetryInboundTransferRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/retry-inbound-transfer`,
@@ -717,6 +772,7 @@ You can filter the list of inbound transfers by domain name.
       unmarshalRetryInboundTransferResponse,
     )
 
+  
   /**
    * Purchase domains. Request the registration of domain names.
 You can provide a domain's already existing contact or a new contact.
@@ -727,7 +783,9 @@ You can provide a domain's already existing contact or a new contact.
   buyDomains = (request: Readonly<RegistrarApiBuyDomainsRequest>) =>
     this.client.fetch<OrderResponse>(
       {
-        body: JSON.stringify(marshalRegistrarApiBuyDomainsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiBuyDomainsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/buy-domains`,
@@ -735,6 +793,7 @@ You can provide a domain's already existing contact or a new contact.
       unmarshalOrderResponse,
     )
 
+  
   /**
    * Renew domains. Request the renewal of one or more domain names.
    *
@@ -744,7 +803,9 @@ You can provide a domain's already existing contact or a new contact.
   renewDomains = (request: Readonly<RegistrarApiRenewDomainsRequest>) =>
     this.client.fetch<OrderResponse>(
       {
-        body: JSON.stringify(marshalRegistrarApiRenewDomainsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiRenewDomainsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/renew-domains`,
@@ -752,6 +813,7 @@ You can provide a domain's already existing contact or a new contact.
       unmarshalOrderResponse,
     )
 
+  
   /**
    * Transfer a domain. Request the transfer of a domain from another registrar to Scaleway Domains and DNS.
    *
@@ -761,7 +823,9 @@ You can provide a domain's already existing contact or a new contact.
   transferInDomain = (request: Readonly<RegistrarApiTransferInDomainRequest>) =>
     this.client.fetch<OrderResponse>(
       {
-        body: JSON.stringify(marshalRegistrarApiTransferInDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiTransferInDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/transfer-domains`,
@@ -769,6 +833,7 @@ You can provide a domain's already existing contact or a new contact.
       unmarshalOrderResponse,
     )
 
+  
   /**
    * Trade a domain's contact. Request to change a domain's contact owner.<br/>
 If you specify the `organization_id` of the domain's new owner, the contact will change from the current owner's Scaleway account to the new owner's Scaleway account.<br/>
@@ -781,7 +846,9 @@ If the new owner has never created a contact to register domains before, an erro
   tradeDomain = (request: Readonly<RegistrarApiTradeDomainRequest>) =>
     this.client.fetch<OrderResponse>(
       {
-        body: JSON.stringify(marshalRegistrarApiTradeDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiTradeDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/trade`,
@@ -789,6 +856,7 @@ If the new owner has never created a contact to register domains before, an erro
       unmarshalOrderResponse,
     )
 
+  
   /**
    * Register an external domain. Request the registration of an external domain name.
    *
@@ -798,7 +866,9 @@ If the new owner has never created a contact to register domains before, an erro
   registerExternalDomain = (request: Readonly<RegistrarApiRegisterExternalDomainRequest>) =>
     this.client.fetch<RegisterExternalDomainResponse>(
       {
-        body: JSON.stringify(marshalRegistrarApiRegisterExternalDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiRegisterExternalDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/external-domains`,
@@ -806,6 +876,7 @@ If the new owner has never created a contact to register domains before, an erro
       unmarshalRegisterExternalDomainResponse,
     )
 
+  
   /**
    * Delete an external domain. Delete an external domain name.
    *
@@ -821,6 +892,7 @@ If the new owner has never created a contact to register domains before, an erro
       unmarshalDeleteExternalDomainResponse,
     )
 
+  
   /**
    * Check if contacts are compatible with a domain or a TLD. Check whether contacts are compatible with a domain or a TLD.
 If contacts are not compatible with either the domain or the TLD, the information that needs to be corrected is returned.
@@ -831,7 +903,9 @@ If contacts are not compatible with either the domain or the TLD, the informatio
   checkContactsCompatibility = (request: Readonly<RegistrarApiCheckContactsCompatibilityRequest> = {}) =>
     this.client.fetch<CheckContactsCompatibilityResponse>(
       {
-        body: JSON.stringify(marshalRegistrarApiCheckContactsCompatibilityRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiCheckContactsCompatibilityRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/check-contacts-compatibility`,
@@ -839,6 +913,7 @@ If contacts are not compatible with either the domain or the TLD, the informatio
       unmarshalCheckContactsCompatibilityResponse,
     )
 
+  
   protected pageOfListContacts = (request: Readonly<RegistrarApiListContactsRequest> = {}) =>
     this.client.fetch<ListContactsResponse>(
       {
@@ -856,7 +931,7 @@ If contacts are not compatible with either the domain or the TLD, the informatio
       },
       unmarshalListContactsResponse,
     )
-
+  
   /**
    * List contacts. Retrieve the list of contacts and their associated domains and roles.
 You can filter the list by domain name.
@@ -867,6 +942,7 @@ You can filter the list by domain name.
   listContacts = (request: Readonly<RegistrarApiListContactsRequest> = {}) =>
     enrichForPagination('contacts', this.pageOfListContacts, request)
 
+  
   /**
    * Get a contact. Retrieve a contact's details from the registrar using the given contact's ID.
    *
@@ -882,6 +958,7 @@ You can filter the list by domain name.
       unmarshalContact,
     )
 
+  
   /**
    * Update contact. Edit the contact's information.
    *
@@ -891,7 +968,9 @@ You can filter the list by domain name.
   updateContact = (request: Readonly<RegistrarApiUpdateContactRequest>) =>
     this.client.fetch<Contact>(
       {
-        body: JSON.stringify(marshalRegistrarApiUpdateContactRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiUpdateContactRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/contacts/${validatePathParam('contactId', request.contactId)}`,
@@ -899,6 +978,7 @@ You can filter the list by domain name.
       unmarshalContact,
     )
 
+  
   protected pageOfListDomains = (request: Readonly<RegistrarApiListDomainsRequest> = {}) =>
     this.client.fetch<ListDomainsResponse>(
       {
@@ -918,7 +998,7 @@ You can filter the list by domain name.
       },
       unmarshalListDomainsResponse,
     )
-
+  
   /**
    * List domains. Retrieve the list of domains you own.
    *
@@ -928,6 +1008,7 @@ You can filter the list by domain name.
   listDomains = (request: Readonly<RegistrarApiListDomainsRequest> = {}) =>
     enrichForPagination('domains', this.pageOfListDomains, request)
 
+  
   protected pageOfListRenewableDomains = (request: Readonly<RegistrarApiListRenewableDomainsRequest> = {}) =>
     this.client.fetch<ListRenewableDomainsResponse>(
       {
@@ -943,7 +1024,7 @@ You can filter the list by domain name.
       },
       unmarshalListRenewableDomainsResponse,
     )
-
+  
   /**
    * List domains that can be renewed. Retrieve the list of domains you own that can be renewed. You can also see the maximum renewal duration in years for your domains that are renewable.
    *
@@ -953,6 +1034,7 @@ You can filter the list by domain name.
   listRenewableDomains = (request: Readonly<RegistrarApiListRenewableDomainsRequest> = {}) =>
     enrichForPagination('domains', this.pageOfListRenewableDomains, request)
 
+  
   /**
    * Get domain. Retrieve a specific domain and display the domain's information.
    *
@@ -967,7 +1049,7 @@ You can filter the list by domain name.
       },
       unmarshalDomain,
     )
-
+  
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -975,7 +1057,10 @@ You can filter the list by domain name.
    * @param options - The waiting options
    * @returns A Promise of Domain
    */
-  waitForDomain = (request: Readonly<RegistrarApiGetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) =>
+  waitForDomain = (
+    request: Readonly<RegistrarApiGetDomainRequest>,
+    options?: Readonly<WaitForOptions<Domain>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_DOMAIN.includes(res.status))),
       this.getDomain,
@@ -983,6 +1068,7 @@ You can filter the list by domain name.
       options,
     )
 
+  
   /**
    * Update a domain's contacts. Update contacts for a specific domain or create a new contact.<br/>
 If you add the same contact for multiple roles (owner, administrative, technical), only one ID will be created and used for all of the roles.
@@ -993,7 +1079,9 @@ If you add the same contact for multiple roles (owner, administrative, technical
   updateDomain = (request: Readonly<RegistrarApiUpdateDomainRequest>) =>
     this.client.fetch<Domain>(
       {
-        body: JSON.stringify(marshalRegistrarApiUpdateDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiUpdateDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}`,
@@ -1001,6 +1089,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
       unmarshalDomain,
     )
 
+  
   /**
    * Lock the transfer of a domain. Lock the transfer of a domain. This means that the domain cannot be transferred and the authorization code cannot be requested to your current registrar.
    *
@@ -1018,6 +1107,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
       unmarshalDomain,
     )
 
+  
   /**
    * Unlock the transfer of a domain. Unlock the transfer of a domain. This means that the domain can be transferred and the authorization code can be requested to your current registrar.
    *
@@ -1035,6 +1125,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
       unmarshalDomain,
     )
 
+  
   /**
    * Enable auto renew. Enable the `auto renew` feature for a domain. This means the domain will be automatically renewed before its expiry date.
    *
@@ -1052,6 +1143,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
       unmarshalDomain,
     )
 
+  
   /**
    * Disable auto renew. Disable the `auto renew` feature for a domain. This means the domain will not be renewed before its expiry date.
    *
@@ -1069,6 +1161,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
       unmarshalDomain,
     )
 
+  
   /**
    * Get a domain's authorization code. Retrieve the authorization code to transfer an unlocked domain. The output returns an error if the domain is locked.
 Some TLDs may have a different procedure to retrieve the authorization code. In that case, the information displays in the message field.
@@ -1085,6 +1178,7 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
       unmarshalGetDomainAuthCodeResponse,
     )
 
+  
   /**
    * Update domain DNSSEC. If your domain uses another registrar and has the default Scaleway NS, you have to **update the DS record at your registrar**.
    *
@@ -1094,7 +1188,9 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
   enableDomainDNSSEC = (request: Readonly<RegistrarApiEnableDomainDNSSECRequest>) =>
     this.client.fetch<Domain>(
       {
-        body: JSON.stringify(marshalRegistrarApiEnableDomainDNSSECRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiEnableDomainDNSSECRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/enable-dnssec`,
@@ -1102,6 +1198,7 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
       unmarshalDomain,
     )
 
+  
   /**
    * Disable a domain's DNSSEC. Disable DNSSEC for a domain.
    *
@@ -1119,6 +1216,7 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
       unmarshalDomain,
     )
 
+  
   /**
    * Search available domains. Search a domain or a maximum of 10 domains that are available.
 
@@ -1142,6 +1240,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
       unmarshalSearchAvailableDomainsResponse,
     )
 
+  
   protected pageOfListTlds = (request: Readonly<RegistrarApiListTldsRequest> = {}) =>
     this.client.fetch<ListTldsResponse>(
       {
@@ -1156,7 +1255,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
       },
       unmarshalListTldsResponse,
     )
-
+  
   /**
    * List TLD offers. Retrieve the list of TLDs and offers associated with them.
    *
@@ -1166,6 +1265,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
   listTlds = (request: Readonly<RegistrarApiListTldsRequest> = {}) =>
     enrichForPagination('tlds', this.pageOfListTlds, request)
 
+  
   /**
    * Create a hostname for a domain. Create a hostname for a domain with glue IPs.
    *
@@ -1175,7 +1275,9 @@ If the TLD list is empty or not set, the search returns the results from the mos
   createDomainHost = (request: Readonly<RegistrarApiCreateDomainHostRequest>) =>
     this.client.fetch<Host>(
       {
-        body: JSON.stringify(marshalRegistrarApiCreateDomainHostRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiCreateDomainHostRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts`,
@@ -1183,6 +1285,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
       unmarshalHost,
     )
 
+  
   protected pageOfListDomainHosts = (request: Readonly<RegistrarApiListDomainHostsRequest>) =>
     this.client.fetch<ListDomainHostsResponse>(
       {
@@ -1195,7 +1298,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
       },
       unmarshalListDomainHostsResponse,
     )
-
+  
   /**
    * List a domain's hostnames. List a domain's hostnames using their glue IPs.
    *
@@ -1205,6 +1308,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
   listDomainHosts = (request: Readonly<RegistrarApiListDomainHostsRequest>) =>
     enrichForPagination('hosts', this.pageOfListDomainHosts, request)
 
+  
   /**
    * Update a domain's hostname. Update a domain's hostname with glue IPs.
    *
@@ -1214,7 +1318,9 @@ If the TLD list is empty or not set, the search returns the results from the mos
   updateDomainHost = (request: Readonly<RegistrarApiUpdateDomainHostRequest>) =>
     this.client.fetch<Host>(
       {
-        body: JSON.stringify(marshalRegistrarApiUpdateDomainHostRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalRegistrarApiUpdateDomainHostRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts/${validatePathParam('name', request.name)}`,
@@ -1222,6 +1328,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
       unmarshalHost,
     )
 
+  
   /**
    * Delete a domain's hostname.
    *
@@ -1236,6 +1343,8 @@ If the TLD list is empty or not set, the search returns the results from the mos
       },
       unmarshalHost,
     )
+
+  
 }
 
 /**
@@ -1251,9 +1360,8 @@ export class UnauthenticatedRegistrarAPI extends ParentAPI {
       unmarshalServiceInfo,
     )
 
-  searchAvailableDomainsConsole = (
-    request: Readonly<UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest>,
-  ) =>
+  
+  searchAvailableDomainsConsole = (request: Readonly<UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest>) =>
     this.client.fetch<SearchAvailableDomainsConsoleResponse>(
       {
         method: 'GET',
@@ -1266,4 +1374,7 @@ export class UnauthenticatedRegistrarAPI extends ParentAPI {
       },
       unmarshalSearchAvailableDomainsConsoleResponse,
     )
+
+  
 }
+

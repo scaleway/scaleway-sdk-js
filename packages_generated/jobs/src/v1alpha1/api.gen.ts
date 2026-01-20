@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -69,10 +69,15 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * Create a new job definition in a specified Project.
    *
@@ -82,7 +87,9 @@ export class API extends ParentAPI {
   createJobDefinition = (request: Readonly<CreateJobDefinitionRequest>) =>
     this.client.fetch<JobDefinition>(
       {
-        body: JSON.stringify(marshalCreateJobDefinitionRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateJobDefinitionRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions`,
@@ -90,6 +97,7 @@ export class API extends ParentAPI {
       unmarshalJobDefinition,
     )
 
+  
   /**
    * Get a job definition by its unique identifier.
    *
@@ -105,6 +113,7 @@ export class API extends ParentAPI {
       unmarshalJobDefinition,
     )
 
+  
   protected pageOfListJobDefinitions = (request: Readonly<ListJobDefinitionsRequest> = {}) =>
     this.client.fetch<ListJobDefinitionsResponse>(
       {
@@ -120,7 +129,7 @@ export class API extends ParentAPI {
       },
       unmarshalListJobDefinitionsResponse,
     )
-
+  
   /**
    * List all your job definitions with filters.
    *
@@ -130,6 +139,7 @@ export class API extends ParentAPI {
   listJobDefinitions = (request: Readonly<ListJobDefinitionsRequest> = {}) =>
     enrichForPagination('jobDefinitions', this.pageOfListJobDefinitions, request)
 
+  
   /**
    * Update an existing job definition associated with the specified unique identifier.
    *
@@ -139,7 +149,9 @@ export class API extends ParentAPI {
   updateJobDefinition = (request: Readonly<UpdateJobDefinitionRequest>) =>
     this.client.fetch<JobDefinition>(
       {
-        body: JSON.stringify(marshalUpdateJobDefinitionRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateJobDefinitionRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
@@ -147,17 +159,21 @@ export class API extends ParentAPI {
       unmarshalJobDefinition,
     )
 
+  
   /**
    * Delete an existing job definition by its unique identifier.
    *
    * @param request - The request {@link DeleteJobDefinitionRequest}
    */
   deleteJobDefinition = (request: Readonly<DeleteJobDefinitionRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
+      },
+    )
 
+  
   /**
    * Run an existing job definition by its unique identifier. This will create a new job run.
    *
@@ -167,7 +183,9 @@ export class API extends ParentAPI {
   startJobDefinition = (request: Readonly<StartJobDefinitionRequest>) =>
     this.client.fetch<StartJobDefinitionResponse>(
       {
-        body: JSON.stringify(marshalStartJobDefinitionRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalStartJobDefinitionRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/start`,
@@ -175,6 +193,7 @@ export class API extends ParentAPI {
       unmarshalStartJobDefinitionResponse,
     )
 
+  
   /**
    * Create a secret reference within a job definition.
    *
@@ -184,7 +203,9 @@ export class API extends ParentAPI {
   createJobDefinitionSecrets = (request: Readonly<CreateJobDefinitionSecretsRequest>) =>
     this.client.fetch<CreateJobDefinitionSecretsResponse>(
       {
-        body: JSON.stringify(marshalCreateJobDefinitionSecretsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateJobDefinitionSecretsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets`,
@@ -192,6 +213,7 @@ export class API extends ParentAPI {
       unmarshalCreateJobDefinitionSecretsResponse,
     )
 
+  
   /**
    * Get a secret references within a job definition.
    *
@@ -207,6 +229,7 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
+  
   /**
    * List secrets references within a job definition.
    *
@@ -222,6 +245,7 @@ export class API extends ParentAPI {
       unmarshalListJobDefinitionSecretsResponse,
     )
 
+  
   /**
    * Update a secret reference within a job definition.
    *
@@ -231,7 +255,9 @@ export class API extends ParentAPI {
   updateJobDefinitionSecret = (request: Readonly<UpdateJobDefinitionSecretRequest>) =>
     this.client.fetch<Secret>(
       {
-        body: JSON.stringify(marshalUpdateJobDefinitionSecretRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateJobDefinitionSecretRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
@@ -239,17 +265,21 @@ export class API extends ParentAPI {
       unmarshalSecret,
     )
 
+  
   /**
    * Delete a secret reference within a job definition.
    *
    * @param request - The request {@link DeleteJobDefinitionSecretRequest}
    */
   deleteJobDefinitionSecret = (request: Readonly<DeleteJobDefinitionSecretRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+      },
+    )
 
+  
   /**
    * Get a job run by its unique identifier.
    *
@@ -265,6 +295,7 @@ export class API extends ParentAPI {
       unmarshalJobRun,
     )
 
+  
   /**
    * Stop a job run by its unique identifier.
    *
@@ -282,6 +313,7 @@ export class API extends ParentAPI {
       unmarshalJobRun,
     )
 
+  
   protected pageOfListJobRuns = (request: Readonly<ListJobRunsRequest> = {}) =>
     this.client.fetch<ListJobRunsResponse>(
       {
@@ -300,7 +332,7 @@ export class API extends ParentAPI {
       },
       unmarshalListJobRunsResponse,
     )
-
+  
   /**
    * List all job runs with filters.
    *
@@ -310,6 +342,7 @@ export class API extends ParentAPI {
   listJobRuns = (request: Readonly<ListJobRunsRequest> = {}) =>
     enrichForPagination('jobRuns', this.pageOfListJobRuns, request)
 
+  
   /**
    * List jobs resources for the console.
    *
@@ -325,6 +358,7 @@ export class API extends ParentAPI {
       unmarshalListJobsResourcesResponse,
     )
 
+  
   /**
    * Get jobs limits for the console.
    *
@@ -339,4 +373,7 @@ export class API extends ParentAPI {
       },
       unmarshalJobsLimits,
     )
+
+  
 }
+

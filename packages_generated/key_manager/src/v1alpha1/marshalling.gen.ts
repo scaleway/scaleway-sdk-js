@@ -1,5 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   CreateKeyRequest,
   DataKey,
@@ -25,7 +26,9 @@ import type {
 
 const unmarshalKeyRotationPolicy = (data: unknown): KeyRotationPolicy => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'KeyRotationPolicy' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'KeyRotationPolicy' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -36,7 +39,9 @@ const unmarshalKeyRotationPolicy = (data: unknown): KeyRotationPolicy => {
 
 const unmarshalKeyUsage = (data: unknown): KeyUsage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'KeyUsage' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'KeyUsage' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -48,7 +53,9 @@ const unmarshalKeyUsage = (data: unknown): KeyUsage => {
 
 export const unmarshalKey = (data: unknown): Key => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Key' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Key' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -74,7 +81,9 @@ export const unmarshalKey = (data: unknown): Key => {
 
 export const unmarshalDataKey = (data: unknown): DataKey => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DataKey' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DataKey' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -88,7 +97,9 @@ export const unmarshalDataKey = (data: unknown): DataKey => {
 
 export const unmarshalDecryptResponse = (data: unknown): DecryptResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DecryptResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DecryptResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -100,7 +111,9 @@ export const unmarshalDecryptResponse = (data: unknown): DecryptResponse => {
 
 export const unmarshalEncryptResponse = (data: unknown): EncryptResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EncryptResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EncryptResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -111,7 +124,9 @@ export const unmarshalEncryptResponse = (data: unknown): EncryptResponse => {
 
 const unmarshalListAlgorithmsResponseAlgorithm = (data: unknown): ListAlgorithmsResponseAlgorithm => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListAlgorithmsResponseAlgorithm' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlgorithmsResponseAlgorithm' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -123,7 +138,9 @@ const unmarshalListAlgorithmsResponseAlgorithm = (data: unknown): ListAlgorithms
 
 export const unmarshalListAlgorithmsResponse = (data: unknown): ListAlgorithmsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListAlgorithmsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlgorithmsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -133,7 +150,9 @@ export const unmarshalListAlgorithmsResponse = (data: unknown): ListAlgorithmsRe
 
 export const unmarshalListKeysResponse = (data: unknown): ListKeysResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListKeysResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListKeysResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -144,7 +163,9 @@ export const unmarshalListKeysResponse = (data: unknown): ListKeysResponse => {
 
 export const unmarshalPublicKey = (data: unknown): PublicKey => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'PublicKey' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'PublicKey' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -154,7 +175,9 @@ export const unmarshalPublicKey = (data: unknown): PublicKey => {
 
 export const unmarshalSignResponse = (data: unknown): SignResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SignResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SignResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -165,7 +188,9 @@ export const unmarshalSignResponse = (data: unknown): SignResponse => {
 
 export const unmarshalVerifyResponse = (data: unknown): VerifyResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VerifyResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VerifyResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -174,16 +199,28 @@ export const unmarshalVerifyResponse = (data: unknown): VerifyResponse => {
   } as VerifyResponse
 }
 
-const marshalKeyRotationPolicy = (request: KeyRotationPolicy, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalKeyRotationPolicy = (
+  request: KeyRotationPolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   next_rotation_at: request.nextRotationAt,
   rotation_period: request.rotationPeriod,
 })
 
-const marshalKeyUsage = (request: KeyUsage, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalKeyUsage = (
+  request: KeyUsage,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    { param: 'symmetric_encryption', value: request.symmetricEncryption },
-    { param: 'asymmetric_encryption', value: request.asymmetricEncryption },
-    { param: 'asymmetric_signing', value: request.asymmetricSigning },
+    {param: 'symmetric_encryption',
+      value: request.symmetricEncryption,
+    },
+    {param: 'asymmetric_encryption',
+      value: request.asymmetricEncryption,
+    },
+    {param: 'asymmetric_signing',
+      value: request.asymmetricSigning,
+    },
   ]),
 })
 
@@ -195,19 +232,24 @@ export const marshalCreateKeyRequest = (
   name: request.name,
   origin: request.origin,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  rotation_policy:
-    request.rotationPolicy !== undefined ? marshalKeyRotationPolicy(request.rotationPolicy, defaults) : undefined,
+  rotation_policy: ((request.rotationPolicy !== undefined) ?  marshalKeyRotationPolicy(request.rotationPolicy, defaults): undefined),
   tags: request.tags,
   unprotected: request.unprotected,
-  usage: request.usage !== undefined ? marshalKeyUsage(request.usage, defaults) : undefined,
+  usage: ((request.usage !== undefined) ?  marshalKeyUsage(request.usage, defaults): undefined),
 })
 
-export const marshalDecryptRequest = (request: DecryptRequest, defaults: DefaultValues): Record<string, unknown> => ({
+export const marshalDecryptRequest = (
+  request: DecryptRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   associated_data: request.associatedData,
   ciphertext: request.ciphertext,
 })
 
-export const marshalEncryptRequest = (request: EncryptRequest, defaults: DefaultValues): Record<string, unknown> => ({
+export const marshalEncryptRequest = (
+  request: EncryptRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   associated_data: request.associatedData,
   plaintext: request.plaintext,
 })
@@ -228,7 +270,10 @@ export const marshalImportKeyMaterialRequest = (
   salt: request.salt,
 })
 
-export const marshalSignRequest = (request: SignRequest, defaults: DefaultValues): Record<string, unknown> => ({
+export const marshalSignRequest = (
+  request: SignRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   digest: request.digest,
 })
 
@@ -238,12 +283,14 @@ export const marshalUpdateKeyRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  rotation_policy:
-    request.rotationPolicy !== undefined ? marshalKeyRotationPolicy(request.rotationPolicy, defaults) : undefined,
+  rotation_policy: ((request.rotationPolicy !== undefined) ?  marshalKeyRotationPolicy(request.rotationPolicy, defaults): undefined),
   tags: request.tags,
 })
 
-export const marshalVerifyRequest = (request: VerifyRequest, defaults: DefaultValues): Record<string, unknown> => ({
+export const marshalVerifyRequest = (
+  request: VerifyRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   digest: request.digest,
   signature: request.signature,
 })

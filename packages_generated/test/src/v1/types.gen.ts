@@ -1,6 +1,21 @@
-export type EyeColors = 'unknown' | 'amber' | 'blue' | 'brown' | 'gray' | 'green' | 'hazel' | 'red' | 'violet'
 
-export type HumanStatus = 'unknown' | 'stopped' | 'running'
+
+
+export type EyeColors =
+  | 'unknown'
+  | 'amber'
+  | 'blue'
+  | 'brown'
+  | 'gray'
+  | 'green'
+  | 'hazel'
+  | 'red'
+  | 'violet'
+
+export type HumanStatus =
+  | 'unknown'
+  | 'stopped'
+  | 'running'
 
 export type ListHumansRequestOrderBy =
   | 'created_at_asc'
@@ -28,6 +43,7 @@ export interface Human {
   projectId: string
 }
 
+
 export type CreateHumanRequest = {
   height: number
   shoeSize: number
@@ -38,7 +54,7 @@ export type CreateHumanRequest = {
   isHappy: boolean
   eyesColor?: EyeColors
   /**
-   * @deprecated
+   * @deprecated 
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
@@ -51,6 +67,7 @@ export type CreateHumanRequest = {
   projectId?: string
 }
 
+
 export type DeleteHumanRequest = {
   /**
    * UUID of the human you want to delete.
@@ -58,12 +75,14 @@ export type DeleteHumanRequest = {
   humanId: string
 }
 
+
 export type GetHumanRequest = {
   /**
    * UUID of the human you want to get.
    */
   humanId: string
 }
+
 
 export type ListHumansRequest = {
   page?: number
@@ -73,19 +92,23 @@ export type ListHumansRequest = {
   projectId?: string
 }
 
+
 export interface ListHumansResponse {
   totalCount: number
   humans: Human[]
 }
 
+
 export type RegisterRequest = {
   username: string
 }
+
 
 export interface RegisterResponse {
   secretKey: string
   accessKey: string
 }
+
 
 export type RunHumanRequest = {
   /**
@@ -94,12 +117,14 @@ export type RunHumanRequest = {
   humanId: string
 }
 
+
 export type SmokeHumanRequest = {
   /**
    * @deprecated UUID of the human you want to make smoking.
    */
   humanId: string
 }
+
 
 export type UpdateHumanRequest = {
   /**
@@ -119,3 +144,5 @@ export type UpdateHumanRequest = {
   eyesColor?: EyeColors
   name?: string
 }
+
+

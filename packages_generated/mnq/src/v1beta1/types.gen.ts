@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type ListNatsAccountsRequestOrderBy =
   | 'created_at_asc'
@@ -34,9 +35,15 @@ export type ListSqsCredentialsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type SnsInfoStatus = 'unknown_status' | 'enabled' | 'disabled'
+export type SnsInfoStatus =
+  | 'unknown_status'
+  | 'enabled'
+  | 'disabled'
 
-export type SqsInfoStatus = 'unknown_status' | 'enabled' | 'disabled'
+export type SqsInfoStatus =
+  | 'unknown_status'
+  | 'enabled'
+  | 'disabled'
 
 export interface File {
   /**
@@ -48,6 +55,7 @@ export interface File {
    */
   content: string
 }
+
 
 export interface SnsPermissions {
   /**
@@ -64,6 +72,7 @@ export interface SnsPermissions {
   canManage?: boolean
 }
 
+
 export interface SqsPermissions {
   /**
    * Defines whether the credentials bearer can publish messages to the service (send messages to Queues queues).
@@ -78,6 +87,7 @@ export interface SqsPermissions {
    */
   canManage?: boolean
 }
+
 
 export interface NatsAccount {
   /**
@@ -109,6 +119,7 @@ export interface NatsAccount {
    */
   updatedAt?: Date
 }
+
 
 export interface NatsCredentials {
   /**
@@ -144,6 +155,7 @@ export interface NatsCredentials {
    */
   checksum: string
 }
+
 
 export interface SnsCredentials {
   /**
@@ -188,6 +200,7 @@ export interface SnsCredentials {
   permissions?: SnsPermissions
 }
 
+
 export interface SqsCredentials {
   /**
    * ID of the credentials.
@@ -231,6 +244,7 @@ export interface SqsCredentials {
   permissions?: SqsPermissions
 }
 
+
 export interface ListNatsAccountsResponse {
   /**
    * Total count of existing NATS accounts (matching any filters specified).
@@ -241,6 +255,7 @@ export interface ListNatsAccountsResponse {
    */
   natsAccounts: NatsAccount[]
 }
+
 
 export interface ListNatsCredentialsResponse {
   /**
@@ -253,6 +268,7 @@ export interface ListNatsCredentialsResponse {
   natsCredentials: NatsCredentials[]
 }
 
+
 export interface ListSnsCredentialsResponse {
   /**
    * Total count of existing credentials (matching any filters specified).
@@ -264,6 +280,7 @@ export interface ListSnsCredentialsResponse {
   snsCredentials: SnsCredentials[]
 }
 
+
 export interface ListSqsCredentialsResponse {
   /**
    * Total count of existing credentials (matching any filters specified).
@@ -274,6 +291,7 @@ export interface ListSqsCredentialsResponse {
    */
   sqsCredentials: SqsCredentials[]
 }
+
 
 export type NatsApiCreateNatsAccountRequest = {
   /**
@@ -290,6 +308,7 @@ export type NatsApiCreateNatsAccountRequest = {
   projectId?: string
 }
 
+
 export type NatsApiCreateNatsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -305,6 +324,7 @@ export type NatsApiCreateNatsCredentialsRequest = {
   name?: string
 }
 
+
 export type NatsApiDeleteNatsAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -315,6 +335,7 @@ export type NatsApiDeleteNatsAccountRequest = {
    */
   natsAccountId: string
 }
+
 
 export type NatsApiDeleteNatsCredentialsRequest = {
   /**
@@ -327,6 +348,7 @@ export type NatsApiDeleteNatsCredentialsRequest = {
   natsCredentialsId: string
 }
 
+
 export type NatsApiGetNatsAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -338,6 +360,7 @@ export type NatsApiGetNatsAccountRequest = {
   natsAccountId: string
 }
 
+
 export type NatsApiGetNatsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -348,6 +371,7 @@ export type NatsApiGetNatsCredentialsRequest = {
    */
   natsCredentialsId: string
 }
+
 
 export type NatsApiListNatsAccountsRequest = {
   /**
@@ -371,6 +395,7 @@ export type NatsApiListNatsAccountsRequest = {
    */
   orderBy?: ListNatsAccountsRequestOrderBy
 }
+
 
 export type NatsApiListNatsCredentialsRequest = {
   /**
@@ -399,6 +424,7 @@ export type NatsApiListNatsCredentialsRequest = {
   orderBy?: ListNatsCredentialsRequestOrderBy
 }
 
+
 export type NatsApiUpdateNatsAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -414,6 +440,7 @@ export type NatsApiUpdateNatsAccountRequest = {
   name?: string
 }
 
+
 export type SnsApiActivateSnsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -424,6 +451,7 @@ export type SnsApiActivateSnsRequest = {
    */
   projectId?: string
 }
+
 
 export type SnsApiCreateSnsCredentialsRequest = {
   /**
@@ -444,6 +472,7 @@ export type SnsApiCreateSnsCredentialsRequest = {
   permissions?: SnsPermissions
 }
 
+
 export type SnsApiDeactivateSnsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -454,6 +483,7 @@ export type SnsApiDeactivateSnsRequest = {
    */
   projectId?: string
 }
+
 
 export type SnsApiDeleteSnsCredentialsRequest = {
   /**
@@ -466,6 +496,7 @@ export type SnsApiDeleteSnsCredentialsRequest = {
   snsCredentialsId: string
 }
 
+
 export type SnsApiGetSnsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -477,6 +508,7 @@ export type SnsApiGetSnsCredentialsRequest = {
   snsCredentialsId: string
 }
 
+
 export type SnsApiGetSnsInfoRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -487,6 +519,7 @@ export type SnsApiGetSnsInfoRequest = {
    */
   projectId?: string
 }
+
 
 export type SnsApiListSnsCredentialsRequest = {
   /**
@@ -511,6 +544,7 @@ export type SnsApiListSnsCredentialsRequest = {
   orderBy?: ListSnsCredentialsRequestOrderBy
 }
 
+
 export type SnsApiUpdateSnsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -529,6 +563,7 @@ export type SnsApiUpdateSnsCredentialsRequest = {
    */
   permissions?: SnsPermissions
 }
+
 
 export interface SnsInfo {
   /**
@@ -557,6 +592,7 @@ export interface SnsInfo {
   snsEndpointUrl: string
 }
 
+
 export type SqsApiActivateSqsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -567,6 +603,7 @@ export type SqsApiActivateSqsRequest = {
    */
   projectId?: string
 }
+
 
 export type SqsApiCreateSqsCredentialsRequest = {
   /**
@@ -587,6 +624,7 @@ export type SqsApiCreateSqsCredentialsRequest = {
   permissions?: SqsPermissions
 }
 
+
 export type SqsApiDeactivateSqsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -597,6 +635,7 @@ export type SqsApiDeactivateSqsRequest = {
    */
   projectId?: string
 }
+
 
 export type SqsApiDeleteSqsCredentialsRequest = {
   /**
@@ -609,6 +648,7 @@ export type SqsApiDeleteSqsCredentialsRequest = {
   sqsCredentialsId: string
 }
 
+
 export type SqsApiGetSqsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -620,6 +660,7 @@ export type SqsApiGetSqsCredentialsRequest = {
   sqsCredentialsId: string
 }
 
+
 export type SqsApiGetSqsInfoRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -630,6 +671,7 @@ export type SqsApiGetSqsInfoRequest = {
    */
   projectId?: string
 }
+
 
 export type SqsApiListSqsCredentialsRequest = {
   /**
@@ -654,6 +696,7 @@ export type SqsApiListSqsCredentialsRequest = {
   orderBy?: ListSqsCredentialsRequestOrderBy
 }
 
+
 export type SqsApiUpdateSqsCredentialsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -672,6 +715,7 @@ export type SqsApiUpdateSqsCredentialsRequest = {
    */
   permissions?: SqsPermissions
 }
+
 
 export interface SqsInfo {
   /**
@@ -699,3 +743,5 @@ export interface SqsInfo {
    */
   sqsEndpointUrl: string
 }
+
+

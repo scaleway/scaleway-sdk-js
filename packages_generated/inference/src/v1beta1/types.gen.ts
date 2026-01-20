@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type DeploymentStatus =
   | 'unknown_status'
@@ -12,7 +13,11 @@ export type DeploymentStatus =
   | 'locked'
   | 'scaling'
 
-export type ListDeploymentsRequestOrderBy = 'created_at_desc' | 'created_at_asc' | 'name_asc' | 'name_desc'
+export type ListDeploymentsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'name_asc'
+  | 'name_desc'
 
 export type ListModelsRequestOrderBy =
   | 'display_rank_asc'
@@ -21,7 +26,11 @@ export type ListModelsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type NodeTypeStock = 'unknown_stock' | 'low_stock' | 'out_of_stock' | 'available'
+export type NodeTypeStock =
+  | 'unknown_stock'
+  | 'low_stock'
+  | 'out_of_stock'
+  | 'available'
 
 export interface EndpointPrivateNetworkDetails {
   /**
@@ -30,7 +39,10 @@ export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointPublicAccessDetails {}
+
+export interface EndpointPublicAccessDetails {
+}
+
 
 export interface EndpointSpecPrivateNetwork {
   /**
@@ -39,7 +51,10 @@ export interface EndpointSpecPrivateNetwork {
   privateNetworkId: string
 }
 
-export interface EndpointSpecPublic {}
+
+export interface EndpointSpecPublic {
+}
+
 
 export interface Endpoint {
   /**
@@ -70,12 +85,14 @@ This CA certificate can be retrieved using the `GetDeploymentCertificate` API ca
   disableAuth: boolean
 }
 
+
 export interface ModelS3Model {
   s3Url: string
   pythonDependencies: Record<string, string>
   nodeType?: string
   tritonServerVersion?: string
 }
+
 
 export interface ACLRuleRequest {
   /**
@@ -87,6 +104,7 @@ export interface ACLRuleRequest {
    */
   description: string
 }
+
 
 export interface ACLRule {
   /**
@@ -102,6 +120,7 @@ export interface ACLRule {
    */
   description: string
 }
+
 
 export interface EndpointSpec {
   /**
@@ -122,6 +141,7 @@ When setting this field to true, the authentication will be disabled.
    */
   disableAuth: boolean
 }
+
 
 export interface Deployment {
   /**
@@ -190,6 +210,7 @@ export interface Deployment {
   region: ScwRegion
 }
 
+
 export interface Model {
   /**
    * Unique identifier.
@@ -251,6 +272,7 @@ export interface Model {
   quantizationLevel: string
 }
 
+
 export interface NodeType {
   /**
    * Name of the node type.
@@ -302,6 +324,7 @@ export interface NodeType {
   region: ScwRegion
 }
 
+
 export type AddDeploymentACLRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -317,12 +340,14 @@ export type AddDeploymentACLRulesRequest = {
   acls?: ACLRuleRequest[]
 }
 
+
 export interface AddDeploymentACLRulesResponse {
   /**
    * List of ACL rules added.
    */
   rules: ACLRule[]
 }
+
 
 export type CreateDeploymentRequest = {
   /**
@@ -368,6 +393,7 @@ The terms of the EULA can be retrieved using the `GetModelEula` API call.
   endpoints: EndpointSpec[]
 }
 
+
 export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -383,6 +409,7 @@ export type CreateEndpointRequest = {
   endpoint: EndpointSpec
 }
 
+
 export type DeleteDeploymentACLRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -393,6 +420,7 @@ export type DeleteDeploymentACLRuleRequest = {
    */
   aclId: string
 }
+
 
 export type DeleteDeploymentRequest = {
   /**
@@ -405,6 +433,7 @@ export type DeleteDeploymentRequest = {
   deploymentId: string
 }
 
+
 export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -416,12 +445,14 @@ export type DeleteEndpointRequest = {
   endpointId: string
 }
 
+
 export interface Eula {
   /**
    * Content of the end user license agreement.
    */
   content: string
 }
+
 
 export type GetDeploymentCertificateRequest = {
   /**
@@ -430,6 +461,7 @@ export type GetDeploymentCertificateRequest = {
   region?: ScwRegion
   deploymentId: string
 }
+
 
 export type GetDeploymentRequest = {
   /**
@@ -442,6 +474,7 @@ export type GetDeploymentRequest = {
   deploymentId: string
 }
 
+
 export type GetModelEulaRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -449,6 +482,7 @@ export type GetModelEulaRequest = {
   region?: ScwRegion
   modelId: string
 }
+
 
 export type GetModelRequest = {
   /**
@@ -460,6 +494,7 @@ export type GetModelRequest = {
    */
   modelId: string
 }
+
 
 export type ListDeploymentACLRulesRequest = {
   /**
@@ -480,6 +515,7 @@ export type ListDeploymentACLRulesRequest = {
   pageSize?: number
 }
 
+
 export interface ListDeploymentACLRulesResponse {
   /**
    * List of ACL rules on the current page.
@@ -490,6 +526,7 @@ export interface ListDeploymentACLRulesResponse {
    */
   totalCount: number
 }
+
 
 export type ListDeploymentsRequest = {
   /**
@@ -526,6 +563,7 @@ export type ListDeploymentsRequest = {
   tags?: string[]
 }
 
+
 export interface ListDeploymentsResponse {
   /**
    * List of deployments on the current page.
@@ -536,6 +574,7 @@ export interface ListDeploymentsResponse {
    */
   totalCount: number
 }
+
 
 export type ListModelsRequest = {
   /**
@@ -568,6 +607,7 @@ export type ListModelsRequest = {
   tags?: string[]
 }
 
+
 export interface ListModelsResponse {
   /**
    * List of models on the current page.
@@ -578,6 +618,7 @@ export interface ListModelsResponse {
    */
   totalCount: number
 }
+
 
 export type ListNodeTypesRequest = {
   /**
@@ -598,6 +639,7 @@ export type ListNodeTypesRequest = {
   includeDisabledTypes: boolean
 }
 
+
 export interface ListNodeTypesResponse {
   /**
    * List of node types.
@@ -608,6 +650,7 @@ export interface ListNodeTypesResponse {
    */
   totalCount: number
 }
+
 
 export type SetDeploymentACLRulesRequest = {
   /**
@@ -624,12 +667,14 @@ export type SetDeploymentACLRulesRequest = {
   acls?: ACLRuleRequest[]
 }
 
+
 export interface SetDeploymentACLRulesResponse {
   /**
    * List of ACL rules that were set.
    */
   rules: ACLRule[]
 }
+
 
 export type UpdateDeploymentRequest = {
   /**
@@ -658,6 +703,7 @@ export type UpdateDeploymentRequest = {
   maxSize?: number
 }
 
+
 export type UpdateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -673,3 +719,5 @@ When setting this field to true, the authentication will be disabled.
    */
   disableAuth?: boolean
 }
+
+

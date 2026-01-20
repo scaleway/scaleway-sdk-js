@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: '@scaleway/sdk-iot',
-  namespace: 'iot',
-  displayName: 'Iot',
-  versions: ['v1'],
+  name: "@scaleway/sdk-iot",
+  namespace: "iot",
+  displayName: "Iot",
+  versions: ["v1"]
 } as const
 
 export type Metadata = typeof pkgMetadata

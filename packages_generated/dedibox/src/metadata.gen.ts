@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: '@scaleway/sdk-dedibox',
-  namespace: 'dedibox',
-  displayName: 'Dedibox',
-  versions: ['v1'],
+  name: "@scaleway/sdk-dedibox",
+  namespace: "dedibox",
+  displayName: "Dedibox",
+  versions: ["v1"]
 } as const
 
 export type Metadata = typeof pkgMetadata

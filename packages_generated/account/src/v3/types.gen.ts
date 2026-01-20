@@ -1,4 +1,6 @@
-import type { LanguageCode as StdLanguageCode } from '@scaleway/sdk-std'
+
+import type {LanguageCode as StdLanguageCode,} from '@scaleway/sdk-std'
+
 
 export type ContractType =
   | 'unknown_type'
@@ -19,9 +21,14 @@ export type ListContractSignaturesRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListProjectsRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
+export type ListProjectsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
 
-export type QualificationAiMachineSubUseCase = 'unknown_sub_use_case'
+export type QualificationAiMachineSubUseCase =
+  | 'unknown_sub_use_case'
 
 export type QualificationArchitectureType =
   | 'unknown_architecture_type'
@@ -34,13 +41,19 @@ export type QualificationArchitectureType =
   | 'dedicated_server'
   | 'other_architecture_type'
 
-export type QualificationArchiveDataSubUseCase = 'unknown_sub_use_case'
+export type QualificationArchiveDataSubUseCase =
+  | 'unknown_sub_use_case'
 
-export type QualificationContainerSubUseCase = 'unknown_sub_use_case'
+export type QualificationContainerSubUseCase =
+  | 'unknown_sub_use_case'
 
-export type QualificationDeploySoftwareSubUseCase = 'unknown_sub_use_case'
+export type QualificationDeploySoftwareSubUseCase =
+  | 'unknown_sub_use_case'
 
-export type QualificationHostApplicationSubUseCase = 'unknown_sub_use_case' | 'saas_app' | 'government_app'
+export type QualificationHostApplicationSubUseCase =
+  | 'unknown_sub_use_case'
+  | 'saas_app'
+  | 'government_app'
 
 export type QualificationHostWebsiteSubUseCase =
   | 'unknown_sub_use_case'
@@ -49,47 +62,59 @@ export type QualificationHostWebsiteSubUseCase =
   | 'high_website'
   | 'other_sub_use_case'
 
-export type QualificationOtherUseCaseSubUseCase = 'unknown_sub_use_case'
+export type QualificationOtherUseCaseSubUseCase =
+  | 'unknown_sub_use_case'
 
-export type QualificationSetScalewayEnvironmentSubUseCase = 'unknown_sub_use_case'
+export type QualificationSetScalewayEnvironmentSubUseCase =
+  | 'unknown_sub_use_case'
 
-export type QualificationShareDataSubUseCase = 'unknown_sub_use_case'
+export type QualificationShareDataSubUseCase =
+  | 'unknown_sub_use_case'
 
 export interface QualificationAiMachine {
   subUseCase: QualificationAiMachineSubUseCase
 }
 
+
 export interface QualificationArchiveData {
   subUseCase: QualificationArchiveDataSubUseCase
 }
+
 
 export interface QualificationContainer {
   subUseCase: QualificationContainerSubUseCase
 }
 
+
 export interface QualificationDeploySoftware {
   subUseCase: QualificationDeploySoftwareSubUseCase
 }
+
 
 export interface QualificationHostApplication {
   subUseCase: QualificationHostApplicationSubUseCase
 }
 
+
 export interface QualificationHostWebsite {
   subUseCase: QualificationHostWebsiteSubUseCase
 }
+
 
 export interface QualificationOtherUseCase {
   subUseCase: QualificationOtherUseCaseSubUseCase
 }
 
+
 export interface QualificationSetScalewayEnvironment {
   subUseCase: QualificationSetScalewayEnvironmentSubUseCase
 }
 
+
 export interface QualificationShareData {
   subUseCase: QualificationShareDataSubUseCase
 }
+
 
 export interface Contract {
   /**
@@ -117,6 +142,7 @@ export interface Contract {
    */
   updatedAt?: Date
 }
+
 
 export interface Qualification {
   /**
@@ -170,6 +196,7 @@ export interface Qualification {
   otherUseCase?: QualificationOtherUseCase
 }
 
+
 export interface ContractSignature {
   /**
    * ID of the contract signature.
@@ -196,6 +223,7 @@ export interface ContractSignature {
    */
   contract?: Contract
 }
+
 
 export interface Project {
   /**
@@ -228,6 +256,7 @@ export interface Project {
   qualification?: Qualification
 }
 
+
 export interface CheckContractSignatureResponse {
   /**
    * Whether a signature has been requested for this contract.
@@ -238,6 +267,7 @@ export interface CheckContractSignatureResponse {
    */
   validated: boolean
 }
+
 
 export type ContractApiCheckContractSignatureRequest = {
   /**
@@ -253,6 +283,7 @@ export type ContractApiCheckContractSignatureRequest = {
    */
   contractName: string
 }
+
 
 export type ContractApiCreateContractSignatureRequest = {
   /**
@@ -273,6 +304,7 @@ export type ContractApiCreateContractSignatureRequest = {
   organizationId?: string
 }
 
+
 export type ContractApiDownloadContractSignatureRequest = {
   /**
    * The contract signature ID.
@@ -283,6 +315,7 @@ export type ContractApiDownloadContractSignatureRequest = {
    */
   locale?: StdLanguageCode
 }
+
 
 export type ContractApiListContractSignaturesRequest = {
   /**
@@ -303,12 +336,14 @@ export type ContractApiListContractSignaturesRequest = {
   organizationId?: string
 }
 
+
 export type ContractApiValidateContractSignatureRequest = {
   /**
    * The contract linked to your Organization you want to sign.
    */
   contractSignatureId: string
 }
+
 
 export interface ListContractSignaturesResponse {
   /**
@@ -321,6 +356,7 @@ export interface ListContractSignaturesResponse {
   contractSignatures: ContractSignature[]
 }
 
+
 export interface ListProjectsResponse {
   /**
    * Total number of Projects.
@@ -331,6 +367,7 @@ export interface ListProjectsResponse {
    */
   projects: Project[]
 }
+
 
 export type ProjectApiCreateProjectRequest = {
   /**
@@ -347,6 +384,7 @@ export type ProjectApiCreateProjectRequest = {
   description: string
 }
 
+
 export type ProjectApiDeleteProjectRequest = {
   /**
    * Project ID of the Project.
@@ -354,12 +392,14 @@ export type ProjectApiDeleteProjectRequest = {
   projectId?: string
 }
 
+
 export type ProjectApiGetProjectRequest = {
   /**
    * Project ID of the Project.
    */
   projectId?: string
 }
+
 
 export type ProjectApiListProjectsRequest = {
   /**
@@ -388,6 +428,7 @@ export type ProjectApiListProjectsRequest = {
   projectIds?: string[]
 }
 
+
 export type ProjectApiSetProjectQualificationRequest = {
   /**
    * Project ID.
@@ -398,6 +439,7 @@ export type ProjectApiSetProjectQualificationRequest = {
    */
   qualification?: Qualification
 }
+
 
 export type ProjectApiUpdateProjectRequest = {
   /**
@@ -414,6 +456,7 @@ export type ProjectApiUpdateProjectRequest = {
   description?: string
 }
 
+
 export interface ProjectQualification {
   /**
    * Project ID.
@@ -424,3 +467,5 @@ export interface ProjectQualification {
    */
   qualification?: Qualification
 }
+
+

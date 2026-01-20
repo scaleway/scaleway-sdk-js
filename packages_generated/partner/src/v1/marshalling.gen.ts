@@ -1,5 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   CreateOrganizationRequest,
   ListOrganizationsResponse,
@@ -10,7 +11,9 @@ import type {
 
 export const unmarshalOrganization = (data: unknown): Organization => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Organization' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Organization' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -34,7 +37,9 @@ export const unmarshalOrganization = (data: unknown): Organization => {
 
 export const unmarshalListOrganizationsResponse = (data: unknown): ListOrganizationsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListOrganizationsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListOrganizationsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {

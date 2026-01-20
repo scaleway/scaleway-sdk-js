@@ -1,5 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   AttachRoutingPolicyRequest,
   AttachVpcRequest,
@@ -27,7 +28,9 @@ import type {
 
 const unmarshalRange = (data: unknown): Range => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Range' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Range' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -38,7 +41,9 @@ const unmarshalRange = (data: unknown): Range => {
 
 export const unmarshalDedicatedConnection = (data: unknown): DedicatedConnection => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DedicatedConnection' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DedicatedConnection' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -61,7 +66,9 @@ export const unmarshalDedicatedConnection = (data: unknown): DedicatedConnection
 
 const unmarshalBgpConfig = (data: unknown): BgpConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'BgpConfig' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'BgpConfig' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -73,7 +80,9 @@ const unmarshalBgpConfig = (data: unknown): BgpConfig => {
 
 const unmarshalPartnerHost = (data: unknown): PartnerHost => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'PartnerHost' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'PartnerHost' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -85,7 +94,9 @@ const unmarshalPartnerHost = (data: unknown): PartnerHost => {
 
 const unmarshalSelfHost = (data: unknown): SelfHost => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SelfHost' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SelfHost' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -95,7 +106,9 @@ const unmarshalSelfHost = (data: unknown): SelfHost => {
 
 export const unmarshalLink = (data: unknown): Link => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Link' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Link' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -127,7 +140,9 @@ export const unmarshalLink = (data: unknown): Link => {
 
 export const unmarshalPartner = (data: unknown): Partner => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Partner' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Partner' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -143,7 +158,9 @@ export const unmarshalPartner = (data: unknown): Partner => {
 
 export const unmarshalPop = (data: unknown): Pop => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Pop' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Pop' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -161,7 +178,9 @@ export const unmarshalPop = (data: unknown): Pop => {
 
 export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'RoutingPolicy' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'RoutingPolicy' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -181,7 +200,9 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
 
 export const unmarshalListDedicatedConnectionsResponse = (data: unknown): ListDedicatedConnectionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListDedicatedConnectionsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListDedicatedConnectionsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -192,7 +213,9 @@ export const unmarshalListDedicatedConnectionsResponse = (data: unknown): ListDe
 
 export const unmarshalListLinksResponse = (data: unknown): ListLinksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListLinksResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListLinksResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -203,7 +226,9 @@ export const unmarshalListLinksResponse = (data: unknown): ListLinksResponse => 
 
 export const unmarshalListPartnersResponse = (data: unknown): ListPartnersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListPartnersResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListPartnersResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -214,7 +239,9 @@ export const unmarshalListPartnersResponse = (data: unknown): ListPartnersRespon
 
 export const unmarshalListPopsResponse = (data: unknown): ListPopsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListPopsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListPopsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -225,7 +252,9 @@ export const unmarshalListPopsResponse = (data: unknown): ListPopsResponse => {
 
 export const unmarshalListRoutingPoliciesResponse = (data: unknown): ListRoutingPoliciesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListRoutingPoliciesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListRoutingPoliciesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -260,10 +289,14 @@ export const marshalCreateLinkRequest = (
   routing_policy_v4_id: request.routingPolicyV4Id,
   routing_policy_v6_id: request.routingPolicyV6Id,
   tags: request.tags,
-  vlan: request.vlan,
+  vlan: request.vlan,  
   ...resolveOneOf([
-    { param: 'connection_id', value: request.connectionId },
-    { param: 'partner_id', value: request.partnerId },
+    {param: 'connection_id',
+      value: request.connectionId,
+    },
+    {param: 'partner_id',
+      value: request.partnerId,
+    },
   ]),
 })
 

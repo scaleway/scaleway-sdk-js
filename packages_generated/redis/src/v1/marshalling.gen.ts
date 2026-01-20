@@ -1,14 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-  unmarshalTimeSeries,
-} from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalTimeSeries, } from '@scaleway/sdk-client'
 import type {
   ACLRule,
   ACLRuleSpec,
@@ -47,7 +41,9 @@ import type {
 
 export const unmarshalACLRule = (data: unknown): ACLRule => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ACLRule' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ACLRule' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -59,7 +55,9 @@ export const unmarshalACLRule = (data: unknown): ACLRule => {
 
 const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -72,15 +70,20 @@ const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
 
 const unmarshalPublicNetwork = (data: unknown): PublicNetwork => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'PublicNetwork' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'PublicNetwork' failed as data isn't a dictionary.`,
+    )
   }
 
-  return {} as PublicNetwork
+  return {
+  } as PublicNetwork
 }
 
 export const unmarshalEndpoint = (data: unknown): Endpoint => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -94,7 +97,9 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
 
 const unmarshalClusterSetting = (data: unknown): ClusterSetting => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ClusterSetting' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterSetting' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -105,7 +110,9 @@ const unmarshalClusterSetting = (data: unknown): ClusterSetting => {
 
 export const unmarshalCluster = (data: unknown): Cluster => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -131,7 +138,9 @@ export const unmarshalCluster = (data: unknown): Cluster => {
 
 export const unmarshalAddAclRulesResponse = (data: unknown): AddAclRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AddAclRulesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AddAclRulesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -142,7 +151,9 @@ export const unmarshalAddAclRulesResponse = (data: unknown): AddAclRulesResponse
 
 export const unmarshalAddEndpointsResponse = (data: unknown): AddEndpointsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AddEndpointsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AddEndpointsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -153,7 +164,9 @@ export const unmarshalAddEndpointsResponse = (data: unknown): AddEndpointsRespon
 
 export const unmarshalClusterMetricsResponse = (data: unknown): ClusterMetricsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ClusterMetricsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterMetricsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -163,7 +176,9 @@ export const unmarshalClusterMetricsResponse = (data: unknown): ClusterMetricsRe
 
 export const unmarshalClusterSettingsResponse = (data: unknown): ClusterSettingsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ClusterSettingsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterSettingsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -173,7 +188,9 @@ export const unmarshalClusterSettingsResponse = (data: unknown): ClusterSettings
 
 const unmarshalAvailableClusterSetting = (data: unknown): AvailableClusterSetting => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AvailableClusterSetting' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AvailableClusterSetting' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -190,7 +207,9 @@ const unmarshalAvailableClusterSetting = (data: unknown): AvailableClusterSettin
 
 const unmarshalClusterVersion = (data: unknown): ClusterVersion => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ClusterVersion' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterVersion' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -204,7 +223,9 @@ const unmarshalClusterVersion = (data: unknown): ClusterVersion => {
 
 export const unmarshalListClusterVersionsResponse = (data: unknown): ListClusterVersionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListClusterVersionsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListClusterVersionsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -215,7 +236,9 @@ export const unmarshalListClusterVersionsResponse = (data: unknown): ListCluster
 
 export const unmarshalListClustersResponse = (data: unknown): ListClustersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -226,7 +249,9 @@ export const unmarshalListClustersResponse = (data: unknown): ListClustersRespon
 
 const unmarshalNodeType = (data: unknown): NodeType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -243,7 +268,9 @@ const unmarshalNodeType = (data: unknown): NodeType => {
 
 export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -254,7 +281,9 @@ export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResp
 
 export const unmarshalSetAclRulesResponse = (data: unknown): SetAclRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SetAclRulesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SetAclRulesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -264,7 +293,9 @@ export const unmarshalSetAclRulesResponse = (data: unknown): SetAclRulesResponse
 
 export const unmarshalSetEndpointsResponse = (data: unknown): SetEndpointsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SetEndpointsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SetEndpointsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -272,7 +303,10 @@ export const unmarshalSetEndpointsResponse = (data: unknown): SetEndpointsRespon
   } as SetEndpointsResponse
 }
 
-const marshalACLRuleSpec = (request: ACLRuleSpec, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalACLRuleSpec = (
+  request: ACLRuleSpec,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   description: request.description,
   ip_cidr: request.ipCidr,
 })
@@ -281,10 +315,13 @@ export const marshalAddAclRulesRequest = (
   request: AddAclRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules: request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)),
+  acl_rules:  request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)),
 })
 
-const marshalClusterSetting = (request: ClusterSetting, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalClusterSetting = (
+  request: ClusterSetting,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   name: request.name,
   value: request.value,
 })
@@ -293,46 +330,42 @@ export const marshalAddClusterSettingsRequest = (
   request: AddClusterSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings: request.settings.map(elt => marshalClusterSetting(elt, defaults)),
+  settings:  request.settings.map(elt => marshalClusterSetting(elt, defaults)),
 })
 
 const marshalEndpointSpecPrivateNetworkSpecIpamConfig = (
   request: EndpointSpecPrivateNetworkSpecIpamConfig,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+})
 
 const marshalEndpointSpecPrivateNetworkSpec = (
   request: EndpointSpecPrivateNetworkSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
-  ipam_config:
-    request.ipamConfig !== undefined
-      ? marshalEndpointSpecPrivateNetworkSpecIpamConfig(request.ipamConfig, defaults)
-      : undefined,
+  ipam_config: ((request.ipamConfig !== undefined) ?  marshalEndpointSpecPrivateNetworkSpecIpamConfig(request.ipamConfig, defaults): undefined),
   service_ips: request.serviceIps,
 })
 
 const marshalEndpointSpecPublicNetworkSpec = (
   request: EndpointSpecPublicNetworkSpec,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+})
 
-const marshalEndpointSpec = (request: EndpointSpec, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalEndpointSpec = (
+  request: EndpointSpec,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    {
-      param: 'private_network',
-      value:
-        request.privateNetwork !== undefined
-          ? marshalEndpointSpecPrivateNetworkSpec(request.privateNetwork, defaults)
-          : undefined,
+    {param: 'private_network',
+      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkSpec(request.privateNetwork, defaults)
+      : undefined,
     },
-    {
-      param: 'public_network',
-      value:
-        request.publicNetwork !== undefined
-          ? marshalEndpointSpecPublicNetworkSpec(request.publicNetwork, defaults)
-          : undefined,
+    {param: 'public_network',
+      value: (request.publicNetwork !== undefined) ? marshalEndpointSpecPublicNetworkSpec(request.publicNetwork, defaults)
+      : undefined,
     },
   ]),
 })
@@ -341,22 +374,17 @@ export const marshalAddEndpointsRequest = (
   request: AddEndpointsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
+  endpoints:  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
 })
 
 export const marshalCreateClusterRequest = (
   request: CreateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules:
-    request.aclRules !== undefined ? request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)) : undefined,
-  cluster_settings:
-    request.clusterSettings !== undefined
-      ? request.clusterSettings.map(elt => marshalClusterSetting(elt, defaults))
-      : undefined,
+  acl_rules: ((request.aclRules !== undefined) ?  request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)): undefined),
+  cluster_settings: ((request.clusterSettings !== undefined) ?  request.clusterSettings.map(elt => marshalClusterSetting(elt, defaults)): undefined),
   cluster_size: request.clusterSize,
-  endpoints:
-    request.endpoints !== undefined ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)) : undefined,
+  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
   name: request.name || randomName('ins'),
   node_type: request.nodeType,
   password: request.password,
@@ -370,11 +398,17 @@ export const marshalCreateClusterRequest = (
 export const marshalMigrateClusterRequest = (
   request: MigrateClusterRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Record<string, unknown> => ({  
   ...resolveOneOf<string | number>([
-    { param: 'version', value: request.version },
-    { param: 'node_type', value: request.nodeType },
-    { param: 'cluster_size', value: request.clusterSize },
+    {param: 'version',
+      value: request.version,
+    },
+    {param: 'node_type',
+      value: request.nodeType,
+    },
+    {param: 'cluster_size',
+      value: request.clusterSize,
+    },
   ]),
 })
 
@@ -382,21 +416,21 @@ export const marshalSetAclRulesRequest = (
   request: SetAclRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules: request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)),
+  acl_rules:  request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)),
 })
 
 export const marshalSetClusterSettingsRequest = (
   request: SetClusterSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  settings: request.settings.map(elt => marshalClusterSetting(elt, defaults)),
+  settings:  request.settings.map(elt => marshalClusterSetting(elt, defaults)),
 })
 
 export const marshalSetEndpointsRequest = (
   request: SetEndpointsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
+  endpoints:  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
 })
 
 export const marshalUpdateClusterRequest = (
@@ -412,21 +446,15 @@ export const marshalUpdateClusterRequest = (
 export const marshalUpdateEndpointRequest = (
   request: UpdateEndpointRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    {
-      param: 'private_network',
-      value:
-        request.privateNetwork !== undefined
-          ? marshalEndpointSpecPrivateNetworkSpec(request.privateNetwork, defaults)
-          : undefined,
+    {param: 'private_network',
+      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkSpec(request.privateNetwork, defaults)
+      : undefined,
     },
-    {
-      param: 'public_network',
-      value:
-        request.publicNetwork !== undefined
-          ? marshalEndpointSpecPublicNetworkSpec(request.publicNetwork, defaults)
-          : undefined,
+    {param: 'public_network',
+      value: (request.publicNetwork !== undefined) ? marshalEndpointSpecPublicNetworkSpec(request.publicNetwork, defaults)
+      : undefined,
     },
   ]),
 })

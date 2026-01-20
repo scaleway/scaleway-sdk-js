@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
+
 
 export type ProductCategory =
   | 'unknown_product_category'
@@ -16,7 +17,10 @@ export type ProductCategory =
   | 'managed_mongodb'
   | 'managed_redis'
 
-export type ReportType = 'unknown_report_type' | 'monthly' | 'yearly'
+export type ReportType =
+  | 'unknown_report_type'
+  | 'monthly'
+  | 'yearly'
 
 export type ServiceCategory =
   | 'unknown_service_category'
@@ -38,6 +42,7 @@ export interface Impact {
   m3WaterUsage: number
 }
 
+
 export interface SkuImpact {
   /**
    * Unique ID of the combination of product, region and zone.
@@ -57,6 +62,7 @@ export interface SkuImpact {
   productCategory: ProductCategory
 }
 
+
 export interface ZoneImpact {
   /**
    * ID of the zone.
@@ -71,6 +77,7 @@ export interface ZoneImpact {
    */
   skus: SkuImpact[]
 }
+
 
 export interface RegionImpact {
   /**
@@ -87,6 +94,7 @@ export interface RegionImpact {
   zones: ZoneImpact[]
 }
 
+
 export interface ProjectImpact {
   /**
    * ID of the project.
@@ -101,6 +109,7 @@ export interface ProjectImpact {
    */
   regions: RegionImpact[]
 }
+
 
 export interface ImpactDataResponse {
   /**
@@ -121,6 +130,7 @@ export interface ImpactDataResponse {
   projects: ProjectImpact[]
 }
 
+
 export interface ImpactReportAvailability {
   /**
    * The list of calendar months for which impact reports are available.
@@ -131,6 +141,7 @@ export interface ImpactReportAvailability {
    */
   yearlySummaryReports: Date[]
 }
+
 
 export type UserApiDownloadImpactReportRequest = {
   /**
@@ -146,6 +157,7 @@ export type UserApiDownloadImpactReportRequest = {
    */
   type?: ReportType
 }
+
 
 export type UserApiGetImpactDataRequest = {
   /**
@@ -182,6 +194,7 @@ export type UserApiGetImpactDataRequest = {
   productCategories?: ProductCategory[]
 }
 
+
 export type UserApiGetImpactReportAvailabilityRequest = {
   /**
    * The UUID of the Organization for which you want to download a report.
@@ -196,3 +209,5 @@ export type UserApiGetImpactReportAvailabilityRequest = {
    */
   endDate?: Date
 }
+
+

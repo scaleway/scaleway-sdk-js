@@ -1,3 +1,6 @@
+
+
+
 export type DomainRecordDNSType =
   | 'unknown_dns_type'
   | 'cname_dns_type'
@@ -5,9 +8,18 @@ export type DomainRecordDNSType =
   | 'srv_dns_type'
   | 'txt_dns_type'
 
-export type DomainRecordLevel = 'unknown_level' | 'required' | 'recommended' | 'optional'
+export type DomainRecordLevel =
+  | 'unknown_level'
+  | 'required'
+  | 'recommended'
+  | 'optional'
 
-export type DomainRecordStatus = 'unknown_status' | 'validating' | 'valid' | 'invalid' | 'not_found'
+export type DomainRecordStatus =
+  | 'unknown_status'
+  | 'validating'
+  | 'valid'
+  | 'invalid'
+  | 'not_found'
 
 export type DomainStatus =
   | 'unknown_status'
@@ -50,12 +62,17 @@ export type MailboxStatus =
   | 'restoring'
   | 'payment_failed'
 
-export type MailboxSubscriptionPeriod = 'unknown_subscription_period' | 'canceled' | 'monthly' | 'yearly'
+export type MailboxSubscriptionPeriod =
+  | 'unknown_subscription_period'
+  | 'canceled'
+  | 'monthly'
+  | 'yearly'
 
 export interface BatchCreateMailboxesRequestMailboxParameters {
   localPart: string
   password: string
 }
+
 
 export interface Mailbox {
   /**
@@ -104,6 +121,7 @@ export interface Mailbox {
   deletionScheduledAt?: Date
 }
 
+
 export interface DomainRecord {
   /**
    * Unique identifier of the DNS record.
@@ -146,6 +164,7 @@ export interface DomainRecord {
    */
   updatedAt?: Date
 }
+
 
 export interface Domain {
   /**
@@ -198,6 +217,7 @@ export interface Domain {
   smtpUrl: string
 }
 
+
 export type BatchCreateMailboxesRequest = {
   /**
    * Parameters for the mailboxes to create.
@@ -213,12 +233,14 @@ export type BatchCreateMailboxesRequest = {
   subscriptionPeriod?: MailboxSubscriptionPeriod
 }
 
+
 export interface BatchCreateMailboxesResponse {
   /**
    * Mailboxes created.
    */
   mailboxes: Mailbox[]
 }
+
 
 export type CreateDomainRequest = {
   /**
@@ -231,12 +253,14 @@ export type CreateDomainRequest = {
   name: string
 }
 
+
 export type DeleteDomainRequest = {
   /**
    * ID of the domain to delete.
    */
   domainId: string
 }
+
 
 export type DeleteMailboxRequest = {
   /**
@@ -245,12 +269,14 @@ export type DeleteMailboxRequest = {
   mailboxId: string
 }
 
+
 export type GetDomainRecordsRequest = {
   /**
    * (Optional) ID of the domain in which to get the records.
    */
   domainId: string
 }
+
 
 export interface GetDomainRecordsResponse {
   /**
@@ -307,6 +333,7 @@ export interface GetDomainRecordsResponse {
   submission?: DomainRecord
 }
 
+
 export type GetDomainRequest = {
   /**
    * ID of the domain to get.
@@ -314,12 +341,14 @@ export type GetDomainRequest = {
   domainId: string
 }
 
+
 export type GetMailboxRequest = {
   /**
    * ID of the mailbox to get.
    */
   mailboxId: string
 }
+
 
 export type ListDomainsRequest = {
   orderBy?: ListDomainsRequestOrderBy
@@ -329,6 +358,7 @@ export type ListDomainsRequest = {
   statuses?: DomainStatus[]
   search?: string
 }
+
 
 export interface ListDomainsResponse {
   /**
@@ -340,6 +370,7 @@ export interface ListDomainsResponse {
    */
   domains: Domain[]
 }
+
 
 export type ListMailboxesRequest = {
   /**
@@ -368,6 +399,7 @@ export type ListMailboxesRequest = {
   search?: string
 }
 
+
 export interface ListMailboxesResponse {
   /**
    * Number of mailboxes that match the request (without pagination).
@@ -379,12 +411,14 @@ export interface ListMailboxesResponse {
   mailboxes: Mailbox[]
 }
 
+
 export type RestoreMailboxRequest = {
   /**
    * ID of the mailbox to restore.
    */
   mailboxId: string
 }
+
 
 export type UpdateMailboxRequest = {
   /**
@@ -401,6 +435,9 @@ export type UpdateMailboxRequest = {
   newPassword?: string
 }
 
+
 export type ValidateDomainRecordsRequest = {
   domainId: string
 }
+
+

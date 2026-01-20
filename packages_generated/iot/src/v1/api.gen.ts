@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT } from './content.gen.js'
+import {HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT,} from './content.gen.js'
 import {
   marshalCreateDeviceRequest,
   marshalCreateHubRequest,
@@ -113,10 +113,13 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+      ],
+    })
+  
   protected pageOfListHubs = (request: Readonly<ListHubsRequest> = {}) =>
     this.client.fetch<ListHubsResponse>(
       {
@@ -133,15 +136,17 @@ export class API extends ParentAPI {
       },
       unmarshalListHubsResponse,
     )
-
+  
   /**
    * List hubs. List all Hubs in the specified zone. By default, returned Hubs are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
    * @param request - The request {@link ListHubsRequest}
    * @returns A Promise of ListHubsResponse
    */
-  listHubs = (request: Readonly<ListHubsRequest> = {}) => enrichForPagination('hubs', this.pageOfListHubs, request)
+  listHubs = (request: Readonly<ListHubsRequest> = {}) =>
+    enrichForPagination('hubs', this.pageOfListHubs, request)
 
+  
   /**
    * Create a hub. Create a new Hub in the targeted region, specifying its configuration including name and product plan.
    *
@@ -151,7 +156,9 @@ export class API extends ParentAPI {
   createHub = (request: Readonly<CreateHubRequest>) =>
     this.client.fetch<Hub>(
       {
-        body: JSON.stringify(marshalCreateHubRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateHubRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs`,
@@ -159,6 +166,7 @@ export class API extends ParentAPI {
       unmarshalHub,
     )
 
+  
   /**
    * Get a hub. Retrieve information about an existing IoT Hub, specified by its Hub ID. Its full details, including name, status and endpoint, are returned in the response object.
    *
@@ -173,7 +181,7 @@ export class API extends ParentAPI {
       },
       unmarshalHub,
     )
-
+  
   /**
    * Waits for {@link Hub} to be in a final state.
    *
@@ -181,7 +189,10 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Hub
    */
-  waitForHub = (request: Readonly<GetHubRequest>, options?: Readonly<WaitForOptions<Hub>>) =>
+  waitForHub = (
+    request: Readonly<GetHubRequest>,
+    options?: Readonly<WaitForOptions<Hub>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!HUB_TRANSIENT_STATUSES_IOT.includes(res.status))),
       this.getHub,
@@ -189,6 +200,7 @@ export class API extends ParentAPI {
       options,
     )
 
+  
   /**
    * Update a hub. Update the parameters of an existing IoT Hub, specified by its Hub ID.
    *
@@ -198,7 +210,9 @@ export class API extends ParentAPI {
   updateHub = (request: Readonly<UpdateHubRequest>) =>
     this.client.fetch<Hub>(
       {
-        body: JSON.stringify(marshalUpdateHubRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateHubRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
@@ -206,6 +220,7 @@ export class API extends ParentAPI {
       unmarshalHub,
     )
 
+  
   /**
    * Enable a hub. Enable an existing IoT Hub, specified by its Hub ID.
    *
@@ -223,6 +238,7 @@ export class API extends ParentAPI {
       unmarshalHub,
     )
 
+  
   /**
    * Disable a hub. Disable an existing IoT Hub, specified by its Hub ID.
    *
@@ -240,18 +256,24 @@ export class API extends ParentAPI {
       unmarshalHub,
     )
 
+  
   /**
    * Delete a hub. Delete an existing IoT Hub, specified by its Hub ID. Deleting a Hub is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteHubRequest}
    */
   deleteHub = (request: Readonly<DeleteHubRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
-      urlParams: urlParams(['delete_devices', request.deleteDevices]),
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
+        urlParams: urlParams(
+          ['delete_devices', request.deleteDevices],
+        ),
+      },
+    )
 
+  
   /**
    * Get a hub's metrics. Get the metrics of an existing IoT Hub, specified by its Hub ID.
    *
@@ -264,11 +286,14 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/metrics`,
-        urlParams: urlParams(['start_date', request.startDate]),
+        urlParams: urlParams(
+          ['start_date', request.startDate],
+        ),
       },
       unmarshalGetHubMetricsResponse,
     )
 
+  
   /**
    * Set the certificate authority of a hub. Set a particular PEM-encoded certificate, specified by the Hub ID.
    *
@@ -278,7 +303,9 @@ export class API extends ParentAPI {
   setHubCA = (request: Readonly<SetHubCARequest>) =>
     this.client.fetch<Hub>(
       {
-        body: JSON.stringify(marshalSetHubCARequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSetHubCARequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/ca`,
@@ -286,6 +313,7 @@ export class API extends ParentAPI {
       unmarshalHub,
     )
 
+  
   /**
    * Get the certificate authority of a hub. Get information for a particular PEM-encoded certificate, specified by the Hub ID.
    *
@@ -301,6 +329,7 @@ export class API extends ParentAPI {
       unmarshalGetHubCAResponse,
     )
 
+  
   protected pageOfListDevices = (request: Readonly<ListDevicesRequest> = {}) =>
     this.client.fetch<ListDevicesResponse>(
       {
@@ -318,7 +347,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDevicesResponse,
     )
-
+  
   /**
    * List devices. List all devices in the specified region. By default, returned devices are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -328,6 +357,7 @@ export class API extends ParentAPI {
   listDevices = (request: Readonly<ListDevicesRequest> = {}) =>
     enrichForPagination('devices', this.pageOfListDevices, request)
 
+  
   /**
    * Add a device. Attach a device to a given Hub.
    *
@@ -337,7 +367,9 @@ export class API extends ParentAPI {
   createDevice = (request: Readonly<CreateDeviceRequest>) =>
     this.client.fetch<CreateDeviceResponse>(
       {
-        body: JSON.stringify(marshalCreateDeviceRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateDeviceRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices`,
@@ -345,6 +377,7 @@ export class API extends ParentAPI {
       unmarshalCreateDeviceResponse,
     )
 
+  
   /**
    * Get a device. Retrieve information about an existing device, specified by its device ID. Its full details, including name, status and ID, are returned in the response object.
    *
@@ -360,6 +393,7 @@ export class API extends ParentAPI {
       unmarshalDevice,
     )
 
+  
   /**
    * Update a device. Update the parameters of an existing device, specified by its device ID.
    *
@@ -369,7 +403,9 @@ export class API extends ParentAPI {
   updateDevice = (request: Readonly<UpdateDeviceRequest>) =>
     this.client.fetch<Device>(
       {
-        body: JSON.stringify(marshalUpdateDeviceRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateDeviceRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
@@ -377,6 +413,7 @@ export class API extends ParentAPI {
       unmarshalDevice,
     )
 
+  
   /**
    * Enable a device. Enable a specific device, specified by its device ID.
    *
@@ -394,6 +431,7 @@ export class API extends ParentAPI {
       unmarshalDevice,
     )
 
+  
   /**
    * Disable a device. Disable an existing device, specified by its device ID.
    *
@@ -411,6 +449,7 @@ export class API extends ParentAPI {
       unmarshalDevice,
     )
 
+  
   /**
    * Renew a device certificate. Renew the certificate of an existing device, specified by its device ID.
    *
@@ -428,6 +467,7 @@ export class API extends ParentAPI {
       unmarshalRenewDeviceCertificateResponse,
     )
 
+  
   /**
    * Set a custom certificate on a device. Switch the existing certificate of a given device with an EM-encoded custom certificate.
    *
@@ -437,7 +477,9 @@ export class API extends ParentAPI {
   setDeviceCertificate = (request: Readonly<SetDeviceCertificateRequest>) =>
     this.client.fetch<SetDeviceCertificateResponse>(
       {
-        body: JSON.stringify(marshalSetDeviceCertificateRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSetDeviceCertificateRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/certificate`,
@@ -445,6 +487,7 @@ export class API extends ParentAPI {
       unmarshalSetDeviceCertificateResponse,
     )
 
+  
   /**
    * Get a device's certificate. Get information for a particular PEM-encoded certificate, specified by the device ID. The response returns full details of the device, including its type of certificate.
    *
@@ -460,17 +503,21 @@ export class API extends ParentAPI {
       unmarshalGetDeviceCertificateResponse,
     )
 
+  
   /**
    * Remove a device. Remove a specific device from the specific Hub it is attached to.
    *
    * @param request - The request {@link DeleteDeviceRequest}
    */
   deleteDevice = (request: Readonly<DeleteDeviceRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
+      },
+    )
 
+  
   /**
    * Get a device's metrics. Get the metrics of an existing device, specified by its device ID.
    *
@@ -483,11 +530,14 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/metrics`,
-        urlParams: urlParams(['start_date', request.startDate]),
+        urlParams: urlParams(
+          ['start_date', request.startDate],
+        ),
       },
       unmarshalGetDeviceMetricsResponse,
     )
 
+  
   protected pageOfListRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
     this.client.fetch<ListRoutesResponse>(
       {
@@ -503,7 +553,7 @@ export class API extends ParentAPI {
       },
       unmarshalListRoutesResponse,
     )
-
+  
   /**
    * List routes. List all routes in the specified region. By default, returned routes are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -513,6 +563,7 @@ export class API extends ParentAPI {
   listRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
     enrichForPagination('routes', this.pageOfListRoutes, request)
 
+  
   /**
    * Create a route. Multiple kinds of routes can be created, such as:
 - Database Route
@@ -531,7 +582,9 @@ export class API extends ParentAPI {
   createRoute = (request: Readonly<CreateRouteRequest>) =>
     this.client.fetch<Route>(
       {
-        body: JSON.stringify(marshalCreateRouteRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateRouteRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
@@ -539,6 +592,7 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
+  
   /**
    * Update a route. Update the parameters of an existing route, specified by its route ID.
    *
@@ -548,7 +602,9 @@ export class API extends ParentAPI {
   updateRoute = (request: Readonly<UpdateRouteRequest>) =>
     this.client.fetch<Route>(
       {
-        body: JSON.stringify(marshalUpdateRouteRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateRouteRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
@@ -556,6 +612,7 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
+  
   /**
    * Get a route. Get information for a particular route, specified by the route ID. The response returns full details of the route, including its type, the topic it subscribes to and its configuration.
    *
@@ -571,17 +628,21 @@ export class API extends ParentAPI {
       unmarshalRoute,
     )
 
+  
   /**
    * Delete a route. Delete an existing route, specified by its route ID. Deleting a route is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
   deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+      },
+    )
 
+  
   protected pageOfListNetworks = (request: Readonly<ListNetworksRequest> = {}) =>
     this.client.fetch<ListNetworksResponse>(
       {
@@ -598,7 +659,7 @@ export class API extends ParentAPI {
       },
       unmarshalListNetworksResponse,
     )
-
+  
   /**
    * List the networks.
    *
@@ -608,6 +669,7 @@ export class API extends ParentAPI {
   listNetworks = (request: Readonly<ListNetworksRequest> = {}) =>
     enrichForPagination('networks', this.pageOfListNetworks, request)
 
+  
   /**
    * Create a new network. Create a new network for an existing hub.  Beside the default network, you can add networks for different data providers. Possible network types are Sigfox and REST.
    *
@@ -617,7 +679,9 @@ export class API extends ParentAPI {
   createNetwork = (request: Readonly<CreateNetworkRequest>) =>
     this.client.fetch<CreateNetworkResponse>(
       {
-        body: JSON.stringify(marshalCreateNetworkRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateNetworkRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks`,
@@ -625,6 +689,7 @@ export class API extends ParentAPI {
       unmarshalCreateNetworkResponse,
     )
 
+  
   /**
    * Retrieve a specific network. Retrieve an existing network, specified by its network ID.  The response returns full details of the network, including its type, the topic prefix and its endpoint.
    *
@@ -640,17 +705,21 @@ export class API extends ParentAPI {
       unmarshalNetwork,
     )
 
+  
   /**
    * Delete a Network. Delete an existing network, specified by its network ID. Deleting a network is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteNetworkRequest}
    */
   deleteNetwork = (request: Readonly<DeleteNetworkRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks/${validatePathParam('networkId', request.networkId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks/${validatePathParam('networkId', request.networkId)}`,
+      },
+    )
 
+  
   /**
    * BETA - Get a Cloud Twin Document.
    *
@@ -666,6 +735,7 @@ export class API extends ParentAPI {
       unmarshalTwinDocument,
     )
 
+  
   /**
    * BETA - Update a Cloud Twin Document.
    *
@@ -675,7 +745,9 @@ export class API extends ParentAPI {
   putTwinDocument = (request: Readonly<PutTwinDocumentRequest>) =>
     this.client.fetch<TwinDocument>(
       {
-        body: JSON.stringify(marshalPutTwinDocumentRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalPutTwinDocumentRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
@@ -683,6 +755,7 @@ export class API extends ParentAPI {
       unmarshalTwinDocument,
     )
 
+  
   /**
    * BETA - Patch a Cloud Twin Document.
    *
@@ -692,7 +765,9 @@ export class API extends ParentAPI {
   patchTwinDocument = (request: Readonly<PatchTwinDocumentRequest>) =>
     this.client.fetch<TwinDocument>(
       {
-        body: JSON.stringify(marshalPatchTwinDocumentRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalPatchTwinDocumentRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
@@ -700,17 +775,21 @@ export class API extends ParentAPI {
       unmarshalTwinDocument,
     )
 
+  
   /**
    * BETA - Delete a Cloud Twin Document.
    *
    * @param request - The request {@link DeleteTwinDocumentRequest}
    */
   deleteTwinDocument = (request: Readonly<DeleteTwinDocumentRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
+      },
+    )
 
+  
   /**
    * BETA - List the documents of a Cloud Twin.
    *
@@ -726,14 +805,20 @@ export class API extends ParentAPI {
       unmarshalListTwinDocumentsResponse,
     )
 
+  
   /**
    * BETA - Delete all the documents of a Cloud Twin.
    *
    * @param request - The request {@link DeleteTwinDocumentsRequest}
    */
   deleteTwinDocuments = (request: Readonly<DeleteTwinDocumentsRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}`,
+      },
+    )
+
+  
 }
+

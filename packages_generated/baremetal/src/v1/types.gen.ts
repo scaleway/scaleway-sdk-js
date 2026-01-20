@@ -2,11 +2,20 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Money, Zone as ScwZone, TimeSeries } from '@scaleway/sdk-client'
 
-export type IPReverseStatus = 'unknown' | 'pending' | 'active' | 'error'
 
-export type IPVersion = 'IPv4' | 'IPv6'
+export type IPReverseStatus =
+  | 'unknown'
+  | 'pending'
+  | 'active'
+  | 'error'
 
-export type ListServerEventsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type IPVersion =
+  | 'IPv4'
+  | 'IPv6'
+
+export type ListServerEventsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
 export type ListServerPrivateNetworksRequestOrderBy =
   | 'created_at_asc'
@@ -14,15 +23,31 @@ export type ListServerPrivateNetworksRequestOrderBy =
   | 'updated_at_asc'
   | 'updated_at_desc'
 
-export type ListServersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListServersRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
-export type ListSettingsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListSettingsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
-export type OfferStock = 'empty' | 'low' | 'available'
+export type OfferStock =
+  | 'empty'
+  | 'low'
+  | 'available'
 
-export type OfferSubscriptionPeriod = 'unknown_subscription_period' | 'hourly' | 'monthly'
+export type OfferSubscriptionPeriod =
+  | 'unknown_subscription_period'
+  | 'hourly'
+  | 'monthly'
 
-export type SchemaFilesystemFormat = 'unknown_format' | 'fat32' | 'ext4' | 'swap' | 'zfs' | 'xfs'
+export type SchemaFilesystemFormat =
+  | 'unknown_format'
+  | 'fat32'
+  | 'ext4'
+  | 'swap'
+  | 'zfs'
+  | 'xfs'
 
 export type SchemaPartitionLabel =
   | 'unknown_partition_label'
@@ -36,7 +61,12 @@ export type SchemaPartitionLabel =
   | 'raid'
   | 'zfs'
 
-export type SchemaPoolType = 'unknown_type' | 'no_raid' | 'mirror' | 'raidz1' | 'raidz2'
+export type SchemaPoolType =
+  | 'unknown_type'
+  | 'no_raid'
+  | 'mirror'
+  | 'raidz1'
+  | 'raidz2'
 
 export type SchemaRAIDLevel =
   | 'unknown_raid_level'
@@ -46,9 +76,17 @@ export type SchemaRAIDLevel =
   | 'raid_level_6'
   | 'raid_level_10'
 
-export type ServerBootType = 'unknown_boot_type' | 'normal' | 'rescue'
+export type ServerBootType =
+  | 'unknown_boot_type'
+  | 'normal'
+  | 'rescue'
 
-export type ServerInstallStatus = 'unknown' | 'to_install' | 'installing' | 'completed' | 'error'
+export type ServerInstallStatus =
+  | 'unknown'
+  | 'to_install'
+  | 'installing'
+  | 'completed'
+  | 'error'
 
 export type ServerOptionOptionStatus =
   | 'option_status_unknown'
@@ -57,9 +95,18 @@ export type ServerOptionOptionStatus =
   | 'option_status_disabling'
   | 'option_status_error'
 
-export type ServerPingStatus = 'ping_status_unknown' | 'ping_status_up' | 'ping_status_down'
+export type ServerPingStatus =
+  | 'ping_status_unknown'
+  | 'ping_status_up'
+  | 'ping_status_down'
 
-export type ServerPrivateNetworkStatus = 'unknown' | 'attaching' | 'attached' | 'error' | 'detaching' | 'locked'
+export type ServerPrivateNetworkStatus =
+  | 'unknown'
+  | 'attaching'
+  | 'attached'
+  | 'error'
+  | 'detaching'
+  | 'locked'
 
 export type ServerStatus =
   | 'unknown'
@@ -76,7 +123,9 @@ export type ServerStatus =
   | 'resetting'
   | 'migrating'
 
-export type SettingType = 'unknown' | 'smtp'
+export type SettingType =
+  | 'unknown'
+  | 'smtp'
 
 export interface SchemaPartition {
   label: SchemaPartitionLabel
@@ -84,6 +133,7 @@ export interface SchemaPartition {
   size: number
   useAllAvailableSpace: boolean
 }
+
 
 export interface SchemaPool {
   name: string
@@ -93,10 +143,12 @@ export interface SchemaPool {
   filesystemOptions: string[]
 }
 
+
 export interface SchemaDisk {
   device: string
   partitions: SchemaPartition[]
 }
+
 
 export interface SchemaFilesystem {
   device: string
@@ -104,15 +156,18 @@ export interface SchemaFilesystem {
   mountpoint: string
 }
 
+
 export interface SchemaRAID {
   name: string
   level: SchemaRAIDLevel
   devices: string[]
 }
 
+
 export interface SchemaZFS {
   pools: SchemaPool[]
 }
+
 
 export interface Schema {
   disks: SchemaDisk[]
@@ -121,21 +176,29 @@ export interface Schema {
   zfs?: SchemaZFS
 }
 
-export interface CertificationOption {}
+
+export interface CertificationOption {
+}
+
 
 export interface LicenseOption {
   osId: string
 }
 
+
 export interface PrivateNetworkOption {
   bandwidthInBps: number
 }
+
 
 export interface PublicBandwidthOption {
   bandwidthInBps: number
 }
 
-export interface RemoteAccessOption {}
+
+export interface RemoteAccessOption {
+}
+
 
 export interface CreateServerRequestInstall {
   /**
@@ -172,6 +235,7 @@ export interface CreateServerRequestInstall {
   partitioningSchema?: Schema
 }
 
+
 export interface IP {
   /**
    * ID of the IP.
@@ -198,6 +262,7 @@ export interface IP {
    */
   reverseStatusMessage: string
 }
+
 
 export interface ServerInstall {
   /**
@@ -233,6 +298,7 @@ export interface ServerInstall {
    */
   partitioningSchema?: Schema
 }
+
 
 export interface ServerOption {
   /**
@@ -287,6 +353,7 @@ export interface ServerOption {
   certification?: CertificationOption
 }
 
+
 export interface ServerRescueServer {
   /**
    * Rescue user name.
@@ -298,11 +365,13 @@ export interface ServerRescueServer {
   password: string
 }
 
+
 export interface OSOSField {
   editable: boolean
   required: boolean
   defaultValue?: string
 }
+
 
 export interface CPU {
   /**
@@ -327,6 +396,7 @@ export interface CPU {
   benchmark: string
 }
 
+
 export interface Disk {
   /**
    * Capacity of the disk in bytes.
@@ -338,6 +408,7 @@ export interface Disk {
   type: string
 }
 
+
 export interface GPU {
   /**
    * Name of the GPU.
@@ -348,6 +419,7 @@ export interface GPU {
    */
   vram: number
 }
+
 
 export interface Memory {
   /**
@@ -367,6 +439,7 @@ export interface Memory {
    */
   isEcc: boolean
 }
+
 
 export interface OfferOptionOffer {
   /**
@@ -430,6 +503,7 @@ If false the option is available for the offer but not included by default.
   certification?: CertificationOption
 }
 
+
 export interface PersistentMemory {
   /**
    * Capacity of the memory in bytes.
@@ -445,16 +519,19 @@ export interface PersistentMemory {
   frequency: number
 }
 
+
 export interface RaidController {
   model: string
   raidLevel: string[]
 }
+
 
 export interface BatchCreateServersRequestServerConfig {
   hostname: string
   description: string
   tags: string[]
 }
+
 
 export type CreateServerRequest = {
   /**
@@ -506,6 +583,7 @@ export type CreateServerRequest = {
    */
   userData?: string
 }
+
 
 export interface Server {
   /**
@@ -594,6 +672,7 @@ export interface Server {
   userData?: string
 }
 
+
 export interface OS {
   /**
    * ID of the OS.
@@ -660,6 +739,7 @@ export interface OS {
    */
   zone: ScwZone
 }
+
 
 export interface Offer {
   /**
@@ -768,6 +848,7 @@ export interface Offer {
   zone: ScwZone
 }
 
+
 export interface Option {
   /**
    * ID of the option.
@@ -813,6 +894,7 @@ export interface Option {
   certification?: CertificationOption
 }
 
+
 export interface ServerEvent {
   /**
    * ID of the server to which the action will be applied.
@@ -831,6 +913,7 @@ export interface ServerEvent {
    */
   createdAt?: Date
 }
+
 
 export interface ServerPrivateNetwork {
   /**
@@ -867,6 +950,7 @@ export interface ServerPrivateNetwork {
   updatedAt?: Date
 }
 
+
 export interface Setting {
   /**
    * ID of the setting.
@@ -885,6 +969,7 @@ export interface Setting {
    */
   enabled: boolean
 }
+
 
 export type AddOptionServerRequest = {
   /**
@@ -905,6 +990,7 @@ export type AddOptionServerRequest = {
   expiresAt?: Date
 }
 
+
 export interface BMCAccess {
   /**
    * URL to access to the server console.
@@ -924,6 +1010,7 @@ export interface BMCAccess {
   expiresAt?: Date
 }
 
+
 export type BatchCreateServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -939,9 +1026,11 @@ export type BatchCreateServersRequest = {
   servers?: BatchCreateServersRequestServerConfig[]
 }
 
+
 export interface BatchCreateServersResponse {
   servers: Server[]
 }
+
 
 export type DeleteOptionServerRequest = {
   /**
@@ -958,6 +1047,7 @@ export type DeleteOptionServerRequest = {
   optionId: string
 }
 
+
 export type DeleteServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -969,6 +1059,7 @@ export type DeleteServerRequest = {
   serverId: string
 }
 
+
 export type GetBMCAccessRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -979,6 +1070,7 @@ export type GetBMCAccessRequest = {
    */
   serverId: string
 }
+
 
 export type GetDefaultPartitioningSchemaRequest = {
   /**
@@ -995,6 +1087,7 @@ export type GetDefaultPartitioningSchemaRequest = {
   osId: string
 }
 
+
 export type GetOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1005,6 +1098,7 @@ export type GetOSRequest = {
    */
   osId: string
 }
+
 
 export type GetOfferRequest = {
   /**
@@ -1017,6 +1111,7 @@ export type GetOfferRequest = {
   offerId: string
 }
 
+
 export type GetOptionRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1027,6 +1122,7 @@ export type GetOptionRequest = {
    */
   optionId: string
 }
+
 
 export type GetServerMetricsRequest = {
   /**
@@ -1039,12 +1135,14 @@ export type GetServerMetricsRequest = {
   serverId: string
 }
 
+
 export interface GetServerMetricsResponse {
   /**
    * Timeseries object representing pings on the server.
    */
   pings?: TimeSeries
 }
+
 
 export type GetServerRequest = {
   /**
@@ -1056,6 +1154,7 @@ export type GetServerRequest = {
    */
   serverId: string
 }
+
 
 export type InstallServerRequest = {
   /**
@@ -1104,6 +1203,7 @@ export type InstallServerRequest = {
   userData?: Blob
 }
 
+
 export type ListOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1123,6 +1223,7 @@ export type ListOSRequest = {
   offerId?: string
 }
 
+
 export interface ListOSResponse {
   /**
    * Total count of matching OS.
@@ -1133,6 +1234,7 @@ export interface ListOSResponse {
    */
   os: OS[]
 }
+
 
 export type ListOffersRequest = {
   /**
@@ -1157,6 +1259,7 @@ export type ListOffersRequest = {
   name?: string
 }
 
+
 export interface ListOffersResponse {
   /**
    * Total count of matching offers.
@@ -1167,6 +1270,7 @@ export interface ListOffersResponse {
    */
   offers: Offer[]
 }
+
 
 export type ListOptionsRequest = {
   /**
@@ -1191,6 +1295,7 @@ export type ListOptionsRequest = {
   name?: string
 }
 
+
 export interface ListOptionsResponse {
   /**
    * Total count of matching options.
@@ -1201,6 +1306,7 @@ export interface ListOptionsResponse {
    */
   options: Option[]
 }
+
 
 export type ListServerEventsRequest = {
   /**
@@ -1225,6 +1331,7 @@ export type ListServerEventsRequest = {
   orderBy?: ListServerEventsRequestOrderBy
 }
 
+
 export interface ListServerEventsResponse {
   /**
    * Total count of matching events.
@@ -1236,10 +1343,12 @@ export interface ListServerEventsResponse {
   events: ServerEvent[]
 }
 
+
 export interface ListServerPrivateNetworksResponse {
   serverPrivateNetworks: ServerPrivateNetwork[]
   totalCount: number
 }
+
 
 export type ListServersRequest = {
   /**
@@ -1284,6 +1393,7 @@ export type ListServersRequest = {
   optionId?: string
 }
 
+
 export interface ListServersResponse {
   /**
    * Total count of matching servers.
@@ -1294,6 +1404,7 @@ export interface ListServersResponse {
    */
   servers: Server[]
 }
+
 
 export type ListSettingsRequest = {
   /**
@@ -1318,6 +1429,7 @@ export type ListSettingsRequest = {
   projectId?: string
 }
 
+
 export interface ListSettingsResponse {
   /**
    * Total count of matching settings.
@@ -1329,6 +1441,7 @@ export interface ListSettingsResponse {
   settings: Setting[]
 }
 
+
 export type MigrateServerToMonthlyOfferRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1339,6 +1452,7 @@ export type MigrateServerToMonthlyOfferRequest = {
    */
   serverId: string
 }
+
 
 export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /**
@@ -1355,6 +1469,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   privateNetworkId: string
 }
 
+
 export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1369,6 +1484,7 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
    */
   privateNetworkId: string
 }
+
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /**
@@ -1405,6 +1521,7 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   projectId?: string
 }
 
+
 export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1419,6 +1536,7 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
    */
   privateNetworkIds: string[]
 }
+
 
 export type RebootServerRequest = {
   /**
@@ -1439,9 +1557,11 @@ export type RebootServerRequest = {
   sshKeyIds?: string[]
 }
 
+
 export interface SetServerPrivateNetworksResponse {
   serverPrivateNetworks: ServerPrivateNetwork[]
 }
+
 
 export type StartBMCAccessRequest = {
   /**
@@ -1457,6 +1577,7 @@ export type StartBMCAccessRequest = {
    */
   ip: string
 }
+
 
 export type StartServerRequest = {
   /**
@@ -1477,6 +1598,7 @@ export type StartServerRequest = {
   sshKeyIds?: string[]
 }
 
+
 export type StopBMCAccessRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1488,6 +1610,7 @@ export type StopBMCAccessRequest = {
   serverId: string
 }
 
+
 export type StopServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1498,6 +1621,7 @@ export type StopServerRequest = {
    */
   serverId: string
 }
+
 
 export type UpdateIPRequest = {
   /**
@@ -1517,6 +1641,7 @@ export type UpdateIPRequest = {
    */
   reverse?: string
 }
+
 
 export type UpdateServerRequest = {
   /**
@@ -1549,6 +1674,7 @@ export type UpdateServerRequest = {
   userData?: string
 }
 
+
 export type UpdateSettingRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1563,6 +1689,7 @@ export type UpdateSettingRequest = {
    */
   enabled?: boolean
 }
+
 
 export type ValidatePartitioningSchemaRequest = {
   /**
@@ -1582,3 +1709,5 @@ export type ValidatePartitioningSchemaRequest = {
    */
   osId: string
 }
+
+

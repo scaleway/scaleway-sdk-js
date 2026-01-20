@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   CreateCronRequest,
   CreateDomainRequest,
@@ -43,7 +43,9 @@ import type {
 
 export const unmarshalCron = (data: unknown): Cron => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Cron' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Cron' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -58,7 +60,9 @@ export const unmarshalCron = (data: unknown): Cron => {
 
 export const unmarshalDomain = (data: unknown): Domain => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Domain' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -73,7 +77,9 @@ export const unmarshalDomain = (data: unknown): Domain => {
 
 const unmarshalSecretHashedValue = (data: unknown): SecretHashedValue => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SecretHashedValue' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SecretHashedValue' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -84,7 +90,9 @@ const unmarshalSecretHashedValue = (data: unknown): SecretHashedValue => {
 
 export const unmarshalFunction = (data: unknown): Function => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Function' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Function' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -120,7 +128,9 @@ export const unmarshalFunction = (data: unknown): Function => {
 
 export const unmarshalNamespace = (data: unknown): Namespace => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -145,7 +155,9 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
 
 export const unmarshalToken = (data: unknown): Token => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Token' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Token' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -162,7 +174,9 @@ export const unmarshalToken = (data: unknown): Token => {
 
 const unmarshalTriggerMnqNatsClientConfig = (data: unknown): TriggerMnqNatsClientConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'TriggerMnqNatsClientConfig' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerMnqNatsClientConfig' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -176,7 +190,9 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown): TriggerMnqNatsClien
 
 const unmarshalTriggerMnqSqsClientConfig = (data: unknown): TriggerMnqSqsClientConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'TriggerMnqSqsClientConfig' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerMnqSqsClientConfig' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -189,7 +205,9 @@ const unmarshalTriggerMnqSqsClientConfig = (data: unknown): TriggerMnqSqsClientC
 
 const unmarshalTriggerSqsClientConfig = (data: unknown): TriggerSqsClientConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerSqsClientConfig' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -202,7 +220,9 @@ const unmarshalTriggerSqsClientConfig = (data: unknown): TriggerSqsClientConfig 
 
 export const unmarshalTrigger = (data: unknown): Trigger => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -221,7 +241,9 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
 
 export const unmarshalDownloadURL = (data: unknown): DownloadURL => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DownloadURL' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DownloadURL' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -232,7 +254,9 @@ export const unmarshalDownloadURL = (data: unknown): DownloadURL => {
 
 export const unmarshalListCronsResponse = (data: unknown): ListCronsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListCronsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListCronsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -243,7 +267,9 @@ export const unmarshalListCronsResponse = (data: unknown): ListCronsResponse => 
 
 export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -254,7 +280,9 @@ export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse
 
 const unmarshalRuntime = (data: unknown): Runtime => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Runtime' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Runtime' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -273,7 +301,9 @@ const unmarshalRuntime = (data: unknown): Runtime => {
 
 export const unmarshalListFunctionRuntimesResponse = (data: unknown): ListFunctionRuntimesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListFunctionRuntimesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListFunctionRuntimesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -284,7 +314,9 @@ export const unmarshalListFunctionRuntimesResponse = (data: unknown): ListFuncti
 
 export const unmarshalListFunctionsResponse = (data: unknown): ListFunctionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListFunctionsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListFunctionsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -295,7 +327,9 @@ export const unmarshalListFunctionsResponse = (data: unknown): ListFunctionsResp
 
 export const unmarshalListNamespacesResponse = (data: unknown): ListNamespacesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -306,7 +340,9 @@ export const unmarshalListNamespacesResponse = (data: unknown): ListNamespacesRe
 
 export const unmarshalListTokensResponse = (data: unknown): ListTokensResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -317,7 +353,9 @@ export const unmarshalListTokensResponse = (data: unknown): ListTokensResponse =
 
 export const unmarshalListTriggersResponse = (data: unknown): ListTriggersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -328,7 +366,9 @@ export const unmarshalListTriggersResponse = (data: unknown): ListTriggersRespon
 
 export const unmarshalUploadURL = (data: unknown): UploadURL => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'UploadURL' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'UploadURL' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -355,7 +395,10 @@ export const marshalCreateDomainRequest = (
   hostname: request.hostname,
 })
 
-const marshalSecret = (request: Secret, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalSecret = (
+  request: Secret,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   key: request.key,
   value: request.value,
 })
@@ -377,10 +420,7 @@ export const marshalCreateFunctionRequest = (
   private_network_id: request.privateNetworkId,
   runtime: request.runtime,
   sandbox: request.sandbox,
-  secret_environment_variables:
-    request.secretEnvironmentVariables !== undefined
-      ? request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults))
-      : undefined,
+  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -394,10 +434,7 @@ export const marshalCreateNamespaceRequest = (
   environment_variables: request.environmentVariables,
   name: request.name || randomName('ns'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  secret_environment_variables:
-    request.secretEnvironmentVariables !== undefined
-      ? request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults))
-      : undefined,
+  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
 })
 
@@ -406,10 +443,14 @@ export const marshalCreateTokenRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  expires_at: request.expiresAt,
+  expires_at: request.expiresAt,  
   ...resolveOneOf([
-    { param: 'function_id', value: request.functionId },
-    { param: 'namespace_id', value: request.namespaceId },
+    {param: 'function_id',
+      value: request.functionId,
+    },
+    {param: 'namespace_id',
+      value: request.namespaceId,
+    },
   ]),
 })
 
@@ -448,28 +489,19 @@ export const marshalCreateTriggerRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   function_id: request.functionId,
-  name: request.name,
+  name: request.name,  
   ...resolveOneOf([
-    {
-      param: 'scw_sqs_config',
-      value:
-        request.scwSqsConfig !== undefined
-          ? marshalCreateTriggerRequestMnqSqsClientConfig(request.scwSqsConfig, defaults)
-          : undefined,
+    {param: 'scw_sqs_config',
+      value: (request.scwSqsConfig !== undefined) ? marshalCreateTriggerRequestMnqSqsClientConfig(request.scwSqsConfig, defaults)
+      : undefined,
     },
-    {
-      param: 'scw_nats_config',
-      value:
-        request.scwNatsConfig !== undefined
-          ? marshalCreateTriggerRequestMnqNatsClientConfig(request.scwNatsConfig, defaults)
-          : undefined,
+    {param: 'scw_nats_config',
+      value: (request.scwNatsConfig !== undefined) ? marshalCreateTriggerRequestMnqNatsClientConfig(request.scwNatsConfig, defaults)
+      : undefined,
     },
-    {
-      param: 'sqs_config',
-      value:
-        request.sqsConfig !== undefined
-          ? marshalCreateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
-          : undefined,
+    {param: 'sqs_config',
+      value: (request.sqsConfig !== undefined) ? marshalCreateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
+      : undefined,
     },
   ]),
 })
@@ -500,10 +532,7 @@ export const marshalUpdateFunctionRequest = (
   redeploy: request.redeploy,
   runtime: request.runtime,
   sandbox: request.sandbox,
-  secret_environment_variables:
-    request.secretEnvironmentVariables !== undefined
-      ? request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults))
-      : undefined,
+  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -514,10 +543,7 @@ export const marshalUpdateNamespaceRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   environment_variables: request.environmentVariables,
-  secret_environment_variables:
-    request.secretEnvironmentVariables !== undefined
-      ? request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults))
-      : undefined,
+  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
 })
 
@@ -534,14 +560,11 @@ export const marshalUpdateTriggerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  name: request.name,
+  name: request.name,  
   ...resolveOneOf([
-    {
-      param: 'sqs_config',
-      value:
-        request.sqsConfig !== undefined
-          ? marshalUpdateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
-          : undefined,
+    {param: 'sqs_config',
+      value: (request.sqsConfig !== undefined) ? marshalUpdateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
+      : undefined,
     },
   ]),
 })

@@ -1,5 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   AccessSecretVersionResponse,
   AddSecretOwnerRequest,
@@ -23,7 +24,9 @@ import type {
 
 const unmarshalEphemeralProperties = (data: unknown): EphemeralProperties => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EphemeralProperties' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EphemeralProperties' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -35,7 +38,9 @@ const unmarshalEphemeralProperties = (data: unknown): EphemeralProperties => {
 
 export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SecretVersion' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SecretVersion' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -43,9 +48,7 @@ export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
     deletedAt: unmarshalDate(data.deleted_at),
     deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
     description: data.description,
-    ephemeralProperties: data.ephemeral_properties
-      ? unmarshalEphemeralProperties(data.ephemeral_properties)
-      : undefined,
+    ephemeralProperties: data.ephemeral_properties ? unmarshalEphemeralProperties(data.ephemeral_properties) : undefined,
     latest: data.latest,
     region: data.region,
     revision: data.revision,
@@ -57,7 +60,9 @@ export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
 
 const unmarshalEphemeralPolicy = (data: unknown): EphemeralPolicy => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'EphemeralPolicy' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'EphemeralPolicy' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -69,7 +74,9 @@ const unmarshalEphemeralPolicy = (data: unknown): EphemeralPolicy => {
 
 export const unmarshalSecret = (data: unknown): Secret => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Secret' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Secret' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -96,7 +103,9 @@ export const unmarshalSecret = (data: unknown): Secret => {
 
 export const unmarshalAccessSecretVersionResponse = (data: unknown): AccessSecretVersionResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AccessSecretVersionResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AccessSecretVersionResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -115,7 +124,8 @@ const unmarshalBrowseSecretsResponseItemFolderDetails = (data: unknown): BrowseS
     )
   }
 
-  return {} as BrowseSecretsResponseItemFolderDetails
+  return {
+  } as BrowseSecretsResponseItemFolderDetails
 }
 
 const unmarshalBrowseSecretsResponseItemSecretDetails = (data: unknown): BrowseSecretsResponseItemSecretDetails => {
@@ -137,7 +147,9 @@ const unmarshalBrowseSecretsResponseItemSecretDetails = (data: unknown): BrowseS
 
 const unmarshalBrowseSecretsResponseItem = (data: unknown): BrowseSecretsResponseItem => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'BrowseSecretsResponseItem' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'BrowseSecretsResponseItem' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -151,7 +163,9 @@ const unmarshalBrowseSecretsResponseItem = (data: unknown): BrowseSecretsRespons
 
 export const unmarshalBrowseSecretsResponse = (data: unknown): BrowseSecretsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'BrowseSecretsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'BrowseSecretsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -163,7 +177,9 @@ export const unmarshalBrowseSecretsResponse = (data: unknown): BrowseSecretsResp
 
 export const unmarshalListSecretTypesResponse = (data: unknown): ListSecretTypesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListSecretTypesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListSecretTypesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -174,7 +190,9 @@ export const unmarshalListSecretTypesResponse = (data: unknown): ListSecretTypes
 
 export const unmarshalListSecretVersionsResponse = (data: unknown): ListSecretVersionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListSecretVersionsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListSecretVersionsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -185,7 +203,9 @@ export const unmarshalListSecretVersionsResponse = (data: unknown): ListSecretVe
 
 export const unmarshalListSecretsResponse = (data: unknown): ListSecretsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListSecretsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListSecretsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -196,7 +216,9 @@ export const unmarshalListSecretsResponse = (data: unknown): ListSecretsResponse
 
 export const unmarshalListTagsResponse = (data: unknown): ListTagsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListTagsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -212,7 +234,10 @@ export const marshalAddSecretOwnerRequest = (
   product: request.product,
 })
 
-const marshalEphemeralPolicy = (request: EphemeralPolicy, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalEphemeralPolicy = (
+  request: EphemeralPolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   action: request.action,
   expires_once_accessed: request.expiresOnceAccessed,
   time_to_live: request.timeToLive,
@@ -223,8 +248,7 @@ export const marshalCreateSecretRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  ephemeral_policy:
-    request.ephemeralPolicy !== undefined ? marshalEphemeralPolicy(request.ephemeralPolicy, defaults) : undefined,
+  ephemeral_policy: ((request.ephemeralPolicy !== undefined) ?  marshalEphemeralPolicy(request.ephemeralPolicy, defaults): undefined),
   key_id: request.keyId,
   name: request.name,
   path: request.path,
@@ -249,8 +273,7 @@ export const marshalUpdateSecretRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  ephemeral_policy:
-    request.ephemeralPolicy !== undefined ? marshalEphemeralPolicy(request.ephemeralPolicy, defaults) : undefined,
+  ephemeral_policy: ((request.ephemeralPolicy !== undefined) ?  marshalEphemeralPolicy(request.ephemeralPolicy, defaults): undefined),
   name: request.name,
   path: request.path,
   tags: request.tags,
@@ -270,8 +293,5 @@ export const marshalUpdateSecretVersionRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  ephemeral_properties:
-    request.ephemeralProperties !== undefined
-      ? marshalEphemeralProperties(request.ephemeralProperties, defaults)
-      : undefined,
+  ephemeral_properties: ((request.ephemeralProperties !== undefined) ?  marshalEphemeralProperties(request.ephemeralProperties, defaults): undefined),
 })

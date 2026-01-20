@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: '@scaleway/sdk-audit-trail',
-  namespace: 'audit-trail',
-  displayName: 'Audit Trail',
-  versions: ['v1alpha1'],
+  name: "@scaleway/sdk-audit-trail",
+  namespace: "audit-trail",
+  displayName: "Audit Trail",
+  versions: ["v1alpha1"]
 } as const
 
 export type Metadata = typeof pkgMetadata

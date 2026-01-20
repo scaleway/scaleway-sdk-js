@@ -20,5 +20,5 @@
     "newlinesBetween": false,
     "order": "asc",
   },
-  "ignorePatterns": ["**/dist/**", "**/build/**", "**/.turbo/**", "**/generated/**", "**/__generated__/**"],
+  "ignorePatterns": ["**/dist/**", "**/build/**", "**/.turbo/**", "**/generated/**", "**/__generated__/**", "*.gen.ts"],
 }

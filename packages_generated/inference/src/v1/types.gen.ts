@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type DeploymentStatus =
   | 'unknown_status'
@@ -12,7 +13,11 @@ export type DeploymentStatus =
   | 'locked'
   | 'scaling'
 
-export type ListDeploymentsRequestOrderBy = 'created_at_desc' | 'created_at_asc' | 'name_asc' | 'name_desc'
+export type ListDeploymentsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'name_asc'
+  | 'name_desc'
 
 export type ListModelsRequestOrderBy =
   | 'display_rank_asc'
@@ -21,9 +26,18 @@ export type ListModelsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ModelStatus = 'unknown_status' | 'preparing' | 'downloading' | 'ready' | 'error'
+export type ModelStatus =
+  | 'unknown_status'
+  | 'preparing'
+  | 'downloading'
+  | 'ready'
+  | 'error'
 
-export type NodeTypeStock = 'unknown_stock' | 'low_stock' | 'out_of_stock' | 'available'
+export type NodeTypeStock =
+  | 'unknown_stock'
+  | 'low_stock'
+  | 'out_of_stock'
+  | 'available'
 
 export interface ModelSupportedQuantization {
   /**
@@ -40,11 +54,15 @@ export interface ModelSupportedQuantization {
   maxContextSize: number
 }
 
+
 export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointPublicNetworkDetails {}
+
+export interface EndpointPublicNetworkDetails {
+}
+
 
 export interface ModelSupportedNode {
   /**
@@ -57,12 +75,14 @@ export interface ModelSupportedNode {
   quantizations: ModelSupportedQuantization[]
 }
 
+
 export interface DeploymentQuantization {
   /**
    * The number of bits each model parameter should be quantized to. The quantization method is chosen based on this value.
    */
   bits: number
 }
+
 
 export interface Endpoint {
   /**
@@ -93,12 +113,14 @@ This CA certificate can be retrieved using the `GetDeploymentCertificate` API ca
   disableAuth: boolean
 }
 
+
 export interface ModelSupportInfo {
   /**
    * List of supported node types.
    */
   nodes: ModelSupportedNode[]
 }
+
 
 export interface EndpointSpec {
   /**
@@ -120,6 +142,7 @@ When setting this field to true, the authentication will be disabled.
   disableAuth: boolean
 }
 
+
 export interface ModelSource {
   url: string
   /**
@@ -128,6 +151,7 @@ export interface ModelSource {
    */
   secret?: string
 }
+
 
 export interface Deployment {
   /**
@@ -200,6 +224,7 @@ export interface Deployment {
   region: ScwRegion
 }
 
+
 export interface Model {
   /**
    * Unique identifier.
@@ -259,6 +284,7 @@ export interface Model {
   sizeBytes: number
 }
 
+
 export interface NodeType {
   /**
    * Name of the node type.
@@ -310,6 +336,7 @@ export interface NodeType {
   region: ScwRegion
 }
 
+
 export type CreateDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -358,6 +385,7 @@ The terms of the EULA can be retrieved using the `GetModelEula` API call.
   quantization?: DeploymentQuantization
 }
 
+
 export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -372,6 +400,7 @@ export type CreateEndpointRequest = {
    */
   endpoint: EndpointSpec
 }
+
 
 export type CreateModelRequest = {
   /**
@@ -392,6 +421,7 @@ export type CreateModelRequest = {
   source: ModelSource
 }
 
+
 export type DeleteDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -402,6 +432,7 @@ export type DeleteDeploymentRequest = {
    */
   deploymentId: string
 }
+
 
 export type DeleteEndpointRequest = {
   /**
@@ -414,6 +445,7 @@ export type DeleteEndpointRequest = {
   endpointId: string
 }
 
+
 export type DeleteModelRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -425,6 +457,7 @@ export type DeleteModelRequest = {
   modelId: string
 }
 
+
 export type GetDeploymentCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -432,6 +465,7 @@ export type GetDeploymentCertificateRequest = {
   region?: ScwRegion
   deploymentId: string
 }
+
 
 export type GetDeploymentRequest = {
   /**
@@ -444,6 +478,7 @@ export type GetDeploymentRequest = {
   deploymentId: string
 }
 
+
 export type GetModelRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -454,6 +489,7 @@ export type GetModelRequest = {
    */
   modelId: string
 }
+
 
 export type ListDeploymentsRequest = {
   /**
@@ -490,6 +526,7 @@ export type ListDeploymentsRequest = {
   tags?: string[]
 }
 
+
 export interface ListDeploymentsResponse {
   /**
    * List of deployments on the current page.
@@ -500,6 +537,7 @@ export interface ListDeploymentsResponse {
    */
   totalCount: number
 }
+
 
 export type ListModelsRequest = {
   /**
@@ -536,6 +574,7 @@ export type ListModelsRequest = {
   tags?: string[]
 }
 
+
 export interface ListModelsResponse {
   /**
    * List of models on the current page.
@@ -546,6 +585,7 @@ export interface ListModelsResponse {
    */
   totalCount: number
 }
+
 
 export type ListNodeTypesRequest = {
   /**
@@ -566,6 +606,7 @@ export type ListNodeTypesRequest = {
   includeDisabledTypes: boolean
 }
 
+
 export interface ListNodeTypesResponse {
   /**
    * List of node types.
@@ -576,6 +617,7 @@ export interface ListNodeTypesResponse {
    */
   totalCount: number
 }
+
 
 export type UpdateDeploymentRequest = {
   /**
@@ -612,6 +654,7 @@ export type UpdateDeploymentRequest = {
   quantization?: DeploymentQuantization
 }
 
+
 export type UpdateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -627,3 +670,5 @@ When setting this field to true, the authentication will be disabled.
    */
   disableAuth?: boolean
 }
+
+

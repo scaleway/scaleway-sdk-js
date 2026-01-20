@@ -1,5 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   BatchCreateMailboxesRequest,
   BatchCreateMailboxesRequestMailboxParameters,
@@ -16,7 +17,9 @@ import type {
 
 export const unmarshalMailbox = (data: unknown): Mailbox => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Mailbox' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Mailbox' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -36,7 +39,9 @@ export const unmarshalMailbox = (data: unknown): Mailbox => {
 
 export const unmarshalDomain = (data: unknown): Domain => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Domain' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -57,7 +62,9 @@ export const unmarshalDomain = (data: unknown): Domain => {
 
 export const unmarshalBatchCreateMailboxesResponse = (data: unknown): BatchCreateMailboxesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'BatchCreateMailboxesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'BatchCreateMailboxesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -67,7 +74,9 @@ export const unmarshalBatchCreateMailboxesResponse = (data: unknown): BatchCreat
 
 const unmarshalDomainRecord = (data: unknown): DomainRecord => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DomainRecord' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DomainRecord' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -86,7 +95,9 @@ const unmarshalDomainRecord = (data: unknown): DomainRecord => {
 
 export const unmarshalGetDomainRecordsResponse = (data: unknown): GetDomainRecordsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'GetDomainRecordsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'GetDomainRecordsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -108,7 +119,9 @@ export const unmarshalGetDomainRecordsResponse = (data: unknown): GetDomainRecor
 
 export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -119,7 +132,9 @@ export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse
 
 export const unmarshalListMailboxesResponse = (data: unknown): ListMailboxesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListMailboxesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListMailboxesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -141,10 +156,7 @@ export const marshalBatchCreateMailboxesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain_id: request.domainId,
-  mailboxes:
-    request.mailboxes !== undefined
-      ? request.mailboxes.map(elt => marshalBatchCreateMailboxesRequestMailboxParameters(elt, defaults))
-      : undefined,
+  mailboxes: ((request.mailboxes !== undefined) ?  request.mailboxes.map(elt => marshalBatchCreateMailboxesRequestMailboxParameters(elt, defaults)): undefined),
   subscription_period: request.subscriptionPeriod,
 })
 

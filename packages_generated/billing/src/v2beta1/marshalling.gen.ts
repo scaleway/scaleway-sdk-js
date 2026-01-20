@@ -1,4 +1,5 @@
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney } from '@scaleway/sdk-client'
+
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
 import type {
   Discount,
   DiscountCoupon,
@@ -14,7 +15,9 @@ import type {
 
 const unmarshalDiscountCoupon = (data: unknown): DiscountCoupon => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DiscountCoupon' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountCoupon' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -24,7 +27,9 @@ const unmarshalDiscountCoupon = (data: unknown): DiscountCoupon => {
 
 const unmarshalDiscountFilter = (data: unknown): DiscountFilter => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DiscountFilter' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountFilter' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -36,7 +41,9 @@ const unmarshalDiscountFilter = (data: unknown): DiscountFilter => {
 
 export const unmarshalDiscount = (data: unknown): Discount => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Discount' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Discount' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -57,7 +64,9 @@ export const unmarshalDiscount = (data: unknown): Discount => {
 
 export const unmarshalInvoice = (data: unknown): Invoice => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Invoice' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Invoice' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -103,7 +112,9 @@ const unmarshalListConsumptionsResponseConsumption = (data: unknown): ListConsum
 
 export const unmarshalListConsumptionsResponse = (data: unknown): ListConsumptionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListConsumptionsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListConsumptionsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -116,7 +127,9 @@ export const unmarshalListConsumptionsResponse = (data: unknown): ListConsumptio
 
 export const unmarshalListDiscountsResponse = (data: unknown): ListDiscountsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListDiscountsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListDiscountsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -127,7 +140,9 @@ export const unmarshalListDiscountsResponse = (data: unknown): ListDiscountsResp
 
 export const unmarshalListInvoicesResponse = (data: unknown): ListInvoicesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListInvoicesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListInvoicesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -138,7 +153,9 @@ export const unmarshalListInvoicesResponse = (data: unknown): ListInvoicesRespon
 
 const unmarshalListTaxesResponseTax = (data: unknown): ListTaxesResponseTax => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListTaxesResponseTax' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListTaxesResponseTax' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -151,7 +168,9 @@ const unmarshalListTaxesResponseTax = (data: unknown): ListTaxesResponseTax => {
 
 export const unmarshalListTaxesResponse = (data: unknown): ListTaxesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListTaxesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListTaxesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {

@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type DeploymentStatus =
   | 'unknown_status'
@@ -17,24 +18,42 @@ export type DeploymentStatus =
   | 'starting'
   | 'stopped'
 
-export type EndpointServiceProtocol = 'unknown_protocol' | 'tcp' | 'https' | 'mysql'
+export type EndpointServiceProtocol =
+  | 'unknown_protocol'
+  | 'tcp'
+  | 'https'
+  | 'mysql'
 
-export type ListDatabasesRequestOrderBy = 'name_asc' | 'name_desc' | 'size_asc' | 'size_desc'
+export type ListDatabasesRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
+  | 'size_asc'
+  | 'size_desc'
 
-export type ListDeploymentsRequestOrderBy = 'created_at_desc' | 'created_at_asc' | 'name_asc' | 'name_desc'
+export type ListDeploymentsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'name_asc'
+  | 'name_desc'
 
-export type ListUsersRequestOrderBy = 'name_asc' | 'name_desc'
+export type ListUsersRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
 
 export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointPublicDetails {}
+
+export interface EndpointPublicDetails {
+}
+
 
 export interface EndpointService {
   protocol: EndpointServiceProtocol
   port: number
 }
+
 
 export interface EndpointSpecPrivateNetworkDetails {
   /**
@@ -43,7 +62,10 @@ export interface EndpointSpecPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointSpecPublicDetails {}
+
+export interface EndpointSpecPublicDetails {
+}
+
 
 export interface Endpoint {
   /**
@@ -72,6 +94,7 @@ export interface Endpoint {
   public?: EndpointPublicDetails
 }
 
+
 export interface EndpointSpec {
   /**
    *
@@ -85,6 +108,7 @@ export interface EndpointSpec {
   privateNetwork?: EndpointSpecPrivateNetworkDetails
 }
 
+
 export interface Database {
   /**
    * Name of the database.
@@ -95,6 +119,7 @@ export interface Database {
    */
   size: number
 }
+
 
 export interface Deployment {
   /**
@@ -163,6 +188,7 @@ export interface Deployment {
   region: ScwRegion
 }
 
+
 export interface Preset {
   /**
    * Name of the preset.
@@ -194,6 +220,7 @@ export interface Preset {
   shardCount: number
 }
 
+
 export interface User {
   /**
    * Name of the user.
@@ -205,6 +232,7 @@ export interface User {
   isAdmin: boolean
 }
 
+
 export interface Version {
   /**
    * Deployment version.
@@ -215,6 +243,7 @@ export interface Version {
    */
   endOfLifeAt?: Date
 }
+
 
 export type CreateDatabaseRequest = {
   /**
@@ -230,6 +259,7 @@ export type CreateDatabaseRequest = {
    */
   name: string
 }
+
 
 export type CreateDeploymentRequest = {
   /**
@@ -282,6 +312,7 @@ export type CreateDeploymentRequest = {
   ramPerCpu: number
 }
 
+
 export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -296,6 +327,7 @@ export type CreateEndpointRequest = {
    */
   endpoint?: EndpointSpec
 }
+
 
 export type CreateUserRequest = {
   /**
@@ -320,6 +352,7 @@ export type CreateUserRequest = {
   isAdmin: boolean
 }
 
+
 export type DeleteDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -335,6 +368,7 @@ export type DeleteDatabaseRequest = {
   name: string
 }
 
+
 export type DeleteDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -346,6 +380,7 @@ export type DeleteDeploymentRequest = {
   deploymentId: string
 }
 
+
 export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -356,6 +391,7 @@ export type DeleteEndpointRequest = {
    */
   endpointId: string
 }
+
 
 export type DeleteUserRequest = {
   /**
@@ -372,6 +408,7 @@ export type DeleteUserRequest = {
   name: string
 }
 
+
 export type GetDeploymentCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -383,6 +420,7 @@ export type GetDeploymentCertificateRequest = {
   deploymentId: string
 }
 
+
 export type GetDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -393,6 +431,7 @@ export type GetDeploymentRequest = {
    */
   deploymentId: string
 }
+
 
 export type ListDatabasesRequest = {
   /**
@@ -415,6 +454,7 @@ export type ListDatabasesRequest = {
   pageSize?: number
 }
 
+
 export interface ListDatabasesResponse {
   /**
    * List of databases associated with the deployment.
@@ -425,6 +465,7 @@ export interface ListDatabasesResponse {
    */
   totalCount: number
 }
+
 
 export type ListDeploymentsRequest = {
   /**
@@ -455,6 +496,7 @@ export type ListDeploymentsRequest = {
   pageSize?: number
 }
 
+
 export interface ListDeploymentsResponse {
   /**
    * List of all deployments available in an Organization or Project.
@@ -466,6 +508,7 @@ export interface ListDeploymentsResponse {
   totalCount: number
 }
 
+
 export type ListPresetsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -474,6 +517,7 @@ export type ListPresetsRequest = {
   page?: number
   pageSize?: number
 }
+
 
 export interface ListPresetsResponse {
   /**
@@ -485,6 +529,7 @@ export interface ListPresetsResponse {
    */
   totalCount: number
 }
+
 
 export type ListUsersRequest = {
   /**
@@ -507,6 +552,7 @@ export type ListUsersRequest = {
   pageSize?: number
 }
 
+
 export interface ListUsersResponse {
   /**
    * List of users associated with the deployment.
@@ -518,6 +564,7 @@ export interface ListUsersResponse {
   totalCount: number
 }
 
+
 export type ListVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -527,6 +574,7 @@ export type ListVersionsRequest = {
   page?: number
   pageSize?: number
 }
+
 
 export interface ListVersionsResponse {
   /**
@@ -539,6 +587,7 @@ export interface ListVersionsResponse {
   totalCount: number
 }
 
+
 export type StartDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -550,6 +599,7 @@ export type StartDeploymentRequest = {
   deploymentId: string
 }
 
+
 export type StopDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -560,6 +610,7 @@ export type StopDeploymentRequest = {
    */
   deploymentId: string
 }
+
 
 export type UpdateDeploymentRequest = {
   /**
@@ -592,6 +643,7 @@ export type UpdateDeploymentRequest = {
   replicaCount?: number
 }
 
+
 export type UpdateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -614,3 +666,5 @@ export type UpdateUserRequest = {
    */
   isAdmin?: boolean
 }
+
+

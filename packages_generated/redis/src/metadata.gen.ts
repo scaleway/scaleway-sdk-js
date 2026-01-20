@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: '@scaleway/sdk-redis',
-  namespace: 'redis',
-  displayName: 'Redis',
-  versions: ['v1'],
+  name: "@scaleway/sdk-redis",
+  namespace: "redis",
+  displayName: "Redis",
+  versions: ["v1"]
 } as const
 
 export type Metadata = typeof pkgMetadata

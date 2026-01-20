@@ -1,12 +1,22 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
 
-export type ContainerPrivacy = 'unknown_privacy' | 'public' | 'private'
 
-export type ContainerProtocol = 'unknown_protocol' | 'http1' | 'h2c'
+export type ContainerPrivacy =
+  | 'unknown_privacy'
+  | 'public'
+  | 'private'
 
-export type ContainerSandbox = 'unknown_sandbox' | 'v1' | 'v2'
+export type ContainerProtocol =
+  | 'unknown_protocol'
+  | 'http1'
+  | 'h2c'
+
+export type ContainerSandbox =
+  | 'unknown_sandbox'
+  | 'v1'
+  | 'v2'
 
 export type ContainerStatus =
   | 'unknown_status'
@@ -38,13 +48,29 @@ export type DomainStatus =
   | 'locking'
   | 'upgrading'
 
-export type ListContainersRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
+export type ListContainersRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
 
-export type ListDomainsRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'hostname_asc' | 'hostname_desc'
+export type ListDomainsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'hostname_asc'
+  | 'hostname_desc'
 
-export type ListNamespacesRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
+export type ListNamespacesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
 
-export type ListTriggersRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
+export type ListTriggersRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
 
 export type NamespaceStatus =
   | 'unknown_status'
@@ -57,9 +83,19 @@ export type NamespaceStatus =
   | 'creating'
   | 'upgrading'
 
-export type TriggerDestinationConfigHttpMethod = 'unknown_http_method' | 'get' | 'post' | 'put' | 'patch' | 'delete'
+export type TriggerDestinationConfigHttpMethod =
+  | 'unknown_http_method'
+  | 'get'
+  | 'post'
+  | 'put'
+  | 'patch'
+  | 'delete'
 
-export type TriggerSourceType = 'unknown_source_type' | 'cron' | 'sqs' | 'nats'
+export type TriggerSourceType =
+  | 'unknown_source_type'
+  | 'cron'
+  | 'sqs'
+  | 'nats'
 
 export type TriggerStatus =
   | 'unknown_status'
@@ -87,7 +123,10 @@ export interface ContainerProbeHTTPProbe {
   path: string
 }
 
-export interface ContainerProbeTCPProbe {}
+
+export interface ContainerProbeTCPProbe {
+}
+
 
 export interface ContainerProbe {
   /**
@@ -116,6 +155,7 @@ export interface ContainerProbe {
   http?: ContainerProbeHTTPProbe
 }
 
+
 export interface ContainerScalingOption {
   /**
    * Scale depending on the number of concurrent requests being processed per container instance. The threshold value is the number of concurrent requests above which the container will be scaled up.
@@ -137,6 +177,7 @@ export interface ContainerScalingOption {
   memoryUsageThreshold?: number
 }
 
+
 export interface TriggerCronConfig {
   /**
    * UNIX cron schedule to run job (e.g., "* * * * *").
@@ -156,6 +197,7 @@ export interface TriggerCronConfig {
   headers: Record<string, string>
 }
 
+
 export interface TriggerDestinationConfig {
   /**
    * The HTTP path to send the request to (e.g., "/my-webhook-endpoint").
@@ -167,6 +209,7 @@ export interface TriggerDestinationConfig {
   httpMethod: TriggerDestinationConfigHttpMethod
 }
 
+
 export interface TriggerNATSConfig {
   /**
    * The URLs of the NATS servers (e.g., "nats://nats.mnq.fr-par.scaleway.com:4222").
@@ -177,6 +220,7 @@ export interface TriggerNATSConfig {
    */
   subject: string
 }
+
 
 export interface TriggerSQSConfig {
   /**
@@ -197,11 +241,15 @@ export interface TriggerSQSConfig {
   queueUrl: string
 }
 
+
 export interface UpdateContainerRequestProbeHTTPProbe {
   path?: string
 }
 
-export interface UpdateContainerRequestProbeTCPProbe {}
+
+export interface UpdateContainerRequestProbeTCPProbe {
+}
+
 
 export interface CreateTriggerRequestCronConfig {
   /**
@@ -222,6 +270,7 @@ export interface CreateTriggerRequestCronConfig {
   headers: Record<string, string>
 }
 
+
 export interface CreateTriggerRequestDestinationConfig {
   /**
    * The HTTP path to send the request to (e.g., "/my-webhook-endpoint").
@@ -232,6 +281,7 @@ export interface CreateTriggerRequestDestinationConfig {
    */
   httpMethod: CreateTriggerRequestDestinationConfigHttpMethod
 }
+
 
 export interface CreateTriggerRequestNATSConfig {
   /**
@@ -247,6 +297,7 @@ export interface CreateTriggerRequestNATSConfig {
    */
   credentialsFileContent: string
 }
+
 
 export interface CreateTriggerRequestSQSConfig {
   /**
@@ -270,6 +321,7 @@ export interface CreateTriggerRequestSQSConfig {
    */
   queueUrl: string
 }
+
 
 export interface Container {
   /**
@@ -408,6 +460,7 @@ Possible check types:
   region: ScwRegion
 }
 
+
 export interface Domain {
   /**
    * Domain unique ID.
@@ -442,6 +495,7 @@ export interface Domain {
    */
   tags: string[]
 }
+
 
 export interface Namespace {
   /**
@@ -497,6 +551,7 @@ export interface Namespace {
    */
   region: ScwRegion
 }
+
 
 export interface Trigger {
   /**
@@ -563,6 +618,7 @@ export interface Trigger {
   updatedAt?: Date
 }
 
+
 export interface UpdateContainerRequestProbe {
   failureThreshold?: number
   interval?: string
@@ -578,6 +634,7 @@ export interface UpdateContainerRequestProbe {
    */
   tcp?: UpdateContainerRequestProbeTCPProbe
 }
+
 
 export interface UpdateTriggerRequestCronConfig {
   /**
@@ -598,6 +655,7 @@ export interface UpdateTriggerRequestCronConfig {
   headers?: Record<string, string>
 }
 
+
 export interface UpdateTriggerRequestDestinationConfig {
   /**
    * The HTTP path to send the request to (e.g., "/my-webhook-endpoint").
@@ -608,6 +666,7 @@ export interface UpdateTriggerRequestDestinationConfig {
    */
   httpMethod?: UpdateTriggerRequestDestinationConfigHttpMethod
 }
+
 
 export interface UpdateTriggerRequestNATSConfig {
   /**
@@ -623,6 +682,7 @@ export interface UpdateTriggerRequestNATSConfig {
    */
   credentialsFileContent?: string
 }
+
 
 export interface UpdateTriggerRequestSQSConfig {
   /**
@@ -646,6 +706,7 @@ export interface UpdateTriggerRequestSQSConfig {
    */
   queueUrl?: string
 }
+
 
 export type CreateContainerRequest = {
   /**
@@ -760,6 +821,7 @@ Possible check types:
   args?: string[]
 }
 
+
 export type CreateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -778,6 +840,7 @@ export type CreateDomainRequest = {
    */
   tags?: string[]
 }
+
 
 export type CreateNamespaceRequest = {
   /**
@@ -809,6 +872,7 @@ export type CreateNamespaceRequest = {
    */
   tags?: string[]
 }
+
 
 export type CreateTriggerRequest = {
   /**
@@ -855,6 +919,7 @@ export type CreateTriggerRequest = {
   natsConfig?: CreateTriggerRequestNATSConfig
 }
 
+
 export type DeleteContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -865,6 +930,7 @@ export type DeleteContainerRequest = {
    */
   containerId: string
 }
+
 
 export type DeleteDomainRequest = {
   /**
@@ -877,6 +943,7 @@ export type DeleteDomainRequest = {
   domainId: string
 }
 
+
 export type DeleteNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -887,6 +954,7 @@ export type DeleteNamespaceRequest = {
    */
   namespaceId: string
 }
+
 
 export type DeleteTriggerRequest = {
   /**
@@ -899,6 +967,7 @@ export type DeleteTriggerRequest = {
   triggerId: string
 }
 
+
 export type GetContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -906,6 +975,7 @@ export type GetContainerRequest = {
   region?: ScwRegion
   containerId: string
 }
+
 
 export type GetDomainRequest = {
   /**
@@ -915,6 +985,7 @@ export type GetDomainRequest = {
   domainId: string
 }
 
+
 export type GetNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -923,12 +994,14 @@ export type GetNamespaceRequest = {
   namespaceId: string
 }
 
+
 export type GetServiceInfoRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
 }
+
 
 export type GetTriggerRequest = {
   /**
@@ -937,6 +1010,7 @@ export type GetTriggerRequest = {
   region?: ScwRegion
   triggerId: string
 }
+
 
 export type ListContainersRequest = {
   /**
@@ -952,10 +1026,12 @@ export type ListContainersRequest = {
   name?: string
 }
 
+
 export interface ListContainersResponse {
   containers: Container[]
   totalCount: number
 }
+
 
 export type ListDomainsRequest = {
   /**
@@ -971,10 +1047,12 @@ export type ListDomainsRequest = {
   containerId?: string
 }
 
+
 export interface ListDomainsResponse {
   domains: Domain[]
   totalCount: number
 }
+
 
 export type ListNamespacesRequest = {
   /**
@@ -989,10 +1067,12 @@ export type ListNamespacesRequest = {
   name?: string
 }
 
+
 export interface ListNamespacesResponse {
   namespaces: Namespace[]
   totalCount: number
 }
+
 
 export type ListTriggersRequest = {
   /**
@@ -1008,10 +1088,12 @@ export type ListTriggersRequest = {
   containerId?: string
 }
 
+
 export interface ListTriggersResponse {
   triggers: Trigger[]
   totalCount: number
 }
+
 
 export type RedeployContainerRequest = {
   /**
@@ -1023,6 +1105,7 @@ export type RedeployContainerRequest = {
    */
   containerId: string
 }
+
 
 export type UpdateContainerRequest = {
   /**
@@ -1133,6 +1216,7 @@ Possible check types:
   args?: string[]
 }
 
+
 export type UpdateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1147,6 +1231,7 @@ export type UpdateDomainRequest = {
    */
   tags?: string[]
 }
+
 
 export type UpdateNamespaceRequest = {
   /**
@@ -1174,6 +1259,7 @@ export type UpdateNamespaceRequest = {
    */
   tags?: string[]
 }
+
 
 export type UpdateTriggerRequest = {
   /**
@@ -1219,3 +1305,5 @@ export type UpdateTriggerRequest = {
    */
   natsConfig?: UpdateTriggerRequestNATSConfig
 }
+
+

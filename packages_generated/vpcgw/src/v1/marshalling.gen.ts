@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   CreateDHCPEntryRequest,
   CreateDHCPRequest,
@@ -44,7 +44,9 @@ import type {
 
 export const unmarshalDHCP = (data: unknown): DHCP => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DHCP' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DHCP' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -72,7 +74,9 @@ export const unmarshalDHCP = (data: unknown): DHCP => {
 
 const unmarshalIpamConfig = (data: unknown): IpamConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'IpamConfig' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'IpamConfig' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -83,7 +87,9 @@ const unmarshalIpamConfig = (data: unknown): IpamConfig => {
 
 export const unmarshalGatewayNetwork = (data: unknown): GatewayNetwork => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'GatewayNetwork' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'GatewayNetwork' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -105,7 +111,9 @@ export const unmarshalGatewayNetwork = (data: unknown): GatewayNetwork => {
 
 export const unmarshalIP = (data: unknown): IP => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'IP' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'IP' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -124,7 +132,9 @@ export const unmarshalIP = (data: unknown): IP => {
 
 export const unmarshalDHCPEntry = (data: unknown): DHCPEntry => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DHCPEntry' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DHCPEntry' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -142,7 +152,9 @@ export const unmarshalDHCPEntry = (data: unknown): DHCPEntry => {
 
 const unmarshalGatewayType = (data: unknown): GatewayType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'GatewayType' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'GatewayType' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -154,7 +166,9 @@ const unmarshalGatewayType = (data: unknown): GatewayType => {
 
 export const unmarshalGateway = (data: unknown): Gateway => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Gateway' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Gateway' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -183,7 +197,9 @@ export const unmarshalGateway = (data: unknown): Gateway => {
 
 export const unmarshalPATRule = (data: unknown): PATRule => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'PATRule' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'PATRule' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -201,7 +217,9 @@ export const unmarshalPATRule = (data: unknown): PATRule => {
 
 export const unmarshalListDHCPEntriesResponse = (data: unknown): ListDHCPEntriesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListDHCPEntriesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListDHCPEntriesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -212,7 +230,9 @@ export const unmarshalListDHCPEntriesResponse = (data: unknown): ListDHCPEntries
 
 export const unmarshalListDHCPsResponse = (data: unknown): ListDHCPsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListDHCPsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListDHCPsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -223,7 +243,9 @@ export const unmarshalListDHCPsResponse = (data: unknown): ListDHCPsResponse => 
 
 export const unmarshalListGatewayNetworksResponse = (data: unknown): ListGatewayNetworksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListGatewayNetworksResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewayNetworksResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -234,7 +256,9 @@ export const unmarshalListGatewayNetworksResponse = (data: unknown): ListGateway
 
 export const unmarshalListGatewayTypesResponse = (data: unknown): ListGatewayTypesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListGatewayTypesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewayTypesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -244,7 +268,9 @@ export const unmarshalListGatewayTypesResponse = (data: unknown): ListGatewayTyp
 
 export const unmarshalListGatewaysResponse = (data: unknown): ListGatewaysResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListGatewaysResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListGatewaysResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -255,7 +281,9 @@ export const unmarshalListGatewaysResponse = (data: unknown): ListGatewaysRespon
 
 export const unmarshalListIPsResponse = (data: unknown): ListIPsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListIPsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListIPsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -266,7 +294,9 @@ export const unmarshalListIPsResponse = (data: unknown): ListIPsResponse => {
 
 export const unmarshalListPATRulesResponse = (data: unknown): ListPATRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListPATRulesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListPATRulesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -277,7 +307,9 @@ export const unmarshalListPATRulesResponse = (data: unknown): ListPATRulesRespon
 
 export const unmarshalSetDHCPEntriesResponse = (data: unknown): SetDHCPEntriesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SetDHCPEntriesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SetDHCPEntriesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -287,7 +319,9 @@ export const unmarshalSetDHCPEntriesResponse = (data: unknown): SetDHCPEntriesRe
 
 export const unmarshalSetPATRulesResponse = (data: unknown): SetPATRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SetPATRulesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SetPATRulesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -339,17 +373,21 @@ export const marshalCreateGatewayNetworkRequest = (
   enable_dhcp: request.enableDhcp,
   enable_masquerade: request.enableMasquerade,
   gateway_id: request.gatewayId,
-  private_network_id: request.privateNetworkId,
+  private_network_id: request.privateNetworkId,  
   ...resolveOneOf<string | Record<string, unknown>>([
-    { param: 'dhcp_id', value: request.dhcpId },
-    { param: 'dhcp', value: request.dhcp !== undefined ? marshalCreateDHCPRequest(request.dhcp, defaults) : undefined },
-    { param: 'address', value: request.address },
-    {
-      param: 'ipam_config',
-      value:
-        request.ipamConfig !== undefined
-          ? marshalCreateGatewayNetworkRequestIpamConfig(request.ipamConfig, defaults)
-          : undefined,
+    {param: 'dhcp_id',
+      value: request.dhcpId,
+    },
+    {param: 'dhcp',
+      value: (request.dhcp !== undefined) ? marshalCreateDHCPRequest(request.dhcp, defaults)
+      : undefined,
+    },
+    {param: 'address',
+      value: request.address,
+    },
+    {param: 'ipam_config',
+      value: (request.ipamConfig !== undefined) ? marshalCreateGatewayNetworkRequestIpamConfig(request.ipamConfig, defaults)
+      : undefined,
     },
   ]),
 })
@@ -369,7 +407,10 @@ export const marshalCreateGatewayRequest = (
   upstream_dns_servers: request.upstreamDnsServers,
 })
 
-export const marshalCreateIPRequest = (request: CreateIPRequest, defaults: DefaultValues): Record<string, unknown> => ({
+export const marshalCreateIPRequest = (
+  request: CreateIPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
 })
@@ -397,10 +438,7 @@ export const marshalSetDHCPEntriesRequest = (
   request: SetDHCPEntriesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  dhcp_entries:
-    request.dhcpEntries !== undefined
-      ? request.dhcpEntries.map(elt => marshalSetDHCPEntriesRequestEntry(elt, defaults))
-      : undefined,
+  dhcp_entries: ((request.dhcpEntries !== undefined) ?  request.dhcpEntries.map(elt => marshalSetDHCPEntriesRequestEntry(elt, defaults)): undefined),
   gateway_network_id: request.gatewayNetworkId,
 })
 
@@ -419,7 +457,7 @@ export const marshalSetPATRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
-  pat_rules: request.patRules.map(elt => marshalSetPATRulesRequestRule(elt, defaults)),
+  pat_rules:  request.patRules.map(elt => marshalSetPATRulesRequestRule(elt, defaults)),
 })
 
 export const marshalUpdateDHCPEntryRequest = (
@@ -461,16 +499,17 @@ export const marshalUpdateGatewayNetworkRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable_dhcp: request.enableDhcp,
-  enable_masquerade: request.enableMasquerade,
+  enable_masquerade: request.enableMasquerade,  
   ...resolveOneOf<string | Record<string, unknown>>([
-    { param: 'dhcp_id', value: request.dhcpId },
-    { param: 'address', value: request.address },
-    {
-      param: 'ipam_config',
-      value:
-        request.ipamConfig !== undefined
-          ? marshalUpdateGatewayNetworkRequestIpamConfig(request.ipamConfig, defaults)
-          : undefined,
+    {param: 'dhcp_id',
+      value: request.dhcpId,
+    },
+    {param: 'address',
+      value: request.address,
+    },
+    {param: 'ipam_config',
+      value: (request.ipamConfig !== undefined) ? marshalUpdateGatewayNetworkRequestIpamConfig(request.ipamConfig, defaults)
+      : undefined,
     },
   ]),
 })
@@ -487,7 +526,10 @@ export const marshalUpdateGatewayRequest = (
   upstream_dns_servers: request.upstreamDnsServers,
 })
 
-export const marshalUpdateIPRequest = (request: UpdateIPRequest, defaults: DefaultValues): Record<string, unknown> => ({
+export const marshalUpdateIPRequest = (
+  request: UpdateIPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   gateway_id: request.gatewayId,
   reverse: request.reverse,
   tags: request.tags,

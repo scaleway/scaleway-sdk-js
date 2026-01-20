@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: '@scaleway/sdk-serverless-sqldb',
-  namespace: 'serverless-sqldb',
-  displayName: 'Serverless Sqldb',
-  versions: ['v1alpha1'],
+  name: "@scaleway/sdk-serverless-sqldb",
+  namespace: "serverless-sqldb",
+  displayName: "Serverless Sqldb",
+  versions: ["v1alpha1"]
 } as const
 
 export type Metadata = typeof pkgMetadata

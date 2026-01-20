@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP } from './content.gen.js'
+import {FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP,} from './content.gen.js'
 import {
   marshalAttachFlexibleIPRequest,
   marshalCreateFlexibleIPRequest,
@@ -56,10 +56,18 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    zones: ['fr-par-1', 'fr-par-2', 'nl-ams-1', 'nl-ams-2', 'pl-waw-2', 'pl-waw-3'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      zones: [
+        'fr-par-1',
+        'fr-par-2',
+        'nl-ams-1',
+        'nl-ams-2',
+        'pl-waw-2',
+        'pl-waw-3',
+      ],
+    })
+  
   /**
    * Create a new flexible IP. Generate a new flexible IP within a given zone, specifying its configuration including Project ID and description.
    *
@@ -69,7 +77,9 @@ export class API extends ParentAPI {
   createFlexibleIP = (request: Readonly<CreateFlexibleIPRequest>) =>
     this.client.fetch<FlexibleIP>(
       {
-        body: JSON.stringify(marshalCreateFlexibleIPRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateFlexibleIPRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips`,
@@ -77,6 +87,7 @@ export class API extends ParentAPI {
       unmarshalFlexibleIP,
     )
 
+  
   /**
    * Get an existing flexible IP. Retrieve information about an existing flexible IP, specified by its ID and zone. Its full details, including Project ID, description and status, are returned in the response object.
    *
@@ -91,7 +102,7 @@ export class API extends ParentAPI {
       },
       unmarshalFlexibleIP,
     )
-
+  
   /**
    * Waits for {@link FlexibleIP} to be in a final state.
    *
@@ -99,7 +110,10 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of FlexibleIP
    */
-  waitForFlexibleIP = (request: Readonly<GetFlexibleIPRequest>, options?: Readonly<WaitForOptions<FlexibleIP>>) =>
+  waitForFlexibleIP = (
+    request: Readonly<GetFlexibleIPRequest>,
+    options?: Readonly<WaitForOptions<FlexibleIP>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP.includes(res.status))),
       this.getFlexibleIP,
@@ -107,6 +121,7 @@ export class API extends ParentAPI {
       options,
     )
 
+  
   protected pageOfListFlexibleIPs = (request: Readonly<ListFlexibleIPsRequest> = {}) =>
     this.client.fetch<ListFlexibleIPsResponse>(
       {
@@ -125,7 +140,7 @@ export class API extends ParentAPI {
       },
       unmarshalListFlexibleIPsResponse,
     )
-
+  
   /**
    * List flexible IPs. List all flexible IPs within a given zone.
    *
@@ -135,6 +150,7 @@ export class API extends ParentAPI {
   listFlexibleIPs = (request: Readonly<ListFlexibleIPsRequest> = {}) =>
     enrichForPagination('flexibleIps', this.pageOfListFlexibleIPs, request)
 
+  
   /**
    * Update an existing flexible IP. Update the parameters of an existing flexible IP, specified by its ID and zone. These parameters include tags and description.
    *
@@ -144,7 +160,9 @@ export class API extends ParentAPI {
   updateFlexibleIP = (request: Readonly<UpdateFlexibleIPRequest>) =>
     this.client.fetch<FlexibleIP>(
       {
-        body: JSON.stringify(marshalUpdateFlexibleIPRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateFlexibleIPRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
@@ -152,17 +170,21 @@ export class API extends ParentAPI {
       unmarshalFlexibleIP,
     )
 
+  
   /**
    * Delete an existing flexible IP. Delete an existing flexible IP, specified by its ID and zone. Note that deleting a flexible IP is permanent and cannot be undone.
    *
    * @param request - The request {@link DeleteFlexibleIPRequest}
    */
   deleteFlexibleIP = (request: Readonly<DeleteFlexibleIPRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
+      },
+    )
 
+  
   /**
    * Attach an existing flexible IP to a server. Attach an existing flexible IP to a specified Elastic Metal server.
    *
@@ -172,7 +194,9 @@ export class API extends ParentAPI {
   attachFlexibleIP = (request: Readonly<AttachFlexibleIPRequest>) =>
     this.client.fetch<AttachFlexibleIPsResponse>(
       {
-        body: JSON.stringify(marshalAttachFlexibleIPRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalAttachFlexibleIPRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/attach`,
@@ -180,6 +204,7 @@ export class API extends ParentAPI {
       unmarshalAttachFlexibleIPsResponse,
     )
 
+  
   /**
    * Detach an existing flexible IP from a server. Detach an existing flexible IP from a specified Elastic Metal server.
    *
@@ -189,7 +214,9 @@ export class API extends ParentAPI {
   detachFlexibleIP = (request: Readonly<DetachFlexibleIPRequest>) =>
     this.client.fetch<DetachFlexibleIPsResponse>(
       {
-        body: JSON.stringify(marshalDetachFlexibleIPRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDetachFlexibleIPRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/detach`,
@@ -197,6 +224,7 @@ export class API extends ParentAPI {
       unmarshalDetachFlexibleIPsResponse,
     )
 
+  
   /**
    * Generate a virtual MAC address on an existing flexible IP. Generate a virtual MAC (Media Access Control) address on an existing flexible IP.
    *
@@ -206,7 +234,9 @@ export class API extends ParentAPI {
   generateMACAddr = (request: Readonly<GenerateMACAddrRequest>) =>
     this.client.fetch<FlexibleIP>(
       {
-        body: JSON.stringify(marshalGenerateMACAddrRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalGenerateMACAddrRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
@@ -214,6 +244,7 @@ export class API extends ParentAPI {
       unmarshalFlexibleIP,
     )
 
+  
   /**
    * Duplicate a virtual MAC address to another flexible IP. Duplicate a virtual MAC address from a given flexible IP to another flexible IP attached to the same server.
    *
@@ -223,7 +254,9 @@ export class API extends ParentAPI {
   duplicateMACAddr = (request: Readonly<DuplicateMACAddrRequest>) =>
     this.client.fetch<FlexibleIP>(
       {
-        body: JSON.stringify(marshalDuplicateMACAddrRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDuplicateMACAddrRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac/duplicate`,
@@ -231,6 +264,7 @@ export class API extends ParentAPI {
       unmarshalFlexibleIP,
     )
 
+  
   /**
    * Relocate an existing virtual MAC address to a different flexible IP. Relocate a virtual MAC (Media Access Control) address from an existing flexible IP to a different flexible IP.
    *
@@ -240,7 +274,9 @@ export class API extends ParentAPI {
   moveMACAddr = (request: Readonly<MoveMACAddrRequest>) =>
     this.client.fetch<FlexibleIP>(
       {
-        body: JSON.stringify(marshalMoveMACAddrRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalMoveMACAddrRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac/move`,
@@ -248,14 +284,20 @@ export class API extends ParentAPI {
       unmarshalFlexibleIP,
     )
 
+  
   /**
    * Detach a given virtual MAC address from an existing flexible IP. Detach a given MAC (Media Access Control) address from an existing flexible IP.
    *
    * @param request - The request {@link DeleteMACAddrRequest}
    */
   deleteMACAddr = (request: Readonly<DeleteMACAddrRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
+      },
+    )
+
+  
 }
+

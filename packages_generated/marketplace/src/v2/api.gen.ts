@@ -1,7 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import { enrichForPagination, API as ParentAPI, resolveOneOf, urlParams, validatePathParam } from '@scaleway/sdk-client'
+import {
+  enrichForPagination,
+  API as ParentAPI,
+  resolveOneOf,
+  urlParams,
+  validatePathParam,
+} from '@scaleway/sdk-client'
 import {
   unmarshalCategory,
   unmarshalImage,
@@ -53,15 +59,17 @@ export class API extends ParentAPI {
       },
       unmarshalListImagesResponse,
     )
-
+  
   /**
    * List marketplace images. List all available images on the marketplace, their UUID, CPU architecture and description.
    *
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
    */
-  listImages = (request: Readonly<ListImagesRequest>) => enrichForPagination('images', this.pageOfListImages, request)
+  listImages = (request: Readonly<ListImagesRequest>) =>
+    enrichForPagination('images', this.pageOfListImages, request)
 
+  
   /**
    * Get a specific marketplace image. Get detailed information about a marketplace image, specified by its `image_id` (UUID format).
    *
@@ -77,6 +85,7 @@ export class API extends ParentAPI {
       unmarshalImage,
     )
 
+  
   protected pageOfListVersions = (request: Readonly<ListVersionsRequest>) =>
     this.client.fetch<ListVersionsResponse>(
       {
@@ -91,7 +100,7 @@ export class API extends ParentAPI {
       },
       unmarshalListVersionsResponse,
     )
-
+  
   /**
    * List versions of an Image. Get a list of all available version of an image, specified by its `image_id` (UUID format).
    *
@@ -101,6 +110,7 @@ export class API extends ParentAPI {
   listVersions = (request: Readonly<ListVersionsRequest>) =>
     enrichForPagination('versions', this.pageOfListVersions, request)
 
+  
   /**
    * Get a specific image version. Get information such as the name, creation date, last update and published date for an image version specified by its `version_id` (UUID format).
    *
@@ -116,6 +126,7 @@ export class API extends ParentAPI {
       unmarshalVersion,
     )
 
+  
   protected pageOfListLocalImages = (request: Readonly<ListLocalImagesRequest> = {}) =>
     this.client.fetch<ListLocalImagesResponse>(
       {
@@ -127,19 +138,23 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['type', request.type],
-          ['zone', request.zone],
-          ...Object.entries(
-            resolveOneOf([
-              { param: 'image_id', value: request.imageId },
-              { param: 'version_id', value: request.versionId },
-              { param: 'image_label', value: request.imageLabel },
-            ]),
-          ),
+          ['zone', request.zone],  
+          ...Object.entries(resolveOneOf([
+            {param: 'image_id',
+              value: request.imageId,
+            },
+            {param: 'version_id',
+              value: request.versionId,
+            },
+            {param: 'image_label',
+              value: request.imageLabel,
+            },
+          ])),
         ),
       },
       unmarshalListLocalImagesResponse,
     )
-
+  
   /**
    * List local images from a specific image or version. List information about local images in a specific Availability Zone, specified by its `image_id` (UUID format), `version_id` (UUID format) or `image_label`. Only one of these three parameters may be set.
    *
@@ -149,6 +164,7 @@ export class API extends ParentAPI {
   listLocalImages = (request: Readonly<ListLocalImagesRequest> = {}) =>
     enrichForPagination('localImages', this.pageOfListLocalImages, request)
 
+  
   /**
    * Get a specific local image by ID. Get detailed information about a local image, including compatible commercial types, supported architecture, labels and the Availability Zone of the image, specified by its `local_image_id` (UUID format).
    *
@@ -164,6 +180,7 @@ export class API extends ParentAPI {
       unmarshalLocalImage,
     )
 
+  
   protected pageOfListCategories = (request: Readonly<ListCategoriesRequest> = {}) =>
     this.client.fetch<ListCategoriesResponse>(
       {
@@ -176,7 +193,7 @@ export class API extends ParentAPI {
       },
       unmarshalListCategoriesResponse,
     )
-
+  
   /**
    * List existing image categories. Get a list of all existing categories. The output can be paginated.
    *
@@ -186,6 +203,7 @@ export class API extends ParentAPI {
   listCategories = (request: Readonly<ListCategoriesRequest> = {}) =>
     enrichForPagination('categories', this.pageOfListCategories, request)
 
+  
   /**
    * Get a specific category. Get information about a specific category of the marketplace catalog, specified by its `category_id` (UUID format).
    *
@@ -200,4 +218,7 @@ export class API extends ParentAPI {
       },
       unmarshalCategory,
     )
+
+  
 }
+

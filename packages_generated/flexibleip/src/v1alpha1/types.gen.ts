@@ -1,14 +1,34 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone } from '@scaleway/sdk-client'
+import type { Zone as ScwZone, } from '@scaleway/sdk-client'
 
-export type FlexibleIPStatus = 'unknown' | 'ready' | 'updating' | 'attached' | 'error' | 'detaching' | 'locked'
 
-export type ListFlexibleIPsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type FlexibleIPStatus =
+  | 'unknown'
+  | 'ready'
+  | 'updating'
+  | 'attached'
+  | 'error'
+  | 'detaching'
+  | 'locked'
 
-export type MACAddressStatus = 'unknown' | 'ready' | 'updating' | 'used' | 'error' | 'deleting'
+export type ListFlexibleIPsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
-export type MACAddressType = 'unknown_type' | 'vmware' | 'xen' | 'kvm'
+export type MACAddressStatus =
+  | 'unknown'
+  | 'ready'
+  | 'updating'
+  | 'used'
+  | 'error'
+  | 'deleting'
+
+export type MACAddressType =
+  | 'unknown_type'
+  | 'vmware'
+  | 'xen'
+  | 'kvm'
 
 export interface MACAddress {
   /**
@@ -40,6 +60,7 @@ export interface MACAddress {
    */
   zone: ScwZone
 }
+
 
 export interface FlexibleIP {
   /**
@@ -101,6 +122,7 @@ export interface FlexibleIP {
   zone: ScwZone
 }
 
+
 export type AttachFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -116,6 +138,7 @@ export type AttachFlexibleIPRequest = {
   serverId: string
 }
 
+
 export interface AttachFlexibleIPsResponse {
   /**
    * Total count of flexible IPs that are being updated.
@@ -126,6 +149,7 @@ export interface AttachFlexibleIPsResponse {
    */
   flexibleIps: FlexibleIP[]
 }
+
 
 export type CreateFlexibleIPRequest = {
   /**
@@ -158,6 +182,7 @@ export type CreateFlexibleIPRequest = {
   isIpv6: boolean
 }
 
+
 export type DeleteFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -168,6 +193,7 @@ export type DeleteFlexibleIPRequest = {
    */
   fipId: string
 }
+
 
 export type DeleteMACAddrRequest = {
   /**
@@ -180,6 +206,7 @@ export type DeleteMACAddrRequest = {
   fipId: string
 }
 
+
 export type DetachFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -191,6 +218,7 @@ export type DetachFlexibleIPRequest = {
   fipsIds: string[]
 }
 
+
 export interface DetachFlexibleIPsResponse {
   /**
    * Total count of flexible IPs that are being detached.
@@ -201,6 +229,7 @@ export interface DetachFlexibleIPsResponse {
    */
   flexibleIps: FlexibleIP[]
 }
+
 
 export type DuplicateMACAddrRequest = {
   /**
@@ -217,6 +246,7 @@ export type DuplicateMACAddrRequest = {
   duplicateFromFipId: string
 }
 
+
 export type GenerateMACAddrRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -232,6 +262,7 @@ export type GenerateMACAddrRequest = {
   macType: MACAddressType
 }
 
+
 export type GetFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -242,6 +273,7 @@ export type GetFlexibleIPRequest = {
    */
   fipId: string
 }
+
 
 export type ListFlexibleIPsRequest = {
   /**
@@ -282,6 +314,7 @@ export type ListFlexibleIPsRequest = {
   projectId?: string
 }
 
+
 export interface ListFlexibleIPsResponse {
   /**
    * Total count of matching flexible IPs.
@@ -293,6 +326,7 @@ export interface ListFlexibleIPsResponse {
   flexibleIps: FlexibleIP[]
 }
 
+
 export type MoveMACAddrRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -301,6 +335,7 @@ export type MoveMACAddrRequest = {
   fipId: string
   dstFipId: string
 }
+
 
 export type UpdateFlexibleIPRequest = {
   /**
@@ -324,3 +359,5 @@ export type UpdateFlexibleIPRequest = {
    */
   reverse?: string
 }
+
+

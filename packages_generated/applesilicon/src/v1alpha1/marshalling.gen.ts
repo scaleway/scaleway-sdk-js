@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   AppliedRunnerConfigurations,
   BatchCreateServersRequest,
@@ -47,7 +47,9 @@ import type {
 
 const unmarshalOSSupportedServerType = (data: unknown): OSSupportedServerType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'OSSupportedServerType' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'OSSupportedServerType' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -58,7 +60,9 @@ const unmarshalOSSupportedServerType = (data: unknown): OSSupportedServerType =>
 
 export const unmarshalOS = (data: unknown): OS => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'OS' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'OS' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -80,7 +84,9 @@ export const unmarshalOS = (data: unknown): OS => {
 
 const unmarshalCommitment = (data: unknown): Commitment => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Commitment' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Commitment' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -91,7 +97,9 @@ const unmarshalCommitment = (data: unknown): Commitment => {
 
 const unmarshalRunnerConfiguration = (data: unknown): RunnerConfiguration => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'RunnerConfiguration' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'RunnerConfiguration' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -104,7 +112,9 @@ const unmarshalRunnerConfiguration = (data: unknown): RunnerConfiguration => {
 
 export const unmarshalServer = (data: unknown): Server => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Server' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Server' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -121,9 +131,7 @@ export const unmarshalServer = (data: unknown): Server => {
     os: data.os ? unmarshalOS(data.os) : undefined,
     projectId: data.project_id,
     publicBandwidthBps: data.public_bandwidth_bps,
-    runnerConfiguration: data.runner_configuration
-      ? unmarshalRunnerConfiguration(data.runner_configuration)
-      : undefined,
+    runnerConfiguration: data.runner_configuration ? unmarshalRunnerConfiguration(data.runner_configuration) : undefined,
     sshUsername: data.ssh_username,
     status: data.status,
     sudoPassword: data.sudo_password,
@@ -139,7 +147,9 @@ export const unmarshalServer = (data: unknown): Server => {
 
 const unmarshalGithubRunnerConfiguration = (data: unknown): GithubRunnerConfiguration => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'GithubRunnerConfiguration' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'GithubRunnerConfiguration' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -151,7 +161,9 @@ const unmarshalGithubRunnerConfiguration = (data: unknown): GithubRunnerConfigur
 
 const unmarshalGitlabRunnerConfiguration = (data: unknown): GitlabRunnerConfiguration => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'GitlabRunnerConfiguration' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'GitlabRunnerConfiguration' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -162,16 +174,14 @@ const unmarshalGitlabRunnerConfiguration = (data: unknown): GitlabRunnerConfigur
 
 const unmarshalRunnerConfigurationV2 = (data: unknown): RunnerConfigurationV2 => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'RunnerConfigurationV2' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'RunnerConfigurationV2' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
-    githubConfiguration: data.github_configuration
-      ? unmarshalGithubRunnerConfiguration(data.github_configuration)
-      : undefined,
-    gitlabConfiguration: data.gitlab_configuration
-      ? unmarshalGitlabRunnerConfiguration(data.gitlab_configuration)
-      : undefined,
+    githubConfiguration: data.github_configuration ? unmarshalGithubRunnerConfiguration(data.github_configuration) : undefined,
+    gitlabConfiguration: data.gitlab_configuration ? unmarshalGitlabRunnerConfiguration(data.gitlab_configuration) : undefined,
     name: data.name,
     provider: data.provider,
   } as RunnerConfigurationV2
@@ -179,7 +189,9 @@ const unmarshalRunnerConfigurationV2 = (data: unknown): RunnerConfigurationV2 =>
 
 export const unmarshalRunner = (data: unknown): Runner => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Runner' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Runner' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -192,7 +204,9 @@ export const unmarshalRunner = (data: unknown): Runner => {
 
 export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwork => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -210,7 +224,9 @@ export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwo
 
 const unmarshalServerTypeCPU = (data: unknown): ServerTypeCPU => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ServerTypeCPU' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeCPU' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -224,7 +240,9 @@ const unmarshalServerTypeCPU = (data: unknown): ServerTypeCPU => {
 
 const unmarshalServerTypeDisk = (data: unknown): ServerTypeDisk => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ServerTypeDisk' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeDisk' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -235,7 +253,9 @@ const unmarshalServerTypeDisk = (data: unknown): ServerTypeDisk => {
 
 const unmarshalServerTypeGPU = (data: unknown): ServerTypeGPU => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ServerTypeGPU' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeGPU' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -245,7 +265,9 @@ const unmarshalServerTypeGPU = (data: unknown): ServerTypeGPU => {
 
 const unmarshalServerTypeMemory = (data: unknown): ServerTypeMemory => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ServerTypeMemory' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeMemory' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -256,7 +278,9 @@ const unmarshalServerTypeMemory = (data: unknown): ServerTypeMemory => {
 
 const unmarshalServerTypeNPU = (data: unknown): ServerTypeNPU => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ServerTypeNPU' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeNPU' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -266,7 +290,9 @@ const unmarshalServerTypeNPU = (data: unknown): ServerTypeNPU => {
 
 const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ServerTypeNetwork' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeNetwork' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -278,7 +304,9 @@ const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
 
 export const unmarshalServerType = (data: unknown): ServerType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ServerType' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ServerType' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -297,7 +325,9 @@ export const unmarshalServerType = (data: unknown): ServerType => {
 
 export const unmarshalBatchCreateServersResponse = (data: unknown): BatchCreateServersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'BatchCreateServersResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'BatchCreateServersResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -324,7 +354,9 @@ const unmarshalConnectivityDiagnosticServerHealth = (data: unknown): Connectivit
 
 export const unmarshalConnectivityDiagnostic = (data: unknown): ConnectivityDiagnostic => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ConnectivityDiagnostic' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ConnectivityDiagnostic' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -339,7 +371,9 @@ export const unmarshalConnectivityDiagnostic = (data: unknown): ConnectivityDiag
 
 export const unmarshalListOSResponse = (data: unknown): ListOSResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListOSResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListOSResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -350,7 +384,9 @@ export const unmarshalListOSResponse = (data: unknown): ListOSResponse => {
 
 export const unmarshalListRunnersResponse = (data: unknown): ListRunnersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListRunnersResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListRunnersResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -361,7 +397,9 @@ export const unmarshalListRunnersResponse = (data: unknown): ListRunnersResponse
 
 export const unmarshalListServerPrivateNetworksResponse = (data: unknown): ListServerPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -372,7 +410,9 @@ export const unmarshalListServerPrivateNetworksResponse = (data: unknown): ListS
 
 export const unmarshalListServerTypesResponse = (data: unknown): ListServerTypesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListServerTypesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerTypesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -382,7 +422,9 @@ export const unmarshalListServerTypesResponse = (data: unknown): ListServerTypes
 
 export const unmarshalListServersResponse = (data: unknown): ListServersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListServersResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListServersResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -393,7 +435,9 @@ export const unmarshalListServersResponse = (data: unknown): ListServersResponse
 
 export const unmarshalSetServerPrivateNetworksResponse = (data: unknown): SetServerPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -430,10 +474,7 @@ export const marshalBatchCreateServersRequest = (
   os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_bandwidth_bps: request.publicBandwidthBps,
-  requests:
-    request.requests !== undefined
-      ? request.requests.map(elt => marshalBatchCreateServersRequestBatchInnerCreateServerRequest(elt, defaults))
-      : undefined,
+  requests: ((request.requests !== undefined) ?  request.requests.map(elt => marshalBatchCreateServersRequestBatchInnerCreateServerRequest(elt, defaults)): undefined),
   type: request.type,
 })
 
@@ -459,21 +500,15 @@ const marshalRunnerConfigurationV2 = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  provider: request.provider,
+  provider: request.provider,  
   ...resolveOneOf([
-    {
-      param: 'github_configuration',
-      value:
-        request.githubConfiguration !== undefined
-          ? marshalGithubRunnerConfiguration(request.githubConfiguration, defaults)
-          : undefined,
+    {param: 'github_configuration',
+      value: (request.githubConfiguration !== undefined) ? marshalGithubRunnerConfiguration(request.githubConfiguration, defaults)
+      : undefined,
     },
-    {
-      param: 'gitlab_configuration',
-      value:
-        request.gitlabConfiguration !== undefined
-          ? marshalGitlabRunnerConfiguration(request.gitlabConfiguration, defaults)
-          : undefined,
+    {param: 'gitlab_configuration',
+      value: (request.gitlabConfiguration !== undefined) ? marshalGitlabRunnerConfiguration(request.gitlabConfiguration, defaults)
+      : undefined,
     },
   ]),
 })
@@ -483,7 +518,7 @@ export const marshalCreateRunnerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
-  runner_configuration: marshalRunnerConfigurationV2(request.runnerConfiguration, defaults),
+  runner_configuration:  marshalRunnerConfigurationV2(request.runnerConfiguration, defaults),
 })
 
 const marshalAppliedRunnerConfigurations = (
@@ -507,10 +542,7 @@ export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  applied_runner_configurations:
-    request.appliedRunnerConfigurations !== undefined
-      ? marshalAppliedRunnerConfigurations(request.appliedRunnerConfigurations, defaults)
-      : undefined,
+  applied_runner_configurations: ((request.appliedRunnerConfigurations !== undefined) ?  marshalAppliedRunnerConfigurations(request.appliedRunnerConfigurations, defaults): undefined),
   commitment_type: request.commitmentType,
   enable_kext: request.enableKext,
   enable_vpc: request.enableVpc,
@@ -518,10 +550,7 @@ export const marshalCreateServerRequest = (
   os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_bandwidth_bps: request.publicBandwidthBps,
-  runner_configuration:
-    request.runnerConfiguration !== undefined
-      ? marshalRunnerConfiguration(request.runnerConfiguration, defaults)
-      : undefined,
+  runner_configuration: ((request.runnerConfiguration !== undefined) ?  marshalRunnerConfiguration(request.runnerConfiguration, defaults): undefined),
   type: request.type,
 })
 
@@ -537,7 +566,7 @@ export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
   request: PrivateNetworkApiSetServerPrivateNetworksRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  per_private_network_ipam_ip_ids: request.perPrivateNetworkIpamIpIds,
+  per_private_network_ipam_ip_ids:  request.perPrivateNetworkIpamIpIds,
 })
 
 export const marshalReinstallServerRequest = (
@@ -559,7 +588,7 @@ export const marshalUpdateRunnerRequest = (
   request: UpdateRunnerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  runner_configuration: marshalRunnerConfigurationV2(request.runnerConfiguration, defaults),
+  runner_configuration:  marshalRunnerConfigurationV2(request.runnerConfiguration, defaults),
 })
 
 const marshalCommitmentTypeValue = (
@@ -573,12 +602,8 @@ export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  applied_runner_configurations:
-    request.appliedRunnerConfigurations !== undefined
-      ? marshalAppliedRunnerConfigurations(request.appliedRunnerConfigurations, defaults)
-      : undefined,
-  commitment_type:
-    request.commitmentType !== undefined ? marshalCommitmentTypeValue(request.commitmentType, defaults) : undefined,
+  applied_runner_configurations: ((request.appliedRunnerConfigurations !== undefined) ?  marshalAppliedRunnerConfigurations(request.appliedRunnerConfigurations, defaults): undefined),
+  commitment_type: ((request.commitmentType !== undefined) ?  marshalCommitmentTypeValue(request.commitmentType, defaults): undefined),
   enable_vpc: request.enableVpc,
   name: request.name,
   public_bandwidth_bps: request.publicBandwidthBps,

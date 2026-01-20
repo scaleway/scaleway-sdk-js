@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   AclRule,
   AddSubnetsRequest,
@@ -36,7 +36,9 @@ import type {
 
 const unmarshalSubnet = (data: unknown): Subnet => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Subnet' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Subnet' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -52,7 +54,9 @@ const unmarshalSubnet = (data: unknown): Subnet => {
 
 export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetwork' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -73,7 +77,9 @@ export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
 
 export const unmarshalRoute = (data: unknown): Route => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Route' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Route' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -95,7 +101,9 @@ export const unmarshalRoute = (data: unknown): Route => {
 
 const unmarshalVPCConnectorPeerInfo = (data: unknown): VPCConnectorPeerInfo => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VPCConnectorPeerInfo' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VPCConnectorPeerInfo' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -107,7 +115,9 @@ const unmarshalVPCConnectorPeerInfo = (data: unknown): VPCConnectorPeerInfo => {
 
 export const unmarshalVPCConnector = (data: unknown): VPCConnector => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VPCConnector' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VPCConnector' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -128,7 +138,9 @@ export const unmarshalVPCConnector = (data: unknown): VPCConnector => {
 
 export const unmarshalVPC = (data: unknown): VPC => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VPC' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VPC' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -149,7 +161,9 @@ export const unmarshalVPC = (data: unknown): VPC => {
 
 export const unmarshalAddSubnetsResponse = (data: unknown): AddSubnetsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AddSubnetsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AddSubnetsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -159,7 +173,9 @@ export const unmarshalAddSubnetsResponse = (data: unknown): AddSubnetsResponse =
 
 export const unmarshalDeleteSubnetsResponse = (data: unknown): DeleteSubnetsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'DeleteSubnetsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'DeleteSubnetsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -169,7 +185,9 @@ export const unmarshalDeleteSubnetsResponse = (data: unknown): DeleteSubnetsResp
 
 export const unmarshalAclRule = (data: unknown): AclRule => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'AclRule' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'AclRule' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -187,7 +205,9 @@ export const unmarshalAclRule = (data: unknown): AclRule => {
 
 export const unmarshalGetAclResponse = (data: unknown): GetAclResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'GetAclResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'GetAclResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -198,7 +218,9 @@ export const unmarshalGetAclResponse = (data: unknown): GetAclResponse => {
 
 export const unmarshalListPrivateNetworksResponse = (data: unknown): ListPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListPrivateNetworksResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListPrivateNetworksResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -224,7 +246,9 @@ const unmarshalListSubnetOverlapsResponseSubnetOverlap = (data: unknown): ListSu
 
 export const unmarshalListSubnetOverlapsResponse = (data: unknown): ListSubnetOverlapsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListSubnetOverlapsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubnetOverlapsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -235,7 +259,9 @@ export const unmarshalListSubnetOverlapsResponse = (data: unknown): ListSubnetOv
 
 export const unmarshalListSubnetsResponse = (data: unknown): ListSubnetsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListSubnetsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubnetsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -246,7 +272,9 @@ export const unmarshalListSubnetsResponse = (data: unknown): ListSubnetsResponse
 
 export const unmarshalListVPCConnectorsResponse = (data: unknown): ListVPCConnectorsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListVPCConnectorsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListVPCConnectorsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -257,7 +285,9 @@ export const unmarshalListVPCConnectorsResponse = (data: unknown): ListVPCConnec
 
 export const unmarshalListVPCsResponse = (data: unknown): ListVPCsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListVPCsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListVPCsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -268,7 +298,9 @@ export const unmarshalListVPCsResponse = (data: unknown): ListVPCsResponse => {
 
 export const unmarshalSetAclResponse = (data: unknown): SetAclResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SetAclResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SetAclResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -336,7 +368,10 @@ export const marshalDeleteSubnetsRequest = (
   subnets: request.subnets,
 })
 
-export const marshalAclRule = (request: AclRule, defaults: DefaultValues): Record<string, unknown> => ({
+export const marshalAclRule = (
+  request: AclRule,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   action: request.action,
   description: request.description,
   destination: request.destination,
@@ -348,10 +383,13 @@ export const marshalAclRule = (request: AclRule, defaults: DefaultValues): Recor
   src_port_low: request.srcPortLow,
 })
 
-export const marshalSetAclRequest = (request: SetAclRequest, defaults: DefaultValues): Record<string, unknown> => ({
+export const marshalSetAclRequest = (
+  request: SetAclRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   default_policy: request.defaultPolicy,
   is_ipv6: request.isIpv6,
-  rules: request.rules.map(elt => marshalAclRule(elt, defaults)),
+  rules:  request.rules.map(elt => marshalAclRule(elt, defaults)),
 })
 
 export const marshalUpdatePrivateNetworkRequest = (

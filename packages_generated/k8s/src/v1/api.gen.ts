@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,11 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {
-  CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,
-  NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,
-  POOL_TRANSIENT_STATUSES as POOL_TRANSIENT_STATUSES_K8S,
-} from './content.gen.js'
+import {CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,POOL_TRANSIENT_STATUSES as POOL_TRANSIENT_STATUSES_K8S,} from './content.gen.js'
 import {
   marshalAddClusterACLRulesRequest,
   marshalCreateClusterRequest,
@@ -115,10 +111,15 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   protected pageOfListClusters = (request: Readonly<ListClustersRequest> = {}) =>
     this.client.fetch<ListClustersResponse>(
       {
@@ -138,7 +139,7 @@ export class API extends ParentAPI {
       },
       unmarshalListClustersResponse,
     )
-
+  
   /**
    * List Clusters. List all existing Kubernetes clusters in a specific region.
    *
@@ -148,6 +149,7 @@ export class API extends ParentAPI {
   listClusters = (request: Readonly<ListClustersRequest> = {}) =>
     enrichForPagination('clusters', this.pageOfListClusters, request)
 
+  
   /**
    * Create a new Cluster. Create a new Kubernetes cluster in a Scaleway region.
    *
@@ -157,7 +159,9 @@ export class API extends ParentAPI {
   createCluster = (request: Readonly<CreateClusterRequest>) =>
     this.client.fetch<Cluster>(
       {
-        body: JSON.stringify(marshalCreateClusterRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateClusterRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters`,
@@ -165,6 +169,7 @@ export class API extends ParentAPI {
       unmarshalCluster,
     )
 
+  
   /**
    * Get a Cluster. Retrieve information about a specific Kubernetes cluster.
    *
@@ -179,7 +184,7 @@ export class API extends ParentAPI {
       },
       unmarshalCluster,
     )
-
+  
   /**
    * Waits for {@link Cluster} to be in a final state.
    *
@@ -187,7 +192,10 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Cluster
    */
-  waitForCluster = (request: Readonly<GetClusterRequest>, options?: Readonly<WaitForOptions<Cluster>>) =>
+  waitForCluster = (
+    request: Readonly<GetClusterRequest>,
+    options?: Readonly<WaitForOptions<Cluster>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CLUSTER_TRANSIENT_STATUSES_K8S.includes(res.status))),
       this.getCluster,
@@ -195,6 +203,7 @@ export class API extends ParentAPI {
       options,
     )
 
+  
   /**
    * Update a Cluster. Update information on a specific Kubernetes cluster. You can update details such as its name, description, tags and configuration. To upgrade a cluster, you will need to use the dedicated endpoint.
    *
@@ -204,7 +213,9 @@ export class API extends ParentAPI {
   updateCluster = (request: Readonly<UpdateClusterRequest>) =>
     this.client.fetch<Cluster>(
       {
-        body: JSON.stringify(marshalUpdateClusterRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateClusterRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
@@ -212,6 +223,7 @@ export class API extends ParentAPI {
       unmarshalCluster,
     )
 
+  
   /**
    * Delete a Cluster. Delete a specific Kubernetes cluster and all its associated pools and nodes, and possibly its associated Load Balancers or Block Volumes.
    *
@@ -223,11 +235,14 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
-        urlParams: urlParams(['with_additional_resources', request.withAdditionalResources]),
+        urlParams: urlParams(
+          ['with_additional_resources', request.withAdditionalResources],
+        ),
       },
       unmarshalCluster,
     )
 
+  
   /**
    * Upgrade a Cluster. Upgrade a specific Kubernetes cluster and possibly its associated pools to a specific and supported Kubernetes version.
    *
@@ -237,7 +252,9 @@ export class API extends ParentAPI {
   upgradeCluster = (request: Readonly<UpgradeClusterRequest>) =>
     this.client.fetch<Cluster>(
       {
-        body: JSON.stringify(marshalUpgradeClusterRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpgradeClusterRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/upgrade`,
@@ -245,6 +262,7 @@ export class API extends ParentAPI {
       unmarshalCluster,
     )
 
+  
   /**
    * Change the Cluster type. Change the type of a specific Kubernetes cluster. To see the possible values you can enter for the `type` field, [list available cluster types](#list-available-cluster-types-for-a-cluster).
    *
@@ -254,7 +272,9 @@ export class API extends ParentAPI {
   setClusterType = (request: Readonly<SetClusterTypeRequest>) =>
     this.client.fetch<Cluster>(
       {
-        body: JSON.stringify(marshalSetClusterTypeRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSetClusterTypeRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/set-type`,
@@ -262,6 +282,7 @@ export class API extends ParentAPI {
       unmarshalCluster,
     )
 
+  
   /**
    * List available versions for a Cluster. List the versions that a specific Kubernetes cluster is allowed to upgrade to. Results will include every patch version greater than the current patch, as well as one minor version ahead of the current version. Any upgrade skipping a minor version will not work.
    *
@@ -277,6 +298,7 @@ export class API extends ParentAPI {
       unmarshalListClusterAvailableVersionsResponse,
     )
 
+  
   /**
    * List available cluster types for a cluster. List the cluster types that a specific Kubernetes cluster is allowed to switch to.
    *
@@ -292,27 +314,37 @@ export class API extends ParentAPI {
       unmarshalListClusterAvailableTypesResponse,
     )
 
+  
   protected _getClusterKubeConfig = (request: Readonly<GetClusterKubeConfigRequest>) =>
-    this.client.fetch<Blob>({
-      method: 'GET',
-      path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/kubeconfig`,
-      urlParams: urlParams(['dl', 1], ['redacted', request.redacted]),
-      responseType: 'blob',
-    })
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/kubeconfig`,
+        urlParams: urlParams(
+          ['dl', 1],
+          ['redacted', request.redacted],
+        ),
+        responseType: 'blob',
+      },
+    )
 
+  
   /**
    * Reset the admin token of a Cluster. Reset the admin token for a specific Kubernetes cluster. This will revoke the old admin token (which will not be usable afterwards) and create a new one. Note that you will need to download the kubeconfig again to keep interacting with the cluster.
    *
    * @param request - The request {@link ResetClusterAdminTokenRequest}
    */
   resetClusterAdminToken = (request: Readonly<ResetClusterAdminTokenRequest>) =>
-    this.client.fetch<void>({
-      body: '{}',
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/reset-admin-token`,
-    })
+    this.client.fetch<void>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/reset-admin-token`,
+      },
+    )
 
+  
   protected pageOfListClusterACLRules = (request: Readonly<ListClusterACLRulesRequest>) =>
     this.client.fetch<ListClusterACLRulesResponse>(
       {
@@ -325,7 +357,7 @@ export class API extends ParentAPI {
       },
       unmarshalListClusterACLRulesResponse,
     )
-
+  
   /**
    * List ACLs. List ACLs for a specific cluster.
    *
@@ -335,6 +367,7 @@ export class API extends ParentAPI {
   listClusterACLRules = (request: Readonly<ListClusterACLRulesRequest>) =>
     enrichForPagination('rules', this.pageOfListClusterACLRules, request)
 
+  
   /**
    * Add new ACLs. Add new ACL rules for a specific cluster.
    *
@@ -344,7 +377,9 @@ export class API extends ParentAPI {
   addClusterACLRules = (request: Readonly<AddClusterACLRulesRequest>) =>
     this.client.fetch<AddClusterACLRulesResponse>(
       {
-        body: JSON.stringify(marshalAddClusterACLRulesRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalAddClusterACLRulesRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
@@ -352,6 +387,7 @@ export class API extends ParentAPI {
       unmarshalAddClusterACLRulesResponse,
     )
 
+  
   /**
    * Set new ACLs. Set new ACL rules for a specific cluster.
    *
@@ -361,7 +397,9 @@ export class API extends ParentAPI {
   setClusterACLRules = (request: Readonly<SetClusterACLRulesRequest>) =>
     this.client.fetch<SetClusterACLRulesResponse>(
       {
-        body: JSON.stringify(marshalSetClusterACLRulesRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSetClusterACLRulesRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
@@ -369,17 +407,21 @@ export class API extends ParentAPI {
       unmarshalSetClusterACLRulesResponse,
     )
 
+  
   /**
    * Delete an existing ACL.
    *
    * @param request - The request {@link DeleteACLRuleRequest}
    */
   deleteACLRule = (request: Readonly<DeleteACLRuleRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
+      },
+    )
 
+  
   protected pageOfListPools = (request: Readonly<ListPoolsRequest>) =>
     this.client.fetch<ListPoolsResponse>(
       {
@@ -395,15 +437,17 @@ export class API extends ParentAPI {
       },
       unmarshalListPoolsResponse,
     )
-
+  
   /**
    * List Pools in a Cluster. List all the existing pools for a specific Kubernetes cluster.
    *
    * @param request - The request {@link ListPoolsRequest}
    * @returns A Promise of ListPoolsResponse
    */
-  listPools = (request: Readonly<ListPoolsRequest>) => enrichForPagination('pools', this.pageOfListPools, request)
+  listPools = (request: Readonly<ListPoolsRequest>) =>
+    enrichForPagination('pools', this.pageOfListPools, request)
 
+  
   /**
    * Create a new Pool in a Cluster. Create a new pool in a specific Kubernetes cluster.
    *
@@ -413,7 +457,9 @@ export class API extends ParentAPI {
   createPool = (request: Readonly<CreatePoolRequest>) =>
     this.client.fetch<Pool>(
       {
-        body: JSON.stringify(marshalCreatePoolRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreatePoolRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/pools`,
@@ -421,6 +467,7 @@ export class API extends ParentAPI {
       unmarshalPool,
     )
 
+  
   /**
    * Get a Pool in a Cluster. Retrieve details about a specific pool in a Kubernetes cluster.
    *
@@ -435,7 +482,7 @@ export class API extends ParentAPI {
       },
       unmarshalPool,
     )
-
+  
   /**
    * Waits for {@link Pool} to be in a final state.
    *
@@ -443,7 +490,10 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Pool
    */
-  waitForPool = (request: Readonly<GetPoolRequest>, options?: Readonly<WaitForOptions<Pool>>) =>
+  waitForPool = (
+    request: Readonly<GetPoolRequest>,
+    options?: Readonly<WaitForOptions<Pool>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!POOL_TRANSIENT_STATUSES_K8S.includes(res.status))),
       this.getPool,
@@ -451,6 +501,7 @@ export class API extends ParentAPI {
       options,
     )
 
+  
   /**
    * Upgrade a Pool in a Cluster. Upgrade the Kubernetes version of a specific pool. Note that it only works if the targeted version matches the cluster's version.
 This will drain and replace the nodes in that pool.
@@ -461,7 +512,9 @@ This will drain and replace the nodes in that pool.
   upgradePool = (request: Readonly<UpgradePoolRequest>) =>
     this.client.fetch<Pool>(
       {
-        body: JSON.stringify(marshalUpgradePoolRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpgradePoolRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/upgrade`,
@@ -469,6 +522,7 @@ This will drain and replace the nodes in that pool.
       unmarshalPool,
     )
 
+  
   /**
    * Update a Pool in a Cluster. Update the attributes of a specific pool, such as its desired size, autoscaling settings, and tags. To upgrade a pool, you will need to use the dedicated endpoint.
    *
@@ -478,7 +532,9 @@ This will drain and replace the nodes in that pool.
   updatePool = (request: Readonly<UpdatePoolRequest>) =>
     this.client.fetch<Pool>(
       {
-        body: JSON.stringify(marshalUpdatePoolRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdatePoolRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
@@ -486,6 +542,7 @@ This will drain and replace the nodes in that pool.
       unmarshalPool,
     )
 
+  
   /**
    * Delete a Pool in a Cluster. Delete a specific pool from a cluster. Note that all the pool's nodes will also be deleted.
    *
@@ -501,6 +558,7 @@ This will drain and replace the nodes in that pool.
       unmarshalPool,
     )
 
+  
   /**
    * Set a list of taints for a specific pool. Apply a list of taints to all nodes of the pool which will be periodically reconciled by scaleway.
    *
@@ -510,7 +568,9 @@ This will drain and replace the nodes in that pool.
   setPoolTaints = (request: Readonly<SetPoolTaintsRequest>) =>
     this.client.fetch<Pool>(
       {
-        body: JSON.stringify(marshalSetPoolTaintsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSetPoolTaintsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-taints`,
@@ -518,6 +578,7 @@ This will drain and replace the nodes in that pool.
       unmarshalPool,
     )
 
+  
   /**
    * Set a list of startup taints for a specific pool. Apply a list of taints to new nodes of the pool which would not be reconciled by scaleway.
    *
@@ -527,7 +588,9 @@ This will drain and replace the nodes in that pool.
   setPoolStartupTaints = (request: Readonly<SetPoolStartupTaintsRequest>) =>
     this.client.fetch<Pool>(
       {
-        body: JSON.stringify(marshalSetPoolStartupTaintsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSetPoolStartupTaintsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-startup-taints`,
@@ -535,6 +598,7 @@ This will drain and replace the nodes in that pool.
       unmarshalPool,
     )
 
+  
   /**
    * Set a list of labels for a specific pool. Apply a list of taints to all nodes of the pool (only apply to labels which was set through scaleway api).
    *
@@ -544,7 +608,9 @@ This will drain and replace the nodes in that pool.
   setPoolLabels = (request: Readonly<SetPoolLabelsRequest>) =>
     this.client.fetch<Pool>(
       {
-        body: JSON.stringify(marshalSetPoolLabelsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSetPoolLabelsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-labels`,
@@ -552,6 +618,7 @@ This will drain and replace the nodes in that pool.
       unmarshalPool,
     )
 
+  
   /**
    * Fetch node metadata. Rerieve metadata to instantiate a Kapsule/Kosmos node. This method is not intended to be called by end users but rather programmatically by the node-installer.
    *
@@ -567,6 +634,7 @@ This will drain and replace the nodes in that pool.
       unmarshalNodeMetadata,
     )
 
+  
   /**
    * Authenticate Kosmos external node. Creates a newer Kosmos node and returns its token. This method is not intended to be called by end users but rather programmatically by the node-installer.
    *
@@ -584,6 +652,7 @@ This will drain and replace the nodes in that pool.
       unmarshalExternalNodeAuth,
     )
 
+  
   /**
    * Create a Kosmos node. Retrieve metadata for a Kosmos node. This method is not intended to be called by end users but rather programmatically by the kapsule-node-agent.
    *
@@ -601,6 +670,7 @@ This will drain and replace the nodes in that pool.
       unmarshalExternalNode,
     )
 
+  
   protected pageOfListNodes = (request: Readonly<ListNodesRequest>) =>
     this.client.fetch<ListNodesResponse>(
       {
@@ -617,15 +687,17 @@ This will drain and replace the nodes in that pool.
       },
       unmarshalListNodesResponse,
     )
-
+  
   /**
    * List Nodes in a Cluster. List all the existing nodes for a specific Kubernetes cluster.
    *
    * @param request - The request {@link ListNodesRequest}
    * @returns A Promise of ListNodesResponse
    */
-  listNodes = (request: Readonly<ListNodesRequest>) => enrichForPagination('nodes', this.pageOfListNodes, request)
+  listNodes = (request: Readonly<ListNodesRequest>) =>
+    enrichForPagination('nodes', this.pageOfListNodes, request)
 
+  
   /**
    * Get a Node in a Cluster. Retrieve details about a specific Kubernetes Node.
    *
@@ -640,7 +712,7 @@ This will drain and replace the nodes in that pool.
       },
       unmarshalNode,
     )
-
+  
   /**
    * Waits for {@link Node} to be in a final state.
    *
@@ -648,7 +720,10 @@ This will drain and replace the nodes in that pool.
    * @param options - The waiting options
    * @returns A Promise of Node
    */
-  waitForNode = (request: Readonly<GetNodeRequest>, options?: Readonly<WaitForOptions<Node>>) =>
+  waitForNode = (
+    request: Readonly<GetNodeRequest>,
+    options?: Readonly<WaitForOptions<Node>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NODE_TRANSIENT_STATUSES_K8S.includes(res.status))),
       this.getNode,
@@ -656,6 +731,7 @@ This will drain and replace the nodes in that pool.
       options,
     )
 
+  
   /**
    * Replace a Node in a Cluster. Replace a specific Node. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
    *
@@ -674,6 +750,7 @@ This will drain and replace the nodes in that pool.
       unmarshalNode,
     )
 
+  
   /**
    * Reboot a Node in a Cluster. Reboot a specific Node. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
    *
@@ -691,6 +768,7 @@ This will drain and replace the nodes in that pool.
       unmarshalNode,
     )
 
+  
   /**
    * Delete a Node in a Cluster. Delete a specific Node. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
    *
@@ -702,11 +780,15 @@ This will drain and replace the nodes in that pool.
       {
         method: 'DELETE',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}`,
-        urlParams: urlParams(['replace', request.replace], ['skip_drain', request.skipDrain]),
+        urlParams: urlParams(
+          ['replace', request.replace],
+          ['skip_drain', request.skipDrain],
+        ),
       },
       unmarshalNode,
     )
 
+  
   /**
    * List all available Versions. List all available versions for the creation of a new Kubernetes cluster.
    *
@@ -722,6 +804,7 @@ This will drain and replace the nodes in that pool.
       unmarshalListVersionsResponse,
     )
 
+  
   /**
    * Get a Version. Retrieve a specific Kubernetes version and its details.
    *
@@ -737,6 +820,7 @@ This will drain and replace the nodes in that pool.
       unmarshalVersion,
     )
 
+  
   protected pageOfListClusterTypes = (request: Readonly<ListClusterTypesRequest> = {}) =>
     this.client.fetch<ListClusterTypesResponse>(
       {
@@ -749,7 +833,7 @@ This will drain and replace the nodes in that pool.
       },
       unmarshalListClusterTypesResponse,
     )
-
+  
   /**
    * List cluster types. List available cluster types and their technical details.
    *
@@ -758,4 +842,7 @@ This will drain and replace the nodes in that pool.
    */
   listClusterTypes = (request: Readonly<ListClusterTypesRequest> = {}) =>
     enrichForPagination('clusterTypes', this.pageOfListClusterTypes, request)
+
+  
 }
+

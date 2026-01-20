@@ -15,7 +15,8 @@ export const ContainerProbeHTTPProbe = {
   },
 }
 
-export const ContainerScalingOption = {}
+export const ContainerScalingOption = {
+}
 
 export const CreateContainerRequest = {
   description: {
@@ -102,7 +103,7 @@ export const CreateTriggerRequestDestinationConfig = {
   httpPath: {
     maxLength: 255,
     minLength: 1,
-    prefix: '/',
+    prefix: "/",
   },
 }
 
@@ -260,7 +261,7 @@ export const UpdateTriggerRequestDestinationConfig = {
   httpPath: {
     maxLength: 255,
     minLength: 1,
-    prefix: '/',
+    prefix: "/",
   },
 }
 

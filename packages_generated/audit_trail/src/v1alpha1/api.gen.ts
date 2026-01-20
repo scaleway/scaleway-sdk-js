@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -66,10 +66,14 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+      ],
+    })
+  
   /**
    * List events. Retrieve the list of Audit Trail events for a Scaleway Organization and/or Project. You must specify the `organization_id` and optionally, the `project_id`.
    *
@@ -102,6 +106,7 @@ export class API extends ParentAPI {
       unmarshalListEventsResponse,
     )
 
+  
   /**
    * List authentication events. Retrieve the list of Audit Trail authentication events for a Scaleway Organization. You must specify the `organization_id`.
    *
@@ -125,6 +130,7 @@ export class API extends ParentAPI {
       unmarshalListAuthenticationEventsResponse,
     )
 
+  
   /**
    * List system events. Retrieve the list of Audit Trail system events for a Scaleway Organization. You must specify the `organization_id`.
    *
@@ -148,6 +154,7 @@ export class API extends ParentAPI {
       unmarshalListSystemEventsResponse,
     )
 
+  
   listCombinedEvents = (request: Readonly<ListCombinedEventsRequest> = {}) =>
     this.client.fetch<ListCombinedEventsResponse>(
       {
@@ -167,6 +174,7 @@ export class API extends ParentAPI {
       unmarshalListCombinedEventsResponse,
     )
 
+  
   /**
    * Retrieve the list of Scaleway resources for which you have Audit Trail events.
    *
@@ -178,11 +186,14 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/products`,
-        urlParams: urlParams(['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId]),
+        urlParams: urlParams(
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+        ),
       },
       unmarshalListProductsResponse,
     )
 
+  
   /**
    * Create an export job. Create an export job for a specified organization. This allows you to export audit trail events to a destination, such as an S3 bucket. The request requires the organization ID, a name for the export, and a destination configuration.
    *
@@ -192,7 +203,9 @@ export class API extends ParentAPI {
   createExportJob = (request: Readonly<CreateExportJobRequest>) =>
     this.client.fetch<ExportJob>(
       {
-        body: JSON.stringify(marshalCreateExportJobRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateExportJobRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs`,
@@ -200,17 +213,21 @@ export class API extends ParentAPI {
       unmarshalExportJob,
     )
 
+  
   /**
    * Delete an export job. Deletes an export job for a specified id.
    *
    * @param request - The request {@link DeleteExportJobRequest}
    */
   deleteExportJob = (request: Readonly<DeleteExportJobRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs/${validatePathParam('exportJobId', request.exportJobId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs/${validatePathParam('exportJobId', request.exportJobId)}`,
+      },
+    )
 
+  
   protected pageOfListExportJobs = (request: Readonly<ListExportJobsRequest> = {}) =>
     this.client.fetch<ListExportJobsResponse>(
       {
@@ -227,10 +244,11 @@ export class API extends ParentAPI {
       },
       unmarshalListExportJobsResponse,
     )
-
+  
   listExportJobs = (request: Readonly<ListExportJobsRequest> = {}) =>
     enrichForPagination('exportJobs', this.pageOfListExportJobs, request)
 
+  
   protected pageOfListAlertRules = (request: Readonly<ListAlertRulesRequest> = {}) =>
     this.client.fetch<ListAlertRulesResponse>(
       {
@@ -245,7 +263,7 @@ export class API extends ParentAPI {
       },
       unmarshalListAlertRulesResponse,
     )
-
+  
   /**
    * List alert rules for a specified organization and their current status (enabled or disabled).
    *
@@ -255,6 +273,7 @@ export class API extends ParentAPI {
   listAlertRules = (request: Readonly<ListAlertRulesRequest> = {}) =>
     enrichForPagination('alertRules', this.pageOfListAlertRules, request)
 
+  
   /**
    * Enable alert rules. Enable alert rules for a specified organization. Enabled rules will trigger alerts when matching events occur.
    *
@@ -264,7 +283,9 @@ export class API extends ParentAPI {
   enableAlertRules = (request: Readonly<EnableAlertRulesRequest> = {}) =>
     this.client.fetch<EnableAlertRulesResponse>(
       {
-        body: JSON.stringify(marshalEnableAlertRulesRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalEnableAlertRulesRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/enable-alert-rules`,
@@ -272,6 +293,7 @@ export class API extends ParentAPI {
       unmarshalEnableAlertRulesResponse,
     )
 
+  
   /**
    * Disable alert rules. Disable alert rules for a specified organization. Disabled rules will no longer trigger alerts when matching events occur.
    *
@@ -281,7 +303,9 @@ export class API extends ParentAPI {
   disableAlertRules = (request: Readonly<DisableAlertRulesRequest> = {}) =>
     this.client.fetch<DisableAlertRulesResponse>(
       {
-        body: JSON.stringify(marshalDisableAlertRulesRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDisableAlertRulesRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/disable-alert-rules`,
@@ -289,6 +313,7 @@ export class API extends ParentAPI {
       unmarshalDisableAlertRulesResponse,
     )
 
+  
   /**
    * Set the alert rules to enabled. Set the alert rules to enabled by replacing the set of enabled alert rules for a specified organization. The provided list defines the complete set of rules that should be enabled. Any previously enabled rule not included in the request will be disabled.
    *
@@ -298,11 +323,16 @@ export class API extends ParentAPI {
   setEnabledAlertRules = (request: Readonly<SetEnabledAlertRulesRequest> = {}) =>
     this.client.fetch<SetEnabledAlertRulesResponse>(
       {
-        body: JSON.stringify(marshalSetEnabledAlertRulesRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSetEnabledAlertRulesRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-rules`,
       },
       unmarshalSetEnabledAlertRulesResponse,
     )
+
+  
 }
+

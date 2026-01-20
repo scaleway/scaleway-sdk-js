@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -38,10 +38,18 @@ export class PrivateNetworkAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    zones: ['fr-par-1', 'fr-par-2', 'nl-ams-1', 'nl-ams-2', 'pl-waw-2', 'pl-waw-3'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      zones: [
+        'fr-par-1',
+        'fr-par-2',
+        'nl-ams-1',
+        'nl-ams-2',
+        'pl-waw-2',
+        'pl-waw-3',
+      ],
+    })
+  
   /**
    * Add a server to a Private Network. Add an Elastic Metal server to a Private Network.
    *
@@ -51,7 +59,9 @@ export class PrivateNetworkAPI extends ParentAPI {
   addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
-        body: JSON.stringify(marshalPrivateNetworkApiAddServerPrivateNetworkRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalPrivateNetworkApiAddServerPrivateNetworkRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
@@ -59,6 +69,7 @@ export class PrivateNetworkAPI extends ParentAPI {
       unmarshalServerPrivateNetwork,
     )
 
+  
   /**
    * Set multiple Private Networks on a server. Configure multiple Private Networks on an Elastic Metal server.
    *
@@ -68,7 +79,9 @@ export class PrivateNetworkAPI extends ParentAPI {
   setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) =>
     this.client.fetch<SetServerPrivateNetworksResponse>(
       {
-        body: JSON.stringify(marshalPrivateNetworkApiSetServerPrivateNetworksRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalPrivateNetworkApiSetServerPrivateNetworksRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
@@ -76,9 +89,8 @@ export class PrivateNetworkAPI extends ParentAPI {
       unmarshalSetServerPrivateNetworksResponse,
     )
 
-  protected pageOfListServerPrivateNetworks = (
-    request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {},
-  ) =>
+  
+  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
     this.client.fetch<ListServerPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -96,7 +108,7 @@ export class PrivateNetworkAPI extends ParentAPI {
       },
       unmarshalListServerPrivateNetworksResponse,
     )
-
+  
   /**
    * List the Private Networks of a server. List the Private Networks of an Elastic Metal server.
    *
@@ -106,14 +118,20 @@ export class PrivateNetworkAPI extends ParentAPI {
   listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
     enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request)
 
+  
   /**
    * Delete a Private Network.
    *
    * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
   deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+      },
+    )
+
+  
 }
+

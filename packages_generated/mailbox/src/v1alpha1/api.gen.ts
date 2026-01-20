@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -9,10 +9,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {
-  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,
-  MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,
-} from './content.gen.js'
+import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
 import {
   marshalBatchCreateMailboxesRequest,
   marshalCreateDomainRequest,
@@ -64,7 +61,9 @@ export class API extends ParentAPI {
   createDomain = (request: Readonly<CreateDomainRequest>) =>
     this.client.fetch<Domain>(
       {
-        body: JSON.stringify(marshalCreateDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalCreateDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mailbox/v1alpha1/domains`,
@@ -72,6 +71,7 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
+  
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}) =>
     this.client.fetch<ListDomainsResponse>(
       {
@@ -88,7 +88,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDomainsResponse,
     )
-
+  
   /**
    * List domains in an organization.. The return list can be filtered with request parameters.
    *
@@ -98,6 +98,7 @@ export class API extends ParentAPI {
   listDomains = (request: Readonly<ListDomainsRequest> = {}) =>
     enrichForPagination('domains', this.pageOfListDomains, request)
 
+  
   /**
    * Get a domain by its ID.. Get a domain by its ID.
    *
@@ -112,7 +113,7 @@ export class API extends ParentAPI {
       },
       unmarshalDomain,
     )
-
+  
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -120,7 +121,10 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Domain
    */
-  waitForDomain = (request: Readonly<GetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) =>
+  waitForDomain = (
+    request: Readonly<GetDomainRequest>,
+    options?: Readonly<WaitForOptions<Domain>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_MAILBOX.includes(res.status))),
       this.getDomain,
@@ -128,6 +132,7 @@ export class API extends ParentAPI {
       options,
     )
 
+  
   /**
    * Delete a domain by its ID.. Delete a domain by its ID.
    *
@@ -143,6 +148,7 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
+  
   /**
    * Get domain records by its ID.. Get domain records by its ID.
    *
@@ -158,18 +164,24 @@ export class API extends ParentAPI {
       unmarshalGetDomainRecordsResponse,
     )
 
+  
   validateDomainRecords = (request: Readonly<ValidateDomainRecordsRequest>) =>
-    this.client.fetch<void>({
-      body: '{}',
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/mailbox/v1alpha1/domains/${validatePathParam('domainId', request.domainId)}/validate-records`,
-    })
+    this.client.fetch<void>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/mailbox/v1alpha1/domains/${validatePathParam('domainId', request.domainId)}/validate-records`,
+      },
+    )
 
+  
   batchCreateMailboxes = (request: Readonly<BatchCreateMailboxesRequest>) =>
     this.client.fetch<BatchCreateMailboxesResponse>(
       {
-        body: JSON.stringify(marshalBatchCreateMailboxesRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalBatchCreateMailboxesRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mailbox/v1alpha1/batch-create-mailboxes`,
@@ -177,6 +189,7 @@ export class API extends ParentAPI {
       unmarshalBatchCreateMailboxesResponse,
     )
 
+  
   protected pageOfListMailboxes = (request: Readonly<ListMailboxesRequest> = {}) =>
     this.client.fetch<ListMailboxesResponse>(
       {
@@ -193,7 +206,7 @@ export class API extends ParentAPI {
       },
       unmarshalListMailboxesResponse,
     )
-
+  
   /**
    * List mailboxes in an organization.. The return list can be filtered with request parameters.
    *
@@ -203,6 +216,7 @@ export class API extends ParentAPI {
   listMailboxes = (request: Readonly<ListMailboxesRequest> = {}) =>
     enrichForPagination('mailboxes', this.pageOfListMailboxes, request)
 
+  
   /**
    * Get a mailbox by its ID.. Get a mailbox by its ID.
    *
@@ -217,7 +231,7 @@ export class API extends ParentAPI {
       },
       unmarshalMailbox,
     )
-
+  
   /**
    * Waits for {@link Mailbox} to be in a final state.
    *
@@ -225,7 +239,10 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Mailbox
    */
-  waitForMailbox = (request: Readonly<GetMailboxRequest>, options?: Readonly<WaitForOptions<Mailbox>>) =>
+  waitForMailbox = (
+    request: Readonly<GetMailboxRequest>,
+    options?: Readonly<WaitForOptions<Mailbox>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!MAILBOX_TRANSIENT_STATUSES_MAILBOX.includes(res.status))),
       this.getMailbox,
@@ -233,6 +250,7 @@ export class API extends ParentAPI {
       options,
     )
 
+  
   /**
    * Update a mailbox subscription period or password with its ID.. Update a mailbox subscription period or password with its ID.
    *
@@ -242,7 +260,9 @@ export class API extends ParentAPI {
   updateMailbox = (request: Readonly<UpdateMailboxRequest>) =>
     this.client.fetch<Mailbox>(
       {
-        body: JSON.stringify(marshalUpdateMailboxRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalUpdateMailboxRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}`,
@@ -250,6 +270,7 @@ export class API extends ParentAPI {
       unmarshalMailbox,
     )
 
+  
   /**
    * Delete a mailbox by its ID.. Delete a mailbox by its ID.
    *
@@ -265,6 +286,7 @@ export class API extends ParentAPI {
       unmarshalMailbox,
     )
 
+  
   /**
    * Restore a mailbox in deletion scheduled status by its ID.. Restore a mailbox in deletion scheduled status by its ID.
    *
@@ -281,4 +303,7 @@ export class API extends ParentAPI {
       },
       unmarshalMailbox,
     )
+
+  
 }
+

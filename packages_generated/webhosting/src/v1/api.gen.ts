@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,11 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {
-  BACKUP_TRANSIENT_STATUSES as BACKUP_TRANSIENT_STATUSES_WEBHOSTING,
-  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,
-  HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,
-} from './content.gen.js'
+import {BACKUP_TRANSIENT_STATUSES as BACKUP_TRANSIENT_STATUSES_WEBHOSTING,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,} from './content.gen.js'
 import {
   marshalBackupApiRestoreBackupItemsRequest,
   marshalDatabaseApiAssignDatabaseUserRequest,
@@ -171,10 +167,15 @@ export class BackupAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   protected pageOfListBackups = (request: Readonly<BackupApiListBackupsRequest>) =>
     this.client.fetch<ListBackupsResponse>(
       {
@@ -188,7 +189,7 @@ export class BackupAPI extends ParentAPI {
       },
       unmarshalListBackupsResponse,
     )
-
+  
   /**
    * List all available backups for a hosting account.. List all available backups for a hosting account.
    *
@@ -198,6 +199,7 @@ export class BackupAPI extends ParentAPI {
   listBackups = (request: Readonly<BackupApiListBackupsRequest>) =>
     enrichForPagination('backups', this.pageOfListBackups, request)
 
+  
   /**
    * Get info about a backup specified by the backup ID.. Get info about a backup specified by the backup ID.
    *
@@ -212,7 +214,7 @@ export class BackupAPI extends ParentAPI {
       },
       unmarshalBackup,
     )
-
+  
   /**
    * Waits for {@link Backup} to be in a final state.
    *
@@ -220,7 +222,10 @@ export class BackupAPI extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Backup
    */
-  waitForBackup = (request: Readonly<BackupApiGetBackupRequest>, options?: Readonly<WaitForOptions<Backup>>) =>
+  waitForBackup = (
+    request: Readonly<BackupApiGetBackupRequest>,
+    options?: Readonly<WaitForOptions<Backup>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!BACKUP_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status))),
       this.getBackup,
@@ -228,6 +233,7 @@ export class BackupAPI extends ParentAPI {
       options,
     )
 
+  
   /**
    * Restore an entire backup to your hosting environment.. Restore an entire backup to your hosting environment.
    *
@@ -245,6 +251,7 @@ export class BackupAPI extends ParentAPI {
       unmarshalRestoreBackupResponse,
     )
 
+  
   /**
    * List items within a specific backup, grouped by type.. List items within a specific backup, grouped by type.
    *
@@ -256,11 +263,14 @@ export class BackupAPI extends ParentAPI {
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/backup-items`,
-        urlParams: urlParams(['backup_id', request.backupId]),
+        urlParams: urlParams(
+          ['backup_id', request.backupId],
+        ),
       },
       unmarshalListBackupItemsResponse,
     )
 
+  
   /**
    * Restore specific items from a backup (e.g., a database or mailbox).. Restore specific items from a backup (e.g., a database or mailbox).
    *
@@ -270,7 +280,9 @@ export class BackupAPI extends ParentAPI {
   restoreBackupItems = (request: Readonly<BackupApiRestoreBackupItemsRequest>) =>
     this.client.fetch<RestoreBackupItemsResponse>(
       {
-        body: JSON.stringify(marshalBackupApiRestoreBackupItemsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalBackupApiRestoreBackupItemsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/restore-backup-items`,
@@ -278,6 +290,7 @@ export class BackupAPI extends ParentAPI {
       unmarshalRestoreBackupItemsResponse,
     )
 
+  
   /**
    * Retrieve detailed information about a specific progress by its ID.. Retrieve detailed information about a specific progress by its ID.
    *
@@ -293,6 +306,7 @@ export class BackupAPI extends ParentAPI {
       unmarshalProgress,
     )
 
+  
   /**
    * List recent progresses associated with a specific backup, grouped by type.. List recent progresses associated with a specific backup, grouped by type.
    *
@@ -307,6 +321,8 @@ export class BackupAPI extends ParentAPI {
       },
       unmarshalListRecentProgressesResponse,
     )
+
+  
 }
 
 /**
@@ -319,10 +335,15 @@ export class ControlPanelAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   protected pageOfListControlPanels = (request: Readonly<ControlPanelApiListControlPanelsRequest> = {}) =>
     this.client.fetch<ListControlPanelsResponse>(
       {
@@ -335,7 +356,7 @@ export class ControlPanelAPI extends ParentAPI {
       },
       unmarshalListControlPanelsResponse,
     )
-
+  
   /**
    * "List the control panels type: cpanel or plesk.".
    *
@@ -344,6 +365,8 @@ export class ControlPanelAPI extends ParentAPI {
    */
   listControlPanels = (request: Readonly<ControlPanelApiListControlPanelsRequest> = {}) =>
     enrichForPagination('controlPanels', this.pageOfListControlPanels, request)
+
+  
 }
 
 /**
@@ -356,10 +379,15 @@ export class DatabaseAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * "Create a new database within your hosting plan".
    *
@@ -369,7 +397,9 @@ export class DatabaseAPI extends ParentAPI {
   createDatabase = (request: Readonly<DatabaseApiCreateDatabaseRequest>) =>
     this.client.fetch<Database>(
       {
-        body: JSON.stringify(marshalDatabaseApiCreateDatabaseRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDatabaseApiCreateDatabaseRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases`,
@@ -377,6 +407,7 @@ export class DatabaseAPI extends ParentAPI {
       unmarshalDatabase,
     )
 
+  
   protected pageOfListDatabases = (request: Readonly<DatabaseApiListDatabasesRequest>) =>
     this.client.fetch<ListDatabasesResponse>(
       {
@@ -390,7 +421,7 @@ export class DatabaseAPI extends ParentAPI {
       },
       unmarshalListDatabasesResponse,
     )
-
+  
   /**
    * "List all databases within your hosting plan".
    *
@@ -400,6 +431,7 @@ export class DatabaseAPI extends ParentAPI {
   listDatabases = (request: Readonly<DatabaseApiListDatabasesRequest>) =>
     enrichForPagination('databases', this.pageOfListDatabases, request)
 
+  
   /**
    * "Get details of a database within your hosting plan".
    *
@@ -415,6 +447,7 @@ export class DatabaseAPI extends ParentAPI {
       unmarshalDatabase,
     )
 
+  
   /**
    * "Delete a database within your hosting plan".
    *
@@ -430,6 +463,7 @@ export class DatabaseAPI extends ParentAPI {
       unmarshalDatabase,
     )
 
+  
   /**
    * "Create a new database user".
    *
@@ -439,7 +473,9 @@ export class DatabaseAPI extends ParentAPI {
   createDatabaseUser = (request: Readonly<DatabaseApiCreateDatabaseUserRequest>) =>
     this.client.fetch<DatabaseUser>(
       {
-        body: JSON.stringify(marshalDatabaseApiCreateDatabaseUserRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDatabaseApiCreateDatabaseUserRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users`,
@@ -447,6 +483,7 @@ export class DatabaseAPI extends ParentAPI {
       unmarshalDatabaseUser,
     )
 
+  
   protected pageOfListDatabaseUsers = (request: Readonly<DatabaseApiListDatabaseUsersRequest>) =>
     this.client.fetch<ListDatabaseUsersResponse>(
       {
@@ -460,7 +497,7 @@ export class DatabaseAPI extends ParentAPI {
       },
       unmarshalListDatabaseUsersResponse,
     )
-
+  
   /**
    * "List all database users".
    *
@@ -470,6 +507,7 @@ export class DatabaseAPI extends ParentAPI {
   listDatabaseUsers = (request: Readonly<DatabaseApiListDatabaseUsersRequest>) =>
     enrichForPagination('users', this.pageOfListDatabaseUsers, request)
 
+  
   /**
    * "Get details of a database user".
    *
@@ -485,6 +523,7 @@ export class DatabaseAPI extends ParentAPI {
       unmarshalDatabaseUser,
     )
 
+  
   /**
    * "Delete a database user".
    *
@@ -500,6 +539,7 @@ export class DatabaseAPI extends ParentAPI {
       unmarshalDatabaseUser,
     )
 
+  
   /**
    * "Change the password of a database user".
    *
@@ -509,7 +549,9 @@ export class DatabaseAPI extends ParentAPI {
   changeDatabaseUserPassword = (request: Readonly<DatabaseApiChangeDatabaseUserPasswordRequest>) =>
     this.client.fetch<DatabaseUser>(
       {
-        body: JSON.stringify(marshalDatabaseApiChangeDatabaseUserPasswordRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDatabaseApiChangeDatabaseUserPasswordRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users/${validatePathParam('username', request.username)}/change-password`,
@@ -517,6 +559,7 @@ export class DatabaseAPI extends ParentAPI {
       unmarshalDatabaseUser,
     )
 
+  
   /**
    * "Assign a database user to a database".
    *
@@ -526,7 +569,9 @@ export class DatabaseAPI extends ParentAPI {
   assignDatabaseUser = (request: Readonly<DatabaseApiAssignDatabaseUserRequest>) =>
     this.client.fetch<DatabaseUser>(
       {
-        body: JSON.stringify(marshalDatabaseApiAssignDatabaseUserRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDatabaseApiAssignDatabaseUserRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}/assign-user`,
@@ -534,6 +579,7 @@ export class DatabaseAPI extends ParentAPI {
       unmarshalDatabaseUser,
     )
 
+  
   /**
    * "Unassign a database user from a database".
    *
@@ -543,13 +589,17 @@ export class DatabaseAPI extends ParentAPI {
   unassignDatabaseUser = (request: Readonly<DatabaseApiUnassignDatabaseUserRequest>) =>
     this.client.fetch<DatabaseUser>(
       {
-        body: JSON.stringify(marshalDatabaseApiUnassignDatabaseUserRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDatabaseApiUnassignDatabaseUserRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}/unassign-user`,
       },
       unmarshalDatabaseUser,
     )
+
+  
 }
 
 /**
@@ -562,10 +612,15 @@ export class DnsAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * Get DNS records. Get the set of DNS records of a specified domain associated with a Web Hosting plan's domain.
    *
@@ -581,6 +636,7 @@ export class DnsAPI extends ParentAPI {
       unmarshalDnsRecords,
     )
 
+  
   /**
    * Check whether you own this domain or not.. Check whether you own this domain or not.
    *
@@ -591,7 +647,9 @@ export class DnsAPI extends ParentAPI {
   checkUserOwnsDomain = (request: Readonly<DnsApiCheckUserOwnsDomainRequest>) =>
     this.client.fetch<CheckUserOwnsDomainResponse>(
       {
-        body: JSON.stringify(marshalDnsApiCheckUserOwnsDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDnsApiCheckUserOwnsDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/check-ownership`,
@@ -599,6 +657,7 @@ export class DnsAPI extends ParentAPI {
       unmarshalCheckUserOwnsDomainResponse,
     )
 
+  
   /**
    * Synchronize your DNS records on the Elements Console and on cPanel.. Synchronize your DNS records on the Elements Console and on cPanel.
    *
@@ -608,7 +667,9 @@ export class DnsAPI extends ParentAPI {
   syncDomainDnsRecords = (request: Readonly<DnsApiSyncDomainDnsRecordsRequest>) =>
     this.client.fetch<DnsRecords>(
       {
-        body: JSON.stringify(marshalDnsApiSyncDomainDnsRecordsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalDnsApiSyncDomainDnsRecordsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/sync-domain-dns-records`,
@@ -616,6 +677,7 @@ export class DnsAPI extends ParentAPI {
       unmarshalDnsRecords,
     )
 
+  
   /**
    * Search for available domains based on domain name.. Search for available domains based on domain name.
    *
@@ -635,6 +697,7 @@ export class DnsAPI extends ParentAPI {
       unmarshalSearchDomainsResponse,
     )
 
+  
   /**
    * Retrieve detailed information about a specific domain, including its status, DNS configuration, and ownership.. Retrieve detailed information about a specific domain, including its status, DNS configuration, and ownership.
    *
@@ -646,11 +709,13 @@ export class DnsAPI extends ParentAPI {
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainName', request.domainName)}`,
-        urlParams: urlParams(['project_id', request.projectId ?? this.client.settings.defaultProjectId]),
+        urlParams: urlParams(
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+        ),
       },
       unmarshalDomain,
     )
-
+  
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -658,13 +723,18 @@ export class DnsAPI extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Domain
    */
-  waitForDomain = (request: Readonly<DnsApiGetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) =>
+  waitForDomain = (
+    request: Readonly<DnsApiGetDomainRequest>,
+    options?: Readonly<WaitForOptions<Domain>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status))),
       this.getDomain,
       request,
       options,
     )
+
+  
 }
 
 /**
@@ -677,10 +747,15 @@ export class OfferAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   protected pageOfListOffers = (request: Readonly<OfferApiListOffersRequest> = {}) =>
     this.client.fetch<ListOffersResponse>(
       {
@@ -696,7 +771,7 @@ export class OfferAPI extends ParentAPI {
       },
       unmarshalListOffersResponse,
     )
-
+  
   /**
    * List all available hosting offers along with their specific options.. List all available hosting offers along with their specific options.
    *
@@ -705,6 +780,8 @@ export class OfferAPI extends ParentAPI {
    */
   listOffers = (request: Readonly<OfferApiListOffersRequest> = {}) =>
     enrichForPagination('offers', this.pageOfListOffers, request)
+
+  
 }
 
 /**
@@ -717,10 +794,15 @@ export class HostingAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * Order a Web Hosting plan. Order a Web Hosting plan, specifying the offer type required via the `offer_id` parameter.
    *
@@ -730,7 +812,9 @@ export class HostingAPI extends ParentAPI {
   createHosting = (request: Readonly<HostingApiCreateHostingRequest>) =>
     this.client.fetch<Hosting>(
       {
-        body: JSON.stringify(marshalHostingApiCreateHostingRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalHostingApiCreateHostingRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings`,
@@ -738,6 +822,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalHosting,
     )
 
+  
   protected pageOfListHostings = (request: Readonly<HostingApiListHostingsRequest> = {}) =>
     this.client.fetch<ListHostingsResponse>(
       {
@@ -758,7 +843,7 @@ export class HostingAPI extends ParentAPI {
       },
       unmarshalListHostingsResponse,
     )
-
+  
   /**
    * List all Web Hosting plans. List all of your existing Web Hosting plans. Various filters are available to limit the results, including filtering by domain, status, tag and Project ID.
    *
@@ -768,6 +853,7 @@ export class HostingAPI extends ParentAPI {
   listHostings = (request: Readonly<HostingApiListHostingsRequest> = {}) =>
     enrichForPagination('hostings', this.pageOfListHostings, request)
 
+  
   /**
    * Get a Web Hosting plan. Get the details of one of your existing Web Hosting plans, specified by its `hosting_id`.
    *
@@ -782,7 +868,7 @@ export class HostingAPI extends ParentAPI {
       },
       unmarshalHosting,
     )
-
+  
   /**
    * Waits for {@link Hosting} to be in a final state.
    *
@@ -790,7 +876,10 @@ export class HostingAPI extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Hosting
    */
-  waitForHosting = (request: Readonly<HostingApiGetHostingRequest>, options?: Readonly<WaitForOptions<Hosting>>) =>
+  waitForHosting = (
+    request: Readonly<HostingApiGetHostingRequest>,
+    options?: Readonly<WaitForOptions<Hosting>>,
+  ) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!HOSTING_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status))),
       this.getHosting,
@@ -798,6 +887,7 @@ export class HostingAPI extends ParentAPI {
       options,
     )
 
+  
   /**
    * Update a Web Hosting plan. Update the details of one of your existing Web Hosting plans, specified by its `hosting_id`. You can update parameters including the contact email address, tags, options and offer.
    *
@@ -807,7 +897,9 @@ export class HostingAPI extends ParentAPI {
   updateHosting = (request: Readonly<HostingApiUpdateHostingRequest>) =>
     this.client.fetch<Hosting>(
       {
-        body: JSON.stringify(marshalHostingApiUpdateHostingRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalHostingApiUpdateHostingRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
@@ -815,6 +907,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalHosting,
     )
 
+  
   /**
    * Delete a Web Hosting plan. Delete a Web Hosting plan, specified by its `hosting_id`. Note that deletion is not immediate: it will take place at the end of the calendar month, after which time your Web Hosting plan and all its data (files and emails) will be irreversibly lost.
    *
@@ -830,6 +923,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalHosting,
     )
 
+  
   /**
    * Create a user session.
    *
@@ -847,6 +941,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalSession,
     )
 
+  
   /**
    * Reset a Web Hosting plan password.
    *
@@ -864,6 +959,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalResetHostingPasswordResponse,
     )
 
+  
   /**
    * Get the total counts of websites, databases, email accounts, and FTP accounts of a Web Hosting plan.
    *
@@ -879,6 +975,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalResourceSummary,
     )
 
+  
   /**
    * Attach a custom domain to a webhosting as an alias to the main domain.
    *
@@ -888,7 +985,9 @@ export class HostingAPI extends ParentAPI {
   addCustomDomain = (request: Readonly<HostingApiAddCustomDomainRequest>) =>
     this.client.fetch<HostingSummary>(
       {
-        body: JSON.stringify(marshalHostingApiAddCustomDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalHostingApiAddCustomDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/add-custom-domain`,
@@ -896,6 +995,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalHostingSummary,
     )
 
+  
   /**
    * Detach a custom domain from a webhosting.
    *
@@ -905,7 +1005,9 @@ export class HostingAPI extends ParentAPI {
   removeCustomDomain = (request: Readonly<HostingApiRemoveCustomDomainRequest>) =>
     this.client.fetch<HostingSummary>(
       {
-        body: JSON.stringify(marshalHostingApiRemoveCustomDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalHostingApiRemoveCustomDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-custom-domain`,
@@ -913,6 +1015,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalHostingSummary,
     )
 
+  
   /**
    * Migrate a hosting to a new control panel.. Migrate a hosting to a new control panel.
    *
@@ -922,7 +1025,9 @@ export class HostingAPI extends ParentAPI {
   migrateControlPanel = (request: Readonly<HostingApiMigrateControlPanelRequest>) =>
     this.client.fetch<HostingSummary>(
       {
-        body: JSON.stringify(marshalHostingApiMigrateControlPanelRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalHostingApiMigrateControlPanelRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/migrate-control-panel`,
@@ -930,6 +1035,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalHostingSummary,
     )
 
+  
   /**
    * Reset a Web Hosting plan. Reset a Web Hosting plan to its initial state, specified by its `hosting_id`. This permanently deletes all hosting data including files, databases and emails. The hosting will be re-provisioned.
    *
@@ -947,6 +1053,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalHosting,
     )
 
+  
   /**
    * Delete domains from a Web Hosting plan. Remove one or more domains from a Web Hosting plan, specified by its `hosting_id`. This permanently deletes the domains and all services tied to them, including mailboxes, FTP accounts and DNS zones.
    *
@@ -956,7 +1063,9 @@ export class HostingAPI extends ParentAPI {
   deleteHostingDomains = (request: Readonly<HostingApiDeleteHostingDomainsRequest>) =>
     this.client.fetch<Hosting>(
       {
-        body: JSON.stringify(marshalHostingApiDeleteHostingDomainsRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalHostingApiDeleteHostingDomainsRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/delete-domains`,
@@ -964,6 +1073,7 @@ export class HostingAPI extends ParentAPI {
       unmarshalHosting,
     )
 
+  
   /**
    * Update the free domain of a Web Hosting plan. Change the free domain associated with a Web Hosting plan, specified by its `hosting_id`.
    *
@@ -973,13 +1083,17 @@ export class HostingAPI extends ParentAPI {
   updateHostingFreeDomain = (request: Readonly<HostingApiUpdateHostingFreeDomainRequest>) =>
     this.client.fetch<Hosting>(
       {
-        body: JSON.stringify(marshalHostingApiUpdateHostingFreeDomainRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalHostingApiUpdateHostingFreeDomainRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/update-free-domain`,
       },
       unmarshalHosting,
     )
+
+  
 }
 
 /**
@@ -992,10 +1106,15 @@ export class FreeDomainAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * Check whether a given slug and free domain combination is available.. Check whether a given slug and free domain combination is available.
    *
@@ -1005,7 +1124,9 @@ export class FreeDomainAPI extends ParentAPI {
   checkFreeDomainAvailability = (request: Readonly<FreeDomainApiCheckFreeDomainAvailabilityRequest>) =>
     this.client.fetch<CheckFreeDomainAvailabilityResponse>(
       {
-        body: JSON.stringify(marshalFreeDomainApiCheckFreeDomainAvailabilityRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalFreeDomainApiCheckFreeDomainAvailabilityRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/free-domains/check-availability`,
@@ -1013,6 +1134,7 @@ export class FreeDomainAPI extends ParentAPI {
       unmarshalCheckFreeDomainAvailabilityResponse,
     )
 
+  
   protected pageOfListFreeRootDomains = (request: Readonly<FreeDomainApiListFreeRootDomainsRequest> = {}) =>
     this.client.fetch<ListFreeRootDomainsResponse>(
       {
@@ -1025,7 +1147,7 @@ export class FreeDomainAPI extends ParentAPI {
       },
       unmarshalListFreeRootDomainsResponse,
     )
-
+  
   /**
    * Retrieve the list of free root domains available for a Web Hosting.. Retrieve the list of free root domains available for a Web Hosting.
    *
@@ -1034,6 +1156,8 @@ export class FreeDomainAPI extends ParentAPI {
    */
   listFreeRootDomains = (request: Readonly<FreeDomainApiListFreeRootDomainsRequest> = {}) =>
     enrichForPagination('rootDomains', this.pageOfListFreeRootDomains, request)
+
+  
 }
 
 /**
@@ -1046,10 +1170,15 @@ export class FtpAccountAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * Create a new FTP account within your hosting plan.. Create a new FTP account within your hosting plan.
    *
@@ -1059,7 +1188,9 @@ export class FtpAccountAPI extends ParentAPI {
   createFtpAccount = (request: Readonly<FtpAccountApiCreateFtpAccountRequest>) =>
     this.client.fetch<FtpAccount>(
       {
-        body: JSON.stringify(marshalFtpAccountApiCreateFtpAccountRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalFtpAccountApiCreateFtpAccountRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts`,
@@ -1067,6 +1198,7 @@ export class FtpAccountAPI extends ParentAPI {
       unmarshalFtpAccount,
     )
 
+  
   protected pageOfListFtpAccounts = (request: Readonly<FtpAccountApiListFtpAccountsRequest>) =>
     this.client.fetch<ListFtpAccountsResponse>(
       {
@@ -1081,7 +1213,7 @@ export class FtpAccountAPI extends ParentAPI {
       },
       unmarshalListFtpAccountsResponse,
     )
-
+  
   /**
    * List all FTP accounts within your hosting plan.. List all FTP accounts within your hosting plan.
    *
@@ -1091,6 +1223,7 @@ export class FtpAccountAPI extends ParentAPI {
   listFtpAccounts = (request: Readonly<FtpAccountApiListFtpAccountsRequest>) =>
     enrichForPagination('ftpAccounts', this.pageOfListFtpAccounts, request)
 
+  
   /**
    * Delete a specific FTP account within your hosting plan.. Delete a specific FTP account within your hosting plan.
    *
@@ -1106,16 +1239,21 @@ export class FtpAccountAPI extends ParentAPI {
       unmarshalFtpAccount,
     )
 
+  
   changeFtpAccountPassword = (request: Readonly<FtpAccountApiChangeFtpAccountPasswordRequest>) =>
     this.client.fetch<FtpAccount>(
       {
-        body: JSON.stringify(marshalFtpAccountApiChangeFtpAccountPasswordRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalFtpAccountApiChangeFtpAccountPasswordRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts/${validatePathParam('username', request.username)}/change-password`,
       },
       unmarshalFtpAccount,
     )
+
+  
 }
 
 /**
@@ -1128,10 +1266,15 @@ export class MailAccountAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * Create a new mail account within your hosting plan.. Create a new mail account within your hosting plan.
    *
@@ -1141,7 +1284,9 @@ export class MailAccountAPI extends ParentAPI {
   createMailAccount = (request: Readonly<MailAccountApiCreateMailAccountRequest>) =>
     this.client.fetch<MailAccount>(
       {
-        body: JSON.stringify(marshalMailAccountApiCreateMailAccountRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalMailAccountApiCreateMailAccountRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/mail-accounts`,
@@ -1149,6 +1294,7 @@ export class MailAccountAPI extends ParentAPI {
       unmarshalMailAccount,
     )
 
+  
   protected pageOfListMailAccounts = (request: Readonly<MailAccountApiListMailAccountsRequest>) =>
     this.client.fetch<ListMailAccountsResponse>(
       {
@@ -1163,7 +1309,7 @@ export class MailAccountAPI extends ParentAPI {
       },
       unmarshalListMailAccountsResponse,
     )
-
+  
   /**
    * List all mail accounts within your hosting plan.. List all mail accounts within your hosting plan.
    *
@@ -1173,6 +1319,7 @@ export class MailAccountAPI extends ParentAPI {
   listMailAccounts = (request: Readonly<MailAccountApiListMailAccountsRequest>) =>
     enrichForPagination('mailAccounts', this.pageOfListMailAccounts, request)
 
+  
   /**
    * Delete a mail account within your hosting plan.. Delete a mail account within your hosting plan.
    *
@@ -1182,7 +1329,9 @@ export class MailAccountAPI extends ParentAPI {
   removeMailAccount = (request: Readonly<MailAccountApiRemoveMailAccountRequest>) =>
     this.client.fetch<MailAccount>(
       {
-        body: JSON.stringify(marshalMailAccountApiRemoveMailAccountRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalMailAccountApiRemoveMailAccountRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-mail-account`,
@@ -1190,6 +1339,7 @@ export class MailAccountAPI extends ParentAPI {
       unmarshalMailAccount,
     )
 
+  
   /**
    * Update the password of a mail account within your hosting plan.. Update the password of a mail account within your hosting plan.
    *
@@ -1199,13 +1349,17 @@ export class MailAccountAPI extends ParentAPI {
   changeMailAccountPassword = (request: Readonly<MailAccountApiChangeMailAccountPasswordRequest>) =>
     this.client.fetch<MailAccount>(
       {
-        body: JSON.stringify(marshalMailAccountApiChangeMailAccountPasswordRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalMailAccountApiChangeMailAccountPasswordRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/change-mail-password`,
       },
       unmarshalMailAccount,
     )
+
+  
 }
 
 /**
@@ -1218,10 +1372,15 @@ export class WebsiteAPI extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   protected pageOfListWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>) =>
     this.client.fetch<ListWebsitesResponse>(
       {
@@ -1235,7 +1394,7 @@ export class WebsiteAPI extends ParentAPI {
       },
       unmarshalListWebsitesResponse,
     )
-
+  
   /**
    * List all websites for a specific hosting.. List all websites for a specific hosting.
    *
@@ -1245,6 +1404,7 @@ export class WebsiteAPI extends ParentAPI {
   listWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>) =>
     enrichForPagination('websites', this.pageOfListWebsites, request)
 
+  
   /**
    * Create a new website and attach it to a webhosting.
    *
@@ -1254,7 +1414,9 @@ export class WebsiteAPI extends ParentAPI {
   createWebsite = (request: Readonly<WebsiteApiCreateWebsiteRequest>) =>
     this.client.fetch<Website>(
       {
-        body: JSON.stringify(marshalWebsiteApiCreateWebsiteRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalWebsiteApiCreateWebsiteRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites`,
@@ -1262,17 +1424,21 @@ export class WebsiteAPI extends ParentAPI {
       unmarshalWebsite,
     )
 
+  
   /**
    * Delete a website from a webhosting.
    *
    * @param request - The request {@link WebsiteApiDeleteWebsiteRequest}
    */
   deleteWebsite = (request: Readonly<WebsiteApiDeleteWebsiteRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}`,
+      },
+    )
 
+  
   /**
    * Delete a website's content, all files and directories. This. Permanently deletes data including files and configurations. The
 website will display the default welcome page.
@@ -1290,4 +1456,7 @@ website will display the default welcome page.
       },
       unmarshalWebsite,
     )
+
+  
 }
+

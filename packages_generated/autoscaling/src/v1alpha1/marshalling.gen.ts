@@ -1,11 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-  unmarshalMapOfObject,
-} from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMapOfObject, } from '@scaleway/sdk-client'
 import type {
   Capacity,
   CreateInstanceGroupRequest,
@@ -34,7 +29,9 @@ import type {
 
 const unmarshalCapacity = (data: unknown): Capacity => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Capacity' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Capacity' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -46,7 +43,9 @@ const unmarshalCapacity = (data: unknown): Capacity => {
 
 const unmarshalLoadbalancer = (data: unknown): Loadbalancer => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Loadbalancer' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Loadbalancer' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -58,7 +57,9 @@ const unmarshalLoadbalancer = (data: unknown): Loadbalancer => {
 
 export const unmarshalInstanceGroup = (data: unknown): InstanceGroup => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'InstanceGroup' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceGroup' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -78,7 +79,9 @@ export const unmarshalInstanceGroup = (data: unknown): InstanceGroup => {
 
 const unmarshalMetric = (data: unknown): Metric => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Metric' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Metric' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -94,7 +97,9 @@ const unmarshalMetric = (data: unknown): Metric => {
 
 export const unmarshalInstancePolicy = (data: unknown): InstancePolicy => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'InstancePolicy' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'InstancePolicy' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -112,7 +117,9 @@ export const unmarshalInstancePolicy = (data: unknown): InstancePolicy => {
 
 const unmarshalVolumeInstanceTemplateFromEmpty = (data: unknown): VolumeInstanceTemplateFromEmpty => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VolumeInstanceTemplateFromEmpty' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeInstanceTemplateFromEmpty' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -135,7 +142,9 @@ const unmarshalVolumeInstanceTemplateFromSnapshot = (data: unknown): VolumeInsta
 
 const unmarshalVolumeInstanceTemplate = (data: unknown): VolumeInstanceTemplate => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'VolumeInstanceTemplate' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeInstanceTemplate' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -151,7 +160,9 @@ const unmarshalVolumeInstanceTemplate = (data: unknown): VolumeInstanceTemplate 
 
 export const unmarshalInstanceTemplate = (data: unknown): InstanceTemplate => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'InstanceTemplate' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceTemplate' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -177,7 +188,9 @@ export const unmarshalInstanceTemplate = (data: unknown): InstanceTemplate => {
 
 const unmarshalInstanceGroupEvent = (data: unknown): InstanceGroupEvent => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'InstanceGroupEvent' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceGroupEvent' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -192,7 +205,9 @@ const unmarshalInstanceGroupEvent = (data: unknown): InstanceGroupEvent => {
 
 export const unmarshalListInstanceGroupEventsResponse = (data: unknown): ListInstanceGroupEventsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListInstanceGroupEventsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstanceGroupEventsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -203,7 +218,9 @@ export const unmarshalListInstanceGroupEventsResponse = (data: unknown): ListIns
 
 export const unmarshalListInstanceGroupsResponse = (data: unknown): ListInstanceGroupsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListInstanceGroupsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstanceGroupsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -214,7 +231,9 @@ export const unmarshalListInstanceGroupsResponse = (data: unknown): ListInstance
 
 export const unmarshalListInstancePoliciesResponse = (data: unknown): ListInstancePoliciesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListInstancePoliciesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstancePoliciesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -225,7 +244,9 @@ export const unmarshalListInstancePoliciesResponse = (data: unknown): ListInstan
 
 export const unmarshalListInstanceTemplatesResponse = (data: unknown): ListInstanceTemplatesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListInstanceTemplatesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListInstanceTemplatesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -234,13 +255,19 @@ export const unmarshalListInstanceTemplatesResponse = (data: unknown): ListInsta
   } as ListInstanceTemplatesResponse
 }
 
-const marshalCapacity = (request: Capacity, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalCapacity = (
+  request: Capacity,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   cooldown_delay: request.cooldownDelay,
   max_replicas: request.maxReplicas,
   min_replicas: request.minReplicas,
 })
 
-const marshalLoadbalancer = (request: Loadbalancer, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalLoadbalancer = (
+  request: Loadbalancer,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   backend_ids: request.backendIds,
   id: request.id,
   private_network_id: request.privateNetworkId,
@@ -250,23 +277,30 @@ export const marshalCreateInstanceGroupRequest = (
   request: CreateInstanceGroupRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  capacity: marshalCapacity(request.capacity, defaults),
-  loadbalancer: marshalLoadbalancer(request.loadbalancer, defaults),
+  capacity:  marshalCapacity(request.capacity, defaults),
+  loadbalancer:  marshalLoadbalancer(request.loadbalancer, defaults),
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
   template_id: request.templateId,
 })
 
-const marshalMetric = (request: Metric, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalMetric = (
+  request: Metric,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   aggregate: request.aggregate,
   name: request.name,
   operator: request.operator,
   sampling_range_min: request.samplingRangeMin,
-  threshold: request.threshold,
+  threshold: request.threshold,  
   ...resolveOneOf([
-    { param: 'managed_metric', value: request.managedMetric },
-    { param: 'cockpit_metric_name', value: request.cockpitMetricName },
+    {param: 'managed_metric',
+      value: request.managedMetric,
+    },
+    {param: 'cockpit_metric_name',
+      value: request.cockpitMetricName,
+    },
   ]),
 })
 
@@ -279,9 +313,12 @@ export const marshalCreateInstancePolicyRequest = (
   name: request.name,
   priority: request.priority,
   type: request.type,
-  value: request.value,
+  value: request.value,  
   ...resolveOneOf([
-    { param: 'metric', value: request.metric !== undefined ? marshalMetric(request.metric, defaults) : undefined },
+    {param: 'metric',
+      value: (request.metric !== undefined) ? marshalMetric(request.metric, defaults)
+      : undefined,
+    },
   ]),
 })
 
@@ -307,24 +344,22 @@ const marshalVolumeInstanceTemplate = (
   boot: request.boot,
   name: request.name,
   tags: request.tags,
-  volume_type: request.volumeType,
+  volume_type: request.volumeType,  
   ...resolveOneOf([
-    {
-      param: 'from_empty',
-      value:
-        request.fromEmpty !== undefined
-          ? marshalVolumeInstanceTemplateFromEmpty(request.fromEmpty, defaults)
-          : undefined,
+    {param: 'from_empty',
+      value: (request.fromEmpty !== undefined) ? marshalVolumeInstanceTemplateFromEmpty(request.fromEmpty, defaults)
+      : undefined,
     },
-    {
-      param: 'from_snapshot',
-      value:
-        request.fromSnapshot !== undefined
-          ? marshalVolumeInstanceTemplateFromSnapshot(request.fromSnapshot, defaults)
-          : undefined,
+    {param: 'from_snapshot',
+      value: (request.fromSnapshot !== undefined) ? marshalVolumeInstanceTemplateFromSnapshot(request.fromSnapshot, defaults)
+      : undefined,
+    },
+  ]),  
+  ...resolveOneOf([
+    {param: 'perf_iops',
+      value: request.perfIops,
     },
   ]),
-  ...resolveOneOf([{ param: 'perf_iops', value: request.perfIops }]),
 })
 
 export const marshalCreateInstanceTemplateRequest = (
@@ -342,10 +377,7 @@ export const marshalCreateInstanceTemplateRequest = (
   public_ips_v6_count: request.publicIpsV6Count,
   security_group_id: request.securityGroupId,
   tags: request.tags,
-  volumes: Object.entries(request.volumes).reduce(
-    (acc, [key, value]) => ({ ...acc, [key]: marshalVolumeInstanceTemplate(value, defaults) }),
-    {},
-  ),
+  volumes:  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeInstanceTemplate(value, defaults) }), {}),
 })
 
 const marshalUpdateInstanceGroupRequestCapacity = (
@@ -368,12 +400,8 @@ export const marshalUpdateInstanceGroupRequest = (
   request: UpdateInstanceGroupRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  capacity:
-    request.capacity !== undefined ? marshalUpdateInstanceGroupRequestCapacity(request.capacity, defaults) : undefined,
-  loadbalancer:
-    request.loadbalancer !== undefined
-      ? marshalUpdateInstanceGroupRequestLoadbalancer(request.loadbalancer, defaults)
-      : undefined,
+  capacity: ((request.capacity !== undefined) ?  marshalUpdateInstanceGroupRequestCapacity(request.capacity, defaults): undefined),
+  loadbalancer: ((request.loadbalancer !== undefined) ?  marshalUpdateInstanceGroupRequestLoadbalancer(request.loadbalancer, defaults): undefined),
   name: request.name,
   tags: request.tags,
 })
@@ -386,10 +414,14 @@ const marshalUpdateInstancePolicyRequestMetric = (
   name: request.name,
   operator: request.operator,
   sampling_range_min: request.samplingRangeMin,
-  threshold: request.threshold,
+  threshold: request.threshold,  
   ...resolveOneOf([
-    { param: 'managed_metric', value: request.managedMetric },
-    { param: 'cockpit_metric_name', value: request.cockpitMetricName },
+    {param: 'managed_metric',
+      value: request.managedMetric,
+    },
+    {param: 'cockpit_metric_name',
+      value: request.cockpitMetricName,
+    },
   ]),
 })
 
@@ -401,12 +433,11 @@ export const marshalUpdateInstancePolicyRequest = (
   name: request.name,
   priority: request.priority,
   type: request.type,
-  value: request.value,
+  value: request.value,  
   ...resolveOneOf([
-    {
-      param: 'metric',
-      value:
-        request.metric !== undefined ? marshalUpdateInstancePolicyRequestMetric(request.metric, defaults) : undefined,
+    {param: 'metric',
+      value: (request.metric !== undefined) ? marshalUpdateInstancePolicyRequestMetric(request.metric, defaults)
+      : undefined,
     },
   ]),
 })
@@ -425,11 +456,5 @@ export const marshalUpdateInstanceTemplateRequest = (
   public_ips_v6_count: request.publicIpsV6Count,
   security_group_id: request.securityGroupId,
   tags: request.tags,
-  volumes:
-    request.volumes !== undefined
-      ? Object.entries(request.volumes).reduce(
-          (acc, [key, value]) => ({ ...acc, [key]: marshalVolumeInstanceTemplate(value, defaults) }),
-          {},
-        )
-      : undefined,
+  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeInstanceTemplate(value, defaults) }), {}): undefined),
 })

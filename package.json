@@ -6,10 +6,6 @@
     "packages_generated/*",
     "tools/*"
   ],
-  "engines": {
-    "node": ">=20.19.0",
-    "pnpm": ">=10.33.0"
-  },
   "type": "module",
   "scripts": {
     "generateAlias": "generateAlias",
@@ -23,8 +19,6 @@
     "build:profile": "cross-env PROFILE=true pnpm run build",
     "commit": "npx git-cz -a",
     "doc": "typedoc",
-    "fmt": "biome check  --linter-enabled=false --write . --diagnostic-level=error",
-    "fmt:check": "biome check --linter-enabled=false --verbose .",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "lint": "biome lint .",
@@ -58,7 +52,7 @@
     "jsdom": "27.4.0",
     "lerna": "9.0.7",
     "lint-staged": "16.3.2",
-    "oxfmt": "0.44.0",
+    "oxfmt": "0.45.0",
     "react": "^19.2.4",
     "read-pkg": "10.1.0",
     "shx": "0.4.0",
@@ -70,5 +64,42 @@
     "vite": "8.0.8",
     "vitest": "3.2.4"
   },
-  "packageManager": "pnpm@10.33.0"
+  "lint-staged": {
+    "packages/*/src/**/*.{ts,tsx,js,jsx}": [
+      "pnpm run format"
+    ],
+    "tools/**/*.ts": [
+      "pnpm run format"
+    ],
+    "*.y?(a)ml": [
+      "pnpm oxfmt --write"
+    ],
+    "*.md?(x)": [
+      "pnpm prettier --write"
+    ],
+    "*.json": [
+      "pnpm run format"
+    ],
+    "(*package).json": [
+      "pnpm exec manypkg check"
+    ],
+    "(*pnpm)-lock": [
+      "pnpm exec manypkg check"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "engines": {
+    "node": ">=20.19.0",
+    "pnpm": ">=10.30.3"
+  },
+  "packageManager": "pnpm@10.30.3"
 }

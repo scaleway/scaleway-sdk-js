@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: '@scaleway/sdk-rdb',
-  namespace: 'rdb',
-  displayName: 'Rdb',
-  versions: ['v1'],
+  name: "@scaleway/sdk-rdb",
+  namespace: "rdb",
+  displayName: "Rdb",
+  versions: ["v1"]
 } as const
 
 export type Metadata = typeof pkgMetadata

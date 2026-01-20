@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type JobRunState =
   | 'unknown_state'
@@ -12,17 +13,23 @@ export type JobRunState =
   | 'canceled'
   | 'internal_error'
 
-export type ListJobDefinitionsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListJobDefinitionsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
-export type ListJobRunsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListJobRunsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
 export interface SecretEnvVar {
   name: string
 }
 
+
 export interface SecretFile {
   path: string
 }
+
 
 export interface CronSchedule {
   /**
@@ -35,10 +42,12 @@ export interface CronSchedule {
   timezone: string
 }
 
+
 export interface CreateJobDefinitionRequestCronScheduleConfig {
   schedule: string
   timezone: string
 }
+
 
 export interface CreateJobDefinitionSecretsRequestSecretConfig {
   secretManagerId: string
@@ -54,6 +63,7 @@ export interface CreateJobDefinitionSecretsRequestSecretConfig {
    */
   envVarName?: string
 }
+
 
 export interface Secret {
   /**
@@ -82,6 +92,7 @@ export interface Secret {
   envVar?: SecretEnvVar
 }
 
+
 export interface JobDefinition {
   id: string
   name: string
@@ -102,6 +113,7 @@ export interface JobDefinition {
    */
   region: ScwRegion
 }
+
 
 export interface JobRun {
   id: string
@@ -125,15 +137,18 @@ export interface JobRun {
   region: ScwRegion
 }
 
+
 export interface Resource {
   cpuLimit: number
   memoryLimit: number
 }
 
+
 export interface UpdateJobDefinitionRequestCronScheduleConfig {
   schedule?: string
   timezone?: string
 }
+
 
 export type CreateJobDefinitionRequest = {
   /**
@@ -186,6 +201,7 @@ export type CreateJobDefinitionRequest = {
   cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
 }
 
+
 export type CreateJobDefinitionSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -201,12 +217,14 @@ export type CreateJobDefinitionSecretsRequest = {
   secrets: CreateJobDefinitionSecretsRequestSecretConfig[]
 }
 
+
 export interface CreateJobDefinitionSecretsResponse {
   /**
    * List of secrets created.
    */
   secrets: Secret[]
 }
+
 
 export type DeleteJobDefinitionRequest = {
   /**
@@ -218,6 +236,7 @@ export type DeleteJobDefinitionRequest = {
    */
   jobDefinitionId: string
 }
+
 
 export type DeleteJobDefinitionSecretRequest = {
   /**
@@ -234,6 +253,7 @@ export type DeleteJobDefinitionSecretRequest = {
   secretId: string
 }
 
+
 export type GetJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -244,6 +264,7 @@ export type GetJobDefinitionRequest = {
    */
   jobDefinitionId: string
 }
+
 
 export type GetJobDefinitionSecretRequest = {
   /**
@@ -260,6 +281,7 @@ export type GetJobDefinitionSecretRequest = {
   secretId: string
 }
 
+
 export type GetJobRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -271,6 +293,7 @@ export type GetJobRunRequest = {
   jobRunId: string
 }
 
+
 export type GetJobsLimitsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -278,9 +301,11 @@ export type GetJobsLimitsRequest = {
   region?: ScwRegion
 }
 
+
 export interface JobsLimits {
   secretsPerJobDefinition: number
 }
+
 
 export type ListJobDefinitionSecretsRequest = {
   /**
@@ -293,6 +318,7 @@ export type ListJobDefinitionSecretsRequest = {
   jobDefinitionId: string
 }
 
+
 export interface ListJobDefinitionSecretsResponse {
   /**
    * List of secret references within a job definition.
@@ -303,6 +329,7 @@ export interface ListJobDefinitionSecretsResponse {
    */
   totalCount: number
 }
+
 
 export type ListJobDefinitionsRequest = {
   /**
@@ -316,10 +343,12 @@ export type ListJobDefinitionsRequest = {
   organizationId?: string
 }
 
+
 export interface ListJobDefinitionsResponse {
   jobDefinitions: JobDefinition[]
   totalCount: number
 }
+
 
 export type ListJobRunsRequest = {
   /**
@@ -336,10 +365,12 @@ export type ListJobRunsRequest = {
   states?: JobRunState[]
 }
 
+
 export interface ListJobRunsResponse {
   jobRuns: JobRun[]
   totalCount: number
 }
+
 
 export type ListJobsResourcesRequest = {
   /**
@@ -348,9 +379,11 @@ export type ListJobsResourcesRequest = {
   region?: ScwRegion
 }
 
+
 export interface ListJobsResourcesResponse {
   resources: Resource[]
 }
+
 
 export type StartJobDefinitionRequest = {
   /**
@@ -375,9 +408,11 @@ export type StartJobDefinitionRequest = {
   replicas?: number
 }
 
+
 export interface StartJobDefinitionResponse {
   jobRuns: JobRun[]
 }
+
 
 export type StopJobRunRequest = {
   /**
@@ -389,6 +424,7 @@ export type StopJobRunRequest = {
    */
   jobRunId: string
 }
+
 
 export type UpdateJobDefinitionRequest = {
   /**
@@ -438,6 +474,7 @@ export type UpdateJobDefinitionRequest = {
   cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig
 }
 
+
 export type UpdateJobDefinitionSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -468,3 +505,5 @@ export type UpdateJobDefinitionSecretRequest = {
    */
   envVarName?: string
 }
+
+

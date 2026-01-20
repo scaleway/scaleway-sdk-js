@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   CreateJobDefinitionRequest,
   CreateJobDefinitionRequestCronScheduleConfig,
@@ -38,7 +38,9 @@ import type {
 
 const unmarshalSecretEnvVar = (data: unknown): SecretEnvVar => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SecretEnvVar' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SecretEnvVar' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -48,7 +50,9 @@ const unmarshalSecretEnvVar = (data: unknown): SecretEnvVar => {
 
 const unmarshalSecretFile = (data: unknown): SecretFile => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SecretFile' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SecretFile' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -58,7 +62,9 @@ const unmarshalSecretFile = (data: unknown): SecretFile => {
 
 export const unmarshalSecret = (data: unknown): Secret => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Secret' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Secret' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -73,7 +79,9 @@ export const unmarshalSecret = (data: unknown): Secret => {
 
 const unmarshalCronSchedule = (data: unknown): CronSchedule => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'CronSchedule' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'CronSchedule' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -84,7 +92,9 @@ const unmarshalCronSchedule = (data: unknown): CronSchedule => {
 
 const unmarshalRetryPolicy = (data: unknown): RetryPolicy => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'RetryPolicy' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'RetryPolicy' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -94,7 +104,9 @@ const unmarshalRetryPolicy = (data: unknown): RetryPolicy => {
 
 export const unmarshalJobDefinition = (data: unknown): JobDefinition => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'JobDefinition' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'JobDefinition' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -121,7 +133,9 @@ export const unmarshalJobDefinition = (data: unknown): JobDefinition => {
 
 export const unmarshalJobRun = (data: unknown): JobRun => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'JobRun' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'JobRun' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -150,7 +164,9 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
 
 const unmarshalTriggerCronConfig = (data: unknown): TriggerCronConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'TriggerCronConfig' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerCronConfig' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -163,7 +179,9 @@ const unmarshalTriggerCronConfig = (data: unknown): TriggerCronConfig => {
 
 export const unmarshalTrigger = (data: unknown): Trigger => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -178,7 +196,9 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
 
 export const unmarshalCreateSecretsResponse = (data: unknown): CreateSecretsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'CreateSecretsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'CreateSecretsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -188,7 +208,9 @@ export const unmarshalCreateSecretsResponse = (data: unknown): CreateSecretsResp
 
 export const unmarshalJobLimits = (data: unknown): JobLimits => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'JobLimits' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'JobLimits' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -198,7 +220,9 @@ export const unmarshalJobLimits = (data: unknown): JobLimits => {
 
 export const unmarshalListJobDefinitionsResponse = (data: unknown): ListJobDefinitionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListJobDefinitionsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobDefinitionsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -209,7 +233,9 @@ export const unmarshalListJobDefinitionsResponse = (data: unknown): ListJobDefin
 
 const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Resource' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Resource' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -220,7 +246,9 @@ const unmarshalResource = (data: unknown): Resource => {
 
 export const unmarshalListJobResourcesResponse = (data: unknown): ListJobResourcesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListJobResourcesResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobResourcesResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -230,7 +258,9 @@ export const unmarshalListJobResourcesResponse = (data: unknown): ListJobResourc
 
 export const unmarshalListJobRunsResponse = (data: unknown): ListJobRunsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListJobRunsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListJobRunsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -241,7 +271,9 @@ export const unmarshalListJobRunsResponse = (data: unknown): ListJobRunsResponse
 
 export const unmarshalListSecretsResponse = (data: unknown): ListSecretsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListSecretsResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListSecretsResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -252,7 +284,9 @@ export const unmarshalListSecretsResponse = (data: unknown): ListSecretsResponse
 
 export const unmarshalListTriggersResponse = (data: unknown): ListTriggersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -263,7 +297,9 @@ export const unmarshalListTriggersResponse = (data: unknown): ListTriggersRespon
 
 export const unmarshalStartJobDefinitionResponse = (data: unknown): StartJobDefinitionResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'StartJobDefinitionResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'StartJobDefinitionResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -279,7 +315,10 @@ const marshalCreateJobDefinitionRequestCronScheduleConfig = (
   timezone: request.timezone,
 })
 
-const marshalRetryPolicy = (request: RetryPolicy, defaults: DefaultValues): Record<string, unknown> => ({
+const marshalRetryPolicy = (
+  request: RetryPolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
   max_retries: request.maxRetries,
 })
 
@@ -290,19 +329,16 @@ export const marshalCreateJobDefinitionRequest = (
   args: request.args,
   command: request.command,
   cpu_limit: request.cpuLimit,
-  cron_schedule:
-    request.cronSchedule !== undefined
-      ? marshalCreateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults)
-      : undefined,
+  cron_schedule: ((request.cronSchedule !== undefined) ?  marshalCreateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
   description: request.description,
-  environment_variables: request.environmentVariables !== undefined ? request.environmentVariables : undefined,
+  environment_variables: ((request.environmentVariables !== undefined) ?  request.environmentVariables: undefined),
   image_uri: request.imageUri,
   job_timeout: request.jobTimeout,
   local_storage_capacity: request.localStorageCapacity,
   memory_limit: request.memoryLimit,
   name: request.name || randomName('job'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  retry_policy: request.retryPolicy !== undefined ? marshalRetryPolicy(request.retryPolicy, defaults) : undefined,
+  retry_policy: ((request.retryPolicy !== undefined) ?  marshalRetryPolicy(request.retryPolicy, defaults): undefined),
   startup_command: request.startupCommand,
 })
 
@@ -311,10 +347,14 @@ const marshalCreateSecretsRequestSecretConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   secret_manager_id: request.secretManagerId,
-  secret_manager_version: request.secretManagerVersion,
+  secret_manager_version: request.secretManagerVersion,  
   ...resolveOneOf([
-    { param: 'path', value: request.path },
-    { param: 'env_var_name', value: request.envVarName },
+    {param: 'path',
+      value: request.path,
+    },
+    {param: 'env_var_name',
+      value: request.envVarName,
+    },
   ]),
 })
 
@@ -323,7 +363,7 @@ export const marshalCreateSecretsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   job_definition_id: request.jobDefinitionId,
-  secrets: request.secrets.map(elt => marshalCreateSecretsRequestSecretConfig(elt, defaults)),
+  secrets:  request.secrets.map(elt => marshalCreateSecretsRequestSecretConfig(elt, defaults)),
 })
 
 const marshalCreateTriggerRequestCronConfig = (
@@ -341,14 +381,11 @@ export const marshalCreateTriggerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   job_definition_id: request.jobDefinitionId,
-  name: request.name,
+  name: request.name,  
   ...resolveOneOf([
-    {
-      param: 'cron_config',
-      value:
-        request.cronConfig !== undefined
-          ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
-          : undefined,
+    {param: 'cron_config',
+      value: (request.cronConfig !== undefined) ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
+      : undefined,
     },
   ]),
 })
@@ -379,10 +416,7 @@ export const marshalUpdateJobDefinitionRequest = (
   args: request.args,
   command: request.command,
   cpu_limit: request.cpuLimit,
-  cron_schedule:
-    request.cronSchedule !== undefined
-      ? marshalUpdateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults)
-      : undefined,
+  cron_schedule: ((request.cronSchedule !== undefined) ?  marshalUpdateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
   description: request.description,
   environment_variables: request.environmentVariables,
   image_uri: request.imageUri,
@@ -390,7 +424,7 @@ export const marshalUpdateJobDefinitionRequest = (
   local_storage_capacity: request.localStorageCapacity,
   memory_limit: request.memoryLimit,
   name: request.name,
-  retry_policy: request.retryPolicy !== undefined ? marshalRetryPolicy(request.retryPolicy, defaults) : undefined,
+  retry_policy: ((request.retryPolicy !== undefined) ?  marshalRetryPolicy(request.retryPolicy, defaults): undefined),
   startup_command: request.startupCommand,
 })
 
@@ -398,10 +432,14 @@ export const marshalUpdateSecretRequest = (
   request: UpdateSecretRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  secret_manager_version: request.secretManagerVersion,
+  secret_manager_version: request.secretManagerVersion,  
   ...resolveOneOf([
-    { param: 'path', value: request.path },
-    { param: 'env_var_name', value: request.envVarName },
+    {param: 'path',
+      value: request.path,
+    },
+    {param: 'env_var_name',
+      value: request.envVarName,
+    },
   ]),
 })
 
@@ -419,14 +457,11 @@ export const marshalUpdateTriggerRequest = (
   request: UpdateTriggerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  name: request.name,
+  name: request.name,  
   ...resolveOneOf([
-    {
-      param: 'cron_config',
-      value:
-        request.cronConfig !== undefined
-          ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
-          : undefined,
+    {param: 'cron_config',
+      value: (request.cronConfig !== undefined) ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
+      : undefined,
     },
   ]),
 })

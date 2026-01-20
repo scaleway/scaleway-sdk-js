@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: '@scaleway/sdk-autoscaling',
-  namespace: 'autoscaling',
-  displayName: 'Autoscaling',
-  versions: ['v1alpha1'],
+  name: "@scaleway/sdk-autoscaling",
+  namespace: "autoscaling",
+  displayName: "Autoscaling",
+  versions: ["v1alpha1"]
 } as const
 
 export type Metadata = typeof pkgMetadata

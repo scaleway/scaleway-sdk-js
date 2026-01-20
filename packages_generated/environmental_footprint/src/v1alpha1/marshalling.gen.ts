@@ -1,5 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   Impact,
   ImpactDataResponse,
@@ -13,7 +14,9 @@ import type {
 
 const unmarshalImpact = (data: unknown): Impact => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'Impact' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'Impact' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -24,7 +27,9 @@ const unmarshalImpact = (data: unknown): Impact => {
 
 const unmarshalSkuImpact = (data: unknown): SkuImpact => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'SkuImpact' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'SkuImpact' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -37,7 +42,9 @@ const unmarshalSkuImpact = (data: unknown): SkuImpact => {
 
 const unmarshalZoneImpact = (data: unknown): ZoneImpact => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ZoneImpact' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ZoneImpact' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -49,7 +56,9 @@ const unmarshalZoneImpact = (data: unknown): ZoneImpact => {
 
 const unmarshalRegionImpact = (data: unknown): RegionImpact => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'RegionImpact' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'RegionImpact' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -61,7 +70,9 @@ const unmarshalRegionImpact = (data: unknown): RegionImpact => {
 
 const unmarshalProjectImpact = (data: unknown): ProjectImpact => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ProjectImpact' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ProjectImpact' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -73,7 +84,9 @@ const unmarshalProjectImpact = (data: unknown): ProjectImpact => {
 
 export const unmarshalImpactDataResponse = (data: unknown): ImpactDataResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ImpactDataResponse' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ImpactDataResponse' failed as data isn't a dictionary.`,
+    )
   }
 
   return {
@@ -86,7 +99,9 @@ export const unmarshalImpactDataResponse = (data: unknown): ImpactDataResponse =
 
 export const unmarshalImpactReportAvailability = (data: unknown): ImpactReportAvailability => {
   if (!isJSONObject(data)) {
-    throw new TypeError(`Unmarshalling the type 'ImpactReportAvailability' failed as data isn't a dictionary.`)
+    throw new TypeError(
+      `Unmarshalling the type 'ImpactReportAvailability' failed as data isn't a dictionary.`,
+    )
   }
 
   return {

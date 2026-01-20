@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: '@scaleway/sdk-ipam',
-  namespace: 'ipam',
-  displayName: 'Ipam',
-  versions: ['v1'],
+  name: "@scaleway/sdk-ipam",
+  namespace: "ipam",
+  displayName: "Ipam",
+  versions: ["v1"]
 } as const
 
 export type Metadata = typeof pkgMetadata
