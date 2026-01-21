@@ -52,6 +52,8 @@ import type {
   ListUsersResponse,
   ListVersionsRequest,
   ListVersionsResponse,
+  StartDeploymentRequest,
+  StopDeploymentRequest,
   UpdateDeploymentRequest,
   UpdateUserRequest,
   User,
@@ -250,6 +252,12 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
+  /**
+   * Get deployment TLS certificate. Retrieve the TLS certificate associated with a deployment.
+   *
+   * @param request - The request {@link GetDeploymentCertificateRequest}
+   * @returns A Promise of Blob
+   */
   getDeploymentCertificate = (
     request: Readonly<GetDeploymentCertificateRequest>,
   ) =>
@@ -259,6 +267,40 @@ export class API extends ParentAPI {
       urlParams: urlParams(['dl', 1]),
       responseType: 'blob',
     })
+
+  /**
+   * Start a deployment. Start a stopped deployment.
+   *
+   * @param request - The request {@link StartDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  startDeployment = (request: Readonly<StartDeploymentRequest>) =>
+    this.client.fetch<Deployment>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/start`,
+      },
+      unmarshalDeployment,
+    )
+
+  /**
+   * Stop a deployment. Stop a running deployment.
+   *
+   * @param request - The request {@link StopDeploymentRequest}
+   * @returns A Promise of Deployment
+   */
+  stopDeployment = (request: Readonly<StopDeploymentRequest>) =>
+    this.client.fetch<Deployment>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/stop`,
+      },
+      unmarshalDeployment,
+    )
 
   protected pageOfListUsers = (request: Readonly<ListUsersRequest>) =>
     this.client.fetch<ListUsersResponse>(
