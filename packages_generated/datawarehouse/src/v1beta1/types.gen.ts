@@ -374,6 +374,9 @@ export type GetDeploymentCertificateRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * UUID of the deployment.
+   */
   deploymentId: string
 }
 
@@ -531,6 +534,28 @@ export interface ListVersionsResponse {
    * Total count of deployment version available.
    */
   totalCount: number
+}
+
+export type StartDeploymentRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the deployment.
+   */
+  deploymentId: string
+}
+
+export type StopDeploymentRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the deployment.
+   */
+  deploymentId: string
 }
 
 export type UpdateDeploymentRequest = {

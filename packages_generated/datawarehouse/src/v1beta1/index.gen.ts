@@ -39,6 +39,8 @@ export type {
   ListVersionsRequest,
   ListVersionsResponse,
   Preset,
+  StartDeploymentRequest,
+  StopDeploymentRequest,
   UpdateDeploymentRequest,
   UpdateUserRequest,
   User,
