@@ -4,6 +4,7 @@ export { API } from './api.gen.js'
 export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
+  ApplyMaintenanceRequest,
   CreateEndpointRequest,
   CreateInstanceRequest,
   CreateSnapshotRequest,
@@ -19,8 +20,10 @@ export type {
   EndpointSpec,
   EndpointSpecPrivateNetworkDetails,
   EndpointSpecPublicNetworkDetails,
+  EngineUpgrade,
   GetInstanceCertificateRequest,
   GetInstanceRequest,
+  GetMaintenanceRequest,
   GetSnapshotRequest,
   Instance,
   InstanceSnapshotSchedule,
@@ -31,6 +34,9 @@ export type {
   ListInstancesRequest,
   ListInstancesRequestOrderBy,
   ListInstancesResponse,
+  ListMaintenancesRequest,
+  ListMaintenancesRequestOrderBy,
+  ListMaintenancesResponse,
   ListNodeTypesRequest,
   ListNodeTypesResponse,
   ListSnapshotsRequest,
@@ -41,10 +47,14 @@ export type {
   ListUsersResponse,
   ListVersionsRequest,
   ListVersionsResponse,
+  Maintenance,
+  MaintenanceAppliedBy,
+  MaintenanceStatus,
   NodeType,
   NodeTypeStock,
   NodeTypeVolumeType,
   RestoreSnapshotRequest,
+  ServiceUpdate,
   SetUserRoleRequest,
   Snapshot,
   SnapshotStatus,
@@ -58,5 +68,6 @@ export type {
   Version,
   Volume,
   VolumeType,
+  Workflow,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

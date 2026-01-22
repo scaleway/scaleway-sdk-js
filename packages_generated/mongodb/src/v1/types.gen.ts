@@ -23,6 +23,14 @@ export type ListInstancesRequestOrderBy =
   | 'status_asc'
   | 'status_desc'
 
+export type ListMaintenancesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'starts_at_asc'
+  | 'starts_at_desc'
+  | 'stops_at_asc'
+  | 'stops_at_desc'
+
 export type ListSnapshotsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -32,6 +40,15 @@ export type ListSnapshotsRequestOrderBy =
   | 'expires_at_desc'
 
 export type ListUsersRequestOrderBy = 'name_asc' | 'name_desc'
+
+export type MaintenanceAppliedBy = 'unknown_applied_by' | 'user' | 'admin'
+
+export type MaintenanceStatus =
+  | 'unknown_status'
+  | 'planned'
+  | 'done'
+  | 'cancelled'
+  | 'ongoing'
 
 export type NodeTypeStock =
   | 'unknown_stock'
@@ -71,6 +88,14 @@ export interface EndpointPrivateNetworkDetails {
  * Public Access details.
  */
 export interface EndpointPublicNetworkDetails {}
+
+export interface EngineUpgrade {
+  newVersionId: string
+}
+
+export interface ServiceUpdate {
+  serviceName: string
+}
 
 export interface EndpointSpecPrivateNetworkDetails {
   /**
@@ -125,6 +150,19 @@ export interface Volume {
    * Volume size.
    */
   sizeBytes: number
+}
+
+export interface Workflow {
+  /**
+   *
+   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate' could be set.
+   */
+  engineUpgrade?: EngineUpgrade
+  /**
+   *
+   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate' could be set.
+   */
+  serviceUpdate?: ServiceUpdate
 }
 
 export interface NodeTypeVolumeType {
@@ -245,6 +283,53 @@ export interface Instance {
   snapshotSchedule?: InstanceSnapshotSchedule
 }
 
+export interface Maintenance {
+  /**
+   * ID of the maintenance.
+   */
+  id: string
+  /**
+   * ID of the instance on which the maintenance is applied.
+   */
+  instanceId: string
+  /**
+   * Creation date of the maintenance.
+   */
+  createdAt?: Date
+  /**
+   * Start date of the maintenance.
+   */
+  startsAt?: Date
+  /**
+   * Stop date of the maintenance.
+   */
+  stopsAt?: Date
+  /**
+   * Current status of the maintenance.
+   */
+  status: MaintenanceStatus
+  /**
+   * Forced application date of the maintenance.
+   */
+  forcedAt?: Date
+  /**
+   * Application date of the maintenance.
+   */
+  appliedAt?: Date
+  /**
+   * Usertype who launched the maintenance.
+   */
+  appliedBy: MaintenanceAppliedBy
+  /**
+   * Workflow to be applied during maintenance.
+   */
+  workflow?: Workflow
+  /**
+   * Reason of the maintenance.
+   */
+  reason: string
+}
+
 export interface NodeType {
   /**
    * Node type name identifier.
@@ -355,6 +440,14 @@ export interface Version {
    * Date of End of Life.
    */
   endOfLifeAt?: Date
+}
+
+export type ApplyMaintenanceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  maintenanceId: string
 }
 
 export type CreateEndpointRequest = {
@@ -527,6 +620,17 @@ export type GetInstanceRequest = {
   instanceId: string
 }
 
+export type GetMaintenanceRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the maintenance.
+   */
+  maintenanceId: string
+}
+
 export type GetSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -602,6 +706,34 @@ export interface ListInstancesResponse {
   instances: Instance[]
   /**
    * Total count of Database Instances available in an Organization or Project.
+   */
+  totalCount: number
+}
+
+export type ListMaintenancesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the instance.
+   */
+  instanceId: string
+  /**
+   * Criteria to use when requesting user listing.
+   */
+  orderBy?: ListMaintenancesRequestOrderBy
+  page?: number
+  pageSize?: number
+}
+
+export interface ListMaintenancesResponse {
+  /**
+   * List of maintenances of a MongoDB© instance.
+   */
+  maintenances: Maintenance[]
+  /**
+   * Total count of maintenances of a MongoDB© instance.
    */
   totalCount: number
 }
@@ -850,7 +982,12 @@ export type UpgradeInstanceRequest = {
   /**
    * Increase your Block Storage volume size.
    *
-   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes' could be set.
+   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'versionId' could be set.
    */
   volumeSizeBytes?: number
+  /**
+   *
+   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'versionId' could be set.
+   */
+  versionId?: string
 }
