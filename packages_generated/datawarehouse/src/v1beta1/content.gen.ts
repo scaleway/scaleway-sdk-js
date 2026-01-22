@@ -10,4 +10,6 @@ export const DEPLOYMENT_TRANSIENT_STATUSES: DeploymentStatus[] = [
   'locking',
   'unlocking',
   'deploying',
+  'stopping',
+  'starting',
 ]
