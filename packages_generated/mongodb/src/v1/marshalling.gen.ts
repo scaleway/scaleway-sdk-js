@@ -20,17 +20,21 @@ import type {
   EndpointSpec,
   EndpointSpecPrivateNetworkDetails,
   EndpointSpecPublicNetworkDetails,
+  EngineUpgrade,
   Instance,
   InstanceSnapshotSchedule,
   ListDatabasesResponse,
   ListInstancesResponse,
+  ListMaintenancesResponse,
   ListNodeTypesResponse,
   ListSnapshotsResponse,
   ListUsersResponse,
   ListVersionsResponse,
+  Maintenance,
   NodeType,
   NodeTypeVolumeType,
   RestoreSnapshotRequest,
+  ServiceUpdate,
   SetUserRoleRequest,
   Snapshot,
   UpdateInstanceRequest,
@@ -41,6 +45,7 @@ import type {
   UserRole,
   Version,
   Volume,
+  Workflow,
 } from './types.gen.js'
 
 const unmarshalEndpointPrivateNetworkDetails = (
@@ -147,6 +152,69 @@ export const unmarshalInstance = (data: unknown): Instance => {
   } as Instance
 }
 
+const unmarshalEngineUpgrade = (data: unknown): EngineUpgrade => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EngineUpgrade' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    newVersionId: data.new_version_id,
+  } as EngineUpgrade
+}
+
+const unmarshalServiceUpdate = (data: unknown): ServiceUpdate => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServiceUpdate' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    serviceName: data.service_name,
+  } as ServiceUpdate
+}
+
+const unmarshalWorkflow = (data: unknown): Workflow => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Workflow' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    engineUpgrade: data.engine_upgrade
+      ? unmarshalEngineUpgrade(data.engine_upgrade)
+      : undefined,
+    serviceUpdate: data.service_update
+      ? unmarshalServiceUpdate(data.service_update)
+      : undefined,
+  } as Workflow
+}
+
+export const unmarshalMaintenance = (data: unknown): Maintenance => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Maintenance' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    appliedAt: unmarshalDate(data.applied_at),
+    appliedBy: data.applied_by,
+    createdAt: unmarshalDate(data.created_at),
+    forcedAt: unmarshalDate(data.forced_at),
+    id: data.id,
+    instanceId: data.instance_id,
+    reason: data.reason,
+    startsAt: unmarshalDate(data.starts_at),
+    status: data.status,
+    stopsAt: unmarshalDate(data.stops_at),
+    workflow: data.workflow ? unmarshalWorkflow(data.workflow) : undefined,
+  } as Maintenance
+}
+
 export const unmarshalSnapshot = (data: unknown): Snapshot => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -237,6 +305,24 @@ export const unmarshalListInstancesResponse = (
     instances: unmarshalArrayOfObject(data.instances, unmarshalInstance),
     totalCount: data.total_count,
   } as ListInstancesResponse
+}
+
+export const unmarshalListMaintenancesResponse = (
+  data: unknown,
+): ListMaintenancesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListMaintenancesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maintenances: unmarshalArrayOfObject(
+      data.maintenances,
+      unmarshalMaintenance,
+    ),
+    totalCount: data.total_count,
+  } as ListMaintenancesResponse
 }
 
 const unmarshalNodeTypeVolumeType = (data: unknown): NodeTypeVolumeType => {
@@ -508,7 +594,8 @@ export const marshalUpgradeInstanceRequest = (
   request: UpgradeInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ...resolveOneOf([
+  ...resolveOneOf<number | string>([
     { param: 'volume_size_bytes', value: request.volumeSizeBytes },
+    { param: 'version_id', value: request.versionId },
   ]),
 })

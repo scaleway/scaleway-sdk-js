@@ -83,6 +83,16 @@ export const ListInstancesRequest = {
   },
 }
 
+export const ListMaintenancesRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListNodeTypesRequest = {
   page: {
     greaterThanOrEqual: 1,

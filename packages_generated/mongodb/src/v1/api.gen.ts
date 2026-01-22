@@ -12,6 +12,7 @@ import {
 } from '@scaleway/sdk-client'
 import {
   INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,
+  MAINTENANCE_TRANSIENT_STATUSES as MAINTENANCE_TRANSIENT_STATUSES_MONGODB,
   SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,
 } from './content.gen.js'
 import {
@@ -29,14 +30,17 @@ import {
   unmarshalInstance,
   unmarshalListDatabasesResponse,
   unmarshalListInstancesResponse,
+  unmarshalListMaintenancesResponse,
   unmarshalListNodeTypesResponse,
   unmarshalListSnapshotsResponse,
   unmarshalListUsersResponse,
   unmarshalListVersionsResponse,
+  unmarshalMaintenance,
   unmarshalSnapshot,
   unmarshalUser,
 } from './marshalling.gen.js'
 import type {
+  ApplyMaintenanceRequest,
   CreateEndpointRequest,
   CreateInstanceRequest,
   CreateSnapshotRequest,
@@ -48,12 +52,15 @@ import type {
   Endpoint,
   GetInstanceCertificateRequest,
   GetInstanceRequest,
+  GetMaintenanceRequest,
   GetSnapshotRequest,
   Instance,
   ListDatabasesRequest,
   ListDatabasesResponse,
   ListInstancesRequest,
   ListInstancesResponse,
+  ListMaintenancesRequest,
+  ListMaintenancesResponse,
   ListNodeTypesRequest,
   ListNodeTypesResponse,
   ListSnapshotsRequest,
@@ -62,6 +69,7 @@ import type {
   ListUsersResponse,
   ListVersionsRequest,
   ListVersionsResponse,
+  Maintenance,
   RestoreSnapshotRequest,
   SetUserRoleRequest,
   Snapshot,
@@ -591,5 +599,88 @@ export class API extends ParentAPI {
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
       },
       unmarshalEndpoint,
+    )
+
+  protected pageOfListMaintenances = (
+    request: Readonly<ListMaintenancesRequest>,
+  ) =>
+    this.client.fetch<ListMaintenancesResponse>(
+      {
+        method: 'GET',
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/maintenances`,
+        urlParams: urlParams(
+          ['instance_id', request.instanceId],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListMaintenancesResponse,
+    )
+
+  /**
+   * List all the maintenances of a MongoDB® Database Instance.. List all the maintenances of a MongoDB® Database Instance.
+   *
+   * @param request - The request {@link ListMaintenancesRequest}
+   * @returns A Promise of ListMaintenancesResponse
+   */
+  listMaintenances = (request: Readonly<ListMaintenancesRequest>) =>
+    enrichForPagination('maintenances', this.pageOfListMaintenances, request)
+
+  /**
+   * Get a maintenance of a MongoDB® Database Instance.. Get a maintenance of a MongoDB® Database Instance.
+   *
+   * @param request - The request {@link GetMaintenanceRequest}
+   * @returns A Promise of Maintenance
+   */
+  getMaintenance = (request: Readonly<GetMaintenanceRequest>) =>
+    this.client.fetch<Maintenance>(
+      {
+        method: 'GET',
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/maintenances/${validatePathParam('maintenanceId', request.maintenanceId)}`,
+      },
+      unmarshalMaintenance,
+    )
+
+  /**
+   * Waits for {@link Maintenance} to be in a final state.
+   *
+   * @param request - The request {@link GetMaintenanceRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Maintenance
+   */
+  waitForMaintenance = (
+    request: Readonly<GetMaintenanceRequest>,
+    options?: Readonly<WaitForOptions<Maintenance>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !MAINTENANCE_TRANSIENT_STATUSES_MONGODB.includes(res.status),
+          )),
+      this.getMaintenance,
+      request,
+      options,
+    )
+
+  /**
+   * Apply a maintenance of a MongoDB® Database Instance.. Apply a maintenance of a MongoDB® Database Instance.
+   *
+   * @param request - The request {@link ApplyMaintenanceRequest}
+   * @returns A Promise of Maintenance
+   */
+  applyMaintenance = (request: Readonly<ApplyMaintenanceRequest>) =>
+    this.client.fetch<Maintenance>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/maintenances/${validatePathParam('maintenanceId', request.maintenanceId)}/apply`,
+      },
+      unmarshalMaintenance,
     )
 }
