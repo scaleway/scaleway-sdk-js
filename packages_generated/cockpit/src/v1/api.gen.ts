@@ -1,14 +1,16 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
   toApiLocality,
   urlParams,
   validatePathParam,
+  waitForResource,
 } from '@scaleway/sdk-client'
+import { EXPORTER_TRANSIENT_STATUSES as EXPORTER_TRANSIENT_STATUSES_COCKPIT } from './content.gen.js'
 import {
   marshalGlobalApiCreateGrafanaUserRequest,
   marshalGlobalApiResetGrafanaUserPasswordRequest,
@@ -16,6 +18,7 @@ import {
   marshalGlobalApiSyncGrafanaDataSourcesRequest,
   marshalRegionalApiCreateContactPointRequest,
   marshalRegionalApiCreateDataSourceRequest,
+  marshalRegionalApiCreateExporterRequest,
   marshalRegionalApiCreateTokenRequest,
   marshalRegionalApiDeleteContactPointRequest,
   marshalRegionalApiDisableAlertManagerRequest,
@@ -27,11 +30,13 @@ import {
   marshalRegionalApiTriggerTestAlertRequest,
   marshalRegionalApiUpdateContactPointRequest,
   marshalRegionalApiUpdateDataSourceRequest,
+  marshalRegionalApiUpdateExporterRequest,
   unmarshalAlertManager,
   unmarshalContactPoint,
   unmarshalDataSource,
   unmarshalDisableAlertRulesResponse,
   unmarshalEnableAlertRulesResponse,
+  unmarshalExporter,
   unmarshalGetConfigResponse,
   unmarshalGetRulesCountResponse,
   unmarshalGrafana,
@@ -40,6 +45,7 @@ import {
   unmarshalListAlertsResponse,
   unmarshalListContactPointsResponse,
   unmarshalListDataSourcesResponse,
+  unmarshalListExportersResponse,
   unmarshalListGrafanaProductDashboardsResponse,
   unmarshalListGrafanaUsersResponse,
   unmarshalListPlansResponse,
@@ -55,6 +61,7 @@ import type {
   DataSource,
   DisableAlertRulesResponse,
   EnableAlertRulesResponse,
+  Exporter,
   GetConfigResponse,
   GetRulesCountResponse,
   GlobalApiCreateGrafanaUserRequest,
@@ -74,6 +81,7 @@ import type {
   ListAlertsResponse,
   ListContactPointsResponse,
   ListDataSourcesResponse,
+  ListExportersResponse,
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
   ListPlansResponse,
@@ -82,9 +90,11 @@ import type {
   Plan,
   RegionalApiCreateContactPointRequest,
   RegionalApiCreateDataSourceRequest,
+  RegionalApiCreateExporterRequest,
   RegionalApiCreateTokenRequest,
   RegionalApiDeleteContactPointRequest,
   RegionalApiDeleteDataSourceRequest,
+  RegionalApiDeleteExporterRequest,
   RegionalApiDeleteTokenRequest,
   RegionalApiDisableAlertManagerRequest,
   RegionalApiDisableAlertRulesRequest,
@@ -95,17 +105,20 @@ import type {
   RegionalApiGetAlertManagerRequest,
   RegionalApiGetConfigRequest,
   RegionalApiGetDataSourceRequest,
+  RegionalApiGetExporterRequest,
   RegionalApiGetRulesCountRequest,
   RegionalApiGetTokenRequest,
   RegionalApiGetUsageOverviewRequest,
   RegionalApiListAlertsRequest,
   RegionalApiListContactPointsRequest,
   RegionalApiListDataSourcesRequest,
+  RegionalApiListExportersRequest,
   RegionalApiListProductsRequest,
   RegionalApiListTokensRequest,
   RegionalApiTriggerTestAlertRequest,
   RegionalApiUpdateContactPointRequest,
   RegionalApiUpdateDataSourceRequest,
+  RegionalApiUpdateExporterRequest,
   Token,
   UsageOverview,
 } from './types.gen.js'
@@ -423,6 +436,136 @@ export class RegionalAPI extends ParentAPI {
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/config`,
       },
       unmarshalGetConfigResponse,
+    )
+
+  /**
+   * Create a data export. Create an export to send your metrics/logs from a Scaleway data source to an external destination.
+Current supported destination for data exports are Datadog and OTLP endpoints.
+This feature is in Beta phase. During Beta phase, exporter can take up to 30 min to be effectively active.
+   *
+   * @param request - The request {@link RegionalApiCreateExporterRequest}
+   * @returns A Promise of Exporter
+   */
+  createExporter = (request: Readonly<RegionalApiCreateExporterRequest>) =>
+    this.client.fetch<Exporter>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiCreateExporterRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters`,
+      },
+      unmarshalExporter,
+    )
+
+  protected pageOfListExporters = (
+    request: Readonly<RegionalApiListExportersRequest> = {},
+  ) =>
+    this.client.fetch<ListExportersResponse>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters`,
+        urlParams: urlParams(
+          ['datasource_id', request.datasourceId],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+          [
+            'project_id',
+            request.projectId ?? this.client.settings.defaultProjectId,
+          ],
+        ),
+      },
+      unmarshalListExportersResponse,
+    )
+
+  /**
+   * List data exports. List all data exports within a given Scaleway Project, specified by its ID.
+Optionally, specify a Scaleway data source ID to retrieve only data exports associated with that data source.
+   *
+   * @param request - The request {@link RegionalApiListExportersRequest}
+   * @returns A Promise of ListExportersResponse
+   */
+  listExporters = (request: Readonly<RegionalApiListExportersRequest> = {}) =>
+    enrichForPagination('exporters', this.pageOfListExporters, request)
+
+  /**
+   * Get a data export. Retrieve information about a given data export, specified by its ID.
+   *
+   * @param request - The request {@link RegionalApiGetExporterRequest}
+   * @returns A Promise of Exporter
+   */
+  getExporter = (request: Readonly<RegionalApiGetExporterRequest>) =>
+    this.client.fetch<Exporter>(
+      {
+        method: 'GET',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters/${validatePathParam('exporterId', request.exporterId)}`,
+      },
+      unmarshalExporter,
+    )
+
+  /**
+   * Waits for {@link Exporter} to be in a final state.
+   *
+   * @param request - The request {@link RegionalApiGetExporterRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Exporter
+   */
+  waitForExporter = (
+    request: Readonly<RegionalApiGetExporterRequest>,
+    options?: Readonly<WaitForOptions<Exporter>>,
+  ) =>
+    waitForResource(
+      options?.stop ??
+        (res =>
+          Promise.resolve(
+            !EXPORTER_TRANSIENT_STATUSES_COCKPIT.includes(res.status),
+          )),
+      this.getExporter,
+      request,
+      options,
+    )
+
+  /**
+   * Delete a data export. Delete a given data export, specified by its ID.
+Note that this action will immediatly and permanently delete this data exports.
+   *
+   * @param request - The request {@link RegionalApiDeleteExporterRequest}
+   */
+  deleteExporter = (request: Readonly<RegionalApiDeleteExporterRequest>) =>
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters/${validatePathParam('exporterId', request.exporterId)}`,
+    })
+
+  /**
+   * Update a data export. Update a data export attributes. Changes are effective immediatly even during Beta phase.
+Note that you can not change the data source linked to the export. If you need to do so, you will need to re-create the export.
+   *
+   * @param request - The request {@link RegionalApiUpdateExporterRequest}
+   * @returns A Promise of Exporter
+   */
+  updateExporter = (request: Readonly<RegionalApiUpdateExporterRequest>) =>
+    this.client.fetch<Exporter>(
+      {
+        body: JSON.stringify(
+          marshalRegionalApiUpdateExporterRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters/${validatePathParam('exporterId', request.exporterId)}`,
+      },
+      unmarshalExporter,
     )
 
   /**

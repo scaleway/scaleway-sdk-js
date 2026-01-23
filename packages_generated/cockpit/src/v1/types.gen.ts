@@ -19,6 +19,8 @@ export type DataSourceOrigin =
 
 export type DataSourceType = 'unknown_type' | 'metrics' | 'logs' | 'traces'
 
+export type ExporterStatus = 'unknown_status' | 'creating' | 'ready' | 'error'
+
 export type GrafanaUserRole = 'unknown_role' | 'editor' | 'viewer'
 
 export type ListDataSourcesRequestOrderBy =
@@ -28,6 +30,12 @@ export type ListDataSourcesRequestOrderBy =
   | 'name_desc'
   | 'type_asc'
   | 'type_desc'
+
+export type ListExportersRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
 
 export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
 
@@ -91,6 +99,16 @@ export interface PreconfiguredAlertData {
 
 export interface ContactPointEmail {
   to: string
+}
+
+export interface ExporterDatadogDestination {
+  apiKey?: string
+  endpoint?: string
+}
+
+export interface ExporterOTLPDestination {
+  endpoint: string
+  headers: Record<string, string>
 }
 
 export interface GetConfigResponseRetention {
@@ -232,6 +250,56 @@ export interface DataSource {
    * Usage of the month in bytes.
    */
   currentMonthUsage?: number
+}
+
+/**
+ * Data exporter.
+ */
+export interface Exporter {
+  /**
+   * ID of the data export.
+   */
+  id: string
+  /**
+   * Name of the data export.
+   */
+  name: string
+  /**
+   * Description of the data export.
+   */
+  description: string
+  /**
+   * ID of the data source linked to the data export.
+   */
+  datasourceId: string
+  /**
+   * Datadog destination configuration for the data export.
+   *
+   * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
+   */
+  datadogDestination?: ExporterDatadogDestination
+  /**
+   * OTLP destination configuration for the data export.
+   *
+   * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
+   */
+  otlpDestination?: ExporterOTLPDestination
+  /**
+   * Status of the data export.
+   */
+  status: ExporterStatus
+  /**
+   * List of Scaleway products name exported by the data export.
+   */
+  exportedProducts: string[]
+  /**
+   * A timestamp of the creation date of the data export.
+   */
+  createdAt?: Date
+  /**
+   * A timestamp of the last update date of the data export.
+   */
+  updatedAt?: Date
 }
 
 /**
@@ -710,6 +778,20 @@ export interface ListDataSourcesResponse {
 }
 
 /**
+ * Response returned when listing data exports.
+ */
+export interface ListExportersResponse {
+  /**
+   * Total count of data exports matching the request.
+   */
+  totalCount: number
+  /**
+   * Data exports matching the request within the pagination.
+   */
+  exporters: Exporter[]
+}
+
+/**
  * Output returned when listing dashboards.
  */
 export interface ListGrafanaProductDashboardsResponse {
@@ -821,6 +903,45 @@ export type RegionalApiCreateDataSourceRequest = {
 }
 
 /**
+ * Create a data export.
+ */
+export type RegionalApiCreateExporterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the data source linked to the data export.
+   */
+  datasourceId: string
+  /**
+   * Datadog destination configuration for the data export.
+   *
+   * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
+   */
+  datadogDestination?: ExporterDatadogDestination
+  /**
+   * OTLP destination configuration for the data export.
+   *
+   * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
+   */
+  otlpDestination?: ExporterOTLPDestination
+  /**
+   * To include all products in your data export, you can use an array containing "all"
+You can retrieve the complete list of product names using the `ListProducts` endpoint.
+   */
+  exportedProducts: string[]
+  /**
+   * Name of the data export.
+   */
+  name: string
+  /**
+   * Description of the data export.
+   */
+  description?: string
+}
+
+/**
  * Create a token.
  */
 export type RegionalApiCreateTokenRequest = {
@@ -874,6 +995,20 @@ export type RegionalApiDeleteDataSourceRequest = {
    * ID of the data source to delete.
    */
   dataSourceId: string
+}
+
+/**
+ * Delete a data export.
+ */
+export type RegionalApiDeleteExporterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the data export to update.
+   */
+  exporterId: string
 }
 
 /**
@@ -1014,6 +1149,20 @@ export type RegionalApiGetDataSourceRequest = {
   dataSourceId: string
 }
 
+/**
+ * Retrieve a specific data export.
+ */
+export type RegionalApiGetExporterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the data export to retrieve.
+   */
+  exporterId: string
+}
+
 export type RegionalApiGetRulesCountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1135,6 +1284,36 @@ export type RegionalApiListDataSourcesRequest = {
 }
 
 /**
+ * List all data exports.
+ */
+export type RegionalApiListExportersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Project ID to filter for. Only data exports from this Project will be returned.
+   */
+  projectId?: string
+  /**
+   * Data source ID to filter for. Only data exports linked to this data source will be returned.
+   */
+  datasourceId?: string
+  /**
+   * Page number to return from the paginated results.
+   */
+  page?: number
+  /**
+   * Number of data exports to return per page.
+   */
+  pageSize?: number
+  /**
+   * Sort order for data exports in the response.
+   */
+  orderBy?: ListExportersRequestOrderBy
+}
+
+/**
  * List all Scaleway products that send metrics and/or logs to Cockpit.
  */
 export type RegionalApiListProductsRequest = {
@@ -1244,6 +1423,45 @@ export type RegionalApiUpdateDataSourceRequest = {
    * Duration for which the data will be retained in the data source.
    */
   retentionDays?: number
+}
+
+/**
+ * Update an existing data export.
+ */
+export type RegionalApiUpdateExporterRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the data export to update.
+   */
+  exporterId: string
+  /**
+   * Updated Datadog destination configuration for the data export.
+   *
+   * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
+   */
+  datadogDestination?: ExporterDatadogDestination
+  /**
+   * Updated OTLP destination configuration for the data export.
+   *
+   * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
+   */
+  otlpDestination?: ExporterOTLPDestination
+  /**
+   * Updated name of the data export.
+   */
+  name?: string
+  /**
+   * Updated description of the data export.
+   */
+  description?: string
+  /**
+   * To include all products in your data export, you can use an array containing "all"
+You can retrieve the complete list of product names using the `ListProducts` endpoint.
+   */
+  exportedProducts?: string[]
 }
 
 export interface UsageOverview {

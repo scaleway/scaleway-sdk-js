@@ -14,6 +14,16 @@ export const RegionalApiCreateDataSourceRequest = {
   },
 }
 
+export const RegionalApiCreateExporterRequest = {
+  description: {
+    maxLength: 200,
+  },
+  name: {
+    maxLength: 60,
+    minLength: 1,
+  },
+}
+
 export const RegionalApiCreateTokenRequest = {
   name: {
     maxLength: 50,
@@ -39,6 +49,17 @@ export const RegionalApiListDataSourcesRequest = {
   pageSize: {
     greaterThanOrEqual: 1,
     lessThanOrEqual: 1000,
+  },
+}
+
+export const RegionalApiListExportersRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
   },
 }
 
@@ -74,5 +95,15 @@ export const RegionalApiUpdateDataSourceRequest = {
     greaterThanOrEqual: 1,
     ignoreEmpty: true,
     lessThanOrEqual: 1825,
+  },
+}
+
+export const RegionalApiUpdateExporterRequest = {
+  description: {
+    maxLength: 200,
+  },
+  name: {
+    maxLength: 60,
+    minLength: 1,
   },
 }
