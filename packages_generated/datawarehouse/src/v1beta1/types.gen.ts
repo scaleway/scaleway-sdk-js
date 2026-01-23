@@ -13,6 +13,9 @@ export type DeploymentStatus =
   | 'locking'
   | 'unlocking'
   | 'deploying'
+  | 'stopping'
+  | 'starting'
+  | 'stopped'
 
 export type EndpointServiceProtocol =
   | 'unknown_protocol'
