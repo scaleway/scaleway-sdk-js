@@ -638,10 +638,6 @@ export interface Cluster {
    */
   iamNodesGroupId: string
   /**
-   * @deprecated Defines whether all pools are migrated to new images.
-   */
-  newImagesEnabled?: boolean
-  /**
    * Subnet used for the Pod CIDR.
    */
   podCidr: string
@@ -802,10 +798,6 @@ export interface Pool {
    * Defines if the public IP should be removed from Nodes. To use this feature, your Cluster must have an attached Private Network set up with a Public Gateway.
    */
   publicIpDisabled: boolean
-  /**
-   * @deprecated Defines whether the pool is migrated to new images.
-   */
-  newImagesEnabled?: boolean
   /**
    * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
    */
@@ -1516,15 +1508,6 @@ export interface ListVersionsResponse {
    * Available Kubernetes versions.
    */
   versions: Version[]
-}
-
-export type MigratePoolsToNewImagesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  clusterId: string
-  poolIds?: string[]
 }
 
 export interface NodeMetadata {
