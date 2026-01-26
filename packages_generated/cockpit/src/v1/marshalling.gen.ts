@@ -13,6 +13,9 @@ import type {
   DataSource,
   DisableAlertRulesResponse,
   EnableAlertRulesResponse,
+  Exporter,
+  ExporterDatadogDestination,
+  ExporterOTLPDestination,
   GetConfigResponse,
   GetConfigResponseRetention,
   GetRulesCountResponse,
@@ -26,6 +29,7 @@ import type {
   ListAlertsResponse,
   ListContactPointsResponse,
   ListDataSourcesResponse,
+  ListExportersResponse,
   ListGrafanaProductDashboardsResponse,
   ListGrafanaUsersResponse,
   ListPlansResponse,
@@ -36,6 +40,7 @@ import type {
   Product,
   RegionalApiCreateContactPointRequest,
   RegionalApiCreateDataSourceRequest,
+  RegionalApiCreateExporterRequest,
   RegionalApiCreateTokenRequest,
   RegionalApiDeleteContactPointRequest,
   RegionalApiDisableAlertManagerRequest,
@@ -47,6 +52,7 @@ import type {
   RegionalApiTriggerTestAlertRequest,
   RegionalApiUpdateContactPointRequest,
   RegionalApiUpdateDataSourceRequest,
+  RegionalApiUpdateExporterRequest,
   RulesCount,
   Token,
   Usage,
@@ -100,6 +106,61 @@ export const unmarshalDataSource = (data: unknown): DataSource => {
     updatedAt: unmarshalDate(data.updated_at),
     url: data.url,
   } as DataSource
+}
+
+const unmarshalExporterDatadogDestination = (
+  data: unknown,
+): ExporterDatadogDestination => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExporterDatadogDestination' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    apiKey: data.api_key,
+    endpoint: data.endpoint,
+  } as ExporterDatadogDestination
+}
+
+const unmarshalExporterOTLPDestination = (
+  data: unknown,
+): ExporterOTLPDestination => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ExporterOTLPDestination' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    endpoint: data.endpoint,
+    headers: data.headers,
+  } as ExporterOTLPDestination
+}
+
+export const unmarshalExporter = (data: unknown): Exporter => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Exporter' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    datadogDestination: data.datadog_destination
+      ? unmarshalExporterDatadogDestination(data.datadog_destination)
+      : undefined,
+    datasourceId: data.datasource_id,
+    description: data.description,
+    exportedProducts: data.exported_products,
+    id: data.id,
+    name: data.name,
+    otlpDestination: data.otlp_destination
+      ? unmarshalExporterOTLPDestination(data.otlp_destination)
+      : undefined,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Exporter
 }
 
 export const unmarshalGrafanaProductDashboard = (
@@ -396,6 +457,21 @@ export const unmarshalListDataSourcesResponse = (
   } as ListDataSourcesResponse
 }
 
+export const unmarshalListExportersResponse = (
+  data: unknown,
+): ListExportersResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListExportersResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    exporters: unmarshalArrayOfObject(data.exporters, unmarshalExporter),
+    totalCount: data.total_count,
+  } as ListExportersResponse
+}
+
 export const unmarshalListGrafanaProductDashboardsResponse = (
   data: unknown,
 ): ListGrafanaProductDashboardsResponse => {
@@ -602,6 +678,51 @@ export const marshalRegionalApiCreateDataSourceRequest = (
   type: request.type,
 })
 
+const marshalExporterDatadogDestination = (
+  request: ExporterDatadogDestination,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  api_key: request.apiKey,
+  endpoint: request.endpoint,
+})
+
+const marshalExporterOTLPDestination = (
+  request: ExporterOTLPDestination,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  endpoint: request.endpoint,
+  headers: request.headers,
+})
+
+export const marshalRegionalApiCreateExporterRequest = (
+  request: RegionalApiCreateExporterRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  datasource_id: request.datasourceId,
+  description: request.description,
+  exported_products: request.exportedProducts,
+  name: request.name,
+  ...resolveOneOf([
+    {
+      param: 'datadog_destination',
+      value:
+        request.datadogDestination !== undefined
+          ? marshalExporterDatadogDestination(
+              request.datadogDestination,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'otlp_destination',
+      value:
+        request.otlpDestination !== undefined
+          ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
+          : undefined,
+    },
+  ]),
+})
+
 export const marshalRegionalApiCreateTokenRequest = (
   request: RegionalApiCreateTokenRequest,
   defaults: DefaultValues,
@@ -702,4 +823,32 @@ export const marshalRegionalApiUpdateDataSourceRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   retention_days: request.retentionDays,
+})
+
+export const marshalRegionalApiUpdateExporterRequest = (
+  request: RegionalApiUpdateExporterRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  exported_products: request.exportedProducts,
+  name: request.name,
+  ...resolveOneOf([
+    {
+      param: 'datadog_destination',
+      value:
+        request.datadogDestination !== undefined
+          ? marshalExporterDatadogDestination(
+              request.datadogDestination,
+              defaults,
+            )
+          : undefined,
+    },
+    {
+      param: 'otlp_destination',
+      value:
+        request.otlpDestination !== undefined
+          ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
+          : undefined,
+    },
+  ]),
 })
