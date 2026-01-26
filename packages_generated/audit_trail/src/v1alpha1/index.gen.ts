@@ -9,6 +9,7 @@ export type {
   AccountProjectInfo,
   AccountUserInfo,
   AppleSiliconServerInfo,
+  AuditTrailExportJobInfo,
   AuthenticationEvent,
   AuthenticationEventFailureReason,
   AuthenticationEventMethod,

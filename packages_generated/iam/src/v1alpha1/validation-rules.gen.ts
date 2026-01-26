@@ -312,6 +312,9 @@ export const UpdateSamlRequest = {
     maxLength: 1024,
     minLength: 1,
   },
+  singleSignOnUrl: {
+    prefix: 'https://',
+  },
 }
 
 export const UpdateUserRequest = {
