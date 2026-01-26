@@ -12,6 +12,7 @@ import type {
   AccountProjectInfo,
   AccountUserInfo,
   AppleSiliconServerInfo,
+  AuditTrailExportJobInfo,
   AuthenticationEvent,
   BaremetalServerInfo,
   BaremetalSettingInfo,
@@ -198,6 +199,18 @@ const unmarshalAppleSiliconServerInfo = (
     id: data.id,
     name: data.name,
   } as AppleSiliconServerInfo
+}
+
+const unmarshalAuditTrailExportJobInfo = (
+  data: unknown,
+): AuditTrailExportJobInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AuditTrailExportJobInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {} as AuditTrailExportJobInfo
 }
 
 const unmarshalBaremetalServerInfo = (data: unknown): BaremetalServerInfo => {
@@ -622,6 +635,9 @@ export const unmarshalResource = (data: unknown): Resource => {
       : undefined,
     appleSiliconServerInfo: data.apple_silicon_server_info
       ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info)
+      : undefined,
+    auditTrailExportJobInfo: data.audit_trail_export_job_info
+      ? unmarshalAuditTrailExportJobInfo(data.audit_trail_export_job_info)
       : undefined,
     baremetalServerInfo: data.baremetal_server_info
       ? unmarshalBaremetalServerInfo(data.baremetal_server_info)
