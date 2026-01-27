@@ -35,5 +35,8 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "dependencies": {
+    "p-map": "7.0.4"
   }
 }
