@@ -1066,6 +1066,8 @@ export const marshalFinishUserWebAuthnRegistrationRequest = (
   ceremony_id: request.ceremonyId,
   client_data_json: request.clientDataJson,
   origin: request.origin,
+  public_key: request.publicKey,
+  public_key_algorithm: request.publicKeyAlgorithm,
   raw_id: request.rawId,
 })
 
