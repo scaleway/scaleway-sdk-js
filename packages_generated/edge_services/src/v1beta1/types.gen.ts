@@ -1547,6 +1547,10 @@ export type UpdateBackendStageRequest = {
    */
   scalewayLb?: ScalewayLbBackendConfig
   /**
+   * Pipeline ID the Backend stage belongs to.
+   */
+  pipelineId: string
+  /**
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
@@ -1556,10 +1560,6 @@ export type UpdateBackendStageRequest = {
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
   scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig
-  /**
-   * Pipeline ID the Backend stage belongs to.
-   */
-  pipelineId: string
 }
 
 export type UpdateCacheStageRequest = {
