@@ -39,6 +39,7 @@
     "@scaleway/sdk-client": "workspace:^",
     "@scaleway/sdk-cockpit": "workspace:*",
     "@scaleway/sdk-container": "workspace:*",
+    "@scaleway/sdk-datalab": "workspace:*",
     "@scaleway/sdk-datawarehouse": "workspace:*",
     "@scaleway/sdk-dedibox": "workspace:*",
     "@scaleway/sdk-domain": "workspace:*",
