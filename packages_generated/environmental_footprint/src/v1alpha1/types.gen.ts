@@ -11,6 +11,7 @@ export type ProductCategory =
   | 'instances'
   | 'object_storage'
   | 'load_balancer'
+  | 'kubernetes'
 
 export type ReportType = 'unknown_report_type' | 'monthly' | 'yearly'
 
@@ -20,6 +21,7 @@ export type ServiceCategory =
   | 'compute'
   | 'storage'
   | 'network'
+  | 'containers'
 
 export interface Impact {
   /**
