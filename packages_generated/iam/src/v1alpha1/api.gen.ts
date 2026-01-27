@@ -19,6 +19,7 @@ import {
   marshalCreatePolicyRequest,
   marshalCreateSSHKeyRequest,
   marshalCreateUserRequest,
+  marshalFinishUserWebAuthnRegistrationRequest,
   marshalJoinUserConnectionRequest,
   marshalParseSamlMetadataRequest,
   marshalRemoveGroupMemberRequest,
@@ -37,11 +38,13 @@ import {
   marshalUpdateUserPasswordRequest,
   marshalUpdateUserRequest,
   marshalUpdateUserUsernameRequest,
+  marshalUpdateWebAuthnAuthenticatorRequest,
   marshalValidateUserMFAOTPRequest,
   unmarshalAPIKey,
   unmarshalApplication,
   unmarshalCreateScimTokenResponse,
   unmarshalEncodedJWT,
+  unmarshalFinishUserWebAuthnRegistrationResponse,
   unmarshalGetUserConnectionsResponse,
   unmarshalGroup,
   unmarshalInitiateUserConnectionResponse,
@@ -60,6 +63,7 @@ import {
   unmarshalListScimTokensResponse,
   unmarshalListSSHKeysResponse,
   unmarshalListUsersResponse,
+  unmarshalListUserWebAuthnAuthenticatorsResponse,
   unmarshalLog,
   unmarshalMFAOTP,
   unmarshalOrganization,
@@ -72,8 +76,10 @@ import {
   unmarshalScim,
   unmarshalSetRulesResponse,
   unmarshalSSHKey,
+  unmarshalStartUserWebAuthnRegistrationResponse,
   unmarshalUser,
   unmarshalValidateUserMFAOTPResponse,
+  unmarshalWebAuthnAuthenticator,
 } from './marshalling.gen.js'
 import type {
   AddGroupMemberRequest,
@@ -104,9 +110,12 @@ import type {
   DeleteSSHKeyRequest,
   DeleteUserMFAOTPRequest,
   DeleteUserRequest,
+  DeleteWebAuthnAuthenticatorRequest,
   EnableOrganizationSamlRequest,
   EnableOrganizationScimRequest,
   EncodedJWT,
+  FinishUserWebAuthnRegistrationRequest,
+  FinishUserWebAuthnRegistrationResponse,
   GetAPIKeyRequest,
   GetApplicationRequest,
   GetGroupRequest,
@@ -155,6 +164,8 @@ import type {
   ListSSHKeysResponse,
   ListUsersRequest,
   ListUsersResponse,
+  ListUserWebAuthnAuthenticatorsRequest,
+  ListUserWebAuthnAuthenticatorsResponse,
   LockUserRequest,
   Log,
   MFAOTP,
@@ -174,6 +185,8 @@ import type {
   SetRulesRequest,
   SetRulesResponse,
   SSHKey,
+  StartUserWebAuthnRegistrationRequest,
+  StartUserWebAuthnRegistrationResponse,
   UnlockUserRequest,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
@@ -186,9 +199,11 @@ import type {
   UpdateUserPasswordRequest,
   UpdateUserRequest,
   UpdateUserUsernameRequest,
+  UpdateWebAuthnAuthenticatorRequest,
   User,
   ValidateUserMFAOTPRequest,
   ValidateUserMFAOTPResponse,
+  WebAuthnAuthenticator,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -1657,5 +1672,120 @@ export class API extends ParentAPI {
     this.client.fetch<void>({
       method: 'DELETE',
       path: `/iam/v1alpha1/scim-tokens/${validatePathParam('tokenId', request.tokenId)}`,
+    })
+
+  /**
+   * Start registering a WebAuthn authenticator.
+   *
+   * @param request - The request {@link StartUserWebAuthnRegistrationRequest}
+   * @returns A Promise of StartUserWebAuthnRegistrationResponse
+   */
+  startUserWebAuthnRegistration = (
+    request: Readonly<StartUserWebAuthnRegistrationRequest>,
+  ) =>
+    this.client.fetch<StartUserWebAuthnRegistrationResponse>(
+      {
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/start-webauthn-registration`,
+        urlParams: urlParams(['origin', request.origin]),
+      },
+      unmarshalStartUserWebAuthnRegistrationResponse,
+    )
+
+  /**
+   * Complete a WebAuthen authenticator registration.
+   *
+   * @param request - The request {@link FinishUserWebAuthnRegistrationRequest}
+   * @returns A Promise of FinishUserWebAuthnRegistrationResponse
+   */
+  finishUserWebAuthnRegistration = (
+    request: Readonly<FinishUserWebAuthnRegistrationRequest>,
+  ) =>
+    this.client.fetch<FinishUserWebAuthnRegistrationResponse>(
+      {
+        body: JSON.stringify(
+          marshalFinishUserWebAuthnRegistrationRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/finish-webauthn-registration`,
+      },
+      unmarshalFinishUserWebAuthnRegistrationResponse,
+    )
+
+  protected pageOfListUserWebAuthnAuthenticators = (
+    request: Readonly<ListUserWebAuthnAuthenticatorsRequest>,
+  ) =>
+    this.client.fetch<ListUserWebAuthnAuthenticatorsResponse>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/webauthn-authenticators`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          [
+            'page_size',
+            request.pageSize ?? this.client.settings.defaultPageSize,
+          ],
+        ),
+      },
+      unmarshalListUserWebAuthnAuthenticatorsResponse,
+    )
+
+  /**
+   * List all of a user's WebAuthn Authenticators.
+   *
+   * @param request - The request {@link ListUserWebAuthnAuthenticatorsRequest}
+   * @returns A Promise of ListUserWebAuthnAuthenticatorsResponse
+   */
+  listUserWebAuthnAuthenticators = (
+    request: Readonly<ListUserWebAuthnAuthenticatorsRequest>,
+  ) =>
+    enrichForPagination(
+      'authenticators',
+      this.pageOfListUserWebAuthnAuthenticators,
+      request,
+    )
+
+  /**
+   * Update a WebAuthn authenticator.
+   *
+   * @param request - The request {@link UpdateWebAuthnAuthenticatorRequest}
+   * @returns A Promise of WebAuthnAuthenticator
+   */
+  updateWebAuthnAuthenticator = (
+    request: Readonly<UpdateWebAuthnAuthenticatorRequest>,
+  ) =>
+    this.client.fetch<WebAuthnAuthenticator>(
+      {
+        body: JSON.stringify(
+          marshalUpdateWebAuthnAuthenticatorRequest(
+            request,
+            this.client.settings,
+          ),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
+      },
+      unmarshalWebAuthnAuthenticator,
+    )
+
+  /**
+   * Delete a WebAuthn authenticator.
+   *
+   * @param request - The request {@link DeleteWebAuthnAuthenticatorRequest}
+   */
+  deleteWebAuthnAuthenticator = (
+    request: Readonly<DeleteWebAuthnAuthenticatorRequest>,
+  ) =>
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'DELETE',
+      path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
     })
 }

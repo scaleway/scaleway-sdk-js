@@ -28,6 +28,8 @@ import type {
   CreateUserRequest,
   CreateUserRequestMember,
   EncodedJWT,
+  FinishUserWebAuthnRegistrationRequest,
+  FinishUserWebAuthnRegistrationResponse,
   GetUserConnectionsResponse,
   GracePeriod,
   Group,
@@ -48,6 +50,7 @@ import type {
   ListScimTokensResponse,
   ListSSHKeysResponse,
   ListUsersResponse,
+  ListUserWebAuthnAuthenticatorsResponse,
   Log,
   MFAOTP,
   Organization,
@@ -72,6 +75,7 @@ import type {
   SetRulesRequest,
   SetRulesResponse,
   SSHKey,
+  StartUserWebAuthnRegistrationResponse,
   UpdateAPIKeyRequest,
   UpdateApplicationRequest,
   UpdateGroupRequest,
@@ -83,9 +87,11 @@ import type {
   UpdateUserPasswordRequest,
   UpdateUserRequest,
   UpdateUserUsernameRequest,
+  UpdateWebAuthnAuthenticatorRequest,
   User,
   ValidateUserMFAOTPRequest,
   ValidateUserMFAOTPResponse,
+  WebAuthnAuthenticator,
 } from './types.gen.js'
 
 export const unmarshalJWT = (data: unknown): JWT => {
@@ -295,6 +301,23 @@ export const unmarshalSamlCertificate = (data: unknown): SamlCertificate => {
   } as SamlCertificate
 }
 
+export const unmarshalWebAuthnAuthenticator = (
+  data: unknown,
+): WebAuthnAuthenticator => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WebAuthnAuthenticator' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    lastLoginAt: unmarshalDate(data.last_login_at),
+    name: data.name,
+  } as WebAuthnAuthenticator
+}
+
 export const unmarshalUser = (data: unknown): User => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -367,6 +390,20 @@ export const unmarshalEncodedJWT = (data: unknown): EncodedJWT => {
     renewToken: data.renew_token,
     token: data.token,
   } as EncodedJWT
+}
+
+export const unmarshalFinishUserWebAuthnRegistrationResponse = (
+  data: unknown,
+): FinishUserWebAuthnRegistrationResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FinishUserWebAuthnRegistrationResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    authenticatorId: data.authenticator_id,
+  } as FinishUserWebAuthnRegistrationResponse
 }
 
 const unmarshalConnectionConnectedOrganization = (
@@ -693,6 +730,24 @@ export const unmarshalListScimTokensResponse = (
   } as ListScimTokensResponse
 }
 
+export const unmarshalListUserWebAuthnAuthenticatorsResponse = (
+  data: unknown,
+): ListUserWebAuthnAuthenticatorsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListUserWebAuthnAuthenticatorsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    authenticators: unmarshalArrayOfObject(
+      data.authenticators,
+      unmarshalWebAuthnAuthenticator,
+    ),
+    totalCount: data.total_count,
+  } as ListUserWebAuthnAuthenticatorsResponse
+}
+
 export const unmarshalListUsersResponse = (
   data: unknown,
 ): ListUsersResponse => {
@@ -826,6 +881,24 @@ export const unmarshalSetRulesResponse = (data: unknown): SetRulesResponse => {
   return {
     rules: unmarshalArrayOfObject(data.rules, unmarshalRule),
   } as SetRulesResponse
+}
+
+export const unmarshalStartUserWebAuthnRegistrationResponse = (
+  data: unknown,
+): StartUserWebAuthnRegistrationResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'StartUserWebAuthnRegistrationResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ceremonyId: data.ceremony_id,
+    challenge: data.challenge,
+    excludeCredentials: data.exclude_credentials,
+    publicKeyAlgorithms: data.public_key_algorithms,
+    timeout: data.timeout,
+  } as StartUserWebAuthnRegistrationResponse
 }
 
 export const unmarshalValidateUserMFAOTPResponse = (
@@ -981,6 +1054,19 @@ export const marshalCreateUserRequest = (
           : undefined,
     },
   ]),
+})
+
+export const marshalFinishUserWebAuthnRegistrationRequest = (
+  request: FinishUserWebAuthnRegistrationRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  attestation_object: request.attestationObject,
+  authenticator_data: request.authenticatorData,
+  authenticator_name: request.authenticatorName,
+  ceremony_id: request.ceremonyId,
+  client_data_json: request.clientDataJson,
+  origin: request.origin,
+  raw_id: request.rawId,
 })
 
 export const marshalJoinUserConnectionRequest = (
@@ -1140,6 +1226,13 @@ export const marshalUpdateUserUsernameRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   username: request.username,
+})
+
+export const marshalUpdateWebAuthnAuthenticatorRequest = (
+  request: UpdateWebAuthnAuthenticatorRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  authenticator_name: request.authenticatorName,
 })
 
 export const marshalValidateUserMFAOTPRequest = (

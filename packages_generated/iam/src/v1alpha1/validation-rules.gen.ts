@@ -79,6 +79,13 @@ export const CreateUserRequestMember = {
   },
 }
 
+export const FinishUserWebAuthnRegistrationRequest = {
+  authenticatorName: {
+    maxLength: 256,
+    minLength: 1,
+  },
+}
+
 export const GetQuotumRequest = {
   quotumName: {
     minLength: 1,
@@ -230,6 +237,17 @@ export const ListScimTokensRequest = {
   },
 }
 
+export const ListUserWebAuthnAuthenticatorsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 10000,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListUsersRequest = {
   page: {
     greaterThanOrEqual: 1,
@@ -312,6 +330,9 @@ export const UpdateSamlRequest = {
     maxLength: 1024,
     minLength: 1,
   },
+  singleSignOnUrl: {
+    prefix: 'https://',
+  },
 }
 
 export const UpdateUserRequest = {
@@ -328,6 +349,13 @@ export const UpdateUserUsernameRequest = {
     maxLength: 150,
     minLength: 2,
     pattern: /^[a-zA-Z0-9@._-]+$/,
+  },
+}
+
+export const UpdateWebAuthnAuthenticatorRequest = {
+  authenticatorName: {
+    maxLength: 256,
+    minLength: 1,
   },
 }
 

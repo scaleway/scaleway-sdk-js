@@ -67,6 +67,10 @@ export type ListSSHKeysRequestOrderBy =
 
 export type ListScimTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export type ListUserWebAuthnAuthenticatorsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+
 export type ListUsersRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -729,6 +733,25 @@ export interface SamlCertificate {
   expiresAt?: Date
 }
 
+export interface WebAuthnAuthenticator {
+  /**
+   * The ID of the authenticator.
+   */
+  id: string
+  /**
+   * The name of the authenticator.
+   */
+  name: string
+  /**
+   * The creation date.
+   */
+  createdAt?: Date
+  /**
+   * The timestamp of the last successful login using the authenticator.
+   */
+  lastLoginAt?: Date
+}
+
 export interface User {
   /**
    * ID of user.
@@ -1133,6 +1156,10 @@ export type DeleteUserRequest = {
   userId: string
 }
 
+export type DeleteWebAuthnAuthenticatorRequest = {
+  authenticatorId: string
+}
+
 export type EnableOrganizationSamlRequest = {
   /**
    * ID of the Organization.
@@ -1160,6 +1187,48 @@ export interface EncodedJWT {
    * The encoded renew token. This token is necessary to renew the JWT.
    */
   renewToken: string
+}
+
+export type FinishUserWebAuthnRegistrationRequest = {
+  /**
+   * The ID of the user on which to finish a webauthn registration.
+   */
+  userId: string
+  /**
+   * The ceremony ID returned by StartUserWebAuthnRegistration.
+   */
+  ceremonyId: string
+  /**
+   * Name of the WebAuthn Authenticator to create.
+   */
+  authenticatorName: string
+  /**
+   * The domain on which the registration is occurring.
+   */
+  origin: string
+  /**
+   * Unique identifier of the key used by the authenticator.
+   */
+  rawId: string
+  /**
+   * JSON representation of the client data.
+   */
+  clientDataJson: string
+  /**
+   * Data about the authenticator that performed the authentication.
+   */
+  authenticatorData: string
+  /**
+   * Attestation Object.
+   */
+  attestationObject: string
+}
+
+export interface FinishUserWebAuthnRegistrationResponse {
+  /**
+   * The ID of the new authenticator created.
+   */
+  authenticatorId: string
 }
 
 export type GetAPIKeyRequest = {
@@ -1789,6 +1858,36 @@ export interface ListScimTokensResponse {
   totalCount: number
 }
 
+export type ListUserWebAuthnAuthenticatorsRequest = {
+  /**
+   * A user ID to filter the authenticators for.
+   */
+  userId: string
+  /**
+   * Sort order of the Authenticators.
+   */
+  orderBy?: ListUserWebAuthnAuthenticatorsRequestOrderBy
+  /**
+   * Requested page number. Value must be greater or equal to 1.
+   */
+  page?: number
+  /**
+   * Number of items per page. Value must be between 1 and 100.
+   */
+  pageSize?: number
+}
+
+export interface ListUserWebAuthnAuthenticatorsResponse {
+  /**
+   * The total number of authenticators.
+   */
+  totalCount: number
+  /**
+   * The list of authenticators.
+   */
+  authenticators: WebAuthnAuthenticator[]
+}
+
 export type ListUsersRequest = {
   /**
    * Criteria for sorting results.
@@ -2007,6 +2106,40 @@ export interface SetRulesResponse {
    * Rules of the policy.
    */
   rules: Rule[]
+}
+
+export type StartUserWebAuthnRegistrationRequest = {
+  /**
+   * The ID of the user on which to start registering a WebAuthn authenticator.
+   */
+  userId: string
+  /**
+   * The URL from which the registration request originated.
+   */
+  origin: string
+}
+
+export interface StartUserWebAuthnRegistrationResponse {
+  /**
+   * A unique ID for this registration attempt, to reuse when calling FinishUserWebAuthnRegistration.
+   */
+  ceremonyId: string
+  /**
+   * Random bytes constituting the challenge to solve for the credentials creation.
+   */
+  challenge: string
+  /**
+   * List of algorithms supported by the relying party, as COSE algorithm identifiers.
+   */
+  publicKeyAlgorithms: number[]
+  /**
+   * Maximum duration of the registration ceremony, in milliseconds.
+   */
+  timeout?: string
+  /**
+   * List of credentials that cannot be used to fulfill the ceremony.
+   */
+  excludeCredentials: string[]
 }
 
 export type UnlockUserRequest = {
@@ -2244,6 +2377,17 @@ export type UpdateUserUsernameRequest = {
    * The new username.
    */
   username: string
+}
+
+export type UpdateWebAuthnAuthenticatorRequest = {
+  /**
+   * The ID of the authenticator to update.
+   */
+  authenticatorId: string
+  /**
+   * A new name for this authenticator.
+   */
+  authenticatorName?: string
 }
 
 export type ValidateUserMFAOTPRequest = {
