@@ -127,6 +127,9 @@ importers:
       '@scaleway/sdk-container':
         specifier: workspace:*
         version: link:../../packages_generated/container
+      '@scaleway/sdk-datalab':
+        specifier: workspace:*
+        version: link:../../packages_generated/datalab
       '@scaleway/sdk-datawarehouse':
         specifier: workspace:*
         version: link:../../packages_generated/datawarehouse
@@ -348,6 +351,19 @@ importers:
       '@scaleway/random-name':
         specifier: 5.1.2
         version: 5.1.2
+      '@scaleway/sdk-std':
+        specifier: workspace:*
+        version: link:../std
+    devDependencies:
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../../packages/client
+
+  packages_generated/datalab:
+    dependencies:
+      '@scaleway/random-name':
+        specifier: 5.1.1
+        version: 5.1.1
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
