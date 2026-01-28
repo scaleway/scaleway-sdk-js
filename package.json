@@ -7,7 +7,7 @@
   ],
   "engines": {
     "node": ">=20.19.6",
-    "pnpm": ">=10.23.0"
+    "pnpm": ">=10.28.1"
   },
   "type": "module",
   "scripts": {
@@ -63,9 +63,9 @@
     "@commitlint/cli": "20.1.0",
     "@commitlint/config-conventional": "20.0.0",
     "@manypkg/cli": "0.25.1",
-    "@vitest/coverage-istanbul": "3.1.2",
-    "@vitest/coverage-v8": "3.1.2",
-    "@vitest/ui": "3.1.2",
+    "@vitest/coverage-istanbul": "3.2.4",
+    "@vitest/coverage-v8": "3.2.4",
+    "@vitest/ui": "3.2.4",
     "babel-plugin-annotate-pure-calls": "0.5.0",
     "browserslist": "4.28.1",
     "cross-env": "10.1.0",
@@ -76,15 +76,15 @@
     "jsdom": "27.2.0",
     "lerna": "8.2.4",
     "lint-staged": "16.2.7",
-    "prettier": "3.7.3",
+    "prettier": "3.8.1",
     "react": "^19.2.4",
     "read-pkg": "10.0.0",
     "tsc-alias": "^1.8.16",
     "typedoc": "0.28.15",
-    "turbo": "^2.6.1",
+    "turbo": "^2.7.5",
     "typescript": "5.9.3",
-    "vite": "7.2.4",
-    "vitest": "3.1.2"
+    "vite": "7.3.1",
+    "vitest": "3.2.4"
   },
-  "packageManager": "pnpm@10.23.0"
+  "packageManager": "pnpm@10.28.1"
 }
