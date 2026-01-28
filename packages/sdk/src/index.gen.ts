@@ -11,7 +11,6 @@ import { Billingv2beta1 } from '@scaleway/sdk-billing'
 import { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
 import { Cockpitv1 } from '@scaleway/sdk-cockpit'
 import { Containerv1beta1 } from '@scaleway/sdk-container'
-import { Datalabv1beta1 } from '@scaleway/sdk-datalab'
 import { Datawarehousev1beta1 } from '@scaleway/sdk-datawarehouse'
 import { Dediboxv1 } from '@scaleway/sdk-dedibox'
 import { Domainv2beta1 } from '@scaleway/sdk-domain'
@@ -122,14 +121,6 @@ export const Cockpit = {
 export { Containerv1beta1 }
 export const Container = {
   v1beta1: Containerv1beta1,
-}
-
-/**
- * @deprecated Direct version exports are deprecated. Use the 'Datalab' namespace instead (e.g., Datalab.v1).
- */
-export { Datalabv1beta1 }
-export const Datalab = {
-  v1beta1: Datalabv1beta1,
 }
 
 /**
