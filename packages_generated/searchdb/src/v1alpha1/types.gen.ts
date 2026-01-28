@@ -460,7 +460,7 @@ export interface ListDeploymentsResponse {
 }
 
 /**
- * Retrieve a list of available node types for a SearchDB cluster.
+ * Retrieve a list of available node types for a Cloud Essentials for OpenSearch cluster.
  */
 export type ListNodeTypesRequest = {
   /**
@@ -482,7 +482,7 @@ export type ListNodeTypesRequest = {
 }
 
 /**
- * Returns a list of node types available for a SearchDB cluster.
+ * Returns a list of node types available for a Cloud Essentials for OpenSearch cluster.
  */
 export interface ListNodeTypesResponse {
   /**

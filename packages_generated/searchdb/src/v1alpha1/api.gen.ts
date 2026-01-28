@@ -55,9 +55,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * SearchDB API.
+ * Cloud Essentials for Opensearch API.
 
-The SearchDB API allows you to manage your Opensearch resources.
+The Cloud Essentials for Opensearch API allows you to manage your Opensearch resources.
  */
 export class API extends ParentAPI {
   /**
@@ -69,7 +69,7 @@ export class API extends ParentAPI {
   })
 
   /**
-   * Create a new SearchDB deployment.
+   * Create a new Cloud Essentials for OpenSearch deployment.
    *
    * @param request - The request {@link CreateDeploymentRequest}
    * @returns A Promise of Deployment
@@ -88,7 +88,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Update a SearchDB deployment.
+   * Update a Cloud Essentials for OpenSearch deployment.
    *
    * @param request - The request {@link UpdateDeploymentRequest}
    * @returns A Promise of Deployment
@@ -107,7 +107,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Upgrade a SearchDB deployment.
+   * Upgrade a Cloud Essentials for OpenSearch deployment.
    *
    * @param request - The request {@link UpgradeDeploymentRequest}
    * @returns A Promise of Deployment
@@ -126,7 +126,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve a specific SearchDB deployment.
+   * Retrieve a specific Cloud Essentials for OpenSearch deployment.
    *
    * @param request - The request {@link GetDeploymentRequest}
    * @returns A Promise of Deployment
@@ -163,7 +163,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Delete a SearchDB deployment.
+   * Delete a Cloud Essentials for OpenSearch deployment.
    *
    * @param request - The request {@link DeleteDeploymentRequest}
    * @returns A Promise of Deployment
@@ -202,7 +202,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * Retrieve a list of SearchDB deployments.
+   * Retrieve a list of Cloud Essentials for OpenSearch deployments.
    *
    * @param request - The request {@link ListDeploymentsRequest}
    * @returns A Promise of ListDeploymentsResponse
@@ -231,7 +231,7 @@ export class API extends ParentAPI {
     )
 
   /**
-   * List available SearchDB versions.
+   * List available Cloud Essentials for OpenSearch versions.
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse

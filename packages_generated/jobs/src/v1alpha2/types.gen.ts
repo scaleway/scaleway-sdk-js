@@ -15,6 +15,7 @@ export type JobRunReason =
   | 'exited_with_error'
   | 'secret_disabled'
   | 'secret_not_found'
+  | 'quota_exceeded'
 
 export type JobRunState =
   | 'unknown_state'

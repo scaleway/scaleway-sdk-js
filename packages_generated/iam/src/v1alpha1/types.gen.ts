@@ -1222,6 +1222,14 @@ export type FinishUserWebAuthnRegistrationRequest = {
    * Attestation Object.
    */
   attestationObject: string
+  /**
+   * Public key that allows to verify signature.
+   */
+  publicKey: string
+  /**
+   * Algorithm used for the signature (see https://www.iana.org/assignments/cose/cose.xhtml#algorithms).
+   */
+  publicKeyAlgorithm: number
 }
 
 export interface FinishUserWebAuthnRegistrationResponse {
