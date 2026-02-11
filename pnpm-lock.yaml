@@ -245,8 +245,8 @@ importers:
   packages_generated/account:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -258,8 +258,8 @@ importers:
   packages_generated/applesilicon:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -271,8 +271,8 @@ importers:
   packages_generated/audit_trail:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -284,8 +284,8 @@ importers:
   packages_generated/autoscaling:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -297,8 +297,8 @@ importers:
   packages_generated/baremetal:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -310,8 +310,8 @@ importers:
   packages_generated/billing:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -323,8 +323,8 @@ importers:
   packages_generated/block:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -336,8 +336,8 @@ importers:
   packages_generated/cockpit:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -349,8 +349,8 @@ importers:
   packages_generated/container:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -362,8 +362,8 @@ importers:
   packages_generated/datalab:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -375,8 +375,8 @@ importers:
   packages_generated/datawarehouse:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -388,8 +388,8 @@ importers:
   packages_generated/dedibox:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -401,8 +401,8 @@ importers:
   packages_generated/domain:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -414,8 +414,8 @@ importers:
   packages_generated/edge_services:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -427,8 +427,8 @@ importers:
   packages_generated/environmental_footprint:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -440,8 +440,8 @@ importers:
   packages_generated/file:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -453,8 +453,8 @@ importers:
   packages_generated/flexibleip:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -466,8 +466,8 @@ importers:
   packages_generated/function:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -479,8 +479,8 @@ importers:
   packages_generated/iam:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -492,8 +492,8 @@ importers:
   packages_generated/inference:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -505,8 +505,8 @@ importers:
   packages_generated/instance:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -518,8 +518,8 @@ importers:
   packages_generated/interlink:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -531,8 +531,8 @@ importers:
   packages_generated/iot:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -544,8 +544,8 @@ importers:
   packages_generated/ipam:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -557,8 +557,8 @@ importers:
   packages_generated/jobs:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -570,8 +570,8 @@ importers:
   packages_generated/k8s:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -583,8 +583,8 @@ importers:
   packages_generated/kafka:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -596,8 +596,8 @@ importers:
   packages_generated/key_manager:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -609,8 +609,8 @@ importers:
   packages_generated/lb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -622,8 +622,8 @@ importers:
   packages_generated/marketplace:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -635,8 +635,8 @@ importers:
   packages_generated/mnq:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -648,8 +648,8 @@ importers:
   packages_generated/mongodb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -661,8 +661,8 @@ importers:
   packages_generated/product_catalog:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -674,8 +674,8 @@ importers:
   packages_generated/qaas:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -687,8 +687,8 @@ importers:
   packages_generated/rdb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -700,8 +700,8 @@ importers:
   packages_generated/redis:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -713,8 +713,8 @@ importers:
   packages_generated/registry:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -726,8 +726,8 @@ importers:
   packages_generated/s2s_vpn:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -739,8 +739,8 @@ importers:
   packages_generated/searchdb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -752,8 +752,8 @@ importers:
   packages_generated/secret:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -765,8 +765,8 @@ importers:
   packages_generated/serverless_sqldb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -784,8 +784,8 @@ importers:
   packages_generated/tem:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -797,8 +797,8 @@ importers:
   packages_generated/test:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -810,8 +810,8 @@ importers:
   packages_generated/vpc:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -823,8 +823,8 @@ importers:
   packages_generated/vpcgw:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -836,8 +836,8 @@ importers:
   packages_generated/webhosting:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -1650,12 +1650,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@scaleway/random-name@5.1.1':
-    resolution: {integrity: sha512-DelRK+56UBUEoRr8pQGwTE7oyC019pExis6iG6zZPcjuz4nLbMB5LIosmclnsvajfIBEQiD1Dv9JI/MgnPwygQ==}
-    engines: {node: '>=20.x'}
-
-  '@scaleway/random-name@5.1.2':
-    resolution: {integrity: sha512-WBiqKPnJdncl2mcA7t89rZrxaSIRF/eiyo69sbIiVsOj413+zg3Royzv4ddkRdNTnNg0l21GZpA6O8pfZyPAQQ==}
+  '@scaleway/random-name@5.1.4':
+    resolution: {integrity: sha512-+rDbZG1317VGovkE79dLaDe0n1cCwtQUrQ1KxMct8vzzZwRA+viiU6VQePMSmu/MMhed2OUtDSM45tbmwE7BeQ==}
     engines: {node: '>=20.x'}
 
   '@shikijs/engine-oniguruma@3.19.0':
@@ -5577,9 +5573,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.45.1':
     optional: true
 
-  '@scaleway/random-name@5.1.1': {}
-
-  '@scaleway/random-name@5.1.2': {}
+  '@scaleway/random-name@5.1.4': {}
 
   '@shikijs/engine-oniguruma@3.19.0':
     dependencies:

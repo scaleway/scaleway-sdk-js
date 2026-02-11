@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@scaleway/sdk-std": "workspace:*",
-    "@scaleway/random-name": "5.1.1"
+    "@scaleway/random-name": "5.1.4"
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
