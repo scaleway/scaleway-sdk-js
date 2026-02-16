@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-02-16)
+
+### Features
+
+- **resource_private:** add s2s_vpn in resource count ([#2723](https://github.com/scaleway/scaleway-sdk-js/issues/2723)) ([2edeebe](https://github.com/scaleway/scaleway-sdk-js/commit/2edeebef6c90b824f7d032be1af5b01c4a40e655))
+
 # [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-s2s-vpn@2.2.0...@scaleway/sdk-s2s-vpn@2.3.0) (2025-12-29)
 
 ### Features

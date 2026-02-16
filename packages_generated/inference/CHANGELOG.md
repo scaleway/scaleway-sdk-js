@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.2.1 (2026-02-16)
+
+### Bug Fixes
+
+- apply Biome formatting to generated files ([#2752](https://github.com/scaleway/scaleway-sdk-js/issues/2752)) ([2a15a4f](https://github.com/scaleway/scaleway-sdk-js/commit/2a15a4f1b0cf358789de52cffa70d896f86ee093))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-inference@2.1.1...@scaleway/sdk-inference@2.2.0) (2025-12-22)
 
 ### Features

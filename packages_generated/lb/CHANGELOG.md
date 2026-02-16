@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-02-16)
+
+### Features
+
+- **lb:** add enum letsencrypt and deprecate letsencryt ([#2705](https://github.com/scaleway/scaleway-sdk-js/issues/2705)) ([37940f0](https://github.com/scaleway/scaleway-sdk-js/commit/37940f02340d3f547a8de9476f6e321efab6ee2c))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-lb@2.1.1...@scaleway/sdk-lb@2.2.0) (2025-12-22)
 
 ### Features

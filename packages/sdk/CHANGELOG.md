@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.1.5...@scaleway/sdk@3.2.0) (2026-02-16)
+
+### Features
+
+- **datalab:** add support for datalab ([#2738](https://github.com/scaleway/scaleway-sdk-js/issues/2738)) ([ca06984](https://github.com/scaleway/scaleway-sdk-js/commit/ca06984d0da22c911fa9708cdd25672ffe923404))
+- **k8s:** allow patching security_group_id on existing pools ([#2720](https://github.com/scaleway/scaleway-sdk-js/issues/2720)) ([45a1479](https://github.com/scaleway/scaleway-sdk-js/commit/45a147926eb27179ed1ff5fbd58bae0273c3fa67))
+- **searchdb:** enable opensearch cli ([#2725](https://github.com/scaleway/scaleway-sdk-js/issues/2725)) ([b311766](https://github.com/scaleway/scaleway-sdk-js/commit/b311766d0d09c1d7e0bfb9b91d66797428b1d16b))
+
 ## [3.1.5](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.1.4...@scaleway/sdk@3.1.5) (2026-01-12)
 
 **Note:** Version bump only for package @scaleway/sdk

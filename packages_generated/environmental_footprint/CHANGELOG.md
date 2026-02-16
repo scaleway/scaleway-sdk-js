@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2026-02-16)
+
+### Features
+
+- **environmental_footprint:** add kubernetes environmental usage for the User API ([#2736](https://github.com/scaleway/scaleway-sdk-js/issues/2736)) ([6899f07](https://github.com/scaleway/scaleway-sdk-js/commit/6899f0722d107d28c675097c36c7a9382a07845b))
+
 # [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-environmental-footprint@2.3.0...@scaleway/sdk-environmental-footprint@2.4.0) (2025-12-29)
 
 ### Features

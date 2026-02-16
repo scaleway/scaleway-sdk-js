@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-02-16)
+
+### Features
+
+- **edge_services:** add doc and cli for head stage ([#2712](https://github.com/scaleway/scaleway-sdk-js/issues/2712)) ([d0c179a](https://github.com/scaleway/scaleway-sdk-js/commit/d0c179a91c15f454e0304220075ccae662dbd16b))
+
 # 2.3.0 (2026-01-05)
 
 ### Features

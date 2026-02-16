@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-02-16)
+
+### Features
+
+- **datawarehouse:** add deployment statuses for start/stop routes ([#2731](https://github.com/scaleway/scaleway-sdk-js/issues/2731)) ([ec3945e](https://github.com/scaleway/scaleway-sdk-js/commit/ec3945ead6060f8d1e0adf7b9ae1bcea14e61151))
+- **datawarehouse:** add start and stop deployment endpoints DTWH-320 ([#2730](https://github.com/scaleway/scaleway-sdk-js/issues/2730)) ([5a54501](https://github.com/scaleway/scaleway-sdk-js/commit/5a54501cb0849a2835a84fb322e06cd38fc0c71c))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-datawarehouse@2.1.1...@scaleway/sdk-datawarehouse@2.2.0) (2025-12-22)
 
 ### Features
