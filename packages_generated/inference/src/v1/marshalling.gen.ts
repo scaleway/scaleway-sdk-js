@@ -1,39 +1,32 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+import { isJSONObject, marshalBlobToScwFile, marshalDecimal, marshalMoney, marshalScwFile, marshalTimeSeries, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalDecimal, unmarshalMapOfObject, unmarshalMoney, unmarshalScwFile, unmarshalServiceInfo, unmarshalTimeSeries, unmarshalTimeSeriesPoint } from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scaleway/sdk-client'
 import type {
-  CreateDeploymentRequest,
-  CreateEndpointRequest,
-  CreateModelRequest,
-  Deployment,
-  DeploymentQuantization,
-  Endpoint,
   EndpointPrivateNetworkDetails,
   EndpointPublicNetworkDetails,
-  EndpointSpec,
+  Endpoint,
+  DeploymentQuantization,
+  Deployment,
+  ModelSupportedQuantization,
+  ModelSupportedNode,
+  ModelSupportInfo,
+  Model,
   ListDeploymentsResponse,
   ListModelsResponse,
-  ListNodeTypesResponse,
-  Model,
-  ModelSource,
-  ModelSupportedNode,
-  ModelSupportedQuantization,
-  ModelSupportInfo,
   NodeType,
+  ListNodeTypesResponse,
+  EndpointSpec,
+  CreateDeploymentRequest,
+  CreateEndpointRequest,
+  ModelSource,
+  CreateModelRequest,
   UpdateDeploymentRequest,
   UpdateEndpointRequest,
 } from './types.gen.js'
 
-const unmarshalEndpointPrivateNetworkDetails = (
-  data: unknown,
-): EndpointPrivateNetworkDetails => {
+const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateNetworkDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`,
@@ -45,16 +38,15 @@ const unmarshalEndpointPrivateNetworkDetails = (
   } as EndpointPrivateNetworkDetails
 }
 
-const unmarshalEndpointPublicNetworkDetails = (
-  data: unknown,
-): EndpointPublicNetworkDetails => {
+const unmarshalEndpointPublicNetworkDetails = (data: unknown): EndpointPublicNetworkDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EndpointPublicNetworkDetails' failed as data isn't a dictionary.`,
     )
   }
 
-  return {} as EndpointPublicNetworkDetails
+  return {
+  } as EndpointPublicNetworkDetails
 }
 
 export const unmarshalEndpoint = (data: unknown): Endpoint => {
@@ -67,19 +59,13 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   return {
     disableAuth: data.disable_auth,
     id: data.id,
-    privateNetwork: data.private_network
-      ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
-      : undefined,
-    publicNetwork: data.public_network
-      ? unmarshalEndpointPublicNetworkDetails(data.public_network)
-      : undefined,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
+    publicNetwork: data.public_network ? unmarshalEndpointPublicNetworkDetails(data.public_network) : undefined,
     url: data.url,
   } as Endpoint
 }
 
-const unmarshalDeploymentQuantization = (
-  data: unknown,
-): DeploymentQuantization => {
+const unmarshalDeploymentQuantization = (data: unknown): DeploymentQuantization => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DeploymentQuantization' failed as data isn't a dictionary.`,
@@ -110,9 +96,7 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     name: data.name,
     nodeTypeName: data.node_type_name,
     projectId: data.project_id,
-    quantization: data.quantization
-      ? unmarshalDeploymentQuantization(data.quantization)
-      : undefined,
+    quantization: data.quantization ? unmarshalDeploymentQuantization(data.quantization) : undefined,
     region: data.region,
     size: data.size,
     status: data.status,
@@ -121,9 +105,7 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
   } as Deployment
 }
 
-const unmarshalModelSupportedQuantization = (
-  data: unknown,
-): ModelSupportedQuantization => {
+const unmarshalModelSupportedQuantization = (data: unknown): ModelSupportedQuantization => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ModelSupportedQuantization' failed as data isn't a dictionary.`,
@@ -146,10 +128,7 @@ const unmarshalModelSupportedNode = (data: unknown): ModelSupportedNode => {
 
   return {
     nodeTypeName: data.node_type_name,
-    quantizations: unmarshalArrayOfObject(
-      data.quantizations,
-      unmarshalModelSupportedQuantization,
-    ),
+    quantizations: unmarshalArrayOfObject(data.quantizations, unmarshalModelSupportedQuantization),
   } as ModelSupportedNode
 }
 
@@ -179,10 +158,7 @@ export const unmarshalModel = (data: unknown): Model => {
     hasEula: data.has_eula,
     id: data.id,
     name: data.name,
-    nodesSupport: unmarshalArrayOfObject(
-      data.nodes_support,
-      unmarshalModelSupportInfo,
-    ),
+    nodesSupport: unmarshalArrayOfObject(data.nodes_support, unmarshalModelSupportInfo),
     parameterSizeBits: data.parameter_size_bits,
     projectId: data.project_id,
     region: data.region,
@@ -193,9 +169,7 @@ export const unmarshalModel = (data: unknown): Model => {
   } as Model
 }
 
-export const unmarshalListDeploymentsResponse = (
-  data: unknown,
-): ListDeploymentsResponse => {
+export const unmarshalListDeploymentsResponse = (data: unknown): ListDeploymentsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDeploymentsResponse' failed as data isn't a dictionary.`,
@@ -208,9 +182,7 @@ export const unmarshalListDeploymentsResponse = (
   } as ListDeploymentsResponse
 }
 
-export const unmarshalListModelsResponse = (
-  data: unknown,
-): ListModelsResponse => {
+export const unmarshalListModelsResponse = (data: unknown): ListModelsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListModelsResponse' failed as data isn't a dictionary.`,
@@ -246,9 +218,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
   } as NodeType
 }
 
-export const unmarshalListNodeTypesResponse = (
-  data: unknown,
-): ListNodeTypesResponse => {
+export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`,
@@ -271,7 +241,8 @@ const marshalEndpointPrivateNetworkDetails = (
 const marshalEndpointPublicNetworkDetails = (
   request: EndpointPublicNetworkDetails,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+})
 
 const marshalDeploymentQuantization = (
   request: DeploymentQuantization,
@@ -284,24 +255,15 @@ const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  disable_auth: request.disableAuth,
+  disable_auth: request.disableAuth,  
   ...resolveOneOf([
-    {
-      param: 'public_network',
-      value:
-        request.publicNetwork !== undefined
-          ? marshalEndpointPublicNetworkDetails(request.publicNetwork, defaults)
-          : undefined,
+    {param: 'public_network',
+      value: (request.publicNetwork !== undefined) ? marshalEndpointPublicNetworkDetails(request.publicNetwork, defaults)
+      : undefined,
     },
-    {
-      param: 'private_network',
-      value:
-        request.privateNetwork !== undefined
-          ? marshalEndpointPrivateNetworkDetails(
-              request.privateNetwork,
-              defaults,
-            )
-          : undefined,
+    {param: 'private_network',
+      value: (request.privateNetwork !== undefined) ? marshalEndpointPrivateNetworkDetails(request.privateNetwork, defaults)
+      : undefined,
     },
   ]),
 })
@@ -311,17 +273,14 @@ export const marshalCreateDeploymentRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   accept_eula: request.acceptEula,
-  endpoints: request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
+  endpoints:  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
   max_size: request.maxSize,
   min_size: request.minSize,
   model_id: request.modelId,
   name: request.name || randomName('inference'),
   node_type_name: request.nodeTypeName,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  quantization:
-    request.quantization !== undefined
-      ? marshalDeploymentQuantization(request.quantization, defaults)
-      : undefined,
+  quantization: ((request.quantization !== undefined) ?  marshalDeploymentQuantization(request.quantization, defaults): undefined),
   tags: request.tags,
 })
 
@@ -330,15 +289,19 @@ export const marshalCreateEndpointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   deployment_id: request.deploymentId,
-  endpoint: marshalEndpointSpec(request.endpoint, defaults),
+  endpoint:  marshalEndpointSpec(request.endpoint, defaults),
 })
 
 const marshalModelSource = (
   request: ModelSource,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  url: request.url,
-  ...resolveOneOf([{ param: 'secret', value: request.secret }]),
+  url: request.url,  
+  ...resolveOneOf([
+    {param: 'secret',
+      value: request.secret,
+    },
+  ]),
 })
 
 export const marshalCreateModelRequest = (
@@ -347,7 +310,7 @@ export const marshalCreateModelRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('model'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  source: marshalModelSource(request.source, defaults),
+  source:  marshalModelSource(request.source, defaults),
 })
 
 export const marshalUpdateDeploymentRequest = (
@@ -358,10 +321,7 @@ export const marshalUpdateDeploymentRequest = (
   min_size: request.minSize,
   model_id: request.modelId,
   name: request.name,
-  quantization:
-    request.quantization !== undefined
-      ? marshalDeploymentQuantization(request.quantization, defaults)
-      : undefined,
+  quantization: ((request.quantization !== undefined) ?  marshalDeploymentQuantization(request.quantization, defaults): undefined),
   tags: request.tags,
 })
 
