@@ -41,19 +41,26 @@ function* pages<
   const { length } = firstPage[key]
   let page = request.page || 1
   
-  if (page === 1) {
-    yield Promise.resolve(getList(firstPage))
-    page += 1
+  // If list is empty, yield empty array and return (no need for totalCount)
+  if (!length) {
+    if (page === 1) {
+      yield Promise.resolve(getList(firstPage))
+    }
+    return
   }
   
-  if (!length) return
-  
+  // For non-empty lists, totalCount is required
   const { totalCount } = firstPage
   if (totalCount === undefined) {
     throw new Error(
       `totalCount is required for pagination but was undefined. ` +
       `The API response must include a totalCount field to enable pagination.`
     )
+  }
+  
+  if (page === 1) {
+    yield Promise.resolve(getList(firstPage))
+    page += 1
   }
   
   while (page <= Math.floor((totalCount + length - 1) / length)) {
