@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-02-16)
+
+### Features
+
+- **product_catalog:** add cloud-init badge in getCatalog ([#2718](https://github.com/scaleway/scaleway-sdk-js/issues/2718)) ([4740b9c](https://github.com/scaleway/scaleway-sdk-js/commit/4740b9c8b52e6a2a660aa694a7386629058ed006))
+
 # [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.2.0...@scaleway/sdk-product-catalog@2.3.0) (2025-12-29)
 
 ### Features

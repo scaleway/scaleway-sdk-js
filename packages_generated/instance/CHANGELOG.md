@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-02-16)
+
+### Features
+
+- **instance:** add cloud-init support on templates ([#2713](https://github.com/scaleway/scaleway-sdk-js/issues/2713)) ([6dbb69b](https://github.com/scaleway/scaleway-sdk-js/commit/6dbb69bebbbbb0104238ee578b3ece00c3751d39))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-instance@2.1.1...@scaleway/sdk-instance@2.2.0) (2025-12-22)
 
 ### Features

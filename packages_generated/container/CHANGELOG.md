@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@2.3.0...@scaleway/sdk-container@2.3.1) (2026-02-16)
+
+### Bug Fixes
+
+- **serverless:** change containers v1 UpdateTriggerRequest http headers type ([#2729](https://github.com/scaleway/scaleway-sdk-js/issues/2729)) ([61417a5](https://github.com/scaleway/scaleway-sdk-js/commit/61417a56de176cffefabfa906391894473f6a116))
+
 # 2.3.0 (2026-01-12)
 
 ### Features

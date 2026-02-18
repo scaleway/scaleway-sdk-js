@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-02-16)
+
+### Features
+
+- **audit_trail:** add support for `AuditTrailExportJobInfo` ([#2734](https://github.com/scaleway/scaleway-sdk-js/issues/2734)) ([773f9de](https://github.com/scaleway/scaleway-sdk-js/commit/773f9deacf2d45904460198a13e6269645369b76))
+- **audit_trail:** add vpc-gw resources info ([#2717](https://github.com/scaleway/scaleway-sdk-js/issues/2717)) ([c89e879](https://github.com/scaleway/scaleway-sdk-js/commit/c89e87928d8d5bfaf8a4c5841ce8b1565764a65c))
+
 # 2.3.0 (2026-01-05)
 
 ### Features

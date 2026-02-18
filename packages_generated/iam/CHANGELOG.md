@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-02-16)
+
+### Features
+
+- **iam:** add WebAuthn handling endpoints ([#2737](https://github.com/scaleway/scaleway-sdk-js/issues/2737)) ([758bbf1](https://github.com/scaleway/scaleway-sdk-js/commit/758bbf1323d525bd5b530ac537201f105d636b2e))
+- **iam:** add webauthn registration public key fields ([#2744](https://github.com/scaleway/scaleway-sdk-js/issues/2744)) ([34cefff](https://github.com/scaleway/scaleway-sdk-js/commit/34cefff283f4f7a5deb13faca9b844650694869e))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@2.1.1...@scaleway/sdk-iam@2.2.0) (2025-12-22)
 
 ### Features

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-02-16)
+
+### Features
+
+- **mongodb:** add support for maintainances ([#2728](https://github.com/scaleway/scaleway-sdk-js/issues/2728)) ([0215b0c](https://github.com/scaleway/scaleway-sdk-js/commit/0215b0cfa5969cb3b125ab5f4df390f0c30ca366))
+
 # [2.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-mongodb@2.1.1...@scaleway/sdk-mongodb@2.2.0) (2025-12-22)
 
 ### Features

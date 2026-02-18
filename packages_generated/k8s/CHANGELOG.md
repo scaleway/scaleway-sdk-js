@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-02-16)
+
+### Features
+
+- **k8s:** allow patching security_group_id on existing pools ([#2720](https://github.com/scaleway/scaleway-sdk-js/issues/2720)) ([45a1479](https://github.com/scaleway/scaleway-sdk-js/commit/45a147926eb27179ed1ff5fbd58bae0273c3fa67))
+
 # [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.2.0...@scaleway/sdk-k8s@2.3.0) (2025-12-22)
 
 ### Features
