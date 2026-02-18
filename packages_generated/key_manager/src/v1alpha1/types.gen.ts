@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type DataKeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
@@ -27,7 +28,10 @@ export type KeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
   | 'aes_256_gcm'
 
-export type KeyOrigin = 'unknown_origin' | 'scaleway_kms' | 'external'
+export type KeyOrigin =
+  | 'unknown_origin'
+  | 'scaleway_kms'
+  | 'external'
 
 export type KeyState =
   | 'unknown_state'
@@ -67,6 +71,7 @@ export interface KeyRotationPolicy {
   nextRotationAt?: Date
 }
 
+
 export interface KeyUsage {
   /**
    * See the `Key.Algorithm.SymmetricEncryption` enum for a description of values.
@@ -88,11 +93,13 @@ export interface KeyUsage {
   asymmetricSigning?: KeyAlgorithmAsymmetricSigning
 }
 
+
 export interface ListAlgorithmsResponseAlgorithm {
   usage: string
   name: string
   recommended: boolean
 }
+
 
 export interface Key {
   /**
@@ -165,6 +172,7 @@ export interface Key {
   region: ScwRegion
 }
 
+
 export type CreateKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -204,6 +212,7 @@ export type CreateKeyRequest = {
   origin?: KeyOrigin
 }
 
+
 export interface DataKey {
   /**
    * ID of the data encryption key.
@@ -227,6 +236,7 @@ export interface DataKey {
   createdAt?: Date
 }
 
+
 export type DecryptRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -246,6 +256,7 @@ export type DecryptRequest = {
   associatedData?: string
 }
 
+
 export interface DecryptResponse {
   /**
    * ID of the key used for decryption.
@@ -261,6 +272,7 @@ export interface DecryptResponse {
   ciphertext?: string
 }
 
+
 export type DeleteKeyMaterialRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -271,6 +283,7 @@ export type DeleteKeyMaterialRequest = {
    */
   keyId: string
 }
+
 
 export type DeleteKeyRequest = {
   /**
@@ -283,6 +296,7 @@ export type DeleteKeyRequest = {
   keyId: string
 }
 
+
 export type DisableKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -294,6 +308,7 @@ export type DisableKeyRequest = {
   keyId: string
 }
 
+
 export type EnableKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -304,6 +319,7 @@ export type EnableKeyRequest = {
    */
   keyId: string
 }
+
 
 export type EncryptRequest = {
   /**
@@ -324,6 +340,7 @@ export type EncryptRequest = {
   associatedData?: string
 }
 
+
 export interface EncryptResponse {
   /**
    * ID of the key used for encryption.
@@ -334,6 +351,7 @@ export interface EncryptResponse {
    */
   ciphertext: string
 }
+
 
 export type GenerateDataKeyRequest = {
   /**
@@ -355,6 +373,7 @@ Set it to `true` if you do not wish the plaintext to be returned in the response
   withoutPlaintext: boolean
 }
 
+
 export type GetKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -366,6 +385,7 @@ export type GetKeyRequest = {
   keyId: string
 }
 
+
 export type GetPublicKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -376,6 +396,7 @@ export type GetPublicKeyRequest = {
    */
   keyId: string
 }
+
 
 export type ImportKeyMaterialRequest = {
   /**
@@ -396,6 +417,7 @@ export type ImportKeyMaterialRequest = {
   salt?: string
 }
 
+
 export type ListAlgorithmsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -407,12 +429,14 @@ export type ListAlgorithmsRequest = {
   usages?: ListAlgorithmsRequestUsage[]
 }
 
+
 export interface ListAlgorithmsResponse {
   /**
    * Returns a list of algorithms matching the requested criteria.
    */
   algorithms: ListAlgorithmsResponseAlgorithm[]
 }
+
 
 export type ListKeysRequest = {
   /**
@@ -448,6 +472,7 @@ export type ListKeysRequest = {
   scheduledForDeletion: boolean
 }
 
+
 export interface ListKeysResponse {
   /**
    * Single page of keys matching the requested criteria.
@@ -458,6 +483,7 @@ export interface ListKeysResponse {
    */
   totalCount: number
 }
+
 
 export type ProtectKeyRequest = {
   /**
@@ -470,9 +496,11 @@ export type ProtectKeyRequest = {
   keyId: string
 }
 
+
 export interface PublicKey {
   pem: string
 }
+
 
 export type RestoreKeyRequest = {
   /**
@@ -481,6 +509,7 @@ export type RestoreKeyRequest = {
   region?: ScwRegion
   keyId: string
 }
+
 
 export type RotateKeyRequest = {
   /**
@@ -492,6 +521,7 @@ export type RotateKeyRequest = {
    */
   keyId: string
 }
+
 
 export type SignRequest = {
   /**
@@ -508,6 +538,7 @@ export type SignRequest = {
   digest: string
 }
 
+
 export interface SignResponse {
   /**
    * ID of the key used to generate the signature.
@@ -519,6 +550,7 @@ export interface SignResponse {
   signature: string
 }
 
+
 export type UnprotectKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -529,6 +561,7 @@ export type UnprotectKeyRequest = {
    */
   keyId: string
 }
+
 
 export type UpdateKeyRequest = {
   /**
@@ -557,6 +590,7 @@ export type UpdateKeyRequest = {
   rotationPolicy?: KeyRotationPolicy
 }
 
+
 export type VerifyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -576,6 +610,7 @@ export type VerifyRequest = {
   signature: string
 }
 
+
 export interface VerifyResponse {
   /**
    * ID of the key used for verification.
@@ -586,3 +621,5 @@ export interface VerifyResponse {
    */
   valid: boolean
 }
+
+

@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_SEARCHDB } from './content.gen.js'
+import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_SEARCHDB,} from './content.gen.js'
 import {
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
@@ -35,6 +35,7 @@ import type {
   DeleteUserRequest,
   Deployment,
   Endpoint,
+  GetDeploymentCertificateAuthorityRequest,
   GetDeploymentRequest,
   ListDeploymentsRequest,
   ListDeploymentsResponse,
@@ -64,10 +65,13 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+      ],
+    })
+  
   /**
    * Create a new Cloud Essentials for OpenSearch deployment.
    *
@@ -87,6 +91,7 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
+  
   /**
    * Update a Cloud Essentials for OpenSearch deployment.
    *
@@ -106,6 +111,7 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
+  
   /**
    * Upgrade a Cloud Essentials for OpenSearch deployment.
    *
@@ -125,6 +131,7 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
+  
   /**
    * Retrieve a specific Cloud Essentials for OpenSearch deployment.
    *
@@ -139,7 +146,7 @@ export class API extends ParentAPI {
       },
       unmarshalDeployment,
     )
-
+  
   /**
    * Waits for {@link Deployment} to be in a final state.
    *
@@ -152,16 +159,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Deployment>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !DEPLOYMENT_TRANSIENT_STATUSES_SEARCHDB.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!DEPLOYMENT_TRANSIENT_STATUSES_SEARCHDB.includes(res.status))),
       this.getDeployment,
       request,
       options,
     )
 
+  
   /**
    * Delete a Cloud Essentials for OpenSearch deployment.
    *
@@ -177,9 +181,8 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  protected pageOfListDeployments = (
-    request: Readonly<ListDeploymentsRequest> = {},
-  ) =>
+  
+  protected pageOfListDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
     this.client.fetch<ListDeploymentsResponse>(
       {
         method: 'GET',
@@ -189,10 +192,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['tags', request.tags],
           ['version', request.version],
@@ -200,7 +200,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDeploymentsResponse,
     )
-
+  
   /**
    * Retrieve a list of Cloud Essentials for OpenSearch deployments.
    *
@@ -210,9 +210,8 @@ export class API extends ParentAPI {
   listDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
     enrichForPagination('deployments', this.pageOfListDeployments, request)
 
-  protected pageOfListVersions = (
-    request: Readonly<ListVersionsRequest> = {},
-  ) =>
+  
+  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}) =>
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
@@ -220,16 +219,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['version', request.version],
         ),
       },
       unmarshalListVersionsResponse,
     )
-
+  
   /**
    * List available Cloud Essentials for OpenSearch versions.
    *
@@ -239,9 +235,8 @@ export class API extends ParentAPI {
   listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
     enrichForPagination('versions', this.pageOfListVersions, request)
 
-  protected pageOfListNodeTypes = (
-    request: Readonly<ListNodeTypesRequest> = {},
-  ) =>
+  
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -249,15 +244,12 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListNodeTypesResponse,
     )
-
+  
   /**
    * Retrieve a list of available node types.
    *
@@ -267,6 +259,7 @@ export class API extends ParentAPI {
   listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
     enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
 
+  
   /**
    * Create a new endpoint on a deployment.
    *
@@ -286,17 +279,21 @@ export class API extends ParentAPI {
       unmarshalEndpoint,
     )
 
+  
   /**
    * Delete an existing endpoint.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
   deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+      },
+    )
 
+  
   protected pageOfListUsers = (request: Readonly<ListUsersRequest>) =>
     this.client.fetch<ListUsersResponse>(
       {
@@ -306,15 +303,12 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListUsersResponse,
     )
-
+  
   /**
    * Retrieve a list of deployment users.
    *
@@ -324,6 +318,7 @@ export class API extends ParentAPI {
   listUsers = (request: Readonly<ListUsersRequest>) =>
     enrichForPagination('users', this.pageOfListUsers, request)
 
+  
   /**
    * Create a new user.
    *
@@ -343,6 +338,7 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
+  
   /**
    * Update an existing user.
    *
@@ -362,14 +358,33 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
+  
   /**
    * Delete an existing user.
    *
    * @param request - The request {@link DeleteUserRequest}
    */
   deleteUser = (request: Readonly<DeleteUserRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
+      },
+    )
+
+  
+  getDeploymentCertificateAuthority = (request: Readonly<GetDeploymentCertificateAuthorityRequest>) =>
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificate-authority`,
+        urlParams: urlParams(
+          ['dl', 1],
+        ),
+        responseType: 'blob',
+      },
+    )
+
+  
 }
+

@@ -1,6 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-export { API } from './api.gen.js'
+export {
+  API,
+} from './api.gen.js'
 export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
@@ -20,6 +22,8 @@ export type {
   ClusterTypeAvailability,
   ClusterTypeResiliency,
   CNI,
+  CoreV1Taint,
+  CoreV1TaintEffect,
   CreateClusterRequest,
   CreateClusterRequestAutoscalerConfig,
   CreateClusterRequestAutoUpgrade,
@@ -78,6 +82,9 @@ export type {
   SetClusterACLRulesRequest,
   SetClusterACLRulesResponse,
   SetClusterTypeRequest,
+  SetPoolLabelsRequest,
+  SetPoolStartupTaintsRequest,
+  SetPoolTaintsRequest,
   UpdateClusterRequest,
   UpdateClusterRequestAutoscalerConfig,
   UpdateClusterRequestAutoUpgrade,

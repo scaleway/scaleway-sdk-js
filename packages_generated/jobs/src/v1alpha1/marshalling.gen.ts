@@ -1,13 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   CreateJobDefinitionRequest,
   CreateJobDefinitionRequestCronScheduleConfig,
@@ -97,9 +92,7 @@ export const unmarshalJobDefinition = (data: unknown): JobDefinition => {
     command: data.command,
     cpuLimit: data.cpu_limit,
     createdAt: unmarshalDate(data.created_at),
-    cronSchedule: data.cron_schedule
-      ? unmarshalCronSchedule(data.cron_schedule)
-      : undefined,
+    cronSchedule: data.cron_schedule ? unmarshalCronSchedule(data.cron_schedule) : undefined,
     description: data.description,
     environmentVariables: data.environment_variables,
     id: data.id,
@@ -141,9 +134,7 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
   } as JobRun
 }
 
-export const unmarshalCreateJobDefinitionSecretsResponse = (
-  data: unknown,
-): CreateJobDefinitionSecretsResponse => {
+export const unmarshalCreateJobDefinitionSecretsResponse = (data: unknown): CreateJobDefinitionSecretsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateJobDefinitionSecretsResponse' failed as data isn't a dictionary.`,
@@ -167,9 +158,7 @@ export const unmarshalJobsLimits = (data: unknown): JobsLimits => {
   } as JobsLimits
 }
 
-export const unmarshalListJobDefinitionSecretsResponse = (
-  data: unknown,
-): ListJobDefinitionSecretsResponse => {
+export const unmarshalListJobDefinitionSecretsResponse = (data: unknown): ListJobDefinitionSecretsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListJobDefinitionSecretsResponse' failed as data isn't a dictionary.`,
@@ -182,9 +171,7 @@ export const unmarshalListJobDefinitionSecretsResponse = (
   } as ListJobDefinitionSecretsResponse
 }
 
-export const unmarshalListJobDefinitionsResponse = (
-  data: unknown,
-): ListJobDefinitionsResponse => {
+export const unmarshalListJobDefinitionsResponse = (data: unknown): ListJobDefinitionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListJobDefinitionsResponse' failed as data isn't a dictionary.`,
@@ -192,17 +179,12 @@ export const unmarshalListJobDefinitionsResponse = (
   }
 
   return {
-    jobDefinitions: unmarshalArrayOfObject(
-      data.job_definitions,
-      unmarshalJobDefinition,
-    ),
+    jobDefinitions: unmarshalArrayOfObject(data.job_definitions, unmarshalJobDefinition),
     totalCount: data.total_count,
   } as ListJobDefinitionsResponse
 }
 
-export const unmarshalListJobRunsResponse = (
-  data: unknown,
-): ListJobRunsResponse => {
+export const unmarshalListJobRunsResponse = (data: unknown): ListJobRunsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListJobRunsResponse' failed as data isn't a dictionary.`,
@@ -228,9 +210,7 @@ const unmarshalResource = (data: unknown): Resource => {
   } as Resource
 }
 
-export const unmarshalListJobsResourcesResponse = (
-  data: unknown,
-): ListJobsResourcesResponse => {
+export const unmarshalListJobsResourcesResponse = (data: unknown): ListJobsResourcesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListJobsResourcesResponse' failed as data isn't a dictionary.`,
@@ -242,9 +222,7 @@ export const unmarshalListJobsResourcesResponse = (
   } as ListJobsResourcesResponse
 }
 
-export const unmarshalStartJobDefinitionResponse = (
-  data: unknown,
-): StartJobDefinitionResponse => {
+export const unmarshalStartJobDefinitionResponse = (data: unknown): StartJobDefinitionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'StartJobDefinitionResponse' failed as data isn't a dictionary.`,
@@ -270,18 +248,9 @@ export const marshalCreateJobDefinitionRequest = (
 ): Record<string, unknown> => ({
   command: request.command,
   cpu_limit: request.cpuLimit,
-  cron_schedule:
-    request.cronSchedule !== undefined
-      ? marshalCreateJobDefinitionRequestCronScheduleConfig(
-          request.cronSchedule,
-          defaults,
-        )
-      : undefined,
+  cron_schedule: ((request.cronSchedule !== undefined) ?  marshalCreateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
   description: request.description,
-  environment_variables:
-    request.environmentVariables !== undefined
-      ? request.environmentVariables
-      : undefined,
+  environment_variables: ((request.environmentVariables !== undefined) ?  request.environmentVariables: undefined),
   image_uri: request.imageUri,
   job_timeout: request.jobTimeout,
   local_storage_capacity: request.localStorageCapacity,
@@ -295,10 +264,14 @@ const marshalCreateJobDefinitionSecretsRequestSecretConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   secret_manager_id: request.secretManagerId,
-  secret_manager_version: request.secretManagerVersion,
+  secret_manager_version: request.secretManagerVersion,  
   ...resolveOneOf([
-    { param: 'path', value: request.path },
-    { param: 'env_var_name', value: request.envVarName },
+    {param: 'path',
+      value: request.path,
+    },
+    {param: 'env_var_name',
+      value: request.envVarName,
+    },
   ]),
 })
 
@@ -306,9 +279,7 @@ export const marshalCreateJobDefinitionSecretsRequest = (
   request: CreateJobDefinitionSecretsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  secrets: request.secrets.map(elt =>
-    marshalCreateJobDefinitionSecretsRequestSecretConfig(elt, defaults),
-  ),
+  secrets:  request.secrets.map(elt => marshalCreateJobDefinitionSecretsRequestSecretConfig(elt, defaults)),
 })
 
 export const marshalStartJobDefinitionRequest = (
@@ -334,13 +305,7 @@ export const marshalUpdateJobDefinitionRequest = (
 ): Record<string, unknown> => ({
   command: request.command,
   cpu_limit: request.cpuLimit,
-  cron_schedule:
-    request.cronSchedule !== undefined
-      ? marshalUpdateJobDefinitionRequestCronScheduleConfig(
-          request.cronSchedule,
-          defaults,
-        )
-      : undefined,
+  cron_schedule: ((request.cronSchedule !== undefined) ?  marshalUpdateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
   description: request.description,
   environment_variables: request.environmentVariables,
   image_uri: request.imageUri,
@@ -354,9 +319,13 @@ export const marshalUpdateJobDefinitionSecretRequest = (
   request: UpdateJobDefinitionSecretRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  secret_manager_version: request.secretManagerVersion,
+  secret_manager_version: request.secretManagerVersion,  
   ...resolveOneOf([
-    { param: 'path', value: request.path },
-    { param: 'env_var_name', value: request.envVarName },
+    {param: 'path',
+      value: request.path,
+    },
+    {param: 'env_var_name',
+      value: request.envVarName,
+    },
   ]),
 })

@@ -1,8 +1,13 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone } from '@scaleway/sdk-client'
+import type { Zone as ScwZone, } from '@scaleway/sdk-client'
 
-export type Arch = 'unknown_arch' | 'x86_64' | 'arm' | 'arm64'
+
+export type Arch =
+  | 'unknown_arch'
+  | 'x86_64'
+  | 'arm'
+  | 'arm64'
 
 export type AttachServerVolumeRequestVolumeType =
   | 'unknown_volume_type'
@@ -10,9 +15,15 @@ export type AttachServerVolumeRequestVolumeType =
   | 'b_ssd'
   | 'sbs_volume'
 
-export type BootType = 'local' | 'bootscript' | 'rescue'
+export type BootType =
+  | 'local'
+  | 'bootscript'
+  | 'rescue'
 
-export type ImageState = 'available' | 'creating' | 'error'
+export type ImageState =
+  | 'available'
+  | 'creating'
+  | 'error'
 
 export type IpState =
   | 'unknown_state'
@@ -21,7 +32,10 @@ export type IpState =
   | 'pending'
   | 'error'
 
-export type IpType = 'unknown_iptype' | 'routed_ipv4' | 'routed_ipv6'
+export type IpType =
+  | 'unknown_iptype'
+  | 'routed_ipv4'
+  | 'routed_ipv6'
 
 export type ListServersRequestOrder =
   | 'creation_date_desc'
@@ -29,15 +43,28 @@ export type ListServersRequestOrder =
   | 'modification_date_desc'
   | 'modification_date_asc'
 
-export type PlacementGroupPolicyMode = 'optional' | 'enforced'
+export type PlacementGroupPolicyMode =
+  | 'optional'
+  | 'enforced'
 
-export type PlacementGroupPolicyType = 'max_availability' | 'low_latency'
+export type PlacementGroupPolicyType =
+  | 'max_availability'
+  | 'low_latency'
 
-export type PrivateNICState = 'available' | 'syncing' | 'syncing_error'
+export type PrivateNICState =
+  | 'available'
+  | 'syncing'
+  | 'syncing_error'
 
-export type SecurityGroupPolicy = 'unknown_policy' | 'accept' | 'drop'
+export type SecurityGroupPolicy =
+  | 'unknown_policy'
+  | 'accept'
+  | 'drop'
 
-export type SecurityGroupRuleAction = 'unknown_action' | 'accept' | 'drop'
+export type SecurityGroupRuleAction =
+  | 'unknown_action'
+  | 'accept'
+  | 'drop'
 
 export type SecurityGroupRuleDirection =
   | 'unknown_direction'
@@ -51,7 +78,10 @@ export type SecurityGroupRuleProtocol =
   | 'ICMP'
   | 'ANY'
 
-export type SecurityGroupState = 'available' | 'syncing' | 'syncing_error'
+export type SecurityGroupState =
+  | 'available'
+  | 'syncing'
+  | 'syncing_error'
 
 export type ServerAction =
   | 'poweron'
@@ -68,9 +98,14 @@ export type ServerFilesystemState =
   | 'available'
   | 'detaching'
 
-export type ServerIpIpFamily = 'inet' | 'inet6'
+export type ServerIpIpFamily =
+  | 'inet'
+  | 'inet6'
 
-export type ServerIpProvisioningMode = 'manual' | 'dhcp' | 'slaac'
+export type ServerIpProvisioningMode =
+  | 'manual'
+  | 'dhcp'
+  | 'slaac'
 
 export type ServerIpState =
   | 'unknown_state'
@@ -87,7 +122,10 @@ export type ServerState =
   | 'stopping'
   | 'locked'
 
-export type ServerTypesAvailability = 'available' | 'scarce' | 'shortage'
+export type ServerTypesAvailability =
+  | 'available'
+  | 'scarce'
+  | 'shortage'
 
 export type SnapshotState =
   | 'available'
@@ -103,7 +141,12 @@ export type SnapshotVolumeType =
   | 'b_ssd'
   | 'unified'
 
-export type TaskStatus = 'pending' | 'started' | 'success' | 'failure' | 'retry'
+export type TaskStatus =
+  | 'pending'
+  | 'started'
+  | 'success'
+  | 'failure'
+  | 'retry'
 
 export type VolumeServerState =
   | 'available'
@@ -144,6 +187,7 @@ export interface ServerSummary {
   name: string
 }
 
+
 export interface Bootscript {
   architecture: Arch
   bootcmdargs: string
@@ -161,6 +205,7 @@ export interface Bootscript {
    */
   zone: ScwZone
 }
+
 
 export interface Volume {
   /**
@@ -217,12 +262,14 @@ export interface Volume {
   zone: ScwZone
 }
 
+
 export interface VolumeSummary {
   id: string
   name: string
   size: number
   volumeType: VolumeVolumeType
 }
+
 
 export interface ServerTypeNetworkInterface {
   /**
@@ -235,6 +282,7 @@ export interface ServerTypeNetworkInterface {
   internetBandwidth?: number
 }
 
+
 export interface ServerTypeVolumeConstraintSizes {
   /**
    * Minimum volume size in bytes.
@@ -246,6 +294,7 @@ export interface ServerTypeVolumeConstraintSizes {
   maxSize: number
 }
 
+
 export interface Image {
   id: string
   name: string
@@ -253,7 +302,7 @@ export interface Image {
   creationDate?: Date
   modificationDate?: Date
   /**
-   * @deprecated
+   * @deprecated 
    */
   defaultBootscript?: Bootscript
   extraVolumes: Record<string, Volume>
@@ -269,6 +318,7 @@ export interface Image {
    */
   zone: ScwZone
 }
+
 
 export interface PlacementGroup {
   /**
@@ -310,6 +360,7 @@ In the placement group endpoints the value is correct.
   zone: ScwZone
 }
 
+
 export interface PrivateNIC {
   /**
    * Private NIC unique ID.
@@ -345,15 +396,18 @@ export interface PrivateNIC {
   zone: ScwZone
 }
 
+
 export interface SecurityGroupSummary {
   id: string
   name: string
 }
 
+
 export interface ServerFilesystem {
   filesystemId: string
   state: ServerFilesystemState
 }
+
 
 export interface ServerIp {
   /**
@@ -398,6 +452,7 @@ export interface ServerIp {
   state: ServerIpState
 }
 
+
 export interface ServerIpv6 {
   /**
    * Instance IPv6 IP-Address.
@@ -413,6 +468,7 @@ export interface ServerIpv6 {
   netmask: string
 }
 
+
 export interface ServerLocation {
   clusterId: string
   hypervisorId: string
@@ -421,16 +477,18 @@ export interface ServerLocation {
   zoneId: string
 }
 
+
 export interface ServerMaintenance {
   reason: string
   startDate?: Date
 }
 
+
 export interface VolumeServer {
   id: string
   name?: string
   /**
-   * @deprecated
+   * @deprecated 
    */
   exportUri?: string
   organization?: string
@@ -448,6 +506,7 @@ export interface VolumeServer {
   zone: ScwZone
 }
 
+
 export interface SnapshotBaseVolume {
   /**
    * Volume ID on which the snapshot is based.
@@ -458,6 +517,7 @@ export interface SnapshotBaseVolume {
    */
   name: string
 }
+
 
 export interface ServerTypeCapabilities {
   /**
@@ -474,6 +534,7 @@ export interface ServerTypeCapabilities {
   maxFileSystems: number
 }
 
+
 export interface ServerTypeGPUInfo {
   /**
    * GPU manufacturer.
@@ -488,6 +549,7 @@ export interface ServerTypeGPUInfo {
    */
   gpuMemory: number
 }
+
 
 export interface ServerTypeNetwork {
   /**
@@ -508,6 +570,7 @@ export interface ServerTypeNetwork {
   ipv6Support: boolean
 }
 
+
 export interface ServerTypeVolumeConstraintsByType {
   /**
    * Local SSD volumes.
@@ -515,14 +578,17 @@ export interface ServerTypeVolumeConstraintsByType {
   lSsd?: ServerTypeVolumeConstraintSizes
 }
 
+
 export interface VolumeTypeCapabilities {
   snapshot: boolean
 }
+
 
 export interface VolumeTypeConstraints {
   min: number
   max: number
 }
+
 
 export interface Server {
   /**
@@ -671,6 +737,7 @@ export interface Server {
   dns?: string
 }
 
+
 export interface VolumeTemplate {
   /**
    * UUID of the volume.
@@ -702,6 +769,7 @@ export interface VolumeTemplate {
   project?: string
 }
 
+
 export interface Ip {
   id: string
   address: string
@@ -719,6 +787,7 @@ export interface Ip {
    */
   zone: ScwZone
 }
+
 
 export interface SecurityGroup {
   /**
@@ -791,6 +860,7 @@ export interface SecurityGroup {
   zone: ScwZone
 }
 
+
 export interface SecurityGroupRule {
   id: string
   protocol: SecurityGroupRuleProtocol
@@ -806,6 +876,7 @@ export interface SecurityGroupRule {
    */
   zone: ScwZone
 }
+
 
 export interface VolumeServerTemplate {
   /**
@@ -841,6 +912,7 @@ export interface VolumeServerTemplate {
    */
   project?: string
 }
+
 
 export interface Snapshot {
   /**
@@ -897,6 +969,7 @@ export interface Snapshot {
   errorReason?: string
 }
 
+
 export interface Task {
   /**
    * Unique ID of the task.
@@ -930,6 +1003,7 @@ export interface Task {
   zone: ScwZone
 }
 
+
 export interface Dashboard {
   volumesCount: number
   runningServersCount: number
@@ -942,18 +1016,19 @@ export interface Dashboard {
   ipsUnused: number
   volumesLSsdCount: number
   /**
-   * @deprecated
+   * @deprecated 
    */
   volumesBSsdCount?: number
   volumesLSsdTotalSize: number
   /**
-   * @deprecated
+   * @deprecated 
    */
   volumesBSsdTotalSize?: number
   privateNicsCount: number
   placementGroupsCount: number
   volumesScratchCount: number
 }
+
 
 export interface PlacementGroupServer {
   /**
@@ -970,9 +1045,11 @@ export interface PlacementGroupServer {
   policyRespected: boolean
 }
 
+
 export interface GetServerTypesAvailabilityResponseAvailability {
   availability: ServerTypesAvailability
 }
+
 
 export interface ServerType {
   /**
@@ -1041,11 +1118,13 @@ export interface ServerType {
   endOfService: boolean
 }
 
+
 export interface VolumeType {
   displayName: string
   capabilities?: VolumeTypeCapabilities
   constraints?: VolumeTypeConstraints
 }
+
 
 export interface ServerActionRequestVolumeBackupTemplate {
   /**
@@ -1054,6 +1133,7 @@ If omitted, the volume type of the original volume will be used.
    */
   volumeType: SnapshotVolumeType
 }
+
 
 export interface SetSecurityGroupRulesRequestRule {
   /**
@@ -1098,6 +1178,7 @@ export interface SetSecurityGroupRulesRequestRule {
   zone?: ScwZone
 }
 
+
 export interface VolumeImageUpdateTemplate {
   /**
    * UUID of the snapshot.
@@ -1105,10 +1186,12 @@ export interface VolumeImageUpdateTemplate {
   id: string
 }
 
+
 export interface SecurityGroupTemplate {
   id: string
   name: string
 }
+
 
 export type ApplyBlockMigrationRequest = {
   /**
@@ -1133,6 +1216,7 @@ export type ApplyBlockMigrationRequest = {
   validationKey: string
 }
 
+
 export type AttachServerFileSystemRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1142,9 +1226,11 @@ export type AttachServerFileSystemRequest = {
   filesystemId: string
 }
 
+
 export interface AttachServerFileSystemResponse {
   server?: Server
 }
+
 
 export type AttachServerVolumeRequest = {
   /**
@@ -1157,9 +1243,11 @@ export type AttachServerVolumeRequest = {
   boot?: boolean
 }
 
+
 export interface AttachServerVolumeResponse {
   server?: Server
 }
+
 
 export type CheckBlockMigrationOrganizationQuotasRequest = {
   /**
@@ -1168,6 +1256,7 @@ export type CheckBlockMigrationOrganizationQuotasRequest = {
   zone?: ScwZone
   organization?: string
 }
+
 
 export type CreateImageRequest = {
   /**
@@ -1212,9 +1301,11 @@ export type CreateImageRequest = {
   public?: boolean
 }
 
+
 export interface CreateImageResponse {
   image?: Image
 }
+
 
 export type CreateIpRequest = {
   /**
@@ -1247,9 +1338,11 @@ export type CreateIpRequest = {
   type?: IpType
 }
 
+
 export interface CreateIpResponse {
   ip?: Ip
 }
+
 
 export type CreatePlacementGroupRequest = {
   /**
@@ -1286,9 +1379,11 @@ export type CreatePlacementGroupRequest = {
   policyType?: PlacementGroupPolicyType
 }
 
+
 export interface CreatePlacementGroupResponse {
   placementGroup?: PlacementGroup
 }
+
 
 export type CreatePrivateNICRequest = {
   /**
@@ -1317,9 +1412,11 @@ export type CreatePrivateNICRequest = {
   ipamIpIds?: string[]
 }
 
+
 export interface CreatePrivateNICResponse {
   privateNic?: PrivateNIC
 }
+
 
 export type CreateSecurityGroupRequest = {
   /**
@@ -1380,9 +1477,11 @@ export type CreateSecurityGroupRequest = {
   enableDefaultSecurity?: boolean
 }
 
+
 export interface CreateSecurityGroupResponse {
   securityGroup?: SecurityGroup
 }
+
 
 export type CreateSecurityGroupRuleRequest = {
   /**
@@ -1415,9 +1514,11 @@ export type CreateSecurityGroupRuleRequest = {
   editable: boolean
 }
 
+
 export interface CreateSecurityGroupRuleResponse {
   rule?: SecurityGroupRule
 }
+
 
 export type CreateServerRequest = {
   /**
@@ -1498,9 +1599,11 @@ export type CreateServerRequest = {
   protected: boolean
 }
 
+
 export interface CreateServerResponse {
   server?: Server
 }
+
 
 export type CreateSnapshotRequest = {
   /**
@@ -1550,10 +1653,12 @@ If omitted, the volume type of the original volume will be used.
   size?: number
 }
 
+
 export interface CreateSnapshotResponse {
   snapshot?: Snapshot
   task?: Task
 }
+
 
 export type CreateVolumeRequest = {
   /**
@@ -1598,9 +1703,11 @@ export type CreateVolumeRequest = {
   baseSnapshot?: string
 }
 
+
 export interface CreateVolumeResponse {
   volume?: Volume
 }
+
 
 export type DeleteImageRequest = {
   /**
@@ -1613,6 +1720,7 @@ export type DeleteImageRequest = {
   imageId: string
 }
 
+
 export type DeleteIpRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1624,6 +1732,7 @@ export type DeleteIpRequest = {
   ip: string
 }
 
+
 export type DeletePlacementGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1634,6 +1743,7 @@ export type DeletePlacementGroupRequest = {
    */
   placementGroupId: string
 }
+
 
 export type DeletePrivateNICRequest = {
   /**
@@ -1650,6 +1760,7 @@ export type DeletePrivateNICRequest = {
   privateNicId: string
 }
 
+
 export type DeleteSecurityGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1661,6 +1772,7 @@ export type DeleteSecurityGroupRequest = {
   securityGroupId: string
 }
 
+
 export type DeleteSecurityGroupRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1670,6 +1782,7 @@ export type DeleteSecurityGroupRuleRequest = {
   securityGroupRuleId: string
 }
 
+
 export type DeleteServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1677,6 +1790,7 @@ export type DeleteServerRequest = {
   zone?: ScwZone
   serverId: string
 }
+
 
 export type DeleteServerUserDataRequest = {
   /**
@@ -1693,6 +1807,7 @@ export type DeleteServerUserDataRequest = {
   key: string
 }
 
+
 export type DeleteSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1703,6 +1818,7 @@ export type DeleteSnapshotRequest = {
    */
   snapshotId: string
 }
+
 
 export type DeleteVolumeRequest = {
   /**
@@ -1715,6 +1831,7 @@ export type DeleteVolumeRequest = {
   volumeId: string
 }
 
+
 export type DetachServerFileSystemRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1724,9 +1841,11 @@ export type DetachServerFileSystemRequest = {
   filesystemId: string
 }
 
+
 export interface DetachServerFileSystemResponse {
   server?: Server
 }
+
 
 export type DetachServerVolumeRequest = {
   /**
@@ -1737,9 +1856,11 @@ export type DetachServerVolumeRequest = {
   volumeId: string
 }
 
+
 export interface DetachServerVolumeResponse {
   server?: Server
 }
+
 
 export type ExportSnapshotRequest = {
   /**
@@ -1760,9 +1881,11 @@ export type ExportSnapshotRequest = {
   key: string
 }
 
+
 export interface ExportSnapshotResponse {
   task?: Task
 }
+
 
 export type GetDashboardRequest = {
   /**
@@ -1773,9 +1896,11 @@ export type GetDashboardRequest = {
   project?: string
 }
 
+
 export interface GetDashboardResponse {
   dashboard?: Dashboard
 }
+
 
 export type GetImageRequest = {
   /**
@@ -1788,9 +1913,11 @@ export type GetImageRequest = {
   imageId: string
 }
 
+
 export interface GetImageResponse {
   image?: Image
 }
+
 
 export type GetIpRequest = {
   /**
@@ -1803,9 +1930,11 @@ export type GetIpRequest = {
   ip: string
 }
 
+
 export interface GetIpResponse {
   ip?: Ip
 }
+
 
 export type GetPlacementGroupRequest = {
   /**
@@ -1818,9 +1947,11 @@ export type GetPlacementGroupRequest = {
   placementGroupId: string
 }
 
+
 export interface GetPlacementGroupResponse {
   placementGroup?: PlacementGroup
 }
+
 
 export type GetPlacementGroupServersRequest = {
   /**
@@ -1833,12 +1964,14 @@ export type GetPlacementGroupServersRequest = {
   placementGroupId: string
 }
 
+
 export interface GetPlacementGroupServersResponse {
   /**
    * Instances attached to the placement group.
    */
   servers: PlacementGroupServer[]
 }
+
 
 export type GetPrivateNICRequest = {
   /**
@@ -1855,9 +1988,11 @@ export type GetPrivateNICRequest = {
   privateNicId: string
 }
 
+
 export interface GetPrivateNICResponse {
   privateNic?: PrivateNIC
 }
+
 
 export type GetSecurityGroupRequest = {
   /**
@@ -1870,9 +2005,11 @@ export type GetSecurityGroupRequest = {
   securityGroupId: string
 }
 
+
 export interface GetSecurityGroupResponse {
   securityGroup?: SecurityGroup
 }
+
 
 export type GetSecurityGroupRuleRequest = {
   /**
@@ -1883,9 +2020,11 @@ export type GetSecurityGroupRuleRequest = {
   securityGroupRuleId: string
 }
 
+
 export interface GetSecurityGroupRuleResponse {
   rule?: SecurityGroupRule
 }
+
 
 export type GetServerCompatibleTypesRequest = {
   /**
@@ -1898,6 +2037,7 @@ export type GetServerCompatibleTypesRequest = {
   serverId: string
 }
 
+
 export type GetServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1909,9 +2049,11 @@ export type GetServerRequest = {
   serverId: string
 }
 
+
 export interface GetServerResponse {
   server?: Server
 }
+
 
 export type GetServerTypesAvailabilityRequest = {
   /**
@@ -1928,6 +2070,7 @@ export type GetServerTypesAvailabilityRequest = {
   page?: number
 }
 
+
 export interface GetServerTypesAvailabilityResponse {
   /**
    * Map of server types.
@@ -1935,6 +2078,7 @@ export interface GetServerTypesAvailabilityResponse {
   servers: Record<string, GetServerTypesAvailabilityResponseAvailability>
   totalCount: number
 }
+
 
 export type GetSnapshotRequest = {
   /**
@@ -1947,9 +2091,11 @@ export type GetSnapshotRequest = {
   snapshotId: string
 }
 
+
 export interface GetSnapshotResponse {
   snapshot?: Snapshot
 }
+
 
 export type GetVolumeRequest = {
   /**
@@ -1962,9 +2108,11 @@ export type GetVolumeRequest = {
   volumeId: string
 }
 
+
 export interface GetVolumeResponse {
   volume?: Volume
 }
+
 
 export type ListDefaultSecurityGroupRulesRequest = {
   /**
@@ -1972,6 +2120,7 @@ export type ListDefaultSecurityGroupRulesRequest = {
    */
   zone?: ScwZone
 }
+
 
 export type ListImagesRequest = {
   /**
@@ -1988,6 +2137,7 @@ export type ListImagesRequest = {
   tags?: string
 }
 
+
 export interface ListImagesResponse {
   /**
    * Total number of images.
@@ -1998,6 +2148,7 @@ export interface ListImagesResponse {
    */
   images: Image[]
 }
+
 
 export type ListIpsRequest = {
   /**
@@ -2034,6 +2185,7 @@ export type ListIpsRequest = {
   type?: string
 }
 
+
 export interface ListIpsResponse {
   /**
    * Total number of ips.
@@ -2044,6 +2196,7 @@ export interface ListIpsResponse {
    */
   ips: Ip[]
 }
+
 
 export type ListPlacementGroupsRequest = {
   /**
@@ -2076,6 +2229,7 @@ export type ListPlacementGroupsRequest = {
   name?: string
 }
 
+
 export interface ListPlacementGroupsResponse {
   /**
    * Total number of placement groups.
@@ -2086,6 +2240,7 @@ export interface ListPlacementGroupsResponse {
    */
   placementGroups: PlacementGroup[]
 }
+
 
 export type ListPrivateNICsRequest = {
   /**
@@ -2110,10 +2265,12 @@ export type ListPrivateNICsRequest = {
   page?: number
 }
 
+
 export interface ListPrivateNICsResponse {
   privateNics: PrivateNIC[]
   totalCount: number
 }
+
 
 export type ListSecurityGroupRulesRequest = {
   /**
@@ -2134,6 +2291,7 @@ export type ListSecurityGroupRulesRequest = {
   page?: number
 }
 
+
 export interface ListSecurityGroupRulesResponse {
   /**
    * Total number of security groups.
@@ -2144,6 +2302,7 @@ export interface ListSecurityGroupRulesResponse {
    */
   rules: SecurityGroupRule[]
 }
+
 
 export type ListSecurityGroupsRequest = {
   /**
@@ -2180,6 +2339,7 @@ export type ListSecurityGroupsRequest = {
   page?: number
 }
 
+
 export interface ListSecurityGroupsResponse {
   /**
    * Total number of security groups.
@@ -2191,6 +2351,7 @@ export interface ListSecurityGroupsResponse {
   securityGroups: SecurityGroup[]
 }
 
+
 export type ListServerActionsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2199,9 +2360,11 @@ export type ListServerActionsRequest = {
   serverId: string
 }
 
+
 export interface ListServerActionsResponse {
   actions: ServerAction[]
 }
+
 
 export type ListServerUserDataRequest = {
   /**
@@ -2214,9 +2377,11 @@ export type ListServerUserDataRequest = {
   serverId: string
 }
 
+
 export interface ListServerUserDataResponse {
   userData: string[]
 }
+
 
 export type ListServersRequest = {
   /**
@@ -2289,6 +2454,7 @@ export type ListServersRequest = {
   servers?: string[]
 }
 
+
 export interface ListServersResponse {
   /**
    * Total number of Instances.
@@ -2300,6 +2466,7 @@ export interface ListServersResponse {
   servers: Server[]
 }
 
+
 export type ListServersTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2308,6 +2475,7 @@ export type ListServersTypesRequest = {
   perPage?: number
   page?: number
 }
+
 
 export interface ListServersTypesResponse {
   /**
@@ -2319,6 +2487,7 @@ export interface ListServersTypesResponse {
    */
   servers: Record<string, ServerType>
 }
+
 
 export type ListSnapshotsRequest = {
   /**
@@ -2355,6 +2524,7 @@ export type ListSnapshotsRequest = {
   baseVolumeId?: string
 }
 
+
 export interface ListSnapshotsResponse {
   /**
    * Total number of snapshots.
@@ -2365,6 +2535,7 @@ export interface ListSnapshotsResponse {
    */
   snapshots: Snapshot[]
 }
+
 
 export type ListVolumesRequest = {
   /**
@@ -2401,6 +2572,7 @@ export type ListVolumesRequest = {
   name?: string
 }
 
+
 export interface ListVolumesResponse {
   /**
    * Total number of volumes.
@@ -2412,6 +2584,7 @@ export interface ListVolumesResponse {
   volumes: Volume[]
 }
 
+
 export type ListVolumesTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2420,6 +2593,7 @@ export type ListVolumesTypesRequest = {
   perPage?: number
   page?: number
 }
+
 
 export interface ListVolumesTypesResponse {
   /**
@@ -2431,6 +2605,7 @@ export interface ListVolumesTypesResponse {
    */
   volumes: Record<string, VolumeType>
 }
+
 
 export interface MigrationPlan {
   /**
@@ -2446,6 +2621,7 @@ export interface MigrationPlan {
    */
   validationKey: string
 }
+
 
 export type PlanBlockMigrationRequest = {
   /**
@@ -2466,6 +2642,7 @@ export type PlanBlockMigrationRequest = {
   snapshotId?: string
 }
 
+
 export type ReleaseIpToIpamRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2476,6 +2653,7 @@ export type ReleaseIpToIpamRequest = {
    */
   ipId: string
 }
+
 
 export type ServerActionRequest = {
   /**
@@ -2507,9 +2685,11 @@ This field should only be specified when performing a enable_routed_ip action.
   disableIpv6?: boolean
 }
 
+
 export interface ServerActionResponse {
   task?: Task
 }
+
 
 export interface ServerCompatibleTypes {
   /**
@@ -2517,6 +2697,7 @@ export interface ServerCompatibleTypes {
    */
   compatibleTypes: string[]
 }
+
 
 export type SetImageRequest = {
   /**
@@ -2529,7 +2710,7 @@ export type SetImageRequest = {
   creationDate?: Date
   modificationDate?: Date
   /**
-   * @deprecated
+   * @deprecated 
    */
   defaultBootscript?: Bootscript
   extraVolumes?: Record<string, Volume>
@@ -2541,6 +2722,7 @@ export type SetImageRequest = {
   project?: string
   tags?: string[]
 }
+
 
 export type SetPlacementGroupRequest = {
   /**
@@ -2556,9 +2738,11 @@ export type SetPlacementGroupRequest = {
   tags?: string[]
 }
 
+
 export interface SetPlacementGroupResponse {
   placementGroup?: PlacementGroup
 }
+
 
 export type SetPlacementGroupServersRequest = {
   /**
@@ -2575,12 +2759,14 @@ export type SetPlacementGroupServersRequest = {
   servers: string[]
 }
 
+
 export interface SetPlacementGroupServersResponse {
   /**
    * Instances attached to the placement group.
    */
   servers: PlacementGroupServer[]
 }
+
 
 export type SetSecurityGroupRulesRequest = {
   /**
@@ -2597,9 +2783,11 @@ export type SetSecurityGroupRulesRequest = {
   rules?: SetSecurityGroupRulesRequestRule[]
 }
 
+
 export interface SetSecurityGroupRulesResponse {
   rules: SecurityGroupRule[]
 }
+
 
 export type UpdateImageRequest = {
   /**
@@ -2632,9 +2820,11 @@ export type UpdateImageRequest = {
   public?: boolean
 }
 
+
 export interface UpdateImageResponse {
   image?: Image
 }
+
 
 export type UpdateIpRequest = {
   /**
@@ -2660,9 +2850,11 @@ export type UpdateIpRequest = {
   server?: string | null
 }
 
+
 export interface UpdateIpResponse {
   ip?: Ip
 }
+
 
 export type UpdatePlacementGroupRequest = {
   /**
@@ -2691,9 +2883,11 @@ export type UpdatePlacementGroupRequest = {
   policyType?: PlacementGroupPolicyType
 }
 
+
 export interface UpdatePlacementGroupResponse {
   placementGroup?: PlacementGroup
 }
+
 
 export type UpdatePlacementGroupServersRequest = {
   /**
@@ -2710,12 +2904,14 @@ export type UpdatePlacementGroupServersRequest = {
   servers: string[]
 }
 
+
 export interface UpdatePlacementGroupServersResponse {
   /**
    * Instances attached to the placement group.
    */
   servers: PlacementGroupServer[]
 }
+
 
 export type UpdatePrivateNICRequest = {
   /**
@@ -2735,6 +2931,7 @@ export type UpdatePrivateNICRequest = {
    */
   tags?: string[]
 }
+
 
 export type UpdateSecurityGroupRequest = {
   /**
@@ -2783,9 +2980,11 @@ export type UpdateSecurityGroupRequest = {
   stateful?: boolean
 }
 
+
 export interface UpdateSecurityGroupResponse {
   securityGroup?: SecurityGroup
 }
+
 
 export type UpdateSecurityGroupRuleRequest = {
   /**
@@ -2830,9 +3029,11 @@ export type UpdateSecurityGroupRuleRequest = {
   position?: number
 }
 
+
 export interface UpdateSecurityGroupRuleResponse {
   rule?: SecurityGroupRule
 }
+
 
 export type UpdateServerRequest = {
   /**
@@ -2863,7 +3064,7 @@ export type UpdateServerRequest = {
    */
   publicIps?: string[]
   /**
-   * @deprecated
+   * @deprecated 
    */
   enableIpv6?: boolean
   /**
@@ -2893,9 +3094,11 @@ export type UpdateServerRequest = {
   adminPasswordEncryptionSshKeyId?: string
 }
 
+
 export interface UpdateServerResponse {
   server?: Server
 }
+
 
 export type UpdateSnapshotRequest = {
   /**
@@ -2916,9 +3119,11 @@ export type UpdateSnapshotRequest = {
   tags?: string[]
 }
 
+
 export interface UpdateSnapshotResponse {
   snapshot?: Snapshot
 }
+
 
 export type UpdateVolumeRequest = {
   /**
@@ -2943,6 +3148,9 @@ export type UpdateVolumeRequest = {
   size?: number
 }
 
+
 export interface UpdateVolumeResponse {
   volume?: Volume
 }
+
+

@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type JobRunReason =
   | 'unknown_reason'
@@ -15,6 +16,7 @@ export type JobRunReason =
   | 'exited_with_error'
   | 'secret_disabled'
   | 'secret_not_found'
+  | 'quota_exceeded'
 
 export type JobRunState =
   | 'unknown_state'
@@ -26,20 +28,25 @@ export type JobRunState =
   | 'failed'
   | 'interrupting'
   | 'interrupted'
+  | 'retrying'
 
 export type ListJobDefinitionsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
-export type ListJobRunsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
+export type ListJobRunsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
 export interface SecretEnvVar {
   name: string
 }
 
+
 export interface SecretFile {
   path: string
 }
+
 
 export interface CronSchedule {
   /**
@@ -52,10 +59,20 @@ export interface CronSchedule {
   timezone: string
 }
 
+
+export interface RetryPolicy {
+  /**
+   * Maximum number of retries upon a job failure.
+   */
+  maxRetries: number
+}
+
+
 export interface CreateJobDefinitionRequestCronScheduleConfig {
   schedule: string
   timezone: string
 }
+
 
 export interface CreateSecretsRequestSecretConfig {
   secretManagerId: string
@@ -71,6 +88,7 @@ export interface CreateSecretsRequestSecretConfig {
    */
   envVarName?: string
 }
+
 
 export interface Secret {
   /**
@@ -103,6 +121,7 @@ export interface Secret {
   envVar?: SecretEnvVar
 }
 
+
 export interface JobDefinition {
   id: string
   name: string
@@ -114,7 +133,7 @@ export interface JobDefinition {
   localStorageCapacity: number
   imageUri: string
   /**
-   * @deprecated
+   * @deprecated 
    */
   command?: string
   environmentVariables: Record<string, string>
@@ -123,16 +142,19 @@ export interface JobDefinition {
   cronSchedule?: CronSchedule
   startupCommand: string[]
   args: string[]
+  retryPolicy?: RetryPolicy
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region: ScwRegion
 }
 
+
 export interface Resource {
   computeLimitMvcpu: number
   memoryLimitBytes: number
 }
+
 
 export interface JobRun {
   id: string
@@ -150,22 +172,25 @@ export interface JobRun {
   memoryLimit: number
   localStorageCapacity: number
   /**
-   * @deprecated
+   * @deprecated 
    */
   command?: string
   environmentVariables: Record<string, string>
   startupCommand: string[]
   args: string[]
+  attempts?: number
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region: ScwRegion
 }
 
+
 export interface UpdateJobDefinitionRequestCronScheduleConfig {
   schedule?: string
   timezone?: string
 }
+
 
 export type CreateJobDefinitionRequest = {
   /**
@@ -226,7 +251,12 @@ Environment variables and secrets can be included, and will be expanded before t
    * Configure a cron for the job.
    */
   cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
+  /**
+   * Retry behaviour in case of job failure.
+   */
+  retryPolicy?: RetryPolicy
 }
+
 
 export type CreateSecretsRequest = {
   /**
@@ -243,12 +273,14 @@ export type CreateSecretsRequest = {
   secrets: CreateSecretsRequestSecretConfig[]
 }
 
+
 export interface CreateSecretsResponse {
   /**
    * List of secrets created.
    */
   secrets: Secret[]
 }
+
 
 export type DeleteJobDefinitionRequest = {
   /**
@@ -261,6 +293,7 @@ export type DeleteJobDefinitionRequest = {
   jobDefinitionId: string
 }
 
+
 export type DeleteSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -271,6 +304,7 @@ export type DeleteSecretRequest = {
    */
   secretId: string
 }
+
 
 export type GetJobDefinitionRequest = {
   /**
@@ -283,12 +317,14 @@ export type GetJobDefinitionRequest = {
   jobDefinitionId: string
 }
 
+
 export type GetJobLimitsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
 }
+
 
 export type GetJobRunRequest = {
   /**
@@ -301,6 +337,7 @@ export type GetJobRunRequest = {
   jobRunId: string
 }
 
+
 export type GetSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -312,9 +349,11 @@ export type GetSecretRequest = {
   secretId: string
 }
 
+
 export interface JobLimits {
   secretsPerJobDefinition: number
 }
+
 
 export type ListJobDefinitionsRequest = {
   /**
@@ -328,10 +367,12 @@ export type ListJobDefinitionsRequest = {
   organizationId?: string
 }
 
+
 export interface ListJobDefinitionsResponse {
   jobDefinitions: JobDefinition[]
   totalCount: number
 }
+
 
 export type ListJobResourcesRequest = {
   /**
@@ -340,9 +381,11 @@ export type ListJobResourcesRequest = {
   region?: ScwRegion
 }
 
+
 export interface ListJobResourcesResponse {
   resources: Resource[]
 }
+
 
 export type ListJobRunsRequest = {
   /**
@@ -360,10 +403,12 @@ export type ListJobRunsRequest = {
   reasons?: JobRunReason[]
 }
 
+
 export interface ListJobRunsResponse {
   jobRuns: JobRun[]
   totalCount: number
 }
+
 
 export type ListSecretsRequest = {
   /**
@@ -376,6 +421,7 @@ export type ListSecretsRequest = {
   jobDefinitionId: string
 }
 
+
 export interface ListSecretsResponse {
   /**
    * List of secret references within a job definition.
@@ -386,6 +432,7 @@ export interface ListSecretsResponse {
    */
   totalCount: number
 }
+
 
 export type StartJobDefinitionRequest = {
   /**
@@ -423,12 +470,14 @@ Environment variables and secrets can be included, and will be expanded before t
   replicas?: number
 }
 
+
 export interface StartJobDefinitionResponse {
   /**
    * List of started job runs.
    */
   jobRuns: JobRun[]
 }
+
 
 export type StopJobRunRequest = {
   /**
@@ -440,6 +489,7 @@ export type StopJobRunRequest = {
    */
   jobRunId: string
 }
+
 
 export type UpdateJobDefinitionRequest = {
   /**
@@ -496,8 +546,16 @@ Environment variables and secrets can be included, and will be expanded before t
    * Timeout of the job in seconds.
    */
   jobTimeout?: string
+  /**
+   * Configure a cron for the job.
+   */
   cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig
+  /**
+   * Retry behaviour in case of job failure.
+   */
+  retryPolicy?: RetryPolicy
 }
+
 
 export type UpdateSecretRequest = {
   /**
@@ -525,3 +583,5 @@ export type UpdateSecretRequest = {
    */
   envVarName?: string
 }
+
+

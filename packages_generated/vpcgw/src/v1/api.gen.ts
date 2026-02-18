@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,10 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {
-  GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,
-  GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,
-} from './content.gen.js'
+import {GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,} from './content.gen.js'
 import {
   marshalCreateDHCPEntryRequest,
   marshalCreateDHCPRequest,
@@ -115,22 +112,21 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    zones: [
-      'fr-par-1',
-      'fr-par-2',
-      'nl-ams-1',
-      'nl-ams-2',
-      'nl-ams-3',
-      'pl-waw-1',
-      'pl-waw-2',
-      'pl-waw-3',
-    ],
-  })
-
-  protected pageOfListGateways = (
-    request: Readonly<ListGatewaysRequest> = {},
-  ) =>
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      zones: [
+        'fr-par-1',
+        'fr-par-2',
+        'nl-ams-1',
+        'nl-ams-2',
+        'nl-ams-3',
+        'pl-waw-1',
+        'pl-waw-2',
+        'pl-waw-3',
+      ],
+    })
+  
+  protected pageOfListGateways = (request: Readonly<ListGatewaysRequest> = {}) =>
     this.client.fetch<ListGatewaysResponse>(
       {
         method: 'GET',
@@ -140,10 +136,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['private_network_id', request.privateNetworkId],
           ['project_id', request.projectId],
           ['status', request.status],
@@ -153,7 +146,7 @@ export class API extends ParentAPI {
       },
       unmarshalListGatewaysResponse,
     )
-
+  
   /**
    * List Public Gateways. List Public Gateways in a given Scaleway Organization or Project. By default, results are displayed in ascending order of creation date.
    *
@@ -164,6 +157,7 @@ export class API extends ParentAPI {
   listGateways = (request: Readonly<ListGatewaysRequest> = {}) =>
     enrichForPagination('gateways', this.pageOfListGateways, request)
 
+  
   /**
    * Get a Public Gateway. Get details of a Public Gateway, specified by its gateway ID. The response object contains full details of the gateway, including its **name**, **type**, **status** and more.
    *
@@ -179,7 +173,7 @@ export class API extends ParentAPI {
       },
       unmarshalGateway,
     )
-
+  
   /**
    * Waits for {@link Gateway} to be in a final state.
    *
@@ -192,16 +186,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Gateway>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !GATEWAY_TRANSIENT_STATUSES_VPCGW.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!GATEWAY_TRANSIENT_STATUSES_VPCGW.includes(res.status))),
       this.getGateway,
       request,
       options,
     )
 
+  
   /**
    * Create a Public Gateway. Create a new Public Gateway in the specified Scaleway Project, defining its **name**, **type** and other configuration details such as whether to enable SSH bastion.
    *
@@ -222,6 +213,7 @@ export class API extends ParentAPI {
       unmarshalGateway,
     )
 
+  
   /**
    * Update a Public Gateway. Update the parameters of an existing Public Gateway, for example, its **name**, **tags**, **SSH bastion configuration**, and **DNS servers**.
    *
@@ -242,6 +234,7 @@ export class API extends ParentAPI {
       unmarshalGateway,
     )
 
+  
   /**
    * Delete a Public Gateway. Delete an existing Public Gateway, specified by its gateway ID. This action is irreversible.
    *
@@ -249,12 +242,17 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteGatewayRequest}
    */
   deleteGateway = (request: Readonly<DeleteGatewayRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
-      urlParams: urlParams(['cleanup_dhcp', request.cleanupDhcp]),
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        urlParams: urlParams(
+          ['cleanup_dhcp', request.cleanupDhcp],
+        ),
+      },
+    )
 
+  
   /**
    * Upgrade a Public Gateway to the latest version and/or to a different commercial offer type. Upgrade a given Public Gateway to the newest software version or to a different commercial offer type. This applies the latest bugfixes and features to your Public Gateway. Note that gateway service will be interrupted during the update.
    *
@@ -275,6 +273,7 @@ export class API extends ParentAPI {
       unmarshalGateway,
     )
 
+  
   /**
    * Upgrade a Public Gateway to IP mobility. Upgrade a Public Gateway to IP mobility (move from NAT IP to routed IP). This is idempotent: repeated calls after the first will return no error but have no effect.
    *
@@ -282,16 +281,17 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableIPMobilityRequest}
    */
   enableIPMobility = (request: Readonly<EnableIPMobilityRequest>) =>
-    this.client.fetch<void>({
-      body: '{}',
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/enable-ip-mobility`,
-    })
+    this.client.fetch<void>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/enable-ip-mobility`,
+      },
+    )
 
-  protected pageOfListGatewayNetworks = (
-    request: Readonly<ListGatewayNetworksRequest> = {},
-  ) =>
+  
+  protected pageOfListGatewayNetworks = (request: Readonly<ListGatewayNetworksRequest> = {}) =>
     this.client.fetch<ListGatewayNetworksResponse>(
       {
         method: 'GET',
@@ -302,17 +302,14 @@ export class API extends ParentAPI {
           ['gateway_id', request.gatewayId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['private_network_id', request.privateNetworkId],
           ['status', request.status],
         ),
       },
       unmarshalListGatewayNetworksResponse,
     )
-
+  
   /**
    * List Public Gateway connections to Private Networks. List the connections between Public Gateways and Private Networks (a connection = a GatewayNetwork). You can choose to filter by `gateway-id` to list all Private Networks attached to the specified Public Gateway, or by `private_network_id` to list all Public Gateways attached to the specified Private Network. Other query parameters are also available. The result is an array of GatewayNetwork objects, each giving details of the connection between a given Public Gateway and a given Private Network.
    *
@@ -321,12 +318,9 @@ export class API extends ParentAPI {
    * @returns A Promise of ListGatewayNetworksResponse
    */
   listGatewayNetworks = (request: Readonly<ListGatewayNetworksRequest> = {}) =>
-    enrichForPagination(
-      'gatewayNetworks',
-      this.pageOfListGatewayNetworks,
-      request,
-    )
+    enrichForPagination('gatewayNetworks', this.pageOfListGatewayNetworks, request)
 
+  
   /**
    * Get a Public Gateway connection to a Private Network. Get details of a given connection between a Public Gateway and a Private Network (this connection = a GatewayNetwork), specified by its `gateway_network_id`. The response object contains details of the connection including the IDs of the Public Gateway and Private Network, the dates the connection was created/updated and its configuration settings.
    *
@@ -342,7 +336,7 @@ export class API extends ParentAPI {
       },
       unmarshalGatewayNetwork,
     )
-
+  
   /**
    * Waits for {@link GatewayNetwork} to be in a final state.
    *
@@ -355,16 +349,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<GatewayNetwork>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW.includes(res.status))),
       this.getGatewayNetwork,
       request,
       options,
     )
 
+  
   /**
    * Attach a Public Gateway to a Private Network. Attach a specific Public Gateway to a specific Private Network (create a GatewayNetwork). You can configure parameters for the connection including DHCP settings, whether to enable masquerade (dynamic NAT), and more.
    *
@@ -385,6 +376,7 @@ export class API extends ParentAPI {
       unmarshalGatewayNetwork,
     )
 
+  
   /**
    * Update a Public Gateway's connection to a Private Network. Update the configuration parameters of a connection between a given Public Gateway and Private Network (the connection = a GatewayNetwork). Updatable parameters include DHCP settings and whether to enable traffic masquerade (dynamic NAT).
    *
@@ -405,6 +397,7 @@ export class API extends ParentAPI {
       unmarshalGatewayNetwork,
     )
 
+  
   /**
    * Detach a Public Gateway from a Private Network. Detach a given Public Gateway from a given Private Network, i.e. delete a GatewayNetwork specified by a gateway_network_id.
    *
@@ -412,12 +405,17 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteGatewayNetworkRequest}
    */
   deleteGatewayNetwork = (request: Readonly<DeleteGatewayNetworkRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
-      urlParams: urlParams(['cleanup_dhcp', request.cleanupDhcp]),
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
+        urlParams: urlParams(
+          ['cleanup_dhcp', request.cleanupDhcp],
+        ),
+      },
+    )
 
+  
   protected pageOfListDHCPs = (request: Readonly<ListDHCPsRequest> = {}) =>
     this.client.fetch<ListDHCPsResponse>(
       {
@@ -429,16 +427,13 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListDHCPsResponse,
     )
-
+  
   /**
    * List DHCP configurations. List DHCP configurations, optionally filtering by Organization, Project, Public Gateway IP address or more. The response is an array of DHCP configuration objects, each identified by a DHCP ID and containing configuration settings for the assignment of IP addresses to devices on a Private Network attached to a Public Gateway. Note that the response does not contain the IDs of any Private Network / Public Gateway the configuration is attached to. Use the `List Public Gateway connections to Private Networks` method for that purpose, filtering on DHCP ID.
    *
@@ -449,6 +444,7 @@ export class API extends ParentAPI {
   listDHCPs = (request: Readonly<ListDHCPsRequest> = {}) =>
     enrichForPagination('dhcps', this.pageOfListDHCPs, request)
 
+  
   /**
    * Get a DHCP configuration. Get a DHCP configuration object, identified by its DHCP ID. The response object contains configuration settings for the assignment of IP addresses to devices on a Private Network attached to a Public Gateway. Note that the response does not contain the IDs of any Private Network / Public Gateway the configuration is attached to. Use the `List Public Gateway connections to Private Networks` method for that purpose, filtering on DHCP ID.
    *
@@ -465,6 +461,7 @@ export class API extends ParentAPI {
       unmarshalDHCP,
     )
 
+  
   /**
    * Create a DHCP configuration. Create a new DHCP configuration object, containing settings for the assignment of IP addresses to devices on a Private Network attached to a Public Gateway. The response object includes the ID of the DHCP configuration object. You can use this ID as part of a call to `Create a Public Gateway connection to a Private Network` or `Update a Public Gateway connection to a Private Network` to directly apply this DHCP configuration.
    *
@@ -485,6 +482,7 @@ export class API extends ParentAPI {
       unmarshalDHCP,
     )
 
+  
   /**
    * Update a DHCP configuration. Update a DHCP configuration object, identified by its DHCP ID.
    *
@@ -505,6 +503,7 @@ export class API extends ParentAPI {
       unmarshalDHCP,
     )
 
+  
   /**
    * Delete a DHCP configuration. Delete a DHCP configuration object, identified by its DHCP ID. Note that you cannot delete a DHCP configuration object that is currently being used by a Gateway Network.
    *
@@ -512,14 +511,15 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDHCPRequest}
    */
   deleteDHCP = (request: Readonly<DeleteDHCPRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcps/${validatePathParam('dhcpId', request.dhcpId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcps/${validatePathParam('dhcpId', request.dhcpId)}`,
+      },
+    )
 
-  protected pageOfListDHCPEntries = (
-    request: Readonly<ListDHCPEntriesRequest> = {},
-  ) =>
+  
+  protected pageOfListDHCPEntries = (request: Readonly<ListDHCPEntriesRequest> = {}) =>
     this.client.fetch<ListDHCPEntriesResponse>(
       {
         method: 'GET',
@@ -531,16 +531,13 @@ export class API extends ParentAPI {
           ['mac_address', request.macAddress],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['type', request.type],
         ),
       },
       unmarshalListDHCPEntriesResponse,
     )
-
+  
   /**
    * List DHCP entries. List DHCP entries, whether dynamically assigned and/or statically reserved. DHCP entries can be filtered by the Gateway Network they are on, their MAC address, IP address, type or hostname.
    *
@@ -551,6 +548,7 @@ export class API extends ParentAPI {
   listDHCPEntries = (request: Readonly<ListDHCPEntriesRequest> = {}) =>
     enrichForPagination('dhcpEntries', this.pageOfListDHCPEntries, request)
 
+  
   /**
    * Get a DHCP entry. Get a DHCP entry, specified by its DHCP entry ID.
    *
@@ -567,6 +565,7 @@ export class API extends ParentAPI {
       unmarshalDHCPEntry,
     )
 
+  
   /**
    * Create a DHCP entry. Create a static DHCP reservation, specifying the Gateway Network for the reservation, the MAC address of the target device and the IP address to assign this device. The response is a DHCP entry object, confirming the ID and configuration details of the static DHCP reservation.
    *
@@ -587,6 +586,7 @@ export class API extends ParentAPI {
       unmarshalDHCPEntry,
     )
 
+  
   /**
    * Update a DHCP entry. Update the IP address for a DHCP entry, specified by its DHCP entry ID. You can update an existing DHCP entry of any type (`reservation` (static), `lease` (dynamic) or `unknown`), but in manually updating the IP address the entry will necessarily be of type `reservation` after the update.
    *
@@ -607,6 +607,7 @@ export class API extends ParentAPI {
       unmarshalDHCPEntry,
     )
 
+  
   /**
    * Set all DHCP reservations on a Gateway Network. Set the list of DHCP reservations attached to a Gateway Network. Reservations are identified by their MAC address, and will sync the current DHCP entry list to the given list, creating, updating or deleting DHCP entries accordingly.
    *
@@ -627,6 +628,7 @@ export class API extends ParentAPI {
       unmarshalSetDHCPEntriesResponse,
     )
 
+  
   /**
    * Delete a DHCP entry. Delete a static DHCP reservation, identified by its DHCP entry ID. Note that you cannot delete DHCP entries of type `lease`, these are deleted automatically when their time-to-live expires.
    *
@@ -634,14 +636,15 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDHCPEntryRequest}
    */
   deleteDHCPEntry = (request: Readonly<DeleteDHCPEntryRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcp-entries/${validatePathParam('dhcpEntryId', request.dhcpEntryId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dhcp-entries/${validatePathParam('dhcpEntryId', request.dhcpEntryId)}`,
+      },
+    )
 
-  protected pageOfListPATRules = (
-    request: Readonly<ListPATRulesRequest> = {},
-  ) =>
+  
+  protected pageOfListPATRules = (request: Readonly<ListPATRulesRequest> = {}) =>
     this.client.fetch<ListPATRulesResponse>(
       {
         method: 'GET',
@@ -650,17 +653,14 @@ export class API extends ParentAPI {
           ['gateway_id', request.gatewayId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['private_ip', request.privateIp],
           ['protocol', request.protocol],
         ),
       },
       unmarshalListPATRulesResponse,
     )
-
+  
   /**
    * List PAT rules. List PAT rules. You can filter by gateway ID to list all PAT rules for a particular gateway, or filter for PAT rules targeting a specific IP address or using a specific protocol.
    *
@@ -671,6 +671,7 @@ export class API extends ParentAPI {
   listPATRules = (request: Readonly<ListPATRulesRequest> = {}) =>
     enrichForPagination('patRules', this.pageOfListPATRules, request)
 
+  
   /**
    * Get a PAT rule. Get a PAT rule, specified by its PAT rule ID. The response object gives full details of the PAT rule, including the Public Gateway it belongs to and the configuration settings in terms of public / private ports, private IP and protocol.
    *
@@ -687,6 +688,7 @@ export class API extends ParentAPI {
       unmarshalPATRule,
     )
 
+  
   /**
    * Create a PAT rule. Create a new PAT rule on a specified Public Gateway, defining the protocol to use, public port to listen on, and private port / IP address to map to.
    *
@@ -707,6 +709,7 @@ export class API extends ParentAPI {
       unmarshalPATRule,
     )
 
+  
   /**
    * Update a PAT rule. Update a PAT rule, specified by its PAT rule ID. Configuration settings including private/public port, private IP address and protocol can all be updated.
    *
@@ -727,6 +730,7 @@ export class API extends ParentAPI {
       unmarshalPATRule,
     )
 
+  
   /**
    * Set all PAT rules. Set a definitive list of PAT rules attached to a Public Gateway. Each rule is identified by its public port and protocol. This will sync the current PAT rule list on the gateway with the new list, creating, updating or deleting PAT rules accordingly.
    *
@@ -747,6 +751,7 @@ export class API extends ParentAPI {
       unmarshalSetPATRulesResponse,
     )
 
+  
   /**
    * Delete a PAT rule. Delete a PAT rule, identified by its PAT rule ID. This action is irreversible.
    *
@@ -754,11 +759,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeletePATRuleRequest}
    */
   deletePATRule = (request: Readonly<DeletePATRuleRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
+      },
+    )
 
+  
   /**
    * List Public Gateway types. List the different Public Gateway commercial offer types available at Scaleway. The response is an array of objects describing the name and technical details of each available gateway type.
    *
@@ -775,6 +783,7 @@ export class API extends ParentAPI {
       unmarshalListGatewayTypesResponse,
     )
 
+  
   protected pageOfListIPs = (request: Readonly<ListIPsRequest> = {}) =>
     this.client.fetch<ListIPsResponse>(
       {
@@ -785,10 +794,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['reverse', request.reverse],
           ['tags', request.tags],
@@ -796,7 +802,7 @@ export class API extends ParentAPI {
       },
       unmarshalListIPsResponse,
     )
-
+  
   /**
    * List IPs. List Public Gateway flexible IP addresses. A number of filter options are available for limiting results in the response.
    *
@@ -807,6 +813,7 @@ export class API extends ParentAPI {
   listIPs = (request: Readonly<ListIPsRequest> = {}) =>
     enrichForPagination('ips', this.pageOfListIPs, request)
 
+  
   /**
    * Get an IP. Get details of a Public Gateway flexible IP address, identified by its IP ID. The response object contains information including which (if any) Public Gateway using this IP address, the reverse and various other metadata.
    *
@@ -823,6 +830,7 @@ export class API extends ParentAPI {
       unmarshalIP,
     )
 
+  
   /**
    * Reserve an IP. Create (reserve) a new flexible IP address that can be used for a Public Gateway in a specified Scaleway Project.
    *
@@ -843,6 +851,7 @@ export class API extends ParentAPI {
       unmarshalIP,
     )
 
+  
   /**
    * Update an IP. Update details of an existing flexible IP address, including its tags, reverse and the Public Gateway it is assigned to.
    *
@@ -863,6 +872,7 @@ export class API extends ParentAPI {
       unmarshalIP,
     )
 
+  
   /**
    * Delete an IP. Delete a flexible IP address from your account. This action is irreversible.
    *
@@ -870,11 +880,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteIPRequest}
    */
   deleteIP = (request: Readonly<DeleteIPRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
+      },
+    )
 
+  
   /**
    * Refresh a Public Gateway's SSH keys. Refresh the SSH keys of a given Public Gateway, specified by its gateway ID. This adds any new SSH keys in the gateway's Scaleway Project to the gateway itself.
    *
@@ -893,6 +906,7 @@ export class API extends ParentAPI {
       unmarshalGateway,
     )
 
+  
   /**
    * Put a Public Gateway in IPAM mode. Put a Public Gateway in IPAM mode, so that it can be used with the Public Gateways API v2. This call is idempotent.
    *
@@ -900,10 +914,15 @@ export class API extends ParentAPI {
    * @param request - The request {@link MigrateToV2Request}
    */
   migrateToV2 = (request: Readonly<MigrateToV2Request>) =>
-    this.client.fetch<void>({
-      body: '{}',
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/migrate-to-v2`,
-    })
+    this.client.fetch<void>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/vpc-gw/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/migrate-to-v2`,
+      },
+    )
+
+  
 }
+

@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -9,10 +9,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {
-  PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,
-  PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,
-} from './content.gen.js'
+import {PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,} from './content.gen.js'
 import {
   marshalAddRouteRulesRequest,
   marshalCheckDomainRequest,
@@ -158,9 +155,7 @@ const jsonContentHeaders = {
  * Edge Services API.
  */
 export class API extends ParentAPI {
-  protected pageOfListPipelines = (
-    request: Readonly<ListPipelinesRequest> = {},
-  ) =>
+  protected pageOfListPipelines = (request: Readonly<ListPipelinesRequest> = {}) =>
     this.client.fetch<ListPipelinesResponse>(
       {
         method: 'GET',
@@ -171,16 +166,13 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListPipelinesResponse,
     )
-
+  
   /**
    * List pipelines. List all pipelines, for a Scaleway Organization or Scaleway Project. By default, the pipelines returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -190,6 +182,7 @@ export class API extends ParentAPI {
   listPipelines = (request: Readonly<ListPipelinesRequest> = {}) =>
     enrichForPagination('pipelines', this.pageOfListPipelines, request)
 
+  
   /**
    * Create pipeline. Create a new pipeline. You must specify a `dns_stage_id` to form a stage-chain that goes all the way to the backend stage (origin), so the HTTP request will be processed according to the stages you created.
    *
@@ -209,6 +202,7 @@ export class API extends ParentAPI {
       unmarshalPipeline,
     )
 
+  
   /**
    * Get pipeline. Retrieve information about an existing pipeline, specified by its `pipeline_id`. Its full details, including errors, are returned in the response object.
    *
@@ -223,7 +217,7 @@ export class API extends ParentAPI {
       },
       unmarshalPipeline,
     )
-
+  
   /**
    * Waits for {@link Pipeline} to be in a final state.
    *
@@ -236,19 +230,14 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Pipeline>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES.includes(res.status))),
       this.getPipeline,
       request,
       options,
     )
 
-  protected pageOfListPipelinesWithStages = (
-    request: Readonly<ListPipelinesWithStagesRequest> = {},
-  ) =>
+  
+  protected pageOfListPipelinesWithStages = (request: Readonly<ListPipelinesWithStagesRequest> = {}) =>
     this.client.fetch<ListPipelinesWithStagesResponse>(
       {
         method: 'GET',
@@ -258,25 +247,17 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListPipelinesWithStagesResponse,
     )
+  
+  listPipelinesWithStages = (request: Readonly<ListPipelinesWithStagesRequest> = {}) =>
+    enrichForPagination('pipelines', this.pageOfListPipelinesWithStages, request)
 
-  listPipelinesWithStages = (
-    request: Readonly<ListPipelinesWithStagesRequest> = {},
-  ) =>
-    enrichForPagination(
-      'pipelines',
-      this.pageOfListPipelinesWithStages,
-      request,
-    )
-
+  
   /**
    * Update pipeline. Update the parameters of an existing pipeline, specified by its `pipeline_id`. Parameters which can be updated include the `name`, `description` and `dns_stage_id`.
    *
@@ -296,17 +277,21 @@ export class API extends ParentAPI {
       unmarshalPipeline,
     )
 
+  
   /**
    * Delete pipeline. Delete an existing pipeline, specified by its `pipeline_id`. Deleting a pipeline is permanent, and cannot be undone. Note that all stages linked to the pipeline are also deleted.
    *
    * @param request - The request {@link DeletePipelineRequest}
    */
   deletePipeline = (request: Readonly<DeletePipelineRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}`,
+      },
+    )
 
+  
   protected pageOfListHeadStages = (request: Readonly<ListHeadStagesRequest>) =>
     this.client.fetch<ListHeadStagesResponse>(
       {
@@ -314,15 +299,12 @@ export class API extends ParentAPI {
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/head-stages`,
         urlParams: urlParams(
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListHeadStagesResponse,
     )
-
+  
   /**
    * List Head stage for your pipeline.. List Head stage for your pipeline.
    *
@@ -332,6 +314,7 @@ export class API extends ParentAPI {
   listHeadStages = (request: Readonly<ListHeadStagesRequest>) =>
     enrichForPagination('headStages', this.pageOfListHeadStages, request)
 
+  
   /**
    * Configure a entry point to your pipeline. You must specify a `head stage` to form a stage-chain that goes all the way to the backend stage (origin), so the HTTP request will be processed according to the stages you created.. You must specify either a `add_new_head_stage` (to add a new head stage), `remove_head_stage` (to remove a head stage) or `swap_head_stage` (to replace a head stage).
    *
@@ -351,6 +334,7 @@ export class API extends ParentAPI {
       unmarshalHeadStageResponse,
     )
 
+  
   protected pageOfListDNSStages = (request: Readonly<ListDNSStagesRequest>) =>
     this.client.fetch<ListDNSStagesResponse>(
       {
@@ -360,15 +344,12 @@ export class API extends ParentAPI {
           ['fqdn', request.fqdn],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListDNSStagesResponse,
     )
-
+  
   /**
    * List DNS stages. List all DNS stages, for a Scaleway Organization or Scaleway Project. By default, the DNS stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -378,6 +359,7 @@ export class API extends ParentAPI {
   listDNSStages = (request: Readonly<ListDNSStagesRequest>) =>
     enrichForPagination('stages', this.pageOfListDNSStages, request)
 
+  
   /**
    * Create DNS stage. Create a new DNS stage. You must specify the `fqdns` field to customize the domain endpoint, using a domain you already own.
    *
@@ -397,6 +379,7 @@ export class API extends ParentAPI {
       unmarshalDNSStage,
     )
 
+  
   /**
    * Get DNS stage. Retrieve information about an existing DNS stage, specified by its `dns_stage_id`. Its full details, including FQDNs, are returned in the response object.
    *
@@ -412,6 +395,7 @@ export class API extends ParentAPI {
       unmarshalDNSStage,
     )
 
+  
   /**
    * Update DNS stage. Update the parameters of an existing DNS stage, specified by its `dns_stage_id`.
    *
@@ -431,17 +415,21 @@ export class API extends ParentAPI {
       unmarshalDNSStage,
     )
 
+  
   /**
    * Delete DNS stage. Delete an existing DNS stage, specified by its `dns_stage_id`. Deleting a DNS stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteDNSStageRequest}
    */
   deleteDNSStage = (request: Readonly<DeleteDNSStageRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/edge-services/v1beta1/dns-stages/${validatePathParam('dnsStageId', request.dnsStageId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/dns-stages/${validatePathParam('dnsStageId', request.dnsStageId)}`,
+      },
+    )
 
+  
   protected pageOfListTLSStages = (request: Readonly<ListTLSStagesRequest>) =>
     this.client.fetch<ListTLSStagesResponse>(
       {
@@ -450,17 +438,14 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['secret_id', request.secretId],
           ['secret_region', request.secretRegion],
         ),
       },
       unmarshalListTLSStagesResponse,
     )
-
+  
   /**
    * List TLS stages. List all TLS stages, for a Scaleway Organization or Scaleway Project. By default, the TLS stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -470,6 +455,7 @@ export class API extends ParentAPI {
   listTLSStages = (request: Readonly<ListTLSStagesRequest>) =>
     enrichForPagination('stages', this.pageOfListTLSStages, request)
 
+  
   /**
    * Create TLS stage. Create a new TLS stage. You must specify either the `secrets` or `managed_certificate` fields to customize the SSL/TLS certificate of your endpoint. Choose `secrets` if you are using a pre-existing certificate held in Scaleway Secret Manager, or `managed_certificate` to let Scaleway generate and manage a Let's Encrypt certificate for your customized endpoint.
    *
@@ -489,6 +475,7 @@ export class API extends ParentAPI {
       unmarshalTLSStage,
     )
 
+  
   /**
    * Get TLS stage. Retrieve information about an existing TLS stage, specified by its `tls_stage_id`. Its full details, including secrets and certificate expiration date are returned in the response object.
    *
@@ -504,6 +491,7 @@ export class API extends ParentAPI {
       unmarshalTLSStage,
     )
 
+  
   /**
    * Update TLS stage. Update the parameters of an existing TLS stage, specified by its `tls_stage_id`. Both `tls_secrets_config` and `managed_certificate` parameters can be updated.
    *
@@ -523,20 +511,22 @@ export class API extends ParentAPI {
       unmarshalTLSStage,
     )
 
+  
   /**
    * Delete TLS stage. Delete an existing TLS stage, specified by its `tls_stage_id`. Deleting a TLS stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteTLSStageRequest}
    */
   deleteTLSStage = (request: Readonly<DeleteTLSStageRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/edge-services/v1beta1/tls-stages/${validatePathParam('tlsStageId', request.tlsStageId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/tls-stages/${validatePathParam('tlsStageId', request.tlsStageId)}`,
+      },
+    )
 
-  protected pageOfListCacheStages = (
-    request: Readonly<ListCacheStagesRequest>,
-  ) =>
+  
+  protected pageOfListCacheStages = (request: Readonly<ListCacheStagesRequest>) =>
     this.client.fetch<ListCacheStagesResponse>(
       {
         method: 'GET',
@@ -544,15 +534,12 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListCacheStagesResponse,
     )
-
+  
   /**
    * List cache stages. List all cache stages, for a Scaleway Organization or Scaleway Project. By default, the cache stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -562,6 +549,7 @@ export class API extends ParentAPI {
   listCacheStages = (request: Readonly<ListCacheStagesRequest>) =>
     enrichForPagination('stages', this.pageOfListCacheStages, request)
 
+  
   /**
    * Create cache stage. Create a new cache stage. You must specify the `fallback_ttl` field to customize the TTL of the cache.
    *
@@ -581,6 +569,7 @@ export class API extends ParentAPI {
       unmarshalCacheStage,
     )
 
+  
   /**
    * Get cache stage. Retrieve information about an existing cache stage, specified by its `cache_stage_id`. Its full details, including Time To Live (TTL), are returned in the response object.
    *
@@ -596,6 +585,7 @@ export class API extends ParentAPI {
       unmarshalCacheStage,
     )
 
+  
   /**
    * Update cache stage. Update the parameters of an existing cache stage, specified by its `cache_stage_id`. Parameters which can be updated include the `fallback_ttl`, `include_cookies` and `backend_stage_id`.
    *
@@ -615,20 +605,22 @@ export class API extends ParentAPI {
       unmarshalCacheStage,
     )
 
+  
   /**
    * Delete cache stage. Delete an existing cache stage, specified by its `cache_stage_id`. Deleting a cache stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteCacheStageRequest}
    */
   deleteCacheStage = (request: Readonly<DeleteCacheStageRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/edge-services/v1beta1/cache-stages/${validatePathParam('cacheStageId', request.cacheStageId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/cache-stages/${validatePathParam('cacheStageId', request.cacheStageId)}`,
+      },
+    )
 
-  protected pageOfListBackendStages = (
-    request: Readonly<ListBackendStagesRequest>,
-  ) =>
+  
+  protected pageOfListBackendStages = (request: Readonly<ListBackendStagesRequest>) =>
     this.client.fetch<ListBackendStagesResponse>(
       {
         method: 'GET',
@@ -639,15 +631,12 @@ export class API extends ParentAPI {
           ['lb_id', request.lbId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListBackendStagesResponse,
     )
-
+  
   /**
    * List backend stages. List all backend stages, for a Scaleway Organization or Scaleway Project. By default, the backend stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -657,6 +646,7 @@ export class API extends ParentAPI {
   listBackendStages = (request: Readonly<ListBackendStagesRequest>) =>
     enrichForPagination('stages', this.pageOfListBackendStages, request)
 
+  
   /**
    * Create backend stage. Create a new backend stage. You must specify either a `scaleway_s3` (for a Scaleway Object Storage bucket) or `scaleway_lb` (for a Scaleway Load Balancer) field to configure the origin.
    *
@@ -676,6 +666,7 @@ export class API extends ParentAPI {
       unmarshalBackendStage,
     )
 
+  
   /**
    * Get backend stage. Retrieve information about an existing backend stage, specified by its `backend_stage_id`. Its full details, including `scaleway_s3` or `scaleway_lb`, are returned in the response object.
    *
@@ -691,6 +682,7 @@ export class API extends ParentAPI {
       unmarshalBackendStage,
     )
 
+  
   /**
    * Update backend stage. Update the parameters of an existing backend stage, specified by its `backend_stage_id`.
    *
@@ -710,17 +702,21 @@ export class API extends ParentAPI {
       unmarshalBackendStage,
     )
 
+  
   /**
    * Delete backend stage. Delete an existing backend stage, specified by its `backend_stage_id`. Deleting a backend stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteBackendStageRequest}
    */
   deleteBackendStage = (request: Readonly<DeleteBackendStageRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/edge-services/v1beta1/backend-stages/${validatePathParam('backendStageId', request.backendStageId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/backend-stages/${validatePathParam('backendStageId', request.backendStageId)}`,
+      },
+    )
 
+  
   searchBackendStages = (request: Readonly<SearchBackendStagesRequest> = {}) =>
     this.client.fetch<ListBackendStagesResponse>(
       {
@@ -732,19 +728,14 @@ export class API extends ParentAPI {
           ['lb_id', request.lbId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalListBackendStagesResponse,
     )
 
+  
   protected pageOfListWafStages = (request: Readonly<ListWafStagesRequest>) =>
     this.client.fetch<ListWafStagesResponse>(
       {
@@ -753,15 +744,12 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListWafStagesResponse,
     )
-
+  
   /**
    * List WAF stages. List all WAF stages, for a Scaleway Organization or Scaleway Project. By default, the WAF stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -771,6 +759,7 @@ export class API extends ParentAPI {
   listWafStages = (request: Readonly<ListWafStagesRequest>) =>
     enrichForPagination('stages', this.pageOfListWafStages, request)
 
+  
   /**
    * Create WAF stage. Create a new WAF stage. You must specify the `mode` and `paranoia_level` fields to customize the WAF.
    *
@@ -790,6 +779,7 @@ export class API extends ParentAPI {
       unmarshalWafStage,
     )
 
+  
   /**
    * Get WAF stage. Retrieve information about an existing WAF stage, specified by its `waf_stage_id`. Its full details are returned in the response object.
    *
@@ -805,6 +795,7 @@ export class API extends ParentAPI {
       unmarshalWafStage,
     )
 
+  
   /**
    * Update WAF stage. Update the parameters of an existing WAF stage, specified by its `waf_stage_id`. Both `mode` and `paranoia_level` parameters can be updated.
    *
@@ -824,17 +815,21 @@ export class API extends ParentAPI {
       unmarshalWafStage,
     )
 
+  
   /**
    * Delete WAF stage. Delete an existing WAF stage, specified by its `waf_stage_id`. Deleting a WAF stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteWafStageRequest}
    */
   deleteWafStage = (request: Readonly<DeleteWafStageRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/edge-services/v1beta1/waf-stages/${validatePathParam('wafStageId', request.wafStageId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/waf-stages/${validatePathParam('wafStageId', request.wafStageId)}`,
+      },
+    )
 
+  
   searchWafStages = (request: Readonly<SearchWafStagesRequest> = {}) =>
     this.client.fetch<ListWafStagesResponse>(
       {
@@ -843,22 +838,15 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          [
-            'project_id',
-            request.projectId ?? this.client.settings.defaultProjectId,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalListWafStagesResponse,
     )
 
-  protected pageOfListRouteStages = (
-    request: Readonly<ListRouteStagesRequest>,
-  ) =>
+  
+  protected pageOfListRouteStages = (request: Readonly<ListRouteStagesRequest>) =>
     this.client.fetch<ListRouteStagesResponse>(
       {
         method: 'GET',
@@ -866,15 +854,12 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListRouteStagesResponse,
     )
-
+  
   /**
    * List route stages. List all route stages, for a given pipeline. By default, the route stages returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -884,6 +869,7 @@ export class API extends ParentAPI {
   listRouteStages = (request: Readonly<ListRouteStagesRequest>) =>
     enrichForPagination('stages', this.pageOfListRouteStages, request)
 
+  
   /**
    * Create route stage. Create a new route stage. You must specify the `waf_stage_id` field to customize the route.
    *
@@ -903,6 +889,7 @@ export class API extends ParentAPI {
       unmarshalRouteStage,
     )
 
+  
   /**
    * Get route stage. Retrieve information about an existing route stage, specified by its `route_stage_id`. The summary of the route stage (without route rules) is returned in the response object.
    *
@@ -918,6 +905,7 @@ export class API extends ParentAPI {
       unmarshalRouteStage,
     )
 
+  
   /**
    * Update route stage. Update the parameters of an existing route stage, specified by its `route_stage_id`.
    *
@@ -937,17 +925,21 @@ export class API extends ParentAPI {
       unmarshalRouteStage,
     )
 
+  
   /**
    * Delete route stage. Delete an existing route stage, specified by its `route_stage_id`. Deleting a route stage is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteRouteStageRequest}
    */
   deleteRouteStage = (request: Readonly<DeleteRouteStageRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}`,
+      },
+    )
 
+  
   /**
    * List route rules. List all route rules of an existing route stage, specified by its `route_stage_id`.
    *
@@ -963,6 +955,7 @@ export class API extends ParentAPI {
       unmarshalListRouteRulesResponse,
     )
 
+  
   /**
    * Set route rules. Set the rules of an existing route stage, specified by its `route_stage_id`.
    *
@@ -982,6 +975,7 @@ export class API extends ParentAPI {
       unmarshalSetRouteRulesResponse,
     )
 
+  
   /**
    * Add route rules. Add route rules to an existing route stage, specified by its `route_stage_id`.
    *
@@ -1001,6 +995,7 @@ export class API extends ParentAPI {
       unmarshalAddRouteRulesResponse,
     )
 
+  
   /**
    * List route rules. List all route rules of an organization or project.
    *
@@ -1016,16 +1011,14 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListRouteRulesResponse,
     )
 
+  
   checkDomain = (request: Readonly<CheckDomainRequest>) =>
     this.client.fetch<CheckDomainResponse>(
       {
@@ -1039,6 +1032,7 @@ export class API extends ParentAPI {
       unmarshalCheckDomainResponse,
     )
 
+  
   checkPEMChain = (request: Readonly<CheckPEMChainRequest>) =>
     this.client.fetch<CheckPEMChainResponse>(
       {
@@ -1052,9 +1046,8 @@ export class API extends ParentAPI {
       unmarshalCheckPEMChainResponse,
     )
 
-  protected pageOfListPurgeRequests = (
-    request: Readonly<ListPurgeRequestsRequest> = {},
-  ) =>
+  
+  protected pageOfListPurgeRequests = (request: Readonly<ListPurgeRequestsRequest> = {}) =>
     this.client.fetch<ListPurgeRequestsResponse>(
       {
         method: 'GET',
@@ -1063,17 +1056,14 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['pipeline_id', request.pipelineId],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListPurgeRequestsResponse,
     )
-
+  
   /**
    * List purge requests. List all purge requests, for a Scaleway Organization or Scaleway Project. This enables you to retrieve a history of all previously-made purge requests. By default, the purge requests returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -1083,6 +1073,7 @@ export class API extends ParentAPI {
   listPurgeRequests = (request: Readonly<ListPurgeRequestsRequest> = {}) =>
     enrichForPagination('purgeRequests', this.pageOfListPurgeRequests, request)
 
+  
   /**
    * Create purge request. Create a new purge request. You must specify either the `all` field (to purge all content) or a list of `assets` (to define the precise assets to purge).
    *
@@ -1102,6 +1093,7 @@ export class API extends ParentAPI {
       unmarshalPurgeRequest,
     )
 
+  
   /**
    * Get purge request. Retrieve information about a purge request, specified by its `purge_request_id`. Its full details, including `status` and `target`, are returned in the response object.
    *
@@ -1116,7 +1108,7 @@ export class API extends ParentAPI {
       },
       unmarshalPurgeRequest,
     )
-
+  
   /**
    * Waits for {@link PurgeRequest} to be in a final state.
    *
@@ -1129,18 +1121,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<PurgeRequest>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES.includes(
-              res.status,
-            ),
-          )),
+      options?.stop ?? (res => Promise.resolve(!PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES.includes(res.status))),
       this.getPurgeRequest,
       request,
       options,
     )
 
+  
   checkLbOrigin = (request: Readonly<CheckLbOriginRequest> = {}) =>
     this.client.fetch<CheckLbOriginResponse>(
       {
@@ -1154,6 +1141,7 @@ export class API extends ParentAPI {
       unmarshalCheckLbOriginResponse,
     )
 
+  
   listPlans = () =>
     this.client.fetch<ListPlansResponse>(
       {
@@ -1163,6 +1151,7 @@ export class API extends ParentAPI {
       unmarshalListPlansResponse,
     )
 
+  
   selectPlan = (request: Readonly<SelectPlanRequest> = {}) =>
     this.client.fetch<Plan>(
       {
@@ -1176,6 +1165,7 @@ export class API extends ParentAPI {
       unmarshalPlan,
     )
 
+  
   getCurrentPlan = (request: Readonly<GetCurrentPlanRequest> = {}) =>
     this.client.fetch<Plan>(
       {
@@ -1185,12 +1175,16 @@ export class API extends ParentAPI {
       unmarshalPlan,
     )
 
+  
   deleteCurrentPlan = (request: Readonly<DeleteCurrentPlanRequest> = {}) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/edge-services/v1beta1/current-plan/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/current-plan/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+      },
+    )
 
+  
   /**
    * Gives information on the currently selected Edge Services subscription plan, resource usage and associated billing information for this calendar month (including whether consumption falls within or exceeds the currently selected subscription plan.).
    *
@@ -1205,4 +1199,7 @@ export class API extends ParentAPI {
       },
       unmarshalGetBillingResponse,
     )
+
+  
 }
+

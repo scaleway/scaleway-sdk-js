@@ -1,9 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   Cluster,
   ClusterVersion,
@@ -46,9 +43,7 @@ const unmarshalDatalabSparkMain = (data: unknown): DatalabSparkMain => {
 
   return {
     nodeType: data.node_type,
-    rootVolume: data.root_volume
-      ? unmarshalVolume(data.root_volume)
-      : undefined,
+    rootVolume: data.root_volume ? unmarshalVolume(data.root_volume) : undefined,
     sparkMasterUrl: data.spark_master_url,
     sparkUiUrl: data.spark_ui_url,
   } as DatalabSparkMain
@@ -64,9 +59,7 @@ const unmarshalDatalabSparkWorker = (data: unknown): DatalabSparkWorker => {
   return {
     nodeCount: data.node_count,
     nodeType: data.node_type,
-    rootVolume: data.root_volume
-      ? unmarshalVolume(data.root_volume)
-      : undefined,
+    rootVolume: data.root_volume ? unmarshalVolume(data.root_volume) : undefined,
   } as DatalabSparkWorker
 }
 
@@ -92,9 +85,7 @@ export const unmarshalDatalab = (data: unknown): Datalab => {
     sparkVersion: data.spark_version,
     status: data.status,
     tags: data.tags,
-    totalStorage: data.total_storage
-      ? unmarshalVolume(data.total_storage)
-      : undefined,
+    totalStorage: data.total_storage ? unmarshalVolume(data.total_storage) : undefined,
     updatedAt: unmarshalDate(data.updated_at),
     worker: data.worker ? unmarshalDatalabSparkWorker(data.worker) : undefined,
   } as Datalab
@@ -131,9 +122,7 @@ const unmarshalCluster = (data: unknown): Cluster => {
   } as Cluster
 }
 
-export const unmarshalListClusterVersionsResponse = (
-  data: unknown,
-): ListClusterVersionsResponse => {
+export const unmarshalListClusterVersionsResponse = (data: unknown): ListClusterVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListClusterVersionsResponse' failed as data isn't a dictionary.`,
@@ -146,9 +135,7 @@ export const unmarshalListClusterVersionsResponse = (
   } as ListClusterVersionsResponse
 }
 
-export const unmarshalListDatalabsResponse = (
-  data: unknown,
-): ListDatalabsResponse => {
+export const unmarshalListDatalabsResponse = (data: unknown): ListDatalabsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDatalabsResponse' failed as data isn't a dictionary.`,
@@ -184,9 +171,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
   } as NodeType
 }
 
-export const unmarshalListNodeTypesResponse = (
-  data: unknown,
-): ListNodeTypesResponse => {
+export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`,
@@ -230,9 +215,7 @@ const unmarshalNotebook = (data: unknown): Notebook => {
   } as Notebook
 }
 
-export const unmarshalListNotebookVersionsResponse = (
-  data: unknown,
-): ListNotebookVersionsResponse => {
+export const unmarshalListNotebookVersionsResponse = (data: unknown): ListNotebookVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNotebookVersionsResponse' failed as data isn't a dictionary.`,
@@ -274,23 +257,14 @@ export const marshalCreateDatalabRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   has_notebook: request.hasNotebook,
-  main:
-    request.main !== undefined
-      ? marshalCreateDatalabRequestSparkMain(request.main, defaults)
-      : undefined,
+  main: ((request.main !== undefined) ?  marshalCreateDatalabRequestSparkMain(request.main, defaults): undefined),
   name: request.name,
   private_network_id: request.privateNetworkId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   spark_version: request.sparkVersion,
   tags: request.tags,
-  total_storage:
-    request.totalStorage !== undefined
-      ? marshalVolume(request.totalStorage, defaults)
-      : undefined,
-  worker:
-    request.worker !== undefined
-      ? marshalCreateDatalabRequestSparkWorker(request.worker, defaults)
-      : undefined,
+  total_storage: ((request.totalStorage !== undefined) ?  marshalVolume(request.totalStorage, defaults): undefined),
+  worker: ((request.worker !== undefined) ?  marshalCreateDatalabRequestSparkWorker(request.worker, defaults): undefined),
 })
 
 export const marshalUpdateDatalabRequest = (

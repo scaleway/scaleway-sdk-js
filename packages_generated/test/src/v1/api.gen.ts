@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { WaitForOptions } from '@scaleway/sdk-client'
+import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -9,7 +9,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST } from './content.gen.js'
+import {HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST,} from './content.gen.js'
 import {
   marshalCreateHumanRequest,
   marshalRegisterRequest,
@@ -63,6 +63,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalRegisterResponse,
     )
 
+  
   protected pageOfListHumans = (request: Readonly<ListHumansRequest> = {}) =>
     this.client.fetch<ListHumansResponse>(
       {
@@ -72,16 +73,13 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListHumansResponse,
     )
-
+  
   /**
    * List all your humans.
    *
@@ -91,6 +89,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
   listHumans = (request: Readonly<ListHumansRequest> = {}) =>
     enrichForPagination('humans', this.pageOfListHumans, request)
 
+  
   /**
    * Get human details. Get the human details associated with the given id.
    *
@@ -105,7 +104,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       },
       unmarshalHuman,
     )
-
+  
   /**
    * Waits for {@link Human} to be in a final state.
    *
@@ -118,14 +117,13 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
     options?: Readonly<WaitForOptions<Human>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(!HUMAN_TRANSIENT_STATUSES_TEST.includes(res.status))),
+      options?.stop ?? (res => Promise.resolve(!HUMAN_TRANSIENT_STATUSES_TEST.includes(res.status))),
       this.getHuman,
       request,
       options,
     )
 
+  
   /**
    * Create a new human.
    *
@@ -145,6 +143,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalHuman,
     )
 
+  
   /**
    * Update an existing human. Update the human associated with the given id.
    *
@@ -164,6 +163,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalHuman,
     )
 
+  
   /**
    * Delete an existing human. Delete the human associated with the given id.
    *
@@ -179,6 +179,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalHuman,
     )
 
+  
   /**
    * Start a 1h running for the given human. Start a one hour running for the given human.
    *
@@ -196,6 +197,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalHuman,
     )
 
+  
   /**
    * Make a human smoke.
    *
@@ -213,4 +215,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       },
       unmarshalHuman,
     )
+
+  
 }
+

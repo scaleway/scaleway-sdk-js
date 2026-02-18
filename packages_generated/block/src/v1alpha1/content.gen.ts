@@ -6,6 +6,7 @@ import type {
   VolumeStatus,
 } from './types.gen.js'
 
+
 /** Lists transient statutes of the enum {@link ReferenceStatus}. */
 export const REFERENCE_TRANSIENT_STATUSES: ReferenceStatus[] = [
   'attaching',
@@ -28,3 +29,4 @@ export const VOLUME_TRANSIENT_STATUSES: VolumeStatus[] = [
   'snapshotting',
   'updating',
 ]
+

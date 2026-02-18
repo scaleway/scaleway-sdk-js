@@ -7,6 +7,17 @@ export const ACLRuleRequest = {
   },
 }
 
+export const CoreV1Taint = {
+  key: {
+    maxLength: 316,
+    minLength: 1,
+    pattern: /^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*\/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$/,
+  },
+  value: {
+    maxLength: 63,
+  },
+}
+
 export const CreateClusterRequest = {
   description: {
     maxLength: 4096,

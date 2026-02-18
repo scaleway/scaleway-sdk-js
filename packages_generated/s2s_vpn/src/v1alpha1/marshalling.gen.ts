@@ -1,10 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   BgpSession,
   Connection,
@@ -15,7 +11,10 @@ import type {
   CreateCustomerGatewayRequest,
   CreateRoutingPolicyRequest,
   CreateVpnGatewayRequest,
+  CreateVpnGatewayRequestDualIpTunnel,
   CreateVpnGatewayRequestPublicConfig,
+  CreateVpnGatewayRequestPublicTunnelConfig,
+  CreateVpnGatewayRequestSingleIpTunnel,
   CustomerGateway,
   DetachRoutingPolicyRequest,
   GatewayType,
@@ -72,25 +71,15 @@ export const unmarshalConnection = (data: unknown): Connection => {
   }
 
   return {
-    bgpSessionIpv4: data.bgp_session_ipv4
-      ? unmarshalBgpSession(data.bgp_session_ipv4)
-      : undefined,
-    bgpSessionIpv6: data.bgp_session_ipv6
-      ? unmarshalBgpSession(data.bgp_session_ipv6)
-      : undefined,
+    bgpSessionIpv4: data.bgp_session_ipv4 ? unmarshalBgpSession(data.bgp_session_ipv4) : undefined,
+    bgpSessionIpv6: data.bgp_session_ipv6 ? unmarshalBgpSession(data.bgp_session_ipv6) : undefined,
     bgpStatusIpv4: data.bgp_status_ipv4,
     bgpStatusIpv6: data.bgp_status_ipv6,
     createdAt: unmarshalDate(data.created_at),
     customerGatewayId: data.customer_gateway_id,
-    espCiphers: unmarshalArrayOfObject(
-      data.esp_ciphers,
-      unmarshalConnectionCipher,
-    ),
+    espCiphers: unmarshalArrayOfObject(data.esp_ciphers, unmarshalConnectionCipher),
     id: data.id,
-    ikev2Ciphers: unmarshalArrayOfObject(
-      data.ikev2_ciphers,
-      unmarshalConnectionCipher,
-    ),
+    ikev2Ciphers: unmarshalArrayOfObject(data.ikev2_ciphers, unmarshalConnectionCipher),
     initiationPolicy: data.initiation_policy,
     isIpv6: data.is_ipv6,
     name: data.name,
@@ -103,12 +92,8 @@ export const unmarshalConnection = (data: unknown): Connection => {
     status: data.status,
     tags: data.tags,
     tunnelStatus: data.tunnel_status,
-    tunnelStatusIpv4: data.tunnel_status_ipv4
-      ? data.tunnel_status_ipv4
-      : undefined,
-    tunnelStatusIpv6: data.tunnel_status_ipv6
-      ? data.tunnel_status_ipv6
-      : undefined,
+    tunnelStatusIpv4: data.tunnel_status_ipv4 ? data.tunnel_status_ipv4 : undefined,
+    tunnelStatusIpv6: data.tunnel_status_ipv6 ? data.tunnel_status_ipv6 : undefined,
     updatedAt: unmarshalDate(data.updated_at),
     vpnGatewayId: data.vpn_gateway_id,
   } as Connection
@@ -159,21 +144,18 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
   } as RoutingPolicy
 }
 
-const unmarshalVpnGatewayPrivateConfig = (
-  data: unknown,
-): VpnGatewayPrivateConfig => {
+const unmarshalVpnGatewayPrivateConfig = (data: unknown): VpnGatewayPrivateConfig => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VpnGatewayPrivateConfig' failed as data isn't a dictionary.`,
     )
   }
 
-  return {} as VpnGatewayPrivateConfig
+  return {
+  } as VpnGatewayPrivateConfig
 }
 
-const unmarshalVpnGatewayPublicConfig = (
-  data: unknown,
-): VpnGatewayPublicConfig => {
+const unmarshalVpnGatewayPublicConfig = (data: unknown): VpnGatewayPublicConfig => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'VpnGatewayPublicConfig' failed as data isn't a dictionary.`,
@@ -203,14 +185,10 @@ export const unmarshalVpnGateway = (data: unknown): VpnGateway => {
     ipamPrivateIpv6Id: data.ipam_private_ipv6_id,
     name: data.name,
     organizationId: data.organization_id,
-    privateConfig: data.private_config
-      ? unmarshalVpnGatewayPrivateConfig(data.private_config)
-      : undefined,
+    privateConfig: data.private_config ? unmarshalVpnGatewayPrivateConfig(data.private_config) : undefined,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
-    publicConfig: data.public_config
-      ? unmarshalVpnGatewayPublicConfig(data.public_config)
-      : undefined,
+    publicConfig: data.public_config ? unmarshalVpnGatewayPublicConfig(data.public_config) : undefined,
     region: data.region,
     status: data.status,
     tags: data.tags,
@@ -219,9 +197,7 @@ export const unmarshalVpnGateway = (data: unknown): VpnGateway => {
   } as VpnGateway
 }
 
-export const unmarshalCreateConnectionResponse = (
-  data: unknown,
-): CreateConnectionResponse => {
+export const unmarshalCreateConnectionResponse = (data: unknown): CreateConnectionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'CreateConnectionResponse' failed as data isn't a dictionary.`,
@@ -229,16 +205,12 @@ export const unmarshalCreateConnectionResponse = (
   }
 
   return {
-    connection: data.connection
-      ? unmarshalConnection(data.connection)
-      : undefined,
+    connection: data.connection ? unmarshalConnection(data.connection) : undefined,
     preSharedKey: data.pre_shared_key,
   } as CreateConnectionResponse
 }
 
-export const unmarshalListConnectionsResponse = (
-  data: unknown,
-): ListConnectionsResponse => {
+export const unmarshalListConnectionsResponse = (data: unknown): ListConnectionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListConnectionsResponse' failed as data isn't a dictionary.`,
@@ -251,9 +223,7 @@ export const unmarshalListConnectionsResponse = (
   } as ListConnectionsResponse
 }
 
-export const unmarshalListCustomerGatewaysResponse = (
-  data: unknown,
-): ListCustomerGatewaysResponse => {
+export const unmarshalListCustomerGatewaysResponse = (data: unknown): ListCustomerGatewaysResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListCustomerGatewaysResponse' failed as data isn't a dictionary.`,
@@ -266,9 +236,7 @@ export const unmarshalListCustomerGatewaysResponse = (
   } as ListCustomerGatewaysResponse
 }
 
-export const unmarshalListRoutingPoliciesResponse = (
-  data: unknown,
-): ListRoutingPoliciesResponse => {
+export const unmarshalListRoutingPoliciesResponse = (data: unknown): ListRoutingPoliciesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListRoutingPoliciesResponse' failed as data isn't a dictionary.`,
@@ -276,10 +244,7 @@ export const unmarshalListRoutingPoliciesResponse = (
   }
 
   return {
-    routingPolicies: unmarshalArrayOfObject(
-      data.routing_policies,
-      unmarshalRoutingPolicy,
-    ),
+    routingPolicies: unmarshalArrayOfObject(data.routing_policies, unmarshalRoutingPolicy),
     totalCount: data.total_count,
   } as ListRoutingPoliciesResponse
 }
@@ -300,9 +265,7 @@ const unmarshalGatewayType = (data: unknown): GatewayType => {
   } as GatewayType
 }
 
-export const unmarshalListVpnGatewayTypesResponse = (
-  data: unknown,
-): ListVpnGatewayTypesResponse => {
+export const unmarshalListVpnGatewayTypesResponse = (data: unknown): ListVpnGatewayTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVpnGatewayTypesResponse' failed as data isn't a dictionary.`,
@@ -310,17 +273,12 @@ export const unmarshalListVpnGatewayTypesResponse = (
   }
 
   return {
-    gatewayTypes: unmarshalArrayOfObject(
-      data.gateway_types,
-      unmarshalGatewayType,
-    ),
+    gatewayTypes: unmarshalArrayOfObject(data.gateway_types, unmarshalGatewayType),
     totalCount: data.total_count,
   } as ListVpnGatewayTypesResponse
 }
 
-export const unmarshalListVpnGatewaysResponse = (
-  data: unknown,
-): ListVpnGatewaysResponse => {
+export const unmarshalListVpnGatewaysResponse = (data: unknown): ListVpnGatewaysResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListVpnGatewaysResponse' failed as data isn't a dictionary.`,
@@ -333,9 +291,7 @@ export const unmarshalListVpnGatewaysResponse = (
   } as ListVpnGatewaysResponse
 }
 
-export const unmarshalRenewConnectionPskResponse = (
-  data: unknown,
-): RenewConnectionPskResponse => {
+export const unmarshalRenewConnectionPskResponse = (data: unknown): RenewConnectionPskResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'RenewConnectionPskResponse' failed as data isn't a dictionary.`,
@@ -343,9 +299,7 @@ export const unmarshalRenewConnectionPskResponse = (
   }
 
   return {
-    connection: data.connection
-      ? unmarshalConnection(data.connection)
-      : undefined,
+    connection: data.connection ? unmarshalConnection(data.connection) : undefined,
     preSharedKey: data.pre_shared_key,
   } as RenewConnectionPskResponse
 }
@@ -372,22 +326,12 @@ export const marshalCreateConnectionRequest = (
   request: CreateConnectionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  bgp_config_ipv4:
-    request.bgpConfigIpv4 !== undefined
-      ? marshalCreateConnectionRequestBgpConfig(request.bgpConfigIpv4, defaults)
-      : undefined,
-  bgp_config_ipv6:
-    request.bgpConfigIpv6 !== undefined
-      ? marshalCreateConnectionRequestBgpConfig(request.bgpConfigIpv6, defaults)
-      : undefined,
+  bgp_config_ipv4: ((request.bgpConfigIpv4 !== undefined) ?  marshalCreateConnectionRequestBgpConfig(request.bgpConfigIpv4, defaults): undefined),
+  bgp_config_ipv6: ((request.bgpConfigIpv6 !== undefined) ?  marshalCreateConnectionRequestBgpConfig(request.bgpConfigIpv6, defaults): undefined),
   customer_gateway_id: request.customerGatewayId,
   enable_route_propagation: request.enableRoutePropagation,
-  esp_ciphers: request.espCiphers.map(elt =>
-    marshalConnectionCipher(elt, defaults),
-  ),
-  ikev2_ciphers: request.ikev2Ciphers.map(elt =>
-    marshalConnectionCipher(elt, defaults),
-  ),
+  esp_ciphers:  request.espCiphers.map(elt => marshalConnectionCipher(elt, defaults)),
+  ikev2_ciphers:  request.ikev2Ciphers.map(elt => marshalConnectionCipher(elt, defaults)),
   initiation_policy: request.initiationPolicy,
   is_ipv6: request.isIpv6,
   name: request.name,
@@ -420,12 +364,47 @@ export const marshalCreateRoutingPolicyRequest = (
   tags: request.tags,
 })
 
+const marshalCreateVpnGatewayRequestDualIpTunnel = (
+  request: CreateVpnGatewayRequestDualIpTunnel,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ipam_ipv4_id: request.ipamIpv4Id,
+  ipam_ipv6_id: request.ipamIpv6Id,
+})
+
+const marshalCreateVpnGatewayRequestSingleIpTunnel = (
+  request: CreateVpnGatewayRequestSingleIpTunnel,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ipam_id: request.ipamId,
+})
+
 const marshalCreateVpnGatewayRequestPublicConfig = (
   request: CreateVpnGatewayRequestPublicConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   ipam_ipv4_id: request.ipamIpv4Id,
   ipam_ipv6_id: request.ipamIpv6Id,
+})
+
+const marshalCreateVpnGatewayRequestPublicTunnelConfig = (
+  request: CreateVpnGatewayRequestPublicTunnelConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({  
+  ...resolveOneOf([
+    {param: 'single_ipv4_tunnel',
+      value: (request.singleIpv4Tunnel !== undefined) ? marshalCreateVpnGatewayRequestSingleIpTunnel(request.singleIpv4Tunnel, defaults)
+      : undefined,
+    },
+    {param: 'single_ipv6_tunnel',
+      value: (request.singleIpv6Tunnel !== undefined) ? marshalCreateVpnGatewayRequestSingleIpTunnel(request.singleIpv6Tunnel, defaults)
+      : undefined,
+    },
+    {param: 'dual_ipv4v6_tunnel',
+      value: (request.dualIpv4V6Tunnel !== undefined) ? marshalCreateVpnGatewayRequestDualIpTunnel(request.dualIpv4V6Tunnel, defaults)
+      : undefined,
+    },
+  ]),
 })
 
 export const marshalCreateVpnGatewayRequest = (
@@ -439,17 +418,15 @@ export const marshalCreateVpnGatewayRequest = (
   private_network_id: request.privateNetworkId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
-  zone: request.zone ?? defaults.defaultZone,
+  zone: request.zone ?? defaults.defaultZone,  
   ...resolveOneOf([
-    {
-      param: 'public_config',
-      value:
-        request.publicConfig !== undefined
-          ? marshalCreateVpnGatewayRequestPublicConfig(
-              request.publicConfig,
-              defaults,
-            )
-          : undefined,
+    {param: 'public_config',
+      value: (request.publicConfig !== undefined) ? marshalCreateVpnGatewayRequestPublicConfig(request.publicConfig, defaults)
+      : undefined,
+    },
+    {param: 'public_tunnel_config',
+      value: (request.publicTunnelConfig !== undefined) ? marshalCreateVpnGatewayRequestPublicTunnelConfig(request.publicTunnelConfig, defaults)
+      : undefined,
     },
   ]),
 })
@@ -457,20 +434,28 @@ export const marshalCreateVpnGatewayRequest = (
 export const marshalDetachRoutingPolicyRequest = (
   request: DetachRoutingPolicyRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    { param: 'routing_policy_v4', value: request.routingPolicyV4 },
-    { param: 'routing_policy_v6', value: request.routingPolicyV6 },
+    {param: 'routing_policy_v4',
+      value: request.routingPolicyV4,
+    },
+    {param: 'routing_policy_v6',
+      value: request.routingPolicyV6,
+    },
   ]),
 })
 
 export const marshalSetRoutingPolicyRequest = (
   request: SetRoutingPolicyRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    { param: 'routing_policy_v4', value: request.routingPolicyV4 },
-    { param: 'routing_policy_v6', value: request.routingPolicyV6 },
+    {param: 'routing_policy_v4',
+      value: request.routingPolicyV4,
+    },
+    {param: 'routing_policy_v6',
+      value: request.routingPolicyV6,
+    },
   ]),
 })
 
@@ -478,14 +463,8 @@ export const marshalUpdateConnectionRequest = (
   request: UpdateConnectionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  esp_ciphers:
-    request.espCiphers !== undefined
-      ? request.espCiphers.map(elt => marshalConnectionCipher(elt, defaults))
-      : undefined,
-  ikev2_ciphers:
-    request.ikev2Ciphers !== undefined
-      ? request.ikev2Ciphers.map(elt => marshalConnectionCipher(elt, defaults))
-      : undefined,
+  esp_ciphers: ((request.espCiphers !== undefined) ?  request.espCiphers.map(elt => marshalConnectionCipher(elt, defaults)): undefined),
+  ikev2_ciphers: ((request.ikev2Ciphers !== undefined) ?  request.ikev2Ciphers.map(elt => marshalConnectionCipher(elt, defaults)): undefined),
   initiation_policy: request.initiationPolicy,
   name: request.name,
   tags: request.tags,

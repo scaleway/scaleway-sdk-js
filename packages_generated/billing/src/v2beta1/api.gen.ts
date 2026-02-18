@@ -39,9 +39,7 @@ import type {
 This API allows you to manage and query your Scaleway billing and consumption.
  */
 export class API extends ParentAPI {
-  protected pageOfListConsumptions = (
-    request: Readonly<ListConsumptionsRequest> = {},
-  ) =>
+  protected pageOfListConsumptions = (request: Readonly<ListConsumptionsRequest> = {}) =>
     this.client.fetch<ListConsumptionsResponse>(
       {
         method: 'GET',
@@ -51,29 +49,20 @@ export class API extends ParentAPI {
           ['category_name', request.categoryName],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          ...Object.entries(
-            resolveOneOf([
-              {
-                default: this.client.settings.defaultOrganizationId,
-                param: 'organization_id',
-                value: request.organizationId,
-              },
-              {
-                default: this.client.settings.defaultProjectId,
-                param: 'project_id',
-                value: request.projectId,
-              },
-            ]),
-          ),
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],  
+          ...Object.entries(resolveOneOf([
+            {default: this.client.settings.defaultOrganizationId,param: 'organization_id',
+              value: request.organizationId,
+            },
+            {default: this.client.settings.defaultProjectId,param: 'project_id',
+              value: request.projectId,
+            },
+          ])),
         ),
       },
       unmarshalListConsumptionsResponse,
     )
-
+  
   /**
    * Get monthly consumption. Consumption allows you to retrieve your past or current consumption cost, by project or category.
    *
@@ -83,6 +72,7 @@ export class API extends ParentAPI {
   listConsumptions = (request: Readonly<ListConsumptionsRequest> = {}) =>
     enrichForPagination('consumptions', this.pageOfListConsumptions, request)
 
+  
   protected pageOfListTaxes = (request: Readonly<ListTaxesRequest> = {}) =>
     this.client.fetch<ListTaxesResponse>(
       {
@@ -91,21 +81,14 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['billing_period', request.billingPeriod],
           ['order_by', request.orderBy],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListTaxesResponse,
     )
-
+  
   /**
    * Get monthly consumption taxes. Consumption Tax allows you to retrieve your past or current tax charges, by project or category.
    *
@@ -115,9 +98,8 @@ export class API extends ParentAPI {
   listTaxes = (request: Readonly<ListTaxesRequest> = {}) =>
     enrichForPagination('taxes', this.pageOfListTaxes, request)
 
-  protected pageOfListInvoices = (
-    request: Readonly<ListInvoicesRequest> = {},
-  ) =>
+  
+  protected pageOfListInvoices = (request: Readonly<ListInvoicesRequest> = {}) =>
     this.client.fetch<ListInvoicesResponse>(
       {
         method: 'GET',
@@ -129,15 +111,12 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListInvoicesResponse,
     )
-
+  
   /**
    * List invoices. List all your invoices, filtering by `start_date` and `invoice_type`. Each invoice has its own ID.
    *
@@ -147,6 +126,7 @@ export class API extends ParentAPI {
   listInvoices = (request: Readonly<ListInvoicesRequest> = {}) =>
     enrichForPagination('invoices', this.pageOfListInvoices, request)
 
+  
   /**
    * Export invoices. Export invoices in a CSV file.
    *
@@ -154,23 +134,26 @@ export class API extends ParentAPI {
    * @returns A Promise of Blob
    */
   exportInvoices = (request: Readonly<ExportInvoicesRequest> = {}) =>
-    this.client.fetch<Blob>({
-      method: 'GET',
-      path: `/billing/v2beta1/export-invoices`,
-      urlParams: urlParams(
-        ['dl', 1],
-        ['billing_period_start_after', request.billingPeriodStartAfter],
-        ['billing_period_start_before', request.billingPeriodStartBefore],
-        ['file_type', request.fileType],
-        ['invoice_type', request.invoiceType],
-        ['order_by', request.orderBy],
-        ['organization_id', request.organizationId],
-        ['page', request.page],
-        ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-      ),
-      responseType: 'blob',
-    })
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/billing/v2beta1/export-invoices`,
+        urlParams: urlParams(
+          ['dl', 1],
+          ['billing_period_start_after', request.billingPeriodStartAfter],
+          ['billing_period_start_before', request.billingPeriodStartBefore],
+          ['file_type', request.fileType],
+          ['invoice_type', request.invoiceType],
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+        ),
+        responseType: 'blob',
+      },
+    )
 
+  
   /**
    * Get an invoice. Get a specific invoice, specified by its ID.
    *
@@ -186,6 +169,7 @@ export class API extends ParentAPI {
       unmarshalInvoice,
     )
 
+  
   /**
    * Download an invoice. Download a specific invoice, specified by its ID.
    *
@@ -193,16 +177,20 @@ export class API extends ParentAPI {
    * @returns A Promise of Blob
    */
   downloadInvoice = (request: Readonly<DownloadInvoiceRequest>) =>
-    this.client.fetch<Blob>({
-      method: 'GET',
-      path: `/billing/v2beta1/invoices/${validatePathParam('invoiceId', request.invoiceId)}/download`,
-      urlParams: urlParams(['dl', 1], ['file_type', request.fileType]),
-      responseType: 'blob',
-    })
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/billing/v2beta1/invoices/${validatePathParam('invoiceId', request.invoiceId)}/download`,
+        urlParams: urlParams(
+          ['dl', 1],
+          ['file_type', request.fileType],
+        ),
+        responseType: 'blob',
+      },
+    )
 
-  protected pageOfListDiscounts = (
-    request: Readonly<ListDiscountsRequest> = {},
-  ) =>
+  
+  protected pageOfListDiscounts = (request: Readonly<ListDiscountsRequest> = {}) =>
     this.client.fetch<ListDiscountsResponse>(
       {
         method: 'GET',
@@ -211,15 +199,12 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListDiscountsResponse,
     )
-
+  
   /**
    * List discounts. List all discounts for your Organization and usable categories, products, offers, references, regions and zones where the discount can be applied. As a reseller:
 - If you do not specify an `organization_id` you will list the discounts applied to your own Organization and your customers
@@ -232,6 +217,7 @@ export class API extends ParentAPI {
   listDiscounts = (request: Readonly<ListDiscountsRequest> = {}) =>
     enrichForPagination('discounts', this.pageOfListDiscounts, request)
 
+  
   /**
    * Redeem coupon. Redeem a coupon given the related code.
    *
@@ -245,13 +231,12 @@ export class API extends ParentAPI {
         path: `/billing/v2beta1/redeem-coupon`,
         urlParams: urlParams(
           ['code', request.code],
-          [
-            'organization_id',
-            request.organizationId ??
-              this.client.settings.defaultOrganizationId,
-          ],
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
         ),
       },
       unmarshalDiscount,
     )
+
+  
 }
+

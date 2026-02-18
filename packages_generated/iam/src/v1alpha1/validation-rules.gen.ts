@@ -331,7 +331,7 @@ export const UpdateSamlRequest = {
     minLength: 1,
   },
   singleSignOnUrl: {
-    prefix: 'https://',
+    prefix: "https://",
   },
 }
 

@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_KAFKA } from './content.gen.js'
+import {CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_KAFKA,} from './content.gen.js'
 import {
   marshalCreateClusterRequest,
   marshalCreateEndpointRequest,
@@ -61,13 +61,14 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par'],
-  })
-
-  protected pageOfListNodeTypes = (
-    request: Readonly<ListNodeTypesRequest> = {},
-  ) =>
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+      ],
+    })
+  
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -75,15 +76,12 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['include_disabled_types', request.includeDisabledTypes],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListNodeTypesResponse,
     )
-
+  
   /**
    * List available node types.
    *
@@ -93,25 +91,21 @@ export class API extends ParentAPI {
   listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
     enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
 
-  protected pageOfListVersions = (
-    request: Readonly<ListVersionsRequest> = {},
-  ) =>
+  
+  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}) =>
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions`,
         urlParams: urlParams(
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['version', request.version],
         ),
       },
       unmarshalListVersionsResponse,
     )
-
+  
   /**
    * List Kafka versions. List all available versions of Kafka at the current time.
    *
@@ -121,9 +115,8 @@ export class API extends ParentAPI {
   listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
     enrichForPagination('versions', this.pageOfListVersions, request)
 
-  protected pageOfListClusters = (
-    request: Readonly<ListClustersRequest> = {},
-  ) =>
+  
+  protected pageOfListClusters = (request: Readonly<ListClustersRequest> = {}) =>
     this.client.fetch<ListClustersResponse>(
       {
         method: 'GET',
@@ -133,17 +126,14 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListClustersResponse,
     )
-
+  
   /**
    * List Kafka clusters. List all Kafka clusters in the specified region. By default, the clusters returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field. You can define additional parameters for your query, such as `tags` and `name`. For the `name` parameter, the value you include will be checked against the whole name string to see if it includes the string you put in the parameter.
    *
@@ -153,6 +143,7 @@ export class API extends ParentAPI {
   listClusters = (request: Readonly<ListClustersRequest> = {}) =>
     enrichForPagination('clusters', this.pageOfListClusters, request)
 
+  
   /**
    * Get a Kafka cluster. Retrieve information about a given Kafka cluster, specified by the `region` and `cluster_id` parameters. Its full details, including name, status, IP address and port, are returned in the response object.
    *
@@ -167,7 +158,7 @@ export class API extends ParentAPI {
       },
       unmarshalCluster,
     )
-
+  
   /**
    * Waits for {@link Cluster} to be in a final state.
    *
@@ -180,16 +171,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Cluster>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !CLUSTER_TRANSIENT_STATUSES_KAFKA.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!CLUSTER_TRANSIENT_STATUSES_KAFKA.includes(res.status))),
       this.getCluster,
       request,
       options,
     )
 
+  
   /**
    * Create a Kafka cluster. Create a new Kafka cluster.
    *
@@ -209,6 +197,7 @@ export class API extends ParentAPI {
       unmarshalCluster,
     )
 
+  
   /**
    * Update a Kafka cluster. Update the parameters of a Kafka cluster.
    *
@@ -228,6 +217,7 @@ export class API extends ParentAPI {
       unmarshalCluster,
     )
 
+  
   /**
    * Delete a Kafka cluster. Delete a given Kafka cluster, specified by the `region` and `cluster_id` parameters. Deleting a Kafka cluster is permanent, and cannot be undone. Note that upon deletion all your data will be lost.
    *
@@ -243,48 +233,56 @@ export class API extends ParentAPI {
       unmarshalCluster,
     )
 
+  
   /**
    * Get a Kafka cluster's certificate authority. Retrieve certificate authority for a given Kafka cluster, specified by the `region` and `cluster_id` parameters. The response object contains the certificate in PEM format. The certificate is required to validate the sever from the client side during TLS connection.
    *
    * @param request - The request {@link GetClusterCertificateAuthorityRequest}
    * @returns A Promise of Blob
    */
-  getClusterCertificateAuthority = (
-    request: Readonly<GetClusterCertificateAuthorityRequest>,
-  ) =>
-    this.client.fetch<Blob>({
-      method: 'GET',
-      path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/certificate-authority`,
-      urlParams: urlParams(['dl', 1]),
-      responseType: 'blob',
-    })
+  getClusterCertificateAuthority = (request: Readonly<GetClusterCertificateAuthorityRequest>) =>
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/certificate-authority`,
+        urlParams: urlParams(
+          ['dl', 1],
+        ),
+        responseType: 'blob',
+      },
+    )
 
+  
   /**
    * Renew the Kafka cluster's certificate authority. Request to renew the certificate authority for a given Kafka cluster, specified by the `region` and `cluster_id` parameters. The certificate authority will be renewed within a few minutes.
    *
    * @param request - The request {@link RenewClusterCertificateAuthorityRequest}
    */
-  renewClusterCertificateAuthority = (
-    request: Readonly<RenewClusterCertificateAuthorityRequest>,
-  ) =>
-    this.client.fetch<void>({
-      body: '{}',
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/renew-certificate-authority`,
-    })
+  renewClusterCertificateAuthority = (request: Readonly<RenewClusterCertificateAuthorityRequest>) =>
+    this.client.fetch<void>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/renew-certificate-authority`,
+      },
+    )
 
+  
   /**
    * Delete a Kafka cluster endpoint. Delete the endpoint of a Kafka cluster. You must specify the `endpoint_id` parameter of the endpoint you want to delete. Note that you might need to update any environment configurations that point to the deleted endpoint.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
   deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+      },
+    )
 
+  
   /**
    * Create a new Kafka cluster endpoint. Create a new endpoint for a Kafka cluster. You can add `public_network` or `private_network` specifications to the body of the request. Note that currently only `private_network` is supported.
    *
@@ -304,6 +302,7 @@ export class API extends ParentAPI {
       unmarshalEndpoint,
     )
 
+  
   protected pageOfListUsers = (request: Readonly<ListUsersRequest>) =>
     this.client.fetch<ListUsersResponse>(
       {
@@ -313,15 +312,12 @@ export class API extends ParentAPI {
           ['name', request.name],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListUsersResponse,
     )
-
+  
   /**
    * Retrieve a list of deployment users.
    *
@@ -331,6 +327,7 @@ export class API extends ParentAPI {
   listUsers = (request: Readonly<ListUsersRequest>) =>
     enrichForPagination('users', this.pageOfListUsers, request)
 
+  
   /**
    * Update an existing user.
    *
@@ -349,4 +346,7 @@ export class API extends ParentAPI {
       },
       unmarshalUser,
     )
+
+  
 }
+

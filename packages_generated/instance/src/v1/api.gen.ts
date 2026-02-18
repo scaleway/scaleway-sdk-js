@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -260,29 +260,28 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    zones: [
-      'fr-par-1',
-      'fr-par-2',
-      'fr-par-3',
-      'nl-ams-1',
-      'nl-ams-2',
-      'nl-ams-3',
-      'pl-waw-1',
-      'pl-waw-2',
-      'pl-waw-3',
-    ],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      zones: [
+        'fr-par-1',
+        'fr-par-2',
+        'fr-par-3',
+        'nl-ams-1',
+        'nl-ams-2',
+        'nl-ams-3',
+        'pl-waw-1',
+        'pl-waw-2',
+        'pl-waw-3',
+      ],
+    })
+  
   /**
    * Get availability. Get availability for all Instance types.
    *
    * @param request - The request {@link GetServerTypesAvailabilityRequest}
    * @returns A Promise of GetServerTypesAvailabilityResponse
    */
-  getServerTypesAvailability = (
-    request: Readonly<GetServerTypesAvailabilityRequest> = {},
-  ) =>
+  getServerTypesAvailability = (request: Readonly<GetServerTypesAvailabilityRequest> = {}) =>
     this.client.fetch<GetServerTypesAvailabilityResponse>(
       {
         method: 'GET',
@@ -295,6 +294,7 @@ export class API extends ParentAPI {
       unmarshalGetServerTypesAvailabilityResponse,
     )
 
+  
   /**
    * List Instance types. List available Instance types and their technical details.
    *
@@ -314,6 +314,7 @@ export class API extends ParentAPI {
       unmarshalListServersTypesResponse,
     )
 
+  
   /**
    * List volume types. List all volume types and their technical details.
    *
@@ -333,6 +334,7 @@ export class API extends ParentAPI {
       unmarshalListVolumesTypesResponse,
     )
 
+  
   protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
     this.client.fetch<ListServersResponse>(
       {
@@ -347,34 +349,22 @@ export class API extends ParentAPI {
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
           ['private_ip', request.privateIp],
           ['private_network', request.privateNetwork],
-          [
-            'private_networks',
-            request.privateNetworks && request.privateNetworks.length > 0
-              ? request.privateNetworks.join(',')
-              : undefined,
-          ],
+          ['private_networks', request.privateNetworks
+          && request.privateNetworks.length > 0 ? request.privateNetworks.join(',') : undefined],
           ['private_nic_mac_address', request.privateNicMacAddress],
           ['project', request.project],
-          [
-            'servers',
-            request.servers && request.servers.length > 0
-              ? request.servers.join(',')
-              : undefined,
-          ],
+          ['servers', request.servers
+          && request.servers.length > 0 ? request.servers.join(',') : undefined],
           ['state', request.state],
-          [
-            'tags',
-            request.tags && request.tags.length > 0
-              ? request.tags.join(',')
-              : undefined,
-          ],
+          ['tags', request.tags
+          && request.tags.length > 0 ? request.tags.join(',') : undefined],
           ['with_ip', request.withIp],
           ['without_ip', request.withoutIp],
         ),
       },
       unmarshalListServersResponse,
     )
-
+  
   /**
    * List all Instances. List all Instances in a specified Availability Zone, e.g. `fr-par-1`.
    *
@@ -384,6 +374,7 @@ export class API extends ParentAPI {
   listServers = (request: Readonly<ListServersRequest> = {}) =>
     enrichForPagination('servers', this.pageOfListServers, request)
 
+  
   protected _createServer = (request: Readonly<CreateServerRequest>) =>
     this.client.fetch<CreateServerResponse>(
       {
@@ -397,17 +388,21 @@ export class API extends ParentAPI {
       unmarshalCreateServerResponse,
     )
 
+  
   /**
    * Delete an Instance. Delete the Instance with the specified ID.
    *
    * @param request - The request {@link DeleteServerRequest}
    */
   deleteServer = (request: Readonly<DeleteServerRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+      },
+    )
 
+  
   /**
    * Get an Instance. Get the details of a specified Instance.
    *
@@ -423,6 +418,7 @@ export class API extends ParentAPI {
       unmarshalGetServerResponse,
     )
 
+  
   protected _setServer = (request: Readonly<SetServerRequest>) =>
     this.client.fetch<SetServerResponse>(
       {
@@ -436,6 +432,7 @@ export class API extends ParentAPI {
       unmarshalSetServerResponse,
     )
 
+  
   protected _updateServer = (request: Readonly<UpdateServerRequest>) =>
     this.client.fetch<UpdateServerResponse>(
       {
@@ -449,6 +446,7 @@ export class API extends ParentAPI {
       unmarshalUpdateServerResponse,
     )
 
+  
   /**
    * List Instance actions. List all actions (e.g. power on, power off, reboot) that can currently be performed on an Instance.
    *
@@ -464,6 +462,7 @@ export class API extends ParentAPI {
       unmarshalListServerActionsResponse,
     )
 
+  
   /**
    * Perform action. Perform an action on an Instance.
 Available actions are:
@@ -498,6 +497,7 @@ The `backup` action can be done with:
       unmarshalServerActionResponse,
     )
 
+  
   /**
    * List user data. List all user data keys registered on a specified Instance.
    *
@@ -513,17 +513,21 @@ The `backup` action can be done with:
       unmarshalListServerUserDataResponse,
     )
 
+  
   /**
    * Delete user data. Delete the specified key from an Instance's user data.
    *
    * @param request - The request {@link DeleteServerUserDataRequest}
    */
   deleteServerUserData = (request: Readonly<DeleteServerUserDataRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user_data/${validatePathParam('key', request.key)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user_data/${validatePathParam('key', request.key)}`,
+      },
+    )
 
+  
   /**
    * Get Instance compatible types. Get compatible commercial types that can be used to update the Instance. The compatibility of an Instance offer is based on:
 * the CPU architecture
@@ -535,9 +539,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetServerCompatibleTypesRequest}
    * @returns A Promise of ServerCompatibleTypes
    */
-  getServerCompatibleTypes = (
-    request: Readonly<GetServerCompatibleTypesRequest>,
-  ) =>
+  getServerCompatibleTypes = (request: Readonly<GetServerCompatibleTypesRequest>) =>
     this.client.fetch<ServerCompatibleTypes>(
       {
         method: 'GET',
@@ -546,6 +548,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalServerCompatibleTypes,
     )
 
+  
   /**
    * Attach a volume to an Instance.
    *
@@ -565,6 +568,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalAttachServerVolumeResponse,
     )
 
+  
   /**
    * Detach a volume from an Instance.
    *
@@ -584,6 +588,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalDetachServerVolumeResponse,
     )
 
+  
   /**
    * Attach a filesystem volume to an Instance.
    *
@@ -603,6 +608,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalAttachServerFileSystemResponse,
     )
 
+  
   /**
    * Detach a filesystem volume from an Instance.
    *
@@ -622,6 +628,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalDetachServerFileSystemResponse,
     )
 
+  
   protected pageOfListImages = (request: Readonly<ListImagesRequest> = {}) =>
     this.client.fetch<ListImagesResponse>(
       {
@@ -640,7 +647,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       },
       unmarshalListImagesResponse,
     )
-
+  
   /**
    * List Instance images. List all existing Instance images.
    *
@@ -650,6 +657,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
   listImages = (request: Readonly<ListImagesRequest> = {}) =>
     enrichForPagination('images', this.pageOfListImages, request)
 
+  
   /**
    * Get an Instance image. Get details of an image with the specified ID.
    *
@@ -665,6 +673,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetImageResponse,
     )
 
+  
   /**
    * Create an Instance image. Create an Instance image from the specified snapshot ID.
    *
@@ -684,6 +693,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalCreateImageResponse,
     )
 
+  
   protected _setImage = (request: Readonly<SetImageRequest>) =>
     this.client.fetch<SetImageResponse>(
       {
@@ -697,6 +707,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalSetImageResponse,
     )
 
+  
   /**
    * Update image. Update the properties of an image.
    *
@@ -716,20 +727,22 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalUpdateImageResponse,
     )
 
+  
   /**
    * Delete an Instance image. Delete the image with the specified ID.
    *
    * @param request - The request {@link DeleteImageRequest}
    */
   deleteImage = (request: Readonly<DeleteImageRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
+      },
+    )
 
-  protected pageOfListSnapshots = (
-    request: Readonly<ListSnapshotsRequest> = {},
-  ) =>
+  
+  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
@@ -746,7 +759,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       },
       unmarshalListSnapshotsResponse,
     )
-
+  
   /**
    * List snapshots. List all snapshots of an Organization in a specified Availability Zone.
    *
@@ -756,6 +769,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
   listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
     enrichForPagination('snapshots', this.pageOfListSnapshots, request)
 
+  
   /**
    * Create a snapshot from a specified volume or from a QCOW2 file. Create a snapshot from a specified volume or from a QCOW2 file in a specified Availability Zone.
    *
@@ -775,6 +789,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalCreateSnapshotResponse,
     )
 
+  
   /**
    * Get a snapshot. Get details of a snapshot with the specified ID.
    *
@@ -790,6 +805,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetSnapshotResponse,
     )
 
+  
   protected _setSnapshot = (request: Readonly<SetSnapshotRequest>) =>
     this.client.fetch<SetSnapshotResponse>(
       {
@@ -803,6 +819,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalSetSnapshotResponse,
     )
 
+  
   /**
    * Update a snapshot. Update the properties of a snapshot.
    *
@@ -822,17 +839,21 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalUpdateSnapshotResponse,
     )
 
+  
   /**
    * Delete a snapshot. Delete the snapshot with the specified ID.
    *
    * @param request - The request {@link DeleteSnapshotRequest}
    */
   deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+      },
+    )
 
+  
   /**
    * Export a snapshot. Export a snapshot to a specified Object Storage bucket in the same region.
    *
@@ -852,6 +873,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalExportSnapshotResponse,
     )
 
+  
   protected pageOfListVolumes = (request: Readonly<ListVolumesRequest> = {}) =>
     this.client.fetch<ListVolumesResponse>(
       {
@@ -863,18 +885,14 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
           ['project', request.project],
-          [
-            'tags',
-            request.tags && request.tags.length > 0
-              ? request.tags.join(',')
-              : undefined,
-          ],
+          ['tags', request.tags
+          && request.tags.length > 0 ? request.tags.join(',') : undefined],
           ['volume_type', request.volumeType],
         ),
       },
       unmarshalListVolumesResponse,
     )
-
+  
   /**
    * List volumes. List volumes in the specified Availability Zone. You can filter the output by volume type.
    *
@@ -884,6 +902,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
   listVolumes = (request: Readonly<ListVolumesRequest> = {}) =>
     enrichForPagination('volumes', this.pageOfListVolumes, request)
 
+  
   /**
    * Create a volume. Create a volume of a specified type in an Availability Zone.
    *
@@ -903,6 +922,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalCreateVolumeResponse,
     )
 
+  
   /**
    * Get a volume. Get details of a volume with the specified ID.
    *
@@ -918,6 +938,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetVolumeResponse,
     )
 
+  
   /**
    * Update a volume. Replace the name and/or size properties of a volume specified by its ID, with the specified value(s).
    *
@@ -937,20 +958,22 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalUpdateVolumeResponse,
     )
 
+  
   /**
    * Delete a volume. Delete the volume with the specified ID.
    *
    * @param request - The request {@link DeleteVolumeRequest}
    */
   deleteVolume = (request: Readonly<DeleteVolumeRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+      },
+    )
 
-  protected pageOfListSecurityGroups = (
-    request: Readonly<ListSecurityGroupsRequest> = {},
-  ) =>
+  
+  protected pageOfListSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}) =>
     this.client.fetch<ListSecurityGroupsResponse>(
       {
         method: 'GET',
@@ -962,17 +985,13 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
           ['project', request.project],
           ['project_default', request.projectDefault],
-          [
-            'tags',
-            request.tags && request.tags.length > 0
-              ? request.tags.join(',')
-              : undefined,
-          ],
+          ['tags', request.tags
+          && request.tags.length > 0 ? request.tags.join(',') : undefined],
         ),
       },
       unmarshalListSecurityGroupsResponse,
     )
-
+  
   /**
    * List security groups. List all existing security groups.
    *
@@ -980,12 +999,9 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @returns A Promise of ListSecurityGroupsResponse
    */
   listSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}) =>
-    enrichForPagination(
-      'securityGroups',
-      this.pageOfListSecurityGroups,
-      request,
-    )
+    enrichForPagination('securityGroups', this.pageOfListSecurityGroups, request)
 
+  
   /**
    * Create a security group. Create a security group with a specified name and description.
    *
@@ -1005,6 +1021,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalCreateSecurityGroupResponse,
     )
 
+  
   /**
    * Get a security group. Get the details of a security group with the specified ID.
    *
@@ -1020,17 +1037,21 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetSecurityGroupResponse,
     )
 
+  
   /**
    * Delete a security group. Delete a security group with the specified ID.
    *
    * @param request - The request {@link DeleteSecurityGroupRequest}
    */
   deleteSecurityGroup = (request: Readonly<DeleteSecurityGroupRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
+      },
+    )
 
+  
   protected _setSecurityGroup = (request: Readonly<SetSecurityGroupRequest>) =>
     this.client.fetch<SetSecurityGroupResponse>(
       {
@@ -1044,6 +1065,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalSetSecurityGroupResponse,
     )
 
+  
   /**
    * Update a security group. Update the properties of security group.
    *
@@ -1063,15 +1085,14 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalUpdateSecurityGroupResponse,
     )
 
+  
   /**
    * Get default rules. Lists the default rules applied to all the security groups.
    *
    * @param request - The request {@link ListDefaultSecurityGroupRulesRequest}
    * @returns A Promise of ListSecurityGroupRulesResponse
    */
-  listDefaultSecurityGroupRules = (
-    request: Readonly<ListDefaultSecurityGroupRulesRequest> = {},
-  ) =>
+  listDefaultSecurityGroupRules = (request: Readonly<ListDefaultSecurityGroupRulesRequest> = {}) =>
     this.client.fetch<ListSecurityGroupRulesResponse>(
       {
         method: 'GET',
@@ -1080,9 +1101,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalListSecurityGroupRulesResponse,
     )
 
-  protected pageOfListSecurityGroupRules = (
-    request: Readonly<ListSecurityGroupRulesRequest>,
-  ) =>
+  
+  protected pageOfListSecurityGroupRules = (request: Readonly<ListSecurityGroupRulesRequest>) =>
     this.client.fetch<ListSecurityGroupRulesResponse>(
       {
         method: 'GET',
@@ -1094,7 +1114,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       },
       unmarshalListSecurityGroupRulesResponse,
     )
-
+  
   /**
    * List rules. List the rules of the a specified security group ID.
    *
@@ -1104,15 +1124,14 @@ If the specified Instance offer is flagged as end of service, the best compatibl
   listSecurityGroupRules = (request: Readonly<ListSecurityGroupRulesRequest>) =>
     enrichForPagination('rules', this.pageOfListSecurityGroupRules, request)
 
+  
   /**
    * Create rule. Create a rule in the specified security group ID.
    *
    * @param request - The request {@link CreateSecurityGroupRuleRequest}
    * @returns A Promise of CreateSecurityGroupRuleResponse
    */
-  createSecurityGroupRule = (
-    request: Readonly<CreateSecurityGroupRuleRequest>,
-  ) =>
+  createSecurityGroupRule = (request: Readonly<CreateSecurityGroupRuleRequest>) =>
     this.client.fetch<CreateSecurityGroupRuleResponse>(
       {
         body: JSON.stringify(
@@ -1125,6 +1144,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalCreateSecurityGroupRuleResponse,
     )
 
+  
   /**
    * Update all the rules of a security group. Replaces the existing rules of the security group with the rules provided. This endpoint supports the update of existing rules, creation of new rules and deletion of existing rules when they are not passed in the request.
    *
@@ -1144,19 +1164,21 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalSetSecurityGroupRulesResponse,
     )
 
+  
   /**
    * Delete rule. Delete a security group rule with the specified ID.
    *
    * @param request - The request {@link DeleteSecurityGroupRuleRequest}
    */
-  deleteSecurityGroupRule = (
-    request: Readonly<DeleteSecurityGroupRuleRequest>,
-  ) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
-    })
+  deleteSecurityGroupRule = (request: Readonly<DeleteSecurityGroupRuleRequest>) =>
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
+      },
+    )
 
+  
   /**
    * Get rule. Get details of a security group rule with the specified ID.
    *
@@ -1172,9 +1194,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetSecurityGroupRuleResponse,
     )
 
-  protected _setSecurityGroupRule = (
-    request: Readonly<SetSecurityGroupRuleRequest>,
-  ) =>
+  
+  protected _setSecurityGroupRule = (request: Readonly<SetSecurityGroupRuleRequest>) =>
     this.client.fetch<SetSecurityGroupRuleResponse>(
       {
         body: JSON.stringify(
@@ -1187,15 +1208,14 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalSetSecurityGroupRuleResponse,
     )
 
+  
   /**
    * Update security group rule. Update the properties of a rule from a specified security group.
    *
    * @param request - The request {@link UpdateSecurityGroupRuleRequest}
    * @returns A Promise of UpdateSecurityGroupRuleResponse
    */
-  updateSecurityGroupRule = (
-    request: Readonly<UpdateSecurityGroupRuleRequest>,
-  ) =>
+  updateSecurityGroupRule = (request: Readonly<UpdateSecurityGroupRuleRequest>) =>
     this.client.fetch<UpdateSecurityGroupRuleResponse>(
       {
         body: JSON.stringify(
@@ -1208,9 +1228,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalUpdateSecurityGroupRuleResponse,
     )
 
-  protected pageOfListPlacementGroups = (
-    request: Readonly<ListPlacementGroupsRequest> = {},
-  ) =>
+  
+  protected pageOfListPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}) =>
     this.client.fetch<ListPlacementGroupsResponse>(
       {
         method: 'GET',
@@ -1221,17 +1240,13 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
           ['project', request.project],
-          [
-            'tags',
-            request.tags && request.tags.length > 0
-              ? request.tags.join(',')
-              : undefined,
-          ],
+          ['tags', request.tags
+          && request.tags.length > 0 ? request.tags.join(',') : undefined],
         ),
       },
       unmarshalListPlacementGroupsResponse,
     )
-
+  
   /**
    * List placement groups. List all placement groups in a specified Availability Zone.
    *
@@ -1239,21 +1254,16 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @returns A Promise of ListPlacementGroupsResponse
    */
   listPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}) =>
-    enrichForPagination(
-      'placementGroups',
-      this.pageOfListPlacementGroups,
-      request,
-    )
+    enrichForPagination('placementGroups', this.pageOfListPlacementGroups, request)
 
+  
   /**
    * Create a placement group. Create a new placement group in a specified Availability Zone.
    *
    * @param request - The request {@link CreatePlacementGroupRequest}
    * @returns A Promise of CreatePlacementGroupResponse
    */
-  createPlacementGroup = (
-    request: Readonly<CreatePlacementGroupRequest> = {},
-  ) =>
+  createPlacementGroup = (request: Readonly<CreatePlacementGroupRequest> = {}) =>
     this.client.fetch<CreatePlacementGroupResponse>(
       {
         body: JSON.stringify(
@@ -1266,6 +1276,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalCreatePlacementGroupResponse,
     )
 
+  
   /**
    * Get a placement group. Get the specified placement group.
    *
@@ -1281,6 +1292,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetPlacementGroupResponse,
     )
 
+  
   /**
    * Set placement group. Set all parameters of the specified placement group.
    *
@@ -1300,6 +1312,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalSetPlacementGroupResponse,
     )
 
+  
   /**
    * Update a placement group. Update one or more parameter of the specified placement group.
    *
@@ -1319,26 +1332,28 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalUpdatePlacementGroupResponse,
     )
 
+  
   /**
    * Delete the specified placement group.
    *
    * @param request - The request {@link DeletePlacementGroupRequest}
    */
   deletePlacementGroup = (request: Readonly<DeletePlacementGroupRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
+      },
+    )
 
+  
   /**
    * Get placement group servers. Get all Instances belonging to the specified placement group.
    *
    * @param request - The request {@link GetPlacementGroupServersRequest}
    * @returns A Promise of GetPlacementGroupServersResponse
    */
-  getPlacementGroupServers = (
-    request: Readonly<GetPlacementGroupServersRequest>,
-  ) =>
+  getPlacementGroupServers = (request: Readonly<GetPlacementGroupServersRequest>) =>
     this.client.fetch<GetPlacementGroupServersResponse>(
       {
         method: 'GET',
@@ -1347,15 +1362,14 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetPlacementGroupServersResponse,
     )
 
+  
   /**
    * Set placement group servers. Set all Instances belonging to the specified placement group.
    *
    * @param request - The request {@link SetPlacementGroupServersRequest}
    * @returns A Promise of SetPlacementGroupServersResponse
    */
-  setPlacementGroupServers = (
-    request: Readonly<SetPlacementGroupServersRequest>,
-  ) =>
+  setPlacementGroupServers = (request: Readonly<SetPlacementGroupServersRequest>) =>
     this.client.fetch<SetPlacementGroupServersResponse>(
       {
         body: JSON.stringify(
@@ -1368,22 +1382,18 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalSetPlacementGroupServersResponse,
     )
 
+  
   /**
    * Update placement group servers. Update all Instances belonging to the specified placement group.
    *
    * @param request - The request {@link UpdatePlacementGroupServersRequest}
    * @returns A Promise of UpdatePlacementGroupServersResponse
    */
-  updatePlacementGroupServers = (
-    request: Readonly<UpdatePlacementGroupServersRequest>,
-  ) =>
+  updatePlacementGroupServers = (request: Readonly<UpdatePlacementGroupServersRequest>) =>
     this.client.fetch<UpdatePlacementGroupServersResponse>(
       {
         body: JSON.stringify(
-          marshalUpdatePlacementGroupServersRequest(
-            request,
-            this.client.settings,
-          ),
+          marshalUpdatePlacementGroupServersRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
@@ -1392,6 +1402,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalUpdatePlacementGroupServersResponse,
     )
 
+  
   protected pageOfListIps = (request: Readonly<ListIpsRequest> = {}) =>
     this.client.fetch<ListIpsResponse>(
       {
@@ -1403,18 +1414,14 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
           ['project', request.project],
-          [
-            'tags',
-            request.tags && request.tags.length > 0
-              ? request.tags.join(',')
-              : undefined,
-          ],
+          ['tags', request.tags
+          && request.tags.length > 0 ? request.tags.join(',') : undefined],
           ['type', request.type],
         ),
       },
       unmarshalListIpsResponse,
     )
-
+  
   /**
    * List all flexible IPs. List all flexible IPs in a specified zone.
    *
@@ -1424,6 +1431,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
   listIps = (request: Readonly<ListIpsRequest> = {}) =>
     enrichForPagination('ips', this.pageOfListIps, request)
 
+  
   /**
    * Reserve a flexible IP. Reserve a flexible IP and attach it to the specified Instance.
    *
@@ -1443,6 +1451,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalCreateIpResponse,
     )
 
+  
   /**
    * Get a flexible IP. Get details of an IP with the specified ID or address.
    *
@@ -1458,6 +1467,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetIpResponse,
     )
 
+  
   /**
    * Update a flexible IP. Update a flexible IP in the specified zone with the specified ID.
    *
@@ -1477,20 +1487,22 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalUpdateIpResponse,
     )
 
+  
   /**
    * Delete a flexible IP. Delete the IP with the specified ID.
    *
    * @param request - The request {@link DeleteIpRequest}
    */
   deleteIp = (request: Readonly<DeleteIpRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
+      },
+    )
 
-  protected pageOfListPrivateNICs = (
-    request: Readonly<ListPrivateNICsRequest>,
-  ) =>
+  
+  protected pageOfListPrivateNICs = (request: Readonly<ListPrivateNICsRequest>) =>
     this.client.fetch<ListPrivateNICsResponse>(
       {
         method: 'GET',
@@ -1498,17 +1510,13 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         urlParams: urlParams(
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          [
-            'tags',
-            request.tags && request.tags.length > 0
-              ? request.tags.join(',')
-              : undefined,
-          ],
+          ['tags', request.tags
+          && request.tags.length > 0 ? request.tags.join(',') : undefined],
         ),
       },
       unmarshalListPrivateNICsResponse,
     )
-
+  
   /**
    * List all private NICs. List all private NICs of a specified Instance.
    *
@@ -1518,6 +1526,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
   listPrivateNICs = (request: Readonly<ListPrivateNICsRequest>) =>
     enrichForPagination('privateNics', this.pageOfListPrivateNICs, request)
 
+  
   /**
    * Create a private NIC connecting an Instance to a Private Network.
    *
@@ -1537,6 +1546,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalCreatePrivateNICResponse,
     )
 
+  
   /**
    * Get a private NIC. Get private NIC properties.
    *
@@ -1552,6 +1562,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetPrivateNICResponse,
     )
 
+  
   /**
    * Update a private NIC. Update one or more parameter(s) of a specified private NIC.
    *
@@ -1571,17 +1582,21 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalPrivateNIC,
     )
 
+  
   /**
    * Delete a private NIC.
    *
    * @param request - The request {@link DeletePrivateNICRequest}
    */
   deletePrivateNIC = (request: Readonly<DeletePrivateNICRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
+      },
+    )
 
+  
   getDashboard = (request: Readonly<GetDashboardRequest> = {}) =>
     this.client.fetch<GetDashboardResponse>(
       {
@@ -1595,6 +1610,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
       unmarshalGetDashboardResponse,
     )
 
+  
   /**
    * Get a volume or snapshot's migration plan. Given a volume or snapshot, returns the migration plan but does not perform the actual migration. To perform the migration, you have to call the [Migrate a volume and/or snapshots to SBS](#path-volumes-migrate-a-volume-andor-snapshots-to-sbs-scaleway-block-storage) endpoint afterward.
 The endpoint returns the resources that should be migrated together:
@@ -1618,46 +1634,53 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
       unmarshalMigrationPlan,
     )
 
+  
   /**
    * Migrate a volume and/or snapshots to SBS (Scaleway Block Storage). To be used, the call to this endpoint must be preceded by a call to the [Get a volume or snapshot's migration plan](#path-volumes-get-a-volume-or-snapshots-migration-plan) endpoint. To migrate all resources mentioned in the migration plan, the validation_key returned in the plan must be provided.
    *
    * @param request - The request {@link ApplyBlockMigrationRequest}
    */
   applyBlockMigration = (request: Readonly<ApplyBlockMigrationRequest>) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalApplyBlockMigrationRequest(request, this.client.settings),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/apply`,
-    })
-
-  checkBlockMigrationOrganizationQuotas = (
-    request: Readonly<CheckBlockMigrationOrganizationQuotasRequest> = {},
-  ) =>
-    this.client.fetch<void>({
-      body: JSON.stringify(
-        marshalCheckBlockMigrationOrganizationQuotasRequest(
-          request,
-          this.client.settings,
+    this.client.fetch<void>(
+      {
+        body: JSON.stringify(
+          marshalApplyBlockMigrationRequest(request, this.client.settings),
         ),
-      ),
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/check-organization-quotas`,
-    })
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/apply`,
+      },
+    )
 
+  
+  checkBlockMigrationOrganizationQuotas = (request: Readonly<CheckBlockMigrationOrganizationQuotasRequest> = {}) =>
+    this.client.fetch<void>(
+      {
+        body: JSON.stringify(
+          marshalCheckBlockMigrationOrganizationQuotasRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/check-organization-quotas`,
+      },
+    )
+
+  
   /**
    * Releases the reserved IP without deleting the reservation.. **The IP remains available in IPAM**, which means that it is still reserved by the Organization, and can be reattached to another resource (Instance or other product).
    *
    * @param request - The request {@link ReleaseIpToIpamRequest}
    */
   releaseIpToIpam = (request: Readonly<ReleaseIpToIpamRequest>) =>
-    this.client.fetch<void>({
-      body: '{}',
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}/release-to-ipam`,
-    })
+    this.client.fetch<void>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}/release-to-ipam`,
+      },
+    )
+
+  
 }
+
