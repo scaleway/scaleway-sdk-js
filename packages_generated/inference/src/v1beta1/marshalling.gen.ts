@@ -1,13 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   ACLRule,
   ACLRuleRequest,
@@ -36,9 +31,7 @@ import type {
   UpdateEndpointRequest,
 } from './types.gen.js'
 
-const unmarshalEndpointPrivateNetworkDetails = (
-  data: unknown,
-): EndpointPrivateNetworkDetails => {
+const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateNetworkDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`,
@@ -50,16 +43,15 @@ const unmarshalEndpointPrivateNetworkDetails = (
   } as EndpointPrivateNetworkDetails
 }
 
-const unmarshalEndpointPublicAccessDetails = (
-  data: unknown,
-): EndpointPublicAccessDetails => {
+const unmarshalEndpointPublicAccessDetails = (data: unknown): EndpointPublicAccessDetails => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'EndpointPublicAccessDetails' failed as data isn't a dictionary.`,
     )
   }
 
-  return {} as EndpointPublicAccessDetails
+  return {
+  } as EndpointPublicAccessDetails
 }
 
 export const unmarshalEndpoint = (data: unknown): Endpoint => {
@@ -72,12 +64,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   return {
     disableAuth: data.disable_auth,
     id: data.id,
-    privateNetwork: data.private_network
-      ? unmarshalEndpointPrivateNetworkDetails(data.private_network)
-      : undefined,
-    publicAccess: data.public_access
-      ? unmarshalEndpointPublicAccessDetails(data.public_access)
-      : undefined,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
+    publicAccess: data.public_access ? unmarshalEndpointPublicAccessDetails(data.public_access) : undefined,
     url: data.url,
   } as Endpoint
 }
@@ -163,9 +151,7 @@ const unmarshalACLRule = (data: unknown): ACLRule => {
   } as ACLRule
 }
 
-export const unmarshalAddDeploymentACLRulesResponse = (
-  data: unknown,
-): AddDeploymentACLRulesResponse => {
+export const unmarshalAddDeploymentACLRulesResponse = (data: unknown): AddDeploymentACLRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AddDeploymentACLRulesResponse' failed as data isn't a dictionary.`,
@@ -189,9 +175,7 @@ export const unmarshalEula = (data: unknown): Eula => {
   } as Eula
 }
 
-export const unmarshalListDeploymentACLRulesResponse = (
-  data: unknown,
-): ListDeploymentACLRulesResponse => {
+export const unmarshalListDeploymentACLRulesResponse = (data: unknown): ListDeploymentACLRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDeploymentACLRulesResponse' failed as data isn't a dictionary.`,
@@ -204,9 +188,7 @@ export const unmarshalListDeploymentACLRulesResponse = (
   } as ListDeploymentACLRulesResponse
 }
 
-export const unmarshalListDeploymentsResponse = (
-  data: unknown,
-): ListDeploymentsResponse => {
+export const unmarshalListDeploymentsResponse = (data: unknown): ListDeploymentsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDeploymentsResponse' failed as data isn't a dictionary.`,
@@ -219,9 +201,7 @@ export const unmarshalListDeploymentsResponse = (
   } as ListDeploymentsResponse
 }
 
-export const unmarshalListModelsResponse = (
-  data: unknown,
-): ListModelsResponse => {
+export const unmarshalListModelsResponse = (data: unknown): ListModelsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListModelsResponse' failed as data isn't a dictionary.`,
@@ -257,9 +237,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
   } as NodeType
 }
 
-export const unmarshalListNodeTypesResponse = (
-  data: unknown,
-): ListNodeTypesResponse => {
+export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`,
@@ -272,9 +250,7 @@ export const unmarshalListNodeTypesResponse = (
   } as ListNodeTypesResponse
 }
 
-export const unmarshalSetDeploymentACLRulesResponse = (
-  data: unknown,
-): SetDeploymentACLRulesResponse => {
+export const unmarshalSetDeploymentACLRulesResponse = (data: unknown): SetDeploymentACLRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SetDeploymentACLRulesResponse' failed as data isn't a dictionary.`,
@@ -298,10 +274,7 @@ export const marshalAddDeploymentACLRulesRequest = (
   request: AddDeploymentACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acls:
-    request.acls !== undefined
-      ? request.acls.map(elt => marshalACLRuleRequest(elt, defaults))
-      : undefined,
+  acls: ((request.acls !== undefined) ?  request.acls.map(elt => marshalACLRuleRequest(elt, defaults)): undefined),
 })
 
 const marshalEndpointSpecPrivateNetwork = (
@@ -314,27 +287,22 @@ const marshalEndpointSpecPrivateNetwork = (
 const marshalEndpointSpecPublic = (
   request: EndpointSpecPublic,
   defaults: DefaultValues,
-): Record<string, unknown> => ({})
+): Record<string, unknown> => ({
+})
 
 const marshalEndpointSpec = (
   request: EndpointSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  disable_auth: request.disableAuth,
+  disable_auth: request.disableAuth,  
   ...resolveOneOf([
-    {
-      param: 'public',
-      value:
-        request.public !== undefined
-          ? marshalEndpointSpecPublic(request.public, defaults)
-          : undefined,
+    {param: 'public',
+      value: (request.public !== undefined) ? marshalEndpointSpecPublic(request.public, defaults)
+      : undefined,
     },
-    {
-      param: 'private_network',
-      value:
-        request.privateNetwork !== undefined
-          ? marshalEndpointSpecPrivateNetwork(request.privateNetwork, defaults)
-          : undefined,
+    {param: 'private_network',
+      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetwork(request.privateNetwork, defaults)
+      : undefined,
     },
   ]),
 })
@@ -344,7 +312,7 @@ export const marshalCreateDeploymentRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   accept_eula: request.acceptEula,
-  endpoints: request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
+  endpoints:  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)),
   max_size: request.maxSize,
   min_size: request.minSize,
   model_name: request.modelName,
@@ -359,17 +327,14 @@ export const marshalCreateEndpointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   deployment_id: request.deploymentId,
-  endpoint: marshalEndpointSpec(request.endpoint, defaults),
+  endpoint:  marshalEndpointSpec(request.endpoint, defaults),
 })
 
 export const marshalSetDeploymentACLRulesRequest = (
   request: SetDeploymentACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acls:
-    request.acls !== undefined
-      ? request.acls.map(elt => marshalACLRuleRequest(elt, defaults))
-      : undefined,
+  acls: ((request.acls !== undefined) ?  request.acls.map(elt => marshalACLRuleRequest(elt, defaults)): undefined),
 })
 
 export const marshalUpdateDeploymentRequest = (

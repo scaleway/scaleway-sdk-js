@@ -143,6 +143,16 @@
           }
         }
       }
+    },
+    {
+      "includes": ["packages_generated/std/**/*.gen.ts"],
+      "assist": {
+        "actions": {
+          "source": {
+            "organizeImports": "off"
+          }
+        }
+      }
     }
   ],
   "assist": {
