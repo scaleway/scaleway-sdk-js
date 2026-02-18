@@ -4,7 +4,7 @@ interface PaginationOptions {
 }
 
 interface PaginatedResponse {
-  totalCount: number
+  totalCount?: number
 }
 
 export type PaginatedFetcher<
@@ -46,6 +46,14 @@ function* pages<
   const { length } = firstPage[key]
   if (!length) return
   const { totalCount } = firstPage
+  
+  if (totalCount === undefined) {
+    throw new Error(
+      `totalCount is required for pagination but was undefined. ` +
+      `The API response must include a totalCount field to enable pagination.`
+    )
+  }
+  
   while (page <= Math.floor((totalCount + length - 1) / length)) {
     yield fetcher({ ...request, page }).then(getList)
     page += 1

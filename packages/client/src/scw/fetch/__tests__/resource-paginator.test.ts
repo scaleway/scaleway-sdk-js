@@ -153,4 +153,24 @@ describe('enrichForPagination', () => {
       readIndex += 1
     }
   })
+
+  it('throws error when totalCount is undefined', async () => {
+    const fetcherWithoutTotalCount = () =>
+      Promise.resolve({
+        items: [{ name: 'Alice' }, { name: 'Bob' }],
+        // totalCount is missing
+      } as PaginatedContent<'items'>)
+
+    await expect(
+      enrichForPagination('items', fetcherWithoutTotalCount, {}).all(),
+    ).rejects.toThrow(
+      'totalCount is required for pagination but was undefined. The API response must include a totalCount field to enable pagination.',
+    )
+
+    await expect(
+      fetchPaginated('items', fetcherWithoutTotalCount, {}).next(),
+    ).rejects.toThrow(
+      'totalCount is required for pagination but was undefined. The API response must include a totalCount field to enable pagination.',
+    )
+  })
 })
