@@ -38,20 +38,21 @@ function* pages<
     throw new Error(`Property ${key} is not a list in paginated result`)
   }
   const getList = extract(key)
-  let page = request.page || 1
-  if (page === 1) {
-    yield Promise.resolve(getList(firstPage))
-    page += 1
-  }
   const { length } = firstPage[key]
   if (!length) return
-  const { totalCount } = firstPage
   
+  const { totalCount } = firstPage
   if (totalCount === undefined) {
     throw new Error(
       `totalCount is required for pagination but was undefined. ` +
       `The API response must include a totalCount field to enable pagination.`
     )
+  }
+  
+  let page = request.page || 1
+  if (page === 1) {
+    yield Promise.resolve(getList(firstPage))
+    page += 1
   }
   
   while (page <= Math.floor((totalCount + length - 1) / length)) {
