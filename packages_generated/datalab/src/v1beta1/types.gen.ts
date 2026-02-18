@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type DatalabStatus =
   | 'unknown_status'
@@ -12,7 +13,9 @@ export type DatalabStatus =
   | 'locked'
   | 'deleted'
 
-export type ListClusterVersionsRequestOrderBy = 'name_asc' | 'name_desc'
+export type ListClusterVersionsRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
 
 export type ListDatalabsRequestOrderBy =
   | 'name_asc'
@@ -34,9 +37,14 @@ export type ListNodeTypesRequestOrderBy =
   | 'gpus_asc'
   | 'gpus_desc'
 
-export type ListNodeTypesRequestResourceType = 'all' | 'gpu' | 'cpu'
+export type ListNodeTypesRequestResourceType =
+  | 'all'
+  | 'gpu'
+  | 'cpu'
 
-export type ListNotebookVersionsRequestOrderBy = 'name_asc' | 'name_desc'
+export type ListNotebookVersionsRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
 
 export type NodeTypeStock =
   | 'unknown_stock'
@@ -44,14 +52,20 @@ export type NodeTypeStock =
   | 'out_of_stock'
   | 'available'
 
-export type NodeTypeTarget = 'unknown_target' | 'notebook' | 'worker'
+export type NodeTypeTarget =
+  | 'unknown_target'
+  | 'notebook'
+  | 'worker'
 
-export type VolumeType = 'unknown_type' | 'sbs_5k'
+export type VolumeType =
+  | 'unknown_type'
+  | 'sbs_5k'
 
 export interface Volume {
   type: VolumeType
   size: number
 }
+
 
 /**
  * A cluster version.
@@ -83,6 +97,7 @@ export interface ClusterVersion {
   beta: boolean
 }
 
+
 export interface DatalabSparkMain {
   nodeType: string
   sparkUiUrl: string
@@ -90,11 +105,13 @@ export interface DatalabSparkMain {
   rootVolume?: Volume
 }
 
+
 export interface DatalabSparkWorker {
   nodeType: string
   nodeCount: number
   rootVolume?: Volume
 }
+
 
 /**
  * A notebook version.
@@ -126,14 +143,17 @@ export interface NotebookVersion {
   beta: boolean
 }
 
+
 export interface CreateDatalabRequestSparkMain {
   nodeType: string
 }
+
 
 export interface CreateDatalabRequestSparkWorker {
   nodeType: string
   nodeCount: number
 }
+
 
 /**
  * A cluster.
@@ -153,6 +173,7 @@ export interface Cluster {
   versions: ClusterVersion[]
 }
 
+
 /**
  * A Data Lab resource.
  */
@@ -162,7 +183,7 @@ export interface Datalab {
    */
   id: string
   /**
-   * The identifier of the project where the Data Lab has been created.
+   * The unique identifier of the project where the Data Lab has been created.
    */
   projectId: string
   /**
@@ -178,15 +199,15 @@ export interface Datalab {
    */
   tags: string[]
   /**
-   * The Spark Main node specification of Data lab. It holds the parameters `node_type` the compute node type of the main node, `spark_ui_url` where the Spark UI is available, `spark_master_url` with which one can connect to the cluster from within one's VPC, `root_volume` the size of the volume assigned to the main node.
+   * The Spark Main node specification of Data lab. It holds the parameters `node_type`, `spark_ui_url` (available to reach Spark UI), `spark_master_url` (used to reach the cluster within a VPC), `root_volume` (size of the volume assigned to the cluster).
    */
   main?: DatalabSparkMain
   /**
-   * The worker node specification of the Data Lab. It presents the parameters `node_type` the compute node type of each worker node, `node_count` the number of worker nodes currently in the cluster, `root_volume` the root volume size of each executor.
+   * The cluster worker nodes specification. It holds the parameters `node_type`, `node_count`, `root_volume` (size of the volume assigned to the cluster).
    */
   worker?: DatalabSparkWorker
   /**
-   * The status of the Data Lab. For a working Data Lab this should be `ready`.
+   * The status of the Data Lab. For a working Data Lab the status is marked as `ready`.
    */
   status: DatalabStatus
   /**
@@ -206,7 +227,7 @@ export interface Datalab {
    */
   hasNotebook: boolean
   /**
-   * The URL of said notebook if exists.
+   * The URL of the notebook if available.
    */
   notebookUrl?: string
   /**
@@ -214,18 +235,19 @@ export interface Datalab {
    */
   sparkVersion: string
   /**
-   * The total storage selected by the user for Spark.
+   * The total persistent volume storage selected to run Spark.
    */
   totalStorage?: Volume
   /**
-   * The private newtwork to which the data lab is connected. This is important for accessing the Spark Master URL.
+   * The unique identifier of the private network to which the Data Lab is attached to.
    */
   privateNetworkId: string
   /**
-   * The URL to the Spark Master endpoint from, and only from the perspective of the JupyterLab Notebook. This is NOT the URL to use for accessing the clutser from a private server.
+   * The URL that is used to reach the cluster from the notebook when available. This URL cannot be used to reach the cluster from a server.
    */
   notebookMasterUrl?: string
 }
+
 
 /**
  * A node type.
@@ -281,6 +303,7 @@ export interface NodeType {
   targets: NodeTypeTarget[]
 }
 
+
 /**
  * A notebook.
  */
@@ -298,6 +321,7 @@ export interface Notebook {
    */
   versions: NotebookVersion[]
 }
+
 
 /**
  * A request to create a Data Lab.
@@ -324,15 +348,15 @@ export type CreateDatalabRequest = {
    */
   tags?: string[]
   /**
-   * The Spark main node configuration of the Data Lab, has one parameter `node_type` which specifies the compute node type of the main node. See ListNodeTypes for available options.
+   * The cluster main node specification. It holds the parameters `node_type` which specifies the node type of the main node. See ListNodeTypes for available options. See ListNodeTypes for available options.
    */
   main?: CreateDatalabRequestSparkMain
   /**
-   * The Spark worker node configuration of the Data Lab, has two parameters `node_type` for selecting the type of the worker node, and `node_count` for specifying the ammount of nodes.
+   * The cluster worker node specification. It holds the parameters `node_type` which specifies the node type of the worker node and `node_count` for specifying the amount of nodes.
    */
   worker?: CreateDatalabRequestSparkWorker
   /**
-   * Whether a JupyterLab notebook shall be created with the Data Lab or not.
+   * Select this option to include a notebook as part of the Data Lab.
    */
   hasNotebook: boolean
   /**
@@ -340,14 +364,15 @@ export type CreateDatalabRequest = {
    */
   sparkVersion: string
   /**
-   * The total storage selected by the user for Spark workers. This means the workers will not use more then this amount for their workload.
+   * The maximum persistent volume storage that will be available during workload.
    */
   totalStorage?: Volume
   /**
-   * The private newtwork to which the Data Lab is connected. Important for accessing the Spark Master URL from a private cluster.
+   * The unique identifier of the private network the Data Lab will be attached to.
    */
   privateNetworkId: string
 }
+
 
 /**
  * A request to delete a Data Lab.
@@ -363,6 +388,7 @@ export type DeleteDatalabRequest = {
   datalabId: string
 }
 
+
 /**
  * A request to get information about a Data Lab.
  */
@@ -376,6 +402,7 @@ export type GetDatalabRequest = {
    */
   datalabId: string
 }
+
 
 /**
  * A request to list cluster versions.
@@ -399,6 +426,7 @@ export type ListClusterVersionsRequest = {
   orderBy?: ListClusterVersionsRequestOrderBy
 }
 
+
 /**
  * A response to list cluster versions.
  */
@@ -413,8 +441,9 @@ export interface ListClusterVersionsResponse {
   totalCount: number
 }
 
+
 /**
- * A request to list Datalabs.
+ * A request to list Data Labs.
  */
 export type ListDatalabsRequest = {
   /**
@@ -451,6 +480,7 @@ export type ListDatalabsRequest = {
   orderBy?: ListDatalabsRequestOrderBy
 }
 
+
 /**
  * A response to list Data Labs.
  */
@@ -460,10 +490,11 @@ export interface ListDatalabsResponse {
    */
   datalabs: Datalab[]
   /**
-   * The total count of Datalabs.
+   * The total count of Data Labs.
    */
   totalCount: number
 }
+
 
 /**
  * A request to list node types.
@@ -486,7 +517,7 @@ export type ListNodeTypesRequest = {
    */
   orderBy?: ListNodeTypesRequestOrderBy
   /**
-   * Filter on the wanted targets, whether it's for main node or worker.
+   * Filter based on the target of the nodes. Allows to filter the nodes based on their purpose which can be main or worker node.
    */
   targets?: NodeTypeTarget[]
   /**
@@ -494,6 +525,7 @@ export type ListNodeTypesRequest = {
    */
   resourceType?: ListNodeTypesRequestResourceType
 }
+
 
 /**
  * A response to list node types.
@@ -508,6 +540,7 @@ export interface ListNodeTypesResponse {
    */
   totalCount: number
 }
+
 
 /**
  * A request to list notebook versions.
@@ -531,6 +564,7 @@ export type ListNotebookVersionsRequest = {
   orderBy?: ListNotebookVersionsRequestOrderBy
 }
 
+
 /**
  * A response to list notebook versions.
  */
@@ -544,6 +578,7 @@ export interface ListNotebookVersionsResponse {
    */
   totalCount: number
 }
+
 
 /**
  * A request to update a Data Lab.
@@ -574,3 +609,5 @@ export type UpdateDatalabRequest = {
    */
   nodeCount?: number
 }
+
+

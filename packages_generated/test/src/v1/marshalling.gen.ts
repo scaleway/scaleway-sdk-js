@@ -1,10 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   CreateHumanRequest,
   Human,
@@ -40,9 +36,7 @@ export const unmarshalHuman = (data: unknown): Human => {
   } as Human
 }
 
-export const unmarshalListHumansResponse = (
-  data: unknown,
-): ListHumansResponse => {
+export const unmarshalListHumansResponse = (data: unknown): ListHumansResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListHumansResponse' failed as data isn't a dictionary.`,
@@ -80,16 +74,12 @@ export const marshalCreateHumanRequest = (
   height: request.height,
   is_happy: request.isHappy,
   name: request.name,
-  shoe_size: request.shoeSize,
+  shoe_size: request.shoeSize,  
   ...resolveOneOf([
-    {
-      default: defaults.defaultProjectId,
-      param: 'project_id',
+    {default: defaults.defaultProjectId,param: 'project_id',
       value: request.projectId,
     },
-    {
-      default: defaults.defaultOrganizationId,
-      param: 'organization_id',
+    {default: defaults.defaultOrganizationId,param: 'organization_id',
       value: request.organizationId,
     },
   ]),

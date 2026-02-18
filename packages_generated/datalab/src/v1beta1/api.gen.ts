@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import { DATALAB_TRANSIENT_STATUSES as DATALAB_TRANSIENT_STATUSES_DATALAB } from './content.gen.js'
+import {DATALAB_TRANSIENT_STATUSES as DATALAB_TRANSIENT_STATUSES_DATALAB,} from './content.gen.js'
 import {
   marshalCreateDatalabRequest,
   marshalUpdateDatalabRequest,
@@ -50,10 +50,13 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+      ],
+    })
+  
   /**
    * Create a new Data Lab. In this call, one can personalize the node counts, add a notebook, choose the private network, define the persistent volume storage capacity.
    *
@@ -73,6 +76,7 @@ export class API extends ParentAPI {
       unmarshalDatalab,
     )
 
+  
   /**
    * Retrieve information about a given Data Lab cluster, specified by the `region` and `datalab_id` parameters. Its full details, including name, status, node counts, are returned in the response object.
    *
@@ -87,7 +91,7 @@ export class API extends ParentAPI {
       },
       unmarshalDatalab,
     )
-
+  
   /**
    * Waits for {@link Datalab} to be in a final state.
    *
@@ -100,19 +104,14 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Datalab>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !DATALAB_TRANSIENT_STATUSES_DATALAB.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!DATALAB_TRANSIENT_STATUSES_DATALAB.includes(res.status))),
       this.getDatalab,
       request,
       options,
     )
 
-  protected pageOfListDatalabs = (
-    request: Readonly<ListDatalabsRequest> = {},
-  ) =>
+  
+  protected pageOfListDatalabs = (request: Readonly<ListDatalabsRequest> = {}) =>
     this.client.fetch<ListDatalabsResponse>(
       {
         method: 'GET',
@@ -122,17 +121,14 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
       },
       unmarshalListDatalabsResponse,
     )
-
+  
   /**
    * List information about Data Lab cluster within a project or an organization.
    *
@@ -142,6 +138,7 @@ export class API extends ParentAPI {
   listDatalabs = (request: Readonly<ListDatalabsRequest> = {}) =>
     enrichForPagination('datalabs', this.pageOfListDatalabs, request)
 
+  
   /**
    * Update a Data Labs node counts. Allows for up- and downscaling on demand, depending on the expected workload.
    *
@@ -161,6 +158,7 @@ export class API extends ParentAPI {
       unmarshalDatalab,
     )
 
+  
   /**
    * Delete a Data Lab based on its region and id.
    *
@@ -176,9 +174,8 @@ export class API extends ParentAPI {
       unmarshalDatalab,
     )
 
-  protected pageOfListNodeTypes = (
-    request: Readonly<ListNodeTypesRequest> = {},
-  ) =>
+  
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -186,19 +183,16 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['resource_type', request.resourceType],
           ['targets', request.targets],
         ),
       },
       unmarshalListNodeTypesResponse,
     )
-
+  
   /**
-   * List the available compute node types upon which a Data Lab can be created.
+   * List the available compute node types for creating a Data Lab.
    *
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
@@ -206,9 +200,8 @@ export class API extends ParentAPI {
   listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
     enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
 
-  protected pageOfListNotebookVersions = (
-    request: Readonly<ListNotebookVersionsRequest> = {},
-  ) =>
+  
+  protected pageOfListNotebookVersions = (request: Readonly<ListNotebookVersionsRequest> = {}) =>
     this.client.fetch<ListNotebookVersionsResponse>(
       {
         method: 'GET',
@@ -216,29 +209,23 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListNotebookVersionsResponse,
     )
-
+  
   /**
-   * List available notebook versions.
+   * Lists available notebook versions.
    *
    * @param request - The request {@link ListNotebookVersionsRequest}
    * @returns A Promise of ListNotebookVersionsResponse
    */
-  listNotebookVersions = (
-    request: Readonly<ListNotebookVersionsRequest> = {},
-  ) =>
+  listNotebookVersions = (request: Readonly<ListNotebookVersionsRequest> = {}) =>
     enrichForPagination('notebooks', this.pageOfListNotebookVersions, request)
 
-  protected pageOfListClusterVersions = (
-    request: Readonly<ListClusterVersionsRequest> = {},
-  ) =>
+  
+  protected pageOfListClusterVersions = (request: Readonly<ListClusterVersionsRequest> = {}) =>
     this.client.fetch<ListClusterVersionsResponse>(
       {
         method: 'GET',
@@ -246,15 +233,12 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListClusterVersionsResponse,
     )
-
+  
   /**
    * List the Spark versions the product is compatible with.
    *
@@ -263,4 +247,7 @@ export class API extends ParentAPI {
    */
   listClusterVersions = (request: Readonly<ListClusterVersionsRequest> = {}) =>
     enrichForPagination('clusters', this.pageOfListClusterVersions, request)
+
+  
 }
+

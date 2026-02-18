@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone } from '@scaleway/sdk-client'
+import type { Zone as ScwZone, } from '@scaleway/sdk-client'
+
 
 export type ListServerPrivateNetworksRequestOrderBy =
   | 'created_at_asc'
@@ -55,10 +56,12 @@ export interface ServerPrivateNetwork {
   ipamIpIds: string[]
 }
 
+
 export interface ListServerPrivateNetworksResponse {
   serverPrivateNetworks: ServerPrivateNetwork[]
   totalCount: number
 }
+
 
 export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /**
@@ -79,6 +82,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   ipamIpIds?: string[]
 }
 
+
 export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -93,6 +97,7 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
    */
   privateNetworkId: string
 }
+
 
 export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /**
@@ -133,6 +138,7 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   ipamIpIds?: string[]
 }
 
+
 export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -148,6 +154,9 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   perPrivateNetworkIpamIpIds: Record<string, string[]>
 }
 
+
 export interface SetServerPrivateNetworksResponse {
   serverPrivateNetworks: ServerPrivateNetwork[]
 }
+
+

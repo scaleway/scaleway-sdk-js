@@ -1,24 +1,22 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   AclRule,
   AddSubnetsRequest,
   AddSubnetsResponse,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
+  CreateVPCConnectorRequest,
   CreateVPCRequest,
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
   GetAclResponse,
   ListPrivateNetworksResponse,
   ListSubnetsResponse,
+  ListVPCConnectorsResponse,
   ListVPCsResponse,
   PrivateNetwork,
   Route,
@@ -27,8 +25,11 @@ import type {
   Subnet,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
+  UpdateVPCConnectorRequest,
   UpdateVPCRequest,
   VPC,
+  VPCConnector,
+  VPCConnectorPeerInfo,
 } from './types.gen.js'
 
 const unmarshalSubnet = (data: unknown): Subnet => {
@@ -87,12 +88,50 @@ export const unmarshalRoute = (data: unknown): Route => {
     isReadOnly: data.is_read_only,
     nexthopPrivateNetworkId: data.nexthop_private_network_id,
     nexthopResourceId: data.nexthop_resource_id,
+    nexthopVpcConnectorId: data.nexthop_vpc_connector_id,
     region: data.region,
     tags: data.tags,
     type: data.type ? data.type : undefined,
     updatedAt: unmarshalDate(data.updated_at),
     vpcId: data.vpc_id,
   } as Route
+}
+
+const unmarshalVPCConnectorPeerInfo = (data: unknown): VPCConnectorPeerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VPCConnectorPeerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    vpcName: data.vpc_name,
+  } as VPCConnectorPeerInfo
+}
+
+export const unmarshalVPCConnector = (data: unknown): VPCConnector => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VPCConnector' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    peerInfo: data.peer_info ? unmarshalVPCConnectorPeerInfo(data.peer_info) : undefined,
+    projectId: data.project_id,
+    region: data.region,
+    status: data.status,
+    tags: data.tags,
+    targetVpcId: data.target_vpc_id,
+    updatedAt: unmarshalDate(data.updated_at),
+    vpcId: data.vpc_id,
+  } as VPCConnector
 }
 
 export const unmarshalVPC = (data: unknown): VPC => {
@@ -118,9 +157,7 @@ export const unmarshalVPC = (data: unknown): VPC => {
   } as VPC
 }
 
-export const unmarshalAddSubnetsResponse = (
-  data: unknown,
-): AddSubnetsResponse => {
+export const unmarshalAddSubnetsResponse = (data: unknown): AddSubnetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AddSubnetsResponse' failed as data isn't a dictionary.`,
@@ -132,9 +169,7 @@ export const unmarshalAddSubnetsResponse = (
   } as AddSubnetsResponse
 }
 
-export const unmarshalDeleteSubnetsResponse = (
-  data: unknown,
-): DeleteSubnetsResponse => {
+export const unmarshalDeleteSubnetsResponse = (data: unknown): DeleteSubnetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'DeleteSubnetsResponse' failed as data isn't a dictionary.`,
@@ -179,9 +214,7 @@ export const unmarshalGetAclResponse = (data: unknown): GetAclResponse => {
   } as GetAclResponse
 }
 
-export const unmarshalListPrivateNetworksResponse = (
-  data: unknown,
-): ListPrivateNetworksResponse => {
+export const unmarshalListPrivateNetworksResponse = (data: unknown): ListPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPrivateNetworksResponse' failed as data isn't a dictionary.`,
@@ -189,17 +222,12 @@ export const unmarshalListPrivateNetworksResponse = (
   }
 
   return {
-    privateNetworks: unmarshalArrayOfObject(
-      data.private_networks,
-      unmarshalPrivateNetwork,
-    ),
+    privateNetworks: unmarshalArrayOfObject(data.private_networks, unmarshalPrivateNetwork),
     totalCount: data.total_count,
   } as ListPrivateNetworksResponse
 }
 
-export const unmarshalListSubnetsResponse = (
-  data: unknown,
-): ListSubnetsResponse => {
+export const unmarshalListSubnetsResponse = (data: unknown): ListSubnetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSubnetsResponse' failed as data isn't a dictionary.`,
@@ -210,6 +238,19 @@ export const unmarshalListSubnetsResponse = (
     subnets: unmarshalArrayOfObject(data.subnets, unmarshalSubnet),
     totalCount: data.total_count,
   } as ListSubnetsResponse
+}
+
+export const unmarshalListVPCConnectorsResponse = (data: unknown): ListVPCConnectorsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVPCConnectorsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    vpcConnectors: unmarshalArrayOfObject(data.vpc_connectors, unmarshalVPCConnector),
+  } as ListVPCConnectorsResponse
 }
 
 export const unmarshalListVPCsResponse = (data: unknown): ListVPCsResponse => {
@@ -265,7 +306,18 @@ export const marshalCreateRouteRequest = (
   destination: request.destination,
   nexthop_private_network_id: request.nexthopPrivateNetworkId,
   nexthop_resource_id: request.nexthopResourceId,
+  nexthop_vpc_connector_id: request.nexthopVpcConnectorId,
   tags: request.tags,
+  vpc_id: request.vpcId,
+})
+
+export const marshalCreateVPCConnectorRequest = (
+  request: CreateVPCConnectorRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name || randomName('VPCConnector'),
+  tags: request.tags,
+  target_vpc_id: request.targetVpcId,
   vpc_id: request.vpcId,
 })
 
@@ -307,7 +359,7 @@ export const marshalSetAclRequest = (
 ): Record<string, unknown> => ({
   default_policy: request.defaultPolicy,
   is_ipv6: request.isIpv6,
-  rules: request.rules.map(elt => marshalAclRule(elt, defaults)),
+  rules:  request.rules.map(elt => marshalAclRule(elt, defaults)),
 })
 
 export const marshalUpdatePrivateNetworkRequest = (
@@ -327,6 +379,15 @@ export const marshalUpdateRouteRequest = (
   destination: request.destination,
   nexthop_private_network_id: request.nexthopPrivateNetworkId,
   nexthop_resource_id: request.nexthopResourceId,
+  nexthop_vpc_connector_id: request.nexthopVpcConnectorId,
+  tags: request.tags,
+})
+
+export const marshalUpdateVPCConnectorRequest = (
+  request: UpdateVPCConnectorRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
   tags: request.tags,
 })
 

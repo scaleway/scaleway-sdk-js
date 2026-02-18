@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -74,10 +74,15 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
   /**
    * Create a key. Create a key in a given region specified by the `region` parameter. You can use keys to encrypt or decrypt arbitrary payloads, to sign and verify messages or to generate data encryption keys. **Data encryption keys are not stored in Key Manager**.
    *
@@ -97,6 +102,7 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
+  
   /**
    * Get key metadata. Retrieve metadata for a specified key using the `region` and `key_id` parameters.
    *
@@ -112,6 +118,7 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
+  
   /**
    * Get the public key in PEM format.. Retrieves the public portion of an asymmetric cryptographic key in PEM format.
    *
@@ -127,6 +134,7 @@ export class API extends ParentAPI {
       unmarshalPublicKey,
     )
 
+  
   /**
    * Update a key. Modify a key's metadata including name, description and tags, specified by the `key_id` and `region` parameters.
    *
@@ -146,17 +154,21 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
+  
   /**
    * Delete a key. Permanently delete a key specified by the `region` and `key_id` parameters. This action is irreversible. Any data encrypted with this key, including data encryption keys, will no longer be decipherable.
    *
    * @param request - The request {@link DeleteKeyRequest}
    */
   deleteKey = (request: Readonly<DeleteKeyRequest>) =>
-    this.client.fetch<void>({
-      method: 'DELETE',
-      path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}`,
-    })
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}`,
+      },
+    )
 
+  
   /**
    * Rotate a key. Generate a new version of an existing key with new key material. Previous key versions remain usable to decrypt previously encrypted data, but the key's new version will be used for subsequent encryption operations and data key generation.
    *
@@ -174,6 +186,7 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
+  
   /**
    * Apply key protection. Apply protection to a given key specified by the `key_id` parameter. Applying key protection means that your key can be used and modified, but it cannot be deleted.
    *
@@ -191,6 +204,7 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
+  
   /**
    * Remove key protection. Remove key protection from a given key specified by the `key_id` parameter. Removing key protection means that your key can be deleted anytime.
    *
@@ -208,6 +222,7 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
+  
   /**
    * Enable key. Enable a given key to be used for cryptographic operations. Enabling a key allows you to make a disabled key usable again. You must specify the `region` and `key_id` parameters.
    *
@@ -225,6 +240,7 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
+  
   /**
    * Disable key. Disable a given key, preventing it to be used for cryptographic operations. Disabling a key renders it unusable. You must specify the `region` and `key_id` parameters.
    *
@@ -242,6 +258,7 @@ export class API extends ParentAPI {
       unmarshalKey,
     )
 
+  
   protected pageOfListKeys = (request: Readonly<ListKeysRequest>) =>
     this.client.fetch<ListKeysResponse>(
       {
@@ -252,10 +269,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['scheduled_for_deletion', request.scheduledForDeletion],
           ['tags', request.tags],
@@ -264,7 +278,7 @@ export class API extends ParentAPI {
       },
       unmarshalListKeysResponse,
     )
-
+  
   /**
    * List keys. Retrieve a list of keys across all Projects in an Organization or within a specific Project. You must specify the `region`, and either the `organization_id` or the `project_id`.
    *
@@ -274,6 +288,7 @@ export class API extends ParentAPI {
   listKeys = (request: Readonly<ListKeysRequest>) =>
     enrichForPagination('keys', this.pageOfListKeys, request)
 
+  
   /**
    * Create a data encryption key. Create a new data encryption key for cryptographic operations outside of Key Manager. The data encryption key is encrypted and must be decrypted using the key you have created in Key Manager.
 
@@ -295,6 +310,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       unmarshalDataKey,
     )
 
+  
   /**
    * Encrypt a payload. Encrypt a payload using an existing key, specified by the `key_id` parameter. The maximum payload size that can be encrypted is 64 KB of plaintext.
    *
@@ -314,6 +330,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       unmarshalEncryptResponse,
     )
 
+  
   /**
    * Decrypt an encrypted payload. Decrypt an encrypted payload using an existing key, specified by the `key_id` parameter. The maximum payload size that can be decrypted is equivalent to the encrypted output of 64 KB of data (around 131 KB).
    *
@@ -333,6 +350,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       unmarshalDecryptResponse,
     )
 
+  
   /**
    * Sign a message digest. Use a given key to sign a message digest. The key must have its usage set to `asymmetric_signing`. The digest must be created using the same digest algorithm that is defined in the key's algorithm configuration.
    *
@@ -342,7 +360,9 @@ The data encryption key is returned in plaintext and ciphertext but it should on
   sign = (request: Readonly<SignRequest>) =>
     this.client.fetch<SignResponse>(
       {
-        body: JSON.stringify(marshalSignRequest(request, this.client.settings)),
+        body: JSON.stringify(
+          marshalSignRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/sign`,
@@ -350,6 +370,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       unmarshalSignResponse,
     )
 
+  
   /**
    * Verify a message signature. Use a given key to verify a message signature against a message digest. The key must have its usage set to `asymmetric_signing`. The message digest must be generated using the same digest algorithm that is defined in the key's algorithm configuration.
    *
@@ -369,6 +390,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       unmarshalVerifyResponse,
     )
 
+  
   /**
    * Import key material. Import externally generated key material into Key Manager to derive a new cryptographic key. The key's origin must be `external`.
    *
@@ -388,19 +410,23 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       unmarshalKey,
     )
 
+  
   /**
    * Delete key material. Delete previously imported key material. This renders the associated cryptographic key unusable for any operation. The key's origin must be `external`.
    *
    * @param request - The request {@link DeleteKeyMaterialRequest}
    */
   deleteKeyMaterial = (request: Readonly<DeleteKeyMaterialRequest>) =>
-    this.client.fetch<void>({
-      body: '{}',
-      headers: jsonContentHeaders,
-      method: 'POST',
-      path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/delete-key-material`,
-    })
+    this.client.fetch<void>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/delete-key-material`,
+      },
+    )
 
+  
   /**
    * Restore a key. Restore a key and all its rotations scheduled for deletion specified by the `region` and `key_id` parameters.
    *
@@ -418,6 +444,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       unmarshalKey,
     )
 
+  
   /**
    * List all available algorithms. Lists all cryptographic algorithms supported by the Key Manager service.
    *
@@ -429,8 +456,13 @@ The data encryption key is returned in plaintext and ciphertext but it should on
       {
         method: 'GET',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/algorithms`,
-        urlParams: urlParams(['usages', request.usages]),
+        urlParams: urlParams(
+          ['usages', request.usages],
+        ),
       },
       unmarshalListAlgorithmsResponse,
     )
+
+  
 }
+

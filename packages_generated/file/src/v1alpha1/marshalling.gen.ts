@@ -1,9 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   Attachment,
   CreateFileSystemRequest,
@@ -51,9 +48,7 @@ const unmarshalAttachment = (data: unknown): Attachment => {
   } as Attachment
 }
 
-export const unmarshalListAttachmentsResponse = (
-  data: unknown,
-): ListAttachmentsResponse => {
+export const unmarshalListAttachmentsResponse = (data: unknown): ListAttachmentsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListAttachmentsResponse' failed as data isn't a dictionary.`,
@@ -66,9 +61,7 @@ export const unmarshalListAttachmentsResponse = (
   } as ListAttachmentsResponse
 }
 
-export const unmarshalListFileSystemsResponse = (
-  data: unknown,
-): ListFileSystemsResponse => {
+export const unmarshalListFileSystemsResponse = (data: unknown): ListFileSystemsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListFileSystemsResponse' failed as data isn't a dictionary.`,

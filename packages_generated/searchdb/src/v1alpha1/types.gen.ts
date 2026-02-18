@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+
 
 export type DeploymentStatus =
   | 'unknown_status'
@@ -30,9 +31,13 @@ export type ListNodeTypesRequestOrderBy =
   | 'memory_asc'
   | 'memory_desc'
 
-export type ListUsersRequestOrderBy = 'name_asc' | 'name_desc'
+export type ListUsersRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
 
-export type ListVersionsRequestOrderBy = 'version_asc' | 'version_desc'
+export type ListVersionsRequestOrderBy =
+  | 'version_asc'
+  | 'version_desc'
 
 export type NodeTypeStockStatus =
   | 'unknown_stock'
@@ -40,13 +45,19 @@ export type NodeTypeStockStatus =
   | 'out_of_stock'
   | 'available'
 
-export type VolumeType = 'unknown_type' | 'sbs_5k' | 'sbs_15k'
+export type VolumeType =
+  | 'unknown_type'
+  | 'sbs_5k'
+  | 'sbs_15k'
 
 export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointPublicDetails {}
+
+export interface EndpointPublicDetails {
+}
+
 
 export interface EndpointService {
   name: string
@@ -54,11 +65,15 @@ export interface EndpointService {
   url: string
 }
 
+
 export interface EndpointSpecPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-export interface EndpointSpecPublicDetails {}
+
+export interface EndpointSpecPublicDetails {
+}
+
 
 /**
  * Refers to an Endpoint.
@@ -88,6 +103,7 @@ export interface Endpoint {
   privateNetwork?: EndpointPrivateNetworkDetails
 }
 
+
 /**
  * Volume.
  */
@@ -102,6 +118,7 @@ export interface Volume {
   sizeBytes: number
 }
 
+
 export interface NodeTypeVolumeType {
   type: VolumeType
   description: string
@@ -109,6 +126,7 @@ export interface NodeTypeVolumeType {
   maxSizeBytes: number
   chunkSizeBytes: number
 }
+
 
 export interface EndpointSpec {
   /**
@@ -122,6 +140,7 @@ export interface EndpointSpec {
    */
   privateNetwork?: EndpointSpecPrivateNetworkDetails
 }
+
 
 /**
  * Refers to a Deployment.
@@ -185,6 +204,7 @@ export interface Deployment {
   region: ScwRegion
 }
 
+
 /**
  * Node type.
  */
@@ -227,9 +247,11 @@ export interface NodeType {
   availableVolumeTypes: NodeTypeVolumeType[]
 }
 
+
 export interface User {
   username: string
 }
+
 
 /**
  * Opensearch Version.
@@ -252,6 +274,7 @@ export interface Version {
    */
   beta: boolean
 }
+
 
 /**
  * Request to create a new deployment.
@@ -303,6 +326,7 @@ export type CreateDeploymentRequest = {
   version: string
 }
 
+
 /**
  * Create an endpoint for a specific deployment.
  */
@@ -320,6 +344,7 @@ export type CreateEndpointRequest = {
    */
   endpointSpec?: EndpointSpec
 }
+
 
 /**
  * Create a user in an deployment.
@@ -343,6 +368,7 @@ export type CreateUserRequest = {
   password: string
 }
 
+
 /**
  * Delete a deployment specified by the ID.
  */
@@ -357,6 +383,7 @@ export type DeleteDeploymentRequest = {
   deploymentId: string
 }
 
+
 /**
  * Delete an endpoint from a specific deployment.
  */
@@ -370,6 +397,7 @@ export type DeleteEndpointRequest = {
    */
   endpointId: string
 }
+
 
 /**
  * Delete a user from a deployment.
@@ -389,6 +417,16 @@ export type DeleteUserRequest = {
   username: string
 }
 
+
+export type GetDeploymentCertificateAuthorityRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  deploymentId: string
+}
+
+
 /**
  * Retrieve a deployment specified by the ID.
  */
@@ -402,6 +440,7 @@ export type GetDeploymentRequest = {
    */
   deploymentId: string
 }
+
 
 /**
  * Retrieve a list of deployments.
@@ -445,6 +484,7 @@ export type ListDeploymentsRequest = {
   version?: string
 }
 
+
 /**
  * Retrieve a list of deployments.
  */
@@ -458,6 +498,7 @@ export interface ListDeploymentsResponse {
    */
   totalCount: number
 }
+
 
 /**
  * Retrieve a list of available node types for a Cloud Essentials for OpenSearch cluster.
@@ -481,6 +522,7 @@ export type ListNodeTypesRequest = {
   pageSize?: number
 }
 
+
 /**
  * Returns a list of node types available for a Cloud Essentials for OpenSearch cluster.
  */
@@ -495,6 +537,7 @@ export interface ListNodeTypesResponse {
   totalCount: number
 }
 
+
 export type ListUsersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -507,10 +550,12 @@ export type ListUsersRequest = {
   name?: string
 }
 
+
 export interface ListUsersResponse {
   users: User[]
   totalCount: number
 }
+
 
 /**
  * Retrieve a list of available versions.
@@ -538,6 +583,7 @@ export type ListVersionsRequest = {
   version?: string
 }
 
+
 /**
  * Retrieve a list of version.
  */
@@ -551,6 +597,7 @@ export interface ListVersionsResponse {
    */
   totalCount: number
 }
+
 
 export type UpdateDeploymentRequest = {
   /**
@@ -570,6 +617,7 @@ export type UpdateDeploymentRequest = {
    */
   tags?: string[]
 }
+
 
 /**
  * Update a user in an deployment.
@@ -593,6 +641,7 @@ export type UpdateUserRequest = {
   password?: string
 }
 
+
 export type UpgradeDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -615,3 +664,5 @@ export type UpgradeDeploymentRequest = {
    */
   volumeSizeBytes?: number
 }
+
+

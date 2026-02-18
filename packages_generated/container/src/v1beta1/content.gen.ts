@@ -9,6 +9,7 @@ import type {
   TriggerStatus,
 } from './types.gen.js'
 
+
 /** Lists transient statutes of the enum {@link ContainerStatus}. */
 export const CONTAINER_TRANSIENT_STATUSES: ContainerStatus[] = [
   'deleting',
@@ -47,7 +48,10 @@ export const NAMESPACE_TRANSIENT_STATUSES: NamespaceStatus[] = [
 ]
 
 /** Lists transient statutes of the enum {@link TokenStatus}. */
-export const TOKEN_TRANSIENT_STATUSES: TokenStatus[] = ['deleting', 'creating']
+export const TOKEN_TRANSIENT_STATUSES: TokenStatus[] = [
+  'deleting',
+  'creating',
+]
 
 /** Lists transient statutes of the enum {@link TriggerStatus}. */
 export const TRIGGER_TRANSIENT_STATUSES: TriggerStatus[] = [
@@ -57,3 +61,4 @@ export const TRIGGER_TRANSIENT_STATUSES: TriggerStatus[] = [
   'locking',
   'upgrading',
 ]
+

@@ -1,11 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  resolveOneOf,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-  unmarshalMoney,
-} from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
 import type {
   Application,
   Booking,
@@ -128,9 +123,7 @@ export const unmarshalModel = (data: unknown): Model => {
   } as Model
 }
 
-const unmarshalPlatformBookingRequirement = (
-  data: unknown,
-): PlatformBookingRequirement => {
+const unmarshalPlatformBookingRequirement = (data: unknown): PlatformBookingRequirement => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'PlatformBookingRequirement' failed as data isn't a dictionary.`,
@@ -175,14 +168,10 @@ export const unmarshalPlatform = (data: unknown): Platform => {
   return {
     availability: data.availability,
     backendName: data.backend_name,
-    bookingRequirement: data.booking_requirement
-      ? unmarshalPlatformBookingRequirement(data.booking_requirement)
-      : undefined,
+    bookingRequirement: data.booking_requirement ? unmarshalPlatformBookingRequirement(data.booking_requirement) : undefined,
     description: data.description,
     documentationUrl: data.documentation_url,
-    hardware: data.hardware
-      ? unmarshalPlatformHardware(data.hardware)
-      : undefined,
+    hardware: data.hardware ? unmarshalPlatformHardware(data.hardware) : undefined,
     id: data.id,
     isBookable: data.is_bookable,
     maxCircuitCount: data.max_circuit_count,
@@ -190,15 +179,9 @@ export const unmarshalPlatform = (data: unknown): Platform => {
     maxShotCount: data.max_shot_count,
     metadata: data.metadata,
     name: data.name,
-    pricePerCircuit: data.price_per_circuit
-      ? unmarshalMoney(data.price_per_circuit)
-      : undefined,
-    pricePerHour: data.price_per_hour
-      ? unmarshalMoney(data.price_per_hour)
-      : undefined,
-    pricePerShot: data.price_per_shot
-      ? unmarshalMoney(data.price_per_shot)
-      : undefined,
+    pricePerCircuit: data.price_per_circuit ? unmarshalMoney(data.price_per_circuit) : undefined,
+    pricePerHour: data.price_per_hour ? unmarshalMoney(data.price_per_hour) : undefined,
+    pricePerShot: data.price_per_shot ? unmarshalMoney(data.price_per_shot) : undefined,
     providerName: data.provider_name,
     technology: data.technology,
     type: data.type,
@@ -264,9 +247,7 @@ export const unmarshalSession = (data: unknown): Session => {
   } as Session
 }
 
-export const unmarshalListApplicationsResponse = (
-  data: unknown,
-): ListApplicationsResponse => {
+export const unmarshalListApplicationsResponse = (data: unknown): ListApplicationsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListApplicationsResponse' failed as data isn't a dictionary.`,
@@ -274,17 +255,12 @@ export const unmarshalListApplicationsResponse = (
   }
 
   return {
-    applications: unmarshalArrayOfObject(
-      data.applications,
-      unmarshalApplication,
-    ),
+    applications: unmarshalArrayOfObject(data.applications, unmarshalApplication),
     totalCount: data.total_count,
   } as ListApplicationsResponse
 }
 
-export const unmarshalListBookingsResponse = (
-  data: unknown,
-): ListBookingsResponse => {
+export const unmarshalListBookingsResponse = (data: unknown): ListBookingsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListBookingsResponse' failed as data isn't a dictionary.`,
@@ -312,9 +288,7 @@ const unmarshalJobResult = (data: unknown): JobResult => {
   } as JobResult
 }
 
-export const unmarshalListJobResultsResponse = (
-  data: unknown,
-): ListJobResultsResponse => {
+export const unmarshalListJobResultsResponse = (data: unknown): ListJobResultsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListJobResultsResponse' failed as data isn't a dictionary.`,
@@ -340,9 +314,7 @@ export const unmarshalListJobsResponse = (data: unknown): ListJobsResponse => {
   } as ListJobsResponse
 }
 
-export const unmarshalListModelsResponse = (
-  data: unknown,
-): ListModelsResponse => {
+export const unmarshalListModelsResponse = (data: unknown): ListModelsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListModelsResponse' failed as data isn't a dictionary.`,
@@ -355,9 +327,7 @@ export const unmarshalListModelsResponse = (
   } as ListModelsResponse
 }
 
-export const unmarshalListPlatformsResponse = (
-  data: unknown,
-): ListPlatformsResponse => {
+export const unmarshalListPlatformsResponse = (data: unknown): ListPlatformsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListPlatformsResponse' failed as data isn't a dictionary.`,
@@ -384,9 +354,7 @@ const unmarshalProcessResult = (data: unknown): ProcessResult => {
   } as ProcessResult
 }
 
-export const unmarshalListProcessResultsResponse = (
-  data: unknown,
-): ListProcessResultsResponse => {
+export const unmarshalListProcessResultsResponse = (data: unknown): ListProcessResultsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListProcessResultsResponse' failed as data isn't a dictionary.`,
@@ -394,17 +362,12 @@ export const unmarshalListProcessResultsResponse = (
   }
 
   return {
-    processResults: unmarshalArrayOfObject(
-      data.process_results,
-      unmarshalProcessResult,
-    ),
+    processResults: unmarshalArrayOfObject(data.process_results, unmarshalProcessResult),
     totalCount: data.total_count,
   } as ListProcessResultsResponse
 }
 
-export const unmarshalListProcessesResponse = (
-  data: unknown,
-): ListProcessesResponse => {
+export const unmarshalListProcessesResponse = (data: unknown): ListProcessesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListProcessesResponse' failed as data isn't a dictionary.`,
@@ -417,9 +380,7 @@ export const unmarshalListProcessesResponse = (
   } as ListProcessesResponse
 }
 
-export const unmarshalListSessionACLsResponse = (
-  data: unknown,
-): ListSessionACLsResponse => {
+export const unmarshalListSessionACLsResponse = (data: unknown): ListSessionACLsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSessionACLsResponse' failed as data isn't a dictionary.`,
@@ -432,9 +393,7 @@ export const unmarshalListSessionACLsResponse = (
   } as ListSessionACLsResponse
 }
 
-export const unmarshalListSessionsResponse = (
-  data: unknown,
-): ListSessionsResponse => {
+export const unmarshalListSessionsResponse = (data: unknown): ListSessionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListSessionsResponse' failed as data isn't a dictionary.`,
@@ -450,10 +409,14 @@ export const unmarshalListSessionsResponse = (
 const marshalJobCircuit = (
   request: JobCircuit,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
+): Record<string, unknown> => ({  
   ...resolveOneOf([
-    { param: 'perceval_circuit', value: request.percevalCircuit },
-    { param: 'qiskit_circuit', value: request.qiskitCircuit },
+    {param: 'perceval_circuit',
+      value: request.percevalCircuit,
+    },
+    {param: 'qiskit_circuit',
+      value: request.qiskitCircuit,
+    },
   ]),
 })
 
@@ -461,7 +424,7 @@ export const marshalCreateJobRequest = (
   request: CreateJobRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  circuit: marshalJobCircuit(request.circuit, defaults),
+  circuit:  marshalJobCircuit(request.circuit, defaults),
   max_duration: request.maxDuration,
   model_id: request.modelId,
   name: request.name,
@@ -504,13 +467,7 @@ export const marshalCreateSessionRequest = (
   request: CreateSessionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  booking_demand:
-    request.bookingDemand !== undefined
-      ? marshalCreateSessionRequestBookingDemand(
-          request.bookingDemand,
-          defaults,
-        )
-      : undefined,
+  booking_demand: ((request.bookingDemand !== undefined) ?  marshalCreateSessionRequestBookingDemand(request.bookingDemand, defaults): undefined),
   deduplication_id: request.deduplicationId,
   max_duration: request.maxDuration,
   max_idle_duration: request.maxIdleDuration,

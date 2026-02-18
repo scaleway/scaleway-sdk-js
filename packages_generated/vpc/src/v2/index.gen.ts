@@ -1,6 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-export { API } from './api.gen.js'
+export {
+  API,
+} from './api.gen.js'
 export * from './marshalling.gen.js'
 export type {
   AclRule,
@@ -10,11 +12,13 @@ export type {
   AddSubnetsResponse,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
+  CreateVPCConnectorRequest,
   CreateVPCRequest,
   DeletePrivateNetworkRequest,
   DeleteRouteRequest,
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
+  DeleteVPCConnectorRequest,
   DeleteVPCRequest,
   EnableCustomRoutesPropagationRequest,
   EnableDHCPRequest,
@@ -23,6 +27,7 @@ export type {
   GetAclResponse,
   GetPrivateNetworkRequest,
   GetRouteRequest,
+  GetVPCConnectorRequest,
   GetVPCRequest,
   ListPrivateNetworksRequest,
   ListPrivateNetworksRequestOrderBy,
@@ -30,6 +35,9 @@ export type {
   ListSubnetsRequest,
   ListSubnetsRequestOrderBy,
   ListSubnetsResponse,
+  ListVPCConnectorsRequest,
+  ListVPCConnectorsRequestOrderBy,
+  ListVPCConnectorsResponse,
   ListVPCsRequest,
   ListVPCsRequestOrderBy,
   ListVPCsResponse,
@@ -41,7 +49,11 @@ export type {
   Subnet,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
+  UpdateVPCConnectorRequest,
   UpdateVPCRequest,
   VPC,
+  VPCConnector,
+  VPCConnectorPeerInfo,
+  VPCConnectorStatus,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

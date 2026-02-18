@@ -9,6 +9,7 @@ import type {
   SnapshotStatus,
 } from './types.gen.js'
 
+
 /** Lists transient statutes of the enum {@link DatabaseBackupStatus}. */
 export const DATABASE_BACKUP_TRANSIENT_STATUSES: DatabaseBackupStatus[] = [
   'creating',
@@ -18,7 +19,9 @@ export const DATABASE_BACKUP_TRANSIENT_STATUSES: DatabaseBackupStatus[] = [
 ]
 
 /** Lists transient statutes of the enum {@link InstanceLogStatus}. */
-export const INSTANCE_LOG_TRANSIENT_STATUSES: InstanceLogStatus[] = ['creating']
+export const INSTANCE_LOG_TRANSIENT_STATUSES: InstanceLogStatus[] = [
+  'creating',
+]
 
 /** Lists transient statutes of the enum {@link InstanceStatus}. */
 export const INSTANCE_TRANSIENT_STATUSES: InstanceStatus[] = [
@@ -33,7 +36,9 @@ export const INSTANCE_TRANSIENT_STATUSES: InstanceStatus[] = [
 ]
 
 /** Lists transient statutes of the enum {@link MaintenanceStatus}. */
-export const MAINTENANCE_TRANSIENT_STATUSES: MaintenanceStatus[] = ['ongoing']
+export const MAINTENANCE_TRANSIENT_STATUSES: MaintenanceStatus[] = [
+  'ongoing',
+]
 
 /** Lists transient statutes of the enum {@link ReadReplicaStatus}. */
 export const READ_REPLICA_TRANSIENT_STATUSES: ReadReplicaStatus[] = [
@@ -50,3 +55,4 @@ export const SNAPSHOT_TRANSIENT_STATUSES: SnapshotStatus[] = [
   'restoring',
   'deleting',
 ]
+

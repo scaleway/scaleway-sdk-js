@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
+import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -11,14 +11,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {
-  CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,
-  CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_CONTAINER,
-  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,
-  NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,
-  TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_CONTAINER,
-  TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,
-} from './content.gen.js'
+import {CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_CONTAINER,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_CONTAINER,TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,} from './content.gen.js'
 import {
   marshalCreateContainerRequest,
   marshalCreateCronRequest,
@@ -101,13 +94,16 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality = toApiLocality({
-    regions: ['fr-par', 'nl-ams', 'pl-waw'],
-  })
-
-  protected pageOfListNamespaces = (
-    request: Readonly<ListNamespacesRequest> = {},
-  ) =>
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      regions: [
+        'fr-par',
+        'nl-ams',
+        'pl-waw',
+      ],
+    })
+  
+  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     this.client.fetch<ListNamespacesResponse>(
       {
         method: 'GET',
@@ -117,16 +113,13 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListNamespacesResponse,
     )
-
+  
   /**
    * List all your namespaces. List all namespaces in a specified region.
    *
@@ -136,6 +129,7 @@ export class API extends ParentAPI {
   listNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
+  
   /**
    * Get a namespace. Get the namespace associated with the specified ID.
    *
@@ -150,7 +144,7 @@ export class API extends ParentAPI {
       },
       unmarshalNamespace,
     )
-
+  
   /**
    * Waits for {@link Namespace} to be in a final state.
    *
@@ -163,16 +157,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Namespace>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !NAMESPACE_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getNamespace,
       request,
       options,
     )
 
+  
   /**
    * Create a new namespace. Create a new namespace in a specified region.
    *
@@ -192,6 +183,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   /**
    * Update an existing namespace. Update the space associated with the specified ID.
    *
@@ -211,6 +203,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   /**
    * Delete an existing namespace. Delete the namespace associated with the specified ID.
    *
@@ -226,6 +219,7 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
+  
   protected pageOfListContainers = (request: Readonly<ListContainersRequest>) =>
     this.client.fetch<ListContainersResponse>(
       {
@@ -237,16 +231,13 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
       },
       unmarshalListContainersResponse,
     )
-
+  
   /**
    * List all your containers. List all containers for a specified region.
    *
@@ -256,6 +247,7 @@ export class API extends ParentAPI {
   listContainers = (request: Readonly<ListContainersRequest>) =>
     enrichForPagination('containers', this.pageOfListContainers, request)
 
+  
   /**
    * Get a container. Get the container associated with the specified ID.
    *
@@ -270,7 +262,7 @@ export class API extends ParentAPI {
       },
       unmarshalContainer,
     )
-
+  
   /**
    * Waits for {@link Container} to be in a final state.
    *
@@ -283,16 +275,13 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Container>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !CONTAINER_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!CONTAINER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getContainer,
       request,
       options,
     )
 
+  
   /**
    * Create a new container. Create a new container in the specified region.
    *
@@ -312,6 +301,7 @@ export class API extends ParentAPI {
       unmarshalContainer,
     )
 
+  
   /**
    * Update an existing container. Update the container associated with the specified ID.
 
@@ -334,6 +324,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalContainer,
     )
 
+  
   /**
    * Delete a container. Delete the container associated with the specified ID.
    *
@@ -349,6 +340,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalContainer,
     )
 
+  
   /**
    * Deploy a container. Deploy a container associated with the specified ID.
    *
@@ -366,6 +358,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalContainer,
     )
 
+  
   protected pageOfListCrons = (request: Readonly<ListCronsRequest>) =>
     this.client.fetch<ListCronsResponse>(
       {
@@ -375,15 +368,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['container_id', request.containerId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListCronsResponse,
     )
-
+  
   /**
    * List all your crons.
    *
@@ -393,6 +383,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   listCrons = (request: Readonly<ListCronsRequest>) =>
     enrichForPagination('crons', this.pageOfListCrons, request)
 
+  
   /**
    * Get a cron. Get the cron associated with the specified ID.
    *
@@ -407,7 +398,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalCron,
     )
-
+  
   /**
    * Waits for {@link Cron} to be in a final state.
    *
@@ -420,16 +411,13 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     options?: Readonly<WaitForOptions<Cron>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !CRON_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!CRON_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getCron,
       request,
       options,
     )
 
+  
   /**
    * Create a new cron.
    *
@@ -449,6 +437,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalCron,
     )
 
+  
   /**
    * Update an existing cron. Update the cron associated with the specified ID.
    *
@@ -468,6 +457,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalCron,
     )
 
+  
   /**
    * Delete an existing cron. Delete the cron associated with the specified ID.
    *
@@ -483,6 +473,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalCron,
     )
 
+  
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest>) =>
     this.client.fetch<ListDomainsResponse>(
       {
@@ -492,15 +483,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['container_id', request.containerId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListDomainsResponse,
     )
-
+  
   /**
    * List all custom domains. List all custom domains in a specified region.
    *
@@ -510,6 +498,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   listDomains = (request: Readonly<ListDomainsRequest>) =>
     enrichForPagination('domains', this.pageOfListDomains, request)
 
+  
   /**
    * Get a custom domain. Get a custom domain for the container with the specified ID.
    *
@@ -524,7 +513,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalDomain,
     )
-
+  
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -537,16 +526,13 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     options?: Readonly<WaitForOptions<Domain>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !DOMAIN_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getDomain,
       request,
       options,
     )
 
+  
   /**
    * Create a custom domain. Create a custom domain for the container with the specified ID.
    *
@@ -566,6 +552,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalDomain,
     )
 
+  
   /**
    * Delete a custom domain. Delete the custom domain with the specific ID.
    *
@@ -581,6 +568,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalDomain,
     )
 
+  
   /**
    * Create a new revocable token. Deprecated in favor of IAM authentication.
    *
@@ -601,6 +589,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalToken,
     )
 
+  
   /**
    * Get a token. Get a token with a specified ID.
    *
@@ -615,7 +604,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalToken,
     )
-
+  
   /**
    * Waits for {@link Token} to be in a final state.
    *
@@ -628,16 +617,13 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     options?: Readonly<WaitForOptions<Token>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !TOKEN_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!TOKEN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getToken,
       request,
       options,
     )
 
+  
   protected pageOfListTokens = (request: Readonly<ListTokensRequest> = {}) =>
     this.client.fetch<ListTokensResponse>(
       {
@@ -648,15 +634,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['namespace_id', request.namespaceId],
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
       },
       unmarshalListTokensResponse,
     )
-
+  
   /**
    * List all tokens. List all tokens belonging to a specified Organization or Project.
    *
@@ -666,6 +649,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   listTokens = (request: Readonly<ListTokensRequest> = {}) =>
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
+  
   /**
    * Delete a token. Delete a token with a specified ID.
    *
@@ -681,6 +665,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalToken,
     )
 
+  
   /**
    * Create a trigger. Create a new trigger for a specified container.
    *
@@ -700,6 +685,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalTrigger,
     )
 
+  
   /**
    * Get a trigger. Get a trigger with a specified ID.
    *
@@ -714,7 +700,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalTrigger,
     )
-
+  
   /**
    * Waits for {@link Trigger} to be in a final state.
    *
@@ -727,19 +713,14 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     options?: Readonly<WaitForOptions<Trigger>>,
   ) =>
     waitForResource(
-      options?.stop ??
-        (res =>
-          Promise.resolve(
-            !TRIGGER_TRANSIENT_STATUSES_CONTAINER.includes(res.status),
-          )),
+      options?.stop ?? (res => Promise.resolve(!TRIGGER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getTrigger,
       request,
       options,
     )
 
-  protected pageOfListTriggers = (
-    request: Readonly<ListTriggersRequest> = {},
-  ) =>
+  
+  protected pageOfListTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     this.client.fetch<ListTriggersResponse>(
       {
         method: 'GET',
@@ -747,26 +728,23 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          [
-            'page_size',
-            request.pageSize ?? this.client.settings.defaultPageSize,
-          ],
-          ...Object.entries(
-            resolveOneOf([
-              { param: 'container_id', value: request.containerId },
-              { param: 'namespace_id', value: request.namespaceId },
-              {
-                default: this.client.settings.defaultProjectId,
-                param: 'project_id',
-                value: request.projectId,
-              },
-            ]),
-          ),
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],  
+          ...Object.entries(resolveOneOf([
+            {param: 'container_id',
+              value: request.containerId,
+            },
+            {param: 'namespace_id',
+              value: request.namespaceId,
+            },
+            {default: this.client.settings.defaultProjectId,param: 'project_id',
+              value: request.projectId,
+            },
+          ])),
         ),
       },
       unmarshalListTriggersResponse,
     )
-
+  
   /**
    * List all triggers. List all triggers belonging to a specified Organization or Project.
    *
@@ -776,6 +754,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     enrichForPagination('triggers', this.pageOfListTriggers, request)
 
+  
   /**
    * Update a trigger. Update a trigger with a specified ID.
    *
@@ -795,6 +774,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       unmarshalTrigger,
     )
 
+  
   /**
    * Delete a trigger. Delete a trigger with a specified ID.
    *
@@ -809,4 +789,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
       },
       unmarshalTrigger,
     )
+
+  
 }
+

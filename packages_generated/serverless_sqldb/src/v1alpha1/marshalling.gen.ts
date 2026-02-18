@@ -1,9 +1,6 @@
-import type { DefaultValues } from '@scaleway/sdk-client'
-import {
-  isJSONObject,
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '@scaleway/sdk-client'
+
+import type { DefaultValues, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   CreateDatabaseRequest,
   Database,
@@ -61,9 +58,7 @@ export const unmarshalDatabase = (data: unknown): Database => {
   } as Database
 }
 
-export const unmarshalListDatabaseBackupsResponse = (
-  data: unknown,
-): ListDatabaseBackupsResponse => {
+export const unmarshalListDatabaseBackupsResponse = (data: unknown): ListDatabaseBackupsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDatabaseBackupsResponse' failed as data isn't a dictionary.`,
@@ -76,9 +71,7 @@ export const unmarshalListDatabaseBackupsResponse = (
   } as ListDatabaseBackupsResponse
 }
 
-export const unmarshalListDatabasesResponse = (
-  data: unknown,
-): ListDatabasesResponse => {
+export const unmarshalListDatabasesResponse = (data: unknown): ListDatabasesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'ListDatabasesResponse' failed as data isn't a dictionary.`,

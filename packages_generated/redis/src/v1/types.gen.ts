@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Zone as ScwZone, TimeSeries } from '@scaleway/sdk-client'
 
+
 export type AvailableClusterSettingPropertyType =
   | 'UNKNOWN'
   | 'BOOLEAN'
@@ -32,9 +33,13 @@ export type NodeTypeStock =
   | 'out_of_stock'
   | 'available'
 
-export type PrivateNetworkProvisioningMode = 'static' | 'ipam'
+export type PrivateNetworkProvisioningMode =
+  | 'static'
+  | 'ipam'
 
-export interface EndpointSpecPrivateNetworkSpecIpamConfig {}
+export interface EndpointSpecPrivateNetworkSpecIpamConfig {
+}
+
 
 export interface PrivateNetwork {
   /**
@@ -55,7 +60,10 @@ export interface PrivateNetwork {
   provisioningMode: PrivateNetworkProvisioningMode
 }
 
-export interface PublicNetwork {}
+
+export interface PublicNetwork {
+}
+
 
 export interface EndpointSpecPrivateNetworkSpec {
   /**
@@ -72,7 +80,10 @@ export interface EndpointSpecPrivateNetworkSpec {
   ipamConfig?: EndpointSpecPrivateNetworkSpecIpamConfig
 }
 
-export interface EndpointSpecPublicNetworkSpec {}
+
+export interface EndpointSpecPublicNetworkSpec {
+}
+
 
 export interface AvailableClusterSetting {
   /**
@@ -109,6 +120,7 @@ export interface AvailableClusterSetting {
   deprecated: boolean
 }
 
+
 export interface ACLRule {
   /**
    * ID of the rule.
@@ -124,6 +136,7 @@ export interface ACLRule {
   description?: string
 }
 
+
 export interface ClusterSetting {
   /**
    * Value of the setting.
@@ -134,6 +147,7 @@ export interface ClusterSetting {
    */
   name: string
 }
+
 
 export interface Endpoint {
   /**
@@ -162,6 +176,7 @@ export interface Endpoint {
   id: string
 }
 
+
 export interface ACLRuleSpec {
   /**
    * IPv4 network address of the rule.
@@ -172,6 +187,7 @@ export interface ACLRuleSpec {
    */
   description: string
 }
+
 
 export interface EndpointSpec {
   /**
@@ -187,6 +203,7 @@ export interface EndpointSpec {
    */
   publicNetwork?: EndpointSpecPublicNetworkSpec
 }
+
 
 export interface ClusterVersion {
   /**
@@ -210,6 +227,7 @@ export interface ClusterVersion {
    */
   zone: ScwZone
 }
+
 
 export interface Cluster {
   /**
@@ -282,6 +300,7 @@ export interface Cluster {
   upgradableVersions: string[]
 }
 
+
 export interface NodeType {
   /**
    * Node type name.
@@ -317,6 +336,7 @@ export interface NodeType {
   zone: ScwZone
 }
 
+
 export type AddAclRulesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -332,6 +352,7 @@ export type AddAclRulesRequest = {
   aclRules: ACLRuleSpec[]
 }
 
+
 export interface AddAclRulesResponse {
   /**
    * ACL Rules enabled for the Database Instance.
@@ -342,6 +363,7 @@ export interface AddAclRulesResponse {
    */
   totalCount: number
 }
+
 
 export type AddClusterSettingsRequest = {
   /**
@@ -358,6 +380,7 @@ export type AddClusterSettingsRequest = {
   settings: ClusterSetting[]
 }
 
+
 export type AddEndpointsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -373,6 +396,7 @@ export type AddEndpointsRequest = {
   endpoints: EndpointSpec[]
 }
 
+
 export interface AddEndpointsResponse {
   /**
    * Endpoints defined on the Database Instance.
@@ -384,6 +408,7 @@ export interface AddEndpointsResponse {
   totalCount: number
 }
 
+
 export interface ClusterMetricsResponse {
   /**
    * Time series of metrics of a given cluster.
@@ -391,12 +416,14 @@ export interface ClusterMetricsResponse {
   timeseries: TimeSeries[]
 }
 
+
 export interface ClusterSettingsResponse {
   /**
    * Settings configured for a given Database Instance.
    */
   settings: ClusterSetting[]
 }
+
 
 export type CreateClusterRequest = {
   /**
@@ -453,6 +480,7 @@ export type CreateClusterRequest = {
   clusterSettings?: ClusterSetting[]
 }
 
+
 export type DeleteAclRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -464,6 +492,7 @@ export type DeleteAclRuleRequest = {
   aclId: string
 }
 
+
 export type DeleteClusterRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -474,6 +503,7 @@ export type DeleteClusterRequest = {
    */
   clusterId: string
 }
+
 
 export type DeleteClusterSettingRequest = {
   /**
@@ -490,6 +520,7 @@ export type DeleteClusterSettingRequest = {
   settingName: string
 }
 
+
 export type DeleteEndpointRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -500,6 +531,7 @@ export type DeleteEndpointRequest = {
    */
   endpointId: string
 }
+
 
 export type GetAclRuleRequest = {
   /**
@@ -512,6 +544,7 @@ export type GetAclRuleRequest = {
   aclId: string
 }
 
+
 export type GetClusterCertificateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -522,6 +555,7 @@ export type GetClusterCertificateRequest = {
    */
   clusterId: string
 }
+
 
 export type GetClusterMetricsRequest = {
   /**
@@ -546,6 +580,7 @@ export type GetClusterMetricsRequest = {
   metricName?: string
 }
 
+
 export type GetClusterRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -557,6 +592,7 @@ export type GetClusterRequest = {
   clusterId: string
 }
 
+
 export type GetEndpointRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -567,6 +603,7 @@ export type GetEndpointRequest = {
    */
   endpointId: string
 }
+
 
 export type ListClusterVersionsRequest = {
   /**
@@ -593,6 +630,7 @@ export type ListClusterVersionsRequest = {
   pageSize?: number
 }
 
+
 export interface ListClusterVersionsResponse {
   /**
    * List of available Redis™ engine versions.
@@ -603,6 +641,7 @@ export interface ListClusterVersionsResponse {
    */
   totalCount: number
 }
+
 
 export type ListClustersRequest = {
   /**
@@ -637,6 +676,7 @@ export type ListClustersRequest = {
   pageSize?: number
 }
 
+
 export interface ListClustersResponse {
   /**
    * List all Database Instances.
@@ -647,6 +687,7 @@ export interface ListClustersResponse {
    */
   totalCount: number
 }
+
 
 export type ListNodeTypesRequest = {
   /**
@@ -661,6 +702,7 @@ export type ListNodeTypesRequest = {
   pageSize?: number
 }
 
+
 export interface ListNodeTypesResponse {
   /**
    * Types of node.
@@ -671,6 +713,7 @@ export interface ListNodeTypesResponse {
    */
   totalCount: number
 }
+
 
 export type MigrateClusterRequest = {
   /**
@@ -701,6 +744,7 @@ export type MigrateClusterRequest = {
   clusterSize?: number
 }
 
+
 export type RenewClusterCertificateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -711,6 +755,7 @@ export type RenewClusterCertificateRequest = {
    */
   clusterId: string
 }
+
 
 export type SetAclRulesRequest = {
   /**
@@ -727,12 +772,14 @@ export type SetAclRulesRequest = {
   aclRules: ACLRuleSpec[]
 }
 
+
 export interface SetAclRulesResponse {
   /**
    * ACL Rules enabled for the Database Instance.
    */
   aclRules: ACLRule[]
 }
+
 
 export type SetClusterSettingsRequest = {
   /**
@@ -749,6 +796,7 @@ export type SetClusterSettingsRequest = {
   settings: ClusterSetting[]
 }
 
+
 export type SetEndpointsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -764,12 +812,14 @@ export type SetEndpointsRequest = {
   endpoints: EndpointSpec[]
 }
 
+
 export interface SetEndpointsResponse {
   /**
    * Endpoints defined on the Database Instance.
    */
   endpoints: Endpoint[]
 }
+
 
 export type UpdateClusterRequest = {
   /**
@@ -798,6 +848,7 @@ export type UpdateClusterRequest = {
   password?: string
 }
 
+
 export type UpdateEndpointRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -820,3 +871,5 @@ export type UpdateEndpointRequest = {
    */
   publicNetwork?: EndpointSpecPublicNetworkSpec
 }
+
+
