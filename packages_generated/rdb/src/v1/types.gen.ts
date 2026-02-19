@@ -546,7 +546,7 @@ export interface ACLRule {
   /**
    * @deprecated 
    */
-  port?: number
+  port: number
   protocol: ACLRuleProtocol
   direction: ACLRuleDirection
   action: ACLRuleAction
@@ -848,7 +848,7 @@ export interface NodeType {
   /**
    * @deprecated The Node Type is compliant with Block Storage.
    */
-  isBssdCompatible?: boolean
+  isBssdCompatible: boolean
   /**
    * The Node Type is currently disabled.
    */

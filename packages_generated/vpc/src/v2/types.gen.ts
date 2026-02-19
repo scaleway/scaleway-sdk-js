@@ -48,6 +48,7 @@ export type VPCConnectorStatus =
   | 'unknown_vpc_connector_status'
   | 'orphan'
   | 'peered'
+  | 'conflict'
 
 export interface Subnet {
   /**

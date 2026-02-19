@@ -851,11 +851,11 @@ export interface User {
   /**
    * @deprecated Deprecated, use "mfa" instead.
    */
-  twoFactorEnabled?: boolean
+  twoFactorEnabled: boolean
   /**
    * @deprecated Status of user invitation.
    */
-  status?: UserStatus
+  status: UserStatus
   /**
    * Defines whether MFA is enabled.
    */

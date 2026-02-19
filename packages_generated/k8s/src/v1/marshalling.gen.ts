@@ -192,7 +192,7 @@ export const unmarshalNode = (data: unknown): Node => {
 
   return {
     clusterId: data.cluster_id,
-    conditions: data.conditions ? data.conditions : undefined,
+    conditions: data.conditions,
     createdAt: unmarshalDate(data.created_at),
     errorMessage: data.error_message,
     id: data.id,

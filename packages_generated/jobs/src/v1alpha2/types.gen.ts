@@ -135,7 +135,7 @@ export interface JobDefinition {
   /**
    * @deprecated 
    */
-  command?: string
+  command: string
   environmentVariables: Record<string, string>
   jobTimeout?: string
   description: string
@@ -174,7 +174,7 @@ export interface JobRun {
   /**
    * @deprecated 
    */
-  command?: string
+  command: string
   environmentVariables: Record<string, string>
   startupCommand: string[]
   args: string[]
@@ -220,7 +220,7 @@ export type CreateJobDefinitionRequest = {
   /**
    * @deprecated Deprecated: please use startup_command instead.
    */
-  command?: string
+  command: string
   /**
    * The main executable or entrypoint script to run.
 If both command and startup_command are provided, only startup_command will be used.
