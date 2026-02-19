@@ -150,6 +150,7 @@ import type {
   WebsiteApiCreateWebsiteRequest,
   WebsiteApiDeleteWebsiteRequest,
   WebsiteApiListWebsitesRequest,
+  WebsiteApiResetWebsiteRequest,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -1435,6 +1436,25 @@ export class WebsiteAPI extends ParentAPI {
         method: 'DELETE',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}`,
       },
+    )
+
+  
+  /**
+   * Delete a website's content, all files and directories. This. Permanently deletes data including files and configurations. The
+website will display the default welcome page.
+   *
+   * @param request - The request {@link WebsiteApiResetWebsiteRequest}
+   * @returns A Promise of Website
+   */
+  resetWebsite = (request: Readonly<WebsiteApiResetWebsiteRequest>) =>
+    this.client.fetch<Website>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}/reset`,
+      },
+      unmarshalWebsite,
     )
 
   
