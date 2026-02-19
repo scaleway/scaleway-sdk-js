@@ -682,7 +682,7 @@ export interface Cluster {
   /**
    * @deprecated Defines whether ACL is available on the cluster.
    */
-  aclAvailable?: boolean
+  aclAvailable: boolean
   /**
    * IAM group that nodes are members of (this field might be empty during early stage of cluster creation).
    */
@@ -738,7 +738,7 @@ export interface Node {
   /**
    * @deprecated Conditions of the node. These conditions contain the Node Problem Detector conditions, as well as some in house conditions.
    */
-  conditions?: Record<string, string>
+  conditions: Record<string, string>
   /**
    * Status of the node.
    */
