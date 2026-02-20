@@ -474,6 +474,18 @@ export interface CreateClusterRequestPoolConfig {
    * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
    */
   securityGroupId?: string
+  /**
+   * Kubernetes labels applied and reconciled on the nodes.
+   */
+  labels: Record<string, string>
+  /**
+   * Kubernetes taints applied and reconciled on the nodes.
+   */
+  taints: CoreV1Taint[]
+  /**
+   * Kubernetes taints applied at node creation but not reconciled afterwards.
+   */
+  startupTaints: CoreV1Taint[]
 }
 
 
@@ -682,7 +694,7 @@ export interface Cluster {
   /**
    * @deprecated Defines whether ACL is available on the cluster.
    */
-  aclAvailable?: boolean
+  aclAvailable: boolean
   /**
    * IAM group that nodes are members of (this field might be empty during early stage of cluster creation).
    */
@@ -738,7 +750,7 @@ export interface Node {
   /**
    * @deprecated Conditions of the node. These conditions contain the Node Problem Detector conditions, as well as some in house conditions.
    */
-  conditions?: Record<string, string>
+  conditions: Record<string, string>
   /**
    * Status of the node.
    */
@@ -854,6 +866,18 @@ export interface Pool {
    * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
    */
   securityGroupId: string
+  /**
+   * Kubernetes labels applied and reconciled on the nodes.
+   */
+  labels: Record<string, string>
+  /**
+   * Kubernetes taints applied and reconciled on the nodes.
+   */
+  taints: CoreV1Taint[]
+  /**
+   * Kubernetes taints applied at node creation but not reconciled afterwards.
+   */
+  startupTaints: CoreV1Taint[]
   /**
    * Cluster region of the pool.
    */
@@ -1175,6 +1199,18 @@ export type CreatePoolRequest = {
    * Security group ID in which all the nodes of the pool will be created. If unset, the pool will use default Kapsule security group in current zone.
    */
   securityGroupId?: string
+  /**
+   * Kubernetes labels applied and reconciled on the nodes.
+   */
+  labels?: Record<string, string>
+  /**
+   * Kubernetes taints applied and reconciled on the nodes.
+   */
+  taints?: CoreV1Taint[]
+  /**
+   * Kubernetes taints applied at node creation but not reconciled afterwards.
+   */
+  startupTaints?: CoreV1Taint[]
 }
 
 
