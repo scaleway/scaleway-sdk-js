@@ -192,7 +192,7 @@ export const unmarshalNode = (data: unknown): Node => {
 
   return {
     clusterId: data.cluster_id,
-    conditions: data.conditions ? data.conditions : undefined,
+    conditions: data.conditions,
     createdAt: unmarshalDate(data.created_at),
     errorMessage: data.error_message,
     id: data.id,
@@ -205,6 +205,20 @@ export const unmarshalNode = (data: unknown): Node => {
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Node
+}
+
+const unmarshalCoreV1Taint = (data: unknown): CoreV1Taint => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CoreV1Taint' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    effect: data.effect,
+    key: data.key,
+    value: data.value,
+  } as CoreV1Taint
 }
 
 const unmarshalPoolUpgradePolicy = (data: unknown): PoolUpgradePolicy => {
@@ -235,6 +249,7 @@ export const unmarshalPool = (data: unknown): Pool => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     kubeletArgs: data.kubelet_args,
+    labels: data.labels,
     maxSize: data.max_size,
     minSize: data.min_size,
     name: data.name,
@@ -246,8 +261,10 @@ export const unmarshalPool = (data: unknown): Pool => {
     rootVolumeType: data.root_volume_type,
     securityGroupId: data.security_group_id,
     size: data.size,
+    startupTaints: unmarshalArrayOfObject(data.startup_taints, unmarshalCoreV1Taint),
     status: data.status,
     tags: data.tags,
+    taints: unmarshalArrayOfObject(data.taints, unmarshalCoreV1Taint),
     updatedAt: unmarshalDate(data.updated_at),
     upgradePolicy: data.upgrade_policy ? unmarshalPoolUpgradePolicy(data.upgrade_policy) : undefined,
     version: data.version,
@@ -543,6 +560,15 @@ const marshalMaintenanceWindow = (
   start_hour: request.startHour,
 })
 
+const marshalCoreV1Taint = (
+  request: CoreV1Taint,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  effect: request.effect,
+  key: request.key,
+  value: request.value,
+})
+
 const marshalCreateClusterRequestPoolConfigUpgradePolicy = (
   request: CreateClusterRequestPoolConfigUpgradePolicy,
   defaults: DefaultValues,
@@ -596,6 +622,7 @@ const marshalCreateClusterRequestPoolConfig = (
   autoscaling: request.autoscaling,
   container_runtime: request.containerRuntime,
   kubelet_args:  request.kubeletArgs,
+  labels:  request.labels,
   max_size: request.maxSize,
   min_size: request.minSize,
   name: request.name,
@@ -606,7 +633,9 @@ const marshalCreateClusterRequestPoolConfig = (
   root_volume_type: request.rootVolumeType,
   security_group_id: request.securityGroupId,
   size: request.size,
+  startup_taints:  request.startupTaints.map(elt => marshalCoreV1Taint(elt, defaults)),
   tags: request.tags,
+  taints:  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)),
   upgrade_policy: ((request.upgradePolicy !== undefined) ?  marshalCreateClusterRequestPoolConfigUpgradePolicy(request.upgradePolicy, defaults): undefined),
   zone: request.zone,
 })
@@ -658,6 +687,7 @@ export const marshalCreatePoolRequest = (
   autoscaling: request.autoscaling,
   container_runtime: request.containerRuntime,
   kubelet_args: ((request.kubeletArgs !== undefined) ?  request.kubeletArgs: undefined),
+  labels: ((request.labels !== undefined) ?  request.labels: undefined),
   max_size: request.maxSize,
   min_size: request.minSize,
   name: request.name || randomName('pool'),
@@ -668,7 +698,9 @@ export const marshalCreatePoolRequest = (
   root_volume_type: request.rootVolumeType,
   security_group_id: request.securityGroupId,
   size: request.size,
+  startup_taints: ((request.startupTaints !== undefined) ?  request.startupTaints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
   tags: request.tags,
+  taints: ((request.taints !== undefined) ?  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
   upgrade_policy: ((request.upgradePolicy !== undefined) ?  marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults): undefined),
   zone: request.zone ?? defaults.defaultZone,
 })
@@ -692,15 +724,6 @@ export const marshalSetPoolLabelsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   labels: ((request.labels !== undefined) ?  request.labels: undefined),
-})
-
-const marshalCoreV1Taint = (
-  request: CoreV1Taint,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  effect: request.effect,
-  key: request.key,
-  value: request.value,
 })
 
 export const marshalSetPoolStartupTaintsRequest = (
