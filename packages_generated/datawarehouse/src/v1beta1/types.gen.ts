@@ -163,6 +163,10 @@ export interface Deployment {
    */
   replicaCount: number
   /**
+   * Number of shards for the deployment.
+   */
+  shardCount: number
+  /**
    * Minimum CPU count for the deployment.
    */
   cpuMin: number
@@ -210,6 +214,10 @@ export interface Preset {
    * Number of replicas for the preset.
    */
   replicaCount: number
+  /**
+   * Number of shards for the preset.
+   */
+  shardCount: number
 }
 
 
@@ -278,6 +286,10 @@ export type CreateDeploymentRequest = {
    * Number of replicas for the deployment.
    */
   replicaCount: number
+  /**
+   * Number of shard for the deployment.
+   */
+  shardCount?: number
   /**
    * Password for the initial user.
    */
