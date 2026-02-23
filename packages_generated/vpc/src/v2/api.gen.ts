@@ -13,39 +13,33 @@ import {
   marshalAddSubnetsRequest,
   marshalCreatePrivateNetworkRequest,
   marshalCreateRouteRequest,
-  marshalCreateVPCConnectorRequest,
   marshalCreateVPCRequest,
   marshalDeleteSubnetsRequest,
   marshalSetAclRequest,
   marshalUpdatePrivateNetworkRequest,
   marshalUpdateRouteRequest,
-  marshalUpdateVPCConnectorRequest,
   marshalUpdateVPCRequest,
   unmarshalAddSubnetsResponse,
   unmarshalDeleteSubnetsResponse,
   unmarshalGetAclResponse,
   unmarshalListPrivateNetworksResponse,
   unmarshalListSubnetsResponse,
-  unmarshalListVPCConnectorsResponse,
   unmarshalListVPCsResponse,
   unmarshalPrivateNetwork,
   unmarshalRoute,
   unmarshalSetAclResponse,
   unmarshalVPC,
-  unmarshalVPCConnector,
 } from './marshalling.gen.js'
 import type {
   AddSubnetsRequest,
   AddSubnetsResponse,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
-  CreateVPCConnectorRequest,
   CreateVPCRequest,
   DeletePrivateNetworkRequest,
   DeleteRouteRequest,
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
-  DeleteVPCConnectorRequest,
   DeleteVPCRequest,
   EnableCustomRoutesPropagationRequest,
   EnableDHCPRequest,
@@ -54,14 +48,11 @@ import type {
   GetAclResponse,
   GetPrivateNetworkRequest,
   GetRouteRequest,
-  GetVPCConnectorRequest,
   GetVPCRequest,
   ListPrivateNetworksRequest,
   ListPrivateNetworksResponse,
   ListSubnetsRequest,
   ListSubnetsResponse,
-  ListVPCConnectorsRequest,
-  ListVPCConnectorsResponse,
   ListVPCsRequest,
   ListVPCsResponse,
   PrivateNetwork,
@@ -70,10 +61,8 @@ import type {
   SetAclResponse,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
-  UpdateVPCConnectorRequest,
   UpdateVPCRequest,
   VPC,
-  VPCConnector,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -528,107 +517,6 @@ export class API extends ParentAPI {
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
       },
       unmarshalSetAclResponse,
-    )
-
-  
-  protected pageOfListVPCConnectors = (request: Readonly<ListVPCConnectorsRequest> = {}) =>
-    this.client.fetch<ListVPCConnectorsResponse>(
-      {
-        method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors`,
-        urlParams: urlParams(
-          ['name', request.name],
-          ['order_by', request.orderBy],
-          ['organization_id', request.organizationId],
-          ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId],
-          ['status', request.status],
-          ['tags', request.tags],
-          ['target_vpc_id', request.targetVpcId],
-          ['vpc_id', request.vpcId],
-        ),
-      },
-      unmarshalListVPCConnectorsResponse,
-    )
-  
-  /**
-   * List VPC connectors. List existing VPC connectors in the specified region.
-   *
-   * @param request - The request {@link ListVPCConnectorsRequest}
-   * @returns A Promise of ListVPCConnectorsResponse
-   */
-  listVPCConnectors = (request: Readonly<ListVPCConnectorsRequest> = {}) =>
-    enrichForPagination('vpcConnectors', this.pageOfListVPCConnectors, request)
-
-  
-  /**
-   * Create a VPC connector. Create a new VPC connector in the specified region.
-   *
-   * @param request - The request {@link CreateVPCConnectorRequest}
-   * @returns A Promise of VPCConnector
-   */
-  createVPCConnector = (request: Readonly<CreateVPCConnectorRequest>) =>
-    this.client.fetch<VPCConnector>(
-      {
-        body: JSON.stringify(
-          marshalCreateVPCConnectorRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors`,
-      },
-      unmarshalVPCConnector,
-    )
-
-  
-  /**
-   * Get a VPC connector. Retrieve details of an existing VPC connector, specified by its VPC connector ID.
-   *
-   * @param request - The request {@link GetVPCConnectorRequest}
-   * @returns A Promise of VPCConnector
-   */
-  getVPCConnector = (request: Readonly<GetVPCConnectorRequest>) =>
-    this.client.fetch<VPCConnector>(
-      {
-        method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}`,
-      },
-      unmarshalVPCConnector,
-    )
-
-  
-  /**
-   * Update VPC connector. Update parameters including name and tags of the specified VPC connector.
-   *
-   * @param request - The request {@link UpdateVPCConnectorRequest}
-   * @returns A Promise of VPCConnector
-   */
-  updateVPCConnector = (request: Readonly<UpdateVPCConnectorRequest>) =>
-    this.client.fetch<VPCConnector>(
-      {
-        body: JSON.stringify(
-          marshalUpdateVPCConnectorRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'PATCH',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}`,
-      },
-      unmarshalVPCConnector,
-    )
-
-  
-  /**
-   * Delete a VPC connector. Delete a VPC connector specified by its VPC connector ID.
-   *
-   * @param request - The request {@link DeleteVPCConnectorRequest}
-   */
-  deleteVPCConnector = (request: Readonly<DeleteVPCConnectorRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}`,
-      },
     )
 
   
