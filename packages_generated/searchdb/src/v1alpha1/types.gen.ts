@@ -86,7 +86,7 @@ export interface Endpoint {
   /**
    * @deprecated DNS entry to access to the service. Now deprecated. Use the `url` field from `services` field instead.
    */
-  dnsRecord?: string
+  dnsRecord: string
   /**
    * List of available services, their ports and URLs.
    */

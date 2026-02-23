@@ -216,11 +216,11 @@ export interface Connection {
   /**
    * @deprecated Status of the IPv4 IPsec tunnel.
    */
-  tunnelStatusIpv4?: TunnelStatus
+  tunnelStatusIpv4: TunnelStatus
   /**
    * @deprecated Status of the IPv6 IPsec tunnel.
    */
-  tunnelStatusIpv6?: TunnelStatus
+  tunnelStatusIpv6: TunnelStatus
   /**
    * Status of the BGP IPv4 session.
    */
@@ -524,7 +524,7 @@ export interface CreateConnectionResponse {
   /**
    * @deprecated Deprecated, use secret_id & secret_revision fields.
    */
-  preSharedKey?: string
+  preSharedKey: string
 }
 
 
@@ -1061,7 +1061,7 @@ export interface RenewConnectionPskResponse {
   /**
    * @deprecated Deprecated, use secret_id & secret_revision fields.
    */
-  preSharedKey?: string
+  preSharedKey: string
 }
 
 
