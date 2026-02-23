@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.4.0...@scaleway/sdk-k8s@2.5.0) (2026-02-23)
+
+### Features
+
+- **k8s:** add pools labels, taints and startup_taints ([#2761](https://github.com/scaleway/scaleway-sdk-js/issues/2761)) ([b844d5c](https://github.com/scaleway/scaleway-sdk-js/commit/b844d5c5fcbbfeea224aa4376d86e165b1685637))
+
 # 2.4.0 (2026-02-16)
 
 ### Features

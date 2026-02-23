@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.4.0...@scaleway/sdk-audit-trail@2.4.1) (2026-02-23)
+
+**Note:** Version bump only for package @scaleway/sdk-audit-trail
+
 # 2.4.0 (2026-02-16)
 
 ### Features
