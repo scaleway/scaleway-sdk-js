@@ -145,5 +145,6 @@ export type {
   WebsiteApiCreateWebsiteRequest,
   WebsiteApiDeleteWebsiteRequest,
   WebsiteApiListWebsitesRequest,
+  WebsiteApiResetWebsiteRequest,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'
