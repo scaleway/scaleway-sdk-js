@@ -31,6 +31,10 @@ export const CreateDeploymentRequest = {
     greaterThanOrEqual: 1,
     lessThanOrEqual: 6,
   },
+  shardCount: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 6,
+  },
   version: {
     maxLength: 10,
     minLength: 1,

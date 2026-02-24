@@ -111,6 +111,7 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     ramPerCpu: data.ram_per_cpu,
     region: data.region,
     replicaCount: data.replica_count,
+    shardCount: data.shard_count,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -171,6 +172,7 @@ const unmarshalPreset = (data: unknown): Preset => {
     name: data.name,
     ramPerCpu: data.ram_per_cpu,
     replicaCount: data.replica_count,
+    shardCount: data.shard_count,
   } as Preset
 }
 
@@ -274,6 +276,7 @@ export const marshalCreateDeploymentRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
   ram_per_cpu: request.ramPerCpu,
   replica_count: request.replicaCount,
+  shard_count: request.shardCount,
   tags: request.tags,
   version: request.version,
 })
