@@ -2137,3 +2137,19 @@ export type WebsiteApiListWebsitesRequest = {
 }
 
 
+export type WebsiteApiResetWebsiteRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Hosting ID to which the website is attached to.
+   */
+  hostingId: string
+  /**
+   * The domain name with which the website is associated.
+   */
+  domainName: string
+}
+
+
