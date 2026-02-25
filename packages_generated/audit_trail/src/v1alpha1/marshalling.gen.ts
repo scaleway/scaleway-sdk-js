@@ -7,12 +7,15 @@ import type {
   AccountOrganizationInfo,
   AccountProjectInfo,
   AccountUserInfo,
+  AlertRule,
   AppleSiliconServerInfo,
   AuditTrailExportJobInfo,
   AuthenticationEvent,
   BaremetalServerInfo,
   BaremetalSettingInfo,
   CreateExportJobRequest,
+  DisableAlertRulesRequest,
+  DisableAlertRulesResponse,
   EdgeServicesBackendStageInfo,
   EdgeServicesCacheStageInfo,
   EdgeServicesDNSStageInfo,
@@ -22,6 +25,8 @@ import type {
   EdgeServicesRouteStageInfo,
   EdgeServicesTLSStageInfo,
   EdgeServicesWAFStageInfo,
+  EnableAlertRulesRequest,
+  EnableAlertRulesResponse,
   Event,
   EventPrincipal,
   ExportJob,
@@ -34,6 +39,7 @@ import type {
   KubernetesClusterInfo,
   KubernetesNodeInfo,
   KubernetesPoolInfo,
+  ListAlertRulesResponse,
   ListAuthenticationEventsResponse,
   ListCombinedEventsResponse,
   ListCombinedEventsResponseCombinedEvent,
@@ -52,6 +58,8 @@ import type {
   Resource,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
+  SetEnabledAlertRulesRequest,
+  SetEnabledAlertRulesResponse,
   SystemEvent,
   VpcGwGatewayInfo,
   VpcGwGatewayNetworkInfo,
@@ -105,6 +113,58 @@ export const unmarshalExportJob = (data: unknown): ExportJob => {
     s3: data.s3 ? unmarshalExportJobS3(data.s3) : undefined,
     tags: data.tags,
   } as ExportJob
+}
+
+const unmarshalAlertRule = (data: unknown): AlertRule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AlertRule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    description: data.description,
+    id: data.id,
+    name: data.name,
+    status: data.status,
+  } as AlertRule
+}
+
+export const unmarshalDisableAlertRulesResponse = (data: unknown): DisableAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DisableAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
+  } as DisableAlertRulesResponse
+}
+
+export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EnableAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
+  } as EnableAlertRulesResponse
+}
+
+export const unmarshalListAlertRulesResponse = (data: unknown): ListAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
+    totalCount: data.total_count,
+  } as ListAlertRulesResponse
 }
 
 const unmarshalAccountContractSignatureInfoAccountContractInfo = (data: unknown): AccountContractSignatureInfoAccountContractInfo => {
@@ -843,6 +903,18 @@ export const unmarshalListProductsResponse = (data: unknown): ListProductsRespon
   } as ListProductsResponse
 }
 
+export const unmarshalSetEnabledAlertRulesResponse = (data: unknown): SetEnabledAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetEnabledAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
+  } as SetEnabledAlertRulesResponse
+}
+
 const marshalExportJobS3 = (
   request: ExportJobS3,
   defaults: DefaultValues,
@@ -866,4 +938,28 @@ export const marshalCreateExportJobRequest = (
       : undefined,
     },
   ]),
+})
+
+export const marshalDisableAlertRulesRequest = (
+  request: DisableAlertRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  alert_rule_ids: request.alertRuleIds,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalEnableAlertRulesRequest = (
+  request: EnableAlertRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  alert_rule_ids: request.alertRuleIds,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalSetEnabledAlertRulesRequest = (
+  request: SetEnabledAlertRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  enabled_alert_rule_ids: request.enabledAlertRuleIds,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
 })

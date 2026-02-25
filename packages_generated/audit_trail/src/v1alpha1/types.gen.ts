@@ -4,6 +4,13 @@ import type { Region as ScwRegion, } from '@scaleway/sdk-client'
 import type {CountryCode as StdCountryCode,} from '@scaleway/sdk-std'
 
 
+export type AlertRuleStatus =
+  | 'unknown_status'
+  | 'enabled'
+  | 'disabled'
+  | 'enabling'
+  | 'disabling'
+
 export type AuthenticationEventFailureReason =
   | 'unknown_failure_reason'
   | 'invalid_mfa'
@@ -734,6 +741,26 @@ export interface ProductService {
 }
 
 
+export interface AlertRule {
+  /**
+   * ID of the alert rule.
+   */
+  id: string
+  /**
+   * Name of the alert rule.
+   */
+  name: string
+  /**
+   * Description of the alert rule.
+   */
+  description: string
+  /**
+   * Current status of the alert rule.
+   */
+  status: AlertRuleStatus
+}
+
+
 export interface ListCombinedEventsResponseCombinedEvent {
   /**
    *
@@ -842,6 +869,84 @@ export type DeleteExportJobRequest = {
    * ID of the export job.
    */
   exportJobId: string
+}
+
+
+export type DisableAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * List of IDs of the rules to disable.
+   */
+  alertRuleIds?: string[]
+}
+
+
+export interface DisableAlertRulesResponse {
+  /**
+   * List of the rules that were disabled.
+   */
+  alertRules: AlertRule[]
+}
+
+
+export type EnableAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * List of IDs of the rules to enable.
+   */
+  alertRuleIds?: string[]
+}
+
+
+export interface EnableAlertRulesResponse {
+  /**
+   * List of the rules that were enabled.
+   */
+  alertRules: AlertRule[]
+}
+
+
+export type ListAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * (Optional) Status of the alert rule.
+   */
+  status?: AlertRuleStatus
+  page?: number
+  pageSize?: number
+}
+
+
+export interface ListAlertRulesResponse {
+  /**
+   * Single page of alert rules matching the requested criteria.
+   */
+  alertRules: AlertRule[]
+  /**
+   * Total count of alert rules matching the requested criteria.
+   */
+  totalCount: number
 }
 
 
@@ -1014,6 +1119,30 @@ export interface ListProductsResponse {
    * Number of integrated products.
    */
   totalCount: number
+}
+
+
+export type SetEnabledAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * List of IDs of the rules that must be enabled after the update.
+   */
+  enabledAlertRuleIds?: string[]
+}
+
+
+export interface SetEnabledAlertRulesResponse {
+  /**
+   * List of the rules that were enabled.
+   */
+  alertRules: AlertRule[]
 }
 
 

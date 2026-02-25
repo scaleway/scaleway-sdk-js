@@ -11,17 +11,30 @@ import {
 } from '@scaleway/sdk-client'
 import {
   marshalCreateExportJobRequest,
+  marshalDisableAlertRulesRequest,
+  marshalEnableAlertRulesRequest,
+  marshalSetEnabledAlertRulesRequest,
+  unmarshalDisableAlertRulesResponse,
+  unmarshalEnableAlertRulesResponse,
   unmarshalExportJob,
+  unmarshalListAlertRulesResponse,
   unmarshalListAuthenticationEventsResponse,
   unmarshalListCombinedEventsResponse,
   unmarshalListEventsResponse,
   unmarshalListExportJobsResponse,
   unmarshalListProductsResponse,
+  unmarshalSetEnabledAlertRulesResponse,
 } from './marshalling.gen.js'
 import type {
   CreateExportJobRequest,
   DeleteExportJobRequest,
+  DisableAlertRulesRequest,
+  DisableAlertRulesResponse,
+  EnableAlertRulesRequest,
+  EnableAlertRulesResponse,
   ExportJob,
+  ListAlertRulesRequest,
+  ListAlertRulesResponse,
   ListAuthenticationEventsRequest,
   ListAuthenticationEventsResponse,
   ListCombinedEventsRequest,
@@ -32,6 +45,8 @@ import type {
   ListExportJobsResponse,
   ListProductsRequest,
   ListProductsResponse,
+  SetEnabledAlertRulesRequest,
+  SetEnabledAlertRulesResponse,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -205,6 +220,91 @@ export class API extends ParentAPI {
   
   listExportJobs = (request: Readonly<ListExportJobsRequest> = {}) =>
     enrichForPagination('exportJobs', this.pageOfListExportJobs, request)
+
+  
+  protected pageOfListAlertRules = (request: Readonly<ListAlertRulesRequest> = {}) =>
+    this.client.fetch<ListAlertRulesResponse>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-rules`,
+        urlParams: urlParams(
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['status', request.status],
+        ),
+      },
+      unmarshalListAlertRulesResponse,
+    )
+  
+  /**
+   * List alert rules for a specified organization and their current status (enabled or disabled).
+   *
+   * @param request - The request {@link ListAlertRulesRequest}
+   * @returns A Promise of ListAlertRulesResponse
+   */
+  listAlertRules = (request: Readonly<ListAlertRulesRequest> = {}) =>
+    enrichForPagination('alertRules', this.pageOfListAlertRules, request)
+
+  
+  /**
+   * Enable alert rules. Enable alert rules for a specified organization. Enabled rules will trigger alerts when matching events occur.
+   *
+   * @param request - The request {@link EnableAlertRulesRequest}
+   * @returns A Promise of EnableAlertRulesResponse
+   */
+  enableAlertRules = (request: Readonly<EnableAlertRulesRequest> = {}) =>
+    this.client.fetch<EnableAlertRulesResponse>(
+      {
+        body: JSON.stringify(
+          marshalEnableAlertRulesRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/enable-alert-rules`,
+      },
+      unmarshalEnableAlertRulesResponse,
+    )
+
+  
+  /**
+   * Disable alert rules. Disable alert rules for a specified organization. Disabled rules will no longer trigger alerts when matching events occur.
+   *
+   * @param request - The request {@link DisableAlertRulesRequest}
+   * @returns A Promise of DisableAlertRulesResponse
+   */
+  disableAlertRules = (request: Readonly<DisableAlertRulesRequest> = {}) =>
+    this.client.fetch<DisableAlertRulesResponse>(
+      {
+        body: JSON.stringify(
+          marshalDisableAlertRulesRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/disable-alert-rules`,
+      },
+      unmarshalDisableAlertRulesResponse,
+    )
+
+  
+  /**
+   * Set the alert rules to enabled. Set the alert rules to enabled by replacing the set of enabled alert rules for a specified organization. The provided list defines the complete set of rules that should be enabled. Any previously enabled rule not included in the request will be disabled.
+   *
+   * @param request - The request {@link SetEnabledAlertRulesRequest}
+   * @returns A Promise of SetEnabledAlertRulesResponse
+   */
+  setEnabledAlertRules = (request: Readonly<SetEnabledAlertRulesRequest> = {}) =>
+    this.client.fetch<SetEnabledAlertRulesResponse>(
+      {
+        body: JSON.stringify(
+          marshalSetEnabledAlertRulesRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-rules`,
+      },
+      unmarshalSetEnabledAlertRulesResponse,
+    )
 
   
 }
