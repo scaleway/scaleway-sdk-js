@@ -34,6 +34,7 @@ import { Lbv1 } from '@scaleway/sdk-lb'
 import { Marketplacev2 } from '@scaleway/sdk-marketplace'
 import { Mnqv1beta1 } from '@scaleway/sdk-mnq'
 import { Mongodbv1, Mongodbv1alpha1 } from '@scaleway/sdk-mongodb'
+import { Partnerv1 } from '@scaleway/sdk-partner'
 import { ProductCatalogv2alpha1 } from '@scaleway/sdk-product-catalog'
 import { Qaasv1alpha1 } from '@scaleway/sdk-qaas'
 import { Rdbv1 } from '@scaleway/sdk-rdb'
@@ -309,6 +310,14 @@ export { Mongodbv1, Mongodbv1alpha1 }
 export const Mongodb = {
   v1: Mongodbv1,
   v1alpha1: Mongodbv1alpha1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'Partner' namespace instead (e.g., Partner.v1).
+ */
+export { Partnerv1 }
+export const Partner = {
+  v1: Partnerv1,
 }
 
 /**
