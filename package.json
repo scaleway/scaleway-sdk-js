@@ -81,7 +81,7 @@
     "read-pkg": "10.0.0",
     "tsc-alias": "^1.8.16",
     "typedoc": "0.28.15",
-    "turbo": "^2.7.5",
+    "turbo": "^2.8.10",
     "typescript": "5.9.3",
     "vite": "7.3.1",
     "vitest": "3.2.4"
