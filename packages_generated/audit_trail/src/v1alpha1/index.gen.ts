@@ -3,6 +3,7 @@
 export {
   API,
 } from './api.gen.js'
+export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
   AccountContractSignatureInfo,
@@ -10,6 +11,8 @@ export type {
   AccountOrganizationInfo,
   AccountProjectInfo,
   AccountUserInfo,
+  AlertRule,
+  AlertRuleStatus,
   AppleSiliconServerInfo,
   AuditTrailExportJobInfo,
   AuthenticationEvent,
@@ -22,6 +25,8 @@ export type {
   BaremetalSettingInfo,
   CreateExportJobRequest,
   DeleteExportJobRequest,
+  DisableAlertRulesRequest,
+  DisableAlertRulesResponse,
   EdgeServicesBackendStageInfo,
   EdgeServicesCacheStageInfo,
   EdgeServicesDNSStageInfo,
@@ -31,6 +36,8 @@ export type {
   EdgeServicesRouteStageInfo,
   EdgeServicesTLSStageInfo,
   EdgeServicesWAFStageInfo,
+  EnableAlertRulesRequest,
+  EnableAlertRulesResponse,
   Event,
   EventPrincipal,
   ExportJob,
@@ -44,6 +51,8 @@ export type {
   KubernetesClusterInfo,
   KubernetesNodeInfo,
   KubernetesPoolInfo,
+  ListAlertRulesRequest,
+  ListAlertRulesResponse,
   ListAuthenticationEventsRequest,
   ListAuthenticationEventsRequestOrderBy,
   ListAuthenticationEventsResponse,
@@ -72,6 +81,8 @@ export type {
   ResourceType,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
+  SetEnabledAlertRulesRequest,
+  SetEnabledAlertRulesResponse,
   SystemEvent,
   SystemEventKind,
   VpcGwGatewayInfo,
