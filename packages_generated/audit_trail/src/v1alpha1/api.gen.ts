@@ -23,6 +23,7 @@ import {
   unmarshalListEventsResponse,
   unmarshalListExportJobsResponse,
   unmarshalListProductsResponse,
+  unmarshalListSystemEventsResponse,
   unmarshalSetEnabledAlertRulesResponse,
 } from './marshalling.gen.js'
 import type {
@@ -45,6 +46,8 @@ import type {
   ListExportJobsResponse,
   ListProductsRequest,
   ListProductsResponse,
+  ListSystemEventsRequest,
+  ListSystemEventsResponse,
   SetEnabledAlertRulesRequest,
   SetEnabledAlertRulesResponse,
 } from './types.gen.js'
@@ -125,6 +128,30 @@ export class API extends ParentAPI {
         ),
       },
       unmarshalListAuthenticationEventsResponse,
+    )
+
+  
+  /**
+   * List system events. Retrieve the list of Audit Trail system events for a Scaleway Organization. You must specify the `organization_id`.
+   *
+   * @param request - The request {@link ListSystemEventsRequest}
+   * @returns A Promise of ListSystemEventsResponse
+   */
+  listSystemEvents = (request: Readonly<ListSystemEventsRequest> = {}) =>
+    this.client.fetch<ListSystemEventsResponse>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/system-events`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['page_token', request.pageToken],
+          ['recorded_after', request.recordedAfter],
+          ['recorded_before', request.recordedBefore],
+        ),
+      },
+      unmarshalListSystemEventsResponse,
     )
 
   
