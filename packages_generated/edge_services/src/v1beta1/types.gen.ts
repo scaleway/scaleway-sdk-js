@@ -86,6 +86,7 @@ export type PipelineErrorCode =
   | 'tls_caa_malfunction'
   | 'pipeline_invalid_workflow'
   | 'pipeline_missing_head_stage'
+  | 'pipeline_websocket_limit'
 
 export type PipelineErrorSeverity =
   | 'unknown_severity'
