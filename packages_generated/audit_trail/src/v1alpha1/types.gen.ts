@@ -60,6 +60,10 @@ export type ListExportJobsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type ListSystemEventsRequestOrderBy =
+  | 'recorded_at_desc'
+  | 'recorded_at_asc'
+
 export type ResourceType =
   | 'unknown_type'
   | 'secm_secret'
@@ -139,6 +143,9 @@ export type ResourceType =
   | 'rdb_instance_logs'
   | 'rdb_instance_read_replica'
   | 'rdb_instance_snapshot'
+  | 'mongodb_instance'
+  | 'mongodb_instance_snapshot'
+  | 'mongodb_instance_endpoint'
 
 export type SystemEventKind =
   | 'unknown_kind'
@@ -705,16 +712,46 @@ export interface Event {
 
 
 export interface SystemEvent {
+  /**
+   * ID of the system event.
+   */
   id: string
+  /**
+   * Timestamp of the system event.
+   */
   recordedAt?: Date
+  /**
+   * Locality of the system event.
+   */
   locality: string
+  /**
+   * Organization ID containing the system event.
+   */
   organizationId: string
+  /**
+   * Project of the resource attached to the system event.
+   */
   projectId?: string
-  source: string
-  systemName: string
-  resources: Resource[]
-  kind: SystemEventKind
+  /**
+   * Name of the Scaleway product in a hyphenated format.
+   */
   productName: string
+  /**
+   * Source of the system event.
+   */
+  source: string
+  /**
+   * Name of the jobs, notification, etc.
+   */
+  systemName: string
+  /**
+   * Resources attached to the event.
+   */
+  resources: Resource[]
+  /**
+   * Source of the event (unknown, cron or notification).
+   */
+  kind: SystemEventKind
 }
 
 
@@ -1119,6 +1156,41 @@ export interface ListProductsResponse {
    * Number of integrated products.
    */
   totalCount: number
+}
+
+
+export type ListSystemEventsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization containing the Audit Trail system events.
+   */
+  organizationId?: string
+  /**
+   * (Optional) The `recorded_after` parameter defines the earliest timestamp from which Audit Trail system events are retrieved. Returns `one hour ago` by default.
+   */
+  recordedAfter?: Date
+  /**
+   * (Optional) The `recorded_before` parameter defines the latest timestamp up to which Audit Trail system events are retrieved. Returns `now` by default.
+   */
+  recordedBefore?: Date
+  orderBy?: ListSystemEventsRequestOrderBy
+  pageSize?: number
+  pageToken?: string
+}
+
+
+export interface ListSystemEventsResponse {
+  /**
+   * Single page of system events matching the requested criteria.
+   */
+  events: SystemEvent[]
+  /**
+   * Page token to use in following calls to keep listing.
+   */
+  nextPageToken?: string
 }
 
 
