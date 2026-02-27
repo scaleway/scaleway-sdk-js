@@ -543,14 +543,14 @@ export interface ACLRuleRequest {
 
 export interface ACLRule {
   ip: string
-  /**
-   * @deprecated 
-   */
-  port?: number
   protocol: ACLRuleProtocol
   direction: ACLRuleDirection
   action: ACLRuleAction
   description: string
+  /**
+   * @deprecated 
+   */
+  port: number
 }
 
 
@@ -848,7 +848,7 @@ export interface NodeType {
   /**
    * @deprecated The Node Type is compliant with Block Storage.
    */
-  isBssdCompatible?: boolean
+  isBssdCompatible: boolean
   /**
    * The Node Type is currently disabled.
    */

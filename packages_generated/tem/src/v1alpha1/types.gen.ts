@@ -344,7 +344,7 @@ export interface Email {
   /**
    * @deprecated Deprecated. Email address of the recipient.
    */
-  rcptTo?: string
+  rcptTo: string
   /**
    * Email address of the recipient.
    */
@@ -856,7 +856,7 @@ export type CreateDomainRequest = {
   /**
    * @deprecated Deprecated. Accept Scaleway's Terms of Service.
    */
-  acceptTos?: boolean
+  acceptTos: boolean
   /**
    * Activate auto-configuration of the domain's DNS zone.
    */

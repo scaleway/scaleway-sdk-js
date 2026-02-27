@@ -179,7 +179,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  createNamespace = (request: Readonly<CreateNamespaceRequest> = {}) =>
+  createNamespace = (request: Readonly<CreateNamespaceRequest>) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(

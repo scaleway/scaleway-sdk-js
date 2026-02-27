@@ -123,25 +123,73 @@ export interface Secret {
 
 
 export interface JobDefinition {
+  /**
+   * UUID of the job definition.
+   */
   id: string
+  /**
+   * Name of the job definition.
+   */
   name: string
+  /**
+   * UUID of the Scaleway Project containing the job.
+   */
   projectId: string
+  /**
+   * Creation date of the job definition.
+   */
   createdAt?: Date
+  /**
+   * Last update date of the job definition.
+   */
   updatedAt?: Date
+  /**
+   * CPU limit of the job (in mvCPU).
+   */
   cpuLimit: number
+  /**
+   * Memory limit of the job (in MiB).
+   */
   memoryLimit: number
+  /**
+   * Local storage capacity of the job (in MiB).
+   */
   localStorageCapacity: number
+  /**
+   * Image to use for the job.
+   */
   imageUri: string
   /**
-   * @deprecated 
+   * @deprecated Deprecated, please use startup_command instead.
    */
-  command?: string
+  command: string
+  /**
+   * Environment variables of the job.
+   */
   environmentVariables: Record<string, string>
+  /**
+   * Timeout of the job in seconds.
+   */
   jobTimeout?: string
+  /**
+   * Description of the job.
+   */
   description: string
+  /**
+   * Configure a cron for the job.
+   */
   cronSchedule?: CronSchedule
+  /**
+   * Job startup command.
+   */
   startupCommand: string[]
+  /**
+   * Job arguments passed to the startup command at runtime.
+   */
   args: string[]
+  /**
+   * Retry behaviour in case of job failure.
+   */
   retryPolicy?: RetryPolicy
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -157,27 +205,81 @@ export interface Resource {
 
 
 export interface JobRun {
+  /**
+   * UUID of the job run.
+   */
   id: string
+  /**
+   * UUID of the job definition.
+   */
   jobDefinitionId: string
+  /**
+   * Creation date of the job run.
+   */
   createdAt?: Date
+  /**
+   * Last update date of the job run.
+   */
   updatedAt?: Date
+  /**
+   * Start date of the job run.
+   */
   startedAt?: Date
+  /**
+   * Termination date of the job run.
+   */
   terminatedAt?: Date
+  /**
+   * Duration of the job run.
+   */
   runDuration?: string
+  /**
+   * State of the job run.
+   */
   state: JobRunState
+  /**
+   * Reason for failure if the job failed.
+   */
   reason?: JobRunReason
+  /**
+   * Exit code of the job.
+   */
   exitCode?: number
+  /**
+   * Error message if the job failed.
+   */
   errorMessage?: string
+  /**
+   * CPU limit of the job (in mvCPU).
+   */
   cpuLimit: number
+  /**
+   * Memory limit of the job (in MiB).
+   */
   memoryLimit: number
+  /**
+   * Local storage capacity of the job (in MiB).
+   */
   localStorageCapacity: number
   /**
-   * @deprecated 
+   * @deprecated Deprecated, please use startup_command instead.
    */
-  command?: string
+  command: string
+  /**
+   * Environment variables of the job run.
+   */
   environmentVariables: Record<string, string>
+  /**
+   * Job startup command.
+   */
   startupCommand: string[]
+  /**
+   * Job arguments passed to the startup command at runtime.
+   */
   args: string[]
+  /**
+   * Number of retry attempts.
+   */
   attempts?: number
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -220,7 +322,7 @@ export type CreateJobDefinitionRequest = {
   /**
    * @deprecated Deprecated: please use startup_command instead.
    */
-  command?: string
+  command: string
   /**
    * The main executable or entrypoint script to run.
 If both command and startup_command are provided, only startup_command will be used.

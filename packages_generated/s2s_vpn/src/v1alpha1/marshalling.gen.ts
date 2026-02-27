@@ -92,8 +92,8 @@ export const unmarshalConnection = (data: unknown): Connection => {
     status: data.status,
     tags: data.tags,
     tunnelStatus: data.tunnel_status,
-    tunnelStatusIpv4: data.tunnel_status_ipv4 ? data.tunnel_status_ipv4 : undefined,
-    tunnelStatusIpv6: data.tunnel_status_ipv6 ? data.tunnel_status_ipv6 : undefined,
+    tunnelStatusIpv4: data.tunnel_status_ipv4,
+    tunnelStatusIpv6: data.tunnel_status_ipv6,
     updatedAt: unmarshalDate(data.updated_at),
     vpnGatewayId: data.vpn_gateway_id,
   } as Connection

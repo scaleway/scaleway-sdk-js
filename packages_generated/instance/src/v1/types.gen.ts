@@ -219,7 +219,7 @@ export interface Volume {
   /**
    * @deprecated Show the volume NBD export URI (deprecated, will always be empty).
    */
-  exportUri?: string
+  exportUri: string
   /**
    * Volume disk size.
    */
@@ -630,11 +630,11 @@ export interface Server {
   /**
    * @deprecated True to configure the instance so it uses the routed IP mode. Use of `routed_ip_enabled` as `False` is deprecated.
    */
-  routedIpEnabled?: boolean
+  routedIpEnabled: boolean
   /**
    * @deprecated True if IPv6 is enabled (deprecated and always `False` when `routed_ip_enabled` is `True`).
    */
-  enableIpv6?: boolean
+  enableIpv6: boolean
   /**
    * Instance host name.
    */
@@ -829,7 +829,7 @@ export interface SecurityGroup {
   /**
    * @deprecated True if it is your default security group for this Organization ID.
    */
-  organizationDefault?: boolean
+  organizationDefault: boolean
   /**
    * True if it is your default security group for this Project ID.
    */
@@ -1015,18 +1015,18 @@ export interface Dashboard {
   securityGroupsCount: number
   ipsUnused: number
   volumesLSsdCount: number
-  /**
-   * @deprecated 
-   */
-  volumesBSsdCount?: number
   volumesLSsdTotalSize: number
-  /**
-   * @deprecated 
-   */
-  volumesBSsdTotalSize?: number
   privateNicsCount: number
   placementGroupsCount: number
   volumesScratchCount: number
+  /**
+   * @deprecated 
+   */
+  volumesBSsdCount: number
+  /**
+   * @deprecated 
+   */
+  volumesBSsdTotalSize: number
 }
 
 
@@ -1055,7 +1055,7 @@ export interface ServerType {
   /**
    * @deprecated Estimated monthly price, for a 30 days month, in Euro.
    */
-  monthlyPrice?: number
+  monthlyPrice: number
   /**
    * Hourly price in Euro.
    */
@@ -1552,7 +1552,7 @@ export type CreateServerRequest = {
   /**
    * @deprecated True if IPv6 is enabled on the server (deprecated and always `False` when `routed_ip_enabled` is `True`).
    */
-  enableIpv6?: boolean
+  enableIpv6: boolean
   /**
    * @deprecated ID of the reserved IP to attach to the Instance.
    */
