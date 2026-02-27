@@ -19,7 +19,7 @@
     "directory": "packages_generated/std"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=20.20.0"
   },
   "scripts": {
     "package:check": "pnpm publint",

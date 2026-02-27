@@ -23,7 +23,7 @@
     "directory": "packages_generated/datalab"
   },
   "engines": {
-    "node": ">=20.18.3"
+    "node": ">=20.20.0"
   },
   "scripts": {
     "package:check": "pnpm publint",

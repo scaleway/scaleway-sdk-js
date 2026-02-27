@@ -23,7 +23,7 @@
     "directory": "packages_generated/marketplace"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=20.20.0"
   },
   "scripts": {
     "package:check": "pnpm publint",
