@@ -81,7 +81,7 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   } as Endpoint
 }
 
-export const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
+const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`,
@@ -110,7 +110,7 @@ const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSched
   } as InstanceSnapshotSchedule
 }
 
-export const unmarshalVolume = (data: unknown): Volume => {
+const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
