@@ -61,7 +61,7 @@ export type SetSecurityGroupRequest = {
   /**
    * @deprecated Please use project_default instead.
    */
-  organizationDefault?: boolean
+  organizationDefault: boolean
   /**
    * True use this security group for future Instances created in this project.
    */
@@ -154,7 +154,7 @@ export type SetServerRequest = {
   /**
    * @deprecated True if IPv6 is enabled (deprecated and always `False` when `routed_ip_enabled` is `True`).
    */
-  enableIpv6?: boolean
+  enableIpv6: boolean
   /**
    * Instance host name.
    */
