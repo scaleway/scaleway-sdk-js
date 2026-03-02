@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-datawarehouse@2.3.1...@scaleway/sdk-datawarehouse@2.4.0) (2026-03-02)
+
+### Features
+
+- **datawarehouse:** add shard_count params ([#2764](https://github.com/scaleway/scaleway-sdk-js/issues/2764)) ([7a49ece](https://github.com/scaleway/scaleway-sdk-js/commit/7a49ece3efaf8703375202a83c0538388cb86ba1))
+
 ## [2.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-datawarehouse@2.3.0...@scaleway/sdk-datawarehouse@2.3.1) (2026-02-23)
 
 **Note:** Version bump only for package @scaleway/sdk-datawarehouse
