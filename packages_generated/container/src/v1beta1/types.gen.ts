@@ -545,7 +545,7 @@ export interface Namespace {
   /**
    * @deprecated The value of this field doesn't matter anymore, and will be removed in a near future.
    */
-  vpcIntegrationActivated?: boolean
+  vpcIntegrationActivated: boolean
 }
 
 
@@ -573,7 +573,7 @@ export interface Token {
   /**
    * @deprecated Public key of the token.
    */
-  publicKey?: string
+  publicKey: string
   /**
    * Status of the token.
    */
@@ -826,7 +826,7 @@ export type CreateNamespaceRequest = {
   /**
    * @deprecated Setting this field to true doesn't matter anymore. It will be removed in a near future.
    */
-  activateVpcIntegration?: boolean
+  activateVpcIntegration: boolean
 }
 
 
