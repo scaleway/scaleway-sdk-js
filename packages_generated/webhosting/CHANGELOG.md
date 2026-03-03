@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.2.1...@scaleway/sdk-webhosting@2.3.0) (2026-03-02)
+
+### Features
+
+- **webhosting:** add support for `resetWebsite` ([#2768](https://github.com/scaleway/scaleway-sdk-js/issues/2768)) ([bf0795b](https://github.com/scaleway/scaleway-sdk-js/commit/bf0795b1d9622318807aea839598a20dd02106d6))
+
 ## 2.2.1 (2026-02-23)
 
 **Note:** Version bump only for package @scaleway/sdk-webhosting
