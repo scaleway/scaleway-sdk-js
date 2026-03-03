@@ -66,7 +66,7 @@ export const unmarshalOS = (data: unknown): OS => {
   }
 
   return {
-    compatibleServerTypes: data.compatible_server_types,
+    compatibleServerTypes: data.compatible_server_types ? data.compatible_server_types : undefined,
     description: data.description,
     family: data.family,
     id: data.id,

@@ -91,7 +91,6 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems`,
         urlParams: urlParams(
-          ['filesystem_ids', request.filesystemIds],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],

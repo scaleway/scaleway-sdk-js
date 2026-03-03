@@ -24,6 +24,12 @@ export type ListSubnetsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type ListVPCConnectorsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+
 export type ListVPCsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -37,6 +43,11 @@ export type RouteType =
   | 'custom'
   | 'interlink'
   | 's2s_vpn'
+
+export type VPCConnectorStatus =
+  | 'unknown_vpc_connector_status'
+  | 'orphan'
+  | 'peered'
 
 export interface Subnet {
   /**
@@ -178,6 +189,13 @@ export interface Route {
 }
 
 
+export interface VPCConnectorPeerInfo {
+  organizationId: string
+  projectId: string
+  vpcName: string
+}
+
+
 export interface AclRule {
   /**
    * Protocol to which this rule applies.
@@ -215,6 +233,58 @@ export interface AclRule {
    * Rule description.
    */
   description?: string
+}
+
+
+export interface VPCConnector {
+  /**
+   * VPC connector ID.
+   */
+  id: string
+  /**
+   * VPC connector name.
+   */
+  name: string
+  /**
+   * Scaleway Organization the VPC connector belongs to.
+   */
+  organizationId: string
+  /**
+   * Scaleway Project the VPC connector belongs to.
+   */
+  projectId: string
+  /**
+   * VPC the VPC connector belongs to (origin VPC).
+   */
+  vpcId: string
+  /**
+   * VPC with which the VPC connector is peered (target VPC).
+   */
+  targetVpcId: string
+  /**
+   * Status of the VPC connector.
+   */
+  status: VPCConnectorStatus
+  /**
+   * Peer info of target VPC. Available when status is Peered.
+   */
+  peerInfo?: VPCConnectorPeerInfo
+  /**
+   * Region of the VPC connector.
+   */
+  region: ScwRegion
+  /**
+   * Tags for the VPC connector.
+   */
+  tags: string[]
+  /**
+   * Date the VPC connector was created.
+   */
+  createdAt?: Date
+  /**
+   * Date the VPC connector was last modified.
+   */
+  updatedAt?: Date
 }
 
 
@@ -359,6 +429,30 @@ export type CreateRouteRequest = {
 }
 
 
+export type CreateVPCConnectorRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Name for the VPC connector.
+   */
+  name?: string
+  /**
+   * Tags for the VPC connector.
+   */
+  tags?: string[]
+  /**
+   * VPC ID to filter for. Only connectors belonging to this VPC will be returned.
+   */
+  vpcId: string
+  /**
+   * Target VPC ID to filter for. Only connectors belonging to this target VPC will be returned.
+   */
+  targetVpcId: string
+}
+
+
 export type CreateVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -425,6 +519,18 @@ export type DeleteSubnetsRequest = {
 
 export interface DeleteSubnetsResponse {
   subnets: string[]
+}
+
+
+export type DeleteVPCConnectorRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * VPC connector ID.
+   */
+  vpcConnectorId: string
 }
 
 
@@ -519,6 +625,18 @@ export type GetRouteRequest = {
    * Route ID.
    */
   routeId: string
+}
+
+
+export type GetVPCConnectorRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * VPC connector ID.
+   */
+  vpcConnectorId: string
 }
 
 
@@ -626,6 +744,60 @@ export type ListSubnetsRequest = {
 
 export interface ListSubnetsResponse {
   subnets: Subnet[]
+  totalCount: number
+}
+
+
+export type ListVPCConnectorsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Sort order of the returned VPC connectors.
+   */
+  orderBy?: ListVPCConnectorsRequestOrderBy
+  /**
+   * Page number to return, from the paginated results.
+   */
+  page?: number
+  /**
+   * Maximum number of VPC connectors to return per page.
+   */
+  pageSize?: number
+  /**
+   * Name to filter for. Only connectors with names containing this string will be returned.
+   */
+  name?: string
+  /**
+   * Tags to filter for. Only connectors with one or more matching tags will be returned.
+   */
+  tags?: string[]
+  /**
+   * Organization ID to filter for. Only connectors belonging to this Organization will be returned.
+   */
+  organizationId?: string
+  /**
+   * Project ID to filter for. Only connectors belonging to this Project will be returned.
+   */
+  projectId?: string
+  /**
+   * VPC ID to filter for. Only connectors belonging to this VPC will be returned.
+   */
+  vpcId?: string
+  /**
+   * Target VPC ID to filter for. Only connectors belonging to this target VPC will be returned.
+   */
+  targetVpcId?: string
+  /**
+   * Status of the VPC connector.
+   */
+  status?: VPCConnectorStatus
+}
+
+
+export interface ListVPCConnectorsResponse {
+  vpcConnectors: VPCConnector[]
   totalCount: number
 }
 
@@ -767,6 +939,26 @@ export type UpdateRouteRequest = {
    * ID of the nexthop VPC connector.
    */
   nexthopVpcConnectorId?: string
+}
+
+
+export type UpdateVPCConnectorRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * VPC connector ID.
+   */
+  vpcConnectorId: string
+  /**
+   * Name for the VPC connector.
+   */
+  name?: string
+  /**
+   * Tags for the VPC connector.
+   */
+  tags?: string[]
 }
 
 

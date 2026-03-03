@@ -17,7 +17,6 @@ import type {
   EndpointSpecPublicNetworkDetails,
   EngineUpgrade,
   Instance,
-  InstanceSetting,
   InstanceSnapshotSchedule,
   ListDatabasesResponse,
   ListInstancesResponse,
@@ -83,19 +82,6 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   } as Endpoint
 }
 
-export const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    name: data.name,
-    value: data.value,
-  } as InstanceSetting
-}
-
 const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSchedule => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -112,7 +98,7 @@ const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSched
   } as InstanceSnapshotSchedule
 }
 
-export const unmarshalVolume = (data: unknown): Volume => {
+const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
@@ -142,7 +128,6 @@ export const unmarshalInstance = (data: unknown): Instance => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     region: data.region,
-    settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
     snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : undefined,
     status: data.status,
     tags: data.tags,
@@ -449,7 +434,7 @@ export const marshalCreateEndpointRequest = (
   instance_id: request.instanceId,
 })
 
-export const marshalVolume = (
+const marshalVolume = (
   request: Volume,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
