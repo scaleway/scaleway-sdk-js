@@ -61,3 +61,10 @@ export const ListEventsRequest = {
     lessThan: 600,
   },
 }
+
+export const ListSystemEventsRequest = {
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1000,
+  },
+}
