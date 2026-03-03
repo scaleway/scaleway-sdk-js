@@ -241,6 +241,10 @@ export type ListFileSystemsRequest = {
    * Filter by tags. Only filesystems with one or more matching tags will be returned.
    */
   tags?: string[]
+  /**
+   * Filter by filesystem IDs. Only filesystems with one or more matching IDs will be returned.
+   */
+  filesystemIds?: string[]
 }
 
 
