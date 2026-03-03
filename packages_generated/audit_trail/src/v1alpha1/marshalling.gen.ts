@@ -8,6 +8,7 @@ import type {
   AccountProjectInfo,
   AccountUserInfo,
   AlertRule,
+  AppleSiliconRunnerInfo,
   AppleSiliconServerInfo,
   AuditTrailExportJobInfo,
   AuthenticationEvent,
@@ -234,6 +235,19 @@ const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
     email: data.email,
     phoneNumber: data.phone_number,
   } as AccountUserInfo
+}
+
+const unmarshalAppleSiliconRunnerInfo = (data: unknown): AppleSiliconRunnerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AppleSiliconRunnerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+  } as AppleSiliconRunnerInfo
 }
 
 const unmarshalAppleSiliconServerInfo = (data: unknown): AppleSiliconServerInfo => {
@@ -670,6 +684,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     accountOrganizationInfo: data.account_organization_info ? unmarshalAccountOrganizationInfo(data.account_organization_info) : undefined,
     accountProjectInfo: data.account_project_info ? unmarshalAccountProjectInfo(data.account_project_info) : undefined,
     accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : undefined,
+    appleSiliconRunnerInfo: data.apple_silicon_runner_info ? unmarshalAppleSiliconRunnerInfo(data.apple_silicon_runner_info) : undefined,
     appleSiliconServerInfo: data.apple_silicon_server_info ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info) : undefined,
     auditTrailExportJobInfo: data.audit_trail_export_job_info ? unmarshalAuditTrailExportJobInfo(data.audit_trail_export_job_info) : undefined,
     baremetalServerInfo: data.baremetal_server_info ? unmarshalBaremetalServerInfo(data.baremetal_server_info) : undefined,
