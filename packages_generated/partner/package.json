@@ -1,11 +1,11 @@
 {
-  "name": "@scaleway/sdk-instance",
-  "version": "2.3.2",
-  "description": "Scaleway SDK instance",
+  "name": "@scaleway/sdk-partner",
+  "version": "1.0.0",
+  "description": "Scaleway SDK partner",
   "license": "Apache-2.0",
   "files": [
-    "README.md",
-    "dist"
+    "dist",
+    "README.md"
   ],
   "type": "module",
   "exports": {
@@ -20,10 +20,10 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages_generated/instance"
+    "directory": "packages_generated/partner"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=20.18.3"
   },
   "scripts": {
     "package:check": "pnpm publint",
@@ -33,8 +33,8 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/random-name": "5.1.2",
-    "@scaleway/sdk-std": "workspace:*"
+    "@scaleway/sdk-std": "workspace:*",
+    "@scaleway/random-name": "5.1.1"
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
