@@ -143,6 +143,9 @@ export type ResourceType =
   | 'rdb_instance_logs'
   | 'rdb_instance_read_replica'
   | 'rdb_instance_snapshot'
+  | 'mongodb_instance'
+  | 'mongodb_instance_snapshot'
+  | 'mongodb_instance_endpoint'
 
 export type SystemEventKind =
   | 'unknown_kind'
