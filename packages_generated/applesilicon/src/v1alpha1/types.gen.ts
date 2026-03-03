@@ -139,7 +139,7 @@ export interface OS {
   /**
    * @deprecated List of compatible server types. Deprecated.
    */
-  compatibleServerTypes?: string[]
+  compatibleServerTypes: string[]
   /**
    * Url of the release notes for the OS image or software pre-installed.
    */
