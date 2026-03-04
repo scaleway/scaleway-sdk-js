@@ -60,6 +60,7 @@ import type {
   MailAccountApiRemoveMailAccountRequest,
   Nameserver,
   Offer,
+  OfferCommitment,
   OfferOption,
   OfferOptionRequest,
   Platform,
@@ -186,10 +187,10 @@ export const unmarshalHostingSummary = (data: unknown): HostingSummary => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status ? data.dns_status : undefined,
+    dnsStatus: data.dns_status,
     domain: data.domain,
     domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : undefined,
-    domainStatus: data.domain_status ? data.domain_status : undefined,
+    domainStatus: data.domain_status,
     id: data.id,
     offerName: data.offer_name,
     projectId: data.project_id,
@@ -307,7 +308,7 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
 
   return {
     autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
-    dnsConfig: data.dns_config ? data.dns_config : undefined,
+    dnsConfig: data.dns_config,
     nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
     records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
     status: data.status,
@@ -324,7 +325,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
   return {
     autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
     availableActions: data.available_actions,
-    availableDnsActions: data.available_dns_actions ? data.available_dns_actions : undefined,
+    availableDnsActions: data.available_dns_actions,
     name: data.name,
     owner: data.owner,
     status: data.status,
@@ -358,6 +359,24 @@ const unmarshalControlPanel = (data: unknown): ControlPanel => {
     logoUrl: data.logo_url,
     name: data.name,
   } as ControlPanel
+}
+
+const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferCommitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    billingMode: data.billing_mode,
+    billingOperationPath: data.billing_operation_path,
+    durationInMonth: data.duration_in_month,
+    id: data.id,
+    next: data.next ? unmarshalOfferCommitment(data.next) : undefined,
+    price: data.price ? unmarshalMoney(data.price) : undefined,
+    type: data.type,
+  } as OfferCommitment
 }
 
 const unmarshalOfferOption = (data: unknown): OfferOption => {
@@ -417,6 +436,7 @@ const unmarshalOffer = (data: unknown): Offer => {
   return {
     available: data.available,
     billingOperationPath: data.billing_operation_path,
+    commitments: unmarshalArrayOfObject(data.commitments, unmarshalOfferCommitment),
     controlPanelName: data.control_panel_name,
     controlPanels: unmarshalArrayOfObject(data.control_panels, unmarshalControlPanel),
     endOfLife: data.end_of_life,
@@ -455,10 +475,10 @@ export const unmarshalHosting = (data: unknown): Hosting => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status ? data.dns_status : undefined,
+    dnsStatus: data.dns_status,
     domain: data.domain,
     domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : undefined,
-    domainStatus: data.domain_status ? data.domain_status : undefined,
+    domainStatus: data.domain_status,
     id: data.id,
     ipv4: data.ipv4,
     offer: data.offer ? unmarshalOffer(data.offer) : undefined,
