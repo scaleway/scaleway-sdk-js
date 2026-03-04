@@ -369,6 +369,7 @@ export interface DomainRecord {
    */
   viewConfig?: DomainRecordViewConfig
   id: string
+  updatedAt?: Date
 }
 
 
@@ -419,11 +420,11 @@ export interface ContactExtensionIT {
   /**
    * @deprecated This option is useless anymore.
    */
-  europeanCitizenship?: string
+  europeanCitizenship: string
   /**
    * @deprecated Tax_code is renamed to pin.
    */
-  taxCode?: string
+  taxCode: string
   /**
    * Domain name registrant's Taxcode (mandatory / only optional when the trustee is used)
 
@@ -535,10 +536,6 @@ export interface Contact {
   companyIdentificationCode: string
   lang: StdLanguageCode
   resale: boolean
-  /**
-   * @deprecated 
-   */
-  questions?: ContactQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
   whoisOptIn: boolean
@@ -547,6 +544,10 @@ export interface Contact {
   extensionNl?: ContactExtensionNL
   status: ContactStatus
   extensionIt?: ContactExtensionIT
+  /**
+   * @deprecated 
+   */
+  questions: ContactQuestion[]
 }
 
 
@@ -598,16 +599,16 @@ export interface NewContact {
   companyIdentificationCode?: string
   lang: StdLanguageCode
   resale: boolean
-  /**
-   * @deprecated 
-   */
-  questions?: ContactQuestion[]
   extensionFr?: ContactExtensionFR
   extensionEu?: ContactExtensionEU
   whoisOptIn: boolean
   state?: string
   extensionNl?: ContactExtensionNL
   extensionIt?: ContactExtensionIT
+  /**
+   * @deprecated 
+   */
+  questions: ContactQuestion[]
 }
 
 
@@ -1093,7 +1094,7 @@ export type ImportRawDNSZoneRequest = {
   /**
    * @deprecated 
    */
-  content?: string
+  content: string
   projectId?: string
   /**
    * @deprecated 
@@ -1265,7 +1266,7 @@ export type ListDNSZonesRequest = {
   /**
    * @deprecated DNS zone on which to filter the returned DNS zones.
    */
-  dnsZone?: string
+  dnsZone: string
   /**
    * DNS zones on which to filter the returned DNS zones.
    */
@@ -1729,16 +1730,16 @@ export type RegistrarApiUpdateContactRequest = {
   companyIdentificationCode?: string
   lang?: StdLanguageCode
   resale?: boolean
+  extensionFr?: ContactExtensionFR
+  extensionEu?: ContactExtensionEU
+  extensionNl?: ContactExtensionNL
+  extensionIt?: ContactExtensionIT
+  whoisOptIn?: boolean
+  state?: string
   /**
    * @deprecated 
    */
   questions?: UpdateContactRequestQuestion[]
-  extensionFr?: ContactExtensionFR
-  extensionEu?: ContactExtensionEU
-  whoisOptIn?: boolean
-  state?: string
-  extensionNl?: ContactExtensionNL
-  extensionIt?: ContactExtensionIT
 }
 
 
