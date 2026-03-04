@@ -24,6 +24,11 @@ export type BackupStatus =
   | 'damaged'
   | 'restoring'
 
+export type BillingMode =
+  | 'unknown_billing_mode'
+  | 'sample'
+  | 'purchase_order'
+
 export type CheckFreeDomainAvailabilityResponseUnavailableReason =
   | 'unavailable_reason_unknown'
   | 'unavailable_reason_already_used'
@@ -33,6 +38,11 @@ export type CheckFreeDomainAvailabilityResponseUnavailableReason =
   | 'unavailable_reason_starts_or_ends_with_hyphen'
   | 'unavailable_reason_contains_dots'
   | 'unavailable_reason_contains_reserved_keyword'
+
+export type CommitmentType =
+  | 'unknown_commitment_type'
+  | 'first_commitment'
+  | 'next_commitment'
 
 export type DnsRecordStatus =
   | 'unknown_status'
@@ -250,6 +260,38 @@ export interface ControlPanel {
    * List of available languages for the control panel.
    */
   availableLanguages: StdLanguageCode[]
+}
+
+
+export interface OfferCommitment {
+  /**
+   * Offer commitment ID.
+   */
+  id: string
+  /**
+   * Offer commitment type.
+   */
+  type: CommitmentType
+  /**
+   * Offer commitment name.
+   */
+  billingMode: BillingMode
+  /**
+   * Unique identifier used for billing.
+   */
+  billingOperationPath: string
+  /**
+   * Price of the offer commitment.
+   */
+  price?: Money
+  /**
+   * Duration of the offer commitment in months.
+   */
+  durationInMonth: number
+  /**
+   * Next offer commitment.
+   */
+  next?: OfferCommitment
 }
 
 
@@ -495,6 +537,10 @@ export interface Offer {
    */
   controlPanels: ControlPanel[]
   /**
+   * Lists available offer commitments for the specified offer.
+   */
+  commitments: OfferCommitment[]
+  /**
    * Region where the offer is hosted.
    */
   region: ScwRegion
@@ -625,7 +671,7 @@ export interface HostingSummary {
   /**
    * @deprecated Main domain associated with the Web Hosting plan (deprecated, use domain_info).
    */
-  domain?: string
+  domain: string
   /**
    * Whether the hosting is protected or not.
    */
@@ -633,7 +679,7 @@ export interface HostingSummary {
   /**
    * @deprecated DNS status of the Web Hosting plan.
    */
-  dnsStatus?: DnsRecordsStatus
+  dnsStatus: DnsRecordsStatus
   /**
    * Name of the active offer for the Web Hosting plan.
    */
@@ -641,7 +687,7 @@ export interface HostingSummary {
   /**
    * @deprecated Main domain status of the Web Hosting plan.
    */
-  domainStatus?: DomainStatus
+  domainStatus: DomainStatus
   /**
    * Region where the Web Hosting plan is hosted.
    */
@@ -1177,19 +1223,19 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
   /**
    * @deprecated Whether or not to synchronize the web records (deprecated, use auto_config_domain_dns).
    */
-  updateWebRecords?: boolean
+  updateWebRecords: boolean
   /**
    * @deprecated Whether or not to synchronize the mail records (deprecated, use auto_config_domain_dns).
    */
-  updateMailRecords?: boolean
+  updateMailRecords: boolean
   /**
    * @deprecated Whether or not to synchronize all types of records. This one has priority (deprecated, use auto_config_domain_dns).
    */
-  updateAllRecords?: boolean
+  updateAllRecords: boolean
   /**
    * @deprecated Whether or not to synchronize domain nameservers (deprecated, use auto_config_domain_dns).
    */
-  updateNameservers?: boolean
+  updateNameservers: boolean
   /**
    * @deprecated Custom records to synchronize.
    */
@@ -1217,7 +1263,7 @@ export interface DnsRecords {
   /**
    * @deprecated Records dns auto configuration settings (deprecated, use auto_config_domain_dns).
    */
-  dnsConfig?: DomainDnsAction[]
+  dnsConfig: DomainDnsAction[]
   /**
    * Whether or not to synchronize each types of records.
    */
@@ -1249,7 +1295,7 @@ export interface Domain {
   /**
    * @deprecated A list of DNS-related actions that can be auto configured for the domain (deprecated, use auto_config_domain_dns instead).
    */
-  availableDnsActions?: DomainDnsAction[]
+  availableDnsActions: DomainDnsAction[]
   /**
    * Whether or not to synchronize each type of record.
    */
@@ -1401,7 +1447,7 @@ export interface Hosting {
   /**
    * @deprecated Main domain associated with the Web Hosting plan (deprecated, use domain_info).
    */
-  domain?: string
+  domain: string
   /**
    * Details of the Web Hosting plan offer and options.
    */
@@ -1417,7 +1463,7 @@ export interface Hosting {
   /**
    * @deprecated DNS status of the Web Hosting plan (deprecated, use domain_info).
    */
-  dnsStatus?: DnsRecordsStatus
+  dnsStatus: DnsRecordsStatus
   /**
    * Current IPv4 address of the hosting.
    */
@@ -1433,7 +1479,7 @@ export interface Hosting {
   /**
    * @deprecated Main domain status of the Web Hosting plan (deprecated, use domain_info).
    */
-  domainStatus?: DomainStatus
+  domainStatus: DomainStatus
   /**
    * Region where the Web Hosting plan is hosted.
    */
@@ -2021,7 +2067,7 @@ export interface ResetHostingPasswordResponse {
   /**
    * @deprecated New temporary password (deprecated, use password_b64 instead).
    */
-  oneTimePassword?: string
+  oneTimePassword: string
   /**
    * New temporary password, encoded in base64.
    */
