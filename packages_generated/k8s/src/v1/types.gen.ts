@@ -1256,7 +1256,7 @@ export type DeleteNodeRequest = {
    */
   skipDrain: boolean
   /**
-   * Add a new node after the deletion of this node.
+   * @deprecated Add a new node after the deletion of this node.
    */
   replace: boolean
 }
