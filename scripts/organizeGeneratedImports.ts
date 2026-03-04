@@ -9,12 +9,12 @@
 
 import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
-import { globby } from 'globby'
+import { globSync } from 'tinyglobby'
 import ts from 'typescript'
 
 async function main(): Promise<void> {
   const rootDir = resolve(process.cwd(), 'packages_generated')
-  const files = await globby(['**/*.ts'], { cwd: rootDir, absolute: true })
+  const files = globSync(['**/*.ts'], { cwd: rootDir, absolute: true })
   if (files.length === 0) return
 
   // Create a LanguageService over the generated files to enable organizeImports
@@ -73,6 +73,7 @@ async function main(): Promise<void> {
       languageService.organizeImports(
         { type: 'file', fileName },
         { newLineCharacter: '\n' },
+        {},
       ) ?? []
 
     if (changes.length === 0) continue

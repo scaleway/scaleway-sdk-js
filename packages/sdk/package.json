@@ -78,8 +78,5 @@
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*"
-  },
-  "peerDependencies": {
-    "@scaleway/sdk-client": "workspace:^"
   }
 }

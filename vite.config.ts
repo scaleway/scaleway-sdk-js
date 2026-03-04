@@ -1,5 +1,3 @@
-import browserslist from 'browserslist'
-import { resolveToEsbuildTarget } from 'esbuild-plugin-browserslist'
 import { readPackage } from 'read-pkg'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
@@ -20,19 +18,10 @@ const external = (id: string) => {
   return isExternal && !isBundled
 }
 
-const targets = resolveToEsbuildTarget(
-  browserslist('defaults', {
-    ignoreUnknownVersions: false,
-  }),
-  {
-    printUnknownTargets: false,
-  },
-)
-
 export const defaultConfig: UserConfig = defineConfig({
   build: {
     outDir: 'dist',
-    target: [...targets, 'node20'],
+    target: 'baseline-widely-available',
     minify: false,
     ssr: true,
     emptyOutDir: true,
@@ -48,12 +37,22 @@ export const defaultConfig: UserConfig = defineConfig({
         return `${filename}.${format}`
       },
     },
-    rollupOptions: {
+    rolldownOptions: {
       external,
+      optimization: {
+        inlineConst: {
+          mode: 'smart',
+        },
+        pifeForModuleWrappers: true,
+      },
       output: {
         preserveModules: true,
-        preserveModulesRoot: './src',
+        preserveModulesRoot: 'src',
       },
+      platform: 'browser',
+      preserveEntrySignatures: 'exports-only',
+      treeshake: true,
+      tsconfig: true,
     },
   },
 })

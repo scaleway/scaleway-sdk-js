@@ -15,7 +15,7 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./*": {
+    "./api/*": {
       "types": "./dist/__generated__/api/*.d.ts",
       "default": "./dist/__generated__/api/*.js"
     }
@@ -23,7 +23,7 @@
   "scripts": {
     "prebuild": "shx rm -rf dist && pnpm generate:api",
     "typecheck": "tsgo --noEmit",
-    "generate:api": "pnpm generate-api",
+    "generate:api": "pnpm generate-api --dir-gen-name src/__generated__  --sdk-factory-path '../contexts/SDKCacheProvider/sdkFactory'",
     "format": "biome check  --linter-enabled=false --write .",
     "type:generate": "tsgo --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
@@ -83,7 +83,7 @@
     "react": "18.x || 19.x"
   },
   "devDependencies": {
-    "@scaleway/generate-sdk": "workspace:*",
+    "@scaleway/generate-react-sdk": "workspace:*",
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
@@ -127,14 +127,16 @@
     "@scaleway/sdk-searchdb": "workspace:*",
     "@scaleway/sdk-secret": "workspace:*",
     "@scaleway/sdk-serverless-sqldb": "workspace:*",
-    "@scaleway/sdk-std": "workspace:*",
+    "@scaleway/sdk-std": "*",
     "@scaleway/sdk-tem": "workspace:*",
-    "@scaleway/sdk-test": "workspace:*",
+    "@scaleway/sdk-test": "*",
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*",
     "@types/react": "19.2.14",
     "react": "^19.2.4",
-    "ts-morph": "27.0.2"
+    "tinyglobby": "0.2.15",
+    "ts-morph": "27.0.2",
+    "vite-tsconfig-paths": "^6.1.1"
   }
 }

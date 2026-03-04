@@ -10,7 +10,7 @@ export const parseArgsCLI = <T extends string[]>({
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i]
-    if (arg && arg.startsWith('--')) {
+    if (arg?.startsWith('--')) {
       const parts = arg.slice(2).split('=')
       const key = parts[0]
       let value = parts.length > 1 ? parts[1] : true
@@ -20,7 +20,7 @@ export const parseArgsCLI = <T extends string[]>({
         value === true &&
         i + 1 < args.length &&
         args[i + 1] &&
-        !args[i + 1]!.startsWith('--')
+        !args[i + 1]?.startsWith('--')
       ) {
         value = args[i + 1]
         i++ // Skip the next argument since we've consumed it

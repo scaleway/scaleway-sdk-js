@@ -83,6 +83,7 @@ const api = new Autoscaling.v1.API(client)
 ## Support
 
 We love feedback! Feel free to reach us on:
+
 - [Scaleway Slack community](https://slack.scaleway.com/) - Join us on [#opensource](https://scaleway-community.slack.com/app_redirect?channel=opensource)
 - [GitHub Issues](https://github.com/scaleway/scaleway-sdk-js/issues)
 
@@ -93,4 +94,3 @@ This repository is at its early stage and is still in active development. If you
 ## License
 
 This project is Apache 2.0 licensed. See the [LICENSE](https://github.com/scaleway/scaleway-sdk-js/blob/master/LICENSE) file for details.
-

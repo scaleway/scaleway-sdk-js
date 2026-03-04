@@ -102,16 +102,6 @@
       }
     },
     {
-      "includes": ["packages/client/src/internal/interceptors/types.ts", "packages/client/src/scw/auth.ts", "packages/client/src/scw/fetch/http-interceptors.ts"],
-      "linter": {
-        "rules": {
-          "style": {
-            "useShorthandFunctionType": "off"
-          }
-        }
-      }
-    },
-    {
       "includes": ["packages_generated/**"],
       "json": {
         "formatter": {
@@ -160,6 +150,7 @@
       "source": {
         "organizeImports": "on"
       }
-    }
+    },
+    "enabled": true
   }
 }

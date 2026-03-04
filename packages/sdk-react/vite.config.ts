@@ -1,14 +1,29 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable import/no-default-export */
-/* eslint-disable import/no-relative-packages */
-/* eslint-disable import/no-extraneous-dependencies */
+import path from 'node:path'
+import { globSync } from 'tinyglobby'
 import { defineConfig, mergeConfig } from 'vite'
 import { defaultConfig } from '../../vite.config'
 
-export default mergeConfig(defineConfig(defaultConfig), {
+const input = Object.fromEntries(
+  globSync('src/**/*.ts').map(file => [
+    // This removes `src/` as well as the file extension from each
+    // file, so e.g. src/nested/foo.js becomes nested/foo, and
+    // normalizes Windows backslashes to forward slashes.
+    path
+      .relative('src', file.slice(0, file.length - path.extname(file).length))
+      .split(path.sep)
+      .join('/'),
+    // This expands the relative paths to absolute paths, so e.g.
+    // src/nested/foo.js becomes /project/src/nested/foo.js
+    path.resolve(file),
+  ]),
+)
+
+const newConfig = defineConfig({
   build: {
-    lib: {
-      entry: 'src/index.ts',
+    rolldownOptions: {
+      input,
     },
   },
 })
+
+export default mergeConfig(defaultConfig, newConfig)
