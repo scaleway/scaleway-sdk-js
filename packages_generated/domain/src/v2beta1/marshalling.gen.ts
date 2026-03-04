@@ -270,7 +270,7 @@ export const unmarshalContact = (data: unknown): Contact => {
     lastname: data.lastname,
     legalForm: data.legal_form,
     phoneNumber: data.phone_number,
-    questions: data.questions ? unmarshalArrayOfObject(data.questions, unmarshalContactQuestion) : undefined,
+    questions: unmarshalArrayOfObject(data.questions, unmarshalContactQuestion),
     resale: data.resale,
     state: data.state,
     status: data.status,
@@ -673,6 +673,7 @@ const unmarshalDomainRecord = (data: unknown): DomainRecord => {
     priority: data.priority,
     ttl: data.ttl,
     type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
     viewConfig: data.view_config ? unmarshalDomainRecordViewConfig(data.view_config) : undefined,
     weightedConfig: data.weighted_config ? unmarshalDomainRecordWeightedConfig(data.weighted_config) : undefined,
   } as DomainRecord
@@ -1459,7 +1460,7 @@ const marshalNewContact = (
   lastname: request.lastname,
   legal_form: request.legalForm,
   phone_number: request.phoneNumber,
-  questions: ((request.questions !== undefined) ?  request.questions.map(elt => marshalContactQuestion(elt, defaults)): undefined),
+  questions:  request.questions.map(elt => marshalContactQuestion(elt, defaults)),
   resale: request.resale,
   state: request.state,
   vat_identification_code: request.vatIdentificationCode,
@@ -1829,7 +1830,8 @@ const marshalDomainRecord = (
   name: request.name,
   priority: request.priority,
   ttl: request.ttl,
-  type: request.type,  
+  type: request.type,
+  updated_at: request.updatedAt,  
   ...resolveOneOf([
     {param: 'geo_ip_config',
       value: (request.geoIpConfig !== undefined) ? marshalDomainRecordGeoIPConfig(request.geoIpConfig, defaults)
