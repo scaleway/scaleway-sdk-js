@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.6.0...@scaleway/sdk-k8s@2.6.1) (2026-03-05)
+
+**Note:** Version bump only for package @scaleway/sdk-k8s
+
 # 2.6.0 (2026-03-05)
 
 ### Features

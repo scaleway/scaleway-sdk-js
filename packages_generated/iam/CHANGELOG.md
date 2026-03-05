@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@2.4.0...@scaleway/sdk-iam@2.5.0) (2026-03-05)
+
+### Features
+
+- **iam/v1:** add scim GetSchemas ([#2800](https://github.com/scaleway/scaleway-sdk-js/issues/2800)) ([1c9c818](https://github.com/scaleway/scaleway-sdk-js/commit/1c9c81883eeb36118346ad08ee0d8a9a3a09faf2))
+
 # 2.4.0 (2026-03-05)
 
 ### Features

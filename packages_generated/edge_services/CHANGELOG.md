@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.5.0...@scaleway/sdk-edge-services@2.6.0) (2026-03-05)
+
+### Features
+
+- **edge_services:** add multi-waf pipeline support ([#2798](https://github.com/scaleway/scaleway-sdk-js/issues/2798)) ([d9d5db5](https://github.com/scaleway/scaleway-sdk-js/commit/d9d5db5a6df3d14bf206698566c86165a0be913d))
+
 # 2.5.0 (2026-03-05)
 
 ### Features
