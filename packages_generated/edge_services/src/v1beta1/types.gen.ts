@@ -572,9 +572,14 @@ export interface SetRouteRulesRequestRouteRule {
   /**
    * ID of the backend stage that requests matching the rule should be forwarded to.
    *
-   * One-of ('next'): at most one of 'backendStageId' could be set.
+   * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
    */
   backendStageId?: string
+  /**
+   *
+   * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
+   */
+  wafStageId?: string
 }
 
 
@@ -588,7 +593,7 @@ export interface RouteRule {
   /**
    * ID of the backend stage that requests matching the rule should be forwarded to.
    *
-   * One-of ('next'): at most one of 'backendStageId' could be set.
+   * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
    */
   backendStageId?: string
   /**
@@ -599,6 +604,11 @@ export interface RouteRule {
    * Route stage ID the route rule belongs to.
    */
   routeStageId: string
+  /**
+   *
+   * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
+   */
+  wafStageId?: string
 }
 
 
