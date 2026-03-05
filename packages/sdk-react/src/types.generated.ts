@@ -48,7 +48,6 @@ import type { Searchdbv1alpha1 } from '@scaleway/sdk-searchdb'
 import type { Secretv1beta1 } from '@scaleway/sdk-secret'
 import type { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
 import type { Temv1alpha1 } from '@scaleway/sdk-tem'
-import type { Testv1 } from '@scaleway/sdk-test'
 import type { Vpcv2 } from '@scaleway/sdk-vpc'
 import type { Vpcgwv1 } from '@scaleway/sdk-vpcgw'
 import type { Vpcgwv2 } from '@scaleway/sdk-vpcgw'
@@ -118,7 +117,6 @@ export type APISdk = {
   secretv1beta1: Secretv1beta1.API
   serverlessSqldbv1alpha1: ServerlessSqldbv1alpha1.API
   temv1alpha1: Temv1alpha1.API
-  testv1: Testv1.API
   vpcv2: Vpcv2.API
   vpcgwv1: Vpcgwv1.API
   vpcgwv2: Vpcgwv2.API
