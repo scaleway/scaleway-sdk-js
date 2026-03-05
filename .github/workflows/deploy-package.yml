@@ -47,6 +47,9 @@ jobs:
           node-version: 20.19.6
           check-latest: true
       - run: pnpm install
+      # need to build tools and install to make tools bin(s) available
+      - run: pnpm turbo build "--filter=./tools/*"
+      - run: pnpm install
       - run: pnpm run build
 
       - name: Version package with lerna
