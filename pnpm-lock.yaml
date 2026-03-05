@@ -1035,6 +1035,15 @@ importers:
         specifier: workspace:^
         version: link:../../packages/client
 
+  tools/generate-react-queries:
+    devDependencies:
+      '@types/node':
+        specifier: 20.19.35
+        version: 20.19.35
+      ts-morph:
+        specifier: 27.0.2
+        version: 27.0.2
+
   tools/generate-react-sdk:
     devDependencies:
       '@types/node':
