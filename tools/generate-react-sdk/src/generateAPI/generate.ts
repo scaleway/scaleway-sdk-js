@@ -1,8 +1,8 @@
 import { exec } from 'node:child_process'
-import { existsSync, rmdirSync } from 'node:fs'
+import { existsSync, readFileSync, rmdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { exit, stdout } from 'node:process'
-import { project, sdkPaths } from './config.ts'
+import { project } from './config.ts'
 import { emitFiles } from './emitFiles.ts'
 import { generateType } from './generateType.ts'
 import { processDeclarationFile } from './processDeclarationFile.ts'
@@ -10,12 +10,26 @@ import type { ProcessDeclaration } from './types.ts'
 
 export const directoryOfSrcFolder = join(resolve('./'))
 
+// Read package.json
+const packageJson = JSON.parse(
+  readFileSync(resolve(resolve('./'), 'package.json'), 'utf8'),
+) as {
+  dependencies?: Record<string, string>
+  devDependencies?: Record<string, string>
+  peerDependencies?: Record<string, string>
+}
+
 export const generateAPI = ({
   dirGenName,
   sdkFactoryPath,
+  packageNameFilter,
 }: {
   dirGenName: string
   sdkFactoryPath: string
+  /**
+   * Name of the package starting with
+   */
+  packageNameFilter: string
 }) => {
   let result: ProcessDeclaration = {}
 
@@ -26,6 +40,23 @@ export const generateAPI = ({
       recursive: true,
     })
   }
+
+  // Generate SDK paths from dependencies
+  const sdkPaths = [
+    ...Object.keys(packageJson.dependencies ?? {}),
+    ...Object.keys(packageJson.devDependencies ?? {}),
+    ...Object.keys(packageJson.peerDependencies ?? {}),
+  ]
+    .filter(dep => dep.startsWith(packageNameFilter))
+    .filter(dep => !['@scaleway/sdk-client'].includes(dep))
+    .map(dep => {
+      const declarationFile = 'dist/index.gen.d.ts'
+
+      return [
+        dep,
+        resolve(resolve('./'), `./node_modules/${dep}/${declarationFile}`),
+      ]
+    })
 
   for (const [packageName, sdkPath] of sdkPaths) {
     if (!(packageName && sdkPath)) {
