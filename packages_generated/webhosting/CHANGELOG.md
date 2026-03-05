@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.3.0...@scaleway/sdk-webhosting@2.4.0) (2026-03-05)
+
+### Features
+
+- **sdk-react:** add react sdk ([#2794](https://github.com/scaleway/scaleway-sdk-js/issues/2794)) ([7dfbf6b](https://github.com/scaleway/scaleway-sdk-js/commit/7dfbf6b4d4eae5f95cd05ff7433e30c522619475))
+- **webhosting:** extends offer api with commitment ([#2793](https://github.com/scaleway/scaleway-sdk-js/issues/2793)) ([9911164](https://github.com/scaleway/scaleway-sdk-js/commit/9911164b8a0dc99c387f5b4b178f69cc5d96b90e))
+
 # [2.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.2.1...@scaleway/sdk-webhosting@2.3.0) (2026-03-02)
 
 ### Features

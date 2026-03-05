@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2026-03-05)
+
+### Features
+
+- **edge_services:** add websocket limit error ([#2776](https://github.com/scaleway/scaleway-sdk-js/issues/2776)) ([a9550e4](https://github.com/scaleway/scaleway-sdk-js/commit/a9550e45070f9bbfa8f194677bce81519aec76cc))
+- **sdk-react:** add react sdk ([#2794](https://github.com/scaleway/scaleway-sdk-js/issues/2794)) ([7dfbf6b](https://github.com/scaleway/scaleway-sdk-js/commit/7dfbf6b4d4eae5f95cd05ff7433e30c522619475))
+
 ## [2.4.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.4.0...@scaleway/sdk-edge-services@2.4.1) (2026-02-23)
 
 **Note:** Version bump only for package @scaleway/sdk-edge-services

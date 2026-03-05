@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.2.2...@scaleway/sdk@3.3.0) (2026-03-05)
+
+### Bug Fixes
+
+- **sdk:** prebuild ([#2796](https://github.com/scaleway/scaleway-sdk-js/issues/2796)) ([c532d6b](https://github.com/scaleway/scaleway-sdk-js/commit/c532d6b614d45849901d0760bc87a3177423dd62))
+
+### Features
+
+- **partner:** enable v1 ([#2788](https://github.com/scaleway/scaleway-sdk-js/issues/2788)) ([e32078c](https://github.com/scaleway/scaleway-sdk-js/commit/e32078cf24434598ab06e655f2ef65b4ba0377d7))
+- **sdk-react:** add react sdk ([#2794](https://github.com/scaleway/scaleway-sdk-js/issues/2794)) ([7dfbf6b](https://github.com/scaleway/scaleway-sdk-js/commit/7dfbf6b4d4eae5f95cd05ff7433e30c522619475))
+
 ## [3.2.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.2.1...@scaleway/sdk@3.2.2) (2026-03-02)
 
 **Note:** Version bump only for package @scaleway/sdk

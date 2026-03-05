@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-03-05)
+
+### Features
+
+- **domain:** add field updated_at on record DNS ([#2792](https://github.com/scaleway/scaleway-sdk-js/issues/2792)) ([bb179af](https://github.com/scaleway/scaleway-sdk-js/commit/bb179af4f074ff966facd40deb5db90014cc9adf))
+- **sdk-react:** add react sdk ([#2794](https://github.com/scaleway/scaleway-sdk-js/issues/2794)) ([7dfbf6b](https://github.com/scaleway/scaleway-sdk-js/commit/7dfbf6b4d4eae5f95cd05ff7433e30c522619475))
+
 ## 2.2.2 (2026-02-23)
 
 **Note:** Version bump only for package @scaleway/sdk-domain

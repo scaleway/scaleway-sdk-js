@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/generate-react-sdk",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "generate react sdk",
   "type": "module",
   "private": false,

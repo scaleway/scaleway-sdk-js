@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-03-05)
+
+### Bug Fixes
+
+- **serverless:** use correct memory limit max value on CreateContainer ([#2775](https://github.com/scaleway/scaleway-sdk-js/issues/2775)) ([c313db8](https://github.com/scaleway/scaleway-sdk-js/commit/c313db80840dd2864cb4f9788a2f678693a13dcf))
+
+### Features
+
+- **sdk-react:** add react sdk ([#2794](https://github.com/scaleway/scaleway-sdk-js/issues/2794)) ([7dfbf6b](https://github.com/scaleway/scaleway-sdk-js/commit/7dfbf6b4d4eae5f95cd05ff7433e30c522619475))
+
 ## [2.3.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@2.3.1...@scaleway/sdk-container@2.3.2) (2026-02-23)
 
 **Note:** Version bump only for package @scaleway/sdk-container

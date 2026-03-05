@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.5.0...@scaleway/sdk-audit-trail@2.6.0) (2026-03-05)
+
+### Features
+
+- **audit_trail:** add apple-silicon runner resource definition ([#2777](https://github.com/scaleway/scaleway-sdk-js/issues/2777)) ([ccd000a](https://github.com/scaleway/scaleway-sdk-js/commit/ccd000a28a305757c1bb8483f0089d5268ab2ab4))
+- **audit_trail:** add list system events ([#2773](https://github.com/scaleway/scaleway-sdk-js/issues/2773)) ([d78c45b](https://github.com/scaleway/scaleway-sdk-js/commit/d78c45bfdaaf12b020e4bf607c28addee784def6))
+- **audit_trail:** add mongodb resources ([#2774](https://github.com/scaleway/scaleway-sdk-js/issues/2774)) ([f661d7b](https://github.com/scaleway/scaleway-sdk-js/commit/f661d7b8c77a3ce664698f6f6eb6060d9fd24f44))
+- **sdk-react:** add react sdk ([#2794](https://github.com/scaleway/scaleway-sdk-js/issues/2794)) ([7dfbf6b](https://github.com/scaleway/scaleway-sdk-js/commit/7dfbf6b4d4eae5f95cd05ff7433e30c522619475))
+
 # [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.4.1...@scaleway/sdk-audit-trail@2.5.0) (2026-03-02)
 
 ### Features
