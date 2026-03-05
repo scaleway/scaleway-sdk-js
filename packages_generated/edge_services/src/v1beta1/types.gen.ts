@@ -460,7 +460,7 @@ export interface RouteStage {
   /**
    * ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
    *
-   * One-of ('next'): at most one of 'wafStageId' could be set.
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
   wafStageId?: string
   /**
@@ -471,6 +471,11 @@ export interface RouteStage {
    * Date the route stage was last updated.
    */
   updatedAt?: Date
+  /**
+   *
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
+   */
+  backendStageId?: string
 }
 
 
@@ -572,9 +577,14 @@ export interface SetRouteRulesRequestRouteRule {
   /**
    * ID of the backend stage that requests matching the rule should be forwarded to.
    *
-   * One-of ('next'): at most one of 'backendStageId' could be set.
+   * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
    */
   backendStageId?: string
+  /**
+   *
+   * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
+   */
+  wafStageId?: string
 }
 
 
@@ -588,7 +598,7 @@ export interface RouteRule {
   /**
    * ID of the backend stage that requests matching the rule should be forwarded to.
    *
-   * One-of ('next'): at most one of 'backendStageId' could be set.
+   * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
    */
   backendStageId?: string
   /**
@@ -599,6 +609,11 @@ export interface RouteRule {
    * Route stage ID the route rule belongs to.
    */
   routeStageId: string
+  /**
+   *
+   * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
+   */
+  wafStageId?: string
 }
 
 
@@ -941,9 +956,14 @@ export type CreateRouteStageRequest = {
   /**
    * ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
    *
-   * One-of ('next'): at most one of 'wafStageId' could be set.
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
   wafStageId?: string
+  /**
+   *
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
+   */
+  backendStageId?: string
 }
 
 
@@ -1781,9 +1801,14 @@ export type UpdateRouteStageRequest = {
   /**
    * ID of the WAF stage HTTP requests should be forwarded to when no rules are matched.
    *
-   * One-of ('next'): at most one of 'wafStageId' could be set.
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
   wafStageId?: string
+  /**
+   *
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
+   */
+  backendStageId?: string
 }
 
 

@@ -248,6 +248,7 @@ export const unmarshalRouteStage = (data: unknown): RouteStage => {
   }
 
   return {
+    backendStageId: data.backend_stage_id,
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     pipelineId: data.pipeline_id,
@@ -383,6 +384,7 @@ const unmarshalRouteRule = (data: unknown): RouteRule => {
     position: data.position,
     routeStageId: data.route_stage_id,
     ruleHttpMatch: data.rule_http_match ? unmarshalRuleHttpMatch(data.rule_http_match) : undefined,
+    wafStageId: data.waf_stage_id,
   } as RouteRule
 }
 
@@ -733,6 +735,9 @@ export const marshalSetRouteRulesRequestRouteRule = (
     {param: 'backend_stage_id',
       value: request.backendStageId,
     },
+    {param: 'waf_stage_id',
+      value: request.wafStageId,
+    },
   ]),
 })
 
@@ -929,6 +934,9 @@ export const marshalCreateRouteStageRequest = (
     {param: 'waf_stage_id',
       value: request.wafStageId,
     },
+    {param: 'backend_stage_id',
+      value: request.backendStageId,
+    },
   ]),
 })
 
@@ -1109,6 +1117,9 @@ export const marshalUpdateRouteStageRequest = (
   ...resolveOneOf([
     {param: 'waf_stage_id',
       value: request.wafStageId,
+    },
+    {param: 'backend_stage_id',
+      value: request.backendStageId,
     },
   ]),
 })
