@@ -1,0 +1,28 @@
+{
+  "extends": "@scaleway/tsconfig",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "strict": true,
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowUnreachableCode": false,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "*.config.ts"],
+  "exclude": [
+    "dist/*",
+    "*.config.ts",
+    "*.setup.ts",
+    "**/__tests__",
+    "**/__mocks__",
+    "src/**/*.test.tsx"
+  ]
+}

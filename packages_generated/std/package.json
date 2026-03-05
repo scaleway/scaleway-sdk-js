@@ -28,10 +28,10 @@
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
-  "dependencies": {
-    "@scaleway/sdk-client": "workspace:^"
-  },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
+  },
+  "devDependencies": {
+    "@scaleway/sdk-client": "workspace:*"
   }
 }

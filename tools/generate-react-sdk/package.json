@@ -1,0 +1,35 @@
+{
+  "name": "@scaleway/generate-react-sdk",
+  "version": "0.0.1",
+  "description": "generate react sdk",
+  "type": "module",
+  "private": false,
+  "bin": {
+    "generate-api": "./dist/buildAPI.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.19.6"
+  },
+  "exports": {
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "directory": "tools/generate-react-sdk"
+  },
+  "scripts": {
+    "build": "tsgo -p tsconfig.build.json",
+    "package:check": "pnpm publint",
+    "typecheck": "tsgo -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.35",
+    "ts-morph": "27.0.2"
+  }
+}
