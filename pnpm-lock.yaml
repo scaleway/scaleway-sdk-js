@@ -393,15 +393,9 @@ importers:
       '@scaleway/sdk-serverless-sqldb':
         specifier: workspace:*
         version: link:../../packages_generated/serverless_sqldb
-      '@scaleway/sdk-std':
-        specifier: '*'
-        version: 2.1.1(@scaleway/sdk-client@packages+client)
       '@scaleway/sdk-tem':
         specifier: workspace:*
         version: link:../../packages_generated/tem
-      '@scaleway/sdk-test':
-        specifier: '*'
-        version: 2.2.1(@scaleway/sdk-client@packages+client)
       '@scaleway/sdk-vpc':
         specifier: workspace:*
         version: link:../../packages_generated/vpc
@@ -423,9 +417,6 @@ importers:
       ts-morph:
         specifier: 27.0.2
         version: 27.0.2
-      vite-tsconfig-paths:
-        specifier: ^6.1.1
-        version: 6.1.1(typescript@5.9.3)(vite@8.0.0-beta.16(@types/node@24.10.13)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.8.1))
 
   packages_generated/account:
     dependencies:
@@ -2561,24 +2552,6 @@ packages:
       }
     engines: { node: '>=20.x' }
 
-  '@scaleway/sdk-std@2.1.1':
-    resolution:
-      {
-        integrity: sha512-CA2sGprYGU4poTpMVbwxDkqmEpoeqKnNunuNQ0Fkd6VmjrEDs0vE0zTrS2yKMErLVuNGXkKyE9ECg44bqcHCLQ==,
-      }
-    engines: { node: '>=20.19.6' }
-    peerDependencies:
-      '@scaleway/sdk-client': ^2.1.0
-
-  '@scaleway/sdk-test@2.2.1':
-    resolution:
-      {
-        integrity: sha512-r3iWVsNMhC8uQUMVRnjUWO4bwexjKRHs9S3ohiwzptbVLr8dGT7GuchTSdMb37Jqtvbug3EdHJwCNfZSsGiTNQ==,
-      }
-    engines: { node: '>=20.19.6' }
-    peerDependencies:
-      '@scaleway/sdk-client': ^2.1.0
-
   '@scaleway/tsconfig@1.1.4':
     resolution:
       {
@@ -4627,12 +4600,6 @@ packages:
         integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==,
       }
     engines: { node: '>=10' }
-
-  globrex@0.1.2:
-    resolution:
-      {
-        integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==,
-      }
 
   gopd@1.2.0:
     resolution:
@@ -7668,19 +7635,6 @@ packages:
     engines: { node: '>=16.20.2' }
     hasBin: true
 
-  tsconfck@3.1.6:
-    resolution:
-      {
-        integrity: sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==,
-      }
-    engines: { node: ^18 || >=20 }
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
   tsconfig-paths@4.2.0:
     resolution:
       {
@@ -7945,14 +7899,6 @@ packages:
       }
     engines: { node: ^18.0.0 || ^20.0.0 || >=22.0.0 }
     hasBin: true
-
-  vite-tsconfig-paths@6.1.1:
-    resolution:
-      {
-        integrity: sha512-2cihq7zliibCCZ8P9cKJrQBkfgdvcFkOOc3Y02o3GWUDLgqjWsZudaoiuOwO/gzTzy17cS5F7ZPo4bsnS4DGkg==,
-      }
-    peerDependencies:
-      vite: '*'
 
   vite@7.3.1:
     resolution:
@@ -9347,16 +9293,6 @@ snapshots:
 
   '@scaleway/random-name@5.1.2': {}
 
-  '@scaleway/sdk-std@2.1.1(@scaleway/sdk-client@packages+client)':
-    dependencies:
-      '@scaleway/sdk-client': link:packages/client
-
-  '@scaleway/sdk-test@2.2.1(@scaleway/sdk-client@packages+client)':
-    dependencies:
-      '@scaleway/random-name': 5.1.2
-      '@scaleway/sdk-client': link:packages/client
-      '@scaleway/sdk-std': 2.1.1(@scaleway/sdk-client@packages+client)
-
   '@scaleway/tsconfig@1.1.4': {}
 
   '@shikijs/engine-oniguruma@3.19.0':
@@ -10614,8 +10550,6 @@ snapshots:
       ignore: 5.3.2
       merge2: 1.4.1
       slash: 3.0.0
-
-  globrex@0.1.2: {}
 
   gopd@1.2.0: {}
 
@@ -12446,10 +12380,6 @@ snapshots:
       normalize-path: 3.0.0
       plimit-lit: 1.6.1
 
-  tsconfck@3.1.6(typescript@5.9.3):
-    optionalDependencies:
-      typescript: 5.9.3
-
   tsconfig-paths@4.2.0:
     dependencies:
       json5: 2.2.3
@@ -12586,16 +12516,6 @@ snapshots:
       - terser
       - tsx
       - yaml
-
-  vite-tsconfig-paths@6.1.1(typescript@5.9.3)(vite@8.0.0-beta.16(@types/node@24.10.13)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.8.1)):
-    dependencies:
-      debug: 4.4.3
-      globrex: 0.1.2
-      tsconfck: 3.1.6(typescript@5.9.3)
-      vite: 8.0.0-beta.16(@types/node@24.10.13)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.8.1)
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
 
   vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(yaml@2.8.1):
     dependencies:
