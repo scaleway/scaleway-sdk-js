@@ -383,6 +383,7 @@ const unmarshalRouteRule = (data: unknown): RouteRule => {
     position: data.position,
     routeStageId: data.route_stage_id,
     ruleHttpMatch: data.rule_http_match ? unmarshalRuleHttpMatch(data.rule_http_match) : undefined,
+    wafStageId: data.waf_stage_id,
   } as RouteRule
 }
 
@@ -732,6 +733,9 @@ export const marshalSetRouteRulesRequestRouteRule = (
   ...resolveOneOf([
     {param: 'backend_stage_id',
       value: request.backendStageId,
+    },
+    {param: 'waf_stage_id',
+      value: request.wafStageId,
     },
   ]),
 })
