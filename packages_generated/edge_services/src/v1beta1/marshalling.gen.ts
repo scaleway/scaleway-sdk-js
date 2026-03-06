@@ -248,6 +248,7 @@ export const unmarshalRouteStage = (data: unknown): RouteStage => {
   }
 
   return {
+    backendStageId: data.backend_stage_id,
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     pipelineId: data.pipeline_id,
@@ -933,6 +934,9 @@ export const marshalCreateRouteStageRequest = (
     {param: 'waf_stage_id',
       value: request.wafStageId,
     },
+    {param: 'backend_stage_id',
+      value: request.backendStageId,
+    },
   ]),
 })
 
@@ -1113,6 +1117,9 @@ export const marshalUpdateRouteStageRequest = (
   ...resolveOneOf([
     {param: 'waf_stage_id',
       value: request.wafStageId,
+    },
+    {param: 'backend_stage_id',
+      value: request.backendStageId,
     },
   ]),
 })
