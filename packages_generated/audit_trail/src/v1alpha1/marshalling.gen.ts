@@ -69,6 +69,7 @@ import type {
   VpcPrivateNetworkInfo,
   VpcRouteInfo,
   VpcSubnetInfo,
+  VpcVpcConnectorInfo,
 } from './types.gen.js'
 
 const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
@@ -684,6 +685,19 @@ const unmarshalVpcSubnetInfo = (data: unknown): VpcSubnetInfo => {
   } as VpcSubnetInfo
 }
 
+const unmarshalVpcVpcConnectorInfo = (data: unknown): VpcVpcConnectorInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VpcVpcConnectorInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    targetVpcId: data.target_vpc_id,
+    vpcId: data.vpc_id,
+  } as VpcVpcConnectorInfo
+}
+
 export const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -741,6 +755,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : undefined,
     vpcRouteInfo: data.vpc_route_info ? unmarshalVpcRouteInfo(data.vpc_route_info) : undefined,
     vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : undefined,
+    vpcVpcConnectorInfo: data.vpc_vpc_connector_info ? unmarshalVpcVpcConnectorInfo(data.vpc_vpc_connector_info) : undefined,
   } as Resource
 }
 
