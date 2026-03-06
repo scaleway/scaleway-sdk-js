@@ -10,6 +10,7 @@ import type {
   AlertRule,
   AppleSiliconRunnerInfo,
   AppleSiliconServerInfo,
+  AuditTrailAlertRuleInfo,
   AuditTrailExportJobInfo,
   AuthenticationEvent,
   BaremetalServerInfo,
@@ -261,6 +262,17 @@ const unmarshalAppleSiliconServerInfo = (data: unknown): AppleSiliconServerInfo 
     id: data.id,
     name: data.name,
   } as AppleSiliconServerInfo
+}
+
+const unmarshalAuditTrailAlertRuleInfo = (data: unknown): AuditTrailAlertRuleInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AuditTrailAlertRuleInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as AuditTrailAlertRuleInfo
 }
 
 const unmarshalAuditTrailExportJobInfo = (data: unknown): AuditTrailExportJobInfo => {
@@ -686,6 +698,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : undefined,
     appleSiliconRunnerInfo: data.apple_silicon_runner_info ? unmarshalAppleSiliconRunnerInfo(data.apple_silicon_runner_info) : undefined,
     appleSiliconServerInfo: data.apple_silicon_server_info ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info) : undefined,
+    auditTrailAlertRuleInfo: data.audit_trail_alert_rule_info ? unmarshalAuditTrailAlertRuleInfo(data.audit_trail_alert_rule_info) : undefined,
     auditTrailExportJobInfo: data.audit_trail_export_job_info ? unmarshalAuditTrailExportJobInfo(data.audit_trail_export_job_info) : undefined,
     baremetalServerInfo: data.baremetal_server_info ? unmarshalBaremetalServerInfo(data.baremetal_server_info) : undefined,
     baremetalSettingInfo: data.baremetal_setting_info ? unmarshalBaremetalSettingInfo(data.baremetal_setting_info) : undefined,
