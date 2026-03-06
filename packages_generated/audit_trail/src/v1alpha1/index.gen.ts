@@ -15,6 +15,7 @@ export type {
   AlertRuleStatus,
   AppleSiliconRunnerInfo,
   AppleSiliconServerInfo,
+  AuditTrailAlertRuleInfo,
   AuditTrailExportJobInfo,
   AuthenticationEvent,
   AuthenticationEventFailureReason,
