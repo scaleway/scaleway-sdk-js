@@ -12,7 +12,7 @@
     "directory": "packages/configuration-loader"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=20.20.0"
   },
   "type": "module",
   "exports": {
@@ -28,6 +28,6 @@
     "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
   },
   "devDependencies": {
-    "@types/node": "20.19.35"
+    "@types/node": "20.19.37"
   }
 }

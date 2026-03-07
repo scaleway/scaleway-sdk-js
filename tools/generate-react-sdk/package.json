@@ -11,7 +11,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=20.20.0"
   },
   "exports": {
     "./*": {
@@ -29,7 +29,7 @@
     "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.35",
+    "@types/node": "20.19.37",
     "ts-morph": "27.0.2"
   }
 }
