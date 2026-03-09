@@ -5,7 +5,7 @@
   "type": "module",
   "private": false,
   "bin": {
-    "generate-queries": "./dist/buildQueries.js"
+    "@scaleway/generate-react-queries": "./dist/buildQueries.js"
   },
   "files": [
     "dist"
