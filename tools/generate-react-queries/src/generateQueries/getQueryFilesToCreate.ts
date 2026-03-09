@@ -1,5 +1,6 @@
 import { customNS, fallbackNamespace } from './config.ts'
 import { getQueryFileContent } from './getQueryFileContent.ts'
+import { getReloadFileContent } from './getReloadFileContent.ts'
 import type { FileToCreateWithNamespace, TransformedResult } from './types.ts'
 
 // For each entry, a file will be created in the `generated` folder in the format `use + Key of transformedResult + Query.ts`, and the file will be filled with the content.
@@ -9,8 +10,13 @@ export const getQueryFilesToCreate = ({
 }: {
   transformedResult: TransformedResult
   apiPath: string
-}) =>
-  Object.entries(transformedResult).reduce<FileToCreateWithNamespace>(
+}) => {
+  // For each namespace extract unique apis to generate useReload hooks
+  const apisByNamespace = new Map<string, undefined | Set<string>>()
+
+  const filesToCreate = Object.entries(
+    transformedResult,
+  ).reduce<FileToCreateWithNamespace>(
     (filesToCreate, [fileName, methodInfo]) => {
       let finalFileName = `use${fileName}Query.ts`
       const product = methodInfo.namespaces[0] ?? ''
@@ -26,13 +32,16 @@ export const getQueryFilesToCreate = ({
         name = 'API'
       }
 
+      const namespace = methodInfo.namespaces[0] ?? fallbackNamespace
       const apiToUse = product + name
 
-      return {
-        ...filesToCreate,
-        [methodInfo.namespaces[0] ?? fallbackNamespace]: [
-          ...(filesToCreate[methodInfo.namespaces[0] ?? fallbackNamespace] ??
-            []),
+      const nsSet = apisByNamespace.get(namespace) ?? new Set<string>()
+      nsSet.add(apiToUse)
+      apisByNamespace.set(namespace, nsSet)
+
+      return Object.assign(filesToCreate, {
+        [namespace]: [
+          ...(filesToCreate[namespace] ?? []),
           {
             fileContent: getQueryFileContent({
               apiPath,
@@ -49,7 +58,26 @@ export const getQueryFilesToCreate = ({
             fileName: finalFileName,
           },
         ],
-      }
+      })
     },
     {},
   )
+
+  // Generate useReload hooks
+  return apisByNamespace
+    .entries()
+    .reduce<FileToCreateWithNamespace>((filesToCreate, [namespace, apis]) => {
+      if (!apis) {
+        return filesToCreate
+      }
+      return Object.assign(filesToCreate, {
+        [namespace]: [
+          ...(filesToCreate[namespace] ?? []),
+          ...apis.values().map(apiToUse => ({
+            fileContent: getReloadFileContent({ apiToUse }),
+            fileName: `use${apiToUse}Reload.ts`,
+          })),
+        ],
+      })
+    }, filesToCreate)
+}
