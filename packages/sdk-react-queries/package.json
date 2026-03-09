@@ -13,7 +13,7 @@
   "scripts": {
     "prebuild": "shx rm -rf dist && pnpm generate:queries",
     "typecheck": "tsgo --noEmit",
-    "generate:queries": "pnpm generate-queries --dir-gen-name src/queries --package-name-filter '@scaleway/sdk' --api-sdk-path '@scaleway/sdk-react' ",
+    "generate:queries": "pnpm generate-queries --dir-gen-name src/queries --package-name-filter '@scaleway/sdk' --api-sdk-path '@scaleway/sdk-react' --custom-ns 'test' ",
     "format": "biome check  --linter-enabled=false --write .",
     "type:generate": "tsgo --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
@@ -232,6 +232,10 @@
     "./mocks*": {
       "default": "./mocks/*/index.ts",
       "types": "./mocks/*/index.ts"
+    },
+    "./test/custom": {
+      "default": "./dist/queries/test/custom/index.js",
+      "types": "./dist/queries/test/custom/index.d.ts"
     }
   },
   "peerDependencies": {
