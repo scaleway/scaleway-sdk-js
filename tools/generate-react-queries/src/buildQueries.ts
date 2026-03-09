@@ -126,7 +126,7 @@ packageJson.exports = {
   ...generatedExportsConfig,
   ...otherStaticExport,
 }
-
-writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
+const content = JSON.stringify(packageJson, null, 2)
+writeFileSync(packageJsonPath, `${content}\n`)
 
 process.stdout.write('✅ package.json exports updated !')
