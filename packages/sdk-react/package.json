@@ -23,8 +23,7 @@
   "scripts": {
     "prebuild": "shx rm -rf dist && pnpm generate:api",
     "typecheck": "tsgo --noEmit",
-    "generate:api": "pnpm generate-api --dir-gen-name src/__generated__/api  --sdk-factory-path '../../contexts/SDKCacheProvider/sdkFactory'",
-    "generate:queries": "pnpm generate-queries --dir-gen-name src/__generated__/queries --package-name-filter '@scaleway/sdk' --api-sdk-path '../../../api' ",
+    "generate:api": "pnpm generate-react-sdk --dir-gen-name src/__generated__/api  --sdk-factory-path '../../contexts/SDKCacheProvider/sdkFactory'",
     "format": "biome check  --linter-enabled=false --write .",
     "type:generate": "tsgo --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",

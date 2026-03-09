@@ -5,7 +5,7 @@
   "type": "module",
   "private": false,
   "bin": {
-    "generate-api": "./dist/buildAPI.js"
+    "generate-react-sdk": "./dist/buildAPI.js"
   },
   "files": [
     "dist"
