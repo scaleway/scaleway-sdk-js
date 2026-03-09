@@ -4,6 +4,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { generateQueries } from './generateQueries/generate.ts'
 import { parseArgsCLI } from './parseArgsCLI.ts'
+import { removeSrcFromPath } from './utils/pathUtils.ts'
 
 const requiresValueArgs = [
   'dir-gen-name',
@@ -70,24 +71,29 @@ const customNamespaceDirectories: string[] = allNamespaces.filter(
     existsSync(join(dirGenName, namespace, String(customPath), 'index.ts')),
 )
 
+// TODO: use tsdown https://tsdown.dev/options/package-exports
+// Remove 'src/' from the directory name for dist paths
+const cleanDirName = removeSrcFromPath(dirGenName)
+
 const generatedExportsConfig: Record<string, ExportEntry> =
   generatedNamespaceDirectories.reduce<Record<string, ExportEntry>>(
     (acc, namespace) => {
       acc[`./${namespace}`] = {
-        default: `./dist/${dirGenName ? `${dirGenName}/` : ''}${namespace}/${generatedPath}/index.js`,
-        types: `./dist/${dirGenName ? `${dirGenName}/` : ''}${namespace}/${generatedPath}/index.d.ts`,
+        default: `./dist/${cleanDirName ? `${cleanDirName}/` : ''}${namespace}/${generatedPath}/index.js`,
+        types: `./dist/${cleanDirName ? `${cleanDirName}/` : ''}${namespace}/${generatedPath}/index.d.ts`,
       }
 
       return acc
     },
     {},
   )
+
 const customExportsConfig: Record<string, ExportEntry> =
   customNamespaceDirectories.reduce<Record<string, ExportEntry>>(
     (acc, namespace) => {
       acc[`./${namespace}/custom`] = {
-        default: `./dist/${dirGenName ? `${dirGenName}/` : ''}${namespace}/${customPath}/index.js`,
-        types: `./dist/${dirGenName ? `${dirGenName}/` : ''}${namespace}/${customPath}/index.d.ts`,
+        default: `./dist/${cleanDirName ? `${cleanDirName}/` : ''}${namespace}/${customPath}/index.js`,
+        types: `./dist/${cleanDirName ? `${cleanDirName}/` : ''}${namespace}/${customPath}/index.d.ts`,
       }
 
       return acc
