@@ -5,7 +5,7 @@
   "type": "module",
   "private": false,
   "bin": {
-    "@scaleway/generate-react-sdk": "./dist/buildAPI.js"
+    "generate-react-sdk": "./dist/buildAPI.js"
   },
   "files": [
     "dist"
