@@ -10,220 +10,6 @@
   ],
   "types": "./dist/index.d.ts",
   "module": "./dist/index.js",
-  "exports": {
-    "./accountv3": {
-      "default": "./dist/src/queries/accountv3/generated/index.js",
-      "types": "./dist/src/queries/accountv3/generated/index.d.ts"
-    },
-    "./applesiliconv1alpha1": {
-      "default": "./dist/src/queries/applesiliconv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/applesiliconv1alpha1/generated/index.d.ts"
-    },
-    "./audittrailv1alpha1": {
-      "default": "./dist/src/queries/audittrailv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/audittrailv1alpha1/generated/index.d.ts"
-    },
-    "./autoscalingv1alpha1": {
-      "default": "./dist/src/queries/autoscalingv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/autoscalingv1alpha1/generated/index.d.ts"
-    },
-    "./baremetalv1": {
-      "default": "./dist/src/queries/baremetalv1/generated/index.js",
-      "types": "./dist/src/queries/baremetalv1/generated/index.d.ts"
-    },
-    "./baremetalv3": {
-      "default": "./dist/src/queries/baremetalv3/generated/index.js",
-      "types": "./dist/src/queries/baremetalv3/generated/index.d.ts"
-    },
-    "./billingv2beta1": {
-      "default": "./dist/src/queries/billingv2beta1/generated/index.js",
-      "types": "./dist/src/queries/billingv2beta1/generated/index.d.ts"
-    },
-    "./blockv1": {
-      "default": "./dist/src/queries/blockv1/generated/index.js",
-      "types": "./dist/src/queries/blockv1/generated/index.d.ts"
-    },
-    "./blockv1alpha1": {
-      "default": "./dist/src/queries/blockv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/blockv1alpha1/generated/index.d.ts"
-    },
-    "./cockpitv1": {
-      "default": "./dist/src/queries/cockpitv1/generated/index.js",
-      "types": "./dist/src/queries/cockpitv1/generated/index.d.ts"
-    },
-    "./containerv1beta1": {
-      "default": "./dist/src/queries/containerv1beta1/generated/index.js",
-      "types": "./dist/src/queries/containerv1beta1/generated/index.d.ts"
-    },
-    "./datalabv1beta1": {
-      "default": "./dist/src/queries/datalabv1beta1/generated/index.js",
-      "types": "./dist/src/queries/datalabv1beta1/generated/index.d.ts"
-    },
-    "./datawarehousev1beta1": {
-      "default": "./dist/src/queries/datawarehousev1beta1/generated/index.js",
-      "types": "./dist/src/queries/datawarehousev1beta1/generated/index.d.ts"
-    },
-    "./dediboxv1": {
-      "default": "./dist/src/queries/dediboxv1/generated/index.js",
-      "types": "./dist/src/queries/dediboxv1/generated/index.d.ts"
-    },
-    "./domainv2beta1": {
-      "default": "./dist/src/queries/domainv2beta1/generated/index.js",
-      "types": "./dist/src/queries/domainv2beta1/generated/index.d.ts"
-    },
-    "./edgeservicesv1beta1": {
-      "default": "./dist/src/queries/edgeservicesv1beta1/generated/index.js",
-      "types": "./dist/src/queries/edgeservicesv1beta1/generated/index.d.ts"
-    },
-    "./environmentalfootprintv1alpha1": {
-      "default": "./dist/src/queries/environmentalfootprintv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/environmentalfootprintv1alpha1/generated/index.d.ts"
-    },
-    "./filev1alpha1": {
-      "default": "./dist/src/queries/filev1alpha1/generated/index.js",
-      "types": "./dist/src/queries/filev1alpha1/generated/index.d.ts"
-    },
-    "./flexibleipv1alpha1": {
-      "default": "./dist/src/queries/flexibleipv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/flexibleipv1alpha1/generated/index.d.ts"
-    },
-    "./functionv1beta1": {
-      "default": "./dist/src/queries/functionv1beta1/generated/index.js",
-      "types": "./dist/src/queries/functionv1beta1/generated/index.d.ts"
-    },
-    "./iamv1alpha1": {
-      "default": "./dist/src/queries/iamv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/iamv1alpha1/generated/index.d.ts"
-    },
-    "./inferencev1": {
-      "default": "./dist/src/queries/inferencev1/generated/index.js",
-      "types": "./dist/src/queries/inferencev1/generated/index.d.ts"
-    },
-    "./inferencev1beta1": {
-      "default": "./dist/src/queries/inferencev1beta1/generated/index.js",
-      "types": "./dist/src/queries/inferencev1beta1/generated/index.d.ts"
-    },
-    "./instancev1": {
-      "default": "./dist/src/queries/instancev1/generated/index.js",
-      "types": "./dist/src/queries/instancev1/generated/index.d.ts"
-    },
-    "./interlinkv1beta1": {
-      "default": "./dist/src/queries/interlinkv1beta1/generated/index.js",
-      "types": "./dist/src/queries/interlinkv1beta1/generated/index.d.ts"
-    },
-    "./iotv1": {
-      "default": "./dist/src/queries/iotv1/generated/index.js",
-      "types": "./dist/src/queries/iotv1/generated/index.d.ts"
-    },
-    "./ipamv1": {
-      "default": "./dist/src/queries/ipamv1/generated/index.js",
-      "types": "./dist/src/queries/ipamv1/generated/index.d.ts"
-    },
-    "./jobsv1alpha1": {
-      "default": "./dist/src/queries/jobsv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/jobsv1alpha1/generated/index.d.ts"
-    },
-    "./jobsv1alpha2": {
-      "default": "./dist/src/queries/jobsv1alpha2/generated/index.js",
-      "types": "./dist/src/queries/jobsv1alpha2/generated/index.d.ts"
-    },
-    "./k8sv1": {
-      "default": "./dist/src/queries/k8sv1/generated/index.js",
-      "types": "./dist/src/queries/k8sv1/generated/index.d.ts"
-    },
-    "./kafkav1alpha1": {
-      "default": "./dist/src/queries/kafkav1alpha1/generated/index.js",
-      "types": "./dist/src/queries/kafkav1alpha1/generated/index.d.ts"
-    },
-    "./keymanagerv1alpha1": {
-      "default": "./dist/src/queries/keymanagerv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/keymanagerv1alpha1/generated/index.d.ts"
-    },
-    "./lbv1": {
-      "default": "./dist/src/queries/lbv1/generated/index.js",
-      "types": "./dist/src/queries/lbv1/generated/index.d.ts"
-    },
-    "./marketplacev2": {
-      "default": "./dist/src/queries/marketplacev2/generated/index.js",
-      "types": "./dist/src/queries/marketplacev2/generated/index.d.ts"
-    },
-    "./mnqv1beta1": {
-      "default": "./dist/src/queries/mnqv1beta1/generated/index.js",
-      "types": "./dist/src/queries/mnqv1beta1/generated/index.d.ts"
-    },
-    "./mongodbv1": {
-      "default": "./dist/src/queries/mongodbv1/generated/index.js",
-      "types": "./dist/src/queries/mongodbv1/generated/index.d.ts"
-    },
-    "./mongodbv1alpha1": {
-      "default": "./dist/src/queries/mongodbv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/mongodbv1alpha1/generated/index.d.ts"
-    },
-    "./partnerv1": {
-      "default": "./dist/src/queries/partnerv1/generated/index.js",
-      "types": "./dist/src/queries/partnerv1/generated/index.d.ts"
-    },
-    "./productcatalogv2alpha1": {
-      "default": "./dist/src/queries/productcatalogv2alpha1/generated/index.js",
-      "types": "./dist/src/queries/productcatalogv2alpha1/generated/index.d.ts"
-    },
-    "./qaasv1alpha1": {
-      "default": "./dist/src/queries/qaasv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/qaasv1alpha1/generated/index.d.ts"
-    },
-    "./rdbv1": {
-      "default": "./dist/src/queries/rdbv1/generated/index.js",
-      "types": "./dist/src/queries/rdbv1/generated/index.d.ts"
-    },
-    "./redisv1": {
-      "default": "./dist/src/queries/redisv1/generated/index.js",
-      "types": "./dist/src/queries/redisv1/generated/index.d.ts"
-    },
-    "./registryv1": {
-      "default": "./dist/src/queries/registryv1/generated/index.js",
-      "types": "./dist/src/queries/registryv1/generated/index.d.ts"
-    },
-    "./s2svpnv1alpha1": {
-      "default": "./dist/src/queries/s2svpnv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/s2svpnv1alpha1/generated/index.d.ts"
-    },
-    "./searchdbv1alpha1": {
-      "default": "./dist/src/queries/searchdbv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/searchdbv1alpha1/generated/index.d.ts"
-    },
-    "./secretv1beta1": {
-      "default": "./dist/src/queries/secretv1beta1/generated/index.js",
-      "types": "./dist/src/queries/secretv1beta1/generated/index.d.ts"
-    },
-    "./serverlesssqldbv1alpha1": {
-      "default": "./dist/src/queries/serverlesssqldbv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/serverlesssqldbv1alpha1/generated/index.d.ts"
-    },
-    "./temv1alpha1": {
-      "default": "./dist/src/queries/temv1alpha1/generated/index.js",
-      "types": "./dist/src/queries/temv1alpha1/generated/index.d.ts"
-    },
-    "./vpcgwv1": {
-      "default": "./dist/src/queries/vpcgwv1/generated/index.js",
-      "types": "./dist/src/queries/vpcgwv1/generated/index.d.ts"
-    },
-    "./vpcgwv2": {
-      "default": "./dist/src/queries/vpcgwv2/generated/index.js",
-      "types": "./dist/src/queries/vpcgwv2/generated/index.d.ts"
-    },
-    "./vpcv2": {
-      "default": "./dist/src/queries/vpcv2/generated/index.js",
-      "types": "./dist/src/queries/vpcv2/generated/index.d.ts"
-    },
-    "./webhostingv1": {
-      "default": "./dist/src/queries/webhostingv1/generated/index.js",
-      "types": "./dist/src/queries/webhostingv1/generated/index.d.ts"
-    },
-    "./mocks*": {
-      "default": "./mocks/*/index.ts",
-      "types": "./mocks/*/index.ts"
-    }
-  },
   "scripts": {
     "prebuild": "shx rm -rf dist && pnpm generate:queries",
     "typecheck": "tsgo --noEmit",
@@ -233,6 +19,220 @@
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
     "watch": "pnpm run '/^watch:.*/'",
     "lint": "biome lint ."
+  },
+  "exports": {
+    "./accountv3": {
+      "default": "./dist/queries/accountv3/generated/index.js",
+      "types": "./dist/queries/accountv3/generated/index.d.ts"
+    },
+    "./applesiliconv1alpha1": {
+      "default": "./dist/queries/applesiliconv1alpha1/generated/index.js",
+      "types": "./dist/queries/applesiliconv1alpha1/generated/index.d.ts"
+    },
+    "./audittrailv1alpha1": {
+      "default": "./dist/queries/audittrailv1alpha1/generated/index.js",
+      "types": "./dist/queries/audittrailv1alpha1/generated/index.d.ts"
+    },
+    "./autoscalingv1alpha1": {
+      "default": "./dist/queries/autoscalingv1alpha1/generated/index.js",
+      "types": "./dist/queries/autoscalingv1alpha1/generated/index.d.ts"
+    },
+    "./baremetalv1": {
+      "default": "./dist/queries/baremetalv1/generated/index.js",
+      "types": "./dist/queries/baremetalv1/generated/index.d.ts"
+    },
+    "./baremetalv3": {
+      "default": "./dist/queries/baremetalv3/generated/index.js",
+      "types": "./dist/queries/baremetalv3/generated/index.d.ts"
+    },
+    "./billingv2beta1": {
+      "default": "./dist/queries/billingv2beta1/generated/index.js",
+      "types": "./dist/queries/billingv2beta1/generated/index.d.ts"
+    },
+    "./blockv1": {
+      "default": "./dist/queries/blockv1/generated/index.js",
+      "types": "./dist/queries/blockv1/generated/index.d.ts"
+    },
+    "./blockv1alpha1": {
+      "default": "./dist/queries/blockv1alpha1/generated/index.js",
+      "types": "./dist/queries/blockv1alpha1/generated/index.d.ts"
+    },
+    "./cockpitv1": {
+      "default": "./dist/queries/cockpitv1/generated/index.js",
+      "types": "./dist/queries/cockpitv1/generated/index.d.ts"
+    },
+    "./containerv1beta1": {
+      "default": "./dist/queries/containerv1beta1/generated/index.js",
+      "types": "./dist/queries/containerv1beta1/generated/index.d.ts"
+    },
+    "./datalabv1beta1": {
+      "default": "./dist/queries/datalabv1beta1/generated/index.js",
+      "types": "./dist/queries/datalabv1beta1/generated/index.d.ts"
+    },
+    "./datawarehousev1beta1": {
+      "default": "./dist/queries/datawarehousev1beta1/generated/index.js",
+      "types": "./dist/queries/datawarehousev1beta1/generated/index.d.ts"
+    },
+    "./dediboxv1": {
+      "default": "./dist/queries/dediboxv1/generated/index.js",
+      "types": "./dist/queries/dediboxv1/generated/index.d.ts"
+    },
+    "./domainv2beta1": {
+      "default": "./dist/queries/domainv2beta1/generated/index.js",
+      "types": "./dist/queries/domainv2beta1/generated/index.d.ts"
+    },
+    "./edgeservicesv1beta1": {
+      "default": "./dist/queries/edgeservicesv1beta1/generated/index.js",
+      "types": "./dist/queries/edgeservicesv1beta1/generated/index.d.ts"
+    },
+    "./environmentalfootprintv1alpha1": {
+      "default": "./dist/queries/environmentalfootprintv1alpha1/generated/index.js",
+      "types": "./dist/queries/environmentalfootprintv1alpha1/generated/index.d.ts"
+    },
+    "./filev1alpha1": {
+      "default": "./dist/queries/filev1alpha1/generated/index.js",
+      "types": "./dist/queries/filev1alpha1/generated/index.d.ts"
+    },
+    "./flexibleipv1alpha1": {
+      "default": "./dist/queries/flexibleipv1alpha1/generated/index.js",
+      "types": "./dist/queries/flexibleipv1alpha1/generated/index.d.ts"
+    },
+    "./functionv1beta1": {
+      "default": "./dist/queries/functionv1beta1/generated/index.js",
+      "types": "./dist/queries/functionv1beta1/generated/index.d.ts"
+    },
+    "./iamv1alpha1": {
+      "default": "./dist/queries/iamv1alpha1/generated/index.js",
+      "types": "./dist/queries/iamv1alpha1/generated/index.d.ts"
+    },
+    "./inferencev1": {
+      "default": "./dist/queries/inferencev1/generated/index.js",
+      "types": "./dist/queries/inferencev1/generated/index.d.ts"
+    },
+    "./inferencev1beta1": {
+      "default": "./dist/queries/inferencev1beta1/generated/index.js",
+      "types": "./dist/queries/inferencev1beta1/generated/index.d.ts"
+    },
+    "./instancev1": {
+      "default": "./dist/queries/instancev1/generated/index.js",
+      "types": "./dist/queries/instancev1/generated/index.d.ts"
+    },
+    "./interlinkv1beta1": {
+      "default": "./dist/queries/interlinkv1beta1/generated/index.js",
+      "types": "./dist/queries/interlinkv1beta1/generated/index.d.ts"
+    },
+    "./iotv1": {
+      "default": "./dist/queries/iotv1/generated/index.js",
+      "types": "./dist/queries/iotv1/generated/index.d.ts"
+    },
+    "./ipamv1": {
+      "default": "./dist/queries/ipamv1/generated/index.js",
+      "types": "./dist/queries/ipamv1/generated/index.d.ts"
+    },
+    "./jobsv1alpha1": {
+      "default": "./dist/queries/jobsv1alpha1/generated/index.js",
+      "types": "./dist/queries/jobsv1alpha1/generated/index.d.ts"
+    },
+    "./jobsv1alpha2": {
+      "default": "./dist/queries/jobsv1alpha2/generated/index.js",
+      "types": "./dist/queries/jobsv1alpha2/generated/index.d.ts"
+    },
+    "./k8sv1": {
+      "default": "./dist/queries/k8sv1/generated/index.js",
+      "types": "./dist/queries/k8sv1/generated/index.d.ts"
+    },
+    "./kafkav1alpha1": {
+      "default": "./dist/queries/kafkav1alpha1/generated/index.js",
+      "types": "./dist/queries/kafkav1alpha1/generated/index.d.ts"
+    },
+    "./keymanagerv1alpha1": {
+      "default": "./dist/queries/keymanagerv1alpha1/generated/index.js",
+      "types": "./dist/queries/keymanagerv1alpha1/generated/index.d.ts"
+    },
+    "./lbv1": {
+      "default": "./dist/queries/lbv1/generated/index.js",
+      "types": "./dist/queries/lbv1/generated/index.d.ts"
+    },
+    "./marketplacev2": {
+      "default": "./dist/queries/marketplacev2/generated/index.js",
+      "types": "./dist/queries/marketplacev2/generated/index.d.ts"
+    },
+    "./mnqv1beta1": {
+      "default": "./dist/queries/mnqv1beta1/generated/index.js",
+      "types": "./dist/queries/mnqv1beta1/generated/index.d.ts"
+    },
+    "./mongodbv1": {
+      "default": "./dist/queries/mongodbv1/generated/index.js",
+      "types": "./dist/queries/mongodbv1/generated/index.d.ts"
+    },
+    "./mongodbv1alpha1": {
+      "default": "./dist/queries/mongodbv1alpha1/generated/index.js",
+      "types": "./dist/queries/mongodbv1alpha1/generated/index.d.ts"
+    },
+    "./partnerv1": {
+      "default": "./dist/queries/partnerv1/generated/index.js",
+      "types": "./dist/queries/partnerv1/generated/index.d.ts"
+    },
+    "./productcatalogv2alpha1": {
+      "default": "./dist/queries/productcatalogv2alpha1/generated/index.js",
+      "types": "./dist/queries/productcatalogv2alpha1/generated/index.d.ts"
+    },
+    "./qaasv1alpha1": {
+      "default": "./dist/queries/qaasv1alpha1/generated/index.js",
+      "types": "./dist/queries/qaasv1alpha1/generated/index.d.ts"
+    },
+    "./rdbv1": {
+      "default": "./dist/queries/rdbv1/generated/index.js",
+      "types": "./dist/queries/rdbv1/generated/index.d.ts"
+    },
+    "./redisv1": {
+      "default": "./dist/queries/redisv1/generated/index.js",
+      "types": "./dist/queries/redisv1/generated/index.d.ts"
+    },
+    "./registryv1": {
+      "default": "./dist/queries/registryv1/generated/index.js",
+      "types": "./dist/queries/registryv1/generated/index.d.ts"
+    },
+    "./s2svpnv1alpha1": {
+      "default": "./dist/queries/s2svpnv1alpha1/generated/index.js",
+      "types": "./dist/queries/s2svpnv1alpha1/generated/index.d.ts"
+    },
+    "./searchdbv1alpha1": {
+      "default": "./dist/queries/searchdbv1alpha1/generated/index.js",
+      "types": "./dist/queries/searchdbv1alpha1/generated/index.d.ts"
+    },
+    "./secretv1beta1": {
+      "default": "./dist/queries/secretv1beta1/generated/index.js",
+      "types": "./dist/queries/secretv1beta1/generated/index.d.ts"
+    },
+    "./serverlesssqldbv1alpha1": {
+      "default": "./dist/queries/serverlesssqldbv1alpha1/generated/index.js",
+      "types": "./dist/queries/serverlesssqldbv1alpha1/generated/index.d.ts"
+    },
+    "./temv1alpha1": {
+      "default": "./dist/queries/temv1alpha1/generated/index.js",
+      "types": "./dist/queries/temv1alpha1/generated/index.d.ts"
+    },
+    "./vpcgwv1": {
+      "default": "./dist/queries/vpcgwv1/generated/index.js",
+      "types": "./dist/queries/vpcgwv1/generated/index.d.ts"
+    },
+    "./vpcgwv2": {
+      "default": "./dist/queries/vpcgwv2/generated/index.js",
+      "types": "./dist/queries/vpcgwv2/generated/index.d.ts"
+    },
+    "./vpcv2": {
+      "default": "./dist/queries/vpcv2/generated/index.js",
+      "types": "./dist/queries/vpcv2/generated/index.d.ts"
+    },
+    "./webhostingv1": {
+      "default": "./dist/queries/webhostingv1/generated/index.js",
+      "types": "./dist/queries/webhostingv1/generated/index.d.ts"
+    },
+    "./mocks*": {
+      "default": "./mocks/*/index.ts",
+      "types": "./mocks/*/index.ts"
+    }
   },
   "peerDependencies": {
     "@scaleway/use-dataloader": "6.x",
