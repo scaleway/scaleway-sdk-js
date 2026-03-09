@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.1 (2026-03-09)
+
+### Bug Fixes
+
+- **bin:** rename bin ([#2815](https://github.com/scaleway/scaleway-sdk-js/issues/2815)) ([71c5292](https://github.com/scaleway/scaleway-sdk-js/commit/71c52924554585fd4f0a401eae9736c909dbc3c6))
+
 # [0.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/generate-react-sdk@0.1.1...@scaleway/generate-react-sdk@0.2.0) (2026-03-09)
 
 ### Features
