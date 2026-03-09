@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-queries@0.2.0...@scaleway/sdk-react-queries@0.2.1) (2026-03-09)
+
+### Bug Fixes
+
+- **generate-queries:** exports paths ([#2812](https://github.com/scaleway/scaleway-sdk-js/issues/2812)) ([5deb680](https://github.com/scaleway/scaleway-sdk-js/commit/5deb680f5ebe433d4a9f0e69642c8c2905613533))
+
 # 0.2.0 (2026-03-09)
 
 ### Features
