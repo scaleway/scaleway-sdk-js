@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-react",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "React API Provider using client settings",
   "private": false,
   "sideEffects": false,
@@ -84,6 +84,7 @@
     "@scaleway/sdk-webhosting": "workspace:*"
   },
   "devDependencies": {
+    "@scaleway/generate-react-sdk": "workspace:*",
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
@@ -131,7 +132,6 @@
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*",
-    "@scaleway/generate-react-sdk": "workspace:*",
     "@types/react": "19.2.14",
     "react": "^19.2.4",
     "tinyglobby": "0.2.15"
