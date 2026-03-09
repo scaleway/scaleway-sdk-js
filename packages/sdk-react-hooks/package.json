@@ -1,0 +1,352 @@
+{
+  "name": "@scaleway/sdk-react-hooks",
+  "version": "0.2.1",
+  "description": "React hooks",
+  "private": false,
+  "sideEffects": false,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "scripts": {
+    "prebuild": "shx rm -rf dist && pnpm generate:queries",
+    "typecheck": "tsgo --noEmit",
+    "generate:queries": "pnpm generate-react-queries --dir-gen-name src/queries --package-name-filter '@scaleway/sdk' --api-sdk-path '@scaleway/sdk-react' --custom-ns 'test' ",
+    "format": "biome check  --linter-enabled=false --write .",
+    "type:generate": "tsgo --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "watch": "pnpm run '/^watch:.*/'",
+    "lint": "biome lint ."
+  },
+  "exports": {
+    "./accountv3": {
+      "default": "./dist/queries/accountv3/generated/index.js",
+      "types": "./dist/queries/accountv3/generated/index.d.ts"
+    },
+    "./applesiliconv1alpha1": {
+      "default": "./dist/queries/applesiliconv1alpha1/generated/index.js",
+      "types": "./dist/queries/applesiliconv1alpha1/generated/index.d.ts"
+    },
+    "./audittrailv1alpha1": {
+      "default": "./dist/queries/audittrailv1alpha1/generated/index.js",
+      "types": "./dist/queries/audittrailv1alpha1/generated/index.d.ts"
+    },
+    "./autoscalingv1alpha1": {
+      "default": "./dist/queries/autoscalingv1alpha1/generated/index.js",
+      "types": "./dist/queries/autoscalingv1alpha1/generated/index.d.ts"
+    },
+    "./baremetalv1": {
+      "default": "./dist/queries/baremetalv1/generated/index.js",
+      "types": "./dist/queries/baremetalv1/generated/index.d.ts"
+    },
+    "./baremetalv3": {
+      "default": "./dist/queries/baremetalv3/generated/index.js",
+      "types": "./dist/queries/baremetalv3/generated/index.d.ts"
+    },
+    "./billingv2beta1": {
+      "default": "./dist/queries/billingv2beta1/generated/index.js",
+      "types": "./dist/queries/billingv2beta1/generated/index.d.ts"
+    },
+    "./blockv1": {
+      "default": "./dist/queries/blockv1/generated/index.js",
+      "types": "./dist/queries/blockv1/generated/index.d.ts"
+    },
+    "./blockv1alpha1": {
+      "default": "./dist/queries/blockv1alpha1/generated/index.js",
+      "types": "./dist/queries/blockv1alpha1/generated/index.d.ts"
+    },
+    "./cockpitv1": {
+      "default": "./dist/queries/cockpitv1/generated/index.js",
+      "types": "./dist/queries/cockpitv1/generated/index.d.ts"
+    },
+    "./containerv1beta1": {
+      "default": "./dist/queries/containerv1beta1/generated/index.js",
+      "types": "./dist/queries/containerv1beta1/generated/index.d.ts"
+    },
+    "./datalabv1beta1": {
+      "default": "./dist/queries/datalabv1beta1/generated/index.js",
+      "types": "./dist/queries/datalabv1beta1/generated/index.d.ts"
+    },
+    "./datawarehousev1beta1": {
+      "default": "./dist/queries/datawarehousev1beta1/generated/index.js",
+      "types": "./dist/queries/datawarehousev1beta1/generated/index.d.ts"
+    },
+    "./dediboxv1": {
+      "default": "./dist/queries/dediboxv1/generated/index.js",
+      "types": "./dist/queries/dediboxv1/generated/index.d.ts"
+    },
+    "./domainv2beta1": {
+      "default": "./dist/queries/domainv2beta1/generated/index.js",
+      "types": "./dist/queries/domainv2beta1/generated/index.d.ts"
+    },
+    "./edgeservicesv1beta1": {
+      "default": "./dist/queries/edgeservicesv1beta1/generated/index.js",
+      "types": "./dist/queries/edgeservicesv1beta1/generated/index.d.ts"
+    },
+    "./environmentalfootprintv1alpha1": {
+      "default": "./dist/queries/environmentalfootprintv1alpha1/generated/index.js",
+      "types": "./dist/queries/environmentalfootprintv1alpha1/generated/index.d.ts"
+    },
+    "./filev1alpha1": {
+      "default": "./dist/queries/filev1alpha1/generated/index.js",
+      "types": "./dist/queries/filev1alpha1/generated/index.d.ts"
+    },
+    "./flexibleipv1alpha1": {
+      "default": "./dist/queries/flexibleipv1alpha1/generated/index.js",
+      "types": "./dist/queries/flexibleipv1alpha1/generated/index.d.ts"
+    },
+    "./functionv1beta1": {
+      "default": "./dist/queries/functionv1beta1/generated/index.js",
+      "types": "./dist/queries/functionv1beta1/generated/index.d.ts"
+    },
+    "./iamv1alpha1": {
+      "default": "./dist/queries/iamv1alpha1/generated/index.js",
+      "types": "./dist/queries/iamv1alpha1/generated/index.d.ts"
+    },
+    "./inferencev1": {
+      "default": "./dist/queries/inferencev1/generated/index.js",
+      "types": "./dist/queries/inferencev1/generated/index.d.ts"
+    },
+    "./inferencev1beta1": {
+      "default": "./dist/queries/inferencev1beta1/generated/index.js",
+      "types": "./dist/queries/inferencev1beta1/generated/index.d.ts"
+    },
+    "./instancev1": {
+      "default": "./dist/queries/instancev1/generated/index.js",
+      "types": "./dist/queries/instancev1/generated/index.d.ts"
+    },
+    "./interlinkv1beta1": {
+      "default": "./dist/queries/interlinkv1beta1/generated/index.js",
+      "types": "./dist/queries/interlinkv1beta1/generated/index.d.ts"
+    },
+    "./iotv1": {
+      "default": "./dist/queries/iotv1/generated/index.js",
+      "types": "./dist/queries/iotv1/generated/index.d.ts"
+    },
+    "./ipamv1": {
+      "default": "./dist/queries/ipamv1/generated/index.js",
+      "types": "./dist/queries/ipamv1/generated/index.d.ts"
+    },
+    "./jobsv1alpha1": {
+      "default": "./dist/queries/jobsv1alpha1/generated/index.js",
+      "types": "./dist/queries/jobsv1alpha1/generated/index.d.ts"
+    },
+    "./jobsv1alpha2": {
+      "default": "./dist/queries/jobsv1alpha2/generated/index.js",
+      "types": "./dist/queries/jobsv1alpha2/generated/index.d.ts"
+    },
+    "./k8sv1": {
+      "default": "./dist/queries/k8sv1/generated/index.js",
+      "types": "./dist/queries/k8sv1/generated/index.d.ts"
+    },
+    "./kafkav1alpha1": {
+      "default": "./dist/queries/kafkav1alpha1/generated/index.js",
+      "types": "./dist/queries/kafkav1alpha1/generated/index.d.ts"
+    },
+    "./keymanagerv1alpha1": {
+      "default": "./dist/queries/keymanagerv1alpha1/generated/index.js",
+      "types": "./dist/queries/keymanagerv1alpha1/generated/index.d.ts"
+    },
+    "./lbv1": {
+      "default": "./dist/queries/lbv1/generated/index.js",
+      "types": "./dist/queries/lbv1/generated/index.d.ts"
+    },
+    "./marketplacev2": {
+      "default": "./dist/queries/marketplacev2/generated/index.js",
+      "types": "./dist/queries/marketplacev2/generated/index.d.ts"
+    },
+    "./mnqv1beta1": {
+      "default": "./dist/queries/mnqv1beta1/generated/index.js",
+      "types": "./dist/queries/mnqv1beta1/generated/index.d.ts"
+    },
+    "./mongodbv1": {
+      "default": "./dist/queries/mongodbv1/generated/index.js",
+      "types": "./dist/queries/mongodbv1/generated/index.d.ts"
+    },
+    "./mongodbv1alpha1": {
+      "default": "./dist/queries/mongodbv1alpha1/generated/index.js",
+      "types": "./dist/queries/mongodbv1alpha1/generated/index.d.ts"
+    },
+    "./partnerv1": {
+      "default": "./dist/queries/partnerv1/generated/index.js",
+      "types": "./dist/queries/partnerv1/generated/index.d.ts"
+    },
+    "./productcatalogv2alpha1": {
+      "default": "./dist/queries/productcatalogv2alpha1/generated/index.js",
+      "types": "./dist/queries/productcatalogv2alpha1/generated/index.d.ts"
+    },
+    "./qaasv1alpha1": {
+      "default": "./dist/queries/qaasv1alpha1/generated/index.js",
+      "types": "./dist/queries/qaasv1alpha1/generated/index.d.ts"
+    },
+    "./rdbv1": {
+      "default": "./dist/queries/rdbv1/generated/index.js",
+      "types": "./dist/queries/rdbv1/generated/index.d.ts"
+    },
+    "./redisv1": {
+      "default": "./dist/queries/redisv1/generated/index.js",
+      "types": "./dist/queries/redisv1/generated/index.d.ts"
+    },
+    "./registryv1": {
+      "default": "./dist/queries/registryv1/generated/index.js",
+      "types": "./dist/queries/registryv1/generated/index.d.ts"
+    },
+    "./s2svpnv1alpha1": {
+      "default": "./dist/queries/s2svpnv1alpha1/generated/index.js",
+      "types": "./dist/queries/s2svpnv1alpha1/generated/index.d.ts"
+    },
+    "./searchdbv1alpha1": {
+      "default": "./dist/queries/searchdbv1alpha1/generated/index.js",
+      "types": "./dist/queries/searchdbv1alpha1/generated/index.d.ts"
+    },
+    "./secretv1beta1": {
+      "default": "./dist/queries/secretv1beta1/generated/index.js",
+      "types": "./dist/queries/secretv1beta1/generated/index.d.ts"
+    },
+    "./serverlesssqldbv1alpha1": {
+      "default": "./dist/queries/serverlesssqldbv1alpha1/generated/index.js",
+      "types": "./dist/queries/serverlesssqldbv1alpha1/generated/index.d.ts"
+    },
+    "./temv1alpha1": {
+      "default": "./dist/queries/temv1alpha1/generated/index.js",
+      "types": "./dist/queries/temv1alpha1/generated/index.d.ts"
+    },
+    "./vpcgwv1": {
+      "default": "./dist/queries/vpcgwv1/generated/index.js",
+      "types": "./dist/queries/vpcgwv1/generated/index.d.ts"
+    },
+    "./vpcgwv2": {
+      "default": "./dist/queries/vpcgwv2/generated/index.js",
+      "types": "./dist/queries/vpcgwv2/generated/index.d.ts"
+    },
+    "./vpcv2": {
+      "default": "./dist/queries/vpcv2/generated/index.js",
+      "types": "./dist/queries/vpcv2/generated/index.d.ts"
+    },
+    "./webhostingv1": {
+      "default": "./dist/queries/webhostingv1/generated/index.js",
+      "types": "./dist/queries/webhostingv1/generated/index.d.ts"
+    },
+    "./mocks*": {
+      "default": "./mocks/*/index.ts",
+      "types": "./mocks/*/index.ts"
+    },
+    "./test/custom": {
+      "default": "./dist/queries/test/custom/index.js",
+      "types": "./dist/queries/test/custom/index.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "@scaleway/use-dataloader": "6.x",
+    "react": "18.x || 19.x"
+  },
+  "devDependencies": {
+    "@scaleway/generate-react-queries": "workspace:*",
+    "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-applesilicon": "workspace:*",
+    "@scaleway/sdk-audit-trail": "workspace:*",
+    "@scaleway/sdk-autoscaling": "workspace:*",
+    "@scaleway/sdk-baremetal": "workspace:*",
+    "@scaleway/sdk-billing": "workspace:*",
+    "@scaleway/sdk-block": "workspace:*",
+    "@scaleway/sdk-client": "workspace:^",
+    "@scaleway/sdk-cockpit": "workspace:*",
+    "@scaleway/sdk-container": "workspace:*",
+    "@scaleway/sdk-datalab": "workspace:*",
+    "@scaleway/sdk-datawarehouse": "workspace:*",
+    "@scaleway/sdk-dedibox": "workspace:*",
+    "@scaleway/sdk-domain": "workspace:*",
+    "@scaleway/sdk-edge-services": "workspace:*",
+    "@scaleway/sdk-environmental-footprint": "workspace:*",
+    "@scaleway/sdk-file": "workspace:*",
+    "@scaleway/sdk-flexibleip": "workspace:*",
+    "@scaleway/sdk-function": "workspace:*",
+    "@scaleway/sdk-iam": "workspace:*",
+    "@scaleway/sdk-inference": "workspace:*",
+    "@scaleway/sdk-instance": "workspace:*",
+    "@scaleway/sdk-interlink": "workspace:*",
+    "@scaleway/sdk-iot": "workspace:*",
+    "@scaleway/sdk-ipam": "workspace:*",
+    "@scaleway/sdk-jobs": "workspace:*",
+    "@scaleway/sdk-k8s": "workspace:*",
+    "@scaleway/sdk-kafka": "workspace:*",
+    "@scaleway/sdk-key-manager": "workspace:*",
+    "@scaleway/sdk-lb": "workspace:*",
+    "@scaleway/sdk-marketplace": "workspace:*",
+    "@scaleway/sdk-mnq": "workspace:*",
+    "@scaleway/sdk-mongodb": "workspace:*",
+    "@scaleway/sdk-partner": "workspace:*",
+    "@scaleway/sdk-product-catalog": "workspace:*",
+    "@scaleway/sdk-qaas": "workspace:*",
+    "@scaleway/sdk-rdb": "workspace:*",
+    "@scaleway/sdk-redis": "workspace:*",
+    "@scaleway/sdk-registry": "workspace:*",
+    "@scaleway/sdk-s2s-vpn": "workspace:*",
+    "@scaleway/sdk-searchdb": "workspace:*",
+    "@scaleway/sdk-secret": "workspace:*",
+    "@scaleway/sdk-serverless-sqldb": "workspace:*",
+    "@scaleway/sdk-tem": "workspace:*",
+    "@scaleway/sdk-vpc": "workspace:*",
+    "@scaleway/sdk-vpcgw": "workspace:*",
+    "@scaleway/sdk-webhosting": "workspace:*",
+    "@scaleway/use-dataloader": "6.1.0",
+    "@types/react": "19.2.14",
+    "react": "^19.2.4",
+    "tinyglobby": "0.2.15",
+    "ts-morph": "27.0.2"
+  },
+  "dependencies": {
+    "@scaleway/sdk-react": "workspace:*"
+  },
+  "optionalDependencies": {
+    "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-applesilicon": "workspace:*",
+    "@scaleway/sdk-audit-trail": "workspace:*",
+    "@scaleway/sdk-autoscaling": "workspace:*",
+    "@scaleway/sdk-baremetal": "workspace:*",
+    "@scaleway/sdk-billing": "workspace:*",
+    "@scaleway/sdk-block": "workspace:*",
+    "@scaleway/sdk-client": "workspace:^",
+    "@scaleway/sdk-cockpit": "workspace:*",
+    "@scaleway/sdk-container": "workspace:*",
+    "@scaleway/sdk-datalab": "workspace:*",
+    "@scaleway/sdk-datawarehouse": "workspace:*",
+    "@scaleway/sdk-dedibox": "workspace:*",
+    "@scaleway/sdk-domain": "workspace:*",
+    "@scaleway/sdk-edge-services": "workspace:*",
+    "@scaleway/sdk-environmental-footprint": "workspace:*",
+    "@scaleway/sdk-file": "workspace:*",
+    "@scaleway/sdk-flexibleip": "workspace:*",
+    "@scaleway/sdk-function": "workspace:*",
+    "@scaleway/sdk-iam": "workspace:*",
+    "@scaleway/sdk-inference": "workspace:*",
+    "@scaleway/sdk-instance": "workspace:*",
+    "@scaleway/sdk-interlink": "workspace:*",
+    "@scaleway/sdk-iot": "workspace:*",
+    "@scaleway/sdk-ipam": "workspace:*",
+    "@scaleway/sdk-jobs": "workspace:*",
+    "@scaleway/sdk-k8s": "workspace:*",
+    "@scaleway/sdk-kafka": "workspace:*",
+    "@scaleway/sdk-key-manager": "workspace:*",
+    "@scaleway/sdk-lb": "workspace:*",
+    "@scaleway/sdk-marketplace": "workspace:*",
+    "@scaleway/sdk-mnq": "workspace:*",
+    "@scaleway/sdk-mongodb": "workspace:*",
+    "@scaleway/sdk-partner": "workspace:*",
+    "@scaleway/sdk-product-catalog": "workspace:*",
+    "@scaleway/sdk-qaas": "workspace:*",
+    "@scaleway/sdk-rdb": "workspace:*",
+    "@scaleway/sdk-redis": "workspace:*",
+    "@scaleway/sdk-registry": "workspace:*",
+    "@scaleway/sdk-s2s-vpn": "workspace:*",
+    "@scaleway/sdk-searchdb": "workspace:*",
+    "@scaleway/sdk-secret": "workspace:*",
+    "@scaleway/sdk-serverless-sqldb": "workspace:*",
+    "@scaleway/sdk-tem": "workspace:*",
+    "@scaleway/sdk-vpc": "workspace:*",
+    "@scaleway/sdk-vpcgw": "workspace:*",
+    "@scaleway/sdk-webhosting": "workspace:*"
+  }
+}

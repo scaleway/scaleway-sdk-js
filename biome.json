@@ -17,7 +17,7 @@
     "lineEnding": "lf",
     "lineWidth": 80,
     "attributePosition": "auto",
-    "includes": ["**", "!**/*.gen.ts"]
+    "includes": ["**", "!**/package.json" ,"!**/*.gen.ts"]
   },
   "javascript": {
     "formatter": {

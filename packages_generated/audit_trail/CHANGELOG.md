@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.6.1...@scaleway/sdk-audit-trail@2.7.0) (2026-03-09)
+
+### Features
+
+- **audit_trail:** add VpcConnector resource ([#2809](https://github.com/scaleway/scaleway-sdk-js/issues/2809)) ([5075439](https://github.com/scaleway/scaleway-sdk-js/commit/5075439661468ace03385ddfee3d74132e56405c))
+- **audit_trail:** audit alerting endpoint ([#2808](https://github.com/scaleway/scaleway-sdk-js/issues/2808)) ([fcfab72](https://github.com/scaleway/scaleway-sdk-js/commit/fcfab7231a3b9a297a2e1cdc4b1fc436c4afd8fd))
+
 ## [2.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.6.0...@scaleway/sdk-audit-trail@2.6.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-audit-trail

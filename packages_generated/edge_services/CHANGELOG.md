@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.6.0...@scaleway/sdk-edge-services@2.7.0) (2026-03-09)
+
+### Features
+
+- **edge_services:** add non-waf default path ([#2799](https://github.com/scaleway/scaleway-sdk-js/issues/2799)) ([c8e0f37](https://github.com/scaleway/scaleway-sdk-js/commit/c8e0f37352f08bfa0eda420e364ed3ceccf79f1d))
+
 # [2.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.5.0...@scaleway/sdk-edge-services@2.6.0) (2026-03-05)
 
 ### Features

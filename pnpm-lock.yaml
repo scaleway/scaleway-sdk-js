@@ -265,6 +265,16 @@ importers:
       '@scaleway/generate-react-sdk':
         specifier: workspace:*
         version: link:../../tools/generate-react-sdk
+      '@types/react':
+        specifier: 19.2.14
+        version: 19.2.14
+      react:
+        specifier: ^19.2.4
+        version: 19.2.4
+      tinyglobby:
+        specifier: 0.2.15
+        version: 0.2.15
+    optionalDependencies:
       '@scaleway/sdk-account':
         specifier: workspace:*
         version: link:../../packages_generated/account
@@ -406,6 +416,19 @@ importers:
       '@scaleway/sdk-webhosting':
         specifier: workspace:*
         version: link:../../packages_generated/webhosting
+
+  packages/sdk-react-hooks:
+    dependencies:
+      '@scaleway/sdk-react':
+        specifier: workspace:*
+        version: link:../sdk-react
+    devDependencies:
+      '@scaleway/generate-react-queries':
+        specifier: workspace:*
+        version: link:../../tools/generate-react-queries
+      '@scaleway/use-dataloader':
+        specifier: 6.1.0
+        version: 6.1.0(react@19.2.4)
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
@@ -418,6 +441,148 @@ importers:
       ts-morph:
         specifier: 27.0.2
         version: 27.0.2
+    optionalDependencies:
+      '@scaleway/sdk-account':
+        specifier: workspace:*
+        version: link:../../packages_generated/account
+      '@scaleway/sdk-applesilicon':
+        specifier: workspace:*
+        version: link:../../packages_generated/applesilicon
+      '@scaleway/sdk-audit-trail':
+        specifier: workspace:*
+        version: link:../../packages_generated/audit_trail
+      '@scaleway/sdk-autoscaling':
+        specifier: workspace:*
+        version: link:../../packages_generated/autoscaling
+      '@scaleway/sdk-baremetal':
+        specifier: workspace:*
+        version: link:../../packages_generated/baremetal
+      '@scaleway/sdk-billing':
+        specifier: workspace:*
+        version: link:../../packages_generated/billing
+      '@scaleway/sdk-block':
+        specifier: workspace:*
+        version: link:../../packages_generated/block
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../client
+      '@scaleway/sdk-cockpit':
+        specifier: workspace:*
+        version: link:../../packages_generated/cockpit
+      '@scaleway/sdk-container':
+        specifier: workspace:*
+        version: link:../../packages_generated/container
+      '@scaleway/sdk-datalab':
+        specifier: workspace:*
+        version: link:../../packages_generated/datalab
+      '@scaleway/sdk-datawarehouse':
+        specifier: workspace:*
+        version: link:../../packages_generated/datawarehouse
+      '@scaleway/sdk-dedibox':
+        specifier: workspace:*
+        version: link:../../packages_generated/dedibox
+      '@scaleway/sdk-domain':
+        specifier: workspace:*
+        version: link:../../packages_generated/domain
+      '@scaleway/sdk-edge-services':
+        specifier: workspace:*
+        version: link:../../packages_generated/edge_services
+      '@scaleway/sdk-environmental-footprint':
+        specifier: workspace:*
+        version: link:../../packages_generated/environmental_footprint
+      '@scaleway/sdk-file':
+        specifier: workspace:*
+        version: link:../../packages_generated/file
+      '@scaleway/sdk-flexibleip':
+        specifier: workspace:*
+        version: link:../../packages_generated/flexibleip
+      '@scaleway/sdk-function':
+        specifier: workspace:*
+        version: link:../../packages_generated/function
+      '@scaleway/sdk-iam':
+        specifier: workspace:*
+        version: link:../../packages_generated/iam
+      '@scaleway/sdk-inference':
+        specifier: workspace:*
+        version: link:../../packages_generated/inference
+      '@scaleway/sdk-instance':
+        specifier: workspace:*
+        version: link:../../packages_generated/instance
+      '@scaleway/sdk-interlink':
+        specifier: workspace:*
+        version: link:../../packages_generated/interlink
+      '@scaleway/sdk-iot':
+        specifier: workspace:*
+        version: link:../../packages_generated/iot
+      '@scaleway/sdk-ipam':
+        specifier: workspace:*
+        version: link:../../packages_generated/ipam
+      '@scaleway/sdk-jobs':
+        specifier: workspace:*
+        version: link:../../packages_generated/jobs
+      '@scaleway/sdk-k8s':
+        specifier: workspace:*
+        version: link:../../packages_generated/k8s
+      '@scaleway/sdk-kafka':
+        specifier: workspace:*
+        version: link:../../packages_generated/kafka
+      '@scaleway/sdk-key-manager':
+        specifier: workspace:*
+        version: link:../../packages_generated/key_manager
+      '@scaleway/sdk-lb':
+        specifier: workspace:*
+        version: link:../../packages_generated/lb
+      '@scaleway/sdk-marketplace':
+        specifier: workspace:*
+        version: link:../../packages_generated/marketplace
+      '@scaleway/sdk-mnq':
+        specifier: workspace:*
+        version: link:../../packages_generated/mnq
+      '@scaleway/sdk-mongodb':
+        specifier: workspace:*
+        version: link:../../packages_generated/mongodb
+      '@scaleway/sdk-partner':
+        specifier: workspace:*
+        version: link:../../packages_generated/partner
+      '@scaleway/sdk-product-catalog':
+        specifier: workspace:*
+        version: link:../../packages_generated/product_catalog
+      '@scaleway/sdk-qaas':
+        specifier: workspace:*
+        version: link:../../packages_generated/qaas
+      '@scaleway/sdk-rdb':
+        specifier: workspace:*
+        version: link:../../packages_generated/rdb
+      '@scaleway/sdk-redis':
+        specifier: workspace:*
+        version: link:../../packages_generated/redis
+      '@scaleway/sdk-registry':
+        specifier: workspace:*
+        version: link:../../packages_generated/registry
+      '@scaleway/sdk-s2s-vpn':
+        specifier: workspace:*
+        version: link:../../packages_generated/s2s_vpn
+      '@scaleway/sdk-searchdb':
+        specifier: workspace:*
+        version: link:../../packages_generated/searchdb
+      '@scaleway/sdk-secret':
+        specifier: workspace:*
+        version: link:../../packages_generated/secret
+      '@scaleway/sdk-serverless-sqldb':
+        specifier: workspace:*
+        version: link:../../packages_generated/serverless_sqldb
+      '@scaleway/sdk-tem':
+        specifier: workspace:*
+        version: link:../../packages_generated/tem
+      '@scaleway/sdk-vpc':
+        specifier: workspace:*
+        version: link:../../packages_generated/vpc
+      '@scaleway/sdk-vpcgw':
+        specifier: workspace:*
+        version: link:../../packages_generated/vpcgw
+      '@scaleway/sdk-webhosting':
+        specifier: workspace:*
+        version: link:../../packages_generated/webhosting
 
   packages_generated/account:
     dependencies:
@@ -1035,6 +1200,15 @@ importers:
       '@scaleway/sdk-client':
         specifier: workspace:^
         version: link:../../packages/client
+
+  tools/generate-react-queries:
+    devDependencies:
+      '@types/node':
+        specifier: 20.19.35
+        version: 20.19.35
+      ts-morph:
+        specifier: 27.0.2
+        version: 27.0.2
 
   tools/generate-react-sdk:
     devDependencies:
@@ -2146,6 +2320,12 @@ packages:
 
   '@scaleway/tsconfig@1.1.4':
     resolution: {integrity: sha512-h1sy6014YIeZqw76i5VsHG54SROlB3MkD093ucZ3RQ2+eMv6OeOVfxyekcZg9yLKC5BIGUXNl8LvkZTNBS6DOQ==}
+
+  '@scaleway/use-dataloader@6.1.0':
+    resolution: {integrity: sha512-X9L5d8loJhNR3JiJfb58X0rL6jP9yeVmD85evh1Ra8ldNdLL4s8XEWENQNBumJvB5wqK1VbvjpHix4vbsMhRkw==}
+    engines: {node: '>=20.x'}
+    peerDependencies:
+      react: 18.x || 19.x
 
   '@shikijs/engine-oniguruma@3.19.0':
     resolution: {integrity: sha512-1hRxtYIJfJSZeM5ivbUXv9hcJP3PWRo5prG/V2sWwiubUKTa+7P62d2qxCW8jiVFX4pgRHhnHNp+qeR7Xl+6kg==}
@@ -6624,6 +6804,10 @@ snapshots:
   '@scaleway/random-name@5.1.2': {}
 
   '@scaleway/tsconfig@1.1.4': {}
+
+  '@scaleway/use-dataloader@6.1.0(react@19.2.4)':
+    dependencies:
+      react: 19.2.4
 
   '@shikijs/engine-oniguruma@3.19.0':
     dependencies:
