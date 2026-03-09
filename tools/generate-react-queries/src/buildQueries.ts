@@ -12,6 +12,7 @@ const requiresValueArgs = [
   'custom-path',
   'api-sdk-path',
   'package-name-filter',
+  'custom-ns',
 ]
 
 // Parse CLI arguments
@@ -32,12 +33,17 @@ const packageNameFilter =
 const apiSDKPath =
   (cliArgs['api-sdk-path'] as string | undefined) || '@scaleway/react-sdk'
 
+const customNs = cliArgs['custom-ns'] as string | undefined
+
+const onlyCustomNS = customNs?.split(',') ?? []
+
 // Make the call async
 generateQueries({
   dirGenName: dirGenName,
   generatedPath,
   packageNameFilter,
   apiPath: apiSDKPath,
+  onlyCustomNS,
 })
 
 type ExportEntry = {

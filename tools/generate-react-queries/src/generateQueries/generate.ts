@@ -26,20 +26,19 @@ export const generateQueries = ({
   generatedPath,
   packageNameFilter,
   apiPath,
+  onlyCustomNS,
 }: {
   dirGenName: string
   generatedPath: string
   packageNameFilter: string
   apiPath: string
+  onlyCustomNS: string[]
 }) => {
   // const dirGenName = options.dirGenName
   const directoryOfSrcFolder = join(directoryOfQueryPackage, dirGenName)
 
   // We use this to not remove namespace directories that has only custom queries. We dont keep folders that has no queries inside
-  const onlyCustomNamespace = [
-    '',
-    // 'incidents', 'S3', 'SQS', 'SNS'
-  ].filter(namespace => {
+  const onlyCustomNamespace = onlyCustomNS.filter(namespace => {
     if (
       existsSync(join(directoryOfSrcFolder, namespace.toLowerCase())) &&
       readdirSync(join(directoryOfSrcFolder, namespace.toLowerCase())).length >
@@ -55,6 +54,7 @@ export const generateQueries = ({
     return false
   })
 
+  console.debug('⚠︎ Custom namespaces: \n', onlyCustomNamespace)
   // Generate SDK paths from dependencies
   const sdkPaths = [
     ...Object.keys(packageJson.dependencies ?? {}),
