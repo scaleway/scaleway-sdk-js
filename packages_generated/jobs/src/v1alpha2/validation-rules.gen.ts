@@ -39,6 +39,25 @@ export const CreateSecretsRequestSecretConfig = {
   },
 }
 
+export const CreateTriggerRequest = {
+  name: {
+    maxLength: 50,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9-_]*$/,
+  },
+}
+
+export const CreateTriggerRequestCronConfig = {
+  schedule: {
+    maxLength: 255,
+    minLength: 1,
+  },
+  timezone: {
+    maxLength: 255,
+    minLength: 1,
+  },
+}
+
 export const CronSchedule = {
   schedule: {
     maxLength: 255,
@@ -61,6 +80,16 @@ export const ListJobDefinitionsRequest = {
 }
 
 export const ListJobRunsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1000,
+  },
+}
+
+export const ListTriggersRequest = {
   page: {
     greaterThanOrEqual: 1,
   },
@@ -116,6 +145,25 @@ export const UpdateJobDefinitionRequestCronScheduleConfig = {
 
 export const UpdateSecretRequest = {
   secretManagerVersion: {
+    minLength: 1,
+  },
+}
+
+export const UpdateTriggerRequest = {
+  name: {
+    maxLength: 50,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9-_]*$/,
+  },
+}
+
+export const UpdateTriggerRequestCronConfig = {
+  schedule: {
+    maxLength: 255,
+    minLength: 1,
+  },
+  timezone: {
+    maxLength: 255,
     minLength: 1,
   },
 }

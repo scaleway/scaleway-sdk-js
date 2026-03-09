@@ -9,6 +9,8 @@ import type {
   CreateSecretsRequest,
   CreateSecretsRequestSecretConfig,
   CreateSecretsResponse,
+  CreateTriggerRequest,
+  CreateTriggerRequestCronConfig,
   CronSchedule,
   JobDefinition,
   JobLimits,
@@ -17,6 +19,7 @@ import type {
   ListJobResourcesResponse,
   ListJobRunsResponse,
   ListSecretsResponse,
+  ListTriggersResponse,
   Resource,
   RetryPolicy,
   Secret,
@@ -24,9 +27,13 @@ import type {
   SecretFile,
   StartJobDefinitionRequest,
   StartJobDefinitionResponse,
+  Trigger,
+  TriggerCronConfig,
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
   UpdateSecretRequest,
+  UpdateTriggerRequest,
+  UpdateTriggerRequestCronConfig,
 } from './types.gen.js'
 
 const unmarshalSecretEnvVar = (data: unknown): SecretEnvVar => {
@@ -155,6 +162,38 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
   } as JobRun
 }
 
+const unmarshalTriggerCronConfig = (data: unknown): TriggerCronConfig => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TriggerCronConfig' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    args: data.args,
+    schedule: data.schedule,
+    startupCommand: data.startup_command,
+    timezone: data.timezone,
+  } as TriggerCronConfig
+}
+
+export const unmarshalTrigger = (data: unknown): Trigger => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    cronConfig: data.cron_config ? unmarshalTriggerCronConfig(data.cron_config) : undefined,
+    id: data.id,
+    jobDefinitionId: data.job_definition_id,
+    name: data.name,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Trigger
+}
+
 export const unmarshalCreateSecretsResponse = (data: unknown): CreateSecretsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -243,6 +282,19 @@ export const unmarshalListSecretsResponse = (data: unknown): ListSecretsResponse
   } as ListSecretsResponse
 }
 
+export const unmarshalListTriggersResponse = (data: unknown): ListTriggersResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    triggers: unmarshalArrayOfObject(data.triggers, unmarshalTrigger),
+  } as ListTriggersResponse
+}
+
 export const unmarshalStartJobDefinitionResponse = (data: unknown): StartJobDefinitionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -314,6 +366,30 @@ export const marshalCreateSecretsRequest = (
   secrets:  request.secrets.map(elt => marshalCreateSecretsRequestSecretConfig(elt, defaults)),
 })
 
+const marshalCreateTriggerRequestCronConfig = (
+  request: CreateTriggerRequestCronConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  args: request.args,
+  schedule: request.schedule,
+  startup_command: request.startupCommand,
+  timezone: request.timezone,
+})
+
+export const marshalCreateTriggerRequest = (
+  request: CreateTriggerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  job_definition_id: request.jobDefinitionId,
+  name: request.name,  
+  ...resolveOneOf([
+    {param: 'cron_config',
+      value: (request.cronConfig !== undefined) ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
+      : undefined,
+    },
+  ]),
+})
+
 export const marshalStartJobDefinitionRequest = (
   request: StartJobDefinitionRequest,
   defaults: DefaultValues,
@@ -363,6 +439,29 @@ export const marshalUpdateSecretRequest = (
     },
     {param: 'env_var_name',
       value: request.envVarName,
+    },
+  ]),
+})
+
+const marshalUpdateTriggerRequestCronConfig = (
+  request: UpdateTriggerRequestCronConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  args: request.args,
+  schedule: request.schedule,
+  startup_command: request.startupCommand,
+  timezone: request.timezone,
+})
+
+export const marshalUpdateTriggerRequest = (
+  request: UpdateTriggerRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,  
+  ...resolveOneOf([
+    {param: 'cron_config',
+      value: (request.cronConfig !== undefined) ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
+      : undefined,
     },
   ]),
 })

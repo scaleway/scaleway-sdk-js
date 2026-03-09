@@ -331,11 +331,11 @@ export interface PublicCatalogProductPropertiesBlockStorage {
   /**
    * @deprecated The minimum size of storage volume for this product in bytes. Deprecated.
    */
-  minVolumeSize?: number
+  minVolumeSize: number
   /**
    * @deprecated The maximum size of storage volume for this product in bytes. Deprecated.
    */
-  maxVolumeSize?: number
+  maxVolumeSize: number
 }
 
 

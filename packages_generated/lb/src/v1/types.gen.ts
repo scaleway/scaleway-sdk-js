@@ -272,7 +272,7 @@ export interface Instance {
   /**
    * @deprecated The region the Instance is in.
    */
-  region?: ScwRegion
+  region: ScwRegion
   /**
    * The zone the Instance is in.
    */
@@ -312,7 +312,7 @@ export interface Ip {
   /**
    * @deprecated The region the IP address is in.
    */
-  region?: ScwRegion
+  region: ScwRegion
   /**
    * The zone the IP address is in.
    */
@@ -493,7 +493,7 @@ export interface Lb {
   /**
    * @deprecated The region the Load Balancer is in.
    */
-  region?: ScwRegion
+  region: ScwRegion
   /**
    * The zone the Load Balancer is in.
    */
@@ -561,7 +561,7 @@ export interface Backend {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2: boolean
   /**
    * Maximum allowed time for a backend server to process a request.
    */
@@ -789,7 +789,7 @@ export interface PrivateNetworkStaticConfig {
   /**
    * @deprecated Array of a local IP address for the Load Balancer on this Private Network.
    */
-  ipAddress?: string[]
+  ipAddress: string[]
 }
 
 
@@ -969,7 +969,7 @@ export interface LbType {
   /**
    * @deprecated The region the Load Balancer stock is in.
    */
-  region?: ScwRegion
+  region: ScwRegion
   /**
    * The zone the Load Balancer stock is in.
    */
@@ -1162,7 +1162,7 @@ export type CreateBackendRequest = {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2: boolean
   /**
    * Maximum allowed time for a backend server to process a request.
    */
@@ -2268,7 +2268,7 @@ export type UpdateBackendRequest = {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2: boolean
   /**
    * Maximum allowed time for a backend server to process a request.
    */
@@ -2695,7 +2695,7 @@ export type ZonedApiCreateBackendRequest = {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2: boolean
   /**
    * Maximum allowed time for a backend server to process a request.
    */
@@ -3665,7 +3665,7 @@ export type ZonedApiUpdateBackendRequest = {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2: boolean
   /**
    * Maximum allowed time for a backend server to process a request.
    */

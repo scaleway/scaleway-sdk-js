@@ -498,7 +498,7 @@ const unmarshalPrivateNetworkStaticConfig = (data: unknown): PrivateNetworkStati
   }
 
   return {
-    ipAddress: data.ip_address ? data.ip_address : undefined,
+    ipAddress: data.ip_address,
   } as PrivateNetworkStaticConfig
 }
 
