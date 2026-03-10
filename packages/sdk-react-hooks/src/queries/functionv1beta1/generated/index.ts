@@ -27,3 +27,4 @@ export { useFunctionv1beta1APIListTokensQuery } from './useFunctionv1beta1APILis
 export { useFunctionv1beta1APIListTriggersAllQuery } from './useFunctionv1beta1APIListTriggersAllQuery'
 export { useFunctionv1beta1APIListTriggersInfiniteQuery } from './useFunctionv1beta1APIListTriggersInfiniteQuery'
 export { useFunctionv1beta1APIListTriggersQuery } from './useFunctionv1beta1APIListTriggersQuery'
+export { useFunctionv1beta1APIReload } from './useFunctionv1beta1APIReload'

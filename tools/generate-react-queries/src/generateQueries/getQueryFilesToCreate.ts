@@ -64,20 +64,20 @@ export const getQueryFilesToCreate = ({
   )
 
   // Generate useReload hooks
-  return apisByNamespace
-    .entries()
-    .reduce<FileToCreateWithNamespace>((filesToCreate, [namespace, apis]) => {
-      if (!apis) {
-        return filesToCreate
-      }
-      return Object.assign(filesToCreate, {
-        [namespace]: [
-          ...(filesToCreate[namespace] ?? []),
-          ...apis.values().map(apiToUse => ({
-            fileContent: getReloadFileContent({ apiToUse }),
-            fileName: `use${apiToUse}Reload.ts`,
-          })),
-        ],
-      })
-    }, filesToCreate)
+  return Array.from(
+    apisByNamespace.entries(),
+  ).reduce<FileToCreateWithNamespace>((filesToCreate, [namespace, apis]) => {
+    if (!apis) {
+      return filesToCreate
+    }
+    return Object.assign(filesToCreate, {
+      [namespace]: [
+        ...(filesToCreate[namespace] ?? []),
+        ...Array.from(apis.values()).map(apiToUse => ({
+          fileContent: getReloadFileContent({ apiToUse }),
+          fileName: `use${apiToUse}Reload.ts`,
+        })),
+      ],
+    })
+  }, filesToCreate)
 }

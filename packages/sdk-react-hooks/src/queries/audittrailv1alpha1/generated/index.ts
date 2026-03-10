@@ -11,3 +11,4 @@ export { useAuditTrailv1alpha1APIListExportJobsInfiniteQuery } from './useAuditT
 export { useAuditTrailv1alpha1APIListExportJobsQuery } from './useAuditTrailv1alpha1APIListExportJobsQuery'
 export { useAuditTrailv1alpha1APIListProductsQuery } from './useAuditTrailv1alpha1APIListProductsQuery'
 export { useAuditTrailv1alpha1APIListSystemEventsQuery } from './useAuditTrailv1alpha1APIListSystemEventsQuery'
+export { useAuditTrailv1alpha1APIReload } from './useAuditTrailv1alpha1APIReload'

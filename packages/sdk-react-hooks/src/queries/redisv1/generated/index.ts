@@ -14,3 +14,4 @@ export { useRedisv1APIListClusterVersionsQuery } from './useRedisv1APIListCluste
 export { useRedisv1APIListNodeTypesAllQuery } from './useRedisv1APIListNodeTypesAllQuery'
 export { useRedisv1APIListNodeTypesInfiniteQuery } from './useRedisv1APIListNodeTypesInfiniteQuery'
 export { useRedisv1APIListNodeTypesQuery } from './useRedisv1APIListNodeTypesQuery'
+export { useRedisv1APIReload } from './useRedisv1APIReload'

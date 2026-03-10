@@ -14,3 +14,4 @@ export { useKafkav1alpha1APIListUsersQuery } from './useKafkav1alpha1APIListUser
 export { useKafkav1alpha1APIListVersionsAllQuery } from './useKafkav1alpha1APIListVersionsAllQuery'
 export { useKafkav1alpha1APIListVersionsInfiniteQuery } from './useKafkav1alpha1APIListVersionsInfiniteQuery'
 export { useKafkav1alpha1APIListVersionsQuery } from './useKafkav1alpha1APIListVersionsQuery'
+export { useKafkav1alpha1APIReload } from './useKafkav1alpha1APIReload'

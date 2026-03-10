@@ -17,3 +17,4 @@ export { useDatawarehousev1beta1APIListUsersQuery } from './useDatawarehousev1be
 export { useDatawarehousev1beta1APIListVersionsAllQuery } from './useDatawarehousev1beta1APIListVersionsAllQuery'
 export { useDatawarehousev1beta1APIListVersionsInfiniteQuery } from './useDatawarehousev1beta1APIListVersionsInfiniteQuery'
 export { useDatawarehousev1beta1APIListVersionsQuery } from './useDatawarehousev1beta1APIListVersionsQuery'
+export { useDatawarehousev1beta1APIReload } from './useDatawarehousev1beta1APIReload'

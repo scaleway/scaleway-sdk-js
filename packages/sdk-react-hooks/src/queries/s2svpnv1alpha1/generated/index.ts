@@ -19,3 +19,4 @@ export { useS2SVpnv1alpha1APIListVpnGatewaysQuery } from './useS2SVpnv1alpha1API
 export { useS2SVpnv1alpha1APIListVpnGatewayTypesAllQuery } from './useS2SVpnv1alpha1APIListVpnGatewayTypesAllQuery'
 export { useS2SVpnv1alpha1APIListVpnGatewayTypesInfiniteQuery } from './useS2SVpnv1alpha1APIListVpnGatewayTypesInfiniteQuery'
 export { useS2SVpnv1alpha1APIListVpnGatewayTypesQuery } from './useS2SVpnv1alpha1APIListVpnGatewayTypesQuery'
+export { useS2SVpnv1alpha1APIReload } from './useS2SVpnv1alpha1APIReload'

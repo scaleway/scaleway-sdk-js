@@ -12,3 +12,4 @@ export { useInferencev1APIListModelsQuery } from './useInferencev1APIListModelsQ
 export { useInferencev1APIListNodeTypesAllQuery } from './useInferencev1APIListNodeTypesAllQuery'
 export { useInferencev1APIListNodeTypesInfiniteQuery } from './useInferencev1APIListNodeTypesInfiniteQuery'
 export { useInferencev1APIListNodeTypesQuery } from './useInferencev1APIListNodeTypesQuery'
+export { useInferencev1APIReload } from './useInferencev1APIReload'

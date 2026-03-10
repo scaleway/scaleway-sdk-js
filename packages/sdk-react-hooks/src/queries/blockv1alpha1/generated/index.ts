@@ -11,3 +11,4 @@ export { useBlockv1alpha1APIListVolumesQuery } from './useBlockv1alpha1APIListVo
 export { useBlockv1alpha1APIListVolumeTypesAllQuery } from './useBlockv1alpha1APIListVolumeTypesAllQuery'
 export { useBlockv1alpha1APIListVolumeTypesInfiniteQuery } from './useBlockv1alpha1APIListVolumeTypesInfiniteQuery'
 export { useBlockv1alpha1APIListVolumeTypesQuery } from './useBlockv1alpha1APIListVolumeTypesQuery'
+export { useBlockv1alpha1APIReload } from './useBlockv1alpha1APIReload'

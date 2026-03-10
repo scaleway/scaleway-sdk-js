@@ -8,3 +8,4 @@ export { useServerlessSqldbv1alpha1APIListDatabaseBackupsQuery } from './useServ
 export { useServerlessSqldbv1alpha1APIListDatabasesAllQuery } from './useServerlessSqldbv1alpha1APIListDatabasesAllQuery'
 export { useServerlessSqldbv1alpha1APIListDatabasesInfiniteQuery } from './useServerlessSqldbv1alpha1APIListDatabasesInfiniteQuery'
 export { useServerlessSqldbv1alpha1APIListDatabasesQuery } from './useServerlessSqldbv1alpha1APIListDatabasesQuery'
+export { useServerlessSqldbv1alpha1APIReload } from './useServerlessSqldbv1alpha1APIReload'
