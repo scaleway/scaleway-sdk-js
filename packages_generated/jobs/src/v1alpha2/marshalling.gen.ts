@@ -151,7 +151,7 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
     jobDefinitionId: data.job_definition_id,
     localStorageCapacity: data.local_storage_capacity,
     memoryLimit: data.memory_limit,
-    reason: data.reason ? data.reason : undefined,
+    reason: data.reason,
     region: data.region,
     runDuration: data.run_duration,
     startedAt: unmarshalDate(data.started_at),
