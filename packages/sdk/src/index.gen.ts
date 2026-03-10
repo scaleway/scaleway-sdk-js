@@ -31,6 +31,7 @@ import { K8Sv1 } from '@scaleway/sdk-k8s'
 import { Kafkav1alpha1 } from '@scaleway/sdk-kafka'
 import { KeyManagerv1alpha1 } from '@scaleway/sdk-key-manager'
 import { Lbv1 } from '@scaleway/sdk-lb'
+import { Mailboxv1alpha1 } from '@scaleway/sdk-mailbox'
 import { Marketplacev2 } from '@scaleway/sdk-marketplace'
 import { Mnqv1beta1 } from '@scaleway/sdk-mnq'
 import { Mongodbv1, Mongodbv1alpha1 } from '@scaleway/sdk-mongodb'
@@ -49,8 +50,7 @@ import { Testv1 } from '@scaleway/sdk-test'
 import { Vpcv2 } from '@scaleway/sdk-vpc'
 import { Vpcgwv1, Vpcgwv2 } from '@scaleway/sdk-vpcgw'
 import { Webhostingv1 } from '@scaleway/sdk-webhosting'
-
-export { createAdvancedClient, createClient } from '@scaleway/sdk-client'
+export { createClient, createAdvancedClient } from '@scaleway/sdk-client'
 
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Account' namespace instead (e.g., Account.v1).
@@ -286,6 +286,14 @@ export const KeyManager = {
 export { Lbv1 }
 export const Lb = {
   v1: Lbv1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'Mailbox' namespace instead (e.g., Mailbox.v1).
+ */
+export { Mailboxv1alpha1 }
+export const Mailbox = {
+  v1alpha1: Mailboxv1alpha1,
 }
 
 /**
