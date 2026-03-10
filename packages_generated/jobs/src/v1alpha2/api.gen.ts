@@ -12,9 +12,11 @@ import {
 import {
   marshalCreateJobDefinitionRequest,
   marshalCreateSecretsRequest,
+  marshalCreateTriggerRequest,
   marshalStartJobDefinitionRequest,
   marshalUpdateJobDefinitionRequest,
   marshalUpdateSecretRequest,
+  marshalUpdateTriggerRequest,
   unmarshalCreateSecretsResponse,
   unmarshalJobDefinition,
   unmarshalJobLimits,
@@ -23,19 +25,24 @@ import {
   unmarshalListJobResourcesResponse,
   unmarshalListJobRunsResponse,
   unmarshalListSecretsResponse,
+  unmarshalListTriggersResponse,
   unmarshalSecret,
   unmarshalStartJobDefinitionResponse,
+  unmarshalTrigger,
 } from './marshalling.gen.js'
 import type {
   CreateJobDefinitionRequest,
   CreateSecretsRequest,
   CreateSecretsResponse,
+  CreateTriggerRequest,
   DeleteJobDefinitionRequest,
   DeleteSecretRequest,
+  DeleteTriggerRequest,
   GetJobDefinitionRequest,
   GetJobLimitsRequest,
   GetJobRunRequest,
   GetSecretRequest,
+  GetTriggerRequest,
   JobDefinition,
   JobLimits,
   JobRun,
@@ -47,12 +54,16 @@ import type {
   ListJobRunsResponse,
   ListSecretsRequest,
   ListSecretsResponse,
+  ListTriggersRequest,
+  ListTriggersResponse,
   Secret,
   StartJobDefinitionRequest,
   StartJobDefinitionResponse,
   StopJobRunRequest,
+  Trigger,
   UpdateJobDefinitionRequest,
   UpdateSecretRequest,
+  UpdateTriggerRequest,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -343,6 +354,101 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+      },
+    )
+
+  
+  /**
+   * Create a trigger.
+   *
+   * @param request - The request {@link CreateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  createTrigger = (request: Readonly<CreateTriggerRequest>) =>
+    this.client.fetch<Trigger>(
+      {
+        body: JSON.stringify(
+          marshalCreateTriggerRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
+      },
+      unmarshalTrigger,
+    )
+
+  
+  /**
+   * Get a trigger.
+   *
+   * @param request - The request {@link GetTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  getTrigger = (request: Readonly<GetTriggerRequest>) =>
+    this.client.fetch<Trigger>(
+      {
+        method: 'GET',
+        path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+      },
+      unmarshalTrigger,
+    )
+
+  
+  protected pageOfListTriggers = (request: Readonly<ListTriggersRequest>) =>
+    this.client.fetch<ListTriggersResponse>(
+      {
+        method: 'GET',
+        path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
+        urlParams: urlParams(
+          ['job_definition_id', request.jobDefinitionId],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+        ),
+      },
+      unmarshalListTriggersResponse,
+    )
+  
+  /**
+   * List triggers of a job definition.
+   *
+   * @param request - The request {@link ListTriggersRequest}
+   * @returns A Promise of ListTriggersResponse
+   */
+  listTriggers = (request: Readonly<ListTriggersRequest>) =>
+    enrichForPagination('triggers', this.pageOfListTriggers, request)
+
+  
+  /**
+   * Update a trigger.
+   *
+   * @param request - The request {@link UpdateTriggerRequest}
+   * @returns A Promise of Trigger
+   */
+  updateTrigger = (request: Readonly<UpdateTriggerRequest>) =>
+    this.client.fetch<Trigger>(
+      {
+        body: JSON.stringify(
+          marshalUpdateTriggerRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+      },
+      unmarshalTrigger,
+    )
+
+  
+  /**
+   * Delete a trigger.
+   *
+   * @param request - The request {@link DeleteTriggerRequest}
+   */
+  deleteTrigger = (request: Readonly<DeleteTriggerRequest>) =>
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
       },
     )
 
