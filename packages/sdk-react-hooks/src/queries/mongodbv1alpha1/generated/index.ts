@@ -18,3 +18,4 @@ export { useMongodbv1alpha1APIListUsersQuery } from './useMongodbv1alpha1APIList
 export { useMongodbv1alpha1APIListVersionsAllQuery } from './useMongodbv1alpha1APIListVersionsAllQuery'
 export { useMongodbv1alpha1APIListVersionsInfiniteQuery } from './useMongodbv1alpha1APIListVersionsInfiniteQuery'
 export { useMongodbv1alpha1APIListVersionsQuery } from './useMongodbv1alpha1APIListVersionsQuery'
+export { useMongodbv1alpha1APIReload } from './useMongodbv1alpha1APIReload'

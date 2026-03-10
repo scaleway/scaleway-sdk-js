@@ -42,6 +42,7 @@ export { useEdgeServicesv1beta1APIListTLSStagesQuery } from './useEdgeServicesv1
 export { useEdgeServicesv1beta1APIListWafStagesAllQuery } from './useEdgeServicesv1beta1APIListWafStagesAllQuery'
 export { useEdgeServicesv1beta1APIListWafStagesInfiniteQuery } from './useEdgeServicesv1beta1APIListWafStagesInfiniteQuery'
 export { useEdgeServicesv1beta1APIListWafStagesQuery } from './useEdgeServicesv1beta1APIListWafStagesQuery'
+export { useEdgeServicesv1beta1APIReload } from './useEdgeServicesv1beta1APIReload'
 export { useEdgeServicesv1beta1APISearchBackendStagesQuery } from './useEdgeServicesv1beta1APISearchBackendStagesQuery'
 export { useEdgeServicesv1beta1APISearchRouteRulesQuery } from './useEdgeServicesv1beta1APISearchRouteRulesQuery'
 export { useEdgeServicesv1beta1APISearchWafStagesQuery } from './useEdgeServicesv1beta1APISearchWafStagesQuery'

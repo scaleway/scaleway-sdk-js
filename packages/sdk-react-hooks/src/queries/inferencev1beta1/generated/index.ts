@@ -16,3 +16,4 @@ export { useInferencev1beta1APIListModelsQuery } from './useInferencev1beta1APIL
 export { useInferencev1beta1APIListNodeTypesAllQuery } from './useInferencev1beta1APIListNodeTypesAllQuery'
 export { useInferencev1beta1APIListNodeTypesInfiniteQuery } from './useInferencev1beta1APIListNodeTypesInfiniteQuery'
 export { useInferencev1beta1APIListNodeTypesQuery } from './useInferencev1beta1APIListNodeTypesQuery'
+export { useInferencev1beta1APIReload } from './useInferencev1beta1APIReload'

@@ -27,3 +27,4 @@ export { useTemv1alpha1APIListWebhookEventsQuery } from './useTemv1alpha1APIList
 export { useTemv1alpha1APIListWebhooksAllQuery } from './useTemv1alpha1APIListWebhooksAllQuery'
 export { useTemv1alpha1APIListWebhooksInfiniteQuery } from './useTemv1alpha1APIListWebhooksInfiniteQuery'
 export { useTemv1alpha1APIListWebhooksQuery } from './useTemv1alpha1APIListWebhooksQuery'
+export { useTemv1alpha1APIReload } from './useTemv1alpha1APIReload'

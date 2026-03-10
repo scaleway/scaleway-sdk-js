@@ -46,3 +46,4 @@ export { useInstancev1APIListVolumesAllQuery } from './useInstancev1APIListVolum
 export { useInstancev1APIListVolumesInfiniteQuery } from './useInstancev1APIListVolumesInfiniteQuery'
 export { useInstancev1APIListVolumesQuery } from './useInstancev1APIListVolumesQuery'
 export { useInstancev1APIListVolumesTypesQuery } from './useInstancev1APIListVolumesTypesQuery'
+export { useInstancev1APIReload } from './useInstancev1APIReload'

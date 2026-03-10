@@ -16,3 +16,4 @@ export { useMarketplacev2APIListLocalImagesQuery } from './useMarketplacev2APILi
 export { useMarketplacev2APIListVersionsAllQuery } from './useMarketplacev2APIListVersionsAllQuery'
 export { useMarketplacev2APIListVersionsInfiniteQuery } from './useMarketplacev2APIListVersionsInfiniteQuery'
 export { useMarketplacev2APIListVersionsQuery } from './useMarketplacev2APIListVersionsQuery'
+export { useMarketplacev2APIReload } from './useMarketplacev2APIReload'

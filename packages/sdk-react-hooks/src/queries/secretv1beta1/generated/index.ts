@@ -13,3 +13,4 @@ export { useSecretv1beta1APIListSecretVersionsQuery } from './useSecretv1beta1AP
 export { useSecretv1beta1APIListTagsAllQuery } from './useSecretv1beta1APIListTagsAllQuery'
 export { useSecretv1beta1APIListTagsInfiniteQuery } from './useSecretv1beta1APIListTagsInfiniteQuery'
 export { useSecretv1beta1APIListTagsQuery } from './useSecretv1beta1APIListTagsQuery'
+export { useSecretv1beta1APIReload } from './useSecretv1beta1APIReload'

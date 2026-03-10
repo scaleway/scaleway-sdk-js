@@ -11,3 +11,4 @@ export { useJobsv1alpha1APIListJobRunsAllQuery } from './useJobsv1alpha1APIListJ
 export { useJobsv1alpha1APIListJobRunsInfiniteQuery } from './useJobsv1alpha1APIListJobRunsInfiniteQuery'
 export { useJobsv1alpha1APIListJobRunsQuery } from './useJobsv1alpha1APIListJobRunsQuery'
 export { useJobsv1alpha1APIListJobsResourcesQuery } from './useJobsv1alpha1APIListJobsResourcesQuery'
+export { useJobsv1alpha1APIReload } from './useJobsv1alpha1APIReload'

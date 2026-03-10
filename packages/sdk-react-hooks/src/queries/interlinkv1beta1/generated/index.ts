@@ -20,3 +20,4 @@ export { useInterlinkv1beta1APIListPopsQuery } from './useInterlinkv1beta1APILis
 export { useInterlinkv1beta1APIListRoutingPoliciesAllQuery } from './useInterlinkv1beta1APIListRoutingPoliciesAllQuery'
 export { useInterlinkv1beta1APIListRoutingPoliciesInfiniteQuery } from './useInterlinkv1beta1APIListRoutingPoliciesInfiniteQuery'
 export { useInterlinkv1beta1APIListRoutingPoliciesQuery } from './useInterlinkv1beta1APIListRoutingPoliciesQuery'
+export { useInterlinkv1beta1APIReload } from './useInterlinkv1beta1APIReload'

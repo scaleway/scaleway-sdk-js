@@ -12,6 +12,7 @@ export { useCockpitv1GlobalAPIListGrafanaUsersQuery } from './useCockpitv1Global
 export { useCockpitv1GlobalAPIListPlansAllQuery } from './useCockpitv1GlobalAPIListPlansAllQuery'
 export { useCockpitv1GlobalAPIListPlansInfiniteQuery } from './useCockpitv1GlobalAPIListPlansInfiniteQuery'
 export { useCockpitv1GlobalAPIListPlansQuery } from './useCockpitv1GlobalAPIListPlansQuery'
+export { useCockpitv1GlobalAPIReload } from './useCockpitv1GlobalAPIReload'
 export { useCockpitv1RegionalAPIGetAlertManagerQuery } from './useCockpitv1RegionalAPIGetAlertManagerQuery'
 export { useCockpitv1RegionalAPIGetConfigQuery } from './useCockpitv1RegionalAPIGetConfigQuery'
 export { useCockpitv1RegionalAPIGetDataSourceQuery } from './useCockpitv1RegionalAPIGetDataSourceQuery'
@@ -35,3 +36,4 @@ export { useCockpitv1RegionalAPIListProductsQuery } from './useCockpitv1Regional
 export { useCockpitv1RegionalAPIListTokensAllQuery } from './useCockpitv1RegionalAPIListTokensAllQuery'
 export { useCockpitv1RegionalAPIListTokensInfiniteQuery } from './useCockpitv1RegionalAPIListTokensInfiniteQuery'
 export { useCockpitv1RegionalAPIListTokensQuery } from './useCockpitv1RegionalAPIListTokensQuery'
+export { useCockpitv1RegionalAPIReload } from './useCockpitv1RegionalAPIReload'

@@ -14,3 +14,4 @@ export { useAutoscalingv1alpha1APIListInstancePoliciesQuery } from './useAutosca
 export { useAutoscalingv1alpha1APIListInstanceTemplatesAllQuery } from './useAutoscalingv1alpha1APIListInstanceTemplatesAllQuery'
 export { useAutoscalingv1alpha1APIListInstanceTemplatesInfiniteQuery } from './useAutoscalingv1alpha1APIListInstanceTemplatesInfiniteQuery'
 export { useAutoscalingv1alpha1APIListInstanceTemplatesQuery } from './useAutoscalingv1alpha1APIListInstanceTemplatesQuery'
+export { useAutoscalingv1alpha1APIReload } from './useAutoscalingv1alpha1APIReload'

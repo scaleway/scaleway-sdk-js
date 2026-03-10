@@ -966,8 +966,8 @@ importers:
   packages_generated/mailbox:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.2
+        version: 5.1.2
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -2978,10 +2978,6 @@ packages:
       }
     cpu: [x64]
     os: [win32]
-
-  '@scaleway/random-name@5.1.1':
-    resolution: {integrity: sha512-DelRK+56UBUEoRr8pQGwTE7oyC019pExis6iG6zZPcjuz4nLbMB5LIosmclnsvajfIBEQiD1Dv9JI/MgnPwygQ==}
-    engines: {node: '>=20.x'}
 
   '@scaleway/random-name@5.1.2':
     resolution:
@@ -9949,8 +9945,6 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.45.1':
     optional: true
-
-  '@scaleway/random-name@5.1.1': {}
 
   '@scaleway/random-name@5.1.2': {}
 

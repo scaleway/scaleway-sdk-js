@@ -6,3 +6,4 @@ export { useFilev1alpha1APIListAttachmentsQuery } from './useFilev1alpha1APIList
 export { useFilev1alpha1APIListFileSystemsAllQuery } from './useFilev1alpha1APIListFileSystemsAllQuery'
 export { useFilev1alpha1APIListFileSystemsInfiniteQuery } from './useFilev1alpha1APIListFileSystemsInfiniteQuery'
 export { useFilev1alpha1APIListFileSystemsQuery } from './useFilev1alpha1APIListFileSystemsQuery'
+export { useFilev1alpha1APIReload } from './useFilev1alpha1APIReload'

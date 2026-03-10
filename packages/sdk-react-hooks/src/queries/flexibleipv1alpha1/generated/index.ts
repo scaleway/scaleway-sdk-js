@@ -3,3 +3,4 @@ export { useFlexibleipv1alpha1APIGetFlexibleIPQuery } from './useFlexibleipv1alp
 export { useFlexibleipv1alpha1APIListFlexibleIPsAllQuery } from './useFlexibleipv1alpha1APIListFlexibleIPsAllQuery'
 export { useFlexibleipv1alpha1APIListFlexibleIPsInfiniteQuery } from './useFlexibleipv1alpha1APIListFlexibleIPsInfiniteQuery'
 export { useFlexibleipv1alpha1APIListFlexibleIPsQuery } from './useFlexibleipv1alpha1APIListFlexibleIPsQuery'
+export { useFlexibleipv1alpha1APIReload } from './useFlexibleipv1alpha1APIReload'

@@ -4,6 +4,7 @@ yarn.lock
 
 # misc
 .DS_Store
+/.vscode
 
 # lint
 .eslintcache

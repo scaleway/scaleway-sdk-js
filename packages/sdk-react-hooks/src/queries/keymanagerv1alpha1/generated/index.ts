@@ -5,3 +5,4 @@ export { useKeyManagerv1alpha1APIListAlgorithmsQuery } from './useKeyManagerv1al
 export { useKeyManagerv1alpha1APIListKeysAllQuery } from './useKeyManagerv1alpha1APIListKeysAllQuery'
 export { useKeyManagerv1alpha1APIListKeysInfiniteQuery } from './useKeyManagerv1alpha1APIListKeysInfiniteQuery'
 export { useKeyManagerv1alpha1APIListKeysQuery } from './useKeyManagerv1alpha1APIListKeysQuery'
+export { useKeyManagerv1alpha1APIReload } from './useKeyManagerv1alpha1APIReload'

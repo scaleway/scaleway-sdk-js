@@ -24,3 +24,4 @@ export { useContainerv1beta1APIListTokensQuery } from './useContainerv1beta1APIL
 export { useContainerv1beta1APIListTriggersAllQuery } from './useContainerv1beta1APIListTriggersAllQuery'
 export { useContainerv1beta1APIListTriggersInfiniteQuery } from './useContainerv1beta1APIListTriggersInfiniteQuery'
 export { useContainerv1beta1APIListTriggersQuery } from './useContainerv1beta1APIListTriggersQuery'
+export { useContainerv1beta1APIReload } from './useContainerv1beta1APIReload'

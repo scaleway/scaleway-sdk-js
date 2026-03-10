@@ -55,3 +55,4 @@ export { useIamv1alpha1APIListUsersQuery } from './useIamv1alpha1APIListUsersQue
 export { useIamv1alpha1APIListUserWebAuthnAuthenticatorsAllQuery } from './useIamv1alpha1APIListUserWebAuthnAuthenticatorsAllQuery'
 export { useIamv1alpha1APIListUserWebAuthnAuthenticatorsInfiniteQuery } from './useIamv1alpha1APIListUserWebAuthnAuthenticatorsInfiniteQuery'
 export { useIamv1alpha1APIListUserWebAuthnAuthenticatorsQuery } from './useIamv1alpha1APIListUserWebAuthnAuthenticatorsQuery'
+export { useIamv1alpha1APIReload } from './useIamv1alpha1APIReload'
