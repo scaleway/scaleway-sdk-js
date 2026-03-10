@@ -38,6 +38,10 @@ export type ListJobRunsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type ListTriggersRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+
 export interface SecretEnvVar {
   name: string
 }
@@ -65,6 +69,26 @@ export interface RetryPolicy {
    * Maximum number of retries upon a job failure.
    */
   maxRetries: number
+}
+
+
+export interface TriggerCronConfig {
+  /**
+   * CRON schedule in UNIX format.
+   */
+  schedule: string
+  /**
+   * Time zone for the CRON schedule.
+   */
+  timezone: string
+  /**
+   * Startup command that will be used by the triggered job.
+   */
+  startupCommand: string[]
+  /**
+   * Arguments passed to the startup command used by the triggered job.
+   */
+  args: string[]
 }
 
 
@@ -122,26 +146,94 @@ export interface Secret {
 }
 
 
+export interface CreateTriggerRequestCronConfig {
+  /**
+   * CRON schedule in UNIX format.
+   */
+  schedule: string
+  /**
+   * Time zone for the CRON schedule.
+   */
+  timezone: string
+  /**
+   * Startup command that will be used by the triggered job.
+   */
+  startupCommand: string[]
+  /**
+   * Arguments passed to the startup command used by the triggered job.
+   */
+  args: string[]
+}
+
+
 export interface JobDefinition {
+  /**
+   * UUID of the job definition.
+   */
   id: string
+  /**
+   * Name of the job definition.
+   */
   name: string
+  /**
+   * UUID of the Scaleway Project containing the job.
+   */
   projectId: string
+  /**
+   * Creation date of the job definition.
+   */
   createdAt?: Date
+  /**
+   * Last update date of the job definition.
+   */
   updatedAt?: Date
+  /**
+   * CPU limit of the job (in mvCPU).
+   */
   cpuLimit: number
+  /**
+   * Memory limit of the job (in MiB).
+   */
   memoryLimit: number
+  /**
+   * Local storage capacity of the job (in MiB).
+   */
   localStorageCapacity: number
+  /**
+   * Image to use for the job.
+   */
   imageUri: string
   /**
-   * @deprecated 
+   * @deprecated Deprecated, please use startup_command instead.
    */
-  command?: string
+  command: string
+  /**
+   * Environment variables of the job.
+   */
   environmentVariables: Record<string, string>
+  /**
+   * Timeout of the job in seconds.
+   */
   jobTimeout?: string
+  /**
+   * Description of the job.
+   */
   description: string
+  /**
+   * Configure a cron for the job.
+   */
   cronSchedule?: CronSchedule
+  /**
+   * Job startup command.
+   */
   startupCommand: string[]
+  /**
+   * Job arguments passed to the startup command at runtime.
+   */
   args: string[]
+  /**
+   * Retry behaviour in case of job failure.
+   */
   retryPolicy?: RetryPolicy
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -157,27 +249,81 @@ export interface Resource {
 
 
 export interface JobRun {
+  /**
+   * UUID of the job run.
+   */
   id: string
+  /**
+   * UUID of the job definition.
+   */
   jobDefinitionId: string
+  /**
+   * Creation date of the job run.
+   */
   createdAt?: Date
+  /**
+   * Last update date of the job run.
+   */
   updatedAt?: Date
+  /**
+   * Start date of the job run.
+   */
   startedAt?: Date
+  /**
+   * Termination date of the job run.
+   */
   terminatedAt?: Date
+  /**
+   * Duration of the job run.
+   */
   runDuration?: string
+  /**
+   * State of the job run.
+   */
   state: JobRunState
+  /**
+   * Reason for failure if the job failed.
+   */
   reason?: JobRunReason
+  /**
+   * Exit code of the job.
+   */
   exitCode?: number
+  /**
+   * Error message if the job failed.
+   */
   errorMessage?: string
+  /**
+   * CPU limit of the job (in mvCPU).
+   */
   cpuLimit: number
+  /**
+   * Memory limit of the job (in MiB).
+   */
   memoryLimit: number
+  /**
+   * Local storage capacity of the job (in MiB).
+   */
   localStorageCapacity: number
   /**
-   * @deprecated 
+   * @deprecated Deprecated, please use startup_command instead.
    */
-  command?: string
+  command: string
+  /**
+   * Environment variables of the job run.
+   */
   environmentVariables: Record<string, string>
+  /**
+   * Job startup command.
+   */
   startupCommand: string[]
+  /**
+   * Job arguments passed to the startup command at runtime.
+   */
   args: string[]
+  /**
+   * Number of retry attempts.
+   */
   attempts?: number
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -186,9 +332,59 @@ export interface JobRun {
 }
 
 
+export interface Trigger {
+  /**
+   * UUID of the trigger.
+   */
+  id: string
+  /**
+   * UUID of the job definition.
+   */
+  jobDefinitionId: string
+  /**
+   * Human readable name of the trigger.
+   */
+  name: string
+  /**
+   * Creation time of the trigger.
+   */
+  createdAt?: Date
+  /**
+   * Last update time of the trigger.
+   */
+  updatedAt?: Date
+  /**
+   * Configuration of the CRON trigger.
+   *
+   * One-of ('config'): at most one of 'cronConfig' could be set.
+   */
+  cronConfig?: TriggerCronConfig
+}
+
+
 export interface UpdateJobDefinitionRequestCronScheduleConfig {
   schedule?: string
   timezone?: string
+}
+
+
+export interface UpdateTriggerRequestCronConfig {
+  /**
+   * CRON schedule in UNIX format.
+   */
+  schedule?: string
+  /**
+   * Time zone for the CRON schedule.
+   */
+  timezone?: string
+  /**
+   * Startup command that will be used by the triggered job.
+   */
+  startupCommand?: string[]
+  /**
+   * Arguments passed to the startup command used by the triggered job.
+   */
+  args?: string[]
 }
 
 
@@ -220,7 +416,7 @@ export type CreateJobDefinitionRequest = {
   /**
    * @deprecated Deprecated: please use startup_command instead.
    */
-  command?: string
+  command: string
   /**
    * The main executable or entrypoint script to run.
 If both command and startup_command are provided, only startup_command will be used.
@@ -282,6 +478,28 @@ export interface CreateSecretsResponse {
 }
 
 
+export type CreateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the job definition.
+   */
+  jobDefinitionId: string
+  /**
+   * Name of the trigger.
+   */
+  name: string
+  /**
+   * Configuration of the CRON trigger.
+   *
+   * One-of ('config'): at most one of 'cronConfig' could be set.
+   */
+  cronConfig?: CreateTriggerRequestCronConfig
+}
+
+
 export type DeleteJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -303,6 +521,18 @@ export type DeleteSecretRequest = {
    * UUID of the secret reference within the job.
    */
   secretId: string
+}
+
+
+export type DeleteTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the trigger.
+   */
+  triggerId: string
 }
 
 
@@ -347,6 +577,18 @@ export type GetSecretRequest = {
    * UUID of the secret reference within the job.
    */
   secretId: string
+}
+
+
+export type GetTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the trigger.
+   */
+  triggerId: string
 }
 
 
@@ -429,6 +671,42 @@ export interface ListSecretsResponse {
   secrets: Secret[]
   /**
    * Total count of secret references within a job definition.
+   */
+  totalCount: number
+}
+
+
+export type ListTriggersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the job definition.
+   */
+  jobDefinitionId: string
+  /**
+   * Page number from paginated list of triggers.
+   */
+  page?: number
+  /**
+   * Number of triggers per page.
+   */
+  pageSize?: number
+  /**
+   * Sorting order of triggers.
+   */
+  orderBy?: ListTriggersRequestOrderBy
+}
+
+
+export interface ListTriggersResponse {
+  /**
+   * List of triggers.
+   */
+  triggers: Trigger[]
+  /**
+   * Total count of triggers.
    */
   totalCount: number
 }
@@ -582,6 +860,28 @@ export type UpdateSecretRequest = {
    * One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set.
    */
   envVarName?: string
+}
+
+
+export type UpdateTriggerRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * UUID of the trigger.
+   */
+  triggerId: string
+  /**
+   * Name of the trigger.
+   */
+  name?: string
+  /**
+   * Configuration of the CRON trigger.
+   *
+   * One-of ('config'): at most one of 'cronConfig' could be set.
+   */
+  cronConfig?: UpdateTriggerRequestCronConfig
 }
 
 
