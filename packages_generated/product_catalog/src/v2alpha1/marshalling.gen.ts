@@ -28,6 +28,10 @@ import type {
   PublicCatalogProductPropertiesKubernetesKosmosNodeType,
   PublicCatalogProductPropertiesLoadBalancer,
   PublicCatalogProductPropertiesManagedInference,
+  PublicCatalogProductPropertiesManagedMongoDB,
+  PublicCatalogProductPropertiesManagedMongoDBManagementType,
+  PublicCatalogProductPropertiesManagedMongoDBNodeType,
+  PublicCatalogProductPropertiesManagedMongoDBStorageType,
   PublicCatalogProductPropertiesManagedRedisDatabase,
   PublicCatalogProductPropertiesManagedRelationalDatabase,
   PublicCatalogProductPropertiesManagedRelationalDatabaseManagementType,
@@ -175,6 +179,40 @@ const unmarshalPublicCatalogProductPropertiesKubernetesKosmosNodeType = (data: u
 
   return {
   } as PublicCatalogProductPropertiesKubernetesKosmosNodeType
+}
+
+const unmarshalPublicCatalogProductPropertiesManagedMongoDBManagementType = (data: unknown): PublicCatalogProductPropertiesManagedMongoDBManagementType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesManagedMongoDBManagementType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesManagedMongoDBManagementType
+}
+
+const unmarshalPublicCatalogProductPropertiesManagedMongoDBNodeType = (data: unknown): PublicCatalogProductPropertiesManagedMongoDBNodeType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesManagedMongoDBNodeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesManagedMongoDBNodeType
+}
+
+const unmarshalPublicCatalogProductPropertiesManagedMongoDBStorageType = (data: unknown): PublicCatalogProductPropertiesManagedMongoDBStorageType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesManagedMongoDBStorageType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    storageClass: data.storage_class,
+  } as PublicCatalogProductPropertiesManagedMongoDBStorageType
 }
 
 const unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseManagementType = (data: unknown): PublicCatalogProductPropertiesManagedRelationalDatabaseManagementType => {
@@ -414,6 +452,20 @@ const unmarshalPublicCatalogProductPropertiesManagedInference = (data: unknown):
   } as PublicCatalogProductPropertiesManagedInference
 }
 
+const unmarshalPublicCatalogProductPropertiesManagedMongoDB = (data: unknown): PublicCatalogProductPropertiesManagedMongoDB => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesManagedMongoDB' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    management: data.management ? unmarshalPublicCatalogProductPropertiesManagedMongoDBManagementType(data.management) : undefined,
+    node: data.node ? unmarshalPublicCatalogProductPropertiesManagedMongoDBNodeType(data.node) : undefined,
+    storage: data.storage ? unmarshalPublicCatalogProductPropertiesManagedMongoDBStorageType(data.storage) : undefined,
+  } as PublicCatalogProductPropertiesManagedMongoDB
+}
+
 const unmarshalPublicCatalogProductPropertiesManagedRedisDatabase = (data: unknown): PublicCatalogProductPropertiesManagedRedisDatabase => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -525,6 +577,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     kubernetes: data.kubernetes ? unmarshalPublicCatalogProductPropertiesKubernetes(data.kubernetes) : undefined,
     loadBalancer: data.load_balancer ? unmarshalPublicCatalogProductPropertiesLoadBalancer(data.load_balancer) : undefined,
     managedInference: data.managed_inference ? unmarshalPublicCatalogProductPropertiesManagedInference(data.managed_inference) : undefined,
+    managedMongodb: data.managed_mongodb ? unmarshalPublicCatalogProductPropertiesManagedMongoDB(data.managed_mongodb) : undefined,
     managedRedisDatabase: data.managed_redis_database ? unmarshalPublicCatalogProductPropertiesManagedRedisDatabase(data.managed_redis_database) : undefined,
     managedRelationalDatabase: data.managed_relational_database ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabase(data.managed_relational_database) : undefined,
     objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
