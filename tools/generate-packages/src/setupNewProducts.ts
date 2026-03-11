@@ -41,10 +41,10 @@ const options: ParseArgsConfig['options'] = {
 
 const { values } = parseArgs({ options })
 const DRY_RUN = Boolean(values['dry-run'])
-const INSTALL = Boolean(values['install'])
-const VERBOSE = values['quiet'] ? false : Boolean(values['verbose'])
-const PACKAGES_GENERATED_DIR = resolve(cwd(), String(values['src']))
-const SDK_PACKAGE_JSON = resolve(cwd(), String(values['sdk']))
+const INSTALL = Boolean(values.install)
+const VERBOSE = values.quiet ? false : Boolean(values.verbose)
+const PACKAGES_GENERATED_DIR = resolve(cwd(), String(values.src))
+const SDK_PACKAGE_JSON = resolve(cwd(), String(values.sdk))
 
 interface Product {
   name: string
@@ -161,8 +161,8 @@ function ensureProductFiles(products: Product[]) {
 }
 
 function detectPackageScope(sdkPackageJsonPath: string): Scope {
-  if (values['scope']) {
-    const s = String(values['scope']) as Scope
+  if (values.scope) {
+    const s = String(values.scope) as Scope
     return s === '@scaleway-internal' ? s : '@scaleway'
   }
   if (!existsSync(sdkPackageJsonPath)) {

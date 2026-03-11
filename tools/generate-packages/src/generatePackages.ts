@@ -71,12 +71,12 @@ const AUTO_GENERATE_MESSAGE = `/**
 
 const { values } = parseArgs({ options, allowPositionals: true })
 
-if (!values['src']) {
+if (!values.src) {
   console.error('Missing required argument: --src')
   exit(1)
 }
 
-const INPUT_PATH_DIR = resolve(cwd(), values['src'] as string)
+const INPUT_PATH_DIR = resolve(cwd(), values.src as string)
 
 const exportProductVersions = ({ productDir }: { productDir: string }) => {
   const fullPath = join(INPUT_PATH_DIR, productDir, SOURCE_DIR)
