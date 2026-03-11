@@ -11,7 +11,7 @@ export const CreateDatabaseRequest = {
 
 export const CreateDeploymentRequest = {
   cpuMax: {
-    greaterThanOrEqual: 1,
+    greaterThanOrEqual: 2,
     lessThanOrEqual: 15,
   },
   cpuMin: {
@@ -156,7 +156,7 @@ export const ListVersionsRequest = {
 
 export const UpdateDeploymentRequest = {
   cpuMax: {
-    greaterThanOrEqual: 1,
+    greaterThanOrEqual: 2,
     lessThanOrEqual: 15,
   },
   cpuMin: {
