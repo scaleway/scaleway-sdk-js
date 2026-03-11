@@ -12,3 +12,4 @@ export { useDatalabv1beta1APIListNodeTypesQuery } from './useDatalabv1beta1APILi
 export { useDatalabv1beta1APIListNotebookVersionsAllQuery } from './useDatalabv1beta1APIListNotebookVersionsAllQuery'
 export { useDatalabv1beta1APIListNotebookVersionsInfiniteQuery } from './useDatalabv1beta1APIListNotebookVersionsInfiniteQuery'
 export { useDatalabv1beta1APIListNotebookVersionsQuery } from './useDatalabv1beta1APIListNotebookVersionsQuery'
+export { useDatalabv1beta1APIReload } from './useDatalabv1beta1APIReload'

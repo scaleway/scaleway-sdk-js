@@ -2,3 +2,4 @@
 
 export { useEnvironmentalFootprintv1alpha1UserAPIGetImpactDataQuery } from './useEnvironmentalFootprintv1alpha1UserAPIGetImpactDataQuery'
 export { useEnvironmentalFootprintv1alpha1UserAPIGetImpactReportAvailabilityQuery } from './useEnvironmentalFootprintv1alpha1UserAPIGetImpactReportAvailabilityQuery'
+export { useEnvironmentalFootprintv1alpha1UserAPIReload } from './useEnvironmentalFootprintv1alpha1UserAPIReload'

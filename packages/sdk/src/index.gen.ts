@@ -31,6 +31,7 @@ import { K8Sv1 } from '@scaleway/sdk-k8s'
 import { Kafkav1alpha1 } from '@scaleway/sdk-kafka'
 import { KeyManagerv1alpha1 } from '@scaleway/sdk-key-manager'
 import { Lbv1 } from '@scaleway/sdk-lb'
+import { Mailboxv1alpha1 } from '@scaleway/sdk-mailbox'
 import { Marketplacev2 } from '@scaleway/sdk-marketplace'
 import { Mnqv1beta1 } from '@scaleway/sdk-mnq'
 import { Mongodbv1, Mongodbv1alpha1 } from '@scaleway/sdk-mongodb'
@@ -286,6 +287,14 @@ export const KeyManager = {
 export { Lbv1 }
 export const Lb = {
   v1: Lbv1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'Mailbox' namespace instead (e.g., Mailbox.v1).
+ */
+export { Mailboxv1alpha1 }
+export const Mailbox = {
+  v1alpha1: Mailboxv1alpha1,
 }
 
 /**

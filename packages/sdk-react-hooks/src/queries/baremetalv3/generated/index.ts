@@ -3,3 +3,4 @@
 export { useBaremetalv3PrivateNetworkAPIListServerPrivateNetworksAllQuery } from './useBaremetalv3PrivateNetworkAPIListServerPrivateNetworksAllQuery'
 export { useBaremetalv3PrivateNetworkAPIListServerPrivateNetworksInfiniteQuery } from './useBaremetalv3PrivateNetworkAPIListServerPrivateNetworksInfiniteQuery'
 export { useBaremetalv3PrivateNetworkAPIListServerPrivateNetworksQuery } from './useBaremetalv3PrivateNetworkAPIListServerPrivateNetworksQuery'
+export { useBaremetalv3PrivateNetworkAPIReload } from './useBaremetalv3PrivateNetworkAPIReload'
