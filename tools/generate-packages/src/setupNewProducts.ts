@@ -19,7 +19,7 @@ import { join, resolve } from 'node:path'
 import { cwd } from 'node:process'
 import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
-import { snakeToSlug } from './helpers'
+import { snakeToSlug } from './helpers.ts'
 
 type Scope = '@scaleway' | '@scaleway-internal'
 
@@ -41,10 +41,10 @@ const options: ParseArgsConfig['options'] = {
 
 const { values } = parseArgs({ options })
 const DRY_RUN = Boolean(values['dry-run'])
-const INSTALL = Boolean(values.install)
-const VERBOSE = values.quiet ? false : Boolean(values.verbose)
-const PACKAGES_GENERATED_DIR = resolve(cwd(), String(values.src))
-const SDK_PACKAGE_JSON = resolve(cwd(), String(values.sdk))
+const INSTALL = Boolean(values['install'])
+const VERBOSE = values['quiet'] ? false : Boolean(values['verbose'])
+const PACKAGES_GENERATED_DIR = resolve(cwd(), String(values['src']))
+const SDK_PACKAGE_JSON = resolve(cwd(), String(values['sdk']))
 
 interface Product {
   name: string
@@ -161,8 +161,8 @@ function ensureProductFiles(products: Product[]) {
 }
 
 function detectPackageScope(sdkPackageJsonPath: string): Scope {
-  if (values.scope) {
-    const s = String(values.scope) as Scope
+  if (values['scope']) {
+    const s = String(values['scope']) as Scope
     return s === '@scaleway-internal' ? s : '@scaleway'
   }
   if (!existsSync(sdkPackageJsonPath)) {
@@ -209,11 +209,11 @@ function updateSdkPackageJson(
   }
 
   // sort deps
-  const sortObj = (o: Record<string, string>) =>
+  const sortObj = (o: Record<string, string>): Record<string, string> =>
     Object.fromEntries(
       Object.keys(o)
         .sort()
-        .map(k => [k, o[k]]),
+        .map(k => [k, o[k]] as [string, string]),
     )
 
   sdkPackage.dependencies = sortObj(sdkPackage.dependencies)

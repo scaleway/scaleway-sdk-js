@@ -1,21 +1,10 @@
 const upperFirst = (str: string) =>
   str.slice(0, 1).toUpperCase() + str.slice(1, str.length)
 
-// Special handling for known acronyms that should be all uppercase
-const ACRONYMS = new Set(['k8s', 's2s', 'api', 'http', 'https', 'url', 'uri'])
-
-const handleAcronym = (str: string): string => {
-  const lower = str.toLowerCase()
-  if (ACRONYMS.has(lower)) {
-    return str.toUpperCase()
-  }
-  return upperFirst(str)
-}
-
 export const snakeToPascal = (str: string) =>
   str
     .split('_')
-    .map(s => handleAcronym(s.split('/').map(handleAcronym).join('/')))
+    .map(s => upperFirst(s.split('/').map(upperFirst).join('/')))
     .join('')
 
 export const unionTocamelCase = (str: string) =>
@@ -26,7 +15,7 @@ export const snakeToSlug = (str: string) => str.split('_').join('-')
 export const snakeToDisplayName = (str: string) =>
   str
     .split('_')
-    .map(s => handleAcronym(s.split('/').map(handleAcronym).join('/')))
+    .map(s => upperFirst(s.split('/').map(upperFirst).join('/')))
     .join(' ')
 
 export const renderTemplate = (
@@ -47,8 +36,6 @@ export const renderTemplatePackageJson = (
   template: string,
   params: Record<string, string>,
 ) => {
-  console.debug('renderTemplatePackageJson', template, params)
-  let packageJson: string
   let result = template
   for (const [key, value] of Object.entries(params)) {
     const placeholder = `{{${key}}}`
@@ -57,12 +44,9 @@ export const renderTemplatePackageJson = (
     result = result.replace(new RegExp(placeholder, 'g'), stringValue)
   }
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    packageJson = JSON.parse(result)
+    return JSON.parse(result)
   } catch (error) {
     console.error('Error parsing package.json:', error)
     throw error
   }
-
-  return packageJson
 }

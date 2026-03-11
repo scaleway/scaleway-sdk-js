@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {
   access,
   appendFileSync,
@@ -8,39 +9,41 @@ import {
   statSync,
   writeFileSync,
 } from 'node:fs'
-import { join, resolve } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { cwd, exit } from 'node:process'
+import { fileURLToPath } from 'node:url'
 import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
-import { SDKS } from './constants'
+import { SDKS } from './constants.ts'
 import {
   renderTemplate,
   renderTemplatePackageJson,
   snakeToDisplayName,
   snakeToPascal,
   snakeToSlug,
-} from './helpers'
+} from './helpers.ts'
 
 /**
- * This script will add multiple file to each product package:
- * - package.json
- * - vite.config.ts
- * - tsconfig.json
- * - README.md
+ * Generates package scaffolding for each product in packages_generated/:
+ * - package.json (from template, only if missing)
+ * - tsconfig.json, tsconfig.build.json, vite.config.ts (always overwritten)
+ * - README.md (from template, only if missing)
+ * - src/index.gen.ts (version re-exports)
  */
 
+const TEMPLATES_DIR = join(dirname(fileURLToPath(import.meta.url)), '../templates')
+
 const TEMPLATES = {
-  PACKAGE_JSON: join(cwd(), 'scripts/templates', 'package.tmpl'),
-  TS_CONFIG: join(cwd(), 'scripts/templates', 'tsconfig.json'),
-  TS_CONFIG_BUILD: join(cwd(), 'scripts/templates', 'tsconfig.build.json'),
-  VITE_CONFIG: join(cwd(), 'scripts/templates', 'vite.config.ts'),
-  README: join(cwd(), 'scripts/templates', 'README.tmpl'),
+  PACKAGE_JSON: join(TEMPLATES_DIR, 'package.tmpl'),
+  TS_CONFIG: join(TEMPLATES_DIR, 'tsconfig.json'),
+  TS_CONFIG_BUILD: join(TEMPLATES_DIR, 'tsconfig.build.json'),
+  VITE_CONFIG: join(TEMPLATES_DIR, 'vite.config.ts'),
+  README: join(TEMPLATES_DIR, 'README.tmpl'),
 }
 
 const templateString = readFileSync(TEMPLATES.PACKAGE_JSON, 'utf8')
 const readmeTemplateString = readFileSync(TEMPLATES.README, 'utf8')
 
-// npx tsx scripts/generatePackages.ts ) --src="packages_generated"
 const options: ParseArgsConfig['options'] = {
   src: {
     type: 'string',
@@ -53,15 +56,11 @@ const SOURCE_DIR = 'src'
 const DEFAULT_GENERATED_EXPORT_PATH = 'index.gen.ts'
 
 const CUSTOM = {
-  /** Std is use for type generation */
-  // PRODUCT_EXPORT: new Set(['std']),
   PRODUCT_EXPORT: new Set(['std']),
   PRODUCT_VERSION_EXPORT: new Set([
     '',
-    // 'baremetal/v1',
     'instance/v1',
     'k8s/v1',
-    // 'lb/v1',
   ]),
 }
 
@@ -72,25 +71,22 @@ const AUTO_GENERATE_MESSAGE = `/**
 
 const { values } = parseArgs({ options, allowPositionals: true })
 
-if (!values.src) {
+if (!values['src']) {
   console.error('Missing required argument: --src')
   exit(1)
 }
 
-const INPUT_PATH_DIR = resolve(cwd(), values.src as string)
+const INPUT_PATH_DIR = resolve(cwd(), values['src'] as string)
 
 const exportProductVersions = ({ productDir }: { productDir: string }) => {
   const fullPath = join(INPUT_PATH_DIR, productDir, SOURCE_DIR)
   const versionDirs = readdirSync(fullPath)
-
   const pathFile = `${fullPath}/${DEFAULT_GENERATED_EXPORT_PATH}`
 
   writeFileSync(pathFile, AUTO_GENERATE_MESSAGE)
 
-  console.debug('Export for', productDir, 'versions', versionDirs)
   for (const versionDir of versionDirs) {
     const pathVersion = `${fullPath}/${versionDir}`
-
     if (statSync(pathVersion).isDirectory()) {
       const exportPath = CUSTOM.PRODUCT_VERSION_EXPORT.has(
         `${productDir}/${versionDir}`,
@@ -98,11 +94,6 @@ const exportProductVersions = ({ productDir }: { productDir: string }) => {
         ? `./${versionDir}/index.js`
         : `./${versionDir}/index.gen.js`
 
-      // appendFileSync(
-      //   pathFile,
-      //   `\n/** @deprecated in favor of ${snakeToPascal(productDir)}${versionDir}, you can also use the dedicated package */
-      //   export * as ${versionDir} from '${exportPath}'`,
-      // )
       appendFileSync(
         pathFile,
         `\nexport * as ${snakeToPascal(productDir)}${versionDir} from '${exportPath}'`,
@@ -112,12 +103,7 @@ const exportProductVersions = ({ productDir }: { productDir: string }) => {
   appendFileSync(pathFile, '\n')
 }
 
-/**
- * This function will generate an index.ts with an export of all product. Std is a custom
- * export as it's only serve for types.
- */
 const main = () => {
-  // eslint-disable-next-line no-unused-vars
   for (const _sdk of SDKS) {
     const productsDirs = readdirSync(INPUT_PATH_DIR)
 
@@ -129,33 +115,23 @@ const main = () => {
           const filePath = join(fullPath, fileName)
           access(filePath, constants.F_OK, err => {
             if (err) {
-              console.log(
-                `The file ${fileName} does not exist in the ${productDir} directory`,
-              )
-
               const pkg = renderTemplatePackageJson(templateString, {
                 name: snakeToSlug(productDir),
               })
               writeFileSync(filePath, JSON.stringify(pkg, null, 2))
             }
-            // console.log(`The file ${fileName} exists in the ${productDir} directory`);
           })
 
           exportProductVersions({ productDir })
           copyFileSync(TEMPLATES.TS_CONFIG, join(fullPath, 'tsconfig.json'))
-          copyFileSync(
-            TEMPLATES.TS_CONFIG_BUILD,
-            join(fullPath, 'tsconfig.build.json'),
-          )
+          copyFileSync(TEMPLATES.TS_CONFIG_BUILD, join(fullPath, 'tsconfig.build.json'))
           copyFileSync(TEMPLATES.VITE_CONFIG, join(fullPath, 'vite.config.ts'))
 
-          // Generate README.md only if it doesn't exist
           const readmeFilePath = join(fullPath, 'README.md')
           access(readmeFilePath, constants.F_OK, err => {
             if (err) {
-              const slugName = snakeToSlug(productDir)
               const readme = renderTemplate(readmeTemplateString, {
-                name: slugName,
+                name: snakeToSlug(productDir),
                 displayName: snakeToDisplayName(productDir),
                 pascalName: snakeToPascal(productDir),
               })
