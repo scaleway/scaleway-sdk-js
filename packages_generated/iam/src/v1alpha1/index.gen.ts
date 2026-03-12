@@ -55,6 +55,7 @@ export type {
   GetOrganizationSecuritySettingsRequest,
   GetPolicyRequest,
   GetQuotumRequest,
+  GetSamlCertificateRequest,
   GetSSHKeyRequest,
   GetUserConnectionsRequest,
   GetUserConnectionsResponse,
