@@ -127,6 +127,7 @@ import type {
   GetOrganizationSecuritySettingsRequest,
   GetPolicyRequest,
   GetQuotumRequest,
+  GetSamlCertificateRequest,
   GetSSHKeyRequest,
   GetUserConnectionsRequest,
   GetUserConnectionsResponse,
@@ -1567,6 +1568,22 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}/certificates`,
+      },
+      unmarshalSamlCertificate,
+    )
+
+  
+  /**
+   * Get a SAML certificate.
+   *
+   * @param request - The request {@link GetSamlCertificateRequest}
+   * @returns A Promise of SamlCertificate
+   */
+  getSamlCertificate = (request: Readonly<GetSamlCertificateRequest>) =>
+    this.client.fetch<SamlCertificate>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
       },
       unmarshalSamlCertificate,
     )

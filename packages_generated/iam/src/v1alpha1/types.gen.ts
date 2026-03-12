@@ -1413,6 +1413,14 @@ export type GetSSHKeyRequest = {
 }
 
 
+export type GetSamlCertificateRequest = {
+  /**
+   * ID of the certificate to get.
+   */
+  certificateId: string
+}
+
+
 export type GetUserConnectionsRequest = {
   /**
    * ID of the user to list connections for.
