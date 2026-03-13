@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import { cwd } from 'node:process'
-import type { SDK } from './types.d.ts'
+import type { SDK } from './types.d'
 
 export const SDKS = new Set<SDK>([
   {
