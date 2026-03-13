@@ -1,6 +1,22 @@
+import path, { extname, relative, resolve } from 'node:path'
 import { readPackage } from 'read-pkg'
+import { globSync } from 'tinyglobby'
 import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
+
+const input = Object.fromEntries(
+  globSync('src/**/*.ts').map(file => [
+    // This removes `src/` as well as the file extension from each
+    // file, so e.g. src/nested/foo.js becomes nested/foo, and
+    // normalizes Windows backslashes to forward slashes.
+    relative('src', file.slice(0, file.length - extname(file).length))
+      .split(path.sep)
+      .join('/'),
+    // This expands the relative paths to absolute paths, so e.g.
+    // src/nested/foo.js becomes /project/src/nested/foo.js
+    resolve(file),
+  ]),
+)
 
 const pkg = await readPackage()
 
@@ -38,6 +54,7 @@ export const defaultConfig: UserConfig = defineConfig({
       },
     },
     rolldownOptions: {
+      input,
       external,
       optimization: {
         inlineConst: {
@@ -48,6 +65,7 @@ export const defaultConfig: UserConfig = defineConfig({
       output: {
         preserveModules: true,
         preserveModulesRoot: 'src',
+        topLevelVar: false,
       },
       platform: 'browser',
       preserveEntrySignatures: 'exports-only',
