@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.2 (2026-03-13)
+
+### Bug Fixes
+
+- **bin:** rename bin ([#2815](https://github.com/scaleway/scaleway-sdk-js/issues/2815)) ([71c5292](https://github.com/scaleway/scaleway-sdk-js/commit/71c52924554585fd4f0a401eae9736c909dbc3c6))
+- **format:** format package.json ([#2817](https://github.com/scaleway/scaleway-sdk-js/issues/2817)) ([98b9859](https://github.com/scaleway/scaleway-sdk-js/commit/98b9859279bd5072be6596aee71d7974a14ba592))
+
 ## 0.2.1 (2026-03-09)
 
 ### Bug Fixes

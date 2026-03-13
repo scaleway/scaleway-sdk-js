@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-03-13)
+
+### Features
+
+- **serverless_jobs:** add triggers of type cron ([#2811](https://github.com/scaleway/scaleway-sdk-js/issues/2811)) ([ad44a38](https://github.com/scaleway/scaleway-sdk-js/commit/ad44a388a1ac9017c99f8e267fbdda220c29a793))
+
 ## [2.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-jobs@2.3.0...@scaleway/sdk-jobs@2.3.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-jobs

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.6.0 (2026-03-13)
+
+### Features
+
+- **iam:** add `GetSamlCertificate` method ([#2826](https://github.com/scaleway/scaleway-sdk-js/issues/2826)) ([b3a130e](https://github.com/scaleway/scaleway-sdk-js/commit/b3a130ed9315de5a2ce0e61f28c92b2f51d6a785))
+
 # [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@2.4.0...@scaleway/sdk-iam@2.5.0) (2026-03-05)
 
 ### Features

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.5.2 (2026-03-13)
+
+### Bug Fixes
+
+- **datawarehouse:** limit deployment cpu_max to be gte 2 DTWH-399 ([#2822](https://github.com/scaleway/scaleway-sdk-js/issues/2822)) ([a4c198d](https://github.com/scaleway/scaleway-sdk-js/commit/a4c198d893764e3c2e076279666b4e2d4ab66e7a))
+
 ## [2.5.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-datawarehouse@2.5.0...@scaleway/sdk-datawarehouse@2.5.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-datawarehouse

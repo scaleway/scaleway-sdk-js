@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "description": "Scaleway SDK TS.",
   "license": "Apache-2.0",
   "files": [
@@ -79,6 +79,5 @@
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*"
-  },
-  "devDependencies": {}
+  }
 }
