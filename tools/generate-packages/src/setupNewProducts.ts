@@ -19,7 +19,7 @@ import { join, resolve } from 'node:path'
 import { cwd } from 'node:process'
 import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
-import { snakeToSlug } from './helpers'
+import { snakeToSlug } from './helpers.ts'
 
 type Scope = '@scaleway' | '@scaleway-internal'
 
@@ -209,11 +209,11 @@ function updateSdkPackageJson(
   }
 
   // sort deps
-  const sortObj = (o: Record<string, string>) =>
+  const sortObj = (o: Record<string, string>): Record<string, string> =>
     Object.fromEntries(
       Object.keys(o)
         .sort()
-        .map(k => [k, o[k]]),
+        .map(k => [k, o[k]] as [string, string]),
     )
 
   sdkPackage.dependencies = sortObj(sdkPackage.dependencies)
