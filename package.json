@@ -74,7 +74,7 @@
     "@manypkg/cli": "0.25.1",
     "@scaleway/generate-react-sdk": "workspace:*",
     "@scaleway/tsconfig": "1.1.4",
-    "@typescript/native-preview": "7.0.0-dev.20260305.1",
+    "@typescript/native-preview": "7.0.0-dev.20260313.1",
     "@vitest/coverage-istanbul": "3.2.4",
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
