@@ -28,6 +28,7 @@ export type {
   GetMaintenanceRequest,
   GetSnapshotRequest,
   Instance,
+  InstanceSetting,
   InstanceSnapshotSchedule,
   InstanceStatus,
   ListDatabasesRequest,
