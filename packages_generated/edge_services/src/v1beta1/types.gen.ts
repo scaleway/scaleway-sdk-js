@@ -77,6 +77,8 @@ export type PipelineErrorCode =
   | 'tls_key_too_many'
   | 'tls_managed_domain_rate_limit'
   | 'tls_managed_internal'
+  | 'tls_managed_unsupported'
+  | 'tls_not_wildcard'
   | 'tls_pair_mismatch'
   | 'tls_root_inconsistent'
   | 'tls_root_incorrect'
@@ -405,6 +407,10 @@ export interface DNSStage {
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
   backendStageId?: string
+  /**
+   * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
+   */
+  wildcardDomain: boolean
 }
 
 
@@ -647,6 +653,10 @@ export interface PlanDetails {
    * Number of backends per pipeline included in subscription plan.
    */
   backendLimit: number
+  /**
+   * Support of wildcard subdomains for the customized domain.
+   */
+  wildcardDomain: boolean
 }
 
 
@@ -912,6 +922,10 @@ export type CreateDNSStageRequest = {
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
   backendStageId?: string
+  /**
+   * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
+   */
+  wildcardDomain?: boolean
 }
 
 
@@ -1777,6 +1791,10 @@ export type UpdateDNSStageRequest = {
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
   backendStageId?: string
+  /**
+   * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
+   */
+  wildcardDomain?: boolean
 }
 
 
