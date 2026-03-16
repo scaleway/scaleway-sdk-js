@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-03-16)
+
+### Features
+
+- **rdb:** add generation_v3 ([#2829](https://github.com/scaleway/scaleway-sdk-js/issues/2829)) ([1821d6f](https://github.com/scaleway/scaleway-sdk-js/commit/1821d6ff886dc538fc24d8f2c8e38bb431aca71c))
+
 ## [2.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-rdb@2.3.0...@scaleway/sdk-rdb@2.3.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-rdb

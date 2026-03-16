@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2026-03-16)
+
+### Features
+
+- **edge_services:** add routing documentation ([#2830](https://github.com/scaleway/scaleway-sdk-js/issues/2830)) ([41c6be2](https://github.com/scaleway/scaleway-sdk-js/commit/41c6be2b93d71a2dafb4c7cf2d5d8460687288ae))
+
 # [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.6.0...@scaleway/sdk-edge-services@2.7.0) (2026-03-09)
 
 ### Features
