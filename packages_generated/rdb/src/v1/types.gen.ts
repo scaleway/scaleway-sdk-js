@@ -849,7 +849,7 @@ export interface NodeType {
   /**
    * @deprecated The Node Type is compliant with Block Storage.
    */
-  isBssdCompatible: boolean
+  isBssdCompatible?: boolean
   /**
    * The Node Type is currently disabled.
    */
