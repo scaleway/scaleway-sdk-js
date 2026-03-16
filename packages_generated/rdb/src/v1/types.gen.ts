@@ -551,7 +551,7 @@ export interface ACLRule {
   /**
    * @deprecated 
    */
-  port: number
+  port?: number
 }
 
 
