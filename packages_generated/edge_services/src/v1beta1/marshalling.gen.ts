@@ -201,6 +201,7 @@ export const unmarshalDNSStage = (data: unknown): DNSStage => {
     tlsStageId: data.tls_stage_id,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
+    wildcardDomain: data.wildcard_domain,
   } as DNSStage
 }
 
@@ -450,6 +451,7 @@ const unmarshalPlanDetails = (data: unknown): PlanDetails => {
     pipelineLimit: data.pipeline_limit,
     planName: data.plan_name,
     wafRequests: data.waf_requests,
+    wildcardDomain: data.wildcard_domain,
   } as PlanDetails
 }
 
@@ -888,7 +890,8 @@ export const marshalCreateDNSStageRequest = (
   request: CreateDNSStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  fqdns: request.fqdns,  
+  fqdns: request.fqdns,
+  wildcard_domain: request.wildcardDomain,  
   ...resolveOneOf([
     {param: 'tls_stage_id',
       value: request.tlsStageId,
@@ -1088,7 +1091,8 @@ export const marshalUpdateDNSStageRequest = (
   request: UpdateDNSStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  fqdns: request.fqdns,  
+  fqdns: request.fqdns,
+  wildcard_domain: request.wildcardDomain,  
   ...resolveOneOf([
     {param: 'tls_stage_id',
       value: request.tlsStageId,
