@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.6.0 (2026-03-13)
+
+### Features
+
+- **product_catalog:** add managed mongoDB information to admin and public API ([#2823](https://github.com/scaleway/scaleway-sdk-js/issues/2823)) ([c68e966](https://github.com/scaleway/scaleway-sdk-js/commit/c68e966f63947432b0ebb98c19cfb9f3dd48bc46))
+
 ## [2.5.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.5.0...@scaleway/sdk-product-catalog@2.5.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-product-catalog

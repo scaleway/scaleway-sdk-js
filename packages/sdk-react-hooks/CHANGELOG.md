@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.3.0...@scaleway/sdk-react-hooks@0.3.1) (2026-03-16)
+
+**Note:** Version bump only for package @scaleway/sdk-react-hooks
+
+# 0.3.0 (2026-03-13)
+
+### Bug Fixes
+
+- **bin:** rename bin ([#2815](https://github.com/scaleway/scaleway-sdk-js/issues/2815)) ([71c5292](https://github.com/scaleway/scaleway-sdk-js/commit/71c52924554585fd4f0a401eae9736c909dbc3c6))
+- **format:** format package.json ([#2817](https://github.com/scaleway/scaleway-sdk-js/issues/2817)) ([98b9859](https://github.com/scaleway/scaleway-sdk-js/commit/98b9859279bd5072be6596aee71d7974a14ba592))
+- **sdk-react-hooks:** codegen ([#2827](https://github.com/scaleway/scaleway-sdk-js/issues/2827)) ([7768138](https://github.com/scaleway/scaleway-sdk-js/commit/7768138ac8d33ded10ff1087fd35c72d7af488cf))
+
+### Features
+
+- **generate-react-queries:** add reload hook codegen ([#2814](https://github.com/scaleway/scaleway-sdk-js/issues/2814)) ([1444713](https://github.com/scaleway/scaleway-sdk-js/commit/1444713dfbc2282a5064ae945d558f52a59c894d))
+
 ## 0.2.2 (2026-03-09)
 
 ### Bug Fixes

@@ -11,6 +11,7 @@ export { useIamv1alpha1APIGetOrganizationScimQuery } from './useIamv1alpha1APIGe
 export { useIamv1alpha1APIGetOrganizationSecuritySettingsQuery } from './useIamv1alpha1APIGetOrganizationSecuritySettingsQuery'
 export { useIamv1alpha1APIGetPolicyQuery } from './useIamv1alpha1APIGetPolicyQuery'
 export { useIamv1alpha1APIGetQuotumQuery } from './useIamv1alpha1APIGetQuotumQuery'
+export { useIamv1alpha1APIGetSamlCertificateQuery } from './useIamv1alpha1APIGetSamlCertificateQuery'
 export { useIamv1alpha1APIGetSSHKeyQuery } from './useIamv1alpha1APIGetSSHKeyQuery'
 export { useIamv1alpha1APIGetUserConnectionsQuery } from './useIamv1alpha1APIGetUserConnectionsQuery'
 export { useIamv1alpha1APIGetUserQuery } from './useIamv1alpha1APIGetUserQuery'
