@@ -99,6 +99,8 @@ export type {
   RouteRule,
   RouteStage,
   RuleHttpMatch,
+  RuleHttpMatchHostFilter,
+  RuleHttpMatchHostFilterHostFilterType,
   RuleHttpMatchMethodFilter,
   RuleHttpMatchPathFilter,
   RuleHttpMatchPathFilterPathFilterType,
