@@ -13,6 +13,9 @@ export type ProductCategory =
   | 'object_storage'
   | 'load_balancer'
   | 'kubernetes'
+  | 'managed_relational_databases'
+  | 'managed_mongodb'
+  | 'managed_redis'
 
 export type ReportType =
   | 'unknown_report_type'
@@ -26,6 +29,7 @@ export type ServiceCategory =
   | 'storage'
   | 'network'
   | 'containers'
+  | 'databases'
 
 export interface Impact {
   /**
