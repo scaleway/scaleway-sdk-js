@@ -38,6 +38,7 @@ import type {
   HostingApiRemoveCustomDomainRequest,
   HostingApiUpdateHostingFreeDomainRequest,
   HostingApiUpdateHostingRequest,
+  HostingCommitment,
   HostingDomain,
   HostingDomainCustomDomain,
   HostingSummary,
@@ -346,21 +347,6 @@ const unmarshalPlatformControlPanelUrls = (data: unknown): PlatformControlPanelU
   } as PlatformControlPanelUrls
 }
 
-const unmarshalControlPanel = (data: unknown): ControlPanel => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ControlPanel' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    available: data.available,
-    availableLanguages: data.available_languages,
-    logoUrl: data.logo_url,
-    name: data.name,
-  } as ControlPanel
-}
-
 const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -377,6 +363,21 @@ const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
     price: data.price ? unmarshalMoney(data.price) : undefined,
     type: data.type,
   } as OfferCommitment
+}
+
+const unmarshalControlPanel = (data: unknown): ControlPanel => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ControlPanel' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    available: data.available,
+    availableLanguages: data.available_languages,
+    logoUrl: data.logo_url,
+    name: data.name,
+  } as ControlPanel
 }
 
 const unmarshalOfferOption = (data: unknown): OfferOption => {
@@ -409,6 +410,21 @@ const unmarshalPlatformControlPanel = (data: unknown): PlatformControlPanel => {
     name: data.name,
     urls: data.urls ? unmarshalPlatformControlPanelUrls(data.urls) : undefined,
   } as PlatformControlPanel
+}
+
+const unmarshalHostingCommitment = (data: unknown): HostingCommitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'HostingCommitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    deleteHostingAtEnd: data.delete_hosting_at_end,
+    endAt: unmarshalDate(data.end_at),
+    offerCommitment: data.offer_commitment ? unmarshalOfferCommitment(data.offer_commitment) : undefined,
+    startAt: unmarshalDate(data.start_at),
+  } as HostingCommitment
 }
 
 const unmarshalHostingUser = (data: unknown): HostingUser => {
@@ -474,6 +490,7 @@ export const unmarshalHosting = (data: unknown): Hosting => {
   }
 
   return {
+    commitment: data.commitment ? unmarshalHostingCommitment(data.commitment) : undefined,
     createdAt: unmarshalDate(data.created_at),
     dnsStatus: data.dns_status,
     domain: data.domain,
@@ -957,6 +974,7 @@ export const marshalHostingApiCreateHostingRequest = (
   domain_configuration: ((request.domainConfiguration !== undefined) ?  marshalCreateHostingRequestDomainConfiguration(request.domainConfiguration, defaults): undefined),
   email: request.email,
   language: request.language,
+  offer_commitment_id: request.offerCommitmentId,
   offer_id: request.offerId,
   offer_options: ((request.offerOptions !== undefined) ?  request.offerOptions.map(elt => marshalOfferOptionRequest(elt, defaults)): undefined),
   project_id: request.projectId ?? defaults.defaultProjectId,

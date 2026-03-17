@@ -91,6 +91,7 @@ export type {
   HostingApiResetHostingRequest,
   HostingApiUpdateHostingFreeDomainRequest,
   HostingApiUpdateHostingRequest,
+  HostingCommitment,
   HostingDomain,
   HostingDomainCustomDomain,
   HostingStatus,
