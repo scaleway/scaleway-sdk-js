@@ -127,6 +127,10 @@ export type PurgeRequestStatus =
   | 'error'
   | 'pending'
 
+export type RuleHttpMatchHostFilterHostFilterType =
+  | 'unknown_host_filter'
+  | 'regex'
+
 export type RuleHttpMatchMethodFilter =
   | 'unknown_method_filter'
   | 'get'
@@ -184,6 +188,12 @@ export interface ScalewayLb {
    * Defines whether to forward websocket requests to the load balancer.
    */
   hasWebsocket?: boolean
+}
+
+
+export interface RuleHttpMatchHostFilter {
+  hostFilterType: RuleHttpMatchHostFilterHostFilterType
+  value: string
 }
 
 
@@ -271,6 +281,10 @@ export interface RuleHttpMatch {
    * HTTP URL path to filter for. A request whose path matches the given filter will be considered to match the rule. All paths will match if none is provided.
    */
   pathFilter?: RuleHttpMatchPathFilter
+  /**
+   * Host to filter for. A request whose host matches the given filter will be considered to match the rule. All hosts will match if none is provided.
+   */
+  hostFilter?: RuleHttpMatchHostFilter
 }
 
 

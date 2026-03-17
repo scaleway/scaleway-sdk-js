@@ -48,6 +48,7 @@ import type {
   RouteRule,
   RouteStage,
   RuleHttpMatch,
+  RuleHttpMatchHostFilter,
   RuleHttpMatchPathFilter,
   ScalewayLb,
   ScalewayLbBackendConfig,
@@ -347,6 +348,19 @@ export const unmarshalPurgeRequest = (data: unknown): PurgeRequest => {
   } as PurgeRequest
 }
 
+const unmarshalRuleHttpMatchHostFilter = (data: unknown): RuleHttpMatchHostFilter => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RuleHttpMatchHostFilter' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    hostFilterType: data.host_filter_type,
+    value: data.value,
+  } as RuleHttpMatchHostFilter
+}
+
 const unmarshalRuleHttpMatchPathFilter = (data: unknown): RuleHttpMatchPathFilter => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -368,6 +382,7 @@ const unmarshalRuleHttpMatch = (data: unknown): RuleHttpMatch => {
   }
 
   return {
+    hostFilter: data.host_filter ? unmarshalRuleHttpMatchHostFilter(data.host_filter) : undefined,
     methodFilters: data.method_filters,
     pathFilter: data.path_filter ? unmarshalRuleHttpMatchPathFilter(data.path_filter) : undefined,
   } as RuleHttpMatch
@@ -707,6 +722,14 @@ export const unmarshalSetRouteRulesResponse = (data: unknown): SetRouteRulesResp
   } as SetRouteRulesResponse
 }
 
+const marshalRuleHttpMatchHostFilter = (
+  request: RuleHttpMatchHostFilter,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  host_filter_type: request.hostFilterType,
+  value: request.value,
+})
+
 const marshalRuleHttpMatchPathFilter = (
   request: RuleHttpMatchPathFilter,
   defaults: DefaultValues,
@@ -719,6 +742,7 @@ const marshalRuleHttpMatch = (
   request: RuleHttpMatch,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  host_filter: ((request.hostFilter !== undefined) ?  marshalRuleHttpMatchHostFilter(request.hostFilter, defaults): undefined),
   method_filters:  request.methodFilters,
   path_filter: ((request.pathFilter !== undefined) ?  marshalRuleHttpMatchPathFilter(request.pathFilter, defaults): undefined),
 })
