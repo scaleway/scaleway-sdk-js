@@ -5,6 +5,8 @@ import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type {
   Cluster,
+  ClusterMonoAZDetails,
+  ClusterMultiAZDetails,
   ClusterSetting,
   CreateClusterRequest,
   CreateClusterRequestVolumeSpec,
@@ -72,6 +74,29 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   } as Endpoint
 }
 
+const unmarshalClusterMonoAZDetails = (data: unknown): ClusterMonoAZDetails => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterMonoAZDetails' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    zone: data.zone,
+  } as ClusterMonoAZDetails
+}
+
+const unmarshalClusterMultiAZDetails = (data: unknown): ClusterMultiAZDetails => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ClusterMultiAZDetails' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as ClusterMultiAZDetails
+}
+
 const unmarshalClusterSetting = (data: unknown): ClusterSetting => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -112,6 +137,8 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     createdAt: unmarshalDate(data.created_at),
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
+    monoAz: data.mono_az ? unmarshalClusterMonoAZDetails(data.mono_az) : undefined,
+    multiAz: data.multi_az ? unmarshalClusterMultiAZDetails(data.multi_az) : undefined,
     name: data.name,
     nodeAmount: data.node_amount,
     nodeType: data.node_type,
@@ -327,6 +354,19 @@ const marshalEndpointSpecPublicDetails = (
 ): Record<string, unknown> => ({
 })
 
+const marshalClusterMonoAZDetails = (
+  request: ClusterMonoAZDetails,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  zone: request.zone,
+})
+
+const marshalClusterMultiAZDetails = (
+  request: ClusterMultiAZDetails,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+})
+
 const marshalCreateClusterRequestVolumeSpec = (
   request: CreateClusterRequestVolumeSpec,
   defaults: DefaultValues,
@@ -364,7 +404,17 @@ export const marshalCreateClusterRequest = (
   tags: request.tags,
   user_name: request.userName,
   version: request.version,
-  volume: ((request.volume !== undefined) ?  marshalCreateClusterRequestVolumeSpec(request.volume, defaults): undefined),
+  volume: ((request.volume !== undefined) ?  marshalCreateClusterRequestVolumeSpec(request.volume, defaults): undefined),  
+  ...resolveOneOf([
+    {param: 'multi_az',
+      value: (request.multiAz !== undefined) ? marshalClusterMultiAZDetails(request.multiAz, defaults)
+      : undefined,
+    },
+    {param: 'mono_az',
+      value: (request.monoAz !== undefined) ? marshalClusterMonoAZDetails(request.monoAz, defaults)
+      : undefined,
+    },
+  ]),
 })
 
 export const marshalCreateEndpointRequest = (

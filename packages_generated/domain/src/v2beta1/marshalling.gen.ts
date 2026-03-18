@@ -1217,6 +1217,7 @@ export const unmarshalSearchAvailableDomainsResponse = (data: unknown): SearchAv
 
   return {
     availableDomains: unmarshalArrayOfObject(data.available_domains, unmarshalAvailableDomain),
+    exactMatchDomain: data.exact_match_domain ? unmarshalAvailableDomain(data.exact_match_domain) : undefined,
   } as SearchAvailableDomainsResponse
 }
 

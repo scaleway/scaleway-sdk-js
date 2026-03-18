@@ -243,26 +243,6 @@ export interface HostingDomainCustomDomain {
 }
 
 
-export interface ControlPanel {
-  /**
-   * Control panel name.
-   */
-  name: string
-  /**
-   * Define if the control panel type is available to order.
-   */
-  available: boolean
-  /**
-   * URL of the control panel's logo.
-   */
-  logoUrl: string
-  /**
-   * List of available languages for the control panel.
-   */
-  availableLanguages: StdLanguageCode[]
-}
-
-
 export interface OfferCommitment {
   /**
    * Offer commitment ID.
@@ -292,6 +272,26 @@ export interface OfferCommitment {
    * Next offer commitment.
    */
   next?: OfferCommitment
+}
+
+
+export interface ControlPanel {
+  /**
+   * Control panel name.
+   */
+  name: string
+  /**
+   * Define if the control panel type is available to order.
+   */
+  available: boolean
+  /**
+   * URL of the control panel's logo.
+   */
+  logoUrl: string
+  /**
+   * List of available languages for the control panel.
+   */
+  availableLanguages: StdLanguageCode[]
 }
 
 
@@ -472,6 +472,28 @@ export interface Nameserver {
    * Defines whether the nameserver is the default one.
    */
   isDefault: boolean
+}
+
+
+export interface HostingCommitment {
+  /**
+   * Offer commitment for the specified hosting.
+   */
+  offerCommitment?: OfferCommitment
+  /**
+   * Date and time the commitment started.
+   */
+  startAt?: Date
+  /**
+   * Date and time the commitment ends.
+   */
+  endAt?: Date
+  /**
+   * The hosting may be deleted, automatically renewed, or switched to
+its configured post-commitment offer, which may have a different 
+price and billing period.
+   */
+  deleteHostingAtEnd: boolean
 }
 
 
@@ -1488,6 +1510,10 @@ export interface Hosting {
    * Domain configuration block (subdomain, optional custom domain, and DNS settings).
    */
   domainInfo?: HostingDomain
+  /**
+   * Commitment details to which the hosting is engaged.
+   */
+  commitment?: HostingCommitment
 }
 
 
@@ -1556,6 +1582,10 @@ export type HostingApiCreateHostingRequest = {
    * Indicates whether to update hosting domain name servers and DNS records for domains managed by Scaleway Elements (deprecated, use auto_update_* fields instead).
    */
   autoConfigDomainDns?: AutoConfigDomainDns
+  /**
+   * Offer commitment ID to which the hosting will be engaged.
+   */
+  offerCommitmentId?: string
 }
 
 
