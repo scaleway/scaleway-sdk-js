@@ -153,6 +153,12 @@ export interface Endpoint {
 }
 
 
+export interface InstanceSetting {
+  name: string
+  value: string
+}
+
+
 export interface InstanceSnapshotSchedule {
   frequencyHours: number
   retentionDays: number
@@ -308,6 +314,10 @@ export interface Instance {
    * Snapshot schedule configuration of the Database Instance.
    */
   snapshotSchedule?: InstanceSnapshotSchedule
+  /**
+   * List of settings applied to the Database Instance.
+   */
+  settings: InstanceSetting[]
 }
 
 
