@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
 
 
 export type ClusterStatus =
@@ -90,6 +90,24 @@ export interface EndpointSpecPrivateNetworkDetails {
 
 
 export interface EndpointSpecPublicDetails {
+}
+
+
+/**
+ * MonoAZ details.
+ */
+export interface ClusterMonoAZDetails {
+  /**
+   * Zone is the zone on which the cluster nodes are deployed.
+   */
+  zone?: ScwZone
+}
+
+
+/**
+ * MultiAZ details.
+ */
+export interface ClusterMultiAZDetails {
 }
 
 
@@ -316,6 +334,18 @@ export interface Cluster {
    * Region the Kafka cluster is in.
    */
   region: ScwRegion
+  /**
+   * MultiAZ tell the cluster is deployed on multiple availability zones in the region.
+   *
+   * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
+   */
+  multiAz?: ClusterMultiAZDetails
+  /**
+   * MonoAZ details.
+   *
+   * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
+   */
+  monoAz?: ClusterMonoAZDetails
 }
 
 
@@ -425,6 +455,18 @@ export type CreateClusterRequest = {
    * Password for the kafka user.
    */
   password?: string
+  /**
+   * MultiAZ tell the cluster is deployed on multiple availability zones in the region.
+   *
+   * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
+   */
+  multiAz?: ClusterMultiAZDetails
+  /**
+   * MonoAZ details.
+   *
+   * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
+   */
+  monoAz?: ClusterMonoAZDetails
 }
 
 

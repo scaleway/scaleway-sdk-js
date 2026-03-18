@@ -7,6 +7,8 @@ export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
   Cluster,
+  ClusterMonoAZDetails,
+  ClusterMultiAZDetails,
   ClusterSetting,
   ClusterStatus,
   CreateClusterRequest,
