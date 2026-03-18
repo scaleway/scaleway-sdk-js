@@ -1655,6 +1655,10 @@ export type RegistrarApiSearchAvailableDomainsRequest = {
    * Search exact match.
    */
   strictSearch: boolean
+  /**
+   * If an exact match is found, include it in response as a separate element.
+   */
+  includeExactMatch: boolean
 }
 
 
@@ -1811,6 +1815,10 @@ export interface SearchAvailableDomainsResponse {
    * Array of available domains.
    */
   availableDomains: AvailableDomain[]
+  /**
+   * If an exact match was asked and found, the result is in this field.
+   */
+  exactMatchDomain?: AvailableDomain
 }
 
 

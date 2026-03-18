@@ -1232,6 +1232,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
         path: `/domain/v2beta1/search-domains`,
         urlParams: urlParams(
           ['domains', request.domains],
+          ['include_exact_match', request.includeExactMatch],
           ['strict_search', request.strictSearch],
           ['tlds', request.tlds],
         ),
