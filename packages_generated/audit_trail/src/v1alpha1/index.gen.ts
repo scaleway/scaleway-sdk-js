@@ -90,11 +90,11 @@ export type {
   SetEnabledAlertRulesResponse,
   SystemEvent,
   SystemEventKind,
+  VpcConnectorInfo,
   VpcGwGatewayInfo,
   VpcGwGatewayNetworkInfo,
   VpcPrivateNetworkInfo,
   VpcRouteInfo,
   VpcSubnetInfo,
-  VpcVpcConnectorInfo,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'
