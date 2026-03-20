@@ -43,9 +43,6 @@ generate-alias:
 generate-packages:
 	pnpm run generatePackages
 
-generate-global-sdk-package:
-	pnpm run generateGlobalSdkPackage
-
 setup-new-products:
 	pnpm run setupNewProducts
 
