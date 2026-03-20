@@ -93,6 +93,7 @@
     "react": "^19.2.4",
     "read-pkg": "10.1.0",
     "shx": "0.4.0",
+    "tinyglobby": "0.2.15",
     "tsc-alias": "1.8.16",
     "turbo": "2.8.20",
     "typedoc": "0.28.17",
