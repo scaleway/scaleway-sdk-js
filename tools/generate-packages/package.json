@@ -1,0 +1,38 @@
+{
+  "name": "@scaleway/generate-packages",
+  "version": "0.1.0",
+  "description": "Code generation scripts for Scaleway SDK packages",
+  "type": "module",
+  "private": false,
+  "bin": {
+    "generatePackages": "./dist/generatePackages.js",
+    "generateAlias": "./dist/generateAlias.js",
+    "setupNewProducts": "./dist/setupNewProducts.js",
+    "fix-import-extensions": "./dist/fix-import-extensions.js"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "exports": {
+    "./helpers": {
+      "types": "./dist/helpers.d.ts",
+      "default": "./dist/helpers.js"
+    }
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "directory": "tools/generate-packages"
+  },
+  "scripts": {
+    "build": "tsgo -p tsconfig.build.json",
+    "package:check": "pnpm publint",
+    "typecheck": "tsgo -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.35"
+  }
+}

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {
   appendFileSync,
   readdirSync,
@@ -6,22 +7,11 @@ import {
   writeFileSync,
 } from 'node:fs'
 import { join } from 'node:path'
+import { snakeToPascal, snakeToSlug } from './helpers.ts'
 
 const GENERATED_PATH = 'packages_generated'
 const OUTPUT_PATH = 'packages/sdk/src/index.gen.ts'
 
-const toPascal = (s: string) =>
-  s
-    .split(/[_-]/)
-    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('')
-
-const toSlug = (s: string) => s.replace(/_/g, '-')
-
-/**
- * Extract real export names from package's index.gen.ts
- * This ensures we use the exact same names as exported by the package
- */
 const getExportsFromPackage = (packagePath: string): string[] => {
   const indexPath = join(packagePath, 'src', 'index.gen.ts')
   try {
@@ -32,7 +22,7 @@ const getExportsFromPackage = (packagePath: string): string[] => {
 
     match = exportPattern.exec(content)
     while (match !== null) {
-      exports.push(match[1])
+      if (match[1]) exports.push(match[1])
       match = exportPattern.exec(content)
     }
 
@@ -45,7 +35,6 @@ const getExportsFromPackage = (packagePath: string): string[] => {
 
 const services = readdirSync(GENERATED_PATH).filter(folder => {
   const fullPath = join(GENERATED_PATH, folder)
-
   return statSync(fullPath).isDirectory()
 })
 
@@ -60,11 +49,10 @@ let importsOutput = ''
 writeFileSync(OUTPUT_PATH, AUTO_GENERATE_MESSAGE)
 
 for (const service of services) {
-  const slug = toSlug(service)
-  const pascal = toPascal(service)
+  const slug = snakeToSlug(service)
+  const pascal = snakeToPascal(service)
   const packagePath = join(GENERATED_PATH, service)
 
-  // Get real exports from the package
   let exportedNames: string[] = []
   try {
     exportedNames = getExportsFromPackage(packagePath)
@@ -76,13 +64,10 @@ for (const service of services) {
   }
 
   if (exportedNames.length > 0) {
-    const imports: string[] = []
     const versionsImport: string[] = []
     const mappings: string[] = []
 
     for (const exportName of exportedNames) {
-      // Extract version from export name (e.g., K8Sv1 -> v1, S2SVpnv1alpha1 -> v1alpha1)
-      // Version must start with lowercase 'v' followed by digits
       const versionMatch = exportName.match(/(v\d+[a-z]*\d*)$/)
       if (versionMatch) {
         const version = versionMatch[1]
@@ -90,14 +75,11 @@ for (const service of services) {
         mappings.push(`  ${version}: ${exportName},`)
       }
     }
-    imports.push(
-      `import { ${versionsImport.join(', ')} } from '@scaleway/sdk-${slug}'`,
-    )
 
-    importsOutput += `${imports.join('\n')}\n`
-    const importedNames = imports
-      .map(line => /{ (.*?) }/.exec(line)?.[1])
-      .join(', ')
+    const importLine = `import { ${versionsImport.join(', ')} } from '@scaleway/sdk-${slug}'`
+    importsOutput += `${importLine}\n`
+
+    const importedNames = versionsImport.join(', ')
 
     output +=
       `/**\n` +
@@ -107,6 +89,7 @@ for (const service of services) {
     output += `export const ${pascal} = {\n${mappings.join('\n')}\n}\n\n`
   }
 }
+
 appendFileSync(OUTPUT_PATH, importsOutput)
 appendFileSync(
   OUTPUT_PATH,
