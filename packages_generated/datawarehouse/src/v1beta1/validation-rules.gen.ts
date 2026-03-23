@@ -72,7 +72,7 @@ export const DeleteUserRequest = {
 
 export const Deployment = {
   cpuMax: {
-    greaterThanOrEqual: 1,
+    greaterThanOrEqual: 2,
     lessThanOrEqual: 15,
   },
   cpuMin: {
