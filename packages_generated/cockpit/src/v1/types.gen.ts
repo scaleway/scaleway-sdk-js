@@ -336,6 +336,10 @@ export interface Exporter {
    * A timestamp of the last update date of the data export.
    */
   updatedAt?: Date
+  /**
+   * The region in which the export is located.
+   */
+  region: ScwRegion
 }
 
 
