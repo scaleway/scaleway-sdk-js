@@ -44,6 +44,8 @@ generate-packages:
 	pnpm run generatePackages
 
 setup-new-products:
+	pnpm turbo build --filter=@scaleway/generate-packages
+	pnpm install
 	pnpm run setupNewProducts
 
 publish: install-dependencies
