@@ -130,7 +130,7 @@ export const tryAtIntervals = async <T>(
  *
  * @public
  */
-export type WaitForStopCondition<T> = (obj: T) => Promise<boolean>
+export type WaitForStopCondition<T> = (obj: T) => Promise<boolean> | boolean
 
 /**
  * The options to wait until a resource is ready.
