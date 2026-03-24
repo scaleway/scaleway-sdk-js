@@ -31,7 +31,10 @@ import {
  * - src/index.gen.ts (version re-exports)
  */
 
-const TEMPLATES_DIR = join(dirname(fileURLToPath(import.meta.url)), '../templates')
+const TEMPLATES_DIR = join(
+  dirname(fileURLToPath(import.meta.url)),
+  '../templates',
+)
 
 const TEMPLATES = {
   PACKAGE_JSON: join(TEMPLATES_DIR, 'package.tmpl'),
@@ -57,11 +60,7 @@ const DEFAULT_GENERATED_EXPORT_PATH = 'index.gen.ts'
 
 const CUSTOM = {
   PRODUCT_EXPORT: new Set(['std']),
-  PRODUCT_VERSION_EXPORT: new Set([
-    '',
-    'instance/v1',
-    'k8s/v1',
-  ]),
+  PRODUCT_VERSION_EXPORT: new Set(['', 'instance/v1', 'k8s/v1']),
 }
 
 const AUTO_GENERATE_MESSAGE = `/**
@@ -124,7 +123,10 @@ const main = () => {
 
           exportProductVersions({ productDir })
           copyFileSync(TEMPLATES.TS_CONFIG, join(fullPath, 'tsconfig.json'))
-          copyFileSync(TEMPLATES.TS_CONFIG_BUILD, join(fullPath, 'tsconfig.build.json'))
+          copyFileSync(
+            TEMPLATES.TS_CONFIG_BUILD,
+            join(fullPath, 'tsconfig.build.json'),
+          )
           copyFileSync(TEMPLATES.VITE_CONFIG, join(fullPath, 'vite.config.ts'))
 
           const readmeFilePath = join(fullPath, 'README.md')
