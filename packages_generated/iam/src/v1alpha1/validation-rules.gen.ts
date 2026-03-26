@@ -71,6 +71,7 @@ export const CreateUserRequestMember = {
   },
   password: {
     ignoreEmpty: true,
+    maxBytes: 72,
   },
   username: {
     maxLength: 150,
@@ -332,6 +333,13 @@ export const UpdateSamlRequest = {
   },
   singleSignOnUrl: {
     prefix: "https://",
+  },
+}
+
+export const UpdateUserPasswordRequest = {
+  password: {
+    maxBytes: 72,
+    minBytes: 1,
   },
 }
 

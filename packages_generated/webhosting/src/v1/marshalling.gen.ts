@@ -188,10 +188,10 @@ export const unmarshalHostingSummary = (data: unknown): HostingSummary => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status,
+    dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
     domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : undefined,
-    domainStatus: data.domain_status,
+    domainStatus: data.domain_status ? data.domain_status : undefined,
     id: data.id,
     offerName: data.offer_name,
     projectId: data.project_id,
@@ -309,7 +309,7 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
 
   return {
     autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
-    dnsConfig: data.dns_config,
+    dnsConfig: data.dns_config ? data.dns_config : undefined,
     nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
     records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
     status: data.status,
@@ -326,7 +326,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
   return {
     autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
     availableActions: data.available_actions,
-    availableDnsActions: data.available_dns_actions,
+    availableDnsActions: data.available_dns_actions ? data.available_dns_actions : undefined,
     name: data.name,
     owner: data.owner,
     status: data.status,
@@ -492,10 +492,10 @@ export const unmarshalHosting = (data: unknown): Hosting => {
   return {
     commitment: data.commitment ? unmarshalHostingCommitment(data.commitment) : undefined,
     createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status,
+    dnsStatus: data.dns_status ? data.dns_status : undefined,
     domain: data.domain,
     domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : undefined,
-    domainStatus: data.domain_status,
+    domainStatus: data.domain_status ? data.domain_status : undefined,
     id: data.id,
     ipv4: data.ipv4,
     offer: data.offer ? unmarshalOffer(data.offer) : undefined,
