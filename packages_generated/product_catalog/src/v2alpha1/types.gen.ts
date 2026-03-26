@@ -271,6 +271,26 @@ export interface PublicCatalogProductPropertiesKubernetesKosmosNodeType {
 }
 
 
+export interface PublicCatalogProductPropertiesLoadBalancerIPV4Type {
+}
+
+
+export interface PublicCatalogProductPropertiesLoadBalancerNodeType {
+  /**
+   * The offer ID of the Load Balancer product.
+   */
+  offerId: string
+  /**
+   * Whether the Load Balancer product is available for multi-cloud providers.
+   */
+  multiCloudProvider: boolean
+  /**
+   * The bandwidth of the Load Balancer product in bits per second.
+   */
+  bandwidth: number
+}
+
+
 export interface PublicCatalogProductPropertiesManagedMongoDBManagementType {
 }
 
@@ -355,11 +375,11 @@ export interface PublicCatalogProductPropertiesBlockStorage {
   /**
    * @deprecated The minimum size of storage volume for this product in bytes. Deprecated.
    */
-  minVolumeSize: number
+  minVolumeSize?: number
   /**
    * @deprecated The maximum size of storage volume for this product in bytes. Deprecated.
    */
-  maxVolumeSize: number
+  maxVolumeSize?: number
 }
 
 
@@ -461,6 +481,18 @@ export interface PublicCatalogProductPropertiesKubernetes {
 
 
 export interface PublicCatalogProductPropertiesLoadBalancer {
+  /**
+   * The properties related to Load Balancer nodes.
+   *
+   * One-of ('type'): at most one of 'node', 'ipv4' could be set.
+   */
+  node?: PublicCatalogProductPropertiesLoadBalancerNodeType
+  /**
+   * The properties related to Load Balancer IPv4.
+   *
+   * One-of ('type'): at most one of 'node', 'ipv4' could be set.
+   */
+  ipv4?: PublicCatalogProductPropertiesLoadBalancerIPV4Type
 }
 
 

@@ -37,6 +37,8 @@ export type {
   PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType,
   PublicCatalogProductPropertiesKubernetesKosmosNodeType,
   PublicCatalogProductPropertiesLoadBalancer,
+  PublicCatalogProductPropertiesLoadBalancerIPV4Type,
+  PublicCatalogProductPropertiesLoadBalancerNodeType,
   PublicCatalogProductPropertiesManagedInference,
   PublicCatalogProductPropertiesManagedMongoDB,
   PublicCatalogProductPropertiesManagedMongoDBManagementType,
