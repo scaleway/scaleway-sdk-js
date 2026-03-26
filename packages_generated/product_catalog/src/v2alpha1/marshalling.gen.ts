@@ -27,6 +27,8 @@ import type {
   PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType,
   PublicCatalogProductPropertiesKubernetesKosmosNodeType,
   PublicCatalogProductPropertiesLoadBalancer,
+  PublicCatalogProductPropertiesLoadBalancerIPV4Type,
+  PublicCatalogProductPropertiesLoadBalancerNodeType,
   PublicCatalogProductPropertiesManagedInference,
   PublicCatalogProductPropertiesManagedMongoDB,
   PublicCatalogProductPropertiesManagedMongoDBManagementType,
@@ -179,6 +181,31 @@ const unmarshalPublicCatalogProductPropertiesKubernetesKosmosNodeType = (data: u
 
   return {
   } as PublicCatalogProductPropertiesKubernetesKosmosNodeType
+}
+
+const unmarshalPublicCatalogProductPropertiesLoadBalancerIPV4Type = (data: unknown): PublicCatalogProductPropertiesLoadBalancerIPV4Type => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesLoadBalancerIPV4Type' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesLoadBalancerIPV4Type
+}
+
+const unmarshalPublicCatalogProductPropertiesLoadBalancerNodeType = (data: unknown): PublicCatalogProductPropertiesLoadBalancerNodeType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesLoadBalancerNodeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    bandwidth: data.bandwidth,
+    multiCloudProvider: data.multi_cloud_provider,
+    offerId: data.offer_id,
+  } as PublicCatalogProductPropertiesLoadBalancerNodeType
 }
 
 const unmarshalPublicCatalogProductPropertiesManagedMongoDBManagementType = (data: unknown): PublicCatalogProductPropertiesManagedMongoDBManagementType => {
@@ -437,6 +464,8 @@ const unmarshalPublicCatalogProductPropertiesLoadBalancer = (data: unknown): Pub
   }
 
   return {
+    ipv4: data.ipv4 ? unmarshalPublicCatalogProductPropertiesLoadBalancerIPV4Type(data.ipv4) : undefined,
+    node: data.node ? unmarshalPublicCatalogProductPropertiesLoadBalancerNodeType(data.node) : undefined,
   } as PublicCatalogProductPropertiesLoadBalancer
 }
 
