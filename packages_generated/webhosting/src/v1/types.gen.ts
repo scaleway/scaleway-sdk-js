@@ -693,7 +693,7 @@ export interface HostingSummary {
   /**
    * @deprecated Main domain associated with the Web Hosting plan (deprecated, use domain_info).
    */
-  domain: string
+  domain?: string
   /**
    * Whether the hosting is protected or not.
    */
@@ -701,7 +701,7 @@ export interface HostingSummary {
   /**
    * @deprecated DNS status of the Web Hosting plan.
    */
-  dnsStatus: DnsRecordsStatus
+  dnsStatus?: DnsRecordsStatus
   /**
    * Name of the active offer for the Web Hosting plan.
    */
@@ -709,7 +709,7 @@ export interface HostingSummary {
   /**
    * @deprecated Main domain status of the Web Hosting plan.
    */
-  domainStatus: DomainStatus
+  domainStatus?: DomainStatus
   /**
    * Region where the Web Hosting plan is hosted.
    */
@@ -1245,19 +1245,19 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
   /**
    * @deprecated Whether or not to synchronize the web records (deprecated, use auto_config_domain_dns).
    */
-  updateWebRecords: boolean
+  updateWebRecords?: boolean
   /**
    * @deprecated Whether or not to synchronize the mail records (deprecated, use auto_config_domain_dns).
    */
-  updateMailRecords: boolean
+  updateMailRecords?: boolean
   /**
    * @deprecated Whether or not to synchronize all types of records. This one has priority (deprecated, use auto_config_domain_dns).
    */
-  updateAllRecords: boolean
+  updateAllRecords?: boolean
   /**
    * @deprecated Whether or not to synchronize domain nameservers (deprecated, use auto_config_domain_dns).
    */
-  updateNameservers: boolean
+  updateNameservers?: boolean
   /**
    * @deprecated Custom records to synchronize.
    */
@@ -1285,7 +1285,7 @@ export interface DnsRecords {
   /**
    * @deprecated Records dns auto configuration settings (deprecated, use auto_config_domain_dns).
    */
-  dnsConfig: DomainDnsAction[]
+  dnsConfig?: DomainDnsAction[]
   /**
    * Whether or not to synchronize each types of records.
    */
@@ -1317,7 +1317,7 @@ export interface Domain {
   /**
    * @deprecated A list of DNS-related actions that can be auto configured for the domain (deprecated, use auto_config_domain_dns instead).
    */
-  availableDnsActions: DomainDnsAction[]
+  availableDnsActions?: DomainDnsAction[]
   /**
    * Whether or not to synchronize each type of record.
    */
@@ -1469,7 +1469,7 @@ export interface Hosting {
   /**
    * @deprecated Main domain associated with the Web Hosting plan (deprecated, use domain_info).
    */
-  domain: string
+  domain?: string
   /**
    * Details of the Web Hosting plan offer and options.
    */
@@ -1485,7 +1485,7 @@ export interface Hosting {
   /**
    * @deprecated DNS status of the Web Hosting plan (deprecated, use domain_info).
    */
-  dnsStatus: DnsRecordsStatus
+  dnsStatus?: DnsRecordsStatus
   /**
    * Current IPv4 address of the hosting.
    */
@@ -1501,7 +1501,7 @@ export interface Hosting {
   /**
    * @deprecated Main domain status of the Web Hosting plan (deprecated, use domain_info).
    */
-  domainStatus: DomainStatus
+  domainStatus?: DomainStatus
   /**
    * Region where the Web Hosting plan is hosted.
    */
@@ -2097,7 +2097,7 @@ export interface ResetHostingPasswordResponse {
   /**
    * @deprecated New temporary password (deprecated, use password_b64 instead).
    */
-  oneTimePassword: string
+  oneTimePassword?: string
   /**
    * New temporary password, encoded in base64.
    */
