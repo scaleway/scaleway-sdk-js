@@ -81,7 +81,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['search', request.search],
           ['statuses', request.statuses],
         ),
@@ -252,7 +252,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Update a mailbox name, recovery email, subscription period or password with its ID.. Update a mailbox name, recovery email, subscription period or password with its ID.
+   * Update a mailbox subscription period or password with its ID.. Update a mailbox subscription period or password with its ID.
    *
    * @param request - The request {@link UpdateMailboxRequest}
    * @returns A Promise of Mailbox

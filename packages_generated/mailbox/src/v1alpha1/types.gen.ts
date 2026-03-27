@@ -71,8 +71,6 @@ export type MailboxSubscriptionPeriod =
 export interface BatchCreateMailboxesRequestMailboxParameters {
   localPart: string
   password: string
-  displayName?: string
-  recoveryEmail?: string
 }
 
 
@@ -86,17 +84,9 @@ export interface Mailbox {
    */
   domainId: string
   /**
-   * Name of the mailbox.
-   */
-  displayName: string
-  /**
    * Email address of the mailbox as local_part@domain.
    */
   email: string
-  /**
-   * Recovery email for the mailbox.
-   */
-  recoveryEmail: string
   /**
    * Status of the mailbox.
    */
@@ -435,14 +425,6 @@ export type UpdateMailboxRequest = {
    * ID of the mailbox to update.
    */
   mailboxId: string
-  /**
-   * (Optional) New display name of the mailbox.
-   */
-  displayName?: string
-  /**
-   * (Optional) New recovery email for the mailbox.
-   */
-  recoveryEmail?: string
   /**
    * (Optional) New subscription period for the mailbox.
    */
