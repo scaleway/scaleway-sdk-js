@@ -720,7 +720,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['platform_id', request.platformId],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalListBookingsResponse,
