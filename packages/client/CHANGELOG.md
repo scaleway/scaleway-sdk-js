@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.2.2 (2026-03-27)
+
+### Bug Fixes
+
+- **client:** flexible type for waiter ([#2851](https://github.com/scaleway/scaleway-sdk-js/issues/2851)) ([711eb6b](https://github.com/scaleway/scaleway-sdk-js/commit/711eb6b135a85957b1aadeec53d96e3ba6f84570))
+
 ## [2.2.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-client@2.2.0...@scaleway/sdk-client@2.2.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-client

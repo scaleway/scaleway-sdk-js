@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+
+### Features
+
+- **audit_trail:** add instance_private_nic resource type ([#2855](https://github.com/scaleway/scaleway-sdk-js/issues/2855)) ([351cc4d](https://github.com/scaleway/scaleway-sdk-js/commit/351cc4d90552c1446bba27ec87fbacbc1990bb69))
+
 # [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.6.1...@scaleway/sdk-audit-trail@2.7.0) (2026-03-09)
 
 ### Features
