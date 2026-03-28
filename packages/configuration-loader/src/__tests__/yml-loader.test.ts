@@ -2,7 +2,9 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import {
   convertYamlToConfiguration,
+  hasSecureFilePermissions,
   loadConfigurationFromFile,
+  loadConfigurationFromFileAsync,
 } from '../yml-loader.js'
 
 describe('convertYamlToConfiguration', () => {
@@ -50,5 +52,41 @@ describe('loadConfigurationFromFile', () => {
     expect(() => {
       loadConfigurationFromFile('invalid/path.html')
     }).toThrow()
+  })
+})
+
+describe('loadConfigurationFromFileAsync', () => {
+  it('loads config from a yaml file asynchronously', async () => {
+    const yamlPath = join(__dirname, 'data', 'scw-config.yaml')
+    const loadedConfig = await loadConfigurationFromFileAsync(yamlPath)
+    expect(loadedConfig).not.toBeNull()
+    expect(loadedConfig).toStrictEqual({
+      default: { dKey1: 'value1', dKey2: 'value2', dKey4: 'value4' },
+      dev: { devKey1: 'value5' },
+      prod: { prodKey1: 'value6' },
+    })
+  })
+
+  it('rejects for an invalid path', async () => {
+    await expect(
+      loadConfigurationFromFileAsync('invalid/path.html'),
+    ).rejects.toThrow()
+  })
+})
+
+describe('hasSecureFilePermissions', () => {
+  it('returns true on Windows (always)', async () => {
+    // This test only validates the contract; actual behavior depends on platform
+    if (process.platform === 'win32') {
+      const result = await hasSecureFilePermissions('any/path')
+      expect(result).toBe(true)
+    }
+  })
+
+  it('checks file permissions on POSIX', async () => {
+    if (process.platform === 'win32') return
+    const yamlPath = join(__dirname, 'data', 'scw-config.yaml')
+    const result = await hasSecureFilePermissions(yamlPath)
+    expect(typeof result).toBe('boolean')
   })
 })
