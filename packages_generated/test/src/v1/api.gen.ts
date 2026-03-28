@@ -74,7 +74,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalListHumansResponse,
