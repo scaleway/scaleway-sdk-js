@@ -7,7 +7,7 @@
     "tools/*"
   ],
   "engines": {
-    "node": ">=20.19.0",
+    "node": ">=20.20.2",
     "pnpm": ">=10.30.3"
   },
   "type": "module",
