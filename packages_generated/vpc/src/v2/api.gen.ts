@@ -25,6 +25,7 @@ import {
   unmarshalDeleteSubnetsResponse,
   unmarshalGetAclResponse,
   unmarshalListPrivateNetworksResponse,
+  unmarshalListSubnetOverlapsResponse,
   unmarshalListSubnetsResponse,
   unmarshalListVPCConnectorsResponse,
   unmarshalListVPCsResponse,
@@ -58,6 +59,8 @@ import type {
   GetVPCRequest,
   ListPrivateNetworksRequest,
   ListPrivateNetworksResponse,
+  ListSubnetOverlapsRequest,
+  ListSubnetOverlapsResponse,
   ListSubnetsRequest,
   ListSubnetsResponse,
   ListVPCConnectorsRequest,
@@ -111,7 +114,7 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['routing_enabled', request.routingEnabled],
           ['tags', request.tags],
         ),
@@ -212,7 +215,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['private_network_ids', request.privateNetworkIds],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['tags', request.tags],
           ['vpc_id', request.vpcId],
         ),
@@ -364,7 +367,7 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['subnet_ids', request.subnetIds],
           ['vpc_id', request.vpcId],
         ),
@@ -542,7 +545,7 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['status', request.status],
           ['tags', request.tags],
           ['target_vpc_id', request.targetVpcId],
@@ -630,6 +633,30 @@ export class API extends ParentAPI {
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}`,
       },
     )
+
+  
+  protected pageOfListSubnetOverlaps = (request: Readonly<ListSubnetOverlapsRequest>) =>
+    this.client.fetch<ListSubnetOverlapsResponse>(
+      {
+        method: 'GET',
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}/subnet-overlaps`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+        ),
+      },
+      unmarshalListSubnetOverlapsResponse,
+    )
+  
+  /**
+   * List subnet overlaps.. List subnet overlaps between the VPCConnector VPC and the target VPC or for a specific subnet if specified.
+   *
+   * @param request - The request {@link ListSubnetOverlapsRequest}
+   * @returns A Promise of ListSubnetOverlapsResponse
+   */
+  listSubnetOverlaps = (request: Readonly<ListSubnetOverlapsRequest>) =>
+    enrichForPagination('subnetOverlaps', this.pageOfListSubnetOverlaps, request)
 
   
 }

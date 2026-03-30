@@ -19,6 +19,16 @@ export const AclRule = {
   },
 }
 
+export const ListSubnetOverlapsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 1000,
+  },
+}
+
 export const Route = {
   description: {
     maxLength: 200,

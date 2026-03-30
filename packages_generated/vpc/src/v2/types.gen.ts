@@ -20,6 +20,12 @@ export type ListPrivateNetworksRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type ListSubnetOverlapsRequestOrderBy =
+  | 'subnet_asc'
+  | 'subnet_desc'
+  | 'target_subnet_asc'
+  | 'target_subnet_desc'
+
 export type ListSubnetsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -234,6 +240,14 @@ export interface AclRule {
    * Rule description.
    */
   description?: string
+}
+
+
+export interface ListSubnetOverlapsResponseSubnetOverlap {
+  subnetId: string
+  subnet: string
+  targetSubnetId: string
+  targetSubnet: string
 }
 
 
@@ -703,6 +717,36 @@ export type ListPrivateNetworksRequest = {
 
 export interface ListPrivateNetworksResponse {
   privateNetworks: PrivateNetwork[]
+  totalCount: number
+}
+
+
+export type ListSubnetOverlapsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * VPCConnector ID.
+   */
+  vpcConnectorId: string
+  /**
+   * Sort order of the returned Subnet overlaps.
+   */
+  orderBy?: ListSubnetOverlapsRequestOrderBy
+  /**
+   * Page number to return, from the paginated results.
+   */
+  page?: number
+  /**
+   * Maximum number of Subnet overlaps to return per page.
+   */
+  pageSize?: number
+}
+
+
+export interface ListSubnetOverlapsResponse {
+  subnetOverlaps: ListSubnetOverlapsResponseSubnetOverlap[]
   totalCount: number
 }
 
