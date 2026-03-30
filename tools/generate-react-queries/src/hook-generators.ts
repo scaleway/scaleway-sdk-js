@@ -1,0 +1,325 @@
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import type {
+  QueriesMetadata,
+  QueryMethod,
+  ReactQueriesConfig,
+  ServiceMetadata,
+} from './config.ts'
+import { capitalize, lowerCaseFirst } from './config.ts'
+
+// --- Template engine ---
+
+const templatesDir = join(fileURLToPath(import.meta.url), '../../templates')
+const hookTemplate = readFileSync(join(templatesDir, 'hook.tmpl'), 'utf-8')
+const reloadTemplate = readFileSync(join(templatesDir, 'reload.tmpl'), 'utf-8')
+
+/**
+ * Simple template renderer with {{var}}, {{#if}}/{{/if}}, {{#unless}}/{{/unless}}.
+ * Uses a recursive descent parser (not regex) to handle nested blocks correctly.
+ */
+function render(
+  template: string,
+  vars: Record<string, string | boolean>,
+): string {
+  const result = renderBlock(template, vars)
+  return result.replace(/\n{3,}/g, '\n\n')
+}
+
+function renderBlock(
+  text: string,
+  vars: Record<string, string | boolean>,
+): string {
+  let result = ''
+  let i = 0
+
+  while (i < text.length) {
+    const tagStart = text.indexOf('{{', i)
+    if (tagStart === -1) {
+      result += text.slice(i)
+      break
+    }
+
+    result += text.slice(i, tagStart)
+    const tagEnd = text.indexOf('}}', tagStart)
+    const tag = text.slice(tagStart + 2, tagEnd)
+
+    if (tag.startsWith('#if ') || tag.startsWith('#unless ')) {
+      const isUnless = tag.startsWith('#unless ')
+      const key = tag.slice(isUnless ? 8 : 4).trim()
+      const closeTag = isUnless ? `{{/unless}}` : `{{/if}}`
+      const { content, end } = findClosingBlock(text, tagEnd + 2, closeTag)
+      const show = isUnless ? !vars[key] : !!vars[key]
+      if (show) result += renderBlock(content, vars)
+      i = end
+    } else {
+      // Variable replacement
+      result += vars[tag] !== undefined ? String(vars[tag]) : ''
+      i = tagEnd + 2
+    }
+  }
+
+  return result
+}
+
+/**
+ * Find the matching closing tag, respecting nested blocks of the same type.
+ * Returns the content between open and close tags, and the position after the close tag.
+ */
+function findClosingBlock(
+  text: string,
+  start: number,
+  closeTag: string,
+): { content: string; end: number } {
+  const openIf = '{{#if '
+  const openUnless = '{{#unless '
+  let depth = 1
+  let i = start
+
+  // Skip the newline after the opening tag
+  if (text[i] === '\n') i++
+
+  const contentStart = i
+
+  while (i < text.length && depth > 0) {
+    const next = text.indexOf('{{', i)
+    if (next === -1) break
+
+    const tagEnd = text.indexOf('}}', next)
+    const tag = text.slice(next, tagEnd + 2)
+
+    if (tag.startsWith(openIf) || tag.startsWith(openUnless)) {
+      depth++
+    } else if (tag === closeTag || tag === '{{/if}}' || tag === '{{/unless}}') {
+      depth--
+      if (depth === 0) {
+        const content = text.slice(contentStart, next)
+        let end = tagEnd + 2
+        if (text[end] === '\n') end++
+        return { content, end }
+      }
+    }
+    i = tagEnd + 2
+  }
+
+  return { content: text.slice(contentStart), end: text.length }
+}
+
+// --- Naming helpers ---
+
+function nsType(ns: string, type: string, rawTypes: Set<string>): string {
+  return rawTypes.has(type) ? type : `${ns}.${type}`
+}
+
+function resolveNames(
+  method: QueryMethod,
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  config: ReactQueriesConfig,
+  sdkPackageName: string,
+) {
+  const { folderName } = metadata
+  const rawTypes = new Set(config.filters.rawTypes)
+
+  const apiImportName = `${folderName}${service.apiClass}`
+  const apiHookName = `${config.naming.hookPrefix}${capitalize(apiImportName)}`
+  const apiVarName = apiImportName.replace(/API$/, '')
+  const apiImportPath = `${config.imports.apiSdkPath}/${lowerCaseFirst(apiImportName)}`
+
+  const ns = capitalize(folderName)
+  const paramsType = nsType(ns, method.paramsType, rawTypes)
+  const returnType = nsType(ns, method.returnType, rawTypes)
+
+  return {
+    folderName,
+    apiHookName,
+    apiVarName,
+    apiImportPath,
+    sdkPackageName,
+    ns,
+    paramsType,
+    returnType,
+    rawTypes,
+  }
+}
+
+// --- Hook generators ---
+
+export function generateQueryHook(
+  method: QueryMethod,
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  config: ReactQueriesConfig,
+  sdkPackageName: string,
+): string {
+  const n = resolveNames(method, service, metadata, config, sdkPackageName)
+  const hasParams = !!method.paramsType
+  const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}Query`
+
+  const needsNsImport =
+    n.returnType.startsWith(`${n.ns}.`) ||
+    (hasParams && n.paramsType.startsWith(`${n.ns}.`))
+
+  const keyArray = hasParams
+    ? `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`
+    : `"${n.apiVarName}", "${method.methodName}"`
+
+  return render(hookTemplate, {
+    apiHookName: n.apiHookName,
+    apiImportPath: n.apiImportPath,
+    needsNsImport,
+    ns: n.ns,
+    sdkPackageName: n.sdkPackageName,
+    dataLoaderPackage: config.imports.dataLoaderPackage,
+    generatedComment: config.generatedComment,
+    hookName: `${config.naming.hookPrefix}${hookSuffix}`,
+    paramsType: n.paramsType,
+    returnType: n.returnType,
+    apiVarName: n.apiVarName,
+    methodName: method.methodName,
+    hasParams,
+    isAll: false,
+    isInfinite: false,
+    keyArray,
+  })
+}
+
+export function generateAllQueryHook(
+  method: QueryMethod,
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  config: ReactQueriesConfig,
+  sdkPackageName: string,
+): string {
+  const n = resolveNames(method, service, metadata, config, sdkPackageName)
+  const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery`
+
+  const rawItemType = method.listItemType
+  const itemType = rawItemType
+    ? nsType(n.ns, rawItemType, n.rawTypes)
+    : n.returnType
+
+  return render(hookTemplate, {
+    apiHookName: n.apiHookName,
+    apiImportPath: n.apiImportPath,
+    needsNsImport: true,
+    ns: n.ns,
+    sdkPackageName: n.sdkPackageName,
+    dataLoaderPackage: config.imports.dataLoaderPackage,
+    generatedComment: config.generatedComment,
+    hookName: `${config.naming.hookPrefix}${hookSuffix}`,
+    paramsType: n.paramsType,
+    returnType: `${itemType}[]`,
+    apiVarName: n.apiVarName,
+    methodName: method.methodName,
+    hasParams: true,
+    isAll: true,
+    isInfinite: false,
+    keyArray: `"${n.apiVarName}", "${method.methodName}", "${config.naming.allKeySuffix}", ...Object.entries(params).flat(3).sort()`,
+  })
+}
+
+export function generateInfiniteQueryHook(
+  method: QueryMethod,
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  config: ReactQueriesConfig,
+  sdkPackageName: string,
+): string {
+  const n = resolveNames(method, service, metadata, config, sdkPackageName)
+  const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery`
+
+  return render(hookTemplate, {
+    apiHookName: n.apiHookName,
+    apiImportPath: n.apiImportPath,
+    needsNsImport: true,
+    ns: n.ns,
+    sdkPackageName: n.sdkPackageName,
+    dataLoaderPackage: config.imports.dataLoaderPackage,
+    generatedComment: config.generatedComment,
+    hookName: `${config.naming.hookPrefix}${hookSuffix}`,
+    paramsType: n.paramsType,
+    returnType: n.returnType,
+    apiVarName: n.apiVarName,
+    methodName: method.methodName,
+    hasParams: true,
+    isAll: false,
+    isInfinite: true,
+    keyArray: `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`,
+  })
+}
+
+export function generateReloadHook(
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  config: ReactQueriesConfig,
+): string {
+  const { folderName } = metadata
+  const apiImportName = `${folderName}${service.apiClass}`
+
+  return render(reloadTemplate, {
+    dataLoaderPackage: config.imports.dataLoaderPackage,
+    generatedComment: config.generatedComment,
+    hookName: `${config.naming.hookPrefix}${capitalize(apiImportName)}Reload`,
+    reloadFnName: `${config.naming.reloadPrefix}${capitalize(apiImportName)}`,
+    asyncReloadFnName: `async${config.naming.reloadPrefix}${capitalize(apiImportName)}`,
+    apiKey: apiImportName.replace(/API$/, ''),
+  })
+}
+
+export function generateIndexFile(
+  services: ServiceMetadata[],
+  metadata: QueriesMetadata,
+  config: ReactQueriesConfig,
+): string {
+  const { folderName } = metadata
+  const skipMethods = new Set(config.filters.skipMethods)
+  const exports: string[] = []
+
+  for (const service of services) {
+    const serviceName = `${capitalize(folderName)}${service.apiClass}`
+
+    for (const method of service.methods) {
+      if (skipMethods.has(method.methodName)) continue
+      if (config.filters.skipPrivateMethods && method.isPrivate) continue
+
+      const baseName = capitalize(method.methodName)
+      exports.push(
+        `export { ${config.naming.hookPrefix}${serviceName}${baseName}Query } from "./${config.naming.hookPrefix}${serviceName}${baseName}Query"`,
+      )
+
+      if (method.isList) {
+        exports.push(
+          `export { ${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery"`,
+        )
+        if (
+          !(
+            config.filters.skipCursorAllHooks &&
+            method.paginationType === 'cursor'
+          )
+        ) {
+          exports.push(
+            `export { ${config.naming.hookPrefix}${serviceName}${baseName}AllQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}AllQuery"`,
+          )
+        }
+      }
+
+      if (method.hasWaiter) {
+        const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
+        exports.push(
+          `export { ${config.naming.hookPrefix}${serviceName}${waiterName}Query } from "./${config.naming.hookPrefix}${serviceName}${waiterName}Query"`,
+        )
+      }
+    }
+
+    exports.push(
+      `export { ${config.naming.hookPrefix}${serviceName}Reload } from "./${config.naming.hookPrefix}${serviceName}Reload"`,
+    )
+  }
+
+  return `${config.generatedComment}
+
+${exports.join('\n')}
+`
+}

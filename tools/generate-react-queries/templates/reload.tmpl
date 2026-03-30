@@ -1,0 +1,12 @@
+import { useDataLoaderContext } from "{{dataLoaderPackage}}"
+
+{{generatedComment}}
+export const {{hookName}} = (): { {{reloadFnName}}: () => void; {{asyncReloadFnName}}: () => Promise<void> } => {
+  const dataLoader = useDataLoaderContext()
+  const keyPrefix = ["{{apiKey}}"]
+
+  return {
+    {{reloadFnName}}: () => dataLoader.reloadGroupActive(keyPrefix).catch(() => null),
+    {{asyncReloadFnName}}: () => dataLoader.reloadGroupActive(keyPrefix),
+  }
+}

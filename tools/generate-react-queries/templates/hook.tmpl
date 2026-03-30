@@ -1,0 +1,49 @@
+import { {{apiHookName}} } from "{{apiImportPath}}"
+{{#if needsNsImport}}
+import type { {{ns}} } from "{{sdkPackageName}}"
+{{/if}}
+{{#if isInfinite}}
+import type { UseInfiniteDataLoaderConfig } from "{{dataLoaderPackage}}"
+import { useInfiniteDataLoader } from "{{dataLoaderPackage}}"
+{{/if}}
+{{#unless isInfinite}}
+import type { UseDataLoaderConfig } from "{{dataLoaderPackage}}"
+import { useDataLoader } from "{{dataLoaderPackage}}"
+{{/unless}}
+
+{{generatedComment}}
+{{#if isInfinite}}
+export const {{hookName}} = (
+  params: {{paramsType}},
+  pageParamKey: keyof typeof params,
+  dataloaderConfig?: UseInfiniteDataLoaderConfig<{{returnType}}, Error, typeof params, typeof pageParamKey>,
+): ReturnType<typeof useInfiniteDataLoader<{{returnType}}, Error, typeof params, typeof pageParamKey>> => {
+  const { {{apiVarName}} } = {{apiHookName}}()
+  const key = [{{keyArray}}]
+
+  return useInfiniteDataLoader(key, (requestParams) => {{apiVarName}}.{{methodName}}(requestParams), params, pageParamKey, dataloaderConfig)
+}
+{{/if}}
+{{#unless isInfinite}}
+{{#if hasParams}}
+export const {{hookName}} = (
+  params: {{paramsType}},
+  dataloaderConfig?: UseDataLoaderConfig<{{returnType}}, Error>,
+): ReturnType<typeof useDataLoader<{{returnType}}, Error>> => {
+  const { {{apiVarName}} } = {{apiHookName}}()
+  const key = [{{keyArray}}]
+
+  return useDataLoader(key, () => {{apiVarName}}.{{methodName}}(params){{#if isAll}}.all(){{/if}}, dataloaderConfig)
+}
+{{/if}}
+{{#unless hasParams}}
+export const {{hookName}} = (
+  dataloaderConfig?: UseDataLoaderConfig<{{returnType}}, Error>,
+): ReturnType<typeof useDataLoader<{{returnType}}, Error>> => {
+  const { {{apiVarName}} } = {{apiHookName}}()
+  const key = [{{keyArray}}]
+
+  return useDataLoader(key, () => {{apiVarName}}.{{methodName}}(), dataloaderConfig)
+}
+{{/unless}}
+{{/unless}}
