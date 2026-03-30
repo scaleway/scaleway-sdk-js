@@ -15,6 +15,8 @@ import type {
   DeleteSubnetsResponse,
   GetAclResponse,
   ListPrivateNetworksResponse,
+  ListSubnetOverlapsResponse,
+  ListSubnetOverlapsResponseSubnetOverlap,
   ListSubnetsResponse,
   ListVPCConnectorsResponse,
   ListVPCsResponse,
@@ -225,6 +227,34 @@ export const unmarshalListPrivateNetworksResponse = (data: unknown): ListPrivate
     privateNetworks: unmarshalArrayOfObject(data.private_networks, unmarshalPrivateNetwork),
     totalCount: data.total_count,
   } as ListPrivateNetworksResponse
+}
+
+const unmarshalListSubnetOverlapsResponseSubnetOverlap = (data: unknown): ListSubnetOverlapsResponseSubnetOverlap => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubnetOverlapsResponseSubnetOverlap' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    subnet: data.subnet,
+    subnetId: data.subnet_id,
+    targetSubnet: data.target_subnet,
+    targetSubnetId: data.target_subnet_id,
+  } as ListSubnetOverlapsResponseSubnetOverlap
+}
+
+export const unmarshalListSubnetOverlapsResponse = (data: unknown): ListSubnetOverlapsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubnetOverlapsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    subnetOverlaps: unmarshalArrayOfObject(data.subnet_overlaps, unmarshalListSubnetOverlapsResponseSubnetOverlap),
+    totalCount: data.total_count,
+  } as ListSubnetOverlapsResponse
 }
 
 export const unmarshalListSubnetsResponse = (data: unknown): ListSubnetsResponse => {
