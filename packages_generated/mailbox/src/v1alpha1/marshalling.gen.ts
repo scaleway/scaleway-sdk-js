@@ -25,13 +25,11 @@ export const unmarshalMailbox = (data: unknown): Mailbox => {
   return {
     createdAt: unmarshalDate(data.created_at),
     deletionScheduledAt: unmarshalDate(data.deletion_scheduled_at),
-    displayName: data.display_name,
     domainId: data.domain_id,
     email: data.email,
     id: data.id,
     nextSubscriptionPeriod: data.next_subscription_period,
     nextSubscriptionPeriodStartsAt: unmarshalDate(data.next_subscription_period_starts_at),
-    recoveryEmail: data.recovery_email,
     status: data.status,
     subscriptionPeriod: data.subscription_period,
     subscriptionPeriodStartedAt: unmarshalDate(data.subscription_period_started_at),
@@ -149,10 +147,8 @@ const marshalBatchCreateMailboxesRequestMailboxParameters = (
   request: BatchCreateMailboxesRequestMailboxParameters,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  display_name: request.displayName,
   local_part: request.localPart,
   password: request.password,
-  recovery_email: request.recoveryEmail,
 })
 
 export const marshalBatchCreateMailboxesRequest = (
@@ -176,8 +172,6 @@ export const marshalUpdateMailboxRequest = (
   request: UpdateMailboxRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  display_name: request.displayName,
   new_password: request.newPassword,
-  recovery_email: request.recoveryEmail,
   subscription_period: request.subscriptionPeriod,
 })

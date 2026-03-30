@@ -2,10 +2,6 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 
 export const BatchCreateMailboxesRequestMailboxParameters = {
-  displayName: {
-    maxLength: 64,
-    minLength: 1,
-  },
   localPart: {
     maxLength: 64,
     minLength: 1,
@@ -13,10 +9,6 @@ export const BatchCreateMailboxesRequestMailboxParameters = {
   password: {
     maxLength: 128,
     minLength: 12,
-  },
-  recoveryEmail: {
-    maxLength: 320,
-    minLength: 6,
   },
 }
 
@@ -48,16 +40,8 @@ export const ListMailboxesRequest = {
 }
 
 export const UpdateMailboxRequest = {
-  displayName: {
-    maxLength: 64,
-    minLength: 1,
-  },
   newPassword: {
     maxLength: 128,
     minLength: 12,
-  },
-  recoveryEmail: {
-    maxLength: 320,
-    minLength: 6,
   },
 }
