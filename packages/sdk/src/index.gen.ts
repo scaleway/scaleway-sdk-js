@@ -258,10 +258,10 @@ export const Jobs = {
 }
 
 /**
- * @deprecated Direct version exports are deprecated. Use the 'K8s' namespace instead (e.g., K8s.v1).
+ * @deprecated Direct version exports are deprecated. Use the 'K8S' namespace instead (e.g., K8S.v1).
  */
 export { K8Sv1 }
-export const K8s = {
+export const K8S = {
   v1: K8Sv1,
 }
 
@@ -371,10 +371,10 @@ export const Registry = {
 }
 
 /**
- * @deprecated Direct version exports are deprecated. Use the 'S2sVpn' namespace instead (e.g., S2sVpn.v1).
+ * @deprecated Direct version exports are deprecated. Use the 'S2SVpn' namespace instead (e.g., S2SVpn.v1).
  */
 export { S2SVpnv1alpha1 }
-export const S2sVpn = {
+export const S2SVpn = {
   v1alpha1: S2SVpnv1alpha1,
 }
 
