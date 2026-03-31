@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.7.0 (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+
+### Features
+
+- **environmental_footprint:** add databases filters for user api ([#2835](https://github.com/scaleway/scaleway-sdk-js/issues/2835)) ([e562c74](https://github.com/scaleway/scaleway-sdk-js/commit/e562c741fa9e33487714fdd4f105c79ed1743131))
+
 ## [2.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-environmental-footprint@2.6.0...@scaleway/sdk-environmental-footprint@2.6.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-environmental-footprint

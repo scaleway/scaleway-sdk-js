@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.4.0 (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+- **kafka:** fix project_id default ([#2853](https://github.com/scaleway/scaleway-sdk-js/issues/2853)) ([717aa31](https://github.com/scaleway/scaleway-sdk-js/commit/717aa3125638ce6dbf99c3136e28593f26a963aa))
+
+### Features
+
+- **kafka:** add a multi-az option on clusters ([#2840](https://github.com/scaleway/scaleway-sdk-js/issues/2840)) ([2e21e3d](https://github.com/scaleway/scaleway-sdk-js/commit/2e21e3dc8b6ecf1b20b81f9800d0bc7efb6b078d))
+
 ## [2.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-kafka@2.3.0...@scaleway/sdk-kafka@2.3.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-kafka

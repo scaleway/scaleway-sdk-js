@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.7.0 (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+
+### Features
+
+- **product_catalog:** add Load Balancer ([#2858](https://github.com/scaleway/scaleway-sdk-js/issues/2858)) ([183008f](https://github.com/scaleway/scaleway-sdk-js/commit/183008fe214a46fe4965706ef3b79089938b5374))
+
 # 2.6.0 (2026-03-13)
 
 ### Features
