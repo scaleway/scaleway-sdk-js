@@ -89,6 +89,9 @@ export const UpdateClusterRequest = {
     minLength: 1,
     pattern: /^[A-Za-z0-9\-_]+$/,
   },
+  version: {
+    pattern: /^[0-9]+\.[0-9]+\.[0-9]+$/,
+  },
 }
 
 export const UpdateUserRequest = {
