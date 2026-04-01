@@ -871,7 +871,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Create route stage. Create a new route stage. You must specify the `waf_stage_id` field to customize the route.
+   * Create route stage. Create a new route stage. You must specify the `waf_stage_id` or `backend_stage_id` fields to customize the route.
    *
    * @param request - The request {@link CreateRouteStageRequest}
    * @returns A Promise of RouteStage

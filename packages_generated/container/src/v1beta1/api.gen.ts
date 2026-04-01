@@ -114,7 +114,7 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalListNamespacesResponse,
@@ -170,7 +170,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  createNamespace = (request: Readonly<CreateNamespaceRequest>) =>
+  createNamespace = (request: Readonly<CreateNamespaceRequest> = {}) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(
@@ -232,7 +232,7 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
       },
       unmarshalListContainersResponse,

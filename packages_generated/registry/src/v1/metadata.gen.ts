@@ -1,0 +1,86 @@
+// This file was automatically generated. DO NOT EDIT.
+// If you have any remark or suggestion do not hesitate to open an issue.
+
+export const queriesMetadata = {
+  namespace: 'registry',
+  version: 'v1',
+  folderName: 'registryv1',
+  services: [
+    {
+      apiClass: 'API',
+      methods: [
+        {
+          methodName: 'listNamespaces',
+          protoName: 'ListNamespaces',
+          paramsType: 'ListNamespacesRequest',
+          returnType: 'ListNamespacesResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'Namespace',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'getNamespace',
+          protoName: 'GetNamespace',
+          paramsType: 'GetNamespaceRequest',
+          returnType: 'Namespace',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+          hasWaiter: true,
+        },
+        {
+          methodName: 'listImages',
+          protoName: 'ListImages',
+          paramsType: 'ListImagesRequest',
+          returnType: 'ListImagesResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'Image',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'getImage',
+          protoName: 'GetImage',
+          paramsType: 'GetImageRequest',
+          returnType: 'Image',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+          hasWaiter: true,
+        },
+        {
+          methodName: 'listTags',
+          protoName: 'ListTags',
+          paramsType: 'ListTagsRequest',
+          returnType: 'ListTagsResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'Tag',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'getTag',
+          protoName: 'GetTag',
+          paramsType: 'GetTagRequest',
+          returnType: 'Tag',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+          hasWaiter: true,
+        },
+      ],
+    },
+  ],
+} as const
+
+export type QueriesMetadata = typeof queriesMetadata
