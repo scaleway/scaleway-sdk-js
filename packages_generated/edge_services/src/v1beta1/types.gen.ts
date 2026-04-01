@@ -590,7 +590,7 @@ export interface WafStage {
 
 export interface SetRouteRulesRequestRouteRule {
   /**
-   * Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` field. Requests that do not match will be checked by the next rule's condition.
+   * Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` or `waf_stage_id` fields. Requests that do not match will be checked by the next rule's condition.
    *
    * One-of ('match'): at most one of 'ruleHttpMatch' could be set.
    */
@@ -612,7 +612,7 @@ export interface SetRouteRulesRequestRouteRule {
 
 export interface RouteRule {
   /**
-   * Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` field. Requests that do not match will be checked by the next rule's condition.
+   * Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` or `waf_stage_id` fields. Requests that do not match will be checked by the next rule's condition.
    *
    * One-of ('match'): at most one of 'ruleHttpMatch' could be set.
    */
@@ -777,7 +777,7 @@ export type AddRouteRulesRequest = {
    */
   routeStageId: string
   /**
-   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`.
+   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
    */
   routeRules?: SetRouteRulesRequestRouteRule[]
   /**
@@ -797,7 +797,7 @@ export type AddRouteRulesRequest = {
 
 export interface AddRouteRulesResponse {
   /**
-   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`.
+   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
    */
   routeRules: RouteRule[]
 }
@@ -991,6 +991,7 @@ export type CreateRouteStageRequest = {
    */
   wafStageId?: string
   /**
+   * ID of the backend stage HTTP requests should be forwarded to when no rules are matched.
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
@@ -1513,7 +1514,7 @@ export type ListRouteRulesRequest = {
 
 export interface ListRouteRulesResponse {
   /**
-   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`.
+   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
    */
   routeRules: RouteRule[]
   /**
@@ -1698,7 +1699,7 @@ export type SetRouteRulesRequest = {
    */
   routeStageId: string
   /**
-   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`.
+   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
    */
   routeRules?: SetRouteRulesRequestRouteRule[]
 }
@@ -1706,7 +1707,7 @@ export type SetRouteRulesRequest = {
 
 export interface SetRouteRulesResponse {
   /**
-   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the WAF stage defined by `waf_stage_id`.
+   * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
    */
   routeRules: RouteRule[]
 }
@@ -1840,6 +1841,7 @@ export type UpdateRouteStageRequest = {
    */
   wafStageId?: string
   /**
+   * ID of the backend stage HTTP requests should be forwarded to when no rules are matched.
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
