@@ -963,6 +963,14 @@ export interface LbType {
    */
   stockStatus: LbTypeStock
   /**
+   * Maximum bandwidth for a given Load Balancer type.
+   */
+  bandwidth: number
+  /**
+   * Ability to handle backend servers outside Scaleway for a given Load Balancer type.
+   */
+  multicloud: boolean
+  /**
    * Load Balancer commercial offer type description.
    */
   description: string
