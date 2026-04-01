@@ -81,7 +81,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          ['project_id', request.projectId],
           ['search', request.search],
           ['statuses', request.statuses],
         ),

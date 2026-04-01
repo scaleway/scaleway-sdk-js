@@ -221,7 +221,7 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize],
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          ['project_id', request.projectId],
         ),
       },
       unmarshalListDatabaseBackupsResponse,

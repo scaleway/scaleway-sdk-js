@@ -353,7 +353,7 @@ export class API extends ParentAPI {
           ['private_networks', request.privateNetworks
           && request.privateNetworks.length > 0 ? request.privateNetworks.join(',') : undefined],
           ['private_nic_mac_address', request.privateNicMacAddress],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['servers', request.servers
           && request.servers.length > 0 ? request.servers.join(',') : undefined],
           ['state', request.state],
@@ -641,7 +641,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['public', request.public],
           ['tags', request.tags],
         ),
@@ -754,7 +754,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['tags', request.tags],
         ),
       },
@@ -885,7 +885,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['tags', request.tags
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
           ['volume_type', request.volumeType],
@@ -984,7 +984,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['project_default', request.projectDefault],
           ['tags', request.tags
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
@@ -1240,7 +1240,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['tags', request.tags
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
         ),
@@ -1414,7 +1414,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['organization', request.organization],
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
           ['tags', request.tags
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
           ['type', request.type],
@@ -1605,7 +1605,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dashboard`,
         urlParams: urlParams(
           ['organization', request.organization],
-          ['project', request.project ?? this.client.settings.defaultProjectId],
+          ['project', request.project],
         ),
       },
       unmarshalGetDashboardResponse,
