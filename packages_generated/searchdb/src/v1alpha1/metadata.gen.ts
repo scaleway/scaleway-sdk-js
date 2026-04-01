@@ -1,0 +1,86 @@
+// This file was automatically generated. DO NOT EDIT.
+// If you have any remark or suggestion do not hesitate to open an issue.
+
+export const queriesMetadata = {
+  namespace: 'searchdb',
+  version: 'v1alpha1',
+  folderName: 'searchdbv1alpha1',
+  services: [
+    {
+      apiClass: 'API',
+      methods: [
+        {
+          methodName: 'getDeployment',
+          protoName: 'GetDeployment',
+          paramsType: 'GetDeploymentRequest',
+          returnType: 'Deployment',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+          hasWaiter: true,
+        },
+        {
+          methodName: 'listDeployments',
+          protoName: 'ListDeployments',
+          paramsType: 'ListDeploymentsRequest',
+          returnType: 'ListDeploymentsResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'Deployment',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listVersions',
+          protoName: 'ListVersions',
+          paramsType: 'ListVersionsRequest',
+          returnType: 'ListVersionsResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'Version',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listNodeTypes',
+          protoName: 'ListNodeTypes',
+          paramsType: 'ListNodeTypesRequest',
+          returnType: 'ListNodeTypesResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'NodeType',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listUsers',
+          protoName: 'ListUsers',
+          paramsType: 'ListUsersRequest',
+          returnType: 'ListUsersResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'User',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'getDeploymentCertificateAuthority',
+          protoName: 'GetDeploymentCertificateAuthority',
+          paramsType: 'GetDeploymentCertificateAuthorityRequest',
+          returnType: 'Blob',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+      ],
+    },
+  ],
+} as const
+
+export type QueriesMetadata = typeof queriesMetadata

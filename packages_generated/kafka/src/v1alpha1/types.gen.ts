@@ -682,6 +682,10 @@ export type UpdateClusterRequest = {
    * Tags of a Kafka Cluster.
    */
   tags?: string[]
+  /**
+   * Version of Kafka.
+   */
+  version?: string
 }
 
 

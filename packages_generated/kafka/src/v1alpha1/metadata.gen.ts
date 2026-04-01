@@ -1,0 +1,86 @@
+// This file was automatically generated. DO NOT EDIT.
+// If you have any remark or suggestion do not hesitate to open an issue.
+
+export const queriesMetadata = {
+  namespace: 'kafka',
+  version: 'v1alpha1',
+  folderName: 'kafkav1alpha1',
+  services: [
+    {
+      apiClass: 'API',
+      methods: [
+        {
+          methodName: 'listNodeTypes',
+          protoName: 'ListNodeTypes',
+          paramsType: 'ListNodeTypesRequest',
+          returnType: 'ListNodeTypesResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'NodeType',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listVersions',
+          protoName: 'ListVersions',
+          paramsType: 'ListVersionsRequest',
+          returnType: 'ListVersionsResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'Version',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listClusters',
+          protoName: 'ListClusters',
+          paramsType: 'ListClustersRequest',
+          returnType: 'ListClustersResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'Cluster',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'getCluster',
+          protoName: 'GetCluster',
+          paramsType: 'GetClusterRequest',
+          returnType: 'Cluster',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+          hasWaiter: true,
+        },
+        {
+          methodName: 'getClusterCertificateAuthority',
+          protoName: 'GetClusterCertificateAuthority',
+          paramsType: 'GetClusterCertificateAuthorityRequest',
+          returnType: 'Blob',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listUsers',
+          protoName: 'ListUsers',
+          paramsType: 'ListUsersRequest',
+          returnType: 'ListUsersResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'User',
+          isPrivate: false,
+          description: '"',
+        },
+      ],
+    },
+  ],
+} as const
+
+export type QueriesMetadata = typeof queriesMetadata

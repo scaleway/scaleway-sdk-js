@@ -229,6 +229,14 @@ export interface ClusterAutoscalerConfig {
    * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node, defaults to 600 (10 minutes).
    */
   maxGracefulTerminationSec: number
+  /**
+   * Cluster autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+   */
+  skipNodesWithLocalStorage: boolean
+  /**
+   * Cluster autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2. see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-increase-the-information-that-the-ca-is-logging for details.
+   */
+  logLevel: number
 }
 
 
@@ -367,6 +375,14 @@ export interface CreateClusterRequestAutoscalerConfig {
    * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node, defaults to 600 (10 minutes).
    */
   maxGracefulTerminationSec?: number
+  /**
+   * Cluster autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+   */
+  skipNodesWithLocalStorage?: boolean
+  /**
+   * Cluster autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2. see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-increase-the-information-that-the-ca-is-logging for details.
+   */
+  logLevel?: number
 }
 
 
@@ -694,7 +710,7 @@ export interface Cluster {
   /**
    * @deprecated Defines whether ACL is available on the cluster.
    */
-  aclAvailable: boolean
+  aclAvailable?: boolean
   /**
    * IAM group that nodes are members of (this field might be empty during early stage of cluster creation).
    */
@@ -945,6 +961,14 @@ export interface UpdateClusterRequestAutoscalerConfig {
    * Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node, defaults to 600 (10 minutes).
    */
   maxGracefulTerminationSec?: number
+  /**
+   * Cluster autoscaler will never delete nodes with pods with local storage, e.g. EmptyDir or HostPath, defaults to true.
+   */
+  skipNodesWithLocalStorage?: boolean
+  /**
+   * Cluster autoscaler logging level expressed from 0 to 4 (4 being the more verbose), defaults to 2. see https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-increase-the-information-that-the-ca-is-logging for details.
+   */
+  logLevel?: number
 }
 
 
