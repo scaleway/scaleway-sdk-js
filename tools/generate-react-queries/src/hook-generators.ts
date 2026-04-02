@@ -1,3 +1,10 @@
+/**
+ * Hook generators — turn metadata into React hook source code using .tmpl templates.
+ *
+ * Each public function produces the source code for one hook file.
+ * Templates live in ../templates/ and use {{var}} / {{#if}} / {{#unless}} syntax.
+ */
+
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -9,7 +16,7 @@ import type {
 } from './config.ts'
 import { capitalize, lowerCaseFirst } from './config.ts'
 
-// --- Template engine ---
+// --- Template engine (lightweight Handlebars-like renderer) ---
 
 const templatesDir = join(fileURLToPath(import.meta.url), '../../templates')
 const hookTemplate = readFileSync(join(templatesDir, 'hook.tmpl'), 'utf-8')
@@ -106,12 +113,14 @@ function findClosingBlock(
   return { content: text.slice(contentStart), end: text.length }
 }
 
-// --- Naming helpers ---
+// --- Naming helpers (build hook names, import paths, and qualified types) ---
 
+/** Qualify a type with namespace prefix, unless it's a raw type (string, Blob, etc.). */
 function nsType(ns: string, type: string, rawTypes: Set<string>): string {
   return rawTypes.has(type) ? type : `${ns}.${type}`
 }
 
+/** Derive all naming conventions for a given method + service combination. */
 function resolveNames(
   method: QueryMethod,
   service: ServiceMetadata,
@@ -144,8 +153,9 @@ function resolveNames(
   }
 }
 
-// --- Hook generators ---
+// --- Hook generators (one function per hook variant) ---
 
+/** Generate a standard useQuery hook (also used for waiter hooks). */
 export function generateQueryHook(
   method: QueryMethod,
   service: ServiceMetadata,
@@ -185,6 +195,7 @@ export function generateQueryHook(
   })
 }
 
+/** Generate an "all" hook that fetches every page of a list method. */
 export function generateAllQueryHook(
   method: QueryMethod,
   service: ServiceMetadata,
@@ -220,6 +231,7 @@ export function generateAllQueryHook(
   })
 }
 
+/** Generate an infinite query hook for paginated list methods. */
 export function generateInfiniteQueryHook(
   method: QueryMethod,
   service: ServiceMetadata,
@@ -250,6 +262,7 @@ export function generateInfiniteQueryHook(
   })
 }
 
+/** Generate a reload hook that invalidates all queries for a service. */
 export function generateReloadHook(
   service: ServiceMetadata,
   metadata: QueriesMetadata,
@@ -263,11 +276,12 @@ export function generateReloadHook(
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${capitalize(apiImportName)}Reload`,
     reloadFnName: `${config.naming.reloadPrefix}${capitalize(apiImportName)}`,
-    asyncReloadFnName: `async${config.naming.reloadPrefix}${capitalize(apiImportName)}`,
+    asyncReloadFnName: `async${capitalize(config.naming.reloadPrefix)}${capitalize(apiImportName)}`,
     apiKey: apiImportName.replace(/API$/, ''),
   })
 }
 
+/** Generate the barrel index.ts that re-exports all hooks for a namespace. */
 export function generateIndexFile(
   services: ServiceMetadata[],
   metadata: QueriesMetadata,

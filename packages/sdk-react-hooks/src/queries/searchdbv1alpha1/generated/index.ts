@@ -15,3 +15,4 @@ export { useSearchdbv1alpha1APIListVersionsAllQuery } from './useSearchdbv1alpha
 export { useSearchdbv1alpha1APIListVersionsInfiniteQuery } from './useSearchdbv1alpha1APIListVersionsInfiniteQuery'
 export { useSearchdbv1alpha1APIListVersionsQuery } from './useSearchdbv1alpha1APIListVersionsQuery'
 export { useSearchdbv1alpha1APIReload } from './useSearchdbv1alpha1APIReload'
+export { useSearchdbv1alpha1APIWaitForDeploymentQuery } from './useSearchdbv1alpha1APIWaitForDeploymentQuery'

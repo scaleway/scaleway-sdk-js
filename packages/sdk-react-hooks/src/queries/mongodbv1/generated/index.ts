@@ -26,3 +26,5 @@ export { useMongodbv1APIListVersionsAllQuery } from './useMongodbv1APIListVersio
 export { useMongodbv1APIListVersionsInfiniteQuery } from './useMongodbv1APIListVersionsInfiniteQuery'
 export { useMongodbv1APIListVersionsQuery } from './useMongodbv1APIListVersionsQuery'
 export { useMongodbv1APIReload } from './useMongodbv1APIReload'
+export { useMongodbv1APIWaitForInstanceQuery } from './useMongodbv1APIWaitForInstanceQuery'
+export { useMongodbv1APIWaitForMaintenanceQuery } from './useMongodbv1APIWaitForMaintenanceQuery'

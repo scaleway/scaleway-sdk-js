@@ -86,3 +86,5 @@ export { useLbv1ZonedAPIListSubscriberAllQuery } from './useLbv1ZonedAPIListSubs
 export { useLbv1ZonedAPIListSubscriberInfiniteQuery } from './useLbv1ZonedAPIListSubscriberInfiniteQuery'
 export { useLbv1ZonedAPIListSubscriberQuery } from './useLbv1ZonedAPIListSubscriberQuery'
 export { useLbv1ZonedAPIReload } from './useLbv1ZonedAPIReload'
+export { useLbv1ZonedAPIWaitForCertificateQuery } from './useLbv1ZonedAPIWaitForCertificateQuery'
+export { useLbv1ZonedAPIWaitForLbQuery } from './useLbv1ZonedAPIWaitForLbQuery'

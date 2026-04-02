@@ -15,3 +15,4 @@ export { useRedisv1APIListNodeTypesAllQuery } from './useRedisv1APIListNodeTypes
 export { useRedisv1APIListNodeTypesInfiniteQuery } from './useRedisv1APIListNodeTypesInfiniteQuery'
 export { useRedisv1APIListNodeTypesQuery } from './useRedisv1APIListNodeTypesQuery'
 export { useRedisv1APIReload } from './useRedisv1APIReload'
+export { useRedisv1APIWaitForClusterQuery } from './useRedisv1APIWaitForClusterQuery'

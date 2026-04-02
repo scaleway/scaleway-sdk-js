@@ -28,3 +28,5 @@ export { useTemv1alpha1APIListWebhooksAllQuery } from './useTemv1alpha1APIListWe
 export { useTemv1alpha1APIListWebhooksInfiniteQuery } from './useTemv1alpha1APIListWebhooksInfiniteQuery'
 export { useTemv1alpha1APIListWebhooksQuery } from './useTemv1alpha1APIListWebhooksQuery'
 export { useTemv1alpha1APIReload } from './useTemv1alpha1APIReload'
+export { useTemv1alpha1APIWaitForDomainQuery } from './useTemv1alpha1APIWaitForDomainQuery'
+export { useTemv1alpha1APIWaitForEmailQuery } from './useTemv1alpha1APIWaitForEmailQuery'

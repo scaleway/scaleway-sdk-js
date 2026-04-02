@@ -1,3 +1,9 @@
+/**
+ * Core generation logic.
+ *
+ * Pipeline: discover SDK packages → load metadata → generate hook files → update package.json exports.
+ */
+
 import {
   existsSync,
   mkdirSync,
@@ -18,7 +24,7 @@ import {
   generateReloadHook,
 } from './hook-generators.ts'
 
-// --- Package resolution ---
+// --- Package resolution (find SDK packages on disk) ---
 
 /**
  * Discover SDK packages and their directories on disk.
@@ -188,14 +194,24 @@ async function loadMetadata(
     const utilsModule = await import(utilsMetadataPath)
     const utilsMetadata: QueriesMetadata = utilsModule.queriesMetadata
     if (utilsMetadata?.services) {
-      metadata.services = [...metadata.services, ...utilsMetadata.services]
+      // Merge utils methods into matching services by apiClass to avoid duplicate services
+      for (const utilsService of utilsMetadata.services) {
+        const existing = metadata.services.find(
+          s => s.apiClass === utilsService.apiClass,
+        )
+        if (existing) {
+          existing.methods = [...existing.methods, ...utilsService.methods]
+        } else {
+          metadata.services = [...metadata.services, utilsService]
+        }
+      }
     }
   }
 
   return metadata
 }
 
-// --- Main generation ---
+// --- Main generation (metadata → hook files) ---
 
 export async function generateFromMetadata(
   config: ReactQueriesConfig,
@@ -246,6 +262,7 @@ export async function generateFromMetadata(
             if (skipMethods.has(method.methodName)) continue
             if (config.filters.skipPrivateMethods && method.isPrivate) continue
 
+            // Standard query hook (e.g. useInstancev1APIGetServerQuery)
             const hookContent = generateQueryHook(
               method,
               service,
@@ -256,6 +273,7 @@ export async function generateFromMetadata(
             const hookFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}Query.ts`
             writeFileSync(join(generatedDir, hookFileName), hookContent)
 
+            // List methods get additional "all" and "infinite" variants
             if (method.isList) {
               if (
                 !(
@@ -288,6 +306,7 @@ export async function generateFromMetadata(
               )
             }
 
+            // Methods with hasWaiter get a polling hook (e.g. useWaitForServer)
             if (method.hasWaiter) {
               const waiterMethod = {
                 ...method,
@@ -305,11 +324,13 @@ export async function generateFromMetadata(
             }
           }
 
+          // One reload hook per service to invalidate all its queries
           const reloadContent = generateReloadHook(service, metadata, config)
           const reloadFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}Reload.ts`
           writeFileSync(join(generatedDir, reloadFileName), reloadContent)
         }
 
+        // Barrel file re-exporting all generated hooks for this namespace
         const indexContent = generateIndexFile(services, metadata, config)
         writeFileSync(join(generatedDir, config.naming.indexFile), indexContent)
 
@@ -327,7 +348,7 @@ export async function generateFromMetadata(
   console.log('🎉 Hook generation complete!')
 }
 
-// --- Package.json exports update ---
+// --- Package.json exports update (so consumers can import e.g. @scaleway/sdk-react-hooks/instancev1) ---
 
 function removeSrcFromPath(path: string): string {
   return path

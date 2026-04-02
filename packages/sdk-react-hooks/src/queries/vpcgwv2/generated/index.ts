@@ -18,3 +18,5 @@ export { useVpcgwv2APIListPatRulesAllQuery } from './useVpcgwv2APIListPatRulesAl
 export { useVpcgwv2APIListPatRulesInfiniteQuery } from './useVpcgwv2APIListPatRulesInfiniteQuery'
 export { useVpcgwv2APIListPatRulesQuery } from './useVpcgwv2APIListPatRulesQuery'
 export { useVpcgwv2APIReload } from './useVpcgwv2APIReload'
+export { useVpcgwv2APIWaitForGatewayNetworkQuery } from './useVpcgwv2APIWaitForGatewayNetworkQuery'
+export { useVpcgwv2APIWaitForGatewayQuery } from './useVpcgwv2APIWaitForGatewayQuery'

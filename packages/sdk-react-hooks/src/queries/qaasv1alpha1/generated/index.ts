@@ -39,3 +39,7 @@ export { useQaasv1alpha1APIListSessionsAllQuery } from './useQaasv1alpha1APIList
 export { useQaasv1alpha1APIListSessionsInfiniteQuery } from './useQaasv1alpha1APIListSessionsInfiniteQuery'
 export { useQaasv1alpha1APIListSessionsQuery } from './useQaasv1alpha1APIListSessionsQuery'
 export { useQaasv1alpha1APIReload } from './useQaasv1alpha1APIReload'
+export { useQaasv1alpha1APIWaitForBookingQuery } from './useQaasv1alpha1APIWaitForBookingQuery'
+export { useQaasv1alpha1APIWaitForJobQuery } from './useQaasv1alpha1APIWaitForJobQuery'
+export { useQaasv1alpha1APIWaitForProcessQuery } from './useQaasv1alpha1APIWaitForProcessQuery'
+export { useQaasv1alpha1APIWaitForSessionQuery } from './useQaasv1alpha1APIWaitForSessionQuery'

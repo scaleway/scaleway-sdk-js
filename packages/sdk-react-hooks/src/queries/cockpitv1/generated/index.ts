@@ -37,3 +37,4 @@ export { useCockpitv1RegionalAPIListTokensAllQuery } from './useCockpitv1Regiona
 export { useCockpitv1RegionalAPIListTokensInfiniteQuery } from './useCockpitv1RegionalAPIListTokensInfiniteQuery'
 export { useCockpitv1RegionalAPIListTokensQuery } from './useCockpitv1RegionalAPIListTokensQuery'
 export { useCockpitv1RegionalAPIReload } from './useCockpitv1RegionalAPIReload'
+export { useCockpitv1RegionalAPIWaitForExporterQuery } from './useCockpitv1RegionalAPIWaitForExporterQuery'
