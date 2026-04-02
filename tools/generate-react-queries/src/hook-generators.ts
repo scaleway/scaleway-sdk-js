@@ -15,103 +15,17 @@ import type {
   ServiceMetadata,
 } from './config.ts'
 import { capitalize, lowerCaseFirst } from './config.ts'
+import { evaluate, parse } from './template.ts'
 
-// --- Template engine (lightweight Handlebars-like renderer) ---
+// --- Pre-parsed templates (parsed once at module load, evaluated many times) ---
 
 const templatesDir = join(fileURLToPath(import.meta.url), '../../templates')
-const hookTemplate = readFileSync(join(templatesDir, 'hook.tmpl'), 'utf-8')
-const reloadTemplate = readFileSync(join(templatesDir, 'reload.tmpl'), 'utf-8')
-
-/**
- * Simple template renderer with {{var}}, {{#if}}/{{/if}}, {{#unless}}/{{/unless}}.
- * Uses a recursive descent parser (not regex) to handle nested blocks correctly.
- */
-function render(
-  template: string,
-  vars: Record<string, string | boolean>,
-): string {
-  const result = renderBlock(template, vars)
-  return result.replace(/\n{3,}/g, '\n\n')
-}
-
-function renderBlock(
-  text: string,
-  vars: Record<string, string | boolean>,
-): string {
-  let result = ''
-  let i = 0
-
-  while (i < text.length) {
-    const tagStart = text.indexOf('{{', i)
-    if (tagStart === -1) {
-      result += text.slice(i)
-      break
-    }
-
-    result += text.slice(i, tagStart)
-    const tagEnd = text.indexOf('}}', tagStart)
-    const tag = text.slice(tagStart + 2, tagEnd)
-
-    if (tag.startsWith('#if ') || tag.startsWith('#unless ')) {
-      const isUnless = tag.startsWith('#unless ')
-      const key = tag.slice(isUnless ? 8 : 4).trim()
-      const closeTag = isUnless ? `{{/unless}}` : `{{/if}}`
-      const { content, end } = findClosingBlock(text, tagEnd + 2, closeTag)
-      const show = isUnless ? !vars[key] : !!vars[key]
-      if (show) result += renderBlock(content, vars)
-      i = end
-    } else {
-      // Variable replacement
-      result += vars[tag] !== undefined ? String(vars[tag]) : ''
-      i = tagEnd + 2
-    }
-  }
-
-  return result
-}
-
-/**
- * Find the matching closing tag, respecting nested blocks of the same type.
- * Returns the content between open and close tags, and the position after the close tag.
- */
-function findClosingBlock(
-  text: string,
-  start: number,
-  closeTag: string,
-): { content: string; end: number } {
-  const openIf = '{{#if '
-  const openUnless = '{{#unless '
-  let depth = 1
-  let i = start
-
-  // Skip the newline after the opening tag
-  if (text[i] === '\n') i++
-
-  const contentStart = i
-
-  while (i < text.length && depth > 0) {
-    const next = text.indexOf('{{', i)
-    if (next === -1) break
-
-    const tagEnd = text.indexOf('}}', next)
-    const tag = text.slice(next, tagEnd + 2)
-
-    if (tag.startsWith(openIf) || tag.startsWith(openUnless)) {
-      depth++
-    } else if (tag === closeTag || tag === '{{/if}}' || tag === '{{/unless}}') {
-      depth--
-      if (depth === 0) {
-        const content = text.slice(contentStart, next)
-        let end = tagEnd + 2
-        if (text[end] === '\n') end++
-        return { content, end }
-      }
-    }
-    i = tagEnd + 2
-  }
-
-  return { content: text.slice(contentStart), end: text.length }
-}
+const hookTemplate = parse(
+  readFileSync(join(templatesDir, 'hook.tmpl'), 'utf-8'),
+)
+const reloadTemplate = parse(
+  readFileSync(join(templatesDir, 'reload.tmpl'), 'utf-8'),
+)
 
 // --- Naming helpers (build hook names, import paths, and qualified types) ---
 
@@ -175,7 +89,7 @@ export function generateQueryHook(
     ? `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`
     : `"${n.apiVarName}", "${method.methodName}"`
 
-  return render(hookTemplate, {
+  return evaluate(hookTemplate, {
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport,
@@ -211,7 +125,7 @@ export function generateAllQueryHook(
     ? nsType(n.ns, rawItemType, n.rawTypes)
     : n.returnType
 
-  return render(hookTemplate, {
+  return evaluate(hookTemplate, {
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport: true,
@@ -242,7 +156,7 @@ export function generateInfiniteQueryHook(
   const n = resolveNames(method, service, metadata, config, sdkPackageName)
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery`
 
-  return render(hookTemplate, {
+  return evaluate(hookTemplate, {
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport: true,
@@ -271,7 +185,7 @@ export function generateReloadHook(
   const { folderName } = metadata
   const apiImportName = `${folderName}${service.apiClass}`
 
-  return render(reloadTemplate, {
+  return evaluate(reloadTemplate, {
     dataLoaderPackage: config.imports.dataLoaderPackage,
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${capitalize(apiImportName)}Reload`,

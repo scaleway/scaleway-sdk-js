@@ -240,10 +240,6 @@
     "./mailboxv1alpha1": {
       "default": "./dist/queries/mailboxv1alpha1/generated/index.js",
       "types": "./dist/queries/mailboxv1alpha1/generated/index.d.ts"
-    },
-    "./testv1": {
-      "default": "./dist/queries/testv1/generated/index.js",
-      "types": "./dist/queries/testv1/generated/index.d.ts"
     }
   },
   "peerDependencies": {

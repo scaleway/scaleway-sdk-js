@@ -82,6 +82,8 @@ export interface ReactQueriesConfig {
     skipCursorAllHooks: boolean
     /** Types that don't need a namespace prefix (e.g. string, Blob). */
     rawTypes: string[]
+    /** Package names to exclude from generation (e.g. @scaleway/sdk-test). */
+    skipPackages: string[]
   }
 
   generatedComment: string
@@ -116,6 +118,7 @@ export const defaultConfig: ReactQueriesConfig = {
     skipPrivateMethods: true,
     skipCursorAllHooks: true,
     rawTypes: ['Blob', 'string', 'number', 'boolean'],
+    skipPackages: ['@scaleway/sdk-test'],
   },
 
   generatedComment:

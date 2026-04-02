@@ -11,7 +11,8 @@
 
 import { parseArgs } from 'node:util'
 import { defaultConfig } from './config.ts'
-import { generateFromMetadata, updatePackageJsonExports } from './generate.ts'
+import { generateFromMetadata } from './generate.ts'
+import { updatePackageJsonExports } from './package-exports.ts'
 
 // Parse CLI flags — all optional, defaults come from config.ts
 const { values } = parseArgs({
