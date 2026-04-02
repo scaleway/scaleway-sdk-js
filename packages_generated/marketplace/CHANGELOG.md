@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-marketplace@2.3.2...@scaleway/sdk-marketplace@2.3.3) (2026-04-02)
+
+**Note:** Version bump only for package @scaleway/sdk-marketplace
+
 ## 2.3.2 (2026-03-27)
 
 ### Bug Fixes

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-vpc@2.3.2...@scaleway/sdk-vpc@2.4.0) (2026-04-02)
+
+### Bug Fixes
+
+- **vpc:** add required to privateNetworkWithNics ([#2867](https://github.com/scaleway/scaleway-sdk-js/issues/2867)) ([81c9af6](https://github.com/scaleway/scaleway-sdk-js/commit/81c9af661393b0b1fdf7a110ec98f93c90acaadf))
+
+### Features
+
+- update generated APIs ([#2881](https://github.com/scaleway/scaleway-sdk-js/issues/2881)) ([79e7ad8](https://github.com/scaleway/scaleway-sdk-js/commit/79e7ad88355e2d8073764b2459749f3888493302))
+
 ## 2.3.2 (2026-03-27)
 
 ### Bug Fixes

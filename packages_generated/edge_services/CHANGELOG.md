@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.9.0...@scaleway/sdk-edge-services@2.10.0) (2026-04-02)
+
+### Features
+
+- **edge_services:** display doc for wildcard domain feature ([#2859](https://github.com/scaleway/scaleway-sdk-js/issues/2859)) ([b9b9df0](https://github.com/scaleway/scaleway-sdk-js/commit/b9b9df0935eadb62bc70053277c63558eb42d540))
+- update generated APIs ([#2881](https://github.com/scaleway/scaleway-sdk-js/issues/2881)) ([79e7ad8](https://github.com/scaleway/scaleway-sdk-js/commit/79e7ad88355e2d8073764b2459749f3888493302))
+
 # [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.8.0...@scaleway/sdk-edge-services@2.9.0) (2026-03-27)
 
 ### Bug Fixes

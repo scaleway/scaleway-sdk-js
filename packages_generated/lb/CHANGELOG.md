@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-lb@2.4.2...@scaleway/sdk-lb@2.5.0) (2026-04-02)
+
+### Features
+
+- **lb:** add new field in LbType ([#2870](https://github.com/scaleway/scaleway-sdk-js/issues/2870)) ([5cae96e](https://github.com/scaleway/scaleway-sdk-js/commit/5cae96e0cee8df6a1df9b3766a541015a7594463))
+- update generated APIs ([#2881](https://github.com/scaleway/scaleway-sdk-js/issues/2881)) ([79e7ad8](https://github.com/scaleway/scaleway-sdk-js/commit/79e7ad88355e2d8073764b2459749f3888493302))
+
 ## 2.4.2 (2026-03-27)
 
 ### Bug Fixes
