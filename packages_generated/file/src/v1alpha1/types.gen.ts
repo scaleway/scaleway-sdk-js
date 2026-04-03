@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
+import type { Money, Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
 
 
 export type AttachmentResourceType =
@@ -44,6 +44,22 @@ export interface Attachment {
    * The zone where the resource is located.
    */
   zone?: ScwZone
+}
+
+
+export interface FileSystemType {
+  /**
+   * Filesystem type name.
+   */
+  name: string
+  /**
+   * Price of the filesystem billed in GB/hour.
+   */
+  filesystemPriceGbPerHour?: Money
+  /**
+   * Price of the snapshot billed in GB/hour.
+   */
+  snapshotPriceGbPerHour?: Money
 }
 
 
@@ -95,6 +111,10 @@ export interface FileSystem {
    * Last update date of the properties of the filesystem.
    */
   updatedAt?: Date
+  /**
+   * UUID of the filesystem type.
+   */
+  filesystemTypeId: string
 }
 
 
@@ -118,6 +138,10 @@ export type CreateFileSystemRequest = {
    * Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size.
    */
   size: number
+  /**
+   * Type of the filesystem.
+   */
+  type?: string
   /**
    * List of tags assigned to the filesystem.
    */
@@ -206,6 +230,37 @@ export interface ListAttachmentsResponse {
 
 
 /**
+ * Request to list filesystem types with pagination options.
+ */
+export type ListFileSystemTypesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Page number (starts at 1).
+   */
+  page?: number
+  /**
+   * Number of entries per page (default: 50, max: 100).
+   */
+  pageSize?: number
+}
+
+
+export interface ListFileSystemTypesResponse {
+  /**
+   * Returns paginated list of filesystem-types.
+   */
+  filesystemTypes: FileSystemType[]
+  /**
+   * Total number of file system types.
+   */
+  totalCount: number
+}
+
+
+/**
  * Request to list filesystems with filtering and pagination options.
  */
 export type ListFileSystemsRequest = {
@@ -237,6 +292,10 @@ export type ListFileSystemsRequest = {
    * Filter the returned filesystems by their names.
    */
   name?: string
+  /**
+   * Type of the filesystem.
+   */
+  filesystemType?: string
   /**
    * Filter by tags. Only filesystems with one or more matching tags will be returned.
    */
