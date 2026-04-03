@@ -19,4 +19,3 @@ export { useMongodbv1alpha1APIListVersionsAllQuery } from './useMongodbv1alpha1A
 export { useMongodbv1alpha1APIListVersionsInfiniteQuery } from './useMongodbv1alpha1APIListVersionsInfiniteQuery'
 export { useMongodbv1alpha1APIListVersionsQuery } from './useMongodbv1alpha1APIListVersionsQuery'
 export { useMongodbv1alpha1APIReload } from './useMongodbv1alpha1APIReload'
-export { useMongodbv1alpha1APIWaitForInstanceQuery } from './useMongodbv1alpha1APIWaitForInstanceQuery'

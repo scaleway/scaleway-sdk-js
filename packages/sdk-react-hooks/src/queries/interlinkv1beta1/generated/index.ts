@@ -21,5 +21,3 @@ export { useInterlinkv1beta1APIListRoutingPoliciesAllQuery } from './useInterlin
 export { useInterlinkv1beta1APIListRoutingPoliciesInfiniteQuery } from './useInterlinkv1beta1APIListRoutingPoliciesInfiniteQuery'
 export { useInterlinkv1beta1APIListRoutingPoliciesQuery } from './useInterlinkv1beta1APIListRoutingPoliciesQuery'
 export { useInterlinkv1beta1APIReload } from './useInterlinkv1beta1APIReload'
-export { useInterlinkv1beta1APIWaitForDedicatedConnectionQuery } from './useInterlinkv1beta1APIWaitForDedicatedConnectionQuery'
-export { useInterlinkv1beta1APIWaitForLinkQuery } from './useInterlinkv1beta1APIWaitForLinkQuery'

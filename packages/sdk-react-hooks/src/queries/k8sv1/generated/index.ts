@@ -25,6 +25,3 @@ export { useK8Sv1APIListPoolsInfiniteQuery } from './useK8Sv1APIListPoolsInfinit
 export { useK8Sv1APIListPoolsQuery } from './useK8Sv1APIListPoolsQuery'
 export { useK8Sv1APIListVersionsQuery } from './useK8Sv1APIListVersionsQuery'
 export { useK8Sv1APIReload } from './useK8Sv1APIReload'
-export { useK8Sv1APIWaitForClusterQuery } from './useK8Sv1APIWaitForClusterQuery'
-export { useK8Sv1APIWaitForNodeQuery } from './useK8Sv1APIWaitForNodeQuery'
-export { useK8Sv1APIWaitForPoolQuery } from './useK8Sv1APIWaitForPoolQuery'

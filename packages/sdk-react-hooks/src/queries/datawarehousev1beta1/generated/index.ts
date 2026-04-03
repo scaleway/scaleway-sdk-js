@@ -18,4 +18,3 @@ export { useDatawarehousev1beta1APIListVersionsAllQuery } from './useDatawarehou
 export { useDatawarehousev1beta1APIListVersionsInfiniteQuery } from './useDatawarehousev1beta1APIListVersionsInfiniteQuery'
 export { useDatawarehousev1beta1APIListVersionsQuery } from './useDatawarehousev1beta1APIListVersionsQuery'
 export { useDatawarehousev1beta1APIReload } from './useDatawarehousev1beta1APIReload'
-export { useDatawarehousev1beta1APIWaitForDeploymentQuery } from './useDatawarehousev1beta1APIWaitForDeploymentQuery'

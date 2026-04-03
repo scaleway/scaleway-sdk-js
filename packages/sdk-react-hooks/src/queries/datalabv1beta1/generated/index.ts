@@ -14,4 +14,3 @@ export { useDatalabv1beta1APIListNotebookVersionsAllQuery } from './useDatalabv1
 export { useDatalabv1beta1APIListNotebookVersionsInfiniteQuery } from './useDatalabv1beta1APIListNotebookVersionsInfiniteQuery'
 export { useDatalabv1beta1APIListNotebookVersionsQuery } from './useDatalabv1beta1APIListNotebookVersionsQuery'
 export { useDatalabv1beta1APIReload } from './useDatalabv1beta1APIReload'
-export { useDatalabv1beta1APIWaitForDatalabQuery } from './useDatalabv1beta1APIWaitForDatalabQuery'

@@ -23,4 +23,3 @@ export { useIotv1APIListRoutesInfiniteQuery } from './useIotv1APIListRoutesInfin
 export { useIotv1APIListRoutesQuery } from './useIotv1APIListRoutesQuery'
 export { useIotv1APIListTwinDocumentsQuery } from './useIotv1APIListTwinDocumentsQuery'
 export { useIotv1APIReload } from './useIotv1APIReload'
-export { useIotv1APIWaitForHubQuery } from './useIotv1APIWaitForHubQuery'

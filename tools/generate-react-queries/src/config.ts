@@ -82,6 +82,8 @@ export interface ReactQueriesConfig {
     skipCursorAllHooks: boolean
     /** Types that don't need a namespace prefix (e.g. string, Blob). */
     rawTypes: string[]
+    /** Skip generating waiter (polling) hooks for methods with hasWaiter. */
+    skipWaiters: boolean
     /** Package names to exclude from generation (e.g. @scaleway/sdk-test). */
     skipPackages: string[]
   }
@@ -117,6 +119,7 @@ export const defaultConfig: ReactQueriesConfig = {
     skipMethods: ['getServiceInfo'],
     skipPrivateMethods: true,
     skipCursorAllHooks: true,
+    skipWaiters: true,
     rawTypes: ['Blob', 'string', 'number', 'boolean'],
     skipPackages: ['@scaleway/sdk-test'],
   },

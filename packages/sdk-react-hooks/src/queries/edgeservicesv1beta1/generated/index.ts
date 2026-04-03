@@ -46,5 +46,3 @@ export { useEdgeServicesv1beta1APIReload } from './useEdgeServicesv1beta1APIRelo
 export { useEdgeServicesv1beta1APISearchBackendStagesQuery } from './useEdgeServicesv1beta1APISearchBackendStagesQuery'
 export { useEdgeServicesv1beta1APISearchRouteRulesQuery } from './useEdgeServicesv1beta1APISearchRouteRulesQuery'
 export { useEdgeServicesv1beta1APISearchWafStagesQuery } from './useEdgeServicesv1beta1APISearchWafStagesQuery'
-export { useEdgeServicesv1beta1APIWaitForPipelineQuery } from './useEdgeServicesv1beta1APIWaitForPipelineQuery'
-export { useEdgeServicesv1beta1APIWaitForPurgeRequestQuery } from './useEdgeServicesv1beta1APIWaitForPurgeRequestQuery'

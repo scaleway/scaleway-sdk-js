@@ -8,4 +8,3 @@ export { useFilev1alpha1APIListFileSystemsAllQuery } from './useFilev1alpha1APIL
 export { useFilev1alpha1APIListFileSystemsInfiniteQuery } from './useFilev1alpha1APIListFileSystemsInfiniteQuery'
 export { useFilev1alpha1APIListFileSystemsQuery } from './useFilev1alpha1APIListFileSystemsQuery'
 export { useFilev1alpha1APIReload } from './useFilev1alpha1APIReload'
-export { useFilev1alpha1APIWaitForFileSystemQuery } from './useFilev1alpha1APIWaitForFileSystemQuery'

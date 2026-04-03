@@ -120,7 +120,7 @@ export async function generateFromMetadata(
             }
 
             // Methods with hasWaiter get a polling hook (e.g. useWaitForServer)
-            if (method.hasWaiter) {
+            if (method.hasWaiter && !config.filters.skipWaiters) {
               const waiterMethod = {
                 ...method,
                 methodName: `waitFor${capitalize(method.methodName.replace('get', ''))}`,

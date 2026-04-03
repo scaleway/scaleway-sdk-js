@@ -1,13 +1,10 @@
 /**
- * Hook generators — turn metadata into React hook source code using .tmpl templates.
+ * Hook generators — turn metadata into React hook source code.
  *
- * Each public function produces the source code for one hook file.
- * Templates live in ../templates/ and use {{var}} / {{#if}} / {{#unless}} syntax.
+ * Each public function produces the source code for one hook file
+ * using template literal functions from ./template.ts.
  */
 
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import type {
   QueriesMetadata,
   QueryMethod,
@@ -15,17 +12,7 @@ import type {
   ServiceMetadata,
 } from './config.ts'
 import { capitalize, lowerCaseFirst } from './config.ts'
-import { evaluate, parse } from './template.ts'
-
-// --- Pre-parsed templates (parsed once at module load, evaluated many times) ---
-
-const templatesDir = join(fileURLToPath(import.meta.url), '../../templates')
-const hookTemplate = parse(
-  readFileSync(join(templatesDir, 'hook.tmpl'), 'utf-8'),
-)
-const reloadTemplate = parse(
-  readFileSync(join(templatesDir, 'reload.tmpl'), 'utf-8'),
-)
+import { renderHook, renderReload } from './template.ts'
 
 // --- Naming helpers (build hook names, import paths, and qualified types) ---
 
@@ -89,7 +76,7 @@ export function generateQueryHook(
     ? `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`
     : `"${n.apiVarName}", "${method.methodName}"`
 
-  return evaluate(hookTemplate, {
+  return renderHook({
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport,
@@ -125,7 +112,7 @@ export function generateAllQueryHook(
     ? nsType(n.ns, rawItemType, n.rawTypes)
     : n.returnType
 
-  return evaluate(hookTemplate, {
+  return renderHook({
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport: true,
@@ -156,7 +143,7 @@ export function generateInfiniteQueryHook(
   const n = resolveNames(method, service, metadata, config, sdkPackageName)
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery`
 
-  return evaluate(hookTemplate, {
+  return renderHook({
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport: true,
@@ -185,7 +172,7 @@ export function generateReloadHook(
   const { folderName } = metadata
   const apiImportName = `${folderName}${service.apiClass}`
 
-  return evaluate(reloadTemplate, {
+  return renderReload({
     dataLoaderPackage: config.imports.dataLoaderPackage,
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${capitalize(apiImportName)}Reload`,
@@ -233,7 +220,7 @@ export function generateIndexFile(
         }
       }
 
-      if (method.hasWaiter) {
+      if (method.hasWaiter && !config.filters.skipWaiters) {
         const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
         exports.push(
           `export { ${config.naming.hookPrefix}${serviceName}${waiterName}Query } from "./${config.naming.hookPrefix}${serviceName}${waiterName}Query"`,

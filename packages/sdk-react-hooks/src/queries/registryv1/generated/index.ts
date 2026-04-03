@@ -13,6 +13,3 @@ export { useRegistryv1APIListTagsAllQuery } from './useRegistryv1APIListTagsAllQ
 export { useRegistryv1APIListTagsInfiniteQuery } from './useRegistryv1APIListTagsInfiniteQuery'
 export { useRegistryv1APIListTagsQuery } from './useRegistryv1APIListTagsQuery'
 export { useRegistryv1APIReload } from './useRegistryv1APIReload'
-export { useRegistryv1APIWaitForImageQuery } from './useRegistryv1APIWaitForImageQuery'
-export { useRegistryv1APIWaitForNamespaceQuery } from './useRegistryv1APIWaitForNamespaceQuery'
-export { useRegistryv1APIWaitForTagQuery } from './useRegistryv1APIWaitForTagQuery'

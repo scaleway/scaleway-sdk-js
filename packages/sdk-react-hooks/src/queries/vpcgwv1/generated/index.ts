@@ -26,5 +26,3 @@ export { useVpcgwv1APIListPATRulesAllQuery } from './useVpcgwv1APIListPATRulesAl
 export { useVpcgwv1APIListPATRulesInfiniteQuery } from './useVpcgwv1APIListPATRulesInfiniteQuery'
 export { useVpcgwv1APIListPATRulesQuery } from './useVpcgwv1APIListPATRulesQuery'
 export { useVpcgwv1APIReload } from './useVpcgwv1APIReload'
-export { useVpcgwv1APIWaitForGatewayNetworkQuery } from './useVpcgwv1APIWaitForGatewayNetworkQuery'
-export { useVpcgwv1APIWaitForGatewayQuery } from './useVpcgwv1APIWaitForGatewayQuery'

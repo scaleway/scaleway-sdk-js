@@ -26,7 +26,6 @@ export { useBaremetalv1APIListSettingsAllQuery } from './useBaremetalv1APIListSe
 export { useBaremetalv1APIListSettingsInfiniteQuery } from './useBaremetalv1APIListSettingsInfiniteQuery'
 export { useBaremetalv1APIListSettingsQuery } from './useBaremetalv1APIListSettingsQuery'
 export { useBaremetalv1APIReload } from './useBaremetalv1APIReload'
-export { useBaremetalv1APIWaitForServerQuery } from './useBaremetalv1APIWaitForServerQuery'
 export { useBaremetalv1PrivateNetworkAPIListServerPrivateNetworksAllQuery } from './useBaremetalv1PrivateNetworkAPIListServerPrivateNetworksAllQuery'
 export { useBaremetalv1PrivateNetworkAPIListServerPrivateNetworksInfiniteQuery } from './useBaremetalv1PrivateNetworkAPIListServerPrivateNetworksInfiniteQuery'
 export { useBaremetalv1PrivateNetworkAPIListServerPrivateNetworksQuery } from './useBaremetalv1PrivateNetworkAPIListServerPrivateNetworksQuery'

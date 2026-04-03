@@ -15,4 +15,3 @@ export { useKafkav1alpha1APIListVersionsAllQuery } from './useKafkav1alpha1APILi
 export { useKafkav1alpha1APIListVersionsInfiniteQuery } from './useKafkav1alpha1APIListVersionsInfiniteQuery'
 export { useKafkav1alpha1APIListVersionsQuery } from './useKafkav1alpha1APIListVersionsQuery'
 export { useKafkav1alpha1APIReload } from './useKafkav1alpha1APIReload'
-export { useKafkav1alpha1APIWaitForClusterQuery } from './useKafkav1alpha1APIWaitForClusterQuery'
