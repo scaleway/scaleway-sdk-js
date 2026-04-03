@@ -17,6 +17,7 @@ import {
   unmarshalFileSystem,
   unmarshalListAttachmentsResponse,
   unmarshalListFileSystemsResponse,
+  unmarshalListFileSystemTypesResponse,
 } from './marshalling.gen.js'
 import type {
   CreateFileSystemRequest,
@@ -27,6 +28,8 @@ import type {
   ListAttachmentsResponse,
   ListFileSystemsRequest,
   ListFileSystemsResponse,
+  ListFileSystemTypesRequest,
+  ListFileSystemTypesResponse,
   UpdateFileSystemRequest,
 } from './types.gen.js'
 
@@ -50,6 +53,29 @@ export class API extends ParentAPI {
         'fr-par',
       ],
     })
+  
+  protected pageOfListFileSystemTypes = (request: Readonly<ListFileSystemTypesRequest> = {}) =>
+    this.client.fetch<ListFileSystemTypesResponse>(
+      {
+        method: 'GET',
+        path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystem-types`,
+        urlParams: urlParams(
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+        ),
+      },
+      unmarshalListFileSystemTypesResponse,
+    )
+  
+  /**
+   * List filesystems types.
+   *
+   * @param request - The request {@link ListFileSystemTypesRequest}
+   * @returns A Promise of ListFileSystemTypesResponse
+   */
+  listFileSystemTypes = (request: Readonly<ListFileSystemTypesRequest> = {}) =>
+    enrichForPagination('filesystemTypes', this.pageOfListFileSystemTypes, request)
+
   
   /**
    * Get filesystem details. Retrieve all properties and current status of a specific filesystem identified by its ID.
@@ -92,6 +118,7 @@ export class API extends ParentAPI {
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems`,
         urlParams: urlParams(
           ['filesystem_ids', request.filesystemIds],
+          ['filesystem_type', request.filesystemType],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],

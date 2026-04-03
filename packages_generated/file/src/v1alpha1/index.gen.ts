@@ -12,12 +12,15 @@ export type {
   DeleteFileSystemRequest,
   FileSystem,
   FileSystemStatus,
+  FileSystemType,
   GetFileSystemRequest,
   ListAttachmentsRequest,
   ListAttachmentsResponse,
   ListFileSystemsRequest,
   ListFileSystemsRequestOrderBy,
   ListFileSystemsResponse,
+  ListFileSystemTypesRequest,
+  ListFileSystemTypesResponse,
   UpdateFileSystemRequest,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'
