@@ -21,7 +21,7 @@
     }
   },
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=20.20.2"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,6 @@
     "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.35"
+    "@types/node": "20.19.39"
   }
 }
