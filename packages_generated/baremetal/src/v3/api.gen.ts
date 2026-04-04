@@ -102,7 +102,7 @@ export class PrivateNetworkAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['private_network_id', request.privateNetworkId],
-          ['project_id', request.projectId],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['server_id', request.serverId],
         ),
       },
