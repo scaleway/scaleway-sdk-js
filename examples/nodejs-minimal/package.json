@@ -11,7 +11,7 @@
   "dependencies": {
     "@scaleway/configuration-loader": "^1.0",
     "@scaleway/sdk": "^2.0",
-    "@scaleway/sdk-client": "^2.0"
+    "@scaleway/sdk-client": "^2.2.2"
   },
   "devDependencies": {
     "@types/node": "20.19.25",
