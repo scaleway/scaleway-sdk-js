@@ -10,6 +10,18 @@ export const queriesMetadata = {
       apiClass: 'API',
       methods: [
         {
+          methodName: 'listFileSystemTypes',
+          protoName: 'ListFileSystemTypes',
+          paramsType: 'ListFileSystemTypesRequest',
+          returnType: 'ListFileSystemTypesResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'FileSystemType',
+          isPrivate: false,
+          description: '"',
+        },
+        {
           methodName: 'getFileSystem',
           protoName: 'GetFileSystem',
           paramsType: 'GetFileSystemRequest',
