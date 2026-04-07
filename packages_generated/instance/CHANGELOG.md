@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-instance@2.5.0...@scaleway/sdk-instance@2.6.0) (2026-04-07)
+
+### Features
+
+- **generate-react-queries:** rewrite generator to use metadata instead of ts-morph ([#2865](https://github.com/scaleway/scaleway-sdk-js/issues/2865)) ([6b383fa](https://github.com/scaleway/scaleway-sdk-js/commit/6b383fa17c91fb4ef16b30b6b41dcb8f806ef6a0))
+
 # [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-instance@2.4.2...@scaleway/sdk-instance@2.5.0) (2026-04-02)
 
 ### Features

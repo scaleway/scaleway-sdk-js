@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.9.0...@scaleway/sdk-audit-trail@2.10.0) (2026-04-07)
+
+### Features
+
+- **api:** update generated apis ([#2885](https://github.com/scaleway/scaleway-sdk-js/issues/2885)) ([428759a](https://github.com/scaleway/scaleway-sdk-js/commit/428759a067817a8ac62e45ce41f271ce0336b409))
+
 # [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.8.0...@scaleway/sdk-audit-trail@2.9.0) (2026-04-02)
 
 ### Features

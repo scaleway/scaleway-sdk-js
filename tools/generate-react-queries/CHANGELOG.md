@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.3.0 (2026-04-07)
+
+### Bug Fixes
+
+- **sdk-react-hooks:** make reload sync ([#2878](https://github.com/scaleway/scaleway-sdk-js/issues/2878)) ([37f652d](https://github.com/scaleway/scaleway-sdk-js/commit/37f652d768758c7c958308cfa5789e1c3f77236a))
+
+### Features
+
+- **generate-react-queries:** rewrite generator to use metadata instead of ts-morph ([#2865](https://github.com/scaleway/scaleway-sdk-js/issues/2865)) ([6b383fa](https://github.com/scaleway/scaleway-sdk-js/commit/6b383fa17c91fb4ef16b30b6b41dcb8f806ef6a0))
+
 # [0.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/generate-react-queries@0.1.1...@scaleway/generate-react-queries@0.2.0) (2026-03-13)
 
 ### Bug Fixes
