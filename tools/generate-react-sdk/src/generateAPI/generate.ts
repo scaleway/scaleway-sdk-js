@@ -1,5 +1,5 @@
 import { exec } from 'node:child_process'
-import { existsSync, readFileSync, rmdirSync } from 'node:fs'
+import { existsSync, readFileSync, rmSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { exit, stdout } from 'node:process'
 import { project } from './config.ts'
@@ -37,8 +37,9 @@ export const generateAPI = ({
   const dir = join(directoryOfSrcFolder, dirGenName)
 
   if (existsSync(dir)) {
-    rmdirSync(dir, {
+    rmSync(dir, {
       recursive: true,
+      force: true
     })
   }
 
