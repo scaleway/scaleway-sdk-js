@@ -13,6 +13,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
+    "types": ["node"],
     "allowImportingTsExtensions": true,
   },
   "include": ["src/**/*.ts"],
