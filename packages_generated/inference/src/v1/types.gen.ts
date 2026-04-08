@@ -191,7 +191,7 @@ export interface Deployment {
    */
   minSize: number
   /**
-   * Defines the maximum size of the pool.
+   * Defines the maximum size of the pool. Currently, autoscaling is not yet supported, and this value must be equal to `min_size`.
    */
   maxSize: number
   /**
@@ -372,7 +372,7 @@ The terms of the EULA can be retrieved using the `GetModelEula` API call.
    */
   minSize?: number
   /**
-   * Defines the maximum size of the pool.
+   * Defines the maximum size of the pool. Currently, autoscaling is not yet supported, and this value must be equal to `min_size`.
    */
   maxSize?: number
   /**
@@ -561,6 +561,10 @@ export type ListModelsRequest = {
    */
   projectId?: string
   /**
+   * Filter by Organization ID.
+   */
+  organizationId?: string
+  /**
    * Filter by model name.
    */
   name?: string
@@ -637,7 +641,7 @@ export type UpdateDeploymentRequest = {
    */
   minSize?: number
   /**
-   * Defines the new maximum size of the pool.
+   * Defines the maximum size of the pool. Currently, autoscaling is not yet supported, and this value must be equal to `min_size`.
    */
   maxSize?: number
   /**
