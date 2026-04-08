@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-react-hooks",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "React hooks",
   "private": false,
   "sideEffects": false,
@@ -13,7 +13,7 @@
   "scripts": {
     "prebuild": "shx rm -rf dist && pnpm generate:queries",
     "typecheck": "tsgo --noEmit",
-    "generate:queries": "pnpm generate-react-queries --dir-gen-name src/queries --package-name-filter '@scaleway/sdk' --api-sdk-path '@scaleway/sdk-react' --custom-ns 'test' && pnpm format ",
+    "generate:queries": "pnpm generate-react-queries && pnpm format",
     "format": "biome check  --linter-enabled=false --write .",
     "type:generate": "tsgo --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
@@ -236,6 +236,10 @@
     "./test/custom": {
       "default": "./dist/queries/test/custom/index.js",
       "types": "./dist/queries/test/custom/index.d.ts"
+    },
+    "./mailboxv1alpha1": {
+      "default": "./dist/queries/mailboxv1alpha1/generated/index.js",
+      "types": "./dist/queries/mailboxv1alpha1/generated/index.d.ts"
     }
   },
   "peerDependencies": {

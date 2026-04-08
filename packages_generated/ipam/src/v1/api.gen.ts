@@ -194,7 +194,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Attach IP to custom resource. Attach an existing reserved IP from a Private Network subnet to a custom, named resource via its MAC address. An example of a custom resource is a virtual machine hosted on an Elastic Metal server. Do not use this method for attaching IP addresses to standard Scaleway resources as it will fail - see the relevant product API for an equivalent method.
+   * Attach private IP to custom resource. Attach an existing reserved private IP from a Private Network subnet to a custom, named resource via its MAC address. An example of a custom resource is a virtual machine hosted on an Elastic Metal server. Do not use this method for attaching IP addresses to standard Scaleway resources as it will fail - see the relevant product API for an equivalent method.
    *
    * @param request - The request {@link AttachIPRequest}
    * @returns A Promise of IP
@@ -214,7 +214,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Detach IP from a custom resource. Detach a private IP from a custom resource. An example of a custom resource is a virtual machine hosted on an Elastic Metal server. Do not use this method for detaching IP addresses from standard Scaleway resources (e.g. Instances, Load Balancers) as it will fail - see the relevant product API for an equivalent method.
+   * Detach private IP from a custom resource. Detach a private IP from a custom resource. An example of a custom resource is a virtual machine hosted on an Elastic Metal server. Do not use this method for detaching IP addresses from standard Scaleway resources (e.g. Instances, Load Balancers) as it will fail - see the relevant product API for an equivalent method.
    *
    * @param request - The request {@link DetachIPRequest}
    * @returns A Promise of IP
@@ -234,7 +234,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Move IP to a custom resource. Move an existing reserved private IP from one custom resource (e.g. a virtual machine hosted on an Elastic Metal server) to another custom resource. This will detach it from the first resource, and attach it to the second. Do not use this method for moving IP addresses between standard Scaleway resources (e.g. Instances, Load Balancers) as it will fail - see the relevant product API for an equivalent method.
+   * Move private IP to a custom resource. Move an existing reserved private IP from one custom resource (e.g. a virtual machine hosted on an Elastic Metal server) to another custom resource. This will detach it from the first resource, and attach it to the second. Do not use this method for moving IP addresses between standard Scaleway resources (e.g. Instances, Load Balancers) as it will fail - see the relevant product API for an equivalent method.
    *
    * @param request - The request {@link MoveIPRequest}
    * @returns A Promise of IP

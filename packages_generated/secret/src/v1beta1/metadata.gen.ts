@@ -1,0 +1,85 @@
+// This file was automatically generated. DO NOT EDIT.
+// If you have any remark or suggestion do not hesitate to open an issue.
+
+export const queriesMetadata = {
+  namespace: 'secret',
+  version: 'v1beta1',
+  folderName: 'secretv1beta1',
+  services: [
+    {
+      apiClass: 'API',
+      methods: [
+        {
+          methodName: 'getSecret',
+          protoName: 'GetSecret',
+          paramsType: 'GetSecretRequest',
+          returnType: 'Secret',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listSecrets',
+          protoName: 'ListSecrets',
+          paramsType: 'ListSecretsRequest',
+          returnType: 'ListSecretsResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'Secret',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'getSecretVersion',
+          protoName: 'GetSecretVersion',
+          paramsType: 'GetSecretVersionRequest',
+          returnType: 'SecretVersion',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listSecretVersions',
+          protoName: 'ListSecretVersions',
+          paramsType: 'ListSecretVersionsRequest',
+          returnType: 'ListSecretVersionsResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'SecretVersion',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listTags',
+          protoName: 'ListTags',
+          paramsType: 'ListTagsRequest',
+          returnType: 'ListTagsResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'string',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listSecretTypes',
+          protoName: 'ListSecretTypes',
+          paramsType: 'ListSecretTypesRequest',
+          returnType: 'ListSecretTypesResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'SecretType',
+          isPrivate: false,
+          description: '"',
+        },
+      ],
+    },
+  ],
+} as const
+
+export type QueriesMetadata = typeof queriesMetadata

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.7.0...@scaleway/sdk-k8s@2.8.0) (2026-04-07)
+
+### Features
+
+- **generate-react-queries:** rewrite generator to use metadata instead of ts-morph ([#2865](https://github.com/scaleway/scaleway-sdk-js/issues/2865)) ([6b383fa](https://github.com/scaleway/scaleway-sdk-js/commit/6b383fa17c91fb4ef16b30b6b41dcb8f806ef6a0))
+
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.6.2...@scaleway/sdk-k8s@2.7.0) (2026-04-02)
+
+### Features
+
+- update generated APIs ([#2881](https://github.com/scaleway/scaleway-sdk-js/issues/2881)) ([79e7ad8](https://github.com/scaleway/scaleway-sdk-js/commit/79e7ad88355e2d8073764b2459749f3888493302))
+
+## 2.6.2 (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+
 ## [2.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.6.0...@scaleway/sdk-k8s@2.6.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-k8s

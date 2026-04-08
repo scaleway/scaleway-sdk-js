@@ -1,14 +1,15 @@
 {
   "name": "@scaleway/generate-react-queries",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "generate react api and queries",
   "type": "module",
   "private": false,
   "bin": {
-    "generate-react-queries": "./dist/buildQueries.js"
+    "generate-react-queries": "./dist/cli.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "templates"
   ],
   "engines": {
     "node": ">=20.19.6"
@@ -29,7 +30,6 @@
     "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.35",
-    "ts-morph": "27.0.2"
+    "@types/node": "20.19.35"
   }
 }

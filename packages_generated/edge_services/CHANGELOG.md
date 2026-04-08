@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.9.0...@scaleway/sdk-edge-services@2.10.0) (2026-04-02)
+
+### Features
+
+- **edge_services:** display doc for wildcard domain feature ([#2859](https://github.com/scaleway/scaleway-sdk-js/issues/2859)) ([b9b9df0](https://github.com/scaleway/scaleway-sdk-js/commit/b9b9df0935eadb62bc70053277c63558eb42d540))
+- update generated APIs ([#2881](https://github.com/scaleway/scaleway-sdk-js/issues/2881)) ([79e7ad8](https://github.com/scaleway/scaleway-sdk-js/commit/79e7ad88355e2d8073764b2459749f3888493302))
+
+# [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.8.0...@scaleway/sdk-edge-services@2.9.0) (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+
+### Features
+
+- **edge_services:** add host filter ([#2837](https://github.com/scaleway/scaleway-sdk-js/issues/2837)) ([c76222d](https://github.com/scaleway/scaleway-sdk-js/commit/c76222d795cb5f9e9ab08d8f183dc6ad70009fc3))
+- **edge_services:** add wildcard domain option on dns stages ([#2834](https://github.com/scaleway/scaleway-sdk-js/issues/2834)) ([6cca6ce](https://github.com/scaleway/scaleway-sdk-js/commit/6cca6cec14d2e0ee588153d653d79d6a3f6112a7))
+
 # 2.8.0 (2026-03-16)
 
 ### Features

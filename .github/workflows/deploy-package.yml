@@ -59,8 +59,53 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry
+      # npm may auto-enable provenance in GHA (OIDC); without Trusted Publishing configured on
+      # npmjs.com for this repo, publish can fail with a misleading 404 on PUT. Use the classic token.
       - name: Publish to npm
         run: pnpm -r publish --access public --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "false"
+
+      - name: Notify Slack on success
+        if: success()
+        continue-on-error: true
+        run: |
+          curl -fsS -X POST -H 'Content-type: application/json' \
+          --data '{
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "'"${SUCCESS_MESSAGE}"'"
+                }
+              }
+            ]
+          }' \
+          "${SLACK_WEBHOOK_SDK_DEPLOY}"
+        env:
+          SLACK_WEBHOOK_SDK_DEPLOY: ${{ secrets.SLACK_WEBHOOK_SDK_DEPLOY }}
+          SUCCESS_MESSAGE: ":white_check_mark: scaleway-sdk-js released to npm: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|view run>"
+
+      - name: Notify Slack on failure
+        if: failure()
+        continue-on-error: true
+        run: |
+          curl -fsS -X POST -H 'Content-type: application/json' \
+          --data '{
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "'"${FAILURE_MESSAGE}"'"
+                }
+              }
+            ]
+          }' \
+          "${SLACK_WEBHOOK_SDK_DEPLOY}"
+        env:
+          SLACK_WEBHOOK_SDK_DEPLOY: ${{ secrets.SLACK_WEBHOOK_SDK_DEPLOY }}
+          FAILURE_MESSAGE: ":x: scaleway-sdk-js npm deploy failed: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|view run>"

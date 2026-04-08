@@ -1,12 +1,14 @@
 
 import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
 import type {
   Attachment,
   CreateFileSystemRequest,
   FileSystem,
+  FileSystemType,
   ListAttachmentsResponse,
   ListFileSystemsResponse,
+  ListFileSystemTypesResponse,
   UpdateFileSystemRequest,
 } from './types.gen.js'
 
@@ -19,6 +21,7 @@ export const unmarshalFileSystem = (data: unknown): FileSystem => {
 
   return {
     createdAt: unmarshalDate(data.created_at),
+    filesystemTypeId: data.filesystem_type_id,
     id: data.id,
     name: data.name,
     numberOfAttachments: data.number_of_attachments,
@@ -61,6 +64,33 @@ export const unmarshalListAttachmentsResponse = (data: unknown): ListAttachments
   } as ListAttachmentsResponse
 }
 
+const unmarshalFileSystemType = (data: unknown): FileSystemType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'FileSystemType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    filesystemPriceGbPerHour: data.filesystem_price_gb_per_hour ? unmarshalMoney(data.filesystem_price_gb_per_hour) : undefined,
+    name: data.name,
+    snapshotPriceGbPerHour: data.snapshot_price_gb_per_hour ? unmarshalMoney(data.snapshot_price_gb_per_hour) : undefined,
+  } as FileSystemType
+}
+
+export const unmarshalListFileSystemTypesResponse = (data: unknown): ListFileSystemTypesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListFileSystemTypesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    filesystemTypes: unmarshalArrayOfObject(data.filesystem_types, unmarshalFileSystemType),
+    totalCount: data.total_count,
+  } as ListFileSystemTypesResponse
+}
+
 export const unmarshalListFileSystemsResponse = (data: unknown): ListFileSystemsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -82,6 +112,7 @@ export const marshalCreateFileSystemRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
   size: request.size,
   tags: request.tags,
+  type: request.type,
 })
 
 export const marshalUpdateFileSystemRequest = (

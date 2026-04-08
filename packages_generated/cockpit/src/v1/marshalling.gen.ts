@@ -146,6 +146,7 @@ export const unmarshalExporter = (data: unknown): Exporter => {
     id: data.id,
     name: data.name,
     otlpDestination: data.otlp_destination ? unmarshalExporterOTLPDestination(data.otlp_destination) : undefined,
+    region: data.region,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Exporter

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@2.4.0...@scaleway/sdk-cockpit@2.4.1) (2026-04-02)
+
+**Note:** Version bump only for package @scaleway/sdk-cockpit
+
+# 2.4.0 (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+
+### Features
+
+- **cockpit:** add new region field to exporter ([#2848](https://github.com/scaleway/scaleway-sdk-js/issues/2848)) ([4781a45](https://github.com/scaleway/scaleway-sdk-js/commit/4781a45e0b6e0ff1497eb9c49fee0e83e850396e))
+
 ## [2.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@2.3.0...@scaleway/sdk-cockpit@2.3.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-cockpit

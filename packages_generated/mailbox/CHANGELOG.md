@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-mailbox@1.1.1...@scaleway/sdk-mailbox@1.2.0) (2026-04-02)
+
+### Bug Fixes
+
+- **mailbox:** remove unused parameters before beta ([#2861](https://github.com/scaleway/scaleway-sdk-js/issues/2861)) ([a491472](https://github.com/scaleway/scaleway-sdk-js/commit/a491472fe8a98bc10ceacc481b99f6c995e389d8))
+
+### Features
+
+- update generated APIs ([#2881](https://github.com/scaleway/scaleway-sdk-js/issues/2881)) ([79e7ad8](https://github.com/scaleway/scaleway-sdk-js/commit/79e7ad88355e2d8073764b2459749f3888493302))
+
+## 1.1.1 (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+
 # 1.1.0 (2026-03-13)
 
 ### Features

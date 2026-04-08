@@ -420,11 +420,11 @@ export interface ContactExtensionIT {
   /**
    * @deprecated This option is useless anymore.
    */
-  europeanCitizenship: string
+  europeanCitizenship?: string
   /**
    * @deprecated Tax_code is renamed to pin.
    */
-  taxCode: string
+  taxCode?: string
   /**
    * Domain name registrant's Taxcode (mandatory / only optional when the trustee is used)
 
@@ -547,7 +547,7 @@ export interface Contact {
   /**
    * @deprecated 
    */
-  questions: ContactQuestion[]
+  questions?: ContactQuestion[]
 }
 
 
@@ -608,7 +608,7 @@ export interface NewContact {
   /**
    * @deprecated 
    */
-  questions: ContactQuestion[]
+  questions?: ContactQuestion[]
 }
 
 
@@ -1094,7 +1094,7 @@ export type ImportRawDNSZoneRequest = {
   /**
    * @deprecated 
    */
-  content: string
+  content?: string
   projectId?: string
   /**
    * @deprecated 
@@ -1266,7 +1266,7 @@ export type ListDNSZonesRequest = {
   /**
    * @deprecated DNS zone on which to filter the returned DNS zones.
    */
-  dnsZone: string
+  dnsZone?: string
   /**
    * DNS zones on which to filter the returned DNS zones.
    */

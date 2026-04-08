@@ -20,6 +20,16 @@ export const ListAttachmentsRequest = {
   },
 }
 
+export const ListFileSystemTypesRequest = {
+  page: {
+    greaterThan: 0,
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListFileSystemsRequest = {
   page: {
     greaterThan: 0,

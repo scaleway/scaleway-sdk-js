@@ -252,7 +252,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Update a mailbox name, recovery email, subscription period or password with its ID.. Update a mailbox name, recovery email, subscription period or password with its ID.
+   * Update a mailbox subscription period or password with its ID.. Update a mailbox subscription period or password with its ID.
    *
    * @param request - The request {@link UpdateMailboxRequest}
    * @returns A Promise of Mailbox

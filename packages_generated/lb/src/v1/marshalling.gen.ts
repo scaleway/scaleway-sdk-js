@@ -682,7 +682,9 @@ const unmarshalLbType = (data: unknown): LbType => {
   }
 
   return {
+    bandwidth: data.bandwidth,
     description: data.description,
+    multicloud: data.multicloud,
     name: data.name,
     region: data.region,
     stockStatus: data.stock_status,

@@ -34,6 +34,7 @@ import type {
   ExportJob,
   ExportJobS3,
   ExportJobStatus,
+  InstancePrivateNetworkInterfaceInfo,
   InstanceServerInfo,
   IpamIpInfo,
   KeyManagerKeyInfo,
@@ -419,6 +420,20 @@ const unmarshalEdgeServicesWAFStageInfo = (data: unknown): EdgeServicesWAFStageI
   } as EdgeServicesWAFStageInfo
 }
 
+const unmarshalInstancePrivateNetworkInterfaceInfo = (data: unknown): InstancePrivateNetworkInterfaceInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstancePrivateNetworkInterfaceInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    privateNetworkId: data.private_network_id,
+    securityGroupId: data.security_group_id,
+    serverId: data.server_id,
+  } as InstancePrivateNetworkInterfaceInfo
+}
+
 const unmarshalInstanceServerInfo = (data: unknown): InstanceServerInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -728,6 +743,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     edgeServicesTlsStageInfo: data.edge_services_tls_stage_info ? unmarshalEdgeServicesTLSStageInfo(data.edge_services_tls_stage_info) : undefined,
     edgeServicesWafStageInfo: data.edge_services_waf_stage_info ? unmarshalEdgeServicesWAFStageInfo(data.edge_services_waf_stage_info) : undefined,
     id: data.id,
+    instancePrivateNetworkInterfaceInfo: data.instance_private_network_interface_info ? unmarshalInstancePrivateNetworkInterfaceInfo(data.instance_private_network_interface_info) : undefined,
     instanceServerInfo: data.instance_server_info ? unmarshalInstanceServerInfo(data.instance_server_info) : undefined,
     ipamIpInfo: data.ipam_ip_info ? unmarshalIpamIpInfo(data.ipam_ip_info) : undefined,
     keyManagerKeyInfo: data.key_manager_key_info ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info) : undefined,

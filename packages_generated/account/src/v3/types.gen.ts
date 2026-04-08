@@ -11,6 +11,7 @@ export type ContractType =
   | 'baremetal'
   | 'network'
   | 'core'
+  | 'vps'
 
 export type ListContractSignaturesRequestOrderBy =
   | 'signed_at_asc'

@@ -1,0 +1,20 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 0.3.0 (2026-04-07)
+
+### Features
+
+- **generate-react-queries:** rewrite generator to use metadata instead of ts-morph ([#2865](https://github.com/scaleway/scaleway-sdk-js/issues/2865)) ([6b383fa](https://github.com/scaleway/scaleway-sdk-js/commit/6b383fa17c91fb4ef16b30b6b41dcb8f806ef6a0))
+
+# 0.2.0 (2026-03-27)
+
+### Bug Fixes
+
+- **client:** flexible type for waiter ([#2851](https://github.com/scaleway/scaleway-sdk-js/issues/2851)) ([711eb6b](https://github.com/scaleway/scaleway-sdk-js/commit/711eb6b135a85957b1aadeec53d96e3ba6f84570))
+
+### Features
+
+- **chore:** generate packages ([#2821](https://github.com/scaleway/scaleway-sdk-js/issues/2821)) ([c506514](https://github.com/scaleway/scaleway-sdk-js/commit/c50651445af0ea4bbbb65a217579ebaf87780982))

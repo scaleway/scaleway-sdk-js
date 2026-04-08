@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-file@2.4.0...@scaleway/sdk-file@2.5.0) (2026-04-07)
+
+### Features
+
+- **api:** update generated apis ([#2885](https://github.com/scaleway/scaleway-sdk-js/issues/2885)) ([428759a](https://github.com/scaleway/scaleway-sdk-js/commit/428759a067817a8ac62e45ce41f271ce0336b409))
+
+# [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-file@2.3.2...@scaleway/sdk-file@2.4.0) (2026-04-02)
+
+### Features
+
+- update generated APIs ([#2881](https://github.com/scaleway/scaleway-sdk-js/issues/2881)) ([79e7ad8](https://github.com/scaleway/scaleway-sdk-js/commit/79e7ad88355e2d8073764b2459749f3888493302))
+
+## 2.3.2 (2026-03-27)
+
+### Bug Fixes
+
+- **build:** output ([#2842](https://github.com/scaleway/scaleway-sdk-js/issues/2842)) ([4cc01dd](https://github.com/scaleway/scaleway-sdk-js/commit/4cc01dd01c88c29f6c46afd4fc22eeb0ae392b9d))
+
 ## [2.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-file@2.3.0...@scaleway/sdk-file@2.3.1) (2026-03-05)
 
 **Note:** Version bump only for package @scaleway/sdk-file

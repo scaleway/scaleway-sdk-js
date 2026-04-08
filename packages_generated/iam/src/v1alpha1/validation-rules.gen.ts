@@ -23,7 +23,7 @@ export const CreateApplicationRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[\w().\-]+( +[\w().\-]+)*$/,
   },
 }
 
@@ -35,7 +35,7 @@ export const CreateGroupRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[\w().\-]+( +[\w().\-]+)*$/,
   },
 }
 
@@ -47,7 +47,7 @@ export const CreatePolicyRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[\w().\-]+( +[\w().\-]+)*$/,
   },
 }
 
@@ -71,6 +71,7 @@ export const CreateUserRequestMember = {
   },
   password: {
     ignoreEmpty: true,
+    maxBytes: 72,
   },
   username: {
     maxLength: 150,
@@ -116,7 +117,7 @@ export const ListApplicationsRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[\w().\-]+( +[\w().\-]+)*$/,
   },
   page: {
     greaterThanOrEqual: 1,
@@ -286,7 +287,7 @@ export const UpdateApplicationRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[\w().\-]+( +[\w().\-]+)*$/,
   },
 }
 
@@ -297,7 +298,7 @@ export const UpdateGroupRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[\w().\-]+( +[\w().\-]+)*$/,
   },
 }
 
@@ -315,7 +316,7 @@ export const UpdatePolicyRequest = {
   name: {
     maxLength: 64,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9\(\)\._\- ]+$/,
+    pattern: /^[\w().\-]+( +[\w().\-]+)*$/,
   },
 }
 
@@ -332,6 +333,13 @@ export const UpdateSamlRequest = {
   },
   singleSignOnUrl: {
     prefix: "https://",
+  },
+}
+
+export const UpdateUserPasswordRequest = {
+  password: {
+    maxBytes: 72,
+    minBytes: 1,
   },
 }
 

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.3.3...@scaleway/sdk-react-hooks@0.4.0) (2026-04-07)
+
+### Bug Fixes
+
+- **sdk-react-hooks:** make reload sync ([#2878](https://github.com/scaleway/scaleway-sdk-js/issues/2878)) ([37f652d](https://github.com/scaleway/scaleway-sdk-js/commit/37f652d768758c7c958308cfa5789e1c3f77236a))
+
+### Features
+
+- **generate-react-queries:** rewrite generator to use metadata instead of ts-morph ([#2865](https://github.com/scaleway/scaleway-sdk-js/issues/2865)) ([6b383fa](https://github.com/scaleway/scaleway-sdk-js/commit/6b383fa17c91fb4ef16b30b6b41dcb8f806ef6a0))
+- **sdk-react-hooks:** ✨ add file system types query hooks ([#2887](https://github.com/scaleway/scaleway-sdk-js/issues/2887)) ([cbbd6da](https://github.com/scaleway/scaleway-sdk-js/commit/cbbd6da1e6bcba14d78d99719ee9966d092ecc93))
+
+## [0.3.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.3.2...@scaleway/sdk-react-hooks@0.3.3) (2026-04-02)
+
+**Note:** Version bump only for package @scaleway/sdk-react-hooks
+
+## [0.3.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.3.1...@scaleway/sdk-react-hooks@0.3.2) (2026-03-27)
+
+**Note:** Version bump only for package @scaleway/sdk-react-hooks
+
 ## [0.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.3.0...@scaleway/sdk-react-hooks@0.3.1) (2026-03-16)
 
 **Note:** Version bump only for package @scaleway/sdk-react-hooks

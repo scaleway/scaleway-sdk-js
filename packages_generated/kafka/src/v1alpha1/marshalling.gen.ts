@@ -431,6 +431,7 @@ export const marshalUpdateClusterRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   tags: request.tags,
+  version: request.version,
 })
 
 export const marshalUpdateUserRequest = (

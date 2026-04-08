@@ -46,6 +46,7 @@ export type {
   ExportJobS3,
   ExportJobStatus,
   ExportJobStatusCode,
+  InstancePrivateNetworkInterfaceInfo,
   InstanceServerInfo,
   IpamIpInfo,
   KeyManagerKeyInfo,

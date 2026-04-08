@@ -9,12 +9,16 @@ import type {
   AddSubnetsResponse,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
+  CreateVPCConnectorRequest,
   CreateVPCRequest,
   DeleteSubnetsRequest,
   DeleteSubnetsResponse,
   GetAclResponse,
   ListPrivateNetworksResponse,
+  ListSubnetOverlapsResponse,
+  ListSubnetOverlapsResponseSubnetOverlap,
   ListSubnetsResponse,
+  ListVPCConnectorsResponse,
   ListVPCsResponse,
   PrivateNetwork,
   Route,
@@ -23,8 +27,11 @@ import type {
   Subnet,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
+  UpdateVPCConnectorRequest,
   UpdateVPCRequest,
   VPC,
+  VPCConnector,
+  VPCConnectorPeerInfo,
 } from './types.gen.js'
 
 const unmarshalSubnet = (data: unknown): Subnet => {
@@ -90,6 +97,43 @@ export const unmarshalRoute = (data: unknown): Route => {
     updatedAt: unmarshalDate(data.updated_at),
     vpcId: data.vpc_id,
   } as Route
+}
+
+const unmarshalVPCConnectorPeerInfo = (data: unknown): VPCConnectorPeerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VPCConnectorPeerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    vpcName: data.vpc_name,
+  } as VPCConnectorPeerInfo
+}
+
+export const unmarshalVPCConnector = (data: unknown): VPCConnector => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VPCConnector' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    peerInfo: data.peer_info ? unmarshalVPCConnectorPeerInfo(data.peer_info) : undefined,
+    projectId: data.project_id,
+    region: data.region,
+    status: data.status,
+    tags: data.tags,
+    targetVpcId: data.target_vpc_id,
+    updatedAt: unmarshalDate(data.updated_at),
+    vpcId: data.vpc_id,
+  } as VPCConnector
 }
 
 export const unmarshalVPC = (data: unknown): VPC => {
@@ -185,6 +229,34 @@ export const unmarshalListPrivateNetworksResponse = (data: unknown): ListPrivate
   } as ListPrivateNetworksResponse
 }
 
+const unmarshalListSubnetOverlapsResponseSubnetOverlap = (data: unknown): ListSubnetOverlapsResponseSubnetOverlap => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubnetOverlapsResponseSubnetOverlap' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    subnet: data.subnet,
+    subnetId: data.subnet_id,
+    targetSubnet: data.target_subnet,
+    targetSubnetId: data.target_subnet_id,
+  } as ListSubnetOverlapsResponseSubnetOverlap
+}
+
+export const unmarshalListSubnetOverlapsResponse = (data: unknown): ListSubnetOverlapsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSubnetOverlapsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    subnetOverlaps: unmarshalArrayOfObject(data.subnet_overlaps, unmarshalListSubnetOverlapsResponseSubnetOverlap),
+    totalCount: data.total_count,
+  } as ListSubnetOverlapsResponse
+}
+
 export const unmarshalListSubnetsResponse = (data: unknown): ListSubnetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -196,6 +268,19 @@ export const unmarshalListSubnetsResponse = (data: unknown): ListSubnetsResponse
     subnets: unmarshalArrayOfObject(data.subnets, unmarshalSubnet),
     totalCount: data.total_count,
   } as ListSubnetsResponse
+}
+
+export const unmarshalListVPCConnectorsResponse = (data: unknown): ListVPCConnectorsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVPCConnectorsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    vpcConnectors: unmarshalArrayOfObject(data.vpc_connectors, unmarshalVPCConnector),
+  } as ListVPCConnectorsResponse
 }
 
 export const unmarshalListVPCsResponse = (data: unknown): ListVPCsResponse => {
@@ -253,6 +338,16 @@ export const marshalCreateRouteRequest = (
   nexthop_resource_id: request.nexthopResourceId,
   nexthop_vpc_connector_id: request.nexthopVpcConnectorId,
   tags: request.tags,
+  vpc_id: request.vpcId,
+})
+
+export const marshalCreateVPCConnectorRequest = (
+  request: CreateVPCConnectorRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name || randomName('VPCConnector'),
+  tags: request.tags,
+  target_vpc_id: request.targetVpcId,
   vpc_id: request.vpcId,
 })
 
@@ -315,6 +410,14 @@ export const marshalUpdateRouteRequest = (
   nexthop_private_network_id: request.nexthopPrivateNetworkId,
   nexthop_resource_id: request.nexthopResourceId,
   nexthop_vpc_connector_id: request.nexthopVpcConnectorId,
+  tags: request.tags,
+})
+
+export const marshalUpdateVPCConnectorRequest = (
+  request: UpdateVPCConnectorRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
   tags: request.tags,
 })
 

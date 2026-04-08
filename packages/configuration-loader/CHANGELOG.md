@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2026-04-02)
+
+### Features
+
+- **configuration-loader:** add async config loading and file permission check ([#2860](https://github.com/scaleway/scaleway-sdk-js/issues/2860)) ([1377d94](https://github.com/scaleway/scaleway-sdk-js/commit/1377d94a2a01c6a717781513affd634c7fc61b98))
+
 # 2.2.0 (2026-03-05)
 
 ### Features

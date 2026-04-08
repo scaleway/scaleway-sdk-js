@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-datalab",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Scaleway SDK datalab",
   "license": "Apache-2.0",
   "files": [

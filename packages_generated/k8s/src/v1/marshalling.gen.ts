@@ -117,11 +117,13 @@ const unmarshalClusterAutoscalerConfig = (data: unknown): ClusterAutoscalerConfi
     expander: data.expander,
     expendablePodsPriorityCutoff: data.expendable_pods_priority_cutoff,
     ignoreDaemonsetsUtilization: data.ignore_daemonsets_utilization,
+    logLevel: data.log_level,
     maxGracefulTerminationSec: data.max_graceful_termination_sec,
     scaleDownDelayAfterAdd: data.scale_down_delay_after_add,
     scaleDownDisabled: data.scale_down_disabled,
     scaleDownUnneededTime: data.scale_down_unneeded_time,
     scaleDownUtilizationThreshold: data.scale_down_utilization_threshold,
+    skipNodesWithLocalStorage: data.skip_nodes_with_local_storage,
   } as ClusterAutoscalerConfig
 }
 
@@ -594,11 +596,13 @@ const marshalCreateClusterRequestAutoscalerConfig = (
   expander: request.expander,
   expendable_pods_priority_cutoff: request.expendablePodsPriorityCutoff,
   ignore_daemonsets_utilization: request.ignoreDaemonsetsUtilization,
+  log_level: request.logLevel,
   max_graceful_termination_sec: request.maxGracefulTerminationSec,
   scale_down_delay_after_add: request.scaleDownDelayAfterAdd,
   scale_down_disabled: request.scaleDownDisabled,
   scale_down_unneeded_time: request.scaleDownUnneededTime,
   scale_down_utilization_threshold: request.scaleDownUtilizationThreshold,
+  skip_nodes_with_local_storage: request.skipNodesWithLocalStorage,
 })
 
 const marshalCreateClusterRequestOpenIDConnectConfig = (
@@ -757,11 +761,13 @@ const marshalUpdateClusterRequestAutoscalerConfig = (
   expander: request.expander,
   expendable_pods_priority_cutoff: request.expendablePodsPriorityCutoff,
   ignore_daemonsets_utilization: request.ignoreDaemonsetsUtilization,
+  log_level: request.logLevel,
   max_graceful_termination_sec: request.maxGracefulTerminationSec,
   scale_down_delay_after_add: request.scaleDownDelayAfterAdd,
   scale_down_disabled: request.scaleDownDisabled,
   scale_down_unneeded_time: request.scaleDownUnneededTime,
   scale_down_utilization_threshold: request.scaleDownUtilizationThreshold,
+  skip_nodes_with_local_storage: request.skipNodesWithLocalStorage,
 })
 
 const marshalUpdateClusterRequestOpenIDConnectConfig = (
