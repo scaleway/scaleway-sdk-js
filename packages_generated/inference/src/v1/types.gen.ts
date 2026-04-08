@@ -561,6 +561,10 @@ export type ListModelsRequest = {
    */
   projectId?: string
   /**
+   * Filter by Organization ID.
+   */
+  organizationId?: string
+  /**
    * Filter by model name.
    */
   name?: string
