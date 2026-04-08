@@ -64,7 +64,7 @@ export async function generateFromMetadata(
         )
 
         if (existsSync(generatedDir)) {
-          rmSync(generatedDir, { recursive: true })
+          rmSync(generatedDir, { recursive: true, force: true })
         }
         mkdirSync(generatedDir, { recursive: true })
 
