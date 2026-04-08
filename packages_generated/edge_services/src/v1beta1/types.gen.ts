@@ -157,6 +157,11 @@ export type SearchWafStagesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type StageStatus =
+  | 'unknown_status'
+  | 'inactive'
+  | 'active'
+
 export type WafStageMode =
   | 'unknown_mode'
   | 'disable'
@@ -298,6 +303,10 @@ export interface BackendStage {
    */
   pipelineId: string
   /**
+   * Current status of the stage.
+   */
+  status: StageStatus
+  /**
    * Date the backend stage was created.
    */
   createdAt?: Date
@@ -348,6 +357,10 @@ export interface CacheStage {
    */
   includeCookies: boolean
   /**
+   * Current status of the stage.
+   */
+  status: StageStatus
+  /**
    * Date the cache stage was created.
    */
   createdAt?: Date
@@ -356,19 +369,19 @@ export interface CacheStage {
    */
   updatedAt?: Date
   /**
+   *
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId', 'routeStageId' could be set.
+   */
+  wafStageId?: string
+  /**
    * Backend stage ID the cache stage is linked to.
    *
-   * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId', 'routeStageId' could be set.
    */
   backendStageId?: string
   /**
    *
-   * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
-   */
-  wafStageId?: string
-  /**
-   *
-   * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
+   * One-of ('next'): at most one of 'wafStageId', 'backendStageId', 'routeStageId' could be set.
    */
   routeStageId?: string
 }
@@ -395,6 +408,10 @@ export interface DNSStage {
    * Pipeline ID the DNS stage belongs to.
    */
   pipelineId: string
+  /**
+   * Current status of the stage.
+   */
+  status: StageStatus
   /**
    * Date the DNS stage was created.
    */
@@ -490,6 +507,10 @@ export interface RouteStage {
    */
   backendStageId?: string
   /**
+   * Current status of the stage.
+   */
+  status: StageStatus
+  /**
    * Date the route stage was created.
    */
   createdAt?: Date
@@ -521,6 +542,10 @@ export interface TLSStage {
    * Expiration date of the certificate.
    */
   certificateExpiresAt?: Date
+  /**
+   * Current status of the stage.
+   */
+  status: StageStatus
   /**
    * Date the TLS stage was created.
    */
@@ -571,6 +596,10 @@ export interface WafStage {
    * Sensitivity level (`1`,`2`,`3`,`4`) to use when classifying requests as malicious. With a high level, requests are more likely to be classed as malicious, and false positives are expected. With a lower level, requests are more likely to be classed as benign.
    */
   paranoiaLevel: number
+  /**
+   * Current status of the stage.
+   */
+  status: StageStatus
   /**
    * Date the WAF stage was created.
    */
