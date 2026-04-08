@@ -123,6 +123,7 @@ export type {
   SetRouteRulesRequest,
   SetRouteRulesRequestRouteRule,
   SetRouteRulesResponse,
+  StageStatus,
   TLSSecret,
   TLSSecretsConfig,
   TLSStage,

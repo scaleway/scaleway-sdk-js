@@ -160,6 +160,7 @@ export const unmarshalBackendStage = (data: unknown): BackendStage => {
     scalewayS3: data.scaleway_s3 ? unmarshalScalewayS3BackendConfig(data.scaleway_s3) : undefined,
     scalewayServerlessContainer: data.scaleway_serverless_container ? unmarshalScalewayServerlessContainerBackendConfig(data.scaleway_serverless_container) : undefined,
     scalewayServerlessFunction: data.scaleway_serverless_function ? unmarshalScalewayServerlessFunctionBackendConfig(data.scaleway_serverless_function) : undefined,
+    status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as BackendStage
 }
@@ -179,6 +180,7 @@ export const unmarshalCacheStage = (data: unknown): CacheStage => {
     includeCookies: data.include_cookies,
     pipelineId: data.pipeline_id,
     routeStageId: data.route_stage_id,
+    status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
     wafStageId: data.waf_stage_id,
   } as CacheStage
@@ -199,6 +201,7 @@ export const unmarshalDNSStage = (data: unknown): DNSStage => {
     fqdns: data.fqdns,
     id: data.id,
     pipelineId: data.pipeline_id,
+    status: data.status,
     tlsStageId: data.tls_stage_id,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
@@ -254,6 +257,7 @@ export const unmarshalRouteStage = (data: unknown): RouteStage => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     pipelineId: data.pipeline_id,
+    status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
     wafStageId: data.waf_stage_id,
   } as RouteStage
@@ -289,6 +293,7 @@ export const unmarshalTLSStage = (data: unknown): TLSStage => {
     pipelineId: data.pipeline_id,
     routeStageId: data.route_stage_id,
     secrets: unmarshalArrayOfObject(data.secrets, unmarshalTLSSecret),
+    status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
     wafStageId: data.waf_stage_id,
   } as TLSStage
@@ -308,6 +313,7 @@ export const unmarshalWafStage = (data: unknown): WafStage => {
     mode: data.mode,
     paranoiaLevel: data.paranoia_level,
     pipelineId: data.pipeline_id,
+    status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as WafStage
 }
