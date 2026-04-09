@@ -69,6 +69,7 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     name: data.name,
     parentVolume: data.parent_volume ? unmarshalSnapshotParentVolume(data.parent_volume) : undefined,
     projectId: data.project_id,
+    public: data.public,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,
     status: data.status,
@@ -176,6 +177,7 @@ export const marshalCreateSnapshotRequest = (
 ): Record<string, unknown> => ({
   name: request.name || randomName('snp'),
   project_id: request.projectId ?? defaults.defaultProjectId,
+  public: request.public,
   tags: request.tags,
   volume_id: request.volumeId,
 })
@@ -244,6 +246,7 @@ export const marshalUpdateSnapshotRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
+  public: request.public,
   tags: request.tags,
 })
 
