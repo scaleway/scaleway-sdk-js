@@ -190,6 +190,10 @@ export interface Snapshot {
    * Storage class of the snapshot.
    */
   class: StorageClass
+  /**
+   * True if the snapshot can be used by anyone to create a volume from.
+   */
+  public: boolean
 }
 
 
@@ -294,6 +298,10 @@ export type CreateSnapshotRequest = {
    * List of tags assigned to the snapshot.
    */
   tags?: string[]
+  /**
+   * Snapshots are private by default, public snapshots are mainly used to publish OS images.
+   */
+  public: boolean
 }
 
 
@@ -600,6 +608,10 @@ export type UpdateSnapshotRequest = {
    * List of tags assigned to the snapshot.
    */
   tags?: string[]
+  /**
+   * Snapshots are private by default, public snapshots are mainly used to publish OS images.
+   */
+  public?: boolean
 }
 
 
