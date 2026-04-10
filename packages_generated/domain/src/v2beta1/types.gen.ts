@@ -897,7 +897,7 @@ export type CloneDNSZoneRequest = {
 
 export type CreateDNSZoneRequest = {
   /**
-   * Domain in which to crreate the DNS zone.
+   * Domain in which to create the DNS zone.
    */
   domain: string
   /**
@@ -1883,7 +1883,7 @@ export interface UpdateDNSZoneRecordsResponse {
 
 export type UpdateDNSZoneRequest = {
   /**
-   * DNS zone to update.
+   * The full name of the DNS zone to modify. For a root zone (e.g., example.com), enter `example.com`. For a specific sub-zone (e.g., prod.example.com), enter `prod.example.com`.
    */
   dnsZone: string
   /**
