@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.11.0 (2026-04-13)
+
+### Features
+
+- **edge_services:** add status to stages ([#2890](https://github.com/scaleway/scaleway-sdk-js/issues/2890)) ([fe59c90](https://github.com/scaleway/scaleway-sdk-js/commit/fe59c90b4790b246f20dbb71c3c67f08d81172e0))
+
 # [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.9.0...@scaleway/sdk-edge-services@2.10.0) (2026-04-02)
 
 ### Features

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.3 (2026-04-13)
+
+### Bug Fixes
+
+- convert deprecated rmDirSync recursive to rmSync ([#2888](https://github.com/scaleway/scaleway-sdk-js/issues/2888)) ([0efc127](https://github.com/scaleway/scaleway-sdk-js/commit/0efc1275bc6e412cc20c01dec3c0c8ecd4c6499e))
+- **release:** align generate-react-sdk formatting to keep release worktree clean. ([#2896](https://github.com/scaleway/scaleway-sdk-js/issues/2896)) ([8dc0008](https://github.com/scaleway/scaleway-sdk-js/commit/8dc0008743b962a2a5b3ecffe9ed7dc00ff979c3))
+
 ## 0.2.2 (2026-03-13)
 
 ### Bug Fixes

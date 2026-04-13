@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2026-04-13)
+
+### Features
+
+- **block:** introduce public snapshots ([#2894](https://github.com/scaleway/scaleway-sdk-js/issues/2894)) ([d712205](https://github.com/scaleway/scaleway-sdk-js/commit/d712205b65ab8933c1e02e2df0ecc8076f47e526))
+
 # [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-block@2.3.2...@scaleway/sdk-block@2.4.0) (2026-04-02)
 
 ### Features

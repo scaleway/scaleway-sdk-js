@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2026-04-13)
+
+### Features
+
+- **inference:** add organization id to ListModelsRequest ([#2891](https://github.com/scaleway/scaleway-sdk-js/issues/2891)) ([28f0ae0](https://github.com/scaleway/scaleway-sdk-js/commit/28f0ae00318d664c99358cd0b80d6eb893669293))
+- **inference:** update max_size field documentation ([#2892](https://github.com/scaleway/scaleway-sdk-js/issues/2892)) ([ee4dcba](https://github.com/scaleway/scaleway-sdk-js/commit/ee4dcba8a50cdd3976f0461381a6fa862abb1af4))
+
 # [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-inference@2.3.2...@scaleway/sdk-inference@2.4.0) (2026-04-02)
 
 ### Features

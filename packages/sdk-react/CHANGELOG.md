@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.2.6...@scaleway/sdk-react@0.2.7) (2026-04-13)
+
+**Note:** Version bump only for package @scaleway/sdk-react
+
 ## [0.2.6](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.2.5...@scaleway/sdk-react@0.2.6) (2026-04-07)
 
 **Note:** Version bump only for package @scaleway/sdk-react

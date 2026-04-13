@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/generate-react-queries@0.3.0...@scaleway/generate-react-queries@0.3.1) (2026-04-13)
+
+### Bug Fixes
+
+- convert deprecated rmDirSync recursive to rmSync ([#2888](https://github.com/scaleway/scaleway-sdk-js/issues/2888)) ([0efc127](https://github.com/scaleway/scaleway-sdk-js/commit/0efc1275bc6e412cc20c01dec3c0c8ecd4c6499e))
+
 # 0.3.0 (2026-04-07)
 
 ### Bug Fixes

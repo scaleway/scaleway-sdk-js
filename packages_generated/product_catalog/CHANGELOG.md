@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2026-04-13)
+
+### Features
+
+- **product_catalog:** add filter by API ID in the catalog API ([#2889](https://github.com/scaleway/scaleway-sdk-js/issues/2889)) ([5e4d3a2](https://github.com/scaleway/scaleway-sdk-js/commit/5e4d3a23eb961241b4dae5bdb3b4d6e4fc183959))
+
 ## [2.7.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.7.0...@scaleway/sdk-product-catalog@2.7.1) (2026-04-02)
 
 **Note:** Version bump only for package @scaleway/sdk-product-catalog
