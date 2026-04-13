@@ -39,7 +39,7 @@ export const generateAPI = ({
   if (existsSync(dir)) {
     rmSync(dir, {
       recursive: true,
-      force: true
+      force: true,
     })
   }
 
