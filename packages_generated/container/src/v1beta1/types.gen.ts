@@ -350,7 +350,7 @@ export interface Container {
    */
   maxConcurrency: number
   /**
-   * Domain name attributed to the contaioner.
+   * Domain name attributed to the container.
    */
   domainName: string
   /**
@@ -511,7 +511,7 @@ export interface Namespace {
    */
   registryNamespaceId: string
   /**
-   * Last error message of the namesace.
+   * Last error message of the namespace.
    */
   errorMessage?: string
   /**
