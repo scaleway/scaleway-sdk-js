@@ -3,4 +3,5 @@
  * PLEASE DO NOT EDIT HERE
  */
 
+export * as Containerv1 from './v1/index.gen.js'
 export * as Containerv1beta1 from './v1beta1/index.gen.js'
