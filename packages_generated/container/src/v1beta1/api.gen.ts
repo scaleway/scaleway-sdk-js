@@ -309,7 +309,8 @@ and the status is set to `pending` accordingly.
    * Update an existing container. Update the container associated with the specified ID.
 
 When updating a container, the container is automatically redeployed to apply the changes.
-This behavior can be changed by setting the `redeploy` field to `false` in the request.
+
+Warning: The `redeploy` field has been deprecated. An update now always redeploys the container.
    *
    * @param request - The request {@link UpdateContainerRequest}
    * @returns A Promise of Container
@@ -346,6 +347,10 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
   
   /**
    * Deploy a container. Deploy a container associated with the specified ID.
+
+Since updating a container now always deploys it (and passes its status to `pending`), this call becomes superfluous.
+
+Moreover, calling `DeployContainer` immediately after `UpdateContainer` can cause `409 - resource is in a transient state` errors, so it is better to not use it when updating a container.
    *
    * @param request - The request {@link DeployContainerRequest}
    * @returns A Promise of Container
