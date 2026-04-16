@@ -1,1 +1,1 @@
-export { generateAPI } from './generate.ts'
+export { generateAPI } from './generate-metadata.ts'

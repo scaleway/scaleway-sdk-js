@@ -66,7 +66,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: "false"
+          NPM_CONFIG_PROVENANCE: 'false'
 
       - name: Notify Slack on success
         if: success()
@@ -87,7 +87,7 @@ jobs:
           "${SLACK_WEBHOOK_SDK_DEPLOY}"
         env:
           SLACK_WEBHOOK_SDK_DEPLOY: ${{ secrets.SLACK_WEBHOOK_SDK_DEPLOY }}
-          SUCCESS_MESSAGE: ":white_check_mark: scaleway-sdk-js released to npm: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|view run>"
+          SUCCESS_MESSAGE: ':white_check_mark: scaleway-sdk-js released to npm: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|view run>'
 
       - name: Notify Slack on failure
         if: failure()
@@ -108,4 +108,4 @@ jobs:
           "${SLACK_WEBHOOK_SDK_DEPLOY}"
         env:
           SLACK_WEBHOOK_SDK_DEPLOY: ${{ secrets.SLACK_WEBHOOK_SDK_DEPLOY }}
-          FAILURE_MESSAGE: ":x: scaleway-sdk-js npm deploy failed: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|view run>"
+          FAILURE_MESSAGE: ':x: scaleway-sdk-js npm deploy failed: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|view run>'

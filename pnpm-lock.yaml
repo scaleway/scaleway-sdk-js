@@ -270,6 +270,9 @@ importers:
       '@scaleway/generate-react-sdk':
         specifier: workspace:*
         version: link:../../tools/generate-react-sdk
+      '@scaleway/sdk-mailbox':
+        specifier: workspace:*
+        version: link:../../packages_generated/mailbox
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
@@ -1236,9 +1239,6 @@ importers:
       '@types/node':
         specifier: 20.19.35
         version: 20.19.35
-      ts-morph:
-        specifier: 27.0.2
-        version: 27.0.2
 
 packages:
   '@acemir/cssom@0.9.29':
