@@ -3,6 +3,9 @@ import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, marshalBlobToScwFile, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, unmarshalTimeSeries, } from '@scaleway/sdk-client'
 import type {
   AddOptionServerRequest,
+  BatchCreateServersRequest,
+  BatchCreateServersRequestServerConfig,
+  BatchCreateServersResponse,
   BMCAccess,
   CertificationOption,
   CPU,
@@ -570,6 +573,18 @@ export const unmarshalBMCAccess = (data: unknown): BMCAccess => {
   } as BMCAccess
 }
 
+export const unmarshalBatchCreateServersResponse = (data: unknown): BatchCreateServersResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'BatchCreateServersResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    servers: unmarshalArrayOfObject(data.servers, unmarshalServer),
+  } as BatchCreateServersResponse
+}
+
 export const unmarshalGetServerMetricsResponse = (data: unknown): GetServerMetricsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -805,6 +820,23 @@ export const marshalAddOptionServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   expires_at: request.expiresAt,
+})
+
+const marshalBatchCreateServersRequestServerConfig = (
+  request: BatchCreateServersRequestServerConfig,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  hostname: request.hostname,
+  tags: request.tags,
+})
+
+export const marshalBatchCreateServersRequest = (
+  request: BatchCreateServersRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  common_configuration: ((request.commonConfiguration !== undefined) ?  marshalCreateServerRequest(request.commonConfiguration, defaults): undefined),
+  servers: ((request.servers !== undefined) ?  request.servers.map(elt => marshalBatchCreateServersRequestServerConfig(elt, defaults)): undefined),
 })
 
 export const marshalInstallServerRequest = async (

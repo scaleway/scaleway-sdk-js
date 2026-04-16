@@ -526,6 +526,13 @@ export interface RaidController {
 }
 
 
+export interface BatchCreateServersRequestServerConfig {
+  hostname: string
+  description: string
+  tags: string[]
+}
+
+
 export type CreateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1001,6 +1008,27 @@ export interface BMCAccess {
    * The date after which the BMC (Baseboard Management Controller) access will be closed.
    */
   expiresAt?: Date
+}
+
+
+export type BatchCreateServersRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * Configuration wanted for the servers to create.
+   */
+  commonConfiguration?: CreateServerRequest
+  /**
+   * List of servers to create.
+   */
+  servers?: BatchCreateServersRequestServerConfig[]
+}
+
+
+export interface BatchCreateServersResponse {
+  servers: Server[]
 }
 
 

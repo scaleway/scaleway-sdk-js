@@ -8,6 +8,9 @@ export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
   AddOptionServerRequest,
+  BatchCreateServersRequest,
+  BatchCreateServersRequestServerConfig,
+  BatchCreateServersResponse,
   BMCAccess,
   CertificationOption,
   CPU,

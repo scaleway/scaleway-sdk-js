@@ -13,6 +13,7 @@ import {
 import {SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL,} from './content.gen.js'
 import {
   marshalAddOptionServerRequest,
+  marshalBatchCreateServersRequest,
   marshalCreateServerRequest,
   marshalInstallServerRequest,
   marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
@@ -24,6 +25,7 @@ import {
   marshalUpdateServerRequest,
   marshalUpdateSettingRequest,
   marshalValidatePartitioningSchemaRequest,
+  unmarshalBatchCreateServersResponse,
   unmarshalBMCAccess,
   unmarshalGetServerMetricsResponse,
   unmarshalIP,
@@ -45,6 +47,8 @@ import {
 } from './marshalling.gen.js'
 import type {
   AddOptionServerRequest,
+  BatchCreateServersRequest,
+  BatchCreateServersResponse,
   BMCAccess,
   CreateServerRequest,
   DeleteOptionServerRequest,
@@ -203,6 +207,26 @@ export class API extends ParentAPI {
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
       },
       unmarshalServer,
+    )
+
+  
+  /**
+   * Create multiple Elastic Metal servers. Create multiple new Elastic Metal servers. Once the servers are created, proceed with the [installation of an OS](#post-3e949e).
+   *
+   * @param request - The request {@link BatchCreateServersRequest}
+   * @returns A Promise of BatchCreateServersResponse
+   */
+  batchCreateServers = (request: Readonly<BatchCreateServersRequest> = {}) =>
+    this.client.fetch<BatchCreateServersResponse>(
+      {
+        body: JSON.stringify(
+          marshalBatchCreateServersRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/batch-create-servers`,
+      },
+      unmarshalBatchCreateServersResponse,
     )
 
   
