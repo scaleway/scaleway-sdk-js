@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2026-04-17)
+
+### Features
+
+- **sdk:** add metadata of the package ([#2902](https://github.com/scaleway/scaleway-sdk-js/issues/2902)) ([e44f293](https://github.com/scaleway/scaleway-sdk-js/commit/e44f293cc1ba24625cc313b7d612ca1200b8b40f))
+
 ## [2.4.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-cockpit@2.4.0...@scaleway/sdk-cockpit@2.4.1) (2026-04-02)
 
 **Note:** Version bump only for package @scaleway/sdk-cockpit

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2026-04-17)
+
+### Features
+
+- **baremetal:** expose BatchCreateServers ([#2900](https://github.com/scaleway/scaleway-sdk-js/issues/2900)) ([7d398ca](https://github.com/scaleway/scaleway-sdk-js/commit/7d398ca72a5879b3e061b349fd742286e65a4b35))
+- **sdk:** add metadata of the package ([#2902](https://github.com/scaleway/scaleway-sdk-js/issues/2902)) ([e44f293](https://github.com/scaleway/scaleway-sdk-js/commit/e44f293cc1ba24625cc313b7d612ca1200b8b40f))
+
 # [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-baremetal@2.3.2...@scaleway/sdk-baremetal@2.4.0) (2026-04-02)
 
 ### Features

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.6.0 (2026-04-17)
+
+### Features
+
+- **sdk:** add metadata of the package ([#2902](https://github.com/scaleway/scaleway-sdk-js/issues/2902)) ([e44f293](https://github.com/scaleway/scaleway-sdk-js/commit/e44f293cc1ba24625cc313b7d612ca1200b8b40f))
+- **serverless:** add note on UpdateContainer and redeploy ([#2898](https://github.com/scaleway/scaleway-sdk-js/issues/2898)) ([893aefd](https://github.com/scaleway/scaleway-sdk-js/commit/893aefd8cc85c2e5b31c6b92b37dee6fadedba87))
+
 # [2.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@2.4.2...@scaleway/sdk-container@2.5.0) (2026-04-02)
 
 ### Features
