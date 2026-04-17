@@ -1,13 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import {
-  enrichForPagination,
-  API as ParentAPI,
-  resolveOneOf,
-  urlParams,
-  validatePathParam,
-} from '@scaleway/sdk-client'
+import { enrichForPagination, API as ParentAPI, resolveOneOf, urlParams, validatePathParam } from '@scaleway/sdk-client'
 import {
   marshalAddGroupMemberRequest,
   marshalAddGroupMembersRequest,
@@ -234,7 +228,7 @@ export class API extends ParentAPI {
       },
       unmarshalListSSHKeysResponse,
     )
-  
+
   /**
    * List SSH keys. List SSH keys. By default, the SSH keys listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You can define additional parameters for your query such as `organization_id`, `name`, `project_id` and `disabled`.
    *
@@ -244,7 +238,6 @@ export class API extends ParentAPI {
   listSSHKeys = (request: Readonly<ListSSHKeysRequest> = {}) =>
     enrichForPagination('sshKeys', this.pageOfListSSHKeys, request)
 
-  
   /**
    * Create an SSH key. Add a new SSH key to a Scaleway Project. You must specify the `name`, `public_key` and `project_id`.
    *
@@ -254,9 +247,7 @@ export class API extends ParentAPI {
   createSSHKey = (request: Readonly<CreateSSHKeyRequest>) =>
     this.client.fetch<SSHKey>(
       {
-        body: JSON.stringify(
-          marshalCreateSSHKeyRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateSSHKeyRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/ssh-keys`,
@@ -264,7 +255,6 @@ export class API extends ParentAPI {
       unmarshalSSHKey,
     )
 
-  
   /**
    * Get an SSH key. Retrieve information about a given SSH key, specified by the `ssh_key_id` parameter. The SSH key's full details, including `id`, `name`, `public_key`, and `project_id` are returned in the response.
    *
@@ -280,7 +270,6 @@ export class API extends ParentAPI {
       unmarshalSSHKey,
     )
 
-  
   /**
    * Update an SSH key. Update the parameters of an SSH key, including `name` and `disable`.
    *
@@ -290,9 +279,7 @@ export class API extends ParentAPI {
   updateSSHKey = (request: Readonly<UpdateSSHKeyRequest>) =>
     this.client.fetch<SSHKey>(
       {
-        body: JSON.stringify(
-          marshalUpdateSSHKeyRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateSSHKeyRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
@@ -300,21 +287,17 @@ export class API extends ParentAPI {
       unmarshalSSHKey,
     )
 
-  
   /**
    * Delete an SSH key. Delete a given SSH key, specified by the `ssh_key_id`. Deleting an SSH is permanent, and cannot be undone. Note that you might need to update any configurations that used the SSH key.
    *
    * @param request - The request {@link DeleteSSHKeyRequest}
    */
   deleteSSHKey = (request: Readonly<DeleteSSHKeyRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
+    })
 
-  
   protected pageOfListUsers = (request: Readonly<ListUsersRequest> = {}) =>
     this.client.fetch<ListUsersResponse>(
       {
@@ -333,17 +316,15 @@ export class API extends ParentAPI {
       },
       unmarshalListUsersResponse,
     )
-  
+
   /**
    * List users of an Organization. List the users of an Organization. By default, the users listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `organization_id` in the query path of your request. You can also define additional parameters for your query such as `user_ids`.
    *
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
    */
-  listUsers = (request: Readonly<ListUsersRequest> = {}) =>
-    enrichForPagination('users', this.pageOfListUsers, request)
+  listUsers = (request: Readonly<ListUsersRequest> = {}) => enrichForPagination('users', this.pageOfListUsers, request)
 
-  
   /**
    * Get a given user. Retrieve information about a user, specified by the `user_id` parameter. The user's full details, including `id`, `email`, `organization_id`, `status` and `mfa` are returned in the response.
    *
@@ -359,7 +340,6 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * Update a user. Update the parameters of a user, including `tags`.
    *
@@ -369,9 +349,7 @@ export class API extends ParentAPI {
   updateUser = (request: Readonly<UpdateUserRequest>) =>
     this.client.fetch<User>(
       {
-        body: JSON.stringify(
-          marshalUpdateUserRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateUserRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
@@ -379,21 +357,17 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * Delete a guest user from an Organization. Remove a user from an Organization in which they are a guest. You must define the `user_id` in your request. Note that removing a user from an Organization automatically deletes their API keys, and any policies directly attached to them become orphaned.
    *
    * @param request - The request {@link DeleteUserRequest}
    */
   deleteUser = (request: Readonly<DeleteUserRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
+    })
 
-  
   /**
    * Create a new user. Create a new user. You must define the `organization_id` in your request. If you are adding a member, enter the member's details. If you are adding a guest, you must define the `email` and not add the member attribute.
    *
@@ -403,9 +377,7 @@ export class API extends ParentAPI {
   createUser = (request: Readonly<CreateUserRequest> = {}) =>
     this.client.fetch<User>(
       {
-        body: JSON.stringify(
-          marshalCreateUserRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateUserRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users`,
@@ -413,7 +385,6 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * Update an user's username.. Update an user's username.
    *
@@ -423,9 +394,7 @@ export class API extends ParentAPI {
   updateUserUsername = (request: Readonly<UpdateUserUsernameRequest>) =>
     this.client.fetch<User>(
       {
-        body: JSON.stringify(
-          marshalUpdateUserUsernameRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateUserUsernameRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-username`,
@@ -433,7 +402,6 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * Update an user's password.. Update an user's password.
    *
@@ -443,9 +411,7 @@ export class API extends ParentAPI {
   updateUserPassword = (request: Readonly<UpdateUserPasswordRequest>) =>
     this.client.fetch<User>(
       {
-        body: JSON.stringify(
-          marshalUpdateUserPasswordRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateUserPasswordRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-password`,
@@ -453,7 +419,6 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * Create a MFA OTP.. Create a MFA OTP.
    *
@@ -471,7 +436,6 @@ export class API extends ParentAPI {
       unmarshalMFAOTP,
     )
 
-  
   /**
    * Validate a MFA OTP.. Validate a MFA OTP.
    *
@@ -481,9 +445,7 @@ export class API extends ParentAPI {
   validateUserMFAOTP = (request: Readonly<ValidateUserMFAOTPRequest>) =>
     this.client.fetch<ValidateUserMFAOTPResponse>(
       {
-        body: JSON.stringify(
-          marshalValidateUserMFAOTPRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalValidateUserMFAOTPRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/validate-mfa-otp`,
@@ -491,23 +453,19 @@ export class API extends ParentAPI {
       unmarshalValidateUserMFAOTPResponse,
     )
 
-  
   /**
    * Delete a MFA OTP.. Delete a MFA OTP.
    *
    * @param request - The request {@link DeleteUserMFAOTPRequest}
    */
   deleteUserMFAOTP = (request: Readonly<DeleteUserMFAOTPRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'DELETE',
-        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/mfa-otp`,
-      },
-    )
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'DELETE',
+      path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/mfa-otp`,
+    })
 
-  
   /**
    * Lock a member. Lock a member. A locked member cannot log in or use API keys until the locked status is removed.
    *
@@ -525,7 +483,6 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * Unlock a member.
    *
@@ -543,7 +500,6 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * List grace periods of a member. List the grace periods of a member.
    *
@@ -555,14 +511,11 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/iam/v1alpha1/grace-periods`,
-        urlParams: urlParams(
-          ['user_id', request.userId],
-        ),
+        urlParams: urlParams(['user_id', request.userId]),
       },
       unmarshalListGracePeriodsResponse,
     )
 
-  
   getUserConnections = (request: Readonly<GetUserConnectionsRequest>) =>
     this.client.fetch<GetUserConnectionsResponse>(
       {
@@ -572,7 +525,6 @@ export class API extends ParentAPI {
       unmarshalGetUserConnectionsResponse,
     )
 
-  
   initiateUserConnection = (request: Readonly<InitiateUserConnectionRequest>) =>
     this.client.fetch<InitiateUserConnectionResponse>(
       {
@@ -584,33 +536,22 @@ export class API extends ParentAPI {
       unmarshalInitiateUserConnectionResponse,
     )
 
-  
   joinUserConnection = (request: Readonly<JoinUserConnectionRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: JSON.stringify(
-          marshalJoinUserConnectionRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/join-connection`,
-      },
-    )
+    this.client.fetch<void>({
+      body: JSON.stringify(marshalJoinUserConnectionRequest(request, this.client.settings)),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/join-connection`,
+    })
 
-  
   removeUserConnection = (request: Readonly<RemoveUserConnectionRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: JSON.stringify(
-          marshalRemoveUserConnectionRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/remove-connection`,
-      },
-    )
+    this.client.fetch<void>({
+      body: JSON.stringify(marshalRemoveUserConnectionRequest(request, this.client.settings)),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/remove-connection`,
+    })
 
-  
   protected pageOfListApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
     this.client.fetch<ListApplicationsResponse>(
       {
@@ -629,7 +570,7 @@ export class API extends ParentAPI {
       },
       unmarshalListApplicationsResponse,
     )
-  
+
   /**
    * List applications of an Organization. List the applications of an Organization. By default, the applications listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `organization_id` in the query path of your request. You can also define additional parameters for your query such as `application_ids`.
    *
@@ -639,7 +580,6 @@ export class API extends ParentAPI {
   listApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
     enrichForPagination('applications', this.pageOfListApplications, request)
 
-  
   /**
    * Create a new application. Create a new application. You must define the `name` parameter in the request.
    *
@@ -649,9 +589,7 @@ export class API extends ParentAPI {
   createApplication = (request: Readonly<CreateApplicationRequest>) =>
     this.client.fetch<Application>(
       {
-        body: JSON.stringify(
-          marshalCreateApplicationRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateApplicationRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/applications`,
@@ -659,7 +597,6 @@ export class API extends ParentAPI {
       unmarshalApplication,
     )
 
-  
   /**
    * Get a given application. Retrieve information about an application, specified by the `application_id` parameter. The application's full details, including `id`, `email`, `organization_id`, `status` and `two_factor_enabled` are returned in the response.
    *
@@ -675,7 +612,6 @@ export class API extends ParentAPI {
       unmarshalApplication,
     )
 
-  
   /**
    * Update an application. Update the parameters of an application, including `name` and `description`.
    *
@@ -685,9 +621,7 @@ export class API extends ParentAPI {
   updateApplication = (request: Readonly<UpdateApplicationRequest>) =>
     this.client.fetch<Application>(
       {
-        body: JSON.stringify(
-          marshalUpdateApplicationRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateApplicationRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
@@ -695,21 +629,17 @@ export class API extends ParentAPI {
       unmarshalApplication,
     )
 
-  
   /**
    * Delete an application. Delete an application. Note that this action is irreversible and will automatically delete the application's API keys. Policies attached to users and applications via this group will no longer apply.
    *
    * @param request - The request {@link DeleteApplicationRequest}
    */
   deleteApplication = (request: Readonly<DeleteApplicationRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
+    })
 
-  
   protected pageOfListGroups = (request: Readonly<ListGroupsRequest> = {}) =>
     this.client.fetch<ListGroupsResponse>(
       {
@@ -729,7 +659,7 @@ export class API extends ParentAPI {
       },
       unmarshalListGroupsResponse,
     )
-  
+
   /**
    * List groups. List groups. By default, the groups listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You can define additional parameters to filter your query. Use `user_ids` or `application_ids` to list all groups certain users or applications belong to.
    *
@@ -739,7 +669,6 @@ export class API extends ParentAPI {
   listGroups = (request: Readonly<ListGroupsRequest> = {}) =>
     enrichForPagination('groups', this.pageOfListGroups, request)
 
-  
   /**
    * Create a group. Create a new group. You must define the `name` and `organization_id` parameters in the request.
    *
@@ -749,9 +678,7 @@ export class API extends ParentAPI {
   createGroup = (request: Readonly<CreateGroupRequest>) =>
     this.client.fetch<Group>(
       {
-        body: JSON.stringify(
-          marshalCreateGroupRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateGroupRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/groups`,
@@ -759,7 +686,6 @@ export class API extends ParentAPI {
       unmarshalGroup,
     )
 
-  
   /**
    * Get a group. Retrieve information about a given group, specified by the `group_id` parameter. The group's full details, including `user_ids` and `application_ids` are returned in the response.
    *
@@ -775,7 +701,6 @@ export class API extends ParentAPI {
       unmarshalGroup,
     )
 
-  
   /**
    * Update a group. Update the parameters of group, including `name` and `description`.
    *
@@ -785,9 +710,7 @@ export class API extends ParentAPI {
   updateGroup = (request: Readonly<UpdateGroupRequest>) =>
     this.client.fetch<Group>(
       {
-        body: JSON.stringify(
-          marshalUpdateGroupRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateGroupRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
@@ -795,7 +718,6 @@ export class API extends ParentAPI {
       unmarshalGroup,
     )
 
-  
   /**
    * Overwrite users and applications of a group. Overwrite users and applications configuration in a group. Any information that you add using this command will overwrite the previous configuration.
    *
@@ -805,9 +727,7 @@ export class API extends ParentAPI {
   setGroupMembers = (request: Readonly<SetGroupMembersRequest>) =>
     this.client.fetch<Group>(
       {
-        body: JSON.stringify(
-          marshalSetGroupMembersRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalSetGroupMembersRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/members`,
@@ -815,7 +735,6 @@ export class API extends ParentAPI {
       unmarshalGroup,
     )
 
-  
   /**
    * Add a user or an application to a group. Add a user or an application to a group. You can specify a `user_id` and `application_id` in the body of your request. Note that you can only add one of each per request.
    *
@@ -825,9 +744,7 @@ export class API extends ParentAPI {
   addGroupMember = (request: Readonly<AddGroupMemberRequest>) =>
     this.client.fetch<Group>(
       {
-        body: JSON.stringify(
-          marshalAddGroupMemberRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalAddGroupMemberRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/add-member`,
@@ -835,7 +752,6 @@ export class API extends ParentAPI {
       unmarshalGroup,
     )
 
-  
   /**
    * Add multiple users and applications to a group. Add multiple users and applications to a group in a single call. You can specify an array of `user_id`s and `application_id`s. Note that any existing users and applications in the group will remain. To add new users/applications and delete pre-existing ones, use the [Overwrite users and applications of a group](#path-groups-overwrite-users-and-applications-of-a-group) method.
    *
@@ -845,9 +761,7 @@ export class API extends ParentAPI {
   addGroupMembers = (request: Readonly<AddGroupMembersRequest>) =>
     this.client.fetch<Group>(
       {
-        body: JSON.stringify(
-          marshalAddGroupMembersRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalAddGroupMembersRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/add-members`,
@@ -855,7 +769,6 @@ export class API extends ParentAPI {
       unmarshalGroup,
     )
 
-  
   /**
    * Remove a user or an application from a group. Remove a user or an application from a group. You can specify a `user_id` and `application_id` in the body of your request. Note that you can only remove one of each per request. Removing a user from a group means that any permissions given to them via the group (i.e. from an attached policy) will no longer apply. Be sure you want to remove these permissions from the user before proceeding.
    *
@@ -865,9 +778,7 @@ export class API extends ParentAPI {
   removeGroupMember = (request: Readonly<RemoveGroupMemberRequest>) =>
     this.client.fetch<Group>(
       {
-        body: JSON.stringify(
-          marshalRemoveGroupMemberRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalRemoveGroupMemberRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/remove-member`,
@@ -875,21 +786,17 @@ export class API extends ParentAPI {
       unmarshalGroup,
     )
 
-  
   /**
    * Delete a group. Delete a group. Note that this action is irreversible and could delete permissions for group members. Policies attached to users and applications via this group will no longer apply.
    *
    * @param request - The request {@link DeleteGroupRequest}
    */
   deleteGroup = (request: Readonly<DeleteGroupRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
+    })
 
-  
   protected pageOfListPolicies = (request: Readonly<ListPoliciesRequest> = {}) =>
     this.client.fetch<ListPoliciesResponse>(
       {
@@ -912,7 +819,7 @@ export class API extends ParentAPI {
       },
       unmarshalListPoliciesResponse,
     )
-  
+
   /**
    * List policies of an Organization. List the policies of an Organization. By default, the policies listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `organization_id` in the query path of your request. You can also define additional parameters to filter your query, such as `user_ids`, `groups_ids`, `application_ids`, and `policy_name`.
    *
@@ -922,7 +829,6 @@ export class API extends ParentAPI {
   listPolicies = (request: Readonly<ListPoliciesRequest> = {}) =>
     enrichForPagination('policies', this.pageOfListPolicies, request)
 
-  
   /**
    * Create a new policy. Create a new application. You must define the `name` parameter in the request. You can specify parameters such as `user_id`, `groups_id`, `application_id`, `no_principal`, `rules` and its child attributes.
    *
@@ -932,9 +838,7 @@ export class API extends ParentAPI {
   createPolicy = (request: Readonly<CreatePolicyRequest>) =>
     this.client.fetch<Policy>(
       {
-        body: JSON.stringify(
-          marshalCreatePolicyRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreatePolicyRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/policies`,
@@ -942,7 +846,6 @@ export class API extends ParentAPI {
       unmarshalPolicy,
     )
 
-  
   /**
    * Get an existing policy. Retrieve information about a policy, specified by the `policy_id` parameter. The policy's full details, including `id`, `name`, `organization_id`, `nb_rules` and `nb_scopes`, `nb_permission_sets` are returned in the response.
    *
@@ -958,7 +861,6 @@ export class API extends ParentAPI {
       unmarshalPolicy,
     )
 
-  
   /**
    * Update an existing policy. Update the parameters of a policy, including `name`, `description`, `user_id`, `group_id`, `application_id` and `no_principal`.
    *
@@ -968,9 +870,7 @@ export class API extends ParentAPI {
   updatePolicy = (request: Readonly<UpdatePolicyRequest>) =>
     this.client.fetch<Policy>(
       {
-        body: JSON.stringify(
-          marshalUpdatePolicyRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdatePolicyRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
@@ -978,21 +878,17 @@ export class API extends ParentAPI {
       unmarshalPolicy,
     )
 
-  
   /**
    * Delete a policy. Delete a policy. You must define specify the `policy_id` parameter in your request. Note that when deleting a policy, all permissions it gives to its principal (user, group or application) will be revoked.
    *
    * @param request - The request {@link DeletePolicyRequest}
    */
   deletePolicy = (request: Readonly<DeletePolicyRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
+    })
 
-  
   /**
    * Clone a policy. Clone a policy. You must define specify the `policy_id` parameter in your request.
    *
@@ -1010,7 +906,6 @@ export class API extends ParentAPI {
       unmarshalPolicy,
     )
 
-  
   /**
    * Set rules of a given policy. Overwrite the rules of a given policy. Any information that you add using this command will overwrite the previous configuration. If you include some of the rules you already had in your previous configuration in your new one, but you change their order, the new order of display will apply. While policy rules are ordered, they have no impact on the access logic of IAM because rules are allow-only.
    *
@@ -1020,9 +915,7 @@ export class API extends ParentAPI {
   setRules = (request: Readonly<SetRulesRequest>) =>
     this.client.fetch<SetRulesResponse>(
       {
-        body: JSON.stringify(
-          marshalSetRulesRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalSetRulesRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iam/v1alpha1/rules`,
@@ -1030,7 +923,6 @@ export class API extends ParentAPI {
       unmarshalSetRulesResponse,
     )
 
-  
   protected pageOfListRules = (request: Readonly<ListRulesRequest>) =>
     this.client.fetch<ListRulesResponse>(
       {
@@ -1044,17 +936,15 @@ export class API extends ParentAPI {
       },
       unmarshalListRulesResponse,
     )
-  
+
   /**
    * List rules of a given policy. List the rules of a given policy. By default, the rules listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `policy_id` in the query path of your request.
    *
    * @param request - The request {@link ListRulesRequest}
    * @returns A Promise of ListRulesResponse
    */
-  listRules = (request: Readonly<ListRulesRequest>) =>
-    enrichForPagination('rules', this.pageOfListRules, request)
+  listRules = (request: Readonly<ListRulesRequest>) => enrichForPagination('rules', this.pageOfListRules, request)
 
-  
   protected pageOfListPermissionSets = (request: Readonly<ListPermissionSetsRequest> = {}) =>
     this.client.fetch<ListPermissionSetsResponse>(
       {
@@ -1069,7 +959,7 @@ export class API extends ParentAPI {
       },
       unmarshalListPermissionSetsResponse,
     )
-  
+
   /**
    * List permission sets. List permission sets available for given Organization. You must define the `organization_id` in the query path of your request.
    *
@@ -1079,7 +969,6 @@ export class API extends ParentAPI {
   listPermissionSets = (request: Readonly<ListPermissionSetsRequest> = {}) =>
     enrichForPagination('permissionSets', this.pageOfListPermissionSets, request)
 
-  
   protected pageOfListAPIKeys = (request: Readonly<ListAPIKeysRequest> = {}) =>
     this.client.fetch<ListAPIKeysResponse>(
       {
@@ -1096,20 +985,18 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],  
-          ...Object.entries(resolveOneOf([
-            {param: 'application_id',
-              value: request.applicationId,
-            },
-            {param: 'user_id',
-              value: request.userId,
-            },
-          ])),
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ...Object.entries(
+            resolveOneOf([
+              { param: 'application_id', value: request.applicationId },
+              { param: 'user_id', value: request.userId },
+            ]),
+          ),
         ),
       },
       unmarshalListAPIKeysResponse,
     )
-  
+
   /**
    * List API keys. List API keys. By default, the API keys listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You can define additional parameters for your query such as `editable`, `expired`, `access_key` and `bearer_id`.
    *
@@ -1119,7 +1006,6 @@ export class API extends ParentAPI {
   listAPIKeys = (request: Readonly<ListAPIKeysRequest> = {}) =>
     enrichForPagination('apiKeys', this.pageOfListAPIKeys, request)
 
-  
   /**
    * Create an API key. Create an API key. You must specify the `application_id` or the `user_id` and the description. You can also specify the `default_project_id`, which is the Project ID of your preferred Project, to use with Object Storage. The `access_key` and `secret_key` values are returned in the response. Note that the secret key is only shown once. Make sure that you copy and store both keys somewhere safe.
    *
@@ -1129,9 +1015,7 @@ export class API extends ParentAPI {
   createAPIKey = (request: Readonly<CreateAPIKeyRequest>) =>
     this.client.fetch<APIKey>(
       {
-        body: JSON.stringify(
-          marshalCreateAPIKeyRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateAPIKeyRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/api-keys`,
@@ -1139,7 +1023,6 @@ export class API extends ParentAPI {
       unmarshalAPIKey,
     )
 
-  
   /**
    * Get an API key. Retrieve information about an API key, specified by the `access_key` parameter. The API key's details, including either the `user_id` or `application_id` of its bearer are returned in the response. Note that the string value for the `secret_key` is nullable, and therefore is not displayed in the response. The `secret_key` value is only displayed upon API key creation.
    *
@@ -1155,7 +1038,6 @@ export class API extends ParentAPI {
       unmarshalAPIKey,
     )
 
-  
   /**
    * Update an API key. Update the parameters of an API key, including `default_project_id` and `description`.
    *
@@ -1165,9 +1047,7 @@ export class API extends ParentAPI {
   updateAPIKey = (request: Readonly<UpdateAPIKeyRequest>) =>
     this.client.fetch<APIKey>(
       {
-        body: JSON.stringify(
-          marshalUpdateAPIKeyRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateAPIKeyRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
@@ -1175,21 +1055,17 @@ export class API extends ParentAPI {
       unmarshalAPIKey,
     )
 
-  
   /**
    * Delete an API key. Delete an API key. Note that this action is irreversible and cannot be undone. Make sure you update any configurations using the API keys you delete.
    *
    * @param request - The request {@link DeleteAPIKeyRequest}
    */
   deleteAPIKey = (request: Readonly<DeleteAPIKeyRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
+    })
 
-  
   protected pageOfListQuota = (request: Readonly<ListQuotaRequest> = {}) =>
     this.client.fetch<ListQuotaResponse>(
       {
@@ -1205,17 +1081,15 @@ export class API extends ParentAPI {
       },
       unmarshalListQuotaResponse,
     )
-  
+
   /**
    * List all quotas in the Organization. List all product and features quota for an Organization, with their associated limits. By default, the quota listed are ordered by creation date in ascending order. This can be modified via the `order_by` field. You must define the `organization_id` in the query path of your request.
    *
    * @param request - The request {@link ListQuotaRequest}
    * @returns A Promise of ListQuotaResponse
    */
-  listQuota = (request: Readonly<ListQuotaRequest> = {}) =>
-    enrichForPagination('quota', this.pageOfListQuota, request)
+  listQuota = (request: Readonly<ListQuotaRequest> = {}) => enrichForPagination('quota', this.pageOfListQuota, request)
 
-  
   /**
    * Get a quota in the Organization. Retrieve information about a resource quota, specified by the `quotum_name` parameter. The quota's `limit`, or whether it is unlimited, is returned in the response.
    *
@@ -1227,14 +1101,11 @@ export class API extends ParentAPI {
       {
         method: 'GET',
         path: `/iam/v1alpha1/quota/${validatePathParam('quotumName', request.quotumName)}`,
-        urlParams: urlParams(
-          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
-        ),
+        urlParams: urlParams(['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId]),
       },
       unmarshalQuotum,
     )
 
-  
   protected pageOfListJWTs = (request: Readonly<ListJWTsRequest>) =>
     this.client.fetch<ListJWTsResponse>(
       {
@@ -1250,17 +1121,15 @@ export class API extends ParentAPI {
       },
       unmarshalListJWTsResponse,
     )
-  
+
   /**
    * List JWTs.
    *
    * @param request - The request {@link ListJWTsRequest}
    * @returns A Promise of ListJWTsResponse
    */
-  listJWTs = (request: Readonly<ListJWTsRequest>) =>
-    enrichForPagination('jwts', this.pageOfListJWTs, request)
+  listJWTs = (request: Readonly<ListJWTsRequest>) => enrichForPagination('jwts', this.pageOfListJWTs, request)
 
-  
   /**
    * Create a JWT.
    *
@@ -1270,9 +1139,7 @@ export class API extends ParentAPI {
   createJWT = (request: Readonly<CreateJWTRequest>) =>
     this.client.fetch<EncodedJWT>(
       {
-        body: JSON.stringify(
-          marshalCreateJWTRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateJWTRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/jwts`,
@@ -1280,7 +1147,6 @@ export class API extends ParentAPI {
       unmarshalEncodedJWT,
     )
 
-  
   /**
    * Get a JWT.
    *
@@ -1296,21 +1162,17 @@ export class API extends ParentAPI {
       unmarshalJWT,
     )
 
-  
   /**
    * Delete a JWT.
    *
    * @param request - The request {@link DeleteJWTRequest}
    */
   deleteJWT = (request: Readonly<DeleteJWTRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/jwts/${validatePathParam('jti', request.jti)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/jwts/${validatePathParam('jti', request.jti)}`,
+    })
 
-  
   protected pageOfListLogs = (request: Readonly<ListLogsRequest> = {}) =>
     this.client.fetch<ListLogsResponse>(
       {
@@ -1330,17 +1192,15 @@ export class API extends ParentAPI {
       },
       unmarshalListLogsResponse,
     )
-  
+
   /**
    * List logs. List logs available for given Organization. You must define the `organization_id` in the query path of your request.
    *
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
    */
-  listLogs = (request: Readonly<ListLogsRequest> = {}) =>
-    enrichForPagination('logs', this.pageOfListLogs, request)
+  listLogs = (request: Readonly<ListLogsRequest> = {}) => enrichForPagination('logs', this.pageOfListLogs, request)
 
-  
   /**
    * Get a log. Retrieve information about a log, specified by the `log_id` parameter. The log's full details, including `id`, `ip`, `user_agent`, `action`, `bearer_id`, `resource_type` and `resource_id` are returned in the response.
    *
@@ -1356,7 +1216,6 @@ export class API extends ParentAPI {
       unmarshalLog,
     )
 
-  
   /**
    * Get security settings of an Organization. Retrieve information about the security settings of an Organization, specified by the `organization_id` parameter.
    *
@@ -1372,7 +1231,6 @@ export class API extends ParentAPI {
       unmarshalOrganizationSecuritySettings,
     )
 
-  
   /**
    * Update the security settings of an Organization.
    *
@@ -1382,9 +1240,7 @@ export class API extends ParentAPI {
   updateOrganizationSecuritySettings = (request: Readonly<UpdateOrganizationSecuritySettingsRequest> = {}) =>
     this.client.fetch<OrganizationSecuritySettings>(
       {
-        body: JSON.stringify(
-          marshalUpdateOrganizationSecuritySettingsRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateOrganizationSecuritySettingsRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`,
@@ -1392,7 +1248,6 @@ export class API extends ParentAPI {
       unmarshalOrganizationSecuritySettings,
     )
 
-  
   /**
    * Set your Organization's alias.. This will fail if an alias has already been defined. Please contact support if you need to change your Organization's alias.
    *
@@ -1402,9 +1257,7 @@ export class API extends ParentAPI {
   setOrganizationAlias = (request: Readonly<SetOrganizationAliasRequest>) =>
     this.client.fetch<Organization>(
       {
-        body: JSON.stringify(
-          marshalSetOrganizationAliasRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalSetOrganizationAliasRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/alias`,
@@ -1412,7 +1265,6 @@ export class API extends ParentAPI {
       unmarshalOrganization,
     )
 
-  
   /**
    * Get your Organization's IAM information.
    *
@@ -1428,7 +1280,6 @@ export class API extends ParentAPI {
       unmarshalOrganization,
     )
 
-  
   /**
    * Set your Organization's allowed login methods.. Set your Organization's allowed login methods.
    *
@@ -1438,9 +1289,7 @@ export class API extends ParentAPI {
   updateOrganizationLoginMethods = (request: Readonly<UpdateOrganizationLoginMethodsRequest> = {}) =>
     this.client.fetch<Organization>(
       {
-        body: JSON.stringify(
-          marshalUpdateOrganizationLoginMethodsRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateOrganizationLoginMethodsRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/login-methods`,
@@ -1448,7 +1297,6 @@ export class API extends ParentAPI {
       unmarshalOrganization,
     )
 
-  
   /**
    * Get SAML Identity Provider configuration of an Organization.
    *
@@ -1464,7 +1312,6 @@ export class API extends ParentAPI {
       unmarshalSaml,
     )
 
-  
   /**
    * Enable SAML Identity Provider for an Organization.
    *
@@ -1482,7 +1329,6 @@ export class API extends ParentAPI {
       unmarshalSaml,
     )
 
-  
   /**
    * Update SAML Identity Provider configuration.
    *
@@ -1492,9 +1338,7 @@ export class API extends ParentAPI {
   updateSaml = (request: Readonly<UpdateSamlRequest>) =>
     this.client.fetch<Saml>(
       {
-        body: JSON.stringify(
-          marshalUpdateSamlRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateSamlRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
@@ -1502,21 +1346,17 @@ export class API extends ParentAPI {
       unmarshalSaml,
     )
 
-  
   /**
    * Disable SAML Identity Provider for an Organization.
    *
    * @param request - The request {@link DeleteSamlRequest}
    */
   deleteSaml = (request: Readonly<DeleteSamlRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
+    })
 
-  
   /**
    * Parse SAML xml metadata file.
    *
@@ -1526,9 +1366,7 @@ export class API extends ParentAPI {
   parseSamlMetadata = async (request: Readonly<ParseSamlMetadataRequest>) =>
     this.client.fetch<ParseSamlMetadataResponse>(
       {
-        body: JSON.stringify(
-          await marshalParseSamlMetadataRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(await marshalParseSamlMetadataRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/parse-saml-metadata`,
@@ -1536,7 +1374,6 @@ export class API extends ParentAPI {
       unmarshalParseSamlMetadataResponse,
     )
 
-  
   /**
    * List SAML certificates.
    *
@@ -1552,7 +1389,6 @@ export class API extends ParentAPI {
       unmarshalListSamlCertificatesResponse,
     )
 
-  
   /**
    * Add a SAML certificate.
    *
@@ -1562,9 +1398,7 @@ export class API extends ParentAPI {
   addSamlCertificate = (request: Readonly<AddSamlCertificateRequest>) =>
     this.client.fetch<SamlCertificate>(
       {
-        body: JSON.stringify(
-          marshalAddSamlCertificateRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalAddSamlCertificateRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}/certificates`,
@@ -1572,7 +1406,6 @@ export class API extends ParentAPI {
       unmarshalSamlCertificate,
     )
 
-  
   /**
    * Get a SAML certificate.
    *
@@ -1588,21 +1421,17 @@ export class API extends ParentAPI {
       unmarshalSamlCertificate,
     )
 
-  
   /**
    * Delete a SAML certificate.
    *
    * @param request - The request {@link DeleteSamlCertificateRequest}
    */
   deleteSamlCertificate = (request: Readonly<DeleteSamlCertificateRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
+    })
 
-  
   /**
    * Get SCIM configuration of an Organization.
    *
@@ -1618,7 +1447,6 @@ export class API extends ParentAPI {
       unmarshalScim,
     )
 
-  
   /**
    * Enable SCIM for an Organization.
    *
@@ -1636,21 +1464,17 @@ export class API extends ParentAPI {
       unmarshalScim,
     )
 
-  
   /**
    * Disable SCIM for an Organization.
    *
    * @param request - The request {@link DeleteScimRequest}
    */
   deleteScim = (request: Readonly<DeleteScimRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}`,
+    })
 
-  
   protected pageOfListScimTokens = (request: Readonly<ListScimTokensRequest>) =>
     this.client.fetch<ListScimTokensResponse>(
       {
@@ -1664,7 +1488,7 @@ export class API extends ParentAPI {
       },
       unmarshalListScimTokensResponse,
     )
-  
+
   /**
    * List SCIM tokens.
    *
@@ -1674,7 +1498,6 @@ export class API extends ParentAPI {
   listScimTokens = (request: Readonly<ListScimTokensRequest>) =>
     enrichForPagination('scimTokens', this.pageOfListScimTokens, request)
 
-  
   /**
    * Create a SCIM token.
    *
@@ -1690,21 +1513,17 @@ export class API extends ParentAPI {
       unmarshalCreateScimTokenResponse,
     )
 
-  
   /**
    * Delete a SCIM token.
    *
    * @param request - The request {@link DeleteScimTokenRequest}
    */
   deleteScimToken = (request: Readonly<DeleteScimTokenRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/iam/v1alpha1/scim-tokens/${validatePathParam('tokenId', request.tokenId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/iam/v1alpha1/scim-tokens/${validatePathParam('tokenId', request.tokenId)}`,
+    })
 
-  
   /**
    * Start registering a WebAuthn authenticator.
    *
@@ -1716,14 +1535,11 @@ export class API extends ParentAPI {
       {
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/start-webauthn-registration`,
-        urlParams: urlParams(
-          ['origin', request.origin],
-        ),
+        urlParams: urlParams(['origin', request.origin]),
       },
       unmarshalStartUserWebAuthnRegistrationResponse,
     )
 
-  
   /**
    * Complete a WebAuthen authenticator registration.
    *
@@ -1733,9 +1549,7 @@ export class API extends ParentAPI {
   finishUserWebAuthnRegistration = (request: Readonly<FinishUserWebAuthnRegistrationRequest>) =>
     this.client.fetch<FinishUserWebAuthnRegistrationResponse>(
       {
-        body: JSON.stringify(
-          marshalFinishUserWebAuthnRegistrationRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalFinishUserWebAuthnRegistrationRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/finish-webauthn-registration`,
@@ -1743,7 +1557,6 @@ export class API extends ParentAPI {
       unmarshalFinishUserWebAuthnRegistrationResponse,
     )
 
-  
   protected pageOfListUserWebAuthnAuthenticators = (request: Readonly<ListUserWebAuthnAuthenticatorsRequest>) =>
     this.client.fetch<ListUserWebAuthnAuthenticatorsResponse>(
       {
@@ -1757,7 +1570,7 @@ export class API extends ParentAPI {
       },
       unmarshalListUserWebAuthnAuthenticatorsResponse,
     )
-  
+
   /**
    * List all of a user's WebAuthn Authenticators.
    *
@@ -1767,7 +1580,6 @@ export class API extends ParentAPI {
   listUserWebAuthnAuthenticators = (request: Readonly<ListUserWebAuthnAuthenticatorsRequest>) =>
     enrichForPagination('authenticators', this.pageOfListUserWebAuthnAuthenticators, request)
 
-  
   /**
    * Update a WebAuthn authenticator.
    *
@@ -1777,9 +1589,7 @@ export class API extends ParentAPI {
   updateWebAuthnAuthenticator = (request: Readonly<UpdateWebAuthnAuthenticatorRequest>) =>
     this.client.fetch<WebAuthnAuthenticator>(
       {
-        body: JSON.stringify(
-          marshalUpdateWebAuthnAuthenticatorRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateWebAuthnAuthenticatorRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
@@ -1787,22 +1597,16 @@ export class API extends ParentAPI {
       unmarshalWebAuthnAuthenticator,
     )
 
-  
   /**
    * Delete a WebAuthn authenticator.
    *
    * @param request - The request {@link DeleteWebAuthnAuthenticatorRequest}
    */
   deleteWebAuthnAuthenticator = (request: Readonly<DeleteWebAuthnAuthenticatorRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'DELETE',
-        path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
-      },
-    )
-
-  
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'DELETE',
+      path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
+    })
 }
-

@@ -108,9 +108,7 @@ export const withUserAgentSuffix =
   (userAgent: string) =>
   (settings: Readonly<Settings>): Settings => ({
     ...settings,
-    userAgent: settings.userAgent
-      ? `${settings.userAgent} ${userAgent}`
-      : userAgent,
+    userAgent: settings.userAgent ? `${settings.userAgent} ${userAgent}` : userAgent,
   })
 
 /**

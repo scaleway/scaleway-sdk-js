@@ -31,9 +31,7 @@ type IntervalStrategy = Generator<number, number, number>
  *
  * @internal
  */
-export function* createFixedIntervalStrategy(
-  interval: number,
-): IntervalStrategy {
+export function* createFixedIntervalStrategy(interval: number): IntervalStrategy {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) yield interval
 }
@@ -47,10 +45,7 @@ export function* createFixedIntervalStrategy(
  *
  * @internal
  */
-export function* createFibonacciIntervalStrategy(
-  base = 1,
-  factor = 1,
-): IntervalStrategy {
+export function* createFibonacciIntervalStrategy(base = 1, factor = 1): IntervalStrategy {
   let [prev, current] = [0, 1]
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
@@ -68,19 +63,13 @@ export function* createFibonacciIntervalStrategy(
  *
  * @internal
  */
-export function* createExponentialBackoffStrategy(
-  minDelay: number,
-  maxDelay: number,
-): IntervalStrategy {
+export function* createExponentialBackoffStrategy(minDelay: number, maxDelay: number): IntervalStrategy {
   if (minDelay < 1 || maxDelay < 1 || minDelay > maxDelay) {
-    throw new Error(
-      'Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay',
-    )
+    throw new Error('Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay')
   }
   let attempt = 1
   const ceiling = Math.log(maxDelay / minDelay) / Math.log(2) + 1
-  const randomInRange = (min: number, max: number) =>
-    min + Math.random() * (max - min)
+  const randomInRange = (min: number, max: number) => min + Math.random() * (max - min)
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
     if (attempt > ceiling) {

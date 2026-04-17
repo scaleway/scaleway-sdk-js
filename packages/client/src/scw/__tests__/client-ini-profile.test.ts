@@ -1,8 +1,5 @@
 import { describe, expect, it, test } from 'vitest'
-import {
-  assertValidAuthenticationSecrets,
-  hasAuthenticationSecrets,
-} from '../client-ini-profile.js'
+import { assertValidAuthenticationSecrets, hasAuthenticationSecrets } from '../client-ini-profile.js'
 
 describe('hasAuthenticationSecrets', () => {
   it('confirms a non-empty payload', () => {
@@ -15,15 +12,9 @@ describe('hasAuthenticationSecrets', () => {
   })
 
   it('rejects payload with empty access or secret', () => {
-    expect(
-      hasAuthenticationSecrets({ accessKey: '', secretKey: '' }),
-    ).toBeFalsy()
-    expect(
-      hasAuthenticationSecrets({ accessKey: '', secretKey: 'any-string' }),
-    ).toBeFalsy()
-    expect(
-      hasAuthenticationSecrets({ accessKey: 'any-string', secretKey: '' }),
-    ).toBeFalsy()
+    expect(hasAuthenticationSecrets({ accessKey: '', secretKey: '' })).toBeFalsy()
+    expect(hasAuthenticationSecrets({ accessKey: '', secretKey: 'any-string' })).toBeFalsy()
+    expect(hasAuthenticationSecrets({ accessKey: 'any-string', secretKey: '' })).toBeFalsy()
   })
 })
 

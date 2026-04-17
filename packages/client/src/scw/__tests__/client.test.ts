@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { createAdvancedClient, createClient } from '../client.js'
 import type { ClientConfig } from '../client-ini-factory.js'
 import { withProfile } from '../client-ini-factory.js'
 import type { Settings } from '../client-settings.js'
+import { createAdvancedClient, createClient } from '../client.js'
 
 const withApiURL =
   (apiURL: string): ClientConfig =>
@@ -23,9 +23,7 @@ describe('createAdvancedClient', () => {
   })
 
   it('contains override from withProfile', () => {
-    const client = createAdvancedClient(
-      withProfile({ defaultRegion: 'nl-ams' }),
-    )
+    const client = createAdvancedClient(withProfile({ defaultRegion: 'nl-ams' }))
     expect(client.settings.defaultRegion).toBe('nl-ams')
   })
 
@@ -64,9 +62,7 @@ describe('createAdvancedClient', () => {
   it('contains override of httpClient', () => {
     const client = createAdvancedClient(withPassthroughFetch('hello world'))
 
-    return expect(
-      client.settings.httpClient('any-url').then(obj => obj.text()),
-    ).resolves.toBe('hello world')
+    return expect(client.settings.httpClient('any-url').then(obj => obj.text())).resolves.toBe('hello world')
   })
 })
 

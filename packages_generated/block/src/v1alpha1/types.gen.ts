@@ -1,19 +1,10 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Zone as ScwZone, } from '@scaleway/sdk-client'
+import type { Money, Zone as ScwZone } from '@scaleway/sdk-client'
 
+export type ListSnapshotsRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
-export type ListSnapshotsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
-
-export type ListVolumesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
+export type ListVolumesRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
 export type ReferenceStatus =
   | 'unknown_status'
@@ -24,11 +15,7 @@ export type ReferenceStatus =
   | 'creating'
   | 'error'
 
-export type ReferenceType =
-  | 'unknown_type'
-  | 'link'
-  | 'exclusive'
-  | 'read_only'
+export type ReferenceType = 'unknown_type' | 'link' | 'exclusive' | 'read_only'
 
 export type SnapshotStatus =
   | 'unknown_status'
@@ -41,11 +28,7 @@ export type SnapshotStatus =
   | 'locked'
   | 'exporting'
 
-export type StorageClass =
-  | 'unknown_storage_class'
-  | 'unspecified'
-  | 'bssd'
-  | 'sbs'
+export type StorageClass = 'unknown_storage_class' | 'unspecified' | 'bssd' | 'sbs'
 
 export type VolumeStatus =
   | 'unknown_status'
@@ -87,7 +70,6 @@ export interface Reference {
   status: ReferenceStatus
 }
 
-
 export interface SnapshotParentVolume {
   /**
    * Parent volume UUID (volume from which the snapshot originates).
@@ -107,7 +89,6 @@ export interface SnapshotParentVolume {
   status: VolumeStatus
 }
 
-
 export interface VolumeSpecifications {
   /**
    * The maximum IO/s expected, according to the different options available in stock (`5000 | 15000`).
@@ -119,14 +100,12 @@ export interface VolumeSpecifications {
   class: StorageClass
 }
 
-
 export interface CreateVolumeRequestFromEmpty {
   /**
    * Must be compliant with the minimum (1 GB) and maximum (10 TB) allowed size.
    */
   size: number
 }
-
 
 export interface CreateVolumeRequestFromSnapshot {
   /**
@@ -139,7 +118,6 @@ Size is optional and is used only if a resize of the volume is requested, otherw
    */
   snapshotId: string
 }
-
 
 export interface Snapshot {
   /**
@@ -192,7 +170,6 @@ export interface Snapshot {
   class: StorageClass
 }
 
-
 export interface VolumeType {
   /**
    * Volume type.
@@ -211,7 +188,6 @@ export interface VolumeType {
    */
   specs?: VolumeSpecifications
 }
-
 
 export interface Volume {
   /**
@@ -272,7 +248,6 @@ export interface Volume {
   lastDetachedAt?: Date
 }
 
-
 export type CreateSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -295,7 +270,6 @@ export type CreateSnapshotRequest = {
    */
   tags?: string[]
 }
-
 
 export type CreateVolumeRequest = {
   /**
@@ -334,7 +308,6 @@ export type CreateVolumeRequest = {
   tags?: string[]
 }
 
-
 export type DeleteSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -346,7 +319,6 @@ export type DeleteSnapshotRequest = {
   snapshotId: string
 }
 
-
 export type DeleteVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -357,7 +329,6 @@ export type DeleteVolumeRequest = {
    */
   volumeId: string
 }
-
 
 export type ExportSnapshotToObjectStorageRequest = {
   /**
@@ -378,7 +349,6 @@ export type ExportSnapshotToObjectStorageRequest = {
   key: string
 }
 
-
 export type GetSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -390,7 +360,6 @@ export type GetSnapshotRequest = {
   snapshotId: string
 }
 
-
 export type GetVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -401,7 +370,6 @@ export type GetVolumeRequest = {
    */
   volumeId: string
 }
-
 
 export type ImportSnapshotFromObjectStorageRequest = {
   /**
@@ -434,7 +402,6 @@ export type ImportSnapshotFromObjectStorageRequest = {
   size?: number
 }
 
-
 export type ImportSnapshotFromS3Request = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -465,7 +432,6 @@ export type ImportSnapshotFromS3Request = {
    */
   size?: number
 }
-
 
 export type ListSnapshotsRequest = {
   /**
@@ -506,7 +472,6 @@ export type ListSnapshotsRequest = {
   tags?: string[]
 }
 
-
 export interface ListSnapshotsResponse {
   /**
    * Paginated returned list of snapshots.
@@ -517,7 +482,6 @@ export interface ListSnapshotsResponse {
    */
   totalCount: number
 }
-
 
 export type ListVolumeTypesRequest = {
   /**
@@ -534,7 +498,6 @@ export type ListVolumeTypesRequest = {
   pageSize?: number
 }
 
-
 export interface ListVolumeTypesResponse {
   /**
    * Returns paginated list of volume-types.
@@ -545,7 +508,6 @@ export interface ListVolumeTypesResponse {
    */
   totalCount: number
 }
-
 
 export type ListVolumesRequest = {
   /**
@@ -586,7 +548,6 @@ export type ListVolumesRequest = {
   tags?: string[]
 }
 
-
 export interface ListVolumesResponse {
   /**
    * Paginated returned list of volumes.
@@ -597,7 +558,6 @@ export interface ListVolumesResponse {
    */
   totalCount: number
 }
-
 
 export type UpdateSnapshotRequest = {
   /**
@@ -617,7 +577,6 @@ export type UpdateSnapshotRequest = {
    */
   tags?: string[]
 }
-
 
 export type UpdateVolumeRequest = {
   /**
@@ -645,5 +604,3 @@ export type UpdateVolumeRequest = {
    */
   perfIops?: number
 }
-
-

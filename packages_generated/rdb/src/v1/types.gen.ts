@@ -2,19 +2,11 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region as ScwRegion, Zone as ScwZone, TimeSeries } from '@scaleway/sdk-client'
 
+export type ACLRuleAction = 'allow' | 'deny'
 
-export type ACLRuleAction =
-  | 'allow'
-  | 'deny'
+export type ACLRuleDirection = 'inbound' | 'outbound'
 
-export type ACLRuleDirection =
-  | 'inbound'
-  | 'outbound'
-
-export type ACLRuleProtocol =
-  | 'tcp'
-  | 'udp'
-  | 'icmp'
+export type ACLRuleProtocol = 'tcp' | 'udp' | 'icmp'
 
 export type DatabaseBackupStatus =
   | 'unknown'
@@ -26,21 +18,11 @@ export type DatabaseBackupStatus =
   | 'exporting'
   | 'locked'
 
-export type EndpointPrivateNetworkDetailsProvisioningMode =
-  | 'static'
-  | 'ipam'
+export type EndpointPrivateNetworkDetailsProvisioningMode = 'static' | 'ipam'
 
-export type EngineSettingPropertyType =
-  | 'BOOLEAN'
-  | 'INT'
-  | 'STRING'
-  | 'FLOAT'
+export type EngineSettingPropertyType = 'BOOLEAN' | 'INT' | 'STRING' | 'FLOAT'
 
-export type InstanceLogStatus =
-  | 'unknown'
-  | 'ready'
-  | 'creating'
-  | 'error'
+export type InstanceLogStatus = 'unknown' | 'ready' | 'creating' | 'error'
 
 export type InstanceStatus =
   | 'unknown'
@@ -65,15 +47,9 @@ export type ListDatabaseBackupsRequestOrderBy =
   | 'status_asc'
   | 'status_desc'
 
-export type ListDatabasesRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
-  | 'size_asc'
-  | 'size_desc'
+export type ListDatabasesRequestOrderBy = 'name_asc' | 'name_desc' | 'size_asc' | 'size_desc'
 
-export type ListInstanceLogsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListInstanceLogsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type ListInstancesRequestOrderBy =
   | 'created_at_asc'
@@ -98,37 +74,15 @@ export type ListSnapshotsRequestOrderBy =
   | 'expires_at_asc'
   | 'expires_at_desc'
 
-export type ListUsersRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
-  | 'is_admin_asc'
-  | 'is_admin_desc'
+export type ListUsersRequestOrderBy = 'name_asc' | 'name_desc' | 'is_admin_asc' | 'is_admin_desc'
 
-export type MaintenanceStatus =
-  | 'unknown'
-  | 'pending'
-  | 'done'
-  | 'canceled'
-  | 'ongoing'
+export type MaintenanceStatus = 'unknown' | 'pending' | 'done' | 'canceled' | 'ongoing'
 
-export type NodeTypeGeneration =
-  | 'unknown_generation'
-  | 'generation_v1'
-  | 'generation_v2'
-  | 'generation_v3'
+export type NodeTypeGeneration = 'unknown_generation' | 'generation_v1' | 'generation_v2' | 'generation_v3'
 
-export type NodeTypeStock =
-  | 'unknown'
-  | 'low_stock'
-  | 'out_of_stock'
-  | 'available'
+export type NodeTypeStock = 'unknown' | 'low_stock' | 'out_of_stock' | 'available'
 
-export type Permission =
-  | 'readonly'
-  | 'readwrite'
-  | 'all'
-  | 'custom'
-  | 'none'
+export type Permission = 'readonly' | 'readwrite' | 'all' | 'custom' | 'none'
 
 export type ReadReplicaStatus =
   | 'unknown'
@@ -141,34 +95,15 @@ export type ReadReplicaStatus =
   | 'configuring'
   | 'promoting'
 
-export type SnapshotStatus =
-  | 'unknown'
-  | 'creating'
-  | 'ready'
-  | 'restoring'
-  | 'deleting'
-  | 'error'
-  | 'locked'
+export type SnapshotStatus = 'unknown' | 'creating' | 'ready' | 'restoring' | 'deleting' | 'error' | 'locked'
 
-export type StorageClass =
-  | 'unknown_storage_class'
-  | 'lssd'
-  | 'bssd'
-  | 'sbs'
+export type StorageClass = 'unknown_storage_class' | 'lssd' | 'bssd' | 'sbs'
 
-export type VolumeType =
-  | 'lssd'
-  | 'bssd'
-  | 'sbs_5k'
-  | 'sbs_15k'
+export type VolumeType = 'lssd' | 'bssd' | 'sbs_5k' | 'sbs_15k'
 
-export interface EndpointDirectAccessDetails {
-}
+export interface EndpointDirectAccessDetails {}
 
-
-export interface EndpointLoadBalancerDetails {
-}
-
+export interface EndpointLoadBalancerDetails {}
 
 export interface EndpointPrivateNetworkDetails {
   /**
@@ -189,14 +124,9 @@ export interface EndpointPrivateNetworkDetails {
   provisioningMode: EndpointPrivateNetworkDetailsProvisioningMode
 }
 
+export interface EndpointSpecPrivateNetworkIpamConfig {}
 
-export interface EndpointSpecPrivateNetworkIpamConfig {
-}
-
-
-export interface ReadReplicaEndpointSpecPrivateNetworkIpamConfig {
-}
-
+export interface ReadReplicaEndpointSpecPrivateNetworkIpamConfig {}
 
 export interface EngineSetting {
   /**
@@ -245,7 +175,6 @@ export interface EngineSetting {
   floatMax?: number
 }
 
-
 export interface Endpoint {
   /**
    * UUID of the endpoint.
@@ -291,10 +220,7 @@ export interface Endpoint {
   hostname?: string
 }
 
-
-export interface EndpointSpecLoadBalancer {
-}
-
+export interface EndpointSpecLoadBalancer {}
 
 export interface EndpointSpecPrivateNetwork {
   /**
@@ -315,10 +241,7 @@ export interface EndpointSpecPrivateNetwork {
   ipamConfig?: EndpointSpecPrivateNetworkIpamConfig
 }
 
-
-export interface ReadReplicaEndpointSpecDirectAccess {
-}
-
+export interface ReadReplicaEndpointSpecDirectAccess {}
 
 export interface ReadReplicaEndpointSpecPrivateNetwork {
   /**
@@ -338,7 +261,6 @@ export interface ReadReplicaEndpointSpecPrivateNetwork {
    */
   ipamConfig?: ReadReplicaEndpointSpecPrivateNetworkIpamConfig
 }
-
 
 export interface EngineVersion {
   /**
@@ -371,7 +293,6 @@ export interface EngineVersion {
   availableInitSettings: EngineSetting[]
 }
 
-
 export interface BackupSchedule {
   /**
    * Frequency of the backup schedule (in hours).
@@ -391,17 +312,14 @@ export interface BackupSchedule {
   nextRunAt?: Date
 }
 
-
 export interface EncryptionAtRest {
   enabled: boolean
 }
-
 
 export interface InstanceSetting {
   name: string
   value: string
 }
-
 
 export interface LogsPolicy {
   /**
@@ -413,7 +331,6 @@ export interface LogsPolicy {
    */
   totalDiskRetention?: number
 }
-
 
 export interface Maintenance {
   /**
@@ -446,7 +363,6 @@ export interface Maintenance {
   isApplicable: boolean
 }
 
-
 export interface ReadReplica {
   /**
    * UUID of the Read Replica.
@@ -474,7 +390,6 @@ export interface ReadReplica {
   instanceId: string
 }
 
-
 export interface UpgradableVersion {
   id: string
   name: string
@@ -482,13 +397,11 @@ export interface UpgradableVersion {
   minorVersion: string
 }
 
-
 export interface Volume {
   type: VolumeType
   size: number
   class: StorageClass
 }
-
 
 export interface NodeTypeVolumeConstraintSizes {
   /**
@@ -500,7 +413,6 @@ export interface NodeTypeVolumeConstraintSizes {
    */
   maxSize: number
 }
-
 
 export interface NodeTypeVolumeType {
   /**
@@ -529,18 +441,15 @@ export interface NodeTypeVolumeType {
   class: StorageClass
 }
 
-
 export interface SnapshotVolumeType {
   type: VolumeType
   class: StorageClass
 }
 
-
 export interface ACLRuleRequest {
   ip: string
   description: string
 }
-
 
 export interface ACLRule {
   ip: string
@@ -549,11 +458,10 @@ export interface ACLRule {
   action: ACLRuleAction
   description: string
   /**
-   * @deprecated 
+   * @deprecated
    */
   port?: number
 }
-
 
 export interface EndpointSpec {
   /**
@@ -570,7 +478,6 @@ export interface EndpointSpec {
   privateNetwork?: EndpointSpecPrivateNetwork
 }
 
-
 export interface ReadReplicaEndpointSpec {
   /**
    * Direct access endpoint specifications. Public endpoint reserved for Read Replicas. One per Read Replica.
@@ -585,7 +492,6 @@ export interface ReadReplicaEndpointSpec {
    */
   privateNetwork?: ReadReplicaEndpointSpecPrivateNetwork
 }
-
 
 export interface DatabaseBackup {
   /**
@@ -646,7 +552,6 @@ export interface DatabaseBackup {
   sameRegion: boolean
 }
 
-
 export interface DatabaseEngine {
   /**
    * Engine name.
@@ -665,7 +570,6 @@ export interface DatabaseEngine {
    */
   region: ScwRegion
 }
-
 
 export interface Database {
   /**
@@ -686,12 +590,10 @@ export interface Database {
   size: number
 }
 
-
 export interface ListInstanceLogsDetailsResponseInstanceLogDetail {
   logName: string
   size: number
 }
-
 
 export interface InstanceLog {
   /**
@@ -723,7 +625,6 @@ export interface InstanceLog {
    */
   region: ScwRegion
 }
-
 
 export interface Instance {
   /**
@@ -820,7 +721,6 @@ export interface Instance {
   encryption?: EncryptionAtRest
 }
 
-
 export interface NodeType {
   /**
    * Node Type name identifier.
@@ -880,7 +780,6 @@ export interface NodeType {
   region: ScwRegion
 }
 
-
 export interface Privilege {
   /**
    * Permission (Read, Read/Write, All, Custom).
@@ -895,7 +794,6 @@ export interface Privilege {
    */
   userName: string
 }
-
 
 export interface Snapshot {
   /**
@@ -948,7 +846,6 @@ export interface Snapshot {
   region: ScwRegion
 }
 
-
 export interface User {
   /**
    * Name of the user (Length must be between 1 and 63 characters for PostgreSQL and between 1 and 32 characters for MySQL. First character must be an alphabet character (a-zA-Z). Your username cannot start with '_rdb' or in PostgreSQL, 'pg_'. Only a-zA-Z0-9_$- characters are accepted).
@@ -960,7 +857,6 @@ export interface User {
   isAdmin: boolean
 }
 
-
 export interface UpgradeInstanceRequestMajorUpgradeWorkflow {
   /**
    * This will create a new Database Instance with same specifications as the current one and perform a Database Engine upgrade.
@@ -971,7 +867,6 @@ export interface UpgradeInstanceRequestMajorUpgradeWorkflow {
    */
   withEndpoints: boolean
 }
-
 
 export type AddInstanceACLRulesRequest = {
   /**
@@ -988,14 +883,12 @@ export type AddInstanceACLRulesRequest = {
   rules: ACLRuleRequest[]
 }
 
-
 export interface AddInstanceACLRulesResponse {
   /**
    * ACL Rules enabled for the Database Instance.
    */
   rules: ACLRule[]
 }
-
 
 export type AddInstanceSettingsRequest = {
   /**
@@ -1012,14 +905,12 @@ export type AddInstanceSettingsRequest = {
   settings: InstanceSetting[]
 }
 
-
 export interface AddInstanceSettingsResponse {
   /**
    * Settings available on the Database Instance.
    */
   settings: InstanceSetting[]
 }
-
 
 export type ApplyInstanceMaintenanceRequest = {
   /**
@@ -1031,7 +922,6 @@ export type ApplyInstanceMaintenanceRequest = {
    */
   instanceId: string
 }
-
 
 export type CloneInstanceRequest = {
   /**
@@ -1051,7 +941,6 @@ export type CloneInstanceRequest = {
    */
   nodeType?: string
 }
-
 
 export type CreateDatabaseBackupRequest = {
   /**
@@ -1076,7 +965,6 @@ export type CreateDatabaseBackupRequest = {
   expiresAt?: Date
 }
 
-
 export type CreateDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1092,7 +980,6 @@ export type CreateDatabaseRequest = {
   name: string
 }
 
-
 export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1107,7 +994,6 @@ export type CreateEndpointRequest = {
    */
   endpointSpec?: EndpointSpec
 }
-
 
 export type CreateInstanceFromSnapshotRequest = {
   /**
@@ -1131,7 +1017,6 @@ export type CreateInstanceFromSnapshotRequest = {
    */
   nodeType?: string
 }
-
 
 export type CreateInstanceRequest = {
   /**
@@ -1208,7 +1093,6 @@ export type CreateInstanceRequest = {
   encryption?: EncryptionAtRest
 }
 
-
 export type CreateReadReplicaEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1223,7 +1107,6 @@ export type CreateReadReplicaEndpointRequest = {
    */
   endpointSpec: ReadReplicaEndpointSpec[]
 }
-
 
 export type CreateReadReplicaRequest = {
   /**
@@ -1244,7 +1127,6 @@ export type CreateReadReplicaRequest = {
   sameZone?: boolean
 }
 
-
 export type CreateSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1263,7 +1145,6 @@ export type CreateSnapshotRequest = {
    */
   expiresAt?: Date
 }
-
 
 export type CreateUserRequest = {
   /**
@@ -1288,7 +1169,6 @@ export type CreateUserRequest = {
   isAdmin: boolean
 }
 
-
 export type DeleteDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1299,7 +1179,6 @@ export type DeleteDatabaseBackupRequest = {
    */
   databaseBackupId: string
 }
-
 
 export type DeleteDatabaseRequest = {
   /**
@@ -1316,7 +1195,6 @@ export type DeleteDatabaseRequest = {
   name: string
 }
 
-
 export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1327,7 +1205,6 @@ export type DeleteEndpointRequest = {
    */
   endpointId: string
 }
-
 
 export type DeleteInstanceACLRulesRequest = {
   /**
@@ -1344,14 +1221,12 @@ export type DeleteInstanceACLRulesRequest = {
   aclRuleIps: string[]
 }
 
-
 export interface DeleteInstanceACLRulesResponse {
   /**
    * IP addresses defined in the ACL rules of the Database Instance.
    */
   rules: ACLRule[]
 }
-
 
 export type DeleteInstanceRequest = {
   /**
@@ -1363,7 +1238,6 @@ export type DeleteInstanceRequest = {
    */
   instanceId: string
 }
-
 
 export type DeleteInstanceSettingsRequest = {
   /**
@@ -1380,14 +1254,12 @@ export type DeleteInstanceSettingsRequest = {
   settingNames: string[]
 }
 
-
 export interface DeleteInstanceSettingsResponse {
   /**
    * Settings names to delete from the Database Instance.
    */
   settings: InstanceSetting[]
 }
-
 
 export type DeleteReadReplicaRequest = {
   /**
@@ -1400,7 +1272,6 @@ export type DeleteReadReplicaRequest = {
   readReplicaId: string
 }
 
-
 export type DeleteSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1411,7 +1282,6 @@ export type DeleteSnapshotRequest = {
    */
   snapshotId: string
 }
-
 
 export type DeleteUserRequest = {
   /**
@@ -1428,7 +1298,6 @@ export type DeleteUserRequest = {
   name: string
 }
 
-
 export type ExportDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1439,7 +1308,6 @@ export type ExportDatabaseBackupRequest = {
    */
   databaseBackupId: string
 }
-
 
 export type GetDatabaseBackupRequest = {
   /**
@@ -1452,7 +1320,6 @@ export type GetDatabaseBackupRequest = {
   databaseBackupId: string
 }
 
-
 export type GetEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1463,7 +1330,6 @@ export type GetEndpointRequest = {
    */
   endpointId: string
 }
-
 
 export type GetInstanceCertificateRequest = {
   /**
@@ -1476,7 +1342,6 @@ export type GetInstanceCertificateRequest = {
   instanceId: string
 }
 
-
 export type GetInstanceLogRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1487,7 +1352,6 @@ export type GetInstanceLogRequest = {
    */
   instanceLogId: string
 }
-
 
 export type GetInstanceMetricsRequest = {
   /**
@@ -1512,7 +1376,6 @@ export type GetInstanceMetricsRequest = {
   metricName?: string
 }
 
-
 export type GetInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1523,7 +1386,6 @@ export type GetInstanceRequest = {
    */
   instanceId: string
 }
-
 
 export type GetReadReplicaRequest = {
   /**
@@ -1536,7 +1398,6 @@ export type GetReadReplicaRequest = {
   readReplicaId: string
 }
 
-
 export type GetSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1548,14 +1409,12 @@ export type GetSnapshotRequest = {
   snapshotId: string
 }
 
-
 export interface InstanceMetrics {
   /**
    * Time series of metrics of a Database Instance.
    */
   timeseries: TimeSeries[]
 }
-
 
 export type ListDatabaseBackupsRequest = {
   /**
@@ -1586,7 +1445,6 @@ export type ListDatabaseBackupsRequest = {
   pageSize?: number
 }
 
-
 export interface ListDatabaseBackupsResponse {
   /**
    * List of database backups.
@@ -1597,7 +1455,6 @@ export interface ListDatabaseBackupsResponse {
    */
   totalCount: number
 }
-
 
 export type ListDatabaseEnginesRequest = {
   /**
@@ -1616,7 +1473,6 @@ export type ListDatabaseEnginesRequest = {
   pageSize?: number
 }
 
-
 export interface ListDatabaseEnginesResponse {
   /**
    * List of the available database engines.
@@ -1627,7 +1483,6 @@ export interface ListDatabaseEnginesResponse {
    */
   totalCount: number
 }
-
 
 export type ListDatabasesRequest = {
   /**
@@ -1662,7 +1517,6 @@ export type ListDatabasesRequest = {
   pageSize?: number
 }
 
-
 export interface ListDatabasesResponse {
   /**
    * List of the databases.
@@ -1673,7 +1527,6 @@ export interface ListDatabasesResponse {
    */
   totalCount: number
 }
-
 
 export type ListInstanceACLRulesRequest = {
   /**
@@ -1688,7 +1541,6 @@ export type ListInstanceACLRulesRequest = {
   pageSize?: number
 }
 
-
 export interface ListInstanceACLRulesResponse {
   /**
    * List of ACL rules present on a Database Instance.
@@ -1699,7 +1551,6 @@ export interface ListInstanceACLRulesResponse {
    */
   totalCount: number
 }
-
 
 export type ListInstanceLogsDetailsRequest = {
   /**
@@ -1712,14 +1563,12 @@ export type ListInstanceLogsDetailsRequest = {
   instanceId: string
 }
 
-
 export interface ListInstanceLogsDetailsResponse {
   /**
    * Remote Database Instance logs details.
    */
   details: ListInstanceLogsDetailsResponseInstanceLogDetail[]
 }
-
 
 export type ListInstanceLogsRequest = {
   /**
@@ -1736,14 +1585,12 @@ export type ListInstanceLogsRequest = {
   orderBy?: ListInstanceLogsRequestOrderBy
 }
 
-
 export interface ListInstanceLogsResponse {
   /**
    * Available logs in a Database Instance.
    */
   instanceLogs: InstanceLog[]
 }
-
 
 export type ListInstancesRequest = {
   /**
@@ -1778,7 +1625,6 @@ export type ListInstancesRequest = {
   pageSize?: number
 }
 
-
 export interface ListInstancesResponse {
   /**
    * List of all Database Instances available in an Organization or Project.
@@ -1789,7 +1635,6 @@ export interface ListInstancesResponse {
    */
   totalCount: number
 }
-
 
 export type ListNodeTypesRequest = {
   /**
@@ -1804,7 +1649,6 @@ export type ListNodeTypesRequest = {
   pageSize?: number
 }
 
-
 export interface ListNodeTypesResponse {
   /**
    * Types of the node.
@@ -1815,7 +1659,6 @@ export interface ListNodeTypesResponse {
    */
   totalCount: number
 }
-
 
 export type ListPrivilegesRequest = {
   /**
@@ -1842,7 +1685,6 @@ export type ListPrivilegesRequest = {
   userName?: string
 }
 
-
 export interface ListPrivilegesResponse {
   /**
    * Privileges of a user in a database in a Database Instance.
@@ -1853,7 +1695,6 @@ export interface ListPrivilegesResponse {
    */
   totalCount: number
 }
-
 
 export type ListSnapshotsRequest = {
   /**
@@ -1884,7 +1725,6 @@ export type ListSnapshotsRequest = {
   pageSize?: number
 }
 
-
 export interface ListSnapshotsResponse {
   /**
    * List of snapshots.
@@ -1895,7 +1735,6 @@ export interface ListSnapshotsResponse {
    */
   totalCount: number
 }
-
 
 export type ListUsersRequest = {
   /**
@@ -1918,7 +1757,6 @@ export type ListUsersRequest = {
   pageSize?: number
 }
 
-
 export interface ListUsersResponse {
   /**
    * List of users in a Database Instance.
@@ -1929,7 +1767,6 @@ export interface ListUsersResponse {
    */
   totalCount: number
 }
-
 
 export type MigrateEndpointRequest = {
   /**
@@ -1945,7 +1782,6 @@ export type MigrateEndpointRequest = {
    */
   instanceId: string
 }
-
 
 export type PrepareInstanceLogsRequest = {
   /**
@@ -1966,14 +1802,12 @@ export type PrepareInstanceLogsRequest = {
   endDate?: Date
 }
 
-
 export interface PrepareInstanceLogsResponse {
   /**
    * Instance logs for a Database Instance between a start and an end date.
    */
   instanceLogs: InstanceLog[]
 }
-
 
 export type PromoteReadReplicaRequest = {
   /**
@@ -1985,7 +1819,6 @@ export type PromoteReadReplicaRequest = {
    */
   readReplicaId: string
 }
-
 
 export type PurgeInstanceLogsRequest = {
   /**
@@ -2002,7 +1835,6 @@ export type PurgeInstanceLogsRequest = {
   logName?: string
 }
 
-
 export type RenewInstanceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -2013,7 +1845,6 @@ export type RenewInstanceCertificateRequest = {
    */
   instanceId: string
 }
-
 
 export type ResetReadReplicaRequest = {
   /**
@@ -2026,7 +1857,6 @@ export type ResetReadReplicaRequest = {
   readReplicaId: string
 }
 
-
 export type RestartInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -2037,7 +1867,6 @@ export type RestartInstanceRequest = {
    */
   instanceId: string
 }
-
 
 export type RestoreDatabaseBackupRequest = {
   /**
@@ -2058,7 +1887,6 @@ export type RestoreDatabaseBackupRequest = {
   instanceId: string
 }
 
-
 export type SetInstanceACLRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -2074,14 +1902,12 @@ export type SetInstanceACLRulesRequest = {
   rules: ACLRuleRequest[]
 }
 
-
 export interface SetInstanceACLRulesResponse {
   /**
    * ACLs rules configured for a Database Instance.
    */
   rules: ACLRule[]
 }
-
 
 export type SetInstanceSettingsRequest = {
   /**
@@ -2098,14 +1924,12 @@ export type SetInstanceSettingsRequest = {
   settings: InstanceSetting[]
 }
 
-
 export interface SetInstanceSettingsResponse {
   /**
    * Settings configured for a Database Instance.
    */
   settings: InstanceSetting[]
 }
-
 
 export type SetPrivilegeRequest = {
   /**
@@ -2130,7 +1954,6 @@ export type SetPrivilegeRequest = {
   permission?: Permission
 }
 
-
 export type UpdateDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -2149,7 +1972,6 @@ export type UpdateDatabaseBackupRequest = {
    */
   expiresAt?: Date
 }
-
 
 export type UpdateInstanceRequest = {
   /**
@@ -2194,7 +2016,6 @@ export type UpdateInstanceRequest = {
   backupScheduleStartHour?: number
 }
 
-
 export type UpdateSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -2213,7 +2034,6 @@ export type UpdateSnapshotRequest = {
    */
   expiresAt?: Date
 }
-
 
 export type UpdateUserRequest = {
   /**
@@ -2237,7 +2057,6 @@ export type UpdateUserRequest = {
    */
   isAdmin?: boolean
 }
-
 
 export type UpgradeInstanceRequest = {
   /**
@@ -2291,5 +2110,3 @@ export type UpgradeInstanceRequest = {
    */
   enableEncryption?: boolean
 }
-
-

@@ -19,17 +19,13 @@ describe('convertYamlToConfiguration', () => {
   })
 
   it('loads properties for a specific profile', () => {
-    expect(
-      convertYamlToConfiguration(
-        'profiles:\nmy-profile:\nkey1: value\nkey2: 42',
-      ),
-    ).toStrictEqual({ 'my-profile': { key1: 'value', key2: '42' } })
+    expect(convertYamlToConfiguration('profiles:\nmy-profile:\nkey1: value\nkey2: 42')).toStrictEqual({
+      'my-profile': { key1: 'value', key2: '42' },
+    })
   })
 
   it(`doesn't consider a new section until we reach the profiles key`, () => {
-    expect(
-      convertYamlToConfiguration('my-profile:\nkey1: value\nkey2: 42'),
-    ).toStrictEqual({})
+    expect(convertYamlToConfiguration('my-profile:\nkey1: value\nkey2: 42')).toStrictEqual({})
   })
 })
 
@@ -68,9 +64,7 @@ describe('loadConfigurationFromFileAsync', () => {
   })
 
   it('rejects for an invalid path', async () => {
-    await expect(
-      loadConfigurationFromFileAsync('invalid/path.html'),
-    ).rejects.toThrow()
+    await expect(loadConfigurationFromFileAsync('invalid/path.html')).rejects.toThrow()
   })
 })
 

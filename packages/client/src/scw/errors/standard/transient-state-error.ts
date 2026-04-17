@@ -14,18 +14,11 @@ export class TransientStateError extends ScalewayError {
     readonly resourceId: string,
     readonly currentState: string,
   ) {
-    super(
-      status,
-      body,
-      `resource ${resource} with ID ${resourceId} is in a transient state: ${currentState}`,
-    )
+    super(status, body, `resource ${resource} with ID ${resourceId} is in a transient state: ${currentState}`)
     this.name = 'TransientStateError'
   }
 
-  static fromJSON(
-    status: number,
-    obj: Readonly<JSONObject>,
-  ): ScalewayError | null {
+  static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
     if (
       typeof obj.resource !== 'string' ||
       typeof obj.resource_id !== 'string' ||
@@ -34,12 +27,6 @@ export class TransientStateError extends ScalewayError {
       return null
     }
 
-    return new TransientStateError(
-      status,
-      obj,
-      obj.resource,
-      obj.resource_id,
-      obj.current_state,
-    )
+    return new TransientStateError(status, obj, obj.resource, obj.resource_id, obj.current_state)
   }
 }

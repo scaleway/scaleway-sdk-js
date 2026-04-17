@@ -1,30 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 
+export type BlocklistType = 'unknown_type' | 'mailbox_full' | 'mailbox_not_found'
 
-export type BlocklistType =
-  | 'unknown_type'
-  | 'mailbox_full'
-  | 'mailbox_not_found'
+export type DomainLastStatusAutoconfigStateReason = 'unknown_reason' | 'permission_denied' | 'domain_not_found'
 
-export type DomainLastStatusAutoconfigStateReason =
-  | 'unknown_reason'
-  | 'permission_denied'
-  | 'domain_not_found'
+export type DomainLastStatusRecordStatus = 'unknown_record_status' | 'valid' | 'invalid' | 'not_found'
 
-export type DomainLastStatusRecordStatus =
-  | 'unknown_record_status'
-  | 'valid'
-  | 'invalid'
-  | 'not_found'
-
-export type DomainReputationStatus =
-  | 'unknown_status'
-  | 'excellent'
-  | 'good'
-  | 'average'
-  | 'bad'
+export type DomainReputationStatus = 'unknown_status' | 'excellent' | 'good' | 'average' | 'bad'
 
 export type DomainStatus =
   | 'unknown'
@@ -47,25 +31,11 @@ export type EmailFlag =
   | 'send_before_expiration'
   | 'blocklisted'
 
-export type EmailRcptType =
-  | 'unknown_rcpt_type'
-  | 'to'
-  | 'cc'
-  | 'bcc'
+export type EmailRcptType = 'unknown_rcpt_type' | 'to' | 'cc' | 'bcc'
 
-export type EmailStatus =
-  | 'unknown'
-  | 'new'
-  | 'sending'
-  | 'sent'
-  | 'failed'
-  | 'canceled'
+export type EmailStatus = 'unknown' | 'new' | 'sending' | 'sent' | 'failed' | 'canceled'
 
-export type ListBlocklistsRequestOrderBy =
-  | 'created_at_desc'
-  | 'created_at_asc'
-  | 'ends_at_desc'
-  | 'ends_at_asc'
+export type ListBlocklistsRequestOrderBy = 'created_at_desc' | 'created_at_asc' | 'ends_at_desc' | 'ends_at_asc'
 
 export type ListEmailsRequestOrderBy =
   | 'created_at_desc'
@@ -81,37 +51,17 @@ export type ListEmailsRequestOrderBy =
   | 'subject_desc'
   | 'subject_asc'
 
-export type ListWebhookEventsRequestOrderBy =
-  | 'created_at_desc'
-  | 'created_at_asc'
+export type ListWebhookEventsRequestOrderBy = 'created_at_desc' | 'created_at_asc'
 
-export type ListWebhooksRequestOrderBy =
-  | 'created_at_desc'
-  | 'created_at_asc'
+export type ListWebhooksRequestOrderBy = 'created_at_desc' | 'created_at_asc'
 
-export type OfferName =
-  | 'unknown_name'
-  | 'essential'
-  | 'scale'
+export type OfferName = 'unknown_name' | 'essential' | 'scale'
 
-export type PoolStatus =
-  | 'unknown_status'
-  | 'disabled'
-  | 'creating'
-  | 'ready'
-  | 'error'
+export type PoolStatus = 'unknown_status' | 'disabled' | 'creating' | 'ready' | 'error'
 
-export type ProjectSettingsPeriodicReportFrequency =
-  | 'unknown_frequency'
-  | 'monthly'
-  | 'weekly'
-  | 'daily'
+export type ProjectSettingsPeriodicReportFrequency = 'unknown_frequency' | 'monthly' | 'weekly' | 'daily'
 
-export type WebhookEventStatus =
-  | 'unknown_status'
-  | 'sending'
-  | 'sent'
-  | 'failed'
+export type WebhookEventStatus = 'unknown_status' | 'sending' | 'sent' | 'failed'
 
 export type WebhookEventType =
   | 'unknown_type'
@@ -135,7 +85,6 @@ export interface DomainRecordsDKIM {
   value: string
 }
 
-
 export interface DomainRecordsDMARC {
   /**
    * Name of the DMARC TXT record.
@@ -146,7 +95,6 @@ export interface DomainRecordsDMARC {
    */
   value: string
 }
-
 
 export interface DomainRecordsMX {
   /**
@@ -159,7 +107,6 @@ export interface DomainRecordsMX {
   value: string
 }
 
-
 export interface DomainRecordsSPF {
   /**
    * Name of the SPF TXT record.
@@ -170,7 +117,6 @@ export interface DomainRecordsSPF {
    */
   value: string
 }
-
 
 export interface EmailTry {
   /**
@@ -191,7 +137,6 @@ export interface EmailTry {
   message: string
 }
 
-
 export interface DomainRecords {
   /**
    * DMARC TXT record specification.
@@ -210,7 +155,6 @@ export interface DomainRecords {
    */
   mx?: DomainRecordsMX
 }
-
 
 export interface DomainReputation {
   /**
@@ -235,14 +179,12 @@ export interface DomainReputation {
   previousScoredAt?: Date
 }
 
-
 export interface DomainStatistics {
   totalCount: number
   sentCount: number
   failedCount: number
   canceledCount: number
 }
-
 
 export interface Blocklist {
   /**
@@ -283,7 +225,6 @@ export interface Blocklist {
   custom: boolean
 }
 
-
 export interface CreateEmailRequestAddress {
   /**
    * Email address.
@@ -294,7 +235,6 @@ export interface CreateEmailRequestAddress {
    */
   name?: string
 }
-
 
 export interface CreateEmailRequestAttachment {
   /**
@@ -311,7 +251,6 @@ export interface CreateEmailRequestAttachment {
   content: string
 }
 
-
 export interface CreateEmailRequestHeader {
   /**
    * Email header key.
@@ -322,7 +261,6 @@ export interface CreateEmailRequestHeader {
    */
   value: string
 }
-
 
 export interface Email {
   /**
@@ -387,7 +325,6 @@ export interface Email {
   flags: EmailFlag[]
 }
 
-
 export interface DomainLastStatusAutoconfigState {
   /**
    * Enable or disable the auto-configuration of domain DNS records.
@@ -402,7 +339,6 @@ export interface DomainLastStatusAutoconfigState {
    */
   reason?: DomainLastStatusAutoconfigStateReason
 }
-
 
 export interface DomainLastStatusDkimRecord {
   /**
@@ -419,7 +355,6 @@ export interface DomainLastStatusDkimRecord {
   error?: string
 }
 
-
 export interface DomainLastStatusDmarcRecord {
   /**
    * Status of the DMARC record's configuration.
@@ -434,7 +369,6 @@ export interface DomainLastStatusDmarcRecord {
    */
   error?: string
 }
-
 
 export interface DomainLastStatusMXRecord {
   /**
@@ -451,7 +385,6 @@ export interface DomainLastStatusMXRecord {
   error?: string
 }
 
-
 export interface DomainLastStatusSpfRecord {
   /**
    * Status of the SPF record's configuration.
@@ -466,7 +399,6 @@ export interface DomainLastStatusSpfRecord {
    */
   error?: string
 }
-
 
 export interface Domain {
   /**
@@ -539,7 +471,6 @@ export interface Domain {
   region: ScwRegion
 }
 
-
 export interface OfferSubscription {
   /**
    * ID of the offer-subscription Organization.
@@ -587,7 +518,6 @@ export interface OfferSubscription {
   includedMonthlyEmails: number
 }
 
-
 export interface Offer {
   /**
    * Name of the offer.
@@ -627,7 +557,6 @@ export interface Offer {
   maxCustomBlocklistsPerDomain: number
 }
 
-
 export interface Pool {
   /**
    * ID of the Project.
@@ -654,7 +583,6 @@ export interface Pool {
    */
   reverse?: string
 }
-
 
 export interface WebhookEvent {
   /**
@@ -703,7 +631,6 @@ export interface WebhookEvent {
   emailId?: string
 }
 
-
 export interface Webhook {
   /**
    * ID of the Webhook.
@@ -743,7 +670,6 @@ export interface Webhook {
   updatedAt?: Date
 }
 
-
 export interface ProjectSettingsPeriodicReport {
   /**
    * Enable or disable periodic report notifications.
@@ -763,7 +689,6 @@ export interface ProjectSettingsPeriodicReport {
   sendingDay: number
 }
 
-
 export interface UpdateProjectSettingsRequestUpdatePeriodicReport {
   /**
    * (Optional) Enable or disable periodic report notifications.
@@ -782,7 +707,6 @@ export interface UpdateProjectSettingsRequestUpdatePeriodicReport {
    */
   sendingDay?: number
 }
-
 
 export type BulkCreateBlocklistsRequest = {
   /**
@@ -807,14 +731,12 @@ export type BulkCreateBlocklistsRequest = {
   reason?: string
 }
 
-
 export interface BulkCreateBlocklistsResponse {
   /**
    * List of blocklist created.
    */
   blocklists: Blocklist[]
 }
-
 
 export type CancelEmailRequest = {
   /**
@@ -827,7 +749,6 @@ export type CancelEmailRequest = {
   emailId: string
 }
 
-
 export type CheckDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -838,7 +759,6 @@ export type CheckDomainRequest = {
    */
   domainId: string
 }
-
 
 export type CreateDomainRequest = {
   /**
@@ -862,7 +782,6 @@ export type CreateDomainRequest = {
    */
   autoconfig: boolean
 }
-
 
 export type CreateEmailRequest = {
   /**
@@ -915,14 +834,12 @@ export type CreateEmailRequest = {
   additionalHeaders?: CreateEmailRequestHeader[]
 }
 
-
 export interface CreateEmailResponse {
   /**
    * Single page of emails matching the requested criteria.
    */
   emails: Email[]
 }
-
 
 export type CreateWebhookRequest = {
   /**
@@ -951,7 +868,6 @@ export type CreateWebhookRequest = {
   snsArn: string
 }
 
-
 export type DeleteBlocklistRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -963,7 +879,6 @@ export type DeleteBlocklistRequest = {
   blocklistId: string
 }
 
-
 export type DeleteWebhookRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -974,7 +889,6 @@ export type DeleteWebhookRequest = {
    */
   webhookId: string
 }
-
 
 export interface DomainLastStatus {
   /**
@@ -1007,7 +921,6 @@ export interface DomainLastStatus {
   autoconfigState?: DomainLastStatusAutoconfigState
 }
 
-
 export type GetDomainLastStatusRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1018,7 +931,6 @@ export type GetDomainLastStatusRequest = {
    */
   domainId: string
 }
-
 
 export type GetDomainRequest = {
   /**
@@ -1031,7 +943,6 @@ export type GetDomainRequest = {
   domainId: string
 }
 
-
 export type GetEmailRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1042,7 +953,6 @@ export type GetEmailRequest = {
    */
   emailId: string
 }
-
 
 export type GetProjectConsumptionRequest = {
   /**
@@ -1055,7 +965,6 @@ export type GetProjectConsumptionRequest = {
   projectId?: string
 }
 
-
 export type GetProjectSettingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1066,7 +975,6 @@ export type GetProjectSettingsRequest = {
    */
   projectId?: string
 }
-
 
 export type GetStatisticsRequest = {
   /**
@@ -1095,7 +1003,6 @@ export type GetStatisticsRequest = {
   mailFrom?: string
 }
 
-
 export type GetWebhookRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1106,7 +1013,6 @@ export type GetWebhookRequest = {
    */
   webhookId: string
 }
-
 
 export type ListBlocklistsRequest = {
   /**
@@ -1143,7 +1049,6 @@ export type ListBlocklistsRequest = {
   custom?: boolean
 }
 
-
 export interface ListBlocklistsResponse {
   /**
    * Number of blocklists matching the requested criteria.
@@ -1154,7 +1059,6 @@ export interface ListBlocklistsResponse {
    */
   blocklists: Blocklist[]
 }
-
 
 export type ListDomainsRequest = {
   /**
@@ -1187,7 +1091,6 @@ export type ListDomainsRequest = {
   name?: string
 }
 
-
 export interface ListDomainsResponse {
   /**
    * Number of domains that match the request (without pagination).
@@ -1198,7 +1101,6 @@ export interface ListDomainsResponse {
    */
   domains: Domain[]
 }
-
 
 export type ListEmailsRequest = {
   /**
@@ -1261,7 +1163,6 @@ export type ListEmailsRequest = {
   flags?: EmailFlag[]
 }
 
-
 export interface ListEmailsResponse {
   /**
    * Number of emails matching the requested criteria.
@@ -1272,7 +1173,6 @@ export interface ListEmailsResponse {
    */
   emails: Email[]
 }
-
 
 export type ListOfferSubscriptionsRequest = {
   /**
@@ -1285,7 +1185,6 @@ export type ListOfferSubscriptionsRequest = {
   projectId?: string
 }
 
-
 export interface ListOfferSubscriptionsResponse {
   /**
    * Number of offer-subscriptions matching the requested criteria.
@@ -1297,14 +1196,12 @@ export interface ListOfferSubscriptionsResponse {
   offerSubscriptions: OfferSubscription[]
 }
 
-
 export type ListOffersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
 }
-
 
 export interface ListOffersResponse {
   /**
@@ -1316,7 +1213,6 @@ export interface ListOffersResponse {
    */
   offers: Offer[]
 }
-
 
 export type ListPoolsRequest = {
   /**
@@ -1337,7 +1233,6 @@ export type ListPoolsRequest = {
   projectId?: string
 }
 
-
 export interface ListPoolsResponse {
   /**
    * Number of pools matching the requested criteria.
@@ -1348,7 +1243,6 @@ export interface ListPoolsResponse {
    */
   pools: Pool[]
 }
-
 
 export type ListWebhookEventsRequest = {
   /**
@@ -1397,7 +1291,6 @@ export type ListWebhookEventsRequest = {
   domainId?: string
 }
 
-
 export interface ListWebhookEventsResponse {
   /**
    * Number of Webhook events matching the requested criteria.
@@ -1408,7 +1301,6 @@ export interface ListWebhookEventsResponse {
    */
   webhookEvents: WebhookEvent[]
 }
-
 
 export type ListWebhooksRequest = {
   /**
@@ -1441,7 +1333,6 @@ export type ListWebhooksRequest = {
   domainId?: string
 }
 
-
 export interface ListWebhooksResponse {
   /**
    * Number of Webhooks matching the requested criteria.
@@ -1452,7 +1343,6 @@ export interface ListWebhooksResponse {
    */
   webhooks: Webhook[]
 }
-
 
 export interface ProjectConsumption {
   /**
@@ -1481,14 +1371,12 @@ export interface ProjectConsumption {
   customBlocklistsCount: number
 }
 
-
 export interface ProjectSettings {
   /**
    * Information about your periodic report.
    */
   periodicReport?: ProjectSettingsPeriodicReport
 }
-
 
 export type RevokeDomainRequest = {
   /**
@@ -1500,7 +1388,6 @@ export type RevokeDomainRequest = {
    */
   domainId: string
 }
-
 
 export interface Statistics {
   /**
@@ -1529,7 +1416,6 @@ export interface Statistics {
   canceledCount: number
 }
 
-
 export type UpdateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1544,7 +1430,6 @@ export type UpdateDomainRequest = {
    */
   autoconfig?: boolean
 }
-
 
 export type UpdateOfferSubscriptionRequest = {
   /**
@@ -1561,7 +1446,6 @@ export type UpdateOfferSubscriptionRequest = {
   name?: OfferName
 }
 
-
 export type UpdateProjectSettingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1576,7 +1460,6 @@ export type UpdateProjectSettingsRequest = {
    */
   periodicReport?: UpdateProjectSettingsRequestUpdatePeriodicReport
 }
-
 
 export type UpdateWebhookRequest = {
   /**
@@ -1600,5 +1483,3 @@ export type UpdateWebhookRequest = {
    */
   snsArn?: string
 }
-
-

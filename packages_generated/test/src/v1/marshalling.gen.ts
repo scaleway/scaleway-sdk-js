@@ -1,6 +1,5 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   CreateHumanRequest,
   Human,
@@ -12,9 +11,7 @@ import type {
 
 export const unmarshalHuman = (data: unknown): Human => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Human' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Human' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -38,9 +35,7 @@ export const unmarshalHuman = (data: unknown): Human => {
 
 export const unmarshalListHumansResponse = (data: unknown): ListHumansResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListHumansResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListHumansResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -51,9 +46,7 @@ export const unmarshalListHumansResponse = (data: unknown): ListHumansResponse =
 
 export const unmarshalRegisterResponse = (data: unknown): RegisterResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RegisterResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RegisterResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -74,21 +67,14 @@ export const marshalCreateHumanRequest = (
   height: request.height,
   is_happy: request.isHappy,
   name: request.name,
-  shoe_size: request.shoeSize,  
+  shoe_size: request.shoeSize,
   ...resolveOneOf([
-    {default: defaults.defaultProjectId,param: 'project_id',
-      value: request.projectId,
-    },
-    {default: defaults.defaultOrganizationId,param: 'organization_id',
-      value: request.organizationId,
-    },
+    { default: defaults.defaultProjectId, param: 'project_id', value: request.projectId },
+    { default: defaults.defaultOrganizationId, param: 'organization_id', value: request.organizationId },
   ]),
 })
 
-export const marshalRegisterRequest = (
-  request: RegisterRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
+export const marshalRegisterRequest = (request: RegisterRequest, defaults: DefaultValues): Record<string, unknown> => ({
   username: request.username,
 })
 

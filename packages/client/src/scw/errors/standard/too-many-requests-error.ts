@@ -74,10 +74,7 @@ export class TooManyRequestsError extends ScalewayError {
     if (isJSONObject(obj.limit) && typeof obj.limit.quota === 'number') {
       limit = {
         quota: obj.limit.quota,
-        windowSeconds:
-          typeof obj.limit.window_seconds === 'number'
-            ? obj.limit.window_seconds
-            : undefined,
+        windowSeconds: typeof obj.limit.window_seconds === 'number' ? obj.limit.window_seconds : undefined,
       }
     }
 

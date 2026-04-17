@@ -60,13 +60,9 @@ const serversToReboot = servers.filter(obj => obj.state === 'running')
 console.log(`\t${serversToReboot.length}/${servers.length} will be rebooted`)
 
 // Reboot all servers at once.
-console.log(
-  `Rebooting servers ${serversToReboot.map(obj => obj.id).join(', ')}...`,
-)
+console.log(`Rebooting servers ${serversToReboot.map(obj => obj.id).join(', ')}...`)
 const updatedServers = await Promise.allSettled(
-  serversToReboot.map(obj =>
-    api.serverActionAndWait({ serverId: obj.id, action: 'reboot' }),
-  ),
+  serversToReboot.map(obj => api.serverActionAndWait({ serverId: obj.id, action: 'reboot' })),
 )
 for (const result of updatedServers) {
   switch (result.status) {

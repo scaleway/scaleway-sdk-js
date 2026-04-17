@@ -1,6 +1,3 @@
-
-
-
 export type CountryCode =
   | 'unknown_country_code'
   | 'AF'
@@ -253,9 +250,4 @@ export type CountryCode =
   | 'ZM'
   | 'ZW'
 
-export type LanguageCode =
-  | 'unknown_language_code'
-  | 'en_US'
-  | 'fr_FR'
-  | 'de_DE'
-
+export type LanguageCode = 'unknown_language_code' | 'en_US' | 'fr_FR' | 'de_DE'

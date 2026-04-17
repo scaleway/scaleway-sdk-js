@@ -17,9 +17,7 @@ const DETECT_ITEM_REGEX = /^\s*(.+?)\s*:\s*(.+?)\s*$/
  *
  * @internal
  */
-export const convertYamlToConfiguration = (
-  input: string | null,
-): ConfigurationType => {
+export const convertYamlToConfiguration = (input: string | null): ConfigurationType => {
   let foundProfilesKey = false
   let currentSection: string | undefined = 'default'
   const map: ConfigurationType = {}
@@ -65,9 +63,7 @@ export const convertYamlToConfiguration = (
  *
  * @internal
  */
-export const loadConfigurationFromFile = (
-  filePath: string,
-): ConfigurationType => {
+export const loadConfigurationFromFile = (filePath: string): ConfigurationType => {
   // `readFileSync` returns a string when encoding option is specified.
   // {@link https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options}
   const fileContent = readFileSync(filePath, 'utf-8')
@@ -89,9 +85,7 @@ export const loadConfigurationFromFile = (
  *
  * @public
  */
-export const loadConfigurationFromFileAsync = async (
-  filePath: string,
-): Promise<ConfigurationType> => {
+export const loadConfigurationFromFileAsync = async (filePath: string): Promise<ConfigurationType> => {
   const fileContent = await readFileAsync(filePath, 'utf-8')
 
   return convertYamlToConfiguration(fileContent)
@@ -110,9 +104,7 @@ export const loadConfigurationFromFileAsync = async (
  *
  * @public
  */
-export const hasSecureFilePermissions = async (
-  filePath: string,
-): Promise<boolean> => {
+export const hasSecureFilePermissions = async (filePath: string): Promise<boolean> => {
   if (process.platform === 'win32') return true
 
   const info = await statAsync(filePath)

@@ -1,59 +1,28 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
+import type { Money, Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 
+export type DNSStageType = 'unknown_type' | 'auto' | 'managed' | 'custom'
 
-export type DNSStageType =
-  | 'unknown_type'
-  | 'auto'
-  | 'managed'
-  | 'custom'
+export type LbOriginError = 'unknown' | 'timeout' | 'connection_refused' | 'tls_error'
 
-export type LbOriginError =
-  | 'unknown'
-  | 'timeout'
-  | 'connection_refused'
-  | 'tls_error'
+export type ListBackendStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListBackendStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListCacheStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListCacheStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListDNSStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListDNSStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListPipelinesRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
-export type ListPipelinesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
+export type ListPipelinesWithStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
-export type ListPipelinesWithStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
+export type ListPurgeRequestsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListPurgeRequestsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListRouteStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListRouteStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListTLSStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListTLSStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-
-export type ListWafStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListWafStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export type PipelineErrorCode =
   | 'unknown_code'
@@ -90,46 +59,19 @@ export type PipelineErrorCode =
   | 'pipeline_missing_head_stage'
   | 'pipeline_websocket_limit'
 
-export type PipelineErrorSeverity =
-  | 'unknown_severity'
-  | 'warning'
-  | 'critical'
+export type PipelineErrorSeverity = 'unknown_severity' | 'warning' | 'critical'
 
-export type PipelineErrorStage =
-  | 'unknown_stage'
-  | 'dns'
-  | 'tls'
-  | 'cache'
-  | 'backend'
+export type PipelineErrorStage = 'unknown_stage' | 'dns' | 'tls' | 'cache' | 'backend'
 
-export type PipelineErrorType =
-  | 'unknown_type'
-  | 'runtime'
-  | 'config'
+export type PipelineErrorType = 'unknown_type' | 'runtime' | 'config'
 
-export type PipelineStatus =
-  | 'unknown_status'
-  | 'ready'
-  | 'error'
-  | 'pending'
-  | 'warning'
-  | 'locked'
+export type PipelineStatus = 'unknown_status' | 'ready' | 'error' | 'pending' | 'warning' | 'locked'
 
-export type PlanName =
-  | 'unknown_name'
-  | 'starter'
-  | 'professional'
-  | 'advanced'
+export type PlanName = 'unknown_name' | 'starter' | 'professional' | 'advanced'
 
-export type PurgeRequestStatus =
-  | 'unknown_status'
-  | 'done'
-  | 'error'
-  | 'pending'
+export type PurgeRequestStatus = 'unknown_status' | 'done' | 'error' | 'pending'
 
-export type RuleHttpMatchHostFilterHostFilterType =
-  | 'unknown_host_filter'
-  | 'regex'
+export type RuleHttpMatchHostFilterHostFilterType = 'unknown_host_filter' | 'regex'
 
 export type RuleHttpMatchMethodFilter =
   | 'unknown_method_filter'
@@ -141,32 +83,17 @@ export type RuleHttpMatchMethodFilter =
   | 'head'
   | 'options'
 
-export type RuleHttpMatchPathFilterPathFilterType =
-  | 'unknown_path_filter'
-  | 'regex'
+export type RuleHttpMatchPathFilterPathFilterType = 'unknown_path_filter' | 'regex'
 
-export type SearchBackendStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type SearchBackendStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type SearchRouteRulesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type SearchRouteRulesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type SearchWafStagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type SearchWafStagesRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type StageStatus =
-  | 'unknown_status'
-  | 'inactive'
-  | 'active'
+export type StageStatus = 'unknown_status' | 'inactive' | 'active'
 
-export type WafStageMode =
-  | 'unknown_mode'
-  | 'disable'
-  | 'log_only'
-  | 'enable'
+export type WafStageMode = 'unknown_mode' | 'disable' | 'log_only' | 'enable'
 
 export interface ScalewayLb {
   /**
@@ -195,12 +122,10 @@ export interface ScalewayLb {
   hasWebsocket?: boolean
 }
 
-
 export interface RuleHttpMatchHostFilter {
   hostFilterType: RuleHttpMatchHostFilterHostFilterType
   value: string
 }
-
 
 export interface RuleHttpMatchPathFilter {
   /**
@@ -213,14 +138,12 @@ export interface RuleHttpMatchPathFilter {
   value: string
 }
 
-
 export interface ScalewayLbBackendConfig {
   /**
    * Load Balancer information.
    */
   lbs: ScalewayLb[]
 }
-
 
 export interface ScalewayS3BackendConfig {
   /**
@@ -237,7 +160,6 @@ export interface ScalewayS3BackendConfig {
   isWebsite?: boolean
 }
 
-
 export interface ScalewayServerlessContainerBackendConfig {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -245,7 +167,6 @@ export interface ScalewayServerlessContainerBackendConfig {
   region: ScwRegion
   containerId: string
 }
-
 
 export interface ScalewayServerlessFunctionBackendConfig {
   /**
@@ -255,7 +176,6 @@ export interface ScalewayServerlessFunctionBackendConfig {
   functionId: string
 }
 
-
 export interface PipelineError {
   stage: PipelineErrorStage
   code: PipelineErrorCode
@@ -263,7 +183,6 @@ export interface PipelineError {
   message: string
   type: PipelineErrorType
 }
-
 
 export interface TLSSecret {
   /**
@@ -275,7 +194,6 @@ export interface TLSSecret {
    */
   region: ScwRegion
 }
-
 
 export interface RuleHttpMatch {
   /**
@@ -291,7 +209,6 @@ export interface RuleHttpMatch {
    */
   hostFilter?: RuleHttpMatchHostFilter
 }
-
 
 export interface BackendStage {
   /**
@@ -337,7 +254,6 @@ export interface BackendStage {
    */
   scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig
 }
-
 
 export interface CacheStage {
   /**
@@ -385,7 +301,6 @@ export interface CacheStage {
    */
   routeStageId?: string
 }
-
 
 export interface DNSStage {
   /**
@@ -444,7 +359,6 @@ export interface DNSStage {
   wildcardDomain: boolean
 }
 
-
 export interface Pipeline {
   /**
    * ID of the pipeline.
@@ -484,7 +398,6 @@ export interface Pipeline {
   updatedAt?: Date
 }
 
-
 export interface RouteStage {
   /**
    * ID of the route stage.
@@ -519,7 +432,6 @@ export interface RouteStage {
    */
   updatedAt?: Date
 }
-
 
 export interface TLSStage {
   /**
@@ -578,7 +490,6 @@ export interface TLSStage {
   routeStageId?: string
 }
 
-
 export interface WafStage {
   /**
    * ID of the WAF stage.
@@ -616,7 +527,6 @@ export interface WafStage {
   backendStageId?: string
 }
 
-
 export interface SetRouteRulesRequestRouteRule {
   /**
    * Rule condition to be matched. Requests matching the condition defined here will be directly forwarded to the backend specified by the `backend_stage_id` or `waf_stage_id` fields. Requests that do not match will be checked by the next rule's condition.
@@ -637,7 +547,6 @@ export interface SetRouteRulesRequestRouteRule {
    */
   wafStageId?: string
 }
-
 
 export interface RouteRule {
   /**
@@ -668,12 +577,10 @@ export interface RouteRule {
   wafStageId?: string
 }
 
-
 export interface CheckPEMChainRequestSecretChain {
   secretId: string
   secretRegion: string
 }
-
 
 export interface PlanDetails {
   /**
@@ -702,14 +609,12 @@ export interface PlanDetails {
   wildcardDomain: boolean
 }
 
-
 export interface PlanUsageDetails {
   /**
    * Cost to date (this month) for the corresponding Edge Services subscription plan.
    */
   planCost?: Money
 }
-
 
 export interface HeadStageResponseHeadStage {
   /**
@@ -719,7 +624,6 @@ export interface HeadStageResponseHeadStage {
   dnsStageId?: string
 }
 
-
 export interface ListHeadStagesResponseHeadStage {
   /**
    *
@@ -727,7 +631,6 @@ export interface ListHeadStagesResponseHeadStage {
    */
   dnsStageId?: string
 }
-
 
 export interface PipelineStages {
   pipeline?: Pipeline
@@ -738,7 +641,6 @@ export interface PipelineStages {
   wafStages: WafStage[]
   routeStages: RouteStage[]
 }
-
 
 export interface PurgeRequest {
   /**
@@ -775,22 +677,18 @@ export interface PurgeRequest {
   updatedAt?: Date
 }
 
-
 export interface SetHeadStageRequestAddNewHeadStage {
   newStageId: string
 }
-
 
 export interface SetHeadStageRequestRemoveHeadStage {
   removeStageId: string
 }
 
-
 export interface SetHeadStageRequestSwapHeadStage {
   newStageId: string
   currentStageId: string
 }
-
 
 export interface TLSSecretsConfig {
   /**
@@ -798,7 +696,6 @@ export interface TLSSecretsConfig {
    */
   tlsSecrets: TLSSecret[]
 }
-
 
 export type AddRouteRulesRequest = {
   /**
@@ -823,7 +720,6 @@ export type AddRouteRulesRequest = {
   beforePosition?: number
 }
 
-
 export interface AddRouteRulesResponse {
   /**
    * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
@@ -831,29 +727,24 @@ export interface AddRouteRulesResponse {
   routeRules: RouteRule[]
 }
 
-
 export type CheckDomainRequest = {
   projectId?: string
   fqdn: string
   cname: string
 }
 
-
 export interface CheckDomainResponse {
   isValid: boolean
 }
-
 
 export type CheckLbOriginRequest = {
   lb?: ScalewayLb
 }
 
-
 export interface CheckLbOriginResponse {
   isValid: boolean
   errorType: LbOriginError
 }
-
 
 export type CheckPEMChainRequest = {
   projectId?: string
@@ -870,11 +761,9 @@ export type CheckPEMChainRequest = {
   raw?: string
 }
 
-
 export interface CheckPEMChainResponse {
   isValid: boolean
 }
-
 
 export type CreateBackendStageRequest = {
   /**
@@ -904,7 +793,6 @@ export type CreateBackendStageRequest = {
    */
   scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig
 }
-
 
 export type CreateCacheStageRequest = {
   /**
@@ -936,7 +824,6 @@ export type CreateCacheStageRequest = {
    */
   routeStageId?: string
 }
-
 
 export type CreateDNSStageRequest = {
   /**
@@ -971,7 +858,6 @@ export type CreateDNSStageRequest = {
   wildcardDomain?: boolean
 }
 
-
 export type CreatePipelineRequest = {
   /**
    * Project ID in which the pipeline will be created.
@@ -986,7 +872,6 @@ export type CreatePipelineRequest = {
    */
   description: string
 }
-
 
 export type CreatePurgeRequestRequest = {
   /**
@@ -1007,7 +892,6 @@ export type CreatePurgeRequestRequest = {
   all?: boolean
 }
 
-
 export type CreateRouteStageRequest = {
   /**
    * Pipeline ID the route stage belongs to.
@@ -1026,7 +910,6 @@ export type CreateRouteStageRequest = {
    */
   backendStageId?: string
 }
-
 
 export type CreateTLSStageRequest = {
   /**
@@ -1065,7 +948,6 @@ export type CreateTLSStageRequest = {
   wafStageId?: string
 }
 
-
 export type CreateWafStageRequest = {
   /**
    * Pipeline ID the WAF stage belongs to.
@@ -1087,14 +969,12 @@ export type CreateWafStageRequest = {
   backendStageId?: string
 }
 
-
 export type DeleteBackendStageRequest = {
   /**
    * ID of the backend stage to delete.
    */
   backendStageId: string
 }
-
 
 export type DeleteCacheStageRequest = {
   /**
@@ -1103,11 +983,9 @@ export type DeleteCacheStageRequest = {
   cacheStageId: string
 }
 
-
 export type DeleteCurrentPlanRequest = {
   projectId?: string
 }
-
 
 export type DeleteDNSStageRequest = {
   /**
@@ -1116,14 +994,12 @@ export type DeleteDNSStageRequest = {
   dnsStageId: string
 }
 
-
 export type DeletePipelineRequest = {
   /**
    * ID of the pipeline to delete.
    */
   pipelineId: string
 }
-
 
 export type DeleteRouteStageRequest = {
   /**
@@ -1132,14 +1008,12 @@ export type DeleteRouteStageRequest = {
   routeStageId: string
 }
 
-
 export type DeleteTLSStageRequest = {
   /**
    * ID of the TLS stage to delete.
    */
   tlsStageId: string
 }
-
 
 export type DeleteWafStageRequest = {
   /**
@@ -1148,7 +1022,6 @@ export type DeleteWafStageRequest = {
   wafStageId: string
 }
 
-
 export type GetBackendStageRequest = {
   /**
    * ID of the requested backend stage.
@@ -1156,11 +1029,9 @@ export type GetBackendStageRequest = {
   backendStageId: string
 }
 
-
 export type GetBillingRequest = {
   projectId?: string
 }
-
 
 export interface GetBillingResponse {
   /**
@@ -1217,7 +1088,6 @@ export interface GetBillingResponse {
   totalCost?: Money
 }
 
-
 export type GetCacheStageRequest = {
   /**
    * ID of the requested cache stage.
@@ -1225,11 +1095,9 @@ export type GetCacheStageRequest = {
   cacheStageId: string
 }
 
-
 export type GetCurrentPlanRequest = {
   projectId?: string
 }
-
 
 export type GetDNSStageRequest = {
   /**
@@ -1238,14 +1106,12 @@ export type GetDNSStageRequest = {
   dnsStageId: string
 }
 
-
 export type GetPipelineRequest = {
   /**
    * ID of the requested pipeline.
    */
   pipelineId: string
 }
-
 
 export type GetPurgeRequestRequest = {
   /**
@@ -1254,14 +1120,12 @@ export type GetPurgeRequestRequest = {
   purgeRequestId: string
 }
 
-
 export type GetRouteStageRequest = {
   /**
    * ID of the requested route stage.
    */
   routeStageId: string
 }
-
 
 export type GetTLSStageRequest = {
   /**
@@ -1270,7 +1134,6 @@ export type GetTLSStageRequest = {
   tlsStageId: string
 }
 
-
 export type GetWafStageRequest = {
   /**
    * ID of the requested WAF stage.
@@ -1278,14 +1141,12 @@ export type GetWafStageRequest = {
   wafStageId: string
 }
 
-
 export interface HeadStageResponse {
   /**
    * Modified or created head stage.
    */
   headStage?: HeadStageResponseHeadStage
 }
-
 
 export type ListBackendStagesRequest = {
   /**
@@ -1318,7 +1179,6 @@ export type ListBackendStagesRequest = {
   lbId?: string
 }
 
-
 export interface ListBackendStagesResponse {
   /**
    * Paginated list of backend stages.
@@ -1329,7 +1189,6 @@ export interface ListBackendStagesResponse {
    */
   totalCount: number
 }
-
 
 export type ListCacheStagesRequest = {
   /**
@@ -1350,7 +1209,6 @@ export type ListCacheStagesRequest = {
   pageSize?: number
 }
 
-
 export interface ListCacheStagesResponse {
   /**
    * Paginated list of cache stages.
@@ -1361,7 +1219,6 @@ export interface ListCacheStagesResponse {
    */
   totalCount: number
 }
-
 
 export type ListDNSStagesRequest = {
   /**
@@ -1386,7 +1243,6 @@ export type ListDNSStagesRequest = {
   fqdn?: string
 }
 
-
 export interface ListDNSStagesResponse {
   /**
    * Paginated list of DNS stages.
@@ -1397,7 +1253,6 @@ export interface ListDNSStagesResponse {
    */
   totalCount: number
 }
-
 
 export type ListHeadStagesRequest = {
   /**
@@ -1414,7 +1269,6 @@ export type ListHeadStagesRequest = {
   pageSize?: number
 }
 
-
 export interface ListHeadStagesResponse {
   /**
    * Number of head stages to return per page.
@@ -1425,7 +1279,6 @@ export interface ListHeadStagesResponse {
    */
   totalCount: number
 }
-
 
 export type ListPipelinesRequest = {
   /**
@@ -1458,7 +1311,6 @@ export type ListPipelinesRequest = {
   hasBackendStageLb?: boolean
 }
 
-
 export interface ListPipelinesResponse {
   /**
    * Paginated list of pipelines.
@@ -1470,7 +1322,6 @@ export interface ListPipelinesResponse {
   totalCount: number
 }
 
-
 export type ListPipelinesWithStagesRequest = {
   orderBy?: ListPipelinesWithStagesRequestOrderBy
   page?: number
@@ -1480,18 +1331,15 @@ export type ListPipelinesWithStagesRequest = {
   projectId?: string
 }
 
-
 export interface ListPipelinesWithStagesResponse {
   pipelines: PipelineStages[]
   totalCount: number
 }
 
-
 export interface ListPlansResponse {
   totalCount: number
   plans: PlanDetails[]
 }
-
 
 export type ListPurgeRequestsRequest = {
   /**
@@ -1520,7 +1368,6 @@ export type ListPurgeRequestsRequest = {
   pipelineId?: string
 }
 
-
 export interface ListPurgeRequestsResponse {
   /**
    * Paginated list of purge requests.
@@ -1532,14 +1379,12 @@ export interface ListPurgeRequestsResponse {
   totalCount: number
 }
 
-
 export type ListRouteRulesRequest = {
   /**
    * Route stage ID to filter for. Only route rules from this route stage will be returned.
    */
   routeStageId: string
 }
-
 
 export interface ListRouteRulesResponse {
   /**
@@ -1551,7 +1396,6 @@ export interface ListRouteRulesResponse {
    */
   totalCount: number
 }
-
 
 export type ListRouteStagesRequest = {
   /**
@@ -1572,7 +1416,6 @@ export type ListRouteStagesRequest = {
   pageSize?: number
 }
 
-
 export interface ListRouteStagesResponse {
   /**
    * Paginated list of summarized route stages.
@@ -1583,7 +1426,6 @@ export interface ListRouteStagesResponse {
    */
   totalCount: number
 }
-
 
 export type ListTLSStagesRequest = {
   /**
@@ -1612,7 +1454,6 @@ export type ListTLSStagesRequest = {
   secretRegion?: string
 }
 
-
 export interface ListTLSStagesResponse {
   /**
    * Paginated list of TLS stages.
@@ -1623,7 +1464,6 @@ export interface ListTLSStagesResponse {
    */
   totalCount: number
 }
-
 
 export type ListWafStagesRequest = {
   /**
@@ -1644,7 +1484,6 @@ export type ListWafStagesRequest = {
   pageSize?: number
 }
 
-
 export interface ListWafStagesResponse {
   /**
    * Paginated list of WAF stages.
@@ -1656,11 +1495,9 @@ export interface ListWafStagesResponse {
   totalCount: number
 }
 
-
 export interface Plan {
   planName: PlanName
 }
-
 
 export type SearchBackendStagesRequest = {
   orderBy?: SearchBackendStagesRequestOrderBy
@@ -1672,7 +1509,6 @@ export type SearchBackendStagesRequest = {
   lbId?: string
 }
 
-
 export type SearchRouteRulesRequest = {
   orderBy?: SearchRouteRulesRequestOrderBy
   page?: number
@@ -1681,7 +1517,6 @@ export type SearchRouteRulesRequest = {
   projectId?: string
 }
 
-
 export type SearchWafStagesRequest = {
   orderBy?: SearchWafStagesRequestOrderBy
   page?: number
@@ -1689,12 +1524,10 @@ export type SearchWafStagesRequest = {
   projectId?: string
 }
 
-
 export type SelectPlanRequest = {
   projectId?: string
   planName?: PlanName
 }
-
 
 export type SetHeadStageRequest = {
   /**
@@ -1721,7 +1554,6 @@ export type SetHeadStageRequest = {
   swapHeadStage?: SetHeadStageRequestSwapHeadStage
 }
 
-
 export type SetRouteRulesRequest = {
   /**
    * ID of the route stage to update.
@@ -1733,14 +1565,12 @@ export type SetRouteRulesRequest = {
   routeRules?: SetRouteRulesRequestRouteRule[]
 }
 
-
 export interface SetRouteRulesResponse {
   /**
    * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
    */
   routeRules: RouteRule[]
 }
-
 
 export type UpdateBackendStageRequest = {
   /**
@@ -1775,7 +1605,6 @@ export type UpdateBackendStageRequest = {
   pipelineId: string
 }
 
-
 export type UpdateCacheStageRequest = {
   /**
    * ID of the cache stage to update.
@@ -1806,7 +1635,6 @@ export type UpdateCacheStageRequest = {
    */
   routeStageId?: string
 }
-
 
 export type UpdateDNSStageRequest = {
   /**
@@ -1841,7 +1669,6 @@ export type UpdateDNSStageRequest = {
   wildcardDomain?: boolean
 }
 
-
 export type UpdatePipelineRequest = {
   /**
    * ID of the pipeline to update.
@@ -1856,7 +1683,6 @@ export type UpdatePipelineRequest = {
    */
   description?: string
 }
-
 
 export type UpdateRouteStageRequest = {
   /**
@@ -1876,7 +1702,6 @@ export type UpdateRouteStageRequest = {
    */
   backendStageId?: string
 }
-
 
 export type UpdateTLSStageRequest = {
   /**
@@ -1915,7 +1740,6 @@ export type UpdateTLSStageRequest = {
   wafStageId?: string
 }
 
-
 export type UpdateWafStageRequest = {
   /**
    * ID of the WAF stage to update.
@@ -1936,5 +1760,3 @@ export type UpdateWafStageRequest = {
    */
   backendStageId?: string
 }
-
-

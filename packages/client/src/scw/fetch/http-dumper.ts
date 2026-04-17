@@ -7,10 +7,7 @@
  * @internal
  */
 const toPascalCase = (str: string): string =>
-  str.replace(
-    /\w+/g,
-    word => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`,
-  )
+  str.replace(/\w+/g, word => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`)
 
 /**
  * Converts a Headers entry to string.
@@ -20,8 +17,7 @@ const toPascalCase = (str: string): string =>
  *
  * @internal
  */
-const serializeHeadersEntry = ([name, value]: [string, string]) =>
-  `${toPascalCase(name)}: ${value}`
+const serializeHeadersEntry = ([name, value]: [string, string]) => `${toPascalCase(name)}: ${value}`
 
 /**
  * Converts Headers to safe to log strings (with obfuscated auth secrets).
@@ -31,8 +27,7 @@ const serializeHeadersEntry = ([name, value]: [string, string]) =>
  *
  * @internal
  */
-const serializeHeaders = (headers: Headers): string[] =>
-  Array.from(headers.entries(), serializeHeadersEntry)
+const serializeHeaders = (headers: Headers): string[] => Array.from(headers.entries(), serializeHeadersEntry)
 
 /**
  * Dumps a Request into a readable string.
@@ -42,9 +37,7 @@ const serializeHeaders = (headers: Headers): string[] =>
  *
  * @internal
  */
-export const dumpRequest = async (
-  request: Readonly<Request>,
-): Promise<string> =>
+export const dumpRequest = async (request: Readonly<Request>): Promise<string> =>
   [
     `${request.method.toUpperCase()}: ${request.url}`,
     ...serializeHeaders(request.headers),
@@ -59,9 +52,7 @@ export const dumpRequest = async (
  *
  * @internal
  */
-export const dumpResponse = async (
-  response: Readonly<Response>,
-): Promise<string> =>
+export const dumpResponse = async (response: Readonly<Response>): Promise<string> =>
   [
     `HTTP ${response.status} ${response.ok ? 'OK' : 'NOK'}`,
     ...serializeHeaders(response.headers),

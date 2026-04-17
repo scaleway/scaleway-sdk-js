@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: "@scaleway/sdk-kafka",
-  namespace: "kafka",
-  displayName: "Kafka",
-  versions: ["v1alpha1"]
+  name: '@scaleway/sdk-kafka',
+  namespace: 'kafka',
+  displayName: 'Kafka',
+  versions: ['v1alpha1'],
 } as const
 
 export type Metadata = typeof pkgMetadata

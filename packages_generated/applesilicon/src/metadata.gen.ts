@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: "@scaleway/sdk-applesilicon",
-  namespace: "applesilicon",
-  displayName: "Applesilicon",
-  versions: ["v1alpha1"]
+  name: '@scaleway/sdk-applesilicon',
+  namespace: 'applesilicon',
+  displayName: 'Applesilicon',
+  versions: ['v1alpha1'],
 } as const
 
 export type Metadata = typeof pkgMetadata

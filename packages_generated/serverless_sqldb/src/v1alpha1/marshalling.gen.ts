@@ -1,6 +1,5 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   CreateDatabaseRequest,
   Database,
@@ -13,9 +12,7 @@ import type {
 
 export const unmarshalDatabaseBackup = (data: unknown): DatabaseBackup => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DatabaseBackup' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DatabaseBackup' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -36,9 +33,7 @@ export const unmarshalDatabaseBackup = (data: unknown): DatabaseBackup => {
 
 export const unmarshalDatabase = (data: unknown): Database => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Database' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Database' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -60,9 +55,7 @@ export const unmarshalDatabase = (data: unknown): Database => {
 
 export const unmarshalListDatabaseBackupsResponse = (data: unknown): ListDatabaseBackupsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDatabaseBackupsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListDatabaseBackupsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -73,9 +66,7 @@ export const unmarshalListDatabaseBackupsResponse = (data: unknown): ListDatabas
 
 export const unmarshalListDatabasesResponse = (data: unknown): ListDatabasesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDatabasesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListDatabasesResponse' failed as data isn't a dictionary.`)
   }
 
   return {

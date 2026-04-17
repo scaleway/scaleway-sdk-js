@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAWAREHOUSE,} from './content.gen.js'
+import { DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAWAREHOUSE } from './content.gen.js'
 import {
   marshalCreateDatabaseRequest,
   marshalCreateDeploymentRequest,
@@ -73,13 +73,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par'],
+  })
+
   protected pageOfListPresets = (request: Readonly<ListPresetsRequest> = {}) =>
     this.client.fetch<ListPresetsResponse>(
       {
@@ -92,7 +89,7 @@ export class API extends ParentAPI {
       },
       unmarshalListPresetsResponse,
     )
-  
+
   /**
    * List available presets.
    *
@@ -102,7 +99,6 @@ export class API extends ParentAPI {
   listPresets = (request: Readonly<ListPresetsRequest> = {}) =>
     enrichForPagination('presets', this.pageOfListPresets, request)
 
-  
   protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}) =>
     this.client.fetch<ListVersionsResponse>(
       {
@@ -116,7 +112,7 @@ export class API extends ParentAPI {
       },
       unmarshalListVersionsResponse,
     )
-  
+
   /**
    * List available ClickHouse® versions.
    *
@@ -126,7 +122,6 @@ export class API extends ParentAPI {
   listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
     enrichForPagination('versions', this.pageOfListVersions, request)
 
-  
   protected pageOfListDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
     this.client.fetch<ListDeploymentsResponse>(
       {
@@ -144,7 +139,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDeploymentsResponse,
     )
-  
+
   /**
    * List deployments. List all deployments in the specified region, for a given Scaleway Project. By default, the deployments returned in the list are ordered by creation date in ascending order, though this can be modified via the order_by field. You can define additional parameters for your query, such as `tags` and `name`. For the `name` parameter, the value you provide will be checked against the whole name string to see if it includes the string you put in the parameter.
    *
@@ -154,7 +149,6 @@ export class API extends ParentAPI {
   listDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
     enrichForPagination('deployments', this.pageOfListDeployments, request)
 
-  
   /**
    * Get a deployment. Retrieve information about a given deployment, specified by the `region` and `deployment_id` parameters. Its full details, including name, status are returned in the response object.
    *
@@ -169,7 +163,7 @@ export class API extends ParentAPI {
       },
       unmarshalDeployment,
     )
-  
+
   /**
    * Waits for {@link Deployment} to be in a final state.
    *
@@ -177,10 +171,7 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Deployment
    */
-  waitForDeployment = (
-    request: Readonly<GetDeploymentRequest>,
-    options?: Readonly<WaitForOptions<Deployment>>,
-  ) =>
+  waitForDeployment = (request: Readonly<GetDeploymentRequest>, options?: Readonly<WaitForOptions<Deployment>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DEPLOYMENT_TRANSIENT_STATUSES_DATAWAREHOUSE.includes(res.status))),
       this.getDeployment,
@@ -188,7 +179,6 @@ export class API extends ParentAPI {
       options,
     )
 
-  
   /**
    * Create a deployment. Create a new deployment.
    *
@@ -198,9 +188,7 @@ export class API extends ParentAPI {
   createDeployment = (request: Readonly<CreateDeploymentRequest>) =>
     this.client.fetch<Deployment>(
       {
-        body: JSON.stringify(
-          marshalCreateDeploymentRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateDeploymentRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
@@ -208,7 +196,6 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  
   /**
    * Update a deployment. Update the parameters of a deployment.
    *
@@ -218,9 +205,7 @@ export class API extends ParentAPI {
   updateDeployment = (request: Readonly<UpdateDeploymentRequest>) =>
     this.client.fetch<Deployment>(
       {
-        body: JSON.stringify(
-          marshalUpdateDeploymentRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateDeploymentRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
@@ -228,7 +213,6 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  
   /**
    * Delete a deployment. Delete a given deployment, specified by the `region` and `deployment_id` parameters. Deleting a deployment is permanent, and cannot be undone. Upon deletion, all your data will be lost.
    *
@@ -244,7 +228,6 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  
   /**
    * Get deployment TLS certificate. Retrieve the TLS certificate associated with a deployment.
    *
@@ -252,18 +235,13 @@ export class API extends ParentAPI {
    * @returns A Promise of Blob
    */
   getDeploymentCertificate = (request: Readonly<GetDeploymentCertificateRequest>) =>
-    this.client.fetch<Blob>(
-      {
-        method: 'GET',
-        path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificate`,
-        urlParams: urlParams(
-          ['dl', 1],
-        ),
-        responseType: 'blob',
-      },
-    )
+    this.client.fetch<Blob>({
+      method: 'GET',
+      path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificate`,
+      urlParams: urlParams(['dl', 1]),
+      responseType: 'blob',
+    })
 
-  
   /**
    * Start a deployment. Start a stopped deployment.
    *
@@ -281,7 +259,6 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  
   /**
    * Stop a deployment. Stop a running deployment.
    *
@@ -299,7 +276,6 @@ export class API extends ParentAPI {
       unmarshalDeployment,
     )
 
-  
   protected pageOfListUsers = (request: Readonly<ListUsersRequest>) =>
     this.client.fetch<ListUsersResponse>(
       {
@@ -314,17 +290,15 @@ export class API extends ParentAPI {
       },
       unmarshalListUsersResponse,
     )
-  
+
   /**
    * List users associated with a deployment.
    *
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
    */
-  listUsers = (request: Readonly<ListUsersRequest>) =>
-    enrichForPagination('users', this.pageOfListUsers, request)
+  listUsers = (request: Readonly<ListUsersRequest>) => enrichForPagination('users', this.pageOfListUsers, request)
 
-  
   /**
    * Create a new user for a deployment.
    *
@@ -334,9 +308,7 @@ export class API extends ParentAPI {
   createUser = (request: Readonly<CreateUserRequest>) =>
     this.client.fetch<User>(
       {
-        body: JSON.stringify(
-          marshalCreateUserRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateUserRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users`,
@@ -344,7 +316,6 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * Update an existing user for a deployment.
    *
@@ -354,9 +325,7 @@ export class API extends ParentAPI {
   updateUser = (request: Readonly<UpdateUserRequest>) =>
     this.client.fetch<User>(
       {
-        body: JSON.stringify(
-          marshalUpdateUserRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateUserRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('name', request.name)}`,
@@ -364,37 +333,30 @@ export class API extends ParentAPI {
       unmarshalUser,
     )
 
-  
   /**
    * Delete a user from a deployment.
    *
    * @param request - The request {@link DeleteUserRequest}
    */
   deleteUser = (request: Readonly<DeleteUserRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'DELETE',
-        path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('name', request.name)}`,
-      },
-    )
+    this.client.fetch<void>({
+      body: '{}',
+      headers: jsonContentHeaders,
+      method: 'DELETE',
+      path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('name', request.name)}`,
+    })
 
-  
   /**
    * Delete an endpoint from a deployment.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
   deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+    })
 
-  
   /**
    * Create a new endpoint for a deployment.
    *
@@ -404,9 +366,7 @@ export class API extends ParentAPI {
   createEndpoint = (request: Readonly<CreateEndpointRequest>) =>
     this.client.fetch<Endpoint>(
       {
-        body: JSON.stringify(
-          marshalCreateEndpointRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateEndpointRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
@@ -414,7 +374,6 @@ export class API extends ParentAPI {
       unmarshalEndpoint,
     )
 
-  
   protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest>) =>
     this.client.fetch<ListDatabasesResponse>(
       {
@@ -429,7 +388,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDatabasesResponse,
     )
-  
+
   /**
    * List databases within a deployment.
    *
@@ -439,7 +398,6 @@ export class API extends ParentAPI {
   listDatabases = (request: Readonly<ListDatabasesRequest>) =>
     enrichForPagination('databases', this.pageOfListDatabases, request)
 
-  
   /**
    * Create a new database within a deployment.
    *
@@ -449,9 +407,7 @@ export class API extends ParentAPI {
   createDatabase = (request: Readonly<CreateDatabaseRequest>) =>
     this.client.fetch<Database>(
       {
-        body: JSON.stringify(
-          marshalCreateDatabaseRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateDatabaseRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/databases`,
@@ -459,20 +415,14 @@ export class API extends ParentAPI {
       unmarshalDatabase,
     )
 
-  
   /**
    * Delete a database from a deployment.
    *
    * @param request - The request {@link DeleteDatabaseRequest}
    */
   deleteDatabase = (request: Readonly<DeleteDatabaseRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/databases/${validatePathParam('name', request.name)}`,
-      },
-    )
-
-  
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/datawarehouse/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/databases/${validatePathParam('name', request.name)}`,
+    })
 }
-

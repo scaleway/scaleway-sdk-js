@@ -1,26 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
+export type ImageStatus = 'unknown' | 'ready' | 'deleting' | 'error' | 'locked'
 
-export type ImageStatus =
-  | 'unknown'
-  | 'ready'
-  | 'deleting'
-  | 'error'
-  | 'locked'
+export type ImageVisibility = 'visibility_unknown' | 'inherit' | 'public' | 'private'
 
-export type ImageVisibility =
-  | 'visibility_unknown'
-  | 'inherit'
-  | 'public'
-  | 'private'
-
-export type ListImagesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
+export type ListImagesRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
 export type ListNamespacesRequestOrderBy =
   | 'created_at_asc'
@@ -30,25 +16,11 @@ export type ListNamespacesRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export type ListTagsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
+export type ListTagsRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
-export type NamespaceStatus =
-  | 'unknown'
-  | 'ready'
-  | 'deleting'
-  | 'error'
-  | 'locked'
+export type NamespaceStatus = 'unknown' | 'ready' | 'deleting' | 'error' | 'locked'
 
-export type TagStatus =
-  | 'unknown'
-  | 'ready'
-  | 'deleting'
-  | 'error'
-  | 'locked'
+export type TagStatus = 'unknown' | 'ready' | 'deleting' | 'error' | 'locked'
 
 export interface Image {
   /**
@@ -92,7 +64,6 @@ export interface Image {
    */
   tags: string[]
 }
-
 
 export interface Namespace {
   /**
@@ -153,7 +124,6 @@ export interface Namespace {
   region: ScwRegion
 }
 
-
 export interface Tag {
   /**
    * UUID of the tag.
@@ -184,7 +154,6 @@ export interface Tag {
    */
   updatedAt?: Date
 }
-
 
 export type CreateNamespaceRequest = {
   /**
@@ -217,7 +186,6 @@ export type CreateNamespaceRequest = {
   isPublic: boolean
 }
 
-
 export type DeleteImageRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -229,7 +197,6 @@ export type DeleteImageRequest = {
   imageId: string
 }
 
-
 export type DeleteNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -240,7 +207,6 @@ export type DeleteNamespaceRequest = {
    */
   namespaceId: string
 }
-
 
 export type DeleteTagRequest = {
   /**
@@ -257,7 +223,6 @@ export type DeleteTagRequest = {
   force?: boolean
 }
 
-
 export type GetImageRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -268,7 +233,6 @@ export type GetImageRequest = {
    */
   imageId: string
 }
-
 
 export type GetNamespaceRequest = {
   /**
@@ -281,7 +245,6 @@ export type GetNamespaceRequest = {
   namespaceId: string
 }
 
-
 export type GetTagRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -292,7 +255,6 @@ export type GetTagRequest = {
    */
   tagId: string
 }
-
 
 export type ListImagesRequest = {
   /**
@@ -329,7 +291,6 @@ export type ListImagesRequest = {
   projectId?: string
 }
 
-
 export interface ListImagesResponse {
   /**
    * Paginated list of images that match the selected filters.
@@ -340,7 +301,6 @@ export interface ListImagesResponse {
    */
   totalCount: number
 }
-
 
 export type ListNamespacesRequest = {
   /**
@@ -373,7 +333,6 @@ export type ListNamespacesRequest = {
   name?: string
 }
 
-
 export interface ListNamespacesResponse {
   /**
    * Paginated list of namespaces that match the selected filters.
@@ -384,7 +343,6 @@ export interface ListNamespacesResponse {
    */
   totalCount: number
 }
-
 
 export type ListTagsRequest = {
   /**
@@ -413,7 +371,6 @@ export type ListTagsRequest = {
   name?: string
 }
 
-
 export interface ListTagsResponse {
   /**
    * Paginated list of tags that match the selected filters.
@@ -424,7 +381,6 @@ export interface ListTagsResponse {
    */
   totalCount: number
 }
-
 
 export type UpdateImageRequest = {
   /**
@@ -440,7 +396,6 @@ export type UpdateImageRequest = {
    */
   visibility?: ImageVisibility
 }
-
 
 export type UpdateNamespaceRequest = {
   /**
@@ -460,5 +415,3 @@ export type UpdateNamespaceRequest = {
    */
   isPublic?: boolean
 }
-
-

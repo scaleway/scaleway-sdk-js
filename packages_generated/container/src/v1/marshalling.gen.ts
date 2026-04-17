@@ -1,6 +1,5 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   Container,
   ContainerProbe,
@@ -41,9 +40,7 @@ import type {
 
 const unmarshalContainerProbeHTTPProbe = (data: unknown): ContainerProbeHTTPProbe => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContainerProbeHTTPProbe' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ContainerProbeHTTPProbe' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -53,20 +50,15 @@ const unmarshalContainerProbeHTTPProbe = (data: unknown): ContainerProbeHTTPProb
 
 const unmarshalContainerProbeTCPProbe = (data: unknown): ContainerProbeTCPProbe => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContainerProbeTCPProbe' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ContainerProbeTCPProbe' failed as data isn't a dictionary.`)
   }
 
-  return {
-  } as ContainerProbeTCPProbe
+  return {} as ContainerProbeTCPProbe
 }
 
 const unmarshalContainerProbe = (data: unknown): ContainerProbe => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContainerProbe' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ContainerProbe' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -80,9 +72,7 @@ const unmarshalContainerProbe = (data: unknown): ContainerProbe => {
 
 const unmarshalContainerScalingOption = (data: unknown): ContainerScalingOption => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContainerScalingOption' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ContainerScalingOption' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -94,9 +84,7 @@ const unmarshalContainerScalingOption = (data: unknown): ContainerScalingOption 
 
 export const unmarshalContainer = (data: unknown): Container => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Container' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Container' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -136,9 +124,7 @@ export const unmarshalContainer = (data: unknown): Container => {
 
 export const unmarshalDomain = (data: unknown): Domain => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Domain' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -155,9 +141,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
 
 export const unmarshalNamespace = (data: unknown): Namespace => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Namespace' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -179,9 +163,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
 
 const unmarshalTriggerCronConfig = (data: unknown): TriggerCronConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerCronConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TriggerCronConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -194,9 +176,7 @@ const unmarshalTriggerCronConfig = (data: unknown): TriggerCronConfig => {
 
 const unmarshalTriggerDestinationConfig = (data: unknown): TriggerDestinationConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerDestinationConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TriggerDestinationConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -207,9 +187,7 @@ const unmarshalTriggerDestinationConfig = (data: unknown): TriggerDestinationCon
 
 const unmarshalTriggerNATSConfig = (data: unknown): TriggerNATSConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerNATSConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TriggerNATSConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -220,9 +198,7 @@ const unmarshalTriggerNATSConfig = (data: unknown): TriggerNATSConfig => {
 
 const unmarshalTriggerSQSConfig = (data: unknown): TriggerSQSConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TriggerSQSConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TriggerSQSConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -235,9 +211,7 @@ const unmarshalTriggerSQSConfig = (data: unknown): TriggerSQSConfig => {
 
 export const unmarshalTrigger = (data: unknown): Trigger => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Trigger' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -260,9 +234,7 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
 
 export const unmarshalListContainersResponse = (data: unknown): ListContainersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListContainersResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListContainersResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -273,9 +245,7 @@ export const unmarshalListContainersResponse = (data: unknown): ListContainersRe
 
 export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -286,9 +256,7 @@ export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse
 
 export const unmarshalListNamespacesResponse = (data: unknown): ListNamespacesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListNamespacesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -299,9 +267,7 @@ export const unmarshalListNamespacesResponse = (data: unknown): ListNamespacesRe
 
 export const unmarshalListTriggersResponse = (data: unknown): ListTriggersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListTriggersResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -320,24 +286,20 @@ const marshalContainerProbeHTTPProbe = (
 const marshalContainerProbeTCPProbe = (
   request: ContainerProbeTCPProbe,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
-})
+): Record<string, unknown> => ({})
 
-const marshalContainerProbe = (
-  request: ContainerProbe,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
+const marshalContainerProbe = (request: ContainerProbe, defaults: DefaultValues): Record<string, unknown> => ({
   failure_threshold: request.failureThreshold,
   interval: request.interval,
-  timeout: request.timeout,  
+  timeout: request.timeout,
   ...resolveOneOf([
-    {param: 'tcp',
-      value: (request.tcp !== undefined) ? marshalContainerProbeTCPProbe(request.tcp, defaults)
-      : undefined,
+    {
+      param: 'tcp',
+      value: request.tcp !== undefined ? marshalContainerProbeTCPProbe(request.tcp, defaults) : undefined,
     },
-    {param: 'http',
-      value: (request.http !== undefined) ? marshalContainerProbeHTTPProbe(request.http, defaults)
-      : undefined,
+    {
+      param: 'http',
+      value: request.http !== undefined ? marshalContainerProbeHTTPProbe(request.http, defaults) : undefined,
     },
   ]),
 })
@@ -345,17 +307,11 @@ const marshalContainerProbe = (
 const marshalContainerScalingOption = (
   request: ContainerScalingOption,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'concurrent_requests_threshold',
-      value: request.concurrentRequestsThreshold,
-    },
-    {param: 'cpu_usage_threshold',
-      value: request.cpuUsageThreshold,
-    },
-    {param: 'memory_usage_threshold',
-      value: request.memoryUsageThreshold,
-    },
+    { param: 'concurrent_requests_threshold', value: request.concurrentRequestsThreshold },
+    { param: 'cpu_usage_threshold', value: request.cpuUsageThreshold },
+    { param: 'memory_usage_threshold', value: request.memoryUsageThreshold },
   ]),
 })
 
@@ -366,10 +322,11 @@ export const marshalCreateContainerRequest = (
   args: request.args,
   command: request.command,
   description: request.description,
-  environment_variables: ((request.environmentVariables !== undefined) ?  request.environmentVariables: undefined),
+  environment_variables: request.environmentVariables !== undefined ? request.environmentVariables : undefined,
   https_connections_only: request.httpsConnectionsOnly,
   image: request.image,
-  liveness_probe: ((request.livenessProbe !== undefined) ?  marshalContainerProbe(request.livenessProbe, defaults): undefined),
+  liveness_probe:
+    request.livenessProbe !== undefined ? marshalContainerProbe(request.livenessProbe, defaults) : undefined,
   local_storage_limit_bytes: request.localStorageLimitBytes,
   max_scale: request.maxScale,
   memory_limit_bytes: request.memoryLimitBytes,
@@ -382,9 +339,11 @@ export const marshalCreateContainerRequest = (
   private_network_id: request.privateNetworkId,
   protocol: request.protocol,
   sandbox: request.sandbox,
-  scaling_option: ((request.scalingOption !== undefined) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables: undefined),
-  startup_probe: ((request.startupProbe !== undefined) ?  marshalContainerProbe(request.startupProbe, defaults): undefined),
+  scaling_option:
+    request.scalingOption !== undefined ? marshalContainerScalingOption(request.scalingOption, defaults) : undefined,
+  secret_environment_variables:
+    request.secretEnvironmentVariables !== undefined ? request.secretEnvironmentVariables : undefined,
+  startup_probe: request.startupProbe !== undefined ? marshalContainerProbe(request.startupProbe, defaults) : undefined,
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -403,10 +362,11 @@ export const marshalCreateNamespaceRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  environment_variables: ((request.environmentVariables !== undefined) ?  request.environmentVariables: undefined),
+  environment_variables: request.environmentVariables !== undefined ? request.environmentVariables : undefined,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables: undefined),
+  secret_environment_variables:
+    request.secretEnvironmentVariables !== undefined ? request.secretEnvironmentVariables : undefined,
   tags: request.tags,
 })
 
@@ -415,7 +375,7 @@ const marshalCreateTriggerRequestCronConfig = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   body: request.body,
-  headers:  request.headers,
+  headers: request.headers,
   schedule: request.schedule,
   timezone: request.timezone,
 })
@@ -454,21 +414,31 @@ export const marshalCreateTriggerRequest = (
 ): Record<string, unknown> => ({
   container_id: request.containerId,
   description: request.description,
-  destination_config: ((request.destinationConfig !== undefined) ?  marshalCreateTriggerRequestDestinationConfig(request.destinationConfig, defaults): undefined),
+  destination_config:
+    request.destinationConfig !== undefined
+      ? marshalCreateTriggerRequestDestinationConfig(request.destinationConfig, defaults)
+      : undefined,
   name: request.name,
-  tags: request.tags,  
+  tags: request.tags,
   ...resolveOneOf([
-    {param: 'cron_config',
-      value: (request.cronConfig !== undefined) ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
-      : undefined,
+    {
+      param: 'cron_config',
+      value:
+        request.cronConfig !== undefined
+          ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
+          : undefined,
     },
-    {param: 'sqs_config',
-      value: (request.sqsConfig !== undefined) ? marshalCreateTriggerRequestSQSConfig(request.sqsConfig, defaults)
-      : undefined,
+    {
+      param: 'sqs_config',
+      value:
+        request.sqsConfig !== undefined ? marshalCreateTriggerRequestSQSConfig(request.sqsConfig, defaults) : undefined,
     },
-    {param: 'nats_config',
-      value: (request.natsConfig !== undefined) ? marshalCreateTriggerRequestNATSConfig(request.natsConfig, defaults)
-      : undefined,
+    {
+      param: 'nats_config',
+      value:
+        request.natsConfig !== undefined
+          ? marshalCreateTriggerRequestNATSConfig(request.natsConfig, defaults)
+          : undefined,
     },
   ]),
 })
@@ -483,8 +453,7 @@ const marshalUpdateContainerRequestProbeHTTPProbe = (
 const marshalUpdateContainerRequestProbeTCPProbe = (
   request: UpdateContainerRequestProbeTCPProbe,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
-})
+): Record<string, unknown> => ({})
 
 const marshalUpdateContainerRequestProbe = (
   request: UpdateContainerRequestProbe,
@@ -492,15 +461,16 @@ const marshalUpdateContainerRequestProbe = (
 ): Record<string, unknown> => ({
   failure_threshold: request.failureThreshold,
   interval: request.interval,
-  timeout: request.timeout,  
+  timeout: request.timeout,
   ...resolveOneOf([
-    {param: 'http',
-      value: (request.http !== undefined) ? marshalUpdateContainerRequestProbeHTTPProbe(request.http, defaults)
-      : undefined,
+    {
+      param: 'http',
+      value:
+        request.http !== undefined ? marshalUpdateContainerRequestProbeHTTPProbe(request.http, defaults) : undefined,
     },
-    {param: 'tcp',
-      value: (request.tcp !== undefined) ? marshalUpdateContainerRequestProbeTCPProbe(request.tcp, defaults)
-      : undefined,
+    {
+      param: 'tcp',
+      value: request.tcp !== undefined ? marshalUpdateContainerRequestProbeTCPProbe(request.tcp, defaults) : undefined,
     },
   ]),
 })
@@ -515,7 +485,8 @@ export const marshalUpdateContainerRequest = (
   environment_variables: request.environmentVariables,
   https_connection_only: request.httpsConnectionOnly,
   image: request.image,
-  liveness_probe: ((request.livenessProbe !== undefined) ?  marshalContainerProbe(request.livenessProbe, defaults): undefined),
+  liveness_probe:
+    request.livenessProbe !== undefined ? marshalContainerProbe(request.livenessProbe, defaults) : undefined,
   local_storage_limit_bytes: request.localStorageLimitBytes,
   max_scale: request.maxScale,
   memory_limit_bytes: request.memoryLimitBytes,
@@ -526,9 +497,11 @@ export const marshalUpdateContainerRequest = (
   private_network_id: request.privateNetworkId,
   protocol: request.protocol,
   sandbox: request.sandbox,
-  scaling_option: ((request.scalingOption !== undefined) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
+  scaling_option:
+    request.scalingOption !== undefined ? marshalContainerScalingOption(request.scalingOption, defaults) : undefined,
   secret_environment_variables: request.secretEnvironmentVariables,
-  startup_probe: ((request.startupProbe !== undefined) ?  marshalUpdateContainerRequestProbe(request.startupProbe, defaults): undefined),
+  startup_probe:
+    request.startupProbe !== undefined ? marshalUpdateContainerRequestProbe(request.startupProbe, defaults) : undefined,
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -593,21 +566,31 @@ export const marshalUpdateTriggerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  destination_config: ((request.destinationConfig !== undefined) ?  marshalUpdateTriggerRequestDestinationConfig(request.destinationConfig, defaults): undefined),
+  destination_config:
+    request.destinationConfig !== undefined
+      ? marshalUpdateTriggerRequestDestinationConfig(request.destinationConfig, defaults)
+      : undefined,
   name: request.name,
-  tags: request.tags,  
+  tags: request.tags,
   ...resolveOneOf([
-    {param: 'cron_config',
-      value: (request.cronConfig !== undefined) ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
-      : undefined,
+    {
+      param: 'cron_config',
+      value:
+        request.cronConfig !== undefined
+          ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
+          : undefined,
     },
-    {param: 'sqs_config',
-      value: (request.sqsConfig !== undefined) ? marshalUpdateTriggerRequestSQSConfig(request.sqsConfig, defaults)
-      : undefined,
+    {
+      param: 'sqs_config',
+      value:
+        request.sqsConfig !== undefined ? marshalUpdateTriggerRequestSQSConfig(request.sqsConfig, defaults) : undefined,
     },
-    {param: 'nats_config',
-      value: (request.natsConfig !== undefined) ? marshalUpdateTriggerRequestNATSConfig(request.natsConfig, defaults)
-      : undefined,
+    {
+      param: 'nats_config',
+      value:
+        request.natsConfig !== undefined
+          ? marshalUpdateTriggerRequestNATSConfig(request.natsConfig, defaults)
+          : undefined,
     },
   ]),
 })

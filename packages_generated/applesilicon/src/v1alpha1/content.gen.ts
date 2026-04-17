@@ -7,11 +7,8 @@ import type {
   ServerStatus,
 } from './types.gen.js'
 
-
 /** Lists transient statutes of the enum {@link RunnerStatus}. */
-export const RUNNER_TRANSIENT_STATUSES: RunnerStatus[] = [
-  'waiting',
-]
+export const RUNNER_TRANSIENT_STATUSES: RunnerStatus[] = ['waiting']
 
 /** Lists transient statutes of the enum {@link ServerPrivateNetworkServerStatus}. */
 export const SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES: ServerPrivateNetworkServerStatus[] = [
@@ -20,9 +17,7 @@ export const SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES: ServerPrivateNetw
 ]
 
 /** Lists transient statutes of the enum {@link ServerPrivateNetworkStatus}. */
-export const SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES: ServerPrivateNetworkStatus[] = [
-  'vpc_updating',
-]
+export const SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES: ServerPrivateNetworkStatus[] = ['vpc_updating']
 
 /** Lists transient statutes of the enum {@link ServerStatus}. */
 export const SERVER_TRANSIENT_STATUSES: ServerStatus[] = [
@@ -34,4 +29,3 @@ export const SERVER_TRANSIENT_STATUSES: ServerStatus[] = [
   'reinstalling',
   'busy',
 ]
-

@@ -65,9 +65,7 @@ describe(`buildRequest`, () => {
       ]),
     }
     const fReq = buildRequest(mReq, DEFAULT_SETTINGS)
-    expect(fReq.url).toBe(
-      'https://api.scaleway.com/undefined?param1=value1&param2=value2',
-    )
+    expect(fReq.url).toBe('https://api.scaleway.com/undefined?param1=value1&param2=value2')
   })
 })
 
@@ -193,8 +191,7 @@ describe(`buildFetcher (mock)`, () => {
           interceptors: [
             {
               request: addHeaderInterceptor('random-header', '42'),
-              responseError: ({ request }) =>
-                request.headers.get('random-header'),
+              responseError: ({ request }) => request.headers.get('random-header'),
             },
           ],
         },

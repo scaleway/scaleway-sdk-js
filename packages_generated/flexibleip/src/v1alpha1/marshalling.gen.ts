@@ -1,6 +1,5 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   AttachFlexibleIPRequest,
   AttachFlexibleIPsResponse,
@@ -18,9 +17,7 @@ import type {
 
 const unmarshalMACAddress = (data: unknown): MACAddress => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'MACAddress' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'MACAddress' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -36,9 +33,7 @@ const unmarshalMACAddress = (data: unknown): MACAddress => {
 
 export const unmarshalFlexibleIP = (data: unknown): FlexibleIP => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'FlexibleIP' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'FlexibleIP' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -60,9 +55,7 @@ export const unmarshalFlexibleIP = (data: unknown): FlexibleIP => {
 
 export const unmarshalAttachFlexibleIPsResponse = (data: unknown): AttachFlexibleIPsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'AttachFlexibleIPsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'AttachFlexibleIPsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -73,9 +66,7 @@ export const unmarshalAttachFlexibleIPsResponse = (data: unknown): AttachFlexibl
 
 export const unmarshalDetachFlexibleIPsResponse = (data: unknown): DetachFlexibleIPsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DetachFlexibleIPsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DetachFlexibleIPsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -86,9 +77,7 @@ export const unmarshalDetachFlexibleIPsResponse = (data: unknown): DetachFlexibl
 
 export const unmarshalListFlexibleIPsResponse = (data: unknown): ListFlexibleIPsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListFlexibleIPsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListFlexibleIPsResponse' failed as data isn't a dictionary.`)
   }
 
   return {

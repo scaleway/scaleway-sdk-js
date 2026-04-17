@@ -2,17 +2,11 @@ import { afterAll, beforeEach, describe, expect, it } from 'vitest'
 import { setLogger } from '../../../internal/logger'
 import { ConsoleLogger } from '../../../internal/logger/console-logger.js'
 import type { LogLevel } from '../../../internal/logger/level-resolver.js'
-import {
-  logRequest,
-  logResponse,
-  obfuscateInterceptor,
-} from '../http-interceptors.js'
+import { logRequest, logResponse, obfuscateInterceptor } from '../http-interceptors.js'
 
 let latestMessage = ''
 
-const makeCallbackConsole = (
-  onMessage: (str: string) => void,
-): typeof console => ({
+const makeCallbackConsole = (onMessage: (str: string) => void): typeof console => ({
   ...console,
   debug: onMessage,
   error: onMessage,
@@ -50,9 +44,7 @@ describe(`logRequest`, () => {
   it(`logs something if the level is high enough`, async () => {
     enableDummyLogger('debug')
     await logRequest('1')({ request })
-    expect(
-      latestMessage.startsWith('--------------- Scaleway SDK REQUEST 1'),
-    ).toBe(true)
+    expect(latestMessage.startsWith('--------------- Scaleway SDK REQUEST 1')).toBe(true)
   })
 })
 
@@ -68,19 +60,14 @@ describe(`logResponse`, () => {
   it(`logs something if the level is high enough`, async () => {
     enableDummyLogger('debug')
     await logResponse('1')({ response })
-    expect(
-      latestMessage.startsWith('--------------- Scaleway SDK RESPONSE 1'),
-    ).toBe(true)
+    expect(latestMessage.startsWith('--------------- Scaleway SDK RESPONSE 1')).toBe(true)
   })
 })
 
 describe('obfuscateInterceptor', () => {
   const prependInterceptor =
     (preprendValue: string) =>
-    ([name, value]: [string, string]): [string, string] => [
-      name,
-      `${preprendValue}${value}`,
-    ]
+    ([name, value]: [string, string]): [string, string] => [name, `${preprendValue}${value}`]
 
   it('changes the request headers', async () => {
     const obfRequest = await obfuscateInterceptor(prependInterceptor('obj-'))({

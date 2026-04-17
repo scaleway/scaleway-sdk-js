@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["./templates/**"],

@@ -3,6 +3,10 @@
   "version": "2.6.0",
   "description": "Scaleway SDK vpc",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "directory": "packages_generated/vpc"
+  },
   "files": [
     "README.md",
     "dist"
@@ -26,13 +30,6 @@
       "default": "./dist/*/metadata.gen.js"
     }
   },
-  "repository": {
-    "type": "git",
-    "directory": "packages_generated/vpc"
-  },
-  "engines": {
-    "node": ">=20.19.6"
-  },
   "scripts": {
     "package:check": "pnpm publint",
     "typecheck": "tsgo --noEmit",
@@ -44,12 +41,15 @@
     "@scaleway/random-name": "5.1.4",
     "@scaleway/sdk-std": "workspace:*"
   },
+  "devDependencies": {
+    "@repo/configs": "workspace:^",
+    "@scaleway/sdk-client": "workspace:^"
+  },
   "peerDependencies": {
     "@repo/configs": "workspace:^",
     "@scaleway/sdk-client": "workspace:^"
   },
-  "devDependencies": {
-    "@repo/configs": "workspace:^",
-    "@scaleway/sdk-client": "workspace:^"
+  "engines": {
+    "node": ">=20.19.6"
   }
 }

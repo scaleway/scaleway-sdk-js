@@ -143,9 +143,7 @@ describe('ResourceLockedError', () => {
   })
 
   it(`doesn't parse invalid input`, () => {
-    expect(
-      ResourceLockedError.fromJSON(423, { ...body, resource_id: 0 }),
-    ).toBeNull()
+    expect(ResourceLockedError.fromJSON(423, { ...body, resource_id: 0 })).toBeNull()
   })
 })
 
@@ -223,9 +221,7 @@ describe('DeniedAuthenticationError', () => {
         reason: 'invalid_argument',
         type: 'denied_authentication',
       }).toString(),
-    ).toBe(
-      'DeniedAuthenticationError: denied authentication: invalid jwt format or empty value',
-    )
+    ).toBe('DeniedAuthenticationError: denied authentication: invalid jwt format or empty value')
   })
 
   it(`parses a body for not found method`, () => {
@@ -235,9 +231,7 @@ describe('DeniedAuthenticationError', () => {
         reason: 'not_found',
         type: 'denied_authentication',
       }).toString(),
-    ).toBe(
-      'DeniedAuthenticationError: denied authentication: api_key does not exist',
-    )
+    ).toBe('DeniedAuthenticationError: denied authentication: api_key does not exist')
   })
 
   it(`parses a body for expired method`, () => {
@@ -257,15 +251,11 @@ describe('DeniedAuthenticationError', () => {
         reason: 'unknown_reason',
         type: 'denied_authentication',
       }).toString(),
-    ).toBe(
-      'DeniedAuthenticationError: denied authentication: unknown reason for unknown_method',
-    )
+    ).toBe('DeniedAuthenticationError: denied authentication: unknown reason for unknown_method')
   })
 
   it(`doesn't parse invalid input`, () => {
-    expect(
-      DeniedAuthenticationError.fromJSON(401, { method: 'jwt' }),
-    ).toBeNull()
+    expect(DeniedAuthenticationError.fromJSON(401, { method: 'jwt' })).toBeNull()
   })
 })
 
@@ -283,8 +273,7 @@ describe('PreconditionFailedError', () => {
   it(`parses a valid input for precondition precondition_failed`, () => {
     expect(
       parseScalewayError(412, {
-        help_message:
-          'All servers must be removed from the private network before deleting it.',
+        help_message: 'All servers must be removed from the private network before deleting it.',
         precondition: 'resource_still_in_use',
         type: 'precondition_failed',
       }).toString(),
@@ -300,9 +289,7 @@ describe('PreconditionFailedError', () => {
         precondition: 'attribute_must_be_set',
         type: 'precondition_failed',
       }).toString(),
-    ).toBe(
-      'PreconditionFailedError: precondition failed: attribute_must_be_set',
-    )
+    ).toBe('PreconditionFailedError: precondition failed: attribute_must_be_set')
   })
 
   it(`parses a valid input for unknown precondition`, () => {
@@ -312,9 +299,7 @@ describe('PreconditionFailedError', () => {
         precondition: 'wrong_precondition_key',
         type: 'precondition_failed',
       }).toString(),
-    ).toBe(
-      'PreconditionFailedError: precondition failed: wrong_precondition_key',
-    )
+    ).toBe('PreconditionFailedError: precondition failed: wrong_precondition_key')
   })
 
   it(`doesn't parse invalid input`, () => {
@@ -342,9 +327,7 @@ describe('TransientStateError', () => {
   })
 
   it(`doesn't parse invalid input`, () => {
-    expect(
-      TransientStateError.fromJSON(409, { ...body, resource_id: 0 }),
-    ).toBeNull()
+    expect(TransientStateError.fromJSON(409, { ...body, resource_id: 0 })).toBeNull()
   })
 })
 
@@ -363,9 +346,7 @@ describe('AlreadyExistsError', () => {
   })
 
   it(`doesn't parse invalid input`, () => {
-    expect(
-      AlreadyExistsError.fromJSON(409, { ...body, resource_id: 0 }),
-    ).toBeNull()
+    expect(AlreadyExistsError.fromJSON(409, { ...body, resource_id: 0 })).toBeNull()
   })
 })
 
@@ -373,8 +354,7 @@ describe('TooManyRequestsError', () => {
   it(`parses a valid input with limit and reset_seconds`, () => {
     expect(
       parseScalewayError(429, {
-        help_message:
-          'You are limited to 3 requests per hour to reset your password',
+        help_message: 'You are limited to 3 requests per hour to reset your password',
         limit: {
           quota: 3,
           window_seconds: 60,
@@ -396,9 +376,7 @@ describe('TooManyRequestsError', () => {
         },
         type: 'too_many_requests',
       }).toString(),
-    ).toBe(
-      'TooManyRequestsError: too many requests (quota is 5): You are limited to 5 requests per day',
-    )
+    ).toBe('TooManyRequestsError: too many requests (quota is 5): You are limited to 5 requests per day')
   })
 
   it(`parses a valid input with empty help message`, () => {
@@ -417,9 +395,7 @@ describe('TooManyRequestsError', () => {
         reset_at: '2022-05-23T15:00:00.01Z',
         type: 'too_many_requests',
       }).toString(),
-    ).toBe(
-      'TooManyRequestsError: too many requests (resets at 2022-05-23T15:00:00.010Z)',
-    )
+    ).toBe('TooManyRequestsError: too many requests (resets at 2022-05-23T15:00:00.010Z)')
   })
 
   it(`doesn't parse invalid input`, () => {

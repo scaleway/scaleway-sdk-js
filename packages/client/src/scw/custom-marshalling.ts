@@ -1,16 +1,7 @@
 import { camelizeKeys, isJSONObject } from '../helpers/json.js'
-import {
-  unmarshalArrayOfObject,
-  unmarshalDate,
-} from '../helpers/marshalling.js'
+import { unmarshalArrayOfObject, unmarshalDate } from '../helpers/marshalling.js'
 import { fromByteArray } from '../vendor/base64'
-import type {
-  Money,
-  ScwFile,
-  ServiceInfo,
-  TimeSeries,
-  TimeSeriesPoint,
-} from './custom-types.js'
+import type { Money, ScwFile, ServiceInfo, TimeSeries, TimeSeriesPoint } from './custom-types.js'
 import { Decimal } from './custom-types.js'
 
 /**
@@ -20,9 +11,7 @@ import { Decimal } from './custom-types.js'
  */
 export const unmarshalMoney = (data: unknown) => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Money' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Money' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -39,9 +28,7 @@ export const unmarshalMoney = (data: unknown) => {
  */
 export const unmarshalServiceInfo = (data: unknown) => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServiceInfo' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ServiceInfo' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -59,9 +46,7 @@ export const unmarshalServiceInfo = (data: unknown) => {
  */
 export const unmarshalScwFile = (data: unknown) => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ScwFile' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ScwFile' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -82,9 +67,7 @@ export const unmarshalScwFile = (data: unknown) => {
  */
 export const unmarshalTimeSeriesPoint = (data: unknown) => {
   if (!Array.isArray(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TimeSeriesPoint' failed as data isn't an array.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TimeSeriesPoint' failed as data isn't an array.`)
   }
 
   return {
@@ -100,9 +83,7 @@ export const unmarshalTimeSeriesPoint = (data: unknown) => {
  */
 export const unmarshalTimeSeries = (data: unknown) => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TimeSeries' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TimeSeries' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -119,24 +100,18 @@ export const unmarshalTimeSeries = (data: unknown) => {
  */
 export const unmarshalDecimal = (data: unknown) => {
   if (!(typeof data === 'object')) {
-    throw new TypeError(
-      `Unmarshalling the type 'Decimal' failed as data isn't an object.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Decimal' failed as data isn't an object.`)
   }
   if (data === null) {
     return null
   }
 
   if (!('value' in data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Decimal' failed as data object does not have a 'value' key.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Decimal' failed as data object does not have a 'value' key.`)
   }
 
   if (!(typeof data.value === 'string')) {
-    throw new TypeError(
-      `Unmarshalling the type 'Decimal' failed as 'value' is not a string.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Decimal' failed as 'value' is not a string.`)
   }
 
   return new Decimal(data.value)
@@ -158,9 +133,7 @@ export const marshalScwFile = (obj: ScwFile): Record<string, unknown> => ({
  *
  * @internal
  */
-export const marshalBlobToScwFile = async (
-  blob: Blob,
-): Promise<Record<string, unknown>> => ({
+export const marshalBlobToScwFile = async (blob: Blob): Promise<Record<string, unknown>> => ({
   content: fromByteArray(new Uint8Array(await blob.arrayBuffer())),
   content_type: blob.type,
   name: 'file',
@@ -182,9 +155,7 @@ export const marshalMoney = (obj: Money): Record<string, unknown> => ({
  *
  * @internal
  */
-export const marshalTimeSeriesPoint = (
-  obj: TimeSeriesPoint,
-): Record<string, unknown> => ({
+export const marshalTimeSeriesPoint = (obj: TimeSeriesPoint): Record<string, unknown> => ({
   timestamp: obj.timestamp?.toISOString(),
   value: obj.value,
 })
@@ -194,9 +165,7 @@ export const marshalTimeSeriesPoint = (
  *
  * @internal
  */
-export const marshalTimeSeries = (
-  obj: TimeSeries,
-): Record<string, unknown> => ({
+export const marshalTimeSeries = (obj: TimeSeries): Record<string, unknown> => ({
   metadata: obj.metadata,
   name: obj.name,
   points: obj.points.map(elt => marshalTimeSeriesPoint(elt)),
@@ -228,10 +197,7 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
   if (obj && typeof obj === 'object') {
     const result: Record<string, unknown> = {}
     for (const [key, value] of Object.entries(obj)) {
-      result[key] =
-        typeof value === 'string' && keys.includes(key)
-          ? new Date(value)
-          : unmarshalDates(value, keys)
+      result[key] = typeof value === 'string' && keys.includes(key) ? new Date(value) : unmarshalDates(value, keys)
     }
     return result as T
   }
@@ -252,17 +218,10 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
  *
  * @internal
  */
-export const unmarshalAnyRes = <T>(
-  obj: unknown,
-  ignoreKeys: string[] = [],
-  dateKeys?: string[],
-): T => {
+export const unmarshalAnyRes = <T>(obj: unknown, ignoreKeys: string[] = [], dateKeys?: string[]): T => {
   if (!isJSONObject(obj)) {
     throw new TypeError(`Data isn't a dictionary.`)
   }
 
-  return camelizeKeys(
-    dateKeys && dateKeys.length > 0 ? unmarshalDates(obj, dateKeys) : obj,
-    ignoreKeys,
-  )
+  return camelizeKeys(dateKeys && dateKeys.length > 0 ? unmarshalDates(obj, dateKeys) : obj, ignoreKeys)
 }

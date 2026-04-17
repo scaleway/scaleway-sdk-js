@@ -38,9 +38,7 @@ const DEFAULT_SETTINGS: Readonly<Settings> = {
 
 describe('withProfile', () => {
   it(`doesn't modify Settings object with empty Profile object`, () => {
-    expect(withProfile(EMPTY_PROFILE)(DEFAULT_SETTINGS)).toStrictEqual(
-      DEFAULT_SETTINGS,
-    )
+    expect(withProfile(EMPTY_PROFILE)(DEFAULT_SETTINGS)).toStrictEqual(DEFAULT_SETTINGS)
     expect(
       withProfile({
         WTF: 'malicious content',
@@ -180,9 +178,7 @@ describe('withProfile', () => {
     expect(reqInterceptor).toBeDefined()
     if (reqInterceptor) {
       const { headers } = await reqInterceptor({ request })
-      expect(headers.get('x-auth-token')).toStrictEqual(
-        FILLED_PROFILE.secretKey,
-      )
+      expect(headers.get('x-auth-token')).toStrictEqual(FILLED_PROFILE.secretKey)
     }
   })
 })
@@ -194,23 +190,22 @@ describe('withDefaultPageSize', () => {
       ...DEFAULT_SETTINGS,
       defaultPageSize: newDefaultPageSize,
     }
-    expect(
-      JSON.stringify(withDefaultPageSize(newDefaultPageSize)(DEFAULT_SETTINGS)),
-    ).toStrictEqual(JSON.stringify(expectedSettings))
+    expect(JSON.stringify(withDefaultPageSize(newDefaultPageSize)(DEFAULT_SETTINGS))).toStrictEqual(
+      JSON.stringify(expectedSettings),
+    )
   })
 })
 
 describe('withHTTPClient', () => {
   it('only modifies the http client', () => {
-    const newHTTPClient: typeof fetch = (): Promise<Response> =>
-      Promise.resolve(new Response())
+    const newHTTPClient: typeof fetch = (): Promise<Response> => Promise.resolve(new Response())
     const expectedSettings: Settings = {
       ...DEFAULT_SETTINGS,
       httpClient: newHTTPClient,
     }
-    expect(
-      JSON.stringify(withHTTPClient(newHTTPClient)(DEFAULT_SETTINGS)),
-    ).toStrictEqual(JSON.stringify(expectedSettings))
+    expect(JSON.stringify(withHTTPClient(newHTTPClient)(DEFAULT_SETTINGS))).toStrictEqual(
+      JSON.stringify(expectedSettings),
+    )
   })
 })
 
@@ -221,9 +216,9 @@ describe('withUserAgent', () => {
       ...DEFAULT_SETTINGS,
       userAgent: defaultUserAgent,
     }
-    expect(
-      JSON.stringify(withUserAgent(defaultUserAgent)(DEFAULT_SETTINGS)),
-    ).toStrictEqual(JSON.stringify(expectedSettings))
+    expect(JSON.stringify(withUserAgent(defaultUserAgent)(DEFAULT_SETTINGS))).toStrictEqual(
+      JSON.stringify(expectedSettings),
+    )
   })
 })
 
@@ -235,9 +230,9 @@ describe('withUserAgentSuffix', () => {
       ...DEFAULT_SETTINGS,
       userAgent: `${defaultUserAgent} ${addUserAgent}`,
     }
-    expect(
-      JSON.stringify(withUserAgentSuffix(addUserAgent)(DEFAULT_SETTINGS)),
-    ).toStrictEqual(JSON.stringify(expectedSettings))
+    expect(JSON.stringify(withUserAgentSuffix(addUserAgent)(DEFAULT_SETTINGS))).toStrictEqual(
+      JSON.stringify(expectedSettings),
+    )
   })
 
   it('replaces the default user agent if the original one is empty', () => {
@@ -247,9 +242,9 @@ describe('withUserAgentSuffix', () => {
       ...newSettings,
       userAgent: addUserAgent,
     }
-    expect(
-      JSON.stringify(withUserAgentSuffix(addUserAgent)(newSettings)),
-    ).toStrictEqual(JSON.stringify(expectedSettings))
+    expect(JSON.stringify(withUserAgentSuffix(addUserAgent)(newSettings))).toStrictEqual(
+      JSON.stringify(expectedSettings),
+    )
   })
 })
 
@@ -275,44 +270,27 @@ describe('withAdditionalInterceptors', () => {
 
 describe('withLegacyInterceptors', () => {
   it('changes nothing if no legacy interceptor', () => {
-    expect(
-      JSON.stringify(withLegacyInterceptors()(DEFAULT_SETTINGS)),
-    ).toStrictEqual(JSON.stringify(DEFAULT_SETTINGS))
+    expect(JSON.stringify(withLegacyInterceptors()(DEFAULT_SETTINGS))).toStrictEqual(JSON.stringify(DEFAULT_SETTINGS))
   })
 
   it('appends the legacy request and response interceptors', () => {
     const legacyInterceptors: ClientConfig = (obj: Settings): Settings => ({
       ...obj,
-      requestInterceptors: [
-        ({ request }): Request => request,
-        ({ request }): Request => request,
-      ],
+      requestInterceptors: [({ request }): Request => request, ({ request }): Request => request],
       responseInterceptors: [({ response }): Response => response],
     })
-    expect(
-      withLegacyInterceptors()(legacyInterceptors(DEFAULT_SETTINGS))
-        .interceptors.length,
-    ).toBe(3)
+    expect(withLegacyInterceptors()(legacyInterceptors(DEFAULT_SETTINGS)).interceptors.length).toBe(3)
 
     const legacyReqInterceptors: ClientConfig = (obj: Settings): Settings => ({
       ...obj,
-      requestInterceptors: [
-        ({ request }): Request => request,
-        ({ request }): Request => request,
-      ],
+      requestInterceptors: [({ request }): Request => request, ({ request }): Request => request],
     })
-    expect(
-      withLegacyInterceptors()(legacyReqInterceptors(DEFAULT_SETTINGS))
-        .interceptors.length,
-    ).toBe(2)
+    expect(withLegacyInterceptors()(legacyReqInterceptors(DEFAULT_SETTINGS)).interceptors.length).toBe(2)
 
     const legacyResInterceptors: ClientConfig = (obj: Settings): Settings => ({
       ...obj,
       responseInterceptors: [({ response }): Response => response],
     })
-    expect(
-      withLegacyInterceptors()(legacyResInterceptors(DEFAULT_SETTINGS))
-        .interceptors.length,
-    ).toBe(1)
+    expect(withLegacyInterceptors()(legacyResInterceptors(DEFAULT_SETTINGS)).interceptors.length).toBe(1)
   })
 })

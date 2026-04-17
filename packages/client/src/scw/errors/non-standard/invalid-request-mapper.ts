@@ -13,10 +13,7 @@ export const mapInvalidRequestFromJSON = (
   status: number,
   obj: Readonly<JSONObject>,
 ): QuotasExceededError | InvalidArgumentsError | ScalewayError => {
-  if (
-    typeof obj.message === 'string' &&
-    obj.message.toLowerCase().includes('quota exceeded for this resource')
-  ) {
+  if (typeof obj.message === 'string' && obj.message.toLowerCase().includes('quota exceeded for this resource')) {
     return new QuotasExceededError(status, obj, [
       {
         current: 0,
@@ -26,8 +23,7 @@ export const mapInvalidRequestFromJSON = (
     ])
   }
 
-  const fields =
-    obj.fields && isRecordOfStringArray(obj.fields) ? obj.fields : {}
+  const fields = obj.fields && isRecordOfStringArray(obj.fields) ? obj.fields : {}
   const fieldsMessages = Object.entries(fields)
   if (fieldsMessages.length) {
     return new InvalidArgumentsError(

@@ -1,24 +1,12 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
+import type { Money, Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 
+export type AttachmentResourceType = 'unknown_resource_type' | 'instance_server'
 
-export type AttachmentResourceType =
-  | 'unknown_resource_type'
-  | 'instance_server'
+export type FileSystemStatus = 'unknown_status' | 'available' | 'error' | 'creating' | 'updating'
 
-export type FileSystemStatus =
-  | 'unknown_status'
-  | 'available'
-  | 'error'
-  | 'creating'
-  | 'updating'
-
-export type ListFileSystemsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
+export type ListFileSystemsRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
 /**
  * Represents an attachment between a filesystem and a resource.
@@ -46,7 +34,6 @@ export interface Attachment {
   zone?: ScwZone
 }
 
-
 export interface FileSystemType {
   /**
    * Filesystem type name.
@@ -61,7 +48,6 @@ export interface FileSystemType {
    */
   snapshotPriceGbPerHour?: Money
 }
-
 
 /**
  * Represents a filesystem resource and its properties.
@@ -117,7 +103,6 @@ export interface FileSystem {
   filesystemTypeId: string
 }
 
-
 /**
  * Request to create a new filesystem.
  */
@@ -148,7 +133,6 @@ export type CreateFileSystemRequest = {
   tags?: string[]
 }
 
-
 /**
  * Request to delete a specific filesystem.
  */
@@ -163,7 +147,6 @@ export type DeleteFileSystemRequest = {
   filesystemId: string
 }
 
-
 /**
  * Request to retrieve a specific filesystem.
  */
@@ -177,7 +160,6 @@ export type GetFileSystemRequest = {
    */
   filesystemId: string
 }
-
 
 /**
  * Request to list filesystem attachments with filtering and pagination options.
@@ -213,7 +195,6 @@ export type ListAttachmentsRequest = {
   pageSize?: number
 }
 
-
 /**
  * Response containing a list of filesystem attachments and total count.
  */
@@ -227,7 +208,6 @@ export interface ListAttachmentsResponse {
    */
   totalCount: number
 }
-
 
 /**
  * Request to list filesystem types with pagination options.
@@ -247,7 +227,6 @@ export type ListFileSystemTypesRequest = {
   pageSize?: number
 }
 
-
 export interface ListFileSystemTypesResponse {
   /**
    * Returns paginated list of filesystem-types.
@@ -258,7 +237,6 @@ export interface ListFileSystemTypesResponse {
    */
   totalCount: number
 }
-
 
 /**
  * Request to list filesystems with filtering and pagination options.
@@ -306,7 +284,6 @@ export type ListFileSystemsRequest = {
   filesystemIds?: string[]
 }
 
-
 /**
  * Response containing a list of filesystems and total count.
  */
@@ -320,7 +297,6 @@ export interface ListFileSystemsResponse {
    */
   totalCount: number
 }
-
 
 /**
  * Request to update a specific filesystem.
@@ -348,5 +324,3 @@ Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size.
    */
   tags?: string[]
 }
-
-

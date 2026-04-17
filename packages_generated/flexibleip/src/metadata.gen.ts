@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: "@scaleway/sdk-flexibleip",
-  namespace: "flexibleip",
-  displayName: "Flexibleip",
-  versions: ["v1alpha1"]
+  name: '@scaleway/sdk-flexibleip',
+  namespace: 'flexibleip',
+  displayName: 'Flexibleip',
+  versions: ['v1alpha1'],
 } as const
 
 export type Metadata = typeof pkgMetadata

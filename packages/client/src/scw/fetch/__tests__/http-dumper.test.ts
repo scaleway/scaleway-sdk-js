@@ -17,9 +17,7 @@ const DEFAULT_SETTINGS: Settings = {
 
 describe(`dumpRequest`, () => {
   it(`returns a readable string`, () => {
-    const userAgentHeader = !isBrowser()
-      ? `User-Agent: scaleway-sdk-js/v1.0.0\r\n`
-      : ''
+    const userAgentHeader = !isBrowser() ? `User-Agent: scaleway-sdk-js/v1.0.0\r\n` : ''
 
     return expect(
       dumpRequest(
@@ -38,14 +36,9 @@ describe(`dumpRequest`, () => {
   })
 })
 
-const convertObjToBuffer = (obj: unknown): Buffer =>
-  Buffer.from(JSON.stringify(obj))
+const convertObjToBuffer = (obj: unknown): Buffer => Buffer.from(JSON.stringify(obj))
 
-const makeFetchResponse = (
-  value: unknown,
-  contentType: string,
-  status: number,
-): Response =>
+const makeFetchResponse = (value: unknown, contentType: string, status: number): Response =>
   new Response(new Uint8Array(convertObjToBuffer(value)), {
     headers: { 'Content-Type': contentType },
     status,
@@ -55,9 +48,7 @@ describe('dumpResponse', () => {
   it('returns a readable string for ok response', async () => {
     const input = { randomKey: 42 }
     const res = makeFetchResponse(input, 'application/json', 200)
-    const expectedDump = `HTTP 200 OK\r\nContent-Type: application/json\r\n${JSON.stringify(
-      input,
-    )}`
+    const expectedDump = `HTTP 200 OK\r\nContent-Type: application/json\r\n${JSON.stringify(input)}`
 
     return expect(dumpResponse(res)).resolves.toBe(expectedDump)
   })
@@ -65,9 +56,7 @@ describe('dumpResponse', () => {
   it('returns a readable string for nok response', async () => {
     const input = 'Raw error message'
     const res = makeFetchResponse(input, 'text/plain', 400)
-    const expectedDump = `HTTP 400 NOK\r\nContent-Type: text/plain\r\n${JSON.stringify(
-      input,
-    )}`
+    const expectedDump = `HTTP 400 NOK\r\nContent-Type: text/plain\r\n${JSON.stringify(input)}`
 
     return expect(dumpResponse(res)).resolves.toBe(expectedDump)
   })

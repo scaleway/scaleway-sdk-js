@@ -1,9 +1,9 @@
 // Correct imports for Scaleway SDK v2.27.0+
 
+import * as http from 'http'
 import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
 import { Registry } from '@scaleway/sdk'
 import { createClient } from '@scaleway/sdk-client'
-import * as http from 'http'
 
 const hostname = '127.0.0.1'
 const port = 3000
@@ -21,9 +21,7 @@ const sendJson = (response: Response, data: object) => {
 }
 
 const sendError = (response: Response, status: number, error?: unknown) => {
-  const errorMessage = `${
-    error instanceof Error ? error.message : String(error)
-  }`
+  const errorMessage = `${error instanceof Error ? error.message : String(error)}`
   response.statusCode = status
   response.setHeader('Content-Type', 'application/json')
   response.end(JSON.stringify({ error: errorMessage }))
@@ -40,6 +38,4 @@ const server = http.createServer(async ({ url }, response) => {
   }
 })
 
-server.listen(port, hostname, () =>
-  console.log(`Server running at http://${hostname}:${port}/`),
-)
+server.listen(port, hostname, () => console.log(`Server running at http://${hostname}:${port}/`))

@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
-
+import type { Money, Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 
 export type ListPublicCatalogProductsRequestProductType =
   | 'unknown_product_type'
@@ -46,12 +45,7 @@ export type PublicCatalogProductPropertiesGenerativeApisConsumptionMode =
   | 'realtime'
   | 'batch'
 
-export type PublicCatalogProductPropertiesHardwareCPUArch =
-  | 'unknown_arch'
-  | 'x64'
-  | 'arm64'
-  | 'riscv'
-  | 'apple_silicon'
+export type PublicCatalogProductPropertiesHardwareCPUArch = 'unknown_arch' | 'x64' | 'arm64' | 'riscv' | 'apple_silicon'
 
 export type PublicCatalogProductPropertiesManagedMongoDBStorageTypeStorageClass =
   | 'unknown_storage_class'
@@ -82,9 +76,7 @@ export type PublicCatalogProductPropertiesObjectStorageInternetTrafficTypeTraffi
   | 'ingress'
   | 'egress'
 
-export type PublicCatalogProductPropertiesObjectStorageRestoreTypeRestoreType =
-  | 'unknown_restore_type'
-  | 'standard'
+export type PublicCatalogProductPropertiesObjectStorageRestoreTypeRestoreType = 'unknown_restore_type' | 'standard'
 
 export type PublicCatalogProductStatus =
   | 'unknown_status'
@@ -154,14 +146,12 @@ export interface PublicCatalogProductPropertiesHardwareCPUPhysical {
   benchmark: number
 }
 
-
 export interface PublicCatalogProductPropertiesHardwareCPUVirtual {
   /**
    * The number of vCPUs.
    */
   count: number
 }
-
 
 export interface PublicCatalogProductPropertiesHardwareCPU {
   /**
@@ -194,7 +184,6 @@ export interface PublicCatalogProductPropertiesHardwareCPU {
   threads: number
 }
 
-
 export interface PublicCatalogProductPropertiesHardwareGPU {
   /**
    * A human-readable description of the GPU.
@@ -209,7 +198,6 @@ export interface PublicCatalogProductPropertiesHardwareGPU {
    */
   type: string
 }
-
 
 export interface PublicCatalogProductPropertiesHardwareNetwork {
   /**
@@ -230,7 +218,6 @@ export interface PublicCatalogProductPropertiesHardwareNetwork {
   maxPublicBandwidth: number
 }
 
-
 export interface PublicCatalogProductPropertiesHardwareRAM {
   /**
    * A human-readable description of the RAM.
@@ -246,7 +233,6 @@ export interface PublicCatalogProductPropertiesHardwareRAM {
   type: string
 }
 
-
 export interface PublicCatalogProductPropertiesHardwareStorage {
   /**
    * A human-readable description of the storage.
@@ -258,22 +244,13 @@ export interface PublicCatalogProductPropertiesHardwareStorage {
   total: number
 }
 
+export interface PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType {}
 
-export interface PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType {
-}
+export interface PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType {}
 
+export interface PublicCatalogProductPropertiesKubernetesKosmosNodeType {}
 
-export interface PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType {
-}
-
-
-export interface PublicCatalogProductPropertiesKubernetesKosmosNodeType {
-}
-
-
-export interface PublicCatalogProductPropertiesLoadBalancerIPV4Type {
-}
-
+export interface PublicCatalogProductPropertiesLoadBalancerIPV4Type {}
 
 export interface PublicCatalogProductPropertiesLoadBalancerNodeType {
   /**
@@ -290,14 +267,9 @@ export interface PublicCatalogProductPropertiesLoadBalancerNodeType {
   bandwidth: number
 }
 
+export interface PublicCatalogProductPropertiesManagedMongoDBManagementType {}
 
-export interface PublicCatalogProductPropertiesManagedMongoDBManagementType {
-}
-
-
-export interface PublicCatalogProductPropertiesManagedMongoDBNodeType {
-}
-
+export interface PublicCatalogProductPropertiesManagedMongoDBNodeType {}
 
 export interface PublicCatalogProductPropertiesManagedMongoDBStorageType {
   /**
@@ -306,18 +278,11 @@ export interface PublicCatalogProductPropertiesManagedMongoDBStorageType {
   storageClass: PublicCatalogProductPropertiesManagedMongoDBStorageTypeStorageClass
 }
 
+export interface PublicCatalogProductPropertiesManagedRelationalDatabaseManagementType {}
 
-export interface PublicCatalogProductPropertiesManagedRelationalDatabaseManagementType {
-}
+export interface PublicCatalogProductPropertiesManagedRelationalDatabaseMultiAzType {}
 
-
-export interface PublicCatalogProductPropertiesManagedRelationalDatabaseMultiAzType {
-}
-
-
-export interface PublicCatalogProductPropertiesManagedRelationalDatabaseNodeType {
-}
-
+export interface PublicCatalogProductPropertiesManagedRelationalDatabaseNodeType {}
 
 export interface PublicCatalogProductPropertiesManagedRelationalDatabaseStorageType {
   /**
@@ -326,14 +291,12 @@ export interface PublicCatalogProductPropertiesManagedRelationalDatabaseStorageT
   storageClass: PublicCatalogProductPropertiesManagedRelationalDatabaseStorageTypeStorageClass
 }
 
-
 export interface PublicCatalogProductPropertiesObjectStorageClassType {
   /**
    * The storage class.
    */
   storageClass: PublicCatalogProductPropertiesObjectStorageClassTypeStorageClass
 }
-
 
 export interface PublicCatalogProductPropertiesObjectStorageInternetTrafficType {
   /**
@@ -342,7 +305,6 @@ export interface PublicCatalogProductPropertiesObjectStorageInternetTrafficType 
   trafficType: PublicCatalogProductPropertiesObjectStorageInternetTrafficTypeTrafficType
 }
 
-
 export interface PublicCatalogProductPropertiesObjectStorageRegionTrafficType {
   /**
    * The destination region for the region traffic.
@@ -350,14 +312,12 @@ export interface PublicCatalogProductPropertiesObjectStorageRegionTrafficType {
   regionDestination: string
 }
 
-
 export interface PublicCatalogProductPropertiesObjectStorageRestoreType {
   /**
    * The type of restore.
    */
   restoreType: PublicCatalogProductPropertiesObjectStorageRestoreTypeRestoreType
 }
-
 
 export interface PublicCatalogProductPropertiesAppleSilicon {
   /**
@@ -370,7 +330,6 @@ export interface PublicCatalogProductPropertiesAppleSilicon {
   serverType: string
 }
 
-
 export interface PublicCatalogProductPropertiesBlockStorage {
   /**
    * @deprecated The minimum size of storage volume for this product in bytes. Deprecated.
@@ -381,7 +340,6 @@ export interface PublicCatalogProductPropertiesBlockStorage {
    */
   maxVolumeSize?: number
 }
-
 
 export interface PublicCatalogProductPropertiesDedibox {
   /**
@@ -394,7 +352,6 @@ export interface PublicCatalogProductPropertiesDedibox {
   offerId: number
 }
 
-
 export interface PublicCatalogProductPropertiesElasticMetal {
   /**
    * The range of the Elastic Metal server.
@@ -406,13 +363,11 @@ export interface PublicCatalogProductPropertiesElasticMetal {
   offerId: string
 }
 
-
 export interface PublicCatalogProductPropertiesGenerativeApis {
   reasoning: boolean
   supportedApis: string[]
   consumptionMode: PublicCatalogProductPropertiesGenerativeApisConsumptionMode
 }
-
 
 export interface PublicCatalogProductPropertiesHardware {
   /**
@@ -437,7 +392,6 @@ export interface PublicCatalogProductPropertiesHardware {
   gpu?: PublicCatalogProductPropertiesHardwareGPU
 }
 
-
 export interface PublicCatalogProductPropertiesInstance {
   /**
    * The range of the Instance server.
@@ -453,10 +407,7 @@ export interface PublicCatalogProductPropertiesInstance {
   recommendedReplacementOfferIds: string[]
 }
 
-
-export interface PublicCatalogProductPropertiesKeyManager {
-}
-
+export interface PublicCatalogProductPropertiesKeyManager {}
 
 export interface PublicCatalogProductPropertiesKubernetes {
   /**
@@ -479,7 +430,6 @@ export interface PublicCatalogProductPropertiesKubernetes {
   kosmosNode?: PublicCatalogProductPropertiesKubernetesKosmosNodeType
 }
 
-
 export interface PublicCatalogProductPropertiesLoadBalancer {
   /**
    * The properties related to Load Balancer nodes.
@@ -495,14 +445,12 @@ export interface PublicCatalogProductPropertiesLoadBalancer {
   ipv4?: PublicCatalogProductPropertiesLoadBalancerIPV4Type
 }
 
-
 export interface PublicCatalogProductPropertiesManagedInference {
   /**
    * The name of the associated instance GPU to this node type.
    */
   instanceGpuName: string
 }
-
 
 export interface PublicCatalogProductPropertiesManagedMongoDB {
   /**
@@ -525,10 +473,7 @@ export interface PublicCatalogProductPropertiesManagedMongoDB {
   storage?: PublicCatalogProductPropertiesManagedMongoDBStorageType
 }
 
-
-export interface PublicCatalogProductPropertiesManagedRedisDatabase {
-}
-
+export interface PublicCatalogProductPropertiesManagedRedisDatabase {}
 
 export interface PublicCatalogProductPropertiesManagedRelationalDatabase {
   /**
@@ -557,7 +502,6 @@ export interface PublicCatalogProductPropertiesManagedRelationalDatabase {
   multiAz?: PublicCatalogProductPropertiesManagedRelationalDatabaseMultiAzType
 }
 
-
 export interface PublicCatalogProductPropertiesObjectStorage {
   /**
    * The properties related to Object Storage class.
@@ -585,16 +529,12 @@ export interface PublicCatalogProductPropertiesObjectStorage {
   regionTraffic?: PublicCatalogProductPropertiesObjectStorageRegionTrafficType
 }
 
-
-export interface PublicCatalogProductPropertiesSecretManager {
-}
-
+export interface PublicCatalogProductPropertiesSecretManager {}
 
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
   kgCo2Equivalent?: number
   m3WaterUsage?: number
 }
-
 
 export interface PublicCatalogProductLocality {
   /**
@@ -623,14 +563,12 @@ export interface PublicCatalogProductLocality {
   datacenter?: string
 }
 
-
 export interface PublicCatalogProductPrice {
   /**
    * The retail price of the product.
    */
   retailPrice?: Money
 }
-
 
 export interface PublicCatalogProductProperties {
   /**
@@ -726,12 +664,10 @@ export interface PublicCatalogProductProperties {
   managedMongodb?: PublicCatalogProductPropertiesManagedMongoDB
 }
 
-
 export interface PublicCatalogProductUnitOfMeasure {
   unit: PublicCatalogProductUnitOfMeasureCountableUnit
   size: number
 }
-
 
 export interface PublicCatalogProduct {
   /**
@@ -800,7 +736,6 @@ export interface PublicCatalogProduct {
   badges: PublicCatalogProductProductBadge[]
 }
 
-
 export interface ListPublicCatalogProductsResponse {
   /**
    * The list of products.
@@ -811,7 +746,6 @@ export interface ListPublicCatalogProductsResponse {
    */
   totalCount: number
 }
-
 
 export type PublicCatalogApiListPublicCatalogProductsRequest = {
   /**
@@ -859,5 +793,3 @@ export type PublicCatalogApiListPublicCatalogProductsRequest = {
    */
   apiIds?: string[]
 }
-
-

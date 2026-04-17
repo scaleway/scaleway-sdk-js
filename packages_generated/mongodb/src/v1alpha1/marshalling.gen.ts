@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   CreateEndpointRequest,
   CreateInstanceRequest,
@@ -43,9 +43,7 @@ import type {
 
 const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateNetworkDetails => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -55,20 +53,15 @@ const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateN
 
 const unmarshalEndpointPublicDetails = (data: unknown): EndpointPublicDetails => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EndpointPublicDetails' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'EndpointPublicDetails' failed as data isn't a dictionary.`)
   }
 
-  return {
-  } as EndpointPublicDetails
+  return {} as EndpointPublicDetails
 }
 
 export const unmarshalEndpoint = (data: unknown): Endpoint => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -83,9 +76,7 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
 
 const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -96,9 +87,7 @@ const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
 
 const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSchedule => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'InstanceSnapshotSchedule' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'InstanceSnapshotSchedule' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -112,9 +101,7 @@ const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSched
 
 const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Volume' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -125,9 +112,7 @@ const unmarshalVolume = (data: unknown): Volume => {
 
 export const unmarshalInstance = (data: unknown): Instance => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Instance' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Instance' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -150,9 +135,7 @@ export const unmarshalInstance = (data: unknown): Instance => {
 
 const unmarshalSnapshotVolumeType = (data: unknown): SnapshotVolumeType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SnapshotVolumeType' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'SnapshotVolumeType' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -162,9 +145,7 @@ const unmarshalSnapshotVolumeType = (data: unknown): SnapshotVolumeType => {
 
 export const unmarshalSnapshot = (data: unknown): Snapshot => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Snapshot' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Snapshot' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -185,9 +166,7 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
 
 const unmarshalUserRole = (data: unknown): UserRole => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'UserRole' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'UserRole' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -199,9 +178,7 @@ const unmarshalUserRole = (data: unknown): UserRole => {
 
 export const unmarshalUser = (data: unknown): User => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'User' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'User' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -212,9 +189,7 @@ export const unmarshalUser = (data: unknown): User => {
 
 export const unmarshalListInstancesResponse = (data: unknown): ListInstancesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListInstancesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListInstancesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -225,9 +200,7 @@ export const unmarshalListInstancesResponse = (data: unknown): ListInstancesResp
 
 const unmarshalNodeTypeVolumeType = (data: unknown): NodeTypeVolumeType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'NodeTypeVolumeType' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'NodeTypeVolumeType' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -241,9 +214,7 @@ const unmarshalNodeTypeVolumeType = (data: unknown): NodeTypeVolumeType => {
 
 const unmarshalNodeType = (data: unknown): NodeType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -261,9 +232,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
 
 export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -274,9 +243,7 @@ export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResp
 
 export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -287,9 +254,7 @@ export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResp
 
 export const unmarshalListUsersResponse = (data: unknown): ListUsersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -300,9 +265,7 @@ export const unmarshalListUsersResponse = (data: unknown): ListUsersResponse => 
 
 const unmarshalSetting = (data: unknown): Setting => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Setting' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Setting' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -322,9 +285,7 @@ const unmarshalSetting = (data: unknown): Setting => {
 
 const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Version' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -336,9 +297,7 @@ const unmarshalVersion = (data: unknown): Version => {
 
 export const unmarshalListVersionsResponse = (data: unknown): ListVersionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -357,21 +316,20 @@ const marshalEndpointSpecPrivateNetworkDetails = (
 const marshalEndpointSpecPublicDetails = (
   request: EndpointSpecPublicDetails,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
-})
+): Record<string, unknown> => ({})
 
-const marshalEndpointSpec = (
-  request: EndpointSpec,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({  
+const marshalEndpointSpec = (request: EndpointSpec, defaults: DefaultValues): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'public',
-      value: (request.public !== undefined) ? marshalEndpointSpecPublicDetails(request.public, defaults)
-      : undefined,
+    {
+      param: 'public',
+      value: request.public !== undefined ? marshalEndpointSpecPublicDetails(request.public, defaults) : undefined,
     },
-    {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
-      : undefined,
+    {
+      param: 'private_network',
+      value:
+        request.privateNetwork !== undefined
+          ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
+          : undefined,
     },
   ]),
 })
@@ -380,7 +338,7 @@ export const marshalCreateEndpointRequest = (
   request: CreateEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint:  marshalEndpointSpec(request.endpoint, defaults),
+  endpoint: marshalEndpointSpec(request.endpoint, defaults),
   instance_id: request.instanceId,
 })
 
@@ -396,7 +354,8 @@ export const marshalCreateInstanceRequest = (
   request: CreateInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  endpoints:
+    request.endpoints !== undefined ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)) : undefined,
   name: request.name || randomName('mgdb'),
   node_number: request.nodeNumber,
   node_type: request.nodeType,
@@ -405,7 +364,8 @@ export const marshalCreateInstanceRequest = (
   tags: request.tags,
   user_name: request.userName,
   version: request.version,
-  volume: ((request.volume !== undefined) ?  marshalCreateInstanceRequestVolumeDetails(request.volume, defaults): undefined),
+  volume:
+    request.volume !== undefined ? marshalCreateInstanceRequestVolumeDetails(request.volume, defaults) : undefined,
 })
 
 export const marshalCreateSnapshotRequest = (
@@ -438,21 +398,14 @@ export const marshalRestoreSnapshotRequest = (
   instance_name: request.instanceName,
   node_number: request.nodeNumber,
   node_type: request.nodeType,
-  volume:  marshalRestoreSnapshotRequestVolumeDetails(request.volume, defaults),
+  volume: marshalRestoreSnapshotRequestVolumeDetails(request.volume, defaults),
 })
 
-const marshalUserRole = (
-  request: UserRole,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  role: request.role,  
+const marshalUserRole = (request: UserRole, defaults: DefaultValues): Record<string, unknown> => ({
+  role: request.role,
   ...resolveOneOf<string | boolean>([
-    {param: 'database',
-      value: request.database,
-    },
-    {param: 'any_database',
-      value: request.anyDatabase,
-    },
+    { param: 'database', value: request.database },
+    { param: 'any_database', value: request.anyDatabase },
   ]),
 })
 
@@ -460,7 +413,7 @@ export const marshalSetUserRoleRequest = (
   request: SetUserRoleRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  roles: ((request.roles !== undefined) ?  request.roles.map(elt => marshalUserRole(elt, defaults)): undefined),
+  roles: request.roles !== undefined ? request.roles.map(elt => marshalUserRole(elt, defaults)) : undefined,
   user_name: request.userName,
 })
 
@@ -490,10 +443,6 @@ export const marshalUpdateUserRequest = (
 export const marshalUpgradeInstanceRequest = (
   request: UpgradeInstanceRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
-  ...resolveOneOf([
-    {param: 'volume_size',
-      value: request.volumeSize,
-    },
-  ]),
+): Record<string, unknown> => ({
+  ...resolveOneOf([{ param: 'volume_size', value: request.volumeSize }]),
 })
