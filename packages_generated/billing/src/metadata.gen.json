@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-billing",
-  "namespace": "billing",
-  "displayName": "Billing",
-  "versions": ["v2beta1"]
-}

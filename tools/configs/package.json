@@ -1,0 +1,39 @@
+{
+  "name": "@repo/configs",
+  "version": "0.1.1",
+  "description": "handle configs",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "directory": "tools/configs"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tsconfig/*": {
+      "default": "./tsconfig/*.json"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "engines": {
+    "node": ">=22.22.1"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsgo -p tsconfig.build.json",
+    "watch": "tsgo -p tsconfig.json --watch",
+    "typecheck": "tsgo -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.35"
+  }
+}

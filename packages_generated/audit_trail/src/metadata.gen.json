@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-audit-trail",
-  "namespace": "audit-trail",
-  "displayName": "Audit Trail",
-  "versions": ["v1alpha1"]
-}

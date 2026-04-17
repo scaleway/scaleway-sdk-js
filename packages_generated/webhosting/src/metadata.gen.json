@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-webhosting",
-  "namespace": "webhosting",
-  "displayName": "Webhosting",
-  "versions": ["v1"]
-}

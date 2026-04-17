@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-instance",
-  "namespace": "instance",
-  "displayName": "Instance",
-  "versions": ["v1"]
-}

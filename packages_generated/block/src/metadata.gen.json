@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-block",
-  "namespace": "block",
-  "displayName": "Block",
-  "versions": ["v1", "v1alpha1"]
-}

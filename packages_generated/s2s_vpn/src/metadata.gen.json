@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-s2s-vpn",
-  "namespace": "s2s-vpn",
-  "displayName": "S2S Vpn",
-  "versions": ["v1alpha1"]
-}

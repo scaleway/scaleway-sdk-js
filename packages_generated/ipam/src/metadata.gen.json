@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-ipam",
-  "namespace": "ipam",
-  "displayName": "Ipam",
-  "versions": ["v1"]
-}

@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-function",
-  "namespace": "function",
-  "displayName": "Function",
-  "versions": ["v1beta1"]
-}

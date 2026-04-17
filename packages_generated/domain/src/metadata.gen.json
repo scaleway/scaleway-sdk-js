@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-domain",
-  "namespace": "domain",
-  "displayName": "Domain",
-  "versions": ["v2beta1"]
-}

@@ -35,5 +35,8 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "devDependencies": {
+    "@repo/configs": "workspace:^"
   }
 }

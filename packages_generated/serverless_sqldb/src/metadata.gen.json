@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-serverless-sqldb",
-  "namespace": "serverless-sqldb",
-  "displayName": "Serverless Sqldb",
-  "versions": ["v1alpha1"]
-}

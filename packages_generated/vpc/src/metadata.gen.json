@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-vpc",
-  "namespace": "vpc",
-  "displayName": "Vpc",
-  "versions": ["v2"]
-}

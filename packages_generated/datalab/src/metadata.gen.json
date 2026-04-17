@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-datalab",
-  "namespace": "datalab",
-  "displayName": "Datalab",
-  "versions": ["v1beta1"]
-}

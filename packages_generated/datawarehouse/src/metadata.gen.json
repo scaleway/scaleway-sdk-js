@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-datawarehouse",
-  "namespace": "datawarehouse",
-  "displayName": "Datawarehouse",
-  "versions": ["v1beta1"]
-}

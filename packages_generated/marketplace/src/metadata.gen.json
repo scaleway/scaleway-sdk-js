@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-marketplace",
-  "namespace": "marketplace",
-  "displayName": "Marketplace",
-  "versions": ["v2"]
-}

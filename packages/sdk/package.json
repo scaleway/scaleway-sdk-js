@@ -79,5 +79,8 @@
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/configs": "workspace:^"
   }
 }

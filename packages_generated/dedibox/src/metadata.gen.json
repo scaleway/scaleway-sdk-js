@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-dedibox",
-  "namespace": "dedibox",
-  "displayName": "Dedibox",
-  "versions": ["v1"]
-}

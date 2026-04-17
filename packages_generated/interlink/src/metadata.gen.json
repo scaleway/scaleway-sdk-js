@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-interlink",
-  "namespace": "interlink",
-  "displayName": "Interlink",
-  "versions": ["v1beta1"]
-}

@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-lb",
-  "namespace": "lb",
-  "displayName": "Lb",
-  "versions": ["v1"]
-}

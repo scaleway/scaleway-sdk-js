@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-iot",
-  "namespace": "iot",
-  "displayName": "Iot",
-  "versions": ["v1"]
-}

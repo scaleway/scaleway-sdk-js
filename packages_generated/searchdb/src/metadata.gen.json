@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-searchdb",
-  "namespace": "searchdb",
-  "displayName": "Searchdb",
-  "versions": ["v1alpha1"]
-}

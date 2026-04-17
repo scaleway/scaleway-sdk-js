@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig/node.json",
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noImplicitAny": true,
+    "listEmittedFiles": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "strict": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["./templates/**"],
+  "typeAcquisition": {
+    "disableFilenameBasedTypeAcquisition": true,
+    "enable": false
+  }
+}

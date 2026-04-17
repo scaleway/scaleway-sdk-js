@@ -48,6 +48,7 @@
     "@scaleway/sdk-client": "workspace:^"
   },
   "devDependencies": {
+    "@repo/configs": "workspace:^",
     "@scaleway/sdk-client": "workspace:^"
   }
 }

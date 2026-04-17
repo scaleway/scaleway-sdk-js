@@ -83,6 +83,7 @@
     "@scaleway/sdk-webhosting": "workspace:*"
   },
   "devDependencies": {
+    "@repo/configs": "workspace:^",
     "@scaleway/generate-react-sdk": "workspace:*",
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
