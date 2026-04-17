@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-kafka",
-  "namespace": "kafka",
-  "displayName": "Kafka",
-  "versions": ["v1alpha1"]
-}

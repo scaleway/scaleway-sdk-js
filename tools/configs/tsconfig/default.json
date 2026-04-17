@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "exactOptionalPropertyTypes": false,
+    "incremental": false,
+    "isolatedModules": true,
+    "listEmittedFiles": false,
+    "module": "ESNext",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext"
+  },
+  "typeAcquisition": {
+    "disableFilenameBasedTypeAcquisition": true,
+    "enable": false
+  }
+}

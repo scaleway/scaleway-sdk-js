@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-cockpit",
-  "namespace": "cockpit",
-  "displayName": "Cockpit",
-  "versions": ["v1"]
-}

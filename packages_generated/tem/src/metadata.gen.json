@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-tem",
-  "namespace": "tem",
-  "displayName": "Tem",
-  "versions": ["v1alpha1"]
-}

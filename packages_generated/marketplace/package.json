@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-marketplace",
-  "version": "2.4.0",
+  "version": "2.3.3",
   "description": "Scaleway SDK marketplace",
   "license": "Apache-2.0",
   "files": [
@@ -20,6 +20,10 @@
     "./metadata": {
       "types": "./dist/metadata.gen.d.ts",
       "default": "./dist/metadata.gen.js"
+    },
+    "./*/metadata": {
+      "types": "./dist/*/metadata.gen.d.ts",
+      "default": "./dist/*/metadata.gen.js"
     }
   },
   "repository": {
@@ -31,8 +35,8 @@
   },
   "scripts": {
     "package:check": "pnpm publint",
-    "typecheck": "tsc --noEmit",
-    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "typecheck": "tsgo --noEmit",
+    "type:generate": "tsgo --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
@@ -44,6 +48,7 @@
     "@scaleway/sdk-client": "workspace:^"
   },
   "devDependencies": {
+    "@repo/configs": "workspace:^",
     "@scaleway/sdk-client": "workspace:^"
   }
 }

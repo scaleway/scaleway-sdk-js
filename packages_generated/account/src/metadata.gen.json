@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-account",
-  "namespace": "account",
-  "displayName": "Account",
-  "versions": ["v3"]
-}

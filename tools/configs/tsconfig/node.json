@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": false,
+    "listEmittedFiles": false,
+    "module": "ESNext",
+    "noEmit": true
+  },
+  "extends": ["@scaleway/tsconfig", "./default.json"],
+  "typeAcquisition": {
+    "disableFilenameBasedTypeAcquisition": true,
+    "enable": false
+  }
+}

@@ -33,6 +33,8 @@
     "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.35"
+    "@repo/configs": "workspace:*",
+    "@types/node": "20.19.35",
+    "vite": "8.0.8"
   }
 }

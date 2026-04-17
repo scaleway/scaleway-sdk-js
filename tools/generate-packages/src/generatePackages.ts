@@ -42,13 +42,11 @@ const TEMPLATES = {
   TS_CONFIG_BUILD: join(TEMPLATES_DIR, 'tsconfig.build.json'),
   VITE_CONFIG: join(TEMPLATES_DIR, 'vite.config.ts'),
   README: join(TEMPLATES_DIR, 'README.tmpl'),
-  METADATA_JSON: join(TEMPLATES_DIR, 'metadata.gen.tmpl'),
   METADATA_TS: join(TEMPLATES_DIR, 'metadata.gen.ts.tmpl'),
 }
 
 const templateString = readFileSync(TEMPLATES.PACKAGE_JSON, 'utf8')
 const readmeTemplateString = readFileSync(TEMPLATES.README, 'utf8')
-const metadataJsonTemplateString = readFileSync(TEMPLATES.METADATA_JSON, 'utf8')
 const metadataTsTemplateString = readFileSync(TEMPLATES.METADATA_TS, 'utf8')
 
 const options: ParseArgsConfig['options'] = {
@@ -116,17 +114,10 @@ const generateMetadata = ({ productDir }: { productDir: string }) => {
 
   const versionsList = versionDirs.map(v => `"${v}"`).join(', ')
 
-  const metadataJson = renderTemplate(metadataJsonTemplateString, {
+  const metadataTs = renderTemplate(metadataTsTemplateString, {
     name: snakeToSlug(productDir),
     displayName: snakeToDisplayName(productDir),
     versions: versionsList,
-  })
-
-  const metadataJsonFilePath = join(srcPath, 'metadata.gen.json')
-  writeFileSync(metadataJsonFilePath, metadataJson)
-
-  const metadataTs = renderTemplate(metadataTsTemplateString, {
-    name: snakeToSlug(productDir),
   })
 
   const metadataTsFilePath = join(srcPath, 'metadata.gen.ts')

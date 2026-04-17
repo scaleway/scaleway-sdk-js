@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-environmental-footprint",
-  "namespace": "environmental-footprint",
-  "displayName": "Environmental Footprint",
-  "versions": ["v1alpha1"]
-}

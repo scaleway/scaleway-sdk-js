@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-edge-services",
-  "namespace": "edge-services",
-  "displayName": "Edge Services",
-  "versions": ["v1beta1"]
-}

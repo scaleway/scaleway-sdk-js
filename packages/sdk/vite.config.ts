@@ -1,5 +1,5 @@
+import { viteConfig } from '@repo/configs'
 import { defineConfig, mergeConfig } from 'vite'
-import { defaultConfig } from '../../vite.config.js'
 
 const newConfig = defineConfig({
   build: {
@@ -9,4 +9,4 @@ const newConfig = defineConfig({
   },
 })
 
-export default mergeConfig(defaultConfig, newConfig)
+export default mergeConfig(viteConfig, newConfig)

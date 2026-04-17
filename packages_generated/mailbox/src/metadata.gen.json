@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-mailbox",
-  "namespace": "mailbox",
-  "displayName": "Mailbox",
-  "versions": ["v1alpha1"]
-}

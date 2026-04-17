@@ -3,15 +3,13 @@
  * PLEASE DO NOT EDIT HERE
  */
 
-import metadata from './metadata.gen.json' with { type: 'json' }
+export const pkgMetadata = {
+  name: "@scaleway/sdk-s2s-vpn",
+  namespace: "s2s-vpn",
+  displayName: "S2S Vpn",
+  versions: ["v1alpha1"]
+} as const
 
-export type Metadata = {
-  name: string
-  namespace: string
-  displayName: string
-  versions: string[]
-}
-
-export const pkgMetadata: Metadata = metadata
+export type Metadata = typeof pkgMetadata
 
 export default pkgMetadata

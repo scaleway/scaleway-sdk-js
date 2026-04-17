@@ -1,4 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@repo/configs/tsconfig/generated",
   "include": ["src/**/*.ts", "src/**/*.tsx", "*.config.ts"]
 }

@@ -10,8 +10,8 @@
     "client"
   ],
   "scripts": {
-    "typecheck": "tsc --noEmit",
-    "type:generate": "tsc --declaration -p tsconfig.build.json",
+    "typecheck": "tsgo --noEmit",
+    "type:generate": "tsgo --declaration -p tsconfig.build.json",
     "build": "vite build --config ../../vite.config.ts && pnpm run type:generate && tsc-alias -p tsconfig.build.json",
     "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
   },
@@ -35,5 +35,8 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "devDependencies": {
+    "@repo/configs": "workspace:^"
   }
 }

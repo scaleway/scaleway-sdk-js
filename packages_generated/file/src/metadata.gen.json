@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-file",
-  "namespace": "file",
-  "displayName": "File",
-  "versions": ["v1alpha1"]
-}

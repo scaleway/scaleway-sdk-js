@@ -1,6 +1,0 @@
-{
-  "name": "@scaleway/sdk-baremetal",
-  "namespace": "baremetal",
-  "displayName": "Baremetal",
-  "versions": ["v1", "v3"]
-}
