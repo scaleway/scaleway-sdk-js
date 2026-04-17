@@ -15,6 +15,7 @@
     "generateAlias": "generateAlias",
     "generatePackages": "generatePackages",
     "setupNewProducts": "setupNewProducts",
+    "updatePackageDependencies": "updatePackageDependencies",
     "prebuild": "pnpm run generatePackages && pnpm run generateAlias && pnpm format",
     "build:packages": "pnpm turbo run build",
     "fix-import-extensions": "fix-import-extensions",

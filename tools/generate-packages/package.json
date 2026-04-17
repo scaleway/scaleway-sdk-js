@@ -8,7 +8,8 @@
     "generatePackages": "./dist/generatePackages.js",
     "generateAlias": "./dist/generateAlias.js",
     "setupNewProducts": "./dist/setupNewProducts.js",
-    "fix-import-extensions": "./dist/fix-import-extensions.js"
+    "fix-import-extensions": "./dist/fix-import-extensions.js",
+    "updatePackageDependencies": "./dist/updatePackageDependencies.js"
   },
   "files": [
     "dist",
