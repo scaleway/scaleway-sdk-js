@@ -5,7 +5,21 @@ import { defaultConfig } from '../../vite.config'
 export default mergeConfig(defineConfig(defaultConfig), {
   build: {
     lib: {
-      entry: ['src/index.gen.ts', 'src/metadata.ts'],
+      entry: ['src/index.gen.ts', 'src/metadata.gen.ts'],
     },
+    copyPublicDir: false,
   },
+  plugins: [
+    {
+      name: 'copy-metadata',
+      writeBundle() {
+        const { copyFileSync } = require('node:fs')
+        const { join } = require('node:path')
+        copyFileSync(
+          join(process.cwd(), 'src', 'metadata.gen.json'),
+          join(process.cwd(), 'dist', 'metadata.gen.json'),
+        )
+      },
+    },
+  ],
 })

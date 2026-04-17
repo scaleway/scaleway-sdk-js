@@ -1,130 +1,82 @@
 import { exec } from 'node:child_process'
-import {
-  existsSync,
-  readdirSync,
-  readFileSync,
-  rmSync,
-  statSync,
-} from 'node:fs'
+import { existsSync, mkdirSync, readFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import { dirname, join, resolve } from 'node:path'
 import { exit, stdout } from 'node:process'
 import type { Metadata, ProcessedMetadata } from '../metadata-types.ts'
 import { emitFiles } from './emitFiles.ts'
 import { generateType } from './generateType.ts'
 
-export const directoryOfSrcFolder = join(resolve('./'))
+const directoryOfSrcFolder = resolve('./')
+const require = createRequire(resolve('./package.json'))
 
-function discoverSdkPackagesFromWorkspace(
-  packageNameFilter: string,
-): Map<string, string> {
+function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
+  const pkgJsonPath = resolve('package.json')
+  if (!existsSync(pkgJsonPath)) {
+    stdout.write('⚠️  No package.json found in current directory\n')
+    return new Map()
+  }
+
+  const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
+  const allDeps: Record<string, string> = {
+    ...pkgJson.dependencies,
+    ...pkgJson.devDependencies,
+    ...pkgJson.peerDependencies,
+  }
+
   const packages = new Map<string, string>()
-
-  let workspaceRoot = resolve('.')
-  while (workspaceRoot !== '/') {
-    const packagesGenPath = join(workspaceRoot, 'packages_generated')
-    if (existsSync(packagesGenPath)) {
-      const dirs = readdirSync(packagesGenPath)
-      for (const dir of dirs) {
-        const dirPath = join(packagesGenPath, dir)
-        if (!statSync(dirPath).isDirectory()) continue
-
-        const pkgJsonPath = join(dirPath, 'package.json')
-        if (!existsSync(pkgJsonPath)) continue
-
-        try {
-          const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
-          if (pkgJson.name && pkgJson.name.startsWith(packageNameFilter)) {
-            packages.set(pkgJson.name, dirPath)
-          }
-        } catch {
-          // Ignore errors
-        }
-      }
-      break
+  for (const [name] of Object.entries(allDeps)) {
+    if (name.startsWith(packageNameFilter)) {
+      packages.set(name, name)
     }
-    workspaceRoot = dirname(workspaceRoot)
   }
 
   return packages
 }
 
-function discoverVersions(pkgDir: string): string[] {
-  const distPath = join(pkgDir, 'dist')
-  const srcPath = join(pkgDir, 'src')
-
-  if (existsSync(distPath)) {
-    try {
-      const entries = readdirSync(distPath)
-      const result = entries.filter(entry => {
-        const fullPath = join(distPath, entry)
-        const isDir = statSync(fullPath).isDirectory()
-        const hasMetadata = existsSync(join(fullPath, 'metadata.gen.js'))
-        return isDir && hasMetadata
-      })
-
-      if (result.length > 0) {
-        return result
-      }
-    } catch (error) {
-      stdout.write(`⚠️  Error reading dist ${distPath}: ${error}\n`)
-    }
+async function loadVersions(packageName: string): Promise<string[]> {
+  try {
+    const resolvedPath = require.resolve(`${packageName}/metadata`)
+    const metadataModule = await import(resolvedPath)
+    const versions =
+      metadataModule?.pkgMetadata?.versions ||
+      metadataModule?.default?.versions ||
+      []
+    return versions
+  } catch (error) {
+    stdout.write(`⚠️  Could not load metadata from ${packageName}: ${error}\n`)
+    return []
   }
-
-  if (existsSync(srcPath)) {
-    try {
-      const entries = readdirSync(srcPath)
-      const result = entries.filter(entry => {
-        const fullPath = join(srcPath, entry)
-        const isDir = statSync(fullPath).isDirectory()
-        const hasMetadata = existsSync(join(fullPath, 'metadata.gen.ts'))
-        return isDir && hasMetadata
-      })
-
-      return result
-    } catch (error) {
-      stdout.write(`⚠️  Error reading src ${srcPath}: ${error}\n`)
-    }
-  }
-
-  return []
 }
 
 async function loadMetadata(
-  pkgDir: string,
+  packageName: string,
   version: string,
 ): Promise<Metadata | null> {
-  // Try dist first
-  let metadataPath = join(pkgDir, 'dist', version, 'metadata.gen.js')
-  let isTsFile = false
-
-  if (!existsSync(metadataPath)) {
-    metadataPath = join(pkgDir, 'src', version, 'metadata.gen.ts')
-    isTsFile = true
-  }
-
-  if (!existsSync(metadataPath)) {
-    return null
-  }
-
   try {
-    if (isTsFile) {
-      const content = readFileSync(metadataPath, 'utf-8')
-      const match = content.match(
-        /export const queriesMetadata\s*=\s*({[\s\S]*?})\s*as const/s,
+    // Try the exported path first
+    try {
+      const resolvedPath = require.resolve(`${packageName}/${version}/metadata`)
+      const metadataModule = await import(resolvedPath)
+      return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
+    } catch {
+      stdout.write(
+        `⚠️  Error loading metadata from ${packageName}/${version}/metadata \n Using dist fallback \n`,
       )
-      if (!match) {
-        return null
-      }
-
-      const objStr = match[1]
-      const fn = new Function(`return ${objStr}`)
-      return fn() as Metadata
-    } else {
-      const metadataModule = await import(metadataPath)
-      return metadataModule.queriesMetadata as Metadata
+      // Fallback: construct path from node_modules
+      const pkgDir = join(
+        dirname(resolve('package.json')),
+        'node_modules',
+        packageName,
+      )
+      const distMetadataPath = join(pkgDir, 'dist', version, 'metadata.gen.js')
+      const metadataModule = await import(distMetadataPath)
+      return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
     }
   } catch (error) {
-    stdout.write(`⚠️  Error loading metadata from ${metadataPath}: ${error}\n`)
+    stdout.write(
+      `⚠️  Error loading metadata from ${packageName}/${version}/metadata: ${error}\n`,
+    )
     return null
   }
 }
@@ -142,30 +94,24 @@ export const generateAPI = async ({
 
   const dir = join(directoryOfSrcFolder, dirGenName)
 
-  if (existsSync(dir)) {
-    rmSync(dir, {
-      recursive: true,
-      force: true,
-    })
-  }
+  // Create directory if it doesn't exist (don't delete existing files)
+  mkdirSync(dir, { recursive: true })
 
-  const sdkPackages = discoverSdkPackagesFromWorkspace(packageNameFilter)
+  const sdkPackages = discoverSdkPackages(packageNameFilter)
 
   if (sdkPackages.size === 0) {
-    stdout.write('⚠️  No SDK packages found in workspace\n')
+    stdout.write('⚠️  No SDK packages found in dependencies\n')
   }
 
-  // Packages to skip (test, internal, etc.)
   const skipPackages = new Set(['@scaleway/sdk-test', '@scaleway/sdk-std'])
 
-  for (const [packageName, pkgDir] of sdkPackages) {
-    // Skip test and internal packages
+  for (const [packageName] of sdkPackages) {
     if (skipPackages.has(packageName)) {
       stdout.write(`⚠️  Skipping ${packageName}: excluded package\n`)
       continue
     }
 
-    const versions = discoverVersions(pkgDir)
+    const versions = await loadVersions(packageName)
 
     if (versions.length === 0) {
       stdout.write(
@@ -175,7 +121,7 @@ export const generateAPI = async ({
     }
 
     for (const version of versions) {
-      const metadata = await loadMetadata(pkgDir, version)
+      const metadata = await loadMetadata(packageName, version)
 
       if (!metadata) {
         stdout.write(
