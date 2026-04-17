@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-partner",
+  "namespace": "partner",
+  "displayName": "Partner",
+  "versions": ["v1"]
+}

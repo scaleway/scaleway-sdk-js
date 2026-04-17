@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-flexibleip",
+  "namespace": "flexibleip",
+  "displayName": "Flexibleip",
+  "versions": ["v1alpha1"]
+}

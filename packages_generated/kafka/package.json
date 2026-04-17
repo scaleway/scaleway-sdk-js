@@ -16,6 +16,10 @@
     "./*": {
       "types": "./dist/*/index.gen.d.ts",
       "default": "./dist/*/index.gen.js"
+    },
+    "./metadata": {
+      "types": "./dist/metadata.d.ts",
+      "default": "./dist/metadata.js"
     }
   },
   "repository": {

@@ -10,7 +10,7 @@ import { Baremetalv1, Baremetalv3 } from '@scaleway/sdk-baremetal'
 import { Billingv2beta1 } from '@scaleway/sdk-billing'
 import { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
 import { Cockpitv1 } from '@scaleway/sdk-cockpit'
-import { Containerv1beta1 } from '@scaleway/sdk-container'
+import { Containerv1, Containerv1beta1 } from '@scaleway/sdk-container'
 import { Datalabv1beta1 } from '@scaleway/sdk-datalab'
 import { Datawarehousev1beta1 } from '@scaleway/sdk-datawarehouse'
 import { Dediboxv1 } from '@scaleway/sdk-dedibox'
@@ -122,8 +122,9 @@ export const Cockpit = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Container' namespace instead (e.g., Container.v1).
  */
-export { Containerv1beta1 }
+export { Containerv1, Containerv1beta1 }
 export const Container = {
+  v1: Containerv1,
   v1beta1: Containerv1beta1,
 }
 

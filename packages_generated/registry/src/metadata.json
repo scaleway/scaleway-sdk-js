@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-registry",
+  "namespace": "registry",
+  "displayName": "Registry",
+  "versions": ["v1"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-key-manager",
+  "namespace": "key-manager",
+  "displayName": "Key Manager",
+  "versions": ["v1alpha1"]
+}

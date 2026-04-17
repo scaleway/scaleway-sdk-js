@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-applesilicon",
+  "namespace": "applesilicon",
+  "displayName": "Applesilicon",
+  "versions": ["v1alpha1"]
+}

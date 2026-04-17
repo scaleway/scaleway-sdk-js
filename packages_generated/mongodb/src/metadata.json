@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-mongodb",
+  "namespace": "mongodb",
+  "displayName": "Mongodb",
+  "versions": ["v1", "v1alpha1"]
+}
