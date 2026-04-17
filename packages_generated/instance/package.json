@@ -45,7 +45,6 @@
     "@scaleway/sdk-std": "workspace:*"
   },
   "peerDependencies": {
-    "@repo/configs": "workspace:^",
     "@scaleway/sdk-client": "workspace:^"
   },
   "devDependencies": {
