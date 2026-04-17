@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-redis",
+  "namespace": "redis",
+  "displayName": "Redis",
+  "versions": ["v1"]
+}

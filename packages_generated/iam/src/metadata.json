@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-iam",
+  "namespace": "iam",
+  "displayName": "Iam",
+  "versions": ["v1alpha1"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-k8s",
+  "namespace": "k8s",
+  "displayName": "K8S",
+  "versions": ["v1"]
+}

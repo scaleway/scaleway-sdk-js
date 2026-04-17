@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-qaas",
+  "namespace": "qaas",
+  "displayName": "Qaas",
+  "versions": ["v1alpha1"]
+}

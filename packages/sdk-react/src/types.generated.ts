@@ -8,7 +8,7 @@ import type { Baremetalv1, Baremetalv3 } from '@scaleway/sdk-baremetal'
 import type { Billingv2beta1 } from '@scaleway/sdk-billing'
 import type { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
 import type { Cockpitv1 } from '@scaleway/sdk-cockpit'
-import type { Containerv1beta1 } from '@scaleway/sdk-container'
+import type { Containerv1, Containerv1beta1 } from '@scaleway/sdk-container'
 import type { Datalabv1beta1 } from '@scaleway/sdk-datalab'
 import type { Datawarehousev1beta1 } from '@scaleway/sdk-datawarehouse'
 import type { Dediboxv1 } from '@scaleway/sdk-dedibox'
@@ -62,6 +62,7 @@ export type APISdk = {
   blockv1alpha1: Blockv1alpha1.API
   cockpitv1Global: Cockpitv1.GlobalAPI
   cockpitv1Regional: Cockpitv1.RegionalAPI
+  containerv1: Containerv1.API
   containerv1beta1: Containerv1beta1.API
   datalabv1beta1: Datalabv1beta1.API
   datawarehousev1beta1: Datawarehousev1beta1.API

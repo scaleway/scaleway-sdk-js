@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-rdb",
+  "namespace": "rdb",
+  "displayName": "Rdb",
+  "versions": ["v1"]
+}

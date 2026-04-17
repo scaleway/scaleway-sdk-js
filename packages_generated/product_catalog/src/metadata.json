@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-product-catalog",
+  "namespace": "product-catalog",
+  "displayName": "Product Catalog",
+  "versions": ["v2alpha1"]
+}

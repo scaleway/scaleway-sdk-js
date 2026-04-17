@@ -1,0 +1,6 @@
+{
+  "name": "@scaleway/sdk-autoscaling",
+  "namespace": "autoscaling",
+  "displayName": "Autoscaling",
+  "versions": ["v1alpha1"]
+}
