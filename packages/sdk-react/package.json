@@ -114,6 +114,7 @@
     "@scaleway/sdk-kafka": "workspace:*",
     "@scaleway/sdk-key-manager": "workspace:*",
     "@scaleway/sdk-lb": "workspace:*",
+    "@scaleway/sdk-mailbox": "workspace:*",
     "@scaleway/sdk-marketplace": "workspace:*",
     "@scaleway/sdk-mnq": "workspace:*",
     "@scaleway/sdk-mongodb": "workspace:*",

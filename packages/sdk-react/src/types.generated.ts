@@ -19,7 +19,7 @@ import type { Filev1alpha1 } from '@scaleway/sdk-file'
 import type { Flexibleipv1alpha1 } from '@scaleway/sdk-flexibleip'
 import type { Functionv1beta1 } from '@scaleway/sdk-function'
 import type { Iamv1alpha1 } from '@scaleway/sdk-iam'
-import type { Inferencev1, Inferencev1beta1 } from '@scaleway/sdk-inference'
+import type { Inferencev1 } from '@scaleway/sdk-inference'
 import type { Instancev1 } from '@scaleway/sdk-instance'
 import type { Interlinkv1beta1 } from '@scaleway/sdk-interlink'
 import type { Iotv1 } from '@scaleway/sdk-iot'
@@ -29,6 +29,7 @@ import type { K8Sv1 } from '@scaleway/sdk-k8s'
 import type { Kafkav1alpha1 } from '@scaleway/sdk-kafka'
 import type { KeyManagerv1alpha1 } from '@scaleway/sdk-key-manager'
 import type { Lbv1 } from '@scaleway/sdk-lb'
+import type { Mailboxv1alpha1 } from '@scaleway/sdk-mailbox'
 import type { Marketplacev2 } from '@scaleway/sdk-marketplace'
 import type { Mnqv1beta1 } from '@scaleway/sdk-mnq'
 import type { Mongodbv1, Mongodbv1alpha1 } from '@scaleway/sdk-mongodb'
@@ -83,7 +84,6 @@ export type APISdk = {
   functionv1beta1: Functionv1beta1.API
   iamv1alpha1: Iamv1alpha1.API
   inferencev1: Inferencev1.API
-  inferencev1beta1: Inferencev1beta1.API
   instancev1: Instancev1.API
   interlinkv1beta1: Interlinkv1beta1.API
   iotv1: Iotv1.API
@@ -95,6 +95,7 @@ export type APISdk = {
   keyManagerv1alpha1: KeyManagerv1alpha1.API
   lbv1Zoned: Lbv1.ZonedAPI
   lbv1: Lbv1.API
+  mailboxv1alpha1: Mailboxv1alpha1.API
   marketplacev2: Marketplacev2.API
   mnqv1beta1Nats: Mnqv1beta1.NatsAPI
   mnqv1beta1Sns: Mnqv1beta1.SnsAPI

@@ -35,12 +35,14 @@ const main = () => {
         // Add metadata export if not already present
         if (pkg.exports && !pkg.exports['./metadata']) {
           pkg.exports['./metadata'] = {
-            types: './dist/metadata.d.ts',
-            default: './dist/metadata.js',
+            types: './dist/metadata.gen.d.ts',
+            default: './dist/metadata.gen.js',
           }
 
           writeFileSync(pkgJsonPath, JSON.stringify(pkg, null, 2) + '\n')
-          console.log(`Updated ${productDir}/package.json with metadata export`)
+          console.log(
+            `Updated ${productDir}/package.json with metadata gen export`,
+          )
         }
       } catch (error) {
         console.error(`Error processing ${productDir}:`, error)

@@ -42,8 +42,8 @@ const TEMPLATES = {
   TS_CONFIG_BUILD: join(TEMPLATES_DIR, 'tsconfig.build.json'),
   VITE_CONFIG: join(TEMPLATES_DIR, 'vite.config.ts'),
   README: join(TEMPLATES_DIR, 'README.tmpl'),
-  METADATA_JSON: join(TEMPLATES_DIR, 'metadata.tmpl'),
-  METADATA_TS: join(TEMPLATES_DIR, 'metadata.ts.tmpl'),
+  METADATA_JSON: join(TEMPLATES_DIR, 'metadata.gen.tmpl'),
+  METADATA_TS: join(TEMPLATES_DIR, 'metadata.gen.ts.tmpl'),
 }
 
 const templateString = readFileSync(TEMPLATES.PACKAGE_JSON, 'utf8')
@@ -122,14 +122,14 @@ const generateMetadata = ({ productDir }: { productDir: string }) => {
     versions: versionsList,
   })
 
-  const metadataJsonFilePath = join(srcPath, 'metadata.json')
+  const metadataJsonFilePath = join(srcPath, 'metadata.gen.json')
   writeFileSync(metadataJsonFilePath, metadataJson)
 
   const metadataTs = renderTemplate(metadataTsTemplateString, {
     name: snakeToSlug(productDir),
   })
 
-  const metadataTsFilePath = join(srcPath, 'metadata.ts')
+  const metadataTsFilePath = join(srcPath, 'metadata.gen.ts')
   writeFileSync(metadataTsFilePath, metadataTs)
 }
 

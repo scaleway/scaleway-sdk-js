@@ -21,7 +21,7 @@ const sdkFactoryPath =
 const packageNameFilter =
   (cliArgs['package-name-filter'] as string | undefined) || '@scaleway/sdk-'
 
-generateAPI({
+await generateAPI({
   dirGenName,
   sdkFactoryPath,
   packageNameFilter,

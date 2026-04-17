@@ -1,15 +1,15 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import type { ProcessedMetadata } from '../metadata-types.ts'
 import { getFileContent } from './getFileContent.ts'
 import { lowerCaseFirstLetter } from './helpers.ts'
-import type { ProcessDeclaration } from './types.ts'
 
 export const emitFiles = ({
   res,
   sourceFolderGen,
   sdkFactoryPath,
 }: {
-  res: ProcessDeclaration
+  res: ProcessedMetadata
   sourceFolderGen: string
   sdkFactoryPath: string
 }) => {

@@ -29,7 +29,6 @@
     "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.35",
-    "ts-morph": "27.0.2"
+    "@types/node": "20.19.35"
   }
 }
