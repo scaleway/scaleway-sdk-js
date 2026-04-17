@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.9.0...@scaleway/sdk-product-catalog@2.10.0) (2026-04-17)
+
+### Features
+
+- **sdk:** unify tools ([#2903](https://github.com/scaleway/scaleway-sdk-js/issues/2903)) ([e0b99e4](https://github.com/scaleway/scaleway-sdk-js/commit/e0b99e47da92c514e06aef2a6c739b9653c9ba45))
+
 # [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.8.0...@scaleway/sdk-product-catalog@2.9.0) (2026-04-17)
 
 ### Features
