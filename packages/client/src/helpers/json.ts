@@ -1,10 +1,4 @@
-export type JSON =
-  | string
-  | number
-  | boolean
-  | null
-  | JSON[]
-  | { [key: string]: JSON }
+export type JSON = string | number | boolean | null | JSON[] | { [key: string]: JSON }
 
 export interface JSONObject {
   [key: string]: JSON
@@ -85,10 +79,7 @@ export const camelize = (str: string): string => {
  *
  * @internal
  */
-export const camelizeKeys = <T>(
-  obj: object | unknown[] | unknown,
-  ignoreKeys: string[] = [],
-): T => {
+export const camelizeKeys = <T>(obj: object | unknown[] | unknown, ignoreKeys: string[] = []): T => {
   if (Array.isArray(obj)) {
     return obj.map(v => camelizeKeys(v, ignoreKeys)) as unknown as T
   }
@@ -97,9 +88,7 @@ export const camelizeKeys = <T>(
     const result: Record<string, unknown> = {}
     for (const [key, value] of Object.entries(obj)) {
       const outKey = camelize(key)
-      result[outKey] = ignoreKeys.includes(key)
-        ? (value as unknown)
-        : camelizeKeys(value, ignoreKeys)
+      result[outKey] = ignoreKeys.includes(key) ? (value as unknown) : camelizeKeys(value, ignoreKeys)
     }
     return result as T
   }

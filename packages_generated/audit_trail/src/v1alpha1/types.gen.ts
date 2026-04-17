@@ -1,68 +1,31 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
-import type {CountryCode as StdCountryCode,} from '@scaleway/sdk-std'
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
+import type { CountryCode as StdCountryCode } from '@scaleway/sdk-std'
 
+export type AlertRuleStatus = 'unknown_status' | 'enabled' | 'disabled' | 'enabling' | 'disabling'
 
-export type AlertRuleStatus =
-  | 'unknown_status'
-  | 'enabled'
-  | 'disabled'
-  | 'enabling'
-  | 'disabling'
+export type AuthenticationEventFailureReason = 'unknown_failure_reason' | 'invalid_mfa' | 'invalid_password'
 
-export type AuthenticationEventFailureReason =
-  | 'unknown_failure_reason'
-  | 'invalid_mfa'
-  | 'invalid_password'
+export type AuthenticationEventMFAType = 'unknown_mfa_type' | 'totp'
 
-export type AuthenticationEventMFAType =
-  | 'unknown_mfa_type'
-  | 'totp'
+export type AuthenticationEventMethod = 'unknown_method' | 'password' | 'authentication_code' | 'oauth2' | 'saml'
 
-export type AuthenticationEventMethod =
-  | 'unknown_method'
-  | 'password'
-  | 'authentication_code'
-  | 'oauth2'
-  | 'saml'
+export type AuthenticationEventOrigin = 'unknown_origin' | 'public_api' | 'admin_api'
 
-export type AuthenticationEventOrigin =
-  | 'unknown_origin'
-  | 'public_api'
-  | 'admin_api'
+export type AuthenticationEventResult = 'unknown_result' | 'success' | 'failure'
 
-export type AuthenticationEventResult =
-  | 'unknown_result'
-  | 'success'
-  | 'failure'
+export type ExportJobStatusCode = 'unknown_code' | 'success' | 'failure'
 
-export type ExportJobStatusCode =
-  | 'unknown_code'
-  | 'success'
-  | 'failure'
+export type ListAuthenticationEventsRequestOrderBy = 'recorded_at_desc' | 'recorded_at_asc'
 
-export type ListAuthenticationEventsRequestOrderBy =
-  | 'recorded_at_desc'
-  | 'recorded_at_asc'
+export type ListCombinedEventsRequestOrderBy = 'recorded_at_desc' | 'recorded_at_asc'
 
-export type ListCombinedEventsRequestOrderBy =
-  | 'recorded_at_desc'
-  | 'recorded_at_asc'
+export type ListEventsRequestOrderBy = 'recorded_at_desc' | 'recorded_at_asc'
 
-export type ListEventsRequestOrderBy =
-  | 'recorded_at_desc'
-  | 'recorded_at_asc'
+export type ListExportJobsRequestOrderBy = 'name_asc' | 'name_desc' | 'created_at_asc' | 'created_at_desc'
 
-export type ListExportJobsRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
-  | 'created_at_asc'
-  | 'created_at_desc'
-
-export type ListSystemEventsRequestOrderBy =
-  | 'recorded_at_desc'
-  | 'recorded_at_asc'
+export type ListSystemEventsRequestOrderBy = 'recorded_at_desc' | 'recorded_at_asc'
 
 export type ResourceType =
   | 'unknown_type'
@@ -152,10 +115,7 @@ export type ResourceType =
   | 'apple_silicon_runner'
   | 'audit_trail_alert_rule'
 
-export type SystemEventKind =
-  | 'unknown_kind'
-  | 'cron'
-  | 'notification'
+export type SystemEventKind = 'unknown_kind' | 'cron' | 'notification'
 
 export interface AccountContractSignatureInfoAccountContractInfo {
   id: string
@@ -166,7 +126,6 @@ export interface AccountContractSignatureInfoAccountContractInfo {
   updatedAt?: Date
 }
 
-
 export interface AccountContractSignatureInfo {
   signedAt?: Date
   signedByAccountRootUserId: string
@@ -174,96 +133,73 @@ export interface AccountContractSignatureInfo {
   contract?: AccountContractSignatureInfoAccountContractInfo
 }
 
-
-export interface AccountOrganizationInfo {
-}
-
+export interface AccountOrganizationInfo {}
 
 export interface AccountProjectInfo {
   description: string
 }
-
 
 export interface AccountUserInfo {
   email: string
   phoneNumber?: string
 }
 
-
 export interface AppleSiliconRunnerInfo {
   id: string
   name: string
 }
-
 
 export interface AppleSiliconServerInfo {
   id: string
   name: string
 }
 
+export interface AuditTrailAlertRuleInfo {}
 
-export interface AuditTrailAlertRuleInfo {
-}
-
-
-export interface AuditTrailExportJobInfo {
-}
-
+export interface AuditTrailExportJobInfo {}
 
 export interface BaremetalServerInfo {
   description: string
   tags: string[]
 }
 
-
 export interface BaremetalSettingInfo {
   type: string
 }
-
 
 export interface EdgeServicesBackendStageInfo {
   pipelineId?: string
 }
 
-
 export interface EdgeServicesCacheStageInfo {
   pipelineId?: string
 }
-
 
 export interface EdgeServicesDNSStageInfo {
   pipelineId?: string
 }
 
-
 export interface EdgeServicesPipelineInfo {
   name: string
 }
 
-
-export interface EdgeServicesPlanInfo {
-}
-
+export interface EdgeServicesPlanInfo {}
 
 export interface EdgeServicesRouteRulesInfo {
   routeStageId: string
 }
 
-
 export interface EdgeServicesRouteStageInfo {
   pipelineId?: string
 }
-
 
 export interface EdgeServicesTLSStageInfo {
   pipelineId?: string
 }
 
-
 export interface EdgeServicesWAFStageInfo {
   pipelineId?: string
 }
-
 
 export interface InstancePrivateNetworkInterfaceInfo {
   privateNetworkId: string
@@ -271,97 +207,76 @@ export interface InstancePrivateNetworkInterfaceInfo {
   securityGroupId?: string
 }
 
-
 export interface InstanceServerInfo {
   name: string
 }
-
 
 export interface IpamIpInfo {
   address: string
 }
 
+export interface KeyManagerKeyInfo {}
 
-export interface KeyManagerKeyInfo {
-}
+export interface KubernetesACLInfo {}
 
-
-export interface KubernetesACLInfo {
-}
-
-
-export interface KubernetesClusterInfo {
-}
-
+export interface KubernetesClusterInfo {}
 
 export interface KubernetesNodeInfo {
   id: string
   name: string
 }
 
-
 export interface KubernetesPoolInfo {
   id: string
   name: string
 }
 
-
 export interface LoadBalancerAclInfo {
   frontendId: string
 }
-
 
 export interface LoadBalancerBackendInfo {
   lbId: string
   name: string
 }
 
-
 export interface LoadBalancerCertificateInfo {
   lbId: string
   name: string
 }
-
 
 export interface LoadBalancerFrontendInfo {
   lbId: string
   name: string
 }
 
-
 export interface LoadBalancerIpInfo {
   ipAddress: string
   lbId?: string
 }
 
-
 export interface LoadBalancerLbInfo {
   name: string
 }
-
 
 export interface LoadBalancerRouteInfo {
   frontendId: string
   backendId: string
 }
 
-
 export interface SecretManagerSecretInfo {
   path: string
   keyId?: string
 }
 
-
 export interface SecretManagerSecretVersionInfo {
   revision: number
 }
-
 
 export interface VpcConnectorInfo {
   vpcId: string
   targetVpcId: string
 }
-
 
 export interface VpcGwGatewayInfo {
   vpcId?: string
@@ -369,19 +284,16 @@ export interface VpcGwGatewayInfo {
   publicIpId?: string
 }
 
-
 export interface VpcGwGatewayNetworkInfo {
   gatewayId: string
   pnId: string
   address?: string
 }
 
-
 export interface VpcPrivateNetworkInfo {
   vpcId: string
   pushDefaultRoute: boolean
 }
-
 
 export interface VpcRouteInfo {
   vpcId: string
@@ -390,12 +302,10 @@ export interface VpcRouteInfo {
   nexthopPrivateNetworkKey?: string
 }
 
-
 export interface VpcSubnetInfo {
   subnetCidr: string
   vpcId: string
 }
-
 
 export interface Resource {
   id: string
@@ -405,13 +315,13 @@ export interface Resource {
   deletedAt?: Date
   name?: string
   /**
-   * @deprecated 
+   * @deprecated
    *
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo' could be set.
    */
   secmSecretInfo?: SecretManagerSecretInfo
   /**
-   * @deprecated 
+   * @deprecated
    *
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo' could be set.
    */
@@ -437,7 +347,7 @@ export interface Resource {
    */
   kubeAclInfo?: KubernetesACLInfo
   /**
-   * @deprecated 
+   * @deprecated
    *
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo' could be set.
    */
@@ -468,7 +378,7 @@ export interface Resource {
    */
   accountOrganizationInfo?: AccountOrganizationInfo
   /**
-   * @deprecated 
+   * @deprecated
    *
    * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo' could be set.
    */
@@ -635,11 +545,9 @@ export interface Resource {
   instancePrivateNetworkInterfaceInfo?: InstancePrivateNetworkInterfaceInfo
 }
 
-
 export interface EventPrincipal {
   id: string
 }
-
 
 export interface AuthenticationEvent {
   /**
@@ -691,7 +599,6 @@ export interface AuthenticationEvent {
    */
   mfaType?: AuthenticationEventMFAType
 }
-
 
 export interface Event {
   /**
@@ -758,7 +665,6 @@ export interface Event {
   statusCode: number
 }
 
-
 export interface SystemEvent {
   /**
    * ID of the system event.
@@ -802,7 +708,6 @@ export interface SystemEvent {
   kind: SystemEventKind
 }
 
-
 export interface ExportJobS3 {
   bucket: string
   /**
@@ -813,18 +718,15 @@ export interface ExportJobS3 {
   projectId?: string
 }
 
-
 export interface ExportJobStatus {
   code: ExportJobStatusCode
   message?: string
 }
 
-
 export interface ProductService {
   name: string
   methods: string[]
 }
-
 
 export interface AlertRule {
   /**
@@ -845,7 +747,6 @@ export interface AlertRule {
   status: AlertRuleStatus
 }
 
-
 export interface ListCombinedEventsResponseCombinedEvent {
   /**
    *
@@ -863,7 +764,6 @@ export interface ListCombinedEventsResponseCombinedEvent {
    */
   system?: SystemEvent
 }
-
 
 export interface ExportJob {
   /**
@@ -902,7 +802,6 @@ export interface ExportJob {
   lastStatus?: ExportJobStatus
 }
 
-
 export interface Product {
   /**
    * Product title.
@@ -917,7 +816,6 @@ export interface Product {
    */
   services: ProductService[]
 }
-
 
 export type CreateExportJobRequest = {
   /**
@@ -944,7 +842,6 @@ export type CreateExportJobRequest = {
   tags?: string[]
 }
 
-
 export type DeleteExportJobRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -955,7 +852,6 @@ export type DeleteExportJobRequest = {
    */
   exportJobId: string
 }
-
 
 export type DisableAlertRulesRequest = {
   /**
@@ -972,14 +868,12 @@ export type DisableAlertRulesRequest = {
   alertRuleIds?: string[]
 }
 
-
 export interface DisableAlertRulesResponse {
   /**
    * List of the rules that were disabled.
    */
   alertRules: AlertRule[]
 }
-
 
 export type EnableAlertRulesRequest = {
   /**
@@ -996,14 +890,12 @@ export type EnableAlertRulesRequest = {
   alertRuleIds?: string[]
 }
 
-
 export interface EnableAlertRulesResponse {
   /**
    * List of the rules that were enabled.
    */
   alertRules: AlertRule[]
 }
-
 
 export type ListAlertRulesRequest = {
   /**
@@ -1022,7 +914,6 @@ export type ListAlertRulesRequest = {
   pageSize?: number
 }
 
-
 export interface ListAlertRulesResponse {
   /**
    * Single page of alert rules matching the requested criteria.
@@ -1033,7 +924,6 @@ export interface ListAlertRulesResponse {
    */
   totalCount: number
 }
-
 
 export type ListAuthenticationEventsRequest = {
   /**
@@ -1048,12 +938,10 @@ export type ListAuthenticationEventsRequest = {
   pageToken?: string
 }
 
-
 export interface ListAuthenticationEventsResponse {
   events: AuthenticationEvent[]
   nextPageToken?: string
 }
-
 
 export type ListCombinedEventsRequest = {
   /**
@@ -1070,12 +958,10 @@ export type ListCombinedEventsRequest = {
   pageToken?: string
 }
 
-
 export interface ListCombinedEventsResponse {
   events: ListCombinedEventsResponseCombinedEvent[]
   nextPageToken?: string
 }
-
 
 export type ListEventsRequest = {
   /**
@@ -1135,7 +1021,6 @@ export type ListEventsRequest = {
   sourceIp?: string
 }
 
-
 export interface ListEventsResponse {
   /**
    * Single page of events matching the requested criteria.
@@ -1146,7 +1031,6 @@ export interface ListEventsResponse {
    */
   nextPageToken?: string
 }
-
 
 export type ListExportJobsRequest = {
   /**
@@ -1170,7 +1054,6 @@ export type ListExportJobsRequest = {
   orderBy?: ListExportJobsRequestOrderBy
 }
 
-
 export interface ListExportJobsResponse {
   /**
    * Single page of export jobs matching the requested criteria.
@@ -1181,7 +1064,6 @@ export interface ListExportJobsResponse {
    */
   totalCount: number
 }
-
 
 export type ListProductsRequest = {
   /**
@@ -1194,7 +1076,6 @@ export type ListProductsRequest = {
   organizationId?: string
 }
 
-
 export interface ListProductsResponse {
   /**
    * List of all products integrated with Audit Trail.
@@ -1205,7 +1086,6 @@ export interface ListProductsResponse {
    */
   totalCount: number
 }
-
 
 export type ListSystemEventsRequest = {
   /**
@@ -1229,7 +1109,6 @@ export type ListSystemEventsRequest = {
   pageToken?: string
 }
 
-
 export interface ListSystemEventsResponse {
   /**
    * Single page of system events matching the requested criteria.
@@ -1240,7 +1119,6 @@ export interface ListSystemEventsResponse {
    */
   nextPageToken?: string
 }
-
 
 export type SetEnabledAlertRulesRequest = {
   /**
@@ -1257,12 +1135,9 @@ export type SetEnabledAlertRulesRequest = {
   enabledAlertRuleIds?: string[]
 }
 
-
 export interface SetEnabledAlertRulesResponse {
   /**
    * List of the rules that were enabled.
    */
   alertRules: AlertRule[]
 }
-
-

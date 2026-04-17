@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { WaitForOptions, } from '@scaleway/sdk-client'
+import type { WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -9,7 +9,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST,} from './content.gen.js'
+import { HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST } from './content.gen.js'
 import {
   marshalCreateHumanRequest,
   marshalRegisterRequest,
@@ -53,9 +53,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
   register = (request: Readonly<RegisterRequest>) =>
     this.client.fetch<RegisterResponse>(
       {
-        body: JSON.stringify(
-          marshalRegisterRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalRegisterRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/test/v1/register`,
@@ -63,7 +61,6 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalRegisterResponse,
     )
 
-  
   protected pageOfListHumans = (request: Readonly<ListHumansRequest> = {}) =>
     this.client.fetch<ListHumansResponse>(
       {
@@ -79,7 +76,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       },
       unmarshalListHumansResponse,
     )
-  
+
   /**
    * List all your humans.
    *
@@ -89,7 +86,6 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
   listHumans = (request: Readonly<ListHumansRequest> = {}) =>
     enrichForPagination('humans', this.pageOfListHumans, request)
 
-  
   /**
    * Get human details. Get the human details associated with the given id.
    *
@@ -104,7 +100,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       },
       unmarshalHuman,
     )
-  
+
   /**
    * Waits for {@link Human} to be in a final state.
    *
@@ -112,10 +108,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param options - The waiting options
    * @returns A Promise of Human
    */
-  waitForHuman = (
-    request: Readonly<GetHumanRequest>,
-    options?: Readonly<WaitForOptions<Human>>,
-  ) =>
+  waitForHuman = (request: Readonly<GetHumanRequest>, options?: Readonly<WaitForOptions<Human>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!HUMAN_TRANSIENT_STATUSES_TEST.includes(res.status))),
       this.getHuman,
@@ -123,7 +116,6 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       options,
     )
 
-  
   /**
    * Create a new human.
    *
@@ -133,9 +125,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
   createHuman = (request: Readonly<CreateHumanRequest>) =>
     this.client.fetch<Human>(
       {
-        body: JSON.stringify(
-          marshalCreateHumanRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateHumanRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/test/v1/humans`,
@@ -143,7 +133,6 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalHuman,
     )
 
-  
   /**
    * Update an existing human. Update the human associated with the given id.
    *
@@ -153,9 +142,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
   updateHuman = (request: Readonly<UpdateHumanRequest>) =>
     this.client.fetch<Human>(
       {
-        body: JSON.stringify(
-          marshalUpdateHumanRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateHumanRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}`,
@@ -163,7 +150,6 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalHuman,
     )
 
-  
   /**
    * Delete an existing human. Delete the human associated with the given id.
    *
@@ -179,7 +165,6 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalHuman,
     )
 
-  
   /**
    * Start a 1h running for the given human. Start a one hour running for the given human.
    *
@@ -197,7 +182,6 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       unmarshalHuman,
     )
 
-  
   /**
    * Make a human smoke.
    *
@@ -215,7 +199,4 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
       },
       unmarshalHuman,
     )
-
-  
 }
-

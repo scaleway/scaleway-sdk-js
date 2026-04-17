@@ -1,6 +1,5 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   ListServerPrivateNetworksResponse,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
@@ -11,9 +10,7 @@ import type {
 
 export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwork => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ServerPrivateNetwork' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -31,9 +28,7 @@ export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwo
 
 export const unmarshalListServerPrivateNetworksResponse = (data: unknown): ListServerPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListServerPrivateNetworksResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -44,9 +39,7 @@ export const unmarshalListServerPrivateNetworksResponse = (data: unknown): ListS
 
 export const unmarshalSetServerPrivateNetworksResponse = (data: unknown): SetServerPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'SetServerPrivateNetworksResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -66,5 +59,5 @@ export const marshalPrivateNetworkApiSetServerPrivateNetworksRequest = (
   request: PrivateNetworkApiSetServerPrivateNetworksRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  per_private_network_ipam_ip_ids:  request.perPrivateNetworkIpamIpIds,
+  per_private_network_ipam_ip_ids: request.perPrivateNetworkIpamIpIds,
 })

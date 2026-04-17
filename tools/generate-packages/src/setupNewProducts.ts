@@ -8,13 +8,7 @@
  */
 
 import { execSync } from 'node:child_process'
-import {
-  existsSync,
-  readdirSync,
-  readFileSync,
-  statSync,
-  writeFileSync,
-} from 'node:fs'
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { cwd } from 'node:process'
 import type { ParseArgsConfig } from 'node:util'
@@ -61,10 +55,7 @@ const REQUIRED_PRODUCT_FILES = [
   'README.md',
 ] as const
 
-const OPTIONAL_PRODUCT_FILES: Record<
-  string,
-  Set<(typeof REQUIRED_PRODUCT_FILES)[number]>
-> = {
+const OPTIONAL_PRODUCT_FILES: Record<string, Set<(typeof REQUIRED_PRODUCT_FILES)[number]>> = {
   std: new Set(['README.md']),
 }
 
@@ -171,17 +162,11 @@ function detectPackageScope(sdkPackageJsonPath: string): Scope {
   }
   const sdkPackage = safeReadJson(sdkPackageJsonPath) as SdkPackageJson
   const deps: Record<string, string> = sdkPackage?.dependencies ?? {}
-  const hasInternal = Object.keys(deps).some(k =>
-    k.startsWith('@scaleway-internal/sdk-'),
-  )
+  const hasInternal = Object.keys(deps).some(k => k.startsWith('@scaleway-internal/sdk-'))
   return hasInternal ? '@scaleway-internal' : '@scaleway'
 }
 
-function updateSdkPackageJson(
-  sdkPackageJsonPath: string,
-  newProducts: Product[],
-  scope: Scope,
-): { added: string[] } {
+function updateSdkPackageJson(sdkPackageJsonPath: string, newProducts: Product[], scope: Scope): { added: string[] } {
   if (!existsSync(sdkPackageJsonPath)) {
     warn('⚠️  SDK package.json not found, skipping update')
     return { added: [] }
@@ -237,7 +222,7 @@ function runCommand(command: string, description: string): void {
   }
 }
 
-async function main(): Promise<number> {
+export async function setupNewProducts(): Promise<number> {
   info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
   info('🤖 Setup New Products')
   info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n')
@@ -304,7 +289,7 @@ async function main(): Promise<number> {
   return 0
 }
 
-main()
+setupNewProducts()
   .then(code => process.exit(code))
   .catch(e => {
     err('❌ Error:', e instanceof Error ? e.message : String(e))

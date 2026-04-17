@@ -2,31 +2,13 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type { Region as ScwRegion, TimeSeries } from '@scaleway/sdk-client'
 
+export type DeviceMessageFiltersRulePolicy = 'unknown' | 'accept' | 'reject'
 
-export type DeviceMessageFiltersRulePolicy =
-  | 'unknown'
-  | 'accept'
-  | 'reject'
+export type DeviceStatus = 'unknown' | 'error' | 'enabled' | 'disabled'
 
-export type DeviceStatus =
-  | 'unknown'
-  | 'error'
-  | 'enabled'
-  | 'disabled'
+export type HubProductPlan = 'plan_unknown' | 'plan_shared' | 'plan_dedicated' | 'plan_ha'
 
-export type HubProductPlan =
-  | 'plan_unknown'
-  | 'plan_shared'
-  | 'plan_dedicated'
-  | 'plan_ha'
-
-export type HubStatus =
-  | 'unknown'
-  | 'error'
-  | 'enabling'
-  | 'ready'
-  | 'disabling'
-  | 'disabled'
+export type HubStatus = 'unknown' | 'error' | 'enabling' | 'ready' | 'disabling' | 'disabled'
 
 export type ListDevicesRequestOrderBy =
   | 'name_asc'
@@ -72,34 +54,15 @@ export type ListRoutesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
-export type NetworkNetworkType =
-  | 'unknown'
-  | 'sigfox'
-  | 'rest'
+export type NetworkNetworkType = 'unknown' | 'sigfox' | 'rest'
 
-export type RouteDatabaseConfigEngine =
-  | 'unknown'
-  | 'postgresql'
-  | 'mysql'
+export type RouteDatabaseConfigEngine = 'unknown' | 'postgresql' | 'mysql'
 
-export type RouteRestConfigHttpVerb =
-  | 'unknown'
-  | 'get'
-  | 'post'
-  | 'put'
-  | 'patch'
-  | 'delete'
+export type RouteRestConfigHttpVerb = 'unknown' | 'get' | 'post' | 'put' | 'patch' | 'delete'
 
-export type RouteRouteType =
-  | 'unknown'
-  | 's3'
-  | 'database'
-  | 'rest'
+export type RouteRouteType = 'unknown' | 's3' | 'database' | 'rest'
 
-export type RouteS3ConfigS3Strategy =
-  | 'unknown'
-  | 'per_topic'
-  | 'per_message'
+export type RouteS3ConfigS3Strategy = 'unknown' | 'per_topic' | 'per_message'
 
 export interface DeviceMessageFiltersRule {
   /**
@@ -113,7 +76,6 @@ If set to `reject`, all topics in the topics list will be denied, with all other
   topics?: string[]
 }
 
-
 export interface DeviceMessageFilters {
   /**
    * Filtering rule to restrict topics the device can publish to.
@@ -125,17 +87,14 @@ export interface DeviceMessageFilters {
   subscribe?: DeviceMessageFiltersRule
 }
 
-
 export interface HubTwinsGraphiteConfig {
   pushUri: string
 }
-
 
 export interface Certificate {
   crt: string
   key: string
 }
-
 
 export interface Device {
   /**
@@ -196,7 +155,6 @@ export interface Device {
   region: ScwRegion
 }
 
-
 export interface Network {
   /**
    * Network ID.
@@ -232,7 +190,6 @@ export interface Network {
   region: ScwRegion
 }
 
-
 export interface CreateRouteRequestDatabaseConfig {
   host: string
   port: number
@@ -243,13 +200,11 @@ export interface CreateRouteRequestDatabaseConfig {
   engine: RouteDatabaseConfigEngine
 }
 
-
 export interface CreateRouteRequestRestConfig {
   verb: RouteRestConfigHttpVerb
   uri: string
   headers: Record<string, string>
 }
-
 
 export interface CreateRouteRequestS3Config {
   bucketRegion: string
@@ -257,7 +212,6 @@ export interface CreateRouteRequestS3Config {
   objectPrefix: string
   strategy: RouteS3ConfigS3Strategy
 }
-
 
 export interface Hub {
   /**
@@ -336,7 +290,6 @@ export interface Hub {
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
 
-
 export interface RouteSummary {
   /**
    * Route ID.
@@ -372,14 +325,12 @@ export interface RouteSummary {
   region: ScwRegion
 }
 
-
 export interface ListTwinDocumentsResponseDocumentSummary {
   /**
    * Name of the document.
    */
   documentName: string
 }
-
 
 export interface RouteDatabaseConfig {
   /**
@@ -412,7 +363,6 @@ export interface RouteDatabaseConfig {
   query: string
 }
 
-
 export interface RouteRestConfig {
   /**
    * HTTP verb used to call REST URI.
@@ -427,7 +377,6 @@ export interface RouteRestConfig {
    */
   headers: Record<string, string>
 }
-
 
 export interface RouteS3Config {
   /**
@@ -448,7 +397,6 @@ export interface RouteS3Config {
   strategy: RouteS3ConfigS3Strategy
 }
 
-
 export interface UpdateRouteRequestDatabaseConfig {
   host?: string
   port?: number
@@ -459,13 +407,11 @@ export interface UpdateRouteRequestDatabaseConfig {
   engine: RouteDatabaseConfigEngine
 }
 
-
 export interface UpdateRouteRequestRestConfig {
   verb: RouteRestConfigHttpVerb
   uri?: string
   headers?: Record<string, string>
 }
-
 
 export interface UpdateRouteRequestS3Config {
   bucketRegion?: string
@@ -473,7 +419,6 @@ export interface UpdateRouteRequestS3Config {
   objectPrefix?: string
   strategy: RouteS3ConfigS3Strategy
 }
-
 
 export type CreateDeviceRequest = {
   /**
@@ -506,7 +451,6 @@ export type CreateDeviceRequest = {
   description?: string
 }
 
-
 export interface CreateDeviceResponse {
   /**
    * Information related to the created device.
@@ -517,7 +461,6 @@ export interface CreateDeviceResponse {
    */
   certificate?: Certificate
 }
-
 
 export type CreateHubRequest = {
   /**
@@ -552,7 +495,6 @@ export type CreateHubRequest = {
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
 
-
 export type CreateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -576,7 +518,6 @@ export type CreateNetworkRequest = {
   topicPrefix: string
 }
 
-
 export interface CreateNetworkResponse {
   /**
    * Information related to the created network.
@@ -587,7 +528,6 @@ export interface CreateNetworkResponse {
    */
   secret: string
 }
-
 
 export type CreateRouteRequest = {
   /**
@@ -626,7 +566,6 @@ export type CreateRouteRequest = {
   restConfig?: CreateRouteRequestRestConfig
 }
 
-
 export type DeleteDeviceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -637,7 +576,6 @@ export type DeleteDeviceRequest = {
    */
   deviceId: string
 }
-
 
 export type DeleteHubRequest = {
   /**
@@ -654,7 +592,6 @@ export type DeleteHubRequest = {
   deleteDevices?: boolean
 }
 
-
 export type DeleteNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -666,7 +603,6 @@ export type DeleteNetworkRequest = {
   networkId: string
 }
 
-
 export type DeleteRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -677,7 +613,6 @@ export type DeleteRouteRequest = {
    */
   routeId: string
 }
-
 
 export type DeleteTwinDocumentRequest = {
   /**
@@ -694,7 +629,6 @@ export type DeleteTwinDocumentRequest = {
   documentName: string
 }
 
-
 export type DeleteTwinDocumentsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -705,7 +639,6 @@ export type DeleteTwinDocumentsRequest = {
    */
   twinId: string
 }
-
 
 export type DisableDeviceRequest = {
   /**
@@ -718,7 +651,6 @@ export type DisableDeviceRequest = {
   deviceId: string
 }
 
-
 export type DisableHubRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -729,7 +661,6 @@ export type DisableHubRequest = {
    */
   hubId: string
 }
-
 
 export type EnableDeviceRequest = {
   /**
@@ -742,7 +673,6 @@ export type EnableDeviceRequest = {
   deviceId: string
 }
 
-
 export type EnableHubRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -753,7 +683,6 @@ export type EnableHubRequest = {
    */
   hubId: string
 }
-
 
 export type GetDeviceCertificateRequest = {
   /**
@@ -766,7 +695,6 @@ export type GetDeviceCertificateRequest = {
   deviceId: string
 }
 
-
 export interface GetDeviceCertificateResponse {
   /**
    * Information related to the created device.
@@ -777,7 +705,6 @@ export interface GetDeviceCertificateResponse {
    */
   certificatePem: string
 }
-
 
 export type GetDeviceMetricsRequest = {
   /**
@@ -794,14 +721,12 @@ export type GetDeviceMetricsRequest = {
   startDate?: Date
 }
 
-
 export interface GetDeviceMetricsResponse {
   /**
    * Metrics for a device over the requested period.
    */
   metrics: TimeSeries[]
 }
-
 
 export type GetDeviceRequest = {
   /**
@@ -814,7 +739,6 @@ export type GetDeviceRequest = {
   deviceId: string
 }
 
-
 export type GetHubCARequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -823,11 +747,9 @@ export type GetHubCARequest = {
   hubId: string
 }
 
-
 export interface GetHubCAResponse {
   caCertPem: string
 }
-
 
 export type GetHubMetricsRequest = {
   /**
@@ -844,14 +766,12 @@ export type GetHubMetricsRequest = {
   startDate?: Date
 }
 
-
 export interface GetHubMetricsResponse {
   /**
    * Metrics for a Hub over the requested period.
    */
   metrics: TimeSeries[]
 }
-
 
 export type GetHubRequest = {
   /**
@@ -864,7 +784,6 @@ export type GetHubRequest = {
   hubId: string
 }
 
-
 export type GetNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -876,7 +795,6 @@ export type GetNetworkRequest = {
   networkId: string
 }
 
-
 export type GetRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -887,7 +805,6 @@ export type GetRouteRequest = {
    */
   routeId: string
 }
-
 
 export type GetTwinDocumentRequest = {
   /**
@@ -903,7 +820,6 @@ export type GetTwinDocumentRequest = {
    */
   documentName: string
 }
-
 
 export type ListDevicesRequest = {
   /**
@@ -940,7 +856,6 @@ export type ListDevicesRequest = {
   status?: DeviceStatus
 }
 
-
 export interface ListDevicesResponse {
   /**
    * Total number of devices.
@@ -951,7 +866,6 @@ export interface ListDevicesResponse {
    */
   devices: Device[]
 }
-
 
 export type ListHubsRequest = {
   /**
@@ -984,7 +898,6 @@ export type ListHubsRequest = {
   name?: string
 }
 
-
 export interface ListHubsResponse {
   /**
    * Total number of Hubs.
@@ -995,7 +908,6 @@ export interface ListHubsResponse {
    */
   hubs: Hub[]
 }
-
 
 export type ListNetworksRequest = {
   /**
@@ -1028,7 +940,6 @@ export type ListNetworksRequest = {
   topicPrefix?: string
 }
 
-
 export interface ListNetworksResponse {
   /**
    * Total number of Networks.
@@ -1039,7 +950,6 @@ export interface ListNetworksResponse {
    */
   networks: Network[]
 }
-
 
 export type ListRoutesRequest = {
   /**
@@ -1068,7 +978,6 @@ export type ListRoutesRequest = {
   name?: string
 }
 
-
 export interface ListRoutesResponse {
   /**
    * Total number of routes.
@@ -1079,7 +988,6 @@ export interface ListRoutesResponse {
    */
   routes: RouteSummary[]
 }
-
 
 export type ListTwinDocumentsRequest = {
   /**
@@ -1092,14 +1000,12 @@ export type ListTwinDocumentsRequest = {
   twinId: string
 }
 
-
 export interface ListTwinDocumentsResponse {
   /**
    * List of the twin document.
    */
   documents: ListTwinDocumentsResponseDocumentSummary[]
 }
-
 
 export type PatchTwinDocumentRequest = {
   /**
@@ -1129,7 +1035,6 @@ Patching rules:
   data?: Record<string, unknown>
 }
 
-
 export type PutTwinDocumentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1153,7 +1058,6 @@ export type PutTwinDocumentRequest = {
   data?: Record<string, unknown>
 }
 
-
 export type RenewDeviceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1165,7 +1069,6 @@ export type RenewDeviceCertificateRequest = {
   deviceId: string
 }
 
-
 export interface RenewDeviceCertificateResponse {
   /**
    * Information related to the created device.
@@ -1176,7 +1079,6 @@ export interface RenewDeviceCertificateResponse {
    */
   certificate?: Certificate
 }
-
 
 export interface Route {
   /**
@@ -1231,7 +1133,6 @@ export interface Route {
   region: ScwRegion
 }
 
-
 export type SetDeviceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1247,12 +1148,10 @@ export type SetDeviceCertificateRequest = {
   certificatePem: string
 }
 
-
 export interface SetDeviceCertificateResponse {
   device?: Device
   certificatePem: string
 }
-
 
 export type SetHubCARequest = {
   /**
@@ -1273,7 +1172,6 @@ export type SetHubCARequest = {
   challengeCertPem: string
 }
 
-
 export interface TwinDocument {
   /**
    * Parent twin ID of the document.
@@ -1292,7 +1190,6 @@ export interface TwinDocument {
    */
   data?: Record<string, unknown>
 }
-
 
 export type UpdateDeviceRequest = {
   /**
@@ -1324,7 +1221,6 @@ export type UpdateDeviceRequest = {
    */
   hubId?: string
 }
-
 
 export type UpdateHubRequest = {
   /**
@@ -1363,7 +1259,6 @@ export type UpdateHubRequest = {
   twinsGraphiteConfig?: HubTwinsGraphiteConfig
 }
 
-
 export type UpdateRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1400,5 +1295,3 @@ export type UpdateRouteRequest = {
    */
   restConfig?: UpdateRouteRequestRestConfig
 }
-
-

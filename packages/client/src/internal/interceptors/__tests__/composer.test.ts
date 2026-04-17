@@ -1,8 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import {
-  composeRequestInterceptors,
-  composeResponseErrorInterceptors,
-} from '../composer.js'
+import { composeRequestInterceptors, composeResponseErrorInterceptors } from '../composer.js'
 
 describe('composeRequestInterceptors', () => {
   it('modifies the request header', async () => {
@@ -16,9 +13,7 @@ describe('composeRequestInterceptors', () => {
     ])
 
     return expect(
-      interceptor(new Request('https://api.scaleway.com')).then(obj =>
-        obj.headers.get('new-header'),
-      ),
+      interceptor(new Request('https://api.scaleway.com')).then(obj => obj.headers.get('new-header')),
     ).resolves.toBe('42')
   })
 })
@@ -37,14 +32,10 @@ describe('composeResponseErrorInterceptors', () => {
 
     const interceptors = composeResponseErrorInterceptors([
       ({ error }): Promise<unknown> => {
-        throw error instanceof NumberError
-          ? new NumberError(error.counter + 1)
-          : error
+        throw error instanceof NumberError ? new NumberError(error.counter + 1) : error
       },
       ({ error }): Promise<unknown> => {
-        throw error instanceof NumberError
-          ? new NumberError(error.counter + 2)
-          : error
+        throw error instanceof NumberError ? new NumberError(error.counter + 2) : error
       },
     ])(new Request('https://api.scaleway.com'), new NumberError(42))
 

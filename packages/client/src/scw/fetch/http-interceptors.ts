@@ -6,15 +6,9 @@
  * tooltips and generated documentation.
  */
 
-import type {
-  RequestInterceptor,
-  ResponseInterceptor,
-} from '../../internal/interceptors/types.js'
+import type { RequestInterceptor, ResponseInterceptor } from '../../internal/interceptors/types.js'
 import { getLogger } from '../../internal/logger'
-import {
-  LevelResolver,
-  shouldLog,
-} from '../../internal/logger/level-resolver.js'
+import { LevelResolver, shouldLog } from '../../internal/logger/level-resolver.js'
 import { dumpRequest, dumpResponse } from './http-dumper.js'
 
 /**
@@ -59,8 +53,7 @@ export const obfuscateInterceptor =
   ({ request }) =>
     new ObfuscatedRequest(request, obfuscate)
 
-const identity: RequestInterceptor = ({ request }: { request: Request }) =>
-  request
+const identity: RequestInterceptor = ({ request }: { request: Request }) => request
 
 /**
  * Creates an interceptor to log the requests.
@@ -72,10 +65,7 @@ const identity: RequestInterceptor = ({ request }: { request: Request }) =>
  * @internal
  */
 export const logRequest =
-  (
-    identifier: string,
-    obfuscate: RequestInterceptor = identity,
-  ): RequestInterceptor =>
+  (identifier: string, obfuscate: RequestInterceptor = identity): RequestInterceptor =>
   async ({ request }) => {
     if (shouldLog(LevelResolver[getLogger().logLevel], 'debug')) {
       getLogger().debug(

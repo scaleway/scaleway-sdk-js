@@ -1,13 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
-import type {
-  PaginatedContent,
-  PaginatedFetcher,
-} from '../resource-paginator.js'
-import {
-  enrichForPagination,
-  fetchAll,
-  fetchPaginated,
-} from '../resource-paginator.js'
+import type { PaginatedContent, PaginatedFetcher } from '../resource-paginator.js'
+import { enrichForPagination, fetchAll, fetchPaginated } from '../resource-paginator.js'
 
 const fetchPages = <T>(input: T[][] = [], delay = 0) => {
   const totalCount = input.flat().length
@@ -27,22 +20,14 @@ const fetchPages = <T>(input: T[][] = [], delay = 0) => {
 
 describe('fetchPaginated', () => {
   it('iterate page by page', async () => {
-    const input = [
-      [{ name: 'Alice' }, { name: 'Bob' }],
-      [{ name: 'Julia' }, { name: 'Thomas' }],
-      [{ name: 'David' }],
-    ]
+    const input = [[{ name: 'Alice' }, { name: 'Bob' }], [{ name: 'Julia' }, { name: 'Thomas' }], [{ name: 'David' }]]
     for await (const page of fetchPaginated('items', fetchPages(input), {})) {
       expect(page).toStrictEqual(input.shift())
     }
   })
 
   it('iterate starting from the desired page', async () => {
-    const input = [
-      [{ name: 'Alice' }, { name: 'Bob' }],
-      [{ name: 'Julia' }, { name: 'Thomas' }],
-      [{ name: 'David' }],
-    ]
+    const input = [[{ name: 'Alice' }, { name: 'Bob' }], [{ name: 'Julia' }, { name: 'Thomas' }], [{ name: 'David' }]]
     let readIndex = 2
     for await (const page of fetchPaginated('items', fetchPages(input), {
       page: readIndex,
@@ -53,10 +38,7 @@ describe('fetchPaginated', () => {
   })
 
   it('iterate without over iteration - 2 pages', async () => {
-    const twoPages = [
-      [{ name: 'Alice' }, { name: 'Bob' }],
-      [{ name: 'Claire' }],
-    ]
+    const twoPages = [[{ name: 'Alice' }, { name: 'Bob' }], [{ name: 'Claire' }]]
     const twoPagesFetcher = vi.fn(fetchPages(twoPages))
     for await (const page of fetchPaginated('items', twoPagesFetcher, {})) {
       expect(page).toStrictEqual(twoPages.shift())
@@ -95,11 +77,7 @@ describe('fetchPaginated', () => {
 
   it('throws when wrong key is provided', async () => {
     await expect(
-      fetchPaginated(
-        'x',
-        fetchPages([]) as unknown as PaginatedFetcher<PaginatedContent<'x'>>,
-        {},
-      ).next(),
+      fetchPaginated('x', fetchPages([]) as unknown as PaginatedFetcher<PaginatedContent<'x'>>, {}).next(),
     ).rejects.toThrow(`Property x is not a list in paginated result`)
   })
 })
@@ -129,9 +107,7 @@ describe('fetchAll', () => {
     const delay = 50
     const tolerance = 50
     const startTime = Date.now()
-    expect(await fetchAll('items', fetchPages(input, 50), {})).toStrictEqual(
-      input.flat(),
-    )
+    expect(await fetchAll('items', fetchPages(input, 50), {})).toStrictEqual(input.flat())
     expect(Date.now() - startTime).toBeLessThanOrEqual(2 * delay + tolerance)
   })
 })
@@ -140,9 +116,7 @@ describe('enrichForPagination', () => {
   const input = [[{ name: 'Rémy' }, { name: 'Jaime' }], [{ name: 'Vincent' }]]
 
   it('can fetch all items', () =>
-    expect(
-      enrichForPagination('items', fetchPages(input), {}).all(),
-    ).resolves.toStrictEqual(input.flat()))
+    expect(enrichForPagination('items', fetchPages(input), {}).all()).resolves.toStrictEqual(input.flat()))
 
   it('can fetch items page by page', async () => {
     let readIndex = 1

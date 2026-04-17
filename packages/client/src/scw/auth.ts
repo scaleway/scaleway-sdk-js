@@ -6,10 +6,7 @@
  * tooltips and generated documentation.
  */
 
-import {
-  addAsyncHeaderInterceptor,
-  addHeaderInterceptor,
-} from '../internal/interceptors/helpers.js'
+import { addAsyncHeaderInterceptor, addHeaderInterceptor } from '../internal/interceptors/helpers.js'
 import type { RequestInterceptor } from '../internal/interceptors/types.js'
 import type { AuthenticationSecrets } from './client-ini-profile.js'
 import { assertValidAuthenticationSecrets } from './client-ini-profile.js'
@@ -31,10 +28,7 @@ interface AddSessionHeader {
  * @returns The Request interceptor
  *
  */
-export const addSessionHeader = async ({
-  request,
-  getAsyncToken,
-}: AddSessionHeader) =>
+export const addSessionHeader = async ({ request, getAsyncToken }: AddSessionHeader) =>
   addAsyncHeaderInterceptor(SESSION_HEADER_KEY, getAsyncToken)({ request })
 
 /**
@@ -47,9 +41,8 @@ export const addSessionHeader = async ({
  *
  * @internal
  */
-export const authenticateWithSessionToken = (
-  getToken: TokenAccessor,
-): RequestInterceptor => addAsyncHeaderInterceptor(SESSION_HEADER_KEY, getToken)
+export const authenticateWithSessionToken = (getToken: TokenAccessor): RequestInterceptor =>
+  addAsyncHeaderInterceptor(SESSION_HEADER_KEY, getToken)
 
 /**
  * Authenticates with a secrets.
@@ -62,9 +55,7 @@ export const authenticateWithSessionToken = (
  *
  * @internal
  */
-export const authenticateWithSecrets = (
-  secrets: AuthenticationSecrets,
-): RequestInterceptor => {
+export const authenticateWithSecrets = (secrets: AuthenticationSecrets): RequestInterceptor => {
   assertValidAuthenticationSecrets(secrets)
 
   return addHeaderInterceptor(AUTH_HEADER_KEY, secrets.secretKey)
@@ -89,8 +80,7 @@ export const obfuscateToken = (key: string): string =>
  *
  * @internal
  */
-export const obfuscateUUID = (key: string): string =>
-  `${key.substring(0, 8)}-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+export const obfuscateUUID = (key: string): string => `${key.substring(0, 8)}-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
 type HeaderEntry = [string, string]
 
@@ -102,10 +92,7 @@ type HeaderEntry = [string, string]
  *
  * @internal
  */
-export const obfuscateAuthHeadersEntry = ([
-  name,
-  value,
-]: HeaderEntry): HeaderEntry => {
+export const obfuscateAuthHeadersEntry = ([name, value]: HeaderEntry): HeaderEntry => {
   if (name === SESSION_HEADER_KEY) return [name, obfuscateToken(value)]
   if (name === AUTH_HEADER_KEY) return [name, obfuscateUUID(value)]
 

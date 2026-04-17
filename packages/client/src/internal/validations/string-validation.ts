@@ -1,8 +1,7 @@
 const isAccessKeyRegex = /^SCW[A-Z0-9]{17}$/i
 const isEmailRegex = /^.+@.+$/i
 const isRegionRegex = /^[a-z]{2}-[a-z]{3}$/i
-const isUUIDRegex =
-  /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/i
+const isUUIDRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/i
 const isZoneRegex = /^[a-z]{2}-[a-z]{3}-[1-9]$/i
 
 /** Returns true if the given string has a valid UUID format. */

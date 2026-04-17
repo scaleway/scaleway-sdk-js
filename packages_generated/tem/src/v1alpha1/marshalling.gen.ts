@@ -1,6 +1,5 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   Blocklist,
   BulkCreateBlocklistsRequest,
@@ -54,9 +53,7 @@ import type {
 
 const unmarshalEmailTry = (data: unknown): EmailTry => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EmailTry' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'EmailTry' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -69,9 +66,7 @@ const unmarshalEmailTry = (data: unknown): EmailTry => {
 
 export const unmarshalEmail = (data: unknown): Email => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Email' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Email' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -95,9 +90,7 @@ export const unmarshalEmail = (data: unknown): Email => {
 
 const unmarshalDomainRecordsDKIM = (data: unknown): DomainRecordsDKIM => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordsDKIM' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainRecordsDKIM' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -108,9 +101,7 @@ const unmarshalDomainRecordsDKIM = (data: unknown): DomainRecordsDKIM => {
 
 const unmarshalDomainRecordsDMARC = (data: unknown): DomainRecordsDMARC => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordsDMARC' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainRecordsDMARC' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -121,9 +112,7 @@ const unmarshalDomainRecordsDMARC = (data: unknown): DomainRecordsDMARC => {
 
 const unmarshalDomainRecordsMX = (data: unknown): DomainRecordsMX => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordsMX' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainRecordsMX' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -134,9 +123,7 @@ const unmarshalDomainRecordsMX = (data: unknown): DomainRecordsMX => {
 
 const unmarshalDomainRecordsSPF = (data: unknown): DomainRecordsSPF => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecordsSPF' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainRecordsSPF' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -147,9 +134,7 @@ const unmarshalDomainRecordsSPF = (data: unknown): DomainRecordsSPF => {
 
 const unmarshalDomainRecords = (data: unknown): DomainRecords => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainRecords' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainRecords' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -162,9 +147,7 @@ const unmarshalDomainRecords = (data: unknown): DomainRecords => {
 
 const unmarshalDomainReputation = (data: unknown): DomainReputation => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainReputation' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainReputation' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -178,9 +161,7 @@ const unmarshalDomainReputation = (data: unknown): DomainReputation => {
 
 const unmarshalDomainStatistics = (data: unknown): DomainStatistics => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainStatistics' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainStatistics' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -193,9 +174,7 @@ const unmarshalDomainStatistics = (data: unknown): DomainStatistics => {
 
 export const unmarshalDomain = (data: unknown): Domain => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Domain' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Domain' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -221,9 +200,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
 
 export const unmarshalOfferSubscription = (data: unknown): OfferSubscription => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'OfferSubscription' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'OfferSubscription' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -243,9 +220,7 @@ export const unmarshalOfferSubscription = (data: unknown): OfferSubscription => 
 
 export const unmarshalWebhook = (data: unknown): Webhook => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Webhook' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Webhook' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -263,9 +238,7 @@ export const unmarshalWebhook = (data: unknown): Webhook => {
 
 const unmarshalBlocklist = (data: unknown): Blocklist => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Blocklist' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Blocklist' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -283,9 +256,7 @@ const unmarshalBlocklist = (data: unknown): Blocklist => {
 
 export const unmarshalBulkCreateBlocklistsResponse = (data: unknown): BulkCreateBlocklistsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'BulkCreateBlocklistsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'BulkCreateBlocklistsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -295,9 +266,7 @@ export const unmarshalBulkCreateBlocklistsResponse = (data: unknown): BulkCreate
 
 export const unmarshalCreateEmailResponse = (data: unknown): CreateEmailResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CreateEmailResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'CreateEmailResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -307,9 +276,7 @@ export const unmarshalCreateEmailResponse = (data: unknown): CreateEmailResponse
 
 const unmarshalDomainLastStatusAutoconfigState = (data: unknown): DomainLastStatusAutoconfigState => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainLastStatusAutoconfigState' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainLastStatusAutoconfigState' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -321,9 +288,7 @@ const unmarshalDomainLastStatusAutoconfigState = (data: unknown): DomainLastStat
 
 const unmarshalDomainLastStatusDkimRecord = (data: unknown): DomainLastStatusDkimRecord => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainLastStatusDkimRecord' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainLastStatusDkimRecord' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -335,9 +300,7 @@ const unmarshalDomainLastStatusDkimRecord = (data: unknown): DomainLastStatusDki
 
 const unmarshalDomainLastStatusDmarcRecord = (data: unknown): DomainLastStatusDmarcRecord => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainLastStatusDmarcRecord' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainLastStatusDmarcRecord' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -349,9 +312,7 @@ const unmarshalDomainLastStatusDmarcRecord = (data: unknown): DomainLastStatusDm
 
 const unmarshalDomainLastStatusMXRecord = (data: unknown): DomainLastStatusMXRecord => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainLastStatusMXRecord' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainLastStatusMXRecord' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -363,9 +324,7 @@ const unmarshalDomainLastStatusMXRecord = (data: unknown): DomainLastStatusMXRec
 
 const unmarshalDomainLastStatusSpfRecord = (data: unknown): DomainLastStatusSpfRecord => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainLastStatusSpfRecord' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainLastStatusSpfRecord' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -377,13 +336,13 @@ const unmarshalDomainLastStatusSpfRecord = (data: unknown): DomainLastStatusSpfR
 
 export const unmarshalDomainLastStatus = (data: unknown): DomainLastStatus => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DomainLastStatus' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DomainLastStatus' failed as data isn't a dictionary.`)
   }
 
   return {
-    autoconfigState: data.autoconfig_state ? unmarshalDomainLastStatusAutoconfigState(data.autoconfig_state) : undefined,
+    autoconfigState: data.autoconfig_state
+      ? unmarshalDomainLastStatusAutoconfigState(data.autoconfig_state)
+      : undefined,
     dkimRecord: data.dkim_record ? unmarshalDomainLastStatusDkimRecord(data.dkim_record) : undefined,
     dmarcRecord: data.dmarc_record ? unmarshalDomainLastStatusDmarcRecord(data.dmarc_record) : undefined,
     domainId: data.domain_id,
@@ -395,9 +354,7 @@ export const unmarshalDomainLastStatus = (data: unknown): DomainLastStatus => {
 
 export const unmarshalListBlocklistsResponse = (data: unknown): ListBlocklistsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListBlocklistsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListBlocklistsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -408,9 +365,7 @@ export const unmarshalListBlocklistsResponse = (data: unknown): ListBlocklistsRe
 
 export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListDomainsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -421,9 +376,7 @@ export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse
 
 export const unmarshalListEmailsResponse = (data: unknown): ListEmailsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListEmailsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListEmailsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -434,9 +387,7 @@ export const unmarshalListEmailsResponse = (data: unknown): ListEmailsResponse =
 
 export const unmarshalListOfferSubscriptionsResponse = (data: unknown): ListOfferSubscriptionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListOfferSubscriptionsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListOfferSubscriptionsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -447,9 +398,7 @@ export const unmarshalListOfferSubscriptionsResponse = (data: unknown): ListOffe
 
 const unmarshalOffer = (data: unknown): Offer => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Offer' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Offer' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -467,9 +416,7 @@ const unmarshalOffer = (data: unknown): Offer => {
 
 export const unmarshalListOffersResponse = (data: unknown): ListOffersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListOffersResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -480,9 +427,7 @@ export const unmarshalListOffersResponse = (data: unknown): ListOffersResponse =
 
 const unmarshalPool = (data: unknown): Pool => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Pool' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Pool' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -497,9 +442,7 @@ const unmarshalPool = (data: unknown): Pool => {
 
 export const unmarshalListPoolsResponse = (data: unknown): ListPoolsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListPoolsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListPoolsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -510,9 +453,7 @@ export const unmarshalListPoolsResponse = (data: unknown): ListPoolsResponse => 
 
 const unmarshalWebhookEvent = (data: unknown): WebhookEvent => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'WebhookEvent' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'WebhookEvent' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -532,9 +473,7 @@ const unmarshalWebhookEvent = (data: unknown): WebhookEvent => {
 
 export const unmarshalListWebhookEventsResponse = (data: unknown): ListWebhookEventsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListWebhookEventsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListWebhookEventsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -545,9 +484,7 @@ export const unmarshalListWebhookEventsResponse = (data: unknown): ListWebhookEv
 
 export const unmarshalListWebhooksResponse = (data: unknown): ListWebhooksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListWebhooksResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListWebhooksResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -558,9 +495,7 @@ export const unmarshalListWebhooksResponse = (data: unknown): ListWebhooksRespon
 
 export const unmarshalProjectConsumption = (data: unknown): ProjectConsumption => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ProjectConsumption' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ProjectConsumption' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -575,9 +510,7 @@ export const unmarshalProjectConsumption = (data: unknown): ProjectConsumption =
 
 const unmarshalProjectSettingsPeriodicReport = (data: unknown): ProjectSettingsPeriodicReport => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ProjectSettingsPeriodicReport' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ProjectSettingsPeriodicReport' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -590,9 +523,7 @@ const unmarshalProjectSettingsPeriodicReport = (data: unknown): ProjectSettingsP
 
 export const unmarshalProjectSettings = (data: unknown): ProjectSettings => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ProjectSettings' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ProjectSettings' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -602,9 +533,7 @@ export const unmarshalProjectSettings = (data: unknown): ProjectSettings => {
 
 export const unmarshalStatistics = (data: unknown): Statistics => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Statistics' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Statistics' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -666,17 +595,23 @@ export const marshalCreateEmailRequest = (
   request: CreateEmailRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  additional_headers: ((request.additionalHeaders !== undefined) ?  request.additionalHeaders.map(elt => marshalCreateEmailRequestHeader(elt, defaults)): undefined),
-  attachments: ((request.attachments !== undefined) ?  request.attachments.map(elt => marshalCreateEmailRequestAttachment(elt, defaults)): undefined),
-  bcc: ((request.bcc !== undefined) ?  request.bcc.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
-  cc: ((request.cc !== undefined) ?  request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
-  from:  marshalCreateEmailRequestAddress(request.from, defaults),
+  additional_headers:
+    request.additionalHeaders !== undefined
+      ? request.additionalHeaders.map(elt => marshalCreateEmailRequestHeader(elt, defaults))
+      : undefined,
+  attachments:
+    request.attachments !== undefined
+      ? request.attachments.map(elt => marshalCreateEmailRequestAttachment(elt, defaults))
+      : undefined,
+  bcc: request.bcc !== undefined ? request.bcc.map(elt => marshalCreateEmailRequestAddress(elt, defaults)) : undefined,
+  cc: request.cc !== undefined ? request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults)) : undefined,
+  from: marshalCreateEmailRequestAddress(request.from, defaults),
   html: request.html,
   project_id: request.projectId ?? defaults.defaultProjectId,
   send_before: request.sendBefore,
   subject: request.subject,
   text: request.text,
-  to: ((request.to !== undefined) ?  request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
+  to: request.to !== undefined ? request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults)) : undefined,
 })
 
 export const marshalCreateWebhookRequest = (
@@ -684,7 +619,7 @@ export const marshalCreateWebhookRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain_id: request.domainId,
-  event_types: ((request.eventTypes !== undefined) ?  request.eventTypes: undefined),
+  event_types: request.eventTypes !== undefined ? request.eventTypes : undefined,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   sns_arn: request.snsArn,
@@ -719,14 +654,17 @@ export const marshalUpdateProjectSettingsRequest = (
   request: UpdateProjectSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  periodic_report: ((request.periodicReport !== undefined) ?  marshalUpdateProjectSettingsRequestUpdatePeriodicReport(request.periodicReport, defaults): undefined),
+  periodic_report:
+    request.periodicReport !== undefined
+      ? marshalUpdateProjectSettingsRequestUpdatePeriodicReport(request.periodicReport, defaults)
+      : undefined,
 })
 
 export const marshalUpdateWebhookRequest = (
   request: UpdateWebhookRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  event_types: ((request.eventTypes !== undefined) ?  request.eventTypes: undefined),
+  event_types: request.eventTypes !== undefined ? request.eventTypes : undefined,
   name: request.name,
   sns_arn: request.snsArn,
 })

@@ -21,9 +21,7 @@ export interface PermissionsDeniedErrorDetails {
  * @internal
  */
 const buildMessage = (list: PermissionsDeniedErrorDetails[]): string =>
-  `insufficient permissions: ${list
-    .map(({ action, resource }) => `${action} ${resource}`)
-    .join('; ')}`
+  `insufficient permissions: ${list.map(({ action, resource }) => `${action} ${resource}`).join('; ')}`
 
 /**
  * PermissionsDenied error happens when one or many permissions are not accorded to the user making the request.
@@ -40,10 +38,7 @@ export class PermissionsDeniedError extends ScalewayError {
     this.name = 'PermissionsDeniedError'
   }
 
-  static fromJSON(
-    status: number,
-    obj: Readonly<JSONObject>,
-  ): ScalewayError | null {
+  static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
     if (!Array.isArray(obj.details)) return null
 
     return new PermissionsDeniedError(
@@ -51,9 +46,7 @@ export class PermissionsDeniedError extends ScalewayError {
       obj,
       obj.details.reduce<PermissionsDeniedErrorDetails[]>(
         (list, detail) =>
-          isJSONObject(detail) &&
-          typeof detail.resource === 'string' &&
-          typeof detail.action === 'string'
+          isJSONObject(detail) && typeof detail.resource === 'string' && typeof detail.action === 'string'
             ? list.concat({
                 action: detail.action,
                 resource: detail.resource,

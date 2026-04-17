@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: "@scaleway/sdk-environmental-footprint",
-  namespace: "environmental-footprint",
-  displayName: "Environmental Footprint",
-  versions: ["v1alpha1"]
+  name: '@scaleway/sdk-environmental-footprint',
+  namespace: 'environmental-footprint',
+  displayName: 'Environmental Footprint',
+  versions: ['v1alpha1'],
 } as const
 
 export type Metadata = typeof pkgMetadata

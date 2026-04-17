@@ -70,9 +70,7 @@ export function toByteArray(b64) {
   }
 
   if (placeHoldersLen === 2) {
-    tmp =
-      (revLookup[b64.charCodeAt(i)] << 2) |
-      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
     arr[curByte++] = tmp & 0xff
   }
 
@@ -89,12 +87,7 @@ export function toByteArray(b64) {
 }
 
 function tripletToBase64(num) {
-  return (
-    lookup[(num >> 18) & 0x3f] +
-    lookup[(num >> 12) & 0x3f] +
-    lookup[(num >> 6) & 0x3f] +
-    lookup[num & 0x3f]
-  )
+  return lookup[(num >> 18) & 0x3f] + lookup[(num >> 12) & 0x3f] + lookup[(num >> 6) & 0x3f] + lookup[num & 0x3f]
 }
 
 function encodeChunk(uint8, start, end) {
@@ -102,10 +95,7 @@ function encodeChunk(uint8, start, end) {
   var output = []
   var i
   for (i = start; i < end; i += 3) {
-    tmp =
-      ((uint8[i] << 16) & 0xff0000) +
-      ((uint8[i + 1] << 8) & 0xff00) +
-      (uint8[i + 2] & 0xff)
+    tmp = ((uint8[i] << 16) & 0xff0000) + ((uint8[i + 1] << 8) & 0xff00) + (uint8[i + 2] & 0xff)
     output.push(tripletToBase64(tmp))
   }
   return output.join('')
@@ -122,13 +112,7 @@ export function fromByteArray(uint8) {
 
   // go through the array every three bytes, we'll deal with trailing stuff later
   for (i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(
-      encodeChunk(
-        uint8,
-        i,
-        i + maxChunkLength > len2 ? len2 : i + maxChunkLength,
-      ),
-    )
+    parts.push(encodeChunk(uint8, i, i + maxChunkLength > len2 ? len2 : i + maxChunkLength))
   }
 
   // pad the end with zeros, but make sure to not forget the extra bytes
@@ -137,12 +121,7 @@ export function fromByteArray(uint8) {
     parts.push(`${lookup[tmp >> 2] + lookup[(tmp << 4) & 0x3f]}==`)
   } else if (extraBytes === 2) {
     tmp = (uint8[len - 2] << 8) + uint8[len - 1]
-    parts.push(
-      lookup[tmp >> 10] +
-        lookup[(tmp >> 4) & 0x3f] +
-        lookup[(tmp << 2) & 0x3f] +
-        '=',
-    )
+    parts.push(lookup[tmp >> 10] + lookup[(tmp >> 4) & 0x3f] + lookup[(tmp << 2) & 0x3f] + '=')
   }
 
   return parts.join('')

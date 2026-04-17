@@ -3,10 +3,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { env } from 'node:process'
 import { afterEach, describe, expect, it } from 'vitest'
-import {
-  loadProfileFromConfigurationFile,
-  loadProfileFromEnvironmentValues,
-} from '../config-loader.js'
+import { loadProfileFromConfigurationFile, loadProfileFromEnvironmentValues } from '../config-loader.js'
 import { EnvironmentKey } from '../env.js'
 import type { Profile } from '../types.js'
 
@@ -27,18 +24,14 @@ const TARGET_PROFILE: Required<Profile> = {
 const updateProfileInEnv = (newProfile: Profile): void => {
   env[EnvironmentKey.ScwAccessKey] = newProfile.accessKey
   env[EnvironmentKey.ScwAPIURL] = newProfile.apiURL
-  env[EnvironmentKey.ScwDefaultOrganizationId] =
-    newProfile.defaultOrganizationId
+  env[EnvironmentKey.ScwDefaultOrganizationId] = newProfile.defaultOrganizationId
   env[EnvironmentKey.ScwDefaultProjectId] = newProfile.defaultProjectId
   env[EnvironmentKey.ScwDefaultRegion] = newProfile.defaultRegion
   env[EnvironmentKey.ScwDefaultZone] = newProfile.defaultZone
   env[EnvironmentKey.ScwSecretKey] = newProfile.secretKey
 }
 
-const updateProfileInConfiFile = (
-  newProfile: Profile,
-  filePath: string,
-): void => {
+const updateProfileInConfiFile = (newProfile: Profile, filePath: string): void => {
   const yml = `access_key: ${newProfile.accessKey ?? ''}\n
     api_url: ${newProfile.apiURL ?? ''}\n
     default_organization_id: ${newProfile.defaultOrganizationId ?? ''}\n
@@ -80,10 +73,6 @@ describe('loadProfileFromConfigurationFile', () => {
       updateProfileInConfiFile(TARGET_PROFILE, CONFIG_FILE_PATH)
       env[EnvironmentKey.ScwConfigPath] = CONFIG_FILE_PATH
       loadProfileFromConfigurationFile({ profileName: unknownName })
-    }).toThrow(
-      new Error(
-        `Could not find the desired profile '${unknownName}' in the configuration file.`,
-      ),
-    )
+    }).toThrow(new Error(`Could not find the desired profile '${unknownName}' in the configuration file.`))
   })
 })

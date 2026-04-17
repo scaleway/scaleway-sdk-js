@@ -1,43 +1,18 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
+export type AlertState = 'unknown_state' | 'inactive' | 'pending' | 'firing'
 
-export type AlertState =
-  | 'unknown_state'
-  | 'inactive'
-  | 'pending'
-  | 'firing'
+export type AlertStatus = 'unknown_status' | 'enabled' | 'disabled' | 'enabling' | 'disabling'
 
-export type AlertStatus =
-  | 'unknown_status'
-  | 'enabled'
-  | 'disabled'
-  | 'enabling'
-  | 'disabling'
+export type DataSourceOrigin = 'unknown_origin' | 'scaleway' | 'external' | 'custom'
 
-export type DataSourceOrigin =
-  | 'unknown_origin'
-  | 'scaleway'
-  | 'external'
-  | 'custom'
+export type DataSourceType = 'unknown_type' | 'metrics' | 'logs' | 'traces'
 
-export type DataSourceType =
-  | 'unknown_type'
-  | 'metrics'
-  | 'logs'
-  | 'traces'
+export type ExporterStatus = 'unknown_status' | 'creating' | 'ready' | 'error'
 
-export type ExporterStatus =
-  | 'unknown_status'
-  | 'creating'
-  | 'ready'
-  | 'error'
-
-export type GrafanaUserRole =
-  | 'unknown_role'
-  | 'editor'
-  | 'viewer'
+export type GrafanaUserRole = 'unknown_role' | 'editor' | 'viewer'
 
 export type ListDataSourcesRequestOrderBy =
   | 'created_at_asc'
@@ -47,19 +22,11 @@ export type ListDataSourcesRequestOrderBy =
   | 'type_asc'
   | 'type_desc'
 
-export type ListExportersRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
+export type ListExportersRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
-export type ListGrafanaUsersRequestOrderBy =
-  | 'login_asc'
-  | 'login_desc'
+export type ListGrafanaUsersRequestOrderBy = 'login_asc' | 'login_desc'
 
-export type ListPlansRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
+export type ListPlansRequestOrderBy = 'name_asc' | 'name_desc'
 
 export type ListProductsRequestOrderBy =
   | 'created_at_asc'
@@ -69,17 +36,9 @@ export type ListProductsRequestOrderBy =
   | 'family_name_asc'
   | 'family_name_desc'
 
-export type ListTokensRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'name_asc'
-  | 'name_desc'
+export type ListTokensRequestOrderBy = 'created_at_asc' | 'created_at_desc' | 'name_asc' | 'name_desc'
 
-export type PlanName =
-  | 'unknown_name'
-  | 'free'
-  | 'premium'
-  | 'custom'
+export type PlanName = 'unknown_name' | 'free' | 'premium' | 'custom'
 
 export type TokenScope =
   | 'unknown_scope'
@@ -93,10 +52,7 @@ export type TokenScope =
   | 'read_only_traces'
   | 'write_only_traces'
 
-export type UsageUnit =
-  | 'unknown_unit'
-  | 'bytes'
-  | 'samples'
+export type UsageUnit = 'unknown_unit' | 'bytes' | 'samples'
 
 /**
  * Structure for additional data relative to preconfigured alerts.
@@ -124,30 +80,25 @@ export interface PreconfiguredAlertData {
   productFamily: string
 }
 
-
 export interface ContactPointEmail {
   to: string
 }
-
 
 export interface ExporterDatadogDestination {
   apiKey?: string
   endpoint?: string
 }
 
-
 export interface ExporterOTLPDestination {
   endpoint: string
   headers: Record<string, string>
 }
-
 
 export interface GetConfigResponseRetention {
   minDays: number
   maxDays: number
   defaultDays: number
 }
-
 
 export interface RulesCount {
   /**
@@ -163,7 +114,6 @@ export interface RulesCount {
    */
   rulesCount: number
 }
-
 
 /**
  * Structure representing an alert.
@@ -211,7 +161,6 @@ export interface Alert {
   dataSourceId: string
 }
 
-
 /**
  * Contact point.
  */
@@ -231,7 +180,6 @@ export interface ContactPoint {
    */
   sendResolvedNotifications: boolean
 }
-
 
 /**
  * Data source.
@@ -287,7 +235,6 @@ export interface DataSource {
   currentMonthUsage?: number
 }
 
-
 /**
  * Data exporter.
  */
@@ -342,7 +289,6 @@ export interface Exporter {
   region: ScwRegion
 }
 
-
 /**
  * Grafana dashboard.
  */
@@ -369,7 +315,6 @@ export interface GrafanaProductDashboard {
   variables: string[]
 }
 
-
 /**
  * Grafana user.
  */
@@ -391,7 +336,6 @@ export interface GrafanaUser {
    */
   password?: string
 }
-
 
 /**
  * Type of pricing plan.
@@ -431,14 +375,12 @@ export interface Plan {
   monthlyPrice: number
 }
 
-
 export interface Product {
   name: string
   displayName: string
   familyName: string
   resourceTypes: string[]
 }
-
 
 /**
  * Token.
@@ -478,7 +420,6 @@ export interface Token {
   region: ScwRegion
 }
 
-
 /**
  * Data source usage.
  */
@@ -517,7 +458,6 @@ export interface Usage {
   region: ScwRegion
 }
 
-
 /**
  * Alert manager information.
  */
@@ -540,7 +480,6 @@ export interface AlertManager {
   region: ScwRegion
 }
 
-
 /**
  * Output returned when alert rules are disabled.
  */
@@ -551,7 +490,6 @@ export interface DisableAlertRulesResponse {
   disabledRuleIds: string[]
 }
 
-
 /**
  * Output returned when alert rules are enabled.
  */
@@ -561,7 +499,6 @@ export interface EnableAlertRulesResponse {
    */
   enabledRuleIds: string[]
 }
-
 
 /**
  * Cockpit configuration.
@@ -589,7 +526,6 @@ export interface GetConfigResponse {
   productLogsRetention?: GetConfigResponseRetention
 }
 
-
 export interface GetRulesCountResponse {
   /**
    * Total count of rules grouped by data source.
@@ -604,7 +540,6 @@ export interface GetRulesCountResponse {
    */
   customRulesCount: number
 }
-
 
 /**
  * Create a Grafana user.
@@ -624,7 +559,6 @@ export type GlobalApiCreateGrafanaUserRequest = {
   role?: GrafanaUserRole
 }
 
-
 /**
  * Delete a Grafana user.
  */
@@ -639,7 +573,6 @@ export type GlobalApiDeleteGrafanaUserRequest = {
   projectId?: string
 }
 
-
 /**
  * Retrieve a pricing plan for the given Project.
  */
@@ -649,7 +582,6 @@ export type GlobalApiGetCurrentPlanRequest = {
    */
   projectId?: string
 }
-
 
 /**
  * Retrieve a specific dashboard.
@@ -665,7 +597,6 @@ export type GlobalApiGetGrafanaProductDashboardRequest = {
   projectId?: string
 }
 
-
 /**
  * Request a Grafana.
  */
@@ -675,7 +606,6 @@ export type GlobalApiGetGrafanaRequest = {
    */
   projectId?: string
 }
-
 
 /**
  * Retrieve a list of available product dashboards.
@@ -699,7 +629,6 @@ export type GlobalApiListGrafanaProductDashboardsRequest = {
   tags?: string[]
 }
 
-
 /**
  * List all Grafana users.
  */
@@ -722,7 +651,6 @@ export type GlobalApiListGrafanaUsersRequest = {
   projectId?: string
 }
 
-
 /**
  * Retrieve a list of available pricing plans.
  */
@@ -738,7 +666,6 @@ export type GlobalApiListPlansRequest = {
   orderBy?: ListPlansRequestOrderBy
 }
 
-
 /**
  * Reset a Grafana user's password.
  */
@@ -752,7 +679,6 @@ export type GlobalApiResetGrafanaUserPasswordRequest = {
    */
   projectId?: string
 }
-
 
 /**
  * Select a specific pricing plan.
@@ -768,7 +694,6 @@ export type GlobalApiSelectPlanRequest = {
   planName?: PlanName
 }
 
-
 /**
  * Trigger the synchronization of all data sources created in the relevant regions.
  */
@@ -779,7 +704,6 @@ export type GlobalApiSyncGrafanaDataSourcesRequest = {
   projectId?: string
 }
 
-
 /**
  * Grafana user.
  */
@@ -789,7 +713,6 @@ export interface Grafana {
    */
   grafanaUrl: string
 }
-
 
 /**
  * Retrieve a list of alerts matching the request.
@@ -804,7 +727,6 @@ export interface ListAlertsResponse {
    */
   alerts: Alert[]
 }
-
 
 /**
  * Response returned when listing contact points.
@@ -828,7 +750,6 @@ export interface ListContactPointsResponse {
   hasAdditionalContactPoints: boolean
 }
 
-
 /**
  * Response returned when listing data sources.
  */
@@ -842,7 +763,6 @@ export interface ListDataSourcesResponse {
    */
   dataSources: DataSource[]
 }
-
 
 /**
  * Response returned when listing data exports.
@@ -858,7 +778,6 @@ export interface ListExportersResponse {
   exporters: Exporter[]
 }
 
-
 /**
  * Output returned when listing dashboards.
  */
@@ -872,7 +791,6 @@ export interface ListGrafanaProductDashboardsResponse {
    */
   dashboards: GrafanaProductDashboard[]
 }
-
 
 /**
  * Output returned when listing Grafana users.
@@ -888,7 +806,6 @@ export interface ListGrafanaUsersResponse {
   grafanaUsers: GrafanaUser[]
 }
 
-
 /**
  * Output returned when listing pricing plans.
  */
@@ -903,12 +820,10 @@ export interface ListPlansResponse {
   plans: Plan[]
 }
 
-
 export interface ListProductsResponse {
   productsList: Product[]
   totalCount: number
 }
-
 
 /**
  * Response returned when listing tokens.
@@ -923,7 +838,6 @@ export interface ListTokensResponse {
    */
   tokens: Token[]
 }
-
 
 /**
  * Create a contact point.
@@ -948,7 +862,6 @@ export type RegionalApiCreateContactPointRequest = {
    */
   sendResolvedNotifications?: boolean
 }
-
 
 /**
  * Create a data source.
@@ -975,7 +888,6 @@ export type RegionalApiCreateDataSourceRequest = {
    */
   retentionDays?: number
 }
-
 
 /**
  * Create a data export.
@@ -1016,7 +928,6 @@ You can retrieve the complete list of product names using the `ListProducts` end
   description?: string
 }
 
-
 /**
  * Create a token.
  */
@@ -1039,7 +950,6 @@ export type RegionalApiCreateTokenRequest = {
   tokenScopes?: TokenScope[]
 }
 
-
 /**
  * Delete a contact point.
  */
@@ -1060,7 +970,6 @@ export type RegionalApiDeleteContactPointRequest = {
   email?: ContactPointEmail
 }
 
-
 /**
  * Delete a data source.
  */
@@ -1074,7 +983,6 @@ export type RegionalApiDeleteDataSourceRequest = {
    */
   dataSourceId: string
 }
-
 
 /**
  * Delete a data export.
@@ -1090,7 +998,6 @@ export type RegionalApiDeleteExporterRequest = {
   exporterId: string
 }
 
-
 /**
  * Delete a token.
  */
@@ -1105,7 +1012,6 @@ export type RegionalApiDeleteTokenRequest = {
   tokenId: string
 }
 
-
 /**
  * Disable the Alert manager.
  */
@@ -1119,7 +1025,6 @@ export type RegionalApiDisableAlertManagerRequest = {
    */
   projectId?: string
 }
-
 
 export type RegionalApiDisableAlertRulesRequest = {
   /**
@@ -1136,7 +1041,6 @@ export type RegionalApiDisableAlertRulesRequest = {
   ruleIds?: string[]
 }
 
-
 /**
  * Disable the sending of managed alerts.
  */
@@ -1151,7 +1055,6 @@ export type RegionalApiDisableManagedAlertsRequest = {
   projectId?: string
 }
 
-
 /**
  * Enable the Alert manager.
  */
@@ -1165,7 +1068,6 @@ export type RegionalApiEnableAlertManagerRequest = {
    */
   projectId?: string
 }
-
 
 export type RegionalApiEnableAlertRulesRequest = {
   /**
@@ -1182,7 +1084,6 @@ export type RegionalApiEnableAlertRulesRequest = {
   ruleIds?: string[]
 }
 
-
 /**
  * Enable the sending of managed alerts.
  */
@@ -1196,7 +1097,6 @@ export type RegionalApiEnableManagedAlertsRequest = {
    */
   projectId?: string
 }
-
 
 /**
  * Get the Alert manager.
@@ -1212,7 +1112,6 @@ export type RegionalApiGetAlertManagerRequest = {
   projectId?: string
 }
 
-
 /**
  * Get Cockpit configuration.
  */
@@ -1222,7 +1121,6 @@ export type RegionalApiGetConfigRequest = {
    */
   region?: ScwRegion
 }
-
 
 /**
  * Retrieve a data source.
@@ -1238,7 +1136,6 @@ export type RegionalApiGetDataSourceRequest = {
   dataSourceId: string
 }
 
-
 /**
  * Retrieve a specific data export.
  */
@@ -1253,7 +1150,6 @@ export type RegionalApiGetExporterRequest = {
   exporterId: string
 }
 
-
 export type RegionalApiGetRulesCountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1264,7 +1160,6 @@ export type RegionalApiGetRulesCountRequest = {
    */
   projectId?: string
 }
-
 
 /**
  * Get a token.
@@ -1280,7 +1175,6 @@ export type RegionalApiGetTokenRequest = {
   tokenId: string
 }
 
-
 export type RegionalApiGetUsageOverviewRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1289,7 +1183,6 @@ export type RegionalApiGetUsageOverviewRequest = {
   projectId?: string
   interval?: string
 }
-
 
 /**
  * Retrieve a list of alerts.
@@ -1321,7 +1214,6 @@ export type RegionalApiListAlertsRequest = {
   dataSourceId?: string
 }
 
-
 /**
  * List contact points.
  */
@@ -1343,7 +1235,6 @@ export type RegionalApiListContactPointsRequest = {
    */
   pageSize?: number
 }
-
 
 /**
  * List data sources.
@@ -1379,7 +1270,6 @@ export type RegionalApiListDataSourcesRequest = {
   orderBy?: ListDataSourcesRequestOrderBy
 }
 
-
 /**
  * List all data exports.
  */
@@ -1410,7 +1300,6 @@ export type RegionalApiListExportersRequest = {
   orderBy?: ListExportersRequestOrderBy
 }
 
-
 /**
  * List all Scaleway products that send metrics and/or logs to Cockpit.
  */
@@ -1432,7 +1321,6 @@ export type RegionalApiListProductsRequest = {
    */
   orderBy?: ListProductsRequestOrderBy
 }
-
 
 /**
  * List tokens.
@@ -1464,7 +1352,6 @@ export type RegionalApiListTokensRequest = {
   orderBy?: ListTokensRequestOrderBy
 }
 
-
 /**
  * Request to trigger a test alert.
  */
@@ -1478,7 +1365,6 @@ export type RegionalApiTriggerTestAlertRequest = {
    */
   projectId?: string
 }
-
 
 /**
  * Update a contact point.
@@ -1504,7 +1390,6 @@ export type RegionalApiUpdateContactPointRequest = {
   sendResolvedNotifications?: boolean
 }
 
-
 /**
  * Update a data source name.
  */
@@ -1526,7 +1411,6 @@ export type RegionalApiUpdateDataSourceRequest = {
    */
   retentionDays?: number
 }
-
 
 /**
  * Update an existing data export.
@@ -1567,7 +1451,6 @@ You can retrieve the complete list of product names using the `ListProducts` end
   exportedProducts?: string[]
 }
 
-
 export interface UsageOverview {
   scalewayMetricsUsage?: Usage
   scalewayLogsUsage?: Usage
@@ -1575,5 +1458,3 @@ export interface UsageOverview {
   externalLogsUsage?: Usage
   externalTracesUsage?: Usage
 }
-
-

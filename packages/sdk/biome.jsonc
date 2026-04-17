@@ -4,18 +4,18 @@
     "actions": {
       "source": {
         "organizeImports": "on",
-        "recommended": true
-      }
+        "recommended": true,
+      },
     },
-   "enabled": true
+    "enabled": true,
   },
   "linter": {
     "rules": {
       "suspicious": {
-        "noShadowRestrictedNames": "off"
-      }
-    }
+        "noShadowRestrictedNames": "off",
+      },
+    },
   },
   "extends": "//",
-  "root": false
+  "root": false,
 }

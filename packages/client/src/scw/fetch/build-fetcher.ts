@@ -1,9 +1,5 @@
 import { isBrowser } from '../../helpers/is-browser.js'
-import type {
-  RequestInterceptor,
-  ResponseErrorInterceptor,
-  ResponseInterceptor,
-} from '../../index.js'
+import type { RequestInterceptor, ResponseErrorInterceptor, ResponseInterceptor } from '../../index.js'
 import {
   composeRequestInterceptors,
   composeResponseErrorInterceptors,
@@ -11,11 +7,7 @@ import {
 } from '../../internal/interceptors/composer.js'
 import { obfuscateAuthHeadersEntry } from '../auth.js'
 import type { Settings } from '../client-settings.js'
-import {
-  logRequest,
-  logResponse,
-  obfuscateInterceptor,
-} from './http-interceptors.js'
+import { logRequest, logResponse, obfuscateInterceptor } from './http-interceptors.js'
 import { responseParser } from './response-parser.js'
 import type { ResponseUnmarshaller, ScwRequest } from './types.js'
 
@@ -28,10 +20,7 @@ import type { ResponseUnmarshaller, ScwRequest } from './types.js'
  *
  * @internal
  */
-export const buildRequest = (
-  request: Readonly<ScwRequest>,
-  settings: Readonly<Settings>,
-): Request => {
+export const buildRequest = (request: Readonly<ScwRequest>, settings: Readonly<Settings>): Request => {
   let { path } = request
   if (request.urlParams instanceof URLSearchParams) {
     path = path.concat(`?${request.urlParams.toString()}`)
@@ -41,9 +30,7 @@ export const buildRequest = (
     body: request.body,
     headers: {
       Accept: 'application/json',
-      .../* istanbul ignore next */ (!isBrowser()
-        ? { 'User-Agent': settings.userAgent }
-        : {}),
+      .../* istanbul ignore next */ (!isBrowser() ? { 'User-Agent': settings.userAgent } : {}),
       ...request.headers,
     },
     method: request.method,
@@ -52,10 +39,7 @@ export const buildRequest = (
 
 const asIs = <T>(response: unknown) => response as T
 
-export type Fetcher = <T>(
-  request: Readonly<ScwRequest>,
-  unwrapper?: ResponseUnmarshaller<T>,
-) => Promise<T>
+export type Fetcher = <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>
 
 /**
  * Builds a resource fetcher.
@@ -70,29 +54,20 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
   let requestNumber = 0
   const prepareRequest = (requestId: string) =>
     composeRequestInterceptors([
-      ...(settings.interceptors
-        .map(obj => obj.request)
-        .filter(obj => obj) as RequestInterceptor[]),
+      ...(settings.interceptors.map(obj => obj.request).filter(obj => obj) as RequestInterceptor[]),
       logRequest(requestId, obfuscateInterceptor(obfuscateAuthHeadersEntry)),
     ])
   const prepareResponse = (requestId: string) =>
     composeResponseInterceptors([
-      ...(settings.interceptors
-        .map(obj => obj.response)
-        .filter(obj => obj) as ResponseInterceptor[]),
+      ...(settings.interceptors.map(obj => obj.response).filter(obj => obj) as ResponseInterceptor[]),
       logResponse(requestId),
     ])
   const prepareResponseErrors = () =>
     composeResponseErrorInterceptors(
-      settings.interceptors
-        .map(obj => obj.responseError)
-        .filter(obj => obj) as ResponseErrorInterceptor[],
+      settings.interceptors.map(obj => obj.responseError).filter(obj => obj) as ResponseErrorInterceptor[],
     )
 
-  return async <T>(
-    request: Readonly<ScwRequest>,
-    unwrapper: ResponseUnmarshaller<T> = asIs,
-  ): Promise<T> => {
+  return async <T>(request: Readonly<ScwRequest>, unwrapper: ResponseUnmarshaller<T> = asIs): Promise<T> => {
     requestNumber += 1
     const requestId = `${requestNumber}`
     const reqInterceptors = prepareRequest(requestId)
@@ -102,10 +77,7 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       const response = await httpClient(finalRequest)
       const resInterceptors = prepareResponse(requestId)
       const finalResponse = await resInterceptors(response)
-      const resUnmarshaller = responseParser<T>(
-        unwrapper,
-        request.responseType ?? 'json',
-      )
+      const resUnmarshaller = responseParser<T>(unwrapper, request.responseType ?? 'json')
       const unmarshaledResponse = await resUnmarshaller(finalResponse)
 
       return unmarshaledResponse

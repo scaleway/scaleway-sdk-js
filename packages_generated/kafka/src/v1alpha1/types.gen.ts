@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
-
+import type { Region as ScwRegion, Zone as ScwZone } from '@scaleway/sdk-client'
 
 export type ClusterStatus =
   | 'unknown_status'
@@ -21,20 +20,11 @@ export type ListClustersRequestOrderBy =
   | 'status_asc'
   | 'status_desc'
 
-export type ListUsersRequestOrderBy =
-  | 'name_asc'
-  | 'name_desc'
+export type ListUsersRequestOrderBy = 'name_asc' | 'name_desc'
 
-export type NodeTypeStock =
-  | 'unknown_stock'
-  | 'low_stock'
-  | 'out_of_stock'
-  | 'available'
+export type NodeTypeStock = 'unknown_stock' | 'low_stock' | 'out_of_stock' | 'available'
 
-export type VolumeType =
-  | 'unknown_type'
-  | 'sbs_5k'
-  | 'sbs_15k'
+export type VolumeType = 'unknown_type' | 'sbs_5k' | 'sbs_15k'
 
 /**
  * Private Network details.
@@ -46,18 +36,14 @@ export interface EndpointPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-
 /**
  * Public Access details.
  */
-export interface EndpointPublicDetails {
-}
-
+export interface EndpointPublicDetails {}
 
 export interface VersionAvailableSettingBooleanProperty {
   defaultValue: boolean
 }
-
 
 export interface VersionAvailableSettingFloatProperty {
   min: number
@@ -66,7 +52,6 @@ export interface VersionAvailableSettingFloatProperty {
   unit?: string
 }
 
-
 export interface VersionAvailableSettingIntegerProperty {
   min: number
   max: number
@@ -74,12 +59,10 @@ export interface VersionAvailableSettingIntegerProperty {
   unit?: string
 }
 
-
 export interface VersionAvailableSettingStringProperty {
   stringConstraint?: string
   defaultValue: string
 }
-
 
 export interface EndpointSpecPrivateNetworkDetails {
   /**
@@ -88,10 +71,7 @@ export interface EndpointSpecPrivateNetworkDetails {
   privateNetworkId: string
 }
 
-
-export interface EndpointSpecPublicDetails {
-}
-
+export interface EndpointSpecPublicDetails {}
 
 /**
  * MonoAZ details.
@@ -103,13 +83,10 @@ export interface ClusterMonoAZDetails {
   zone?: ScwZone
 }
 
-
 /**
  * MultiAZ details.
  */
-export interface ClusterMultiAZDetails {
-}
-
+export interface ClusterMultiAZDetails {}
 
 export interface ClusterSetting {
   /**
@@ -142,7 +119,6 @@ export interface ClusterSetting {
   floatValue?: number
 }
 
-
 export interface Endpoint {
   /**
    * UUID of the endpoint.
@@ -170,7 +146,6 @@ export interface Endpoint {
   publicNetwork?: EndpointPublicDetails
 }
 
-
 export interface Volume {
   /**
    * Type of volume where data is stored.
@@ -181,7 +156,6 @@ export interface Volume {
    */
   sizeBytes: number
 }
-
 
 export interface NodeTypeVolumeType {
   /**
@@ -205,7 +179,6 @@ export interface NodeTypeVolumeType {
    */
   chunkSizeBytes: number
 }
-
 
 export interface VersionAvailableSetting {
   /**
@@ -246,7 +219,6 @@ export interface VersionAvailableSetting {
   floatProperty?: VersionAvailableSettingFloatProperty
 }
 
-
 export interface CreateClusterRequestVolumeSpec {
   /**
    * Volume size.
@@ -257,7 +229,6 @@ export interface CreateClusterRequestVolumeSpec {
    */
   type: VolumeType
 }
-
 
 export interface EndpointSpec {
   /**
@@ -271,7 +242,6 @@ export interface EndpointSpec {
    */
   privateNetwork?: EndpointSpecPrivateNetworkDetails
 }
-
 
 export interface Cluster {
   /**
@@ -348,7 +318,6 @@ export interface Cluster {
   monoAz?: ClusterMonoAZDetails
 }
 
-
 export interface NodeType {
   /**
    * Node type name identifier.
@@ -388,11 +357,9 @@ export interface NodeType {
   clusterRange: string
 }
 
-
 export interface User {
   username: string
 }
-
 
 export interface Version {
   /**
@@ -408,7 +375,6 @@ export interface Version {
    */
   availableSettings: VersionAvailableSetting[]
 }
-
 
 export type CreateClusterRequest = {
   /**
@@ -469,7 +435,6 @@ export type CreateClusterRequest = {
   monoAz?: ClusterMonoAZDetails
 }
 
-
 export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -485,7 +450,6 @@ export type CreateEndpointRequest = {
   endpoint: EndpointSpec
 }
 
-
 export type DeleteClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -496,7 +460,6 @@ export type DeleteClusterRequest = {
    */
   clusterId: string
 }
-
 
 export type DeleteEndpointRequest = {
   /**
@@ -509,7 +472,6 @@ export type DeleteEndpointRequest = {
   endpointId: string
 }
 
-
 export type GetClusterCertificateAuthorityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -521,7 +483,6 @@ export type GetClusterCertificateAuthorityRequest = {
   clusterId: string
 }
 
-
 export type GetClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -532,7 +493,6 @@ export type GetClusterRequest = {
    */
   clusterId: string
 }
-
 
 export type ListClustersRequest = {
   /**
@@ -563,7 +523,6 @@ export type ListClustersRequest = {
   pageSize?: number
 }
 
-
 export interface ListClustersResponse {
   /**
    * List of all Kafka cluster available in an Organization or Project.
@@ -574,7 +533,6 @@ export interface ListClustersResponse {
    */
   totalCount: number
 }
-
 
 export type ListNodeTypesRequest = {
   /**
@@ -589,7 +547,6 @@ export type ListNodeTypesRequest = {
   pageSize?: number
 }
 
-
 export interface ListNodeTypesResponse {
   /**
    * Types of the node.
@@ -600,7 +557,6 @@ export interface ListNodeTypesResponse {
    */
   totalCount: number
 }
-
 
 export type ListUsersRequest = {
   /**
@@ -614,12 +570,10 @@ export type ListUsersRequest = {
   name?: string
 }
 
-
 export interface ListUsersResponse {
   users: User[]
   totalCount: number
 }
-
 
 export type ListVersionsRequest = {
   /**
@@ -640,7 +594,6 @@ export type ListVersionsRequest = {
   pageSize?: number
 }
 
-
 export interface ListVersionsResponse {
   /**
    * Available Kafka versions.
@@ -652,7 +605,6 @@ export interface ListVersionsResponse {
   totalCount: number
 }
 
-
 export type RenewClusterCertificateAuthorityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -663,7 +615,6 @@ export type RenewClusterCertificateAuthorityRequest = {
    */
   clusterId: string
 }
-
 
 export type UpdateClusterRequest = {
   /**
@@ -688,7 +639,6 @@ export type UpdateClusterRequest = {
   version?: string
 }
 
-
 /**
  * Update a user of a Kafka cluster.
  */
@@ -710,5 +660,3 @@ export type UpdateUserRequest = {
    */
   password?: string
 }
-
-

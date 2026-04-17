@@ -1,15 +1,8 @@
 import { env } from 'node:process'
 import { EnvironmentKey } from './env.js'
 import { resolveConfigurationFilePath } from './path-resolver.js'
-import type {
-  AllProfilesFromFileParams,
-  Profile,
-  ProfileFromFileParams,
-} from './types.js'
-import {
-  loadConfigurationFromFile,
-  loadConfigurationFromFileAsync,
-} from './yml-loader.js'
+import type { AllProfilesFromFileParams, Profile, ProfileFromFileParams } from './types.js'
+import { loadConfigurationFromFile, loadConfigurationFromFileAsync } from './yml-loader.js'
 
 const convertFileConfigToSDK = (obj: Record<string, string>): Profile => ({
   accessKey: obj.access_key,
@@ -77,16 +70,12 @@ export const loadAllProfilesFromConfigurationFile = (
  *
  * @public
  */
-export const loadProfileFromConfigurationFile = (
-  params?: Readonly<ProfileFromFileParams>,
-): Profile => {
+export const loadProfileFromConfigurationFile = (params?: Readonly<ProfileFromFileParams>): Profile => {
   const configs = loadAllProfilesFromConfigurationFile(params)
   const profileName = params?.profileName ?? 'default'
   const profileMap = configs[profileName]
   if (typeof profileMap !== 'object') {
-    throw new Error(
-      `Could not find the desired profile '${profileName}' in the configuration file.`,
-    )
+    throw new Error(`Could not find the desired profile '${profileName}' in the configuration file.`)
   }
 
   return profileMap
@@ -142,9 +131,7 @@ export const loadProfileFromConfigurationFileAsync = async (
   const profileName = params?.profileName ?? 'default'
   const profileMap = configs[profileName]
   if (typeof profileMap !== 'object') {
-    throw new Error(
-      `Could not find the desired profile '${profileName}' in the configuration file.`,
-    )
+    throw new Error(`Could not find the desired profile '${profileName}' in the configuration file.`)
   }
 
   return profileMap

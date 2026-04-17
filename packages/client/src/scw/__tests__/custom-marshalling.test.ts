@@ -83,9 +83,7 @@ describe('unmarshalScwFile', () => {
 
 describe('unmarshalTimeSeriesPoint', () => {
   it('returns the proper object', () => {
-    expect(
-      unmarshalTimeSeriesPoint(['2019-08-08T15:00:00.000Z', 42]),
-    ).toStrictEqual({
+    expect(unmarshalTimeSeriesPoint(['2019-08-08T15:00:00.000Z', 42])).toStrictEqual({
       timestamp: new Date('2019-08-08T15:00:00.000Z'),
       value: 42,
     })

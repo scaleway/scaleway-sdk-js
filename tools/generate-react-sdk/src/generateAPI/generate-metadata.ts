@@ -38,10 +38,7 @@ async function loadVersions(packageName: string): Promise<string[]> {
   try {
     const resolvedPath = require.resolve(`${packageName}/metadata`)
     const metadataModule = await import(resolvedPath)
-    const versions =
-      metadataModule?.pkgMetadata?.versions ||
-      metadataModule?.default?.versions ||
-      []
+    const versions = metadataModule?.pkgMetadata?.versions || metadataModule?.default?.versions || []
     return versions
   } catch (error) {
     stdout.write(`⚠️  Could not load metadata from ${packageName}: ${error}\n`)
@@ -49,10 +46,7 @@ async function loadVersions(packageName: string): Promise<string[]> {
   }
 }
 
-async function loadMetadata(
-  packageName: string,
-  version: string,
-): Promise<Metadata | null> {
+async function loadMetadata(packageName: string, version: string): Promise<Metadata | null> {
   try {
     // Try the exported path first
     try {
@@ -60,23 +54,15 @@ async function loadMetadata(
       const metadataModule = await import(resolvedPath)
       return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
     } catch {
-      stdout.write(
-        `⚠️  Error loading metadata from ${packageName}/${version}/metadata \n Using dist fallback \n`,
-      )
+      stdout.write(`⚠️  Error loading metadata from ${packageName}/${version}/metadata \n Using dist fallback \n`)
       // Fallback: construct path from node_modules
-      const pkgDir = join(
-        dirname(resolve('package.json')),
-        'node_modules',
-        packageName,
-      )
+      const pkgDir = join(dirname(resolve('package.json')), 'node_modules', packageName)
       const distMetadataPath = join(pkgDir, 'dist', version, 'metadata.gen.js')
       const metadataModule = await import(distMetadataPath)
       return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
     }
   } catch (error) {
-    stdout.write(
-      `⚠️  Error loading metadata from ${packageName}/${version}/metadata: ${error}\n`,
-    )
+    stdout.write(`⚠️  Error loading metadata from ${packageName}/${version}/metadata: ${error}\n`)
     return null
   }
 }
@@ -114,9 +100,7 @@ export const generateAPI = async ({
     const versions = await loadVersions(packageName)
 
     if (versions.length === 0) {
-      stdout.write(
-        `⚠️  Skipping ${packageName}: no versions with metadata found\n`,
-      )
+      stdout.write(`⚠️  Skipping ${packageName}: no versions with metadata found\n`)
       continue
     }
 
@@ -124,9 +108,7 @@ export const generateAPI = async ({
       const metadata = await loadMetadata(packageName, version)
 
       if (!metadata) {
-        stdout.write(
-          `⚠️  Skipping ${packageName}/${version}: no queriesMetadata found\n`,
-        )
+        stdout.write(`⚠️  Skipping ${packageName}/${version}: no queriesMetadata found\n`)
         continue
       }
 

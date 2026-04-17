@@ -1,20 +1,8 @@
+export type ListOrganizationsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
+export type OrganizationLockedBy = 'unknown_locked_by' | 'partner' | 'scaleway'
 
-
-export type ListOrganizationsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-
-export type OrganizationLockedBy =
-  | 'unknown_locked_by'
-  | 'partner'
-  | 'scaleway'
-
-export type OrganizationStatus =
-  | 'unknown_status'
-  | 'opened'
-  | 'locked'
-  | 'closed'
+export type OrganizationStatus = 'unknown_status' | 'opened' | 'locked' | 'closed'
 
 export interface Organization {
   /**
@@ -79,7 +67,6 @@ export interface Organization {
   comment: string
 }
 
-
 export type CreateOrganizationRequest = {
   /**
    * Your personal `partner_id`. This is the same as your Organization ID.
@@ -115,14 +102,12 @@ export type CreateOrganizationRequest = {
   sirenNumber?: string
 }
 
-
 export type GetOrganizationRequest = {
   /**
    * The ID of the organization you want to GET.
    */
   organizationId?: string
 }
-
 
 export type ListOrganizationsRequest = {
   pageSize?: number
@@ -147,7 +132,6 @@ If the customer ID was changed only the last one can be used.
   lockedBy?: OrganizationLockedBy
 }
 
-
 export interface ListOrganizationsResponse {
   /**
    * List of organizations.
@@ -159,14 +143,12 @@ export interface ListOrganizationsResponse {
   totalCount: number
 }
 
-
 export type LockOrganizationRequest = {
   /**
    * The ID of the organization you want to lock.
    */
   organizationId?: string
 }
-
 
 export type RequestAdminRoleRequest = {
   /**
@@ -187,14 +169,12 @@ export type RequestAdminRoleRequest = {
   password: string
 }
 
-
 export type UnlockOrganizationRequest = {
   /**
    * The ID of the organization you want to unlock.
    */
   organizationId?: string
 }
-
 
 export type UpdateOrganizationRequest = {
   /**
@@ -232,5 +212,3 @@ If you try to change this value after the 25th of the month, we cannot guarantee
    */
   comment?: string
 }
-
-

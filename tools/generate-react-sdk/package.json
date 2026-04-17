@@ -1,27 +1,24 @@
 {
   "name": "@scaleway/generate-react-sdk",
   "version": "0.2.4",
-  "description": "generate react sdk",
-  "type": "module",
   "private": false,
+  "description": "generate react sdk",
+  "repository": {
+    "type": "git",
+    "directory": "tools/generate-react-sdk"
+  },
   "bin": {
     "generate-react-sdk": "./dist/buildAPI.js"
   },
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": ">=20.19.6"
-  },
+  "type": "module",
   "exports": {
     "./*": {
       "types": "./dist/*.d.ts",
       "default": "./dist/*.js"
     }
-  },
-  "repository": {
-    "type": "git",
-    "directory": "tools/generate-react-sdk"
   },
   "scripts": {
     "build": "tsgo -p tsconfig.build.json",
@@ -30,5 +27,8 @@
   },
   "devDependencies": {
     "@types/node": "20.19.35"
+  },
+  "engines": {
+    "node": ">=20.19.6"
   }
 }

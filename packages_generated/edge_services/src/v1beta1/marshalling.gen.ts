@@ -1,6 +1,12 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMapOfObject, unmarshalMoney, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+  unmarshalMapOfObject,
+  unmarshalMoney,
+} from '@scaleway/sdk-client'
 import type {
   AddRouteRulesRequest,
   AddRouteRulesResponse,
@@ -78,9 +84,7 @@ import type {
 
 const unmarshalScalewayLb = (data: unknown): ScalewayLb => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ScalewayLb' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ScalewayLb' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -95,9 +99,7 @@ const unmarshalScalewayLb = (data: unknown): ScalewayLb => {
 
 const unmarshalScalewayLbBackendConfig = (data: unknown): ScalewayLbBackendConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ScalewayLbBackendConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ScalewayLbBackendConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -107,9 +109,7 @@ const unmarshalScalewayLbBackendConfig = (data: unknown): ScalewayLbBackendConfi
 
 const unmarshalScalewayS3BackendConfig = (data: unknown): ScalewayS3BackendConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ScalewayS3BackendConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ScalewayS3BackendConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -147,9 +147,7 @@ const unmarshalScalewayServerlessFunctionBackendConfig = (data: unknown): Scalew
 
 export const unmarshalBackendStage = (data: unknown): BackendStage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'BackendStage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'BackendStage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -158,8 +156,12 @@ export const unmarshalBackendStage = (data: unknown): BackendStage => {
     pipelineId: data.pipeline_id,
     scalewayLb: data.scaleway_lb ? unmarshalScalewayLbBackendConfig(data.scaleway_lb) : undefined,
     scalewayS3: data.scaleway_s3 ? unmarshalScalewayS3BackendConfig(data.scaleway_s3) : undefined,
-    scalewayServerlessContainer: data.scaleway_serverless_container ? unmarshalScalewayServerlessContainerBackendConfig(data.scaleway_serverless_container) : undefined,
-    scalewayServerlessFunction: data.scaleway_serverless_function ? unmarshalScalewayServerlessFunctionBackendConfig(data.scaleway_serverless_function) : undefined,
+    scalewayServerlessContainer: data.scaleway_serverless_container
+      ? unmarshalScalewayServerlessContainerBackendConfig(data.scaleway_serverless_container)
+      : undefined,
+    scalewayServerlessFunction: data.scaleway_serverless_function
+      ? unmarshalScalewayServerlessFunctionBackendConfig(data.scaleway_serverless_function)
+      : undefined,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as BackendStage
@@ -167,9 +169,7 @@ export const unmarshalBackendStage = (data: unknown): BackendStage => {
 
 export const unmarshalCacheStage = (data: unknown): CacheStage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CacheStage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'CacheStage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -188,9 +188,7 @@ export const unmarshalCacheStage = (data: unknown): CacheStage => {
 
 export const unmarshalDNSStage = (data: unknown): DNSStage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DNSStage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DNSStage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -211,9 +209,7 @@ export const unmarshalDNSStage = (data: unknown): DNSStage => {
 
 const unmarshalPipelineError = (data: unknown): PipelineError => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PipelineError' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'PipelineError' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -227,9 +223,7 @@ const unmarshalPipelineError = (data: unknown): PipelineError => {
 
 export const unmarshalPipeline = (data: unknown): Pipeline => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Pipeline' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Pipeline' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -247,9 +241,7 @@ export const unmarshalPipeline = (data: unknown): Pipeline => {
 
 export const unmarshalRouteStage = (data: unknown): RouteStage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteStage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RouteStage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -265,9 +257,7 @@ export const unmarshalRouteStage = (data: unknown): RouteStage => {
 
 const unmarshalTLSSecret = (data: unknown): TLSSecret => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TLSSecret' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TLSSecret' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -278,9 +268,7 @@ const unmarshalTLSSecret = (data: unknown): TLSSecret => {
 
 export const unmarshalTLSStage = (data: unknown): TLSStage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TLSStage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TLSStage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -301,9 +289,7 @@ export const unmarshalTLSStage = (data: unknown): TLSStage => {
 
 export const unmarshalWafStage = (data: unknown): WafStage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'WafStage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'WafStage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -320,9 +306,7 @@ export const unmarshalWafStage = (data: unknown): WafStage => {
 
 export const unmarshalPipelineStages = (data: unknown): PipelineStages => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PipelineStages' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'PipelineStages' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -338,9 +322,7 @@ export const unmarshalPipelineStages = (data: unknown): PipelineStages => {
 
 export const unmarshalPurgeRequest = (data: unknown): PurgeRequest => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PurgeRequest' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'PurgeRequest' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -356,9 +338,7 @@ export const unmarshalPurgeRequest = (data: unknown): PurgeRequest => {
 
 const unmarshalRuleHttpMatchHostFilter = (data: unknown): RuleHttpMatchHostFilter => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RuleHttpMatchHostFilter' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RuleHttpMatchHostFilter' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -369,9 +349,7 @@ const unmarshalRuleHttpMatchHostFilter = (data: unknown): RuleHttpMatchHostFilte
 
 const unmarshalRuleHttpMatchPathFilter = (data: unknown): RuleHttpMatchPathFilter => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RuleHttpMatchPathFilter' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RuleHttpMatchPathFilter' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -382,9 +360,7 @@ const unmarshalRuleHttpMatchPathFilter = (data: unknown): RuleHttpMatchPathFilte
 
 const unmarshalRuleHttpMatch = (data: unknown): RuleHttpMatch => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RuleHttpMatch' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RuleHttpMatch' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -396,9 +372,7 @@ const unmarshalRuleHttpMatch = (data: unknown): RuleHttpMatch => {
 
 const unmarshalRouteRule = (data: unknown): RouteRule => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteRule' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RouteRule' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -412,9 +386,7 @@ const unmarshalRouteRule = (data: unknown): RouteRule => {
 
 export const unmarshalAddRouteRulesResponse = (data: unknown): AddRouteRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'AddRouteRulesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'AddRouteRulesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -424,9 +396,7 @@ export const unmarshalAddRouteRulesResponse = (data: unknown): AddRouteRulesResp
 
 export const unmarshalCheckDomainResponse = (data: unknown): CheckDomainResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CheckDomainResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'CheckDomainResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -436,9 +406,7 @@ export const unmarshalCheckDomainResponse = (data: unknown): CheckDomainResponse
 
 export const unmarshalCheckLbOriginResponse = (data: unknown): CheckLbOriginResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CheckLbOriginResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'CheckLbOriginResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -449,9 +417,7 @@ export const unmarshalCheckLbOriginResponse = (data: unknown): CheckLbOriginResp
 
 export const unmarshalCheckPEMChainResponse = (data: unknown): CheckPEMChainResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CheckPEMChainResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'CheckPEMChainResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -461,9 +427,7 @@ export const unmarshalCheckPEMChainResponse = (data: unknown): CheckPEMChainResp
 
 const unmarshalPlanDetails = (data: unknown): PlanDetails => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PlanDetails' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'PlanDetails' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -478,9 +442,7 @@ const unmarshalPlanDetails = (data: unknown): PlanDetails => {
 
 const unmarshalPlanUsageDetails = (data: unknown): PlanUsageDetails => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PlanUsageDetails' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'PlanUsageDetails' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -490,9 +452,7 @@ const unmarshalPlanUsageDetails = (data: unknown): PlanUsageDetails => {
 
 export const unmarshalGetBillingResponse = (data: unknown): GetBillingResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetBillingResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GetBillingResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -514,9 +474,7 @@ export const unmarshalGetBillingResponse = (data: unknown): GetBillingResponse =
 
 const unmarshalHeadStageResponseHeadStage = (data: unknown): HeadStageResponseHeadStage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HeadStageResponseHeadStage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'HeadStageResponseHeadStage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -526,9 +484,7 @@ const unmarshalHeadStageResponseHeadStage = (data: unknown): HeadStageResponseHe
 
 export const unmarshalHeadStageResponse = (data: unknown): HeadStageResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HeadStageResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'HeadStageResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -538,9 +494,7 @@ export const unmarshalHeadStageResponse = (data: unknown): HeadStageResponse => 
 
 export const unmarshalListBackendStagesResponse = (data: unknown): ListBackendStagesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListBackendStagesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListBackendStagesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -551,9 +505,7 @@ export const unmarshalListBackendStagesResponse = (data: unknown): ListBackendSt
 
 export const unmarshalListCacheStagesResponse = (data: unknown): ListCacheStagesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListCacheStagesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListCacheStagesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -564,9 +516,7 @@ export const unmarshalListCacheStagesResponse = (data: unknown): ListCacheStages
 
 export const unmarshalListDNSStagesResponse = (data: unknown): ListDNSStagesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDNSStagesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListDNSStagesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -577,9 +527,7 @@ export const unmarshalListDNSStagesResponse = (data: unknown): ListDNSStagesResp
 
 const unmarshalListHeadStagesResponseHeadStage = (data: unknown): ListHeadStagesResponseHeadStage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListHeadStagesResponseHeadStage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListHeadStagesResponseHeadStage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -589,9 +537,7 @@ const unmarshalListHeadStagesResponseHeadStage = (data: unknown): ListHeadStages
 
 export const unmarshalListHeadStagesResponse = (data: unknown): ListHeadStagesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListHeadStagesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListHeadStagesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -602,9 +548,7 @@ export const unmarshalListHeadStagesResponse = (data: unknown): ListHeadStagesRe
 
 export const unmarshalListPipelinesResponse = (data: unknown): ListPipelinesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListPipelinesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListPipelinesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -615,9 +559,7 @@ export const unmarshalListPipelinesResponse = (data: unknown): ListPipelinesResp
 
 export const unmarshalListPipelinesWithStagesResponse = (data: unknown): ListPipelinesWithStagesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListPipelinesWithStagesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListPipelinesWithStagesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -628,9 +570,7 @@ export const unmarshalListPipelinesWithStagesResponse = (data: unknown): ListPip
 
 export const unmarshalListPlansResponse = (data: unknown): ListPlansResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -641,9 +581,7 @@ export const unmarshalListPlansResponse = (data: unknown): ListPlansResponse => 
 
 export const unmarshalListPurgeRequestsResponse = (data: unknown): ListPurgeRequestsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListPurgeRequestsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListPurgeRequestsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -654,9 +592,7 @@ export const unmarshalListPurgeRequestsResponse = (data: unknown): ListPurgeRequ
 
 export const unmarshalListRouteRulesResponse = (data: unknown): ListRouteRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListRouteRulesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListRouteRulesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -667,9 +603,7 @@ export const unmarshalListRouteRulesResponse = (data: unknown): ListRouteRulesRe
 
 export const unmarshalListRouteStagesResponse = (data: unknown): ListRouteStagesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListRouteStagesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListRouteStagesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -680,9 +614,7 @@ export const unmarshalListRouteStagesResponse = (data: unknown): ListRouteStages
 
 export const unmarshalListTLSStagesResponse = (data: unknown): ListTLSStagesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListTLSStagesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListTLSStagesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -693,9 +625,7 @@ export const unmarshalListTLSStagesResponse = (data: unknown): ListTLSStagesResp
 
 export const unmarshalListWafStagesResponse = (data: unknown): ListWafStagesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListWafStagesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListWafStagesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -706,9 +636,7 @@ export const unmarshalListWafStagesResponse = (data: unknown): ListWafStagesResp
 
 export const unmarshalPlan = (data: unknown): Plan => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Plan' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -718,9 +646,7 @@ export const unmarshalPlan = (data: unknown): Plan => {
 
 export const unmarshalSetRouteRulesResponse = (data: unknown): SetRouteRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SetRouteRulesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'SetRouteRulesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -744,32 +670,27 @@ const marshalRuleHttpMatchPathFilter = (
   value: request.value,
 })
 
-const marshalRuleHttpMatch = (
-  request: RuleHttpMatch,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  host_filter: ((request.hostFilter !== undefined) ?  marshalRuleHttpMatchHostFilter(request.hostFilter, defaults): undefined),
-  method_filters:  request.methodFilters,
-  path_filter: ((request.pathFilter !== undefined) ?  marshalRuleHttpMatchPathFilter(request.pathFilter, defaults): undefined),
+const marshalRuleHttpMatch = (request: RuleHttpMatch, defaults: DefaultValues): Record<string, unknown> => ({
+  host_filter:
+    request.hostFilter !== undefined ? marshalRuleHttpMatchHostFilter(request.hostFilter, defaults) : undefined,
+  method_filters: request.methodFilters,
+  path_filter:
+    request.pathFilter !== undefined ? marshalRuleHttpMatchPathFilter(request.pathFilter, defaults) : undefined,
 })
 
 export const marshalSetRouteRulesRequestRouteRule = (
   request: SetRouteRulesRequestRouteRule,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'rule_http_match',
-      value: (request.ruleHttpMatch !== undefined) ? marshalRuleHttpMatch(request.ruleHttpMatch, defaults)
-      : undefined,
+    {
+      param: 'rule_http_match',
+      value: request.ruleHttpMatch !== undefined ? marshalRuleHttpMatch(request.ruleHttpMatch, defaults) : undefined,
     },
-  ]),  
+  ]),
   ...resolveOneOf([
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
-    {param: 'waf_stage_id',
-      value: request.wafStageId,
-    },
+    { param: 'backend_stage_id', value: request.backendStageId },
+    { param: 'waf_stage_id', value: request.wafStageId },
   ]),
 })
 
@@ -777,14 +698,13 @@ export const marshalAddRouteRulesRequest = (
   request: AddRouteRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  route_rules: ((request.routeRules !== undefined) ?  request.routeRules.map(elt => marshalSetRouteRulesRequestRouteRule(elt, defaults)): undefined),  
+  route_rules:
+    request.routeRules !== undefined
+      ? request.routeRules.map(elt => marshalSetRouteRulesRequestRouteRule(elt, defaults))
+      : undefined,
   ...resolveOneOf([
-    {param: 'after_position',
-      value: request.afterPosition,
-    },
-    {param: 'before_position',
-      value: request.beforePosition,
-    },
+    { param: 'after_position', value: request.afterPosition },
+    { param: 'before_position', value: request.beforePosition },
   ]),
 })
 
@@ -797,10 +717,7 @@ export const marshalCheckDomainRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
-const marshalScalewayLb = (
-  request: ScalewayLb,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
+const marshalScalewayLb = (request: ScalewayLb, defaults: DefaultValues): Record<string, unknown> => ({
   domain_name: request.domainName,
   frontend_id: request.frontendId,
   has_websocket: request.hasWebsocket,
@@ -813,7 +730,7 @@ export const marshalCheckLbOriginRequest = (
   request: CheckLbOriginRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  lb: ((request.lb !== undefined) ?  marshalScalewayLb(request.lb, defaults): undefined),
+  lb: request.lb !== undefined ? marshalScalewayLb(request.lb, defaults) : undefined,
 })
 
 const marshalCheckPEMChainRequestSecretChain = (
@@ -829,15 +746,14 @@ export const marshalCheckPEMChainRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fqdn: request.fqdn,
-  project_id: request.projectId ?? defaults.defaultProjectId,  
+  project_id: request.projectId ?? defaults.defaultProjectId,
   ...resolveOneOf<Record<string, unknown> | string>([
-    {param: 'secret',
-      value: (request.secret !== undefined) ? marshalCheckPEMChainRequestSecretChain(request.secret, defaults)
-      : undefined,
+    {
+      param: 'secret',
+      value:
+        request.secret !== undefined ? marshalCheckPEMChainRequestSecretChain(request.secret, defaults) : undefined,
     },
-    {param: 'raw',
-      value: request.raw,
-    },
+    { param: 'raw', value: request.raw },
   ]),
 })
 
@@ -845,7 +761,7 @@ const marshalScalewayLbBackendConfig = (
   request: ScalewayLbBackendConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  lbs:  request.lbs.map(elt => marshalScalewayLb(elt, defaults)),
+  lbs: request.lbs.map(elt => marshalScalewayLb(elt, defaults)),
 })
 
 const marshalScalewayS3BackendConfig = (
@@ -876,23 +792,31 @@ const marshalScalewayServerlessFunctionBackendConfig = (
 export const marshalCreateBackendStageRequest = (
   request: CreateBackendStageRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'scaleway_s3',
-      value: (request.scalewayS3 !== undefined) ? marshalScalewayS3BackendConfig(request.scalewayS3, defaults)
-      : undefined,
+    {
+      param: 'scaleway_s3',
+      value:
+        request.scalewayS3 !== undefined ? marshalScalewayS3BackendConfig(request.scalewayS3, defaults) : undefined,
     },
-    {param: 'scaleway_lb',
-      value: (request.scalewayLb !== undefined) ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults)
-      : undefined,
+    {
+      param: 'scaleway_lb',
+      value:
+        request.scalewayLb !== undefined ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults) : undefined,
     },
-    {param: 'scaleway_serverless_container',
-      value: (request.scalewayServerlessContainer !== undefined) ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
-      : undefined,
+    {
+      param: 'scaleway_serverless_container',
+      value:
+        request.scalewayServerlessContainer !== undefined
+          ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
+          : undefined,
     },
-    {param: 'scaleway_serverless_function',
-      value: (request.scalewayServerlessFunction !== undefined) ? marshalScalewayServerlessFunctionBackendConfig(request.scalewayServerlessFunction, defaults)
-      : undefined,
+    {
+      param: 'scaleway_serverless_function',
+      value:
+        request.scalewayServerlessFunction !== undefined
+          ? marshalScalewayServerlessFunctionBackendConfig(request.scalewayServerlessFunction, defaults)
+          : undefined,
     },
   ]),
 })
@@ -902,17 +826,11 @@ export const marshalCreateCacheStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fallback_ttl: request.fallbackTtl,
-  include_cookies: request.includeCookies,  
+  include_cookies: request.includeCookies,
   ...resolveOneOf([
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
-    {param: 'waf_stage_id',
-      value: request.wafStageId,
-    },
-    {param: 'route_stage_id',
-      value: request.routeStageId,
-    },
+    { param: 'backend_stage_id', value: request.backendStageId },
+    { param: 'waf_stage_id', value: request.wafStageId },
+    { param: 'route_stage_id', value: request.routeStageId },
   ]),
 })
 
@@ -921,17 +839,11 @@ export const marshalCreateDNSStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fqdns: request.fqdns,
-  wildcard_domain: request.wildcardDomain,  
+  wildcard_domain: request.wildcardDomain,
   ...resolveOneOf([
-    {param: 'tls_stage_id',
-      value: request.tlsStageId,
-    },
-    {param: 'cache_stage_id',
-      value: request.cacheStageId,
-    },
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
+    { param: 'tls_stage_id', value: request.tlsStageId },
+    { param: 'cache_stage_id', value: request.cacheStageId },
+    { param: 'backend_stage_id', value: request.backendStageId },
   ]),
 })
 
@@ -948,35 +860,24 @@ export const marshalCreatePurgeRequestRequest = (
   request: CreatePurgeRequestRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  pipeline_id: request.pipelineId,  
+  pipeline_id: request.pipelineId,
   ...resolveOneOf<string[] | boolean>([
-    {param: 'assets',
-      value: request.assets,
-    },
-    {param: 'all',
-      value: request.all,
-    },
+    { param: 'assets', value: request.assets },
+    { param: 'all', value: request.all },
   ]),
 })
 
 export const marshalCreateRouteStageRequest = (
   request: CreateRouteStageRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'waf_stage_id',
-      value: request.wafStageId,
-    },
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
+    { param: 'waf_stage_id', value: request.wafStageId },
+    { param: 'backend_stage_id', value: request.backendStageId },
   ]),
 })
 
-const marshalTLSSecret = (
-  request: TLSSecret,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
+const marshalTLSSecret = (request: TLSSecret, defaults: DefaultValues): Record<string, unknown> => ({
   region: request.region,
   secret_id: request.secretId,
 })
@@ -986,20 +887,12 @@ export const marshalCreateTLSStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   managed_certificate: request.managedCertificate,
-  secrets: ((request.secrets !== undefined) ?  request.secrets.map(elt => marshalTLSSecret(elt, defaults)): undefined),  
+  secrets: request.secrets !== undefined ? request.secrets.map(elt => marshalTLSSecret(elt, defaults)) : undefined,
   ...resolveOneOf([
-    {param: 'cache_stage_id',
-      value: request.cacheStageId,
-    },
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
-    {param: 'route_stage_id',
-      value: request.routeStageId,
-    },
-    {param: 'waf_stage_id',
-      value: request.wafStageId,
-    },
+    { param: 'cache_stage_id', value: request.cacheStageId },
+    { param: 'backend_stage_id', value: request.backendStageId },
+    { param: 'route_stage_id', value: request.routeStageId },
+    { param: 'waf_stage_id', value: request.wafStageId },
   ]),
 })
 
@@ -1008,12 +901,8 @@ export const marshalCreateWafStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mode: request.mode,
-  paranoia_level: request.paranoiaLevel,  
-  ...resolveOneOf([
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
-  ]),
+  paranoia_level: request.paranoiaLevel,
+  ...resolveOneOf([{ param: 'backend_stage_id', value: request.backendStageId }]),
 })
 
 export const marshalSelectPlanRequest = (
@@ -1049,19 +938,28 @@ const marshalSetHeadStageRequestSwapHeadStage = (
 export const marshalSetHeadStageRequest = (
   request: SetHeadStageRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'add_new_head_stage',
-      value: (request.addNewHeadStage !== undefined) ? marshalSetHeadStageRequestAddNewHeadStage(request.addNewHeadStage, defaults)
-      : undefined,
+    {
+      param: 'add_new_head_stage',
+      value:
+        request.addNewHeadStage !== undefined
+          ? marshalSetHeadStageRequestAddNewHeadStage(request.addNewHeadStage, defaults)
+          : undefined,
     },
-    {param: 'remove_head_stage',
-      value: (request.removeHeadStage !== undefined) ? marshalSetHeadStageRequestRemoveHeadStage(request.removeHeadStage, defaults)
-      : undefined,
+    {
+      param: 'remove_head_stage',
+      value:
+        request.removeHeadStage !== undefined
+          ? marshalSetHeadStageRequestRemoveHeadStage(request.removeHeadStage, defaults)
+          : undefined,
     },
-    {param: 'swap_head_stage',
-      value: (request.swapHeadStage !== undefined) ? marshalSetHeadStageRequestSwapHeadStage(request.swapHeadStage, defaults)
-      : undefined,
+    {
+      param: 'swap_head_stage',
+      value:
+        request.swapHeadStage !== undefined
+          ? marshalSetHeadStageRequestSwapHeadStage(request.swapHeadStage, defaults)
+          : undefined,
     },
   ]),
 })
@@ -1070,30 +968,41 @@ export const marshalSetRouteRulesRequest = (
   request: SetRouteRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  route_rules: ((request.routeRules !== undefined) ?  request.routeRules.map(elt => marshalSetRouteRulesRequestRouteRule(elt, defaults)): undefined),
+  route_rules:
+    request.routeRules !== undefined
+      ? request.routeRules.map(elt => marshalSetRouteRulesRequestRouteRule(elt, defaults))
+      : undefined,
 })
 
 export const marshalUpdateBackendStageRequest = (
   request: UpdateBackendStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  pipeline_id: request.pipelineId,  
+  pipeline_id: request.pipelineId,
   ...resolveOneOf([
-    {param: 'scaleway_s3',
-      value: (request.scalewayS3 !== undefined) ? marshalScalewayS3BackendConfig(request.scalewayS3, defaults)
-      : undefined,
+    {
+      param: 'scaleway_s3',
+      value:
+        request.scalewayS3 !== undefined ? marshalScalewayS3BackendConfig(request.scalewayS3, defaults) : undefined,
     },
-    {param: 'scaleway_lb',
-      value: (request.scalewayLb !== undefined) ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults)
-      : undefined,
+    {
+      param: 'scaleway_lb',
+      value:
+        request.scalewayLb !== undefined ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults) : undefined,
     },
-    {param: 'scaleway_serverless_container',
-      value: (request.scalewayServerlessContainer !== undefined) ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
-      : undefined,
+    {
+      param: 'scaleway_serverless_container',
+      value:
+        request.scalewayServerlessContainer !== undefined
+          ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
+          : undefined,
     },
-    {param: 'scaleway_serverless_function',
-      value: (request.scalewayServerlessFunction !== undefined) ? marshalScalewayServerlessFunctionBackendConfig(request.scalewayServerlessFunction, defaults)
-      : undefined,
+    {
+      param: 'scaleway_serverless_function',
+      value:
+        request.scalewayServerlessFunction !== undefined
+          ? marshalScalewayServerlessFunctionBackendConfig(request.scalewayServerlessFunction, defaults)
+          : undefined,
     },
   ]),
 })
@@ -1103,17 +1012,11 @@ export const marshalUpdateCacheStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fallback_ttl: request.fallbackTtl,
-  include_cookies: request.includeCookies,  
+  include_cookies: request.includeCookies,
   ...resolveOneOf([
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
-    {param: 'waf_stage_id',
-      value: request.wafStageId,
-    },
-    {param: 'route_stage_id',
-      value: request.routeStageId,
-    },
+    { param: 'backend_stage_id', value: request.backendStageId },
+    { param: 'waf_stage_id', value: request.wafStageId },
+    { param: 'route_stage_id', value: request.routeStageId },
   ]),
 })
 
@@ -1122,17 +1025,11 @@ export const marshalUpdateDNSStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fqdns: request.fqdns,
-  wildcard_domain: request.wildcardDomain,  
+  wildcard_domain: request.wildcardDomain,
   ...resolveOneOf([
-    {param: 'tls_stage_id',
-      value: request.tlsStageId,
-    },
-    {param: 'cache_stage_id',
-      value: request.cacheStageId,
-    },
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
+    { param: 'tls_stage_id', value: request.tlsStageId },
+    { param: 'cache_stage_id', value: request.cacheStageId },
+    { param: 'backend_stage_id', value: request.backendStageId },
   ]),
 })
 
@@ -1147,22 +1044,15 @@ export const marshalUpdatePipelineRequest = (
 export const marshalUpdateRouteStageRequest = (
   request: UpdateRouteStageRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({  
+): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'waf_stage_id',
-      value: request.wafStageId,
-    },
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
+    { param: 'waf_stage_id', value: request.wafStageId },
+    { param: 'backend_stage_id', value: request.backendStageId },
   ]),
 })
 
-const marshalTLSSecretsConfig = (
-  request: TLSSecretsConfig,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  tls_secrets:  request.tlsSecrets.map(elt => marshalTLSSecret(elt, defaults)),
+const marshalTLSSecretsConfig = (request: TLSSecretsConfig, defaults: DefaultValues): Record<string, unknown> => ({
+  tls_secrets: request.tlsSecrets.map(elt => marshalTLSSecret(elt, defaults)),
 })
 
 export const marshalUpdateTLSStageRequest = (
@@ -1170,20 +1060,13 @@ export const marshalUpdateTLSStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   managed_certificate: request.managedCertificate,
-  tls_secrets_config: ((request.tlsSecretsConfig !== undefined) ?  marshalTLSSecretsConfig(request.tlsSecretsConfig, defaults): undefined),  
+  tls_secrets_config:
+    request.tlsSecretsConfig !== undefined ? marshalTLSSecretsConfig(request.tlsSecretsConfig, defaults) : undefined,
   ...resolveOneOf([
-    {param: 'cache_stage_id',
-      value: request.cacheStageId,
-    },
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
-    {param: 'route_stage_id',
-      value: request.routeStageId,
-    },
-    {param: 'waf_stage_id',
-      value: request.wafStageId,
-    },
+    { param: 'cache_stage_id', value: request.cacheStageId },
+    { param: 'backend_stage_id', value: request.backendStageId },
+    { param: 'route_stage_id', value: request.routeStageId },
+    { param: 'waf_stage_id', value: request.wafStageId },
   ]),
 })
 
@@ -1192,10 +1075,6 @@ export const marshalUpdateWafStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   mode: request.mode,
-  paranoia_level: request.paranoiaLevel,  
-  ...resolveOneOf([
-    {param: 'backend_stage_id',
-      value: request.backendStageId,
-    },
-  ]),
+  paranoia_level: request.paranoiaLevel,
+  ...resolveOneOf([{ param: 'backend_stage_id', value: request.backendStageId }]),
 })

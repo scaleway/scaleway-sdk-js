@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,ServiceInfo, WaitForOptions, } from '@scaleway/sdk-client'
+import type { ApiLocality, ServiceInfo, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -11,7 +11,12 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,} from './content.gen.js'
+import {
+  CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,
+  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,
+  NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,
+  TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,
+} from './content.gen.js'
 import {
   marshalCreateContainerRequest,
   marshalCreateDomainRequest,
@@ -77,15 +82,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-        'pl-waw',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
+
   getServiceInfo = (request: Readonly<GetServiceInfoRequest> = {}) =>
     this.client.fetch<ServiceInfo>(
       {
@@ -95,7 +95,6 @@ export class API extends ParentAPI {
       unmarshalServiceInfo,
     )
 
-  
   /**
    * Create a new namespace.. Namespace name must be unique inside a project.
    *
@@ -105,9 +104,7 @@ export class API extends ParentAPI {
   createNamespace = (request: Readonly<CreateNamespaceRequest>) =>
     this.client.fetch<Namespace>(
       {
-        body: JSON.stringify(
-          marshalCreateNamespaceRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateNamespaceRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
@@ -115,7 +112,6 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
-  
   /**
    * Get the namespace associated with the specified ID.. Get the namespace associated with the specified ID.
    *
@@ -130,7 +126,7 @@ export class API extends ParentAPI {
       },
       unmarshalNamespace,
     )
-  
+
   /**
    * Waits for {@link Namespace} to be in a final state.
    *
@@ -138,10 +134,7 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Namespace
    */
-  waitForNamespace = (
-    request: Readonly<GetNamespaceRequest>,
-    options?: Readonly<WaitForOptions<Namespace>>,
-  ) =>
+  waitForNamespace = (request: Readonly<GetNamespaceRequest>, options?: Readonly<WaitForOptions<Namespace>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getNamespace,
@@ -149,7 +142,6 @@ export class API extends ParentAPI {
       options,
     )
 
-  
   protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     this.client.fetch<ListNamespacesResponse>(
       {
@@ -166,7 +158,7 @@ export class API extends ParentAPI {
       },
       unmarshalListNamespacesResponse,
     )
-  
+
   /**
    * List all namespaces the caller can access (read permission).. By default, the namespaces listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
 
@@ -178,7 +170,6 @@ Additional parameters can be set in the query to filter, such as `organization_i
   listNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
-  
   /**
    * Update the namespace associated with the specified ID.. Only fields present in the request are updated; others are left untouched.
    *
@@ -188,9 +179,7 @@ Additional parameters can be set in the query to filter, such as `organization_i
   updateNamespace = (request: Readonly<UpdateNamespaceRequest>) =>
     this.client.fetch<Namespace>(
       {
-        body: JSON.stringify(
-          marshalUpdateNamespaceRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateNamespaceRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
@@ -198,7 +187,6 @@ Additional parameters can be set in the query to filter, such as `organization_i
       unmarshalNamespace,
     )
 
-  
   /**
    * Delete the namespace associated with the specified ID.. It also deletes in cascade any resource inside the namespace.
 
@@ -216,7 +204,6 @@ This action **cannot** be undone.
       unmarshalNamespace,
     )
 
-  
   /**
    * Create a new container in a namespace.. Name must be unique inside the given namespace.
    *
@@ -226,9 +213,7 @@ This action **cannot** be undone.
   createContainer = (request: Readonly<CreateContainerRequest>) =>
     this.client.fetch<Container>(
       {
-        body: JSON.stringify(
-          marshalCreateContainerRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateContainerRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers`,
@@ -236,7 +221,6 @@ This action **cannot** be undone.
       unmarshalContainer,
     )
 
-  
   /**
    * Get the container associated with the specified ID.. Get the container associated with the specified ID.
    *
@@ -251,7 +235,7 @@ This action **cannot** be undone.
       },
       unmarshalContainer,
     )
-  
+
   /**
    * Waits for {@link Container} to be in a final state.
    *
@@ -259,10 +243,7 @@ This action **cannot** be undone.
    * @param options - The waiting options
    * @returns A Promise of Container
    */
-  waitForContainer = (
-    request: Readonly<GetContainerRequest>,
-    options?: Readonly<WaitForOptions<Container>>,
-  ) =>
+  waitForContainer = (request: Readonly<GetContainerRequest>, options?: Readonly<WaitForOptions<Container>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CONTAINER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getContainer,
@@ -270,7 +251,6 @@ This action **cannot** be undone.
       options,
     )
 
-  
   protected pageOfListContainers = (request: Readonly<ListContainersRequest> = {}) =>
     this.client.fetch<ListContainersResponse>(
       {
@@ -288,7 +268,7 @@ This action **cannot** be undone.
       },
       unmarshalListContainersResponse,
     )
-  
+
   /**
    * List all containers the caller can access (read permission).. By default, the containers listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
 
@@ -300,7 +280,6 @@ Additional parameters can be set in the query to filter, such as `organization_i
   listContainers = (request: Readonly<ListContainersRequest> = {}) =>
     enrichForPagination('containers', this.pageOfListContainers, request)
 
-  
   /**
    * Update the container associated with the specified ID.. Only fields present in the request are updated; others are left untouched.
    *
@@ -310,9 +289,7 @@ Additional parameters can be set in the query to filter, such as `organization_i
   updateContainer = (request: Readonly<UpdateContainerRequest>) =>
     this.client.fetch<Container>(
       {
-        body: JSON.stringify(
-          marshalUpdateContainerRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateContainerRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}`,
@@ -320,7 +297,6 @@ Additional parameters can be set in the query to filter, such as `organization_i
       unmarshalContainer,
     )
 
-  
   /**
    * Delete the container associated with the specified ID.. It also deletes in cascade any resource linked to the container (crons, tokens, etc.).
 
@@ -338,7 +314,6 @@ This action **cannot** be undone.
       unmarshalContainer,
     )
 
-  
   /**
    * Create a new custom domain for the container with the specified ID.. Create a new custom domain for the container with the specified ID.
    *
@@ -348,9 +323,7 @@ This action **cannot** be undone.
   createDomain = (request: Readonly<CreateDomainRequest>) =>
     this.client.fetch<Domain>(
       {
-        body: JSON.stringify(
-          marshalCreateDomainRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateDomainRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
@@ -358,7 +331,6 @@ This action **cannot** be undone.
       unmarshalDomain,
     )
 
-  
   /**
    * Get the custom domain associated with the specified ID.. Get the custom domain associated with the specified ID.
    *
@@ -373,7 +345,7 @@ This action **cannot** be undone.
       },
       unmarshalDomain,
     )
-  
+
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -381,10 +353,7 @@ This action **cannot** be undone.
    * @param options - The waiting options
    * @returns A Promise of Domain
    */
-  waitForDomain = (
-    request: Readonly<GetDomainRequest>,
-    options?: Readonly<WaitForOptions<Domain>>,
-  ) =>
+  waitForDomain = (request: Readonly<GetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getDomain,
@@ -392,7 +361,6 @@ This action **cannot** be undone.
       options,
     )
 
-  
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}) =>
     this.client.fetch<ListDomainsResponse>(
       {
@@ -410,7 +378,7 @@ This action **cannot** be undone.
       },
       unmarshalListDomainsResponse,
     )
-  
+
   /**
    * List all custom domains the caller can access (read permission).. By default, the custom domains listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
     
@@ -422,7 +390,6 @@ Additional parameters can be set in the query to filter the output, such as `org
   listDomains = (request: Readonly<ListDomainsRequest> = {}) =>
     enrichForPagination('domains', this.pageOfListDomains, request)
 
-  
   /**
    * Update the domain associated with the specified ID.. Only fields present in the request are updated; others are left untouched.
    *
@@ -432,9 +399,7 @@ Additional parameters can be set in the query to filter the output, such as `org
   updateDomain = (request: Readonly<UpdateDomainRequest>) =>
     this.client.fetch<Domain>(
       {
-        body: JSON.stringify(
-          marshalUpdateDomainRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateDomainRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
@@ -442,7 +407,6 @@ Additional parameters can be set in the query to filter the output, such as `org
       unmarshalDomain,
     )
 
-  
   /**
    * Delete the custom domain associated with the specified ID.. Delete the custom domain associated with the specified ID.
    *
@@ -458,7 +422,6 @@ Additional parameters can be set in the query to filter the output, such as `org
       unmarshalDomain,
     )
 
-  
   /**
    * Redeploy a container. Performs a rollout of the container by creating new instances with the latest image version and terminating the old instances.
 When using mutable registry image references (e.g. `my-registry-namespace/image:tag`), this endpoint can be used to force the container to use
@@ -478,7 +441,6 @@ the most recent image version available in the registry.
       unmarshalContainer,
     )
 
-  
   /**
    * Create a new trigger for the container with the specified ID.. Create a new trigger for the container with the specified ID.
    *
@@ -488,9 +450,7 @@ the most recent image version available in the registry.
   createTrigger = (request: Readonly<CreateTriggerRequest>) =>
     this.client.fetch<Trigger>(
       {
-        body: JSON.stringify(
-          marshalCreateTriggerRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateTriggerRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
@@ -498,7 +458,6 @@ the most recent image version available in the registry.
       unmarshalTrigger,
     )
 
-  
   /**
    * Get the trigger associated with the specified ID.. Get the trigger associated with the specified ID.
    *
@@ -513,7 +472,7 @@ the most recent image version available in the registry.
       },
       unmarshalTrigger,
     )
-  
+
   /**
    * Waits for {@link Trigger} to be in a final state.
    *
@@ -521,10 +480,7 @@ the most recent image version available in the registry.
    * @param options - The waiting options
    * @returns A Promise of Trigger
    */
-  waitForTrigger = (
-    request: Readonly<GetTriggerRequest>,
-    options?: Readonly<WaitForOptions<Trigger>>,
-  ) =>
+  waitForTrigger = (request: Readonly<GetTriggerRequest>, options?: Readonly<WaitForOptions<Trigger>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TRIGGER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getTrigger,
@@ -532,7 +488,6 @@ the most recent image version available in the registry.
       options,
     )
 
-  
   protected pageOfListTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     this.client.fetch<ListTriggersResponse>(
       {
@@ -550,7 +505,7 @@ the most recent image version available in the registry.
       },
       unmarshalListTriggersResponse,
     )
-  
+
   /**
    * List all triggers the caller can access (read permission).. By default, the triggers listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
 
@@ -562,7 +517,6 @@ Additional parameters can be set in the query to filter, such as `organization_i
   listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     enrichForPagination('triggers', this.pageOfListTriggers, request)
 
-  
   /**
    * Update the trigger associated with the specified ID.. When updating a trigger, you cannot specify a different source type than the one already set.
 Only fields present in the request are updated; others are left untouched.
@@ -573,9 +527,7 @@ Only fields present in the request are updated; others are left untouched.
   updateTrigger = (request: Readonly<UpdateTriggerRequest>) =>
     this.client.fetch<Trigger>(
       {
-        body: JSON.stringify(
-          marshalUpdateTriggerRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateTriggerRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
@@ -583,7 +535,6 @@ Only fields present in the request are updated; others are left untouched.
       unmarshalTrigger,
     )
 
-  
   /**
    * Delete the trigger associated with the specified ID.. This action **cannot** be undone.
    *
@@ -598,7 +549,4 @@ Only fields present in the request are updated; others are left untouched.
       },
       unmarshalTrigger,
     )
-
-  
 }
-

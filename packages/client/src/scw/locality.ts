@@ -20,10 +20,7 @@ export type ApiLocality =
   | { type: 'global' }
   | { type: 'unspecified' }
 
-export function toApiLocality(legacy?: {
-  zones?: Zone[]
-  regions?: Region[]
-}): ApiLocality {
+export function toApiLocality(legacy?: { zones?: Zone[]; regions?: Region[] }): ApiLocality {
   if (!legacy) {
     return { type: 'unspecified' }
   }

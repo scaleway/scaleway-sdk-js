@@ -5,12 +5,7 @@
  * using template literal functions from ./template.ts.
  */
 
-import type {
-  QueriesMetadata,
-  QueryMethod,
-  ReactQueriesConfig,
-  ServiceMetadata,
-} from './config.ts'
+import type { QueriesMetadata, QueryMethod, ReactQueriesConfig, ServiceMetadata } from './config.ts'
 import { capitalize, lowerCaseFirst } from './config.ts'
 import { renderHook, renderReload } from './template.ts'
 
@@ -68,9 +63,7 @@ export function generateQueryHook(
   const hasParams = !!method.paramsType
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}Query`
 
-  const needsNsImport =
-    n.returnType.startsWith(`${n.ns}.`) ||
-    (hasParams && n.paramsType.startsWith(`${n.ns}.`))
+  const needsNsImport = n.returnType.startsWith(`${n.ns}.`) || (hasParams && n.paramsType.startsWith(`${n.ns}.`))
 
   const keyArray = hasParams
     ? `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`
@@ -108,9 +101,7 @@ export function generateAllQueryHook(
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery`
 
   const rawItemType = method.listItemType
-  const itemType = rawItemType
-    ? nsType(n.ns, rawItemType, n.rawTypes)
-    : n.returnType
+  const itemType = rawItemType ? nsType(n.ns, rawItemType, n.rawTypes) : n.returnType
 
   return renderHook({
     apiHookName: n.apiHookName,
@@ -208,12 +199,7 @@ export function generateIndexFile(
         exports.push(
           `export { ${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery"`,
         )
-        if (
-          !(
-            config.filters.skipCursorAllHooks &&
-            method.paginationType === 'cursor'
-          )
-        ) {
+        if (!(config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
           exports.push(
             `export { ${config.naming.hookPrefix}${serviceName}${baseName}AllQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}AllQuery"`,
           )

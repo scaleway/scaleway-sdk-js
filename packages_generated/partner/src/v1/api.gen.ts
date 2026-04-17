@@ -1,12 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import {
-  enrichForPagination,
-  API as ParentAPI,
-  urlParams,
-  validatePathParam,
-} from '@scaleway/sdk-client'
+import { enrichForPagination, API as ParentAPI, urlParams, validatePathParam } from '@scaleway/sdk-client'
 import {
   marshalCreateOrganizationRequest,
   marshalRequestAdminRoleRequest,
@@ -42,18 +37,13 @@ export class API extends ParentAPI {
    * @param request - The request {@link RequestAdminRoleRequest}
    */
   requestAdminRole = (request: Readonly<RequestAdminRoleRequest>) =>
-    this.client.fetch<void>(
-      {
-        body: JSON.stringify(
-          marshalRequestAdminRoleRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/request-admin-role`,
-      },
-    )
+    this.client.fetch<void>({
+      body: JSON.stringify(marshalRequestAdminRoleRequest(request, this.client.settings)),
+      headers: jsonContentHeaders,
+      method: 'POST',
+      path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/request-admin-role`,
+    })
 
-  
   /**
    * Create a new organization.
    *
@@ -63,9 +53,7 @@ export class API extends ParentAPI {
   createOrganization = (request: Readonly<CreateOrganizationRequest>) =>
     this.client.fetch<Organization>(
       {
-        body: JSON.stringify(
-          marshalCreateOrganizationRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateOrganizationRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/partner/v1/organizations`,
@@ -73,7 +61,6 @@ export class API extends ParentAPI {
       unmarshalOrganization,
     )
 
-  
   /**
    * Get an organization.
    *
@@ -89,7 +76,6 @@ export class API extends ParentAPI {
       unmarshalOrganization,
     )
 
-  
   protected pageOfListOrganizations = (request: Readonly<ListOrganizationsRequest> = {}) =>
     this.client.fetch<ListOrganizationsResponse>(
       {
@@ -107,7 +93,7 @@ export class API extends ParentAPI {
       },
       unmarshalListOrganizationsResponse,
     )
-  
+
   /**
    * List Organizations.
    *
@@ -117,7 +103,6 @@ export class API extends ParentAPI {
   listOrganizations = (request: Readonly<ListOrganizationsRequest> = {}) =>
     enrichForPagination('organizations', this.pageOfListOrganizations, request)
 
-  
   /**
    * Lock an organization.
    *
@@ -135,7 +120,6 @@ export class API extends ParentAPI {
       unmarshalOrganization,
     )
 
-  
   /**
    * Unlock an organization.
    *
@@ -153,7 +137,6 @@ export class API extends ParentAPI {
       unmarshalOrganization,
     )
 
-  
   /**
    * Update an organization.
    *
@@ -163,16 +146,11 @@ export class API extends ParentAPI {
   updateOrganization = (request: Readonly<UpdateOrganizationRequest> = {}) =>
     this.client.fetch<Organization>(
       {
-        body: JSON.stringify(
-          marshalUpdateOrganizationRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateOrganizationRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}`,
       },
       unmarshalOrganization,
     )
-
-  
 }
-

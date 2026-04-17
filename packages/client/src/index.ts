@@ -1,7 +1,4 @@
-export type {
-  WaitForOptions,
-  WaitForStopCondition,
-} from './internal/async/interval-retrier.js'
+export type { WaitForOptions, WaitForStopCondition } from './internal/async/interval-retrier.js'
 export type {
   NetworkInterceptors,
   RequestInterceptor,

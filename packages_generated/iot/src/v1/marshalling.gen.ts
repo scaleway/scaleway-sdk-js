@@ -1,8 +1,14 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalTimeSeries, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import {
+  isJSONObject,
+  resolveOneOf,
+  unmarshalArrayOfObject,
+  unmarshalDate,
+  unmarshalTimeSeries,
+} from '@scaleway/sdk-client'
 import type {
   Certificate,
   CreateDeviceRequest,
@@ -52,9 +58,7 @@ import type {
 
 const unmarshalDeviceMessageFiltersRule = (data: unknown): DeviceMessageFiltersRule => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DeviceMessageFiltersRule' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DeviceMessageFiltersRule' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -65,9 +69,7 @@ const unmarshalDeviceMessageFiltersRule = (data: unknown): DeviceMessageFiltersR
 
 const unmarshalDeviceMessageFilters = (data: unknown): DeviceMessageFilters => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DeviceMessageFilters' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DeviceMessageFilters' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -78,9 +80,7 @@ const unmarshalDeviceMessageFilters = (data: unknown): DeviceMessageFilters => {
 
 export const unmarshalDevice = (data: unknown): Device => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Device' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Device' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -103,9 +103,7 @@ export const unmarshalDevice = (data: unknown): Device => {
 
 export const unmarshalNetwork = (data: unknown): Network => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Network' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Network' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -122,9 +120,7 @@ export const unmarshalNetwork = (data: unknown): Network => {
 
 const unmarshalHubTwinsGraphiteConfig = (data: unknown): HubTwinsGraphiteConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'HubTwinsGraphiteConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'HubTwinsGraphiteConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -134,9 +130,7 @@ const unmarshalHubTwinsGraphiteConfig = (data: unknown): HubTwinsGraphiteConfig 
 
 export const unmarshalHub = (data: unknown): Hub => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Hub' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Hub' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -156,16 +150,16 @@ export const unmarshalHub = (data: unknown): Hub => {
     projectId: data.project_id,
     region: data.region,
     status: data.status,
-    twinsGraphiteConfig: data.twins_graphite_config ? unmarshalHubTwinsGraphiteConfig(data.twins_graphite_config) : undefined,
+    twinsGraphiteConfig: data.twins_graphite_config
+      ? unmarshalHubTwinsGraphiteConfig(data.twins_graphite_config)
+      : undefined,
     updatedAt: unmarshalDate(data.updated_at),
   } as Hub
 }
 
 const unmarshalCertificate = (data: unknown): Certificate => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -176,9 +170,7 @@ const unmarshalCertificate = (data: unknown): Certificate => {
 
 export const unmarshalCreateDeviceResponse = (data: unknown): CreateDeviceResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CreateDeviceResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'CreateDeviceResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -189,9 +181,7 @@ export const unmarshalCreateDeviceResponse = (data: unknown): CreateDeviceRespon
 
 export const unmarshalCreateNetworkResponse = (data: unknown): CreateNetworkResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'CreateNetworkResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'CreateNetworkResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -202,9 +192,7 @@ export const unmarshalCreateNetworkResponse = (data: unknown): CreateNetworkResp
 
 export const unmarshalGetDeviceCertificateResponse = (data: unknown): GetDeviceCertificateResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetDeviceCertificateResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GetDeviceCertificateResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -215,9 +203,7 @@ export const unmarshalGetDeviceCertificateResponse = (data: unknown): GetDeviceC
 
 export const unmarshalGetDeviceMetricsResponse = (data: unknown): GetDeviceMetricsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetDeviceMetricsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GetDeviceMetricsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -227,9 +213,7 @@ export const unmarshalGetDeviceMetricsResponse = (data: unknown): GetDeviceMetri
 
 export const unmarshalGetHubCAResponse = (data: unknown): GetHubCAResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetHubCAResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GetHubCAResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -239,9 +223,7 @@ export const unmarshalGetHubCAResponse = (data: unknown): GetHubCAResponse => {
 
 export const unmarshalGetHubMetricsResponse = (data: unknown): GetHubMetricsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetHubMetricsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GetHubMetricsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -251,9 +233,7 @@ export const unmarshalGetHubMetricsResponse = (data: unknown): GetHubMetricsResp
 
 export const unmarshalListDevicesResponse = (data: unknown): ListDevicesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDevicesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListDevicesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -264,9 +244,7 @@ export const unmarshalListDevicesResponse = (data: unknown): ListDevicesResponse
 
 export const unmarshalListHubsResponse = (data: unknown): ListHubsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListHubsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListHubsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -277,9 +255,7 @@ export const unmarshalListHubsResponse = (data: unknown): ListHubsResponse => {
 
 export const unmarshalListNetworksResponse = (data: unknown): ListNetworksResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListNetworksResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListNetworksResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -290,9 +266,7 @@ export const unmarshalListNetworksResponse = (data: unknown): ListNetworksRespon
 
 const unmarshalRouteSummary = (data: unknown): RouteSummary => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteSummary' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RouteSummary' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -309,9 +283,7 @@ const unmarshalRouteSummary = (data: unknown): RouteSummary => {
 
 export const unmarshalListRoutesResponse = (data: unknown): ListRoutesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListRoutesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListRoutesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -334,9 +306,7 @@ const unmarshalListTwinDocumentsResponseDocumentSummary = (data: unknown): ListT
 
 export const unmarshalListTwinDocumentsResponse = (data: unknown): ListTwinDocumentsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListTwinDocumentsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListTwinDocumentsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -346,9 +316,7 @@ export const unmarshalListTwinDocumentsResponse = (data: unknown): ListTwinDocum
 
 export const unmarshalRenewDeviceCertificateResponse = (data: unknown): RenewDeviceCertificateResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RenewDeviceCertificateResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RenewDeviceCertificateResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -359,9 +327,7 @@ export const unmarshalRenewDeviceCertificateResponse = (data: unknown): RenewDev
 
 const unmarshalRouteDatabaseConfig = (data: unknown): RouteDatabaseConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteDatabaseConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RouteDatabaseConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -377,9 +343,7 @@ const unmarshalRouteDatabaseConfig = (data: unknown): RouteDatabaseConfig => {
 
 const unmarshalRouteRestConfig = (data: unknown): RouteRestConfig => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteRestConfig' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RouteRestConfig' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -391,9 +355,7 @@ const unmarshalRouteRestConfig = (data: unknown): RouteRestConfig => {
 
 const unmarshalRouteS3Config = (data: unknown): RouteS3Config => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RouteS3Config' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RouteS3Config' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -406,9 +368,7 @@ const unmarshalRouteS3Config = (data: unknown): RouteS3Config => {
 
 export const unmarshalRoute = (data: unknown): Route => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Route' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Route' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -428,9 +388,7 @@ export const unmarshalRoute = (data: unknown): Route => {
 
 export const unmarshalSetDeviceCertificateResponse = (data: unknown): SetDeviceCertificateResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'SetDeviceCertificateResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'SetDeviceCertificateResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -441,9 +399,7 @@ export const unmarshalSetDeviceCertificateResponse = (data: unknown): SetDeviceC
 
 export const unmarshalTwinDocument = (data: unknown): TwinDocument => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'TwinDocument' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'TwinDocument' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -466,8 +422,8 @@ const marshalDeviceMessageFilters = (
   request: DeviceMessageFilters,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  publish: ((request.publish !== undefined) ?  marshalDeviceMessageFiltersRule(request.publish, defaults): undefined),
-  subscribe: ((request.subscribe !== undefined) ?  marshalDeviceMessageFiltersRule(request.subscribe, defaults): undefined),
+  publish: request.publish !== undefined ? marshalDeviceMessageFiltersRule(request.publish, defaults) : undefined,
+  subscribe: request.subscribe !== undefined ? marshalDeviceMessageFiltersRule(request.subscribe, defaults) : undefined,
 })
 
 export const marshalCreateDeviceRequest = (
@@ -478,7 +434,8 @@ export const marshalCreateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: ((request.messageFilters !== undefined) ?  marshalDeviceMessageFilters(request.messageFilters, defaults): undefined),
+  message_filters:
+    request.messageFilters !== undefined ? marshalDeviceMessageFilters(request.messageFilters, defaults) : undefined,
   name: request.name || randomName('device'),
 })
 
@@ -497,11 +454,14 @@ export const marshalCreateHubRequest = (
   events_topic_prefix: request.eventsTopicPrefix,
   name: request.name || randomName('hub'),
   product_plan: request.productPlan,
-  project_id: request.projectId ?? defaults.defaultProjectId,  
+  project_id: request.projectId ?? defaults.defaultProjectId,
   ...resolveOneOf([
-    {param: 'twins_graphite_config',
-      value: (request.twinsGraphiteConfig !== undefined) ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
-      : undefined,
+    {
+      param: 'twins_graphite_config',
+      value:
+        request.twinsGraphiteConfig !== undefined
+          ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
+          : undefined,
     },
   ]),
 })
@@ -533,7 +493,7 @@ const marshalCreateRouteRequestRestConfig = (
   request: CreateRouteRequestRestConfig,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  headers:  request.headers,
+  headers: request.headers,
   uri: request.uri,
   verb: request.verb,
 })
@@ -554,19 +514,25 @@ export const marshalCreateRouteRequest = (
 ): Record<string, unknown> => ({
   hub_id: request.hubId,
   name: request.name || randomName('route'),
-  topic: request.topic,  
+  topic: request.topic,
   ...resolveOneOf([
-    {param: 's3_config',
-      value: (request.s3Config !== undefined) ? marshalCreateRouteRequestS3Config(request.s3Config, defaults)
-      : undefined,
+    {
+      param: 's3_config',
+      value: request.s3Config !== undefined ? marshalCreateRouteRequestS3Config(request.s3Config, defaults) : undefined,
     },
-    {param: 'db_config',
-      value: (request.dbConfig !== undefined) ? marshalCreateRouteRequestDatabaseConfig(request.dbConfig, defaults)
-      : undefined,
+    {
+      param: 'db_config',
+      value:
+        request.dbConfig !== undefined
+          ? marshalCreateRouteRequestDatabaseConfig(request.dbConfig, defaults)
+          : undefined,
     },
-    {param: 'rest_config',
-      value: (request.restConfig !== undefined) ? marshalCreateRouteRequestRestConfig(request.restConfig, defaults)
-      : undefined,
+    {
+      param: 'rest_config',
+      value:
+        request.restConfig !== undefined
+          ? marshalCreateRouteRequestRestConfig(request.restConfig, defaults)
+          : undefined,
     },
   ]),
 })
@@ -594,10 +560,7 @@ export const marshalSetDeviceCertificateRequest = (
   certificate_pem: request.certificatePem,
 })
 
-export const marshalSetHubCARequest = (
-  request: SetHubCARequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
+export const marshalSetHubCARequest = (request: SetHubCARequest, defaults: DefaultValues): Record<string, unknown> => ({
   ca_cert_pem: request.caCertPem,
   challenge_cert_pem: request.challengeCertPem,
 })
@@ -610,7 +573,8 @@ export const marshalUpdateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: ((request.messageFilters !== undefined) ?  marshalDeviceMessageFilters(request.messageFilters, defaults): undefined),
+  message_filters:
+    request.messageFilters !== undefined ? marshalDeviceMessageFilters(request.messageFilters, defaults) : undefined,
 })
 
 export const marshalUpdateHubRequest = (
@@ -621,11 +585,14 @@ export const marshalUpdateHubRequest = (
   enable_device_auto_provisioning: request.enableDeviceAutoProvisioning,
   events_topic_prefix: request.eventsTopicPrefix,
   name: request.name,
-  product_plan: request.productPlan,  
+  product_plan: request.productPlan,
   ...resolveOneOf([
-    {param: 'twins_graphite_config',
-      value: (request.twinsGraphiteConfig !== undefined) ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
-      : undefined,
+    {
+      param: 'twins_graphite_config',
+      value:
+        request.twinsGraphiteConfig !== undefined
+          ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
+          : undefined,
     },
   ]),
 })
@@ -667,19 +634,25 @@ export const marshalUpdateRouteRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  topic: request.topic,  
+  topic: request.topic,
   ...resolveOneOf([
-    {param: 's3_config',
-      value: (request.s3Config !== undefined) ? marshalUpdateRouteRequestS3Config(request.s3Config, defaults)
-      : undefined,
+    {
+      param: 's3_config',
+      value: request.s3Config !== undefined ? marshalUpdateRouteRequestS3Config(request.s3Config, defaults) : undefined,
     },
-    {param: 'db_config',
-      value: (request.dbConfig !== undefined) ? marshalUpdateRouteRequestDatabaseConfig(request.dbConfig, defaults)
-      : undefined,
+    {
+      param: 'db_config',
+      value:
+        request.dbConfig !== undefined
+          ? marshalUpdateRouteRequestDatabaseConfig(request.dbConfig, defaults)
+          : undefined,
     },
-    {param: 'rest_config',
-      value: (request.restConfig !== undefined) ? marshalUpdateRouteRequestRestConfig(request.restConfig, defaults)
-      : undefined,
+    {
+      param: 'rest_config',
+      value:
+        request.restConfig !== undefined
+          ? marshalUpdateRouteRequestRestConfig(request.restConfig, defaults)
+          : undefined,
     },
   ]),
 })

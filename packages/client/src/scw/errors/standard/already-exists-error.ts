@@ -14,11 +14,7 @@ export class AlreadyExistsError extends ScalewayError {
     readonly resourceId: string,
     readonly helpMessage: string,
   ) {
-    super(
-      status,
-      body,
-      `resource ${resource} with ID ${resourceId} already exists: ${helpMessage}`,
-    )
+    super(status, body, `resource ${resource} with ID ${resourceId} already exists: ${helpMessage}`)
     this.name = 'AlreadyExistsError'
   }
 
@@ -31,12 +27,6 @@ export class AlreadyExistsError extends ScalewayError {
       return null
     }
 
-    return new AlreadyExistsError(
-      status,
-      obj,
-      obj.resource,
-      obj.resource_id,
-      obj.help_message,
-    )
+    return new AlreadyExistsError(status, obj, obj.resource, obj.resource_id, obj.help_message)
   }
 }

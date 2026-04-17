@@ -10,17 +10,11 @@ import type {
   TaskStatus,
 } from './types.gen.js'
 
-
 /** Lists transient statutes of the enum {@link DNSZoneStatus}. */
-export const DNS_ZONE_TRANSIENT_STATUSES: DNSZoneStatus[] = [
-  'pending',
-]
+export const DNS_ZONE_TRANSIENT_STATUSES: DNSZoneStatus[] = ['pending']
 
 /** Lists transient statutes of the enum {@link DomainFeatureStatus}. */
-export const DOMAIN_FEATURE_TRANSIENT_STATUSES: DomainFeatureStatus[] = [
-  'enabling',
-  'disabling',
-]
+export const DOMAIN_FEATURE_TRANSIENT_STATUSES: DomainFeatureStatus[] = ['enabling', 'disabling']
 
 /** Lists transient statutes of the enum {@link DomainRegistrationStatusTransferStatus}. */
 export const DOMAIN_REGISTRATION_STATUS_TRANSFER_TRANSIENT_STATUSES: DomainRegistrationStatusTransferStatus[] = [
@@ -40,18 +34,10 @@ export const DOMAIN_TRANSIENT_STATUSES: DomainStatus[] = [
 ]
 
 /** Lists transient statutes of the enum {@link HostStatus}. */
-export const HOST_TRANSIENT_STATUSES: HostStatus[] = [
-  'updating',
-  'deleting',
-]
+export const HOST_TRANSIENT_STATUSES: HostStatus[] = ['updating', 'deleting']
 
 /** Lists transient statutes of the enum {@link SSLCertificateStatus}. */
-export const SSL_CERTIFICATE_TRANSIENT_STATUSES: SSLCertificateStatus[] = [
-  'pending',
-]
+export const SSL_CERTIFICATE_TRANSIENT_STATUSES: SSLCertificateStatus[] = ['pending']
 
 /** Lists transient statutes of the enum {@link TaskStatus}. */
-export const TASK_TRANSIENT_STATUSES: TaskStatus[] = [
-  'pending',
-]
-
+export const TASK_TRANSIENT_STATUSES: TaskStatus[] = ['pending']

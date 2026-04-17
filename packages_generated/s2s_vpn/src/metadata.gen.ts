@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: "@scaleway/sdk-s2s-vpn",
-  namespace: "s2s-vpn",
-  displayName: "S2S Vpn",
-  versions: ["v1alpha1"]
+  name: '@scaleway/sdk-s2s-vpn',
+  namespace: 's2s-vpn',
+  displayName: 'S2S Vpn',
+  versions: ['v1alpha1'],
 } as const
 
 export type Metadata = typeof pkgMetadata

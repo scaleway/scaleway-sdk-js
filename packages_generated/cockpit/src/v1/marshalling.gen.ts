@@ -1,6 +1,5 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   Alert,
   AlertManager,
@@ -57,9 +56,7 @@ import type {
 
 const unmarshalContactPointEmail = (data: unknown): ContactPointEmail => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContactPointEmail' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ContactPointEmail' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -69,9 +66,7 @@ const unmarshalContactPointEmail = (data: unknown): ContactPointEmail => {
 
 export const unmarshalContactPoint = (data: unknown): ContactPoint => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ContactPoint' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ContactPoint' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -83,9 +78,7 @@ export const unmarshalContactPoint = (data: unknown): ContactPoint => {
 
 export const unmarshalDataSource = (data: unknown): DataSource => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DataSource' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DataSource' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -106,9 +99,7 @@ export const unmarshalDataSource = (data: unknown): DataSource => {
 
 const unmarshalExporterDatadogDestination = (data: unknown): ExporterDatadogDestination => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ExporterDatadogDestination' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ExporterDatadogDestination' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -119,9 +110,7 @@ const unmarshalExporterDatadogDestination = (data: unknown): ExporterDatadogDest
 
 const unmarshalExporterOTLPDestination = (data: unknown): ExporterOTLPDestination => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ExporterOTLPDestination' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ExporterOTLPDestination' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -132,14 +121,14 @@ const unmarshalExporterOTLPDestination = (data: unknown): ExporterOTLPDestinatio
 
 export const unmarshalExporter = (data: unknown): Exporter => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Exporter' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Exporter' failed as data isn't a dictionary.`)
   }
 
   return {
     createdAt: unmarshalDate(data.created_at),
-    datadogDestination: data.datadog_destination ? unmarshalExporterDatadogDestination(data.datadog_destination) : undefined,
+    datadogDestination: data.datadog_destination
+      ? unmarshalExporterDatadogDestination(data.datadog_destination)
+      : undefined,
     datasourceId: data.datasource_id,
     description: data.description,
     exportedProducts: data.exported_products,
@@ -154,9 +143,7 @@ export const unmarshalExporter = (data: unknown): Exporter => {
 
 export const unmarshalGrafanaProductDashboard = (data: unknown): GrafanaProductDashboard => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GrafanaProductDashboard' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GrafanaProductDashboard' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -170,9 +157,7 @@ export const unmarshalGrafanaProductDashboard = (data: unknown): GrafanaProductD
 
 export const unmarshalGrafanaUser = (data: unknown): GrafanaUser => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GrafanaUser' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GrafanaUser' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -185,9 +170,7 @@ export const unmarshalGrafanaUser = (data: unknown): GrafanaUser => {
 
 export const unmarshalPlan = (data: unknown): Plan => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Plan' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Plan' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -204,9 +187,7 @@ export const unmarshalPlan = (data: unknown): Plan => {
 
 export const unmarshalToken = (data: unknown): Token => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Token' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Token' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -223,9 +204,7 @@ export const unmarshalToken = (data: unknown): Token => {
 
 export const unmarshalAlertManager = (data: unknown): AlertManager => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'AlertManager' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'AlertManager' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -238,9 +217,7 @@ export const unmarshalAlertManager = (data: unknown): AlertManager => {
 
 export const unmarshalDisableAlertRulesResponse = (data: unknown): DisableAlertRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DisableAlertRulesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'DisableAlertRulesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -250,9 +227,7 @@ export const unmarshalDisableAlertRulesResponse = (data: unknown): DisableAlertR
 
 export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRulesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EnableAlertRulesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'EnableAlertRulesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -262,9 +237,7 @@ export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRul
 
 const unmarshalGetConfigResponseRetention = (data: unknown): GetConfigResponseRetention => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetConfigResponseRetention' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GetConfigResponseRetention' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -276,25 +249,31 @@ const unmarshalGetConfigResponseRetention = (data: unknown): GetConfigResponseRe
 
 export const unmarshalGetConfigResponse = (data: unknown): GetConfigResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetConfigResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GetConfigResponse' failed as data isn't a dictionary.`)
   }
 
   return {
-    customLogsRetention: data.custom_logs_retention ? unmarshalGetConfigResponseRetention(data.custom_logs_retention) : undefined,
-    customMetricsRetention: data.custom_metrics_retention ? unmarshalGetConfigResponseRetention(data.custom_metrics_retention) : undefined,
-    customTracesRetention: data.custom_traces_retention ? unmarshalGetConfigResponseRetention(data.custom_traces_retention) : undefined,
-    productLogsRetention: data.product_logs_retention ? unmarshalGetConfigResponseRetention(data.product_logs_retention) : undefined,
-    productMetricsRetention: data.product_metrics_retention ? unmarshalGetConfigResponseRetention(data.product_metrics_retention) : undefined,
+    customLogsRetention: data.custom_logs_retention
+      ? unmarshalGetConfigResponseRetention(data.custom_logs_retention)
+      : undefined,
+    customMetricsRetention: data.custom_metrics_retention
+      ? unmarshalGetConfigResponseRetention(data.custom_metrics_retention)
+      : undefined,
+    customTracesRetention: data.custom_traces_retention
+      ? unmarshalGetConfigResponseRetention(data.custom_traces_retention)
+      : undefined,
+    productLogsRetention: data.product_logs_retention
+      ? unmarshalGetConfigResponseRetention(data.product_logs_retention)
+      : undefined,
+    productMetricsRetention: data.product_metrics_retention
+      ? unmarshalGetConfigResponseRetention(data.product_metrics_retention)
+      : undefined,
   } as GetConfigResponse
 }
 
 const unmarshalRulesCount = (data: unknown): RulesCount => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'RulesCount' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'RulesCount' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -306,9 +285,7 @@ const unmarshalRulesCount = (data: unknown): RulesCount => {
 
 export const unmarshalGetRulesCountResponse = (data: unknown): GetRulesCountResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetRulesCountResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'GetRulesCountResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -320,9 +297,7 @@ export const unmarshalGetRulesCountResponse = (data: unknown): GetRulesCountResp
 
 export const unmarshalGrafana = (data: unknown): Grafana => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Grafana' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Grafana' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -332,9 +307,7 @@ export const unmarshalGrafana = (data: unknown): Grafana => {
 
 const unmarshalPreconfiguredAlertData = (data: unknown): PreconfiguredAlertData => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PreconfiguredAlertData' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'PreconfiguredAlertData' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -348,9 +321,7 @@ const unmarshalPreconfiguredAlertData = (data: unknown): PreconfiguredAlertData 
 
 const unmarshalAlert = (data: unknown): Alert => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Alert' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Alert' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -369,9 +340,7 @@ const unmarshalAlert = (data: unknown): Alert => {
 
 export const unmarshalListAlertsResponse = (data: unknown): ListAlertsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListAlertsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListAlertsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -382,9 +351,7 @@ export const unmarshalListAlertsResponse = (data: unknown): ListAlertsResponse =
 
 export const unmarshalListContactPointsResponse = (data: unknown): ListContactPointsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListContactPointsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListContactPointsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -397,9 +364,7 @@ export const unmarshalListContactPointsResponse = (data: unknown): ListContactPo
 
 export const unmarshalListDataSourcesResponse = (data: unknown): ListDataSourcesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListDataSourcesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListDataSourcesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -410,9 +375,7 @@ export const unmarshalListDataSourcesResponse = (data: unknown): ListDataSources
 
 export const unmarshalListExportersResponse = (data: unknown): ListExportersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListExportersResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListExportersResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -436,9 +399,7 @@ export const unmarshalListGrafanaProductDashboardsResponse = (data: unknown): Li
 
 export const unmarshalListGrafanaUsersResponse = (data: unknown): ListGrafanaUsersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListGrafanaUsersResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListGrafanaUsersResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -449,9 +410,7 @@ export const unmarshalListGrafanaUsersResponse = (data: unknown): ListGrafanaUse
 
 export const unmarshalListPlansResponse = (data: unknown): ListPlansResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListPlansResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -462,9 +421,7 @@ export const unmarshalListPlansResponse = (data: unknown): ListPlansResponse => 
 
 const unmarshalProduct = (data: unknown): Product => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Product' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Product' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -477,9 +434,7 @@ const unmarshalProduct = (data: unknown): Product => {
 
 export const unmarshalListProductsResponse = (data: unknown): ListProductsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListProductsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListProductsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -490,9 +445,7 @@ export const unmarshalListProductsResponse = (data: unknown): ListProductsRespon
 
 export const unmarshalListTokensResponse = (data: unknown): ListTokensResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListTokensResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -503,9 +456,7 @@ export const unmarshalListTokensResponse = (data: unknown): ListTokensResponse =
 
 const unmarshalUsage = (data: unknown): Usage => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Usage' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Usage' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -522,9 +473,7 @@ const unmarshalUsage = (data: unknown): Usage => {
 
 export const unmarshalUsageOverview = (data: unknown): UsageOverview => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'UsageOverview' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'UsageOverview' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -567,10 +516,7 @@ export const marshalGlobalApiSyncGrafanaDataSourcesRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
-const marshalContactPointEmail = (
-  request: ContactPointEmail,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
+const marshalContactPointEmail = (request: ContactPointEmail, defaults: DefaultValues): Record<string, unknown> => ({
   to: request.to,
 })
 
@@ -579,11 +525,11 @@ export const marshalRegionalApiCreateContactPointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
-  send_resolved_notifications: request.sendResolvedNotifications,  
+  send_resolved_notifications: request.sendResolvedNotifications,
   ...resolveOneOf([
-    {param: 'email',
-      value: (request.email !== undefined) ? marshalContactPointEmail(request.email, defaults)
-      : undefined,
+    {
+      param: 'email',
+      value: request.email !== undefined ? marshalContactPointEmail(request.email, defaults) : undefined,
     },
   ]),
 })
@@ -611,7 +557,7 @@ const marshalExporterOTLPDestination = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   endpoint: request.endpoint,
-  headers:  request.headers,
+  headers: request.headers,
 })
 
 export const marshalRegionalApiCreateExporterRequest = (
@@ -621,15 +567,21 @@ export const marshalRegionalApiCreateExporterRequest = (
   datasource_id: request.datasourceId,
   description: request.description,
   exported_products: request.exportedProducts,
-  name: request.name,  
+  name: request.name,
   ...resolveOneOf([
-    {param: 'datadog_destination',
-      value: (request.datadogDestination !== undefined) ? marshalExporterDatadogDestination(request.datadogDestination, defaults)
-      : undefined,
+    {
+      param: 'datadog_destination',
+      value:
+        request.datadogDestination !== undefined
+          ? marshalExporterDatadogDestination(request.datadogDestination, defaults)
+          : undefined,
     },
-    {param: 'otlp_destination',
-      value: (request.otlpDestination !== undefined) ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
-      : undefined,
+    {
+      param: 'otlp_destination',
+      value:
+        request.otlpDestination !== undefined
+          ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
+          : undefined,
     },
   ]),
 })
@@ -640,18 +592,18 @@ export const marshalRegionalApiCreateTokenRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  token_scopes: ((request.tokenScopes !== undefined) ?  request.tokenScopes: undefined),
+  token_scopes: request.tokenScopes !== undefined ? request.tokenScopes : undefined,
 })
 
 export const marshalRegionalApiDeleteContactPointRequest = (
   request: RegionalApiDeleteContactPointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  project_id: request.projectId ?? defaults.defaultProjectId,  
+  project_id: request.projectId ?? defaults.defaultProjectId,
   ...resolveOneOf([
-    {param: 'email',
-      value: (request.email !== undefined) ? marshalContactPointEmail(request.email, defaults)
-      : undefined,
+    {
+      param: 'email',
+      value: request.email !== undefined ? marshalContactPointEmail(request.email, defaults) : undefined,
     },
   ]),
 })
@@ -712,11 +664,11 @@ export const marshalRegionalApiUpdateContactPointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   project_id: request.projectId ?? defaults.defaultProjectId,
-  send_resolved_notifications: request.sendResolvedNotifications,  
+  send_resolved_notifications: request.sendResolvedNotifications,
   ...resolveOneOf([
-    {param: 'email',
-      value: (request.email !== undefined) ? marshalContactPointEmail(request.email, defaults)
-      : undefined,
+    {
+      param: 'email',
+      value: request.email !== undefined ? marshalContactPointEmail(request.email, defaults) : undefined,
     },
   ]),
 })
@@ -735,15 +687,21 @@ export const marshalRegionalApiUpdateExporterRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   exported_products: request.exportedProducts,
-  name: request.name,  
+  name: request.name,
   ...resolveOneOf([
-    {param: 'datadog_destination',
-      value: (request.datadogDestination !== undefined) ? marshalExporterDatadogDestination(request.datadogDestination, defaults)
-      : undefined,
+    {
+      param: 'datadog_destination',
+      value:
+        request.datadogDestination !== undefined
+          ? marshalExporterDatadogDestination(request.datadogDestination, defaults)
+          : undefined,
     },
-    {param: 'otlp_destination',
-      value: (request.otlpDestination !== undefined) ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
-      : undefined,
+    {
+      param: 'otlp_destination',
+      value:
+        request.otlpDestination !== undefined
+          ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
+          : undefined,
     },
   ]),
 })

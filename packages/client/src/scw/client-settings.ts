@@ -1,15 +1,5 @@
-import type {
-  NetworkInterceptors,
-  RequestInterceptor,
-  ResponseInterceptor,
-} from '../internal/interceptors/types.js'
-import {
-  isOrganizationId,
-  isProjectId,
-  isRegion,
-  isURL,
-  isZone,
-} from '../internal/validations/string-validation.js'
+import type { NetworkInterceptors, RequestInterceptor, ResponseInterceptor } from '../internal/interceptors/types.js'
+import { isOrganizationId, isProjectId, isRegion, isURL, isZone } from '../internal/validations/string-validation.js'
 import type { Profile } from './client-ini-profile.js'
 
 /**
@@ -73,10 +63,7 @@ export interface Settings extends DefaultValues {
 export const assertValidSettings = (obj: Readonly<Settings>): void => {
   // Default Organization ID.
   if (obj.defaultOrganizationId !== undefined) {
-    if (
-      typeof obj.defaultOrganizationId !== 'string' ||
-      obj.defaultOrganizationId.length === 0
-    ) {
+    if (typeof obj.defaultOrganizationId !== 'string' || obj.defaultOrganizationId.length === 0) {
       throw new Error('Default organization ID cannot be empty')
     }
     if (!isOrganizationId(obj.defaultOrganizationId)) {
@@ -88,10 +75,7 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
 
   // Default Project ID.
   if (obj.defaultProjectId !== undefined) {
-    if (
-      typeof obj.defaultProjectId !== 'string' ||
-      obj.defaultProjectId.length === 0
-    ) {
+    if (typeof obj.defaultProjectId !== 'string' || obj.defaultProjectId.length === 0) {
       throw new Error('Default project ID cannot be empty')
     }
     if (!isProjectId(obj.defaultProjectId)) {
@@ -117,9 +101,7 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
   }
 
   if (obj.apiURL?.endsWith('/')) {
-    throw new Error(
-      `Invalid URL ${obj.apiURL}: it should not have a trailing slash`,
-    )
+    throw new Error(`Invalid URL ${obj.apiURL}: it should not have a trailing slash`)
   }
 
   // HTTP Client.
@@ -130,13 +112,9 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
   // Default Page Size.
   if (
     obj.defaultPageSize !== undefined &&
-    (typeof obj.defaultPageSize !== 'number' ||
-      Number.isNaN(obj.defaultPageSize) ||
-      obj.defaultPageSize <= 0)
+    (typeof obj.defaultPageSize !== 'number' || Number.isNaN(obj.defaultPageSize) || obj.defaultPageSize <= 0)
   ) {
-    throw new Error(
-      `Invalid defaultPageSize ${obj.defaultPageSize}: it should be a number above 0`,
-    )
+    throw new Error(`Invalid defaultPageSize ${obj.defaultPageSize}: it should be a number above 0`)
   }
 
   // User Agent.

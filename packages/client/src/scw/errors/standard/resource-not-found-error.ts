@@ -13,19 +13,12 @@ export class ResourceNotFoundError extends ScalewayError {
     readonly resource: string,
     readonly resourceId: string,
   ) {
-    super(
-      status,
-      body,
-      `resource ${resource} with ID ${resourceId} is not found`,
-    )
+    super(status, body, `resource ${resource} with ID ${resourceId} is not found`)
     this.name = 'ResourceNotFoundError'
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
-    if (
-      typeof obj.resource !== 'string' ||
-      typeof obj.resource_id !== 'string'
-    ) {
+    if (typeof obj.resource !== 'string' || typeof obj.resource_id !== 'string') {
       return null
     }
 

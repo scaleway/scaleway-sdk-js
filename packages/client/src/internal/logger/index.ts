@@ -23,10 +23,8 @@ export const setLogger = (logger: Readonly<Logger>) => {
  *
  * @public
  */
-export const enableConsoleLogger = (
-  logLevel: LogLevel = 'warn',
-  prefix = 'scaleway-sdk-js:',
-) => setLogger(new ConsoleLogger(logLevel, prefix))
+export const enableConsoleLogger = (logLevel: LogLevel = 'warn', prefix = 'scaleway-sdk-js:') =>
+  setLogger(new ConsoleLogger(logLevel, prefix))
 
 /**
  * Returns the active SDK logger.

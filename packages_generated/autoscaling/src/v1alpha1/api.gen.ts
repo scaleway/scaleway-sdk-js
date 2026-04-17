@@ -1,12 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import {
-  enrichForPagination,
-  API as ParentAPI,
-  urlParams,
-  validatePathParam,
-} from '@scaleway/sdk-client'
+import { enrichForPagination, API as ParentAPI, urlParams, validatePathParam } from '@scaleway/sdk-client'
 import {
   marshalCreateInstanceGroupRequest,
   marshalCreateInstancePolicyRequest,
@@ -71,7 +66,6 @@ export class API extends ParentAPI {
       unmarshalInstanceGroup,
     )
 
-  
   /**
    * Create Instance group. Create a new Instance group. You must specify a `template_id`, capacity and Load Balancer object.
    *
@@ -81,9 +75,7 @@ export class API extends ParentAPI {
   createInstanceGroup = (request: Readonly<CreateInstanceGroupRequest>) =>
     this.client.fetch<InstanceGroup>(
       {
-        body: JSON.stringify(
-          marshalCreateInstanceGroupRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateInstanceGroupRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-groups`,
@@ -91,7 +83,6 @@ export class API extends ParentAPI {
       unmarshalInstanceGroup,
     )
 
-  
   protected pageOfListInstanceGroups = (request: Readonly<ListInstanceGroupsRequest> = {}) =>
     this.client.fetch<ListInstanceGroupsResponse>(
       {
@@ -105,7 +96,7 @@ export class API extends ParentAPI {
       },
       unmarshalListInstanceGroupsResponse,
     )
-  
+
   /**
    * List Instance groups. List all Instance groups, for a Scaleway Organization or Scaleway Project. By default, the Instance groups returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -115,7 +106,6 @@ export class API extends ParentAPI {
   listInstanceGroups = (request: Readonly<ListInstanceGroupsRequest> = {}) =>
     enrichForPagination('instanceGroups', this.pageOfListInstanceGroups, request)
 
-  
   /**
    * Update Instance group. Update the parameters of an existing Instance group, specified by its `instance_group_id`.
    *
@@ -125,9 +115,7 @@ export class API extends ParentAPI {
   updateInstanceGroup = (request: Readonly<UpdateInstanceGroupRequest>) =>
     this.client.fetch<InstanceGroup>(
       {
-        body: JSON.stringify(
-          marshalUpdateInstanceGroupRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateInstanceGroupRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-groups/${validatePathParam('instanceGroupId', request.instanceGroupId)}`,
@@ -135,21 +123,17 @@ export class API extends ParentAPI {
       unmarshalInstanceGroup,
     )
 
-  
   /**
    * Delete  Instance group. Delete an existing Instance group, specified by its `instance_group_id`. Deleting an Instance group is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteInstanceGroupRequest}
    */
   deleteInstanceGroup = (request: Readonly<DeleteInstanceGroupRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-groups/${validatePathParam('instanceGroupId', request.instanceGroupId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-groups/${validatePathParam('instanceGroupId', request.instanceGroupId)}`,
+    })
 
-  
   /**
    * Create Instance template. Create a new Instance template. This specifies the details of the Instance (commercial type, zone, image, volumes etc.) that will be in the Instance group.
    *
@@ -159,9 +143,7 @@ export class API extends ParentAPI {
   createInstanceTemplate = (request: Readonly<CreateInstanceTemplateRequest>) =>
     this.client.fetch<InstanceTemplate>(
       {
-        body: JSON.stringify(
-          marshalCreateInstanceTemplateRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateInstanceTemplateRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-templates`,
@@ -169,7 +151,6 @@ export class API extends ParentAPI {
       unmarshalInstanceTemplate,
     )
 
-  
   /**
    * Update Instance template. Update an Instance template, such as its commercial offer type, image or volume template.
    *
@@ -179,9 +160,7 @@ export class API extends ParentAPI {
   updateInstanceTemplate = (request: Readonly<UpdateInstanceTemplateRequest>) =>
     this.client.fetch<InstanceTemplate>(
       {
-        body: JSON.stringify(
-          marshalUpdateInstanceTemplateRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateInstanceTemplateRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-templates/${validatePathParam('templateId', request.templateId)}`,
@@ -189,7 +168,6 @@ export class API extends ParentAPI {
       unmarshalInstanceTemplate,
     )
 
-  
   /**
    * Get Instance template. Get an existing Instance template from its `template_id`.
    *
@@ -205,21 +183,17 @@ export class API extends ParentAPI {
       unmarshalInstanceTemplate,
     )
 
-  
   /**
    * Delete Instance template. Delete an existing Instance template. This action is permanent and cannot be undone.
    *
    * @param request - The request {@link DeleteInstanceTemplateRequest}
    */
   deleteInstanceTemplate = (request: Readonly<DeleteInstanceTemplateRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-templates/${validatePathParam('templateId', request.templateId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-templates/${validatePathParam('templateId', request.templateId)}`,
+    })
 
-  
   protected pageOfListInstanceTemplates = (request: Readonly<ListInstanceTemplatesRequest> = {}) =>
     this.client.fetch<ListInstanceTemplatesResponse>(
       {
@@ -233,7 +207,7 @@ export class API extends ParentAPI {
       },
       unmarshalListInstanceTemplatesResponse,
     )
-  
+
   /**
    * List Instance templates. List all Instance templates, for a Scaleway Organization or Scaleway Project. By default, the Instance templates returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -243,7 +217,6 @@ export class API extends ParentAPI {
   listInstanceTemplates = (request: Readonly<ListInstanceTemplatesRequest> = {}) =>
     enrichForPagination('instanceTemplates', this.pageOfListInstanceTemplates, request)
 
-  
   /**
    * Create scaling policy. Create a new scaling policy. You must specify a `policy_id`, capacity and Load Balancer object.
    *
@@ -253,9 +226,7 @@ export class API extends ParentAPI {
   createInstancePolicy = (request: Readonly<CreateInstancePolicyRequest>) =>
     this.client.fetch<InstancePolicy>(
       {
-        body: JSON.stringify(
-          marshalCreateInstancePolicyRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateInstancePolicyRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-policies`,
@@ -263,7 +234,6 @@ export class API extends ParentAPI {
       unmarshalInstancePolicy,
     )
 
-  
   /**
    * Update scaling policy. Update the parameters of an existing scaling policy, specified by its `policy_id`.
    *
@@ -273,9 +243,7 @@ export class API extends ParentAPI {
   updateInstancePolicy = (request: Readonly<UpdateInstancePolicyRequest>) =>
     this.client.fetch<InstancePolicy>(
       {
-        body: JSON.stringify(
-          marshalUpdateInstancePolicyRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateInstancePolicyRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-policies/${validatePathParam('policyId', request.policyId)}`,
@@ -283,7 +251,6 @@ export class API extends ParentAPI {
       unmarshalInstancePolicy,
     )
 
-  
   protected pageOfListInstancePolicies = (request: Readonly<ListInstancePoliciesRequest>) =>
     this.client.fetch<ListInstancePoliciesResponse>(
       {
@@ -298,7 +265,7 @@ export class API extends ParentAPI {
       },
       unmarshalListInstancePoliciesResponse,
     )
-  
+
   /**
    * List scaling policies. List all scaling policies, for a Scaleway Organization or Scaleway Project. By default, the policies returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
    *
@@ -308,7 +275,6 @@ export class API extends ParentAPI {
   listInstancePolicies = (request: Readonly<ListInstancePoliciesRequest>) =>
     enrichForPagination('policies', this.pageOfListInstancePolicies, request)
 
-  
   /**
    * Get scaling policy. Retrieve information about an existing scaling policy, specified by its `policy_id`. Its full details are returned in the response object.
    *
@@ -324,21 +290,17 @@ export class API extends ParentAPI {
       unmarshalInstancePolicy,
     )
 
-  
   /**
    * Delete scaling policy. Delete an existing scaling policy, specified by its `policy_id`. Deleting a scaling policy is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteInstancePolicyRequest}
    */
   deleteInstancePolicy = (request: Readonly<DeleteInstancePolicyRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-policies/${validatePathParam('policyId', request.policyId)}`,
-      },
-    )
+    this.client.fetch<void>({
+      method: 'DELETE',
+      path: `/autoscaling/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/instance-policies/${validatePathParam('policyId', request.policyId)}`,
+    })
 
-  
   protected pageOfListInstanceGroupEvents = (request: Readonly<ListInstanceGroupEventsRequest>) =>
     this.client.fetch<ListInstanceGroupEventsResponse>(
       {
@@ -352,7 +314,7 @@ export class API extends ParentAPI {
       },
       unmarshalListInstanceGroupEventsResponse,
     )
-  
+
   /**
    * List events. List all events for a given Instance group. By default, the events are ordered by creation date in descending order, though this can be modified via the `order_by` field.
    *
@@ -361,7 +323,4 @@ export class API extends ParentAPI {
    */
   listInstanceGroupEvents = (request: Readonly<ListInstanceGroupEventsRequest>) =>
     enrichForPagination('instanceEvents', this.pageOfListInstanceGroupEvents, request)
-
-  
 }
-

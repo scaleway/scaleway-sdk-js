@@ -6,8 +6,7 @@ import { fixLegacyTotalCount, responseParser } from '../response-parser.js'
 
 const SIMPLE_REQ_BODY = { 'what-is-life': 42 }
 
-const convertObjToBuffer = (obj: unknown): Buffer =>
-  Buffer.from(JSON.stringify(obj))
+const convertObjToBuffer = (obj: unknown): Buffer => Buffer.from(JSON.stringify(obj))
 
 const unmarshalJSON = (obj: unknown) => {
   if (!isJSONObject(obj)) throw new Error(`couldn't unwrap response value`)
@@ -15,23 +14,14 @@ const unmarshalJSON = (obj: unknown) => {
   return obj
 }
 
-const makeResponse = (
-  value: unknown,
-  status = 200,
-  contentType: string | undefined = undefined,
-) =>
-  new Response(
-    value !== null ? new Uint8Array(convertObjToBuffer(value)) : value,
-    {
-      headers: contentType ? { 'Content-Type': contentType } : undefined,
-      status,
-    },
-  )
+const makeResponse = (value: unknown, status = 200, contentType: string | undefined = undefined) =>
+  new Response(value !== null ? new Uint8Array(convertObjToBuffer(value)) : value, {
+    headers: contentType ? { 'Content-Type': contentType } : undefined,
+    status,
+  })
 
-const makeJSONResponse = (
-  value: JSONObject | null = SIMPLE_REQ_BODY,
-  status = 200,
-) => makeResponse(value, status, 'application/json')
+const makeJSONResponse = (value: JSONObject | null = SIMPLE_REQ_BODY, status = 200) =>
+  makeResponse(value, status, 'application/json')
 
 const makeTextResponse = (value: string, status = 200) =>
   new Response(value, {
@@ -41,14 +31,8 @@ const makeTextResponse = (value: string, status = 200) =>
 
 describe(`responseParser`, () => {
   const parseJson = responseParser(unmarshalJSON, 'json')
-  const parseAsIs = responseParser(
-    <T>(response: unknown) => response as T,
-    'json',
-  )
-  const parseBlob = responseParser(
-    <T>(response: unknown) => response as T,
-    'blob',
-  )
+  const parseAsIs = responseParser(<T>(response: unknown) => response as T, 'json')
+  const parseBlob = responseParser(<T>(response: unknown) => response as T, 'blob')
 
   it(`triggers a type error for non 'Response' object`, () =>
     expect(
@@ -57,43 +41,30 @@ describe(`responseParser`, () => {
     ).rejects.toThrow(new TypeError('Invalid response object')))
 
   it(`triggers an error for invalid status code`, async () => {
-    const invalidResponse = new Response(
-      new Uint8Array(convertObjToBuffer(SIMPLE_REQ_BODY)),
-      {
-        headers: { 'Content-Type': 'application/json' },
-        status: 500,
-      },
-    )
+    const invalidResponse = new Response(new Uint8Array(convertObjToBuffer(SIMPLE_REQ_BODY)), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 500,
+    })
 
     return expect(parseJson(invalidResponse)).rejects.toThrow()
   })
 
   it(`triggers an error with string payload`, async () => {
-    const invalidResponse = new Response(
-      new Uint8Array(convertObjToBuffer('random-error')),
-      {
-        headers: { 'Content-Type': 'application/json' },
-        status: 500,
-      },
-    )
+    const invalidResponse = new Response(new Uint8Array(convertObjToBuffer('random-error')), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 500,
+    })
 
-    return expect(parseJson(invalidResponse)).rejects.toThrow(
-      new ScalewayError(500, 'random-error'),
-    )
+    return expect(parseJson(invalidResponse)).rejects.toThrow(new ScalewayError(500, 'random-error'))
   })
 
   it(`triggers an error with unknown payload`, async () => {
-    const invalidResponse = new Response(
-      new Uint8Array(convertObjToBuffer(null)),
-      {
-        headers: { 'Content-Type': 'application/json' },
-        status: 500,
-      },
-    )
+    const invalidResponse = new Response(new Uint8Array(convertObjToBuffer(null)), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 500,
+    })
 
-    return expect(parseJson(invalidResponse)).rejects.toThrow(
-      new ScalewayError(500, 'cannot read error response body'),
-    )
+    return expect(parseJson(invalidResponse)).rejects.toThrow(new ScalewayError(500, 'cannot read error response body'))
   })
 
   it(`triggers an error with server response message when parsing fails`, async () => {
@@ -102,9 +73,7 @@ describe(`responseParser`, () => {
       status: 500,
     })
 
-    return expect(parseJson(alreadyReadResponse)).rejects.toThrow(
-      new ScalewayError(500, 'text error content'),
-    )
+    return expect(parseJson(alreadyReadResponse)).rejects.toThrow(new ScalewayError(500, 'text error content'))
   })
 
   it(`triggers an error for unsuccessful unmarshalling`, async () => {
@@ -127,38 +96,24 @@ describe(`responseParser`, () => {
         // eslint-disable-next-line @typescript-eslint/no-throw-literal
         throw 'not-of-error-type'
       }, 'text')(validResponse.clone()),
-    ).rejects.toThrow(
-      new ScalewayError(
-        validResponse.status,
-        `could not parse 'application/json' response`,
-      ),
-    )
+    ).rejects.toThrow(new ScalewayError(validResponse.status, `could not parse 'application/json' response`))
 
     await expect(
       responseParser(() => {
         // eslint-disable-next-line @typescript-eslint/no-throw-literal
         throw 'not-of-error-type'
       }, 'blob')(emptyContentTypeResponse),
-    ).rejects.toThrow(
-      new ScalewayError(
-        emptyContentTypeResponse.status,
-        `could not parse '' response`,
-      ),
-    )
+    ).rejects.toThrow(new ScalewayError(emptyContentTypeResponse.status, `could not parse '' response`))
   })
 
   it(`returns the response as text for unknown content type`, async () =>
     expect(parseAsIs(makeTextResponse('text-body'))).resolves.toBe('text-body'))
 
   it(`returns the proper object for a valid JSON object`, async () =>
-    expect(parseJson(makeJSONResponse())).resolves.toMatchObject(
-      SIMPLE_REQ_BODY,
-    ))
+    expect(parseJson(makeJSONResponse())).resolves.toMatchObject(SIMPLE_REQ_BODY))
 
   it(`returns the proper type for a Blob responseType`, async () =>
-    expect(
-      parseBlob(makeTextResponse('hello world')).then(obj => typeof obj),
-    ).resolves.toBe('object'))
+    expect(parseBlob(makeTextResponse('hello world')).then(obj => typeof obj)).resolves.toBe('object'))
 
   it(`returns undefined for a 204 status code, even if content-type is json`, async () =>
     expect(parseAsIs(makeJSONResponse(null, 204))).resolves.toBeUndefined())
@@ -166,41 +121,29 @@ describe(`responseParser`, () => {
 
 describe('fixLegacyTotalCount', () => {
   it('appends total_count if headers contains the key', () => {
-    expect(
-      fixLegacyTotalCount(
-        { my_key: 'anything' },
-        new Headers({ 'x-total-count': '3' }),
-      ),
-    ).toStrictEqual({ my_key: 'anything', total_count: 3 })
+    expect(fixLegacyTotalCount({ my_key: 'anything' }, new Headers({ 'x-total-count': '3' }))).toStrictEqual({
+      my_key: 'anything',
+      total_count: 3,
+    })
   })
 
   it('does nothing if expected key is empty', () => {
-    expect(
-      fixLegacyTotalCount({ my_key: 'anything' }, new Headers({})),
-    ).toStrictEqual({ my_key: 'anything' })
+    expect(fixLegacyTotalCount({ my_key: 'anything' }, new Headers({}))).toStrictEqual({ my_key: 'anything' })
   })
 
   it('does nothing if expected key is not of valid value', () => {
-    expect(
-      fixLegacyTotalCount(
-        { my_key: 'anything' },
-        new Headers({ 'x-total-count': 'true' }),
-      ),
-    ).toStrictEqual({ my_key: 'anything' })
+    expect(fixLegacyTotalCount({ my_key: 'anything' }, new Headers({ 'x-total-count': 'true' }))).toStrictEqual({
+      my_key: 'anything',
+    })
   })
 
   it('does nothing if total_count already exists', () => {
     expect(
-      fixLegacyTotalCount(
-        { my_key: 'anything', total_count: 5 },
-        new Headers({ 'x-total-count': '3' }),
-      ),
+      fixLegacyTotalCount({ my_key: 'anything', total_count: 5 }, new Headers({ 'x-total-count': '3' })),
     ).toStrictEqual({ my_key: 'anything', total_count: 5 })
   })
 
   it('does nothing if input is not a Record', () => {
-    expect(
-      fixLegacyTotalCount('my-value', new Headers({ 'x-total-count': '3' })),
-    ).toStrictEqual('my-value')
+    expect(fixLegacyTotalCount('my-value', new Headers({ 'x-total-count': '3' }))).toStrictEqual('my-value')
   })
 })

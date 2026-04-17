@@ -1,8 +1,8 @@
 import type { JSONObject } from '../../helpers/json.js'
 import { mapInvalidRequestFromJSON } from './non-standard/invalid-request-mapper.js'
 import { mapUnknownResourceFromJSON } from './non-standard/unknown-resource-mapper.js'
-import { ScalewayError } from './scw-error.js'
 import type { ScalewayErrorFromJSONInitializer } from './scw-error-from-json.js'
+import { ScalewayError } from './scw-error.js'
 import { AlreadyExistsError } from './standard/already-exists-error.js'
 import { DeniedAuthenticationError } from './standard/denied-authentication-error.js'
 import { InvalidArgumentsError } from './standard/invalid-arguments-error.js'
@@ -26,11 +26,7 @@ import { TransientStateError } from './standard/transient-state-error.js'
  *
  * @internal
  */
-const unmarshalStandardError = (
-  type: string,
-  status: number,
-  body: Readonly<JSONObject>,
-): ScalewayError | null => {
+const unmarshalStandardError = (type: string, status: number, body: Readonly<JSONObject>): ScalewayError | null => {
   let error: ScalewayErrorFromJSONInitializer
   switch (type) {
     case 'denied_authentication':
@@ -86,11 +82,7 @@ const unmarshalStandardError = (
  *
  * @internal
  */
-const unmarshalNonStandardError = (
-  type: string,
-  status: number,
-  body: Readonly<JSONObject>,
-): ScalewayError | null => {
+const unmarshalNonStandardError = (type: string, status: number, body: Readonly<JSONObject>): ScalewayError | null => {
   switch (type) {
     case 'unknown_resource':
       return mapUnknownResourceFromJSON(status, body)
@@ -110,14 +102,10 @@ const unmarshalNonStandardError = (
  *
  * @internal
  */
-export const parseScalewayError = (
-  status: number,
-  body: Readonly<JSONObject>,
-): ScalewayError => {
+export const parseScalewayError = (status: number, body: Readonly<JSONObject>): ScalewayError => {
   const parsableError =
     typeof body.type === 'string' &&
-    (unmarshalStandardError(body.type, status, body) ??
-      unmarshalNonStandardError(body.type, status, body))
+    (unmarshalStandardError(body.type, status, body) ?? unmarshalNonStandardError(body.type, status, body))
 
   return parsableError || new ScalewayError(status, body)
 }

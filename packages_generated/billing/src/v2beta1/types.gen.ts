@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Money, } from '@scaleway/sdk-client'
-
+import type { Money } from '@scaleway/sdk-client'
 
 export type DiscountDiscountMode =
   | 'unknown_discount_mode'
@@ -18,11 +17,9 @@ export type DiscountFilterType =
   | 'region'
   | 'zone'
 
-export type DownloadInvoiceRequestFileType =
-  | 'pdf'
+export type DownloadInvoiceRequestFileType = 'pdf'
 
-export type ExportInvoicesRequestFileType =
-  | 'csv'
+export type ExportInvoicesRequestFileType = 'csv'
 
 export type ExportInvoicesRequestOrderBy =
   | 'invoice_number_desc'
@@ -40,10 +37,7 @@ export type ExportInvoicesRequestOrderBy =
   | 'invoice_type_desc'
   | 'invoice_type_asc'
 
-export type InvoiceType =
-  | 'unknown_type'
-  | 'periodic'
-  | 'purchase'
+export type InvoiceType = 'unknown_type' | 'periodic' | 'purchase'
 
 export type ListConsumptionsRequestOrderBy =
   | 'updated_at_desc'
@@ -75,11 +69,7 @@ export type ListInvoicesRequestOrderBy =
   | 'invoice_type_desc'
   | 'invoice_type_asc'
 
-export type ListTaxesRequestOrderBy =
-  | 'updated_at_desc'
-  | 'updated_at_asc'
-  | 'category_name_desc'
-  | 'category_name_asc'
+export type ListTaxesRequestOrderBy = 'updated_at_desc' | 'updated_at_asc' | 'category_name_desc' | 'category_name_asc'
 
 export interface DiscountCoupon {
   /**
@@ -87,7 +77,6 @@ export interface DiscountCoupon {
    */
   description?: string
 }
-
 
 export interface DiscountFilter {
   /**
@@ -103,7 +92,6 @@ export interface DiscountFilter {
    */
   exclude: boolean
 }
-
 
 export interface ListConsumptionsResponseConsumption {
   /**
@@ -143,7 +131,6 @@ export interface ListConsumptionsResponseConsumption {
    */
   consumerId: string
 }
-
 
 export interface Discount {
   /**
@@ -195,7 +182,6 @@ export interface Discount {
    */
   filters: DiscountFilter[]
 }
-
 
 export interface Invoice {
   /**
@@ -259,7 +245,6 @@ export interface Invoice {
   sellerName: string
 }
 
-
 export interface ListTaxesResponseTax {
   /**
    * Description of the tax applied.
@@ -279,7 +264,6 @@ export interface ListTaxesResponseTax {
   totalTaxValue?: number
 }
 
-
 export type DownloadInvoiceRequest = {
   /**
    * Invoice ID.
@@ -290,7 +274,6 @@ export type DownloadInvoiceRequest = {
    */
   fileType?: DownloadInvoiceRequestFileType
 }
-
 
 export type ExportInvoicesRequest = {
   /**
@@ -327,14 +310,12 @@ export type ExportInvoicesRequest = {
   fileType?: ExportInvoicesRequestFileType
 }
 
-
 export type GetInvoiceRequest = {
   /**
    * Invoice ID.
    */
   invoiceId: string
 }
-
 
 export type ListConsumptionsRequest = {
   /**
@@ -371,7 +352,6 @@ export type ListConsumptionsRequest = {
   billingPeriod?: string
 }
 
-
 export interface ListConsumptionsResponse {
   /**
    * Detailed consumption list.
@@ -390,7 +370,6 @@ export interface ListConsumptionsResponse {
    */
   updatedAt?: Date
 }
-
 
 export type ListDiscountsRequest = {
   /**
@@ -411,7 +390,6 @@ export type ListDiscountsRequest = {
   organizationId?: string
 }
 
-
 export interface ListDiscountsResponse {
   /**
    * Total number of discounts.
@@ -422,7 +400,6 @@ export interface ListDiscountsResponse {
    */
   discounts: Discount[]
 }
-
 
 export type ListInvoicesRequest = {
   /**
@@ -455,7 +432,6 @@ export type ListInvoicesRequest = {
   orderBy?: ListInvoicesRequestOrderBy
 }
 
-
 export interface ListInvoicesResponse {
   /**
    * Total number of invoices.
@@ -466,7 +442,6 @@ export interface ListInvoicesResponse {
    */
   invoices: Invoice[]
 }
-
 
 export type ListTaxesRequest = {
   /**
@@ -491,7 +466,6 @@ export type ListTaxesRequest = {
   billingPeriod?: string
 }
 
-
 export interface ListTaxesResponse {
   /**
    * Detailed consumption tax.
@@ -507,7 +481,6 @@ export interface ListTaxesResponse {
   updatedAt?: Date
 }
 
-
 export type RedeemCouponRequest = {
   /**
    * The Organization ID of the discount.
@@ -518,5 +491,3 @@ export type RedeemCouponRequest = {
    */
   code: string
 }
-
-

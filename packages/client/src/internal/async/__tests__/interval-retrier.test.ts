@@ -57,9 +57,7 @@ describe('createExponentialBackoffStrategy', () => {
     try {
       createExponentialBackoffStrategy(0, 5).next(0)
     } catch (err) {
-      expect((err as Error).message).toBe(
-        `Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`,
-      )
+      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
   })
 
@@ -67,17 +65,13 @@ describe('createExponentialBackoffStrategy', () => {
     try {
       createExponentialBackoffStrategy(1, 0).next(0)
     } catch (err) {
-      expect((err as Error).message).toBe(
-        `Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`,
-      )
+      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
 
     try {
       createExponentialBackoffStrategy(2, 1).next(0)
     } catch (err) {
-      expect((err as Error).message).toBe(
-        `Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`,
-      )
+      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
   })
 })
@@ -113,14 +107,10 @@ describe('tryAtIntervals', () => {
   })
 
   it('timeouts after 0s', () =>
-    expect(
-      tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, 0),
-    ).rejects.toThrow(`Timeout after 0s`))
+    expect(tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, 0)).rejects.toThrow(`Timeout after 0s`))
 
   it('timeouts after 10ms', () =>
-    expect(
-      tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, 0.01),
-    ).rejects.toThrow(`Timeout after 0.01s`))
+    expect(tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, 0.01)).rejects.toThrow(`Timeout after 0.01s`))
 
   it('uses default timeout', async () => {
     const mLogic = mockLogic(3, 0)
@@ -132,10 +122,7 @@ describe('tryAtIntervals', () => {
 describe('waitForResource', () => {
   it('resolves with non-transient status', () => {
     const result = waitForResource(
-      res =>
-        Promise.resolve(
-          !['transient-one', 'transient-two'].includes(res.status),
-        ),
+      res => Promise.resolve(!['transient-one', 'transient-two'].includes(res.status)),
       () => Promise.resolve({ message: 'All went fine.', status: 'final' }),
       {
         resourceId: 'random-uuid',
@@ -151,10 +138,7 @@ describe('waitForResource', () => {
 
   it('rejects after timeout as transient status is being returned', () => {
     const result = waitForResource(
-      res =>
-        Promise.resolve(
-          !['transient-one', 'transient-two'].includes(res.status),
-        ),
+      res => Promise.resolve(!['transient-one', 'transient-two'].includes(res.status)),
       () =>
         Promise.resolve({
           message: 'Still processing.',

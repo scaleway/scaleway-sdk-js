@@ -1,6 +1,5 @@
-
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney } from '@scaleway/sdk-client'
 import type {
   Attachment,
   CreateFileSystemRequest,
@@ -14,9 +13,7 @@ import type {
 
 export const unmarshalFileSystem = (data: unknown): FileSystem => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'FileSystem' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'FileSystem' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -37,9 +34,7 @@ export const unmarshalFileSystem = (data: unknown): FileSystem => {
 
 const unmarshalAttachment = (data: unknown): Attachment => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Attachment' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Attachment' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -53,9 +48,7 @@ const unmarshalAttachment = (data: unknown): Attachment => {
 
 export const unmarshalListAttachmentsResponse = (data: unknown): ListAttachmentsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListAttachmentsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListAttachmentsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -66,23 +59,23 @@ export const unmarshalListAttachmentsResponse = (data: unknown): ListAttachments
 
 const unmarshalFileSystemType = (data: unknown): FileSystemType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'FileSystemType' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'FileSystemType' failed as data isn't a dictionary.`)
   }
 
   return {
-    filesystemPriceGbPerHour: data.filesystem_price_gb_per_hour ? unmarshalMoney(data.filesystem_price_gb_per_hour) : undefined,
+    filesystemPriceGbPerHour: data.filesystem_price_gb_per_hour
+      ? unmarshalMoney(data.filesystem_price_gb_per_hour)
+      : undefined,
     name: data.name,
-    snapshotPriceGbPerHour: data.snapshot_price_gb_per_hour ? unmarshalMoney(data.snapshot_price_gb_per_hour) : undefined,
+    snapshotPriceGbPerHour: data.snapshot_price_gb_per_hour
+      ? unmarshalMoney(data.snapshot_price_gb_per_hour)
+      : undefined,
   } as FileSystemType
 }
 
 export const unmarshalListFileSystemTypesResponse = (data: unknown): ListFileSystemTypesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListFileSystemTypesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListFileSystemTypesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -93,9 +86,7 @@ export const unmarshalListFileSystemTypesResponse = (data: unknown): ListFileSys
 
 export const unmarshalListFileSystemsResponse = (data: unknown): ListFileSystemsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListFileSystemsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListFileSystemsResponse' failed as data isn't a dictionary.`)
   }
 
   return {

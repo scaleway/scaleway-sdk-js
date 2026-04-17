@@ -1,7 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, } from '@scaleway/sdk-client'
-
+import type { Region as ScwRegion } from '@scaleway/sdk-client'
 
 export type JobRunReason =
   | 'unknown_reason'
@@ -30,27 +29,19 @@ export type JobRunState =
   | 'interrupted'
   | 'retrying'
 
-export type ListJobDefinitionsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListJobDefinitionsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListJobRunsRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListJobRunsRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
-export type ListTriggersRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
+export type ListTriggersRequestOrderBy = 'created_at_asc' | 'created_at_desc'
 
 export interface SecretEnvVar {
   name: string
 }
 
-
 export interface SecretFile {
   path: string
 }
-
 
 export interface CronSchedule {
   /**
@@ -63,14 +54,12 @@ export interface CronSchedule {
   timezone: string
 }
 
-
 export interface RetryPolicy {
   /**
    * Maximum number of retries upon a job failure.
    */
   maxRetries: number
 }
-
 
 export interface TriggerCronConfig {
   /**
@@ -91,12 +80,10 @@ export interface TriggerCronConfig {
   args: string[]
 }
 
-
 export interface CreateJobDefinitionRequestCronScheduleConfig {
   schedule: string
   timezone: string
 }
-
 
 export interface CreateSecretsRequestSecretConfig {
   secretManagerId: string
@@ -112,7 +99,6 @@ export interface CreateSecretsRequestSecretConfig {
    */
   envVarName?: string
 }
-
 
 export interface Secret {
   /**
@@ -145,7 +131,6 @@ export interface Secret {
   envVar?: SecretEnvVar
 }
 
-
 export interface CreateTriggerRequestCronConfig {
   /**
    * CRON schedule in UNIX format.
@@ -164,7 +149,6 @@ export interface CreateTriggerRequestCronConfig {
    */
   args: string[]
 }
-
 
 export interface JobDefinition {
   /**
@@ -241,12 +225,10 @@ export interface JobDefinition {
   region: ScwRegion
 }
 
-
 export interface Resource {
   computeLimitMvcpu: number
   memoryLimitBytes: number
 }
-
 
 export interface JobRun {
   /**
@@ -331,7 +313,6 @@ export interface JobRun {
   region: ScwRegion
 }
 
-
 export interface Trigger {
   /**
    * UUID of the trigger.
@@ -361,12 +342,10 @@ export interface Trigger {
   cronConfig?: TriggerCronConfig
 }
 
-
 export interface UpdateJobDefinitionRequestCronScheduleConfig {
   schedule?: string
   timezone?: string
 }
-
 
 export interface UpdateTriggerRequestCronConfig {
   /**
@@ -386,7 +365,6 @@ export interface UpdateTriggerRequestCronConfig {
    */
   args?: string[]
 }
-
 
 export type CreateJobDefinitionRequest = {
   /**
@@ -453,7 +431,6 @@ Environment variables and secrets can be included, and will be expanded before t
   retryPolicy?: RetryPolicy
 }
 
-
 export type CreateSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -469,14 +446,12 @@ export type CreateSecretsRequest = {
   secrets: CreateSecretsRequestSecretConfig[]
 }
 
-
 export interface CreateSecretsResponse {
   /**
    * List of secrets created.
    */
   secrets: Secret[]
 }
-
 
 export type CreateTriggerRequest = {
   /**
@@ -499,7 +474,6 @@ export type CreateTriggerRequest = {
   cronConfig?: CreateTriggerRequestCronConfig
 }
 
-
 export type DeleteJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -510,7 +484,6 @@ export type DeleteJobDefinitionRequest = {
    */
   jobDefinitionId: string
 }
-
 
 export type DeleteSecretRequest = {
   /**
@@ -523,7 +496,6 @@ export type DeleteSecretRequest = {
   secretId: string
 }
 
-
 export type DeleteTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -534,7 +506,6 @@ export type DeleteTriggerRequest = {
    */
   triggerId: string
 }
-
 
 export type GetJobDefinitionRequest = {
   /**
@@ -547,14 +518,12 @@ export type GetJobDefinitionRequest = {
   jobDefinitionId: string
 }
 
-
 export type GetJobLimitsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
 }
-
 
 export type GetJobRunRequest = {
   /**
@@ -567,7 +536,6 @@ export type GetJobRunRequest = {
   jobRunId: string
 }
 
-
 export type GetSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -578,7 +546,6 @@ export type GetSecretRequest = {
    */
   secretId: string
 }
-
 
 export type GetTriggerRequest = {
   /**
@@ -591,11 +558,9 @@ export type GetTriggerRequest = {
   triggerId: string
 }
 
-
 export interface JobLimits {
   secretsPerJobDefinition: number
 }
-
 
 export type ListJobDefinitionsRequest = {
   /**
@@ -609,12 +574,10 @@ export type ListJobDefinitionsRequest = {
   organizationId?: string
 }
 
-
 export interface ListJobDefinitionsResponse {
   jobDefinitions: JobDefinition[]
   totalCount: number
 }
-
 
 export type ListJobResourcesRequest = {
   /**
@@ -623,11 +586,9 @@ export type ListJobResourcesRequest = {
   region?: ScwRegion
 }
 
-
 export interface ListJobResourcesResponse {
   resources: Resource[]
 }
-
 
 export type ListJobRunsRequest = {
   /**
@@ -645,12 +606,10 @@ export type ListJobRunsRequest = {
   reasons?: JobRunReason[]
 }
 
-
 export interface ListJobRunsResponse {
   jobRuns: JobRun[]
   totalCount: number
 }
-
 
 export type ListSecretsRequest = {
   /**
@@ -663,7 +622,6 @@ export type ListSecretsRequest = {
   jobDefinitionId: string
 }
 
-
 export interface ListSecretsResponse {
   /**
    * List of secret references within a job definition.
@@ -674,7 +632,6 @@ export interface ListSecretsResponse {
    */
   totalCount: number
 }
-
 
 export type ListTriggersRequest = {
   /**
@@ -699,7 +656,6 @@ export type ListTriggersRequest = {
   orderBy?: ListTriggersRequestOrderBy
 }
 
-
 export interface ListTriggersResponse {
   /**
    * List of triggers.
@@ -710,7 +666,6 @@ export interface ListTriggersResponse {
    */
   totalCount: number
 }
-
 
 export type StartJobDefinitionRequest = {
   /**
@@ -748,14 +703,12 @@ Environment variables and secrets can be included, and will be expanded before t
   replicas?: number
 }
 
-
 export interface StartJobDefinitionResponse {
   /**
    * List of started job runs.
    */
   jobRuns: JobRun[]
 }
-
 
 export type StopJobRunRequest = {
   /**
@@ -767,7 +720,6 @@ export type StopJobRunRequest = {
    */
   jobRunId: string
 }
-
 
 export type UpdateJobDefinitionRequest = {
   /**
@@ -834,7 +786,6 @@ Environment variables and secrets can be included, and will be expanded before t
   retryPolicy?: RetryPolicy
 }
 
-
 export type UpdateSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -862,7 +813,6 @@ export type UpdateSecretRequest = {
   envVarName?: string
 }
 
-
 export type UpdateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -883,5 +833,3 @@ export type UpdateTriggerRequest = {
    */
   cronConfig?: UpdateTriggerRequestCronConfig
 }
-
-

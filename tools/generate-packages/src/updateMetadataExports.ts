@@ -40,9 +40,7 @@ const main = () => {
           }
 
           writeFileSync(pkgJsonPath, JSON.stringify(pkg, null, 2) + '\n')
-          console.log(
-            `Updated ${productDir}/package.json with metadata gen export`,
-          )
+          console.log(`Updated ${productDir}/package.json with metadata gen export`)
         }
       } catch (error) {
         console.error(`Error processing ${productDir}:`, error)

@@ -1,8 +1,8 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
-import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
+import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate } from '@scaleway/sdk-client'
 import type {
   Cluster,
   ClusterMonoAZDetails,
@@ -37,9 +37,7 @@ import type {
 
 const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateNetworkDetails => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'EndpointPrivateNetworkDetails' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -49,20 +47,15 @@ const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateN
 
 const unmarshalEndpointPublicDetails = (data: unknown): EndpointPublicDetails => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EndpointPublicDetails' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'EndpointPublicDetails' failed as data isn't a dictionary.`)
   }
 
-  return {
-  } as EndpointPublicDetails
+  return {} as EndpointPublicDetails
 }
 
 export const unmarshalEndpoint = (data: unknown): Endpoint => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Endpoint' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -76,9 +69,7 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
 
 const unmarshalClusterMonoAZDetails = (data: unknown): ClusterMonoAZDetails => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClusterMonoAZDetails' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ClusterMonoAZDetails' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -88,20 +79,15 @@ const unmarshalClusterMonoAZDetails = (data: unknown): ClusterMonoAZDetails => {
 
 const unmarshalClusterMultiAZDetails = (data: unknown): ClusterMultiAZDetails => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClusterMultiAZDetails' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ClusterMultiAZDetails' failed as data isn't a dictionary.`)
   }
 
-  return {
-  } as ClusterMultiAZDetails
+  return {} as ClusterMultiAZDetails
 }
 
 const unmarshalClusterSetting = (data: unknown): ClusterSetting => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ClusterSetting' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ClusterSetting' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -115,9 +101,7 @@ const unmarshalClusterSetting = (data: unknown): ClusterSetting => {
 
 const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Volume' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -128,9 +112,7 @@ const unmarshalVolume = (data: unknown): Volume => {
 
 export const unmarshalCluster = (data: unknown): Cluster => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Cluster' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -156,9 +138,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
 
 export const unmarshalUser = (data: unknown): User => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'User' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'User' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -168,9 +148,7 @@ export const unmarshalUser = (data: unknown): User => {
 
 export const unmarshalListClustersResponse = (data: unknown): ListClustersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListClustersResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -181,9 +159,7 @@ export const unmarshalListClustersResponse = (data: unknown): ListClustersRespon
 
 const unmarshalNodeTypeVolumeType = (data: unknown): NodeTypeVolumeType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'NodeTypeVolumeType' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'NodeTypeVolumeType' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -197,9 +173,7 @@ const unmarshalNodeTypeVolumeType = (data: unknown): NodeTypeVolumeType => {
 
 const unmarshalNodeType = (data: unknown): NodeType => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'NodeType' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -217,9 +191,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
 
 export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListNodeTypesResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -230,9 +202,7 @@ export const unmarshalListNodeTypesResponse = (data: unknown): ListNodeTypesResp
 
 export const unmarshalListUsersResponse = (data: unknown): ListUsersResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListUsersResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -298,9 +268,7 @@ const unmarshalVersionAvailableSettingStringProperty = (data: unknown): VersionA
 
 const unmarshalVersionAvailableSetting = (data: unknown): VersionAvailableSetting => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'VersionAvailableSetting' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'VersionAvailableSetting' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -310,15 +278,15 @@ const unmarshalVersionAvailableSetting = (data: unknown): VersionAvailableSettin
     hotConfigurable: data.hot_configurable,
     intProperty: data.int_property ? unmarshalVersionAvailableSettingIntegerProperty(data.int_property) : undefined,
     name: data.name,
-    stringProperty: data.string_property ? unmarshalVersionAvailableSettingStringProperty(data.string_property) : undefined,
+    stringProperty: data.string_property
+      ? unmarshalVersionAvailableSettingStringProperty(data.string_property)
+      : undefined,
   } as VersionAvailableSetting
 }
 
 const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'Version' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -330,9 +298,7 @@ const unmarshalVersion = (data: unknown): Version => {
 
 export const unmarshalListVersionsResponse = (data: unknown): ListVersionsResponse => {
   if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,
-    )
+    throw new TypeError(`Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`)
   }
 
   return {
@@ -351,8 +317,7 @@ const marshalEndpointSpecPrivateNetworkDetails = (
 const marshalEndpointSpecPublicDetails = (
   request: EndpointSpecPublicDetails,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
-})
+): Record<string, unknown> => ({})
 
 const marshalClusterMonoAZDetails = (
   request: ClusterMonoAZDetails,
@@ -364,8 +329,7 @@ const marshalClusterMonoAZDetails = (
 const marshalClusterMultiAZDetails = (
   request: ClusterMultiAZDetails,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
-})
+): Record<string, unknown> => ({})
 
 const marshalCreateClusterRequestVolumeSpec = (
   request: CreateClusterRequestVolumeSpec,
@@ -375,18 +339,21 @@ const marshalCreateClusterRequestVolumeSpec = (
   type: request.type,
 })
 
-const marshalEndpointSpec = (
-  request: EndpointSpec,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({  
+const marshalEndpointSpec = (request: EndpointSpec, defaults: DefaultValues): Record<string, unknown> => ({
   ...resolveOneOf([
-    {param: 'public_network',
-      value: (request.publicNetwork !== undefined) ? marshalEndpointSpecPublicDetails(request.publicNetwork, defaults)
-      : undefined,
+    {
+      param: 'public_network',
+      value:
+        request.publicNetwork !== undefined
+          ? marshalEndpointSpecPublicDetails(request.publicNetwork, defaults)
+          : undefined,
     },
-    {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
-      : undefined,
+    {
+      param: 'private_network',
+      value:
+        request.privateNetwork !== undefined
+          ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
+          : undefined,
     },
   ]),
 })
@@ -395,7 +362,8 @@ export const marshalCreateClusterRequest = (
   request: CreateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  endpoints:
+    request.endpoints !== undefined ? request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)) : undefined,
   name: request.name || randomName('kafk'),
   node_amount: request.nodeAmount,
   node_type: request.nodeType,
@@ -404,15 +372,15 @@ export const marshalCreateClusterRequest = (
   tags: request.tags,
   user_name: request.userName,
   version: request.version,
-  volume: ((request.volume !== undefined) ?  marshalCreateClusterRequestVolumeSpec(request.volume, defaults): undefined),  
+  volume: request.volume !== undefined ? marshalCreateClusterRequestVolumeSpec(request.volume, defaults) : undefined,
   ...resolveOneOf([
-    {param: 'multi_az',
-      value: (request.multiAz !== undefined) ? marshalClusterMultiAZDetails(request.multiAz, defaults)
-      : undefined,
+    {
+      param: 'multi_az',
+      value: request.multiAz !== undefined ? marshalClusterMultiAZDetails(request.multiAz, defaults) : undefined,
     },
-    {param: 'mono_az',
-      value: (request.monoAz !== undefined) ? marshalClusterMonoAZDetails(request.monoAz, defaults)
-      : undefined,
+    {
+      param: 'mono_az',
+      value: request.monoAz !== undefined ? marshalClusterMonoAZDetails(request.monoAz, defaults) : undefined,
     },
   ]),
 })
@@ -422,7 +390,7 @@ export const marshalCreateEndpointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   cluster_id: request.clusterId,
-  endpoint:  marshalEndpointSpec(request.endpoint, defaults),
+  endpoint: marshalEndpointSpec(request.endpoint, defaults),
 })
 
 export const marshalUpdateClusterRequest = (

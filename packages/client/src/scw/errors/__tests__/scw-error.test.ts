@@ -17,31 +17,21 @@ describe('ScalewayError', () => {
   })
 
   it(`handles a string body`, () => {
-    expect(new ScalewayError(400, 'unknown error').message).toBe(
-      `http error 400: unknown error`,
-    )
+    expect(new ScalewayError(400, 'unknown error').message).toBe(`http error 400: unknown error`)
   })
 
   it(`handles a non-JSON object`, () => {
-    expect(new ScalewayError(400, [] as unknown as JSONObject).message).toBe(
-      `http error 400`,
-    )
+    expect(new ScalewayError(400, [] as unknown as JSONObject).message).toBe(`http error 400`)
   })
 
   it(`handles a resource field`, () => {
-    expect(new ScalewayError(400, { resource: 'registry' }).message).toBe(
-      `http error 400: resource registry`,
-    )
+    expect(new ScalewayError(400, { resource: 'registry' }).message).toBe(`http error 400: resource registry`)
   })
 
   it(`handles a message field`, () => {
-    expect(
-      new ScalewayError(400, { message: 'plain text message' }).message,
-    ).toBe(`http error 400: plain text message`)
+    expect(new ScalewayError(400, { message: 'plain text message' }).message).toBe(`http error 400: plain text message`)
 
-    expect(
-      new ScalewayError(400, { message: 'plain text message' }).rawMessage,
-    ).toBe(`plain text message`)
+    expect(new ScalewayError(400, { message: 'plain text message' }).rawMessage).toBe(`plain text message`)
   })
 
   it(`handles 1 field with 1 message`, () => {
@@ -68,8 +58,6 @@ describe('ScalewayError', () => {
           project_id: ['value is required'],
         },
       }).message,
-    ).toBe(
-      `http error 400: organization_id (project_id is already specified), project_id (value is required)`,
-    )
+    ).toBe(`http error 400: organization_id (project_id is already specified), project_id (value is required)`)
   })
 })

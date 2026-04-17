@@ -3,6 +3,10 @@
   "version": "2.4.0",
   "description": "Scaleway SDK Std",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "directory": "packages_generated/std"
+  },
   "files": [
     "README.md",
     "dist"
@@ -22,13 +26,6 @@
       "default": "./dist/*/metadata.gen.js"
     }
   },
-  "repository": {
-    "type": "git",
-    "directory": "packages_generated/std"
-  },
-  "engines": {
-    "node": ">=20.19.6"
-  },
   "scripts": {
     "package:check": "pnpm publint",
     "typecheck": "tsgo --noEmit",
@@ -36,11 +33,14 @@
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
-  "peerDependencies": {
-    "@scaleway/sdk-client": "workspace:^"
-  },
   "devDependencies": {
     "@repo/configs": "workspace:^",
     "@scaleway/sdk-client": "workspace:*"
+  },
+  "peerDependencies": {
+    "@scaleway/sdk-client": "workspace:^"
+  },
+  "engines": {
+    "node": ">=20.19.6"
   }
 }

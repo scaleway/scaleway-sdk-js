@@ -18,10 +18,7 @@ export class ResourceLockedError extends ScalewayError {
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
-    if (
-      typeof obj.resource !== 'string' ||
-      typeof obj.resource_id !== 'string'
-    ) {
+    if (typeof obj.resource !== 'string' || typeof obj.resource_id !== 'string') {
       return null
     }
 

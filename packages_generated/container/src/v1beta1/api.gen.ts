@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
+import type { ApiLocality, WaitForOptions } from '@scaleway/sdk-client'
 import {
   enrichForPagination,
   API as ParentAPI,
@@ -11,7 +11,14 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_CONTAINER,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_CONTAINER,TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,} from './content.gen.js'
+import {
+  CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,
+  CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_CONTAINER,
+  DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,
+  NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,
+  TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_CONTAINER,
+  TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,
+} from './content.gen.js'
 import {
   marshalCreateContainerRequest,
   marshalCreateCronRequest,
@@ -94,15 +101,10 @@ export class API extends ParentAPI {
    * Locality of this API.
    * type ∈ {'zone','region','global','unspecified'}
    */
-  public static readonly LOCALITY: ApiLocality =
-    toApiLocality({
-      regions: [
-        'fr-par',
-        'nl-ams',
-        'pl-waw',
-      ],
-    })
-  
+  public static readonly LOCALITY: ApiLocality = toApiLocality({
+    regions: ['fr-par', 'nl-ams', 'pl-waw'],
+  })
+
   protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     this.client.fetch<ListNamespacesResponse>(
       {
@@ -119,7 +121,7 @@ export class API extends ParentAPI {
       },
       unmarshalListNamespacesResponse,
     )
-  
+
   /**
    * List all your namespaces. List all namespaces in a specified region.
    *
@@ -129,7 +131,6 @@ export class API extends ParentAPI {
   listNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
     enrichForPagination('namespaces', this.pageOfListNamespaces, request)
 
-  
   /**
    * Get a namespace. Get the namespace associated with the specified ID.
    *
@@ -144,7 +145,7 @@ export class API extends ParentAPI {
       },
       unmarshalNamespace,
     )
-  
+
   /**
    * Waits for {@link Namespace} to be in a final state.
    *
@@ -152,10 +153,7 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Namespace
    */
-  waitForNamespace = (
-    request: Readonly<GetNamespaceRequest>,
-    options?: Readonly<WaitForOptions<Namespace>>,
-  ) =>
+  waitForNamespace = (request: Readonly<GetNamespaceRequest>, options?: Readonly<WaitForOptions<Namespace>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getNamespace,
@@ -163,7 +161,6 @@ export class API extends ParentAPI {
       options,
     )
 
-  
   /**
    * Create a new namespace. Create a new namespace in a specified region.
    *
@@ -173,9 +170,7 @@ export class API extends ParentAPI {
   createNamespace = (request: Readonly<CreateNamespaceRequest> = {}) =>
     this.client.fetch<Namespace>(
       {
-        body: JSON.stringify(
-          marshalCreateNamespaceRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateNamespaceRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
@@ -183,7 +178,6 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
-  
   /**
    * Update an existing namespace. Update the space associated with the specified ID.
    *
@@ -193,9 +187,7 @@ export class API extends ParentAPI {
   updateNamespace = (request: Readonly<UpdateNamespaceRequest>) =>
     this.client.fetch<Namespace>(
       {
-        body: JSON.stringify(
-          marshalUpdateNamespaceRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateNamespaceRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
@@ -203,7 +195,6 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
-  
   /**
    * Delete an existing namespace. Delete the namespace associated with the specified ID.
    *
@@ -219,7 +210,6 @@ export class API extends ParentAPI {
       unmarshalNamespace,
     )
 
-  
   protected pageOfListContainers = (request: Readonly<ListContainersRequest>) =>
     this.client.fetch<ListContainersResponse>(
       {
@@ -237,7 +227,7 @@ export class API extends ParentAPI {
       },
       unmarshalListContainersResponse,
     )
-  
+
   /**
    * List all your containers. List all containers for a specified region.
    *
@@ -247,7 +237,6 @@ export class API extends ParentAPI {
   listContainers = (request: Readonly<ListContainersRequest>) =>
     enrichForPagination('containers', this.pageOfListContainers, request)
 
-  
   /**
    * Get a container. Get the container associated with the specified ID.
    *
@@ -262,7 +251,7 @@ export class API extends ParentAPI {
       },
       unmarshalContainer,
     )
-  
+
   /**
    * Waits for {@link Container} to be in a final state.
    *
@@ -270,10 +259,7 @@ export class API extends ParentAPI {
    * @param options - The waiting options
    * @returns A Promise of Container
    */
-  waitForContainer = (
-    request: Readonly<GetContainerRequest>,
-    options?: Readonly<WaitForOptions<Container>>,
-  ) =>
+  waitForContainer = (request: Readonly<GetContainerRequest>, options?: Readonly<WaitForOptions<Container>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CONTAINER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getContainer,
@@ -281,7 +267,6 @@ export class API extends ParentAPI {
       options,
     )
 
-  
   /**
    * Create a new container. Create a new container in the specified region.
 
@@ -294,9 +279,7 @@ and the status is set to `pending` accordingly.
   createContainer = (request: Readonly<CreateContainerRequest>) =>
     this.client.fetch<Container>(
       {
-        body: JSON.stringify(
-          marshalCreateContainerRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateContainerRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers`,
@@ -304,7 +287,6 @@ and the status is set to `pending` accordingly.
       unmarshalContainer,
     )
 
-  
   /**
    * Update an existing container. Update the container associated with the specified ID.
 
@@ -318,9 +300,7 @@ Warning: The `redeploy` field has been deprecated. An update now always redeploy
   updateContainer = (request: Readonly<UpdateContainerRequest>) =>
     this.client.fetch<Container>(
       {
-        body: JSON.stringify(
-          marshalUpdateContainerRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateContainerRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}`,
@@ -328,7 +308,6 @@ Warning: The `redeploy` field has been deprecated. An update now always redeploy
       unmarshalContainer,
     )
 
-  
   /**
    * Delete a container. Delete the container associated with the specified ID.
    *
@@ -344,7 +323,6 @@ Warning: The `redeploy` field has been deprecated. An update now always redeploy
       unmarshalContainer,
     )
 
-  
   /**
    * Deploy a container. Deploy a container associated with the specified ID.
 
@@ -366,7 +344,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalContainer,
     )
 
-  
   protected pageOfListCrons = (request: Readonly<ListCronsRequest>) =>
     this.client.fetch<ListCronsResponse>(
       {
@@ -381,17 +358,15 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       },
       unmarshalListCronsResponse,
     )
-  
+
   /**
    * List all your crons.
    *
    * @param request - The request {@link ListCronsRequest}
    * @returns A Promise of ListCronsResponse
    */
-  listCrons = (request: Readonly<ListCronsRequest>) =>
-    enrichForPagination('crons', this.pageOfListCrons, request)
+  listCrons = (request: Readonly<ListCronsRequest>) => enrichForPagination('crons', this.pageOfListCrons, request)
 
-  
   /**
    * Get a cron. Get the cron associated with the specified ID.
    *
@@ -406,7 +381,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       },
       unmarshalCron,
     )
-  
+
   /**
    * Waits for {@link Cron} to be in a final state.
    *
@@ -414,10 +389,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param options - The waiting options
    * @returns A Promise of Cron
    */
-  waitForCron = (
-    request: Readonly<GetCronRequest>,
-    options?: Readonly<WaitForOptions<Cron>>,
-  ) =>
+  waitForCron = (request: Readonly<GetCronRequest>, options?: Readonly<WaitForOptions<Cron>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CRON_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getCron,
@@ -425,7 +397,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       options,
     )
 
-  
   /**
    * Create a new cron.
    *
@@ -435,9 +406,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   createCron = (request: Readonly<CreateCronRequest>) =>
     this.client.fetch<Cron>(
       {
-        body: JSON.stringify(
-          marshalCreateCronRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateCronRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons`,
@@ -445,7 +414,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalCron,
     )
 
-  
   /**
    * Update an existing cron. Update the cron associated with the specified ID.
    *
@@ -455,9 +423,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   updateCron = (request: Readonly<UpdateCronRequest>) =>
     this.client.fetch<Cron>(
       {
-        body: JSON.stringify(
-          marshalUpdateCronRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateCronRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
@@ -465,7 +431,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalCron,
     )
 
-  
   /**
    * Delete an existing cron. Delete the cron associated with the specified ID.
    *
@@ -481,7 +446,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalCron,
     )
 
-  
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest>) =>
     this.client.fetch<ListDomainsResponse>(
       {
@@ -496,7 +460,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       },
       unmarshalListDomainsResponse,
     )
-  
+
   /**
    * List all custom domains. List all custom domains in a specified region.
    *
@@ -506,7 +470,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   listDomains = (request: Readonly<ListDomainsRequest>) =>
     enrichForPagination('domains', this.pageOfListDomains, request)
 
-  
   /**
    * Get a custom domain. Get a custom domain for the container with the specified ID.
    *
@@ -521,7 +484,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       },
       unmarshalDomain,
     )
-  
+
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -529,10 +492,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param options - The waiting options
    * @returns A Promise of Domain
    */
-  waitForDomain = (
-    request: Readonly<GetDomainRequest>,
-    options?: Readonly<WaitForOptions<Domain>>,
-  ) =>
+  waitForDomain = (request: Readonly<GetDomainRequest>, options?: Readonly<WaitForOptions<Domain>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getDomain,
@@ -540,7 +500,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       options,
     )
 
-  
   /**
    * Create a custom domain. Create a custom domain for the container with the specified ID.
    *
@@ -550,9 +509,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   createDomain = (request: Readonly<CreateDomainRequest>) =>
     this.client.fetch<Domain>(
       {
-        body: JSON.stringify(
-          marshalCreateDomainRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateDomainRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
@@ -560,7 +517,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalDomain,
     )
 
-  
   /**
    * Delete a custom domain. Delete the custom domain with the specific ID.
    *
@@ -576,7 +532,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalDomain,
     )
 
-  
   /**
    * Create a new revocable token. Deprecated in favor of IAM authentication.
    *
@@ -587,9 +542,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   createToken = (request: Readonly<CreateTokenRequest> = {}) =>
     this.client.fetch<Token>(
       {
-        body: JSON.stringify(
-          marshalCreateTokenRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateTokenRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
@@ -597,7 +550,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalToken,
     )
 
-  
   /**
    * Get a token. Get a token with a specified ID.
    *
@@ -612,7 +564,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       },
       unmarshalToken,
     )
-  
+
   /**
    * Waits for {@link Token} to be in a final state.
    *
@@ -620,10 +572,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param options - The waiting options
    * @returns A Promise of Token
    */
-  waitForToken = (
-    request: Readonly<GetTokenRequest>,
-    options?: Readonly<WaitForOptions<Token>>,
-  ) =>
+  waitForToken = (request: Readonly<GetTokenRequest>, options?: Readonly<WaitForOptions<Token>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TOKEN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getToken,
@@ -631,7 +580,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       options,
     )
 
-  
   protected pageOfListTokens = (request: Readonly<ListTokensRequest> = {}) =>
     this.client.fetch<ListTokensResponse>(
       {
@@ -647,7 +595,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       },
       unmarshalListTokensResponse,
     )
-  
+
   /**
    * List all tokens. List all tokens belonging to a specified Organization or Project.
    *
@@ -657,7 +605,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   listTokens = (request: Readonly<ListTokensRequest> = {}) =>
     enrichForPagination('tokens', this.pageOfListTokens, request)
 
-  
   /**
    * Delete a token. Delete a token with a specified ID.
    *
@@ -673,7 +620,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalToken,
     )
 
-  
   /**
    * Create a trigger. Create a new trigger for a specified container.
    *
@@ -683,9 +629,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   createTrigger = (request: Readonly<CreateTriggerRequest>) =>
     this.client.fetch<Trigger>(
       {
-        body: JSON.stringify(
-          marshalCreateTriggerRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalCreateTriggerRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
@@ -693,7 +637,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalTrigger,
     )
 
-  
   /**
    * Get a trigger. Get a trigger with a specified ID.
    *
@@ -708,7 +651,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       },
       unmarshalTrigger,
     )
-  
+
   /**
    * Waits for {@link Trigger} to be in a final state.
    *
@@ -716,10 +659,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param options - The waiting options
    * @returns A Promise of Trigger
    */
-  waitForTrigger = (
-    request: Readonly<GetTriggerRequest>,
-    options?: Readonly<WaitForOptions<Trigger>>,
-  ) =>
+  waitForTrigger = (request: Readonly<GetTriggerRequest>, options?: Readonly<WaitForOptions<Trigger>>) =>
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TRIGGER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getTrigger,
@@ -727,7 +667,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       options,
     )
 
-  
   protected pageOfListTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     this.client.fetch<ListTriggersResponse>(
       {
@@ -736,23 +675,19 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],  
-          ...Object.entries(resolveOneOf([
-            {param: 'container_id',
-              value: request.containerId,
-            },
-            {param: 'namespace_id',
-              value: request.namespaceId,
-            },
-            {default: this.client.settings.defaultProjectId,param: 'project_id',
-              value: request.projectId,
-            },
-          ])),
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ...Object.entries(
+            resolveOneOf([
+              { param: 'container_id', value: request.containerId },
+              { param: 'namespace_id', value: request.namespaceId },
+              { default: this.client.settings.defaultProjectId, param: 'project_id', value: request.projectId },
+            ]),
+          ),
         ),
       },
       unmarshalListTriggersResponse,
     )
-  
+
   /**
    * List all triggers. List all triggers belonging to a specified Organization or Project.
    *
@@ -762,7 +697,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
     enrichForPagination('triggers', this.pageOfListTriggers, request)
 
-  
   /**
    * Update a trigger. Update a trigger with a specified ID.
    *
@@ -772,9 +706,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   updateTrigger = (request: Readonly<UpdateTriggerRequest>) =>
     this.client.fetch<Trigger>(
       {
-        body: JSON.stringify(
-          marshalUpdateTriggerRequest(request, this.client.settings),
-        ),
+        body: JSON.stringify(marshalUpdateTriggerRequest(request, this.client.settings)),
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
@@ -782,7 +714,6 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       unmarshalTrigger,
     )
 
-  
   /**
    * Delete a trigger. Delete a trigger with a specified ID.
    *
@@ -797,7 +728,4 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
       },
       unmarshalTrigger,
     )
-
-  
 }
-
