@@ -1,4 +1,4 @@
-import { viteConfig } from '@repo/config'
+import { viteConfig } from '@repo/configs'
 import { defineConfig, mergeConfig } from 'vite'
 
 const newConfig = defineConfig({

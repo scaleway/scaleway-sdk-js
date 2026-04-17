@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/configs/tsconfig/generated",
+  "extends": "@scaleway/tsconfig",
   "compilerOptions": {
     "noEmit": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
