@@ -15,9 +15,9 @@
     "templates"
   ],
   "exports": {
-    "./helpers": {
-      "types": "./dist/helpers.d.ts",
-      "default": "./dist/helpers.js"
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
     }
   },
   "engines": {
