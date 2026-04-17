@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/generate-packages@0.5.0...@scaleway/generate-packages@0.5.1) (2026-04-17)
+
+### Bug Fixes
+
+- **generate:** exports ([#2904](https://github.com/scaleway/scaleway-sdk-js/issues/2904)) ([36a297f](https://github.com/scaleway/scaleway-sdk-js/commit/36a297ff4d8b52a05edec6e4771a4cef78a4b589))
+
 # [0.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/generate-packages@0.4.0...@scaleway/generate-packages@0.5.0) (2026-04-17)
 
 ### Features
