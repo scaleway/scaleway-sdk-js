@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.1 (2026-04-18)
+
+**Note:** Version bump only for package @scaleway/sdk-environmental-footprint
+
+
+
+
+
 # [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-environmental-footprint@2.8.0...@scaleway/sdk-environmental-footprint@2.9.0) (2026-04-17)
 
 ### Features

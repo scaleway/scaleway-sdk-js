@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.2 (2026-04-18)
+
+**Note:** Version bump only for package @scaleway/generate-react-queries
+
+
+
+
+
 ## [0.3.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/generate-react-queries@0.3.0...@scaleway/generate-react-queries@0.3.1) (2026-04-13)
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/generate-react-queries",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": false,
   "description": "generate react api and queries",
   "repository": {
