@@ -53,7 +53,7 @@
     "lerna": "9.0.7",
     "lint-staged": "16.3.2",
     "oxfmt": "0.45.0",
-    "react": "^19.2.4",
+    "react": "^19.2.5",
     "read-pkg": "10.1.0",
     "shx": "0.4.0",
     "tinyglobby": "0.2.15",
