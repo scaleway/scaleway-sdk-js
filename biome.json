@@ -17,7 +17,7 @@
     "lineEnding": "lf",
     "lineWidth": 80,
     "attributePosition": "auto",
-    "includes": ["**","!**/*.gen.ts"]
+    "includes": ["**", "!**/*.gen.ts"]
   },
   "javascript": {
     "formatter": {
@@ -70,7 +70,15 @@
       }
     },
     {
-      "includes": ["**/dist/**", "coverage/**", "**/examples/**", "packages/**/*.gen.ts", "scripts/**/*.gen.ts", "scripts/templates/**", "packages/sdk/src/index.gen.ts"],
+      "includes": [
+        "**/dist/**",
+        "coverage/**",
+        "**/examples/**",
+        "packages/**/*.gen.ts",
+        "scripts/**/*.gen.ts",
+        "scripts/templates/**",
+        "packages/sdk/src/index.gen.ts"
+      ],
       "formatter": {
         "enabled": false
       },
@@ -79,7 +87,13 @@
       }
     },
     {
-      "includes": ["vite.config.ts", "vitest.config.ts", "packages/**/*.config.ts", "packages/**/*.config.js", "packages_generated/**/*.config.ts"],
+      "includes": [
+        "vite.config.ts",
+        "vitest.config.ts",
+        "packages/**/*.config.ts",
+        "packages/**/*.config.js",
+        "packages_generated/**/*.config.ts"
+      ],
       "linter": {
         "rules": {
           "style": {

@@ -3,9 +3,7 @@ import { isRecordOfStringArray } from '../types.js'
 
 describe('isRecordOfStringArray', () => {
   it('validates a proper object', () => {
-    expect(
-      isRecordOfStringArray({ myValue: ['reason 1', 'reason 2'] }),
-    ).toBeTruthy()
+    expect(isRecordOfStringArray({ myValue: ['reason 1', 'reason 2'] })).toBeTruthy()
   })
 
   it('refuses object with proper structure but non-string values', () => {

@@ -1,8 +1,4 @@
-import type {
-  RequestInterceptor,
-  ResponseErrorInterceptor,
-  ResponseInterceptor,
-} from './types.js'
+import type { RequestInterceptor, ResponseErrorInterceptor, ResponseInterceptor } from './types.js'
 
 /**
  * Composes request interceptors.
@@ -16,8 +12,7 @@ export const composeRequestInterceptors =
   (interceptors: RequestInterceptor[]) =>
   async (request: Request): Promise<Request> =>
     interceptors.reduce(
-      async (asyncResult, interceptor): Promise<Request> =>
-        interceptor({ request: await asyncResult }),
+      async (asyncResult, interceptor): Promise<Request> => interceptor({ request: await asyncResult }),
       Promise.resolve(request),
     )
 
@@ -33,8 +28,7 @@ export const composeResponseInterceptors =
   (interceptors: ResponseInterceptor[]) =>
   async (response: Response): Promise<Response> =>
     interceptors.reduce(
-      async (asyncResult, interceptor): Promise<Response> =>
-        interceptor({ response: await asyncResult }),
+      async (asyncResult, interceptor): Promise<Response> => interceptor({ response: await asyncResult }),
       Promise.resolve(response),
     )
 

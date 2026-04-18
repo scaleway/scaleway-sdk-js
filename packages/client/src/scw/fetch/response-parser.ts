@@ -46,10 +46,7 @@ export const fixLegacyTotalCount = <T>(obj: T, headers: Headers): T => {
  * @internal
  */
 export const responseParser =
-  <T>(
-    unmarshaller: ResponseUnmarshaller<T>,
-    responseType: 'json' | 'text' | 'blob',
-  ) =>
+  <T>(unmarshaller: ResponseUnmarshaller<T>, responseType: 'json' | 'text' | 'blob') =>
   async (response: Response): Promise<T> => {
     if (!isResponse(response)) {
       throw new TypeError('Invalid response object')
@@ -60,9 +57,7 @@ export const responseParser =
       const contentType = response.headers.get('Content-Type')
       try {
         if (responseType === 'json' && contentType === 'application/json') {
-          return unmarshaller(
-            fixLegacyTotalCount(await response.json(), response.headers),
-          )
+          return unmarshaller(fixLegacyTotalCount(await response.json(), response.headers))
         }
         if (responseType === 'blob') {
           return unmarshaller(await response.blob())
@@ -72,9 +67,7 @@ export const responseParser =
       } catch (err) {
         throw new ScalewayError(
           response.status,
-          `could not parse '${contentType ?? ''}' response${
-            err instanceof Error ? `: ${err.message}` : ''
-          }`,
+          `could not parse '${contentType ?? ''}' response${err instanceof Error ? `: ${err.message}` : ''}`,
         )
       }
     }
@@ -86,8 +79,5 @@ export const responseParser =
 
     if (isJSONObject(error)) throw parseScalewayError(response.status, error)
 
-    throw new ScalewayError(
-      response.status,
-      typeof error === 'string' ? error : 'cannot read error response body',
-    )
+    throw new ScalewayError(response.status, typeof error === 'string' ? error : 'cannot read error response body')
   }

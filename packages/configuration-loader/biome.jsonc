@@ -3,11 +3,11 @@
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "on"
-      }
+        "organizeImports": "on",
+      },
     },
-   "enabled": true
+    "enabled": true,
   },
   "extends": "//",
-  "root": false
+  "root": false,
 }

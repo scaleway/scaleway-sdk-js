@@ -30,9 +30,6 @@ export const addHeaderInterceptor =
  * @internal
  */
 export const addAsyncHeaderInterceptor =
-  (
-    key: string,
-    getter: () => Promise<string | undefined>,
-  ): RequestInterceptor =>
+  (key: string, getter: () => Promise<string | undefined>): RequestInterceptor =>
   async request =>
     addHeaderInterceptor(key, await getter())(request)

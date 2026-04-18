@@ -3,9 +3,7 @@ import { enableConsoleLogger, getLogger, setLogger } from '..'
 import { ConsoleLogger } from '../console-logger.js'
 import type { LogLevel } from '../level-resolver.js'
 
-const makeCallbackConsole = (
-  onMessage: (str: string) => void,
-): typeof console => ({
+const makeCallbackConsole = (onMessage: (str: string) => void): typeof console => ({
   ...console,
   debug: onMessage,
   error: onMessage,

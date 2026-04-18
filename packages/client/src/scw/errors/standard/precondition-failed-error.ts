@@ -36,18 +36,10 @@ export class PreconditionFailedError extends ScalewayError {
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
-    if (
-      typeof obj.precondition !== 'string' ||
-      typeof obj.help_message !== 'string'
-    ) {
+    if (typeof obj.precondition !== 'string' || typeof obj.help_message !== 'string') {
       return null
     }
 
-    return new PreconditionFailedError(
-      status,
-      obj,
-      obj.precondition,
-      obj.help_message,
-    )
+    return new PreconditionFailedError(status, obj, obj.precondition, obj.help_message)
   }
 }

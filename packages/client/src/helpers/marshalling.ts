@@ -11,10 +11,7 @@
  *
  * @internal
  */
-export function validatePathParam(
-  name: string,
-  param: string | number | undefined,
-): string {
+export function validatePathParam(name: string, param: string | number | undefined): string {
   if (typeof param === 'string' && param.length > 0) return param
   if (typeof param === 'number') return param.toString()
 
@@ -41,9 +38,7 @@ export const resolveOneOf = <T>(
   }[],
   isRequired = false,
 ): Record<string, T> => {
-  const elt =
-    list.find(obj => obj.value !== undefined) ??
-    list.find(obj => obj.default !== undefined)
+  const elt = list.find(obj => obj.value !== undefined) ?? list.find(obj => obj.default !== undefined)
   const value = elt?.value ?? elt?.default
   if (elt && value !== undefined) {
     return { [elt.param]: value }
@@ -74,9 +69,7 @@ const toParamString = (v: URLParameterValue): string | null => {
 }
 
 export const urlParams = (
-  ...paramTuples: Readonly<
-    [string, URLParameterValue | URLParameterValue[] | undefined]
-  >[]
+  ...paramTuples: Readonly<[string, URLParameterValue | URLParameterValue[] | undefined]>[]
 ) => {
   const params = new URLSearchParams()
   for (const [key, value] of paramTuples) {
@@ -122,9 +115,7 @@ export const unmarshalArrayOfObject = <T, B extends boolean>(
   emptyFallback: B = true as B,
 ): B extends true ? T[] | undefined : T[] => {
   if (!Array.isArray(data)) {
-    return (emptyFallback ? [] : undefined) as B extends true
-      ? T[] | undefined
-      : T[]
+    return (emptyFallback ? [] : undefined) as B extends true ? T[] | undefined : T[]
   }
 
   return data.map(elt => unmarshaller(elt))
@@ -140,15 +131,8 @@ export const unmarshalMapOfObject = <T, B extends boolean>(
   unmarshaller: (input: unknown) => T,
   emptyFallback: B = true as B,
 ): B extends true ? Record<string, T> | undefined : Record<string, T> => {
-  if (
-    !data ||
-    typeof data !== 'object' ||
-    !(data instanceof Object) ||
-    Array.isArray(data)
-  ) {
-    return (emptyFallback ? {} : undefined) as B extends true
-      ? Record<string, T> | undefined
-      : Record<string, T>
+  if (!data || typeof data !== 'object' || !(data instanceof Object) || Array.isArray(data)) {
+    return (emptyFallback ? {} : undefined) as B extends true ? Record<string, T> | undefined : Record<string, T>
   }
 
   const out: Record<string, T> = {}

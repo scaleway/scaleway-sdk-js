@@ -7,11 +7,7 @@ export {
   urlParams,
   validatePathParam,
 } from './helpers/marshalling.js'
-export {
-  createExponentialBackoffStrategy,
-  tryAtIntervals,
-  waitForResource,
-} from './internal/async/interval-retrier.js'
+export { createExponentialBackoffStrategy, tryAtIntervals, waitForResource } from './internal/async/interval-retrier.js'
 export { addAsyncHeaderInterceptor } from './internal/interceptors/helpers.js'
 export { API } from './scw/api.js'
 export { authenticateWithSessionToken } from './scw/auth.js'

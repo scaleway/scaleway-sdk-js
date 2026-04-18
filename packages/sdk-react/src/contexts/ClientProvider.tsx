@@ -25,10 +25,7 @@ export const useClient = () => {
   return context
 }
 
-export const ClientProvider = ({
-  children,
-  clientSettings,
-}: APIProviderProps) => {
+export const ClientProvider = ({ children, clientSettings }: APIProviderProps) => {
   const value = useMemo(
     () => ({
       client: createAdvancedClient(() => clientSettings),

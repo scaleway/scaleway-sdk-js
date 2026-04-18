@@ -7,15 +7,9 @@ interface PaginatedResponse {
   totalCount: number
 }
 
-export type PaginatedFetcher<
-  T,
-  R extends PaginationOptions = PaginationOptions,
-> = (request: R) => Promise<T>
+export type PaginatedFetcher<T, R extends PaginationOptions = PaginationOptions> = (request: R) => Promise<T>
 
-export type PaginatedContent<
-  K extends string,
-  T = unknown,
-> = PaginatedResponse & {
+export type PaginatedContent<K extends string, T = unknown> = PaginatedResponse & {
   [key in K]: T[]
 }
 
@@ -24,11 +18,7 @@ export const extract =
   <T extends PaginatedContent<K>>(result: T) =>
     result[key]
 
-function* pages<
-  K extends string,
-  T extends PaginatedContent<K>,
-  R extends PaginationOptions,
->(
+function* pages<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
   request: R,
@@ -61,11 +51,7 @@ function* pages<
  * @param initial - The first page
  * @returns An async generator of resources arrays
  */
-export async function* fetchPaginated<
-  K extends string,
-  T extends PaginatedContent<K>,
-  R extends PaginationOptions,
->(
+export async function* fetchPaginated<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
   request: R,
@@ -83,19 +69,12 @@ export async function* fetchPaginated<
  * @param initial - The first page
  * @returns A resources array Promise
  */
-export const fetchAll = async <
-  K extends string,
-  T extends PaginatedContent<K>,
-  R extends PaginationOptions,
->(
+export const fetchAll = async <K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
   request: R,
   initial: Promise<T> = fetcher(request),
-) =>
-  (
-    await Promise.all(Array.from(pages(key, fetcher, request, await initial)))
-  ).flat()
+) => (await Promise.all(Array.from(pages(key, fetcher, request, await initial)))).flat()
 
 /**
  * Enriches a listing method with helpers.
@@ -107,11 +86,7 @@ export const fetchAll = async <
  *
  * @internal
  */
-export const enrichForPagination = <
-  K extends string,
-  T extends PaginatedContent<K>,
-  R extends PaginationOptions,
->(
+export const enrichForPagination = <K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
   request: R,
@@ -120,7 +95,6 @@ export const enrichForPagination = <
 
   return Object.assign(firstPage, {
     all: () => fetchAll(key, fetcher, request, firstPage),
-    [Symbol.asyncIterator]: () =>
-      fetchPaginated(key, fetcher, request, firstPage),
+    [Symbol.asyncIterator]: () => fetchPaginated(key, fetcher, request, firstPage),
   })
 }

@@ -7,8 +7,7 @@ function walk(dir: string, callback: (file: string) => void) {
   for (const f of fs.readdirSync(dir)) {
     const p = path.join(dir, f)
     if (fs.statSync(p).isDirectory()) walk(p, callback)
-    else if (p.endsWith('.ts') || p.endsWith('.js') || p.endsWith('.d.ts'))
-      callback(p)
+    else if (p.endsWith('.ts') || p.endsWith('.js') || p.endsWith('.d.ts')) callback(p)
   }
 }
 

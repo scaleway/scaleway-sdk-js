@@ -8,5 +8,4 @@ export enum LevelResolver {
 
 export type LogLevel = keyof typeof LevelResolver
 
-export const shouldLog = (currentLevel: LevelResolver, level: LogLevel) =>
-  LevelResolver[level] <= currentLevel
+export const shouldLog = (currentLevel: LevelResolver, level: LogLevel) => LevelResolver[level] <= currentLevel

@@ -1,10 +1,6 @@
 import { getLogger } from '../internal/logger'
 import type { ClientConfig } from './client-ini-factory.js'
-import {
-  withAdditionalInterceptors,
-  withLegacyInterceptors,
-  withProfile,
-} from './client-ini-factory.js'
+import { withAdditionalInterceptors, withLegacyInterceptors, withProfile } from './client-ini-factory.js'
 import type { Settings } from './client-settings.js'
 import { assertValidSettings } from './client-settings.js'
 import { userAgent, version } from './constants.js'
@@ -54,10 +50,7 @@ export interface Client {
 export const createAdvancedClient = (...configs: ClientConfig[]): Client => {
   const settings = configs
     .concat([withLegacyInterceptors()])
-    .reduce(
-      (currentSettings, config) => config(currentSettings),
-      DEFAULT_SETTINGS,
-    )
+    .reduce((currentSettings, config) => config(currentSettings), DEFAULT_SETTINGS)
   assertValidSettings(settings)
   getLogger().info(`init Scaleway SDK version ${version}`)
 
@@ -103,7 +96,4 @@ export const createAdvancedClient = (...configs: ClientConfig[]): Client => {
  * @public
  */
 export const createClient = (settings: Partial<Settings> = {}): Client =>
-  createAdvancedClient(
-    withProfile(settings),
-    withAdditionalInterceptors(settings.interceptors ?? []),
-  )
+  createAdvancedClient(withProfile(settings), withAdditionalInterceptors(settings.interceptors ?? []))

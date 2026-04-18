@@ -1,11 +1,5 @@
 #!/usr/bin/env node
-import {
-  appendFileSync,
-  readdirSync,
-  readFileSync,
-  statSync,
-  writeFileSync,
-} from 'node:fs'
+import { appendFileSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { snakeToPascal, snakeToSlug } from './helpers.ts'
 
@@ -58,9 +52,7 @@ for (const service of services) {
     exportedNames = getExportsFromPackage(packagePath)
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err)
-    throw new Error(
-      `Error getting exports for package '${service}': ${message}`,
-    )
+    throw new Error(`Error getting exports for package '${service}': ${message}`)
   }
 
   if (exportedNames.length > 0) {
@@ -91,9 +83,6 @@ for (const service of services) {
 }
 
 appendFileSync(OUTPUT_PATH, importsOutput)
-appendFileSync(
-  OUTPUT_PATH,
-  "export { createClient, createAdvancedClient } from '@scaleway/sdk-client'\n\n",
-)
+appendFileSync(OUTPUT_PATH, "export { createClient, createAdvancedClient } from '@scaleway/sdk-client'\n\n")
 appendFileSync(OUTPUT_PATH, output)
 console.log(`✅ File generated: ${OUTPUT_PATH}`)

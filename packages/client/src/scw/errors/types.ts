@@ -8,17 +8,12 @@ import { isJSONObject } from '../../helpers/json.js'
  *
  * @internal
  */
-export const isRecordOfStringArray = (
-  obj: Readonly<unknown>,
-): obj is Record<string, string[]> => {
+export const isRecordOfStringArray = (obj: Readonly<unknown>): obj is Record<string, string[]> => {
   if (!isJSONObject(obj)) {
     return false
   }
   for (const elt of Object.values(obj)) {
-    if (
-      !Array.isArray(elt) ||
-      Object.values(elt).find(x => typeof x !== 'string') !== undefined
-    ) {
+    if (!Array.isArray(elt) || Object.values(elt).find(x => typeof x !== 'string') !== undefined) {
       return false
     }
   }

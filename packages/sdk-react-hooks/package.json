@@ -1,25 +1,15 @@
 {
   "name": "@scaleway/sdk-react-hooks",
   "version": "0.6.0",
-  "description": "React hooks",
   "private": false,
-  "sideEffects": false,
-  "type": "module",
+  "description": "React hooks",
   "files": [
     "dist"
   ],
-  "types": "./dist/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
   "module": "./dist/index.js",
-  "scripts": {
-    "prebuild": "shx rm -rf dist && pnpm generate:queries",
-    "typecheck": "tsgo --noEmit",
-    "generate:queries": "pnpm generate-react-queries && pnpm format",
-    "format": "biome check  --linter-enabled=false --write .",
-    "type:generate": "tsgo --declaration -p tsconfig.build.json",
-    "build": "vite build --config vite.config.ts && pnpm run type:generate",
-    "watch": "pnpm run '/^watch:.*/'",
-    "lint": "biome lint ."
-  },
+  "types": "./dist/index.d.ts",
   "exports": {
     "./accountv3": {
       "default": "./dist/queries/accountv3/generated/index.js",
@@ -246,9 +236,18 @@
       "types": "./dist/queries/containerv1/generated/index.d.ts"
     }
   },
-  "peerDependencies": {
-    "@scaleway/use-dataloader": "6.x",
-    "react": "18.x || 19.x"
+  "scripts": {
+    "prebuild": "shx rm -rf dist && pnpm generate:queries",
+    "typecheck": "tsgo --noEmit",
+    "generate:queries": "pnpm generate-react-queries && pnpm format",
+    "format": "biome check  --linter-enabled=false --write .",
+    "type:generate": "tsgo --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "watch": "pnpm run '/^watch:.*/'",
+    "lint": "biome lint ."
+  },
+  "dependencies": {
+    "@scaleway/sdk-react": "workspace:*"
   },
   "devDependencies": {
     "@repo/configs": "workspace:^",
@@ -305,8 +304,9 @@
     "react": "^19.2.4",
     "tinyglobby": "0.2.15"
   },
-  "dependencies": {
-    "@scaleway/sdk-react": "workspace:*"
+  "peerDependencies": {
+    "@scaleway/use-dataloader": "6.x",
+    "react": "18.x || 19.x"
   },
   "optionalDependencies": {
     "@scaleway/sdk-account": "workspace:*",

@@ -1,7 +1,4 @@
-import {
-  isAccessKey,
-  isSecretKey,
-} from '../internal/validations/string-validation.js'
+import { isAccessKey, isSecretKey } from '../internal/validations/string-validation.js'
 import type { Region, Zone } from './locality.js'
 
 /**
@@ -75,13 +72,8 @@ export type Profile = Partial<ProfileDefaultValues & AuthenticationSecrets>
  *
  * @internal
  */
-export const hasAuthenticationSecrets = (
-  obj: Partial<AuthenticationSecrets>,
-): obj is AuthenticationSecrets =>
-  typeof obj.accessKey === 'string' &&
-  obj.accessKey !== '' &&
-  typeof obj.secretKey === 'string' &&
-  obj.secretKey !== ''
+export const hasAuthenticationSecrets = (obj: Partial<AuthenticationSecrets>): obj is AuthenticationSecrets =>
+  typeof obj.accessKey === 'string' && obj.accessKey !== '' && typeof obj.secretKey === 'string' && obj.secretKey !== ''
 
 /**
  * Asserts the format of secrets.

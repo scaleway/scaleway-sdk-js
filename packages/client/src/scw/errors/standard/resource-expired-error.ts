@@ -14,11 +14,7 @@ export class ResourceExpiredError extends ScalewayError {
     readonly resourceId: string,
     readonly expiredSince: Date,
   ) {
-    super(
-      status,
-      body,
-      `resource ${resource} with ID ${resourceId} expired since ${expiredSince.toISOString()}`,
-    )
+    super(status, body, `resource ${resource} with ID ${resourceId} expired since ${expiredSince.toISOString()}`)
     this.name = 'ResourceExpiredError'
   }
 
@@ -31,12 +27,6 @@ export class ResourceExpiredError extends ScalewayError {
       return null
     }
 
-    return new ResourceExpiredError(
-      status,
-      obj,
-      obj.resource,
-      obj.resource_id,
-      new Date(obj.expired_since),
-    )
+    return new ResourceExpiredError(status, obj, obj.resource, obj.resource_id, new Date(obj.expired_since))
   }
 }

@@ -14,7 +14,7 @@
     "strict": true,
     "target": "esnext",
     "types": ["node"],
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["./templates/**"],

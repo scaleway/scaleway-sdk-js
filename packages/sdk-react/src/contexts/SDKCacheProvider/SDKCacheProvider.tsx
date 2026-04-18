@@ -1,22 +1,9 @@
 import type { PropsWithChildren } from 'react'
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useClient } from '../ClientProvider'
-import type {
-  APISdkCache,
-  DefaultTypeBaseAPI,
-  ExtendedAPISdkCache,
-} from '../types'
+import type { APISdkCache, DefaultTypeBaseAPI, ExtendedAPISdkCache } from '../types'
 
-type SetSDKInstance<TCache extends APISdkCache = APISdkCache> = (
-  key: Partial<TCache>,
-) => void
+type SetSDKInstance<TCache extends APISdkCache = APISdkCache> = (key: Partial<TCache>) => void
 
 // oxlint-disable-next-line react/only-export-components
 export const SDKCacheContext = createContext<
@@ -28,9 +15,7 @@ export const SDKCacheContext = createContext<
 >(undefined)
 
 // oxlint-disable-next-line react/only-export-components
-export const useSDKCache = <
-  TCustomAPIs extends DefaultTypeBaseAPI = DefaultTypeBaseAPI,
->() => {
+export const useSDKCache = <TCustomAPIs extends DefaultTypeBaseAPI = DefaultTypeBaseAPI>() => {
   const context = useContext(SDKCacheContext)
   if (!context) {
     throw new Error('useSDKCache must be used in SDKCacheProvider')

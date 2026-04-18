@@ -7,10 +7,7 @@ export { OutOfStockError } from './out-of-stock-error.js'
 export type { PermissionsDeniedErrorDetails } from './permissions-denied-error.js'
 export { PermissionsDeniedError } from './permissions-denied-error.js'
 export { PreconditionFailedError } from './precondition-failed-error.js'
-export type {
-  QuotasExceededErrorDetails,
-  QuotasExceededErrorScope,
-} from './quotas-exceeded-error.js'
+export type { QuotasExceededErrorDetails, QuotasExceededErrorScope } from './quotas-exceeded-error.js'
 export { QuotasExceededError } from './quotas-exceeded-error.js'
 export { ResourceExpiredError } from './resource-expired-error.js'
 export { ResourceLockedError } from './resource-locked-error.js'

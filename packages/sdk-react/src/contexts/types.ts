@@ -7,8 +7,7 @@ export type DefaultTypeBaseAPI = Record<string, API>
  */
 export type BaseAPISdkCache = APISdk
 
-export type ExtendedAPISdkCache<
-  TCustomAPIs extends DefaultTypeBaseAPI = Record<string, never>,
-> = BaseAPISdkCache & TCustomAPIs
+export type ExtendedAPISdkCache<TCustomAPIs extends DefaultTypeBaseAPI = Record<string, never>> = BaseAPISdkCache &
+  TCustomAPIs
 
 export type APISdkCache = ExtendedAPISdkCache<DefaultTypeBaseAPI>

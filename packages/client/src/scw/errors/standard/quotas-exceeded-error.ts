@@ -37,19 +37,12 @@ const buildMessage = (list: QuotasExceededErrorDetails[]): string =>
     .map(details => {
       const message = `Quotas reached: You have reached the maximum number of ${details.resource} authorized by your Organization. Access the quotas page from your Organization dashboard to manage quotas.`
 
-      return details.scope
-        ? `${message} for ${details.scope.kind} '${details.scope.id}'`
-        : message
+      return details.scope ? `${message} for ${details.scope.kind} '${details.scope.id}'` : message
     })
     .join('; ')}`
 
-const buildScope = (
-  detail: JSONObject,
-): QuotasExceededErrorScope | undefined => {
-  if (
-    typeof detail.organization_id === 'string' &&
-    detail.organization_id.length
-  ) {
+const buildScope = (detail: JSONObject): QuotasExceededErrorScope | undefined => {
+  if (typeof detail.organization_id === 'string' && detail.organization_id.length) {
     return { id: detail.organization_id, kind: 'organization' }
   }
   if (typeof detail.project_id === 'string' && detail.project_id.length) {

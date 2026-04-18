@@ -23,9 +23,7 @@ import type { QueriesMetadata, ReactQueriesConfig } from './config.ts'
  *
  * Returns a Map of packageName → directory path on disk.
  */
-export function discoverSdkPackages(
-  config: ReactQueriesConfig,
-): Map<string, string> {
+export function discoverSdkPackages(config: ReactQueriesConfig): Map<string, string> {
   if (config.packagesPath) {
     return discoverFromDirectory(config.packagesPath)
   }
@@ -77,9 +75,7 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
  *
  * This is the generic path — works with node_modules, pnpm workspaces, etc.
  */
-function discoverFromDependencies(
-  packageNameFilter: string,
-): Map<string, string> {
+function discoverFromDependencies(packageNameFilter: string): Map<string, string> {
   const pkgJson = JSON.parse(readFileSync(resolve('package.json'), 'utf-8'))
 
   const allDeps: Record<string, string> = {
@@ -89,10 +85,7 @@ function discoverFromDependencies(
   }
 
   const sdkPackageNames = Object.keys(allDeps).filter(
-    name =>
-      name.startsWith(packageNameFilter) &&
-      !name.endsWith('-client') &&
-      !name.endsWith('-react'),
+    name => name.startsWith(packageNameFilter) && !name.endsWith('-client') && !name.endsWith('-react'),
   )
 
   const packages = new Map<string, string>()
@@ -102,9 +95,7 @@ function discoverFromDependencies(
     if (pkgDir) packages.set(name, pkgDir)
   }
 
-  console.log(
-    `📦 Found ${packages.size} SDK packages matching "${packageNameFilter}"`,
-  )
+  console.log(`📦 Found ${packages.size} SDK packages matching "${packageNameFilter}"`)
   return packages
 }
 
@@ -130,9 +121,7 @@ function resolvePackageDir(packageName: string): string | undefined {
     dir = dirname(dir)
   }
 
-  console.warn(
-    `⚠️  Could not resolve package "${packageName}" from CWD, skipping.`,
-  )
+  console.warn(`⚠️  Could not resolve package "${packageName}" from CWD, skipping.`)
   return undefined
 }
 
@@ -140,10 +129,7 @@ function resolvePackageDir(packageName: string): string | undefined {
  * Find API versions that have metadata in a package's dist directory.
  * Looks for the compiled metadata file (e.g. metadata.gen.js) in each version subdirectory.
  */
-export function discoverVersions(
-  pkgDir: string,
-  metadataFileName: string,
-): string[] {
+export function discoverVersions(pkgDir: string, metadataFileName: string): string[] {
   const distPath = join(pkgDir, 'dist')
   const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
 
@@ -151,10 +137,7 @@ export function discoverVersions(
 
   return readdirSync(distPath).filter(entry => {
     const fullPath = join(distPath, entry)
-    return (
-      statSync(fullPath).isDirectory() &&
-      existsSync(join(fullPath, metadataJsFile))
-    )
+    return statSync(fullPath).isDirectory() && existsSync(join(fullPath, metadataJsFile))
   })
 }
 
@@ -181,9 +164,7 @@ export async function loadMetadata(
     if (utilsMetadata?.services) {
       // Merge utils methods into matching services by apiClass to avoid duplicate services
       for (const utilsService of utilsMetadata.services) {
-        const existing = metadata.services.find(
-          s => s.apiClass === utilsService.apiClass,
-        )
+        const existing = metadata.services.find(s => s.apiClass === utilsService.apiClass)
         if (existing) {
           existing.methods = [...existing.methods, ...utilsService.methods]
         } else {

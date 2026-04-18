@@ -3,6 +3,11 @@
   "version": "3.6.0",
   "description": "Scaleway SDK TS.",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scaleway/scaleway-sdk-js.git",
+    "directory": "packages/sdk"
+  },
   "files": [
     "dist"
   ],
@@ -12,14 +17,6 @@
       "types": "./dist/index.gen.d.ts",
       "default": "./dist/index.gen.js"
     }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/scaleway/scaleway-sdk-js.git",
-    "directory": "packages/sdk"
-  },
-  "engines": {
-    "node": ">=20.19.6"
   },
   "scripts": {
     "package:check": "pnpm publint",
@@ -82,5 +79,8 @@
   },
   "devDependencies": {
     "@repo/configs": "workspace:^"
+  },
+  "engines": {
+    "node": ">=20.19.6"
   }
 }

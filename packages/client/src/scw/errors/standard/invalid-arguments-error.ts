@@ -72,15 +72,10 @@ export class InvalidArgumentsError extends ScalewayError {
       obj,
       obj.details.reduce<InvalidArgumentsErrorDetails[]>(
         (list, detail) =>
-          isJSONObject(detail) &&
-          typeof detail.argument_name === 'string' &&
-          typeof detail.reason === 'string'
+          isJSONObject(detail) && typeof detail.argument_name === 'string' && typeof detail.reason === 'string'
             ? list.concat({
                 argumentName: detail.argument_name,
-                helpMessage:
-                  typeof detail.help_message === 'string'
-                    ? detail.help_message
-                    : undefined,
+                helpMessage: typeof detail.help_message === 'string' ? detail.help_message : undefined,
                 reason: detail.reason,
               })
             : list,

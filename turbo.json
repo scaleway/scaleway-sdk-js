@@ -22,13 +22,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputLogs": "new-only",
-      "outputs": [
-        "build/**",
-        "dist/**",
-        ".next/**",
-        "!.next/cache/**",
-        "out/**"
-      ],
+      "outputs": ["build/**", "dist/**", ".next/**", "!.next/cache/**", "out/**"],
       "cache": true
     },
 

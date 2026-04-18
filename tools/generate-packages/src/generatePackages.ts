@@ -15,13 +15,7 @@ import { fileURLToPath } from 'node:url'
 import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
 import { SDKS } from './constants.ts'
-import {
-  renderTemplate,
-  renderTemplatePackageJson,
-  snakeToDisplayName,
-  snakeToPascal,
-  snakeToSlug,
-} from './helpers.ts'
+import { renderTemplate, renderTemplatePackageJson, snakeToDisplayName, snakeToPascal, snakeToSlug } from './helpers.ts'
 
 /**
  * Generates package scaffolding for each product in packages_generated/:
@@ -31,10 +25,7 @@ import {
  * - src/index.gen.ts (version re-exports)
  */
 
-const TEMPLATES_DIR = join(
-  dirname(fileURLToPath(import.meta.url)),
-  '../templates',
-)
+const TEMPLATES_DIR = join(dirname(fileURLToPath(import.meta.url)), '../templates')
 
 const TEMPLATES = {
   PACKAGE_JSON: join(TEMPLATES_DIR, 'package.tmpl'),
@@ -89,16 +80,11 @@ const exportProductVersions = ({ productDir }: { productDir: string }) => {
   for (const versionDir of versionDirs) {
     const pathVersion = `${fullPath}/${versionDir}`
     if (statSync(pathVersion).isDirectory()) {
-      const exportPath = CUSTOM.PRODUCT_VERSION_EXPORT.has(
-        `${productDir}/${versionDir}`,
-      )
+      const exportPath = CUSTOM.PRODUCT_VERSION_EXPORT.has(`${productDir}/${versionDir}`)
         ? `./${versionDir}/index.js`
         : `./${versionDir}/index.gen.js`
 
-      appendFileSync(
-        pathFile,
-        `\nexport * as ${snakeToPascal(productDir)}${versionDir} from '${exportPath}'`,
-      )
+      appendFileSync(pathFile, `\nexport * as ${snakeToPascal(productDir)}${versionDir} from '${exportPath}'`)
     }
   }
   appendFileSync(pathFile, '\n')
@@ -124,7 +110,7 @@ const generateMetadata = ({ productDir }: { productDir: string }) => {
   writeFileSync(metadataTsFilePath, metadataTs)
 }
 
-const main = () => {
+export const generatePackages = () => {
   for (const _sdk of SDKS) {
     const productsDirs = readdirSync(INPUT_PATH_DIR)
 
@@ -146,10 +132,7 @@ const main = () => {
           exportProductVersions({ productDir })
           generateMetadata({ productDir })
           copyFileSync(TEMPLATES.TS_CONFIG, join(fullPath, 'tsconfig.json'))
-          copyFileSync(
-            TEMPLATES.TS_CONFIG_BUILD,
-            join(fullPath, 'tsconfig.build.json'),
-          )
+          copyFileSync(TEMPLATES.TS_CONFIG_BUILD, join(fullPath, 'tsconfig.build.json'))
           copyFileSync(TEMPLATES.VITE_CONFIG, join(fullPath, 'vite.config.ts'))
 
           const readmeFilePath = join(fullPath, 'README.md')
@@ -170,4 +153,4 @@ const main = () => {
   }
 }
 
-main()
+generatePackages()

@@ -1,9 +1,9 @@
 {
   "name": "scaleway-nodejs-minimal",
   "version": "1.0.0",
-  "main": "index.ts",
-  "type": "module",
   "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
     "start": "node ./dist/index"

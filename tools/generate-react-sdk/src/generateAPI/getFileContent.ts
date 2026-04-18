@@ -7,12 +7,7 @@ type getContentProps = {
   sdkFactoryPath: string
 }
 
-export const getFileContent = ({
-  packageName,
-  name,
-  api,
-  sdkFactoryPath,
-}: getContentProps) => {
+export const getFileContent = ({ packageName, name, api, sdkFactoryPath }: getContentProps) => {
   const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
   const apiName = capitalizedName + api
   const keyValue = name + api.replace('API', '')

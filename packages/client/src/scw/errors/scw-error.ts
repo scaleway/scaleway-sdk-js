@@ -53,17 +53,11 @@ export class ScalewayError extends Error {
   ) {
     super(message) // 'Error' breaks prototype chain here
     this.name = 'ScalewayError'
-    this.rawMessage =
-      typeof body === 'object' && typeof body.message === 'string'
-        ? body.message
-        : undefined
+    this.rawMessage = typeof body === 'object' && typeof body.message === 'string' ? body.message : undefined
     Object.setPrototypeOf(this, new.target.prototype) // restore prototype chain
   }
 
-  static fromJSON(
-    status: number,
-    obj: Readonly<JSONObject>,
-  ): ScalewayError | null {
+  static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
     return new ScalewayError(status, obj)
   }
 
