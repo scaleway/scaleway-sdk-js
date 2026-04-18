@@ -60,7 +60,7 @@
     "tsc-alias": "1.8.16",
     "turbo": "2.8.20",
     "typedoc": "0.28.17",
-    "typescript": "5.9.3",
+    "typescript": "6.0.2",
     "vite": "8.0.8",
     "vitest": "3.2.4"
   },
