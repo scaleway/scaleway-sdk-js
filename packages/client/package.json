@@ -34,7 +34,8 @@
     "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
   },
   "devDependencies": {
-    "@repo/configs": "workspace:^"
+    "@repo/configs": "workspace:^",
+    "@types/node": "20.19.35"
   },
   "engines": {
     "node": ">=20.19.6"

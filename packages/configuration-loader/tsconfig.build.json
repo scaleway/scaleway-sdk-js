@@ -5,7 +5,8 @@
     "emitDeclarationOnly": true,
     "rootDir": "src",
     "outDir": "dist",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["node"]
   },
   "exclude": ["dist/*", "*.config.ts", "*.setup.ts", "**/__tests__", "**/__mocks__", "src/**/*.test.tsx"]
 }
