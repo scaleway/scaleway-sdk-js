@@ -14,7 +14,8 @@
     "strict": true,
     "target": "esnext",
     "allowImportingTsExtensions": true,
-    "noPropertyAccessFromIndexSignature": false
+    "noPropertyAccessFromIndexSignature": false,
+    "types": ["node"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["./templates/**"],

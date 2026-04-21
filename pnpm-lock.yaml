@@ -113,6 +113,9 @@ importers:
       '@repo/configs':
         specifier: workspace:^
         version: link:../../tools/configs
+      '@types/node':
+        specifier: 20.19.35
+        version: 20.19.35
 
   packages/configuration-loader:
     devDependencies:
