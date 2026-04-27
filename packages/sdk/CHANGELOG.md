@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @scaleway/sdk
 
-
-
-
-
 # [3.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.5.0...@scaleway/sdk@3.6.0) (2026-04-17)
 
 ### Features

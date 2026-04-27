@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @scaleway/configuration-loader
 
-
-
-
-
 # 2.4.0 (2026-04-17)
 
 ### Features

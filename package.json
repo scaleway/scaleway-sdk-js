@@ -75,7 +75,7 @@
       "pnpm oxfmt --write"
     ],
     "*.md?(x)": [
-      "pnpm prettier --write"
+      "pnpm oxfmt --write"
     ],
     "*.json": [
       "pnpm run format"

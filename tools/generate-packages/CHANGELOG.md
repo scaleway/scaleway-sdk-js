@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @scaleway/generate-packages
 
-
-
-
-
 ## [0.5.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/generate-packages@0.5.0...@scaleway/generate-packages@0.5.1) (2026-04-17)
 
 ### Bug Fixes
