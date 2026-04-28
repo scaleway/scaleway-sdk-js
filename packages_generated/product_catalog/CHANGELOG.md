@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @scaleway/sdk-product-catalog
 
-
-
-
-
 # [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.9.0...@scaleway/sdk-product-catalog@2.10.0) (2026-04-17)
 
 ### Features
