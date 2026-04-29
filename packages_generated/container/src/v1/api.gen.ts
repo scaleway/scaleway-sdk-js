@@ -546,6 +546,7 @@ the most recent image version available in the registry.
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
+          ['trigger_type', request.triggerType],
         ),
       },
       unmarshalListTriggersResponse,
@@ -554,7 +555,7 @@ the most recent image version available in the registry.
   /**
    * List all triggers the caller can access (read permission).. By default, the triggers listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
 
-Additional parameters can be set in the query to filter, such as `organization_id`, `project_id`, `namespace_id`, or `container_id`.
+Additional parameters can be set in the query to filter, such as `organization_id`, `project_id`, `namespace_id`, `container_id` or `trigger_type`.
    *
    * @param request - The request {@link ListTriggersRequest}
    * @returns A Promise of ListTriggersResponse
