@@ -1086,6 +1086,7 @@ export type ListTriggersRequest = {
   projectId?: string
   namespaceId?: string
   containerId?: string
+  triggerType?: TriggerSourceType
 }
 
 
