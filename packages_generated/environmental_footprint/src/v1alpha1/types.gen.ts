@@ -73,7 +73,7 @@ export interface ZoneImpact {
    */
   totalZoneImpact?: Impact
   /**
-   * List of estimated impact values per SKU.
+   * List of estimated impact values per SKU for this zone.
    */
   skus: SkuImpact[]
 }
@@ -92,6 +92,10 @@ export interface RegionImpact {
    * List of estimated impact values per zone.
    */
   zones: ZoneImpact[]
+  /**
+   * List of estimated impact values per SKU for this region.
+   */
+  skus: SkuImpact[]
 }
 
 
