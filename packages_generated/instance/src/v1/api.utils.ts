@@ -1,5 +1,9 @@
 import type { WaitForOptions } from '@scaleway/sdk-client'
-import { createExponentialBackoffStrategy, tryAtIntervals, validatePathParam } from '@scaleway/sdk-client'
+import {
+  createExponentialBackoffStrategy,
+  tryAtIntervals,
+  validatePathParam,
+} from '@scaleway/sdk-client'
 import { API } from './api.gen'
 import {
   IMAGE_TRANSIENT_STATUSES,
@@ -48,17 +52,25 @@ export class InstanceV1UtilsAPI extends API {
    * @param options - The waiting options
    * @returns A Promise of Image
    */
-  waitForImage = (request: Readonly<GetImageRequest>, options?: Readonly<WaitForOptions<Image>>) =>
+  waitForImage = (
+    request: Readonly<GetImageRequest>,
+    options?: Readonly<WaitForOptions<Image>>,
+  ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getImage(request).then(res => res.image as Image)
+        const value = await this.getImage(request).then(
+          res => res.image as Image,
+        )
 
         return {
           done: !IMAGE_TRANSIENT_STATUSES.includes(value.state),
           value,
         }
       },
-      createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
+      createExponentialBackoffStrategy(
+        options?.minDelay ?? 1,
+        options?.maxDelay ?? 30,
+      ),
       options?.timeout,
     )
 
@@ -69,17 +81,25 @@ export class InstanceV1UtilsAPI extends API {
    * @param options - The waiting options
    * @returns A Promise of PrivateNIC
    */
-  waitForPrivateNIC = (request: Readonly<GetPrivateNICRequest>, options?: Readonly<WaitForOptions<PrivateNIC>>) =>
+  waitForPrivateNIC = (
+    request: Readonly<GetPrivateNICRequest>,
+    options?: Readonly<WaitForOptions<PrivateNIC>>,
+  ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getPrivateNIC(request).then(res => res.privateNic as PrivateNIC)
+        const value = await this.getPrivateNIC(request).then(
+          res => res.privateNic as PrivateNIC,
+        )
 
         return {
           done: !PRIVATE_NIC_TRANSIENT_STATUSES.includes(value.state),
           value,
         }
       },
-      createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
+      createExponentialBackoffStrategy(
+        options?.minDelay ?? 1,
+        options?.maxDelay ?? 30,
+      ),
       options?.timeout,
     )
 
@@ -90,17 +110,25 @@ export class InstanceV1UtilsAPI extends API {
    * @param options - The waiting options
    * @returns A Promise of Server
    */
-  waitForServer = (request: Readonly<GetServerRequest>, options?: Readonly<WaitForOptions<Server>>) =>
+  waitForServer = (
+    request: Readonly<GetServerRequest>,
+    options?: Readonly<WaitForOptions<Server>>,
+  ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getServer(request).then(res => res.server as Server)
+        const value = await this.getServer(request).then(
+          res => res.server as Server,
+        )
 
         return {
           done: !SERVER_TRANSIENT_STATUSES.includes(value.state),
           value,
         }
       },
-      createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
+      createExponentialBackoffStrategy(
+        options?.minDelay ?? 1,
+        options?.maxDelay ?? 30,
+      ),
       options?.timeout,
     )
 
@@ -111,17 +139,25 @@ export class InstanceV1UtilsAPI extends API {
    * @param options - The waiting options
    * @returns A Promise of Server
    */
-  waitForSnapshot = (request: Readonly<GetSnapshotRequest>, options?: Readonly<WaitForOptions<Snapshot>>) =>
+  waitForSnapshot = (
+    request: Readonly<GetSnapshotRequest>,
+    options?: Readonly<WaitForOptions<Snapshot>>,
+  ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getSnapshot(request).then(res => res.snapshot as Snapshot)
+        const value = await this.getSnapshot(request).then(
+          res => res.snapshot as Snapshot,
+        )
 
         return {
           done: !SNAPSHOT_TRANSIENT_STATUSES.includes(value.state),
           value,
         }
       },
-      createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
+      createExponentialBackoffStrategy(
+        options?.minDelay ?? 1,
+        options?.maxDelay ?? 30,
+      ),
       options?.timeout,
     )
 
@@ -132,17 +168,25 @@ export class InstanceV1UtilsAPI extends API {
    * @param options - The waiting options
    * @returns A Promise of Volume
    */
-  waitForVolume = (request: Readonly<GetVolumeRequest>, options?: Readonly<WaitForOptions<Volume>>) =>
+  waitForVolume = (
+    request: Readonly<GetVolumeRequest>,
+    options?: Readonly<WaitForOptions<Volume>>,
+  ) =>
     tryAtIntervals(
       async () => {
-        const value = await this.getVolume(request).then(res => res.volume as Volume)
+        const value = await this.getVolume(request).then(
+          res => res.volume as Volume,
+        )
 
         return {
           done: !VOLUME_TRANSIENT_STATUSES.includes(value.state),
           value,
         }
       },
-      createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
+      createExponentialBackoffStrategy(
+        options?.minDelay ?? 1,
+        options?.maxDelay ?? 30,
+      ),
       options?.timeout,
     )
 
@@ -160,7 +204,8 @@ export class InstanceV1UtilsAPI extends API {
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of CreateServerResponse
    */
-  createServer = (request: Readonly<CreateServerRequest>) => this._createServer(request)
+  createServer = (request: Readonly<CreateServerRequest>) =>
+    this._createServer(request)
 
   /**
    * Starts an action and wait for the server to be in the correct "terminal
@@ -169,7 +214,10 @@ export class InstanceV1UtilsAPI extends API {
    * @param request - The request {@link ServerActionRequest}
    * @returns A Promise of Server
    */
-  serverActionAndWait = async (request: ServerActionRequest, options?: Readonly<WaitForOptions<Server>>) => {
+  serverActionAndWait = async (
+    request: ServerActionRequest,
+    options?: Readonly<WaitForOptions<Server>>,
+  ) => {
     const finalServer = await this.serverAction(request).then(() =>
       this.waitForServer(
         {
@@ -198,7 +246,9 @@ export class InstanceV1UtilsAPI extends API {
     }
 
     if (expectedState && finalServer.state !== expectedState) {
-      throw new Error(`expected state ${expectedState} but found ${finalServer.state}: ${finalServer.stateDetail}`)
+      throw new Error(
+        `expected state ${expectedState} but found ${finalServer.state}: ${finalServer.stateDetail}`,
+      )
     }
 
     return finalServer
@@ -216,7 +266,8 @@ export class InstanceV1UtilsAPI extends API {
       zone: request.zone,
     }).then(res => validateNotUndefined(res.server?.volumes))
 
-    const newVolumes: Record<string, { id: string; name: string | undefined }> = {}
+    const newVolumes: Record<string, { id: string; name: string | undefined }> =
+      {}
     for (const [key, server] of Object.entries(volumes)) {
       newVolumes[key] = { id: server.id, name: server.name }
     }
@@ -272,7 +323,8 @@ export class InstanceV1UtilsAPI extends API {
       .then(res => validateNotUndefined(res.server))
 
     // Remove volume.
-    const newVolumes: Record<string, { id: string; name: string | undefined }> = {}
+    const newVolumes: Record<string, { id: string; name: string | undefined }> =
+      {}
     for (const [key, volume] of Object.entries(server.volumes)) {
       if (volume.id !== request.volumeId) {
         newVolumes[key] = { id: volume.id, name: volume.name }
