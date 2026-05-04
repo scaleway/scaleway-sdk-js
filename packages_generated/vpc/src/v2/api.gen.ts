@@ -97,6 +97,7 @@ export class API extends ParentAPI {
     toApiLocality({
       regions: [
         'fr-par',
+        'it-mil',
         'nl-ams',
         'pl-waw',
       ],

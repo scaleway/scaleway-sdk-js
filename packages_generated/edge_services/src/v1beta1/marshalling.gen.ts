@@ -20,6 +20,7 @@ import type {
   CreatePurgeRequestRequest,
   CreateRouteStageRequest,
   CreateTLSStageRequest,
+  CreateVPCEndpointRequest,
   CreateWafStageRequest,
   DNSStage,
   GetBillingResponse,
@@ -37,6 +38,7 @@ import type {
   ListRouteRulesResponse,
   ListRouteStagesResponse,
   ListTLSStagesResponse,
+  ListVPCEndpointsResponse,
   ListWafStagesResponse,
   Pipeline,
   PipelineError,
@@ -73,6 +75,7 @@ import type {
   UpdateRouteStageRequest,
   UpdateTLSStageRequest,
   UpdateWafStageRequest,
+  VPCEndpoint,
   WafStage,
 } from './types.gen.js'
 
@@ -89,6 +92,7 @@ const unmarshalScalewayLb = (data: unknown): ScalewayLb => {
     hasWebsocket: data.has_websocket,
     id: data.id,
     isSsl: data.is_ssl,
+    privateNetworkId: data.private_network_id,
     zone: data.zone,
   } as ScalewayLb
 }
@@ -198,7 +202,9 @@ export const unmarshalDNSStage = (data: unknown): DNSStage => {
     cacheStageId: data.cache_stage_id,
     createdAt: unmarshalDate(data.created_at),
     defaultFqdn: data.default_fqdn,
+    defaultPrivateFqdn: data.default_private_fqdn,
     fqdns: data.fqdns,
+    fullPrivate: data.full_private,
     id: data.id,
     pipelineId: data.pipeline_id,
     status: data.status,
@@ -242,6 +248,7 @@ export const unmarshalPipeline = (data: unknown): Pipeline => {
     projectId: data.project_id,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
+    vpcEndpointIds: data.vpc_endpoint_ids,
   } as Pipeline
 }
 
@@ -352,6 +359,21 @@ export const unmarshalPurgeRequest = (data: unknown): PurgeRequest => {
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as PurgeRequest
+}
+
+export const unmarshalVPCEndpoint = (data: unknown): VPCEndpoint => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VPCEndpoint' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
+    region: data.region,
+  } as VPCEndpoint
 }
 
 const unmarshalRuleHttpMatchHostFilter = (data: unknown): RuleHttpMatchHostFilter => {
@@ -691,6 +713,19 @@ export const unmarshalListTLSStagesResponse = (data: unknown): ListTLSStagesResp
   } as ListTLSStagesResponse
 }
 
+export const unmarshalListVPCEndpointsResponse = (data: unknown): ListVPCEndpointsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVPCEndpointsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    vpcEndpoints: unmarshalArrayOfObject(data.vpc_endpoints, unmarshalVPCEndpoint),
+  } as ListVPCEndpointsResponse
+}
+
 export const unmarshalListWafStagesResponse = (data: unknown): ListWafStagesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -806,6 +841,7 @@ const marshalScalewayLb = (
   has_websocket: request.hasWebsocket,
   id: request.id,
   is_ssl: request.isSsl,
+  private_network_id: request.privateNetworkId,
   zone: request.zone,
 })
 
@@ -921,6 +957,7 @@ export const marshalCreateDNSStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fqdns: request.fqdns,
+  full_private: request.fullPrivate,
   wildcard_domain: request.wildcardDomain,  
   ...resolveOneOf([
     {param: 'tls_stage_id',
@@ -942,6 +979,7 @@ export const marshalCreatePipelineRequest = (
   description: request.description,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  vpc_endpoint_ids: request.vpcEndpointIds,
 })
 
 export const marshalCreatePurgeRequestRequest = (
@@ -1001,6 +1039,15 @@ export const marshalCreateTLSStageRequest = (
       value: request.wafStageId,
     },
   ]),
+})
+
+export const marshalCreateVPCEndpointRequest = (
+  request: CreateVPCEndpointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  region: request.region ?? defaults.defaultRegion,
 })
 
 export const marshalCreateWafStageRequest = (
@@ -1122,6 +1169,7 @@ export const marshalUpdateDNSStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   fqdns: request.fqdns,
+  full_private: request.fullPrivate,
   wildcard_domain: request.wildcardDomain,  
   ...resolveOneOf([
     {param: 'tls_stage_id',
@@ -1142,6 +1190,7 @@ export const marshalUpdatePipelineRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+  vpc_endpoint_ids: request.vpcEndpointIds,
 })
 
 export const marshalUpdateRouteStageRequest = (

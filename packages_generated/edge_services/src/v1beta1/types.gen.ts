@@ -51,6 +51,12 @@ export type ListTLSStagesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type ListVPCEndpointsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+
 export type ListWafStagesRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -193,6 +199,7 @@ export interface ScalewayLb {
    * Defines whether to forward websocket requests to the load balancer.
    */
   hasWebsocket?: boolean
+  privateNetworkId?: string
 }
 
 
@@ -327,11 +334,13 @@ export interface BackendStage {
    */
   scalewayLb?: ScalewayLbBackendConfig
   /**
+   * Scaleway Serverless container origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
   scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
   /**
+   * Scaleway Serverless function origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
@@ -396,6 +405,7 @@ export interface DNSStage {
    * Default Fully Qualified Domain Name attached to the stage.
    */
   defaultFqdn: string
+  defaultPrivateFqdn: string
   /**
    * List of additional (custom) Fully Qualified Domain Names attached to the stage.
    */
@@ -442,6 +452,10 @@ export interface DNSStage {
    * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
    */
   wildcardDomain: boolean
+  /**
+   * Fully Qualified Domain Names are accessible exclusively within the VPC.
+   */
+  fullPrivate: boolean
 }
 
 
@@ -482,6 +496,7 @@ export interface Pipeline {
    * Date the pipeline was last updated.
    */
   updatedAt?: Date
+  vpcEndpointIds: string[]
 }
 
 
@@ -776,6 +791,17 @@ export interface PurgeRequest {
 }
 
 
+export interface VPCEndpoint {
+  id: string
+  projectId: string
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region: ScwRegion
+  privateNetworkId: string
+}
+
+
 export interface SetHeadStageRequestAddNewHeadStage {
   newStageId: string
 }
@@ -894,11 +920,13 @@ export type CreateBackendStageRequest = {
    */
   scalewayLb?: ScalewayLbBackendConfig
   /**
+   * Scaleway Serverless container origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
   scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
   /**
+   * Scaleway Serverless function origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
@@ -969,6 +997,10 @@ export type CreateDNSStageRequest = {
    * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
    */
   wildcardDomain?: boolean
+  /**
+   * When true, Fully Qualified Domain Names are accessible exclusively within the VPC.
+   */
+  fullPrivate?: boolean
 }
 
 
@@ -985,6 +1017,7 @@ export type CreatePipelineRequest = {
    * Description of the pipeline.
    */
   description: string
+  vpcEndpointIds?: string[]
 }
 
 
@@ -1066,6 +1099,16 @@ export type CreateTLSStageRequest = {
 }
 
 
+export type CreateVPCEndpointRequest = {
+  projectId?: string
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  privateNetworkId: string
+}
+
+
 export type CreateWafStageRequest = {
   /**
    * Pipeline ID the WAF stage belongs to.
@@ -1138,6 +1181,11 @@ export type DeleteTLSStageRequest = {
    * ID of the TLS stage to delete.
    */
   tlsStageId: string
+}
+
+
+export type DeleteVPCEndpointRequest = {
+  vpcEndpointId: string
 }
 
 
@@ -1268,6 +1316,11 @@ export type GetTLSStageRequest = {
    * ID of the requested TLS stage.
    */
   tlsStageId: string
+}
+
+
+export type GetVPCEndpointRequest = {
+  vpcEndpointId: string
 }
 
 
@@ -1625,6 +1678,21 @@ export interface ListTLSStagesResponse {
 }
 
 
+export type ListVPCEndpointsRequest = {
+  page?: number
+  pageSize?: number
+  orderBy?: ListVPCEndpointsRequestOrderBy
+  projectId?: string
+  organizationId?: string
+}
+
+
+export interface ListVPCEndpointsResponse {
+  totalCount: number
+  vpcEndpoints: VPCEndpoint[]
+}
+
+
 export type ListWafStagesRequest = {
   /**
    * Pipeline ID to filter for. Only WAF stages from this pipeline will be returned.
@@ -1760,11 +1828,13 @@ export type UpdateBackendStageRequest = {
    */
   scalewayLb?: ScalewayLbBackendConfig
   /**
+   * Scaleway Serverless container origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
   scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
   /**
+   * Scaleway Serverless function origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
@@ -1839,6 +1909,10 @@ export type UpdateDNSStageRequest = {
    * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
    */
   wildcardDomain?: boolean
+  /**
+   * When true, Fully Qualified Domain Names are accessible exclusively within the VPC.
+   */
+  fullPrivate?: boolean
 }
 
 
@@ -1855,6 +1929,7 @@ export type UpdatePipelineRequest = {
    * Description of the pipeline.
    */
   description?: string
+  vpcEndpointIds?: string[]
 }
 
 

@@ -6,5 +6,12 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "exclude": ["dist/*", "*.config.ts", "*.setup.ts", "**/__tests__", "**/__mocks__", "src/**/*.test.tsx"]
+  "exclude": [
+    "dist/*",
+    "*.config.ts",
+    "*.setup.ts",
+    "**/__tests__",
+    "**/__mocks__",
+    "src/**/*.test.tsx"
+  ]
 }

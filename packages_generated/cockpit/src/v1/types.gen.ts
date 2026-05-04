@@ -33,6 +33,7 @@ export type ExporterStatus =
   | 'creating'
   | 'ready'
   | 'error'
+  | 'idle'
 
 export type GrafanaUserRole =
   | 'unknown_role'
