@@ -299,13 +299,13 @@
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*",
-    "@scaleway/use-dataloader": "6.1.0",
+    "@scaleway/use-dataloader": "6.1.1",
     "@types/react": "19.2.14",
     "react": "^19.2.5",
     "tinyglobby": "0.2.15"
   },
   "peerDependencies": {
-    "@scaleway/use-dataloader": "6.x",
+    "@scaleway/use-dataloader": "6.1.1",
     "react": "18.x || 19.x"
   },
   "optionalDependencies": {
