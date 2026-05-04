@@ -13,7 +13,7 @@
     "@scaleway/sdk": "^2.0"
   },
   "devDependencies": {
-    "@types/node": "20.19.25",
+    "@types/node": "20.19.39",
     "serverless-scaleway-functions": "0.4.17",
     "typescript": "6.0.2"
   }

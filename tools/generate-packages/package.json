@@ -31,10 +31,10 @@
   },
   "devDependencies": {
     "@repo/configs": "workspace:*",
-    "@types/node": "20.19.35",
+    "@types/node": "20.19.39",
     "vite": "8.0.8"
   },
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=20.20.2"
   }
 }

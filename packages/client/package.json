@@ -35,9 +35,9 @@
   },
   "devDependencies": {
     "@repo/configs": "workspace:^",
-    "@types/node": "20.19.35"
+    "@types/node": "20.19.39"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=20.20.2"
   }
 }

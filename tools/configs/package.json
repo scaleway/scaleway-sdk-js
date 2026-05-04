@@ -31,9 +31,9 @@
     "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.35"
+    "@types/node": "20.19.39"
   },
   "engines": {
-    "node": ">=20.x"
+    "node": ">=20.20.2"
   }
 }
