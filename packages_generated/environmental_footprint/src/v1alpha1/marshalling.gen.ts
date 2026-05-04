@@ -63,6 +63,7 @@ const unmarshalRegionImpact = (data: unknown): RegionImpact => {
 
   return {
     region: data.region,
+    skus: unmarshalArrayOfObject(data.skus, unmarshalSkuImpact),
     totalRegionImpact: data.total_region_impact ? unmarshalImpact(data.total_region_impact) : undefined,
     zones: unmarshalArrayOfObject(data.zones, unmarshalZoneImpact),
   } as RegionImpact
