@@ -52,9 +52,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * Managed Inference API.
+ * Generative APIs - Dedicated Deployment API.
 
-This API allows you to handle your Managed Inference services.
+This API allows you to handle your Generative APIs - Dedicated Deployment services.
  */
 export class API extends ParentAPI {
   /**
