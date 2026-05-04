@@ -14,7 +14,8 @@ export const queriesMetadata = {
           isList: false,
           paginationType: 'none',
           isPrivate: false,
-          description: 'Get the content of a user data on a server for the given key.',
+          description:
+            'Get the content of a user data on a server for the given key.',
         },
       ],
     },
