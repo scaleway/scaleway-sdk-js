@@ -8,5 +8,6 @@ export class K8SUtilsAPI extends API {
    * @param request - The request {@link GetClusterKubeConfigRequest}
    * @returns A Promise of Blob
    */
-  getClusterKubeConfig = (request: Readonly<GetClusterKubeConfigRequest>) => this._getClusterKubeConfig(request)
+  getClusterKubeConfig = (request: Readonly<GetClusterKubeConfigRequest>) =>
+    this._getClusterKubeConfig(request)
 }

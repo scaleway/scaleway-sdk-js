@@ -618,6 +618,10 @@ export interface Backend {
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
   timeoutQueue?: string
+  /**
+   * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
+   */
+  host?: string
 }
 
 
@@ -1219,6 +1223,10 @@ export type CreateBackendRequest = {
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
   timeoutQueue?: string
+  /**
+   * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
+   */
+  host?: string
 }
 
 
@@ -2325,6 +2333,10 @@ export type UpdateBackendRequest = {
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
   timeoutQueue?: string
+  /**
+   * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
+   */
+  host?: string
 }
 
 
@@ -2752,6 +2764,10 @@ export type ZonedApiCreateBackendRequest = {
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
   timeoutQueue?: string
+  /**
+   * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
+   */
+  host?: string
 }
 
 
@@ -3722,6 +3738,10 @@ export type ZonedApiUpdateBackendRequest = {
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
   timeoutQueue?: string
+  /**
+   * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
+   */
+  host?: string
 }
 
 
