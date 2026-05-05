@@ -251,6 +251,9 @@ importers:
       '@scaleway/sdk-s2s-vpn':
         specifier: workspace:*
         version: link:../../packages_generated/s2s_vpn
+      '@scaleway/sdk-search':
+        specifier: workspace:*
+        version: link:../../packages_generated/search
       '@scaleway/sdk-searchdb':
         specifier: workspace:*
         version: link:../../packages_generated/searchdb
@@ -1249,6 +1252,19 @@ importers:
       '@repo/configs':
         specifier: workspace:^
         version: link:../../tools/configs
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../../packages/client
+
+  packages_generated/search:
+    dependencies:
+      '@scaleway/random-name':
+        specifier: 5.1.1
+        version: 5.1.1
+      '@scaleway/sdk-std':
+        specifier: workspace:*
+        version: link:../std
+    devDependencies:
       '@scaleway/sdk-client':
         specifier: workspace:^
         version: link:../../packages/client
@@ -2690,6 +2706,10 @@ packages:
     resolution: {integrity: sha512-M/fKi4sasCdM8i0aWJjCSFm2qEnYRR8AMLG2kxp6wD13+tMGA4Z1tVAuHkNRjud5SW2EM3naLuK35w9twvf6aA==}
     cpu: [x64]
     os: [win32]
+
+  '@scaleway/random-name@5.1.1':
+    resolution: {integrity: sha512-DelRK+56UBUEoRr8pQGwTE7oyC019pExis6iG6zZPcjuz4nLbMB5LIosmclnsvajfIBEQiD1Dv9JI/MgnPwygQ==}
+    engines: {node: '>=20.x'}
 
   '@scaleway/random-name@5.1.4':
     resolution: {integrity: sha512-+rDbZG1317VGovkE79dLaDe0n1cCwtQUrQ1KxMct8vzzZwRA+viiU6VQePMSmu/MMhed2OUtDSM45tbmwE7BeQ==}
@@ -7106,6 +7126,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.45.1':
     optional: true
+
+  '@scaleway/random-name@5.1.1': {}
 
   '@scaleway/random-name@5.1.4': {}
 
