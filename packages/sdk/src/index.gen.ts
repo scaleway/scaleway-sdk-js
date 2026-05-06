@@ -42,6 +42,7 @@ import { Rdbv1 } from '@scaleway/sdk-rdb'
 import { Redisv1 } from '@scaleway/sdk-redis'
 import { Registryv1 } from '@scaleway/sdk-registry'
 import { S2SVpnv1alpha1 } from '@scaleway/sdk-s2s-vpn'
+import { Searchv1alpha1 } from '@scaleway/sdk-search'
 import { Searchdbv1alpha1 } from '@scaleway/sdk-searchdb'
 import { Secretv1beta1 } from '@scaleway/sdk-secret'
 import { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
@@ -376,6 +377,14 @@ export const Registry = {
 export { S2SVpnv1alpha1 }
 export const S2SVpn = {
   v1alpha1: S2SVpnv1alpha1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'Search' namespace instead (e.g., Search.v1).
+ */
+export { Searchv1alpha1 }
+export const Search = {
+  v1alpha1: Searchv1alpha1,
 }
 
 /**
