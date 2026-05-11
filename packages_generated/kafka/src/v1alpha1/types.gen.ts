@@ -12,6 +12,7 @@ export type ClusterStatus =
   | 'error'
   | 'locked'
   | 'stopped'
+  | 'upgrading'
 
 export type ListClustersRequestOrderBy =
   | 'created_at_asc'
