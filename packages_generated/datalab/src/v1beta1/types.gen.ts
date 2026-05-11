@@ -175,31 +175,31 @@ export interface Cluster {
 
 
 /**
- * A Data Lab resource.
+ * A Clusters for Apache Spark™ resource.
  */
 export interface Datalab {
   /**
-   * The unique identifier of the Data Lab.
+   * The unique identifier of the cluster.
    */
   id: string
   /**
-   * The unique identifier of the project where the Data Lab has been created.
+   * The unique identifier of the project where the cluster has been created.
    */
   projectId: string
   /**
-   * The name of the Data Lab.
+   * The name of the cluster.
    */
   name: string
   /**
-   * The description of the Data Lab.
+   * The description of the cluster.
    */
   description: string
   /**
-   * The tags of the Data Lab.
+   * The tags of the cluster.
    */
   tags: string[]
   /**
-   * The Spark Main node specification of Data lab. It holds the parameters `node_type`, `spark_ui_url` (available to reach Spark UI), `spark_master_url` (used to reach the cluster within a VPC), `root_volume` (size of the volume assigned to the cluster).
+   * The Apache Spark™ Main node specification of cluster. It holds the parameters `node_type`, `spark_ui_url` (available to reach Apache Spark™ UI), `spark_master_url` (used to reach the cluster within a VPC), `root_volume` (size of the volume assigned to the cluster).
    */
   main?: DatalabSparkMain
   /**
@@ -207,23 +207,23 @@ export interface Datalab {
    */
   worker?: DatalabSparkWorker
   /**
-   * The status of the Data Lab. For a working Data Lab the status is marked as `ready`.
+   * The status of the cluster. For a working cluster the status is marked as `ready`.
    */
   status: DatalabStatus
   /**
-   * The creation timestamp of the Data Lab.
+   * The creation timestamp of the cluster.
    */
   createdAt?: Date
   /**
-   * The last update date of the Data Lab.
+   * The last update date of the cluster.
    */
   updatedAt?: Date
   /**
-   * The region of the Data Lab.
+   * The region of the cluster.
    */
   region: ScwRegion
   /**
-   * Whether a JupyterLab notebook is associated with the Data Lab or not.
+   * Whether a JupyterLab notebook is associated with the cluster or not.
    */
   hasNotebook: boolean
   /**
@@ -231,15 +231,15 @@ export interface Datalab {
    */
   notebookUrl?: string
   /**
-   * The version of Spark running inside the Data Lab.
+   * The version of Apache Spark™ running inside the cluster.
    */
   sparkVersion: string
   /**
-   * The total persistent volume storage selected to run Spark.
+   * The total persistent volume storage selected to run Apache Spark™.
    */
   totalStorage?: Volume
   /**
-   * The unique identifier of the private network to which the Data Lab is attached to.
+   * The unique identifier of the private network to which the cluster is attached to.
    */
   privateNetworkId: string
   /**
@@ -324,7 +324,7 @@ export interface Notebook {
 
 
 /**
- * A request to create a Data Lab.
+ * A request to create a cluster.
  */
 export type CreateDatalabRequest = {
   /**
@@ -332,19 +332,19 @@ export type CreateDatalabRequest = {
    */
   region?: ScwRegion
   /**
-   * The unique identifier of the project where the Data Lab will be created.
+   * The unique identifier of the project where the cluster will be created.
    */
   projectId?: string
   /**
-   * The name of the Data Lab.
+   * The name of the cluster.
    */
   name: string
   /**
-   * The description of the Data Lab.
+   * The description of the cluster.
    */
   description: string
   /**
-   * The tags of the Data Lab.
+   * The tags of the cluster.
    */
   tags?: string[]
   /**
@@ -356,11 +356,11 @@ export type CreateDatalabRequest = {
    */
   worker?: CreateDatalabRequestSparkWorker
   /**
-   * Select this option to include a notebook as part of the Data Lab.
+   * Select this option to include a notebook as part of the cluster.
    */
   hasNotebook: boolean
   /**
-   * The version of Spark running inside the Data Lab, available options can be viewed at ListClusterVersions.
+   * The version of Apache Spark™ running inside the cluster, available options can be viewed at ListClusterVersions.
    */
   sparkVersion: string
   /**
@@ -368,14 +368,14 @@ export type CreateDatalabRequest = {
    */
   totalStorage?: Volume
   /**
-   * The unique identifier of the private network the Data Lab will be attached to.
+   * The unique identifier of the private network the cluster will be attached to.
    */
   privateNetworkId: string
 }
 
 
 /**
- * A request to delete a Data Lab.
+ * A request to delete a cluster.
  */
 export type DeleteDatalabRequest = {
   /**
@@ -383,14 +383,14 @@ export type DeleteDatalabRequest = {
    */
   region?: ScwRegion
   /**
-   * The unique identifier of the Data Lab.
+   * The unique identifier of the cluster.
    */
   datalabId: string
 }
 
 
 /**
- * A request to get information about a Data Lab.
+ * A request to get information about a cluster.
  */
 export type GetDatalabRequest = {
   /**
@@ -398,7 +398,7 @@ export type GetDatalabRequest = {
    */
   region?: ScwRegion
   /**
-   * The unique identifier of the Data Lab.
+   * The unique identifier of the cluster.
    */
   datalabId: string
 }
@@ -443,7 +443,7 @@ export interface ListClusterVersionsResponse {
 
 
 /**
- * A request to list Data Labs.
+ * A request to list clusters.
  */
 export type ListDatalabsRequest = {
   /**
@@ -451,19 +451,19 @@ export type ListDatalabsRequest = {
    */
   region?: ScwRegion
   /**
-   * The unique identifier of the organization whose Data Labs you want to list.
+   * The unique identifier of the organization whose clusters you want to list.
    */
   organizationId?: string
   /**
-   * The unique identifier of the project whose Data Labs you want to list.
+   * The unique identifier of the project whose clusters you want to list.
    */
   projectId?: string
   /**
-   * The name of the Data Lab you want to list.
+   * The name of the cluster you want to list.
    */
   name?: string
   /**
-   * The tags associated with the Data Lab you want to list.
+   * The tags associated with the cluster you want to list.
    */
   tags?: string[]
   /**
@@ -482,15 +482,15 @@ export type ListDatalabsRequest = {
 
 
 /**
- * A response to list Data Labs.
+ * A response to list clusters.
  */
 export interface ListDatalabsResponse {
   /**
-   * The list of Data Labs. This is a list composed of messages of type `DataLab`.
+   * The list of clusters. This is a list composed of messages of type `DataLab`.
    */
   datalabs: Datalab[]
   /**
-   * The total count of Data Labs.
+   * The total count of clusters.
    */
   totalCount: number
 }
@@ -581,7 +581,7 @@ export interface ListNotebookVersionsResponse {
 
 
 /**
- * A request to update a Data Lab.
+ * A request to update a cluster.
  */
 export type UpdateDatalabRequest = {
   /**
@@ -589,23 +589,23 @@ export type UpdateDatalabRequest = {
    */
   region?: ScwRegion
   /**
-   * The unique identifier of the Data Lab.
+   * The unique identifier of the cluster.
    */
   datalabId: string
   /**
-   * The updated name of the Data Lab.
+   * The updated name of the cluster.
    */
   name?: string
   /**
-   * The updated description of the Data Lab.
+   * The updated description of the cluster.
    */
   description?: string
   /**
-   * The updated tags of the Data Lab.
+   * The updated tags of the cluster.
    */
   tags?: string[]
   /**
-   * The updated node count of the Data Lab. Scale up or down the number of worker nodes.
+   * The updated node count of the cluster. Scale up or down the number of worker nodes.
    */
   nodeCount?: number
 }

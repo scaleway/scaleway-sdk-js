@@ -8,6 +8,16 @@ export const CreateWafStageRequest = {
   },
 }
 
+export const ListVPCEndpointsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 1000,
+  },
+}
+
 export const UpdateWafStageRequest = {
   paranoiaLevel: {
     greaterThanOrEqual: 1,

@@ -204,10 +204,6 @@ export interface Domain {
    */
   imapUrl: string
   /**
-   * URL of the domain's JMAP service.
-   */
-  jmapUrl: string
-  /**
    * URL of the domain's POP3 service.
    */
   pop3Url: string
@@ -311,10 +307,6 @@ export interface GetDomainRecordsResponse {
    * Record that allows accessing the mailbox with the IMAP protocol.
    */
   imap?: DomainRecord
-  /**
-   * Record that allows accessing the mailbox with the JMAP protocol.
-   */
-  jmap?: DomainRecord
   /**
    * Record that directs emails to a mail server.
    */
