@@ -13,13 +13,13 @@ export const CreateDeploymentRequest = {
     pattern: /^[A-Za-z0-9\-_]+$/,
   },
   password: {
-    maxLength: 128,
+    maxLength: 50,
     minLength: 12,
   },
   userName: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
   version: {
     maxLength: 128,
@@ -30,13 +30,13 @@ export const CreateDeploymentRequest = {
 
 export const CreateUserRequest = {
   password: {
-    maxLength: 128,
-    minLength: 8,
+    maxLength: 50,
+    minLength: 12,
   },
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
 }
 
@@ -112,13 +112,13 @@ export const UpdateDeploymentRequest = {
 
 export const UpdateUserRequest = {
   password: {
-    maxLength: 128,
-    minLength: 8,
+    maxLength: 50,
+    minLength: 12,
   },
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
 }
 
