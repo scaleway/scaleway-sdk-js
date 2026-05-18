@@ -183,7 +183,7 @@ export const unmarshalDeleteSubnetsResponse = (data: unknown): DeleteSubnetsResp
   } as DeleteSubnetsResponse
 }
 
-export const unmarshalAclRule = (data: unknown): AclRule => {
+const unmarshalAclRule = (data: unknown): AclRule => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AclRule' failed as data isn't a dictionary.`,
@@ -368,7 +368,7 @@ export const marshalDeleteSubnetsRequest = (
   subnets: request.subnets,
 })
 
-export const marshalAclRule = (
+const marshalAclRule = (
   request: AclRule,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
