@@ -75,16 +75,13 @@ export interface EndpointSpecPublicDetails {
 }
 
 
-/**
- * Refers to an Endpoint.
- */
 export interface Endpoint {
   /**
-   * Unique identifier of the Endpoint.
+   * Unique identifier of the endpoint.
    */
   id: string
   /**
-   * @deprecated DNS entry to access to the service. Now deprecated. Use the `url` field from `services` field instead.
+   * @deprecated DNS record for service access. Now deprecated. Use the `url` field from `services` field instead.
    */
   dnsRecord?: string
   /**
@@ -104,16 +101,13 @@ export interface Endpoint {
 }
 
 
-/**
- * Volume.
- */
 export interface Volume {
   /**
-   * Define the type of the Volume.
+   * Type of the Volume.
    */
   type: VolumeType
   /**
-   * Define the size of the Volume.
+   * Size of the Volume.
    */
   sizeBytes: number
 }
@@ -142,40 +136,37 @@ export interface EndpointSpec {
 }
 
 
-/**
- * Refers to a Deployment.
- */
 export interface Deployment {
   /**
-   * Unique identifier of the Deployment.
+   * Unique identifier of the deployment.
    */
   id: string
   /**
-   * Name of the Deployment.
+   * Name of the deployment.
    */
   name: string
   /**
-   * ID of the Organization containing the Deployment.
+   * ID of the Organization containing the deployment.
    */
   organizationId: string
   /**
-   * ID of the Project containing the Deployment.
+   * ID of the Project containing the deployment.
    */
   projectId: string
   /**
-   * Status of the Deployment.
+   * Status of the deployment.
    */
   status: DeploymentStatus
   /**
-   * Tags of the Deployment.
+   * Tags of the deployment.
    */
   tags: string[]
   /**
-   * Number of nodes allocated per deployment.
+   * Number of nodes.
    */
-  nodeAmount: number
+  nodeCount: number
   /**
-   * Node type used in deployment.
+   * Node type used.
    */
   nodeType: string
   /**
@@ -187,30 +178,27 @@ export interface Deployment {
    */
   endpoints: Endpoint[]
   /**
-   * Creation date of the Deployment.
+   * Date the deployment was created.
    */
   createdAt?: Date
   /**
-   * Date when last update was done to the Deployment.
+   * Date the deployment was last updated.
    */
   updatedAt?: Date
   /**
-   * Opensearch version of the Deployment.
+   * MessageQ version of the deployment.
    */
   version: string
   /**
-   * Region the Deployment is located.
+   * Region of the deployment.
    */
   region: ScwRegion
 }
 
 
-/**
- * Node type.
- */
 export interface NodeType {
   /**
-   * Stock status of the node type.
+   * Stock status for the node type.
    */
   stockStatus: NodeTypeStockStatus
   /**
@@ -238,11 +226,11 @@ export interface NodeType {
    */
   beta: boolean
   /**
-   * Instance range associated with the NodeType offer.
+   * Instance range associated with the node type offer.
    */
   instanceRange: string
   /**
-   * Available storage options for the Node Type.
+   * Available storage options for the node type.
    */
   availableVolumeTypes: NodeTypeVolumeType[]
 }
@@ -253,24 +241,21 @@ export interface User {
 }
 
 
-/**
- * Opensearch Version.
- */
 export interface Version {
   /**
-   * Opensearch Version.
+   * MessageQ version.
    */
   version: string
   /**
-   * End of life date of the version.
+   * Date the version support ends.
    */
   endOfLife?: Date
   /**
-   * Parameter that tell if the version is disabled.
+   * Defines whether the version is disabled.
    */
   disabled: boolean
   /**
-   * Parameter that tell if the version is in beta.
+   * Defines whether the version is in beta.
    */
   beta: boolean
 }
@@ -299,9 +284,9 @@ export type CreateDeploymentRequest = {
   /**
    * Number of nodes.
    */
-  nodeAmount: number
+  nodeCount: number
   /**
-   * Node type.
+   * Node type to use.
    */
   nodeType: string
   /**
@@ -313,7 +298,7 @@ export type CreateDeploymentRequest = {
    */
   password?: string
   /**
-   * Volume.
+   * Volume for storing data.
    */
   volume?: Volume
   /**
@@ -321,7 +306,7 @@ export type CreateDeploymentRequest = {
    */
   endpoints?: EndpointSpec[]
   /**
-   * The Opensearch version to use.
+   * The MessageQ version to use.
    */
   version: string
 }
@@ -336,7 +321,7 @@ export type CreateEndpointRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the deployment for which to create an endpoint.
+   * ID of the deployment.
    */
   deploymentId: string
   /**
@@ -347,7 +332,7 @@ export type CreateEndpointRequest = {
 
 
 /**
- * Create a user in an deployment.
+ * Create a user for a deployment.
  */
 export type CreateUserRequest = {
   /**
@@ -355,7 +340,7 @@ export type CreateUserRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the deployment in which to create the user.
+   * ID of the deployment.
    */
   deploymentId: string
   /**
@@ -393,7 +378,7 @@ export type DeleteEndpointRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the endpoint to delete.
+   * ID of the endpoint.
    */
   endpointId: string
 }
@@ -408,22 +393,13 @@ export type DeleteUserRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the deployment in which to create the user.
+   * ID of the deployment.
    */
   deploymentId: string
   /**
    * Username of the deployment user.
    */
   username: string
-}
-
-
-export type GetDeploymentCertificateAuthorityRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  deploymentId: string
 }
 
 
@@ -451,53 +427,50 @@ export type ListDeploymentsRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the Organization containing the deployments.
+   * Organization ID to filter for, only deployments from this Organization will be returned.
    */
   organizationId?: string
   /**
-   * ID of the Project containing the deployments.
+   * Project ID to filter for, only deployments from this Project will be returned.
    */
   projectId?: string
   /**
-   * Define the order of the returned deployments.
+   * Sort order for deployments in the response.
    */
   orderBy?: ListDeploymentsRequestOrderBy
   /**
-   * The page number to return, from the paginated results.
+   * Page number to return, from the paginated results.
    */
   page?: number
   /**
-   * Number of deployments to return.
+   * Number of deployments to return per page.
    */
   pageSize?: number
   /**
-   * Filter by tag, only deployments with one or more matching tags will be returned.
+   * Tags to filter for, only deployments with one or more matching tags will be returned.
    */
   tags?: string[]
   /**
-   * Deployment name to filter for.
+   * Deployment name to filter for, only deployments with this string within their name will be returned.
    */
   name?: string
 }
 
 
-/**
- * Retrieve a list of deployments.
- */
 export interface ListDeploymentsResponse {
   /**
-   * List of deployments available.
+   * List of deployments.
    */
   deployments: Deployment[]
   /**
-   * Total number of objects.
+   * Number of deployments in result set.
    */
   totalCount: number
 }
 
 
 /**
- * Retrieve a list of available node types for a Cloud Essentials for OpenSearch cluster.
+ * Retrieve a list of available node types for a MessageQ deployment.
  */
 export type ListNodeTypesRequest = {
   /**
@@ -505,7 +478,7 @@ export type ListNodeTypesRequest = {
    */
   region?: ScwRegion
   /**
-   * Sort order of nodes in the response (name, vcpus or memory).
+   * Sort order for versions in the response.
    */
   orderBy?: ListNodeTypesRequestOrderBy
   /**
@@ -513,22 +486,19 @@ export type ListNodeTypesRequest = {
    */
   page?: number
   /**
-   * Number of node types to return.
+   * Number of node types to return per page.
    */
   pageSize?: number
 }
 
 
-/**
- * Returns a list of node types available for a Cloud Essentials for OpenSearch cluster.
- */
 export interface ListNodeTypesResponse {
   /**
-   * Node types compatible with the cluster.
+   * List of node types compatible.
    */
   nodeTypes: NodeType[]
   /**
-   * Number of available node types to return.
+   * Number of node types in result set.
    */
   totalCount: number
 }
@@ -562,34 +532,31 @@ export type ListVersionsRequest = {
    */
   region?: ScwRegion
   /**
-   * Define the order of the returned version.
+   * Sort order for versions in the response.
    */
   orderBy?: ListVersionsRequestOrderBy
   /**
-   * The page number to return, form the paginated results.
+   * Page number to return, from the paginated results.
    */
   page?: number
   /**
-   * Number of version to return.
+   * Number of versions to return per page.
    */
   pageSize?: number
   /**
-   * Filter by version.
+   * Engine version to filter for, only versions with this version will be returned.
    */
   version?: string
 }
 
 
-/**
- * Retrieve a list of version.
- */
 export interface ListVersionsResponse {
   /**
    * List of versions.
    */
   versions: Version[]
   /**
-   * Number of versions in the list.
+   * Number of versions in result set.
    */
   totalCount: number
 }
@@ -601,22 +568,22 @@ export type UpdateDeploymentRequest = {
    */
   region?: ScwRegion
   /**
-   * UUID of the deployment to update.
+   * ID of the deployment.
    */
   deploymentId: string
   /**
-   * Name of the deployment.
+   * New name for the deployment.
    */
   name?: string
   /**
-   * Tags of a deployment.
+   * Tags to update.
    */
   tags?: string[]
 }
 
 
 /**
- * Update a user in an deployment.
+ * Update a deployment user.
  */
 export type UpdateUserRequest = {
   /**
@@ -624,7 +591,7 @@ export type UpdateUserRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the deployment in which to create the user.
+   * ID of the deployment.
    */
   deploymentId: string
   /**
@@ -644,19 +611,19 @@ export type UpgradeDeploymentRequest = {
    */
   region?: ScwRegion
   /**
-   * UUID of the Deployment to upgrade.
+   * ID of the deployment.
    */
   deploymentId: string
   /**
-   * Amount of node upgrade target.
+   * Target number of nodes.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'volumeSizeBytes' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeCount', 'volumeSizeBytes' could be set.
    */
-  nodeAmount?: number
+  nodeCount?: number
   /**
-   * Volume size upgrade target.
+   * Target volume size.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'volumeSizeBytes' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeCount', 'volumeSizeBytes' could be set.
    */
   volumeSizeBytes?: number
 }

@@ -10,7 +10,7 @@ import {
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
-import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_SEARCHDB,} from './content.gen.js'
+import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_MESSAGEQ,} from './content.gen.js'
 import {
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
@@ -35,7 +35,6 @@ import type {
   DeleteUserRequest,
   Deployment,
   Endpoint,
-  GetDeploymentCertificateAuthorityRequest,
   GetDeploymentRequest,
   ListDeploymentsRequest,
   ListDeploymentsResponse,
@@ -56,9 +55,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * Cloud Essentials for Opensearch API.
+ * MessageQ API.
 
-The Cloud Essentials for Opensearch API allows you to manage your Opensearch resources.
+The MessageQ API allows you to manage your MessageQ deployments.
  */
 export class API extends ParentAPI {
   /**
@@ -73,7 +72,7 @@ export class API extends ParentAPI {
     })
   
   /**
-   * Create a new Cloud Essentials for OpenSearch deployment.
+   * Create a new MessageQ deployment.
    *
    * @param request - The request {@link CreateDeploymentRequest}
    * @returns A Promise of Deployment
@@ -86,14 +85,14 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
       },
       unmarshalDeployment,
     )
 
   
   /**
-   * Update a Cloud Essentials for OpenSearch deployment.
+   * Update a MessageQ deployment.
    *
    * @param request - The request {@link UpdateDeploymentRequest}
    * @returns A Promise of Deployment
@@ -106,14 +105,14 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
       },
       unmarshalDeployment,
     )
 
   
   /**
-   * Upgrade a Cloud Essentials for OpenSearch deployment.
+   * Upgrade a MessageQ deployment.
    *
    * @param request - The request {@link UpgradeDeploymentRequest}
    * @returns A Promise of Deployment
@@ -126,14 +125,14 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/upgrade`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/upgrade`,
       },
       unmarshalDeployment,
     )
 
   
   /**
-   * Retrieve a specific Cloud Essentials for OpenSearch deployment.
+   * Retrieve a specific MessageQ deployment.
    *
    * @param request - The request {@link GetDeploymentRequest}
    * @returns A Promise of Deployment
@@ -142,7 +141,7 @@ export class API extends ParentAPI {
     this.client.fetch<Deployment>(
       {
         method: 'GET',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
       },
       unmarshalDeployment,
     )
@@ -159,7 +158,7 @@ export class API extends ParentAPI {
     options?: Readonly<WaitForOptions<Deployment>>,
   ) =>
     waitForResource(
-      options?.stop ?? (res => Promise.resolve(!DEPLOYMENT_TRANSIENT_STATUSES_SEARCHDB.includes(res.status))),
+      options?.stop ?? (res => Promise.resolve(!DEPLOYMENT_TRANSIENT_STATUSES_MESSAGEQ.includes(res.status))),
       this.getDeployment,
       request,
       options,
@@ -167,7 +166,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Delete a Cloud Essentials for OpenSearch deployment.
+   * Delete a MessageQ deployment.
    *
    * @param request - The request {@link DeleteDeploymentRequest}
    * @returns A Promise of Deployment
@@ -176,7 +175,7 @@ export class API extends ParentAPI {
     this.client.fetch<Deployment>(
       {
         method: 'DELETE',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
       },
       unmarshalDeployment,
     )
@@ -186,7 +185,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListDeploymentsResponse>(
       {
         method: 'GET',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -201,7 +200,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * Retrieve a list of Cloud Essentials for OpenSearch deployments.
+   * Retrieve a list of MessageQ deployments.
    *
    * @param request - The request {@link ListDeploymentsRequest}
    * @returns A Promise of ListDeploymentsResponse
@@ -214,7 +213,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -226,7 +225,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List available Cloud Essentials for OpenSearch versions.
+   * List available MessageQ versions.
    *
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
@@ -239,7 +238,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/node-types`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/node-types`,
         urlParams: urlParams(
           ['order_by', request.orderBy],
           ['page', request.page],
@@ -260,7 +259,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Create a new endpoint on a deployment.
+   * Create a new endpoint for a deployment.
    *
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint
@@ -273,7 +272,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
       },
       unmarshalEndpoint,
     )
@@ -288,7 +287,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         method: 'DELETE',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
       },
     )
 
@@ -297,7 +296,7 @@ export class API extends ParentAPI {
     this.client.fetch<ListUsersResponse>(
       {
         method: 'GET',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users`,
         urlParams: urlParams(
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -332,7 +331,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users`,
       },
       unmarshalUser,
     )
@@ -352,7 +351,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
       },
       unmarshalUser,
     )
@@ -367,20 +366,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         method: 'DELETE',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
-      },
-    )
-
-  
-  getDeploymentCertificateAuthority = (request: Readonly<GetDeploymentCertificateAuthorityRequest>) =>
-    this.client.fetch<Blob>(
-      {
-        method: 'GET',
-        path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificate-authority`,
-        urlParams: urlParams(
-          ['dl', 1],
-        ),
-        responseType: 'blob',
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
       },
     )
 
