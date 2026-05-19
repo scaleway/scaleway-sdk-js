@@ -1,6 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Region as ScwRegion, Zone as ScwZone, } from '@scaleway/sdk-client'
+import type { Region as ScwRegion, Zone as ScwZone} from '@scaleway/sdk-client'
 
 
 export type ClusterStatus =
@@ -12,6 +12,7 @@ export type ClusterStatus =
   | 'error'
   | 'locked'
   | 'stopped'
+  | 'upgrading'
 
 export type ListClustersRequestOrderBy =
   | 'created_at_asc'

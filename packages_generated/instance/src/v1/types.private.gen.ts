@@ -1,7 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-import type { Zone as ScwZone, } from '@scaleway/sdk-client'
-import type {Arch,BootType,Image,PlacementGroup,PrivateNIC,SecurityGroup,SecurityGroupPolicy,SecurityGroupRule,SecurityGroupRuleAction,SecurityGroupRuleDirection,SecurityGroupRuleProtocol,SecurityGroupSummary,Server,ServerAction,ServerIp,ServerIpv6,ServerLocation,ServerMaintenance,ServerState,ServerSummary,Snapshot,SnapshotBaseVolume,SnapshotState,Volume,VolumeVolumeType,} from './types.gen.js'
+import type { Zone as ScwZone } from '@scaleway/sdk-client'
+import type {Arch,BootType,SecurityGroupPolicy,SecurityGroupRuleAction,SecurityGroupRuleDirection,SecurityGroupRuleProtocol,ServerAction,ServerState,SnapshotState,VolumeVolumeType,ServerSummary,Volume,Image,PlacementGroup,PrivateNIC,SecurityGroupSummary,ServerIp,ServerIpv6,ServerLocation,ServerMaintenance,SnapshotBaseVolume,Server,SecurityGroup,SecurityGroupRule,Snapshot,} from './types.gen.js'
 
 
 export interface SetImageResponse {

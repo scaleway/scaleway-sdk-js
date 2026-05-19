@@ -1,34 +1,33 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
-  marshalNatsApiCreateNatsAccountRequest,
-  marshalNatsApiCreateNatsCredentialsRequest,
-  marshalNatsApiUpdateNatsAccountRequest,
-  marshalSnsApiActivateSnsRequest,
-  marshalSnsApiCreateSnsCredentialsRequest,
-  marshalSnsApiDeactivateSnsRequest,
-  marshalSnsApiUpdateSnsCredentialsRequest,
-  marshalSqsApiActivateSqsRequest,
-  marshalSqsApiCreateSqsCredentialsRequest,
-  marshalSqsApiDeactivateSqsRequest,
-  marshalSqsApiUpdateSqsCredentialsRequest,
   unmarshalListNatsAccountsResponse,
   unmarshalListNatsCredentialsResponse,
   unmarshalListSnsCredentialsResponse,
   unmarshalListSqsCredentialsResponse,
   unmarshalNatsAccount,
+  marshalNatsApiCreateNatsAccountRequest,
+  marshalNatsApiCreateNatsCredentialsRequest,
+  marshalNatsApiUpdateNatsAccountRequest,
   unmarshalNatsCredentials,
+  marshalSnsApiActivateSnsRequest,
+  marshalSnsApiCreateSnsCredentialsRequest,
+  marshalSnsApiDeactivateSnsRequest,
+  marshalSnsApiUpdateSnsCredentialsRequest,
   unmarshalSnsCredentials,
   unmarshalSnsInfo,
+  marshalSqsApiActivateSqsRequest,
+  marshalSqsApiCreateSqsCredentialsRequest,
+  marshalSqsApiDeactivateSqsRequest,
+  marshalSqsApiUpdateSqsCredentialsRequest,
   unmarshalSqsCredentials,
   unmarshalSqsInfo,
 } from './marshalling.gen.js'
