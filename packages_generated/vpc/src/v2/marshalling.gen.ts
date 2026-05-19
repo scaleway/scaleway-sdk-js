@@ -1,37 +1,37 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  AclRule,
-  AddSubnetsRequest,
+  Subnet,
+  PrivateNetwork,
+  Route,
+  VPCConnectorPeerInfo,
+  VPCConnector,
+  VPC,
   AddSubnetsResponse,
+  DeleteSubnetsResponse,
+  AclRule,
+  GetAclResponse,
+  ListPrivateNetworksResponse,
+  ListSubnetOverlapsResponseSubnetOverlap,
+  ListSubnetOverlapsResponse,
+  ListSubnetsResponse,
+  ListVPCConnectorsResponse,
+  ListVPCsResponse,
+  SetAclResponse,
+  AddSubnetsRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
   DeleteSubnetsRequest,
-  DeleteSubnetsResponse,
-  GetAclResponse,
-  ListPrivateNetworksResponse,
-  ListSubnetOverlapsResponse,
-  ListSubnetOverlapsResponseSubnetOverlap,
-  ListSubnetsResponse,
-  ListVPCConnectorsResponse,
-  ListVPCsResponse,
-  PrivateNetwork,
-  Route,
   SetAclRequest,
-  SetAclResponse,
-  Subnet,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
   UpdateVPCConnectorRequest,
   UpdateVPCRequest,
-  VPC,
-  VPCConnector,
-  VPCConnectorPeerInfo,
 } from './types.gen.js'
 
 const unmarshalSubnet = (data: unknown): Subnet => {
@@ -183,7 +183,7 @@ export const unmarshalDeleteSubnetsResponse = (data: unknown): DeleteSubnetsResp
   } as DeleteSubnetsResponse
 }
 
-export const unmarshalAclRule = (data: unknown): AclRule => {
+const unmarshalAclRule = (data: unknown): AclRule => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AclRule' failed as data isn't a dictionary.`,
@@ -368,7 +368,7 @@ export const marshalDeleteSubnetsRequest = (
   subnets: request.subnets,
 })
 
-export const marshalAclRule = (
+const marshalAclRule = (
   request: AclRule,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
