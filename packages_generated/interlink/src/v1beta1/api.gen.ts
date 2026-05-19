@@ -1,26 +1,22 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {DEDICATED_CONNECTION_TRANSIENT_STATUSES as DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK,LINK_TRANSIENT_STATUSES as LINK_TRANSIENT_STATUSES_INTERLINK,} from './content.gen.js'
 import {
   marshalAttachRoutingPolicyRequest,
   marshalAttachVpcRequest,
   marshalCreateLinkRequest,
   marshalCreateRoutingPolicyRequest,
-  marshalDetachRoutingPolicyRequest,
-  marshalSetRoutingPolicyRequest,
-  marshalUpdateLinkRequest,
-  marshalUpdateRoutingPolicyRequest,
   unmarshalDedicatedConnection,
+  marshalDetachRoutingPolicyRequest,
   unmarshalLink,
   unmarshalListDedicatedConnectionsResponse,
   unmarshalListLinksResponse,
@@ -30,6 +26,9 @@ import {
   unmarshalPartner,
   unmarshalPop,
   unmarshalRoutingPolicy,
+  marshalSetRoutingPolicyRequest,
+  marshalUpdateLinkRequest,
+  marshalUpdateRoutingPolicyRequest,
 } from './marshalling.gen.js'
 import type {
   AttachRoutingPolicyRequest,
@@ -85,6 +84,7 @@ export class API extends ParentAPI {
     toApiLocality({
       regions: [
         'fr-par',
+        'it-mil',
         'nl-ams',
         'pl-waw',
       ],
