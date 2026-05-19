@@ -391,6 +391,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     id: data.id,
     licenseInfo: data.license_info ? unmarshalOfferLicenseInfo(data.license_info) : undefined,
     name: data.name,
+    offerId: data.offer_id,
     paymentFrequency: data.payment_frequency,
     pricing: data.pricing ? unmarshalMoney(data.pricing) : undefined,
     rpnInfo: data.rpn_info ? unmarshalOfferRPNInfo(data.rpn_info) : undefined,

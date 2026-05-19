@@ -58,6 +58,7 @@
     "@scaleway/sdk-lb": "workspace:*",
     "@scaleway/sdk-mailbox": "workspace:*",
     "@scaleway/sdk-marketplace": "workspace:*",
+    "@scaleway/sdk-messageq": "workspace:*",
     "@scaleway/sdk-mnq": "workspace:*",
     "@scaleway/sdk-mongodb": "workspace:*",
     "@scaleway/sdk-partner": "workspace:*",
