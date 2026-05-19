@@ -1,31 +1,30 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   marshalCreateKeyRequest,
+  unmarshalDataKey,
   marshalDecryptRequest,
+  unmarshalDecryptResponse,
   marshalEncryptRequest,
+  unmarshalEncryptResponse,
   marshalGenerateDataKeyRequest,
   marshalImportKeyMaterialRequest,
-  marshalSignRequest,
-  marshalUpdateKeyRequest,
-  marshalVerifyRequest,
-  unmarshalDataKey,
-  unmarshalDecryptResponse,
-  unmarshalEncryptResponse,
   unmarshalKey,
   unmarshalListAlgorithmsResponse,
   unmarshalListKeysResponse,
   unmarshalPublicKey,
+  marshalSignRequest,
   unmarshalSignResponse,
+  marshalUpdateKeyRequest,
+  marshalVerifyRequest,
   unmarshalVerifyResponse,
 } from './marshalling.gen.js'
 import type {

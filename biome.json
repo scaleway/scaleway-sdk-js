@@ -149,7 +149,7 @@
       }
     },
     {
-      "includes": ["packages_generated/std/**/*.gen.ts"],
+      "includes": ["packages_generated/**/*.gen.ts"],
       "assist": {
         "actions": {
           "source": {

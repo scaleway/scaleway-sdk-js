@@ -1,41 +1,40 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,} from './content.gen.js'
 import {
   marshalAddBastionAllowedIPsRequest,
+  unmarshalAddBastionAllowedIPsResponse,
   marshalCreateGatewayNetworkRequest,
   marshalCreateGatewayRequest,
   marshalCreateIPRequest,
   marshalCreatePatRuleRequest,
+  unmarshalGateway,
+  unmarshalGatewayNetwork,
+  unmarshalIP,
+  unmarshalListGatewayNetworksResponse,
+  unmarshalListGatewayTypesResponse,
+  unmarshalListGatewaysResponse,
+  unmarshalListIPsResponse,
+  unmarshalListPatRulesResponse,
+  unmarshalPatRule,
   marshalSetBastionAllowedIPsRequest,
+  unmarshalSetBastionAllowedIPsResponse,
   marshalSetPatRulesRequest,
+  unmarshalSetPatRulesResponse,
   marshalUpdateGatewayNetworkRequest,
   marshalUpdateGatewayRequest,
   marshalUpdateIPRequest,
   marshalUpdatePatRuleRequest,
   marshalUpgradeGatewayRequest,
-  unmarshalAddBastionAllowedIPsResponse,
-  unmarshalGateway,
-  unmarshalGatewayNetwork,
-  unmarshalIP,
-  unmarshalListGatewayNetworksResponse,
-  unmarshalListGatewaysResponse,
-  unmarshalListGatewayTypesResponse,
-  unmarshalListIPsResponse,
-  unmarshalListPatRulesResponse,
-  unmarshalPatRule,
-  unmarshalSetBastionAllowedIPsResponse,
-  unmarshalSetPatRulesResponse,
 } from './marshalling.gen.js'
 import type {
   AddBastionAllowedIPsRequest,
@@ -58,10 +57,10 @@ import type {
   IP,
   ListGatewayNetworksRequest,
   ListGatewayNetworksResponse,
-  ListGatewaysRequest,
-  ListGatewaysResponse,
   ListGatewayTypesRequest,
   ListGatewayTypesResponse,
+  ListGatewaysRequest,
+  ListGatewaysResponse,
   ListIPsRequest,
   ListIPsResponse,
   ListPatRulesRequest,
@@ -98,6 +97,7 @@ export class API extends ParentAPI {
       zones: [
         'fr-par-1',
         'fr-par-2',
+        'it-mil-1',
         'nl-ams-1',
         'nl-ams-2',
         'nl-ams-3',

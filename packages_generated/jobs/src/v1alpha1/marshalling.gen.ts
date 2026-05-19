@@ -1,30 +1,30 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  CreateJobDefinitionRequest,
-  CreateJobDefinitionRequestCronScheduleConfig,
-  CreateJobDefinitionSecretsRequest,
-  CreateJobDefinitionSecretsRequestSecretConfig,
-  CreateJobDefinitionSecretsResponse,
+  SecretEnvVar,
+  SecretFile,
+  Secret,
   CronSchedule,
   JobDefinition,
   JobRun,
+  CreateJobDefinitionSecretsResponse,
   JobsLimits,
   ListJobDefinitionSecretsResponse,
   ListJobDefinitionsResponse,
   ListJobRunsResponse,
-  ListJobsResourcesResponse,
   Resource,
-  Secret,
-  SecretEnvVar,
-  SecretFile,
-  StartJobDefinitionRequest,
+  ListJobsResourcesResponse,
   StartJobDefinitionResponse,
-  UpdateJobDefinitionRequest,
+  CreateJobDefinitionRequestCronScheduleConfig,
+  CreateJobDefinitionRequest,
+  CreateJobDefinitionSecretsRequestSecretConfig,
+  CreateJobDefinitionSecretsRequest,
+  StartJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
+  UpdateJobDefinitionRequest,
   UpdateJobDefinitionSecretRequest,
 } from './types.gen.js'
 
