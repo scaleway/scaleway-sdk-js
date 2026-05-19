@@ -1,11 +1,11 @@
 {
-  "name": "@scaleway/sdk-search",
+  "name": "@scaleway/sdk-messageq",
   "version": "1.0.0",
-  "description": "Scaleway SDK search",
+  "description": "Scaleway SDK messageq",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "directory": "packages_generated/search"
+    "directory": "packages_generated/messageq"
   },
   "files": [
     "dist",
