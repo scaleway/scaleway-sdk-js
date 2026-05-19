@@ -1,24 +1,24 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  Cluster,
-  ClusterVersion,
-  CreateDatalabRequest,
-  CreateDatalabRequestSparkMain,
-  CreateDatalabRequestSparkWorker,
-  Datalab,
+  Volume,
   DatalabSparkMain,
   DatalabSparkWorker,
+  Datalab,
+  ClusterVersion,
+  Cluster,
   ListClusterVersionsResponse,
   ListDatalabsResponse,
-  ListNodeTypesResponse,
-  ListNotebookVersionsResponse,
   NodeType,
-  Notebook,
+  ListNodeTypesResponse,
   NotebookVersion,
+  Notebook,
+  ListNotebookVersionsResponse,
+  CreateDatalabRequestSparkMain,
+  CreateDatalabRequestSparkWorker,
+  CreateDatalabRequest,
   UpdateDatalabRequest,
-  Volume,
 } from './types.gen.js'
 
 const unmarshalVolume = (data: unknown): Volume => {
