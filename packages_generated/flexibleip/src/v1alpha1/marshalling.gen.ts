@@ -1,17 +1,17 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  AttachFlexibleIPRequest,
+  MACAddress,
+  FlexibleIP,
   AttachFlexibleIPsResponse,
+  DetachFlexibleIPsResponse,
+  ListFlexibleIPsResponse,
+  AttachFlexibleIPRequest,
   CreateFlexibleIPRequest,
   DetachFlexibleIPRequest,
-  DetachFlexibleIPsResponse,
   DuplicateMACAddrRequest,
-  FlexibleIP,
   GenerateMACAddrRequest,
-  ListFlexibleIPsResponse,
-  MACAddress,
   MoveMACAddrRequest,
   UpdateFlexibleIPRequest,
 } from './types.gen.js'

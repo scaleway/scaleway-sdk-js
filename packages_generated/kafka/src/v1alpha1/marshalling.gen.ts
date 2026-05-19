@@ -1,38 +1,38 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  Cluster,
+  EndpointPrivateNetworkDetails,
+  EndpointPublicDetails,
+  Endpoint,
   ClusterMonoAZDetails,
   ClusterMultiAZDetails,
   ClusterSetting,
-  CreateClusterRequest,
-  CreateClusterRequestVolumeSpec,
-  CreateEndpointRequest,
-  Endpoint,
-  EndpointPrivateNetworkDetails,
-  EndpointPublicDetails,
-  EndpointSpec,
-  EndpointSpecPrivateNetworkDetails,
-  EndpointSpecPublicDetails,
+  Volume,
+  Cluster,
+  User,
   ListClustersResponse,
+  NodeTypeVolumeType,
+  NodeType,
   ListNodeTypesResponse,
   ListUsersResponse,
-  ListVersionsResponse,
-  NodeType,
-  NodeTypeVolumeType,
-  UpdateClusterRequest,
-  UpdateUserRequest,
-  User,
-  Version,
-  VersionAvailableSetting,
   VersionAvailableSettingBooleanProperty,
   VersionAvailableSettingFloatProperty,
   VersionAvailableSettingIntegerProperty,
   VersionAvailableSettingStringProperty,
-  Volume,
+  VersionAvailableSetting,
+  Version,
+  ListVersionsResponse,
+  EndpointSpecPrivateNetworkDetails,
+  EndpointSpecPublicDetails,
+  CreateClusterRequestVolumeSpec,
+  EndpointSpec,
+  CreateClusterRequest,
+  CreateEndpointRequest,
+  UpdateClusterRequest,
+  UpdateUserRequest,
 } from './types.gen.js'
 
 const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateNetworkDetails => {
