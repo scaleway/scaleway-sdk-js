@@ -1,26 +1,26 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
+  Reference,
+  SnapshotParentVolume,
+  Snapshot,
+  VolumeSpecifications,
+  Volume,
+  ListSnapshotsResponse,
+  VolumeType,
+  ListVolumeTypesResponse,
+  ListVolumesResponse,
   CreateSnapshotRequest,
-  CreateVolumeRequest,
   CreateVolumeRequestFromEmpty,
   CreateVolumeRequestFromSnapshot,
+  CreateVolumeRequest,
   ExportSnapshotToObjectStorageRequest,
   ImportSnapshotFromObjectStorageRequest,
-  ListSnapshotsResponse,
-  ListVolumesResponse,
-  ListVolumeTypesResponse,
-  Reference,
-  Snapshot,
-  SnapshotParentVolume,
   UpdateSnapshotRequest,
   UpdateVolumeRequest,
-  Volume,
-  VolumeSpecifications,
-  VolumeType,
 } from './types.gen.js'
 
 export const unmarshalReference = (data: unknown): Reference => {
