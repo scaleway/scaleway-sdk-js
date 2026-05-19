@@ -1,28 +1,27 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP,} from './content.gen.js'
 import {
   marshalAttachFlexibleIPRequest,
+  unmarshalAttachFlexibleIPsResponse,
   marshalCreateFlexibleIPRequest,
   marshalDetachFlexibleIPRequest,
+  unmarshalDetachFlexibleIPsResponse,
   marshalDuplicateMACAddrRequest,
+  unmarshalFlexibleIP,
   marshalGenerateMACAddrRequest,
+  unmarshalListFlexibleIPsResponse,
   marshalMoveMACAddrRequest,
   marshalUpdateFlexibleIPRequest,
-  unmarshalAttachFlexibleIPsResponse,
-  unmarshalDetachFlexibleIPsResponse,
-  unmarshalFlexibleIP,
-  unmarshalListFlexibleIPsResponse,
 } from './marshalling.gen.js'
 import type {
   AttachFlexibleIPRequest,

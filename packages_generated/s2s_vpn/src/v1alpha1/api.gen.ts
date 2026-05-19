@@ -1,37 +1,36 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN,} from './content.gen.js'
 import {
+  unmarshalConnection,
   marshalCreateConnectionRequest,
+  unmarshalCreateConnectionResponse,
   marshalCreateCustomerGatewayRequest,
   marshalCreateRoutingPolicyRequest,
   marshalCreateVpnGatewayRequest,
+  unmarshalCustomerGateway,
   marshalDetachRoutingPolicyRequest,
+  unmarshalListConnectionsResponse,
+  unmarshalListCustomerGatewaysResponse,
+  unmarshalListRoutingPoliciesResponse,
+  unmarshalListVpnGatewayTypesResponse,
+  unmarshalListVpnGatewaysResponse,
+  unmarshalRenewConnectionPskResponse,
+  unmarshalRoutingPolicy,
   marshalSetRoutingPolicyRequest,
   marshalUpdateConnectionRequest,
   marshalUpdateCustomerGatewayRequest,
   marshalUpdateRoutingPolicyRequest,
   marshalUpdateVpnGatewayRequest,
-  unmarshalConnection,
-  unmarshalCreateConnectionResponse,
-  unmarshalCustomerGateway,
-  unmarshalListConnectionsResponse,
-  unmarshalListCustomerGatewaysResponse,
-  unmarshalListRoutingPoliciesResponse,
-  unmarshalListVpnGatewaysResponse,
-  unmarshalListVpnGatewayTypesResponse,
-  unmarshalRenewConnectionPskResponse,
-  unmarshalRoutingPolicy,
   unmarshalVpnGateway,
 } from './marshalling.gen.js'
 import type {
@@ -59,10 +58,10 @@ import type {
   ListCustomerGatewaysResponse,
   ListRoutingPoliciesRequest,
   ListRoutingPoliciesResponse,
-  ListVpnGatewaysRequest,
-  ListVpnGatewaysResponse,
   ListVpnGatewayTypesRequest,
   ListVpnGatewayTypesResponse,
+  ListVpnGatewaysRequest,
+  ListVpnGatewaysResponse,
   RenewConnectionPskRequest,
   RenewConnectionPskResponse,
   RoutingPolicy,
@@ -92,6 +91,7 @@ export class API extends ParentAPI {
     toApiLocality({
       regions: [
         'fr-par',
+        'it-mil',
         'nl-ams',
         'pl-waw',
       ],

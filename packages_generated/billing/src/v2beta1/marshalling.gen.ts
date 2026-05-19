@@ -1,16 +1,16 @@
 
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
 import type {
-  Discount,
   DiscountCoupon,
   DiscountFilter,
+  Discount,
   Invoice,
-  ListConsumptionsResponse,
   ListConsumptionsResponseConsumption,
+  ListConsumptionsResponse,
   ListDiscountsResponse,
   ListInvoicesResponse,
-  ListTaxesResponse,
   ListTaxesResponseTax,
+  ListTaxesResponse,
 } from './types.gen.js'
 
 const unmarshalDiscountCoupon = (data: unknown): DiscountCoupon => {
