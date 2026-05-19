@@ -1,20 +1,18 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   marshalCreateExportJobRequest,
   marshalDisableAlertRulesRequest,
-  marshalEnableAlertRulesRequest,
-  marshalSetEnabledAlertRulesRequest,
   unmarshalDisableAlertRulesResponse,
+  marshalEnableAlertRulesRequest,
   unmarshalEnableAlertRulesResponse,
   unmarshalExportJob,
   unmarshalListAlertRulesResponse,
@@ -24,6 +22,7 @@ import {
   unmarshalListExportJobsResponse,
   unmarshalListProductsResponse,
   unmarshalListSystemEventsResponse,
+  marshalSetEnabledAlertRulesRequest,
   unmarshalSetEnabledAlertRulesResponse,
 } from './marshalling.gen.js'
 import type {

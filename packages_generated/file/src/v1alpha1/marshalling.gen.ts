@@ -1,14 +1,14 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  Attachment,
-  CreateFileSystemRequest,
   FileSystem,
-  FileSystemType,
+  Attachment,
   ListAttachmentsResponse,
-  ListFileSystemsResponse,
+  FileSystemType,
   ListFileSystemTypesResponse,
+  ListFileSystemsResponse,
+  CreateFileSystemRequest,
   UpdateFileSystemRequest,
 } from './types.gen.js'
 

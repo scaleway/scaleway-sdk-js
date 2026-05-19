@@ -1,30 +1,30 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  CreateDatabaseRequest,
-  CreateDeploymentRequest,
-  CreateEndpointRequest,
-  CreateUserRequest,
-  Database,
-  Deployment,
-  Endpoint,
   EndpointPrivateNetworkDetails,
   EndpointPublicDetails,
   EndpointService,
-  EndpointSpec,
-  EndpointSpecPrivateNetworkDetails,
-  EndpointSpecPublicDetails,
+  Endpoint,
+  Database,
+  Deployment,
+  User,
   ListDatabasesResponse,
   ListDeploymentsResponse,
+  Preset,
   ListPresetsResponse,
   ListUsersResponse,
+  Version,
   ListVersionsResponse,
-  Preset,
+  CreateDatabaseRequest,
+  EndpointSpecPrivateNetworkDetails,
+  EndpointSpecPublicDetails,
+  EndpointSpec,
+  CreateDeploymentRequest,
+  CreateEndpointRequest,
+  CreateUserRequest,
   UpdateDeploymentRequest,
   UpdateUserRequest,
-  User,
-  Version,
 } from './types.gen.js'
 
 const unmarshalEndpointPrivateNetworkDetails = (data: unknown): EndpointPrivateNetworkDetails => {

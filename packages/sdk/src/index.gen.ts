@@ -33,6 +33,7 @@ import { KeyManagerv1alpha1 } from '@scaleway/sdk-key-manager'
 import { Lbv1 } from '@scaleway/sdk-lb'
 import { Mailboxv1alpha1 } from '@scaleway/sdk-mailbox'
 import { Marketplacev2 } from '@scaleway/sdk-marketplace'
+import { Messageqv1alpha1 } from '@scaleway/sdk-messageq'
 import { Mnqv1beta1 } from '@scaleway/sdk-mnq'
 import { Mongodbv1, Mongodbv1alpha1 } from '@scaleway/sdk-mongodb'
 import { Partnerv1 } from '@scaleway/sdk-partner'
@@ -42,6 +43,7 @@ import { Rdbv1 } from '@scaleway/sdk-rdb'
 import { Redisv1 } from '@scaleway/sdk-redis'
 import { Registryv1 } from '@scaleway/sdk-registry'
 import { S2SVpnv1alpha1 } from '@scaleway/sdk-s2s-vpn'
+import { Searchv1alpha1 } from '@scaleway/sdk-search'
 import { Searchdbv1alpha1 } from '@scaleway/sdk-searchdb'
 import { Secretv1beta1 } from '@scaleway/sdk-secret'
 import { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
@@ -306,6 +308,14 @@ export const Marketplace = {
 }
 
 /**
+ * @deprecated Direct version exports are deprecated. Use the 'Messageq' namespace instead (e.g., Messageq.v1).
+ */
+export { Messageqv1alpha1 }
+export const Messageq = {
+  v1alpha1: Messageqv1alpha1,
+}
+
+/**
  * @deprecated Direct version exports are deprecated. Use the 'Mnq' namespace instead (e.g., Mnq.v1).
  */
 export { Mnqv1beta1 }
@@ -376,6 +386,14 @@ export const Registry = {
 export { S2SVpnv1alpha1 }
 export const S2SVpn = {
   v1alpha1: S2SVpnv1alpha1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'Search' namespace instead (e.g., Search.v1).
+ */
+export { Searchv1alpha1 }
+export const Search = {
+  v1alpha1: Searchv1alpha1,
 }
 
 /**

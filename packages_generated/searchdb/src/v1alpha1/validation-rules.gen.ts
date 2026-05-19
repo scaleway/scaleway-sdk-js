@@ -7,19 +7,23 @@ export const CreateDeploymentRequest = {
     minLength: 1,
     pattern: /^[A-Za-z0-9\-_]+$/,
   },
+  nodeAmount: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 99,
+  },
   nodeType: {
     maxLength: 128,
     minLength: 1,
     pattern: /^[A-Za-z0-9\-_]+$/,
   },
   password: {
-    maxLength: 128,
+    maxLength: 50,
     minLength: 12,
   },
   userName: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
   version: {
     maxLength: 128,
@@ -30,13 +34,13 @@ export const CreateDeploymentRequest = {
 
 export const CreateUserRequest = {
   password: {
-    maxLength: 128,
-    minLength: 8,
+    maxLength: 50,
+    minLength: 12,
   },
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
 }
 
@@ -60,11 +64,6 @@ export const ListDeploymentsRequest = {
   pageSize: {
     greaterThanOrEqual: 1,
     lessThanOrEqual: 100,
-  },
-  version: {
-    maxLength: 128,
-    minLength: 1,
-    pattern: /^[A-Za-z0-9\-_]+$/,
   },
 }
 
@@ -112,14 +111,17 @@ export const UpdateDeploymentRequest = {
 
 export const UpdateUserRequest = {
   password: {
-    maxLength: 128,
-    minLength: 8,
+    maxLength: 50,
+    minLength: 12,
   },
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
+}
+
+export const UpgradeDeploymentRequest = {
 }
 
 export const Volume = {
