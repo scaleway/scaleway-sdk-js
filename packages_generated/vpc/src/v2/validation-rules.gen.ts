@@ -19,6 +19,18 @@ export const AclRule = {
   },
 }
 
+export const CreateIngressRuleRequest = {
+  description: {
+    maxLength: 200,
+  },
+}
+
+export const IngressRule = {
+  description: {
+    maxLength: 200,
+  },
+}
+
 export const ListSubnetOverlapsRequest = {
   page: {
     greaterThanOrEqual: 1,
@@ -30,6 +42,12 @@ export const ListSubnetOverlapsRequest = {
 }
 
 export const Route = {
+  description: {
+    maxLength: 200,
+  },
+}
+
+export const UpdateIngressRuleRequest = {
   description: {
     maxLength: 200,
   },
