@@ -1,12 +1,12 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  CreateHumanRequest,
   Human,
   ListHumansResponse,
-  RegisterRequest,
   RegisterResponse,
+  CreateHumanRequest,
+  RegisterRequest,
   UpdateHumanRequest,
 } from './types.gen.js'
 

@@ -1,15 +1,15 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Impact,
+  SkuImpact,
+  ZoneImpact,
+  RegionImpact,
+  ProjectImpact,
   ImpactDataResponse,
   ImpactReportAvailability,
-  ProjectImpact,
-  RegionImpact,
-  SkuImpact,
   UserApiDownloadImpactReportRequest,
-  ZoneImpact,
 } from './types.gen.js'
 
 const unmarshalImpact = (data: unknown): Impact => {
