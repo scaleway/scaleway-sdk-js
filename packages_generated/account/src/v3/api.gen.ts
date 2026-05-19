@@ -1,21 +1,21 @@
 
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   urlParams,
   validatePathParam,
 } from '@scaleway/sdk-client'
 import {
+  unmarshalCheckContractSignatureResponse,
   marshalContractApiCheckContractSignatureRequest,
   marshalContractApiCreateContractSignatureRequest,
-  marshalProjectApiCreateProjectRequest,
-  marshalProjectApiSetProjectQualificationRequest,
-  marshalProjectApiUpdateProjectRequest,
-  unmarshalCheckContractSignatureResponse,
   unmarshalContractSignature,
   unmarshalListContractSignaturesResponse,
   unmarshalListProjectsResponse,
   unmarshalProject,
+  marshalProjectApiCreateProjectRequest,
+  marshalProjectApiSetProjectQualificationRequest,
+  marshalProjectApiUpdateProjectRequest,
   unmarshalProjectQualification,
 } from './marshalling.gen.js'
 import type {

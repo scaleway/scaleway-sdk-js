@@ -1,24 +1,23 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {DATALAB_TRANSIENT_STATUSES as DATALAB_TRANSIENT_STATUSES_DATALAB,} from './content.gen.js'
 import {
   marshalCreateDatalabRequest,
-  marshalUpdateDatalabRequest,
   unmarshalDatalab,
   unmarshalListClusterVersionsResponse,
   unmarshalListDatalabsResponse,
   unmarshalListNodeTypesResponse,
   unmarshalListNotebookVersionsResponse,
+  marshalUpdateDatalabRequest,
 } from './marshalling.gen.js'
 import type {
   CreateDatalabRequest,
@@ -41,9 +40,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * Data Lab API for Apache Spark™.
+ * Clusters for Apache Spark™ API.
 
-This API allows you to manage your Data Lab resources.
+This API allows you to manage your Apache Spark™ resources.
  */
 export class API extends ParentAPI {
   /**
@@ -54,11 +53,12 @@ export class API extends ParentAPI {
     toApiLocality({
       regions: [
         'fr-par',
+        'it-mil',
       ],
     })
   
   /**
-   * Create a new Data Lab. In this call, one can personalize the node counts, add a notebook, choose the private network, define the persistent volume storage capacity.
+   * Create a new cluster. In this call, one can personalize the node counts, add a notebook, choose the private network, define the persistent volume storage capacity.
    *
    * @param request - The request {@link CreateDatalabRequest}
    * @returns A Promise of Datalab
@@ -78,7 +78,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Retrieve information about a given Data Lab cluster, specified by the `region` and `datalab_id` parameters. Its full details, including name, status, node counts, are returned in the response object.
+   * Retrieve information about a given cluster, specified by the `region` and `datalab_id` parameters. Its full details, including name, status, node counts, are returned in the response object.
    *
    * @param request - The request {@link GetDatalabRequest}
    * @returns A Promise of Datalab
@@ -130,7 +130,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List information about Data Lab cluster within a project or an organization.
+   * List information about cluster within a project or an organization.
    *
    * @param request - The request {@link ListDatalabsRequest}
    * @returns A Promise of ListDatalabsResponse
@@ -140,7 +140,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Update a Data Labs node counts. Allows for up- and downscaling on demand, depending on the expected workload.
+   * Update a cluster node counts. Allows for up- and downscaling on demand, depending on the expected workload.
    *
    * @param request - The request {@link UpdateDatalabRequest}
    * @returns A Promise of Datalab
@@ -160,7 +160,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Delete a Data Lab based on its region and id.
+   * Delete a cluster based on its region and id.
    *
    * @param request - The request {@link DeleteDatalabRequest}
    * @returns A Promise of Datalab
@@ -192,7 +192,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List the available compute node types for creating a Data Lab.
+   * List the available compute node types for creating a new cluster.
    *
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
@@ -240,7 +240,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List the Spark versions the product is compatible with.
+   * List the Apache Spark™ versions the product is compatible with.
    *
    * @param request - The request {@link ListClusterVersionsRequest}
    * @returns A Promise of ListClusterVersionsResponse
