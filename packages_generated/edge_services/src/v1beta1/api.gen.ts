@@ -1,20 +1,25 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,} from './content.gen.js'
 import {
   marshalAddRouteRulesRequest,
+  unmarshalAddRouteRulesResponse,
+  unmarshalBackendStage,
+  unmarshalCacheStage,
   marshalCheckDomainRequest,
+  unmarshalCheckDomainResponse,
   marshalCheckLbOriginRequest,
+  unmarshalCheckLbOriginResponse,
   marshalCheckPEMChainRequest,
+  unmarshalCheckPEMChainResponse,
   marshalCreateBackendStageRequest,
   marshalCreateCacheStageRequest,
   marshalCreateDNSStageRequest,
@@ -22,23 +27,8 @@ import {
   marshalCreatePurgeRequestRequest,
   marshalCreateRouteStageRequest,
   marshalCreateTLSStageRequest,
+  marshalCreateVPCEndpointRequest,
   marshalCreateWafStageRequest,
-  marshalSelectPlanRequest,
-  marshalSetHeadStageRequest,
-  marshalSetRouteRulesRequest,
-  marshalUpdateBackendStageRequest,
-  marshalUpdateCacheStageRequest,
-  marshalUpdateDNSStageRequest,
-  marshalUpdatePipelineRequest,
-  marshalUpdateRouteStageRequest,
-  marshalUpdateTLSStageRequest,
-  marshalUpdateWafStageRequest,
-  unmarshalAddRouteRulesResponse,
-  unmarshalBackendStage,
-  unmarshalCacheStage,
-  unmarshalCheckDomainResponse,
-  unmarshalCheckLbOriginResponse,
-  unmarshalCheckPEMChainResponse,
   unmarshalDNSStage,
   unmarshalGetBillingResponse,
   unmarshalHeadStageResponse,
@@ -53,13 +43,25 @@ import {
   unmarshalListRouteRulesResponse,
   unmarshalListRouteStagesResponse,
   unmarshalListTLSStagesResponse,
+  unmarshalListVPCEndpointsResponse,
   unmarshalListWafStagesResponse,
   unmarshalPipeline,
   unmarshalPlan,
   unmarshalPurgeRequest,
   unmarshalRouteStage,
+  marshalSelectPlanRequest,
+  marshalSetHeadStageRequest,
+  marshalSetRouteRulesRequest,
   unmarshalSetRouteRulesResponse,
   unmarshalTLSStage,
+  marshalUpdateBackendStageRequest,
+  marshalUpdateCacheStageRequest,
+  marshalUpdateDNSStageRequest,
+  marshalUpdatePipelineRequest,
+  marshalUpdateRouteStageRequest,
+  marshalUpdateTLSStageRequest,
+  marshalUpdateWafStageRequest,
+  unmarshalVPCEndpoint,
   unmarshalWafStage,
 } from './marshalling.gen.js'
 import type {
@@ -80,7 +82,9 @@ import type {
   CreatePurgeRequestRequest,
   CreateRouteStageRequest,
   CreateTLSStageRequest,
+  CreateVPCEndpointRequest,
   CreateWafStageRequest,
+  DNSStage,
   DeleteBackendStageRequest,
   DeleteCacheStageRequest,
   DeleteCurrentPlanRequest,
@@ -88,8 +92,8 @@ import type {
   DeletePipelineRequest,
   DeleteRouteStageRequest,
   DeleteTLSStageRequest,
+  DeleteVPCEndpointRequest,
   DeleteWafStageRequest,
-  DNSStage,
   GetBackendStageRequest,
   GetBillingRequest,
   GetBillingResponse,
@@ -100,6 +104,7 @@ import type {
   GetPurgeRequestRequest,
   GetRouteStageRequest,
   GetTLSStageRequest,
+  GetVPCEndpointRequest,
   GetWafStageRequest,
   HeadStageResponse,
   ListBackendStagesRequest,
@@ -123,6 +128,8 @@ import type {
   ListRouteStagesResponse,
   ListTLSStagesRequest,
   ListTLSStagesResponse,
+  ListVPCEndpointsRequest,
+  ListVPCEndpointsResponse,
   ListWafStagesRequest,
   ListWafStagesResponse,
   Pipeline,
@@ -144,6 +151,7 @@ import type {
   UpdateRouteStageRequest,
   UpdateTLSStageRequest,
   UpdateWafStageRequest,
+  VPCEndpoint,
   WafStage,
 } from './types.gen.js'
 
@@ -288,6 +296,59 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}`,
+      },
+    )
+
+  
+  getVPCEndpoint = (request: Readonly<GetVPCEndpointRequest>) =>
+    this.client.fetch<VPCEndpoint>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1beta1/vpc-endpoints/${validatePathParam('vpcEndpointId', request.vpcEndpointId)}`,
+      },
+      unmarshalVPCEndpoint,
+    )
+
+  
+  protected pageOfListVPCEndpoints = (request: Readonly<ListVPCEndpointsRequest> = {}) =>
+    this.client.fetch<ListVPCEndpointsResponse>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1beta1/vpc-endpoints`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalListVPCEndpointsResponse,
+    )
+  
+  listVPCEndpoints = (request: Readonly<ListVPCEndpointsRequest> = {}) =>
+    enrichForPagination('vpcEndpoints', this.pageOfListVPCEndpoints, request)
+
+  
+  createVPCEndpoint = (request: Readonly<CreateVPCEndpointRequest>) =>
+    this.client.fetch<VPCEndpoint>(
+      {
+        body: JSON.stringify(
+          marshalCreateVPCEndpointRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/edge-services/v1beta1/vpc-endpoints`,
+      },
+      unmarshalVPCEndpoint,
+    )
+
+  
+  deleteVPCEndpoint = (request: Readonly<DeleteVPCEndpointRequest>) =>
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/edge-services/v1beta1/vpc-endpoints/${validatePathParam('vpcEndpointId', request.vpcEndpointId)}`,
       },
     )
 

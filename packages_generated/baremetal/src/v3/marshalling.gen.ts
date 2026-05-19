@@ -1,12 +1,12 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
+  ServerPrivateNetwork,
   ListServerPrivateNetworksResponse,
+  SetServerPrivateNetworksResponse,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiSetServerPrivateNetworksRequest,
-  ServerPrivateNetwork,
-  SetServerPrivateNetworksResponse,
 } from './types.gen.js'
 
 export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwork => {

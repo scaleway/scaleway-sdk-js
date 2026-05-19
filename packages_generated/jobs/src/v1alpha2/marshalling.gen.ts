@@ -1,39 +1,40 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  CreateJobDefinitionRequest,
-  CreateJobDefinitionRequestCronScheduleConfig,
-  CreateSecretsRequest,
-  CreateSecretsRequestSecretConfig,
-  CreateSecretsResponse,
-  CreateTriggerRequest,
-  CreateTriggerRequestCronConfig,
+  SecretEnvVar,
+  SecretFile,
+  Secret,
   CronSchedule,
+  RetryPolicy,
   JobDefinition,
-  JobLimits,
   JobRun,
+  TriggerCronConfig,
+  Trigger,
+  CreateSecretsResponse,
+  JobLimits,
   ListJobDefinitionsResponse,
+  Resource,
   ListJobResourcesResponse,
   ListJobRunsResponse,
   ListSecretsResponse,
   ListTriggersResponse,
-  Resource,
-  RetryPolicy,
-  Secret,
-  SecretEnvVar,
-  SecretFile,
-  StartJobDefinitionRequest,
   StartJobDefinitionResponse,
-  Trigger,
-  TriggerCronConfig,
-  UpdateJobDefinitionRequest,
+  CreateJobDefinitionRequestCronScheduleConfig,
+  CreateJobDefinitionRequest,
+  CreateSecretsRequestSecretConfig,
+  CreateSecretsRequest,
+  CreateTriggerRequestCronConfig,
+  CreateTriggerRequest,
+  StartJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
+  UpdateJobDefinitionRequestUpdateRetryPolicy,
+  UpdateJobDefinitionRequest,
   UpdateSecretRequest,
-  UpdateTriggerRequest,
   UpdateTriggerRequestCronConfig,
+  UpdateTriggerRequest,
 } from './types.gen.js'
 
 const unmarshalSecretEnvVar = (data: unknown): SecretEnvVar => {
@@ -409,6 +410,13 @@ const marshalUpdateJobDefinitionRequestCronScheduleConfig = (
   timezone: request.timezone,
 })
 
+const marshalUpdateJobDefinitionRequestUpdateRetryPolicy = (
+  request: UpdateJobDefinitionRequestUpdateRetryPolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  max_retries: request.maxRetries,
+})
+
 export const marshalUpdateJobDefinitionRequest = (
   request: UpdateJobDefinitionRequest,
   defaults: DefaultValues,
@@ -424,7 +432,7 @@ export const marshalUpdateJobDefinitionRequest = (
   local_storage_capacity: request.localStorageCapacity,
   memory_limit: request.memoryLimit,
   name: request.name,
-  retry_policy: ((request.retryPolicy !== undefined) ?  marshalRetryPolicy(request.retryPolicy, defaults): undefined),
+  retry_policy: ((request.retryPolicy !== undefined) ?  marshalUpdateJobDefinitionRequestUpdateRetryPolicy(request.retryPolicy, defaults): undefined),
   startup_command: request.startupCommand,
 })
 

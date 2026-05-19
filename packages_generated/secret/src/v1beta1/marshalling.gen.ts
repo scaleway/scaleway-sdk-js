@@ -1,23 +1,23 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
+  EphemeralProperties,
+  SecretVersion,
+  EphemeralPolicy,
+  Secret,
   AccessSecretVersionResponse,
-  AddSecretOwnerRequest,
-  BrowseSecretsResponse,
-  BrowseSecretsResponseItem,
   BrowseSecretsResponseItemFolderDetails,
   BrowseSecretsResponseItemSecretDetails,
-  CreateSecretRequest,
-  CreateSecretVersionRequest,
-  EphemeralPolicy,
-  EphemeralProperties,
-  ListSecretsResponse,
+  BrowseSecretsResponseItem,
+  BrowseSecretsResponse,
   ListSecretTypesResponse,
   ListSecretVersionsResponse,
+  ListSecretsResponse,
   ListTagsResponse,
-  Secret,
-  SecretVersion,
+  AddSecretOwnerRequest,
+  CreateSecretRequest,
+  CreateSecretVersionRequest,
   UpdateSecretRequest,
   UpdateSecretVersionRequest,
 } from './types.gen.js'

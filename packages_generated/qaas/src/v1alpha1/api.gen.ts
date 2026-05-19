@@ -1,27 +1,22 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
+  enrichForPagination,
   resolveOneOf,
   urlParams,
   validatePathParam,
   waitForResource,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,} from './content.gen.js'
 import {
+  unmarshalApplication,
+  unmarshalBooking,
   marshalCreateJobRequest,
   marshalCreateModelRequest,
   marshalCreateProcessRequest,
   marshalCreateSessionRequest,
-  marshalUpdateBookingRequest,
-  marshalUpdateJobRequest,
-  marshalUpdateProcessRequest,
-  marshalUpdateSessionRequest,
-  unmarshalApplication,
-  unmarshalBooking,
   unmarshalJob,
   unmarshalJobCircuit,
   unmarshalListApplicationsResponse,
@@ -30,14 +25,18 @@ import {
   unmarshalListJobsResponse,
   unmarshalListModelsResponse,
   unmarshalListPlatformsResponse,
-  unmarshalListProcessesResponse,
   unmarshalListProcessResultsResponse,
+  unmarshalListProcessesResponse,
   unmarshalListSessionACLsResponse,
   unmarshalListSessionsResponse,
   unmarshalModel,
   unmarshalPlatform,
   unmarshalProcess,
   unmarshalSession,
+  marshalUpdateBookingRequest,
+  marshalUpdateJobRequest,
+  marshalUpdateProcessRequest,
+  marshalUpdateSessionRequest,
 } from './marshalling.gen.js'
 import type {
   Application,
@@ -73,10 +72,10 @@ import type {
   ListModelsResponse,
   ListPlatformsRequest,
   ListPlatformsResponse,
-  ListProcessesRequest,
-  ListProcessesResponse,
   ListProcessResultsRequest,
   ListProcessResultsResponse,
+  ListProcessesRequest,
+  ListProcessesResponse,
   ListSessionACLsRequest,
   ListSessionACLsResponse,
   ListSessionsRequest,
