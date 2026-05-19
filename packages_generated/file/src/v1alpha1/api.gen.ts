@@ -1,23 +1,22 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE,} from './content.gen.js'
 import {
   marshalCreateFileSystemRequest,
-  marshalUpdateFileSystemRequest,
   unmarshalFileSystem,
   unmarshalListAttachmentsResponse,
-  unmarshalListFileSystemsResponse,
   unmarshalListFileSystemTypesResponse,
+  unmarshalListFileSystemsResponse,
+  marshalUpdateFileSystemRequest,
 } from './marshalling.gen.js'
 import type {
   CreateFileSystemRequest,
@@ -26,10 +25,10 @@ import type {
   GetFileSystemRequest,
   ListAttachmentsRequest,
   ListAttachmentsResponse,
-  ListFileSystemsRequest,
-  ListFileSystemsResponse,
   ListFileSystemTypesRequest,
   ListFileSystemTypesResponse,
+  ListFileSystemsRequest,
+  ListFileSystemsResponse,
   UpdateFileSystemRequest,
 } from './types.gen.js'
 

@@ -1,39 +1,38 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS,} from './content.gen.js'
 import {
+  unmarshalACLRule,
   marshalAddAclRulesRequest,
+  unmarshalAddAclRulesResponse,
   marshalAddClusterSettingsRequest,
   marshalAddEndpointsRequest,
-  marshalCreateClusterRequest,
-  marshalMigrateClusterRequest,
-  marshalSetAclRulesRequest,
-  marshalSetClusterSettingsRequest,
-  marshalSetEndpointsRequest,
-  marshalUpdateClusterRequest,
-  marshalUpdateEndpointRequest,
-  unmarshalACLRule,
-  unmarshalAddAclRulesResponse,
   unmarshalAddEndpointsResponse,
   unmarshalCluster,
   unmarshalClusterMetricsResponse,
   unmarshalClusterSettingsResponse,
+  marshalCreateClusterRequest,
   unmarshalEndpoint,
-  unmarshalListClustersResponse,
   unmarshalListClusterVersionsResponse,
+  unmarshalListClustersResponse,
   unmarshalListNodeTypesResponse,
+  marshalMigrateClusterRequest,
+  marshalSetAclRulesRequest,
   unmarshalSetAclRulesResponse,
+  marshalSetClusterSettingsRequest,
+  marshalSetEndpointsRequest,
   unmarshalSetEndpointsResponse,
+  marshalUpdateClusterRequest,
+  marshalUpdateEndpointRequest,
 } from './marshalling.gen.js'
 import type {
   ACLRule,
@@ -56,10 +55,10 @@ import type {
   GetClusterMetricsRequest,
   GetClusterRequest,
   GetEndpointRequest,
-  ListClustersRequest,
-  ListClustersResponse,
   ListClusterVersionsRequest,
   ListClusterVersionsResponse,
+  ListClustersRequest,
+  ListClustersResponse,
   ListNodeTypesRequest,
   ListNodeTypesResponse,
   MigrateClusterRequest,

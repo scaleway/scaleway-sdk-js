@@ -1,18 +1,17 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
+  unmarshalListServerPrivateNetworksResponse,
   marshalPrivateNetworkApiAddServerPrivateNetworkRequest,
   marshalPrivateNetworkApiSetServerPrivateNetworksRequest,
-  unmarshalListServerPrivateNetworksResponse,
   unmarshalServerPrivateNetwork,
   unmarshalSetServerPrivateNetworksResponse,
 } from './marshalling.gen.js'
