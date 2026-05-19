@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-export type Region = 'fr-par' | 'nl-ams' | 'pl-waw' | (string & {})
+export type Region = 'fr-par' | 'nl-ams' | 'pl-waw' | 'it-mil' | (string & {})
 
 export type Zone =
   | 'fr-par-1'
@@ -11,6 +11,7 @@ export type Zone =
   | 'pl-waw-1'
   | 'pl-waw-2'
   | 'pl-waw-3'
+  | 'it-mil-1'
   | (string & {})
 /* eslint-enable @typescript-eslint/ban-types */
 
