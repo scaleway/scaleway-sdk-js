@@ -10,5 +10,6 @@ export const CLUSTER_TRANSIENT_STATUSES: ClusterStatus[] = [
   'creating',
   'configuring',
   'deleting',
+  'upgrading',
 ]
 
