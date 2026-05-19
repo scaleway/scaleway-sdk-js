@@ -1,12 +1,13 @@
-
+// This file was automatically generated. DO NOT EDIT.
+// If you have any remark or suggestion do not hesitate to open an issue.
 import {
   API as ParentAPI,
   urlParams,
 } from '@scaleway/sdk-client'
 import {
-  marshalUserApiDownloadImpactReportRequest,
   unmarshalImpactDataResponse,
   unmarshalImpactReportAvailability,
+  marshalUserApiDownloadImpactReportRequest,
 } from './marshalling.gen.js'
 import type {
   ImpactDataResponse,
