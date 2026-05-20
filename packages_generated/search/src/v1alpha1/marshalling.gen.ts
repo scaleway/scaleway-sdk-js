@@ -2,12 +2,12 @@
 import { isJSONObject, unmarshalArrayOfObject, } from '@scaleway/sdk-client'
 import type {
   BrmServerInfo,
-  Resource,
-  SearchResourcesResponse,
   ServerlessContainersContainerInfo,
   ServerlessFunctionsFunctionInfo,
   ServerlessSqldbBackupInfo,
   VpcPrivateNetworkInfo,
+  Resource,
+  SearchResourcesResponse,
 } from './types.gen.js'
 
 const unmarshalBrmServerInfo = (data: unknown): BrmServerInfo => {

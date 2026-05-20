@@ -7,6 +7,7 @@ import type {
   Subnet,
   PrivateNetwork,
   Route,
+  IngressRule,
   VPCConnectorPeerInfo,
   VPCConnector,
   VPC,
@@ -14,6 +15,7 @@ import type {
   DeleteSubnetsResponse,
   AclRule,
   GetAclResponse,
+  ListIngressRulesResponse,
   ListPrivateNetworksResponse,
   ListSubnetOverlapsResponseSubnetOverlap,
   ListSubnetOverlapsResponse,
@@ -22,12 +24,14 @@ import type {
   ListVPCsResponse,
   SetAclResponse,
   AddSubnetsRequest,
+  CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
   DeleteSubnetsRequest,
   SetAclRequest,
+  UpdateIngressRuleRequest,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
   UpdateVPCConnectorRequest,
@@ -97,6 +101,27 @@ export const unmarshalRoute = (data: unknown): Route => {
     updatedAt: unmarshalDate(data.updated_at),
     vpcId: data.vpc_id,
   } as Route
+}
+
+export const unmarshalIngressRule = (data: unknown): IngressRule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IngressRule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    id: data.id,
+    isIpv6: data.is_ipv6,
+    nexthopPrivateNetworkId: data.nexthop_private_network_id,
+    nexthopResourceIp: data.nexthop_resource_ip,
+    source: data.source,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    vpcId: data.vpc_id,
+  } as IngressRule
 }
 
 const unmarshalVPCConnectorPeerInfo = (data: unknown): VPCConnectorPeerInfo => {
@@ -216,6 +241,19 @@ export const unmarshalGetAclResponse = (data: unknown): GetAclResponse => {
   } as GetAclResponse
 }
 
+export const unmarshalListIngressRulesResponse = (data: unknown): ListIngressRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListIngressRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rules: unmarshalArrayOfObject(data.rules, unmarshalIngressRule),
+    totalCount: data.total_count,
+  } as ListIngressRulesResponse
+}
+
 export const unmarshalListPrivateNetworksResponse = (data: unknown): ListPrivateNetworksResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -316,6 +354,18 @@ export const marshalAddSubnetsRequest = (
   subnets: request.subnets,
 })
 
+export const marshalCreateIngressRuleRequest = (
+  request: CreateIngressRuleRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  nexthop_private_network_id: request.nexthopPrivateNetworkId,
+  nexthop_resource_ip: request.nexthopResourceIp,
+  source: request.source,
+  tags: request.tags,
+  vpc_id: request.vpcId,
+})
+
 export const marshalCreatePrivateNetworkRequest = (
   request: CreatePrivateNetworkRequest,
   defaults: DefaultValues,
@@ -390,6 +440,17 @@ export const marshalSetAclRequest = (
   default_policy: request.defaultPolicy,
   is_ipv6: request.isIpv6,
   rules:  request.rules.map(elt => marshalAclRule(elt, defaults)),
+})
+
+export const marshalUpdateIngressRuleRequest = (
+  request: UpdateIngressRuleRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  nexthop_private_network_id: request.nexthopPrivateNetworkId,
+  nexthop_resource_ip: request.nexthopResourceIp,
+  source: request.source,
+  tags: request.tags,
 })
 
 export const marshalUpdatePrivateNetworkRequest = (
