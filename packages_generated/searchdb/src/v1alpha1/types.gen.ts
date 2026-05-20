@@ -478,10 +478,6 @@ export type ListDeploymentsRequest = {
    * Deployment name to filter for.
    */
   name?: string
-  /**
-   * Engine version to filter for.
-   */
-  version?: string
 }
 
 
