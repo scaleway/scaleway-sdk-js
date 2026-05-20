@@ -140,6 +140,12 @@ export interface CreateConnectionRequestBgpConfig {
 }
 
 
+export interface CreateConnectionRequestSecret {
+  id: string
+  revision?: number
+}
+
+
 export interface Connection {
   /**
    * Unique identifier of the connection.
@@ -497,6 +503,10 @@ export type CreateConnectionRequest = {
    * Defines whether route propagation is enabled or not.
    */
   enableRoutePropagation: boolean
+  /**
+   * Specifies the pre-shared key used for the IPsec tunnel.
+   */
+  secret?: CreateConnectionRequestSecret
   /**
    * ID of the VPN gateway to attach to the connection.
    */
