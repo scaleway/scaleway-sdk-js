@@ -1,52 +1,53 @@
 
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } from '@scaleway/sdk-client'
 import type {
-  ListPublicCatalogProductsResponse,
-  PublicCatalogProduct,
-  PublicCatalogProductEnvironmentalImpactEstimation,
-  PublicCatalogProductLocality,
-  PublicCatalogProductPrice,
-  PublicCatalogProductProperties,
+  PublicCatalogProductPropertiesHardwareCPUPhysical,
+  PublicCatalogProductPropertiesHardwareCPUVirtual,
+  PublicCatalogProductPropertiesHardwareCPU,
+  PublicCatalogProductPropertiesHardwareGPU,
+  PublicCatalogProductPropertiesHardwareNetwork,
+  PublicCatalogProductPropertiesHardwareRAM,
+  PublicCatalogProductPropertiesHardwareStorage,
+  PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType,
+  PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType,
+  PublicCatalogProductPropertiesKubernetesKosmosNodeType,
+  PublicCatalogProductPropertiesLoadBalancerIPV4Type,
+  PublicCatalogProductPropertiesLoadBalancerNodeType,
+  PublicCatalogProductPropertiesManagedMongoDBManagementType,
+  PublicCatalogProductPropertiesManagedMongoDBNodeType,
+  PublicCatalogProductPropertiesManagedMongoDBStorageType,
+  PublicCatalogProductPropertiesManagedRelationalDatabaseManagementType,
+  PublicCatalogProductPropertiesManagedRelationalDatabaseMultiAzType,
+  PublicCatalogProductPropertiesManagedRelationalDatabaseNodeType,
+  PublicCatalogProductPropertiesManagedRelationalDatabaseStorageType,
+  PublicCatalogProductPropertiesObjectStorageClassType,
+  PublicCatalogProductPropertiesObjectStorageInternetTrafficType,
+  PublicCatalogProductPropertiesObjectStorageRegionTrafficType,
+  PublicCatalogProductPropertiesObjectStorageRestoreType,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesGenerativeApis,
   PublicCatalogProductPropertiesHardware,
-  PublicCatalogProductPropertiesHardwareCPU,
-  PublicCatalogProductPropertiesHardwareCPUPhysical,
-  PublicCatalogProductPropertiesHardwareCPUVirtual,
-  PublicCatalogProductPropertiesHardwareGPU,
-  PublicCatalogProductPropertiesHardwareNetwork,
-  PublicCatalogProductPropertiesHardwareRAM,
-  PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
   PublicCatalogProductPropertiesKeyManager,
   PublicCatalogProductPropertiesKubernetes,
-  PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType,
-  PublicCatalogProductPropertiesKubernetesKosmosControlPlaneType,
-  PublicCatalogProductPropertiesKubernetesKosmosNodeType,
   PublicCatalogProductPropertiesLoadBalancer,
-  PublicCatalogProductPropertiesLoadBalancerIPV4Type,
-  PublicCatalogProductPropertiesLoadBalancerNodeType,
   PublicCatalogProductPropertiesManagedInference,
   PublicCatalogProductPropertiesManagedMongoDB,
-  PublicCatalogProductPropertiesManagedMongoDBManagementType,
-  PublicCatalogProductPropertiesManagedMongoDBNodeType,
-  PublicCatalogProductPropertiesManagedMongoDBStorageType,
   PublicCatalogProductPropertiesManagedRedisDatabase,
   PublicCatalogProductPropertiesManagedRelationalDatabase,
-  PublicCatalogProductPropertiesManagedRelationalDatabaseManagementType,
-  PublicCatalogProductPropertiesManagedRelationalDatabaseMultiAzType,
-  PublicCatalogProductPropertiesManagedRelationalDatabaseNodeType,
-  PublicCatalogProductPropertiesManagedRelationalDatabaseStorageType,
   PublicCatalogProductPropertiesObjectStorage,
-  PublicCatalogProductPropertiesObjectStorageClassType,
-  PublicCatalogProductPropertiesObjectStorageInternetTrafficType,
-  PublicCatalogProductPropertiesObjectStorageRegionTrafficType,
-  PublicCatalogProductPropertiesObjectStorageRestoreType,
   PublicCatalogProductPropertiesSecretManager,
+  PublicCatalogProductPropertiesServerlessFunctions,
+  PublicCatalogProductEnvironmentalImpactEstimation,
+  PublicCatalogProductLocality,
+  PublicCatalogProductPrice,
+  PublicCatalogProductProperties,
   PublicCatalogProductUnitOfMeasure,
+  PublicCatalogProduct,
+  ListPublicCatalogProductsResponse,
 } from './types.gen.js'
 
 const unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical = (data: unknown): PublicCatalogProductPropertiesHardwareCPUPhysical => {
@@ -547,6 +548,17 @@ const unmarshalPublicCatalogProductPropertiesSecretManager = (data: unknown): Pu
   } as PublicCatalogProductPropertiesSecretManager
 }
 
+const unmarshalPublicCatalogProductPropertiesServerlessFunctions = (data: unknown): PublicCatalogProductPropertiesServerlessFunctions => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessFunctions' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessFunctions
+}
+
 const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (data: unknown): PublicCatalogProductEnvironmentalImpactEstimation => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -611,6 +623,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     managedRelationalDatabase: data.managed_relational_database ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabase(data.managed_relational_database) : undefined,
     objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
     secretManager: data.secret_manager ? unmarshalPublicCatalogProductPropertiesSecretManager(data.secret_manager) : undefined,
+    serverlessFunctions: data.serverless_functions ? unmarshalPublicCatalogProductPropertiesServerlessFunctions(data.serverless_functions) : undefined,
   } as PublicCatalogProductProperties
 }
 
