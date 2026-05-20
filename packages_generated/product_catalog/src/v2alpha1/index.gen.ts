@@ -61,6 +61,7 @@ export type {
   PublicCatalogProductPropertiesObjectStorageRestoreType,
   PublicCatalogProductPropertiesObjectStorageRestoreTypeRestoreType,
   PublicCatalogProductPropertiesSecretManager,
+  PublicCatalogProductPropertiesServerlessFunctions,
   PublicCatalogProductStatus,
   PublicCatalogProductUnitOfMeasure,
   PublicCatalogProductUnitOfMeasureCountableUnit,
