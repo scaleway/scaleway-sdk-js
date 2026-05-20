@@ -31,6 +31,7 @@ import type {
   TriggerCronConfig,
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
+  UpdateJobDefinitionRequestUpdateRetryPolicy,
   UpdateSecretRequest,
   UpdateTriggerRequest,
   UpdateTriggerRequestCronConfig,
@@ -409,6 +410,13 @@ const marshalUpdateJobDefinitionRequestCronScheduleConfig = (
   timezone: request.timezone,
 })
 
+const marshalUpdateJobDefinitionRequestUpdateRetryPolicy = (
+  request: UpdateJobDefinitionRequestUpdateRetryPolicy,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  max_retries: request.maxRetries,
+})
+
 export const marshalUpdateJobDefinitionRequest = (
   request: UpdateJobDefinitionRequest,
   defaults: DefaultValues,
@@ -424,7 +432,7 @@ export const marshalUpdateJobDefinitionRequest = (
   local_storage_capacity: request.localStorageCapacity,
   memory_limit: request.memoryLimit,
   name: request.name,
-  retry_policy: ((request.retryPolicy !== undefined) ?  marshalRetryPolicy(request.retryPolicy, defaults): undefined),
+  retry_policy: ((request.retryPolicy !== undefined) ?  marshalUpdateJobDefinitionRequestUpdateRetryPolicy(request.retryPolicy, defaults): undefined),
   startup_command: request.startupCommand,
 })
 

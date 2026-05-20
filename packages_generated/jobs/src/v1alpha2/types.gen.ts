@@ -368,6 +368,11 @@ export interface UpdateJobDefinitionRequestCronScheduleConfig {
 }
 
 
+export interface UpdateJobDefinitionRequestUpdateRetryPolicy {
+  maxRetries?: number
+}
+
+
 export interface UpdateTriggerRequestCronConfig {
   /**
    * CRON schedule in UNIX format.
@@ -831,7 +836,7 @@ Environment variables and secrets can be included, and will be expanded before t
   /**
    * Retry behaviour in case of job failure.
    */
-  retryPolicy?: RetryPolicy
+  retryPolicy?: UpdateJobDefinitionRequestUpdateRetryPolicy
 }
 
 
