@@ -477,7 +477,7 @@ export interface IP {
 
 export interface Offer {
   /**
-   * ID of the offer.
+   * ID of the offer (aka product.id).
    */
   id: number
   /**
@@ -496,6 +496,10 @@ export interface Offer {
    * Price of the offer.
    */
   pricing?: Money
+  /**
+   * Original Dedibox ID of the offer.
+   */
+  offerId?: number
   /**
    * Server info if it is a server offer.
    *
