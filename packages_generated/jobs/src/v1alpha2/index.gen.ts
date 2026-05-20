@@ -52,6 +52,7 @@ export type {
   TriggerCronConfig,
   UpdateJobDefinitionRequest,
   UpdateJobDefinitionRequestCronScheduleConfig,
+  UpdateJobDefinitionRequestUpdateRetryPolicy,
   UpdateSecretRequest,
   UpdateTriggerRequest,
   UpdateTriggerRequestCronConfig,
