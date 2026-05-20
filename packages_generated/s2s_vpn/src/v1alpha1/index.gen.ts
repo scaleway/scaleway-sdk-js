@@ -18,6 +18,7 @@ export type {
   CreateConnectionRequest,
   CreateConnectionRequestBgpConfig,
   CreateConnectionRequestInitiationPolicy,
+  CreateConnectionRequestSecret,
   CreateConnectionResponse,
   CreateCustomerGatewayRequest,
   CreateRoutingPolicyRequest,
