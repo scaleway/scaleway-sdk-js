@@ -8,6 +8,7 @@ export type ResourceType =
   | 'instance_server'
   | 'instance_volume'
   | 'instance_image'
+  | 'instance_security_group'
   | 'k8s_cluster'
   | 'k8s_pool'
   | 'k8s_node'
@@ -46,6 +47,10 @@ export type ResourceType =
   | 'obs_datasource'
   | 'obs_token'
   | 'obs_alert'
+  | 'svpn_vpn_gateway'
+  | 'svpn_customer_gateway'
+  | 'svpn_connection'
+  | 'svpn_routing_policy'
 
 export interface BrmServerInfo {
   ip: string
