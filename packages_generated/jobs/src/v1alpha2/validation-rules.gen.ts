@@ -143,6 +143,12 @@ export const UpdateJobDefinitionRequestCronScheduleConfig = {
   },
 }
 
+export const UpdateJobDefinitionRequestUpdateRetryPolicy = {
+  maxRetries: {
+    lessThanOrEqual: 5,
+  },
+}
+
 export const UpdateSecretRequest = {
   secretManagerVersion: {
     minLength: 1,
