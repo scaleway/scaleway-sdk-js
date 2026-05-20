@@ -1,18 +1,18 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  AttachIPRequest,
-  BookIPRequest,
-  CustomResource,
-  DetachIPRequest,
-  IP,
-  ListIPsResponse,
-  MoveIPRequest,
-  ReleaseIPSetRequest,
   Resource,
   Reverse,
   Source,
+  IP,
+  ListIPsResponse,
+  CustomResource,
+  AttachIPRequest,
+  BookIPRequest,
+  DetachIPRequest,
+  MoveIPRequest,
+  ReleaseIPSetRequest,
   UpdateIPRequest,
 } from './types.gen.js'
 

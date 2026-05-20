@@ -1118,8 +1118,8 @@ importers:
   packages_generated/messageq:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std
@@ -1275,8 +1275,8 @@ importers:
   packages_generated/search:
     dependencies:
       '@scaleway/random-name':
-        specifier: 5.1.1
-        version: 5.1.1
+        specifier: 5.1.4
+        version: 5.1.4
       '@scaleway/sdk-std':
         specifier: workspace:*
         version: link:../std

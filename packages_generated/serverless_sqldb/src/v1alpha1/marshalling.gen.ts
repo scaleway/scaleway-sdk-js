@@ -1,12 +1,12 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  CreateDatabaseRequest,
-  Database,
   DatabaseBackup,
+  Database,
   ListDatabaseBackupsResponse,
   ListDatabasesResponse,
+  CreateDatabaseRequest,
   RestoreDatabaseFromBackupRequest,
   UpdateDatabaseRequest,
 } from './types.gen.js'

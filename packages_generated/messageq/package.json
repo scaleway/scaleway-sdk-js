@@ -1,0 +1,53 @@
+{
+  "name": "@scaleway/sdk-messageq",
+  "version": "1.0.0",
+  "description": "Scaleway SDK messageq",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "directory": "packages_generated/messageq"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.gen.d.ts",
+      "default": "./dist/index.gen.js"
+    },
+    "./*": {
+      "types": "./dist/*/index.gen.d.ts",
+      "default": "./dist/*/index.gen.js"
+    },
+    "./metadata": {
+      "types": "./dist/metadata.gen.d.ts",
+      "default": "./dist/metadata.gen.js"
+    },
+    "./*/metadata": {
+      "types": "./dist/*/metadata.gen.d.ts",
+      "default": "./dist/*/metadata.gen.js"
+    }
+  },
+  "scripts": {
+    "package:check": "pnpm publint",
+    "typecheck": "tsgo --noEmit",
+    "type:generate": "tsgo --declaration -p tsconfig.build.json",
+    "build": "vite build --config vite.config.ts && pnpm run type:generate",
+    "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
+  },
+  "dependencies": {
+    "@scaleway/random-name": "5.1.4",
+    "@scaleway/sdk-std": "workspace:*"
+  },
+  "devDependencies": {
+    "@scaleway/sdk-client": "workspace:^"
+  },
+  "peerDependencies": {
+    "@scaleway/sdk-client": "workspace:^"
+  },
+  "engines": {
+    "node": ">=20.18.3"
+  }
+}

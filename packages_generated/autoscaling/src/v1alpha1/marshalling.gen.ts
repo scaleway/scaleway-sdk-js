@@ -1,30 +1,30 @@
 
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalMapOfObject, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Capacity,
-  CreateInstanceGroupRequest,
-  CreateInstancePolicyRequest,
-  CreateInstanceTemplateRequest,
+  Loadbalancer,
   InstanceGroup,
-  InstanceGroupEvent,
+  Metric,
   InstancePolicy,
+  VolumeInstanceTemplateFromEmpty,
+  VolumeInstanceTemplateFromSnapshot,
+  VolumeInstanceTemplate,
   InstanceTemplate,
+  InstanceGroupEvent,
   ListInstanceGroupEventsResponse,
   ListInstanceGroupsResponse,
   ListInstancePoliciesResponse,
   ListInstanceTemplatesResponse,
-  Loadbalancer,
-  Metric,
-  UpdateInstanceGroupRequest,
+  CreateInstanceGroupRequest,
+  CreateInstancePolicyRequest,
+  CreateInstanceTemplateRequest,
   UpdateInstanceGroupRequestCapacity,
   UpdateInstanceGroupRequestLoadbalancer,
-  UpdateInstancePolicyRequest,
+  UpdateInstanceGroupRequest,
   UpdateInstancePolicyRequestMetric,
+  UpdateInstancePolicyRequest,
   UpdateInstanceTemplateRequest,
-  VolumeInstanceTemplate,
-  VolumeInstanceTemplateFromEmpty,
-  VolumeInstanceTemplateFromSnapshot,
 } from './types.gen.js'
 
 const unmarshalCapacity = (data: unknown): Capacity => {

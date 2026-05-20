@@ -71,7 +71,7 @@
     "tools/**/*.ts": [
       "pnpm run format"
     ],
-    "*.y?(a)ml": [
+    "!(pnpm-lock).y?(a)ml": [
       "pnpm oxfmt --write"
     ],
     "*.md?(x)": [

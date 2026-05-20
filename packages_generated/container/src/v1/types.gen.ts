@@ -973,6 +973,9 @@ export type GetContainerRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * UUID of the container to get.
+   */
   containerId: string
 }
 
@@ -982,6 +985,9 @@ export type GetDomainRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * UUID of the domain to get.
+   */
   domainId: string
 }
 
@@ -991,6 +997,9 @@ export type GetNamespaceRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * UUID of the namespace to get.
+   */
   namespaceId: string
 }
 
@@ -1008,6 +1017,9 @@ export type GetTriggerRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * ID of the trigger to get.
+   */
   triggerId: string
 }
 

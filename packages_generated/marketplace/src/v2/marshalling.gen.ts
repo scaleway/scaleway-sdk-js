@@ -3,12 +3,12 @@ import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/
 import type {
   Category,
   Image,
+  LocalImage,
+  Version,
   ListCategoriesResponse,
   ListImagesResponse,
   ListLocalImagesResponse,
   ListVersionsResponse,
-  LocalImage,
-  Version,
 } from './types.gen.js'
 
 export const unmarshalCategory = (data: unknown): Category => {
