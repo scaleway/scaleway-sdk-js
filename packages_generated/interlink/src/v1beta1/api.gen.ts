@@ -161,6 +161,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/partners`,
         urlParams: urlParams(
+          ['l3_connectivity', request.l3Connectivity],
           ['order_by', request.orderBy],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
@@ -204,6 +205,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['dedicated_available', request.dedicatedAvailable],
           ['hosting_provider_name', request.hostingProviderName],
+          ['l3_connectivity_partners', request.l3ConnectivityPartners],
           ['link_bandwidth_mbps', request.linkBandwidthMbps],
           ['name', request.name],
           ['order_by', request.orderBy],
