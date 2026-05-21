@@ -87,6 +87,7 @@ const unmarshalPartnerHost = (data: unknown): PartnerHost => {
 
   return {
     disapprovedReason: data.disapproved_reason,
+    l3Connectivity: data.l3_connectivity,
     pairingKey: data.pairing_key,
     partnerId: data.partner_id,
   } as PartnerHost
@@ -149,6 +150,7 @@ export const unmarshalPartner = (data: unknown): Partner => {
     contactEmail: data.contact_email,
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
+    l3Connectivity: data.l3_connectivity,
     logoUrl: data.logo_url,
     name: data.name,
     portalUrl: data.portal_url,

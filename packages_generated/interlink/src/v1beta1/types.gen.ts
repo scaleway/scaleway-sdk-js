@@ -22,6 +22,8 @@ export type DedicatedConnectionStatus =
 export type LinkKind =
   | 'hosted'
   | 'self_hosted'
+  | 'l2_hosted'
+  | 'l3_hosted'
 
 export type LinkStatus =
   | 'unknown_link_status'
@@ -106,6 +108,10 @@ export interface PartnerHost {
    * Reason given by partner to explain why they did not approve the request for a hosted link.
    */
   disapprovedReason?: string
+  /**
+   * Whether or not the partner supports L3 connectivity.
+   */
+  l3Connectivity: boolean
 }
 
 
@@ -306,6 +312,10 @@ export interface Partner {
    * Last modification date of the partner.
    */
   updatedAt?: Date
+  /**
+   * Whether or not the partner supports L3 connectivity.
+   */
+  l3Connectivity: boolean
 }
 
 
@@ -826,6 +836,10 @@ export type ListPartnersRequest = {
    * Filter for partners present (offering a connection) in one of these PoPs.
    */
   popIds?: string[]
+  /**
+   * Filter for partners supporting L3 connectivity.
+   */
+  l3Connectivity?: boolean
 }
 
 
@@ -871,13 +885,17 @@ export type ListPopsRequest = {
    */
   partnerId?: string
   /**
-   * Filter for PoPs with a shared connection allowing this bandwidth size. Note that we cannot guarantee that PoPs returned will have available capacity.
+   * Filter for PoPs with a connection allowing this bandwidth size. Note that we cannot guarantee that PoPs returned will have available capacity.
    */
   linkBandwidthMbps?: number
   /**
    * Filter for PoPs with a dedicated connection available for self-hosted links.
    */
   dedicatedAvailable?: boolean
+  /**
+   * Filter for PoPs with a shared connection available from a partner supporting L3 connectivity.
+   */
+  l3ConnectivityPartners?: boolean
 }
 
 
