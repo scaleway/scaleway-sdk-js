@@ -33,8 +33,8 @@ import type {
   DeleteEndpointRequest,
   DeleteUserRequest,
   Deployment,
+  DownloadDeploymentCertificateAuthorityRequest,
   Endpoint,
-  GetDeploymentCertificateAuthorityRequest,
   GetDeploymentRequest,
   ListDeploymentsRequest,
   ListDeploymentsResponse,
@@ -371,7 +371,7 @@ export class API extends ParentAPI {
     )
 
   
-  getDeploymentCertificateAuthority = (request: Readonly<GetDeploymentCertificateAuthorityRequest>) =>
+  downloadDeploymentCertificateAuthority = (request: Readonly<DownloadDeploymentCertificateAuthorityRequest>) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
