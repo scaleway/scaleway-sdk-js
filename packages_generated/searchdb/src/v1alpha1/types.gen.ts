@@ -418,7 +418,7 @@ export type DeleteUserRequest = {
 }
 
 
-export type GetDeploymentCertificateAuthorityRequest = {
+export type DownloadDeploymentCertificateAuthorityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */

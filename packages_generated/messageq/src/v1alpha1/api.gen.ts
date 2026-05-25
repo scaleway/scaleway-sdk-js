@@ -33,6 +33,7 @@ import type {
   DeleteEndpointRequest,
   DeleteUserRequest,
   Deployment,
+  DownloadDeploymentCertificateAuthorityRequest,
   Endpoint,
   GetDeploymentRequest,
   ListDeploymentsRequest,
@@ -366,6 +367,19 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
+      },
+    )
+
+  
+  downloadDeploymentCertificateAuthority = (request: Readonly<DownloadDeploymentCertificateAuthorityRequest>) =>
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificate-authority`,
+        urlParams: urlParams(
+          ['dl', 1],
+        ),
+        responseType: 'blob',
       },
     )
 
