@@ -6,6 +6,12 @@ export interface ScwRequest {
   body?: string
   urlParams?: URLSearchParams
   responseType?: 'json' | 'text' | 'blob'
+  /**
+   * When true, ensures Modern IAM compliance for listing methods by injecting
+   * `defaultOrganizationId` if neither `organization_id` nor `project_id` is
+   * already present in the request's URL parameters.
+   */
+  miamScopeGuard?: boolean
 }
 
 /**

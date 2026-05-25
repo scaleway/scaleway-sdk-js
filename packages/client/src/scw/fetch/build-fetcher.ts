@@ -12,6 +12,31 @@ import { responseParser } from './response-parser.js'
 import type { ResponseUnmarshaller, ScwRequest } from './types.js'
 
 /**
+ * Ensures Modern IAM compliance for listing methods: injects `defaultOrganizationId`
+ * into URL params when `miamScopeGuard` is enabled and no scope is already set.
+ *
+ * @param request - A scaleway request
+ * @param settings - The settings
+ * @returns A new request with the scope guard applied, or the original if not needed
+ *
+ * @internal
+ */
+export const applyMiamScopeGuard = (
+  request: Readonly<ScwRequest>,
+  settings: Readonly<Settings>,
+): Readonly<ScwRequest> => {
+  if (!request.miamScopeGuard || !settings.defaultOrganizationId) return request
+
+  const params = request.urlParams ?? new URLSearchParams()
+  if (params.has('organization_id') || params.has('project_id')) return request
+
+  const newParams = new URLSearchParams(params)
+  newParams.set('organization_id', settings.defaultOrganizationId)
+
+  return { ...request, urlParams: newParams }
+}
+
+/**
  * Builds Request from {@link ScwRequest} & {@link Settings}.
  *
  * @param request - A scaleway request
@@ -71,7 +96,7 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     requestNumber += 1
     const requestId = `${requestNumber}`
     const reqInterceptors = prepareRequest(requestId)
-    const finalRequest = await reqInterceptors(buildRequest(request, settings))
+    const finalRequest = await reqInterceptors(buildRequest(applyMiamScopeGuard(request, settings), settings))
 
     try {
       const response = await httpClient(finalRequest)

@@ -2,7 +2,7 @@ import { afterAll, describe, expect, it, vi } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser.js'
 import { addHeaderInterceptor } from '../../../internal/interceptors/helpers.js'
 import type { Settings } from '../../client-settings.js'
-import { buildFetcher, buildRequest } from '../build-fetcher.js'
+import { applyMiamScopeGuard, buildFetcher, buildRequest } from '../build-fetcher.js'
 import type { ScwRequest } from '../types.js'
 
 const DEFAULT_SETTINGS: Settings = {
@@ -20,6 +20,80 @@ const SCW_POST_REQUEST: ScwRequest = {
   method: 'POST',
   path: '/undefined',
 }
+
+const ORGANIZATION_ID = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+const PROJECT_ID = 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy'
+
+describe('applyMiamScopeGuard', () => {
+  const settingsWithOrg: Settings = {
+    ...DEFAULT_SETTINGS,
+    defaultOrganizationId: ORGANIZATION_ID,
+  }
+
+  it('does nothing when miamScopeGuard is not set', () => {
+    const req: ScwRequest = { method: 'GET', path: '/test' }
+    expect(applyMiamScopeGuard(req, settingsWithOrg)).toBe(req)
+  })
+
+  it('does nothing when defaultOrganizationId is not set in settings', () => {
+    const req: ScwRequest = { method: 'GET', path: '/test', miamScopeGuard: true }
+    expect(applyMiamScopeGuard(req, DEFAULT_SETTINGS)).toBe(req)
+  })
+
+  it('injects defaultOrganizationId when no scope is set', () => {
+    const req: ScwRequest = {
+      method: 'GET',
+      path: '/test',
+      miamScopeGuard: true,
+      urlParams: new URLSearchParams([['page', '1']]),
+    }
+    const result = applyMiamScopeGuard(req, settingsWithOrg)
+    expect(result.urlParams?.get('organization_id')).toBe(ORGANIZATION_ID)
+    expect(result.urlParams?.get('page')).toBe('1')
+  })
+
+  it('injects defaultOrganizationId when urlParams is undefined', () => {
+    const req: ScwRequest = { method: 'GET', path: '/test', miamScopeGuard: true }
+    const result = applyMiamScopeGuard(req, settingsWithOrg)
+    expect(result.urlParams?.get('organization_id')).toBe(ORGANIZATION_ID)
+  })
+
+  it('does not inject when organization_id is already set', () => {
+    const req: ScwRequest = {
+      method: 'GET',
+      path: '/test',
+      miamScopeGuard: true,
+      urlParams: new URLSearchParams([['organization_id', 'other-org-id']]),
+    }
+    const result = applyMiamScopeGuard(req, settingsWithOrg)
+    expect(result.urlParams?.get('organization_id')).toBe('other-org-id')
+    expect(result).toBe(req)
+  })
+
+  it('does not inject when project_id is already set', () => {
+    const req: ScwRequest = {
+      method: 'GET',
+      path: '/test',
+      miamScopeGuard: true,
+      urlParams: new URLSearchParams([['project_id', PROJECT_ID]]),
+    }
+    const result = applyMiamScopeGuard(req, settingsWithOrg)
+    expect(result.urlParams?.get('organization_id')).toBeNull()
+    expect(result).toBe(req)
+  })
+
+  it('does not mutate the original request', () => {
+    const originalParams = new URLSearchParams([['page', '1']])
+    const req: ScwRequest = {
+      method: 'GET',
+      path: '/test',
+      miamScopeGuard: true,
+      urlParams: originalParams,
+    }
+    applyMiamScopeGuard(req, settingsWithOrg)
+    expect(originalParams.has('organization_id')).toBe(false)
+  })
+})
 
 describe(`buildRequest`, () => {
   it(`has the specified method & url`, () => {
