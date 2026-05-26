@@ -94,6 +94,7 @@ export type {
   VpcConnectorInfo,
   VpcGwGatewayInfo,
   VpcGwGatewayNetworkInfo,
+  VpcIngressRuleInfo,
   VpcPrivateNetworkInfo,
   VpcRouteInfo,
   VpcSubnetInfo,
