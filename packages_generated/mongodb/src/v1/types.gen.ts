@@ -85,6 +85,16 @@ export type VolumeType =
   | 'sbs_5k'
   | 'sbs_15k'
 
+export interface EngineUpgrade {
+  newVersionId: string
+}
+
+
+export interface ServiceUpdate {
+  serviceName: string
+}
+
+
 /**
  * Private Network details.
  */
@@ -103,13 +113,17 @@ export interface EndpointPublicNetworkDetails {
 }
 
 
-export interface EngineUpgrade {
-  newVersionId: string
-}
-
-
-export interface ServiceUpdate {
-  serviceName: string
+export interface Workflow {
+  /**
+   *
+   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate' could be set.
+   */
+  engineUpgrade?: EngineUpgrade
+  /**
+   *
+   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate' could be set.
+   */
+  serviceUpdate?: ServiceUpdate
 }
 
 
@@ -168,6 +182,54 @@ export interface InstanceSnapshotSchedule {
 }
 
 
+export interface Maintenance {
+  /**
+   * ID of the maintenance.
+   */
+  id: string
+  /**
+   * ID of the instance on which the maintenance is applied.
+   */
+  instanceId: string
+  /**
+   * Creation date of the maintenance.
+   */
+  createdAt?: Date
+  /**
+   * Start date of the maintenance.
+   */
+  startsAt?: Date
+  /**
+   * Stop date of the maintenance.
+   */
+  stopsAt?: Date
+  /**
+   * Current status of the maintenance.
+   */
+  status: MaintenanceStatus
+  /**
+   * Forced application date of the maintenance.
+   */
+  forcedAt?: Date
+  /**
+   * Application date of the maintenance.
+   */
+  appliedAt?: Date
+  /**
+   * Usertype who launched the maintenance.
+   */
+  appliedBy: MaintenanceAppliedBy
+  /**
+   * Workflow to be applied during maintenance.
+   */
+  workflow?: Workflow
+  /**
+   * Reason of the maintenance.
+   */
+  reason: string
+}
+
+
 export interface Volume {
   /**
    * Type of volume where data is stored.
@@ -177,20 +239,6 @@ export interface Volume {
    * Volume size.
    */
   sizeBytes: number
-}
-
-
-export interface Workflow {
-  /**
-   *
-   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate' could be set.
-   */
-  engineUpgrade?: EngineUpgrade
-  /**
-   *
-   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate' could be set.
-   */
-  serviceUpdate?: ServiceUpdate
 }
 
 
@@ -318,54 +366,10 @@ export interface Instance {
    * List of settings applied to the Database Instance.
    */
   settings: InstanceSetting[]
-}
-
-
-export interface Maintenance {
   /**
-   * ID of the maintenance.
+   * List of pending maintenances applicable to the Database Instance.
    */
-  id: string
-  /**
-   * ID of the instance on which the maintenance is applied.
-   */
-  instanceId: string
-  /**
-   * Creation date of the maintenance.
-   */
-  createdAt?: Date
-  /**
-   * Start date of the maintenance.
-   */
-  startsAt?: Date
-  /**
-   * Stop date of the maintenance.
-   */
-  stopsAt?: Date
-  /**
-   * Current status of the maintenance.
-   */
-  status: MaintenanceStatus
-  /**
-   * Forced application date of the maintenance.
-   */
-  forcedAt?: Date
-  /**
-   * Application date of the maintenance.
-   */
-  appliedAt?: Date
-  /**
-   * Usertype who launched the maintenance.
-   */
-  appliedBy: MaintenanceAppliedBy
-  /**
-   * Workflow to be applied during maintenance.
-   */
-  workflow?: Workflow
-  /**
-   * Reason of the maintenance.
-   */
-  reason: string
+  maintenances: Maintenance[]
 }
 
 
@@ -753,6 +757,10 @@ export type ListInstancesRequest = {
    * Project ID to list the instances of.
    */
   projectId?: string
+  /**
+   * Retrieve pending maintenances for the database instances if given.
+   */
+  hasMaintenance?: boolean
   page?: number
   pageSize?: number
 }
