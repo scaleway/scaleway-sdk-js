@@ -16,6 +16,7 @@ export type ProductCategory =
   | 'managed_relational_databases'
   | 'managed_mongodb'
   | 'managed_redis'
+  | 'managed_inference'
 
 export type ReportType =
   | 'unknown_report_type'
@@ -30,6 +31,7 @@ export type ServiceCategory =
   | 'network'
   | 'containers'
   | 'databases'
+  | 'ai'
 
 export interface Impact {
   /**
