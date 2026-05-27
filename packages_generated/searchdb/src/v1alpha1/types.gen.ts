@@ -418,7 +418,7 @@ export type DeleteUserRequest = {
 }
 
 
-export type GetDeploymentCertificateAuthorityRequest = {
+export type DownloadDeploymentCertificateAuthorityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
@@ -478,10 +478,6 @@ export type ListDeploymentsRequest = {
    * Deployment name to filter for.
    */
   name?: string
-  /**
-   * Engine version to filter for.
-   */
-  version?: string
 }
 
 

@@ -33,8 +33,8 @@ import type {
   DeleteEndpointRequest,
   DeleteUserRequest,
   Deployment,
+  DownloadDeploymentCertificateAuthorityRequest,
   Endpoint,
-  GetDeploymentCertificateAuthorityRequest,
   GetDeploymentRequest,
   ListDeploymentsRequest,
   ListDeploymentsResponse,
@@ -194,7 +194,6 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['tags', request.tags],
-          ['version', request.version],
         ),
       },
       unmarshalListDeploymentsResponse,
@@ -372,7 +371,7 @@ export class API extends ParentAPI {
     )
 
   
-  getDeploymentCertificateAuthority = (request: Readonly<GetDeploymentCertificateAuthorityRequest>) =>
+  downloadDeploymentCertificateAuthority = (request: Readonly<DownloadDeploymentCertificateAuthorityRequest>) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',

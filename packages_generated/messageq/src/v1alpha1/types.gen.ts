@@ -403,6 +403,15 @@ export type DeleteUserRequest = {
 }
 
 
+export type DownloadDeploymentCertificateAuthorityRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  deploymentId: string
+}
+
+
 /**
  * Retrieve a deployment specified by the ID.
  */

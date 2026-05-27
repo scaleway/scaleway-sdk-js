@@ -19,6 +19,7 @@ import type {
   ListVpnGatewaysResponse,
   RenewConnectionPskResponse,
   CreateConnectionRequestBgpConfig,
+  CreateConnectionRequestSecret,
   CreateConnectionRequest,
   CreateCustomerGatewayRequest,
   CreateRoutingPolicyRequest,
@@ -322,6 +323,14 @@ const marshalCreateConnectionRequestBgpConfig = (
   routing_policy_id: request.routingPolicyId,
 })
 
+const marshalCreateConnectionRequestSecret = (
+  request: CreateConnectionRequestSecret,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  id: request.id,
+  revision: request.revision,
+})
+
 export const marshalCreateConnectionRequest = (
   request: CreateConnectionRequest,
   defaults: DefaultValues,
@@ -336,6 +345,7 @@ export const marshalCreateConnectionRequest = (
   is_ipv6: request.isIpv6,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  secret: ((request.secret !== undefined) ?  marshalCreateConnectionRequestSecret(request.secret, defaults): undefined),
   tags: request.tags,
   vpn_gateway_id: request.vpnGatewayId,
 })

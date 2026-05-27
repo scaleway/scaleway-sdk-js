@@ -150,6 +150,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
         urlParams: urlParams(
+          ['has_maintenance', request.hasMaintenance],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],

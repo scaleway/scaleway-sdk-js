@@ -14,6 +14,7 @@ export type {
   DeleteUserRequest,
   Deployment,
   DeploymentStatus,
+  DownloadDeploymentCertificateAuthorityRequest,
   Endpoint,
   EndpointPrivateNetworkDetails,
   EndpointPublicDetails,
