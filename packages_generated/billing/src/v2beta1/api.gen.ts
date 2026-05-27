@@ -10,6 +10,7 @@ import {
 import {
   unmarshalDiscount,
   unmarshalInvoice,
+  unmarshalListChargesResponse,
   unmarshalListConsumptionsResponse,
   unmarshalListDiscountsResponse,
   unmarshalListInvoicesResponse,
@@ -19,8 +20,10 @@ import type {
   Discount,
   DownloadInvoiceRequest,
   ExportInvoicesRequest,
+  FinOpsApiListChargesRequest,
   GetInvoiceRequest,
   Invoice,
+  ListChargesResponse,
   ListConsumptionsRequest,
   ListConsumptionsResponse,
   ListDiscountsRequest,
@@ -234,6 +237,42 @@ export class API extends ParentAPI {
         ),
       },
       unmarshalDiscount,
+    )
+
+  
+}
+
+/**
+ * Billing FinOps API.
+ */
+export class FinOpsAPI extends ParentAPI {
+  /**
+   * List charges. List charges for organizations or projects. You must specify at least `organization_ids` or `project_ids`.
+   *
+   * @param request - The request {@link FinOpsApiListChargesRequest}
+   * @returns A Promise of ListChargesResponse
+   */
+  listCharges = (request: Readonly<FinOpsApiListChargesRequest> = {}) =>
+    this.client.fetch<ListChargesResponse>(
+      {
+        method: 'GET',
+        path: `/billing/v2beta1/charges`,
+        urlParams: urlParams(
+          ['clamp_to_time_range', request.clampToTimeRange],
+          ['end_date_before', request.endDateBefore],
+          ['invoice_ids', request.invoiceIds],
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['page_token', request.pageToken],
+          ['project_ids', request.projectIds],
+          ['resource_ids', request.resourceIds],
+          ['resource_names', request.resourceNames],
+          ['skus', request.skus],
+          ['start_date_after', request.startDateAfter],
+        ),
+      },
+      unmarshalListChargesResponse,
     )
 
   
