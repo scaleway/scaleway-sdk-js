@@ -102,6 +102,7 @@ export const unmarshalVolume = (data: unknown): Volume => {
   return {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
+    kmsKeyId: data.kms_key_id,
     lastDetachedAt: unmarshalDate(data.last_detached_at),
     name: data.name,
     parentSnapshotId: data.parent_snapshot_id,
@@ -201,6 +202,7 @@ export const marshalCreateVolumeRequest = (
   request: CreateVolumeRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  kms_key_id: request.kmsKeyId,
   name: request.name || randomName('vol'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,  
