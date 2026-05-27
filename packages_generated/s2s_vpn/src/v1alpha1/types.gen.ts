@@ -133,14 +133,7 @@ export interface VpnGatewayPublicConfig {
 }
 
 
-export interface CreateConnectionRequestBgpConfig {
-  routingPolicyId: string
-  privateIp?: string
-  peerPrivateIp?: string
-}
-
-
-export interface CreateConnectionRequestSecret {
+export interface ChangeConnectionPskRequestSecret {
   id: string
   revision?: number
 }
@@ -247,6 +240,19 @@ export interface Connection {
    * Region of the connection.
    */
   region: ScwRegion
+}
+
+
+export interface CreateConnectionRequestBgpConfig {
+  routingPolicyId: string
+  privateIp?: string
+  peerPrivateIp?: string
+}
+
+
+export interface CreateConnectionRequestSecret {
+  id: string
+  revision?: number
 }
 
 
@@ -463,6 +469,30 @@ export interface VpnGateway {
    * Region of the VPN gateway.
    */
   region: ScwRegion
+}
+
+
+export type ChangeConnectionPskRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the connection to renew the PSK.
+   */
+  connectionId: string
+  /**
+   * New PSK Secret of the connection.
+   */
+  secret: ChangeConnectionPskRequestSecret
+}
+
+
+export interface ChangeConnectionPskResponse {
+  /**
+   * This connection.
+   */
+  connection?: Connection
 }
 
 
@@ -1060,6 +1090,10 @@ export type RenewConnectionPskRequest = {
    * ID of the connection to renew the PSK.
    */
   connectionId: string
+  /**
+   * Generate a new revision or update to the latest existing one.
+   */
+  generateRevision?: boolean
 }
 
 
