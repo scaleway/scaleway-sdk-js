@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           registry-url: 'https://registry.npmjs.org/'
-          node-version: 20.19.6
+          node-version: 20.20.2
           check-latest: true
       - run: pnpm install
       # need to build tools and install to make tools bin(s) available
