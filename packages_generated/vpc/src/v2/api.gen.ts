@@ -11,7 +11,6 @@ import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
   marshalAddSubnetsRequest,
   unmarshalAddSubnetsResponse,
-  marshalCreateIngressRuleRequest,
   marshalCreatePrivateNetworkRequest,
   marshalCreateRouteRequest,
   marshalCreateVPCConnectorRequest,
@@ -19,8 +18,6 @@ import {
   marshalDeleteSubnetsRequest,
   unmarshalDeleteSubnetsResponse,
   unmarshalGetAclResponse,
-  unmarshalIngressRule,
-  unmarshalListIngressRulesResponse,
   unmarshalListPrivateNetworksResponse,
   unmarshalListSubnetOverlapsResponse,
   unmarshalListSubnetsResponse,
@@ -30,7 +27,6 @@ import {
   unmarshalRoute,
   marshalSetAclRequest,
   unmarshalSetAclResponse,
-  marshalUpdateIngressRuleRequest,
   marshalUpdatePrivateNetworkRequest,
   marshalUpdateRouteRequest,
   marshalUpdateVPCConnectorRequest,
@@ -41,12 +37,10 @@ import {
 import type {
   AddSubnetsRequest,
   AddSubnetsResponse,
-  CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
-  DeleteIngressRuleRequest,
   DeletePrivateNetworkRequest,
   DeleteRouteRequest,
   DeleteSubnetsRequest,
@@ -58,14 +52,10 @@ import type {
   EnableRoutingRequest,
   GetAclRequest,
   GetAclResponse,
-  GetIngressRuleRequest,
   GetPrivateNetworkRequest,
   GetRouteRequest,
   GetVPCConnectorRequest,
   GetVPCRequest,
-  IngressRule,
-  ListIngressRulesRequest,
-  ListIngressRulesResponse,
   ListPrivateNetworksRequest,
   ListPrivateNetworksResponse,
   ListSubnetOverlapsRequest,
@@ -80,7 +70,6 @@ import type {
   Route,
   SetAclRequest,
   SetAclResponse,
-  UpdateIngressRuleRequest,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
   UpdateVPCConnectorRequest,
@@ -668,76 +657,6 @@ export class API extends ParentAPI {
    */
   listSubnetOverlaps = (request: Readonly<ListSubnetOverlapsRequest>) =>
     enrichForPagination('subnetOverlaps', this.pageOfListSubnetOverlaps, request)
-
-  
-  protected pageOfListIngressRules = (request: Readonly<ListIngressRulesRequest> = {}) =>
-    this.client.fetch<ListIngressRulesResponse>(
-      {
-        method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules`,
-        urlParams: urlParams(
-          ['is_ipv6', request.isIpv6],
-          ['nexthop_private_network_id', request.nexthopPrivateNetworkId],
-          ['nexthop_resource_ip', request.nexthopResourceIp],
-          ['order_by', request.orderBy],
-          ['page', request.page],
-          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['tags', request.tags],
-          ['vpc_id', request.vpcId],
-        ),
-      },
-      unmarshalListIngressRulesResponse,
-    )
-  
-  listIngressRules = (request: Readonly<ListIngressRulesRequest> = {}) =>
-    enrichForPagination('rules', this.pageOfListIngressRules, request)
-
-  
-  createIngressRule = (request: Readonly<CreateIngressRuleRequest>) =>
-    this.client.fetch<IngressRule>(
-      {
-        body: JSON.stringify(
-          marshalCreateIngressRuleRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules`,
-      },
-      unmarshalIngressRule,
-    )
-
-  
-  getIngressRule = (request: Readonly<GetIngressRuleRequest>) =>
-    this.client.fetch<IngressRule>(
-      {
-        method: 'GET',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules/${validatePathParam('ruleId', request.ruleId)}`,
-      },
-      unmarshalIngressRule,
-    )
-
-  
-  updateIngressRule = (request: Readonly<UpdateIngressRuleRequest>) =>
-    this.client.fetch<IngressRule>(
-      {
-        body: JSON.stringify(
-          marshalUpdateIngressRuleRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'PATCH',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules/${validatePathParam('ruleId', request.ruleId)}`,
-      },
-      unmarshalIngressRule,
-    )
-
-  
-  deleteIngressRule = (request: Readonly<DeleteIngressRuleRequest>) =>
-    this.client.fetch<void>(
-      {
-        method: 'DELETE',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules/${validatePathParam('ruleId', request.ruleId)}`,
-      },
-    )
 
   
 }

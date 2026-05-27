@@ -65,6 +65,11 @@ export const ListDeploymentsRequest = {
     greaterThanOrEqual: 1,
     lessThanOrEqual: 100,
   },
+  version: {
+    maxLength: 128,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/,
+  },
 }
 
 export const ListNodeTypesRequest = {

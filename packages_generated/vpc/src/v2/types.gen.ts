@@ -14,14 +14,6 @@ export type Action =
   | 'accept'
   | 'drop'
 
-export type ListIngressRulesRequestOrderBy =
-  | 'created_at_asc'
-  | 'created_at_desc'
-  | 'source_asc'
-  | 'source_desc'
-  | 'prefix_len_asc'
-  | 'prefix_len_desc'
-
 export type ListPrivateNetworksRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -251,20 +243,6 @@ export interface AclRule {
 }
 
 
-export interface IngressRule {
-  id: string
-  vpcId: string
-  createdAt?: Date
-  updatedAt?: Date
-  isIpv6: boolean
-  source: string
-  nexthopResourceIp: string
-  nexthopPrivateNetworkId: string
-  description?: string
-  tags: string[]
-}
-
-
 export interface ListSubnetOverlapsResponseSubnetOverlap {
   subnetId: string
   subnet: string
@@ -398,20 +376,6 @@ export interface AddSubnetsResponse {
 }
 
 
-export type CreateIngressRuleRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  vpcId: string
-  source: string
-  nexthopResourceIp: string
-  nexthopPrivateNetworkId: string
-  description?: string
-  tags?: string[]
-}
-
-
 export type CreatePrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -525,15 +489,6 @@ export type CreateVPCRequest = {
    * Enable routing between Private Networks in the VPC.
    */
   enableRouting: boolean
-}
-
-
-export type DeleteIngressRuleRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  ruleId: string
 }
 
 
@@ -664,15 +619,6 @@ export interface GetAclResponse {
 }
 
 
-export type GetIngressRuleRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  ruleId: string
-}
-
-
 export type GetPrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -718,28 +664,6 @@ export type GetVPCRequest = {
    * VPC ID.
    */
   vpcId: string
-}
-
-
-export type ListIngressRulesRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  orderBy?: ListIngressRulesRequestOrderBy
-  page?: number
-  pageSize?: number
-  vpcId?: string
-  nexthopResourceIp?: string
-  nexthopPrivateNetworkId?: string
-  isIpv6?: boolean
-  tags?: string[]
-}
-
-
-export interface ListIngressRulesResponse {
-  rules: IngressRule[]
-  totalCount: number
 }
 
 
@@ -1000,20 +924,6 @@ export type SetAclRequest = {
 export interface SetAclResponse {
   rules: AclRule[]
   defaultPolicy: Action
-}
-
-
-export type UpdateIngressRuleRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  ruleId: string
-  source?: string
-  nexthopResourceIp?: string
-  nexthopPrivateNetworkId?: string
-  description?: string
-  tags?: string[]
 }
 
 

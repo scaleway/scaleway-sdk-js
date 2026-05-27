@@ -194,6 +194,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['tags', request.tags],
+          ['version', request.version],
         ),
       },
       unmarshalListDeploymentsResponse,
