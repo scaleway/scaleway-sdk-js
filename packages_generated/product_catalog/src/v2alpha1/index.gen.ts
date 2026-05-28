@@ -40,6 +40,8 @@ export type {
   PublicCatalogProductPropertiesLoadBalancerIPV4Type,
   PublicCatalogProductPropertiesLoadBalancerNodeType,
   PublicCatalogProductPropertiesManagedInference,
+  PublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage,
+  PublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment,
   PublicCatalogProductPropertiesManagedMongoDB,
   PublicCatalogProductPropertiesManagedMongoDBManagementType,
   PublicCatalogProductPropertiesManagedMongoDBNodeType,
