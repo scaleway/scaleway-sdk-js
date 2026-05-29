@@ -323,6 +323,10 @@ export interface Server {
    * Runner configurations applied on the server, optional.
    */
   appliedRunnerConfigurationIds: string[]
+  /**
+   * Status of kernel extensions for the server.
+   */
+  kextEnabled: boolean
 }
 
 
