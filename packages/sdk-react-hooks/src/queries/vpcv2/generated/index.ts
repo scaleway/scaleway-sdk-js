@@ -20,4 +20,8 @@ export { useVpcv2APIGetVPCConnectorQuery } from "./useVpcv2APIGetVPCConnectorQue
 export { useVpcv2APIListSubnetOverlapsQuery } from "./useVpcv2APIListSubnetOverlapsQuery"
 export { useVpcv2APIListSubnetOverlapsInfiniteQuery } from "./useVpcv2APIListSubnetOverlapsInfiniteQuery"
 export { useVpcv2APIListSubnetOverlapsAllQuery } from "./useVpcv2APIListSubnetOverlapsAllQuery"
+export { useVpcv2APIListIngressRulesQuery } from "./useVpcv2APIListIngressRulesQuery"
+export { useVpcv2APIListIngressRulesInfiniteQuery } from "./useVpcv2APIListIngressRulesInfiniteQuery"
+export { useVpcv2APIListIngressRulesAllQuery } from "./useVpcv2APIListIngressRulesAllQuery"
+export { useVpcv2APIGetIngressRuleQuery } from "./useVpcv2APIGetIngressRuleQuery"
 export { useVpcv2APIReload } from "./useVpcv2APIReload"
