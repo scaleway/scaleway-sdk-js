@@ -50,7 +50,7 @@ import { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
 import { Temv1alpha1 } from '@scaleway/sdk-tem'
 import { Testv1 } from '@scaleway/sdk-test'
 import { Vpcv2 } from '@scaleway/sdk-vpc'
-import { Vpcgwv1, Vpcgwv2 } from '@scaleway/sdk-vpcgw'
+import { Vpcgwv2 } from '@scaleway/sdk-vpcgw'
 import { Webhostingv1 } from '@scaleway/sdk-webhosting'
 export { createClient, createAdvancedClient } from '@scaleway/sdk-client'
 
@@ -445,11 +445,10 @@ export const Vpc = {
 }
 
 /**
- * @deprecated Direct version exports are deprecated. Use the 'Vpcgw' namespace instead (e.g., Vpcgw.v1).
+ * @deprecated Direct version exports are deprecated. Use the 'Vpcgw' namespace instead (e.g., Vpcgw.v2).
  */
-export { Vpcgwv1, Vpcgwv2 }
+export { Vpcgwv2 }
 export const Vpcgw = {
-  v1: Vpcgwv1,
   v2: Vpcgwv2,
 }
 

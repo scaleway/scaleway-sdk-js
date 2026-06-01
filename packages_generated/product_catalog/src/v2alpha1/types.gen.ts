@@ -292,6 +292,18 @@ export interface PublicCatalogProductPropertiesLoadBalancerNodeType {
 }
 
 
+export interface PublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage {
+}
+
+
+export interface PublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment {
+  /**
+   * The name of the associated instance GPU to this deployment.
+   */
+  instanceGpuName: string
+}
+
+
 export interface PublicCatalogProductPropertiesManagedMongoDBManagementType {
 }
 
@@ -499,9 +511,21 @@ export interface PublicCatalogProductPropertiesLoadBalancer {
 
 export interface PublicCatalogProductPropertiesManagedInference {
   /**
-   * The name of the associated instance GPU to this node type.
+   * @deprecated The name of the associated instance GPU to this node type. Deprecated, use `deployment.instance_gpu_name` instead.
    */
   instanceGpuName: string
+  /**
+   * The properties related to Managed Inference Deployment.
+   *
+   * One-of ('type'): at most one of 'deployment', 'customModelStorage' could be set.
+   */
+  deployment?: PublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment
+  /**
+   * The properties related to Managed Inference Custom Model Storage.
+   *
+   * One-of ('type'): at most one of 'deployment', 'customModelStorage' could be set.
+   */
+  customModelStorage?: PublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage
 }
 
 

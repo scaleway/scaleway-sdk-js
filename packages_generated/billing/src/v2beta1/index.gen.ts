@@ -2,9 +2,11 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 export {
   API,
+  FinOpsAPI,
 } from './api.gen.js'
 export * from './marshalling.gen.js'
 export type {
+  Charge,
   Discount,
   DiscountCoupon,
   DiscountDiscountMode,
@@ -15,9 +17,12 @@ export type {
   ExportInvoicesRequest,
   ExportInvoicesRequestFileType,
   ExportInvoicesRequestOrderBy,
+  FinOpsApiListChargesRequest,
   GetInvoiceRequest,
   Invoice,
   InvoiceType,
+  ListChargesRequestOrderBy,
+  ListChargesResponse,
   ListConsumptionsRequest,
   ListConsumptionsRequestOrderBy,
   ListConsumptionsResponse,
@@ -34,3 +39,4 @@ export type {
   ListTaxesResponseTax,
   RedeemCouponRequest,
 } from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'

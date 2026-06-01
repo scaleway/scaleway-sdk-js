@@ -11,6 +11,8 @@ import {
 import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN,} from './content.gen.js'
 import {
+  marshalChangeConnectionPskRequest,
+  unmarshalChangeConnectionPskResponse,
   unmarshalConnection,
   marshalCreateConnectionRequest,
   unmarshalCreateConnectionResponse,
@@ -24,6 +26,7 @@ import {
   unmarshalListRoutingPoliciesResponse,
   unmarshalListVpnGatewayTypesResponse,
   unmarshalListVpnGatewaysResponse,
+  marshalRenewConnectionPskRequest,
   unmarshalRenewConnectionPskResponse,
   unmarshalRoutingPolicy,
   marshalSetRoutingPolicyRequest,
@@ -34,6 +37,8 @@ import {
   unmarshalVpnGateway,
 } from './marshalling.gen.js'
 import type {
+  ChangeConnectionPskRequest,
+  ChangeConnectionPskResponse,
   Connection,
   CreateConnectionRequest,
   CreateConnectionResponse,
@@ -354,12 +359,34 @@ export class API extends ParentAPI {
   renewConnectionPsk = (request: Readonly<RenewConnectionPskRequest>) =>
     this.client.fetch<RenewConnectionPskResponse>(
       {
-        body: '{}',
+        body: JSON.stringify(
+          marshalRenewConnectionPskRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/renew-psk`,
       },
       unmarshalRenewConnectionPskResponse,
+    )
+
+  
+  /**
+   * Change pre-shared key. Change pre-shared key for a given connection.
+   *
+   * @param request - The request {@link ChangeConnectionPskRequest}
+   * @returns A Promise of ChangeConnectionPskResponse
+   */
+  changeConnectionPsk = (request: Readonly<ChangeConnectionPskRequest>) =>
+    this.client.fetch<ChangeConnectionPskResponse>(
+      {
+        body: JSON.stringify(
+          marshalChangeConnectionPskRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/change-psk`,
+      },
+      unmarshalChangeConnectionPskResponse,
     )
 
   

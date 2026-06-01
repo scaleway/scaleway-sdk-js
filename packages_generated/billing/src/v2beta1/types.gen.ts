@@ -45,6 +45,10 @@ export type InvoiceType =
   | 'periodic'
   | 'purchase'
 
+export type ListChargesRequestOrderBy =
+  | 'start_date_asc'
+  | 'start_date_desc'
+
 export type ListConsumptionsRequestOrderBy =
   | 'updated_at_desc'
   | 'updated_at_asc'
@@ -102,6 +106,50 @@ export interface DiscountFilter {
    * Boolean to describe if filter is an excluding filter.
    */
   exclude: boolean
+}
+
+
+export interface Charge {
+  /**
+   * ID of the charged organization.
+   */
+  organizationId: string
+  /**
+   * ID of the charged project.
+   */
+  projectId: string
+  /**
+   * ID of the SKU the charge is priced with.
+   */
+  sku: string
+  /**
+   * ID of the invoice including the charge.
+   */
+  invoiceId: string
+  /**
+   * ID of the resource that incurs the charge.
+   */
+  resourceId: string
+  /**
+   * Optional display name assigned to the resource that incurs the charge.
+   */
+  resourceName?: string
+  /**
+   * Price of the charge.
+   */
+  price?: Money
+  /**
+   * Start date of the charge.
+   */
+  startDate?: Date
+  /**
+   * End date of the charge, included.
+   */
+  endDate?: Date
+  /**
+   * Date the charge was last updated.
+   */
+  updatedAt?: Date
 }
 
 
@@ -328,11 +376,75 @@ export type ExportInvoicesRequest = {
 }
 
 
+export type FinOpsApiListChargesRequest = {
+  /**
+   * Sort order of charges in the response.
+   */
+  orderBy?: ListChargesRequestOrderBy
+  /**
+   * Token returned by previous call to list next paginated charges, omitted for first page.
+   */
+  pageToken?: string
+  /**
+   * Number of charges to return per page.
+   */
+  pageSize?: number
+  /**
+   * Minimum start date of charges to filter for, defaults to the start of the billing period.
+   */
+  startDateAfter?: Date
+  /**
+   * Maximum end date of charges to filter for, defaults to the end of the billing period.
+   */
+  endDateBefore?: Date
+  /**
+   * Invoice IDs to filter for, only charges from these invoices will be returned.
+   */
+  invoiceIds?: string[]
+  /**
+   * Organization ID to filter for, only charges for this organization will be returned.
+   */
+  organizationId?: string
+  /**
+   * Project IDs to filter for, only charges for these projects will be returned.
+   */
+  projectIds?: string[]
+  /**
+   * Resource IDs to filter for, only charges for these resources will be returned.
+   */
+  resourceIds?: string[]
+  /**
+   * Resource display names to filter for, only charges for these resources will be returned.
+   */
+  resourceNames?: string[]
+  /**
+   * SKU IDs to filter for, only charges for these SKUs will be returned.
+   */
+  skus?: string[]
+  /**
+   * Clamp charges to the requested time range.
+   */
+  clampToTimeRange?: boolean
+}
+
+
 export type GetInvoiceRequest = {
   /**
    * Invoice ID.
    */
   invoiceId: string
+}
+
+
+export interface ListChargesResponse {
+  /**
+   * Paginated matching charges.
+   */
+  charges: Charge[]
+  /**
+   * Page token to use with following call to keep listing charges if there are more.
+   */
+  nextPageToken?: string
 }
 
 
