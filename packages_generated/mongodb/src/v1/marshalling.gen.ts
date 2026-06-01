@@ -396,6 +396,7 @@ const unmarshalVersion = (data: unknown): Version => {
 
   return {
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    releasedAt: unmarshalDate(data.released_at),
     version: data.version,
   } as Version
 }

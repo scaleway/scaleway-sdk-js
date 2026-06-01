@@ -126,6 +126,7 @@ export const unmarshalServer = (data: unknown): Server => {
     delivered: data.delivered,
     id: data.id,
     ip: data.ip,
+    kextEnabled: data.kext_enabled,
     name: data.name,
     organizationId: data.organization_id,
     os: data.os ? unmarshalOS(data.os) : undefined,

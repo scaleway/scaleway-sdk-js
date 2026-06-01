@@ -486,6 +486,10 @@ export interface Version {
    * Date of End of Life.
    */
   endOfLifeAt?: Date
+  /**
+   * Date of Release.
+   */
+  releasedAt?: Date
 }
 
 
