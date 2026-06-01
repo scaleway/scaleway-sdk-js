@@ -7,11 +7,13 @@ export interface ScwRequest {
   urlParams?: URLSearchParams
   responseType?: 'json' | 'text' | 'blob'
   /**
-   * When true, ensures Modern IAM compliance for listing methods by injecting
-   * `defaultOrganizationId` if neither `organization_id` nor `project_id` is
-   * already present in the request's URL parameters.
+   * Enables the Modern IAM scope guard for listing methods.
+   * - `'org'`: injects `defaultOrganizationId` if neither `organization_id` nor
+   *   `project_id` is already present in the URL parameters.
+   * - `'project'`: injects `defaultProjectId` if neither `project_id` nor
+   *   `organization_id` is already present in the URL parameters.
    */
-  miamScopeGuard?: boolean
+  listScopeGuard?: 'org' | 'project'
 }
 
 /**
