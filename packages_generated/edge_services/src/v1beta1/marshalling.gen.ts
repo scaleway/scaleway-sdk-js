@@ -47,6 +47,7 @@ import type {
   ListVPCEndpointsResponse,
   ListWafStagesResponse,
   Plan,
+  SetPipelineVPCEndpointsResponse,
   SetRouteRulesResponse,
   SetRouteRulesRequestRouteRule,
   AddRouteRulesRequest,
@@ -369,10 +370,12 @@ export const unmarshalVPCEndpoint = (data: unknown): VPCEndpoint => {
   }
 
   return {
+    createdAt: unmarshalDate(data.created_at),
     id: data.id,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     region: data.region,
+    updatedAt: unmarshalDate(data.updated_at),
   } as VPCEndpoint
 }
 
@@ -751,6 +754,20 @@ export const unmarshalPlan = (data: unknown): Plan => {
   } as Plan
 }
 
+export const unmarshalSetPipelineVPCEndpointsResponse = (data: unknown): SetPipelineVPCEndpointsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetPipelineVPCEndpointsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    pipelineId: data.pipeline_id,
+    totalCount: data.total_count,
+    vpcEndpoints: unmarshalArrayOfObject(data.vpc_endpoints, unmarshalVPCEndpoint),
+  } as SetPipelineVPCEndpointsResponse
+}
+
 export const unmarshalSetRouteRulesResponse = (data: unknown): SetRouteRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -979,7 +996,6 @@ export const marshalCreatePipelineRequest = (
   description: request.description,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  vpc_endpoint_ids: request.vpcEndpointIds,
 })
 
 export const marshalCreatePurgeRequestRequest = (
@@ -1190,7 +1206,6 @@ export const marshalUpdatePipelineRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  vpc_endpoint_ids: request.vpcEndpointIds,
 })
 
 export const marshalUpdateRouteStageRequest = (
