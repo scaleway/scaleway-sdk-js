@@ -223,6 +223,10 @@ export interface ClusterVersion {
    */
   logoUrl: string
   /**
+   * Date of Release.
+   */
+  releasedAt?: Date
+  /**
    * Zone of the Redis™ Database Instance.
    */
   zone: ScwZone
