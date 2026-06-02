@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-serverless-sqldb@2.6.1...@scaleway/sdk-serverless-sqldb@2.7.0) (2026-06-02)
+
+
+### Features
+
+* **serverless_sqldb:** add audit-trail parameters in ServerlessDB ([#2919](https://github.com/scaleway/scaleway-sdk-js/issues/2919)) ([9a838bb](https://github.com/scaleway/scaleway-sdk-js/commit/9a838bbf703f3c77201144653563440225aeed1e))
+
+
+
+
+
 ## 2.6.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-serverless-sqldb

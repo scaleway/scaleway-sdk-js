@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.12.1...@scaleway/sdk-audit-trail@2.13.0) (2026-06-02)
+
+
+### Features
+
+* **audit_trail:** add IngressRule resource ([#2980](https://github.com/scaleway/scaleway-sdk-js/issues/2980)) ([9067d7c](https://github.com/scaleway/scaleway-sdk-js/commit/9067d7ca9b2e4da24ee309699641645293f5911e))
+* **audit_trail:** add support for `observability_datasource`, `observability_token` and `observability_exporter` ([#2994](https://github.com/scaleway/scaleway-sdk-js/issues/2994)) ([52365cd](https://github.com/scaleway/scaleway-sdk-js/commit/52365cd149a22fc8551b408af9d20880312a091d))
+* **serverless_sqldb:** add audit-trail parameters in ServerlessDB ([#2919](https://github.com/scaleway/scaleway-sdk-js/issues/2919)) ([9a838bb](https://github.com/scaleway/scaleway-sdk-js/commit/9a838bbf703f3c77201144653563440225aeed1e))
+
+
+
+
+
 ## 2.12.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-audit-trail

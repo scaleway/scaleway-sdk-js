@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-block@2.7.1...@scaleway/sdk-block@2.8.0) (2026-06-02)
+
+
+### Features
+
+* **block:** add kms_key_id to CreateVolumeRequest and Volume ([#2986](https://github.com/scaleway/scaleway-sdk-js/issues/2986)) ([829c6cb](https://github.com/scaleway/scaleway-sdk-js/commit/829c6cb18d07f23b6275d0a1127deec9c975ab54))
+
+
+
+
+
 ## 2.7.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-block

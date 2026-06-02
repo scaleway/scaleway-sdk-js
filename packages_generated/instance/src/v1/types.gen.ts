@@ -394,6 +394,10 @@ export interface PrivateNIC {
    * The zone in which the Private NIC is located.
    */
   zone: ScwZone
+  /**
+   * The list of IPAM IPs associated with this private NIC.
+   */
+  ipamIpIds: string[]
 }
 
 

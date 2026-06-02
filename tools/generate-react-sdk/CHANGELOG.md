@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/generate-react-sdk@0.2.5...@scaleway/generate-react-sdk@0.2.6) (2026-06-02)
+
+**Note:** Version bump only for package @scaleway/generate-react-sdk
+
+
+
+
+
 ## 0.2.5 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/generate-react-sdk

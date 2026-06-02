@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.6.1...@scaleway/sdk@3.7.0) (2026-06-02)
+
+
+### Bug Fixes
+
+* **account:** add organization_id to CompanyAdministrativeDataApi requests to... ([#2934](https://github.com/scaleway/scaleway-sdk-js/issues/2934)) ([8645eb8](https://github.com/scaleway/scaleway-sdk-js/commit/8645eb85909ee6cee87c035c9a8e0ad0d1d03e3c))
+
+
+### Features
+
+* **search:** add support for CLI ([#2931](https://github.com/scaleway/scaleway-sdk-js/issues/2931)) ([d70238d](https://github.com/scaleway/scaleway-sdk-js/commit/d70238d8eb29f527658689ea07ec77cfa483262a))
+* **vpcgw:** remove v1 API export ([#2972](https://github.com/scaleway/scaleway-sdk-js/issues/2972)) ([c652e9d](https://github.com/scaleway/scaleway-sdk-js/commit/c652e9dcdc993685af4db0061b633b43c3908867))
+
+
+
+
+
 ## 3.6.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk

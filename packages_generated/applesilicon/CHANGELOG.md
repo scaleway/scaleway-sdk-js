@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-applesilicon@2.7.1...@scaleway/sdk-applesilicon@2.8.0) (2026-06-02)
+
+
+### Features
+
+* **apple-silicon:** add support for `kextEnabled` ([#2992](https://github.com/scaleway/scaleway-sdk-js/issues/2992)) ([dabba83](https://github.com/scaleway/scaleway-sdk-js/commit/dabba83e86b17d48ecf2c875f2f1186e22e1ac86))
+
+
+
+
+
 ## 2.7.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-applesilicon

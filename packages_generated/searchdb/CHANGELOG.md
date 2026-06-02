@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-searchdb@1.5.1...@scaleway/sdk-searchdb@1.6.0) (2026-06-02)
+
+
+### Features
+
+* **messageq:** add DownloadDeploymentCertificateAuthority ([#2978](https://github.com/scaleway/scaleway-sdk-js/issues/2978)) ([6bbba52](https://github.com/scaleway/scaleway-sdk-js/commit/6bbba52e4a2ed4f3137fc8be7d6143a81dedef42))
+* **searchdb:** increase node_amount to 99 ([#2937](https://github.com/scaleway/scaleway-sdk-js/issues/2937)) ([631cb30](https://github.com/scaleway/scaleway-sdk-js/commit/631cb307ad33456815bc06b80a1ba0445748d72c))
+* **searchdb:** remove version field from ListDeploymentsRequest ([#2970](https://github.com/scaleway/scaleway-sdk-js/issues/2970)) ([5cdf128](https://github.com/scaleway/scaleway-sdk-js/commit/5cdf128ce92cf9b3c401ceedf305b801b822658f))
+
+
+
+
+
 ## 1.5.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-searchdb

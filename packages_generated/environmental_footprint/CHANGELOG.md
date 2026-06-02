@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-environmental-footprint@2.9.1...@scaleway/sdk-environmental-footprint@2.10.0) (2026-06-02)
+
+
+### Features
+
+* **environmental_footprint:** add ai and managed inference in user_api ([#2985](https://github.com/scaleway/scaleway-sdk-js/issues/2985)) ([b7f0326](https://github.com/scaleway/scaleway-sdk-js/commit/b7f03263a8e0e2b78abb45369aaa4de940df680b))
+* **environmental_footprint:** move impact multi-az to region-level ([#2921](https://github.com/scaleway/scaleway-sdk-js/issues/2921)) ([a6860cd](https://github.com/scaleway/scaleway-sdk-js/commit/a6860cd00d6c3ed5283012edc5cc53a8bb089e1e))
+
+
+
+
+
 ## 2.9.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-environmental-footprint
