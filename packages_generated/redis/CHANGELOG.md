@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-redis@2.6.2...@scaleway/sdk-redis@2.7.0) (2026-06-02)
+
+
+### Features
+
+* **redis:** add version release date ([#2996](https://github.com/scaleway/scaleway-sdk-js/issues/2996)) ([b040823](https://github.com/scaleway/scaleway-sdk-js/commit/b040823010d60baa4a82dd9bd10fd83557532c16))
+
+
+
+
+
 ## [2.6.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-redis@2.6.1...@scaleway/sdk-redis@2.6.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-redis

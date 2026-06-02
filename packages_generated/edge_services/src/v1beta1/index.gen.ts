@@ -126,6 +126,8 @@ export type {
   SetHeadStageRequestAddNewHeadStage,
   SetHeadStageRequestRemoveHeadStage,
   SetHeadStageRequestSwapHeadStage,
+  SetPipelineVPCEndpointsRequest,
+  SetPipelineVPCEndpointsResponse,
   SetRouteRulesRequest,
   SetRouteRulesRequestRouteRule,
   SetRouteRulesResponse,
