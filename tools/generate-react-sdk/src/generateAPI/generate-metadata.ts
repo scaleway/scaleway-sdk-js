@@ -1,8 +1,7 @@
-import { exec } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { dirname, join, resolve } from 'node:path'
-import { exit, stdout } from 'node:process'
+import { stdout } from 'node:process'
 import type { Metadata, ProcessedMetadata } from '../metadata-types.ts'
 import { emitFiles } from './emitFiles.ts'
 import { generateType } from './generateType.ts'
@@ -131,10 +130,5 @@ export const generateAPI = async ({
 
   emitFiles({ res: result, sourceFolderGen: dir, sdkFactoryPath })
   generateType(result)
-
-  exec('cd ../.. && pnpm run format').on('error', () => {
-    stdout.write('❌ Error during format !\n')
-    exit(1)
-  })
-  stdout.write('✅ files formatted !\n')
+  stdout.write('✅ files generated !\n')
 }
