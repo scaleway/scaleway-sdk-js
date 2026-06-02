@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-jobs@2.7.1...@scaleway/sdk-jobs@2.8.0) (2026-06-02)
+
+
+### Features
+
+* **jobs:** add UpdateJobDefinitionRequestUpdateRetryPolicy ([#2967](https://github.com/scaleway/scaleway-sdk-js/issues/2967)) ([7a7a3c2](https://github.com/scaleway/scaleway-sdk-js/commit/7a7a3c229109f1f779214ff3cd516db049ad01a3))
+
+
+
+
+
 ## 2.7.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-jobs

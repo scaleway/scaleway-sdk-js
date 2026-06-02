@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.10.1...@scaleway/sdk-product-catalog@2.11.0) (2026-06-02)
+
+
+### Features
+
+* **product_catalog:** add PublicCatalogProductPropertiesServerlessFunctions ([#2971](https://github.com/scaleway/scaleway-sdk-js/issues/2971)) ([1724d10](https://github.com/scaleway/scaleway-sdk-js/commit/1724d10b39c1b7ad75b41e2ffcc0eefee7a2fa83))
+* **product_catalog:** restructure managed inference and deprecate instance_gpu_name ([#2989](https://github.com/scaleway/scaleway-sdk-js/issues/2989)) ([3a7d9d8](https://github.com/scaleway/scaleway-sdk-js/commit/3a7d9d882d1f354a9118b8f8200e25df33e12470))
+
+
+
+
+
 ## 2.10.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-product-catalog

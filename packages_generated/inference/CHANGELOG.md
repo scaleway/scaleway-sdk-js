@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-inference@2.7.1...@scaleway/sdk-inference@2.8.0) (2026-06-02)
+
+
+### Features
+
+* **inference:** change product name due to product merge MTA-7127 ([#2928](https://github.com/scaleway/scaleway-sdk-js/issues/2928)) ([0b78372](https://github.com/scaleway/scaleway-sdk-js/commit/0b78372bcff8a23465e48a6cf0d8c25fcd38aa39))
+
+
+
+
+
 ## 2.7.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-inference

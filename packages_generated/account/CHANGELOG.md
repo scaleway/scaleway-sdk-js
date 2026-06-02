@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-account@2.5.1...@scaleway/sdk-account@2.5.2) (2026-06-02)
+
+
+### Bug Fixes
+
+* **account:** add organization_id to CompanyAdministrativeDataApi requests to... ([#2934](https://github.com/scaleway/scaleway-sdk-js/issues/2934)) ([8645eb8](https://github.com/scaleway/scaleway-sdk-js/commit/8645eb85909ee6cee87c035c9a8e0ad0d1d03e3c))
+
+
+
+
+
 ## 2.5.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-account

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@2.7.1...@scaleway/sdk-container@2.8.0) (2026-06-02)
+
+
+### Features
+
+* **containers:** add a filter to list triggers by type ([#2920](https://github.com/scaleway/scaleway-sdk-js/issues/2920)) ([9cad658](https://github.com/scaleway/scaleway-sdk-js/commit/9cad658162ca2ac4523cd613801405d7ae6cb4bf))
+
+
+
+
+
 ## 2.7.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-container

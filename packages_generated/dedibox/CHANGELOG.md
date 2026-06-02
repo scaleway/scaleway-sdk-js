@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-dedibox@2.6.1...@scaleway/sdk-dedibox@2.7.0) (2026-06-02)
+
+
+### Features
+
+* **dedibox:** expose original dedibox offer id ([#2955](https://github.com/scaleway/scaleway-sdk-js/issues/2955)) ([419581e](https://github.com/scaleway/scaleway-sdk-js/commit/419581edefe59fb0b76f0741bd4896f33d5b0944))
+
+
+
+
+
 ## 2.6.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-dedibox

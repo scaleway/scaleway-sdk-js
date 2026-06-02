@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.13.1...@scaleway/sdk-edge-services@2.14.0) (2026-06-02)
+
+
+### Features
+
+* **edge_services:** add VPCEndpoint support ([#2966](https://github.com/scaleway/scaleway-sdk-js/issues/2966)) ([5b56990](https://github.com/scaleway/scaleway-sdk-js/commit/5b569901ed971456f59a9eac8d0dc30336ea7e1a))
+
+
+
+
+
 ## 2.13.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-edge-services

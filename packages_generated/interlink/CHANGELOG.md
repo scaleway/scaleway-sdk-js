@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-interlink@2.6.1...@scaleway/sdk-interlink@2.7.0) (2026-06-02)
+
+
+### Features
+
+* **interlink:** support hosted L2 partners & links ([#2977](https://github.com/scaleway/scaleway-sdk-js/issues/2977)) ([6e4c8ee](https://github.com/scaleway/scaleway-sdk-js/commit/6e4c8eeb6f6a44c1e7b38d5cbd9d9f1486c24382))
+
+
+
+
+
 ## 2.6.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-interlink

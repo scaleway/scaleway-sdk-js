@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-vpc@2.6.1...@scaleway/sdk-vpc@2.7.0) (2026-06-02)
+
+
+### Features
+
+* **vpc:** add v2 API ([#2969](https://github.com/scaleway/scaleway-sdk-js/issues/2969)) ([2985023](https://github.com/scaleway/scaleway-sdk-js/commit/298502311f86919e9ad8883ca4095d8e434c0f03))
+
+
+
+
+
 ## 2.6.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-vpc
