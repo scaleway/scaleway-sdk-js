@@ -20,13 +20,5 @@
     "newlinesBetween": false,
     "order": "asc",
   },
-  "ignorePatterns": [
-    "**/dist/**",
-    "**/build/**",
-    "**/.turbo/**",
-    "**/generated/**",
-    "**/__generated__/**",
-    "*.gen.ts",
-    "**/CHANGELOG.md",
-  ],
+  "ignorePatterns": ["**/dist/**", "**/build/**", "**/.turbo/**", "**/generated/**", "**/__generated__/**", "*.gen.ts"],
 }
