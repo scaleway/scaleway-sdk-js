@@ -75,8 +75,8 @@ post_generate:
 	$(MAKE) build-tools
 	pnpm install --no-frozen-lockfile
 	pnpm turbo run build --filter='./packages_generated/*'
-	pnpm --filter @scaleway/sdk-react run generate:api
-	pnpm --filter @scaleway/sdk-react-hooks run generate:queries
+	pnpm --filter @scaleway/sdk-react run generate
+	pnpm --filter @scaleway/sdk-react-hooks run generate
 
 publish: install-dependencies
 	pnpm run build
