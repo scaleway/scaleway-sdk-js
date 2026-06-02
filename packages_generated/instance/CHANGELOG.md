@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.3](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-instance@2.8.2...@scaleway/sdk-instance@2.8.3) (2026-06-02)
+
+
+### Bug Fixes
+
+* **instance:** add private_nic's ipam ip ids ([#2997](https://github.com/scaleway/scaleway-sdk-js/issues/2997)) ([5be9cc6](https://github.com/scaleway/scaleway-sdk-js/commit/5be9cc6b0a3fa21433c1d8876de86c7076d3d7b0))
+
+
+
+
+
 ## [2.8.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-instance@2.8.1...@scaleway/sdk-instance@2.8.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-instance
