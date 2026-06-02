@@ -20,5 +20,5 @@
     "newlinesBetween": false,
     "order": "asc",
   },
-  "ignorePatterns": ["**/dist/**", "**/build/**", "**/.turbo/**", "**/generated/**", "**/__generated__/**", "*.gen.ts", "**/CHANGELOG.md"],
+  "ignorePatterns": [".oxfmtrc.jsonc", "**/dist/**", "**/build/**", "**/.turbo/**", "**/generated/**", "**/__generated__/**", "*.gen.ts", "**/CHANGELOG.md"],
 }
