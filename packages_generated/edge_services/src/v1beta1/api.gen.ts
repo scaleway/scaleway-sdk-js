@@ -51,6 +51,7 @@ import {
   unmarshalRouteStage,
   marshalSelectPlanRequest,
   marshalSetHeadStageRequest,
+  unmarshalSetPipelineVPCEndpointsResponse,
   marshalSetRouteRulesRequest,
   unmarshalSetRouteRulesResponse,
   unmarshalTLSStage,
@@ -141,6 +142,8 @@ import type {
   SearchWafStagesRequest,
   SelectPlanRequest,
   SetHeadStageRequest,
+  SetPipelineVPCEndpointsRequest,
+  SetPipelineVPCEndpointsResponse,
   SetRouteRulesRequest,
   SetRouteRulesResponse,
   TLSStage,
@@ -300,6 +303,12 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Get VPC Endpoint. Retrieve information about an existing VPC Endpoint, specified by its `vpc_endpoint_id`.
+   *
+   * @param request - The request {@link GetVPCEndpointRequest}
+   * @returns A Promise of VPCEndpoint
+   */
   getVPCEndpoint = (request: Readonly<GetVPCEndpointRequest>) =>
     this.client.fetch<VPCEndpoint>(
       {
@@ -326,10 +335,22 @@ export class API extends ParentAPI {
       unmarshalListVPCEndpointsResponse,
     )
   
+  /**
+   * List VPC Endpoints. List all VPC Endpoints, for a Scaleway Organization or Scaleway Project. By default, the VPC Endpoints returned in the list are ordered by creation date in ascending order, though this can be modified via the `order_by` field.
+   *
+   * @param request - The request {@link ListVPCEndpointsRequest}
+   * @returns A Promise of ListVPCEndpointsResponse
+   */
   listVPCEndpoints = (request: Readonly<ListVPCEndpointsRequest> = {}) =>
     enrichForPagination('vpcEndpoints', this.pageOfListVPCEndpoints, request)
 
   
+  /**
+   * Create VPC Endpoint. Create a new VPC Endpoint. You must specify a `private_network_id` to define to which Private Network the VPC endpoint will be attached to.
+   *
+   * @param request - The request {@link CreateVPCEndpointRequest}
+   * @returns A Promise of VPCEndpoint
+   */
   createVPCEndpoint = (request: Readonly<CreateVPCEndpointRequest>) =>
     this.client.fetch<VPCEndpoint>(
       {
@@ -344,12 +365,36 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Delete VPC Endpoint. Delete an existing VPC Endpoint, specified by its `vpc_endpoint_id`.
+   *
+   * @param request - The request {@link DeleteVPCEndpointRequest}
+   */
   deleteVPCEndpoint = (request: Readonly<DeleteVPCEndpointRequest>) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/vpc-endpoints/${validatePathParam('vpcEndpointId', request.vpcEndpointId)}`,
       },
+    )
+
+  
+  /**
+   * Attach VPC Endpoints. Attach VPC Endpoint to the given Pipeline. You must specify a `pipeline_id` and `vpc_endpoint_ids` which contains the list of VPC Endpoints.
+   *
+   * @param request - The request {@link SetPipelineVPCEndpointsRequest}
+   * @returns A Promise of SetPipelineVPCEndpointsResponse
+   */
+  setPipelineVPCEndpoints = (request: Readonly<SetPipelineVPCEndpointsRequest>) =>
+    this.client.fetch<SetPipelineVPCEndpointsResponse>(
+      {
+        method: 'PUT',
+        path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/vpc-endpoints`,
+        urlParams: urlParams(
+          ['vpc_endpoint_ids', request.vpcEndpointIds],
+        ),
+      },
+      unmarshalSetPipelineVPCEndpointsResponse,
     )
 
   
@@ -1058,7 +1103,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * List route rules. List all route rules of an organization or project.
+   * Search route rules. List all route rules of an organization or project.
    *
    * @param request - The request {@link SearchRouteRulesRequest}
    * @returns A Promise of ListRouteRulesResponse
@@ -1203,6 +1248,11 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * List plans. List all available Edge Services subscription plans.
+   *
+   * @returns A Promise of ListPlansResponse
+   */
   listPlans = () =>
     this.client.fetch<ListPlansResponse>(
       {
@@ -1213,6 +1263,12 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Select plan. Subscribe to the Edge Services subscription plan of your choice, for the given Scaleway Project.
+   *
+   * @param request - The request {@link SelectPlanRequest}
+   * @returns A Promise of Plan
+   */
   selectPlan = (request: Readonly<SelectPlanRequest> = {}) =>
     this.client.fetch<Plan>(
       {
@@ -1227,6 +1283,12 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Get plan. Get the current Edge Services subscription plan for your Scaleway Project.
+   *
+   * @param request - The request {@link GetCurrentPlanRequest}
+   * @returns A Promise of Plan
+   */
   getCurrentPlan = (request: Readonly<GetCurrentPlanRequest> = {}) =>
     this.client.fetch<Plan>(
       {
@@ -1237,6 +1299,11 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Delete plan. Unsubscribe from the current Edge Services subscription plan for your Scaleway Project.
+   *
+   * @param request - The request {@link DeleteCurrentPlanRequest}
+   */
   deleteCurrentPlan = (request: Readonly<DeleteCurrentPlanRequest> = {}) =>
     this.client.fetch<void>(
       {
