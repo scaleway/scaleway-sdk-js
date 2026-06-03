@@ -23,6 +23,7 @@ import type { Flexibleipv1alpha1 } from '@scaleway/sdk-flexibleip'
 import type { Functionv1beta1 } from '@scaleway/sdk-function'
 import type { Iamv1alpha1 } from '@scaleway/sdk-iam'
 import type { Inferencev1 } from '@scaleway/sdk-inference'
+import type { Inferencev1beta1 } from '@scaleway/sdk-inference'
 import type { Instancev1 } from '@scaleway/sdk-instance'
 import type { Interlinkv1beta1 } from '@scaleway/sdk-interlink'
 import type { Iotv1 } from '@scaleway/sdk-iot'
@@ -90,6 +91,7 @@ export type APISdk = {
   functionv1beta1: Functionv1beta1.API
   iamv1alpha1: Iamv1alpha1.API
   inferencev1: Inferencev1.API
+  inferencev1beta1: Inferencev1beta1.API
   instancev1: Instancev1.API
   interlinkv1beta1: Interlinkv1beta1.API
   iotv1: Iotv1.API
