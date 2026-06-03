@@ -445,7 +445,7 @@ export const Vpc = {
 }
 
 /**
- * @deprecated Direct version exports are deprecated. Use the 'Vpcgw' namespace instead (e.g., Vpcgw.v2).
+ * @deprecated Direct version exports are deprecated. Use the 'Vpcgw' namespace instead (e.g., Vpcgw.v1).
  */
 export { Vpcgwv2 }
 export const Vpcgw = {
