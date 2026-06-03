@@ -4,10 +4,10 @@
  */
 
 export const pkgMetadata = {
-  name: "@scaleway/sdk-vpcgw",
-  namespace: "vpcgw",
-  displayName: "Vpcgw",
-  versions: ["v2"]
+  name: "@scaleway/sdk-messageq",
+  namespace: "messageq",
+  displayName: "Messageq",
+  versions: ["v1alpha1"]
 } as const
 
 export type Metadata = typeof pkgMetadata
