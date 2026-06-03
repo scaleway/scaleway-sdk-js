@@ -1,24 +1,20 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
-
-import type { ApiLocality,WaitForOptions, } from '@scaleway/sdk-client'
 import {
-  enrichForPagination,
   API as ParentAPI,
-  toApiLocality,
+  enrichForPagination,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,} from './content.gen.js'
 import {
   marshalAddDeploymentACLRulesRequest,
+  unmarshalAddDeploymentACLRulesResponse,
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
-  marshalSetDeploymentACLRulesRequest,
-  marshalUpdateDeploymentRequest,
-  marshalUpdateEndpointRequest,
-  unmarshalAddDeploymentACLRulesResponse,
   unmarshalDeployment,
   unmarshalEndpoint,
   unmarshalEula,
@@ -27,7 +23,10 @@ import {
   unmarshalListModelsResponse,
   unmarshalListNodeTypesResponse,
   unmarshalModel,
+  marshalSetDeploymentACLRulesRequest,
   unmarshalSetDeploymentACLRulesResponse,
+  marshalUpdateDeploymentRequest,
+  marshalUpdateEndpointRequest,
 } from './marshalling.gen.js'
 import type {
   AddDeploymentACLRulesRequest,

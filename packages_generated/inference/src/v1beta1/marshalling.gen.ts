@@ -1,32 +1,32 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import randomName from '@scaleway/random-name'
-import type { DefaultValues, } from '@scaleway/sdk-client'
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
+import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
-  ACLRule,
-  ACLRuleRequest,
-  AddDeploymentACLRulesRequest,
-  AddDeploymentACLRulesResponse,
-  CreateDeploymentRequest,
-  CreateEndpointRequest,
-  Deployment,
-  Endpoint,
   EndpointPrivateNetworkDetails,
   EndpointPublicAccessDetails,
-  EndpointSpec,
-  EndpointSpecPrivateNetwork,
-  EndpointSpecPublic,
+  Endpoint,
+  Deployment,
+  ModelS3Model,
+  Model,
+  ACLRule,
+  AddDeploymentACLRulesResponse,
   Eula,
   ListDeploymentACLRulesResponse,
   ListDeploymentsResponse,
   ListModelsResponse,
-  ListNodeTypesResponse,
-  Model,
-  ModelS3Model,
   NodeType,
-  SetDeploymentACLRulesRequest,
+  ListNodeTypesResponse,
   SetDeploymentACLRulesResponse,
+  ACLRuleRequest,
+  AddDeploymentACLRulesRequest,
+  EndpointSpecPrivateNetwork,
+  EndpointSpecPublic,
+  EndpointSpec,
+  CreateDeploymentRequest,
+  CreateEndpointRequest,
+  SetDeploymentACLRulesRequest,
   UpdateDeploymentRequest,
   UpdateEndpointRequest,
 } from './types.gen.js'
