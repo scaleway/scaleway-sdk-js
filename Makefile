@@ -68,6 +68,16 @@ setup-new-products:
 	pnpm install
 	pnpm run setupNewProducts
 
+post_generate:
+	$(MAKE) format-generated
+	$(MAKE) setup-new-products
+	$(MAKE) prebuild
+	$(MAKE) build-tools
+	pnpm install --no-frozen-lockfile
+	pnpm turbo run build --filter='./packages_generated/*'
+	pnpm --filter @scaleway/sdk-react run generate
+	pnpm --filter @scaleway/sdk-react-hooks run generate
+
 publish: install-dependencies
 	pnpm run build
 	pnpm lerna changed
