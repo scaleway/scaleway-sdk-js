@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.15.0 (2026-06-03)
+
+
+### Bug Fixes
+
+* align edge_services tsconfig.build.json with generate-packages template ([#3007](https://github.com/scaleway/scaleway-sdk-js/issues/3007)) ([5948b82](https://github.com/scaleway/scaleway-sdk-js/commit/5948b828b781037f11c80af931d086425709428d))
+
+
+### Features
+
+* **edge_services:** update VPC endpoint proto and several fixes ([#3003](https://github.com/scaleway/scaleway-sdk-js/issues/3003)) ([ce397c4](https://github.com/scaleway/scaleway-sdk-js/commit/ce397c46daad03120c46fbbccc13523da777a788))
+
+
+
+
+
 # [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.13.1...@scaleway/sdk-edge-services@2.14.0) (2026-06-02)
 
 
