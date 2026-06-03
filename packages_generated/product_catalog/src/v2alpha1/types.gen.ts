@@ -41,6 +41,7 @@ export type PublicCatalogProductProductBadge =
   | 'best_seller'
   | 'best_value'
   | 'popular'
+  | 'no_kvm'
 
 export type PublicCatalogProductPropertiesGenerativeApisConsumptionMode =
   | 'unknown_consumption_mode'
