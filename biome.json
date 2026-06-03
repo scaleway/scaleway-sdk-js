@@ -157,6 +157,20 @@
           }
         }
       }
+    },
+    {
+      "includes": ["**/tsconfig.build.json"],
+      "formatter": {
+        "enabled": false
+      },
+      "json": {
+        "formatter": {
+          "enabled": false
+        }
+      },
+      "linter": {
+        "enabled": false
+      }
     }
   ],
   "assist": {
