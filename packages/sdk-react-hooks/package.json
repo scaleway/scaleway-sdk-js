@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-react-hooks",
-  "version": "0.6.1",
+  "version": "0.7.2",
   "private": false,
   "description": "React hooks",
   "files": [
@@ -237,10 +237,10 @@
     }
   },
   "scripts": {
-    "prebuild": "shx rm -rf dist && pnpm generate:queries",
+    "prebuild": "shx rm -rf dist && pnpm generate",
     "typecheck": "tsgo --noEmit",
     "format": "oxfmt --write .",
-    "generate:queries": "pnpm generate-react-queries && pnpm format",
+    "generate": "pnpm generate-react-queries && pnpm format",
     "type:generate": "tsgo --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
     "watch": "pnpm run '/^watch:.*/'",
@@ -299,13 +299,13 @@
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*",
-    "@scaleway/use-dataloader": "6.1.0",
+    "@scaleway/use-dataloader": "6.1.2",
     "@types/react": "19.2.14",
     "react": "^19.2.5",
-    "tinyglobby": "0.2.15"
+    "tinyglobby": "0.2.16"
   },
   "peerDependencies": {
-    "@scaleway/use-dataloader": "6.x",
+    "@scaleway/use-dataloader": "6.1.2",
     "react": "18.x || 19.x"
   },
   "optionalDependencies": {

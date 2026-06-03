@@ -216,6 +216,7 @@ const unmarshalClusterVersion = (data: unknown): ClusterVersion => {
     availableSettings: unmarshalArrayOfObject(data.available_settings, unmarshalAvailableClusterSetting),
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
     logoUrl: data.logo_url,
+    releasedAt: unmarshalDate(data.released_at),
     version: data.version,
     zone: data.zone,
   } as ClusterVersion

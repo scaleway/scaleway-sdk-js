@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "3.6.1",
+  "version": "3.7.2",
   "description": "Scaleway SDK TS.",
   "license": "Apache-2.0",
   "repository": {
@@ -83,6 +83,6 @@
     "@repo/configs": "workspace:^"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=20.20.2"
   }
 }

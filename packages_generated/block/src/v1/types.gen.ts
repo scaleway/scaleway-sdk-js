@@ -274,6 +274,10 @@ export interface Volume {
    * Last time the volume was detached.
    */
   lastDetachedAt?: Date
+  /**
+   * KMS Key used for securing the volume's encryption.
+   */
+  kmsKeyId?: string
 }
 
 
@@ -340,6 +344,10 @@ export type CreateVolumeRequest = {
    * List of tags assigned to the volume.
    */
   tags?: string[]
+  /**
+   * UUID of the KMS key used to protect the volume's encryption.
+   */
+  kmsKeyId?: string
 }
 
 

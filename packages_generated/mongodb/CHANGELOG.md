@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-mongodb@2.8.1...@scaleway/sdk-mongodb@2.9.0) (2026-06-02)
+
+
+### Features
+
+* **mongodb:** add has_maintenance field to ListInstance ([#2981](https://github.com/scaleway/scaleway-sdk-js/issues/2981)) ([e97089a](https://github.com/scaleway/scaleway-sdk-js/commit/e97089a24f7e963a54775bc457dce1d01503a14a))
+* **mongodb:** add version release date ([#2991](https://github.com/scaleway/scaleway-sdk-js/issues/2991)) ([9587c3f](https://github.com/scaleway/scaleway-sdk-js/commit/9587c3fac676c90557eeae29b09d85b1dfbf3554))
+
+
+
+
+
 ## 2.8.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-mongodb

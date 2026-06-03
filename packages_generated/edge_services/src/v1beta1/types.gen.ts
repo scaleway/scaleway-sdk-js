@@ -792,13 +792,30 @@ export interface PurgeRequest {
 
 
 export interface VPCEndpoint {
+  /**
+   * The VPC Endpoint ID.
+   */
   id: string
+  /**
+   * Project ID of the VPC Endpoint.
+   */
   projectId: string
   /**
-   * Region to target. If none is passed will use default region from the config.
+   * Zone of the VPC Endpoint.
    */
   region: ScwRegion
+  /**
+   * Private Network ID of the VPC Endpoint.
+   */
   privateNetworkId: string
+  /**
+   * Date the VPC Endpoint was created.
+   */
+  createdAt?: Date
+  /**
+   * Date the VPC Endpoint was last updated.
+   */
+  updatedAt?: Date
 }
 
 
@@ -1017,7 +1034,6 @@ export type CreatePipelineRequest = {
    * Description of the pipeline.
    */
   description: string
-  vpcEndpointIds?: string[]
 }
 
 
@@ -1100,11 +1116,17 @@ export type CreateTLSStageRequest = {
 
 
 export type CreateVPCEndpointRequest = {
+  /**
+   * Project ID of the VPC Endpoint.
+   */
   projectId?: string
   /**
-   * Region to target. If none is passed will use default region from the config.
+   * Zone of the VPC Endpoint.
    */
   region?: ScwRegion
+  /**
+   * Private Network ID of the VPC Endpoint.
+   */
   privateNetworkId: string
 }
 
@@ -1185,6 +1207,9 @@ export type DeleteTLSStageRequest = {
 
 
 export type DeleteVPCEndpointRequest = {
+  /**
+   * The VPC Endpoint ID.
+   */
   vpcEndpointId: string
 }
 
@@ -1320,6 +1345,9 @@ export type GetTLSStageRequest = {
 
 
 export type GetVPCEndpointRequest = {
+  /**
+   * The VPC Endpoint ID.
+   */
   vpcEndpointId: string
 }
 
@@ -1560,7 +1588,7 @@ export type ListPurgeRequestsRequest = {
    */
   pageSize?: number
   /**
-   * Organization ID to filter for. Only purge requests from this Project will be returned.
+   * Organization ID to filter for. Only purge requests from this Organization will be returned.
    */
   organizationId?: string
   /**
@@ -1679,17 +1707,38 @@ export interface ListTLSStagesResponse {
 
 
 export type ListVPCEndpointsRequest = {
-  page?: number
-  pageSize?: number
+  /**
+   * Sort order of VPC Endpoints in the response.
+   */
   orderBy?: ListVPCEndpointsRequestOrderBy
+  /**
+   * Page number to return, from the paginated results.
+   */
+  page?: number
+  /**
+   * Number of VPC Endpoints to return per page.
+   */
+  pageSize?: number
+  /**
+   * Project ID to filter for. Only VPC Endpoints from this project will be returned.
+   */
   projectId?: string
+  /**
+   * Organization ID to filter for. Only VPC Endpoints from this Organization will be returned.
+   */
   organizationId?: string
 }
 
 
 export interface ListVPCEndpointsResponse {
-  totalCount: number
+  /**
+   * Paginated list of VPC Endpoints.
+   */
   vpcEndpoints: VPCEndpoint[]
+  /**
+   * Count of all VPC Endpoints matching the requested criteria.
+   */
+  totalCount: number
 }
 
 
@@ -1787,6 +1836,34 @@ export type SetHeadStageRequest = {
    * One-of ('action'): at most one of 'addNewHeadStage', 'removeHeadStage', 'swapHeadStage' could be set.
    */
   swapHeadStage?: SetHeadStageRequestSwapHeadStage
+}
+
+
+export type SetPipelineVPCEndpointsRequest = {
+  /**
+   * Pipeline ID for which VPC Endpoints must be set.
+   */
+  pipelineId: string
+  /**
+   * List of VPC Endpoints to attach.
+   */
+  vpcEndpointIds?: string[]
+}
+
+
+export interface SetPipelineVPCEndpointsResponse {
+  /**
+   * Pipeline ID.
+   */
+  pipelineId: string
+  /**
+   * List of VPC Endpoints for the given Pipeline ID.
+   */
+  vpcEndpoints: VPCEndpoint[]
+  /**
+   * Count of all VPC Endpoints for the given Pipeline ID.
+   */
+  totalCount: number
 }
 
 
@@ -1929,7 +2006,6 @@ export type UpdatePipelineRequest = {
    * Description of the pipeline.
    */
   description?: string
-  vpcEndpointIds?: string[]
 }
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-billing@2.5.1...@scaleway/sdk-billing@2.6.0) (2026-06-02)
+
+
+### Features
+
+* **billing:** allow only one organization_id in list charge public ([#2976](https://github.com/scaleway/scaleway-sdk-js/issues/2976)) ([c1a64e2](https://github.com/scaleway/scaleway-sdk-js/commit/c1a64e2b52ce972c2fbe1378d14f0bf610bfe134))
+* **billing:** make finops public api visible ([#2984](https://github.com/scaleway/scaleway-sdk-js/issues/2984)) ([7c92564](https://github.com/scaleway/scaleway-sdk-js/commit/7c925642ffb1bd4f90efbecc460ad39d42f0add1))
+
+
+
+
+
 ## 2.5.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-billing

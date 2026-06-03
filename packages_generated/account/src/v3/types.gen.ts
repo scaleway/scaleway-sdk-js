@@ -12,6 +12,8 @@ export type ContractType =
   | 'network'
   | 'core'
   | 'vps'
+  | 'storage'
+  | 'transactional_email'
 
 export type ListContractSignaturesRequestOrderBy =
   | 'signed_at_asc'

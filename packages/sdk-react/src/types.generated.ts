@@ -50,7 +50,6 @@ import type { Secretv1beta1 } from '@scaleway/sdk-secret'
 import type { ServerlessSqldbv1alpha1 } from '@scaleway/sdk-serverless-sqldb'
 import type { Temv1alpha1 } from '@scaleway/sdk-tem'
 import type { Vpcv2 } from '@scaleway/sdk-vpc'
-import type { Vpcgwv1 } from '@scaleway/sdk-vpcgw'
 import type { Vpcgwv2 } from '@scaleway/sdk-vpcgw'
 import type { Webhostingv1 } from '@scaleway/sdk-webhosting'
 
@@ -65,6 +64,7 @@ export type APISdk = {
   baremetalv1PrivateNetwork: Baremetalv1.PrivateNetworkAPI
   baremetalv3PrivateNetwork: Baremetalv3.PrivateNetworkAPI
   billingv2beta1: Billingv2beta1.API
+  billingv2beta1FinOps: Billingv2beta1.FinOpsAPI
   blockv1: Blockv1.API
   blockv1alpha1: Blockv1alpha1.API
   cockpitv1Global: Cockpitv1.GlobalAPI
@@ -120,7 +120,6 @@ export type APISdk = {
   serverlessSqldbv1alpha1: ServerlessSqldbv1alpha1.API
   temv1alpha1: Temv1alpha1.API
   vpcv2: Vpcv2.API
-  vpcgwv1: Vpcgwv1.API
   vpcgwv2: Vpcgwv2.API
   webhostingv1Backup: Webhostingv1.BackupAPI
   webhostingv1ControlPanel: Webhostingv1.ControlPanelAPI

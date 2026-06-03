@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-react",
-  "version": "0.4.1",
+  "version": "0.5.2",
   "private": false,
   "description": "React API Provider using client settings",
   "files": [
@@ -21,9 +21,9 @@
     }
   },
   "scripts": {
-    "prebuild": "shx rm -rf dist && pnpm generate:api",
+    "prebuild": "shx rm -rf dist && pnpm generate",
     "typecheck": "tsgo --noEmit",
-    "generate:api": "pnpm generate-react-sdk --dir-gen-name src/__generated__/api  --sdk-factory-path '../../contexts/SDKCacheProvider/sdkFactory' && pnpm format",
+    "generate": "pnpm generate-react-sdk --dir-gen-name src/__generated__/api  --sdk-factory-path '../../contexts/SDKCacheProvider/sdkFactory' && pnpm format",
     "format": "oxfmt --write .",
     "type:generate": "tsgo --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
@@ -83,7 +83,7 @@
     "@scaleway/sdk-webhosting": "workspace:*",
     "@types/react": "19.2.14",
     "react": "^19.2.5",
-    "tinyglobby": "0.2.15"
+    "tinyglobby": "0.2.16"
   },
   "peerDependencies": {
     "react": "18.x || 19.x"

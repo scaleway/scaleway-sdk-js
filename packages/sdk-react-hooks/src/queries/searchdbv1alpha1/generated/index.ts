@@ -13,5 +13,4 @@ export { useSearchdbv1alpha1APIListNodeTypesAllQuery } from "./useSearchdbv1alph
 export { useSearchdbv1alpha1APIListUsersQuery } from "./useSearchdbv1alpha1APIListUsersQuery"
 export { useSearchdbv1alpha1APIListUsersInfiniteQuery } from "./useSearchdbv1alpha1APIListUsersInfiniteQuery"
 export { useSearchdbv1alpha1APIListUsersAllQuery } from "./useSearchdbv1alpha1APIListUsersAllQuery"
-export { useSearchdbv1alpha1APIGetDeploymentCertificateAuthorityQuery } from "./useSearchdbv1alpha1APIGetDeploymentCertificateAuthorityQuery"
 export { useSearchdbv1alpha1APIReload } from "./useSearchdbv1alpha1APIReload"

@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/generate-react-sdk",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "private": false,
   "description": "generate react sdk",
   "repository": {
@@ -26,9 +26,9 @@
     "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.35"
+    "@types/node": "20.19.41"
   },
   "engines": {
-    "node": ">=20.19.6"
+    "node": ">=20.20.2"
   }
 }

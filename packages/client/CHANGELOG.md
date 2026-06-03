@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-client@2.3.1...@scaleway/sdk-client@2.4.0) (2026-06-02)
+
+
+### Features
+
+* **client:** add it-mil region and zone ([#2948](https://github.com/scaleway/scaleway-sdk-js/issues/2948)) ([644b782](https://github.com/scaleway/scaleway-sdk-js/commit/644b782680ca042b0547136a60c319e590465ef7))
+
+
+
+
+
 ## 2.3.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-client

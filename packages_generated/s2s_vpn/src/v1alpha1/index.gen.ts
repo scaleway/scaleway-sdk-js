@@ -8,6 +8,9 @@ export * from './marshalling.gen.js'
 export type {
   BgpSession,
   BgpSessionStatus,
+  ChangeConnectionPskRequest,
+  ChangeConnectionPskRequestSecret,
+  ChangeConnectionPskResponse,
   Connection,
   ConnectionCipher,
   ConnectionDhGroup,
@@ -18,6 +21,7 @@ export type {
   CreateConnectionRequest,
   CreateConnectionRequestBgpConfig,
   CreateConnectionRequestInitiationPolicy,
+  CreateConnectionRequestSecret,
   CreateConnectionResponse,
   CreateCustomerGatewayRequest,
   CreateRoutingPolicyRequest,

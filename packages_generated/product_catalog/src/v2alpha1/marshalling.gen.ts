@@ -13,6 +13,8 @@ import type {
   PublicCatalogProductPropertiesKubernetesKosmosNodeType,
   PublicCatalogProductPropertiesLoadBalancerIPV4Type,
   PublicCatalogProductPropertiesLoadBalancerNodeType,
+  PublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage,
+  PublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment,
   PublicCatalogProductPropertiesManagedMongoDBManagementType,
   PublicCatalogProductPropertiesManagedMongoDBNodeType,
   PublicCatalogProductPropertiesManagedMongoDBStorageType,
@@ -207,6 +209,29 @@ const unmarshalPublicCatalogProductPropertiesLoadBalancerNodeType = (data: unkno
     multiCloudProvider: data.multi_cloud_provider,
     offerId: data.offer_id,
   } as PublicCatalogProductPropertiesLoadBalancerNodeType
+}
+
+const unmarshalPublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage = (data: unknown): PublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage
+}
+
+const unmarshalPublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment = (data: unknown): PublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    instanceGpuName: data.instance_gpu_name,
+  } as PublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment
 }
 
 const unmarshalPublicCatalogProductPropertiesManagedMongoDBManagementType = (data: unknown): PublicCatalogProductPropertiesManagedMongoDBManagementType => {
@@ -478,6 +503,8 @@ const unmarshalPublicCatalogProductPropertiesManagedInference = (data: unknown):
   }
 
   return {
+    customModelStorage: data.custom_model_storage ? unmarshalPublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage(data.custom_model_storage) : undefined,
+    deployment: data.deployment ? unmarshalPublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment(data.deployment) : undefined,
     instanceGpuName: data.instance_gpu_name,
   } as PublicCatalogProductPropertiesManagedInference
 }

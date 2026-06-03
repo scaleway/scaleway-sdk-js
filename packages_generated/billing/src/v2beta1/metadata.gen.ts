@@ -69,6 +69,24 @@ export const queriesMetadata = {
         },
       ],
     },
+    {
+      apiClass: 'FinOpsAPI',
+      methods: [
+        {
+          methodName: 'listCharges',
+          protoName: 'ListCharges',
+          paramsType: 'FinOpsApiListChargesRequest',
+          returnType: 'ListChargesResponse',
+          isList: true,
+          paginationType: 'cursor',
+          pageParamKey: 'pageToken',
+          listItemType: 'Charge',
+          nextPageField: 'nextPageToken',
+          isPrivate: false,
+          description: '"',
+        },
+      ],
+    },
   ],
 } as const
 

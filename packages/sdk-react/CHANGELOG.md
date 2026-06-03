@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.5.1...@scaleway/sdk-react@0.5.2) (2026-06-03)
+
+**Note:** Version bump only for package @scaleway/sdk-react
+
+
+
+
+
+## [0.5.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.5.0...@scaleway/sdk-react@0.5.1) (2026-06-02)
+
+**Note:** Version bump only for package @scaleway/sdk-react
+
+
+
+
+
+# [0.5.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.4.1...@scaleway/sdk-react@0.5.0) (2026-06-02)
+
+
+### Features
+
+* **vpcgw:** remove v1 API export ([#2972](https://github.com/scaleway/scaleway-sdk-js/issues/2972)) ([c652e9d](https://github.com/scaleway/scaleway-sdk-js/commit/c652e9dcdc993685af4db0061b633b43c3908867))
+
+
+
+
+
 ## 0.4.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-react

@@ -56,10 +56,10 @@
     "react": "^19.2.5",
     "read-pkg": "10.1.0",
     "shx": "0.4.0",
-    "tinyglobby": "0.2.15",
+    "tinyglobby": "0.2.16",
     "tsc-alias": "1.8.16",
     "turbo": "2.9.14",
-    "typedoc": "0.28.17",
+    "typedoc": "0.28.19",
     "typescript": "6.0.2",
     "vite": "8.0.8",
     "vitest": "3.2.4"
@@ -98,7 +98,7 @@
     }
   },
   "engines": {
-    "node": ">=20.19.0",
+    "node": ">=20.20.2",
     "pnpm": ">=10.30.3"
   },
   "packageManager": "pnpm@10.30.3"

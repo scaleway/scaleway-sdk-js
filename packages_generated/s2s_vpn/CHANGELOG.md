@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-s2s-vpn@2.8.1...@scaleway/sdk-s2s-vpn@2.9.0) (2026-06-02)
+
+
+### Features
+
+* **s2s_vpn:** add support for changing PSK secret ([#2987](https://github.com/scaleway/scaleway-sdk-js/issues/2987)) ([0f7963b](https://github.com/scaleway/scaleway-sdk-js/commit/0f7963b98105f4584e365136e0b1ee4d6f65b9d0))
+* **s2s_vpn:** add support for importing custom PSK during connection creation ([#2975](https://github.com/scaleway/scaleway-sdk-js/issues/2975)) ([40fce74](https://github.com/scaleway/scaleway-sdk-js/commit/40fce74c91b60d8be676026d557ab1bf29070d00))
+
+
+
+
+
 ## 2.8.1 (2026-04-18)
 
 **Note:** Version bump only for package @scaleway/sdk-s2s-vpn

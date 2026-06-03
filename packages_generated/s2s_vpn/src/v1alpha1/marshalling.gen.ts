@@ -10,6 +10,7 @@ import type {
   VpnGatewayPrivateConfig,
   VpnGatewayPublicConfig,
   VpnGateway,
+  ChangeConnectionPskResponse,
   CreateConnectionResponse,
   ListConnectionsResponse,
   ListCustomerGatewaysResponse,
@@ -18,7 +19,10 @@ import type {
   ListVpnGatewayTypesResponse,
   ListVpnGatewaysResponse,
   RenewConnectionPskResponse,
+  ChangeConnectionPskRequestSecret,
+  ChangeConnectionPskRequest,
   CreateConnectionRequestBgpConfig,
+  CreateConnectionRequestSecret,
   CreateConnectionRequest,
   CreateCustomerGatewayRequest,
   CreateRoutingPolicyRequest,
@@ -28,6 +32,7 @@ import type {
   CreateVpnGatewayRequestPublicTunnelConfig,
   CreateVpnGatewayRequest,
   DetachRoutingPolicyRequest,
+  RenewConnectionPskRequest,
   SetRoutingPolicyRequest,
   UpdateConnectionRequest,
   UpdateCustomerGatewayRequest,
@@ -197,6 +202,18 @@ export const unmarshalVpnGateway = (data: unknown): VpnGateway => {
   } as VpnGateway
 }
 
+export const unmarshalChangeConnectionPskResponse = (data: unknown): ChangeConnectionPskResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ChangeConnectionPskResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    connection: data.connection ? unmarshalConnection(data.connection) : undefined,
+  } as ChangeConnectionPskResponse
+}
+
 export const unmarshalCreateConnectionResponse = (data: unknown): CreateConnectionResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -304,6 +321,21 @@ export const unmarshalRenewConnectionPskResponse = (data: unknown): RenewConnect
   } as RenewConnectionPskResponse
 }
 
+const marshalChangeConnectionPskRequestSecret = (
+  request: ChangeConnectionPskRequestSecret,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  id: request.id,
+  revision: request.revision,
+})
+
+export const marshalChangeConnectionPskRequest = (
+  request: ChangeConnectionPskRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  secret:  marshalChangeConnectionPskRequestSecret(request.secret, defaults),
+})
+
 const marshalConnectionCipher = (
   request: ConnectionCipher,
   defaults: DefaultValues,
@@ -322,6 +354,14 @@ const marshalCreateConnectionRequestBgpConfig = (
   routing_policy_id: request.routingPolicyId,
 })
 
+const marshalCreateConnectionRequestSecret = (
+  request: CreateConnectionRequestSecret,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  id: request.id,
+  revision: request.revision,
+})
+
 export const marshalCreateConnectionRequest = (
   request: CreateConnectionRequest,
   defaults: DefaultValues,
@@ -336,6 +376,7 @@ export const marshalCreateConnectionRequest = (
   is_ipv6: request.isIpv6,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  secret: ((request.secret !== undefined) ?  marshalCreateConnectionRequestSecret(request.secret, defaults): undefined),
   tags: request.tags,
   vpn_gateway_id: request.vpnGatewayId,
 })
@@ -443,6 +484,13 @@ export const marshalDetachRoutingPolicyRequest = (
       value: request.routingPolicyV6,
     },
   ]),
+})
+
+export const marshalRenewConnectionPskRequest = (
+  request: RenewConnectionPskRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  generate_revision: request.generateRevision,
 })
 
 export const marshalSetRoutingPolicyRequest = (

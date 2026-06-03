@@ -133,10 +133,9 @@ export interface VpnGatewayPublicConfig {
 }
 
 
-export interface CreateConnectionRequestBgpConfig {
-  routingPolicyId: string
-  privateIp?: string
-  peerPrivateIp?: string
+export interface ChangeConnectionPskRequestSecret {
+  id: string
+  revision?: number
 }
 
 
@@ -241,6 +240,19 @@ export interface Connection {
    * Region of the connection.
    */
   region: ScwRegion
+}
+
+
+export interface CreateConnectionRequestBgpConfig {
+  routingPolicyId: string
+  privateIp?: string
+  peerPrivateIp?: string
+}
+
+
+export interface CreateConnectionRequestSecret {
+  id: string
+  revision?: number
 }
 
 
@@ -460,6 +472,30 @@ export interface VpnGateway {
 }
 
 
+export type ChangeConnectionPskRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the connection to renew the PSK.
+   */
+  connectionId: string
+  /**
+   * New PSK Secret of the connection.
+   */
+  secret: ChangeConnectionPskRequestSecret
+}
+
+
+export interface ChangeConnectionPskResponse {
+  /**
+   * This connection.
+   */
+  connection?: Connection
+}
+
+
 export type CreateConnectionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -497,6 +533,10 @@ export type CreateConnectionRequest = {
    * Defines whether route propagation is enabled or not.
    */
   enableRoutePropagation: boolean
+  /**
+   * Specifies the pre-shared key used for the IPsec tunnel.
+   */
+  secret?: CreateConnectionRequestSecret
   /**
    * ID of the VPN gateway to attach to the connection.
    */
@@ -1050,6 +1090,10 @@ export type RenewConnectionPskRequest = {
    * ID of the connection to renew the PSK.
    */
   connectionId: string
+  /**
+   * Generate a new revision or update to the latest existing one.
+   */
+  generateRevision?: boolean
 }
 
 

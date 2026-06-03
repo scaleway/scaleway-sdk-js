@@ -49,6 +49,7 @@ import type {
   VpcConnectorInfo,
   VpcGwGatewayInfo,
   VpcGwGatewayNetworkInfo,
+  VpcIngressRuleInfo,
   VpcPrivateNetworkInfo,
   VpcRouteInfo,
   VpcSubnetInfo,
@@ -672,6 +673,21 @@ const unmarshalVpcGwGatewayNetworkInfo = (data: unknown): VpcGwGatewayNetworkInf
   } as VpcGwGatewayNetworkInfo
 }
 
+const unmarshalVpcIngressRuleInfo = (data: unknown): VpcIngressRuleInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VpcIngressRuleInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nexthopPrivateNetworkId: data.nexthop_private_network_id,
+    nexthopResourceIp: data.nexthop_resource_ip,
+    source: data.source,
+    vpcId: data.vpc_id,
+  } as VpcIngressRuleInfo
+}
+
 const unmarshalVpcPrivateNetworkInfo = (data: unknown): VpcPrivateNetworkInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -769,6 +785,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     vpcConnectorInfo: data.vpc_connector_info ? unmarshalVpcConnectorInfo(data.vpc_connector_info) : undefined,
     vpcGwGatewayInfo: data.vpc_gw_gateway_info ? unmarshalVpcGwGatewayInfo(data.vpc_gw_gateway_info) : undefined,
     vpcGwGatewayNetworkInfo: data.vpc_gw_gateway_network_info ? unmarshalVpcGwGatewayNetworkInfo(data.vpc_gw_gateway_network_info) : undefined,
+    vpcIngressRuleInfo: data.vpc_ingress_rule_info ? unmarshalVpcIngressRuleInfo(data.vpc_ingress_rule_info) : undefined,
     vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : undefined,
     vpcRouteInfo: data.vpc_route_info ? unmarshalVpcRouteInfo(data.vpc_route_info) : undefined,
     vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : undefined,

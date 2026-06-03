@@ -7,14 +7,14 @@ import type {
   EndpointPrivateNetworkDetails,
   EndpointPublicNetworkDetails,
   Endpoint,
-  InstanceSetting,
-  InstanceSnapshotSchedule,
-  Volume,
-  Instance,
   EngineUpgrade,
   ServiceUpdate,
   Workflow,
   Maintenance,
+  InstanceSetting,
+  InstanceSnapshotSchedule,
+  Volume,
+  Instance,
   Snapshot,
   UserRole,
   User,
@@ -83,74 +83,6 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   } as Endpoint
 }
 
-export const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    name: data.name,
-    value: data.value,
-  } as InstanceSetting
-}
-
-const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSchedule => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'InstanceSnapshotSchedule' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    enabled: data.enabled,
-    frequencyHours: data.frequency_hours,
-    lastRun: unmarshalDate(data.last_run),
-    nextUpdate: unmarshalDate(data.next_update),
-    retentionDays: data.retention_days,
-  } as InstanceSnapshotSchedule
-}
-
-export const unmarshalVolume = (data: unknown): Volume => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    sizeBytes: data.size_bytes,
-    type: data.type,
-  } as Volume
-}
-
-export const unmarshalInstance = (data: unknown): Instance => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Instance' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
-    id: data.id,
-    name: data.name,
-    nodeAmount: data.node_amount,
-    nodeType: data.node_type,
-    organizationId: data.organization_id,
-    projectId: data.project_id,
-    region: data.region,
-    settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
-    snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : undefined,
-    status: data.status,
-    tags: data.tags,
-    version: data.version,
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
-  } as Instance
-}
-
 const unmarshalEngineUpgrade = (data: unknown): EngineUpgrade => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -208,6 +140,75 @@ export const unmarshalMaintenance = (data: unknown): Maintenance => {
     stopsAt: unmarshalDate(data.stops_at),
     workflow: data.workflow ? unmarshalWorkflow(data.workflow) : undefined,
   } as Maintenance
+}
+
+export const unmarshalInstanceSetting = (data: unknown): InstanceSetting => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceSetting' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    value: data.value,
+  } as InstanceSetting
+}
+
+const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSchedule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InstanceSnapshotSchedule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    enabled: data.enabled,
+    frequencyHours: data.frequency_hours,
+    lastRun: unmarshalDate(data.last_run),
+    nextUpdate: unmarshalDate(data.next_update),
+    retentionDays: data.retention_days,
+  } as InstanceSnapshotSchedule
+}
+
+export const unmarshalVolume = (data: unknown): Volume => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    sizeBytes: data.size_bytes,
+    type: data.type,
+  } as Volume
+}
+
+export const unmarshalInstance = (data: unknown): Instance => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Instance' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
+    id: data.id,
+    maintenances: unmarshalArrayOfObject(data.maintenances, unmarshalMaintenance),
+    name: data.name,
+    nodeAmount: data.node_amount,
+    nodeType: data.node_type,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
+    settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
+    snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : undefined,
+    status: data.status,
+    tags: data.tags,
+    version: data.version,
+    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+  } as Instance
 }
 
 export const unmarshalSnapshot = (data: unknown): Snapshot => {
@@ -395,6 +396,7 @@ const unmarshalVersion = (data: unknown): Version => {
 
   return {
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    releasedAt: unmarshalDate(data.released_at),
     version: data.version,
   } as Version
 }
