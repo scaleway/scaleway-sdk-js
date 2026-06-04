@@ -32,13 +32,13 @@ const updateProfileInEnv = (newProfile: Profile): void => {
 }
 
 const updateProfileInConfiFile = (newProfile: Profile, filePath: string): void => {
-  const yml = `access_key: ${newProfile.accessKey ?? ''}\n
-    api_url: ${newProfile.apiURL ?? ''}\n
-    default_organization_id: ${newProfile.defaultOrganizationId ?? ''}\n
-    default_project_id: ${newProfile.defaultProjectId ?? ''}\n
-    default_region: ${newProfile.defaultRegion ?? ''}\n
-    default_zone: ${newProfile.defaultZone ?? ''}\n
-    secret_key: ${newProfile.secretKey ?? ''}`
+  const yml = `access_key: ${newProfile.accessKey ?? ''}
+api_url: ${newProfile.apiURL ?? ''}
+default_organization_id: ${newProfile.defaultOrganizationId ?? ''}
+default_project_id: ${newProfile.defaultProjectId ?? ''}
+default_region: ${newProfile.defaultRegion ?? ''}
+default_zone: ${newProfile.defaultZone ?? ''}
+secret_key: ${newProfile.secretKey ?? ''}`
   writeFileSync(filePath, yml)
 }
 
