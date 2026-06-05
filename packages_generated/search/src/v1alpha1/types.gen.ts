@@ -3,6 +3,17 @@
 import type { Region as ScwRegion, Zone as ScwZone} from '@scaleway/sdk-client'
 
 
+export type ObsDatasourceInfoDataType =
+  | 'unknown_data_type'
+  | 'metrics'
+  | 'logs'
+  | 'traces'
+
+export type ObsExporterInfoDestinationType =
+  | 'unknown_destination_type'
+  | 'datadog'
+  | 'otlp'
+
 export type ResourceType =
   | 'unknown_type'
   | 'instance_server'
@@ -48,8 +59,7 @@ export type ResourceType =
   | 'gapi_batch'
   | 'dtwh_deployment'
   | 'obs_datasource'
-  | 'obs_token'
-  | 'obs_alert'
+  | 'obs_exporter'
   | 'svpn_vpn_gateway'
   | 'svpn_customer_gateway'
   | 'svpn_connection'
@@ -57,6 +67,16 @@ export type ResourceType =
 
 export interface BrmServerInfo {
   ip: string
+}
+
+
+export interface ObsDatasourceInfo {
+  type: ObsDatasourceInfoDataType
+}
+
+
+export interface ObsExporterInfo {
+  destinationType: ObsExporterInfoDestinationType
 }
 
 
@@ -131,31 +151,41 @@ export interface Resource {
   /**
    * Additional information for a VPC Private Network.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
   vpcPrivateNetworkInfo?: VpcPrivateNetworkInfo
   /**
    * Additional information for a Serverless Function.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
   serverlessFunctionsFunctionInfo?: ServerlessFunctionsFunctionInfo
   /**
    * Additional information for a Serverless Container.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
   serverlessContainersContainerInfo?: ServerlessContainersContainerInfo
   /**
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
   baremetalServerInfo?: BrmServerInfo
   /**
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
   serverlessSqldbBackupInfo?: ServerlessSqldbBackupInfo
+  /**
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   */
+  obsDatasourceInfo?: ObsDatasourceInfo
+  /**
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   */
+  obsExporterInfo?: ObsExporterInfo
 }
 
 
