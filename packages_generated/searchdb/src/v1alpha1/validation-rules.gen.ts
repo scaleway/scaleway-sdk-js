@@ -11,6 +11,10 @@ export const CreateDeploymentRequest = {
     greaterThanOrEqual: 1,
     lessThanOrEqual: 99,
   },
+  nodeCount: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 99,
+  },
   nodeType: {
     maxLength: 128,
     minLength: 1,

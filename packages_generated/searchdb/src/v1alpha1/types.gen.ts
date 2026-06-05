@@ -171,9 +171,13 @@ export interface Deployment {
    */
   tags: string[]
   /**
-   * Number of nodes allocated per deployment.
+   * @deprecated DEPRECATED: Use node_count instead. Number of nodes allocated per deployment.
    */
   nodeAmount: number
+  /**
+   * Number of nodes allocated per deployment.
+   */
+  nodeCount: number
   /**
    * Node type used in deployment.
    */
@@ -297,9 +301,13 @@ export type CreateDeploymentRequest = {
    */
   tags?: string[]
   /**
-   * Number of nodes.
+   * @deprecated DEPRECATED: Use node_count instead. Number of nodes.
    */
   nodeAmount: number
+  /**
+   * Number of nodes.
+   */
+  nodeCount: number
   /**
    * Node type.
    */
@@ -648,15 +656,21 @@ export type UpgradeDeploymentRequest = {
    */
   deploymentId: string
   /**
-   * Amount of node upgrade target.
+   * @deprecated DEPRECATED: Use node_count instead. Amount of node upgrade target.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'volumeSizeBytes' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'nodeCount', 'volumeSizeBytes' could be set.
    */
   nodeAmount?: number
   /**
+   * The target number of nodes for the upgrade.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'nodeCount', 'volumeSizeBytes' could be set.
+   */
+  nodeCount?: number
+  /**
    * Volume size upgrade target.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'volumeSizeBytes' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'nodeCount', 'volumeSizeBytes' could be set.
    */
   volumeSizeBytes?: number
 }
