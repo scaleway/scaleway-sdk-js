@@ -6,6 +6,10 @@ export {
 export * from './marshalling.gen.js'
 export type {
   BrmServerInfo,
+  ObsDatasourceInfo,
+  ObsDatasourceInfoDataType,
+  ObsExporterInfo,
+  ObsExporterInfoDestinationType,
   Resource,
   ResourceType,
   SearchResourcesRequest,
