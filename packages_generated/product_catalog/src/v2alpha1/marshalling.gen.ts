@@ -42,6 +42,7 @@ import type {
   PublicCatalogProductPropertiesManagedRelationalDatabase,
   PublicCatalogProductPropertiesObjectStorage,
   PublicCatalogProductPropertiesSecretManager,
+  PublicCatalogProductPropertiesServerlessContainers,
   PublicCatalogProductPropertiesServerlessFunctions,
   PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
@@ -575,6 +576,17 @@ const unmarshalPublicCatalogProductPropertiesSecretManager = (data: unknown): Pu
   } as PublicCatalogProductPropertiesSecretManager
 }
 
+const unmarshalPublicCatalogProductPropertiesServerlessContainers = (data: unknown): PublicCatalogProductPropertiesServerlessContainers => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessContainers' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessContainers
+}
+
 const unmarshalPublicCatalogProductPropertiesServerlessFunctions = (data: unknown): PublicCatalogProductPropertiesServerlessFunctions => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -650,6 +662,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     managedRelationalDatabase: data.managed_relational_database ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabase(data.managed_relational_database) : undefined,
     objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
     secretManager: data.secret_manager ? unmarshalPublicCatalogProductPropertiesSecretManager(data.secret_manager) : undefined,
+    serverlessContainers: data.serverless_containers ? unmarshalPublicCatalogProductPropertiesServerlessContainers(data.serverless_containers) : undefined,
     serverlessFunctions: data.serverless_functions ? unmarshalPublicCatalogProductPropertiesServerlessFunctions(data.serverless_functions) : undefined,
   } as PublicCatalogProductProperties
 }
