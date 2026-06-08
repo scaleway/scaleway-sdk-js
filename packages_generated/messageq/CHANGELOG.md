@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2026-06-08)
+
+
+### Features
+
+* **product_catalog:** add support for `no_kvm` ([#3015](https://github.com/scaleway/scaleway-sdk-js/issues/3015)) ([c0f8a58](https://github.com/scaleway/scaleway-sdk-js/commit/c0f8a58d60f0b0a8aad5697680245ca231de3b0c))
+
+
+
+
+
 # 1.1.0 (2026-06-02)
 
 

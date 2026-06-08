@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2026-06-08)
+
+
+### Features
+
+* **cockpit:** add api search integration ([#3018](https://github.com/scaleway/scaleway-sdk-js/issues/3018)) ([be67ee2](https://github.com/scaleway/scaleway-sdk-js/commit/be67ee2271941b3d5a8aacc263b7ce8ba451696e))
+* **search:** add support for instance_private_nic instance_snapshot and instance_placement_group ([#3016](https://github.com/scaleway/scaleway-sdk-js/issues/3016)) ([54ad561](https://github.com/scaleway/scaleway-sdk-js/commit/54ad56196bf078e3a7793f68bb795dd0b7401041))
+
+
+
+
+
 # 1.1.0 (2026-06-02)
 
 

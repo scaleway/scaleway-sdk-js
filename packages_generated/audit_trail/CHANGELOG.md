@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.14.0 (2026-06-08)
+
+
+### Features
+
+* **audit_trail:** add support for interlink resource types ([#3022](https://github.com/scaleway/scaleway-sdk-js/issues/3022)) ([d8a43b2](https://github.com/scaleway/scaleway-sdk-js/commit/d8a43b21798cce34514bdaa8f3a8a74fb603498e))
+
+
+
+
+
 # [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.12.1...@scaleway/sdk-audit-trail@2.13.0) (2026-06-02)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.12.0 (2026-06-08)
+
+
+### Features
+
+* **product_catalog:** add serverless containers products to catalog APIs ([#3017](https://github.com/scaleway/scaleway-sdk-js/issues/3017)) ([e2598d0](https://github.com/scaleway/scaleway-sdk-js/commit/e2598d090222f1ce763a8e12babdbcfffd73fd92))
+* **product_catalog:** add support for `no_kvm` ([#3015](https://github.com/scaleway/scaleway-sdk-js/issues/3015)) ([c0f8a58](https://github.com/scaleway/scaleway-sdk-js/commit/c0f8a58d60f0b0a8aad5697680245ca231de3b0c))
+
+
+
+
+
 # [2.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.10.1...@scaleway/sdk-product-catalog@2.11.0) (2026-06-02)
 
 
