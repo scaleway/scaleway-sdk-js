@@ -161,6 +161,10 @@ export type ResourceType =
   | 'observability_datasource'
   | 'observability_token'
   | 'observability_exporter'
+  | 'ili_partner'
+  | 'ili_connection'
+  | 'ili_link'
+  | 'ili_routing_policy'
 
 export type SystemEventKind =
   | 'unknown_kind'
