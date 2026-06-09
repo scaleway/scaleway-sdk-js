@@ -93,6 +93,10 @@ export interface Subnet {
    * VPC the subnet belongs to.
    */
   vpcId: string
+  /**
+   * Region in which the Subnet can be used.
+   */
+  region: ScwRegion
 }
 
 
@@ -262,6 +266,12 @@ export interface IngressRule {
   nexthopPrivateNetworkId: string
   description?: string
   tags: string[]
+  organizationId: string
+  projectId: string
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region: ScwRegion
 }
 
 
@@ -734,6 +744,8 @@ export type ListIngressRulesRequest = {
   nexthopPrivateNetworkId?: string
   isIpv6?: boolean
   tags?: string[]
+  organizationId?: string
+  projectId?: string
 }
 
 
