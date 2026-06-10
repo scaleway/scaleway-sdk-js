@@ -44,6 +44,10 @@ export interface Attachment {
    * The zone where the resource is located.
    */
   zone?: ScwZone
+  /**
+   * The region where the attachment is located.
+   */
+  region: ScwRegion
 }
 
 
