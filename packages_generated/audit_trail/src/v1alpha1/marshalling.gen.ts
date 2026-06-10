@@ -44,6 +44,8 @@ import type {
   LoadBalancerIpInfo,
   LoadBalancerLbInfo,
   LoadBalancerRouteInfo,
+  ObservabilityAlertRuleInfo,
+  ObservabilityContactPointInfo,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
   VpcConnectorInfo,
@@ -607,6 +609,30 @@ const unmarshalLoadBalancerRouteInfo = (data: unknown): LoadBalancerRouteInfo =>
   } as LoadBalancerRouteInfo
 }
 
+const unmarshalObservabilityAlertRuleInfo = (data: unknown): ObservabilityAlertRuleInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ObservabilityAlertRuleInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ruleIds: data.rule_ids,
+  } as ObservabilityAlertRuleInfo
+}
+
+const unmarshalObservabilityContactPointInfo = (data: unknown): ObservabilityContactPointInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ObservabilityContactPointInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    email: data.email,
+  } as ObservabilityContactPointInfo
+}
+
 const unmarshalSecretManagerSecretInfo = (data: unknown): SecretManagerSecretInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -776,6 +802,8 @@ export const unmarshalResource = (data: unknown): Resource => {
     loadBalancerLbInfo: data.load_balancer_lb_info ? unmarshalLoadBalancerLbInfo(data.load_balancer_lb_info) : undefined,
     loadBalancerRouteInfo: data.load_balancer_route_info ? unmarshalLoadBalancerRouteInfo(data.load_balancer_route_info) : undefined,
     name: data.name,
+    observabilityAlertRuleInfo: data.observability_alert_rule_info ? unmarshalObservabilityAlertRuleInfo(data.observability_alert_rule_info) : undefined,
+    observabilityContactPointInfo: data.observability_contact_point_info ? unmarshalObservabilityContactPointInfo(data.observability_contact_point_info) : undefined,
     secmSecretInfo: data.secm_secret_info ? unmarshalSecretManagerSecretInfo(data.secm_secret_info) : undefined,
     secmSecretVersionInfo: data.secm_secret_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info) : undefined,
     secretManagerSecretInfo: data.secret_manager_secret_info ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info) : undefined,
