@@ -81,6 +81,8 @@ export type {
   LoadBalancerIpInfo,
   LoadBalancerLbInfo,
   LoadBalancerRouteInfo,
+  ObservabilityAlertRuleInfo,
+  ObservabilityContactPointInfo,
   Product,
   ProductService,
   Resource,
