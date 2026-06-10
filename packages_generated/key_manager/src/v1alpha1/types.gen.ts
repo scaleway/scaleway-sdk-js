@@ -33,6 +33,11 @@ export type KeyOrigin =
   | 'scaleway_kms'
   | 'external'
 
+export type KeyProtectionLevel =
+  | 'unknown_protection_level'
+  | 'software'
+  | 'hsm'
+
 export type KeyState =
   | 'unknown_state'
   | 'enabled'
@@ -167,6 +172,10 @@ export interface Key {
    */
   deletionRequestedAt?: Date
   /**
+   * Refer to the `Key.ProtectionLevel` enum for a description of values.
+   */
+  protectionLevel: KeyProtectionLevel
+  /**
    * Region where the key is stored.
    */
   region: ScwRegion
@@ -210,6 +219,10 @@ export type CreateKeyRequest = {
    * Refer to the `Key.Origin` enum for a description of values.
    */
   origin?: KeyOrigin
+  /**
+   * Refer to the `Key.Protection` enum for a description of values.
+   */
+  protectionLevel?: KeyProtectionLevel
 }
 
 
@@ -470,6 +483,10 @@ export type ListKeysRequest = {
    * Filter keys based on their deletion status. By default, only keys not scheduled for deletion are returned in the output.
    */
   scheduledForDeletion: boolean
+  /**
+   * Select from software or hsm.
+   */
+  protectionLevel?: KeyProtectionLevel
 }
 
 
