@@ -214,6 +214,10 @@ export interface VolumeType {
    * Volume specifications of the volume type.
    */
   specs?: VolumeSpecifications
+  /**
+   * Zone of the volume type.
+   */
+  zone: ScwZone
 }
 
 
