@@ -44,6 +44,7 @@ import type {
   PublicCatalogProductPropertiesSecretManager,
   PublicCatalogProductPropertiesServerlessContainers,
   PublicCatalogProductPropertiesServerlessFunctions,
+  PublicCatalogProductPropertiesServerlessJobs,
   PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
@@ -598,6 +599,17 @@ const unmarshalPublicCatalogProductPropertiesServerlessFunctions = (data: unknow
   } as PublicCatalogProductPropertiesServerlessFunctions
 }
 
+const unmarshalPublicCatalogProductPropertiesServerlessJobs = (data: unknown): PublicCatalogProductPropertiesServerlessJobs => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessJobs' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessJobs
+}
+
 const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (data: unknown): PublicCatalogProductEnvironmentalImpactEstimation => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -664,6 +676,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     secretManager: data.secret_manager ? unmarshalPublicCatalogProductPropertiesSecretManager(data.secret_manager) : undefined,
     serverlessContainers: data.serverless_containers ? unmarshalPublicCatalogProductPropertiesServerlessContainers(data.serverless_containers) : undefined,
     serverlessFunctions: data.serverless_functions ? unmarshalPublicCatalogProductPropertiesServerlessFunctions(data.serverless_functions) : undefined,
+    serverlessJobs: data.serverless_jobs ? unmarshalPublicCatalogProductPropertiesServerlessJobs(data.serverless_jobs) : undefined,
   } as PublicCatalogProductProperties
 }
 
