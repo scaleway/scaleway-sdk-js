@@ -65,6 +65,7 @@ export type {
   PublicCatalogProductPropertiesSecretManager,
   PublicCatalogProductPropertiesServerlessContainers,
   PublicCatalogProductPropertiesServerlessFunctions,
+  PublicCatalogProductPropertiesServerlessJobs,
   PublicCatalogProductStatus,
   PublicCatalogProductUnitOfMeasure,
   PublicCatalogProductUnitOfMeasureCountableUnit,
