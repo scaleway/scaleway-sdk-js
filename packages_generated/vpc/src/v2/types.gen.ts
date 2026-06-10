@@ -94,7 +94,7 @@ export interface Subnet {
    */
   vpcId: string
   /**
-   * Region of the subnet.
+   * Region in which the Subnet can be used.
    */
   region: ScwRegion
 }
