@@ -45,6 +45,7 @@ const unmarshalAttachment = (data: unknown): Attachment => {
   return {
     filesystemId: data.filesystem_id,
     id: data.id,
+    region: data.region,
     resourceId: data.resource_id,
     resourceType: data.resource_type,
     zone: data.zone,
