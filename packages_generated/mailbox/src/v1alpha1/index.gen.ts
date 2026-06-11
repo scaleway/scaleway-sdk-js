@@ -6,9 +6,12 @@ export {
 export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
+  Alias,
+  AliasStatus,
   BatchCreateMailboxesRequest,
   BatchCreateMailboxesRequestMailboxParameters,
   BatchCreateMailboxesResponse,
+  CreateAliasRequest,
   CreateDomainRequest,
   DeleteDomainRequest,
   DeleteMailboxRequest,
