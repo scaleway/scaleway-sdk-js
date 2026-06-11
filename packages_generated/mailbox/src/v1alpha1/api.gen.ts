@@ -70,7 +70,7 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
-  
+
   protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}) =>
     this.client.fetch<ListDomainsResponse>(
       {
@@ -87,7 +87,7 @@ export class API extends ParentAPI {
       },
       unmarshalListDomainsResponse,
     )
-  
+
   /**
    * List domains in an organization.. The return list can be filtered with request parameters.
    *
@@ -97,7 +97,7 @@ export class API extends ParentAPI {
   listDomains = (request: Readonly<ListDomainsRequest> = {}) =>
     enrichForPagination('domains', this.pageOfListDomains, request)
 
-  
+
   /**
    * Get a domain by its ID.. Get a domain by its ID.
    *
@@ -112,7 +112,7 @@ export class API extends ParentAPI {
       },
       unmarshalDomain,
     )
-  
+
   /**
    * Waits for {@link Domain} to be in a final state.
    *
@@ -131,7 +131,7 @@ export class API extends ParentAPI {
       options,
     )
 
-  
+
   /**
    * Delete a domain by its ID.. Delete a domain by its ID.
    *
@@ -147,7 +147,7 @@ export class API extends ParentAPI {
       unmarshalDomain,
     )
 
-  
+
   /**
    * Get domain records by its ID.. Get domain records by its ID.
    *
@@ -163,7 +163,12 @@ export class API extends ParentAPI {
       unmarshalGetDomainRecordsResponse,
     )
 
-  
+
+    /**
+   * Validate domain records by its ID.. Validate domain records by its ID.
+   *
+   * @param request - The request {@link ValidateDomainRecordsRequest}
+   */
   validateDomainRecords = (request: Readonly<ValidateDomainRecordsRequest>) =>
     this.client.fetch<void>(
       {
@@ -174,7 +179,13 @@ export class API extends ParentAPI {
       },
     )
 
-  
+
+   /**
+   * Create one or more mailboxes.. Create one or more mailboxes.
+   *
+   * @param request - The request {@link BatchCreateMailboxesRequest}
+   * @returns A Promise of BatchCreateMailboxesResponse
+   */
   batchCreateMailboxes = (request: Readonly<BatchCreateMailboxesRequest>) =>
     this.client.fetch<BatchCreateMailboxesResponse>(
       {
@@ -188,7 +199,7 @@ export class API extends ParentAPI {
       unmarshalBatchCreateMailboxesResponse,
     )
 
-  
+
   protected pageOfListMailboxes = (request: Readonly<ListMailboxesRequest> = {}) =>
     this.client.fetch<ListMailboxesResponse>(
       {
@@ -205,7 +216,7 @@ export class API extends ParentAPI {
       },
       unmarshalListMailboxesResponse,
     )
-  
+
   /**
    * List mailboxes in an organization.. The return list can be filtered with request parameters.
    *
@@ -215,7 +226,7 @@ export class API extends ParentAPI {
   listMailboxes = (request: Readonly<ListMailboxesRequest> = {}) =>
     enrichForPagination('mailboxes', this.pageOfListMailboxes, request)
 
-  
+
   /**
    * Get a mailbox by its ID.. Get a mailbox by its ID.
    *
@@ -230,7 +241,7 @@ export class API extends ParentAPI {
       },
       unmarshalMailbox,
     )
-  
+
   /**
    * Waits for {@link Mailbox} to be in a final state.
    *
@@ -249,7 +260,7 @@ export class API extends ParentAPI {
       options,
     )
 
-  
+
   /**
    * Update a mailbox subscription period or password with its ID.. Update a mailbox subscription period or password with its ID.
    *
@@ -269,7 +280,7 @@ export class API extends ParentAPI {
       unmarshalMailbox,
     )
 
-  
+
   /**
    * Delete a mailbox by its ID.. Delete a mailbox by its ID.
    *
@@ -285,7 +296,7 @@ export class API extends ParentAPI {
       unmarshalMailbox,
     )
 
-  
+
   /**
    * Restore a mailbox in deletion scheduled status by its ID.. Restore a mailbox in deletion scheduled status by its ID.
    *
@@ -303,6 +314,6 @@ export class API extends ParentAPI {
       unmarshalMailbox,
     )
 
-  
+
 }
 

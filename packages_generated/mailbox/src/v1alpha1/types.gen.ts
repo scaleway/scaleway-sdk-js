@@ -429,6 +429,9 @@ export type UpdateMailboxRequest = {
 
 
 export type ValidateDomainRecordsRequest = {
+  /**
+   * ID of the domain with which to validate the records.
+   */
   domainId: string
 }
 
