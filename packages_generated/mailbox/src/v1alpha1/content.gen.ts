@@ -1,11 +1,18 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type {
+  AliasStatus,
   DomainRecordStatus,
   DomainStatus,
   MailboxStatus,
 } from './types.gen.js'
 
+
+/** Lists transient statutes of the enum {@link AliasStatus}. */
+export const ALIAS_TRANSIENT_STATUSES: AliasStatus[] = [
+  'provisioning',
+  'deleting',
+]
 
 /** Lists transient statutes of the enum {@link DomainRecordStatus}. */
 export const DOMAIN_RECORD_TRANSIENT_STATUSES: DomainRecordStatus[] = [
