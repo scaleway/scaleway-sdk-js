@@ -28,6 +28,7 @@ import type {
   EdgeServicesRouteRulesInfo,
   EdgeServicesRouteStageInfo,
   EdgeServicesTLSStageInfo,
+  EdgeServicesVPCEndpointInfo,
   EdgeServicesWAFStageInfo,
   InstancePrivateNetworkInterfaceInfo,
   InstanceServerInfo,
@@ -411,6 +412,18 @@ const unmarshalEdgeServicesTLSStageInfo = (data: unknown): EdgeServicesTLSStageI
   } as EdgeServicesTLSStageInfo
 }
 
+const unmarshalEdgeServicesVPCEndpointInfo = (data: unknown): EdgeServicesVPCEndpointInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesVPCEndpointInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    privateNetworkId: data.private_network_id,
+  } as EdgeServicesVPCEndpointInfo
+}
+
 const unmarshalEdgeServicesWAFStageInfo = (data: unknown): EdgeServicesWAFStageInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -783,6 +796,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     edgeServicesRouteRulesInfo: data.edge_services_route_rules_info ? unmarshalEdgeServicesRouteRulesInfo(data.edge_services_route_rules_info) : undefined,
     edgeServicesRouteStageInfo: data.edge_services_route_stage_info ? unmarshalEdgeServicesRouteStageInfo(data.edge_services_route_stage_info) : undefined,
     edgeServicesTlsStageInfo: data.edge_services_tls_stage_info ? unmarshalEdgeServicesTLSStageInfo(data.edge_services_tls_stage_info) : undefined,
+    edgeServicesVpcEndpointInfo: data.edge_services_vpc_endpoint_info ? unmarshalEdgeServicesVPCEndpointInfo(data.edge_services_vpc_endpoint_info) : undefined,
     edgeServicesWafStageInfo: data.edge_services_waf_stage_info ? unmarshalEdgeServicesWAFStageInfo(data.edge_services_waf_stage_info) : undefined,
     id: data.id,
     instancePrivateNetworkInterfaceInfo: data.instance_private_network_interface_info ? unmarshalInstancePrivateNetworkInterfaceInfo(data.instance_private_network_interface_info) : undefined,

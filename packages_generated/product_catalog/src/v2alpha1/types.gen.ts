@@ -50,6 +50,20 @@ export type PublicCatalogProductPropertiesGenerativeApisConsumptionMode =
   | 'realtime'
   | 'batch'
 
+export type PublicCatalogProductPropertiesGenerativeApisTask =
+  | 'unknown_task'
+  | 'chat'
+  | 'embeddings'
+  | 'vision'
+  | 'audio_transcription'
+  | 'code'
+
+export type PublicCatalogProductPropertiesGenerativeApisTokenType =
+  | 'unknown_token_type'
+  | 'input_token'
+  | 'output_token'
+  | 'input_duration'
+
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
   | 'x64'
@@ -427,6 +441,10 @@ export interface PublicCatalogProductPropertiesGenerativeApis {
   reasoning: boolean
   supportedApis: string[]
   consumptionMode: PublicCatalogProductPropertiesGenerativeApisConsumptionMode
+  providerName: string
+  tasks: PublicCatalogProductPropertiesGenerativeApisTask[]
+  tokenType: PublicCatalogProductPropertiesGenerativeApisTokenType
+  supportedReasoningValues: string[]
 }
 
 

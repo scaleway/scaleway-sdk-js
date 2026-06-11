@@ -4,6 +4,7 @@ import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Mailbox,
   Domain,
+  Alias,
   BatchCreateMailboxesResponse,
   DomainRecord,
   GetDomainRecordsResponse,
@@ -11,6 +12,7 @@ import type {
   ListMailboxesResponse,
   BatchCreateMailboxesRequestMailboxParameters,
   BatchCreateMailboxesRequest,
+  CreateAliasRequest,
   CreateDomainRequest,
   UpdateMailboxRequest,
 } from './types.gen.js'
@@ -57,6 +59,24 @@ export const unmarshalDomain = (data: unknown): Domain => {
     updatedAt: unmarshalDate(data.updated_at),
     webmailUrl: data.webmail_url,
   } as Domain
+}
+
+export const unmarshalAlias = (data: unknown): Alias => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Alias' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    email: data.email,
+    id: data.id,
+    mailboxId: data.mailbox_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Alias
 }
 
 export const unmarshalBatchCreateMailboxesResponse = (data: unknown): BatchCreateMailboxesResponse => {
@@ -156,6 +176,14 @@ export const marshalBatchCreateMailboxesRequest = (
   domain_id: request.domainId,
   mailboxes: ((request.mailboxes !== undefined) ?  request.mailboxes.map(elt => marshalBatchCreateMailboxesRequestMailboxParameters(elt, defaults)): undefined),
   subscription_period: request.subscriptionPeriod,
+})
+
+export const marshalCreateAliasRequest = (
+  request: CreateAliasRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  local_part: request.localPart,
 })
 
 export const marshalCreateDomainRequest = (
