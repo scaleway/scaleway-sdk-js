@@ -10,8 +10,10 @@ import {
 import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
 import {
+  unmarshalAlias,
   marshalBatchCreateMailboxesRequest,
   unmarshalBatchCreateMailboxesResponse,
+  marshalCreateAliasRequest,
   marshalCreateDomainRequest,
   unmarshalDomain,
   unmarshalGetDomainRecordsResponse,
@@ -21,8 +23,10 @@ import {
   marshalUpdateMailboxRequest,
 } from './marshalling.gen.js'
 import type {
+  Alias,
   BatchCreateMailboxesRequest,
   BatchCreateMailboxesResponse,
+  CreateAliasRequest,
   CreateDomainRequest,
   DeleteDomainRequest,
   DeleteMailboxRequest,
@@ -314,6 +318,26 @@ export class API extends ParentAPI {
       unmarshalMailbox,
     )
 
+  
+  /**
+   * Create an alias for a mailbox.. Create an alias for a mailbox.
+   *
+   * @param request - The request {@link CreateAliasRequest}
+   * @returns A Promise of Alias
+   */
+  createAlias = (request: Readonly<CreateAliasRequest>) =>
+    this.client.fetch<Alias>(
+      {
+        body: JSON.stringify(
+          marshalCreateAliasRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/aliases`,
+      },
+      unmarshalAlias,
+    )
 
+  
 }
 
