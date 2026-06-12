@@ -21,6 +21,8 @@ export type {
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesGenerativeApis,
   PublicCatalogProductPropertiesGenerativeApisConsumptionMode,
+  PublicCatalogProductPropertiesGenerativeApisTask,
+  PublicCatalogProductPropertiesGenerativeApisTokenType,
   PublicCatalogProductPropertiesHardware,
   PublicCatalogProductPropertiesHardwareCPU,
   PublicCatalogProductPropertiesHardwareCPUArch,
