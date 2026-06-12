@@ -424,8 +424,12 @@ const unmarshalPublicCatalogProductPropertiesGenerativeApis = (data: unknown): P
 
   return {
     consumptionMode: data.consumption_mode,
+    providerName: data.provider_name,
     reasoning: data.reasoning,
     supportedApis: data.supported_apis,
+    supportedReasoningValues: data.supported_reasoning_values,
+    tasks: data.tasks,
+    tokenType: data.token_type,
   } as PublicCatalogProductPropertiesGenerativeApis
 }
 
