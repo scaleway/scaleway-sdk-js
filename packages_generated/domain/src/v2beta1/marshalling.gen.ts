@@ -16,7 +16,6 @@ import type {
   DNSZone,
   Host,
   SSLCertificate,
-  Task,
   CheckContactsCompatibilityResponseContactCheckResult,
   CheckContactsCompatibilityResponse,
   ClearDNSZoneRecordsResponse,
@@ -69,6 +68,7 @@ import type {
   RenewableDomain,
   ListRenewableDomainsResponse,
   ListSSLCertificatesResponse,
+  Task,
   ListTasksResponse,
   ListTldsResponse,
   OrderResponse,
@@ -332,27 +332,6 @@ export const unmarshalSSLCertificate = (data: unknown): SSLCertificate => {
     privateKey: data.private_key,
     status: data.status,
   } as SSLCertificate
-}
-
-export const unmarshalTask = (data: unknown): Task => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Task' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    contactIdentifier: data.contact_identifier,
-    domain: data.domain,
-    id: data.id,
-    message: data.message,
-    organizationId: data.organization_id,
-    projectId: data.project_id,
-    startedAt: unmarshalDate(data.started_at),
-    status: data.status,
-    type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as Task
 }
 
 const unmarshalCheckContactsCompatibilityResponseContactCheckResult = (data: unknown): CheckContactsCompatibilityResponseContactCheckResult => {
@@ -1087,6 +1066,27 @@ export const unmarshalListSSLCertificatesResponse = (data: unknown): ListSSLCert
     certificates: unmarshalArrayOfObject(data.certificates, unmarshalSSLCertificate),
     totalCount: data.total_count,
   } as ListSSLCertificatesResponse
+}
+
+export const unmarshalTask = (data: unknown): Task => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Task' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    contactIdentifier: data.contact_identifier,
+    domain: data.domain,
+    id: data.id,
+    message: data.message,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    startedAt: unmarshalDate(data.started_at),
+    status: data.status,
+    type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Task
 }
 
 export const unmarshalListTasksResponse = (data: unknown): ListTasksResponse => {
