@@ -12,16 +12,6 @@ export const BatchCreateMailboxesRequestMailboxParameters = {
   },
 }
 
-export const CreateAliasRequest = {
-  description: {
-    maxLength: 128,
-  },
-  localPart: {
-    maxLength: 64,
-    minLength: 1,
-  },
-}
-
 export const CreateDomainRequest = {
   name: {
     maxLength: 253,

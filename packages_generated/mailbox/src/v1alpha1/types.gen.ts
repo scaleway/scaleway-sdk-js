@@ -1,12 +1,6 @@
 
 
 
-export type AliasStatus =
-  | 'unknown_status'
-  | 'provisioning'
-  | 'deleting'
-  | 'ready'
-
 export type DomainRecordDNSType =
   | 'unknown_dns_type'
   | 'cname_dns_type'
@@ -220,38 +214,6 @@ export interface Domain {
 }
 
 
-export interface Alias {
-  /**
-   * Unique identifier of the alias.
-   */
-  id: string
-  /**
-   * Email address of the alias as local_part@domain.
-   */
-  email: string
-  /**
-   * ID of the mailbox to which the alias belongs.
-   */
-  mailboxId: string
-  /**
-   * Description of the alias.
-   */
-  description: string
-  /**
-   * Current status of the alias.
-   */
-  status: AliasStatus
-  /**
-   * Date and time of alias creation.
-   */
-  createdAt?: Date
-  /**
-   * Date and time when the alias was last updated.
-   */
-  updatedAt?: Date
-}
-
-
 export type BatchCreateMailboxesRequest = {
   /**
    * Parameters for the mailboxes to create.
@@ -273,22 +235,6 @@ export interface BatchCreateMailboxesResponse {
    * Mailboxes created.
    */
   mailboxes: Mailbox[]
-}
-
-
-export type CreateAliasRequest = {
-  /**
-   * ID of the mailbox to associate with the alias.
-   */
-  mailboxId: string
-  /**
-   * Local part of the email address (e.g. local_part@domain.com).
-   */
-  localPart: string
-  /**
-   * (Optional) Description of the alias.
-   */
-  description?: string
 }
 
 
@@ -483,9 +429,6 @@ export type UpdateMailboxRequest = {
 
 
 export type ValidateDomainRecordsRequest = {
-  /**
-   * ID of the domain with which to validate the records.
-   */
   domainId: string
 }
 

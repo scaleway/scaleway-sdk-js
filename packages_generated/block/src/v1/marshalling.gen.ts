@@ -143,7 +143,6 @@ const unmarshalVolumeType = (data: unknown): VolumeType => {
     snapshotPricing: data.snapshot_pricing ? unmarshalMoney(data.snapshot_pricing) : undefined,
     specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
     type: data.type,
-    zone: data.zone,
   } as VolumeType
 }
 

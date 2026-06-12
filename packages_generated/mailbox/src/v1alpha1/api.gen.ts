@@ -10,10 +10,8 @@ import {
 import type { WaitForOptions, } from '@scaleway/sdk-client'
 import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
 import {
-  unmarshalAlias,
   marshalBatchCreateMailboxesRequest,
   unmarshalBatchCreateMailboxesResponse,
-  marshalCreateAliasRequest,
   marshalCreateDomainRequest,
   unmarshalDomain,
   unmarshalGetDomainRecordsResponse,
@@ -23,10 +21,8 @@ import {
   marshalUpdateMailboxRequest,
 } from './marshalling.gen.js'
 import type {
-  Alias,
   BatchCreateMailboxesRequest,
   BatchCreateMailboxesResponse,
-  CreateAliasRequest,
   CreateDomainRequest,
   DeleteDomainRequest,
   DeleteMailboxRequest,
@@ -168,11 +164,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Validate domain records by its ID.. Validate domain records by its ID.
-   *
-   * @param request - The request {@link ValidateDomainRecordsRequest}
-   */
   validateDomainRecords = (request: Readonly<ValidateDomainRecordsRequest>) =>
     this.client.fetch<void>(
       {
@@ -184,12 +175,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Create one or more mailboxes.. Create one or more mailboxes.
-   *
-   * @param request - The request {@link BatchCreateMailboxesRequest}
-   * @returns A Promise of BatchCreateMailboxesResponse
-   */
   batchCreateMailboxes = (request: Readonly<BatchCreateMailboxesRequest>) =>
     this.client.fetch<BatchCreateMailboxesResponse>(
       {
@@ -316,26 +301,6 @@ export class API extends ParentAPI {
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/restore`,
       },
       unmarshalMailbox,
-    )
-
-  
-  /**
-   * Create an alias for a mailbox.. Create an alias for a mailbox.
-   *
-   * @param request - The request {@link CreateAliasRequest}
-   * @returns A Promise of Alias
-   */
-  createAlias = (request: Readonly<CreateAliasRequest>) =>
-    this.client.fetch<Alias>(
-      {
-        body: JSON.stringify(
-          marshalCreateAliasRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/aliases`,
-      },
-      unmarshalAlias,
     )
 
   
