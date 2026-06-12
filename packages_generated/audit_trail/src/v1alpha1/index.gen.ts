@@ -37,6 +37,7 @@ export type {
   EdgeServicesRouteRulesInfo,
   EdgeServicesRouteStageInfo,
   EdgeServicesTLSStageInfo,
+  EdgeServicesVPCEndpointInfo,
   EdgeServicesWAFStageInfo,
   EnableAlertRulesRequest,
   EnableAlertRulesResponse,
