@@ -767,7 +767,7 @@ export class ZonedAPI extends ParentAPI {
     )
   
   /**
-   * List all routes. List all routes for a given frontend. The response is an array of routes, each one  with a specified backend to direct to if a certain condition is matched (based on the value of the SNI field or HTTP Host header).
+   * List all routes. List all routes for a given frontend. The response is an array of routes, each one with a specified backend to direct to if a certain condition is matched (based on the value of the SNI field or HTTP Host header).
    *
    * @param request - The request {@link ZonedApiListRoutesRequest}
    * @returns A Promise of ListRoutesResponse

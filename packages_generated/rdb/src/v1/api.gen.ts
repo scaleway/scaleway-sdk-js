@@ -640,7 +640,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Get a Read Replica. Retrieve information about a Database Instance Read Replica. Full details about the Read Replica, like `endpoints`, `status`  and `region` are returned in the response.
+   * Get a Read Replica. Retrieve information about a Database Instance Read Replica. Full details about the Read Replica, like `endpoints`, `status` and `region` are returned in the response.
    *
    * @param request - The request {@link GetReadReplicaRequest}
    * @returns A Promise of ReadReplica
@@ -1062,7 +1062,7 @@ The configured endpoints do not change.
 
   
   /**
-   * Delete a user on a Database Instance. Delete a given user on a Database Instance. You must specify, in the endpoint,  the `region`, `instance_id` and `name` parameters of the user you want to delete.
+   * Delete a user on a Database Instance. Delete a given user on a Database Instance. You must specify, in the endpoint, the `region`, `instance_id` and `name` parameters of the user you want to delete.
    *
    * @param request - The request {@link DeleteUserRequest}
    */
@@ -1286,7 +1286,7 @@ The configured endpoints do not change.
 
   
   /**
-   * Delete a Database Instance snapshot. Delete a given snapshot of a Database Instance. You must specify, in the endpoint,  the `region` and `snapshot_id` parameters of the snapshot you want to delete.
+   * Delete a Database Instance snapshot. Delete a given snapshot of a Database Instance. You must specify, in the endpoint, the `region` and `snapshot_id` parameters of the snapshot you want to delete.
    *
    * @param request - The request {@link DeleteSnapshotRequest}
    * @returns A Promise of Snapshot
