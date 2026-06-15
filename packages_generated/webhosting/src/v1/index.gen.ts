@@ -94,6 +94,7 @@ export type {
   HostingCommitment,
   HostingDomain,
   HostingDomainCustomDomain,
+  HostingProvider,
   HostingStatus,
   HostingSummary,
   HostingUser,
