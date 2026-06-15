@@ -17,6 +17,7 @@ export type ProductCategory =
   | 'managed_mongodb'
   | 'managed_redis'
   | 'managed_inference'
+  | 'generative_apis'
 
 export type ReportType =
   | 'unknown_report_type'

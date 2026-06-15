@@ -7,7 +7,7 @@ export const pkgMetadata = {
   name: "@scaleway/sdk-billing",
   namespace: "billing",
   displayName: "Billing",
-  versions: ["v2beta1"]
+  versions: ["v2", "v2beta1"]
 } as const
 
 export type Metadata = typeof pkgMetadata
