@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.14.0...@scaleway/sdk-audit-trail@2.15.0) (2026-06-15)
+
+
+### Features
+
+* **audit_trail:** add edge services VPC endpoint resource type ([#3042](https://github.com/scaleway/scaleway-sdk-js/issues/3042)) ([178029c](https://github.com/scaleway/scaleway-sdk-js/commit/178029c8fe1993721fc3f62c5fcf8e5fa7c94376))
+* **audit_trail:** add observability resource infos ([#3026](https://github.com/scaleway/scaleway-sdk-js/issues/3026)) ([ee0f7ac](https://github.com/scaleway/scaleway-sdk-js/commit/ee0f7ac9d99daed920654b6cc510c1c38ac8685e))
+* **audit-trail:** add support for `autoscaling_group` ([#3050](https://github.com/scaleway/scaleway-sdk-js/issues/3050)) ([fee64a5](https://github.com/scaleway/scaleway-sdk-js/commit/fee64a51fb7045abe8bd4546a993952c0767b423))
+
+
+
+
+
 # 2.14.0 (2026-06-08)
 
 
