@@ -166,6 +166,7 @@ export type ResourceType =
   | 'ili_connection'
   | 'ili_link'
   | 'ili_routing_policy'
+  | 'autoscaling_group'
 
 export type SystemEventKind =
   | 'unknown_kind'

@@ -90,6 +90,7 @@ export type ResourceType =
   | 'svpn_customer_gateway'
   | 'svpn_connection'
   | 'svpn_routing_policy'
+  | 'kafk_cluster'
 
 export interface BrmServerInfo {
   ip: string
