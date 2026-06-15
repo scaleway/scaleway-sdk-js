@@ -105,7 +105,6 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
     name: data.name,
-    nodeAmount: data.node_amount,
     nodeCount: data.node_count,
     nodeType: data.node_type,
     organizationId: data.organization_id,
@@ -277,7 +276,6 @@ export const marshalCreateDeploymentRequest = (
 ): Record<string, unknown> => ({
   endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
   name: request.name,
-  node_amount: request.nodeAmount,
   node_count: request.nodeCount,
   node_type: request.nodeType,
   password: request.password,
@@ -324,9 +322,6 @@ export const marshalUpgradeDeploymentRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
-    {param: 'node_amount',
-      value: request.nodeAmount,
-    },
     {param: 'node_count',
       value: request.nodeCount,
     },
