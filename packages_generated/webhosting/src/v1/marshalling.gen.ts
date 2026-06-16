@@ -502,6 +502,7 @@ export const unmarshalHosting = (data: unknown): Hosting => {
     platform: data.platform ? unmarshalPlatform(data.platform) : undefined,
     projectId: data.project_id,
     protected: data.protected,
+    provider: data.provider ? data.provider : undefined,
     region: data.region,
     status: data.status,
     tags: data.tags,
