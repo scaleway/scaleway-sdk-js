@@ -7,8 +7,14 @@ export const CreateDeploymentRequest = {
     minLength: 1,
     pattern: /^[A-Za-z0-9\-_]+$/,
   },
+  nodeAmount: {
+    greaterThanOrEqual: 1,
+    ignoreEmpty: true,
+    lessThanOrEqual: 99,
+  },
   nodeCount: {
     greaterThanOrEqual: 1,
+    ignoreEmpty: true,
     lessThanOrEqual: 99,
   },
   nodeType: {
