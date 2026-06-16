@@ -183,6 +183,10 @@ export interface Deployment {
    */
   ramPerCpu: number
   /**
+   * For the `tiered` storage policy, controls when data is moved from the hot volume (Block Storage) to the cold volume (Object Storage). Data is moved once free space on the hot volume drops below this fraction of its capacity. Value between 0 and 1 (default 0.1, i.e. data is moved when the hot volume is 90% full).
+   */
+  moveFactor: number
+  /**
    * Region of the deployment.
    */
   region: ScwRegion
@@ -310,6 +314,10 @@ export type CreateDeploymentRequest = {
    * RAM per CPU count for the deployment (in GB).
    */
   ramPerCpu: number
+  /**
+   * For the `tiered` storage policy, controls when data is moved from the hot volume (Block Storage) to the cold volume (Object Storage). Data is moved once free space on the hot volume drops below this fraction of its capacity. Value between 0 and 1 (default 0.1, i.e. data is moved when the hot volume is 90% full).
+   */
+  moveFactor?: number
 }
 
 
@@ -641,6 +649,10 @@ export type UpdateDeploymentRequest = {
    * Number of replicas for the deployment.
    */
   replicaCount?: number
+  /**
+   * For the `tiered` storage policy, controls when data is moved from the hot volume (Block Storage) to the cold volume (Object Storage). Data is moved once free space on the hot volume drops below this fraction of its capacity. Value between 0 and 1 (default 0.1, i.e. data is moved when the hot volume is 90% full).
+   */
+  moveFactor?: number
 }
 
 
