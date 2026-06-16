@@ -221,7 +221,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Get an Operating System (OS). Get an Operating System (OS).  The response will include the OS's unique ID as well as its name and label.
+   * Get an Operating System (OS). Get an Operating System (OS). The response will include the OS's unique ID as well as its name and label.
    *
    * @param request - The request {@link GetOSRequest}
    * @returns A Promise of OS
