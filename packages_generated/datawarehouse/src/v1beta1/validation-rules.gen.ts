@@ -18,6 +18,10 @@ export const CreateDeploymentRequest = {
     greaterThanOrEqual: 1,
     lessThanOrEqual: 15,
   },
+  moveFactor: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 1,
+  },
   name: {
     maxLength: 255,
     minLength: 1,
@@ -162,6 +166,10 @@ export const UpdateDeploymentRequest = {
   cpuMin: {
     greaterThanOrEqual: 1,
     lessThanOrEqual: 15,
+  },
+  moveFactor: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 1,
   },
   name: {
     maxLength: 255,
