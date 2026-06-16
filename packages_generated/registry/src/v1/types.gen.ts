@@ -72,7 +72,7 @@ export interface Image {
    */
   statusMessage?: string
   /**
-   * Set to `public` to allow the image to be pulled without authentication. Else, set to  `private`. Set to `inherit` to keep the same visibility configuration as the namespace.
+   * Set to `public` to allow the image to be pulled without authentication. Else, set to `private`. Set to `inherit` to keep the same visibility configuration as the namespace.
    */
   visibility: ImageVisibility
   /**
@@ -436,7 +436,7 @@ export type UpdateImageRequest = {
    */
   imageId: string
   /**
-   * Set to `public` to allow the image to be pulled without authentication. Else, set to  `private`. Set to `inherit` to keep the same visibility configuration as the namespace.
+   * Set to `public` to allow the image to be pulled without authentication. Else, set to `private`. Set to `inherit` to keep the same visibility configuration as the namespace.
    */
   visibility?: ImageVisibility
 }
