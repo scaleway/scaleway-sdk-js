@@ -82,7 +82,7 @@ export const CreateTriggerRequest = {
   name: {
     maxLength: 50,
     minLength: 1,
-    pattern: /^[a-zA-Z]([-a-zA-Z0-9]*[a-zA-Z0-9])$/,
+    pattern: /^[a-zA-Z0-9]([-_a-zA-Z0-9]*[a-zA-Z0-9])$/,
   },
 }
 
@@ -241,7 +241,7 @@ export const UpdateTriggerRequest = {
   name: {
     maxLength: 50,
     minLength: 1,
-    pattern: /^[a-zA-Z]([-a-zA-Z0-9]*[a-zA-Z0-9])$/,
+    pattern: /^[a-zA-Z0-9]([-_a-zA-Z0-9]*[a-zA-Z0-9])$/,
   },
 }
 
