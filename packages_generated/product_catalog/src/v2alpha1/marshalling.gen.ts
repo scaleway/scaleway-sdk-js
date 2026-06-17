@@ -26,6 +26,7 @@ import type {
   PublicCatalogProductPropertiesObjectStorageInternetTrafficType,
   PublicCatalogProductPropertiesObjectStorageRegionTrafficType,
   PublicCatalogProductPropertiesObjectStorageRestoreType,
+  PublicCatalogProductPropertiesApacheKafka,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
@@ -363,6 +364,17 @@ const unmarshalPublicCatalogProductPropertiesObjectStorageRestoreType = (data: u
   } as PublicCatalogProductPropertiesObjectStorageRestoreType
 }
 
+const unmarshalPublicCatalogProductPropertiesApacheKafka = (data: unknown): PublicCatalogProductPropertiesApacheKafka => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesApacheKafka' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesApacheKafka
+}
+
 const unmarshalPublicCatalogProductPropertiesAppleSilicon = (data: unknown): PublicCatalogProductPropertiesAppleSilicon => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -662,6 +674,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
   }
 
   return {
+    apacheKafka: data.apache_kafka ? unmarshalPublicCatalogProductPropertiesApacheKafka(data.apache_kafka) : undefined,
     appleSilicon: data.apple_silicon ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon) : undefined,
     blockStorage: data.block_storage ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage) : undefined,
     dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : undefined,
