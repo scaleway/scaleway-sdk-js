@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2026-06-15)
+
+
+### Features
+
+* **vpc:** add project/org filter to ingress rule list ([#3024](https://github.com/scaleway/scaleway-sdk-js/issues/3024)) ([2d3c120](https://github.com/scaleway/scaleway-sdk-js/commit/2d3c120370b137e67c87e47eecbae5dbc63d38c5))
+
+
+
+
+
 # [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-vpc@2.6.1...@scaleway/sdk-vpc@2.7.0) (2026-06-02)
 
 

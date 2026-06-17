@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-searchdb@1.6.1...@scaleway/sdk-searchdb@1.7.0) (2026-06-15)
+
+
+### Bug Fixes
+
+* **searchdb:** remove validation rule from deprecated node_amount ([#3023](https://github.com/scaleway/scaleway-sdk-js/issues/3023)) ([eca4488](https://github.com/scaleway/scaleway-sdk-js/commit/eca4488850cd243898a11b436109254d5062f46c))
+
+
+### Features
+
+* **searchdb:** remove node_amount field ([#3048](https://github.com/scaleway/scaleway-sdk-js/issues/3048)) ([6d0ed9b](https://github.com/scaleway/scaleway-sdk-js/commit/6d0ed9bae7498b3540f84955812ad4e78c1244bd))
+
+
+
+
+
 ## 1.6.1 (2026-06-08)
 
 **Note:** Version bump only for package @scaleway/sdk-searchdb

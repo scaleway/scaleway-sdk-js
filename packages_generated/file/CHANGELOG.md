@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2026-06-15)
+
+
+### Features
+
+* **file:** add 'region' field to 'attachment' resource ([#3034](https://github.com/scaleway/scaleway-sdk-js/issues/3034)) ([694c9a0](https://github.com/scaleway/scaleway-sdk-js/commit/694c9a0b59c2a3ec0b42cd2a275410066ab03ff5))
+
+
+
+
+
 ## [2.7.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-file@2.7.1...@scaleway/sdk-file@2.7.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-file
