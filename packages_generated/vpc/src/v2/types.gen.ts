@@ -384,6 +384,10 @@ export interface VPC {
    * Defines whether the VPC advertises custom routes between its Private Networks.
    */
   customRoutesPropagationEnabled: boolean
+  /**
+   * Defines whether the VPC allows packets from peered VPCs to transit through.
+   */
+  transitivityEnabled: boolean
 }
 
 
@@ -535,6 +539,10 @@ export type CreateVPCRequest = {
    * Enable routing between Private Networks in the VPC.
    */
   enableRouting: boolean
+  /**
+   * Enable packets from peered VPCs to transit through this VPC.
+   */
+  enableTransitivity: boolean
 }
 
 
