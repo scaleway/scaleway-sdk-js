@@ -7,7 +7,7 @@ import { Applesiliconv1alpha1 } from '@scaleway/sdk-applesilicon'
 import { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
 import { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
 import { Baremetalv1, Baremetalv3 } from '@scaleway/sdk-baremetal'
-import { Billingv2beta1 } from '@scaleway/sdk-billing'
+import { Billingv2, Billingv2beta1 } from '@scaleway/sdk-billing'
 import { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
 import { Cockpitv1 } from '@scaleway/sdk-cockpit'
 import { Containerv1, Containerv1beta1 } from '@scaleway/sdk-container'
@@ -98,8 +98,9 @@ export const Baremetal = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Billing' namespace instead (e.g., Billing.v1).
  */
-export { Billingv2beta1 }
+export { Billingv2, Billingv2beta1 }
 export const Billing = {
+  v2: Billingv2,
   v2beta1: Billingv2beta1,
 }
 
