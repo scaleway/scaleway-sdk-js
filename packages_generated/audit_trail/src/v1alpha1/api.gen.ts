@@ -14,6 +14,7 @@ import {
   unmarshalDisableAlertRulesResponse,
   marshalEnableAlertRulesRequest,
   unmarshalEnableAlertRulesResponse,
+  unmarshalEventsOverview,
   unmarshalExportJob,
   unmarshalListAlertRulesResponse,
   unmarshalListAuthenticationEventsResponse,
@@ -32,7 +33,9 @@ import type {
   DisableAlertRulesResponse,
   EnableAlertRulesRequest,
   EnableAlertRulesResponse,
+  EventsOverview,
   ExportJob,
+  GetLastEventsOverviewRequest,
   ListAlertRulesRequest,
   ListAlertRulesResponse,
   ListAuthenticationEventsRequest,
@@ -190,6 +193,20 @@ export class API extends ParentAPI {
         ),
       },
       unmarshalListProductsResponse,
+    )
+
+  
+  getLastEventsOverview = (request: Readonly<GetLastEventsOverviewRequest> = {}) =>
+    this.client.fetch<EventsOverview>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/last-events-overview`,
+        urlParams: urlParams(
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+          ['project_id', request.projectId],
+        ),
+      },
+      unmarshalEventsOverview,
     )
 
   
