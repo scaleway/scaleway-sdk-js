@@ -1066,6 +1066,21 @@ export interface EnableAlertRulesResponse {
 }
 
 
+export interface EventsOverview {
+  lastEvents: Event[]
+}
+
+
+export type GetLastEventsOverviewRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  organizationId?: string
+  projectId?: string
+}
+
+
 export type ListAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
