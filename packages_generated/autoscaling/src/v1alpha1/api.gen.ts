@@ -136,7 +136,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Delete  Instance group. Delete an existing Instance group, specified by its `instance_group_id`. Deleting an Instance group is permanent, and cannot be undone.
+   * Delete Instance group. Delete an existing Instance group, specified by its `instance_group_id`. Deleting an Instance group is permanent, and cannot be undone.
    *
    * @param request - The request {@link DeleteInstanceGroupRequest}
    */
