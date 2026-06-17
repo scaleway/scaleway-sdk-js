@@ -167,6 +167,8 @@ export type ResourceType =
   | 'ili_link'
   | 'ili_routing_policy'
   | 'autoscaling_group'
+  | 'gapi_dedicated_deployment'
+  | 'gapi_dedicated_model'
 
 export type SystemEventKind =
   | 'unknown_kind'
@@ -1061,6 +1063,21 @@ export interface EnableAlertRulesResponse {
    * List of the rules that were enabled.
    */
   alertRules: AlertRule[]
+}
+
+
+export interface EventsOverview {
+  lastEvents: Event[]
+}
+
+
+export type GetLastEventsOverviewRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  organizationId?: string
+  projectId?: string
 }
 
 

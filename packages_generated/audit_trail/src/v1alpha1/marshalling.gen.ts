@@ -8,7 +8,6 @@ import type {
   AlertRule,
   DisableAlertRulesResponse,
   EnableAlertRulesResponse,
-  ListAlertRulesResponse,
   AccountContractSignatureInfoAccountContractInfo,
   AccountContractSignatureInfo,
   AccountOrganizationInfo,
@@ -56,11 +55,13 @@ import type {
   VpcPrivateNetworkInfo,
   VpcRouteInfo,
   VpcSubnetInfo,
+  EventPrincipal,
   Resource,
+  Event,
+  EventsOverview,
+  ListAlertRulesResponse,
   AuthenticationEvent,
   ListAuthenticationEventsResponse,
-  EventPrincipal,
-  Event,
   SystemEvent,
   ListCombinedEventsResponseCombinedEvent,
   ListCombinedEventsResponse,
@@ -161,19 +162,6 @@ export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRul
   return {
     alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
   } as EnableAlertRulesResponse
-}
-
-export const unmarshalListAlertRulesResponse = (data: unknown): ListAlertRulesResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListAlertRulesResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
-    totalCount: data.total_count,
-  } as ListAlertRulesResponse
 }
 
 const unmarshalAccountContractSignatureInfoAccountContractInfo = (data: unknown): AccountContractSignatureInfoAccountContractInfo => {
@@ -768,6 +756,18 @@ const unmarshalVpcSubnetInfo = (data: unknown): VpcSubnetInfo => {
   } as VpcSubnetInfo
 }
 
+const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+  } as EventPrincipal
+}
+
 export const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -834,6 +834,57 @@ export const unmarshalResource = (data: unknown): Resource => {
   } as Resource
 }
 
+export const unmarshalEvent = (data: unknown): Event => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Event' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    locality: data.locality,
+    methodName: data.method_name,
+    organizationId: data.organization_id,
+    principal: data.principal ? unmarshalEventPrincipal(data.principal) : undefined,
+    productName: data.product_name,
+    projectId: data.project_id,
+    recordedAt: unmarshalDate(data.recorded_at),
+    requestBody: data.request_body,
+    requestId: data.request_id,
+    resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
+    serviceName: data.service_name,
+    sourceIp: data.source_ip,
+    statusCode: data.status_code,
+    userAgent: data.user_agent,
+  } as Event
+}
+
+export const unmarshalEventsOverview = (data: unknown): EventsOverview => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EventsOverview' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    lastEvents: unmarshalArrayOfObject(data.last_events, unmarshalEvent),
+  } as EventsOverview
+}
+
+export const unmarshalListAlertRulesResponse = (data: unknown): ListAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
+    totalCount: data.total_count,
+  } as ListAlertRulesResponse
+}
+
 const unmarshalAuthenticationEvent = (data: unknown): AuthenticationEvent => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -868,44 +919,6 @@ export const unmarshalListAuthenticationEventsResponse = (data: unknown): ListAu
     events: unmarshalArrayOfObject(data.events, unmarshalAuthenticationEvent),
     nextPageToken: data.next_page_token,
   } as ListAuthenticationEventsResponse
-}
-
-const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-  } as EventPrincipal
-}
-
-export const unmarshalEvent = (data: unknown): Event => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Event' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    locality: data.locality,
-    methodName: data.method_name,
-    organizationId: data.organization_id,
-    principal: data.principal ? unmarshalEventPrincipal(data.principal) : undefined,
-    productName: data.product_name,
-    projectId: data.project_id,
-    recordedAt: unmarshalDate(data.recorded_at),
-    requestBody: data.request_body,
-    requestId: data.request_id,
-    resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
-    serviceName: data.service_name,
-    sourceIp: data.source_ip,
-    statusCode: data.status_code,
-    userAgent: data.user_agent,
-  } as Event
 }
 
 const unmarshalSystemEvent = (data: unknown): SystemEvent => {
