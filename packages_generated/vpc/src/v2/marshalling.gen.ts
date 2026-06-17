@@ -184,6 +184,7 @@ export const unmarshalVPC = (data: unknown): VPC => {
     region: data.region,
     routingEnabled: data.routing_enabled,
     tags: data.tags,
+    transitivityEnabled: data.transitivity_enabled,
     updatedAt: unmarshalDate(data.updated_at),
   } as VPC
 }
@@ -410,6 +411,7 @@ export const marshalCreateVPCRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable_routing: request.enableRouting,
+  enable_transitivity: request.enableTransitivity,
   name: request.name || randomName('vpc'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,

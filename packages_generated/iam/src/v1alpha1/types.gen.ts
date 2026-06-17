@@ -523,7 +523,7 @@ export interface Log {
    */
   resourceType: LogResourceType
   /**
-   * ID of the resource linked  to the log.
+   * ID of the resource linked to the log.
    */
   resourceId: string
 }

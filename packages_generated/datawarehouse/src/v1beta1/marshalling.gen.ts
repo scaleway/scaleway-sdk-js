@@ -105,6 +105,7 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     createdAt: unmarshalDate(data.created_at),
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
+    moveFactor: data.move_factor,
     name: data.name,
     organizationId: data.organization_id,
     projectId: data.project_id,
@@ -271,6 +272,7 @@ export const marshalCreateDeploymentRequest = (
   cpu_max: request.cpuMax,
   cpu_min: request.cpuMin,
   endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  move_factor: request.moveFactor,
   name: request.name,
   password: request.password,
   project_id: request.projectId ?? defaults.defaultProjectId,
@@ -304,6 +306,7 @@ export const marshalUpdateDeploymentRequest = (
 ): Record<string, unknown> => ({
   cpu_max: request.cpuMax,
   cpu_min: request.cpuMin,
+  move_factor: request.moveFactor,
   name: request.name,
   replica_count: request.replicaCount,
   tags: request.tags,

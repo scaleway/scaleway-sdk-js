@@ -502,6 +502,10 @@ export interface CreateClusterRequestPoolConfig {
    * Kubernetes taints applied at node creation but not reconciled afterwards.
    */
   startupTaints: CoreV1Taint[]
+  /**
+   * Private network where the nodes are attached. Should be member of the same VPC as the API Server.
+   */
+  privateNetworkId?: string
 }
 
 
@@ -895,6 +899,10 @@ export interface Pool {
    */
   startupTaints: CoreV1Taint[]
   /**
+   * Private network where the nodes are attached. Should be member of the same VPC as the API Server.
+   */
+  privateNetworkId: string
+  /**
    * Cluster region of the pool.
    */
   region: ScwRegion
@@ -1235,6 +1243,10 @@ export type CreatePoolRequest = {
    * Kubernetes taints applied at node creation but not reconciled afterwards.
    */
   startupTaints?: CoreV1Taint[]
+  /**
+   * Private network where the nodes are attached. Should be member of the same VPC as the API Server.
+   */
+  privateNetworkId?: string
 }
 
 
