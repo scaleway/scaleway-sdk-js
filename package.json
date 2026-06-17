@@ -61,7 +61,7 @@
     "turbo": "2.9.14",
     "typedoc": "0.28.19",
     "typescript": "6.0.2",
-    "vite": "8.0.8",
+    "vite": "8.0.16",
     "vitest": "4.1.0"
   },
   "lint-staged": {
