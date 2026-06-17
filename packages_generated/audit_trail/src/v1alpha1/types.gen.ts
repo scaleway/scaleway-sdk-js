@@ -167,6 +167,8 @@ export type ResourceType =
   | 'ili_link'
   | 'ili_routing_policy'
   | 'autoscaling_group'
+  | 'gapi_dedicated_deployment'
+  | 'gapi_dedicated_model'
 
 export type SystemEventKind =
   | 'unknown_kind'
