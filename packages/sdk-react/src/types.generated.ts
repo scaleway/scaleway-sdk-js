@@ -6,6 +6,7 @@ import type { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
 import type { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
 import type { Baremetalv1 } from '@scaleway/sdk-baremetal'
 import type { Baremetalv3 } from '@scaleway/sdk-baremetal'
+import type { Billingv2 } from '@scaleway/sdk-billing'
 import type { Billingv2beta1 } from '@scaleway/sdk-billing'
 import type { Blockv1 } from '@scaleway/sdk-block'
 import type { Blockv1alpha1 } from '@scaleway/sdk-block'
@@ -64,6 +65,7 @@ export type APISdk = {
   baremetalv1: Baremetalv1.API
   baremetalv1PrivateNetwork: Baremetalv1.PrivateNetworkAPI
   baremetalv3PrivateNetwork: Baremetalv3.PrivateNetworkAPI
+  billingv2: Billingv2.API
   billingv2beta1: Billingv2beta1.API
   billingv2beta1FinOps: Billingv2beta1.FinOpsAPI
   blockv1: Blockv1.API

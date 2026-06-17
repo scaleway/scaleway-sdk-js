@@ -234,6 +234,10 @@
     "./containerv1": {
       "default": "./dist/queries/containerv1/generated/index.js",
       "types": "./dist/queries/containerv1/generated/index.d.ts"
+    },
+    "./billingv2": {
+      "default": "./dist/queries/billingv2/generated/index.js",
+      "types": "./dist/queries/billingv2/generated/index.d.ts"
     }
   },
   "scripts": {

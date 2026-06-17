@@ -72,6 +72,16 @@ export const queriesMetadata = {
           description: '"',
         },
         {
+          methodName: 'getLastEventsOverview',
+          protoName: 'GetLastEventsOverview',
+          paramsType: 'GetLastEventsOverviewRequest',
+          returnType: 'EventsOverview',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
           methodName: 'listExportJobs',
           protoName: 'ListExportJobs',
           paramsType: 'ListExportJobsRequest',

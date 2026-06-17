@@ -9,6 +9,7 @@ export { useAuditTrailv1alpha1APIListSystemEventsInfiniteQuery } from "./useAudi
 export { useAuditTrailv1alpha1APIListCombinedEventsQuery } from "./useAuditTrailv1alpha1APIListCombinedEventsQuery"
 export { useAuditTrailv1alpha1APIListCombinedEventsInfiniteQuery } from "./useAuditTrailv1alpha1APIListCombinedEventsInfiniteQuery"
 export { useAuditTrailv1alpha1APIListProductsQuery } from "./useAuditTrailv1alpha1APIListProductsQuery"
+export { useAuditTrailv1alpha1APIGetLastEventsOverviewQuery } from "./useAuditTrailv1alpha1APIGetLastEventsOverviewQuery"
 export { useAuditTrailv1alpha1APIListExportJobsQuery } from "./useAuditTrailv1alpha1APIListExportJobsQuery"
 export { useAuditTrailv1alpha1APIListExportJobsInfiniteQuery } from "./useAuditTrailv1alpha1APIListExportJobsInfiniteQuery"
 export { useAuditTrailv1alpha1APIListExportJobsAllQuery } from "./useAuditTrailv1alpha1APIListExportJobsAllQuery"
