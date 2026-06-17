@@ -54,7 +54,7 @@ export const DeleteUserRequest = {
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
 }
 
