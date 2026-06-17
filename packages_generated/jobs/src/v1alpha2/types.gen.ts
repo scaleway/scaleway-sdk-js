@@ -322,7 +322,7 @@ export interface JobRun {
    */
   args: string[]
   /**
-   * Number of retry attempts.
+   * Number of run attempts.
    */
   attempts?: number
   /**
@@ -453,7 +453,7 @@ Environment variables and secrets can be included, and will be expanded before t
    */
   cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
   /**
-   * Retry behaviour in case of job failure.
+   * Retry policy upon a job failure.
    */
   retryPolicy?: RetryPolicy
 }
@@ -834,7 +834,7 @@ Environment variables and secrets can be included, and will be expanded before t
    */
   cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig
   /**
-   * Retry behaviour in case of job failure.
+   * Retry policy upon a job failure.
    */
   retryPolicy?: UpdateJobDefinitionRequestUpdateRetryPolicy
 }
