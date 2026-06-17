@@ -717,7 +717,7 @@ export interface ServiceLevel {
 
 export interface RpnSan {
   /**
-   * RPN SAN  ID.
+   * RPN SAN ID.
    */
   id: number
   /**
@@ -1350,7 +1350,7 @@ export interface RpnGroupMember {
 
 export interface RpnSanSummary {
   /**
-   * RPN SAN  ID.
+   * RPN SAN ID.
    */
   id: number
   /**

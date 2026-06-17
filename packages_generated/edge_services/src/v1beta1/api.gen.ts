@@ -51,6 +51,7 @@ import {
   unmarshalRouteStage,
   marshalSelectPlanRequest,
   marshalSetHeadStageRequest,
+  marshalSetPipelineVPCEndpointsRequest,
   unmarshalSetPipelineVPCEndpointsResponse,
   marshalSetRouteRulesRequest,
   unmarshalSetRouteRulesResponse,
@@ -388,11 +389,12 @@ export class API extends ParentAPI {
   setPipelineVPCEndpoints = (request: Readonly<SetPipelineVPCEndpointsRequest>) =>
     this.client.fetch<SetPipelineVPCEndpointsResponse>(
       {
+        body: JSON.stringify(
+          marshalSetPipelineVPCEndpointsRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
         method: 'PUT',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/vpc-endpoints`,
-        urlParams: urlParams(
-          ['vpc_endpoint_ids', request.vpcEndpointIds],
-        ),
       },
       unmarshalSetPipelineVPCEndpointsResponse,
     )
