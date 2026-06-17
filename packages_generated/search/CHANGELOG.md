@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-search@1.2.0...@scaleway/sdk-search@1.3.0) (2026-06-15)
+
+
+### Features
+
+* **search:** add filters to search resources ([#3028](https://github.com/scaleway/scaleway-sdk-js/issues/3028)) ([14f4554](https://github.com/scaleway/scaleway-sdk-js/commit/14f455463a665328f32645c29c9cd7ab0b3fd3f5))
+* **search:** add support for `kafk_cluster` ([#3051](https://github.com/scaleway/scaleway-sdk-js/issues/3051)) ([5813e10](https://github.com/scaleway/scaleway-sdk-js/commit/5813e107084b525c42468816b80c3a7ef9c1c92d))
+
+
+
+
+
 # 1.2.0 (2026-06-08)
 
 
