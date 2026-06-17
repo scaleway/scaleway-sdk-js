@@ -97,7 +97,6 @@ export type ResourceType =
   | 'iam_group'
   | 'iam_policy'
 
-
 export interface BrmServerInfo {
   ip: string
 }
