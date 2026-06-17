@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.9.0 (2026-06-15)
+
+
+### Features
+
+* **block:** add 'zone' field to 'volume' resource ([#3033](https://github.com/scaleway/scaleway-sdk-js/issues/3033)) ([114b429](https://github.com/scaleway/scaleway-sdk-js/commit/114b429e54e41b55190a8136f474d36ebe765cf9))
+
+
+
+
+
 # [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-block@2.7.1...@scaleway/sdk-block@2.8.0) (2026-06-02)
 
 

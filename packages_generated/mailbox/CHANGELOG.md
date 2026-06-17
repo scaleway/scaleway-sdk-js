@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.5.0 (2026-06-15)
+
+
+### Features
+
+* **mailbox:** add create alias endpoint ([#3036](https://github.com/scaleway/scaleway-sdk-js/issues/3036)) ([d77f69f](https://github.com/scaleway/scaleway-sdk-js/commit/d77f69f8610c5d40a130af797d770542f27fd4b5))
+
+
+
+
+
 ## [1.4.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-mailbox@1.4.1...@scaleway/sdk-mailbox@1.4.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-mailbox
