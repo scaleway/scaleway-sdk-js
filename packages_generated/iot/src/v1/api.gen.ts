@@ -670,7 +670,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Create a new network. Create a new network for an existing hub.  Beside the default network, you can add networks for different data providers. Possible network types are Sigfox and REST.
+   * Create a new network. Create a new network for an existing hub. Beside the default network, you can add networks for different data providers. Possible network types are Sigfox and REST.
    *
    * @param request - The request {@link CreateNetworkRequest}
    * @returns A Promise of CreateNetworkResponse
@@ -690,7 +690,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Retrieve a specific network. Retrieve an existing network, specified by its network ID.  The response returns full details of the network, including its type, the topic prefix and its endpoint.
+   * Retrieve a specific network. Retrieve an existing network, specified by its network ID. The response returns full details of the network, including its type, the topic prefix and its endpoint.
    *
    * @param request - The request {@link GetNetworkRequest}
    * @returns A Promise of Network

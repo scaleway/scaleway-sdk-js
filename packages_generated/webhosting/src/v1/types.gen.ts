@@ -105,6 +105,11 @@ export type DomainZoneOwner =
   | 'online'
   | 'webhosting'
 
+export type HostingProvider =
+  | 'unknown_provider'
+  | 'elements'
+  | 'dedibox'
+
 export type HostingStatus =
   | 'unknown_status'
   | 'delivering'
@@ -1514,6 +1519,10 @@ export interface Hosting {
    * Commitment details to which the hosting is engaged.
    */
   commitment?: HostingCommitment
+  /**
+   * Provider where the Web Hosting plan is managed (elements, dedibox).
+   */
+  provider?: HostingProvider
 }
 
 

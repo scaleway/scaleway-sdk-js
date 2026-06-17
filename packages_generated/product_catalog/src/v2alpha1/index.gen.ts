@@ -15,6 +15,7 @@ export type {
   PublicCatalogProductPrice,
   PublicCatalogProductProductBadge,
   PublicCatalogProductProperties,
+  PublicCatalogProductPropertiesApacheKafka,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
