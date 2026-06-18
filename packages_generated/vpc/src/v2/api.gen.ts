@@ -9,15 +9,11 @@ import {
 } from '@scaleway/sdk-client'
 import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
-  marshalAddSubnetsRequest,
-  unmarshalAddSubnetsResponse,
   marshalCreateIngressRuleRequest,
   marshalCreatePrivateNetworkRequest,
   marshalCreateRouteRequest,
   marshalCreateVPCConnectorRequest,
   marshalCreateVPCRequest,
-  marshalDeleteSubnetsRequest,
-  unmarshalDeleteSubnetsResponse,
   unmarshalGetAclResponse,
   unmarshalIngressRule,
   unmarshalListIngressRulesResponse,
@@ -39,8 +35,6 @@ import {
   unmarshalVPCConnector,
 } from './marshalling.gen.js'
 import type {
-  AddSubnetsRequest,
-  AddSubnetsResponse,
   CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
@@ -49,8 +43,6 @@ import type {
   DeleteIngressRuleRequest,
   DeletePrivateNetworkRequest,
   DeleteRouteRequest,
-  DeleteSubnetsRequest,
-  DeleteSubnetsResponse,
   DeleteVPCConnectorRequest,
   DeleteVPCRequest,
   EnableCustomRoutesPropagationRequest,
@@ -394,46 +386,6 @@ export class API extends ParentAPI {
    */
   listSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
     enrichForPagination('subnets', this.pageOfListSubnets, request)
-
-  
-  /**
-   * Add subnets to a Private Network. Add new subnets to an existing Private Network.
-   *
-   * @param request - The request {@link AddSubnetsRequest}
-   * @returns A Promise of AddSubnetsResponse
-   */
-  addSubnets = (request: Readonly<AddSubnetsRequest>) =>
-    this.client.fetch<AddSubnetsResponse>(
-      {
-        body: JSON.stringify(
-          marshalAddSubnetsRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/subnets`,
-      },
-      unmarshalAddSubnetsResponse,
-    )
-
-  
-  /**
-   * Delete subnets from a Private Network. Delete the specified subnets from a Private Network.
-   *
-   * @param request - The request {@link DeleteSubnetsRequest}
-   * @returns A Promise of DeleteSubnetsResponse
-   */
-  deleteSubnets = (request: Readonly<DeleteSubnetsRequest>) =>
-    this.client.fetch<DeleteSubnetsResponse>(
-      {
-        body: JSON.stringify(
-          marshalDeleteSubnetsRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'DELETE',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/subnets`,
-      },
-      unmarshalDeleteSubnetsResponse,
-    )
 
   
   /**
