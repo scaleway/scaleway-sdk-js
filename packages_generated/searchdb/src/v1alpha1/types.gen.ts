@@ -303,11 +303,11 @@ export type CreateDeploymentRequest = {
   /**
    * @deprecated DEPRECATED: Use node_count instead. Number of nodes.
    */
-  nodeAmount: number
+  nodeAmount?: number
   /**
    * Number of nodes.
    */
-  nodeCount: number
+  nodeCount?: number
   /**
    * Node type.
    */
