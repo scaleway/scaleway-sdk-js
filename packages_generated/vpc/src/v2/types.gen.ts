@@ -391,27 +391,6 @@ export interface VPC {
 }
 
 
-export type AddSubnetsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * Private Network ID.
-   */
-  privateNetworkId: string
-  /**
-   * Private Network subnets CIDR.
-   */
-  subnets?: string[]
-}
-
-
-export interface AddSubnetsResponse {
-  subnets: string[]
-}
-
-
 export type CreateIngressRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -576,27 +555,6 @@ export type DeleteRouteRequest = {
    * Route ID.
    */
   routeId: string
-}
-
-
-export type DeleteSubnetsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * Private Network ID.
-   */
-  privateNetworkId: string
-  /**
-   * Private Network subnets CIDR.
-   */
-  subnets?: string[]
-}
-
-
-export interface DeleteSubnetsResponse {
-  subnets: string[]
 }
 
 
