@@ -97,6 +97,7 @@ export type ResourceType =
   | 'iam_group'
   | 'iam_policy'
   | 'sedb_cluster'
+  | 'autoscaling_group'
 
 export interface BrmServerInfo {
   ip: string

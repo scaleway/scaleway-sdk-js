@@ -11,8 +11,6 @@ import type {
   VPCConnectorPeerInfo,
   VPCConnector,
   VPC,
-  AddSubnetsResponse,
-  DeleteSubnetsResponse,
   AclRule,
   GetAclResponse,
   ListIngressRulesResponse,
@@ -23,13 +21,11 @@ import type {
   ListVPCConnectorsResponse,
   ListVPCsResponse,
   SetAclResponse,
-  AddSubnetsRequest,
   CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
-  DeleteSubnetsRequest,
   SetAclRequest,
   UpdateIngressRuleRequest,
   UpdatePrivateNetworkRequest,
@@ -189,30 +185,6 @@ export const unmarshalVPC = (data: unknown): VPC => {
   } as VPC
 }
 
-export const unmarshalAddSubnetsResponse = (data: unknown): AddSubnetsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'AddSubnetsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    subnets: data.subnets,
-  } as AddSubnetsResponse
-}
-
-export const unmarshalDeleteSubnetsResponse = (data: unknown): DeleteSubnetsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DeleteSubnetsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    subnets: data.subnets,
-  } as DeleteSubnetsResponse
-}
-
 const unmarshalAclRule = (data: unknown): AclRule => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -352,13 +324,6 @@ export const unmarshalSetAclResponse = (data: unknown): SetAclResponse => {
   } as SetAclResponse
 }
 
-export const marshalAddSubnetsRequest = (
-  request: AddSubnetsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  subnets: request.subnets,
-})
-
 export const marshalCreateIngressRuleRequest = (
   request: CreateIngressRuleRequest,
   defaults: DefaultValues,
@@ -415,13 +380,6 @@ export const marshalCreateVPCRequest = (
   name: request.name || randomName('vpc'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
-})
-
-export const marshalDeleteSubnetsRequest = (
-  request: DeleteSubnetsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  subnets: request.subnets,
 })
 
 const marshalAclRule = (
