@@ -8,7 +8,7 @@ import {
   waitForResource,
 } from '@scaleway/sdk-client'
 import type { WaitForOptions, } from '@scaleway/sdk-client'
-import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
+import {ALIAS_TRANSIENT_STATUSES as ALIAS_TRANSIENT_STATUSES_MAILBOX,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
 import {
   unmarshalAlias,
   marshalBatchCreateMailboxesRequest,
@@ -17,6 +17,7 @@ import {
   marshalCreateDomainRequest,
   unmarshalDomain,
   unmarshalGetDomainRecordsResponse,
+  unmarshalListAliasesResponse,
   unmarshalListDomainsResponse,
   unmarshalListMailboxesResponse,
   unmarshalMailbox,
@@ -28,13 +29,17 @@ import type {
   BatchCreateMailboxesResponse,
   CreateAliasRequest,
   CreateDomainRequest,
+  DeleteAliasRequest,
   DeleteDomainRequest,
   DeleteMailboxRequest,
   Domain,
+  GetAliasRequest,
   GetDomainRecordsRequest,
   GetDomainRecordsResponse,
   GetDomainRequest,
   GetMailboxRequest,
+  ListAliasesRequest,
+  ListAliasesResponse,
   ListDomainsRequest,
   ListDomainsResponse,
   ListMailboxesRequest,
@@ -214,6 +219,7 @@ export class API extends ParentAPI {
           ['order_by', request.orderBy],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId],
           ['search', request.search],
           ['statuses', request.statuses],
         ),
@@ -333,7 +339,84 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/aliases`,
+        path: `/mailbox/v1alpha1/aliases`,
+      },
+      unmarshalAlias,
+    )
+
+  
+  protected pageOfListAliases = (request: Readonly<ListAliasesRequest> = {}) =>
+    this.client.fetch<ListAliasesResponse>(
+      {
+        method: 'GET',
+        path: `/mailbox/v1alpha1/aliases`,
+        urlParams: urlParams(
+          ['mailbox_id', request.mailboxId],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          ['status', request.status],
+        ),
+      },
+      unmarshalListAliasesResponse,
+    )
+  
+  /**
+   * List aliases for a mailbox.. List aliases for a mailbox.
+   *
+   * @param request - The request {@link ListAliasesRequest}
+   * @returns A Promise of ListAliasesResponse
+   */
+  listAliases = (request: Readonly<ListAliasesRequest> = {}) =>
+    enrichForPagination('aliases', this.pageOfListAliases, request)
+
+  
+  /**
+   * Get an alias by its ID.. Get an alias by its ID.
+   *
+   * @param request - The request {@link GetAliasRequest}
+   * @returns A Promise of Alias
+   */
+  getAlias = (request: Readonly<GetAliasRequest>) =>
+    this.client.fetch<Alias>(
+      {
+        method: 'GET',
+        path: `/mailbox/v1alpha1/aliases/${validatePathParam('aliasId', request.aliasId)}`,
+      },
+      unmarshalAlias,
+    )
+  
+  /**
+   * Waits for {@link Alias} to be in a final state.
+   *
+   * @param request - The request {@link GetAliasRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Alias
+   */
+  waitForAlias = (
+    request: Readonly<GetAliasRequest>,
+    options?: Readonly<WaitForOptions<Alias>>,
+  ) =>
+    waitForResource(
+      options?.stop ?? (res => Promise.resolve(!ALIAS_TRANSIENT_STATUSES_MAILBOX.includes(res.status))),
+      this.getAlias,
+      request,
+      options,
+    )
+
+  
+  /**
+   * Delete an alias by its ID.. Delete an alias by its ID.
+   *
+   * @param request - The request {@link DeleteAliasRequest}
+   * @returns A Promise of Alias
+   */
+  deleteAlias = (request: Readonly<DeleteAliasRequest>) =>
+    this.client.fetch<Alias>(
+      {
+        method: 'DELETE',
+        path: `/mailbox/v1alpha1/aliases/${validatePathParam('aliasId', request.aliasId)}`,
       },
       unmarshalAlias,
     )
