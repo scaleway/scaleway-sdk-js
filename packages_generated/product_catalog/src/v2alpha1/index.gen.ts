@@ -65,6 +65,7 @@ export type {
   PublicCatalogProductPropertiesObjectStorageRegionTrafficType,
   PublicCatalogProductPropertiesObjectStorageRestoreType,
   PublicCatalogProductPropertiesObjectStorageRestoreTypeRestoreType,
+  PublicCatalogProductPropertiesOpenSearch,
   PublicCatalogProductPropertiesSecretManager,
   PublicCatalogProductPropertiesServerlessContainers,
   PublicCatalogProductPropertiesServerlessFunctions,
