@@ -3,11 +3,12 @@ import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Mailbox,
-  Domain,
   Alias,
+  Domain,
   BatchCreateMailboxesResponse,
   DomainRecord,
   GetDomainRecordsResponse,
+  ListAliasesResponse,
   ListDomainsResponse,
   ListMailboxesResponse,
   BatchCreateMailboxesRequestMailboxParameters,
@@ -39,6 +40,24 @@ export const unmarshalMailbox = (data: unknown): Mailbox => {
   } as Mailbox
 }
 
+export const unmarshalAlias = (data: unknown): Alias => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Alias' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    email: data.email,
+    id: data.id,
+    mailboxId: data.mailbox_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Alias
+}
+
 export const unmarshalDomain = (data: unknown): Domain => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -59,24 +78,6 @@ export const unmarshalDomain = (data: unknown): Domain => {
     updatedAt: unmarshalDate(data.updated_at),
     webmailUrl: data.webmail_url,
   } as Domain
-}
-
-export const unmarshalAlias = (data: unknown): Alias => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Alias' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
-    email: data.email,
-    id: data.id,
-    mailboxId: data.mailbox_id,
-    status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as Alias
 }
 
 export const unmarshalBatchCreateMailboxesResponse = (data: unknown): BatchCreateMailboxesResponse => {
@@ -135,6 +136,19 @@ export const unmarshalGetDomainRecordsResponse = (data: unknown): GetDomainRecor
   } as GetDomainRecordsResponse
 }
 
+export const unmarshalListAliasesResponse = (data: unknown): ListAliasesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAliasesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    aliases: unmarshalArrayOfObject(data.aliases, unmarshalAlias),
+    totalCount: data.total_count,
+  } as ListAliasesResponse
+}
+
 export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -184,6 +198,7 @@ export const marshalCreateAliasRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   local_part: request.localPart,
+  mailbox_id: request.mailboxId,
 })
 
 export const marshalCreateDomainRequest = (
