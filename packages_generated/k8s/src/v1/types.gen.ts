@@ -901,7 +901,7 @@ export interface Pool {
   /**
    * Private network where the nodes are attached. Should be member of the same VPC as the API Server.
    */
-  privateNetworkId: string
+  privateNetworkId?: string
   /**
    * Cluster region of the pool.
    */
