@@ -19,7 +19,7 @@ export const CreateDeploymentRequest = {
     lessThanOrEqual: 15,
   },
   moveFactor: {
-    greaterThanOrEqual: 0,
+    greaterThanOrEqual: 0.1,
     lessThanOrEqual: 1,
   },
   name: {
@@ -168,7 +168,7 @@ export const UpdateDeploymentRequest = {
     lessThanOrEqual: 15,
   },
   moveFactor: {
-    greaterThanOrEqual: 0,
+    greaterThanOrEqual: 0.1,
     lessThanOrEqual: 1,
   },
   name: {
