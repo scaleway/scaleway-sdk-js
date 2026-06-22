@@ -42,6 +42,7 @@ import type {
   PublicCatalogProductPropertiesManagedRedisDatabase,
   PublicCatalogProductPropertiesManagedRelationalDatabase,
   PublicCatalogProductPropertiesObjectStorage,
+  PublicCatalogProductPropertiesOpenSearch,
   PublicCatalogProductPropertiesSecretManager,
   PublicCatalogProductPropertiesServerlessContainers,
   PublicCatalogProductPropertiesServerlessFunctions,
@@ -582,6 +583,17 @@ const unmarshalPublicCatalogProductPropertiesObjectStorage = (data: unknown): Pu
   } as PublicCatalogProductPropertiesObjectStorage
 }
 
+const unmarshalPublicCatalogProductPropertiesOpenSearch = (data: unknown): PublicCatalogProductPropertiesOpenSearch => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesOpenSearch' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesOpenSearch
+}
+
 const unmarshalPublicCatalogProductPropertiesSecretManager = (data: unknown): PublicCatalogProductPropertiesSecretManager => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -690,6 +702,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     managedRedisDatabase: data.managed_redis_database ? unmarshalPublicCatalogProductPropertiesManagedRedisDatabase(data.managed_redis_database) : undefined,
     managedRelationalDatabase: data.managed_relational_database ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabase(data.managed_relational_database) : undefined,
     objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
+    openSearch: data.open_search ? unmarshalPublicCatalogProductPropertiesOpenSearch(data.open_search) : undefined,
     secretManager: data.secret_manager ? unmarshalPublicCatalogProductPropertiesSecretManager(data.secret_manager) : undefined,
     serverlessContainers: data.serverless_containers ? unmarshalPublicCatalogProductPropertiesServerlessContainers(data.serverless_containers) : undefined,
     serverlessFunctions: data.serverless_functions ? unmarshalPublicCatalogProductPropertiesServerlessFunctions(data.serverless_functions) : undefined,
