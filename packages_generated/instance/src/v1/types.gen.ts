@@ -976,33 +976,36 @@ export interface Snapshot {
 
 export interface Task {
   /**
-   * Unique ID of the task.
+   * @deprecated Unique ID of the task.
    */
   id: string
   /**
-   * Description of the task.
+   * @deprecated Description of the task.
    */
   description: string
   /**
-   * Progress of the task in percent.
+   * @deprecated Progress of the task in percent.
    */
   progress: number
   /**
-   * Task start date.
+   * @deprecated Task start date.
    */
   startedAt?: Date
   /**
-   * Task end date.
+   * @deprecated Task end date.
    */
   terminatedAt?: Date
   /**
-   * Task status.
+   * @deprecated Task status.
    */
   status: TaskStatus
   hrefFrom: string
+  /**
+   * Location of the resulting resource.
+   */
   hrefResult: string
   /**
-   * Zone in which the task is executed.
+   * @deprecated Zone in which the task is executed.
    */
   zone: ScwZone
 }
