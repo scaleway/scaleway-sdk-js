@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-vpc@2.8.0...@scaleway/sdk-vpc@2.9.0) (2026-06-22)
+
+
+### Features
+
+* **vpc:** add support for `enableTransitivity` ([#3077](https://github.com/scaleway/scaleway-sdk-js/issues/3077)) ([564b73f](https://github.com/scaleway/scaleway-sdk-js/commit/564b73ff64b29e22d0cf0f9b833b3f1da9f9814a))
+
+
+
+
+
 # 2.8.0 (2026-06-15)
 
 

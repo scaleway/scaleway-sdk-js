@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-searchdb@1.7.0...@scaleway/sdk-searchdb@1.7.1) (2026-06-22)
+
+
+### Bug Fixes
+
+* **searchdb:** add ignore_empty to node fields to fix backward compatibility ([#3053](https://github.com/scaleway/scaleway-sdk-js/issues/3053)) ([96296e8](https://github.com/scaleway/scaleway-sdk-js/commit/96296e8a165fe065c32b88696f9c9a03318abd67))
+* **searchdb:** fix DeleteUser validation regexp ([#3074](https://github.com/scaleway/scaleway-sdk-js/issues/3074)) ([20840c7](https://github.com/scaleway/scaleway-sdk-js/commit/20840c7035f8da1357f09830c8ee5cd5cd17f323))
+* **searchdb:** mark node_amount and node_count tags as optional for TS compatibility ([#3078](https://github.com/scaleway/scaleway-sdk-js/issues/3078)) ([40b826a](https://github.com/scaleway/scaleway-sdk-js/commit/40b826a95e9a820275a2b114087a9002767e6c52))
+
+
+
+
+
 # [1.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-searchdb@1.6.1...@scaleway/sdk-searchdb@1.7.0) (2026-06-15)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.8.1...@scaleway/sdk-react-hooks@0.9.0) (2026-06-22)
+
+
+### Features
+
+* **audit_trail:** add endpoint for overview of auditTrail Event ([#3069](https://github.com/scaleway/scaleway-sdk-js/issues/3069)) ([db5d849](https://github.com/scaleway/scaleway-sdk-js/commit/db5d849f92123c8e78b7672277616a34eb7a0051))
+* **billing:** set public visibility for budget API ([#3056](https://github.com/scaleway/scaleway-sdk-js/issues/3056)) ([5b4c6e0](https://github.com/scaleway/scaleway-sdk-js/commit/5b4c6e008477cf06c2de509a6c3b5ae78f7bd0c5))
+
+
+
+
+
 ## [0.8.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.8.0...@scaleway/sdk-react-hooks@0.8.1) (2026-06-15)
 
 **Note:** Version bump only for package @scaleway/sdk-react-hooks

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.2.1 (2026-06-22)
+
+
+### Bug Fixes
+
+* **messageq:** align username regex validation ([#3083](https://github.com/scaleway/scaleway-sdk-js/issues/3083)) ([caada18](https://github.com/scaleway/scaleway-sdk-js/commit/caada18688a9e6b4eec65b412778157afe7e5ae1))
+
+
+
+
+
 # 1.2.0 (2026-06-08)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.15.0...@scaleway/sdk-audit-trail@2.16.0) (2026-06-22)
+
+
+### Features
+
+* **audit_trail:** add endpoint for overview of auditTrail Event ([#3069](https://github.com/scaleway/scaleway-sdk-js/issues/3069)) ([db5d849](https://github.com/scaleway/scaleway-sdk-js/commit/db5d849f92123c8e78b7672277616a34eb7a0051))
+* **audit-trail:** add support for `gapi_dedicated_deployment` and `gapi_dedicated_model` ([#3065](https://github.com/scaleway/scaleway-sdk-js/issues/3065)) ([6f8c853](https://github.com/scaleway/scaleway-sdk-js/commit/6f8c853c4751719b354d3102ab6ebc98f1f9576c))
+
+
+
+
+
 # [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.14.0...@scaleway/sdk-audit-trail@2.15.0) (2026-06-15)
 
 

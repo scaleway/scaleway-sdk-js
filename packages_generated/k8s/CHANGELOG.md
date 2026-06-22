@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.12.0 (2026-06-22)
+
+
+### Features
+
+* **k8s:** add support for `privateNetworkId` ([#3076](https://github.com/scaleway/scaleway-sdk-js/issues/3076)) ([c35edbf](https://github.com/scaleway/scaleway-sdk-js/commit/c35edbf36c2e74054f563ed3ce0f993145485a65))
+* **k8s:** make `privateNetworkId` optional in `Pool` ([#3082](https://github.com/scaleway/scaleway-sdk-js/issues/3082)) ([68fdc9c](https://github.com/scaleway/scaleway-sdk-js/commit/68fdc9c4b207fca02d9fc4613675398c2ca2b6d8))
+
+
+
+
+
 # 2.11.0 (2026-06-08)
 
 

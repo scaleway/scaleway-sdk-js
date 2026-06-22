@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-search@1.3.0...@scaleway/sdk-search@1.4.0) (2026-06-22)
+
+
+### Bug Fixes
+
+* **searchdb:** add ignore_empty to node fields to fix backward compatibility ([#3053](https://github.com/scaleway/scaleway-sdk-js/issues/3053)) ([96296e8](https://github.com/scaleway/scaleway-sdk-js/commit/96296e8a165fe065c32b88696f9c9a03318abd67))
+
+
+### Features
+
+* **search/v1alpha1:** add iam resources ([#3052](https://github.com/scaleway/scaleway-sdk-js/issues/3052)) ([0e1d752](https://github.com/scaleway/scaleway-sdk-js/commit/0e1d75234bd29eaab4c067768b0ac73e9d66ac77))
+* **search:** add support for `autoscaling_group` ([#3081](https://github.com/scaleway/scaleway-sdk-js/issues/3081)) ([2c6fbca](https://github.com/scaleway/scaleway-sdk-js/commit/2c6fbcada6c6895bccbcec74d5a540f093eb2e65))
+* **search:** add support for `sedb_cluster` ([#3068](https://github.com/scaleway/scaleway-sdk-js/issues/3068)) ([1ed3dca](https://github.com/scaleway/scaleway-sdk-js/commit/1ed3dca585e5f1746342243e631fbd036e4e0b61))
+
+
+
+
+
 # [1.3.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-search@1.2.0...@scaleway/sdk-search@1.3.0) (2026-06-15)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.9.0 (2026-06-22)
+
+
+### Features
+
+* **webhosting:** add hosting provider ([#3054](https://github.com/scaleway/scaleway-sdk-js/issues/3054)) ([1748db4](https://github.com/scaleway/scaleway-sdk-js/commit/1748db4b0e596829c86863d8884f39ef394093c0))
+
+
+
+
+
 ## [2.8.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.8.1...@scaleway/sdk-webhosting@2.8.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-webhosting

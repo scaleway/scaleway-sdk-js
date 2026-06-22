@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.13.0...@scaleway/sdk-product-catalog@2.14.0) (2026-06-22)
+
+
+### Features
+
+* **product-catalog:** add support for `apacheKafka` ([#3071](https://github.com/scaleway/scaleway-sdk-js/issues/3071)) ([278f174](https://github.com/scaleway/scaleway-sdk-js/commit/278f17459d7635923720637eba5414b24654f394))
+* **product-catalog:** add support for OpenSearch ([#3085](https://github.com/scaleway/scaleway-sdk-js/issues/3085)) ([28fad16](https://github.com/scaleway/scaleway-sdk-js/commit/28fad16ac659d76099e09aa49eacc5dc953483ef))
+
+
+
+
+
 # [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.12.0...@scaleway/sdk-product-catalog@2.13.0) (2026-06-15)
 
 

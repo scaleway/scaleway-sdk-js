@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.16.1 (2026-06-22)
+
+
+### Bug Fixes
+
+* **edge_services:** add body param for new rpc endpoint ([#3070](https://github.com/scaleway/scaleway-sdk-js/issues/3070)) ([4e8cc85](https://github.com/scaleway/scaleway-sdk-js/commit/4e8cc85ad8845bf67186e1e2919ed1f2c5ab6ec8))
+
+
+
+
+
 # [2.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.15.0...@scaleway/sdk-edge-services@2.16.0) (2026-06-08)
 
 
