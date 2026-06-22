@@ -114,8 +114,8 @@ importers:
         specifier: workspace:^
         version: link:../../tools/configs
       '@types/node':
-        specifier: 20.19.41
-        version: 20.19.41
+        specifier: 20.19.43
+        version: 20.19.43
 
   packages/configuration-loader:
     devDependencies:
@@ -123,8 +123,8 @@ importers:
         specifier: workspace:^
         version: link:../../tools/configs
       '@types/node':
-        specifier: 20.19.41
-        version: 20.19.41
+        specifier: 20.19.43
+        version: 20.19.43
 
   packages/sdk:
     dependencies:
@@ -1425,8 +1425,8 @@ importers:
   tools/configs:
     devDependencies:
       '@types/node':
-        specifier: 20.19.41
-        version: 20.19.41
+        specifier: 20.19.43
+        version: 20.19.43
 
   tools/generate-packages:
     devDependencies:
@@ -1434,23 +1434,23 @@ importers:
         specifier: workspace:*
         version: link:../configs
       '@types/node':
-        specifier: 20.19.41
-        version: 20.19.41
+        specifier: 20.19.43
+        version: 20.19.43
       vite:
         specifier: 8.0.16
-        version: 8.0.16(@types/node@20.19.41)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.9.0)
+        version: 8.0.16(@types/node@20.19.43)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.9.0)
 
   tools/generate-react-queries:
     devDependencies:
       '@types/node':
-        specifier: 20.19.41
-        version: 20.19.41
+        specifier: 20.19.43
+        version: 20.19.43
 
   tools/generate-react-sdk:
     devDependencies:
       '@types/node':
-        specifier: 20.19.41
-        version: 20.19.41
+        specifier: 20.19.43
+        version: 20.19.43
 
 packages:
 
@@ -2733,8 +2733,8 @@ packages:
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
 
-  '@types/node@20.19.41':
-    resolution: {integrity: sha512-ECymXOukMnOoVkC2bb1Vc/w/836DXncOg5m8Xj1RH7xSHZJWNYY6Zh7EH477vcnD5egKNNfy2RpNOmuChhFPgQ==}
+  '@types/node@20.19.43':
+    resolution: {integrity: sha512-6oYBAi5ikg4Pl+kGsoYtawUMBT2zZMCvPNF7pVLnHZfd1zf38DRiWn/gT01RYCdUqkv7Fhr+C9ot4/tb+2sVvA==}
 
   '@types/node@25.5.0':
     resolution: {integrity: sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw==}
@@ -6947,7 +6947,7 @@ snapshots:
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
-      '@types/node': 20.19.41
+      '@types/node': 20.19.43
     optional: true
 
   '@types/deep-eql@4.0.2': {}
@@ -6960,7 +6960,7 @@ snapshots:
 
   '@types/minimist@1.2.5': {}
 
-  '@types/node@20.19.41':
+  '@types/node@20.19.43':
     dependencies:
       undici-types: 6.21.0
 
@@ -9954,7 +9954,7 @@ snapshots:
 
   validate-npm-package-name@6.0.2: {}
 
-  vite@8.0.16(@types/node@20.19.41)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.9.0):
+  vite@8.0.16(@types/node@20.19.43)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -9962,7 +9962,7 @@ snapshots:
       rolldown: 1.0.3
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 20.19.41
+      '@types/node': 20.19.43
       esbuild: 0.27.2
       fsevents: 2.3.3
       jiti: 2.6.1
