@@ -19,7 +19,7 @@ export const CreateDeploymentRequest = {
   userName: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
   version: {
     maxLength: 128,
@@ -36,7 +36,7 @@ export const CreateUserRequest = {
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
 }
 
@@ -44,7 +44,7 @@ export const DeleteUserRequest = {
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
 }
 
@@ -113,7 +113,7 @@ export const UpdateUserRequest = {
   username: {
     maxLength: 63,
     minLength: 1,
-    pattern: /^[a-zA-Z0-9_\-]*$/,
+    pattern: /^[a-zA-Z0-9_$-]*$/,
   },
 }
 
