@@ -29,6 +29,16 @@ export const CreateDomainRequest = {
   },
 }
 
+export const ListAliasesRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListDomainsRequest = {
   page: {
     greaterThanOrEqual: 1,
