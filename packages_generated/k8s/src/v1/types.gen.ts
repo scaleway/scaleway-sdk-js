@@ -1551,6 +1551,10 @@ export type ListClustersRequest = {
    * Private Network ID to filter on, only clusters within this Private Network will be returned.
    */
   privateNetworkId?: string
+  /**
+   * Version to filter on, only cluster matching this prefix version will be returned.
+   */
+  version?: string
 }
 
 
