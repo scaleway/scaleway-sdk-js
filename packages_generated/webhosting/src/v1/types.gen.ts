@@ -258,6 +258,10 @@ export interface OfferCommitment {
    */
   type: CommitmentType
   /**
+   * True when its is the default commitment for that offer.
+   */
+  isDefault: boolean
+  /**
    * Offer commitment name.
    */
   billingMode: BillingMode
