@@ -359,6 +359,7 @@ const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
     billingOperationPath: data.billing_operation_path,
     durationInMonth: data.duration_in_month,
     id: data.id,
+    isDefault: data.is_default,
     next: data.next ? unmarshalOfferCommitment(data.next) : undefined,
     price: data.price ? unmarshalMoney(data.price) : undefined,
     type: data.type,

@@ -412,6 +412,7 @@ const unmarshalMemory = (data: unknown): Memory => {
 
   return {
     capacity: data.capacity,
+    eccType: data.ecc_type,
     frequency: data.frequency,
     isEcc: data.is_ecc,
     type: data.type,

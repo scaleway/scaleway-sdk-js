@@ -73,6 +73,11 @@ export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'riscv'
   | 'apple_silicon'
 
+export type PublicCatalogProductPropertiesHardwareRAMECCType =
+  | 'unknown_ecc_type'
+  | 'standard'
+  | 'on_die'
+
 export type PublicCatalogProductPropertiesManagedMongoDBStorageTypeStorageClass =
   | 'unknown_storage_class'
   | 'sbs_5k'
@@ -264,6 +269,10 @@ export interface PublicCatalogProductPropertiesHardwareRAM {
    * The type of the RAM.
    */
   type: string
+  /**
+   * ECC type.
+   */
+  eccType?: PublicCatalogProductPropertiesHardwareRAMECCType
 }
 
 

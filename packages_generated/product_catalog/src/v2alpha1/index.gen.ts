@@ -32,6 +32,7 @@ export type {
   PublicCatalogProductPropertiesHardwareGPU,
   PublicCatalogProductPropertiesHardwareNetwork,
   PublicCatalogProductPropertiesHardwareRAM,
+  PublicCatalogProductPropertiesHardwareRAMECCType,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
   PublicCatalogProductPropertiesKeyManager,

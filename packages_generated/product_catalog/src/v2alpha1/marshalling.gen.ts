@@ -139,6 +139,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareRAM = (data: unknown): Publ
 
   return {
     description: data.description,
+    eccType: data.ecc_type ? data.ecc_type : undefined,
     size: data.size,
     type: data.type,
   } as PublicCatalogProductPropertiesHardwareRAM
