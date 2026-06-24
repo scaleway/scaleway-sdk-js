@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@repo/configs": "workspace:*",
-    "@types/node": "20.19.41",
+    "@types/node": "20.19.43",
     "vite": "8.0.16"
   },
   "engines": {
