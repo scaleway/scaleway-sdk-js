@@ -31,6 +31,12 @@ export type ListSettingsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type MemoryEccType =
+  | 'unknown_ecc_type'
+  | 'none'
+  | 'standard'
+  | 'on_die'
+
 export type OfferStock =
   | 'empty'
   | 'low'
@@ -438,6 +444,10 @@ export interface Memory {
    * True if the memory is an error-correcting code memory.
    */
   isEcc: boolean
+  /**
+   * Type of ECC memory.
+   */
+  eccType: MemoryEccType
 }
 
 
