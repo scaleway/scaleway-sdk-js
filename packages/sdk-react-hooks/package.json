@@ -238,6 +238,10 @@
     "./billingv2": {
       "default": "./dist/queries/billingv2/generated/index.js",
       "types": "./dist/queries/billingv2/generated/index.d.ts"
+    },
+    "./instancev2alpha1": {
+      "default": "./dist/queries/instancev2alpha1/generated/index.js",
+      "types": "./dist/queries/instancev2alpha1/generated/index.d.ts"
     }
   },
   "scripts": {
