@@ -4,3 +4,4 @@
  */
 
 export * as Instancev1 from './v1/index.js'
+export * as Instancev2alpha1 from './v2alpha1/index.gen.js'

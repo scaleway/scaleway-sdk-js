@@ -22,7 +22,7 @@ import { Flexibleipv1alpha1 } from '@scaleway/sdk-flexibleip'
 import { Functionv1beta1 } from '@scaleway/sdk-function'
 import { Iamv1alpha1 } from '@scaleway/sdk-iam'
 import { Inferencev1, Inferencev1beta1 } from '@scaleway/sdk-inference'
-import { Instancev1 } from '@scaleway/sdk-instance'
+import { Instancev1, Instancev2alpha1 } from '@scaleway/sdk-instance'
 import { Interlinkv1beta1 } from '@scaleway/sdk-interlink'
 import { Iotv1 } from '@scaleway/sdk-iot'
 import { Ipamv1 } from '@scaleway/sdk-ipam'
@@ -222,9 +222,10 @@ export const Inference = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Instance' namespace instead (e.g., Instance.v1).
  */
-export { Instancev1 }
+export { Instancev1, Instancev2alpha1 }
 export const Instance = {
   v1: Instancev1,
+  v2alpha1: Instancev2alpha1,
 }
 
 /**
