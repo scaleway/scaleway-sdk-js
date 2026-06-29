@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-messageq",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Scaleway SDK messageq",
   "license": "Apache-2.0",
   "repository": {

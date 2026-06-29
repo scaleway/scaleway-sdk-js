@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.9.0...@scaleway/sdk@3.10.0) (2026-06-29)
+
+
+### Features
+
+* **instance:** enable SDK generation for instance api v2 ([#3099](https://github.com/scaleway/scaleway-sdk-js/issues/3099)) ([3fabc80](https://github.com/scaleway/scaleway-sdk-js/commit/3fabc80fada11a7d1d8a44539ea189f616fa65a6))
+
+
+
+
+
 # [3.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk@3.8.1...@scaleway/sdk@3.9.0) (2026-06-22)
 
 

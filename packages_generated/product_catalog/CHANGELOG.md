@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.14.0...@scaleway/sdk-product-catalog@2.15.0) (2026-06-29)
+
+
+### Features
+
+* **product_catalog:** add RAM ECC type ([#3097](https://github.com/scaleway/scaleway-sdk-js/issues/3097)) ([38467fd](https://github.com/scaleway/scaleway-sdk-js/commit/38467fdc243edf43c5b02b52bb7ec75f0b307f10))
+
+
+
+
+
 # [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.13.0...@scaleway/sdk-product-catalog@2.14.0) (2026-06-22)
 
 

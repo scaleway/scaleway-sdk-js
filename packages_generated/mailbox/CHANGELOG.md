@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-mailbox@1.6.0...@scaleway/sdk-mailbox@1.6.1) (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-mailbox
+
+
+
+
+
 # [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-mailbox@1.5.0...@scaleway/sdk-mailbox@1.6.0) (2026-06-22)
 
 

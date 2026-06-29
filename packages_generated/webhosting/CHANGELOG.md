@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.9.0...@scaleway/sdk-webhosting@2.10.0) (2026-06-29)
+
+
+### Features
+
+* **webhosting:** expose the field default on offer commitment ([#3096](https://github.com/scaleway/scaleway-sdk-js/issues/3096)) ([5ffb303](https://github.com/scaleway/scaleway-sdk-js/commit/5ffb303732fa63f7422db6dccb0f87648e2c153f))
+
+
+
+
+
 # 2.9.0 (2026-06-22)
 
 

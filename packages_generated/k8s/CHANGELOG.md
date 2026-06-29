@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.12.0...@scaleway/sdk-k8s@2.13.0) (2026-06-29)
+
+
+### Features
+
+* **k8s:** filter by version in the list cluster service ([#3092](https://github.com/scaleway/scaleway-sdk-js/issues/3092)) ([5810577](https://github.com/scaleway/scaleway-sdk-js/commit/581057705d25387f11186156a1fb60dded793990))
+
+
+
+
+
 # 2.12.0 (2026-06-22)
 
 

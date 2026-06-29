@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.7.0 (2026-06-29)
+
+
+### Features
+
+* **functions:** deprecate old runtimes and add new ones ([#3098](https://github.com/scaleway/scaleway-sdk-js/issues/3098)) ([4d42ef6](https://github.com/scaleway/scaleway-sdk-js/commit/4d42ef6c7f717f132da202a73d0745df453e08e0))
+
+
+
+
+
 ## [2.6.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-function@2.6.1...@scaleway/sdk-function@2.6.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-function
