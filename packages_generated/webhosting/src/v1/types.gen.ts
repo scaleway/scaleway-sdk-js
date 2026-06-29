@@ -258,7 +258,7 @@ export interface OfferCommitment {
    */
   type: CommitmentType
   /**
-   * True when its is the default commitment for that offer.
+   * True if the commitment is the default one for that offer.
    */
   isDefault: boolean
   /**
