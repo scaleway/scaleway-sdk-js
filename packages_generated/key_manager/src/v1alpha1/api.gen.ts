@@ -270,7 +270,6 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
-          ['protection_level', request.protectionLevel],
           ['scheduled_for_deletion', request.scheduledForDeletion],
           ['tags', request.tags],
           ['usage', request.usage],

@@ -3,6 +3,7 @@
  * PLEASE DO NOT EDIT HERE
  */
 import { Accountv3 } from '@scaleway/sdk-account'
+import { Annotationsv1 } from '@scaleway/sdk-annotations'
 import { Applesiliconv1alpha1 } from '@scaleway/sdk-applesilicon'
 import { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
 import { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
@@ -60,6 +61,14 @@ export { createClient, createAdvancedClient } from '@scaleway/sdk-client'
 export { Accountv3 }
 export const Account = {
   v3: Accountv3,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'Annotations' namespace instead (e.g., Annotations.v1).
+ */
+export { Annotationsv1 }
+export const Annotations = {
+  v1: Annotationsv1,
 }
 
 /**
