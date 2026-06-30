@@ -613,7 +613,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List subnet overlaps.. List subnet overlaps between the VPCConnector VPC and the target VPC or for a specific subnet if specified.
+   * List subnet overlaps. List subnet overlaps between the VPCs on both sides of a connector, or for a specific subnet if specified.
    *
    * @param request - The request {@link ListSubnetOverlapsRequest}
    * @returns A Promise of ListSubnetOverlapsResponse
@@ -643,10 +643,22 @@ export class API extends ParentAPI {
       unmarshalListIngressRulesResponse,
     )
   
+  /**
+   * List ingress rules. List existing ingress rules in the specified region.
+   *
+   * @param request - The request {@link ListIngressRulesRequest}
+   * @returns A Promise of ListIngressRulesResponse
+   */
   listIngressRules = (request: Readonly<ListIngressRulesRequest> = {}) =>
     enrichForPagination('rules', this.pageOfListIngressRules, request)
 
   
+  /**
+   * Create an ingress rule. Create an ingress rule in the specified region.
+   *
+   * @param request - The request {@link CreateIngressRuleRequest}
+   * @returns A Promise of IngressRule
+   */
   createIngressRule = (request: Readonly<CreateIngressRuleRequest>) =>
     this.client.fetch<IngressRule>(
       {
@@ -661,6 +673,12 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Get an ingress rule. Retrieve details of an existing ingress rule, specified by its ingress rule ID.
+   *
+   * @param request - The request {@link GetIngressRuleRequest}
+   * @returns A Promise of IngressRule
+   */
   getIngressRule = (request: Readonly<GetIngressRuleRequest>) =>
     this.client.fetch<IngressRule>(
       {
@@ -671,6 +689,12 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Update an ingress rule. Update an ingress rule specified by its ingress rule ID.
+   *
+   * @param request - The request {@link UpdateIngressRuleRequest}
+   * @returns A Promise of IngressRule
+   */
   updateIngressRule = (request: Readonly<UpdateIngressRuleRequest>) =>
     this.client.fetch<IngressRule>(
       {
@@ -685,6 +709,11 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Delete an ingress rule. Delete an ingress rule specified by its ingress rule ID.
+   *
+   * @param request - The request {@link DeleteIngressRuleRequest}
+   */
   deleteIngressRule = (request: Readonly<DeleteIngressRuleRequest>) =>
     this.client.fetch<void>(
       {
