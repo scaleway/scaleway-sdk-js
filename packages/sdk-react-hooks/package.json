@@ -310,7 +310,7 @@
     "@scaleway/use-dataloader": "6.1.2",
     "@types/react": "19.2.14",
     "react": "^19.2.5",
-    "tinyglobby": "0.2.16"
+    "tinyglobby": "0.2.17"
   },
   "peerDependencies": {
     "@scaleway/use-dataloader": "6.1.2",
