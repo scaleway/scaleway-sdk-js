@@ -95,6 +95,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareCPU = (data: unknown): Publ
     arch: data.arch,
     description: data.description,
     physical: data.physical ? unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical(data.physical) : undefined,
+    shared: data.shared,
     threads: data.threads,
     type: data.type,
     virtual: data.virtual ? unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual(data.virtual) : undefined,

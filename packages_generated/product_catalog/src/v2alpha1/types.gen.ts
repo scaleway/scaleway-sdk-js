@@ -217,6 +217,10 @@ export interface PublicCatalogProductPropertiesHardwareCPU {
    * The total number of threads.
    */
   threads: number
+  /**
+   * Indicates whether the CPU is shared or not.
+   */
+  shared: boolean
 }
 
 
