@@ -68,7 +68,7 @@ jobs:
       - run: pnpm install
       - run: make build
       - run: pnpm run test:coverage --environment ${{ matrix.test-environment }}
-      - uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+      - uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v6.0.2
       - run: pnpm run test:junit
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
