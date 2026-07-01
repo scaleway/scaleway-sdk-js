@@ -202,6 +202,9 @@ export const UpdateUserRequest = {
   },
 }
 
+export const UpgradeInstanceRequest = {
+}
+
 export const Volume = {
   sizeBytes: {
     greaterThanOrEqual: 1000000000,

@@ -119,6 +119,8 @@ export type HostingStatus =
   | 'locked'
   | 'migrating'
   | 'updating'
+  | 'payment_pending'
+  | 'payment_failed'
 
 export type ListBackupsRequestOrderBy =
   | 'created_at_desc'

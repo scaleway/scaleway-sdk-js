@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
     "@scaleway/sdk-autoscaling": "workspace:*",
