@@ -37,7 +37,7 @@
     "@repo/configs": "workspace:^",
     "@scaleway/generate-packages": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
-    "@scaleway/tsconfig": "1.1.4",
+    "@scaleway/tsconfig": "1.1.6",
     "@typescript/native-preview": "7.0.0-dev.20260420.1",
     "@vitest/coverage-istanbul": "4.1.0",
     "@vitest/coverage-v8": "4.1.0",
