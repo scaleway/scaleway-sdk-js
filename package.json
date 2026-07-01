@@ -30,7 +30,7 @@
     "test:ui": "vitest --ui"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.12",
+    "@biomejs/biome": "2.5.1",
     "@commitlint/cli": "20.5.3",
     "@commitlint/config-conventional": "20.5.3",
     "@manypkg/cli": "0.25.1",
