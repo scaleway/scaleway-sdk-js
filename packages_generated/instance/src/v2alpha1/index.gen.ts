@@ -26,6 +26,7 @@ export type {
   CreateServerRequestServerVolume,
   CreateServerRequestServerVolumeVolumeType,
   CreateTemplateRequest,
+  CreateTemplateRequestPrivateNetworkTemplate,
   CreateTemplateRequestVolumeTemplate,
   DeletePlacementGroupRequest,
   DeletePrivateNetworkInterfaceRequest,
@@ -124,6 +125,7 @@ export type {
   UpdateServerRequest,
   UpdateServerRequestPublicNetworkInterface,
   UpdateTemplateRequest,
+  UpdateTemplateRequestUpdatePrivateNetworks,
   UpdateTemplateRequestUpdateVolumes,
   UserData,
 } from './types.gen.js'

@@ -286,6 +286,7 @@ const unmarshalACLRule = (data: unknown): ACLRule => {
     description: data.description,
     id: data.id,
     ip: data.ip,
+    region: data.region,
     scalewayRanges: data.scaleway_ranges,
   } as ACLRule
 }
@@ -383,6 +384,7 @@ const unmarshalClusterType = (data: unknown): ClusterType => {
     maxNodes: data.max_nodes,
     memory: data.memory,
     name: data.name,
+    region: data.region,
     resiliency: data.resiliency,
     sla: data.sla,
   } as ClusterType
