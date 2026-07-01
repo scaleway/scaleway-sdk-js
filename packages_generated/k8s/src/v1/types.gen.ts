@@ -319,6 +319,10 @@ export interface ACLRule {
    * Description of the ACL.
    */
   description: string
+  /**
+   * Region of the ACL rule.
+   */
+  region: ScwRegion
 }
 
 
@@ -563,6 +567,10 @@ export interface ClusterType {
    * Maximum amount of data that can be stored in etcd for the offer.
    */
   maxEtcdSize: number
+  /**
+   * The region of the cluster type.
+   */
+  region: ScwRegion
 }
 
 
