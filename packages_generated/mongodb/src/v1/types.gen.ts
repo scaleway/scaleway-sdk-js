@@ -230,22 +230,6 @@ export interface Maintenance {
 }
 
 
-export interface Version {
-  /**
-   * MongoDB® major engine version.
-   */
-  version: string
-  /**
-   * Date of End of Life.
-   */
-  endOfLifeAt?: Date
-  /**
-   * Date of Release.
-   */
-  releasedAt?: Date
-}
-
-
 export interface Volume {
   /**
    * Type of volume where data is stored.
@@ -389,7 +373,7 @@ export interface Instance {
   /**
    * List of MongoDB® versions the Database Instance can be upgraded to.
    */
-  upgradableVersions: Version[]
+  upgradableVersions: string[]
 }
 
 
@@ -494,6 +478,22 @@ export interface User {
    * List of roles assigned to the user, along with the corresponding database where each role is granted.
    */
   roles: UserRole[]
+}
+
+
+export interface Version {
+  /**
+   * MongoDB® major engine version.
+   */
+  version: string
+  /**
+   * Date of End of Life.
+   */
+  endOfLifeAt?: Date
+  /**
+   * Date of Release.
+   */
+  releasedAt?: Date
 }
 
 
