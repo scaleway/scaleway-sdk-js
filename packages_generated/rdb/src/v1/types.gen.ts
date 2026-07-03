@@ -369,6 +369,10 @@ export interface EngineVersion {
    * Engine settings available to be set at database initialization.
    */
   availableInitSettings: EngineSetting[]
+  /**
+   * Version release date.
+   */
+  releaseDate?: Date
 }
 
 
