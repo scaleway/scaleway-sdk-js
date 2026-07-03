@@ -543,6 +543,7 @@ const unmarshalEngineVersion = (data: unknown): EngineVersion => {
     disabled: data.disabled,
     endOfLife: unmarshalDate(data.end_of_life),
     name: data.name,
+    releaseDate: unmarshalDate(data.release_date),
     version: data.version,
   } as EngineVersion
 }
