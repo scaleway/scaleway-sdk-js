@@ -1,6 +1,7 @@
 //this file is generated
 
 import type { Accountv3 } from '@scaleway/sdk-account'
+import type { Annotationsv1 } from '@scaleway/sdk-annotations'
 import type { Applesiliconv1alpha1 } from '@scaleway/sdk-applesilicon'
 import type { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
 import type { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
@@ -59,6 +60,7 @@ import type { Webhostingv1 } from '@scaleway/sdk-webhosting'
 export type APISdk = {
   accountv3Contract: Accountv3.ContractAPI
   accountv3Project: Accountv3.ProjectAPI
+  annotationsv1: Annotationsv1.API
   applesiliconv1alpha1: Applesiliconv1alpha1.API
   applesiliconv1alpha1PrivateNetwork: Applesiliconv1alpha1.PrivateNetworkAPI
   auditTrailv1alpha1: AuditTrailv1alpha1.API

@@ -131,6 +131,9 @@ importers:
       '@scaleway/sdk-account':
         specifier: workspace:*
         version: link:../../packages_generated/account
+      '@scaleway/sdk-annotations':
+        specifier: workspace:*
+        version: link:../../packages_generated/annotations
       '@scaleway/sdk-applesilicon':
         specifier: workspace:*
         version: link:../../packages_generated/applesilicon
@@ -313,6 +316,9 @@ importers:
       '@scaleway/sdk-account':
         specifier: workspace:*
         version: link:../../packages_generated/account
+      '@scaleway/sdk-annotations':
+        specifier: workspace:*
+        version: link:../../packages_generated/annotations
       '@scaleway/sdk-applesilicon':
         specifier: workspace:*
         version: link:../../packages_generated/applesilicon
@@ -480,6 +486,9 @@ importers:
       '@scaleway/sdk-account':
         specifier: workspace:*
         version: link:../../packages_generated/account
+      '@scaleway/sdk-annotations':
+        specifier: workspace:*
+        version: link:../../packages_generated/annotations
       '@scaleway/sdk-applesilicon':
         specifier: workspace:*
         version: link:../../packages_generated/applesilicon
@@ -631,6 +640,19 @@ importers:
       '@repo/configs':
         specifier: workspace:^
         version: link:../../tools/configs
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../../packages/client
+
+  packages_generated/annotations:
+    dependencies:
+      '@scaleway/random-name':
+        specifier: 5.1.4
+        version: 5.1.4
+      '@scaleway/sdk-std':
+        specifier: workspace:*
+        version: link:../std
+    devDependencies:
       '@scaleway/sdk-client':
         specifier: workspace:^
         version: link:../../packages/client
