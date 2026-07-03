@@ -242,6 +242,10 @@
     "./instancev2alpha1": {
       "default": "./dist/queries/instancev2alpha1/generated/index.js",
       "types": "./dist/queries/instancev2alpha1/generated/index.d.ts"
+    },
+    "./annotationsv1": {
+      "default": "./dist/queries/annotationsv1/generated/index.js",
+      "types": "./dist/queries/annotationsv1/generated/index.d.ts"
     }
   },
   "scripts": {
@@ -261,6 +265,7 @@
     "@repo/configs": "workspace:^",
     "@scaleway/generate-react-queries": "workspace:*",
     "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
     "@scaleway/sdk-autoscaling": "workspace:*",
@@ -318,6 +323,7 @@
   },
   "optionalDependencies": {
     "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
     "@scaleway/sdk-autoscaling": "workspace:*",
