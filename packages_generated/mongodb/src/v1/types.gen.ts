@@ -230,6 +230,22 @@ export interface Maintenance {
 }
 
 
+export interface Version {
+  /**
+   * MongoDB® major engine version.
+   */
+  version: string
+  /**
+   * Date of End of Life.
+   */
+  endOfLifeAt?: Date
+  /**
+   * Date of Release.
+   */
+  releasedAt?: Date
+}
+
+
 export interface Volume {
   /**
    * Type of volume where data is stored.
@@ -370,6 +386,10 @@ export interface Instance {
    * List of pending maintenances applicable to the Database Instance.
    */
   maintenances: Maintenance[]
+  /**
+   * List of MongoDB® versions the Database Instance can be upgraded to.
+   */
+  upgradableVersions: Version[]
 }
 
 
@@ -474,22 +494,6 @@ export interface User {
    * List of roles assigned to the user, along with the corresponding database where each role is granted.
    */
   roles: UserRole[]
-}
-
-
-export interface Version {
-  /**
-   * MongoDB® major engine version.
-   */
-  version: string
-  /**
-   * Date of End of Life.
-   */
-  endOfLifeAt?: Date
-  /**
-   * Date of Release.
-   */
-  releasedAt?: Date
 }
 
 
@@ -1069,14 +1073,15 @@ export type UpgradeInstanceRequest = {
   /**
    * Increase your Block Storage volume size.
    *
-   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'versionId' could be set.
+   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'version' could be set.
    */
   volumeSizeBytes?: number
   /**
+   * MongoDB version to upgrade to (e.g., `8.0`, `7.0`, `8.2`).
    *
-   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'versionId' could be set.
+   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'version' could be set.
    */
-  versionId?: string
+  version?: string
 }
 
 
