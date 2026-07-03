@@ -756,7 +756,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Create backend stage. Create a new backend stage. You must specify either a `scaleway_s3` (for a Scaleway Object Storage bucket) or `scaleway_lb` (for a Scaleway Load Balancer) field to configure the origin.
+   * Create backend stage. Create a new backend stage. You must specify a type of backend (`scaleway_s3`, `scaleway_lb`, etc.) to configure the origin.
    *
    * @param request - The request {@link CreateBackendStageRequest}
    * @returns A Promise of BackendStage
@@ -776,7 +776,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Get backend stage. Retrieve information about an existing backend stage, specified by its `backend_stage_id`. Its full details, including `scaleway_s3` or `scaleway_lb`, are returned in the response object.
+   * Get backend stage. Retrieve information about an existing backend stage, specified by its `backend_stage_id`. Its full details are returned in the response object.
    *
    * @param request - The request {@link GetBackendStageRequest}
    * @returns A Promise of BackendStage
