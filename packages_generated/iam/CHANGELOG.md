@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.4](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@2.9.3...@scaleway/sdk-iam@2.9.4) (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-iam
+
+
+
+
+
+## 2.9.3 (2026-06-22)
+
+**Note:** Version bump only for package @scaleway/sdk-iam
+
+
+
+
+
 ## [2.9.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-iam@2.9.1...@scaleway/sdk-iam@2.9.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-iam

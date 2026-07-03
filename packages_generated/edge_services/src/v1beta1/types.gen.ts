@@ -95,6 +95,7 @@ export type PipelineErrorCode =
   | 'pipeline_invalid_workflow'
   | 'pipeline_missing_head_stage'
   | 'pipeline_websocket_limit'
+  | 'pipeline_configuration_failed'
 
 export type PipelineErrorSeverity =
   | 'unknown_severity'

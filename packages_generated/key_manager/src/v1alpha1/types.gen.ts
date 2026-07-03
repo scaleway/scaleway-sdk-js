@@ -23,6 +23,9 @@ export type KeyAlgorithmAsymmetricSigning =
   | 'rsa_pkcs1_2048_sha256'
   | 'rsa_pkcs1_3072_sha256'
   | 'rsa_pkcs1_4096_sha256'
+  | 'ml_dsa_44'
+  | 'ml_dsa_65'
+  | 'ml_dsa_87'
 
 export type KeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'

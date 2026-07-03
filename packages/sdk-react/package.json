@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-react",
-  "version": "0.5.2",
+  "version": "0.8.0",
   "private": false,
   "description": "React API Provider using client settings",
   "files": [
@@ -34,6 +34,7 @@
     "@repo/configs": "workspace:^",
     "@scaleway/generate-react-sdk": "workspace:*",
     "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
     "@scaleway/sdk-autoscaling": "workspace:*",
@@ -90,6 +91,7 @@
   },
   "optionalDependencies": {
     "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
     "@scaleway/sdk-autoscaling": "workspace:*",

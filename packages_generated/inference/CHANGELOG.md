@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.1 (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-inference
+
+
+
+
+
+# 2.9.0 (2026-06-08)
+
+
+### Features
+
+* **inference:** add support for react hooks ([#3014](https://github.com/scaleway/scaleway-sdk-js/issues/3014)) ([9c0f7f0](https://github.com/scaleway/scaleway-sdk-js/commit/9c0f7f0025612f0304df0b79ddeae68947ec52a3))
+
+
+
+
+
 # [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-inference@2.7.1...@scaleway/sdk-inference@2.8.0) (2026-06-02)
 
 

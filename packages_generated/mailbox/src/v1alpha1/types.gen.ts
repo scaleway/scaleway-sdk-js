@@ -1,6 +1,12 @@
 
 
 
+export type AliasStatus =
+  | 'unknown_status'
+  | 'provisioning'
+  | 'deleting'
+  | 'ready'
+
 export type DomainRecordDNSType =
   | 'unknown_dns_type'
   | 'cname_dns_type'
@@ -30,6 +36,14 @@ export type DomainStatus =
   | 'provisioning'
   | 'ready'
   | 'deleting'
+
+export type ListAliasesRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'updated_at_desc'
+  | 'updated_at_asc'
+  | 'name_desc'
+  | 'name_asc'
 
 export type ListDomainsRequestOrderBy =
   | 'created_at_desc'
@@ -166,6 +180,38 @@ export interface DomainRecord {
 }
 
 
+export interface Alias {
+  /**
+   * Unique identifier of the alias.
+   */
+  id: string
+  /**
+   * Email address of the alias as local_part@domain.
+   */
+  email: string
+  /**
+   * ID of the mailbox to which the alias belongs.
+   */
+  mailboxId: string
+  /**
+   * Description of the alias.
+   */
+  description: string
+  /**
+   * Current status of the alias.
+   */
+  status: AliasStatus
+  /**
+   * Date and time of alias creation.
+   */
+  createdAt?: Date
+  /**
+   * Date and time when the alias was last updated.
+   */
+  updatedAt?: Date
+}
+
+
 export interface Domain {
   /**
    * Unique identifier of the domain.
@@ -238,6 +284,22 @@ export interface BatchCreateMailboxesResponse {
 }
 
 
+export type CreateAliasRequest = {
+  /**
+   * Local part of the email address (e.g. local_part@domain.com).
+   */
+  localPart: string
+  /**
+   * ID of the mailbox to associate with the alias.
+   */
+  mailboxId: string
+  /**
+   * (Optional) Description of the alias.
+   */
+  description?: string
+}
+
+
 export type CreateDomainRequest = {
   /**
    * ID of the project to which the domain belongs.
@@ -247,6 +309,14 @@ export type CreateDomainRequest = {
    * Fully qualified domain name.
    */
   name: string
+}
+
+
+export type DeleteAliasRequest = {
+  /**
+   * ID of the alias to delete.
+   */
+  aliasId: string
 }
 
 
@@ -263,6 +333,14 @@ export type DeleteMailboxRequest = {
    * ID of the mailbox to delete.
    */
   mailboxId: string
+}
+
+
+export type GetAliasRequest = {
+  /**
+   * ID of the alias to get.
+   */
+  aliasId: string
 }
 
 
@@ -342,6 +420,46 @@ export type GetMailboxRequest = {
 }
 
 
+export type ListAliasesRequest = {
+  /**
+   * Order aliases by specific criteria.
+   */
+  orderBy?: ListAliasesRequestOrderBy
+  /**
+   * Requested page number. Value must be greater or equal to 1.
+   */
+  page?: number
+  /**
+   * Requested page size. Value must be between 1 and 100.
+   */
+  pageSize?: number
+  /**
+   * ID of the mailbox for which to list aliases.
+   */
+  mailboxId?: string
+  /**
+   * (Optional) Filter aliases by their status.
+   */
+  status?: AliasStatus
+  /**
+   * Project ID to filter on.
+   */
+  projectId?: string
+}
+
+
+export interface ListAliasesResponse {
+  /**
+   * Number of aliases that match the request (without pagination).
+   */
+  totalCount: number
+  /**
+   * Single page of aliases matching the requested criteria.
+   */
+  aliases: Alias[]
+}
+
+
 export type ListDomainsRequest = {
   orderBy?: ListDomainsRequestOrderBy
   page?: number
@@ -389,6 +507,10 @@ export type ListMailboxesRequest = {
    * (Optional) Search term to filter mailboxes on name and local_part.
    */
   search?: string
+  /**
+   * (Optional) Project ID to filter mailboxes on.
+   */
+  projectId?: string
 }
 
 
@@ -429,6 +551,9 @@ export type UpdateMailboxRequest = {
 
 
 export type ValidateDomainRecordsRequest = {
+  /**
+   * ID of the domain with which to validate the records.
+   */
   domainId: string
 }
 

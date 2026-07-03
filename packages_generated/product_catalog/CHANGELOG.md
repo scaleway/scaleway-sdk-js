@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.14.0...@scaleway/sdk-product-catalog@2.15.0) (2026-06-29)
+
+
+### Features
+
+* **product_catalog:** add RAM ECC type ([#3097](https://github.com/scaleway/scaleway-sdk-js/issues/3097)) ([38467fd](https://github.com/scaleway/scaleway-sdk-js/commit/38467fdc243edf43c5b02b52bb7ec75f0b307f10))
+
+
+
+
+
+# [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.13.0...@scaleway/sdk-product-catalog@2.14.0) (2026-06-22)
+
+
+### Features
+
+* **product-catalog:** add support for `apacheKafka` ([#3071](https://github.com/scaleway/scaleway-sdk-js/issues/3071)) ([278f174](https://github.com/scaleway/scaleway-sdk-js/commit/278f17459d7635923720637eba5414b24654f394))
+* **product-catalog:** add support for OpenSearch ([#3085](https://github.com/scaleway/scaleway-sdk-js/issues/3085)) ([28fad16](https://github.com/scaleway/scaleway-sdk-js/commit/28fad16ac659d76099e09aa49eacc5dc953483ef))
+
+
+
+
+
+# [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.12.0...@scaleway/sdk-product-catalog@2.13.0) (2026-06-15)
+
+
+### Features
+
+* **product_catalog:** add new fields to generative apis ([#3044](https://github.com/scaleway/scaleway-sdk-js/issues/3044)) ([1fc6b85](https://github.com/scaleway/scaleway-sdk-js/commit/1fc6b85b129a09530d3232f4f2d2dc10b6a14d5a))
+* **product_catalog:** add serverless jobs products to catalog APIs ([#3032](https://github.com/scaleway/scaleway-sdk-js/issues/3032)) ([ae267ef](https://github.com/scaleway/scaleway-sdk-js/commit/ae267ef279ac48c19e2a5c84d18a6a0cb5238cb9))
+
+
+
+
+
+# 2.12.0 (2026-06-08)
+
+
+### Features
+
+* **product_catalog:** add serverless containers products to catalog APIs ([#3017](https://github.com/scaleway/scaleway-sdk-js/issues/3017)) ([e2598d0](https://github.com/scaleway/scaleway-sdk-js/commit/e2598d090222f1ce763a8e12babdbcfffd73fd92))
+* **product_catalog:** add support for `no_kvm` ([#3015](https://github.com/scaleway/scaleway-sdk-js/issues/3015)) ([c0f8a58](https://github.com/scaleway/scaleway-sdk-js/commit/c0f8a58d60f0b0a8aad5697680245ca231de3b0c))
+
+
+
+
+
 # [2.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.10.1...@scaleway/sdk-product-catalog@2.11.0) (2026-06-02)
 
 

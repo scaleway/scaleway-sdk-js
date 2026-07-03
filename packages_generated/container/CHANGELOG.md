@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@2.8.1...@scaleway/sdk-container@2.8.2) (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-container
+
+
+
+
+
+## 2.8.1 (2026-06-22)
+
+
+### Bug Fixes
+
+* **containers:** allow underscores in triggers names ([#3075](https://github.com/scaleway/scaleway-sdk-js/issues/3075)) ([eb07241](https://github.com/scaleway/scaleway-sdk-js/commit/eb072410e270dafe888a220de58e4bad204d93d2))
+* **containers:** validate triggers' names ([#3061](https://github.com/scaleway/scaleway-sdk-js/issues/3061)) ([1ce5e9f](https://github.com/scaleway/scaleway-sdk-js/commit/1ce5e9fc61bcba0027aa975217e47ee7d4ba4aa1))
+
+
+
+
+
 # [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-container@2.7.1...@scaleway/sdk-container@2.8.0) (2026-06-02)
 
 

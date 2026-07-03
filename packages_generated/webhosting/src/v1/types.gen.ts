@@ -105,6 +105,11 @@ export type DomainZoneOwner =
   | 'online'
   | 'webhosting'
 
+export type HostingProvider =
+  | 'unknown_provider'
+  | 'elements'
+  | 'dedibox'
+
 export type HostingStatus =
   | 'unknown_status'
   | 'delivering'
@@ -114,6 +119,8 @@ export type HostingStatus =
   | 'locked'
   | 'migrating'
   | 'updating'
+  | 'payment_pending'
+  | 'payment_failed'
 
 export type ListBackupsRequestOrderBy =
   | 'created_at_desc'
@@ -252,6 +259,10 @@ export interface OfferCommitment {
    * Offer commitment type.
    */
   type: CommitmentType
+  /**
+   * True if the commitment is the default one for that offer.
+   */
+  isDefault: boolean
   /**
    * Offer commitment name.
    */
@@ -1514,6 +1525,10 @@ export interface Hosting {
    * Commitment details to which the hosting is engaged.
    */
   commitment?: HostingCommitment
+  /**
+   * Provider where the Web Hosting plan is managed (elements, dedibox).
+   */
+  provider?: HostingProvider
 }
 
 

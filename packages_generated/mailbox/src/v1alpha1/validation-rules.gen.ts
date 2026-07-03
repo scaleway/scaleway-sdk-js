@@ -12,10 +12,30 @@ export const BatchCreateMailboxesRequestMailboxParameters = {
   },
 }
 
+export const CreateAliasRequest = {
+  description: {
+    maxLength: 128,
+  },
+  localPart: {
+    maxLength: 64,
+    minLength: 1,
+  },
+}
+
 export const CreateDomainRequest = {
   name: {
     maxLength: 253,
     minLength: 1,
+  },
+}
+
+export const ListAliasesRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
   },
 }
 

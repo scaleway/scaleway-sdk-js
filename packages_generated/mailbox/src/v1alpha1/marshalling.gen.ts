@@ -3,14 +3,17 @@ import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
   Mailbox,
+  Alias,
   Domain,
   BatchCreateMailboxesResponse,
   DomainRecord,
   GetDomainRecordsResponse,
+  ListAliasesResponse,
   ListDomainsResponse,
   ListMailboxesResponse,
   BatchCreateMailboxesRequestMailboxParameters,
   BatchCreateMailboxesRequest,
+  CreateAliasRequest,
   CreateDomainRequest,
   UpdateMailboxRequest,
 } from './types.gen.js'
@@ -35,6 +38,24 @@ export const unmarshalMailbox = (data: unknown): Mailbox => {
     subscriptionPeriodStartedAt: unmarshalDate(data.subscription_period_started_at),
     updatedAt: unmarshalDate(data.updated_at),
   } as Mailbox
+}
+
+export const unmarshalAlias = (data: unknown): Alias => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Alias' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    email: data.email,
+    id: data.id,
+    mailboxId: data.mailbox_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Alias
 }
 
 export const unmarshalDomain = (data: unknown): Domain => {
@@ -115,6 +136,19 @@ export const unmarshalGetDomainRecordsResponse = (data: unknown): GetDomainRecor
   } as GetDomainRecordsResponse
 }
 
+export const unmarshalListAliasesResponse = (data: unknown): ListAliasesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAliasesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    aliases: unmarshalArrayOfObject(data.aliases, unmarshalAlias),
+    totalCount: data.total_count,
+  } as ListAliasesResponse
+}
+
 export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -156,6 +190,15 @@ export const marshalBatchCreateMailboxesRequest = (
   domain_id: request.domainId,
   mailboxes: ((request.mailboxes !== undefined) ?  request.mailboxes.map(elt => marshalBatchCreateMailboxesRequestMailboxParameters(elt, defaults)): undefined),
   subscription_period: request.subscriptionPeriod,
+})
+
+export const marshalCreateAliasRequest = (
+  request: CreateAliasRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  local_part: request.localPart,
+  mailbox_id: request.mailboxId,
 })
 
 export const marshalCreateDomainRequest = (

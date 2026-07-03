@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.12.0...@scaleway/sdk-k8s@2.13.0) (2026-06-29)
+
+
+### Features
+
+* **k8s:** filter by version in the list cluster service ([#3092](https://github.com/scaleway/scaleway-sdk-js/issues/3092)) ([5810577](https://github.com/scaleway/scaleway-sdk-js/commit/581057705d25387f11186156a1fb60dded793990))
+
+
+
+
+
+# 2.12.0 (2026-06-22)
+
+
+### Features
+
+* **k8s:** add support for `privateNetworkId` ([#3076](https://github.com/scaleway/scaleway-sdk-js/issues/3076)) ([c35edbf](https://github.com/scaleway/scaleway-sdk-js/commit/c35edbf36c2e74054f563ed3ce0f993145485a65))
+* **k8s:** make `privateNetworkId` optional in `Pool` ([#3082](https://github.com/scaleway/scaleway-sdk-js/issues/3082)) ([68fdc9c](https://github.com/scaleway/scaleway-sdk-js/commit/68fdc9c4b207fca02d9fc4613675398c2ca2b6d8))
+
+
+
+
+
+# 2.11.0 (2026-06-08)
+
+
+### Features
+
+* **k8s:** add support for `it-mil` ([#3010](https://github.com/scaleway/scaleway-sdk-js/issues/3010)) ([1114e99](https://github.com/scaleway/scaleway-sdk-js/commit/1114e99bf5fffff9db9dc14d6d4b2fa535c1bb62))
+
+
+
+
+
 ## [2.10.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.10.1...@scaleway/sdk-k8s@2.10.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-k8s

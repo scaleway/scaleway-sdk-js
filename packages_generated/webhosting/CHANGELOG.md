@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.9.0...@scaleway/sdk-webhosting@2.10.0) (2026-06-29)
+
+
+### Features
+
+* **webhosting:** expose the field default on offer commitment ([#3096](https://github.com/scaleway/scaleway-sdk-js/issues/3096)) ([5ffb303](https://github.com/scaleway/scaleway-sdk-js/commit/5ffb303732fa63f7422db6dccb0f87648e2c153f))
+
+
+
+
+
+# 2.9.0 (2026-06-22)
+
+
+### Features
+
+* **webhosting:** add hosting provider ([#3054](https://github.com/scaleway/scaleway-sdk-js/issues/3054)) ([1748db4](https://github.com/scaleway/scaleway-sdk-js/commit/1748db4b0e596829c86863d8884f39ef394093c0))
+
+
+
+
+
 ## [2.8.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.8.1...@scaleway/sdk-webhosting@2.8.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-webhosting

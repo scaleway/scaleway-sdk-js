@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-searchdb@1.7.1...@scaleway/sdk-searchdb@1.7.2) (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-searchdb
+
+
+
+
+
+## [1.7.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-searchdb@1.7.0...@scaleway/sdk-searchdb@1.7.1) (2026-06-22)
+
+
+### Bug Fixes
+
+* **searchdb:** add ignore_empty to node fields to fix backward compatibility ([#3053](https://github.com/scaleway/scaleway-sdk-js/issues/3053)) ([96296e8](https://github.com/scaleway/scaleway-sdk-js/commit/96296e8a165fe065c32b88696f9c9a03318abd67))
+* **searchdb:** fix DeleteUser validation regexp ([#3074](https://github.com/scaleway/scaleway-sdk-js/issues/3074)) ([20840c7](https://github.com/scaleway/scaleway-sdk-js/commit/20840c7035f8da1357f09830c8ee5cd5cd17f323))
+* **searchdb:** mark node_amount and node_count tags as optional for TS compatibility ([#3078](https://github.com/scaleway/scaleway-sdk-js/issues/3078)) ([40b826a](https://github.com/scaleway/scaleway-sdk-js/commit/40b826a95e9a820275a2b114087a9002767e6c52))
+
+
+
+
+
+# [1.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-searchdb@1.6.1...@scaleway/sdk-searchdb@1.7.0) (2026-06-15)
+
+
+### Bug Fixes
+
+* **searchdb:** remove validation rule from deprecated node_amount ([#3023](https://github.com/scaleway/scaleway-sdk-js/issues/3023)) ([eca4488](https://github.com/scaleway/scaleway-sdk-js/commit/eca4488850cd243898a11b436109254d5062f46c))
+
+
+### Features
+
+* **searchdb:** remove node_amount field ([#3048](https://github.com/scaleway/scaleway-sdk-js/issues/3048)) ([6d0ed9b](https://github.com/scaleway/scaleway-sdk-js/commit/6d0ed9bae7498b3540f84955812ad4e78c1244bd))
+
+
+
+
+
+## 1.6.1 (2026-06-08)
+
+**Note:** Version bump only for package @scaleway/sdk-searchdb
+
+
+
+
+
 # [1.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-searchdb@1.5.1...@scaleway/sdk-searchdb@1.6.0) (2026-06-02)
 
 

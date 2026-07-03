@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.7.0...@scaleway/sdk-react@0.8.0) (2026-06-29)
+
+
+### Features
+
+* **instance:** enable SDK generation for instance api v2 ([#3099](https://github.com/scaleway/scaleway-sdk-js/issues/3099)) ([3fabc80](https://github.com/scaleway/scaleway-sdk-js/commit/3fabc80fada11a7d1d8a44539ea189f616fa65a6))
+
+
+
+
+
+# [0.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.6.1...@scaleway/sdk-react@0.7.0) (2026-06-22)
+
+
+### Features
+
+* **billing:** set public visibility for budget API ([#3056](https://github.com/scaleway/scaleway-sdk-js/issues/3056)) ([5b4c6e0](https://github.com/scaleway/scaleway-sdk-js/commit/5b4c6e008477cf06c2de509a6c3b5ae78f7bd0c5))
+
+
+
+
+
+## [0.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.6.0...@scaleway/sdk-react@0.6.1) (2026-06-15)
+
+**Note:** Version bump only for package @scaleway/sdk-react
+
+
+
+
+
+# [0.6.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.5.2...@scaleway/sdk-react@0.6.0) (2026-06-08)
+
+
+### Features
+
+* **inference:** add support for react hooks ([#3014](https://github.com/scaleway/scaleway-sdk-js/issues/3014)) ([9c0f7f0](https://github.com/scaleway/scaleway-sdk-js/commit/9c0f7f0025612f0304df0b79ddeae68947ec52a3))
+
+
+
+
+
 ## [0.5.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.5.1...@scaleway/sdk-react@0.5.2) (2026-06-03)
 
 **Note:** Version bump only for package @scaleway/sdk-react

@@ -116,6 +116,7 @@ export class API extends ParentAPI {
         'fr-par',
         'nl-ams',
         'pl-waw',
+        'it-mil',
       ],
     })
   
@@ -134,6 +135,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['status', request.status],
           ['type', request.type],
+          ['version', request.version],
         ),
       },
       unmarshalListClustersResponse,

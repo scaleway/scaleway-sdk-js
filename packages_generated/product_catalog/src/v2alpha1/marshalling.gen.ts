@@ -26,6 +26,7 @@ import type {
   PublicCatalogProductPropertiesObjectStorageInternetTrafficType,
   PublicCatalogProductPropertiesObjectStorageRegionTrafficType,
   PublicCatalogProductPropertiesObjectStorageRestoreType,
+  PublicCatalogProductPropertiesApacheKafka,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
@@ -41,8 +42,11 @@ import type {
   PublicCatalogProductPropertiesManagedRedisDatabase,
   PublicCatalogProductPropertiesManagedRelationalDatabase,
   PublicCatalogProductPropertiesObjectStorage,
+  PublicCatalogProductPropertiesOpenSearch,
   PublicCatalogProductPropertiesSecretManager,
+  PublicCatalogProductPropertiesServerlessContainers,
   PublicCatalogProductPropertiesServerlessFunctions,
+  PublicCatalogProductPropertiesServerlessJobs,
   PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
@@ -91,6 +95,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareCPU = (data: unknown): Publ
     arch: data.arch,
     description: data.description,
     physical: data.physical ? unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical(data.physical) : undefined,
+    shared: data.shared,
     threads: data.threads,
     type: data.type,
     virtual: data.virtual ? unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual(data.virtual) : undefined,
@@ -135,6 +140,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareRAM = (data: unknown): Publ
 
   return {
     description: data.description,
+    eccType: data.ecc_type ? data.ecc_type : undefined,
     size: data.size,
     type: data.type,
   } as PublicCatalogProductPropertiesHardwareRAM
@@ -361,6 +367,17 @@ const unmarshalPublicCatalogProductPropertiesObjectStorageRestoreType = (data: u
   } as PublicCatalogProductPropertiesObjectStorageRestoreType
 }
 
+const unmarshalPublicCatalogProductPropertiesApacheKafka = (data: unknown): PublicCatalogProductPropertiesApacheKafka => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesApacheKafka' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesApacheKafka
+}
+
 const unmarshalPublicCatalogProductPropertiesAppleSilicon = (data: unknown): PublicCatalogProductPropertiesAppleSilicon => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -422,8 +439,12 @@ const unmarshalPublicCatalogProductPropertiesGenerativeApis = (data: unknown): P
 
   return {
     consumptionMode: data.consumption_mode,
+    providerName: data.provider_name,
     reasoning: data.reasoning,
     supportedApis: data.supported_apis,
+    supportedReasoningValues: data.supported_reasoning_values,
+    tasks: data.tasks,
+    tokenType: data.token_type,
   } as PublicCatalogProductPropertiesGenerativeApis
 }
 
@@ -564,6 +585,17 @@ const unmarshalPublicCatalogProductPropertiesObjectStorage = (data: unknown): Pu
   } as PublicCatalogProductPropertiesObjectStorage
 }
 
+const unmarshalPublicCatalogProductPropertiesOpenSearch = (data: unknown): PublicCatalogProductPropertiesOpenSearch => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesOpenSearch' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesOpenSearch
+}
+
 const unmarshalPublicCatalogProductPropertiesSecretManager = (data: unknown): PublicCatalogProductPropertiesSecretManager => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -575,6 +607,17 @@ const unmarshalPublicCatalogProductPropertiesSecretManager = (data: unknown): Pu
   } as PublicCatalogProductPropertiesSecretManager
 }
 
+const unmarshalPublicCatalogProductPropertiesServerlessContainers = (data: unknown): PublicCatalogProductPropertiesServerlessContainers => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessContainers' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessContainers
+}
+
 const unmarshalPublicCatalogProductPropertiesServerlessFunctions = (data: unknown): PublicCatalogProductPropertiesServerlessFunctions => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -584,6 +627,17 @@ const unmarshalPublicCatalogProductPropertiesServerlessFunctions = (data: unknow
 
   return {
   } as PublicCatalogProductPropertiesServerlessFunctions
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessJobs = (data: unknown): PublicCatalogProductPropertiesServerlessJobs => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessJobs' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessJobs
 }
 
 const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (data: unknown): PublicCatalogProductEnvironmentalImpactEstimation => {
@@ -634,6 +688,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
   }
 
   return {
+    apacheKafka: data.apache_kafka ? unmarshalPublicCatalogProductPropertiesApacheKafka(data.apache_kafka) : undefined,
     appleSilicon: data.apple_silicon ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon) : undefined,
     blockStorage: data.block_storage ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage) : undefined,
     dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : undefined,
@@ -649,8 +704,11 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     managedRedisDatabase: data.managed_redis_database ? unmarshalPublicCatalogProductPropertiesManagedRedisDatabase(data.managed_redis_database) : undefined,
     managedRelationalDatabase: data.managed_relational_database ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabase(data.managed_relational_database) : undefined,
     objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
+    openSearch: data.open_search ? unmarshalPublicCatalogProductPropertiesOpenSearch(data.open_search) : undefined,
     secretManager: data.secret_manager ? unmarshalPublicCatalogProductPropertiesSecretManager(data.secret_manager) : undefined,
+    serverlessContainers: data.serverless_containers ? unmarshalPublicCatalogProductPropertiesServerlessContainers(data.serverless_containers) : undefined,
     serverlessFunctions: data.serverless_functions ? unmarshalPublicCatalogProductPropertiesServerlessFunctions(data.serverless_functions) : undefined,
+    serverlessJobs: data.serverless_jobs ? unmarshalPublicCatalogProductPropertiesServerlessJobs(data.serverless_jobs) : undefined,
   } as PublicCatalogProductProperties
 }
 

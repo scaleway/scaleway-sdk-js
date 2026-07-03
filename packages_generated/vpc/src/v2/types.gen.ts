@@ -93,6 +93,10 @@ export interface Subnet {
    * VPC the subnet belongs to.
    */
   vpcId: string
+  /**
+   * Region in which the Subnet can be used.
+   */
+  region: ScwRegion
 }
 
 
@@ -252,16 +256,58 @@ export interface AclRule {
 
 
 export interface IngressRule {
+  /**
+   * ID of the ingress rule.
+   */
   id: string
+  /**
+   * ID of the VPC this rule belongs to.
+   */
   vpcId: string
+  /**
+   * Date the ingress rule was created.
+   */
   createdAt?: Date
+  /**
+   * Date the ingress rule was last modified.
+   */
   updatedAt?: Date
+  /**
+   * Whether this rule applies to IPv4 or IPv6 traffic.
+   */
   isIpv6: boolean
+  /**
+   * Source network to apply this rule on.
+   */
   source: string
+  /**
+   * IP of the local resource to redirect ingress traffic to.
+   */
   nexthopResourceIp: string
+  /**
+   * ID of the Private Network the destination resource is in.
+   */
   nexthopPrivateNetworkId: string
+  /**
+   * Description of this ingress rule.
+   */
   description?: string
+  /**
+   * Tags of this ingress rule.
+   */
   tags: string[]
+  /**
+   * Scaleway Organization the ingress rule belongs to.
+   */
+  organizationId: string
+  /**
+   * Scaleway Project the ingress rule belongs to.
+   */
+  projectId: string
+  /**
+   * Region of the ingress rule.
+   */
+  region: ScwRegion
 }
 
 
@@ -374,27 +420,10 @@ export interface VPC {
    * Defines whether the VPC advertises custom routes between its Private Networks.
    */
   customRoutesPropagationEnabled: boolean
-}
-
-
-export type AddSubnetsRequest = {
   /**
-   * Region to target. If none is passed will use default region from the config.
+   * Defines whether the VPC allows packets from peered VPCs to transit through.
    */
-  region?: ScwRegion
-  /**
-   * Private Network ID.
-   */
-  privateNetworkId: string
-  /**
-   * Private Network subnets CIDR.
-   */
-  subnets?: string[]
-}
-
-
-export interface AddSubnetsResponse {
-  subnets: string[]
+  transitivityEnabled: boolean
 }
 
 
@@ -403,11 +432,29 @@ export type CreateIngressRuleRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * ID of the VPC this rule will belong to.
+   */
   vpcId: string
+  /**
+   * Source network to match ingress traffic on. Can be IPv6 or IPv4.
+   */
   source: string
+  /**
+   * IP of the local resource to redirect ingress traffic to. IP version must be consistent with the source network.
+   */
   nexthopResourceIp: string
+  /**
+   * ID of the Private Network the destination resource is in.
+   */
   nexthopPrivateNetworkId: string
+  /**
+   * Description for this ingress rule.
+   */
   description?: string
+  /**
+   * Tags for this ingress rule.
+   */
   tags?: string[]
 }
 
@@ -525,6 +572,10 @@ export type CreateVPCRequest = {
    * Enable routing between Private Networks in the VPC.
    */
   enableRouting: boolean
+  /**
+   * Enable packets from peered VPCs to transit through this VPC.
+   */
+  enableTransitivity: boolean
 }
 
 
@@ -533,6 +584,9 @@ export type DeleteIngressRuleRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * ID of the ingress rule to delete.
+   */
   ruleId: string
 }
 
@@ -558,27 +612,6 @@ export type DeleteRouteRequest = {
    * Route ID.
    */
   routeId: string
-}
-
-
-export type DeleteSubnetsRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * Private Network ID.
-   */
-  privateNetworkId: string
-  /**
-   * Private Network subnets CIDR.
-   */
-  subnets?: string[]
-}
-
-
-export interface DeleteSubnetsResponse {
-  subnets: string[]
 }
 
 
@@ -669,6 +702,9 @@ export type GetIngressRuleRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * ID of the ingress rule to return.
+   */
   ruleId: string
 }
 
@@ -726,14 +762,46 @@ export type ListIngressRulesRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * Sort order of the returned ingress rules.
+   */
   orderBy?: ListIngressRulesRequestOrderBy
+  /**
+   * Page number to return, from the paginated results.
+   */
   page?: number
+  /**
+   * Maximum number of ingress rules to return per page.
+   */
   pageSize?: number
+  /**
+   * ID of the VPC to filter for.
+   */
   vpcId?: string
+  /**
+   * Next hop IP to filter for.
+   */
   nexthopResourceIp?: string
+  /**
+   * Next hop Private Network ID to filter for. Only ingress rules with this Private Network as next hop will be returned.
+   */
   nexthopPrivateNetworkId?: string
+  /**
+   * Whether to return only IPv4 or IPv6 ingress rules.
+   */
   isIpv6?: boolean
+  /**
+   * Tags to filter for. Only ingress rules with one or more matching tags will be returned.
+   */
   tags?: string[]
+  /**
+   * Organization ID to filter for. Only ingress rules belonging to this Organization will be returned.
+   */
+  organizationId?: string
+  /**
+   * Project ID to filter for. Only ingress rules belonging to this Project will be returned.
+   */
+  projectId?: string
 }
 
 
@@ -803,7 +871,7 @@ export type ListSubnetOverlapsRequest = {
    */
   region?: ScwRegion
   /**
-   * VPCConnector ID.
+   * VPC Peering connector ID.
    */
   vpcConnectorId: string
   /**
@@ -1008,11 +1076,29 @@ export type UpdateIngressRuleRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * ID of the ingress rule to update.
+   */
   ruleId: string
+  /**
+   * Source network to match ingress traffic on. Can be IPv4 or IPv6.
+   */
   source?: string
+  /**
+   * IP of the local resource to redirect ingress traffic to. IP version must be consistent with the source network.
+   */
   nexthopResourceIp?: string
+  /**
+   * ID of the Private Network the destination resource is in.
+   */
   nexthopPrivateNetworkId?: string
+  /**
+   * Description to set for this ingress rule.
+   */
   description?: string
+  /**
+   * Tags to set for this ingress rule.
+   */
   tags?: string[]
 }
 

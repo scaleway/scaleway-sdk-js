@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.8.1 (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-vpcgw
+
+
+
+
+
+# 2.8.0 (2026-06-08)
+
+
+### Features
+
+* **product_catalog:** add support for `no_kvm` ([#3015](https://github.com/scaleway/scaleway-sdk-js/issues/3015)) ([c0f8a58](https://github.com/scaleway/scaleway-sdk-js/commit/c0f8a58d60f0b0a8aad5697680245ca231de3b0c))
+
+
+
+
+
 # [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-vpcgw@2.6.1...@scaleway/sdk-vpcgw@2.7.0) (2026-06-02)
 
 

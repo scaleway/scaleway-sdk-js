@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/generate-react-queries",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": false,
   "description": "generate react api and queries",
   "repository": {
@@ -27,7 +27,7 @@
     "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.41"
+    "@types/node": "20.19.43"
   },
   "engines": {
     "node": ">=20.20.2"

@@ -69,6 +69,7 @@ import type {
   SetHeadStageRequestRemoveHeadStage,
   SetHeadStageRequestSwapHeadStage,
   SetHeadStageRequest,
+  SetPipelineVPCEndpointsRequest,
   SetRouteRulesRequest,
   UpdateBackendStageRequest,
   UpdateCacheStageRequest,
@@ -1127,6 +1128,13 @@ export const marshalSetHeadStageRequest = (
       : undefined,
     },
   ]),
+})
+
+export const marshalSetPipelineVPCEndpointsRequest = (
+  request: SetPipelineVPCEndpointsRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  vpc_endpoint_ids: request.vpcEndpointIds,
 })
 
 export const marshalSetRouteRulesRequest = (

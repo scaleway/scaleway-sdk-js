@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.7.1 (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-key-manager
+
+
+
+
+
+# 2.7.0 (2026-06-15)
+
+
+### Features
+
+* **key_manager:** add ml-dsa post quantum signature algorithm ([#3031](https://github.com/scaleway/scaleway-sdk-js/issues/3031)) ([c3a49a0](https://github.com/scaleway/scaleway-sdk-js/commit/c3a49a05196a38bb748fe24870973512283cf631))
+* **key_manager:** add protection level in create key ([#3030](https://github.com/scaleway/scaleway-sdk-js/issues/3030)) ([af10b94](https://github.com/scaleway/scaleway-sdk-js/commit/af10b94dbc0f10cc0397b451f81319e90c34d030))
+
+
+
+
+
 ## [2.6.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-key-manager@2.6.1...@scaleway/sdk-key-manager@2.6.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-key-manager

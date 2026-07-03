@@ -7,7 +7,7 @@ export const pkgMetadata = {
   name: "@scaleway/sdk-instance",
   namespace: "instance",
   displayName: "Instance",
-  versions: ["v1"]
+  versions: ["v1", "v2alpha1"]
 } as const
 
 export type Metadata = typeof pkgMetadata

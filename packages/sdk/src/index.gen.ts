@@ -3,11 +3,12 @@
  * PLEASE DO NOT EDIT HERE
  */
 import { Accountv3 } from '@scaleway/sdk-account'
+import { Annotationsv1 } from '@scaleway/sdk-annotations'
 import { Applesiliconv1alpha1 } from '@scaleway/sdk-applesilicon'
 import { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
 import { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
 import { Baremetalv1, Baremetalv3 } from '@scaleway/sdk-baremetal'
-import { Billingv2beta1 } from '@scaleway/sdk-billing'
+import { Billingv2, Billingv2beta1 } from '@scaleway/sdk-billing'
 import { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
 import { Cockpitv1 } from '@scaleway/sdk-cockpit'
 import { Containerv1, Containerv1beta1 } from '@scaleway/sdk-container'
@@ -22,7 +23,7 @@ import { Flexibleipv1alpha1 } from '@scaleway/sdk-flexibleip'
 import { Functionv1beta1 } from '@scaleway/sdk-function'
 import { Iamv1alpha1 } from '@scaleway/sdk-iam'
 import { Inferencev1, Inferencev1beta1 } from '@scaleway/sdk-inference'
-import { Instancev1 } from '@scaleway/sdk-instance'
+import { Instancev1, Instancev2alpha1 } from '@scaleway/sdk-instance'
 import { Interlinkv1beta1 } from '@scaleway/sdk-interlink'
 import { Iotv1 } from '@scaleway/sdk-iot'
 import { Ipamv1 } from '@scaleway/sdk-ipam'
@@ -63,6 +64,14 @@ export const Account = {
 }
 
 /**
+ * @deprecated Direct version exports are deprecated. Use the 'Annotations' namespace instead (e.g., Annotations.v1).
+ */
+export { Annotationsv1 }
+export const Annotations = {
+  v1: Annotationsv1,
+}
+
+/**
  * @deprecated Direct version exports are deprecated. Use the 'Applesilicon' namespace instead (e.g., Applesilicon.v1).
  */
 export { Applesiliconv1alpha1 }
@@ -98,8 +107,9 @@ export const Baremetal = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Billing' namespace instead (e.g., Billing.v1).
  */
-export { Billingv2beta1 }
+export { Billingv2, Billingv2beta1 }
 export const Billing = {
+  v2: Billingv2,
   v2beta1: Billingv2beta1,
 }
 
@@ -221,9 +231,10 @@ export const Inference = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Instance' namespace instead (e.g., Instance.v1).
  */
-export { Instancev1 }
+export { Instancev1, Instancev2alpha1 }
 export const Instance = {
   v1: Instancev1,
+  v2alpha1: Instancev2alpha1,
 }
 
 /**
@@ -445,7 +456,7 @@ export const Vpc = {
 }
 
 /**
- * @deprecated Direct version exports are deprecated. Use the 'Vpcgw' namespace instead (e.g., Vpcgw.v2).
+ * @deprecated Direct version exports are deprecated. Use the 'Vpcgw' namespace instead (e.g., Vpcgw.v1).
  */
 export { Vpcgwv2 }
 export const Vpcgw = {

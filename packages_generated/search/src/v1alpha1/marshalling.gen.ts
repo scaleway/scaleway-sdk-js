@@ -2,6 +2,8 @@
 import { isJSONObject, unmarshalArrayOfObject, } from '@scaleway/sdk-client'
 import type {
   BrmServerInfo,
+  ObsDatasourceInfo,
+  ObsExporterInfo,
   ServerlessContainersContainerInfo,
   ServerlessFunctionsFunctionInfo,
   ServerlessSqldbBackupInfo,
@@ -20,6 +22,30 @@ const unmarshalBrmServerInfo = (data: unknown): BrmServerInfo => {
   return {
     ip: data.ip,
   } as BrmServerInfo
+}
+
+const unmarshalObsDatasourceInfo = (data: unknown): ObsDatasourceInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ObsDatasourceInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    type: data.type,
+  } as ObsDatasourceInfo
+}
+
+const unmarshalObsExporterInfo = (data: unknown): ObsExporterInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ObsExporterInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    destinationType: data.destination_type,
+  } as ObsExporterInfo
 }
 
 const unmarshalServerlessContainersContainerInfo = (data: unknown): ServerlessContainersContainerInfo => {
@@ -82,6 +108,8 @@ const unmarshalResource = (data: unknown): Resource => {
     global: data.global,
     id: data.id,
     name: data.name,
+    obsDatasourceInfo: data.obs_datasource_info ? unmarshalObsDatasourceInfo(data.obs_datasource_info) : undefined,
+    obsExporterInfo: data.obs_exporter_info ? unmarshalObsExporterInfo(data.obs_exporter_info) : undefined,
     organizationId: data.organization_id,
     projectId: data.project_id,
     region: data.region,

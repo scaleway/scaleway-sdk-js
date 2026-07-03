@@ -257,6 +257,7 @@ export const unmarshalPool = (data: unknown): Pool => {
     name: data.name,
     nodeType: data.node_type,
     placementGroupId: data.placement_group_id,
+    privateNetworkId: data.private_network_id,
     publicIpDisabled: data.public_ip_disabled,
     region: data.region,
     rootVolumeSize: data.root_volume_size,
@@ -285,6 +286,7 @@ const unmarshalACLRule = (data: unknown): ACLRule => {
     description: data.description,
     id: data.id,
     ip: data.ip,
+    region: data.region,
     scalewayRanges: data.scaleway_ranges,
   } as ACLRule
 }
@@ -382,6 +384,7 @@ const unmarshalClusterType = (data: unknown): ClusterType => {
     maxNodes: data.max_nodes,
     memory: data.memory,
     name: data.name,
+    region: data.region,
     resiliency: data.resiliency,
     sla: data.sla,
   } as ClusterType
@@ -632,6 +635,7 @@ const marshalCreateClusterRequestPoolConfig = (
   name: request.name,
   node_type: request.nodeType,
   placement_group_id: request.placementGroupId,
+  private_network_id: request.privateNetworkId,
   public_ip_disabled: request.publicIpDisabled,
   root_volume_size: request.rootVolumeSize,
   root_volume_type: request.rootVolumeType,
@@ -697,6 +701,7 @@ export const marshalCreatePoolRequest = (
   name: request.name || randomName('pool'),
   node_type: request.nodeType,
   placement_group_id: request.placementGroupId,
+  private_network_id: request.privateNetworkId,
   public_ip_disabled: request.publicIpDisabled,
   root_volume_size: request.rootVolumeSize,
   root_volume_type: request.rootVolumeType,

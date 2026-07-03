@@ -11,8 +11,6 @@ import type {
   VPCConnectorPeerInfo,
   VPCConnector,
   VPC,
-  AddSubnetsResponse,
-  DeleteSubnetsResponse,
   AclRule,
   GetAclResponse,
   ListIngressRulesResponse,
@@ -23,13 +21,11 @@ import type {
   ListVPCConnectorsResponse,
   ListVPCsResponse,
   SetAclResponse,
-  AddSubnetsRequest,
   CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
-  DeleteSubnetsRequest,
   SetAclRequest,
   UpdateIngressRuleRequest,
   UpdatePrivateNetworkRequest,
@@ -50,6 +46,7 @@ const unmarshalSubnet = (data: unknown): Subnet => {
     id: data.id,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
+    region: data.region,
     subnet: data.subnet,
     updatedAt: unmarshalDate(data.updated_at),
     vpcId: data.vpc_id,
@@ -117,6 +114,9 @@ export const unmarshalIngressRule = (data: unknown): IngressRule => {
     isIpv6: data.is_ipv6,
     nexthopPrivateNetworkId: data.nexthop_private_network_id,
     nexthopResourceIp: data.nexthop_resource_ip,
+    organizationId: data.organization_id,
+    projectId: data.project_id,
+    region: data.region,
     source: data.source,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -180,32 +180,9 @@ export const unmarshalVPC = (data: unknown): VPC => {
     region: data.region,
     routingEnabled: data.routing_enabled,
     tags: data.tags,
+    transitivityEnabled: data.transitivity_enabled,
     updatedAt: unmarshalDate(data.updated_at),
   } as VPC
-}
-
-export const unmarshalAddSubnetsResponse = (data: unknown): AddSubnetsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'AddSubnetsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    subnets: data.subnets,
-  } as AddSubnetsResponse
-}
-
-export const unmarshalDeleteSubnetsResponse = (data: unknown): DeleteSubnetsResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DeleteSubnetsResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    subnets: data.subnets,
-  } as DeleteSubnetsResponse
 }
 
 const unmarshalAclRule = (data: unknown): AclRule => {
@@ -347,13 +324,6 @@ export const unmarshalSetAclResponse = (data: unknown): SetAclResponse => {
   } as SetAclResponse
 }
 
-export const marshalAddSubnetsRequest = (
-  request: AddSubnetsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  subnets: request.subnets,
-})
-
 export const marshalCreateIngressRuleRequest = (
   request: CreateIngressRuleRequest,
   defaults: DefaultValues,
@@ -406,16 +376,10 @@ export const marshalCreateVPCRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable_routing: request.enableRouting,
+  enable_transitivity: request.enableTransitivity,
   name: request.name || randomName('vpc'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
-})
-
-export const marshalDeleteSubnetsRequest = (
-  request: DeleteSubnetsRequest,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  subnets: request.subnets,
 })
 
 const marshalAclRule = (

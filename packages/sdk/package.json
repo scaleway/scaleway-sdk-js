@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "3.7.2",
+  "version": "3.10.0",
   "description": "Scaleway SDK TS.",
   "license": "Apache-2.0",
   "repository": {
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@scaleway/sdk-account": "workspace:*",
+    "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
     "@scaleway/sdk-audit-trail": "workspace:*",
     "@scaleway/sdk-autoscaling": "workspace:*",

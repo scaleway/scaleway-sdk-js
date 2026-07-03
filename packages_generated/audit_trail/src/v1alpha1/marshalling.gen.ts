@@ -8,7 +8,6 @@ import type {
   AlertRule,
   DisableAlertRulesResponse,
   EnableAlertRulesResponse,
-  ListAlertRulesResponse,
   AccountContractSignatureInfoAccountContractInfo,
   AccountContractSignatureInfo,
   AccountOrganizationInfo,
@@ -28,6 +27,7 @@ import type {
   EdgeServicesRouteRulesInfo,
   EdgeServicesRouteStageInfo,
   EdgeServicesTLSStageInfo,
+  EdgeServicesVPCEndpointInfo,
   EdgeServicesWAFStageInfo,
   InstancePrivateNetworkInterfaceInfo,
   InstanceServerInfo,
@@ -44,6 +44,8 @@ import type {
   LoadBalancerIpInfo,
   LoadBalancerLbInfo,
   LoadBalancerRouteInfo,
+  ObservabilityAlertRuleInfo,
+  ObservabilityContactPointInfo,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
   VpcConnectorInfo,
@@ -53,11 +55,13 @@ import type {
   VpcPrivateNetworkInfo,
   VpcRouteInfo,
   VpcSubnetInfo,
+  EventPrincipal,
   Resource,
+  Event,
+  EventsOverview,
+  ListAlertRulesResponse,
   AuthenticationEvent,
   ListAuthenticationEventsResponse,
-  EventPrincipal,
-  Event,
   SystemEvent,
   ListCombinedEventsResponseCombinedEvent,
   ListCombinedEventsResponse,
@@ -158,19 +162,6 @@ export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRul
   return {
     alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
   } as EnableAlertRulesResponse
-}
-
-export const unmarshalListAlertRulesResponse = (data: unknown): ListAlertRulesResponse => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ListAlertRulesResponse' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
-    totalCount: data.total_count,
-  } as ListAlertRulesResponse
 }
 
 const unmarshalAccountContractSignatureInfoAccountContractInfo = (data: unknown): AccountContractSignatureInfoAccountContractInfo => {
@@ -409,6 +400,18 @@ const unmarshalEdgeServicesTLSStageInfo = (data: unknown): EdgeServicesTLSStageI
   } as EdgeServicesTLSStageInfo
 }
 
+const unmarshalEdgeServicesVPCEndpointInfo = (data: unknown): EdgeServicesVPCEndpointInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EdgeServicesVPCEndpointInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    privateNetworkId: data.private_network_id,
+  } as EdgeServicesVPCEndpointInfo
+}
+
 const unmarshalEdgeServicesWAFStageInfo = (data: unknown): EdgeServicesWAFStageInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -607,6 +610,30 @@ const unmarshalLoadBalancerRouteInfo = (data: unknown): LoadBalancerRouteInfo =>
   } as LoadBalancerRouteInfo
 }
 
+const unmarshalObservabilityAlertRuleInfo = (data: unknown): ObservabilityAlertRuleInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ObservabilityAlertRuleInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ruleIds: data.rule_ids,
+  } as ObservabilityAlertRuleInfo
+}
+
+const unmarshalObservabilityContactPointInfo = (data: unknown): ObservabilityContactPointInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ObservabilityContactPointInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    email: data.email,
+  } as ObservabilityContactPointInfo
+}
+
 const unmarshalSecretManagerSecretInfo = (data: unknown): SecretManagerSecretInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -729,6 +756,18 @@ const unmarshalVpcSubnetInfo = (data: unknown): VpcSubnetInfo => {
   } as VpcSubnetInfo
 }
 
+const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+  } as EventPrincipal
+}
+
 export const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -757,6 +796,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     edgeServicesRouteRulesInfo: data.edge_services_route_rules_info ? unmarshalEdgeServicesRouteRulesInfo(data.edge_services_route_rules_info) : undefined,
     edgeServicesRouteStageInfo: data.edge_services_route_stage_info ? unmarshalEdgeServicesRouteStageInfo(data.edge_services_route_stage_info) : undefined,
     edgeServicesTlsStageInfo: data.edge_services_tls_stage_info ? unmarshalEdgeServicesTLSStageInfo(data.edge_services_tls_stage_info) : undefined,
+    edgeServicesVpcEndpointInfo: data.edge_services_vpc_endpoint_info ? unmarshalEdgeServicesVPCEndpointInfo(data.edge_services_vpc_endpoint_info) : undefined,
     edgeServicesWafStageInfo: data.edge_services_waf_stage_info ? unmarshalEdgeServicesWAFStageInfo(data.edge_services_waf_stage_info) : undefined,
     id: data.id,
     instancePrivateNetworkInterfaceInfo: data.instance_private_network_interface_info ? unmarshalInstancePrivateNetworkInterfaceInfo(data.instance_private_network_interface_info) : undefined,
@@ -776,6 +816,8 @@ export const unmarshalResource = (data: unknown): Resource => {
     loadBalancerLbInfo: data.load_balancer_lb_info ? unmarshalLoadBalancerLbInfo(data.load_balancer_lb_info) : undefined,
     loadBalancerRouteInfo: data.load_balancer_route_info ? unmarshalLoadBalancerRouteInfo(data.load_balancer_route_info) : undefined,
     name: data.name,
+    observabilityAlertRuleInfo: data.observability_alert_rule_info ? unmarshalObservabilityAlertRuleInfo(data.observability_alert_rule_info) : undefined,
+    observabilityContactPointInfo: data.observability_contact_point_info ? unmarshalObservabilityContactPointInfo(data.observability_contact_point_info) : undefined,
     secmSecretInfo: data.secm_secret_info ? unmarshalSecretManagerSecretInfo(data.secm_secret_info) : undefined,
     secmSecretVersionInfo: data.secm_secret_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info) : undefined,
     secretManagerSecretInfo: data.secret_manager_secret_info ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info) : undefined,
@@ -790,6 +832,57 @@ export const unmarshalResource = (data: unknown): Resource => {
     vpcRouteInfo: data.vpc_route_info ? unmarshalVpcRouteInfo(data.vpc_route_info) : undefined,
     vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : undefined,
   } as Resource
+}
+
+export const unmarshalEvent = (data: unknown): Event => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Event' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    locality: data.locality,
+    methodName: data.method_name,
+    organizationId: data.organization_id,
+    principal: data.principal ? unmarshalEventPrincipal(data.principal) : undefined,
+    productName: data.product_name,
+    projectId: data.project_id,
+    recordedAt: unmarshalDate(data.recorded_at),
+    requestBody: data.request_body,
+    requestId: data.request_id,
+    resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
+    serviceName: data.service_name,
+    sourceIp: data.source_ip,
+    statusCode: data.status_code,
+    userAgent: data.user_agent,
+  } as Event
+}
+
+export const unmarshalEventsOverview = (data: unknown): EventsOverview => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EventsOverview' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    lastEvents: unmarshalArrayOfObject(data.last_events, unmarshalEvent),
+  } as EventsOverview
+}
+
+export const unmarshalListAlertRulesResponse = (data: unknown): ListAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
+    totalCount: data.total_count,
+  } as ListAlertRulesResponse
 }
 
 const unmarshalAuthenticationEvent = (data: unknown): AuthenticationEvent => {
@@ -826,44 +919,6 @@ export const unmarshalListAuthenticationEventsResponse = (data: unknown): ListAu
     events: unmarshalArrayOfObject(data.events, unmarshalAuthenticationEvent),
     nextPageToken: data.next_page_token,
   } as ListAuthenticationEventsResponse
-}
-
-const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'EventPrincipal' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-  } as EventPrincipal
-}
-
-export const unmarshalEvent = (data: unknown): Event => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Event' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    id: data.id,
-    locality: data.locality,
-    methodName: data.method_name,
-    organizationId: data.organization_id,
-    principal: data.principal ? unmarshalEventPrincipal(data.principal) : undefined,
-    productName: data.product_name,
-    projectId: data.project_id,
-    recordedAt: unmarshalDate(data.recorded_at),
-    requestBody: data.request_body,
-    requestId: data.request_id,
-    resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
-    serviceName: data.service_name,
-    sourceIp: data.source_ip,
-    statusCode: data.status_code,
-    userAgent: data.user_agent,
-  } as Event
 }
 
 const unmarshalSystemEvent = (data: unknown): SystemEvent => {

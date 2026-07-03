@@ -9,15 +9,11 @@ import {
 } from '@scaleway/sdk-client'
 import type { ApiLocality,} from '@scaleway/sdk-client'
 import {
-  marshalAddSubnetsRequest,
-  unmarshalAddSubnetsResponse,
   marshalCreateIngressRuleRequest,
   marshalCreatePrivateNetworkRequest,
   marshalCreateRouteRequest,
   marshalCreateVPCConnectorRequest,
   marshalCreateVPCRequest,
-  marshalDeleteSubnetsRequest,
-  unmarshalDeleteSubnetsResponse,
   unmarshalGetAclResponse,
   unmarshalIngressRule,
   unmarshalListIngressRulesResponse,
@@ -39,8 +35,6 @@ import {
   unmarshalVPCConnector,
 } from './marshalling.gen.js'
 import type {
-  AddSubnetsRequest,
-  AddSubnetsResponse,
   CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
@@ -49,8 +43,6 @@ import type {
   DeleteIngressRuleRequest,
   DeletePrivateNetworkRequest,
   DeleteRouteRequest,
-  DeleteSubnetsRequest,
-  DeleteSubnetsResponse,
   DeleteVPCConnectorRequest,
   DeleteVPCRequest,
   EnableCustomRoutesPropagationRequest,
@@ -397,46 +389,6 @@ export class API extends ParentAPI {
 
   
   /**
-   * Add subnets to a Private Network. Add new subnets to an existing Private Network.
-   *
-   * @param request - The request {@link AddSubnetsRequest}
-   * @returns A Promise of AddSubnetsResponse
-   */
-  addSubnets = (request: Readonly<AddSubnetsRequest>) =>
-    this.client.fetch<AddSubnetsResponse>(
-      {
-        body: JSON.stringify(
-          marshalAddSubnetsRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/subnets`,
-      },
-      unmarshalAddSubnetsResponse,
-    )
-
-  
-  /**
-   * Delete subnets from a Private Network. Delete the specified subnets from a Private Network.
-   *
-   * @param request - The request {@link DeleteSubnetsRequest}
-   * @returns A Promise of DeleteSubnetsResponse
-   */
-  deleteSubnets = (request: Readonly<DeleteSubnetsRequest>) =>
-    this.client.fetch<DeleteSubnetsResponse>(
-      {
-        body: JSON.stringify(
-          marshalDeleteSubnetsRequest(request, this.client.settings),
-        ),
-        headers: jsonContentHeaders,
-        method: 'DELETE',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/subnets`,
-      },
-      unmarshalDeleteSubnetsResponse,
-    )
-
-  
-  /**
    * Create a Route. Create a new custom Route.
    *
    * @param request - The request {@link CreateRouteRequest}
@@ -661,7 +613,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List subnet overlaps.. List subnet overlaps between the VPCConnector VPC and the target VPC or for a specific subnet if specified.
+   * List subnet overlaps. List subnet overlaps between the VPCs on both sides of a connector, or for a specific subnet if specified.
    *
    * @param request - The request {@link ListSubnetOverlapsRequest}
    * @returns A Promise of ListSubnetOverlapsResponse
@@ -680,8 +632,10 @@ export class API extends ParentAPI {
           ['nexthop_private_network_id', request.nexthopPrivateNetworkId],
           ['nexthop_resource_ip', request.nexthopResourceIp],
           ['order_by', request.orderBy],
+          ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId],
           ['tags', request.tags],
           ['vpc_id', request.vpcId],
         ),
@@ -689,10 +643,22 @@ export class API extends ParentAPI {
       unmarshalListIngressRulesResponse,
     )
   
+  /**
+   * List ingress rules. List existing ingress rules in the specified region.
+   *
+   * @param request - The request {@link ListIngressRulesRequest}
+   * @returns A Promise of ListIngressRulesResponse
+   */
   listIngressRules = (request: Readonly<ListIngressRulesRequest> = {}) =>
     enrichForPagination('rules', this.pageOfListIngressRules, request)
 
   
+  /**
+   * Create an ingress rule. Create an ingress rule in the specified region.
+   *
+   * @param request - The request {@link CreateIngressRuleRequest}
+   * @returns A Promise of IngressRule
+   */
   createIngressRule = (request: Readonly<CreateIngressRuleRequest>) =>
     this.client.fetch<IngressRule>(
       {
@@ -707,6 +673,12 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Get an ingress rule. Retrieve details of an existing ingress rule, specified by its ingress rule ID.
+   *
+   * @param request - The request {@link GetIngressRuleRequest}
+   * @returns A Promise of IngressRule
+   */
   getIngressRule = (request: Readonly<GetIngressRuleRequest>) =>
     this.client.fetch<IngressRule>(
       {
@@ -717,6 +689,12 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Update an ingress rule. Update an ingress rule specified by its ingress rule ID.
+   *
+   * @param request - The request {@link UpdateIngressRuleRequest}
+   * @returns A Promise of IngressRule
+   */
   updateIngressRule = (request: Readonly<UpdateIngressRuleRequest>) =>
     this.client.fetch<IngressRule>(
       {
@@ -731,6 +709,11 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * Delete an ingress rule. Delete an ingress rule specified by its ingress rule ID.
+   *
+   * @param request - The request {@link DeleteIngressRuleRequest}
+   */
   deleteIngressRule = (request: Readonly<DeleteIngressRuleRequest>) =>
     this.client.fetch<void>(
       {

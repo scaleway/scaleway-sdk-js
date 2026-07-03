@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.16.1...@scaleway/sdk-edge-services@2.16.2) (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-edge-services
+
+
+
+
+
+## 2.16.1 (2026-06-22)
+
+
+### Bug Fixes
+
+* **edge_services:** add body param for new rpc endpoint ([#3070](https://github.com/scaleway/scaleway-sdk-js/issues/3070)) ([4e8cc85](https://github.com/scaleway/scaleway-sdk-js/commit/4e8cc85ad8845bf67186e1e2919ed1f2c5ab6ec8))
+
+
+
+
+
+# [2.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-edge-services@2.15.0...@scaleway/sdk-edge-services@2.16.0) (2026-06-08)
+
+
+### Features
+
+* **edge_services:** add pipeline code for failed configuration ([#3019](https://github.com/scaleway/scaleway-sdk-js/issues/3019)) ([c442c58](https://github.com/scaleway/scaleway-sdk-js/commit/c442c58ce7b18cd4edee2a7ab57765fba953f45b))
+
+
+
+
+
 # 2.15.0 (2026-06-03)
 
 

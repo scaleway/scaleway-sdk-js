@@ -370,6 +370,10 @@ export interface Instance {
    * List of pending maintenances applicable to the Database Instance.
    */
   maintenances: Maintenance[]
+  /**
+   * List of MongoDB® versions the Database Instance can be upgraded to.
+   */
+  upgradableVersions: string[]
 }
 
 
@@ -1069,14 +1073,15 @@ export type UpgradeInstanceRequest = {
   /**
    * Increase your Block Storage volume size.
    *
-   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'versionId' could be set.
+   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'version' could be set.
    */
   volumeSizeBytes?: number
   /**
+   * MongoDB version to upgrade to (e.g., `8.0`, `7.0`, `8.2`).
    *
-   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'versionId' could be set.
+   * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'version' could be set.
    */
-  versionId?: string
+  version?: string
 }
 
 

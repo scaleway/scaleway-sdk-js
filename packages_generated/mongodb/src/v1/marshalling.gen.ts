@@ -206,6 +206,7 @@ export const unmarshalInstance = (data: unknown): Instance => {
     snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : undefined,
     status: data.status,
     tags: data.tags,
+    upgradableVersions: data.upgradable_versions,
     version: data.version,
     volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as Instance
@@ -559,8 +560,8 @@ export const marshalUpgradeInstanceRequest = (
     {param: 'volume_size_bytes',
       value: request.volumeSizeBytes,
     },
-    {param: 'version_id',
-      value: request.versionId,
+    {param: 'version',
+      value: request.version,
     },
   ]),
 })

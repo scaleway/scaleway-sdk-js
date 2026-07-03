@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.4.4 (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/configuration-loader
+
+
+
+
+
+## 2.4.3 (2026-06-08)
+
+**Note:** Version bump only for package @scaleway/configuration-loader
+
+
+
+
+
 ## [2.4.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/configuration-loader@2.4.1...@scaleway/configuration-loader@2.4.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/configuration-loader

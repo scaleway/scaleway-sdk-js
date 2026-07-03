@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-datawarehouse@2.9.0...@scaleway/sdk-datawarehouse@2.9.1) (2026-06-29)
+
+**Note:** Version bump only for package @scaleway/sdk-datawarehouse
+
+
+
+
+
+# 2.9.0 (2026-06-22)
+
+
+### Bug Fixes
+
+* **datawarehouse:** require move_factor to be greater than or equal to 0.1 ([#3079](https://github.com/scaleway/scaleway-sdk-js/issues/3079)) ([a82abfd](https://github.com/scaleway/scaleway-sdk-js/commit/a82abfdcde4de2890885d1e00da2a7b50e62d4ae))
+
+
+### Features
+
+* **datawarehouse:**  add move_factor field to CreateDeploymentRequest and UpdateDeploymentRequest ([#3063](https://github.com/scaleway/scaleway-sdk-js/issues/3063)) ([01e43a6](https://github.com/scaleway/scaleway-sdk-js/commit/01e43a60e3981a485c3948dcfee08c0c3905b7a9))
+
+
+
+
+
 ## [2.8.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-datawarehouse@2.8.1...@scaleway/sdk-datawarehouse@2.8.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-datawarehouse

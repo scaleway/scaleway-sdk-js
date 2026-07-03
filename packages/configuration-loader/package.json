@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/configuration-loader",
-  "version": "2.4.2",
+  "version": "2.4.4",
   "description": "Load configuration via file or environment for NodeJS.",
   "license": "Apache-2.0",
   "repository": {
@@ -21,12 +21,13 @@
   "scripts": {
     "typecheck": "tsgo --noEmit",
     "type:generate": "tsgo --declaration -p tsconfig.build.json",
-    "build": "vite build --config ../../vite.config.ts && pnpm run type:generate",
+    "build": "vite build --config ../../vite.config.ts && pnpm run type:generate && pnpm run copy-test-fixtures",
+    "copy-test-fixtures": "mkdir -p dist/__tests__/data && cp src/__tests__/data/*.yaml dist/__tests__/data/",
     "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
   },
   "devDependencies": {
     "@repo/configs": "workspace:^",
-    "@types/node": "20.19.41"
+    "@types/node": "20.19.43"
   },
   "engines": {
     "node": ">=20.20.2"

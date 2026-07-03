@@ -97,6 +97,9 @@ export const ListClustersRequest = {
     greaterThan: 0,
     lessThanOrEqual: 100,
   },
+  version: {
+    minLength: 1,
+  },
 }
 
 export const ListNodesRequest = {

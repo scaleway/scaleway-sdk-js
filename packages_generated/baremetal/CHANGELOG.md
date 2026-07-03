@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.7.0 (2026-06-29)
+
+
+### Features
+
+* **baremetal:** add ECC memory type ([#3095](https://github.com/scaleway/scaleway-sdk-js/issues/3095)) ([524c86a](https://github.com/scaleway/scaleway-sdk-js/commit/524c86a618d93b84a3bf3d793e1111a5d2b0b836))
+
+
+
+
+
 ## [2.6.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-baremetal@2.6.1...@scaleway/sdk-baremetal@2.6.2) (2026-06-02)
 
 **Note:** Version bump only for package @scaleway/sdk-baremetal
