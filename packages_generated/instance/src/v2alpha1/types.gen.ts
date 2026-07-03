@@ -223,6 +223,11 @@ export interface ServerIP {
 }
 
 
+export interface CreateTemplateRequestPrivateNetworkTemplate {
+  privateNetworkId: string
+}
+
+
 export interface CreateTemplateRequestVolumeTemplate {
   volumeType: CreateServerRequestServerVolumeVolumeType
   name: string
@@ -382,7 +387,6 @@ export interface TemplateSummary {
   placementGroupId?: string
   publicIpV4Count: number
   publicIpV6Count: number
-  privateNetworkIds: string[]
   createdAt?: Date
   updatedAt?: Date
   filesystemIds: string[]
@@ -432,6 +436,11 @@ export interface ServerVolume {
 
 export interface UpdateServerRequestPublicNetworkInterface {
   securityGroupId?: string
+}
+
+
+export interface UpdateTemplateRequestUpdatePrivateNetworks {
+  privateNetworks: CreateTemplateRequestPrivateNetworkTemplate[]
 }
 
 
@@ -591,7 +600,7 @@ export type CreateTemplateRequest = {
   securityGroupId?: string
   placementGroupId?: string
   volumes?: CreateTemplateRequestVolumeTemplate[]
-  privateNetworkIds?: string[]
+  privateNetworks?: CreateTemplateRequestPrivateNetworkTemplate[]
   publicIpV4Count: number
   publicIpV6Count: number
   windowsRdpSshKeyId?: string
@@ -1206,7 +1215,7 @@ export interface Template {
   publicIpV4Count: number
   publicIpV6Count: number
   volumes: CreateTemplateRequestVolumeTemplate[]
-  privateNetworkIds: string[]
+  privateNetworks: CreateTemplateRequestPrivateNetworkTemplate[]
   createdAt?: Date
   updatedAt?: Date
   windowsRdpSshKeyId?: string
@@ -1306,7 +1315,7 @@ export type UpdateTemplateRequest = {
   securityGroupId?: string
   placementGroupId?: string
   updateVolumes?: UpdateTemplateRequestUpdateVolumes
-  privateNetworkIds?: string[]
+  updatePrivateNetworks?: UpdateTemplateRequestUpdatePrivateNetworks
   publicIpV4Count?: number
   publicIpV6Count?: number
   windowsRdpSshKeyId?: string
