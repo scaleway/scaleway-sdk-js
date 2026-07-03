@@ -13,6 +13,7 @@ import type {
   Maintenance,
   InstanceSetting,
   InstanceSnapshotSchedule,
+  Version,
   Volume,
   Instance,
   Snapshot,
@@ -27,7 +28,6 @@ import type {
   ListNodeTypesResponse,
   ListSnapshotsResponse,
   ListUsersResponse,
-  Version,
   ListVersionsResponse,
   EndpointSpecPrivateNetworkDetails,
   EndpointSpecPublicNetworkDetails,
@@ -171,6 +171,20 @@ const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSched
   } as InstanceSnapshotSchedule
 }
 
+const unmarshalVersion = (data: unknown): Version => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    releasedAt: unmarshalDate(data.released_at),
+    version: data.version,
+  } as Version
+}
+
 export const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -206,6 +220,7 @@ export const unmarshalInstance = (data: unknown): Instance => {
     snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : undefined,
     status: data.status,
     tags: data.tags,
+    upgradableVersions: unmarshalArrayOfObject(data.upgradable_versions, unmarshalVersion),
     version: data.version,
     volume: data.volume ? unmarshalVolume(data.volume) : undefined,
   } as Instance
@@ -387,20 +402,6 @@ export const unmarshalListUsersResponse = (data: unknown): ListUsersResponse => 
   } as ListUsersResponse
 }
 
-const unmarshalVersion = (data: unknown): Version => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
-    releasedAt: unmarshalDate(data.released_at),
-    version: data.version,
-  } as Version
-}
-
 export const unmarshalListVersionsResponse = (data: unknown): ListVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -559,8 +560,8 @@ export const marshalUpgradeInstanceRequest = (
     {param: 'volume_size_bytes',
       value: request.volumeSizeBytes,
     },
-    {param: 'version_id',
-      value: request.versionId,
+    {param: 'version',
+      value: request.version,
     },
   ]),
 })
