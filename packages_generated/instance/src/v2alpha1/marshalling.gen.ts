@@ -30,6 +30,7 @@ import type {
   ServerRDPPassword,
   ServerVolume,
   Server,
+  CreateTemplateRequestPrivateNetworkTemplate,
   CreateTemplateRequestVolumeTemplate,
   Template,
   UserData,
@@ -68,6 +69,7 @@ import type {
   UpdateSecurityGroupRuleRequest,
   UpdateServerRequestPublicNetworkInterface,
   UpdateServerRequest,
+  UpdateTemplateRequestUpdatePrivateNetworks,
   UpdateTemplateRequestUpdateVolumes,
   UpdateTemplateRequest,
 } from './types.gen.js'
@@ -382,7 +384,6 @@ const unmarshalTemplateSummary = (data: unknown): TemplateSummary => {
     id: data.id,
     name: data.name,
     placementGroupId: data.placement_group_id,
-    privateNetworkIds: data.private_network_ids,
     projectId: data.project_id,
     publicIpV4Count: data.public_ip_v4_count,
     publicIpV6Count: data.public_ip_v6_count,
@@ -562,6 +563,18 @@ export const unmarshalServer = (data: unknown): Server => {
   } as Server
 }
 
+const unmarshalCreateTemplateRequestPrivateNetworkTemplate = (data: unknown): CreateTemplateRequestPrivateNetworkTemplate => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CreateTemplateRequestPrivateNetworkTemplate' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    privateNetworkId: data.private_network_id,
+  } as CreateTemplateRequestPrivateNetworkTemplate
+}
+
 const unmarshalCreateTemplateRequestVolumeTemplate = (data: unknown): CreateTemplateRequestVolumeTemplate => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -593,7 +606,7 @@ export const unmarshalTemplate = (data: unknown): Template => {
     id: data.id,
     name: data.name,
     placementGroupId: data.placement_group_id,
-    privateNetworkIds: data.private_network_ids,
+    privateNetworks: unmarshalArrayOfObject(data.private_networks, unmarshalCreateTemplateRequestPrivateNetworkTemplate),
     projectId: data.project_id,
     publicIpV4Count: data.public_ip_v4_count,
     publicIpV6Count: data.public_ip_v6_count,
@@ -806,6 +819,13 @@ export const marshalCreateServerRequest = (
   windows_rdp_ssh_key_id: request.windowsRdpSshKeyId,
 })
 
+const marshalCreateTemplateRequestPrivateNetworkTemplate = (
+  request: CreateTemplateRequestPrivateNetworkTemplate,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+})
+
 const marshalCreateTemplateRequestVolumeTemplate = (
   request: CreateTemplateRequestVolumeTemplate,
   defaults: DefaultValues,
@@ -832,7 +852,7 @@ export const marshalCreateTemplateRequest = (
   filesystem_ids: request.filesystemIds,
   name: request.name,
   placement_group_id: request.placementGroupId,
-  private_network_ids: request.privateNetworkIds,
+  private_networks: ((request.privateNetworks !== undefined) ?  request.privateNetworks.map(elt => marshalCreateTemplateRequestPrivateNetworkTemplate(elt, defaults)): undefined),
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_ip_v4_count: request.publicIpV4Count,
   public_ip_v6_count: request.publicIpV6Count,
@@ -1019,6 +1039,13 @@ export const marshalUpdateServerRequest = (
   windows_rdp_ssh_key_id: request.windowsRdpSshKeyId,
 })
 
+const marshalUpdateTemplateRequestUpdatePrivateNetworks = (
+  request: UpdateTemplateRequestUpdatePrivateNetworks,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_networks:  request.privateNetworks.map(elt => marshalCreateTemplateRequestPrivateNetworkTemplate(elt, defaults)),
+})
+
 const marshalUpdateTemplateRequestUpdateVolumes = (
   request: UpdateTemplateRequestUpdateVolumes,
   defaults: DefaultValues,
@@ -1033,13 +1060,13 @@ export const marshalUpdateTemplateRequest = (
   filesystem_ids: request.filesystemIds,
   name: request.name,
   placement_group_id: request.placementGroupId,
-  private_network_ids: request.privateNetworkIds,
   public_ip_v4_count: request.publicIpV4Count,
   public_ip_v6_count: request.publicIpV6Count,
   security_group_id: request.securityGroupId,
   server_tags: request.serverTags,
   server_type: request.serverType,
   tags: request.tags,
+  update_private_networks: ((request.updatePrivateNetworks !== undefined) ?  marshalUpdateTemplateRequestUpdatePrivateNetworks(request.updatePrivateNetworks, defaults): undefined),
   update_volumes: ((request.updateVolumes !== undefined) ?  marshalUpdateTemplateRequestUpdateVolumes(request.updateVolumes, defaults): undefined),
   windows_rdp_ssh_key_id: request.windowsRdpSshKeyId,
 })
