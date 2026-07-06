@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-key-manager@2.7.1...@scaleway/sdk-key-manager@2.8.0) (2026-07-06)
+
+
+### Features
+
+* **key_manager:** hide protection level ([#3105](https://github.com/scaleway/scaleway-sdk-js/issues/3105)) ([10242e6](https://github.com/scaleway/scaleway-sdk-js/commit/10242e6179c90dbcfb63a2c200ea2f46bed3ff23))
+
+
+
+
+
 ## 2.7.1 (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-key-manager

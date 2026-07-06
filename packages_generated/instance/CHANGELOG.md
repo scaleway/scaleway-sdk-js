@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-instance@2.9.0...@scaleway/sdk-instance@2.10.0) (2026-07-06)
+
+
+### Features
+
+* **instance:** include SG in PrivateNics definition of Template ([#3108](https://github.com/scaleway/scaleway-sdk-js/issues/3108)) ([1b7b087](https://github.com/scaleway/scaleway-sdk-js/commit/1b7b087eaff3e61f5861923db0e041d629fb275e))
+
+
+
+
+
 # [2.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-instance@2.8.4...@scaleway/sdk-instance@2.9.0) (2026-06-29)
 
 

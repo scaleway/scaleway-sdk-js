@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-mongodb@2.9.1...@scaleway/sdk-mongodb@2.9.2) (2026-07-06)
+
+
+### Bug Fixes
+
+* **mongodb:** change Instance.upgradable_versions ([#3113](https://github.com/scaleway/scaleway-sdk-js/issues/3113)) ([df0d61e](https://github.com/scaleway/scaleway-sdk-js/commit/df0d61ef7462c9f75ae8e92ba94d1f2208124f20))
+* **mongodb:** change UpgradeInstanceRequest.version to support (e.g., 8.0, 7.0, 8.2) ([#3111](https://github.com/scaleway/scaleway-sdk-js/issues/3111)) ([3b22e10](https://github.com/scaleway/scaleway-sdk-js/commit/3b22e101fd816c84d892cc004b65424958d105b5))
+
+
+
+
+
 ## 2.9.1 (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-mongodb

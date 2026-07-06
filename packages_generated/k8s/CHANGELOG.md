@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.13.0...@scaleway/sdk-k8s@2.14.0) (2026-07-06)
+
+
+### Features
+
+* **k8s:** add resource annotation ([#3109](https://github.com/scaleway/scaleway-sdk-js/issues/3109)) ([263354a](https://github.com/scaleway/scaleway-sdk-js/commit/263354a5748a68ee344adc587cd3606ec3126d7d))
+
+
+
+
+
 # [2.13.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.12.0...@scaleway/sdk-k8s@2.13.0) (2026-06-29)
 
 

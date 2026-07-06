@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-edge-services",
-  "version": "2.16.2",
+  "version": "2.16.3",
   "description": "Scaleway SDK edge-services",
   "license": "Apache-2.0",
   "repository": {

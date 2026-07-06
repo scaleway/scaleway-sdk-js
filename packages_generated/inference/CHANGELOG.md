@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-inference@2.9.1...@scaleway/sdk-inference@2.10.0) (2026-07-06)
+
+
+### Features
+
+* **inference:** add new status ifr_deployment ([#3104](https://github.com/scaleway/scaleway-sdk-js/issues/3104)) ([956fbb6](https://github.com/scaleway/scaleway-sdk-js/commit/956fbb65cd3f21ae6da8ab173b152b828e51ef2b))
+
+
+
+
+
 ## 2.9.1 (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-inference

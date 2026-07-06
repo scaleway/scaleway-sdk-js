@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.15.0...@scaleway/sdk-product-catalog@2.16.0) (2026-07-06)
+
+
+### Features
+
+* **product_catalog:** add shared CPU ([#3106](https://github.com/scaleway/scaleway-sdk-js/issues/3106)) ([66b9380](https://github.com/scaleway/scaleway-sdk-js/commit/66b9380c6af39b0f5b830ebc4c62d9f27961f1e2))
+
+
+
+
+
 # [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.14.0...@scaleway/sdk-product-catalog@2.15.0) (2026-06-29)
 
 

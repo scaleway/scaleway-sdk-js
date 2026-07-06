@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-rdb@2.7.4...@scaleway/sdk-rdb@2.8.0) (2026-07-06)
+
+
+### Features
+
+* **rdb:** add relase_date field in EngineVersion ([#3112](https://github.com/scaleway/scaleway-sdk-js/issues/3112)) ([1495a78](https://github.com/scaleway/scaleway-sdk-js/commit/1495a787fd317eb5ab5b0d9bb87e6a4964049cb0))
+
+
+
+
+
 ## [2.7.4](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-rdb@2.7.3...@scaleway/sdk-rdb@2.7.4) (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-rdb

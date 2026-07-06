@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.10.0...@scaleway/sdk-webhosting@2.11.0) (2026-07-06)
+
+
+### Bug Fixes
+
+* **webhosting:** fix typo on the description of the field is_default in OfferCommitment ([#3100](https://github.com/scaleway/scaleway-sdk-js/issues/3100)) ([06fc975](https://github.com/scaleway/scaleway-sdk-js/commit/06fc975015deb99cdc302eda57b664b2ad37c650))
+
+
+### Features
+
+* **webhosting:** add payment_pending and payment_failed hosting status ([#3110](https://github.com/scaleway/scaleway-sdk-js/issues/3110)) ([ac9e865](https://github.com/scaleway/scaleway-sdk-js/commit/ac9e865e17581ea9440a184a21a42e60761c5688))
+
+
+
+
+
 # [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.9.0...@scaleway/sdk-webhosting@2.10.0) (2026-06-29)
 
 
