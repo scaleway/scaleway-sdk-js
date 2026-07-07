@@ -40,6 +40,7 @@ export type {
   MailboxStatus,
   MailboxSubscriptionPeriod,
   RestoreMailboxRequest,
+  UpdateAliasRequest,
   UpdateMailboxRequest,
   ValidateDomainRecordsRequest,
 } from './types.gen.js'

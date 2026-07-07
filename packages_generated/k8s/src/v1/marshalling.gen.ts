@@ -16,8 +16,6 @@ import type {
   Pool,
   ACLRule,
   AddClusterACLRulesResponse,
-  ExternalNodeCoreV1Taint,
-  ExternalNode,
   ExternalNodeAuth,
   ListClusterACLRulesResponse,
   ClusterType,
@@ -301,45 +299,6 @@ export const unmarshalAddClusterACLRulesResponse = (data: unknown): AddClusterAC
   return {
     rules: unmarshalArrayOfObject(data.rules, unmarshalACLRule),
   } as AddClusterACLRulesResponse
-}
-
-const unmarshalExternalNodeCoreV1Taint = (data: unknown): ExternalNodeCoreV1Taint => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ExternalNodeCoreV1Taint' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    effect: data.effect,
-    key: data.key,
-    value: data.value,
-  } as ExternalNodeCoreV1Taint
-}
-
-export const unmarshalExternalNode = (data: unknown): ExternalNode => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ExternalNode' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    clusterCa: data.cluster_ca,
-    clusterUrl: data.cluster_url,
-    cniPluginsVersion: data.cni_plugins_version,
-    containerdVersion: data.containerd_version,
-    externalIp: data.external_ip,
-    iamToken: data.iam_token,
-    id: data.id,
-    kubeToken: data.kube_token,
-    kubeletConfig: data.kubelet_config,
-    name: data.name,
-    nodeLabels: data.node_labels,
-    nodeTaints: unmarshalArrayOfObject(data.node_taints, unmarshalExternalNodeCoreV1Taint),
-    poolVersion: data.pool_version,
-    runcVersion: data.runc_version,
-  } as ExternalNode
 }
 
 export const unmarshalExternalNodeAuth = (data: unknown): ExternalNodeAuth => {

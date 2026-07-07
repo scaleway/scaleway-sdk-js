@@ -21,6 +21,7 @@ import {
   unmarshalListDomainsResponse,
   unmarshalListMailboxesResponse,
   unmarshalMailbox,
+  marshalUpdateAliasRequest,
   marshalUpdateMailboxRequest,
 } from './marshalling.gen.js'
 import type {
@@ -46,6 +47,7 @@ import type {
   ListMailboxesResponse,
   Mailbox,
   RestoreMailboxRequest,
+  UpdateAliasRequest,
   UpdateMailboxRequest,
   ValidateDomainRecordsRequest,
 } from './types.gen.js'
@@ -403,6 +405,26 @@ export class API extends ParentAPI {
       this.getAlias,
       request,
       options,
+    )
+
+  
+  /**
+   * Update an alias by its ID.. Update an alias by its ID.
+   *
+   * @param request - The request {@link UpdateAliasRequest}
+   * @returns A Promise of Alias
+   */
+  updateAlias = (request: Readonly<UpdateAliasRequest>) =>
+    this.client.fetch<Alias>(
+      {
+        body: JSON.stringify(
+          marshalUpdateAliasRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/mailbox/v1alpha1/aliases/${validatePathParam('aliasId', request.aliasId)}`,
+      },
+      unmarshalAlias,
     )
 
   
