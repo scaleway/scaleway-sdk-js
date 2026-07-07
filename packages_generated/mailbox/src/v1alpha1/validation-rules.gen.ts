@@ -59,6 +59,12 @@ export const ListMailboxesRequest = {
   },
 }
 
+export const UpdateAliasRequest = {
+  description: {
+    maxLength: 128,
+  },
+}
+
 export const UpdateMailboxRequest = {
   newPassword: {
     maxLength: 128,

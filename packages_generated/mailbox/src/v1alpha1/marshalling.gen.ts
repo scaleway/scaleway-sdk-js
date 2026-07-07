@@ -15,6 +15,7 @@ import type {
   BatchCreateMailboxesRequest,
   CreateAliasRequest,
   CreateDomainRequest,
+  UpdateAliasRequest,
   UpdateMailboxRequest,
 } from './types.gen.js'
 
@@ -207,6 +208,13 @@ export const marshalCreateDomainRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+})
+
+export const marshalUpdateAliasRequest = (
+  request: UpdateAliasRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
 })
 
 export const marshalUpdateMailboxRequest = (

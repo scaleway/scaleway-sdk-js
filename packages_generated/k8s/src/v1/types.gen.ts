@@ -166,11 +166,11 @@ export interface CoreV1Taint {
 
 export interface CreateClusterRequestPoolConfigUpgradePolicy {
   /**
-   * The maximum number of nodes that can be not ready at the same time.
+   * The maximum number of nodes that can be `upgrading` at the same time.
    */
   maxUnavailable?: number
   /**
-   * The maximum number of nodes to be created during the upgrade.
+   * The maximum number of nodes to be created during the upgrade, e.g. the pool will scale up to reach `size`+`max_surge` before downscaling to `size` after node upgrades.
    */
   maxSurge?: number
 }
@@ -273,7 +273,13 @@ export interface ClusterOpenIDConnectConfig {
 
 
 export interface PoolUpgradePolicy {
+  /**
+   * The maximum number of nodes that can be `upgrading` at the same time.
+   */
   maxUnavailable: number
+  /**
+   * The maximum number of nodes to be created during the upgrade, e.g. the pool will scale up to reach `size`+`max_surge` before downscaling to `size` after node upgrades.
+   */
   maxSurge: number
 }
 
@@ -468,7 +474,7 @@ export interface CreateClusterRequestPoolConfig {
    */
   kubeletArgs: Record<string, string>
   /**
-   * Pool upgrade policy.
+   * Defines how node provisioning should behave during pool version upgrade.
    */
   upgradePolicy?: CreateClusterRequestPoolConfigUpgradePolicy
   /**
@@ -514,15 +520,14 @@ export interface CreateClusterRequestPoolConfig {
 
 
 export interface CreatePoolRequestUpgradePolicy {
+  /**
+   * The maximum number of nodes that can be `upgrading` at the same time.
+   */
   maxUnavailable?: number
+  /**
+   * The maximum number of nodes to be created during the upgrade, e.g. the pool will scale up to reach `size`+`max_surge` before downscaling to `size` after node upgrades.
+   */
   maxSurge?: number
-}
-
-
-export interface ExternalNodeCoreV1Taint {
-  key: string
-  value: string
-  effect: string
 }
 
 
@@ -868,7 +873,7 @@ export interface Pool {
    */
   kubeletArgs: Record<string, string>
   /**
-   * Pool upgrade policy.
+   * Defines how node provisioning should behave during pool version upgrade.
    */
   upgradePolicy?: PoolUpgradePolicy
   /**
@@ -1021,7 +1026,13 @@ export interface UpdateClusterRequestOpenIDConnectConfig {
 
 
 export interface UpdatePoolRequestUpgradePolicy {
+  /**
+   * New maximum number of nodes that can be `upgrading` at the same time.
+   */
   maxUnavailable?: number
+  /**
+   * New maximum number of nodes to be created during the upgrade.
+   */
   maxSurge?: number
 }
 
@@ -1150,15 +1161,6 @@ export type CreateClusterRequest = {
 }
 
 
-export type CreateExternalNodeRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  poolId: string
-}
-
-
 export type CreatePoolRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1213,7 +1215,7 @@ export type CreatePoolRequest = {
    */
   kubeletArgs?: Record<string, string>
   /**
-   * Pool upgrade policy.
+   * Defines how node provisioning should behave during pool version upgrade.
    */
   upgradePolicy?: CreatePoolRequestUpgradePolicy
   /**
@@ -1315,24 +1317,6 @@ export type DeletePoolRequest = {
    * ID of the pool to delete.
    */
   poolId: string
-}
-
-
-export interface ExternalNode {
-  id: string
-  name: string
-  clusterUrl: string
-  poolVersion: string
-  clusterCa: string
-  kubeToken: string
-  kubeletConfig: string
-  externalIp: string
-  containerdVersion: string
-  runcVersion: string
-  cniPluginsVersion: string
-  nodeLabels: Record<string, string>
-  nodeTaints: ExternalNodeCoreV1Taint[]
-  iamToken: string
 }
 
 

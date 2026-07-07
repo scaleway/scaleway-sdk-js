@@ -16,7 +16,6 @@ import {
   unmarshalCluster,
   marshalCreateClusterRequest,
   marshalCreatePoolRequest,
-  unmarshalExternalNode,
   unmarshalExternalNodeAuth,
   unmarshalListClusterACLRulesResponse,
   unmarshalListClusterAvailableTypesResponse,
@@ -47,13 +46,11 @@ import type {
   AuthExternalNodeRequest,
   Cluster,
   CreateClusterRequest,
-  CreateExternalNodeRequest,
   CreatePoolRequest,
   DeleteACLRuleRequest,
   DeleteClusterRequest,
   DeleteNodeRequest,
   DeletePoolRequest,
-  ExternalNode,
   ExternalNodeAuth,
   GetClusterKubeConfigRequest,
   GetClusterRequest,
@@ -651,24 +648,6 @@ This will drain and replace the nodes in that pool.
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/external-nodes/auth`,
       },
       unmarshalExternalNodeAuth,
-    )
-
-  
-  /**
-   * Create a Kosmos node. Retrieve metadata for a Kosmos node. This method is not intended to be called by end users but rather programmatically by the kapsule-node-agent.
-   *
-   * @param request - The request {@link CreateExternalNodeRequest}
-   * @returns A Promise of ExternalNode
-   */
-  createExternalNode = (request: Readonly<CreateExternalNodeRequest>) =>
-    this.client.fetch<ExternalNode>(
-      {
-        body: '{}',
-        headers: jsonContentHeaders,
-        method: 'POST',
-        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/external-nodes`,
-      },
-      unmarshalExternalNode,
     )
 
   
