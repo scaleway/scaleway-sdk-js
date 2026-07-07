@@ -411,7 +411,7 @@ export type ImportKeyMaterialRequest = {
    */
   keyId: string
   /**
-   * The key material The key material is a random sequence of bytes used to derive a cryptographic key.
+   * The key material is a random sequence of bytes used to derive a cryptographic key.
    */
   keyMaterial: string
   /**

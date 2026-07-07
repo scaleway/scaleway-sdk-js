@@ -534,6 +534,18 @@ export type RestoreMailboxRequest = {
 }
 
 
+export type UpdateAliasRequest = {
+  /**
+   * ID of the alias to update.
+   */
+  aliasId: string
+  /**
+   * (Optional) Description of the alias.
+   */
+  description?: string
+}
+
+
 export type UpdateMailboxRequest = {
   /**
    * ID of the mailbox to update.
