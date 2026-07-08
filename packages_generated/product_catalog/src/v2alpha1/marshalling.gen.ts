@@ -26,6 +26,15 @@ import type {
   PublicCatalogProductPropertiesObjectStorageInternetTrafficType,
   PublicCatalogProductPropertiesObjectStorageRegionTrafficType,
   PublicCatalogProductPropertiesObjectStorageRestoreType,
+  PublicCatalogProductPropertiesServerlessContainersCPUType,
+  PublicCatalogProductPropertiesServerlessContainersMemoryType,
+  PublicCatalogProductPropertiesServerlessFunctionsConsumptionType,
+  PublicCatalogProductPropertiesServerlessFunctionsFreeTierType,
+  PublicCatalogProductPropertiesServerlessFunctionsProvisionType,
+  PublicCatalogProductPropertiesServerlessFunctionsRequestType,
+  PublicCatalogProductPropertiesServerlessFunctionsRuntimeResource,
+  PublicCatalogProductPropertiesServerlessJobsCPUType,
+  PublicCatalogProductPropertiesServerlessJobsMemoryType,
   PublicCatalogProductPropertiesApacheKafka,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
@@ -367,6 +376,111 @@ const unmarshalPublicCatalogProductPropertiesObjectStorageRestoreType = (data: u
   } as PublicCatalogProductPropertiesObjectStorageRestoreType
 }
 
+const unmarshalPublicCatalogProductPropertiesServerlessContainersCPUType = (data: unknown): PublicCatalogProductPropertiesServerlessContainersCPUType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessContainersCPUType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    mvcpuCounts: data.mvcpu_counts,
+  } as PublicCatalogProductPropertiesServerlessContainersCPUType
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessContainersMemoryType = (data: unknown): PublicCatalogProductPropertiesServerlessContainersMemoryType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessContainersMemoryType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    sizes: data.sizes,
+  } as PublicCatalogProductPropertiesServerlessContainersMemoryType
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessFunctionsConsumptionType = (data: unknown): PublicCatalogProductPropertiesServerlessFunctionsConsumptionType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessFunctionsConsumptionType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessFunctionsConsumptionType
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessFunctionsFreeTierType = (data: unknown): PublicCatalogProductPropertiesServerlessFunctionsFreeTierType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessFunctionsFreeTierType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessFunctionsFreeTierType
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessFunctionsProvisionType = (data: unknown): PublicCatalogProductPropertiesServerlessFunctionsProvisionType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessFunctionsProvisionType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessFunctionsProvisionType
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessFunctionsRequestType = (data: unknown): PublicCatalogProductPropertiesServerlessFunctionsRequestType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessFunctionsRequestType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessFunctionsRequestType
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessFunctionsRuntimeResource = (data: unknown): PublicCatalogProductPropertiesServerlessFunctionsRuntimeResource => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessFunctionsRuntimeResource' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    memorySize: data.memory_size,
+    mvcpuCount: data.mvcpu_count,
+  } as PublicCatalogProductPropertiesServerlessFunctionsRuntimeResource
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessJobsCPUType = (data: unknown): PublicCatalogProductPropertiesServerlessJobsCPUType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessJobsCPUType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    mvcpuCounts: data.mvcpu_counts,
+  } as PublicCatalogProductPropertiesServerlessJobsCPUType
+}
+
+const unmarshalPublicCatalogProductPropertiesServerlessJobsMemoryType = (data: unknown): PublicCatalogProductPropertiesServerlessJobsMemoryType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessJobsMemoryType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    sizes: data.sizes,
+  } as PublicCatalogProductPropertiesServerlessJobsMemoryType
+}
+
 const unmarshalPublicCatalogProductPropertiesApacheKafka = (data: unknown): PublicCatalogProductPropertiesApacheKafka => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -615,6 +729,8 @@ const unmarshalPublicCatalogProductPropertiesServerlessContainers = (data: unkno
   }
 
   return {
+    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesServerlessContainersCPUType(data.cpu) : undefined,
+    memory: data.memory ? unmarshalPublicCatalogProductPropertiesServerlessContainersMemoryType(data.memory) : undefined,
   } as PublicCatalogProductPropertiesServerlessContainers
 }
 
@@ -626,6 +742,11 @@ const unmarshalPublicCatalogProductPropertiesServerlessFunctions = (data: unknow
   }
 
   return {
+    consumption: data.consumption ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsConsumptionType(data.consumption) : undefined,
+    freeTier: data.free_tier ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsFreeTierType(data.free_tier) : undefined,
+    provision: data.provision ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsProvisionType(data.provision) : undefined,
+    request: data.request ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsRequestType(data.request) : undefined,
+    resources: unmarshalArrayOfObject(data.resources, unmarshalPublicCatalogProductPropertiesServerlessFunctionsRuntimeResource),
   } as PublicCatalogProductPropertiesServerlessFunctions
 }
 
@@ -637,6 +758,8 @@ const unmarshalPublicCatalogProductPropertiesServerlessJobs = (data: unknown): P
   }
 
   return {
+    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesServerlessJobsCPUType(data.cpu) : undefined,
+    memory: data.memory ? unmarshalPublicCatalogProductPropertiesServerlessJobsMemoryType(data.memory) : undefined,
   } as PublicCatalogProductPropertiesServerlessJobs
 }
 
