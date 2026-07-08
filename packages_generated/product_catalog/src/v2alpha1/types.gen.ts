@@ -65,6 +65,7 @@ export type PublicCatalogProductPropertiesGenerativeApisTokenType =
   | 'input_token'
   | 'output_token'
   | 'input_duration'
+  | 'input_cached_token'
 
 export type PublicCatalogProductPropertiesHardwareCPUArch =
   | 'unknown_arch'
