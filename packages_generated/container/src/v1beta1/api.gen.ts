@@ -86,7 +86,11 @@ const jsonContentHeaders = {
 /**
  * Serverless Containers API.
 
-This API allows you to manage your Serverless Containers.
+This API allows you to manage your Serverless Containers. **[DEPRECATED]** This API is deprecated. Please use the [Serverless Containers API v1](https://www.scaleway.com/en/developers/api/serverless-containers/),
+which provides the same capabilities and more, with improved performance and support for the latest features.
+
+Follow the [migration guide](https://www.scaleway.com/en/developers/api/serverless-containers/migration-guide/) to migrate your custom API integrations to the new v1 API.
+Note that no redeployment or action is necessary to continue managing your existing containers; both APIs have access to the same resources.
  */
 export class API extends ParentAPI {
   /**
@@ -122,6 +126,7 @@ export class API extends ParentAPI {
   /**
    * List all your namespaces. List all namespaces in a specified region.
    *
+   * @deprecated
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
    */
@@ -132,6 +137,7 @@ export class API extends ParentAPI {
   /**
    * Get a namespace. Get the namespace associated with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
    */
@@ -166,6 +172,7 @@ export class API extends ParentAPI {
   /**
    * Create a new namespace. Create a new namespace in a specified region.
    *
+   * @deprecated
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
    */
@@ -186,6 +193,7 @@ export class API extends ParentAPI {
   /**
    * Update an existing namespace. Update the space associated with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
    */
@@ -206,6 +214,7 @@ export class API extends ParentAPI {
   /**
    * Delete an existing namespace. Delete the namespace associated with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
    */
@@ -240,6 +249,7 @@ export class API extends ParentAPI {
   /**
    * List all your containers. List all containers for a specified region.
    *
+   * @deprecated
    * @param request - The request {@link ListContainersRequest}
    * @returns A Promise of ListContainersResponse
    */
@@ -250,6 +260,7 @@ export class API extends ParentAPI {
   /**
    * Get a container. Get the container associated with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link GetContainerRequest}
    * @returns A Promise of Container
    */
@@ -287,6 +298,7 @@ export class API extends ParentAPI {
 When creating a container, the `created` status is no longer used. The deployment process is started
 and the status is set to `pending` accordingly.
    *
+   * @deprecated
    * @param request - The request {@link CreateContainerRequest}
    * @returns A Promise of Container
    */
@@ -311,6 +323,7 @@ When updating a container, the container is automatically redeployed to apply th
 
 Warning: The `redeploy` field has been deprecated. An update now always redeploys the container.
    *
+   * @deprecated
    * @param request - The request {@link UpdateContainerRequest}
    * @returns A Promise of Container
    */
@@ -331,6 +344,7 @@ Warning: The `redeploy` field has been deprecated. An update now always redeploy
   /**
    * Delete a container. Delete the container associated with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link DeleteContainerRequest}
    * @returns A Promise of Container
    */
@@ -351,6 +365,7 @@ Since updating a container now always deploys it (and passes its status to `pend
 
 Moreover, calling `DeployContainer` immediately after `UpdateContainer` can cause `409 - resource is in a transient state` errors, so it is better to not use it when updating a container.
    *
+   * @deprecated
    * @param request - The request {@link DeployContainerRequest}
    * @returns A Promise of Container
    */
@@ -384,6 +399,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * List all your crons.
    *
+   * @deprecated
    * @param request - The request {@link ListCronsRequest}
    * @returns A Promise of ListCronsResponse
    */
@@ -394,6 +410,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Get a cron. Get the cron associated with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link GetCronRequest}
    * @returns A Promise of Cron
    */
@@ -428,6 +445,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Create a new cron.
    *
+   * @deprecated
    * @param request - The request {@link CreateCronRequest}
    * @returns A Promise of Cron
    */
@@ -448,6 +466,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Update an existing cron. Update the cron associated with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link UpdateCronRequest}
    * @returns A Promise of Cron
    */
@@ -468,6 +487,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Delete an existing cron. Delete the cron associated with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link DeleteCronRequest}
    * @returns A Promise of Cron
    */
@@ -499,6 +519,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * List all custom domains. List all custom domains in a specified region.
    *
+   * @deprecated
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
    */
@@ -509,6 +530,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Get a custom domain. Get a custom domain for the container with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
    */
@@ -543,6 +565,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Create a custom domain. Create a custom domain for the container with the specified ID.
    *
+   * @deprecated
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
    */
@@ -563,6 +586,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Delete a custom domain. Delete the custom domain with the specific ID.
    *
+   * @deprecated
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
    */
@@ -600,6 +624,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Get a token. Get a token with a specified ID.
    *
+   * @deprecated
    * @param request - The request {@link GetTokenRequest}
    * @returns A Promise of Token
    */
@@ -650,6 +675,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * List all tokens. List all tokens belonging to a specified Organization or Project.
    *
+   * @deprecated
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
    */
@@ -660,6 +686,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Delete a token. Delete a token with a specified ID.
    *
+   * @deprecated
    * @param request - The request {@link DeleteTokenRequest}
    * @returns A Promise of Token
    */
@@ -676,6 +703,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Create a trigger. Create a new trigger for a specified container.
    *
+   * @deprecated
    * @param request - The request {@link CreateTriggerRequest}
    * @returns A Promise of Trigger
    */
@@ -696,6 +724,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Get a trigger. Get a trigger with a specified ID.
    *
+   * @deprecated
    * @param request - The request {@link GetTriggerRequest}
    * @returns A Promise of Trigger
    */
@@ -755,6 +784,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * List all triggers. List all triggers belonging to a specified Organization or Project.
    *
+   * @deprecated
    * @param request - The request {@link ListTriggersRequest}
    * @returns A Promise of ListTriggersResponse
    */
@@ -765,6 +795,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Update a trigger. Update a trigger with a specified ID.
    *
+   * @deprecated
    * @param request - The request {@link UpdateTriggerRequest}
    * @returns A Promise of Trigger
    */
@@ -785,6 +816,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
   /**
    * Delete a trigger. Delete a trigger with a specified ID.
    *
+   * @deprecated
    * @param request - The request {@link DeleteTriggerRequest}
    * @returns A Promise of Trigger
    */
