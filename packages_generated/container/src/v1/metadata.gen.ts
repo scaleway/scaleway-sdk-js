@@ -10,16 +10,6 @@ export const queriesMetadata = {
       apiClass: 'API',
       methods: [
         {
-          methodName: 'getServiceInfo',
-          protoName: 'GetServiceInfo',
-          paramsType: 'GetServiceInfoRequest',
-          returnType: 'ServiceInfo',
-          isList: false,
-          paginationType: 'none',
-          isPrivate: false,
-          description: '"',
-        },
-        {
           methodName: 'getNamespace',
           protoName: 'GetNamespace',
           paramsType: 'GetNamespaceRequest',

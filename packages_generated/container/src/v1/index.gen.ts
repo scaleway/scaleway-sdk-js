@@ -33,7 +33,6 @@ export type {
   GetContainerRequest,
   GetDomainRequest,
   GetNamespaceRequest,
-  GetServiceInfoRequest,
   GetTriggerRequest,
   ListContainersRequest,
   ListContainersRequestOrderBy,

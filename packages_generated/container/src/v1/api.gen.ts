@@ -3,13 +3,12 @@
 import {
   API as ParentAPI,
   enrichForPagination,
-  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,} from './content.gen.js'
 import {
   unmarshalContainer,
@@ -43,7 +42,6 @@ import type {
   GetContainerRequest,
   GetDomainRequest,
   GetNamespaceRequest,
-  GetServiceInfoRequest,
   GetTriggerRequest,
   ListContainersRequest,
   ListContainersResponse,
@@ -84,16 +82,6 @@ export class API extends ParentAPI {
         'pl-waw',
       ],
     })
-  
-  getServiceInfo = (request: Readonly<GetServiceInfoRequest> = {}) =>
-    this.client.fetch<ServiceInfo>(
-      {
-        method: 'GET',
-        path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}`,
-      },
-      unmarshalServiceInfo,
-    )
-
   
   /**
    * Create a new namespace.. Namespace name must be unique inside a project.
