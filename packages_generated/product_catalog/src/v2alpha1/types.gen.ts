@@ -405,6 +405,66 @@ export interface PublicCatalogProductPropertiesObjectStorageRestoreType {
 }
 
 
+export interface PublicCatalogProductPropertiesServerlessContainersCPUType {
+  /**
+   * The list of available number of milli-vCPUs.
+   */
+  mvcpuCounts: number[]
+}
+
+
+export interface PublicCatalogProductPropertiesServerlessContainersMemoryType {
+  /**
+   * The list of available memory size in bytes.
+   */
+  sizes: number[]
+}
+
+
+export interface PublicCatalogProductPropertiesServerlessFunctionsConsumptionType {
+}
+
+
+export interface PublicCatalogProductPropertiesServerlessFunctionsFreeTierType {
+}
+
+
+export interface PublicCatalogProductPropertiesServerlessFunctionsProvisionType {
+}
+
+
+export interface PublicCatalogProductPropertiesServerlessFunctionsRequestType {
+}
+
+
+export interface PublicCatalogProductPropertiesServerlessFunctionsRuntimeResource {
+  /**
+   * The memory size in bytes.
+   */
+  memorySize: number
+  /**
+   * The number of milli-vCPUs.
+   */
+  mvcpuCount: number
+}
+
+
+export interface PublicCatalogProductPropertiesServerlessJobsCPUType {
+  /**
+   * The list of available number of milli-vCPUs.
+   */
+  mvcpuCounts: number[]
+}
+
+
+export interface PublicCatalogProductPropertiesServerlessJobsMemoryType {
+  /**
+   * The list of available memory size in bytes.
+   */
+  sizes: number[]
+}
+
+
 export interface PublicCatalogProductPropertiesApacheKafka {
 }
 
@@ -661,14 +721,66 @@ export interface PublicCatalogProductPropertiesSecretManager {
 
 
 export interface PublicCatalogProductPropertiesServerlessContainers {
+  /**
+   * The properties related to Serverless containers memory products.
+   *
+   * One-of ('type'): at most one of 'memory', 'cpu' could be set.
+   */
+  memory?: PublicCatalogProductPropertiesServerlessContainersMemoryType
+  /**
+   * The properties related to Serverless containers CPU products.
+   *
+   * One-of ('type'): at most one of 'memory', 'cpu' could be set.
+   */
+  cpu?: PublicCatalogProductPropertiesServerlessContainersCPUType
 }
 
 
 export interface PublicCatalogProductPropertiesServerlessFunctions {
+  /**
+   * The serverless functions runtime resources sorted by memory size and then by milli-vCPU count.
+   */
+  resources: PublicCatalogProductPropertiesServerlessFunctionsRuntimeResource[]
+  /**
+   * The properties related to Serverless functions consumption products.
+   *
+   * One-of ('type'): at most one of 'consumption', 'request', 'provision', 'freeTier' could be set.
+   */
+  consumption?: PublicCatalogProductPropertiesServerlessFunctionsConsumptionType
+  /**
+   * The properties related to Serverless functions request products.
+   *
+   * One-of ('type'): at most one of 'consumption', 'request', 'provision', 'freeTier' could be set.
+   */
+  request?: PublicCatalogProductPropertiesServerlessFunctionsRequestType
+  /**
+   * The properties related to Serverless functions provision products.
+   *
+   * One-of ('type'): at most one of 'consumption', 'request', 'provision', 'freeTier' could be set.
+   */
+  provision?: PublicCatalogProductPropertiesServerlessFunctionsProvisionType
+  /**
+   * The properties related to Serverless functions free tier products.
+   *
+   * One-of ('type'): at most one of 'consumption', 'request', 'provision', 'freeTier' could be set.
+   */
+  freeTier?: PublicCatalogProductPropertiesServerlessFunctionsFreeTierType
 }
 
 
 export interface PublicCatalogProductPropertiesServerlessJobs {
+  /**
+   * The properties related to Serverless containers memory products.
+   *
+   * One-of ('type'): at most one of 'memory', 'cpu' could be set.
+   */
+  memory?: PublicCatalogProductPropertiesServerlessJobsMemoryType
+  /**
+   * The properties related to Serverless containers CPU products.
+   *
+   * One-of ('type'): at most one of 'memory', 'cpu' could be set.
+   */
+  cpu?: PublicCatalogProductPropertiesServerlessJobsCPUType
 }
 
 
