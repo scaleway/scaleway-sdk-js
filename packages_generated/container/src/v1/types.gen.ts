@@ -1004,14 +1004,6 @@ export type GetNamespaceRequest = {
 }
 
 
-export type GetServiceInfoRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-}
-
-
 export type GetTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
