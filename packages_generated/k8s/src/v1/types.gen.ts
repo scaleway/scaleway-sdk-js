@@ -916,6 +916,10 @@ export interface Pool {
    */
   privateNetworkId?: string
   /**
+   * Details of the error, if any occurred when managing the pool.
+   */
+  errorMessage?: string
+  /**
    * Cluster region of the pool.
    */
   region: ScwRegion

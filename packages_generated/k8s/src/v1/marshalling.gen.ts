@@ -247,6 +247,7 @@ export const unmarshalPool = (data: unknown): Pool => {
     clusterId: data.cluster_id,
     containerRuntime: data.container_runtime,
     createdAt: unmarshalDate(data.created_at),
+    errorMessage: data.error_message,
     id: data.id,
     kubeletArgs: data.kubelet_args,
     labels: data.labels,
