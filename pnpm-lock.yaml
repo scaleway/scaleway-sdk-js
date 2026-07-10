@@ -164,6 +164,9 @@ importers:
       '@scaleway/sdk-datalab':
         specifier: workspace:*
         version: link:../../packages_generated/datalab
+      '@scaleway/sdk-dataviz':
+        specifier: workspace:*
+        version: link:../../packages_generated/dataviz
       '@scaleway/sdk-datawarehouse':
         specifier: workspace:*
         version: link:../../packages_generated/datawarehouse
@@ -797,6 +800,19 @@ importers:
       '@repo/configs':
         specifier: workspace:^
         version: link:../../tools/configs
+      '@scaleway/sdk-client':
+        specifier: workspace:^
+        version: link:../../packages/client
+
+  packages_generated/dataviz:
+    dependencies:
+      '@scaleway/random-name':
+        specifier: 5.1.1
+        version: 5.1.1
+      '@scaleway/sdk-std':
+        specifier: workspace:*
+        version: link:../std
+    devDependencies:
       '@scaleway/sdk-client':
         specifier: workspace:^
         version: link:../../packages/client
@@ -2626,6 +2642,10 @@ packages:
 
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
+
+  '@scaleway/random-name@5.1.1':
+    resolution: {integrity: sha512-DelRK+56UBUEoRr8pQGwTE7oyC019pExis6iG6zZPcjuz4nLbMB5LIosmclnsvajfIBEQiD1Dv9JI/MgnPwygQ==}
+    engines: {node: '>=20.x'}
 
   '@scaleway/random-name@5.1.4':
     resolution: {integrity: sha512-+rDbZG1317VGovkE79dLaDe0n1cCwtQUrQ1KxMct8vzzZwRA+viiU6VQePMSmu/MMhed2OUtDSM45tbmwE7BeQ==}
@@ -6845,6 +6865,8 @@ snapshots:
     optional: true
 
   '@rolldown/pluginutils@1.0.1': {}
+
+  '@scaleway/random-name@5.1.1': {}
 
   '@scaleway/random-name@5.1.4': {}
 
