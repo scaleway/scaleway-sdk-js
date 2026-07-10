@@ -44,6 +44,7 @@ export type InvoiceType =
   | 'unknown_type'
   | 'periodic'
   | 'purchase'
+  | 'credit_note'
 
 export type ListChargesRequestOrderBy =
   | 'start_date_asc'
@@ -354,7 +355,7 @@ export type ExportInvoicesRequest = {
    */
   billingPeriodStartBefore?: Date
   /**
-   * Invoice type. It can either be `periodic` or `purchase`.
+   * Invoice type. It can either be `periodic`, `purchase` or `credit_note`.
    */
   invoiceType?: InvoiceType
   /**
@@ -550,7 +551,7 @@ export type ListInvoicesRequest = {
    */
   billingPeriodStartBefore?: Date
   /**
-   * Invoice type. It can either be `periodic` or `purchase`.
+   * Invoice type. It can either be `periodic`, `purchase` or `credit_note`.
    */
   invoiceType?: InvoiceType
   /**
