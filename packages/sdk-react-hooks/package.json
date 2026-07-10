@@ -246,6 +246,10 @@
     "./annotationsv1": {
       "default": "./dist/queries/annotationsv1/generated/index.js",
       "types": "./dist/queries/annotationsv1/generated/index.d.ts"
+    },
+    "./autoscalingv1alpha2": {
+      "default": "./dist/queries/autoscalingv1alpha2/generated/index.js",
+      "types": "./dist/queries/autoscalingv1alpha2/generated/index.d.ts"
     }
   },
   "scripts": {

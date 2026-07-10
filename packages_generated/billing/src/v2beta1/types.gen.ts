@@ -116,9 +116,17 @@ export interface Charge {
    */
   organizationId: string
   /**
+   * Name of the charged organization.
+   */
+  organizationName: string
+  /**
    * ID of the charged project.
    */
   projectId: string
+  /**
+   * Name of the charged project.
+   */
+  projectName: string
   /**
    * ID of the SKU the charge is priced with.
    */

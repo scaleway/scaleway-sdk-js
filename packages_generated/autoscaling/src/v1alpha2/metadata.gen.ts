@@ -1,0 +1,80 @@
+// This file was automatically generated. DO NOT EDIT.
+// If you have any remark or suggestion do not hesitate to open an issue.
+
+export const queriesMetadata = {
+  namespace: 'autoscaling',
+  version: 'v1alpha2',
+  folderName: 'autoscalingv1alpha2',
+  services: [
+    {
+      apiClass: 'API',
+      methods: [
+        {
+          methodName: 'listGroups',
+          protoName: 'ListGroups',
+          paramsType: 'ListGroupsRequest',
+          returnType: 'ListGroupsResponse',
+          isList: true,
+          paginationType: 'cursor',
+          pageParamKey: 'pageToken',
+          listItemType: 'GroupSummary',
+          nextPageField: 'nextPageToken',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'getGroup',
+          protoName: 'GetGroup',
+          paramsType: 'GetGroupRequest',
+          returnType: 'Group',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+          hasWaiter: true,
+        },
+        {
+          methodName: 'listLogs',
+          protoName: 'ListLogs',
+          paramsType: 'ListLogsRequest',
+          returnType: 'ListLogsResponse',
+          isList: true,
+          paginationType: 'cursor',
+          pageParamKey: 'pageToken',
+          listItemType: 'Log',
+          nextPageField: 'nextPageToken',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listServers',
+          protoName: 'ListServers',
+          paramsType: 'ListServersRequest',
+          returnType: 'ListServersResponse',
+          isList: true,
+          paginationType: 'cursor',
+          pageParamKey: 'pageToken',
+          listItemType: 'Server',
+          nextPageField: 'nextPageToken',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'listAlerts',
+          protoName: 'ListAlerts',
+          paramsType: 'ListAlertsRequest',
+          returnType: 'ListAlertsResponse',
+          isList: true,
+          paginationType: 'cursor',
+          pageParamKey: 'pageToken',
+          listItemType: 'Alert',
+          nextPageField: 'nextPageToken',
+          isPrivate: false,
+          description: '"',
+        },
+      ],
+    },
+  ],
+} as const
+
+export type QueriesMetadata = typeof queriesMetadata

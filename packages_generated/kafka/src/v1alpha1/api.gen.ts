@@ -53,7 +53,7 @@ const jsonContentHeaders = {
 /**
  * Clusters for Apache Kafka®.
 
-This API allows you to manage your Clusters for Apache Kafka®. This product is currently in Public Beta.
+This API allows you to manage your Clusters for Apache Kafka®.
  */
 export class API extends ParentAPI {
   /**
