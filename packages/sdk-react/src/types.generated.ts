@@ -5,6 +5,7 @@ import type { Annotationsv1 } from '@scaleway/sdk-annotations'
 import type { Applesiliconv1alpha1 } from '@scaleway/sdk-applesilicon'
 import type { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
 import type { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
+import type { Autoscalingv1alpha2 } from '@scaleway/sdk-autoscaling'
 import type { Baremetalv1 } from '@scaleway/sdk-baremetal'
 import type { Baremetalv3 } from '@scaleway/sdk-baremetal'
 import type { Billingv2 } from '@scaleway/sdk-billing'
@@ -65,6 +66,7 @@ export type APISdk = {
   applesiliconv1alpha1PrivateNetwork: Applesiliconv1alpha1.PrivateNetworkAPI
   auditTrailv1alpha1: AuditTrailv1alpha1.API
   autoscalingv1alpha1: Autoscalingv1alpha1.API
+  autoscalingv1alpha2: Autoscalingv1alpha2.API
   baremetalv1: Baremetalv1.API
   baremetalv1PrivateNetwork: Baremetalv1.PrivateNetworkAPI
   baremetalv3PrivateNetwork: Baremetalv3.PrivateNetworkAPI
