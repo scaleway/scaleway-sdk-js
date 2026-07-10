@@ -6,7 +6,7 @@ import { Accountv3 } from '@scaleway/sdk-account'
 import { Annotationsv1 } from '@scaleway/sdk-annotations'
 import { Applesiliconv1alpha1 } from '@scaleway/sdk-applesilicon'
 import { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
-import { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
+import { Autoscalingv1alpha1, Autoscalingv1alpha2 } from '@scaleway/sdk-autoscaling'
 import { Baremetalv1, Baremetalv3 } from '@scaleway/sdk-baremetal'
 import { Billingv2, Billingv2beta1 } from '@scaleway/sdk-billing'
 import { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
@@ -91,9 +91,10 @@ export const AuditTrail = {
 /**
  * @deprecated Direct version exports are deprecated. Use the 'Autoscaling' namespace instead (e.g., Autoscaling.v1).
  */
-export { Autoscalingv1alpha1 }
+export { Autoscalingv1alpha1, Autoscalingv1alpha2 }
 export const Autoscaling = {
   v1alpha1: Autoscalingv1alpha1,
+  v1alpha2: Autoscalingv1alpha2,
 }
 
 /**
