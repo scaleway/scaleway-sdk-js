@@ -46,6 +46,7 @@ export type ResourceType =
   | 'sedb_cluster'
   | 'msgq_cluster'
   | 'edge_vpc_endpoint'
+  | 'dviz_cluster'
 
 export interface Resource {
   /**

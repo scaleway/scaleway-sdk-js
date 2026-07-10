@@ -13,6 +13,7 @@ import { Blockv1, Blockv1alpha1 } from '@scaleway/sdk-block'
 import { Cockpitv1 } from '@scaleway/sdk-cockpit'
 import { Containerv1, Containerv1beta1 } from '@scaleway/sdk-container'
 import { Datalabv1beta1 } from '@scaleway/sdk-datalab'
+import { Datavizv1alpha1 } from '@scaleway/sdk-dataviz'
 import { Datawarehousev1beta1 } from '@scaleway/sdk-datawarehouse'
 import { Dediboxv1 } from '@scaleway/sdk-dedibox'
 import { Domainv2beta1 } from '@scaleway/sdk-domain'
@@ -145,6 +146,14 @@ export const Container = {
 export { Datalabv1beta1 }
 export const Datalab = {
   v1beta1: Datalabv1beta1,
+}
+
+/**
+ * @deprecated Direct version exports are deprecated. Use the 'Dataviz' namespace instead (e.g., Dataviz.v1).
+ */
+export { Datavizv1alpha1 }
+export const Dataviz = {
+  v1alpha1: Datavizv1alpha1,
 }
 
 /**
