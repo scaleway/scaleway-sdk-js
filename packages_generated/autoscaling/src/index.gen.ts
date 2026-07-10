@@ -4,3 +4,4 @@
  */
 
 export * as Autoscalingv1alpha1 from './v1alpha1/index.gen.js'
+export * as Autoscalingv1alpha2 from './v1alpha2/index.gen.js'
