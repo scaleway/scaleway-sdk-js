@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2026-07-13)
+
+
+### Features
+
+* **kafka:** remove references to Beta ([#3128](https://github.com/scaleway/scaleway-sdk-js/issues/3128)) ([eb96898](https://github.com/scaleway/scaleway-sdk-js/commit/eb96898b2ad2d6043dc2fe72609d86244e0b59de))
+
+
+
+
+
 ## 2.7.3 (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-kafka

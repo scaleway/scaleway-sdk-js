@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.16.0...@scaleway/sdk-product-catalog@2.17.0) (2026-07-13)
+
+
+### Features
+
+* **product_catalog:** add all serverless sub types in public and admin APIs ([#3122](https://github.com/scaleway/scaleway-sdk-js/issues/3122)) ([00f6968](https://github.com/scaleway/scaleway-sdk-js/commit/00f69680d8879935f38c8b0e65f7ddf09e119677))
+* **product_catalog:** add support for input cached tokens for generative APIs models ([#3119](https://github.com/scaleway/scaleway-sdk-js/issues/3119)) ([280ee96](https://github.com/scaleway/scaleway-sdk-js/commit/280ee9652fbb7d21512fc76c3757d1a03627038a))
+
+
+
+
+
 # [2.16.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.15.0...@scaleway/sdk-product-catalog@2.16.0) (2026-07-06)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2026-07-13)
+
+
+### Features
+
+* **billing:** add credit_note as invoice type ([#3125](https://github.com/scaleway/scaleway-sdk-js/issues/3125)) ([20549ee](https://github.com/scaleway/scaleway-sdk-js/commit/20549eeec7fbe1e9751e0612b837d30adeef7b5a))
+* **billing:** add organization_name and project_name to FinOpsApi's Charge ([#3129](https://github.com/scaleway/scaleway-sdk-js/issues/3129)) ([08de47e](https://github.com/scaleway/scaleway-sdk-js/commit/08de47eebba2f69274eaa4079a41e6dbdb1cc74e))
+
+
+
+
+
 ## [2.7.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-billing@2.7.0...@scaleway/sdk-billing@2.7.1) (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-billing

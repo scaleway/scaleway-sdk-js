@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.7.0 (2026-07-13)
+
+
+### Features
+
+* **mailbox:** add update alias ([#3115](https://github.com/scaleway/scaleway-sdk-js/issues/3115)) ([4bc24b8](https://github.com/scaleway/scaleway-sdk-js/commit/4bc24b87b6a00400bb91a1565d6394c5416d3b97))
+
+
+
+
+
 ## [1.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-mailbox@1.6.0...@scaleway/sdk-mailbox@1.6.1) (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-mailbox

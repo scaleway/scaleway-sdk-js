@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.8.1...@scaleway/sdk-react@0.9.0) (2026-07-13)
+
+
+### Features
+
+* **autoscaling:** add v1alpha2 ([#3127](https://github.com/scaleway/scaleway-sdk-js/issues/3127)) ([fdb107d](https://github.com/scaleway/scaleway-sdk-js/commit/fdb107dcd09e2da0b439728c751bf40361de1c24))
+
+
+
+
+
 ## [0.8.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.8.0...@scaleway/sdk-react@0.8.1) (2026-07-06)
 
 **Note:** Version bump only for package @scaleway/sdk-react

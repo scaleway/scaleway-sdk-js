@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.14.0...@scaleway/sdk-k8s@2.15.0) (2026-07-13)
+
+
+### Features
+
+* **k8s:** add error message on Pool ([#3124](https://github.com/scaleway/scaleway-sdk-js/issues/3124)) ([31faf0e](https://github.com/scaleway/scaleway-sdk-js/commit/31faf0eb0443a18b84f3e1c7b1763a51bae9fd49))
+* **k8s:** deprecate unused route + fix documentation ([#3116](https://github.com/scaleway/scaleway-sdk-js/issues/3116)) ([51d111f](https://github.com/scaleway/scaleway-sdk-js/commit/51d111fb7c3f7b325dfcf53b6ea7702ab30b5c1a))
+
+
+
+
+
 # [2.14.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.13.0...@scaleway/sdk-k8s@2.14.0) (2026-07-06)
 
 
