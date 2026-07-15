@@ -40,8 +40,23 @@ export type ListUsersRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
-export interface EndpointPrivateNetworkDetails {
-  privateNetworkId: string
+export interface NodePrivateNetworkDetails {
+  /**
+   * Name  of the node.
+   */
+  nodeName: string
+  /**
+   * The ClickHouse shard to which the node belongs to.
+   */
+  shard: number
+  /**
+   * The ClickHouse replica to which the node belongs to.
+   */
+  replica: number
+  /**
+   * Private static IP address of that node.
+   */
+  ipAddress: string
 }
 
 
@@ -55,11 +70,15 @@ export interface EndpointService {
 }
 
 
-export interface EndpointSpecPrivateNetworkDetails {
+export interface PrivateNetworkDetails {
   /**
    * UUID of the Private Network.
    */
   privateNetworkId: string
+  /**
+   * List of nodes belonging to this private network and their details.
+   */
+  nodes: NodePrivateNetworkDetails[]
 }
 
 
@@ -85,7 +104,7 @@ export interface Endpoint {
    *
    * One-of ('details'): at most one of 'privateNetwork', 'public' could be set.
    */
-  privateNetwork?: EndpointPrivateNetworkDetails
+  privateNetwork?: PrivateNetworkDetails
   /**
    * Public endpoint details.
    *
@@ -105,7 +124,7 @@ export interface EndpointSpec {
    *
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointSpecPrivateNetworkDetails
+  privateNetwork?: PrivateNetworkDetails
 }
 
 
