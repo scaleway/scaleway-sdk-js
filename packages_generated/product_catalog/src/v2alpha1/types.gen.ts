@@ -525,6 +525,7 @@ export interface PublicCatalogProductPropertiesGenerativeApis {
   tasks: PublicCatalogProductPropertiesGenerativeApisTask[]
   tokenType: PublicCatalogProductPropertiesGenerativeApisTokenType
   supportedReasoningValues: string[]
+  defaultReasoningValue?: string
 }
 
 
