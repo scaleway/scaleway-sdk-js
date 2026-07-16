@@ -139,7 +139,7 @@ export type CreateFileSystemRequest = {
    */
   projectId?: string
   /**
-   * Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size.
+   * Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
    */
   size: number
   /**
@@ -343,8 +343,8 @@ export type UpdateFileSystemRequest = {
    */
   name?: string
   /**
-   * Size in bytes, with a granularity of 100 GB (10^11 bytes).
-Must be compliant with the minimum (100 GB) and maximum (10 TB) allowed size.
+   * Size in bytes, with a granularity in GB (10^9 bytes).
+Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
    */
   size?: number
   /**

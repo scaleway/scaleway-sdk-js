@@ -18,6 +18,9 @@ export type ProductCategory =
   | 'managed_redis'
   | 'managed_inference'
   | 'generative_apis'
+  | 'serverless_functions'
+  | 'serverless_containers'
+  | 'serverless_jobs'
 
 export type ReportType =
   | 'unknown_report_type'
@@ -33,6 +36,7 @@ export type ServiceCategory =
   | 'containers'
   | 'databases'
   | 'ai'
+  | 'serverless'
 
 export interface Impact {
   /**
