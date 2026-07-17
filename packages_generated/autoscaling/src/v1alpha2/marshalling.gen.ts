@@ -99,6 +99,7 @@ const unmarshalAlert = (data: unknown): Alert => {
   return {
     closedAt: unmarshalDate(data.closed_at),
     failingQuotas: data.failing_quotas,
+    groupId: data.group_id,
     openedAt: unmarshalDate(data.opened_at),
     type: data.type,
   } as Alert

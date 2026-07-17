@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import {
   API as ParentAPI,
+  resolveOneOf,
   urlParams,
   validatePathParam,
   waitForResource,
@@ -179,9 +180,10 @@ export class API extends ParentAPI {
     this.client.fetch<ListLogsResponse>(
       {
         method: 'GET',
-        path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}/logs`,
+        path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/logs`,
         urlParams: urlParams(
           ['end_time', request.endTime],
+          ['group_id', request.groupId],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
           ['start_time', request.startTime],
@@ -201,8 +203,9 @@ export class API extends ParentAPI {
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
-        path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}/servers`,
+        path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         urlParams: urlParams(
+          ['group_id', request.groupId],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
@@ -217,14 +220,22 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListAlertsRequest}
    * @returns A Promise of ListAlertsResponse
    */
-  listAlerts = (request: Readonly<ListAlertsRequest>) =>
+  listAlerts = (request: Readonly<ListAlertsRequest> = {}) =>
     this.client.fetch<ListAlertsResponse>(
       {
         method: 'GET',
-        path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}/alerts`,
+        path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/alerts`,
         urlParams: urlParams(
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['page_token', request.pageToken],
+          ['page_token', request.pageToken],  
+          ...Object.entries(resolveOneOf([
+            {param: 'group_id',
+              value: request.groupId,
+            },
+            {default: this.client.settings.defaultProjectId,param: 'project_id',
+              value: request.projectId,
+            },
+          ])),
         ),
       },
       unmarshalListAlertsResponse,
