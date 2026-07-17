@@ -111,6 +111,10 @@ export interface Endpoint {
    * One-of ('details'): at most one of 'privateNetwork', 'public' could be set.
    */
   public?: EndpointPublicDetails
+  /**
+   * Region of the deployment.
+   */
+  region: ScwRegion
 }
 
 
@@ -137,6 +141,14 @@ export interface Database {
    * Size of the database.
    */
   size: number
+  /**
+   * Identifier of the deployment.
+   */
+  deploymentId: string
+  /**
+   * Region of the deployment.
+   */
+  region: ScwRegion
 }
 
 
@@ -253,6 +265,14 @@ export interface User {
    * Indicates if the user is an administrator.
    */
   isAdmin: boolean
+  /**
+   * Identifier of the deployment.
+   */
+  deploymentId: string
+  /**
+   * Region of the deployment.
+   */
+  region: ScwRegion
 }
 
 
