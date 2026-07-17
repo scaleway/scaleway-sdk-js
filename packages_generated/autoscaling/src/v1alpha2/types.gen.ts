@@ -111,6 +111,10 @@ export interface Alert {
    */
   closedAt?: Date
   /**
+   * ID of the group.
+   */
+  groupId: string
+  /**
    * List of quota names that are exceeded (for quotas_exceeded alerts).
    */
   failingQuotas: string[]
@@ -408,9 +412,18 @@ export type ListAlertsRequest = {
    * Zone to target. If none is passed will use default zone from the config.
    */
   zone?: ScwZone
-  groupId: string
+  /**
+   *
+   * One-of ('scope'): at most one of 'groupId', 'projectId' could be set.
+   */
+  groupId?: string
   pageToken?: string
   pageSize?: number
+  /**
+   *
+   * One-of ('scope'): at most one of 'groupId', 'projectId' could be set.
+   */
+  projectId?: string
 }
 
 
