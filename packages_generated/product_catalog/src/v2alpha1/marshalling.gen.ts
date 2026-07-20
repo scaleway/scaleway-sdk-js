@@ -43,6 +43,8 @@ import type {
   PublicCatalogProductPropertiesGenerativeApis,
   PublicCatalogProductPropertiesHardware,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductPropertiesInstanceLocalSSDSnapshot,
+  PublicCatalogProductPropertiesInstanceLocalSSDStorage,
   PublicCatalogProductPropertiesKeyManager,
   PublicCatalogProductPropertiesKubernetes,
   PublicCatalogProductPropertiesLoadBalancer,
@@ -593,6 +595,28 @@ const unmarshalPublicCatalogProductPropertiesInstance = (data: unknown): PublicC
   } as PublicCatalogProductPropertiesInstance
 }
 
+const unmarshalPublicCatalogProductPropertiesInstanceLocalSSDSnapshot = (data: unknown): PublicCatalogProductPropertiesInstanceLocalSSDSnapshot => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesInstanceLocalSSDSnapshot' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesInstanceLocalSSDSnapshot
+}
+
+const unmarshalPublicCatalogProductPropertiesInstanceLocalSSDStorage = (data: unknown): PublicCatalogProductPropertiesInstanceLocalSSDStorage => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesInstanceLocalSSDStorage' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesInstanceLocalSSDStorage
+}
+
 const unmarshalPublicCatalogProductPropertiesKeyManager = (data: unknown): PublicCatalogProductPropertiesKeyManager => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -820,6 +844,8 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     generativeApis: data.generative_apis ? unmarshalPublicCatalogProductPropertiesGenerativeApis(data.generative_apis) : undefined,
     hardware: data.hardware ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware) : undefined,
     instance: data.instance ? unmarshalPublicCatalogProductPropertiesInstance(data.instance) : undefined,
+    instanceLocalSsdSnapshot: data.instance_local_ssd_snapshot ? unmarshalPublicCatalogProductPropertiesInstanceLocalSSDSnapshot(data.instance_local_ssd_snapshot) : undefined,
+    instanceLocalSsdStorage: data.instance_local_ssd_storage ? unmarshalPublicCatalogProductPropertiesInstanceLocalSSDStorage(data.instance_local_ssd_storage) : undefined,
     keyManager: data.key_manager ? unmarshalPublicCatalogProductPropertiesKeyManager(data.key_manager) : undefined,
     kubernetes: data.kubernetes ? unmarshalPublicCatalogProductPropertiesKubernetes(data.kubernetes) : undefined,
     loadBalancer: data.load_balancer ? unmarshalPublicCatalogProductPropertiesLoadBalancer(data.load_balancer) : undefined,
