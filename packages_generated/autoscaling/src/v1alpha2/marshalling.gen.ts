@@ -192,12 +192,16 @@ const unmarshalGroupSummary = (data: unknown): GroupSummary => {
     id: data.id,
     latestOpenAlert: data.latest_open_alert ? unmarshalAlert(data.latest_open_alert) : undefined,
     loadBalancerId: data.load_balancer_id,
+    maximumSize: data.maximum_size,
+    minimumSize: data.minimum_size,
     name: data.name,
     projectId: data.project_id,
+    scalingPolicyTargetType: data.scaling_policy_target_type,
     status: data.status,
     tags: data.tags,
     templateId: data.template_id,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as GroupSummary
 }
 

@@ -35,6 +35,8 @@ export type {
   PublicCatalogProductPropertiesHardwareRAMECCType,
   PublicCatalogProductPropertiesHardwareStorage,
   PublicCatalogProductPropertiesInstance,
+  PublicCatalogProductPropertiesInstanceLocalSSDSnapshot,
+  PublicCatalogProductPropertiesInstanceLocalSSDStorage,
   PublicCatalogProductPropertiesKeyManager,
   PublicCatalogProductPropertiesKubernetes,
   PublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType,

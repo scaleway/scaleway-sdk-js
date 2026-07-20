@@ -91,6 +91,7 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     id: data.id,
     privateNetwork: data.private_network ? unmarshalPrivateNetworkDetails(data.private_network) : undefined,
     public: data.public ? unmarshalEndpointPublicDetails(data.public) : undefined,
+    region: data.region,
     services: unmarshalArrayOfObject(data.services, unmarshalEndpointService),
   } as Endpoint
 }
@@ -103,7 +104,9 @@ export const unmarshalDatabase = (data: unknown): Database => {
   }
 
   return {
+    deploymentId: data.deployment_id,
     name: data.name,
+    region: data.region,
     size: data.size,
   } as Database
 }
@@ -144,8 +147,10 @@ export const unmarshalUser = (data: unknown): User => {
   }
 
   return {
+    deploymentId: data.deployment_id,
     isAdmin: data.is_admin,
     name: data.name,
+    region: data.region,
   } as User
 }
 
