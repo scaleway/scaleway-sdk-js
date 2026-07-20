@@ -22,6 +22,7 @@ export type {
   GroupScalingPolicyScalingPolicyFixedSize,
   GroupScalingPolicyScalingPolicyMemoryTarget,
   GroupSummary,
+  GroupSummaryScalingPolicyTargetType,
   ListAlertsRequest,
   ListAlertsResponse,
   ListGroupsRequest,
