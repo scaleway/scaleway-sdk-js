@@ -8,13 +8,13 @@ export type AlertAlertType =
   | 'quotas_exceeded'
   | 'out_of_stock'
   | 'invalid_template'
-  | 'load_balancer_misconfigured'
   | 'template_not_found'
   | 'invalid_instance'
   | 'template_permissions_denied'
   | 'load_balancer_not_found'
   | 'load_balancer_permissions_denied'
   | 'backend_not_found'
+  | 'backend_permissions_denied'
 
 export type GroupGroupStatus =
   | 'unknown_group_status'
@@ -30,6 +30,12 @@ export type GroupLoadBalancerConfigurationBackendAddressFamily =
   | 'unknown_address_family'
   | 'ipv4'
   | 'ipv6'
+
+export type GroupSummaryScalingPolicyTargetType =
+  | 'unknown_scaling_policy_target_type'
+  | 'fixed_size'
+  | 'cpu_target'
+  | 'memory_target'
 
 export type ListGroupsRequestOrderBy =
   | 'created_at_desc'
@@ -260,6 +266,22 @@ export interface GroupSummary {
    * Most recent active alert if any.
    */
   latestOpenAlert?: Alert
+  /**
+   * The minimum number of instances in the group.
+   */
+  minimumSize: number
+  /**
+   * The maximum number of instances in the group.
+   */
+  maximumSize: number
+  /**
+   * Defines which metric the group uses for scaling (cpu, memory, or fixed size).
+   */
+  scalingPolicyTargetType: GroupSummaryScalingPolicyTargetType
+  /**
+   * Availability zone of the group.
+   */
+  zone: ScwZone
 }
 
 

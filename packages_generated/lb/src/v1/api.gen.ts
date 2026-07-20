@@ -250,6 +250,7 @@ export class ZonedAPI extends ParentAPI {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs`,
         urlParams: urlParams(
+          ['lb_ids', request.lbIds],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
@@ -1363,6 +1364,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs`,
         urlParams: urlParams(
+          ['lb_ids', request.lbIds],
           ['name', request.name],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
