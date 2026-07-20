@@ -130,6 +130,7 @@ export const unmarshalSearchResourcesResponse = (data: unknown): SearchResources
   }
 
   return {
+    nextPageToken: data.next_page_token,
     resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
   } as SearchResourcesResponse
 }

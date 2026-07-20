@@ -2021,6 +2021,10 @@ export type ListLbsRequest = {
    * Filter by tag, only Load Balancers with one or more matching tags will be returned.
    */
   tags?: string[]
+  /**
+   * Filter by lb_ids, only Load Balancers with these IDs will be returned.
+   */
+  lbIds?: string[]
 }
 
 
@@ -3458,6 +3462,10 @@ export type ZonedApiListLbsRequest = {
    * Filter by tag, only Load Balancers with one or more matching tags will be returned.
    */
   tags?: string[]
+  /**
+   * Filter by lb_ids, only Load Balancers with these IDs will be returned.
+   */
+  lbIds?: string[]
 }
 
 

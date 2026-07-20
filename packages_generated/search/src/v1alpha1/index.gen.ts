@@ -14,6 +14,7 @@ export type {
   Resource,
   ResourceType,
   SearchResourcesRequest,
+  SearchResourcesRequestOrderBy,
   SearchResourcesResponse,
   ServerlessContainersContainerInfo,
   ServerlessFunctionsFunctionInfo,

@@ -1821,6 +1821,10 @@ export type HostingApiUpdateHostingRequest = {
    * Whether the hosting is protected or not.
    */
   protected?: boolean
+  /**
+   * Whether the hosting is deleted at the end of the commitment period.
+   */
+  deleteHostingAfterCommitment?: boolean
 }
 
 
