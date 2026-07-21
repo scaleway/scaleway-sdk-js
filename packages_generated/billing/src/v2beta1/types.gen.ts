@@ -199,6 +199,14 @@ export interface ListConsumptionsResponseConsumption {
    * Organization ID of the consumer for this consumption.
    */
   consumerId: string
+  /**
+   * Project name of the consumpiton.
+   */
+  projectName: string
+  /**
+   * Organization name of the consumer for this consumption.
+   */
+  organizationName: string
 }
 
 
