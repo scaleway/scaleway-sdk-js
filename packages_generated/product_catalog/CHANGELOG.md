@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.17.0...@scaleway/sdk-product-catalog@2.18.0) (2026-07-20)
+
+
+### Features
+
+* **product_catalog:** add default reasoning value for generative models in our APIs ([#3136](https://github.com/scaleway/scaleway-sdk-js/issues/3136)) ([3b05a65](https://github.com/scaleway/scaleway-sdk-js/commit/3b05a650057bd949ff2c0a24e1aa3d83c3ff619a))
+
+
+
+
+
 # [2.17.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.16.0...@scaleway/sdk-product-catalog@2.17.0) (2026-07-13)
 
 
