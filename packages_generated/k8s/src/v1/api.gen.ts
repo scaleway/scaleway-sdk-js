@@ -715,7 +715,6 @@ This will drain and replace the nodes in that pool.
   /**
    * Replace a Node in a Cluster. Replace a specific Node. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
    *
-   * @deprecated
    * @param request - The request {@link ReplaceNodeRequest}
    * @returns A Promise of Node
    */
@@ -750,7 +749,7 @@ This will drain and replace the nodes in that pool.
 
   
   /**
-   * Delete a Node in a Cluster. Delete a specific Node. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
+   * Delete a Node in a Cluster. Delete a specific Node. Pool size is reduced by 1. The node will first be drained and pods will be rescheduled onto another node. Note that when there is not enough space to reschedule all the pods (such as in a one-node cluster, or with specific constraints), disruption of your applications may occur.
    *
    * @param request - The request {@link DeleteNodeRequest}
    * @returns A Promise of Node
@@ -761,7 +760,6 @@ This will drain and replace the nodes in that pool.
         method: 'DELETE',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}`,
         urlParams: urlParams(
-          ['replace', request.replace],
           ['skip_drain', request.skipDrain],
         ),
       },

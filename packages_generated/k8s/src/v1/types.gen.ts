@@ -1305,10 +1305,6 @@ export type DeleteNodeRequest = {
    * Skip draining node from its workload (Note: this parameter is currently inactive).
    */
   skipDrain: boolean
-  /**
-   * @deprecated Add a new node after the deletion of this node.
-   */
-  replace: boolean
 }
 
 
