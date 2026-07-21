@@ -53,6 +53,8 @@ export class API extends ParentAPI {
     toApiLocality({
       zones: [
         'fr-par-1',
+        'fr-par-2',
+        'fr-par-3',
       ],
     })
   
