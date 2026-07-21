@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-autoscaling@2.6.0...@scaleway/sdk-autoscaling@2.6.1) (2026-07-20)
+
+
+### Bug Fixes
+
+* **autoscaling:** document group_id for Alert messages ([#3137](https://github.com/scaleway/scaleway-sdk-js/issues/3137)) ([c8ad420](https://github.com/scaleway/scaleway-sdk-js/commit/c8ad4209a87402dd48a75b714080ddc035c41597))
+
+
+
+
+
 # 2.6.0 (2026-07-13)
 
 
