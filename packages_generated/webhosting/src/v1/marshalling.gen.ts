@@ -1018,6 +1018,7 @@ export const marshalHostingApiUpdateHostingRequest = (
   request: HostingApiUpdateHostingRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  delete_hosting_after_commitment: request.deleteHostingAfterCommitment,
   email: request.email,
   offer_id: request.offerId,
   offer_options: ((request.offerOptions !== undefined) ?  request.offerOptions.map(elt => marshalOfferOptionRequest(elt, defaults)): undefined),
