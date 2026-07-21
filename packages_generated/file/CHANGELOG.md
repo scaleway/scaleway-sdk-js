@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.8.2 (2026-07-20)
+
+
+### Bug Fixes
+
+* **file:** update create/update limits of filesystems ([#3134](https://github.com/scaleway/scaleway-sdk-js/issues/3134)) ([179f465](https://github.com/scaleway/scaleway-sdk-js/commit/179f465b332e4d981a4dde6a38dd9b2435aacf90))
+
+
+
+
+
 ## 2.8.1 (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-file
