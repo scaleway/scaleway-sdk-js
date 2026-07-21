@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.12.0 (2026-07-20)
+
+
+### Features
+
+* **environmental_footprint:** add serverless products to EFP user API ([#3133](https://github.com/scaleway/scaleway-sdk-js/issues/3133)) ([adb9137](https://github.com/scaleway/scaleway-sdk-js/commit/adb9137bf24cd4bbb05fe75d3d67242069bade4f))
+
+
+
+
+
 ## [2.11.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-environmental-footprint@2.11.0...@scaleway/sdk-environmental-footprint@2.11.1) (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-environmental-footprint
