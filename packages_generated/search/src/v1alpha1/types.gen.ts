@@ -99,6 +99,16 @@ export type ResourceType =
   | 'sedb_cluster'
   | 'autoscaling_group'
 
+export type SearchResourcesRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'modified_at_asc'
+  | 'modified_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+  | 'type_asc'
+  | 'type_desc'
+
 export interface BrmServerInfo {
   ip: string
 }
@@ -260,6 +270,18 @@ export type SearchResourcesRequest = {
    * Filter resources modified before this timestamp.
    */
   modifiedBefore?: Date
+  /**
+   * Leave empty or omit to fetch the first page.
+   */
+  pageToken?: string
+  /**
+   * Number of resources to retrieve per page.
+   */
+  pageSize?: number
+  /**
+   * Sort order in the response.
+   */
+  orderBy?: SearchResourcesRequestOrderBy
 }
 
 
@@ -268,6 +290,10 @@ export interface SearchResourcesResponse {
    * Top resources found.
    */
   resources: Resource[]
+  /**
+   * If this string is empty, it means there are no more pages available.
+   */
+  nextPageToken: string
 }
 
 
