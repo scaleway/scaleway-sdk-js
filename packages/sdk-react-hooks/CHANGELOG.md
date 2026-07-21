@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.11.0...@scaleway/sdk-react-hooks@0.11.1) (2026-07-20)
+
+**Note:** Version bump only for package @scaleway/sdk-react-hooks
+
+
+
+
+
 # [0.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.10.1...@scaleway/sdk-react-hooks@0.11.0) (2026-07-13)
 
 

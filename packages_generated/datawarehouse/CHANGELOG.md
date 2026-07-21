@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.2 (2026-07-20)
+
+
+### Bug Fixes
+
+* **datawarehouse:** add NodePrivateNetworkDetails message ([#3130](https://github.com/scaleway/scaleway-sdk-js/issues/3130)) ([950400a](https://github.com/scaleway/scaleway-sdk-js/commit/950400a2501218e0e566f5c7a5c7cd59d27c69c4))
+
+
+
+
+
 ## [2.9.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-datawarehouse@2.9.0...@scaleway/sdk-datawarehouse@2.9.1) (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-datawarehouse
