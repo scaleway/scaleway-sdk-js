@@ -2,12 +2,15 @@
 import { isJSONObject, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, } from '@scaleway/sdk-client'
 import type { DefaultValues } from '@scaleway/sdk-client'
 import type {
+  CustomAlertRule,
   ExportJobS3,
   ExportJobStatus,
   ExportJob,
   AlertRule,
   DisableAlertRulesResponse,
+  DisableCustomAlertRulesResponse,
   EnableAlertRulesResponse,
+  EnableCustomAlertRulesResponse,
   AccountContractSignatureInfoAccountContractInfo,
   AccountContractSignatureInfo,
   AccountOrganizationInfo,
@@ -65,6 +68,7 @@ import type {
   SystemEvent,
   ListCombinedEventsResponseCombinedEvent,
   ListCombinedEventsResponse,
+  ListCustomAlertRulesResponse,
   ListEventsResponse,
   ListExportJobsResponse,
   ProductService,
@@ -72,11 +76,38 @@ import type {
   ListProductsResponse,
   ListSystemEventsResponse,
   SetEnabledAlertRulesResponse,
+  SetEnabledCustomAlertRulesResponse,
+  CreateCustomAlertRuleRequest,
   CreateExportJobRequest,
   DisableAlertRulesRequest,
+  DisableCustomAlertRulesRequest,
   EnableAlertRulesRequest,
+  EnableCustomAlertRulesRequest,
   SetEnabledAlertRulesRequest,
+  SetEnabledCustomAlertRulesRequest,
+  UpdateCustomAlertRuleRequest,
 } from './types.gen.js'
+
+export const unmarshalCustomAlertRule = (data: unknown): CustomAlertRule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CustomAlertRule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    description: data.description,
+    evaluationWindow: data.evaluation_window,
+    id: data.id,
+    name: data.name,
+    occurrences: data.occurrences,
+    query: data.query,
+    severity: data.severity,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as CustomAlertRule
+}
 
 const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
   if (!isJSONObject(data)) {
@@ -152,6 +183,18 @@ export const unmarshalDisableAlertRulesResponse = (data: unknown): DisableAlertR
   } as DisableAlertRulesResponse
 }
 
+export const unmarshalDisableCustomAlertRulesResponse = (data: unknown): DisableCustomAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DisableCustomAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    customAlertRules: unmarshalArrayOfObject(data.custom_alert_rules, unmarshalCustomAlertRule),
+  } as DisableCustomAlertRulesResponse
+}
+
 export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -162,6 +205,18 @@ export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRul
   return {
     alertRules: unmarshalArrayOfObject(data.alert_rules, unmarshalAlertRule),
   } as EnableAlertRulesResponse
+}
+
+export const unmarshalEnableCustomAlertRulesResponse = (data: unknown): EnableCustomAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'EnableCustomAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    customAlertRules: unmarshalArrayOfObject(data.custom_alert_rules, unmarshalCustomAlertRule),
+  } as EnableCustomAlertRulesResponse
 }
 
 const unmarshalAccountContractSignatureInfoAccountContractInfo = (data: unknown): AccountContractSignatureInfoAccountContractInfo => {
@@ -969,6 +1024,19 @@ export const unmarshalListCombinedEventsResponse = (data: unknown): ListCombined
   } as ListCombinedEventsResponse
 }
 
+export const unmarshalListCustomAlertRulesResponse = (data: unknown): ListCustomAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListCustomAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    customAlertRules: unmarshalArrayOfObject(data.custom_alert_rules, unmarshalCustomAlertRule),
+    totalCount: data.total_count,
+  } as ListCustomAlertRulesResponse
+}
+
 export const unmarshalListEventsResponse = (data: unknown): ListEventsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1060,6 +1128,31 @@ export const unmarshalSetEnabledAlertRulesResponse = (data: unknown): SetEnabled
   } as SetEnabledAlertRulesResponse
 }
 
+export const unmarshalSetEnabledCustomAlertRulesResponse = (data: unknown): SetEnabledCustomAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetEnabledCustomAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    customAlertRules: unmarshalArrayOfObject(data.custom_alert_rules, unmarshalCustomAlertRule),
+  } as SetEnabledCustomAlertRulesResponse
+}
+
+export const marshalCreateCustomAlertRuleRequest = (
+  request: CreateCustomAlertRuleRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  evaluation_window: request.evaluationWindow,
+  name: request.name,
+  occurrences: request.occurrences,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  query: request.query,
+  severity: request.severity,
+})
+
 const marshalExportJobS3 = (
   request: ExportJobS3,
   defaults: DefaultValues,
@@ -1093,11 +1186,27 @@ export const marshalDisableAlertRulesRequest = (
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
 })
 
+export const marshalDisableCustomAlertRulesRequest = (
+  request: DisableCustomAlertRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  custom_alert_rule_ids: request.customAlertRuleIds,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
 export const marshalEnableAlertRulesRequest = (
   request: EnableAlertRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   alert_rule_ids: request.alertRuleIds,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalEnableCustomAlertRulesRequest = (
+  request: EnableCustomAlertRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  custom_alert_rule_ids: request.customAlertRuleIds,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
 })
 
@@ -1107,4 +1216,20 @@ export const marshalSetEnabledAlertRulesRequest = (
 ): Record<string, unknown> => ({
   enabled_alert_rule_ids: request.enabledAlertRuleIds,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalSetEnabledCustomAlertRulesRequest = (
+  request: SetEnabledCustomAlertRulesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  enabled_custom_alert_rule_ids: request.enabledCustomAlertRuleIds,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalUpdateCustomAlertRuleRequest = (
+  request: UpdateCustomAlertRuleRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  description: request.description,
+  name: request.name,
 })

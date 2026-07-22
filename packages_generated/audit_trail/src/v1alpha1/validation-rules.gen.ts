@@ -1,6 +1,24 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
+export const CreateCustomAlertRuleRequest = {
+  description: {
+    maxLength: 2048,
+  },
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$/,
+  },
+  occurrences: {
+    greaterThan: 0,
+  },
+  query: {
+    maxLength: 2048,
+    minLength: 1,
+  },
+}
+
 export const CreateExportJobRequest = {
   name: {
     maxLength: 255,
@@ -66,5 +84,15 @@ export const ListSystemEventsRequest = {
   pageSize: {
     greaterThanOrEqual: 1,
     lessThanOrEqual: 1000,
+  },
+}
+
+export const UpdateCustomAlertRuleRequest = {
+  description: {
+    maxLength: 2048,
+  },
+  name: {
+    maxLength: 255,
+    pattern: /^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$/,
   },
 }
