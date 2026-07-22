@@ -37,6 +37,20 @@ export type AuthenticationEventResult =
   | 'success'
   | 'failure'
 
+export type CustomAlertRuleSeverity =
+  | 'unknown_severity'
+  | 'info'
+  | 'error'
+  | 'warning'
+  | 'critical'
+
+export type CustomAlertRuleStatus =
+  | 'unknown_status'
+  | 'enabled'
+  | 'disabled'
+  | 'enabling'
+  | 'disabling'
+
 export type ExportJobStatusCode =
   | 'unknown_code'
   | 'success'
@@ -907,6 +921,50 @@ export interface AlertRule {
 }
 
 
+export interface CustomAlertRule {
+  /**
+   * ID of the alert rule.
+   */
+  id: string
+  /**
+   * Name of the alert rule.
+   */
+  name: string
+  /**
+   * (Optional) Description of the alert rule.
+   */
+  description?: string
+  /**
+   * Current status of the alert rule.
+   */
+  status: CustomAlertRuleStatus
+  /**
+   * The Common Expression Language (CEL) string defining the logic for the alert rule.
+   */
+  query: string
+  /**
+   * The duration of time over which to evaluate the rule (how far back to look for matching events).
+   */
+  evaluationWindow?: string
+  /**
+   * The minimum number of matched occurrences required within the evaluation window to trigger the alert.
+   */
+  occurrences: number
+  /**
+   * The severity level assigned to the custom alert rule.
+   */
+  severity: CustomAlertRuleSeverity
+  /**
+   * Custom alert rule creation date.
+   */
+  createdAt?: Date
+  /**
+   * Custom alert rule last modification date.
+   */
+  updatedAt?: Date
+}
+
+
 export interface ListCombinedEventsResponseCombinedEvent {
   /**
    *
@@ -980,6 +1038,42 @@ export interface Product {
 }
 
 
+export type CreateCustomAlertRuleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * Name of the custom alert rule.
+   */
+  name: string
+  /**
+   * (Optional) Description of the custom alert rule.
+   */
+  description?: string
+  /**
+   * The Common Expression Language (CEL) string defining the logic for the alert rule.
+   */
+  query: string
+  /**
+   * The duration of time over which to evaluate the rule (how far back to look for matching events).
+   */
+  evaluationWindow?: string
+  /**
+   * The minimum number of matched occurrences required within the evaluation window to trigger the alert.
+   */
+  occurrences: number
+  /**
+   * (Optional) The severity level assigned to the custom alert rule. By default, the severity will be set to info.
+   */
+  severity?: CustomAlertRuleSeverity
+}
+
+
 export type CreateExportJobRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1003,6 +1097,18 @@ export type CreateExportJobRequest = {
    * Tags of the export.
    */
   tags?: string[]
+}
+
+
+export type DeleteCustomAlertRuleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the custom alert rule to delete.
+   */
+  customAlertRuleId: string
 }
 
 
@@ -1036,9 +1142,33 @@ export type DisableAlertRulesRequest = {
 
 export interface DisableAlertRulesResponse {
   /**
-   * List of the rules that were disabled.
+   * List of the preconfigured rules that were disabled.
    */
   alertRules: AlertRule[]
+}
+
+
+export type DisableCustomAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * List of IDs of the custom rules to disable.
+   */
+  customAlertRuleIds?: string[]
+}
+
+
+export interface DisableCustomAlertRulesResponse {
+  /**
+   * List of the custom rules that were disabled.
+   */
+  customAlertRules: CustomAlertRule[]
 }
 
 
@@ -1060,9 +1190,33 @@ export type EnableAlertRulesRequest = {
 
 export interface EnableAlertRulesResponse {
   /**
-   * List of the rules that were enabled.
+   * List of the preconfigured rules that were enabled.
    */
   alertRules: AlertRule[]
+}
+
+
+export type EnableCustomAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * List of IDs of the custom rules to enable.
+   */
+  customAlertRuleIds?: string[]
+}
+
+
+export interface EnableCustomAlertRulesResponse {
+  /**
+   * List of the custom rules that were enabled.
+   */
+  customAlertRules: CustomAlertRule[]
 }
 
 
@@ -1101,7 +1255,7 @@ export type ListAlertRulesRequest = {
 
 export interface ListAlertRulesResponse {
   /**
-   * Single page of alert rules matching the requested criteria.
+   * Single page of preconfigured alert rules matching the requested criteria.
    */
   alertRules: AlertRule[]
   /**
@@ -1150,6 +1304,36 @@ export type ListCombinedEventsRequest = {
 export interface ListCombinedEventsResponse {
   events: ListCombinedEventsResponseCombinedEvent[]
   nextPageToken?: string
+}
+
+
+export type ListCustomAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * (Optional) Status of the custom alert rule.
+   */
+  status?: CustomAlertRuleStatus
+  page?: number
+  pageSize?: number
+}
+
+
+export interface ListCustomAlertRulesResponse {
+  /**
+   * Single page of custom alert rules matching the requested criteria.
+   */
+  customAlertRules: CustomAlertRule[]
+  /**
+   * Total count of custom alert rules matching the requested criteria.
+   */
+  totalCount: number
 }
 
 
@@ -1336,9 +1520,53 @@ export type SetEnabledAlertRulesRequest = {
 
 export interface SetEnabledAlertRulesResponse {
   /**
-   * List of the rules that were enabled.
+   * List of the preconfigured rules that were enabled.
    */
   alertRules: AlertRule[]
+}
+
+
+export type SetEnabledCustomAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * List of IDs of the custom rules that must be enabled after the update.
+   */
+  enabledCustomAlertRuleIds?: string[]
+}
+
+
+export interface SetEnabledCustomAlertRulesResponse {
+  /**
+   * List of the custom rules that were enabled.
+   */
+  customAlertRules: CustomAlertRule[]
+}
+
+
+export type UpdateCustomAlertRuleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the custom alert rule to update.
+   */
+  customAlertRuleId: string
+  /**
+   * (Optional) New name for the custom alert rule.
+   */
+  name?: string
+  /**
+   * (Optional) New description for the custom alert rule.
+   */
+  description?: string
 }
 
 

@@ -16,4 +16,7 @@ export { useAuditTrailv1alpha1APIListExportJobsAllQuery } from "./useAuditTrailv
 export { useAuditTrailv1alpha1APIListAlertRulesQuery } from "./useAuditTrailv1alpha1APIListAlertRulesQuery"
 export { useAuditTrailv1alpha1APIListAlertRulesInfiniteQuery } from "./useAuditTrailv1alpha1APIListAlertRulesInfiniteQuery"
 export { useAuditTrailv1alpha1APIListAlertRulesAllQuery } from "./useAuditTrailv1alpha1APIListAlertRulesAllQuery"
+export { useAuditTrailv1alpha1APIListCustomAlertRulesQuery } from "./useAuditTrailv1alpha1APIListCustomAlertRulesQuery"
+export { useAuditTrailv1alpha1APIListCustomAlertRulesInfiniteQuery } from "./useAuditTrailv1alpha1APIListCustomAlertRulesInfiniteQuery"
+export { useAuditTrailv1alpha1APIListCustomAlertRulesAllQuery } from "./useAuditTrailv1alpha1APIListCustomAlertRulesAllQuery"
 export { useAuditTrailv1alpha1APIReload } from "./useAuditTrailv1alpha1APIReload"
