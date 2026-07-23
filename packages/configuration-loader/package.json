@@ -19,8 +19,8 @@
     "access": "public"
   },
   "scripts": {
-    "typecheck": "tsgo --noEmit",
-    "type:generate": "tsgo --declaration -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
     "build": "vite build --config ../../vite.config.ts && pnpm run type:generate && pnpm run copy-test-fixtures",
     "copy-test-fixtures": "mkdir -p dist/__tests__/data && cp src/__tests__/data/*.yaml dist/__tests__/data/",
     "build:profile": "npx vite-bundle-visualizer -c ../../vite.config.ts"
