@@ -14,6 +14,7 @@
     "prebuild": "pnpm run generatePackages && pnpm run generateAlias && pnpm format",
     "build:packages": "pnpm turbo run build",
     "fix-import-extensions": "fix-import-extensions",
+    "fix-deps": "pnpm exec manypkg fix && pnpm sync-peer-deps",
     "build": "pnpm run build:packages && pnpm run fix-import-extensions",
     "typecheck": "pnpm turbo typecheck",
     "build:profile": "cross-env PROFILE=true pnpm run build",
@@ -21,9 +22,9 @@
     "doc": "typedoc",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
+    "format:generated": "oxfmt check --write packages_generated",
     "lint": "biome lint .",
     "check": "biome check .",
-    "prepare": "husky",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:junit": "vitest --reporter=junit --outputFile=test-report.junit.xml",
@@ -37,8 +38,8 @@
     "@repo/configs": "workspace:^",
     "@scaleway/generate-packages": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
-    "@scaleway/tsconfig": "1.1.4",
-    "@typescript/native-preview": "7.0.0-dev.20260420.1",
+    "@scaleway/sync-peer-deps": "1.0.3",
+    "@scaleway/tsconfig": "1.1.6",
     "@vitest/coverage-istanbul": "4.1.0",
     "@vitest/coverage-v8": "4.1.0",
     "@vitest/ui": "4.1.0",
@@ -48,20 +49,19 @@
     "cross-fetch": "4.1.0",
     "cz-conventional-changelog": "3.3.0",
     "esbuild-plugin-browserslist": "2.0.0",
-    "husky": "9.1.7",
     "jsdom": "29.0.2",
     "lerna": "9.0.7",
     "lint-staged": "16.3.2",
-    "oxfmt": "0.45.0",
-    "react": "^19.2.5",
+    "oxfmt": "0.60.0",
+    "react": "^19.2.8",
     "read-pkg": "10.1.0",
     "shx": "0.4.0",
-    "tinyglobby": "0.2.16",
+    "tinyglobby": "0.2.17",
     "tsc-alias": "1.8.16",
     "turbo": "2.9.14",
     "typedoc": "0.28.19",
-    "typescript": "6.0.2",
-    "vite": "8.0.16",
+    "typescript": "7.0.2",
+    "vite": "8.1.5",
     "vitest": "4.1.0"
   },
   "lint-staged": {
@@ -97,9 +97,20 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "engines": {
-    "node": ">=20.20.2",
-    "pnpm": ">=10.30.3"
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.15.1",
+      "onFail": "warn"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "24.x || 26.x",
+      "onFail": "error"
+    }
   },
-  "packageManager": "pnpm@10.30.3"
+  "engines": {
+    "node": ">=20.20.2"
+  },
+  "packageManager": "pnpm@11.15.1"
 }

@@ -41,8 +41,6 @@ const jsonContentHeaders = {
 
 /**
  * Autoscaling Groups API.
-
-Instances Autoscaling Groups management API.
  */
 export class API extends ParentAPI {
   /**
@@ -83,7 +81,8 @@ export class API extends ParentAPI {
 
   
   /**
-   * Get an autoscaling group. Get details of a specified autoscaling group including its configuration, current size, and status.
+   * Get an autoscaling group. Get details of a specified autoscaling group including its
+configuration, current size, and status.
    *
    * @param request - The request {@link GetGroupRequest}
    * @returns A Promise of Group
@@ -117,7 +116,9 @@ export class API extends ParentAPI {
 
   
   /**
-   * Create an autoscaling group. Create a new autoscaling group with the specified configuration including template, scaling policy, and optional load balancer settings.
+   * Create an autoscaling group. Create a new autoscaling group with the specified configuration
+including template, scaling policy, and optional load balancer
+settings.
    *
    * @param request - The request {@link CreateGroupRequest}
    * @returns A Promise of Group
@@ -137,7 +138,8 @@ export class API extends ParentAPI {
 
   
   /**
-   * Update an autoscaling group. Update the configuration of a specified autoscaling group including name, tags, template, scaling policy, and load balancer settings.
+   * Update an autoscaling group. Update the configuration of a specified autoscaling group including
+name, tags, template, scaling policy, and load balancer settings.
    *
    * @param request - The request {@link UpdateGroupRequest}
    * @returns A Promise of Group
@@ -157,7 +159,8 @@ export class API extends ParentAPI {
 
   
   /**
-   * Delete an autoscaling group. Delete a specified autoscaling group and all its associated resources.
+   * Delete an autoscaling group. Delete a specified autoscaling group and all its associated
+resources.
    *
    * @param request - The request {@link DeleteGroupRequest}
    * @returns A Promise of Group
@@ -173,7 +176,8 @@ export class API extends ParentAPI {
 
   
   /**
-   * List group logs. List logs for a specified autoscaling group to view scaling events and activities.
+   * List autoscaling group logs. List logs for a specified autoscaling group to view scaling events
+and activities.
    *
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
@@ -196,7 +200,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * List group servers. List all Instances belonging to a specified autoscaling group.
+   * List autoscaling group servers. List all Instances belonging to a specified autoscaling group.
    *
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
@@ -217,7 +221,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * List group alerts. List active and historical alerts for a specified autoscaling group.
+   * List autoscaling group alerts. List active and historical alerts for a specified autoscaling group.
    *
    * @param request - The request {@link ListAlertsRequest}
    * @returns A Promise of ListAlertsResponse

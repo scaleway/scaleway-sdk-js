@@ -6,10 +6,11 @@ build:
 	pnpm run build
 
 install-dependencies:
-	pnpm install
+	pnpm install --no-frozen-lockfile
+	pnpm fix-deps
 
 build-tools:
-	pnpm turbo build --filter=./tools/*
+	pnpm turbo build --filter=./tools/* --force
 
 release-prepare: install-dependencies build-tools
 	pnpm install
@@ -36,7 +37,7 @@ format-check:
 
 format-generated:
 	pnpm install
-	pnpm biome format --write packages_generated/
+	pnpm format:generated
 	pnpm biome check --write --unsafe packages_generated/
 
 typing:
