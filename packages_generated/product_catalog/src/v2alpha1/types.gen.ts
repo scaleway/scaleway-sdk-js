@@ -191,6 +191,22 @@ export interface PublicCatalogProductPropertiesHardwareCPUVirtual {
 }
 
 
+export interface PublicCatalogProductPropertiesBlockStorageSnapshotType {
+}
+
+
+export interface PublicCatalogProductPropertiesBlockStorageVolumeType {
+  /**
+   * The minimum size of storage volume for this product in bytes.
+   */
+  minSize: number
+  /**
+   * The maximum size of storage volume for this product in bytes.
+   */
+  maxSize: number
+}
+
+
 export interface PublicCatalogProductPropertiesHardwareCPU {
   /**
    * A human readable description of the CPU.
@@ -492,6 +508,18 @@ export interface PublicCatalogProductPropertiesBlockStorage {
    * @deprecated The maximum size of storage volume for this product in bytes. Deprecated.
    */
   maxVolumeSize?: number
+  /**
+   * The properties related to Block Storage snapshot.
+   *
+   * One-of ('type'): at most one of 'snapshot', 'volume' could be set.
+   */
+  snapshot?: PublicCatalogProductPropertiesBlockStorageSnapshotType
+  /**
+   * The properties related to Block Storage volume.
+   *
+   * One-of ('type'): at most one of 'snapshot', 'volume' could be set.
+   */
+  volume?: PublicCatalogProductPropertiesBlockStorageVolumeType
 }
 
 
