@@ -25,14 +25,14 @@
     }
   },
   "scripts": {
-    "build": "tsgo -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json",
     "package:check": "pnpm publint",
-    "typecheck": "tsgo -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@repo/configs": "workspace:*",
     "@types/node": "20.19.43",
-    "vite": "8.0.16"
+    "vite": "8.1.5"
   },
   "engines": {
     "node": ">=20.20.2"
