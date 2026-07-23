@@ -18,6 +18,8 @@ export type {
   PublicCatalogProductPropertiesApacheKafka,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
+  PublicCatalogProductPropertiesBlockStorageSnapshotType,
+  PublicCatalogProductPropertiesBlockStorageVolumeType,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesGenerativeApis,
