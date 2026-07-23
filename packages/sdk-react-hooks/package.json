@@ -254,10 +254,10 @@
   },
   "scripts": {
     "prebuild": "shx rm -rf dist && pnpm generate",
-    "typecheck": "tsgo --noEmit",
+    "typecheck": "tsc --noEmit",
     "format": "oxfmt --write .",
     "generate": "pnpm generate-react-queries && pnpm format",
-    "type:generate": "tsgo --declaration -p tsconfig.build.json",
+    "type:generate": "tsc --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
     "watch": "pnpm run '/^watch:.*/'",
     "lint": "biome lint ."
@@ -316,14 +316,14 @@
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*",
-    "@scaleway/use-dataloader": "6.1.2",
-    "@types/react": "19.2.14",
-    "react": "^19.2.5",
-    "tinyglobby": "0.2.16"
+    "@scaleway/use-dataloader": "7.1.0",
+    "@types/react": "19.2.17",
+    "react": "^19.2.8",
+    "tinyglobby": "0.2.17"
   },
   "peerDependencies": {
-    "@scaleway/use-dataloader": "6.1.2",
-    "react": "18.x || 19.x"
+    "@scaleway/use-dataloader": "7.1.0",
+    "react": "^19.2.8"
   },
   "optionalDependencies": {
     "@scaleway/sdk-account": "workspace:*",

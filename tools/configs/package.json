@@ -26,9 +26,9 @@
   },
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "tsgo -p tsconfig.build.json",
-    "watch": "tsgo -p tsconfig.json --watch",
-    "typecheck": "tsgo -p tsconfig.json --noEmit"
+    "build": "tsc -p tsconfig.build.json",
+    "watch": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@types/node": "20.19.43"
