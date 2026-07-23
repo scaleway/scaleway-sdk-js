@@ -100,6 +100,7 @@ export type ResourceType =
   | 'autoscaling_group'
 
 export type SearchResourcesRequestOrderBy =
+  | 'relevance'
   | 'created_at_asc'
   | 'created_at_desc'
   | 'modified_at_asc'

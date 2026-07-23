@@ -82,6 +82,14 @@ export interface PrivateNetworkDetails {
 }
 
 
+export interface EndpointSpecPrivateNetworkSummary {
+  /**
+   * UUID of the Private Network.
+   */
+  privateNetworkId: string
+}
+
+
 export interface EndpointSpecPublicDetails {
 }
 
@@ -128,7 +136,7 @@ export interface EndpointSpec {
    *
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
-  privateNetwork?: PrivateNetworkDetails
+  privateNetwork?: EndpointSpecPrivateNetworkSummary
 }
 
 
