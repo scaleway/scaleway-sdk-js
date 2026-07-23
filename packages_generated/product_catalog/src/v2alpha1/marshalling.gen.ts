@@ -3,6 +3,8 @@ import { isJSONObject, unmarshalArrayOfObject, unmarshalDate, unmarshalMoney, } 
 import type {
   PublicCatalogProductPropertiesHardwareCPUPhysical,
   PublicCatalogProductPropertiesHardwareCPUVirtual,
+  PublicCatalogProductPropertiesBlockStorageSnapshotType,
+  PublicCatalogProductPropertiesBlockStorageVolumeType,
   PublicCatalogProductPropertiesHardwareCPU,
   PublicCatalogProductPropertiesHardwareGPU,
   PublicCatalogProductPropertiesHardwareNetwork,
@@ -93,6 +95,30 @@ const unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual = (data: unknown
   return {
     count: data.count,
   } as PublicCatalogProductPropertiesHardwareCPUVirtual
+}
+
+const unmarshalPublicCatalogProductPropertiesBlockStorageSnapshotType = (data: unknown): PublicCatalogProductPropertiesBlockStorageSnapshotType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesBlockStorageSnapshotType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesBlockStorageSnapshotType
+}
+
+const unmarshalPublicCatalogProductPropertiesBlockStorageVolumeType = (data: unknown): PublicCatalogProductPropertiesBlockStorageVolumeType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesBlockStorageVolumeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxSize: data.max_size,
+    minSize: data.min_size,
+  } as PublicCatalogProductPropertiesBlockStorageVolumeType
 }
 
 const unmarshalPublicCatalogProductPropertiesHardwareCPU = (data: unknown): PublicCatalogProductPropertiesHardwareCPU => {
@@ -517,6 +543,8 @@ const unmarshalPublicCatalogProductPropertiesBlockStorage = (data: unknown): Pub
   return {
     maxVolumeSize: data.max_volume_size,
     minVolumeSize: data.min_volume_size,
+    snapshot: data.snapshot ? unmarshalPublicCatalogProductPropertiesBlockStorageSnapshotType(data.snapshot) : undefined,
+    volume: data.volume ? unmarshalPublicCatalogProductPropertiesBlockStorageVolumeType(data.volume) : undefined,
   } as PublicCatalogProductPropertiesBlockStorage
 }
 
