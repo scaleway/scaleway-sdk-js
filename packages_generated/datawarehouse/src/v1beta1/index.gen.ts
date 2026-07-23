@@ -22,6 +22,7 @@ export type {
   EndpointService,
   EndpointServiceProtocol,
   EndpointSpec,
+  EndpointSpecPrivateNetworkSummary,
   EndpointSpecPublicDetails,
   GetDeploymentCertificateRequest,
   GetDeploymentRequest,

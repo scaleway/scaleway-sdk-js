@@ -18,6 +18,7 @@ import type {
   Version,
   ListVersionsResponse,
   CreateDatabaseRequest,
+  EndpointSpecPrivateNetworkSummary,
   EndpointSpecPublicDetails,
   EndpointSpec,
   CreateDeploymentRequest,
@@ -257,28 +258,17 @@ export const marshalCreateDatabaseRequest = (
   name: request.name,
 })
 
-const marshalNodePrivateNetworkDetails = (
-  request: NodePrivateNetworkDetails,
+const marshalEndpointSpecPrivateNetworkSummary = (
+  request: EndpointSpecPrivateNetworkSummary,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ip_address: request.ipAddress,
-  node_name: request.nodeName,
-  replica: request.replica,
-  shard: request.shard,
+  private_network_id: request.privateNetworkId,
 })
 
 const marshalEndpointSpecPublicDetails = (
   request: EndpointSpecPublicDetails,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-})
-
-const marshalPrivateNetworkDetails = (
-  request: PrivateNetworkDetails,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  nodes:  request.nodes.map(elt => marshalNodePrivateNetworkDetails(elt, defaults)),
-  private_network_id: request.privateNetworkId,
 })
 
 const marshalEndpointSpec = (
@@ -291,7 +281,7 @@ const marshalEndpointSpec = (
       : undefined,
     },
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalPrivateNetworkDetails(request.privateNetwork, defaults)
+      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkSummary(request.privateNetwork, defaults)
       : undefined,
     },
   ]),
