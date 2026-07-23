@@ -2,3 +2,10 @@ packages:
   - 'packages/*'
   - 'packages_generated/*'
   - 'tools/*'
+
+savePrefix: ''
+strictPeerDependencies: false
+
+allowBuilds:
+  esbuild: true
+  nx: true
