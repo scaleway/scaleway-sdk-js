@@ -35,9 +35,9 @@
     "@scaleway/oxlint-config": "0.2.3",
     "@scaleway/sync-peer-deps": "1.0.3",
     "@scaleway/tsconfig": "1.1.6",
-    "@vitest/coverage-istanbul": "4.1.0",
-    "@vitest/coverage-v8": "4.1.0",
-    "@vitest/ui": "4.1.0",
+    "@vitest/coverage-istanbul": "4.1.10",
+    "@vitest/coverage-v8": "4.1.10",
+    "@vitest/ui": "4.1.10",
     "babel-plugin-annotate-pure-calls": "0.5.0",
     "browserslist": "4.28.2",
     "cross-env": "10.1.0",
@@ -59,7 +59,7 @@
     "typedoc": "0.28.19",
     "typescript": "7.0.2",
     "vite": "8.1.5",
-    "vitest": "4.1.0"
+    "vitest": "4.1.10"
   },
   "lint-staged": {
     "packages/*/src/**/*.{ts,tsx,js,jsx}": [
