@@ -65,9 +65,8 @@ generate-packages:
 	pnpm run generatePackages
 
 setup-new-products:
-	pnpm turbo build --filter=@scaleway/generate-packages
-	pnpm install --force
 	pnpm setupNewProducts
+	pnpm install --no-frozen-lockfile
 
 post_generate:
 	$(MAKE) format-generated
