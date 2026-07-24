@@ -5,6 +5,11 @@ packages:
 
 savePrefix: ''
 strictPeerDependencies: false
+autoInstallPeers: true
+engineStrict: true
+
+# Needed as we run a pnpm install after building packages
+optimisticRepeatInstall: false
 
 allowBuilds:
   esbuild: true
