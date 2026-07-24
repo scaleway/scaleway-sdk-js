@@ -8,10 +8,10 @@
     "directory": "tools/generate-packages"
   },
   "bin": {
-    "fix-import-extensions": "./dist/fix-import-extensions.js",
-    "generateAlias": "./dist/generateAlias.js",
-    "generatePackages": "./dist/generatePackages.js",
-    "setupNewProducts": "./dist/setupNewProducts.js"
+    "fix-import-extensions": "./src/fix-import-extensions.ts",
+    "generateAlias": "./src/generateAlias.ts",
+    "generatePackages": "./src/generatePackages.ts",
+    "setupNewProducts": "./src/setupNewProducts.ts"
   },
   "files": [
     "dist",
