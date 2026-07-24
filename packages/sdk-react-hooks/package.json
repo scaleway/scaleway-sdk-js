@@ -253,14 +253,13 @@
     }
   },
   "scripts": {
-    "prebuild": "shx rm -rf dist && pnpm generate",
+    "prebuild": "shx rm -rf dist && pnpm install &&  pnpm generate",
     "typecheck": "tsc --noEmit",
     "format": "oxfmt --write .",
     "generate": "pnpm generate-react-queries && pnpm format",
     "type:generate": "tsc --declaration -p tsconfig.build.json",
     "build": "vite build --config vite.config.ts && pnpm run type:generate",
-    "watch": "pnpm run '/^watch:.*/'",
-    "lint": "biome lint ."
+    "watch": "pnpm run '/^watch:.*/'"
   },
   "dependencies": {
     "@scaleway/sdk-react": "workspace:*"

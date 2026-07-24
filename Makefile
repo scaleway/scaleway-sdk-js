@@ -41,10 +41,10 @@ format-generated:
 	pnpm lint
 
 typing:
-	pnpm run typecheck
+	pnpm typecheck
 
 lint:
-	pnpm run lint
+	pnpm lint
 
 test:
 	pnpm run test
@@ -59,10 +59,10 @@ prebuild:
 	pnpm run prebuild
 
 generate-alias:
-	pnpm run generateAlias
+	pnpm  generateAlias
 
 generate-packages:
-	pnpm run generatePackages
+	pnpm generatePackages
 
 setup-new-products:
 	pnpm setupNewProducts
@@ -75,6 +75,8 @@ post_generate:
 	$(MAKE) build-tools
 	pnpm install --no-frozen-lockfile
 	pnpm turbo run build --filter='./packages_generated/*'
+	## Force link bin
+	rm -rf node_modules/ &&	pnpm install
 	pnpm --filter @scaleway/sdk-react run generate
 	pnpm --filter @scaleway/sdk-react-hooks run generate
 
