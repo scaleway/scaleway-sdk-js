@@ -15,6 +15,36 @@ import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
 import { snakeToSlug } from './helpers.ts'
 
+/**
+ * Returns the set of package names under `packages_generated/` that have
+ * newly-added or untracked files in the current git working tree.
+ * This prevents setup-new-products from registering packages whose files
+ * are being generated in a *different* bot PR running in the same workspace.
+ */
+function getGitNewPackages(dir: string): Set<string> {
+  try {
+    const output = execSync('git status --porcelain', { encoding: 'utf8', cwd: cwd() })
+    const rel = resolve(cwd(), dir)
+    const changed = new Set<string>()
+    for (const line of output.split('\n')) {
+      const filePath = line.slice(3).trim()
+      const abs = resolve(cwd(), filePath)
+      if (!abs.startsWith(rel + '/')) continue
+      // Only consider untracked (??) or staged-new (A) files
+      const status = line.slice(0, 2)
+      if (status === '??' || status.includes('A')) {
+        const relative = abs.slice(rel.length + 1)
+        const packageName = relative.split('/')[0]
+        if (packageName) changed.add(packageName)
+      }
+    }
+    return changed
+  } catch {
+    // If git is unavailable (non-git env), fall back to no filtering
+    return new Set()
+  }
+}
+
 type Scope = '@scaleway' | '@scaleway-internal'
 
 interface SdkPackageJson {
@@ -120,8 +150,19 @@ function scanProducts(dir: string): Product[] {
     })
 }
 
-function detectNewProducts(products: Product[]): Product[] {
-  return products.filter(p => p.hasGenFiles && !p.hasPackageJson)
+function detectNewProducts(products: Product[], gitNewPackages: Set<string>): Product[] {
+  return products.filter(p => {
+    if (!p.hasGenFiles || p.hasPackageJson) return false
+    // Only register packages whose gen files are part of the current git changeset.
+    // If the set is empty (non-git env), fall back to the original behaviour.
+    if (gitNewPackages.size > 0 && !gitNewPackages.has(p.name)) {
+      warn(
+        `  ⚠️  Skipping ${p.name}: gen files exist on disk but are not part of the current git changeset (likely in another PR)`,
+      )
+      return false
+    }
+    return true
+  })
 }
 
 function ensureProductFiles(products: Product[]) {
@@ -232,7 +273,8 @@ export async function setupNewProducts(): Promise<number> {
   // 1) Scan
   info('🔍 Step 1: Scanning for products…')
   const allProducts = scanProducts(PACKAGES_GENERATED_DIR)
-  const newProducts = detectNewProducts(allProducts)
+  const gitNewPackages = getGitNewPackages(String(values.src))
+  const newProducts = detectNewProducts(allProducts, gitNewPackages)
   info(`  📦 Total products: ${allProducts.length}`)
   info(`  🆕 New products: ${newProducts.length}`)
   if (newProducts.length) {
