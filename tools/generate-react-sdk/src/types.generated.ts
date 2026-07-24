@@ -1,6 +1,3 @@
-//this file is generated 
+//this file is generated
 
-
- export type APISdk = {
-
-}
+export type APISdk = {}

@@ -38,7 +38,7 @@ format-check:
 format-generated:
 	pnpm install
 	pnpm format:generated
-	pnpm biome check --write --unsafe packages_generated/
+	pnpm lint
 
 typing:
 	pnpm run typecheck
@@ -66,8 +66,8 @@ generate-packages:
 
 setup-new-products:
 	pnpm turbo build --filter=@scaleway/generate-packages
-	pnpm install
-	pnpm run setupNewProducts
+	pnpm install --force
+	pnpm setupNewProducts
 
 post_generate:
 	$(MAKE) format-generated
