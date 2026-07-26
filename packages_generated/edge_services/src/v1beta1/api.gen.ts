@@ -3,11 +3,14 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, } from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,} from './content.gen.js'
 import {
   marshalAddRouteRulesRequest,
@@ -46,6 +49,7 @@ import {
   unmarshalListVPCEndpointsResponse,
   unmarshalListWafStagesResponse,
   unmarshalPipeline,
+  unmarshalPipelineStages,
   unmarshalPlan,
   unmarshalPurgeRequest,
   unmarshalRouteStage,
@@ -135,6 +139,7 @@ import type {
   ListWafStagesRequest,
   ListWafStagesResponse,
   Pipeline,
+  PipelineStages,
   Plan,
   PurgeRequest,
   RouteStage,
