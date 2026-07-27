@@ -3,12 +3,14 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {DATALAB_TRANSIENT_STATUSES as DATALAB_TRANSIENT_STATUSES_DATALAB,} from './content.gen.js'
 import {
   marshalCreateDatalabRequest,

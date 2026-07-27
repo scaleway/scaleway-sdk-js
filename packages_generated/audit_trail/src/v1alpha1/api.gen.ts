@@ -3,11 +3,15 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
+  waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {ALERT_RULE_TRANSIENT_STATUSES as ALERT_RULE_TRANSIENT_STATUSES_AUDIT_TRAIL,CUSTOM_ALERT_RULE_TRANSIENT_STATUSES as CUSTOM_ALERT_RULE_TRANSIENT_STATUSES_AUDIT_TRAIL,} from './content.gen.js'
 import {
   marshalCreateCustomAlertRuleRequest,
   marshalCreateExportJobRequest,

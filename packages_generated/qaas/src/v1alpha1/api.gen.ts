@@ -4,11 +4,13 @@ import {
   API as ParentAPI,
   enrichForPagination,
   resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, } from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,} from './content.gen.js'
 import {
   unmarshalApplication,

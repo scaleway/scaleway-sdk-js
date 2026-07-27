@@ -3,12 +3,15 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, } from '@scaleway/sdk-client'
-import {ALIAS_TRANSIENT_STATUSES as ALIAS_TRANSIENT_STATUSES_MAILBOX,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {ALIAS_TRANSIENT_STATUSES as ALIAS_TRANSIENT_STATUSES_MAILBOX,DOMAIN_RECORD_TRANSIENT_STATUSES as DOMAIN_RECORD_TRANSIENT_STATUSES_MAILBOX,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
 import {
   unmarshalAlias,
   marshalBatchCreateMailboxesRequest,

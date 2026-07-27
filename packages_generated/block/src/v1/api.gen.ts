@@ -3,13 +3,15 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,} from './content.gen.js'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {REFERENCE_TRANSIENT_STATUSES as REFERENCE_TRANSIENT_STATUSES_BLOCK,SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,} from './content.gen.js'
 import {
   marshalCreateSnapshotRequest,
   marshalCreateVolumeRequest,
@@ -18,6 +20,7 @@ import {
   unmarshalListSnapshotsResponse,
   unmarshalListVolumeTypesResponse,
   unmarshalListVolumesResponse,
+  unmarshalReference,
   unmarshalSnapshot,
   marshalUpdateSnapshotRequest,
   marshalUpdateVolumeRequest,
@@ -38,6 +41,7 @@ import type {
   ListVolumeTypesResponse,
   ListVolumesRequest,
   ListVolumesResponse,
+  Reference,
   Snapshot,
   UpdateSnapshotRequest,
   UpdateVolumeRequest,
