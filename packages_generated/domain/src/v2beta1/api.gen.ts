@@ -3,13 +3,15 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
   unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { ServiceInfo, WaitForOptions, } from '@scaleway/sdk-client'
-import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,} from './content.gen.js'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {DNS_ZONE_TRANSIENT_STATUSES as DNS_ZONE_TRANSIENT_STATUSES_DOMAIN,DOMAIN_FEATURE_TRANSIENT_STATUSES as DOMAIN_FEATURE_TRANSIENT_STATUSES_DOMAIN,DOMAIN_REGISTRATION_STATUS_TRANSFER_TRANSIENT_STATUSES as DOMAIN_REGISTRATION_STATUS_TRANSFER_TRANSIENT_STATUSES_DOMAIN,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,HOST_TRANSIENT_STATUSES as HOST_TRANSIENT_STATUSES_DOMAIN,SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,TASK_TRANSIENT_STATUSES as TASK_TRANSIENT_STATUSES_DOMAIN,} from './content.gen.js'
 import {
   unmarshalCheckContactsCompatibilityResponse,
   unmarshalClearDNSZoneRecordsResponse,
@@ -64,6 +66,7 @@ import {
   unmarshalSSLCertificate,
   unmarshalSearchAvailableDomainsConsoleResponse,
   unmarshalSearchAvailableDomainsResponse,
+  unmarshalTask,
   marshalUpdateDNSZoneNameserversRequest,
   unmarshalUpdateDNSZoneNameserversResponse,
   marshalUpdateDNSZoneRecordsRequest,
@@ -157,6 +160,7 @@ import type {
   SSLCertificate,
   SearchAvailableDomainsConsoleResponse,
   SearchAvailableDomainsResponse,
+  Task,
   UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest,
   UpdateDNSZoneNameserversRequest,
   UpdateDNSZoneNameserversResponse,

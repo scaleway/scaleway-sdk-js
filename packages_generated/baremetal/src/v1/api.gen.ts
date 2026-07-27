@@ -3,13 +3,15 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL,} from './content.gen.js'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {SERVER_INSTALL_TRANSIENT_STATUSES as SERVER_INSTALL_TRANSIENT_STATUSES_BAREMETAL,SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES_BAREMETAL,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL,} from './content.gen.js'
 import {
   marshalAddOptionServerRequest,
   unmarshalBMCAccess,

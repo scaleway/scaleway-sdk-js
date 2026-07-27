@@ -3,11 +3,14 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
+  toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, } from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST,} from './content.gen.js'
 import {
   marshalCreateHumanRequest,

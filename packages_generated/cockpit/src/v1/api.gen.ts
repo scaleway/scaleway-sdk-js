@@ -3,12 +3,14 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {EXPORTER_TRANSIENT_STATUSES as EXPORTER_TRANSIENT_STATUSES_COCKPIT,} from './content.gen.js'
 import {
   unmarshalAlertManager,

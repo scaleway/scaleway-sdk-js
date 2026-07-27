@@ -3,13 +3,15 @@
 import {
   API as ParentAPI,
   enrichForPagination,
+  resolveOneOf,
+  unmarshalServiceInfo,
   urlParams,
   validatePathParam,
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,} from './content.gen.js'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_LB,LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,PRIVATE_NETWORK_TRANSIENT_STATUSES as PRIVATE_NETWORK_TRANSIENT_STATUSES_LB,} from './content.gen.js'
 import {
   unmarshalAcl,
   marshalAddBackendServersRequest,
