@@ -10,6 +10,16 @@ export const queriesMetadata = {
       apiClass: 'API',
       methods: [
         {
+          methodName: 'getServiceInfo',
+          protoName: 'GetServiceInfo',
+          paramsType: 'GetServiceInfoRequest',
+          returnType: 'ServiceInfo',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
           methodName: 'getResourceCounts',
           protoName: 'GetResourceCounts',
           paramsType: 'GetResourceCountsRequest',
@@ -64,7 +74,7 @@ export const queriesMetadata = {
           isList: true,
           paginationType: 'cursor',
           pageParamKey: 'pageToken',
-          listItemType: 'PrivateNetworkInterface',
+          listItemType: 'PrivateNetworkInterfaceSummary',
           nextPageField: 'nextPageToken',
           isPrivate: false,
           description: '"',
