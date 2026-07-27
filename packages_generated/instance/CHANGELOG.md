@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.10.1 (2026-07-27)
+
+
+### Bug Fixes
+
+* **instance:** move instance.v2alpha volume api documentation to volume_api.yml ([#3163](https://github.com/scaleway/scaleway-sdk-js/issues/3163)) ([0cfaa0d](https://github.com/scaleway/scaleway-sdk-js/commit/0cfaa0d4aa3ff83df773f872a3c70be84bde19eb))
+
+
+
+
+
 # [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-instance@2.9.0...@scaleway/sdk-instance@2.10.0) (2026-07-06)
 
 
