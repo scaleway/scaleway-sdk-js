@@ -64,7 +64,7 @@ export const queriesMetadata = {
           isList: true,
           paginationType: 'cursor',
           pageParamKey: 'pageToken',
-          listItemType: 'PrivateNetworkInterface',
+          listItemType: 'PrivateNetworkInterfaceSummary',
           nextPageField: 'nextPageToken',
           isPrivate: false,
           description: '"',
