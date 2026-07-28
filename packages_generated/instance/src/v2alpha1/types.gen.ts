@@ -317,7 +317,7 @@ export interface PlacementGroup {
 }
 
 
-export interface PrivateNetworkInterface {
+export interface PrivateNetworkInterfaceSummary {
   id: string
   privateNetworkId: string
   projectId: string
@@ -892,7 +892,7 @@ export type ListPrivateNetworkInterfacesRequest = {
 
 
 export interface ListPrivateNetworkInterfacesResponse {
-  privateNetworkInterfaces: PrivateNetworkInterface[]
+  privateNetworkInterfaces: PrivateNetworkInterfaceSummary[]
   nextPageToken?: string
   totalCount: number
 }
@@ -1031,6 +1031,21 @@ export type PauseServerRequest = {
    */
   zone?: ScwZone
   serverId: string
+}
+
+
+export interface PrivateNetworkInterface {
+  id: string
+  privateNetworkId: string
+  projectId: string
+  serverId: string
+  securityGroupId: string
+  macAddress: string
+  status: PrivateNetworkInterfaceStatus
+  ipIds: string[]
+  tags: string[]
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 

@@ -8,9 +8,9 @@ import type {
   SecurityGroupRule,
   SecurityGroup,
   PlacementGroup,
-  PrivateNetworkInterface,
   AddSecurityGroupRulesResponse,
   ListPlacementGroupsResponse,
+  PrivateNetworkInterfaceSummary,
   ListPrivateNetworkInterfacesResponse,
   SecurityGroupSummary,
   ListSecurityGroupsResponse,
@@ -24,6 +24,7 @@ import type {
   TemplateSummary,
   ListTemplatesResponse,
   ListUserDataKeysResponse,
+  PrivateNetworkInterface,
   ResourceCounts,
   ServerIP,
   ServerFilesystem,
@@ -154,28 +155,6 @@ export const unmarshalPlacementGroup = (data: unknown): PlacementGroup => {
   } as PlacementGroup
 }
 
-export const unmarshalPrivateNetworkInterface = (data: unknown): PrivateNetworkInterface => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'PrivateNetworkInterface' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    id: data.id,
-    ipIds: data.ip_ids,
-    macAddress: data.mac_address,
-    privateNetworkId: data.private_network_id,
-    projectId: data.project_id,
-    securityGroupId: data.security_group_id,
-    serverId: data.server_id,
-    status: data.status,
-    tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-  } as PrivateNetworkInterface
-}
-
 export const unmarshalAddSecurityGroupRulesResponse = (data: unknown): AddSecurityGroupRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -203,6 +182,28 @@ export const unmarshalListPlacementGroupsResponse = (data: unknown): ListPlaceme
   } as ListPlacementGroupsResponse
 }
 
+const unmarshalPrivateNetworkInterfaceSummary = (data: unknown): PrivateNetworkInterfaceSummary => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetworkInterfaceSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    ipIds: data.ip_ids,
+    macAddress: data.mac_address,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
+    securityGroupId: data.security_group_id,
+    serverId: data.server_id,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as PrivateNetworkInterfaceSummary
+}
+
 export const unmarshalListPrivateNetworkInterfacesResponse = (data: unknown): ListPrivateNetworkInterfacesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -212,7 +213,7 @@ export const unmarshalListPrivateNetworkInterfacesResponse = (data: unknown): Li
 
   return {
     nextPageToken: data.next_page_token,
-    privateNetworkInterfaces: unmarshalArrayOfObject(data.private_network_interfaces, unmarshalPrivateNetworkInterface),
+    privateNetworkInterfaces: unmarshalArrayOfObject(data.private_network_interfaces, unmarshalPrivateNetworkInterfaceSummary),
     totalCount: data.total_count,
   } as ListPrivateNetworkInterfacesResponse
 }
@@ -424,6 +425,28 @@ export const unmarshalListUserDataKeysResponse = (data: unknown): ListUserDataKe
     nextPageToken: data.next_page_token,
     totalCount: data.total_count,
   } as ListUserDataKeysResponse
+}
+
+export const unmarshalPrivateNetworkInterface = (data: unknown): PrivateNetworkInterface => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PrivateNetworkInterface' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    ipIds: data.ip_ids,
+    macAddress: data.mac_address,
+    privateNetworkId: data.private_network_id,
+    projectId: data.project_id,
+    securityGroupId: data.security_group_id,
+    serverId: data.server_id,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as PrivateNetworkInterface
 }
 
 export const unmarshalResourceCounts = (data: unknown): ResourceCounts => {

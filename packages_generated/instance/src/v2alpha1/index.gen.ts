@@ -76,6 +76,7 @@ export type {
   PlacementGroupPolicyType,
   PrivateNetworkInterface,
   PrivateNetworkInterfaceStatus,
+  PrivateNetworkInterfaceSummary,
   RebootServerRequest,
   ResourceCounts,
   SecurityGroup,
