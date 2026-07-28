@@ -196,7 +196,6 @@ const unmarshalPrivateNetworkInterfaceSummary = (data: unknown): PrivateNetworkI
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
-    securityGroupId: data.security_group_id,
     serverId: data.server_id,
     status: data.status,
     tags: data.tags,
@@ -441,7 +440,6 @@ export const unmarshalPrivateNetworkInterface = (data: unknown): PrivateNetworkI
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
-    securityGroupId: data.security_group_id,
     serverId: data.server_id,
     status: data.status,
     tags: data.tags,
@@ -738,7 +736,6 @@ export const marshalCreatePrivateNetworkInterfaceRequest = (
   ip_ids: request.ipIds,
   private_network_id: request.privateNetworkId,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  security_group_id: request.securityGroupId,
   server_id: request.serverId,
   tags: request.tags,
 })
@@ -1010,7 +1007,6 @@ export const marshalUpdatePrivateNetworkInterfaceRequest = (
   request: UpdatePrivateNetworkInterfaceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  security_group_id: request.securityGroupId,
   tags: request.tags,
 })
 

@@ -46,6 +46,7 @@ export type {
   GetSecurityGroupRequest,
   GetServerCloudInitRequest,
   GetServerRequest,
+  GetServiceInfoRequest,
   GetTemplateCloudInitRequest,
   GetTemplateRequest,
   GetTemplateUserDataRequest,

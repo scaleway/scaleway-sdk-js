@@ -91,6 +91,7 @@ import type {
   GetSecurityGroupRequest,
   GetServerCloudInitRequest,
   GetServerRequest,
+  GetServiceInfoRequest,
   GetTemplateCloudInitRequest,
   GetTemplateRequest,
   GetTemplateUserDataRequest,
@@ -142,9 +143,9 @@ const jsonContentHeaders = {
 }
 
 /**
- * Instance API.
+ * Instance Volume API.
 
-This API allows you to manage your CPU and GPU Instances.
+This API allows you to manage Instance local and scratch volumes.
  */
 export class API extends ParentAPI {
   /**
@@ -167,12 +168,16 @@ export class API extends ParentAPI {
       ],
     })
   
-  /**
-   * Get resource counts. Get counts of various resources (e.g. servers, volumes).
-   *
-   * @param request - The request {@link GetResourceCountsRequest}
-   * @returns A Promise of ResourceCounts
-   */
+  getServiceInfo = (request: Readonly<GetServiceInfoRequest> = {}) =>
+    this.client.fetch<ServiceInfo>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}`,
+      },
+      unmarshalServiceInfo,
+    )
+
+  
   getResourceCounts = (request: Readonly<GetResourceCountsRequest> = {}) =>
     this.client.fetch<ResourceCounts>(
       {
@@ -193,12 +198,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * List all Instances.
-   *
-   * @param request - The request {@link ListServersRequest}
-   * @returns A Promise of ListServersResponse
-   */
   listServers = (request: Readonly<ListServersRequest> = {}) =>
     this.client.fetch<ListServersResponse>(
       {
@@ -223,12 +222,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Create an Instance. Create a new Instance of a specified server_type.
-   *
-   * @param request - The request {@link CreateServerRequest}
-   * @returns A Promise of Server
-   */
   createServer = (request: Readonly<CreateServerRequest>) =>
     this.client.fetch<Server>(
       {
@@ -243,12 +236,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get an Instance. Get the details of a specified Instance.
-   *
-   * @param request - The request {@link GetServerRequest}
-   * @returns A Promise of Server
-   */
   getServer = (request: Readonly<GetServerRequest>) =>
     this.client.fetch<Server>(
       {
@@ -277,12 +264,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Update an Instance. Update the properties of a specified Instance information, such as name, rescue_mode, or tags.
-   *
-   * @param request - The request {@link UpdateServerRequest}
-   * @returns A Promise of Server
-   */
   updateServer = (request: Readonly<UpdateServerRequest>) =>
     this.client.fetch<Server>(
       {
@@ -297,11 +278,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Delete an Instance. Delete a specified Instance.
-   *
-   * @param request - The request {@link DeleteServerRequest}
-   */
   deleteServer = (request: Readonly<DeleteServerRequest>) =>
     this.client.fetch<void>(
       {
@@ -337,12 +313,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * List Instance types. List available Instance types and their technical details.
-   *
-   * @param request - The request {@link ListServerTypesRequest}
-   * @returns A Promise of ListServerTypesResponse
-   */
   listServerTypes = (request: Readonly<ListServerTypesRequest> = {}) =>
     this.client.fetch<ListServerTypesResponse>(
       {
@@ -357,12 +327,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Start an Instance. Start a stopped or paused Instance.
-   *
-   * @param request - The request {@link StartServerRequest}
-   * @returns A Promise of Server
-   */
   startServer = (request: Readonly<StartServerRequest>) =>
     this.client.fetch<Server>(
       {
@@ -375,12 +339,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Reboot an Instance. Reboot a running or paused Instance.
-   *
-   * @param request - The request {@link RebootServerRequest}
-   * @returns A Promise of Server
-   */
   rebootServer = (request: Readonly<RebootServerRequest>) =>
     this.client.fetch<Server>(
       {
@@ -393,12 +351,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Pause an Instance. Pause a running Instance.
-   *
-   * @param request - The request {@link PauseServerRequest}
-   * @returns A Promise of Server
-   */
   pauseServer = (request: Readonly<PauseServerRequest>) =>
     this.client.fetch<Server>(
       {
@@ -411,12 +363,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Stop an Instance. Stop a running or paused Instance.
-   *
-   * @param request - The request {@link StopServerRequest}
-   * @returns A Promise of Server
-   */
   stopServer = (request: Readonly<StopServerRequest>) =>
     this.client.fetch<Server>(
       {
@@ -429,12 +375,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Stop and delete an Instance. Stop and delete a running or paused Instance.
-   *
-   * @param request - The request {@link StopAndDeleteServerRequest}
-   * @returns A Promise of Server
-   */
   stopAndDeleteServer = (request: Readonly<StopAndDeleteServerRequest>) =>
     this.client.fetch<Server>(
       {
@@ -449,12 +389,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Attach a volume to an Instance. Attach a l_ssd or SBS volume to an Instance.
-   *
-   * @param request - The request {@link AttachServerVolumeRequest}
-   * @returns A Promise of Server
-   */
   attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
     this.client.fetch<Server>(
       {
@@ -469,12 +403,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Detach a volume from an Instance.
-   *
-   * @param request - The request {@link DetachServerVolumeRequest}
-   * @returns A Promise of Server
-   */
   detachServerVolume = (request: Readonly<DetachServerVolumeRequest>) =>
     this.client.fetch<Server>(
       {
@@ -489,12 +417,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Attach a filesystem volume to an Instance.
-   *
-   * @param request - The request {@link AttachServerFileSystemRequest}
-   * @returns A Promise of Server
-   */
   attachServerFileSystem = (request: Readonly<AttachServerFileSystemRequest>) =>
     this.client.fetch<Server>(
       {
@@ -509,12 +431,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Detach a filesystem volume from an Instance.
-   *
-   * @param request - The request {@link DetachServerFileSystemRequest}
-   * @returns A Promise of Server
-   */
   detachServerFileSystem = (request: Readonly<DetachServerFileSystemRequest>) =>
     this.client.fetch<Server>(
       {
@@ -529,12 +445,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Attach an IP to an Instance.
-   *
-   * @param request - The request {@link AttachServerIPRequest}
-   * @returns A Promise of Server
-   */
   attachServerIP = (request: Readonly<AttachServerIPRequest>) =>
     this.client.fetch<Server>(
       {
@@ -549,12 +459,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Detach an IP from an Instance.
-   *
-   * @param request - The request {@link DetachServerIPRequest}
-   * @returns A Promise of Server
-   */
   detachServerIP = (request: Readonly<DetachServerIPRequest>) =>
     this.client.fetch<Server>(
       {
@@ -569,12 +473,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Set default IP for an Instance. Set the default IP for an Instance.
-   *
-   * @param request - The request {@link SetServerDefaultIPRequest}
-   * @returns A Promise of Server
-   */
   setServerDefaultIP = (request: Readonly<SetServerDefaultIPRequest>) =>
     this.client.fetch<Server>(
       {
@@ -589,12 +487,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Attach a private network interface to an Instance.
-   *
-   * @param request - The request {@link AttachServerPrivateNetworkInterfaceRequest}
-   * @returns A Promise of Server
-   */
   attachServerPrivateNetworkInterface = (request: Readonly<AttachServerPrivateNetworkInterfaceRequest>) =>
     this.client.fetch<Server>(
       {
@@ -609,12 +501,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Detach a private network interface from an Instance.
-   *
-   * @param request - The request {@link DetachServerPrivateNetworkInterfaceRequest}
-   * @returns A Promise of Server
-   */
   detachServerPrivateNetworkInterface = (request: Readonly<DetachServerPrivateNetworkInterfaceRequest>) =>
     this.client.fetch<Server>(
       {
@@ -629,12 +515,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * List private network interfaces. List all private network interfaces.
-   *
-   * @param request - The request {@link ListPrivateNetworkInterfacesRequest}
-   * @returns A Promise of ListPrivateNetworkInterfacesResponse
-   */
   listPrivateNetworkInterfaces = (request: Readonly<ListPrivateNetworkInterfacesRequest> = {}) =>
     this.client.fetch<ListPrivateNetworkInterfacesResponse>(
       {
@@ -646,7 +526,6 @@ export class API extends ParentAPI {
           ['page_token', request.pageToken],
           ['private_network_ids', request.privateNetworkIds],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
-          ['security_group_ids', request.securityGroupIds],
           ['server_ids', request.serverIds],
           ['tags', request.tags],
         ),
@@ -655,12 +534,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Create a private network interface. Create a private network interface linked to a Private Network. It can be attached to an Instance.
-   *
-   * @param request - The request {@link CreatePrivateNetworkInterfaceRequest}
-   * @returns A Promise of PrivateNetworkInterface
-   */
   createPrivateNetworkInterface = (request: Readonly<CreatePrivateNetworkInterfaceRequest>) =>
     this.client.fetch<PrivateNetworkInterface>(
       {
@@ -675,12 +548,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get a private network interface. Get details of a specified private network interface.
-   *
-   * @param request - The request {@link GetPrivateNetworkInterfaceRequest}
-   * @returns A Promise of PrivateNetworkInterface
-   */
   getPrivateNetworkInterface = (request: Readonly<GetPrivateNetworkInterfaceRequest>) =>
     this.client.fetch<PrivateNetworkInterface>(
       {
@@ -709,12 +576,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Update a private network interface. Update the properties of a specified private network interface.
-   *
-   * @param request - The request {@link UpdatePrivateNetworkInterfaceRequest}
-   * @returns A Promise of PrivateNetworkInterface
-   */
   updatePrivateNetworkInterface = (request: Readonly<UpdatePrivateNetworkInterfaceRequest>) =>
     this.client.fetch<PrivateNetworkInterface>(
       {
@@ -729,11 +590,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Delete a private network interface. Delete a specified private network interface.
-   *
-   * @param request - The request {@link DeletePrivateNetworkInterfaceRequest}
-   */
   deletePrivateNetworkInterface = (request: Readonly<DeletePrivateNetworkInterfaceRequest>) =>
     this.client.fetch<void>(
       {
@@ -743,12 +599,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * List placement groups. List all placement groups.
-   *
-   * @param request - The request {@link ListPlacementGroupsRequest}
-   * @returns A Promise of ListPlacementGroupsResponse
-   */
   listPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}) =>
     this.client.fetch<ListPlacementGroupsResponse>(
       {
@@ -768,12 +618,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Create a placement group. Create a new placement group.
-   *
-   * @param request - The request {@link CreatePlacementGroupRequest}
-   * @returns A Promise of PlacementGroup
-   */
   createPlacementGroup = (request: Readonly<CreatePlacementGroupRequest>) =>
     this.client.fetch<PlacementGroup>(
       {
@@ -788,12 +632,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get a placement group. Get a specified placement group.
-   *
-   * @param request - The request {@link GetPlacementGroupRequest}
-   * @returns A Promise of PlacementGroup
-   */
   getPlacementGroup = (request: Readonly<GetPlacementGroupRequest>) =>
     this.client.fetch<PlacementGroup>(
       {
@@ -804,12 +642,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Update a placement group. Update the properties of a specified placement group.
-   *
-   * @param request - The request {@link UpdatePlacementGroupRequest}
-   * @returns A Promise of PlacementGroup
-   */
   updatePlacementGroup = (request: Readonly<UpdatePlacementGroupRequest>) =>
     this.client.fetch<PlacementGroup>(
       {
@@ -824,11 +656,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Delete a placement group. Delete a specified placement group.
-   *
-   * @param request - The request {@link DeletePlacementGroupRequest}
-   */
   deletePlacementGroup = (request: Readonly<DeletePlacementGroupRequest>) =>
     this.client.fetch<void>(
       {
@@ -838,12 +665,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * List security groups. List all security groups.
-   *
-   * @param request - The request {@link ListSecurityGroupsRequest}
-   * @returns A Promise of ListSecurityGroupsResponse
-   */
   listSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}) =>
     this.client.fetch<ListSecurityGroupsResponse>(
       {
@@ -863,12 +684,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Create a security group. Create a security group with a specified name and description.
-   *
-   * @param request - The request {@link CreateSecurityGroupRequest}
-   * @returns A Promise of SecurityGroup
-   */
   createSecurityGroup = (request: Readonly<CreateSecurityGroupRequest>) =>
     this.client.fetch<SecurityGroup>(
       {
@@ -883,12 +698,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get a security group. Get the details of a specified security group.
-   *
-   * @param request - The request {@link GetSecurityGroupRequest}
-   * @returns A Promise of SecurityGroup
-   */
   getSecurityGroup = (request: Readonly<GetSecurityGroupRequest>) =>
     this.client.fetch<SecurityGroup>(
       {
@@ -899,12 +708,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Update a security group. Update the properties of a security group.
-   *
-   * @param request - The request {@link UpdateSecurityGroupRequest}
-   * @returns A Promise of SecurityGroup
-   */
   updateSecurityGroup = (request: Readonly<UpdateSecurityGroupRequest>) =>
     this.client.fetch<SecurityGroup>(
       {
@@ -919,11 +722,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Delete a security group. Delete a specified security group.
-   *
-   * @param request - The request {@link DeleteSecurityGroupRequest}
-   */
   deleteSecurityGroup = (request: Readonly<DeleteSecurityGroupRequest>) =>
     this.client.fetch<void>(
       {
@@ -933,12 +731,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Add rules to a security group. Add one or more rules to a security group.
-   *
-   * @param request - The request {@link AddSecurityGroupRulesRequest}
-   * @returns A Promise of AddSecurityGroupRulesResponse
-   */
   addSecurityGroupRules = (request: Readonly<AddSecurityGroupRulesRequest>) =>
     this.client.fetch<AddSecurityGroupRulesResponse>(
       {
@@ -953,12 +745,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Set all rules of a security group. Replace all rules of a specified security group with the provided rules.
-   *
-   * @param request - The request {@link SetSecurityGroupRulesRequest}
-   * @returns A Promise of SecurityGroup
-   */
   setSecurityGroupRules = (request: Readonly<SetSecurityGroupRulesRequest>) =>
     this.client.fetch<SecurityGroup>(
       {
@@ -973,12 +759,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Update a security group rule. Update the properties of a rule from a specified security group.
-   *
-   * @param request - The request {@link UpdateSecurityGroupRuleRequest}
-   * @returns A Promise of SecurityGroup
-   */
   updateSecurityGroupRule = (request: Readonly<UpdateSecurityGroupRuleRequest>) =>
     this.client.fetch<SecurityGroup>(
       {
@@ -993,11 +773,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Delete rules from a security group. Delete specified security groups.
-   *
-   * @param request - The request {@link DeleteSecurityGroupRulesRequest}
-   */
   deleteSecurityGroupRules = (request: Readonly<DeleteSecurityGroupRulesRequest> = {}) =>
     this.client.fetch<void>(
       {
@@ -1011,12 +786,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * List user data keys. List all user data keys registered on a specified Instance.
-   *
-   * @param request - The request {@link ListUserDataKeysRequest}
-   * @returns A Promise of ListUserDataKeysResponse
-   */
   listUserDataKeys = (request: Readonly<ListUserDataKeysRequest>) =>
     this.client.fetch<ListUserDataKeysResponse>(
       {
@@ -1031,12 +800,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get user data. Get the content of a user data with a specified key on an Instance.
-   *
-   * @param request - The request {@link GetUserDataRequest}
-   * @returns A Promise of UserData
-   */
   getUserData = (request: Readonly<GetUserDataRequest>) =>
     this.client.fetch<UserData>(
       {
@@ -1047,11 +810,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Add/set user data. Add or update a user data with a specified key on an Instance.
-   *
-   * @param request - The request {@link SetUserDataRequest}
-   */
   setUserData = (request: Readonly<SetUserDataRequest>) =>
     this.client.fetch<void>(
       {
@@ -1065,11 +823,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Delete user data. Delete a specified key from an Instance's user data.
-   *
-   * @param request - The request {@link DeleteUserDataRequest}
-   */
   deleteUserData = (request: Readonly<DeleteUserDataRequest>) =>
     this.client.fetch<void>(
       {
@@ -1079,12 +832,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get cloud-init user data. Get the cloud-init configuration of a specified Instance.
-   *
-   * @param request - The request {@link GetServerCloudInitRequest}
-   * @returns A Promise of UserData
-   */
   getServerCloudInit = (request: Readonly<GetServerCloudInitRequest>) =>
     this.client.fetch<UserData>(
       {
@@ -1095,11 +842,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Set cloud-init user data. Set the cloud-init configuration for a specified Instance.
-   *
-   * @param request - The request {@link SetServerCloudInitRequest}
-   */
   setServerCloudInit = (request: Readonly<SetServerCloudInitRequest>) =>
     this.client.fetch<void>(
       {
@@ -1113,12 +855,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * List templates. List all available templates.
-   *
-   * @param request - The request {@link ListTemplatesRequest}
-   * @returns A Promise of ListTemplatesResponse
-   */
   listTemplates = (request: Readonly<ListTemplatesRequest> = {}) =>
     this.client.fetch<ListTemplatesResponse>(
       {
@@ -1141,12 +877,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Create a template. Create a new template from an Instance.
-   *
-   * @param request - The request {@link CreateTemplateRequest}
-   * @returns A Promise of Template
-   */
   createTemplate = (request: Readonly<CreateTemplateRequest>) =>
     this.client.fetch<Template>(
       {
@@ -1161,12 +891,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get a template. Get details of a specified template.
-   *
-   * @param request - The request {@link GetTemplateRequest}
-   * @returns A Promise of Template
-   */
   getTemplate = (request: Readonly<GetTemplateRequest>) =>
     this.client.fetch<Template>(
       {
@@ -1177,12 +901,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Update a template. Update the properties of a template.
-   *
-   * @param request - The request {@link UpdateTemplateRequest}
-   * @returns A Promise of Template
-   */
   updateTemplate = (request: Readonly<UpdateTemplateRequest>) =>
     this.client.fetch<Template>(
       {
@@ -1197,11 +915,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Delete a template. Delete a specified template.
-   *
-   * @param request - The request {@link DeleteTemplateRequest}
-   */
   deleteTemplate = (request: Readonly<DeleteTemplateRequest>) =>
     this.client.fetch<void>(
       {
@@ -1213,12 +926,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * List template user data keys. List all user data keys of a template.
-   *
-   * @param request - The request {@link ListTemplateUserDataKeysRequest}
-   * @returns A Promise of ListTemplateUserDataKeysResponse
-   */
   listTemplateUserDataKeys = (request: Readonly<ListTemplateUserDataKeysRequest>) =>
     this.client.fetch<ListTemplateUserDataKeysResponse>(
       {
@@ -1233,12 +940,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get template user data. Get a specific user data key of a template.
-   *
-   * @param request - The request {@link GetTemplateUserDataRequest}
-   * @returns A Promise of UserData
-   */
   getTemplateUserData = (request: Readonly<GetTemplateUserDataRequest>) =>
     this.client.fetch<UserData>(
       {
@@ -1249,11 +950,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Set template user data. Set a user data key of a template.
-   *
-   * @param request - The request {@link SetTemplateUserDataRequest}
-   */
   setTemplateUserData = (request: Readonly<SetTemplateUserDataRequest>) =>
     this.client.fetch<void>(
       {
@@ -1267,11 +963,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Delete template user data. Delete a specific user data key of a template.
-   *
-   * @param request - The request {@link DeleteTemplateUserDataRequest}
-   */
   deleteTemplateUserData = (request: Readonly<DeleteTemplateUserDataRequest>) =>
     this.client.fetch<void>(
       {
@@ -1281,12 +972,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Get template cloud-init. Get the cloud-init configuration of a template.
-   *
-   * @param request - The request {@link GetTemplateCloudInitRequest}
-   * @returns A Promise of UserData
-   */
   getTemplateCloudInit = (request: Readonly<GetTemplateCloudInitRequest>) =>
     this.client.fetch<UserData>(
       {
@@ -1297,11 +982,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Set template cloud-init. Set the cloud-init configuration of a template.
-   *
-   * @param request - The request {@link SetTemplateCloudInitRequest}
-   */
   setTemplateCloudInit = (request: Readonly<SetTemplateCloudInitRequest>) =>
     this.client.fetch<void>(
       {
@@ -1315,11 +995,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Check a template. Validate that a template is usable.
-   *
-   * @param request - The request {@link CheckTemplateRequest}
-   */
   checkTemplate = (request: Readonly<CheckTemplateRequest>) =>
     this.client.fetch<void>(
       {
@@ -1329,12 +1004,6 @@ export class API extends ParentAPI {
     )
 
   
-  /**
-   * Create a server from a template. Create a new Instance using a specified template.
-   *
-   * @param request - The request {@link CreateServerFromTemplateRequest}
-   * @returns A Promise of Server
-   */
   createServerFromTemplate = (request: Readonly<CreateServerFromTemplateRequest>) =>
     this.client.fetch<Server>(
       {
