@@ -101,6 +101,7 @@ export type APISdk = {
   inferencev1beta1: Inferencev1beta1.API
   instancev1: Instancev1.API
   instancev2alpha1: Instancev2alpha1.API
+  instancev2alpha1Volume: Instancev2alpha1.VolumeAPI
   interlinkv1beta1: Interlinkv1beta1.API
   iotv1: Iotv1.API
   ipamv1: Ipamv1.API

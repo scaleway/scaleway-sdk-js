@@ -56,3 +56,24 @@ export const ListUserDataKeysRequest = {
     lessThanOrEqual: 100,
   },
 }
+
+export const VolumeApiListSnapshotsRequest = {
+  pageSize: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
+export const VolumeApiListVolumeTypesRequest = {
+  pageSize: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
+export const VolumeApiListVolumesRequest = {
+  pageSize: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 100,
+  },
+}
