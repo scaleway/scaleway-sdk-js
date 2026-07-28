@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.5.0 (2026-07-27)
+
+
+### Features
+
+* **search:** add relevance value to order_by enum ([#3159](https://github.com/scaleway/scaleway-sdk-js/issues/3159)) ([809f720](https://github.com/scaleway/scaleway-sdk-js/commit/809f7202db41cc817900743c3c51515ae71b5bc9))
+* **search:** add sort/pagination and empty query possible ([#3149](https://github.com/scaleway/scaleway-sdk-js/issues/3149)) ([c94a5d1](https://github.com/scaleway/scaleway-sdk-js/commit/c94a5d1fef5f4d6afcd14c493c9144071b5477b2))
+
+
+
+
+
 ## [1.4.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-search@1.4.0...@scaleway/sdk-search@1.4.1) (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-search

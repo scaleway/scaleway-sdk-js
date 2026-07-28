@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.4.4 (2026-07-27)
+
+**Note:** Version bump only for package @scaleway/sdk-marketplace
+
+
+
+
+
 ## 2.4.3 (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-marketplace

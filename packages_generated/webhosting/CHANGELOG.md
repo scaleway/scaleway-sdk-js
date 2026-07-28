@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.12.0 (2026-07-27)
+
+
+### Features
+
+* **webhosting:** add delete_hosting_at_end to UpdateHostingRequest to toggle auto-renew ([#3150](https://github.com/scaleway/scaleway-sdk-js/issues/3150)) ([083ca6e](https://github.com/scaleway/scaleway-sdk-js/commit/083ca6ec23df28966935ad7e833a8b696d87a99b))
+
+
+
+
+
 # [2.11.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-webhosting@2.10.0...@scaleway/sdk-webhosting@2.11.0) (2026-07-06)
 
 
