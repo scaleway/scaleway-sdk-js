@@ -1,0 +1,26 @@
+{
+  "name": "@repo/pnpm-auto-release",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bump and publish changed packages via pnpm",
+  "repository": {
+    "type": "git",
+    "directory": "tools/pnpm-auto-release"
+  },
+  "bin": {
+    "pnpm-auto-release": "./src/cli.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@repo/configs": "workspace:*",
+    "@types/node": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.23.1",
+    "pnpm": ">=11.17.0"
+  }
+}

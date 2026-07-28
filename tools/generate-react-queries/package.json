@@ -27,7 +27,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.43"
+    "@types/node": "catalog:"
   },
   "engines": {
     "node": ">=20.20.2"

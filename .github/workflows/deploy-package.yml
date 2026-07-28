@@ -61,21 +61,30 @@ jobs:
             exit 1
           fi
 
-      - name: Version package with lerna
-        run: pnpm lerna version -y --no-private --force-git-tag --create-release github
+      - name: Release
+        run: pnpm-auto-release
         env:
           HUSKY: 0
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      # https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-nodejs-packages#publishing-packages-to-the-npm-registry
-      # npm may auto-enable provenance in GHA (OIDC); without Trusted Publishing configured on
-      # npmjs.com for this repo, publish can fail with a misleading 404 on PUT. Use the classic token.
-      - name: Publish to npm
-        run: pnpm -r publish --access public --tag latest
-        env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'false'
+
+      - name: Create GitHub releases
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          for tag in $(git tag --points-at HEAD); do
+            if gh release view "$tag" >/dev/null 2>&1; then
+              echo "Release for $tag already exists, skipping"
+              continue
+            fi
+            gh release create "$tag" \
+              --title "$tag" \
+              --notes "Release $tag" \
+              --verify-tag
+            echo "Created GitHub release for $tag"
+          done
 
       - name: Notify Slack on success
         if: success()

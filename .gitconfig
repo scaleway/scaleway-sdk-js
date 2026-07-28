@@ -1,8 +1,8 @@
 
-[hook "pre-commit lint-staged"]
+[hook "pre-commit nano-staged"]
   event = pre-commit
-  command = pnpm lint-staged
+  command = pnpm nano-staged
 
-[hook "pre-push lint-staged"]
+[hook "pre-push nano-staged"]
   event = pre-push
-  command = pnpm lint-staged
+  command = pnpm nano-staged
