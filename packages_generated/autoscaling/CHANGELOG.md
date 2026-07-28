@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-autoscaling@2.6.1...@scaleway/sdk-autoscaling@2.7.0) (2026-07-27)
+
+
+### Bug Fixes
+
+* **instance:** move instance.v2alpha volume api documentation to volume_api.yml ([#3163](https://github.com/scaleway/scaleway-sdk-js/issues/3163)) ([0cfaa0d](https://github.com/scaleway/scaleway-sdk-js/commit/0cfaa0d4aa3ff83df773f872a3c70be84bde19eb))
+
+
+### Features
+
+* **autoscaling:** add support for `GroupSummaryScalingPolicyTargetType` ([#3139](https://github.com/scaleway/scaleway-sdk-js/issues/3139)) ([7212f8d](https://github.com/scaleway/scaleway-sdk-js/commit/7212f8d9875afa9d8c6336b610c97027912a1a66))
+* **lb:** add support for filtering with `lbIds` ([#3147](https://github.com/scaleway/scaleway-sdk-js/issues/3147)) ([997a8cd](https://github.com/scaleway/scaleway-sdk-js/commit/997a8cd2a0bc579e05c042f70ec1d97ac17c127d))
+
+
+
+
+
 ## [2.6.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-autoscaling@2.6.0...@scaleway/sdk-autoscaling@2.6.1) (2026-07-20)
 
 

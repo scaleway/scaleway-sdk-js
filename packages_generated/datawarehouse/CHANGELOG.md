@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-datawarehouse@2.9.2...@scaleway/sdk-datawarehouse@2.10.0) (2026-07-27)
+
+
+### Bug Fixes
+
+* **instance:** move instance.v2alpha volume api documentation to volume_api.yml ([#3163](https://github.com/scaleway/scaleway-sdk-js/issues/3163)) ([0cfaa0d](https://github.com/scaleway/scaleway-sdk-js/commit/0cfaa0d4aa3ff83df773f872a3c70be84bde19eb))
+
+
+### Features
+
+* **datawarehouse:** add support for `deploymentId` and `region` ([#3138](https://github.com/scaleway/scaleway-sdk-js/issues/3138)) ([f6c34dc](https://github.com/scaleway/scaleway-sdk-js/commit/f6c34dcee04e5c9cbffaa6735f4acd82a20702fa))
+
+
+
+
+
 ## 2.9.2 (2026-07-20)
 
 

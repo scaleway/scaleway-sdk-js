@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.2](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.9.1...@scaleway/sdk-react@0.9.2) (2026-07-27)
+
+
+### Bug Fixes
+
+* **pnpm:** optimisticRepeatInstall setting to false ([#3167](https://github.com/scaleway/scaleway-sdk-js/issues/3167)) ([400f9bc](https://github.com/scaleway/scaleway-sdk-js/commit/400f9bc6114d9ee680e3ec84e0266952bb2d7b8e))
+
+
+
+
+
 ## [0.9.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react@0.9.0...@scaleway/sdk-react@0.9.1) (2026-07-20)
 
 **Note:** Version bump only for package @scaleway/sdk-react

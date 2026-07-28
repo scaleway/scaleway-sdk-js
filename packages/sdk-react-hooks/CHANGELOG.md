@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.11.1...@scaleway/sdk-react-hooks@0.12.0) (2026-07-27)
+
+
+### Bug Fixes
+
+* **pnpm:** optimisticRepeatInstall setting to false ([#3167](https://github.com/scaleway/scaleway-sdk-js/issues/3167)) ([400f9bc](https://github.com/scaleway/scaleway-sdk-js/commit/400f9bc6114d9ee680e3ec84e0266952bb2d7b8e))
+
+
+### Features
+
+* **audit_trail:** add custom alerts ([#3155](https://github.com/scaleway/scaleway-sdk-js/issues/3155)) ([856769c](https://github.com/scaleway/scaleway-sdk-js/commit/856769c43eb5177c1303d712c196eb6cffea7b7f))
+
+
+
+
+
 ## [0.11.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-react-hooks@0.11.0...@scaleway/sdk-react-hooks@0.11.1) (2026-07-20)
 
 **Note:** Version bump only for package @scaleway/sdk-react-hooks

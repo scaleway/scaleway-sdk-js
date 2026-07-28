@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.9.0 (2026-07-27)
+
+
+### Features
+
+* **billing:** add project_name and organization_name to ListConsumptions response ([#3152](https://github.com/scaleway/scaleway-sdk-js/issues/3152)) ([66c0d8a](https://github.com/scaleway/scaleway-sdk-js/commit/66c0d8a83347ef015cb705263272b6a1ccad1ed0))
+
+
+
+
+
 # 2.8.0 (2026-07-13)
 
 

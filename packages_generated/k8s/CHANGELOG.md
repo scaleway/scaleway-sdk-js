@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.16.0 (2026-07-27)
+
+
+### Features
+
+* **k8s:** revert to older behaviour for `DeleteNode` ([#3153](https://github.com/scaleway/scaleway-sdk-js/issues/3153)) ([18a83da](https://github.com/scaleway/scaleway-sdk-js/commit/18a83dac5584d72de78339310e059f378bdb597e))
+
+
+
+
+
 # [2.15.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-k8s@2.14.0...@scaleway/sdk-k8s@2.15.0) (2026-07-13)
 
 

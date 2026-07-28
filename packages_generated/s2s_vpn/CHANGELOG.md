@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.9.2 (2026-07-27)
+
+**Note:** Version bump only for package @scaleway/sdk-s2s-vpn
+
+
+
+
+
 ## 2.9.1 (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-s2s-vpn
