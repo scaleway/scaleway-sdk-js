@@ -7,6 +7,8 @@ import type {
   ServerPrivateNetworkInterfaceStatus,
   ServerPublicNetworkInterfaceStatus,
   ServerStatus,
+  SnapshotStatus,
+  VolumeStatus,
 } from './types.gen.js'
 
 
@@ -46,5 +48,20 @@ export const SERVER_TRANSIENT_STATUSES: ServerStatus[] = [
   'stopping',
   'pausing',
   'rebooting',
+]
+
+/** Lists transient statutes of the enum {@link SnapshotStatus}. */
+export const SNAPSHOT_TRANSIENT_STATUSES: SnapshotStatus[] = [
+  'creating',
+  'exporting',
+]
+
+/** Lists transient statutes of the enum {@link VolumeStatus}. */
+export const VOLUME_TRANSIENT_STATUSES: VolumeStatus[] = [
+  'snapshotting',
+  'attaching',
+  'detaching',
+  'creating',
+  'migrating',
 ]
 

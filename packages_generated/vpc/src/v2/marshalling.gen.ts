@@ -11,6 +11,7 @@ import type {
   VPCConnectorPeerInfo,
   VPCConnector,
   VPC,
+  AddPrivateNetworkS3EndpointResponse,
   AclRule,
   GetAclResponse,
   ListIngressRulesResponse,
@@ -21,12 +22,15 @@ import type {
   ListVPCConnectorsResponse,
   ListVPCsResponse,
   SetAclResponse,
+  SetPrivateNetworksS3EndpointResponse,
+  AddPrivateNetworkS3EndpointRequest,
   CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
   SetAclRequest,
+  SetPrivateNetworksS3EndpointRequest,
   UpdateIngressRuleRequest,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
@@ -64,6 +68,7 @@ export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
     createdAt: unmarshalDate(data.created_at),
     defaultRoutePropagationEnabled: data.default_route_propagation_enabled,
     dhcpEnabled: data.dhcp_enabled,
+    hasS3Integration: data.has_s3_integration,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -179,10 +184,24 @@ export const unmarshalVPC = (data: unknown): VPC => {
     projectId: data.project_id,
     region: data.region,
     routingEnabled: data.routing_enabled,
+    s3IntegrationEnabled: data.s3_integration_enabled,
     tags: data.tags,
     transitivityEnabled: data.transitivity_enabled,
     updatedAt: unmarshalDate(data.updated_at),
   } as VPC
+}
+
+export const unmarshalAddPrivateNetworkS3EndpointResponse = (data: unknown): AddPrivateNetworkS3EndpointResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AddPrivateNetworkS3EndpointResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    privateNetworkIds: data.private_network_ids,
+    vpcId: data.vpc_id,
+  } as AddPrivateNetworkS3EndpointResponse
 }
 
 const unmarshalAclRule = (data: unknown): AclRule => {
@@ -324,6 +343,26 @@ export const unmarshalSetAclResponse = (data: unknown): SetAclResponse => {
   } as SetAclResponse
 }
 
+export const unmarshalSetPrivateNetworksS3EndpointResponse = (data: unknown): SetPrivateNetworksS3EndpointResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SetPrivateNetworksS3EndpointResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    privateNetworkIds: data.private_network_ids,
+    vpcId: data.vpc_id,
+  } as SetPrivateNetworksS3EndpointResponse
+}
+
+export const marshalAddPrivateNetworkS3EndpointRequest = (
+  request: AddPrivateNetworkS3EndpointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_id: request.privateNetworkId,
+})
+
 export const marshalCreateIngressRuleRequest = (
   request: CreateIngressRuleRequest,
   defaults: DefaultValues,
@@ -404,6 +443,13 @@ export const marshalSetAclRequest = (
   default_policy: request.defaultPolicy,
   is_ipv6: request.isIpv6,
   rules:  request.rules.map(elt => marshalAclRule(elt, defaults)),
+})
+
+export const marshalSetPrivateNetworksS3EndpointRequest = (
+  request: SetPrivateNetworksS3EndpointRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_ids: request.privateNetworkIds,
 })
 
 export const marshalUpdateIngressRuleRequest = (
