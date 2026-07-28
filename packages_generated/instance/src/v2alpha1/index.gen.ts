@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 export {
   API,
+  VolumeAPI,
 } from './api.gen.js'
 export * from './content.gen.js'
 export * from './marshalling.gen.js'
@@ -28,6 +29,7 @@ export type {
   CreateTemplateRequest,
   CreateTemplateRequestPrivateNetworkTemplate,
   CreateTemplateRequestVolumeTemplate,
+  CreateVolumeRequestVolumeType,
   DeletePlacementGroupRequest,
   DeletePrivateNetworkInterfaceRequest,
   DeleteSecurityGroupRequest,
@@ -64,6 +66,8 @@ export type {
   ListServersRequest,
   ListServersRequestOrderBy,
   ListServersResponse,
+  ListSnapshotsRequestOrderBy,
+  ListSnapshotsResponse,
   ListTemplateUserDataKeysRequest,
   ListTemplateUserDataKeysResponse,
   ListTemplatesRequest,
@@ -71,6 +75,9 @@ export type {
   ListTemplatesResponse,
   ListUserDataKeysRequest,
   ListUserDataKeysResponse,
+  ListVolumeTypesResponse,
+  ListVolumesRequestOrderBy,
+  ListVolumesResponse,
   PauseServerRequest,
   PlacementGroup,
   PlacementGroupPolicyType,
@@ -114,6 +121,9 @@ export type {
   SetTemplateCloudInitRequest,
   SetTemplateUserDataRequest,
   SetUserDataRequest,
+  Snapshot,
+  SnapshotStatus,
+  SnapshotVolumeType,
   StartServerRequest,
   StopAndDeleteServerRequest,
   StopServerRequest,
@@ -129,5 +139,22 @@ export type {
   UpdateTemplateRequestUpdatePrivateNetworks,
   UpdateTemplateRequestUpdateVolumes,
   UserData,
+  Volume,
+  VolumeApiCreateSnapshotRequest,
+  VolumeApiCreateVolumeRequest,
+  VolumeApiDeleteSnapshotRequest,
+  VolumeApiDeleteVolumeRequest,
+  VolumeApiExportSnapshotToObjectStorageRequest,
+  VolumeApiGetSnapshotRequest,
+  VolumeApiGetVolumeRequest,
+  VolumeApiImportSnapshotFromObjectStorageRequest,
+  VolumeApiListSnapshotsRequest,
+  VolumeApiListVolumeTypesRequest,
+  VolumeApiListVolumesRequest,
+  VolumeApiUpdateSnapshotRequest,
+  VolumeApiUpdateVolumeRequest,
+  VolumeStatus,
+  VolumeType,
+  VolumeVolumeType,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

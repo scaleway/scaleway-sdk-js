@@ -8,6 +8,8 @@ import type {
   SecurityGroupRule,
   SecurityGroup,
   PlacementGroup,
+  Snapshot,
+  Volume,
   AddSecurityGroupRulesResponse,
   ListPlacementGroupsResponse,
   PrivateNetworkInterfaceSummary,
@@ -20,10 +22,14 @@ import type {
   ListServerTypesResponse,
   ServerSummary,
   ListServersResponse,
+  ListSnapshotsResponse,
   ListTemplateUserDataKeysResponse,
   TemplateSummary,
   ListTemplatesResponse,
   ListUserDataKeysResponse,
+  VolumeType,
+  ListVolumeTypesResponse,
+  ListVolumesResponse,
   PrivateNetworkInterface,
   ResourceCounts,
   ServerIP,
@@ -75,6 +81,12 @@ import type {
   UpdateTemplateRequestUpdatePrivateNetworks,
   UpdateTemplateRequestUpdateVolumes,
   UpdateTemplateRequest,
+  VolumeApiCreateSnapshotRequest,
+  VolumeApiCreateVolumeRequest,
+  VolumeApiExportSnapshotToObjectStorageRequest,
+  VolumeApiImportSnapshotFromObjectStorageRequest,
+  VolumeApiUpdateSnapshotRequest,
+  VolumeApiUpdateVolumeRequest,
 } from './types.gen.js'
 
 export const unmarshalSecurityGroupRulePortRange = (data: unknown): SecurityGroupRulePortRange => {
@@ -155,6 +167,52 @@ export const unmarshalPlacementGroup = (data: unknown): PlacementGroup => {
   } as PlacementGroup
 }
 
+export const unmarshalSnapshot = (data: unknown): Snapshot => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Snapshot' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    baseVolumeId: data.base_volume_id,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    projectId: data.project_id,
+    public: data.public,
+    size: data.size,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    volumeType: data.volume_type,
+    zone: data.zone,
+  } as Snapshot
+}
+
+export const unmarshalVolume = (data: unknown): Volume => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Volume' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    baseSnapshotId: data.base_snapshot_id,
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    projectId: data.project_id,
+    serverId: data.server_id,
+    size: data.size,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+    volumeType: data.volume_type,
+    zone: data.zone,
+  } as Volume
+}
+
 export const unmarshalAddSecurityGroupRulesResponse = (data: unknown): AddSecurityGroupRulesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -196,7 +254,6 @@ const unmarshalPrivateNetworkInterfaceSummary = (data: unknown): PrivateNetworkI
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
-    securityGroupId: data.security_group_id,
     serverId: data.server_id,
     status: data.status,
     tags: data.tags,
@@ -360,6 +417,20 @@ export const unmarshalListServersResponse = (data: unknown): ListServersResponse
   } as ListServersResponse
 }
 
+export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nextPageToken: data.next_page_token,
+    snapshots: unmarshalArrayOfObject(data.snapshots, unmarshalSnapshot),
+    totalCount: data.total_count,
+  } as ListSnapshotsResponse
+}
+
 export const unmarshalListTemplateUserDataKeysResponse = (data: unknown): ListTemplateUserDataKeysResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -427,6 +498,48 @@ export const unmarshalListUserDataKeysResponse = (data: unknown): ListUserDataKe
   } as ListUserDataKeysResponse
 }
 
+const unmarshalVolumeType = (data: unknown): VolumeType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'VolumeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxSize: data.max_size,
+    minSize: data.min_size,
+    name: data.name,
+  } as VolumeType
+}
+
+export const unmarshalListVolumeTypesResponse = (data: unknown): ListVolumeTypesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVolumeTypesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nextPageToken: data.next_page_token,
+    totalCount: data.total_count,
+    volumeTypes: unmarshalArrayOfObject(data.volume_types, unmarshalVolumeType),
+  } as ListVolumeTypesResponse
+}
+
+export const unmarshalListVolumesResponse = (data: unknown): ListVolumesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVolumesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nextPageToken: data.next_page_token,
+    totalCount: data.total_count,
+    volumes: unmarshalArrayOfObject(data.volumes, unmarshalVolume),
+  } as ListVolumesResponse
+}
+
 export const unmarshalPrivateNetworkInterface = (data: unknown): PrivateNetworkInterface => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -441,7 +554,6 @@ export const unmarshalPrivateNetworkInterface = (data: unknown): PrivateNetworkI
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
-    securityGroupId: data.security_group_id,
     serverId: data.server_id,
     status: data.status,
     tags: data.tags,
@@ -738,7 +850,6 @@ export const marshalCreatePrivateNetworkInterfaceRequest = (
   ip_ids: request.ipIds,
   private_network_id: request.privateNetworkId,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  security_group_id: request.securityGroupId,
   server_id: request.serverId,
   tags: request.tags,
 })
@@ -1010,7 +1121,6 @@ export const marshalUpdatePrivateNetworkInterfaceRequest = (
   request: UpdatePrivateNetworkInterfaceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  security_group_id: request.securityGroupId,
   tags: request.tags,
 })
 
@@ -1094,4 +1204,66 @@ export const marshalUpdateTemplateRequest = (
   update_private_networks: ((request.updatePrivateNetworks !== undefined) ?  marshalUpdateTemplateRequestUpdatePrivateNetworks(request.updatePrivateNetworks, defaults): undefined),
   update_volumes: ((request.updateVolumes !== undefined) ?  marshalUpdateTemplateRequestUpdateVolumes(request.updateVolumes, defaults): undefined),
   windows_rdp_ssh_key_id: request.windowsRdpSshKeyId,
+})
+
+export const marshalVolumeApiCreateSnapshotRequest = (
+  request: VolumeApiCreateSnapshotRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  base_volume_id: request.baseVolumeId,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  public: request.public,
+  tags: request.tags,
+})
+
+export const marshalVolumeApiCreateVolumeRequest = (
+  request: VolumeApiCreateVolumeRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  base_snapshot_id: request.baseSnapshotId,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  size: request.size,
+  tags: request.tags,
+  volume_type: request.volumeType,
+})
+
+export const marshalVolumeApiExportSnapshotToObjectStorageRequest = (
+  request: VolumeApiExportSnapshotToObjectStorageRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket: request.bucket,
+  object_key: request.objectKey,
+})
+
+export const marshalVolumeApiImportSnapshotFromObjectStorageRequest = (
+  request: VolumeApiImportSnapshotFromObjectStorageRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  bucket: request.bucket,
+  name: request.name,
+  object_key: request.objectKey,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  size: request.size,
+  tags: request.tags,
+  volume_type: request.volumeType,
+})
+
+export const marshalVolumeApiUpdateSnapshotRequest = (
+  request: VolumeApiUpdateSnapshotRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  public: request.public,
+  tags: request.tags,
+})
+
+export const marshalVolumeApiUpdateVolumeRequest = (
+  request: VolumeApiUpdateVolumeRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  size: request.size,
+  tags: request.tags,
 })
