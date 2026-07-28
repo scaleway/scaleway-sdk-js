@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.18.0...@scaleway/sdk-product-catalog@2.19.0) (2026-07-27)
+
+
+### Features
+
+* **pcu:** add support for `PublicCatalogProductPropertiesInstanceLocalSSDSnapshot` and `PublicCatalogProductPropertiesInstanceLocalSSDStorage` ([#3148](https://github.com/scaleway/scaleway-sdk-js/issues/3148)) ([80f6da3](https://github.com/scaleway/scaleway-sdk-js/commit/80f6da31f576ec38e80380d05aa2f4bb5c163bd7))
+* **search:** add relevance value to order_by enum ([#3159](https://github.com/scaleway/scaleway-sdk-js/issues/3159)) ([809f720](https://github.com/scaleway/scaleway-sdk-js/commit/809f7202db41cc817900743c3c51515ae71b5bc9))
+
+
+
+
+
 # [2.18.0](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-product-catalog@2.17.0...@scaleway/sdk-product-catalog@2.18.0) (2026-07-20)
 
 

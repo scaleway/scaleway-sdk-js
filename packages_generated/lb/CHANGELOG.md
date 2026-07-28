@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2026-07-27)
+
+
+### Features
+
+* **lb:** add support for filtering with `lbIds` ([#3147](https://github.com/scaleway/scaleway-sdk-js/issues/3147)) ([997a8cd](https://github.com/scaleway/scaleway-sdk-js/commit/997a8cd2a0bc579e05c042f70ec1d97ac17c127d))
+
+
+
+
+
 ## [2.7.4](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-lb@2.7.3...@scaleway/sdk-lb@2.7.4) (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-lb

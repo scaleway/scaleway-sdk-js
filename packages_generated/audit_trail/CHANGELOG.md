@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.17.0 (2026-07-27)
+
+
+### Bug Fixes
+
+* **instance:** move instance.v2alpha volume api documentation to volume_api.yml ([#3163](https://github.com/scaleway/scaleway-sdk-js/issues/3163)) ([0cfaa0d](https://github.com/scaleway/scaleway-sdk-js/commit/0cfaa0d4aa3ff83df773f872a3c70be84bde19eb))
+
+
+### Features
+
+* **audit_trail:** add custom alerts ([#3155](https://github.com/scaleway/scaleway-sdk-js/issues/3155)) ([856769c](https://github.com/scaleway/scaleway-sdk-js/commit/856769c43eb5177c1303d712c196eb6cffea7b7f))
+
+
+
+
+
 ## [2.16.1](https://github.com/scaleway/scaleway-sdk-js/compare/@scaleway/sdk-audit-trail@2.16.0...@scaleway/sdk-audit-trail@2.16.1) (2026-06-29)
 
 **Note:** Version bump only for package @scaleway/sdk-audit-trail
