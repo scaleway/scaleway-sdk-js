@@ -1,5 +1,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { execSync } from 'node:child_process'
+import { cwd } from 'node:process'
 import type { Config } from '../config.ts'
 import { escapeRegExp } from '../helpers.ts'
 
@@ -91,5 +93,8 @@ export const deps = async ({ src, config, dryRun = false }: DepsOptions): Promis
   }
 
   console.log(`\n📊 Packages updated: ${updated}`)
+  if (updated > 0) {
+    execSync('pnpm install --no-frozen-lockfile', { stdio: 'inherit', cwd: cwd() })
+  }
   if (dryRun) console.log('🔍 DRY RUN - no changes made')
 }
