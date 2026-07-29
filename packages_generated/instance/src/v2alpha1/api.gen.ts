@@ -11,7 +11,7 @@ import {
   toApiLocality,
 } from '@scaleway/sdk-client'
 import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES as PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_FILESYSTEM_TRANSIENT_STATUSES as SERVER_FILESYSTEM_TRANSIENT_STATUSES_INSTANCE,SERVER_IP_TRANSIENT_STATUSES as SERVER_IP_TRANSIENT_STATUSES_INSTANCE,SERVER_PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_PUBLIC_NETWORK_INTERFACE_TRANSIENT_STATUSES as SERVER_PUBLIC_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_INSTANCE,} from './content.gen.js'
+import {PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES as PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_FILESYSTEM_TRANSIENT_STATUSES as SERVER_FILESYSTEM_TRANSIENT_STATUSES_INSTANCE,SERVER_IP_TRANSIENT_STATUSES as SERVER_IP_TRANSIENT_STATUSES_INSTANCE,SERVER_PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_PUBLIC_NETWORK_INTERFACE_TRANSIENT_STATUSES as SERVER_PUBLIC_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_INSTANCE,SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_INSTANCE,VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_INSTANCE,} from './content.gen.js'
 import {
   marshalAddSecurityGroupRulesRequest,
   unmarshalAddSecurityGroupRulesResponse,
@@ -35,9 +35,12 @@ import {
   unmarshalListSecurityGroupsResponse,
   unmarshalListServerTypesResponse,
   unmarshalListServersResponse,
+  unmarshalListSnapshotsResponse,
   unmarshalListTemplateUserDataKeysResponse,
   unmarshalListTemplatesResponse,
   unmarshalListUserDataKeysResponse,
+  unmarshalListVolumeTypesResponse,
+  unmarshalListVolumesResponse,
   unmarshalPlacementGroup,
   unmarshalPrivateNetworkInterface,
   unmarshalResourceCounts,
@@ -49,6 +52,7 @@ import {
   marshalSetTemplateCloudInitRequest,
   marshalSetTemplateUserDataRequest,
   marshalSetUserDataRequest,
+  unmarshalSnapshot,
   marshalStopAndDeleteServerRequest,
   unmarshalTemplate,
   marshalUpdatePlacementGroupRequest,
@@ -58,6 +62,13 @@ import {
   marshalUpdateServerRequest,
   marshalUpdateTemplateRequest,
   unmarshalUserData,
+  unmarshalVolume,
+  marshalVolumeApiCreateSnapshotRequest,
+  marshalVolumeApiCreateVolumeRequest,
+  marshalVolumeApiExportSnapshotToObjectStorageRequest,
+  marshalVolumeApiImportSnapshotFromObjectStorageRequest,
+  marshalVolumeApiUpdateSnapshotRequest,
+  marshalVolumeApiUpdateVolumeRequest,
 } from './marshalling.gen.js'
 import type {
   AddSecurityGroupRulesRequest,
@@ -105,12 +116,15 @@ import type {
   ListServerTypesResponse,
   ListServersRequest,
   ListServersResponse,
+  ListSnapshotsResponse,
   ListTemplateUserDataKeysRequest,
   ListTemplateUserDataKeysResponse,
   ListTemplatesRequest,
   ListTemplatesResponse,
   ListUserDataKeysRequest,
   ListUserDataKeysResponse,
+  ListVolumeTypesResponse,
+  ListVolumesResponse,
   PauseServerRequest,
   PlacementGroup,
   PrivateNetworkInterface,
@@ -124,6 +138,7 @@ import type {
   SetTemplateCloudInitRequest,
   SetTemplateUserDataRequest,
   SetUserDataRequest,
+  Snapshot,
   StartServerRequest,
   StopAndDeleteServerRequest,
   StopServerRequest,
@@ -135,6 +150,20 @@ import type {
   UpdateServerRequest,
   UpdateTemplateRequest,
   UserData,
+  Volume,
+  VolumeApiCreateSnapshotRequest,
+  VolumeApiCreateVolumeRequest,
+  VolumeApiDeleteSnapshotRequest,
+  VolumeApiDeleteVolumeRequest,
+  VolumeApiExportSnapshotToObjectStorageRequest,
+  VolumeApiGetSnapshotRequest,
+  VolumeApiGetVolumeRequest,
+  VolumeApiImportSnapshotFromObjectStorageRequest,
+  VolumeApiListSnapshotsRequest,
+  VolumeApiListVolumeTypesRequest,
+  VolumeApiListVolumesRequest,
+  VolumeApiUpdateSnapshotRequest,
+  VolumeApiUpdateVolumeRequest,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -646,7 +675,6 @@ export class API extends ParentAPI {
           ['page_token', request.pageToken],
           ['private_network_ids', request.privateNetworkIds],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
-          ['security_group_ids', request.securityGroupIds],
           ['server_ids', request.serverIds],
           ['tags', request.tags],
         ),
@@ -1346,6 +1374,322 @@ export class API extends ParentAPI {
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/create-server`,
       },
       unmarshalServer,
+    )
+
+  
+}
+
+/**
+ * Instance Volume API.
+
+This API allows you to manage Instance local and scratch volumes.
+ */
+export class VolumeAPI extends ParentAPI {
+  /**
+   * Locality of this API.
+   * type ∈ {'zone','region','global','unspecified'}
+   */
+  public static readonly LOCALITY: ApiLocality =
+    toApiLocality({
+      zones: [
+        'fr-par-1',
+        'fr-par-2',
+        'fr-par-3',
+        'nl-ams-1',
+        'nl-ams-2',
+        'nl-ams-3',
+        'pl-waw-1',
+        'pl-waw-2',
+        'pl-waw-3',
+        'it-mil-1',
+      ],
+    })
+  
+  /**
+   * List volume types. List all volume types and their technical details.
+   *
+   * @param request - The request {@link VolumeApiListVolumeTypesRequest}
+   * @returns A Promise of ListVolumeTypesResponse
+   */
+  listVolumeTypes = (request: Readonly<VolumeApiListVolumeTypesRequest> = {}) =>
+    this.client.fetch<ListVolumeTypesResponse>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volume-types`,
+        urlParams: urlParams(
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['page_token', request.pageToken],
+        ),
+      },
+      unmarshalListVolumeTypesResponse,
+    )
+
+  
+  /**
+   * List volumes.
+   *
+   * @param request - The request {@link VolumeApiListVolumesRequest}
+   * @returns A Promise of ListVolumesResponse
+   */
+  listVolumes = (request: Readonly<VolumeApiListVolumesRequest> = {}) =>
+    this.client.fetch<ListVolumesResponse>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
+        urlParams: urlParams(
+          ['name', request.name],
+          ['order_by', request.orderBy],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['page_token', request.pageToken],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          ['tags', request.tags],
+          ['volume_ids', request.volumeIds],
+          ['volume_type', request.volumeType],
+        ),
+      },
+      unmarshalListVolumesResponse,
+    )
+
+  
+  /**
+   * Create a volume. Create a volume of a specified type.
+   *
+   * @param request - The request {@link VolumeApiCreateVolumeRequest}
+   * @returns A Promise of Volume
+   */
+  createVolume = (request: Readonly<VolumeApiCreateVolumeRequest>) =>
+    this.client.fetch<Volume>(
+      {
+        body: JSON.stringify(
+          marshalVolumeApiCreateVolumeRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
+      },
+      unmarshalVolume,
+    )
+
+  
+  /**
+   * Get a volume. Get a specified volume.
+   *
+   * @param request - The request {@link VolumeApiGetVolumeRequest}
+   * @returns A Promise of Volume
+   */
+  getVolume = (request: Readonly<VolumeApiGetVolumeRequest>) =>
+    this.client.fetch<Volume>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+      },
+      unmarshalVolume,
+    )
+  
+  /**
+   * Waits for {@link Volume} to be in a final state.
+   *
+   * @param request - The request {@link VolumeApiGetVolumeRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Volume
+   */
+  waitForVolume = (
+    request: Readonly<VolumeApiGetVolumeRequest>,
+    options?: Readonly<WaitForOptions<Volume>>,
+  ) =>
+    waitForResource(
+      options?.stop ?? (res => Promise.resolve(!VOLUME_TRANSIENT_STATUSES_INSTANCE.includes(res.status))),
+      this.getVolume,
+      request,
+      options,
+    )
+
+  
+  /**
+   * Update a volume. Update the properties of a specified volume.
+   *
+   * @param request - The request {@link VolumeApiUpdateVolumeRequest}
+   * @returns A Promise of Volume
+   */
+  updateVolume = (request: Readonly<VolumeApiUpdateVolumeRequest>) =>
+    this.client.fetch<Volume>(
+      {
+        body: JSON.stringify(
+          marshalVolumeApiUpdateVolumeRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+      },
+      unmarshalVolume,
+    )
+
+  
+  /**
+   * Delete a volume. Delete a specified volume.
+   *
+   * @param request - The request {@link VolumeApiDeleteVolumeRequest}
+   */
+  deleteVolume = (request: Readonly<VolumeApiDeleteVolumeRequest>) =>
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+      },
+    )
+
+  
+  /**
+   * List snapshots. List all snapshots of an Organization.
+   *
+   * @param request - The request {@link VolumeApiListSnapshotsRequest}
+   * @returns A Promise of ListSnapshotsResponse
+   */
+  listSnapshots = (request: Readonly<VolumeApiListSnapshotsRequest> = {}) =>
+    this.client.fetch<ListSnapshotsResponse>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
+        urlParams: urlParams(
+          ['base_volume_id', request.baseVolumeId],
+          ['name', request.name],
+          ['order_by', request.orderBy],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['page_token', request.pageToken],
+          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          ['snapshot_ids', request.snapshotIds],
+          ['tags', request.tags],
+        ),
+      },
+      unmarshalListSnapshotsResponse,
+    )
+
+  
+  /**
+   * Create a snapshot from a specified volume. Create a snapshot from a specified l_ssd volume.
+   *
+   * @param request - The request {@link VolumeApiCreateSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  createSnapshot = (request: Readonly<VolumeApiCreateSnapshotRequest>) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalVolumeApiCreateSnapshotRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
+      },
+      unmarshalSnapshot,
+    )
+
+  
+  /**
+   * Get a snapshot. Get details of a specified snapshot.
+   *
+   * @param request - The request {@link VolumeApiGetSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  getSnapshot = (request: Readonly<VolumeApiGetSnapshotRequest>) =>
+    this.client.fetch<Snapshot>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+      },
+      unmarshalSnapshot,
+    )
+  
+  /**
+   * Waits for {@link Snapshot} to be in a final state.
+   *
+   * @param request - The request {@link VolumeApiGetSnapshotRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Snapshot
+   */
+  waitForSnapshot = (
+    request: Readonly<VolumeApiGetSnapshotRequest>,
+    options?: Readonly<WaitForOptions<Snapshot>>,
+  ) =>
+    waitForResource(
+      options?.stop ?? (res => Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES_INSTANCE.includes(res.status))),
+      this.getSnapshot,
+      request,
+      options,
+    )
+
+  
+  /**
+   * Update a snapshot. Update the properties of a snapshot.
+   *
+   * @param request - The request {@link VolumeApiUpdateSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  updateSnapshot = (request: Readonly<VolumeApiUpdateSnapshotRequest>) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalVolumeApiUpdateSnapshotRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+      },
+      unmarshalSnapshot,
+    )
+
+  
+  /**
+   * Delete a snapshot. Delete a specified snapshot.
+   *
+   * @param request - The request {@link VolumeApiDeleteSnapshotRequest}
+   */
+  deleteSnapshot = (request: Readonly<VolumeApiDeleteSnapshotRequest>) =>
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+      },
+    )
+
+  
+  /**
+   * Import a snapshot from Object Storage. Import a snapshot from a QCOW2 file stored in Object Storage.
+   *
+   * @param request - The request {@link VolumeApiImportSnapshotFromObjectStorageRequest}
+   * @returns A Promise of Snapshot
+   */
+  importSnapshotFromObjectStorage = (request: Readonly<VolumeApiImportSnapshotFromObjectStorageRequest>) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalVolumeApiImportSnapshotFromObjectStorageRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`,
+      },
+      unmarshalSnapshot,
+    )
+
+  
+  /**
+   * Export a snapshot to Object Storage. Export a snapshot to a specified Object Storage bucket in the same region.
+   *
+   * @param request - The request {@link VolumeApiExportSnapshotToObjectStorageRequest}
+   * @returns A Promise of Snapshot
+   */
+  exportSnapshotToObjectStorage = (request: Readonly<VolumeApiExportSnapshotToObjectStorageRequest>) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalVolumeApiExportSnapshotToObjectStorageRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export-to-object-storage`,
+      },
+      unmarshalSnapshot,
     )
 
   

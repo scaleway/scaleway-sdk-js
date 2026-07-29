@@ -149,6 +149,10 @@ export interface PrivateNetwork {
    * Defines whether default v4 and v6 routes are propagated for this Private Network.
    */
   defaultRoutePropagationEnabled: boolean
+  /**
+   * Defines whether this Private Network is enabled for S3 integration.
+   */
+  hasS3Integration: boolean
 }
 
 
@@ -424,6 +428,38 @@ export interface VPC {
    * Defines whether the VPC allows packets from peered VPCs to transit through.
    */
   transitivityEnabled: boolean
+  /**
+   * Defines whether the S3 integration is enabled for the VPC.
+   */
+  s3IntegrationEnabled: boolean
+}
+
+
+export type AddPrivateNetworkS3EndpointRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the VPC containing the S3 Endpoint.
+   */
+  vpcId: string
+  /**
+   * ID of the Private Network to add to the S3 Endpoint.
+   */
+  privateNetworkId: string
+}
+
+
+export interface AddPrivateNetworkS3EndpointResponse {
+  /**
+   * ID of the VPC containing the S3 Endpoint.
+   */
+  vpcId: string
+  /**
+   * IDs of the Private Networks associated with the S3 Endpoint.
+   */
+  privateNetworkIds: string[]
 }
 
 
@@ -603,6 +639,22 @@ export type DeletePrivateNetworkRequest = {
 }
 
 
+export type DeletePrivateNetworkS3EndpointRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the VPC containing the S3 Endpoint.
+   */
+  vpcId: string
+  /**
+   * ID of the Private Network to remove from the S3 Endpoint.
+   */
+  privateNetworkId: string
+}
+
+
 export type DeleteRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -634,6 +686,18 @@ export type DeleteVPCRequest = {
   region?: ScwRegion
   /**
    * VPC ID.
+   */
+  vpcId: string
+}
+
+
+export type DisableS3EndpointRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the VPC for which to disable S3 integration.
    */
   vpcId: string
 }
@@ -672,6 +736,22 @@ export type EnableRoutingRequest = {
    * VPC ID.
    */
   vpcId: string
+}
+
+
+export type EnableS3EndpointRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the VPC for which to enable S3 integration.
+   */
+  vpcId: string
+  /**
+   * IDs of the Private Networks for which to enable S3 integration.
+   */
+  privateNetworkIds?: string[]
 }
 
 
@@ -856,6 +936,10 @@ export type ListPrivateNetworksRequest = {
    * DHCP status to filter for. When true, only Private Networks with managed DHCP enabled will be returned.
    */
   dhcpEnabled?: boolean
+  /**
+   * Filter by whether S3 integration is enabled. When set, only matching Private Networks will be returned.
+   */
+  s3IntegrationEnabled?: boolean
 }
 
 
@@ -1032,6 +1116,10 @@ export type ListVPCsRequest = {
    * Defines whether to filter only for VPCs which route traffic between their Private Networks.
    */
   routingEnabled?: boolean
+  /**
+   * Defines whether to filter only for VPCs with S3 integration enabled.
+   */
+  s3IntegrationEnabled?: boolean
 }
 
 
@@ -1068,6 +1156,34 @@ export type SetAclRequest = {
 export interface SetAclResponse {
   rules: AclRule[]
   defaultPolicy: Action
+}
+
+
+export type SetPrivateNetworksS3EndpointRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the VPC containing the S3 Endpoint.
+   */
+  vpcId: string
+  /**
+   * IDs of the Private Networks to associate with the S3 Endpoint.
+   */
+  privateNetworkIds: string[]
+}
+
+
+export interface SetPrivateNetworksS3EndpointResponse {
+  /**
+   * ID of the VPC containing the S3 Endpoint.
+   */
+  vpcId: string
+  /**
+   * IDs of the Private Networks associated with the S3 Endpoint.
+   */
+  privateNetworkIds: string[]
 }
 
 
