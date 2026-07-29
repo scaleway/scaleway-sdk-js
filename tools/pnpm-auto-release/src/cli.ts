@@ -65,7 +65,7 @@ function main() {
   const registry = values.registry
 
   if (ghRelease) {
-    const ghToken = process.env['GH_TOKEN']
+    const ghToken = process.env['GH_TOKEN'] ||  process.env['GITHUB_TOKEN']
     if (!ghToken) {
       throw new Error('GH_TOKEN environment variable is required for creating GitHub releases')
     }
