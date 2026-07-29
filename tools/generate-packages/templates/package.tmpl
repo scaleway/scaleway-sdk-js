@@ -1,11 +1,10 @@
 {
-  "name": "@scaleway/sdk-{{name}}",
+  "name": "@scaleway-internal/sdk-{{name}}",
   "version": "1.0.0",
   "description": "Scaleway SDK {{name}}",
-  "license": "Apache-2.0",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "README.md"
+    "dist"
   ],
   "type": "module",
   "exports": {
@@ -16,6 +15,10 @@
     "./*": {
       "types": "./dist/*/index.gen.d.ts",
       "default": "./dist/*/index.gen.js"
+    },
+   "./metadata": {
+      "types": "./dist/metadata.gen.d.ts",
+      "default": "./dist/metadata.gen.js"
     },
     "./metadata": {
       "types": "./dist/metadata.gen.d.ts",
@@ -28,11 +31,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "packages_generated/{{name}}"
   },
   "engines": {
-    "node": ">=20.18.3"
+    "node": ">=22.22.0"
   },
   "scripts": {
     "package:check": "pnpm publint",
@@ -42,13 +44,14 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/sdk-std":"workspace:*",
+    "@scaleway-internal/sdk-std":"workspace:*",
     "@scaleway/random-name": "catalog:"
   },
   "peerDependencies": {
-     "@scaleway/sdk-client": "workspace:^"
+     "@scaleway/sdk-client": "catalog:"
   },
   "devDependencies":{
-    "@scaleway/sdk-client": "workspace:^"
+    "@repo/configs": "workspace:*",
+    "@scaleway/sdk-client": "catalog:"
   }
 }

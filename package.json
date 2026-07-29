@@ -8,10 +8,10 @@
   ],
   "type": "module",
   "scripts": {
-    "prebuild": "pnpm generatePackages && pnpm generateAlias && pnpm format",
+    "prebuild": "generate-packages packages && generate-packages sdk && generate-packages deps && pnpm fix-deps && pnpm format",
     "build:packages": "pnpm turbo run build",
     "fix-deps": "pnpm exec manypkg fix && pnpm sync-peer-deps",
-    "build": "pnpm run build:packages && pnpm fix-import-extensions",
+    "build": "pnpm turbo build",
     "typecheck": "pnpm turbo typecheck",
     "build:profile": "cross-env PROFILE=true pnpm run build",
     "doc": "typedoc",
@@ -27,8 +27,8 @@
   "devDependencies": {
     "@manypkg/cli": "0.25.1",
     "@repo/configs": "workspace:^",
+    "@repo/generate-packages": "workspace:*",
     "@repo/pnpm-auto-release": "workspace:*",
-    "@scaleway/generate-packages": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
     "@scaleway/oxlint-config": "0.2.3",
     "@scaleway/sync-peer-deps": "1.0.3",

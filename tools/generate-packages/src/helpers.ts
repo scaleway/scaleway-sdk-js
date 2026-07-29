@@ -36,6 +36,8 @@ export const renderTemplate = (template: string, params: Record<string, string>)
   return result
 }
 
+export const escapeRegExp = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
 export const renderTemplatePackageJson = (template: string, params: Record<string, string>) => {
   let result = template
   for (const [key, value] of Object.entries(params)) {
