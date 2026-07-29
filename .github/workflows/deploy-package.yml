@@ -51,18 +51,16 @@ jobs:
       # need to build tools and install to make tools bin(s) available
       - run: pnpm turbo build "--filter=./tools/*"
       - run: pnpm install
-      - run: pnpm run build:packages
-
-      # - name: Ensure working tree is clean before release
-      #   run: |
-      #     if [ -n "$(git status --porcelain --untracked-files=normal)" ]; then
-      #       echo "Release must run from a clean working tree."
-      #       git status --short
-      #       exit 1
-      #     fi
+      - name: Ensure working tree is clean before release
+        run: |
+          if [ -n "$(git status --porcelain --untracked-files=normal)" ]; then
+            echo "Release must run from a clean working tree."
+            git status --short
+            exit 1
+          fi
 
       - name: Release
-        run: pnpm-auto-release
+        run: pnpm pnpm-auto-release
         env:
           HUSKY: 0
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
