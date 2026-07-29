@@ -51,8 +51,6 @@ jobs:
       # need to build tools and install to make tools bin(s) available
       - run: pnpm turbo build "--filter=./tools/*"
       - run: pnpm install
-      - run: pnpm run build:packages
-
       - name: Ensure working tree is clean before release
         run: |
           if [ -n "$(git status --porcelain --untracked-files=normal)" ]; then
@@ -62,29 +60,13 @@ jobs:
           fi
 
       - name: Release
-        run: pnpm-auto-release
+        run: pnpm pnpm-auto-release --by-commit --gh-release
         env:
           HUSKY: 0
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'false'
-
-      - name: Create GitHub releases
-        if: success()
-        env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          for tag in $(git tag --points-at HEAD); do
-            if gh release view "$tag" >/dev/null 2>&1; then
-              echo "Release for $tag already exists, skipping"
-              continue
-            fi
-            gh release create "$tag" \
-              --title "$tag" \
-              --notes "Release $tag" \
-              --verify-tag
-            echo "Created GitHub release for $tag"
-          done
 
       - name: Notify Slack on success
         if: success()

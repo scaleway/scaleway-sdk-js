@@ -71,6 +71,48 @@ export const createTags = ({
   }
 }
 
+export const createGithubReleases = ({
+  root,
+  affectedPackages,
+  updatedPackages,
+}: {
+  root: string
+  affectedPackages: Package[]
+  updatedPackages: Package[]
+}) => {
+  const ghToken = process.env['GH_TOKEN']
+  if (!ghToken) {
+    throw new Error('GH_TOKEN environment variable is required for creating GitHub releases')
+  }
+
+  for (const pkg of affectedPackages) {
+    const newPkg = updatedPackages.find(({ name }) => name === pkg.name)
+    if (newPkg) {
+      const tag = `${pkg.name}@${newPkg.version}`
+      const releaseNotes = `Release ${tag}`
+      
+      try {
+        exec(`gh release view ${tag} --repo ${getRepoFromRemote(root)} >/dev/null 2>&1`, { cwd: root })
+        logger(`[release] github release already exists: ${tag}`)
+      } catch {
+        exec(`echo "${releaseNotes}" | gh release create ${tag} --title ${tag} --notes-file - --repo ${getRepoFromRemote(root)}`, {
+          cwd: root,
+        })
+        logger(`[release] github release created: ${tag}`)
+      }
+    }
+  }
+}
+
+const getRepoFromRemote = (root: string): string => {
+  const remoteUrl = exec('git remote get-url origin', { cwd: root })
+  const match = remoteUrl.match(/github\.com[:/]([^/]+\/[^/]+?)(?:\.git)?$/)
+  if (!match?.[1]) {
+    throw new Error('Could not determine GitHub repository from git remote')
+  }
+  return match[1]
+}
+
 const createChangesetForPackages = (root: string, packages: Package[], summary: string) => {
   const names = packages.map(({ name }) => name).join(' ')
   exec(`pnpm change --bump minor --summary "${summary}" ${names}`, {
