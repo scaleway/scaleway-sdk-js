@@ -203,6 +203,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@scaleway/random-name':
+      specifier: 6.0.2
+      version: 6.0.2
+
 overrides:
   vite: 8.1.5
   vitest: 4.1.0
@@ -833,7 +839,7 @@ importers:
   packages_generated/account:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -849,7 +855,7 @@ importers:
   packages_generated/annotations:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -862,7 +868,7 @@ importers:
   packages_generated/applesilicon:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -878,7 +884,7 @@ importers:
   packages_generated/audit_trail:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -894,7 +900,7 @@ importers:
   packages_generated/autoscaling:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -910,7 +916,7 @@ importers:
   packages_generated/baremetal:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -926,7 +932,7 @@ importers:
   packages_generated/billing:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -942,7 +948,7 @@ importers:
   packages_generated/block:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -958,7 +964,7 @@ importers:
   packages_generated/cockpit:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -974,7 +980,7 @@ importers:
   packages_generated/container:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -990,7 +996,7 @@ importers:
   packages_generated/datalab:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1006,7 +1012,7 @@ importers:
   packages_generated/dataviz:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1019,7 +1025,7 @@ importers:
   packages_generated/datawarehouse:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1035,7 +1041,7 @@ importers:
   packages_generated/dedibox:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1051,7 +1057,7 @@ importers:
   packages_generated/domain:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1067,7 +1073,7 @@ importers:
   packages_generated/edge_services:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1083,7 +1089,7 @@ importers:
   packages_generated/environmental_footprint:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1099,7 +1105,7 @@ importers:
   packages_generated/file:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1115,7 +1121,7 @@ importers:
   packages_generated/flexibleip:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1131,7 +1137,7 @@ importers:
   packages_generated/function:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1147,7 +1153,7 @@ importers:
   packages_generated/iam:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1163,7 +1169,7 @@ importers:
   packages_generated/inference:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1179,7 +1185,7 @@ importers:
   packages_generated/instance:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1195,7 +1201,7 @@ importers:
   packages_generated/interlink:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1211,7 +1217,7 @@ importers:
   packages_generated/iot:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1227,7 +1233,7 @@ importers:
   packages_generated/ipam:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1243,7 +1249,7 @@ importers:
   packages_generated/jobs:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1259,7 +1265,7 @@ importers:
   packages_generated/k8s:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1275,7 +1281,7 @@ importers:
   packages_generated/kafka:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1291,7 +1297,7 @@ importers:
   packages_generated/key_manager:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1307,7 +1313,7 @@ importers:
   packages_generated/lb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1323,7 +1329,7 @@ importers:
   packages_generated/mailbox:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1339,7 +1345,7 @@ importers:
   packages_generated/marketplace:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1355,7 +1361,7 @@ importers:
   packages_generated/messageq:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1368,7 +1374,7 @@ importers:
   packages_generated/mnq:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1384,7 +1390,7 @@ importers:
   packages_generated/mongodb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1400,7 +1406,7 @@ importers:
   packages_generated/partner:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1416,7 +1422,7 @@ importers:
   packages_generated/product_catalog:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1432,7 +1438,7 @@ importers:
   packages_generated/qaas:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1448,7 +1454,7 @@ importers:
   packages_generated/rdb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1464,7 +1470,7 @@ importers:
   packages_generated/redis:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1480,7 +1486,7 @@ importers:
   packages_generated/registry:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1496,7 +1502,7 @@ importers:
   packages_generated/s2s_vpn:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1512,7 +1518,7 @@ importers:
   packages_generated/search:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1525,7 +1531,7 @@ importers:
   packages_generated/searchdb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1541,7 +1547,7 @@ importers:
   packages_generated/secret:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1557,7 +1563,7 @@ importers:
   packages_generated/serverless_sqldb:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1582,7 +1588,7 @@ importers:
   packages_generated/tem:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1598,7 +1604,7 @@ importers:
   packages_generated/test:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1614,7 +1620,7 @@ importers:
   packages_generated/vpc:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1630,7 +1636,7 @@ importers:
   packages_generated/vpcgw:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*
@@ -1646,7 +1652,7 @@ importers:
   packages_generated/webhosting:
     dependencies:
       '@scaleway/random-name':
-        specifier: 6.0.2
+        specifier: 'catalog:'
         version: 6.0.2
       '@scaleway/sdk-std':
         specifier: workspace:*

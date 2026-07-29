@@ -5,7 +5,8 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "directory": "packages_generated/serverless-sqldb"
+    "directory": "packages_generated/serverless-sqldb",
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git"
   },
   "files": [
     "README.md",
@@ -38,7 +39,7 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/random-name": "6.0.2",
+    "@scaleway/random-name": "catalog:",
     "@scaleway/sdk-std": "workspace:*"
   },
   "devDependencies": {
