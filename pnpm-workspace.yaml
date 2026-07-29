@@ -26,14 +26,12 @@ minimumReleaseAge: 720
 minimumReleaseAgeExclude:
   - '@scaleway/*'
 
-
 # Needed as we run a pnpm install after building packages
 optimisticRepeatInstall: false
 
 allowBuilds:
   esbuild: true
   nx: true
-
 
 versioning:
   # fixed:

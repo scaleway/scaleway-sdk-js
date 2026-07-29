@@ -5,8 +5,8 @@
   "description": "Bump and publish changed packages via pnpm",
   "repository": {
     "type": "git",
-    "directory": "tools/pnpm-auto-release",
-    "url": "https://github.com/scaleway/scaleway-sdk-js.git"
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
+    "directory": "tools/pnpm-auto-release"
   },
   "bin": {
     "pnpm-auto-release": "./src/cli.ts"
