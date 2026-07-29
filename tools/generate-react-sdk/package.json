@@ -5,7 +5,8 @@
   "description": "generate react sdk",
   "repository": {
     "type": "git",
-    "directory": "tools/generate-react-sdk"
+    "directory": "tools/generate-react-sdk",
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git"
   },
   "bin": {
     "generate-react-sdk": "./dist/buildAPI.js"
