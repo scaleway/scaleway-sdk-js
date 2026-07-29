@@ -19,11 +19,11 @@ jobs:
           node-version-file: .nvmrc
           check-latest: true
           cache: 'pnpm'
-      - run: make install-dependencies
+      - run: pnpm install --no-frozen-lockfile
       # need to build tools and install to make the bin available
       - run: pnpm turbo build "--filter=./tools/*"
       - run: rm -rf node_modules && pnpm install
-      - run: make typing
+      - run: pnpm typecheck
 
   lint:
     runs-on: ubuntu-24.04
@@ -37,12 +37,12 @@ jobs:
           check-latest: true
           cache: 'pnpm'
       - run:
-          make install-dependencies
+          pnpm install --no-frozen-lockfile
           # need to build tools and install to make the bin available
       - run: pnpm turbo build "--filter=./tools/*"
       - run: rm -rf node_modules && pnpm install
-      - run: make build
-      - run: pnpm run lint
+      - run: pnpm build
+      - run: pnpm lint
 
   test:
     runs-on: ubuntu-24.04
@@ -64,12 +64,12 @@ jobs:
           check-latest: true
           cache: 'pnpm'
       - run:
-          make install-dependencies
+           pnpm install --no-frozen-lockfile
           # need to build tools and install to make the bin available
       - run: pnpm turbo build "--filter=./tools/*" --force
       # relinks bins without reinstalling
       - run: rm -rf node_modules && pnpm install
-      - run: make build
+      - run: pnpm build
       - run: pnpm run test:coverage --environment ${{ matrix.test-environment }}
       - uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
       - run: pnpm run test:junit
