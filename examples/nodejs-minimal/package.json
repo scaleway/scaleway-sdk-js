@@ -1,6 +1,7 @@
 {
   "name": "scaleway-nodejs-minimal",
   "version": "1.0.0",
+  "private": true,
   "license": "Apache-2.0",
   "type": "module",
   "main": "index.ts",
@@ -14,7 +15,7 @@
     "@scaleway/sdk-client": "^2.2.2"
   },
   "devDependencies": {
-    "@types/node": "20.19.43",
+    "@types/node": "catalog:",
     "typescript": "6.0.2"
   }
 }

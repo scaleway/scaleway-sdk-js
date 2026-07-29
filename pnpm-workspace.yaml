@@ -8,9 +8,36 @@ strictPeerDependencies: false
 autoInstallPeers: true
 engineStrict: true
 
+catalog:
+  vite: 8.1.5
+  vitest: 4.1.0
+  '@types/react': 19.2.17
+  '@types/node': 26.1.1
+  '@scaleway/random-name': 6.0.2
+
+overrides:
+  vite: 'catalog:'
+  vitest: 'catalog:'
+  '@types/react': 'catalog:'
+  '@types/node': 'catalog:'
+
+# 12h
+minimumReleaseAge: 720
+minimumReleaseAgeExclude:
+  - '@scaleway/*'
+
 # Needed as we run a pnpm install after building packages
 optimisticRepeatInstall: false
 
 allowBuilds:
   esbuild: true
   nx: true
+
+versioning:
+  # fixed:
+  #   - ['./packages_generated/**']
+  ignore:
+    - './tools/**'
+  maxBump: minor
+  changelog:
+    storage: repository

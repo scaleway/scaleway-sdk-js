@@ -14,7 +14,6 @@
     "build": "pnpm run build:packages && pnpm fix-import-extensions",
     "typecheck": "pnpm turbo typecheck",
     "build:profile": "cross-env PROFILE=true pnpm run build",
-    "commit": "npx git-cz -a",
     "doc": "typedoc",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
@@ -26,10 +25,9 @@
     "test:ui": "vitest --ui"
   },
   "devDependencies": {
-    "@commitlint/cli": "20.5.3",
-    "@commitlint/config-conventional": "20.5.3",
     "@manypkg/cli": "0.25.1",
     "@repo/configs": "workspace:^",
+    "@repo/pnpm-auto-release": "workspace:*",
     "@scaleway/generate-packages": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
     "@scaleway/oxlint-config": "0.2.3",
@@ -42,11 +40,9 @@
     "browserslist": "4.28.2",
     "cross-env": "10.1.0",
     "cross-fetch": "4.1.0",
-    "cz-conventional-changelog": "3.3.0",
     "esbuild-plugin-browserslist": "2.0.0",
     "jsdom": "29.0.2",
-    "lerna": "9.0.7",
-    "lint-staged": "16.3.2",
+    "nano-staged": "1.0.2",
     "oxfmt": "0.60.0",
     "oxlint": "1.75.0",
     "oxlint-tsgolint": "7.0.2001",
@@ -58,10 +54,10 @@
     "turbo": "2.9.14",
     "typedoc": "0.28.19",
     "typescript": "7.0.2",
-    "vite": "8.1.5",
-    "vitest": "4.1.0"
+    "vite": "catalog:",
+    "vitest": "catalog:"
   },
-  "lint-staged": {
+  "nano-staged": {
     "packages/*/src/**/*.{ts,tsx,js,jsx}": [
       "pnpm run format"
     ],
@@ -97,7 +93,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.15.1",
+      "version": "11.17.0",
       "onFail": "warn"
     },
     "runtime": {
@@ -109,5 +105,5 @@
   "engines": {
     "node": ">=20.20.2"
   },
-  "packageManager": "pnpm@11.15.1"
+  "packageManager": "pnpm@11.17.0"
 }
