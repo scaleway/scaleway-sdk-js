@@ -316,7 +316,7 @@
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*",
     "@scaleway/use-dataloader": "7.1.0",
-    "@types/react": "19.2.17",
+    "@types/react": "catalog:",
     "react": "^19.2.8",
     "tinyglobby": "0.2.17"
   },

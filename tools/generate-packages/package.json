@@ -5,6 +5,7 @@
   "description": "Code generation scripts for Scaleway SDK packages",
   "repository": {
     "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "tools/generate-packages"
   },
   "bin": {
@@ -31,7 +32,7 @@
   },
   "devDependencies": {
     "@repo/configs": "workspace:*",
-    "@types/node": "20.19.43",
+    "@types/node": "catalog:",
     "vite": "8.1.5"
   },
   "engines": {

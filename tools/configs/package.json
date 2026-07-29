@@ -5,6 +5,7 @@
   "description": "handle configs",
   "repository": {
     "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "tools/configs"
   },
   "files": [
@@ -31,7 +32,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@types/node": "20.19.43"
+    "@types/node": "catalog:"
   },
   "engines": {
     "node": ">=20.20.2"

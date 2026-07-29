@@ -82,7 +82,4 @@ post_generate:
 
 publish: install-dependencies
 	pnpm run build
-	pnpm lerna changed
-	git add .
-	git commit -m "chore: update generated files" || true
-	pnpm lerna version -y --no-private --force-git-tag --create-release github
+	pnpm-auto-release

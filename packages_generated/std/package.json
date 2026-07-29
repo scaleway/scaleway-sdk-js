@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "packages_generated/std"
   },
   "files": [

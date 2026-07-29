@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "packages_generated/redis"
   },
   "files": [
@@ -38,7 +39,7 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway/random-name": "6.0.2",
+    "@scaleway/random-name": "catalog:",
     "@scaleway/sdk-std": "workspace:*"
   },
   "devDependencies": {
