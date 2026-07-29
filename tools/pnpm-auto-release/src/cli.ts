@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
 import { RELEASE_SUBJECT, CHANGESET_MESSAGE } from './constants.ts'
-import { createTags, exec, findWorkspaceRoot, listWorkspacePackages, createChangesets } from './utils.ts'
+import { createTags, exec, findWorkspaceRoot, listWorkspacePackages, createChangesets, createGithubReleases } from './utils.ts'
 
 const { log: logger } = console
 
@@ -22,11 +22,13 @@ Options:
       --skip-publish     Bump and tag, but don't publish to the registry
       --skip-push        Don't push the release commit and tags
       --by-commit        Create one changeset per commit (default: one changeset for all affected packages)
+      --gh-release       Create GitHub releases for the published packages
   -h, --help             Show this help
 
 Environment variables for registry auth:
   NPM_REGISTRY_USER      Registry username
   NPM_REGISTRY_PASSWD    Registry password
+  GH_TOKEN               GitHub token for creating releases (required with --gh-release)
 `
 
 function main() {
@@ -38,6 +40,7 @@ function main() {
       'skip-publish': { type: 'boolean', default: false },
       'skip-push': { type: 'boolean', default: false },
       'by-commit': { type: 'boolean', default: false },
+      'gh-release': { type: 'boolean', default: false },
       help: { type: 'boolean', short: 'h', default: false },
     },
   })
@@ -51,7 +54,15 @@ function main() {
   const skipPublish = values['skip-publish'] === true
   const skipPush = values['skip-push'] === true
   const byCommit = values['by-commit'] === true
+  const ghRelease = values['gh-release'] === true
   const registry = values.registry
+
+  if (ghRelease) {
+    const ghToken = process.env['GH_TOKEN']
+    if (!ghToken) {
+      throw new Error('GH_TOKEN environment variable is required for creating GitHub releases')
+    }
+  }
 
   const root = findWorkspaceRoot(process.cwd())
   const packages = listWorkspacePackages(root)
@@ -123,6 +134,16 @@ function main() {
     affectedPackages: affected,
     updatedPackages: updated,
   })
+
+  // Create GitHub releases
+  if (ghRelease) {
+    createGithubReleases({
+      root,
+      affectedPackages: affected,
+      updatedPackages: updated,
+    })
+    logger('[release] github releases created')
+  }
 
   // Push
   if (!skipPush) {
