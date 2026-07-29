@@ -1,25 +1,30 @@
 {
-  "name": "@scaleway/generate-packages",
-  "version": "0.5.6",
-  "private": false,
-  "description": "Code generation scripts for Scaleway SDK packages",
+  "name": "@repo/generate-packages",
+  "version": "1.0.0",
+  "private": true,
+  "description": "handle package generated",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "tools/generate-packages"
   },
   "bin": {
-    "fix-import-extensions": "./src/fix-import-extensions.ts",
-    "generateAlias": "./src/generateAlias.ts",
-    "generatePackages": "./src/generatePackages.ts",
-    "setupNewProducts": "./src/setupNewProducts.ts"
+    "generate-packages": "./src/cli.ts"
   },
   "files": [
     "dist",
+    "src",
     "templates"
   ],
   "type": "module",
   "exports": {
+    ".": {
+      "types": "./dist/cli.d.ts",
+      "default": "./dist/cli.js"
+    },
+    "./commands/*": {
+      "types": "./dist/commands/*.d.ts",
+      "default": "./dist/commands/*.js"
+    },
     "./*": {
       "types": "./dist/*.d.ts",
       "default": "./dist/*.js"
@@ -28,14 +33,19 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "package:check": "pnpm publint",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "cli": "node src/cli.ts"
+  },
+  "dependencies": {
+    "@scaleway/generate-packages": "0.5.6",
+    "vite": "catalog:"
   },
   "devDependencies": {
     "@repo/configs": "workspace:*",
-    "@types/node": "catalog:",
-    "vite": "8.1.5"
+    "@scaleway/tsconfig": "1.1.6",
+    "@types/node": "catalog:"
   },
   "engines": {
-    "node": ">=20.20.2"
+    "node": ">=22.23.1"
   }
 }

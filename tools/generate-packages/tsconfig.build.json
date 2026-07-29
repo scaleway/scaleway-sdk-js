@@ -4,10 +4,10 @@
     "rewriteRelativeImportExtensions": true,
     "noEmit": false,
     "declaration": true,
-    "listEmittedFiles": false,
     "emitDeclarationOnly": false,
+    "listEmittedFiles": false,
     "rootDir": "src",
     "outDir": "dist"
   },
-  "exclude": ["dist/*", "*.config.ts", "*.setup.ts", "**/__tests__", "**/__mocks__", "src/**/*.test.ts"]
+  "exclude": ["dist/*", "*.config.ts", "*.setup.ts", "**/__tests__", "**/__mocks__", "src/**/*.test.tsx"]
 }

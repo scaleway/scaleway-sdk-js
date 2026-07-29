@@ -90,14 +90,17 @@ export const createGithubReleases = ({
     if (newPkg) {
       const tag = `${pkg.name}@${newPkg.version}`
       const releaseNotes = `Release ${tag}`
-      
+
       try {
         exec(`gh release view ${tag} --repo ${getRepoFromRemote(root)} >/dev/null 2>&1`, { cwd: root })
         logger(`[release] github release already exists: ${tag}`)
       } catch {
-        exec(`echo "${releaseNotes}" | gh release create ${tag} --title ${tag} --notes-file - --repo ${getRepoFromRemote(root)}`, {
-          cwd: root,
-        })
+        exec(
+          `echo "${releaseNotes}" | gh release create ${tag} --title ${tag} --notes-file - --repo ${getRepoFromRemote(root)}`,
+          {
+            cwd: root,
+          },
+        )
         logger(`[release] github release created: ${tag}`)
       }
     }

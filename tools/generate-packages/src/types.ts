@@ -1,7 +1,10 @@
 export type SDK = {
   path: string
   index: string
-  type: 'public'
+  type: string
+  depsTypes: ('devDependencies' | 'peerDependencies' | 'dependencies')[]
+  shouldUpdateIndex: boolean
+  ignoredPackages: string[]
 }
 
 export type PackageJSON = {

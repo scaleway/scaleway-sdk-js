@@ -1,4 +1,7 @@
 {
   "extends": "@repo/configs/tsconfig/generated",
+  "compilerOptions": {
+    "module": "ESNext"
+  },
   "include": ["src/**/*.ts", "src/**/*.tsx", "*.config.ts"]
 }

@@ -225,12 +225,12 @@ importers:
       '@repo/configs':
         specifier: workspace:^
         version: link:tools/configs
+      '@repo/generate-packages':
+        specifier: workspace:*
+        version: link:tools/generate-packages
       '@repo/pnpm-auto-release':
         specifier: workspace:*
         version: link:tools/pnpm-auto-release
-      '@scaleway/generate-packages':
-        specifier: workspace:*
-        version: link:tools/generate-packages
       '@scaleway/generate-react-sdk':
         specifier: workspace:*
         version: link:tools/generate-react-sdk
@@ -357,9 +357,6 @@ importers:
       '@scaleway/sdk-block':
         specifier: workspace:*
         version: link:../../packages_generated/block
-      '@scaleway/sdk-client':
-        specifier: workspace:^
-        version: link:../client
       '@scaleway/sdk-cockpit':
         specifier: workspace:*
         version: link:../../packages_generated/cockpit
@@ -1672,16 +1669,23 @@ importers:
         version: 26.1.1
 
   tools/generate-packages:
+    dependencies:
+      '@scaleway/generate-packages':
+        specifier: 0.5.6
+        version: 0.5.6
+      vite:
+        specifier: 8.1.5
+        version: 8.1.5(@types/node@26.1.1)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.9.0)
     devDependencies:
       '@repo/configs':
         specifier: workspace:*
         version: link:../configs
+      '@scaleway/tsconfig':
+        specifier: 1.1.6
+        version: 1.1.6
       '@types/node':
         specifier: 26.1.1
         version: 26.1.1
-      vite:
-        specifier: 8.1.5
-        version: 8.1.5(@types/node@26.1.1)(esbuild@0.27.2)(jiti@2.6.1)(yaml@2.9.0)
 
   tools/generate-react-queries:
     devDependencies:
@@ -2464,6 +2468,11 @@ packages:
 
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
+
+  '@scaleway/generate-packages@0.5.6':
+    resolution: {integrity: sha512-slSYcAgu9t50SrLAmY3V1+cCxxYRo0MmCgl1YXmTr0QnlE1N6TKojhJVWmFB0UdqaP8sA0hClYPJEr8R9LOSVQ==}
+    engines: {node: '>=20.20.2'}
+    hasBin: true
 
   '@scaleway/oxlint-config@0.2.3':
     resolution: {integrity: sha512-ioZ/DoMitQlKoZuH9GIQ5F6hgQFTxL7Y+yqZ+IPc1GUUUV03l5wqddKejaJsae3d1oZEzPNx3nxiPkz9oLUn0w==}
@@ -4327,6 +4336,8 @@ snapshots:
     optional: true
 
   '@rolldown/pluginutils@1.0.1': {}
+
+  '@scaleway/generate-packages@0.5.6': {}
 
   '@scaleway/oxlint-config@0.2.3(oxlint@1.75.0(oxlint-tsgolint@7.0.2001))':
     dependencies:

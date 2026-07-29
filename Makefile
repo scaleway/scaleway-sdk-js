@@ -12,22 +12,6 @@ install-dependencies:
 build-tools:
 	pnpm turbo build --filter=./tools/* --force
 
-release-prepare: install-dependencies build-tools
-	pnpm install
-	pnpm run build
-
-release-check:
-	@if [ -n "$$(git status --porcelain --untracked-files=normal)" ]; then \
-		echo "Working tree must be clean before running release-check."; \
-		git status --short; \
-		exit 1; \
-	fi
-	@$(MAKE) release-prepare
-	@if [ -n "$$(git status --porcelain --untracked-files=normal)" ]; then \
-		echo "Release preparation modified the worktree. Commit generated files before publishing."; \
-		git status --short; \
-		exit 1; \
-	fi
 
 format:
 	pnpm run format
@@ -58,11 +42,6 @@ doc:
 prebuild:
 	pnpm run prebuild
 
-generate-alias:
-	pnpm  generateAlias
-
-generate-packages:
-	pnpm generatePackages
 
 setup-new-products:
 	pnpm setupNewProducts
@@ -70,7 +49,6 @@ setup-new-products:
 
 post_generate:
 	$(MAKE) format-generated
-	$(MAKE) setup-new-products
 	$(MAKE) prebuild
 	$(MAKE) build-tools
 	pnpm install --no-frozen-lockfile
