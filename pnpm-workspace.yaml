@@ -34,10 +34,7 @@ allowBuilds:
   nx: true
 
 versioning:
-  # fixed:
-  #   - ['./packages_generated/**']
   ignore:
     - './tools/**'
-  maxBump: minor
   changelog:
     storage: repository
