@@ -5,8 +5,8 @@
   "description": "handle configs",
   "repository": {
     "type": "git",
-    "directory": "tools/configs",
-    "url": "https://github.com/scaleway/scaleway-sdk-js.git"
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
+    "directory": "tools/configs"
   },
   "files": [
     "dist"

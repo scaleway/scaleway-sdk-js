@@ -5,8 +5,8 @@
   "description": "Code generation scripts for Scaleway SDK packages",
   "repository": {
     "type": "git",
-    "directory": "tools/generate-packages",
-    "url": "https://github.com/scaleway/scaleway-sdk-js.git"
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
+    "directory": "tools/generate-packages"
   },
   "bin": {
     "fix-import-extensions": "./src/fix-import-extensions.ts",
