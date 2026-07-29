@@ -1,0 +1,14 @@
+{
+  "extends": "@repo/configs/tsconfig/node",
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "listEmittedFiles": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"],
+  "typeAcquisition": {
+    "disableFilenameBasedTypeAcquisition": true,
+    "enable": false
+  }
+}
