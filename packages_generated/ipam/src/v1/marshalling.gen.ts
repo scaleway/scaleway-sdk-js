@@ -55,6 +55,7 @@ const unmarshalSource = (data: unknown): Source => {
 
   return {
     privateNetworkId: data.private_network_id,
+    regional: data.regional,
     subnetId: data.subnet_id,
     vpcId: data.vpc_id,
     zonal: data.zonal,
@@ -116,7 +117,7 @@ const marshalSource = (
   request: Source,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({  
-  ...resolveOneOf([
+  ...resolveOneOf<string | boolean>([
     {param: 'zonal',
       value: request.zonal,
     },
@@ -128,6 +129,9 @@ const marshalSource = (
     },
     {param: 'vpc_id',
       value: request.vpcId,
+    },
+    {param: 'regional',
+      value: request.regional,
     },
   ]),
 })
