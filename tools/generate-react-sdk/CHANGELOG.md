@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.3.0
+
+### Minor Changes
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: update generated APIs (#3182)
+
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

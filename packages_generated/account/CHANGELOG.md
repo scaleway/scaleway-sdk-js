@@ -1,5 +1,20 @@
 # Change Log
 
+## 2.6.0
+
+### Minor Changes
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: update generated APIs (#3182)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.5.0
+
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

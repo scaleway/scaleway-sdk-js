@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.5.0
+
+### Minor Changes
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- fix(release): run by commit and github release cli (#3185)
+
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

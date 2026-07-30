@@ -1,5 +1,67 @@
 # Change Log
 
+## 0.13.0
+
+### Minor Changes
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- fix(release): run by commit and github release cli (#3185)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-account@2.6.0
+  - @scaleway/sdk-annotations@1.1.0
+  - @scaleway/sdk-applesilicon@2.9.0
+  - @scaleway/sdk-audit-trail@2.18.0
+  - @scaleway/sdk-autoscaling@2.8.0
+  - @scaleway/sdk-baremetal@2.8.0
+  - @scaleway/sdk-billing@2.10.0
+  - @scaleway/sdk-block@2.10.0
+  - @scaleway/sdk-cockpit@2.7.0
+  - @scaleway/sdk-container@2.9.0
+  - @scaleway/sdk-datalab@1.6.0
+  - @scaleway/sdk-datawarehouse@2.11.0
+  - @scaleway/sdk-dedibox@2.8.0
+  - @scaleway/sdk-domain@2.8.0
+  - @scaleway/sdk-edge-services@2.17.0
+  - @scaleway/sdk-environmental-footprint@2.13.0
+  - @scaleway/sdk-file@2.9.0
+  - @scaleway/sdk-flexibleip@2.7.0
+  - @scaleway/sdk-function@2.8.0
+  - @scaleway/sdk-iam@2.10.0
+  - @scaleway/sdk-inference@2.11.0
+  - @scaleway/sdk-instance@2.11.0
+  - @scaleway/sdk-interlink@2.8.0
+  - @scaleway/sdk-iot@2.7.0
+  - @scaleway/sdk-ipam@2.9.0
+  - @scaleway/sdk-jobs@2.9.0
+  - @scaleway/sdk-k8s@2.17.0
+  - @scaleway/sdk-kafka@2.9.0
+  - @scaleway/sdk-key-manager@2.9.0
+  - @scaleway/sdk-lb@2.9.0
+  - @scaleway/sdk-marketplace@2.5.0
+  - @scaleway/sdk-mnq@2.7.0
+  - @scaleway/sdk-mongodb@2.10.0
+  - @scaleway/sdk-partner@1.4.0
+  - @scaleway/sdk-product-catalog@2.20.0
+  - @scaleway/sdk-qaas@2.7.0
+  - @scaleway/sdk-rdb@2.9.0
+  - @scaleway/sdk-react@0.10.0
+  - @scaleway/sdk-redis@2.8.0
+  - @scaleway/sdk-registry@2.7.0
+  - @scaleway/sdk-s2s-vpn@2.10.0
+  - @scaleway/sdk-searchdb@1.8.0
+  - @scaleway/sdk-secret@2.7.0
+  - @scaleway/sdk-serverless-sqldb@2.8.0
+  - @scaleway/sdk-tem@2.7.0
+  - @scaleway/sdk-vpc@2.11.0
+  - @scaleway/sdk-vpcgw@2.9.0
+  - @scaleway/sdk-webhosting@2.13.0
+
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.5.0
+
+### Minor Changes
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-client@2.5.0
+
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
