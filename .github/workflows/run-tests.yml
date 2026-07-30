@@ -64,7 +64,7 @@ jobs:
           check-latest: true
           cache: 'pnpm'
       - run:
-           pnpm install --no-frozen-lockfile
+          pnpm install --no-frozen-lockfile
           # need to build tools and install to make the bin available
       - run: pnpm turbo build "--filter=./tools/*" --force
       # relinks bins without reinstalling

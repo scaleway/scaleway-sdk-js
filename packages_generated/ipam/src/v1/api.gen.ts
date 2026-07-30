@@ -166,9 +166,12 @@ export class API extends ParentAPI {
           ['resource_types', request.resourceTypes],
           ['tags', request.tags],
           ['vpc_id', request.vpcId],  
-          ...Object.entries(resolveOneOf([
+          ...Object.entries(resolveOneOf<string | boolean>([
             {param: 'zonal',
               value: request.zonal,
+            },
+            {param: 'regional',
+              value: request.regional,
             },
             {param: 'private_network_id',
               value: request.privateNetworkId,

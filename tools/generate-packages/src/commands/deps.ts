@@ -1,6 +1,6 @@
+import { execSync } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { execSync } from 'node:child_process'
 import { cwd } from 'node:process'
 import type { Config } from '../config.ts'
 import { escapeRegExp } from '../helpers.ts'
