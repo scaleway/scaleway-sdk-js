@@ -64,7 +64,7 @@ export const createTags = ({
       try {
         exec(`git rev-parse -q --verify refs/tags/${tag}`, { cwd: root })
       } catch {
-        exec(`git tag "${tag}"`, { cwd: root })
+        exec(`git tag "${tag}" -m "${tag}"`, { cwd: root })
         logger(`[release] tag: ${tag}`)
       }
     }
