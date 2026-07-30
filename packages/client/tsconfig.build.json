@@ -8,9 +8,6 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "tsc-alias": {
-    "resolveFullPaths": true,
-    "resolveFullExtension": ".js"
-  },
+
   "exclude": ["dist/*", "*.config.ts", "*.setup.ts", "**/__tests__", "**/__mocks__", "src/**/*.test.tsx"]
 }
