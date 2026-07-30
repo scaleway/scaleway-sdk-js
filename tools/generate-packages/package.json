@@ -36,14 +36,11 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "cli": "node src/cli.ts"
   },
-  "dependencies": {
-    "@scaleway/generate-packages": "0.5.6",
-    "vite": "catalog:"
-  },
   "devDependencies": {
     "@repo/configs": "workspace:*",
     "@scaleway/tsconfig": "1.1.6",
-    "@types/node": "catalog:"
+    "@types/node": "catalog:",
+    "vite": "catalog:"
   },
   "engines": {
     "node": ">=22.23.1"
