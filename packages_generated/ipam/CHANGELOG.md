@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.10.0
+
+### Minor Changes
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(ipam): add booking of regional IPs (#3195)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.6.0
+
 ## 2.9.0
 
 ### Minor Changes

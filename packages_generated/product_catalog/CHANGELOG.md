@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.21.0
+
+### Minor Changes
+
+- feat: update generated APIs (#3206)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.6.0
+
 ## 2.20.0
 
 ### Minor Changes

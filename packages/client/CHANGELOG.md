@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.6.0
+
+### Minor Changes
+
+- fix(deps): upgrade and remove unused deps (#3202)
+
 ## 2.5.0
 
 ### Minor Changes
