@@ -58,6 +58,8 @@ jobs:
             git status --short
             exit 1
           fi
+      - name: global build
+        run: pnpm turbo build
 
       - name: Release
         run: pnpm pnpm-auto-release --by-commit --gh-release
