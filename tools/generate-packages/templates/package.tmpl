@@ -45,14 +45,14 @@
     "build:profile": "npx vite-bundle-visualizer -c vite.config.ts"
   },
   "dependencies": {
-    "@scaleway-internal/sdk-std":"workspace:*",
+    "@scaleway/sdk-std": "workspace:^"
     "@scaleway/random-name": "catalog:"
   },
   "peerDependencies": {
-     "@scaleway/sdk-client": "catalog:"
+     "@scaleway/sdk-client": "workspace:^"
   },
   "devDependencies":{
     "@repo/configs": "workspace:*",
-    "@scaleway/sdk-client": "catalog:"
+    "@scaleway/sdk-client": "workspace:^"
   }
 }
