@@ -3,32 +3,6 @@
 import type { Decimal, Money, ServiceInfo, Region as ScwRegion, ScwFile, TimeSeries, Zone as ScwZone} from '@scaleway/sdk-client'
 
 
-export type Locality =
-  | 'unknown_locality'
-  | 'global'
-  | 'fr_rz'
-  | 'fr_srr'
-  | 'fr_srr_1'
-  | 'fr_par'
-  | 'fr_par_1'
-  | 'fr_par_2'
-  | 'fr_par_3'
-  | 'fr_par_4'
-  | 'nl_ams'
-  | 'nl_ams_1'
-  | 'nl_ams_2'
-  | 'nl_ams_3'
-  | 'pl_waw'
-  | 'pl_waw_1'
-  | 'pl_waw_2'
-  | 'pl_waw_3'
-  | 'fr_int'
-  | 'fr_int_1'
-  | 'fr_lab'
-  | 'fr_lab_1'
-  | 'it_mil'
-  | 'it_mil_1'
-
 export type ObsDatasourceInfoDataType =
   | 'unknown_data_type'
   | 'metrics'
@@ -254,7 +228,7 @@ export type SearchResourcesRequest = {
   /**
    * List of scopes (zones, regions, or global) to filter the resources by.
    */
-  localities?: Locality[]
+  localities?: string[]
   /**
    * Filter resources created after this timestamp.
    */

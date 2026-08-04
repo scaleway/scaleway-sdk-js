@@ -49,6 +49,11 @@ export type PublicCatalogProductProductBadge =
   | 'popular'
   | 'no_kvm'
 
+export type PublicCatalogProductPropertiesApacheKafkaAvailableVolumeType =
+  | 'unknown_type'
+  | 'sbs_5k'
+  | 'sbs_15k'
+
 export type PublicCatalogProductPropertiesGenerativeApisConsumptionMode =
   | 'unknown_consumption_mode'
   | 'realtime'
@@ -189,6 +194,46 @@ export interface PublicCatalogProductPropertiesHardwareCPUVirtual {
    * The number of vCPUs.
    */
   count: number
+}
+
+
+export interface PublicCatalogProductPropertiesApacheKafkaNodeType {
+  /**
+   * The list of available versions for the Kafka node.
+   */
+  versions: string[]
+  /**
+   * Number of virtual CPUs.
+   */
+  vcpuCount: number
+  /**
+   * Whether or not this Kafka product is multi AZ.
+   */
+  isMultiAz: boolean
+  /**
+   * Memory size in bytes.
+   */
+  memorySize: number
+}
+
+
+export interface PublicCatalogProductPropertiesApacheKafkaStorageType {
+  /**
+   * The type of volume.
+   */
+  type: PublicCatalogProductPropertiesApacheKafkaAvailableVolumeType
+  /**
+   * The minimum size of the volume in bytes.
+   */
+  minSize: number
+  /**
+   * The maximum size of the volume in bytes.
+   */
+  maxSize: number
+  /**
+   * Whether or not this Kafka product is multi AZ.
+   */
+  isMultiAz: boolean
 }
 
 
@@ -485,6 +530,18 @@ export interface PublicCatalogProductPropertiesServerlessJobsMemoryType {
 
 
 export interface PublicCatalogProductPropertiesApacheKafka {
+  /**
+   * The properties related to Kafka node products.
+   *
+   * One-of ('type'): at most one of 'node', 'storage' could be set.
+   */
+  node?: PublicCatalogProductPropertiesApacheKafkaNodeType
+  /**
+   * The properties related to Kafka storage products.
+   *
+   * One-of ('type'): at most one of 'node', 'storage' could be set.
+   */
+  storage?: PublicCatalogProductPropertiesApacheKafkaStorageType
 }
 
 
