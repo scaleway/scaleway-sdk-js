@@ -47,6 +47,7 @@ export type ResourceType =
   | 'msgq_cluster'
   | 'edge_vpc_endpoint'
   | 'dviz_cluster'
+  | 'nats_cluster'
 
 export interface Resource {
   /**
