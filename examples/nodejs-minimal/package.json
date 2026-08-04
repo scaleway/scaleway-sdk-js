@@ -12,7 +12,7 @@
   "dependencies": {
     "@scaleway/configuration-loader": "^1.0",
     "@scaleway/sdk": "^2.0",
-    "@scaleway/sdk-client": "^2.2.2"
+    "@scaleway/sdk-client": "^2.5.0"
   },
   "devDependencies": {
     "@types/node": "catalog:",
