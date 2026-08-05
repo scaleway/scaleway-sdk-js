@@ -6,6 +6,8 @@ import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scale
 import type {
   PublicCatalogProductPropertiesHardwareCPUPhysical,
   PublicCatalogProductPropertiesHardwareCPUVirtual,
+  PublicCatalogProductPropertiesApacheKafkaNodeType,
+  PublicCatalogProductPropertiesApacheKafkaStorageType,
   PublicCatalogProductPropertiesBlockStorageSnapshotType,
   PublicCatalogProductPropertiesBlockStorageVolumeType,
   PublicCatalogProductPropertiesHardwareCPU,
@@ -98,6 +100,36 @@ const unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual = (data: unknown
   return {
     count: data.count,
   } as PublicCatalogProductPropertiesHardwareCPUVirtual
+}
+
+const unmarshalPublicCatalogProductPropertiesApacheKafkaNodeType = (data: unknown): PublicCatalogProductPropertiesApacheKafkaNodeType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesApacheKafkaNodeType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    isMultiAz: data.is_multi_az,
+    memorySize: data.memory_size,
+    vcpuCount: data.vcpu_count,
+    versions: data.versions,
+  } as PublicCatalogProductPropertiesApacheKafkaNodeType
+}
+
+const unmarshalPublicCatalogProductPropertiesApacheKafkaStorageType = (data: unknown): PublicCatalogProductPropertiesApacheKafkaStorageType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesApacheKafkaStorageType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    isMultiAz: data.is_multi_az,
+    maxSize: data.max_size,
+    minSize: data.min_size,
+    type: data.type,
+  } as PublicCatalogProductPropertiesApacheKafkaStorageType
 }
 
 const unmarshalPublicCatalogProductPropertiesBlockStorageSnapshotType = (data: unknown): PublicCatalogProductPropertiesBlockStorageSnapshotType => {
@@ -520,6 +552,8 @@ const unmarshalPublicCatalogProductPropertiesApacheKafka = (data: unknown): Publ
   }
 
   return {
+    node: data.node ? unmarshalPublicCatalogProductPropertiesApacheKafkaNodeType(data.node) : undefined,
+    storage: data.storage ? unmarshalPublicCatalogProductPropertiesApacheKafkaStorageType(data.storage) : undefined,
   } as PublicCatalogProductPropertiesApacheKafka
 }
 
