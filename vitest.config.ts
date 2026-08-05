@@ -8,7 +8,7 @@ export const defaultVitestConfig = mergeConfig(
       coverage: {
         enabled: true,
         provider: 'v8',
-        reporter: ['text', 'json', 'html'],
+        reporter: ['text', 'json', 'html', 'cobertura'],
         exclude: [
           '.reports/**',
           '**/.eslintrc.json.*',
