@@ -108,6 +108,7 @@ const unmarshalResource = (data: unknown): Resource => {
 
   return {
     baremetalServerInfo: data.baremetal_server_info ? unmarshalBrmServerInfo(data.baremetal_server_info) : undefined,
+    createdAt: unmarshalDate(data.created_at),
     global: data.global,
     id: data.id,
     name: data.name,
@@ -120,6 +121,7 @@ const unmarshalResource = (data: unknown): Resource => {
     serverlessFunctionsFunctionInfo: data.serverless_functions_function_info ? unmarshalServerlessFunctionsFunctionInfo(data.serverless_functions_function_info) : undefined,
     serverlessSqldbBackupInfo: data.serverless_sqldb_backup_info ? unmarshalServerlessSqldbBackupInfo(data.serverless_sqldb_backup_info) : undefined,
     type: data.type,
+    updatedAt: unmarshalDate(data.updated_at),
     vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : undefined,
     zone: data.zone,
   } as Resource

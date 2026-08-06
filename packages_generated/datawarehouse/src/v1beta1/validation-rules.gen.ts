@@ -12,7 +12,7 @@ export const CreateDatabaseRequest = {
 export const CreateDeploymentRequest = {
   cpuMax: {
     greaterThanOrEqual: 2,
-    lessThanOrEqual: 15,
+    lessThanOrEqual: 30,
   },
   cpuMin: {
     greaterThanOrEqual: 1,
@@ -77,7 +77,7 @@ export const DeleteUserRequest = {
 export const Deployment = {
   cpuMax: {
     greaterThanOrEqual: 2,
-    lessThanOrEqual: 15,
+    lessThanOrEqual: 30,
   },
   cpuMin: {
     lessThanOrEqual: 15,
@@ -161,7 +161,7 @@ export const ListVersionsRequest = {
 export const UpdateDeploymentRequest = {
   cpuMax: {
     greaterThanOrEqual: 2,
-    lessThanOrEqual: 15,
+    lessThanOrEqual: 30,
   },
   cpuMin: {
     greaterThanOrEqual: 1,

@@ -186,6 +186,14 @@ export interface Resource {
    */
   serverlessContainersContainerInfo?: ServerlessContainersContainerInfo
   /**
+   * Creation date.
+   */
+  createdAt?: Date
+  /**
+   * Last udpate date.
+   */
+  updatedAt?: Date
+  /**
    *
    * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
