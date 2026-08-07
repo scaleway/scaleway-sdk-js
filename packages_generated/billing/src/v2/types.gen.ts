@@ -9,6 +9,10 @@ export type BudgetAlertNotificationType =
   | 'email'
   | 'webhook'
 
+export type ListElectronicAddressesRequestOrderBy =
+  | 'starts_at_asc'
+  | 'starts_at_desc'
+
 export interface BudgetAlertNotification {
   /**
    * Alert notification's ID.
@@ -86,6 +90,38 @@ export interface Budget {
    * Alerts defined for this budget.
    */
   alerts: BudgetAlert[]
+}
+
+
+export interface ElectronicAddress {
+  /**
+   * The id of the electronic address.
+   */
+  id: string
+  /**
+   * The start date of the electronic address.
+   */
+  startsAt?: Date
+  /**
+   * The stop date of the electronic address.
+   */
+  stopsAt?: Date
+  /**
+   * The creation date of the electronic address.
+   */
+  createdAt?: Date
+  /**
+   * The last modification date of the electronic address.
+   */
+  updatedAt?: Date
+  /**
+   * The organization ID of the electronic address.
+   */
+  organizationId: string
+  /**
+   * Current value of electronic address.
+   */
+  value: string
 }
 
 
@@ -167,6 +203,86 @@ export type DeleteBudgetRequest = {
 }
 
 
+export type ElectronicBillingApiCreateElectronicAddressRequest = {
+  /**
+   * The Organization ID to set electronic address.
+   */
+  organizationId?: string
+  /**
+   * Electronic address to set.
+   */
+  value: string
+  /**
+   * When electronic address should be active.
+   */
+  startsAt?: Date
+  /**
+   * When electronic address should stop being active.
+   */
+  stopsAt?: Date
+}
+
+
+export type ElectronicBillingApiDeleteElectronicAddressRequest = {
+  /**
+   * The ID of the electronic address to delete.
+   */
+  electronicAddressId: string
+}
+
+
+export type ElectronicBillingApiGetElectronicAddressRequest = {
+  /**
+   * The ID of the electronic address we want to retrieve.
+   */
+  electronicAddressId: string
+}
+
+
+export type ElectronicBillingApiListElectronicAddressesRequest = {
+  /**
+   * Page number to return, from the paginated results.
+   */
+  page?: number
+  /**
+   * Number of Electronic Address to return per page.
+   */
+  pageSize?: number
+  /**
+   * Sort order of Electronic address in the response.
+   */
+  orderBy?: ListElectronicAddressesRequestOrderBy
+  /**
+   * The Organization ID to set electronic address.
+   */
+  organizationId?: string
+  /**
+   * Filter services where electronic address start_date is greater or equal to starts_after.
+   */
+  startsAfter?: Date
+  /**
+   * Filter services where electronic address stop_date is before stops_before.
+   */
+  stopsBefore?: Date
+}
+
+
+export type ElectronicBillingApiUpdateElectronicAddressRequest = {
+  /**
+   * The ID of the electronic address we want to update.
+   */
+  electronicAddressId: string
+  /**
+   * Electronic address to set.
+   */
+  value?: string
+  /**
+   * When electronic address should stop being active.
+   */
+  stopsAt?: Date
+}
+
+
 export type GetBudgetRequest = {
   /**
    * The ID of the budget.
@@ -198,6 +314,18 @@ export interface ListBudgetsResponse {
   budgets: Budget[]
   /**
    * Total number of items.
+   */
+  totalCount: number
+}
+
+
+export interface ListElectronicAddressesResponse {
+  /**
+   * List of electronic addresses.
+   */
+  electronicAddresses: ElectronicAddress[]
+  /**
+   * Total Number of returned electronic addresses.
    */
   totalCount: number
 }
