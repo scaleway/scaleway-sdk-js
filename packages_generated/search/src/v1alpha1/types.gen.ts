@@ -190,7 +190,7 @@ export interface Resource {
    */
   createdAt?: Date
   /**
-   * Last udpate date.
+   * Last update date.
    */
   updatedAt?: Date
   /**

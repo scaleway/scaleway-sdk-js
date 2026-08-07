@@ -394,7 +394,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Create a baremetal server. Create a new baremetal server. The order return you a service ID to follow the provisionning status you could call GetService.
+   * Create a baremetal server. Create a new baremetal server. The order return you a service ID to follow the provisioning status you could call GetService.
    *
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Service
