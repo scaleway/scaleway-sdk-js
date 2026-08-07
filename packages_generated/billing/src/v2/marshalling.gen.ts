@@ -7,10 +7,14 @@ import type {
   BudgetAlertNotification,
   BudgetAlert,
   Budget,
+  ElectronicAddress,
   ListBudgetsResponse,
+  ListElectronicAddressesResponse,
   CreateBudgetAlertNotificationRequest,
   CreateBudgetAlertRequest,
   CreateBudgetRequest,
+  ElectronicBillingApiCreateElectronicAddressRequest,
+  ElectronicBillingApiUpdateElectronicAddressRequest,
   UpdateBudgetAlertNotificationRequest,
   UpdateBudgetAlertRequest,
   UpdateBudgetRequest,
@@ -66,6 +70,24 @@ export const unmarshalBudget = (data: unknown): Budget => {
   } as Budget
 }
 
+export const unmarshalElectronicAddress = (data: unknown): ElectronicAddress => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ElectronicAddress' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    organizationId: data.organization_id,
+    startsAt: unmarshalDate(data.starts_at),
+    stopsAt: unmarshalDate(data.stops_at),
+    updatedAt: unmarshalDate(data.updated_at),
+    value: data.value,
+  } as ElectronicAddress
+}
+
 export const unmarshalListBudgetsResponse = (data: unknown): ListBudgetsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -77,6 +99,19 @@ export const unmarshalListBudgetsResponse = (data: unknown): ListBudgetsResponse
     budgets: unmarshalArrayOfObject(data.budgets, unmarshalBudget),
     totalCount: data.total_count,
   } as ListBudgetsResponse
+}
+
+export const unmarshalListElectronicAddressesResponse = (data: unknown): ListElectronicAddressesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListElectronicAddressesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    electronicAddresses: unmarshalArrayOfObject(data.electronic_addresses, unmarshalElectronicAddress),
+    totalCount: data.total_count,
+  } as ListElectronicAddressesResponse
 }
 
 export const marshalCreateBudgetAlertNotificationRequest = (
@@ -112,6 +147,24 @@ export const marshalCreateBudgetRequest = (
   consumption_limit: request.consumptionLimit,
   enabled: request.enabled,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalElectronicBillingApiCreateElectronicAddressRequest = (
+  request: ElectronicBillingApiCreateElectronicAddressRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  starts_at: request.startsAt,
+  stops_at: request.stopsAt,
+  value: request.value,
+})
+
+export const marshalElectronicBillingApiUpdateElectronicAddressRequest = (
+  request: ElectronicBillingApiUpdateElectronicAddressRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  stops_at: request.stopsAt,
+  value: request.value,
 })
 
 export const marshalUpdateBudgetAlertNotificationRequest = (
