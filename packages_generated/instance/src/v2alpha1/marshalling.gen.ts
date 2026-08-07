@@ -569,13 +569,17 @@ export const unmarshalResourceCounts = (data: unknown): ResourceCounts => {
   }
 
   return {
+    flexibleIps: data.flexible_ips,
     gpuServers: data.gpu_servers,
+    images: data.images,
     placementGroups: data.placement_groups,
     privateNetworkInterfaces: data.private_network_interfaces,
     securityGroups: data.security_groups,
     servers: data.servers,
     serversByType: data.servers_by_type,
     snapshots: data.snapshots,
+    templates: data.templates,
+    unusedFlexibleIps: data.unused_flexible_ips,
     volumes: data.volumes,
     volumesLSsd: data.volumes_l_ssd,
     volumesLSsdTotalSize: data.volumes_l_ssd_total_size,
