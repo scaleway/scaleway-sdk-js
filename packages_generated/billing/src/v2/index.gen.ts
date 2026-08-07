@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 export {
   API,
+  ElectronicBillingAPI,
 } from './api.gen.js'
 export * from './marshalling.gen.js'
 export type {
@@ -15,9 +16,17 @@ export type {
   DeleteBudgetAlertNotificationRequest,
   DeleteBudgetAlertRequest,
   DeleteBudgetRequest,
+  ElectronicAddress,
+  ElectronicBillingApiCreateElectronicAddressRequest,
+  ElectronicBillingApiDeleteElectronicAddressRequest,
+  ElectronicBillingApiGetElectronicAddressRequest,
+  ElectronicBillingApiListElectronicAddressesRequest,
+  ElectronicBillingApiUpdateElectronicAddressRequest,
   GetBudgetRequest,
   ListBudgetsRequest,
   ListBudgetsResponse,
+  ListElectronicAddressesRequestOrderBy,
+  ListElectronicAddressesResponse,
   UpdateBudgetAlertNotificationRequest,
   UpdateBudgetAlertRequest,
   UpdateBudgetRequest,

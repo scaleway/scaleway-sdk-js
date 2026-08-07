@@ -18,7 +18,11 @@ import {
   marshalCreateBudgetAlertNotificationRequest,
   marshalCreateBudgetAlertRequest,
   marshalCreateBudgetRequest,
+  unmarshalElectronicAddress,
+  marshalElectronicBillingApiCreateElectronicAddressRequest,
+  marshalElectronicBillingApiUpdateElectronicAddressRequest,
   unmarshalListBudgetsResponse,
+  unmarshalListElectronicAddressesResponse,
   marshalUpdateBudgetAlertNotificationRequest,
   marshalUpdateBudgetAlertRequest,
   marshalUpdateBudgetRequest,
@@ -33,9 +37,16 @@ import type {
   DeleteBudgetAlertNotificationRequest,
   DeleteBudgetAlertRequest,
   DeleteBudgetRequest,
+  ElectronicAddress,
+  ElectronicBillingApiCreateElectronicAddressRequest,
+  ElectronicBillingApiDeleteElectronicAddressRequest,
+  ElectronicBillingApiGetElectronicAddressRequest,
+  ElectronicBillingApiListElectronicAddressesRequest,
+  ElectronicBillingApiUpdateElectronicAddressRequest,
   GetBudgetRequest,
   ListBudgetsRequest,
   ListBudgetsResponse,
+  ListElectronicAddressesResponse,
   UpdateBudgetAlertNotificationRequest,
   UpdateBudgetAlertRequest,
   UpdateBudgetRequest,
@@ -249,6 +260,111 @@ export class API extends ParentAPI {
       {
         method: 'DELETE',
         path: `/billing/v2/budget-alert-notifications/${validatePathParam('budgetAlertNotificationId', request.budgetAlertNotificationId)}`,
+      },
+    )
+
+  
+}
+
+/**
+ * Electronic Billing API.
+
+This API allows you to query electronic billing related objects.
+ */
+export class ElectronicBillingAPI extends ParentAPI {
+  protected pageOfListElectronicAddresses = (request: Readonly<ElectronicBillingApiListElectronicAddressesRequest> = {}) =>
+    this.client.fetch<ListElectronicAddressesResponse>(
+      {
+        method: 'GET',
+        path: `/billing/v2/electronic-address`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['starts_after', request.startsAfter],
+          ['stops_before', request.stopsBefore],
+        ),
+      },
+      unmarshalListElectronicAddressesResponse,
+    )
+  
+  /**
+   * List electronic addresses.. List electronic addresses.
+   *
+   * @param request - The request {@link ElectronicBillingApiListElectronicAddressesRequest}
+   * @returns A Promise of ListElectronicAddressesResponse
+   */
+  listElectronicAddresses = (request: Readonly<ElectronicBillingApiListElectronicAddressesRequest> = {}) =>
+    enrichForPagination('electronicAddresses', this.pageOfListElectronicAddresses, request)
+
+  
+  /**
+   * Fetch an electronic address.. Fetch an electronic address.
+   *
+   * @param request - The request {@link ElectronicBillingApiGetElectronicAddressRequest}
+   * @returns A Promise of ElectronicAddress
+   */
+  getElectronicAddress = (request: Readonly<ElectronicBillingApiGetElectronicAddressRequest>) =>
+    this.client.fetch<ElectronicAddress>(
+      {
+        method: 'GET',
+        path: `/billing/v2/electronic-address/${validatePathParam('electronicAddressId', request.electronicAddressId)}`,
+      },
+      unmarshalElectronicAddress,
+    )
+
+  
+  /**
+   * Create a new electronic address.. Create a new electronic address.
+   *
+   * @param request - The request {@link ElectronicBillingApiCreateElectronicAddressRequest}
+   * @returns A Promise of ElectronicAddress
+   */
+  createElectronicAddress = (request: Readonly<ElectronicBillingApiCreateElectronicAddressRequest>) =>
+    this.client.fetch<ElectronicAddress>(
+      {
+        body: JSON.stringify(
+          marshalElectronicBillingApiCreateElectronicAddressRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/billing/v2/electronic-address`,
+      },
+      unmarshalElectronicAddress,
+    )
+
+  
+  /**
+   * Update an electronic address.. Update an electronic address.
+   *
+   * @param request - The request {@link ElectronicBillingApiUpdateElectronicAddressRequest}
+   * @returns A Promise of ElectronicAddress
+   */
+  updateElectronicAddress = (request: Readonly<ElectronicBillingApiUpdateElectronicAddressRequest>) =>
+    this.client.fetch<ElectronicAddress>(
+      {
+        body: JSON.stringify(
+          marshalElectronicBillingApiUpdateElectronicAddressRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/billing/v2/electronic-address/${validatePathParam('electronicAddressId', request.electronicAddressId)}`,
+      },
+      unmarshalElectronicAddress,
+    )
+
+  
+  /**
+   * Delete an electronic address.. Delete an electronic address.
+   *
+   * @param request - The request {@link ElectronicBillingApiDeleteElectronicAddressRequest}
+   */
+  deleteElectronicAddress = (request: Readonly<ElectronicBillingApiDeleteElectronicAddressRequest>) =>
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/billing/v2/electronic-address/${validatePathParam('electronicAddressId', request.electronicAddressId)}`,
       },
     )
 

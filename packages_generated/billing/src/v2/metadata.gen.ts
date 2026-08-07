@@ -33,6 +33,33 @@ export const queriesMetadata = {
         },
       ],
     },
+    {
+      apiClass: 'ElectronicBillingAPI',
+      methods: [
+        {
+          methodName: 'listElectronicAddresses',
+          protoName: 'ListElectronicAddresses',
+          paramsType: 'ElectronicBillingApiListElectronicAddressesRequest',
+          returnType: 'ListElectronicAddressesResponse',
+          isList: true,
+          paginationType: 'offset',
+          pageParamKey: 'page',
+          listItemType: 'ElectronicAddress',
+          isPrivate: false,
+          description: '"',
+        },
+        {
+          methodName: 'getElectronicAddress',
+          protoName: 'GetElectronicAddress',
+          paramsType: 'ElectronicBillingApiGetElectronicAddressRequest',
+          returnType: 'ElectronicAddress',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+      ],
+    },
   ],
 } as const
 

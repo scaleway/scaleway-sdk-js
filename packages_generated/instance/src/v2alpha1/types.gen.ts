@@ -2227,6 +2227,22 @@ export interface ResourceCounts {
    * Number of private network interfaces.
    */
   privateNetworkInterfaces: number
+  /**
+   * Number of templates.
+   */
+  templates: number
+  /**
+   * Number of flexible IPs.
+   */
+  flexibleIps: number
+  /**
+   * Number of flexible IPs not attached to any server.
+   */
+  unusedFlexibleIps: number
+  /**
+   * Number of images.
+   */
+  images: number
 }
 
 

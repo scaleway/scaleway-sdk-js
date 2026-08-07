@@ -8,6 +8,30 @@ export const CreateBudgetAlertRequest = {
   },
 }
 
+export const ElectronicBillingApiCreateElectronicAddressRequest = {
+  value: {
+    maxLength: 115,
+    minLength: 1,
+  },
+}
+
+export const ElectronicBillingApiListElectronicAddressesRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 1000,
+  },
+}
+
+export const ElectronicBillingApiUpdateElectronicAddressRequest = {
+  value: {
+    maxLength: 115,
+    minLength: 1,
+  },
+}
+
 export const UpdateBudgetAlertRequest = {
   threshold: {
     greaterThanOrEqual: 1,
