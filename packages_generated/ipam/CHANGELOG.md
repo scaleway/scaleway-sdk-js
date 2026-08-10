@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.11.0
+
+### Minor Changes
+
+- feat(ipam): add support for nats_cluster (#3214)
+
 ## 2.10.0
 
 ### Minor Changes

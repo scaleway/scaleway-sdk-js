@@ -1,5 +1,18 @@
 # Change Log
 
+## 0.10.2
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-audit-trail@2.20.0
+  - @scaleway/sdk-billing@2.12.0
+  - @scaleway/sdk-datawarehouse@2.13.0
+  - @scaleway/sdk-dedibox@2.10.0
+  - @scaleway/sdk-instance@2.13.0
+  - @scaleway/sdk-ipam@2.11.0
+  - @scaleway/sdk-product-catalog@2.22.0
+
 ## 0.10.1
 
 ### Patch Changes

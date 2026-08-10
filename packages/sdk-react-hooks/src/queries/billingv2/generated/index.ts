@@ -5,3 +5,8 @@ export { useBillingv2APIListBudgetsInfiniteQuery } from "./useBillingv2APIListBu
 export { useBillingv2APIListBudgetsAllQuery } from "./useBillingv2APIListBudgetsAllQuery"
 export { useBillingv2APIGetBudgetQuery } from "./useBillingv2APIGetBudgetQuery"
 export { useBillingv2APIReload } from "./useBillingv2APIReload"
+export { useBillingv2ElectronicBillingAPIListElectronicAddressesQuery } from "./useBillingv2ElectronicBillingAPIListElectronicAddressesQuery"
+export { useBillingv2ElectronicBillingAPIListElectronicAddressesInfiniteQuery } from "./useBillingv2ElectronicBillingAPIListElectronicAddressesInfiniteQuery"
+export { useBillingv2ElectronicBillingAPIListElectronicAddressesAllQuery } from "./useBillingv2ElectronicBillingAPIListElectronicAddressesAllQuery"
+export { useBillingv2ElectronicBillingAPIGetElectronicAddressQuery } from "./useBillingv2ElectronicBillingAPIGetElectronicAddressQuery"
+export { useBillingv2ElectronicBillingAPIReload } from "./useBillingv2ElectronicBillingAPIReload"

@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.8.0
+
+### Minor Changes
+
+- refactor(search): remove enum and use a string instead (#3216)
+
+- docs: fix typos (#3221)
+
+- feat(datawarehouse): allow max CPU field up to 30 DTWH-563 (#3220)
+
 ## 1.7.0
 
 ### Minor Changes

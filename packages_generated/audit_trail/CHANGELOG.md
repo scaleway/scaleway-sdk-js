@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.20.0
+
+### Minor Changes
+
+- feat(containers): add audit trail annotations (#3224)
+
 ## 2.19.0
 
 ### Minor Changes

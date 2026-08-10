@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.13.0
+
+### Minor Changes
+
+- feat(datawarehouse): allow max CPU field up to 30 DTWH-563 (#3220)
+
 ## 2.12.0
 
 ### Minor Changes

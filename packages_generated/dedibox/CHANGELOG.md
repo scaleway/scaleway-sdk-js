@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.10.0
+
+### Minor Changes
+
+- docs: fix typos (#3221)
+
 ## 2.9.0
 
 ### Minor Changes

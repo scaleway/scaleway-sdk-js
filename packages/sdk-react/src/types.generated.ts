@@ -71,6 +71,7 @@ export type APISdk = {
   baremetalv1PrivateNetwork: Baremetalv1.PrivateNetworkAPI
   baremetalv3PrivateNetwork: Baremetalv3.PrivateNetworkAPI
   billingv2: Billingv2.API
+  billingv2ElectronicBilling: Billingv2.ElectronicBillingAPI
   billingv2beta1: Billingv2beta1.API
   billingv2beta1FinOps: Billingv2beta1.FinOpsAPI
   blockv1: Blockv1.API

@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.12.0
+
+### Minor Changes
+
+- feat(billing): add electronic billing api (#3222)
+
 ## 2.11.0
 
 ### Minor Changes

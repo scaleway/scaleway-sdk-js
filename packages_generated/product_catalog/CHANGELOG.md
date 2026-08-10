@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.22.0
+
+### Minor Changes
+
+- feat(product_catalog): add support for  VolumeType, NodeType and StorageType (#3217)
+
 ## 2.21.0
 
 ### Minor Changes

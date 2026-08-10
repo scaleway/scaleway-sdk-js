@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.13.0
+
+### Minor Changes
+
+- feat(instance/v2alpha1): expose the number of templates in the dashboard counter (#3223)
+
 ## 2.12.0
 
 ### Minor Changes
