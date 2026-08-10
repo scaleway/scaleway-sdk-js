@@ -54,6 +54,10 @@ import type {
   ObservabilityContactPointInfo,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
+  ServerlessContainersContainerInfo,
+  ServerlessContainersDomainInfo,
+  ServerlessContainersNamespaceInfo,
+  ServerlessContainersTriggerInfo,
   VpcConnectorInfo,
   VpcGwGatewayInfo,
   VpcGwGatewayNetworkInfo,
@@ -728,6 +732,54 @@ const unmarshalSecretManagerSecretVersionInfo = (data: unknown): SecretManagerSe
   } as SecretManagerSecretVersionInfo
 }
 
+const unmarshalServerlessContainersContainerInfo = (data: unknown): ServerlessContainersContainerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessContainersContainerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    namespaceId: data.namespace_id,
+  } as ServerlessContainersContainerInfo
+}
+
+const unmarshalServerlessContainersDomainInfo = (data: unknown): ServerlessContainersDomainInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessContainersDomainInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    containerId: data.container_id,
+  } as ServerlessContainersDomainInfo
+}
+
+const unmarshalServerlessContainersNamespaceInfo = (data: unknown): ServerlessContainersNamespaceInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessContainersNamespaceInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as ServerlessContainersNamespaceInfo
+}
+
+const unmarshalServerlessContainersTriggerInfo = (data: unknown): ServerlessContainersTriggerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessContainersTriggerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    containerId: data.container_id,
+    sourceType: data.source_type,
+  } as ServerlessContainersTriggerInfo
+}
+
 const unmarshalVpcConnectorInfo = (data: unknown): VpcConnectorInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -892,6 +944,10 @@ export const unmarshalResource = (data: unknown): Resource => {
     secmSecretVersionInfo: data.secm_secret_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info) : undefined,
     secretManagerSecretInfo: data.secret_manager_secret_info ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info) : undefined,
     secretManagerVersionInfo: data.secret_manager_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secret_manager_version_info) : undefined,
+    serverlessContainersContainerInfo: data.serverless_containers_container_info ? unmarshalServerlessContainersContainerInfo(data.serverless_containers_container_info) : undefined,
+    serverlessContainersDomainInfo: data.serverless_containers_domain_info ? unmarshalServerlessContainersDomainInfo(data.serverless_containers_domain_info) : undefined,
+    serverlessContainersNamespaceInfo: data.serverless_containers_namespace_info ? unmarshalServerlessContainersNamespaceInfo(data.serverless_containers_namespace_info) : undefined,
+    serverlessContainersTriggerInfo: data.serverless_containers_trigger_info ? unmarshalServerlessContainersTriggerInfo(data.serverless_containers_trigger_info) : undefined,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
     vpcConnectorInfo: data.vpc_connector_info ? unmarshalVpcConnectorInfo(data.vpc_connector_info) : undefined,
