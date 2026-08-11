@@ -699,7 +699,7 @@ export interface AclMatch {
    */
   ipSubnet: string[]
   /**
-   * Defines whether Edge Services IPs should be matched.
+   * Defines whether Edge Services IPs should be matched. If set to `true`, restricts all connections except for Edge Services.
    */
   ipsEdgeServices: boolean
   /**
