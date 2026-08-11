@@ -36,6 +36,12 @@ export type EngineSettingPropertyType =
   | 'STRING'
   | 'FLOAT'
 
+export type HighAvailabilityMode =
+  | 'unknown_high_availability_mode'
+  | 'disabled'
+  | 'single_zone'
+  | 'multiple_zone'
+
 export type InstanceLogStatus =
   | 'unknown'
   | 'ready'
@@ -791,6 +797,10 @@ export interface Instance {
    */
   isHaCluster: boolean
   /**
+   * Defines the High-Availability mode of the instance.
+   */
+  highAvailabilityMode: HighAvailabilityMode
+  /**
    * Read Replicas of the Database Instance.
    */
   readReplicas: ReadReplica[]
@@ -1127,9 +1137,13 @@ export type CreateInstanceFromSnapshotRequest = {
    */
   instanceName: string
   /**
-   * Defines whether or not High-Availability is enabled on the new Database Instance.
+   * @deprecated Defines whether or not High-Availability is enabled on the new Database Instance.
    */
   isHaCluster?: boolean
+  /**
+   * Defines the High-Availability mode of the instance.
+   */
+  highAvailabilityMode?: HighAvailabilityMode
   /**
    * The node type used to restore the snapshot.
    */
@@ -1175,9 +1189,13 @@ export type CreateInstanceRequest = {
    */
   nodeType: string
   /**
-   * Defines whether or not High-Availability is enabled.
+   * @deprecated Defines whether or not High-Availability is enabled.
    */
   isHaCluster: boolean
+  /**
+   * Defines the High-Availability mode of the instance.
+   */
+  highAvailabilityMode?: HighAvailabilityMode
   /**
    * Defines whether or not backups are disabled.
    */
@@ -2255,43 +2273,49 @@ export type UpgradeInstanceRequest = {
   /**
    * Node type of the Database Instance you want to upgrade to.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
   nodeType?: string
   /**
-   * Defines whether or not high availability should be enabled on the Database Instance.
+   * @deprecated Defines whether or not high availability should be enabled on the Database Instance.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
   enableHa?: boolean
   /**
+   * Defines the High-Availability mode of the instance.
+   *
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
+   */
+  highAvailabilityMode?: HighAvailabilityMode
+  /**
    * Increase your block storage volume size.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
   volumeSize?: number
   /**
    * Change your Database Instance storage type.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
   volumeType?: VolumeType
   /**
    * This will create a new Database Instance with same specifications as the current one and perform a Database Engine upgrade.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
   upgradableVersionId?: string
   /**
    * Upgrade your database engine to a new major version including instance endpoints.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
   majorUpgradeWorkflow?: UpgradeInstanceRequestMajorUpgradeWorkflow
   /**
    * Defines whether or not encryption should be enabled on the Database Instance.
    *
-   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
+   * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
   enableEncryption?: boolean
 }
