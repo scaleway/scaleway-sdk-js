@@ -64,6 +64,7 @@ export type {
   GetInstanceRequest,
   GetReadReplicaRequest,
   GetSnapshotRequest,
+  HighAvailabilityMode,
   Instance,
   InstanceLog,
   InstanceLogStatus,
