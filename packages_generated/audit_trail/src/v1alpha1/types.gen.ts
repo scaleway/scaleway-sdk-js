@@ -494,6 +494,7 @@ export interface Resource {
   updatedAt?: Date
   deletedAt?: Date
   name?: string
+  action?: string
   /**
    * @deprecated 
    *
