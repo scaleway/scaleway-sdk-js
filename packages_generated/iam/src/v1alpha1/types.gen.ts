@@ -486,6 +486,14 @@ export interface Group {
    * Defines whether or not the group is managed.
    */
   managed: boolean
+  /**
+   * Indicates if the group is the special "All Users" group that contains all users of the organization.
+   */
+  allUsers: boolean
+  /**
+   * Indicates if the group is the special "All Applications" group that contains all non-managed applications of the organization.
+   */
+  allApplications: boolean
 }
 
 
