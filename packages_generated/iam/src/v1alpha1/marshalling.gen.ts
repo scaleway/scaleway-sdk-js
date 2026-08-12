@@ -161,6 +161,8 @@ export const unmarshalGroup = (data: unknown): Group => {
   }
 
   return {
+    allApplications: data.all_applications,
+    allUsers: data.all_users,
     applicationIds: data.application_ids,
     createdAt: unmarshalDate(data.created_at),
     deletable: data.deletable,
