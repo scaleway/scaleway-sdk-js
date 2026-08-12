@@ -901,6 +901,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     accountOrganizationInfo: data.account_organization_info ? unmarshalAccountOrganizationInfo(data.account_organization_info) : undefined,
     accountProjectInfo: data.account_project_info ? unmarshalAccountProjectInfo(data.account_project_info) : undefined,
     accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : undefined,
+    action: data.action,
     appleSiliconRunnerInfo: data.apple_silicon_runner_info ? unmarshalAppleSiliconRunnerInfo(data.apple_silicon_runner_info) : undefined,
     appleSiliconServerInfo: data.apple_silicon_server_info ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info) : undefined,
     auditTrailAlertRuleInfo: data.audit_trail_alert_rule_info ? unmarshalAuditTrailAlertRuleInfo(data.audit_trail_alert_rule_info) : undefined,
