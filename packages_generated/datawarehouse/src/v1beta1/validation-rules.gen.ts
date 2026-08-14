@@ -80,7 +80,8 @@ export const Deployment = {
     lessThanOrEqual: 30,
   },
   cpuMin: {
-    lessThanOrEqual: 15,
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 30,
   },
   name: {
     maxLength: 63,
