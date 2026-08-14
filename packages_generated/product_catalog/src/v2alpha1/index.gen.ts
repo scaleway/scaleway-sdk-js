@@ -25,6 +25,7 @@ export type {
   PublicCatalogProductPropertiesBlockStorageVolumeType,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
+  PublicCatalogProductPropertiesFileStorage,
   PublicCatalogProductPropertiesGenerativeApis,
   PublicCatalogProductPropertiesGenerativeApisConsumptionMode,
   PublicCatalogProductPropertiesGenerativeApisTask,
