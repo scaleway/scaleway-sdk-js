@@ -47,6 +47,7 @@ import type {
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
+  PublicCatalogProductPropertiesFileStorage,
   PublicCatalogProductPropertiesGenerativeApis,
   PublicCatalogProductPropertiesHardware,
   PublicCatalogProductPropertiesInstance,
@@ -611,6 +612,19 @@ const unmarshalPublicCatalogProductPropertiesElasticMetal = (data: unknown): Pub
   } as PublicCatalogProductPropertiesElasticMetal
 }
 
+const unmarshalPublicCatalogProductPropertiesFileStorage = (data: unknown): PublicCatalogProductPropertiesFileStorage => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesFileStorage' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    maxSize: data.max_size,
+    minSize: data.min_size,
+  } as PublicCatalogProductPropertiesFileStorage
+}
+
 const unmarshalPublicCatalogProductPropertiesGenerativeApis = (data: unknown): PublicCatalogProductPropertiesGenerativeApis => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -906,6 +920,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     blockStorage: data.block_storage ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage) : undefined,
     dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : undefined,
     elasticMetal: data.elastic_metal ? unmarshalPublicCatalogProductPropertiesElasticMetal(data.elastic_metal) : undefined,
+    fileStorage: data.file_storage ? unmarshalPublicCatalogProductPropertiesFileStorage(data.file_storage) : undefined,
     generativeApis: data.generative_apis ? unmarshalPublicCatalogProductPropertiesGenerativeApis(data.generative_apis) : undefined,
     hardware: data.hardware ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware) : undefined,
     instance: data.instance ? unmarshalPublicCatalogProductPropertiesInstance(data.instance) : undefined,
