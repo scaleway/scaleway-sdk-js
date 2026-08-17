@@ -1,5 +1,19 @@
 # Change Log
 
+## 0.13.3
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-audit-trail@2.21.0
+  - @scaleway/sdk-datawarehouse@2.14.0
+  - @scaleway/sdk-iam@2.12.0
+  - @scaleway/sdk-k8s@2.19.0
+  - @scaleway/sdk-lb@2.11.0
+  - @scaleway/sdk-product-catalog@2.23.0
+  - @scaleway/sdk-rdb@2.11.0
+  - @scaleway/sdk-react@0.10.3
+
 ## 0.13.2
 
 ### Patch Changes

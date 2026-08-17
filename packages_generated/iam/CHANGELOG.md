@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.12.0
+
+### Minor Changes
+
+- feat(iam): add all_users and all_applications marker for special IAM groups (#3227)
+
 ## 2.11.0
 
 ### Minor Changes

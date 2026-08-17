@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.14.0
+
+### Minor Changes
+
+- fix(datawarehouse): update validate.rules of field Deployment.cpu_min (#3230)
+
 ## 2.13.0
 
 ### Minor Changes

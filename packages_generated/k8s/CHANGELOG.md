@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.19.0
+
+### Minor Changes
+
+- feat(k8s): add support for pool user-data in createPool (#3234)
+
 ## 2.18.0
 
 ### Minor Changes

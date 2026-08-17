@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.11.0
+
+### Minor Changes
+
+- feat(rdb): add high_availability_mode enum (#3226)
+
 ## 2.10.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.23.0
+
+### Minor Changes
+
+- chore(product_catalog): add file storage (#3231)
+
 ## 2.22.0
 
 ### Minor Changes

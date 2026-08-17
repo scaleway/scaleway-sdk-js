@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.11.0
+
+### Minor Changes
+
+- feat(lb): add info about ips_edge_services (#3225)
+
 ## 2.10.0
 
 ### Minor Changes

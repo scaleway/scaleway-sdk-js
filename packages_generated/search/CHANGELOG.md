@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.9.0
+
+### Minor Changes
+
+- fix(search): add missing instance_template in Resource.Type (#3233)
+
 ## 1.8.0
 
 ### Minor Changes

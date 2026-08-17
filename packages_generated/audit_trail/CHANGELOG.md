@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.21.0
+
+### Minor Changes
+
+- feat(audit_trail): add action name field on event (#3229)
+
 ## 2.20.0
 
 ### Minor Changes
