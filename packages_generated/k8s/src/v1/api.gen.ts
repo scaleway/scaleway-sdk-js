@@ -59,6 +59,7 @@ import type {
   GetNodeMetadataRequest,
   GetNodeRequest,
   GetPoolRequest,
+  GetUserDataRequest,
   GetVersionRequest,
   ListClusterACLRulesRequest,
   ListClusterACLRulesResponse,
@@ -616,6 +617,26 @@ This will drain and replace the nodes in that pool.
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-labels`,
       },
       unmarshalPool,
+    )
+
+  
+  /**
+   * Get a pool related user data. Retrieve specific user data content for a given pool.
+Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded content of your user data.
+   *
+   * @param request - The request {@link GetUserDataRequest}
+   * @returns A Promise of Blob
+   */
+  getUserData = (request: Readonly<GetUserDataRequest>) =>
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/user-data/${validatePathParam('key', request.key)}`,
+        urlParams: urlParams(
+          ['dl', 1],
+        ),
+        responseType: 'blob',
+      },
     )
 
   
