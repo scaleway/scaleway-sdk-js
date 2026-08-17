@@ -98,6 +98,16 @@ export const queriesMetadata = {
           hasWaiter: true,
         },
         {
+          methodName: 'getUserData',
+          protoName: 'GetUserData',
+          paramsType: 'GetUserDataRequest',
+          returnType: 'Blob',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
           methodName: 'getNodeMetadata',
           protoName: 'GetNodeMetadata',
           paramsType: 'GetNodeMetadataRequest',

@@ -1261,6 +1261,10 @@ export type CreatePoolRequest = {
    * Private network where the nodes are attached. Should be member of the same VPC as the API Server.
    */
   privateNetworkId?: string
+  /**
+   * User data applied and reconciled with the pool.
+   */
+  userData?: Record<string, string>
 }
 
 
@@ -1383,6 +1387,22 @@ export type GetPoolRequest = {
    * ID of the requested pool.
    */
   poolId: string
+}
+
+
+export type GetUserDataRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Pool the user data will be attached to.
+   */
+  poolId: string
+  /**
+   * User data key to retrieved.
+   */
+  key: string
 }
 
 

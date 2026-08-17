@@ -42,6 +42,7 @@ export type {
   GetNodeMetadataRequest,
   GetNodeRequest,
   GetPoolRequest,
+  GetUserDataRequest,
   GetVersionRequest,
   ListClusterACLRulesRequest,
   ListClusterACLRulesResponse,

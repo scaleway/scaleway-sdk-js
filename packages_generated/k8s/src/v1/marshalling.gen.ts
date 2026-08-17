@@ -671,6 +671,7 @@ export const marshalCreatePoolRequest = (
   tags: request.tags,
   taints: ((request.taints !== undefined) ?  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
   upgrade_policy: ((request.upgradePolicy !== undefined) ?  marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults): undefined),
+  user_data: ((request.userData !== undefined) ?  request.userData: undefined),
   zone: request.zone ?? defaults.defaultZone,
 })
 
