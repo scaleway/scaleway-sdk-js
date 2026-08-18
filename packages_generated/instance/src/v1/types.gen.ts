@@ -855,7 +855,8 @@ export interface SecurityGroup {
    */
   stateful: boolean
   /**
-   * Security group state.
+   * Are applied) when the security group is updated (e.g., rules added, modified, or deleted)
+or when it is attached to or detached from a server's public network interface.
    */
   state: SecurityGroupState
   /**
