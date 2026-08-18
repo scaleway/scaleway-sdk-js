@@ -16,7 +16,7 @@ export const CreateDeploymentRequest = {
   },
   cpuMin: {
     greaterThanOrEqual: 1,
-    lessThanOrEqual: 15,
+    lessThanOrEqual: 30,
   },
   moveFactor: {
     greaterThanOrEqual: 0.1,
@@ -166,7 +166,7 @@ export const UpdateDeploymentRequest = {
   },
   cpuMin: {
     greaterThanOrEqual: 1,
-    lessThanOrEqual: 15,
+    lessThanOrEqual: 30,
   },
   moveFactor: {
     greaterThanOrEqual: 0.1,
