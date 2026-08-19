@@ -92,6 +92,16 @@ export const ListEmailsRequest = {
   },
 }
 
+export const ListOfferSubscriptionsRequest = {
+  page: {
+    greaterThan: 0,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListPoolsRequest = {
   page: {
     greaterThanOrEqual: 1,
