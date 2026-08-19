@@ -619,6 +619,28 @@ export class API extends ParentAPI {
     )
 
   
+  protected pageOfListOfferSubscriptions = (request: Readonly<ListOfferSubscriptionsRequest> = {}) =>
+    this.client.fetch<ListOfferSubscriptionsResponse>(
+      {
+        method: 'GET',
+        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`,
+        urlParams: urlParams(
+          ['offer_name', request.offerName],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],  
+          ...Object.entries(resolveOneOf([
+            {default: this.client.settings.defaultOrganizationId,param: 'organization_id',
+              value: request.organizationId,
+            },
+            {default: this.client.settings.defaultProjectId,param: 'project_id',
+              value: request.projectId,
+            },
+          ])),
+        ),
+      },
+      unmarshalListOfferSubscriptionsResponse,
+    )
+  
   /**
    * Get information about subscribed offers. Retrieve information about the offers you are subscribed to using the `project_id` and `region` parameters.
    *
@@ -626,16 +648,7 @@ export class API extends ParentAPI {
    * @returns A Promise of ListOfferSubscriptionsResponse
    */
   listOfferSubscriptions = (request: Readonly<ListOfferSubscriptionsRequest> = {}) =>
-    this.client.fetch<ListOfferSubscriptionsResponse>(
-      {
-        method: 'GET',
-        path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`,
-        urlParams: urlParams(
-          ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
-        ),
-      },
-      unmarshalListOfferSubscriptionsResponse,
-    )
+    enrichForPagination('offerSubscriptions', this.pageOfListOfferSubscriptions, request)
 
   
   /**
