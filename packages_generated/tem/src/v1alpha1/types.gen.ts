@@ -1280,9 +1280,29 @@ export type ListOfferSubscriptionsRequest = {
    */
   region?: ScwRegion
   /**
-   * ID of the Project.
+   * (Optional) Requested page number. Value must be greater or equal to 1.
+   */
+  page?: number
+  /**
+   * (Optional) Requested page size. Value must be between 1 and 100.
+   */
+  pageSize?: number
+  /**
+   * (Optional) ID of the Organization.
+   *
+   * One-of ('scope'): at most one of 'organizationId', 'projectId' could be set.
+   */
+  organizationId?: string
+  /**
+   * (Optional) ID of the Project.
+   *
+   * One-of ('scope'): at most one of 'organizationId', 'projectId' could be set.
    */
   projectId?: string
+  /**
+   * (Optional) Name of the offer associated with the Project.
+   */
+  offerName?: OfferName
 }
 
 
