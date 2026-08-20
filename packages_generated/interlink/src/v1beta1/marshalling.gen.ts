@@ -156,6 +156,7 @@ export const unmarshalPartner = (data: unknown): Partner => {
     logoUrl: data.logo_url,
     name: data.name,
     portalUrl: data.portal_url,
+    region: data.region,
     updatedAt: unmarshalDate(data.updated_at),
   } as Partner
 }
