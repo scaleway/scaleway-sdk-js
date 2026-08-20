@@ -34,6 +34,12 @@ export const ProjectApiCreateProjectRequest = {
   },
 }
 
+export const ProjectApiDeleteProjectWithResourcesRequest = {
+  projectName: {
+    minLength: 1,
+  },
+}
+
 export const ProjectApiListProjectsRequest = {
   name: {
     maxLength: 64,
