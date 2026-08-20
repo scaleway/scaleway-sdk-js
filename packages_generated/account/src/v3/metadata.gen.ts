@@ -52,6 +52,7 @@ export const queriesMetadata = {
           paginationType: 'none',
           isPrivate: false,
           description: '"',
+          hasWaiter: true,
         },
       ],
     },

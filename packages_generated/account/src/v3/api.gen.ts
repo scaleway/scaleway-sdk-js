@@ -11,6 +11,7 @@ import {
   toApiLocality,
 } from '@scaleway/sdk-client'
 import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import {PROJECT_TRANSIENT_STATUSES as PROJECT_TRANSIENT_STATUSES_ACCOUNT,} from './content.gen.js'
 import {
   unmarshalCheckContractSignatureResponse,
   marshalContractApiCheckContractSignatureRequest,
@@ -37,6 +38,7 @@ import type {
   Project,
   ProjectApiCreateProjectRequest,
   ProjectApiDeleteProjectRequest,
+  ProjectApiDeleteProjectWithResourcesRequest,
   ProjectApiGetProjectRequest,
   ProjectApiListProjectsRequest,
   ProjectApiSetProjectQualificationRequest,
@@ -226,6 +228,24 @@ export class ProjectAPI extends ParentAPI {
       },
       unmarshalProject,
     )
+  
+  /**
+   * Waits for {@link Project} to be in a final state.
+   *
+   * @param request - The request {@link ProjectApiGetProjectRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Project
+   */
+  waitForProject = (
+    request: Readonly<ProjectApiGetProjectRequest> = {},
+    options?: Readonly<WaitForOptions<Project>>,
+  ) =>
+    waitForResource(
+      options?.stop ?? (res => Promise.resolve(!PROJECT_TRANSIENT_STATUSES_ACCOUNT.includes(res.status))),
+      this.getProject,
+      request,
+      options,
+    )
 
   
   /**
@@ -239,6 +259,25 @@ export class ProjectAPI extends ParentAPI {
         method: 'DELETE',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
       },
+    )
+
+  
+  /**
+   * Delete an existing Project with all its resources. Delete an existing Project, specified by its Project ID and Name, along with all the resources it contains. Note that deleting a Project is permanent, and cannot be undone.
+   *
+   * @param request - The request {@link ProjectApiDeleteProjectWithResourcesRequest}
+   * @returns A Promise of Project
+   */
+  deleteProjectWithResources = (request: Readonly<ProjectApiDeleteProjectWithResourcesRequest>) =>
+    this.client.fetch<Project>(
+      {
+        method: 'POST',
+        path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/delete-with-resources`,
+        urlParams: urlParams(
+          ['project_name', request.projectName],
+        ),
+      },
+      unmarshalProject,
     )
 
   
