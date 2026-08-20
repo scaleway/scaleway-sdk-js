@@ -14,6 +14,7 @@ export const queriesMetadata = {
           protoName: 'SearchResources',
           paramsType: 'SearchResourcesRequest',
           returnType: 'SearchResourcesResponse',
+          returnTypeNamespace: '@scaleway-internal/sdk-search/v1alpha1',
           isList: false,
           paginationType: 'none',
           isPrivate: false,

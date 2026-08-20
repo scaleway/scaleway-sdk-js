@@ -4,6 +4,7 @@ export {
   ContractAPI,
   ProjectAPI,
 } from './api.gen.js'
+export * from './content.gen.js'
 export * from './marshalling.gen.js'
 export type {
   CheckContractSignatureResponse,
@@ -22,11 +23,13 @@ export type {
   Project,
   ProjectApiCreateProjectRequest,
   ProjectApiDeleteProjectRequest,
+  ProjectApiDeleteProjectWithResourcesRequest,
   ProjectApiGetProjectRequest,
   ProjectApiListProjectsRequest,
   ProjectApiSetProjectQualificationRequest,
   ProjectApiUpdateProjectRequest,
   ProjectQualification,
+  ProjectStatus,
   Qualification,
   QualificationAiMachine,
   QualificationAiMachineSubUseCase,

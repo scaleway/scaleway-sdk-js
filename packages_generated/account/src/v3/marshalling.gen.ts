@@ -205,6 +205,7 @@ export const unmarshalProject = (data: unknown): Project => {
     name: data.name,
     organizationId: data.organization_id,
     qualification: data.qualification ? unmarshalQualification(data.qualification) : undefined,
+    status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Project
 }
