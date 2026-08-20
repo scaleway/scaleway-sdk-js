@@ -31,6 +31,11 @@ export type ListProjectsRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export type ProjectStatus =
+  | 'unknown_status'
+  | 'active'
+  | 'deleting'
+
 export type QualificationAiMachineSubUseCase =
   | 'unknown_sub_use_case'
 
@@ -258,6 +263,10 @@ export interface Project {
    * Qualification of the Project.
    */
   qualification?: Qualification
+  /**
+   * Status of the Project.
+   */
+  status: ProjectStatus
 }
 
 
@@ -394,6 +403,18 @@ export type ProjectApiDeleteProjectRequest = {
    * Project ID of the Project.
    */
   projectId?: string
+}
+
+
+export type ProjectApiDeleteProjectWithResourcesRequest = {
+  /**
+   * Project ID of the Project.
+   */
+  projectId?: string
+  /**
+   * Name of the Project to delete. This is used as a safeguard confirmation.
+   */
+  projectName: string
 }
 
 
