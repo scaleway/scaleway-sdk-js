@@ -316,6 +316,10 @@ export interface Partner {
    * Whether or not the partner supports L3 connectivity.
    */
   l3Connectivity: boolean
+  /**
+   * Region of the partner.
+   */
+  region: ScwRegion
 }
 
 
