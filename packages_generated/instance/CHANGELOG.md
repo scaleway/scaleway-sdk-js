@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.14.0
+
+### Minor Changes
+
+- feat(instance): add doc for the security-group 'syncing' state (#3239)
+
+- feat(generation): improve ts metadata (#3242)
+
 ## 2.13.0
 
 ### Minor Changes

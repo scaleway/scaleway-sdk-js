@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.11.0
+
+### Minor Changes
+
+- feat(serverless_jobs): add reason application_not_started to job run (#3238)
+
+- feat(generation): improve ts metadata (#3242)
+
 ## 2.10.0
 
 ### Minor Changes

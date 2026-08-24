@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.19.0
+
+### Minor Changes
+
+- feat(generation): improve ts metadata (#3242)
+
 ## 2.18.0
 
 ### Minor Changes

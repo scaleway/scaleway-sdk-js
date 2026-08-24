@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.8.0
+
+### Minor Changes
+
+- feat(account): add DeleteProjectWithResources RPC + project status (AUTH-5153)  (#3245)
+
+- feat(generation): improve ts metadata (#3242)
+
 ## 2.7.0
 
 ### Minor Changes

@@ -22,6 +22,8 @@ export { useTemv1alpha1APIListBlocklistsQuery } from "./useTemv1alpha1APIListBlo
 export { useTemv1alpha1APIListBlocklistsInfiniteQuery } from "./useTemv1alpha1APIListBlocklistsInfiniteQuery"
 export { useTemv1alpha1APIListBlocklistsAllQuery } from "./useTemv1alpha1APIListBlocklistsAllQuery"
 export { useTemv1alpha1APIListOfferSubscriptionsQuery } from "./useTemv1alpha1APIListOfferSubscriptionsQuery"
+export { useTemv1alpha1APIListOfferSubscriptionsInfiniteQuery } from "./useTemv1alpha1APIListOfferSubscriptionsInfiniteQuery"
+export { useTemv1alpha1APIListOfferSubscriptionsAllQuery } from "./useTemv1alpha1APIListOfferSubscriptionsAllQuery"
 export { useTemv1alpha1APIListOffersQuery } from "./useTemv1alpha1APIListOffersQuery"
 export { useTemv1alpha1APIListPoolsQuery } from "./useTemv1alpha1APIListPoolsQuery"
 export { useTemv1alpha1APIListPoolsInfiniteQuery } from "./useTemv1alpha1APIListPoolsInfiniteQuery"

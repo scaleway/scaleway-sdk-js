@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.10.0
+
+### Minor Changes
+
+- feat(interlink): add SRN to Interlink and s2s-vpn (#3248)
+
+- feat(generation): improve ts metadata (#3242)
+
 ## 2.9.0
 
 ### Minor Changes

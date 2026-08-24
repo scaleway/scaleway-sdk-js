@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.9.0
+
+### Minor Changes
+
+- feat(tem): add filter to list offer subscriptions (#3240)
+
+- feat(generation): improve ts metadata (#3242)
+
 ## 2.8.0
 
 ### Minor Changes

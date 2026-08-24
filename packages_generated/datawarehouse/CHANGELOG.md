@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.15.0
+
+### Minor Changes
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(datawarehouse): allow min CPU field up to 30 in create and update DTWH-563 (#3236)
+
 ## 2.14.0
 
 ### Minor Changes

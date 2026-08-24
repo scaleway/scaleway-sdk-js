@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.20.0
+
+### Minor Changes
+
+- feat(k8s): allow page_size=0 (#3235)
+
+- feat(generation): improve ts metadata (#3242)
+
 ## 2.19.0
 
 ### Minor Changes

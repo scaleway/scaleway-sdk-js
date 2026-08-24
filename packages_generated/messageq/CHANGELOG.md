@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.5.0
+
+### Minor Changes
+
+- feat(generation): improve ts metadata (#3242)
+
 ## 1.4.0
 
 ### Minor Changes
