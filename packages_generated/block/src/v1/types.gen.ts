@@ -194,6 +194,10 @@ export interface Snapshot {
    * True if the snapshot can be used by anyone to create a volume from.
    */
   public: boolean
+  /**
+   * KMS Key used for securing the parent volume's encryption.
+   */
+  kmsKeyId?: string
 }
 
 
