@@ -66,6 +66,7 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     class: data.class,
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
+    kmsKeyId: data.kms_key_id,
     name: data.name,
     parentVolume: data.parent_volume ? unmarshalSnapshotParentVolume(data.parent_volume) : undefined,
     projectId: data.project_id,
