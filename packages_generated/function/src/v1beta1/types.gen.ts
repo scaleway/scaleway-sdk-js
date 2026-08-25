@@ -259,9 +259,21 @@ export interface CreateTriggerRequestMnqSqsClientConfig {
 
 
 export interface CreateTriggerRequestSqsClientConfig {
+  /**
+   * @deprecated 
+   */
   endpoint: string
+  /**
+   * @deprecated 
+   */
   queueUrl: string
+  /**
+   * @deprecated 
+   */
   accessKey: string
+  /**
+   * @deprecated 
+   */
   secretKey: string
 }
 
@@ -606,7 +618,13 @@ export interface Trigger {
 
 
 export interface UpdateTriggerRequestSqsClientConfig {
+  /**
+   * @deprecated 
+   */
   accessKey?: string
+  /**
+   * @deprecated 
+   */
   secretKey?: string
 }
 
@@ -813,7 +831,7 @@ export type CreateTriggerRequest = {
    */
   scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig
   /**
-   * Configuration for an AWS SQS queue.
+   * @deprecated Configuration for an AWS SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
@@ -1435,7 +1453,7 @@ export type UpdateTriggerRequest = {
    */
   description?: string
   /**
-   * Configuration for an AWS SQS queue.
+   * @deprecated Configuration for an AWS SQS queue.
    *
    * One-of ('config'): at most one of 'sqsConfig' could be set.
    */
