@@ -4,6 +4,7 @@ import randomName from '@scaleway/random-name'
 import { isJSONObject, marshalBlobToScwFile, marshalDecimal, marshalMoney, marshalScwFile, marshalTimeSeries, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalDecimal, unmarshalMapOfObject, unmarshalMoney, unmarshalScwFile, unmarshalServiceInfo, unmarshalTimeSeries, unmarshalTimeSeriesPoint } from '@scaleway/sdk-client'
 import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scaleway/sdk-client'
 import type {
+  ComponentInfo,
   Version,
   MaintenanceWindow,
   ClusterAutoUpgrade,
@@ -54,6 +55,18 @@ import type {
   UpgradePoolRequest,
 } from './types.gen.js'
 
+const unmarshalComponentInfo = (data: unknown): ComponentInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ComponentInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    version: data.version,
+  } as ComponentInfo
+}
+
 export const unmarshalVersion = (data: unknown): Version => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -62,6 +75,7 @@ export const unmarshalVersion = (data: unknown): Version => {
   }
 
   return {
+    additionalComponents: unmarshalMapOfObject(data.additional_components, unmarshalComponentInfo),
     availableAdmissionPlugins: data.available_admission_plugins,
     availableCnis: data.available_cnis,
     availableContainerRuntimes: data.available_container_runtimes,

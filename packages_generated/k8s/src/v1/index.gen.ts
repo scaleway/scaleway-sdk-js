@@ -22,6 +22,7 @@ export type {
   ClusterType,
   ClusterTypeAvailability,
   ClusterTypeResiliency,
+  ComponentInfo,
   CoreV1Taint,
   CoreV1TaintEffect,
   CreateClusterRequest,
