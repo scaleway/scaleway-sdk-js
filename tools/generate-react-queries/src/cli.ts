@@ -20,63 +20,26 @@ import { generateFromMetadata } from './generate.ts'
 import { updatePackageJsonExports } from './package-exports.ts'
 
 /** Shape of a JSON config file (customNamespaces is [string,string][] here, not a Map). */
-type FileConfig = {
-  outputDir?: string
-  generatedPath?: string
-  customPath?: string
-  packagesPath?: string
+type FileConfig = Omit<ReactQueriesConfig, 'customNamespaces'> & {
   customNamespaces?: [string, string][]
-  imports?: Partial<ReactQueriesConfig['imports']>
-  filters?: Partial<ReactQueriesConfig['filters']>
 }
 
-const TOP_LEVEL_STRING_FIELDS = ['outputDir', 'generatedPath', 'customPath', 'packagesPath'] as const
-const IMPORT_STRING_FIELDS = ['apiSdkPath', 'packageNameFilter', 'dataLoaderPackage'] as const
-const FILTER_ARRAY_FIELDS = ['skipMethods', 'skipPackages', 'skipServices', 'skipVersions', 'rawTypes'] as const
-const FILTER_BOOLEAN_FIELDS = ['skipPrivateMethods', 'skipCursorAllHooks', 'skipWaiters'] as const
-
-/**
- * Merge a JSON config file into the given config. Fields present and valid in
- * the file override the config; anything else is left untouched.
- */
+/** Merge a JSON config file into the given config. File fields override defaults. */
 const loadConfigFile = (config: ReactQueriesConfig, path?: string): ReactQueriesConfig => {
   const fileConfig = loadJsonConfig<FileConfig>(path)
   if (!fileConfig) return config
 
-  const next: ReactQueriesConfig = { ...config }
+  const { customNamespaces, ...rest } = fileConfig
 
-  for (const key of TOP_LEVEL_STRING_FIELDS) {
-    if (typeof fileConfig[key] === 'string') next[key] = fileConfig[key] as string
+  return {
+    ...config,
+    ...rest,
+    imports: { ...config.imports, ...rest.imports },
+    filters: { ...config.filters, ...rest.filters },
+    customNamespaces: Array.isArray(customNamespaces)
+      ? new Map(customNamespaces)
+      : config.customNamespaces,
   }
-
-  if (fileConfig.imports) {
-    const imports = fileConfig.imports
-    for (const key of IMPORT_STRING_FIELDS) {
-      if (typeof imports[key] === 'string') next.imports[key] = imports[key] as string
-    }
-  }
-
-  if (fileConfig.filters) {
-    const filters = fileConfig.filters
-    next.filters = { ...config.filters }
-    for (const key of FILTER_ARRAY_FIELDS) {
-      if (Array.isArray(filters[key])) next.filters[key] = filters[key] as string[]
-    }
-    for (const key of FILTER_BOOLEAN_FIELDS) {
-      if (typeof filters[key] === 'boolean') next.filters[key] = filters[key] as boolean
-    }
-  }
-
-  if (Array.isArray(fileConfig.customNamespaces)) {
-    next.customNamespaces = new Map(
-      fileConfig.customNamespaces.filter(
-        (entry): entry is [string, string] =>
-          Array.isArray(entry) && entry.length === 2 && entry.every(v => typeof v === 'string'),
-      ),
-    )
-  }
-
-  return next
 }
 
 // Parse CLI flags — all optional, defaults come from config.ts
