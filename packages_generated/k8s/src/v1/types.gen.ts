@@ -517,6 +517,10 @@ export interface CreateClusterRequestPoolConfig {
    * Private network where the nodes are attached. Should be member of the same VPC as the API Server.
    */
   privateNetworkId?: string
+  /**
+   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   */
+  maxTerminationGracePeriod?: string
 }
 
 
@@ -925,6 +929,10 @@ export interface Pool {
    */
   errorMessage?: string
   /**
+   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   */
+  maxTerminationGracePeriod?: string
+  /**
    * Cluster region of the pool.
    */
   region: ScwRegion
@@ -1270,6 +1278,10 @@ export type CreatePoolRequest = {
    * User data applied and reconciled with the pool.
    */
   userData?: Record<string, string>
+  /**
+   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   */
+  maxTerminationGracePeriod?: string
 }
 
 
@@ -1929,6 +1941,10 @@ export type UpdatePoolRequest = {
    * Security group ID in which all the nodes of the pool will be moved.
    */
   securityGroupId?: string
+  /**
+   * New maximum amount of time before the API forces the drain and deletion of a `deleting` node.
+   */
+  maxTerminationGracePeriod?: string
 }
 
 
