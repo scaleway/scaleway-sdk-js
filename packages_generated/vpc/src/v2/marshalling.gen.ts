@@ -11,7 +11,7 @@ import type {
   VPCConnectorPeerInfo,
   VPCConnector,
   VPC,
-  AddPrivateNetworkS3EndpointResponse,
+  AddPrivateNetworkObjectStoragePrivateAccessResponse,
   AclRule,
   GetAclResponse,
   ListIngressRulesResponse,
@@ -22,15 +22,15 @@ import type {
   ListVPCConnectorsResponse,
   ListVPCsResponse,
   SetAclResponse,
-  SetPrivateNetworksS3EndpointResponse,
-  AddPrivateNetworkS3EndpointRequest,
+  SetPrivateNetworksObjectStoragePrivateAccessResponse,
+  AddPrivateNetworkObjectStoragePrivateAccessRequest,
   CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
   SetAclRequest,
-  SetPrivateNetworksS3EndpointRequest,
+  SetPrivateNetworksObjectStoragePrivateAccessRequest,
   UpdateIngressRuleRequest,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
@@ -68,7 +68,7 @@ export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
     createdAt: unmarshalDate(data.created_at),
     defaultRoutePropagationEnabled: data.default_route_propagation_enabled,
     dhcpEnabled: data.dhcp_enabled,
-    hasS3Integration: data.has_s3_integration,
+    hasObjectStoragePrivateAccess: data.has_object_storage_private_access,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -179,29 +179,29 @@ export const unmarshalVPC = (data: unknown): VPC => {
     id: data.id,
     isDefault: data.is_default,
     name: data.name,
+    objectStoragePrivateAccessEnabled: data.object_storage_private_access_enabled,
     organizationId: data.organization_id,
     privateNetworkCount: data.private_network_count,
     projectId: data.project_id,
     region: data.region,
     routingEnabled: data.routing_enabled,
-    s3IntegrationEnabled: data.s3_integration_enabled,
     tags: data.tags,
     transitivityEnabled: data.transitivity_enabled,
     updatedAt: unmarshalDate(data.updated_at),
   } as VPC
 }
 
-export const unmarshalAddPrivateNetworkS3EndpointResponse = (data: unknown): AddPrivateNetworkS3EndpointResponse => {
+export const unmarshalAddPrivateNetworkObjectStoragePrivateAccessResponse = (data: unknown): AddPrivateNetworkObjectStoragePrivateAccessResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'AddPrivateNetworkS3EndpointResponse' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'AddPrivateNetworkObjectStoragePrivateAccessResponse' failed as data isn't a dictionary.`,
     )
   }
 
   return {
     privateNetworkIds: data.private_network_ids,
     vpcId: data.vpc_id,
-  } as AddPrivateNetworkS3EndpointResponse
+  } as AddPrivateNetworkObjectStoragePrivateAccessResponse
 }
 
 const unmarshalAclRule = (data: unknown): AclRule => {
@@ -343,21 +343,21 @@ export const unmarshalSetAclResponse = (data: unknown): SetAclResponse => {
   } as SetAclResponse
 }
 
-export const unmarshalSetPrivateNetworksS3EndpointResponse = (data: unknown): SetPrivateNetworksS3EndpointResponse => {
+export const unmarshalSetPrivateNetworksObjectStoragePrivateAccessResponse = (data: unknown): SetPrivateNetworksObjectStoragePrivateAccessResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'SetPrivateNetworksS3EndpointResponse' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'SetPrivateNetworksObjectStoragePrivateAccessResponse' failed as data isn't a dictionary.`,
     )
   }
 
   return {
     privateNetworkIds: data.private_network_ids,
     vpcId: data.vpc_id,
-  } as SetPrivateNetworksS3EndpointResponse
+  } as SetPrivateNetworksObjectStoragePrivateAccessResponse
 }
 
-export const marshalAddPrivateNetworkS3EndpointRequest = (
-  request: AddPrivateNetworkS3EndpointRequest,
+export const marshalAddPrivateNetworkObjectStoragePrivateAccessRequest = (
+  request: AddPrivateNetworkObjectStoragePrivateAccessRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
@@ -445,8 +445,8 @@ export const marshalSetAclRequest = (
   rules:  request.rules.map(elt => marshalAclRule(elt, defaults)),
 })
 
-export const marshalSetPrivateNetworksS3EndpointRequest = (
-  request: SetPrivateNetworksS3EndpointRequest,
+export const marshalSetPrivateNetworksObjectStoragePrivateAccessRequest = (
+  request: SetPrivateNetworksObjectStoragePrivateAccessRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_ids: request.privateNetworkIds,
