@@ -6,13 +6,78 @@
  * Reads metadata.gen.ts from each SDK package's dist/, then generates
  * useQuery / useInfiniteQuery / useReload hooks into sdk-react-hooks.
  *
- * Usage: pnpm generate-react-queries [--packages-path ../../packages_generated]
+ * Usage: pnpm generate-react-queries [--config config.json] [--packages-path ../../packages_generated]
+ *
+ * A JSON config file may override any default from config.ts. Top-level
+ * string fields, imports.*, filters.* (arrays/booleans), and customNamespaces
+ * (as [string, string][]) are recognised.
  */
 
 import { parseArgs } from 'node:util'
-import { defaultConfig } from './config.ts'
+import { defaultConfig, loadJsonConfig } from './config.ts'
+import type { ReactQueriesConfig } from './config.ts'
 import { generateFromMetadata } from './generate.ts'
 import { updatePackageJsonExports } from './package-exports.ts'
+
+/** Shape of a JSON config file (customNamespaces is [string,string][] here, not a Map). */
+type FileConfig = {
+  outputDir?: string
+  generatedPath?: string
+  customPath?: string
+  packagesPath?: string
+  customNamespaces?: [string, string][]
+  imports?: Partial<ReactQueriesConfig['imports']>
+  filters?: Partial<ReactQueriesConfig['filters']>
+}
+
+const TOP_LEVEL_STRING_FIELDS = ['outputDir', 'generatedPath', 'customPath', 'packagesPath'] as const
+const IMPORT_STRING_FIELDS = ['apiSdkPath', 'packageNameFilter', 'dataLoaderPackage'] as const
+const FILTER_ARRAY_FIELDS = ['skipMethods', 'skipPackages', 'skipServices', 'skipVersions', 'rawTypes'] as const
+const FILTER_BOOLEAN_FIELDS = ['skipPrivateMethods', 'skipCursorAllHooks', 'skipWaiters'] as const
+
+/**
+ * Merge a JSON config file into the given config. Fields present and valid in
+ * the file override the config; anything else is left untouched.
+ */
+const loadConfigFile = (config: ReactQueriesConfig, path?: string): ReactQueriesConfig => {
+  const fileConfig = loadJsonConfig<FileConfig>(path)
+  if (!fileConfig) return config
+
+  const next: ReactQueriesConfig = { ...config }
+
+  for (const key of TOP_LEVEL_STRING_FIELDS) {
+    if (typeof fileConfig[key] === 'string') next[key] = fileConfig[key] as string
+  }
+
+  if (fileConfig.imports) {
+    const imports = fileConfig.imports
+    for (const key of IMPORT_STRING_FIELDS) {
+      if (typeof imports[key] === 'string') next.imports[key] = imports[key] as string
+    }
+  }
+
+  if (fileConfig.filters) {
+    const filters = fileConfig.filters
+    next.filters = { ...config.filters }
+    for (const key of FILTER_ARRAY_FIELDS) {
+      if (Array.isArray(filters[key])) next.filters[key] = filters[key] as string[]
+    }
+    for (const key of FILTER_BOOLEAN_FIELDS) {
+      if (typeof filters[key] === 'boolean') next.filters[key] = filters[key] as boolean
+    }
+  }
+
+  if (Array.isArray(fileConfig.customNamespaces)) {
+    next.customNamespaces = new Map(
+      fileConfig.customNamespaces.filter(
+        (entry): entry is [string, string] =>
+          Array.isArray(entry) && entry.length === 2 && entry.every(v => typeof v === 'string'),
+      ),
+    )
+  }
+
+  return next
+}
 
 // Parse CLI flags — all optional, defaults come from config.ts
 const { values } = parseArgs({
@@ -23,12 +88,13 @@ const { values } = parseArgs({
     'api-sdk-path': { type: 'string' },
     'package-name-filter': { type: 'string' },
     'packages-path': { type: 'string' },
+    'config': { type: 'string' },
   },
   strict: false,
 }) as { values: Record<string, string | undefined> }
 
-// Override defaults with any CLI-provided values
-const config = structuredClone(defaultConfig)
+// Start from defaults, then apply a config file, then CLI overrides
+const config = loadConfigFile(structuredClone(defaultConfig), values['config'])
 
 if (values['dir-gen-name']) config.outputDir = values['dir-gen-name']
 if (values['generated-path']) config.generatedPath = values['generated-path']

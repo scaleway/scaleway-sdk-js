@@ -5,6 +5,8 @@
  * Config controls naming conventions, filtering, and import paths.
  */
 
+import { existsSync, readFileSync } from 'node:fs'
+
 // --- Types (mirror metadata.gen.ts structure in each SDK package) ---
 
 /** A single API method that will become a React Query hook. */
@@ -86,6 +88,13 @@ export interface ReactQueriesConfig {
     skipWaiters: boolean
     /** Package names to exclude from generation (e.g. @scaleway/sdk-test). */
     skipPackages: string[]
+    /** Service classes to exclude (matched against service.apiClass). */
+    skipServices: string[]
+    /**
+     * Versions to exclude. "<package>@<version>" skips only that package's
+     * version; a bare "<version>" skips it for all packages.
+     */
+    skipVersions: string[]
   }
 
   generatedComment: string
@@ -122,6 +131,8 @@ export const defaultConfig: ReactQueriesConfig = {
     skipWaiters: true,
     rawTypes: ['Blob', 'string', 'number', 'boolean'],
     skipPackages: ['@scaleway/sdk-test'],
+    skipServices: [],
+    skipVersions: [],
   },
 
   generatedComment:
@@ -138,4 +149,24 @@ export function capitalize(str: string): string {
 export function lowerCaseFirst(str: string): string {
   if (!str) return str
   return str.charAt(0).toLowerCase() + str.slice(1)
+}
+
+// --- Config helpers ---
+
+/**
+ * Load and parse a JSON config file, returning undefined (with a warning) if
+ * the file is missing or malformed.
+ */
+export function loadJsonConfig<T>(path?: string): T | undefined {
+  if (!path) return undefined
+  if (!existsSync(path)) {
+    console.warn(`⚠️  Config file not found: ${path} (ignored)`)
+    return undefined
+  }
+  try {
+    return JSON.parse(readFileSync(path, 'utf-8')) as T
+  } catch (error) {
+    console.warn(`⚠️  Could not parse config file ${path}: ${error}`)
+    return undefined
+  }
 }

@@ -18,9 +18,14 @@ import {
 export async function generateFromMetadata(config: ReactQueriesConfig): Promise<void> {
   const sdkPackages = discoverSdkPackages(config)
   const skipMethods = new Set(config.filters.skipMethods)
+  const skipServices = new Set(config.filters.skipServices)
+  const skipVersions = new Set(config.filters.skipVersions)
   const { metadataFileName } = config.naming
 
   const skipPackages = new Set(config.filters.skipPackages)
+
+  const isVersionSkipped = (packageName: string, version: string): boolean =>
+    skipVersions.has(`${packageName}@${version}`) || skipVersions.has(version)
 
   for (const [packageName, pkgDir] of sdkPackages) {
     if (skipPackages.has(packageName)) {
@@ -38,6 +43,11 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
     console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.join(', ')}`)
 
     for (const version of versions) {
+      if (isVersionSkipped(packageName, version)) {
+        console.log(`  ⏭️  Skipping ${packageName}/${version} (excluded by skipVersions)`)
+        continue
+      }
+
       try {
         const metadata = await loadMetadata(pkgDir, version, metadataFileName)
 
@@ -54,7 +64,16 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
         }
         mkdirSync(generatedDir, { recursive: true })
 
-        for (const service of services) {
+        const servicesToGenerate = services.filter(
+          service => !skipServices.has(service.apiClass),
+        )
+
+        if (servicesToGenerate.length === 0) {
+          console.log(` ⏭️  Skipping ${packageName}/${version}: all services excluded by skipServices`)
+          continue
+        }
+
+        for (const service of servicesToGenerate) {
           console.log(`📝 Generating hooks for ${service.apiClass}`)
 
           for (const method of service.methods) {
@@ -98,7 +117,7 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
         }
 
         // Barrel file re-exporting all generated hooks for this namespace
-        const indexContent = generateIndexFile(services, metadata, config)
+        const indexContent = generateIndexFile(servicesToGenerate, metadata, config)
         writeFileSync(join(generatedDir, config.naming.indexFile), indexContent)
 
         console.log(`✅ Generated hooks for ${folderName}`)
