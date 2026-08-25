@@ -58,6 +58,11 @@ import type {
   ServerlessContainersDomainInfo,
   ServerlessContainersNamespaceInfo,
   ServerlessContainersTriggerInfo,
+  ServerlessFunctionsCronInfo,
+  ServerlessFunctionsDomainInfo,
+  ServerlessFunctionsFunctionInfo,
+  ServerlessFunctionsNamespaceInfo,
+  ServerlessFunctionsTriggerInfo,
   VpcConnectorInfo,
   VpcGwGatewayInfo,
   VpcGwGatewayNetworkInfo,
@@ -780,6 +785,66 @@ const unmarshalServerlessContainersTriggerInfo = (data: unknown): ServerlessCont
   } as ServerlessContainersTriggerInfo
 }
 
+const unmarshalServerlessFunctionsCronInfo = (data: unknown): ServerlessFunctionsCronInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessFunctionsCronInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    functionId: data.function_id,
+  } as ServerlessFunctionsCronInfo
+}
+
+const unmarshalServerlessFunctionsDomainInfo = (data: unknown): ServerlessFunctionsDomainInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessFunctionsDomainInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    functionId: data.function_id,
+  } as ServerlessFunctionsDomainInfo
+}
+
+const unmarshalServerlessFunctionsFunctionInfo = (data: unknown): ServerlessFunctionsFunctionInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessFunctionsFunctionInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    namespaceId: data.namespace_id,
+  } as ServerlessFunctionsFunctionInfo
+}
+
+const unmarshalServerlessFunctionsNamespaceInfo = (data: unknown): ServerlessFunctionsNamespaceInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessFunctionsNamespaceInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as ServerlessFunctionsNamespaceInfo
+}
+
+const unmarshalServerlessFunctionsTriggerInfo = (data: unknown): ServerlessFunctionsTriggerInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerlessFunctionsTriggerInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    functionId: data.function_id,
+    inputType: data.input_type,
+  } as ServerlessFunctionsTriggerInfo
+}
+
 const unmarshalVpcConnectorInfo = (data: unknown): VpcConnectorInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -949,6 +1014,11 @@ export const unmarshalResource = (data: unknown): Resource => {
     serverlessContainersDomainInfo: data.serverless_containers_domain_info ? unmarshalServerlessContainersDomainInfo(data.serverless_containers_domain_info) : undefined,
     serverlessContainersNamespaceInfo: data.serverless_containers_namespace_info ? unmarshalServerlessContainersNamespaceInfo(data.serverless_containers_namespace_info) : undefined,
     serverlessContainersTriggerInfo: data.serverless_containers_trigger_info ? unmarshalServerlessContainersTriggerInfo(data.serverless_containers_trigger_info) : undefined,
+    serverlessFunctionsCronInfo: data.serverless_functions_cron_info ? unmarshalServerlessFunctionsCronInfo(data.serverless_functions_cron_info) : undefined,
+    serverlessFunctionsDomainInfo: data.serverless_functions_domain_info ? unmarshalServerlessFunctionsDomainInfo(data.serverless_functions_domain_info) : undefined,
+    serverlessFunctionsFunctionInfo: data.serverless_functions_function_info ? unmarshalServerlessFunctionsFunctionInfo(data.serverless_functions_function_info) : undefined,
+    serverlessFunctionsNamespaceInfo: data.serverless_functions_namespace_info ? unmarshalServerlessFunctionsNamespaceInfo(data.serverless_functions_namespace_info) : undefined,
+    serverlessFunctionsTriggerInfo: data.serverless_functions_trigger_info ? unmarshalServerlessFunctionsTriggerInfo(data.serverless_functions_trigger_info) : undefined,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
     vpcConnectorInfo: data.vpc_connector_info ? unmarshalVpcConnectorInfo(data.vpc_connector_info) : undefined,

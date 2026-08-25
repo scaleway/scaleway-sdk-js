@@ -12,8 +12,8 @@ import {
 } from '@scaleway/sdk-client'
 import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
 import {
-  marshalAddPrivateNetworkS3EndpointRequest,
-  unmarshalAddPrivateNetworkS3EndpointResponse,
+  marshalAddPrivateNetworkObjectStoragePrivateAccessRequest,
+  unmarshalAddPrivateNetworkObjectStoragePrivateAccessResponse,
   marshalCreateIngressRuleRequest,
   marshalCreatePrivateNetworkRequest,
   marshalCreateRouteRequest,
@@ -31,8 +31,8 @@ import {
   unmarshalRoute,
   marshalSetAclRequest,
   unmarshalSetAclResponse,
-  marshalSetPrivateNetworksS3EndpointRequest,
-  unmarshalSetPrivateNetworksS3EndpointResponse,
+  marshalSetPrivateNetworksObjectStoragePrivateAccessRequest,
+  unmarshalSetPrivateNetworksObjectStoragePrivateAccessResponse,
   marshalUpdateIngressRuleRequest,
   marshalUpdatePrivateNetworkRequest,
   marshalUpdateRouteRequest,
@@ -42,24 +42,24 @@ import {
   unmarshalVPCConnector,
 } from './marshalling.gen.js'
 import type {
-  AddPrivateNetworkS3EndpointRequest,
-  AddPrivateNetworkS3EndpointResponse,
+  AddPrivateNetworkObjectStoragePrivateAccessRequest,
+  AddPrivateNetworkObjectStoragePrivateAccessResponse,
   CreateIngressRuleRequest,
   CreatePrivateNetworkRequest,
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
   DeleteIngressRuleRequest,
+  DeletePrivateNetworkObjectStoragePrivateAccessRequest,
   DeletePrivateNetworkRequest,
-  DeletePrivateNetworkS3EndpointRequest,
   DeleteRouteRequest,
   DeleteVPCConnectorRequest,
   DeleteVPCRequest,
-  DisableS3EndpointRequest,
+  DisableObjectStoragePrivateAccessRequest,
   EnableCustomRoutesPropagationRequest,
   EnableDHCPRequest,
+  EnableObjectStoragePrivateAccessRequest,
   EnableRoutingRequest,
-  EnableS3EndpointRequest,
   GetAclRequest,
   GetAclResponse,
   GetIngressRuleRequest,
@@ -84,8 +84,8 @@ import type {
   Route,
   SetAclRequest,
   SetAclResponse,
-  SetPrivateNetworksS3EndpointRequest,
-  SetPrivateNetworksS3EndpointResponse,
+  SetPrivateNetworksObjectStoragePrivateAccessRequest,
+  SetPrivateNetworksObjectStoragePrivateAccessResponse,
   UpdateIngressRuleRequest,
   UpdatePrivateNetworkRequest,
   UpdateRouteRequest,
@@ -127,13 +127,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['is_default', request.isDefault],
           ['name', request.name],
+          ['object_storage_private_access_enabled', request.objectStoragePrivateAccessEnabled],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
           ['routing_enabled', request.routingEnabled],
-          ['s3_integration_enabled', request.s3IntegrationEnabled],
           ['tags', request.tags],
         ),
       },
@@ -228,13 +228,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['dhcp_enabled', request.dhcpEnabled],
           ['name', request.name],
+          ['object_storage_private_access_enabled', request.objectStoragePrivateAccessEnabled],
           ['order_by', request.orderBy],
           ['organization_id', request.organizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['private_network_ids', request.privateNetworkIds],
           ['project_id', request.projectId],
-          ['s3_integration_enabled', request.s3IntegrationEnabled],
           ['tags', request.tags],
           ['vpc_id', request.vpcId],
         ),
@@ -740,16 +740,16 @@ export class API extends ParentAPI {
 
   
   /**
-   * Enable S3 integration. Enable S3 integration for a VPC.
+   * Enable Object Storage private access. Enable Object Storage private access for a VPC.
    *
-   * @param request - The request {@link EnableS3EndpointRequest}
+   * @param request - The request {@link EnableObjectStoragePrivateAccessRequest}
    * @returns A Promise of VPC
    */
-  enableS3Endpoint = (request: Readonly<EnableS3EndpointRequest>) =>
+  enableObjectStoragePrivateAccess = (request: Readonly<EnableObjectStoragePrivateAccessRequest>) =>
     this.client.fetch<VPC>(
       {
         method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/s3-integration/${validatePathParam('vpcId', request.vpcId)}/enable`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/enable`,
         urlParams: urlParams(
           ['private_network_ids', request.privateNetworkIds],
         ),
@@ -759,71 +759,71 @@ export class API extends ParentAPI {
 
   
   /**
-   * Disable S3 integration. Disable S3 integration for a VPC.
+   * Disable Object Storage private access. Disable Object Storage private access for a VPC.
    *
-   * @param request - The request {@link DisableS3EndpointRequest}
+   * @param request - The request {@link DisableObjectStoragePrivateAccessRequest}
    * @returns A Promise of VPC
    */
-  disableS3Endpoint = (request: Readonly<DisableS3EndpointRequest>) =>
+  disableObjectStoragePrivateAccess = (request: Readonly<DisableObjectStoragePrivateAccessRequest>) =>
     this.client.fetch<VPC>(
       {
         method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/s3-integration/${validatePathParam('vpcId', request.vpcId)}/disable`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/disable`,
       },
       unmarshalVPC,
     )
 
   
   /**
-   * Add a Private Network to an S3 Endpoint. Add a Private Network to the S3 Endpoint to enable S3 integration for its resources.
+   * Add a Private Network to an Object Storage private access. Add a Private Network to the Object Storage private access to enable Object Storage integration for its resources.
    *
-   * @param request - The request {@link AddPrivateNetworkS3EndpointRequest}
-   * @returns A Promise of AddPrivateNetworkS3EndpointResponse
+   * @param request - The request {@link AddPrivateNetworkObjectStoragePrivateAccessRequest}
+   * @returns A Promise of AddPrivateNetworkObjectStoragePrivateAccessResponse
    */
-  addPrivateNetworkS3Endpoint = (request: Readonly<AddPrivateNetworkS3EndpointRequest>) =>
-    this.client.fetch<AddPrivateNetworkS3EndpointResponse>(
+  addPrivateNetworkObjectStoragePrivateAccess = (request: Readonly<AddPrivateNetworkObjectStoragePrivateAccessRequest>) =>
+    this.client.fetch<AddPrivateNetworkObjectStoragePrivateAccessResponse>(
       {
         body: JSON.stringify(
-          marshalAddPrivateNetworkS3EndpointRequest(request, this.client.settings),
+          marshalAddPrivateNetworkObjectStoragePrivateAccessRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'POST',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/s3-integration/${validatePathParam('vpcId', request.vpcId)}/private-networks`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/private-networks`,
       },
-      unmarshalAddPrivateNetworkS3EndpointResponse,
+      unmarshalAddPrivateNetworkObjectStoragePrivateAccessResponse,
     )
 
   
   /**
-   * Set S3 Endpoint Private Networks. Set the Private Networks associated with the S3 Endpoint to enable S3 integration for their resources.
+   * Set Object Storage private access Private Networks. Set the Private Networks associated with the Object Storage private access to enable Object Storage integration for their resources.
    *
-   * @param request - The request {@link SetPrivateNetworksS3EndpointRequest}
-   * @returns A Promise of SetPrivateNetworksS3EndpointResponse
+   * @param request - The request {@link SetPrivateNetworksObjectStoragePrivateAccessRequest}
+   * @returns A Promise of SetPrivateNetworksObjectStoragePrivateAccessResponse
    */
-  setPrivateNetworksS3Endpoint = (request: Readonly<SetPrivateNetworksS3EndpointRequest>) =>
-    this.client.fetch<SetPrivateNetworksS3EndpointResponse>(
+  setPrivateNetworksObjectStoragePrivateAccess = (request: Readonly<SetPrivateNetworksObjectStoragePrivateAccessRequest>) =>
+    this.client.fetch<SetPrivateNetworksObjectStoragePrivateAccessResponse>(
       {
         body: JSON.stringify(
-          marshalSetPrivateNetworksS3EndpointRequest(request, this.client.settings),
+          marshalSetPrivateNetworksObjectStoragePrivateAccessRequest(request, this.client.settings),
         ),
         headers: jsonContentHeaders,
         method: 'PUT',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/s3-integration/${validatePathParam('vpcId', request.vpcId)}/private-networks`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/private-networks`,
       },
-      unmarshalSetPrivateNetworksS3EndpointResponse,
+      unmarshalSetPrivateNetworksObjectStoragePrivateAccessResponse,
     )
 
   
   /**
-   * Remove a Private Network from an S3 Endpoint. Remove a Private Network from the S3 Endpoint to disable S3 integration for its resources.
+   * Remove a Private Network from an Object Storage private access. Remove a Private Network from the Object Storage private access to disable Object Storage integration for its resources.
    *
-   * @param request - The request {@link DeletePrivateNetworkS3EndpointRequest}
+   * @param request - The request {@link DeletePrivateNetworkObjectStoragePrivateAccessRequest}
    */
-  deletePrivateNetworkS3Endpoint = (request: Readonly<DeletePrivateNetworkS3EndpointRequest>) =>
+  deletePrivateNetworkObjectStoragePrivateAccess = (request: Readonly<DeletePrivateNetworkObjectStoragePrivateAccessRequest>) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
-        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/s3-integration/${validatePathParam('vpcId', request.vpcId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
       },
     )
 

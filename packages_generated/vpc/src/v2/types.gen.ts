@@ -150,9 +150,9 @@ export interface PrivateNetwork {
    */
   defaultRoutePropagationEnabled: boolean
   /**
-   * Defines whether this Private Network is enabled for S3 integration.
+   * Defines whether this Private Network is enabled for Object Storage private access.
    */
-  hasS3Integration: boolean
+  hasObjectStoragePrivateAccess: boolean
 }
 
 
@@ -429,35 +429,35 @@ export interface VPC {
    */
   transitivityEnabled: boolean
   /**
-   * Defines whether the S3 integration is enabled for the VPC.
+   * Defines whether the Object Storage private access is enabled for the VPC.
    */
-  s3IntegrationEnabled: boolean
+  objectStoragePrivateAccessEnabled: boolean
 }
 
 
-export type AddPrivateNetworkS3EndpointRequest = {
+export type AddPrivateNetworkObjectStoragePrivateAccessRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
   /**
-   * ID of the VPC containing the S3 Endpoint.
+   * ID of the VPC containing the Object Storage private access.
    */
   vpcId: string
   /**
-   * ID of the Private Network to add to the S3 Endpoint.
+   * ID of the Private Network to add to the Object Storage private access.
    */
   privateNetworkId: string
 }
 
 
-export interface AddPrivateNetworkS3EndpointResponse {
+export interface AddPrivateNetworkObjectStoragePrivateAccessResponse {
   /**
-   * ID of the VPC containing the S3 Endpoint.
+   * ID of the VPC containing the Object Storage private access.
    */
   vpcId: string
   /**
-   * IDs of the Private Networks associated with the S3 Endpoint.
+   * IDs of the Private Networks associated with the Object Storage private access.
    */
   privateNetworkIds: string[]
 }
@@ -627,6 +627,22 @@ export type DeleteIngressRuleRequest = {
 }
 
 
+export type DeletePrivateNetworkObjectStoragePrivateAccessRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the VPC containing the Object Storage private access.
+   */
+  vpcId: string
+  /**
+   * ID of the Private Network to remove from the Object Storage private access.
+   */
+  privateNetworkId: string
+}
+
+
 export type DeletePrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -634,22 +650,6 @@ export type DeletePrivateNetworkRequest = {
   region?: ScwRegion
   /**
    * Private Network ID.
-   */
-  privateNetworkId: string
-}
-
-
-export type DeletePrivateNetworkS3EndpointRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * ID of the VPC containing the S3 Endpoint.
-   */
-  vpcId: string
-  /**
-   * ID of the Private Network to remove from the S3 Endpoint.
    */
   privateNetworkId: string
 }
@@ -691,13 +691,13 @@ export type DeleteVPCRequest = {
 }
 
 
-export type DisableS3EndpointRequest = {
+export type DisableObjectStoragePrivateAccessRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
   /**
-   * ID of the VPC for which to disable S3 integration.
+   * ID of the VPC for which to disable Object Storage private access.
    */
   vpcId: string
 }
@@ -727,6 +727,22 @@ export type EnableDHCPRequest = {
 }
 
 
+export type EnableObjectStoragePrivateAccessRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the VPC for which to enable Object Storage private access.
+   */
+  vpcId: string
+  /**
+   * IDs of the Private Networks for which to enable Object Storage private access.
+   */
+  privateNetworkIds?: string[]
+}
+
+
 export type EnableRoutingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -736,22 +752,6 @@ export type EnableRoutingRequest = {
    * VPC ID.
    */
   vpcId: string
-}
-
-
-export type EnableS3EndpointRequest = {
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region?: ScwRegion
-  /**
-   * ID of the VPC for which to enable S3 integration.
-   */
-  vpcId: string
-  /**
-   * IDs of the Private Networks for which to enable S3 integration.
-   */
-  privateNetworkIds?: string[]
 }
 
 
@@ -937,9 +937,9 @@ export type ListPrivateNetworksRequest = {
    */
   dhcpEnabled?: boolean
   /**
-   * Filter by whether S3 integration is enabled. When set, only matching Private Networks will be returned.
+   * Filter by whether Object Storage private access is enabled. When set, only matching Private Networks will be returned.
    */
-  s3IntegrationEnabled?: boolean
+  objectStoragePrivateAccessEnabled?: boolean
 }
 
 
@@ -1117,9 +1117,9 @@ export type ListVPCsRequest = {
    */
   routingEnabled?: boolean
   /**
-   * Defines whether to filter only for VPCs with S3 integration enabled.
+   * Defines whether to filter only for VPCs with Object Storage private access enabled.
    */
-  s3IntegrationEnabled?: boolean
+  objectStoragePrivateAccessEnabled?: boolean
 }
 
 
@@ -1159,29 +1159,29 @@ export interface SetAclResponse {
 }
 
 
-export type SetPrivateNetworksS3EndpointRequest = {
+export type SetPrivateNetworksObjectStoragePrivateAccessRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
   /**
-   * ID of the VPC containing the S3 Endpoint.
+   * ID of the VPC containing the Object Storage private access.
    */
   vpcId: string
   /**
-   * IDs of the Private Networks to associate with the S3 Endpoint.
+   * IDs of the Private Networks to associate with the Object Storage private access.
    */
   privateNetworkIds: string[]
 }
 
 
-export interface SetPrivateNetworksS3EndpointResponse {
+export interface SetPrivateNetworksObjectStoragePrivateAccessResponse {
   /**
-   * ID of the VPC containing the S3 Endpoint.
+   * ID of the VPC containing the Object Storage private access.
    */
   vpcId: string
   /**
-   * IDs of the Private Networks associated with the S3 Endpoint.
+   * IDs of the Private Networks associated with the Object Storage private access.
    */
   privateNetworkIds: string[]
 }

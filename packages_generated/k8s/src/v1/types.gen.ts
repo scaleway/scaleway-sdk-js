@@ -19,8 +19,6 @@ export type CNI =
   | 'unknown_cni'
   | 'cilium'
   | 'calico'
-  | 'weave'
-  | 'flannel'
   | 'kilo'
   | 'none'
   | 'cilium_native'
@@ -129,9 +127,7 @@ export type PoolVolumeType =
 
 export type Runtime =
   | 'unknown_runtime'
-  | 'docker'
   | 'containerd'
-  | 'crio'
 
 export interface MaintenanceWindow {
   /**
@@ -173,6 +169,11 @@ export interface CreateClusterRequestPoolConfigUpgradePolicy {
    * The maximum number of nodes to be created during the upgrade, e.g. the pool will scale up to reach `size`+`max_surge` before downscaling to `size` after node upgrades.
    */
   maxSurge?: number
+}
+
+
+export interface ComponentInfo {
+  version: string
 }
 
 
@@ -597,7 +598,7 @@ export interface Version {
    */
   availableCnis: CNI[]
   /**
-   * Supported container runtimes for this version.
+   * @deprecated Supported container runtimes for this version.
    */
   availableContainerRuntimes: Runtime[]
   /**
@@ -624,6 +625,10 @@ export interface Version {
    * Date at which this version was made available by Kapsule product.
    */
   releasedAt?: Date
+  /**
+   * Map containing every sub-component version shipped with this Kapsule version.
+   */
+  additionalComponents: Record<string, ComponentInfo>
 }
 
 
