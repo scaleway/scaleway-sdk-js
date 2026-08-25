@@ -502,6 +502,9 @@ export type ApplyMaintenanceRequest = {
    * Region to target. If none is passed will use default region from the config.
    */
   region?: ScwRegion
+  /**
+   * ID of the maintenance.
+   */
   maintenanceId: string
 }
 
