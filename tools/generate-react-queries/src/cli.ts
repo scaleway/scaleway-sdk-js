@@ -6,41 +6,14 @@
  * Reads metadata.gen.ts from each SDK package's dist/, then generates
  * useQuery / useInfiniteQuery / useReload hooks into sdk-react-hooks.
  *
- * Usage: pnpm generate-react-queries [--config config.json] [--packages-path ../../packages_generated]
- *
- * A JSON config file may override any default from config.ts. Top-level
- * string fields, imports.*, filters.* (arrays/booleans), and customNamespaces
- * (as [string, string][]) are recognised.
+ * Usage: pnpm generate-react-queries [--packages-path ../../packages_generated]
  */
 
 import { parseArgs } from 'node:util'
-import { defaultConfig, loadJsonConfig } from './config.ts'
+import { defaultConfig } from './config.ts'
 import type { ReactQueriesConfig } from './config.ts'
 import { generateFromMetadata } from './generate.ts'
 import { updatePackageJsonExports } from './package-exports.ts'
-
-/** Shape of a JSON config file (customNamespaces is [string,string][] here, not a Map). */
-type FileConfig = Omit<ReactQueriesConfig, 'customNamespaces'> & {
-  customNamespaces?: [string, string][]
-}
-
-/** Merge a JSON config file into the given config. File fields override defaults. */
-const loadConfigFile = (config: ReactQueriesConfig, path?: string): ReactQueriesConfig => {
-  const fileConfig = loadJsonConfig<FileConfig>(path)
-  if (!fileConfig) return config
-
-  const { customNamespaces, ...rest } = fileConfig
-
-  return {
-    ...config,
-    ...rest,
-    imports: { ...config.imports, ...rest.imports },
-    filters: { ...config.filters, ...rest.filters },
-    customNamespaces: Array.isArray(customNamespaces)
-      ? new Map(customNamespaces)
-      : config.customNamespaces,
-  }
-}
 
 // Parse CLI flags — all optional, defaults come from config.ts
 const { values } = parseArgs({
@@ -51,20 +24,22 @@ const { values } = parseArgs({
     'api-sdk-path': { type: 'string' },
     'package-name-filter': { type: 'string' },
     'packages-path': { type: 'string' },
-    'config': { type: 'string' },
+    'skip-services': { type: 'string', multiple: true },
+    'skip-versions': { type: 'string', multiple: true },
   },
   strict: false,
-}) as { values: Record<string, string | undefined> }
+}) as { values: Record<string, string | string[] | undefined> }
 
-// Start from defaults, then apply a config file, then CLI overrides
-const config = loadConfigFile(structuredClone(defaultConfig), values['config'])
+const config: ReactQueriesConfig = structuredClone(defaultConfig)
 
-if (values['dir-gen-name']) config.outputDir = values['dir-gen-name']
-if (values['generated-path']) config.generatedPath = values['generated-path']
-if (values['custom-path']) config.customPath = values['custom-path']
-if (values['api-sdk-path']) config.imports.apiSdkPath = values['api-sdk-path']
-if (values['package-name-filter']) config.imports.packageNameFilter = values['package-name-filter']
-if (values['packages-path']) config.packagesPath = values['packages-path']
+if (typeof values['dir-gen-name'] === 'string') config.outputDir = values['dir-gen-name']
+if (typeof values['generated-path'] === 'string') config.generatedPath = values['generated-path']
+if (typeof values['custom-path'] === 'string') config.customPath = values['custom-path']
+if (typeof values['api-sdk-path'] === 'string') config.imports.apiSdkPath = values['api-sdk-path']
+if (typeof values['package-name-filter'] === 'string') config.imports.packageNameFilter = values['package-name-filter']
+if (typeof values['packages-path'] === 'string') config.packagesPath = values['packages-path']
+if (Array.isArray(values['skip-services'])) config.filters.skipServices = values['skip-services']
+if (Array.isArray(values['skip-versions'])) config.filters.skipVersions = values['skip-versions']
 
 console.log('🚀 Generating React hooks from metadata...')
 console.log('⚠️  Prerequisite: Ensure SDK packages are built first')
