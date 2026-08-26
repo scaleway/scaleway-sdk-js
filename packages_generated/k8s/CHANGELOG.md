@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.21.0
+
+### Minor Changes
+
+- feat(k8s): add  field to version message (#3252)
+
+- feat: update generated APIs (#3261)
+
 ## 2.20.0
 
 ### Minor Changes

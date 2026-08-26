@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.14.0
+
+### Minor Changes
+
+- fix(vpc): rename s3-integration endpoints to object-storage-private-access (#3251)
+
 ## 2.13.0
 
 ### Minor Changes

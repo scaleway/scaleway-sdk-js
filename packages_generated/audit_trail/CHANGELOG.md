@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.23.0
+
+### Minor Changes
+
+- feat(functions): add audit trail annotations (#3249)
+
 ## 2.22.0
 
 ### Minor Changes
