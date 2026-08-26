@@ -81,7 +81,7 @@ export const ListClusterACLRulesRequest = {
     greaterThan: 0,
   },
   pageSize: {
-    greaterThanOrEqual: 0,
+    greaterThan: 0,
     lessThanOrEqual: 100,
   },
 }
@@ -91,7 +91,7 @@ export const ListClusterTypesRequest = {
     greaterThan: 0,
   },
   pageSize: {
-    greaterThanOrEqual: 0,
+    greaterThan: 0,
     lessThanOrEqual: 100,
   },
 }
@@ -104,7 +104,7 @@ export const ListClustersRequest = {
     greaterThan: 0,
   },
   pageSize: {
-    greaterThanOrEqual: 0,
+    greaterThan: 0,
     lessThanOrEqual: 100,
   },
   version: {
@@ -120,7 +120,7 @@ export const ListNodesRequest = {
     greaterThan: 0,
   },
   pageSize: {
-    greaterThanOrEqual: 0,
+    greaterThan: 0,
     lessThanOrEqual: 100,
   },
 }
@@ -133,7 +133,7 @@ export const ListPoolsRequest = {
     greaterThan: 0,
   },
   pageSize: {
-    greaterThanOrEqual: 0,
+    greaterThan: 0,
     lessThanOrEqual: 100,
   },
 }

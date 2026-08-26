@@ -26,6 +26,8 @@ import type {
   ListClustersResponse,
   ListNodesResponse,
   ListPoolsResponse,
+  UserDataSummary,
+  ListUserDataResponse,
   ListVersionsResponse,
   NodeMetadataCoreV1Taint,
   NodeMetadata,
@@ -266,6 +268,7 @@ export const unmarshalPool = (data: unknown): Pool => {
     kubeletArgs: data.kubelet_args,
     labels: data.labels,
     maxSize: data.max_size,
+    maxTerminationGracePeriod: data.max_termination_grace_period,
     minSize: data.min_size,
     name: data.name,
     nodeType: data.node_type,
@@ -441,6 +444,30 @@ export const unmarshalListPoolsResponse = (data: unknown): ListPoolsResponse => 
   } as ListPoolsResponse
 }
 
+const unmarshalUserDataSummary = (data: unknown): UserDataSummary => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UserDataSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    key: data.key,
+  } as UserDataSummary
+}
+
+export const unmarshalListUserDataResponse = (data: unknown): ListUserDataResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListUserDataResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    userData: unmarshalArrayOfObject(data.user_data, unmarshalUserDataSummary),
+  } as ListUserDataResponse
+}
+
 export const unmarshalListVersionsResponse = (data: unknown): ListVersionsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -605,6 +632,7 @@ const marshalCreateClusterRequestPoolConfig = (
   kubelet_args:  request.kubeletArgs,
   labels:  request.labels,
   max_size: request.maxSize,
+  max_termination_grace_period: request.maxTerminationGracePeriod,
   min_size: request.minSize,
   name: request.name,
   node_type: request.nodeType,
@@ -671,6 +699,7 @@ export const marshalCreatePoolRequest = (
   kubelet_args: ((request.kubeletArgs !== undefined) ?  request.kubeletArgs: undefined),
   labels: ((request.labels !== undefined) ?  request.labels: undefined),
   max_size: request.maxSize,
+  max_termination_grace_period: request.maxTerminationGracePeriod,
   min_size: request.minSize,
   name: request.name || randomName('pool'),
   node_type: request.nodeType,
@@ -794,6 +823,7 @@ export const marshalUpdatePoolRequest = (
   autoscaling: request.autoscaling,
   kubelet_args: request.kubeletArgs,
   max_size: request.maxSize,
+  max_termination_grace_period: request.maxTerminationGracePeriod,
   min_size: request.minSize,
   security_group_id: request.securityGroupId,
   size: request.size,
