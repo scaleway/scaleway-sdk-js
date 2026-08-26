@@ -64,9 +64,7 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
         }
         mkdirSync(generatedDir, { recursive: true })
 
-        const servicesToGenerate = services.filter(
-          service => !skipServices.has(service.apiClass),
-        )
+        const servicesToGenerate = services.filter(service => !skipServices.has(service.apiClass))
 
         if (servicesToGenerate.length === 0) {
           console.log(` ⏭️  Skipping ${packageName}/${version}: all services excluded by skipServices`)

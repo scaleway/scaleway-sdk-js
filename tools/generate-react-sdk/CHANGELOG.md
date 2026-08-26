@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.4.0
+
+### Minor Changes
+
+- feat(tools): add JSON config file support and skip filters (#3253)
+
 ## 0.3.0
 
 ### Minor Changes
