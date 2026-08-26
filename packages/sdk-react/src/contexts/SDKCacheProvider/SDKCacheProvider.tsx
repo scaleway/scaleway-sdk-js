@@ -28,10 +28,13 @@ export const useSDKCache = <TCustomAPIs extends DefaultTypeBaseAPI = DefaultType
   }
 }
 
-export const SDKCacheProvider = ({ children }: PropsWithChildren) => {
+export const SDKCacheProvider = ({
+  children,
+  initialCache = null,
+}: PropsWithChildren<{ initialCache?: APISdkCache | null }>) => {
   const { client } = useClient()
 
-  const [sdkCache, setSdkCache] = useState<APISdkCache | null>(null)
+  const [sdkCache, setSdkCache] = useState<APISdkCache | null>(initialCache)
 
   const setSdkInstance = useCallback(
     (sdkInstance: Partial<APISdkCache>) => {
