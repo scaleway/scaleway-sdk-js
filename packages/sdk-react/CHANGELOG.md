@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.12.0
+
+### Minor Changes
+
+- fix(sdk-react): remove duplicate condition (#3263)
+
 ## 0.11.0
 
 ### Minor Changes
