@@ -56,19 +56,33 @@ export const createTags = ({
   root: string
   affectedPackages: Package[]
   updatedPackages: Package[]
-}) => {
+}): string[] => {
+  const newTags: string[] = []
   for (const pkg of affectedPackages) {
     const newPkg = updatedPackages.find(({ name }) => name === pkg.name)
     if (newPkg) {
       const tag = `${pkg.name}@${newPkg.version}`
+      // Skip tags that already exist locally or on the remote. Retried runs
+      // must not recreate tags for already-released versions (pushing them
+      // would fail with "tag already exists").
+      let localExists = false
       try {
         exec(`git rev-parse -q --verify refs/tags/${tag}`, { cwd: root })
+        localExists = true
       } catch {
-        exec(`git tag "${tag}" -m "${tag}"`, { cwd: root })
-        logger(`[release] tag: ${tag}`)
+        localExists = false
       }
+      const remoteExists = exec(`git ls-remote --tags origin "refs/tags/${tag}"`, { cwd: root }).length > 0
+      if (localExists || remoteExists) {
+        logger(`[release] tag already exists, skipping: ${tag}`)
+        continue
+      }
+      exec(`git tag "${tag}" -m "${tag}"`, { cwd: root })
+      newTags.push(tag)
+      logger(`[release] tag: ${tag}`)
     }
   }
+  return newTags
 }
 
 export const createGithubReleases = ({
