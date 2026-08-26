@@ -16,9 +16,7 @@ export const createSDKFactory =
     }
 
     if (!clientCtx) {
-      if (!clientCtx) {
-        throw new Error('Missing ClientContext, make sure you have a ClientProvider')
-      }
+      throw new Error('Missing ClientContext, make sure you have a ClientProvider')
     }
 
     // Create new instance using the provided factory function
