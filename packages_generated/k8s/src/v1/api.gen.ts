@@ -26,6 +26,7 @@ import {
   unmarshalListClustersResponse,
   unmarshalListNodesResponse,
   unmarshalListPoolsResponse,
+  unmarshalListUserDataResponse,
   unmarshalListVersionsResponse,
   unmarshalNode,
   unmarshalNodeMetadata,
@@ -75,6 +76,8 @@ import type {
   ListNodesResponse,
   ListPoolsRequest,
   ListPoolsResponse,
+  ListUserDataRequest,
+  ListUserDataResponse,
   ListVersionsRequest,
   ListVersionsResponse,
   Node,
@@ -637,6 +640,22 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
         ),
         responseType: 'blob',
       },
+    )
+
+  
+  /**
+   * List all user data related to a given pool.. This list only the user data key and not the content.
+   *
+   * @param request - The request {@link ListUserDataRequest}
+   * @returns A Promise of ListUserDataResponse
+   */
+  listUserData = (request: Readonly<ListUserDataRequest>) =>
+    this.client.fetch<ListUserDataResponse>(
+      {
+        method: 'GET',
+        path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/user-data`,
+      },
+      unmarshalListUserDataResponse,
     )
 
   

@@ -26,6 +26,8 @@ import type {
   ListClustersResponse,
   ListNodesResponse,
   ListPoolsResponse,
+  UserDataSummary,
+  ListUserDataResponse,
   ListVersionsResponse,
   NodeMetadataCoreV1Taint,
   NodeMetadata,
@@ -440,6 +442,30 @@ export const unmarshalListPoolsResponse = (data: unknown): ListPoolsResponse => 
     pools: unmarshalArrayOfObject(data.pools, unmarshalPool),
     totalCount: data.total_count,
   } as ListPoolsResponse
+}
+
+const unmarshalUserDataSummary = (data: unknown): UserDataSummary => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UserDataSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    key: data.key,
+  } as UserDataSummary
+}
+
+export const unmarshalListUserDataResponse = (data: unknown): ListUserDataResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListUserDataResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    userData: unmarshalArrayOfObject(data.user_data, unmarshalUserDataSummary),
+  } as ListUserDataResponse
 }
 
 export const unmarshalListVersionsResponse = (data: unknown): ListVersionsResponse => {

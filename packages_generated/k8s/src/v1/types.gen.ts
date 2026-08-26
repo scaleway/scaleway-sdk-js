@@ -939,6 +939,14 @@ export interface Pool {
 }
 
 
+export interface UserDataSummary {
+  /**
+   * Key name of a given user data.
+   */
+  key: string
+}
+
+
 export interface NodeMetadataCoreV1Taint {
   key: string
   value: string
@@ -1413,7 +1421,7 @@ export type GetUserDataRequest = {
    */
   region?: ScwRegion
   /**
-   * Pool the user data will be attached to.
+   * Pool the user data are associated to.
    */
   poolId: string
   /**
@@ -1688,6 +1696,26 @@ export interface ListPoolsResponse {
    * Paginated returned pools.
    */
   pools: Pool[]
+}
+
+
+export type ListUserDataRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Pool the user data are associated to.
+   */
+  poolId: string
+}
+
+
+export interface ListUserDataResponse {
+  /**
+   * User data information.
+   */
+  userData: UserDataSummary[]
 }
 
 

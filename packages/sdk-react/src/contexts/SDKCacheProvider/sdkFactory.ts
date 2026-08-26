@@ -1,12 +1,13 @@
 import type { Client } from '@scaleway/sdk-client'
-import { useClient } from '../ClientProvider'
+import { useContext } from 'react'
+import { ClientContext, useClient } from '../ClientProvider'
 import type { APISdkCache, DefaultTypeBaseAPI, ExtendedAPISdkCache } from '../types'
 import { useSDKCache } from './SDKCacheProvider'
 
 export const createSDKFactory =
   <K extends keyof APISdkCache>(SDKNamespace: { new (client: Client): APISdkCache[K] }, cacheKey: K) =>
   () => {
-    const { client } = useClient()
+    const clientCtx = useContext(ClientContext)
     const { sdkCache, setSdkInstance } = useSDKCache()
 
     // Check if we already have this SDK instance cached
@@ -14,8 +15,12 @@ export const createSDKFactory =
       return { [cacheKey]: sdkCache[cacheKey] } as { [P in K]: APISdkCache[P] }
     }
 
+    if (!clientCtx) {
+      throw new Error('Missing ClientContext, make sure you have a ClientProvider')
+    }
+
     // Create new instance using the provided factory function
-    const instance = new SDKNamespace(client)
+    const instance = new SDKNamespace(clientCtx.client)
 
     // Cache the instance
     setSdkInstance({ [cacheKey]: instance })

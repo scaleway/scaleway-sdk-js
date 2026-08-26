@@ -14,6 +14,7 @@ export { useK8Sv1APIListPoolsInfiniteQuery } from "./useK8Sv1APIListPoolsInfinit
 export { useK8Sv1APIListPoolsAllQuery } from "./useK8Sv1APIListPoolsAllQuery"
 export { useK8Sv1APIGetPoolQuery } from "./useK8Sv1APIGetPoolQuery"
 export { useK8Sv1APIGetUserDataQuery } from "./useK8Sv1APIGetUserDataQuery"
+export { useK8Sv1APIListUserDataQuery } from "./useK8Sv1APIListUserDataQuery"
 export { useK8Sv1APIGetNodeMetadataQuery } from "./useK8Sv1APIGetNodeMetadataQuery"
 export { useK8Sv1APIListNodesQuery } from "./useK8Sv1APIListNodesQuery"
 export { useK8Sv1APIListNodesInfiniteQuery } from "./useK8Sv1APIListNodesInfiniteQuery"

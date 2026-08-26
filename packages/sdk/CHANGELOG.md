@@ -1,5 +1,18 @@
 # Change Log
 
+## 4.0.5
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-audit-trail@2.23.0
+  - @scaleway/sdk-block@2.13.0
+  - @scaleway/sdk-container@2.12.0
+  - @scaleway/sdk-function@2.11.0
+  - @scaleway/sdk-k8s@2.21.0
+  - @scaleway/sdk-mongodb@2.13.0
+  - @scaleway/sdk-vpc@2.14.0
+
 ## 4.0.4
 
 ### Patch Changes

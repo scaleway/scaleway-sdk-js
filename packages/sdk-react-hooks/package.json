@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-react-hooks",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "private": false,
   "description": "React hooks",
   "files": [

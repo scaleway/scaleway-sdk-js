@@ -62,6 +62,8 @@ export type {
   ListPoolsRequest,
   ListPoolsRequestOrderBy,
   ListPoolsResponse,
+  ListUserDataRequest,
+  ListUserDataResponse,
   ListVersionsRequest,
   ListVersionsResponse,
   MaintenanceWindow,
@@ -92,6 +94,7 @@ export type {
   UpdatePoolRequestUpgradePolicy,
   UpgradeClusterRequest,
   UpgradePoolRequest,
+  UserDataSummary,
   Version,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

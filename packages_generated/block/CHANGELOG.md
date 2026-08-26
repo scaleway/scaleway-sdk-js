@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.13.0
+
+### Minor Changes
+
+- feat(block): add kms_key_id to Snapshot (#3250)
+
 ## 2.12.0
 
 ### Minor Changes

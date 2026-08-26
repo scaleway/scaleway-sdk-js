@@ -120,6 +120,17 @@ export const queriesMetadata = {
           description: '"',
         },
         {
+          methodName: 'listUserData',
+          protoName: 'ListUserData',
+          paramsType: 'ListUserDataRequest',
+          returnType: 'ListUserDataResponse',
+          returnTypeNamespace: '@scaleway-internal/sdk-k8s/v1',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
           methodName: 'getNodeMetadata',
           protoName: 'GetNodeMetadata',
           paramsType: 'GetNodeMetadataRequest',
