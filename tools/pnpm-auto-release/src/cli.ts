@@ -136,7 +136,7 @@ function main() {
   exec('git add -A', { cwd: root })
   exec('git commit -m "chore(release): publish" --no-verify', { cwd: root })
 
-  createTags({
+  const newTags = createTags({
     root,
     affectedPackages: affected,
     updatedPackages: updated,
@@ -154,7 +154,13 @@ function main() {
 
   // Push
   if (!skipPush) {
-    exec('git push origin HEAD --tags --no-verify', { cwd: root })
+    // Push the branch first, then each new tag individually. Pushing tags one
+    // at a time (rather than `--tags`) means a tag that already exists on the
+    // remote no longer fails the whole push on retried runs.
+    exec('git push origin HEAD --no-verify', { cwd: root })
+    for (const tag of newTags) {
+      exec(`git push origin "refs/tags/${tag}" --no-verify`, { cwd: root })
+    }
     logger('[release] pushed')
   }
 
