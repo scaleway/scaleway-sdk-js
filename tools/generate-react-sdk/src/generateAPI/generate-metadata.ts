@@ -71,10 +71,14 @@ export const generateAPI = async ({
   dirGenName,
   sdkFactoryPath,
   packageNameFilter,
+  skipServices = [],
+  skipVersions = [],
 }: {
   dirGenName: string
   sdkFactoryPath: string
   packageNameFilter: string
+  skipServices?: string[]
+  skipVersions?: string[]
 }) => {
   let result: ProcessedMetadata = {}
 
@@ -90,6 +94,11 @@ export const generateAPI = async ({
   }
 
   const skipPackages = new Set(['@scaleway/sdk-test', '@scaleway/sdk-std'])
+  const servicesToSkip = new Set(skipServices)
+  const versionsToSkip = new Set(skipVersions)
+
+  const isVersionSkipped = (packageName: string, version: string): boolean =>
+    versionsToSkip.has(`${packageName}@${version}`) || versionsToSkip.has(version)
 
   for (const [packageName] of sdkPackages) {
     if (skipPackages.has(packageName)) {
@@ -105,6 +114,11 @@ export const generateAPI = async ({
     }
 
     for (const version of versions) {
+      if (isVersionSkipped(packageName, version)) {
+        stdout.write(`⚠️  Skipping ${packageName}/${version}: excluded by skipVersions\n`)
+        continue
+      }
+
       const metadata = await loadMetadata(packageName, version)
 
       if (!metadata) {
@@ -114,6 +128,7 @@ export const generateAPI = async ({
 
       const namespace = metadata.folderName || metadata.namespace
       const apis = metadata.services
+        .filter((service: { apiClass: string }) => !servicesToSkip.has(service.apiClass))
         .map((service: { apiClass: string }) => service.apiClass)
         .filter((apiClass: string) => apiClass && apiClass.length > 0)
 

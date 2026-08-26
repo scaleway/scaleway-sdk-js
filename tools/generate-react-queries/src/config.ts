@@ -86,6 +86,13 @@ export interface ReactQueriesConfig {
     skipWaiters: boolean
     /** Package names to exclude from generation (e.g. @scaleway/sdk-test). */
     skipPackages: string[]
+    /** Service classes to exclude (matched against service.apiClass). */
+    skipServices: string[]
+    /**
+     * Versions to exclude. "<package>@<version>" skips only that package's
+     * version; a bare "<version>" skips it for all packages.
+     */
+    skipVersions: string[]
   }
 
   generatedComment: string
@@ -122,6 +129,8 @@ export const defaultConfig: ReactQueriesConfig = {
     skipWaiters: true,
     rawTypes: ['Blob', 'string', 'number', 'boolean'],
     skipPackages: ['@scaleway/sdk-test'],
+    skipServices: [],
+    skipVersions: [],
   },
 
   generatedComment:
