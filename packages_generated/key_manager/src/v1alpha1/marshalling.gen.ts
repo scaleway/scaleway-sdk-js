@@ -15,15 +15,19 @@ import type {
   ListKeysResponse,
   PublicKey,
   SignResponse,
+  UnwrapKeyResponse,
   VerifyResponse,
+  WrapKeyResponse,
   CreateKeyRequest,
   DecryptRequest,
   EncryptRequest,
   GenerateDataKeyRequest,
   ImportKeyMaterialRequest,
   SignRequest,
+  UnwrapKeyRequest,
   UpdateKeyRequest,
   VerifyRequest,
+  WrapKeyRequest,
 } from './types.gen.js'
 
 const unmarshalKeyRotationPolicy = (data: unknown): KeyRotationPolicy => {
@@ -188,6 +192,19 @@ export const unmarshalSignResponse = (data: unknown): SignResponse => {
   } as SignResponse
 }
 
+export const unmarshalUnwrapKeyResponse = (data: unknown): UnwrapKeyResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UnwrapKeyResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    keyId: data.key_id,
+    plaintext: data.plaintext,
+  } as UnwrapKeyResponse
+}
+
 export const unmarshalVerifyResponse = (data: unknown): VerifyResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -199,6 +216,19 @@ export const unmarshalVerifyResponse = (data: unknown): VerifyResponse => {
     keyId: data.key_id,
     valid: data.valid,
   } as VerifyResponse
+}
+
+export const unmarshalWrapKeyResponse = (data: unknown): WrapKeyResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WrapKeyResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ciphertext: data.ciphertext,
+    keyId: data.key_id,
+  } as WrapKeyResponse
 }
 
 const marshalKeyRotationPolicy = (
@@ -279,6 +309,14 @@ export const marshalSignRequest = (
   digest: request.digest,
 })
 
+export const marshalUnwrapKeyRequest = (
+  request: UnwrapKeyRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  associated_data: request.associatedData,
+  ciphertext: request.ciphertext,
+})
+
 export const marshalUpdateKeyRequest = (
   request: UpdateKeyRequest,
   defaults: DefaultValues,
@@ -295,4 +333,12 @@ export const marshalVerifyRequest = (
 ): Record<string, unknown> => ({
   digest: request.digest,
   signature: request.signature,
+})
+
+export const marshalWrapKeyRequest = (
+  request: WrapKeyRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  associated_data: request.associatedData,
+  plaintext: request.plaintext,
 })
