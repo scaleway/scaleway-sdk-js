@@ -66,6 +66,7 @@ import type {
   PublicCatalogProductPropertiesServerlessContainers,
   PublicCatalogProductPropertiesServerlessFunctions,
   PublicCatalogProductPropertiesServerlessJobs,
+  PublicCatalogProductPropertiesServerlessSqlDatabase,
   PublicCatalogProductEnvironmentalImpactEstimation,
   PublicCatalogProductLocality,
   PublicCatalogProductPrice,
@@ -867,6 +868,17 @@ const unmarshalPublicCatalogProductPropertiesServerlessJobs = (data: unknown): P
   } as PublicCatalogProductPropertiesServerlessJobs
 }
 
+const unmarshalPublicCatalogProductPropertiesServerlessSqlDatabase = (data: unknown): PublicCatalogProductPropertiesServerlessSqlDatabase => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesServerlessSqlDatabase' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesServerlessSqlDatabase
+}
+
 const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (data: unknown): PublicCatalogProductEnvironmentalImpactEstimation => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -939,6 +951,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     serverlessContainers: data.serverless_containers ? unmarshalPublicCatalogProductPropertiesServerlessContainers(data.serverless_containers) : undefined,
     serverlessFunctions: data.serverless_functions ? unmarshalPublicCatalogProductPropertiesServerlessFunctions(data.serverless_functions) : undefined,
     serverlessJobs: data.serverless_jobs ? unmarshalPublicCatalogProductPropertiesServerlessJobs(data.serverless_jobs) : undefined,
+    serverlessSqlDatabase: data.serverless_sql_database ? unmarshalPublicCatalogProductPropertiesServerlessSqlDatabase(data.serverless_sql_database) : undefined,
   } as PublicCatalogProductProperties
 }
 
