@@ -88,6 +88,7 @@ export type {
   PublicCatalogProductPropertiesServerlessJobs,
   PublicCatalogProductPropertiesServerlessJobsCPUType,
   PublicCatalogProductPropertiesServerlessJobsMemoryType,
+  PublicCatalogProductPropertiesServerlessSqlDatabase,
   PublicCatalogProductStatus,
   PublicCatalogProductUnitOfMeasure,
   PublicCatalogProductUnitOfMeasureCountableUnit,
