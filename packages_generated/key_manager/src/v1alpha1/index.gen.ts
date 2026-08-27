@@ -43,7 +43,11 @@ export type {
   SignRequest,
   SignResponse,
   UnprotectKeyRequest,
+  UnwrapKeyRequest,
+  UnwrapKeyResponse,
   UpdateKeyRequest,
   VerifyRequest,
   VerifyResponse,
+  WrapKeyRequest,
+  WrapKeyResponse,
 } from './types.gen.js'
