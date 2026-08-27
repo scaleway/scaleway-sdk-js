@@ -28,6 +28,7 @@ export type ListPublicCatalogProductsRequestProductType =
   | 'instance_local_ssd_snapshot'
   | 'instance_local_ssd_storage'
   | 'file_storage'
+  | 'serverless_sql_database'
 
 export type ListPublicCatalogProductsRequestStatus =
   | 'unknown_status'
@@ -894,6 +895,10 @@ export interface PublicCatalogProductPropertiesServerlessJobs {
 }
 
 
+export interface PublicCatalogProductPropertiesServerlessSqlDatabase {
+}
+
+
 export interface PublicCatalogProductEnvironmentalImpactEstimation {
   kgCo2Equivalent?: number
   m3WaterUsage?: number
@@ -944,136 +949,142 @@ export interface PublicCatalogProductProperties {
   /**
    * The properties of Dedibox products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   dedibox?: PublicCatalogProductPropertiesDedibox
   /**
    * The properties of Elastic Metal products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   elasticMetal?: PublicCatalogProductPropertiesElasticMetal
   /**
    * The properties of Apple Silicon products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   appleSilicon?: PublicCatalogProductPropertiesAppleSilicon
   /**
    * The properties of Instance products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   instance?: PublicCatalogProductPropertiesInstance
   /**
    * The properties of Block Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   blockStorage?: PublicCatalogProductPropertiesBlockStorage
   /**
    * The properties of Object Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   objectStorage?: PublicCatalogProductPropertiesObjectStorage
   /**
    * The properties of Managed Inference products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   managedInference?: PublicCatalogProductPropertiesManagedInference
   /**
    * The properties of Generative APIs products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   generativeApis?: PublicCatalogProductPropertiesGenerativeApis
   /**
    * The properties of Load Balancer products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   loadBalancer?: PublicCatalogProductPropertiesLoadBalancer
   /**
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   secretManager?: PublicCatalogProductPropertiesSecretManager
   /**
    * The properties of Managed Redis Database products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   managedRedisDatabase?: PublicCatalogProductPropertiesManagedRedisDatabase
   /**
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   keyManager?: PublicCatalogProductPropertiesKeyManager
   /**
    * The properties of Kubernetes products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   kubernetes?: PublicCatalogProductPropertiesKubernetes
   /**
    * The properties of Managed Relational Database products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   managedRelationalDatabase?: PublicCatalogProductPropertiesManagedRelationalDatabase
   /**
    * The properties of Serverless Functions products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   serverlessFunctions?: PublicCatalogProductPropertiesServerlessFunctions
   /**
    * The properties of Serverless Containers products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   serverlessContainers?: PublicCatalogProductPropertiesServerlessContainers
   /**
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   managedMongodb?: PublicCatalogProductPropertiesManagedMongoDB
   /**
    * The properties of Serverless Jobs products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   serverlessJobs?: PublicCatalogProductPropertiesServerlessJobs
   /**
+   * The properties of Serverless SQL Database products.
+   *
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   */
+  serverlessSqlDatabase?: PublicCatalogProductPropertiesServerlessSqlDatabase
+  /**
    * The properties of Apache Kafka products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   apacheKafka?: PublicCatalogProductPropertiesApacheKafka
   /**
    * The properties of OpenSearch DB products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   openSearch?: PublicCatalogProductPropertiesOpenSearch
   /**
    * The properties of Instance Local SSD Snapshot products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   instanceLocalSsdSnapshot?: PublicCatalogProductPropertiesInstanceLocalSSDSnapshot
   /**
    * The properties of Instance Local SSD Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   instanceLocalSsdStorage?: PublicCatalogProductPropertiesInstanceLocalSSDStorage
   /**
    * The properties of File Storage products.
    *
-   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
+   * One-of ('properties'): at most one of 'dedibox', 'elasticMetal', 'appleSilicon', 'instance', 'blockStorage', 'objectStorage', 'managedInference', 'generativeApis', 'loadBalancer', 'secretManager', 'managedRedisDatabase', 'keyManager', 'kubernetes', 'managedRelationalDatabase', 'serverlessFunctions', 'serverlessContainers', 'managedMongodb', 'serverlessJobs', 'serverlessSqlDatabase', 'apacheKafka', 'openSearch', 'instanceLocalSsdSnapshot', 'instanceLocalSsdStorage', 'fileStorage' could be set.
    */
   fileStorage?: PublicCatalogProductPropertiesFileStorage
 }
