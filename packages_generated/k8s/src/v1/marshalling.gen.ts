@@ -647,6 +647,7 @@ const marshalCreateClusterRequestPoolConfig = (
   tags: request.tags,
   taints:  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)),
   upgrade_policy: ((request.upgradePolicy !== undefined) ?  marshalCreateClusterRequestPoolConfigUpgradePolicy(request.upgradePolicy, defaults): undefined),
+  user_data:  request.userData,
   zone: request.zone,
 })
 
