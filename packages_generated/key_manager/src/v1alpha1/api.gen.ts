@@ -26,9 +26,13 @@ import {
   unmarshalPublicKey,
   marshalSignRequest,
   unmarshalSignResponse,
+  marshalUnwrapKeyRequest,
+  unmarshalUnwrapKeyResponse,
   marshalUpdateKeyRequest,
   marshalVerifyRequest,
   unmarshalVerifyResponse,
+  marshalWrapKeyRequest,
+  unmarshalWrapKeyResponse,
 } from './marshalling.gen.js'
 import type {
   CreateKeyRequest,
@@ -57,9 +61,13 @@ import type {
   SignRequest,
   SignResponse,
   UnprotectKeyRequest,
+  UnwrapKeyRequest,
+  UnwrapKeyResponse,
   UpdateKeyRequest,
   VerifyRequest,
   VerifyResponse,
+  WrapKeyRequest,
+  WrapKeyResponse,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -466,6 +474,46 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         ),
       },
       unmarshalListAlgorithmsResponse,
+    )
+
+  
+  /**
+   * Wrap a key. Wrap (encrypt) a key using an existing key, specified by the `key_id` parameter. The key must use ML-KEM algorithm. The maximum key size that can be wrapped is 2 KB of plaintext.
+   *
+   * @param request - The request {@link WrapKeyRequest}
+   * @returns A Promise of WrapKeyResponse
+   */
+  wrapKey = (request: Readonly<WrapKeyRequest>) =>
+    this.client.fetch<WrapKeyResponse>(
+      {
+        body: JSON.stringify(
+          marshalWrapKeyRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/wrap`,
+      },
+      unmarshalWrapKeyResponse,
+    )
+
+  
+  /**
+   * Unwrap a key. Unwrap (decrypt) a wrapped key using an existing key, specified by the `key_id` parameter. The key must use ML-KEM algorithm. The maximum key size that can be unwrapped is 4 KB of ciphertext.
+   *
+   * @param request - The request {@link UnwrapKeyRequest}
+   * @returns A Promise of UnwrapKeyResponse
+   */
+  unwrapKey = (request: Readonly<UnwrapKeyRequest>) =>
+    this.client.fetch<UnwrapKeyResponse>(
+      {
+        body: JSON.stringify(
+          marshalUnwrapKeyRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/unwrap`,
+      },
+      unmarshalUnwrapKeyResponse,
     )
 
   
