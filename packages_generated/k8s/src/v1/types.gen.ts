@@ -521,6 +521,10 @@ export interface CreateClusterRequestPoolConfig {
    * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
    */
   maxTerminationGracePeriod?: string
+  /**
+   * User data applied and reconciled with the pool.
+   */
+  userData: Record<string, string>
 }
 
 
