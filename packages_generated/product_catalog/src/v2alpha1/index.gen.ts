@@ -3,6 +3,7 @@
 export {
   PublicCatalogAPI,
 } from './api.gen.js'
+export * from './constants.gen.js'
 export * from './marshalling.gen.js'
 export type {
   ListPublicCatalogProductsRequestProductType,
@@ -88,6 +89,7 @@ export type {
   PublicCatalogProductPropertiesServerlessJobs,
   PublicCatalogProductPropertiesServerlessJobsCPUType,
   PublicCatalogProductPropertiesServerlessJobsMemoryType,
+  PublicCatalogProductPropertiesServerlessSqlDatabase,
   PublicCatalogProductStatus,
   PublicCatalogProductUnitOfMeasure,
   PublicCatalogProductUnitOfMeasureCountableUnit,

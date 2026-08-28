@@ -3,6 +3,7 @@
 export {
   API,
 } from './api.gen.js'
+export * from './constants.gen.js'
 export * from './marshalling.gen.js'
 export type {
   CreateKeyRequest,
@@ -43,7 +44,11 @@ export type {
   SignRequest,
   SignResponse,
   UnprotectKeyRequest,
+  UnwrapKeyRequest,
+  UnwrapKeyResponse,
   UpdateKeyRequest,
   VerifyRequest,
   VerifyResponse,
+  WrapKeyRequest,
+  WrapKeyResponse,
 } from './types.gen.js'

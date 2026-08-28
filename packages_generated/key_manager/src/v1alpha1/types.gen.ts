@@ -12,6 +12,8 @@ export type KeyAlgorithmAsymmetricEncryption =
   | 'rsa_oaep_2048_sha256'
   | 'rsa_oaep_3072_sha256'
   | 'rsa_oaep_4096_sha256'
+  | 'ml_kem_768'
+  | 'ml_kem_1024'
 
 export type KeyAlgorithmAsymmetricSigning =
   | 'unknown_asymmetric_signing'
@@ -566,6 +568,23 @@ export type UnprotectKeyRequest = {
 }
 
 
+export type UnwrapKeyRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  keyId: string
+  ciphertext: string
+  associatedData?: string
+}
+
+
+export interface UnwrapKeyResponse {
+  keyId: string
+  plaintext: string
+}
+
+
 export type UpdateKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -623,6 +642,23 @@ export interface VerifyResponse {
    * Returns `true` if the signature is valid for the digest and key, and `false` otherwise.
    */
   valid: boolean
+}
+
+
+export type WrapKeyRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  keyId: string
+  plaintext: string
+  associatedData?: string
+}
+
+
+export interface WrapKeyResponse {
+  keyId: string
+  ciphertext: string
 }
 
 
