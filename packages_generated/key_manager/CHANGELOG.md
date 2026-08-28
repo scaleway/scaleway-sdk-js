@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.12.0
+
+### Minor Changes
+
+- feat(key_manager): add support for  and  (#3272)
+
+- feat: add support for constants (#3286)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.7.0
+
 ## 2.11.0
 
 ### Minor Changes

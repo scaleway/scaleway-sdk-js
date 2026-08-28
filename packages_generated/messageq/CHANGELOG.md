@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.6.0
+
+### Minor Changes
+
+- feat: add support for constants (#3286)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.7.0
+
 ## 1.5.0
 
 ### Minor Changes

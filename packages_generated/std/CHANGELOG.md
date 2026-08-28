@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.7.0
+
+### Minor Changes
+
+- feat: add support for constants (#3286)
+
 ## 2.6.0
 
 ### Minor Changes

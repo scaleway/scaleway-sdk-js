@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.11.0
+
+### Minor Changes
+
+- feat(search): remove temporarily IAM from public search (#3265)
+
+- feat: add support for constants (#3286)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.7.0
+
 ## 1.10.0
 
 ### Minor Changes
