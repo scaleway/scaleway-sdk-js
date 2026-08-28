@@ -96,6 +96,14 @@ export interface Mailbox {
    */
   id: string
   /**
+   * ID of the Project to which the mailbox belongs.
+   */
+  projectId: string
+  /**
+   * ID of the Organization to which the mailbox belongs.
+   */
+  organizationId: string
+  /**
    * ID of the domain to which the mailbox belongs.
    */
   domainId: string
@@ -223,6 +231,10 @@ export interface Domain {
    * ID of the Project to which the domain belongs.
    */
   projectId: string
+  /**
+   * ID of the Organization to which the domain belongs.
+   */
+  organizationId: string
   /**
    * Fully qualified domain name.
    */
