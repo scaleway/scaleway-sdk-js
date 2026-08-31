@@ -101,7 +101,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List of keys.. List of keys.
+   * List all keys, sorted alphabetically by name.. List all keys, sorted alphabetically by name.
    *
    * @param request - The request {@link ListKeysRequest}
    * @returns A Promise of ListKeysResponse
@@ -196,7 +196,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List all values for a key, sorted alphabetically by name.. List all values for a key, sorted alphabetically by name.
+   * List all values, sorted alphabetically by name.. List all values, sorted alphabetically by name.
    *
    * @param request - The request {@link ListValuesRequest}
    * @returns A Promise of ListValuesResponse
@@ -222,7 +222,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Update name or description. Global update.. Update name or description. Global update.
+   * Update name or description.. Update name or description.
    *
    * @param request - The request {@link UpdateValueRequest}
    * @returns A Promise of Value
@@ -330,7 +330,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List all bindings, or filter by Scaleway Resource Number or value ID. Response order by ID.. List all bindings, or filter by Scaleway Resource Number or value ID. Response order by ID.
+   * List all bindings, or filter by Scaleway Resource Name or value ID. Response order by ID.. List all bindings, or filter by Scaleway Resource Name or value ID. Response order by ID.
    *
    * @param request - The request {@link ListBindingsRequest}
    * @returns A Promise of ListBindingsResponse
@@ -373,7 +373,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Delete ALL bindings associated with a Scaleway Resource Number.. Delete ALL bindings associated with a Scaleway Resource Number.
+   * Delete ALL bindings associated with a Scaleway Resource Name.. Delete ALL bindings associated with a Scaleway Resource Name.
    *
    * @param request - The request {@link DeleteAllBindingsMatchingSRNRequest}
    * @returns A Promise of DeleteAllBindingsMatchingSRNResponse
