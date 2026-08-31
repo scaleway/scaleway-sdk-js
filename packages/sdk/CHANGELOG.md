@@ -1,5 +1,14 @@
 # Change Log
 
+## 4.0.7
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-annotations@1.4.0
+  - @scaleway/sdk-dedibox@2.13.0
+  - @scaleway/sdk-mailbox@1.12.0
+
 ## 4.0.6
 
 ### Patch Changes

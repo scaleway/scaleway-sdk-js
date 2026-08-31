@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.12.0
+
+### Minor Changes
+
+- feat(mailbox): add project_id and organization_id (#3287)
+
 ## 1.11.0
 
 ### Minor Changes

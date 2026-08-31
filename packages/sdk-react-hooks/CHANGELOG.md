@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.13.8
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-annotations@1.4.0
+  - @scaleway/sdk-dedibox@2.13.0
+  - @scaleway/sdk-react@0.12.2
+
 ## 0.13.7
 
 ### Patch Changes

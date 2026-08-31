@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.13.0
+
+### Minor Changes
+
+- feat(dedibox): list available OS by offer_id (#3288)
+
 ## 2.12.0
 
 ### Minor Changes

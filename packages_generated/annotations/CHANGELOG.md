@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.4.0
+
+### Minor Changes
+
+- docs(annotations): improve documentation (#3289)
+
 ## 1.3.1
 
 ### Patch Changes

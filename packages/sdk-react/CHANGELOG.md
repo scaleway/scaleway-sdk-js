@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.12.2
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-annotations@1.4.0
+  - @scaleway/sdk-dedibox@2.13.0
+
 ## 0.12.1
 
 ### Patch Changes
