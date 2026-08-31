@@ -69,7 +69,7 @@ export interface Binding {
    */
   id: string
   /**
-   * Scaleway Resource Number associated to the binding.
+   * Scaleway Resource Name associated to the binding.
    */
   srn: string
   /**
@@ -121,7 +121,7 @@ export interface Value {
 
 export type CreateBindingRequest = {
   /**
-   * Scaleway Resource Number to associate.
+   * Scaleway Resource Name to associate.
    */
   srn: string
   /**
@@ -165,7 +165,7 @@ export type CreateValueRequest = {
 
 export type DeleteAllBindingsMatchingSRNRequest = {
   /**
-   * Scaleway Resource Number for which all bindings should be deleted.
+   * Scaleway Resource Name for which all bindings should be deleted.
    */
   srn: string
   /**
@@ -209,7 +209,7 @@ export type DeleteAllValuesMatchingKeyRequest = {
 
 export interface DeleteAllValuesMatchingKeyResponse {
   /**
-   * Total number of bindings deleted.
+   * Total number of values deleted.
    */
   totalDeleted: number
 }
@@ -285,7 +285,7 @@ export type ListBindingsRequest = {
    */
   organizationId?: string
   /**
-   * Scaleway Resource Number for which to list all bindings.
+   * Scaleway Resource Name for which to list all bindings.
    */
   srn?: string
   /**
