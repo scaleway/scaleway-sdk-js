@@ -2458,12 +2458,20 @@ export type ListOSRequest = {
   type?: OSType
   /**
    * Filter OS by compatible server ID.
+   *
+   * One-of ('offer'): at most one of 'serverId', 'offerId' could be set.
    */
-  serverId: number
+  serverId?: number
   /**
    * Project ID.
    */
   projectId?: string
+  /**
+   * Filter OS by compatible offer ID.
+   *
+   * One-of ('offer'): at most one of 'serverId', 'offerId' could be set.
+   */
+  offerId?: number
 }
 
 

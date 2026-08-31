@@ -849,7 +849,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
     )
 
   
-  protected pageOfListOS = (request: Readonly<ListOSRequest>) =>
+  protected pageOfListOS = (request: Readonly<ListOSRequest> = {}) =>
     this.client.fetch<ListOSResponse>(
       {
         method: 'GET',
@@ -859,8 +859,15 @@ The BMC (Baseboard Management Controller) access is available one hour after the
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
-          ['server_id', request.serverId],
-          ['type', request.type],
+          ['type', request.type],  
+          ...Object.entries(resolveOneOf([
+            {param: 'server_id',
+              value: request.serverId,
+            },
+            {param: 'offer_id',
+              value: request.offerId,
+            },
+          ])),
         ),
       },
       unmarshalListOSResponse,
@@ -872,7 +879,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link ListOSRequest}
    * @returns A Promise of ListOSResponse
    */
-  listOS = (request: Readonly<ListOSRequest>) =>
+  listOS = (request: Readonly<ListOSRequest> = {}) =>
     enrichForPagination('os', this.pageOfListOS, request)
 
   
