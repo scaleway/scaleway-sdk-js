@@ -213,9 +213,6 @@ export const ListOSRequest = {
     greaterThan: 0,
     lessThanOrEqual: 100,
   },
-  serverId: {
-    greaterThan: 0,
-  },
 }
 
 export const ListOffersRequest = {
