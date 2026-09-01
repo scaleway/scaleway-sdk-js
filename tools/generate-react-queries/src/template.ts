@@ -9,13 +9,15 @@ interface HookVars {
   apiHookName: string
   apiImportPath: string
   needsNsImport: boolean
-  ns: string
   sdkPackageName: string
   dataLoaderPackage: string
   generatedComment: string
   hookName: string
   paramsType: string
   returnType: string
+  returnTypeNamespace: string
+  listItemType?: string
+  listItemTypeNamespace?: string
   apiVarName: string
   methodName: string
   hasParams: boolean
@@ -36,7 +38,10 @@ interface ReloadVars {
 export function renderHook(v: HookVars): string {
   const imports = [
     `import { ${v.apiHookName} } from "${v.apiImportPath}"`,
-    v.needsNsImport ? `import type { ${v.ns} } from "${v.sdkPackageName}"` : '',
+    v.needsNsImport
+      ? `import type { ${v.paramsType ? `${v.paramsType}, ` : ''}${v.returnType} } from "${v.returnTypeNamespace}"`
+      : '',
+    v.isAll ? `import type { ${v.listItemType} } from "${v.listItemTypeNamespace}"` : '',
     v.isInfinite
       ? `import type { UseInfiniteDataLoaderConfig } from "${v.dataLoaderPackage}"
 import { useInfiniteDataLoader } from "${v.dataLoaderPackage}"`

@@ -9,10 +9,12 @@ export interface MetadataMethod {
   protoName: string
   paramsType: string
   returnType: string
+  returnTypeNamespace: string
   isList: boolean
   paginationType?: 'offset' | 'cursor' | 'none'
   pageParamKey?: string
   listItemType?: string
+  listItemTypeNamespace?: string
   isPrivate: boolean
   description?: string
   hasWaiter?: boolean
