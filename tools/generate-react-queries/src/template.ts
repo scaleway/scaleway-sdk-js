@@ -38,10 +38,9 @@ interface ReloadVars {
 export function renderHook(v: HookVars): string {
   const imports = [
     `import { ${v.apiHookName} } from "${v.apiImportPath}"`,
-    v.needsNsImport
-      ? `import type { ${v.paramsType ? `${v.paramsType}, ` : ''}${v.returnType} } from "${v.returnTypeNamespace}"`
-      : '',
-    v.isAll ? `import type { ${v.listItemType} } from "${v.listItemTypeNamespace}"` : '',
+    v.needsNsImport && v.paramsType ? `import type { ${v.paramsType} } from "${v.returnTypeNamespace}"` : '',
+    v.needsNsImport && !v.isAll ? `import type { ${v.returnType} } from "${v.returnTypeNamespace}"` : '',
+    v.needsNsImport && v.isAll ? `import type { ${v.listItemType} } from "${v.listItemTypeNamespace}"` : '',
     v.isInfinite
       ? `import type { UseInfiniteDataLoaderConfig } from "${v.dataLoaderPackage}"
 import { useInfiniteDataLoader } from "${v.dataLoaderPackage}"`
