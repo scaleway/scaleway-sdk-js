@@ -30,7 +30,7 @@
     "@repo/generate-packages": "workspace:*",
     "@repo/pnpm-auto-release": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
-    "@scaleway/oxlint-config": "0.2.3",
+    "@scaleway/oxlint-config": "1.0.0",
     "@scaleway/sync-peer-deps": "1.0.4",
     "@scaleway/tsconfig": "1.1.6",
     "@vitest/coverage-istanbul": "4.1.10",
