@@ -46,6 +46,21 @@ describe(`logRequest`, () => {
     await logRequest('1')({ request })
     expect(latestMessage.startsWith('--------------- Scaleway SDK REQUEST 1')).toBe(true)
   })
+
+  it(`does not consume the original request body`, async () => {
+    enableDummyLogger('debug')
+    const requestWithBody = new Request('https://api.scaleway.com', {
+      method: 'POST',
+      body: 'hello-world',
+    })
+    await logRequest(
+      '1',
+      obfuscateInterceptor(([name, value]) => [name, value]),
+    )({
+      request: requestWithBody,
+    })
+    expect(await requestWithBody.clone().text()).toBe('hello-world')
+  })
 })
 
 describe(`logResponse`, () => {
