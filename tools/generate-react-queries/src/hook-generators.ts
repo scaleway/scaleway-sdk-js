@@ -101,8 +101,7 @@ export function generateAllQueryHook(
   const n = resolveNames(method, service, metadata, config, sdkPackageName)
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery`
 
-  // if on a AllQuery method then we append "[]" to the type returned
-  const itemReturnedType = method.listItemType ? `${method.listItemType}[]` : n.returnType
+  const itemReturnedType = method.listItemType ? method.listItemType : n.returnType
 
   return renderHook({
     apiHookName: n.apiHookName,
@@ -113,7 +112,8 @@ export function generateAllQueryHook(
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${hookSuffix}`,
     paramsType: n.paramsType,
-    returnType: itemReturnedType,
+    // if on a AllQuery method then we append "[]" to the type returned
+    returnType: `${itemReturnedType}[]`,
     returnTypeNamespace: n.returnTypeNamespace,
     listItemType: n.listItemType,
     listItemTypeNamespace: n.listItemTypeNamespace,
