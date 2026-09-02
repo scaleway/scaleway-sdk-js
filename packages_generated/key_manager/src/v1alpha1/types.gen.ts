@@ -28,6 +28,7 @@ export type KeyAlgorithmAsymmetricSigning =
   | 'ml_dsa_44'
   | 'ml_dsa_65'
   | 'ml_dsa_87'
+  | 'ec_secp256k1_sha256'
 
 export type KeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
