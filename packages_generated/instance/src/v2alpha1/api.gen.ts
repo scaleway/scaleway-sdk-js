@@ -92,6 +92,7 @@ import type {
   DeleteTemplateRequest,
   DeleteTemplateUserDataRequest,
   DeleteUserDataRequest,
+  DetachAndDeletePrivateNetworkInterfaceRequest,
   DetachServerFileSystemRequest,
   DetachServerIPRequest,
   DetachServerPrivateNetworkInterfaceRequest,
@@ -768,6 +769,18 @@ export class API extends ParentAPI {
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces/${validatePathParam('privateNetworkInterfaceId', request.privateNetworkInterfaceId)}`,
       },
+    )
+
+  
+  detachAndDeletePrivateNetworkInterface = (request: Readonly<DetachAndDeletePrivateNetworkInterfaceRequest>) =>
+    this.client.fetch<PrivateNetworkInterface>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces/${validatePathParam('privateNetworkInterfaceId', request.privateNetworkInterfaceId)}/detach-and-delete`,
+      },
+      unmarshalPrivateNetworkInterface,
     )
 
   

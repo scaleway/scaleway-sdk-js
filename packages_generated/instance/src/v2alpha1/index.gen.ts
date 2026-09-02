@@ -39,6 +39,7 @@ export type {
   DeleteTemplateRequest,
   DeleteTemplateUserDataRequest,
   DeleteUserDataRequest,
+  DetachAndDeletePrivateNetworkInterfaceRequest,
   DetachServerFileSystemRequest,
   DetachServerIPRequest,
   DetachServerPrivateNetworkInterfaceRequest,

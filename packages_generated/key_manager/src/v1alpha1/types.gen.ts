@@ -12,8 +12,6 @@ export type KeyAlgorithmAsymmetricEncryption =
   | 'rsa_oaep_2048_sha256'
   | 'rsa_oaep_3072_sha256'
   | 'rsa_oaep_4096_sha256'
-  | 'ml_kem_768'
-  | 'ml_kem_1024'
 
 export type KeyAlgorithmAsymmetricSigning =
   | 'unknown_asymmetric_signing'
@@ -29,6 +27,11 @@ export type KeyAlgorithmAsymmetricSigning =
   | 'ml_dsa_65'
   | 'ml_dsa_87'
   | 'ec_secp256k1_sha256'
+
+export type KeyAlgorithmKeyEncapsulation =
+  | 'unknown_key_encapsulation'
+  | 'ml_kem_768'
+  | 'ml_kem_1024'
 
 export type KeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
@@ -51,6 +54,7 @@ export type ListAlgorithmsRequestUsage =
   | 'symmetric_encryption'
   | 'asymmetric_encryption'
   | 'asymmetric_signing'
+  | 'key_encapsulation'
 
 export type ListKeysRequestOrderBy =
   | 'name_asc'
@@ -82,21 +86,26 @@ export interface KeyUsage {
   /**
    * See the `Key.Algorithm.SymmetricEncryption` enum for a description of values.
    *
-   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
+   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
    */
   symmetricEncryption?: KeyAlgorithmSymmetricEncryption
   /**
    * See the `Key.Algorithm.AsymmetricEncryption` enum for a description of values.
    *
-   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
+   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
    */
   asymmetricEncryption?: KeyAlgorithmAsymmetricEncryption
   /**
    * See the `Key.Algorithm.AsymmetricSigning` enum for a description of values.
    *
-   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning' could be set.
+   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
    */
   asymmetricSigning?: KeyAlgorithmAsymmetricSigning
+  /**
+   *
+   * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
+   */
+  keyEncapsulation?: KeyAlgorithmKeyEncapsulation
 }
 
 

@@ -4,6 +4,7 @@ import type {
   DataKeyAlgorithmSymmetricEncryption,
   KeyAlgorithmAsymmetricEncryption,
   KeyAlgorithmAsymmetricSigning,
+  KeyAlgorithmKeyEncapsulation,
   KeyAlgorithmSymmetricEncryption,
   KeyOrigin,
   KeyState,
@@ -25,8 +26,6 @@ export const KEY_ALGORITHM_ASYMMETRIC_ENCRYPTIONS: KeyAlgorithmAsymmetricEncrypt
   'rsa_oaep_2048_sha256',
   'rsa_oaep_3072_sha256',
   'rsa_oaep_4096_sha256',
-  'ml_kem_768',
-  'ml_kem_1024',
 ]
 
 /** Lists all values of the enum {@link KeyAlgorithmAsymmetricSigning}. */
@@ -44,6 +43,13 @@ export const KEY_ALGORITHM_ASYMMETRIC_SIGNINGS: KeyAlgorithmAsymmetricSigning[] 
   'ml_dsa_65',
   'ml_dsa_87',
   'ec_secp256k1_sha256',
+]
+
+/** Lists all values of the enum {@link KeyAlgorithmKeyEncapsulation}. */
+export const KEY_ALGORITHM_KEY_ENCAPSULATIONS: KeyAlgorithmKeyEncapsulation[] = [
+  'unknown_key_encapsulation',
+  'ml_kem_768',
+  'ml_kem_1024',
 ]
 
 /** Lists all values of the enum {@link KeyAlgorithmSymmetricEncryption}. */
@@ -74,6 +80,7 @@ export const LIST_ALGORITHMS_REQUEST_USAGES: ListAlgorithmsRequestUsage[] = [
   'symmetric_encryption',
   'asymmetric_encryption',
   'asymmetric_signing',
+  'key_encapsulation',
 ]
 
 /** Lists all values of the enum {@link ListKeysRequestOrderBy}. */
