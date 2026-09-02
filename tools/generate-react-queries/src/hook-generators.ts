@@ -11,11 +11,6 @@ import { renderHook, renderReload } from './template.ts'
 
 // --- Naming helpers (build hook names, import paths, and qualified types) ---
 
-/** Qualify a type with namespace prefix, unless it's a raw type (string, Blob, etc.). */
-function nsType(ns: string, type: string, rawTypes: Set<string>): string {
-  return rawTypes.has(type) ? type : `${ns}.${type}`
-}
-
 /** Derive all naming conventions for a given method + service combination. */
 function resolveNames(
   method: QueryMethod,
@@ -32,9 +27,11 @@ function resolveNames(
   const apiVarName = apiImportName.replace(/API$/, '')
   const apiImportPath = `${config.imports.apiSdkPath}/${lowerCaseFirst(apiImportName)}`
 
-  const ns = capitalize(folderName)
-  const paramsType = nsType(ns, method.paramsType, rawTypes)
-  const returnType = nsType(ns, method.returnType, rawTypes)
+  const paramsType = method.paramsType
+  const returnType = method.returnType
+  const returnTypeNamespace = method.returnTypeNamespace
+  const listItemType = method.listItemType
+  const listItemTypeNamespace = method.listItemTypeNamespace
 
   return {
     folderName,
@@ -42,9 +39,11 @@ function resolveNames(
     apiVarName,
     apiImportPath,
     sdkPackageName,
-    ns,
     paramsType,
     returnType,
+    returnTypeNamespace,
+    listItemType,
+    listItemTypeNamespace,
     rawTypes,
   }
 }
@@ -63,7 +62,7 @@ export function generateQueryHook(
   const hasParams = !!method.paramsType
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}Query`
 
-  const needsNsImport = n.returnType.startsWith(`${n.ns}.`) || (hasParams && n.paramsType.startsWith(`${n.ns}.`))
+  const needsNsImport = !n.rawTypes.has(n.returnType) || (hasParams && !n.rawTypes.has(n.paramsType))
 
   const keyArray = hasParams
     ? `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`
@@ -73,13 +72,15 @@ export function generateQueryHook(
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport,
-    ns: n.ns,
     sdkPackageName: n.sdkPackageName,
     dataLoaderPackage: config.imports.dataLoaderPackage,
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${hookSuffix}`,
     paramsType: n.paramsType,
     returnType: n.returnType,
+    returnTypeNamespace: n.returnTypeNamespace,
+    listItemType: n.listItemType,
+    listItemTypeNamespace: n.listItemTypeNamespace,
     apiVarName: n.apiVarName,
     methodName: method.methodName,
     hasParams,
@@ -100,20 +101,22 @@ export function generateAllQueryHook(
   const n = resolveNames(method, service, metadata, config, sdkPackageName)
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery`
 
-  const rawItemType = method.listItemType
-  const itemType = rawItemType ? nsType(n.ns, rawItemType, n.rawTypes) : n.returnType
+  const itemReturnedType = method.listItemType ? method.listItemType : n.returnType
 
   return renderHook({
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport: true,
-    ns: n.ns,
     sdkPackageName: n.sdkPackageName,
     dataLoaderPackage: config.imports.dataLoaderPackage,
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${hookSuffix}`,
     paramsType: n.paramsType,
-    returnType: `${itemType}[]`,
+    // if on a AllQuery method then we append "[]" to the type returned
+    returnType: `${itemReturnedType}[]`,
+    returnTypeNamespace: n.returnTypeNamespace,
+    listItemType: n.listItemType,
+    listItemTypeNamespace: n.listItemTypeNamespace,
     apiVarName: n.apiVarName,
     methodName: method.methodName,
     hasParams: true,
@@ -138,13 +141,15 @@ export function generateInfiniteQueryHook(
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
     needsNsImport: true,
-    ns: n.ns,
     sdkPackageName: n.sdkPackageName,
     dataLoaderPackage: config.imports.dataLoaderPackage,
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${hookSuffix}`,
     paramsType: n.paramsType,
     returnType: n.returnType,
+    returnTypeNamespace: n.returnTypeNamespace,
+    listItemType: n.listItemType,
+    listItemTypeNamespace: n.listItemTypeNamespace,
     apiVarName: n.apiVarName,
     methodName: method.methodName,
     hasParams: true,

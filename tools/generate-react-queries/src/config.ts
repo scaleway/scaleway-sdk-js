@@ -13,10 +13,12 @@ export interface QueryMethod {
   protoName: string
   paramsType: string
   returnType: string
+  returnTypeNamespace: string
   isList: boolean
   paginationType?: 'offset' | 'cursor' | 'none'
   pageParamKey?: string
   listItemType?: string
+  listItemTypeNamespace?: string
   nextPageField?: string
   isPrivate: boolean
   description?: string

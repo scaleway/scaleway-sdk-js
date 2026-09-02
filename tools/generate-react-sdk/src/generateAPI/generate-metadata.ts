@@ -80,7 +80,7 @@ export const generateAPI = async ({
   skipServices?: string[]
   skipVersions?: string[]
 }) => {
-  let result: ProcessedMetadata = {}
+  let apisWithNamespace: ProcessedMetadata = {}
 
   const dir = join(directoryOfSrcFolder, dirGenName)
 
@@ -133,8 +133,8 @@ export const generateAPI = async ({
         .filter((apiClass: string) => apiClass && apiClass.length > 0)
 
       if (apis.length > 0) {
-        result = {
-          ...result,
+        apisWithNamespace = {
+          ...apisWithNamespace,
           [namespace]: {
             packageName,
             apis,
@@ -144,8 +144,8 @@ export const generateAPI = async ({
     }
   }
 
-  emitFiles({ res: result, sourceFolderGen: dir, sdkFactoryPath })
-  generateType(result)
+  emitFiles({ res: apisWithNamespace, sourceFolderGen: dir, sdkFactoryPath })
+  generateType(apisWithNamespace)
 
   exec('cd ../.. && pnpm run format').on('error', () => {
     stdout.write('❌ Error during format !\n')
