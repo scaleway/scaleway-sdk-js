@@ -72,6 +72,9 @@ export type PrivateNetworkInterfaceStatus =
   | 'attaching'
   | 'detaching'
   | 'syncing'
+  | 'deleting'
+  | 'detach_error'
+  | 'delete_error'
 
 export type SecurityGroupAction =
   | 'unknown_action'
@@ -120,6 +123,9 @@ export type ServerPrivateNetworkInterfaceStatus =
   | 'attaching'
   | 'detaching'
   | 'syncing'
+  | 'deleting'
+  | 'detach_error'
+  | 'delete_error'
 
 export type ServerPublicNetworkInterfaceStatus =
   | 'unknown_status'
@@ -1467,6 +1473,18 @@ export type DeleteUserDataRequest = {
    * The key of the user data to delete.
    */
   key: string
+}
+
+
+export type DetachAndDeletePrivateNetworkInterfaceRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * ID of the private network interface to detach and delete.
+   */
+  privateNetworkInterfaceId: string
 }
 
 

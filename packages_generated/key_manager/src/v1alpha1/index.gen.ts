@@ -24,6 +24,7 @@ export type {
   Key,
   KeyAlgorithmAsymmetricEncryption,
   KeyAlgorithmAsymmetricSigning,
+  KeyAlgorithmKeyEncapsulation,
   KeyAlgorithmSymmetricEncryption,
   KeyOrigin,
   KeyRotationPolicy,
