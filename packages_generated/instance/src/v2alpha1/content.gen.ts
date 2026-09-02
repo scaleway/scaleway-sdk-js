@@ -17,6 +17,7 @@ export const PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES: PrivateNetworkInterfa
   'attaching',
   'detaching',
   'syncing',
+  'deleting',
 ]
 
 /** Lists transient statutes of the enum {@link ServerFilesystemStatus}. */
@@ -35,6 +36,7 @@ export const SERVER_PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES: ServerPrivateN
   'attaching',
   'detaching',
   'syncing',
+  'deleting',
 ]
 
 /** Lists transient statutes of the enum {@link ServerPublicNetworkInterfaceStatus}. */
