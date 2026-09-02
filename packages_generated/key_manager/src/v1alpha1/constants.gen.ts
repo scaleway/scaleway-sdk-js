@@ -43,6 +43,7 @@ export const KEY_ALGORITHM_ASYMMETRIC_SIGNINGS: KeyAlgorithmAsymmetricSigning[] 
   'ml_dsa_44',
   'ml_dsa_65',
   'ml_dsa_87',
+  'ec_secp256k1_sha256',
 ]
 
 /** Lists all values of the enum {@link KeyAlgorithmSymmetricEncryption}. */
