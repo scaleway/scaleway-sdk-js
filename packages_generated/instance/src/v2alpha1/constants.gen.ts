@@ -125,6 +125,9 @@ export const PRIVATE_NETWORK_INTERFACE_STATUSES: PrivateNetworkInterfaceStatus[]
   'attaching',
   'detaching',
   'syncing',
+  'deleting',
+  'detach_error',
+  'delete_error',
 ]
 
 /** Lists all values of the enum {@link SecurityGroupAction}. */
@@ -189,6 +192,9 @@ export const SERVER_PRIVATE_NETWORK_INTERFACE_STATUSES: ServerPrivateNetworkInte
   'attaching',
   'detaching',
   'syncing',
+  'deleting',
+  'detach_error',
+  'delete_error',
 ]
 
 /** Lists all values of the enum {@link ServerPublicNetworkInterfaceStatus}. */

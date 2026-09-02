@@ -53,6 +53,7 @@ const unmarshalKeyUsage = (data: unknown): KeyUsage => {
   return {
     asymmetricEncryption: data.asymmetric_encryption ? data.asymmetric_encryption : undefined,
     asymmetricSigning: data.asymmetric_signing ? data.asymmetric_signing : undefined,
+    keyEncapsulation: data.key_encapsulation ? data.key_encapsulation : undefined,
     symmetricEncryption: data.symmetric_encryption ? data.symmetric_encryption : undefined,
   } as KeyUsage
 }
@@ -252,6 +253,9 @@ const marshalKeyUsage = (
     },
     {param: 'asymmetric_signing',
       value: request.asymmetricSigning,
+    },
+    {param: 'key_encapsulation',
+      value: request.keyEncapsulation,
     },
   ]),
 })
