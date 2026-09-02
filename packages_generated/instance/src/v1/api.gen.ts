@@ -1523,6 +1523,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
   
   /**
    * List all private NICs. List all private NICs of a specified Instance.
+Some private NICs, such as those in deleting, detaching, or in error state are
+not listed. We strongly recommend migrating to v2alpha1 to retrieve all private NICs.
    *
    * @param request - The request {@link ListPrivateNICsRequest}
    * @returns A Promise of ListPrivateNICsResponse
@@ -1532,7 +1534,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
 
   
   /**
-   * Create a private NIC connecting an Instance to a Private Network.
+   * Create a private NIC connecting an Instance to a Private Network. Create a private NIC connecting an Instance to a Private Network.
+Some private NICs, such as those in deleting, detaching, or in error state are
+not listed in v1.
+Therefore, you may encounter quota limits errors when creating a new private NIC, even if your visible
+count is below the threshold.
+We strongly recommend migrating to v2alpha1 to see all private NICs.
    *
    * @param request - The request {@link CreatePrivateNICRequest}
    * @returns A Promise of CreatePrivateNICResponse
