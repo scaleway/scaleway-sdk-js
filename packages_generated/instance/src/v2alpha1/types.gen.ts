@@ -1400,13 +1400,13 @@ export type DeleteServerRequest = {
    */
   deleteIpIds?: string[]
   /**
-   * Whether to delete all volumes attached to the server.
+   * Whether to delete all volumes attached to the server. Deletion of SBS volumes is not supported yet.
    *
    * One-of ('volumes'): at most one of 'deleteAllVolumes', 'deleteVolumeIds' could be set.
    */
   deleteAllVolumes?: boolean
   /**
-   * List of volume IDs to delete.
+   * List of volume IDs to delete. Deletion of SBS volumes is not supported yet.
    *
    * One-of ('volumes'): at most one of 'deleteAllVolumes', 'deleteVolumeIds' could be set.
    */
