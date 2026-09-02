@@ -7,6 +7,8 @@
 
 import type { QueriesMetadata, QueryMethod, ReactQueriesConfig, ServiceMetadata } from './config.ts'
 import { capitalize, lowerCaseFirst } from './config.ts'
+import { resolveTypeNamespace } from './namespace-resolver.ts'
+import type { ResolvedNamespace } from './namespace-resolver.ts'
 import { renderHook, renderReload } from './template.ts'
 
 // --- Naming helpers (build hook names, import paths, and qualified types) ---
@@ -16,6 +18,15 @@ function nsType(ns: string, type: string, rawTypes: Set<string>): string {
   return rawTypes.has(type) ? type : `${ns}.${type}`
 }
 
+/**
+ * Collect all distinct namespace imports needed for a hook, keyed by package
+ * name so we deduplicate when multiple types come from the same package.
+ * Returns a sorted array for deterministic output.
+ */
+function collectNsImports(imports: Map<string, ResolvedNamespace>): ResolvedNamespace[] {
+  return [...imports.values()].sort((a, b) => a.packageName.localeCompare(b.packageName))
+}
+
 /** Derive all naming conventions for a given method + service combination. */
 function resolveNames(
   method: QueryMethod,
@@ -23,6 +34,7 @@ function resolveNames(
   metadata: QueriesMetadata,
   config: ReactQueriesConfig,
   sdkPackageName: string,
+  namespaceResolver: Map<string, ResolvedNamespace>,
 ) {
   const { folderName } = metadata
   const rawTypes = new Set(config.filters.rawTypes)
@@ -33,8 +45,10 @@ function resolveNames(
   const apiImportPath = `${config.imports.apiSdkPath}/${lowerCaseFirst(apiImportName)}`
 
   const ns = capitalize(folderName)
-  const paramsType = nsType(ns, method.paramsType, rawTypes)
-  const returnType = nsType(ns, method.returnType, rawTypes)
+
+  // Resolve the namespace for the return type
+  const returnNsInfo = resolveTypeNamespace(method.returnTypeNamespace, sdkPackageName, ns, namespaceResolver)
+  const returnType = nsType(returnNsInfo.ns, method.returnType, rawTypes)
 
   return {
     folderName,
@@ -43,8 +57,9 @@ function resolveNames(
     apiImportPath,
     sdkPackageName,
     ns,
-    paramsType,
+    paramsType: nsType(ns, method.paramsType, rawTypes),
     returnType,
+    returnNsInfo,
     rawTypes,
   }
 }
@@ -58,12 +73,20 @@ export function generateQueryHook(
   metadata: QueriesMetadata,
   config: ReactQueriesConfig,
   sdkPackageName: string,
+  namespaceResolver: Map<string, ResolvedNamespace>,
 ): string {
-  const n = resolveNames(method, service, metadata, config, sdkPackageName)
+  const n = resolveNames(method, service, metadata, config, sdkPackageName, namespaceResolver)
   const hasParams = !!method.paramsType
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}Query`
 
-  const needsNsImport = n.returnType.startsWith(`${n.ns}.`) || (hasParams && n.paramsType.startsWith(`${n.ns}.`))
+  // Collect namespace imports: return type, and params type if it uses a namespace
+  const nsImports = new Map<string, ResolvedNamespace>()
+  if (!n.rawTypes.has(method.returnType)) {
+    nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
+  }
+  if (hasParams && !n.rawTypes.has(method.paramsType)) {
+    nsImports.set(sdkPackageName, { packageName: sdkPackageName, ns: n.ns })
+  }
 
   const keyArray = hasParams
     ? `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`
@@ -72,9 +95,7 @@ export function generateQueryHook(
   return renderHook({
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
-    needsNsImport,
-    ns: n.ns,
-    sdkPackageName: n.sdkPackageName,
+    nsImports: collectNsImports(nsImports),
     dataLoaderPackage: config.imports.dataLoaderPackage,
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${hookSuffix}`,
@@ -96,19 +117,33 @@ export function generateAllQueryHook(
   metadata: QueriesMetadata,
   config: ReactQueriesConfig,
   sdkPackageName: string,
+  namespaceResolver: Map<string, ResolvedNamespace>,
 ): string {
-  const n = resolveNames(method, service, metadata, config, sdkPackageName)
+  const n = resolveNames(method, service, metadata, config, sdkPackageName, namespaceResolver)
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery`
 
+  // Resolve the namespace for the list item type
+  const itemNsInfo = resolveTypeNamespace(method.listItemTypeNamespace, sdkPackageName, n.ns, namespaceResolver)
+
   const rawItemType = method.listItemType
-  const itemType = rawItemType ? nsType(n.ns, rawItemType, n.rawTypes) : n.returnType
+  const itemType = rawItemType ? nsType(itemNsInfo.ns, rawItemType, n.rawTypes) : n.returnType
+
+  // Collect namespace imports: params type, return type (if used), and list item type
+  const nsImports = new Map<string, ResolvedNamespace>()
+  if (!n.rawTypes.has(method.paramsType)) {
+    nsImports.set(sdkPackageName, { packageName: sdkPackageName, ns: n.ns })
+  }
+  if (!n.rawTypes.has(method.returnType)) {
+    nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
+  }
+  if (rawItemType && !n.rawTypes.has(rawItemType)) {
+    nsImports.set(itemNsInfo.packageName, itemNsInfo)
+  }
 
   return renderHook({
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
-    needsNsImport: true,
-    ns: n.ns,
-    sdkPackageName: n.sdkPackageName,
+    nsImports: collectNsImports(nsImports),
     dataLoaderPackage: config.imports.dataLoaderPackage,
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${hookSuffix}`,
@@ -130,16 +165,24 @@ export function generateInfiniteQueryHook(
   metadata: QueriesMetadata,
   config: ReactQueriesConfig,
   sdkPackageName: string,
+  namespaceResolver: Map<string, ResolvedNamespace>,
 ): string {
-  const n = resolveNames(method, service, metadata, config, sdkPackageName)
+  const n = resolveNames(method, service, metadata, config, sdkPackageName, namespaceResolver)
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery`
+
+  // Collect namespace imports: params type and return type
+  const nsImports = new Map<string, ResolvedNamespace>()
+  if (!n.rawTypes.has(method.paramsType)) {
+    nsImports.set(sdkPackageName, { packageName: sdkPackageName, ns: n.ns })
+  }
+  if (!n.rawTypes.has(method.returnType)) {
+    nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
+  }
 
   return renderHook({
     apiHookName: n.apiHookName,
     apiImportPath: n.apiImportPath,
-    needsNsImport: true,
-    ns: n.ns,
-    sdkPackageName: n.sdkPackageName,
+    nsImports: collectNsImports(nsImports),
     dataLoaderPackage: config.imports.dataLoaderPackage,
     generatedComment: config.generatedComment,
     hookName: `${config.naming.hookPrefix}${hookSuffix}`,

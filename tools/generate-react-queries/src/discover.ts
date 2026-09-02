@@ -154,13 +154,14 @@ export async function loadMetadata(
   const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
   const metadataPath = join(pkgDir, 'dist', version, metadataJsFile)
   const module = await import(metadataPath)
-  const metadata: QueriesMetadata = module.queriesMetadata
+  // Deep clone to avoid mutating the cached module singleton across multiple calls
+  const metadata: QueriesMetadata = structuredClone(module.queriesMetadata)
 
   // Load utils-metadata if it exists (hand-written, for api.utils.ts methods)
   const utilsMetadataPath = join(pkgDir, 'dist', version, 'utils-metadata.js')
   if (existsSync(utilsMetadataPath)) {
     const utilsModule = await import(utilsMetadataPath)
-    const utilsMetadata: QueriesMetadata = utilsModule.queriesMetadata
+    const utilsMetadata: QueriesMetadata = structuredClone(utilsModule.queriesMetadata)
     if (utilsMetadata?.services) {
       // Merge utils methods into matching services by apiClass to avoid duplicate services
       for (const utilsService of utilsMetadata.services) {
