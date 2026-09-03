@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type {
+  Action,
   AlertRuleStatus,
   AuthenticationEventFailureReason,
   AuthenticationEventMFAType,
@@ -21,6 +22,14 @@ import type {
   SystemEventKind,
 } from './types.gen.js'
 
+
+/** Lists all values of the enum {@link Action}. */
+export const ACTIONS: Action[] = [
+  'unknown_action',
+  'create',
+  'update',
+  'delete',
+]
 
 /** Lists all values of the enum {@link AlertRuleStatus}. */
 export const ALERT_RULE_STATUSES: AlertRuleStatus[] = [

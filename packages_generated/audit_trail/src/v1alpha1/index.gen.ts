@@ -12,6 +12,7 @@ export type {
   AccountOrganizationInfo,
   AccountProjectInfo,
   AccountUserInfo,
+  Action,
   AlertRule,
   AlertRuleStatus,
   AppleSiliconRunnerInfo,
