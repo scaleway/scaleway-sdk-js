@@ -5,9 +5,11 @@ import { isJSONObject, marshalBlobToScwFile, marshalDecimal, marshalMoney, marsh
 import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scaleway/sdk-client'
 import type {
   DatabaseBackup,
+  Version,
   Database,
   ListDatabaseBackupsResponse,
   ListDatabasesResponse,
+  ListVersionsResponse,
   CreateDatabaseRequest,
   RestoreDatabaseFromBackupRequest,
   UpdateDatabaseRequest,
@@ -36,6 +38,20 @@ export const unmarshalDatabaseBackup = (data: unknown): DatabaseBackup => {
   } as DatabaseBackup
 }
 
+const unmarshalVersion = (data: unknown): Version => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Version' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    name: data.name,
+    region: data.region,
+  } as Version
+}
+
 export const unmarshalDatabase = (data: unknown): Database => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -57,6 +73,7 @@ export const unmarshalDatabase = (data: unknown): Database => {
     region: data.region,
     started: data.started,
     status: data.status,
+    version: data.version ? unmarshalVersion(data.version) : undefined,
   } as Database
 }
 
@@ -86,6 +103,19 @@ export const unmarshalListDatabasesResponse = (data: unknown): ListDatabasesResp
   } as ListDatabasesResponse
 }
 
+export const unmarshalListVersionsResponse = (data: unknown): ListVersionsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListVersionsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    totalCount: data.total_count,
+    versions: unmarshalArrayOfObject(data.versions, unmarshalVersion),
+  } as ListVersionsResponse
+}
+
 export const marshalCreateDatabaseRequest = (
   request: CreateDatabaseRequest,
   defaults: DefaultValues,
@@ -95,6 +125,7 @@ export const marshalCreateDatabaseRequest = (
   from_backup_id: request.fromBackupId,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  version: request.version,
 })
 
 export const marshalRestoreDatabaseFromBackupRequest = (
