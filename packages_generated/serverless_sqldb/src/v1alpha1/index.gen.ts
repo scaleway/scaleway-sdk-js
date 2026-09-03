@@ -22,7 +22,10 @@ export type {
   ListDatabasesRequest,
   ListDatabasesRequestOrderBy,
   ListDatabasesResponse,
+  ListVersionsRequest,
+  ListVersionsResponse,
   RestoreDatabaseFromBackupRequest,
   UpdateDatabaseRequest,
+  Version,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

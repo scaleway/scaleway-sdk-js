@@ -51,6 +51,16 @@ export const ListDatabasesRequest = {
   },
 }
 
+export const ListVersionsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const UpdateDatabaseRequest = {
   cpuMax: {
     greaterThanOrEqual: 1,
