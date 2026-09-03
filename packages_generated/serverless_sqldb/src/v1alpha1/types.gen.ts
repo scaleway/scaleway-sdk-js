@@ -28,6 +28,22 @@ export type ListDatabasesRequestOrderBy =
   | 'name_asc'
   | 'name_desc'
 
+export interface Version {
+  /**
+   * Major number of the PostgreSQL engine.
+   */
+  name: string
+  /**
+   * Date of End Of Life.
+   */
+  endOfLifeAt?: Date
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region: ScwRegion
+}
+
+
 export interface DatabaseBackup {
   /**
    * UUID that uniquely identifies a Serverless SQL Database backup.
@@ -130,9 +146,13 @@ export interface Database {
    */
   started: boolean
   /**
+   * @deprecated The major version of the underlying database engine. (deprecated in favor of `version`).
+   */
+  engineMajorVersion?: number
+  /**
    * The major version of the underlying database engine.
    */
-  engineMajorVersion: number
+  version?: Version
 }
 
 
@@ -161,6 +181,10 @@ export type CreateDatabaseRequest = {
    * The ID of the backup to create the database from.
    */
   fromBackupId?: string
+  /**
+   * The major version of the postgreSQL requested.
+   */
+  version: string
 }
 
 
@@ -295,6 +319,29 @@ export interface ListDatabasesResponse {
   databases: Database[]
   /**
    * Total count of Serverless SQL Databases.
+   */
+  totalCount: number
+}
+
+
+export type ListVersionsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  version?: string
+  page?: number
+  pageSize?: number
+}
+
+
+export interface ListVersionsResponse {
+  /**
+   * Available PostgreSQL versions.
+   */
+  versions: Version[]
+  /**
+   * Total count of versions available.
    */
   totalCount: number
 }
