@@ -1434,6 +1434,10 @@ export type RegistrarApiBuyDomainsRequest = {
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContact?: NewContact
+  /**
+   * Enable the `auto renew` feature for all the requested domains. This means the domain will be automatically renewed before its expiry date.
+   */
+  autoRenew: boolean
 }
 
 

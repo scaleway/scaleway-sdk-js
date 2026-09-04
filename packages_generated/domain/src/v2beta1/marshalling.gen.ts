@@ -1475,6 +1475,7 @@ export const marshalRegistrarApiBuyDomainsRequest = (
   request: RegistrarApiBuyDomainsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  auto_renew: request.autoRenew,
   domains: request.domains,
   duration_in_years: request.durationInYears,
   project_id: request.projectId ?? defaults.defaultProjectId,  
