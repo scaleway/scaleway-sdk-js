@@ -14,6 +14,7 @@ import {
   generateQueryHook,
   generateReloadHook,
 } from './hook-generators.ts'
+import { buildNamespaceResolver } from './namespace-resolver.ts'
 
 export async function generateFromMetadata(config: ReactQueriesConfig): Promise<void> {
   const sdkPackages = discoverSdkPackages(config)
@@ -26,6 +27,9 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
 
   const isVersionSkipped = (packageName: string, version: string): boolean =>
     skipVersions.has(`${packageName}@${version}`) || skipVersions.has(version)
+
+  // Preload namespace resolver for cross-package type references
+  const namespaceResolver = await buildNamespaceResolver(config)
 
   for (const [packageName, pkgDir] of sdkPackages) {
     if (skipPackages.has(packageName)) {
@@ -79,19 +83,33 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
             if (config.filters.skipPrivateMethods && method.isPrivate) continue
 
             // Standard query hook (e.g. useInstancev1APIGetServerQuery)
-            const hookContent = generateQueryHook(method, service, metadata, config, packageName)
+            const hookContent = generateQueryHook(method, service, metadata, config, packageName, namespaceResolver)
             const hookFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}Query.ts`
             writeFileSync(join(generatedDir, hookFileName), hookContent)
 
             // List methods get additional "all" and "infinite" variants
             if (method.isList) {
               if (!(config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
-                const allContent = generateAllQueryHook(method, service, metadata, config, packageName)
+                const allContent = generateAllQueryHook(
+                  method,
+                  service,
+                  metadata,
+                  config,
+                  packageName,
+                  namespaceResolver,
+                )
                 const allFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery.ts`
                 writeFileSync(join(generatedDir, allFileName), allContent)
               }
 
-              const infiniteContent = generateInfiniteQueryHook(method, service, metadata, config, packageName)
+              const infiniteContent = generateInfiniteQueryHook(
+                method,
+                service,
+                metadata,
+                config,
+                packageName,
+                namespaceResolver,
+              )
               const infiniteFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery.ts`
               writeFileSync(join(generatedDir, infiniteFileName), infiniteContent)
             }
@@ -102,7 +120,14 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
                 ...method,
                 methodName: `waitFor${capitalize(method.methodName.replace('get', ''))}`,
               }
-              const waiterContent = generateQueryHook(waiterMethod, service, metadata, config, packageName)
+              const waiterContent = generateQueryHook(
+                waiterMethod,
+                service,
+                metadata,
+                config,
+                packageName,
+                namespaceResolver,
+              )
               const waiterFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${config.naming.waiterPrefix}${capitalize(method.methodName.replace('get', ''))}Query.ts`
               writeFileSync(join(generatedDir, waiterFileName), waiterContent)
             }

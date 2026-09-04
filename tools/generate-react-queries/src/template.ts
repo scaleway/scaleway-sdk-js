@@ -5,12 +5,13 @@
  * Variables are passed as typed objects, giving IDE support and type safety.
  */
 
+import type { ResolvedNamespace } from './namespace-resolver.ts'
+
 interface HookVars {
   apiHookName: string
   apiImportPath: string
-  needsNsImport: boolean
-  ns: string
-  sdkPackageName: string
+  /** Namespace imports needed by this hook (deduplicated by package name). */
+  nsImports: ResolvedNamespace[]
   dataLoaderPackage: string
   generatedComment: string
   hookName: string
@@ -34,9 +35,11 @@ interface ReloadVars {
 }
 
 export function renderHook(v: HookVars): string {
+  const nsImportLines = v.nsImports.map(imp => `import type { ${imp.ns} } from "${imp.packageName}"`)
+
   const imports = [
     `import { ${v.apiHookName} } from "${v.apiImportPath}"`,
-    v.needsNsImport ? `import type { ${v.ns} } from "${v.sdkPackageName}"` : '',
+    ...nsImportLines,
     v.isInfinite
       ? `import type { UseInfiniteDataLoaderConfig } from "${v.dataLoaderPackage}"
 import { useInfiniteDataLoader } from "${v.dataLoaderPackage}"`

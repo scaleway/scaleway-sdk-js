@@ -13,10 +13,22 @@ export interface QueryMethod {
   protoName: string
   paramsType: string
   returnType: string
+  /**
+   * Package + version path where the return type lives
+   * (e.g. '@scaleway/sdk-rdb/v1').
+   * When omitted, the type is assumed to come from the current package.
+   */
+  returnTypeNamespace?: string
   isList: boolean
   paginationType?: 'offset' | 'cursor' | 'none'
   pageParamKey?: string
   listItemType?: string
+  /**
+   * Package + version path where the list item type lives
+   * (e.g. '@scaleway/sdk-rdb/v1').
+   * When omitted, the type is assumed to come from the current package.
+   */
+  listItemTypeNamespace?: string
   nextPageField?: string
   isPrivate: boolean
   description?: string
