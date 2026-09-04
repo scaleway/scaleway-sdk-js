@@ -44,7 +44,7 @@
     "jsdom": "30.0.1",
     "nano-staged": "1.0.2",
     "oxfmt": "0.61.0",
-    "oxlint": "1.75.0",
+    "oxlint": "1.80.0",
     "oxlint-tsgolint": "7.0.2001",
     "react": "^19.2.8",
     "read-pkg": "10.1.0",
