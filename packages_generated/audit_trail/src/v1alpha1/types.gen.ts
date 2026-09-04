@@ -4,6 +4,12 @@ import type { Decimal, Money, ServiceInfo, Region as ScwRegion, ScwFile, TimeSer
 import type {CountryCode as StdCountryCode,} from '@scaleway/sdk-std'
 
 
+export type Action =
+  | 'unknown_action'
+  | 'create'
+  | 'update'
+  | 'delete'
+
 export type AlertRuleStatus =
   | 'unknown_status'
   | 'enabled'
@@ -529,7 +535,7 @@ export interface Resource {
   updatedAt?: Date
   deletedAt?: Date
   name?: string
-  action?: string
+  action?: Action
   /**
    * @deprecated 
    *

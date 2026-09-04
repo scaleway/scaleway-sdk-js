@@ -18,6 +18,7 @@ import {
   unmarshalDatabaseBackup,
   unmarshalListDatabaseBackupsResponse,
   unmarshalListDatabasesResponse,
+  unmarshalListVersionsResponse,
   marshalRestoreDatabaseFromBackupRequest,
   marshalUpdateDatabaseRequest,
 } from './marshalling.gen.js'
@@ -33,6 +34,8 @@ import type {
   ListDatabaseBackupsResponse,
   ListDatabasesRequest,
   ListDatabasesResponse,
+  ListVersionsRequest,
+  ListVersionsResponse,
   RestoreDatabaseFromBackupRequest,
   UpdateDatabaseRequest,
 } from './types.gen.js'
@@ -254,6 +257,30 @@ export class API extends ParentAPI {
       },
       unmarshalDatabaseBackup,
     )
+
+  
+  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}) =>
+    this.client.fetch<ListVersionsResponse>(
+      {
+        method: 'GET',
+        path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions`,
+        urlParams: urlParams(
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['version', request.version],
+        ),
+      },
+      unmarshalListVersionsResponse,
+    )
+  
+  /**
+   * List available PostgreSQL major versions.
+   *
+   * @param request - The request {@link ListVersionsRequest}
+   * @returns A Promise of ListVersionsResponse
+   */
+  listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
+    enrichForPagination('versions', this.pageOfListVersions, request)
 
   
 }

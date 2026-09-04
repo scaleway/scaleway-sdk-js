@@ -5,18 +5,13 @@
  * Variables are passed as typed objects, giving IDE support and type safety.
  */
 
-interface NsImport {
-  /** Exported namespace, e.g. 'Rdbv1'. */
-  ns: string
-  /** Public package name for imports, e.g. '@scaleway/sdk-rdb'. */
-  packageName: string
-}
+import type { ResolvedNamespace } from './namespace-resolver.ts'
 
 interface HookVars {
   apiHookName: string
   apiImportPath: string
   /** Namespace imports needed by this hook (deduplicated by package name). */
-  nsImports: NsImport[]
+  nsImports: ResolvedNamespace[]
   dataLoaderPackage: string
   generatedComment: string
   hookName: string

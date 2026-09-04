@@ -74,14 +74,14 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
               // package) are left for that package to claim when it is
               // iterated; if no package claims them, resolveTypeNamespace
               // falls back to the current package's namespace.
-              if (nsPath === `${ownPathPrefix}/${version}` || nsPath.startsWith(`${ownPathPrefix}/`)) {
+              if (nsPath.startsWith(`${ownPathPrefix}/`)) {
                 resolver.set(nsPath, { packageName, ns })
               }
             }
           }
         }
-      } catch {
-        // Ignore errors — the package/version may not be needed for resolution
+      } catch (err) {
+        console.warn(`⚠️  Failed to load metadata for ${packageName}/${version}:`, err instanceof Error ? err.message : err)
       }
     }
   }

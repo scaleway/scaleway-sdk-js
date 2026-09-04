@@ -45,6 +45,7 @@ function resolveNames(
   const apiImportPath = `${config.imports.apiSdkPath}/${lowerCaseFirst(apiImportName)}`
 
   const ns = capitalize(folderName)
+  const selfNs: ResolvedNamespace = { packageName: sdkPackageName, ns }
 
   // Resolve the namespace for the return type
   const returnNsInfo = resolveTypeNamespace(method.returnTypeNamespace, sdkPackageName, ns, namespaceResolver)
@@ -57,6 +58,7 @@ function resolveNames(
     apiImportPath,
     sdkPackageName,
     ns,
+    selfNs,
     paramsType: nsType(ns, method.paramsType, rawTypes),
     returnType,
     returnNsInfo,
@@ -85,7 +87,7 @@ export function generateQueryHook(
     nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
   }
   if (hasParams && !n.rawTypes.has(method.paramsType)) {
-    nsImports.set(sdkPackageName, { packageName: sdkPackageName, ns: n.ns })
+    nsImports.set(sdkPackageName, n.selfNs)
   }
 
   const keyArray = hasParams
@@ -131,7 +133,7 @@ export function generateAllQueryHook(
   // Collect namespace imports: params type, return type (if used), and list item type
   const nsImports = new Map<string, ResolvedNamespace>()
   if (!n.rawTypes.has(method.paramsType)) {
-    nsImports.set(sdkPackageName, { packageName: sdkPackageName, ns: n.ns })
+    nsImports.set(sdkPackageName, n.selfNs)
   }
   if (!n.rawTypes.has(method.returnType)) {
     nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
@@ -173,7 +175,7 @@ export function generateInfiniteQueryHook(
   // Collect namespace imports: params type and return type
   const nsImports = new Map<string, ResolvedNamespace>()
   if (!n.rawTypes.has(method.paramsType)) {
-    nsImports.set(sdkPackageName, { packageName: sdkPackageName, ns: n.ns })
+    nsImports.set(sdkPackageName, n.selfNs)
   }
   if (!n.rawTypes.has(method.returnType)) {
     nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
