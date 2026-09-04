@@ -258,6 +258,7 @@ const unmarshalPrivateNetworkInterfaceSummary = (data: unknown): PrivateNetworkI
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as PrivateNetworkInterfaceSummary
 }
 
@@ -295,6 +296,7 @@ const unmarshalSecurityGroupSummary = (data: unknown): SecurityGroupSummary => {
     stateless: data.stateless,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as SecurityGroupSummary
 }
 
@@ -400,6 +402,7 @@ const unmarshalServerSummary = (data: unknown): ServerSummary => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as ServerSummary
 }
 
@@ -558,6 +561,7 @@ export const unmarshalPrivateNetworkInterface = (data: unknown): PrivateNetworkI
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as PrivateNetworkInterface
 }
 

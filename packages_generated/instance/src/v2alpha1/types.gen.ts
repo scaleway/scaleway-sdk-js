@@ -620,6 +620,10 @@ export interface PrivateNetworkInterfaceSummary {
    * Last update timestamp of the private network interface.
    */
   updatedAt?: Date
+  /**
+   * Zone in which the network interface is located.
+   */
+  zone: ScwZone
 }
 
 
@@ -672,6 +676,10 @@ export interface SecurityGroupSummary {
    * Last update timestamp of the security group.
    */
   updatedAt?: Date
+  /**
+   * Zone in which the security group is located.
+   */
+  zone: ScwZone
 }
 
 
@@ -760,6 +768,10 @@ export interface ServerSummary {
    * Whether the server is in rescue mode.
    */
   rescueMode: boolean
+  /**
+   * Zone in which the server is located.
+   */
+  zone: ScwZone
 }
 
 
@@ -2185,6 +2197,10 @@ export interface PrivateNetworkInterface {
    * Last update timestamp of the private network interface.
    */
   updatedAt?: Date
+  /**
+   * Zone in which the network interface is located.
+   */
+  zone: ScwZone
 }
 
 
