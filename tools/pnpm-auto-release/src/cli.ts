@@ -115,13 +115,11 @@ function main() {
   // `pnpm publish -r` skips versions already on the registry, so retries
   // are idempotent and only publish what's missing.
   if (!skipPublish) {
-    const user = process.env['NPM_REGISTRY_USER']
-    const passwd = process.env['NPM_REGISTRY_PASSWD']
-    if (registry && user && passwd) {
-      const host = registry.replace(/^https?:\/\//, '')
-      const auth = Buffer.from(`${user}:${passwd}`).toString('base64')
+    const token = process.env['NODE_AUTH_TOKEN'] || process.env['NPM_TOKEN']
+    if (token) {
+      const host = registry ? registry.replace(/^https?:\/\//, '') : 'registry.npmjs.org'
       const npmrcPath = join(root, '.npmrc')
-      appendFileSync(npmrcPath, `\n//${host}/:_auth=${auth}\n`)
+      appendFileSync(npmrcPath, `\n//${host}/:_authToken=${token}\n`)
       logger(`[release] authenticated to ${host}`)
     }
     const flag = registry ? ` --registry ${registry}` : ''

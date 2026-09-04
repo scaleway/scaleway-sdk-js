@@ -1,5 +1,34 @@
 # Change Log
 
+## 2.25.0
+
+### Minor Changes
+
+- feat(audit_trail): replace action string by enum (#3302)
+
+## 2.25.0
+
+### Minor Changes
+
+- feat(audit_trail): replace action string by enum (#3302)
+
+## 2.25.0
+
+### Minor Changes
+
+- feat(audit_trail): replace action string by enum (#3302)
+
+## 2.25.0
+
+### Minor Changes
+
+- feat(audit_trail): replace action string by enum (#3302)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.7.1
+
 ## 2.24.0
 
 ### Minor Changes

@@ -1,5 +1,34 @@
 # Change Log
 
+## 2.12.0
+
+### Minor Changes
+
+- feat(lb): display doc for host backend field (#3307)
+
+## 2.12.0
+
+### Minor Changes
+
+- feat(lb): display doc for host backend field (#3307)
+
+## 2.12.0
+
+### Minor Changes
+
+- feat(lb): display doc for host backend field (#3307)
+
+## 2.12.0
+
+### Minor Changes
+
+- feat(lb): display doc for host backend field (#3307)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.7.1
+
 ## 2.11.0
 
 ### Minor Changes

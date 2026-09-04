@@ -1,5 +1,50 @@
 # Change Log
 
+## 2.16.0
+
+### Minor Changes
+
+- feat(instance): add support  (#3308)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+## 2.16.0
+
+### Minor Changes
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+- feat(instance): add support  (#3308)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+## 2.16.0
+
+### Minor Changes
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- feat(instance): add support  (#3308)
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+## 2.16.0
+
+### Minor Changes
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- feat(instance): add support  (#3308)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.7.1
+
 ## 2.15.0
 
 ### Minor Changes

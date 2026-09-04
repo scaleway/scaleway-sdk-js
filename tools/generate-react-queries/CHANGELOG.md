@@ -1,5 +1,29 @@
 # Change Log
 
+## 0.6.0
+
+### Minor Changes
+
+- fix(generate-react-queries): resolve cross-package type namespaces correctly (#3301)
+
+## 0.6.0
+
+### Minor Changes
+
+- fix(generate-react-queries): resolve cross-package type namespaces correctly (#3301)
+
+## 0.6.0
+
+### Minor Changes
+
+- fix(generate-react-queries): resolve cross-package type namespaces correctly (#3301)
+
+## 0.6.0
+
+### Minor Changes
+
+- fix(generate-react-queries): resolve cross-package type namespaces correctly (#3301)
+
 ## 0.5.0
 
 ### Minor Changes

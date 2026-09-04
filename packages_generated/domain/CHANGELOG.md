@@ -1,5 +1,34 @@
 # Change Log
 
+## 2.12.0
+
+### Minor Changes
+
+- feat(domain): add auto renew at domain creation (#3309)
+
+## 2.12.0
+
+### Minor Changes
+
+- feat(domain): add auto renew at domain creation (#3309)
+
+## 2.12.0
+
+### Minor Changes
+
+- feat(domain): add auto renew at domain creation (#3309)
+
+## 2.12.0
+
+### Minor Changes
+
+- feat(domain): add auto renew at domain creation (#3309)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.7.1
+
 ## 2.11.0
 
 ### Minor Changes

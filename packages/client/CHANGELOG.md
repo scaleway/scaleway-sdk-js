@@ -1,5 +1,29 @@
 # Change Log
 
+## 2.7.0
+
+### Minor Changes
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+## 2.7.0
+
+### Minor Changes
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+## 2.7.0
+
+### Minor Changes
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+## 2.7.0
+
+### Minor Changes
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
 ## 2.6.0
 
 ### Minor Changes
