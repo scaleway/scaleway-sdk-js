@@ -11,7 +11,7 @@ engineStrict: true
 catalog:
   vite: 8.2.0
   vitest: 4.1.10
-  '@types/react': 19.2.17
+  '@types/react': 19.2.18
   '@types/node': 26.1.2
   '@scaleway/random-name': 6.0.2
 
