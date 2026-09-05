@@ -6,6 +6,8 @@ export interface ScwRequest {
   body?: string
   urlParams?: URLSearchParams
   responseType?: 'json' | 'text' | 'blob'
+  /** An {@link AbortSignal} to cancel the request. */
+  signal?: AbortSignal
 }
 
 /**
