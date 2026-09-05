@@ -1,3 +1,4 @@
+import { AbortError } from '../../scw/fetch/abort-error.js'
 import { sleep } from './sleep.js'
 
 const DEFAULT_TIMEOUT_SECONDS = 300
@@ -87,8 +88,9 @@ export function* createExponentialBackoffStrategy(minDelay: number, maxDelay: nu
  * @param retry - The function to retry logic between each interval
  * @param strategy - A generated interval strategy iterator
  * @param timeout - The maximum time elapsed before timeout error
+ * @param signal - An {@link AbortSignal} to cancel the polling loop
  *
- * @throws An timeout exception or error thrown by the logic being run
+ * @throws An timeout exception, an {@link AbortError} or error thrown by the logic being run
  *
  * @internal
  */
@@ -96,10 +98,12 @@ export const tryAtIntervals = async <T>(
   retry: Retry<T>,
   strategy: IntervalStrategy,
   timeout: number = DEFAULT_TIMEOUT_SECONDS,
+  signal?: AbortSignal,
 ): Promise<T> => {
   const timeoutTimestamp = Date.now() + timeout * 1000
   let retryCount = 0
   while (Date.now() <= timeoutTimestamp) {
+    if (signal?.aborted) throw new AbortError()
     retryCount += 1
     const delay = strategy.next(retryCount).value * 1000
     // Break if timeout has been reached
@@ -151,6 +155,10 @@ export interface WaitForOptions<T> {
    * @defaultValue Waits for non-transient value.
    */
   stop?: WaitForStopCondition<T>
+  /**
+   * An {@link AbortSignal} to cancel the polling loop.
+   */
+  signal?: AbortSignal
 }
 
 type ResourceFetcher<T, R> = (request: R) => Promise<T>
@@ -189,4 +197,5 @@ export const waitForResource = <R, T>(
     },
     strategy,
     options?.timeout,
+    options?.signal,
   )
