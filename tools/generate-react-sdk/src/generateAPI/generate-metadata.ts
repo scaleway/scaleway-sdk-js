@@ -17,7 +17,11 @@ function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
     return new Map()
   }
 
-  const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
+  const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')) as {
+    dependencies?: Record<string, string>
+    devDependencies?: Record<string, string>
+    peerDependencies?: Record<string, string>
+  }
   const allDeps: Record<string, string> = {
     ...pkgJson.dependencies,
     ...pkgJson.devDependencies,
@@ -37,7 +41,10 @@ function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
 async function loadVersions(packageName: string): Promise<string[]> {
   try {
     const resolvedPath = require.resolve(`${packageName}/metadata`)
-    const metadataModule = await import(resolvedPath)
+    const metadataModule = (await import(resolvedPath)) as {
+      pkgMetadata?: { versions?: string[] }
+      default?: { versions?: string[] }
+    }
     const versions = metadataModule?.pkgMetadata?.versions || metadataModule?.default?.versions || []
     return versions
   } catch (error) {

@@ -56,7 +56,7 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
     }
 
     try {
-      const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
+      const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')) as { name?: string }
       if (pkgJson.name) {
         packages.set(pkgJson.name, dirPath)
       }
@@ -76,7 +76,11 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
  * This is the generic path — works with node_modules, pnpm workspaces, etc.
  */
 function discoverFromDependencies(packageNameFilter: string): Map<string, string> {
-  const pkgJson = JSON.parse(readFileSync(resolve('package.json'), 'utf-8'))
+  const pkgJson = JSON.parse(readFileSync(resolve('package.json'), 'utf-8')) as {
+    dependencies?: Record<string, string>
+    devDependencies?: Record<string, string>
+    peerDependencies?: Record<string, string>
+  }
 
   const allDeps: Record<string, string> = {
     ...pkgJson.dependencies,
@@ -153,14 +157,14 @@ export async function loadMetadata(
 ): Promise<QueriesMetadata> {
   const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
   const metadataPath = join(pkgDir, 'dist', version, metadataJsFile)
-  const module = await import(metadataPath)
+  const module = (await import(metadataPath)) as { queriesMetadata: QueriesMetadata }
   // Deep clone to avoid mutating the cached module singleton across multiple calls
   const metadata: QueriesMetadata = structuredClone(module.queriesMetadata)
 
   // Load utils-metadata if it exists (hand-written, for api.utils.ts methods)
   const utilsMetadataPath = join(pkgDir, 'dist', version, 'utils-metadata.js')
   if (existsSync(utilsMetadataPath)) {
-    const utilsModule = await import(utilsMetadataPath)
+    const utilsModule = (await import(utilsMetadataPath)) as { queriesMetadata: QueriesMetadata }
     const utilsMetadata: QueriesMetadata = structuredClone(utilsModule.queriesMetadata)
     if (utilsMetadata?.services) {
       // Merge utils methods into matching services by apiClass to avoid duplicate services
