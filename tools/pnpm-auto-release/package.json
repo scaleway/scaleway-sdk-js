@@ -21,7 +21,7 @@
     "@types/node": "catalog:"
   },
   "engines": {
-    "node": ">=22.23.1",
-    "pnpm": ">=11.25.0"
+    "node": ">=22.x",
+    "pnpm": ">=11.x"
   }
 }
