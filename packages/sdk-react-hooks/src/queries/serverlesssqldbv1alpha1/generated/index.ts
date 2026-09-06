@@ -8,4 +8,7 @@ export { useServerlessSqldbv1alpha1APIGetDatabaseBackupQuery } from "./useServer
 export { useServerlessSqldbv1alpha1APIListDatabaseBackupsQuery } from "./useServerlessSqldbv1alpha1APIListDatabaseBackupsQuery"
 export { useServerlessSqldbv1alpha1APIListDatabaseBackupsInfiniteQuery } from "./useServerlessSqldbv1alpha1APIListDatabaseBackupsInfiniteQuery"
 export { useServerlessSqldbv1alpha1APIListDatabaseBackupsAllQuery } from "./useServerlessSqldbv1alpha1APIListDatabaseBackupsAllQuery"
+export { useServerlessSqldbv1alpha1APIListVersionsQuery } from "./useServerlessSqldbv1alpha1APIListVersionsQuery"
+export { useServerlessSqldbv1alpha1APIListVersionsInfiniteQuery } from "./useServerlessSqldbv1alpha1APIListVersionsInfiniteQuery"
+export { useServerlessSqldbv1alpha1APIListVersionsAllQuery } from "./useServerlessSqldbv1alpha1APIListVersionsAllQuery"
 export { useServerlessSqldbv1alpha1APIReload } from "./useServerlessSqldbv1alpha1APIReload"

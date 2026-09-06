@@ -82,8 +82,5 @@
   },
   "devDependencies": {
     "@repo/configs": "workspace:^"
-  },
-  "engines": {
-    "node": ">=20.20.2"
   }
 }

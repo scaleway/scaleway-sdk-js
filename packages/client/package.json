@@ -36,8 +36,5 @@
   "devDependencies": {
     "@repo/configs": "workspace:^",
     "@types/node": "catalog:"
-  },
-  "engines": {
-    "node": ">=20.20.2"
   }
 }
