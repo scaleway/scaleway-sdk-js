@@ -47,8 +47,5 @@
   },
   "peerDependencies": {
     "@scaleway/sdk-client": "workspace:^"
-  },
-  "engines": {
-    "node": ">=20.20.2"
   }
 }
