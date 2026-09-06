@@ -3,6 +3,11 @@ packages:
   - 'packages_generated/*'
   - 'tools/*'
 
+tasks:
+  typecheck:
+    dependsOn:
+      - build
+
 savePrefix: ''
 strictPeerDependencies: false
 autoInstallPeers: true

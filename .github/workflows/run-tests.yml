@@ -21,7 +21,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --no-frozen-lockfile
       # need to build tools and install to make the bin available
-      - run: pnpm turbo build "--filter=./tools/*"
+      - run: pnpm --filter "./tools/*" run build
       - run: rm -rf node_modules && pnpm install
       - run: pnpm typecheck
 
@@ -36,10 +36,9 @@ jobs:
           node-version-file: .nvmrc
           check-latest: true
           cache: 'pnpm'
-      - run:
-          pnpm install --no-frozen-lockfile
+      - run: pnpm install --no-frozen-lockfile
           # need to build tools and install to make the bin available
-      - run: pnpm turbo build "--filter=./tools/*"
+      - run: pnpm --filter "./tools/*" run build
       - run: rm -rf node_modules && pnpm install
       - run: pnpm build
       - run: pnpm lint
@@ -63,10 +62,9 @@ jobs:
           node-version: ${{ matrix.node }}
           check-latest: true
           cache: 'pnpm'
-      - run:
-          pnpm install --no-frozen-lockfile
+      - run: pnpm install --no-frozen-lockfile
           # need to build tools and install to make the bin available
-      - run: pnpm turbo build "--filter=./tools/*" --force
+      - run: pnpm --filter "./tools/*" run build
       # relinks bins without reinstalling
       - run: rm -rf node_modules && pnpm install
       - run: pnpm build

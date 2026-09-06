@@ -3,7 +3,7 @@ WORKDIR = $(shell pwd)
 LIBRARIES = $(shell find packages packages_generated -mindepth 1 -maxdepth 1 -type d)
 
 build:
-	pnpm turbo build
+	pnpm -r run build
 
 install-dependencies:
 	pnpm install --no-frozen-lockfile
