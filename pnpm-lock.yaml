@@ -265,8 +265,8 @@ importers:
         specifier: 4.1.0
         version: 4.1.0(encoding@0.1.13)
       esbuild-plugin-browserslist:
-        specifier: 3.0.2
-        version: 3.0.2(browserslist@4.28.9)(esbuild@0.28.2)(supports-color@7.2.0)
+        specifier: 4.0.0
+        version: 4.0.0(browserslist@4.28.9)(esbuild@0.28.2)(supports-color@7.2.0)
       jsdom:
         specifier: 30.0.1
         version: 30.0.1
@@ -2800,9 +2800,9 @@ packages:
   es-module-lexer@2.1.0:
     resolution: {integrity: sha512-n27zTYMjYu1aj4MjCWzSP7G9r75utsaoc8m61weK+W8JMBGGQybd43GstCXZ3WNmSFtGT9wi59qQTW6mhTR5LQ==}
 
-  esbuild-plugin-browserslist@3.0.2:
-    resolution: {integrity: sha512-8BeCOu90HJXOnHuXwRySBsEbBlJcoMQi9QeGCygliZ3NhnMl7J43GiMtoiCAEl9BZf+oyMXlwg1+hteAkRY1kQ==}
-    engines: {node: ^20.19.0 || ^22.12.0 || >23.0.0}
+  esbuild-plugin-browserslist@4.0.0:
+    resolution: {integrity: sha512-2NW9nRdQMuGc9/rTARJl45xTeUVAiC3FKWypXSQwjZavr9aglbPufRWsWQPgOx1Ln7X22tFW/VUcyUeGabwvmA==}
+    engines: {node: ^22.12.0 || >=24.0.0}
     peerDependencies:
       browserslist: ^4.28.2
       esbuild: ~0.28.0
@@ -4492,7 +4492,7 @@ snapshots:
 
   es-module-lexer@2.1.0: {}
 
-  esbuild-plugin-browserslist@3.0.2(browserslist@4.28.9)(esbuild@0.28.2)(supports-color@7.2.0):
+  esbuild-plugin-browserslist@4.0.0(browserslist@4.28.9)(esbuild@0.28.2)(supports-color@7.2.0):
     dependencies:
       browserslist: 4.28.9
       debug: 4.4.3(supports-color@7.2.0)
