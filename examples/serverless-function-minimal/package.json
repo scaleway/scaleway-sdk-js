@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "serverless-scaleway-functions": "0.4.17",
+    "serverless-scaleway-functions": "0.5.1",
     "typescript": "7.0.2"
   }
 }
