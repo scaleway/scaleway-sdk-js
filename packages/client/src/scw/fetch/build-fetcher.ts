@@ -34,6 +34,7 @@ export const buildRequest = (request: Readonly<ScwRequest>, settings: Readonly<S
       ...request.headers,
     },
     method: request.method,
+    signal: request.signal,
   })
 }
 

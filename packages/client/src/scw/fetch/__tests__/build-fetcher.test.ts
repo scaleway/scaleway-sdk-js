@@ -67,6 +67,14 @@ describe(`buildRequest`, () => {
     const fReq = buildRequest(mReq, DEFAULT_SETTINGS)
     expect(fReq.url).toBe('https://api.scaleway.com/undefined?param1=value1&param2=value2')
   })
+
+  it(`wires the AbortSignal to the Request`, () => {
+    const controller = new AbortController()
+    const fReq = buildRequest({ ...SCW_POST_REQUEST, signal: controller.signal }, DEFAULT_SETTINGS)
+    expect(fReq.signal.aborted).toBe(false)
+    controller.abort()
+    expect(fReq.signal.aborted).toBe(true)
+  })
 })
 
 describe(`buildFetcher (mock)`, () => {

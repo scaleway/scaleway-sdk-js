@@ -117,6 +117,21 @@ describe('tryAtIntervals', () => {
     const result = await tryAtIntervals(mLogic, zeroIntervalStrat)
     expect(result.doneIterations).toBe(3)
   })
+
+  it('throws an AbortError when the signal is already aborted', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    await expect(tryAtIntervals(mockLogic(3, 0), zeroIntervalStrat, 1, controller.signal)).rejects.toThrow(
+      'The operation was aborted',
+    )
+  })
+
+  it('throws an AbortError when the signal aborts mid-loop', async () => {
+    const controller = new AbortController()
+    const result = tryAtIntervals(mockLogic(10, 0), zeroIntervalStrat, 5, controller.signal)
+    controller.abort()
+    await expect(result).rejects.toThrow('The operation was aborted')
+  })
 })
 
 describe('waitForResource', () => {
@@ -151,5 +166,18 @@ describe('waitForResource', () => {
     )
 
     return expect(result).rejects.toThrow()
+  })
+
+  it('rejects with AbortError when the signal is aborted', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    const result = waitForResource(
+      res => Promise.resolve(!['transient-one', 'transient-two'].includes(res.status)),
+      () => Promise.resolve({ message: 'Still processing.', status: 'transient-two' }),
+      { resourceId: 'random-uuid' },
+      { maxDelay: 1, minDelay: 1, signal: controller.signal },
+    )
+
+    await expect(result).rejects.toThrow('The operation was aborted')
   })
 })
