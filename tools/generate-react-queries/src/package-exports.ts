@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Package.json exports update — so consumers can import e.g. @scaleway/sdk-react-hooks/instancev1
  */

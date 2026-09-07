@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { execSync } from 'node:child_process'
 import type { Dirent } from 'node:fs'
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
