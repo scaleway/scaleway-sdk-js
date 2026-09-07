@@ -10,6 +10,21 @@ import { generateType } from './generateType.ts'
 const directoryOfSrcFolder = resolve('./')
 const require = createRequire(resolve('./package.json'))
 
+type PackageJson = {
+  dependencies?: Record<string, string>
+  devDependencies?: Record<string, string>
+  peerDependencies?: Record<string, string>
+}
+
+type MetadataModule = {
+  pkgMetadata?: { versions?: string[] }
+  default?: { versions?: string[] }
+}
+
+const isPackageJson = (value: unknown): value is PackageJson => typeof value === 'object' && value !== null
+
+const isMetadataModule = (value: unknown): value is MetadataModule => typeof value === 'object' && value !== null
+
 function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
   const pkgJsonPath = resolve('package.json')
   if (!existsSync(pkgJsonPath)) {
@@ -17,16 +32,14 @@ function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
     return new Map()
   }
 
-  const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')) as {
-    dependencies?: Record<string, string>
-    devDependencies?: Record<string, string>
-    peerDependencies?: Record<string, string>
-  }
-  const allDeps: Record<string, string> = {
-    ...pkgJson.dependencies,
-    ...pkgJson.devDependencies,
-    ...pkgJson.peerDependencies,
-  }
+  const pkgJson: unknown = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
+  const allDeps: Record<string, string> = isPackageJson(pkgJson)
+    ? {
+        ...pkgJson.dependencies,
+        ...pkgJson.devDependencies,
+        ...pkgJson.peerDependencies,
+      }
+    : {}
 
   const packages = new Map<string, string>()
   for (const [name] of Object.entries(allDeps)) {
@@ -41,11 +54,11 @@ function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
 async function loadVersions(packageName: string): Promise<string[]> {
   try {
     const resolvedPath = require.resolve(`${packageName}/metadata`)
-    const metadataModule = (await import(resolvedPath)) as {
-      pkgMetadata?: { versions?: string[] }
-      default?: { versions?: string[] }
-    }
-    const versions = metadataModule?.pkgMetadata?.versions || metadataModule?.default?.versions || []
+    const metadataModule: unknown = await import(resolvedPath)
+    const versions =
+      (isMetadataModule(metadataModule) && metadataModule.pkgMetadata?.versions) ||
+      (isMetadataModule(metadataModule) && metadataModule.default?.versions) ||
+      []
     return versions
   } catch (error) {
     stdout.write(`⚠️  Could not load metadata from ${packageName}: ${error}\n`)
