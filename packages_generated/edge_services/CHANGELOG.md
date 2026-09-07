@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.20.1
+
+### Patch Changes
+
+- Updated dependencies
+
+
 ## 2.20.0
 
 ### Minor Changes

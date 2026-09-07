@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.7.1
+
+### Patch Changes
+
+- Updated dependencies
+
+
 ## 1.7.0
 
 ### Minor Changes
