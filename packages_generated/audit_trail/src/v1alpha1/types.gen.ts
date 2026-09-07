@@ -21,10 +21,19 @@ export type AuthenticationEventFailureReason =
   | 'unknown_failure_reason'
   | 'invalid_mfa'
   | 'invalid_password'
+  | 'invalid_captcha'
+  | 'invalid_authentication_code'
+  | 'invalid_passkey'
+  | 'passkey_uv_not_met'
+  | 'passkey_uv_not_verified'
+  | 'expired_session'
+  | 'authentication_code_required'
+  | 'mfa_required'
 
 export type AuthenticationEventMFAType =
   | 'unknown_mfa_type'
   | 'totp'
+  | 'webauthn'
 
 export type AuthenticationEventMethod =
   | 'unknown_method'
@@ -32,6 +41,7 @@ export type AuthenticationEventMethod =
   | 'authentication_code'
   | 'oauth2'
   | 'saml'
+  | 'passkey'
 
 export type AuthenticationEventOrigin =
   | 'unknown_origin'
