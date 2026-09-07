@@ -39,7 +39,7 @@ export const renderTemplate = (template: string, params: Record<string, string>)
 
 export const escapeRegExp = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-export const renderTemplatePackageJson = (template: string, params: Record<string, string>) => {
+export const renderTemplatePackageJson = (template: string, params: Record<string, string>): unknown => {
   let result = template
   for (const [key, value] of Object.entries(params)) {
     const placeholder = `{{${key}}}`
@@ -47,7 +47,8 @@ export const renderTemplatePackageJson = (template: string, params: Record<strin
     result = result.replace(new RegExp(placeholder, 'g'), stringValue)
   }
   try {
-    return JSON.parse(result)
+    const parsed: unknown = JSON.parse(result)
+    return parsed
   } catch (error) {
     console.error('Error parsing package.json:', error)
     throw error

@@ -37,8 +37,12 @@ function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
 async function loadVersions(packageName: string): Promise<string[]> {
   try {
     const resolvedPath = require.resolve(`${packageName}/metadata`)
-    const metadataModule = await import(resolvedPath)
-    const versions = metadataModule?.pkgMetadata?.versions || metadataModule?.default?.versions || []
+    const metadataModule: unknown = await import(resolvedPath)
+    const metadata = metadataModule as {
+      pkgMetadata?: { versions?: string[] }
+      default?: { versions?: string[] }
+    }
+    const versions = metadata?.pkgMetadata?.versions || metadata?.default?.versions || []
     return versions
   } catch (error) {
     stdout.write(`⚠️  Could not load metadata from ${packageName}: ${error}\n`)
