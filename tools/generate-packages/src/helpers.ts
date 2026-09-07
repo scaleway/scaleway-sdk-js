@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const upperFirst = (str: string) => str.slice(0, 1).toUpperCase() + str.slice(1, str.length)
 
 const ACRONYMS = new Set(['k8s', 's2s', 'api', 'http', 'https', 'url', 'uri'])

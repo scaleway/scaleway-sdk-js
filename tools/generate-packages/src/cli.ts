@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 import { resolve } from 'node:path'
 import { cwd, exit } from 'node:process'
 import type { ParseArgsConfig } from 'node:util'

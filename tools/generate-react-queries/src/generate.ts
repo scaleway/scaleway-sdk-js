@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Core generation logic — metadata to hook files.
  */

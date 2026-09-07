@@ -22,7 +22,6 @@ export default defineConfig({
   rules: {
     'typescript/no-unsafe-member-access': 'warn',
     'typescript/no-unsafe-assignment': 'warn',
-    'typescript/consistent-type-definitions': 'warn',
     'eslint/no-console': 'warn',
     'eslint/no-continue': 'warn',
     'eslint/no-unused-vars': 'warn',

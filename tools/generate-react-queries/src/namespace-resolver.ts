@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Namespace resolution — maps returnTypeNamespace/listItemTypeNamespace
  * values (e.g. '@scaleway-internal/sdk-rdb/v1') to the public package name
@@ -8,7 +9,7 @@ import { capitalize } from './config.ts'
 import type { ReactQueriesConfig } from './config.ts'
 import { discoverSdkPackages, discoverVersions, loadMetadata } from './discover.ts'
 
-export interface ResolvedNamespace {
+export type ResolvedNamespace = {
   /** Public package name for imports, e.g. '@scaleway/sdk-rdb'. */
   packageName: string
   /** Exported namespace, e.g. 'Rdbv1'. */

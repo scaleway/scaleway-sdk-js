@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { execSync } from 'node:child_process'
 import { appendFileSync, copyFileSync, existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
