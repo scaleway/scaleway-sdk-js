@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Namespace resolution — maps returnTypeNamespace/listItemTypeNamespace
  * values (e.g. '@scaleway-internal/sdk-rdb/v1') to the public package name

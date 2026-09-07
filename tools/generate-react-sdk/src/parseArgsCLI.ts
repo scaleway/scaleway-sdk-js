@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Parse CLI arguments
 
 export const parseArgsCLI = <T extends string[]>({ requiresValueArgs }: { requiresValueArgs?: T }) => {
