@@ -232,30 +232,29 @@ export function generateIndexFile(
     const serviceName = `${capitalize(folderName)}${service.apiClass}`
 
     for (const method of service.methods) {
-      if (skipMethods.has(method.methodName)) continue
-      if (config.filters.skipPrivateMethods && method.isPrivate) continue
-
-      const baseName = capitalize(method.methodName)
-      exports.push(
-        `export { ${config.naming.hookPrefix}${serviceName}${baseName}Query } from "./${config.naming.hookPrefix}${serviceName}${baseName}Query"`,
-      )
-
-      if (method.isList) {
+      if (!skipMethods.has(method.methodName) && !(config.filters.skipPrivateMethods && method.isPrivate)) {
+        const baseName = capitalize(method.methodName)
         exports.push(
-          `export { ${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery"`,
+          `export { ${config.naming.hookPrefix}${serviceName}${baseName}Query } from "./${config.naming.hookPrefix}${serviceName}${baseName}Query"`,
         )
-        if (!(config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
+
+        if (method.isList) {
           exports.push(
-            `export { ${config.naming.hookPrefix}${serviceName}${baseName}AllQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}AllQuery"`,
+            `export { ${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery"`,
+          )
+          if (!(config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
+            exports.push(
+              `export { ${config.naming.hookPrefix}${serviceName}${baseName}AllQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}AllQuery"`,
+            )
+          }
+        }
+
+        if (method.hasWaiter && !config.filters.skipWaiters) {
+          const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
+          exports.push(
+            `export { ${config.naming.hookPrefix}${serviceName}${waiterName}Query } from "./${config.naming.hookPrefix}${serviceName}${waiterName}Query"`,
           )
         }
-      }
-
-      if (method.hasWaiter && !config.filters.skipWaiters) {
-        const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
-        exports.push(
-          `export { ${config.naming.hookPrefix}${serviceName}${waiterName}Query } from "./${config.naming.hookPrefix}${serviceName}${waiterName}Query"`,
-        )
       }
     }
 

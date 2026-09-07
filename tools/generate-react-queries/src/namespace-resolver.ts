@@ -72,17 +72,17 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
         for (const service of metadata.services) {
           for (const method of service.methods) {
             for (const nsPath of [method.returnTypeNamespace, method.listItemTypeNamespace]) {
-              if (!nsPath) continue
-              const normalized = normalizeNsPath(nsPath)
-              if (resolver.has(normalized)) continue
-              // Only register the path as owned by this package when it
-              // actually matches this package's own namespace prefix.
-              // Cross-package references (nsPath belongs to a different
-              // package) are left for that package to claim when it is
-              // iterated; if no package claims them, resolveTypeNamespace
-              // falls back to the current package's namespace.
-              if (normalized.startsWith(`${ownPathPrefix}/`)) {
-                resolver.set(normalized, { packageName, ns })
+              if (nsPath) {
+                const normalized = normalizeNsPath(nsPath)
+                // Only register the path as owned by this package when it
+                // actually matches this package's own namespace prefix.
+                // Cross-package references (nsPath belongs to a different
+                // package) are left for that package to claim when it is
+                // iterated; if no package claims them, resolveTypeNamespace
+                // falls back to the current package's namespace.
+                if (!resolver.has(normalized) && normalized.startsWith(`${ownPathPrefix}/`)) {
+                  resolver.set(normalized, { packageName, ns })
+                }
               }
             }
           }

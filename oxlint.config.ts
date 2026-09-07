@@ -25,7 +25,6 @@ export default defineConfig({
     'typescript/no-unsafe-return': 'warn',
     'typescript/consistent-type-definitions': 'warn',
     'eslint/no-console': 'warn',
-    'eslint/no-continue': 'warn',
     'eslint/max-statements': 'warn',
     'unicorn/catch-error-name': 'warn',
     'unicorn/explicit-length-check': 'warn',
