@@ -47,22 +47,21 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
 
   for (const dir of readdirSync(fullPath)) {
     const dirPath = join(fullPath, dir)
-    if (!statSync(dirPath).isDirectory()) continue
-
-    // Read the actual package name from its package.json
-    const pkgJsonPath = join(dirPath, 'package.json')
-    if (!existsSync(pkgJsonPath)) {
-      console.warn(`  ⚠️  No package.json in ${dirPath}, skipping`)
-      continue
-    }
-
-    try {
-      const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')) as { name?: string }
-      if (pkgJson.name) {
-        packages.set(pkgJson.name, dirPath)
+    if (statSync(dirPath).isDirectory()) {
+      // Read the actual package name from its package.json
+      const pkgJsonPath = join(dirPath, 'package.json')
+      if (existsSync(pkgJsonPath)) {
+        try {
+          const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')) as { name?: string }
+          if (pkgJson.name) {
+            packages.set(pkgJson.name, dirPath)
+          }
+        } catch {
+          console.warn(`  ⚠️  Could not read ${pkgJsonPath}, skipping`)
+        }
+      } else {
+        console.warn(`  ⚠️  No package.json in ${dirPath}, skipping`)
       }
-    } catch {
-      console.warn(`  ⚠️  Could not read ${pkgJsonPath}, skipping`)
     }
   }
 

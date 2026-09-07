@@ -45,12 +45,21 @@ export const AUTHENTICATION_EVENT_FAILURE_REASONS: AuthenticationEventFailureRea
   'unknown_failure_reason',
   'invalid_mfa',
   'invalid_password',
+  'invalid_captcha',
+  'invalid_authentication_code',
+  'invalid_passkey',
+  'passkey_uv_not_met',
+  'passkey_uv_not_verified',
+  'expired_session',
+  'authentication_code_required',
+  'mfa_required',
 ]
 
 /** Lists all values of the enum {@link AuthenticationEventMFAType}. */
 export const AUTHENTICATION_EVENT_MFA_TYPES: AuthenticationEventMFAType[] = [
   'unknown_mfa_type',
   'totp',
+  'webauthn',
 ]
 
 /** Lists all values of the enum {@link AuthenticationEventMethod}. */
@@ -60,6 +69,7 @@ export const AUTHENTICATION_EVENT_METHODS: AuthenticationEventMethod[] = [
   'authentication_code',
   'oauth2',
   'saml',
+  'passkey',
 ]
 
 /** Lists all values of the enum {@link AuthenticationEventOrigin}. */
