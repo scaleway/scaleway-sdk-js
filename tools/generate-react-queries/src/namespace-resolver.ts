@@ -87,10 +87,10 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
             }
           }
         }
-      } catch (err) {
+      } catch (error) {
         console.warn(
           `⚠️  Failed to load metadata for ${packageName}/${version}:`,
-          err instanceof Error ? err.message : err,
+          error instanceof Error ? error.message : error,
         )
       }
     }
