@@ -34,6 +34,10 @@ function normalizePackagePath(packageName: string): string {
   return packageName.replace(/^@scaleway\/sdk-/, '@scaleway-internal/sdk-')
 }
 
+function normalizeNsPath(nsPath: string): string {
+  return nsPath.replace(/^@scaleway\/sdk-/, '@scaleway-internal/sdk-')
+}
+
 /**
  * Build a map of all known namespace paths → { packageName, ns }.
  *
@@ -68,15 +72,17 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
         for (const service of metadata.services) {
           for (const method of service.methods) {
             for (const nsPath of [method.returnTypeNamespace, method.listItemTypeNamespace]) {
-              if (!nsPath || resolver.has(nsPath)) continue
+              if (!nsPath) continue
+              const normalized = normalizeNsPath(nsPath)
+              if (resolver.has(normalized)) continue
               // Only register the path as owned by this package when it
               // actually matches this package's own namespace prefix.
               // Cross-package references (nsPath belongs to a different
               // package) are left for that package to claim when it is
               // iterated; if no package claims them, resolveTypeNamespace
               // falls back to the current package's namespace.
-              if (nsPath.startsWith(`${ownPathPrefix}/`)) {
-                resolver.set(nsPath, { packageName, ns })
+              if (normalized.startsWith(`${ownPathPrefix}/`)) {
+                resolver.set(normalized, { packageName, ns })
               }
             }
           }
@@ -161,7 +167,7 @@ export function resolveTypeNamespace(
     return { packageName: fallbackPackageName, ns: fallbackNs }
   }
 
-  const resolved = resolver.get(typeNamespace)
+  const resolved = resolver.get(normalizeNsPath(typeNamespace))
   if (resolved) return resolved
 
   // Try to derive from the path itself — better than falling back to the
