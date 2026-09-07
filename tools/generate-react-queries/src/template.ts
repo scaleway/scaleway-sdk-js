@@ -7,7 +7,7 @@
 
 import type { ResolvedNamespace } from './namespace-resolver.ts'
 
-interface HookVars {
+type HookVars = {
   apiHookName: string
   apiImportPath: string
   /** Namespace imports needed by this hook (deduplicated by package name). */
@@ -25,7 +25,7 @@ interface HookVars {
   keyArray: string
 }
 
-interface ReloadVars {
+type ReloadVars = {
   dataLoaderPackage: string
   generatedComment: string
   hookName: string

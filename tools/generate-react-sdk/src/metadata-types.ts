@@ -4,7 +4,7 @@
  */
 
 /** A single API method from metadata */
-export interface MetadataMethod {
+export type MetadataMethod = {
   methodName: string
   protoName: string
   paramsType: string
@@ -19,13 +19,13 @@ export interface MetadataMethod {
 }
 
 /** A service class (e.g. "API", "ZonedAPI") from metadata */
-export interface MetadataService {
+export type MetadataService = {
   apiClass: string
   methods: MetadataMethod[]
 }
 
 /** Top-level metadata from metadata.gen.ts */
-export interface Metadata {
+export type Metadata = {
   namespace: string
   version: string
   folderName: string

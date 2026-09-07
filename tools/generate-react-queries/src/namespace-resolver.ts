@@ -8,7 +8,7 @@ import { capitalize } from './config.ts'
 import type { ReactQueriesConfig } from './config.ts'
 import { discoverSdkPackages, discoverVersions, loadMetadata } from './discover.ts'
 
-export interface ResolvedNamespace {
+export type ResolvedNamespace = {
   /** Public package name for imports, e.g. '@scaleway/sdk-rdb'. */
   packageName: string
   /** Exported namespace, e.g. 'Rdbv1'. */
