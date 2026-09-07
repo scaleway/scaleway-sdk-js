@@ -66,7 +66,7 @@ async function loadVersions(packageName: string): Promise<string[]> {
 async function loadMetadataFromFallback(packageName: string, version: string): Promise<Metadata> {
   const pkgDir = join(dirname(resolve('package.json')), 'node_modules', packageName)
   const distMetadataPath = join(pkgDir, 'dist', version, 'metadata.gen.js')
-  const metadataModule = await import(distMetadataPath)
+  const metadataModule: unknown = await import(distMetadataPath)
   return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
 }
 
@@ -74,7 +74,7 @@ async function loadMetadata(packageName: string, version: string): Promise<Metad
   try {
     try {
       const resolvedPath = require.resolve(`${packageName}/${version}/metadata`)
-      const metadataModule = await import(resolvedPath)
+      const metadataModule: unknown = await import(resolvedPath)
       return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
     } catch {
       stdout.write(`⚠️  Error loading metadata from ${packageName}/${version}/metadata \n Using dist fallback \n`)
