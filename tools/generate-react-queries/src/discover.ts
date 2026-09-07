@@ -56,7 +56,7 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
     }
 
     try {
-      const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
+      const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')) as { name?: string }
       if (pkgJson.name) {
         packages.set(pkgJson.name, dirPath)
       }

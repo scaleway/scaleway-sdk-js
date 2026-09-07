@@ -67,7 +67,7 @@ export const loadConfig = async (configPath?: string): Promise<Config> => {
 
   if (!existsSync(resolvedPath)) return resolvePaths(DEFAULT_CONFIG)
 
-  const mod = await import(`file://${resolvedPath}`)
+  const mod = (await import(`file://${resolvedPath}`)) as { default?: Config } & Config
   return resolvePaths(mod.default ?? mod)
 }
 
