@@ -34,6 +34,65 @@ const CUSTOM = {
 
 export type PackagesOptions = { src: string; runInstall?: boolean }
 
+function ensurePackageJson(fullPath: string, productDir: string, templateString: string): void {
+  const packageJsonPath = join(fullPath, 'package.json')
+  if (!existsSync(packageJsonPath)) {
+    const pkg = renderTemplatePackageJson(templateString, { name: snakeToSlug(productDir) })
+    writeFileSync(packageJsonPath, JSON.stringify(pkg, null, 2))
+  }
+}
+
+function writeVersionExports(srcPath: string, indexGenPath: string, productDir: string): void {
+  for (const versionDir of readdirSync(srcPath)) {
+    if (statSync(join(srcPath, versionDir)).isDirectory()) {
+      const exportPath = CUSTOM.PRODUCT_VERSION_EXPORT.has(`${productDir}/${versionDir}`)
+        ? `./${versionDir}/index.js`
+        : `./${versionDir}/index.gen.js`
+      appendFileSync(indexGenPath, `\nexport * as ${snakeToPascal(productDir)}${versionDir} from '${exportPath}'`)
+    }
+  }
+}
+
+function writeMetadataGen(srcPath: string, productDir: string, templateString: string): void {
+  const versionsList = readdirSync(srcPath)
+    .filter(d => statSync(join(srcPath, d)).isDirectory())
+    .map(v => `"${v}"`)
+    .join(', ')
+  writeFileSync(
+    join(srcPath, 'metadata.gen.ts'),
+    renderTemplate(templateString, {
+      name: snakeToSlug(productDir),
+      displayName: snakeToDisplayName(productDir),
+      versions: versionsList,
+    }),
+  )
+}
+
+function copyConfigTemplates(fullPath: string): void {
+  copyFileSync(TEMPLATES.TS_CONFIG, join(fullPath, 'tsconfig.json'))
+  copyFileSync(TEMPLATES.TS_CONFIG_BUILD, join(fullPath, 'tsconfig.build.json'))
+  copyFileSync(TEMPLATES.VITE_CONFIG, join(fullPath, 'vite.config.ts'))
+}
+
+function processProductDir(
+  productDir: string,
+  inputPathDir: string,
+  templateString: string,
+  metadataTsTemplateString: string,
+): void {
+  const fullPath = join(inputPathDir, productDir)
+  if (!statSync(fullPath).isDirectory() || CUSTOM.PRODUCT_EXPORT.has(productDir)) return
+
+  ensurePackageJson(fullPath, productDir, templateString)
+
+  const srcPath = join(fullPath, 'src')
+  const indexGenPath = join(srcPath, 'index.gen.ts')
+  writeFileSync(indexGenPath, AUTO_GENERATE_MESSAGE)
+  writeVersionExports(srcPath, indexGenPath, productDir)
+  writeMetadataGen(srcPath, productDir, metadataTsTemplateString)
+  copyConfigTemplates(fullPath)
+}
+
 /**
  * Generate per-product configuration files from templates.
  *
@@ -51,43 +110,7 @@ export const packages = async ({ src: inputPathDir, runInstall = true }: Package
   const metadataTsTemplateString = readFileSync(TEMPLATES.METADATA_TS, 'utf8')
 
   for (const productDir of readdirSync(inputPathDir)) {
-    const fullPath = join(inputPathDir, productDir)
-    if (statSync(fullPath).isDirectory() && !CUSTOM.PRODUCT_EXPORT.has(productDir)) {
-      const packageJsonPath = join(fullPath, 'package.json')
-      if (!existsSync(packageJsonPath)) {
-        const pkg = renderTemplatePackageJson(templateString, { name: snakeToSlug(productDir) })
-        writeFileSync(packageJsonPath, JSON.stringify(pkg, null, 2))
-      }
-
-      const srcPath = join(fullPath, 'src')
-      const indexGenPath = join(srcPath, 'index.gen.ts')
-      writeFileSync(indexGenPath, AUTO_GENERATE_MESSAGE)
-      for (const versionDir of readdirSync(srcPath)) {
-        if (statSync(join(srcPath, versionDir)).isDirectory()) {
-          const exportPath = CUSTOM.PRODUCT_VERSION_EXPORT.has(`${productDir}/${versionDir}`)
-            ? `./${versionDir}/index.js`
-            : `./${versionDir}/index.gen.js`
-          appendFileSync(indexGenPath, `\nexport * as ${snakeToPascal(productDir)}${versionDir} from '${exportPath}'`)
-        }
-      }
-
-      const versionsList = readdirSync(srcPath)
-        .filter(d => statSync(join(srcPath, d)).isDirectory())
-        .map(v => `"${v}"`)
-        .join(', ')
-      writeFileSync(
-        join(srcPath, 'metadata.gen.ts'),
-        renderTemplate(metadataTsTemplateString, {
-          name: snakeToSlug(productDir),
-          displayName: snakeToDisplayName(productDir),
-          versions: versionsList,
-        }),
-      )
-
-      copyFileSync(TEMPLATES.TS_CONFIG, join(fullPath, 'tsconfig.json'))
-      copyFileSync(TEMPLATES.TS_CONFIG_BUILD, join(fullPath, 'tsconfig.build.json'))
-      copyFileSync(TEMPLATES.VITE_CONFIG, join(fullPath, 'vite.config.ts'))
-    }
+    processProductDir(productDir, inputPathDir, templateString, metadataTsTemplateString)
   }
 
   if (runInstall) {
