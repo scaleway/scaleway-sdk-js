@@ -75,11 +75,11 @@ export const createTags = ({
       const remoteExists = exec(`git ls-remote --tags origin "refs/tags/${tag}"`, { cwd: root }).length > 0
       if (localExists || remoteExists) {
         logger(`[release] tag already exists, skipping: ${tag}`)
-        continue
+      } else {
+        exec(`git tag "${tag}" -m "${tag}"`, { cwd: root })
+        newTags.push(tag)
+        logger(`[release] tag: ${tag}`)
       }
-      exec(`git tag "${tag}" -m "${tag}"`, { cwd: root })
-      newTags.push(tag)
-      logger(`[release] tag: ${tag}`)
     }
   }
   return newTags
@@ -161,18 +161,19 @@ export const createChangesets = ({
 
   for (const line of commits.split('\n').filter(Boolean)) {
     const [sha, subject] = line.split('\u001F')
-    if (!sha) continue
-    const changedFiles = exec(`git diff-tree --no-commit-id --name-only -r ${sha}`, { cwd: root })
-      .split('\n')
-      .filter(Boolean)
+    if (sha) {
+      const changedFiles = exec(`git diff-tree --no-commit-id --name-only -r ${sha}`, { cwd: root })
+        .split('\n')
+        .filter(Boolean)
 
-    const affected = packages.filter(
-      pkg => pkg.relativePath && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)),
-    )
+      const affected = packages.filter(
+        pkg => pkg.relativePath && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)),
+      )
 
-    if (affected.length === 0) continue
-
-    createChangesetForPackages(root, affected, subject || defaultSummary)
-    logger(`[release] changeset (${sha.slice(0, 7)} -> ${affected.length} pkg)`)
+      if (affected.length > 0) {
+        createChangesetForPackages(root, affected, subject || defaultSummary)
+        logger(`[release] changeset (${sha.slice(0, 7)} -> ${affected.length} pkg)`)
+      }
+    }
   }
 }
