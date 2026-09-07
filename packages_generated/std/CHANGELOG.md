@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.8.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(engines): remove node engines (#3336)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-client@2.8.0
+
 ## 2.7.1
 
 ### Patch Changes

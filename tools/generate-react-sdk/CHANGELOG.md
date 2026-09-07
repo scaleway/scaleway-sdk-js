@@ -1,5 +1,17 @@
 # Change Log
 
+## 0.5.0
+
+### Minor Changes
+
+- fix(oxlint): fix typescript/consistent-type-definitions violations (#3359)
+
+- chore(engines): remove node engines (#3336)
+
+- fix(oxlint): fix eslint/no-continue violations (#3363)
+
+- fix(oxlint): fix eslint/no-console violations (#3362)
+
 ## 0.4.0
 
 ### Minor Changes
