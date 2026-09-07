@@ -61,36 +61,36 @@ export const deps = async ({ src, config, dryRun = false }: DepsOptions): Promis
 
   for (const pkg of packages) {
     const srcDir = join(pkg.path, 'src')
-    if (!existsSync(srcDir)) continue
+    if (existsSync(srcDir)) {
+      const imports = new Set<string>()
+      for (const file of getAllGenTsFiles(srcDir)) {
+        const content = readFileSync(file, 'utf8')
+        importRegex.lastIndex = 0
+        let match: RegExpExecArray | null
+        while ((match = importRegex.exec(content)) !== null) {
+          const pkgName = match[1]?.split('/').slice(0, 2).join('/')
+          if (pkgName && pkgMap.has(pkgName) && pkgName !== pkg.packageJson.name) imports.add(pkgName)
+        }
+      }
 
-    const imports = new Set<string>()
-    for (const file of getAllGenTsFiles(srcDir)) {
-      const content = readFileSync(file, 'utf8')
-      importRegex.lastIndex = 0
-      let match: RegExpExecArray | null
-      while ((match = importRegex.exec(content)) !== null) {
-        const pkgName = match[1]?.split('/').slice(0, 2).join('/')
-        if (pkgName && pkgMap.has(pkgName) && pkgName !== pkg.packageJson.name) imports.add(pkgName)
+      const missing = [...imports].filter(imp => !pkg.packageJson.dependencies?.[imp])
+      if (missing.length > 0) {
+        const allDeps = [
+          ...Object.entries(pkg.packageJson.dependencies ?? {}),
+          ...missing.map(d => [d, 'workspace:*'] as const),
+        ]
+        allDeps.sort(([a], [b]) => a.localeCompare(b))
+        pkg.packageJson.dependencies = Object.fromEntries(allDeps)
+
+        if (dryRun) {
+          console.log(`  🔍 DRY RUN: Would add to ${pkg.name}: ${missing.join(', ')}`)
+        } else {
+          writeFileSync(pkg.packageJsonPath, `${JSON.stringify(pkg.packageJson, null, 2)}\n`, 'utf8')
+          console.log(`  ✅ Updated ${pkg.name}: +${missing.length} deps`)
+        }
+        updated++
       }
     }
-
-    const missing = [...imports].filter(imp => !pkg.packageJson.dependencies?.[imp])
-    if (missing.length === 0) continue
-
-    const allDeps = [
-      ...Object.entries(pkg.packageJson.dependencies ?? {}),
-      ...missing.map(d => [d, 'workspace:*'] as const),
-    ]
-    allDeps.sort(([a], [b]) => a.localeCompare(b))
-    pkg.packageJson.dependencies = Object.fromEntries(allDeps)
-
-    if (dryRun) {
-      console.log(`  🔍 DRY RUN: Would add to ${pkg.name}: ${missing.join(', ')}`)
-    } else {
-      writeFileSync(pkg.packageJsonPath, `${JSON.stringify(pkg.packageJson, null, 2)}\n`, 'utf8')
-      console.log(`  ✅ Updated ${pkg.name}: +${missing.length} deps`)
-    }
-    updated++
   }
 
   console.log(`\n📊 Packages updated: ${updated}`)
