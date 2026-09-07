@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.13.0
+
+### Minor Changes
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+- feat(key_manager): add secp256k1 algorithm (#3292)
+
+
 ## 2.12.0
 
 ### Minor Changes

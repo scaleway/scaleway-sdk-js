@@ -1,5 +1,14 @@
 # Change Log
 
+## 2.16.0
+
+### Minor Changes
+
+- feat(instance): add support `zone` (#3308)
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+
 ## 2.15.0
 
 ### Minor Changes

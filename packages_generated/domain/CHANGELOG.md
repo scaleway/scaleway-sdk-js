@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.12.0
+
+### Minor Changes
+
+- feat(domain): add auto renew at domain creation (#3309)
+
+
 ## 2.11.0
 
 ### Minor Changes

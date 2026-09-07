@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.16.1
+
+### Patch Changes
+
+- Updated dependencies
+
+
 ## 2.16.0
 
 ### Minor Changes
