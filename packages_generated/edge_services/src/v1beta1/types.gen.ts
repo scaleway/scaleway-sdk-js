@@ -285,6 +285,11 @@ export interface TLSSecret {
 }
 
 
+export interface WafExclusionRule {
+  ruleId: number
+}
+
+
 export interface RuleHttpMatch {
   /**
    * HTTP methods to filter for. A request using any of these methods will be considered to match the rule. Possible values are `get`, `post`, `put`, `patch`, `delete`, `head`, `options`. All methods will match if none is provided.
@@ -630,6 +635,10 @@ export interface WafStage {
    * One-of ('next'): at most one of 'backendStageId' could be set.
    */
   backendStageId?: string
+  /**
+   * List of OWASP® CRS rule IDs excluded from WAF.
+   */
+  exclusionRules: WafExclusionRule[]
 }
 
 
@@ -1150,6 +1159,10 @@ export type CreateWafStageRequest = {
    * Sensitivity level (`1`,`2`,`3`,`4`) to use when classifying requests as malicious. With a high level, requests are more likely to be classed as malicious, and false positives are expected. With a lower level, requests are more likely to be classed as benign.
    */
   paranoiaLevel: number
+  /**
+   * List of OWASP® CRS rule IDs excluded from WAF.
+   */
+  exclusionRules?: WafExclusionRule[]
   /**
    * ID of the backend stage to forward requests to after the WAF stage.
    *
@@ -2092,6 +2105,10 @@ export type UpdateWafStageRequest = {
    * Sensitivity level (`1`,`2`,`3`,`4`) to use when classifying requests as malicious. With a high level, requests are more likely to be classed as malicious, and false positives are expected. With a lower level, requests are more likely to be classed as benign.
    */
   paranoiaLevel?: number
+  /**
+   * List of OWASP® CRS rule IDs excluded from WAF.
+   */
+  exclusionRules?: WafExclusionRule[]
   /**
    * ID of the backend stage to forward requests to after the WAF stage.
    *
