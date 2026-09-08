@@ -1,5 +1,24 @@
 # Change Log
 
+## 2.8.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(engines): remove node engines (#3336)
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+- feat(client): add AbortSignal / request cancellation support (#3319)
+
+## 2.7.0
+
+### Minor Changes
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+
 ## 2.6.0
 
 ### Minor Changes

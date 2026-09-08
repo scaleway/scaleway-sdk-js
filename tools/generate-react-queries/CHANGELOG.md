@@ -1,5 +1,38 @@
 # Change Log
 
+## 0.8.0
+
+### Minor Changes
+
+- fix(oxlint): fix unicorn/catch-error-name violations (#3366)
+
+## 0.7.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix(oxlint): fix typescript/consistent-type-definitions violations (#3359)
+
+- chore(engines): remove node engines (#3336)
+
+- fix(generate-react-queries): resolve cross-package type namespaces correctly (#3301)
+
+- fix(oxlint): fix eslint/no-continue violations (#3363)
+
+- fix(oxlint): fix typescript/no-unsafe-argument violations (#3355)
+
+- fix(oxlint): fix eslint/no-console violations (#3362)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+## 0.6.0
+
+### Minor Changes
+
+- fix(generate-react-queries): resolve cross-package type namespaces correctly (#3301)
+
+
 ## 0.5.0
 
 ### Minor Changes

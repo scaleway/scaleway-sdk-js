@@ -1,5 +1,27 @@
 # Change Log
 
+## 1.5.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.0
+
+## 1.4.1
+
+### Patch Changes
+
+- Updated dependencies
+
+
 ## 1.4.0
 
 ### Minor Changes

@@ -8,7 +8,7 @@
 // --- Types (mirror metadata.gen.ts structure in each SDK package) ---
 
 /** A single API method that will become a React Query hook. */
-export interface QueryMethod {
+export type QueryMethod = {
   methodName: string
   protoName: string
   paramsType: string
@@ -36,13 +36,13 @@ export interface QueryMethod {
 }
 
 /** A service class (e.g. "API", "ZonedAPI") containing query methods. */
-export interface ServiceMetadata {
+export type ServiceMetadata = {
   apiClass: string
   methods: QueryMethod[]
 }
 
 /** Top-level metadata for one API version (e.g. instance/v1). */
-export interface QueriesMetadata {
+export type QueriesMetadata = {
   namespace: string
   version: string
   folderName: string
@@ -51,7 +51,7 @@ export interface QueriesMetadata {
 
 // --- Config ---
 
-export interface ReactQueriesConfig {
+export type ReactQueriesConfig = {
   /** Where to write generated hook files (relative to CWD). */
   outputDir: string
   /** Subdirectory name for generated hooks inside each namespace folder. */

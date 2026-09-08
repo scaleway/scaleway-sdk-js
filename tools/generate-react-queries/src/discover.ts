@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * SDK package discovery — find packages on disk and load their metadata.
  */

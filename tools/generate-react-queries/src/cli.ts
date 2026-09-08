@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 /**
  * CLI entry point for generating React Query hooks from SDK metadata files.

@@ -1,5 +1,29 @@
 # Change Log
 
+## 2.26.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(audit_trail): replace action string by enum (#3302)
+
+- chore(engines): remove node engines (#3336)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.0
+
+## 2.25.0
+
+### Minor Changes
+
+- feat(audit_trail): replace action string by enum (#3302)
+
+
 ## 2.24.0
 
 ### Minor Changes

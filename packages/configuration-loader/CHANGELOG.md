@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.6.0
+
+### Minor Changes
+
+- chore(engines): remove node engines (#3336)
+
 ## 2.5.0
 
 ### Minor Changes

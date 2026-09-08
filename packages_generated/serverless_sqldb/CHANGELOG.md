@@ -1,5 +1,29 @@
 # Change Log
 
+## 2.13.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(lb): display doc for host backend field (#3307)
+
+- chore(engines): remove node engines (#3336)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.0
+
+## 2.12.0
+
+### Minor Changes
+
+- feat(lb): display doc for host backend field (#3307)
+
+
 ## 2.11.0
 
 ### Minor Changes

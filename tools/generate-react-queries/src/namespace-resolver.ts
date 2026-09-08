@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Namespace resolution — maps returnTypeNamespace/listItemTypeNamespace
  * values (e.g. '@scaleway-internal/sdk-rdb/v1') to the public package name
@@ -8,7 +9,7 @@ import { capitalize } from './config.ts'
 import type { ReactQueriesConfig } from './config.ts'
 import { discoverSdkPackages, discoverVersions, loadMetadata } from './discover.ts'
 
-export interface ResolvedNamespace {
+export type ResolvedNamespace = {
   /** Public package name for imports, e.g. '@scaleway/sdk-rdb'. */
   packageName: string
   /** Exported namespace, e.g. 'Rdbv1'. */
@@ -31,6 +32,10 @@ export interface ResolvedNamespace {
  */
 function normalizePackagePath(packageName: string): string {
   return packageName.replace(/^@scaleway\/sdk-/, '@scaleway-internal/sdk-')
+}
+
+function normalizeNsPath(nsPath: string): string {
+  return nsPath.replace(/^@scaleway\/sdk-/, '@scaleway-internal/sdk-')
 }
 
 /**
@@ -67,23 +72,25 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
         for (const service of metadata.services) {
           for (const method of service.methods) {
             for (const nsPath of [method.returnTypeNamespace, method.listItemTypeNamespace]) {
-              if (!nsPath || resolver.has(nsPath)) continue
-              // Only register the path as owned by this package when it
-              // actually matches this package's own namespace prefix.
-              // Cross-package references (nsPath belongs to a different
-              // package) are left for that package to claim when it is
-              // iterated; if no package claims them, resolveTypeNamespace
-              // falls back to the current package's namespace.
-              if (nsPath.startsWith(`${ownPathPrefix}/`)) {
-                resolver.set(nsPath, { packageName, ns })
+              if (nsPath) {
+                const normalized = normalizeNsPath(nsPath)
+                // Only register the path as owned by this package when it
+                // actually matches this package's own namespace prefix.
+                // Cross-package references (nsPath belongs to a different
+                // package) are left for that package to claim when it is
+                // iterated; if no package claims them, resolveTypeNamespace
+                // falls back to the current package's namespace.
+                if (!resolver.has(normalized) && normalized.startsWith(`${ownPathPrefix}/`)) {
+                  resolver.set(normalized, { packageName, ns })
+                }
               }
             }
           }
         }
-      } catch (err) {
+      } catch (error) {
         console.warn(
           `⚠️  Failed to load metadata for ${packageName}/${version}:`,
-          err instanceof Error ? err.message : err,
+          error instanceof Error ? error.message : error,
         )
       }
     }
@@ -160,7 +167,7 @@ export function resolveTypeNamespace(
     return { packageName: fallbackPackageName, ns: fallbackNs }
   }
 
-  const resolved = resolver.get(typeNamespace)
+  const resolved = resolver.get(normalizeNsPath(typeNamespace))
   if (resolved) return resolved
 
   // Try to derive from the path itself — better than falling back to the

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Parse CLI arguments
 
 export const parseArgsCLI = <T extends string[]>({ requiresValueArgs }: { requiresValueArgs?: T }) => {
@@ -21,9 +22,9 @@ export const parseArgsCLI = <T extends string[]>({ requiresValueArgs }: { requir
         // For arguments that require values, if no value is provided, skip them or use default
         if (requiresValueArgs?.includes(key) && (value === true || value === undefined)) {
           console.log(`⚠️  Warning: --${key} requires a value, using default`)
-          continue
+        } else {
+          cliArgs[key] = value as string | boolean
         }
-        cliArgs[key] = value as string | boolean
       }
     }
   }

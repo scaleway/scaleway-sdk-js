@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Core generation logic — metadata to hook files.
  */
@@ -31,57 +32,40 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
   // Preload namespace resolver for cross-package type references
   const namespaceResolver = await buildNamespaceResolver(config)
 
-  for (const [packageName, pkgDir] of sdkPackages) {
-    if (skipPackages.has(packageName)) {
-      console.log(`⏭️ Skipping ${packageName} (excluded by skipPackages)`)
-      continue
+  const processVersion = async (packageName: string, pkgDir: string, version: string): Promise<void> => {
+    if (isVersionSkipped(packageName, version)) {
+      console.log(`  ⏭️  Skipping ${packageName}/${version} (excluded by skipVersions)`)
+      return
     }
 
-    const versions = discoverVersions(pkgDir, metadataFileName)
+    try {
+      const metadata = await loadMetadata(pkgDir, version, metadataFileName)
 
-    if (versions.length === 0) {
-      console.log(` ⏭️ Skipping ${packageName} (no metadata found)`)
-      continue
-    }
-
-    console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.join(', ')}`)
-
-    for (const version of versions) {
-      if (isVersionSkipped(packageName, version)) {
-        console.log(`  ⏭️  Skipping ${packageName}/${version} (excluded by skipVersions)`)
-        continue
+      if (!metadata?.services) {
+        console.warn(`    ⚠️  Invalid metadata for ${packageName}/${version}, skipping`)
+        return
       }
 
-      try {
-        const metadata = await loadMetadata(pkgDir, version, metadataFileName)
+      const { folderName, services } = metadata
+      const generatedDir = join(config.outputDir, folderName.toLowerCase(), config.generatedPath)
 
-        if (!metadata?.services) {
-          console.warn(`    ⚠️  Invalid metadata for ${packageName}/${version}, skipping`)
-          continue
-        }
+      if (existsSync(generatedDir)) {
+        rmSync(generatedDir, { recursive: true, force: true })
+      }
+      mkdirSync(generatedDir, { recursive: true })
 
-        const { folderName, services } = metadata
-        const generatedDir = join(config.outputDir, folderName.toLowerCase(), config.generatedPath)
+      const servicesToGenerate = services.filter(service => !skipServices.has(service.apiClass))
 
-        if (existsSync(generatedDir)) {
-          rmSync(generatedDir, { recursive: true, force: true })
-        }
-        mkdirSync(generatedDir, { recursive: true })
+      if (servicesToGenerate.length === 0) {
+        console.log(` ⏭️  Skipping ${packageName}/${version}: all services excluded by skipServices`)
+        return
+      }
 
-        const servicesToGenerate = services.filter(service => !skipServices.has(service.apiClass))
+      for (const service of servicesToGenerate) {
+        console.log(`📝 Generating hooks for ${service.apiClass}`)
 
-        if (servicesToGenerate.length === 0) {
-          console.log(` ⏭️  Skipping ${packageName}/${version}: all services excluded by skipServices`)
-          continue
-        }
-
-        for (const service of servicesToGenerate) {
-          console.log(`📝 Generating hooks for ${service.apiClass}`)
-
-          for (const method of service.methods) {
-            if (skipMethods.has(method.methodName)) continue
-            if (config.filters.skipPrivateMethods && method.isPrivate) continue
-
+        for (const method of service.methods) {
+          if (!skipMethods.has(method.methodName) && !(config.filters.skipPrivateMethods && method.isPrivate)) {
             // Standard query hook (e.g. useInstancev1APIGetServerQuery)
             const hookContent = generateQueryHook(method, service, metadata, config, packageName, namespaceResolver)
             const hookFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}Query.ts`
@@ -132,21 +116,39 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
               writeFileSync(join(generatedDir, waiterFileName), waiterContent)
             }
           }
-
-          // One reload hook per service to invalidate all its queries
-          const reloadContent = generateReloadHook(service, metadata, config)
-          const reloadFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}Reload.ts`
-          writeFileSync(join(generatedDir, reloadFileName), reloadContent)
         }
 
-        // Barrel file re-exporting all generated hooks for this namespace
-        const indexContent = generateIndexFile(servicesToGenerate, metadata, config)
-        writeFileSync(join(generatedDir, config.naming.indexFile), indexContent)
+        // One reload hook per service to invalidate all its queries
+        const reloadContent = generateReloadHook(service, metadata, config)
+        const reloadFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}Reload.ts`
+        writeFileSync(join(generatedDir, reloadFileName), reloadContent)
+      }
 
-        console.log(`✅ Generated hooks for ${folderName}`)
-      } catch (error) {
-        console.error(`    ❌ Error loading ${packageName}/${version}/metadata:`, error)
-        throw error
+      // Barrel file re-exporting all generated hooks for this namespace
+      const indexContent = generateIndexFile(servicesToGenerate, metadata, config)
+      writeFileSync(join(generatedDir, config.naming.indexFile), indexContent)
+
+      console.log(`✅ Generated hooks for ${folderName}`)
+    } catch (error) {
+      console.error(`    ❌ Error loading ${packageName}/${version}/metadata:`, error)
+      throw error
+    }
+  }
+
+  for (const [packageName, pkgDir] of sdkPackages) {
+    if (skipPackages.has(packageName)) {
+      console.log(`⏭️ Skipping ${packageName} (excluded by skipPackages)`)
+    } else {
+      const versions = discoverVersions(pkgDir, metadataFileName)
+
+      if (versions.length === 0) {
+        console.log(` ⏭️ Skipping ${packageName} (no metadata found)`)
+      } else {
+        console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.join(', ')}`)
+
+        for (const version of versions) {
+          await processVersion(packageName, pkgDir, version)
+        }
       }
     }
   }

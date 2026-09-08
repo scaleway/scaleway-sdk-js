@@ -1,5 +1,27 @@
 # Change Log
 
+## 2.23.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(engines): remove node engines (#3336)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.0
+
+## 2.22.1
+
+### Patch Changes
+
+- Updated dependencies
+
+
 ## 2.22.0
 
 ### Minor Changes
