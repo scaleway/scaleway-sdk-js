@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.6.0
+
+### Minor Changes
+
+- fix(oxlint): fix typescript/no-unsafe-return violations (#3358)
+
 ## 0.5.0
 
 ### Minor Changes
