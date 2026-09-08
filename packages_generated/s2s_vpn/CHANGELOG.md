@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.15.0
+
+### Minor Changes
+
+- feat: update generated APIs (#3369)
+
 ## 2.14.0
 
 ### Minor Changes

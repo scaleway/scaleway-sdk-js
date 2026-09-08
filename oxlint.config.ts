@@ -23,7 +23,6 @@ export default defineConfig({
     'typescript/no-unsafe-member-access': 'warn',
     'typescript/no-unsafe-assignment': 'warn',
     'eslint/no-console': 'warn',
-    'eslint/no-unused-vars': 'warn',
     'eslint/max-statements': 'warn',
     'unicorn/explicit-length-check': 'warn',
     // TODO: new errors from @scaleway/oxlint-config 1.x upgrade — fix later

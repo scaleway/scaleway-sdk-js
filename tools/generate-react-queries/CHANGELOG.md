@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.8.0
+
+### Minor Changes
+
+- fix(oxlint): fix unicorn/catch-error-name violations (#3366)
+
 ## 0.7.0
 
 ### Minor Changes
