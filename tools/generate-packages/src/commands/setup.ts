@@ -27,7 +27,7 @@ export type SetupOptions = {
 function walkHasGenFiles(root: string): boolean {
   if (!existsSync(root)) return false
   const stack = [root]
-  while (stack.length) {
+  while (stack.length > 0) {
     const p = stack.pop()
     if (!p) break
     const st = statSync(p)
@@ -76,7 +76,7 @@ export const setup = async ({
     .filter(p => p.hasGenFiles && !p.hasPackageJson)
 
   console.log(`📦 New products: ${newProducts.length}`)
-  if (newProducts.length) newProducts.forEach(p => console.log(`  - ${p.name}`))
+  if (newProducts.length > 0) newProducts.forEach(p => console.log(`  - ${p.name}`))
 
   if (newProducts.length === 0) {
     console.log('✅ No new products to configure')

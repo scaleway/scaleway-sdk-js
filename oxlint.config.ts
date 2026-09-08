@@ -23,7 +23,6 @@ export default defineConfig({
     'typescript/no-unsafe-assignment': 'warn',
     'eslint/no-console': 'warn',
     'eslint/max-statements': 'warn',
-    'unicorn/explicit-length-check': 'warn',
     // TODO: new errors from @scaleway/oxlint-config 1.x upgrade — fix later
     'eslint/curly': 'warn',
     'eslint/default-case': 'warn',
