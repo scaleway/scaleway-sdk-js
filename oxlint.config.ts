@@ -25,7 +25,6 @@ export default defineConfig({
     'eslint/no-console': 'warn',
     'eslint/no-unused-vars': 'warn',
     'eslint/max-statements': 'warn',
-    'unicorn/catch-error-name': 'warn',
     'unicorn/explicit-length-check': 'warn',
     // TODO: new errors from @scaleway/oxlint-config 1.x upgrade — fix later
     'eslint/curly': 'warn',
