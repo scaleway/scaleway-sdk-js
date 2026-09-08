@@ -37,8 +37,12 @@ function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
 async function loadVersions(packageName: string): Promise<string[]> {
   try {
     const resolvedPath = require.resolve(`${packageName}/metadata`)
-    const metadataModule = await import(resolvedPath)
-    const versions = metadataModule?.pkgMetadata?.versions || metadataModule?.default?.versions || []
+    const metadataModule: unknown = await import(resolvedPath)
+    const metadata = metadataModule as {
+      pkgMetadata?: { versions?: string[] }
+      default?: { versions?: string[] }
+    }
+    const versions = metadata?.pkgMetadata?.versions || metadata?.default?.versions || []
     return versions
   } catch (error) {
     stdout.write(`⚠️  Could not load metadata from ${packageName}: ${error}\n`)
@@ -103,42 +107,38 @@ export const generateAPI = async ({
   for (const [packageName] of sdkPackages) {
     if (skipPackages.has(packageName)) {
       stdout.write(`⚠️  Skipping ${packageName}: excluded package\n`)
-      continue
-    }
+    } else {
+      const versions = await loadVersions(packageName)
 
-    const versions = await loadVersions(packageName)
+      if (versions.length === 0) {
+        stdout.write(`⚠️  Skipping ${packageName}: no versions with metadata found\n`)
+      } else {
+        for (const version of versions) {
+          if (isVersionSkipped(packageName, version)) {
+            stdout.write(`⚠️  Skipping ${packageName}/${version}: excluded by skipVersions\n`)
+          } else {
+            const metadata = await loadMetadata(packageName, version)
 
-    if (versions.length === 0) {
-      stdout.write(`⚠️  Skipping ${packageName}: no versions with metadata found\n`)
-      continue
-    }
+            if (!metadata) {
+              stdout.write(`⚠️  Skipping ${packageName}/${version}: no queriesMetadata found\n`)
+            } else {
+              const namespace = metadata.folderName || metadata.namespace
+              const apis = metadata.services
+                .filter((service: { apiClass: string }) => !servicesToSkip.has(service.apiClass))
+                .map((service: { apiClass: string }) => service.apiClass)
+                .filter((apiClass: string) => apiClass && apiClass.length > 0)
 
-    for (const version of versions) {
-      if (isVersionSkipped(packageName, version)) {
-        stdout.write(`⚠️  Skipping ${packageName}/${version}: excluded by skipVersions\n`)
-        continue
-      }
-
-      const metadata = await loadMetadata(packageName, version)
-
-      if (!metadata) {
-        stdout.write(`⚠️  Skipping ${packageName}/${version}: no queriesMetadata found\n`)
-        continue
-      }
-
-      const namespace = metadata.folderName || metadata.namespace
-      const apis = metadata.services
-        .filter((service: { apiClass: string }) => !servicesToSkip.has(service.apiClass))
-        .map((service: { apiClass: string }) => service.apiClass)
-        .filter((apiClass: string) => apiClass && apiClass.length > 0)
-
-      if (apis.length > 0) {
-        result = {
-          ...result,
-          [namespace]: {
-            packageName,
-            apis,
-          },
+              if (apis.length > 0) {
+                result = {
+                  ...result,
+                  [namespace]: {
+                    packageName,
+                    apis,
+                  },
+                }
+              }
+            }
+          }
         }
       }
     }

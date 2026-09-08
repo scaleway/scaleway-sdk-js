@@ -1,5 +1,71 @@
 # Change Log
 
+## 0.13.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-edge-services@2.22.0
+  - @scaleway/sdk-key-manager@2.15.0
+  - @scaleway/sdk-s2s-vpn@2.15.0
+
+## 0.13.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-account@2.10.0
+  - @scaleway/sdk-annotations@1.5.0
+  - @scaleway/sdk-applesilicon@2.13.0
+  - @scaleway/sdk-audit-trail@2.26.0
+  - @scaleway/sdk-autoscaling@2.12.0
+  - @scaleway/sdk-baremetal@2.12.0
+  - @scaleway/sdk-billing@2.15.0
+  - @scaleway/sdk-block@2.15.0
+  - @scaleway/sdk-cockpit@2.11.0
+  - @scaleway/sdk-container@2.14.0
+  - @scaleway/sdk-datalab@1.10.0
+  - @scaleway/sdk-datawarehouse@2.17.0
+  - @scaleway/sdk-dedibox@2.14.0
+  - @scaleway/sdk-domain@2.13.0
+  - @scaleway/sdk-edge-services@2.21.0
+  - @scaleway/sdk-environmental-footprint@2.17.0
+  - @scaleway/sdk-file@2.13.0
+  - @scaleway/sdk-flexibleip@2.11.0
+  - @scaleway/sdk-function@2.13.0
+  - @scaleway/sdk-iam@2.15.0
+  - @scaleway/sdk-inference@2.15.0
+  - @scaleway/sdk-instance@2.17.0
+  - @scaleway/sdk-interlink@2.12.0
+  - @scaleway/sdk-iot@2.11.0
+  - @scaleway/sdk-ipam@2.14.0
+  - @scaleway/sdk-jobs@2.13.0
+  - @scaleway/sdk-k8s@2.23.0
+  - @scaleway/sdk-kafka@2.13.0
+  - @scaleway/sdk-key-manager@2.14.0
+  - @scaleway/sdk-lb@2.14.0
+  - @scaleway/sdk-marketplace@2.9.0
+  - @scaleway/sdk-mnq@2.11.0
+  - @scaleway/sdk-mongodb@2.15.0
+  - @scaleway/sdk-partner@1.8.0
+  - @scaleway/sdk-product-catalog@2.26.0
+  - @scaleway/sdk-qaas@2.11.0
+  - @scaleway/sdk-rdb@2.14.0
+  - @scaleway/sdk-redis@2.12.0
+  - @scaleway/sdk-registry@2.11.0
+  - @scaleway/sdk-s2s-vpn@2.14.0
+  - @scaleway/sdk-searchdb@1.12.0
+  - @scaleway/sdk-secret@2.11.0
+  - @scaleway/sdk-serverless-sqldb@2.13.0
+  - @scaleway/sdk-tem@2.11.0
+  - @scaleway/sdk-vpc@2.16.0
+  - @scaleway/sdk-vpcgw@2.13.0
+  - @scaleway/sdk-webhosting@2.17.0
+
 ## 0.12.3
 
 ### Patch Changes

@@ -1,5 +1,30 @@
 # Change Log
 
+## 2.15.0
+
+### Minor Changes
+
+- feat: update generated APIs (#3369)
+
+## 2.14.0
+
+### Minor Changes
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(key_manager): add secp256k1 algorithm (#3292)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.0
+
 ## 2.13.0
 
 ### Minor Changes
