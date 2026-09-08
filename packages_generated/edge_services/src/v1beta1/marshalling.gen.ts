@@ -39,6 +39,8 @@ import type {
   ListDNSStagesResponse,
   ListHeadStagesResponseHeadStage,
   ListHeadStagesResponse,
+  Node,
+  ListNodesResponse,
   ListPipelinesResponse,
   ListPipelinesWithStagesResponse,
   ListPlansResponse,
@@ -626,6 +628,31 @@ export const unmarshalListHeadStagesResponse = (data: unknown): ListHeadStagesRe
     headStages: unmarshalArrayOfObject(data.head_stages, unmarshalListHeadStagesResponseHeadStage),
     totalCount: data.total_count,
   } as ListHeadStagesResponse
+}
+
+const unmarshalNode = (data: unknown): Node => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Node' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ip: data.ip,
+  } as Node
+}
+
+export const unmarshalListNodesResponse = (data: unknown): ListNodesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListNodesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nodes: unmarshalArrayOfObject(data.nodes, unmarshalNode),
+    totalCount: data.total_count,
+  } as ListNodesResponse
 }
 
 export const unmarshalListPipelinesResponse = (data: unknown): ListPipelinesResponse => {
