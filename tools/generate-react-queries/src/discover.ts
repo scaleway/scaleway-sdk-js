@@ -7,6 +7,20 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import type { QueriesMetadata, ReactQueriesConfig } from './config.ts'
 
+type PackageJson = {
+  dependencies?: Record<string, string>
+  devDependencies?: Record<string, string>
+  peerDependencies?: Record<string, string>
+}
+
+const isPackageJson = (value: unknown): value is PackageJson => typeof value === 'object' && value !== null
+
+const isPackageJsonWithName = (value: unknown): value is PackageJson & { name?: string } =>
+  typeof value === 'object' && value !== null
+
+const isQueriesMetadataModule = (value: unknown): value is { queriesMetadata: QueriesMetadata } =>
+  typeof value === 'object' && value !== null && 'queriesMetadata' in value
+
 /**
  * Discover SDK packages and their directories on disk.
  *
@@ -47,21 +61,22 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
 
   for (const dir of readdirSync(fullPath)) {
     const dirPath = join(fullPath, dir)
-    if (statSync(dirPath).isDirectory()) {
-      // Read the actual package name from its package.json
-      const pkgJsonPath = join(dirPath, 'package.json')
-      if (existsSync(pkgJsonPath)) {
-        try {
-          const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8')) as { name?: string }
-          if (pkgJson.name) {
-            packages.set(pkgJson.name, dirPath)
-          }
-        } catch {
-          console.warn(`  ⚠️  Could not read ${pkgJsonPath}, skipping`)
-        }
-      } else {
-        console.warn(`  ⚠️  No package.json in ${dirPath}, skipping`)
+    if (!statSync(dirPath).isDirectory()) continue
+
+    // Read the actual package name from its package.json
+    const pkgJsonPath = join(dirPath, 'package.json')
+    if (!existsSync(pkgJsonPath)) {
+      console.warn(`  ⚠️  No package.json in ${dirPath}, skipping`)
+      continue
+    }
+
+    try {
+      const pkgJson: unknown = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
+      if (isPackageJsonWithName(pkgJson) && pkgJson.name) {
+        packages.set(pkgJson.name, dirPath)
       }
+    } catch {
+      console.warn(`  ⚠️  Could not read ${pkgJsonPath}, skipping`)
     }
   }
 
@@ -76,13 +91,15 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
  * This is the generic path — works with node_modules, pnpm workspaces, etc.
  */
 function discoverFromDependencies(packageNameFilter: string): Map<string, string> {
-  const pkgJson = JSON.parse(readFileSync(resolve('package.json'), 'utf-8'))
+  const pkgJson: unknown = JSON.parse(readFileSync(resolve('package.json'), 'utf-8'))
 
-  const allDeps: Record<string, string> = {
-    ...pkgJson.dependencies,
-    ...pkgJson.devDependencies,
-    ...pkgJson.peerDependencies,
-  }
+  const allDeps: Record<string, string> = isPackageJson(pkgJson)
+    ? {
+        ...pkgJson.dependencies,
+        ...pkgJson.devDependencies,
+        ...pkgJson.peerDependencies,
+      }
+    : {}
 
   const sdkPackageNames = Object.keys(allDeps).filter(
     name => name.startsWith(packageNameFilter) && !name.endsWith('-client') && !name.endsWith('-react'),
@@ -153,23 +170,28 @@ export async function loadMetadata(
 ): Promise<QueriesMetadata> {
   const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
   const metadataPath = join(pkgDir, 'dist', version, metadataJsFile)
-  const module = await import(metadataPath)
+  const module: unknown = await import(metadataPath)
+  if (!isQueriesMetadataModule(module)) {
+    throw new Error(`Metadata module ${metadataPath} does not export queriesMetadata`)
+  }
   // Deep clone to avoid mutating the cached module singleton across multiple calls
   const metadata: QueriesMetadata = structuredClone(module.queriesMetadata)
 
   // Load utils-metadata if it exists (hand-written, for api.utils.ts methods)
   const utilsMetadataPath = join(pkgDir, 'dist', version, 'utils-metadata.js')
   if (existsSync(utilsMetadataPath)) {
-    const utilsModule = await import(utilsMetadataPath)
-    const utilsMetadata: QueriesMetadata = structuredClone(utilsModule.queriesMetadata)
-    if (utilsMetadata?.services) {
-      // Merge utils methods into matching services by apiClass to avoid duplicate services
-      for (const utilsService of utilsMetadata.services) {
-        const existing = metadata.services.find(s => s.apiClass === utilsService.apiClass)
-        if (existing) {
-          existing.methods = [...existing.methods, ...utilsService.methods]
-        } else {
-          metadata.services = [...metadata.services, utilsService]
+    const utilsModule: unknown = await import(utilsMetadataPath)
+    if (isQueriesMetadataModule(utilsModule)) {
+      const utilsMetadata: QueriesMetadata = structuredClone(utilsModule.queriesMetadata)
+      if (utilsMetadata?.services) {
+        // Merge utils methods into matching services by apiClass to avoid duplicate services
+        for (const utilsService of utilsMetadata.services) {
+          const existing = metadata.services.find(s => s.apiClass === utilsService.apiClass)
+          if (existing) {
+            existing.methods = [...existing.methods, ...utilsService.methods]
+          } else {
+            metadata.services = [...metadata.services, utilsService]
+          }
         }
       }
     }

@@ -20,7 +20,6 @@ export default defineConfig({
     'tools/generate-react-sdk/src/types.generated.ts',
   ],
   rules: {
-    'typescript/no-unsafe-member-access': 'warn',
     'typescript/no-unsafe-assignment': 'warn',
     'eslint/no-console': 'warn',
     'eslint/max-statements': 'warn',
