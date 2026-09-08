@@ -17,6 +17,7 @@ import type {
   RouteStage,
   TLSSecret,
   TLSStage,
+  WafExclusionRule,
   WafStage,
   PipelineStages,
   PurgeRequest,
@@ -312,6 +313,18 @@ export const unmarshalTLSStage = (data: unknown): TLSStage => {
   } as TLSStage
 }
 
+const unmarshalWafExclusionRule = (data: unknown): WafExclusionRule => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WafExclusionRule' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ruleId: data.rule_id,
+  } as WafExclusionRule
+}
+
 export const unmarshalWafStage = (data: unknown): WafStage => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -322,6 +335,7 @@ export const unmarshalWafStage = (data: unknown): WafStage => {
   return {
     backendStageId: data.backend_stage_id,
     createdAt: unmarshalDate(data.created_at),
+    exclusionRules: unmarshalArrayOfObject(data.exclusion_rules, unmarshalWafExclusionRule),
     id: data.id,
     mode: data.mode,
     paranoiaLevel: data.paranoia_level,
@@ -1096,10 +1110,18 @@ export const marshalCreateVPCEndpointRequest = (
   region: request.region ?? defaults.defaultRegion,
 })
 
+const marshalWafExclusionRule = (
+  request: WafExclusionRule,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  rule_id: request.ruleId,
+})
+
 export const marshalCreateWafStageRequest = (
   request: CreateWafStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  exclusion_rules: ((request.exclusionRules !== undefined) ?  request.exclusionRules.map(elt => marshalWafExclusionRule(elt, defaults)): undefined),
   mode: request.mode,
   paranoia_level: request.paranoiaLevel,  
   ...resolveOneOf([
@@ -1292,6 +1314,7 @@ export const marshalUpdateWafStageRequest = (
   request: UpdateWafStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  exclusion_rules: ((request.exclusionRules !== undefined) ?  request.exclusionRules.map(elt => marshalWafExclusionRule(elt, defaults)): undefined),
   mode: request.mode,
   paranoia_level: request.paranoiaLevel,  
   ...resolveOneOf([

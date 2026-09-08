@@ -25,6 +25,12 @@ export const UpdateWafStageRequest = {
   },
 }
 
+export const WafExclusionRule = {
+  ruleId: {
+    greaterThan: 0,
+  },
+}
+
 export const WafStage = {
   paranoiaLevel: {
     greaterThanOrEqual: 1,
