@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.13.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-edge-services@2.22.0
+  - @scaleway/sdk-key-manager@2.15.0
+  - @scaleway/sdk-s2s-vpn@2.15.0
+
 ## 0.13.0
 
 ### Minor Changes
