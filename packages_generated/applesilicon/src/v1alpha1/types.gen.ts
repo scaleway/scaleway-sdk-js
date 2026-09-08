@@ -28,6 +28,12 @@ export type ListServersRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
 
+export type RunnerConfigurationAction =
+  | 'unknown_action'
+  | 'remove'
+  | 'update'
+  | 'add'
+
 export type RunnerConfigurationProvider =
   | 'unknown_provider'
   | 'github'
@@ -164,6 +170,10 @@ export interface RunnerConfiguration {
   url: string
   token: string
   provider: RunnerConfigurationProvider
+  downloadRunner: boolean
+  action: RunnerConfigurationAction
+  id: string
+  labels: string[]
 }
 
 
@@ -645,6 +655,14 @@ export type GetServerTypeRequest = {
 }
 
 
+export type GetUserConfigurationRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+}
+
+
 export type ListOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -930,6 +948,19 @@ export interface StartConnectivityDiagnosticResponse {
 }
 
 
+export type UpdateRunnerConfigurationStatusRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  runnerErrors?: Record<string, string>
+}
+
+
+export interface UpdateRunnerConfigurationStatusResponse {
+}
+
+
 export type UpdateRunnerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -979,6 +1010,13 @@ export type UpdateServerRequest = {
    * Runner configurations to apply on the server, existing ones missing from the specified configuration will be removed from the server.
    */
   appliedRunnerConfigurations?: AppliedRunnerConfigurations
+}
+
+
+export interface UserConfiguration {
+  vncPassword: string
+  sshKeys: string[]
+  runnerConfigurations: RunnerConfiguration[]
 }
 
 
