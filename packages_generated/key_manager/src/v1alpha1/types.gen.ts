@@ -102,6 +102,7 @@ export interface KeyUsage {
    */
   asymmetricSigning?: KeyAlgorithmAsymmetricSigning
   /**
+   * See the `Key.Algorithm.KeyEncapulation` enum for a description of values.
    *
    * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
    */

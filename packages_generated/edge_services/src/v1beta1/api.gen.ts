@@ -39,6 +39,7 @@ import {
   unmarshalListCacheStagesResponse,
   unmarshalListDNSStagesResponse,
   unmarshalListHeadStagesResponse,
+  unmarshalListNodesResponse,
   unmarshalListPipelinesResponse,
   unmarshalListPipelinesWithStagesResponse,
   unmarshalListPlansResponse,
@@ -121,6 +122,7 @@ import type {
   ListDNSStagesResponse,
   ListHeadStagesRequest,
   ListHeadStagesResponse,
+  ListNodesResponse,
   ListPipelinesRequest,
   ListPipelinesResponse,
   ListPipelinesWithStagesRequest,
@@ -172,6 +174,16 @@ const jsonContentHeaders = {
  * Edge Services API.
  */
 export class API extends ParentAPI {
+  listNodes = () =>
+    this.client.fetch<ListNodesResponse>(
+      {
+        method: 'GET',
+        path: `/edge-services/v1beta1/nodes`,
+      },
+      unmarshalListNodesResponse,
+    )
+
+  
   protected pageOfListPipelines = (request: Readonly<ListPipelinesRequest> = {}) =>
     this.client.fetch<ListPipelinesResponse>(
       {

@@ -403,12 +403,12 @@ export interface DNSStage {
    */
   id: string
   /**
-   * Default Fully Qualified Domain Name attached to the stage.
+   * Default Fully Qualified Domain Name provided for the Pipeline.
    */
   defaultFqdn: string
   defaultPrivateFqdn: string
   /**
-   * List of additional (custom) Fully Qualified Domain Names attached to the stage.
+   * Custom Fully Qualified Domain Names configured (only the first one is valid).
    */
   fqdns: string[]
   /**
@@ -745,6 +745,11 @@ export interface ListHeadStagesResponseHeadStage {
 }
 
 
+export interface Node {
+  ip: string
+}
+
+
 export interface PipelineStages {
   pipeline?: Pipeline
   dnsStages: DNSStage[]
@@ -990,7 +995,7 @@ export type CreateDNSStageRequest = {
    */
   pipelineId: string
   /**
-   * Fully Qualified Domain Name (in the format subdomain.example.com) to attach to the stage.
+   * Custom Fully Qualified Domain Name to be configured (only 1 FQDN can be setup for now).
    */
   fqdns?: string[]
   /**
@@ -1509,6 +1514,12 @@ export interface ListHeadStagesResponse {
 }
 
 
+export interface ListNodesResponse {
+  nodes: Node[]
+  totalCount: number
+}
+
+
 export type ListPipelinesRequest = {
   /**
    * Sort order of pipelines in the response.
@@ -1962,7 +1973,7 @@ export type UpdateDNSStageRequest = {
    */
   dnsStageId: string
   /**
-   * Fully Qualified Domain Name (in the format subdomain.example.com) attached to the stage.
+   * Custom Fully Qualified Domain Name to be configured (only 1 FQDN can be setup for now).
    */
   fqdns?: string[]
   /**

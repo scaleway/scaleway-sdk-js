@@ -10,6 +10,17 @@ export const queriesMetadata = {
       apiClass: 'API',
       methods: [
         {
+          methodName: 'listNodes',
+          protoName: 'ListNodes',
+          paramsType: '',
+          returnType: 'ListNodesResponse',
+          returnTypeNamespace: '@scaleway/sdk-edge-services/v1beta1',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
           methodName: 'listPipelines',
           protoName: 'ListPipelines',
           paramsType: 'ListPipelinesRequest',
