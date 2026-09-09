@@ -34,7 +34,6 @@ export default defineConfig({
     'eslint/no-useless-assignment': 'warn',
     'eslint/prefer-template': 'warn',
     'eslint/require-unicode-regexp': 'warn',
-    'eslint/sort-imports': 'warn',
     'import/no-nodejs-modules': 'warn',
     'node/no-process-env': 'warn',
     'oxc/no-accumulating-spread': 'warn',
