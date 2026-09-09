@@ -33,7 +33,6 @@ export default defineConfig({
     'eslint/no-use-before-define': 'warn',
     'eslint/no-useless-assignment': 'warn',
     'eslint/prefer-destructuring': 'warn',
-    'eslint/prefer-named-capture-group': 'warn',
     'eslint/prefer-template': 'warn',
     'eslint/require-unicode-regexp': 'warn',
     'eslint/sort-imports': 'warn',
