@@ -6,6 +6,7 @@ import type {
   ConnectivityDiagnosticDiagnosticStatus,
   ListServerPrivateNetworksRequestOrderBy,
   ListServersRequestOrderBy,
+  RunnerConfigurationAction,
   RunnerConfigurationProvider,
   RunnerConfigurationV2Provider,
   RunnerStatus,
@@ -49,6 +50,14 @@ export const LIST_SERVER_PRIVATE_NETWORKS_REQUEST_ORDER_BIES: ListServerPrivateN
 export const LIST_SERVERS_REQUEST_ORDER_BIES: ListServersRequestOrderBy[] = [
   'created_at_asc',
   'created_at_desc',
+]
+
+/** Lists all values of the enum {@link RunnerConfigurationAction}. */
+export const RUNNER_CONFIGURATION_ACTIONS: RunnerConfigurationAction[] = [
+  'unknown_action',
+  'remove',
+  'update',
+  'add',
 ]
 
 /** Lists all values of the enum {@link RunnerConfigurationProvider}. */

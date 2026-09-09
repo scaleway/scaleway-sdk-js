@@ -31,6 +31,8 @@ import type {
   ListServersResponse,
   SetServerPrivateNetworksResponse,
   StartConnectivityDiagnosticResponse,
+  UpdateRunnerConfigurationStatusResponse,
+  UserConfiguration,
   BatchCreateServersRequestBatchInnerCreateServerRequest,
   BatchCreateServersRequest,
   CreateRunnerRequest,
@@ -40,6 +42,7 @@ import type {
   PrivateNetworkApiSetServerPrivateNetworksRequest,
   ReinstallServerRequest,
   StartConnectivityDiagnosticRequest,
+  UpdateRunnerConfigurationStatusRequest,
   UpdateRunnerRequest,
   CommitmentTypeValue,
   UpdateServerRequest,
@@ -103,6 +106,10 @@ const unmarshalRunnerConfiguration = (data: unknown): RunnerConfiguration => {
   }
 
   return {
+    action: data.action,
+    downloadRunner: data.download_runner,
+    id: data.id,
+    labels: data.labels,
     name: data.name,
     provider: data.provider,
     token: data.token,
@@ -458,6 +465,31 @@ export const unmarshalStartConnectivityDiagnosticResponse = (data: unknown): Sta
   } as StartConnectivityDiagnosticResponse
 }
 
+export const unmarshalUpdateRunnerConfigurationStatusResponse = (data: unknown): UpdateRunnerConfigurationStatusResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UpdateRunnerConfigurationStatusResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as UpdateRunnerConfigurationStatusResponse
+}
+
+export const unmarshalUserConfiguration = (data: unknown): UserConfiguration => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'UserConfiguration' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    runnerConfigurations: unmarshalArrayOfObject(data.runner_configurations, unmarshalRunnerConfiguration),
+    sshKeys: data.ssh_keys,
+    vncPassword: data.vnc_password,
+  } as UserConfiguration
+}
+
 const marshalBatchCreateServersRequestBatchInnerCreateServerRequest = (
   request: BatchCreateServersRequestBatchInnerCreateServerRequest,
   defaults: DefaultValues,
@@ -533,6 +565,10 @@ const marshalRunnerConfiguration = (
   request: RunnerConfiguration,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  action: request.action,
+  download_runner: request.downloadRunner,
+  id: request.id,
+  labels: request.labels,
   name: request.name,
   provider: request.provider,
   token: request.token,
@@ -583,6 +619,13 @@ export const marshalStartConnectivityDiagnosticRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   server_id: request.serverId,
+})
+
+export const marshalUpdateRunnerConfigurationStatusRequest = (
+  request: UpdateRunnerConfigurationStatusRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  runner_errors: ((request.runnerErrors !== undefined) ?  request.runnerErrors: undefined),
 })
 
 export const marshalUpdateRunnerRequest = (
