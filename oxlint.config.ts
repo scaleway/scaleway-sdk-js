@@ -31,7 +31,6 @@ export default defineConfig({
     'eslint/prefer-destructuring': 'warn',
     'eslint/prefer-named-capture-group': 'warn',
     'eslint/prefer-template': 'warn',
-    'eslint/require-unicode-regexp': 'warn',
     'eslint/vars-on-top': 'warn',
     'import/no-namespace': 'warn',
     'react/set-state-in-effect': 'warn',
