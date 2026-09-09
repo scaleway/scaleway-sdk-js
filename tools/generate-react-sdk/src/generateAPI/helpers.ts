@@ -1,5 +1,5 @@
 export function toCamelCase(input: string): string {
-  const camelCased = input.replaceAll(/(?<prefix>[-_][a-z])/gi, s => s.toUpperCase().replaceAll(/[-_]/g, ''))
+  const camelCased = input.replaceAll(/(?<prefix>[\-_][a-z])/giv, s => s.toUpperCase().replaceAll(/[\-_]/gv, ''))
 
   return camelCased.charAt(0).toLowerCase() + camelCased.slice(1)
 }

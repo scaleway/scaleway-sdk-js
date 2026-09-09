@@ -5,9 +5,9 @@ import type { ConfigurationType } from './types.js'
 const readFileAsync = promisify(readFile)
 const statAsync = promisify(stat)
 
-const STRIP_COMMENT_REGEX = /(?<prefix>^|\s)[;#]/
-const DETECT_SECTION_REGEX = /^\s*(?<section>[\s\S]+?):\s*$/
-const DETECT_ITEM_REGEX = /^\s*(?<key>.+?)\s*:\s*(?<value>.+?)\s*$/
+const STRIP_COMMENT_REGEX = /(?<prefix>^|\s)[;#]/v
+const DETECT_SECTION_REGEX = /^\s*(?<section>[\s\S]+?):\s*$/v
+const DETECT_ITEM_REGEX = /^\s*(?<key>.+?)\s*:\s*(?<value>.+?)\s*$/v
 
 /**
  * Converts YAML to configuration map.
@@ -24,7 +24,7 @@ export const convertYamlToConfiguration = (input: string | null): ConfigurationT
   if (typeof input !== 'string') {
     return map
   }
-  input.split(/\r?\n/).forEach(rawLine => {
+  input.split(/\r?\n/v).forEach(rawLine => {
     // remove comments
     const [line] = rawLine.split(STRIP_COMMENT_REGEX)
     // parse sections

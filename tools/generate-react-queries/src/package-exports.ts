@@ -23,7 +23,7 @@ function removeSrcFromPath(filePath: string): string {
   return filePath
     .replaceAll('/src/', '/')
     .replaceAll('\\src\\', '\\')
-    .replace(/^src[\\/]/, '')
+    .replace(/^src[\\\/]/v, '')
 }
 
 type BuildNamespaceExportsOptions = {
