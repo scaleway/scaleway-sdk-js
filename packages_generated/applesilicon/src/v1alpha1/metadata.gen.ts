@@ -119,6 +119,17 @@ export const queriesMetadata = {
           isPrivate: false,
           description: '"',
         },
+        {
+          methodName: 'getUserConfiguration',
+          protoName: 'GetUserConfiguration',
+          paramsType: 'GetUserConfigurationRequest',
+          returnType: 'UserConfiguration',
+          returnTypeNamespace: '@scaleway/sdk-applesilicon/v1alpha1',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
       ],
     },
     {

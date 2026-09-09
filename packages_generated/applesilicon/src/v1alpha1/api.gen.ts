@@ -34,8 +34,11 @@ import {
   unmarshalSetServerPrivateNetworksResponse,
   marshalStartConnectivityDiagnosticRequest,
   unmarshalStartConnectivityDiagnosticResponse,
+  marshalUpdateRunnerConfigurationStatusRequest,
+  unmarshalUpdateRunnerConfigurationStatusResponse,
   marshalUpdateRunnerRequest,
   marshalUpdateServerRequest,
+  unmarshalUserConfiguration,
 } from './marshalling.gen.js'
 import type {
   BatchCreateServersRequest,
@@ -50,6 +53,7 @@ import type {
   GetRunnerRequest,
   GetServerRequest,
   GetServerTypeRequest,
+  GetUserConfigurationRequest,
   ListOSRequest,
   ListOSResponse,
   ListRunnersRequest,
@@ -74,8 +78,11 @@ import type {
   SetServerPrivateNetworksResponse,
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
+  UpdateRunnerConfigurationStatusRequest,
+  UpdateRunnerConfigurationStatusResponse,
   UpdateRunnerRequest,
   UpdateServerRequest,
+  UserConfiguration,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -479,6 +486,30 @@ export class API extends ParentAPI {
         method: 'DELETE',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners/${validatePathParam('runnerId', request.runnerId)}`,
       },
+    )
+
+  
+  getUserConfiguration = (request: Readonly<GetUserConfigurationRequest> = {}) =>
+    this.client.fetch<UserConfiguration>(
+      {
+        method: 'GET',
+        path: `/apple-silicon-internal/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/user-configuration`,
+      },
+      unmarshalUserConfiguration,
+    )
+
+  
+  updateRunnerConfigurationStatus = (request: Readonly<UpdateRunnerConfigurationStatusRequest> = {}) =>
+    this.client.fetch<UpdateRunnerConfigurationStatusResponse>(
+      {
+        body: JSON.stringify(
+          marshalUpdateRunnerConfigurationStatusRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/apple-silicon-internal/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runner-configuration-status`,
+      },
+      unmarshalUpdateRunnerConfigurationStatusResponse,
     )
 
   

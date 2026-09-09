@@ -28,6 +28,7 @@ export type {
   GetRunnerRequest,
   GetServerRequest,
   GetServerTypeRequest,
+  GetUserConfigurationRequest,
   GithubRunnerConfiguration,
   GitlabRunnerConfiguration,
   ListOSRequest,
@@ -52,6 +53,7 @@ export type {
   ReinstallServerRequest,
   Runner,
   RunnerConfiguration,
+  RunnerConfigurationAction,
   RunnerConfigurationProvider,
   RunnerConfigurationV2,
   RunnerConfigurationV2Provider,
@@ -72,7 +74,10 @@ export type {
   SetServerPrivateNetworksResponse,
   StartConnectivityDiagnosticRequest,
   StartConnectivityDiagnosticResponse,
+  UpdateRunnerConfigurationStatusRequest,
+  UpdateRunnerConfigurationStatusResponse,
   UpdateRunnerRequest,
   UpdateServerRequest,
+  UserConfiguration,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

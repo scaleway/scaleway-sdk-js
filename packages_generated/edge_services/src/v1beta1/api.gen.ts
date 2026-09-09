@@ -1333,7 +1333,7 @@ export class API extends ParentAPI {
 
   
   /**
-   * Gives information on the currently selected Edge Services subscription plan, resource usage and associated billing information for this calendar month (including whether consumption falls within or exceeds the currently selected subscription plan.).
+   * Billing information. Gives information on the currently selected Edge Services subscription plan, resource usage and associated billing information for this calendar month (including whether consumption falls within or exceeds the currently selected subscription plan.).
    *
    * @param request - The request {@link GetBillingRequest}
    * @returns A Promise of GetBillingResponse
