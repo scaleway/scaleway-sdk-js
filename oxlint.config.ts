@@ -20,7 +20,6 @@ export default defineConfig({
     'tools/generate-react-sdk/src/types.generated.ts',
   ],
   rules: {
-    'typescript/no-unsafe-assignment': 'warn',
     'eslint/no-console': 'warn',
 
     // TODO: new errors from @scaleway/oxlint-config 1.x upgrade — fix later
