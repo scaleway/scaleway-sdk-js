@@ -73,9 +73,9 @@ function rebuildAllDeps(
 
 function writeSdkIndex(s: Config['sdks'][number], validPackages: PackageJSON[]): void {
   if (!s.shouldUpdateIndex) return
-  const indexContent =
-    '// Auto-generated exports from all SDK packages\n\n' +
-    validPackages.map(p => `export * from '${p.name}'\n`).join('')
+  const indexContent = `// Auto-generated exports from all SDK packages\n\n${validPackages
+    .map(p => `export * from '${p.name}'\n`)
+    .join('')}`
   writeFileSync(s.index, indexContent, 'utf8')
   console.log(`Updated ${s.index} with exports for ${validPackages.length} packages`)
 }
