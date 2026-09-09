@@ -7,7 +7,7 @@ function parseSingleArg(arg: string, nextArg: string | undefined): ParsedArg | n
   if (!arg.startsWith('--')) return null
 
   const parts = arg.slice(2).split('=')
-  const key = parts[0]
+  const [key] = parts
   let value: string | boolean = parts.length > 1 ? (parts[1] as string) : true
   let consumedNext = false
 

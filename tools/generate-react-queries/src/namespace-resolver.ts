@@ -143,10 +143,8 @@ function deriveFromNamespacePath(nsPath: string): ResolvedNamespace | undefined 
   const match = nsPath.match(/^(?<scope>@scaleway(?:-internal)?)\/sdk-(?<slug>[^/]+)\/(?<version>.+)$/)
   if (!match) return undefined
 
-  const scope = match[1] // e.g. "@scaleway-internal" or "@scaleway"
-  const slug = match[2] // e.g. "rdb", "rdb-admin", "baremetal"
+  const { scope, slug, version } = match?.groups ?? {} // e.g. "@scaleway-internal", "rdb-admin", "v1"
   if (!slug) return undefined
-  const version = match[3] // e.g. "v1", "v1alpha1"
   if (!version) return undefined
 
   // Convert kebab-case slug to camelCase (e.g. "rdb-admin" → "rdbAdmin")
