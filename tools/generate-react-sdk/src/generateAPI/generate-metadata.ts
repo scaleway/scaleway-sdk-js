@@ -41,14 +41,11 @@ function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
       }
     : {}
 
-  const packages = new Map<string, string>()
-  for (const [name] of Object.entries(allDeps)) {
-    if (name.startsWith(packageNameFilter)) {
-      packages.set(name, name)
-    }
-  }
-
-  return packages
+  return new Map(
+    Object.keys(allDeps)
+      .filter(name => name.startsWith(packageNameFilter))
+      .map(name => [name, name] as const),
+  )
 }
 
 async function loadVersions(packageName: string): Promise<string[]> {
@@ -66,25 +63,99 @@ async function loadVersions(packageName: string): Promise<string[]> {
   }
 }
 
+async function loadMetadataFromFallback(packageName: string, version: string): Promise<Metadata> {
+  const pkgDir = join(dirname(resolve('package.json')), 'node_modules', packageName)
+  const distMetadataPath = join(pkgDir, 'dist', version, 'metadata.gen.js')
+  const metadataModule = await import(distMetadataPath)
+  return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
+}
+
 async function loadMetadata(packageName: string, version: string): Promise<Metadata | null> {
   try {
-    // Try the exported path first
     try {
       const resolvedPath = require.resolve(`${packageName}/${version}/metadata`)
       const metadataModule = await import(resolvedPath)
       return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
     } catch {
       stdout.write(`⚠️  Error loading metadata from ${packageName}/${version}/metadata \n Using dist fallback \n`)
-      // Fallback: construct path from node_modules
-      const pkgDir = join(dirname(resolve('package.json')), 'node_modules', packageName)
-      const distMetadataPath = join(pkgDir, 'dist', version, 'metadata.gen.js')
-      const metadataModule = await import(distMetadataPath)
-      return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
+      return await loadMetadataFromFallback(packageName, version)
     }
   } catch (error) {
     stdout.write(`⚠️  Error loading metadata from ${packageName}/${version}/metadata: ${error}\n`)
     return null
   }
+}
+
+async function processVersion(
+  packageName: string,
+  version: string,
+  servicesToSkip: Set<string>,
+  isVersionSkipped: (packageName: string, version: string) => boolean,
+): Promise<ProcessedMetadata | null> {
+  if (isVersionSkipped(packageName, version)) {
+    stdout.write(`⚠️  Skipping ${packageName}/${version}: excluded by skipVersions\n`)
+    return null
+  }
+  const metadata = await loadMetadata(packageName, version)
+  if (!metadata) {
+    stdout.write(`⚠️  Skipping ${packageName}/${version}: no queriesMetadata found\n`)
+    return null
+  }
+  const namespace = metadata.folderName || metadata.namespace
+  const apis = metadata.services
+    .filter((service: { apiClass: string }) => !servicesToSkip.has(service.apiClass))
+    .map((service: { apiClass: string }) => service.apiClass)
+    .filter((apiClass: string) => apiClass && apiClass.length > 0)
+  return apis.length > 0 ? { [namespace]: { packageName, apis } } : null
+}
+
+async function processPackageVersions(
+  packageName: string,
+  servicesToSkip: Set<string>,
+  isVersionSkipped: (packageName: string, version: string) => boolean,
+): Promise<ProcessedMetadata> {
+  const versions = await loadVersions(packageName)
+  if (versions.length === 0) {
+    stdout.write(`⚠️  Skipping ${packageName}: no versions with metadata found\n`)
+    return {}
+  }
+  let pkgResult: ProcessedMetadata = {}
+  for (const version of versions) {
+    const versionResult = await processVersion(packageName, version, servicesToSkip, isVersionSkipped)
+    if (versionResult) pkgResult = { ...pkgResult, ...versionResult }
+  }
+  return pkgResult
+}
+
+function setupGenerateAPI(
+  dirGenName: string,
+  packageNameFilter: string,
+  skipServices: string[],
+  skipVersions: string[],
+) {
+  const dir = join(directoryOfSrcFolder, dirGenName)
+  mkdirSync(dir, { recursive: true })
+  const sdkPackages = discoverSdkPackages(packageNameFilter)
+  if (sdkPackages.size === 0) stdout.write('⚠️  No SDK packages found in dependencies\n')
+  const skipPackages = new Set(['@scaleway/sdk-test', '@scaleway/sdk-std'])
+  const servicesToSkip = new Set(skipServices)
+  const versionsToSkip = new Set(skipVersions)
+  const isVersionSkipped = (packageName: string, version: string): boolean =>
+    versionsToSkip.has(`${packageName}@${version}`) || versionsToSkip.has(version)
+  return { dir, sdkPackages, skipPackages, servicesToSkip, isVersionSkipped }
+}
+
+async function processSdkPackage(
+  packageName: string,
+  skipPackages: Set<string>,
+  servicesToSkip: Set<string>,
+  isVersionSkipped: (packageName: string, version: string) => boolean,
+): Promise<ProcessedMetadata> {
+  if (skipPackages.has(packageName)) {
+    stdout.write(`⚠️  Skipping ${packageName}: excluded package\n`)
+    return {}
+  }
+  return await processPackageVersions(packageName, servicesToSkip, isVersionSkipped)
 }
 
 export const generateAPI = async ({
@@ -100,69 +171,18 @@ export const generateAPI = async ({
   skipServices?: string[]
   skipVersions?: string[]
 }) => {
+  const { dir, sdkPackages, skipPackages, servicesToSkip, isVersionSkipped } = setupGenerateAPI(
+    dirGenName,
+    packageNameFilter,
+    skipServices,
+    skipVersions,
+  )
   let result: ProcessedMetadata = {}
-
-  const dir = join(directoryOfSrcFolder, dirGenName)
-
-  // Create directory if it doesn't exist (don't delete existing files)
-  mkdirSync(dir, { recursive: true })
-
-  const sdkPackages = discoverSdkPackages(packageNameFilter)
-
-  if (sdkPackages.size === 0) {
-    stdout.write('⚠️  No SDK packages found in dependencies\n')
-  }
-
-  const skipPackages = new Set(['@scaleway/sdk-test', '@scaleway/sdk-std'])
-  const servicesToSkip = new Set(skipServices)
-  const versionsToSkip = new Set(skipVersions)
-
-  const isVersionSkipped = (packageName: string, version: string): boolean =>
-    versionsToSkip.has(`${packageName}@${version}`) || versionsToSkip.has(version)
-
   for (const [packageName] of sdkPackages) {
-    if (skipPackages.has(packageName)) {
-      stdout.write(`⚠️  Skipping ${packageName}: excluded package\n`)
-    } else {
-      const versions = await loadVersions(packageName)
-
-      if (versions.length === 0) {
-        stdout.write(`⚠️  Skipping ${packageName}: no versions with metadata found\n`)
-      } else {
-        for (const version of versions) {
-          if (isVersionSkipped(packageName, version)) {
-            stdout.write(`⚠️  Skipping ${packageName}/${version}: excluded by skipVersions\n`)
-          } else {
-            const metadata = await loadMetadata(packageName, version)
-
-            if (!metadata) {
-              stdout.write(`⚠️  Skipping ${packageName}/${version}: no queriesMetadata found\n`)
-            } else {
-              const namespace = metadata.folderName || metadata.namespace
-              const apis = metadata.services
-                .filter((service: { apiClass: string }) => !servicesToSkip.has(service.apiClass))
-                .map((service: { apiClass: string }) => service.apiClass)
-                .filter((apiClass: string) => apiClass && apiClass.length > 0)
-
-              if (apis.length > 0) {
-                result = {
-                  ...result,
-                  [namespace]: {
-                    packageName,
-                    apis,
-                  },
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+    result = { ...result, ...(await processSdkPackage(packageName, skipPackages, servicesToSkip, isVersionSkipped)) }
   }
-
   emitFiles({ res: result, sourceFolderGen: dir, sdkFactoryPath })
   generateType(result)
-
   exec('cd ../.. && pnpm run format').on('error', () => {
     stdout.write('❌ Error during format !\n')
     exit(1)

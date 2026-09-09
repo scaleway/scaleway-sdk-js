@@ -28,6 +28,67 @@ function getAllGenTsFiles(dir: string, files: string[] = []): string[] {
   return files
 }
 
+function discoverPackages(src: string): PkgInfo[] {
+  return readdirSync(src, { withFileTypes: true })
+    .filter(e => e.isDirectory())
+    .flatMap(e => {
+      const packageJsonPath = join(src, e.name, 'package.json')
+      if (!existsSync(packageJsonPath)) return []
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PkgInfo['packageJson']
+      return [{ name: e.name, path: join(src, e.name), packageJsonPath, packageJson }]
+    })
+}
+
+function collectImports(
+  srcDir: string,
+  importRegex: RegExp,
+  pkgMap: Map<string, PkgInfo>,
+  currentPkgName: string,
+): Set<string> {
+  const imports = new Set<string>()
+  for (const file of getAllGenTsFiles(srcDir)) {
+    const content = readFileSync(file, 'utf8')
+    importRegex.lastIndex = 0
+    let match: RegExpExecArray | null
+    while ((match = importRegex.exec(content)) !== null) {
+      const pkgName = match[1]?.split('/').slice(0, 2).join('/')
+      if (pkgName && pkgMap.has(pkgName) && pkgName !== currentPkgName) imports.add(pkgName)
+    }
+  }
+  return imports
+}
+
+function syncMissingDeps(pkg: PkgInfo, missing: string[], dryRun: boolean): void {
+  const allDeps = [
+    ...Object.entries(pkg.packageJson.dependencies ?? {}),
+    ...missing.map(d => [d, 'workspace:*'] as const),
+  ]
+  allDeps.sort(([a], [b]) => a.localeCompare(b))
+  pkg.packageJson.dependencies = Object.fromEntries(allDeps)
+  if (dryRun) {
+    console.log(`  🔍 DRY RUN: Would add to ${pkg.name}: ${missing.join(', ')}`)
+  } else {
+    writeFileSync(pkg.packageJsonPath, `${JSON.stringify(pkg.packageJson, null, 2)}\n`, 'utf8')
+    console.log(`  ✅ Updated ${pkg.name}: +${missing.length} deps`)
+  }
+}
+
+function syncPackage(pkg: PkgInfo, importRegex: RegExp, pkgMap: Map<string, PkgInfo>, dryRun: boolean): boolean {
+  const srcDir = join(pkg.path, 'src')
+  if (!existsSync(srcDir)) return false
+  const imports = collectImports(srcDir, importRegex, pkgMap, pkg.packageJson.name)
+  const missing = [...imports].filter(imp => !pkg.packageJson.dependencies?.[imp])
+  if (missing.length === 0) return false
+  syncMissingDeps(pkg, missing, dryRun)
+  return true
+}
+
+function runInstallIfNeeded(updated: number): void {
+  if (updated > 0) {
+    execSync('pnpm install --no-frozen-lockfile', { stdio: 'inherit', cwd: cwd() })
+  }
+}
+
 /**
  * Sync `workspace:*` dependencies in each generated package's `package.json`.
  *
@@ -44,58 +105,16 @@ function getAllGenTsFiles(dir: string, files: string[] = []): string[] {
 export const deps = async ({ src, config, dryRun = false }: DepsOptions): Promise<void> => {
   if (!existsSync(src)) throw new Error(`Directory not found: ${src}`)
 
-  const prefix = escapeRegExp(config.sdkPackagePrefix)
-  const importRegex = new RegExp(`from\\s+['"]((${prefix})[^'"]+)['"]`, 'g')
-
-  const packages: PkgInfo[] = readdirSync(src, { withFileTypes: true })
-    .filter(e => e.isDirectory())
-    .flatMap(e => {
-      const packageJsonPath = join(src, e.name, 'package.json')
-      if (!existsSync(packageJsonPath)) return []
-      const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PkgInfo['packageJson']
-      return [{ name: e.name, path: join(src, e.name), packageJsonPath, packageJson }]
-    })
-
+  const importRegex = new RegExp(`from\\s+['"]((${escapeRegExp(config.sdkPackagePrefix)})[^'"]+)['"]`, 'g')
+  const packages = discoverPackages(src)
   const pkgMap = new Map(packages.map(p => [p.packageJson.name, p]))
   let updated = 0
 
   for (const pkg of packages) {
-    const srcDir = join(pkg.path, 'src')
-    if (existsSync(srcDir)) {
-      const imports = new Set<string>()
-      for (const file of getAllGenTsFiles(srcDir)) {
-        const content = readFileSync(file, 'utf8')
-        importRegex.lastIndex = 0
-        let match: RegExpExecArray | null
-        while ((match = importRegex.exec(content)) !== null) {
-          const pkgName = match[1]?.split('/').slice(0, 2).join('/')
-          if (pkgName && pkgMap.has(pkgName) && pkgName !== pkg.packageJson.name) imports.add(pkgName)
-        }
-      }
-
-      const missing = [...imports].filter(imp => !pkg.packageJson.dependencies?.[imp])
-      if (missing.length > 0) {
-        const allDeps = [
-          ...Object.entries(pkg.packageJson.dependencies ?? {}),
-          ...missing.map(d => [d, 'workspace:*'] as const),
-        ]
-        allDeps.sort(([a], [b]) => a.localeCompare(b))
-        pkg.packageJson.dependencies = Object.fromEntries(allDeps)
-
-        if (dryRun) {
-          console.log(`  🔍 DRY RUN: Would add to ${pkg.name}: ${missing.join(', ')}`)
-        } else {
-          writeFileSync(pkg.packageJsonPath, `${JSON.stringify(pkg.packageJson, null, 2)}\n`, 'utf8')
-          console.log(`  ✅ Updated ${pkg.name}: +${missing.length} deps`)
-        }
-        updated++
-      }
-    }
+    if (syncPackage(pkg, importRegex, pkgMap, dryRun)) updated++
   }
 
   console.log(`\n📊 Packages updated: ${updated}`)
-  if (updated > 0) {
-    execSync('pnpm install --no-frozen-lockfile', { stdio: 'inherit', cwd: cwd() })
-  }
+  runInstallIfNeeded(updated)
   if (dryRun) console.log('🔍 DRY RUN - no changes made')
 }

@@ -16,6 +16,17 @@ import {
 
 const { log: logger } = console
 
+type WorkspacePackage = ReturnType<typeof listWorkspacePackages>[number]
+
+type ReleaseOptions = {
+  dryRun: boolean
+  skipPublish: boolean
+  skipPush: boolean
+  byCommit: boolean
+  ghRelease: boolean
+  registry?: string
+}
+
 const HELP = `Usage: release [options]
 
 Bump and publish changed packages in the monorepo.
@@ -39,7 +50,7 @@ Environment variables for registry auth:
   GH_TOKEN               GitHub token for creating releases (required with --gh-release)
 `
 
-function main() {
+function parseReleaseArgs(): ReleaseOptions | null {
   const { values } = parseArgs({
     args: process.argv.slice(2),
     options: {
@@ -52,119 +63,104 @@ function main() {
       help: { type: 'boolean', short: 'h', default: false },
     },
   })
-
   if (values.help) {
     logger(HELP)
-    return
+    return null
   }
-
-  const dryRun = values['dry-run'] === true
-  const skipPublish = values['skip-publish'] === true
-  const skipPush = values['skip-push'] === true
-  const byCommit = values['by-commit'] === true
-  const ghRelease = values['gh-release'] === true
-  const registry = values.registry
-
-  if (ghRelease) {
+  if (values['gh-release'] === true) {
     const ghToken = process.env['GH_TOKEN'] || process.env['GITHUB_TOKEN']
     if (!ghToken) {
       throw new Error('GH_TOKEN environment variable is required for creating GitHub releases')
     }
   }
+  return {
+    dryRun: values['dry-run'] === true,
+    skipPublish: values['skip-publish'] === true,
+    skipPush: values['skip-push'] === true,
+    byCommit: values['by-commit'] === true,
+    ghRelease: values['gh-release'] === true,
+    registry: values.registry,
+  }
+}
 
-  const root = findWorkspaceRoot(process.cwd())
+function gatherAffectedPackages(root: string, dryRun: boolean): { affected: WorkspacePackage[]; range: string } {
   const packages = listWorkspacePackages(root)
-
-  const lastSha =
-    exec(`git log --grep="^${RELEASE_SUBJECT}" -1 --format="%H"`, {
-      cwd: root,
-    }) || null
+  const lastSha = exec(`git log --grep="^${RELEASE_SUBJECT}" -1 --format="%H"`, { cwd: root }) || null
   const range = lastSha ? `${lastSha}..HEAD` : 'HEAD~50..HEAD'
   const changedFiles = exec(`git diff --name-only ${range}`, { cwd: root }).split('\n').filter(Boolean)
-
   const affected = packages.filter(pkg => !pkg.private && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)))
-
   logger(`[release] ${affected.length} packages to bump (dryRun=${dryRun})`)
   for (const pkg of affected) logger(`  - ${pkg.name}: ${pkg.version}`)
+  return { affected, range }
+}
 
-  if (dryRun || affected.length === 0) return
+function writeNpmrcAuth(root: string, registry: string): void {
+  const user = process.env['NPM_REGISTRY_USER']
+  const passwd = process.env['NPM_REGISTRY_PASSWD']
+  if (!user || !passwd) return
+  const host = registry.replace(/^https?:\/\//, '')
+  const auth = Buffer.from(`${user}:${passwd}`).toString('base64')
+  appendFileSync(join(root, '.npmrc'), `\n//${host}/:_auth=${auth}\n`)
+  logger(`[release] authenticated to ${host}`)
+}
 
-  createChangesets({
-    root,
-    range,
-    packages: affected,
-    byCommit,
-    defaultSummary: CHANGESET_MESSAGE,
-  })
+function publishPackages(root: string, options: ReleaseOptions): void {
+  if (options.skipPublish) return
+  if (options.registry) writeNpmrcAuth(root, options.registry)
+  const flag = options.registry ? ` --registry ${options.registry}` : ''
+  exec(`pnpm publish -r --no-git-checks --access public${flag}`, { cwd: root, stdio: 'inherit' })
+  logger('[release] published')
+}
 
-  // Bump versions — pnpm handles dependency propagation.
-  // In recursive mode pnpm never creates git commits/tags itself, so the
-  // working tree is left dirty for us to commit explicitly below — but only
-  // after publish has succeeded, so a registry failure leaves the remote
-  // untouched and the run can be retried from a pristine state.
-  exec('pnpm version -r --no-git-checks --tag-version-prefix ""', {
-    cwd: root,
-    stdio: 'inherit',
-  })
+function bumpAndPublish(
+  root: string,
+  options: ReleaseOptions,
+  affected: WorkspacePackage[],
+  range: string,
+): WorkspacePackage[] {
+  createChangesets({ root, range, packages: affected, byCommit: options.byCommit, defaultSummary: CHANGESET_MESSAGE })
+  exec('pnpm version -r --no-git-checks --tag-version-prefix ""', { cwd: root, stdio: 'inherit' })
   exec('rm -rf .changeset/*', { cwd: root })
-
   const updated = listWorkspacePackages(root)
+  publishPackages(root, options)
+  return updated
+}
 
-  // Publish BEFORE committing/tagging/pushing. If publish fails (registry
-  // down, auth expired, network, version already exists, ...) we abort and
-  // leave the remote untouched — no tags pointing at unpublished versions.
-  // `pnpm publish -r` skips versions already on the registry, so retries
-  // are idempotent and only publish what's missing.
-  if (!skipPublish) {
-    const user = process.env['NPM_REGISTRY_USER']
-    const passwd = process.env['NPM_REGISTRY_PASSWD']
-    if (registry && user && passwd) {
-      const host = registry.replace(/^https?:\/\//, '')
-      const auth = Buffer.from(`${user}:${passwd}`).toString('base64')
-      const npmrcPath = join(root, '.npmrc')
-      appendFileSync(npmrcPath, `\n//${host}/:_auth=${auth}\n`)
-      logger(`[release] authenticated to ${host}`)
-    }
-    const flag = registry ? ` --registry ${registry}` : ''
-    exec(`pnpm publish -r --no-git-checks --access public${flag}`, {
-      cwd: root,
-      stdio: 'inherit',
-    })
-    logger('[release] published')
+function pushRelease(root: string, skipPush: boolean, newTags: string[]): void {
+  if (skipPush) return
+  exec('git push origin HEAD --no-verify', { cwd: root })
+  for (const tag of newTags) {
+    exec(`git push origin "refs/tags/${tag}" --no-verify`, { cwd: root })
   }
+  logger('[release] pushed')
+}
 
-  // Commit and tag — only reached if publish succeeded (or --skip-publish).
+function commitTagAndPush(
+  root: string,
+  options: ReleaseOptions,
+  affected: WorkspacePackage[],
+  updated: WorkspacePackage[],
+): void {
   exec('git add -A', { cwd: root })
   exec('git commit -m "chore(release): publish" --no-verify', { cwd: root })
-
-  const newTags = createTags({
-    root,
-    affectedPackages: affected,
-    updatedPackages: updated,
-  })
-
-  // Create GitHub releases
-  if (ghRelease) {
-    createGithubReleases({
-      root,
-      affectedPackages: affected,
-      updatedPackages: updated,
-    })
+  const newTags = createTags({ root, affectedPackages: affected, updatedPackages: updated })
+  if (options.ghRelease) {
+    createGithubReleases({ root, affectedPackages: affected, updatedPackages: updated })
     logger('[release] github releases created')
   }
+  pushRelease(root, options.skipPush, newTags)
+}
 
-  // Push
-  if (!skipPush) {
-    // Push the branch first, then each new tag individually. Pushing tags one
-    // at a time (rather than `--tags`) means a tag that already exists on the
-    // remote no longer fails the whole push on retried runs.
-    exec('git push origin HEAD --no-verify', { cwd: root })
-    for (const tag of newTags) {
-      exec(`git push origin "refs/tags/${tag}" --no-verify`, { cwd: root })
-    }
-    logger('[release] pushed')
-  }
+function main() {
+  const options = parseReleaseArgs()
+  if (!options) return
 
+  const root = findWorkspaceRoot(process.cwd())
+  const { affected, range } = gatherAffectedPackages(root, options.dryRun)
+  if (options.dryRun || affected.length === 0) return
+
+  const updated = bumpAndPublish(root, options, affected, range)
+  commitTagAndPush(root, options, affected, updated)
   logger('[release] done.')
 }
 

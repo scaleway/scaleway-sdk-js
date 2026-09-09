@@ -26,6 +26,27 @@ function removeSrcFromPath(path: string): string {
     .replace(/^src[\\/]/, '')
 }
 
+function buildNamespaceExports(
+  allNamespaces: string[],
+  config: ReactQueriesConfig,
+  cleanDirName: string,
+  pathKey: 'generatedPath' | 'customPath',
+  keySuffix = '',
+): Record<string, ExportEntry> {
+  const subPath = config[pathKey]
+  const directories = allNamespaces.filter(namespace =>
+    existsSync(join(config.outputDir, namespace, subPath, config.naming.indexFile)),
+  )
+  const prefix = cleanDirName ? `${cleanDirName}/` : ''
+  return directories.reduce<Record<string, ExportEntry>>((acc, namespace) => {
+    acc[`./${namespace}${keySuffix}`] = {
+      default: `./dist/${prefix}${namespace}/${subPath}/index.js`,
+      types: `./dist/${prefix}${namespace}/${subPath}/index.d.ts`,
+    }
+    return acc
+  }, {})
+}
+
 export function updatePackageJsonExports(config: ReactQueriesConfig): void {
   const allNamespaces = readdirSync(resolve('./', config.outputDir), {
     withFileTypes: true,
@@ -33,34 +54,10 @@ export function updatePackageJsonExports(config: ReactQueriesConfig): void {
     .map(file => (file.isDirectory() ? file.name : ''))
     .filter(fileName => fileName !== '')
 
-  const generatedNamespaceDirectories = allNamespaces.filter(namespace =>
-    existsSync(join(config.outputDir, namespace, config.generatedPath, config.naming.indexFile)),
-  )
-  const customNamespaceDirectories = allNamespaces.filter(namespace =>
-    existsSync(join(config.outputDir, namespace, config.customPath, config.naming.indexFile)),
-  )
-
   const cleanDirName = removeSrcFromPath(config.outputDir)
 
-  const generatedExportsConfig: Record<string, ExportEntry> = generatedNamespaceDirectories.reduce<
-    Record<string, ExportEntry>
-  >((acc, namespace) => {
-    acc[`./${namespace}`] = {
-      default: `./dist/${cleanDirName ? `${cleanDirName}/` : ''}${namespace}/${config.generatedPath}/index.js`,
-      types: `./dist/${cleanDirName ? `${cleanDirName}/` : ''}${namespace}/${config.generatedPath}/index.d.ts`,
-    }
-    return acc
-  }, {})
-
-  const customExportsConfig: Record<string, ExportEntry> = customNamespaceDirectories.reduce<
-    Record<string, ExportEntry>
-  >((acc, namespace) => {
-    acc[`./${namespace}/custom`] = {
-      default: `./dist/${cleanDirName ? `${cleanDirName}/` : ''}${namespace}/${config.customPath}/index.js`,
-      types: `./dist/${cleanDirName ? `${cleanDirName}/` : ''}${namespace}/${config.customPath}/index.d.ts`,
-    }
-    return acc
-  }, {})
+  const generatedExportsConfig = buildNamespaceExports(allNamespaces, config, cleanDirName, 'generatedPath')
+  const customExportsConfig = buildNamespaceExports(allNamespaces, config, cleanDirName, 'customPath', '/custom')
 
   const otherStaticExport: Record<string, ExportEntry> = {
     './mocks*': {

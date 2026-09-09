@@ -5,7 +5,7 @@
 
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import type { ReactQueriesConfig } from './config.ts'
+import type { QueriesMetadata, QueryMethod, ReactQueriesConfig, ServiceMetadata } from './config.ts'
 import { capitalize } from './config.ts'
 import { discoverSdkPackages, discoverVersions, loadMetadata } from './discover.ts'
 import {
@@ -16,141 +16,205 @@ import {
   generateReloadHook,
 } from './hook-generators.ts'
 import { buildNamespaceResolver } from './namespace-resolver.ts'
+import type { ResolvedNamespace } from './namespace-resolver.ts'
 
-export async function generateFromMetadata(config: ReactQueriesConfig): Promise<void> {
-  const sdkPackages = discoverSdkPackages(config)
-  const skipMethods = new Set(config.filters.skipMethods)
-  const skipServices = new Set(config.filters.skipServices)
-  const skipVersions = new Set(config.filters.skipVersions)
-  const { metadataFileName } = config.naming
+type GenerationContext = {
+  config: ReactQueriesConfig
+  metadataFileName: string
+  skipMethods: Set<string>
+  skipServices: Set<string>
+  skipVersions: Set<string>
+  skipPackages: Set<string>
+  namespaceResolver: Map<string, ResolvedNamespace>
+}
 
-  const skipPackages = new Set(config.filters.skipPackages)
+function prepareGeneratedDir(ctx: GenerationContext, folderName: string): string {
+  const generatedDir = join(ctx.config.outputDir, folderName.toLowerCase(), ctx.config.generatedPath)
+  if (existsSync(generatedDir)) {
+    rmSync(generatedDir, { recursive: true, force: true })
+  }
+  mkdirSync(generatedDir, { recursive: true })
+  return generatedDir
+}
 
-  const isVersionSkipped = (packageName: string, version: string): boolean =>
-    skipVersions.has(`${packageName}@${version}`) || skipVersions.has(version)
-
-  // Preload namespace resolver for cross-package type references
-  const namespaceResolver = await buildNamespaceResolver(config)
-
-  const processVersion = async (packageName: string, pkgDir: string, version: string): Promise<void> => {
-    if (isVersionSkipped(packageName, version)) {
-      console.log(`  ⏭️  Skipping ${packageName}/${version} (excluded by skipVersions)`)
-      return
-    }
-
-    try {
-      const metadata = await loadMetadata(pkgDir, version, metadataFileName)
-
-      if (!metadata?.services) {
-        console.warn(`    ⚠️  Invalid metadata for ${packageName}/${version}, skipping`)
-        return
-      }
-
-      const { folderName, services } = metadata
-      const generatedDir = join(config.outputDir, folderName.toLowerCase(), config.generatedPath)
-
-      if (existsSync(generatedDir)) {
-        rmSync(generatedDir, { recursive: true, force: true })
-      }
-      mkdirSync(generatedDir, { recursive: true })
-
-      const servicesToGenerate = services.filter(service => !skipServices.has(service.apiClass))
-
-      if (servicesToGenerate.length === 0) {
-        console.log(` ⏭️  Skipping ${packageName}/${version}: all services excluded by skipServices`)
-        return
-      }
-
-      for (const service of servicesToGenerate) {
-        console.log(`📝 Generating hooks for ${service.apiClass}`)
-
-        for (const method of service.methods) {
-          if (!skipMethods.has(method.methodName) && !(config.filters.skipPrivateMethods && method.isPrivate)) {
-            // Standard query hook (e.g. useInstancev1APIGetServerQuery)
-            const hookContent = generateQueryHook(method, service, metadata, config, packageName, namespaceResolver)
-            const hookFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}Query.ts`
-            writeFileSync(join(generatedDir, hookFileName), hookContent)
-
-            // List methods get additional "all" and "infinite" variants
-            if (method.isList) {
-              if (!(config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
-                const allContent = generateAllQueryHook(
-                  method,
-                  service,
-                  metadata,
-                  config,
-                  packageName,
-                  namespaceResolver,
-                )
-                const allFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery.ts`
-                writeFileSync(join(generatedDir, allFileName), allContent)
-              }
-
-              const infiniteContent = generateInfiniteQueryHook(
-                method,
-                service,
-                metadata,
-                config,
-                packageName,
-                namespaceResolver,
-              )
-              const infiniteFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery.ts`
-              writeFileSync(join(generatedDir, infiniteFileName), infiniteContent)
-            }
-
-            // Methods with hasWaiter get a polling hook (e.g. useWaitForServer)
-            if (method.hasWaiter && !config.filters.skipWaiters) {
-              const waiterMethod = {
-                ...method,
-                methodName: `waitFor${capitalize(method.methodName.replace('get', ''))}`,
-              }
-              const waiterContent = generateQueryHook(
-                waiterMethod,
-                service,
-                metadata,
-                config,
-                packageName,
-                namespaceResolver,
-              )
-              const waiterFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${config.naming.waiterPrefix}${capitalize(method.methodName.replace('get', ''))}Query.ts`
-              writeFileSync(join(generatedDir, waiterFileName), waiterContent)
-            }
-          }
-        }
-
-        // One reload hook per service to invalidate all its queries
-        const reloadContent = generateReloadHook(service, metadata, config)
-        const reloadFileName = `${config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}Reload.ts`
-        writeFileSync(join(generatedDir, reloadFileName), reloadContent)
-      }
-
-      // Barrel file re-exporting all generated hooks for this namespace
-      const indexContent = generateIndexFile(servicesToGenerate, metadata, config)
-      writeFileSync(join(generatedDir, config.naming.indexFile), indexContent)
-
-      console.log(`✅ Generated hooks for ${folderName}`)
-    } catch (error) {
-      console.error(`    ❌ Error loading ${packageName}/${version}/metadata:`, error)
-      throw error
-    }
+function writeListMethodHooks(
+  method: QueryMethod,
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  ctx: GenerationContext,
+  packageName: string,
+  generatedDir: string,
+  folderName: string,
+): void {
+  if (!(ctx.config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
+    const allContent = generateAllQueryHook(method, service, metadata, ctx.config, packageName, ctx.namespaceResolver)
+    const allFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery.ts`
+    writeFileSync(join(generatedDir, allFileName), allContent)
   }
 
-  for (const [packageName, pkgDir] of sdkPackages) {
-    if (skipPackages.has(packageName)) {
-      console.log(`⏭️ Skipping ${packageName} (excluded by skipPackages)`)
-    } else {
-      const versions = discoverVersions(pkgDir, metadataFileName)
+  const infiniteContent = generateInfiniteQueryHook(
+    method,
+    service,
+    metadata,
+    ctx.config,
+    packageName,
+    ctx.namespaceResolver,
+  )
+  const infiniteFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery.ts`
+  writeFileSync(join(generatedDir, infiniteFileName), infiniteContent)
+}
 
-      if (versions.length === 0) {
-        console.log(` ⏭️ Skipping ${packageName} (no metadata found)`)
-      } else {
-        console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.join(', ')}`)
+function writeWaiterHook(
+  method: QueryMethod,
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  ctx: GenerationContext,
+  packageName: string,
+  generatedDir: string,
+  folderName: string,
+): void {
+  const waiterMethod = {
+    ...method,
+    methodName: `waitFor${capitalize(method.methodName.replace('get', ''))}`,
+  }
+  const waiterContent = generateQueryHook(
+    waiterMethod,
+    service,
+    metadata,
+    ctx.config,
+    packageName,
+    ctx.namespaceResolver,
+  )
+  const waiterFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${ctx.config.naming.waiterPrefix}${capitalize(method.methodName.replace('get', ''))}Query.ts`
+  writeFileSync(join(generatedDir, waiterFileName), waiterContent)
+}
 
-        for (const version of versions) {
-          await processVersion(packageName, pkgDir, version)
-        }
-      }
+function writeMethodHooks(
+  method: QueryMethod,
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  ctx: GenerationContext,
+  packageName: string,
+  generatedDir: string,
+  folderName: string,
+): void {
+  const hookContent = generateQueryHook(method, service, metadata, ctx.config, packageName, ctx.namespaceResolver)
+  const hookFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}Query.ts`
+  writeFileSync(join(generatedDir, hookFileName), hookContent)
+
+  if (method.isList) {
+    writeListMethodHooks(method, service, metadata, ctx, packageName, generatedDir, folderName)
+  }
+
+  if (method.hasWaiter && !ctx.config.filters.skipWaiters) {
+    writeWaiterHook(method, service, metadata, ctx, packageName, generatedDir, folderName)
+  }
+}
+
+function writeServiceHooks(
+  service: ServiceMetadata,
+  metadata: QueriesMetadata,
+  ctx: GenerationContext,
+  packageName: string,
+  generatedDir: string,
+  folderName: string,
+): void {
+  console.log(`📝 Generating hooks for ${service.apiClass}`)
+  for (const method of service.methods) {
+    if (!ctx.skipMethods.has(method.methodName) && !(ctx.config.filters.skipPrivateMethods && method.isPrivate)) {
+      writeMethodHooks(method, service, metadata, ctx, packageName, generatedDir, folderName)
     }
+  }
+  const reloadContent = generateReloadHook(service, metadata, ctx.config)
+  const reloadFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}Reload.ts`
+  writeFileSync(join(generatedDir, reloadFileName), reloadContent)
+}
+
+function generateServiceHooks(
+  services: ServiceMetadata[],
+  metadata: QueriesMetadata,
+  ctx: GenerationContext,
+  packageName: string,
+  generatedDir: string,
+  folderName: string,
+): void {
+  const servicesToGenerate = services.filter(service => !ctx.skipServices.has(service.apiClass))
+  if (servicesToGenerate.length === 0) {
+    console.log(' ⏭️  Skipping: all services excluded by skipServices')
+    return
+  }
+  for (const service of servicesToGenerate) {
+    writeServiceHooks(service, metadata, ctx, packageName, generatedDir, folderName)
+  }
+  const indexContent = generateIndexFile(servicesToGenerate, metadata, ctx.config)
+  writeFileSync(join(generatedDir, ctx.config.naming.indexFile), indexContent)
+}
+
+async function processVersionCore(
+  packageName: string,
+  pkgDir: string,
+  version: string,
+  ctx: GenerationContext,
+): Promise<void> {
+  const metadata = await loadMetadata(pkgDir, version, ctx.metadataFileName)
+  if (!metadata?.services) {
+    console.warn(`    ⚠️  Invalid metadata for ${packageName}/${version}, skipping`)
+    return
+  }
+  const { folderName, services } = metadata
+  const generatedDir = prepareGeneratedDir(ctx, folderName)
+  generateServiceHooks(services, metadata, ctx, packageName, generatedDir, folderName)
+  console.log(`✅ Generated hooks for ${folderName}`)
+}
+
+async function processVersion(
+  packageName: string,
+  pkgDir: string,
+  version: string,
+  ctx: GenerationContext,
+): Promise<void> {
+  if (ctx.skipVersions.has(`${packageName}@${version}`) || ctx.skipVersions.has(version)) {
+    console.log(`  ⏭️  Skipping ${packageName}/${version} (excluded by skipVersions)`)
+    return
+  }
+  try {
+    await processVersionCore(packageName, pkgDir, version, ctx)
+  } catch (error) {
+    console.error(`    ❌ Error loading ${packageName}/${version}/metadata:`, error)
+    throw error
+  }
+}
+
+async function processPackage(packageName: string, pkgDir: string, ctx: GenerationContext): Promise<void> {
+  if (ctx.skipPackages.has(packageName)) {
+    console.log(`⏭️ Skipping ${packageName} (excluded by skipPackages)`)
+    return
+  }
+  const versions = discoverVersions(pkgDir, ctx.metadataFileName)
+  if (versions.length === 0) {
+    console.log(` ⏭️ Skipping ${packageName} (no metadata found)`)
+    return
+  }
+  console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.join(', ')}`)
+  for (const version of versions) {
+    await processVersion(packageName, pkgDir, version, ctx)
+  }
+}
+
+export async function generateFromMetadata(config: ReactQueriesConfig): Promise<void> {
+  const ctx: GenerationContext = {
+    config,
+    metadataFileName: config.naming.metadataFileName,
+    skipMethods: new Set(config.filters.skipMethods),
+    skipServices: new Set(config.filters.skipServices),
+    skipVersions: new Set(config.filters.skipVersions),
+    skipPackages: new Set(config.filters.skipPackages),
+    namespaceResolver: await buildNamespaceResolver(config),
+  }
+
+  const sdkPackages = discoverSdkPackages(config)
+  for (const [packageName, pkgDir] of sdkPackages) {
+    await processPackage(packageName, pkgDir, ctx)
   }
 
   console.log('🎉 Hook generation complete!')
