@@ -4,14 +4,14 @@ import { appendFileSync, realpathSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
-import { RELEASE_SUBJECT, CHANGESET_MESSAGE } from './constants.ts'
+import { CHANGESET_MESSAGE, RELEASE_SUBJECT } from './constants.ts'
 import {
+  createChangesets,
+  createGithubReleases,
   createTags,
   exec,
   findWorkspaceRoot,
   listWorkspacePackages,
-  createChangesets,
-  createGithubReleases,
 } from './utils.ts'
 
 const { log: logger } = console
