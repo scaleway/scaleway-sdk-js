@@ -235,8 +235,8 @@ importers:
         specifier: workspace:*
         version: link:tools/generate-react-sdk
       '@scaleway/oxlint-config':
-        specifier: 1.1.0
-        version: 1.1.0(oxlint@1.81.0(oxlint-tsgolint@7.0.2001))
+        specifier: 1.1.1
+        version: 1.1.1(oxlint@1.81.0(oxlint-tsgolint@7.0.2001))
       '@scaleway/sync-peer-deps':
         specifier: 1.0.5
         version: 1.0.5
@@ -2417,10 +2417,10 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
-  '@scaleway/oxlint-config@1.1.0':
-    resolution: {integrity: sha512-rKeXwbm6QUyt4PcWCPethnUKY9wZcxicN05yKGIoy4OWw2EjYdnQ2qpFPrhgl/LyvzaiAAXQwmTDascXC28GOA==}
+  '@scaleway/oxlint-config@1.1.1':
+    resolution: {integrity: sha512-eXDxOZTd+UkPF87M35/Zh1habpE+EXU+4A/zLXp31am4p4Ea4kUFL8hGr2cV1074ONsm5k0DCXYDMT8A9IkmLA==}
     peerDependencies:
-      oxlint: '>=1.78.0'
+      oxlint: '>=1.80.0'
 
   '@scaleway/random-name@6.0.2':
     resolution: {integrity: sha512-fhR2aCzxoZlOZcCM42srbALdpdqMy79LwOK5mVf4sGG1uknn095mr5PQ/0/zwfk/FX2KycZwbKJzr4zP6CG3Zg==}
@@ -4040,7 +4040,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.1': {}
 
-  '@scaleway/oxlint-config@1.1.0(oxlint@1.81.0(oxlint-tsgolint@7.0.2001))':
+  '@scaleway/oxlint-config@1.1.1(oxlint@1.81.0(oxlint-tsgolint@7.0.2001))':
     dependencies:
       oxlint: 1.81.0(oxlint-tsgolint@7.0.2001)
 
