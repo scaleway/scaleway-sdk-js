@@ -31,11 +31,11 @@ export type ResolvedNamespace = {
  * to the package that actually owns it (`@scaleway/sdk-rdb`).
  */
 function normalizePackagePath(packageName: string): string {
-  return packageName.replace(/^@scaleway\/sdk-/, '@scaleway-internal/sdk-')
+  return packageName.replace(/^@scaleway\/sdk-/v, '@scaleway-internal/sdk-')
 }
 
 function normalizeNsPath(nsPath: string): string {
-  return nsPath.replace(/^@scaleway\/sdk-/, '@scaleway-internal/sdk-')
+  return nsPath.replace(/^@scaleway\/sdk-/v, '@scaleway-internal/sdk-')
 }
 
 function registerNsPath(
@@ -140,7 +140,7 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
  * like `RdbAdminv1.RdbV1ACLRule` instead of `Rdbv1.RdbV1ACLRule`.
  */
 function deriveFromNamespacePath(nsPath: string): ResolvedNamespace | undefined {
-  const match = nsPath.match(/^(?<scope>@scaleway(?:-internal)?)\/sdk-(?<slug>[^/]+)\/(?<version>.+)$/)
+  const match = nsPath.match(/^(?<scope>@scaleway(?:-internal)?)\/sdk-(?<slug>[^\/]+)\/(?<version>.+)$/v)
   if (!match) return undefined
 
   const scope = match[1] // e.g. "@scaleway-internal" or "@scaleway"
@@ -150,7 +150,7 @@ function deriveFromNamespacePath(nsPath: string): ResolvedNamespace | undefined 
   if (!version) return undefined
 
   // Convert kebab-case slug to camelCase (e.g. "rdb-admin" → "rdbAdmin")
-  const camelSlug = slug.replace(/-(?<char>[a-z])/g, (_, c: string) => c.toUpperCase())
+  const camelSlug = slug.replace(/-(?<char>[a-z])/gv, (_, c: string) => c.toUpperCase())
 
   return {
     packageName: `${scope}/sdk-${slug}`,
