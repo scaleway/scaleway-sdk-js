@@ -31,7 +31,6 @@ export default defineConfig({
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-implicit-coercion': 'warn',
     'eslint/no-use-before-define': 'warn',
-    'eslint/no-useless-assignment': 'warn',
     'eslint/prefer-template': 'warn',
     'eslint/require-unicode-regexp': 'warn',
     'eslint/sort-imports': 'warn',
