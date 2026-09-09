@@ -1,0 +1,27 @@
+{
+  "name": "@repo/configure-npm-trust",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Configure npm OIDC trusted publishing for unpublished workspace packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
+    "directory": "tools/configure-npm-trust"
+  },
+  "bin": {
+    "configure-npm-trust": "./src/cli.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@repo/configs": "workspace:*",
+    "@types/node": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.x",
+    "pnpm": ">=11.x"
+  }
+}

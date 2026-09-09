@@ -225,6 +225,9 @@ importers:
       '@repo/configs':
         specifier: workspace:^
         version: link:tools/configs
+      '@repo/configure-npm-trust':
+        specifier: workspace:*
+        version: link:tools/configure-npm-trust
       '@repo/generate-packages':
         specifier: workspace:*
         version: link:tools/generate-packages
@@ -1640,6 +1643,15 @@ importers:
 
   tools/configs:
     devDependencies:
+      '@types/node':
+        specifier: 26.4.1
+        version: 26.4.1
+
+  tools/configure-npm-trust:
+    devDependencies:
+      '@repo/configs':
+        specifier: workspace:*
+        version: link:../configs
       '@types/node':
         specifier: 26.4.1
         version: 26.4.1
