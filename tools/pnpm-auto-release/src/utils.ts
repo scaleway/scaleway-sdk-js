@@ -49,7 +49,7 @@ export const listWorkspacePackages = (root: string) => {
 }
 
 function tagExists(root: string, tag: string): boolean {
-  let localExists = false
+  let localExists: boolean
   try {
     exec(`git rev-parse -q --verify refs/tags/${tag}`, { cwd: root })
     localExists = true
