@@ -7,7 +7,7 @@
  * @internal
  */
 const toPascalCase = (str: string): string =>
-  str.replaceAll(/\w+/g, word => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`)
+  str.replaceAll(/\w+/gv, word => `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`)
 
 /**
  * Converts a Headers entry to string.

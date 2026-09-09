@@ -95,7 +95,7 @@ export const createTags = ({
 
 const getRepoFromRemote = (root: string): string => {
   const remoteUrl = exec('git remote get-url origin', { cwd: root })
-  const match = /github\.com[:/](?<repo>[^/]+\/[^/]+?)(?:\.git)?$/.exec(remoteUrl)
+  const match = /github\.com[:\/](?<repo>[^\/]+\/[^\/]+?)(?:\.git)?$/v.exec(remoteUrl)
   if (!match?.[1]) {
     throw new Error('Could not determine GitHub repository from git remote')
   }
