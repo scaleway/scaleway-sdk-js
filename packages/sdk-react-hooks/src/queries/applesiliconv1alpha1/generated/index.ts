@@ -15,6 +15,7 @@ export { useApplesiliconv1alpha1APIGetRunnerQuery } from "./useApplesiliconv1alp
 export { useApplesiliconv1alpha1APIListRunnersQuery } from "./useApplesiliconv1alpha1APIListRunnersQuery"
 export { useApplesiliconv1alpha1APIListRunnersInfiniteQuery } from "./useApplesiliconv1alpha1APIListRunnersInfiniteQuery"
 export { useApplesiliconv1alpha1APIListRunnersAllQuery } from "./useApplesiliconv1alpha1APIListRunnersAllQuery"
+export { useApplesiliconv1alpha1APIGetUserConfigurationQuery } from "./useApplesiliconv1alpha1APIGetUserConfigurationQuery"
 export { useApplesiliconv1alpha1APIReload } from "./useApplesiliconv1alpha1APIReload"
 export { useApplesiliconv1alpha1PrivateNetworkAPIGetServerPrivateNetworkQuery } from "./useApplesiliconv1alpha1PrivateNetworkAPIGetServerPrivateNetworkQuery"
 export { useApplesiliconv1alpha1PrivateNetworkAPIListServerPrivateNetworksQuery } from "./useApplesiliconv1alpha1PrivateNetworkAPIListServerPrivateNetworksQuery"
