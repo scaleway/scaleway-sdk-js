@@ -32,7 +32,7 @@ type ResolvedNames = ReturnType<typeof resolveNames>
 function resolveApiNames(folderName: string, service: ServiceMetadata, config: ReactQueriesConfig) {
   const apiImportName = `${folderName}${service.apiClass}`
   const apiHookName = `${config.naming.hookPrefix}${capitalize(apiImportName)}`
-  const apiVarName = apiImportName.replace(/API$/, '')
+  const apiVarName = apiImportName.replace(/API$/v, '')
   const apiImportPath = `${config.imports.apiSdkPath}/${lowerCaseFirst(apiImportName)}`
   return { apiImportName, apiHookName, apiVarName, apiImportPath }
 }
@@ -230,7 +230,7 @@ export function generateReloadHook(
     hookName: `${config.naming.hookPrefix}${capitalize(apiImportName)}Reload`,
     reloadFnName: `${config.naming.reloadPrefix}${capitalize(apiImportName)}`,
     asyncReloadFnName: `async${capitalize(config.naming.reloadPrefix)}${capitalize(apiImportName)}`,
-    apiKey: apiImportName.replace(/API$/, ''),
+    apiKey: apiImportName.replace(/API$/v, ''),
   })
 }
 
@@ -266,7 +266,7 @@ function collectMethodExports(
     exports.push(...collectListExports(method, serviceName, config, baseName))
   }
   if (method.hasWaiter && !config.filters.skipWaiters) {
-    const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
+    const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/v, ''))}`
     exports.push(
       `export { ${config.naming.hookPrefix}${serviceName}${waiterName}Query } from "./${config.naming.hookPrefix}${serviceName}${waiterName}Query"`,
     )

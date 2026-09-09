@@ -151,7 +151,7 @@ function resolvePackageDir(packageName: string): string | undefined {
  */
 export function discoverVersions(pkgDir: string, metadataFileName: string): string[] {
   const distPath = join(pkgDir, 'dist')
-  const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
+  const metadataJsFile = metadataFileName.replace(/\.ts$/v, '.js')
 
   if (!existsSync(distPath)) return []
 
@@ -196,7 +196,7 @@ export async function loadMetadata(
   version: string,
   metadataFileName: string,
 ): Promise<QueriesMetadata> {
-  const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
+  const metadataJsFile = metadataFileName.replace(/\.ts$/v, '.js')
   const metadataPath = join(pkgDir, 'dist', version, metadataJsFile)
   const module: unknown = await import(metadataPath)
   if (!isQueriesMetadataModule(module)) {

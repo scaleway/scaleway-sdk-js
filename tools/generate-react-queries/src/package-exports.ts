@@ -21,9 +21,9 @@ type PackageJson = {
 
 function removeSrcFromPath(path: string): string {
   return path
-    .replace(/\/src\//g, '/')
-    .replace(/\\src\\/g, '\\')
-    .replace(/^src[\\/]/, '')
+    .replace(/\/src\//gv, '/')
+    .replace(/\\src\\/gv, '\\')
+    .replace(/^src[\\\/]/v, '')
 }
 
 function buildNamespaceExports(
