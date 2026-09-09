@@ -84,7 +84,7 @@ export function generateQueryHook(
   namespaceResolver: Map<string, ResolvedNamespace>,
 ): string {
   const n = resolveNames(method, service, metadata, config, sdkPackageName, namespaceResolver)
-  const hasParams = !!method.paramsType
+  const hasParams = Boolean(method.paramsType)
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}Query`
 
   // Collect namespace imports: return type, and params type if it uses a namespace

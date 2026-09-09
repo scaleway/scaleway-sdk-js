@@ -31,7 +31,6 @@ export default defineConfig({
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-bitwise': 'warn',
     'eslint/no-eq-null': 'warn',
-    'eslint/no-implicit-coercion': 'warn',
     'eslint/no-shadow': 'warn',
     'eslint/no-use-before-define': 'warn',
     'eslint/no-useless-assignment': 'warn',
