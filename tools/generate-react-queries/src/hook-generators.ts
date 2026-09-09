@@ -27,6 +27,16 @@ function collectNsImports(imports: Map<string, ResolvedNamespace>): ResolvedName
   return [...imports.values()].sort((a, b) => a.packageName.localeCompare(b.packageName))
 }
 
+type ResolvedNames = ReturnType<typeof resolveNames>
+
+function resolveApiNames(folderName: string, service: ServiceMetadata, config: ReactQueriesConfig) {
+  const apiImportName = `${folderName}${service.apiClass}`
+  const apiHookName = `${config.naming.hookPrefix}${capitalize(apiImportName)}`
+  const apiVarName = apiImportName.replace(/API$/, '')
+  const apiImportPath = `${config.imports.apiSdkPath}/${lowerCaseFirst(apiImportName)}`
+  return { apiImportName, apiHookName, apiVarName, apiImportPath }
+}
+
 /** Derive all naming conventions for a given method + service combination. */
 function resolveNames(
   method: QueryMethod,
@@ -38,11 +48,7 @@ function resolveNames(
 ) {
   const { folderName } = metadata
   const rawTypes = new Set(config.filters.rawTypes)
-
-  const apiImportName = `${folderName}${service.apiClass}`
-  const apiHookName = `${config.naming.hookPrefix}${capitalize(apiImportName)}`
-  const apiVarName = apiImportName.replace(/API$/, '')
-  const apiImportPath = `${config.imports.apiSdkPath}/${lowerCaseFirst(apiImportName)}`
+  const { apiHookName, apiVarName, apiImportPath } = resolveApiNames(folderName, service, config)
 
   const ns = capitalize(folderName)
   const selfNs: ResolvedNamespace = { packageName: sdkPackageName, ns }
@@ -112,6 +118,26 @@ export function generateQueryHook(
   })
 }
 
+function collectAllHookImports(
+  n: ResolvedNames,
+  method: QueryMethod,
+  sdkPackageName: string,
+  itemNsInfo: ResolvedNamespace,
+  rawItemType: string | undefined,
+): Map<string, ResolvedNamespace> {
+  const nsImports = new Map<string, ResolvedNamespace>()
+  if (!n.rawTypes.has(method.paramsType)) {
+    nsImports.set(sdkPackageName, n.selfNs)
+  }
+  if (!n.rawTypes.has(method.returnType)) {
+    nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
+  }
+  if (rawItemType && !n.rawTypes.has(rawItemType)) {
+    nsImports.set(itemNsInfo.packageName, itemNsInfo)
+  }
+  return nsImports
+}
+
 /** Generate an "all" hook that fetches every page of a list method. */
 export function generateAllQueryHook(
   method: QueryMethod,
@@ -130,17 +156,7 @@ export function generateAllQueryHook(
   const rawItemType = method.listItemType
   const itemType = rawItemType ? nsType(itemNsInfo.ns, rawItemType, n.rawTypes) : n.returnType
 
-  // Collect namespace imports: params type, return type (if used), and list item type
-  const nsImports = new Map<string, ResolvedNamespace>()
-  if (!n.rawTypes.has(method.paramsType)) {
-    nsImports.set(sdkPackageName, n.selfNs)
-  }
-  if (!n.rawTypes.has(method.returnType)) {
-    nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
-  }
-  if (rawItemType && !n.rawTypes.has(rawItemType)) {
-    nsImports.set(itemNsInfo.packageName, itemNsInfo)
-  }
+  const nsImports = collectAllHookImports(n, method, sdkPackageName, itemNsInfo, rawItemType)
 
   return renderHook({
     apiHookName: n.apiHookName,
@@ -218,6 +234,46 @@ export function generateReloadHook(
   })
 }
 
+function collectListExports(
+  method: QueryMethod,
+  serviceName: string,
+  config: ReactQueriesConfig,
+  baseName: string,
+): string[] {
+  const exports = [
+    `export { ${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery"`,
+  ]
+  if (!(config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
+    exports.push(
+      `export { ${config.naming.hookPrefix}${serviceName}${baseName}AllQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}AllQuery"`,
+    )
+  }
+  return exports
+}
+
+function collectMethodExports(
+  method: QueryMethod,
+  serviceName: string,
+  config: ReactQueriesConfig,
+  skipMethods: Set<string>,
+): string[] {
+  if (skipMethods.has(method.methodName) || (config.filters.skipPrivateMethods && method.isPrivate)) return []
+  const baseName = capitalize(method.methodName)
+  const exports = [
+    `export { ${config.naming.hookPrefix}${serviceName}${baseName}Query } from "./${config.naming.hookPrefix}${serviceName}${baseName}Query"`,
+  ]
+  if (method.isList) {
+    exports.push(...collectListExports(method, serviceName, config, baseName))
+  }
+  if (method.hasWaiter && !config.filters.skipWaiters) {
+    const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
+    exports.push(
+      `export { ${config.naming.hookPrefix}${serviceName}${waiterName}Query } from "./${config.naming.hookPrefix}${serviceName}${waiterName}Query"`,
+    )
+  }
+  return exports
+}
+
 /** Generate the barrel index.ts that re-exports all hooks for a namespace. */
 export function generateIndexFile(
   services: ServiceMetadata[],
@@ -232,30 +288,7 @@ export function generateIndexFile(
     const serviceName = `${capitalize(folderName)}${service.apiClass}`
 
     for (const method of service.methods) {
-      if (!skipMethods.has(method.methodName) && !(config.filters.skipPrivateMethods && method.isPrivate)) {
-        const baseName = capitalize(method.methodName)
-        exports.push(
-          `export { ${config.naming.hookPrefix}${serviceName}${baseName}Query } from "./${config.naming.hookPrefix}${serviceName}${baseName}Query"`,
-        )
-
-        if (method.isList) {
-          exports.push(
-            `export { ${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery"`,
-          )
-          if (!(config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
-            exports.push(
-              `export { ${config.naming.hookPrefix}${serviceName}${baseName}AllQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}AllQuery"`,
-            )
-          }
-        }
-
-        if (method.hasWaiter && !config.filters.skipWaiters) {
-          const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
-          exports.push(
-            `export { ${config.naming.hookPrefix}${serviceName}${waiterName}Query } from "./${config.naming.hookPrefix}${serviceName}${waiterName}Query"`,
-          )
-        }
-      }
+      exports.push(...collectMethodExports(method, serviceName, config, skipMethods))
     }
 
     exports.push(

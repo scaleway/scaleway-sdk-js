@@ -3,30 +3,34 @@ import { join, resolve } from 'node:path'
 import type { ProcessedMetadata } from '../metadata-types.ts'
 import { lowerCaseFirstLetter } from './helpers.ts'
 
-export const generateType = (res: ProcessedMetadata) => {
-  const filename = 'types.generated.ts'
-  const template = ['//this file is generated \n\n']
-
-  // import types
-  for (const [name, { packageName }] of Object.entries(res)) {
+function buildImportLines(res: ProcessedMetadata): string[] {
+  return Object.entries(res).map(([name, { packageName }]) => {
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
-    const imp = `import type { ${capitalizedName} } from "${packageName}"\n`
-    template.push(imp)
-  }
+    return `import type { ${capitalizedName} } from "${packageName}"\n`
+  })
+}
 
-  // export
-  template.push('\n export type APISdk = {\n')
-
+function buildExportLines(res: ProcessedMetadata): string[] {
+  const lines: string[] = []
   for (const [name, { apis }] of Object.entries(res)) {
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
     for (const api of apis) {
       const key = `${lowerCaseFirstLetter(name + api.replace('API', ''))}`
       const type = `${capitalizedName}.${api}`
-
-      template.push(`${key}:${type},\n`)
+      lines.push(`${key}:${type},\n`)
     }
   }
-  template.push('\n}')
-  const src = join(resolve('./src/'), filename)
-  writeFileSync(src, template.join('').toString())
+  return lines
+}
+
+export const generateType = (res: ProcessedMetadata) => {
+  const content = [
+    '//this file is generated \n\n',
+    ...buildImportLines(res),
+    '\n export type APISdk = {\n',
+    ...buildExportLines(res),
+    '\n}',
+  ].join('')
+  const src = join(resolve('./src/'), 'types.generated.ts')
+  writeFileSync(src, content)
 }

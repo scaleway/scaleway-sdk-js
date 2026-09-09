@@ -43,49 +43,62 @@ const getGeneratedPackages = (dir: string, excludeSuffix?: string): PackageJSON[
  * @param options.config - Loaded configuration defining SDK targets and filters
  * @param options.runInstall - Run `pnpm install` after updating (default: true)
  */
+function rebuildDeps(sdkPkg: PackageJSON, depType: string, config: Config, validPackages: PackageJSON[]): void {
+  const field =
+    depType === 'dependencies'
+      ? 'dependencies'
+      : depType === 'peerDependencies'
+        ? 'peerDependencies'
+        : 'devDependencies'
+  const existing = sdkPkg[field] ?? {}
+  const kept = Object.fromEntries(
+    Object.entries(existing).filter(([name]) => !name.startsWith(config.sdkPackagePrefix)),
+  )
+  const added = Object.fromEntries(
+    validPackages.length > 0 ? validPackages.map(p => [p.name, 'workspace:*' as const]) : [],
+  )
+  sdkPkg[field] = { ...kept, ...added }
+}
+
+function rebuildAllDeps(
+  sdkPkg: PackageJSON,
+  s: Config['sdks'][number],
+  config: Config,
+  validPackages: PackageJSON[],
+): void {
+  for (const depType of s.depsTypes) {
+    rebuildDeps(sdkPkg, depType, config, validPackages)
+  }
+}
+
+function writeSdkIndex(s: Config['sdks'][number], validPackages: PackageJSON[]): void {
+  if (!s.shouldUpdateIndex) return
+  const indexContent =
+    '// Auto-generated exports from all SDK packages\n\n' +
+    validPackages.map(p => `export * from '${p.name}'\n`).join('')
+  writeFileSync(s.index, indexContent, 'utf8')
+  console.log(`Updated ${s.index} with exports for ${validPackages.length} packages`)
+}
+
+function updateSdk(s: Config['sdks'][number], src: string, config: Config): void {
+  const generatedPackages = getGeneratedPackages(src, s.excludeSuffix)
+  if (!generatedPackages || generatedPackages.length === 0) {
+    console.warn('No generated packages found. Nothing to update.')
+    exit(1)
+  }
+  const validPackages = generatedPackages.filter(p => !s.ignoredPackages.includes(p.name))
+  const sdkPkg = JSON.parse(readFileSync(s.path, 'utf8')) as PackageJSON
+  rebuildAllDeps(sdkPkg, s, config, validPackages)
+  writeFileSync(s.path, `${JSON.stringify(sdkPkg, null, 2)}\n`, 'utf8')
+  console.log(`Updated ${s.path} with ${validPackages.length} packages`)
+  writeSdkIndex(s, validPackages)
+}
+
 export const sdk = async ({ src, config, runInstall = true }: SdkOptions): Promise<void> => {
   console.log('Starting SDK package update process...')
 
   for (const s of config.sdks) {
-    const generatedPackages = getGeneratedPackages(src, s.excludeSuffix)
-    if (!generatedPackages || generatedPackages.length === 0) {
-      console.warn('No generated packages found. Nothing to update.')
-      exit(1)
-    }
-
-    const validPackages = generatedPackages.filter(p => !s.ignoredPackages.includes(p.name))
-    const validNames = new Set(validPackages.map(p => p.name))
-
-    const sdkPkg = JSON.parse(readFileSync(s.path, 'utf8')) as PackageJSON
-
-    // Rebuild each dependency section: keep non-SDK deps, replace SDK deps with current set
-    for (const depType of s.depsTypes) {
-      const field =
-        depType === 'dependencies'
-          ? 'dependencies'
-          : depType === 'peerDependencies'
-            ? 'peerDependencies'
-            : 'devDependencies'
-      const existing = sdkPkg[field] ?? {}
-      const kept = Object.fromEntries(
-        Object.entries(existing).filter(([name]) => !name.startsWith(config.sdkPackagePrefix)),
-      )
-      const added = Object.fromEntries(
-        validNames.size > 0 ? validPackages.map(p => [p.name, 'workspace:*' as const]) : [],
-      )
-      sdkPkg[field] = { ...kept, ...added }
-    }
-
-    writeFileSync(s.path, `${JSON.stringify(sdkPkg, null, 2)}\n`, 'utf8')
-    console.log(`Updated ${s.path} with ${validPackages.length} packages`)
-
-    if (s.shouldUpdateIndex) {
-      const indexContent =
-        '// Auto-generated exports from all SDK packages\n\n' +
-        validPackages.map(p => `export * from '${p.name}'\n`).join('')
-      writeFileSync(s.index, indexContent, 'utf8')
-      console.log(`Updated ${s.index} with exports for ${validPackages.length} packages`)
-    }
+    updateSdk(s, src, config)
   }
 
   if (runInstall) {

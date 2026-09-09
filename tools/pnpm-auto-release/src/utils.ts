@@ -48,6 +48,29 @@ export const listWorkspacePackages = (root: string) => {
     }))
 }
 
+function tagExists(root: string, tag: string): boolean {
+  let localExists = false
+  try {
+    exec(`git rev-parse -q --verify refs/tags/${tag}`, { cwd: root })
+    localExists = true
+  } catch {
+    localExists = false
+  }
+  const remoteExists = exec(`git ls-remote --tags origin "refs/tags/${tag}"`, { cwd: root }).length > 0
+  return localExists || remoteExists
+}
+
+function createTagForPackage(root: string, pkg: Package, newPkg: Package, newTags: string[]): void {
+  const tag = `${pkg.name}@${newPkg.version}`
+  if (tagExists(root, tag)) {
+    logger(`[release] tag already exists, skipping: ${tag}`)
+    return
+  }
+  exec(`git tag "${tag}" -m "${tag}"`, { cwd: root })
+  newTags.push(tag)
+  logger(`[release] tag: ${tag}`)
+}
+
 export const createTags = ({
   root,
   affectedPackages,
@@ -60,29 +83,24 @@ export const createTags = ({
   const newTags: string[] = []
   for (const pkg of affectedPackages) {
     const newPkg = updatedPackages.find(({ name }) => name === pkg.name)
-    if (newPkg) {
-      const tag = `${pkg.name}@${newPkg.version}`
-      // Skip tags that already exist locally or on the remote. Retried runs
-      // must not recreate tags for already-released versions (pushing them
-      // would fail with "tag already exists").
-      let localExists = false
-      try {
-        exec(`git rev-parse -q --verify refs/tags/${tag}`, { cwd: root })
-        localExists = true
-      } catch {
-        localExists = false
-      }
-      const remoteExists = exec(`git ls-remote --tags origin "refs/tags/${tag}"`, { cwd: root }).length > 0
-      if (localExists || remoteExists) {
-        logger(`[release] tag already exists, skipping: ${tag}`)
-      } else {
-        exec(`git tag "${tag}" -m "${tag}"`, { cwd: root })
-        newTags.push(tag)
-        logger(`[release] tag: ${tag}`)
-      }
-    }
+    if (newPkg) createTagForPackage(root, pkg, newPkg, newTags)
   }
   return newTags
+}
+
+function createReleaseForPackage(root: string, pkg: Package, newPkg: Package): void {
+  const tag = `${pkg.name}@${newPkg.version}`
+  const releaseNotes = `Release ${tag}`
+  try {
+    exec(`gh release view ${tag} --repo ${getRepoFromRemote(root)} >/dev/null 2>&1`, { cwd: root })
+    logger(`[release] github release already exists: ${tag}`)
+  } catch {
+    exec(
+      `echo "${releaseNotes}" | gh release create ${tag} --title ${tag} --notes-file - --repo ${getRepoFromRemote(root)}`,
+      { cwd: root },
+    )
+    logger(`[release] github release created: ${tag}`)
+  }
 }
 
 export const createGithubReleases = ({
@@ -101,23 +119,7 @@ export const createGithubReleases = ({
 
   for (const pkg of affectedPackages) {
     const newPkg = updatedPackages.find(({ name }) => name === pkg.name)
-    if (newPkg) {
-      const tag = `${pkg.name}@${newPkg.version}`
-      const releaseNotes = `Release ${tag}`
-
-      try {
-        exec(`gh release view ${tag} --repo ${getRepoFromRemote(root)} >/dev/null 2>&1`, { cwd: root })
-        logger(`[release] github release already exists: ${tag}`)
-      } catch {
-        exec(
-          `echo "${releaseNotes}" | gh release create ${tag} --title ${tag} --notes-file - --repo ${getRepoFromRemote(root)}`,
-          {
-            cwd: root,
-          },
-        )
-        logger(`[release] github release created: ${tag}`)
-      }
-    }
+    if (newPkg) createReleaseForPackage(root, pkg, newPkg)
   }
 }
 
@@ -136,6 +138,21 @@ const createChangesetForPackages = (root: string, packages: Package[], summary: 
     cwd: root,
   })
   logger(`changeset ${summary} ${names}`)
+}
+
+function processCommit(root: string, line: string, packages: Package[], defaultSummary: string): void {
+  const [sha, subject] = line.split('\u001F')
+  if (!sha) return
+  const changedFiles = exec(`git diff-tree --no-commit-id --name-only -r ${sha}`, { cwd: root })
+    .split('\n')
+    .filter(Boolean)
+  const affected = packages.filter(
+    pkg => pkg.relativePath && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)),
+  )
+  if (affected.length > 0) {
+    createChangesetForPackages(root, affected, subject || defaultSummary)
+    logger(`[release] changeset (${sha.slice(0, 7)} -> ${affected.length} pkg)`)
+  }
 }
 
 export const createChangesets = ({
@@ -160,20 +177,6 @@ export const createChangesets = ({
   const commits = exec(`git log ${range} --format="%H%x1F%s" --no-merges`, { cwd: root })
 
   for (const line of commits.split('\n').filter(Boolean)) {
-    const [sha, subject] = line.split('\u001F')
-    if (sha) {
-      const changedFiles = exec(`git diff-tree --no-commit-id --name-only -r ${sha}`, { cwd: root })
-        .split('\n')
-        .filter(Boolean)
-
-      const affected = packages.filter(
-        pkg => pkg.relativePath && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)),
-      )
-
-      if (affected.length > 0) {
-        createChangesetForPackages(root, affected, subject || defaultSummary)
-        logger(`[release] changeset (${sha.slice(0, 7)} -> ${affected.length} pkg)`)
-      }
-    }
+    processCommit(root, line, packages, defaultSummary)
   }
 }
