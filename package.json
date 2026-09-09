@@ -29,7 +29,7 @@
     "@repo/generate-packages": "workspace:*",
     "@repo/pnpm-auto-release": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
-    "@scaleway/oxlint-config": "1.1.0",
+    "@scaleway/oxlint-config": "1.1.1",
     "@scaleway/sync-peer-deps": "1.0.5",
     "@scaleway/tsconfig": "1.1.6",
     "@vitest/coverage-v8": "4.1.11",
