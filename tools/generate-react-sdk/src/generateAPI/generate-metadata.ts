@@ -121,6 +121,7 @@ async function processPackageVersions(
   }
   let pkgResult: ProcessedMetadata = {}
   for (const version of versions) {
+    // eslint-disable-next-line eslint/no-await-in-loop
     const versionResult = await processVersion(packageName, version, servicesToSkip, isVersionSkipped)
     if (versionResult) pkgResult = { ...pkgResult, ...versionResult }
   }
@@ -179,6 +180,7 @@ export const generateAPI = async ({
   )
   let result: ProcessedMetadata = {}
   for (const [packageName] of sdkPackages) {
+    // eslint-disable-next-line eslint/no-await-in-loop
     result = { ...result, ...(await processSdkPackage(packageName, skipPackages, servicesToSkip, isVersionSkipped)) }
   }
   emitFiles({ res: result, sourceFolderGen: dir, sdkFactoryPath })

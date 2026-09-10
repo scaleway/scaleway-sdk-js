@@ -43,6 +43,7 @@ export const composeResponseErrorInterceptors =
     let prevError = error
     for (const interceptor of interceptors) {
       try {
+        // eslint-disable-next-line eslint/no-await-in-loop
         const res = await interceptor({ request, error: prevError })
 
         return res
