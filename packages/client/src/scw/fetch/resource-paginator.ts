@@ -9,9 +9,7 @@ interface PaginatedResponse {
 
 export type PaginatedFetcher<T, R extends PaginationOptions = PaginationOptions> = (request: R) => Promise<T>
 
-export type PaginatedContent<K extends string, T = unknown> = PaginatedResponse & {
-  [key in K]: T[]
-}
+export type PaginatedContent<K extends string, T = unknown> = PaginatedResponse & Record<K, T[]>
 
 export const extract =
   <K extends string>(key: K) =>

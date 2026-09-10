@@ -33,9 +33,10 @@ export type Metadata = {
 }
 
 /** Processed result for code generation */
-export type ProcessedMetadata = {
-  [namespace: string]: {
+export type ProcessedMetadata = Record<
+  string,
+  {
     packageName: string
     apis: string[]
   }
-}
+>

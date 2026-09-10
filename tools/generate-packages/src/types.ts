@@ -11,8 +11,8 @@ export type PackageJSON = {
   name: string
   version: string
   path: string
-  dependencies?: { [key: string]: string }
-  devDependencies?: { [key: string]: string }
-  peerDependencies?: { [key: string]: string }
-  optionalDependencies?: { [key: string]: string }
+  dependencies?: Record<string, string>
+  devDependencies?: Record<string, string>
+  peerDependencies?: Record<string, string>
+  optionalDependencies?: Record<string, string>
 }
