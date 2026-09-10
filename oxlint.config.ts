@@ -53,7 +53,6 @@ export default defineConfig({
     'typescript/no-redundant-type-constituents': 'warn',
     'typescript/no-unnecessary-boolean-literal-compare': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
-    'typescript/no-unnecessary-template-expression': 'warn',
     'typescript/no-unnecessary-type-conversion': 'warn',
     'typescript/no-unnecessary-type-parameters': 'warn',
     'typescript/no-unsafe-assignment': 'warn',
