@@ -51,7 +51,6 @@ export default defineConfig({
     'typescript/no-confusing-void-expression': 'warn',
     'typescript/no-dynamic-delete': 'warn',
     'typescript/no-redundant-type-constituents': 'warn',
-    'typescript/no-unnecessary-boolean-literal-compare': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
     'typescript/no-unnecessary-template-expression': 'warn',
     'typescript/no-unnecessary-type-conversion': 'warn',
