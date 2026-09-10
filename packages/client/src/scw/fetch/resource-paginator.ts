@@ -98,3 +98,100 @@ export const enrichForPagination = <K extends string, T extends PaginatedContent
     [Symbol.asyncIterator]: () => fetchPaginated(key, fetcher, request, firstPage),
   })
 }
+
+export type CursorPaginatedFetcher<T, R = object> = (request: R) => Promise<T>
+
+export type CursorPaginatedContent<K extends string, T = unknown> = {
+  [key in K]: T[]
+} & {
+  nextPageToken?: string | null
+}
+
+async function* cursorPages<K extends string, T extends CursorPaginatedContent<K>, R>(
+  key: K,
+  fetcher: CursorPaginatedFetcher<T, R>,
+  request: R,
+  tokenKey: string,
+  firstPage: T,
+): AsyncGenerator<T[K], void, void> {
+  if (!Array.isArray(firstPage[key])) {
+    throw new Error(`Property ${key} is not a list in paginated result`)
+  }
+  let nextPageToken = firstPage.nextPageToken
+  yield firstPage[key]
+  while (nextPageToken) {
+    // eslint-disable-next-line no-await-in-loop
+    const page = await fetcher({ ...request, [tokenKey]: nextPageToken })
+    nextPageToken = page.nextPageToken
+    yield page[key]
+  }
+}
+
+/**
+ * Fetches a cursor-paginated resource.
+ *
+ * @param key - The resource key of values list
+ * @param fetcher - The method to retrieve paginated resources
+ * @param request - A request with pagination options
+ * @param tokenKey - The request field receiving the next page token
+ * @param initial - The first page
+ * @returns An async generator of resources arrays
+ */
+export async function* fetchPaginatedByCursor<K extends string, T extends CursorPaginatedContent<K>, R>(
+  key: K,
+  fetcher: CursorPaginatedFetcher<T, R>,
+  request: R,
+  tokenKey: string,
+  initial: Promise<T> = fetcher(request),
+) {
+  yield* cursorPages(key, fetcher, request, tokenKey, await initial)
+}
+
+/**
+ * Fetches all cursor-paginated resources.
+ *
+ * @param key - The resource key of values list
+ * @param fetcher - The method to retrieve paginated resources
+ * @param request - A request with pagination options
+ * @param tokenKey - The request field receiving the next page token
+ * @param initial - The first page
+ * @returns A resources array Promise
+ */
+export const fetchAllByCursor = async <K extends string, T extends CursorPaginatedContent<K>, R>(
+  key: K,
+  fetcher: CursorPaginatedFetcher<T, R>,
+  request: R,
+  tokenKey: string,
+  initial: Promise<T> = fetcher(request),
+) => {
+  const pages: T[K][] = []
+  for await (const page of fetchPaginatedByCursor(key, fetcher, request, tokenKey, initial)) {
+    pages.push(page)
+  }
+  return pages.flat()
+}
+
+/**
+ * Enriches a listing method with helpers.
+ *
+ * @param key - The resource key of values list
+ * @param fetcher - The method to retrieve paginated resources
+ * @param request - A request with pagination options
+ * @param tokenKey - The request field receiving the next page token
+ * @returns A resource Promise with the pagination helpers
+ *
+ * @internal
+ */
+export const enrichForPaginationByCursor = <K extends string, T extends CursorPaginatedContent<K>, R>(
+  key: K,
+  fetcher: CursorPaginatedFetcher<T, R>,
+  request: R,
+  tokenKey: string,
+) => {
+  const firstPage = fetcher(request)
+
+  return Object.assign(firstPage, {
+    all: () => fetchAllByCursor(key, fetcher, request, tokenKey, firstPage),
+    [Symbol.asyncIterator]: () => fetchPaginatedByCursor(key, fetcher, request, tokenKey, firstPage),
+  })
+}
