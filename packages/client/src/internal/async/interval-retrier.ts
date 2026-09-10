@@ -109,8 +109,10 @@ export const tryAtIntervals = async <T>(
     // Break if timeout has been reached
     if (timeoutTimestamp <= Date.now() + delay) break
     // Wait before the next retry
+    // eslint-disable-next-line eslint/no-await-in-loop
     await sleep(delay)
     // Retry
+    // eslint-disable-next-line eslint/no-await-in-loop
     const { value, done } = await retry()
     if (done) return value
   }

@@ -28,7 +28,6 @@ export default defineConfig({
     'eslint/init-declarations': 'warn',
     'eslint/max-depth': 'warn',
     'eslint/max-params': 'warn',
-    'eslint/no-await-in-loop': 'warn',
     'eslint/no-bitwise': 'warn',
     'eslint/no-eq-null': 'warn',
     'eslint/no-shadow': 'warn',

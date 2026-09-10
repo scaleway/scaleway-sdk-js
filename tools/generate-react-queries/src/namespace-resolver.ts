@@ -105,6 +105,7 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
     const ownPathPrefix = normalizePackagePath(packageName)
 
     for (const version of versions) {
+      // eslint-disable-next-line eslint/no-await-in-loop
       await registerVersionNamespaces(packageName, pkgDir, version, metadataFileName, ownPathPrefix, resolver)
     }
   }
