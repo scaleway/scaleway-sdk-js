@@ -1,6 +1,18 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { PaginatedContent, PaginatedFetcher } from '../resource-paginator.js'
-import { enrichForPagination, fetchAll, fetchPaginated } from '../resource-paginator.js'
+import type {
+  CursorPaginatedContent,
+  CursorPaginatedFetcher,
+  PaginatedContent,
+  PaginatedFetcher,
+} from '../resource-paginator.js'
+import {
+  enrichForPagination,
+  enrichForPaginationByCursor,
+  fetchAll,
+  fetchAllByCursor,
+  fetchPaginated,
+  fetchPaginatedByCursor,
+} from '../resource-paginator.js'
 
 const fetchPages = <T>(input: T[][] = [], delay = 0) => {
   const totalCount = input.flat().length
@@ -126,5 +138,85 @@ describe('enrichForPagination', () => {
       expect(page).toStrictEqual(input[readIndex - 1])
       readIndex += 1
     }
+  })
+})
+
+const fetchCursorPages = <T>(input: T[][] = []) => {
+  const pages = [...input]
+  return (request: { page?: string }) => {
+    const page = pages.shift()
+    const nextPageToken = pages.length ? 'token' : undefined
+    return Promise.resolve({ items: page ?? [], nextPageToken } as { items: T[]; nextPageToken?: string })
+  }
+}
+
+describe('fetchPaginatedByCursor', () => {
+  it('iterates page by page and stops when nextPageToken is absent', async () => {
+    const input = [[{ name: 'Alice' }, { name: 'Bob' }], [{ name: 'Julia' }, { name: 'Thomas' }], [{ name: 'David' }]]
+    const fetcher = vi.fn(fetchCursorPages(input))
+    const pages: unknown[] = []
+    for await (const page of fetchPaginatedByCursor('items', fetcher, {}, 'page')) {
+      pages.push(page)
+    }
+    expect(pages).toStrictEqual(input)
+    expect(fetcher).toHaveBeenCalledTimes(3)
+    expect(fetcher).toHaveBeenLastCalledWith({ page: 'token' })
+  })
+
+  it('iterates a single page when no nextPageToken is returned', async () => {
+    const input = [[{ name: 'Alice' }, { name: 'Bob' }]]
+    const fetcher = vi.fn(fetchCursorPages(input))
+    const pages: unknown[] = []
+    for await (const page of fetchPaginatedByCursor('items', fetcher, {}, 'page')) {
+      pages.push(page)
+    }
+    expect(pages).toStrictEqual(input)
+    expect(fetcher).toHaveBeenCalledTimes(1)
+  })
+
+  it('returns empty array on empty result', async () => {
+    const fetcher = vi.fn(fetchCursorPages([]))
+    const iterator = fetchPaginatedByCursor('items', fetcher, {}, 'page')
+    const empty = await iterator.next()
+    expect(empty.value).toEqual([])
+    expect(empty.done).toBe(false)
+    const ended = await iterator.next()
+    expect(ended.value).toEqual(undefined)
+    expect(ended.done).toBe(true)
+  })
+
+  it('throws when wrong key is provided', async () => {
+    await expect(
+      fetchPaginatedByCursor(
+        'x',
+        fetchCursorPages([]) as unknown as CursorPaginatedFetcher<CursorPaginatedContent<'x'>>,
+        {},
+        'page',
+      ).next(),
+    ).rejects.toThrow(`Property x is not a list in paginated result`)
+  })
+})
+
+describe('fetchAllByCursor', () => {
+  it('fetches all items', async () => {
+    const input = [[{ name: 'Alice' }], [{ name: 'Bob' }], [{ name: 'Julia' }]]
+    expect(await fetchAllByCursor('items', fetchCursorPages(input), {}, 'page')).toStrictEqual(input.flat())
+  })
+})
+
+describe('enrichForPaginationByCursor', () => {
+  const input = [[{ name: 'Rémy' }, { name: 'Jaime' }], [{ name: 'Vincent' }]]
+
+  it('can fetch all items', () =>
+    expect(enrichForPaginationByCursor('items', fetchCursorPages(input), {}, 'page').all()).resolves.toStrictEqual(
+      input.flat(),
+    ))
+
+  it('can fetch items page by page', async () => {
+    const pages: unknown[] = []
+    for await (const page of enrichForPaginationByCursor('items', fetchCursorPages(input), {}, 'page')) {
+      pages.push(page)
+    }
+    expect(pages).toStrictEqual(input)
   })
 })
