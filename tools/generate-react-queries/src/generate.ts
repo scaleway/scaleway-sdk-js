@@ -157,10 +157,6 @@ async function processVersionCore(
   ctx: GenerationContext,
 ): Promise<void> {
   const metadata = await loadMetadata(pkgDir, version, ctx.metadataFileName)
-  if (!metadata?.services) {
-    console.warn(`    ⚠️  Invalid metadata for ${packageName}/${version}, skipping`)
-    return
-  }
   const { folderName, services } = metadata
   const generatedDir = prepareGeneratedDir(ctx, folderName)
   generateServiceHooks(services, metadata, ctx, packageName, generatedDir, folderName)

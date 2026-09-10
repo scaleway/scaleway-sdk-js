@@ -159,7 +159,6 @@ export function discoverVersions(pkgDir: string, metadataFileName: string): stri
  * Utils methods are merged into matching services by apiClass to avoid duplicate services.
  */
 function mergeUtilsServices(metadata: QueriesMetadata, utilsMetadata: QueriesMetadata): void {
-  if (!utilsMetadata?.services) return
   for (const utilsService of utilsMetadata.services) {
     const existing = metadata.services.find(s => s.apiClass === utilsService.apiClass)
     if (existing) {
