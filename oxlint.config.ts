@@ -41,7 +41,6 @@ export default defineConfig({
     'eslint/vars-on-top': 'warn',
     'import/no-namespace': 'warn',
     'import/no-nodejs-modules': 'warn',
-    'node/no-process-env': 'warn',
     'oxc/no-accumulating-spread': 'warn',
     'react/set-state-in-effect': 'warn',
     'typescript/consistent-indexed-object-style': 'warn',
@@ -108,4 +107,12 @@ export default defineConfig({
     'unicorn/switch-case-braces': 'warn',
     'unicorn/text-encoding-identifier-case': 'warn',
   },
+  overrides: [
+    {
+      files: ['tools/pnpm-auto-release/**'],
+      rules: {
+        'node/no-process-env': 'off',
+      },
+    },
+  ],
 })
