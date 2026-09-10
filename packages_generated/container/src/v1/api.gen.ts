@@ -44,6 +44,7 @@ import type {
   GetContainerRequest,
   GetDomainRequest,
   GetNamespaceRequest,
+  GetPrivateEndpointCertificateAuthorityRequest,
   GetTriggerRequest,
   ListContainersRequest,
   ListContainersResponse,
@@ -326,6 +327,25 @@ This action **cannot** be undone.
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}`,
       },
       unmarshalContainer,
+    )
+
+  
+  /**
+   * Get the private endpoint certificate authority.. When enabling private endpoints for your containers, you need to trust this CA to establish HTTPS connections to them.
+   *
+   * @param request - The request {@link GetPrivateEndpointCertificateAuthorityRequest}
+   * @returns A Promise of Blob
+   */
+  getPrivateEndpointCertificateAuthority = (request: Readonly<GetPrivateEndpointCertificateAuthorityRequest> = {}) =>
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-endpoint-ca`,
+        urlParams: urlParams(
+          ['dl', 1],
+        ),
+        responseType: 'blob',
+      },
     )
 
   

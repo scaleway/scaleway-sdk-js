@@ -62,6 +62,17 @@ export const queriesMetadata = {
           description: '"',
         },
         {
+          methodName: 'getPrivateEndpointCertificateAuthority',
+          protoName: 'GetPrivateEndpointCertificateAuthority',
+          paramsType: 'GetPrivateEndpointCertificateAuthorityRequest',
+          returnType: 'Blob',
+          returnTypeNamespace: '@scaleway/sdk-container/v1',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
           methodName: 'getDomain',
           protoName: 'GetDomain',
           paramsType: 'GetDomainRequest',

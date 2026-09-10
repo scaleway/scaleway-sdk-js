@@ -34,6 +34,7 @@ export type {
   GetContainerRequest,
   GetDomainRequest,
   GetNamespaceRequest,
+  GetPrivateEndpointCertificateAuthorityRequest,
   GetTriggerRequest,
   ListContainersRequest,
   ListContainersRequestOrderBy,

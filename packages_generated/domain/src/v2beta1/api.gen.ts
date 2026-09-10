@@ -174,7 +174,7 @@ const jsonContentHeaders = {
 }
 
 /**
- * Domains and DNS API.
+ * DNS zones and records API.
 
 This API allows you to manage your domains, DNS zones and records.
  */
@@ -694,7 +694,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
 }
 
 /**
- * Domains and DNS - Registrar API.
+ * Domain names - Registrar API.
 
 Manage your domains and contacts.
  */
