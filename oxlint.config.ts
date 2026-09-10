@@ -36,7 +36,6 @@ export default defineConfig({
     'eslint/vars-on-top': 'warn',
     'import/no-namespace': 'warn',
     'node/no-process-env': 'warn',
-    'oxc/no-accumulating-spread': 'warn',
     'react/set-state-in-effect': 'warn',
     'typescript/consistent-type-definitions': 'warn',
     'typescript/explicit-member-accessibility': 'warn',
