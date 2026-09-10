@@ -32,7 +32,7 @@ export const exec = (cmd: string, opts: { cwd?: string; stdio?: 'pipe' | 'inheri
     stdio: opts.stdio === 'inherit' ? 'inherit' : ['ignore', 'pipe', 'pipe'],
     maxBuffer: 50 * 1024 * 1024,
   })
-  return (out ?? '').trim()
+  return out.trim()
 }
 
 export const listWorkspacePackages = (root: string) => {

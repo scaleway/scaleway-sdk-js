@@ -24,7 +24,7 @@ function applyParsedArg(
   requiresValueArgs: string[] | undefined,
   cliArgs: Record<string, string | boolean>,
 ): void {
-  if (requiresValueArgs?.includes(parsed.key) && (parsed.value === true || parsed.value === undefined)) {
+  if (requiresValueArgs?.includes(parsed.key) && parsed.value === true) {
     console.log(`⚠️  Warning: --${parsed.key} requires a value, using default`)
   } else {
     cliArgs[parsed.key] = parsed.value
