@@ -2,20 +2,40 @@ import type { JSONObject } from '../../../helpers/json.js'
 import { ScalewayError } from '../scw-error.js'
 
 /**
+ * Options for {@link TransientStateError}.
+ *
+ * @public
+ */
+export interface TransientStateErrorOptions {
+  resource: string
+  resourceId: string
+  currentState: string
+}
+
+/**
  * TransientState error happens when trying to perform an action on a resource in a transient state.
  *
  * @public
  */
 export class TransientStateError extends ScalewayError {
+  readonly resource: string
+  readonly resourceId: string
+  readonly currentState: string
+
   constructor(
     readonly status: number,
     readonly body: JSONObject,
-    readonly resource: string,
-    readonly resourceId: string,
-    readonly currentState: string,
+    options: TransientStateErrorOptions,
   ) {
-    super(status, body, `resource ${resource} with ID ${resourceId} is in a transient state: ${currentState}`)
+    super(
+      status,
+      body,
+      `resource ${options.resource} with ID ${options.resourceId} is in a transient state: ${options.currentState}`,
+    )
     this.name = 'TransientStateError'
+    this.resource = options.resource
+    this.resourceId = options.resourceId
+    this.currentState = options.currentState
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
@@ -27,6 +47,10 @@ export class TransientStateError extends ScalewayError {
       return null
     }
 
-    return new TransientStateError(status, obj, obj.resource, obj.resource_id, obj.current_state)
+    return new TransientStateError(status, obj, {
+      resource: obj.resource,
+      resourceId: obj.resource_id,
+      currentState: obj.current_state,
+    })
   }
 }

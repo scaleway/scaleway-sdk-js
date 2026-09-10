@@ -102,15 +102,17 @@ describe('tryAtIntervals', () => {
 
   it('does the proper number of iterations', async () => {
     const mLogic = mockLogic(3, 0)
-    const result = await tryAtIntervals(mLogic, zeroIntervalStrat, 0.5)
+    const result = await tryAtIntervals(mLogic, zeroIntervalStrat, { timeout: 0.5 })
     expect(result.doneIterations).toBe(3)
   })
 
   it('timeouts after 0s', () =>
-    expect(tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, 0)).rejects.toThrow(`Timeout after 0s`))
+    expect(tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, { timeout: 0 })).rejects.toThrow(`Timeout after 0s`))
 
   it('timeouts after 10ms', () =>
-    expect(tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, 0.01)).rejects.toThrow(`Timeout after 0.01s`))
+    expect(tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, { timeout: 0.01 })).rejects.toThrow(
+      `Timeout after 0.01s`,
+    ))
 
   it('uses default timeout', async () => {
     const mLogic = mockLogic(3, 0)
@@ -121,14 +123,14 @@ describe('tryAtIntervals', () => {
   it('throws an AbortError when the signal is already aborted', async () => {
     const controller = new AbortController()
     controller.abort()
-    await expect(tryAtIntervals(mockLogic(3, 0), zeroIntervalStrat, 1, controller.signal)).rejects.toThrow(
-      'The operation was aborted',
-    )
+    await expect(
+      tryAtIntervals(mockLogic(3, 0), zeroIntervalStrat, { timeout: 1, signal: controller.signal }),
+    ).rejects.toThrow('The operation was aborted')
   })
 
   it('throws an AbortError when the signal aborts mid-loop', async () => {
     const controller = new AbortController()
-    const result = tryAtIntervals(mockLogic(10, 0), zeroIntervalStrat, 5, controller.signal)
+    const result = tryAtIntervals(mockLogic(10, 0), zeroIntervalStrat, { timeout: 5, signal: controller.signal })
     controller.abort()
     await expect(result).rejects.toThrow('The operation was aborted')
   })
@@ -140,9 +142,10 @@ describe('waitForResource', () => {
       res => Promise.resolve(!['transient-one', 'transient-two'].includes(res.status)),
       () => Promise.resolve({ message: 'All went fine.', status: 'final' }),
       {
-        resourceId: 'random-uuid',
+        request: { resourceId: 'random-uuid' },
+        maxDelay: 1,
+        minDelay: 1,
       },
-      { maxDelay: 1, minDelay: 1 },
     )
 
     return expect(result).resolves.toStrictEqual({
@@ -160,9 +163,9 @@ describe('waitForResource', () => {
           status: 'transient-two',
         }),
       {
-        resourceId: 'random-uuid',
+        request: { resourceId: 'random-uuid' },
+        timeout: 0.01,
       },
-      { timeout: 0.01 },
     )
 
     return expect(result).rejects.toThrow()
@@ -174,8 +177,7 @@ describe('waitForResource', () => {
     const result = waitForResource(
       res => Promise.resolve(!['transient-one', 'transient-two'].includes(res.status)),
       () => Promise.resolve({ message: 'Still processing.', status: 'transient-two' }),
-      { resourceId: 'random-uuid' },
-      { maxDelay: 1, minDelay: 1, signal: controller.signal },
+      { request: { resourceId: 'random-uuid' }, maxDelay: 1, minDelay: 1, signal: controller.signal },
     )
 
     await expect(result).rejects.toThrow('The operation was aborted')

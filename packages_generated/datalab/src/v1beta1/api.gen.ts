@@ -108,8 +108,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DATALAB_TRANSIENT_STATUSES_DATALAB.includes(res.status))),
       this.getDatalab,
-      request,
-      options,
+      { ...options, request },
     )
 
   

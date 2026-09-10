@@ -321,8 +321,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SERVER_TRANSIENT_STATUSES_DEDIBOX.includes(res.status))),
       this.getServer,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -695,8 +694,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SERVER_INSTALL_TRANSIENT_STATUSES_DEDIBOX.includes(res.status))),
       this.getServerInstall,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -778,8 +776,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!BMC_ACCESS_TRANSIENT_STATUSES_DEDIBOX.includes(res.status))),
       this.getBMCAccess,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -1527,8 +1524,7 @@ export class RpnSanAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!RPN_SAN_TRANSIENT_STATUSES_DEDIBOX.includes(res.status))),
       this.getRpnSan,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -1894,8 +1890,7 @@ export class RpnV2API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!RPN_V2_GROUP_TRANSIENT_STATUSES_DEDIBOX.includes(res.status))),
       this.getRpnV2Group,
-      request,
-      options,
+      { ...options, request },
     )
 
   

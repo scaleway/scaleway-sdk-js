@@ -115,8 +115,7 @@ function publishPackages(root: string, options: ReleaseOptions): void {
 function bumpAndPublish(
   root: string,
   options: ReleaseOptions,
-  affected: WorkspacePackage[],
-  range: string,
+  { affected, range }: { affected: WorkspacePackage[]; range: string },
 ): WorkspacePackage[] {
   createChangesets({ root, range, packages: affected, byCommit: options.byCommit, defaultSummary: CHANGESET_MESSAGE })
   exec('pnpm version -r --no-git-checks --tag-version-prefix ""', { cwd: root, stdio: 'inherit' })
@@ -138,8 +137,7 @@ function pushRelease(root: string, skipPush: boolean, newTags: string[]): void {
 function commitTagAndPush(
   root: string,
   options: ReleaseOptions,
-  affected: WorkspacePackage[],
-  updated: WorkspacePackage[],
+  { affected, updated }: { affected: WorkspacePackage[]; updated: WorkspacePackage[] },
 ): void {
   exec('git add -A', { cwd: root })
   exec('git commit -m "chore(release): publish" --no-verify', { cwd: root })
@@ -159,8 +157,8 @@ function main() {
   const { affected, range } = gatherAffectedPackages(root, options.dryRun)
   if (options.dryRun || affected.length === 0) return
 
-  const updated = bumpAndPublish(root, options, affected, range)
-  commitTagAndPush(root, options, affected, updated)
+  const updated = bumpAndPublish(root, options, { affected, range })
+  commitTagAndPush(root, options, { affected, updated })
   logger('[release] done.')
 }
 

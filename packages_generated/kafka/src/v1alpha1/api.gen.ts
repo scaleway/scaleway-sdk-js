@@ -174,8 +174,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CLUSTER_TRANSIENT_STATUSES_KAFKA.includes(res.status))),
       this.getCluster,
-      request,
-      options,
+      { ...options, request },
     )
 
   

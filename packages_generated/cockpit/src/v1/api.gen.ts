@@ -492,8 +492,7 @@ Optionally, specify a Scaleway data source ID to retrieve only data exports asso
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!EXPORTER_TRANSIENT_STATUSES_COCKPIT.includes(res.status))),
       this.getExporter,
-      request,
-      options,
+      { ...options, request },
     )
 
   

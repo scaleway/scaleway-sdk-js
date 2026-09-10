@@ -193,8 +193,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!INSTANCE_TRANSIENT_STATUSES_MONGODB.includes(res.status))),
       this.getInstance,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -342,8 +341,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES_MONGODB.includes(res.status))),
       this.getSnapshot,
-      request,
-      options,
+      { ...options, request },
     )
 
   
