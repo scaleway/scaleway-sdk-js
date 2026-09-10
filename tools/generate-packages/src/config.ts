@@ -62,6 +62,14 @@ const DEFAULT_CONFIG: Config = {
   ],
 }
 
+const isConfigModule = (value: unknown): value is { default: Config } =>
+  typeof value === 'object' && value !== null && 'default' in value
+
+const resolvePaths = (config: Config): Config => ({
+  ...config,
+  sdks: config.sdks.map(s => ({ ...s, path: join(cwd(), s.path), index: join(cwd(), s.index) })),
+})
+
 export const loadConfig = async (configPath?: string): Promise<Config> => {
   const resolvedPath = resolve(cwd(), configPath ?? 'generate-packages.config.ts')
 
@@ -70,11 +78,3 @@ export const loadConfig = async (configPath?: string): Promise<Config> => {
   const mod: unknown = await import(`file://${resolvedPath}`)
   return resolvePaths(isConfigModule(mod) ? mod.default : (mod as Config))
 }
-
-const isConfigModule = (value: unknown): value is { default: Config } =>
-  typeof value === 'object' && value !== null && 'default' in value
-
-const resolvePaths = (config: Config): Config => ({
-  ...config,
-  sdks: config.sdks.map(s => ({ ...s, path: join(cwd(), s.path), index: join(cwd(), s.index) })),
-})

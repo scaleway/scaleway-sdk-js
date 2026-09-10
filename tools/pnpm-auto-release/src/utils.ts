@@ -88,6 +88,15 @@ export const createTags = ({
   return newTags
 }
 
+const getRepoFromRemote = (root: string): string => {
+  const remoteUrl = exec('git remote get-url origin', { cwd: root })
+  const match = remoteUrl.match(/github\.com[:/](?<repo>[^/]+\/[^/]+?)(?:\.git)?$/)
+  if (!match?.[1]) {
+    throw new Error('Could not determine GitHub repository from git remote')
+  }
+  return match[1]
+}
+
 function createReleaseForPackage(root: string, pkg: Package, newPkg: Package): void {
   const tag = `${pkg.name}@${newPkg.version}`
   const releaseNotes = `Release ${tag}`
@@ -121,15 +130,6 @@ export const createGithubReleases = ({
     const newPkg = updatedPackages.find(({ name }) => name === pkg.name)
     if (newPkg) createReleaseForPackage(root, pkg, newPkg)
   }
-}
-
-const getRepoFromRemote = (root: string): string => {
-  const remoteUrl = exec('git remote get-url origin', { cwd: root })
-  const match = remoteUrl.match(/github\.com[:/](?<repo>[^/]+\/[^/]+?)(?:\.git)?$/)
-  if (!match?.[1]) {
-    throw new Error('Could not determine GitHub repository from git remote')
-  }
-  return match[1]
 }
 
 const createChangesetForPackages = (root: string, packages: Package[], summary: string) => {

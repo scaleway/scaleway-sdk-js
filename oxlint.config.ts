@@ -32,7 +32,6 @@ export default defineConfig({
     'eslint/no-bitwise': 'warn',
     'eslint/no-eq-null': 'warn',
     'eslint/no-shadow': 'warn',
-    'eslint/no-use-before-define': 'warn',
     'eslint/no-useless-assignment': 'warn',
     'eslint/no-var': 'warn',
     'eslint/prefer-destructuring': 'warn',

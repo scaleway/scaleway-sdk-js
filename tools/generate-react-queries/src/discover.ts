@@ -38,13 +38,6 @@ const isQueriesMetadataModule = (value: unknown): value is { queriesMetadata: Qu
  *
  * Returns a Map of packageName → directory path on disk.
  */
-export function discoverSdkPackages(config: ReactQueriesConfig): Map<string, string> {
-  if (config.packagesPath) {
-    return discoverFromDirectory(config.packagesPath)
-  }
-  return discoverFromDependencies(config.imports.packageNameFilter)
-}
-
 /**
  * Scan a directory where each subdirectory is an SDK package.
  * e.g. packages_generated/instance/, packages_generated/k8s/, etc.
@@ -88,6 +81,32 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
 }
 
 /**
+ * Resolve a package name to its root directory on disk.
+ *
+ * Walks up from CWD looking for the package in node_modules directories.
+ * This handles pnpm workspaces (symlinks), hoisted node_modules, and regular installs.
+ *
+ * For example, resolving '@scaleway-internal/sdk-instance' from
+ * /repo/packages/queries/ will check:
+ *   /repo/packages/queries/node_modules/@scaleway-internal/sdk-instance
+ *   /repo/packages/node_modules/@scaleway-internal/sdk-instance
+ *   /repo/node_modules/@scaleway-internal/sdk-instance
+ * and return the first one that has a package.json.
+ */
+function resolvePackageDir(packageName: string): string | undefined {
+  let dir = resolve('.')
+
+  while (dir !== '/') {
+    const candidate = join(dir, 'node_modules', packageName)
+    if (existsSync(join(candidate, 'package.json'))) return candidate
+    dir = dirname(dir)
+  }
+
+  console.warn(`⚠️  Could not resolve package "${packageName}" from CWD, skipping.`)
+  return undefined
+}
+
+/**
  * Discover packages from package.json dependencies, then resolve their
  * location on disk using Node's module resolution.
  *
@@ -117,32 +136,6 @@ function discoverFromDependencies(packageNameFilter: string): Map<string, string
 
   console.log(`📦 Found ${packages.size} SDK packages matching "${packageNameFilter}"`)
   return packages
-}
-
-/**
- * Resolve a package name to its root directory on disk.
- *
- * Walks up from CWD looking for the package in node_modules directories.
- * This handles pnpm workspaces (symlinks), hoisted node_modules, and regular installs.
- *
- * For example, resolving '@scaleway-internal/sdk-instance' from
- * /repo/packages/queries/ will check:
- *   /repo/packages/queries/node_modules/@scaleway-internal/sdk-instance
- *   /repo/packages/node_modules/@scaleway-internal/sdk-instance
- *   /repo/node_modules/@scaleway-internal/sdk-instance
- * and return the first one that has a package.json.
- */
-function resolvePackageDir(packageName: string): string | undefined {
-  let dir = resolve('.')
-
-  while (dir !== '/') {
-    const candidate = join(dir, 'node_modules', packageName)
-    if (existsSync(join(candidate, 'package.json'))) return candidate
-    dir = dirname(dir)
-  }
-
-  console.warn(`⚠️  Could not resolve package "${packageName}" from CWD, skipping.`)
-  return undefined
 }
 
 /**
@@ -208,4 +201,11 @@ export async function loadMetadata(
   await loadUtilsMetadata(pkgDir, version, metadata)
 
   return metadata
+}
+
+export function discoverSdkPackages(config: ReactQueriesConfig): Map<string, string> {
+  if (config.packagesPath) {
+    return discoverFromDirectory(config.packagesPath)
+  }
+  return discoverFromDependencies(config.imports.packageNameFilter)
 }
