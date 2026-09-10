@@ -48,7 +48,6 @@ export default defineConfig({
     'typescript/consistent-type-definitions': 'warn',
     'typescript/explicit-member-accessibility': 'warn',
     'typescript/method-signature-style': 'warn',
-    'typescript/no-confusing-void-expression': 'warn',
     'typescript/no-dynamic-delete': 'warn',
     'typescript/no-redundant-type-constituents': 'warn',
     'typescript/no-unnecessary-boolean-literal-compare': 'warn',

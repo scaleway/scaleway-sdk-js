@@ -13,7 +13,9 @@ const fetchPages = <T>(input: T[][] = [], delay = 0) => {
     }
 
     return new Promise<typeof page>(resolve => {
-      setTimeout(() => resolve(page), delay)
+      setTimeout(() => {
+        resolve(page)
+      }, delay)
     })
   }
 }

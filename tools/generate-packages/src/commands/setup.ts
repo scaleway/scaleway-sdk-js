@@ -50,7 +50,10 @@ function discoverNewProducts(src: string): { name: string }[] {
 
 function logNewProducts(newProducts: { name: string }[]): void {
   console.log(`📦 New products: ${newProducts.length}`)
-  if (newProducts.length > 0) newProducts.forEach(p => console.log(`  - ${p.name}`))
+  if (newProducts.length > 0)
+    newProducts.forEach(p => {
+      console.log(`  - ${p.name}`)
+    })
 }
 
 function checkEarlyExit(newProducts: { name: string }[], dryRun: boolean): number | null {

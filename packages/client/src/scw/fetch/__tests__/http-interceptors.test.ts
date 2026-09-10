@@ -30,7 +30,9 @@ beforeEach(() => {
   latestMessage = ''
 })
 
-afterAll(() => setLogger(new ConsoleLogger('silent')))
+afterAll(() => {
+  setLogger(new ConsoleLogger('silent'))
+})
 
 describe(`logRequest`, () => {
   const request = new Request('https://api.scaleway.com')
