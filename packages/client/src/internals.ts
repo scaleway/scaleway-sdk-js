@@ -28,4 +28,4 @@ export {
   unmarshalTimeSeriesPoint,
 } from './scw/custom-marshalling.js'
 export type { ServiceInfo } from './scw/custom-types.js'
-export { enrichForPagination } from './scw/fetch/resource-paginator.js'
+export { enrichForPagination, enrichForPaginationByCursor } from './scw/fetch/resource-paginator.js'
