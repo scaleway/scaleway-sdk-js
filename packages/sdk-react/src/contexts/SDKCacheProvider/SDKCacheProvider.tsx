@@ -48,9 +48,8 @@ export const SDKCacheProvider = ({
 
   // reset cache
   useEffect(() => {
-    if (client) {
-      setSdkCache(null)
-    }
+    setSdkCache(null)
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies -- client is intentionally observed to reset the cache
   }, [client])
 
   const value = useMemo(

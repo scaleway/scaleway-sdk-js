@@ -42,8 +42,10 @@ const unmarshalStandardError = (type: string, status: number, body: Readonly<JSO
     too_many_requests: TooManyRequestsError,
   }
 
-  const error = errorByType[type]
-  return error ? error.fromJSON(status, body) : null
+  if (!(type in errorByType)) {
+    return null
+  }
+  return errorByType[type].fromJSON(status, body)
 }
 
 /**
