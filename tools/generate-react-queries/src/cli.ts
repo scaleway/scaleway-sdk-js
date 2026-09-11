@@ -33,14 +33,30 @@ const { values } = parseArgs({
 
 const config: ReactQueriesConfig = structuredClone(defaultConfig)
 
-if (typeof values['dir-gen-name'] === 'string') config.outputDir = values['dir-gen-name']
-if (typeof values['generated-path'] === 'string') config.generatedPath = values['generated-path']
-if (typeof values['custom-path'] === 'string') config.customPath = values['custom-path']
-if (typeof values['api-sdk-path'] === 'string') config.imports.apiSdkPath = values['api-sdk-path']
-if (typeof values['package-name-filter'] === 'string') config.imports.packageNameFilter = values['package-name-filter']
-if (typeof values['packages-path'] === 'string') config.packagesPath = values['packages-path']
-if (Array.isArray(values['skip-services'])) config.filters.skipServices = values['skip-services']
-if (Array.isArray(values['skip-versions'])) config.filters.skipVersions = values['skip-versions']
+if (typeof values['dir-gen-name'] === 'string') {
+  config.outputDir = values['dir-gen-name']
+}
+if (typeof values['generated-path'] === 'string') {
+  config.generatedPath = values['generated-path']
+}
+if (typeof values['custom-path'] === 'string') {
+  config.customPath = values['custom-path']
+}
+if (typeof values['api-sdk-path'] === 'string') {
+  config.imports.apiSdkPath = values['api-sdk-path']
+}
+if (typeof values['package-name-filter'] === 'string') {
+  config.imports.packageNameFilter = values['package-name-filter']
+}
+if (typeof values['packages-path'] === 'string') {
+  config.packagesPath = values['packages-path']
+}
+if (Array.isArray(values['skip-services'])) {
+  config.filters.skipServices = values['skip-services']
+}
+if (Array.isArray(values['skip-versions'])) {
+  config.filters.skipVersions = values['skip-versions']
+}
 
 console.log('🚀 Generating React hooks from metadata...')
 console.log('⚠️  Prerequisite: Ensure SDK packages are built first')

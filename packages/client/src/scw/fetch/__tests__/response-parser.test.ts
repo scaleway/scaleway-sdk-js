@@ -9,7 +9,9 @@ const SIMPLE_REQ_BODY = { 'what-is-life': 42 }
 const convertObjToBuffer = (obj: unknown): Buffer => Buffer.from(JSON.stringify(obj))
 
 const unmarshalJSON = (obj: unknown) => {
-  if (!isJSONObject(obj)) throw new Error(`couldn't unwrap response value`)
+  if (!isJSONObject(obj)) {
+    throw new Error(`couldn't unwrap response value`)
+  }
 
   return obj
 }

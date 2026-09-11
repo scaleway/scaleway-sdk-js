@@ -65,7 +65,9 @@ export class InvalidArgumentsError extends ScalewayError {
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
-    if (!Array.isArray(obj.details)) return null
+    if (!Array.isArray(obj.details)) {
+      return null
+    }
 
     return new InvalidArgumentsError(
       status,

@@ -105,7 +105,9 @@ export const loadConfigurationFromFileAsync = async (filePath: string): Promise<
  * @public
  */
 export const hasSecureFilePermissions = async (filePath: string): Promise<boolean> => {
-  if (process.platform === 'win32') return true
+  if (process.platform === 'win32') {
+    return true
+  }
 
   const info = await statAsync(filePath)
   // eslint-disable-next-line no-bitwise

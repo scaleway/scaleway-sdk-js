@@ -98,7 +98,9 @@ function resolvePackageDir(packageName: string): string | undefined {
 
   while (dir !== '/') {
     const candidate = join(dir, 'node_modules', packageName)
-    if (existsSync(join(candidate, 'package.json'))) return candidate
+    if (existsSync(join(candidate, 'package.json'))) {
+      return candidate
+    }
     dir = dirname(dir)
   }
 
@@ -131,7 +133,9 @@ function discoverFromDependencies(packageNameFilter: string): Map<string, string
 
   for (const name of sdkPackageNames) {
     const pkgDir = resolvePackageDir(name)
-    if (pkgDir) packages.set(name, pkgDir)
+    if (pkgDir) {
+      packages.set(name, pkgDir)
+    }
   }
 
   console.log(`📦 Found ${packages.size} SDK packages matching "${packageNameFilter}"`)
@@ -146,7 +150,9 @@ export function discoverVersions(pkgDir: string, metadataFileName: string): stri
   const distPath = join(pkgDir, 'dist')
   const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
 
-  if (!existsSync(distPath)) return []
+  if (!existsSync(distPath)) {
+    return []
+  }
 
   return readdirSync(distPath).filter(entry => {
     const fullPath = join(distPath, entry)
@@ -159,7 +165,9 @@ export function discoverVersions(pkgDir: string, metadataFileName: string): stri
  * Utils methods are merged into matching services by apiClass to avoid duplicate services.
  */
 function mergeUtilsServices(metadata: QueriesMetadata, utilsMetadata: QueriesMetadata): void {
-  if (!utilsMetadata?.services) return
+  if (!utilsMetadata?.services) {
+    return
+  }
   for (const utilsService of utilsMetadata.services) {
     const existing = metadata.services.find(s => s.apiClass === utilsService.apiClass)
     if (existing) {
@@ -172,9 +180,13 @@ function mergeUtilsServices(metadata: QueriesMetadata, utilsMetadata: QueriesMet
 
 async function loadUtilsMetadata(pkgDir: string, version: string, metadata: QueriesMetadata): Promise<void> {
   const utilsMetadataPath = join(pkgDir, 'dist', version, 'utils-metadata.js')
-  if (!existsSync(utilsMetadataPath)) return
+  if (!existsSync(utilsMetadataPath)) {
+    return
+  }
   const utilsModule: unknown = await import(utilsMetadataPath)
-  if (!isQueriesMetadataModule(utilsModule)) return
+  if (!isQueriesMetadataModule(utilsModule)) {
+    return
+  }
   const utilsMetadata: QueriesMetadata = structuredClone(utilsModule.queriesMetadata)
   mergeUtilsServices(metadata, utilsMetadata)
 }

@@ -39,7 +39,9 @@ export class PermissionsDeniedError extends ScalewayError {
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
-    if (!Array.isArray(obj.details)) return null
+    if (!Array.isArray(obj.details)) {
+      return null
+    }
 
     return new PermissionsDeniedError(
       status,

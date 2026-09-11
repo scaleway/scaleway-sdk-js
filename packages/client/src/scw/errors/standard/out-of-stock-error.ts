@@ -17,7 +17,9 @@ export class OutOfStockError extends ScalewayError {
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
-    if (typeof obj.resource !== 'string') return null
+    if (typeof obj.resource !== 'string') {
+      return null
+    }
 
     return new OutOfStockError(status, obj, obj.resource)
   }

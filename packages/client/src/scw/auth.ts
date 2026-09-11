@@ -93,8 +93,12 @@ type HeaderEntry = [string, string]
  * @internal
  */
 export const obfuscateAuthHeadersEntry = ([name, value]: HeaderEntry): HeaderEntry => {
-  if (name === SESSION_HEADER_KEY) return [name, obfuscateToken(value)]
-  if (name === AUTH_HEADER_KEY) return [name, obfuscateUUID(value)]
+  if (name === SESSION_HEADER_KEY) {
+    return [name, obfuscateToken(value)]
+  }
+  if (name === AUTH_HEADER_KEY) {
+    return [name, obfuscateUUID(value)]
+  }
 
   return [name, value]
 }
