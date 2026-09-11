@@ -48,7 +48,6 @@ export default defineConfig({
     'typescript/no-dynamic-delete': 'warn',
     'typescript/no-redundant-type-constituents': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
-    'typescript/no-unnecessary-template-expression': 'warn',
     'typescript/no-unnecessary-type-conversion': 'warn',
     'typescript/no-unnecessary-type-parameters': 'warn',
     'typescript/no-unsafe-assignment': 'warn',
