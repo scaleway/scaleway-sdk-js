@@ -302,7 +302,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SERVER_TRANSIENT_STATUSES_INSTANCE.includes(res.status))),
       this.getServer,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -732,7 +733,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE.includes(res.status))),
       this.getPrivateNetworkInterface,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -1511,7 +1513,8 @@ export class VolumeAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!VOLUME_TRANSIENT_STATUSES_INSTANCE.includes(res.status))),
       this.getVolume,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -1624,7 +1627,8 @@ export class VolumeAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES_INSTANCE.includes(res.status))),
       this.getSnapshot,
-      { ...options, request },
+      request,
+      options,
     )
 
   
