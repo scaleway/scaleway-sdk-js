@@ -26,7 +26,6 @@ export default defineConfig({
     'eslint/default-case': 'warn',
     'eslint/eqeqeq': 'warn',
     'eslint/init-declarations': 'warn',
-    'eslint/max-depth': 'warn',
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-bitwise': 'warn',
     'eslint/no-eq-null': 'warn',
