@@ -42,7 +42,6 @@ export default defineConfig({
     'node/no-process-env': 'warn',
     'oxc/no-accumulating-spread': 'warn',
     'react/set-state-in-effect': 'warn',
-    'typescript/consistent-indexed-object-style': 'warn',
     'typescript/consistent-type-definitions': 'warn',
     'typescript/explicit-member-accessibility': 'warn',
     'typescript/method-signature-style': 'warn',
