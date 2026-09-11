@@ -22,5 +22,5 @@ export const getFileContent = ({ packageName, name, api, sdkFactoryPath }: getCo
     ')',
   ].join('\n')
 
-  return template.toString()
+  return template
 }
