@@ -49,7 +49,14 @@ import { useDataLoader } from "${v.dataLoaderPackage}"`,
     .filter(Boolean)
     .join('\n')
 
-  let body: string
+  let body = `export const ${v.hookName} = (
+  dataloaderConfig?: UseDataLoaderConfig<${v.returnType}, Error>,
+): ReturnType<typeof useDataLoader<${v.returnType}, Error>> => {
+  const { ${v.apiVarName} } = ${v.apiHookName}()
+  const key = [${v.keyArray}]
+
+  return useDataLoader(key, () => ${v.apiVarName}.${v.methodName}(), dataloaderConfig)
+}`
 
   if (v.isInfinite) {
     body = `export const ${v.hookName} = (
@@ -71,15 +78,6 @@ import { useDataLoader } from "${v.dataLoaderPackage}"`,
   const key = [${v.keyArray}]
 
   return useDataLoader(key, () => ${v.apiVarName}.${v.methodName}(params)${v.isAll ? '.all()' : ''}, dataloaderConfig)
-}`
-  } else {
-    body = `export const ${v.hookName} = (
-  dataloaderConfig?: UseDataLoaderConfig<${v.returnType}, Error>,
-): ReturnType<typeof useDataLoader<${v.returnType}, Error>> => {
-  const { ${v.apiVarName} } = ${v.apiHookName}()
-  const key = [${v.keyArray}]
-
-  return useDataLoader(key, () => ${v.apiVarName}.${v.methodName}(), dataloaderConfig)
 }`
   }
 

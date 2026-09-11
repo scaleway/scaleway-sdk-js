@@ -20,7 +20,7 @@ export interface DeniedAuthenticationErrorOptions {
  * @internal
  */
 const buildMessage = (options: DeniedAuthenticationErrorOptions): string => {
-  let reasonDesc: string
+  let reasonDesc = `unknown reason for ${options.method}`
   switch (options.reason) {
     case 'invalid_argument':
       reasonDesc = `invalid ${options.method} format or empty value`
@@ -31,8 +31,6 @@ const buildMessage = (options: DeniedAuthenticationErrorOptions): string => {
     case 'expired':
       reasonDesc = `${options.method} is expired`
       break
-    default:
-      reasonDesc = `unknown reason for ${options.method}`
   }
 
   return `denied authentication: ${reasonDesc}`
