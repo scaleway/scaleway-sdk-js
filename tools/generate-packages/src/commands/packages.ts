@@ -81,7 +81,9 @@ function processProductDir(
 ): void {
   const { templateString, metadataTsTemplateString } = options
   const fullPath = join(inputPathDir, productDir)
-  if (!statSync(fullPath).isDirectory() || CUSTOM.PRODUCT_EXPORT.has(productDir)) return
+  if (!statSync(fullPath).isDirectory() || CUSTOM.PRODUCT_EXPORT.has(productDir)) {
+    return
+  }
 
   ensurePackageJson(fullPath, productDir, templateString)
 

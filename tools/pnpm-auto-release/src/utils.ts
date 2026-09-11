@@ -87,7 +87,9 @@ export const createTags = ({
   const newTags: string[] = []
   for (const pkg of affectedPackages) {
     const newPkg = updatedPackages.find(({ name }) => name === pkg.name)
-    if (newPkg) createTagForPackage(root, pkg, { newPkg, newTags })
+    if (newPkg) {
+      createTagForPackage(root, pkg, { newPkg, newTags })
+    }
   }
   return newTags
 }
@@ -132,7 +134,9 @@ export const createGithubReleases = ({
 
   for (const pkg of affectedPackages) {
     const newPkg = updatedPackages.find(({ name }) => name === pkg.name)
-    if (newPkg) createReleaseForPackage(root, pkg, newPkg)
+    if (newPkg) {
+      createReleaseForPackage(root, pkg, newPkg)
+    }
   }
 }
 
@@ -150,7 +154,9 @@ function processCommit(
   { packages, defaultSummary }: { packages: Package[]; defaultSummary: string },
 ): void {
   const [sha, subject] = line.split('\u001F')
-  if (!sha) return
+  if (!sha) {
+    return
+  }
   const changedFiles = exec(`git diff-tree --no-commit-id --name-only -r ${sha}`, { cwd: root })
     .split('\n')
     .filter(Boolean)

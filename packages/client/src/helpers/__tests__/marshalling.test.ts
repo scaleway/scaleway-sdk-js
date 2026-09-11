@@ -173,7 +173,9 @@ describe('unmarshalArrayOfObject', () => {
     myNumber: number
   }
   const unmarshaller = (data: unknown): MyResource => {
-    if (!isJSONObject(data)) throw new Error('Should not happen')
+    if (!isJSONObject(data)) {
+      throw new Error('Should not happen')
+    }
 
     return { myNumber: data.my_number } as MyResource
   }
@@ -199,7 +201,9 @@ describe('unmarshalMapOfObject', () => {
     myNumber: number
   }
   const unmarshaller = (data: unknown): MyResource => {
-    if (!isJSONObject(data)) throw new Error('Should not happen')
+    if (!isJSONObject(data)) {
+      throw new Error('Should not happen')
+    }
 
     return { myNumber: data.my_number } as MyResource
   }

@@ -78,7 +78,9 @@ describe('hasSecureFilePermissions', () => {
   })
 
   it('checks file permissions on POSIX', async () => {
-    if (process.platform === 'win32') return
+    if (process.platform === 'win32') {
+      return
+    }
     const yamlPath = join(__dirname, 'data', 'scw-config.yaml')
     const result = await hasSecureFilePermissions(yamlPath)
     expect(typeof result).toBe('boolean')

@@ -90,14 +90,18 @@ function gatherAffectedPackages(root: string, dryRun: boolean): { affected: Work
   const changedFiles = exec(`git diff --name-only ${range}`, { cwd: root }).split('\n').filter(Boolean)
   const affected = packages.filter(pkg => !pkg.private && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)))
   logger(`[release] ${affected.length} packages to bump (dryRun=${dryRun})`)
-  for (const pkg of affected) logger(`  - ${pkg.name}: ${pkg.version}`)
+  for (const pkg of affected) {
+    logger(`  - ${pkg.name}: ${pkg.version}`)
+  }
   return { affected, range }
 }
 
 function writeNpmrcAuth(root: string, registry: string): void {
   const user = process.env['NPM_REGISTRY_USER']
   const passwd = process.env['NPM_REGISTRY_PASSWD']
-  if (!user || !passwd) return
+  if (!user || !passwd) {
+    return
+  }
   const host = registry.replace(/^https?:\/\//, '')
   const auth = Buffer.from(`${user}:${passwd}`).toString('base64')
   appendFileSync(join(root, '.npmrc'), `\n//${host}/:_auth=${auth}\n`)
@@ -105,8 +109,12 @@ function writeNpmrcAuth(root: string, registry: string): void {
 }
 
 function publishPackages(root: string, options: ReleaseOptions): void {
-  if (options.skipPublish) return
-  if (options.registry) writeNpmrcAuth(root, options.registry)
+  if (options.skipPublish) {
+    return
+  }
+  if (options.registry) {
+    writeNpmrcAuth(root, options.registry)
+  }
   const flag = options.registry ? ` --registry ${options.registry}` : ''
   exec(`pnpm publish -r --no-git-checks --access public${flag}`, { cwd: root, stdio: 'inherit' })
   logger('[release] published')
@@ -126,7 +134,9 @@ function bumpAndPublish(
 }
 
 function pushRelease(root: string, skipPush: boolean, newTags: string[]): void {
-  if (skipPush) return
+  if (skipPush) {
+    return
+  }
   exec('git push origin HEAD --no-verify', { cwd: root })
   for (const tag of newTags) {
     exec(`git push origin "refs/tags/${tag}" --no-verify`, { cwd: root })
@@ -151,11 +161,15 @@ function commitTagAndPush(
 
 function main() {
   const options = parseReleaseArgs()
-  if (!options) return
+  if (!options) {
+    return
+  }
 
   const root = findWorkspaceRoot(process.cwd())
   const { affected, range } = gatherAffectedPackages(root, options.dryRun)
-  if (options.dryRun || affected.length === 0) return
+  if (options.dryRun || affected.length === 0) {
+    return
+  }
 
   const updated = bumpAndPublish(root, options, { affected, range })
   commitTagAndPush(root, options, { affected, updated })

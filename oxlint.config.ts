@@ -22,7 +22,6 @@ export default defineConfig({
     'eslint/no-unused-vars': 'warn',
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
-    'eslint/curly': 'warn',
     'eslint/default-case': 'warn',
     'eslint/eqeqeq': 'warn',
     'eslint/init-declarations': 'warn',

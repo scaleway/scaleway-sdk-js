@@ -272,7 +272,9 @@ function collectMethodExports(
   serviceName: string,
   { config, skipMethods }: CollectMethodExportsOptions,
 ): string[] {
-  if (skipMethods.has(method.methodName) || (config.filters.skipPrivateMethods && method.isPrivate)) return []
+  if (skipMethods.has(method.methodName) || (config.filters.skipPrivateMethods && method.isPrivate)) {
+    return []
+  }
   const baseName = capitalize(method.methodName)
   const exports = [
     `export { ${config.naming.hookPrefix}${serviceName}${baseName}Query } from "./${config.naming.hookPrefix}${serviceName}${baseName}Query"`,

@@ -12,8 +12,12 @@
  * @internal
  */
 export function validatePathParam(name: string, param: string | number | undefined): string {
-  if (typeof param === 'string' && param.length > 0) return param
-  if (typeof param === 'number') return param.toString()
+  if (typeof param === 'string' && param.length > 0) {
+    return param
+  }
+  if (typeof param === 'number') {
+    return param.toString()
+  }
 
   throw new TypeError(`param ${name} cannot be empty in request`)
 }
@@ -63,8 +67,12 @@ type URLParameterValue = string | number | boolean | Date | null
  * @internal
  */
 const toParamString = (v: URLParameterValue): string | null => {
-  if (v === null) return null
-  if (v instanceof Date) return v.toISOString()
+  if (v === null) {
+    return null
+  }
+  if (v instanceof Date) {
+    return v.toISOString()
+  }
   return v.toString()
 }
 
@@ -73,16 +81,22 @@ export const urlParams = (
 ) => {
   const params = new URLSearchParams()
   for (const [key, value] of paramTuples) {
-    if (typeof key !== 'string' || value == null) continue
+    if (typeof key !== 'string' || value == null) {
+      continue
+    }
     if (Array.isArray(value)) {
       for (const inner of value) {
         const s = toParamString(inner)
-        if (s !== null) params.append(key, s)
+        if (s !== null) {
+          params.append(key, s)
+        }
       }
       continue
     }
     const s = toParamString(value)
-    if (s !== null) params.append(key, s)
+    if (s !== null) {
+      params.append(key, s)
+    }
   }
   return params
 }

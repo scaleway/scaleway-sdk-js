@@ -34,7 +34,9 @@ type IntervalStrategy = Generator<number, number, number>
  */
 export function* createFixedIntervalStrategy(interval: number): IntervalStrategy {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  while (true) yield interval
+  while (true) {
+    yield interval
+  }
 }
 
 /**
@@ -102,16 +104,22 @@ export const tryAtIntervals = async <T>(
   const timeoutTimestamp = Date.now() + timeout * 1000
   let retryCount = 0
   while (Date.now() <= timeoutTimestamp) {
-    if (signal?.aborted) throw new AbortError()
+    if (signal?.aborted) {
+      throw new AbortError()
+    }
     retryCount += 1
     const delay = strategy.next(retryCount).value * 1000
     // Break if timeout has been reached
-    if (timeoutTimestamp <= Date.now() + delay) break
+    if (timeoutTimestamp <= Date.now() + delay) {
+      break
+    }
     // Wait before the next retry
     await sleep(delay)
     // Retry
     const { value, done } = await retry()
-    if (done) return value
+    if (done) {
+      return value
+    }
   }
 
   throw new Error(`Timeout after ${timeout}s`)

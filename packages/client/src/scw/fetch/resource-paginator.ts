@@ -37,7 +37,9 @@ function* pages<K extends string, T extends PaginatedContent<K>, R extends Pagin
     page += 1
   }
   const { length } = firstPage[key]
-  if (!length) return
+  if (!length) {
+    return
+  }
   const { totalCount } = firstPage
   while (page <= Math.floor((totalCount + length - 1) / length)) {
     yield fetcher({ ...request, page }).then(getList)

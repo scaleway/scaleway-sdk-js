@@ -132,7 +132,9 @@ async function processPackageVersions(
   let pkgResult: ProcessedMetadata = {}
   for (const version of versions) {
     const versionResult = await processVersion(packageName, version, { servicesToSkip, isVersionSkipped })
-    if (versionResult) pkgResult = { ...pkgResult, ...versionResult }
+    if (versionResult) {
+      pkgResult = { ...pkgResult, ...versionResult }
+    }
   }
   return pkgResult
 }
@@ -145,7 +147,9 @@ function setupGenerateAPI(
   const dir = join(directoryOfSrcFolder, dirGenName)
   mkdirSync(dir, { recursive: true })
   const sdkPackages = discoverSdkPackages(packageNameFilter)
-  if (sdkPackages.size === 0) stdout.write('⚠️  No SDK packages found in dependencies\n')
+  if (sdkPackages.size === 0) {
+    stdout.write('⚠️  No SDK packages found in dependencies\n')
+  }
   const skipPackages = new Set(['@scaleway/sdk-test', '@scaleway/sdk-std'])
   const servicesToSkip = new Set(skipServices)
   const versionsToSkip = new Set(skipVersions)
