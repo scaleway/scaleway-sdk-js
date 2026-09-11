@@ -38,12 +38,16 @@ function normalizeNsPath(nsPath: string): string {
   return nsPath.replace(/^@scaleway\/sdk-/, '@scaleway-internal/sdk-')
 }
 
+type RegisterNsPathOptions = {
+  packageName: string
+  ns: string
+  resolver: Map<string, ResolvedNamespace>
+}
+
 function registerNsPath(
   nsPath: string,
   ownPathPrefix: string,
-  packageName: string,
-  ns: string,
-  resolver: Map<string, ResolvedNamespace>,
+  { packageName, ns, resolver }: RegisterNsPathOptions,
 ): void {
   const normalized = normalizeNsPath(nsPath)
   if (!resolver.has(normalized) && normalized.startsWith(`${ownPathPrefix}/`)) {
@@ -51,13 +55,15 @@ function registerNsPath(
   }
 }
 
+type RegisterVersionNamespacesOptions = {
+  metadataFileName: string
+  ownPathPrefix: string
+  resolver: Map<string, ResolvedNamespace>
+}
+
 async function registerVersionNamespaces(
-  packageName: string,
-  pkgDir: string,
-  version: string,
-  metadataFileName: string,
-  ownPathPrefix: string,
-  resolver: Map<string, ResolvedNamespace>,
+  { packageName, pkgDir, version }: { packageName: string; pkgDir: string; version: string },
+  { metadataFileName, ownPathPrefix, resolver }: RegisterVersionNamespacesOptions,
 ): Promise<void> {
   try {
     const metadata = await loadMetadata(pkgDir, version, metadataFileName)
@@ -66,7 +72,7 @@ async function registerVersionNamespaces(
     for (const service of metadata.services) {
       for (const method of service.methods) {
         for (const nsPath of [method.returnTypeNamespace, method.listItemTypeNamespace]) {
-          if (nsPath) registerNsPath(nsPath, ownPathPrefix, packageName, ns, resolver)
+          if (nsPath) registerNsPath(nsPath, ownPathPrefix, { packageName, ns, resolver })
         }
       }
     }
@@ -105,7 +111,7 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
     const ownPathPrefix = normalizePackagePath(packageName)
 
     for (const version of versions) {
-      await registerVersionNamespaces(packageName, pkgDir, version, metadataFileName, ownPathPrefix, resolver)
+      await registerVersionNamespaces({ packageName, pkgDir, version }, { metadataFileName, ownPathPrefix, resolver })
     }
   }
 
@@ -166,11 +172,15 @@ function deriveFromNamespacePath(nsPath: string): ResolvedNamespace | undefined 
  *    but the path follows the `@scaleway/sdk-<slug>/<version>` convention).
  * 3. Fall back to the current package's namespace.
  */
+type ResolveTypeNamespaceOptions = {
+  fallbackPackageName: string
+  fallbackNs: string
+  resolver: Map<string, ResolvedNamespace>
+}
+
 export function resolveTypeNamespace(
   typeNamespace: string | undefined,
-  fallbackPackageName: string,
-  fallbackNs: string,
-  resolver: Map<string, ResolvedNamespace>,
+  { fallbackPackageName, fallbackNs, resolver }: ResolveTypeNamespaceOptions,
 ): ResolvedNamespace {
   // Only resolve values that look like package paths (e.g. '@scaleway-internal/sdk-rdb/v1').
   // Some metadata entries contain the type name itself instead of a package path.

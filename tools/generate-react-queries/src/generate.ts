@@ -37,29 +37,36 @@ function prepareGeneratedDir(ctx: GenerationContext, folderName: string): string
   return generatedDir
 }
 
+type HookGenOptions = {
+  metadata: QueriesMetadata
+  ctx: GenerationContext
+  packageName: string
+  generatedDir: string
+  folderName: string
+}
+
 function writeListMethodHooks(
   method: QueryMethod,
   service: ServiceMetadata,
-  metadata: QueriesMetadata,
-  ctx: GenerationContext,
-  packageName: string,
-  generatedDir: string,
-  folderName: string,
+  { metadata, ctx, packageName, generatedDir, folderName }: HookGenOptions,
 ): void {
   if (!(ctx.config.filters.skipCursorAllHooks && method.paginationType === 'cursor')) {
-    const allContent = generateAllQueryHook(method, service, metadata, ctx.config, packageName, ctx.namespaceResolver)
+    const allContent = generateAllQueryHook(method, service, {
+      metadata,
+      config: ctx.config,
+      sdkPackageName: packageName,
+      namespaceResolver: ctx.namespaceResolver,
+    })
     const allFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery.ts`
     writeFileSync(join(generatedDir, allFileName), allContent)
   }
 
-  const infiniteContent = generateInfiniteQueryHook(
-    method,
-    service,
+  const infiniteContent = generateInfiniteQueryHook(method, service, {
     metadata,
-    ctx.config,
-    packageName,
-    ctx.namespaceResolver,
-  )
+    config: ctx.config,
+    sdkPackageName: packageName,
+    namespaceResolver: ctx.namespaceResolver,
+  })
   const infiniteFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery.ts`
   writeFileSync(join(generatedDir, infiniteFileName), infiniteContent)
 }
@@ -67,24 +74,18 @@ function writeListMethodHooks(
 function writeWaiterHook(
   method: QueryMethod,
   service: ServiceMetadata,
-  metadata: QueriesMetadata,
-  ctx: GenerationContext,
-  packageName: string,
-  generatedDir: string,
-  folderName: string,
+  { metadata, ctx, packageName, generatedDir, folderName }: HookGenOptions,
 ): void {
   const waiterMethod = {
     ...method,
     methodName: `waitFor${capitalize(method.methodName.replace('get', ''))}`,
   }
-  const waiterContent = generateQueryHook(
-    waiterMethod,
-    service,
+  const waiterContent = generateQueryHook(waiterMethod, service, {
     metadata,
-    ctx.config,
-    packageName,
-    ctx.namespaceResolver,
-  )
+    config: ctx.config,
+    sdkPackageName: packageName,
+    namespaceResolver: ctx.namespaceResolver,
+  })
   const waiterFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${ctx.config.naming.waiterPrefix}${capitalize(method.methodName.replace('get', ''))}Query.ts`
   writeFileSync(join(generatedDir, waiterFileName), waiterContent)
 }
@@ -92,37 +93,34 @@ function writeWaiterHook(
 function writeMethodHooks(
   method: QueryMethod,
   service: ServiceMetadata,
-  metadata: QueriesMetadata,
-  ctx: GenerationContext,
-  packageName: string,
-  generatedDir: string,
-  folderName: string,
+  { metadata, ctx, packageName, generatedDir, folderName }: HookGenOptions,
 ): void {
-  const hookContent = generateQueryHook(method, service, metadata, ctx.config, packageName, ctx.namespaceResolver)
+  const hookContent = generateQueryHook(method, service, {
+    metadata,
+    config: ctx.config,
+    sdkPackageName: packageName,
+    namespaceResolver: ctx.namespaceResolver,
+  })
   const hookFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}Query.ts`
   writeFileSync(join(generatedDir, hookFileName), hookContent)
 
   if (method.isList) {
-    writeListMethodHooks(method, service, metadata, ctx, packageName, generatedDir, folderName)
+    writeListMethodHooks(method, service, { metadata, ctx, packageName, generatedDir, folderName })
   }
 
   if (method.hasWaiter && !ctx.config.filters.skipWaiters) {
-    writeWaiterHook(method, service, metadata, ctx, packageName, generatedDir, folderName)
+    writeWaiterHook(method, service, { metadata, ctx, packageName, generatedDir, folderName })
   }
 }
 
 function writeServiceHooks(
   service: ServiceMetadata,
-  metadata: QueriesMetadata,
-  ctx: GenerationContext,
-  packageName: string,
-  generatedDir: string,
-  folderName: string,
+  { metadata, ctx, packageName, generatedDir, folderName }: HookGenOptions,
 ): void {
   console.log(`📝 Generating hooks for ${service.apiClass}`)
   for (const method of service.methods) {
     if (!ctx.skipMethods.has(method.methodName) && !(ctx.config.filters.skipPrivateMethods && method.isPrivate)) {
-      writeMethodHooks(method, service, metadata, ctx, packageName, generatedDir, folderName)
+      writeMethodHooks(method, service, { metadata, ctx, packageName, generatedDir, folderName })
     }
   }
   const reloadContent = generateReloadHook(service, metadata, ctx.config)
@@ -132,11 +130,7 @@ function writeServiceHooks(
 
 function generateServiceHooks(
   services: ServiceMetadata[],
-  metadata: QueriesMetadata,
-  ctx: GenerationContext,
-  packageName: string,
-  generatedDir: string,
-  folderName: string,
+  { metadata, ctx, packageName, generatedDir, folderName }: HookGenOptions,
 ): void {
   const servicesToGenerate = services.filter(service => !ctx.skipServices.has(service.apiClass))
   if (servicesToGenerate.length === 0) {
@@ -144,16 +138,14 @@ function generateServiceHooks(
     return
   }
   for (const service of servicesToGenerate) {
-    writeServiceHooks(service, metadata, ctx, packageName, generatedDir, folderName)
+    writeServiceHooks(service, { metadata, ctx, packageName, generatedDir, folderName })
   }
   const indexContent = generateIndexFile(servicesToGenerate, metadata, ctx.config)
   writeFileSync(join(generatedDir, ctx.config.naming.indexFile), indexContent)
 }
 
 async function processVersionCore(
-  packageName: string,
-  pkgDir: string,
-  version: string,
+  { packageName, pkgDir, version }: { packageName: string; pkgDir: string; version: string },
   ctx: GenerationContext,
 ): Promise<void> {
   const metadata = await loadMetadata(pkgDir, version, ctx.metadataFileName)
@@ -163,14 +155,12 @@ async function processVersionCore(
   }
   const { folderName, services } = metadata
   const generatedDir = prepareGeneratedDir(ctx, folderName)
-  generateServiceHooks(services, metadata, ctx, packageName, generatedDir, folderName)
+  generateServiceHooks(services, { metadata, ctx, packageName, generatedDir, folderName })
   console.log(`✅ Generated hooks for ${folderName}`)
 }
 
 async function processVersion(
-  packageName: string,
-  pkgDir: string,
-  version: string,
+  { packageName, pkgDir, version }: { packageName: string; pkgDir: string; version: string },
   ctx: GenerationContext,
 ): Promise<void> {
   if (ctx.skipVersions.has(`${packageName}@${version}`) || ctx.skipVersions.has(version)) {
@@ -178,7 +168,7 @@ async function processVersion(
     return
   }
   try {
-    await processVersionCore(packageName, pkgDir, version, ctx)
+    await processVersionCore({ packageName, pkgDir, version }, ctx)
   } catch (error) {
     console.error(`    ❌ Error loading ${packageName}/${version}/metadata:`, error)
     throw error
@@ -197,7 +187,7 @@ async function processPackage(packageName: string, pkgDir: string, ctx: Generati
   }
   console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.join(', ')}`)
   for (const version of versions) {
-    await processVersion(packageName, pkgDir, version, ctx)
+    await processVersion({ packageName, pkgDir, version }, ctx)
   }
 }
 

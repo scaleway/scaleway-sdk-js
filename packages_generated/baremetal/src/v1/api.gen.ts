@@ -186,8 +186,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SERVER_TRANSIENT_STATUSES_BAREMETAL.includes(res.status))),
       this.getServer,
-      request,
-      options,
+      { ...options, request },
     )
 
   

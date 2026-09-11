@@ -77,9 +77,9 @@ function copyConfigTemplates(fullPath: string): void {
 function processProductDir(
   productDir: string,
   inputPathDir: string,
-  templateString: string,
-  metadataTsTemplateString: string,
+  options: { templateString: string; metadataTsTemplateString: string },
 ): void {
+  const { templateString, metadataTsTemplateString } = options
   const fullPath = join(inputPathDir, productDir)
   if (!statSync(fullPath).isDirectory() || CUSTOM.PRODUCT_EXPORT.has(productDir)) return
 
@@ -110,7 +110,7 @@ export const packages = async ({ src: inputPathDir, runInstall = true }: Package
   const metadataTsTemplateString = readFileSync(TEMPLATES.METADATA_TS, 'utf8')
 
   for (const productDir of readdirSync(inputPathDir)) {
-    processProductDir(productDir, inputPathDir, templateString, metadataTsTemplateString)
+    processProductDir(productDir, inputPathDir, { templateString, metadataTsTemplateString })
   }
 
   if (runInstall) {

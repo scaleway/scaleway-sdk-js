@@ -59,7 +59,7 @@ export class InstanceV1UtilsAPI extends API {
         }
       },
       createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
-      options?.timeout,
+      { timeout: options?.timeout },
     )
 
   /**
@@ -80,7 +80,7 @@ export class InstanceV1UtilsAPI extends API {
         }
       },
       createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
-      options?.timeout,
+      { timeout: options?.timeout },
     )
 
   /**
@@ -101,7 +101,7 @@ export class InstanceV1UtilsAPI extends API {
         }
       },
       createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
-      options?.timeout,
+      { timeout: options?.timeout },
     )
 
   /**
@@ -122,7 +122,7 @@ export class InstanceV1UtilsAPI extends API {
         }
       },
       createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
-      options?.timeout,
+      { timeout: options?.timeout },
     )
 
   /**
@@ -143,7 +143,7 @@ export class InstanceV1UtilsAPI extends API {
         }
       },
       createExponentialBackoffStrategy(options?.minDelay ?? 1, options?.maxDelay ?? 30),
-      options?.timeout,
+      { timeout: options?.timeout },
     )
 
   /**

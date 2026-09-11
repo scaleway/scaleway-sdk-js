@@ -132,8 +132,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!JOB_TRANSIENT_STATUSES_QAAS.includes(res.status))),
       this.getJob,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -356,8 +355,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SESSION_TRANSIENT_STATUSES_QAAS.includes(res.status))),
       this.getSession,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -527,8 +525,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!PROCESS_TRANSIENT_STATUSES_QAAS.includes(res.status))),
       this.getProcess,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -706,8 +703,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!BOOKING_TRANSIENT_STATUSES_QAAS.includes(res.status))),
       this.getBooking,
-      request,
-      options,
+      { ...options, request },
     )
 
   

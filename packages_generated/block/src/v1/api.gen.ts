@@ -182,8 +182,7 @@ To create a volume from an existing snapshot, specify `from_snapshot` and the `s
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!VOLUME_TRANSIENT_STATUSES_BLOCK.includes(res.status))),
       this.getVolume,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -281,8 +280,7 @@ You can only resize a volume to a larger size. It is currently not possible to c
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES_BLOCK.includes(res.status))),
       this.getSnapshot,
-      request,
-      options,
+      { ...options, request },
     )
 
   

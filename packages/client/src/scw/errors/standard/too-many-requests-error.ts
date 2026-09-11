@@ -13,16 +13,26 @@ export interface TooManyRequestsQuotaPolicy {
 }
 
 /**
+ * Options for {@link TooManyRequestsError}.
+ *
+ * @public
+ */
+export interface TooManyRequestsErrorOptions {
+  helpMessage: string
+  limit?: TooManyRequestsQuotaPolicy
+  /** The number of seconds until the quota resets */
+  resetSeconds?: number
+  /** The timestamp when the quota resets */
+  resetAt?: Date
+}
+
+/**
  * Build the default message for {@link TooManyRequestsError}.
  *
  * @internal
  */
-const buildMessage = (
-  helpMessage: string,
-  limit?: TooManyRequestsQuotaPolicy,
-  resetSeconds?: number,
-  resetAt?: Date,
-): string => {
+const buildMessage = (options: TooManyRequestsErrorOptions): string => {
+  const { helpMessage, limit, resetSeconds, resetAt } = options
   const details: string[] = []
   if (limit) {
     if (limit.windowSeconds) {
@@ -54,18 +64,24 @@ const buildMessage = (
  * @public
  */
 export class TooManyRequestsError extends ScalewayError {
+  readonly helpMessage: string
+  readonly limit?: TooManyRequestsQuotaPolicy
+  /** The number of seconds until the quota resets */
+  readonly resetSeconds?: number
+  /** The timestamp when the quota resets */
+  readonly resetAt?: Date
+
   constructor(
     readonly status: number,
     readonly body: JSONObject,
-    readonly helpMessage: string,
-    readonly limit?: TooManyRequestsQuotaPolicy,
-    /** The number of seconds until the quota resets */
-    readonly resetSeconds?: number,
-    /** The timestamp when the quota resets */
-    readonly resetAt?: Date,
+    options: TooManyRequestsErrorOptions,
   ) {
-    super(status, body, buildMessage(helpMessage, limit, resetSeconds, resetAt))
+    super(status, body, buildMessage(options))
     this.name = 'TooManyRequestsError'
+    this.helpMessage = options.helpMessage
+    this.limit = options.limit
+    this.resetSeconds = options.resetSeconds
+    this.resetAt = options.resetAt
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
@@ -78,13 +94,11 @@ export class TooManyRequestsError extends ScalewayError {
       }
     }
 
-    return new TooManyRequestsError(
-      status,
-      obj,
-      obj.help_message,
+    return new TooManyRequestsError(status, obj, {
+      helpMessage: obj.help_message,
       limit,
-      typeof obj.reset_seconds === 'number' ? obj.reset_seconds : undefined,
-      typeof obj.reset_at === 'string' ? new Date(obj.reset_at) : undefined,
-    )
+      resetSeconds: typeof obj.reset_seconds === 'number' ? obj.reset_seconds : undefined,
+      resetAt: typeof obj.reset_at === 'string' ? new Date(obj.reset_at) : undefined,
+    })
   }
 }

@@ -243,8 +243,7 @@ export class ProjectAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!PROJECT_TRANSIENT_STATUSES_ACCOUNT.includes(res.status))),
       this.getProject,
-      request,
-      options,
+      { ...options, request },
     )
 
   

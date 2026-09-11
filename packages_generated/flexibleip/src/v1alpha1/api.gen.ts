@@ -118,8 +118,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP.includes(res.status))),
       this.getFlexibleIP,
-      request,
-      options,
+      { ...options, request },
     )
 
   

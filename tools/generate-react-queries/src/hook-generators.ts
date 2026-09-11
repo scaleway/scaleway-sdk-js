@@ -37,14 +37,18 @@ function resolveApiNames(folderName: string, service: ServiceMetadata, config: R
   return { apiImportName, apiHookName, apiVarName, apiImportPath }
 }
 
+type ResolveNamesOptions = {
+  metadata: QueriesMetadata
+  config: ReactQueriesConfig
+  sdkPackageName: string
+  namespaceResolver: Map<string, ResolvedNamespace>
+}
+
 /** Derive all naming conventions for a given method + service combination. */
 function resolveNames(
   method: QueryMethod,
   service: ServiceMetadata,
-  metadata: QueriesMetadata,
-  config: ReactQueriesConfig,
-  sdkPackageName: string,
-  namespaceResolver: Map<string, ResolvedNamespace>,
+  { metadata, config, sdkPackageName, namespaceResolver }: ResolveNamesOptions,
 ) {
   const { folderName } = metadata
   const rawTypes = new Set(config.filters.rawTypes)
@@ -54,7 +58,11 @@ function resolveNames(
   const selfNs: ResolvedNamespace = { packageName: sdkPackageName, ns }
 
   // Resolve the namespace for the return type
-  const returnNsInfo = resolveTypeNamespace(method.returnTypeNamespace, sdkPackageName, ns, namespaceResolver)
+  const returnNsInfo = resolveTypeNamespace(method.returnTypeNamespace, {
+    fallbackPackageName: sdkPackageName,
+    fallbackNs: ns,
+    resolver: namespaceResolver,
+  })
   const returnType = nsType(returnNsInfo.ns, method.returnType, rawTypes)
 
   return {
@@ -78,12 +86,9 @@ function resolveNames(
 export function generateQueryHook(
   method: QueryMethod,
   service: ServiceMetadata,
-  metadata: QueriesMetadata,
-  config: ReactQueriesConfig,
-  sdkPackageName: string,
-  namespaceResolver: Map<string, ResolvedNamespace>,
+  { metadata, config, sdkPackageName, namespaceResolver }: ResolveNamesOptions,
 ): string {
-  const n = resolveNames(method, service, metadata, config, sdkPackageName, namespaceResolver)
+  const n = resolveNames(method, service, { metadata, config, sdkPackageName, namespaceResolver })
   const hasParams = Boolean(method.paramsType)
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}Query`
 
@@ -118,12 +123,16 @@ export function generateQueryHook(
   })
 }
 
+type CollectAllHookImportsOptions = {
+  sdkPackageName: string
+  itemNsInfo: ResolvedNamespace
+  rawItemType: string | undefined
+}
+
 function collectAllHookImports(
   n: ResolvedNames,
   method: QueryMethod,
-  sdkPackageName: string,
-  itemNsInfo: ResolvedNamespace,
-  rawItemType: string | undefined,
+  { sdkPackageName, itemNsInfo, rawItemType }: CollectAllHookImportsOptions,
 ): Map<string, ResolvedNamespace> {
   const nsImports = new Map<string, ResolvedNamespace>()
   if (!n.rawTypes.has(method.paramsType)) {
@@ -142,21 +151,22 @@ function collectAllHookImports(
 export function generateAllQueryHook(
   method: QueryMethod,
   service: ServiceMetadata,
-  metadata: QueriesMetadata,
-  config: ReactQueriesConfig,
-  sdkPackageName: string,
-  namespaceResolver: Map<string, ResolvedNamespace>,
+  { metadata, config, sdkPackageName, namespaceResolver }: ResolveNamesOptions,
 ): string {
-  const n = resolveNames(method, service, metadata, config, sdkPackageName, namespaceResolver)
+  const n = resolveNames(method, service, { metadata, config, sdkPackageName, namespaceResolver })
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery`
 
   // Resolve the namespace for the list item type
-  const itemNsInfo = resolveTypeNamespace(method.listItemTypeNamespace, sdkPackageName, n.ns, namespaceResolver)
+  const itemNsInfo = resolveTypeNamespace(method.listItemTypeNamespace, {
+    fallbackPackageName: sdkPackageName,
+    fallbackNs: n.ns,
+    resolver: namespaceResolver,
+  })
 
   const rawItemType = method.listItemType
   const itemType = rawItemType ? nsType(itemNsInfo.ns, rawItemType, n.rawTypes) : n.returnType
 
-  const nsImports = collectAllHookImports(n, method, sdkPackageName, itemNsInfo, rawItemType)
+  const nsImports = collectAllHookImports(n, method, { sdkPackageName, itemNsInfo, rawItemType })
 
   return renderHook({
     apiHookName: n.apiHookName,
@@ -180,12 +190,9 @@ export function generateAllQueryHook(
 export function generateInfiniteQueryHook(
   method: QueryMethod,
   service: ServiceMetadata,
-  metadata: QueriesMetadata,
-  config: ReactQueriesConfig,
-  sdkPackageName: string,
-  namespaceResolver: Map<string, ResolvedNamespace>,
+  { metadata, config, sdkPackageName, namespaceResolver }: ResolveNamesOptions,
 ): string {
-  const n = resolveNames(method, service, metadata, config, sdkPackageName, namespaceResolver)
+  const n = resolveNames(method, service, { metadata, config, sdkPackageName, namespaceResolver })
   const hookSuffix = `${capitalize(metadata.folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery`
 
   // Collect namespace imports: params type and return type
@@ -234,11 +241,15 @@ export function generateReloadHook(
   })
 }
 
+type CollectListExportsOptions = {
+  config: ReactQueriesConfig
+  baseName: string
+}
+
 function collectListExports(
   method: QueryMethod,
   serviceName: string,
-  config: ReactQueriesConfig,
-  baseName: string,
+  { config, baseName }: CollectListExportsOptions,
 ): string[] {
   const exports = [
     `export { ${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery } from "./${config.naming.hookPrefix}${serviceName}${baseName}InfiniteQuery"`,
@@ -251,11 +262,15 @@ function collectListExports(
   return exports
 }
 
+type CollectMethodExportsOptions = {
+  config: ReactQueriesConfig
+  skipMethods: Set<string>
+}
+
 function collectMethodExports(
   method: QueryMethod,
   serviceName: string,
-  config: ReactQueriesConfig,
-  skipMethods: Set<string>,
+  { config, skipMethods }: CollectMethodExportsOptions,
 ): string[] {
   if (skipMethods.has(method.methodName) || (config.filters.skipPrivateMethods && method.isPrivate)) return []
   const baseName = capitalize(method.methodName)
@@ -263,7 +278,7 @@ function collectMethodExports(
     `export { ${config.naming.hookPrefix}${serviceName}${baseName}Query } from "./${config.naming.hookPrefix}${serviceName}${baseName}Query"`,
   ]
   if (method.isList) {
-    exports.push(...collectListExports(method, serviceName, config, baseName))
+    exports.push(...collectListExports(method, serviceName, { config, baseName }))
   }
   if (method.hasWaiter && !config.filters.skipWaiters) {
     const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
@@ -288,7 +303,7 @@ export function generateIndexFile(
     const serviceName = `${capitalize(folderName)}${service.apiClass}`
 
     for (const method of service.methods) {
-      exports.push(...collectMethodExports(method, serviceName, config, skipMethods))
+      exports.push(...collectMethodExports(method, serviceName, { config, skipMethods }))
     }
 
     exports.push(

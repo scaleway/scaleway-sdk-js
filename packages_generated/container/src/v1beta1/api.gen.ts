@@ -165,8 +165,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getNamespace,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -288,8 +287,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CONTAINER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getContainer,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -438,8 +436,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CRON_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getCron,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -558,8 +555,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getDomain,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -652,8 +648,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TOKEN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getToken,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -752,8 +747,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TRIGGER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getTrigger,
-      request,
-      options,
+      { ...options, request },
     )
 
   

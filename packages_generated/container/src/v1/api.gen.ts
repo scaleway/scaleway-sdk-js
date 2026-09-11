@@ -44,6 +44,7 @@ import type {
   GetContainerRequest,
   GetDomainRequest,
   GetNamespaceRequest,
+  GetPrivateEndpointCertificateAuthorityRequest,
   GetTriggerRequest,
   ListContainersRequest,
   ListContainersResponse,
@@ -135,8 +136,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getNamespace,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -256,8 +256,7 @@ This action **cannot** be undone.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CONTAINER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getContainer,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -330,6 +329,25 @@ This action **cannot** be undone.
 
   
   /**
+   * Get the private endpoint certificate authority.. When enabling private endpoints for your containers, you need to trust this CA to establish HTTPS connections to them.
+   *
+   * @param request - The request {@link GetPrivateEndpointCertificateAuthorityRequest}
+   * @returns A Promise of Blob
+   */
+  getPrivateEndpointCertificateAuthority = (request: Readonly<GetPrivateEndpointCertificateAuthorityRequest> = {}) =>
+    this.client.fetch<Blob>(
+      {
+        method: 'GET',
+        path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-endpoint-ca`,
+        urlParams: urlParams(
+          ['dl', 1],
+        ),
+        responseType: 'blob',
+      },
+    )
+
+  
+  /**
    * Create a new custom domain for the container with the specified ID.. Create a new custom domain for the container with the specified ID.
    *
    * @param request - The request {@link CreateDomainRequest}
@@ -378,8 +396,7 @@ This action **cannot** be undone.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getDomain,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -518,8 +535,7 @@ the most recent image version available in the registry.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TRIGGER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getTrigger,
-      request,
-      options,
+      { ...options, request },
     )
 
   

@@ -2,28 +2,37 @@ import type { JSONObject } from '../../../helpers/json.js'
 import { ScalewayError } from '../scw-error.js'
 
 /**
+ * Options for {@link DeniedAuthenticationError}.
+ *
+ * @public
+ */
+export interface DeniedAuthenticationErrorOptions {
+  method: string
+  reason: string
+}
+
+/**
  * Build the default message for {@link DeniedAuthenticationError}.
  *
- * @param method - The authentication method
- * @param reason - The deny reason
+ * @param options - The authentication method and deny reason
  * @returns The error message
  *
  * @internal
  */
-const buildMessage = (method: string, reason: string): string => {
+const buildMessage = (options: DeniedAuthenticationErrorOptions): string => {
   let reasonDesc: string
-  switch (reason) {
+  switch (options.reason) {
     case 'invalid_argument':
-      reasonDesc = `invalid ${method} format or empty value`
+      reasonDesc = `invalid ${options.method} format or empty value`
       break
     case 'not_found':
-      reasonDesc = `${method} does not exist`
+      reasonDesc = `${options.method} does not exist`
       break
     case 'expired':
-      reasonDesc = `${method} is expired`
+      reasonDesc = `${options.method} is expired`
       break
     default:
-      reasonDesc = `unknown reason for ${method}`
+      reasonDesc = `unknown reason for ${options.method}`
   }
 
   return `denied authentication: ${reasonDesc}`
@@ -35,14 +44,18 @@ const buildMessage = (method: string, reason: string): string => {
  * @public
  */
 export class DeniedAuthenticationError extends ScalewayError {
+  readonly method: string
+  readonly reason: string
+
   constructor(
     readonly status: number,
     readonly body: JSONObject,
-    readonly method: string,
-    readonly reason: string,
+    options: DeniedAuthenticationErrorOptions,
   ) {
-    super(status, body, buildMessage(method, reason))
+    super(status, body, buildMessage(options))
     this.name = 'DeniedAuthenticationError'
+    this.method = options.method
+    this.reason = options.reason
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
@@ -50,6 +63,6 @@ export class DeniedAuthenticationError extends ScalewayError {
       return null
     }
 
-    return new DeniedAuthenticationError(status, obj, obj.method, obj.reason)
+    return new DeniedAuthenticationError(status, obj, { method: obj.method, reason: obj.reason })
   }
 }

@@ -170,8 +170,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!GATEWAY_TRANSIENT_STATUSES_VPCGW.includes(res.status))),
       this.getGateway,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -311,8 +310,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW.includes(res.status))),
       this.getGatewayNetwork,
-      request,
-      options,
+      { ...options, request },
     )
 
   
