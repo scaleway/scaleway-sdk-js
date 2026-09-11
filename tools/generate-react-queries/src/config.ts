@@ -152,11 +152,15 @@ export const defaultConfig: ReactQueriesConfig = {
 // --- String utils ---
 
 export function capitalize(str: string): string {
-  if (!str) return str
+  if (!str) {
+    return str
+  }
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 export function lowerCaseFirst(str: string): string {
-  if (!str) return str
+  if (!str) {
+    return str
+  }
   return str.charAt(0).toLowerCase() + str.slice(1)
 }

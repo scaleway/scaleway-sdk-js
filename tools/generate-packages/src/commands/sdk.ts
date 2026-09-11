@@ -20,7 +20,9 @@ const getGeneratedPackages = (dir: string, excludeSuffix?: string): PackageJSON[
       .filter((d: Dirent) => !excludeSuffix || !d.name.includes(excludeSuffix))
       .flatMap((d: Dirent) => {
         const pkgPath = join(dir, d.name, 'package.json')
-        if (!existsSync(pkgPath)) return []
+        if (!existsSync(pkgPath)) {
+          return []
+        }
         const pkg = JSON.parse(readFileSync(pkgPath, 'utf8')) as PackageJSON
         return [{ name: pkg.name, version: pkg.version, path: d.name }]
       })
@@ -77,7 +79,9 @@ function rebuildAllDeps(
 }
 
 function writeSdkIndex(s: Config['sdks'][number], validPackages: PackageJSON[]): void {
-  if (!s.shouldUpdateIndex) return
+  if (!s.shouldUpdateIndex) {
+    return
+  }
   const indexContent = `// Auto-generated exports from all SDK packages\n\n${validPackages
     .map(p => `export * from '${p.name}'\n`)
     .join('')}`

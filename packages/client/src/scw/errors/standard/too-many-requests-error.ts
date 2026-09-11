@@ -85,7 +85,9 @@ export class TooManyRequestsError extends ScalewayError {
   }
 
   static fromJSON(status: number, obj: Readonly<JSONObject>) {
-    if (typeof obj.help_message !== 'string') return null
+    if (typeof obj.help_message !== 'string') {
+      return null
+    }
     let limit: TooManyRequestsQuotaPolicy | undefined
     if (isJSONObject(obj.limit) && typeof obj.limit.quota === 'number') {
       limit = {

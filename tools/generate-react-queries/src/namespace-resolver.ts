@@ -72,7 +72,9 @@ async function registerVersionNamespaces(
     for (const service of metadata.services) {
       for (const method of service.methods) {
         for (const nsPath of [method.returnTypeNamespace, method.listItemTypeNamespace]) {
-          if (nsPath) registerNsPath(nsPath, ownPathPrefix, { packageName, ns, resolver })
+          if (nsPath) {
+            registerNsPath(nsPath, ownPathPrefix, { packageName, ns, resolver })
+          }
         }
       }
     }
@@ -147,11 +149,17 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
  */
 function deriveFromNamespacePath(nsPath: string): ResolvedNamespace | undefined {
   const match = nsPath.match(/^(?<scope>@scaleway(?:-internal)?)\/sdk-(?<slug>[^/]+)\/(?<version>.+)$/)
-  if (!match) return undefined
+  if (!match) {
+    return undefined
+  }
 
   const { scope, slug, version } = match?.groups ?? {} // e.g. "@scaleway-internal", "rdb-admin", "v1"
-  if (!slug) return undefined
-  if (!version) return undefined
+  if (!slug) {
+    return undefined
+  }
+  if (!version) {
+    return undefined
+  }
 
   // Convert kebab-case slug to camelCase (e.g. "rdb-admin" → "rdbAdmin")
   const camelSlug = slug.replace(/-(?<char>[a-z])/g, (_, c: string) => c.toUpperCase())
@@ -189,13 +197,17 @@ export function resolveTypeNamespace(
   }
 
   const resolved = resolver.get(normalizeNsPath(typeNamespace))
-  if (resolved) return resolved
+  if (resolved) {
+    return resolved
+  }
 
   // Try to derive from the path itself — better than falling back to the
   // current package, which would produce wrong type qualifiers for
   // cross-package references whose owning package wasn't discovered.
   const derived = deriveFromNamespacePath(typeNamespace)
-  if (derived) return derived
+  if (derived) {
+    return derived
+  }
 
   // Last resort: the namespace path couldn't be resolved or derived
   return { packageName: fallbackPackageName, ns: fallbackNs }
