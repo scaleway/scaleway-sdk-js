@@ -7,8 +7,10 @@ import type {
   KeyAlgorithmKeyEncapsulation,
   KeyAlgorithmSymmetricEncryption,
   KeyOrigin,
+  KeyRotationStatus,
   KeyState,
   ListAlgorithmsRequestUsage,
+  ListKeyRotationsRequestOrderBy,
   ListKeysRequestOrderBy,
   ListKeysRequestUsage,
 } from './types.gen.js'
@@ -65,6 +67,13 @@ export const KEY_ORIGINS: KeyOrigin[] = [
   'external',
 ]
 
+/** Lists all values of the enum {@link KeyRotationStatus}. */
+export const KEY_ROTATION_STATUSES: KeyRotationStatus[] = [
+  'unknown_status',
+  'enabled',
+  'deleted',
+]
+
 /** Lists all values of the enum {@link KeyState}. */
 export const KEY_STATES: KeyState[] = [
   'unknown_state',
@@ -81,6 +90,12 @@ export const LIST_ALGORITHMS_REQUEST_USAGES: ListAlgorithmsRequestUsage[] = [
   'asymmetric_encryption',
   'asymmetric_signing',
   'key_encapsulation',
+]
+
+/** Lists all values of the enum {@link ListKeyRotationsRequestOrderBy}. */
+export const LIST_KEY_ROTATIONS_REQUEST_ORDER_BIES: ListKeyRotationsRequestOrderBy[] = [
+  'created_at_asc',
+  'created_at_desc',
 ]
 
 /** Lists all values of the enum {@link ListKeysRequestOrderBy}. */
