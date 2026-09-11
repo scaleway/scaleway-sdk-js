@@ -76,4 +76,6 @@ switch (command) {
       install: Boolean(values.install),
     })
     break
+  default:
+    break
 }
