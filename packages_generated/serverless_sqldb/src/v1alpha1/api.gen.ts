@@ -110,7 +110,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB.includes(res.status))),
       this.getDatabase,
-      { ...options, request },
+      request,
+      options,
     )
 
   

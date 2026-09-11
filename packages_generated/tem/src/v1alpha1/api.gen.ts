@@ -159,7 +159,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!EMAIL_TRANSIENT_STATUSES_TEM.includes(res.status))),
       this.getEmail,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -289,7 +290,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_TEM.includes(res.status))),
       this.getDomain,
-      { ...options, request },
+      request,
+      options,
     )
 
   
