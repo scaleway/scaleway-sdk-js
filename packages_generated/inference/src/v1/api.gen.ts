@@ -126,7 +126,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE.includes(res.status))),
       this.getDeployment,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -317,7 +318,8 @@ The CA certificate will be returned as a PEM file.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!MODEL_TRANSIENT_STATUSES_INFERENCE.includes(res.status))),
       this.getModel,
-      { ...options, request },
+      request,
+      options,
     )
 
   
