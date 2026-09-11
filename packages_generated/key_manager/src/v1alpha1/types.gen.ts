@@ -42,6 +42,11 @@ export type KeyOrigin =
   | 'scaleway_kms'
   | 'external'
 
+export type KeyRotationStatus =
+  | 'unknown_status'
+  | 'enabled'
+  | 'deleted'
+
 export type KeyState =
   | 'unknown_state'
   | 'enabled'
@@ -55,6 +60,10 @@ export type ListAlgorithmsRequestUsage =
   | 'asymmetric_encryption'
   | 'asymmetric_signing'
   | 'key_encapsulation'
+
+export type ListKeyRotationsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
 
 export type ListKeysRequestOrderBy =
   | 'name_asc'
@@ -114,6 +123,38 @@ export interface ListAlgorithmsResponseAlgorithm {
   usage: string
   name: string
   recommended: boolean
+}
+
+
+export interface KeyRotation {
+  /**
+   * ID of the associated key.
+   */
+  keyId: string
+  /**
+   * The rotation index tracks the specific version of the key material.
+   */
+  index: number
+  /**
+   * See the `KeyRotation.Status` enum for a description of possible values.
+   */
+  status: KeyRotationStatus
+  /**
+   * Returns `true` if the key was rotated manually, or `false` if it was rotated automatically by a rotation policy.
+   */
+  manuallyRotated: boolean
+  /**
+   * Key rotation creation date.
+   */
+  createdAt?: Date
+  /**
+   * Key rotation last modification date.
+   */
+  updatedAt?: Date
+  /**
+   * Key rotation deletion date.
+   */
+  deletedAt?: Date
 }
 
 
@@ -451,6 +492,37 @@ export interface ListAlgorithmsResponse {
    * Returns a list of algorithms matching the requested criteria.
    */
   algorithms: ListAlgorithmsResponseAlgorithm[]
+}
+
+
+export type ListKeyRotationsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the key to list rotations for.
+   */
+  keyId: string
+  orderBy?: ListKeyRotationsRequestOrderBy
+  page?: number
+  pageSize?: number
+  /**
+   * See the `KeyRotation.Status` enum for a description of possible values.
+   */
+  status?: KeyRotationStatus[]
+}
+
+
+export interface ListKeyRotationsResponse {
+  /**
+   * Single page of key rotations matching the requested criteria.
+   */
+  rotations: KeyRotation[]
+  /**
+   * Total count of key rotations matching the requested criteria.
+   */
+  totalCount: number
 }
 
 
