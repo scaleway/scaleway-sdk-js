@@ -136,7 +136,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getNamespace,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -256,7 +257,8 @@ This action **cannot** be undone.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CONTAINER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getContainer,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -396,7 +398,8 @@ This action **cannot** be undone.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getDomain,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -535,7 +538,8 @@ the most recent image version available in the registry.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TRIGGER_TRANSIENT_STATUSES_CONTAINER.includes(res.status))),
       this.getTrigger,
-      { ...options, request },
+      request,
+      options,
     )
 
   
