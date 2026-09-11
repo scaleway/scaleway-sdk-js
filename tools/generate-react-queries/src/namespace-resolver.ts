@@ -69,12 +69,11 @@ async function registerVersionNamespaces(
     const metadata = await loadMetadata(pkgDir, version, metadataFileName)
     const ns = capitalize(metadata.folderName)
 
-    for (const service of metadata.services) {
-      for (const method of service.methods) {
-        for (const nsPath of [method.returnTypeNamespace, method.listItemTypeNamespace]) {
-          if (nsPath) registerNsPath(nsPath, ownPathPrefix, { packageName, ns, resolver })
-        }
-      }
+    const nsPaths = metadata.services.flatMap(service =>
+      service.methods.flatMap(method => [method.returnTypeNamespace, method.listItemTypeNamespace]),
+    )
+    for (const nsPath of nsPaths) {
+      if (nsPath) registerNsPath(nsPath, ownPathPrefix, { packageName, ns, resolver })
     }
   } catch (error) {
     console.warn(

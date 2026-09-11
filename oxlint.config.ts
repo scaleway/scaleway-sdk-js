@@ -24,7 +24,6 @@ export default defineConfig({
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
     'eslint/curly': 'warn',
     'eslint/eqeqeq': 'warn',
-    'eslint/max-depth': 'warn',
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-bitwise': 'warn',
     'eslint/no-eq-null': 'warn',
