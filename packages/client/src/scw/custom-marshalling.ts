@@ -189,9 +189,9 @@ export const marshalDecimal = (obj: Decimal): { value: string } => ({
  *
  * @internal
  */
-export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
+export const unmarshalDates = (obj: unknown, keys: string[]): unknown => {
   if (Array.isArray(obj)) {
-    return obj.map(v => unmarshalDates(v, keys)) as unknown as T
+    return obj.map(v => unmarshalDates(v, keys))
   }
 
   if (obj && typeof obj === 'object') {
@@ -199,10 +199,10 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
     for (const [key, value] of Object.entries(obj)) {
       result[key] = typeof value === 'string' && keys.includes(key) ? new Date(value) : unmarshalDates(value, keys)
     }
-    return result as T
+    return result
   }
 
-  return obj as T
+  return obj
 }
 
 /**
@@ -218,7 +218,7 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
  *
  * @internal
  */
-export const unmarshalAnyRes = <T>(obj: unknown, ignoreKeys: string[] = [], dateKeys?: string[]): T => {
+export const unmarshalAnyRes = (obj: unknown, ignoreKeys: string[] = [], dateKeys?: string[]): unknown => {
   if (!isJSONObject(obj)) {
     throw new TypeError(`Data isn't a dictionary.`)
   }

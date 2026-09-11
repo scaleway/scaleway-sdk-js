@@ -31,8 +31,8 @@ const makeTextResponse = (value: string, status = 200) =>
 
 describe(`responseParser`, () => {
   const parseJson = responseParser(unmarshalJSON, 'json')
-  const parseAsIs = responseParser(<T>(response: unknown) => response as T, 'json')
-  const parseBlob = responseParser(<T>(response: unknown) => response as T, 'blob')
+  const parseAsIs = responseParser((response: unknown) => response, 'json')
+  const parseBlob = responseParser((response: unknown) => response, 'blob')
 
   it(`triggers a type error for non 'Response' object`, () =>
     expect(

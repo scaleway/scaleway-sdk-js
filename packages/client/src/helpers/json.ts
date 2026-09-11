@@ -81,9 +81,9 @@ export const camelize = (str: string): string => {
  *
  * @internal
  */
-export const camelizeKeys = <T>(obj: object | unknown[] | unknown, ignoreKeys: string[] = []): T => {
+export const camelizeKeys = (obj: object | unknown[] | unknown, ignoreKeys: string[] = []): unknown => {
   if (Array.isArray(obj)) {
-    return obj.map(v => camelizeKeys(v, ignoreKeys)) as unknown as T
+    return obj.map(v => camelizeKeys(v, ignoreKeys))
   }
 
   if (obj && typeof obj === 'object' && !(obj instanceof Date)) {
@@ -92,8 +92,8 @@ export const camelizeKeys = <T>(obj: object | unknown[] | unknown, ignoreKeys: s
       const outKey = camelize(key)
       result[outKey] = ignoreKeys.includes(key) ? (value as unknown) : camelizeKeys(value, ignoreKeys)
     }
-    return result as T
+    return result
   }
 
-  return obj as T
+  return obj
 }
