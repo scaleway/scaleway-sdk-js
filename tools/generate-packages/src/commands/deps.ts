@@ -42,9 +42,9 @@ function discoverPackages(src: string): PkgInfo[] {
 function collectImports(
   srcDir: string,
   importRegex: RegExp,
-  pkgMap: Map<string, PkgInfo>,
-  currentPkgName: string,
+  options: { pkgMap: Map<string, PkgInfo>; currentPkgName: string },
 ): Set<string> {
+  const { pkgMap, currentPkgName } = options
   const imports = new Set<string>()
   for (const file of getAllGenTsFiles(srcDir)) {
     const content = readFileSync(file, 'utf8')
@@ -73,10 +73,15 @@ function syncMissingDeps(pkg: PkgInfo, missing: string[], dryRun: boolean): void
   }
 }
 
-function syncPackage(pkg: PkgInfo, importRegex: RegExp, pkgMap: Map<string, PkgInfo>, dryRun: boolean): boolean {
+function syncPackage(
+  pkg: PkgInfo,
+  importRegex: RegExp,
+  options: { pkgMap: Map<string, PkgInfo>; dryRun: boolean },
+): boolean {
+  const { pkgMap, dryRun } = options
   const srcDir = join(pkg.path, 'src')
   if (!existsSync(srcDir)) return false
-  const imports = collectImports(srcDir, importRegex, pkgMap, pkg.packageJson.name)
+  const imports = collectImports(srcDir, importRegex, { pkgMap, currentPkgName: pkg.packageJson.name })
   const missing = [...imports].filter(imp => !pkg.packageJson.dependencies?.[imp])
   if (missing.length === 0) return false
   syncMissingDeps(pkg, missing, dryRun)
@@ -111,7 +116,7 @@ export const deps = async ({ src, config, dryRun = false }: DepsOptions): Promis
   let updated = 0
 
   for (const pkg of packages) {
-    if (syncPackage(pkg, importRegex, pkgMap, dryRun)) updated++
+    if (syncPackage(pkg, importRegex, { pkgMap, dryRun })) updated++
   }
 
   console.log(`\n📊 Packages updated: ${updated}`)

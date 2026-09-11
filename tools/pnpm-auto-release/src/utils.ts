@@ -60,7 +60,11 @@ function tagExists(root: string, tag: string): boolean {
   return localExists || remoteExists
 }
 
-function createTagForPackage(root: string, pkg: Package, newPkg: Package, newTags: string[]): void {
+function createTagForPackage(
+  root: string,
+  pkg: Package,
+  { newPkg, newTags }: { newPkg: Package; newTags: string[] },
+): void {
   const tag = `${pkg.name}@${newPkg.version}`
   if (tagExists(root, tag)) {
     logger(`[release] tag already exists, skipping: ${tag}`)
@@ -83,7 +87,7 @@ export const createTags = ({
   const newTags: string[] = []
   for (const pkg of affectedPackages) {
     const newPkg = updatedPackages.find(({ name }) => name === pkg.name)
-    if (newPkg) createTagForPackage(root, pkg, newPkg, newTags)
+    if (newPkg) createTagForPackage(root, pkg, { newPkg, newTags })
   }
   return newTags
 }
@@ -140,7 +144,11 @@ const createChangesetForPackages = (root: string, packages: Package[], summary: 
   logger(`changeset ${summary} ${names}`)
 }
 
-function processCommit(root: string, line: string, packages: Package[], defaultSummary: string): void {
+function processCommit(
+  root: string,
+  line: string,
+  { packages, defaultSummary }: { packages: Package[]; defaultSummary: string },
+): void {
   const [sha, subject] = line.split('\u001F')
   if (!sha) return
   const changedFiles = exec(`git diff-tree --no-commit-id --name-only -r ${sha}`, { cwd: root })
@@ -177,6 +185,6 @@ export const createChangesets = ({
   const commits = exec(`git log ${range} --format="%H%x1F%s" --no-merges`, { cwd: root })
 
   for (const line of commits.split('\n').filter(Boolean)) {
-    processCommit(root, line, packages, defaultSummary)
+    processCommit(root, line, { packages, defaultSummary })
   }
 }

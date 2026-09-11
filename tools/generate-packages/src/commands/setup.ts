@@ -82,10 +82,9 @@ function addProductsToSdk(sdkPkgPath: string, newProducts: { name: string }[], s
 async function generateAndUpdateProducts(
   src: string,
   config: Config,
-  sdkPkgPath: string,
-  newProducts: { name: string }[],
-  scope: string,
+  options: { sdkPkgPath: string; newProducts: { name: string }[]; scope: string },
 ): Promise<void> {
+  const { sdkPkgPath, newProducts, scope } = options
   console.log('⚙️  Generating package configs...')
   await runPackages({ src, runInstall: false })
   console.log(`📝 Adding deps to ${sdkPkgPath} (scope: ${scope})...`)
@@ -136,7 +135,7 @@ export const setup = async ({
   const earlyExit = checkEarlyExit(newProducts, dryRun)
   if (earlyExit !== null) return earlyExit
 
-  await generateAndUpdateProducts(src, config, sdkPkgPath, newProducts, scope)
+  await generateAndUpdateProducts(src, config, { sdkPkgPath, newProducts, scope })
   runInstallStep(install)
 
   console.log(`✅ Setup complete: ${newProducts.length} product(s) configured`)

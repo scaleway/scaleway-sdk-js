@@ -123,8 +123,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_REGISTRY.includes(res.status))),
       this.getNamespace,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -241,8 +240,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!IMAGE_TRANSIENT_STATUSES_REGISTRY.includes(res.status))),
       this.getImage,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -336,8 +334,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TAG_TRANSIENT_STATUSES_REGISTRY.includes(res.status))),
       this.getTag,
-      request,
-      options,
+      { ...options, request },
     )
 
   

@@ -26,12 +26,16 @@ function removeSrcFromPath(path: string): string {
     .replace(/^src[\\/]/, '')
 }
 
+type BuildNamespaceExportsOptions = {
+  cleanDirName: string
+  pathKey: 'generatedPath' | 'customPath'
+  keySuffix?: string
+}
+
 function buildNamespaceExports(
   allNamespaces: string[],
   config: ReactQueriesConfig,
-  cleanDirName: string,
-  pathKey: 'generatedPath' | 'customPath',
-  keySuffix = '',
+  { cleanDirName, pathKey, keySuffix = '' }: BuildNamespaceExportsOptions,
 ): Record<string, ExportEntry> {
   const subPath = config[pathKey]
   const directories = allNamespaces.filter(namespace =>
@@ -56,8 +60,15 @@ export function updatePackageJsonExports(config: ReactQueriesConfig): void {
 
   const cleanDirName = removeSrcFromPath(config.outputDir)
 
-  const generatedExportsConfig = buildNamespaceExports(allNamespaces, config, cleanDirName, 'generatedPath')
-  const customExportsConfig = buildNamespaceExports(allNamespaces, config, cleanDirName, 'customPath', '/custom')
+  const generatedExportsConfig = buildNamespaceExports(allNamespaces, config, {
+    cleanDirName,
+    pathKey: 'generatedPath',
+  })
+  const customExportsConfig = buildNamespaceExports(allNamespaces, config, {
+    cleanDirName,
+    pathKey: 'customPath',
+    keySuffix: '/custom',
+  })
 
   const otherStaticExport: Record<string, ExportEntry> = {
     './mocks*': {

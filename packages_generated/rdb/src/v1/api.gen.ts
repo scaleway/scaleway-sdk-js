@@ -308,8 +308,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DATABASE_BACKUP_TRANSIENT_STATUSES_RDB.includes(res.status))),
       this.getDatabaseBackup,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -465,8 +464,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!INSTANCE_TRANSIENT_STATUSES_RDB.includes(res.status))),
       this.getInstance,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -670,8 +668,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!READ_REPLICA_TRANSIENT_STATUSES_RDB.includes(res.status))),
       this.getReadReplica,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -816,8 +813,7 @@ The configured endpoints do not change.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!INSTANCE_LOG_TRANSIENT_STATUSES_RDB.includes(res.status))),
       this.getInstanceLog,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -1242,8 +1238,7 @@ The configured endpoints do not change.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES_RDB.includes(res.status))),
       this.getSnapshot,
-      request,
-      options,
+      { ...options, request },
     )
 
   

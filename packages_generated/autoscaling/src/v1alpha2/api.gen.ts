@@ -112,8 +112,7 @@ configuration, current size, and status.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!GROUP_GROUP_TRANSIENT_STATUSES_AUTOSCALING.includes(res.status))),
       this.getGroup,
-      request,
-      options,
+      { ...options, request },
     )
 
   

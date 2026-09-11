@@ -168,8 +168,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NAMESPACE_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getNamespace,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -286,8 +285,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!FUNCTION_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getFunction,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -473,8 +471,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CRON_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getCron,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -588,8 +585,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getDomain,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -679,8 +675,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TOKEN_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getToken,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -775,8 +770,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!TRIGGER_TRANSIENT_STATUSES_FUNCTION.includes(res.status))),
       this.getTrigger,
-      request,
-      options,
+      { ...options, request },
     )
 
   

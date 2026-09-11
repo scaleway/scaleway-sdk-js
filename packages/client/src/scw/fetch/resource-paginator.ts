@@ -18,12 +18,17 @@ export const extract =
   <T extends PaginatedContent<K>>(result: T) =>
     result[key]
 
+interface PaginationCallOptions<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions> {
+  request: R
+  initial?: Promise<T>
+}
+
 function* pages<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
-  request: R,
-  firstPage: T,
+  options: { request: R; firstPage: T },
 ): Generator<Promise<T[K]>, void, void> {
+  const { request, firstPage } = options
   if (!Array.isArray(firstPage[key])) {
     throw new Error(`Property ${key} is not a list in paginated result`)
   }
@@ -47,17 +52,16 @@ function* pages<K extends string, T extends PaginatedContent<K>, R extends Pagin
  *
  * @param key - The resource key of values list
  * @param fetcher - The method to retrieve paginated resources
- * @param request - A request with pagination options
- * @param initial - The first page
+ * @param options - A request with pagination options and an optional first page
  * @returns An async generator of resources arrays
  */
 export async function* fetchPaginated<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
-  request: R,
-  initial: Promise<T> = fetcher(request),
+  options: PaginationCallOptions<K, T, R>,
 ) {
-  yield* pages(key, fetcher, request, await initial)
+  const firstPage = await (options.initial ?? fetcher(options.request))
+  yield* pages(key, fetcher, { request: options.request, firstPage })
 }
 
 /**
@@ -65,16 +69,17 @@ export async function* fetchPaginated<K extends string, T extends PaginatedConte
  *
  * @param key - The resource key of values list
  * @param fetcher - The method to retrieve paginated resources
- * @param request - A request with pagination options
- * @param initial - The first page
+ * @param options - A request with pagination options and an optional first page
  * @returns A resources array Promise
  */
 export const fetchAll = async <K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
-  request: R,
-  initial: Promise<T> = fetcher(request),
-) => (await Promise.all(Array.from(pages(key, fetcher, request, await initial)))).flat()
+  options: PaginationCallOptions<K, T, R>,
+) => {
+  const firstPage = await (options.initial ?? fetcher(options.request))
+  return (await Promise.all(Array.from(pages(key, fetcher, { request: options.request, firstPage })))).flat()
+}
 
 /**
  * Enriches a listing method with helpers.
@@ -94,7 +99,7 @@ export const enrichForPagination = <K extends string, T extends PaginatedContent
   const firstPage = fetcher(request)
 
   return Object.assign(firstPage, {
-    all: () => fetchAll(key, fetcher, request, firstPage),
-    [Symbol.asyncIterator]: () => fetchPaginated(key, fetcher, request, firstPage),
+    all: () => fetchAll(key, fetcher, { request, initial: firstPage }),
+    [Symbol.asyncIterator]: () => fetchPaginated(key, fetcher, { request, initial: firstPage }),
   })
 }

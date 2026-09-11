@@ -141,8 +141,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_MAILBOX.includes(res.status))),
       this.getDomain,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -271,8 +270,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!MAILBOX_TRANSIENT_STATUSES_MAILBOX.includes(res.status))),
       this.getMailbox,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -406,8 +404,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!ALIAS_TRANSIENT_STATUSES_MAILBOX.includes(res.status))),
       this.getAlias,
-      request,
-      options,
+      { ...options, request },
     )
 
   

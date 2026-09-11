@@ -324,8 +324,7 @@ export class ZonedAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!LB_TRANSIENT_STATUSES_LB.includes(res.status))),
       this.getLb,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -1082,8 +1081,7 @@ export class ZonedAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CERTIFICATE_TRANSIENT_STATUSES_LB.includes(res.status))),
       this.getCertificate,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -1438,8 +1436,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!LB_TRANSIENT_STATUSES_LB.includes(res.status))),
       this.getLb,
-      request,
-      options,
+      { ...options, request },
     )
 
   
@@ -2176,8 +2173,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CERTIFICATE_TRANSIENT_STATUSES_LB.includes(res.status))),
       this.getCertificate,
-      request,
-      options,
+      { ...options, request },
     )
 
   

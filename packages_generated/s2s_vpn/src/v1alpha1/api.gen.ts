@@ -187,8 +187,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN.includes(res.status))),
       this.getVpnGateway,
-      request,
-      options,
+      { ...options, request },
     )
 
   

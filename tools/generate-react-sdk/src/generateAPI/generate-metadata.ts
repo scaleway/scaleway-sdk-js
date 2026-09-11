@@ -89,8 +89,13 @@ async function loadMetadata(packageName: string, version: string): Promise<Metad
 async function processVersion(
   packageName: string,
   version: string,
-  servicesToSkip: Set<string>,
-  isVersionSkipped: (packageName: string, version: string) => boolean,
+  {
+    servicesToSkip,
+    isVersionSkipped,
+  }: {
+    servicesToSkip: Set<string>
+    isVersionSkipped: (packageName: string, version: string) => boolean
+  },
 ): Promise<ProcessedMetadata | null> {
   if (isVersionSkipped(packageName, version)) {
     stdout.write(`⚠️  Skipping ${packageName}/${version}: excluded by skipVersions\n`)
@@ -111,8 +116,13 @@ async function processVersion(
 
 async function processPackageVersions(
   packageName: string,
-  servicesToSkip: Set<string>,
-  isVersionSkipped: (packageName: string, version: string) => boolean,
+  {
+    servicesToSkip,
+    isVersionSkipped,
+  }: {
+    servicesToSkip: Set<string>
+    isVersionSkipped: (packageName: string, version: string) => boolean
+  },
 ): Promise<ProcessedMetadata> {
   const versions = await loadVersions(packageName)
   if (versions.length === 0) {
@@ -121,7 +131,7 @@ async function processPackageVersions(
   }
   let pkgResult: ProcessedMetadata = {}
   for (const version of versions) {
-    const versionResult = await processVersion(packageName, version, servicesToSkip, isVersionSkipped)
+    const versionResult = await processVersion(packageName, version, { servicesToSkip, isVersionSkipped })
     if (versionResult) pkgResult = { ...pkgResult, ...versionResult }
   }
   return pkgResult
@@ -130,8 +140,7 @@ async function processPackageVersions(
 function setupGenerateAPI(
   dirGenName: string,
   packageNameFilter: string,
-  skipServices: string[],
-  skipVersions: string[],
+  { skipServices, skipVersions }: { skipServices: string[]; skipVersions: string[] },
 ) {
   const dir = join(directoryOfSrcFolder, dirGenName)
   mkdirSync(dir, { recursive: true })
@@ -147,15 +156,21 @@ function setupGenerateAPI(
 
 async function processSdkPackage(
   packageName: string,
-  skipPackages: Set<string>,
-  servicesToSkip: Set<string>,
-  isVersionSkipped: (packageName: string, version: string) => boolean,
+  {
+    skipPackages,
+    servicesToSkip,
+    isVersionSkipped,
+  }: {
+    skipPackages: Set<string>
+    servicesToSkip: Set<string>
+    isVersionSkipped: (packageName: string, version: string) => boolean
+  },
 ): Promise<ProcessedMetadata> {
   if (skipPackages.has(packageName)) {
     stdout.write(`⚠️  Skipping ${packageName}: excluded package\n`)
     return {}
   }
-  return await processPackageVersions(packageName, servicesToSkip, isVersionSkipped)
+  return await processPackageVersions(packageName, { servicesToSkip, isVersionSkipped })
 }
 
 export const generateAPI = async ({
@@ -174,12 +189,17 @@ export const generateAPI = async ({
   const { dir, sdkPackages, skipPackages, servicesToSkip, isVersionSkipped } = setupGenerateAPI(
     dirGenName,
     packageNameFilter,
-    skipServices,
-    skipVersions,
+    {
+      skipServices,
+      skipVersions,
+    },
   )
   let result: ProcessedMetadata = {}
   for (const [packageName] of sdkPackages) {
-    result = { ...result, ...(await processSdkPackage(packageName, skipPackages, servicesToSkip, isVersionSkipped)) }
+    result = {
+      ...result,
+      ...(await processSdkPackage(packageName, { skipPackages, servicesToSkip, isVersionSkipped })),
+    }
   }
   emitFiles({ res: result, sourceFolderGen: dir, sdkFactoryPath })
   generateType(result)

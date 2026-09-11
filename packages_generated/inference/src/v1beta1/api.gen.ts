@@ -136,8 +136,7 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE.includes(res.status))),
       this.getDeployment,
-      request,
-      options,
+      { ...options, request },
     )
 
   

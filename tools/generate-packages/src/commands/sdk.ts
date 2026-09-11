@@ -43,7 +43,12 @@ const getGeneratedPackages = (dir: string, excludeSuffix?: string): PackageJSON[
  * @param options.config - Loaded configuration defining SDK targets and filters
  * @param options.runInstall - Run `pnpm install` after updating (default: true)
  */
-function rebuildDeps(sdkPkg: PackageJSON, depType: string, config: Config, validPackages: PackageJSON[]): void {
+function rebuildDeps(
+  sdkPkg: PackageJSON,
+  depType: string,
+  options: { config: Config; validPackages: PackageJSON[] },
+): void {
+  const { config, validPackages } = options
   const field =
     depType === 'dependencies'
       ? 'dependencies'
@@ -63,11 +68,11 @@ function rebuildDeps(sdkPkg: PackageJSON, depType: string, config: Config, valid
 function rebuildAllDeps(
   sdkPkg: PackageJSON,
   s: Config['sdks'][number],
-  config: Config,
-  validPackages: PackageJSON[],
+  options: { config: Config; validPackages: PackageJSON[] },
 ): void {
+  const { config, validPackages } = options
   for (const depType of s.depsTypes) {
-    rebuildDeps(sdkPkg, depType, config, validPackages)
+    rebuildDeps(sdkPkg, depType, { config, validPackages })
   }
 }
 
@@ -88,7 +93,7 @@ function updateSdk(s: Config['sdks'][number], src: string, config: Config): void
   }
   const validPackages = generatedPackages.filter(p => !s.ignoredPackages.includes(p.name))
   const sdkPkg = JSON.parse(readFileSync(s.path, 'utf8')) as PackageJSON
-  rebuildAllDeps(sdkPkg, s, config, validPackages)
+  rebuildAllDeps(sdkPkg, s, { config, validPackages })
   writeFileSync(s.path, `${JSON.stringify(sdkPkg, null, 2)}\n`, 'utf8')
   console.log(`Updated ${s.path} with ${validPackages.length} packages`)
   writeSdkIndex(s, validPackages)
