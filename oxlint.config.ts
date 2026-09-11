@@ -39,7 +39,6 @@ export default defineConfig({
     'eslint/require-unicode-regexp': 'warn',
     'eslint/vars-on-top': 'warn',
     'import/no-namespace': 'warn',
-    'import/no-nodejs-modules': 'warn',
     'node/no-process-env': 'warn',
     'oxc/no-accumulating-spread': 'warn',
     'react/set-state-in-effect': 'warn',
@@ -107,4 +106,12 @@ export default defineConfig({
     'unicorn/switch-case-braces': 'warn',
     'unicorn/text-encoding-identifier-case': 'warn',
   },
+  overrides: [
+    {
+      files: ['tools/**', 'vite.config.ts', 'packages/configuration-loader/**'],
+      rules: {
+        'import/no-nodejs-modules': 'off',
+      },
+    },
+  ],
 })
