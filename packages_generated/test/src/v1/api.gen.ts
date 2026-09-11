@@ -121,7 +121,8 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!HUMAN_TRANSIENT_STATUSES_TEST.includes(res.status))),
       this.getHuman,
-      { ...options, request },
+      request,
+      options,
     )
 
   
