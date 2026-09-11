@@ -25,7 +25,6 @@ export default defineConfig({
     'eslint/curly': 'warn',
     'eslint/default-case': 'warn',
     'eslint/eqeqeq': 'warn',
-    'eslint/init-declarations': 'warn',
     'eslint/max-depth': 'warn',
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-bitwise': 'warn',

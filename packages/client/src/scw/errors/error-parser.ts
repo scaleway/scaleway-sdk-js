@@ -27,49 +27,23 @@ import { TransientStateError } from './standard/transient-state-error.js'
  * @internal
  */
 const unmarshalStandardError = (type: string, status: number, body: Readonly<JSONObject>): ScalewayError | null => {
-  let error: ScalewayErrorFromJSONInitializer
-  switch (type) {
-    case 'denied_authentication':
-      error = DeniedAuthenticationError
-      break
-    case 'invalid_arguments':
-      error = InvalidArgumentsError
-      break
-    case 'out_of_stock':
-      error = OutOfStockError
-      break
-    case 'permissions_denied':
-      error = PermissionsDeniedError
-      break
-    case 'precondition_failed':
-      error = PreconditionFailedError
-      break
-    case 'quotas_exceeded':
-      error = QuotasExceededError
-      break
-    case 'expired':
-      error = ResourceExpiredError
-      break
-    case 'not_found':
-      error = ResourceNotFoundError
-      break
-    case 'locked':
-      error = ResourceLockedError
-      break
-    case 'transient_state':
-      error = TransientStateError
-      break
-    case 'already_exists':
-      error = AlreadyExistsError
-      break
-    case 'too_many_requests':
-      error = TooManyRequestsError
-      break
-    default:
-      return null
+  const errorByType: Record<string, ScalewayErrorFromJSONInitializer> = {
+    denied_authentication: DeniedAuthenticationError,
+    invalid_arguments: InvalidArgumentsError,
+    out_of_stock: OutOfStockError,
+    permissions_denied: PermissionsDeniedError,
+    precondition_failed: PreconditionFailedError,
+    quotas_exceeded: QuotasExceededError,
+    expired: ResourceExpiredError,
+    not_found: ResourceNotFoundError,
+    locked: ResourceLockedError,
+    transient_state: TransientStateError,
+    already_exists: AlreadyExistsError,
+    too_many_requests: TooManyRequestsError,
   }
 
-  return error.fromJSON(status, body)
+  const error = errorByType[type]
+  return error ? error.fromJSON(status, body) : null
 }
 
 /**

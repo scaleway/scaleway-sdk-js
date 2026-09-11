@@ -77,7 +77,7 @@ describe('createExponentialBackoffStrategy', () => {
 })
 
 const mockLogic = (iterations: number, workingTime: number) => {
-  let startDate: Date
+  let startDate: Date = new Date()
   let counter = 0
 
   return async () => {

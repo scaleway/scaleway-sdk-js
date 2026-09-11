@@ -1,3 +1,4 @@
+// oxlint-disable eslint/init-declarations -- vendored base64-js implementation, keep as-is
 var lookup = []
 var revLookup = []
 var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array

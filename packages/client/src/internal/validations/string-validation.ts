@@ -27,14 +27,12 @@ export const isZone = (str: string): boolean => isZoneRegex.test(str)
 
 /** Returns true if the given string has a valid URL format and starts by `http(s):`. */
 export const isURL = (str: string): boolean => {
-  let url: URL
   try {
-    url = new URL(str)
+    const url = new URL(str)
+    return url.protocol === 'http:' || url.protocol === 'https:'
   } catch {
     return false
   }
-
-  return url.protocol === 'http:' || url.protocol === 'https:'
 }
 
 /** Returns true if the given string has an email format. */
