@@ -455,6 +455,10 @@ Possible check types:
    */
   publicEndpoint: string
   /**
+   * This endpoint is accessible from the Private Network the container is connected to, and can be used to access the container from other resources in the same Private Network.
+   */
+  privateEndpoint?: string
+  /**
    * Region in which the container exists.
    */
   region: ScwRegion
@@ -819,6 +823,10 @@ Possible check types:
    * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
    */
   args?: string[]
+  /**
+   * When enabled, the container can receive traffic from other resources in the same Private Network.
+   */
+  enablePrivateEndpoint?: boolean
 }
 
 
@@ -1001,6 +1009,14 @@ export type GetNamespaceRequest = {
    * UUID of the namespace to get.
    */
   namespaceId: string
+}
+
+
+export type GetPrivateEndpointCertificateAuthorityRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
 }
 
 
@@ -1219,6 +1235,10 @@ Possible check types:
    * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
    */
   args?: string[]
+  /**
+   * When enabled, the container can receive traffic from other resources in the same Private Network.
+   */
+  enablePrivateEndpoint?: boolean
 }
 
 
