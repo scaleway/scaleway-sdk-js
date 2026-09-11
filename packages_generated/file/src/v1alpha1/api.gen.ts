@@ -107,7 +107,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!FILE_SYSTEM_TRANSIENT_STATUSES_FILE.includes(res.status))),
       this.getFileSystem,
-      { ...options, request },
+      request,
+      options,
     )
 
   

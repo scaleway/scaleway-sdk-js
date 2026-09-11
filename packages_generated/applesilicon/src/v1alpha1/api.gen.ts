@@ -274,7 +274,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SERVER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status))),
       this.getServer,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -423,7 +424,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!RUNNER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status))),
       this.getRunner,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -552,7 +554,8 @@ export class PrivateNetworkAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON.includes(res.status))),
       this.getServerPrivateNetwork,
-      { ...options, request },
+      request,
+      options,
     )
 
   
