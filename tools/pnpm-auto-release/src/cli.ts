@@ -67,18 +67,18 @@ function parseReleaseArgs(): ReleaseOptions | null {
     logger(HELP)
     return null
   }
-  if (values['gh-release'] === true) {
+  if (values['gh-release']) {
     const ghToken = process.env['GH_TOKEN'] || process.env['GITHUB_TOKEN']
     if (!ghToken) {
       throw new Error('GH_TOKEN environment variable is required for creating GitHub releases')
     }
   }
   return {
-    dryRun: values['dry-run'] === true,
-    skipPublish: values['skip-publish'] === true,
-    skipPush: values['skip-push'] === true,
-    byCommit: values['by-commit'] === true,
-    ghRelease: values['gh-release'] === true,
+    dryRun: values['dry-run'],
+    skipPublish: values['skip-publish'],
+    skipPush: values['skip-push'],
+    byCommit: values['by-commit'],
+    ghRelease: values['gh-release'],
     registry: values.registry,
   }
 }
