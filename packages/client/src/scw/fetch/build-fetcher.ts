@@ -38,7 +38,7 @@ export const buildRequest = (request: Readonly<ScwRequest>, settings: Readonly<S
   })
 }
 
-const asIs = <T>(response: unknown) => response as T
+const asIs = (response: unknown) => response
 
 export type Fetcher = <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>
 
@@ -68,7 +68,10 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       settings.interceptors.map(obj => obj.responseError).filter(obj => obj) as ResponseErrorInterceptor[],
     )
 
-  return async <T>(request: Readonly<ScwRequest>, unwrapper: ResponseUnmarshaller<T> = asIs): Promise<T> => {
+  return async <T>(
+    request: Readonly<ScwRequest>,
+    unwrapper: ResponseUnmarshaller<T> = asIs as ResponseUnmarshaller<T>,
+  ): Promise<T> => {
     requestNumber += 1
     const requestId = `${requestNumber}`
     const reqInterceptors = prepareRequest(requestId)

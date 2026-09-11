@@ -49,7 +49,6 @@ export default defineConfig({
     'typescript/no-redundant-type-constituents': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
     'typescript/no-unnecessary-type-conversion': 'warn',
-    'typescript/no-unnecessary-type-parameters': 'warn',
     'typescript/no-unsafe-assignment': 'warn',
     'typescript/no-unsafe-call': 'warn',
     'typescript/no-unsafe-member-access': 'warn',

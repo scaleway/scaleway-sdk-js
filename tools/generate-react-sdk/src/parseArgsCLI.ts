@@ -31,7 +31,7 @@ function applyParsedArg(
   }
 }
 
-export const parseArgsCLI = <T extends string[]>({ requiresValueArgs }: { requiresValueArgs?: T }) => {
+export const parseArgsCLI = ({ requiresValueArgs }: { requiresValueArgs?: string[] }) => {
   const args = process.argv.slice(2)
   const cliArgs: Record<string, string | boolean> = {}
 
