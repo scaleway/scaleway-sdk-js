@@ -197,7 +197,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!HUB_TRANSIENT_STATUSES_IOT.includes(res.status))),
       this.getHub,
-      { ...options, request },
+      request,
+      options,
     )
 
   

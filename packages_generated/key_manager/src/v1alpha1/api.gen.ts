@@ -22,6 +22,7 @@ import {
   marshalImportKeyMaterialRequest,
   unmarshalKey,
   unmarshalListAlgorithmsResponse,
+  unmarshalListKeyRotationsResponse,
   unmarshalListKeysResponse,
   unmarshalPublicKey,
   marshalSignRequest,
@@ -52,6 +53,8 @@ import type {
   Key,
   ListAlgorithmsRequest,
   ListAlgorithmsResponse,
+  ListKeyRotationsRequest,
+  ListKeyRotationsResponse,
   ListKeysRequest,
   ListKeysResponse,
   ProtectKeyRequest,
@@ -300,6 +303,32 @@ The `region` parameter in path is needed in both case.
    */
   listKeys = (request: Readonly<ListKeysRequest>) =>
     enrichForPagination('keys', this.pageOfListKeys, request)
+
+  
+  protected pageOfListKeyRotations = (request: Readonly<ListKeyRotationsRequest>) =>
+    this.client.fetch<ListKeyRotationsResponse>(
+      {
+        method: 'GET',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/rotations`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['status', request.status],
+        ),
+      },
+      unmarshalListKeyRotationsResponse,
+    )
+  
+  /**
+   * List key rotations. Retrieve a list of all rotations associated with a specific key.
+The `key_id` and `region` parameters in the path are required.
+   *
+   * @param request - The request {@link ListKeyRotationsRequest}
+   * @returns A Promise of ListKeyRotationsResponse
+   */
+  listKeyRotations = (request: Readonly<ListKeyRotationsRequest>) =>
+    enrichForPagination('rotations', this.pageOfListKeyRotations, request)
 
   
   /**

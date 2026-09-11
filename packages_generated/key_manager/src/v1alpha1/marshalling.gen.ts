@@ -12,6 +12,8 @@ import type {
   EncryptResponse,
   ListAlgorithmsResponseAlgorithm,
   ListAlgorithmsResponse,
+  KeyRotation,
+  ListKeyRotationsResponse,
   ListKeysResponse,
   PublicKey,
   SignResponse,
@@ -153,6 +155,37 @@ export const unmarshalListAlgorithmsResponse = (data: unknown): ListAlgorithmsRe
   return {
     algorithms: unmarshalArrayOfObject(data.algorithms, unmarshalListAlgorithmsResponseAlgorithm),
   } as ListAlgorithmsResponse
+}
+
+const unmarshalKeyRotation = (data: unknown): KeyRotation => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KeyRotation' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    deletedAt: unmarshalDate(data.deleted_at),
+    index: data.index,
+    keyId: data.key_id,
+    manuallyRotated: data.manually_rotated,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as KeyRotation
+}
+
+export const unmarshalListKeyRotationsResponse = (data: unknown): ListKeyRotationsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListKeyRotationsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rotations: unmarshalArrayOfObject(data.rotations, unmarshalKeyRotation),
+    totalCount: data.total_count,
+  } as ListKeyRotationsResponse
 }
 
 export const unmarshalListKeysResponse = (data: unknown): ListKeysResponse => {
