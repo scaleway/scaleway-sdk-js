@@ -147,7 +147,7 @@ describe('unmarshalDecimal', () => {
 })
 
 describe('marshalScwFile', () => {
-  it('returns a the proper object', () =>
+  it('returns a the proper object', () => {
     expect(
       marshalScwFile({
         content: 'eyJoZWxsbyI6IndvcmxkIn0=',
@@ -158,7 +158,8 @@ describe('marshalScwFile', () => {
       content: 'eyJoZWxsbyI6IndvcmxkIn0=',
       content_type: 'text/plain',
       name: 'filename',
-    }))
+    })
+  })
 })
 
 describe('marshalMoney', () => {

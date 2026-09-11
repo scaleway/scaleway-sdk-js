@@ -15,7 +15,7 @@ function buildExportLines(res: ProcessedMetadata): string[] {
   for (const [name, { apis }] of Object.entries(res)) {
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
     for (const api of apis) {
-      const key = `${lowerCaseFirstLetter(name + api.replace('API', ''))}`
+      const key = lowerCaseFirstLetter(name + api.replace('API', ''))
       const type = `${capitalizedName}.${api}`
       lines.push(`${key}:${type},\n`)
     }
