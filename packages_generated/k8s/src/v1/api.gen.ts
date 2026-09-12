@@ -203,7 +203,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!CLUSTER_TRANSIENT_STATUSES_K8S.includes(res.status))),
       this.getCluster,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -500,7 +501,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!POOL_TRANSIENT_STATUSES_K8S.includes(res.status))),
       this.getPool,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -747,7 +749,8 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!NODE_TRANSIENT_STATUSES_K8S.includes(res.status))),
       this.getNode,
-      { ...options, request },
+      request,
+      options,
     )
 
   

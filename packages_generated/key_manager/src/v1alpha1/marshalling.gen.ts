@@ -12,6 +12,8 @@ import type {
   EncryptResponse,
   ListAlgorithmsResponseAlgorithm,
   ListAlgorithmsResponse,
+  KeyRotation,
+  ListKeyRotationsResponse,
   ListKeysResponse,
   PublicKey,
   SignResponse,
@@ -20,6 +22,7 @@ import type {
   WrapKeyResponse,
   CreateKeyRequest,
   DecryptRequest,
+  DeleteKeyMaterialRequest,
   EncryptRequest,
   GenerateDataKeyRequest,
   ImportKeyMaterialRequest,
@@ -155,6 +158,37 @@ export const unmarshalListAlgorithmsResponse = (data: unknown): ListAlgorithmsRe
   } as ListAlgorithmsResponse
 }
 
+const unmarshalKeyRotation = (data: unknown): KeyRotation => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'KeyRotation' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    deletedAt: unmarshalDate(data.deleted_at),
+    index: data.index,
+    keyId: data.key_id,
+    manuallyRotated: data.manually_rotated,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as KeyRotation
+}
+
+export const unmarshalListKeyRotationsResponse = (data: unknown): ListKeyRotationsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListKeyRotationsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    rotations: unmarshalArrayOfObject(data.rotations, unmarshalKeyRotation),
+    totalCount: data.total_count,
+  } as ListKeyRotationsResponse
+}
+
 export const unmarshalListKeysResponse = (data: unknown): ListKeysResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -280,6 +314,13 @@ export const marshalDecryptRequest = (
 ): Record<string, unknown> => ({
   associated_data: request.associatedData,
   ciphertext: request.ciphertext,
+})
+
+export const marshalDeleteKeyMaterialRequest = (
+  request: DeleteKeyMaterialRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  key_rotation_index: request.keyRotationIndex,
 })
 
 export const marshalEncryptRequest = (
