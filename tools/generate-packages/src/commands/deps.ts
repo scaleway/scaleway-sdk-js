@@ -125,7 +125,7 @@ export const deps = async ({ src, config, dryRun = false }: DepsOptions): Promis
     throw new Error(`Directory not found: ${src}`)
   }
 
-  const importRegex = new RegExp(`from\\s+['"]((${escapeRegExp(config.sdkPackagePrefix)})[^'"]+)['"]`, 'g')
+  const importRegex = new RegExp(`from\\s+['"]((${escapeRegExp(config.sdkPackagePrefix)})[^'"]+)['"]`, 'gv')
   const packages = discoverPackages(src)
   const pkgMap = new Map(packages.map(p => [p.packageJson.name, p]))
   let updated = 0
