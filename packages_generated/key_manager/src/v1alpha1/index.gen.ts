@@ -27,13 +27,18 @@ export type {
   KeyAlgorithmKeyEncapsulation,
   KeyAlgorithmSymmetricEncryption,
   KeyOrigin,
+  KeyRotation,
   KeyRotationPolicy,
+  KeyRotationStatus,
   KeyState,
   KeyUsage,
   ListAlgorithmsRequest,
   ListAlgorithmsRequestUsage,
   ListAlgorithmsResponse,
   ListAlgorithmsResponseAlgorithm,
+  ListKeyRotationsRequest,
+  ListKeyRotationsRequestOrderBy,
+  ListKeyRotationsResponse,
   ListKeysRequest,
   ListKeysRequestOrderBy,
   ListKeysRequestUsage,
@@ -53,3 +58,4 @@ export type {
   WrapKeyRequest,
   WrapKeyResponse,
 } from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'

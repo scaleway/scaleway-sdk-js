@@ -230,7 +230,8 @@ export class BackupAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!BACKUP_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status))),
       this.getBackup,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -730,7 +731,8 @@ export class DnsAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status))),
       this.getDomain,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -882,7 +884,8 @@ export class HostingAPI extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!HOSTING_TRANSIENT_STATUSES_WEBHOSTING.includes(res.status))),
       this.getHosting,
-      { ...options, request },
+      request,
+      options,
     )
 
   
