@@ -31,6 +31,8 @@ const buildMessage = (options: DeniedAuthenticationErrorOptions): string => {
     case 'expired':
       reasonDesc = `${options.method} is expired`
       break
+    default:
+      break
   }
 
   return `denied authentication: ${reasonDesc}`
