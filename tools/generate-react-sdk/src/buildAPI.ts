@@ -15,11 +15,11 @@ const { values } = parseArgs({
   strict: false,
 }) as { values: Record<string, string | string[] | undefined> }
 
-const dirGenName = (values['dir-gen-name'] as string | undefined) || 'src/__generated__'
+const dirGenName = (values['dir-gen-name'] as string | undefined) ?? 'src/__generated__'
 
-const sdkFactoryPath = (values['sdk-factory-path'] as string | undefined) || '../contexts/SDKCacheProvider/sdkFactory'
+const sdkFactoryPath = (values['sdk-factory-path'] as string | undefined) ?? '../contexts/SDKCacheProvider/sdkFactory'
 
-const packageNameFilter = (values['package-name-filter'] as string | undefined) || '@scaleway/sdk-'
+const packageNameFilter = (values['package-name-filter'] as string | undefined) ?? '@scaleway/sdk-'
 
 const skipServices = Array.isArray(values['skip-services']) ? values['skip-services'] : []
 const skipVersions = Array.isArray(values['skip-versions']) ? values['skip-versions'] : []
