@@ -16,12 +16,14 @@ import {
   unmarshalDataKey,
   marshalDecryptRequest,
   unmarshalDecryptResponse,
+  marshalDeleteKeyMaterialRequest,
   marshalEncryptRequest,
   unmarshalEncryptResponse,
   marshalGenerateDataKeyRequest,
   marshalImportKeyMaterialRequest,
   unmarshalKey,
   unmarshalListAlgorithmsResponse,
+  unmarshalListKeyRotationsResponse,
   unmarshalListKeysResponse,
   unmarshalPublicKey,
   marshalSignRequest,
@@ -52,6 +54,8 @@ import type {
   Key,
   ListAlgorithmsRequest,
   ListAlgorithmsResponse,
+  ListKeyRotationsRequest,
+  ListKeyRotationsResponse,
   ListKeysRequest,
   ListKeysResponse,
   ProtectKeyRequest,
@@ -302,6 +306,32 @@ The `region` parameter in path is needed in both case.
     enrichForPagination('keys', this.pageOfListKeys, request)
 
   
+  protected pageOfListKeyRotations = (request: Readonly<ListKeyRotationsRequest>) =>
+    this.client.fetch<ListKeyRotationsResponse>(
+      {
+        method: 'GET',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/rotations`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['status', request.status],
+        ),
+      },
+      unmarshalListKeyRotationsResponse,
+    )
+  
+  /**
+   * List key rotations. Retrieve a list of all rotations associated with a specific key.
+The `key_id` and `region` parameters in the path are required.
+   *
+   * @param request - The request {@link ListKeyRotationsRequest}
+   * @returns A Promise of ListKeyRotationsResponse
+   */
+  listKeyRotations = (request: Readonly<ListKeyRotationsRequest>) =>
+    enrichForPagination('rotations', this.pageOfListKeyRotations, request)
+
+  
   /**
    * Create a data encryption key. Create a new data encryption key for cryptographic operations outside of Key Manager. The data encryption key is encrypted and must be decrypted using the key you have created in Key Manager.
 
@@ -432,7 +462,9 @@ The data encryption key is returned in plaintext and ciphertext but it should on
   deleteKeyMaterial = (request: Readonly<DeleteKeyMaterialRequest>) =>
     this.client.fetch<void>(
       {
-        body: '{}',
+        body: JSON.stringify(
+          marshalDeleteKeyMaterialRequest(request, this.client.settings),
+        ),
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/delete-key-material`,
