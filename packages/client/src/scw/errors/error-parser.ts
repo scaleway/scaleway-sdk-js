@@ -78,8 +78,9 @@ const unmarshalNonStandardError = (type: string, status: number, body: Readonly<
  */
 export const parseScalewayError = (status: number, body: Readonly<JSONObject>): ScalewayError => {
   const parsableError =
-    typeof body.type === 'string' &&
-    (unmarshalStandardError(body.type, status, body) ?? unmarshalNonStandardError(body.type, status, body))
+    typeof body.type === 'string'
+      ? (unmarshalStandardError(body.type, status, body) ?? unmarshalNonStandardError(body.type, status, body))
+      : null
 
-  return parsableError || new ScalewayError(status, body)
+  return parsableError ?? new ScalewayError(status, body)
 }

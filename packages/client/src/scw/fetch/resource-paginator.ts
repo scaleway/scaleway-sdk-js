@@ -31,7 +31,7 @@ function* pages<K extends string, T extends PaginatedContent<K>, R extends Pagin
     throw new Error(`Property ${key} is not a list in paginated result`)
   }
   const getList = extract(key)
-  let page = request.page || 1
+  let page = request.page ?? 1
   if (page === 1) {
     yield Promise.resolve(getList(firstPage))
     page += 1

@@ -127,7 +127,7 @@ export const createGithubReleases = ({
   affectedPackages: Package[]
   updatedPackages: Package[]
 }) => {
-  const ghToken = process.env['GH_TOKEN'] || process.env['GITHUB_TOKEN']
+  const ghToken = process.env['GH_TOKEN'] ?? process.env['GITHUB_TOKEN']
   if (!ghToken) {
     throw new Error('GH_TOKEN environment variable is required for creating GitHub releases')
   }
@@ -164,7 +164,7 @@ function processCommit(
     pkg => pkg.relativePath && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)),
   )
   if (affected.length > 0) {
-    createChangesetForPackages(root, affected, subject || defaultSummary)
+    createChangesetForPackages(root, affected, subject ?? defaultSummary)
     logger(`[release] changeset (${sha.slice(0, 7)} -> ${affected.length} pkg)`)
   }
 }

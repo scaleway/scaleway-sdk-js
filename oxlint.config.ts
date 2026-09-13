@@ -54,7 +54,6 @@ export default defineConfig({
     'typescript/only-throw-error': 'warn',
     'typescript/parameter-properties': 'warn',
     'typescript/prefer-function-type': 'warn',
-    'typescript/prefer-nullish-coalescing': 'warn',
     'typescript/prefer-optional-chain': 'warn',
     'typescript/prefer-readonly': 'warn',
     'typescript/prefer-regexp-exec': 'warn',

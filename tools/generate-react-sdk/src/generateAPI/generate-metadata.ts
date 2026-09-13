@@ -52,10 +52,9 @@ async function loadVersions(packageName: string): Promise<string[]> {
   try {
     const resolvedPath = require.resolve(`${packageName}/metadata`)
     const metadataModule: unknown = await import(resolvedPath)
-    const versions =
-      (isMetadataModule(metadataModule) && metadataModule.pkgMetadata?.versions) ||
-      (isMetadataModule(metadataModule) && metadataModule.default?.versions) ||
-      []
+    const versions = isMetadataModule(metadataModule)
+      ? (metadataModule.pkgMetadata?.versions ?? metadataModule.default?.versions ?? [])
+      : []
     return versions
   } catch (error) {
     stdout.write(`⚠️  Could not load metadata from ${packageName}: ${error}\n`)
