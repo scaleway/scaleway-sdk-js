@@ -493,7 +493,7 @@ export class API extends ParentAPI {
     this.client.fetch<UserConfiguration>(
       {
         method: 'GET',
-        path: `/apple-silicon-internal/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/user-configuration`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/user-configuration`,
       },
       unmarshalUserConfiguration,
     )
@@ -507,7 +507,7 @@ export class API extends ParentAPI {
         ),
         headers: jsonContentHeaders,
         method: 'PATCH',
-        path: `/apple-silicon-internal/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runner-configuration-status`,
+        path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runner-configuration-status`,
       },
       unmarshalUpdateRunnerConfigurationStatusResponse,
     )
