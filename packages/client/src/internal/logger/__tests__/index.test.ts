@@ -138,8 +138,11 @@ describe('ConsoleLogger', () => {
       for (const elt of test.tests) {
         log.mockReset()
         logger[elt.target](elt.target) // call target log level
-        if (elt.expected) expect(log).toHaveBeenCalledWith(elt.target)
-        else expect(log).not.toHaveBeenCalledWith(elt.target)
+        if (elt.expected) {
+          expect(log).toHaveBeenCalledWith(elt.target)
+        } else {
+          expect(log).not.toHaveBeenCalledWith(elt.target)
+        }
       }
     }
   })

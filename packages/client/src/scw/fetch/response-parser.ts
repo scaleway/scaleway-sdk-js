@@ -53,7 +53,9 @@ export const responseParser =
     }
 
     if (response.ok) {
-      if (response.status === 204) return unmarshaller(undefined)
+      if (response.status === 204) {
+        return unmarshaller(undefined)
+      }
       const contentType = response.headers.get('Content-Type')
       try {
         if (responseType === 'json' && contentType === 'application/json') {
@@ -77,7 +79,9 @@ export const responseParser =
       .json()
       .catch(() => response.text())
 
-    if (isJSONObject(error)) throw parseScalewayError(response.status, error)
+    if (isJSONObject(error)) {
+      throw parseScalewayError(response.status, error)
+    }
 
     throw new ScalewayError(response.status, typeof error === 'string' ? error : 'cannot read error response body')
   }

@@ -25,14 +25,23 @@ export type SetupOptions = {
  * Used to detect whether a product has generated code.
  */
 function walkHasGenFiles(root: string): boolean {
-  if (!existsSync(root)) return false
+  if (!existsSync(root)) {
+    return false
+  }
   const stack = [root]
   while (stack.length > 0) {
     const p = stack.pop()
-    if (!p) break
+    if (!p) {
+      break
+    }
     const st = statSync(p)
-    if (st.isDirectory()) for (const name of readdirSync(p)) stack.push(join(p, name))
-    else if (p.endsWith('.gen.ts')) return true
+    if (st.isDirectory()) {
+      for (const name of readdirSync(p)) {
+        stack.push(join(p, name))
+      }
+    } else if (p.endsWith('.gen.ts')) {
+      return true
+    }
   }
   return false
 }
@@ -50,10 +59,11 @@ function discoverNewProducts(src: string): { name: string }[] {
 
 function logNewProducts(newProducts: { name: string }[]): void {
   console.log(`📦 New products: ${newProducts.length}`)
-  if (newProducts.length > 0)
+  if (newProducts.length > 0) {
     newProducts.forEach(p => {
       console.log(`  - ${p.name}`)
     })
+  }
 }
 
 function checkEarlyExit(newProducts: { name: string }[], dryRun: boolean): number | null {
@@ -130,13 +140,17 @@ export const setup = async ({
   dryRun = false,
   install = true,
 }: SetupOptions): Promise<number> => {
-  if (!existsSync(src)) throw new Error(`Directory not found: ${src}`)
+  if (!existsSync(src)) {
+    throw new Error(`Directory not found: ${src}`)
+  }
 
   const newProducts = discoverNewProducts(src)
   logNewProducts(newProducts)
 
   const earlyExit = checkEarlyExit(newProducts, dryRun)
-  if (earlyExit !== null) return earlyExit
+  if (earlyExit !== null) {
+    return earlyExit
+  }
 
   await generateAndUpdateProducts(src, config, { sdkPkgPath, newProducts, scope })
   runInstallStep(install)

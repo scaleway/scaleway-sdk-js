@@ -73,7 +73,9 @@ const resolvePaths = (config: Config): Config => ({
 export const loadConfig = async (configPath?: string): Promise<Config> => {
   const resolvedPath = resolve(cwd(), configPath ?? 'generate-packages.config.ts')
 
-  if (!existsSync(resolvedPath)) return resolvePaths(DEFAULT_CONFIG)
+  if (!existsSync(resolvedPath)) {
+    return resolvePaths(DEFAULT_CONFIG)
+  }
 
   const mod: unknown = await import(`file://${resolvedPath}`)
   return resolvePaths(isConfigModule(mod) ? mod.default : (mod as Config))

@@ -4,7 +4,9 @@
 type ParsedArg = { key: string; value: string | boolean; consumedNext: boolean }
 
 function parseSingleArg(arg: string, nextArg: string | undefined): ParsedArg | null {
-  if (!arg.startsWith('--')) return null
+  if (!arg.startsWith('--')) {
+    return null
+  }
 
   const parts = arg.slice(2).split('=')
   const [key] = parts
@@ -39,8 +41,12 @@ export const parseArgsCLI = <T extends string[]>({ requiresValueArgs }: { requir
     const arg = args[i]
     const nextArg = i + 1 < args.length ? args[i + 1] : undefined
     const parsed = arg?.startsWith('--') ? parseSingleArg(arg, nextArg) : null
-    if (!parsed) continue
-    if (parsed.consumedNext) i++
+    if (!parsed) {
+      continue
+    }
+    if (parsed.consumedNext) {
+      i++
+    }
     applyParsedArg(parsed, requiresValueArgs, cliArgs)
   }
   return { cliArgs }
