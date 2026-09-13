@@ -26,6 +26,7 @@
   "devDependencies": {
     "@manypkg/cli": "0.25.1",
     "@repo/configs": "workspace:^",
+    "@repo/configure-npm-trust": "workspace:*",
     "@repo/generate-packages": "workspace:*",
     "@repo/pnpm-auto-release": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
