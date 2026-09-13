@@ -34,7 +34,6 @@ export default defineConfig({
     'eslint/require-unicode-regexp': 'warn',
     'eslint/vars-on-top': 'warn',
     'import/no-namespace': 'warn',
-    'node/no-process-env': 'warn',
     'react/set-state-in-effect': 'warn',
     'typescript/consistent-type-definitions': 'warn',
     'typescript/explicit-member-accessibility': 'warn',
@@ -98,6 +97,12 @@ export default defineConfig({
       files: ['tools/**', 'vite.config.ts', 'packages/configuration-loader/**'],
       rules: {
         'import/no-nodejs-modules': 'off',
+      },
+    },
+    {
+      files: ['tools/pnpm-auto-release/**'],
+      rules: {
+        'node/no-process-env': 'off',
       },
     },
   ],
