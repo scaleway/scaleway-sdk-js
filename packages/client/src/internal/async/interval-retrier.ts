@@ -94,6 +94,7 @@ export function* createExponentialBackoffStrategy(minDelay: number, maxDelay: nu
  *
  * @internal
  */
+// oxlint-disable-next-line eslint/max-params -- four params are required by the retry logic
 export const tryAtIntervals = async <T>(
   retry: Retry<T>,
   strategy: IntervalStrategy,
@@ -176,6 +177,7 @@ type ResourceFetcher<T, R> = (request: R) => Promise<T>
  *
  * @public
  */
+// oxlint-disable-next-line eslint/max-params -- four params are required by the public API contract
 export const waitForResource = <R, T>(
   stop: WaitForStopCondition<T>,
   fetcher: ResourceFetcher<T, R>,

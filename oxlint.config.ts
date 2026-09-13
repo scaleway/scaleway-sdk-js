@@ -23,11 +23,7 @@ export default defineConfig({
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
     'eslint/curly': 'warn',
-    'eslint/default-case': 'warn',
     'eslint/eqeqeq': 'warn',
-    'eslint/init-declarations': 'warn',
-    'eslint/max-depth': 'warn',
-    'eslint/max-params': 'warn',
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-bitwise': 'warn',
     'eslint/no-eq-null': 'warn',
@@ -40,21 +36,15 @@ export default defineConfig({
     'eslint/require-unicode-regexp': 'warn',
     'eslint/vars-on-top': 'warn',
     'import/no-namespace': 'warn',
-    'import/no-nodejs-modules': 'warn',
     'node/no-process-env': 'warn',
     'oxc/no-accumulating-spread': 'warn',
     'react/set-state-in-effect': 'warn',
-    'typescript/consistent-indexed-object-style': 'warn',
     'typescript/consistent-type-definitions': 'warn',
     'typescript/explicit-member-accessibility': 'warn',
     'typescript/method-signature-style': 'warn',
-    'typescript/no-confusing-void-expression': 'warn',
     'typescript/no-dynamic-delete': 'warn',
     'typescript/no-redundant-type-constituents': 'warn',
-    'typescript/no-unnecessary-boolean-literal-compare': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
-    'typescript/no-unnecessary-template-expression': 'warn',
-    'typescript/no-unnecessary-type-conversion': 'warn',
     'typescript/no-unnecessary-type-parameters': 'warn',
     'typescript/no-unsafe-assignment': 'warn',
     'typescript/no-unsafe-call': 'warn',
@@ -108,4 +98,12 @@ export default defineConfig({
     'unicorn/switch-case-braces': 'warn',
     'unicorn/text-encoding-identifier-case': 'warn',
   },
+  overrides: [
+    {
+      files: ['tools/**', 'vite.config.ts', 'packages/configuration-loader/**'],
+      rules: {
+        'import/no-nodejs-modules': 'off',
+      },
+    },
+  ],
 })
