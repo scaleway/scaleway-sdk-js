@@ -595,7 +595,8 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN.includes(res.status))),
       this.getSSLCertificate,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -1066,7 +1067,8 @@ You can filter the list by domain name.
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DOMAIN_TRANSIENT_STATUSES_DOMAIN.includes(res.status))),
       this.getDomain,
-      { ...options, request },
+      request,
+      options,
     )
 
   

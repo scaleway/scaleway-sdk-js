@@ -87,18 +87,20 @@ export function* createExponentialBackoffStrategy(minDelay: number, maxDelay: nu
  *
  * @param retry - The function to retry logic between each interval
  * @param strategy - A generated interval strategy iterator
- * @param options - The timeout and abort signal options
+ * @param timeout - The maximum time elapsed before timeout error
+ * @param signal - An {@link AbortSignal} to cancel the polling loop
  *
  * @throws An timeout exception, an {@link AbortError} or error thrown by the logic being run
  *
  * @internal
  */
+// oxlint-disable-next-line eslint/max-params -- four params are required by the retry logic
 export const tryAtIntervals = async <T>(
   retry: Retry<T>,
   strategy: IntervalStrategy,
-  options: { timeout?: number; signal?: AbortSignal } = {},
+  timeout: number = DEFAULT_TIMEOUT_SECONDS,
+  signal?: AbortSignal,
 ): Promise<T> => {
-  const { timeout = DEFAULT_TIMEOUT_SECONDS, signal } = options
   const timeoutTimestamp = Date.now() + timeout * 1000
   let retryCount = 0
   while (Date.now() <= timeoutTimestamp) {
@@ -163,47 +165,32 @@ export interface WaitForOptions<T> {
 type ResourceFetcher<T, R> = (request: R) => Promise<T>
 
 /**
- * The options to wait until a resource is ready.
- *
- * @public
- */
-export interface WaitForResourceOptions<R, T> extends WaitForOptions<T> {
-  /**
-   * The resource request options.
-   */
-  request: R
-  /**
-   * An optional custom strategy.
-   */
-  strategy?: IntervalStrategy
-}
-
-/**
  * Fetches resource several times until an expected condition is reached, timeouts, or throws an exception.
  *
  * @param stop - The condition to stop waiting
  * @param fetcher - The method to retrieve resource
- * @param options - The request, retry strategy and wait options
+ * @param request - The resource request options
+ * @param options - The retry strategy options
+ * @param strategy - An optional custom strategy
  *
  * @returns A promise of resource
  *
  * @public
  */
+// oxlint-disable-next-line eslint/max-params -- four params are required by the public API contract
 export const waitForResource = <R, T>(
   stop: WaitForStopCondition<T>,
   fetcher: ResourceFetcher<T, R>,
-  options: Readonly<WaitForResourceOptions<R, T>>,
-) => {
-  const strategy =
-    options.strategy ??
-    createExponentialBackoffStrategy(
-      options.minDelay ?? DEFAULT_MIN_DELAY_SECONDS,
-      options.maxDelay ?? DEFAULT_MAX_DELAY_SECONDS,
-    )
-
-  return tryAtIntervals(
+  request: R,
+  options?: WaitForOptions<T>,
+  strategy: IntervalStrategy = createExponentialBackoffStrategy(
+    options?.minDelay ?? DEFAULT_MIN_DELAY_SECONDS,
+    options?.maxDelay ?? DEFAULT_MAX_DELAY_SECONDS,
+  ),
+) =>
+  tryAtIntervals(
     async () => {
-      const value = await fetcher(options.request)
+      const value = await fetcher(request)
 
       return {
         done: await stop(value),
@@ -211,6 +198,6 @@ export const waitForResource = <R, T>(
       }
     },
     strategy,
-    { timeout: options.timeout, signal: options.signal },
+    options?.timeout,
+    options?.signal,
   )
-}

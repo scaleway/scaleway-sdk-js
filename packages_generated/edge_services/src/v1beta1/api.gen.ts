@@ -261,7 +261,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES.includes(res.status))),
       this.getPipeline,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -1247,7 +1248,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES.includes(res.status))),
       this.getPurgeRequest,
-      { ...options, request },
+      request,
+      options,
     )
 
   

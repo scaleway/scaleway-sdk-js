@@ -152,7 +152,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK.includes(res.status))),
       this.getDedicatedConnection,
-      { ...options, request },
+      request,
+      options,
     )
 
   
@@ -312,7 +313,8 @@ export class API extends ParentAPI {
     waitForResource(
       options?.stop ?? (res => Promise.resolve(!LINK_TRANSIENT_STATUSES_INTERLINK.includes(res.status))),
       this.getLink,
-      { ...options, request },
+      request,
+      options,
     )
 
   
