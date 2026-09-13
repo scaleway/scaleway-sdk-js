@@ -83,6 +83,7 @@ export const camelize = (str: string): string => {
  */
 export const camelizeKeys = <T>(obj: object | unknown[] | unknown, ignoreKeys: string[] = []): T => {
   if (Array.isArray(obj)) {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- generic mapping result cannot be inferred as T
     return obj.map(v => camelizeKeys(v, ignoreKeys)) as unknown as T
   }
 
@@ -92,8 +93,10 @@ export const camelizeKeys = <T>(obj: object | unknown[] | unknown, ignoreKeys: s
       const outKey = camelize(key)
       result[outKey] = ignoreKeys.includes(key) ? (value as unknown) : camelizeKeys(value, ignoreKeys)
     }
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- built object keys are camelized, cast back to T
     return result as T
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- primitive/date value passes through unchanged as T
   return obj as T
 }

@@ -40,11 +40,13 @@ describe('withProfile', () => {
   it(`doesn't modify Settings object with empty Profile object`, () => {
     expect(withProfile(EMPTY_PROFILE)(DEFAULT_SETTINGS)).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test fixture casts a partial object to Profile
       withProfile({
         WTF: 'malicious content',
       } as unknown as Profile)(DEFAULT_SETTINGS),
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test fixture casts a partial object to Profile
       withProfile({
         apiURL: undefined,
         defaultOrganizationId: undefined,
@@ -60,6 +62,7 @@ describe('withProfile', () => {
       } as unknown as Profile)(DEFAULT_SETTINGS),
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test fixture casts a partial object to Profile
       withProfile({
         apiURL: null,
         defaultOrganizationId: null,
@@ -75,6 +78,7 @@ describe('withProfile', () => {
       } as unknown as Profile)(DEFAULT_SETTINGS),
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test fixture casts a partial object to Profile
       withProfile({
         apiURL: '',
         defaultOrganizationId: '',
@@ -90,6 +94,7 @@ describe('withProfile', () => {
       } as unknown as Profile)(DEFAULT_SETTINGS),
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test fixture casts a partial object to Profile
       withProfile({
         apiURL: 0,
         defaultOrganizationId: 0,

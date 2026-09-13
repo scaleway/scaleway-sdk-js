@@ -14,6 +14,7 @@ export const unmarshalMoney = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'Money' failed as data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- raw JSON mapped to Money by contract
   return {
     currencyCode: data.currency_code,
     nanos: data.nanos,
@@ -31,6 +32,7 @@ export const unmarshalServiceInfo = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'ServiceInfo' failed as data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- raw JSON mapped to ServiceInfo by contract
   return {
     description: data.description,
     documentationUrl: data.documentation_url,
@@ -49,6 +51,7 @@ export const unmarshalScwFile = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'ScwFile' failed as data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- raw JSON mapped to ScwFile by contract
   return {
     content: data.content,
     contentType: data.content_type,
@@ -72,6 +75,7 @@ export const unmarshalTimeSeriesPoint = (data: unknown) => {
 
   return {
     timestamp: unmarshalDate(data[0]),
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- raw array element cast to number by contract
     value: data[1] as number,
   } as TimeSeriesPoint
 }
@@ -86,6 +90,7 @@ export const unmarshalTimeSeries = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'TimeSeries' failed as data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- raw JSON mapped to TimeSeries by contract
   return {
     metadata: data.metadata,
     name: data.name,
@@ -191,6 +196,7 @@ export const marshalDecimal = (obj: Decimal): { value: string } => ({
  */
 export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
   if (Array.isArray(obj)) {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- generic mapping result cannot be inferred as T
     return obj.map(v => unmarshalDates(v, keys)) as unknown as T
   }
 
@@ -199,9 +205,11 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
     for (const [key, value] of Object.entries(obj)) {
       result[key] = typeof value === 'string' && keys.includes(key) ? new Date(value) : unmarshalDates(value, keys)
     }
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- built object cast back to T
     return result as T
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- value passes through unchanged as T
   return obj as T
 }
 

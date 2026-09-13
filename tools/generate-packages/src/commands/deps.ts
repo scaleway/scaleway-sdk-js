@@ -34,6 +34,7 @@ function discoverPackages(src: string): PkgInfo[] {
     .flatMap(e => {
       const packageJsonPath = join(src, e.name, 'package.json')
       if (!existsSync(packageJsonPath)) return []
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parsed JSON assumed to be a package.json
       const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PkgInfo['packageJson']
       return [{ name: e.name, path: join(src, e.name), packageJsonPath, packageJson }]
     })

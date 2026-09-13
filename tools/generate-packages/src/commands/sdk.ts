@@ -21,6 +21,7 @@ const getGeneratedPackages = (dir: string, excludeSuffix?: string): PackageJSON[
       .flatMap((d: Dirent) => {
         const pkgPath = join(dir, d.name, 'package.json')
         if (!existsSync(pkgPath)) return []
+        // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parsed JSON assumed to be a package.json
         const pkg = JSON.parse(readFileSync(pkgPath, 'utf8')) as PackageJSON
         return [{ name: pkg.name, version: pkg.version, path: d.name }]
       })
@@ -92,6 +93,7 @@ function updateSdk(s: Config['sdks'][number], src: string, config: Config): void
     exit(1)
   }
   const validPackages = generatedPackages.filter(p => !s.ignoredPackages.includes(p.name))
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parsed JSON assumed to be a package.json
   const sdkPkg = JSON.parse(readFileSync(s.path, 'utf8')) as PackageJSON
   rebuildAllDeps(sdkPkg, s, { config, validPackages })
   writeFileSync(s.path, `${JSON.stringify(sdkPkg, null, 2)}\n`, 'utf8')

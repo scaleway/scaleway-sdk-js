@@ -66,6 +66,7 @@ describe('urlParams', () => {
 
   it('filters non-string keys', () => {
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test casts deliberately override tuple types
       urlParams([0, 'valid'] as unknown as [string, string], [null, 'valid'] as unknown as [string, string]).toString(),
     ).toStrictEqual('')
   })
@@ -175,6 +176,7 @@ describe('unmarshalArrayOfObject', () => {
   const unmarshaller = (data: unknown): MyResource => {
     if (!isJSONObject(data)) throw new Error('Should not happen')
 
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- raw JSON field mapped to MyResource by contract
     return { myNumber: data.my_number } as MyResource
   }
 
@@ -201,6 +203,7 @@ describe('unmarshalMapOfObject', () => {
   const unmarshaller = (data: unknown): MyResource => {
     if (!isJSONObject(data)) throw new Error('Should not happen')
 
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- raw JSON field mapped to MyResource by contract
     return { myNumber: data.my_number } as MyResource
   }
 

@@ -22,6 +22,7 @@ export const useSDKCache = <TCustomAPIs extends DefaultTypeBaseAPI = DefaultType
   }
 
   // Cast the context to the extended type for better type safety
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- context value re-typed to the extended SDK cache shape
   return context as {
     sdkCache: ExtendedAPISdkCache<TCustomAPIs> | null
     setSdkInstance: SetSDKInstance<ExtendedAPISdkCache<TCustomAPIs>>

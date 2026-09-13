@@ -112,9 +112,11 @@ export const unmarshalDate = (data: unknown): Date | undefined => {
 export const unmarshalArrayOfObject = <T, B extends boolean>(
   data: unknown,
   unmarshaller: (input: unknown) => T,
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- default boolean widened to generic B
   emptyFallback: B = true as B,
 ): B extends true ? T[] | undefined : T[] => {
   if (!Array.isArray(data)) {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- conditional return type requires cast
     return (emptyFallback ? [] : undefined) as B extends true ? T[] | undefined : T[]
   }
 
@@ -129,9 +131,11 @@ export const unmarshalArrayOfObject = <T, B extends boolean>(
 export const unmarshalMapOfObject = <T, B extends boolean>(
   data: unknown,
   unmarshaller: (input: unknown) => T,
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- default boolean widened to generic B
   emptyFallback: B = true as B,
 ): B extends true ? Record<string, T> | undefined : Record<string, T> => {
   if (!data || typeof data !== 'object' || !(data instanceof Object) || Array.isArray(data)) {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- conditional return type requires cast
     return (emptyFallback ? {} : undefined) as B extends true ? Record<string, T> | undefined : Record<string, T>
   }
 
