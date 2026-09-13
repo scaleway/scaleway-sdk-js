@@ -147,7 +147,7 @@ export async function buildNamespaceResolver(config: ReactQueriesConfig): Promis
  * like `RdbAdminv1.RdbV1ACLRule` instead of `Rdbv1.RdbV1ACLRule`.
  */
 function deriveFromNamespacePath(nsPath: string): ResolvedNamespace | undefined {
-  const match = nsPath.match(/^(?<scope>@scaleway(?:-internal)?)\/sdk-(?<slug>[^/]+)\/(?<version>.+)$/)
+  const match = /^(?<scope>@scaleway(?:-internal)?)\/sdk-(?<slug>[^/]+)\/(?<version>.+)$/.exec(nsPath)
   if (!match) {
     return undefined
   }
