@@ -128,11 +128,11 @@ async function processPackageVersions(
     stdout.write(`⚠️  Skipping ${packageName}: no versions with metadata found\n`)
     return {}
   }
-  let pkgResult: ProcessedMetadata = {}
+  const pkgResult: ProcessedMetadata = {}
   for (const version of versions) {
     const versionResult = await processVersion(packageName, version, { servicesToSkip, isVersionSkipped })
     if (versionResult) {
-      pkgResult = { ...pkgResult, ...versionResult }
+      Object.assign(pkgResult, versionResult)
     }
   }
   return pkgResult
@@ -197,12 +197,9 @@ export const generateAPI = async ({
       skipVersions,
     },
   )
-  let result: ProcessedMetadata = {}
+  const result: ProcessedMetadata = {}
   for (const [packageName] of sdkPackages) {
-    result = {
-      ...result,
-      ...(await processSdkPackage(packageName, { skipPackages, servicesToSkip, isVersionSkipped })),
-    }
+    Object.assign(result, await processSdkPackage(packageName, { skipPackages, servicesToSkip, isVersionSkipped }))
   }
   emitFiles({ res: result, sourceFolderGen: dir, sdkFactoryPath })
   generateType(result)
