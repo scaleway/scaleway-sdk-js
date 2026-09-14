@@ -55,6 +55,7 @@ export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
     region: data.region,
     revision: data.revision,
     secretId: data.secret_id,
+    srn: data.srn,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as SecretVersion
@@ -94,6 +95,7 @@ export const unmarshalSecret = (data: unknown): Secret => {
     projectId: data.project_id,
     protected: data.protected,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     type: data.type,

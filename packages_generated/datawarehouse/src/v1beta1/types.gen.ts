@@ -123,6 +123,10 @@ export interface Endpoint {
    * Region of the deployment.
    */
   region: ScwRegion
+  /**
+   * The SRN of the endpoint.
+   */
+  srn: string
 }
 
 
@@ -157,6 +161,10 @@ export interface Database {
    * Region of the deployment.
    */
   region: ScwRegion
+  /**
+   * The SRN of the database.
+   */
+  srn: string
 }
 
 
@@ -229,6 +237,10 @@ export interface Deployment {
    * Region of the deployment.
    */
   region: ScwRegion
+  /**
+   * The SRN of the deployment.
+   */
+  srn: string
 }
 
 
@@ -281,6 +293,10 @@ export interface User {
    * Region of the deployment.
    */
   region: ScwRegion
+  /**
+   * The SRN of the user.
+   */
+  srn: string
 }
 
 

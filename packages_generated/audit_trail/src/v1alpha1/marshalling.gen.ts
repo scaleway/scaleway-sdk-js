@@ -70,6 +70,8 @@ import type {
   VpcPrivateNetworkInfo,
   VpcRouteInfo,
   VpcSubnetInfo,
+  WoflWorkflowDefinitionInfo,
+  WoflWorkflowRunInfo,
   EventPrincipal,
   Resource,
   Event,
@@ -942,6 +944,33 @@ const unmarshalVpcSubnetInfo = (data: unknown): VpcSubnetInfo => {
   } as VpcSubnetInfo
 }
 
+const unmarshalWoflWorkflowDefinitionInfo = (data: unknown): WoflWorkflowDefinitionInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WoflWorkflowDefinitionInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    description: data.description,
+    name: data.name,
+  } as WoflWorkflowDefinitionInfo
+}
+
+const unmarshalWoflWorkflowRunInfo = (data: unknown): WoflWorkflowRunInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WoflWorkflowRunInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    status: data.status,
+    workflowDefinitionId: data.workflow_definition_id,
+    workflowDefinitionName: data.workflow_definition_name,
+  } as WoflWorkflowRunInfo
+}
+
 const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1028,6 +1057,8 @@ export const unmarshalResource = (data: unknown): Resource => {
     vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : undefined,
     vpcRouteInfo: data.vpc_route_info ? unmarshalVpcRouteInfo(data.vpc_route_info) : undefined,
     vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : undefined,
+    woflWorkflowDefinitionInfo: data.wofl_workflow_definition_info ? unmarshalWoflWorkflowDefinitionInfo(data.wofl_workflow_definition_info) : undefined,
+    woflWorkflowRunInfo: data.wofl_workflow_run_info ? unmarshalWoflWorkflowRunInfo(data.wofl_workflow_run_info) : undefined,
   } as Resource
 }
 

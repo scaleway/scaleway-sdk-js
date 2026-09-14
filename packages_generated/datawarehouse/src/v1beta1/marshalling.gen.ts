@@ -96,6 +96,7 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     public: data.public ? unmarshalEndpointPublicDetails(data.public) : undefined,
     region: data.region,
     services: unmarshalArrayOfObject(data.services, unmarshalEndpointService),
+    srn: data.srn,
   } as Endpoint
 }
 
@@ -111,6 +112,7 @@ export const unmarshalDatabase = (data: unknown): Database => {
     name: data.name,
     region: data.region,
     size: data.size,
+    srn: data.srn,
   } as Database
 }
 
@@ -135,6 +137,7 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     region: data.region,
     replicaCount: data.replica_count,
     shardCount: data.shard_count,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -154,6 +157,7 @@ export const unmarshalUser = (data: unknown): User => {
     isAdmin: data.is_admin,
     name: data.name,
     region: data.region,
+    srn: data.srn,
   } as User
 }
 

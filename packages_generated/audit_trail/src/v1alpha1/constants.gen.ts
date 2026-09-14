@@ -17,6 +17,7 @@ import type {
   ListExportJobsRequestOrderBy,
   ListSystemEventsRequestOrderBy,
   ResourceType,
+  RunStatus,
   ServerlessContainersTriggerInfoSourceType,
   ServerlessFunctionsTriggerInfoInputType,
   SystemEventKind,
@@ -259,6 +260,23 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'serverless_functions_domain',
   'serverless_functions_cron',
   'serverless_functions_trigger',
+  'wofl_workflow_definition',
+  'wofl_workflow_run',
+]
+
+/** Lists all values of the enum {@link RunStatus}. */
+export const RUN_STATUSES: RunStatus[] = [
+  'unknown_run_status',
+  'initialized',
+  'validated',
+  'queued',
+  'running',
+  'succeeded',
+  'failed',
+  'interrupting',
+  'interrupted',
+  'pausing',
+  'paused',
 ]
 
 /** Lists all values of the enum {@link ServerlessContainersTriggerInfoSourceType}. */
