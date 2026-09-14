@@ -103,7 +103,7 @@ function updateSdk(s: Config['sdks'][number], src: string, config: Config): void
   writeSdkIndex(s, validPackages)
 }
 
-export const sdk = async ({ src, config, runInstall = true }: SdkOptions): Promise<void> => {
+export const sdk = ({ src, config, runInstall = true }: SdkOptions): void => {
   console.log('Starting SDK package update process...')
 
   for (const s of config.sdks) {

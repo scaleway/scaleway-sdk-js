@@ -119,7 +119,7 @@ function runInstallIfNeeded(updated: number): void {
  * @param options.config - Loaded configuration defining the SDK package prefix
  * @param options.dryRun - Report missing deps without writing (default: false)
  */
-export const deps = async ({ src, config, dryRun = false }: DepsOptions): Promise<void> => {
+export const deps = ({ src, config, dryRun = false }: DepsOptions): void => {
   if (!existsSync(src)) {
     throw new Error(`Directory not found: ${src}`)
   }

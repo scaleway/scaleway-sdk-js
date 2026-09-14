@@ -54,7 +54,6 @@ export default defineConfig({
     'typescript/prefer-optional-chain': 'warn',
     'typescript/prefer-readonly': 'warn',
     'typescript/promise-function-async': 'warn',
-    'typescript/require-await': 'warn',
     'typescript/restrict-template-expressions': 'warn',
     'typescript/strict-boolean-expressions': 'warn',
     'typescript/strict-void-return': 'warn',

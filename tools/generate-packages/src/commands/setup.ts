@@ -92,19 +92,19 @@ function addProductsToSdk(sdkPkgPath: string, newProducts: { name: string }[], s
   writeFileSync(sdkPkgPath, `${JSON.stringify(sdkPkg, null, 2)}\n`, 'utf8')
 }
 
-async function generateAndUpdateProducts(
+function generateAndUpdateProducts(
   src: string,
   config: Config,
   options: { sdkPkgPath: string; newProducts: { name: string }[]; scope: string },
-): Promise<void> {
+): void {
   const { sdkPkgPath, newProducts, scope } = options
   console.log('⚙️  Generating package configs...')
-  await runPackages({ src, runInstall: false })
+  runPackages({ src, runInstall: false })
   console.log(`📝 Adding deps to ${sdkPkgPath} (scope: ${scope})...`)
   addProductsToSdk(sdkPkgPath, newProducts, scope)
   console.log('📝 Updating SDK exports...')
-  await runSdk({ src, config, runInstall: false })
-  await runDeps({ src, config })
+  runSdk({ src, config, runInstall: false })
+  runDeps({ src, config })
 }
 
 function runInstallStep(install: boolean): void {
@@ -132,14 +132,14 @@ function runInstallStep(install: boolean): void {
  * @param options.install - Run `pnpm install` at the end (default: true)
  * @returns Exit code (0 = success)
  */
-export const setup = async ({
+export const setup = ({
   src,
   config,
   sdk: sdkPkgPath,
   scope = config.scope,
   dryRun = false,
   install = true,
-}: SetupOptions): Promise<number> => {
+}: SetupOptions): number => {
   if (!existsSync(src)) {
     throw new Error(`Directory not found: ${src}`)
   }
@@ -152,7 +152,7 @@ export const setup = async ({
     return earlyExit
   }
 
-  await generateAndUpdateProducts(src, config, { sdkPkgPath, newProducts, scope })
+  generateAndUpdateProducts(src, config, { sdkPkgPath, newProducts, scope })
   runInstallStep(install)
 
   console.log(`✅ Setup complete: ${newProducts.length} product(s) configured`)
