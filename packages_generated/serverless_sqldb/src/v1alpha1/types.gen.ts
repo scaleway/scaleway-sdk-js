@@ -34,6 +34,10 @@ export interface Version {
    */
   name: string
   /**
+   * The SRN of the version.
+   */
+  srn: string
+  /**
    * Date of End Of Life.
    */
   endOfLifeAt?: Date
@@ -49,6 +53,10 @@ export interface DatabaseBackup {
    * UUID that uniquely identifies a Serverless SQL Database backup.
    */
   id: string
+  /**
+   * The SRN of the database backup.
+   */
+  srn: string
   /**
    * Status of the Serverless SQL Database backup. One of `unknown_status` | `error` | `ready` | `locked`.
    */
@@ -101,6 +109,10 @@ export interface Database {
    * UUID that uniquely identifies your Serverless SQL DB Database.
    */
   id: string
+  /**
+   * The SRN of the database.
+   */
+  srn: string
   /**
    * Name of the database.
    */

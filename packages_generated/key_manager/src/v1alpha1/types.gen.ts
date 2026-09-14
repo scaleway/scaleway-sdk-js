@@ -164,6 +164,10 @@ export interface Key {
    */
   id: string
   /**
+   * The SRN of the key.
+   */
+  srn: string
+  /**
    * ID of the Project containing the key.
    */
   projectId: string
