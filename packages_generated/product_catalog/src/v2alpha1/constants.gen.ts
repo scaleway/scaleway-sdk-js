@@ -214,5 +214,6 @@ export const PUBLIC_CATALOG_PRODUCT_UNIT_OF_MEASURE_COUNTABLE_UNITS: PublicCatal
   'sample_day',
   'gigabyte_day',
   'mvcpu',
+  'gigabyte_hour',
 ]
 
