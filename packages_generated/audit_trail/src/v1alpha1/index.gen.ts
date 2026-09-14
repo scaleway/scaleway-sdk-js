@@ -104,6 +104,7 @@ export type {
   ProductService,
   Resource,
   ResourceType,
+  RunStatus,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
   ServerlessContainersContainerInfo,
@@ -131,5 +132,7 @@ export type {
   VpcPrivateNetworkInfo,
   VpcRouteInfo,
   VpcSubnetInfo,
+  WoflWorkflowDefinitionInfo,
+  WoflWorkflowRunInfo,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

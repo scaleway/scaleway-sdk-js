@@ -52,10 +52,6 @@ export interface Organization {
    */
   phoneNumber?: string
   /**
-   * Siren number of the organization.
-   */
-  sirenNumber?: string
-  /**
    * Customer ID associated with this organization.
    */
   customerId: string
@@ -111,10 +107,6 @@ export type CreateOrganizationRequest = {
    * A custom ID for the customer in your own infrastructure.
    */
   customerId: string
-  /**
-   * A SIREN number for the customer.
-   */
-  sirenNumber?: string
 }
 
 
