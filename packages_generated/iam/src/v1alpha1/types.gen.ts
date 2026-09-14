@@ -226,6 +226,10 @@ export interface JWT {
    * User-agent used during the creation of the JWT.
    */
   userAgent: string
+  /**
+   * The SRN of the JWT.
+   */
+  srn: string
 }
 
 
@@ -370,6 +374,10 @@ export interface APIKey {
    * IP address of the device that created the API key.
    */
   creationIp: string
+  /**
+   * The SRN of the API key.
+   */
+  srn: string
 }
 
 
@@ -418,6 +426,10 @@ export interface Application {
    * Tags associated with the user.
    */
   tags: string[]
+  /**
+   * SRN of the application.
+   */
+  srn: string
 }
 
 
@@ -494,6 +506,10 @@ export interface Group {
    * Indicates if the group is the special "All Applications" group that contains all non-managed applications of the organization.
    */
   allApplications: boolean
+  /**
+   * The SRN of the group.
+   */
+  srn: string
 }
 
 
@@ -534,6 +550,10 @@ export interface Log {
    * ID of the resource linked to the log.
    */
   resourceId: string
+  /**
+   * The SRN of the log.
+   */
+  srn: string
 }
 
 
@@ -638,6 +658,10 @@ export interface Policy {
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
   noPrincipal?: boolean
+  /**
+   * The SRN of the policy.
+   */
+  srn: string
 }
 
 
@@ -678,6 +702,10 @@ export interface Quotum {
    * Limits per locality.
    */
   limits: QuotumLimit[]
+  /**
+   * The SRN of the quotum.
+   */
+  srn: string
 }
 
 
@@ -716,6 +744,10 @@ export interface Rule {
    * One-of ('scope'): at most one of 'projectIds', 'organizationId', 'accountRootUserId' could be set.
    */
   accountRootUserId?: string
+  /**
+   * The SRN of the rule.
+   */
+  srn: string
 }
 
 
@@ -756,6 +788,10 @@ export interface SSHKey {
    * SSH key status.
    */
   disabled: boolean
+  /**
+   * The SRN of the SSH key.
+   */
+  srn: string
 }
 
 
@@ -780,6 +816,10 @@ export interface SamlCertificate {
    * Date and time of the SAML certificate expiration.
    */
   expiresAt?: Date
+  /**
+   * The SRN of the SAML certificate.
+   */
+  srn: string
 }
 
 
@@ -880,6 +920,10 @@ export interface User {
    * Defines whether the user is locked.
    */
   locked: boolean
+  /**
+   * The SRN of the user.
+   */
+  srn: string
 }
 
 
@@ -2217,6 +2261,10 @@ export interface Saml {
    * Single Sign-On URL of the SAML Identity Provider.
    */
   singleSignOnUrl: string
+  /**
+   * The SRN of the SAML.
+   */
+  srn: string
 }
 
 

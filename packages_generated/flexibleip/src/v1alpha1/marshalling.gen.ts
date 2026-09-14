@@ -53,6 +53,7 @@ export const unmarshalFlexibleIP = (data: unknown): FlexibleIP => {
     projectId: data.project_id,
     reverse: data.reverse,
     serverId: data.server_id,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),

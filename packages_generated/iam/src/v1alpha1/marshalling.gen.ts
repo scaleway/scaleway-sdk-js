@@ -102,6 +102,7 @@ export const unmarshalJWT = (data: unknown): JWT => {
     ip: data.ip,
     issuerId: data.issuer_id,
     jti: data.jti,
+    srn: data.srn,
     updatedAt: unmarshalDate(data.updated_at),
     userAgent: data.user_agent,
   } as JWT
@@ -126,6 +127,7 @@ export const unmarshalAPIKey = (data: unknown): APIKey => {
     expiresAt: unmarshalDate(data.expires_at),
     managed: data.managed,
     secretKey: data.secret_key,
+    srn: data.srn,
     updatedAt: unmarshalDate(data.updated_at),
     userId: data.user_id,
   } as APIKey
@@ -148,6 +150,7 @@ export const unmarshalApplication = (data: unknown): Application => {
     name: data.name,
     nbApiKeys: data.nb_api_keys,
     organizationId: data.organization_id,
+    srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as Application
@@ -172,6 +175,7 @@ export const unmarshalGroup = (data: unknown): Group => {
     managed: data.managed,
     name: data.name,
     organizationId: data.organization_id,
+    srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     userIds: data.user_ids,
@@ -194,6 +198,7 @@ export const unmarshalLog = (data: unknown): Log => {
     organizationId: data.organization_id,
     resourceId: data.resource_id,
     resourceType: data.resource_type,
+    srn: data.srn,
     userAgent: data.user_agent,
   } as Log
 }
@@ -220,6 +225,7 @@ export const unmarshalPolicy = (data: unknown): Policy => {
     nbScopes: data.nb_scopes,
     noPrincipal: data.no_principal,
     organizationId: data.organization_id,
+    srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
     userId: data.user_id,
@@ -256,6 +262,7 @@ export const unmarshalQuotum = (data: unknown): Quotum => {
     localityType: data.locality_type,
     name: data.name,
     prettyName: data.pretty_name,
+    srn: data.srn,
     unit: data.unit,
     unlimited: data.unlimited,
   } as Quotum
@@ -277,6 +284,7 @@ export const unmarshalSSHKey = (data: unknown): SSHKey => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     publicKey: data.public_key,
+    srn: data.srn,
     updatedAt: unmarshalDate(data.updated_at),
   } as SSHKey
 }
@@ -293,6 +301,7 @@ export const unmarshalSamlCertificate = (data: unknown): SamlCertificate => {
     expiresAt: unmarshalDate(data.expires_at),
     id: data.id,
     origin: data.origin,
+    srn: data.srn,
     type: data.type,
   } as SamlCertificate
 }
@@ -333,6 +342,7 @@ export const unmarshalUser = (data: unknown): User => {
     mfa: data.mfa,
     organizationId: data.organization_id,
     phoneNumber: data.phone_number,
+    srn: data.srn,
     status: data.status ? data.status : undefined,
     tags: data.tags,
     twoFactorEnabled: data.two_factor_enabled,
@@ -622,6 +632,7 @@ const unmarshalRule = (data: unknown): Rule => {
     permissionSetNames: data.permission_set_names,
     permissionSetsScopeType: data.permission_sets_scope_type,
     projectIds: data.project_ids,
+    srn: data.srn,
   } as Rule
 }
 
@@ -787,6 +798,7 @@ export const unmarshalSaml = (data: unknown): Saml => {
     id: data.id,
     serviceProvider: data.service_provider ? unmarshalSamlServiceProvider(data.service_provider) : undefined,
     singleSignOnUrl: data.single_sign_on_url,
+    srn: data.srn,
     status: data.status,
   } as Saml
 }

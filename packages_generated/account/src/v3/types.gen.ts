@@ -267,6 +267,10 @@ export interface Project {
    * Status of the Project.
    */
   status: ProjectStatus
+  /**
+   * The SRN of the project.
+   */
+  srn: string
 }
 
 

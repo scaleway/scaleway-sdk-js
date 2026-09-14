@@ -129,6 +129,10 @@ export interface DedicatedConnection {
    */
   id: string
   /**
+   * The SRN of the dedicated connection.
+   */
+  srn: string
+  /**
    * Project ID.
    */
   projectId: string
@@ -188,6 +192,10 @@ export interface Link {
    * Unique identifier of the link.
    */
   id: string
+  /**
+   * The SRN of the link.
+   */
+  srn: string
   /**
    * Project ID.
    */
@@ -289,6 +297,10 @@ export interface Partner {
    */
   id: string
   /**
+   * The SRN of the partner.
+   */
+  srn: string
+  /**
    * Name of the partner.
    */
   name: string
@@ -329,6 +341,10 @@ export interface Pop {
    */
   id: string
   /**
+   * The SRN of the pop.
+   */
+  srn: string
+  /**
    * Name of the PoP. It is the common reference of Hosting DC (ex: TH2).
    */
   name: string
@@ -368,6 +384,10 @@ export interface RoutingPolicy {
    * Unique identifier of the routing policy.
    */
   id: string
+  /**
+   * The SRN of the routing policy.
+   */
+  srn: string
   /**
    * Project ID.
    */

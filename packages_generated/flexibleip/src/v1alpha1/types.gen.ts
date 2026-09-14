@@ -120,6 +120,10 @@ export interface FlexibleIP {
    * Availability Zone of the flexible IP.
    */
   zone: ScwZone
+  /**
+   * The SRN of the flexible ip.
+   */
+  srn: string
 }
 
 

@@ -132,6 +132,10 @@ export interface IP {
    */
   id: string
   /**
+   * The SRN of the IP.
+   */
+  srn: string
+  /**
    * IPv4 or IPv6 address in CIDR notation.
    */
   address: string

@@ -82,6 +82,7 @@ export const unmarshalKey = (data: unknown): Key => {
     rotatedAt: unmarshalDate(data.rotated_at),
     rotationCount: data.rotation_count,
     rotationPolicy: data.rotation_policy ? unmarshalKeyRotationPolicy(data.rotation_policy) : undefined,
+    srn: data.srn,
     state: data.state,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),

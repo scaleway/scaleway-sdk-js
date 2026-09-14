@@ -48,6 +48,10 @@ export interface Attachment {
    * The region where the attachment is located.
    */
   region: ScwRegion
+  /**
+   * The SRN of the attachment.
+   */
+  srn: string
 }
 
 
@@ -119,6 +123,10 @@ export interface FileSystem {
    * UUID of the filesystem type.
    */
   filesystemTypeId: string
+  /**
+   * The SRN of the filesystem.
+   */
+  srn: string
 }
 
 

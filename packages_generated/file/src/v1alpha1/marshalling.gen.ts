@@ -31,6 +31,7 @@ export const unmarshalFileSystem = (data: unknown): FileSystem => {
     projectId: data.project_id,
     region: data.region,
     size: data.size,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -50,6 +51,7 @@ const unmarshalAttachment = (data: unknown): Attachment => {
     region: data.region,
     resourceId: data.resource_id,
     resourceType: data.resource_type,
+    srn: data.srn,
     zone: data.zone,
   } as Attachment
 }

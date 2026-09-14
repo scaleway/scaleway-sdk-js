@@ -311,6 +311,10 @@ export interface ACLRule {
    */
   id: string
   /**
+   * The SRN of the ACL rule.
+   */
+  srn: string
+  /**
    * IP subnet to allow.
    *
    * One-of ('allowed'): at most one of 'ip', 'scalewayRanges' could be set.
@@ -546,6 +550,10 @@ export interface ClusterType {
    */
   name: string
   /**
+   * The SRN of the cluster type.
+   */
+  srn: string
+  /**
    * Cluster type availability.
    */
   availability: ClusterTypeAvailability
@@ -593,6 +601,10 @@ export interface Version {
    * Name of the Kubernetes version.
    */
   name: string
+  /**
+   * The SRN of the version.
+   */
+  srn: string
   /**
    * Label of the Kubernetes version.
    */
@@ -645,6 +657,10 @@ export interface Cluster {
    * Cluster ID.
    */
   id: string
+  /**
+   * The SRN of the cluster.
+   */
+  srn: string
   /**
    * Cluster type.
    */
@@ -765,6 +781,10 @@ export interface Node {
    * Node ID.
    */
   id: string
+  /**
+   * The SRN of the node.
+   */
+  srn: string
   /**
    * Pool ID of the node.
    */
@@ -936,6 +956,10 @@ export interface Pool {
    * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
    */
   maxTerminationGracePeriod?: string
+  /**
+   * The SRN of the pool.
+   */
+  srn: string
   /**
    * Cluster region of the pool.
    */

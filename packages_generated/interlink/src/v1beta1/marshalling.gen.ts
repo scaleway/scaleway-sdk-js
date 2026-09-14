@@ -59,6 +59,7 @@ export const unmarshalDedicatedConnection = (data: unknown): DedicatedConnection
     popId: data.pop_id,
     projectId: data.project_id,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -133,6 +134,7 @@ export const unmarshalLink = (data: unknown): Link => {
     routingPolicyV6Id: data.routing_policy_v6_id,
     scwBgpConfig: data.scw_bgp_config ? unmarshalBgpConfig(data.scw_bgp_config) : undefined,
     self: data.self ? unmarshalSelfHost(data.self) : undefined,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -157,6 +159,7 @@ export const unmarshalPartner = (data: unknown): Partner => {
     name: data.name,
     portalUrl: data.portal_url,
     region: data.region,
+    srn: data.srn,
     updatedAt: unmarshalDate(data.updated_at),
   } as Partner
 }
@@ -178,6 +181,7 @@ export const unmarshalPop = (data: unknown): Pop => {
     logoUrl: data.logo_url,
     name: data.name,
     region: data.region,
+    srn: data.srn,
   } as Pop
 }
 
@@ -198,6 +202,7 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
     prefixFilterOut: data.prefix_filter_out,
     projectId: data.project_id,
     region: data.region,
+    srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as RoutingPolicy

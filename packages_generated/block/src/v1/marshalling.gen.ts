@@ -73,6 +73,7 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     public: data.public,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -111,6 +112,7 @@ export const unmarshalVolume = (data: unknown): Volume => {
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,
     specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     type: data.type,
@@ -143,6 +145,7 @@ const unmarshalVolumeType = (data: unknown): VolumeType => {
     pricing: data.pricing ? unmarshalMoney(data.pricing) : undefined,
     snapshotPricing: data.snapshot_pricing ? unmarshalMoney(data.snapshot_pricing) : undefined,
     specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
+    srn: data.srn,
     type: data.type,
     zone: data.zone,
   } as VolumeType
