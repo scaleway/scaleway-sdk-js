@@ -166,6 +166,7 @@ export type PublicCatalogProductUnitOfMeasureCountableUnit =
   | 'sample_day'
   | 'gigabyte_day'
   | 'mvcpu'
+  | 'gigabyte_hour'
 
 export interface PublicCatalogProductPropertiesHardwareCPUPhysical {
   /**
