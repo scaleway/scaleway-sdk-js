@@ -198,6 +198,10 @@ export interface Snapshot {
    * KMS Key used for securing the parent volume's encryption.
    */
   kmsKeyId?: string
+  /**
+   * The SRN of the snapshot.
+   */
+  srn: string
 }
 
 
@@ -222,6 +226,10 @@ export interface VolumeType {
    * Zone of the volume type.
    */
   zone: ScwZone
+  /**
+   * The SRN of the volume type.
+   */
+  srn: string
 }
 
 
@@ -286,6 +294,10 @@ export interface Volume {
    * KMS Key used for securing the volume's encryption.
    */
   kmsKeyId?: string
+  /**
+   * The SRN of the volume.
+   */
+  srn: string
 }
 
 

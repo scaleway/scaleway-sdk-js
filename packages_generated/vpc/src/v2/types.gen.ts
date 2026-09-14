@@ -70,6 +70,10 @@ export interface Subnet {
    */
   id: string
   /**
+   * The SRN of the subnet.
+   */
+  srn: string
+  /**
    * Subnet creation date.
    */
   createdAt?: Date
@@ -105,6 +109,10 @@ export interface PrivateNetwork {
    * Private Network ID.
    */
   id: string
+  /**
+   * The SRN of the private network.
+   */
+  srn: string
   /**
    * Private Network name.
    */
@@ -161,6 +169,10 @@ export interface Route {
    * Route ID.
    */
   id: string
+  /**
+   * The SRN of the route.
+   */
+  srn: string
   /**
    * Route description.
    */
@@ -265,6 +277,10 @@ export interface IngressRule {
    */
   id: string
   /**
+   * The SRN of the ingress rule.
+   */
+  srn: string
+  /**
    * ID of the VPC this rule belongs to.
    */
   vpcId: string
@@ -329,6 +345,10 @@ export interface VPCConnector {
    */
   id: string
   /**
+   * The SRN of the VPC connector.
+   */
+  srn: string
+  /**
    * VPC connector name.
    */
   name: string
@@ -380,6 +400,10 @@ export interface VPC {
    * VPC ID.
    */
   id: string
+  /**
+   * The SRN of the VPC.
+   */
+  srn: string
   /**
    * VPC name.
    */

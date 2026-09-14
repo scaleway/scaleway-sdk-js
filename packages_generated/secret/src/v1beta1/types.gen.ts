@@ -119,6 +119,10 @@ export interface SecretVersion {
    */
   revision: number
   /**
+   * The SRN of the secret version.
+   */
+  srn: string
+  /**
    * ID of the secret.
    */
   secretId: string
@@ -170,6 +174,10 @@ export interface Secret {
    * ID of the secret.
    */
   id: string
+  /**
+   * The SRN of the secret.
+   */
+  srn: string
   /**
    * ID of the Project containing the secret.
    */

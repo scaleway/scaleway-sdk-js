@@ -89,6 +89,7 @@ export const unmarshalVersion = (data: unknown): Version => {
     name: data.name,
     region: data.region,
     releasedAt: unmarshalDate(data.released_at),
+    srn: data.srn,
   } as Version
 }
 
@@ -190,6 +191,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     region: data.region,
     serviceCidr: data.service_cidr,
     serviceDnsIp: data.service_dns_ip,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     type: data.type,
@@ -218,6 +220,7 @@ export const unmarshalNode = (data: unknown): Node => {
     publicIpV4: data.public_ip_v4,
     publicIpV6: data.public_ip_v6,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Node
@@ -280,6 +283,7 @@ export const unmarshalPool = (data: unknown): Pool => {
     rootVolumeType: data.root_volume_type,
     securityGroupId: data.security_group_id,
     size: data.size,
+    srn: data.srn,
     startupTaints: unmarshalArrayOfObject(data.startup_taints, unmarshalCoreV1Taint),
     status: data.status,
     tags: data.tags,
@@ -304,6 +308,7 @@ const unmarshalACLRule = (data: unknown): ACLRule => {
     ip: data.ip,
     region: data.region,
     scalewayRanges: data.scaleway_ranges,
+    srn: data.srn,
   } as ACLRule
 }
 
@@ -364,6 +369,7 @@ const unmarshalClusterType = (data: unknown): ClusterType => {
     region: data.region,
     resiliency: data.resiliency,
     sla: data.sla,
+    srn: data.srn,
   } as ClusterType
 }
 
