@@ -194,7 +194,7 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
     return obj.map(v => unmarshalDates(v, keys)) as unknown as T
   }
 
-  if (obj && typeof obj === 'object') {
+  if (obj != null && typeof obj === 'object') {
     const result: Record<string, unknown> = {}
     for (const [key, value] of Object.entries(obj)) {
       result[key] = typeof value === 'string' && keys.includes(key) ? new Date(value) : unmarshalDates(value, keys)

@@ -29,7 +29,7 @@ const buildMessage = (list: InvalidArgumentsErrorDetails[]): string => {
         format: 'is wrongly formatted',
         constraint: 'does not respect constraint',
       }[details.reason] ?? 'is invalid for unexpected reason'
-    if (details.helpMessage && details.helpMessage.length > 0) {
+    if (details.helpMessage !== undefined && details.helpMessage.length > 0) {
       acc.push(`${details.argumentName} ${readableReason}, ${details.helpMessage}`)
     } else {
       acc.push(`${details.argumentName} ${readableReason}`)

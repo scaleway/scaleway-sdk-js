@@ -34,16 +34,16 @@ export interface TooManyRequestsErrorOptions {
 const buildMessage = (options: TooManyRequestsErrorOptions): string => {
   const { helpMessage, limit, resetSeconds, resetAt } = options
   const details: string[] = []
-  if (limit) {
-    if (limit.windowSeconds) {
+  if (limit !== undefined) {
+    if (limit.windowSeconds !== undefined) {
       details.push(`quota is ${limit.quota} for ${limit.windowSeconds}s`)
     } else {
       details.push(`quota is ${limit.quota}`)
     }
   }
-  if (resetSeconds) {
+  if (resetSeconds !== undefined) {
     details.push(`resets in ${resetSeconds}s`)
-  } else if (resetAt) {
+  } else if (resetAt !== undefined) {
     details.push(`resets at ${resetAt.toISOString()}`)
   }
 

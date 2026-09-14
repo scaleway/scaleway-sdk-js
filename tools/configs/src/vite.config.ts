@@ -31,7 +31,7 @@ const external = (id: string) => {
   const isExternal = externalPkgs.some(match)
   const isBundled = pkg.bundleDependencies?.some(match) // alias of bundledDependencies package.json field array
 
-  return isExternal && !isBundled
+  return isExternal && isBundled !== true
 }
 
 export const defaultConfig: UserConfig = {

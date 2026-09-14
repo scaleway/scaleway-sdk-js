@@ -69,7 +69,7 @@ function parseReleaseArgs(): ReleaseOptions | null {
   }
   if (values['gh-release']) {
     const ghToken = process.env['GH_TOKEN'] ?? process.env['GITHUB_TOKEN']
-    if (!ghToken) {
+    if (ghToken === undefined) {
       throw new Error('GH_TOKEN environment variable is required for creating GitHub releases')
     }
   }
@@ -86,7 +86,7 @@ function parseReleaseArgs(): ReleaseOptions | null {
 function gatherAffectedPackages(root: string, dryRun: boolean): { affected: WorkspacePackage[]; range: string } {
   const packages = listWorkspacePackages(root)
   const lastSha = exec(`git log --grep="^${RELEASE_SUBJECT}" -1 --format="%H"`, { cwd: root }) || null
-  const range = lastSha ? `${lastSha}..HEAD` : 'HEAD~50..HEAD'
+  const range = lastSha !== null ? `${lastSha}..HEAD` : 'HEAD~50..HEAD'
   const changedFiles = exec(`git diff --name-only ${range}`, { cwd: root }).split('\n').filter(Boolean)
   const affected = packages.filter(pkg => !pkg.private && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)))
   logger(`[release] ${affected.length} packages to bump (dryRun=${dryRun})`)
@@ -99,7 +99,7 @@ function gatherAffectedPackages(root: string, dryRun: boolean): { affected: Work
 function writeNpmrcAuth(root: string, registry: string): void {
   const user = process.env['NPM_REGISTRY_USER']
   const passwd = process.env['NPM_REGISTRY_PASSWD']
-  if (!user || !passwd) {
+  if (user === undefined || passwd === undefined) {
     return
   }
   const host = registry.replace(/^https?:\/\//, '')
@@ -112,10 +112,10 @@ function publishPackages(root: string, options: ReleaseOptions): void {
   if (options.skipPublish) {
     return
   }
-  if (options.registry) {
+  if (options.registry !== undefined) {
     writeNpmrcAuth(root, options.registry)
   }
-  const flag = options.registry ? ` --registry ${options.registry}` : ''
+  const flag = options.registry !== undefined ? ` --registry ${options.registry}` : ''
   exec(`pnpm publish -r --no-git-checks --access public${flag}`, { cwd: root, stdio: 'inherit' })
   logger('[release] published')
 }
@@ -176,7 +176,7 @@ function main() {
   logger('[release] done.')
 }
 
-if (process.argv[1] && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))) {
+if (process.argv[1] !== undefined && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))) {
   try {
     main()
   } catch (error) {

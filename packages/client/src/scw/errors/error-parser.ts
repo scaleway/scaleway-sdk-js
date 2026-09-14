@@ -43,7 +43,7 @@ const unmarshalStandardError = (type: string, status: number, body: Readonly<JSO
   }
 
   const error = errorByType[type]
-  return error ? error.fromJSON(status, body) : null
+  return error !== undefined ? error.fromJSON(status, body) : null
 }
 
 /**

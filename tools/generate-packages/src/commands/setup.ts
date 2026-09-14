@@ -31,7 +31,7 @@ function walkHasGenFiles(root: string): boolean {
   const stack = [root]
   while (stack.length > 0) {
     const p = stack.pop()
-    if (!p) {
+    if (p === undefined) {
       break
     }
     const st = statSync(p)
@@ -83,7 +83,7 @@ function addProductsToSdk(sdkPkgPath: string, newProducts: { name: string }[], s
   sdkPkg.dependencies = sdkPkg.dependencies ?? {}
   for (const p of newProducts) {
     const pkgName = `${scope}/sdk-${snakeToSlug(p.name)}`
-    if (!sdkPkg.dependencies[pkgName]) {
+    if (sdkPkg.dependencies[pkgName] === undefined) {
       sdkPkg.dependencies[pkgName] = 'workspace:*'
       console.log(`  ✅ ${pkgName}`)
     }

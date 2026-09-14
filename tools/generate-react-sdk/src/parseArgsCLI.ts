@@ -13,12 +13,12 @@ function parseSingleArg(arg: string, nextArg: string | undefined): ParsedArg | n
   let value: string | boolean = parts.length > 1 ? (parts[1] as string) : true
   let consumedNext = false
 
-  if (value === true && nextArg && !nextArg.startsWith('--')) {
+  if (value === true && nextArg !== undefined && !nextArg.startsWith('--')) {
     value = nextArg
     consumedNext = true
   }
 
-  return key ? { key, value, consumedNext } : null
+  return key !== undefined ? { key, value, consumedNext } : null
 }
 
 function applyParsedArg(
@@ -26,7 +26,7 @@ function applyParsedArg(
   requiresValueArgs: string[] | undefined,
   cliArgs: Record<string, string | boolean>,
 ): void {
-  if (requiresValueArgs?.includes(parsed.key) && (parsed.value === true || parsed.value === undefined)) {
+  if (requiresValueArgs?.includes(parsed.key) === true && (parsed.value === true || parsed.value === undefined)) {
     console.log(`⚠️  Warning: --${parsed.key} requires a value, using default`)
   } else {
     cliArgs[parsed.key] = parsed.value
@@ -40,7 +40,7 @@ export const parseArgsCLI = <T extends string[]>({ requiresValueArgs }: { requir
   for (let i = 0; i < args.length; i++) {
     const arg = args[i]
     const nextArg = i + 1 < args.length ? args[i + 1] : undefined
-    const parsed = arg?.startsWith('--') ? parseSingleArg(arg, nextArg) : null
+    const parsed = arg?.startsWith('--') === true ? parseSingleArg(arg, nextArg) : null
     if (!parsed) {
       continue
     }

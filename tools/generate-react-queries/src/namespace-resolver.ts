@@ -73,7 +73,7 @@ async function registerVersionNamespaces(
       service.methods.flatMap(method => [method.returnTypeNamespace, method.listItemTypeNamespace]),
     )
     for (const nsPath of nsPaths) {
-      if (nsPath) {
+      if (nsPath !== undefined) {
         registerNsPath(nsPath, ownPathPrefix, { packageName, ns, resolver })
       }
     }
@@ -153,10 +153,10 @@ function deriveFromNamespacePath(nsPath: string): ResolvedNamespace | undefined 
   }
 
   const { scope, slug, version } = match?.groups ?? {} // e.g. "@scaleway-internal", "rdb-admin", "v1"
-  if (!slug) {
+  if (slug === undefined) {
     return undefined
   }
-  if (!version) {
+  if (version === undefined) {
     return undefined
   }
 
@@ -191,7 +191,7 @@ export function resolveTypeNamespace(
 ): ResolvedNamespace {
   // Only resolve values that look like package paths (e.g. '@scaleway-internal/sdk-rdb/v1').
   // Some metadata entries contain the type name itself instead of a package path.
-  if (!typeNamespace || !typeNamespace.startsWith('@')) {
+  if (typeNamespace === undefined || !typeNamespace.startsWith('@')) {
     return { packageName: fallbackPackageName, ns: fallbackNs }
   }
 

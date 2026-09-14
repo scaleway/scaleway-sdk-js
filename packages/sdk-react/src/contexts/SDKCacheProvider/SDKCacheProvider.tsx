@@ -48,7 +48,7 @@ export const SDKCacheProvider = ({
 
   // reset cache
   useEffect(() => {
-    if (client) {
+    if (client !== undefined) {
       setSdkCache(null)
     }
   }, [client])

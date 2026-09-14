@@ -105,11 +105,12 @@ async function processVersion(
     stdout.write(`⚠️  Skipping ${packageName}/${version}: no queriesMetadata found\n`)
     return null
   }
-  const namespace = metadata.folderName || metadata.namespace
+  const namespace =
+    metadata.folderName !== undefined && metadata.folderName !== '' ? metadata.folderName : metadata.namespace
   const apis = metadata.services
     .filter((service: { apiClass: string }) => !servicesToSkip.has(service.apiClass))
     .map((service: { apiClass: string }) => service.apiClass)
-    .filter((apiClass: string) => apiClass && apiClass.length > 0)
+    .filter((apiClass: string) => apiClass !== undefined && apiClass.length > 0)
   return apis.length > 0 ? { [namespace]: { packageName, apis } } : null
 }
 

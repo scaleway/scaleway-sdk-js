@@ -4,7 +4,7 @@ import { createClient } from '../client.js'
 
 class CustomAPI extends API {
   getBaseURL = (): string => {
-    if (!this.client.settings.apiURL) {
+    if (this.client.settings.apiURL === undefined) {
       throw new Error('API URL is missing')
     }
 

@@ -109,7 +109,7 @@ export const tryAtIntervals = async <T>(
   const timeoutTimestamp = Date.now() + timeout * 1000
   let retryCount = 0
   while (Date.now() <= timeoutTimestamp) {
-    if (signal?.aborted) {
+    if (signal?.aborted === true) {
       throw new AbortError()
     }
     retryCount += 1
@@ -122,7 +122,7 @@ export const tryAtIntervals = async <T>(
     await sleep(delay)
     // Retry
     const { value, done } = await retry()
-    if (done) {
+    if (done === true) {
       return value
     }
   }

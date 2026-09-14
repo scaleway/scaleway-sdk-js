@@ -141,7 +141,7 @@ function collectAllHookImports(
   if (!n.rawTypes.has(method.returnType)) {
     nsImports.set(n.returnNsInfo.packageName, n.returnNsInfo)
   }
-  if (rawItemType && !n.rawTypes.has(rawItemType)) {
+  if (rawItemType !== undefined && !n.rawTypes.has(rawItemType)) {
     nsImports.set(itemNsInfo.packageName, itemNsInfo)
   }
   return nsImports
@@ -164,7 +164,7 @@ export function generateAllQueryHook(
   })
 
   const rawItemType = method.listItemType
-  const itemType = rawItemType ? nsType(itemNsInfo.ns, rawItemType, n.rawTypes) : n.returnType
+  const itemType = rawItemType !== undefined ? nsType(itemNsInfo.ns, rawItemType, n.rawTypes) : n.returnType
 
   const nsImports = collectAllHookImports(n, method, { sdkPackageName, itemNsInfo, rawItemType })
 
@@ -282,7 +282,7 @@ function collectMethodExports(
   if (method.isList) {
     exports.push(...collectListExports(method, serviceName, { config, baseName }))
   }
-  if (method.hasWaiter && !config.filters.skipWaiters) {
+  if (method.hasWaiter === true && !config.filters.skipWaiters) {
     const waiterName = `${config.naming.waiterPrefix}${capitalize(method.methodName.replace(/^get/, ''))}`
     exports.push(
       `export { ${config.naming.hookPrefix}${serviceName}${waiterName}Query } from "./${config.naming.hookPrefix}${serviceName}${waiterName}Query"`,

@@ -108,7 +108,7 @@ function writeMethodHooks(
     writeListMethodHooks(method, service, { metadata, ctx, packageName, generatedDir, folderName })
   }
 
-  if (method.hasWaiter && !ctx.config.filters.skipWaiters) {
+  if (method.hasWaiter === true && !ctx.config.filters.skipWaiters) {
     writeWaiterHook(method, service, { metadata, ctx, packageName, generatedDir, folderName })
   }
 }
@@ -149,7 +149,7 @@ async function processVersionCore(
   ctx: GenerationContext,
 ): Promise<void> {
   const metadata = await loadMetadata(pkgDir, version, ctx.metadataFileName)
-  if (!metadata?.services) {
+  if (metadata?.services === undefined) {
     console.warn(`    ⚠️  Invalid metadata for ${packageName}/${version}, skipping`)
     return
   }

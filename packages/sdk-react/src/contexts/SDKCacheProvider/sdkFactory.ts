@@ -11,7 +11,7 @@ export const createSDKFactory =
     const { sdkCache, setSdkInstance } = useSDKCache()
 
     // Check if we already have this SDK instance cached
-    if (sdkCache?.[cacheKey]) {
+    if (sdkCache?.[cacheKey] !== undefined) {
       return { [cacheKey]: sdkCache[cacheKey] } as { [P in K]: APISdkCache[P] }
     }
 
@@ -43,7 +43,7 @@ export const createGenericSDKFactory =
     const { sdkCache, setSdkInstance } = useSDKCache<TCustomAPIs>()
 
     // Check if we already have this SDK instance cached
-    if (sdkCache?.[cacheKey]) {
+    if (sdkCache?.[cacheKey] !== undefined) {
       return { [cacheKey]: sdkCache[cacheKey] } as {
         [P in K]: ExtendedAPISdkCache<TCustomAPIs>[P]
       }

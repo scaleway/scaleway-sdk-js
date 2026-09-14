@@ -50,7 +50,7 @@ function tryReadPackageDir(dirPath: string, packages: Map<string, string>): void
   }
   try {
     const pkgJson: unknown = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
-    if (isPackageJsonWithName(pkgJson) && pkgJson.name) {
+    if (isPackageJsonWithName(pkgJson) && pkgJson.name !== undefined) {
       packages.set(pkgJson.name, dirPath)
     }
   } catch {
@@ -133,7 +133,7 @@ function discoverFromDependencies(packageNameFilter: string): Map<string, string
 
   for (const name of sdkPackageNames) {
     const pkgDir = resolvePackageDir(name)
-    if (pkgDir) {
+    if (pkgDir !== undefined) {
       packages.set(name, pkgDir)
     }
   }
@@ -165,7 +165,7 @@ export function discoverVersions(pkgDir: string, metadataFileName: string): stri
  * Utils methods are merged into matching services by apiClass to avoid duplicate services.
  */
 function mergeUtilsServices(metadata: QueriesMetadata, utilsMetadata: QueriesMetadata): void {
-  if (!utilsMetadata?.services) {
+  if (utilsMetadata?.services === undefined) {
     return
   }
   for (const utilsService of utilsMetadata.services) {
@@ -216,7 +216,7 @@ export async function loadMetadata(
 }
 
 export function discoverSdkPackages(config: ReactQueriesConfig): Map<string, string> {
-  if (config.packagesPath) {
+  if (config.packagesPath !== undefined) {
     return discoverFromDirectory(config.packagesPath)
   }
   return discoverFromDependencies(config.imports.packageNameFilter)

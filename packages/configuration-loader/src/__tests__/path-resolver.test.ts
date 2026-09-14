@@ -11,7 +11,7 @@ const updateEnv = (key: string, value: string): string | undefined => {
 }
 
 const setOrDeleteEnv = (key: string, value?: string): void => {
-  if (value) {
+  if (value !== undefined) {
     env[key] = value
   } else {
     delete env[key]
