@@ -40,7 +40,7 @@
     "oxfmt": "0.66.0",
     "oxlint": "1.81.0",
     "oxlint-tsgolint": "7.0.2001",
-    "react": "^19.2.8",
+    "react": "^19.3.0",
     "read-pkg": "10.1.0",
     "shx": "0.4.0",
     "tinyglobby": "0.2.17",
