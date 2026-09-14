@@ -5,7 +5,7 @@ import type { LogLevel } from './level-resolver.js'
  *
  * @public
  */
-export interface Logger {
+export type Logger = {
   readonly logLevel: LogLevel
   debug: (message: string) => void
   info: (message: string) => void

@@ -16,14 +16,22 @@ const unmarshalJSON = (obj: unknown) => {
   return obj
 }
 
-const makeResponse = (value: unknown, status = 200, contentType: string | undefined = undefined) =>
+const makeResponse = ({
+  value,
+  status,
+  contentType,
+}: {
+  value: unknown
+  status: number
+  contentType: string | undefined
+}) =>
   new Response(value !== null ? new Uint8Array(convertObjToBuffer(value)) : value, {
     headers: contentType ? { 'Content-Type': contentType } : undefined,
     status,
   })
 
 const makeJSONResponse = (value: JSONObject | null = SIMPLE_REQ_BODY, status = 200) =>
-  makeResponse(value, status, 'application/json')
+  makeResponse({ value, status, contentType: 'application/json' })
 
 const makeTextResponse = (value: string, status = 200) =>
   new Response(value, {
@@ -80,7 +88,7 @@ describe(`responseParser`, () => {
 
   it(`triggers an error for unsuccessful unmarshalling`, async () => {
     const validResponse = makeJSONResponse()
-    const emptyContentTypeResponse = makeResponse('some-text', 200, '')
+    const emptyContentTypeResponse = makeResponse({ value: 'some-text', status: 200, contentType: '' })
 
     await expect(
       responseParser(() => {

@@ -6,7 +6,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface TransientStateErrorOptions {
+export type TransientStateErrorOptions = {
   resource: string
   resourceId: string
   currentState: string

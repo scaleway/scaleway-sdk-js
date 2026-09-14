@@ -6,7 +6,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface DeniedAuthenticationErrorOptions {
+export type DeniedAuthenticationErrorOptions = {
   method: string
   reason: string
 }

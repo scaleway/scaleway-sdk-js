@@ -25,7 +25,7 @@
  *
  * @public
  */
-export interface RequestInterceptor {
+export type RequestInterceptor = {
   ({ request }: { request: Readonly<Request> }): Request | Promise<Request>
 }
 
@@ -44,7 +44,7 @@ export interface RequestInterceptor {
  *
  * @public
  */
-export interface ResponseInterceptor {
+export type ResponseInterceptor = {
   ({ response }: { response: Readonly<Response> }): Response | Promise<Response>
 }
 
@@ -75,7 +75,7 @@ export interface ResponseInterceptor {
  *
  * @public
  */
-export interface ResponseErrorInterceptor {
+export type ResponseErrorInterceptor = {
   ({ request, error }: { request: Request; error: unknown }): unknown
 }
 
@@ -86,7 +86,7 @@ export interface ResponseErrorInterceptor {
  *
  * @public
  */
-export interface NetworkInterceptors {
+export type NetworkInterceptors = {
   request?: RequestInterceptor
   response?: ResponseInterceptor
   responseError?: ResponseErrorInterceptor

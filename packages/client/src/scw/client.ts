@@ -18,7 +18,7 @@ const DEFAULT_SETTINGS: Settings = {
 /**
  * Scaleway client.
  */
-export interface Client {
+export type Client = {
   fetch: Fetcher
   settings: Settings
 }

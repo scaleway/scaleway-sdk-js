@@ -5,7 +5,7 @@
  *
  * @internal
  */
-export interface ServiceInfo {
+export type ServiceInfo = {
   /** Name of the API */
   name: string
   /** Human readable description for the API. */
@@ -19,7 +19,7 @@ export interface ServiceInfo {
 /**
  * Represents an amount of money with its currency type.
  */
-export interface Money {
+export type Money = {
   /** 3-letter currency code defined in ISO 4217. */
   currencyCode: string
   /**
@@ -41,7 +41,7 @@ export interface Money {
 }
 
 /** Represents a point in a TimeSeries. */
-export interface TimeSeriesPoint {
+export type TimeSeriesPoint = {
   /** Date of the point. */
   timestamp?: Date
   /** Value of the point. */
@@ -49,7 +49,7 @@ export interface TimeSeriesPoint {
 }
 
 /** Represents a time series that could be used for graph purposes. */
-export interface TimeSeries {
+export type TimeSeries = {
   /** Name of the metric. */
   name: string
   /** Points contains all the points that composed the series. */
@@ -59,7 +59,7 @@ export interface TimeSeries {
 }
 
 /** Represents a Scaleway file. */
-export interface ScwFile {
+export type ScwFile = {
   /** Name of the file. */
   name: string
   /** Content-type of the file. */

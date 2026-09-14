@@ -6,7 +6,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface ResourceExpiredErrorOptions {
+export type ResourceExpiredErrorOptions = {
   resource: string
   resourceId: string
   expiredSince: Date

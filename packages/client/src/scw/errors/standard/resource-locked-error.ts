@@ -6,7 +6,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface ResourceLockedErrorOptions {
+export type ResourceLockedErrorOptions = {
   resource: string
   resourceId: string
 }

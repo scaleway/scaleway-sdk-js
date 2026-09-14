@@ -6,7 +6,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface AlreadyExistsErrorOptions {
+export type AlreadyExistsErrorOptions = {
   resource: string
   resourceId: string
   helpMessage: string

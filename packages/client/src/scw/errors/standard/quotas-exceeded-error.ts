@@ -7,7 +7,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface QuotasExceededErrorScope {
+export type QuotasExceededErrorScope = {
   kind: 'organization' | 'project'
   id: string
 }
@@ -17,7 +17,7 @@ export interface QuotasExceededErrorScope {
  *
  * @public
  */
-export interface QuotasExceededErrorDetails {
+export type QuotasExceededErrorDetails = {
   readonly resource: string
   readonly quota: number
   readonly current: number
@@ -42,10 +42,10 @@ const buildMessage = (list: QuotasExceededErrorDetails[]): string =>
     .join('; ')}`
 
 const buildScope = (detail: JSONObject): QuotasExceededErrorScope | undefined => {
-  if (typeof detail.organization_id === 'string' && detail.organization_id.length) {
+  if (typeof detail.organization_id === 'string' && detail.organization_id.length > 0) {
     return { id: detail.organization_id, kind: 'organization' }
   }
-  if (typeof detail.project_id === 'string' && detail.project_id.length) {
+  if (typeof detail.project_id === 'string' && detail.project_id.length > 0) {
     return { id: detail.project_id, kind: 'project' }
   }
 

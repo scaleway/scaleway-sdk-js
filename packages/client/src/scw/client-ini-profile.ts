@@ -6,7 +6,7 @@ import type { Region, Zone } from './locality.js'
  *
  * @public
  */
-export interface AuthenticationSecrets {
+export type AuthenticationSecrets = {
   /**
    * You need an access key and a secret key to connect to Scaleway API.
    * Generate your access key at the following address: {@link https://console.scaleway.com/project/credentials}.
@@ -25,7 +25,7 @@ export interface AuthenticationSecrets {
  *
  * @public
  */
-export interface ProfileDefaultValues {
+export type ProfileDefaultValues = {
   /**
    * APIURL overrides the API URL of the Scaleway API to the given URL.
    * Change that if you want to direct requests to a different endpoint.

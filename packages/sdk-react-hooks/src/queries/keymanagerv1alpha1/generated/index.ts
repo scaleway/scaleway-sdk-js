@@ -5,5 +5,8 @@ export { useKeyManagerv1alpha1APIGetPublicKeyQuery } from "./useKeyManagerv1alph
 export { useKeyManagerv1alpha1APIListKeysQuery } from "./useKeyManagerv1alpha1APIListKeysQuery"
 export { useKeyManagerv1alpha1APIListKeysInfiniteQuery } from "./useKeyManagerv1alpha1APIListKeysInfiniteQuery"
 export { useKeyManagerv1alpha1APIListKeysAllQuery } from "./useKeyManagerv1alpha1APIListKeysAllQuery"
+export { useKeyManagerv1alpha1APIListKeyRotationsQuery } from "./useKeyManagerv1alpha1APIListKeyRotationsQuery"
+export { useKeyManagerv1alpha1APIListKeyRotationsInfiniteQuery } from "./useKeyManagerv1alpha1APIListKeyRotationsInfiniteQuery"
+export { useKeyManagerv1alpha1APIListKeyRotationsAllQuery } from "./useKeyManagerv1alpha1APIListKeyRotationsAllQuery"
 export { useKeyManagerv1alpha1APIListAlgorithmsQuery } from "./useKeyManagerv1alpha1APIListAlgorithmsQuery"
 export { useKeyManagerv1alpha1APIReload } from "./useKeyManagerv1alpha1APIReload"

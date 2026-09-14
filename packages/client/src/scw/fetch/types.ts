@@ -1,5 +1,5 @@
 /** Scaleway Request. */
-export interface ScwRequest {
+export type ScwRequest = {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
   path: string
   headers?: Record<string, string>

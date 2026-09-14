@@ -1,7 +1,7 @@
 // oxlint-disable-next-line typescript/consistent-indexed-object-style -- recursive type cannot use Record<string, JSON> (TS2456 circular reference)
 export type JSON = string | number | boolean | null | JSON[] | { [key: string]: JSON }
 
-export interface JSONObject {
+export type JSONObject = {
   // oxlint-disable-next-line typescript/consistent-indexed-object-style -- recursive type cannot use Record<string, JSON> (TS2456 circular reference)
   [key: string]: JSON
 }

@@ -47,24 +47,19 @@ const getGeneratedPackages = (dir: string, excludeSuffix?: string): PackageJSON[
  */
 function rebuildDeps(
   sdkPkg: PackageJSON,
-  depType: string,
+  depType: 'dependencies' | 'peerDependencies' | 'devDependencies',
   options: { config: Config; validPackages: PackageJSON[] },
 ): void {
   const { config, validPackages } = options
-  const field =
-    depType === 'dependencies'
-      ? 'dependencies'
-      : depType === 'peerDependencies'
-        ? 'peerDependencies'
-        : 'devDependencies'
-  const existing = sdkPkg[field] ?? {}
+
+  const existing = sdkPkg[depType] ?? {}
   const kept = Object.fromEntries(
     Object.entries(existing).filter(([name]) => !name.startsWith(config.sdkPackagePrefix)),
   )
   const added = Object.fromEntries(
     validPackages.length > 0 ? validPackages.map(p => [p.name, 'workspace:*' as const]) : [],
   )
-  sdkPkg[field] = { ...kept, ...added }
+  sdkPkg[depType] = { ...kept, ...added }
 }
 
 function rebuildAllDeps(

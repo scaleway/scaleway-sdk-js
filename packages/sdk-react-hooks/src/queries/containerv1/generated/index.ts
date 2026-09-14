@@ -8,6 +8,7 @@ export { useContainerv1APIGetContainerQuery } from "./useContainerv1APIGetContai
 export { useContainerv1APIListContainersQuery } from "./useContainerv1APIListContainersQuery"
 export { useContainerv1APIListContainersInfiniteQuery } from "./useContainerv1APIListContainersInfiniteQuery"
 export { useContainerv1APIListContainersAllQuery } from "./useContainerv1APIListContainersAllQuery"
+export { useContainerv1APIGetPrivateEndpointCertificateAuthorityQuery } from "./useContainerv1APIGetPrivateEndpointCertificateAuthorityQuery"
 export { useContainerv1APIGetDomainQuery } from "./useContainerv1APIGetDomainQuery"
 export { useContainerv1APIListDomainsQuery } from "./useContainerv1APIListDomainsQuery"
 export { useContainerv1APIListDomainsInfiniteQuery } from "./useContainerv1APIListDomainsInfiniteQuery"
