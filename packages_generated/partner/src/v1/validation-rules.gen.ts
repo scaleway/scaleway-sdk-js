@@ -18,9 +18,6 @@ export const CreateOrganizationRequest = {
     maxLength: 256,
     minLength: 2,
   },
-  sirenNumber: {
-    pattern: /^[0-9]{9}$/,
-  },
 }
 
 export const ListOrganizationsRequest = {

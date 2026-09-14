@@ -32,7 +32,6 @@ export const unmarshalOrganization = (data: unknown): Organization => {
     ownerLastname: data.owner_lastname,
     phoneNumber: data.phone_number,
     pictureLink: data.picture_link,
-    sirenNumber: data.siren_number,
     status: data.status,
   } as Organization
 }
@@ -61,7 +60,6 @@ export const marshalCreateOrganizationRequest = (
   owner_lastname: request.ownerLastname,
   partner_id: request.partnerId,
   phone_number: request.phoneNumber,
-  siren_number: request.sirenNumber,
 })
 
 export const marshalRequestAdminRoleRequest = (

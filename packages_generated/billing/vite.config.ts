@@ -1,5 +1,6 @@
 import { viteConfig } from '@repo/configs'
 import { defineConfig, mergeConfig } from 'vite'
+import type { UserConfig } from 'vite'
 
 export default mergeConfig(defineConfig(viteConfig), {
   build: {
