@@ -108,7 +108,7 @@ function writeMethodHooks(
     writeListMethodHooks(method, service, { metadata, ctx, packageName, generatedDir, folderName })
   }
 
-  if (method.hasWaiter && !ctx.config.filters.skipWaiters) {
+  if (method.hasWaiter === true && !ctx.config.filters.skipWaiters) {
     writeWaiterHook(method, service, { metadata, ctx, packageName, generatedDir, folderName })
   }
 }
@@ -150,7 +150,7 @@ async function processVersionCore(
 ): Promise<void> {
   const metadata = await loadMetadata(pkgDir, version, ctx.metadataFileName)
   // oxlint-disable-next-line typescript/no-unnecessary-condition -- metadata is typed non-null but structuredClone of malformed metadata may omit services at runtime
-  if (!metadata?.services) {
+  if (metadata?.services === undefined) {
     console.warn(`    ⚠️  Invalid metadata for ${packageName}/${version}, skipping`)
     return
   }

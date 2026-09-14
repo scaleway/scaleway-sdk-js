@@ -11,7 +11,7 @@ export const createSDKFactory =
     const { sdkCache, setSdkInstance } = useSDKCache()
 
     // Check if we already have this SDK instance cached
-    if (sdkCache?.[cacheKey]) {
+    if (sdkCache?.[cacheKey] !== undefined) {
       // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- mapped-type return keyed by K cannot be expressed without a cast
       return { [cacheKey]: sdkCache[cacheKey] } as { [P in K]: APISdkCache[P] }
     }
@@ -45,7 +45,7 @@ export const createGenericSDKFactory =
     const { sdkCache, setSdkInstance } = useSDKCache<TCustomAPIs>()
 
     // Check if we already have this SDK instance cached
-    if (sdkCache?.[cacheKey]) {
+    if (sdkCache?.[cacheKey] !== undefined) {
       // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- mapped-type return keyed by K cannot be expressed without a cast
       return { [cacheKey]: sdkCache[cacheKey] } as {
         [P in K]: ExtendedAPISdkCache<TCustomAPIs>[P]

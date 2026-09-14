@@ -25,19 +25,19 @@ export const withProfile =
   (profile: Readonly<Profile>) =>
   (settings: Readonly<Settings>): Settings => {
     const newSettings = { ...settings }
-    if (profile.apiURL) {
+    if (typeof profile.apiURL === 'string' && profile.apiURL !== '') {
       newSettings.apiURL = profile.apiURL
     }
-    if (profile.defaultOrganizationId) {
+    if (typeof profile.defaultOrganizationId === 'string' && profile.defaultOrganizationId !== '') {
       newSettings.defaultOrganizationId = profile.defaultOrganizationId
     }
-    if (profile.defaultProjectId) {
+    if (typeof profile.defaultProjectId === 'string' && profile.defaultProjectId !== '') {
       newSettings.defaultProjectId = profile.defaultProjectId
     }
-    if (profile.defaultRegion) {
+    if (typeof profile.defaultRegion === 'string' && profile.defaultRegion !== '') {
       newSettings.defaultRegion = profile.defaultRegion
     }
-    if (profile.defaultZone) {
+    if (typeof profile.defaultZone === 'string' && profile.defaultZone !== '') {
       newSettings.defaultZone = profile.defaultZone
     }
     if (hasAuthenticationSecrets(profile)) {

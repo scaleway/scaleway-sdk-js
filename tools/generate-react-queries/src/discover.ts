@@ -50,7 +50,7 @@ function tryReadPackageDir(dirPath: string, packages: Map<string, string>): void
   }
   try {
     const pkgJson: unknown = JSON.parse(readFileSync(pkgJsonPath, 'utf8'))
-    if (isPackageJsonWithName(pkgJson) && pkgJson.name) {
+    if (isPackageJsonWithName(pkgJson) && pkgJson.name !== undefined) {
       packages.set(pkgJson.name, dirPath)
     }
   } catch {
@@ -133,7 +133,7 @@ function discoverFromDependencies(packageNameFilter: string): Map<string, string
 
   for (const name of sdkPackageNames) {
     const pkgDir = resolvePackageDir(name)
-    if (pkgDir) {
+    if (pkgDir !== undefined) {
       packages.set(name, pkgDir)
     }
   }
@@ -166,7 +166,7 @@ export function discoverVersions(pkgDir: string, metadataFileName: string): stri
  */
 function mergeUtilsServices(metadata: QueriesMetadata, utilsMetadata: QueriesMetadata): void {
   // oxlint-disable-next-line typescript/no-unnecessary-condition -- utilsMetadata is typed non-null but structuredClone of malformed metadata may omit services at runtime
-  if (!utilsMetadata?.services) {
+  if (utilsMetadata?.services === undefined) {
     return
   }
   for (const utilsService of utilsMetadata.services) {
@@ -217,7 +217,7 @@ export async function loadMetadata(
 }
 
 export function discoverSdkPackages(config: ReactQueriesConfig): Map<string, string> {
-  if (config.packagesPath) {
+  if (config.packagesPath !== undefined) {
     return discoverFromDirectory(config.packagesPath)
   }
   return discoverFromDependencies(config.imports.packageNameFilter)

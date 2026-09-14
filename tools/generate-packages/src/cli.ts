@@ -29,7 +29,7 @@ const { values, positionals } = parseArgs({ options, allowPositionals: true })
 // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- CLI positional is an untyped string; narrowed to the known command union
 const command = positionals[0] as CommandName | undefined
 
-if (!command || values.help || !(command in commands)) {
+if (command === undefined || values.help === true || !(command in commands)) {
   console.log(`Usage: generate-packages <command> [options]
 
 Commands:
@@ -47,14 +47,14 @@ Options:
   --sdk <path>       SDK package.json (setup only, default from config)
   --scope <scope>    Override npm scope (default from config)
   --install=false    Skip pnpm install (setup only, default: true)`)
-  exit(command && values.help ? 0 : 1)
+  exit(command !== undefined && values.help === true ? 0 : 1)
 }
 
-const config = await loadConfig(values.config ? String(values.config) : undefined)
+const config = await loadConfig(values.config !== undefined ? String(values.config) : undefined)
 const src = path.resolve(cwd(), String(values.src))
 const dryRun = Boolean(values['dry-run'])
-const verbose = values.quiet ? false : Boolean(values.verbose)
-const scope = values.scope ? String(values.scope) : config.scope
+const verbose = values.quiet === true ? false : Boolean(values.verbose)
+const scope = values.scope !== undefined ? String(values.scope) : config.scope
 
 switch (command) {
   case 'packages': {

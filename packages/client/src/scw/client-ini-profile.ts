@@ -89,7 +89,12 @@ export const hasAuthenticationSecrets = (obj: Partial<AuthenticationSecrets>): o
 export function assertValidAuthenticationSecrets(
   obj: Partial<AuthenticationSecrets>,
 ): asserts obj is AuthenticationSecrets {
-  if (!(obj.accessKey && obj.secretKey)) {
+  if (
+    typeof obj.accessKey !== 'string' ||
+    obj.accessKey === '' ||
+    typeof obj.secretKey !== 'string' ||
+    obj.secretKey === ''
+  ) {
     throw new Error(
       `Invalid secrets, accessKey & secretKey must be defined. See https://www.scaleway.com/en/docs/identity-and-access-management/iam/how-to/create-api-keys/`,
     )

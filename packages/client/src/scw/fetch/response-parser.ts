@@ -14,7 +14,7 @@ const TOTAL_COUNT_RES_KEY = 'total_count'
  */
 export const fixLegacyTotalCount = <T>(obj: T, headers: Headers): T => {
   const headerVal = headers.get(X_TOTAL_COUNT_HEADER_KEY)
-  if (!headerVal) {
+  if (headerVal === null) {
     return obj
   }
   const totalCount = Math.trunc(Number(headerVal))

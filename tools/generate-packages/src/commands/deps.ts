@@ -59,7 +59,7 @@ function collectImports(
     importRegex.lastIndex = 0
     for (let match = importRegex.exec(content); match !== null; match = importRegex.exec(content)) {
       const pkgName = match[1]?.split('/').slice(0, 2).join('/')
-      if (pkgName && pkgMap.has(pkgName) && pkgName !== currentPkgName) {
+      if (pkgName !== undefined && pkgMap.has(pkgName) && pkgName !== currentPkgName) {
         imports.add(pkgName)
       }
     }
@@ -93,7 +93,7 @@ function syncPackage(
     return false
   }
   const imports = collectImports(srcDir, importRegex, { pkgMap, currentPkgName: pkg.packageJson.name })
-  const missing = [...imports].filter(imp => !pkg.packageJson.dependencies?.[imp])
+  const missing = [...imports].filter(imp => pkg.packageJson.dependencies?.[imp] === undefined)
   if (missing.length === 0) {
     return false
   }
