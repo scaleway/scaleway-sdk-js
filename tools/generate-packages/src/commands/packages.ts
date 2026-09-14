@@ -107,7 +107,7 @@ function processProductDir(
  * @param options.src - Absolute path to the generated packages directory
  * @param options.runInstall - Run `pnpm install` + `manypkg fix` after generation (default: true)
  */
-export const packages = async ({ src: inputPathDir, runInstall = true }: PackagesOptions): Promise<void> => {
+export const packages = ({ src: inputPathDir, runInstall = true }: PackagesOptions): void => {
   const templateString = readFileSync(TEMPLATES.PACKAGE_JSON, 'utf8')
   const metadataTsTemplateString = readFileSync(TEMPLATES.METADATA_TS, 'utf8')
 

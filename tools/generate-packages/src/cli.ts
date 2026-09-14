@@ -57,16 +57,16 @@ const scope = values.scope ? String(values.scope) : config.scope
 
 switch (command) {
   case 'packages':
-    await packages({ src, runInstall: true })
+    packages({ src, runInstall: true })
     break
   case 'sdk':
-    await sdk({ src, config, runInstall: true })
+    sdk({ src, config, runInstall: true })
     break
   case 'deps':
-    await deps({ src, config, dryRun })
+    deps({ src, config, dryRun })
     break
   case 'setup':
-    await setup({
+    setup({
       src,
       config,
       sdk: resolve(cwd(), String(values.sdk)),
