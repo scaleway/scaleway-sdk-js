@@ -145,6 +145,10 @@ export interface Connection {
    */
   id: string
   /**
+   * The SRN of the connection.
+   */
+  srn: string
+  /**
    * Project ID.
    */
   projectId: string
@@ -287,6 +291,10 @@ export interface CustomerGateway {
    */
   id: string
   /**
+   * The SRN of the customer gateway.
+   */
+  srn: string
+  /**
    * Project ID.
    */
   projectId: string
@@ -338,6 +346,10 @@ export interface RoutingPolicy {
    * Unique identifier of the routing policy.
    */
   id: string
+  /**
+   * The SRN of the routing policy.
+   */
+  srn: string
   /**
    * Project ID.
    */
@@ -399,6 +411,10 @@ export interface VpnGateway {
    */
   id: string
   /**
+   * The SRN of the VPN gateway.
+   */
+  srn: string
+  /**
    * Project ID.
    */
   projectId: string
@@ -437,14 +453,14 @@ export interface VpnGateway {
    */
   publicConfig?: VpnGatewayPublicConfig
   /**
-   * ID of the Private Network attached to the VPN gateway.
-   */
-  privateNetworkId: string
-  /**
    *
    * One-of ('endpoint'): at most one of 'publicConfig', 'privateConfig' could be set.
    */
   privateConfig?: VpnGatewayPrivateConfig
+  /**
+   * ID of the Private Network attached to the VPN gateway.
+   */
+  privateNetworkId: string
   /**
    * ID of the IPAM private IPv4 address attached to the VPN gateway.
    */

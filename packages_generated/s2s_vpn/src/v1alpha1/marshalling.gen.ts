@@ -96,6 +96,7 @@ export const unmarshalConnection = (data: unknown): Connection => {
     routePropagationEnabled: data.route_propagation_enabled,
     secretId: data.secret_id,
     secretRevision: data.secret_revision,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     tunnelStatus: data.tunnel_status,
@@ -124,6 +125,7 @@ export const unmarshalCustomerGateway = (data: unknown): CustomerGateway => {
     publicIpv4: data.public_ipv4,
     publicIpv6: data.public_ipv6,
     region: data.region,
+    srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as CustomerGateway
@@ -146,6 +148,7 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
     prefixFilterOut: data.prefix_filter_out,
     projectId: data.project_id,
     region: data.region,
+    srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as RoutingPolicy
@@ -197,6 +200,7 @@ export const unmarshalVpnGateway = (data: unknown): VpnGateway => {
     projectId: data.project_id,
     publicConfig: data.public_config ? unmarshalVpnGatewayPublicConfig(data.public_config) : undefined,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),

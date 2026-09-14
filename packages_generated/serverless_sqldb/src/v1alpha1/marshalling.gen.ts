@@ -34,6 +34,7 @@ export const unmarshalDatabaseBackup = (data: unknown): DatabaseBackup => {
     projectId: data.project_id,
     region: data.region,
     size: data.size,
+    srn: data.srn,
     status: data.status,
   } as DatabaseBackup
 }
@@ -49,6 +50,7 @@ const unmarshalVersion = (data: unknown): Version => {
     endOfLifeAt: unmarshalDate(data.end_of_life_at),
     name: data.name,
     region: data.region,
+    srn: data.srn,
   } as Version
 }
 
@@ -71,6 +73,7 @@ export const unmarshalDatabase = (data: unknown): Database => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     region: data.region,
+    srn: data.srn,
     started: data.started,
     status: data.status,
     version: data.version ? unmarshalVersion(data.version) : undefined,

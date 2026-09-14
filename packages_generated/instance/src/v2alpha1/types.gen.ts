@@ -453,6 +453,10 @@ export interface SecurityGroup {
    */
   id: string
   /**
+   * The SRN of the security group.
+   */
+  srn: string
+  /**
    * Name of the security group.
    */
   name: string
@@ -549,6 +553,10 @@ export interface PlacementGroup {
    */
   id: string
   /**
+   * The SRN of the placement group.
+   */
+  srn: string
+  /**
    * Placement group Project ID.
    */
   projectId: string
@@ -584,6 +592,10 @@ export interface PrivateNetworkInterfaceSummary {
    * Unique ID of the private network interface.
    */
   id: string
+  /**
+   * The SRN of the private network interface.
+   */
+  srn: string
   /**
    * ID of the Private Network this interface is attached to.
    */
@@ -632,6 +644,10 @@ export interface SecurityGroupSummary {
    * Unique ID of the security group.
    */
   id: string
+  /**
+   * The SRN of the security group.
+   */
+  srn: string
   /**
    * Name of the security group.
    */
@@ -729,6 +745,10 @@ export interface ServerSummary {
    */
   id: string
   /**
+   * The SRN of the server.
+   */
+  srn: string
+  /**
    * Name of the server.
    */
   name: string
@@ -780,6 +800,10 @@ export interface Snapshot {
    * Unique ID of the snapshot.
    */
   id: string
+  /**
+   * The SRN of the snapshot.
+   */
+  srn: string
   /**
    * Project ID of the snapshot.
    */
@@ -836,6 +860,10 @@ export interface TemplateSummary {
    * Unique ID of the template.
    */
   id: string
+  /**
+   * The SRN of the template.
+   */
+  srn: string
   /**
    * Name of the template.
    */
@@ -908,6 +936,10 @@ export interface Volume {
    * Unique ID of the volume.
    */
   id: string
+  /**
+   * The SRN of the volume.
+   */
+  srn: string
   /**
    * Project ID to which the volume belongs.
    */
@@ -2162,6 +2194,10 @@ export interface PrivateNetworkInterface {
    */
   id: string
   /**
+   * The SRN of the private network interface.
+   */
+  srn: string
+  /**
    * ID of the Private Network this interface is attached to.
    */
   privateNetworkId: string
@@ -2285,6 +2321,10 @@ export interface Server {
    * Unique ID of the server.
    */
   id: string
+  /**
+   * The SRN of the server.
+   */
+  srn: string
   /**
    * Name of the server.
    */
@@ -2545,6 +2585,10 @@ export interface Template {
    * Unique ID of the template.
    */
   id: string
+  /**
+   * The SRN of the template.
+   */
+  srn: string
   /**
    * Name of the template.
    */

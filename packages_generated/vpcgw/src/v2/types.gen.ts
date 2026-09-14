@@ -64,6 +64,10 @@ export interface GatewayNetwork {
    */
   id: string
   /**
+   * The SRN of the gateway network.
+   */
+  srn: string
+  /**
    * Connection creation date.
    */
   createdAt?: Date
@@ -111,6 +115,10 @@ export interface IP {
    * IP address ID.
    */
   id: string
+  /**
+   * The SRN of the ip.
+   */
+  srn: string
   /**
    * Owning Organization.
    */
@@ -171,6 +179,10 @@ export interface Gateway {
    * ID of the gateway.
    */
   id: string
+  /**
+   * The SRN of the gateway.
+   */
+  srn: string
   /**
    * Owning Organization.
    */
@@ -255,6 +267,10 @@ export interface PatRule {
    * PAT rule ID.
    */
   id: string
+  /**
+   * The SRN of the PAT rule.
+   */
+  srn: string
   /**
    * Gateway the PAT rule applies to.
    */
