@@ -49,11 +49,14 @@ export function* createFixedIntervalStrategy(interval: number): IntervalStrategy
  * @internal
  */
 export function* createFibonacciIntervalStrategy(base = 1, factor = 1): IntervalStrategy {
-  let [prev, current] = [0, 1]
+  let prev = 0
+  let current = 1
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
     yield current * base
-    ;[prev, current] = [current, prev + current * factor]
+    const nextPrev = current
+    current = prev + current * factor
+    prev = nextPrev
   }
 }
 

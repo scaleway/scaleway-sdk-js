@@ -56,8 +56,7 @@ function collectImports(
   for (const file of getAllGenTsFiles(srcDir)) {
     const content = readFileSync(file, 'utf8')
     importRegex.lastIndex = 0
-    let match: RegExpExecArray | null = null
-    while ((match = importRegex.exec(content)) !== null) {
+    for (let match = importRegex.exec(content); match !== null; match = importRegex.exec(content)) {
       const pkgName = match[1]?.split('/').slice(0, 2).join('/')
       if (pkgName && pkgMap.has(pkgName) && pkgName !== currentPkgName) {
         imports.add(pkgName)

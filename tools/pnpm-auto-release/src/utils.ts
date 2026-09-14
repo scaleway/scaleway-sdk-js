@@ -49,15 +49,14 @@ export const listWorkspacePackages = (root: string) => {
 }
 
 function tagExists(root: string, tag: string): boolean {
-  let localExists: boolean
   try {
     exec(`git rev-parse -q --verify refs/tags/${tag}`, { cwd: root })
-    localExists = true
+    return true
   } catch {
-    localExists = false
+    // local tag does not exist, fall through to remote check
   }
   const remoteExists = exec(`git ls-remote --tags origin "refs/tags/${tag}"`, { cwd: root }).length > 0
-  return localExists || remoteExists
+  return remoteExists
 }
 
 function createTagForPackage(

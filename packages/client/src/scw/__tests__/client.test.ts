@@ -38,13 +38,7 @@ describe('createAdvancedClient', () => {
   })
 
   it('does not mutate default requestInterceptors', () => {
-    let client = createAdvancedClient(
-      withProfile({
-        accessKey: 'SCW1234567890ABCDEFG',
-        secretKey: '3aef5281-13eb-4705-b858-eb64dd5da24c',
-      }),
-    )
-    client = createAdvancedClient(
+    const client = createAdvancedClient(
       withProfile({
         accessKey: 'SCW1234567890ABCDEFG',
         secretKey: '3aef5281-13eb-4705-b858-eb64dd5da24c',
