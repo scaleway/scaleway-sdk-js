@@ -3,6 +3,7 @@
 import type {
   AlertRuleStatus,
   CustomAlertRuleStatus,
+  RunStatus,
 } from './types.gen.js'
 
 
@@ -16,5 +17,11 @@ export const ALERT_RULE_TRANSIENT_STATUSES: AlertRuleStatus[] = [
 export const CUSTOM_ALERT_RULE_TRANSIENT_STATUSES: CustomAlertRuleStatus[] = [
   'enabling',
   'disabling',
+]
+
+/** Lists transient statutes of the enum {@link RunStatus}. */
+export const RUN_TRANSIENT_STATUSES: RunStatus[] = [
+  'interrupting',
+  'pausing',
 ]
 
