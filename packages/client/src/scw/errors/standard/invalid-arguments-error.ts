@@ -23,25 +23,17 @@ export interface InvalidArgumentsErrorDetails {
  */
 const buildMessage = (list: InvalidArgumentsErrorDetails[]): string => {
   const invalidArgs: string[] = list.reduce<string[]>((acc, details) => {
-    let readableReason = ''
-    switch (details.reason) {
-      case 'required':
-        readableReason = `is required`
-        break
-      case 'format':
-        readableReason = `is wrongly formatted`
-        break
-      case 'constraint':
-        readableReason = `does not respect constraint`
-        break
-      default:
-        readableReason = `is invalid for unexpected reason`
-        break
-    }
+    const readableReason =
+      {
+        required: 'is required',
+        format: 'is wrongly formatted',
+        constraint: 'does not respect constraint',
+      }[details.reason] ?? 'is invalid for unexpected reason'
     if (details.helpMessage && details.helpMessage.length > 0) {
-      readableReason = readableReason.concat(`, `, details.helpMessage)
+      acc.push(`${details.argumentName} ${readableReason}, ${details.helpMessage}`)
+    } else {
+      acc.push(`${details.argumentName} ${readableReason}`)
     }
-    acc.push(`${details.argumentName} ${readableReason}`)
 
     return acc
   }, [])
