@@ -57,6 +57,7 @@ describe('createExponentialBackoffStrategy', () => {
     try {
       createExponentialBackoffStrategy(0, 5).next(0)
     } catch (err) {
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- caught value narrowed to Error for the assertion
       expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
   })
@@ -65,12 +66,14 @@ describe('createExponentialBackoffStrategy', () => {
     try {
       createExponentialBackoffStrategy(1, 0).next(0)
     } catch (err) {
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- caught value narrowed to Error for the assertion
       expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
 
     try {
       createExponentialBackoffStrategy(2, 1).next(0)
     } catch (err) {
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- caught value narrowed to Error for the assertion
       expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
   })

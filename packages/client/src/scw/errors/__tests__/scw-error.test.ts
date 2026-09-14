@@ -21,6 +21,7 @@ describe('ScalewayError', () => {
   })
 
   it(`handles a non-JSON object`, () => {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test casts an array to JSONObject
     expect(new ScalewayError(400, [] as unknown as JSONObject).message).toBe(`http error 400`)
   })
 

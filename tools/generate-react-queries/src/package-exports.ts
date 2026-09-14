@@ -78,6 +78,7 @@ export function updatePackageJsonExports(config: ReactQueriesConfig): void {
   }
 
   const packageJsonPath = resolve('package.json')
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parsed JSON assumed to follow the PackageJson shape
   const packageJson: PackageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PackageJson
 
   packageJson.exports = {

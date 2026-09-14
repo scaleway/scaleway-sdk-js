@@ -10,6 +10,7 @@ function parseSingleArg(arg: string, nextArg: string | undefined): ParsedArg | n
 
   const parts = arg.slice(2).split('=')
   const [key] = parts
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- string when the arg has an explicit `=value`
   let value: string | boolean = parts.length > 1 ? (parts[1] as string) : true
   let consumedNext = false
 

@@ -4,6 +4,7 @@ import { InvalidArgumentsError, QuotasExceededError, ResourceNotFoundError, Scal
 
 describe('InvalidRequestError', () => {
   it(`transforms to InvalidArgumentsError when there are fields`, () => {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to a subtype
     const error = parseScalewayError(400, {
       fields: {
         'volumes.5.id': ['92 is not a valid UUID.'],
@@ -31,6 +32,7 @@ describe('InvalidRequestError', () => {
   })
 
   it(`transforms to QuotasExceededError when message includes a specific text`, () => {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to a subtype
     const error = parseScalewayError(400, {
       message: 'Quota exceeded for this resource.',
       resource: 'compute_snapshots_type_b_ssd_available',
@@ -50,6 +52,7 @@ describe('InvalidRequestError', () => {
   })
 
   it(`transforms to QuotasExceededError when message includes a specific text, no resource case`, () => {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to a subtype
     const error = parseScalewayError(400, {
       message: 'Quota exceeded for this resource.',
       type: 'invalid_request_error',
@@ -84,6 +87,7 @@ describe('InvalidRequestError', () => {
 
 describe('UnknownResourceError', () => {
   it(`transforms to ResourceNotFoundError with only the resource ID`, () => {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to a subtype
     const error = parseScalewayError(404, {
       message: `"11111111-1111-4111-8111-111111111142" not found`,
       type: 'unknown_resource',
@@ -97,6 +101,7 @@ describe('UnknownResourceError', () => {
   })
 
   it(`transforms to ResourceNotFoundError with the resource Name and ID`, () => {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to a subtype
     const error = parseScalewayError(404, {
       message: `Security group "11111111-1111-4111-8111-111111111112" not found`,
       type: 'unknown_resource',
@@ -110,6 +115,7 @@ describe('UnknownResourceError', () => {
   })
 
   it('transforms to ResourceNotFoundError with the not found resource / single quote', () => {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to a subtype
     const error = parseScalewayError(404, {
       message: `Volume '11111111-1111-4111-8111-111111111111' not found`,
       type: 'unknown_resource',

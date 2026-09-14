@@ -33,7 +33,9 @@ const makeTextResponse = (value: string, status = 200) =>
 
 describe(`responseParser`, () => {
   const parseJson = responseParser(unmarshalJSON, 'json')
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- identity unwrapper casts unknown response to T
   const parseAsIs = responseParser(<T>(response: unknown) => response as T, 'json')
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- identity unwrapper casts unknown response to T
   const parseBlob = responseParser(<T>(response: unknown) => response as T, 'blob')
 
   it(`triggers a type error for non 'Response' object`, () =>

@@ -37,12 +37,14 @@ export const exec = (cmd: string, opts: { cwd?: string; stdio?: 'pipe' | 'inheri
 
 export const listWorkspacePackages = (root: string) => {
   const raw = exec('pnpm ls -r --depth -1 --json', { cwd: root })
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- pnpm JSON output parsed as Package[]
   return (JSON.parse(raw) as Package[])
     .filter(e => e.version)
     .map(e => ({
       name: e.name,
       path: e.path,
       relativePath: relative(root, e.path),
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- filtered to entries with a version
       version: e.version as string,
       private: e.private === true,
     }))

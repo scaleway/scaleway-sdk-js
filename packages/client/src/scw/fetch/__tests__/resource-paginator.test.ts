@@ -79,6 +79,7 @@ describe('fetchPaginated', () => {
 
   it('throws when wrong key is provided', async () => {
     await expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test casts a mock fetcher to the expected type
       fetchPaginated('x', fetchPages([]) as unknown as PaginatedFetcher<PaginatedContent<'x'>>, { request: {} }).next(),
     ).rejects.toThrow(`Property x is not a list in paginated result`)
   })
