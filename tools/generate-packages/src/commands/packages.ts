@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { execSync } from 'node:child_process'
 import { appendFileSync, copyFileSync, existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import path from 'node:path'
 import { cwd } from 'node:process'
 import { fileURLToPath } from 'node:url'
 import {
@@ -12,14 +12,14 @@ import {
   snakeToSlug,
 } from '../helpers.ts'
 
-const TEMPLATES_DIR = join(dirname(fileURLToPath(import.meta.url)), '../../templates')
+const TEMPLATES_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../templates')
 
 const TEMPLATES = {
-  PACKAGE_JSON: join(TEMPLATES_DIR, 'package.tmpl'),
-  TS_CONFIG: join(TEMPLATES_DIR, 'tsconfig.json'),
-  TS_CONFIG_BUILD: join(TEMPLATES_DIR, 'tsconfig.build.json'),
-  VITE_CONFIG: join(TEMPLATES_DIR, 'vite.config.ts'),
-  METADATA_TS: join(TEMPLATES_DIR, 'metadata.gen.ts.tmpl'),
+  PACKAGE_JSON: path.join(TEMPLATES_DIR, 'package.tmpl'),
+  TS_CONFIG: path.join(TEMPLATES_DIR, 'tsconfig.json'),
+  TS_CONFIG_BUILD: path.join(TEMPLATES_DIR, 'tsconfig.build.json'),
+  VITE_CONFIG: path.join(TEMPLATES_DIR, 'vite.config.ts'),
+  METADATA_TS: path.join(TEMPLATES_DIR, 'metadata.gen.ts.tmpl'),
 }
 
 const AUTO_GENERATE_MESSAGE = `/**
@@ -35,7 +35,7 @@ const CUSTOM = {
 export type PackagesOptions = { src: string; runInstall?: boolean }
 
 function ensurePackageJson(fullPath: string, productDir: string, templateString: string): void {
-  const packageJsonPath = join(fullPath, 'package.json')
+  const packageJsonPath = path.join(fullPath, 'package.json')
   if (!existsSync(packageJsonPath)) {
     const pkg = renderTemplatePackageJson(templateString, { name: snakeToSlug(productDir) })
     writeFileSync(packageJsonPath, JSON.stringify(pkg, null, 2))
@@ -44,7 +44,7 @@ function ensurePackageJson(fullPath: string, productDir: string, templateString:
 
 function writeVersionExports(srcPath: string, indexGenPath: string, productDir: string): void {
   for (const versionDir of readdirSync(srcPath)) {
-    if (statSync(join(srcPath, versionDir)).isDirectory()) {
+    if (statSync(path.join(srcPath, versionDir)).isDirectory()) {
       const exportPath = CUSTOM.PRODUCT_VERSION_EXPORT.has(`${productDir}/${versionDir}`)
         ? `./${versionDir}/index.js`
         : `./${versionDir}/index.gen.js`
@@ -55,11 +55,11 @@ function writeVersionExports(srcPath: string, indexGenPath: string, productDir: 
 
 function writeMetadataGen(srcPath: string, productDir: string, templateString: string): void {
   const versionsList = readdirSync(srcPath)
-    .filter(d => statSync(join(srcPath, d)).isDirectory())
+    .filter(d => statSync(path.join(srcPath, d)).isDirectory())
     .map(v => `"${v}"`)
     .join(', ')
   writeFileSync(
-    join(srcPath, 'metadata.gen.ts'),
+    path.join(srcPath, 'metadata.gen.ts'),
     renderTemplate(templateString, {
       name: snakeToSlug(productDir),
       displayName: snakeToDisplayName(productDir),
@@ -69,9 +69,9 @@ function writeMetadataGen(srcPath: string, productDir: string, templateString: s
 }
 
 function copyConfigTemplates(fullPath: string): void {
-  copyFileSync(TEMPLATES.TS_CONFIG, join(fullPath, 'tsconfig.json'))
-  copyFileSync(TEMPLATES.TS_CONFIG_BUILD, join(fullPath, 'tsconfig.build.json'))
-  copyFileSync(TEMPLATES.VITE_CONFIG, join(fullPath, 'vite.config.ts'))
+  copyFileSync(TEMPLATES.TS_CONFIG, path.join(fullPath, 'tsconfig.json'))
+  copyFileSync(TEMPLATES.TS_CONFIG_BUILD, path.join(fullPath, 'tsconfig.build.json'))
+  copyFileSync(TEMPLATES.VITE_CONFIG, path.join(fullPath, 'vite.config.ts'))
 }
 
 function processProductDir(
@@ -80,15 +80,15 @@ function processProductDir(
   options: { templateString: string; metadataTsTemplateString: string },
 ): void {
   const { templateString, metadataTsTemplateString } = options
-  const fullPath = join(inputPathDir, productDir)
+  const fullPath = path.join(inputPathDir, productDir)
   if (!statSync(fullPath).isDirectory() || CUSTOM.PRODUCT_EXPORT.has(productDir)) {
     return
   }
 
   ensurePackageJson(fullPath, productDir, templateString)
 
-  const srcPath = join(fullPath, 'src')
-  const indexGenPath = join(srcPath, 'index.gen.ts')
+  const srcPath = path.join(fullPath, 'src')
+  const indexGenPath = path.join(srcPath, 'index.gen.ts')
   writeFileSync(indexGenPath, AUTO_GENERATE_MESSAGE)
   writeVersionExports(srcPath, indexGenPath, productDir)
   writeMetadataGen(srcPath, productDir, metadataTsTemplateString)

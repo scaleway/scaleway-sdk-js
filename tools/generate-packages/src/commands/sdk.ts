@@ -2,7 +2,7 @@
 import { execSync } from 'node:child_process'
 import type { Dirent } from 'node:fs'
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import path from 'node:path'
 import { cwd, exit } from 'node:process'
 import type { Config } from '../config.ts'
 import type { PackageJSON } from '../types.ts'
@@ -19,7 +19,7 @@ const getGeneratedPackages = (dir: string, excludeSuffix?: string): PackageJSON[
       .filter((d: Dirent) => d.isDirectory())
       .filter((d: Dirent) => !excludeSuffix || !d.name.includes(excludeSuffix))
       .flatMap((d: Dirent) => {
-        const pkgPath = join(dir, d.name, 'package.json')
+        const pkgPath = path.join(dir, d.name, 'package.json')
         if (!existsSync(pkgPath)) {
           return []
         }

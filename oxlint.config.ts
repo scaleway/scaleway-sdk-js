@@ -57,7 +57,6 @@ export default defineConfig({
     'unicorn/consistent-function-scoping': 'warn',
     'unicorn/custom-error-definition': 'warn',
     'unicorn/error-message': 'warn',
-    'unicorn/import-style': 'warn',
     'unicorn/max-nested-calls': 'warn',
     'unicorn/no-await-expression-member': 'warn',
     'unicorn/no-length-as-slice-end': 'warn',

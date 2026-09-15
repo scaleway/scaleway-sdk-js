@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 import { appendFileSync, realpathSync } from 'node:fs'
-import { join } from 'node:path'
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
 import { CHANGESET_MESSAGE, RELEASE_SUBJECT } from './constants.ts'
@@ -104,7 +104,7 @@ function writeNpmrcAuth(root: string, registry: string): void {
   }
   const host = registry.replace(/^https?:\/\//, '')
   const auth = Buffer.from(`${user}:${passwd}`).toString('base64')
-  appendFileSync(join(root, '.npmrc'), `\n//${host}/:_auth=${auth}\n`)
+  appendFileSync(path.join(root, '.npmrc'), `\n//${host}/:_auth=${auth}\n`)
   logger(`[release] authenticated to ${host}`)
 }
 

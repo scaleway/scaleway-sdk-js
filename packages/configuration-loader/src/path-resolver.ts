@@ -1,5 +1,5 @@
 import { homedir } from 'node:os'
-import * as path from 'node:path'
+import path from 'node:path'
 import { env } from 'node:process'
 import { EnvironmentKey } from './env.js'
 
