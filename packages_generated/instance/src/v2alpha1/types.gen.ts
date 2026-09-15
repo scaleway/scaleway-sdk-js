@@ -364,6 +364,7 @@ export interface ServerIP {
   dynamic: boolean
   status: ServerIPStatus
   default: boolean
+  provisionedAddress: string
 }
 
 
