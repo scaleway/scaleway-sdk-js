@@ -137,8 +137,8 @@ importers:
         specifier: workspace:*
         version: link:tools/generate-react-sdk
       '@scaleway/oxlint-config':
-        specifier: 1.1.1
-        version: 1.1.1(oxlint@1.82.0(oxlint-tsgolint@7.0.2001))
+        specifier: 1.1.2
+        version: 1.1.2(oxlint@1.82.0(oxlint-tsgolint@7.0.2001))
       '@scaleway/sync-peer-deps':
         specifier: 1.0.5
         version: 1.0.5
@@ -2319,8 +2319,8 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
-  '@scaleway/oxlint-config@1.1.1':
-    resolution: {integrity: sha512-eXDxOZTd+UkPF87M35/Zh1habpE+EXU+4A/zLXp31am4p4Ea4kUFL8hGr2cV1074ONsm5k0DCXYDMT8A9IkmLA==}
+  '@scaleway/oxlint-config@1.1.2':
+    resolution: {integrity: sha512-a5X1PMwoFUf7cNDjULakBsLpVhgIxmXQpmqvf3NSRpHybYyApHb8vAz+I6Te3hLOyOKiX2MU0QjmTuXtgv6Rdg==}
     peerDependencies:
       oxlint: '>=1.80.0'
 
@@ -3942,7 +3942,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.1': {}
 
-  '@scaleway/oxlint-config@1.1.1(oxlint@1.82.0(oxlint-tsgolint@7.0.2001))':
+  '@scaleway/oxlint-config@1.1.2(oxlint@1.82.0(oxlint-tsgolint@7.0.2001))':
     dependencies:
       oxlint: 1.82.0(oxlint-tsgolint@7.0.2001)
 
