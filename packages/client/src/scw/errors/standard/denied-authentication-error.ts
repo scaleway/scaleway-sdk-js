@@ -22,17 +22,21 @@ export type DeniedAuthenticationErrorOptions = {
 const buildMessage = (options: DeniedAuthenticationErrorOptions): string => {
   let reasonDesc = `unknown reason for ${options.method}`
   switch (options.reason) {
-    case 'invalid_argument':
+    case 'invalid_argument': {
       reasonDesc = `invalid ${options.method} format or empty value`
       break
-    case 'not_found':
+    }
+    case 'not_found': {
       reasonDesc = `${options.method} does not exist`
       break
-    case 'expired':
+    }
+    case 'expired': {
       reasonDesc = `${options.method} is expired`
       break
-    default:
+    }
+    default: {
       break
+    }
   }
 
   return `denied authentication: ${reasonDesc}`

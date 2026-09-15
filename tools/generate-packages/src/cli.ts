@@ -56,16 +56,19 @@ const verbose = values.quiet ? false : Boolean(values.verbose)
 const scope = values.scope ? String(values.scope) : config.scope
 
 switch (command) {
-  case 'packages':
+  case 'packages': {
     packages({ src, runInstall: true })
     break
-  case 'sdk':
+  }
+  case 'sdk': {
     sdk({ src, config, runInstall: true })
     break
-  case 'deps':
+  }
+  case 'deps': {
     deps({ src, config, dryRun })
     break
-  case 'setup':
+  }
+  case 'setup': {
     setup({
       src,
       config,
@@ -76,6 +79,8 @@ switch (command) {
       install: Boolean(values.install),
     })
     break
-  default:
+  }
+  default: {
     break
+  }
 }

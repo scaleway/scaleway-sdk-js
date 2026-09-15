@@ -77,7 +77,6 @@ export default defineConfig({
     'unicorn/prefer-string-slice': 'warn',
     'unicorn/prefer-ternary': 'warn',
     'unicorn/prefer-type-error': 'warn',
-    'unicorn/switch-case-braces': 'warn',
     'unicorn/text-encoding-identifier-case': 'warn',
   },
   overrides: [
