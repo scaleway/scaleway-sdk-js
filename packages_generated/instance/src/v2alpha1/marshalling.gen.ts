@@ -11,13 +11,18 @@ import type {
   Snapshot,
   Volume,
   AddSecurityGroupRulesResponse,
+  DedicatedPool,
+  ServerTypeGpuInfo,
+  ServerTypeLimits,
+  DedicatedPoolServerType,
+  ListDedicatedPoolServerTypesResponse,
+  DedicatedPoolSummary,
+  ListDedicatedPoolsResponse,
   ListPlacementGroupsResponse,
   PrivateNetworkInterfaceSummary,
   ListPrivateNetworkInterfacesResponse,
   SecurityGroupSummary,
   ListSecurityGroupsResponse,
-  ServerTypeGpuInfo,
-  ServerTypeLimits,
   ServerType,
   ListServerTypesResponse,
   ServerSummary,
@@ -72,6 +77,7 @@ import type {
   SetTemplateUserDataRequest,
   SetUserDataRequest,
   StopAndDeleteServerRequest,
+  UpdateDedicatedPoolRequest,
   UpdatePlacementGroupRequest,
   UpdatePrivateNetworkInterfaceRequest,
   UpdateSecurityGroupRequest,
@@ -230,6 +236,126 @@ export const unmarshalAddSecurityGroupRulesResponse = (data: unknown): AddSecuri
   } as AddSecurityGroupRulesResponse
 }
 
+export const unmarshalDedicatedPool = (data: unknown): DedicatedPool => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DedicatedPool' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    srn: data.srn,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as DedicatedPool
+}
+
+const unmarshalServerTypeGpuInfo = (data: unknown): ServerTypeGpuInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeGpuInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    manufacturer: data.manufacturer,
+    memory: data.memory,
+    name: data.name,
+  } as ServerTypeGpuInfo
+}
+
+const unmarshalServerTypeLimits = (data: unknown): ServerTypeLimits => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeLimits' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    blockBandwidth: data.block_bandwidth,
+    fileSystemCount: data.file_system_count,
+    internetBandwidth: data.internet_bandwidth,
+    ipCount: data.ip_count,
+    lSsdSize: data.l_ssd_size,
+    privateNetworkBandwidth: data.private_network_bandwidth,
+    privateNetworkCount: data.private_network_count,
+    scratchSize: data.scratch_size,
+    scratchVolumesCount: data.scratch_volumes_count,
+    volumeCount: data.volume_count,
+  } as ServerTypeLimits
+}
+
+const unmarshalDedicatedPoolServerType = (data: unknown): DedicatedPoolServerType => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DedicatedPoolServerType' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    architecture: data.architecture,
+    availability: data.availability,
+    endOfService: data.end_of_service,
+    gpuCount: data.gpu_count,
+    gpuInfo: data.gpu_info ? unmarshalServerTypeGpuInfo(data.gpu_info) : undefined,
+    limits: data.limits ? unmarshalServerTypeLimits(data.limits) : undefined,
+    memory: data.memory,
+    name: data.name,
+    slotsAvailable: data.slots_available,
+    vcpuCount: data.vcpu_count,
+  } as DedicatedPoolServerType
+}
+
+export const unmarshalListDedicatedPoolServerTypesResponse = (data: unknown): ListDedicatedPoolServerTypesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDedicatedPoolServerTypesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nextPageToken: data.next_page_token,
+    serverTypes: unmarshalArrayOfObject(data.server_types, unmarshalDedicatedPoolServerType),
+    totalCount: data.total_count,
+  } as ListDedicatedPoolServerTypesResponse
+}
+
+const unmarshalDedicatedPoolSummary = (data: unknown): DedicatedPoolSummary => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DedicatedPoolSummary' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    srn: data.srn,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as DedicatedPoolSummary
+}
+
+export const unmarshalListDedicatedPoolsResponse = (data: unknown): ListDedicatedPoolsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDedicatedPoolsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    dedicatedPools: unmarshalArrayOfObject(data.dedicated_pools, unmarshalDedicatedPoolSummary),
+    nextPageToken: data.next_page_token,
+    totalCount: data.total_count,
+  } as ListDedicatedPoolsResponse
+}
+
 export const unmarshalListPlacementGroupsResponse = (data: unknown): ListPlacementGroupsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -318,41 +444,6 @@ export const unmarshalListSecurityGroupsResponse = (data: unknown): ListSecurity
     securityGroups: unmarshalArrayOfObject(data.security_groups, unmarshalSecurityGroupSummary),
     totalCount: data.total_count,
   } as ListSecurityGroupsResponse
-}
-
-const unmarshalServerTypeGpuInfo = (data: unknown): ServerTypeGpuInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerTypeGpuInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    manufacturer: data.manufacturer,
-    memory: data.memory,
-    name: data.name,
-  } as ServerTypeGpuInfo
-}
-
-const unmarshalServerTypeLimits = (data: unknown): ServerTypeLimits => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ServerTypeLimits' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    blockBandwidth: data.block_bandwidth,
-    fileSystemCount: data.file_system_count,
-    internetBandwidth: data.internet_bandwidth,
-    ipCount: data.ip_count,
-    lSsdSize: data.l_ssd_size,
-    privateNetworkBandwidth: data.private_network_bandwidth,
-    privateNetworkCount: data.private_network_count,
-    scratchSize: data.scratch_size,
-    scratchVolumesCount: data.scratch_volumes_count,
-    volumeCount: data.volume_count,
-  } as ServerTypeLimits
 }
 
 const unmarshalServerType = (data: unknown): ServerType => {
@@ -699,6 +790,7 @@ export const unmarshalServer = (data: unknown): Server => {
     architecture: data.architecture,
     bootVolumeId: data.boot_volume_id,
     createdAt: unmarshalDate(data.created_at),
+    dedicatedPoolId: data.dedicated_pool_id,
     filesystems: unmarshalArrayOfObject(data.filesystems, unmarshalServerFilesystem),
     id: data.id,
     name: data.name,
@@ -965,6 +1057,7 @@ export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  dedicated_pool_id: request.dedicatedPoolId,
   name: request.name,
   placement_group_id: request.placementGroupId,
   project_id: request.projectId ?? defaults.defaultProjectId,
@@ -1128,6 +1221,14 @@ export const marshalStopAndDeleteServerRequest = (
   ]),
 })
 
+export const marshalUpdateDedicatedPoolRequest = (
+  request: UpdateDedicatedPoolRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
+  tags: request.tags,
+})
+
 export const marshalUpdatePlacementGroupRequest = (
   request: UpdatePlacementGroupRequest,
   defaults: DefaultValues,
@@ -1184,6 +1285,7 @@ export const marshalUpdateServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   boot_volume_id: request.bootVolumeId,
+  dedicated_pool_id: request.dedicatedPoolId,
   name: request.name,
   placement_group_id: request.placementGroupId,
   protected: request.protected,

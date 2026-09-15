@@ -4,6 +4,7 @@ import type {
   CreateServerRequestBookIPIPType,
   CreateServerRequestServerVolumeVolumeType,
   CreateVolumeRequestVolumeType,
+  ListDedicatedPoolsRequestOrderBy,
   ListPlacementGroupsRequestOrderBy,
   ListPrivateNetworkInterfacesRequestOrderBy,
   ListSecurityGroupsRequestOrderBy,
@@ -53,6 +54,14 @@ export const CREATE_VOLUME_REQUEST_VOLUME_TYPES: CreateVolumeRequestVolumeType[]
   'unknown_volume_type',
   'l_ssd',
   'scratch',
+]
+
+/** Lists all values of the enum {@link ListDedicatedPoolsRequestOrderBy}. */
+export const LIST_DEDICATED_POOLS_REQUEST_ORDER_BIES: ListDedicatedPoolsRequestOrderBy[] = [
+  'created_at_desc',
+  'created_at_asc',
+  'updated_at_desc',
+  'updated_at_asc',
 ]
 
 /** Lists all values of the enum {@link ListPlacementGroupsRequestOrderBy}. */

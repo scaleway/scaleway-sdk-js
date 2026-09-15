@@ -19,6 +19,12 @@ export type CreateVolumeRequestVolumeType =
   | 'l_ssd'
   | 'scratch'
 
+export type ListDedicatedPoolsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'updated_at_desc'
+  | 'updated_at_asc'
+
 export type ListPlacementGroupsRequestOrderBy =
   | 'created_at_desc'
   | 'created_at_asc'
@@ -545,6 +551,82 @@ export interface CreateServerRequestServerVolume {
    * One-of ('serverVolume'): at most one of 'volumeId', 'newVolume' could be set.
    */
   newVolume?: CreateServerRequestCreateVolume
+}
+
+
+export interface DedicatedPoolServerType {
+  /**
+   * Name of the server type.
+   */
+  name: string
+  /**
+   * Number of vCPUs.
+   */
+  vcpuCount: number
+  /**
+   * Number of GPUs.
+   */
+  gpuCount: number
+  /**
+   * Amount of memory.
+   */
+  memory: number
+  /**
+   * Architecture of the server type.
+   */
+  architecture: ServerTypeArchitecture
+  /**
+   * Availability status of the server type.
+   */
+  availability: ServerTypeAvailability
+  /**
+   * Limits for the server type.
+   */
+  limits?: ServerTypeLimits
+  /**
+   * GPU information for the server type.
+   */
+  gpuInfo?: ServerTypeGpuInfo
+  /**
+   * Whether the server type has reached end of service.
+   */
+  endOfService: boolean
+  /**
+   * Number of additional Instances of this type that can currently be started in this Dedicated Pool.
+   */
+  slotsAvailable: number
+}
+
+
+export interface DedicatedPoolSummary {
+  /**
+   * Unique ID of the Dedicated Pool.
+   */
+  id: string
+  /**
+   * SRN of the Dedicated Pool.
+   */
+  srn: string
+  /**
+   * Organization ID the Dedicated Pool belongs to.
+   */
+  organizationId: string
+  /**
+   * Name of the Dedicated Pool.
+   */
+  name: string
+  /**
+   * Tags associated with the Dedicated Pool.
+   */
+  tags: string[]
+  /**
+   * Creation timestamp of the Dedicated Pool.
+   */
+  createdAt?: Date
+  /**
+   * Last update timestamp of the Dedicated Pool.
+   */
+  updatedAt?: Date
 }
 
 
@@ -1307,6 +1389,10 @@ export type CreateServerRequest = {
    */
   placementGroupId?: string
   /**
+   * ID of the Dedicated Pool this server belongs to.
+   */
+  dedicatedPoolId?: string
+  /**
    * Volumes to attach to the server.
    */
   volumes?: CreateServerRequestServerVolume[]
@@ -1378,6 +1464,38 @@ export type CreateTemplateRequest = {
    * IAM ID of the SSH key used to encrypt the Windows `Administrator` password for RDP use.
    */
   windowsRdpSshKeyId?: string
+}
+
+
+export interface DedicatedPool {
+  /**
+   * Unique ID of the Dedicated Pool.
+   */
+  id: string
+  /**
+   * The SRN of the Dedicated Pool.
+   */
+  srn: string
+  /**
+   * Organization ID the Dedicated Pool belongs to.
+   */
+  organizationId: string
+  /**
+   * The name of the Dedicated Pool.
+   */
+  name: string
+  /**
+   * Tags associated with the Dedicated Pool.
+   */
+  tags: string[]
+  /**
+   * Creation timestamp of the Dedicated Pool.
+   */
+  createdAt?: Date
+  /**
+   * Last update timestamp of the Dedicated Pool.
+   */
+  updatedAt?: Date
 }
 
 
@@ -1597,6 +1715,18 @@ export type DetachServerVolumeRequest = {
 }
 
 
+export type GetDedicatedPoolRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * ID of the Dedicated Pool to retrieve.
+   */
+  dedicatedPoolId: string
+}
+
+
 export type GetPlacementGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1730,6 +1860,82 @@ export type GetUserDataRequest = {
    * The key of the user data to retrieve.
    */
   key: string
+}
+
+
+export type ListDedicatedPoolServerTypesRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * ID of the Dedicated Pool to list Instance types for.
+   */
+  dedicatedPoolId: string
+  /**
+   * Token for pagination.
+   */
+  pageToken?: string
+  /**
+   * Number of Instance types to return per page.
+   */
+  pageSize?: number
+}
+
+
+export interface ListDedicatedPoolServerTypesResponse {
+  /**
+   * List of Instance types.
+   */
+  serverTypes: DedicatedPoolServerType[]
+  /**
+   * Token for the next page.
+   */
+  nextPageToken?: string
+  /**
+   * Total number of Instance types.
+   */
+  totalCount: number
+}
+
+
+export type ListDedicatedPoolsRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * Token for pagination.
+   */
+  pageToken?: string
+  /**
+   * Number of Dedicated Pools to return per page.
+   */
+  pageSize?: number
+  /**
+   * Order in which to return Dedicated Pools.
+   */
+  orderBy?: ListDedicatedPoolsRequestOrderBy
+  /**
+   * Organization ID to filter Dedicated Pools by.
+   */
+  organizationId?: string
+}
+
+
+export interface ListDedicatedPoolsResponse {
+  /**
+   * List of Dedicated Pools.
+   */
+  dedicatedPools: DedicatedPoolSummary[]
+  /**
+   * Token for the next page.
+   */
+  nextPageToken?: string
+  /**
+   * Total number of Dedicated Pools.
+   */
+  totalCount: number
 }
 
 
@@ -1966,6 +2172,10 @@ export type ListServersRequest = {
    * Placement group IDs to filter servers.
    */
   placementGroupIds?: string[]
+  /**
+   * Filter servers associated with these Dedicated Pools.
+   */
+  dedicatedPoolIds?: string[]
   /**
    * Private Network IDs to filter servers.
    */
@@ -2347,6 +2557,10 @@ export interface Server {
    */
   placementGroupId?: string
   /**
+   * ID of the Dedicated Pool the server belongs to.
+   */
+  dedicatedPoolId?: string
+  /**
    * Current status of the server.
    */
   status: ServerStatus
@@ -2653,6 +2867,26 @@ export interface Template {
 }
 
 
+export type UpdateDedicatedPoolRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * ID of the Dedicated Pool to update.
+   */
+  dedicatedPoolId: string
+  /**
+   * New name for the Dedicated Pool.
+   */
+  name?: string
+  /**
+   * New tags for the Dedicated Pool.
+   */
+  tags?: string[]
+}
+
+
 export type UpdatePlacementGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2806,6 +3040,10 @@ export type UpdateServerRequest = {
    * New placement group ID.
    */
   placementGroupId?: string
+  /**
+   * New Dedicated Pool ID.
+   */
+  dedicatedPoolId?: string
   /**
    * New rescue mode setting.
    */

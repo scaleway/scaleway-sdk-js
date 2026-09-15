@@ -25,11 +25,14 @@ import {
   marshalCreateServerFromTemplateRequest,
   marshalCreateServerRequest,
   marshalCreateTemplateRequest,
+  unmarshalDedicatedPool,
   marshalDeleteSecurityGroupRulesRequest,
   marshalDetachServerFileSystemRequest,
   marshalDetachServerIPRequest,
   marshalDetachServerPrivateNetworkInterfaceRequest,
   marshalDetachServerVolumeRequest,
+  unmarshalListDedicatedPoolServerTypesResponse,
+  unmarshalListDedicatedPoolsResponse,
   unmarshalListPlacementGroupsResponse,
   unmarshalListPrivateNetworkInterfacesResponse,
   unmarshalListSecurityGroupsResponse,
@@ -55,6 +58,7 @@ import {
   unmarshalSnapshot,
   marshalStopAndDeleteServerRequest,
   unmarshalTemplate,
+  marshalUpdateDedicatedPoolRequest,
   marshalUpdatePlacementGroupRequest,
   marshalUpdatePrivateNetworkInterfaceRequest,
   marshalUpdateSecurityGroupRequest,
@@ -84,6 +88,7 @@ import type {
   CreateServerFromTemplateRequest,
   CreateServerRequest,
   CreateTemplateRequest,
+  DedicatedPool,
   DeletePlacementGroupRequest,
   DeletePrivateNetworkInterfaceRequest,
   DeleteSecurityGroupRequest,
@@ -97,6 +102,7 @@ import type {
   DetachServerIPRequest,
   DetachServerPrivateNetworkInterfaceRequest,
   DetachServerVolumeRequest,
+  GetDedicatedPoolRequest,
   GetPlacementGroupRequest,
   GetPrivateNetworkInterfaceRequest,
   GetResourceCountsRequest,
@@ -107,6 +113,10 @@ import type {
   GetTemplateRequest,
   GetTemplateUserDataRequest,
   GetUserDataRequest,
+  ListDedicatedPoolServerTypesRequest,
+  ListDedicatedPoolServerTypesResponse,
+  ListDedicatedPoolsRequest,
+  ListDedicatedPoolsResponse,
   ListPlacementGroupsRequest,
   ListPlacementGroupsResponse,
   ListPrivateNetworkInterfacesRequest,
@@ -144,6 +154,7 @@ import type {
   StopAndDeleteServerRequest,
   StopServerRequest,
   Template,
+  UpdateDedicatedPoolRequest,
   UpdatePlacementGroupRequest,
   UpdatePrivateNetworkInterfaceRequest,
   UpdateSecurityGroupRequest,
@@ -235,6 +246,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         urlParams: urlParams(
+          ['dedicated_pool_ids', request.dedicatedPoolIds],
           ['mac_addresses', request.macAddresses],
           ['name', request.name],
           ['order_by', request.orderBy],
@@ -1387,6 +1399,84 @@ export class API extends ParentAPI {
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/create-server`,
       },
       unmarshalServer,
+    )
+
+  
+  /**
+   * List Dedicated Pools. List Dedicated Pools for an organization.
+   *
+   * @param request - The request {@link ListDedicatedPoolsRequest}
+   * @returns A Promise of ListDedicatedPoolsResponse
+   */
+  listDedicatedPools = (request: Readonly<ListDedicatedPoolsRequest> = {}) =>
+    this.client.fetch<ListDedicatedPoolsResponse>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dedicated-pools`,
+        urlParams: urlParams(
+          ['order_by', request.orderBy],
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['page_token', request.pageToken],
+        ),
+      },
+      unmarshalListDedicatedPoolsResponse,
+    )
+
+  
+  /**
+   * Get a Dedicated Pool. Get detailed information about a Dedicated Pool.
+   *
+   * @param request - The request {@link GetDedicatedPoolRequest}
+   * @returns A Promise of DedicatedPool
+   */
+  getDedicatedPool = (request: Readonly<GetDedicatedPoolRequest>) =>
+    this.client.fetch<DedicatedPool>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dedicated-pools/${validatePathParam('dedicatedPoolId', request.dedicatedPoolId)}`,
+      },
+      unmarshalDedicatedPool,
+    )
+
+  
+  /**
+   * Update a Dedicated Pool. Update the name and tags of a Dedicated Pool.
+   *
+   * @param request - The request {@link UpdateDedicatedPoolRequest}
+   * @returns A Promise of DedicatedPool
+   */
+  updateDedicatedPool = (request: Readonly<UpdateDedicatedPoolRequest>) =>
+    this.client.fetch<DedicatedPool>(
+      {
+        body: JSON.stringify(
+          marshalUpdateDedicatedPoolRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dedicated-pools/${validatePathParam('dedicatedPoolId', request.dedicatedPoolId)}`,
+      },
+      unmarshalDedicatedPool,
+    )
+
+  
+  /**
+   * List Instance types for a Dedicated Pool. List Instance types available in a Dedicated Pool and their technical details.
+   *
+   * @param request - The request {@link ListDedicatedPoolServerTypesRequest}
+   * @returns A Promise of ListDedicatedPoolServerTypesResponse
+   */
+  listDedicatedPoolServerTypes = (request: Readonly<ListDedicatedPoolServerTypesRequest>) =>
+    this.client.fetch<ListDedicatedPoolServerTypesResponse>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dedicated-pools/${validatePathParam('dedicatedPoolId', request.dedicatedPoolId)}/server-types`,
+        urlParams: urlParams(
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['page_token', request.pageToken],
+        ),
+      },
+      unmarshalListDedicatedPoolServerTypesResponse,
     )
 
   
