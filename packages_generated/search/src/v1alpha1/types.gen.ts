@@ -81,16 +81,25 @@ export type SearchResourcesRequestOrderBy =
   | 'type_desc'
 
 export interface BrmServerInfo {
+  /**
+   * IP address of the Baremetal server.
+   */
   ip: string
 }
 
 
 export interface ObsDatasourceInfo {
+  /**
+   * Type of data handled by the OBS datasource.
+   */
   type: ObsDatasourceInfoDataType
 }
 
 
 export interface ObsExporterInfo {
+  /**
+   * Destination type of the OBS exporter.
+   */
   destinationType: ObsExporterInfoDestinationType
 }
 
@@ -112,6 +121,9 @@ export interface ServerlessFunctionsFunctionInfo {
 
 
 export interface ServerlessSqldbBackupInfo {
+  /**
+   * ID of the Serverless SQL Database the backup belongs to.
+   */
   databaseId: string
 }
 
@@ -166,21 +178,45 @@ export interface Resource {
   /**
    * Additional information for a VPC Private Network.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
   vpcPrivateNetworkInfo?: VpcPrivateNetworkInfo
   /**
    * Additional information for a Serverless Function.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
   serverlessFunctionsFunctionInfo?: ServerlessFunctionsFunctionInfo
   /**
    * Additional information for a Serverless Container.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
    */
   serverlessContainersContainerInfo?: ServerlessContainersContainerInfo
+  /**
+   * Additional information for a Serverless SQL database backup.
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   */
+  serverlessSqldbBackupInfo?: ServerlessSqldbBackupInfo
+  /**
+   * Additional information for a Baremetal server.
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   */
+  baremetalServerInfo?: BrmServerInfo
+  /**
+   * Additional information for an OBS datasource.
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   */
+  obsDatasourceInfo?: ObsDatasourceInfo
+  /**
+   * Additional information for an OBS exporter.
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   */
+  obsExporterInfo?: ObsExporterInfo
   /**
    * Creation date.
    */
@@ -189,26 +225,6 @@ export interface Resource {
    * Last update date.
    */
   updatedAt?: Date
-  /**
-   *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
-   */
-  baremetalServerInfo?: BrmServerInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
-   */
-  serverlessSqldbBackupInfo?: ServerlessSqldbBackupInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
-   */
-  obsDatasourceInfo?: ObsDatasourceInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'baremetalServerInfo', 'serverlessSqldbBackupInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
-   */
-  obsExporterInfo?: ObsExporterInfo
 }
 
 
