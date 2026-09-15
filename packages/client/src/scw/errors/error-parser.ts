@@ -58,12 +58,15 @@ const unmarshalStandardError = (type: string, status: number, body: Readonly<JSO
  */
 const unmarshalNonStandardError = (type: string, status: number, body: Readonly<JSONObject>): ScalewayError | null => {
   switch (type) {
-    case 'unknown_resource':
+    case 'unknown_resource': {
       return mapUnknownResourceFromJSON(status, body)
-    case 'invalid_request_error':
+    }
+    case 'invalid_request_error': {
       return mapInvalidRequestFromJSON(status, body)
-    default:
+    }
+    default: {
       return null
+    }
   }
 }
 
