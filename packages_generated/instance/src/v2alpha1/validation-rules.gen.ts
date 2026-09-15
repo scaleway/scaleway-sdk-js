@@ -1,6 +1,20 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
+export const ListDedicatedPoolServerTypesRequest = {
+  pageSize: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
+export const ListDedicatedPoolsRequest = {
+  pageSize: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListPlacementGroupsRequest = {
   pageSize: {
     greaterThanOrEqual: 0,
