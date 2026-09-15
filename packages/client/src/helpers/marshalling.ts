@@ -81,7 +81,7 @@ export const urlParams = (
 ) => {
   const params = new URLSearchParams()
   for (const [key, value] of paramTuples) {
-    if (typeof key !== 'string' || value == null) {
+    if (typeof key !== 'string' || value === null || value === undefined) {
       continue
     }
     if (Array.isArray(value)) {

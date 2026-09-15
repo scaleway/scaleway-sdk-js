@@ -1,6 +1,6 @@
 import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
-import { join, relative } from 'node:path'
+import path from 'node:path'
 
 type Package = {
   name: string
@@ -16,10 +16,10 @@ export const findWorkspaceRoot = (start: string): string => {
   let dir = start
   while (dir !== '/') {
     try {
-      readFileSync(join(dir, 'pnpm-workspace.yaml'), 'utf8')
+      readFileSync(path.join(dir, 'pnpm-workspace.yaml'), 'utf8')
       return dir
     } catch {
-      dir = join(dir, '..')
+      dir = path.join(dir, '..')
     }
   }
   return start
@@ -42,7 +42,7 @@ export const listWorkspacePackages = (root: string) => {
     .map(e => ({
       name: e.name,
       path: e.path,
-      relativePath: relative(root, e.path),
+      relativePath: path.relative(root, e.path),
       version: e.version as string,
       private: e.private === true,
     }))
