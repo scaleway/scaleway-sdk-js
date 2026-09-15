@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.10.0
+
+### Minor Changes
+
+- fix(oxlint): enable unicorn/no-array-sort as error (#3554)
+
 ## 0.9.0
 
 ### Minor Changes
