@@ -139,6 +139,10 @@ function pushRelease(root: string, skipPush: boolean, newTags: string[]): void {
   }
   exec('git push origin HEAD --no-verify', { cwd: root })
   for (const tag of newTags) {
+    if (exec(`git ls-remote --tags origin "refs/tags/${tag}"`, { cwd: root }).length > 0) {
+      logger(`[release] tag already on remote, skipping push: ${tag}`)
+      continue
+    }
     exec(`git push origin "refs/tags/${tag}" --no-verify`, { cwd: root })
   }
   logger('[release] pushed')
