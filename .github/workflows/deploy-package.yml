@@ -65,9 +65,7 @@ jobs:
         run: pnpm pnpm-auto-release --by-commit --gh-release
         env:
           HUSKY: 0
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: 'false'
+          PNPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Notify Slack on success
