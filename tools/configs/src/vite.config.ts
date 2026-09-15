@@ -1,4 +1,4 @@
-import path, { extname, relative, resolve } from 'node:path'
+import path from 'node:path'
 import { readPackageSync } from 'read-pkg'
 import { globSync } from 'tinyglobby'
 import type { UserConfig } from 'vite'
@@ -9,12 +9,13 @@ const input = Object.fromEntries(
     // file, so e.g. src/nested/foo.js becomes nested/foo, and
     // normalizes Windows backslashes to forward slashes.
 
-    relative('src', file.slice(0, file.length - extname(file).length))
+    path
+      .relative('src', file.slice(0, file.length - path.extname(file).length))
       .split(path.sep)
       .join('/'),
     // This expands the relative paths to absolute paths, so e.g.
     // src/nested/foo.js becomes /project/src/nested/foo.js
-    resolve(file),
+    path.resolve(file),
   ]),
 )
 

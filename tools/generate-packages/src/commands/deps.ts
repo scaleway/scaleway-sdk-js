@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { execSync } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import path from 'node:path'
 import { cwd } from 'node:process'
 import type { Config } from '../config.ts'
 import { escapeRegExp } from '../helpers.ts'
@@ -23,7 +23,7 @@ function getAllGenTsFiles(dir: string, files: string[] = []): string[] {
     return files
   }
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const full = join(dir, entry.name)
+    const full = path.join(dir, entry.name)
     if (entry.isDirectory() && entry.name !== 'node_modules') {
       getAllGenTsFiles(full, files)
     } else if (entry.isFile() && entry.name.endsWith('.gen.ts')) {
@@ -37,12 +37,12 @@ function discoverPackages(src: string): PkgInfo[] {
   return readdirSync(src, { withFileTypes: true })
     .filter(e => e.isDirectory())
     .flatMap(e => {
-      const packageJsonPath = join(src, e.name, 'package.json')
+      const packageJsonPath = path.join(src, e.name, 'package.json')
       if (!existsSync(packageJsonPath)) {
         return []
       }
       const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PkgInfo['packageJson']
-      return [{ name: e.name, path: join(src, e.name), packageJsonPath, packageJson }]
+      return [{ name: e.name, path: path.join(src, e.name), packageJsonPath, packageJson }]
     })
 }
 
@@ -87,7 +87,7 @@ function syncPackage(
   options: { pkgMap: Map<string, PkgInfo>; dryRun: boolean },
 ): boolean {
   const { pkgMap, dryRun } = options
-  const srcDir = join(pkg.path, 'src')
+  const srcDir = path.join(pkg.path, 'src')
   if (!existsSync(srcDir)) {
     return false
   }

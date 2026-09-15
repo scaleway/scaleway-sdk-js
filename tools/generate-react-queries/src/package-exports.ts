@@ -4,7 +4,7 @@
  */
 
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import path from 'node:path'
 import type { ReactQueriesConfig } from './config.ts'
 
 type ExportEntry = {
@@ -39,7 +39,7 @@ function buildNamespaceExports(
 ): Record<string, ExportEntry> {
   const subPath = config[pathKey]
   const directories = allNamespaces.filter(namespace =>
-    existsSync(join(config.outputDir, namespace, subPath, config.naming.indexFile)),
+    existsSync(path.join(config.outputDir, namespace, subPath, config.naming.indexFile)),
   )
   const prefix = cleanDirName ? `${cleanDirName}/` : ''
   return directories.reduce<Record<string, ExportEntry>>((acc, namespace) => {
@@ -52,7 +52,7 @@ function buildNamespaceExports(
 }
 
 export function updatePackageJsonExports(config: ReactQueriesConfig): void {
-  const allNamespaces = readdirSync(resolve('./', config.outputDir), {
+  const allNamespaces = readdirSync(path.resolve('./', config.outputDir), {
     withFileTypes: true,
   })
     .map(file => (file.isDirectory() ? file.name : ''))
@@ -77,7 +77,7 @@ export function updatePackageJsonExports(config: ReactQueriesConfig): void {
     },
   }
 
-  const packageJsonPath = resolve('package.json')
+  const packageJsonPath = path.resolve('package.json')
   const packageJson: PackageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PackageJson
 
   packageJson.exports = {

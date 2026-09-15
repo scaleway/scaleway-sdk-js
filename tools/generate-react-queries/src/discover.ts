@@ -4,7 +4,7 @@
  */
 
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
-import { dirname, join, resolve } from 'node:path'
+import path from 'node:path'
 import type { QueriesMetadata, ReactQueriesConfig } from './config.ts'
 
 type PackageJson = {
@@ -43,7 +43,7 @@ const isQueriesMetadataModule = (value: unknown): value is { queriesMetadata: Qu
  * e.g. packages_generated/instance/, packages_generated/k8s/, etc.
  */
 function tryReadPackageDir(dirPath: string, packages: Map<string, string>): void {
-  const pkgJsonPath = join(dirPath, 'package.json')
+  const pkgJsonPath = path.join(dirPath, 'package.json')
   if (!existsSync(pkgJsonPath)) {
     console.warn(`  ⚠️  No package.json in ${dirPath}, skipping`)
     return
@@ -66,7 +66,7 @@ function scanPackageDirectory(fullPath: string): Map<string, string> {
 
   const packages = new Map<string, string>()
   for (const dir of readdirSync(fullPath)) {
-    const dirPath = join(fullPath, dir)
+    const dirPath = path.join(fullPath, dir)
     if (statSync(dirPath).isDirectory()) {
       tryReadPackageDir(dirPath, packages)
     }
@@ -75,7 +75,7 @@ function scanPackageDirectory(fullPath: string): Map<string, string> {
 }
 
 function discoverFromDirectory(packagesPath: string): Map<string, string> {
-  const packages = scanPackageDirectory(resolve(packagesPath))
+  const packages = scanPackageDirectory(path.resolve(packagesPath))
   console.log(`📦 Found ${packages.size} SDK packages in ${packagesPath}`)
   return packages
 }
@@ -94,14 +94,14 @@ function discoverFromDirectory(packagesPath: string): Map<string, string> {
  * and return the first one that has a package.json.
  */
 function resolvePackageDir(packageName: string): string | undefined {
-  let dir = resolve('.')
+  let dir = path.resolve('.')
 
   while (dir !== '/') {
-    const candidate = join(dir, 'node_modules', packageName)
-    if (existsSync(join(candidate, 'package.json'))) {
+    const candidate = path.join(dir, 'node_modules', packageName)
+    if (existsSync(path.join(candidate, 'package.json'))) {
       return candidate
     }
-    dir = dirname(dir)
+    dir = path.dirname(dir)
   }
 
   console.warn(`⚠️  Could not resolve package "${packageName}" from CWD, skipping.`)
@@ -115,7 +115,7 @@ function resolvePackageDir(packageName: string): string | undefined {
  * This is the generic path — works with node_modules, pnpm workspaces, etc.
  */
 function discoverFromDependencies(packageNameFilter: string): Map<string, string> {
-  const pkgJson: unknown = JSON.parse(readFileSync(resolve('package.json'), 'utf-8'))
+  const pkgJson: unknown = JSON.parse(readFileSync(path.resolve('package.json'), 'utf-8'))
 
   const allDeps: Record<string, string> = isPackageJson(pkgJson)
     ? {
@@ -147,7 +147,7 @@ function discoverFromDependencies(packageNameFilter: string): Map<string, string
  * Looks for the compiled metadata file (e.g. metadata.gen.js) in each version subdirectory.
  */
 export function discoverVersions(pkgDir: string, metadataFileName: string): string[] {
-  const distPath = join(pkgDir, 'dist')
+  const distPath = path.join(pkgDir, 'dist')
   const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
 
   if (!existsSync(distPath)) {
@@ -155,8 +155,8 @@ export function discoverVersions(pkgDir: string, metadataFileName: string): stri
   }
 
   return readdirSync(distPath).filter(entry => {
-    const fullPath = join(distPath, entry)
-    return statSync(fullPath).isDirectory() && existsSync(join(fullPath, metadataJsFile))
+    const fullPath = path.join(distPath, entry)
+    return statSync(fullPath).isDirectory() && existsSync(path.join(fullPath, metadataJsFile))
   })
 }
 
@@ -179,7 +179,7 @@ function mergeUtilsServices(metadata: QueriesMetadata, utilsMetadata: QueriesMet
 }
 
 async function loadUtilsMetadata(pkgDir: string, version: string, metadata: QueriesMetadata): Promise<void> {
-  const utilsMetadataPath = join(pkgDir, 'dist', version, 'utils-metadata.js')
+  const utilsMetadataPath = path.join(pkgDir, 'dist', version, 'utils-metadata.js')
   if (!existsSync(utilsMetadataPath)) {
     return
   }
@@ -202,7 +202,7 @@ export async function loadMetadata(
   metadataFileName: string,
 ): Promise<QueriesMetadata> {
   const metadataJsFile = metadataFileName.replace(/\.ts$/, '.js')
-  const metadataPath = join(pkgDir, 'dist', version, metadataJsFile)
+  const metadataPath = path.join(pkgDir, 'dist', version, metadataJsFile)
   const module: unknown = await import(metadataPath)
   if (!isQueriesMetadataModule(module)) {
     throw new Error(`Metadata module ${metadataPath} does not export queriesMetadata`)

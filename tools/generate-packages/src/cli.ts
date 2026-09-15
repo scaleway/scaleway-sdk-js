@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
-import { resolve } from 'node:path'
+import path from 'node:path'
 import { cwd, exit } from 'node:process'
 import type { ParseArgsConfig } from 'node:util'
 import { parseArgs } from 'node:util'
@@ -50,7 +50,7 @@ Options:
 }
 
 const config = await loadConfig(values.config ? String(values.config) : undefined)
-const src = resolve(cwd(), String(values.src))
+const src = path.resolve(cwd(), String(values.src))
 const dryRun = Boolean(values['dry-run'])
 const verbose = values.quiet ? false : Boolean(values.verbose)
 const scope = values.scope ? String(values.scope) : config.scope
@@ -69,7 +69,7 @@ switch (command) {
     setup({
       src,
       config,
-      sdk: resolve(cwd(), String(values.sdk)),
+      sdk: path.resolve(cwd(), String(values.sdk)),
       scope,
       dryRun,
       verbose,

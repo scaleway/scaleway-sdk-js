@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import path from 'node:path'
 import { cwd } from 'node:process'
 
 export type Config = {
@@ -67,11 +67,11 @@ const isConfigModule = (value: unknown): value is { default: Config } =>
 
 const resolvePaths = (config: Config): Config => ({
   ...config,
-  sdks: config.sdks.map(s => ({ ...s, path: join(cwd(), s.path), index: join(cwd(), s.index) })),
+  sdks: config.sdks.map(s => ({ ...s, path: path.join(cwd(), s.path), index: path.join(cwd(), s.index) })),
 })
 
 export const loadConfig = async (configPath?: string): Promise<Config> => {
-  const resolvedPath = resolve(cwd(), configPath ?? 'generate-packages.config.ts')
+  const resolvedPath = path.resolve(cwd(), configPath ?? 'generate-packages.config.ts')
 
   if (!existsSync(resolvedPath)) {
     return resolvePaths(DEFAULT_CONFIG)

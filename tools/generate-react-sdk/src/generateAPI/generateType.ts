@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import path from 'node:path'
 import type { ProcessedMetadata } from '../metadata-types.ts'
 import { lowerCaseFirstLetter } from './helpers.ts'
 
@@ -31,6 +31,6 @@ export const generateType = (res: ProcessedMetadata) => {
     ...buildExportLines(res),
     '\n}',
   ].join('')
-  const src = join(resolve('./src/'), 'types.generated.ts')
+  const src = path.join(path.resolve('./src/'), 'types.generated.ts')
   writeFileSync(src, content)
 }

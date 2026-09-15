@@ -1,14 +1,14 @@
 import { exec } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
-import { dirname, join, resolve } from 'node:path'
+import path from 'node:path'
 import { exit, stdout } from 'node:process'
 import type { Metadata, ProcessedMetadata } from '../metadata-types.ts'
 import { emitFiles } from './emitFiles.ts'
 import { generateType } from './generateType.ts'
 
-const directoryOfSrcFolder = resolve('./')
-const require = createRequire(resolve('./package.json'))
+const directoryOfSrcFolder = path.resolve('./')
+const require = createRequire(path.resolve('./package.json'))
 
 type PackageJson = {
   dependencies?: Record<string, string>
@@ -26,7 +26,7 @@ const isPackageJson = (value: unknown): value is PackageJson => typeof value ===
 const isMetadataModule = (value: unknown): value is MetadataModule => typeof value === 'object' && value !== null
 
 function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
-  const pkgJsonPath = resolve('package.json')
+  const pkgJsonPath = path.resolve('package.json')
   if (!existsSync(pkgJsonPath)) {
     stdout.write('⚠️  No package.json found in current directory\n')
     return new Map()
@@ -63,8 +63,8 @@ async function loadVersions(packageName: string): Promise<string[]> {
 }
 
 async function loadMetadataFromFallback(packageName: string, version: string): Promise<Metadata> {
-  const pkgDir = join(dirname(resolve('package.json')), 'node_modules', packageName)
-  const distMetadataPath = join(pkgDir, 'dist', version, 'metadata.gen.js')
+  const pkgDir = path.join(path.dirname(path.resolve('package.json')), 'node_modules', packageName)
+  const distMetadataPath = path.join(pkgDir, 'dist', version, 'metadata.gen.js')
   const metadataModule: unknown = await import(distMetadataPath)
   return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
 }
@@ -143,7 +143,7 @@ function setupGenerateAPI(
   packageNameFilter: string,
   { skipServices, skipVersions }: { skipServices: string[]; skipVersions: string[] },
 ) {
-  const dir = join(directoryOfSrcFolder, dirGenName)
+  const dir = path.join(directoryOfSrcFolder, dirGenName)
   mkdirSync(dir, { recursive: true })
   const sdkPackages = discoverSdkPackages(packageNameFilter)
   if (sdkPackages.size === 0) {
