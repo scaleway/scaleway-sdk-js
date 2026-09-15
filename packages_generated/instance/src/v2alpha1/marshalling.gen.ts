@@ -611,6 +611,7 @@ const unmarshalServerIP = (data: unknown): ServerIP => {
     default: data.default,
     dynamic: data.dynamic,
     id: data.id,
+    provisionedAddress: data.provisioned_address,
     status: data.status,
   } as ServerIP
 }
