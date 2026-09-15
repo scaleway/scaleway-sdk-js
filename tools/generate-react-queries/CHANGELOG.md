@@ -1,5 +1,31 @@
 # Change Log
 
+## 0.9.0
+
+### Minor Changes
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- fix(oxlint): fix eslint/max-statements violations (#3365)
+
+- fix(oxlint): enable eslint/prefer-named-capture-group as error (#3420)
+
+- fix(oxlint): fix typescript/no-unsafe-member-access violations (#3354)
+
+- fix(oxlint): enable eslint/prefer-destructuring as error (#3422)
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- fix(oxlint): enable typescript/prefer-regexp-exec as error (#3520)
+
+- fix(oxlint): enable eslint/no-implicit-coercion as error (#3482)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- fix(oxlint): enable eslint/no-use-before-define as error (#3483)
+
 ## 0.8.0
 
 ### Minor Changes

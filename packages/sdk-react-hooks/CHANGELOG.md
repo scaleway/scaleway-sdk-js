@@ -1,5 +1,69 @@
 # Change Log
 
+## 0.15.0
+
+### Minor Changes
+
+- fix: release provenance (#3552)
+
+- chore(deps): update react monorepo to v19.3.0 (#3539)
+
+- chore(deps): update dependency @scaleway/sync-peer-deps to v1.0.5 (#3378)
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-account@2.11.0
+  - @scaleway/sdk-annotations@1.6.0
+  - @scaleway/sdk-applesilicon@2.14.0
+  - @scaleway/sdk-audit-trail@2.27.0
+  - @scaleway/sdk-autoscaling@2.13.0
+  - @scaleway/sdk-baremetal@2.13.0
+  - @scaleway/sdk-billing@2.16.0
+  - @scaleway/sdk-block@2.16.0
+  - @scaleway/sdk-cockpit@2.12.0
+  - @scaleway/sdk-container@2.15.0
+  - @scaleway/sdk-datalab@1.11.0
+  - @scaleway/sdk-datawarehouse@2.18.0
+  - @scaleway/sdk-dedibox@2.15.0
+  - @scaleway/sdk-domain@2.14.0
+  - @scaleway/sdk-edge-services@2.23.0
+  - @scaleway/sdk-environmental-footprint@2.18.0
+  - @scaleway/sdk-file@2.14.0
+  - @scaleway/sdk-flexibleip@2.12.0
+  - @scaleway/sdk-function@2.14.0
+  - @scaleway/sdk-iam@2.16.0
+  - @scaleway/sdk-inference@2.16.0
+  - @scaleway/sdk-instance@2.18.0
+  - @scaleway/sdk-interlink@2.13.0
+  - @scaleway/sdk-iot@2.12.0
+  - @scaleway/sdk-ipam@2.15.0
+  - @scaleway/sdk-jobs@2.14.0
+  - @scaleway/sdk-k8s@2.24.0
+  - @scaleway/sdk-kafka@2.14.0
+  - @scaleway/sdk-key-manager@2.16.0
+  - @scaleway/sdk-lb@2.15.0
+  - @scaleway/sdk-marketplace@2.10.0
+  - @scaleway/sdk-mnq@2.12.0
+  - @scaleway/sdk-mongodb@2.16.0
+  - @scaleway/sdk-partner@1.9.0
+  - @scaleway/sdk-product-catalog@2.27.0
+  - @scaleway/sdk-qaas@2.12.0
+  - @scaleway/sdk-rdb@2.15.0
+  - @scaleway/sdk-react@0.14.0
+  - @scaleway/sdk-redis@2.13.0
+  - @scaleway/sdk-registry@2.12.0
+  - @scaleway/sdk-s2s-vpn@2.16.0
+  - @scaleway/sdk-searchdb@1.13.0
+  - @scaleway/sdk-secret@2.12.0
+  - @scaleway/sdk-serverless-sqldb@2.14.0
+  - @scaleway/sdk-tem@2.12.0
+  - @scaleway/sdk-vpc@2.17.0
+  - @scaleway/sdk-vpcgw@2.14.0
+  - @scaleway/sdk-webhosting@2.18.0
+
 ## 0.14.1
 
 ### Patch Changes

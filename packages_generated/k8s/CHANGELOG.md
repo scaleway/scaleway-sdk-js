@@ -1,5 +1,24 @@
 # Change Log
 
+## 2.24.0
+
+### Minor Changes
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat: add support for srn (#3524)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- fix(k8s): add a pattern validation for the value of a  (#3484)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.1
+
 ## 2.23.0
 
 ### Minor Changes

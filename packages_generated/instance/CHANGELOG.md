@@ -1,5 +1,26 @@
 # Change Log
 
+## 2.18.0
+
+### Minor Changes
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- feat(instance): add dedicated pools (#3549)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(instance): expose the provisioned_address field (#3546)
+
+- feat: add support for srn (#3524)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.1
+
 ## 2.17.0
 
 ### Minor Changes

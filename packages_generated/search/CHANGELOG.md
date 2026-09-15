@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.13.0
+
+### Minor Changes
+
+- feat(search): add resource infos to yml (#3547)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.1
+
 ## 1.12.0
 
 ### Minor Changes

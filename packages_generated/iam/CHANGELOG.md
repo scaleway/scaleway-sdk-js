@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.16.0
+
+### Minor Changes
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- feat: add support for srn (#3524)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.1
+
 ## 2.15.0
 
 ### Minor Changes

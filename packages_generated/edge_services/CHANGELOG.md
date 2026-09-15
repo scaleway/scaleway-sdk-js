@@ -1,5 +1,24 @@
 # Change Log
 
+## 2.23.0
+
+### Minor Changes
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- doc(edge_services): Add title for billing endpoint (#3374)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- feat(edge_services): add support for  (#3370)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.1
+
 ## 2.22.0
 
 ### Minor Changes

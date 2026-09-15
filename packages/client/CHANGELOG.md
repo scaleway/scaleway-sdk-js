@@ -1,5 +1,29 @@
 # Change Log
 
+## 2.9.0
+
+### Minor Changes
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- fix(oxlint): enable typescript/no-confusing-void-expression as error (#3498)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- fix(oxlint): enable typescript/consistent-indexed-object-style as error (#3497)
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- fix(oxlint): enable typescript/prefer-nullish-coalescing as error (#3519)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- fix(oxlint): fix no-useless-assignment violations breaking lint (#3528)
+
 ## 2.8.0
 
 ### Minor Changes

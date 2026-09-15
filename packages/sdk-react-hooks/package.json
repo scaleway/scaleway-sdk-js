@@ -1,16 +1,16 @@
 {
   "name": "@scaleway/sdk-react-hooks",
-  "version": "0.14.1",
+  "version": "0.15.0",
   "private": false,
   "description": "React hooks",
-  "files": [
-    "dist"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "packages_generated/account"
   },
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "sideEffects": false,
   "module": "./dist/index.js",

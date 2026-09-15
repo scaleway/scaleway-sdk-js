@@ -1,16 +1,16 @@
 {
   "name": "@scaleway/sdk-react",
-  "version": "0.13.1",
+  "version": "0.14.0",
   "private": false,
   "description": "React API Provider using client settings",
-  "files": [
-    "dist"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/scaleway/scaleway-sdk-js.git",
     "directory": "packages_generated/account"
   },
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "sideEffects": false,
   "module": "./dist/index.js",

@@ -1,5 +1,35 @@
 # Change Log
 
+## 0.7.0
+
+### Minor Changes
+
+- fix(oxlint): fix eslint/max-statements violations (#3365)
+
+- fix(oxlint): enable eslint/prefer-named-capture-group as error (#3420)
+
+- fix(oxlint): enable typescript/no-unnecessary-type-conversion as error (#3515)
+
+- fix(oxlint): fix typescript/no-unsafe-assignment violations (#3357)
+
+- fix(oxlint): fix typescript/no-unsafe-member-access violations (#3354)
+
+- fix(oxlint): enable typescript/consistent-indexed-object-style as error (#3497)
+
+- fix(oxlint): enable eslint/prefer-destructuring as error (#3422)
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- fix(oxlint): enable typescript/prefer-nullish-coalescing as error (#3519)
+
+- fix(oxlint): enable oxc/no-accumulating-spread as error (#3496)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- fix(oxlint): enable typescript/no-unnecessary-template-expression as error (#3501)
+
 ## 0.6.0
 
 ### Minor Changes
