@@ -59,7 +59,6 @@ export default defineConfig({
     'unicorn/error-message': 'warn',
     'unicorn/max-nested-calls': 'warn',
     'unicorn/no-await-expression-member': 'warn',
-    'unicorn/no-length-as-slice-end': 'warn',
     'unicorn/no-typeof-undefined': 'warn',
     'unicorn/no-unreadable-array-destructuring': 'warn',
     'unicorn/no-useless-promise-resolve-reject': 'warn',
