@@ -24,7 +24,7 @@ function nsType(ns: string, type: string, rawTypes: Set<string>): string {
  * Returns a sorted array for deterministic output.
  */
 function collectNsImports(imports: Map<string, ResolvedNamespace>): ResolvedNamespace[] {
-  return [...imports.values()].sort((a, b) => a.packageName.localeCompare(b.packageName))
+  return [...imports.values()].toSorted((a, b) => a.packageName.localeCompare(b.packageName))
 }
 
 type ResolvedNames = ReturnType<typeof resolveNames>
