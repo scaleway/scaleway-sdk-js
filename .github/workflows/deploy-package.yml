@@ -19,8 +19,6 @@ jobs:
           fetch-depth: '0'
           persist-credentials: false
           token: ${{ secrets.GH_TOKEN }}
-      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-
       - name: Configure SSH signing
         run: |
           mkdir -p ~/.ssh
