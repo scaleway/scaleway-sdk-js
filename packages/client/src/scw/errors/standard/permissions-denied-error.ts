@@ -7,7 +7,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface PermissionsDeniedErrorDetails {
+export type PermissionsDeniedErrorDetails = {
   readonly resource: string
   readonly action: string
 }

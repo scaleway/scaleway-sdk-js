@@ -25,7 +25,7 @@ export const mapInvalidRequestFromJSON = (
 
   const fields = obj.fields && isRecordOfStringArray(obj.fields) ? obj.fields : {}
   const fieldsMessages = Object.entries(fields)
-  if (fieldsMessages.length) {
+  if (fieldsMessages.length > 0) {
     return new InvalidArgumentsError(
       status,
       obj,

@@ -142,7 +142,7 @@ export type WaitForStopCondition<T> = (obj: T) => Promise<boolean> | boolean
  *
  * @public
  */
-export interface WaitForOptions<T> {
+export type WaitForOptions<T> = {
   /**
    * Timeout in seconds.
    *

@@ -7,7 +7,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface InvalidArgumentsErrorDetails {
+export type InvalidArgumentsErrorDetails = {
   readonly argumentName: string
   readonly reason: string
   readonly helpMessage?: string

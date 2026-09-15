@@ -1,9 +1,9 @@
-interface PaginationOptions {
+type PaginationOptions = {
   page?: number
   pageSize?: number
 }
 
-interface PaginatedResponse {
+type PaginatedResponse = {
   totalCount: number
 }
 
@@ -16,7 +16,7 @@ export const extract =
   <T extends PaginatedContent<K>>(result: T) =>
     result[key]
 
-interface PaginationCallOptions<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions> {
+type PaginationCallOptions<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions> = {
   request: R
   initial?: Promise<T>
 }

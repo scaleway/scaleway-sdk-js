@@ -57,7 +57,7 @@ async function loadVersions(packageName: string): Promise<string[]> {
       : []
     return versions
   } catch (error) {
-    stdout.write(`⚠️  Could not load metadata from ${packageName}: ${error}\n`)
+    stdout.write(`⚠️  Could not load metadata from ${packageName}: ${String(error)}\n`)
     return []
   }
 }
@@ -80,7 +80,7 @@ async function loadMetadata(packageName: string, version: string): Promise<Metad
       return await loadMetadataFromFallback(packageName, version)
     }
   } catch (error) {
-    stdout.write(`⚠️  Error loading metadata from ${packageName}/${version}/metadata: ${error}\n`)
+    stdout.write(`⚠️  Error loading metadata from ${packageName}/${version}/metadata: ${String(error)}\n`)
     return null
   }
 }

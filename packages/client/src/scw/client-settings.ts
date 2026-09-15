@@ -19,7 +19,7 @@ export type DefaultValues = Profile & {
  *
  * @public
  */
-export interface Settings extends DefaultValues {
+export type Settings = DefaultValues & {
   /**
    * The default number of results when requesting a paginated resource.
    */

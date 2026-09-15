@@ -7,7 +7,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface TooManyRequestsQuotaPolicy {
+export type TooManyRequestsQuotaPolicy = {
   quota: number
   windowSeconds?: number
 }
@@ -17,7 +17,7 @@ export interface TooManyRequestsQuotaPolicy {
  *
  * @public
  */
-export interface TooManyRequestsErrorOptions {
+export type TooManyRequestsErrorOptions = {
   helpMessage: string
   limit?: TooManyRequestsQuotaPolicy
   /** The number of seconds until the quota resets */

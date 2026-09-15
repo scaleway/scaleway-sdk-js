@@ -6,7 +6,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface ResourceNotFoundErrorOptions {
+export type ResourceNotFoundErrorOptions = {
   resource: string
   resourceId: string
 }

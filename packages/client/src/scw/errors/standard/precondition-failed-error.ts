@@ -6,7 +6,7 @@ import { ScalewayError } from '../scw-error.js'
  *
  * @public
  */
-export interface PreconditionFailedErrorOptions {
+export type PreconditionFailedErrorOptions = {
   precondition: string
   helpMessage: string
 }

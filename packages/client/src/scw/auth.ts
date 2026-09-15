@@ -12,11 +12,9 @@ import type { AuthenticationSecrets } from './client-ini-profile.js'
 import { assertValidAuthenticationSecrets } from './client-ini-profile.js'
 import { AUTH_HEADER_KEY, SESSION_HEADER_KEY } from './constants.js'
 
-interface TokenAccessor {
-  (): Promise<string | undefined>
-}
+type TokenAccessor = () => Promise<string | undefined>
 
-interface AddSessionHeader {
+type AddSessionHeader = {
   request: Request
   getAsyncToken: () => Promise<string | undefined>
 }
