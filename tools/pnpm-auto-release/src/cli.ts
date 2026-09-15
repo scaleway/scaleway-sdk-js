@@ -116,7 +116,7 @@ function publishPackages(root: string, options: ReleaseOptions): void {
     writeNpmrcAuth(root, options.registry)
   }
   const flag = options.registry ? ` --registry ${options.registry}` : ''
-  exec(`pnpm publish -r --no-git-checks --access public${flag}`, { cwd: root, stdio: 'inherit' })
+  exec(`pnpm publish -r --no-git-checks --access public --provenance ${flag}`, { cwd: root, stdio: 'inherit' })
   logger('[release] published')
 }
 
@@ -151,6 +151,8 @@ function commitTagAndPush(
 ): void {
   exec('git add -A', { cwd: root })
   exec('git commit -m "chore(release): publish" --no-verify', { cwd: root })
+  exec('git fetch origin main', { cwd: root })
+  exec('git rebase origin/main', { cwd: root })
   const newTags = createTags({ root, affectedPackages: affected, updatedPackages: updated })
   if (options.ghRelease) {
     createGithubReleases({ root, affectedPackages: affected, updatedPackages: updated })
