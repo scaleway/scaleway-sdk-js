@@ -3,7 +3,6 @@ import { execSync } from 'node:child_process'
 import { appendFileSync, copyFileSync, existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { cwd } from 'node:process'
-import { fileURLToPath } from 'node:url'
 import {
   renderTemplate,
   renderTemplatePackageJson,
@@ -12,7 +11,7 @@ import {
   snakeToSlug,
 } from '../helpers.ts'
 
-const TEMPLATES_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '../../templates')
+const TEMPLATES_DIR = path.join(import.meta.dirname, '../../templates')
 
 const TEMPLATES = {
   PACKAGE_JSON: path.join(TEMPLATES_DIR, 'package.tmpl'),

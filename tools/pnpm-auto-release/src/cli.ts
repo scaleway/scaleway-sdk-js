@@ -2,7 +2,6 @@
 /* eslint-disable no-console */
 import { appendFileSync, realpathSync } from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
 import { CHANGESET_MESSAGE, RELEASE_SUBJECT } from './constants.ts'
 import {
@@ -182,7 +181,7 @@ function main() {
   logger('[release] done.')
 }
 
-if (process.argv[1] && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))) {
+if (process.argv[1] && realpathSync(process.argv[1]) === realpathSync(import.meta.filename)) {
   try {
     main()
   } catch (error) {
