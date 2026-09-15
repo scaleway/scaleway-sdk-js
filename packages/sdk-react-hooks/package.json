@@ -6,6 +6,11 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaleway/scaleway-sdk-js.git",
+    "directory": "packages_generated/account"
+  },
   "type": "module",
   "sideEffects": false,
   "module": "./dist/index.js",
