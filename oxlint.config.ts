@@ -61,7 +61,6 @@ export default defineConfig({
     'unicorn/no-await-expression-member': 'warn',
     'unicorn/no-length-as-slice-end': 'warn',
     'unicorn/no-typeof-undefined': 'warn',
-    'unicorn/no-unnecessary-slice-end': 'warn',
     'unicorn/no-unreadable-array-destructuring': 'warn',
     'unicorn/no-useless-promise-resolve-reject': 'warn',
     'unicorn/numeric-separators-style': 'warn',
