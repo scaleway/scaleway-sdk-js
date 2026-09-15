@@ -88,7 +88,9 @@ function addProductsToSdk(sdkPkgPath: string, newProducts: { name: string }[], s
       console.log(`  ✅ ${pkgName}`)
     }
   }
-  sdkPkg.dependencies = Object.fromEntries(Object.entries(sdkPkg.dependencies).sort(([a], [b]) => a.localeCompare(b)))
+  sdkPkg.dependencies = Object.fromEntries(
+    Object.entries(sdkPkg.dependencies).toSorted(([a], [b]) => a.localeCompare(b)),
+  )
   writeFileSync(sdkPkgPath, `${JSON.stringify(sdkPkg, null, 2)}\n`, 'utf8')
 }
 
