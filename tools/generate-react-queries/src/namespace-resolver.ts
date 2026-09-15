@@ -161,7 +161,7 @@ function deriveFromNamespacePath(nsPath: string): ResolvedNamespace | undefined 
   }
 
   // Convert kebab-case slug to camelCase (e.g. "rdb-admin" → "rdbAdmin")
-  const camelSlug = slug.replace(/-(?<char>[a-z])/g, (_, c: string) => c.toUpperCase())
+  const camelSlug = slug.replaceAll(/-(?<char>[a-z])/g, (_, c: string) => c.toUpperCase())
 
   return {
     packageName: `${scope}/sdk-${slug}`,

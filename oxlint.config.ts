@@ -73,7 +73,6 @@ export default defineConfig({
     'unicorn/prefer-number-properties': 'warn',
     'unicorn/prefer-response-static-json': 'warn',
     'unicorn/prefer-spread': 'warn',
-    'unicorn/prefer-string-replace-all': 'warn',
     'unicorn/prefer-string-slice': 'warn',
     'unicorn/prefer-ternary': 'warn',
     'unicorn/prefer-type-error': 'warn',
