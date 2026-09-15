@@ -1,13 +1,13 @@
 import { writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import path from 'node:path'
 import { env } from 'node:process'
 import { afterEach, describe, expect, it } from 'vitest'
 import { loadProfileFromConfigurationFile, loadProfileFromEnvironmentValues } from '../config-loader.js'
 import { EnvironmentKey } from '../env.js'
 import type { Profile } from '../types.js'
 
-const CONFIG_FILE_PATH = join(tmpdir(), 'scw-config.yaml')
+const CONFIG_FILE_PATH = path.join(tmpdir(), 'scw-config.yaml')
 
 const EMPTY_PROFILE: Profile = {}
 

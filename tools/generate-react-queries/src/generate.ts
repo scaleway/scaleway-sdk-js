@@ -4,7 +4,7 @@
  */
 
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import path from 'node:path'
 import type { QueriesMetadata, QueryMethod, ReactQueriesConfig, ServiceMetadata } from './config.ts'
 import { capitalize } from './config.ts'
 import { discoverSdkPackages, discoverVersions, loadMetadata } from './discover.ts'
@@ -29,7 +29,7 @@ type GenerationContext = {
 }
 
 function prepareGeneratedDir(ctx: GenerationContext, folderName: string): string {
-  const generatedDir = join(ctx.config.outputDir, folderName.toLowerCase(), ctx.config.generatedPath)
+  const generatedDir = path.join(ctx.config.outputDir, folderName.toLowerCase(), ctx.config.generatedPath)
   if (existsSync(generatedDir)) {
     rmSync(generatedDir, { recursive: true, force: true })
   }
@@ -58,7 +58,7 @@ function writeListMethodHooks(
       namespaceResolver: ctx.namespaceResolver,
     })
     const allFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}AllQuery.ts`
-    writeFileSync(join(generatedDir, allFileName), allContent)
+    writeFileSync(path.join(generatedDir, allFileName), allContent)
   }
 
   const infiniteContent = generateInfiniteQueryHook(method, service, {
@@ -68,7 +68,7 @@ function writeListMethodHooks(
     namespaceResolver: ctx.namespaceResolver,
   })
   const infiniteFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}InfiniteQuery.ts`
-  writeFileSync(join(generatedDir, infiniteFileName), infiniteContent)
+  writeFileSync(path.join(generatedDir, infiniteFileName), infiniteContent)
 }
 
 function writeWaiterHook(
@@ -87,7 +87,7 @@ function writeWaiterHook(
     namespaceResolver: ctx.namespaceResolver,
   })
   const waiterFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${ctx.config.naming.waiterPrefix}${capitalize(method.methodName.replace('get', ''))}Query.ts`
-  writeFileSync(join(generatedDir, waiterFileName), waiterContent)
+  writeFileSync(path.join(generatedDir, waiterFileName), waiterContent)
 }
 
 function writeMethodHooks(
@@ -102,7 +102,7 @@ function writeMethodHooks(
     namespaceResolver: ctx.namespaceResolver,
   })
   const hookFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}${capitalize(method.methodName)}Query.ts`
-  writeFileSync(join(generatedDir, hookFileName), hookContent)
+  writeFileSync(path.join(generatedDir, hookFileName), hookContent)
 
   if (method.isList) {
     writeListMethodHooks(method, service, { metadata, ctx, packageName, generatedDir, folderName })
@@ -125,7 +125,7 @@ function writeServiceHooks(
   }
   const reloadContent = generateReloadHook(service, metadata, ctx.config)
   const reloadFileName = `${ctx.config.naming.hookPrefix}${capitalize(folderName)}${service.apiClass}Reload.ts`
-  writeFileSync(join(generatedDir, reloadFileName), reloadContent)
+  writeFileSync(path.join(generatedDir, reloadFileName), reloadContent)
 }
 
 function generateServiceHooks(
@@ -141,7 +141,7 @@ function generateServiceHooks(
     writeServiceHooks(service, { metadata, ctx, packageName, generatedDir, folderName })
   }
   const indexContent = generateIndexFile(servicesToGenerate, metadata, ctx.config)
-  writeFileSync(join(generatedDir, ctx.config.naming.indexFile), indexContent)
+  writeFileSync(path.join(generatedDir, ctx.config.naming.indexFile), indexContent)
 }
 
 async function processVersionCore(
@@ -185,7 +185,7 @@ async function processPackage(packageName: string, pkgDir: string, ctx: Generati
     console.log(` ⏭️ Skipping ${packageName} (no metadata found)`)
     return
   }
-  console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.join(', ')}`)
+  console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.path.join(', ')}`)
   for (const version of versions) {
     await processVersion({ packageName, pkgDir, version }, ctx)
   }

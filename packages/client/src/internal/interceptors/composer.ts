@@ -39,15 +39,15 @@ export const composeResponseInterceptors =
  */
 export const composeResponseErrorInterceptors =
   (interceptors: ResponseErrorInterceptor[]) =>
-  async (request: Request, error: unknown): Promise<unknown> => {
-    let prevError = error
+  async (request: Request, err: unknown): Promise<unknown> => {
+    let prevError = err
     for (const interceptor of interceptors) {
       try {
         const res = await interceptor({ request, error: prevError })
 
         return res
-      } catch (err) {
-        prevError = err
+      } catch (error) {
+        prevError = error
       }
     }
 

@@ -56,22 +56,22 @@ describe('createExponentialBackoffStrategy', () => {
   it(`throws if minDelay isn't valid`, () => {
     try {
       createExponentialBackoffStrategy(0, 5).next(0)
-    } catch (err) {
-      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
+    } catch (error) {
+      expect((error as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
   })
 
   it(`throws if maxDelay isn't valid`, () => {
     try {
       createExponentialBackoffStrategy(1, 0).next(0)
-    } catch (err) {
-      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
+    } catch (error) {
+      expect((error as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
 
     try {
       createExponentialBackoffStrategy(2, 1).next(0)
-    } catch (err) {
-      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
+    } catch (error) {
+      expect((error as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
   })
 })

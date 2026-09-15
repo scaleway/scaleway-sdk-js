@@ -1,4 +1,4 @@
-import { join } from 'node:path'
+import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 import {
   convertYamlToConfiguration,
@@ -31,7 +31,7 @@ describe('convertYamlToConfiguration', () => {
 
 describe('loadConfigurationFromFile', () => {
   it('loads config from a yaml file', () => {
-    const yamlPath = join(__dirname, 'data', 'scw-config.yaml')
+    const yamlPath = path.join(__dirname, 'data', 'scw-config.yaml')
     const loadedConfig = loadConfigurationFromFile(yamlPath)
     expect(loadedConfig).not.toBeNull()
     expect(
@@ -53,7 +53,7 @@ describe('loadConfigurationFromFile', () => {
 
 describe('loadConfigurationFromFileAsync', () => {
   it('loads config from a yaml file asynchronously', async () => {
-    const yamlPath = join(__dirname, 'data', 'scw-config.yaml')
+    const yamlPath = path.join(__dirname, 'data', 'scw-config.yaml')
     const loadedConfig = await loadConfigurationFromFileAsync(yamlPath)
     expect(loadedConfig).not.toBeNull()
     expect(loadedConfig).toStrictEqual({
@@ -81,7 +81,7 @@ describe('hasSecureFilePermissions', () => {
     if (process.platform === 'win32') {
       return
     }
-    const yamlPath = join(__dirname, 'data', 'scw-config.yaml')
+    const yamlPath = path.join(__dirname, 'data', 'scw-config.yaml')
     const result = await hasSecureFilePermissions(yamlPath)
     expect(typeof result).toBe('boolean')
   })

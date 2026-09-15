@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { execSync } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import path from 'node:path'
 import { cwd } from 'node:process'
 import type { Config } from '../config.ts'
 import { snakeToSlug } from '../helpers.ts'
@@ -37,7 +37,7 @@ function walkHasGenFiles(root: string): boolean {
     const st = statSync(p)
     if (st.isDirectory()) {
       for (const name of readdirSync(p)) {
-        stack.push(join(p, name))
+        stack.push(path.join(p, name))
       }
     } else if (p.endsWith('.gen.ts')) {
       return true
@@ -48,11 +48,11 @@ function walkHasGenFiles(root: string): boolean {
 
 function discoverNewProducts(src: string): { name: string }[] {
   return readdirSync(src)
-    .filter(name => statSync(join(src, name)).isDirectory())
+    .filter(name => statSync(path.join(src, name)).isDirectory())
     .map(name => ({
       name,
-      hasGenFiles: walkHasGenFiles(join(src, name, 'src')),
-      hasPackageJson: existsSync(join(src, name, 'package.json')),
+      hasGenFiles: walkHasGenFiles(path.join(src, name, 'src')),
+      hasPackageJson: existsSync(path.join(src, name, 'package.json')),
     }))
     .filter(p => p.hasGenFiles && !p.hasPackageJson)
 }

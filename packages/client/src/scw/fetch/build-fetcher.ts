@@ -82,9 +82,9 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       const unmarshaledResponse = await resUnmarshaller(finalResponse)
 
       return unmarshaledResponse
-    } catch (err) {
+    } catch (error) {
       const resErrorInterceptors = prepareResponseErrors()
-      const handledError = (await resErrorInterceptors(finalRequest, err)) as T
+      const handledError = (await resErrorInterceptors(finalRequest, error)) as T
 
       return unwrapper(handledError)
     }

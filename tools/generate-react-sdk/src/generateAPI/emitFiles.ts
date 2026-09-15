@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import path from 'node:path'
 import type { ProcessedMetadata } from '../metadata-types.ts'
 import { getFileContent } from './getFileContent.ts'
 import { lowerCaseFirstLetter } from './helpers.ts'
@@ -13,7 +13,7 @@ export const emitFiles = ({
   sourceFolderGen: string
   sdkFactoryPath: string
 }) => {
-  const dirPath = join(sourceFolderGen)
+  const dirPath = path.join(sourceFolderGen)
   if (!existsSync(dirPath)) {
     mkdirSync(dirPath, { recursive: true })
   }
@@ -27,7 +27,7 @@ export const emitFiles = ({
         packageName,
         sdkFactoryPath,
       })
-      const src = join(dirPath, filename)
+      const src = path.join(dirPath, filename)
       writeFileSync(src, content)
     }
   }
