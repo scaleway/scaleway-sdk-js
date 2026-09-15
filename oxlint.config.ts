@@ -66,7 +66,6 @@ export default defineConfig({
     'unicorn/prefer-array-some': 'warn',
     'unicorn/prefer-code-point': 'warn',
     'unicorn/prefer-global-this': 'warn',
-    'unicorn/prefer-import-meta-properties': 'warn',
     'unicorn/prefer-module': 'warn',
     'unicorn/prefer-native-coercion-functions': 'warn',
     'unicorn/prefer-number-coercion': 'warn',
