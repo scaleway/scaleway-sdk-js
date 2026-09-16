@@ -611,8 +611,8 @@ importers:
         specifier: workspace:*
         version: link:../../tools/generate-react-queries
       '@scaleway/use-dataloader':
-        specifier: 7.1.0
-        version: 7.1.0(react@19.3.0)
+        specifier: 7.1.1
+        version: 7.1.1(react@19.3.0)
       '@types/react':
         specifier: 19.3.0
         version: 19.3.0
@@ -2393,8 +2393,8 @@ packages:
   '@scaleway/tsconfig@1.1.6':
     resolution: {integrity: sha512-iU1AlvlPWL0R77lWhFD5gAPIeac6Pixb0sOYjZLovsqLp5jQgKM8BgcPtRHJ2xPHg4p7azuJQ8PQsMedB2YRwA==}
 
-  '@scaleway/use-dataloader@7.1.0':
-    resolution: {integrity: sha512-p8zmyCrTWdwnzHecjUT5rf/KisDm6m+kNRrzlRBLMuNqDg6/wf5dtP6gzmvB2Zst3pI/s9wKIcYTFWxuddsqFQ==}
+  '@scaleway/use-dataloader@7.1.1':
+    resolution: {integrity: sha512-XLpjVyRPqr4DTkjhBlKd9JQaigp2OAR6Y5ZtZZ6lVHUGtiTSwajjPju5t5hMhkscjF/lONQc6iopIaRHGzWZqg==}
     engines: {node: 24.x || 25.x || 26.x}
     peerDependencies:
       react: 18.x || 19.x
@@ -4016,7 +4016,7 @@ snapshots:
 
   '@scaleway/tsconfig@1.1.6': {}
 
-  '@scaleway/use-dataloader@7.1.0(react@19.3.0)':
+  '@scaleway/use-dataloader@7.1.1(react@19.3.0)':
     dependencies:
       react: 19.3.0
 
