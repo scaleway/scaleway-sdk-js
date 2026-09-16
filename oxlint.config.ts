@@ -23,17 +23,13 @@ export default defineConfig({
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
     // eslint rules
-    'eslint/eqeqeq': 'warn',
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-bitwise': 'warn',
-    'eslint/no-eq-null': 'warn',
     'eslint/no-shadow': 'warn',
     'eslint/no-var': 'warn',
     'eslint/prefer-destructuring': 'warn',
     'eslint/prefer-named-capture-group': 'warn',
-    'eslint/prefer-template': 'warn',
     'eslint/require-unicode-regexp': 'warn',
-    'eslint/vars-on-top': 'warn',
     // import rules
     'import/no-namespace': 'warn',
     // react rules
