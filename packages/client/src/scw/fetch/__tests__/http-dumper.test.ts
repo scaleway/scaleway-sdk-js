@@ -16,7 +16,7 @@ const DEFAULT_SETTINGS: Settings = {
 }
 
 describe(`dumpRequest`, () => {
-  it(`returns a readable string`, () => {
+  it(`returns a readable string`, async () => {
     const userAgentHeader = !isBrowser() ? `User-Agent: scaleway-sdk-js/v1.0.0\r\n` : ''
 
     const request = buildRequest(

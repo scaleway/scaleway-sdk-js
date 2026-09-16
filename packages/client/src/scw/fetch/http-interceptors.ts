@@ -26,7 +26,7 @@ type HeaderEntryMapper = (entry: [string, string]) => [string, string]
 class ObfuscatedRequest extends Request {
   constructor(
     request: Request,
-    private obfuscate: HeaderEntryMapper,
+    private readonly obfuscate: HeaderEntryMapper,
   ) {
     super(request.clone())
   }

@@ -19,7 +19,7 @@ describe('composeRequestInterceptors', () => {
 })
 
 describe('composeResponseErrorInterceptors', () => {
-  it('passes the error to all interceptors if they all throw', () => {
+  it('passes the error to all interceptors if they all throw', async () => {
     class NumberError extends Error {
       counter: number
 
@@ -43,7 +43,7 @@ describe('composeResponseErrorInterceptors', () => {
     return expect(interceptors).rejects.toThrow(new NumberError(45))
   })
 
-  it('stops at the second interceptor (amongst three) if it resolves', () => {
+  it('stops at the second interceptor (amongst three) if it resolves', async () => {
     const interceptors = composeResponseErrorInterceptors([
       ({ error }): Promise<unknown> => {
         throw error
@@ -57,7 +57,7 @@ describe('composeResponseErrorInterceptors', () => {
     return expect(interceptors).resolves.toBe(42)
   })
 
-  it('throws the last processed error', () => {
+  it('throws the last processed error', async () => {
     const interceptors = composeResponseErrorInterceptors([
       ({ error }): Promise<unknown> => {
         throw error

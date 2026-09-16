@@ -44,7 +44,7 @@ describe(`responseParser`, () => {
   const parseAsIs = responseParser(<T>(response: unknown) => response as T, 'json')
   const parseBlob = responseParser(<T>(response: unknown) => response as T, 'blob')
 
-  it(`triggers a type error for non 'Response' object`, () =>
+  it(`triggers a type error for non 'Response' object`, async () =>
     expect(
       // @ts-expect-error Different type
       parseJson('not-a-response'),

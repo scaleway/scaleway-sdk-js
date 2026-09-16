@@ -67,8 +67,7 @@ export const authenticateWithSecrets = (secrets: AuthenticationSecrets): Request
  *
  * @internal
  */
-export const obfuscateToken = (key: string): string =>
-  `${key.substring(0, 5)}xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
+export const obfuscateToken = (key: string): string => `${key.slice(0, 5)}xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
 /**
  * Obfuscates an UUID.
@@ -78,7 +77,7 @@ export const obfuscateToken = (key: string): string =>
  *
  * @internal
  */
-export const obfuscateUUID = (key: string): string => `${key.substring(0, 8)}-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+export const obfuscateUUID = (key: string): string => `${key.slice(0, 8)}-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
 type HeaderEntry = [string, string]
 

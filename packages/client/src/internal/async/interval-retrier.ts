@@ -185,7 +185,7 @@ type ResourceFetcher<T, R> = (request: R) => Promise<T>
  * @public
  */
 // oxlint-disable-next-line eslint/max-params -- four params are required by the public API contract
-export const waitForResource = <R, T>(
+export const waitForResource = async <R, T>(
   stop: WaitForStopCondition<T>,
   fetcher: ResourceFetcher<T, R>,
   request: R,
