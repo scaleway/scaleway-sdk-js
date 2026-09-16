@@ -18,6 +18,8 @@ revLookup['_'.charCodeAt(0)] = 63
 
 function getLens(b64) {
   var len = b64.length
+  var validLen
+  var placeHoldersLen
 
   if (len % 4 > 0) {
     throw new Error('Invalid string. Length must be a multiple of 4')
@@ -25,12 +27,12 @@ function getLens(b64) {
 
   // Trim off extra bytes after placeholder bytes are found
   // See: https://github.com/beatgammit/base64-js/issues/42
-  var validLen = b64.indexOf('=')
+  validLen = b64.indexOf('=')
   if (validLen === -1) {
     validLen = len
   }
 
-  var placeHoldersLen = validLen === len ? 0 : 4 - (validLen % 4)
+  placeHoldersLen = validLen === len ? 0 : 4 - (validLen % 4)
 
   return [validLen, placeHoldersLen]
 }
@@ -121,10 +123,10 @@ export function fromByteArray(uint8) {
   // pad the end with zeros, but make sure to not forget the extra bytes
   if (extraBytes === 1) {
     tmp = uint8[len - 1]
-    parts.push(`${lookup[tmp >> 2] + lookup[(tmp << 4) & 0x3f]}==`)
+    parts.push(`${lookup[tmp >> 2]}${lookup[(tmp << 4) & 0x3f]}==`)
   } else if (extraBytes === 2) {
     tmp = (uint8[len - 2] << 8) + uint8[len - 1]
-    parts.push(lookup[tmp >> 10] + lookup[(tmp >> 4) & 0x3f] + lookup[(tmp << 2) & 0x3f] + '=')
+    parts.push(`${lookup[tmp >> 10]}${lookup[(tmp >> 4) & 0x3f]}${lookup[(tmp << 2) & 0x3f]}=`)
   }
 
   return parts.join('')
