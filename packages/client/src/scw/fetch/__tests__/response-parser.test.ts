@@ -103,14 +103,14 @@ describe(`responseParser`, () => {
 
     await expect(
       responseParser(() => {
-        // oxlint-disable-next-line typescript/only-throw-error -- intentionally throwing a non-error to test error handling
+        // oxlint-disable-next-line eslint/no-throw-literal -- intentionally throwing a non-error to test error handling
         throw 'not-of-error-type'
       }, 'text')(validResponse.clone()),
     ).rejects.toThrow(new ScalewayError(validResponse.status, `could not parse 'application/json' response`))
 
     await expect(
       responseParser(() => {
-        // oxlint-disable-next-line typescript/only-throw-error -- intentionally throwing a non-error to test error handling
+        // oxlint-disable-next-line eslint/no-throw-literal -- intentionally throwing a non-error to test error handling
         throw 'not-of-error-type'
       }, 'blob')(emptyContentTypeResponse),
     ).rejects.toThrow(new ScalewayError(emptyContentTypeResponse.status, `could not parse '' response`))
