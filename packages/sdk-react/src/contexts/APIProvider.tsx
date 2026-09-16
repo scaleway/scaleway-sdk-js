@@ -1,4 +1,3 @@
-// oxlint-disable eslint/max-statements
 import type { Settings } from '@scaleway/sdk-client'
 import type { PropsWithChildren } from 'react'
 import { ClientProvider as BaseClientProvider } from './ClientProvider'

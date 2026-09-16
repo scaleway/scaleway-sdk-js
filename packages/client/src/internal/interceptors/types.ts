@@ -25,9 +25,7 @@
  *
  * @public
  */
-export type RequestInterceptor = {
-  ({ request }: { request: Readonly<Request> }): Request | Promise<Request>
-}
+export type RequestInterceptor = ({ request }: { request: Readonly<Request> }) => Request | Promise<Request>
 
 /**
  * Defines the interceptor for a `Response`.
@@ -44,9 +42,7 @@ export type RequestInterceptor = {
  *
  * @public
  */
-export type ResponseInterceptor = {
-  ({ response }: { response: Readonly<Response> }): Response | Promise<Response>
-}
+export type ResponseInterceptor = ({ response }: { response: Readonly<Response> }) => Response | Promise<Response>
 
 /**
  * Defines the interceptor for a `Response` error.
@@ -75,9 +71,7 @@ export type ResponseInterceptor = {
  *
  * @public
  */
-export type ResponseErrorInterceptor = {
-  ({ request, error }: { request: Request; error: unknown }): unknown
-}
+export type ResponseErrorInterceptor = ({ request, error }: { request: Request; error: unknown }) => unknown
 
 /**
  * Defines the network interceptors.

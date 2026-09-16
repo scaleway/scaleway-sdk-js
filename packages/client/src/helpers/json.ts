@@ -1,4 +1,3 @@
-// oxlint-disable-next-line typescript/consistent-indexed-object-style -- recursive type cannot use Record<string, JSON> (TS2456 circular reference)
 export type JSON = string | number | boolean | null | JSON[] | { [key: string]: JSON }
 
 export type JSONObject = {
@@ -65,7 +64,7 @@ export const camelize = (str: string): string => {
     capNext = char === '_' || char === ' ' || char === '-' || char === '.'
   }
 
-  return out.charAt(0).toLowerCase() + out.substring(1)
+  return out.charAt(0).toLowerCase() + out.slice(1)
 }
 
 /**

@@ -5,7 +5,7 @@ import type { APISdkCache, DefaultTypeBaseAPI, ExtendedAPISdkCache } from '../ty
 import { useSDKCache } from './SDKCacheProvider'
 
 export const createSDKFactory =
-  <K extends keyof APISdkCache>(SDKNamespace: { new (client: Client): APISdkCache[K] }, cacheKey: K) =>
+  <K extends keyof APISdkCache>(SDKNamespace: new (client: Client) => APISdkCache[K], cacheKey: K) =>
   () => {
     const clientCtx = useContext(ClientContext)
     const { sdkCache, setSdkInstance } = useSDKCache()
@@ -35,7 +35,7 @@ export const createSDKFactory =
  */
 export const createGenericSDKFactory =
   <TCustomAPIs extends DefaultTypeBaseAPI, K extends keyof ExtendedAPISdkCache<TCustomAPIs>>(
-    SDKNamespace: { new (client: Client): ExtendedAPISdkCache<TCustomAPIs>[K] },
+    SDKNamespace: new (client: Client) => ExtendedAPISdkCache<TCustomAPIs>[K],
     cacheKey: K,
   ) =>
   () => {

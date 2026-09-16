@@ -29,7 +29,7 @@ describe('createFibonacciIntervalStrategy', () => {
 
   it('returns a fibonacci sequence with custom base and factor', () => {
     const strategy = createFibonacciIntervalStrategy(500, 2)
-    const expectedSequence = [500, 1000, 2500, 6000, 14500, 35000]
+    const expectedSequence = [500, 1000, 2500, 6000, 14_500, 35_000]
     for (const expectedNumber of expectedSequence) {
       expect(strategy.next(0).value).toBe(expectedNumber)
     }
@@ -56,22 +56,22 @@ describe('createExponentialBackoffStrategy', () => {
   it(`throws if minDelay isn't valid`, () => {
     try {
       createExponentialBackoffStrategy(0, 5).next(0)
-    } catch (err) {
-      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
+    } catch (error) {
+      expect((error as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
   })
 
   it(`throws if maxDelay isn't valid`, () => {
     try {
       createExponentialBackoffStrategy(1, 0).next(0)
-    } catch (err) {
-      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
+    } catch (error) {
+      expect((error as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
 
     try {
       createExponentialBackoffStrategy(2, 1).next(0)
-    } catch (err) {
-      expect((err as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
+    } catch (error) {
+      expect((error as Error).message).toBe(`Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay`)
     }
   })
 })

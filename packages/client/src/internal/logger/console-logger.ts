@@ -12,12 +12,12 @@ import type { Logger } from './logger.js'
  * @internal
  */
 export class ConsoleLogger implements Logger {
-  private level: LevelResolver
+  private readonly level: LevelResolver
 
   constructor(
     public readonly logLevel: LogLevel,
     private readonly prefix = '',
-    private output: typeof console = console,
+    private readonly output: typeof console = console,
   ) {
     this.level = LevelResolver[this.logLevel]
   }

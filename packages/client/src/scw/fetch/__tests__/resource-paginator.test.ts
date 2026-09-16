@@ -6,7 +6,7 @@ const fetchPages = <T>(input: T[][] = [], delay = 0) => {
   const totalCount = input.flat().length
   const pages = [...input]
 
-  return () => {
+  return async () => {
     const page = {
       items: pages.shift() ?? [],
       totalCount,
@@ -117,7 +117,7 @@ describe('fetchAll', () => {
 describe('enrichForPagination', () => {
   const input = [[{ name: 'Rémy' }, { name: 'Jaime' }], [{ name: 'Vincent' }]]
 
-  it('can fetch all items', () =>
+  it('can fetch all items', async () =>
     expect(enrichForPagination('items', fetchPages(input), {}).all()).resolves.toStrictEqual(input.flat()))
 
   it('can fetch items page by page', async () => {
