@@ -22,6 +22,7 @@ export default defineConfig({
     'eslint/no-unused-vars': 'warn',
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
+    // eslint rules
     'eslint/eqeqeq': 'warn',
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-bitwise': 'warn',
@@ -33,8 +34,11 @@ export default defineConfig({
     'eslint/prefer-template': 'warn',
     'eslint/require-unicode-regexp': 'warn',
     'eslint/vars-on-top': 'warn',
+    // import rules
     'import/no-namespace': 'warn',
+    // react rules
     'react/set-state-in-effect': 'warn',
+    // typescript rules
     'typescript/explicit-member-accessibility': 'warn',
     'typescript/method-signature-style': 'warn',
     'typescript/no-dynamic-delete': 'warn',
@@ -53,6 +57,7 @@ export default defineConfig({
     'typescript/promise-function-async': 'warn',
     'typescript/strict-boolean-expressions': 'warn',
     'typescript/strict-void-return': 'warn',
+    // unicorn rules
     'unicorn/catch-error-name': 'warn',
     'unicorn/consistent-function-scoping': 'warn',
     'unicorn/custom-error-definition': 'warn',
