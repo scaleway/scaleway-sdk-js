@@ -16,4 +16,4 @@ export const isResponse = (obj: unknown): obj is Response =>
   'headers' in obj &&
   typeof obj.headers === 'object' &&
   'body' in obj &&
-  typeof obj.body !== 'undefined'
+  obj.body !== undefined

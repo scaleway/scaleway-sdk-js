@@ -7,6 +7,8 @@ import {
   loadConfigurationFromFileAsync,
 } from '../yml-loader.js'
 
+const currentDir = import.meta.dirname
+
 describe('convertYamlToConfiguration', () => {
   it('loads nothing from non-string object', () => {
     expect(convertYamlToConfiguration(null)).toStrictEqual({})
@@ -31,7 +33,7 @@ describe('convertYamlToConfiguration', () => {
 
 describe('loadConfigurationFromFile', () => {
   it('loads config from a yaml file', () => {
-    const yamlPath = path.join(__dirname, 'data', 'scw-config.yaml')
+    const yamlPath = path.join(currentDir, 'data', 'scw-config.yaml')
     const loadedConfig = loadConfigurationFromFile(yamlPath)
     expect(loadedConfig).not.toBeNull()
     expect(
@@ -53,7 +55,7 @@ describe('loadConfigurationFromFile', () => {
 
 describe('loadConfigurationFromFileAsync', () => {
   it('loads config from a yaml file asynchronously', async () => {
-    const yamlPath = path.join(__dirname, 'data', 'scw-config.yaml')
+    const yamlPath = path.join(currentDir, 'data', 'scw-config.yaml')
     const loadedConfig = await loadConfigurationFromFileAsync(yamlPath)
     expect(loadedConfig).not.toBeNull()
     expect(loadedConfig).toStrictEqual({
@@ -81,7 +83,7 @@ describe('hasSecureFilePermissions', () => {
     if (process.platform === 'win32') {
       return
     }
-    const yamlPath = path.join(__dirname, 'data', 'scw-config.yaml')
+    const yamlPath = path.join(currentDir, 'data', 'scw-config.yaml')
     const result = await hasSecureFilePermissions(yamlPath)
     expect(typeof result).toBe('boolean')
   })

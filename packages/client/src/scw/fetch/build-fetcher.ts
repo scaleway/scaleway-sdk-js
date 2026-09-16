@@ -55,17 +55,17 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
   let requestNumber = 0
   const prepareRequest = (requestId: string) =>
     composeRequestInterceptors([
-      ...(settings.interceptors.map(obj => obj.request).filter(obj => obj) as RequestInterceptor[]),
+      ...(settings.interceptors.map(obj => obj.request).filter(Boolean) as RequestInterceptor[]),
       logRequest(requestId, obfuscateInterceptor(obfuscateAuthHeadersEntry)),
     ])
   const prepareResponse = (requestId: string) =>
     composeResponseInterceptors([
-      ...(settings.interceptors.map(obj => obj.response).filter(obj => obj) as ResponseInterceptor[]),
+      ...(settings.interceptors.map(obj => obj.response).filter(Boolean) as ResponseInterceptor[]),
       logResponse(requestId),
     ])
   const prepareResponseErrors = () =>
     composeResponseErrorInterceptors(
-      settings.interceptors.map(obj => obj.responseError).filter(obj => obj) as ResponseErrorInterceptor[],
+      settings.interceptors.map(obj => obj.responseError).filter(Boolean) as ResponseErrorInterceptor[],
     )
 
   return async <T>(request: Readonly<ScwRequest>, unwrapper: ResponseUnmarshaller<T> = asIs): Promise<T> => {
