@@ -6,5 +6,5 @@ import type { ScalewayError } from './scw-error.js'
  * @internal
  */
 export type ScalewayErrorFromJSONInitializer = {
-  fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null
+  fromJSON: (status: number, obj: Readonly<JSONObject>) => ScalewayError | null
 }

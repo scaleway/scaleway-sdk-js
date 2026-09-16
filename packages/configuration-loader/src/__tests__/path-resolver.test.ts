@@ -14,7 +14,7 @@ const setOrDeleteEnv = (key: string, value?: string): void => {
   if (value) {
     env[key] = value
   } else {
-    delete env[key]
+    Reflect.deleteProperty(env, key)
   }
 }
 

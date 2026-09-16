@@ -76,7 +76,7 @@ export const camelize = (str: string): string => {
  *
  * @internal
  */
-export const camelizeKeys = <T>(obj: object | unknown[] | unknown, ignoreKeys: string[] = []): T => {
+export const camelizeKeys = <T>(obj: unknown, ignoreKeys: string[] = []): T => {
   if (Array.isArray(obj)) {
     return obj.map(v => camelizeKeys(v, ignoreKeys)) as unknown as T
   }

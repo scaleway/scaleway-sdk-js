@@ -51,7 +51,7 @@ const buildMessage = (options: TooManyRequestsErrorOptions): string => {
   if (details.length > 0) {
     output += ` (${details.join(', ')})`
   }
-  if (helpMessage.length > 0) {
+  if (helpMessage && helpMessage.length > 0) {
     output += `: ${helpMessage}`
   }
 

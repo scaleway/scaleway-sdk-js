@@ -128,7 +128,7 @@ describe('ConsoleLogger', () => {
   })
 
   it('returns the proper level boolean', () => {
-    const log = vi.fn().mockImplementation(() => {
+    const log = vi.fn<(message: string) => void>().mockImplementation(() => {
       /* noop */
     })
     const out = makeCallbackConsole(log)
