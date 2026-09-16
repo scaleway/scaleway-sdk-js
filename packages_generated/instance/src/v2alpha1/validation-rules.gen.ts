@@ -36,6 +36,13 @@ export const ListSecurityGroupsRequest = {
   },
 }
 
+export const ListServerCompatibleTypesRequest = {
+  pageSize: {
+    greaterThanOrEqual: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListServerTypesRequest = {
   pageSize: {
     greaterThanOrEqual: 0,

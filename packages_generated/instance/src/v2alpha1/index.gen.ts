@@ -72,6 +72,8 @@ export type {
   ListSecurityGroupsRequest,
   ListSecurityGroupsRequestOrderBy,
   ListSecurityGroupsResponse,
+  ListServerCompatibleTypesRequest,
+  ListServerCompatibleTypesResponse,
   ListServerTypesRequest,
   ListServerTypesResponse,
   ListServersRequest,

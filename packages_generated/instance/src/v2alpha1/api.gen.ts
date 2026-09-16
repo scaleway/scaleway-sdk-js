@@ -36,6 +36,7 @@ import {
   unmarshalListPlacementGroupsResponse,
   unmarshalListPrivateNetworkInterfacesResponse,
   unmarshalListSecurityGroupsResponse,
+  unmarshalListServerCompatibleTypesResponse,
   unmarshalListServerTypesResponse,
   unmarshalListServersResponse,
   unmarshalListSnapshotsResponse,
@@ -123,6 +124,8 @@ import type {
   ListPrivateNetworkInterfacesResponse,
   ListSecurityGroupsRequest,
   ListSecurityGroupsResponse,
+  ListServerCompatibleTypesRequest,
+  ListServerCompatibleTypesResponse,
   ListServerTypesRequest,
   ListServerTypesResponse,
   ListServersRequest,
@@ -376,6 +379,20 @@ export class API extends ParentAPI {
           ])),
         ),
       },
+    )
+
+  
+  listServerCompatibleTypes = (request: Readonly<ListServerCompatibleTypesRequest>) =>
+    this.client.fetch<ListServerCompatibleTypesResponse>(
+      {
+        method: 'GET',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/compatible-types`,
+        urlParams: urlParams(
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['page_token', request.pageToken],
+        ),
+      },
+      unmarshalListServerCompatibleTypesResponse,
     )
 
   
