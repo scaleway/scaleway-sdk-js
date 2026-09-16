@@ -448,7 +448,7 @@ export interface SecurityGroupRuleConfig {
    */
   destinationPorts?: SecurityGroupRulePortRange
   /**
-   * Position of the rule in the list.
+   * Position of this rule in the rule list, starting at 1.
    */
   position: number
 }
@@ -2091,6 +2091,24 @@ export interface ListSecurityGroupsResponse {
   /**
    * Total number of items.
    */
+  totalCount: number
+}
+
+
+export type ListServerCompatibleTypesRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  serverId: string
+  pageToken?: string
+  pageSize?: number
+}
+
+
+export interface ListServerCompatibleTypesResponse {
+  serverTypes: ServerType[]
+  nextPageToken?: string
   totalCount: number
 }
 

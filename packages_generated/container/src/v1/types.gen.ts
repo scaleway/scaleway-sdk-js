@@ -459,6 +459,10 @@ Possible check types:
    */
   privateEndpoint?: string
   /**
+   * Whether default public endpoint is enabled or not.
+   */
+  defaultPublicEndpointEnabled: boolean
+  /**
    * Region in which the container exists.
    */
   region: ScwRegion
