@@ -32,7 +32,7 @@ function discoverSdkPackages(packageNameFilter: string): Map<string, string> {
     return new Map()
   }
 
-  const pkgJson: unknown = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
+  const pkgJson: unknown = JSON.parse(readFileSync(pkgJsonPath, 'utf8'))
   const allDeps: Record<string, string> = isPackageJson(pkgJson)
     ? {
         ...pkgJson.dependencies,

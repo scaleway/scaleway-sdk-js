@@ -49,7 +49,7 @@ function tryReadPackageDir(dirPath: string, packages: Map<string, string>): void
     return
   }
   try {
-    const pkgJson: unknown = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'))
+    const pkgJson: unknown = JSON.parse(readFileSync(pkgJsonPath, 'utf8'))
     if (isPackageJsonWithName(pkgJson) && pkgJson.name) {
       packages.set(pkgJson.name, dirPath)
     }
@@ -115,7 +115,7 @@ function resolvePackageDir(packageName: string): string | undefined {
  * This is the generic path — works with node_modules, pnpm workspaces, etc.
  */
 function discoverFromDependencies(packageNameFilter: string): Map<string, string> {
-  const pkgJson: unknown = JSON.parse(readFileSync(path.resolve('package.json'), 'utf-8'))
+  const pkgJson: unknown = JSON.parse(readFileSync(path.resolve('package.json'), 'utf8'))
 
   const allDeps: Record<string, string> = isPackageJson(pkgJson)
     ? {
