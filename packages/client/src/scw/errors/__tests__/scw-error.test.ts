@@ -8,6 +8,7 @@ describe('ScalewayError', () => {
   })
 
   it('returns proper name, even if class name has changed', () => {
+    // oxlint-disable-next-line unicorn/custom-error-definition -- name is intentionally inherited from ScalewayError
     class AltError extends ScalewayError {}
     expect(new AltError(200, '').name).toBe('ScalewayError')
   })

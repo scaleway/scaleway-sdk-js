@@ -25,6 +25,7 @@ describe('composeResponseErrorInterceptors', () => {
 
       constructor(obj: number) {
         super()
+        this.name = 'NumberError'
         this.counter = obj
         Object.setPrototypeOf(this, NumberError.prototype)
       }

@@ -78,11 +78,7 @@ export function* createExponentialBackoffStrategy(minDelay: number, maxDelay: nu
   const randomInRange = (min: number, max: number) => min + Math.random() * (max - min)
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
-    if (attempt > ceiling) {
-      yield maxDelay
-    } else {
-      yield randomInRange(minDelay, minDelay * 2 ** (attempt - 1))
-    }
+    yield attempt > ceiling ? maxDelay : randomInRange(minDelay, minDelay * 2 ** (attempt - 1))
     attempt += 1
   }
 }

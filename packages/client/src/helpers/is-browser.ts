@@ -1,1 +1,1 @@
-export const isBrowser = (): boolean => typeof globalThis?.document !== 'undefined'
+export const isBrowser = (): boolean => globalThis?.document !== undefined

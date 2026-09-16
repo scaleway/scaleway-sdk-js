@@ -13,7 +13,7 @@ export const isRecordOfStringArray = (obj: Readonly<unknown>): obj is Record<str
     return false
   }
   for (const elt of Object.values(obj)) {
-    if (!Array.isArray(elt) || Object.values(elt).find(x => typeof x !== 'string') !== undefined) {
+    if (!Array.isArray(elt) || Object.values(elt).some(x => typeof x !== 'string')) {
       return false
     }
   }

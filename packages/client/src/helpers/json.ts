@@ -56,11 +56,7 @@ export const camelize = (str: string): string => {
   for (let capNext = false, index = 0; index < strLength; index += 1) {
     const char = str.charAt(index)
     if (char >= 'a' && char <= 'z') {
-      if (capNext) {
-        out += char.toUpperCase()
-      } else {
-        out += char
-      }
+      out += capNext ? char.toUpperCase() : char
     } else if (char >= 'A' && char <= 'Z') {
       out += char
     } else if (char >= '0' && char <= '9') {

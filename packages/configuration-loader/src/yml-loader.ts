@@ -44,7 +44,7 @@ export const convertYamlToConfiguration = (input: string | null): ConfigurationT
         if (typeof map[currentSection] !== 'object') {
           map[currentSection] = {}
         }
-        ;[, , map[currentSection][item[1]]] = item
+        map[currentSection][item[1]] = item[2]
       }
     }
   })

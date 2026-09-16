@@ -19,18 +19,16 @@ describe(`dumpRequest`, () => {
   it(`returns a readable string`, () => {
     const userAgentHeader = !isBrowser() ? `User-Agent: scaleway-sdk-js/v1.0.0\r\n` : ''
 
-    return expect(
-      dumpRequest(
-        buildRequest(
-          {
-            body: JSON.stringify({ myProp: 'random-value' }),
-            method: 'POST',
-            path: '/random/path',
-          },
-          DEFAULT_SETTINGS,
-        ),
-      ),
-    ).resolves.toBe(
+    const request = buildRequest(
+      {
+        body: JSON.stringify({ myProp: 'random-value' }),
+        method: 'POST',
+        path: '/random/path',
+      },
+      DEFAULT_SETTINGS,
+    )
+
+    return expect(dumpRequest(request)).resolves.toBe(
       `POST: https://api.scaleway.com/random/path\r\nAccept: application/json\r\nContent-Type: text/plain;charset=UTF-8\r\n${userAgentHeader}{"myProp":"random-value"}`,
     )
   })
