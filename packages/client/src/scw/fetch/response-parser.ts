@@ -66,10 +66,10 @@ export const responseParser =
         }
 
         return unmarshaller(await response.text())
-      } catch (err) {
+      } catch (error) {
         throw new ScalewayError(
           response.status,
-          `could not parse '${contentType ?? ''}' response${err instanceof Error ? `: ${err.message}` : ''}`,
+          `could not parse '${contentType ?? ''}' response${error instanceof Error ? `: ${error.message}` : ''}`,
         )
       }
     }

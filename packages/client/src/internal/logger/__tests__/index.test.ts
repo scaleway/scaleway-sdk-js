@@ -128,7 +128,7 @@ describe('ConsoleLogger', () => {
   })
 
   it('returns the proper level boolean', () => {
-    const log = vi.fn().mockImplementation(() => {
+    const log = vi.fn<(message: string) => void>().mockImplementation(() => {
       /* noop */
     })
     const out = makeCallbackConsole(log)
@@ -158,7 +158,7 @@ describe('ConsoleLogger', () => {
       }),
     )
     for (const method of allLogLevels) {
-      const randomStr = (Math.random() + 1).toString(36).substring(7)
+      const randomStr = (Math.random() + 1).toString(36).slice(7)
       logger[method](randomStr)
       expect(latestMessage).toBe(`${prefix} ${randomStr}`)
     }
@@ -174,7 +174,7 @@ describe('ConsoleLogger', () => {
       }),
     )
     for (const method of allLogLevels) {
-      const randomStr = (Math.random() + 1).toString(36).substring(7)
+      const randomStr = (Math.random() + 1).toString(36).slice(7)
       logger[method](randomStr)
       expect(latestMessage).toBe('')
     }

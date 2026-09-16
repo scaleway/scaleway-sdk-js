@@ -44,7 +44,7 @@ describe(`responseParser`, () => {
   const parseAsIs = responseParser(<T>(response: unknown) => response as T, 'json')
   const parseBlob = responseParser(<T>(response: unknown) => response as T, 'blob')
 
-  it(`triggers a type error for non 'Response' object`, () =>
+  it(`triggers a type error for non 'Response' object`, async () =>
     expect(
       // @ts-expect-error Different type
       parseJson('not-a-response'),
@@ -103,14 +103,14 @@ describe(`responseParser`, () => {
 
     await expect(
       responseParser(() => {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        // oxlint-disable-next-line typescript/only-throw-error -- intentionally throwing a non-error to test error handling
         throw 'not-of-error-type'
       }, 'text')(validResponse.clone()),
     ).rejects.toThrow(new ScalewayError(validResponse.status, `could not parse 'application/json' response`))
 
     await expect(
       responseParser(() => {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        // oxlint-disable-next-line typescript/only-throw-error -- intentionally throwing a non-error to test error handling
         throw 'not-of-error-type'
       }, 'blob')(emptyContentTypeResponse),
     ).rejects.toThrow(new ScalewayError(emptyContentTypeResponse.status, `could not parse '' response`))
