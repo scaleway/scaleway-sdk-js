@@ -105,6 +105,7 @@ export const unmarshalContainer = (data: unknown): Container => {
     args: data.args,
     command: data.command,
     createdAt: unmarshalDate(data.created_at),
+    defaultPublicEndpointEnabled: data.default_public_endpoint_enabled,
     description: data.description,
     environmentVariables: data.environment_variables,
     errorMessage: data.error_message,
