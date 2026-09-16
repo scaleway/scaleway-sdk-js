@@ -2095,6 +2095,24 @@ export interface ListSecurityGroupsResponse {
 }
 
 
+export type ListServerCompatibleTypesRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  serverId: string
+  pageToken?: string
+  pageSize?: number
+}
+
+
+export interface ListServerCompatibleTypesResponse {
+  serverTypes: ServerType[]
+  nextPageToken?: string
+  totalCount: number
+}
+
+
 export type ListServerTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.

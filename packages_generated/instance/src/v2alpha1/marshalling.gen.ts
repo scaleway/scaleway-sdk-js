@@ -24,6 +24,7 @@ import type {
   SecurityGroupSummary,
   ListSecurityGroupsResponse,
   ServerType,
+  ListServerCompatibleTypesResponse,
   ListServerTypesResponse,
   ServerSummary,
   ListServersResponse,
@@ -464,6 +465,20 @@ const unmarshalServerType = (data: unknown): ServerType => {
     name: data.name,
     vcpuCount: data.vcpu_count,
   } as ServerType
+}
+
+export const unmarshalListServerCompatibleTypesResponse = (data: unknown): ListServerCompatibleTypesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListServerCompatibleTypesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    nextPageToken: data.next_page_token,
+    serverTypes: unmarshalArrayOfObject(data.server_types, unmarshalServerType),
+    totalCount: data.total_count,
+  } as ListServerCompatibleTypesResponse
 }
 
 export const unmarshalListServerTypesResponse = (data: unknown): ListServerTypesResponse => {
