@@ -448,7 +448,7 @@ export interface SecurityGroupRuleConfig {
    */
   destinationPorts?: SecurityGroupRulePortRange
   /**
-   * Position of the rule in the list.
+   * Position of this rule in the rule list, starting at 1.
    */
   position: number
 }
