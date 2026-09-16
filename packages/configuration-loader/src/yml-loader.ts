@@ -66,7 +66,7 @@ export const convertYamlToConfiguration = (input: string | null): ConfigurationT
 export const loadConfigurationFromFile = (filePath: string): ConfigurationType => {
   // `readFileSync` returns a string when encoding option is specified.
   // {@link https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options}
-  const fileContent = readFileSync(filePath, 'utf-8')
+  const fileContent = readFileSync(filePath, 'utf8')
 
   return convertYamlToConfiguration(fileContent)
 }
@@ -86,7 +86,7 @@ export const loadConfigurationFromFile = (filePath: string): ConfigurationType =
  * @public
  */
 export const loadConfigurationFromFileAsync = async (filePath: string): Promise<ConfigurationType> => {
-  const fileContent = await readFileAsync(filePath, 'utf-8')
+  const fileContent = await readFileAsync(filePath, 'utf8')
 
   return convertYamlToConfiguration(fileContent)
 }
