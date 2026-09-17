@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.17.0
+
+### Minor Changes
+
+- fix: add range to react deps (#3581)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-react@0.16.0
+
 ## 0.16.0
 
 ### Minor Changes
