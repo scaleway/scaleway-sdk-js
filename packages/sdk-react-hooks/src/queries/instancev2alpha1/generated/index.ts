@@ -4,6 +4,8 @@ export { useInstancev2alpha1APIGetResourceCountsQuery } from "./useInstancev2alp
 export { useInstancev2alpha1APIListServersQuery } from "./useInstancev2alpha1APIListServersQuery"
 export { useInstancev2alpha1APIListServersInfiniteQuery } from "./useInstancev2alpha1APIListServersInfiniteQuery"
 export { useInstancev2alpha1APIGetServerQuery } from "./useInstancev2alpha1APIGetServerQuery"
+export { useInstancev2alpha1APIListServerCompatibleTypesQuery } from "./useInstancev2alpha1APIListServerCompatibleTypesQuery"
+export { useInstancev2alpha1APIListServerCompatibleTypesInfiniteQuery } from "./useInstancev2alpha1APIListServerCompatibleTypesInfiniteQuery"
 export { useInstancev2alpha1APIListServerTypesQuery } from "./useInstancev2alpha1APIListServerTypesQuery"
 export { useInstancev2alpha1APIListServerTypesInfiniteQuery } from "./useInstancev2alpha1APIListServerTypesInfiniteQuery"
 export { useInstancev2alpha1APIListPrivateNetworkInterfacesQuery } from "./useInstancev2alpha1APIListPrivateNetworkInterfacesQuery"
