@@ -327,7 +327,7 @@
   },
   "peerDependencies": {
     "@scaleway/use-dataloader": "7.1.1",
-    "react": "18.x || 19.x"
+    "react": "^19.3.0"
   },
   "optionalDependencies": {
     "@scaleway/sdk-account": "workspace:*",
