@@ -38,6 +38,8 @@ import {
   unmarshalSetEnabledAlertRulesResponse,
   marshalSetEnabledCustomAlertRulesRequest,
   unmarshalSetEnabledCustomAlertRulesResponse,
+  marshalTestCustomAlertRuleRequest,
+  unmarshalTestCustomAlertRuleResponse,
   marshalUpdateCustomAlertRuleRequest,
 } from './marshalling.gen.js'
 import type {
@@ -77,6 +79,8 @@ import type {
   SetEnabledAlertRulesResponse,
   SetEnabledCustomAlertRulesRequest,
   SetEnabledCustomAlertRulesResponse,
+  TestCustomAlertRuleRequest,
+  TestCustomAlertRuleResponse,
   UpdateCustomAlertRuleRequest,
 } from './types.gen.js'
 
@@ -512,6 +516,26 @@ export class API extends ParentAPI {
         method: 'DELETE',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules/${validatePathParam('customAlertRuleId', request.customAlertRuleId)}`,
       },
+    )
+
+  
+  /**
+   * Test a custom alert rule. Test whether a custom alert rule's condition is currently satisfied, without needing to create or enable it.
+   *
+   * @param request - The request {@link TestCustomAlertRuleRequest}
+   * @returns A Promise of TestCustomAlertRuleResponse
+   */
+  testCustomAlertRule = (request: Readonly<TestCustomAlertRuleRequest>) =>
+    this.client.fetch<TestCustomAlertRuleResponse>(
+      {
+        body: JSON.stringify(
+          marshalTestCustomAlertRuleRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/test-custom-alert-rule`,
+      },
+      unmarshalTestCustomAlertRuleResponse,
     )
 
   
