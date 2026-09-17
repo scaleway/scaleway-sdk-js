@@ -187,6 +187,9 @@ importers:
       '@repo/generate-packages':
         specifier: workspace:*
         version: link:tools/generate-packages
+      '@repo/npm-trust':
+        specifier: workspace:*
+        version: link:tools/npm-trust
       '@repo/pnpm-auto-release':
         specifier: workspace:*
         version: link:tools/pnpm-auto-release
@@ -1626,6 +1629,15 @@ importers:
 
   tools/generate-react-sdk:
     devDependencies:
+      '@types/node':
+        specifier: 26.5.1
+        version: 26.5.1
+
+  tools/npm-trust:
+    devDependencies:
+      '@repo/configs':
+        specifier: workspace:*
+        version: link:../configs
       '@types/node':
         specifier: 26.5.1
         version: 26.5.1
