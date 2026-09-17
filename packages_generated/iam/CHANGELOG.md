@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.17.0
+
+### Minor Changes
+
+- feat: update generated APIs (#3576)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.2
+
 ## 2.16.0
 
 ### Minor Changes

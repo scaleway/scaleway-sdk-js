@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.17.0
+
+### Minor Changes
+
+- feat(s2s_vpn): add support for updating Connection's PSK secret (#3577)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.2
+
 ## 2.16.0
 
 ### Minor Changes

@@ -1,5 +1,16 @@
 # Change Log
 
+## 2.16.0
+
+### Minor Changes
+
+- chore(containers): remove CLI exclusion for enable_default_public_endpoint (#3568)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.2
+
 ## 2.15.0
 
 ### Minor Changes

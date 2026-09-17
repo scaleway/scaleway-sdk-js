@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.19.0
+
+### Minor Changes
+
+- chore(instance): document minimal position for security rule (#3569)
+
+- feat(instance): add 'ListServerCompatibleTypes' RPC (#3567)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.2
+
 ## 2.18.0
 
 ### Minor Changes

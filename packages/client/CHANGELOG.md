@@ -1,5 +1,25 @@
 # Change Log
 
+## 2.10.0
+
+### Minor Changes
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- chore: linter (#3578)
+
+- fix(oxlint): enable unicorn/switch-case-braces as error (#3561)
+
+- feat(peer): fix peer deps range (#3579)
+
+- fix(oxlint): enable eqeqeq, no-eq-null, prefer-template, vars-on-top as error (#3572)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574)
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
 ## 2.9.0
 
 ### Minor Changes

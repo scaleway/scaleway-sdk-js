@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.11.0
+
+### Minor Changes
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- fix(oxlint): enable unicorn/import-style as error (#3553)
+
+- fix(oxlint): enable unicorn/text-encoding-identifier-case as error (#3571)
+
 ## 0.10.0
 
 ### Minor Changes

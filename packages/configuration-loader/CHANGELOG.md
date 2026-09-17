@@ -1,5 +1,17 @@
 # Change Log
 
+## 2.8.0
+
+### Minor Changes
+
+- fix(oxlint): enable unicorn/import-style as error (#3553)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
+- fix(oxlint): enable unicorn/text-encoding-identifier-case as error (#3571)
+
 ## 2.7.0
 
 ### Minor Changes

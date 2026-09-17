@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-react",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "private": false,
   "description": "React API Provider using client settings",
   "repository": {
