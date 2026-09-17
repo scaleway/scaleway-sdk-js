@@ -42,7 +42,7 @@ export const RequestAdminRoleRequest = {
   username: {
     maxLength: 64,
     minLength: 2,
-    pattern: /^[a-zA-Z0-9@._-]+$/,
+    pattern: /^[a-zA-Z0-9@._+-]+$/,
   },
 }
 
