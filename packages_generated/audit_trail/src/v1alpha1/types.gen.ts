@@ -1725,6 +1725,38 @@ export interface SetEnabledCustomAlertRulesResponse {
 }
 
 
+export type TestCustomAlertRuleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the Organization to target.
+   */
+  organizationId?: string
+  /**
+   * The Common Expression Language (CEL) string defining the logic for the alert rule.
+   */
+  query: string
+  /**
+   * The duration of time over which to evaluate the rule (how far back to look for matching events).
+   */
+  evaluationWindow?: string
+  /**
+   * The minimum number of matched occurrences required within the evaluation window to trigger the alert.
+   */
+  occurrences: number
+}
+
+
+export interface TestCustomAlertRuleResponse {
+  /**
+   * A false return value does not mean the alert rule is incorrect, only that it is not currently firing.
+   */
+  firing: boolean
+}
+
+
 export type UpdateCustomAlertRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
