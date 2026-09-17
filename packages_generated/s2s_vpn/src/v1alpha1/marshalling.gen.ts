@@ -521,6 +521,8 @@ export const marshalUpdateConnectionRequest = (
   ikev2_ciphers: ((request.ikev2Ciphers !== undefined) ?  request.ikev2Ciphers.map(elt => marshalConnectionCipher(elt, defaults)): undefined),
   initiation_policy: request.initiationPolicy,
   name: request.name,
+  secret_id: request.secretId,
+  secret_revision: request.secretRevision,
   tags: request.tags,
 })
 

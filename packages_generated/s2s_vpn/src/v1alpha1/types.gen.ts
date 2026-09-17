@@ -550,7 +550,8 @@ export type CreateConnectionRequest = {
    */
   enableRoutePropagation: boolean
   /**
-   * Previously created secret in Secret Manager containing the PSK to be used for the IPsec tunnel. If no secret given, S2S VPN will create one automatically in Secret Manager, reference it's secret_id and revision in the connection and use the generated PSK. Secret revision is also optional and maybe used to refer to a previous revision. If no revision given, "latest" is used.
+   * If no secret is given, S2S VPN will create one automatically in Secret Manager, reference its secret_id and version in the connection and use the generated PSK.
+Secret version is also optional and maybe used to refer to a previous version. If no version is given, "latest" is used.
    */
   secret?: CreateConnectionRequestSecret
   /**
@@ -1107,7 +1108,7 @@ export type RenewConnectionPskRequest = {
    */
   connectionId: string
   /**
-   * Generate a new revision or update to the latest existing one.
+   * Generate a new version or update to the latest existing one.
    */
   generateRevision?: boolean
 }
@@ -1178,6 +1179,14 @@ export type UpdateConnectionRequest = {
    * List of ESP ciphers proposed for the IPsec tunnel.
    */
   espCiphers?: ConnectionCipher[]
+  /**
+   * Secret ID in the client's project containing the PSK.
+   */
+  secretId?: string
+  /**
+   * If not given it will not change. If secret_id is updated, secret_revision should be set accordingly.
+   */
+  secretRevision?: number
 }
 
 
