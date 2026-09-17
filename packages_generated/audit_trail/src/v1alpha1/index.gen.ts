@@ -124,6 +124,8 @@ export type {
   SetEnabledCustomAlertRulesResponse,
   SystemEvent,
   SystemEventKind,
+  TestCustomAlertRuleRequest,
+  TestCustomAlertRuleResponse,
   UpdateCustomAlertRuleRequest,
   VpcConnectorInfo,
   VpcGwGatewayInfo,

@@ -87,6 +87,16 @@ export const ListSystemEventsRequest = {
   },
 }
 
+export const TestCustomAlertRuleRequest = {
+  occurrences: {
+    greaterThan: 0,
+  },
+  query: {
+    maxLength: 2048,
+    minLength: 1,
+  },
+}
+
 export const UpdateCustomAlertRuleRequest = {
   description: {
     maxLength: 2048,
