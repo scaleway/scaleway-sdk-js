@@ -32,13 +32,10 @@ export default defineConfig({
     'typescript/no-unnecessary-condition': 'warn',
     'typescript/no-unnecessary-type-parameters': 'warn',
     'typescript/no-unsafe-type-assertion': 'warn',
-    'typescript/only-throw-error': 'warn',
     'typescript/parameter-properties': 'warn',
     'typescript/promise-function-async': 'warn',
     'typescript/strict-boolean-expressions': 'warn',
     // unicorn rules
-    'unicorn/error-message': 'warn',
-    'unicorn/prefer-type-error': 'warn',
   },
   overrides: [
     {

@@ -75,7 +75,7 @@ export const loadProfileFromConfigurationFile = (params?: Readonly<ProfileFromFi
   const profileName = params?.profileName ?? 'default'
   const profileMap = configs[profileName]
   if (typeof profileMap !== 'object') {
-    throw new Error(`Could not find the desired profile '${profileName}' in the configuration file.`)
+    throw new TypeError(`Could not find the desired profile '${profileName}' in the configuration file.`)
   }
 
   return profileMap
@@ -131,7 +131,7 @@ export const loadProfileFromConfigurationFileAsync = async (
   const profileName = params?.profileName ?? 'default'
   const profileMap = configs[profileName]
   if (typeof profileMap !== 'object') {
-    throw new Error(`Could not find the desired profile '${profileName}' in the configuration file.`)
+    throw new TypeError(`Could not find the desired profile '${profileName}' in the configuration file.`)
   }
 
   return profileMap

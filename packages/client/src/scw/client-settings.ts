@@ -106,7 +106,7 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
 
   // HTTP Client.
   if (typeof obj.httpClient !== typeof fetch) {
-    throw new Error(`Invalid HTTP Client`)
+    throw new TypeError(`Invalid HTTP Client`)
   }
 
   // Default Page Size.
@@ -119,6 +119,6 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
 
   // User Agent.
   if (typeof obj.userAgent !== 'string') {
-    throw new Error(`Invalid User-Agent`)
+    throw new TypeError(`Invalid User-Agent`)
   }
 }
