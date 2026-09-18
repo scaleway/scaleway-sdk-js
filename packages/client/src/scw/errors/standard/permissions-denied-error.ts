@@ -46,16 +46,15 @@ export class PermissionsDeniedError extends ScalewayError {
     return new PermissionsDeniedError(
       status,
       obj,
-      obj.details.reduce<PermissionsDeniedErrorDetails[]>(
-        (list, detail) =>
-          isJSONObject(detail) && typeof detail.resource === 'string' && typeof detail.action === 'string'
-            ? list.concat({
-                action: detail.action,
-                resource: detail.resource,
-              })
-            : list,
-        [],
-      ),
+      obj.details.reduce<PermissionsDeniedErrorDetails[]>((list, detail) => {
+        if (isJSONObject(detail) && typeof detail.resource === 'string' && typeof detail.action === 'string') {
+          list.push({
+            action: detail.action,
+            resource: detail.resource,
+          })
+        }
+        return list
+      }, []),
     )
   }
 }

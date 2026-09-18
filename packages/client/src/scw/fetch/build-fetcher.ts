@@ -23,7 +23,7 @@ import type { ResponseUnmarshaller, ScwRequest } from './types.js'
 export const buildRequest = (request: Readonly<ScwRequest>, settings: Readonly<Settings>): Request => {
   let { path } = request
   if (request.urlParams instanceof URLSearchParams) {
-    path = path.concat(`?${request.urlParams.toString()}`)
+    path = `${path}?${request.urlParams.toString()}`
   }
 
   return new Request(`${settings.apiURL}${path}`, {

@@ -40,11 +40,8 @@ export default defineConfig({
     'typescript/promise-function-async': 'warn',
     'typescript/strict-boolean-expressions': 'warn',
     // unicorn rules
-    'unicorn/consistent-function-scoping': 'warn',
     'unicorn/error-message': 'warn',
     'unicorn/prefer-global-this': 'warn',
-    'unicorn/prefer-response-static-json': 'warn',
-    'unicorn/prefer-spread': 'warn',
     'unicorn/prefer-type-error': 'warn',
   },
   overrides: [

@@ -157,7 +157,7 @@ export const withAdditionalInterceptors =
   (interceptors: NetworkInterceptors[]) =>
   (settings: Readonly<Settings>): Settings => ({
     ...settings,
-    interceptors: settings.interceptors.concat(interceptors),
+    interceptors: [...settings.interceptors, ...interceptors],
   })
 
 /**
@@ -170,14 +170,15 @@ export const withLegacyInterceptors =
     if (!settings.requestInterceptors && !settings.responseInterceptors) {
       return settings
     }
-    const allInterceptors = settings.interceptors.concat(
-      (settings.requestInterceptors ?? []).map(obj => ({
+    const allInterceptors = [
+      ...settings.interceptors,
+      ...(settings.requestInterceptors ?? []).map(obj => ({
         request: obj,
       })),
-      (settings.responseInterceptors ?? []).map(obj => ({
+      ...(settings.responseInterceptors ?? []).map(obj => ({
         response: obj,
       })),
-    )
+    ]
 
     return {
       ...settings,
