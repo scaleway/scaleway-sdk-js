@@ -74,7 +74,7 @@ export type ScwFile = {
 export class Decimal {
   private readonly str: string
 
-  constructor(v: string) {
+  public constructor(v: string) {
     this.str = v
   }
 

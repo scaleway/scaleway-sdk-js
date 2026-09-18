@@ -64,19 +64,19 @@ const buildMessage = (options: TooManyRequestsErrorOptions): string => {
  * @public
  */
 export class TooManyRequestsError extends ScalewayError {
-  readonly helpMessage: string
-  readonly limit?: TooManyRequestsQuotaPolicy
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly helpMessage: string
+  public readonly limit?: TooManyRequestsQuotaPolicy
   /** The number of seconds until the quota resets */
-  readonly resetSeconds?: number
+  public readonly resetSeconds?: number
   /** The timestamp when the quota resets */
-  readonly resetAt?: Date
+  public readonly resetAt?: Date
 
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    options: TooManyRequestsErrorOptions,
-  ) {
+  public constructor(status: number, body: JSONObject, options: TooManyRequestsErrorOptions) {
     super(status, body, buildMessage(options))
+    this.status = status
+    this.body = body
     this.name = 'TooManyRequestsError'
     this.helpMessage = options.helpMessage
     this.limit = options.limit
@@ -84,7 +84,7 @@ export class TooManyRequestsError extends ScalewayError {
     this.resetAt = options.resetAt
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>) {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>) {
     if (typeof obj.help_message !== 'string') {
       return null
     }

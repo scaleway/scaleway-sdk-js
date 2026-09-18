@@ -20,18 +20,13 @@ export default defineConfig({
   ],
   rules: {
     'eslint/no-console': 'warn',
-    'eslint/no-unused-vars': 'warn',
+    'eslint/no-unused-vars': 'warn', // 1 warning
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
-    // eslint rules
-    'eslint/prefer-named-capture-group': 'warn',
     // typescript rules
-    'typescript/explicit-member-accessibility': 'warn',
-    'typescript/no-unnecessary-condition': 'warn',
-    'typescript/no-unsafe-type-assertion': 'warn',
-    'typescript/parameter-properties': 'warn',
-    'typescript/strict-boolean-expressions': 'warn',
-    // unicorn rules
+    'typescript/no-unnecessary-condition': 'warn', // 11 warnings
+    'typescript/no-unsafe-type-assertion': 'warn', // 61 warnings
+    'typescript/strict-boolean-expressions': 'warn', // 72 warnings
   },
   overrides: [
     {

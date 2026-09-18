@@ -58,16 +58,19 @@ const buildScope = (detail: JSONObject): QuotasExceededErrorScope | undefined =>
  * @public
  */
 export class QuotasExceededError extends ScalewayError {
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    readonly list: QuotasExceededErrorDetails[],
-  ) {
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly list: QuotasExceededErrorDetails[]
+
+  public constructor(status: number, body: JSONObject, list: QuotasExceededErrorDetails[]) {
     super(status, body, buildMessage(list))
+    this.status = status
+    this.body = body
+    this.list = list
     this.name = 'QuotasExceededError'
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>) {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>) {
     if (!Array.isArray(obj.details)) {
       return null
     }

@@ -21,9 +21,9 @@ describe('composeRequestInterceptors', () => {
 describe('composeResponseErrorInterceptors', () => {
   it('passes the error to all interceptors if they all throw', async () => {
     class NumberError extends Error {
-      counter: number
+      public counter: number
 
-      constructor(obj: number) {
+      public constructor(obj: number) {
         super()
         this.name = 'NumberError'
         this.counter = obj

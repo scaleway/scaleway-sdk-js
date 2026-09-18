@@ -47,16 +47,19 @@ const buildMessage = (list: InvalidArgumentsErrorDetails[]): string => {
  * @public
  */
 export class InvalidArgumentsError extends ScalewayError {
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    readonly details: InvalidArgumentsErrorDetails[],
-  ) {
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly details: InvalidArgumentsErrorDetails[]
+
+  public constructor(status: number, body: JSONObject, details: InvalidArgumentsErrorDetails[]) {
     super(status, body, buildMessage(details))
+    this.status = status
+    this.body = body
+    this.details = details
     this.name = 'InvalidArgumentsError'
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>) {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>) {
     if (!Array.isArray(obj.details)) {
       return null
     }

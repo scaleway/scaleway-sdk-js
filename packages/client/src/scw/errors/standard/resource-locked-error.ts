@@ -17,21 +17,21 @@ export type ResourceLockedErrorOptions = {
  * @public
  */
 export class ResourceLockedError extends ScalewayError {
-  readonly resource: string
-  readonly resourceId: string
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly resource: string
+  public readonly resourceId: string
 
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    options: ResourceLockedErrorOptions,
-  ) {
+  public constructor(status: number, body: JSONObject, options: ResourceLockedErrorOptions) {
     super(status, body, `resource ${options.resource} with ID ${options.resourceId} is locked`)
+    this.status = status
+    this.body = body
     this.name = 'ResourceLockedError'
     this.resource = options.resource
     this.resourceId = options.resourceId
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>) {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>) {
     if (typeof obj.resource !== 'string' || typeof obj.resource_id !== 'string') {
       return null
     }

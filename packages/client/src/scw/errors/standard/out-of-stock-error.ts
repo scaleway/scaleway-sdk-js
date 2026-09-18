@@ -7,16 +7,19 @@ import { ScalewayError } from '../scw-error.js'
  * @public
  */
 export class OutOfStockError extends ScalewayError {
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    readonly resource: string,
-  ) {
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly resource: string
+
+  public constructor(status: number, body: JSONObject, resource: string) {
     super(status, body, `resource ${resource} is out of stock`)
+    this.status = status
+    this.body = body
+    this.resource = resource
     this.name = 'OutOfStockError'
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>) {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>) {
     if (typeof obj.resource !== 'string') {
       return null
     }

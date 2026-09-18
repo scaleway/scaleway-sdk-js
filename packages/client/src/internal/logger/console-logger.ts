@@ -13,12 +13,14 @@ import type { Logger } from './logger.js'
  */
 export class ConsoleLogger implements Logger {
   private readonly level: LevelResolver
+  public readonly logLevel: LogLevel
+  private readonly prefix: string
+  private readonly output: typeof console
 
-  constructor(
-    public readonly logLevel: LogLevel,
-    private readonly prefix = '',
-    private readonly output: typeof console = console,
-  ) {
+  public constructor(logLevel: LogLevel, prefix = '', output: typeof console = console) {
+    this.logLevel = logLevel
+    this.prefix = prefix
+    this.output = output
     this.level = LevelResolver[this.logLevel]
   }
 
@@ -30,11 +32,11 @@ export class ConsoleLogger implements Logger {
     }
   }
 
-  debug = this.makeMethod('debug')
+  public debug = this.makeMethod('debug')
 
-  error = this.makeMethod('error')
+  public error = this.makeMethod('error')
 
-  info = this.makeMethod('info')
+  public info = this.makeMethod('info')
 
-  warn = this.makeMethod('warn')
+  public warn = this.makeMethod('warn')
 }
