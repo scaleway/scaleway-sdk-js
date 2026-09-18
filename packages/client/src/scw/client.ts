@@ -48,9 +48,10 @@ export type Client = {
  * @public
  */
 export const createAdvancedClient = (...configs: ClientConfig[]): Client => {
-  const settings = configs
-    .concat([withLegacyInterceptors()])
-    .reduce((currentSettings, config) => config(currentSettings), DEFAULT_SETTINGS)
+  const settings = [...configs, withLegacyInterceptors()].reduce(
+    (currentSettings, config) => config(currentSettings),
+    DEFAULT_SETTINGS,
+  )
   assertValidSettings(settings)
   getLogger().info(`init Scaleway SDK version ${version}`)
 

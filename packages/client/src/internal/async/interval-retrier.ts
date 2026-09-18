@@ -69,13 +69,14 @@ export function* createFibonacciIntervalStrategy(base = 1, factor = 1): Interval
  *
  * @internal
  */
+const randomInRange = (min: number, max: number) => min + Math.random() * (max - min)
+
 export function* createExponentialBackoffStrategy(minDelay: number, maxDelay: number): IntervalStrategy {
   if (minDelay < 1 || maxDelay < 1 || minDelay > maxDelay) {
     throw new Error('Waiter: minDelay must be >= 1 and maxDelay must be >= minDelay')
   }
   let attempt = 1
   const ceiling = Math.log(maxDelay / minDelay) / Math.log(2) + 1
-  const randomInRange = (min: number, max: number) => min + Math.random() * (max - min)
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   while (true) {
     yield attempt > ceiling ? maxDelay : randomInRange(minDelay, minDelay * 2 ** (attempt - 1))

@@ -14,6 +14,24 @@ import type { Settings } from '../client-settings.js'
 
 const EMPTY_PROFILE: Profile = {}
 
+const newHTTPClient: typeof fetch = (): Promise<Response> => Promise.resolve(new Response())
+
+const legacyInterceptors: ClientConfig = (obj: Settings): Settings => ({
+  ...obj,
+  requestInterceptors: [({ request }): Request => request, ({ request }): Request => request],
+  responseInterceptors: [({ response }): Response => response],
+})
+
+const legacyReqInterceptors: ClientConfig = (obj: Settings): Settings => ({
+  ...obj,
+  requestInterceptors: [({ request }): Request => request, ({ request }): Request => request],
+})
+
+const legacyResInterceptors: ClientConfig = (obj: Settings): Settings => ({
+  ...obj,
+  responseInterceptors: [({ response }): Response => response],
+})
+
 const FILLED_PROFILE: Required<Profile> = {
   accessKey: 'SCW1234567890ABCDEFG',
   apiURL: 'https://api.example.com',
@@ -198,7 +216,6 @@ describe('withDefaultPageSize', () => {
 
 describe('withHTTPClient', () => {
   it('only modifies the http client', () => {
-    const newHTTPClient: typeof fetch = (): Promise<Response> => Promise.resolve(new Response())
     const expectedSettings: Settings = {
       ...DEFAULT_SETTINGS,
       httpClient: newHTTPClient,
@@ -274,23 +291,10 @@ describe('withLegacyInterceptors', () => {
   })
 
   it('appends the legacy request and response interceptors', () => {
-    const legacyInterceptors: ClientConfig = (obj: Settings): Settings => ({
-      ...obj,
-      requestInterceptors: [({ request }): Request => request, ({ request }): Request => request],
-      responseInterceptors: [({ response }): Response => response],
-    })
     expect(withLegacyInterceptors()(legacyInterceptors(DEFAULT_SETTINGS)).interceptors.length).toBe(3)
 
-    const legacyReqInterceptors: ClientConfig = (obj: Settings): Settings => ({
-      ...obj,
-      requestInterceptors: [({ request }): Request => request, ({ request }): Request => request],
-    })
     expect(withLegacyInterceptors()(legacyReqInterceptors(DEFAULT_SETTINGS)).interceptors.length).toBe(2)
 
-    const legacyResInterceptors: ClientConfig = (obj: Settings): Settings => ({
-      ...obj,
-      responseInterceptors: [({ response }): Response => response],
-    })
     expect(withLegacyInterceptors()(legacyResInterceptors(DEFAULT_SETTINGS)).interceptors.length).toBe(1)
   })
 })

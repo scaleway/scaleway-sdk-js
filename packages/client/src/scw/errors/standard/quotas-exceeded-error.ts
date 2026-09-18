@@ -75,21 +75,22 @@ export class QuotasExceededError extends ScalewayError {
     return new QuotasExceededError(
       status,
       obj,
-      obj.details.reduce<QuotasExceededErrorDetails[]>(
-        (list, detail) =>
+      obj.details.reduce<QuotasExceededErrorDetails[]>((list, detail) => {
+        if (
           isJSONObject(detail) &&
           typeof detail.resource === 'string' &&
           typeof detail.quota === 'number' &&
           typeof detail.current === 'number'
-            ? list.concat({
-                current: detail.current,
-                quota: detail.quota,
-                resource: detail.resource,
-                scope: buildScope(detail),
-              })
-            : list,
-        [],
-      ),
+        ) {
+          list.push({
+            current: detail.current,
+            quota: detail.quota,
+            resource: detail.resource,
+            scope: buildScope(detail),
+          })
+        }
+        return list
+      }, []),
     )
   }
 }

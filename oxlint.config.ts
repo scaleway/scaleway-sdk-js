@@ -48,11 +48,8 @@ export default defineConfig({
     'typescript/strict-boolean-expressions': 'warn',
     'typescript/strict-void-return': 'warn',
     // unicorn rules
-    'unicorn/consistent-function-scoping': 'warn',
     'unicorn/error-message': 'warn',
     'unicorn/prefer-global-this': 'warn',
-    'unicorn/prefer-response-static-json': 'warn',
-    'unicorn/prefer-spread': 'warn',
     'unicorn/prefer-type-error': 'warn',
   },
   overrides: [
