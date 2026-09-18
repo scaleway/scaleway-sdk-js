@@ -6,5 +6,9 @@ import type { Client } from './client.js'
  * @internal
  */
 export abstract class API {
-  constructor(protected client: Client) {}
+  protected client: Client
+
+  public constructor(client: Client) {
+    this.client = client
+  }
 }

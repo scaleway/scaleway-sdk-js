@@ -18,27 +18,27 @@ export type ResourceExpiredErrorOptions = {
  * @public
  */
 export class ResourceExpiredError extends ScalewayError {
-  readonly resource: string
-  readonly resourceId: string
-  readonly expiredSince: Date
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly resource: string
+  public readonly resourceId: string
+  public readonly expiredSince: Date
 
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    options: ResourceExpiredErrorOptions,
-  ) {
+  public constructor(status: number, body: JSONObject, options: ResourceExpiredErrorOptions) {
     super(
       status,
       body,
       `resource ${options.resource} with ID ${options.resourceId} expired since ${options.expiredSince.toISOString()}`,
     )
+    this.status = status
+    this.body = body
     this.name = 'ResourceExpiredError'
     this.resource = options.resource
     this.resourceId = options.resourceId
     this.expiredSince = options.expiredSince
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>) {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>) {
     if (
       typeof obj.resource !== 'string' ||
       typeof obj.resource_id !== 'string' ||

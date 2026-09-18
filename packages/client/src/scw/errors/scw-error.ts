@@ -41,27 +41,27 @@ const buildDefaultMessage = (status: number, body: unknown): string => {
  */
 export class ScalewayError extends Error {
   /** The message originating from the payload. */
-  rawMessage: string | undefined
+  public rawMessage: string | undefined
 
-  constructor(
-    /** The response status. */
-    readonly status: number,
-    /** The response payload. */
-    readonly body: JSONObject | string,
-    /** The augmented message. */
-    readonly message: string = buildDefaultMessage(status, body),
-  ) {
+  /** The response status. */
+  public readonly status: number
+  /** The response payload. */
+  public readonly body: JSONObject | string
+
+  public constructor(status: number, body: JSONObject | string, message: string = buildDefaultMessage(status, body)) {
     super(message) // 'Error' breaks prototype chain here
+    this.status = status
+    this.body = body
     this.name = 'ScalewayError'
     this.rawMessage = typeof body === 'object' && typeof body.message === 'string' ? body.message : undefined
     Object.setPrototypeOf(this, new.target.prototype) // restore prototype chain
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
     return new ScalewayError(status, obj)
   }
 
-  toString(): string {
+  public toString(): string {
     return `${this.name}: ${this.message}`
   }
 }

@@ -4,7 +4,7 @@
  * @public
  */
 export class AbortError extends Error {
-  constructor(message = 'The operation was aborted') {
+  public constructor(message = 'The operation was aborted') {
     super(message)
     this.name = 'AbortError'
   }

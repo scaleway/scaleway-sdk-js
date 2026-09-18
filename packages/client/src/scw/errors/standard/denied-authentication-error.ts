@@ -48,21 +48,21 @@ const buildMessage = (options: DeniedAuthenticationErrorOptions): string => {
  * @public
  */
 export class DeniedAuthenticationError extends ScalewayError {
-  readonly method: string
-  readonly reason: string
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly method: string
+  public readonly reason: string
 
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    options: DeniedAuthenticationErrorOptions,
-  ) {
+  public constructor(status: number, body: JSONObject, options: DeniedAuthenticationErrorOptions) {
     super(status, body, buildMessage(options))
+    this.status = status
+    this.body = body
     this.name = 'DeniedAuthenticationError'
     this.method = options.method
     this.reason = options.reason
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>) {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>) {
     if (typeof obj.method !== 'string' || typeof obj.reason !== 'string') {
       return null
     }

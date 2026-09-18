@@ -29,16 +29,19 @@ const buildMessage = (list: PermissionsDeniedErrorDetails[]): string =>
  * @public
  */
 export class PermissionsDeniedError extends ScalewayError {
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    readonly list: PermissionsDeniedErrorDetails[],
-  ) {
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly list: PermissionsDeniedErrorDetails[]
+
+  public constructor(status: number, body: JSONObject, list: PermissionsDeniedErrorDetails[]) {
     super(status, body, buildMessage(list))
+    this.status = status
+    this.body = body
+    this.list = list
     this.name = 'PermissionsDeniedError'
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
     if (!Array.isArray(obj.details)) {
       return null
     }

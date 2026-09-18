@@ -18,27 +18,27 @@ export type AlreadyExistsErrorOptions = {
  * @public
  */
 export class AlreadyExistsError extends ScalewayError {
-  readonly resource: string
-  readonly resourceId: string
-  readonly helpMessage: string
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly resource: string
+  public readonly resourceId: string
+  public readonly helpMessage: string
 
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    options: AlreadyExistsErrorOptions,
-  ) {
+  public constructor(status: number, body: JSONObject, options: AlreadyExistsErrorOptions) {
     super(
       status,
       body,
       `resource ${options.resource} with ID ${options.resourceId} already exists: ${options.helpMessage}`,
     )
+    this.status = status
+    this.body = body
     this.name = 'AlreadyExistsError'
     this.resource = options.resource
     this.resourceId = options.resourceId
     this.helpMessage = options.helpMessage
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>) {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>) {
     if (
       typeof obj.resource !== 'string' ||
       typeof obj.resource_id !== 'string' ||

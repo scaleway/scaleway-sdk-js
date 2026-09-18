@@ -18,27 +18,27 @@ export type TransientStateErrorOptions = {
  * @public
  */
 export class TransientStateError extends ScalewayError {
-  readonly resource: string
-  readonly resourceId: string
-  readonly currentState: string
+  public readonly status: number
+  public readonly body: JSONObject
+  public readonly resource: string
+  public readonly resourceId: string
+  public readonly currentState: string
 
-  constructor(
-    readonly status: number,
-    readonly body: JSONObject,
-    options: TransientStateErrorOptions,
-  ) {
+  public constructor(status: number, body: JSONObject, options: TransientStateErrorOptions) {
     super(
       status,
       body,
       `resource ${options.resource} with ID ${options.resourceId} is in a transient state: ${options.currentState}`,
     )
+    this.status = status
+    this.body = body
     this.name = 'TransientStateError'
     this.resource = options.resource
     this.resourceId = options.resourceId
     this.currentState = options.currentState
   }
 
-  static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
+  public static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {
     if (
       typeof obj.resource !== 'string' ||
       typeof obj.resource_id !== 'string' ||
