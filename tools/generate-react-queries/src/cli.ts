@@ -17,6 +17,7 @@ import { generateFromMetadata } from './generate.ts'
 import { updatePackageJsonExports } from './package-exports.ts'
 
 // Parse CLI flags — all optional, defaults come from config.ts
+// oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parseArgs return narrowed to a simple values record for option lookups
 const { values } = parseArgs({
   options: {
     'dir-gen-name': { type: 'string' },

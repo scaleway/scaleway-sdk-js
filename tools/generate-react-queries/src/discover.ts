@@ -165,6 +165,7 @@ export function discoverVersions(pkgDir: string, metadataFileName: string): stri
  * Utils methods are merged into matching services by apiClass to avoid duplicate services.
  */
 function mergeUtilsServices(metadata: QueriesMetadata, utilsMetadata: QueriesMetadata): void {
+  // oxlint-disable-next-line typescript/no-unnecessary-condition -- utilsMetadata is typed non-null but structuredClone of malformed metadata may omit services at runtime
   if (!utilsMetadata?.services) {
     return
   }

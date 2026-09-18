@@ -79,6 +79,7 @@ function checkEarlyExit(newProducts: { name: string }[], dryRun: boolean): numbe
 }
 
 function addProductsToSdk(sdkPkgPath: string, newProducts: { name: string }[], scope: string): void {
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parsing untyped JSON package.json
   const sdkPkg = JSON.parse(readFileSync(sdkPkgPath, 'utf8')) as PackageJSON
   sdkPkg.dependencies = sdkPkg.dependencies ?? {}
   for (const p of newProducts) {

@@ -22,6 +22,7 @@ export const useSDKCache = <TCustomAPIs extends DefaultTypeBaseAPI = DefaultType
   }
 
   // Cast the context to the extended type for better type safety
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- narrowing the generic context to the caller's TCustomAPIs specialization
   return context as {
     sdkCache: ExtendedAPISdkCache<TCustomAPIs> | null
     setSdkInstance: SetSDKInstance<ExtendedAPISdkCache<TCustomAPIs>>
@@ -48,6 +49,7 @@ export const SDKCacheProvider = ({
 
   // reset cache when client changes
   useEffect(() => {
+    // oxlint-disable-next-line typescript/no-unnecessary-condition -- client is typed as non-null but may be absent at runtime if ClientProvider is missing
     if (client) {
       // oxlint-disable-next-line react/set-state-in-effect -- intentional cache reset on client change
       setSdkCache(null)

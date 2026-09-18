@@ -24,8 +24,6 @@ export default defineConfig({
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
     // typescript rules
-    'typescript/no-unnecessary-condition': 'warn', // 11 warnings
-    'typescript/no-unsafe-type-assertion': 'warn', // 61 warnings
     'typescript/strict-boolean-expressions': 'warn', // 72 warnings
   },
   overrides: [

@@ -66,6 +66,7 @@ describe('urlParams', () => {
 
   it('filters non-string keys', () => {
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes invalid key types
       urlParams([0, 'valid'] as unknown as [string, string], [null, 'valid'] as unknown as [string, string]).toString(),
     ).toStrictEqual('')
   })
@@ -177,6 +178,7 @@ describe('unmarshalArrayOfObject', () => {
       throw new Error('Should not happen')
     }
 
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test unmarshaller casts untyped JSON to MyResource
     return { myNumber: data.my_number } as MyResource
   }
 
@@ -205,6 +207,7 @@ describe('unmarshalMapOfObject', () => {
       throw new Error('Should not happen')
     }
 
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test unmarshaller casts untyped JSON to MyResource
     return { myNumber: data.my_number } as MyResource
   }
 

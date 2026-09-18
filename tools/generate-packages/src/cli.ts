@@ -26,6 +26,7 @@ const options: ParseArgsConfig['options'] = {
 }
 
 const { values, positionals } = parseArgs({ options, allowPositionals: true })
+// oxlint-disable-next-line typescript/no-unsafe-type-assertion -- CLI positional is an untyped string; narrowed to the known command union
 const command = positionals[0] as CommandName | undefined
 
 if (!command || values.help || !(command in commands)) {
