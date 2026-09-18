@@ -38,7 +38,7 @@ export const buildRequest = (request: Readonly<ScwRequest>, settings: Readonly<S
   })
 }
 
-// oxlint-disable-next-line typescript/no-unnecessary-type-parameters -- T is required to match ResponseUnmarshaller<T> type
+// oxlint-disable-next-line typescript/no-unnecessary-type-parameters, typescript/no-unsafe-type-assertion -- generic passthrough unwrapper; T is caller-controlled and the response shape is unknown at this layer
 const asIs = <T>(response: unknown) => response as T
 
 export type Fetcher = <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>
@@ -56,17 +56,17 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
   let requestNumber = 0
   const prepareRequest = (requestId: string) =>
     composeRequestInterceptors([
-      ...(settings.interceptors.map(obj => obj.request).filter(Boolean) as RequestInterceptor[]),
+      ...settings.interceptors.map(obj => obj.request).filter((x): x is RequestInterceptor => x !== undefined),
       logRequest(requestId, obfuscateInterceptor(obfuscateAuthHeadersEntry)),
     ])
   const prepareResponse = (requestId: string) =>
     composeResponseInterceptors([
-      ...(settings.interceptors.map(obj => obj.response).filter(Boolean) as ResponseInterceptor[]),
+      ...settings.interceptors.map(obj => obj.response).filter((x): x is ResponseInterceptor => x !== undefined),
       logResponse(requestId),
     ])
   const prepareResponseErrors = () =>
     composeResponseErrorInterceptors(
-      settings.interceptors.map(obj => obj.responseError).filter(Boolean) as ResponseErrorInterceptor[],
+      settings.interceptors.map(obj => obj.responseError).filter((x): x is ResponseErrorInterceptor => x !== undefined),
     )
 
   return async <T>(request: Readonly<ScwRequest>, unwrapper: ResponseUnmarshaller<T> = asIs): Promise<T> => {
@@ -85,6 +85,7 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       return unmarshaledResponse
     } catch (error) {
       const resErrorInterceptors = prepareResponseErrors()
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- error interceptor may transform the error into the response type expected by the unwrapper
       const handledError = (await resErrorInterceptors(finalRequest, error)) as T
 
       return unwrapper(handledError)

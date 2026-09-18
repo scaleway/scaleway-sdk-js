@@ -149,6 +149,7 @@ async function processVersionCore(
   ctx: GenerationContext,
 ): Promise<void> {
   const metadata = await loadMetadata(pkgDir, version, ctx.metadataFileName)
+  // oxlint-disable-next-line typescript/no-unnecessary-condition -- metadata is typed non-null but structuredClone of malformed metadata may omit services at runtime
   if (!metadata?.services) {
     console.warn(`    ⚠️  Invalid metadata for ${packageName}/${version}, skipping`)
     return

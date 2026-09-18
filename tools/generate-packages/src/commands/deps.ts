@@ -41,6 +41,7 @@ function discoverPackages(src: string): PkgInfo[] {
       if (!existsSync(packageJsonPath)) {
         return []
       }
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parsing untyped JSON package.json
       const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PkgInfo['packageJson']
       return [{ name: e.name, path: path.join(src, e.name), packageJsonPath, packageJson }]
     })

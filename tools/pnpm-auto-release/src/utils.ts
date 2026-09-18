@@ -32,18 +32,19 @@ export const exec = (cmd: string, opts: { cwd?: string; stdio?: 'pipe' | 'inheri
     stdio: opts.stdio === 'inherit' ? 'inherit' : ['ignore', 'pipe', 'pipe'],
     maxBuffer: 50 * 1024 * 1024,
   })
-  return (out ?? '').trim()
+  return out.trim()
 }
 
 export const listWorkspacePackages = (root: string) => {
   const raw = exec('pnpm ls -r --depth -1 --json', { cwd: root })
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parsing untyped JSON output from pnpm CLI
   return (JSON.parse(raw) as Package[])
-    .filter(e => e.version)
+    .filter((e): e is Package & { version: string } => Boolean(e.version))
     .map(e => ({
       name: e.name,
       path: e.path,
       relativePath: path.relative(root, e.path),
-      version: e.version as string,
+      version: e.version,
       private: e.private === true,
     }))
 }

@@ -66,6 +66,7 @@ async function loadMetadataFromFallback(packageName: string, version: string): P
   const pkgDir = path.join(path.dirname(path.resolve('package.json')), 'node_modules', packageName)
   const distMetadataPath = path.join(pkgDir, 'dist', version, 'metadata.gen.js')
   const metadataModule: unknown = await import(distMetadataPath)
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- dynamically imported module is unknown; shape assumed by the metadata generator
   return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
 }
 
@@ -74,6 +75,7 @@ async function loadMetadata(packageName: string, version: string): Promise<Metad
     try {
       const resolvedPath = require.resolve(`${packageName}/${version}/metadata`)
       const metadataModule: unknown = await import(resolvedPath)
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- dynamically imported module is unknown; shape assumed by the metadata generator
       return (metadataModule as { queriesMetadata: Metadata }).queriesMetadata
     } catch {
       stdout.write(`⚠️  Error loading metadata from ${packageName}/${version}/metadata \n Using dist fallback \n`)

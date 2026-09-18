@@ -99,6 +99,7 @@ const IS_LEVEL_ENOUGH_CASES = [
     ],
   },
   {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test exercises an invalid log level value
     base: 'unknown' as LogLevel,
     tests: [
       {

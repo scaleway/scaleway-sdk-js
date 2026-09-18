@@ -12,6 +12,7 @@ export const createSDKFactory =
 
     // Check if we already have this SDK instance cached
     if (sdkCache?.[cacheKey]) {
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- mapped-type return keyed by K cannot be expressed without a cast
       return { [cacheKey]: sdkCache[cacheKey] } as { [P in K]: APISdkCache[P] }
     }
 
@@ -25,6 +26,7 @@ export const createSDKFactory =
     // Cache the instance
     setSdkInstance({ [cacheKey]: instance })
 
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- mapped-type return keyed by K cannot be expressed without a cast
     return { [cacheKey]: instance } as { [P in K]: APISdkCache[P] }
   }
 
@@ -44,6 +46,7 @@ export const createGenericSDKFactory =
 
     // Check if we already have this SDK instance cached
     if (sdkCache?.[cacheKey]) {
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- mapped-type return keyed by K cannot be expressed without a cast
       return { [cacheKey]: sdkCache[cacheKey] } as {
         [P in K]: ExtendedAPISdkCache<TCustomAPIs>[P]
       }
@@ -53,8 +56,10 @@ export const createGenericSDKFactory =
     const instance = new SDKNamespace(client)
 
     // Cache the instance
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- Partial<ExtendedAPISdkCache> keyed by K cannot be expressed without a cast
     setSdkInstance({ [cacheKey]: instance } as unknown as Partial<ExtendedAPISdkCache<TCustomAPIs>>)
 
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- mapped-type return keyed by K cannot be expressed without a cast
     return { [cacheKey]: instance } as {
       [P in K]: ExtendedAPISdkCache<TCustomAPIs>[P]
     }

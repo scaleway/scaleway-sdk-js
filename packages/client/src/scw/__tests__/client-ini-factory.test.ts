@@ -59,11 +59,13 @@ describe('withProfile', () => {
   it(`doesn't modify Settings object with empty Profile object`, () => {
     expect(withProfile(EMPTY_PROFILE)(DEFAULT_SETTINGS)).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes an invalid profile shape
       withProfile({
         WTF: 'malicious content',
       } as unknown as Profile)(DEFAULT_SETTINGS),
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes undefined fields
       withProfile({
         apiURL: undefined,
         defaultOrganizationId: undefined,
@@ -79,6 +81,7 @@ describe('withProfile', () => {
       } as unknown as Profile)(DEFAULT_SETTINGS),
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes null fields
       withProfile({
         apiURL: null,
         defaultOrganizationId: null,
@@ -94,6 +97,7 @@ describe('withProfile', () => {
       } as unknown as Profile)(DEFAULT_SETTINGS),
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes empty-string fields
       withProfile({
         apiURL: '',
         defaultOrganizationId: '',
@@ -109,6 +113,7 @@ describe('withProfile', () => {
       } as unknown as Profile)(DEFAULT_SETTINGS),
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes zero-value fields
       withProfile({
         apiURL: 0,
         defaultOrganizationId: 0,

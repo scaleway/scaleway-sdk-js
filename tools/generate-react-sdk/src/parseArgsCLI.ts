@@ -10,6 +10,7 @@ function parseSingleArg(arg: string, nextArg: string | undefined): ParsedArg | n
 
   const parts = arg.slice(2).split('=')
   const [key] = parts
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parts[1] is guarded by parts.length > 1 but TS does not narrow indexed access
   let value: string | boolean = parts.length > 1 ? (parts[1] as string) : true
   let consumedNext = false
 
@@ -26,7 +27,7 @@ function applyParsedArg(
   requiresValueArgs: string[] | undefined,
   cliArgs: Record<string, string | boolean>,
 ): void {
-  if (requiresValueArgs?.includes(parsed.key) && (parsed.value === true || parsed.value === undefined)) {
+  if (requiresValueArgs?.includes(parsed.key) && parsed.value === true) {
     console.log(`⚠️  Warning: --${parsed.key} requires a value, using default`)
   } else {
     cliArgs[parsed.key] = parsed.value

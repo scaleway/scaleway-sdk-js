@@ -78,5 +78,6 @@ export const loadConfig = async (configPath?: string): Promise<Config> => {
   }
 
   const mod: unknown = await import(`file://${resolvedPath}`)
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- config module loaded dynamically; shape validated by isConfigModule above for the default-export branch
   return resolvePaths(isConfigModule(mod) ? mod.default : (mod as Config))
 }

@@ -14,6 +14,7 @@ export const unmarshalMoney = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'Money' failed as data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed Money shape
   return {
     currencyCode: data.currency_code,
     nanos: data.nanos,
@@ -31,6 +32,7 @@ export const unmarshalServiceInfo = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'ServiceInfo' failed as data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed ServiceInfo shape
   return {
     description: data.description,
     documentationUrl: data.documentation_url,
@@ -49,6 +51,7 @@ export const unmarshalScwFile = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'ScwFile' failed as data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed ScwFile shape
   return {
     content: data.content,
     contentType: data.content_type,
@@ -72,6 +75,7 @@ export const unmarshalTimeSeriesPoint = (data: unknown) => {
 
   return {
     timestamp: unmarshalDate(data[0]),
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON array element into number
     value: data[1] as number,
   } as TimeSeriesPoint
 }
@@ -86,6 +90,7 @@ export const unmarshalTimeSeries = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'TimeSeries' failed as data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed TimeSeries shape
   return {
     metadata: data.metadata,
     name: data.name,
@@ -224,5 +229,6 @@ export const unmarshalAnyRes = <T>(obj: unknown, ignoreKeys: string[] = [], date
     throw new TypeError(`Data isn't a dictionary.`)
   }
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- generic T over unknown untyped JSON; structure validated by callers
   return camelizeKeys(dateKeys && dateKeys.length > 0 ? unmarshalDates(obj, dateKeys) : obj, ignoreKeys) as T
 }
