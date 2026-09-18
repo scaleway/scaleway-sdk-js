@@ -15,7 +15,7 @@ export const mapUnknownResourceFromJSON = (
   // Split the message
   // Note: some errors uses ' and not "
   // Examples: `"111..." not found` or `Security Group '111...' not found`
-  const messageParts = typeof obj.message === 'string' ? obj.message.split(/"|'/) : []
+  const messageParts = typeof obj.message === 'string' ? obj.message.split(/"|'/v) : []
   if (messageParts.length === 3 && isUUID(messageParts[1])) {
     return new ResourceNotFoundError(status, obj, {
       // transform `Security group ` to `security_group`

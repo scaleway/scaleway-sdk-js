@@ -101,7 +101,7 @@ function writeNpmrcAuth(root: string, registry: string): void {
   if (!user || !passwd) {
     return
   }
-  const host = registry.replace(/^https?:\/\//, '')
+  const host = registry.replace(/^https?:\/\//v, '')
   const auth = Buffer.from(`${user}:${passwd}`).toString('base64')
   appendFileSync(path.join(root, '.npmrc'), `\n//${host}/:_auth=${auth}\n`)
   logger(`[release] authenticated to ${host}`)

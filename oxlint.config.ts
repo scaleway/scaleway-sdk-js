@@ -26,7 +26,6 @@ export default defineConfig({
     // eslint rules
     'eslint/no-await-in-loop': 'warn',
     'eslint/prefer-named-capture-group': 'warn',
-    'eslint/require-unicode-regexp': 'warn',
     // typescript rules
     'typescript/explicit-member-accessibility': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
