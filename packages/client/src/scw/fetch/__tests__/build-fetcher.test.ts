@@ -154,7 +154,7 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   it('gets a response with response error interceptor despite the error', () => {
-    mockedFetch.mockRejectedValue(new TypeError(''))
+    mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
 
     return expect(
       buildFetcher(
@@ -175,7 +175,7 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   it('gets the unmarshalled value of what responseError returns', () => {
-    mockedFetch.mockRejectedValue(new TypeError(''))
+    mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
 
     return expect(
       buildFetcher(
@@ -199,7 +199,7 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   it('gets modified request in response error', () => {
-    mockedFetch.mockRejectedValue(new TypeError(''))
+    mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
 
     return expect(
       buildFetcher(

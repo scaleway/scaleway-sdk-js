@@ -73,6 +73,6 @@ describe('loadProfileFromConfigurationFile', () => {
       updateProfileInConfiFile(TARGET_PROFILE, CONFIG_FILE_PATH)
       env[EnvironmentKey.ScwConfigPath] = CONFIG_FILE_PATH
       loadProfileFromConfigurationFile({ profileName: unknownName })
-    }).toThrow(new Error(`Could not find the desired profile '${unknownName}' in the configuration file.`))
+    }).toThrow(new TypeError(`Could not find the desired profile '${unknownName}' in the configuration file.`))
   })
 })

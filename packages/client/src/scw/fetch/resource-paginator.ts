@@ -28,7 +28,7 @@ function* pages<K extends string, T extends PaginatedContent<K>, R extends Pagin
 ): Generator<Promise<T[K]>, void, void> {
   const { request, firstPage } = options
   if (!Array.isArray(firstPage[key])) {
-    throw new Error(`Property ${key} is not a list in paginated result`)
+    throw new TypeError(`Property ${key} is not a list in paginated result`)
   }
   const getList = extract(key)
   let page = request.page ?? 1

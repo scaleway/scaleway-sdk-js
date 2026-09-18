@@ -52,7 +52,7 @@ describe('composeResponseErrorInterceptors', () => {
       ({ error }): Promise<unknown> => {
         throw error
       },
-    ])(new Request('https://api.scaleway.com'), new TypeError(''))
+    ])(new Request('https://api.scaleway.com'), new TypeError('test error'))
 
     return expect(interceptors).resolves.toBe(42)
   })
