@@ -46,8 +46,8 @@ export const composeResponseErrorInterceptors =
         const res = await interceptor({ request, error: prevError })
 
         return res
-      } catch (error) {
-        prevError = error
+      } catch (caughtError) {
+        prevError = caughtError
       }
     }
 

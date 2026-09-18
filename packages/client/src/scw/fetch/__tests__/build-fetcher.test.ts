@@ -9,7 +9,7 @@ const DEFAULT_SETTINGS: Settings = {
   apiURL: 'https://api.scaleway.com',
   defaultRegion: 'fr-par',
   defaultZone: 'fr-par-1',
-  httpClient: global.fetch,
+  httpClient: globalThis.fetch,
   interceptors: [],
   requestInterceptors: [],
   responseInterceptors: [],
@@ -82,9 +82,9 @@ describe(`buildFetcher (mock)`, () => {
     vi.restoreAllMocks()
   })
 
-  vi.spyOn(global, 'fetch')
+  vi.spyOn(globalThis, 'fetch')
   const mockedFetch = vi.mocked(fetch)
-  const fetcher = buildFetcher(DEFAULT_SETTINGS, global.fetch)
+  const fetcher = buildFetcher(DEFAULT_SETTINGS, globalThis.fetch)
 
   it(`gets a response without error for a simple request with unmarshaller`, async () => {
     mockedFetch.mockResolvedValue(
@@ -127,7 +127,7 @@ describe(`buildFetcher (mock)`, () => {
             },
           ],
         },
-        global.fetch,
+        globalThis.fetch,
       )({
         method: 'POST',
         path: '/undefined',
@@ -166,7 +166,7 @@ describe(`buildFetcher (mock)`, () => {
             },
           ],
         },
-        global.fetch,
+        globalThis.fetch,
       )({
         method: 'GET',
         path: '/will-trigger-an-error',
@@ -187,7 +187,7 @@ describe(`buildFetcher (mock)`, () => {
             },
           ],
         },
-        global.fetch,
+        globalThis.fetch,
       )(
         {
           method: 'GET',
@@ -212,7 +212,7 @@ describe(`buildFetcher (mock)`, () => {
             },
           ],
         },
-        global.fetch,
+        globalThis.fetch,
       )({
         method: 'GET',
         path: '/will-trigger-an-error',

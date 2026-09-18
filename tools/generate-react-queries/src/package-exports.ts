@@ -19,8 +19,8 @@ type PackageJson = {
   [key: string]: unknown
 }
 
-function removeSrcFromPath(path: string): string {
-  return path
+function removeSrcFromPath(filePath: string): string {
+  return filePath
     .replaceAll('/src/', '/')
     .replaceAll('\\src\\', '\\')
     .replace(/^src[\\/]/, '')

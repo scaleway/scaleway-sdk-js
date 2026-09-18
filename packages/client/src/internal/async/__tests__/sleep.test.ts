@@ -3,7 +3,7 @@ import { sleep } from '../sleep.js'
 
 beforeAll(() => {
   vi.useFakeTimers()
-  vi.spyOn(global, 'setTimeout')
+  vi.spyOn(globalThis, 'setTimeout')
 })
 
 afterAll(() => {
@@ -16,7 +16,7 @@ describe('sleep', () => {
     sleep(delay).catch(() => {
       /* noop */
     })
-    expect(setTimeout).toHaveBeenCalledTimes(1)
-    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), delay)
+    expect(globalThis.setTimeout).toHaveBeenCalledTimes(1)
+    expect(globalThis.setTimeout).toHaveBeenLastCalledWith(expect.any(Function), delay)
   })
 })
