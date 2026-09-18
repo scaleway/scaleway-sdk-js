@@ -25,11 +25,8 @@ export default defineConfig({
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
     // eslint rules
     'eslint/no-await-in-loop': 'warn',
-    'eslint/no-shadow': 'warn',
-    'eslint/prefer-destructuring': 'warn',
+    'eslint/prefer-named-capture-group': 'warn',
     'eslint/require-unicode-regexp': 'warn',
-    // react rules
-    'react/set-state-in-effect': 'warn',
     // typescript rules
     'typescript/explicit-member-accessibility': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
@@ -41,7 +38,6 @@ export default defineConfig({
     'typescript/strict-boolean-expressions': 'warn',
     // unicorn rules
     'unicorn/error-message': 'warn',
-    'unicorn/prefer-global-this': 'warn',
     'unicorn/prefer-type-error': 'warn',
   },
   overrides: [

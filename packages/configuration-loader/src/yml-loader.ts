@@ -26,7 +26,7 @@ export const convertYamlToConfiguration = (input: string | null): ConfigurationT
   }
   input.split(/\r?\n/).forEach(rawLine => {
     // remove comments
-    const line = rawLine.split(STRIP_COMMENT_REGEX)[0]
+    const [line] = rawLine.split(STRIP_COMMENT_REGEX)
     // parse sections
     const newSection = DETECT_SECTION_REGEX.exec(line)
     if (newSection) {
@@ -44,7 +44,8 @@ export const convertYamlToConfiguration = (input: string | null): ConfigurationT
         if (typeof map[currentSection] !== 'object') {
           map[currentSection] = {}
         }
-        map[currentSection][item[1]] = item[2]
+        const [, key, value] = item
+        map[currentSection][key] = value
       }
     }
   })

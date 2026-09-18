@@ -46,9 +46,10 @@ export const SDKCacheProvider = ({
     [sdkCache],
   )
 
-  // reset cache
+  // reset cache when client changes
   useEffect(() => {
     if (client) {
+      // oxlint-disable-next-line react/set-state-in-effect -- intentional cache reset on client change
       setSdkCache(null)
     }
   }, [client])
