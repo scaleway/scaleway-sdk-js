@@ -27,7 +27,6 @@ export default defineConfig({
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-shadow': 'warn',
     'eslint/prefer-destructuring': 'warn',
-    'eslint/prefer-named-capture-group': 'warn',
     'eslint/require-unicode-regexp': 'warn',
     // react rules
     'react/set-state-in-effect': 'warn',
