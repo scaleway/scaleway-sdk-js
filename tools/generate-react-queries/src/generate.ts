@@ -187,6 +187,7 @@ async function processPackage(packageName: string, pkgDir: string, ctx: Generati
   }
   console.log(`  📦 ${packageName}: ${versions.length} version(s): ${versions.join(', ')}`)
   for (const version of versions) {
+    // oxlint-disable-next-line eslint/no-await-in-loop -- sequential version processing
     await processVersion({ packageName, pkgDir, version }, ctx)
   }
 }
@@ -204,6 +205,7 @@ export async function generateFromMetadata(config: ReactQueriesConfig): Promise<
 
   const sdkPackages = discoverSdkPackages(config)
   for (const [packageName, pkgDir] of sdkPackages) {
+    // oxlint-disable-next-line eslint/no-await-in-loop -- sequential package processing
     await processPackage(packageName, pkgDir, ctx)
   }
 

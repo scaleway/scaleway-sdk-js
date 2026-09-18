@@ -92,6 +92,7 @@ export const fetchAll = async <K extends string, T extends PaginatedContent<K>, 
  *
  * @internal
  */
+// oxlint-disable-next-line typescript/promise-function-async -- must return the enriched Promise, not a plain one
 export const enrichForPagination = <K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
@@ -100,7 +101,7 @@ export const enrichForPagination = <K extends string, T extends PaginatedContent
   const firstPage = fetcher(request)
 
   return Object.assign(firstPage, {
-    all: () => fetchAll(key, fetcher, { request, initial: firstPage }),
+    all: async () => fetchAll(key, fetcher, { request, initial: firstPage }),
     [Symbol.asyncIterator]: () => fetchPaginated(key, fetcher, { request, initial: firstPage }),
   })
 }

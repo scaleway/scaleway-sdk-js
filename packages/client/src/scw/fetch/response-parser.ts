@@ -77,7 +77,7 @@ export const responseParser =
     const error: unknown = await response
       .clone()
       .json()
-      .catch(() => response.text())
+      .catch(async () => response.text())
 
     if (isJSONObject(error)) {
       throw parseScalewayError(response.status, error)

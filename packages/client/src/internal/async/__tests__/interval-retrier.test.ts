@@ -106,10 +106,10 @@ describe('tryAtIntervals', () => {
     expect(result.doneIterations).toBe(3)
   })
 
-  it('timeouts after 0s', () =>
+  it('timeouts after 0s', async () =>
     expect(tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, 0)).rejects.toThrow(`Timeout after 0s`))
 
-  it('timeouts after 10ms', () =>
+  it('timeouts after 10ms', async () =>
     expect(tryAtIntervals(mockLogic(3, 5), zeroIntervalStrat, 0.01)).rejects.toThrow(`Timeout after 0.01s`))
 
   it('uses default timeout', async () => {
@@ -135,10 +135,12 @@ describe('tryAtIntervals', () => {
 })
 
 describe('waitForResource', () => {
-  it('resolves with non-transient status', () => {
+  it('resolves with non-transient status', async () => {
     const result = waitForResource(
-      res => Promise.resolve(!['transient-one', 'transient-two'].includes(res.status)),
-      () => Promise.resolve({ message: 'All went fine.', status: 'final' }),
+      // oxlint-disable-next-line typescript/require-await -- test helper returning Promise<T>
+      async (res: { status: string }) => !['transient-one', 'transient-two'].includes(res.status),
+      // oxlint-disable-next-line typescript/require-await -- test helper returning Promise<T>
+      async () => ({ message: 'All went fine.', status: 'final' }),
       {
         resourceId: 'random-uuid',
       },
@@ -151,14 +153,15 @@ describe('waitForResource', () => {
     })
   })
 
-  it('rejects after timeout as transient status is being returned', () => {
+  it('rejects after timeout as transient status is being returned', async () => {
     const result = waitForResource(
-      res => Promise.resolve(!['transient-one', 'transient-two'].includes(res.status)),
-      () =>
-        Promise.resolve({
-          message: 'Still processing.',
-          status: 'transient-two',
-        }),
+      // oxlint-disable-next-line typescript/require-await -- test helper returning Promise<T>
+      async (res: { status: string }) => !['transient-one', 'transient-two'].includes(res.status),
+      // oxlint-disable-next-line typescript/require-await -- test helper returning Promise<T>
+      async () => ({
+        message: 'Still Processing.',
+        status: 'transient-two',
+      }),
       {
         resourceId: 'random-uuid',
       },
@@ -172,8 +175,10 @@ describe('waitForResource', () => {
     const controller = new AbortController()
     controller.abort()
     const result = waitForResource(
-      res => Promise.resolve(!['transient-one', 'transient-two'].includes(res.status)),
-      () => Promise.resolve({ message: 'Still processing.', status: 'transient-two' }),
+      // oxlint-disable-next-line typescript/require-await -- test helper returning Promise<T>
+      async (res: { status: string }) => !['transient-one', 'transient-two'].includes(res.status),
+      // oxlint-disable-next-line typescript/require-await -- test helper returning Promise<T>
+      async () => ({ message: 'Still processing.', status: 'transient-two' }),
       { resourceId: 'random-uuid' },
       { maxDelay: 1, minDelay: 1, signal: controller.signal },
     )

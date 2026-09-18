@@ -24,15 +24,12 @@ export default defineConfig({
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
     // eslint rules
-    'eslint/no-await-in-loop': 'warn',
     'eslint/prefer-named-capture-group': 'warn',
     // typescript rules
     'typescript/explicit-member-accessibility': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
-    'typescript/no-unnecessary-type-parameters': 'warn',
     'typescript/no-unsafe-type-assertion': 'warn',
     'typescript/parameter-properties': 'warn',
-    'typescript/promise-function-async': 'warn',
     'typescript/strict-boolean-expressions': 'warn',
     // unicorn rules
   },
