@@ -58,6 +58,7 @@ describe('authenticateWithSessionToken', () => {
     const dummyToken = 'dummy'
     const sourceReq = new Request('https://api.scaleway.com/my/path')
 
+    // oxlint-disable-next-line typescript/promise-function-async -- test helper
     const updatedReq = await authenticateWithSessionToken((): Promise<string> => Promise.resolve(dummyToken))({
       request: sourceReq,
     })
@@ -89,6 +90,7 @@ describe('authenticateWithSecrets', () => {
       accessKey: '',
       secretKey: '',
     }
+    // oxlint-disable-next-line typescript/promise-function-async -- must be sync for toThrow to catch the synchronous throw
     expect(() => authenticateWithSecrets(invalidSecrets)({ request: sourceReq })).toThrow()
   })
 })

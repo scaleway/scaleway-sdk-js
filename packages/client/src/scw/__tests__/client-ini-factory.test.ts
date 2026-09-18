@@ -14,6 +14,7 @@ import type { Settings } from '../client-settings.js'
 
 const EMPTY_PROFILE: Profile = {}
 
+// oxlint-disable-next-line typescript/promise-function-async -- test helper, typeof fetch requires Promise return
 const newHTTPClient: typeof fetch = (): Promise<Response> => Promise.resolve(new Response())
 
 const legacyInterceptors: ClientConfig = (obj: Settings): Settings => ({

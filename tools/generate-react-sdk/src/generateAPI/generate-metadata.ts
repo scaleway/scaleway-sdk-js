@@ -130,6 +130,7 @@ async function processPackageVersions(
   }
   const pkgResult: ProcessedMetadata = {}
   for (const version of versions) {
+    // oxlint-disable-next-line eslint/no-await-in-loop -- sequential version processing
     const versionResult = await processVersion(packageName, version, { servicesToSkip, isVersionSkipped })
     if (versionResult) {
       Object.assign(pkgResult, versionResult)
@@ -199,6 +200,7 @@ export const generateAPI = async ({
   )
   const result: ProcessedMetadata = {}
   for (const [packageName] of sdkPackages) {
+    // oxlint-disable-next-line eslint/no-await-in-loop -- sequential package processing
     Object.assign(result, await processSdkPackage(packageName, { skipPackages, servicesToSkip, isVersionSkipped }))
   }
   emitFiles({ res: result, sourceFolderGen: dir, sdkFactoryPath })

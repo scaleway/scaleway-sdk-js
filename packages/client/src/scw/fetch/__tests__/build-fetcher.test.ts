@@ -107,7 +107,7 @@ describe(`buildFetcher (mock)`, () => {
     ).resolves.toStrictEqual('dummy-output')
   })
 
-  it('gets modified response', () => {
+  it('gets modified response', async () => {
     mockedFetch.mockResolvedValue(
       Response.json(
         {},
@@ -153,7 +153,7 @@ describe(`buildFetcher (mock)`, () => {
     ).resolves.toMatchObject({ any_parameter: 'any-value' })
   })
 
-  it('gets a response with response error interceptor despite the error', () => {
+  it('gets a response with response error interceptor despite the error', async () => {
     mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
 
     return expect(
@@ -162,7 +162,7 @@ describe(`buildFetcher (mock)`, () => {
           ...DEFAULT_SETTINGS,
           interceptors: [
             {
-              responseError: () => Promise.resolve(42),
+              responseError: () => 42,
             },
           ],
         },
@@ -174,7 +174,7 @@ describe(`buildFetcher (mock)`, () => {
     ).resolves.toBe(42)
   })
 
-  it('gets the unmarshalled value of what responseError returns', () => {
+  it('gets the unmarshalled value of what responseError returns', async () => {
     mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
 
     return expect(
@@ -183,7 +183,7 @@ describe(`buildFetcher (mock)`, () => {
           ...DEFAULT_SETTINGS,
           interceptors: [
             {
-              responseError: () => Promise.resolve(42),
+              responseError: () => 42,
             },
           ],
         },
@@ -198,7 +198,7 @@ describe(`buildFetcher (mock)`, () => {
     ).resolves.toBe('42-dummy-output')
   })
 
-  it('gets modified request in response error', () => {
+  it('gets modified request in response error', async () => {
     mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
 
     return expect(

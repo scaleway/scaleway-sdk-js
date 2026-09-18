@@ -32,10 +32,10 @@ describe('composeResponseErrorInterceptors', () => {
     }
 
     const interceptors = composeResponseErrorInterceptors([
-      ({ error }): Promise<unknown> => {
+      ({ error }) => {
         throw error instanceof NumberError ? new NumberError(error.counter + 1) : error
       },
-      ({ error }): Promise<unknown> => {
+      ({ error }) => {
         throw error instanceof NumberError ? new NumberError(error.counter + 2) : error
       },
     ])(new Request('https://api.scaleway.com'), new NumberError(42))
@@ -45,11 +45,11 @@ describe('composeResponseErrorInterceptors', () => {
 
   it('stops at the second interceptor (amongst three) if it resolves', async () => {
     const interceptors = composeResponseErrorInterceptors([
-      ({ error }): Promise<unknown> => {
+      ({ error }) => {
         throw error
       },
-      (): Promise<unknown> => Promise.resolve(42),
-      ({ error }): Promise<unknown> => {
+      (): unknown => 42,
+      ({ error }) => {
         throw error
       },
     ])(new Request('https://api.scaleway.com'), new TypeError('test error'))
@@ -59,10 +59,10 @@ describe('composeResponseErrorInterceptors', () => {
 
   it('throws the last processed error', async () => {
     const interceptors = composeResponseErrorInterceptors([
-      ({ error }): Promise<unknown> => {
+      ({ error }) => {
         throw error
       },
-      (): Promise<unknown> => {
+      () => {
         throw new TypeError('second error')
       },
     ])(new Request('https://api.scaleway.com'), new TypeError('first error'))

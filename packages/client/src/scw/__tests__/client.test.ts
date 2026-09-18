@@ -12,6 +12,7 @@ const withPassthroughFetch =
   (res: string): ClientConfig =>
   (obj: Settings): Settings => ({
     ...obj,
+    // oxlint-disable-next-line typescript/promise-function-async -- Settings.httpClient requires Promise return
     httpClient: () => Promise.resolve(new Response(res)),
   })
 
@@ -53,10 +54,10 @@ describe('createAdvancedClient', () => {
     expect(client.settings.apiURL).toBe(betaApiRoot)
   })
 
-  it('contains override of httpClient', () => {
+  it('contains override of httpClient', async () => {
     const client = createAdvancedClient(withPassthroughFetch('hello world'))
 
-    return expect(client.settings.httpClient('any-url').then(obj => obj.text())).resolves.toBe('hello world')
+    return expect(client.settings.httpClient('any-url').then(async obj => obj.text())).resolves.toBe('hello world')
   })
 })
 

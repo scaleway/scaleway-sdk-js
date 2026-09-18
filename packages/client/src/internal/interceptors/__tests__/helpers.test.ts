@@ -26,6 +26,7 @@ describe('addHeaderInterceptor', () => {
 describe('addAsyncHeaderInterceptor', () => {
   it('inserts 1 key/value in the request', async () => {
     const request = new Request('https://api.scaleway.com/my/path')
+    // oxlint-disable-next-line typescript/promise-function-async -- test helper
     const updatedReq = await addAsyncHeaderInterceptor('my-key', () => Promise.resolve('my-value'))({ request })
     expect(updatedReq.headers.get('my-key')).toBe('my-value')
   })

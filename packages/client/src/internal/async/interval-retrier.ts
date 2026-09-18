@@ -116,8 +116,10 @@ export const tryAtIntervals = async <T>(
       break
     }
     // Wait before the next retry
+    // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry with delay
     await sleep(delay)
     // Retry
+    // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry logic
     const { value, done } = await retry()
     if (done) {
       return value

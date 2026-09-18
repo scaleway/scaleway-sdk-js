@@ -189,9 +189,9 @@ export const marshalDecimal = (obj: Decimal): { value: string } => ({
  *
  * @internal
  */
-export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
+export const unmarshalDates = (obj: unknown, keys: string[]): unknown => {
   if (Array.isArray(obj)) {
-    return obj.map(v => unmarshalDates(v, keys)) as unknown as T
+    return obj.map(v => unmarshalDates(v, keys))
   }
 
   if (obj && typeof obj === 'object') {
@@ -199,10 +199,10 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
     for (const [key, value] of Object.entries(obj)) {
       result[key] = typeof value === 'string' && keys.includes(key) ? new Date(value) : unmarshalDates(value, keys)
     }
-    return result as T
+    return result
   }
 
-  return obj as T
+  return obj
 }
 
 /**
@@ -218,10 +218,11 @@ export const unmarshalDates = <T>(obj: unknown, keys: string[]): T => {
  *
  * @internal
  */
+// oxlint-disable-next-line typescript/no-unnecessary-type-parameters -- T is the public return type
 export const unmarshalAnyRes = <T>(obj: unknown, ignoreKeys: string[] = [], dateKeys?: string[]): T => {
   if (!isJSONObject(obj)) {
     throw new TypeError(`Data isn't a dictionary.`)
   }
 
-  return camelizeKeys(dateKeys && dateKeys.length > 0 ? unmarshalDates(obj, dateKeys) : obj, ignoreKeys)
+  return camelizeKeys(dateKeys && dateKeys.length > 0 ? unmarshalDates(obj, dateKeys) : obj, ignoreKeys) as T
 }

@@ -41,7 +41,9 @@ const makeTextResponse = (value: string, status = 200) =>
 
 describe(`responseParser`, () => {
   const parseJson = responseParser(unmarshalJSON, 'json')
+  // oxlint-disable-next-line typescript/no-unnecessary-type-parameters -- T is required to match ResponseUnmarshaller<T> type
   const parseAsIs = responseParser(<T>(response: unknown) => response as T, 'json')
+  // oxlint-disable-next-line typescript/no-unnecessary-type-parameters -- T is required to match ResponseUnmarshaller<T> type
   const parseBlob = responseParser(<T>(response: unknown) => response as T, 'blob')
 
   it(`triggers a type error for non 'Response' object`, async () =>

@@ -38,6 +38,7 @@ export const buildRequest = (request: Readonly<ScwRequest>, settings: Readonly<S
   })
 }
 
+// oxlint-disable-next-line typescript/no-unnecessary-type-parameters -- T is required to match ResponseUnmarshaller<T> type
 const asIs = <T>(response: unknown) => response as T
 
 export type Fetcher = <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>
