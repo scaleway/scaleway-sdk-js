@@ -27,26 +27,18 @@ export default defineConfig({
     'eslint/no-await-in-loop': 'warn',
     'eslint/no-shadow': 'warn',
     'eslint/prefer-destructuring': 'warn',
-    'eslint/prefer-named-capture-group': 'warn',
     'eslint/require-unicode-regexp': 'warn',
-    // import rules
-    'import/no-namespace': 'warn',
     // react rules
     'react/set-state-in-effect': 'warn',
     // typescript rules
     'typescript/explicit-member-accessibility': 'warn',
-    'typescript/method-signature-style': 'warn',
-    'typescript/no-dynamic-delete': 'warn',
-    'typescript/no-redundant-type-constituents': 'warn',
     'typescript/no-unnecessary-condition': 'warn',
     'typescript/no-unnecessary-type-parameters': 'warn',
-    'typescript/no-unsafe-member-access': 'warn',
     'typescript/no-unsafe-type-assertion': 'warn',
     'typescript/only-throw-error': 'warn',
     'typescript/parameter-properties': 'warn',
     'typescript/promise-function-async': 'warn',
     'typescript/strict-boolean-expressions': 'warn',
-    'typescript/strict-void-return': 'warn',
     // unicorn rules
     'unicorn/error-message': 'warn',
     'unicorn/prefer-global-this': 'warn',
