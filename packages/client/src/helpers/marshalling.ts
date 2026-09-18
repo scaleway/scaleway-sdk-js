@@ -148,7 +148,7 @@ export const unmarshalMapOfObject = <T, B extends boolean>(
   // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- B extends boolean but TS cannot narrow the literal default to B
   emptyFallback: B = true as B,
 ): B extends true ? Record<string, T> | undefined : Record<string, T> => {
-  if (!data || typeof data !== 'object' || !(data instanceof Object) || Array.isArray(data)) {
+  if (data === null || typeof data !== 'object' || !(data instanceof Object) || Array.isArray(data)) {
     // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- conditional return type cannot be expressed without a cast
     return (emptyFallback ? {} : undefined) as B extends true ? Record<string, T> | undefined : Record<string, T>
   }

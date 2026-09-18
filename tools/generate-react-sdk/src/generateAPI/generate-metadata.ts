@@ -107,11 +107,14 @@ async function processVersion(
     stdout.write(`⚠️  Skipping ${packageName}/${version}: no queriesMetadata found\n`)
     return null
   }
-  const namespace = metadata.folderName || metadata.namespace
+  const namespace =
+    // oxlint-disable-next-line typescript/no-unnecessary-condition -- metadata shape may vary at runtime
+    metadata.folderName !== undefined && metadata.folderName !== '' ? metadata.folderName : metadata.namespace
   const apis = metadata.services
     .filter((service: { apiClass: string }) => !servicesToSkip.has(service.apiClass))
     .map((service: { apiClass: string }) => service.apiClass)
-    .filter((apiClass: string) => apiClass && apiClass.length > 0)
+    // oxlint-disable-next-line typescript/no-unnecessary-condition -- apiClass may be undefined at runtime despite the type
+    .filter((apiClass: string) => apiClass !== undefined && apiClass.length > 0)
   return apis.length > 0 ? { [namespace]: { packageName, apis } } : null
 }
 

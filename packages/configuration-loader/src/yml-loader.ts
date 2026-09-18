@@ -38,7 +38,7 @@ export const convertYamlToConfiguration = (input: string | null): ConfigurationT
       }
     }
     // parse items
-    else if (currentSection) {
+    else if (currentSection !== undefined) {
       const item = DETECT_ITEM_REGEX.exec(line)
       if (item) {
         if (typeof map[currentSection] !== 'object') {

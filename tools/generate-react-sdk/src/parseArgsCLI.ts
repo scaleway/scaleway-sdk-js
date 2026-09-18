@@ -14,12 +14,12 @@ function parseSingleArg(arg: string, nextArg: string | undefined): ParsedArg | n
   let value: string | boolean = parts.length > 1 ? (parts[1] as string) : true
   let consumedNext = false
 
-  if (value === true && nextArg && !nextArg.startsWith('--')) {
+  if (value === true && nextArg !== undefined && !nextArg.startsWith('--')) {
     value = nextArg
     consumedNext = true
   }
 
-  return key ? { key, value, consumedNext } : null
+  return key !== undefined ? { key, value, consumedNext } : null
 }
 
 function applyParsedArg(
@@ -27,6 +27,7 @@ function applyParsedArg(
   requiresValueArgs: string[] | undefined,
   cliArgs: Record<string, string | boolean>,
 ): void {
+  // oxlint-disable-next-line typescript/strict-boolean-expressions -- nullable boolean from optional chain
   if (requiresValueArgs?.includes(parsed.key) && parsed.value === true) {
     console.log(`⚠️  Warning: --${parsed.key} requires a value, using default`)
   } else {
@@ -41,7 +42,7 @@ export const parseArgsCLI = ({ requiresValueArgs }: { requiresValueArgs?: string
   for (let i = 0; i < args.length; i++) {
     const arg = args[i]
     const nextArg = i + 1 < args.length ? args[i + 1] : undefined
-    const parsed = arg?.startsWith('--') ? parseSingleArg(arg, nextArg) : null
+    const parsed = arg?.startsWith('--') === true ? parseSingleArg(arg, nextArg) : null
     if (!parsed) {
       continue
     }

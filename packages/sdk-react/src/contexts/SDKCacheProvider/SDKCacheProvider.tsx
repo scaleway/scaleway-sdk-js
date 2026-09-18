@@ -50,7 +50,7 @@ export const SDKCacheProvider = ({
   // reset cache when client changes
   useEffect(() => {
     // oxlint-disable-next-line typescript/no-unnecessary-condition -- client is typed as non-null but may be absent at runtime if ClientProvider is missing
-    if (client) {
+    if (client !== undefined) {
       // oxlint-disable-next-line react/set-state-in-effect -- intentional cache reset on client change
       setSdkCache(null)
     }

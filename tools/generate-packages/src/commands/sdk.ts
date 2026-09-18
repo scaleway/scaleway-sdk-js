@@ -17,7 +17,7 @@ const getGeneratedPackages = (dir: string, excludeSuffix?: string): PackageJSON[
   try {
     return readdirSync(dir, { withFileTypes: true })
       .filter((d: Dirent) => d.isDirectory())
-      .filter((d: Dirent) => !excludeSuffix || !d.name.includes(excludeSuffix))
+      .filter((d: Dirent) => excludeSuffix === undefined || !d.name.includes(excludeSuffix))
       .flatMap((d: Dirent) => {
         const pkgPath = path.join(dir, d.name, 'package.json')
         if (!existsSync(pkgPath)) {

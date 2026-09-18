@@ -81,7 +81,7 @@ export const camelizeKeys = (obj: unknown, ignoreKeys: string[] = []): unknown =
     return obj.map(v => camelizeKeys(v, ignoreKeys))
   }
 
-  if (obj && typeof obj === 'object' && !(obj instanceof Date)) {
+  if (obj !== null && typeof obj === 'object' && !(obj instanceof Date)) {
     const result: Record<string, unknown> = {}
     for (const [key, value] of Object.entries(obj)) {
       const outKey = camelize(key)

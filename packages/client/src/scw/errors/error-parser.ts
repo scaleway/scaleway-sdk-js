@@ -45,7 +45,7 @@ const unmarshalStandardError = (type: string, status: number, body: Readonly<JSO
   const error = errorByType[type]
   // `errorByType` is a Record<string, ...>, but the key may be absent at runtime
   // oxlint-disable-next-line typescript/no-unnecessary-condition
-  return error ? error.fromJSON(status, body) : null
+  return error !== undefined ? error.fromJSON(status, body) : null
 }
 
 /**

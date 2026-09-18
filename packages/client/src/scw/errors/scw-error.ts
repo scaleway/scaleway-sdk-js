@@ -22,7 +22,7 @@ const buildDefaultMessage = (status: number, body: unknown): string => {
     if (typeof body.message === 'string') {
       message.push(body.message)
     }
-    if (body.fields && isRecordOfStringArray(body.fields)) {
+    if (body.fields !== null && isRecordOfStringArray(body.fields)) {
       message.push(
         Object.entries(body.fields)
           .map(([name, list]) => `${name} (${list.join(', ')})`)

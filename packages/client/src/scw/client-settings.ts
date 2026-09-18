@@ -86,21 +86,21 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
   }
 
   // Default Region.
-  if (obj.defaultRegion && !isRegion(obj.defaultRegion)) {
+  if (obj.defaultRegion !== undefined && !isRegion(obj.defaultRegion)) {
     throw new Error(`Invalid default region format '${obj.defaultRegion}'`)
   }
 
   // Default Zone.
-  if (obj.defaultZone && !isZone(obj.defaultZone)) {
+  if (obj.defaultZone !== undefined && !isZone(obj.defaultZone)) {
     throw new Error(`Invalid default zone format '${obj.defaultZone}'`)
   }
 
   // API URL.
-  if (obj.apiURL && !isURL(obj.apiURL)) {
+  if (obj.apiURL !== undefined && !isURL(obj.apiURL)) {
     throw new Error(`Invalid URL ${obj.apiURL}`)
   }
 
-  if (obj.apiURL?.endsWith('/')) {
+  if (obj.apiURL?.endsWith('/') === true) {
     throw new Error(`Invalid URL ${obj.apiURL}: it should not have a trailing slash`)
   }
 

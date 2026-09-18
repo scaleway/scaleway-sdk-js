@@ -24,7 +24,6 @@ export default defineConfig({
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
     // typescript rules
-    'typescript/strict-boolean-expressions': 'warn', // 72 warnings
   },
   overrides: [
     {

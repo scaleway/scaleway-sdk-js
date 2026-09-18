@@ -191,7 +191,7 @@ describe('withProfile', () => {
   })
 
   it('modifies authentication', async () => {
-    if (!DEFAULT_SETTINGS.apiURL) {
+    if (DEFAULT_SETTINGS.apiURL === undefined) {
       throw new Error('API URL is missing')
     }
     const request = new Request(DEFAULT_SETTINGS.apiURL)

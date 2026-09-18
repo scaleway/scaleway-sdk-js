@@ -97,7 +97,7 @@ export const createTags = ({
 const getRepoFromRemote = (root: string): string => {
   const remoteUrl = exec('git remote get-url origin', { cwd: root })
   const match = /github\.com[:\/](?<repo>[^\/]+\/[^\/]+?)(?:\.git)?$/v.exec(remoteUrl)
-  if (!match?.[1]) {
+  if (match?.[1] === undefined) {
     throw new Error('Could not determine GitHub repository from git remote')
   }
   return match[1]
@@ -128,7 +128,7 @@ export const createGithubReleases = ({
   updatedPackages: Package[]
 }) => {
   const ghToken = process.env['GH_TOKEN'] ?? process.env['GITHUB_TOKEN']
-  if (!ghToken) {
+  if (ghToken === undefined) {
     throw new Error('GH_TOKEN environment variable is required for creating GitHub releases')
   }
 
@@ -154,14 +154,14 @@ function processCommit(
   { packages, defaultSummary }: { packages: Package[]; defaultSummary: string },
 ): void {
   const [sha, subject] = line.split('\u001F')
-  if (!sha) {
+  if (sha === undefined) {
     return
   }
   const changedFiles = exec(`git diff-tree --no-commit-id --name-only -r ${sha}`, { cwd: root })
     .split('\n')
     .filter(Boolean)
   const affected = packages.filter(
-    pkg => pkg.relativePath && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)),
+    pkg => pkg.relativePath !== undefined && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)),
   )
   if (affected.length > 0) {
     createChangesetForPackages(root, affected, subject ?? defaultSummary)
