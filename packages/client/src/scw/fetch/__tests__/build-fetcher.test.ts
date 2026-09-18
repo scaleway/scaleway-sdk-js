@@ -88,9 +88,12 @@ describe(`buildFetcher (mock)`, () => {
 
   it(`gets a response without error for a simple request with unmarshaller`, async () => {
     mockedFetch.mockResolvedValue(
-      new Response(JSON.stringify({}), {
-        headers: { 'Content-Type': 'application/json' },
-      }),
+      Response.json(
+        {},
+        {
+          headers: { 'Content-Type': 'application/json' },
+        },
+      ),
     )
 
     return expect(
@@ -106,9 +109,12 @@ describe(`buildFetcher (mock)`, () => {
 
   it('gets modified response', () => {
     mockedFetch.mockResolvedValue(
-      new Response(JSON.stringify({}), {
-        headers: { 'Content-Type': 'application/json' },
-      }),
+      Response.json(
+        {},
+        {
+          headers: { 'Content-Type': 'application/json' },
+        },
+      ),
     )
 
     return expect(
@@ -117,7 +123,7 @@ describe(`buildFetcher (mock)`, () => {
           ...DEFAULT_SETTINGS,
           interceptors: [
             {
-              response: () => new Response(JSON.stringify(42)),
+              response: () => Response.json('42'),
             },
           ],
         },
@@ -131,9 +137,12 @@ describe(`buildFetcher (mock)`, () => {
 
   it(`gets a response without error for a simple request without unmarshaller`, async () => {
     mockedFetch.mockResolvedValue(
-      new Response(JSON.stringify({ any_parameter: 'any-value' }), {
-        headers: { 'Content-Type': 'application/json' },
-      }),
+      Response.json(
+        { any_parameter: 'any-value' },
+        {
+          headers: { 'Content-Type': 'application/json' },
+        },
+      ),
     )
 
     return expect(

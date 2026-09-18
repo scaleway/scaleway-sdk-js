@@ -81,11 +81,11 @@ describe(`logResponse`, () => {
   })
 })
 
-describe('obfuscateInterceptor', () => {
-  const prependInterceptor =
-    (preprendValue: string) =>
-    ([name, value]: [string, string]): [string, string] => [name, `${preprendValue}${value}`]
+const prependInterceptor =
+  (preprendValue: string) =>
+  ([name, value]: [string, string]): [string, string] => [name, `${preprendValue}${value}`]
 
+describe('obfuscateInterceptor', () => {
   it('changes the request headers', async () => {
     const obfRequest = await obfuscateInterceptor(prependInterceptor('obj-'))({
       request: new Request('https://api.scaleway.com', {
