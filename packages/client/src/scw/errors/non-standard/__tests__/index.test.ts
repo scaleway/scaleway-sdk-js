@@ -4,7 +4,7 @@ import { InvalidArgumentsError, QuotasExceededError, ResourceNotFoundError, Scal
 
 describe('InvalidRequestError', () => {
   it(`transforms to InvalidArgumentsError when there are fields`, () => {
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
+    // oxlint-disable typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
     const error = parseScalewayError(400, {
       fields: {
         'volumes.5.id': ['92 is not a valid UUID.'],
@@ -13,6 +13,7 @@ describe('InvalidRequestError', () => {
       message: 'Validation Error',
       type: 'invalid_request_error',
     }) as InvalidArgumentsError
+    // oxlint-enable typescript/no-unsafe-type-assertion
     expect(error).toBeInstanceOf(InvalidArgumentsError)
     expect(error instanceof Error ? error.details : undefined).toEqual([
       {
@@ -32,12 +33,13 @@ describe('InvalidRequestError', () => {
   })
 
   it(`transforms to QuotasExceededError when message includes a specific text`, () => {
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
+    // oxlint-disable typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
     const error = parseScalewayError(400, {
       message: 'Quota exceeded for this resource.',
       resource: 'compute_snapshots_type_b_ssd_available',
       type: 'invalid_request_error',
     }) as QuotasExceededError
+    // oxlint-enable typescript/no-unsafe-type-assertion
     expect(error).toBeInstanceOf(QuotasExceededError)
     expect(error instanceof Error ? error.list : undefined).toEqual([
       {
@@ -52,11 +54,12 @@ describe('InvalidRequestError', () => {
   })
 
   it(`transforms to QuotasExceededError when message includes a specific text, no resource case`, () => {
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
+    // oxlint-disable typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
     const error = parseScalewayError(400, {
       message: 'Quota exceeded for this resource.',
       type: 'invalid_request_error',
     }) as QuotasExceededError
+    // oxlint-enable typescript/no-unsafe-type-assertion
     expect(error).toBeInstanceOf(QuotasExceededError)
     expect(error instanceof Error ? error.list : undefined).toEqual([
       {
@@ -87,11 +90,12 @@ describe('InvalidRequestError', () => {
 
 describe('UnknownResourceError', () => {
   it(`transforms to ResourceNotFoundError with only the resource ID`, () => {
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
+    // oxlint-disable typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
     const error = parseScalewayError(404, {
       message: `"11111111-1111-4111-8111-111111111142" not found`,
       type: 'unknown_resource',
     }) as ResourceNotFoundError
+    // oxlint-enable typescript/no-unsafe-type-assertion
     expect(error).toBeInstanceOf(ResourceNotFoundError)
     expect(error instanceof Error ? error.message : String(error)).toBe(
       'resource  with ID 11111111-1111-4111-8111-111111111142 is not found',
@@ -101,11 +105,12 @@ describe('UnknownResourceError', () => {
   })
 
   it(`transforms to ResourceNotFoundError with the resource Name and ID`, () => {
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
+    // oxlint-disable typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
     const error = parseScalewayError(404, {
       message: `Security group "11111111-1111-4111-8111-111111111112" not found`,
       type: 'unknown_resource',
     }) as ResourceNotFoundError
+    // oxlint-enable typescript/no-unsafe-type-assertion
     expect(error).toBeInstanceOf(ResourceNotFoundError)
     expect(error instanceof Error ? error.message : String(error)).toBe(
       'resource security_group with ID 11111111-1111-4111-8111-111111111112 is not found',
@@ -115,11 +120,12 @@ describe('UnknownResourceError', () => {
   })
 
   it('transforms to ResourceNotFoundError with the not found resource / single quote', () => {
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
+    // oxlint-disable typescript/no-unsafe-type-assertion -- test narrows parsed error to the expected subclass
     const error = parseScalewayError(404, {
       message: `Volume '11111111-1111-4111-8111-111111111111' not found`,
       type: 'unknown_resource',
     }) as ResourceNotFoundError
+    // oxlint-enable typescript/no-unsafe-type-assertion
     expect(error).toBeInstanceOf(ResourceNotFoundError)
     expect(error instanceof Error ? error.message : String(error)).toBe(
       'resource volume with ID 11111111-1111-4111-8111-111111111111 is not found',
