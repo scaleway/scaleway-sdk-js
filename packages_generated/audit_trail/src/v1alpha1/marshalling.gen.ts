@@ -91,6 +91,7 @@ import type {
   ListSystemEventsResponse,
   SetEnabledAlertRulesResponse,
   SetEnabledCustomAlertRulesResponse,
+  TestCustomAlertRuleResponse,
   CreateCustomAlertRuleRequest,
   CreateExportJobRequest,
   DisableAlertRulesRequest,
@@ -99,6 +100,7 @@ import type {
   EnableCustomAlertRulesRequest,
   SetEnabledAlertRulesRequest,
   SetEnabledCustomAlertRulesRequest,
+  TestCustomAlertRuleRequest,
   UpdateCustomAlertRuleRequest,
 } from './types.gen.js'
 
@@ -1313,6 +1315,18 @@ export const unmarshalSetEnabledCustomAlertRulesResponse = (data: unknown): SetE
   } as SetEnabledCustomAlertRulesResponse
 }
 
+export const unmarshalTestCustomAlertRuleResponse = (data: unknown): TestCustomAlertRuleResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TestCustomAlertRuleResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    firing: data.firing,
+  } as TestCustomAlertRuleResponse
+}
+
 export const marshalCreateCustomAlertRuleRequest = (
   request: CreateCustomAlertRuleRequest,
   defaults: DefaultValues,
@@ -1397,6 +1411,16 @@ export const marshalSetEnabledCustomAlertRulesRequest = (
 ): Record<string, unknown> => ({
   enabled_custom_alert_rule_ids: request.enabledCustomAlertRuleIds,
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalTestCustomAlertRuleRequest = (
+  request: TestCustomAlertRuleRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  evaluation_window: request.evaluationWindow,
+  occurrences: request.occurrences,
+  organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+  query: request.query,
 })
 
 export const marshalUpdateCustomAlertRuleRequest = (

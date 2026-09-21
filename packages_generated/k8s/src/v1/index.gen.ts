@@ -40,6 +40,7 @@ export type {
   DeletePoolRequest,
   ExternalNodeAuth,
   GetClusterKubeConfigRequest,
+  GetClusterKubeConfigRequestEndpoint,
   GetClusterRequest,
   GetNodeMetadataRequest,
   GetNodeRequest,
