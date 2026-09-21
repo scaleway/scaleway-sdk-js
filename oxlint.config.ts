@@ -20,7 +20,7 @@ export default defineConfig({
   ],
   rules: {
     'eslint/no-console': 'warn',
-    'eslint/no-unused-vars': 'warn', // 1 warning
+    'eslint/no-unused-vars': 'error',
 
     // Downgrade base-preset error rules to warn (to be fixed and re-enabled as error)
     // typescript rules
