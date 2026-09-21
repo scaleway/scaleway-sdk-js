@@ -48,6 +48,11 @@ export type CoreV1TaintEffect =
   | 'PreferNoSchedule'
   | 'NoExecute'
 
+export type GetClusterKubeConfigRequestEndpoint =
+  | 'unknown_endpoint'
+  | 'public'
+  | 'vpc'
+
 export type ListClustersRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -1396,6 +1401,10 @@ export type GetClusterKubeConfigRequest = {
    * Hide the legacy token from the kubeconfig.
    */
   redacted?: boolean
+  /**
+   * Which endpoint to use to reach the APIServer (default: public).
+   */
+  endpoint?: GetClusterKubeConfigRequestEndpoint
 }
 
 

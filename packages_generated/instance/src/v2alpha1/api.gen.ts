@@ -382,6 +382,12 @@ export class API extends ParentAPI {
     )
 
   
+  /**
+   * List compatible Instance types. List the Instance types that a given instance could be converted to.
+   *
+   * @param request - The request {@link ListServerCompatibleTypesRequest}
+   * @returns A Promise of ListServerCompatibleTypesResponse
+   */
   listServerCompatibleTypes = (request: Readonly<ListServerCompatibleTypesRequest>) =>
     this.client.fetch<ListServerCompatibleTypesResponse>(
       {

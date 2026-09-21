@@ -8,6 +8,7 @@ import type {
   ClusterTypeAvailability,
   ClusterTypeResiliency,
   CoreV1TaintEffect,
+  GetClusterKubeConfigRequestEndpoint,
   ListClustersRequestOrderBy,
   ListNodesRequestOrderBy,
   ListPoolsRequestOrderBy,
@@ -76,6 +77,13 @@ export const CORE_V1_TAINT_EFFECTS: CoreV1TaintEffect[] = [
   'NoSchedule',
   'PreferNoSchedule',
   'NoExecute',
+]
+
+/** Lists all values of the enum {@link GetClusterKubeConfigRequestEndpoint}. */
+export const GET_CLUSTER_KUBE_CONFIG_REQUEST_ENDPOINTS: GetClusterKubeConfigRequestEndpoint[] = [
+  'unknown_endpoint',
+  'public',
+  'vpc',
 ]
 
 /** Lists all values of the enum {@link ListClustersRequestOrderBy}. */
