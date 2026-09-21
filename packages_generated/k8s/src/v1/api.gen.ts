@@ -326,6 +326,7 @@ export class API extends ParentAPI {
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/kubeconfig`,
         urlParams: urlParams(
           ['dl', 1],
+          ['endpoint', request.endpoint],
           ['redacted', request.redacted],
         ),
         responseType: 'blob',
