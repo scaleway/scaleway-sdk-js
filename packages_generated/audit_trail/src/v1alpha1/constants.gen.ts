@@ -8,6 +8,9 @@ import type {
   AuthenticationEventMethod,
   AuthenticationEventOrigin,
   AuthenticationEventResult,
+  CustomAlertRuleFieldFieldType,
+  CustomAlertRuleFieldIntOperator,
+  CustomAlertRuleFieldStringOperator,
   CustomAlertRuleSeverity,
   CustomAlertRuleStatus,
   ExportJobStatusCode,
@@ -85,6 +88,33 @@ export const AUTHENTICATION_EVENT_RESULTS: AuthenticationEventResult[] = [
   'unknown_result',
   'success',
   'failure',
+]
+
+/** Lists all values of the enum {@link CustomAlertRuleFieldFieldType}. */
+export const CUSTOM_ALERT_RULE_FIELD_FIELD_TYPES: CustomAlertRuleFieldFieldType[] = [
+  'unknown_field_type',
+  'field_type_string',
+  'field_type_int',
+]
+
+/** Lists all values of the enum {@link CustomAlertRuleFieldIntOperator}. */
+export const CUSTOM_ALERT_RULE_FIELD_INT_OPERATORS: CustomAlertRuleFieldIntOperator[] = [
+  'unknown_int_operator',
+  'equal',
+  'not_equal',
+  'less_than_or_equal',
+  'less_than',
+  'greater_than_or_equal',
+  'greater_than',
+]
+
+/** Lists all values of the enum {@link CustomAlertRuleFieldStringOperator}. */
+export const CUSTOM_ALERT_RULE_FIELD_STRING_OPERATORS: CustomAlertRuleFieldStringOperator[] = [
+  'unknown_string_operator',
+  'contains',
+  'matches',
+  'starts_with',
+  'ends_with',
 ]
 
 /** Lists all values of the enum {@link CustomAlertRuleSeverity}. */
@@ -262,6 +292,7 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'serverless_functions_trigger',
   'wofl_workflow_definition',
   'wofl_workflow_run',
+  'wofl_workflow_version',
 ]
 
 /** Lists all values of the enum {@link RunStatus}. */
