@@ -27,6 +27,7 @@ export type {
   KeyAlgorithmKeyEncapsulation,
   KeyAlgorithmSymmetricEncryption,
   KeyOrigin,
+  KeyProtectionLevel,
   KeyRotation,
   KeyRotationPolicy,
   KeyRotationStatus,

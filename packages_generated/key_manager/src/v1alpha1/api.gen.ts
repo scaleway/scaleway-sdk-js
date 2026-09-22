@@ -285,6 +285,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
+          ['protection_level', request.protectionLevel],
           ['scheduled_for_deletion', request.scheduledForDeletion],
           ['tags', request.tags],
           ['usage', request.usage],
@@ -294,7 +295,7 @@ export class API extends ParentAPI {
     )
   
   /**
-   * List keys. Retrieve a list of keys across all Projects in an Organization or within a specific Project. 
+   * List keys. Retrieve a list of keys across all Projects in an Organization or within a specific Project.
 If the user has permissions for all current and future projects: Either organization_id or project_id is required.
 If the user has permissions for all current projects or only specific projects: The project_id is required.
 The `region` parameter in path is needed in both case.
