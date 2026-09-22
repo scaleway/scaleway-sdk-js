@@ -24,6 +24,7 @@ import type {
   ContractApiCheckContractSignatureRequest,
   ContractApiCreateContractSignatureRequest,
   ProjectApiCreateProjectRequest,
+  ProjectApiDeleteProjectWithResourcesRequest,
   ProjectApiSetProjectQualificationRequest,
   ProjectApiUpdateProjectRequest,
 } from './types.gen.js'
@@ -289,6 +290,13 @@ export const marshalProjectApiCreateProjectRequest = (
   description: request.description,
   name: request.name || randomName('proj'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
+})
+
+export const marshalProjectApiDeleteProjectWithResourcesRequest = (
+  request: ProjectApiDeleteProjectWithResourcesRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  project_name: request.projectName,
 })
 
 const marshalQualificationAiMachine = (

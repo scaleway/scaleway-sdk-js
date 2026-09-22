@@ -31,6 +31,12 @@ export type {
   CreateCustomAlertRuleRequest,
   CreateExportJobRequest,
   CustomAlertRule,
+  CustomAlertRuleField,
+  CustomAlertRuleFieldFieldType,
+  CustomAlertRuleFieldIntOperator,
+  CustomAlertRuleFieldIntOperators,
+  CustomAlertRuleFieldStringOperator,
+  CustomAlertRuleFieldStringOperators,
   CustomAlertRuleSeverity,
   CustomAlertRuleStatus,
   DeleteCustomAlertRuleRequest,
@@ -104,6 +110,8 @@ export type {
   ProductService,
   Resource,
   ResourceType,
+  RetrieveAvailableFieldsForCustomAlertRulesRequest,
+  RetrieveAvailableFieldsForCustomAlertRulesResponse,
   RunStatus,
   SecretManagerSecretInfo,
   SecretManagerSecretVersionInfo,
@@ -136,5 +144,6 @@ export type {
   VpcSubnetInfo,
   WoflWorkflowDefinitionInfo,
   WoflWorkflowRunInfo,
+  WoflWorkflowVersionInfo,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

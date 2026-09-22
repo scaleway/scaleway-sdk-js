@@ -72,6 +72,7 @@ import type {
   VpcSubnetInfo,
   WoflWorkflowDefinitionInfo,
   WoflWorkflowRunInfo,
+  WoflWorkflowVersionInfo,
   EventPrincipal,
   Resource,
   Event,
@@ -89,6 +90,10 @@ import type {
   Product,
   ListProductsResponse,
   ListSystemEventsResponse,
+  CustomAlertRuleFieldIntOperators,
+  CustomAlertRuleFieldStringOperators,
+  CustomAlertRuleField,
+  RetrieveAvailableFieldsForCustomAlertRulesResponse,
   SetEnabledAlertRulesResponse,
   SetEnabledCustomAlertRulesResponse,
   TestCustomAlertRuleResponse,
@@ -973,6 +978,20 @@ const unmarshalWoflWorkflowRunInfo = (data: unknown): WoflWorkflowRunInfo => {
   } as WoflWorkflowRunInfo
 }
 
+const unmarshalWoflWorkflowVersionInfo = (data: unknown): WoflWorkflowVersionInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WoflWorkflowVersionInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    workflowDefinitionId: data.workflow_definition_id,
+    workflowDefinitionName: data.workflow_definition_name,
+  } as WoflWorkflowVersionInfo
+}
+
 const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1061,6 +1080,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : undefined,
     woflWorkflowDefinitionInfo: data.wofl_workflow_definition_info ? unmarshalWoflWorkflowDefinitionInfo(data.wofl_workflow_definition_info) : undefined,
     woflWorkflowRunInfo: data.wofl_workflow_run_info ? unmarshalWoflWorkflowRunInfo(data.wofl_workflow_run_info) : undefined,
+    woflWorkflowVersionInfo: data.wofl_workflow_version_info ? unmarshalWoflWorkflowVersionInfo(data.wofl_workflow_version_info) : undefined,
   } as Resource
 }
 
@@ -1289,6 +1309,58 @@ export const unmarshalListSystemEventsResponse = (data: unknown): ListSystemEven
     events: unmarshalArrayOfObject(data.events, unmarshalSystemEvent),
     nextPageToken: data.next_page_token,
   } as ListSystemEventsResponse
+}
+
+const unmarshalCustomAlertRuleFieldIntOperators = (data: unknown): CustomAlertRuleFieldIntOperators => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CustomAlertRuleFieldIntOperators' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    operators: data.operators,
+  } as CustomAlertRuleFieldIntOperators
+}
+
+const unmarshalCustomAlertRuleFieldStringOperators = (data: unknown): CustomAlertRuleFieldStringOperators => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CustomAlertRuleFieldStringOperators' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    operators: data.operators,
+  } as CustomAlertRuleFieldStringOperators
+}
+
+const unmarshalCustomAlertRuleField = (data: unknown): CustomAlertRuleField => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CustomAlertRuleField' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    intOperators: data.int_operators ? unmarshalCustomAlertRuleFieldIntOperators(data.int_operators) : undefined,
+    name: data.name,
+    stringOperators: data.string_operators ? unmarshalCustomAlertRuleFieldStringOperators(data.string_operators) : undefined,
+    type: data.type,
+  } as CustomAlertRuleField
+}
+
+export const unmarshalRetrieveAvailableFieldsForCustomAlertRulesResponse = (data: unknown): RetrieveAvailableFieldsForCustomAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RetrieveAvailableFieldsForCustomAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    fields: unmarshalArrayOfObject(data.fields, unmarshalCustomAlertRuleField),
+    totalCount: data.total_count,
+  } as RetrieveAvailableFieldsForCustomAlertRulesResponse
 }
 
 export const unmarshalSetEnabledAlertRulesResponse = (data: unknown): SetEnabledAlertRulesResponse => {
