@@ -1,40 +1,23 @@
 name: Setup
-description: Checkout, install pnpm/Node, build tools, and relink bins
+description: Install pnpm/Node, build tools, and relink bins (run after checkout)
 
 inputs:
   node-version:
     description: Node.js version (defaults to .nvmrc)
     required: false
     default: ''
-  fetch-depth:
-    description: Number of commits to fetch (0 = all)
-    required: false
-    default: '1'
-  token:
-    description: GitHub token for checkout
-    required: false
-    default: ${{ github.token }}
-  persist-credentials:
-    description: Whether to persist credentials in git config
-    required: false
-    default: 'true'
   registry-url:
     description: npm registry URL (for publishing)
     required: false
     default: ''
   frozen-lockfile:
-    description: Use --no-frozen-lockfile (false) or frozen lockfile (true)
+    description: Use frozen lockfile (true) or --no-frozen-lockfile (false)
     required: false
     default: 'false'
 
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with:
-        fetch-depth: ${{ inputs.fetch-depth }}
-        persist-credentials: ${{ inputs.persist-credentials }}
-        token: ${{ inputs.token }}
     - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
     - name: Use Node.js
       uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
