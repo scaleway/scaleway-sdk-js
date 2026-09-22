@@ -14,12 +14,13 @@ export const unmarshalMoney = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'Money' failed as data isn't a dictionary.`)
   }
 
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed Money shape
+  // oxlint-disable typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed Money shape
   return {
     currencyCode: data.currency_code,
     nanos: data.nanos,
     units: data.units,
   } as Money
+  // oxlint-enable typescript/no-unsafe-type-assertion
 }
 
 /**
@@ -32,13 +33,14 @@ export const unmarshalServiceInfo = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'ServiceInfo' failed as data isn't a dictionary.`)
   }
 
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed ServiceInfo shape
+  // oxlint-disable typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed ServiceInfo shape
   return {
     description: data.description,
     documentationUrl: data.documentation_url,
     name: data.name,
     version: data.version,
   } as ServiceInfo
+  // oxlint-enable typescript/no-unsafe-type-assertion
 }
 
 /**
@@ -51,12 +53,13 @@ export const unmarshalScwFile = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'ScwFile' failed as data isn't a dictionary.`)
   }
 
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed ScwFile shape
+  // oxlint-disable typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed ScwFile shape
   return {
     content: data.content,
     contentType: data.content_type,
     name: data.name,
   } as ScwFile
+  // oxlint-enable typescript/no-unsafe-type-assertion
 }
 
 /**
@@ -90,12 +93,13 @@ export const unmarshalTimeSeries = (data: unknown) => {
     throw new TypeError(`Unmarshalling the type 'TimeSeries' failed as data isn't a dictionary.`)
   }
 
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed TimeSeries shape
+  // oxlint-disable typescript/no-unsafe-type-assertion -- unmarshalling untyped API JSON into the typed TimeSeries shape
   return {
     metadata: data.metadata,
     name: data.name,
     points: unmarshalArrayOfObject(data.points, unmarshalTimeSeriesPoint),
   } as TimeSeries
+  // oxlint-enable typescript/no-unsafe-type-assertion
 }
 
 /**
