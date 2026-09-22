@@ -483,6 +483,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     commercialRange: data.commercial_range,
     cpus: unmarshalArrayOfObject(data.cpus, unmarshalCPU),
     disks: unmarshalArrayOfObject(data.disks, unmarshalDisk),
+    dualAttach: data.dual_attach,
     enable: data.enable,
     fee: data.fee ? unmarshalMoney(data.fee) : undefined,
     gpus: unmarshalArrayOfObject(data.gpus, unmarshalGPU),
