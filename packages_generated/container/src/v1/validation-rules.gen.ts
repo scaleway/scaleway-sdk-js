@@ -31,7 +31,7 @@ export const CreateContainerRequest = {
   },
   maxScale: {
     greaterThanOrEqual: 1,
-    lessThanOrEqual: 50,
+    lessThanOrEqual: 200,
   },
   memoryLimitBytes: {
     greaterThanOrEqual: 128000000,
@@ -193,7 +193,7 @@ export const UpdateContainerRequest = {
   },
   maxScale: {
     greaterThanOrEqual: 1,
-    lessThanOrEqual: 50,
+    lessThanOrEqual: 200,
   },
   memoryLimitBytes: {
     greaterThanOrEqual: 128000000,
