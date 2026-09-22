@@ -700,6 +700,11 @@ export interface CheckPEMChainRequestSecretChain {
 }
 
 
+export interface WafExclusionRules {
+  rules: WafExclusionRule[]
+}
+
+
 export interface PlanDetails {
   /**
    * Subscription plan name.
@@ -1162,7 +1167,7 @@ export type CreateWafStageRequest = {
   /**
    * List of OWASP® CRS rule IDs excluded from WAF.
    */
-  exclusionRules?: WafExclusionRule[]
+  exclusionRules?: WafExclusionRules
   /**
    * ID of the backend stage to forward requests to after the WAF stage.
    *
@@ -2108,7 +2113,7 @@ export type UpdateWafStageRequest = {
   /**
    * List of OWASP® CRS rule IDs excluded from WAF.
    */
-  exclusionRules?: WafExclusionRule[]
+  exclusionRules?: WafExclusionRules
   /**
    * ID of the backend stage to forward requests to after the WAF stage.
    *
