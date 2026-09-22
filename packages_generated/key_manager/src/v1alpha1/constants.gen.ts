@@ -7,6 +7,7 @@ import type {
   KeyAlgorithmKeyEncapsulation,
   KeyAlgorithmSymmetricEncryption,
   KeyOrigin,
+  KeyProtectionLevel,
   KeyRotationStatus,
   KeyState,
   ListAlgorithmsRequestUsage,
@@ -65,6 +66,13 @@ export const KEY_ORIGINS: KeyOrigin[] = [
   'unknown_origin',
   'scaleway_kms',
   'external',
+]
+
+/** Lists all values of the enum {@link KeyProtectionLevel}. */
+export const KEY_PROTECTION_LEVELS: KeyProtectionLevel[] = [
+  'unknown_protection_level',
+  'software',
+  'hsm',
 ]
 
 /** Lists all values of the enum {@link KeyRotationStatus}. */
