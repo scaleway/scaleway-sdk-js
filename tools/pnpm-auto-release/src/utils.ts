@@ -149,7 +149,8 @@ export const createGithubReleases = ({
 
 const createChangesetForPackages = (root: string, packages: Package[], summary: string) => {
   const names = packages.map(({ name }) => name).join(' ')
-  exec(`pnpm change --bump minor --summary "${summary}" ${names}`, {
+  const safeSummary = summary.replaceAll(`'`, `'\\''`)
+  exec(`pnpm change --bump minor --summary '${safeSummary}' ${names}`, {
     cwd: root,
   })
   logger(`changeset ${summary} ${names}`)
