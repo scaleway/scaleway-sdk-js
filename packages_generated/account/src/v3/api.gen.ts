@@ -21,6 +21,7 @@ import {
   unmarshalListProjectsResponse,
   unmarshalProject,
   marshalProjectApiCreateProjectRequest,
+  marshalProjectApiDeleteProjectWithResourcesRequest,
   marshalProjectApiSetProjectQualificationRequest,
   marshalProjectApiUpdateProjectRequest,
   unmarshalProjectQualification,
@@ -271,11 +272,12 @@ export class ProjectAPI extends ParentAPI {
   deleteProjectWithResources = (request: Readonly<ProjectApiDeleteProjectWithResourcesRequest>) =>
     this.client.fetch<Project>(
       {
+        body: JSON.stringify(
+          marshalProjectApiDeleteProjectWithResourcesRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
         method: 'POST',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/delete-with-resources`,
-        urlParams: urlParams(
-          ['project_name', request.projectName],
-        ),
       },
       unmarshalProject,
     )
