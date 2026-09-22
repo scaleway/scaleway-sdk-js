@@ -1,5 +1,165 @@
 # Change Log
 
+## 2.9.0
+
+### Minor Changes
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- chore: fix a few typos (#47)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(minor-deps): update dependency @scaleway/eslint-config-react to ^3.10.0 (#238)
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
+- chore(minor-deps): update dependency @scaleway/eslint-config-react to ^3.14.1 (#378)
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- feat: update to Node18, remove cross-fetch, and run tests on node+jsdom (#386)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency @types/node to v18.19.130 (#2610)
+
+- chore(release): publish
+
+- test(vitest): use vitest instead of jest (#1124)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- fix(build): export all types (#1261)
+
+- chore(release): publish
+
+- feat(configuration-loader): list all configurations at once (#336)
+
+- feat(configuration-loader): add async config loading and file permission check (#2860)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(client): clean up client usage inside sdk (#1952)
+
+- chore: remove linter warnings, and move jsdom to devDep (#1154)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- fix(release): run by commit and github release cli (#3185)
+
+- build: adjust package version (#16)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- chore(deps): update dependency vitest to v4 [security] (#2998)
+
+- test: check homeDir with empty xdg_config_home (#269)
+
+- chore(release): publish
+
+- chore(deps): update dependency typescript to ^4.9.3 (#241)
+
+- feat: prepare v1 release (#454)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(biome): use biome to format instead of prettier (#1947)
+
+- chore(deps): update dependency husky to v9 (#1149)
+
+- chore(deps): update dependency @typescript/native-preview to v7.0.0-dev.20260420.1 (#2906)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- chore: migrate from ESLint to Biome for linting and formatting (#2551)
+
+- fix(oxlint): enable unicorn/text-encoding-identifier-case as error (#3571)
+
+- chore(build): from rollup to vite config (#1255)
+
+- chore(release): publish
+
+- fix: exclude generated config files from biome formatting (#2661)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- feat: migrate to GitHub (#1)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(sdk): unify tools (#2903)
+
+- fix(oxlint): enable unicorn/import-style as error (#3553)
+
+- chore: commit generated files for release (#2876)
+
+- chore(release): publish
+
+- chore: add extension for nodenext (#2265)
+
+- feat(sdk-react): add react sdk (#2794)
+
 ## 2.8.0
 
 ### Minor Changes

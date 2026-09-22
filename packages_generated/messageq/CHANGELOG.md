@@ -1,5 +1,80 @@
 # Change Log
 
+## 1.9.0
+
+### Minor Changes
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(messageq): add generated messageq package (#2962)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- feat(product_catalog): add support for `no_kvm` (#3015)
+
+- chore(release): publish
+
+- feat: add support for constants (#3286)
+
+- chore(release): publish
+
+- fix(messageq): align username regex validation (#3083)
+
+- feat: update generated APIs (#3182)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(messageq): add DownloadDeploymentCertificateAuthority (#2978)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.3
+
 ## 1.8.1
 
 ### Patch Changes

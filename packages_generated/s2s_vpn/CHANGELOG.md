@@ -1,5 +1,188 @@
 # Change Log
 
+## 2.18.0
+
+### Minor Changes
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: update generated APIs (#2881)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3369)
+
+- feat(resource_private): add s2s_vpn in resource count (#2723)
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- fix: format (#2683)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(s2s_vpn): add packages (#2400)
+
+- chore: format generated files (#2652)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(lint): update generated files (#2594)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- fix: read real exports from packages instead of guessing names to fix TypeScript compilation errors (#2460)
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- feat(s2s_vpn): add customer gateway region (#2694)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore: fix formating (#2669)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(s2s_vpn): add VpnGW type availability zone (#2627)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore: remove post-generate updates (#3168)
+
+- fix: change tabs into space (#2688)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2598)
+
+- chore(deps): update node.js (#2630)
+
+- chore(release): publish
+
+- feat(s2s_vpn): add support for importing custom PSK during connection creation (#2975)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(s2s_vpn): make connections object ip version–specific (#2418)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- feat(s2s_vpn): return connection_ids with list of gws (#2696)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- feat: add support for srn (#3524)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore: new formating (#2667)
+
+- chore(release): publish
+
+- feat(s2s_vpn): add support for updating Connection's PSK secret (#3577)
+
+- chore: reorganize import (#2520)
+
+- feat: add support for constants (#3286)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- feat(s2s_vpn): use secret manager to store connection psk (#2539)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- feat(s2s_vpn): accept custom private interco IPs on connection creation (#2482)
+
+- chore: add extension for nodenext (#2265)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(s2s_vpn): add support for changing PSK secret (#2987)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.3
+
 ## 2.17.0
 
 ### Minor Changes

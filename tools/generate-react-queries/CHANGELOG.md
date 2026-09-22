@@ -1,5 +1,127 @@
 # Change Log
 
+## 0.12.0
+
+### Minor Changes
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- fix: convert deprecated rmDirSync recursive to rmSync (#2888)
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- fix(generate-queries): exports paths (#2812)
+
+- chore(packages): upgrade deps (#3157)
+
+- fix(oxlint): enable eslint/prefer-named-capture-group as error (#3420)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generate-react-queries): add reload hook codegen (#2814)
+
+- fix(oxlint): fix unicorn/catch-error-name violations (#3366)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): fix eslint/no-console violations (#3362)
+
+- fix(oxlint): enable eslint/prefer-destructuring as error (#3422)
+
+- chore(release): publish
+
+- fix(oxlint): fix typescript/no-unsafe-member-access violations (#3354)
+
+- fix(oxlint): enable unicorn/no-array-sort as error (#3554)
+
+- fix(oxlint): enable eslint/no-implicit-coercion as error (#3482)
+
+- fix(generate-react-queries): resolve cross-package type namespaces correctly (#3301)
+
+- fix(sdk-react-hooks): make reload sync (#2878)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- fix(oxlint): enable typescript/prefer-regexp-exec as error (#3520)
+
+- chore(release): publish
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): fix typescript/no-unsafe-argument violations (#3355)
+
+- feat(tools): add JSON config file support and skip filters (#3253)
+
+- chore(release): publish
+
+- fix(export): package.json rewrite (#2820)
+
+- chore(release): publish
+
+- fix(oxlint): fix eslint/no-continue violations (#3363)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- fix(oxlint): enable unicorn/text-encoding-identifier-case as error (#3571)
+
+- chore(typescript): upgrade version (#2916)
+
+- fix(oxlint): fix eslint/max-statements violations (#3365)
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- fix(generate-queries): only custom ns (#2813)
+
+- feat: update generated APIs (#3182)
+
+- feat(generate-queries): sdk-react-queries (#2802)
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix(oxlint): enable eslint/no-use-before-define as error (#3483)
+
+- fix(bin): rename bin (#2815)
+
+- fix(oxlint): enable unicorn/import-style as error (#3553)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- fix(oxlint): fix typescript/consistent-type-definitions violations (#3359)
+
 ## 0.11.0
 
 ### Minor Changes

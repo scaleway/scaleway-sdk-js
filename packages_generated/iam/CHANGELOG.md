@@ -1,5 +1,246 @@
 # Change Log
 
+## 2.18.0
+
+### Minor Changes
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: update generated APIs (#2881)
+
+- fix(iam/v1alpha1): set UpdateOrganizationLoginMethods body (#2508)
+
+- chore(release): publish
+
+- feat(iam): add GetOrganization and SetOrganizationAlias (#2183)
+
+- fix(iam/v1alpha1): add max_bytes rule to password validation (#2259)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(iam): add webauthn registration public key fields (#2744)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- fix: format (#2683)
+
+- feat(iam/v1alpha1): add GetSamlInformation (#2324)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3576)
+
+- feat(iam/v1alpha1): add ParseSamlMetadata (#2523)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(iam): add max_login_session_days security setting (#2450)
+
+- chore: format generated files (#2652)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- feat(iam/v1alpha1): add user connection routes (#2164)
+
+- feat(iam): remove guest from user type (#2494)
+
+- chore(lint): update generated files (#2594)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(iam): remove MigrateOrganizationGuests method (#2507)
+
+- chore(release): publish
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- fix(iam/v1alpha1): add max_bytes rule to update password validation (#2260)
+
+- feat: update generated APIs (#2568)
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- feat(iam): add all_users and all_applications marker for special IAM groups (#3227)
+
+- fix(build): output (#2842)
+
+- chore(release): publish
+
+- feat(iam): increase rules condition max_len to 2048 (#2172)
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- feat(iam): allow @ in username (#2212)
+
+- feat(iam): add expires_at to updateable API key fields (#2532)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- feat(iam): add SCIM related endpoints (#2562)
+
+- chore: remove whitespaces (#3057)
+
+- chore(release): publish
+
+- feat(iam): add max_api_key_expiration_duration to OrganizationSecuritySettings (#2527)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore: fix formating (#2669)
+
+- feat(iam/v1): add scim GetSchemas (#2800)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- feat(iam): increase max username length (#2674)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore: remove post-generate updates (#3168)
+
+- fix: change tabs into space (#2688)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore(release): publish
+
+- feat(iam): rework saml endpoints (#2346)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(iam): add `GetSamlCertificate` method (#2826)
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat: add support for srn (#3524)
+
+- feat(iam): add WebAuthn handling endpoints (#2737)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore: new formating (#2667)
+
+- chore(release): publish
+
+- chore: reorganize import (#2520)
+
+- feat: add support for constants (#3286)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(iam): add GetOrganizationScim method (#2633)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(iam/v1alpha1): add UpdateOrganizationLoginMethods (#2484)
+
+- feat(iam): add guest migration endpoint (#2132)
+
+- feat(iam): add saml certificate expires_at field (#2248)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.3
+
 ## 2.17.0
 
 ### Minor Changes

@@ -1,5 +1,62 @@
 # Change Log
 
+## 1.7.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(annotations): make it public (#3107)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- docs(annotations): improve documentation (#3289)
+
+- feat: update generated APIs (#3182)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.3
+
 ## 1.6.1
 
 ### Patch Changes

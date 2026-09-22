@@ -1,5 +1,282 @@
 # Change Log
 
+## 2.25.0
+
+### Minor Changes
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: update generated APIs (#2881)
+
+- chore(release): publish
+
+- fix(k8s): add a pattern validation for the value of a `CoreV1Taint` (#3484)
+
+- feat(k8s): add support for `userData` (#3267)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(k8s): add support for `it-mil` (#3010)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- feat(k8s): add template_args field to NodeMetadata (#2414)
+
+- chore(k8s): deprecate replace on DeleteNode (#2791)
+
+- feat(k8s): add pools labels, taints and startup_taints (#2761)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- feat(k8s): remove support for `sbsCsiEnabled` (#2066)
+
+- chore(release): publish
+
+- chore: format generated files (#2652)
+
+- feat(k8s): add resource annotation (#3109)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(lint): update generated files (#2594)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- chore(k8s): remove sbs-csi migration route (#2050)
+
+- fix(build): output (#2842)
+
+- chore(release): publish
+
+- feat(k8s): add versions deprecation+eol dates (#2445)
+
+- fix: read real exports from packages instead of guessing names to fix TypeScript compilation errors (#2460)
+
+- chore(release): publish
+
+- feat(environmental_footprint): add network and load balancer categories to enums (#2677)
+
+- feat: publish packages as ESM only (#2624)
+
+- fix(k8s): fix typo export index.gen.ts (#2474)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore(release): publish
+
+- feat(k8s): add cilium_native cni for native routing mode (#2404)
+
+- feat(k8s): add support for pool user-data in createPool (#3234)
+
+- feat(k8s): add node metadata fields for provider and updater (#2226)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- docs(k8s): update root volume type description (#2735)
+
+- chore(release): publish
+
+- feat(k8s): allow page_size=0 (#3235)
+
+- feat(k8s): add `additional_components` field to version message (#3252)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore: fix formating (#2669)
+
+- feat(k8s): enable passing a security group ID at pool creation (#2167)
+
+- chore: update index (#2247)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore: sync generated files after build (#2862)
+
+- feat(k8s): add k8s version release date (#2495)
+
+- chore(k8s): remove legacy endpoint + refresh autoscaler docs (#2649)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(k8s): allow patching security_group_id on existing pools (#2720)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): publish
+
+- feat(k8s): filter by version in the list cluster service (#3092)
+
+- chore(release): publish
+
+- feat(k8s): support setting PodCidr, ServiceCidr, and ServiceDNSIP during cluster creation (#2273)
+
+- fix: sdk client deps (#2056)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(k8s): update links k8s (#2544)
+
+- fix: change tabs into space (#2688)
+
+- feat(k8s): deprecate unused route + fix documentation (#3116)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3261)
+
+- fix: export locality (#2200)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(k8s): add MigratePoolsToNewImages handler (#2139)
+
+- feat(k8s): add support for `privateNetworkId` (#3076)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- fix(k8s): change installer_tags to repeated string with unique validation (#2231)
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat: add support for srn (#3524)
+
+- chore(k8s): remove MigratePoolsToNewImagesRequest (#2732)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore: new formating (#2667)
+
+- chore(release): publish
+
+- chore: reorganize import (#2520)
+
+- feat: add support for constants (#3286)
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- feat(k8s): make `privateNetworkId` optional in `Pool` (#3082)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- feat(k8s): revert to older behaviour for `DeleteNode` (#3153)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- fix: unify biome config with spaces (#2684)
+
+- chore: add extension for nodenext (#2265)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(k8s): add error message on Pool (#3124)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.3
+
 ## 2.24.1
 
 ### Patch Changes

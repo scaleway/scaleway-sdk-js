@@ -1,5 +1,106 @@
 # Change Log
 
+## 1.11.0
+
+### Minor Changes
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- feat: update generated APIs (#3576)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- feat(partner): enable v1 (#2788)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: add support for constants (#3286)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat(sdk-react): add react sdk (#2794)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.8.3
+
 ## 1.10.0
 
 ### Minor Changes
