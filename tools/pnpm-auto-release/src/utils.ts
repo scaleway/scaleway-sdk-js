@@ -25,22 +25,27 @@ export const findWorkspaceRoot = (start: string): string => {
   return start
 }
 
-export const exec = (cmd: string, opts: { cwd?: string; stdio?: 'inherit' } = {}): string => {
-  const out: string | null = execSync(cmd, {
+export const exec = (cmd: string, opts: { cwd?: string; stdio?: 'pipe' | 'inherit' } = {}): string => {
+  const out = execSync(cmd, {
     cwd: opts.cwd,
     encoding: 'utf8',
-    stdio: 'inherit',
+    stdio: opts.stdio === 'inherit' ? 'inherit' : ['ignore', 'pipe', 'pipe'],
     maxBuffer: 50 * 1024 * 1024,
-  })
-
-  // oxlint-disable-next-line typescript/no-unnecessary-condition
-  return out?.trim()
+  }) as string | null
+  return (out ?? '').trim()
 }
 
 export const listWorkspacePackages = (root: string) => {
   const raw = exec('pnpm ls -r --depth -1 --json', { cwd: root })
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- parsing untyped JSON output from pnpm CLI
-  return (JSON.parse(raw) as Package[])
+  if (!raw) {
+    throw new Error('pnpm ls returned no output. Ensure pnpm is installed and the workspace is valid.')
+  }
+  const parsed: unknown = JSON.parse(raw)
+  if (!Array.isArray(parsed)) {
+    throw new TypeError('pnpm ls output is not an array')
+  }
+  return parsed
+    .filter((e): e is Package => e !== null && typeof e === 'object' && 'name' in e && 'path' in e)
     .filter((e): e is Package & { version: string } => Boolean(e.version))
     .map(e => ({
       name: e.name,

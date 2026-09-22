@@ -85,8 +85,8 @@ function parseReleaseArgs(): ReleaseOptions | null {
 function gatherAffectedPackages(root: string, dryRun: boolean): { affected: WorkspacePackage[]; range: string } {
   const packages = listWorkspacePackages(root)
   const lastSha = exec(`git log --grep="^${RELEASE_SUBJECT}" -1 --format="%H"`, { cwd: root }) || null
-  const range = lastSha !== null ? `${lastSha}..HEAD` : 'HEAD~50..HEAD'
-  const changedFiles = exec(`git diff --name-only ${range}`, { cwd: root }).split('\n').filter(Boolean)
+  const range = lastSha ?? exec('git hash-object -t tree /dev/null', { cwd: root })
+  const changedFiles = exec(`git diff --name-only ${range} -- .`, { cwd: root }).split('\n').filter(Boolean)
   const affected = packages.filter(pkg => !pkg.private && changedFiles.some(f => f.startsWith(`${pkg.relativePath}/`)))
   logger(`[release] ${affected.length} packages to bump (dryRun=${dryRun})`)
   for (const pkg of affected) {
