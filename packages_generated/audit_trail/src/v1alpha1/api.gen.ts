@@ -34,6 +34,7 @@ import {
   unmarshalListExportJobsResponse,
   unmarshalListProductsResponse,
   unmarshalListSystemEventsResponse,
+  unmarshalRetrieveAvailableFieldsForCustomAlertRulesResponse,
   marshalSetEnabledAlertRulesRequest,
   unmarshalSetEnabledAlertRulesResponse,
   marshalSetEnabledCustomAlertRulesRequest,
@@ -75,6 +76,8 @@ import type {
   ListProductsResponse,
   ListSystemEventsRequest,
   ListSystemEventsResponse,
+  RetrieveAvailableFieldsForCustomAlertRulesRequest,
+  RetrieveAvailableFieldsForCustomAlertRulesResponse,
   SetEnabledAlertRulesRequest,
   SetEnabledAlertRulesResponse,
   SetEnabledCustomAlertRulesRequest,
@@ -536,6 +539,25 @@ export class API extends ParentAPI {
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/test-custom-alert-rule`,
       },
       unmarshalTestCustomAlertRuleResponse,
+    )
+
+  
+  /**
+   * Retrieve available fields for custom alert rules. Retrieve all available fields that can be used to construct Common Expression Language (CEL) queries for custom alert rules.
+   *
+   * @param request - The request {@link RetrieveAvailableFieldsForCustomAlertRulesRequest}
+   * @returns A Promise of RetrieveAvailableFieldsForCustomAlertRulesResponse
+   */
+  retrieveAvailableFieldsForCustomAlertRules = (request: Readonly<RetrieveAvailableFieldsForCustomAlertRulesRequest> = {}) =>
+    this.client.fetch<RetrieveAvailableFieldsForCustomAlertRulesResponse>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rule-fields`,
+        urlParams: urlParams(
+          ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
+        ),
+      },
+      unmarshalRetrieveAvailableFieldsForCustomAlertRulesResponse,
     )
 
   

@@ -90,6 +90,10 @@ import type {
   Product,
   ListProductsResponse,
   ListSystemEventsResponse,
+  CustomAlertRuleFieldIntOperators,
+  CustomAlertRuleFieldStringOperators,
+  CustomAlertRuleField,
+  RetrieveAvailableFieldsForCustomAlertRulesResponse,
   SetEnabledAlertRulesResponse,
   SetEnabledCustomAlertRulesResponse,
   TestCustomAlertRuleResponse,
@@ -1305,6 +1309,58 @@ export const unmarshalListSystemEventsResponse = (data: unknown): ListSystemEven
     events: unmarshalArrayOfObject(data.events, unmarshalSystemEvent),
     nextPageToken: data.next_page_token,
   } as ListSystemEventsResponse
+}
+
+const unmarshalCustomAlertRuleFieldIntOperators = (data: unknown): CustomAlertRuleFieldIntOperators => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CustomAlertRuleFieldIntOperators' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    operators: data.operators,
+  } as CustomAlertRuleFieldIntOperators
+}
+
+const unmarshalCustomAlertRuleFieldStringOperators = (data: unknown): CustomAlertRuleFieldStringOperators => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CustomAlertRuleFieldStringOperators' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    operators: data.operators,
+  } as CustomAlertRuleFieldStringOperators
+}
+
+const unmarshalCustomAlertRuleField = (data: unknown): CustomAlertRuleField => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'CustomAlertRuleField' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    intOperators: data.int_operators ? unmarshalCustomAlertRuleFieldIntOperators(data.int_operators) : undefined,
+    name: data.name,
+    stringOperators: data.string_operators ? unmarshalCustomAlertRuleFieldStringOperators(data.string_operators) : undefined,
+    type: data.type,
+  } as CustomAlertRuleField
+}
+
+export const unmarshalRetrieveAvailableFieldsForCustomAlertRulesResponse = (data: unknown): RetrieveAvailableFieldsForCustomAlertRulesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'RetrieveAvailableFieldsForCustomAlertRulesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    fields: unmarshalArrayOfObject(data.fields, unmarshalCustomAlertRuleField),
+    totalCount: data.total_count,
+  } as RetrieveAvailableFieldsForCustomAlertRulesResponse
 }
 
 export const unmarshalSetEnabledAlertRulesResponse = (data: unknown): SetEnabledAlertRulesResponse => {

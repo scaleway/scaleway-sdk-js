@@ -53,6 +53,27 @@ export type AuthenticationEventResult =
   | 'success'
   | 'failure'
 
+export type CustomAlertRuleFieldFieldType =
+  | 'unknown_field_type'
+  | 'field_type_string'
+  | 'field_type_int'
+
+export type CustomAlertRuleFieldIntOperator =
+  | 'unknown_int_operator'
+  | 'equal'
+  | 'not_equal'
+  | 'less_than_or_equal'
+  | 'less_than'
+  | 'greater_than_or_equal'
+  | 'greater_than'
+
+export type CustomAlertRuleFieldStringOperator =
+  | 'unknown_string_operator'
+  | 'contains'
+  | 'matches'
+  | 'starts_with'
+  | 'ends_with'
+
 export type CustomAlertRuleSeverity =
   | 'unknown_severity'
   | 'info'
@@ -1089,6 +1110,16 @@ export interface ProductService {
 }
 
 
+export interface CustomAlertRuleFieldIntOperators {
+  operators: CustomAlertRuleFieldIntOperator[]
+}
+
+
+export interface CustomAlertRuleFieldStringOperators {
+  operators: CustomAlertRuleFieldStringOperator[]
+}
+
+
 export interface AlertRule {
   /**
    * ID of the alert rule.
@@ -1223,6 +1254,30 @@ export interface Product {
    * Specifies the API versions of the products integrated with Audit Trail. Each version defines the methods logged by Audit Trail.
    */
   services: ProductService[]
+}
+
+
+export interface CustomAlertRuleField {
+  /**
+   * The field name to be used in the CEL expression (e.g., `productName`, `status`).
+   */
+  name: string
+  /**
+   * The expected data type of the field within the CEL environment.
+   */
+  type: CustomAlertRuleFieldFieldType
+  /**
+   * A list of string CEL operators that are supported and valid for this field.
+   *
+   * One-of ('availableOperators'): at most one of 'stringOperators', 'intOperators' could be set.
+   */
+  stringOperators?: CustomAlertRuleFieldStringOperators
+  /**
+   * A list of int CEL operators that are supported and valid for this field.
+   *
+   * One-of ('availableOperators'): at most one of 'stringOperators', 'intOperators' could be set.
+   */
+  intOperators?: CustomAlertRuleFieldIntOperators
 }
 
 
@@ -1687,6 +1742,30 @@ export interface ListSystemEventsResponse {
    * Page token to use in following calls to keep listing.
    */
   nextPageToken?: string
+}
+
+
+export type RetrieveAvailableFieldsForCustomAlertRulesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  organizationId?: string
+}
+
+
+export interface RetrieveAvailableFieldsForCustomAlertRulesResponse {
+  /**
+   * A list of fields that are authorized to be used in a CEL expression.
+   */
+  fields: CustomAlertRuleField[]
+  /**
+   * Number of fields.
+   */
+  totalCount: number
 }
 
 
