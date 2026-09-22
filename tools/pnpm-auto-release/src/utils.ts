@@ -25,14 +25,16 @@ export const findWorkspaceRoot = (start: string): string => {
   return start
 }
 
-export const exec = (cmd: string, opts: { cwd?: string; stdio?: 'pipe' | 'inherit' } = {}): string => {
-  const out = execSync(cmd, {
+export const exec = (cmd: string, opts: { cwd?: string; stdio?: 'inherit' } = {}): string => {
+  const out: string | null = execSync(cmd, {
     cwd: opts.cwd,
     encoding: 'utf8',
-    stdio: opts.stdio === 'inherit' ? 'inherit' : ['ignore', 'pipe', 'pipe'],
+    stdio: 'inherit',
     maxBuffer: 50 * 1024 * 1024,
   })
-  return out.trim()
+
+  // oxlint-disable-next-line typescript/no-unnecessary-condition
+  return out?.trim()
 }
 
 export const listWorkspacePackages = (root: string) => {

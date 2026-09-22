@@ -59,13 +59,14 @@ describe('withProfile', () => {
   it(`doesn't modify Settings object with empty Profile object`, () => {
     expect(withProfile(EMPTY_PROFILE)(DEFAULT_SETTINGS)).toStrictEqual(DEFAULT_SETTINGS)
     expect(
-      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes an invalid profile shape
+      // oxlint-disable typescript/no-unsafe-type-assertion -- test deliberately passes an invalid profile shape
       withProfile({
         WTF: 'malicious content',
       } as unknown as Profile)(DEFAULT_SETTINGS),
+      // oxlint-enable typescript/no-unsafe-type-assertion
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
-      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes undefined fields
+      // oxlint-disable typescript/no-unsafe-type-assertion -- test deliberately passes undefined fields
       withProfile({
         apiURL: undefined,
         defaultOrganizationId: undefined,
@@ -79,9 +80,10 @@ describe('withProfile', () => {
         responseInterceptors: undefined,
         userAgent: undefined,
       } as unknown as Profile)(DEFAULT_SETTINGS),
+      // oxlint-enable typescript/no-unsafe-type-assertion
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
-      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes null fields
+      // oxlint-disable typescript/no-unsafe-type-assertion -- test deliberately passes null fields
       withProfile({
         apiURL: null,
         defaultOrganizationId: null,
@@ -95,9 +97,10 @@ describe('withProfile', () => {
         responseInterceptors: null,
         userAgent: null,
       } as unknown as Profile)(DEFAULT_SETTINGS),
+      // oxlint-enable typescript/no-unsafe-type-assertion
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
-      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes empty-string fields
+      // oxlint-disable typescript/no-unsafe-type-assertion -- test deliberately passes empty-string fields
       withProfile({
         apiURL: '',
         defaultOrganizationId: '',
@@ -111,9 +114,10 @@ describe('withProfile', () => {
         responseInterceptors: '',
         userAgent: '',
       } as unknown as Profile)(DEFAULT_SETTINGS),
+      // oxlint-enable typescript/no-unsafe-type-assertion
     ).toStrictEqual(DEFAULT_SETTINGS)
     expect(
-      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes zero-value fields
+      // oxlint-disable typescript/no-unsafe-type-assertion -- test deliberately passes zero-value fields
       withProfile({
         apiURL: 0,
         defaultOrganizationId: 0,
@@ -127,6 +131,7 @@ describe('withProfile', () => {
         responseInterceptors: 0,
         userAgent: 0,
       } as unknown as Profile)(DEFAULT_SETTINGS),
+      // oxlint-enable typescript/no-unsafe-type-assertion
     ).toStrictEqual(DEFAULT_SETTINGS)
   })
 
