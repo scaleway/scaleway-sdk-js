@@ -100,21 +100,23 @@ export const CUSTOM_ALERT_RULE_FIELD_FIELD_TYPES: CustomAlertRuleFieldFieldType[
 /** Lists all values of the enum {@link CustomAlertRuleFieldIntOperator}. */
 export const CUSTOM_ALERT_RULE_FIELD_INT_OPERATORS: CustomAlertRuleFieldIntOperator[] = [
   'unknown_int_operator',
-  'equal',
-  'not_equal',
-  'less_than_or_equal',
-  'less_than',
-  'greater_than_or_equal',
-  'greater_than',
+  'int_equal',
+  'int_not_equal',
+  'int_less_than_or_equal',
+  'int_less_than',
+  'int_greater_than_or_equal',
+  'int_greater_than',
 ]
 
 /** Lists all values of the enum {@link CustomAlertRuleFieldStringOperator}. */
 export const CUSTOM_ALERT_RULE_FIELD_STRING_OPERATORS: CustomAlertRuleFieldStringOperator[] = [
   'unknown_string_operator',
-  'contains',
-  'matches',
-  'starts_with',
-  'ends_with',
+  'string_contains',
+  'string_matches',
+  'string_starts_with',
+  'string_ends_with',
+  'string_equal',
+  'string_not_equal',
 ]
 
 /** Lists all values of the enum {@link CustomAlertRuleSeverity}. */

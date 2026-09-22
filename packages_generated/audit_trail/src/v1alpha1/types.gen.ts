@@ -60,19 +60,21 @@ export type CustomAlertRuleFieldFieldType =
 
 export type CustomAlertRuleFieldIntOperator =
   | 'unknown_int_operator'
-  | 'equal'
-  | 'not_equal'
-  | 'less_than_or_equal'
-  | 'less_than'
-  | 'greater_than_or_equal'
-  | 'greater_than'
+  | 'int_equal'
+  | 'int_not_equal'
+  | 'int_less_than_or_equal'
+  | 'int_less_than'
+  | 'int_greater_than_or_equal'
+  | 'int_greater_than'
 
 export type CustomAlertRuleFieldStringOperator =
   | 'unknown_string_operator'
-  | 'contains'
-  | 'matches'
-  | 'starts_with'
-  | 'ends_with'
+  | 'string_contains'
+  | 'string_matches'
+  | 'string_starts_with'
+  | 'string_ends_with'
+  | 'string_equal'
+  | 'string_not_equal'
 
 export type CustomAlertRuleSeverity =
   | 'unknown_severity'

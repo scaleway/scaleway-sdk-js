@@ -68,6 +68,7 @@ import type {
   CreateRouteStageRequest,
   CreateTLSStageRequest,
   CreateVPCEndpointRequest,
+  WafExclusionRules,
   CreateWafStageRequest,
   SelectPlanRequest,
   SetHeadStageRequestAddNewHeadStage,
@@ -1117,11 +1118,18 @@ const marshalWafExclusionRule = (
   rule_id: request.ruleId,
 })
 
+const marshalWafExclusionRules = (
+  request: WafExclusionRules,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  rules:  request.rules.map(elt => marshalWafExclusionRule(elt, defaults)),
+})
+
 export const marshalCreateWafStageRequest = (
   request: CreateWafStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  exclusion_rules: ((request.exclusionRules !== undefined) ?  request.exclusionRules.map(elt => marshalWafExclusionRule(elt, defaults)): undefined),
+  exclusion_rules: ((request.exclusionRules !== undefined) ?  marshalWafExclusionRules(request.exclusionRules, defaults): undefined),
   mode: request.mode,
   paranoia_level: request.paranoiaLevel,  
   ...resolveOneOf([
@@ -1314,7 +1322,7 @@ export const marshalUpdateWafStageRequest = (
   request: UpdateWafStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  exclusion_rules: ((request.exclusionRules !== undefined) ?  request.exclusionRules.map(elt => marshalWafExclusionRule(elt, defaults)): undefined),
+  exclusion_rules: ((request.exclusionRules !== undefined) ?  marshalWafExclusionRules(request.exclusionRules, defaults): undefined),
   mode: request.mode,
   paranoia_level: request.paranoiaLevel,  
   ...resolveOneOf([
