@@ -10,12 +10,12 @@ generate-packages <command> [options]
 
 ### Commands
 
-| Command    | Description                                                                                                               |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `packages` | Generate per-product `package.json`, `vite.config.ts`, `tsconfig.json`, `metadata.gen.ts`, and `index.gen.ts` re-exports. |
-| `sdk`      | Update global SDK `package.json` with `workspace:*` deps and rewrite `index.gen.ts` exports.                              |
-| `deps`     | Scan `.gen.ts` files for SDK cross-imports and sync missing `workspace:*` dependencies.                                   |
-| `setup`    | Detect new products without a `package.json` and fully onboard them (packages + sdk + deps + install).                    |
+| Command    | Description                                                                                                                 |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `packages` | Generate per-product `package.json`, `tsdown.config.ts`, `tsconfig.json`, `metadata.gen.ts`, and `index.gen.ts` re-exports. |
+| `sdk`      | Update global SDK `package.json` with `workspace:*` deps and rewrite `index.gen.ts` exports.                                |
+| `deps`     | Scan `.gen.ts` files for SDK cross-imports and sync missing `workspace:*` dependencies.                                     |
+| `setup`    | Detect new products without a `package.json` and fully onboard them (packages + sdk + deps + install).                      |
 
 ### Options
 

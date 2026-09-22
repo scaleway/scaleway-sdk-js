@@ -45,5 +45,4 @@ export { useInstancev1APIListPrivateNICsInfiniteQuery } from "./useInstancev1API
 export { useInstancev1APIListPrivateNICsAllQuery } from "./useInstancev1APIListPrivateNICsAllQuery"
 export { useInstancev1APIGetPrivateNICQuery } from "./useInstancev1APIGetPrivateNICQuery"
 export { useInstancev1APIGetDashboardQuery } from "./useInstancev1APIGetDashboardQuery"
-export { useInstancev1APIGetServerUserDataQuery } from "./useInstancev1APIGetServerUserDataQuery"
 export { useInstancev1APIReload } from "./useInstancev1APIReload"

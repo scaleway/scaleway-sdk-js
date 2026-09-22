@@ -1,4 +1,7 @@
 {
   "extends": "@repo/configs/tsconfig/generated",
+  "compilerOptions": {
+    "types": ["node"]
+  },
   "include": ["src/**/*.ts", "src/**/*.tsx", "*.config.ts"]
 }

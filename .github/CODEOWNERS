@@ -7,7 +7,7 @@ tools @philibea
 tsconfig.json             @philibea
 .oxlintrc.jsonc            @philibea
 oxfmt.config.ts            @philibea
-vite.config.ts            @philibea
+tsdown.config.ts            @philibea
 vitest.setup.ts            @philibea
 vitest.config.ts            @philibea
 pnpm-workspace.yaml      @philibea

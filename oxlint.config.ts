@@ -27,7 +27,7 @@ export default defineConfig({
   },
   overrides: [
     {
-      files: ['tools/**', 'vite.config.ts', 'packages/configuration-loader/**'],
+      files: ['tools/**', 'tsdown.config.ts', 'packages/configuration-loader/**'],
       rules: {
         'import/no-nodejs-modules': 'off',
       },
