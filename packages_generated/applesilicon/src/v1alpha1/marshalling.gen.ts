@@ -140,6 +140,7 @@ export const unmarshalServer = (data: unknown): Server => {
     projectId: data.project_id,
     publicBandwidthBps: data.public_bandwidth_bps,
     runnerConfiguration: data.runner_configuration ? unmarshalRunnerConfiguration(data.runner_configuration) : undefined,
+    srn: data.srn,
     sshUsername: data.ssh_username,
     status: data.status,
     sudoPassword: data.sudo_password,
@@ -206,7 +207,9 @@ export const unmarshalRunner = (data: unknown): Runner => {
     configuration: data.configuration ? unmarshalRunnerConfigurationV2(data.configuration) : undefined,
     errorMessage: data.error_message,
     id: data.id,
+    srn: data.srn,
     status: data.status,
+    zone: data.zone,
   } as Runner
 }
 
@@ -372,8 +375,10 @@ export const unmarshalConnectivityDiagnostic = (data: unknown): ConnectivityDiag
     healthDetails: data.health_details ? unmarshalConnectivityDiagnosticServerHealth(data.health_details) : undefined,
     id: data.id,
     isHealthy: data.is_healthy,
+    srn: data.srn,
     status: data.status,
     supportedActions: data.supported_actions,
+    zone: data.zone,
   } as ConnectivityDiagnostic
 }
 
