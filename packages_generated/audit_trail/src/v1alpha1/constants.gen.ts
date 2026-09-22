@@ -262,6 +262,7 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'serverless_functions_trigger',
   'wofl_workflow_definition',
   'wofl_workflow_run',
+  'wofl_workflow_version',
 ]
 
 /** Lists all values of the enum {@link RunStatus}. */

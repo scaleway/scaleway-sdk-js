@@ -72,6 +72,7 @@ import type {
   VpcSubnetInfo,
   WoflWorkflowDefinitionInfo,
   WoflWorkflowRunInfo,
+  WoflWorkflowVersionInfo,
   EventPrincipal,
   Resource,
   Event,
@@ -973,6 +974,20 @@ const unmarshalWoflWorkflowRunInfo = (data: unknown): WoflWorkflowRunInfo => {
   } as WoflWorkflowRunInfo
 }
 
+const unmarshalWoflWorkflowVersionInfo = (data: unknown): WoflWorkflowVersionInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WoflWorkflowVersionInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    name: data.name,
+    workflowDefinitionId: data.workflow_definition_id,
+    workflowDefinitionName: data.workflow_definition_name,
+  } as WoflWorkflowVersionInfo
+}
+
 const unmarshalEventPrincipal = (data: unknown): EventPrincipal => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1061,6 +1076,7 @@ export const unmarshalResource = (data: unknown): Resource => {
     vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : undefined,
     woflWorkflowDefinitionInfo: data.wofl_workflow_definition_info ? unmarshalWoflWorkflowDefinitionInfo(data.wofl_workflow_definition_info) : undefined,
     woflWorkflowRunInfo: data.wofl_workflow_run_info ? unmarshalWoflWorkflowRunInfo(data.wofl_workflow_run_info) : undefined,
+    woflWorkflowVersionInfo: data.wofl_workflow_version_info ? unmarshalWoflWorkflowVersionInfo(data.wofl_workflow_version_info) : undefined,
   } as Resource
 }
 

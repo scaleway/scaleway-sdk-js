@@ -136,5 +136,6 @@ export type {
   VpcSubnetInfo,
   WoflWorkflowDefinitionInfo,
   WoflWorkflowRunInfo,
+  WoflWorkflowVersionInfo,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'
