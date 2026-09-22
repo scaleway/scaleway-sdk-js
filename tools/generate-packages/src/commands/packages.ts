@@ -16,8 +16,7 @@ const TEMPLATES_DIR = path.join(import.meta.dirname, '../../templates')
 const TEMPLATES = {
   PACKAGE_JSON: path.join(TEMPLATES_DIR, 'package.tmpl'),
   TS_CONFIG: path.join(TEMPLATES_DIR, 'tsconfig.json'),
-  TS_CONFIG_BUILD: path.join(TEMPLATES_DIR, 'tsconfig.build.json'),
-  VITE_CONFIG: path.join(TEMPLATES_DIR, 'vite.config.ts'),
+  TSDOWN_CONFIG: path.join(TEMPLATES_DIR, 'tsdown.config.ts'),
   METADATA_TS: path.join(TEMPLATES_DIR, 'metadata.gen.ts.tmpl'),
 }
 
@@ -69,8 +68,7 @@ function writeMetadataGen(srcPath: string, productDir: string, templateString: s
 
 function copyConfigTemplates(fullPath: string): void {
   copyFileSync(TEMPLATES.TS_CONFIG, path.join(fullPath, 'tsconfig.json'))
-  copyFileSync(TEMPLATES.TS_CONFIG_BUILD, path.join(fullPath, 'tsconfig.build.json'))
-  copyFileSync(TEMPLATES.VITE_CONFIG, path.join(fullPath, 'vite.config.ts'))
+  copyFileSync(TEMPLATES.TSDOWN_CONFIG, path.join(fullPath, 'tsdown.config.ts'))
 }
 
 function processProductDir(
@@ -101,7 +99,7 @@ function processProductDir(
  * - Creates `package.json` if missing (from `templates/package.tmpl`)
  * - Generates `src/index.gen.ts` re-exporting all version directories as namespaces
  * - Generates `src/metadata.gen.ts` with product name, display name, and version list
- * - Copies `tsconfig.json`, `tsconfig.build.json`, and `vite.config.ts` from templates
+ * - Copies `tsconfig.json` and `tsdown.config.ts` from templates
  *
  * @param options.src - Absolute path to the generated packages directory
  * @param options.runInstall - Run `pnpm install` + `manypkg fix` after generation (default: true)

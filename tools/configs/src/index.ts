@@ -1,1 +1,1 @@
-export { defaultConfig as viteConfig } from './vite.config.js'
+export { defaultConfig as tsdownConfig } from './tsdown.config.js'

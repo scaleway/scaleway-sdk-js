@@ -33,7 +33,7 @@ if (command === undefined || values.help === true || !(command in commands)) {
   console.log(`Usage: generate-packages <command> [options]
 
 Commands:
-  packages   Generate per-product package.json / vite.config.ts / tsconfig / metadata
+  packages   Generate per-product package.json / tsdown.config.ts / tsconfig / metadata
   sdk        Update global SDK package.json + index.gen.ts exports
   deps       Sync workspace:* dependencies from .gen.ts imports
   setup      Detect & onboard new products (orchestrator)
