@@ -306,6 +306,10 @@ export interface Server {
    */
   zone: ScwZone
   /**
+   * SRN of the server.
+   */
+  srn: string
+  /**
    * Set to true once the server has completed its provisioning steps and is ready to use. Some OS configurations might require a reinstallation of the server before delivery depending on the available stock. A reinstallation after the initial delivery will not change this flag and can be tracked using the server status.
    */
   delivered: boolean
@@ -356,10 +360,30 @@ export interface AppliedRunnerConfigurations {
 
 
 export interface Runner {
+  /**
+   * UUID of the runner.
+   */
   id: string
+  /**
+   * Configuration of the runner.
+   */
   configuration?: RunnerConfigurationV2
+  /**
+   * Status of the runner.
+   */
   status: RunnerStatus
+  /**
+   * Error message of the runner (if any).
+   */
   errorMessage: string
+  /**
+   * Zone of the runner.
+   */
+  zone: ScwZone
+  /**
+   * SRN of the runner.
+   */
+  srn: string
 }
 
 
@@ -507,6 +531,11 @@ export interface ConnectivityDiagnostic {
   healthDetails?: ConnectivityDiagnosticServerHealth
   supportedActions: ConnectivityDiagnosticActionType[]
   errorMessage: string
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone: ScwZone
+  srn: string
 }
 
 
