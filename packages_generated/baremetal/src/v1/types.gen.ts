@@ -856,6 +856,10 @@ export interface Offer {
    * Zone in which is the offer is available.
    */
   zone: ScwZone
+  /**
+   * Describe the network topology of the offer.
+   */
+  dualAttach?: boolean
 }
 
 
