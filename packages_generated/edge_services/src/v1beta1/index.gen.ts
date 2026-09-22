@@ -147,6 +147,7 @@ export type {
   UpdateWafStageRequest,
   VPCEndpoint,
   WafExclusionRule,
+  WafExclusionRules,
   WafStage,
   WafStageMode,
 } from './types.gen.js'
