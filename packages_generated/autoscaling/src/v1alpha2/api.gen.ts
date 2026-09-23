@@ -34,6 +34,7 @@ import type {
   ListLogsResponse,
   ListServersRequest,
   ListServersResponse,
+  RefreshGroupRequest,
   UpdateGroupRequest,
 } from './types.gen.js'
 
@@ -55,6 +56,12 @@ export class API extends ParentAPI {
         'fr-par-1',
         'fr-par-2',
         'fr-par-3',
+        'nl-ams-1',
+        'nl-ams-2',
+        'nl-ams-3',
+        'pl-waw-1',
+        'pl-waw-2',
+        'pl-waw-3',
       ],
     })
   
@@ -134,6 +141,25 @@ settings.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups`,
+      },
+      unmarshalGroup,
+    )
+
+  
+  /**
+   * Refresh an autoscaling group. This will replace all the instances of the group.
+Its main use case is applying changes if the instance template has been updated.
+   *
+   * @param request - The request {@link RefreshGroupRequest}
+   * @returns A Promise of Group
+   */
+  refreshGroup = (request: Readonly<RefreshGroupRequest>) =>
+    this.client.fetch<Group>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}/refresh`,
       },
       unmarshalGroup,
     )
