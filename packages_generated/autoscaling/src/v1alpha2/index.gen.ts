@@ -38,6 +38,7 @@ export type {
   LoadBalancerConfigurationSpecBackend,
   Log,
   LogLogLevel,
+  RefreshGroupRequest,
   ScalingPolicySpec,
   Server,
   UpdateGroupRequest,
