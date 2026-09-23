@@ -122,5 +122,6 @@ export const LIST_KEYS_REQUEST_USAGES: ListKeysRequestUsage[] = [
   'symmetric_encryption',
   'asymmetric_encryption',
   'asymmetric_signing',
+  'key_encapsulation',
 ]
 

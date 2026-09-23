@@ -83,6 +83,7 @@ export type ListKeysRequestUsage =
   | 'symmetric_encryption'
   | 'asymmetric_encryption'
   | 'asymmetric_signing'
+  | 'key_encapsulation'
 
 export interface KeyRotationPolicy {
   /**
@@ -572,7 +573,7 @@ export type ListKeysRequest = {
    */
   name?: string
   /**
-   * Select from symmetric encryption, asymmetric encryption, or asymmetric signing.
+   * Select from symmetric encryption, asymmetric encryption, asymmetric signing or key_encapsulation.
    */
   usage?: ListKeysRequestUsage
   /**

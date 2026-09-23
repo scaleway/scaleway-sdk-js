@@ -569,6 +569,15 @@ export interface ListServersResponse {
 }
 
 
+export type RefreshGroupRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  groupId: string
+}
+
+
 export type UpdateGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
