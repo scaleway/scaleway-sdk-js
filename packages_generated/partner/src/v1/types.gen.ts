@@ -107,6 +107,10 @@ export type CreateOrganizationRequest = {
    * A custom ID for the customer in your own infrastructure.
    */
   customerId: string
+  /**
+   * A comment about the organization.
+   */
+  comment?: string
 }
 
 

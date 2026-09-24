@@ -2,6 +2,10 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 
 export const CreateOrganizationRequest = {
+  comment: {
+    maxLength: 1024,
+    minLength: 1,
+  },
   customerId: {
     maxLength: 256,
     minLength: 1,

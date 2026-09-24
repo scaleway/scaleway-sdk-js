@@ -53,6 +53,7 @@ export const marshalCreateOrganizationRequest = (
   request: CreateOrganizationRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  comment: request.comment,
   customer_id: request.customerId,
   email: request.email,
   organization_name: request.organizationName,
