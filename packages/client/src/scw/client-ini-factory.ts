@@ -1,4 +1,6 @@
 import type { NetworkInterceptors } from '../index.js'
+import { createRetryingFetch } from '../internal/async/retrying-fetch.js'
+import type { RetryOptions } from '../internal/async/retrying-fetch.js'
 import { authenticateWithSecrets } from './auth.js'
 import type { Profile } from './client-ini-profile.js'
 import { hasAuthenticationSecrets } from './client-ini-profile.js'
@@ -173,6 +175,34 @@ export const withAdditionalInterceptors =
   (settings: Readonly<Settings>): Settings => ({
     ...settings,
     interceptors: [...settings.interceptors, ...interceptors],
+  })
+
+/**
+ * Instantiates the SDK with automatic retry on transient HTTP errors (429, 503) and network errors.
+ *
+ * Uses an exponential backoff strategy and respects the `Retry-After` header when present.
+ * Retries are off by default; this factory must be used to enable them.
+ *
+ * @param options - The retry options
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks This method should be used in conjunction with the initializer `createAdvancedClient`.
+ *
+ * @example
+ * ```
+ * createAdvancedClient(
+ *   withProfile(profile),
+ *   withRetry({ maxRetries: 3 }),
+ * )
+ * ```
+ *
+ * @public
+ */
+export const withRetry =
+  (options?: RetryOptions): ClientConfig =>
+  (settings: Readonly<Settings>): Settings => ({
+    ...settings,
+    httpClient: createRetryingFetch(settings.httpClient, options ?? {}),
   })
 
 /**

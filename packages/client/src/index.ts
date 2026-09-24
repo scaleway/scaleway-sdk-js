@@ -17,9 +17,11 @@ export {
   withHTTPClient,
   withProfile,
   withTimeout,
+  withRetry,
   withUserAgent,
   withUserAgentSuffix,
 } from './scw/client-ini-factory.js'
+export type { RetryOptions } from './internal/async/retrying-fetch.js'
 export type { Profile } from './scw/client-ini-profile.js'
 export type { Settings } from './scw/client-settings.js'
 export { AUTH_HEADER_KEY, SESSION_HEADER_KEY } from './scw/constants.js'
