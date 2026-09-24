@@ -112,9 +112,7 @@ export const createRetryingFetch = (fetchFn: typeof fetch, options: RetryOptions
       }
 
       if (attempt < maxRetries) {
-        const retryAfter = lastResponse
-          ? parseRetryAfter(lastResponse.headers.get('Retry-After'))
-          : undefined
+        const retryAfter = lastResponse ? parseRetryAfter(lastResponse.headers.get('Retry-After')) : undefined
         const delay = retryAfter ?? strategy.next(attempt + 1).value
         // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry with delay
         await sleep(delay * 1000)

@@ -28,10 +28,7 @@ describe('createRetryingFetch', () => {
   })
 
   it('retries on 429 and succeeds', async () => {
-    const fetchFn = vi
-      .fn()
-      .mockResolvedValueOnce(mockResponse(429))
-      .mockResolvedValueOnce(mockResponse(200))
+    const fetchFn = vi.fn().mockResolvedValueOnce(mockResponse(429)).mockResolvedValueOnce(mockResponse(200))
     const retryingFetch = createRetryingFetch(fetchFn, { minDelay: 1, maxDelay: 1 })
 
     const promise = retryingFetch('https://api.scaleway.com/test')
@@ -43,10 +40,7 @@ describe('createRetryingFetch', () => {
   })
 
   it('retries on 503 and succeeds', async () => {
-    const fetchFn = vi
-      .fn()
-      .mockResolvedValueOnce(mockResponse(503))
-      .mockResolvedValueOnce(mockResponse(200))
+    const fetchFn = vi.fn().mockResolvedValueOnce(mockResponse(503)).mockResolvedValueOnce(mockResponse(200))
     const retryingFetch = createRetryingFetch(fetchFn, { minDelay: 1, maxDelay: 1 })
 
     const promise = retryingFetch('https://api.scaleway.com/test')
@@ -147,10 +141,7 @@ describe('createRetryingFetch', () => {
   })
 
   it('uses custom retryable status codes', async () => {
-    const fetchFn = vi
-      .fn()
-      .mockResolvedValueOnce(mockResponse(500))
-      .mockResolvedValueOnce(mockResponse(200))
+    const fetchFn = vi.fn().mockResolvedValueOnce(mockResponse(500)).mockResolvedValueOnce(mockResponse(200))
     const retryingFetch = createRetryingFetch(fetchFn, {
       retryableStatusCodes: [500],
       minDelay: 1,
@@ -181,9 +172,9 @@ describe('createRetryingFetch', () => {
     const fetchFn = vi.fn().mockResolvedValue(mockResponse(200))
     const retryingFetch = createRetryingFetch(fetchFn)
 
-    await expect(
-      retryingFetch('https://api.scaleway.com/test', { signal: controller.signal }),
-    ).rejects.toThrow('The operation was aborted')
+    await expect(retryingFetch('https://api.scaleway.com/test', { signal: controller.signal })).rejects.toThrow(
+      'The operation was aborted',
+    )
     expect(fetchFn).not.toHaveBeenCalled()
   })
 

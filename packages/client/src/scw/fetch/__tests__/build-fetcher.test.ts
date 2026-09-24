@@ -2,6 +2,7 @@ import { afterAll, describe, expect, it, vi } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser.js'
 import { addHeaderInterceptor } from '../../../internal/interceptors/helpers.js'
 import type { Settings } from '../../client-settings.js'
+import { ScalewayError } from '../../errors/scw-error.js'
 import { buildFetcher, buildRequest } from '../build-fetcher.js'
 import type { ScwRequest } from '../types.js'
 
@@ -249,5 +250,26 @@ describe(`buildFetcher (mock)`, () => {
         path: '/will-trigger-an-error',
       }),
     ).resolves.toBe('42')
+  })
+
+  it('attaches obfuscated request context to a thrown ScalewayError', async () => {
+    mockedFetch.mockResolvedValue(new Response('not found', { status: 404, headers: { 'Content-Type': 'text/plain' } }))
+
+    const localFetcher = buildFetcher(DEFAULT_SETTINGS, globalThis.fetch)
+    const result = await localFetcher({
+      method: 'GET',
+      path: '/missing',
+      headers: { 'X-Auth-Token': '11111111-1111-1111-1111-111111111111' },
+    }).catch((error: unknown) => error)
+
+    expect(result).toBeInstanceOf(ScalewayError)
+    expect(result).toMatchObject({
+      url: 'https://api.scaleway.com/missing',
+      method: 'GET',
+      requestId: '1',
+    })
+    if (result instanceof ScalewayError) {
+      expect(result.requestHeaders?.get('X-Auth-Token')).toBe('11111111-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+    }
   })
 })

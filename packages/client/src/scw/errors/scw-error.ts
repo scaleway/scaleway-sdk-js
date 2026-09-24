@@ -35,6 +35,19 @@ const buildDefaultMessage = (status: number, body: unknown): string => {
 }
 
 /**
+ * Request context attached to a {@link ScalewayError} when it is thrown from
+ * the fetcher, so callers can identify which call failed.
+ *
+ * @public
+ */
+export type ScalewayErrorRequestContext = {
+  url: string
+  method: string
+  requestId: string
+  requestHeaders: Headers
+}
+
+/**
  * Scaleway error.
  *
  * @public
@@ -48,6 +61,15 @@ export class ScalewayError extends Error {
   /** The response payload. */
   public readonly body: JSONObject | string
 
+  /** The request URL that triggered the error, if known. */
+  public url?: string
+  /** The HTTP method of the request that triggered the error, if known. */
+  public method?: string
+  /** The internal request ID of the request that triggered the error, if known. */
+  public requestId?: string
+  /** The obfuscated request headers of the request that triggered the error, if known. */
+  public requestHeaders?: Headers
+
   public constructor(status: number, body: JSONObject | string, message: string = buildDefaultMessage(status, body)) {
     super(message) // 'Error' breaks prototype chain here
     this.status = status
@@ -55,6 +77,20 @@ export class ScalewayError extends Error {
     this.name = 'ScalewayError'
     this.rawMessage = typeof body === 'object' && typeof body.message === 'string' ? body.message : undefined
     Object.setPrototypeOf(this, new.target.prototype) // restore prototype chain
+  }
+
+  /**
+   * Attaches request context to this error.
+   *
+   * @param context - The request context (headers should already be obfuscated)
+   *
+   * @public
+   */
+  public attachRequestContext(context: ScalewayErrorRequestContext): void {
+    this.url = context.url
+    this.method = context.method
+    this.requestId = context.requestId
+    this.requestHeaders = context.requestHeaders
   }
 
   public static fromJSON(status: number, obj: Readonly<JSONObject>): ScalewayError | null {

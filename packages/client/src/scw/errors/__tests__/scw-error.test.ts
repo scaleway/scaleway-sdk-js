@@ -62,4 +62,41 @@ describe('ScalewayError', () => {
       }).message,
     ).toBe(`http error 400: organization_id (project_id is already specified), project_id (value is required)`)
   })
+
+  it(`attaches request context`, () => {
+    const error = new ScalewayError(404, { message: 'not found' })
+    expect(error.url).toBeUndefined()
+    expect(error.method).toBeUndefined()
+    expect(error.requestId).toBeUndefined()
+    expect(error.requestHeaders).toBeUndefined()
+
+    const headers = new Headers({ 'x-auth-token': '11111111-1111-1111-1111-111111111111' })
+    error.attachRequestContext({
+      url: 'https://api.scaleway.com/instances',
+      method: 'GET',
+      requestId: '1',
+      requestHeaders: headers,
+    })
+
+    expect(error.url).toBe('https://api.scaleway.com/instances')
+    expect(error.method).toBe('GET')
+    expect(error.requestId).toBe('1')
+    expect(error.requestHeaders).toBe(headers)
+  })
+
+  it(`preserves request context on subclasses`, () => {
+    // oxlint-disable-next-line unicorn/custom-error-definition -- name intentionally inherited from ScalewayError
+    class MyError extends ScalewayError {}
+    const error = new MyError(500, {})
+    const headers = new Headers()
+    error.attachRequestContext({
+      url: 'https://api.scaleway.com',
+      method: 'POST',
+      requestId: '2',
+      requestHeaders: headers,
+    })
+    expect(error.url).toBe('https://api.scaleway.com')
+    expect(error.method).toBe('POST')
+    expect(error.requestId).toBe('2')
+  })
 })
