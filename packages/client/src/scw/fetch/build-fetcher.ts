@@ -34,7 +34,9 @@ export const buildRequest = (request: Readonly<ScwRequest>, settings: Readonly<S
       ...request.headers,
     },
     method: request.method,
-    signal: request.signal,
+    signal:
+      request.signal ??
+      (settings.defaultTimeoutMs !== undefined ? AbortSignal.timeout(settings.defaultTimeoutMs) : undefined),
   })
 }
 

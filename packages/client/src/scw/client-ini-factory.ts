@@ -81,6 +81,21 @@ export const withDefaultPageSize =
   (settings: Readonly<Settings>): Settings => ({ ...settings, defaultPageSize })
 
 /**
+ * Instantiates the SDK with a default HTTP request timeout.
+ *
+ * @param defaultTimeoutMs - The default timeout in milliseconds
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks This method should be used in conjunction with the initializer `createAdvancedClient`.
+ * A caller-supplied {@link AbortSignal} on a request takes precedence over this timeout.
+ *
+ * @public
+ */
+export const withTimeout =
+  (defaultTimeoutMs: number): ClientConfig =>
+  (settings: Readonly<Settings>): Settings => ({ ...settings, defaultTimeoutMs })
+
+/**
  * Instantiates the SDK with a different default user agent.
  *
  * @param userAgent - The default user agent

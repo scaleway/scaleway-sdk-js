@@ -6,6 +6,7 @@ import {
   withHTTPClient,
   withLegacyInterceptors,
   withProfile,
+  withTimeout,
   withUserAgent,
   withUserAgentSuffix,
 } from '../client-ini-factory.js'
@@ -220,6 +221,19 @@ describe('withDefaultPageSize', () => {
       defaultPageSize: newDefaultPageSize,
     }
     expect(JSON.stringify(withDefaultPageSize(newDefaultPageSize)(DEFAULT_SETTINGS))).toStrictEqual(
+      JSON.stringify(expectedSettings),
+    )
+  })
+})
+
+describe('withTimeout', () => {
+  it('only modifies the default timeout', () => {
+    const defaultTimeoutMs = 10_000
+    const expectedSettings: Settings = {
+      ...DEFAULT_SETTINGS,
+      defaultTimeoutMs,
+    }
+    expect(JSON.stringify(withTimeout(defaultTimeoutMs)(DEFAULT_SETTINGS))).toStrictEqual(
       JSON.stringify(expectedSettings),
     )
   })
