@@ -1,4 +1,5 @@
 import { AbortError } from '../../scw/fetch/abort-error.js'
+import type { RequestOptions } from '../../scw/fetch/types.js'
 import { sleep } from './sleep.js'
 
 const DEFAULT_TIMEOUT_SECONDS = 300
@@ -172,7 +173,7 @@ export type WaitForOptions<T> = {
   signal?: AbortSignal
 }
 
-type ResourceFetcher<T, R> = (request: R) => Promise<T>
+type ResourceFetcher<T, R> = (request: R, options?: RequestOptions) => Promise<T>
 
 /**
  * Fetches resource several times until an expected condition is reached, timeouts, or throws an exception.
@@ -200,7 +201,7 @@ export const waitForResource = async <R, T>(
 ) =>
   tryAtIntervals(
     async () => {
-      const value = await fetcher(request)
+      const value = await fetcher(request, { signal: options?.signal })
 
       return {
         done: await stop(value),
