@@ -16,6 +16,7 @@ export {
   withDefaultPageSize,
   withHTTPClient,
   withProfile,
+  withTimeout,
   withUserAgent,
   withUserAgentSuffix,
 } from './scw/client-ini-factory.js'

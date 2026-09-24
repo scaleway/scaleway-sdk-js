@@ -32,6 +32,10 @@ const INVALID_SETTINGS_LIST: Partial<Settings>[] = [
   { defaultPageSize: -1 },
   // @ts-expect-error Wrong type
   { defaultPageSize: '42' },
+  { defaultTimeoutMs: 0 },
+  { defaultTimeoutMs: -1 },
+  // @ts-expect-error Wrong type
+  { defaultTimeoutMs: '42' },
   // @ts-expect-error Unknown user agent type
   { userAgent: null },
 ]

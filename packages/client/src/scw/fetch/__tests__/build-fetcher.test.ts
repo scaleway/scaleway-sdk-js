@@ -75,6 +75,37 @@ describe(`buildRequest`, () => {
     controller.abort()
     expect(fReq.signal.aborted).toBe(true)
   })
+
+  it(`attaches AbortSignal.timeout when defaultTimeoutMs is set`, async () => {
+    const fReq = buildRequest(SCW_POST_REQUEST, { ...DEFAULT_SETTINGS, defaultTimeoutMs: 1 })
+    expect(fReq.signal.aborted).toBe(false)
+    await expect(
+      new Promise<void>((resolve, reject) => {
+        fReq.signal.addEventListener('abort', () => {
+          resolve()
+        })
+        setTimeout(() => {
+          reject(new Error('timeout signal did not abort'))
+        }, 100)
+      }),
+    ).resolves.toBeUndefined()
+    expect(fReq.signal.aborted).toBe(true)
+  })
+
+  it(`prefers a caller-supplied signal over defaultTimeoutMs`, async () => {
+    const controller = new AbortController()
+    const fReq = buildRequest(
+      { ...SCW_POST_REQUEST, signal: controller.signal },
+      { ...DEFAULT_SETTINGS, defaultTimeoutMs: 1 },
+    )
+    expect(fReq.signal.aborted).toBe(false)
+    await new Promise<void>(resolve => {
+      setTimeout(resolve, 50)
+    })
+    expect(fReq.signal.aborted).toBe(false)
+    controller.abort()
+    expect(fReq.signal.aborted).toBe(true)
+  })
 })
 
 describe(`buildFetcher (mock)`, () => {

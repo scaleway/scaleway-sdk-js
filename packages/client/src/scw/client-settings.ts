@@ -25,6 +25,11 @@ export type Settings = DefaultValues & {
    */
   defaultPageSize?: number
   /**
+   * The default timeout in milliseconds applied to each HTTP request.
+   * When set, requests without a caller-supplied {@link AbortSignal} are aborted after this duration.
+   */
+  defaultTimeoutMs?: number
+  /**
    * HTTP Client doing the requests.
    */
   httpClient: typeof fetch
@@ -115,6 +120,14 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
     (typeof obj.defaultPageSize !== 'number' || Number.isNaN(obj.defaultPageSize) || obj.defaultPageSize <= 0)
   ) {
     throw new Error(`Invalid defaultPageSize ${obj.defaultPageSize}: it should be a number above 0`)
+  }
+
+  // Default Timeout.
+  if (
+    obj.defaultTimeoutMs !== undefined &&
+    (typeof obj.defaultTimeoutMs !== 'number' || Number.isNaN(obj.defaultTimeoutMs) || obj.defaultTimeoutMs <= 0)
+  ) {
+    throw new Error(`Invalid defaultTimeoutMs ${obj.defaultTimeoutMs}: it should be a number above 0`)
   }
 
   // User Agent.
