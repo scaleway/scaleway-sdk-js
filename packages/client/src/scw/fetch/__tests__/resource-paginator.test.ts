@@ -164,7 +164,7 @@ describe('fetchPaginatedByCursor', () => {
     }
     expect(pages).toStrictEqual(input)
     expect(fetcher).toHaveBeenCalledTimes(3)
-    expect(fetcher).toHaveBeenLastCalledWith({ page: 'token' })
+    expect(fetcher).toHaveBeenLastCalledWith({ page: 'token' }, undefined)
   })
 
   it('iterates a single page when no nextPageToken is returned', async () => {

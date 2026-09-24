@@ -29,3 +29,4 @@ export {
 } from './scw/custom-marshalling.js'
 export type { ServiceInfo } from './scw/custom-types.js'
 export { enrichForPagination, enrichForPaginationByCursor } from './scw/fetch/resource-paginator.js'
+export type { RequestOptions } from './scw/fetch/types.js'
