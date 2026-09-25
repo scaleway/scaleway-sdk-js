@@ -6,6 +6,7 @@ import {
   withHTTPClient,
   withLegacyInterceptors,
   withProfile,
+  withRetry,
   withTimeout,
   withUserAgent,
   withUserAgentSuffix,
@@ -236,6 +237,29 @@ describe('withTimeout', () => {
     expect(JSON.stringify(withTimeout(defaultTimeoutMs)(DEFAULT_SETTINGS))).toStrictEqual(
       JSON.stringify(expectedSettings),
     )
+  })
+})
+
+describe('withRetry', () => {
+  it('enables retry with defaults', () => {
+    const settings = withRetry()(DEFAULT_SETTINGS)
+    expect(settings.retry).toMatchObject({
+      maxRetries: 2,
+      minDelay: 1,
+      maxDelay: 30,
+    })
+    expect(typeof settings.retry?.isRetryable).toBe('function')
+  })
+
+  it('keeps custom retry options', () => {
+    const isRetryable = () => true
+    const settings = withRetry({ maxRetries: 5, minDelay: 2, maxDelay: 8, isRetryable })(DEFAULT_SETTINGS)
+    expect(settings.retry).toStrictEqual({
+      maxRetries: 5,
+      minDelay: 2,
+      maxDelay: 8,
+      isRetryable,
+    })
   })
 })
 

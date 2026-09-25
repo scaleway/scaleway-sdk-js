@@ -1,6 +1,8 @@
 import { afterAll, describe, expect, it, vi } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser.js'
+import * as sleepModule from '../../../internal/async/sleep.js'
 import { addHeaderInterceptor } from '../../../internal/interceptors/helpers.js'
+import { ScalewayError } from '../../errors/scw-error.js'
 import type { Settings } from '../../client-settings.js'
 import { buildFetcher, buildRequest } from '../build-fetcher.js'
 import type { ScwRequest } from '../types.js'
@@ -249,5 +251,115 @@ describe(`buildFetcher (mock)`, () => {
         path: '/will-trigger-an-error',
       }),
     ).resolves.toBe('42')
+  })
+})
+
+describe('buildFetcher retry', () => {
+  afterAll(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('does not retry when retry is unset', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(new Response(JSON.stringify({ message: 'unavailable' }), { status: 503 }))
+
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock }, fetchMock)({
+        method: 'GET',
+        path: '/no-retry',
+      }),
+    ).rejects.toThrow(ScalewayError)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('retries 503 then succeeds', async () => {
+    vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(new Response(JSON.stringify({ message: 'unavailable' }), { status: 503 }))
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } }, fetchMock)({
+        method: 'GET',
+        path: '/retry-503',
+      }),
+    ).resolves.toMatchObject({ ok: true })
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('honours Retry-After before retrying 429', async () => {
+    const sleepMock = vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ help_message: 'slow down', type: 'too_many_requests' }), {
+          headers: { 'Retry-After': '3' },
+          status: 429,
+        }),
+      )
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } }, fetchMock)({
+        method: 'GET',
+        path: '/retry-after',
+      }),
+    ).resolves.toMatchObject({ ok: true })
+    expect(sleepMock).toHaveBeenCalledWith(3000)
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('retries network errors', async () => {
+    vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockRejectedValueOnce(new TypeError('fetch failed'))
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } }, fetchMock)({
+        method: 'GET',
+        path: '/network',
+      }),
+    ).resolves.toMatchObject({ ok: true })
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('stops after maxRetries', async () => {
+    vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(new Response(JSON.stringify({ message: 'unavailable' }), { status: 503 }))
+
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } }, fetchMock)({
+        method: 'GET',
+        path: '/exhausted',
+      }),
+    ).rejects.toThrow(ScalewayError)
+    expect(fetchMock).toHaveBeenCalledTimes(3)
   })
 })

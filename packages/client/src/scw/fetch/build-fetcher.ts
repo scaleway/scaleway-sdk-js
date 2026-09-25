@@ -1,6 +1,13 @@
 import { isBrowser } from '../../helpers/is-browser.js'
 import type { RequestInterceptor, ResponseErrorInterceptor, ResponseInterceptor } from '../../index.js'
 import {
+  createRetryBackoffStrategy,
+  parseRetryAfterHeader,
+  resolveRetryDelayMs,
+  resolveRetryOptions,
+} from '../../internal/async/http-retry.js'
+import { sleep } from '../../internal/async/sleep.js'
+import {
   composeRequestInterceptors,
   composeResponseErrorInterceptors,
   composeResponseInterceptors,
@@ -71,26 +78,58 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       settings.interceptors.map(obj => obj.responseError).filter((x): x is ResponseErrorInterceptor => x !== undefined),
     )
 
+  const retryOptions = settings.retry !== undefined ? resolveRetryOptions(settings.retry) : undefined
+
   return async <T>(request: Readonly<ScwRequest>, unwrapper: ResponseUnmarshaller<T> = asIs): Promise<T> => {
     requestNumber += 1
     const requestId = `${requestNumber}`
     const reqInterceptors = prepareRequest(requestId)
-    const finalRequest = await reqInterceptors(buildRequest(request, settings))
+    const resInterceptors = prepareResponse(requestId)
+    const resUnmarshaller = responseParser<T>(unwrapper, request.responseType ?? 'json')
+    const backoff = retryOptions !== undefined ? createRetryBackoffStrategy(retryOptions) : undefined
+    const maxAttempts = retryOptions !== undefined ? retryOptions.maxRetries + 1 : 1
 
-    try {
-      const response = await httpClient(finalRequest)
-      const resInterceptors = prepareResponse(requestId)
-      const finalResponse = await resInterceptors(response)
-      const resUnmarshaller = responseParser<T>(unwrapper, request.responseType ?? 'json')
-      const unmarshaledResponse = await resUnmarshaller(finalResponse)
+    let lastRequest: Request | undefined
+    let lastError: unknown
+    let retryAfterMs: number | undefined
 
-      return unmarshaledResponse
-    } catch (error) {
-      const resErrorInterceptors = prepareResponseErrors()
-      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- error interceptor may transform the error into the response type expected by the unwrapper
-      const handledError = (await resErrorInterceptors(finalRequest, error)) as T
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
+      lastRequest = await reqInterceptors(buildRequest(request, settings))
+      retryAfterMs = undefined
 
-      return unwrapper(handledError)
+      try {
+        // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
+        const response = await httpClient(lastRequest)
+        // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
+        const finalResponse = await resInterceptors(response)
+        if (!finalResponse.ok) {
+          retryAfterMs = parseRetryAfterHeader(finalResponse.headers.get('Retry-After'))
+        }
+        // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
+        return await resUnmarshaller(finalResponse)
+      } catch (error) {
+        lastError = error
+        const canRetry =
+          retryOptions !== undefined &&
+          backoff !== undefined &&
+          attempt + 1 < maxAttempts &&
+          retryOptions.isRetryable(error)
+
+        if (!canRetry) {
+          break
+        }
+
+        const delayMs = resolveRetryDelayMs(error, retryAfterMs, backoff.next().value)
+        // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry with delay
+        await sleep(delayMs)
+      }
     }
+
+    const resErrorInterceptors = prepareResponseErrors()
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- error interceptor may transform the error into the response type expected by the unwrapper
+    const handledError = (await resErrorInterceptors(lastRequest ?? buildRequest(request, settings), lastError)) as T
+
+    return unwrapper(handledError)
   }
 }

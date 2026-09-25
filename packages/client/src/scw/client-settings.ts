@@ -1,3 +1,5 @@
+import type { RetryOptions } from '../internal/async/http-retry.js'
+import { assertValidRetryOptions } from '../internal/async/http-retry.js'
 import type { NetworkInterceptors, RequestInterceptor, ResponseInterceptor } from '../internal/interceptors/types.js'
 import { isOrganizationId, isProjectId, isRegion, isURL, isZone } from '../internal/validations/string-validation.js'
 import type { Profile } from './client-ini-profile.js'
@@ -29,6 +31,11 @@ export type Settings = DefaultValues & {
    * When set, requests without a caller-supplied {@link AbortSignal} are aborted after this duration.
    */
   defaultTimeoutMs?: number
+  /**
+   * Automatic retry configuration for transient HTTP failures.
+   * When unset, requests are not retried.
+   */
+  retry?: RetryOptions
   /**
    * HTTP Client doing the requests.
    */
@@ -128,6 +135,11 @@ export const assertValidSettings = (obj: Readonly<Settings>): void => {
     (typeof obj.defaultTimeoutMs !== 'number' || Number.isNaN(obj.defaultTimeoutMs) || obj.defaultTimeoutMs <= 0)
   ) {
     throw new Error(`Invalid defaultTimeoutMs ${obj.defaultTimeoutMs}: it should be a number above 0`)
+  }
+
+  // Retry.
+  if (obj.retry !== undefined) {
+    assertValidRetryOptions(obj.retry)
   }
 
   // User Agent.
