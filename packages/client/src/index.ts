@@ -1,4 +1,5 @@
 export type { WaitForOptions, WaitForStopCondition } from './internal/async/interval-retrier.js'
+export type { RetryOptions } from './internal/async/http-retry.js'
 export type {
   NetworkInterceptors,
   RequestInterceptor,
@@ -16,6 +17,7 @@ export {
   withDefaultPageSize,
   withHTTPClient,
   withProfile,
+  withRetry,
   withTimeout,
   withUserAgent,
   withUserAgentSuffix,

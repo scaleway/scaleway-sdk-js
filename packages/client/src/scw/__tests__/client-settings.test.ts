@@ -36,6 +36,8 @@ const INVALID_SETTINGS_LIST: Partial<Settings>[] = [
   { defaultTimeoutMs: -1 },
   // @ts-expect-error Wrong type
   { defaultTimeoutMs: '42' },
+  { retry: { maxRetries: -1 } },
+  { retry: { minDelay: 10, maxDelay: 1 } },
   // @ts-expect-error Unknown user agent type
   { userAgent: null },
 ]

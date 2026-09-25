@@ -1,7 +1,8 @@
-import { afterAll, describe, expect, it, vi } from 'vitest'
+import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser.js'
 import { addHeaderInterceptor } from '../../../internal/interceptors/helpers.js'
 import type { Settings } from '../../client-settings.js'
+import { ScalewayError } from '../../errors/scw-error.js'
 import { buildFetcher, buildRequest } from '../build-fetcher.js'
 import type { ScwRequest } from '../types.js'
 
@@ -249,5 +250,166 @@ describe(`buildFetcher (mock)`, () => {
         path: '/will-trigger-an-error',
       }),
     ).resolves.toBe('42')
+  })
+})
+
+describe('buildFetcher retry', () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+    vi.spyOn(globalThis, 'setTimeout')
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+    vi.restoreAllMocks()
+  })
+
+  it('does not retry when retry is unset', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
+
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock }, fetchMock)({
+        method: 'GET',
+        path: '/no-retry',
+      }),
+    ).rejects.toThrow(ScalewayError)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('retries 503 then succeeds', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(Response.json({ message: 'unavailable' }, { status: 503 }))
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/retry-503',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('honours Retry-After before retrying 429', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        Response.json(
+          { help_message: 'slow down', type: 'too_many_requests' },
+          {
+            headers: { 'Retry-After': '3' },
+            status: 429,
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/retry-after',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
+    expect(globalThis.setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000)
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('caps oversized Retry-After by maxDelay', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        Response.json(
+          { help_message: 'slow down', type: 'too_many_requests' },
+          {
+            headers: { 'Retry-After': '120' },
+            status: 429,
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1, maxDelay: 30 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/retry-after-capped',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
+    expect(globalThis.setTimeout).toHaveBeenCalledWith(expect.any(Function), 30_000)
+  })
+
+  it('retries network errors', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockRejectedValueOnce(new TypeError('fetch failed'))
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/network',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('stops after maxRetries', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
+
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/exhausted',
+    })
+    const expectation = expect(resultPromise).rejects.toThrow(ScalewayError)
+    await vi.runAllTimersAsync()
+    await expectation
+    expect(fetchMock).toHaveBeenCalledTimes(3)
   })
 })
