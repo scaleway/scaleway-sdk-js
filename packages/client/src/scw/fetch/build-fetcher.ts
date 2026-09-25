@@ -89,9 +89,9 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     const backoff = retryOptions !== undefined ? createRetryBackoffStrategy(retryOptions) : undefined
     const maxAttempts = retryOptions !== undefined ? retryOptions.maxRetries + 1 : 1
 
-    let lastRequest: Request | undefined
-    let lastError: unknown
-    let retryAfterMs: number | undefined
+    let lastRequest: Request | undefined = undefined
+    let lastError: unknown = undefined
+    let retryAfterMs: number | undefined = undefined
 
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
       // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
@@ -120,7 +120,12 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
           break
         }
 
-        const delayMs = resolveRetryDelayMs(error, retryAfterMs, backoff.next().value, retryOptions.maxDelay)
+        const delayMs = resolveRetryDelayMs({
+          backoffSeconds: backoff.next().value,
+          error,
+          maxDelaySeconds: retryOptions.maxDelay,
+          retryAfterMs,
+        })
         // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry with delay
         await sleep(delayMs)
       }

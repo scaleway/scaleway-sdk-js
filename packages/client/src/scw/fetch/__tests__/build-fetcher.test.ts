@@ -1,9 +1,8 @@
-import { afterAll, describe, expect, it, vi } from 'vitest'
+import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser.js'
-import * as sleepModule from '../../../internal/async/sleep.js'
 import { addHeaderInterceptor } from '../../../internal/interceptors/helpers.js'
-import { ScalewayError } from '../../errors/scw-error.js'
 import type { Settings } from '../../client-settings.js'
+import { ScalewayError } from '../../errors/scw-error.js'
 import { buildFetcher, buildRequest } from '../build-fetcher.js'
 import type { ScwRequest } from '../types.js'
 
@@ -255,14 +254,20 @@ describe(`buildFetcher (mock)`, () => {
 })
 
 describe('buildFetcher retry', () => {
-  afterAll(() => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+    vi.spyOn(globalThis, 'setTimeout')
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
     vi.restoreAllMocks()
   })
 
   it('does not retry when retry is unset', async () => {
     const fetchMock = vi
       .fn<typeof fetch>()
-      .mockResolvedValue(new Response(JSON.stringify({ message: 'unavailable' }), { status: 503 }))
+      .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
 
     await expect(
       buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock }, fetchMock)({
@@ -274,10 +279,9 @@ describe('buildFetcher retry', () => {
   })
 
   it('retries 503 then succeeds', async () => {
-    vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
     const fetchMock = vi
       .fn<typeof fetch>()
-      .mockResolvedValueOnce(new Response(JSON.stringify({ message: 'unavailable' }), { status: 503 }))
+      .mockResolvedValueOnce(Response.json({ message: 'unavailable' }, { status: 503 }))
       .mockResolvedValueOnce(
         Response.json(
           { ok: true },
@@ -287,24 +291,29 @@ describe('buildFetcher retry', () => {
         ),
       )
 
-    await expect(
-      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } }, fetchMock)({
-        method: 'GET',
-        path: '/retry-503',
-      }),
-    ).resolves.toMatchObject({ ok: true })
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/retry-503',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
   it('honours Retry-After before retrying 429', async () => {
-    const sleepMock = vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
     const fetchMock = vi
       .fn<typeof fetch>()
       .mockResolvedValueOnce(
-        new Response(JSON.stringify({ help_message: 'slow down', type: 'too_many_requests' }), {
-          headers: { 'Retry-After': '3' },
-          status: 429,
-        }),
+        Response.json(
+          { help_message: 'slow down', type: 'too_many_requests' },
+          {
+            headers: { 'Retry-After': '3' },
+            status: 429,
+          },
+        ),
       )
       .mockResolvedValueOnce(
         Response.json(
@@ -315,25 +324,30 @@ describe('buildFetcher retry', () => {
         ),
       )
 
-    await expect(
-      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } }, fetchMock)({
-        method: 'GET',
-        path: '/retry-after',
-      }),
-    ).resolves.toMatchObject({ ok: true })
-    expect(sleepMock).toHaveBeenCalledWith(3000)
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/retry-after',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
+    expect(globalThis.setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000)
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
   it('caps oversized Retry-After by maxDelay', async () => {
-    const sleepMock = vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
     const fetchMock = vi
       .fn<typeof fetch>()
       .mockResolvedValueOnce(
-        new Response(JSON.stringify({ help_message: 'slow down', type: 'too_many_requests' }), {
-          headers: { 'Retry-After': '120' },
-          status: 429,
-        }),
+        Response.json(
+          { help_message: 'slow down', type: 'too_many_requests' },
+          {
+            headers: { 'Retry-After': '120' },
+            status: 429,
+          },
+        ),
       )
       .mockResolvedValueOnce(
         Response.json(
@@ -344,20 +358,19 @@ describe('buildFetcher retry', () => {
         ),
       )
 
-    await expect(
-      buildFetcher(
-        { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1, maxDelay: 30 } },
-        fetchMock,
-      )({
-        method: 'GET',
-        path: '/retry-after-capped',
-      }),
-    ).resolves.toMatchObject({ ok: true })
-    expect(sleepMock).toHaveBeenCalledWith(30_000)
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1, maxDelay: 30 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/retry-after-capped',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
+    expect(globalThis.setTimeout).toHaveBeenCalledWith(expect.any(Function), 30_000)
   })
 
   it('retries network errors', async () => {
-    vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
     const fetchMock = vi
       .fn<typeof fetch>()
       .mockRejectedValueOnce(new TypeError('fetch failed'))
@@ -370,27 +383,33 @@ describe('buildFetcher retry', () => {
         ),
       )
 
-    await expect(
-      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } }, fetchMock)({
-        method: 'GET',
-        path: '/network',
-      }),
-    ).resolves.toMatchObject({ ok: true })
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/network',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
   it('stops after maxRetries', async () => {
-    vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
     const fetchMock = vi
       .fn<typeof fetch>()
-      .mockResolvedValue(new Response(JSON.stringify({ message: 'unavailable' }), { status: 503 }))
+      .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
 
-    await expect(
-      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } }, fetchMock)({
-        method: 'GET',
-        path: '/exhausted',
-      }),
-    ).rejects.toThrow(ScalewayError)
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/exhausted',
+    })
+    const expectation = expect(resultPromise).rejects.toThrow(ScalewayError)
+    await vi.runAllTimersAsync()
+    await expectation
     expect(fetchMock).toHaveBeenCalledTimes(3)
   })
 })

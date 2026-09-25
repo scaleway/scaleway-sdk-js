@@ -115,19 +115,22 @@ export const parseRetryAfterHeader = (value: string | null): number | undefined 
  *
  * @internal
  */
-export const resolveRetryDelayMs = (
-  error: unknown,
-  retryAfterMs: number | undefined,
-  backoffSeconds: number,
-  maxDelaySeconds: number,
-): number => {
-  let delayMs: number
+export const resolveRetryDelayMs = ({
+  error,
+  retryAfterMs,
+  backoffSeconds,
+  maxDelaySeconds,
+}: {
+  error: unknown
+  retryAfterMs: number | undefined
+  backoffSeconds: number
+  maxDelaySeconds: number
+}): number => {
+  let delayMs = backoffSeconds * 1000
   if (retryAfterMs !== undefined) {
     delayMs = retryAfterMs
   } else if (error instanceof TooManyRequestsError && error.resetSeconds !== undefined) {
     delayMs = error.resetSeconds * 1000
-  } else {
-    delayMs = backoffSeconds * 1000
   }
 
   return Math.min(delayMs, maxDelaySeconds * 1000)
