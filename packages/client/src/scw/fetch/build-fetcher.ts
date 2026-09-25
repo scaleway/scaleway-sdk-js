@@ -120,7 +120,7 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
           break
         }
 
-        const delayMs = resolveRetryDelayMs(error, retryAfterMs, backoff.next().value)
+        const delayMs = resolveRetryDelayMs(error, retryAfterMs, backoff.next().value, retryOptions.maxDelay)
         // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry with delay
         await sleep(delayMs)
       }

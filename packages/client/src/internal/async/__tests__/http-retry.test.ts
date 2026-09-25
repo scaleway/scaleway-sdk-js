@@ -69,16 +69,25 @@ describe('parseRetryAfterHeader', () => {
 describe('resolveRetryDelayMs', () => {
   it('prefers Retry-After over other sources', () => {
     const error = new TooManyRequestsError(429, {}, { helpMessage: 'slow down', resetSeconds: 30 })
-    expect(resolveRetryDelayMs(error, 2000, 10)).toBe(2000)
+    expect(resolveRetryDelayMs(error, 2000, 10, 30)).toBe(2000)
   })
 
   it('uses TooManyRequestsError.resetSeconds when no Retry-After', () => {
     const error = new TooManyRequestsError(429, {}, { helpMessage: 'slow down', resetSeconds: 7 })
-    expect(resolveRetryDelayMs(error, undefined, 10)).toBe(7000)
+    expect(resolveRetryDelayMs(error, undefined, 10, 30)).toBe(7000)
   })
 
   it('falls back to backoff seconds', () => {
-    expect(resolveRetryDelayMs(new ScalewayError(503, 'err'), undefined, 3)).toBe(3000)
+    expect(resolveRetryDelayMs(new ScalewayError(503, 'err'), undefined, 3, 30)).toBe(3000)
+  })
+
+  it('caps Retry-After by maxDelay', () => {
+    expect(resolveRetryDelayMs(new ScalewayError(429, 'err'), 60_000, 1, 30)).toBe(30_000)
+  })
+
+  it('caps resetSeconds by maxDelay', () => {
+    const error = new TooManyRequestsError(429, {}, { helpMessage: 'slow down', resetSeconds: 120 })
+    expect(resolveRetryDelayMs(error, undefined, 1, 30)).toBe(30_000)
   })
 })
 

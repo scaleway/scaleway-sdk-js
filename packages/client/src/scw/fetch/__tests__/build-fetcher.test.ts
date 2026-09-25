@@ -325,6 +325,37 @@ describe('buildFetcher retry', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
+  it('caps oversized Retry-After by maxDelay', async () => {
+    const sleepMock = vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ help_message: 'slow down', type: 'too_many_requests' }), {
+          headers: { 'Retry-After': '120' },
+          status: 429,
+        }),
+      )
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    await expect(
+      buildFetcher(
+        { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1, maxDelay: 30 } },
+        fetchMock,
+      )({
+        method: 'GET',
+        path: '/retry-after-capped',
+      }),
+    ).resolves.toMatchObject({ ok: true })
+    expect(sleepMock).toHaveBeenCalledWith(30_000)
+  })
+
   it('retries network errors', async () => {
     vi.spyOn(sleepModule, 'sleep').mockResolvedValue(undefined)
     const fetchMock = vi

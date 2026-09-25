@@ -27,6 +27,7 @@ export type RetryOptions = {
   minDelay?: number
   /**
    * Maximum backoff delay in seconds.
+   * Also caps waits derived from `Retry-After` / reset hints.
    *
    * @defaultValue 30
    */
@@ -34,6 +35,7 @@ export type RetryOptions = {
   /**
    * Predicate deciding whether an error is retryable.
    * Defaults to retrying 429, 503 and network errors.
+   * When provided, fully replaces the default predicate (including abort/timeout guards).
    */
   isRetryable?: (error: unknown) => boolean
 }
@@ -109,6 +111,7 @@ export const parseRetryAfterHeader = (value: string | null): number | undefined 
 /**
  * Resolves the wait before the next retry attempt, preferring `Retry-After`,
  * then {@link TooManyRequestsError.resetSeconds}, then exponential backoff.
+ * The result is always capped by `maxDelaySeconds`.
  *
  * @internal
  */
@@ -116,15 +119,18 @@ export const resolveRetryDelayMs = (
   error: unknown,
   retryAfterMs: number | undefined,
   backoffSeconds: number,
+  maxDelaySeconds: number,
 ): number => {
+  let delayMs: number
   if (retryAfterMs !== undefined) {
-    return retryAfterMs
-  }
-  if (error instanceof TooManyRequestsError && error.resetSeconds !== undefined) {
-    return error.resetSeconds * 1000
+    delayMs = retryAfterMs
+  } else if (error instanceof TooManyRequestsError && error.resetSeconds !== undefined) {
+    delayMs = error.resetSeconds * 1000
+  } else {
+    delayMs = backoffSeconds * 1000
   }
 
-  return backoffSeconds * 1000
+  return Math.min(delayMs, maxDelaySeconds * 1000)
 }
 
 /**

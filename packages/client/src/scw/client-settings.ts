@@ -34,6 +34,7 @@ export type Settings = DefaultValues & {
   /**
    * Automatic retry configuration for transient HTTP failures.
    * When unset, requests are not retried.
+   * See {@link withRetry} for idempotency and `Retry-After` capping notes.
    */
   retry?: RetryOptions
   /**
