@@ -84,7 +84,9 @@ export const fetchAll = async <K extends string, T extends PaginatedContent<K>, 
   options: PaginationCallOptions<K, T, R>,
 ) => {
   const firstPage = await (options.initial ?? fetcher(options.request, options.options))
-  const pagesResult = await Promise.all(pages(key, fetcher, { request: options.request, firstPage, options: options.options }))
+  const pagesResult = await Promise.all(
+    pages(key, fetcher, { request: options.request, firstPage, options: options.options }),
+  )
   return pagesResult.flat()
 }
 
