@@ -91,12 +91,11 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
 
     let lastRequest: Request | undefined = undefined
     let lastError: unknown = undefined
-    let retryAfterMs: number | undefined = undefined
 
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
       // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
       lastRequest = await reqInterceptors(buildRequest(request, settings))
-      retryAfterMs = undefined
+      let retryAfterMs: number | undefined = undefined
 
       try {
         // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
