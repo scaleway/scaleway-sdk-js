@@ -200,8 +200,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(oxlint@1.83.0(oxlint-tsgolint@7.0.2002))
       '@scaleway/sync-peer-deps':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.1
+        version: 1.1.1
       '@scaleway/tsconfig':
         specifier: 1.1.6
         version: 1.1.6
@@ -2404,8 +2404,8 @@ packages:
     resolution: {integrity: sha512-fhR2aCzxoZlOZcCM42srbALdpdqMy79LwOK5mVf4sGG1uknn095mr5PQ/0/zwfk/FX2KycZwbKJzr4zP6CG3Zg==}
     engines: {node: '>=24.x'}
 
-  '@scaleway/sync-peer-deps@1.1.0':
-    resolution: {integrity: sha512-Pk6begtg7mWS4+60KzmJInZQkkndXQ37G8ACe63GDuY4sNmSr80lY29jXks3LFWDU9a2z7WGRfzGWJnt/Ky6gA==}
+  '@scaleway/sync-peer-deps@1.1.1':
+    resolution: {integrity: sha512-wHb9gqUW3t4/3McPM+yhkZCw04WUurozV5vV0/LkHq18Ve9/DcAWF+TN0HkyfnRtKwoUT29a++E2HIx4d5yDmQ==}
     engines: {node: 24.x || 25.x || 26.x}
     hasBin: true
 
@@ -4294,7 +4294,7 @@ snapshots:
 
   '@scaleway/random-name@6.0.2': {}
 
-  '@scaleway/sync-peer-deps@1.1.0':
+  '@scaleway/sync-peer-deps@1.1.1':
     dependencies:
       chalk: 6.0.0
       tinyglobby: 0.2.17
