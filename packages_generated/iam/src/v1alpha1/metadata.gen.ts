@@ -365,6 +365,17 @@ export const queriesMetadata = {
           description: '"',
         },
         {
+          methodName: 'getScimToken',
+          protoName: 'GetScimToken',
+          paramsType: 'GetScimTokenRequest',
+          returnType: 'ScimToken',
+          returnTypeNamespace: '@scaleway/sdk-iam/v1alpha1',
+          isList: false,
+          paginationType: 'none',
+          isPrivate: false,
+          description: '"',
+        },
+        {
           methodName: 'listUserWebAuthnAuthenticators',
           protoName: 'ListUserWebAuthnAuthenticators',
           paramsType: 'ListUserWebAuthnAuthenticatorsRequest',
