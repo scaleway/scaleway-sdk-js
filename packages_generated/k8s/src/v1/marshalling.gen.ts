@@ -80,7 +80,6 @@ export const unmarshalVersion = (data: unknown): Version => {
     additionalComponents: unmarshalMapOfObject(data.additional_components, unmarshalComponentInfo),
     availableAdmissionPlugins: data.available_admission_plugins,
     availableCnis: data.available_cnis,
-    availableContainerRuntimes: data.available_container_runtimes,
     availableFeatureGates: data.available_feature_gates,
     availableKubeletArgs: data.available_kubelet_args,
     deprecatedAt: unmarshalDate(data.deprecated_at),

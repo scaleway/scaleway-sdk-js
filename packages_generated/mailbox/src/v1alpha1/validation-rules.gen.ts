@@ -29,6 +29,13 @@ export const CreateDomainRequest = {
   },
 }
 
+export const CreateForwardingRequest = {
+  email: {
+    maxLength: 254,
+    minLength: 3,
+  },
+}
+
 export const ListAliasesRequest = {
   page: {
     greaterThanOrEqual: 1,
@@ -49,6 +56,16 @@ export const ListDomainsRequest = {
   },
 }
 
+export const ListForwardingsRequest = {
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListMailboxesRequest = {
   page: {
     greaterThanOrEqual: 1,
@@ -62,6 +79,13 @@ export const ListMailboxesRequest = {
 export const UpdateAliasRequest = {
   description: {
     maxLength: 128,
+  },
+}
+
+export const UpdateForwardingRequest = {
+  email: {
+    maxLength: 254,
+    minLength: 3,
   },
 }
 

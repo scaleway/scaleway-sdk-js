@@ -623,10 +623,6 @@ export interface Version {
    */
   availableCnis: CNI[]
   /**
-   * @deprecated Supported container runtimes for this version.
-   */
-  availableContainerRuntimes: Runtime[]
-  /**
    * Supported feature gates for this version.
    */
   availableFeatureGates: string[]

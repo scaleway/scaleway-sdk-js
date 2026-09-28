@@ -4,6 +4,7 @@ import type {
   AliasStatus,
   DomainRecordStatus,
   DomainStatus,
+  ForwardingStatus,
   MailboxStatus,
 } from './types.gen.js'
 
@@ -24,6 +25,13 @@ export const DOMAIN_TRANSIENT_STATUSES: DomainStatus[] = [
   'creating',
   'validating',
   'provisioning',
+  'deleting',
+]
+
+/** Lists transient statutes of the enum {@link ForwardingStatus}. */
+export const FORWARDING_TRANSIENT_STATUSES: ForwardingStatus[] = [
+  'provisioning',
+  'updating',
   'deleting',
 ]
 

@@ -39,6 +39,13 @@ export type DomainStatus =
   | 'ready'
   | 'deleting'
 
+export type ForwardingStatus =
+  | 'unknown_status'
+  | 'provisioning'
+  | 'ready'
+  | 'updating'
+  | 'deleting'
+
 export type ListAliasesRequestOrderBy =
   | 'created_at_desc'
   | 'created_at_asc'
@@ -56,6 +63,14 @@ export type ListDomainsRequestOrderBy =
   | 'name_asc'
   | 'mailbox_total_count_desc'
   | 'mailbox_total_count_asc'
+
+export type ListForwardingsRequestOrderBy =
+  | 'created_at_desc'
+  | 'created_at_asc'
+  | 'updated_at_desc'
+  | 'updated_at_asc'
+  | 'email_desc'
+  | 'email_asc'
 
 export type ListMailboxesRequestOrderBy =
   | 'created_at_desc'
@@ -274,6 +289,34 @@ export interface Domain {
 }
 
 
+export interface Forwarding {
+  /**
+   * Unique identifier of the forwarding rule.
+   */
+  id: string
+  /**
+   * Date and time of forwarding rule creation.
+   */
+  createdAt?: Date
+  /**
+   * Date and time when the forwarding rule was last updated.
+   */
+  updatedAt?: Date
+  /**
+   * ID of the mailbox to which the forwarding rule belongs.
+   */
+  mailboxId: string
+  /**
+   * Destination email address to which incoming emails are forwarded.
+   */
+  email: string
+  /**
+   * Status of the forwarding rule.
+   */
+  status: ForwardingStatus
+}
+
+
 export type BatchCreateMailboxesRequest = {
   /**
    * Parameters for the mailboxes to create.
@@ -326,6 +369,18 @@ export type CreateDomainRequest = {
 }
 
 
+export type CreateForwardingRequest = {
+  /**
+   * ID of the mailbox for which to create the forwarding rule.
+   */
+  mailboxId: string
+  /**
+   * Destination email address to which incoming emails will be forwarded. Must not be the same as the mailbox's own email address.
+   */
+  email: string
+}
+
+
 export type DeleteAliasRequest = {
   /**
    * ID of the alias to delete.
@@ -339,6 +394,14 @@ export type DeleteDomainRequest = {
    * ID of the domain to delete.
    */
   domainId: string
+}
+
+
+export type DeleteForwardingRequest = {
+  /**
+   * ID of the forwarding rule to delete.
+   */
+  forwardingId: string
 }
 
 
@@ -426,6 +489,22 @@ export type GetDomainRequest = {
 }
 
 
+export type GetForwardingRequest = {
+  /**
+   * ID of the forwarding rule to get.
+   */
+  forwardingId: string
+}
+
+
+export type GetMailboxForwardingRequest = {
+  /**
+   * ID of the mailbox to get the forwarding settings for.
+   */
+  mailboxId: string
+}
+
+
 export type GetMailboxRequest = {
   /**
    * ID of the mailbox to get.
@@ -496,6 +575,54 @@ export interface ListDomainsResponse {
 }
 
 
+export type ListForwardingsRequest = {
+  /**
+   * Order forwardings by specific criteria.
+   */
+  orderBy?: ListForwardingsRequestOrderBy
+  /**
+   * Requested page number. Value must be greater or equal to 1.
+   */
+  page?: number
+  /**
+   * Requested page size. Value must be between 1 and 100.
+   */
+  pageSize?: number
+  /**
+   * (Optional) ID of the mailbox for which to list forwarding rules.
+   */
+  mailboxId?: string
+  /**
+   * (Optional) Filter forwarding rules by their status.
+   */
+  status?: ForwardingStatus
+  /**
+   * ID of the Project to filter on.
+   *
+   * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
+   */
+  projectId?: string
+  /**
+   * ID of the Organization to filter on.
+   *
+   * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
+   */
+  organizationId?: string
+}
+
+
+export interface ListForwardingsResponse {
+  /**
+   * Number of forwarding rules that match the request (without pagination).
+   */
+  totalCount: number
+  /**
+   * Single page of forwarding rules matching the requested criteria.
+   */
+  forwardings: Forwarding[]
+}
+
+
 export type ListMailboxesRequest = {
   /**
    * Order matching mailbox by different criteria.
@@ -540,6 +667,30 @@ export interface ListMailboxesResponse {
 }
 
 
+export interface MailboxForwarding {
+  /**
+   * ID of the mailbox to which the forwarding settings belong.
+   */
+  mailboxId: string
+  /**
+   * Whether to keep a copy of forwarded emails in the local mailbox.
+   */
+  keepCopy: boolean
+  /**
+   * Whether forwarding is enabled for the mailbox. When disabled, no emails are forwarded.
+   */
+  enabled: boolean
+  /**
+   * Date and time of the forwarding settings creation.
+   */
+  createdAt?: Date
+  /**
+   * Date and time when the forwarding settings were last updated.
+   */
+  updatedAt?: Date
+}
+
+
 export type RestoreMailboxRequest = {
   /**
    * ID of the mailbox to restore.
@@ -557,6 +708,34 @@ export type UpdateAliasRequest = {
    * (Optional) Description of the alias.
    */
   description?: string
+}
+
+
+export type UpdateForwardingRequest = {
+  /**
+   * ID of the forwarding rule to update.
+   */
+  forwardingId: string
+  /**
+   * (Optional) New destination email address for the forwarding rule. Must not be the same as the mailbox's own email address.
+   */
+  email?: string
+}
+
+
+export type UpdateMailboxForwardingRequest = {
+  /**
+   * ID of the mailbox to update the forwarding settings for.
+   */
+  mailboxId: string
+  /**
+   * (Optional) Whether to keep a copy of forwarded emails in the local mailbox.
+   */
+  keepCopy?: boolean
+  /**
+   * (Optional) Enable or disable forwarding for the mailbox.
+   */
+  enabled?: boolean
 }
 
 

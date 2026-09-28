@@ -6,8 +6,10 @@ import type {
   DomainRecordLevel,
   DomainRecordStatus,
   DomainStatus,
+  ForwardingStatus,
   ListAliasesRequestOrderBy,
   ListDomainsRequestOrderBy,
+  ListForwardingsRequestOrderBy,
   ListMailboxesRequestOrderBy,
   MailboxStatus,
   MailboxSubscriptionPeriod,
@@ -60,6 +62,15 @@ export const DOMAIN_STATUSES: DomainStatus[] = [
   'deleting',
 ]
 
+/** Lists all values of the enum {@link ForwardingStatus}. */
+export const FORWARDING_STATUSES: ForwardingStatus[] = [
+  'unknown_status',
+  'provisioning',
+  'ready',
+  'updating',
+  'deleting',
+]
+
 /** Lists all values of the enum {@link ListAliasesRequestOrderBy}. */
 export const LIST_ALIASES_REQUEST_ORDER_BIES: ListAliasesRequestOrderBy[] = [
   'created_at_desc',
@@ -80,6 +91,16 @@ export const LIST_DOMAINS_REQUEST_ORDER_BIES: ListDomainsRequestOrderBy[] = [
   'name_asc',
   'mailbox_total_count_desc',
   'mailbox_total_count_asc',
+]
+
+/** Lists all values of the enum {@link ListForwardingsRequestOrderBy}. */
+export const LIST_FORWARDINGS_REQUEST_ORDER_BIES: ListForwardingsRequestOrderBy[] = [
+  'created_at_desc',
+  'created_at_asc',
+  'updated_at_desc',
+  'updated_at_asc',
+  'email_desc',
+  'email_asc',
 ]
 
 /** Lists all values of the enum {@link ListMailboxesRequestOrderBy}. */
