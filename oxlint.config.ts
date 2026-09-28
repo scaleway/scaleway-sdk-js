@@ -32,11 +32,5 @@ export default defineConfig({
         'import/no-nodejs-modules': 'off',
       },
     },
-    {
-      files: ['tools/pnpm-auto-release/**'],
-      rules: {
-        'node/no-process-env': 'off',
-      },
-    },
   ],
 })
