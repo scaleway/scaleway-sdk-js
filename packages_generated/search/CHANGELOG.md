@@ -1,5 +1,120 @@
 # Change Log
 
+## 1.15.0
+
+### Minor Changes
+
+- feat(search): add support for `autoscaling_group` (#3081)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat: add support for constants (#3286)
+
+- chore: reformat tsconfig.build.json exclude arrays and reorder imports (#2973)
+
+- feat(search): add support for CLI (#2931)
+
+- refactor(search): remove enum and use a string instead (#3216)
+
+- feat(datawarehouse): allow max CPU field up to 30 DTWH-563 (#3220)
+
+- feat(search): add support for `sedb_cluster` (#3068)
+
+- feat(search/v1alpha1): add iam resources (#3052)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(search): add support for `kafk_cluster` (#3051)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(search): add support for instance_private_nic instance_snapshot and instance_placement_group (#3016)
+
+- chore(release): publish
+
+- feat(search): add sort/pagination and empty query possible (#3149)
+
+- docs: fix typos (#3221)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(search): add relevance value to order_by enum (#3159)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(search): add filters to search resources (#3028)
+
+- feat(search): remove temporarily IAM from public search (#3265)
+
+- fix(searchdb): add ignore_empty to node fields to fix backward compatibility (#3053)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat(cockpit): add api search integration (#3018)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- feat(messageq): add generated messageq package (#2962)
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- fix(search): add missing instance_template in Resource.Type (#3233)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- feat(search): add new resource types (#2965)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- feat(search): add resource infos to yml (#3547)
+
+- chore(release): publish
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.0
+
 ## 1.14.0
 
 ### Minor Changes
