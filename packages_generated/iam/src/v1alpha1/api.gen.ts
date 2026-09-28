@@ -62,6 +62,7 @@ import {
   unmarshalSaml,
   unmarshalSamlCertificate,
   unmarshalScim,
+  unmarshalScimToken,
   marshalSetGroupMembersRequest,
   marshalSetOrganizationAliasRequest,
   marshalSetRulesRequest,
@@ -132,6 +133,7 @@ import type {
   GetQuotumRequest,
   GetSSHKeyRequest,
   GetSamlCertificateRequest,
+  GetScimTokenRequest,
   GetUserConnectionsRequest,
   GetUserConnectionsResponse,
   GetUserRequest,
@@ -185,6 +187,7 @@ import type {
   Saml,
   SamlCertificate,
   Scim,
+  ScimToken,
   SetGroupMembersRequest,
   SetOrganizationAliasRequest,
   SetRulesRequest,
@@ -1705,6 +1708,16 @@ export class API extends ParentAPI {
         method: 'DELETE',
         path: `/iam/v1alpha1/scim-tokens/${validatePathParam('tokenId', request.tokenId)}`,
       },
+    )
+
+  
+  getScimToken = (request: Readonly<GetScimTokenRequest>) =>
+    this.client.fetch<ScimToken>(
+      {
+        method: 'GET',
+        path: `/iam/v1alpha1/scim-tokens/${validatePathParam('scimTokenId', request.scimTokenId)}`,
+      },
+      unmarshalScimToken,
     )
 
   

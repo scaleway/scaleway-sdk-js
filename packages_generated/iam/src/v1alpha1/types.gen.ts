@@ -1473,6 +1473,11 @@ export type GetSamlCertificateRequest = {
 }
 
 
+export type GetScimTokenRequest = {
+  scimTokenId: string
+}
+
+
 export type GetUserConnectionsRequest = {
   /**
    * ID of the user to list connections for.

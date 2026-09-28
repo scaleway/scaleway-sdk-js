@@ -5,6 +5,7 @@ import { isJSONObject, marshalBlobToScwFile, marshalDecimal, marshalMoney, marsh
 import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scaleway/sdk-client'
 import type {
   JWT,
+  ScimToken,
   APIKey,
   Application,
   Group,
@@ -16,7 +17,6 @@ import type {
   SamlCertificate,
   WebAuthnAuthenticator,
   User,
-  ScimToken,
   CreateScimTokenResponse,
   EncodedJWT,
   FinishUserWebAuthnRegistrationResponse,
@@ -106,6 +106,21 @@ export const unmarshalJWT = (data: unknown): JWT => {
     updatedAt: unmarshalDate(data.updated_at),
     userAgent: data.user_agent,
   } as JWT
+}
+
+export const unmarshalScimToken = (data: unknown): ScimToken => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ScimToken' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    expiresAt: unmarshalDate(data.expires_at),
+    id: data.id,
+    scimId: data.scim_id,
+  } as ScimToken
 }
 
 export const unmarshalAPIKey = (data: unknown): APIKey => {
@@ -350,21 +365,6 @@ export const unmarshalUser = (data: unknown): User => {
     updatedAt: unmarshalDate(data.updated_at),
     username: data.username,
   } as User
-}
-
-const unmarshalScimToken = (data: unknown): ScimToken => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'ScimToken' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
-    id: data.id,
-    scimId: data.scim_id,
-  } as ScimToken
 }
 
 export const unmarshalCreateScimTokenResponse = (data: unknown): CreateScimTokenResponse => {

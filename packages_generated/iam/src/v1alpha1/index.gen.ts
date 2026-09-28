@@ -58,6 +58,7 @@ export type {
   GetQuotumRequest,
   GetSSHKeyRequest,
   GetSamlCertificateRequest,
+  GetScimTokenRequest,
   GetUserConnectionsRequest,
   GetUserConnectionsResponse,
   GetUserRequest,
