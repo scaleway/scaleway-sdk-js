@@ -7,17 +7,23 @@ import type {
   Mailbox,
   Alias,
   Domain,
+  Forwarding,
   BatchCreateMailboxesResponse,
   DomainRecord,
   GetDomainRecordsResponse,
   ListAliasesResponse,
   ListDomainsResponse,
+  ListForwardingsResponse,
   ListMailboxesResponse,
+  MailboxForwarding,
   BatchCreateMailboxesRequestMailboxParameters,
   BatchCreateMailboxesRequest,
   CreateAliasRequest,
   CreateDomainRequest,
+  CreateForwardingRequest,
   UpdateAliasRequest,
+  UpdateForwardingRequest,
+  UpdateMailboxForwardingRequest,
   UpdateMailboxRequest,
 } from './types.gen.js'
 
@@ -84,6 +90,23 @@ export const unmarshalDomain = (data: unknown): Domain => {
     updatedAt: unmarshalDate(data.updated_at),
     webmailUrl: data.webmail_url,
   } as Domain
+}
+
+export const unmarshalForwarding = (data: unknown): Forwarding => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Forwarding' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    email: data.email,
+    id: data.id,
+    mailboxId: data.mailbox_id,
+    status: data.status,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Forwarding
 }
 
 export const unmarshalBatchCreateMailboxesResponse = (data: unknown): BatchCreateMailboxesResponse => {
@@ -168,6 +191,19 @@ export const unmarshalListDomainsResponse = (data: unknown): ListDomainsResponse
   } as ListDomainsResponse
 }
 
+export const unmarshalListForwardingsResponse = (data: unknown): ListForwardingsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListForwardingsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    forwardings: unmarshalArrayOfObject(data.forwardings, unmarshalForwarding),
+    totalCount: data.total_count,
+  } as ListForwardingsResponse
+}
+
 export const unmarshalListMailboxesResponse = (data: unknown): ListMailboxesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -179,6 +215,22 @@ export const unmarshalListMailboxesResponse = (data: unknown): ListMailboxesResp
     mailboxes: unmarshalArrayOfObject(data.mailboxes, unmarshalMailbox),
     totalCount: data.total_count,
   } as ListMailboxesResponse
+}
+
+export const unmarshalMailboxForwarding = (data: unknown): MailboxForwarding => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'MailboxForwarding' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    enabled: data.enabled,
+    keepCopy: data.keep_copy,
+    mailboxId: data.mailbox_id,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as MailboxForwarding
 }
 
 const marshalBatchCreateMailboxesRequestMailboxParameters = (
@@ -215,11 +267,34 @@ export const marshalCreateDomainRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
+export const marshalCreateForwardingRequest = (
+  request: CreateForwardingRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  email: request.email,
+  mailbox_id: request.mailboxId,
+})
+
 export const marshalUpdateAliasRequest = (
   request: UpdateAliasRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
+})
+
+export const marshalUpdateForwardingRequest = (
+  request: UpdateForwardingRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  email: request.email,
+})
+
+export const marshalUpdateMailboxForwardingRequest = (
+  request: UpdateMailboxForwardingRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  enabled: request.enabled,
+  keep_copy: request.keepCopy,
 })
 
 export const marshalUpdateMailboxRequest = (

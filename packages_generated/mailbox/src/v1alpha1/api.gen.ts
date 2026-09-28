@@ -11,20 +11,26 @@ import {
   toApiLocality,
 } from '@scaleway/sdk-client'
 import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
-import {ALIAS_TRANSIENT_STATUSES as ALIAS_TRANSIENT_STATUSES_MAILBOX,DOMAIN_RECORD_TRANSIENT_STATUSES as DOMAIN_RECORD_TRANSIENT_STATUSES_MAILBOX,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
+import {ALIAS_TRANSIENT_STATUSES as ALIAS_TRANSIENT_STATUSES_MAILBOX,DOMAIN_RECORD_TRANSIENT_STATUSES as DOMAIN_RECORD_TRANSIENT_STATUSES_MAILBOX,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,FORWARDING_TRANSIENT_STATUSES as FORWARDING_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
 import {
   unmarshalAlias,
   marshalBatchCreateMailboxesRequest,
   unmarshalBatchCreateMailboxesResponse,
   marshalCreateAliasRequest,
   marshalCreateDomainRequest,
+  marshalCreateForwardingRequest,
   unmarshalDomain,
+  unmarshalForwarding,
   unmarshalGetDomainRecordsResponse,
   unmarshalListAliasesResponse,
   unmarshalListDomainsResponse,
+  unmarshalListForwardingsResponse,
   unmarshalListMailboxesResponse,
   unmarshalMailbox,
+  unmarshalMailboxForwarding,
   marshalUpdateAliasRequest,
+  marshalUpdateForwardingRequest,
+  marshalUpdateMailboxForwardingRequest,
   marshalUpdateMailboxRequest,
 } from './marshalling.gen.js'
 import type {
@@ -33,24 +39,34 @@ import type {
   BatchCreateMailboxesResponse,
   CreateAliasRequest,
   CreateDomainRequest,
+  CreateForwardingRequest,
   DeleteAliasRequest,
   DeleteDomainRequest,
+  DeleteForwardingRequest,
   DeleteMailboxRequest,
   Domain,
+  Forwarding,
   GetAliasRequest,
   GetDomainRecordsRequest,
   GetDomainRecordsResponse,
   GetDomainRequest,
+  GetForwardingRequest,
+  GetMailboxForwardingRequest,
   GetMailboxRequest,
   ListAliasesRequest,
   ListAliasesResponse,
   ListDomainsRequest,
   ListDomainsResponse,
+  ListForwardingsRequest,
+  ListForwardingsResponse,
   ListMailboxesRequest,
   ListMailboxesResponse,
   Mailbox,
+  MailboxForwarding,
   RestoreMailboxRequest,
   UpdateAliasRequest,
+  UpdateForwardingRequest,
+  UpdateMailboxForwardingRequest,
   UpdateMailboxRequest,
   ValidateDomainRecordsRequest,
 } from './types.gen.js'
@@ -444,6 +460,155 @@ export class API extends ParentAPI {
         path: `/mailbox/v1alpha1/aliases/${validatePathParam('aliasId', request.aliasId)}`,
       },
       unmarshalAlias,
+    )
+
+  
+  /**
+   * Create a forwarding rule for a mailbox.. All incoming emails to the mailbox will be redirected to the specified destination email address.
+A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own email address is not allowed.
+   *
+   * @param request - The request {@link CreateForwardingRequest}
+   * @returns A Promise of Forwarding
+   */
+  createForwarding = (request: Readonly<CreateForwardingRequest>) =>
+    this.client.fetch<Forwarding>(
+      {
+        body: JSON.stringify(
+          marshalCreateForwardingRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/mailbox/v1alpha1/forwardings`,
+      },
+      unmarshalForwarding,
+    )
+
+  
+  protected pageOfListForwardings = (request: Readonly<ListForwardingsRequest> = {}) =>
+    this.client.fetch<ListForwardingsResponse>(
+      {
+        method: 'GET',
+        path: `/mailbox/v1alpha1/forwardings`,
+        urlParams: urlParams(
+          ['mailbox_id', request.mailboxId],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['status', request.status],  
+          ...Object.entries(resolveOneOf([
+            {default: this.client.settings.defaultProjectId,param: 'project_id',
+              value: request.projectId,
+            },
+            {default: this.client.settings.defaultOrganizationId,param: 'organization_id',
+              value: request.organizationId,
+            },
+          ])),
+        ),
+      },
+      unmarshalListForwardingsResponse,
+    )
+  
+  /**
+   * List forwarding rules in an organization.. The return list can be filtered with request parameters.
+   *
+   * @param request - The request {@link ListForwardingsRequest}
+   * @returns A Promise of ListForwardingsResponse
+   */
+  listForwardings = (request: Readonly<ListForwardingsRequest> = {}) =>
+    enrichForPagination('forwardings', this.pageOfListForwardings, request)
+
+  
+  /**
+   * Get a forwarding rule by its ID.. Get a forwarding rule by its ID.
+   *
+   * @param request - The request {@link GetForwardingRequest}
+   * @returns A Promise of Forwarding
+   */
+  getForwarding = (request: Readonly<GetForwardingRequest>) =>
+    this.client.fetch<Forwarding>(
+      {
+        method: 'GET',
+        path: `/mailbox/v1alpha1/forwardings/${validatePathParam('forwardingId', request.forwardingId)}`,
+      },
+      unmarshalForwarding,
+    )
+  
+  /**
+   * Waits for {@link Forwarding} to be in a final state.
+   *
+   * @param request - The request {@link GetForwardingRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Forwarding
+   */
+  waitForForwarding = (
+    request: Readonly<GetForwardingRequest>,
+    options?: Readonly<WaitForOptions<Forwarding>>,
+  ) =>
+    waitForResource(
+      options?.stop ?? (res => Promise.resolve(!FORWARDING_TRANSIENT_STATUSES_MAILBOX.includes(res.status))),
+      this.getForwarding,
+      request,
+      options,
+    )
+
+  
+  /**
+   * Update a forwarding rule's destination email address by its ID.. Update a forwarding rule's destination email address by its ID.
+   *
+   * @param request - The request {@link UpdateForwardingRequest}
+   * @returns A Promise of Forwarding
+   */
+  updateForwarding = (request: Readonly<UpdateForwardingRequest>) =>
+    this.client.fetch<Forwarding>(
+      {
+        body: JSON.stringify(
+          marshalUpdateForwardingRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/mailbox/v1alpha1/forwardings/${validatePathParam('forwardingId', request.forwardingId)}`,
+      },
+      unmarshalForwarding,
+    )
+
+  
+  /**
+   * Delete a forwarding rule by its ID.. Delete a forwarding rule by its ID.
+   *
+   * @param request - The request {@link DeleteForwardingRequest}
+   * @returns A Promise of Forwarding
+   */
+  deleteForwarding = (request: Readonly<DeleteForwardingRequest>) =>
+    this.client.fetch<Forwarding>(
+      {
+        method: 'DELETE',
+        path: `/mailbox/v1alpha1/forwardings/${validatePathParam('forwardingId', request.forwardingId)}`,
+      },
+      unmarshalForwarding,
+    )
+
+  
+  getMailboxForwarding = (request: Readonly<GetMailboxForwardingRequest>) =>
+    this.client.fetch<MailboxForwarding>(
+      {
+        method: 'GET',
+        path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/forwarding`,
+      },
+      unmarshalMailboxForwarding,
+    )
+
+  
+  updateMailboxForwarding = (request: Readonly<UpdateMailboxForwardingRequest>) =>
+    this.client.fetch<MailboxForwarding>(
+      {
+        body: JSON.stringify(
+          marshalUpdateMailboxForwardingRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/forwarding`,
+      },
+      unmarshalMailboxForwarding,
     )
 
   
