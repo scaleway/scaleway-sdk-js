@@ -83,7 +83,7 @@ export interface Budget {
    */
   enabled: boolean
   /**
-   * Cost limit for this budget.
+   * Cost limit for this budget expressed in the embedded currency code.
    */
   consumptionLimit?: Money
   /**
@@ -169,7 +169,7 @@ export type CreateBudgetRequest = {
    */
   organizationId?: string
   /**
-   * Cost limit for the budget.
+   * Cost limit for the budget expressed in the invoiced currency (no cents allowed).
    */
   consumptionLimit: number
   /**
@@ -375,7 +375,7 @@ export type UpdateBudgetRequest = {
    */
   budgetId: string
   /**
-   * Cost limit for the budget.
+   * Cost limit for the budget expressed in the invoiced currency (no cents allowed).
    */
   consumptionLimit?: number
   /**
