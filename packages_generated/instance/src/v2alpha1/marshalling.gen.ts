@@ -23,6 +23,7 @@ import type {
   ListPrivateNetworkInterfacesResponse,
   SecurityGroupSummary,
   ListSecurityGroupsResponse,
+  ServerTypeSpotInfo,
   ServerType,
   ListServerCompatibleTypesResponse,
   ListServerTypesResponse,
@@ -43,6 +44,7 @@ import type {
   ServerPrivateNetworkInterface,
   ServerPublicNetworkInterface,
   ServerRDPPassword,
+  ServerRuntimeInfo,
   ServerVolume,
   Server,
   CreateTemplateRequestPrivateNetworkTemplate,
@@ -447,6 +449,18 @@ export const unmarshalListSecurityGroupsResponse = (data: unknown): ListSecurity
   } as ListSecurityGroupsResponse
 }
 
+const unmarshalServerTypeSpotInfo = (data: unknown): ServerTypeSpotInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerTypeSpotInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    availability: data.availability,
+  } as ServerTypeSpotInfo
+}
+
 const unmarshalServerType = (data: unknown): ServerType => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -463,6 +477,7 @@ const unmarshalServerType = (data: unknown): ServerType => {
     limits: data.limits ? unmarshalServerTypeLimits(data.limits) : undefined,
     memory: data.memory,
     name: data.name,
+    spotInfo: data.spot_info ? unmarshalServerTypeSpotInfo(data.spot_info) : undefined,
     vcpuCount: data.vcpu_count,
   } as ServerType
 }
@@ -781,6 +796,18 @@ const unmarshalServerRDPPassword = (data: unknown): ServerRDPPassword => {
   } as ServerRDPPassword
 }
 
+const unmarshalServerRuntimeInfo = (data: unknown): ServerRuntimeInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerRuntimeInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    spot: data.spot,
+  } as ServerRuntimeInfo
+}
+
 const unmarshalServerVolume = (data: unknown): ServerVolume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -814,6 +841,7 @@ export const unmarshalServer = (data: unknown): Server => {
     projectId: data.project_id,
     publicNetworkInterface: data.public_network_interface ? unmarshalServerPublicNetworkInterface(data.public_network_interface) : undefined,
     rescueMode: data.rescue_mode,
+    runtimeInfo: data.runtime_info ? unmarshalServerRuntimeInfo(data.runtime_info) : undefined,
     serverType: data.server_type,
     srn: data.srn,
     status: data.status,

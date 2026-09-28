@@ -154,6 +154,7 @@ import type {
   SetUserDataRequest,
   Snapshot,
   StartServerRequest,
+  StartSpotServerRequest,
   StopAndDeleteServerRequest,
   StopServerRequest,
   Template,
@@ -435,6 +436,25 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start`,
+      },
+      unmarshalServer,
+    )
+
+  
+  /**
+   * Start an Instance as Spot. Spot instances are billed at a discount compared to regular instances. However, they can be interrupted
+at any time.
+   *
+   * @param request - The request {@link StartSpotServerRequest}
+   * @returns A Promise of Server
+   */
+  startSpotServer = (request: Readonly<StartSpotServerRequest>) =>
+    this.client.fetch<Server>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start-spot`,
       },
       unmarshalServer,
     )
