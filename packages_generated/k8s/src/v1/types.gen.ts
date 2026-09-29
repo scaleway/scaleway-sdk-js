@@ -763,6 +763,10 @@ export interface Cluster {
    */
   iamNodesGroupId: string
   /**
+   * IAM application ID for the control plane (this field might be empty during early stage of cluster creation).
+   */
+  iamControlPlaneApplicationId: string
+  /**
    * Subnet used for the Pod CIDR.
    */
   podCidr: string

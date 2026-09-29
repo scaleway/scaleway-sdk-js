@@ -179,6 +179,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     description: data.description,
     dnsWildcard: data.dns_wildcard,
     featureGates: data.feature_gates,
+    iamControlPlaneApplicationId: data.iam_control_plane_application_id,
     iamNodesGroupId: data.iam_nodes_group_id,
     id: data.id,
     name: data.name,
