@@ -239,6 +239,7 @@ export const SERVER_TYPE_AVAILABILITIES: ServerTypeAvailability[] = [
   'available',
   'low_stock',
   'out_of_stock',
+  'unavailable',
 ]
 
 /** Lists all values of the enum {@link ServerVolumeVolumeType}. */
