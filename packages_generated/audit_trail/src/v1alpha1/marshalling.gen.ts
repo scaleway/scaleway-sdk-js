@@ -124,7 +124,9 @@ export const unmarshalCustomAlertRule = (data: unknown): CustomAlertRule => {
     name: data.name,
     occurrences: data.occurrences,
     query: data.query,
+    region: data.region,
     severity: data.severity,
+    srn: data.srn,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as CustomAlertRule
@@ -172,7 +174,9 @@ export const unmarshalExportJob = (data: unknown): ExportJob => {
     lastStatus: data.last_status ? unmarshalExportJobStatus(data.last_status) : undefined,
     name: data.name,
     organizationId: data.organization_id,
+    region: data.region,
     s3: data.s3 ? unmarshalExportJobS3(data.s3) : undefined,
+    srn: data.srn,
     tags: data.tags,
   } as ExportJob
 }

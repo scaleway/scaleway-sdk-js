@@ -1148,6 +1148,10 @@ export interface CustomAlertRule {
    */
   id: string
   /**
+   * The SRN of the alert rule.
+   */
+  srn: string
+  /**
    * Name of the alert rule.
    */
   name: string
@@ -1183,6 +1187,10 @@ export interface CustomAlertRule {
    * Custom alert rule last modification date.
    */
   updatedAt?: Date
+  /**
+   * Region of the alert rule.
+   */
+  region: ScwRegion
 }
 
 
@@ -1210,6 +1218,10 @@ export interface ExportJob {
    * ID of the export job.
    */
   id: string
+  /**
+   * The SRN of the export job.
+   */
+  srn: string
   /**
    * ID of the targeted Organization.
    */
@@ -1240,6 +1252,10 @@ export interface ExportJob {
    * Status of last export job.
    */
   lastStatus?: ExportJobStatus
+  /**
+   * Region of the export job.
+   */
+  region: ScwRegion
 }
 
 
