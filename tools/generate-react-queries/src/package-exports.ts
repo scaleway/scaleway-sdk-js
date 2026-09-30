@@ -71,7 +71,7 @@ export function updatePackageJsonExports(config: ReactQueriesConfig): void {
   })
 
   const otherStaticExport: Record<string, ExportEntry> = {
-    './mocks*': {
+    './mocks/*': {
       default: './mocks/*/index.ts',
       types: './mocks/*/index.ts',
     },
