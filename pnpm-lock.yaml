@@ -175,7 +175,7 @@ overrides:
   vite: 8.3.0
   vitest: 4.1.11
   '@types/react': 19.3.0
-  '@types/node': 26.6.2
+  '@types/node': 26.6.3
 
 importers:
 
@@ -260,8 +260,8 @@ importers:
         specifier: workspace:^
         version: link:../../tools/configs
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
 
   packages/configuration-loader:
     devDependencies:
@@ -269,8 +269,8 @@ importers:
         specifier: workspace:^
         version: link:../../tools/configs
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
 
   packages/sdk:
     dependencies:
@@ -1606,8 +1606,8 @@ importers:
   tools/configs:
     devDependencies:
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
       tsdown:
         specifier: 'catalog:'
         version: 0.23.0(typescript@7.0.2)
@@ -1621,8 +1621,8 @@ importers:
         specifier: 1.1.6
         version: 1.1.6
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
       tsdown:
         specifier: 'catalog:'
         version: 0.23.0(typescript@7.0.2)
@@ -1630,14 +1630,14 @@ importers:
   tools/generate-react-queries:
     devDependencies:
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
 
   tools/generate-react-sdk:
     devDependencies:
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
 
 packages:
 
@@ -2426,8 +2426,8 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
-  '@types/node@26.6.2':
-    resolution: {integrity: sha512-X1P21scMv4zGKLYqjdGjaKa7COa0RKVYYZZN/NfvLQ1JegxFhdhpZG/Lyn8AXx6CDUavKAd11v6BvfpkDByK8g==}
+  '@types/node@26.6.3':
+    resolution: {integrity: sha512-dsqMQQoeTLqu9wynDD00q573mNzso3IdQOAfHRJqLCcmCFPoGo9A1bDpUcv/9tnKpErQWv9uKeGfl37EIS02Yg==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -3667,7 +3667,7 @@ packages:
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@opentelemetry/api': ^1.9.0
-      '@types/node': 26.6.2
+      '@types/node': 26.6.3
       '@vitest/browser-playwright': 4.1.11
       '@vitest/browser-preview': 4.1.11
       '@vitest/browser-webdriverio': 4.1.11
@@ -4314,7 +4314,7 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
-  '@types/node@26.6.2':
+  '@types/node@26.6.3':
     dependencies:
       undici-types: 8.9.0
 
