@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.1.1
+
+### Patch Changes
+
+- fix export of types
+
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

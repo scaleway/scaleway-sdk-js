@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.8.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.1
+
 ## 1.8.0
 
 ### Minor Changes

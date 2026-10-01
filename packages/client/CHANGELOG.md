@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.12.1
+
+### Patch Changes
+
+- fix export of types
+
 ## 2.12.0
 
 ### Minor Changes

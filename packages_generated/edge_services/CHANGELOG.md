@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.25.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.1
+
 ## 2.25.0
 
 ### Minor Changes
