@@ -12,5 +12,5 @@ export const useBaremetalv1APIListServerEventsInfiniteQuery = (
   const { baremetalv1 } = useBaremetalv1API()
   const key = ["baremetalv1", "listServerEvents", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => baremetalv1.listServerEvents(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => baremetalv1.listServerEvents(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

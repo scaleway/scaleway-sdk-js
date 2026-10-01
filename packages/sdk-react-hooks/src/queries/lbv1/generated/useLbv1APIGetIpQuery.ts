@@ -11,5 +11,5 @@ export const useLbv1APIGetIpQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "getIp", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1.getIp(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1.getIp(params, { signal }), dataloaderConfig)
 }

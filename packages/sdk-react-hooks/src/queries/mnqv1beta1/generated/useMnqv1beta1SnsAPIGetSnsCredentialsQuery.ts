@@ -11,5 +11,5 @@ export const useMnqv1beta1SnsAPIGetSnsCredentialsQuery = (
   const { mnqv1beta1Sns } = useMnqv1beta1SnsAPI()
   const key = ["mnqv1beta1Sns", "getSnsCredentials", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mnqv1beta1Sns.getSnsCredentials(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mnqv1beta1Sns.getSnsCredentials(params, { signal }), dataloaderConfig)
 }

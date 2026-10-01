@@ -11,5 +11,5 @@ export const useDediboxv1BillingAPIListRefundsQuery = (
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
   const key = ["dediboxv1Billing", "listRefunds", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1Billing.listRefunds(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1Billing.listRefunds(params, { signal }), dataloaderConfig)
 }

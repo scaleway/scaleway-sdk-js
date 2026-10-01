@@ -11,5 +11,5 @@ export const useS2SVpnv1alpha1APIListConnectionsAllQuery = (
   const { s2SVpnv1alpha1 } = useS2SVpnv1alpha1API()
   const key = ["s2SVpnv1alpha1", "listConnections", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => s2SVpnv1alpha1.listConnections(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => s2SVpnv1alpha1.listConnections(params, { signal }).all(), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useLbv1APIListCertificatesAllQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listCertificates", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1.listCertificates(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1.listCertificates(params, { signal }).all(), dataloaderConfig)
 }

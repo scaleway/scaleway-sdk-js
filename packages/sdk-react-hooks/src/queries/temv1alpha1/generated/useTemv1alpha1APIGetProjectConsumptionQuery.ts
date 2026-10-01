@@ -11,5 +11,5 @@ export const useTemv1alpha1APIGetProjectConsumptionQuery = (
   const { temv1alpha1 } = useTemv1alpha1API()
   const key = ["temv1alpha1", "getProjectConsumption", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => temv1alpha1.getProjectConsumption(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => temv1alpha1.getProjectConsumption(params, { signal }), dataloaderConfig)
 }

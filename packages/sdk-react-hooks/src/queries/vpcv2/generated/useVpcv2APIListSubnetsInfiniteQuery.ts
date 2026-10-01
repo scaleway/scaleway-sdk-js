@@ -12,5 +12,5 @@ export const useVpcv2APIListSubnetsInfiniteQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listSubnets", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => vpcv2.listSubnets(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcv2.listSubnets(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

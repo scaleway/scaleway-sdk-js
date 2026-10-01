@@ -11,5 +11,5 @@ export const useVpcgwv2APIListIPsQuery = (
   const { vpcgwv2 } = useVpcgwv2API()
   const key = ["vpcgwv2", "listIPs", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcgwv2.listIPs(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcgwv2.listIPs(params, { signal }), dataloaderConfig)
 }

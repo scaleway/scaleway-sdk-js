@@ -11,5 +11,5 @@ export const useDediboxv1RpnV2APIGetRpnV2GroupQuery = (
   const { dediboxv1RpnV2 } = useDediboxv1RpnV2API()
   const key = ["dediboxv1RpnV2", "getRpnV2Group", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1RpnV2.getRpnV2Group(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1RpnV2.getRpnV2Group(params, { signal }), dataloaderConfig)
 }

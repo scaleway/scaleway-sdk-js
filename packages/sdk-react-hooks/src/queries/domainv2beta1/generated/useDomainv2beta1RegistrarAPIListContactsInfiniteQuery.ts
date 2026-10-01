@@ -12,5 +12,5 @@ export const useDomainv2beta1RegistrarAPIListContactsInfiniteQuery = (
   const { domainv2beta1Registrar } = useDomainv2beta1RegistrarAPI()
   const key = ["domainv2beta1Registrar", "listContacts", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => domainv2beta1Registrar.listContacts(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => domainv2beta1Registrar.listContacts(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

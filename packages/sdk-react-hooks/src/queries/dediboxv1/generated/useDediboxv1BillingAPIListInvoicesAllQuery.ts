@@ -11,5 +11,5 @@ export const useDediboxv1BillingAPIListInvoicesAllQuery = (
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
   const key = ["dediboxv1Billing", "listInvoices", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1Billing.listInvoices(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1Billing.listInvoices(params, { signal }).all(), dataloaderConfig)
 }

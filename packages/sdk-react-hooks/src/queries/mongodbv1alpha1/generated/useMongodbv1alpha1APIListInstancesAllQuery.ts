@@ -11,5 +11,5 @@ export const useMongodbv1alpha1APIListInstancesAllQuery = (
   const { mongodbv1alpha1 } = useMongodbv1alpha1API()
   const key = ["mongodbv1alpha1", "listInstances", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1alpha1.listInstances(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1alpha1.listInstances(params, { signal }).all(), dataloaderConfig)
 }

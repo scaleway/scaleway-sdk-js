@@ -12,5 +12,5 @@ export const useDediboxv1BillingAPIListInvoicesInfiniteQuery = (
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
   const key = ["dediboxv1Billing", "listInvoices", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1Billing.listInvoices(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1Billing.listInvoices(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useIamv1alpha1APIListGroupsInfiniteQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listGroups", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => iamv1alpha1.listGroups(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => iamv1alpha1.listGroups(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

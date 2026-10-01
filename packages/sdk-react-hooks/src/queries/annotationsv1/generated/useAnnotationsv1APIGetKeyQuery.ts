@@ -11,5 +11,5 @@ export const useAnnotationsv1APIGetKeyQuery = (
   const { annotationsv1 } = useAnnotationsv1API()
   const key = ["annotationsv1", "getKey", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => annotationsv1.getKey(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => annotationsv1.getKey(params, { signal }), dataloaderConfig)
 }

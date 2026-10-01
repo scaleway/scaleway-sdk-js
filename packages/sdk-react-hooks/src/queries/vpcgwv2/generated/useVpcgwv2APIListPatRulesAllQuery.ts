@@ -11,5 +11,5 @@ export const useVpcgwv2APIListPatRulesAllQuery = (
   const { vpcgwv2 } = useVpcgwv2API()
   const key = ["vpcgwv2", "listPatRules", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcgwv2.listPatRules(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcgwv2.listPatRules(params, { signal }).all(), dataloaderConfig)
 }

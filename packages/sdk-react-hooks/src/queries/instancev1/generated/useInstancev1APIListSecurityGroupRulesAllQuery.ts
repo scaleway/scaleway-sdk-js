@@ -11,5 +11,5 @@ export const useInstancev1APIListSecurityGroupRulesAllQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listSecurityGroupRules", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev1.listSecurityGroupRules(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev1.listSecurityGroupRules(params, { signal }).all(), dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useKeyManagerv1alpha1APIListKeysInfiniteQuery = (
   const { keyManagerv1alpha1 } = useKeyManagerv1alpha1API()
   const key = ["keyManagerv1alpha1", "listKeys", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => keyManagerv1alpha1.listKeys(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => keyManagerv1alpha1.listKeys(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

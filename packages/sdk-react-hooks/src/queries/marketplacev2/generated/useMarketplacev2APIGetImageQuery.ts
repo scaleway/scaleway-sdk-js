@@ -11,5 +11,5 @@ export const useMarketplacev2APIGetImageQuery = (
   const { marketplacev2 } = useMarketplacev2API()
   const key = ["marketplacev2", "getImage", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => marketplacev2.getImage(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => marketplacev2.getImage(params, { signal }), dataloaderConfig)
 }

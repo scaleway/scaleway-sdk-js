@@ -12,5 +12,5 @@ export const useLbv1APIListCertificatesInfiniteQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listCertificates", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => lbv1.listCertificates(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => lbv1.listCertificates(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

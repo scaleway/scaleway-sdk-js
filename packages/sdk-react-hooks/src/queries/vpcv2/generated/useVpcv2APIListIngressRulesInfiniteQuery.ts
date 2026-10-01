@@ -12,5 +12,5 @@ export const useVpcv2APIListIngressRulesInfiniteQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listIngressRules", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => vpcv2.listIngressRules(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcv2.listIngressRules(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

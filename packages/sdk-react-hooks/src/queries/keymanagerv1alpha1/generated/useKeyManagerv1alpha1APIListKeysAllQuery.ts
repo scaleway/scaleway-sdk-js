@@ -11,5 +11,5 @@ export const useKeyManagerv1alpha1APIListKeysAllQuery = (
   const { keyManagerv1alpha1 } = useKeyManagerv1alpha1API()
   const key = ["keyManagerv1alpha1", "listKeys", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => keyManagerv1alpha1.listKeys(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => keyManagerv1alpha1.listKeys(params, { signal }).all(), dataloaderConfig)
 }

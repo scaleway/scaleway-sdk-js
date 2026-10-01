@@ -12,5 +12,5 @@ export const useIotv1APIListRoutesInfiniteQuery = (
   const { iotv1 } = useIotv1API()
   const key = ["iotv1", "listRoutes", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => iotv1.listRoutes(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => iotv1.listRoutes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

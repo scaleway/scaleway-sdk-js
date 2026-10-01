@@ -11,5 +11,5 @@ export const useAccountv3ProjectAPIGetProjectQuery = (
   const { accountv3Project } = useAccountv3ProjectAPI()
   const key = ["accountv3Project", "getProject", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => accountv3Project.getProject(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => accountv3Project.getProject(params, { signal }), dataloaderConfig)
 }

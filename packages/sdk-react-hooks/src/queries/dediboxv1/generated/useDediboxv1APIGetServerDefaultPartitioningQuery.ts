@@ -11,5 +11,5 @@ export const useDediboxv1APIGetServerDefaultPartitioningQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getServerDefaultPartitioning", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getServerDefaultPartitioning(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getServerDefaultPartitioning(params, { signal }), dataloaderConfig)
 }

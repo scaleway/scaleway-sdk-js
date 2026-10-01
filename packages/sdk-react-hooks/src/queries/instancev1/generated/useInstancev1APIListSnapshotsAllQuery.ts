@@ -11,5 +11,5 @@ export const useInstancev1APIListSnapshotsAllQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listSnapshots", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev1.listSnapshots(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev1.listSnapshots(params, { signal }).all(), dataloaderConfig)
 }

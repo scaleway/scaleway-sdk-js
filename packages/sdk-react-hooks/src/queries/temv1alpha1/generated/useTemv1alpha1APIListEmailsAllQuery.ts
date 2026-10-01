@@ -11,5 +11,5 @@ export const useTemv1alpha1APIListEmailsAllQuery = (
   const { temv1alpha1 } = useTemv1alpha1API()
   const key = ["temv1alpha1", "listEmails", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => temv1alpha1.listEmails(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => temv1alpha1.listEmails(params, { signal }).all(), dataloaderConfig)
 }

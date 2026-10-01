@@ -12,5 +12,5 @@ export const useCockpitv1RegionalAPIListContactPointsInfiniteQuery = (
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
   const key = ["cockpitv1Regional", "listContactPoints", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => cockpitv1Regional.listContactPoints(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => cockpitv1Regional.listContactPoints(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

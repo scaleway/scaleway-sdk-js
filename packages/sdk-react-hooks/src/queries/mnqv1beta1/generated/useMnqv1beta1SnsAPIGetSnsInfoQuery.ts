@@ -11,5 +11,5 @@ export const useMnqv1beta1SnsAPIGetSnsInfoQuery = (
   const { mnqv1beta1Sns } = useMnqv1beta1SnsAPI()
   const key = ["mnqv1beta1Sns", "getSnsInfo", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mnqv1beta1Sns.getSnsInfo(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mnqv1beta1Sns.getSnsInfo(params, { signal }), dataloaderConfig)
 }

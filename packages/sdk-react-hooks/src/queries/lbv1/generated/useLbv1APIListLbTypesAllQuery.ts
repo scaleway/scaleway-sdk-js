@@ -11,5 +11,5 @@ export const useLbv1APIListLbTypesAllQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listLbTypes", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1.listLbTypes(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1.listLbTypes(params, { signal }).all(), dataloaderConfig)
 }

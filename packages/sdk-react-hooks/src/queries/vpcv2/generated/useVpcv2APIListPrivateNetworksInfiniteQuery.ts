@@ -12,5 +12,5 @@ export const useVpcv2APIListPrivateNetworksInfiniteQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listPrivateNetworks", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => vpcv2.listPrivateNetworks(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcv2.listPrivateNetworks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

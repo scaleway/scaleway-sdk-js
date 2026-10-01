@@ -11,5 +11,5 @@ export const useRdbv1APIGetReadReplicaQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "getReadReplica", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.getReadReplica(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.getReadReplica(params, { signal }), dataloaderConfig)
 }

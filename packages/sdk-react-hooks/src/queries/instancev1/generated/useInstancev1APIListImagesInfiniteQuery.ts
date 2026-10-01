@@ -12,5 +12,5 @@ export const useInstancev1APIListImagesInfiniteQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listImages", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev1.listImages(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev1.listImages(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

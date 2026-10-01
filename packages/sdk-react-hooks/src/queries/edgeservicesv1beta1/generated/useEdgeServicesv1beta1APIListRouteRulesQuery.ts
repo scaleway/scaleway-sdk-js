@@ -11,5 +11,5 @@ export const useEdgeServicesv1beta1APIListRouteRulesQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "listRouteRules", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => edgeServicesv1beta1.listRouteRules(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.listRouteRules(params, { signal }), dataloaderConfig)
 }

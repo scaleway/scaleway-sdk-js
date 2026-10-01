@@ -11,5 +11,5 @@ export const useCockpitv1RegionalAPIListProductsAllQuery = (
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
   const key = ["cockpitv1Regional", "listProducts", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Regional.listProducts(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Regional.listProducts(params, { signal }).all(), dataloaderConfig)
 }

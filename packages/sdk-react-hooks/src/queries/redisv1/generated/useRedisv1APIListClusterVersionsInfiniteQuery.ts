@@ -12,5 +12,5 @@ export const useRedisv1APIListClusterVersionsInfiniteQuery = (
   const { redisv1 } = useRedisv1API()
   const key = ["redisv1", "listClusterVersions", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => redisv1.listClusterVersions(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => redisv1.listClusterVersions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

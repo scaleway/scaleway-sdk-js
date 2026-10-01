@@ -11,5 +11,5 @@ export const useCockpitv1GlobalAPIGetCurrentPlanQuery = (
   const { cockpitv1Global } = useCockpitv1GlobalAPI()
   const key = ["cockpitv1Global", "getCurrentPlan", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Global.getCurrentPlan(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Global.getCurrentPlan(params, { signal }), dataloaderConfig)
 }

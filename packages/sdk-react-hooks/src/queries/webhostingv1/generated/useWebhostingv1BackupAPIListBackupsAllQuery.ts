@@ -11,5 +11,5 @@ export const useWebhostingv1BackupAPIListBackupsAllQuery = (
   const { webhostingv1Backup } = useWebhostingv1BackupAPI()
   const key = ["webhostingv1Backup", "listBackups", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1Backup.listBackups(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1Backup.listBackups(params, { signal }).all(), dataloaderConfig)
 }

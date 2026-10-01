@@ -11,5 +11,5 @@ export const useInstancev2alpha1VolumeAPIListVolumeTypesQuery = (
   const { instancev2alpha1Volume } = useInstancev2alpha1VolumeAPI()
   const key = ["instancev2alpha1Volume", "listVolumeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev2alpha1Volume.listVolumeTypes(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev2alpha1Volume.listVolumeTypes(params, { signal }), dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useDediboxv1RpnSanAPIListRpnSansInfiniteQuery = (
   const { dediboxv1RpnSan } = useDediboxv1RpnSanAPI()
   const key = ["dediboxv1RpnSan", "listRpnSans", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1RpnSan.listRpnSans(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1RpnSan.listRpnSans(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

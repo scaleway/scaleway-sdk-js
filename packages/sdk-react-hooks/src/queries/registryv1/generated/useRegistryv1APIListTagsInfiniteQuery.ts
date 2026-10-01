@@ -12,5 +12,5 @@ export const useRegistryv1APIListTagsInfiniteQuery = (
   const { registryv1 } = useRegistryv1API()
   const key = ["registryv1", "listTags", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => registryv1.listTags(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => registryv1.listTags(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

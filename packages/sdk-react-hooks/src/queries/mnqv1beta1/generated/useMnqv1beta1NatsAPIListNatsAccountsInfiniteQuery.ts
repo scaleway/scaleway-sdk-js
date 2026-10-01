@@ -12,5 +12,5 @@ export const useMnqv1beta1NatsAPIListNatsAccountsInfiniteQuery = (
   const { mnqv1beta1Nats } = useMnqv1beta1NatsAPI()
   const key = ["mnqv1beta1Nats", "listNatsAccounts", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => mnqv1beta1Nats.listNatsAccounts(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => mnqv1beta1Nats.listNatsAccounts(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useTemv1alpha1APIListOfferSubscriptionsInfiniteQuery = (
   const { temv1alpha1 } = useTemv1alpha1API()
   const key = ["temv1alpha1", "listOfferSubscriptions", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => temv1alpha1.listOfferSubscriptions(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => temv1alpha1.listOfferSubscriptions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

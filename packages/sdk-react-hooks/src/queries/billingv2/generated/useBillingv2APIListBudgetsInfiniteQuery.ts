@@ -12,5 +12,5 @@ export const useBillingv2APIListBudgetsInfiniteQuery = (
   const { billingv2 } = useBillingv2API()
   const key = ["billingv2", "listBudgets", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => billingv2.listBudgets(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => billingv2.listBudgets(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

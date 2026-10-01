@@ -11,5 +11,5 @@ export const useLbv1ZonedAPIListFrontendsQuery = (
   const { lbv1Zoned } = useLbv1ZonedAPI()
   const key = ["lbv1Zoned", "listFrontends", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1Zoned.listFrontends(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1Zoned.listFrontends(params, { signal }), dataloaderConfig)
 }

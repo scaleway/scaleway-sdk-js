@@ -12,5 +12,5 @@ export const useDediboxv1APIListFailoverIPsInfiniteQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "listFailoverIPs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1.listFailoverIPs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1.listFailoverIPs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

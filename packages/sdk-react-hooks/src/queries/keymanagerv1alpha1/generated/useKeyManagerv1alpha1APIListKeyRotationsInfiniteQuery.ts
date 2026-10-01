@@ -12,5 +12,5 @@ export const useKeyManagerv1alpha1APIListKeyRotationsInfiniteQuery = (
   const { keyManagerv1alpha1 } = useKeyManagerv1alpha1API()
   const key = ["keyManagerv1alpha1", "listKeyRotations", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => keyManagerv1alpha1.listKeyRotations(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => keyManagerv1alpha1.listKeyRotations(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

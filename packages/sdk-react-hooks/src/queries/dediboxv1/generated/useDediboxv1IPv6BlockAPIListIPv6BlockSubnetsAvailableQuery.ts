@@ -11,5 +11,5 @@ export const useDediboxv1IPv6BlockAPIListIPv6BlockSubnetsAvailableQuery = (
   const { dediboxv1IPv6Block } = useDediboxv1IPv6BlockAPI()
   const key = ["dediboxv1IPv6Block", "listIPv6BlockSubnetsAvailable", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1IPv6Block.listIPv6BlockSubnetsAvailable(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1IPv6Block.listIPv6BlockSubnetsAvailable(params, { signal }), dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useRdbv1APIListDatabaseEnginesInfiniteQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listDatabaseEngines", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => rdbv1.listDatabaseEngines(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => rdbv1.listDatabaseEngines(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

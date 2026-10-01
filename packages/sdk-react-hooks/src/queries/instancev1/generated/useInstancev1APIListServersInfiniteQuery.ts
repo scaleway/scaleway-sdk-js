@@ -12,5 +12,5 @@ export const useInstancev1APIListServersInfiniteQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listServers", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev1.listServers(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev1.listServers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

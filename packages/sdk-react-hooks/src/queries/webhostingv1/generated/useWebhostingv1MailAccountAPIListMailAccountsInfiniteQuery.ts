@@ -12,5 +12,5 @@ export const useWebhostingv1MailAccountAPIListMailAccountsInfiniteQuery = (
   const { webhostingv1MailAccount } = useWebhostingv1MailAccountAPI()
   const key = ["webhostingv1MailAccount", "listMailAccounts", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => webhostingv1MailAccount.listMailAccounts(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1MailAccount.listMailAccounts(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

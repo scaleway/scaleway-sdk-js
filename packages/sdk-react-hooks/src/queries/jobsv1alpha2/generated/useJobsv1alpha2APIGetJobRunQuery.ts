@@ -11,5 +11,5 @@ export const useJobsv1alpha2APIGetJobRunQuery = (
   const { jobsv1alpha2 } = useJobsv1alpha2API()
   const key = ["jobsv1alpha2", "getJobRun", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => jobsv1alpha2.getJobRun(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => jobsv1alpha2.getJobRun(params, { signal }), dataloaderConfig)
 }

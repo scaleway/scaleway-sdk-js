@@ -11,5 +11,5 @@ export const useJobsv1alpha2APIListTriggersQuery = (
   const { jobsv1alpha2 } = useJobsv1alpha2API()
   const key = ["jobsv1alpha2", "listTriggers", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => jobsv1alpha2.listTriggers(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => jobsv1alpha2.listTriggers(params, { signal }), dataloaderConfig)
 }

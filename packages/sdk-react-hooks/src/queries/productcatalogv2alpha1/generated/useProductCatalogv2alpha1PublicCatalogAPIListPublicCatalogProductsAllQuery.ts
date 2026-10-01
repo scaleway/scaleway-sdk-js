@@ -11,5 +11,5 @@ export const useProductCatalogv2alpha1PublicCatalogAPIListPublicCatalogProductsA
   const { productCatalogv2alpha1PublicCatalog } = useProductCatalogv2alpha1PublicCatalogAPI()
   const key = ["productCatalogv2alpha1PublicCatalog", "listPublicCatalogProducts", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => productCatalogv2alpha1PublicCatalog.listPublicCatalogProducts(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => productCatalogv2alpha1PublicCatalog.listPublicCatalogProducts(params, { signal }).all(), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useDediboxv1APIListServerEventsAllQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "listServerEvents", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.listServerEvents(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.listServerEvents(params, { signal }).all(), dataloaderConfig)
 }

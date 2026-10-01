@@ -11,5 +11,5 @@ export const useK8Sv1APIGetUserDataQuery = (
   const { k8Sv1 } = useK8Sv1API()
   const key = ["k8Sv1", "getUserData", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => k8Sv1.getUserData(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => k8Sv1.getUserData(params, { signal }), dataloaderConfig)
 }

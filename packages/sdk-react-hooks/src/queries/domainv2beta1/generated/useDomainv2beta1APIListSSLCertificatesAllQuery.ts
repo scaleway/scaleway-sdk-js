@@ -11,5 +11,5 @@ export const useDomainv2beta1APIListSSLCertificatesAllQuery = (
   const { domainv2beta1 } = useDomainv2beta1API()
   const key = ["domainv2beta1", "listSSLCertificates", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => domainv2beta1.listSSLCertificates(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => domainv2beta1.listSSLCertificates(params, { signal }).all(), dataloaderConfig)
 }

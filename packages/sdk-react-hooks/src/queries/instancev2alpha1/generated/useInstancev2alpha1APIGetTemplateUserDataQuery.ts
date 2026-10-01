@@ -11,5 +11,5 @@ export const useInstancev2alpha1APIGetTemplateUserDataQuery = (
   const { instancev2alpha1 } = useInstancev2alpha1API()
   const key = ["instancev2alpha1", "getTemplateUserData", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev2alpha1.getTemplateUserData(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev2alpha1.getTemplateUserData(params, { signal }), dataloaderConfig)
 }

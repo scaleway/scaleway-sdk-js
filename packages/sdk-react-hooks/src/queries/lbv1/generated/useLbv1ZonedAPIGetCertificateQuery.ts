@@ -11,5 +11,5 @@ export const useLbv1ZonedAPIGetCertificateQuery = (
   const { lbv1Zoned } = useLbv1ZonedAPI()
   const key = ["lbv1Zoned", "getCertificate", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1Zoned.getCertificate(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1Zoned.getCertificate(params, { signal }), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useVpcv2APIGetRouteQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "getRoute", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcv2.getRoute(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcv2.getRoute(params, { signal }), dataloaderConfig)
 }

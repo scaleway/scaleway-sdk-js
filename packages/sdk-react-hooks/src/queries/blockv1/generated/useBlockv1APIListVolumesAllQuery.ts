@@ -11,5 +11,5 @@ export const useBlockv1APIListVolumesAllQuery = (
   const { blockv1 } = useBlockv1API()
   const key = ["blockv1", "listVolumes", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => blockv1.listVolumes(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => blockv1.listVolumes(params, { signal }).all(), dataloaderConfig)
 }

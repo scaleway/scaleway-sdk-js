@@ -11,5 +11,5 @@ export const useInstancev1APIGetIpQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "getIp", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev1.getIp(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev1.getIp(params, { signal }), dataloaderConfig)
 }

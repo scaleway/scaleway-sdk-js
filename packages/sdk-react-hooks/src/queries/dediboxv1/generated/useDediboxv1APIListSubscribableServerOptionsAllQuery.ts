@@ -11,5 +11,5 @@ export const useDediboxv1APIListSubscribableServerOptionsAllQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "listSubscribableServerOptions", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.listSubscribableServerOptions(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.listSubscribableServerOptions(params, { signal }).all(), dataloaderConfig)
 }

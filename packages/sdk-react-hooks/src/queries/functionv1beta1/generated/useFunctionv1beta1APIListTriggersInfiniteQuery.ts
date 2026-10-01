@@ -12,5 +12,5 @@ export const useFunctionv1beta1APIListTriggersInfiniteQuery = (
   const { functionv1beta1 } = useFunctionv1beta1API()
   const key = ["functionv1beta1", "listTriggers", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => functionv1beta1.listTriggers(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => functionv1beta1.listTriggers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

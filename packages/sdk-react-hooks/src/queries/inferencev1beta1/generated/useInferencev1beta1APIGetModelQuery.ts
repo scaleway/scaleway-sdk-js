@@ -11,5 +11,5 @@ export const useInferencev1beta1APIGetModelQuery = (
   const { inferencev1beta1 } = useInferencev1beta1API()
   const key = ["inferencev1beta1", "getModel", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => inferencev1beta1.getModel(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => inferencev1beta1.getModel(params, { signal }), dataloaderConfig)
 }

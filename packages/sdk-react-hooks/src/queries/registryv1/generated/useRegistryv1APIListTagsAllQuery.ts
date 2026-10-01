@@ -11,5 +11,5 @@ export const useRegistryv1APIListTagsAllQuery = (
   const { registryv1 } = useRegistryv1API()
   const key = ["registryv1", "listTags", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => registryv1.listTags(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => registryv1.listTags(params, { signal }).all(), dataloaderConfig)
 }

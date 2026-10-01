@@ -12,5 +12,5 @@ export const useVpcv2APIListSubnetOverlapsInfiniteQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listSubnetOverlaps", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => vpcv2.listSubnetOverlaps(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcv2.listSubnetOverlaps(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

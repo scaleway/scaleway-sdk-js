@@ -12,5 +12,5 @@ export const useInstancev2alpha1VolumeAPIListVolumeTypesInfiniteQuery = (
   const { instancev2alpha1Volume } = useInstancev2alpha1VolumeAPI()
   const key = ["instancev2alpha1Volume", "listVolumeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev2alpha1Volume.listVolumeTypes(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev2alpha1Volume.listVolumeTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

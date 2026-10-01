@@ -11,5 +11,5 @@ export const useRedisv1APIGetClusterCertificateQuery = (
   const { redisv1 } = useRedisv1API()
   const key = ["redisv1", "getClusterCertificate", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => redisv1.getClusterCertificate(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => redisv1.getClusterCertificate(params, { signal }), dataloaderConfig)
 }

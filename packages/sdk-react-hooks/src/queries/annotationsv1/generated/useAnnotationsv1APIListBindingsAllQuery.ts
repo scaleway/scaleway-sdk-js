@@ -11,5 +11,5 @@ export const useAnnotationsv1APIListBindingsAllQuery = (
   const { annotationsv1 } = useAnnotationsv1API()
   const key = ["annotationsv1", "listBindings", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => annotationsv1.listBindings(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => annotationsv1.listBindings(params, { signal }).all(), dataloaderConfig)
 }

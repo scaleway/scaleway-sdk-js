@@ -11,5 +11,5 @@ export const useCockpitv1RegionalAPIGetAlertManagerQuery = (
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
   const key = ["cockpitv1Regional", "getAlertManager", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Regional.getAlertManager(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Regional.getAlertManager(params, { signal }), dataloaderConfig)
 }

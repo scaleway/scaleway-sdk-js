@@ -12,5 +12,5 @@ export const useAuditTrailv1alpha1APIListExportJobsInfiniteQuery = (
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
   const key = ["auditTrailv1alpha1", "listExportJobs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => auditTrailv1alpha1.listExportJobs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => auditTrailv1alpha1.listExportJobs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

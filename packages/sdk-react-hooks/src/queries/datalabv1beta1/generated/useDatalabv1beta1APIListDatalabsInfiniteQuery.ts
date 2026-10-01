@@ -12,5 +12,5 @@ export const useDatalabv1beta1APIListDatalabsInfiniteQuery = (
   const { datalabv1beta1 } = useDatalabv1beta1API()
   const key = ["datalabv1beta1", "listDatalabs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => datalabv1beta1.listDatalabs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => datalabv1beta1.listDatalabs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

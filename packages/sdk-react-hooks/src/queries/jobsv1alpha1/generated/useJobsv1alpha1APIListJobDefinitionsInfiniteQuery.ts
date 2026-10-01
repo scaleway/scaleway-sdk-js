@@ -12,5 +12,5 @@ export const useJobsv1alpha1APIListJobDefinitionsInfiniteQuery = (
   const { jobsv1alpha1 } = useJobsv1alpha1API()
   const key = ["jobsv1alpha1", "listJobDefinitions", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => jobsv1alpha1.listJobDefinitions(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => jobsv1alpha1.listJobDefinitions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

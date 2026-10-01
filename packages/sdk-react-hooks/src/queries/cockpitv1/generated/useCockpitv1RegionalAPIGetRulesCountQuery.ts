@@ -11,5 +11,5 @@ export const useCockpitv1RegionalAPIGetRulesCountQuery = (
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
   const key = ["cockpitv1Regional", "getRulesCount", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Regional.getRulesCount(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Regional.getRulesCount(params, { signal }), dataloaderConfig)
 }

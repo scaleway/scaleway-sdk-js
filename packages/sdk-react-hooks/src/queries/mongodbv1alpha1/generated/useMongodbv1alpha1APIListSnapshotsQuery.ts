@@ -11,5 +11,5 @@ export const useMongodbv1alpha1APIListSnapshotsQuery = (
   const { mongodbv1alpha1 } = useMongodbv1alpha1API()
   const key = ["mongodbv1alpha1", "listSnapshots", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1alpha1.listSnapshots(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1alpha1.listSnapshots(params, { signal }), dataloaderConfig)
 }

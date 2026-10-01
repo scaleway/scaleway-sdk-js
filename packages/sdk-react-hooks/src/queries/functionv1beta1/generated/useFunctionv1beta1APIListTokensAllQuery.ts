@@ -11,5 +11,5 @@ export const useFunctionv1beta1APIListTokensAllQuery = (
   const { functionv1beta1 } = useFunctionv1beta1API()
   const key = ["functionv1beta1", "listTokens", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => functionv1beta1.listTokens(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => functionv1beta1.listTokens(params, { signal }).all(), dataloaderConfig)
 }

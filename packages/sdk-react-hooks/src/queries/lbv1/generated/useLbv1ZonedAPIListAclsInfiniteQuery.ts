@@ -12,5 +12,5 @@ export const useLbv1ZonedAPIListAclsInfiniteQuery = (
   const { lbv1Zoned } = useLbv1ZonedAPI()
   const key = ["lbv1Zoned", "listAcls", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => lbv1Zoned.listAcls(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => lbv1Zoned.listAcls(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

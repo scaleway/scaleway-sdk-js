@@ -11,5 +11,5 @@ export const useMongodbv1APIListDatabasesQuery = (
   const { mongodbv1 } = useMongodbv1API()
   const key = ["mongodbv1", "listDatabases", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1.listDatabases(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1.listDatabases(params, { signal }), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useRedisv1APIListClusterVersionsAllQuery = (
   const { redisv1 } = useRedisv1API()
   const key = ["redisv1", "listClusterVersions", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => redisv1.listClusterVersions(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => redisv1.listClusterVersions(params, { signal }).all(), dataloaderConfig)
 }

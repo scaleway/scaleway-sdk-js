@@ -12,5 +12,5 @@ export const useTemv1alpha1APIListBlocklistsInfiniteQuery = (
   const { temv1alpha1 } = useTemv1alpha1API()
   const key = ["temv1alpha1", "listBlocklists", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => temv1alpha1.listBlocklists(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => temv1alpha1.listBlocklists(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

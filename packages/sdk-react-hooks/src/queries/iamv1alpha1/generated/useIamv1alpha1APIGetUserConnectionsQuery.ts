@@ -11,5 +11,5 @@ export const useIamv1alpha1APIGetUserConnectionsQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "getUserConnections", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iamv1alpha1.getUserConnections(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iamv1alpha1.getUserConnections(params, { signal }), dataloaderConfig)
 }
