@@ -12,5 +12,5 @@ export const useQaasv1alpha1APIListSessionACLsInfiniteQuery = (
   const { qaasv1alpha1 } = useQaasv1alpha1API()
   const key = ["qaasv1alpha1", "listSessionACLs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => qaasv1alpha1.listSessionACLs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => qaasv1alpha1.listSessionACLs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

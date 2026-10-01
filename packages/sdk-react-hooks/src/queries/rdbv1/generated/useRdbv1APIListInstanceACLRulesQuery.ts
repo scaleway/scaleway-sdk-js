@@ -11,5 +11,5 @@ export const useRdbv1APIListInstanceACLRulesQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listInstanceACLRules", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.listInstanceACLRules(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.listInstanceACLRules(params, { signal }), dataloaderConfig)
 }

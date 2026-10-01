@@ -12,5 +12,5 @@ export const useVpcgwv2APIListIPsInfiniteQuery = (
   const { vpcgwv2 } = useVpcgwv2API()
   const key = ["vpcgwv2", "listIPs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => vpcgwv2.listIPs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcgwv2.listIPs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

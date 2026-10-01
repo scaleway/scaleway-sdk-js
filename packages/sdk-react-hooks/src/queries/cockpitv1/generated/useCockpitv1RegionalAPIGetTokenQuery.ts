@@ -11,5 +11,5 @@ export const useCockpitv1RegionalAPIGetTokenQuery = (
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
   const key = ["cockpitv1Regional", "getToken", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Regional.getToken(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Regional.getToken(params, { signal }), dataloaderConfig)
 }

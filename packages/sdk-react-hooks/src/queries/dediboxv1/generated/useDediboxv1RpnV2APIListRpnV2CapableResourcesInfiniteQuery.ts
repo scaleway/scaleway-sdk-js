@@ -12,5 +12,5 @@ export const useDediboxv1RpnV2APIListRpnV2CapableResourcesInfiniteQuery = (
   const { dediboxv1RpnV2 } = useDediboxv1RpnV2API()
   const key = ["dediboxv1RpnV2", "listRpnV2CapableResources", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1RpnV2.listRpnV2CapableResources(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1RpnV2.listRpnV2CapableResources(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

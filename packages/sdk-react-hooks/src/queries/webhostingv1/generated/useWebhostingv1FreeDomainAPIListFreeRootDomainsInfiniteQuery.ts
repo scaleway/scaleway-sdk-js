@@ -12,5 +12,5 @@ export const useWebhostingv1FreeDomainAPIListFreeRootDomainsInfiniteQuery = (
   const { webhostingv1FreeDomain } = useWebhostingv1FreeDomainAPI()
   const key = ["webhostingv1FreeDomain", "listFreeRootDomains", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => webhostingv1FreeDomain.listFreeRootDomains(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1FreeDomain.listFreeRootDomains(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

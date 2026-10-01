@@ -11,5 +11,5 @@ export const useApplesiliconv1alpha1APIGetServerQuery = (
   const { applesiliconv1alpha1 } = useApplesiliconv1alpha1API()
   const key = ["applesiliconv1alpha1", "getServer", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => applesiliconv1alpha1.getServer(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => applesiliconv1alpha1.getServer(params, { signal }), dataloaderConfig)
 }

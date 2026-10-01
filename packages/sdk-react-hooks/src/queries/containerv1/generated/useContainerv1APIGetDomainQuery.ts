@@ -11,5 +11,5 @@ export const useContainerv1APIGetDomainQuery = (
   const { containerv1 } = useContainerv1API()
   const key = ["containerv1", "getDomain", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => containerv1.getDomain(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => containerv1.getDomain(params, { signal }), dataloaderConfig)
 }

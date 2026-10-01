@@ -12,5 +12,5 @@ export const useMnqv1beta1SqsAPIListSqsCredentialsInfiniteQuery = (
   const { mnqv1beta1Sqs } = useMnqv1beta1SqsAPI()
   const key = ["mnqv1beta1Sqs", "listSqsCredentials", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => mnqv1beta1Sqs.listSqsCredentials(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => mnqv1beta1Sqs.listSqsCredentials(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

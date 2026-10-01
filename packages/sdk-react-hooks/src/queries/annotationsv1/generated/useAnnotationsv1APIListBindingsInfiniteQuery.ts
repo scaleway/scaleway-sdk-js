@@ -12,5 +12,5 @@ export const useAnnotationsv1APIListBindingsInfiniteQuery = (
   const { annotationsv1 } = useAnnotationsv1API()
   const key = ["annotationsv1", "listBindings", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => annotationsv1.listBindings(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => annotationsv1.listBindings(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useVpcv2APIListSubnetOverlapsQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listSubnetOverlaps", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcv2.listSubnetOverlaps(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcv2.listSubnetOverlaps(params, { signal }), dataloaderConfig)
 }

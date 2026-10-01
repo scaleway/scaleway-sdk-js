@@ -11,5 +11,5 @@ export const useAuditTrailv1alpha1APIListCustomAlertRulesAllQuery = (
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
   const key = ["auditTrailv1alpha1", "listCustomAlertRules", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => auditTrailv1alpha1.listCustomAlertRules(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => auditTrailv1alpha1.listCustomAlertRules(params, { signal }).all(), dataloaderConfig)
 }

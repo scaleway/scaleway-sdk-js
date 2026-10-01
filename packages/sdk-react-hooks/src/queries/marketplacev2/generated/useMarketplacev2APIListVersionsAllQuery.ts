@@ -11,5 +11,5 @@ export const useMarketplacev2APIListVersionsAllQuery = (
   const { marketplacev2 } = useMarketplacev2API()
   const key = ["marketplacev2", "listVersions", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => marketplacev2.listVersions(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => marketplacev2.listVersions(params, { signal }).all(), dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useVpcv2APIListVPCConnectorsInfiniteQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listVPCConnectors", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => vpcv2.listVPCConnectors(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcv2.listVPCConnectors(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

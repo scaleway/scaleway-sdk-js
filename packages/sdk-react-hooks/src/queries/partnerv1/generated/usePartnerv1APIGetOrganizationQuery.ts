@@ -11,5 +11,5 @@ export const usePartnerv1APIGetOrganizationQuery = (
   const { partnerv1 } = usePartnerv1API()
   const key = ["partnerv1", "getOrganization", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => partnerv1.getOrganization(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => partnerv1.getOrganization(params, { signal }), dataloaderConfig)
 }

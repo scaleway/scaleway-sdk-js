@@ -11,5 +11,5 @@ export const useDediboxv1APIListServerDisksAllQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "listServerDisks", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.listServerDisks(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.listServerDisks(params, { signal }).all(), dataloaderConfig)
 }

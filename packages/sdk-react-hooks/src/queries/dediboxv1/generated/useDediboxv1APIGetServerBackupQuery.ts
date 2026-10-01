@@ -11,5 +11,5 @@ export const useDediboxv1APIGetServerBackupQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getServerBackup", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getServerBackup(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getServerBackup(params, { signal }), dataloaderConfig)
 }

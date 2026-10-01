@@ -12,5 +12,5 @@ export const useWebhostingv1DatabaseAPIListDatabaseUsersInfiniteQuery = (
   const { webhostingv1Database } = useWebhostingv1DatabaseAPI()
   const key = ["webhostingv1Database", "listDatabaseUsers", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => webhostingv1Database.listDatabaseUsers(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1Database.listDatabaseUsers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

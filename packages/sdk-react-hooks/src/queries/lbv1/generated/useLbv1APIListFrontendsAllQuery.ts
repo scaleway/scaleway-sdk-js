@@ -11,5 +11,5 @@ export const useLbv1APIListFrontendsAllQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listFrontends", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1.listFrontends(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1.listFrontends(params, { signal }).all(), dataloaderConfig)
 }

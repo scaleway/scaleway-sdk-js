@@ -11,5 +11,5 @@ export const useIotv1APIListDevicesAllQuery = (
   const { iotv1 } = useIotv1API()
   const key = ["iotv1", "listDevices", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iotv1.listDevices(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iotv1.listDevices(params, { signal }).all(), dataloaderConfig)
 }

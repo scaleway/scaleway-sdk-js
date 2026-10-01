@@ -12,5 +12,5 @@ export const useVpcgwv2APIListGatewayNetworksInfiniteQuery = (
   const { vpcgwv2 } = useVpcgwv2API()
   const key = ["vpcgwv2", "listGatewayNetworks", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => vpcgwv2.listGatewayNetworks(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcgwv2.listGatewayNetworks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

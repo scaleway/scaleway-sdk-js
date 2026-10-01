@@ -11,5 +11,5 @@ export const useAccountv3ContractAPIListContractSignaturesQuery = (
   const { accountv3Contract } = useAccountv3ContractAPI()
   const key = ["accountv3Contract", "listContractSignatures", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => accountv3Contract.listContractSignatures(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => accountv3Contract.listContractSignatures(params, { signal }), dataloaderConfig)
 }

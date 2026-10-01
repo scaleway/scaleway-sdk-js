@@ -11,5 +11,5 @@ export const useMarketplacev2APIGetVersionQuery = (
   const { marketplacev2 } = useMarketplacev2API()
   const key = ["marketplacev2", "getVersion", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => marketplacev2.getVersion(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => marketplacev2.getVersion(params, { signal }), dataloaderConfig)
 }

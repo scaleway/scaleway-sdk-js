@@ -11,5 +11,5 @@ export const useVpcv2APIListVPCsAllQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listVPCs", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcv2.listVPCs(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcv2.listVPCs(params, { signal }).all(), dataloaderConfig)
 }

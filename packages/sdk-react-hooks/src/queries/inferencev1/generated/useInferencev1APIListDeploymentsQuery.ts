@@ -11,5 +11,5 @@ export const useInferencev1APIListDeploymentsQuery = (
   const { inferencev1 } = useInferencev1API()
   const key = ["inferencev1", "listDeployments", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => inferencev1.listDeployments(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => inferencev1.listDeployments(params, { signal }), dataloaderConfig)
 }

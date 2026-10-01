@@ -12,5 +12,5 @@ export const useDediboxv1APIListOSInfiniteQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "listOS", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1.listOS(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1.listOS(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

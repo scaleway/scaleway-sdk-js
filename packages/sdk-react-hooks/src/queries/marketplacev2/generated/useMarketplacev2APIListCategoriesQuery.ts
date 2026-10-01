@@ -11,5 +11,5 @@ export const useMarketplacev2APIListCategoriesQuery = (
   const { marketplacev2 } = useMarketplacev2API()
   const key = ["marketplacev2", "listCategories", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => marketplacev2.listCategories(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => marketplacev2.listCategories(params, { signal }), dataloaderConfig)
 }

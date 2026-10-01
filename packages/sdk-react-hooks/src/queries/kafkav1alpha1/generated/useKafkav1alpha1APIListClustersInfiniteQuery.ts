@@ -12,5 +12,5 @@ export const useKafkav1alpha1APIListClustersInfiniteQuery = (
   const { kafkav1alpha1 } = useKafkav1alpha1API()
   const key = ["kafkav1alpha1", "listClusters", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => kafkav1alpha1.listClusters(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => kafkav1alpha1.listClusters(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

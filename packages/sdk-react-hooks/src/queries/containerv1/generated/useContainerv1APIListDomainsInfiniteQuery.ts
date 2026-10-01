@@ -12,5 +12,5 @@ export const useContainerv1APIListDomainsInfiniteQuery = (
   const { containerv1 } = useContainerv1API()
   const key = ["containerv1", "listDomains", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => containerv1.listDomains(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => containerv1.listDomains(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useQaasv1alpha1APIListApplicationsInfiniteQuery = (
   const { qaasv1alpha1 } = useQaasv1alpha1API()
   const key = ["qaasv1alpha1", "listApplications", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => qaasv1alpha1.listApplications(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => qaasv1alpha1.listApplications(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

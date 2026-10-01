@@ -12,5 +12,5 @@ export const useLbv1APIListBackendStatsInfiniteQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listBackendStats", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => lbv1.listBackendStats(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => lbv1.listBackendStats(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

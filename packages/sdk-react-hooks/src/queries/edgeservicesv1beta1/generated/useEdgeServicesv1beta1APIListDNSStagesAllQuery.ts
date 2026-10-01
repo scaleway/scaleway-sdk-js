@@ -11,5 +11,5 @@ export const useEdgeServicesv1beta1APIListDNSStagesAllQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "listDNSStages", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => edgeServicesv1beta1.listDNSStages(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.listDNSStages(params, { signal }).all(), dataloaderConfig)
 }

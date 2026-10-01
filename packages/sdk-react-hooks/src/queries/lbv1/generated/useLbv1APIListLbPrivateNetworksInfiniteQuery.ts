@@ -12,5 +12,5 @@ export const useLbv1APIListLbPrivateNetworksInfiniteQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listLbPrivateNetworks", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => lbv1.listLbPrivateNetworks(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => lbv1.listLbPrivateNetworks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

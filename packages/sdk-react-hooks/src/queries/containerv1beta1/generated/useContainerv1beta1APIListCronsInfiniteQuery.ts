@@ -12,5 +12,5 @@ export const useContainerv1beta1APIListCronsInfiniteQuery = (
   const { containerv1beta1 } = useContainerv1beta1API()
   const key = ["containerv1beta1", "listCrons", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => containerv1beta1.listCrons(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => containerv1beta1.listCrons(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

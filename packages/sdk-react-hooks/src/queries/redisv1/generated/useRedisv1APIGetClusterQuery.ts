@@ -11,5 +11,5 @@ export const useRedisv1APIGetClusterQuery = (
   const { redisv1 } = useRedisv1API()
   const key = ["redisv1", "getCluster", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => redisv1.getCluster(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => redisv1.getCluster(params, { signal }), dataloaderConfig)
 }

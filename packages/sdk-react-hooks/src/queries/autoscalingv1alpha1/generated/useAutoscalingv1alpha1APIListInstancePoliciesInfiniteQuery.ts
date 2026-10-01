@@ -12,5 +12,5 @@ export const useAutoscalingv1alpha1APIListInstancePoliciesInfiniteQuery = (
   const { autoscalingv1alpha1 } = useAutoscalingv1alpha1API()
   const key = ["autoscalingv1alpha1", "listInstancePolicies", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => autoscalingv1alpha1.listInstancePolicies(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => autoscalingv1alpha1.listInstancePolicies(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

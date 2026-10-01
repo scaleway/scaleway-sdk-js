@@ -12,5 +12,5 @@ export const useWebhostingv1ControlPanelAPIListControlPanelsInfiniteQuery = (
   const { webhostingv1ControlPanel } = useWebhostingv1ControlPanelAPI()
   const key = ["webhostingv1ControlPanel", "listControlPanels", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => webhostingv1ControlPanel.listControlPanels(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1ControlPanel.listControlPanels(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

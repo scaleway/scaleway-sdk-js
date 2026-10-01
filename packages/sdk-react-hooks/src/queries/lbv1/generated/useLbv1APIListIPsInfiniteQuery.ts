@@ -12,5 +12,5 @@ export const useLbv1APIListIPsInfiniteQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listIPs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => lbv1.listIPs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => lbv1.listIPs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

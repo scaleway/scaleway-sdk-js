@@ -11,5 +11,5 @@ export const useWebhostingv1HostingAPIGetHostingQuery = (
   const { webhostingv1Hosting } = useWebhostingv1HostingAPI()
   const key = ["webhostingv1Hosting", "getHosting", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1Hosting.getHosting(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1Hosting.getHosting(params, { signal }), dataloaderConfig)
 }

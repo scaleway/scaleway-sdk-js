@@ -11,5 +11,5 @@ export const useCockpitv1RegionalAPIGetConfigQuery = (
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
   const key = ["cockpitv1Regional", "getConfig", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Regional.getConfig(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Regional.getConfig(params, { signal }), dataloaderConfig)
 }

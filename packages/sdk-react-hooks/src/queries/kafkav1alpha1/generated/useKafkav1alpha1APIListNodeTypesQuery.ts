@@ -11,5 +11,5 @@ export const useKafkav1alpha1APIListNodeTypesQuery = (
   const { kafkav1alpha1 } = useKafkav1alpha1API()
   const key = ["kafkav1alpha1", "listNodeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => kafkav1alpha1.listNodeTypes(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => kafkav1alpha1.listNodeTypes(params, { signal }), dataloaderConfig)
 }

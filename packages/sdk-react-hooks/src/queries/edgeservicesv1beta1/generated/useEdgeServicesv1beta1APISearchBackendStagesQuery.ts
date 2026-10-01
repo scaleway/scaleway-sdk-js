@@ -11,5 +11,5 @@ export const useEdgeServicesv1beta1APISearchBackendStagesQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "searchBackendStages", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => edgeServicesv1beta1.searchBackendStages(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.searchBackendStages(params, { signal }), dataloaderConfig)
 }

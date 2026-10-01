@@ -12,5 +12,5 @@ export const usePartnerv1APIListOrganizationsInfiniteQuery = (
   const { partnerv1 } = usePartnerv1API()
   const key = ["partnerv1", "listOrganizations", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => partnerv1.listOrganizations(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => partnerv1.listOrganizations(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

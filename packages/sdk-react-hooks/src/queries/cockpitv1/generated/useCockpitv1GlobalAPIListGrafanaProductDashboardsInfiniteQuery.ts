@@ -12,5 +12,5 @@ export const useCockpitv1GlobalAPIListGrafanaProductDashboardsInfiniteQuery = (
   const { cockpitv1Global } = useCockpitv1GlobalAPI()
   const key = ["cockpitv1Global", "listGrafanaProductDashboards", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => cockpitv1Global.listGrafanaProductDashboards(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => cockpitv1Global.listGrafanaProductDashboards(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

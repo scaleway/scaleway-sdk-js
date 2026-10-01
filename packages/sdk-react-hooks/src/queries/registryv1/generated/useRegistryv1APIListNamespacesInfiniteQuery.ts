@@ -12,5 +12,5 @@ export const useRegistryv1APIListNamespacesInfiniteQuery = (
   const { registryv1 } = useRegistryv1API()
   const key = ["registryv1", "listNamespaces", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => registryv1.listNamespaces(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => registryv1.listNamespaces(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

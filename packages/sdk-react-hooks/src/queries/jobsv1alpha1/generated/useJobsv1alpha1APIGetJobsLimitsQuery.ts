@@ -11,5 +11,5 @@ export const useJobsv1alpha1APIGetJobsLimitsQuery = (
   const { jobsv1alpha1 } = useJobsv1alpha1API()
   const key = ["jobsv1alpha1", "getJobsLimits", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => jobsv1alpha1.getJobsLimits(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => jobsv1alpha1.getJobsLimits(params, { signal }), dataloaderConfig)
 }

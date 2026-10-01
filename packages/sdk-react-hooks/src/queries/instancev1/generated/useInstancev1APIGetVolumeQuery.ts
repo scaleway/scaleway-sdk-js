@@ -11,5 +11,5 @@ export const useInstancev1APIGetVolumeQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "getVolume", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev1.getVolume(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev1.getVolume(params, { signal }), dataloaderConfig)
 }

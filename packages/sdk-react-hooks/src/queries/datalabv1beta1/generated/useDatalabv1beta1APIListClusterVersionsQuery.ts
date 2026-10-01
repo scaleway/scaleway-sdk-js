@@ -11,5 +11,5 @@ export const useDatalabv1beta1APIListClusterVersionsQuery = (
   const { datalabv1beta1 } = useDatalabv1beta1API()
   const key = ["datalabv1beta1", "listClusterVersions", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => datalabv1beta1.listClusterVersions(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => datalabv1beta1.listClusterVersions(params, { signal }), dataloaderConfig)
 }

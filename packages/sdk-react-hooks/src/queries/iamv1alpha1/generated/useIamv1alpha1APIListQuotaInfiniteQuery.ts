@@ -12,5 +12,5 @@ export const useIamv1alpha1APIListQuotaInfiniteQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listQuota", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => iamv1alpha1.listQuota(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => iamv1alpha1.listQuota(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

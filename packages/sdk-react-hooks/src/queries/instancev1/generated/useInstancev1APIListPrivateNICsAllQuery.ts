@@ -11,5 +11,5 @@ export const useInstancev1APIListPrivateNICsAllQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listPrivateNICs", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev1.listPrivateNICs(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev1.listPrivateNICs(params, { signal }).all(), dataloaderConfig)
 }

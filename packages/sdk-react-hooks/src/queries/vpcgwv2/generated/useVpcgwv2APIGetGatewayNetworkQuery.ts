@@ -11,5 +11,5 @@ export const useVpcgwv2APIGetGatewayNetworkQuery = (
   const { vpcgwv2 } = useVpcgwv2API()
   const key = ["vpcgwv2", "getGatewayNetwork", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcgwv2.getGatewayNetwork(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcgwv2.getGatewayNetwork(params, { signal }), dataloaderConfig)
 }

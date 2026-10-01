@@ -11,5 +11,5 @@ export const useMongodbv1APIListVersionsQuery = (
   const { mongodbv1 } = useMongodbv1API()
   const key = ["mongodbv1", "listVersions", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1.listVersions(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1.listVersions(params, { signal }), dataloaderConfig)
 }

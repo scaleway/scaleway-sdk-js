@@ -11,5 +11,5 @@ export const useIotv1APIListTwinDocumentsQuery = (
   const { iotv1 } = useIotv1API()
   const key = ["iotv1", "listTwinDocuments", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iotv1.listTwinDocuments(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iotv1.listTwinDocuments(params, { signal }), dataloaderConfig)
 }

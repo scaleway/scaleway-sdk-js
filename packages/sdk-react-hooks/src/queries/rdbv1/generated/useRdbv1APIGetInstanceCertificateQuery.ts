@@ -11,5 +11,5 @@ export const useRdbv1APIGetInstanceCertificateQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "getInstanceCertificate", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.getInstanceCertificate(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.getInstanceCertificate(params, { signal }), dataloaderConfig)
 }

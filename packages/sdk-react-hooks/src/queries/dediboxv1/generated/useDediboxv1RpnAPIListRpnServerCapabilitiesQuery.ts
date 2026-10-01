@@ -11,5 +11,5 @@ export const useDediboxv1RpnAPIListRpnServerCapabilitiesQuery = (
   const { dediboxv1Rpn } = useDediboxv1RpnAPI()
   const key = ["dediboxv1Rpn", "listRpnServerCapabilities", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1Rpn.listRpnServerCapabilities(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1Rpn.listRpnServerCapabilities(params, { signal }), dataloaderConfig)
 }

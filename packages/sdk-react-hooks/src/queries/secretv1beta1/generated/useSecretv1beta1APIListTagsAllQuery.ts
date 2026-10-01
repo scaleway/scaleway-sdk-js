@@ -11,5 +11,5 @@ export const useSecretv1beta1APIListTagsAllQuery = (
   const { secretv1beta1 } = useSecretv1beta1API()
   const key = ["secretv1beta1", "listTags", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => secretv1beta1.listTags(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => secretv1beta1.listTags(params, { signal }).all(), dataloaderConfig)
 }

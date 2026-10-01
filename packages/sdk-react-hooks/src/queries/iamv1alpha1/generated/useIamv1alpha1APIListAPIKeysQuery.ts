@@ -11,5 +11,5 @@ export const useIamv1alpha1APIListAPIKeysQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listAPIKeys", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iamv1alpha1.listAPIKeys(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iamv1alpha1.listAPIKeys(params, { signal }), dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useDediboxv1RpnV1APIListRpnCapableServersInfiniteQuery = (
   const { dediboxv1RpnV1 } = useDediboxv1RpnV1API()
   const key = ["dediboxv1RpnV1", "listRpnCapableServers", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1RpnV1.listRpnCapableServers(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1RpnV1.listRpnCapableServers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

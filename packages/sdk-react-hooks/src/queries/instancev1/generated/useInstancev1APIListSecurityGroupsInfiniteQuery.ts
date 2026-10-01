@@ -12,5 +12,5 @@ export const useInstancev1APIListSecurityGroupsInfiniteQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listSecurityGroups", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev1.listSecurityGroups(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev1.listSecurityGroups(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useBaremetalv1APIListOptionsQuery = (
   const { baremetalv1 } = useBaremetalv1API()
   const key = ["baremetalv1", "listOptions", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => baremetalv1.listOptions(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => baremetalv1.listOptions(params, { signal }), dataloaderConfig)
 }

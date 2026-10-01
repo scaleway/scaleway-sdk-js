@@ -11,5 +11,5 @@ export const useRedisv1APIGetEndpointQuery = (
   const { redisv1 } = useRedisv1API()
   const key = ["redisv1", "getEndpoint", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => redisv1.getEndpoint(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => redisv1.getEndpoint(params, { signal }), dataloaderConfig)
 }

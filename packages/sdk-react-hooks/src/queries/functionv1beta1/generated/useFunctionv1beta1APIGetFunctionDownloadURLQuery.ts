@@ -11,5 +11,5 @@ export const useFunctionv1beta1APIGetFunctionDownloadURLQuery = (
   const { functionv1beta1 } = useFunctionv1beta1API()
   const key = ["functionv1beta1", "getFunctionDownloadURL", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => functionv1beta1.getFunctionDownloadURL(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => functionv1beta1.getFunctionDownloadURL(params, { signal }), dataloaderConfig)
 }

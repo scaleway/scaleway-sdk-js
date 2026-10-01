@@ -12,5 +12,5 @@ export const useEdgeServicesv1beta1APIListHeadStagesInfiniteQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "listHeadStages", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => edgeServicesv1beta1.listHeadStages(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => edgeServicesv1beta1.listHeadStages(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

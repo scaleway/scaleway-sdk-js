@@ -11,5 +11,5 @@ export const useLbv1ZonedAPIListIPsAllQuery = (
   const { lbv1Zoned } = useLbv1ZonedAPI()
   const key = ["lbv1Zoned", "listIPs", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1Zoned.listIPs(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1Zoned.listIPs(params, { signal }).all(), dataloaderConfig)
 }

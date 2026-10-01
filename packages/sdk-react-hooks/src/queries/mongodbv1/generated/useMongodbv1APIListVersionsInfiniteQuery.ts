@@ -12,5 +12,5 @@ export const useMongodbv1APIListVersionsInfiniteQuery = (
   const { mongodbv1 } = useMongodbv1API()
   const key = ["mongodbv1", "listVersions", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => mongodbv1.listVersions(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => mongodbv1.listVersions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

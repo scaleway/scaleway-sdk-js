@@ -11,5 +11,5 @@ export const useLbv1APIListAclsQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listAcls", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1.listAcls(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1.listAcls(params, { signal }), dataloaderConfig)
 }

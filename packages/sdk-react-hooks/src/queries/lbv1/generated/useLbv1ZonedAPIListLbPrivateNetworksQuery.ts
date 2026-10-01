@@ -11,5 +11,5 @@ export const useLbv1ZonedAPIListLbPrivateNetworksQuery = (
   const { lbv1Zoned } = useLbv1ZonedAPI()
   const key = ["lbv1Zoned", "listLbPrivateNetworks", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1Zoned.listLbPrivateNetworks(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1Zoned.listLbPrivateNetworks(params, { signal }), dataloaderConfig)
 }

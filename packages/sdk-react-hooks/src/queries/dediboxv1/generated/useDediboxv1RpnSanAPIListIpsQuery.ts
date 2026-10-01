@@ -11,5 +11,5 @@ export const useDediboxv1RpnSanAPIListIpsQuery = (
   const { dediboxv1RpnSan } = useDediboxv1RpnSanAPI()
   const key = ["dediboxv1RpnSan", "listIps", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1RpnSan.listIps(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1RpnSan.listIps(params, { signal }), dataloaderConfig)
 }

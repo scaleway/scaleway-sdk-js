@@ -12,5 +12,5 @@ export const useRdbv1APIListSnapshotsInfiniteQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listSnapshots", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => rdbv1.listSnapshots(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => rdbv1.listSnapshots(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

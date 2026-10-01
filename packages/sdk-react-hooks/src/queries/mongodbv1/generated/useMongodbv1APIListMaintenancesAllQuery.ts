@@ -11,5 +11,5 @@ export const useMongodbv1APIListMaintenancesAllQuery = (
   const { mongodbv1 } = useMongodbv1API()
   const key = ["mongodbv1", "listMaintenances", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1.listMaintenances(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1.listMaintenances(params, { signal }).all(), dataloaderConfig)
 }

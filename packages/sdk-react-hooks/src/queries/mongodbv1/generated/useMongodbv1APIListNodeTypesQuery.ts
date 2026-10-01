@@ -11,5 +11,5 @@ export const useMongodbv1APIListNodeTypesQuery = (
   const { mongodbv1 } = useMongodbv1API()
   const key = ["mongodbv1", "listNodeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1.listNodeTypes(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1.listNodeTypes(params, { signal }), dataloaderConfig)
 }

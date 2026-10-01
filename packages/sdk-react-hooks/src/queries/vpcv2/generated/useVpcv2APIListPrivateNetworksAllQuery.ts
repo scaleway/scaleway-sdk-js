@@ -11,5 +11,5 @@ export const useVpcv2APIListPrivateNetworksAllQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listPrivateNetworks", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcv2.listPrivateNetworks(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcv2.listPrivateNetworks(params, { signal }).all(), dataloaderConfig)
 }

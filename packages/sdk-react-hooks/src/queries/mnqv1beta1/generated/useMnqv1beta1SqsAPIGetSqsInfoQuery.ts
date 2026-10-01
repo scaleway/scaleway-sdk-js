@@ -11,5 +11,5 @@ export const useMnqv1beta1SqsAPIGetSqsInfoQuery = (
   const { mnqv1beta1Sqs } = useMnqv1beta1SqsAPI()
   const key = ["mnqv1beta1Sqs", "getSqsInfo", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mnqv1beta1Sqs.getSqsInfo(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mnqv1beta1Sqs.getSqsInfo(params, { signal }), dataloaderConfig)
 }

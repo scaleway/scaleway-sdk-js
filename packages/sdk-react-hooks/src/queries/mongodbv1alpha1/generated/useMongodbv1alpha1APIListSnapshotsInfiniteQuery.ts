@@ -12,5 +12,5 @@ export const useMongodbv1alpha1APIListSnapshotsInfiniteQuery = (
   const { mongodbv1alpha1 } = useMongodbv1alpha1API()
   const key = ["mongodbv1alpha1", "listSnapshots", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => mongodbv1alpha1.listSnapshots(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => mongodbv1alpha1.listSnapshots(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

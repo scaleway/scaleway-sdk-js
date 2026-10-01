@@ -11,5 +11,5 @@ export const useWebhostingv1HostingAPIGetResourceSummaryQuery = (
   const { webhostingv1Hosting } = useWebhostingv1HostingAPI()
   const key = ["webhostingv1Hosting", "getResourceSummary", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1Hosting.getResourceSummary(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1Hosting.getResourceSummary(params, { signal }), dataloaderConfig)
 }

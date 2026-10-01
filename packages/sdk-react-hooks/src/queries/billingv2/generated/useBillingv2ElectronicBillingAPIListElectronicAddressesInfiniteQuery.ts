@@ -12,5 +12,5 @@ export const useBillingv2ElectronicBillingAPIListElectronicAddressesInfiniteQuer
   const { billingv2ElectronicBilling } = useBillingv2ElectronicBillingAPI()
   const key = ["billingv2ElectronicBilling", "listElectronicAddresses", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => billingv2ElectronicBilling.listElectronicAddresses(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => billingv2ElectronicBilling.listElectronicAddresses(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useAutoscalingv1alpha2APIListLogsInfiniteQuery = (
   const { autoscalingv1alpha2 } = useAutoscalingv1alpha2API()
   const key = ["autoscalingv1alpha2", "listLogs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => autoscalingv1alpha2.listLogs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => autoscalingv1alpha2.listLogs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

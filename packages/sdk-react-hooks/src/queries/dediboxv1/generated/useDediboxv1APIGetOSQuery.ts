@@ -11,5 +11,5 @@ export const useDediboxv1APIGetOSQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getOS", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getOS(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getOS(params, { signal }), dataloaderConfig)
 }

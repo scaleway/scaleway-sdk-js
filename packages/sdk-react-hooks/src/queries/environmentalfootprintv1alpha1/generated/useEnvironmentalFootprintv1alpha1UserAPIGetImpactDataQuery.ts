@@ -11,5 +11,5 @@ export const useEnvironmentalFootprintv1alpha1UserAPIGetImpactDataQuery = (
   const { environmentalFootprintv1alpha1User } = useEnvironmentalFootprintv1alpha1UserAPI()
   const key = ["environmentalFootprintv1alpha1User", "getImpactData", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => environmentalFootprintv1alpha1User.getImpactData(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => environmentalFootprintv1alpha1User.getImpactData(params, { signal }), dataloaderConfig)
 }

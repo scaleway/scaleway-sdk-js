@@ -11,5 +11,5 @@ export const useIamv1alpha1APIListRulesAllQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listRules", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iamv1alpha1.listRules(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iamv1alpha1.listRules(params, { signal }).all(), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useDediboxv1APIGetServerQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getServer", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getServer(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getServer(params, { signal }), dataloaderConfig)
 }

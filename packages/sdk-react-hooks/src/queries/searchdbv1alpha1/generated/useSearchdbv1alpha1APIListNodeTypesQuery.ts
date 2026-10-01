@@ -11,5 +11,5 @@ export const useSearchdbv1alpha1APIListNodeTypesQuery = (
   const { searchdbv1alpha1 } = useSearchdbv1alpha1API()
   const key = ["searchdbv1alpha1", "listNodeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => searchdbv1alpha1.listNodeTypes(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => searchdbv1alpha1.listNodeTypes(params, { signal }), dataloaderConfig)
 }

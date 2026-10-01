@@ -12,5 +12,5 @@ export const useWebhostingv1WebsiteAPIListWebsitesInfiniteQuery = (
   const { webhostingv1Website } = useWebhostingv1WebsiteAPI()
   const key = ["webhostingv1Website", "listWebsites", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => webhostingv1Website.listWebsites(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1Website.listWebsites(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useDediboxv1RpnV1APIListRpnGroupsAllQuery = (
   const { dediboxv1RpnV1 } = useDediboxv1RpnV1API()
   const key = ["dediboxv1RpnV1", "listRpnGroups", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1RpnV1.listRpnGroups(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1RpnV1.listRpnGroups(params, { signal }).all(), dataloaderConfig)
 }

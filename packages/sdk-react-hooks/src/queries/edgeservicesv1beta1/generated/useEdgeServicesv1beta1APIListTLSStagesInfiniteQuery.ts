@@ -12,5 +12,5 @@ export const useEdgeServicesv1beta1APIListTLSStagesInfiniteQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "listTLSStages", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => edgeServicesv1beta1.listTLSStages(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => edgeServicesv1beta1.listTLSStages(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

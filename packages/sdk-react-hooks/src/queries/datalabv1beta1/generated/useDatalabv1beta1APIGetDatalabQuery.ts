@@ -11,5 +11,5 @@ export const useDatalabv1beta1APIGetDatalabQuery = (
   const { datalabv1beta1 } = useDatalabv1beta1API()
   const key = ["datalabv1beta1", "getDatalab", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => datalabv1beta1.getDatalab(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => datalabv1beta1.getDatalab(params, { signal }), dataloaderConfig)
 }
