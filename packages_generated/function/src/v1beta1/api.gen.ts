@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_FUNCTION,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_FUNCTION,FUNCTION_TRANSIENT_STATUSES as FUNCTION_TRANSIENT_STATUSES_FUNCTION,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_FUNCTION,TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_FUNCTION,TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_FUNCTION,} from './content.gen.js'
 import {
   marshalCreateCronRequest,
@@ -112,7 +112,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
+  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNamespacesResponse>(
       {
         method: 'GET',
@@ -125,6 +125,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListNamespacesResponse,
     )
@@ -135,8 +136,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
    */
-  listNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
-    enrichForPagination('namespaces', this.pageOfListNamespaces, request)
+  listNamespaces = (request: Readonly<ListNamespacesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('namespaces', this.pageOfListNamespaces, request, options)
 
   
   /**
@@ -145,11 +146,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  getNamespace = (request: Readonly<GetNamespaceRequest>) =>
+  getNamespace = (request: Readonly<GetNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -179,7 +181,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  createNamespace = (request: Readonly<CreateNamespaceRequest> = {}) =>
+  createNamespace = (request: Readonly<CreateNamespaceRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(
@@ -188,6 +190,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -199,7 +202,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  updateNamespace = (request: Readonly<UpdateNamespaceRequest>) =>
+  updateNamespace = (request: Readonly<UpdateNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(
@@ -208,6 +211,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -219,17 +223,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  deleteNamespace = (request: Readonly<DeleteNamespaceRequest>) =>
+  deleteNamespace = (request: Readonly<DeleteNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         method: 'DELETE',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
 
   
-  protected pageOfListFunctions = (request: Readonly<ListFunctionsRequest>) =>
+  protected pageOfListFunctions = (request: Readonly<ListFunctionsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListFunctionsResponse>(
       {
         method: 'GET',
@@ -243,6 +248,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListFunctionsResponse,
     )
@@ -253,8 +259,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListFunctionsRequest}
    * @returns A Promise of ListFunctionsResponse
    */
-  listFunctions = (request: Readonly<ListFunctionsRequest>) =>
-    enrichForPagination('functions', this.pageOfListFunctions, request)
+  listFunctions = (request: Readonly<ListFunctionsRequest>, options?: RequestOptions) =>
+    enrichForPagination('functions', this.pageOfListFunctions, request, options)
 
   
   /**
@@ -263,11 +269,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetFunctionRequest}
    * @returns A Promise of Function
    */
-  getFunction = (request: Readonly<GetFunctionRequest>) =>
+  getFunction = (request: Readonly<GetFunctionRequest>, options?: RequestOptions) =>
     this.client.fetch<Function>(
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}`,
+        signal: options?.signal,
       },
       unmarshalFunction,
     )
@@ -297,7 +304,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateFunctionRequest}
    * @returns A Promise of Function
    */
-  createFunction = (request: Readonly<CreateFunctionRequest>) =>
+  createFunction = (request: Readonly<CreateFunctionRequest>, options?: RequestOptions) =>
     this.client.fetch<Function>(
       {
         body: JSON.stringify(
@@ -306,6 +313,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions`,
+        signal: options?.signal,
       },
       unmarshalFunction,
     )
@@ -320,7 +328,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link UpdateFunctionRequest}
    * @returns A Promise of Function
    */
-  updateFunction = (request: Readonly<UpdateFunctionRequest>) =>
+  updateFunction = (request: Readonly<UpdateFunctionRequest>, options?: RequestOptions) =>
     this.client.fetch<Function>(
       {
         body: JSON.stringify(
@@ -329,6 +337,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}`,
+        signal: options?.signal,
       },
       unmarshalFunction,
     )
@@ -340,11 +349,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link DeleteFunctionRequest}
    * @returns A Promise of Function
    */
-  deleteFunction = (request: Readonly<DeleteFunctionRequest>) =>
+  deleteFunction = (request: Readonly<DeleteFunctionRequest>, options?: RequestOptions) =>
     this.client.fetch<Function>(
       {
         method: 'DELETE',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}`,
+        signal: options?.signal,
       },
       unmarshalFunction,
     )
@@ -356,13 +366,14 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link DeployFunctionRequest}
    * @returns A Promise of Function
    */
-  deployFunction = (request: Readonly<DeployFunctionRequest>) =>
+  deployFunction = (request: Readonly<DeployFunctionRequest>, options?: RequestOptions) =>
     this.client.fetch<Function>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/deploy`,
+        signal: options?.signal,
       },
       unmarshalFunction,
     )
@@ -374,11 +385,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link ListFunctionRuntimesRequest}
    * @returns A Promise of ListFunctionRuntimesResponse
    */
-  listFunctionRuntimes = (request: Readonly<ListFunctionRuntimesRequest> = {}) =>
+  listFunctionRuntimes = (request: Readonly<ListFunctionRuntimesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListFunctionRuntimesResponse>(
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/runtimes`,
+        signal: options?.signal,
       },
       unmarshalListFunctionRuntimesResponse,
     )
@@ -390,7 +402,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link GetFunctionUploadURLRequest}
    * @returns A Promise of UploadURL
    */
-  getFunctionUploadURL = (request: Readonly<GetFunctionUploadURLRequest>) =>
+  getFunctionUploadURL = (request: Readonly<GetFunctionUploadURLRequest>, options?: RequestOptions) =>
     this.client.fetch<UploadURL>(
       {
         method: 'GET',
@@ -398,6 +410,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         urlParams: urlParams(
           ['content_length', request.contentLength],
         ),
+        signal: options?.signal,
       },
       unmarshalUploadURL,
     )
@@ -409,17 +422,18 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link GetFunctionDownloadURLRequest}
    * @returns A Promise of DownloadURL
    */
-  getFunctionDownloadURL = (request: Readonly<GetFunctionDownloadURLRequest>) =>
+  getFunctionDownloadURL = (request: Readonly<GetFunctionDownloadURLRequest>, options?: RequestOptions) =>
     this.client.fetch<DownloadURL>(
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/download-url`,
+        signal: options?.signal,
       },
       unmarshalDownloadURL,
     )
 
   
-  protected pageOfListCrons = (request: Readonly<ListCronsRequest>) =>
+  protected pageOfListCrons = (request: Readonly<ListCronsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListCronsResponse>(
       {
         method: 'GET',
@@ -430,6 +444,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListCronsResponse,
     )
@@ -440,8 +455,8 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link ListCronsRequest}
    * @returns A Promise of ListCronsResponse
    */
-  listCrons = (request: Readonly<ListCronsRequest>) =>
-    enrichForPagination('crons', this.pageOfListCrons, request)
+  listCrons = (request: Readonly<ListCronsRequest>, options?: RequestOptions) =>
+    enrichForPagination('crons', this.pageOfListCrons, request, options)
 
   
   /**
@@ -450,11 +465,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link GetCronRequest}
    * @returns A Promise of Cron
    */
-  getCron = (request: Readonly<GetCronRequest>) =>
+  getCron = (request: Readonly<GetCronRequest>, options?: RequestOptions) =>
     this.client.fetch<Cron>(
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
+        signal: options?.signal,
       },
       unmarshalCron,
     )
@@ -484,7 +500,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link CreateCronRequest}
    * @returns A Promise of Cron
    */
-  createCron = (request: Readonly<CreateCronRequest>) =>
+  createCron = (request: Readonly<CreateCronRequest>, options?: RequestOptions) =>
     this.client.fetch<Cron>(
       {
         body: JSON.stringify(
@@ -493,6 +509,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons`,
+        signal: options?.signal,
       },
       unmarshalCron,
     )
@@ -504,7 +521,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link UpdateCronRequest}
    * @returns A Promise of Cron
    */
-  updateCron = (request: Readonly<UpdateCronRequest>) =>
+  updateCron = (request: Readonly<UpdateCronRequest>, options?: RequestOptions) =>
     this.client.fetch<Cron>(
       {
         body: JSON.stringify(
@@ -513,6 +530,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
+        signal: options?.signal,
       },
       unmarshalCron,
     )
@@ -524,17 +542,18 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link DeleteCronRequest}
    * @returns A Promise of Cron
    */
-  deleteCron = (request: Readonly<DeleteCronRequest>) =>
+  deleteCron = (request: Readonly<DeleteCronRequest>, options?: RequestOptions) =>
     this.client.fetch<Cron>(
       {
         method: 'DELETE',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
+        signal: options?.signal,
       },
       unmarshalCron,
     )
 
   
-  protected pageOfListDomains = (request: Readonly<ListDomainsRequest>) =>
+  protected pageOfListDomains = (request: Readonly<ListDomainsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDomainsResponse>(
       {
         method: 'GET',
@@ -545,6 +564,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDomainsResponse,
     )
@@ -555,8 +575,8 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
    */
-  listDomains = (request: Readonly<ListDomainsRequest>) =>
-    enrichForPagination('domains', this.pageOfListDomains, request)
+  listDomains = (request: Readonly<ListDomainsRequest>, options?: RequestOptions) =>
+    enrichForPagination('domains', this.pageOfListDomains, request, options)
 
   
   /**
@@ -565,11 +585,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
    */
-  getDomain = (request: Readonly<GetDomainRequest>) =>
+  getDomain = (request: Readonly<GetDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -599,7 +620,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
    */
-  createDomain = (request: Readonly<CreateDomainRequest>) =>
+  createDomain = (request: Readonly<CreateDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: JSON.stringify(
@@ -608,6 +629,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -619,11 +641,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
    */
-  deleteDomain = (request: Readonly<DeleteDomainRequest>) =>
+  deleteDomain = (request: Readonly<DeleteDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'DELETE',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -636,7 +659,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
    */
-  createToken = (request: Readonly<CreateTokenRequest> = {}) =>
+  createToken = (request: Readonly<CreateTokenRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Token>(
       {
         body: JSON.stringify(
@@ -645,6 +668,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
+        signal: options?.signal,
       },
       unmarshalToken,
     )
@@ -656,11 +680,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link GetTokenRequest}
    * @returns A Promise of Token
    */
-  getToken = (request: Readonly<GetTokenRequest>) =>
+  getToken = (request: Readonly<GetTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<Token>(
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        signal: options?.signal,
       },
       unmarshalToken,
     )
@@ -684,7 +709,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     )
 
   
-  protected pageOfListTokens = (request: Readonly<ListTokensRequest> = {}) =>
+  protected pageOfListTokens = (request: Readonly<ListTokensRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTokensResponse>(
       {
         method: 'GET',
@@ -696,6 +721,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListTokensResponse,
     )
@@ -706,8 +732,8 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
    */
-  listTokens = (request: Readonly<ListTokensRequest> = {}) =>
-    enrichForPagination('tokens', this.pageOfListTokens, request)
+  listTokens = (request: Readonly<ListTokensRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('tokens', this.pageOfListTokens, request, options)
 
   
   /**
@@ -716,11 +742,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link DeleteTokenRequest}
    * @returns A Promise of Token
    */
-  deleteToken = (request: Readonly<DeleteTokenRequest>) =>
+  deleteToken = (request: Readonly<DeleteTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<Token>(
       {
         method: 'DELETE',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        signal: options?.signal,
       },
       unmarshalToken,
     )
@@ -732,7 +759,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link CreateTriggerRequest}
    * @returns A Promise of Trigger
    */
-  createTrigger = (request: Readonly<CreateTriggerRequest>) =>
+  createTrigger = (request: Readonly<CreateTriggerRequest>, options?: RequestOptions) =>
     this.client.fetch<Trigger>(
       {
         body: JSON.stringify(
@@ -741,6 +768,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
+        signal: options?.signal,
       },
       unmarshalTrigger,
     )
@@ -752,11 +780,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link GetTriggerRequest}
    * @returns A Promise of Trigger
    */
-  getTrigger = (request: Readonly<GetTriggerRequest>) =>
+  getTrigger = (request: Readonly<GetTriggerRequest>, options?: RequestOptions) =>
     this.client.fetch<Trigger>(
       {
         method: 'GET',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        signal: options?.signal,
       },
       unmarshalTrigger,
     )
@@ -780,7 +809,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     )
 
   
-  protected pageOfListTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
+  protected pageOfListTriggers = (request: Readonly<ListTriggersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTriggersResponse>(
       {
         method: 'GET',
@@ -801,6 +830,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListTriggersResponse,
     )
@@ -811,8 +841,8 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link ListTriggersRequest}
    * @returns A Promise of ListTriggersResponse
    */
-  listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
-    enrichForPagination('triggers', this.pageOfListTriggers, request)
+  listTriggers = (request: Readonly<ListTriggersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('triggers', this.pageOfListTriggers, request, options)
 
   
   /**
@@ -821,7 +851,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link UpdateTriggerRequest}
    * @returns A Promise of Trigger
    */
-  updateTrigger = (request: Readonly<UpdateTriggerRequest>) =>
+  updateTrigger = (request: Readonly<UpdateTriggerRequest>, options?: RequestOptions) =>
     this.client.fetch<Trigger>(
       {
         body: JSON.stringify(
@@ -830,6 +860,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        signal: options?.signal,
       },
       unmarshalTrigger,
     )
@@ -841,11 +872,12 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
    * @param request - The request {@link DeleteTriggerRequest}
    * @returns A Promise of Trigger
    */
-  deleteTrigger = (request: Readonly<DeleteTriggerRequest>) =>
+  deleteTrigger = (request: Readonly<DeleteTriggerRequest>, options?: RequestOptions) =>
     this.client.fetch<Trigger>(
       {
         method: 'DELETE',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        signal: options?.signal,
       },
       unmarshalTrigger,
     )

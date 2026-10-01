@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DATALAB_TRANSIENT_STATUSES as DATALAB_TRANSIENT_STATUSES_DATALAB,} from './content.gen.js'
 import {
   marshalCreateDatalabRequest,
@@ -65,7 +65,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDatalabRequest}
    * @returns A Promise of Datalab
    */
-  createDatalab = (request: Readonly<CreateDatalabRequest>) =>
+  createDatalab = (request: Readonly<CreateDatalabRequest>, options?: RequestOptions) =>
     this.client.fetch<Datalab>(
       {
         body: JSON.stringify(
@@ -74,6 +74,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/datalab/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/datalabs`,
+        signal: options?.signal,
       },
       unmarshalDatalab,
     )
@@ -85,11 +86,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDatalabRequest}
    * @returns A Promise of Datalab
    */
-  getDatalab = (request: Readonly<GetDatalabRequest>) =>
+  getDatalab = (request: Readonly<GetDatalabRequest>, options?: RequestOptions) =>
     this.client.fetch<Datalab>(
       {
         method: 'GET',
         path: `/datalab/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/datalabs/${validatePathParam('datalabId', request.datalabId)}`,
+        signal: options?.signal,
       },
       unmarshalDatalab,
     )
@@ -113,7 +115,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListDatalabs = (request: Readonly<ListDatalabsRequest> = {}) =>
+  protected pageOfListDatalabs = (request: Readonly<ListDatalabsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDatalabsResponse>(
       {
         method: 'GET',
@@ -127,6 +129,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatalabsResponse,
     )
@@ -137,8 +140,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDatalabsRequest}
    * @returns A Promise of ListDatalabsResponse
    */
-  listDatalabs = (request: Readonly<ListDatalabsRequest> = {}) =>
-    enrichForPagination('datalabs', this.pageOfListDatalabs, request)
+  listDatalabs = (request: Readonly<ListDatalabsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('datalabs', this.pageOfListDatalabs, request, options)
 
   
   /**
@@ -147,7 +150,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDatalabRequest}
    * @returns A Promise of Datalab
    */
-  updateDatalab = (request: Readonly<UpdateDatalabRequest>) =>
+  updateDatalab = (request: Readonly<UpdateDatalabRequest>, options?: RequestOptions) =>
     this.client.fetch<Datalab>(
       {
         body: JSON.stringify(
@@ -156,6 +159,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/datalab/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/datalabs/${validatePathParam('datalabId', request.datalabId)}`,
+        signal: options?.signal,
       },
       unmarshalDatalab,
     )
@@ -167,17 +171,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDatalabRequest}
    * @returns A Promise of Datalab
    */
-  deleteDatalab = (request: Readonly<DeleteDatalabRequest>) =>
+  deleteDatalab = (request: Readonly<DeleteDatalabRequest>, options?: RequestOptions) =>
     this.client.fetch<Datalab>(
       {
         method: 'DELETE',
         path: `/datalab/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/datalabs/${validatePathParam('datalabId', request.datalabId)}`,
+        signal: options?.signal,
       },
       unmarshalDatalab,
     )
 
   
-  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -189,6 +194,7 @@ export class API extends ParentAPI {
           ['resource_type', request.resourceType],
           ['targets', request.targets],
         ),
+        signal: options?.signal,
       },
       unmarshalListNodeTypesResponse,
     )
@@ -199,11 +205,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
    */
-  listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
-    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
+  listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request, options)
 
   
-  protected pageOfListNotebookVersions = (request: Readonly<ListNotebookVersionsRequest> = {}) =>
+  protected pageOfListNotebookVersions = (request: Readonly<ListNotebookVersionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNotebookVersionsResponse>(
       {
         method: 'GET',
@@ -213,6 +219,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListNotebookVersionsResponse,
     )
@@ -223,11 +230,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNotebookVersionsRequest}
    * @returns A Promise of ListNotebookVersionsResponse
    */
-  listNotebookVersions = (request: Readonly<ListNotebookVersionsRequest> = {}) =>
-    enrichForPagination('notebooks', this.pageOfListNotebookVersions, request)
+  listNotebookVersions = (request: Readonly<ListNotebookVersionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('notebooks', this.pageOfListNotebookVersions, request, options)
 
   
-  protected pageOfListClusterVersions = (request: Readonly<ListClusterVersionsRequest> = {}) =>
+  protected pageOfListClusterVersions = (request: Readonly<ListClusterVersionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListClusterVersionsResponse>(
       {
         method: 'GET',
@@ -237,6 +244,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListClusterVersionsResponse,
     )
@@ -247,8 +255,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListClusterVersionsRequest}
    * @returns A Promise of ListClusterVersionsResponse
    */
-  listClusterVersions = (request: Readonly<ListClusterVersionsRequest> = {}) =>
-    enrichForPagination('clusters', this.pageOfListClusterVersions, request)
+  listClusterVersions = (request: Readonly<ListClusterVersionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('clusters', this.pageOfListClusterVersions, request, options)
 
   
 }

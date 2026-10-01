@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {PIPELINE_TRANSIENT_STATUSES as PIPELINE_TRANSIENT_STATUSES_EDGE_SERVICES,PURGE_REQUEST_TRANSIENT_STATUSES as PURGE_REQUEST_TRANSIENT_STATUSES_EDGE_SERVICES,} from './content.gen.js'
 import {
   marshalAddRouteRulesRequest,
@@ -174,17 +174,18 @@ const jsonContentHeaders = {
  * Edge Services API.
  */
 export class API extends ParentAPI {
-  listNodes = () =>
+  listNodes = (options?: RequestOptions) =>
     this.client.fetch<ListNodesResponse>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/nodes`,
+        signal: options?.signal,
       },
       unmarshalListNodesResponse,
     )
 
   
-  protected pageOfListPipelines = (request: Readonly<ListPipelinesRequest> = {}) =>
+  protected pageOfListPipelines = (request: Readonly<ListPipelinesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPipelinesResponse>(
       {
         method: 'GET',
@@ -198,6 +199,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListPipelinesResponse,
     )
@@ -208,8 +210,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPipelinesRequest}
    * @returns A Promise of ListPipelinesResponse
    */
-  listPipelines = (request: Readonly<ListPipelinesRequest> = {}) =>
-    enrichForPagination('pipelines', this.pageOfListPipelines, request)
+  listPipelines = (request: Readonly<ListPipelinesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('pipelines', this.pageOfListPipelines, request, options)
 
   
   /**
@@ -218,7 +220,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePipelineRequest}
    * @returns A Promise of Pipeline
    */
-  createPipeline = (request: Readonly<CreatePipelineRequest>) =>
+  createPipeline = (request: Readonly<CreatePipelineRequest>, options?: RequestOptions) =>
     this.client.fetch<Pipeline>(
       {
         body: JSON.stringify(
@@ -227,6 +229,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines`,
+        signal: options?.signal,
       },
       unmarshalPipeline,
     )
@@ -238,11 +241,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPipelineRequest}
    * @returns A Promise of Pipeline
    */
-  getPipeline = (request: Readonly<GetPipelineRequest>) =>
+  getPipeline = (request: Readonly<GetPipelineRequest>, options?: RequestOptions) =>
     this.client.fetch<Pipeline>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}`,
+        signal: options?.signal,
       },
       unmarshalPipeline,
     )
@@ -266,7 +270,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListPipelinesWithStages = (request: Readonly<ListPipelinesWithStagesRequest> = {}) =>
+  protected pageOfListPipelinesWithStages = (request: Readonly<ListPipelinesWithStagesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPipelinesWithStagesResponse>(
       {
         method: 'GET',
@@ -279,12 +283,13 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListPipelinesWithStagesResponse,
     )
   
-  listPipelinesWithStages = (request: Readonly<ListPipelinesWithStagesRequest> = {}) =>
-    enrichForPagination('pipelines', this.pageOfListPipelinesWithStages, request)
+  listPipelinesWithStages = (request: Readonly<ListPipelinesWithStagesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('pipelines', this.pageOfListPipelinesWithStages, request, options)
 
   
   /**
@@ -293,7 +298,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdatePipelineRequest}
    * @returns A Promise of Pipeline
    */
-  updatePipeline = (request: Readonly<UpdatePipelineRequest>) =>
+  updatePipeline = (request: Readonly<UpdatePipelineRequest>, options?: RequestOptions) =>
     this.client.fetch<Pipeline>(
       {
         body: JSON.stringify(
@@ -302,6 +307,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}`,
+        signal: options?.signal,
       },
       unmarshalPipeline,
     )
@@ -312,11 +318,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeletePipelineRequest}
    */
-  deletePipeline = (request: Readonly<DeletePipelineRequest>) =>
+  deletePipeline = (request: Readonly<DeletePipelineRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -327,17 +334,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetVPCEndpointRequest}
    * @returns A Promise of VPCEndpoint
    */
-  getVPCEndpoint = (request: Readonly<GetVPCEndpointRequest>) =>
+  getVPCEndpoint = (request: Readonly<GetVPCEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<VPCEndpoint>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/vpc-endpoints/${validatePathParam('vpcEndpointId', request.vpcEndpointId)}`,
+        signal: options?.signal,
       },
       unmarshalVPCEndpoint,
     )
 
   
-  protected pageOfListVPCEndpoints = (request: Readonly<ListVPCEndpointsRequest> = {}) =>
+  protected pageOfListVPCEndpoints = (request: Readonly<ListVPCEndpointsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVPCEndpointsResponse>(
       {
         method: 'GET',
@@ -349,6 +357,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListVPCEndpointsResponse,
     )
@@ -359,8 +368,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVPCEndpointsRequest}
    * @returns A Promise of ListVPCEndpointsResponse
    */
-  listVPCEndpoints = (request: Readonly<ListVPCEndpointsRequest> = {}) =>
-    enrichForPagination('vpcEndpoints', this.pageOfListVPCEndpoints, request)
+  listVPCEndpoints = (request: Readonly<ListVPCEndpointsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('vpcEndpoints', this.pageOfListVPCEndpoints, request, options)
 
   
   /**
@@ -369,7 +378,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateVPCEndpointRequest}
    * @returns A Promise of VPCEndpoint
    */
-  createVPCEndpoint = (request: Readonly<CreateVPCEndpointRequest>) =>
+  createVPCEndpoint = (request: Readonly<CreateVPCEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<VPCEndpoint>(
       {
         body: JSON.stringify(
@@ -378,6 +387,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/vpc-endpoints`,
+        signal: options?.signal,
       },
       unmarshalVPCEndpoint,
     )
@@ -388,11 +398,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteVPCEndpointRequest}
    */
-  deleteVPCEndpoint = (request: Readonly<DeleteVPCEndpointRequest>) =>
+  deleteVPCEndpoint = (request: Readonly<DeleteVPCEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/vpc-endpoints/${validatePathParam('vpcEndpointId', request.vpcEndpointId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -403,7 +414,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetPipelineVPCEndpointsRequest}
    * @returns A Promise of SetPipelineVPCEndpointsResponse
    */
-  setPipelineVPCEndpoints = (request: Readonly<SetPipelineVPCEndpointsRequest>) =>
+  setPipelineVPCEndpoints = (request: Readonly<SetPipelineVPCEndpointsRequest>, options?: RequestOptions) =>
     this.client.fetch<SetPipelineVPCEndpointsResponse>(
       {
         body: JSON.stringify(
@@ -412,12 +423,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/vpc-endpoints`,
+        signal: options?.signal,
       },
       unmarshalSetPipelineVPCEndpointsResponse,
     )
 
   
-  protected pageOfListHeadStages = (request: Readonly<ListHeadStagesRequest>) =>
+  protected pageOfListHeadStages = (request: Readonly<ListHeadStagesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListHeadStagesResponse>(
       {
         method: 'GET',
@@ -426,6 +438,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListHeadStagesResponse,
     )
@@ -436,8 +449,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListHeadStagesRequest}
    * @returns A Promise of ListHeadStagesResponse
    */
-  listHeadStages = (request: Readonly<ListHeadStagesRequest>) =>
-    enrichForPagination('headStages', this.pageOfListHeadStages, request)
+  listHeadStages = (request: Readonly<ListHeadStagesRequest>, options?: RequestOptions) =>
+    enrichForPagination('headStages', this.pageOfListHeadStages, request, options)
 
   
   /**
@@ -446,7 +459,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetHeadStageRequest}
    * @returns A Promise of HeadStageResponse
    */
-  setHeadStage = (request: Readonly<SetHeadStageRequest>) =>
+  setHeadStage = (request: Readonly<SetHeadStageRequest>, options?: RequestOptions) =>
     this.client.fetch<HeadStageResponse>(
       {
         body: JSON.stringify(
@@ -455,12 +468,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/set-head-stage`,
+        signal: options?.signal,
       },
       unmarshalHeadStageResponse,
     )
 
   
-  protected pageOfListDNSStages = (request: Readonly<ListDNSStagesRequest>) =>
+  protected pageOfListDNSStages = (request: Readonly<ListDNSStagesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDNSStagesResponse>(
       {
         method: 'GET',
@@ -471,6 +485,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDNSStagesResponse,
     )
@@ -481,8 +496,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDNSStagesRequest}
    * @returns A Promise of ListDNSStagesResponse
    */
-  listDNSStages = (request: Readonly<ListDNSStagesRequest>) =>
-    enrichForPagination('stages', this.pageOfListDNSStages, request)
+  listDNSStages = (request: Readonly<ListDNSStagesRequest>, options?: RequestOptions) =>
+    enrichForPagination('stages', this.pageOfListDNSStages, request, options)
 
   
   /**
@@ -491,7 +506,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDNSStageRequest}
    * @returns A Promise of DNSStage
    */
-  createDNSStage = (request: Readonly<CreateDNSStageRequest>) =>
+  createDNSStage = (request: Readonly<CreateDNSStageRequest>, options?: RequestOptions) =>
     this.client.fetch<DNSStage>(
       {
         body: JSON.stringify(
@@ -500,6 +515,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/dns-stages`,
+        signal: options?.signal,
       },
       unmarshalDNSStage,
     )
@@ -511,11 +527,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDNSStageRequest}
    * @returns A Promise of DNSStage
    */
-  getDNSStage = (request: Readonly<GetDNSStageRequest>) =>
+  getDNSStage = (request: Readonly<GetDNSStageRequest>, options?: RequestOptions) =>
     this.client.fetch<DNSStage>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/dns-stages/${validatePathParam('dnsStageId', request.dnsStageId)}`,
+        signal: options?.signal,
       },
       unmarshalDNSStage,
     )
@@ -527,7 +544,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDNSStageRequest}
    * @returns A Promise of DNSStage
    */
-  updateDNSStage = (request: Readonly<UpdateDNSStageRequest>) =>
+  updateDNSStage = (request: Readonly<UpdateDNSStageRequest>, options?: RequestOptions) =>
     this.client.fetch<DNSStage>(
       {
         body: JSON.stringify(
@@ -536,6 +553,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/edge-services/v1beta1/dns-stages/${validatePathParam('dnsStageId', request.dnsStageId)}`,
+        signal: options?.signal,
       },
       unmarshalDNSStage,
     )
@@ -546,16 +564,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteDNSStageRequest}
    */
-  deleteDNSStage = (request: Readonly<DeleteDNSStageRequest>) =>
+  deleteDNSStage = (request: Readonly<DeleteDNSStageRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/dns-stages/${validatePathParam('dnsStageId', request.dnsStageId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListTLSStages = (request: Readonly<ListTLSStagesRequest>) =>
+  protected pageOfListTLSStages = (request: Readonly<ListTLSStagesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListTLSStagesResponse>(
       {
         method: 'GET',
@@ -567,6 +586,7 @@ export class API extends ParentAPI {
           ['secret_id', request.secretId],
           ['secret_region', request.secretRegion],
         ),
+        signal: options?.signal,
       },
       unmarshalListTLSStagesResponse,
     )
@@ -577,8 +597,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListTLSStagesRequest}
    * @returns A Promise of ListTLSStagesResponse
    */
-  listTLSStages = (request: Readonly<ListTLSStagesRequest>) =>
-    enrichForPagination('stages', this.pageOfListTLSStages, request)
+  listTLSStages = (request: Readonly<ListTLSStagesRequest>, options?: RequestOptions) =>
+    enrichForPagination('stages', this.pageOfListTLSStages, request, options)
 
   
   /**
@@ -587,7 +607,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateTLSStageRequest}
    * @returns A Promise of TLSStage
    */
-  createTLSStage = (request: Readonly<CreateTLSStageRequest>) =>
+  createTLSStage = (request: Readonly<CreateTLSStageRequest>, options?: RequestOptions) =>
     this.client.fetch<TLSStage>(
       {
         body: JSON.stringify(
@@ -596,6 +616,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/tls-stages`,
+        signal: options?.signal,
       },
       unmarshalTLSStage,
     )
@@ -607,11 +628,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetTLSStageRequest}
    * @returns A Promise of TLSStage
    */
-  getTLSStage = (request: Readonly<GetTLSStageRequest>) =>
+  getTLSStage = (request: Readonly<GetTLSStageRequest>, options?: RequestOptions) =>
     this.client.fetch<TLSStage>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/tls-stages/${validatePathParam('tlsStageId', request.tlsStageId)}`,
+        signal: options?.signal,
       },
       unmarshalTLSStage,
     )
@@ -623,7 +645,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateTLSStageRequest}
    * @returns A Promise of TLSStage
    */
-  updateTLSStage = (request: Readonly<UpdateTLSStageRequest>) =>
+  updateTLSStage = (request: Readonly<UpdateTLSStageRequest>, options?: RequestOptions) =>
     this.client.fetch<TLSStage>(
       {
         body: JSON.stringify(
@@ -632,6 +654,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/edge-services/v1beta1/tls-stages/${validatePathParam('tlsStageId', request.tlsStageId)}`,
+        signal: options?.signal,
       },
       unmarshalTLSStage,
     )
@@ -642,16 +665,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteTLSStageRequest}
    */
-  deleteTLSStage = (request: Readonly<DeleteTLSStageRequest>) =>
+  deleteTLSStage = (request: Readonly<DeleteTLSStageRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/tls-stages/${validatePathParam('tlsStageId', request.tlsStageId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListCacheStages = (request: Readonly<ListCacheStagesRequest>) =>
+  protected pageOfListCacheStages = (request: Readonly<ListCacheStagesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListCacheStagesResponse>(
       {
         method: 'GET',
@@ -661,6 +685,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListCacheStagesResponse,
     )
@@ -671,8 +696,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListCacheStagesRequest}
    * @returns A Promise of ListCacheStagesResponse
    */
-  listCacheStages = (request: Readonly<ListCacheStagesRequest>) =>
-    enrichForPagination('stages', this.pageOfListCacheStages, request)
+  listCacheStages = (request: Readonly<ListCacheStagesRequest>, options?: RequestOptions) =>
+    enrichForPagination('stages', this.pageOfListCacheStages, request, options)
 
   
   /**
@@ -681,7 +706,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateCacheStageRequest}
    * @returns A Promise of CacheStage
    */
-  createCacheStage = (request: Readonly<CreateCacheStageRequest>) =>
+  createCacheStage = (request: Readonly<CreateCacheStageRequest>, options?: RequestOptions) =>
     this.client.fetch<CacheStage>(
       {
         body: JSON.stringify(
@@ -690,6 +715,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/cache-stages`,
+        signal: options?.signal,
       },
       unmarshalCacheStage,
     )
@@ -701,11 +727,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetCacheStageRequest}
    * @returns A Promise of CacheStage
    */
-  getCacheStage = (request: Readonly<GetCacheStageRequest>) =>
+  getCacheStage = (request: Readonly<GetCacheStageRequest>, options?: RequestOptions) =>
     this.client.fetch<CacheStage>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/cache-stages/${validatePathParam('cacheStageId', request.cacheStageId)}`,
+        signal: options?.signal,
       },
       unmarshalCacheStage,
     )
@@ -717,7 +744,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateCacheStageRequest}
    * @returns A Promise of CacheStage
    */
-  updateCacheStage = (request: Readonly<UpdateCacheStageRequest>) =>
+  updateCacheStage = (request: Readonly<UpdateCacheStageRequest>, options?: RequestOptions) =>
     this.client.fetch<CacheStage>(
       {
         body: JSON.stringify(
@@ -726,6 +753,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/edge-services/v1beta1/cache-stages/${validatePathParam('cacheStageId', request.cacheStageId)}`,
+        signal: options?.signal,
       },
       unmarshalCacheStage,
     )
@@ -736,16 +764,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteCacheStageRequest}
    */
-  deleteCacheStage = (request: Readonly<DeleteCacheStageRequest>) =>
+  deleteCacheStage = (request: Readonly<DeleteCacheStageRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/cache-stages/${validatePathParam('cacheStageId', request.cacheStageId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListBackendStages = (request: Readonly<ListBackendStagesRequest>) =>
+  protected pageOfListBackendStages = (request: Readonly<ListBackendStagesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListBackendStagesResponse>(
       {
         method: 'GET',
@@ -758,6 +787,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListBackendStagesResponse,
     )
@@ -768,8 +798,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListBackendStagesRequest}
    * @returns A Promise of ListBackendStagesResponse
    */
-  listBackendStages = (request: Readonly<ListBackendStagesRequest>) =>
-    enrichForPagination('stages', this.pageOfListBackendStages, request)
+  listBackendStages = (request: Readonly<ListBackendStagesRequest>, options?: RequestOptions) =>
+    enrichForPagination('stages', this.pageOfListBackendStages, request, options)
 
   
   /**
@@ -778,7 +808,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateBackendStageRequest}
    * @returns A Promise of BackendStage
    */
-  createBackendStage = (request: Readonly<CreateBackendStageRequest>) =>
+  createBackendStage = (request: Readonly<CreateBackendStageRequest>, options?: RequestOptions) =>
     this.client.fetch<BackendStage>(
       {
         body: JSON.stringify(
@@ -787,6 +817,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/backend-stages`,
+        signal: options?.signal,
       },
       unmarshalBackendStage,
     )
@@ -798,11 +829,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetBackendStageRequest}
    * @returns A Promise of BackendStage
    */
-  getBackendStage = (request: Readonly<GetBackendStageRequest>) =>
+  getBackendStage = (request: Readonly<GetBackendStageRequest>, options?: RequestOptions) =>
     this.client.fetch<BackendStage>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/backend-stages/${validatePathParam('backendStageId', request.backendStageId)}`,
+        signal: options?.signal,
       },
       unmarshalBackendStage,
     )
@@ -814,7 +846,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateBackendStageRequest}
    * @returns A Promise of BackendStage
    */
-  updateBackendStage = (request: Readonly<UpdateBackendStageRequest>) =>
+  updateBackendStage = (request: Readonly<UpdateBackendStageRequest>, options?: RequestOptions) =>
     this.client.fetch<BackendStage>(
       {
         body: JSON.stringify(
@@ -823,6 +855,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/edge-services/v1beta1/backend-stages/${validatePathParam('backendStageId', request.backendStageId)}`,
+        signal: options?.signal,
       },
       unmarshalBackendStage,
     )
@@ -833,16 +866,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteBackendStageRequest}
    */
-  deleteBackendStage = (request: Readonly<DeleteBackendStageRequest>) =>
+  deleteBackendStage = (request: Readonly<DeleteBackendStageRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/backend-stages/${validatePathParam('backendStageId', request.backendStageId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  searchBackendStages = (request: Readonly<SearchBackendStagesRequest> = {}) =>
+  searchBackendStages = (request: Readonly<SearchBackendStagesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListBackendStagesResponse>(
       {
         method: 'GET',
@@ -856,12 +890,13 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListBackendStagesResponse,
     )
 
   
-  protected pageOfListWafStages = (request: Readonly<ListWafStagesRequest>) =>
+  protected pageOfListWafStages = (request: Readonly<ListWafStagesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListWafStagesResponse>(
       {
         method: 'GET',
@@ -871,6 +906,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListWafStagesResponse,
     )
@@ -881,8 +917,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListWafStagesRequest}
    * @returns A Promise of ListWafStagesResponse
    */
-  listWafStages = (request: Readonly<ListWafStagesRequest>) =>
-    enrichForPagination('stages', this.pageOfListWafStages, request)
+  listWafStages = (request: Readonly<ListWafStagesRequest>, options?: RequestOptions) =>
+    enrichForPagination('stages', this.pageOfListWafStages, request, options)
 
   
   /**
@@ -891,7 +927,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateWafStageRequest}
    * @returns A Promise of WafStage
    */
-  createWafStage = (request: Readonly<CreateWafStageRequest>) =>
+  createWafStage = (request: Readonly<CreateWafStageRequest>, options?: RequestOptions) =>
     this.client.fetch<WafStage>(
       {
         body: JSON.stringify(
@@ -900,6 +936,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/waf-stages`,
+        signal: options?.signal,
       },
       unmarshalWafStage,
     )
@@ -911,11 +948,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetWafStageRequest}
    * @returns A Promise of WafStage
    */
-  getWafStage = (request: Readonly<GetWafStageRequest>) =>
+  getWafStage = (request: Readonly<GetWafStageRequest>, options?: RequestOptions) =>
     this.client.fetch<WafStage>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/waf-stages/${validatePathParam('wafStageId', request.wafStageId)}`,
+        signal: options?.signal,
       },
       unmarshalWafStage,
     )
@@ -927,7 +965,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateWafStageRequest}
    * @returns A Promise of WafStage
    */
-  updateWafStage = (request: Readonly<UpdateWafStageRequest>) =>
+  updateWafStage = (request: Readonly<UpdateWafStageRequest>, options?: RequestOptions) =>
     this.client.fetch<WafStage>(
       {
         body: JSON.stringify(
@@ -936,6 +974,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/edge-services/v1beta1/waf-stages/${validatePathParam('wafStageId', request.wafStageId)}`,
+        signal: options?.signal,
       },
       unmarshalWafStage,
     )
@@ -946,16 +985,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteWafStageRequest}
    */
-  deleteWafStage = (request: Readonly<DeleteWafStageRequest>) =>
+  deleteWafStage = (request: Readonly<DeleteWafStageRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/waf-stages/${validatePathParam('wafStageId', request.wafStageId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  searchWafStages = (request: Readonly<SearchWafStagesRequest> = {}) =>
+  searchWafStages = (request: Readonly<SearchWafStagesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListWafStagesResponse>(
       {
         method: 'GET',
@@ -966,12 +1006,13 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListWafStagesResponse,
     )
 
   
-  protected pageOfListRouteStages = (request: Readonly<ListRouteStagesRequest>) =>
+  protected pageOfListRouteStages = (request: Readonly<ListRouteStagesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListRouteStagesResponse>(
       {
         method: 'GET',
@@ -981,6 +1022,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListRouteStagesResponse,
     )
@@ -991,8 +1033,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRouteStagesRequest}
    * @returns A Promise of ListRouteStagesResponse
    */
-  listRouteStages = (request: Readonly<ListRouteStagesRequest>) =>
-    enrichForPagination('stages', this.pageOfListRouteStages, request)
+  listRouteStages = (request: Readonly<ListRouteStagesRequest>, options?: RequestOptions) =>
+    enrichForPagination('stages', this.pageOfListRouteStages, request, options)
 
   
   /**
@@ -1001,7 +1043,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateRouteStageRequest}
    * @returns A Promise of RouteStage
    */
-  createRouteStage = (request: Readonly<CreateRouteStageRequest>) =>
+  createRouteStage = (request: Readonly<CreateRouteStageRequest>, options?: RequestOptions) =>
     this.client.fetch<RouteStage>(
       {
         body: JSON.stringify(
@@ -1010,6 +1052,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/route-stages`,
+        signal: options?.signal,
       },
       unmarshalRouteStage,
     )
@@ -1021,11 +1064,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetRouteStageRequest}
    * @returns A Promise of RouteStage
    */
-  getRouteStage = (request: Readonly<GetRouteStageRequest>) =>
+  getRouteStage = (request: Readonly<GetRouteStageRequest>, options?: RequestOptions) =>
     this.client.fetch<RouteStage>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}`,
+        signal: options?.signal,
       },
       unmarshalRouteStage,
     )
@@ -1037,7 +1081,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateRouteStageRequest}
    * @returns A Promise of RouteStage
    */
-  updateRouteStage = (request: Readonly<UpdateRouteStageRequest>) =>
+  updateRouteStage = (request: Readonly<UpdateRouteStageRequest>, options?: RequestOptions) =>
     this.client.fetch<RouteStage>(
       {
         body: JSON.stringify(
@@ -1046,6 +1090,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}`,
+        signal: options?.signal,
       },
       unmarshalRouteStage,
     )
@@ -1056,11 +1101,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteRouteStageRequest}
    */
-  deleteRouteStage = (request: Readonly<DeleteRouteStageRequest>) =>
+  deleteRouteStage = (request: Readonly<DeleteRouteStageRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1071,11 +1117,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRouteRulesRequest}
    * @returns A Promise of ListRouteRulesResponse
    */
-  listRouteRules = (request: Readonly<ListRouteRulesRequest>) =>
+  listRouteRules = (request: Readonly<ListRouteRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListRouteRulesResponse>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}/route-rules`,
+        signal: options?.signal,
       },
       unmarshalListRouteRulesResponse,
     )
@@ -1087,7 +1134,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetRouteRulesRequest}
    * @returns A Promise of SetRouteRulesResponse
    */
-  setRouteRules = (request: Readonly<SetRouteRulesRequest>) =>
+  setRouteRules = (request: Readonly<SetRouteRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<SetRouteRulesResponse>(
       {
         body: JSON.stringify(
@@ -1096,6 +1143,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}/route-rules`,
+        signal: options?.signal,
       },
       unmarshalSetRouteRulesResponse,
     )
@@ -1107,7 +1155,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddRouteRulesRequest}
    * @returns A Promise of AddRouteRulesResponse
    */
-  addRouteRules = (request: Readonly<AddRouteRulesRequest>) =>
+  addRouteRules = (request: Readonly<AddRouteRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<AddRouteRulesResponse>(
       {
         body: JSON.stringify(
@@ -1116,6 +1164,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}/route-rules`,
+        signal: options?.signal,
       },
       unmarshalAddRouteRulesResponse,
     )
@@ -1127,7 +1176,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SearchRouteRulesRequest}
    * @returns A Promise of ListRouteRulesResponse
    */
-  searchRouteRules = (request: Readonly<SearchRouteRulesRequest> = {}) =>
+  searchRouteRules = (request: Readonly<SearchRouteRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRouteRulesResponse>(
       {
         method: 'GET',
@@ -1139,12 +1188,13 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRouteRulesResponse,
     )
 
   
-  checkDomain = (request: Readonly<CheckDomainRequest>) =>
+  checkDomain = (request: Readonly<CheckDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<CheckDomainResponse>(
       {
         body: JSON.stringify(
@@ -1153,12 +1203,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/check-domain`,
+        signal: options?.signal,
       },
       unmarshalCheckDomainResponse,
     )
 
   
-  checkPEMChain = (request: Readonly<CheckPEMChainRequest>) =>
+  checkPEMChain = (request: Readonly<CheckPEMChainRequest>, options?: RequestOptions) =>
     this.client.fetch<CheckPEMChainResponse>(
       {
         body: JSON.stringify(
@@ -1167,12 +1218,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/check-pem-chain`,
+        signal: options?.signal,
       },
       unmarshalCheckPEMChainResponse,
     )
 
   
-  protected pageOfListPurgeRequests = (request: Readonly<ListPurgeRequestsRequest> = {}) =>
+  protected pageOfListPurgeRequests = (request: Readonly<ListPurgeRequestsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPurgeRequestsResponse>(
       {
         method: 'GET',
@@ -1185,6 +1237,7 @@ export class API extends ParentAPI {
           ['pipeline_id', request.pipelineId],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListPurgeRequestsResponse,
     )
@@ -1195,8 +1248,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPurgeRequestsRequest}
    * @returns A Promise of ListPurgeRequestsResponse
    */
-  listPurgeRequests = (request: Readonly<ListPurgeRequestsRequest> = {}) =>
-    enrichForPagination('purgeRequests', this.pageOfListPurgeRequests, request)
+  listPurgeRequests = (request: Readonly<ListPurgeRequestsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('purgeRequests', this.pageOfListPurgeRequests, request, options)
 
   
   /**
@@ -1205,7 +1258,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePurgeRequestRequest}
    * @returns A Promise of PurgeRequest
    */
-  createPurgeRequest = (request: Readonly<CreatePurgeRequestRequest>) =>
+  createPurgeRequest = (request: Readonly<CreatePurgeRequestRequest>, options?: RequestOptions) =>
     this.client.fetch<PurgeRequest>(
       {
         body: JSON.stringify(
@@ -1214,6 +1267,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/purge-requests`,
+        signal: options?.signal,
       },
       unmarshalPurgeRequest,
     )
@@ -1225,11 +1279,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPurgeRequestRequest}
    * @returns A Promise of PurgeRequest
    */
-  getPurgeRequest = (request: Readonly<GetPurgeRequestRequest>) =>
+  getPurgeRequest = (request: Readonly<GetPurgeRequestRequest>, options?: RequestOptions) =>
     this.client.fetch<PurgeRequest>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/purge-requests/${validatePathParam('purgeRequestId', request.purgeRequestId)}`,
+        signal: options?.signal,
       },
       unmarshalPurgeRequest,
     )
@@ -1253,7 +1308,7 @@ export class API extends ParentAPI {
     )
 
   
-  checkLbOrigin = (request: Readonly<CheckLbOriginRequest> = {}) =>
+  checkLbOrigin = (request: Readonly<CheckLbOriginRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<CheckLbOriginResponse>(
       {
         body: JSON.stringify(
@@ -1262,6 +1317,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/edge-services/v1beta1/check-lb-origin`,
+        signal: options?.signal,
       },
       unmarshalCheckLbOriginResponse,
     )
@@ -1272,11 +1328,12 @@ export class API extends ParentAPI {
    *
    * @returns A Promise of ListPlansResponse
    */
-  listPlans = () =>
+  listPlans = (options?: RequestOptions) =>
     this.client.fetch<ListPlansResponse>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/plans`,
+        signal: options?.signal,
       },
       unmarshalListPlansResponse,
     )
@@ -1288,7 +1345,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SelectPlanRequest}
    * @returns A Promise of Plan
    */
-  selectPlan = (request: Readonly<SelectPlanRequest> = {}) =>
+  selectPlan = (request: Readonly<SelectPlanRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Plan>(
       {
         body: JSON.stringify(
@@ -1297,6 +1354,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/edge-services/v1beta1/current-plan`,
+        signal: options?.signal,
       },
       unmarshalPlan,
     )
@@ -1308,11 +1366,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetCurrentPlanRequest}
    * @returns A Promise of Plan
    */
-  getCurrentPlan = (request: Readonly<GetCurrentPlanRequest> = {}) =>
+  getCurrentPlan = (request: Readonly<GetCurrentPlanRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Plan>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/current-plan/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+        signal: options?.signal,
       },
       unmarshalPlan,
     )
@@ -1323,11 +1382,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteCurrentPlanRequest}
    */
-  deleteCurrentPlan = (request: Readonly<DeleteCurrentPlanRequest> = {}) =>
+  deleteCurrentPlan = (request: Readonly<DeleteCurrentPlanRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/edge-services/v1beta1/current-plan/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1338,11 +1398,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetBillingRequest}
    * @returns A Promise of GetBillingResponse
    */
-  getBilling = (request: Readonly<GetBillingRequest> = {}) =>
+  getBilling = (request: Readonly<GetBillingRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<GetBillingResponse>(
       {
         method: 'GET',
         path: `/edge-services/v1beta1/billing/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+        signal: options?.signal,
       },
       unmarshalGetBillingResponse,
     )

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {BOOKING_TRANSIENT_STATUSES as BOOKING_TRANSIENT_STATUSES_QAAS,JOB_TRANSIENT_STATUSES as JOB_TRANSIENT_STATUSES_QAAS,PROCESS_TRANSIENT_STATUSES as PROCESS_TRANSIENT_STATUSES_QAAS,SESSION_TRANSIENT_STATUSES as SESSION_TRANSIENT_STATUSES_QAAS,} from './content.gen.js'
 import {
   unmarshalApplication,
@@ -109,11 +109,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetJobRequest}
    * @returns A Promise of Job
    */
-  getJob = (request: Readonly<GetJobRequest>) =>
+  getJob = (request: Readonly<GetJobRequest>, options?: RequestOptions) =>
     this.client.fetch<Job>(
       {
         method: 'GET',
         path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}`,
+        signal: options?.signal,
       },
       unmarshalJob,
     )
@@ -137,7 +138,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListJobs = (request: Readonly<ListJobsRequest> = {}) =>
+  protected pageOfListJobs = (request: Readonly<ListJobsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListJobsResponse>(
       {
         method: 'GET',
@@ -156,6 +157,7 @@ export class API extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListJobsResponse,
     )
@@ -166,11 +168,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJobsRequest}
    * @returns A Promise of ListJobsResponse
    */
-  listJobs = (request: Readonly<ListJobsRequest> = {}) =>
-    enrichForPagination('jobs', this.pageOfListJobs, request)
+  listJobs = (request: Readonly<ListJobsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('jobs', this.pageOfListJobs, request, options)
 
   
-  protected pageOfListJobResults = (request: Readonly<ListJobResultsRequest>) =>
+  protected pageOfListJobResults = (request: Readonly<ListJobResultsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListJobResultsResponse>(
       {
         method: 'GET',
@@ -180,6 +182,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListJobResultsResponse,
     )
@@ -190,8 +193,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJobResultsRequest}
    * @returns A Promise of ListJobResultsResponse
    */
-  listJobResults = (request: Readonly<ListJobResultsRequest>) =>
-    enrichForPagination('jobResults', this.pageOfListJobResults, request)
+  listJobResults = (request: Readonly<ListJobResultsRequest>, options?: RequestOptions) =>
+    enrichForPagination('jobResults', this.pageOfListJobResults, request, options)
 
   
   /**
@@ -200,7 +203,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateJobRequest}
    * @returns A Promise of Job
    */
-  createJob = (request: Readonly<CreateJobRequest>) =>
+  createJob = (request: Readonly<CreateJobRequest>, options?: RequestOptions) =>
     this.client.fetch<Job>(
       {
         body: JSON.stringify(
@@ -209,6 +212,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/qaas/v1alpha1/jobs`,
+        signal: options?.signal,
       },
       unmarshalJob,
     )
@@ -220,7 +224,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateJobRequest}
    * @returns A Promise of Job
    */
-  updateJob = (request: Readonly<UpdateJobRequest>) =>
+  updateJob = (request: Readonly<UpdateJobRequest>, options?: RequestOptions) =>
     this.client.fetch<Job>(
       {
         body: JSON.stringify(
@@ -229,6 +233,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}`,
+        signal: options?.signal,
       },
       unmarshalJob,
     )
@@ -240,13 +245,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link CancelJobRequest}
    * @returns A Promise of Job
    */
-  cancelJob = (request: Readonly<CancelJobRequest>) =>
+  cancelJob = (request: Readonly<CancelJobRequest>, options?: RequestOptions) =>
     this.client.fetch<Job>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}/cancel`,
+        signal: options?.signal,
       },
       unmarshalJob,
     )
@@ -257,11 +263,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteJobRequest}
    */
-  deleteJob = (request: Readonly<DeleteJobRequest>) =>
+  deleteJob = (request: Readonly<DeleteJobRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -272,11 +279,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetJobCircuitRequest}
    * @returns A Promise of JobCircuit
    */
-  getJobCircuit = (request: Readonly<GetJobCircuitRequest>) =>
+  getJobCircuit = (request: Readonly<GetJobCircuitRequest>, options?: RequestOptions) =>
     this.client.fetch<JobCircuit>(
       {
         method: 'GET',
         path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}/circuit`,
+        signal: options?.signal,
       },
       unmarshalJobCircuit,
     )
@@ -288,17 +296,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPlatformRequest}
    * @returns A Promise of Platform
    */
-  getPlatform = (request: Readonly<GetPlatformRequest>) =>
+  getPlatform = (request: Readonly<GetPlatformRequest>, options?: RequestOptions) =>
     this.client.fetch<Platform>(
       {
         method: 'GET',
         path: `/qaas/v1alpha1/platforms/${validatePathParam('platformId', request.platformId)}`,
+        signal: options?.signal,
       },
       unmarshalPlatform,
     )
 
   
-  protected pageOfListPlatforms = (request: Readonly<ListPlatformsRequest> = {}) =>
+  protected pageOfListPlatforms = (request: Readonly<ListPlatformsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPlatformsResponse>(
       {
         method: 'GET',
@@ -313,6 +322,7 @@ export class API extends ParentAPI {
           ['platform_type', request.platformType],
           ['provider_name', request.providerName],
         ),
+        signal: options?.signal,
       },
       unmarshalListPlatformsResponse,
     )
@@ -323,8 +333,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPlatformsRequest}
    * @returns A Promise of ListPlatformsResponse
    */
-  listPlatforms = (request: Readonly<ListPlatformsRequest> = {}) =>
-    enrichForPagination('platforms', this.pageOfListPlatforms, request)
+  listPlatforms = (request: Readonly<ListPlatformsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('platforms', this.pageOfListPlatforms, request, options)
 
   
   /**
@@ -333,11 +343,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetSessionRequest}
    * @returns A Promise of Session
    */
-  getSession = (request: Readonly<GetSessionRequest>) =>
+  getSession = (request: Readonly<GetSessionRequest>, options?: RequestOptions) =>
     this.client.fetch<Session>(
       {
         method: 'GET',
         path: `/qaas/v1alpha1/sessions/${validatePathParam('sessionId', request.sessionId)}`,
+        signal: options?.signal,
       },
       unmarshalSession,
     )
@@ -361,7 +372,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListSessions = (request: Readonly<ListSessionsRequest> = {}) =>
+  protected pageOfListSessions = (request: Readonly<ListSessionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSessionsResponse>(
       {
         method: 'GET',
@@ -374,6 +385,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListSessionsResponse,
     )
@@ -384,8 +396,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSessionsRequest}
    * @returns A Promise of ListSessionsResponse
    */
-  listSessions = (request: Readonly<ListSessionsRequest> = {}) =>
-    enrichForPagination('sessions', this.pageOfListSessions, request)
+  listSessions = (request: Readonly<ListSessionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('sessions', this.pageOfListSessions, request, options)
 
   
   /**
@@ -394,7 +406,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateSessionRequest}
    * @returns A Promise of Session
    */
-  createSession = (request: Readonly<CreateSessionRequest>) =>
+  createSession = (request: Readonly<CreateSessionRequest>, options?: RequestOptions) =>
     this.client.fetch<Session>(
       {
         body: JSON.stringify(
@@ -403,6 +415,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/qaas/v1alpha1/sessions`,
+        signal: options?.signal,
       },
       unmarshalSession,
     )
@@ -414,7 +427,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateSessionRequest}
    * @returns A Promise of Session
    */
-  updateSession = (request: Readonly<UpdateSessionRequest>) =>
+  updateSession = (request: Readonly<UpdateSessionRequest>, options?: RequestOptions) =>
     this.client.fetch<Session>(
       {
         body: JSON.stringify(
@@ -423,6 +436,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/qaas/v1alpha1/sessions/${validatePathParam('sessionId', request.sessionId)}`,
+        signal: options?.signal,
       },
       unmarshalSession,
     )
@@ -434,13 +448,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link TerminateSessionRequest}
    * @returns A Promise of Session
    */
-  terminateSession = (request: Readonly<TerminateSessionRequest>) =>
+  terminateSession = (request: Readonly<TerminateSessionRequest>, options?: RequestOptions) =>
     this.client.fetch<Session>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/qaas/v1alpha1/sessions/${validatePathParam('sessionId', request.sessionId)}/terminate`,
+        signal: options?.signal,
       },
       unmarshalSession,
     )
@@ -451,16 +466,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteSessionRequest}
    */
-  deleteSession = (request: Readonly<DeleteSessionRequest>) =>
+  deleteSession = (request: Readonly<DeleteSessionRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/qaas/v1alpha1/sessions/${validatePathParam('sessionId', request.sessionId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListSessionACLs = (request: Readonly<ListSessionACLsRequest>) =>
+  protected pageOfListSessionACLs = (request: Readonly<ListSessionACLsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSessionACLsResponse>(
       {
         method: 'GET',
@@ -470,12 +486,13 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListSessionACLsResponse,
     )
   
-  listSessionACLs = (request: Readonly<ListSessionACLsRequest>) =>
-    enrichForPagination('acls', this.pageOfListSessionACLs, request)
+  listSessionACLs = (request: Readonly<ListSessionACLsRequest>, options?: RequestOptions) =>
+    enrichForPagination('acls', this.pageOfListSessionACLs, request, options)
 
   
   /**
@@ -484,7 +501,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateProcessRequest}
    * @returns A Promise of Process
    */
-  createProcess = (request: Readonly<CreateProcessRequest>) =>
+  createProcess = (request: Readonly<CreateProcessRequest>, options?: RequestOptions) =>
     this.client.fetch<Process>(
       {
         body: JSON.stringify(
@@ -493,6 +510,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/qaas/v1alpha1/processes`,
+        signal: options?.signal,
       },
       unmarshalProcess,
     )
@@ -504,11 +522,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetProcessRequest}
    * @returns A Promise of Process
    */
-  getProcess = (request: Readonly<GetProcessRequest>) =>
+  getProcess = (request: Readonly<GetProcessRequest>, options?: RequestOptions) =>
     this.client.fetch<Process>(
       {
         method: 'GET',
         path: `/qaas/v1alpha1/processes/${validatePathParam('processId', request.processId)}`,
+        signal: options?.signal,
       },
       unmarshalProcess,
     )
@@ -532,7 +551,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListProcesses = (request: Readonly<ListProcessesRequest> = {}) =>
+  protected pageOfListProcesses = (request: Readonly<ListProcessesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListProcessesResponse>(
       {
         method: 'GET',
@@ -545,6 +564,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListProcessesResponse,
     )
@@ -555,8 +575,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListProcessesRequest}
    * @returns A Promise of ListProcessesResponse
    */
-  listProcesses = (request: Readonly<ListProcessesRequest> = {}) =>
-    enrichForPagination('processes', this.pageOfListProcesses, request)
+  listProcesses = (request: Readonly<ListProcessesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('processes', this.pageOfListProcesses, request, options)
 
   
   /**
@@ -565,7 +585,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateProcessRequest}
    * @returns A Promise of Process
    */
-  updateProcess = (request: Readonly<UpdateProcessRequest>) =>
+  updateProcess = (request: Readonly<UpdateProcessRequest>, options?: RequestOptions) =>
     this.client.fetch<Process>(
       {
         body: JSON.stringify(
@@ -574,6 +594,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/qaas/v1alpha1/processes/${validatePathParam('processId', request.processId)}`,
+        signal: options?.signal,
       },
       unmarshalProcess,
     )
@@ -585,13 +606,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link CancelProcessRequest}
    * @returns A Promise of Process
    */
-  cancelProcess = (request: Readonly<CancelProcessRequest>) =>
+  cancelProcess = (request: Readonly<CancelProcessRequest>, options?: RequestOptions) =>
     this.client.fetch<Process>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/qaas/v1alpha1/processes/${validatePathParam('processId', request.processId)}/cancel`,
+        signal: options?.signal,
       },
       unmarshalProcess,
     )
@@ -602,16 +624,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteProcessRequest}
    */
-  deleteProcess = (request: Readonly<DeleteProcessRequest>) =>
+  deleteProcess = (request: Readonly<DeleteProcessRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/qaas/v1alpha1/processes/${validatePathParam('processId', request.processId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListProcessResults = (request: Readonly<ListProcessResultsRequest>) =>
+  protected pageOfListProcessResults = (request: Readonly<ListProcessResultsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListProcessResultsResponse>(
       {
         method: 'GET',
@@ -621,6 +644,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListProcessResultsResponse,
     )
@@ -631,8 +655,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListProcessResultsRequest}
    * @returns A Promise of ListProcessResultsResponse
    */
-  listProcessResults = (request: Readonly<ListProcessResultsRequest>) =>
-    enrichForPagination('processResults', this.pageOfListProcessResults, request)
+  listProcessResults = (request: Readonly<ListProcessResultsRequest>, options?: RequestOptions) =>
+    enrichForPagination('processResults', this.pageOfListProcessResults, request, options)
 
   
   /**
@@ -641,17 +665,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetApplicationRequest}
    * @returns A Promise of Application
    */
-  getApplication = (request: Readonly<GetApplicationRequest>) =>
+  getApplication = (request: Readonly<GetApplicationRequest>, options?: RequestOptions) =>
     this.client.fetch<Application>(
       {
         method: 'GET',
         path: `/qaas/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
+        signal: options?.signal,
       },
       unmarshalApplication,
     )
 
   
-  protected pageOfListApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
+  protected pageOfListApplications = (request: Readonly<ListApplicationsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListApplicationsResponse>(
       {
         method: 'GET',
@@ -663,6 +688,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListApplicationsResponse,
     )
@@ -673,8 +699,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListApplicationsRequest}
    * @returns A Promise of ListApplicationsResponse
    */
-  listApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
-    enrichForPagination('applications', this.pageOfListApplications, request)
+  listApplications = (request: Readonly<ListApplicationsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('applications', this.pageOfListApplications, request, options)
 
   
   /**
@@ -683,11 +709,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetBookingRequest}
    * @returns A Promise of Booking
    */
-  getBooking = (request: Readonly<GetBookingRequest>) =>
+  getBooking = (request: Readonly<GetBookingRequest>, options?: RequestOptions) =>
     this.client.fetch<Booking>(
       {
         method: 'GET',
         path: `/qaas/v1alpha1/bookings/${validatePathParam('bookingId', request.bookingId)}`,
+        signal: options?.signal,
       },
       unmarshalBooking,
     )
@@ -711,7 +738,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListBookings = (request: Readonly<ListBookingsRequest> = {}) =>
+  protected pageOfListBookings = (request: Readonly<ListBookingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListBookingsResponse>(
       {
         method: 'GET',
@@ -723,6 +750,7 @@ export class API extends ParentAPI {
           ['platform_id', request.platformId],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListBookingsResponse,
     )
@@ -733,8 +761,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListBookingsRequest}
    * @returns A Promise of ListBookingsResponse
    */
-  listBookings = (request: Readonly<ListBookingsRequest> = {}) =>
-    enrichForPagination('bookings', this.pageOfListBookings, request)
+  listBookings = (request: Readonly<ListBookingsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('bookings', this.pageOfListBookings, request, options)
 
   
   /**
@@ -743,7 +771,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateBookingRequest}
    * @returns A Promise of Booking
    */
-  updateBooking = (request: Readonly<UpdateBookingRequest>) =>
+  updateBooking = (request: Readonly<UpdateBookingRequest>, options?: RequestOptions) =>
     this.client.fetch<Booking>(
       {
         body: JSON.stringify(
@@ -752,6 +780,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/qaas/v1alpha1/bookings/${validatePathParam('bookingId', request.bookingId)}`,
+        signal: options?.signal,
       },
       unmarshalBooking,
     )
@@ -763,7 +792,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateModelRequest}
    * @returns A Promise of Model
    */
-  createModel = (request: Readonly<CreateModelRequest> = {}) =>
+  createModel = (request: Readonly<CreateModelRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Model>(
       {
         body: JSON.stringify(
@@ -772,6 +801,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/qaas/v1alpha1/models`,
+        signal: options?.signal,
       },
       unmarshalModel,
     )
@@ -783,17 +813,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetModelRequest}
    * @returns A Promise of Model
    */
-  getModel = (request: Readonly<GetModelRequest>) =>
+  getModel = (request: Readonly<GetModelRequest>, options?: RequestOptions) =>
     this.client.fetch<Model>(
       {
         method: 'GET',
         path: `/qaas/v1alpha1/models/${validatePathParam('modelId', request.modelId)}`,
+        signal: options?.signal,
       },
       unmarshalModel,
     )
 
   
-  protected pageOfListModels = (request: Readonly<ListModelsRequest> = {}) =>
+  protected pageOfListModels = (request: Readonly<ListModelsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListModelsResponse>(
       {
         method: 'GET',
@@ -804,6 +835,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListModelsResponse,
     )
@@ -814,8 +846,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListModelsRequest}
    * @returns A Promise of ListModelsResponse
    */
-  listModels = (request: Readonly<ListModelsRequest> = {}) =>
-    enrichForPagination('models', this.pageOfListModels, request)
+  listModels = (request: Readonly<ListModelsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('models', this.pageOfListModels, request, options)
 
   
 }

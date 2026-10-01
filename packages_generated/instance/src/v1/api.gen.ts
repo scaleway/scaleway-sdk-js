@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_INSTANCE,IP_TRANSIENT_STATUSES as IP_TRANSIENT_STATUSES_INSTANCE,PRIVATE_NIC_TRANSIENT_STATUSES as PRIVATE_NIC_TRANSIENT_STATUSES_INSTANCE,SECURITY_GROUP_TRANSIENT_STATUSES as SECURITY_GROUP_TRANSIENT_STATUSES_INSTANCE,SERVER_FILESYSTEM_TRANSIENT_STATUSES as SERVER_FILESYSTEM_TRANSIENT_STATUSES_INSTANCE,SERVER_IP_TRANSIENT_STATUSES as SERVER_IP_TRANSIENT_STATUSES_INSTANCE,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_INSTANCE,SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_INSTANCE,TASK_TRANSIENT_STATUSES as TASK_TRANSIENT_STATUSES_INSTANCE,VOLUME_SERVER_TRANSIENT_STATUSES as VOLUME_SERVER_TRANSIENT_STATUSES_INSTANCE,VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_INSTANCE,} from './content.gen.js'
 import {
   marshalApplyBlockMigrationRequest,
@@ -285,7 +285,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerTypesAvailabilityRequest}
    * @returns A Promise of GetServerTypesAvailabilityResponse
    */
-  getServerTypesAvailability = (request: Readonly<GetServerTypesAvailabilityRequest> = {}) =>
+  getServerTypesAvailability = (request: Readonly<GetServerTypesAvailabilityRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<GetServerTypesAvailabilityResponse>(
       {
         method: 'GET',
@@ -294,6 +294,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalGetServerTypesAvailabilityResponse,
     )
@@ -305,7 +306,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServersTypesRequest}
    * @returns A Promise of ListServersTypesResponse
    */
-  listServersTypes = (request: Readonly<ListServersTypesRequest> = {}) =>
+  listServersTypes = (request: Readonly<ListServersTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServersTypesResponse>(
       {
         method: 'GET',
@@ -314,6 +315,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListServersTypesResponse,
     )
@@ -325,7 +327,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVolumesTypesRequest}
    * @returns A Promise of ListVolumesTypesResponse
    */
-  listVolumesTypes = (request: Readonly<ListVolumesTypesRequest> = {}) =>
+  listVolumesTypes = (request: Readonly<ListVolumesTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVolumesTypesResponse>(
       {
         method: 'GET',
@@ -334,12 +336,13 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListVolumesTypesResponse,
     )
 
   
-  protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
+  protected pageOfListServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
@@ -365,6 +368,7 @@ export class API extends ParentAPI {
           ['with_ip', request.withIp],
           ['without_ip', request.withoutIp],
         ),
+        signal: options?.signal,
       },
       unmarshalListServersResponse,
     )
@@ -375,11 +379,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
    */
-  listServers = (request: Readonly<ListServersRequest> = {}) =>
-    enrichForPagination('servers', this.pageOfListServers, request)
+  listServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('servers', this.pageOfListServers, request, options)
 
   
-  protected _createServer = (request: Readonly<CreateServerRequest>) =>
+  protected _createServer = (request: Readonly<CreateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateServerResponse>(
       {
         body: JSON.stringify(
@@ -388,6 +392,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
+        signal: options?.signal,
       },
       unmarshalCreateServerResponse,
     )
@@ -398,11 +403,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteServerRequest}
    */
-  deleteServer = (request: Readonly<DeleteServerRequest>) =>
+  deleteServer = (request: Readonly<DeleteServerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -413,17 +419,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of GetServerResponse
    */
-  getServer = (request: Readonly<GetServerRequest>) =>
+  getServer = (request: Readonly<GetServerRequest>, options?: RequestOptions) =>
     this.client.fetch<GetServerResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalGetServerResponse,
     )
 
   
-  protected _setServer = (request: Readonly<SetServerRequest>) =>
+  protected _setServer = (request: Readonly<SetServerRequest>, options?: RequestOptions) =>
     this.client.fetch<SetServerResponse>(
       {
         body: JSON.stringify(
@@ -432,12 +439,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('id', request.id)}`,
+        signal: options?.signal,
       },
       unmarshalSetServerResponse,
     )
 
   
-  protected _updateServer = (request: Readonly<UpdateServerRequest>) =>
+  protected _updateServer = (request: Readonly<UpdateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateServerResponse>(
       {
         body: JSON.stringify(
@@ -446,6 +454,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalUpdateServerResponse,
     )
@@ -457,11 +466,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServerActionsRequest}
    * @returns A Promise of ListServerActionsResponse
    */
-  listServerActions = (request: Readonly<ListServerActionsRequest>) =>
+  listServerActions = (request: Readonly<ListServerActionsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListServerActionsResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/action`,
+        signal: options?.signal,
       },
       unmarshalListServerActionsResponse,
     )
@@ -488,7 +498,7 @@ The `backup` action can be done with:
    * @param request - The request {@link ServerActionRequest}
    * @returns A Promise of ServerActionResponse
    */
-  serverAction = (request: Readonly<ServerActionRequest>) =>
+  serverAction = (request: Readonly<ServerActionRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerActionResponse>(
       {
         body: JSON.stringify(
@@ -497,6 +507,7 @@ The `backup` action can be done with:
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/action`,
+        signal: options?.signal,
       },
       unmarshalServerActionResponse,
     )
@@ -508,11 +519,12 @@ The `backup` action can be done with:
    * @param request - The request {@link ListServerUserDataRequest}
    * @returns A Promise of ListServerUserDataResponse
    */
-  listServerUserData = (request: Readonly<ListServerUserDataRequest>) =>
+  listServerUserData = (request: Readonly<ListServerUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<ListServerUserDataResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user_data`,
+        signal: options?.signal,
       },
       unmarshalListServerUserDataResponse,
     )
@@ -523,11 +535,12 @@ The `backup` action can be done with:
    *
    * @param request - The request {@link DeleteServerUserDataRequest}
    */
-  deleteServerUserData = (request: Readonly<DeleteServerUserDataRequest>) =>
+  deleteServerUserData = (request: Readonly<DeleteServerUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user_data/${validatePathParam('key', request.key)}`,
+        signal: options?.signal,
       },
     )
 
@@ -543,11 +556,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetServerCompatibleTypesRequest}
    * @returns A Promise of ServerCompatibleTypes
    */
-  getServerCompatibleTypes = (request: Readonly<GetServerCompatibleTypesRequest>) =>
+  getServerCompatibleTypes = (request: Readonly<GetServerCompatibleTypesRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerCompatibleTypes>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/compatible-types`,
+        signal: options?.signal,
       },
       unmarshalServerCompatibleTypes,
     )
@@ -559,7 +573,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link AttachServerVolumeRequest}
    * @returns A Promise of AttachServerVolumeResponse
    */
-  attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
+  attachServerVolume = (request: Readonly<AttachServerVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<AttachServerVolumeResponse>(
       {
         body: JSON.stringify(
@@ -568,6 +582,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-volume`,
+        signal: options?.signal,
       },
       unmarshalAttachServerVolumeResponse,
     )
@@ -579,7 +594,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link DetachServerVolumeRequest}
    * @returns A Promise of DetachServerVolumeResponse
    */
-  detachServerVolume = (request: Readonly<DetachServerVolumeRequest>) =>
+  detachServerVolume = (request: Readonly<DetachServerVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<DetachServerVolumeResponse>(
       {
         body: JSON.stringify(
@@ -588,6 +603,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-volume`,
+        signal: options?.signal,
       },
       unmarshalDetachServerVolumeResponse,
     )
@@ -599,7 +615,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link AttachServerFileSystemRequest}
    * @returns A Promise of AttachServerFileSystemResponse
    */
-  attachServerFileSystem = (request: Readonly<AttachServerFileSystemRequest>) =>
+  attachServerFileSystem = (request: Readonly<AttachServerFileSystemRequest>, options?: RequestOptions) =>
     this.client.fetch<AttachServerFileSystemResponse>(
       {
         body: JSON.stringify(
@@ -608,6 +624,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-filesystem`,
+        signal: options?.signal,
       },
       unmarshalAttachServerFileSystemResponse,
     )
@@ -619,7 +636,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link DetachServerFileSystemRequest}
    * @returns A Promise of DetachServerFileSystemResponse
    */
-  detachServerFileSystem = (request: Readonly<DetachServerFileSystemRequest>) =>
+  detachServerFileSystem = (request: Readonly<DetachServerFileSystemRequest>, options?: RequestOptions) =>
     this.client.fetch<DetachServerFileSystemResponse>(
       {
         body: JSON.stringify(
@@ -628,12 +645,13 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-filesystem`,
+        signal: options?.signal,
       },
       unmarshalDetachServerFileSystemResponse,
     )
 
   
-  protected pageOfListImages = (request: Readonly<ListImagesRequest> = {}) =>
+  protected pageOfListImages = (request: Readonly<ListImagesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListImagesResponse>(
       {
         method: 'GET',
@@ -648,6 +666,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['public', request.public],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListImagesResponse,
     )
@@ -658,8 +677,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
    */
-  listImages = (request: Readonly<ListImagesRequest> = {}) =>
-    enrichForPagination('images', this.pageOfListImages, request)
+  listImages = (request: Readonly<ListImagesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('images', this.pageOfListImages, request, options)
 
   
   /**
@@ -668,11 +687,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetImageRequest}
    * @returns A Promise of GetImageResponse
    */
-  getImage = (request: Readonly<GetImageRequest>) =>
+  getImage = (request: Readonly<GetImageRequest>, options?: RequestOptions) =>
     this.client.fetch<GetImageResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
+        signal: options?.signal,
       },
       unmarshalGetImageResponse,
     )
@@ -684,7 +704,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link CreateImageRequest}
    * @returns A Promise of CreateImageResponse
    */
-  createImage = (request: Readonly<CreateImageRequest>) =>
+  createImage = (request: Readonly<CreateImageRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateImageResponse>(
       {
         body: JSON.stringify(
@@ -693,12 +713,13 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images`,
+        signal: options?.signal,
       },
       unmarshalCreateImageResponse,
     )
 
   
-  protected _setImage = (request: Readonly<SetImageRequest>) =>
+  protected _setImage = (request: Readonly<SetImageRequest>, options?: RequestOptions) =>
     this.client.fetch<SetImageResponse>(
       {
         body: JSON.stringify(
@@ -707,6 +728,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('id', request.id)}`,
+        signal: options?.signal,
       },
       unmarshalSetImageResponse,
     )
@@ -718,7 +740,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link UpdateImageRequest}
    * @returns A Promise of UpdateImageResponse
    */
-  updateImage = (request: Readonly<UpdateImageRequest>) =>
+  updateImage = (request: Readonly<UpdateImageRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateImageResponse>(
       {
         body: JSON.stringify(
@@ -727,6 +749,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
+        signal: options?.signal,
       },
       unmarshalUpdateImageResponse,
     )
@@ -737,16 +760,17 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    *
    * @param request - The request {@link DeleteImageRequest}
    */
-  deleteImage = (request: Readonly<DeleteImageRequest>) =>
+  deleteImage = (request: Readonly<DeleteImageRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
+  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
@@ -760,6 +784,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['project', request.project],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListSnapshotsResponse,
     )
@@ -770,8 +795,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
    */
-  listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
-    enrichForPagination('snapshots', this.pageOfListSnapshots, request)
+  listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('snapshots', this.pageOfListSnapshots, request, options)
 
   
   /**
@@ -780,7 +805,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of CreateSnapshotResponse
    */
-  createSnapshot = (request: Readonly<CreateSnapshotRequest> = {}) =>
+  createSnapshot = (request: Readonly<CreateSnapshotRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<CreateSnapshotResponse>(
       {
         body: JSON.stringify(
@@ -789,6 +814,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
+        signal: options?.signal,
       },
       unmarshalCreateSnapshotResponse,
     )
@@ -800,17 +826,18 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetSnapshotRequest}
    * @returns A Promise of GetSnapshotResponse
    */
-  getSnapshot = (request: Readonly<GetSnapshotRequest>) =>
+  getSnapshot = (request: Readonly<GetSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<GetSnapshotResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalGetSnapshotResponse,
     )
 
   
-  protected _setSnapshot = (request: Readonly<SetSnapshotRequest>) =>
+  protected _setSnapshot = (request: Readonly<SetSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<SetSnapshotResponse>(
       {
         body: JSON.stringify(
@@ -819,6 +846,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSetSnapshotResponse,
     )
@@ -830,7 +858,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link UpdateSnapshotRequest}
    * @returns A Promise of UpdateSnapshotResponse
    */
-  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>) =>
+  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateSnapshotResponse>(
       {
         body: JSON.stringify(
@@ -839,6 +867,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalUpdateSnapshotResponse,
     )
@@ -849,11 +878,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    *
    * @param request - The request {@link DeleteSnapshotRequest}
    */
-  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>) =>
+  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -864,7 +894,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ExportSnapshotRequest}
    * @returns A Promise of ExportSnapshotResponse
    */
-  exportSnapshot = (request: Readonly<ExportSnapshotRequest>) =>
+  exportSnapshot = (request: Readonly<ExportSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<ExportSnapshotResponse>(
       {
         body: JSON.stringify(
@@ -873,12 +903,13 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export`,
+        signal: options?.signal,
       },
       unmarshalExportSnapshotResponse,
     )
 
   
-  protected pageOfListVolumes = (request: Readonly<ListVolumesRequest> = {}) =>
+  protected pageOfListVolumes = (request: Readonly<ListVolumesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVolumesResponse>(
       {
         method: 'GET',
@@ -893,6 +924,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
           ['volume_type', request.volumeType],
         ),
+        signal: options?.signal,
       },
       unmarshalListVolumesResponse,
     )
@@ -903,8 +935,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
    */
-  listVolumes = (request: Readonly<ListVolumesRequest> = {}) =>
-    enrichForPagination('volumes', this.pageOfListVolumes, request)
+  listVolumes = (request: Readonly<ListVolumesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('volumes', this.pageOfListVolumes, request, options)
 
   
   /**
@@ -913,7 +945,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of CreateVolumeResponse
    */
-  createVolume = (request: Readonly<CreateVolumeRequest> = {}) =>
+  createVolume = (request: Readonly<CreateVolumeRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<CreateVolumeResponse>(
       {
         body: JSON.stringify(
@@ -922,6 +954,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
+        signal: options?.signal,
       },
       unmarshalCreateVolumeResponse,
     )
@@ -933,11 +966,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetVolumeRequest}
    * @returns A Promise of GetVolumeResponse
    */
-  getVolume = (request: Readonly<GetVolumeRequest>) =>
+  getVolume = (request: Readonly<GetVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<GetVolumeResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
       unmarshalGetVolumeResponse,
     )
@@ -949,7 +983,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link UpdateVolumeRequest}
    * @returns A Promise of UpdateVolumeResponse
    */
-  updateVolume = (request: Readonly<UpdateVolumeRequest>) =>
+  updateVolume = (request: Readonly<UpdateVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateVolumeResponse>(
       {
         body: JSON.stringify(
@@ -958,6 +992,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
       unmarshalUpdateVolumeResponse,
     )
@@ -968,16 +1003,17 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    *
    * @param request - The request {@link DeleteVolumeRequest}
    */
-  deleteVolume = (request: Readonly<DeleteVolumeRequest>) =>
+  deleteVolume = (request: Readonly<DeleteVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}) =>
+  protected pageOfListSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSecurityGroupsResponse>(
       {
         method: 'GET',
@@ -992,6 +1028,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['tags', request.tags
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
         ),
+        signal: options?.signal,
       },
       unmarshalListSecurityGroupsResponse,
     )
@@ -1002,8 +1039,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ListSecurityGroupsRequest}
    * @returns A Promise of ListSecurityGroupsResponse
    */
-  listSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}) =>
-    enrichForPagination('securityGroups', this.pageOfListSecurityGroups, request)
+  listSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('securityGroups', this.pageOfListSecurityGroups, request, options)
 
   
   /**
@@ -1012,7 +1049,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link CreateSecurityGroupRequest}
    * @returns A Promise of CreateSecurityGroupResponse
    */
-  createSecurityGroup = (request: Readonly<CreateSecurityGroupRequest>) =>
+  createSecurityGroup = (request: Readonly<CreateSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateSecurityGroupResponse>(
       {
         body: JSON.stringify(
@@ -1021,6 +1058,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups`,
+        signal: options?.signal,
       },
       unmarshalCreateSecurityGroupResponse,
     )
@@ -1032,11 +1070,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetSecurityGroupRequest}
    * @returns A Promise of GetSecurityGroupResponse
    */
-  getSecurityGroup = (request: Readonly<GetSecurityGroupRequest>) =>
+  getSecurityGroup = (request: Readonly<GetSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<GetSecurityGroupResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalGetSecurityGroupResponse,
     )
@@ -1047,16 +1086,17 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    *
    * @param request - The request {@link DeleteSecurityGroupRequest}
    */
-  deleteSecurityGroup = (request: Readonly<DeleteSecurityGroupRequest>) =>
+  deleteSecurityGroup = (request: Readonly<DeleteSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected _setSecurityGroup = (request: Readonly<SetSecurityGroupRequest>) =>
+  protected _setSecurityGroup = (request: Readonly<SetSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<SetSecurityGroupResponse>(
       {
         body: JSON.stringify(
@@ -1065,6 +1105,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('id', request.id)}`,
+        signal: options?.signal,
       },
       unmarshalSetSecurityGroupResponse,
     )
@@ -1076,7 +1117,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link UpdateSecurityGroupRequest}
    * @returns A Promise of UpdateSecurityGroupResponse
    */
-  updateSecurityGroup = (request: Readonly<UpdateSecurityGroupRequest>) =>
+  updateSecurityGroup = (request: Readonly<UpdateSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateSecurityGroupResponse>(
       {
         body: JSON.stringify(
@@ -1085,6 +1126,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalUpdateSecurityGroupResponse,
     )
@@ -1096,17 +1138,18 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ListDefaultSecurityGroupRulesRequest}
    * @returns A Promise of ListSecurityGroupRulesResponse
    */
-  listDefaultSecurityGroupRules = (request: Readonly<ListDefaultSecurityGroupRulesRequest> = {}) =>
+  listDefaultSecurityGroupRules = (request: Readonly<ListDefaultSecurityGroupRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSecurityGroupRulesResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/default/rules`,
+        signal: options?.signal,
       },
       unmarshalListSecurityGroupRulesResponse,
     )
 
   
-  protected pageOfListSecurityGroupRules = (request: Readonly<ListSecurityGroupRulesRequest>) =>
+  protected pageOfListSecurityGroupRules = (request: Readonly<ListSecurityGroupRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSecurityGroupRulesResponse>(
       {
         method: 'GET',
@@ -1115,6 +1158,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['page', request.page],
           ['per_page', request.perPage ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListSecurityGroupRulesResponse,
     )
@@ -1125,8 +1169,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ListSecurityGroupRulesRequest}
    * @returns A Promise of ListSecurityGroupRulesResponse
    */
-  listSecurityGroupRules = (request: Readonly<ListSecurityGroupRulesRequest>) =>
-    enrichForPagination('rules', this.pageOfListSecurityGroupRules, request)
+  listSecurityGroupRules = (request: Readonly<ListSecurityGroupRulesRequest>, options?: RequestOptions) =>
+    enrichForPagination('rules', this.pageOfListSecurityGroupRules, request, options)
 
   
   /**
@@ -1135,7 +1179,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link CreateSecurityGroupRuleRequest}
    * @returns A Promise of CreateSecurityGroupRuleResponse
    */
-  createSecurityGroupRule = (request: Readonly<CreateSecurityGroupRuleRequest>) =>
+  createSecurityGroupRule = (request: Readonly<CreateSecurityGroupRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateSecurityGroupRuleResponse>(
       {
         body: JSON.stringify(
@@ -1144,6 +1188,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules`,
+        signal: options?.signal,
       },
       unmarshalCreateSecurityGroupRuleResponse,
     )
@@ -1155,7 +1200,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link SetSecurityGroupRulesRequest}
    * @returns A Promise of SetSecurityGroupRulesResponse
    */
-  setSecurityGroupRules = (request: Readonly<SetSecurityGroupRulesRequest>) =>
+  setSecurityGroupRules = (request: Readonly<SetSecurityGroupRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<SetSecurityGroupRulesResponse>(
       {
         body: JSON.stringify(
@@ -1164,6 +1209,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules`,
+        signal: options?.signal,
       },
       unmarshalSetSecurityGroupRulesResponse,
     )
@@ -1174,11 +1220,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    *
    * @param request - The request {@link DeleteSecurityGroupRuleRequest}
    */
-  deleteSecurityGroupRule = (request: Readonly<DeleteSecurityGroupRuleRequest>) =>
+  deleteSecurityGroupRule = (request: Readonly<DeleteSecurityGroupRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1189,17 +1236,18 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetSecurityGroupRuleRequest}
    * @returns A Promise of GetSecurityGroupRuleResponse
    */
-  getSecurityGroupRule = (request: Readonly<GetSecurityGroupRuleRequest>) =>
+  getSecurityGroupRule = (request: Readonly<GetSecurityGroupRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<GetSecurityGroupRuleResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
+        signal: options?.signal,
       },
       unmarshalGetSecurityGroupRuleResponse,
     )
 
   
-  protected _setSecurityGroupRule = (request: Readonly<SetSecurityGroupRuleRequest>) =>
+  protected _setSecurityGroupRule = (request: Readonly<SetSecurityGroupRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<SetSecurityGroupRuleResponse>(
       {
         body: JSON.stringify(
@@ -1208,6 +1256,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
+        signal: options?.signal,
       },
       unmarshalSetSecurityGroupRuleResponse,
     )
@@ -1219,7 +1268,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link UpdateSecurityGroupRuleRequest}
    * @returns A Promise of UpdateSecurityGroupRuleResponse
    */
-  updateSecurityGroupRule = (request: Readonly<UpdateSecurityGroupRuleRequest>) =>
+  updateSecurityGroupRule = (request: Readonly<UpdateSecurityGroupRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateSecurityGroupRuleResponse>(
       {
         body: JSON.stringify(
@@ -1228,12 +1277,13 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
+        signal: options?.signal,
       },
       unmarshalUpdateSecurityGroupRuleResponse,
     )
 
   
-  protected pageOfListPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}) =>
+  protected pageOfListPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPlacementGroupsResponse>(
       {
         method: 'GET',
@@ -1247,6 +1297,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['tags', request.tags
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
         ),
+        signal: options?.signal,
       },
       unmarshalListPlacementGroupsResponse,
     )
@@ -1257,8 +1308,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ListPlacementGroupsRequest}
    * @returns A Promise of ListPlacementGroupsResponse
    */
-  listPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}) =>
-    enrichForPagination('placementGroups', this.pageOfListPlacementGroups, request)
+  listPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('placementGroups', this.pageOfListPlacementGroups, request, options)
 
   
   /**
@@ -1267,7 +1318,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link CreatePlacementGroupRequest}
    * @returns A Promise of CreatePlacementGroupResponse
    */
-  createPlacementGroup = (request: Readonly<CreatePlacementGroupRequest> = {}) =>
+  createPlacementGroup = (request: Readonly<CreatePlacementGroupRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<CreatePlacementGroupResponse>(
       {
         body: JSON.stringify(
@@ -1276,6 +1327,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups`,
+        signal: options?.signal,
       },
       unmarshalCreatePlacementGroupResponse,
     )
@@ -1287,11 +1339,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetPlacementGroupRequest}
    * @returns A Promise of GetPlacementGroupResponse
    */
-  getPlacementGroup = (request: Readonly<GetPlacementGroupRequest>) =>
+  getPlacementGroup = (request: Readonly<GetPlacementGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<GetPlacementGroupResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalGetPlacementGroupResponse,
     )
@@ -1303,7 +1356,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link SetPlacementGroupRequest}
    * @returns A Promise of SetPlacementGroupResponse
    */
-  setPlacementGroup = (request: Readonly<SetPlacementGroupRequest>) =>
+  setPlacementGroup = (request: Readonly<SetPlacementGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<SetPlacementGroupResponse>(
       {
         body: JSON.stringify(
@@ -1312,6 +1365,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalSetPlacementGroupResponse,
     )
@@ -1323,7 +1377,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link UpdatePlacementGroupRequest}
    * @returns A Promise of UpdatePlacementGroupResponse
    */
-  updatePlacementGroup = (request: Readonly<UpdatePlacementGroupRequest>) =>
+  updatePlacementGroup = (request: Readonly<UpdatePlacementGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdatePlacementGroupResponse>(
       {
         body: JSON.stringify(
@@ -1332,6 +1386,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalUpdatePlacementGroupResponse,
     )
@@ -1342,11 +1397,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    *
    * @param request - The request {@link DeletePlacementGroupRequest}
    */
-  deletePlacementGroup = (request: Readonly<DeletePlacementGroupRequest>) =>
+  deletePlacementGroup = (request: Readonly<DeletePlacementGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1357,11 +1413,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetPlacementGroupServersRequest}
    * @returns A Promise of GetPlacementGroupServersResponse
    */
-  getPlacementGroupServers = (request: Readonly<GetPlacementGroupServersRequest>) =>
+  getPlacementGroupServers = (request: Readonly<GetPlacementGroupServersRequest>, options?: RequestOptions) =>
     this.client.fetch<GetPlacementGroupServersResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalGetPlacementGroupServersResponse,
     )
@@ -1373,7 +1430,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link SetPlacementGroupServersRequest}
    * @returns A Promise of SetPlacementGroupServersResponse
    */
-  setPlacementGroupServers = (request: Readonly<SetPlacementGroupServersRequest>) =>
+  setPlacementGroupServers = (request: Readonly<SetPlacementGroupServersRequest>, options?: RequestOptions) =>
     this.client.fetch<SetPlacementGroupServersResponse>(
       {
         body: JSON.stringify(
@@ -1382,6 +1439,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalSetPlacementGroupServersResponse,
     )
@@ -1393,7 +1451,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link UpdatePlacementGroupServersRequest}
    * @returns A Promise of UpdatePlacementGroupServersResponse
    */
-  updatePlacementGroupServers = (request: Readonly<UpdatePlacementGroupServersRequest>) =>
+  updatePlacementGroupServers = (request: Readonly<UpdatePlacementGroupServersRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdatePlacementGroupServersResponse>(
       {
         body: JSON.stringify(
@@ -1402,12 +1460,13 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalUpdatePlacementGroupServersResponse,
     )
 
   
-  protected pageOfListIps = (request: Readonly<ListIpsRequest> = {}) =>
+  protected pageOfListIps = (request: Readonly<ListIpsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
@@ -1422,6 +1481,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
           ['type', request.type],
         ),
+        signal: options?.signal,
       },
       unmarshalListIpsResponse,
     )
@@ -1432,8 +1492,8 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link ListIpsRequest}
    * @returns A Promise of ListIpsResponse
    */
-  listIps = (request: Readonly<ListIpsRequest> = {}) =>
-    enrichForPagination('ips', this.pageOfListIps, request)
+  listIps = (request: Readonly<ListIpsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('ips', this.pageOfListIps, request, options)
 
   
   /**
@@ -1442,7 +1502,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link CreateIpRequest}
    * @returns A Promise of CreateIpResponse
    */
-  createIp = (request: Readonly<CreateIpRequest> = {}) =>
+  createIp = (request: Readonly<CreateIpRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<CreateIpResponse>(
       {
         body: JSON.stringify(
@@ -1451,6 +1511,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
+        signal: options?.signal,
       },
       unmarshalCreateIpResponse,
     )
@@ -1462,11 +1523,12 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link GetIpRequest}
    * @returns A Promise of GetIpResponse
    */
-  getIp = (request: Readonly<GetIpRequest>) =>
+  getIp = (request: Readonly<GetIpRequest>, options?: RequestOptions) =>
     this.client.fetch<GetIpResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
+        signal: options?.signal,
       },
       unmarshalGetIpResponse,
     )
@@ -1478,7 +1540,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    * @param request - The request {@link UpdateIpRequest}
    * @returns A Promise of UpdateIpResponse
    */
-  updateIp = (request: Readonly<UpdateIpRequest>) =>
+  updateIp = (request: Readonly<UpdateIpRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateIpResponse>(
       {
         body: JSON.stringify(
@@ -1487,6 +1549,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
+        signal: options?.signal,
       },
       unmarshalUpdateIpResponse,
     )
@@ -1497,16 +1560,17 @@ If the specified Instance offer is flagged as end of service, the best compatibl
    *
    * @param request - The request {@link DeleteIpRequest}
    */
-  deleteIp = (request: Readonly<DeleteIpRequest>) =>
+  deleteIp = (request: Readonly<DeleteIpRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListPrivateNICs = (request: Readonly<ListPrivateNICsRequest>) =>
+  protected pageOfListPrivateNICs = (request: Readonly<ListPrivateNICsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListPrivateNICsResponse>(
       {
         method: 'GET',
@@ -1517,6 +1581,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['tags', request.tags
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
         ),
+        signal: options?.signal,
       },
       unmarshalListPrivateNICsResponse,
     )
@@ -1529,8 +1594,8 @@ not listed. We strongly recommend migrating to v2alpha1 to retrieve all private 
    * @param request - The request {@link ListPrivateNICsRequest}
    * @returns A Promise of ListPrivateNICsResponse
    */
-  listPrivateNICs = (request: Readonly<ListPrivateNICsRequest>) =>
-    enrichForPagination('privateNics', this.pageOfListPrivateNICs, request)
+  listPrivateNICs = (request: Readonly<ListPrivateNICsRequest>, options?: RequestOptions) =>
+    enrichForPagination('privateNics', this.pageOfListPrivateNICs, request, options)
 
   
   /**
@@ -1544,7 +1609,7 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
    * @param request - The request {@link CreatePrivateNICRequest}
    * @returns A Promise of CreatePrivateNICResponse
    */
-  createPrivateNIC = (request: Readonly<CreatePrivateNICRequest>) =>
+  createPrivateNIC = (request: Readonly<CreatePrivateNICRequest>, options?: RequestOptions) =>
     this.client.fetch<CreatePrivateNICResponse>(
       {
         body: JSON.stringify(
@@ -1553,6 +1618,7 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics`,
+        signal: options?.signal,
       },
       unmarshalCreatePrivateNICResponse,
     )
@@ -1564,11 +1630,12 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
    * @param request - The request {@link GetPrivateNICRequest}
    * @returns A Promise of GetPrivateNICResponse
    */
-  getPrivateNIC = (request: Readonly<GetPrivateNICRequest>) =>
+  getPrivateNIC = (request: Readonly<GetPrivateNICRequest>, options?: RequestOptions) =>
     this.client.fetch<GetPrivateNICResponse>(
       {
         method: 'GET',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
+        signal: options?.signal,
       },
       unmarshalGetPrivateNICResponse,
     )
@@ -1580,7 +1647,7 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
    * @param request - The request {@link UpdatePrivateNICRequest}
    * @returns A Promise of PrivateNIC
    */
-  updatePrivateNIC = (request: Readonly<UpdatePrivateNICRequest>) =>
+  updatePrivateNIC = (request: Readonly<UpdatePrivateNICRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNIC>(
       {
         body: JSON.stringify(
@@ -1589,6 +1656,7 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
+        signal: options?.signal,
       },
       unmarshalPrivateNIC,
     )
@@ -1599,16 +1667,17 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
    *
    * @param request - The request {@link DeletePrivateNICRequest}
    */
-  deletePrivateNIC = (request: Readonly<DeletePrivateNICRequest>) =>
+  deletePrivateNIC = (request: Readonly<DeletePrivateNICRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  getDashboard = (request: Readonly<GetDashboardRequest> = {}) =>
+  getDashboard = (request: Readonly<GetDashboardRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<GetDashboardResponse>(
       {
         method: 'GET',
@@ -1617,6 +1686,7 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
           ['organization', request.organization],
           ['project', request.project],
         ),
+        signal: options?.signal,
       },
       unmarshalGetDashboardResponse,
     )
@@ -1632,7 +1702,7 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
    * @param request - The request {@link PlanBlockMigrationRequest}
    * @returns A Promise of MigrationPlan
    */
-  planBlockMigration = (request: Readonly<PlanBlockMigrationRequest> = {}) =>
+  planBlockMigration = (request: Readonly<PlanBlockMigrationRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<MigrationPlan>(
       {
         body: JSON.stringify(
@@ -1641,6 +1711,7 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/plan`,
+        signal: options?.signal,
       },
       unmarshalMigrationPlan,
     )
@@ -1651,7 +1722,7 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
    *
    * @param request - The request {@link ApplyBlockMigrationRequest}
    */
-  applyBlockMigration = (request: Readonly<ApplyBlockMigrationRequest>) =>
+  applyBlockMigration = (request: Readonly<ApplyBlockMigrationRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1660,11 +1731,12 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/apply`,
+        signal: options?.signal,
       },
     )
 
   
-  checkBlockMigrationOrganizationQuotas = (request: Readonly<CheckBlockMigrationOrganizationQuotasRequest> = {}) =>
+  checkBlockMigrationOrganizationQuotas = (request: Readonly<CheckBlockMigrationOrganizationQuotasRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1673,6 +1745,7 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/check-organization-quotas`,
+        signal: options?.signal,
       },
     )
 
@@ -1682,13 +1755,14 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
    *
    * @param request - The request {@link ReleaseIpToIpamRequest}
    */
-  releaseIpToIpam = (request: Readonly<ReleaseIpToIpamRequest>) =>
+  releaseIpToIpam = (request: Readonly<ReleaseIpToIpamRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}/release-to-ipam`,
+        signal: options?.signal,
       },
     )
 

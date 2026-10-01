@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DEDICATED_CONNECTION_TRANSIENT_STATUSES as DEDICATED_CONNECTION_TRANSIENT_STATUSES_INTERLINK,LINK_TRANSIENT_STATUSES as LINK_TRANSIENT_STATUSES_INTERLINK,} from './content.gen.js'
 import {
   marshalAttachRoutingPolicyRequest,
@@ -92,7 +92,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListDedicatedConnections = (request: Readonly<ListDedicatedConnectionsRequest> = {}) =>
+  protected pageOfListDedicatedConnections = (request: Readonly<ListDedicatedConnectionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDedicatedConnectionsResponse>(
       {
         method: 'GET',
@@ -109,6 +109,7 @@ export class API extends ParentAPI {
           ['status', request.status],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListDedicatedConnectionsResponse,
     )
@@ -119,8 +120,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDedicatedConnectionsRequest}
    * @returns A Promise of ListDedicatedConnectionsResponse
    */
-  listDedicatedConnections = (request: Readonly<ListDedicatedConnectionsRequest> = {}) =>
-    enrichForPagination('connections', this.pageOfListDedicatedConnections, request)
+  listDedicatedConnections = (request: Readonly<ListDedicatedConnectionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('connections', this.pageOfListDedicatedConnections, request, options)
 
   
   /**
@@ -129,11 +130,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDedicatedConnectionRequest}
    * @returns A Promise of DedicatedConnection
    */
-  getDedicatedConnection = (request: Readonly<GetDedicatedConnectionRequest>) =>
+  getDedicatedConnection = (request: Readonly<GetDedicatedConnectionRequest>, options?: RequestOptions) =>
     this.client.fetch<DedicatedConnection>(
       {
         method: 'GET',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/dedicated-connections/${validatePathParam('connectionId', request.connectionId)}`,
+        signal: options?.signal,
       },
       unmarshalDedicatedConnection,
     )
@@ -157,7 +159,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListPartners = (request: Readonly<ListPartnersRequest> = {}) =>
+  protected pageOfListPartners = (request: Readonly<ListPartnersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPartnersResponse>(
       {
         method: 'GET',
@@ -169,6 +171,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['pop_ids', request.popIds],
         ),
+        signal: options?.signal,
       },
       unmarshalListPartnersResponse,
     )
@@ -179,8 +182,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPartnersRequest}
    * @returns A Promise of ListPartnersResponse
    */
-  listPartners = (request: Readonly<ListPartnersRequest> = {}) =>
-    enrichForPagination('partners', this.pageOfListPartners, request)
+  listPartners = (request: Readonly<ListPartnersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('partners', this.pageOfListPartners, request, options)
 
   
   /**
@@ -189,17 +192,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPartnerRequest}
    * @returns A Promise of Partner
    */
-  getPartner = (request: Readonly<GetPartnerRequest>) =>
+  getPartner = (request: Readonly<GetPartnerRequest>, options?: RequestOptions) =>
     this.client.fetch<Partner>(
       {
         method: 'GET',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/partners/${validatePathParam('partnerId', request.partnerId)}`,
+        signal: options?.signal,
       },
       unmarshalPartner,
     )
 
   
-  protected pageOfListPops = (request: Readonly<ListPopsRequest> = {}) =>
+  protected pageOfListPops = (request: Readonly<ListPopsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPopsResponse>(
       {
         method: 'GET',
@@ -215,6 +219,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['partner_id', request.partnerId],
         ),
+        signal: options?.signal,
       },
       unmarshalListPopsResponse,
     )
@@ -225,8 +230,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPopsRequest}
    * @returns A Promise of ListPopsResponse
    */
-  listPops = (request: Readonly<ListPopsRequest> = {}) =>
-    enrichForPagination('pops', this.pageOfListPops, request)
+  listPops = (request: Readonly<ListPopsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('pops', this.pageOfListPops, request, options)
 
   
   /**
@@ -235,17 +240,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPopRequest}
    * @returns A Promise of Pop
    */
-  getPop = (request: Readonly<GetPopRequest>) =>
+  getPop = (request: Readonly<GetPopRequest>, options?: RequestOptions) =>
     this.client.fetch<Pop>(
       {
         method: 'GET',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pops/${validatePathParam('popId', request.popId)}`,
+        signal: options?.signal,
       },
       unmarshalPop,
     )
 
   
-  protected pageOfListLinks = (request: Readonly<ListLinksRequest> = {}) =>
+  protected pageOfListLinks = (request: Readonly<ListLinksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListLinksResponse>(
       {
         method: 'GET',
@@ -270,6 +276,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['vpc_id', request.vpcId],
         ),
+        signal: options?.signal,
       },
       unmarshalListLinksResponse,
     )
@@ -280,8 +287,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListLinksRequest}
    * @returns A Promise of ListLinksResponse
    */
-  listLinks = (request: Readonly<ListLinksRequest> = {}) =>
-    enrichForPagination('links', this.pageOfListLinks, request)
+  listLinks = (request: Readonly<ListLinksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('links', this.pageOfListLinks, request, options)
 
   
   /**
@@ -290,11 +297,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetLinkRequest}
    * @returns A Promise of Link
    */
-  getLink = (request: Readonly<GetLinkRequest>) =>
+  getLink = (request: Readonly<GetLinkRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         method: 'GET',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -324,7 +332,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateLinkRequest}
    * @returns A Promise of Link
    */
-  createLink = (request: Readonly<CreateLinkRequest>) =>
+  createLink = (request: Readonly<CreateLinkRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: JSON.stringify(
@@ -333,6 +341,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -344,7 +353,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateLinkRequest}
    * @returns A Promise of Link
    */
-  updateLink = (request: Readonly<UpdateLinkRequest>) =>
+  updateLink = (request: Readonly<UpdateLinkRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: JSON.stringify(
@@ -353,6 +362,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -364,11 +374,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteLinkRequest}
    * @returns A Promise of Link
    */
-  deleteLink = (request: Readonly<DeleteLinkRequest>) =>
+  deleteLink = (request: Readonly<DeleteLinkRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         method: 'DELETE',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -380,7 +391,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachVpcRequest}
    * @returns A Promise of Link
    */
-  attachVpc = (request: Readonly<AttachVpcRequest>) =>
+  attachVpc = (request: Readonly<AttachVpcRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: JSON.stringify(
@@ -389,6 +400,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/attach-vpc`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -400,13 +412,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachVpcRequest}
    * @returns A Promise of Link
    */
-  detachVpc = (request: Readonly<DetachVpcRequest>) =>
+  detachVpc = (request: Readonly<DetachVpcRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/detach-vpc`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -418,7 +431,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachRoutingPolicyRequest}
    * @returns A Promise of Link
    */
-  attachRoutingPolicy = (request: Readonly<AttachRoutingPolicyRequest>) =>
+  attachRoutingPolicy = (request: Readonly<AttachRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: JSON.stringify(
@@ -427,6 +440,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/attach-routing-policy`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -438,7 +452,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachRoutingPolicyRequest}
    * @returns A Promise of Link
    */
-  detachRoutingPolicy = (request: Readonly<DetachRoutingPolicyRequest>) =>
+  detachRoutingPolicy = (request: Readonly<DetachRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: JSON.stringify(
@@ -447,6 +461,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/detach-routing-policy`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -458,7 +473,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetRoutingPolicyRequest}
    * @returns A Promise of Link
    */
-  setRoutingPolicy = (request: Readonly<SetRoutingPolicyRequest>) =>
+  setRoutingPolicy = (request: Readonly<SetRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: JSON.stringify(
@@ -467,6 +482,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/set-routing-policy`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -478,13 +494,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableRoutePropagationRequest}
    * @returns A Promise of Link
    */
-  enableRoutePropagation = (request: Readonly<EnableRoutePropagationRequest>) =>
+  enableRoutePropagation = (request: Readonly<EnableRoutePropagationRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/enable-route-propagation`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
@@ -496,19 +513,20 @@ export class API extends ParentAPI {
    * @param request - The request {@link DisableRoutePropagationRequest}
    * @returns A Promise of Link
    */
-  disableRoutePropagation = (request: Readonly<DisableRoutePropagationRequest>) =>
+  disableRoutePropagation = (request: Readonly<DisableRoutePropagationRequest>, options?: RequestOptions) =>
     this.client.fetch<Link>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/disable-route-propagation`,
+        signal: options?.signal,
       },
       unmarshalLink,
     )
 
   
-  protected pageOfListRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}) =>
+  protected pageOfListRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRoutingPoliciesResponse>(
       {
         method: 'GET',
@@ -523,6 +541,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListRoutingPoliciesResponse,
     )
@@ -533,8 +552,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRoutingPoliciesRequest}
    * @returns A Promise of ListRoutingPoliciesResponse
    */
-  listRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}) =>
-    enrichForPagination('routingPolicies', this.pageOfListRoutingPolicies, request)
+  listRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('routingPolicies', this.pageOfListRoutingPolicies, request, options)
 
   
   /**
@@ -543,11 +562,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
    */
-  getRoutingPolicy = (request: Readonly<GetRoutingPolicyRequest>) =>
+  getRoutingPolicy = (request: Readonly<GetRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<RoutingPolicy>(
       {
         method: 'GET',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
+        signal: options?.signal,
       },
       unmarshalRoutingPolicy,
     )
@@ -559,7 +579,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
    */
-  createRoutingPolicy = (request: Readonly<CreateRoutingPolicyRequest>) =>
+  createRoutingPolicy = (request: Readonly<CreateRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<RoutingPolicy>(
       {
         body: JSON.stringify(
@@ -568,6 +588,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies`,
+        signal: options?.signal,
       },
       unmarshalRoutingPolicy,
     )
@@ -579,7 +600,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
    */
-  updateRoutingPolicy = (request: Readonly<UpdateRoutingPolicyRequest>) =>
+  updateRoutingPolicy = (request: Readonly<UpdateRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<RoutingPolicy>(
       {
         body: JSON.stringify(
@@ -588,6 +609,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
+        signal: options?.signal,
       },
       unmarshalRoutingPolicy,
     )
@@ -598,11 +620,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteRoutingPolicyRequest}
    */
-  deleteRoutingPolicy = (request: Readonly<DeleteRoutingPolicyRequest>) =>
+  deleteRoutingPolicy = (request: Readonly<DeleteRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
+        signal: options?.signal,
       },
     )
 

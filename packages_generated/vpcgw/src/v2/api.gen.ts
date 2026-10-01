@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {GATEWAY_NETWORK_TRANSIENT_STATUSES as GATEWAY_NETWORK_TRANSIENT_STATUSES_VPCGW,GATEWAY_TRANSIENT_STATUSES as GATEWAY_TRANSIENT_STATUSES_VPCGW,} from './content.gen.js'
 import {
   marshalAddBastionAllowedIPsRequest,
@@ -109,7 +109,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListGateways = (request: Readonly<ListGatewaysRequest> = {}) =>
+  protected pageOfListGateways = (request: Readonly<ListGatewaysRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListGatewaysResponse>(
       {
         method: 'GET',
@@ -127,6 +127,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['types', request.types],
         ),
+        signal: options?.signal,
       },
       unmarshalListGatewaysResponse,
     )
@@ -137,8 +138,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListGatewaysRequest}
    * @returns A Promise of ListGatewaysResponse
    */
-  listGateways = (request: Readonly<ListGatewaysRequest> = {}) =>
-    enrichForPagination('gateways', this.pageOfListGateways, request)
+  listGateways = (request: Readonly<ListGatewaysRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('gateways', this.pageOfListGateways, request, options)
 
   
   /**
@@ -147,11 +148,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetGatewayRequest}
    * @returns A Promise of Gateway
    */
-  getGateway = (request: Readonly<GetGatewayRequest>) =>
+  getGateway = (request: Readonly<GetGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<Gateway>(
       {
         method: 'GET',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        signal: options?.signal,
       },
       unmarshalGateway,
     )
@@ -181,7 +183,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateGatewayRequest}
    * @returns A Promise of Gateway
    */
-  createGateway = (request: Readonly<CreateGatewayRequest>) =>
+  createGateway = (request: Readonly<CreateGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<Gateway>(
       {
         body: JSON.stringify(
@@ -190,6 +192,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways`,
+        signal: options?.signal,
       },
       unmarshalGateway,
     )
@@ -201,7 +204,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateGatewayRequest}
    * @returns A Promise of Gateway
    */
-  updateGateway = (request: Readonly<UpdateGatewayRequest>) =>
+  updateGateway = (request: Readonly<UpdateGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<Gateway>(
       {
         body: JSON.stringify(
@@ -210,6 +213,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        signal: options?.signal,
       },
       unmarshalGateway,
     )
@@ -221,7 +225,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteGatewayRequest}
    * @returns A Promise of Gateway
    */
-  deleteGateway = (request: Readonly<DeleteGatewayRequest>) =>
+  deleteGateway = (request: Readonly<DeleteGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<Gateway>(
       {
         method: 'DELETE',
@@ -229,6 +233,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['delete_ip', request.deleteIp],
         ),
+        signal: options?.signal,
       },
       unmarshalGateway,
     )
@@ -240,7 +245,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpgradeGatewayRequest}
    * @returns A Promise of Gateway
    */
-  upgradeGateway = (request: Readonly<UpgradeGatewayRequest>) =>
+  upgradeGateway = (request: Readonly<UpgradeGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<Gateway>(
       {
         body: JSON.stringify(
@@ -249,12 +254,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/upgrade`,
+        signal: options?.signal,
       },
       unmarshalGateway,
     )
 
   
-  protected pageOfListGatewayNetworks = (request: Readonly<ListGatewayNetworksRequest> = {}) =>
+  protected pageOfListGatewayNetworks = (request: Readonly<ListGatewayNetworksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListGatewayNetworksResponse>(
       {
         method: 'GET',
@@ -268,6 +274,7 @@ export class API extends ParentAPI {
           ['private_network_ids', request.privateNetworkIds],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListGatewayNetworksResponse,
     )
@@ -278,8 +285,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListGatewayNetworksRequest}
    * @returns A Promise of ListGatewayNetworksResponse
    */
-  listGatewayNetworks = (request: Readonly<ListGatewayNetworksRequest> = {}) =>
-    enrichForPagination('gatewayNetworks', this.pageOfListGatewayNetworks, request)
+  listGatewayNetworks = (request: Readonly<ListGatewayNetworksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('gatewayNetworks', this.pageOfListGatewayNetworks, request, options)
 
   
   /**
@@ -288,11 +295,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
    */
-  getGatewayNetwork = (request: Readonly<GetGatewayNetworkRequest>) =>
+  getGatewayNetwork = (request: Readonly<GetGatewayNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<GatewayNetwork>(
       {
         method: 'GET',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
+        signal: options?.signal,
       },
       unmarshalGatewayNetwork,
     )
@@ -322,7 +330,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
    */
-  createGatewayNetwork = (request: Readonly<CreateGatewayNetworkRequest>) =>
+  createGatewayNetwork = (request: Readonly<CreateGatewayNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<GatewayNetwork>(
       {
         body: JSON.stringify(
@@ -331,6 +339,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks`,
+        signal: options?.signal,
       },
       unmarshalGatewayNetwork,
     )
@@ -342,7 +351,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
    */
-  updateGatewayNetwork = (request: Readonly<UpdateGatewayNetworkRequest>) =>
+  updateGatewayNetwork = (request: Readonly<UpdateGatewayNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<GatewayNetwork>(
       {
         body: JSON.stringify(
@@ -351,6 +360,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
+        signal: options?.signal,
       },
       unmarshalGatewayNetwork,
     )
@@ -362,17 +372,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteGatewayNetworkRequest}
    * @returns A Promise of GatewayNetwork
    */
-  deleteGatewayNetwork = (request: Readonly<DeleteGatewayNetworkRequest>) =>
+  deleteGatewayNetwork = (request: Readonly<DeleteGatewayNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<GatewayNetwork>(
       {
         method: 'DELETE',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
+        signal: options?.signal,
       },
       unmarshalGatewayNetwork,
     )
 
   
-  protected pageOfListPatRules = (request: Readonly<ListPatRulesRequest> = {}) =>
+  protected pageOfListPatRules = (request: Readonly<ListPatRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPatRulesResponse>(
       {
         method: 'GET',
@@ -385,6 +396,7 @@ export class API extends ParentAPI {
           ['private_ips', request.privateIps],
           ['protocol', request.protocol],
         ),
+        signal: options?.signal,
       },
       unmarshalListPatRulesResponse,
     )
@@ -395,8 +407,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPatRulesRequest}
    * @returns A Promise of ListPatRulesResponse
    */
-  listPatRules = (request: Readonly<ListPatRulesRequest> = {}) =>
-    enrichForPagination('patRules', this.pageOfListPatRules, request)
+  listPatRules = (request: Readonly<ListPatRulesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('patRules', this.pageOfListPatRules, request, options)
 
   
   /**
@@ -405,11 +417,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPatRuleRequest}
    * @returns A Promise of PatRule
    */
-  getPatRule = (request: Readonly<GetPatRuleRequest>) =>
+  getPatRule = (request: Readonly<GetPatRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<PatRule>(
       {
         method: 'GET',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
+        signal: options?.signal,
       },
       unmarshalPatRule,
     )
@@ -421,7 +434,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePatRuleRequest}
    * @returns A Promise of PatRule
    */
-  createPatRule = (request: Readonly<CreatePatRuleRequest>) =>
+  createPatRule = (request: Readonly<CreatePatRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<PatRule>(
       {
         body: JSON.stringify(
@@ -430,6 +443,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules`,
+        signal: options?.signal,
       },
       unmarshalPatRule,
     )
@@ -441,7 +455,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdatePatRuleRequest}
    * @returns A Promise of PatRule
    */
-  updatePatRule = (request: Readonly<UpdatePatRuleRequest>) =>
+  updatePatRule = (request: Readonly<UpdatePatRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<PatRule>(
       {
         body: JSON.stringify(
@@ -450,6 +464,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
+        signal: options?.signal,
       },
       unmarshalPatRule,
     )
@@ -461,7 +476,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetPatRulesRequest}
    * @returns A Promise of SetPatRulesResponse
    */
-  setPatRules = (request: Readonly<SetPatRulesRequest>) =>
+  setPatRules = (request: Readonly<SetPatRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<SetPatRulesResponse>(
       {
         body: JSON.stringify(
@@ -470,6 +485,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules`,
+        signal: options?.signal,
       },
       unmarshalSetPatRulesResponse,
     )
@@ -480,11 +496,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeletePatRuleRequest}
    */
-  deletePatRule = (request: Readonly<DeletePatRuleRequest>) =>
+  deletePatRule = (request: Readonly<DeletePatRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -495,17 +512,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListGatewayTypesRequest}
    * @returns A Promise of ListGatewayTypesResponse
    */
-  listGatewayTypes = (request: Readonly<ListGatewayTypesRequest> = {}) =>
+  listGatewayTypes = (request: Readonly<ListGatewayTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListGatewayTypesResponse>(
       {
         method: 'GET',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-types`,
+        signal: options?.signal,
       },
       unmarshalListGatewayTypesResponse,
     )
 
   
-  protected pageOfListIPs = (request: Readonly<ListIPsRequest> = {}) =>
+  protected pageOfListIPs = (request: Readonly<ListIPsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListIPsResponse>(
       {
         method: 'GET',
@@ -520,6 +538,7 @@ export class API extends ParentAPI {
           ['reverse', request.reverse],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListIPsResponse,
     )
@@ -530,8 +549,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListIPsRequest}
    * @returns A Promise of ListIPsResponse
    */
-  listIPs = (request: Readonly<ListIPsRequest> = {}) =>
-    enrichForPagination('ips', this.pageOfListIPs, request)
+  listIPs = (request: Readonly<ListIPsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('ips', this.pageOfListIPs, request, options)
 
   
   /**
@@ -540,11 +559,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetIPRequest}
    * @returns A Promise of IP
    */
-  getIP = (request: Readonly<GetIPRequest>) =>
+  getIP = (request: Readonly<GetIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         method: 'GET',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -556,7 +576,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateIPRequest}
    * @returns A Promise of IP
    */
-  createIP = (request: Readonly<CreateIPRequest> = {}) =>
+  createIP = (request: Readonly<CreateIPRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -565,6 +585,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -576,7 +597,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateIPRequest}
    * @returns A Promise of IP
    */
-  updateIP = (request: Readonly<UpdateIPRequest>) =>
+  updateIP = (request: Readonly<UpdateIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -585,6 +606,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -595,11 +617,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteIPRequest}
    */
-  deleteIP = (request: Readonly<DeleteIPRequest>) =>
+  deleteIP = (request: Readonly<DeleteIPRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -610,13 +633,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RefreshSSHKeysRequest}
    * @returns A Promise of Gateway
    */
-  refreshSSHKeys = (request: Readonly<RefreshSSHKeysRequest>) =>
+  refreshSSHKeys = (request: Readonly<RefreshSSHKeysRequest>, options?: RequestOptions) =>
     this.client.fetch<Gateway>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/refresh-ssh-keys`,
+        signal: options?.signal,
       },
       unmarshalGateway,
     )
@@ -628,7 +652,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddBastionAllowedIPsRequest}
    * @returns A Promise of AddBastionAllowedIPsResponse
    */
-  addBastionAllowedIPs = (request: Readonly<AddBastionAllowedIPsRequest>) =>
+  addBastionAllowedIPs = (request: Readonly<AddBastionAllowedIPsRequest>, options?: RequestOptions) =>
     this.client.fetch<AddBastionAllowedIPsResponse>(
       {
         body: JSON.stringify(
@@ -637,6 +661,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/bastion-allowed-ips`,
+        signal: options?.signal,
       },
       unmarshalAddBastionAllowedIPsResponse,
     )
@@ -648,7 +673,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetBastionAllowedIPsRequest}
    * @returns A Promise of SetBastionAllowedIPsResponse
    */
-  setBastionAllowedIPs = (request: Readonly<SetBastionAllowedIPsRequest>) =>
+  setBastionAllowedIPs = (request: Readonly<SetBastionAllowedIPsRequest>, options?: RequestOptions) =>
     this.client.fetch<SetBastionAllowedIPsResponse>(
       {
         body: JSON.stringify(
@@ -657,6 +682,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/bastion-allowed-ips`,
+        signal: options?.signal,
       },
       unmarshalSetBastionAllowedIPsResponse,
     )
@@ -667,11 +693,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteBastionAllowedIPsRequest}
    */
-  deleteBastionAllowedIPs = (request: Readonly<DeleteBastionAllowedIPsRequest>) =>
+  deleteBastionAllowedIPs = (request: Readonly<DeleteBastionAllowedIPsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/bastion-allowed-ips/${validatePathParam('ipRange', request.ipRange)}`,
+        signal: options?.signal,
       },
     )
 

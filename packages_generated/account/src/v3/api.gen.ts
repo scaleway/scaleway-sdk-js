@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {PROJECT_TRANSIENT_STATUSES as PROJECT_TRANSIENT_STATUSES_ACCOUNT,} from './content.gen.js'
 import {
   unmarshalCheckContractSignatureResponse,
@@ -63,7 +63,7 @@ export class ContractAPI extends ParentAPI {
    * @param request - The request {@link ContractApiDownloadContractSignatureRequest}
    * @returns A Promise of Blob
    */
-  downloadContractSignature = (request: Readonly<ContractApiDownloadContractSignatureRequest>) =>
+  downloadContractSignature = (request: Readonly<ContractApiDownloadContractSignatureRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -73,6 +73,7 @@ export class ContractAPI extends ParentAPI {
           ['locale', request.locale],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -83,7 +84,7 @@ export class ContractAPI extends ParentAPI {
    * @param request - The request {@link ContractApiCreateContractSignatureRequest}
    * @returns A Promise of ContractSignature
    */
-  createContractSignature = (request: Readonly<ContractApiCreateContractSignatureRequest>) =>
+  createContractSignature = (request: Readonly<ContractApiCreateContractSignatureRequest>, options?: RequestOptions) =>
     this.client.fetch<ContractSignature>(
       {
         body: JSON.stringify(
@@ -92,6 +93,7 @@ export class ContractAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/account/v3/contract-signatures`,
+        signal: options?.signal,
       },
       unmarshalContractSignature,
     )
@@ -103,13 +105,14 @@ export class ContractAPI extends ParentAPI {
    * @param request - The request {@link ContractApiValidateContractSignatureRequest}
    * @returns A Promise of ContractSignature
    */
-  validateContractSignature = (request: Readonly<ContractApiValidateContractSignatureRequest>) =>
+  validateContractSignature = (request: Readonly<ContractApiValidateContractSignatureRequest>, options?: RequestOptions) =>
     this.client.fetch<ContractSignature>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/account/v3/contract-signatures/${validatePathParam('contractSignatureId', request.contractSignatureId)}/validate`,
+        signal: options?.signal,
       },
       unmarshalContractSignature,
     )
@@ -121,7 +124,7 @@ export class ContractAPI extends ParentAPI {
    * @param request - The request {@link ContractApiCheckContractSignatureRequest}
    * @returns A Promise of CheckContractSignatureResponse
    */
-  checkContractSignature = (request: Readonly<ContractApiCheckContractSignatureRequest>) =>
+  checkContractSignature = (request: Readonly<ContractApiCheckContractSignatureRequest>, options?: RequestOptions) =>
     this.client.fetch<CheckContractSignatureResponse>(
       {
         body: JSON.stringify(
@@ -130,12 +133,13 @@ export class ContractAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/account/v3/contract-signatures/check`,
+        signal: options?.signal,
       },
       unmarshalCheckContractSignatureResponse,
     )
 
   
-  protected pageOfListContractSignatures = (request: Readonly<ContractApiListContractSignaturesRequest> = {}) =>
+  protected pageOfListContractSignatures = (request: Readonly<ContractApiListContractSignaturesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListContractSignaturesResponse>(
       {
         method: 'GET',
@@ -146,6 +150,7 @@ export class ContractAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListContractSignaturesResponse,
     )
@@ -156,8 +161,8 @@ export class ContractAPI extends ParentAPI {
    * @param request - The request {@link ContractApiListContractSignaturesRequest}
    * @returns A Promise of ListContractSignaturesResponse
    */
-  listContractSignatures = (request: Readonly<ContractApiListContractSignaturesRequest> = {}) =>
-    enrichForPagination('contractSignatures', this.pageOfListContractSignatures, request)
+  listContractSignatures = (request: Readonly<ContractApiListContractSignaturesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('contractSignatures', this.pageOfListContractSignatures, request, options)
 
   
 }
@@ -174,7 +179,7 @@ export class ProjectAPI extends ParentAPI {
    * @param request - The request {@link ProjectApiCreateProjectRequest}
    * @returns A Promise of Project
    */
-  createProject = (request: Readonly<ProjectApiCreateProjectRequest>) =>
+  createProject = (request: Readonly<ProjectApiCreateProjectRequest>, options?: RequestOptions) =>
     this.client.fetch<Project>(
       {
         body: JSON.stringify(
@@ -183,12 +188,13 @@ export class ProjectAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/account/v3/projects`,
+        signal: options?.signal,
       },
       unmarshalProject,
     )
 
   
-  protected pageOfListProjects = (request: Readonly<ProjectApiListProjectsRequest> = {}) =>
+  protected pageOfListProjects = (request: Readonly<ProjectApiListProjectsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListProjectsResponse>(
       {
         method: 'GET',
@@ -201,6 +207,7 @@ export class ProjectAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_ids', request.projectIds],
         ),
+        signal: options?.signal,
       },
       unmarshalListProjectsResponse,
     )
@@ -211,8 +218,8 @@ export class ProjectAPI extends ParentAPI {
    * @param request - The request {@link ProjectApiListProjectsRequest}
    * @returns A Promise of ListProjectsResponse
    */
-  listProjects = (request: Readonly<ProjectApiListProjectsRequest> = {}) =>
-    enrichForPagination('projects', this.pageOfListProjects, request)
+  listProjects = (request: Readonly<ProjectApiListProjectsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('projects', this.pageOfListProjects, request, options)
 
   
   /**
@@ -221,11 +228,12 @@ export class ProjectAPI extends ParentAPI {
    * @param request - The request {@link ProjectApiGetProjectRequest}
    * @returns A Promise of Project
    */
-  getProject = (request: Readonly<ProjectApiGetProjectRequest> = {}) =>
+  getProject = (request: Readonly<ProjectApiGetProjectRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Project>(
       {
         method: 'GET',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+        signal: options?.signal,
       },
       unmarshalProject,
     )
@@ -254,11 +262,12 @@ export class ProjectAPI extends ParentAPI {
    *
    * @param request - The request {@link ProjectApiDeleteProjectRequest}
    */
-  deleteProject = (request: Readonly<ProjectApiDeleteProjectRequest> = {}) =>
+  deleteProject = (request: Readonly<ProjectApiDeleteProjectRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -269,7 +278,7 @@ export class ProjectAPI extends ParentAPI {
    * @param request - The request {@link ProjectApiDeleteProjectWithResourcesRequest}
    * @returns A Promise of Project
    */
-  deleteProjectWithResources = (request: Readonly<ProjectApiDeleteProjectWithResourcesRequest>) =>
+  deleteProjectWithResources = (request: Readonly<ProjectApiDeleteProjectWithResourcesRequest>, options?: RequestOptions) =>
     this.client.fetch<Project>(
       {
         body: JSON.stringify(
@@ -278,6 +287,7 @@ export class ProjectAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/delete-with-resources`,
+        signal: options?.signal,
       },
       unmarshalProject,
     )
@@ -289,7 +299,7 @@ export class ProjectAPI extends ParentAPI {
    * @param request - The request {@link ProjectApiUpdateProjectRequest}
    * @returns A Promise of Project
    */
-  updateProject = (request: Readonly<ProjectApiUpdateProjectRequest> = {}) =>
+  updateProject = (request: Readonly<ProjectApiUpdateProjectRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Project>(
       {
         body: JSON.stringify(
@@ -298,6 +308,7 @@ export class ProjectAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
+        signal: options?.signal,
       },
       unmarshalProject,
     )
@@ -309,7 +320,7 @@ export class ProjectAPI extends ParentAPI {
    * @param request - The request {@link ProjectApiSetProjectQualificationRequest}
    * @returns A Promise of ProjectQualification
    */
-  setProjectQualification = (request: Readonly<ProjectApiSetProjectQualificationRequest> = {}) =>
+  setProjectQualification = (request: Readonly<ProjectApiSetProjectQualificationRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ProjectQualification>(
       {
         body: JSON.stringify(
@@ -318,6 +329,7 @@ export class ProjectAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/project-qualification`,
+        signal: options?.signal,
       },
       unmarshalProjectQualification,
     )

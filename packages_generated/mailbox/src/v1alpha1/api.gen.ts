@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {ALIAS_TRANSIENT_STATUSES as ALIAS_TRANSIENT_STATUSES_MAILBOX,DOMAIN_RECORD_TRANSIENT_STATUSES as DOMAIN_RECORD_TRANSIENT_STATUSES_MAILBOX,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_MAILBOX,FORWARDING_TRANSIENT_STATUSES as FORWARDING_TRANSIENT_STATUSES_MAILBOX,MAILBOX_TRANSIENT_STATUSES as MAILBOX_TRANSIENT_STATUSES_MAILBOX,} from './content.gen.js'
 import {
   unmarshalAlias,
@@ -87,7 +87,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
    */
-  createDomain = (request: Readonly<CreateDomainRequest>) =>
+  createDomain = (request: Readonly<CreateDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: JSON.stringify(
@@ -96,12 +96,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mailbox/v1alpha1/domains`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
 
   
-  protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}) =>
+  protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDomainsResponse>(
       {
         method: 'GET',
@@ -114,6 +115,7 @@ export class API extends ParentAPI {
           ['search', request.search],
           ['statuses', request.statuses],
         ),
+        signal: options?.signal,
       },
       unmarshalListDomainsResponse,
     )
@@ -124,8 +126,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
    */
-  listDomains = (request: Readonly<ListDomainsRequest> = {}) =>
-    enrichForPagination('domains', this.pageOfListDomains, request)
+  listDomains = (request: Readonly<ListDomainsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('domains', this.pageOfListDomains, request, options)
 
   
   /**
@@ -134,11 +136,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
    */
-  getDomain = (request: Readonly<GetDomainRequest>) =>
+  getDomain = (request: Readonly<GetDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'GET',
         path: `/mailbox/v1alpha1/domains/${validatePathParam('domainId', request.domainId)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -168,11 +171,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
    */
-  deleteDomain = (request: Readonly<DeleteDomainRequest>) =>
+  deleteDomain = (request: Readonly<DeleteDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'DELETE',
         path: `/mailbox/v1alpha1/domains/${validatePathParam('domainId', request.domainId)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -184,11 +188,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDomainRecordsRequest}
    * @returns A Promise of GetDomainRecordsResponse
    */
-  getDomainRecords = (request: Readonly<GetDomainRecordsRequest>) =>
+  getDomainRecords = (request: Readonly<GetDomainRecordsRequest>, options?: RequestOptions) =>
     this.client.fetch<GetDomainRecordsResponse>(
       {
         method: 'GET',
         path: `/mailbox/v1alpha1/domains/${validatePathParam('domainId', request.domainId)}/records`,
+        signal: options?.signal,
       },
       unmarshalGetDomainRecordsResponse,
     )
@@ -199,13 +204,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link ValidateDomainRecordsRequest}
    */
-  validateDomainRecords = (request: Readonly<ValidateDomainRecordsRequest>) =>
+  validateDomainRecords = (request: Readonly<ValidateDomainRecordsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mailbox/v1alpha1/domains/${validatePathParam('domainId', request.domainId)}/validate-records`,
+        signal: options?.signal,
       },
     )
 
@@ -216,7 +222,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link BatchCreateMailboxesRequest}
    * @returns A Promise of BatchCreateMailboxesResponse
    */
-  batchCreateMailboxes = (request: Readonly<BatchCreateMailboxesRequest>) =>
+  batchCreateMailboxes = (request: Readonly<BatchCreateMailboxesRequest>, options?: RequestOptions) =>
     this.client.fetch<BatchCreateMailboxesResponse>(
       {
         body: JSON.stringify(
@@ -225,12 +231,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mailbox/v1alpha1/batch-create-mailboxes`,
+        signal: options?.signal,
       },
       unmarshalBatchCreateMailboxesResponse,
     )
 
   
-  protected pageOfListMailboxes = (request: Readonly<ListMailboxesRequest> = {}) =>
+  protected pageOfListMailboxes = (request: Readonly<ListMailboxesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListMailboxesResponse>(
       {
         method: 'GET',
@@ -244,6 +251,7 @@ export class API extends ParentAPI {
           ['search', request.search],
           ['statuses', request.statuses],
         ),
+        signal: options?.signal,
       },
       unmarshalListMailboxesResponse,
     )
@@ -254,8 +262,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListMailboxesRequest}
    * @returns A Promise of ListMailboxesResponse
    */
-  listMailboxes = (request: Readonly<ListMailboxesRequest> = {}) =>
-    enrichForPagination('mailboxes', this.pageOfListMailboxes, request)
+  listMailboxes = (request: Readonly<ListMailboxesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('mailboxes', this.pageOfListMailboxes, request, options)
 
   
   /**
@@ -264,11 +272,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetMailboxRequest}
    * @returns A Promise of Mailbox
    */
-  getMailbox = (request: Readonly<GetMailboxRequest>) =>
+  getMailbox = (request: Readonly<GetMailboxRequest>, options?: RequestOptions) =>
     this.client.fetch<Mailbox>(
       {
         method: 'GET',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}`,
+        signal: options?.signal,
       },
       unmarshalMailbox,
     )
@@ -298,7 +307,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateMailboxRequest}
    * @returns A Promise of Mailbox
    */
-  updateMailbox = (request: Readonly<UpdateMailboxRequest>) =>
+  updateMailbox = (request: Readonly<UpdateMailboxRequest>, options?: RequestOptions) =>
     this.client.fetch<Mailbox>(
       {
         body: JSON.stringify(
@@ -307,6 +316,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}`,
+        signal: options?.signal,
       },
       unmarshalMailbox,
     )
@@ -318,11 +328,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteMailboxRequest}
    * @returns A Promise of Mailbox
    */
-  deleteMailbox = (request: Readonly<DeleteMailboxRequest>) =>
+  deleteMailbox = (request: Readonly<DeleteMailboxRequest>, options?: RequestOptions) =>
     this.client.fetch<Mailbox>(
       {
         method: 'DELETE',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}`,
+        signal: options?.signal,
       },
       unmarshalMailbox,
     )
@@ -334,13 +345,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RestoreMailboxRequest}
    * @returns A Promise of Mailbox
    */
-  restoreMailbox = (request: Readonly<RestoreMailboxRequest>) =>
+  restoreMailbox = (request: Readonly<RestoreMailboxRequest>, options?: RequestOptions) =>
     this.client.fetch<Mailbox>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/restore`,
+        signal: options?.signal,
       },
       unmarshalMailbox,
     )
@@ -352,7 +364,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateAliasRequest}
    * @returns A Promise of Alias
    */
-  createAlias = (request: Readonly<CreateAliasRequest>) =>
+  createAlias = (request: Readonly<CreateAliasRequest>, options?: RequestOptions) =>
     this.client.fetch<Alias>(
       {
         body: JSON.stringify(
@@ -361,12 +373,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mailbox/v1alpha1/aliases`,
+        signal: options?.signal,
       },
       unmarshalAlias,
     )
 
   
-  protected pageOfListAliases = (request: Readonly<ListAliasesRequest> = {}) =>
+  protected pageOfListAliases = (request: Readonly<ListAliasesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAliasesResponse>(
       {
         method: 'GET',
@@ -379,6 +392,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListAliasesResponse,
     )
@@ -389,8 +403,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListAliasesRequest}
    * @returns A Promise of ListAliasesResponse
    */
-  listAliases = (request: Readonly<ListAliasesRequest> = {}) =>
-    enrichForPagination('aliases', this.pageOfListAliases, request)
+  listAliases = (request: Readonly<ListAliasesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('aliases', this.pageOfListAliases, request, options)
 
   
   /**
@@ -399,11 +413,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetAliasRequest}
    * @returns A Promise of Alias
    */
-  getAlias = (request: Readonly<GetAliasRequest>) =>
+  getAlias = (request: Readonly<GetAliasRequest>, options?: RequestOptions) =>
     this.client.fetch<Alias>(
       {
         method: 'GET',
         path: `/mailbox/v1alpha1/aliases/${validatePathParam('aliasId', request.aliasId)}`,
+        signal: options?.signal,
       },
       unmarshalAlias,
     )
@@ -433,7 +448,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateAliasRequest}
    * @returns A Promise of Alias
    */
-  updateAlias = (request: Readonly<UpdateAliasRequest>) =>
+  updateAlias = (request: Readonly<UpdateAliasRequest>, options?: RequestOptions) =>
     this.client.fetch<Alias>(
       {
         body: JSON.stringify(
@@ -442,6 +457,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mailbox/v1alpha1/aliases/${validatePathParam('aliasId', request.aliasId)}`,
+        signal: options?.signal,
       },
       unmarshalAlias,
     )
@@ -453,11 +469,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteAliasRequest}
    * @returns A Promise of Alias
    */
-  deleteAlias = (request: Readonly<DeleteAliasRequest>) =>
+  deleteAlias = (request: Readonly<DeleteAliasRequest>, options?: RequestOptions) =>
     this.client.fetch<Alias>(
       {
         method: 'DELETE',
         path: `/mailbox/v1alpha1/aliases/${validatePathParam('aliasId', request.aliasId)}`,
+        signal: options?.signal,
       },
       unmarshalAlias,
     )
@@ -470,7 +487,7 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
    * @param request - The request {@link CreateForwardingRequest}
    * @returns A Promise of Forwarding
    */
-  createForwarding = (request: Readonly<CreateForwardingRequest>) =>
+  createForwarding = (request: Readonly<CreateForwardingRequest>, options?: RequestOptions) =>
     this.client.fetch<Forwarding>(
       {
         body: JSON.stringify(
@@ -479,12 +496,13 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mailbox/v1alpha1/forwardings`,
+        signal: options?.signal,
       },
       unmarshalForwarding,
     )
 
   
-  protected pageOfListForwardings = (request: Readonly<ListForwardingsRequest> = {}) =>
+  protected pageOfListForwardings = (request: Readonly<ListForwardingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListForwardingsResponse>(
       {
         method: 'GET',
@@ -504,6 +522,7 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListForwardingsResponse,
     )
@@ -514,8 +533,8 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
    * @param request - The request {@link ListForwardingsRequest}
    * @returns A Promise of ListForwardingsResponse
    */
-  listForwardings = (request: Readonly<ListForwardingsRequest> = {}) =>
-    enrichForPagination('forwardings', this.pageOfListForwardings, request)
+  listForwardings = (request: Readonly<ListForwardingsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('forwardings', this.pageOfListForwardings, request, options)
 
   
   /**
@@ -524,11 +543,12 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
    * @param request - The request {@link GetForwardingRequest}
    * @returns A Promise of Forwarding
    */
-  getForwarding = (request: Readonly<GetForwardingRequest>) =>
+  getForwarding = (request: Readonly<GetForwardingRequest>, options?: RequestOptions) =>
     this.client.fetch<Forwarding>(
       {
         method: 'GET',
         path: `/mailbox/v1alpha1/forwardings/${validatePathParam('forwardingId', request.forwardingId)}`,
+        signal: options?.signal,
       },
       unmarshalForwarding,
     )
@@ -558,7 +578,7 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
    * @param request - The request {@link UpdateForwardingRequest}
    * @returns A Promise of Forwarding
    */
-  updateForwarding = (request: Readonly<UpdateForwardingRequest>) =>
+  updateForwarding = (request: Readonly<UpdateForwardingRequest>, options?: RequestOptions) =>
     this.client.fetch<Forwarding>(
       {
         body: JSON.stringify(
@@ -567,6 +587,7 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mailbox/v1alpha1/forwardings/${validatePathParam('forwardingId', request.forwardingId)}`,
+        signal: options?.signal,
       },
       unmarshalForwarding,
     )
@@ -578,27 +599,29 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
    * @param request - The request {@link DeleteForwardingRequest}
    * @returns A Promise of Forwarding
    */
-  deleteForwarding = (request: Readonly<DeleteForwardingRequest>) =>
+  deleteForwarding = (request: Readonly<DeleteForwardingRequest>, options?: RequestOptions) =>
     this.client.fetch<Forwarding>(
       {
         method: 'DELETE',
         path: `/mailbox/v1alpha1/forwardings/${validatePathParam('forwardingId', request.forwardingId)}`,
+        signal: options?.signal,
       },
       unmarshalForwarding,
     )
 
   
-  getMailboxForwarding = (request: Readonly<GetMailboxForwardingRequest>) =>
+  getMailboxForwarding = (request: Readonly<GetMailboxForwardingRequest>, options?: RequestOptions) =>
     this.client.fetch<MailboxForwarding>(
       {
         method: 'GET',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/forwarding`,
+        signal: options?.signal,
       },
       unmarshalMailboxForwarding,
     )
 
   
-  updateMailboxForwarding = (request: Readonly<UpdateMailboxForwardingRequest>) =>
+  updateMailboxForwarding = (request: Readonly<UpdateMailboxForwardingRequest>, options?: RequestOptions) =>
     this.client.fetch<MailboxForwarding>(
       {
         body: JSON.stringify(
@@ -607,6 +630,7 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/forwarding`,
+        signal: options?.signal,
       },
       unmarshalMailboxForwarding,
     )

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {IMAGE_TRANSIENT_STATUSES as IMAGE_TRANSIENT_STATUSES_REGISTRY,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_REGISTRY,TAG_TRANSIENT_STATUSES as TAG_TRANSIENT_STATUSES_REGISTRY,} from './content.gen.js'
 import {
   marshalCreateNamespaceRequest,
@@ -67,7 +67,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
+  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNamespacesResponse>(
       {
         method: 'GET',
@@ -80,6 +80,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListNamespacesResponse,
     )
@@ -90,8 +91,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
    */
-  listNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
-    enrichForPagination('namespaces', this.pageOfListNamespaces, request)
+  listNamespaces = (request: Readonly<ListNamespacesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('namespaces', this.pageOfListNamespaces, request, options)
 
   
   /**
@@ -100,11 +101,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  getNamespace = (request: Readonly<GetNamespaceRequest>) =>
+  getNamespace = (request: Readonly<GetNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         method: 'GET',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -134,7 +136,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  createNamespace = (request: Readonly<CreateNamespaceRequest>) =>
+  createNamespace = (request: Readonly<CreateNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(
@@ -143,6 +145,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -154,7 +157,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  updateNamespace = (request: Readonly<UpdateNamespaceRequest>) =>
+  updateNamespace = (request: Readonly<UpdateNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(
@@ -163,6 +166,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -174,17 +178,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  deleteNamespace = (request: Readonly<DeleteNamespaceRequest>) =>
+  deleteNamespace = (request: Readonly<DeleteNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         method: 'DELETE',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
 
   
-  protected pageOfListImages = (request: Readonly<ListImagesRequest> = {}) =>
+  protected pageOfListImages = (request: Readonly<ListImagesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListImagesResponse>(
       {
         method: 'GET',
@@ -198,6 +203,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListImagesResponse,
     )
@@ -208,8 +214,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
    */
-  listImages = (request: Readonly<ListImagesRequest> = {}) =>
-    enrichForPagination('images', this.pageOfListImages, request)
+  listImages = (request: Readonly<ListImagesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('images', this.pageOfListImages, request, options)
 
   
   /**
@@ -218,11 +224,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetImageRequest}
    * @returns A Promise of Image
    */
-  getImage = (request: Readonly<GetImageRequest>) =>
+  getImage = (request: Readonly<GetImageRequest>, options?: RequestOptions) =>
     this.client.fetch<Image>(
       {
         method: 'GET',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images/${validatePathParam('imageId', request.imageId)}`,
+        signal: options?.signal,
       },
       unmarshalImage,
     )
@@ -252,7 +259,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateImageRequest}
    * @returns A Promise of Image
    */
-  updateImage = (request: Readonly<UpdateImageRequest>) =>
+  updateImage = (request: Readonly<UpdateImageRequest>, options?: RequestOptions) =>
     this.client.fetch<Image>(
       {
         body: JSON.stringify(
@@ -261,6 +268,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images/${validatePathParam('imageId', request.imageId)}`,
+        signal: options?.signal,
       },
       unmarshalImage,
     )
@@ -272,17 +280,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteImageRequest}
    * @returns A Promise of Image
    */
-  deleteImage = (request: Readonly<DeleteImageRequest>) =>
+  deleteImage = (request: Readonly<DeleteImageRequest>, options?: RequestOptions) =>
     this.client.fetch<Image>(
       {
         method: 'DELETE',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images/${validatePathParam('imageId', request.imageId)}`,
+        signal: options?.signal,
       },
       unmarshalImage,
     )
 
   
-  protected pageOfListTags = (request: Readonly<ListTagsRequest>) =>
+  protected pageOfListTags = (request: Readonly<ListTagsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListTagsResponse>(
       {
         method: 'GET',
@@ -293,6 +302,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListTagsResponse,
     )
@@ -303,8 +313,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListTagsRequest}
    * @returns A Promise of ListTagsResponse
    */
-  listTags = (request: Readonly<ListTagsRequest>) =>
-    enrichForPagination('tags', this.pageOfListTags, request)
+  listTags = (request: Readonly<ListTagsRequest>, options?: RequestOptions) =>
+    enrichForPagination('tags', this.pageOfListTags, request, options)
 
   
   /**
@@ -313,11 +323,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetTagRequest}
    * @returns A Promise of Tag
    */
-  getTag = (request: Readonly<GetTagRequest>) =>
+  getTag = (request: Readonly<GetTagRequest>, options?: RequestOptions) =>
     this.client.fetch<Tag>(
       {
         method: 'GET',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tags/${validatePathParam('tagId', request.tagId)}`,
+        signal: options?.signal,
       },
       unmarshalTag,
     )
@@ -347,7 +358,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteTagRequest}
    * @returns A Promise of Tag
    */
-  deleteTag = (request: Readonly<DeleteTagRequest>) =>
+  deleteTag = (request: Readonly<DeleteTagRequest>, options?: RequestOptions) =>
     this.client.fetch<Tag>(
       {
         method: 'DELETE',
@@ -355,6 +366,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['force', request.force],
         ),
+        signal: options?.signal,
       },
       unmarshalTag,
     )

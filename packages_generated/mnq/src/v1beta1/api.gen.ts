@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalListNatsAccountsResponse,
   unmarshalListNatsCredentialsResponse,
@@ -100,7 +100,7 @@ export class NatsAPI extends ParentAPI {
    * @param request - The request {@link NatsApiCreateNatsAccountRequest}
    * @returns A Promise of NatsAccount
    */
-  createNatsAccount = (request: Readonly<NatsApiCreateNatsAccountRequest> = {}) =>
+  createNatsAccount = (request: Readonly<NatsApiCreateNatsAccountRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<NatsAccount>(
       {
         body: JSON.stringify(
@@ -109,6 +109,7 @@ export class NatsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts`,
+        signal: options?.signal,
       },
       unmarshalNatsAccount,
     )
@@ -119,11 +120,12 @@ export class NatsAPI extends ParentAPI {
    *
    * @param request - The request {@link NatsApiDeleteNatsAccountRequest}
    */
-  deleteNatsAccount = (request: Readonly<NatsApiDeleteNatsAccountRequest>) =>
+  deleteNatsAccount = (request: Readonly<NatsApiDeleteNatsAccountRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -134,7 +136,7 @@ export class NatsAPI extends ParentAPI {
    * @param request - The request {@link NatsApiUpdateNatsAccountRequest}
    * @returns A Promise of NatsAccount
    */
-  updateNatsAccount = (request: Readonly<NatsApiUpdateNatsAccountRequest>) =>
+  updateNatsAccount = (request: Readonly<NatsApiUpdateNatsAccountRequest>, options?: RequestOptions) =>
     this.client.fetch<NatsAccount>(
       {
         body: JSON.stringify(
@@ -143,6 +145,7 @@ export class NatsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
+        signal: options?.signal,
       },
       unmarshalNatsAccount,
     )
@@ -154,17 +157,18 @@ export class NatsAPI extends ParentAPI {
    * @param request - The request {@link NatsApiGetNatsAccountRequest}
    * @returns A Promise of NatsAccount
    */
-  getNatsAccount = (request: Readonly<NatsApiGetNatsAccountRequest>) =>
+  getNatsAccount = (request: Readonly<NatsApiGetNatsAccountRequest>, options?: RequestOptions) =>
     this.client.fetch<NatsAccount>(
       {
         method: 'GET',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
+        signal: options?.signal,
       },
       unmarshalNatsAccount,
     )
 
   
-  protected pageOfListNatsAccounts = (request: Readonly<NatsApiListNatsAccountsRequest> = {}) =>
+  protected pageOfListNatsAccounts = (request: Readonly<NatsApiListNatsAccountsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNatsAccountsResponse>(
       {
         method: 'GET',
@@ -175,6 +179,7 @@ export class NatsAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListNatsAccountsResponse,
     )
@@ -185,8 +190,8 @@ export class NatsAPI extends ParentAPI {
    * @param request - The request {@link NatsApiListNatsAccountsRequest}
    * @returns A Promise of ListNatsAccountsResponse
    */
-  listNatsAccounts = (request: Readonly<NatsApiListNatsAccountsRequest> = {}) =>
-    enrichForPagination('natsAccounts', this.pageOfListNatsAccounts, request)
+  listNatsAccounts = (request: Readonly<NatsApiListNatsAccountsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('natsAccounts', this.pageOfListNatsAccounts, request, options)
 
   
   /**
@@ -195,7 +200,7 @@ export class NatsAPI extends ParentAPI {
    * @param request - The request {@link NatsApiCreateNatsCredentialsRequest}
    * @returns A Promise of NatsCredentials
    */
-  createNatsCredentials = (request: Readonly<NatsApiCreateNatsCredentialsRequest>) =>
+  createNatsCredentials = (request: Readonly<NatsApiCreateNatsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<NatsCredentials>(
       {
         body: JSON.stringify(
@@ -204,6 +209,7 @@ export class NatsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials`,
+        signal: options?.signal,
       },
       unmarshalNatsCredentials,
     )
@@ -214,11 +220,12 @@ export class NatsAPI extends ParentAPI {
    *
    * @param request - The request {@link NatsApiDeleteNatsCredentialsRequest}
    */
-  deleteNatsCredentials = (request: Readonly<NatsApiDeleteNatsCredentialsRequest>) =>
+  deleteNatsCredentials = (request: Readonly<NatsApiDeleteNatsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials/${validatePathParam('natsCredentialsId', request.natsCredentialsId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -229,17 +236,18 @@ export class NatsAPI extends ParentAPI {
    * @param request - The request {@link NatsApiGetNatsCredentialsRequest}
    * @returns A Promise of NatsCredentials
    */
-  getNatsCredentials = (request: Readonly<NatsApiGetNatsCredentialsRequest>) =>
+  getNatsCredentials = (request: Readonly<NatsApiGetNatsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<NatsCredentials>(
       {
         method: 'GET',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials/${validatePathParam('natsCredentialsId', request.natsCredentialsId)}`,
+        signal: options?.signal,
       },
       unmarshalNatsCredentials,
     )
 
   
-  protected pageOfListNatsCredentials = (request: Readonly<NatsApiListNatsCredentialsRequest> = {}) =>
+  protected pageOfListNatsCredentials = (request: Readonly<NatsApiListNatsCredentialsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNatsCredentialsResponse>(
       {
         method: 'GET',
@@ -251,6 +259,7 @@ export class NatsAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListNatsCredentialsResponse,
     )
@@ -261,8 +270,8 @@ export class NatsAPI extends ParentAPI {
    * @param request - The request {@link NatsApiListNatsCredentialsRequest}
    * @returns A Promise of ListNatsCredentialsResponse
    */
-  listNatsCredentials = (request: Readonly<NatsApiListNatsCredentialsRequest> = {}) =>
-    enrichForPagination('natsCredentials', this.pageOfListNatsCredentials, request)
+  listNatsCredentials = (request: Readonly<NatsApiListNatsCredentialsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('natsCredentials', this.pageOfListNatsCredentials, request, options)
 
   
 }
@@ -291,7 +300,7 @@ export class SnsAPI extends ParentAPI {
    * @param request - The request {@link SnsApiActivateSnsRequest}
    * @returns A Promise of SnsInfo
    */
-  activateSns = (request: Readonly<SnsApiActivateSnsRequest> = {}) =>
+  activateSns = (request: Readonly<SnsApiActivateSnsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SnsInfo>(
       {
         body: JSON.stringify(
@@ -300,6 +309,7 @@ export class SnsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/activate-sns`,
+        signal: options?.signal,
       },
       unmarshalSnsInfo,
     )
@@ -311,7 +321,7 @@ export class SnsAPI extends ParentAPI {
    * @param request - The request {@link SnsApiGetSnsInfoRequest}
    * @returns A Promise of SnsInfo
    */
-  getSnsInfo = (request: Readonly<SnsApiGetSnsInfoRequest> = {}) =>
+  getSnsInfo = (request: Readonly<SnsApiGetSnsInfoRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SnsInfo>(
       {
         method: 'GET',
@@ -319,6 +329,7 @@ export class SnsAPI extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalSnsInfo,
     )
@@ -330,7 +341,7 @@ export class SnsAPI extends ParentAPI {
    * @param request - The request {@link SnsApiDeactivateSnsRequest}
    * @returns A Promise of SnsInfo
    */
-  deactivateSns = (request: Readonly<SnsApiDeactivateSnsRequest> = {}) =>
+  deactivateSns = (request: Readonly<SnsApiDeactivateSnsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SnsInfo>(
       {
         body: JSON.stringify(
@@ -339,6 +350,7 @@ export class SnsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deactivate-sns`,
+        signal: options?.signal,
       },
       unmarshalSnsInfo,
     )
@@ -350,7 +362,7 @@ export class SnsAPI extends ParentAPI {
    * @param request - The request {@link SnsApiCreateSnsCredentialsRequest}
    * @returns A Promise of SnsCredentials
    */
-  createSnsCredentials = (request: Readonly<SnsApiCreateSnsCredentialsRequest> = {}) =>
+  createSnsCredentials = (request: Readonly<SnsApiCreateSnsCredentialsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SnsCredentials>(
       {
         body: JSON.stringify(
@@ -359,6 +371,7 @@ export class SnsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials`,
+        signal: options?.signal,
       },
       unmarshalSnsCredentials,
     )
@@ -369,11 +382,12 @@ export class SnsAPI extends ParentAPI {
    *
    * @param request - The request {@link SnsApiDeleteSnsCredentialsRequest}
    */
-  deleteSnsCredentials = (request: Readonly<SnsApiDeleteSnsCredentialsRequest>) =>
+  deleteSnsCredentials = (request: Readonly<SnsApiDeleteSnsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -384,7 +398,7 @@ export class SnsAPI extends ParentAPI {
    * @param request - The request {@link SnsApiUpdateSnsCredentialsRequest}
    * @returns A Promise of SnsCredentials
    */
-  updateSnsCredentials = (request: Readonly<SnsApiUpdateSnsCredentialsRequest>) =>
+  updateSnsCredentials = (request: Readonly<SnsApiUpdateSnsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<SnsCredentials>(
       {
         body: JSON.stringify(
@@ -393,6 +407,7 @@ export class SnsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
+        signal: options?.signal,
       },
       unmarshalSnsCredentials,
     )
@@ -404,17 +419,18 @@ export class SnsAPI extends ParentAPI {
    * @param request - The request {@link SnsApiGetSnsCredentialsRequest}
    * @returns A Promise of SnsCredentials
    */
-  getSnsCredentials = (request: Readonly<SnsApiGetSnsCredentialsRequest>) =>
+  getSnsCredentials = (request: Readonly<SnsApiGetSnsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<SnsCredentials>(
       {
         method: 'GET',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
+        signal: options?.signal,
       },
       unmarshalSnsCredentials,
     )
 
   
-  protected pageOfListSnsCredentials = (request: Readonly<SnsApiListSnsCredentialsRequest> = {}) =>
+  protected pageOfListSnsCredentials = (request: Readonly<SnsApiListSnsCredentialsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSnsCredentialsResponse>(
       {
         method: 'GET',
@@ -425,6 +441,7 @@ export class SnsAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSnsCredentialsResponse,
     )
@@ -435,8 +452,8 @@ export class SnsAPI extends ParentAPI {
    * @param request - The request {@link SnsApiListSnsCredentialsRequest}
    * @returns A Promise of ListSnsCredentialsResponse
    */
-  listSnsCredentials = (request: Readonly<SnsApiListSnsCredentialsRequest> = {}) =>
-    enrichForPagination('snsCredentials', this.pageOfListSnsCredentials, request)
+  listSnsCredentials = (request: Readonly<SnsApiListSnsCredentialsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('snsCredentials', this.pageOfListSnsCredentials, request, options)
 
   
 }
@@ -465,7 +482,7 @@ export class SqsAPI extends ParentAPI {
    * @param request - The request {@link SqsApiActivateSqsRequest}
    * @returns A Promise of SqsInfo
    */
-  activateSqs = (request: Readonly<SqsApiActivateSqsRequest> = {}) =>
+  activateSqs = (request: Readonly<SqsApiActivateSqsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SqsInfo>(
       {
         body: JSON.stringify(
@@ -474,6 +491,7 @@ export class SqsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/activate-sqs`,
+        signal: options?.signal,
       },
       unmarshalSqsInfo,
     )
@@ -485,7 +503,7 @@ export class SqsAPI extends ParentAPI {
    * @param request - The request {@link SqsApiGetSqsInfoRequest}
    * @returns A Promise of SqsInfo
    */
-  getSqsInfo = (request: Readonly<SqsApiGetSqsInfoRequest> = {}) =>
+  getSqsInfo = (request: Readonly<SqsApiGetSqsInfoRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SqsInfo>(
       {
         method: 'GET',
@@ -493,6 +511,7 @@ export class SqsAPI extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalSqsInfo,
     )
@@ -504,7 +523,7 @@ export class SqsAPI extends ParentAPI {
    * @param request - The request {@link SqsApiDeactivateSqsRequest}
    * @returns A Promise of SqsInfo
    */
-  deactivateSqs = (request: Readonly<SqsApiDeactivateSqsRequest> = {}) =>
+  deactivateSqs = (request: Readonly<SqsApiDeactivateSqsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SqsInfo>(
       {
         body: JSON.stringify(
@@ -513,6 +532,7 @@ export class SqsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deactivate-sqs`,
+        signal: options?.signal,
       },
       unmarshalSqsInfo,
     )
@@ -524,7 +544,7 @@ export class SqsAPI extends ParentAPI {
    * @param request - The request {@link SqsApiCreateSqsCredentialsRequest}
    * @returns A Promise of SqsCredentials
    */
-  createSqsCredentials = (request: Readonly<SqsApiCreateSqsCredentialsRequest> = {}) =>
+  createSqsCredentials = (request: Readonly<SqsApiCreateSqsCredentialsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SqsCredentials>(
       {
         body: JSON.stringify(
@@ -533,6 +553,7 @@ export class SqsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials`,
+        signal: options?.signal,
       },
       unmarshalSqsCredentials,
     )
@@ -543,11 +564,12 @@ export class SqsAPI extends ParentAPI {
    *
    * @param request - The request {@link SqsApiDeleteSqsCredentialsRequest}
    */
-  deleteSqsCredentials = (request: Readonly<SqsApiDeleteSqsCredentialsRequest>) =>
+  deleteSqsCredentials = (request: Readonly<SqsApiDeleteSqsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -558,7 +580,7 @@ export class SqsAPI extends ParentAPI {
    * @param request - The request {@link SqsApiUpdateSqsCredentialsRequest}
    * @returns A Promise of SqsCredentials
    */
-  updateSqsCredentials = (request: Readonly<SqsApiUpdateSqsCredentialsRequest>) =>
+  updateSqsCredentials = (request: Readonly<SqsApiUpdateSqsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<SqsCredentials>(
       {
         body: JSON.stringify(
@@ -567,6 +589,7 @@ export class SqsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
+        signal: options?.signal,
       },
       unmarshalSqsCredentials,
     )
@@ -578,17 +601,18 @@ export class SqsAPI extends ParentAPI {
    * @param request - The request {@link SqsApiGetSqsCredentialsRequest}
    * @returns A Promise of SqsCredentials
    */
-  getSqsCredentials = (request: Readonly<SqsApiGetSqsCredentialsRequest>) =>
+  getSqsCredentials = (request: Readonly<SqsApiGetSqsCredentialsRequest>, options?: RequestOptions) =>
     this.client.fetch<SqsCredentials>(
       {
         method: 'GET',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
+        signal: options?.signal,
       },
       unmarshalSqsCredentials,
     )
 
   
-  protected pageOfListSqsCredentials = (request: Readonly<SqsApiListSqsCredentialsRequest> = {}) =>
+  protected pageOfListSqsCredentials = (request: Readonly<SqsApiListSqsCredentialsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSqsCredentialsResponse>(
       {
         method: 'GET',
@@ -599,6 +623,7 @@ export class SqsAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSqsCredentialsResponse,
     )
@@ -609,8 +634,8 @@ export class SqsAPI extends ParentAPI {
    * @param request - The request {@link SqsApiListSqsCredentialsRequest}
    * @returns A Promise of ListSqsCredentialsResponse
    */
-  listSqsCredentials = (request: Readonly<SqsApiListSqsCredentialsRequest> = {}) =>
-    enrichForPagination('sqsCredentials', this.pageOfListSqsCredentials, request)
+  listSqsCredentials = (request: Readonly<SqsApiListSqsCredentialsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('sqsCredentials', this.pageOfListSqsCredentials, request, options)
 
   
 }

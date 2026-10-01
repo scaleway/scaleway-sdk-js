@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalAPIKey,
   marshalAddGroupMemberRequest,
@@ -223,7 +223,7 @@ const jsonContentHeaders = {
 This API allows you to manage Identity and Access Management (IAM) across your Scaleway Organizations, Projects and resources.
  */
 export class API extends ParentAPI {
-  protected pageOfListSSHKeys = (request: Readonly<ListSSHKeysRequest> = {}) =>
+  protected pageOfListSSHKeys = (request: Readonly<ListSSHKeysRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSSHKeysResponse>(
       {
         method: 'GET',
@@ -237,6 +237,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSSHKeysResponse,
     )
@@ -247,8 +248,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSSHKeysRequest}
    * @returns A Promise of ListSSHKeysResponse
    */
-  listSSHKeys = (request: Readonly<ListSSHKeysRequest> = {}) =>
-    enrichForPagination('sshKeys', this.pageOfListSSHKeys, request)
+  listSSHKeys = (request: Readonly<ListSSHKeysRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('sshKeys', this.pageOfListSSHKeys, request, options)
 
   
   /**
@@ -257,7 +258,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateSSHKeyRequest}
    * @returns A Promise of SSHKey
    */
-  createSSHKey = (request: Readonly<CreateSSHKeyRequest>) =>
+  createSSHKey = (request: Readonly<CreateSSHKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<SSHKey>(
       {
         body: JSON.stringify(
@@ -266,6 +267,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/ssh-keys`,
+        signal: options?.signal,
       },
       unmarshalSSHKey,
     )
@@ -277,11 +279,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetSSHKeyRequest}
    * @returns A Promise of SSHKey
    */
-  getSSHKey = (request: Readonly<GetSSHKeyRequest>) =>
+  getSSHKey = (request: Readonly<GetSSHKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<SSHKey>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
+        signal: options?.signal,
       },
       unmarshalSSHKey,
     )
@@ -293,7 +296,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateSSHKeyRequest}
    * @returns A Promise of SSHKey
    */
-  updateSSHKey = (request: Readonly<UpdateSSHKeyRequest>) =>
+  updateSSHKey = (request: Readonly<UpdateSSHKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<SSHKey>(
       {
         body: JSON.stringify(
@@ -302,6 +305,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
+        signal: options?.signal,
       },
       unmarshalSSHKey,
     )
@@ -312,16 +316,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteSSHKeyRequest}
    */
-  deleteSSHKey = (request: Readonly<DeleteSSHKeyRequest>) =>
+  deleteSSHKey = (request: Readonly<DeleteSSHKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListUsers = (request: Readonly<ListUsersRequest> = {}) =>
+  protected pageOfListUsers = (request: Readonly<ListUsersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListUsersResponse>(
       {
         method: 'GET',
@@ -336,6 +341,7 @@ export class API extends ParentAPI {
           ['type', request.type],
           ['user_ids', request.userIds],
         ),
+        signal: options?.signal,
       },
       unmarshalListUsersResponse,
     )
@@ -346,8 +352,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
    */
-  listUsers = (request: Readonly<ListUsersRequest> = {}) =>
-    enrichForPagination('users', this.pageOfListUsers, request)
+  listUsers = (request: Readonly<ListUsersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('users', this.pageOfListUsers, request, options)
 
   
   /**
@@ -356,11 +362,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetUserRequest}
    * @returns A Promise of User
    */
-  getUser = (request: Readonly<GetUserRequest>) =>
+  getUser = (request: Readonly<GetUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -372,7 +379,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateUserRequest}
    * @returns A Promise of User
    */
-  updateUser = (request: Readonly<UpdateUserRequest>) =>
+  updateUser = (request: Readonly<UpdateUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -381,6 +388,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -391,11 +399,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteUserRequest}
    */
-  deleteUser = (request: Readonly<DeleteUserRequest>) =>
+  deleteUser = (request: Readonly<DeleteUserRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -406,7 +415,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateUserRequest}
    * @returns A Promise of User
    */
-  createUser = (request: Readonly<CreateUserRequest> = {}) =>
+  createUser = (request: Readonly<CreateUserRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -415,6 +424,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -426,7 +436,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateUserUsernameRequest}
    * @returns A Promise of User
    */
-  updateUserUsername = (request: Readonly<UpdateUserUsernameRequest>) =>
+  updateUserUsername = (request: Readonly<UpdateUserUsernameRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -435,6 +445,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-username`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -446,7 +457,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateUserPasswordRequest}
    * @returns A Promise of User
    */
-  updateUserPassword = (request: Readonly<UpdateUserPasswordRequest>) =>
+  updateUserPassword = (request: Readonly<UpdateUserPasswordRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -455,6 +466,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-password`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -466,13 +478,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateUserMFAOTPRequest}
    * @returns A Promise of MFAOTP
    */
-  createUserMFAOTP = (request: Readonly<CreateUserMFAOTPRequest>) =>
+  createUserMFAOTP = (request: Readonly<CreateUserMFAOTPRequest>, options?: RequestOptions) =>
     this.client.fetch<MFAOTP>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/mfa-otp`,
+        signal: options?.signal,
       },
       unmarshalMFAOTP,
     )
@@ -484,7 +497,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ValidateUserMFAOTPRequest}
    * @returns A Promise of ValidateUserMFAOTPResponse
    */
-  validateUserMFAOTP = (request: Readonly<ValidateUserMFAOTPRequest>) =>
+  validateUserMFAOTP = (request: Readonly<ValidateUserMFAOTPRequest>, options?: RequestOptions) =>
     this.client.fetch<ValidateUserMFAOTPResponse>(
       {
         body: JSON.stringify(
@@ -493,6 +506,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/validate-mfa-otp`,
+        signal: options?.signal,
       },
       unmarshalValidateUserMFAOTPResponse,
     )
@@ -503,13 +517,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteUserMFAOTPRequest}
    */
-  deleteUserMFAOTP = (request: Readonly<DeleteUserMFAOTPRequest>) =>
+  deleteUserMFAOTP = (request: Readonly<DeleteUserMFAOTPRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/mfa-otp`,
+        signal: options?.signal,
       },
     )
 
@@ -520,13 +535,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link LockUserRequest}
    * @returns A Promise of User
    */
-  lockUser = (request: Readonly<LockUserRequest>) =>
+  lockUser = (request: Readonly<LockUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/lock`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -538,13 +554,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link UnlockUserRequest}
    * @returns A Promise of User
    */
-  unlockUser = (request: Readonly<UnlockUserRequest>) =>
+  unlockUser = (request: Readonly<UnlockUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/unlock`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -556,7 +573,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListGracePeriodsRequest}
    * @returns A Promise of ListGracePeriodsResponse
    */
-  listGracePeriods = (request: Readonly<ListGracePeriodsRequest> = {}) =>
+  listGracePeriods = (request: Readonly<ListGracePeriodsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListGracePeriodsResponse>(
       {
         method: 'GET',
@@ -564,34 +581,37 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['user_id', request.userId],
         ),
+        signal: options?.signal,
       },
       unmarshalListGracePeriodsResponse,
     )
 
   
-  getUserConnections = (request: Readonly<GetUserConnectionsRequest>) =>
+  getUserConnections = (request: Readonly<GetUserConnectionsRequest>, options?: RequestOptions) =>
     this.client.fetch<GetUserConnectionsResponse>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/connections`,
+        signal: options?.signal,
       },
       unmarshalGetUserConnectionsResponse,
     )
 
   
-  initiateUserConnection = (request: Readonly<InitiateUserConnectionRequest>) =>
+  initiateUserConnection = (request: Readonly<InitiateUserConnectionRequest>, options?: RequestOptions) =>
     this.client.fetch<InitiateUserConnectionResponse>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/initiate-connection`,
+        signal: options?.signal,
       },
       unmarshalInitiateUserConnectionResponse,
     )
 
   
-  joinUserConnection = (request: Readonly<JoinUserConnectionRequest>) =>
+  joinUserConnection = (request: Readonly<JoinUserConnectionRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -600,11 +620,12 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/join-connection`,
+        signal: options?.signal,
       },
     )
 
   
-  removeUserConnection = (request: Readonly<RemoveUserConnectionRequest>) =>
+  removeUserConnection = (request: Readonly<RemoveUserConnectionRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -613,11 +634,12 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/remove-connection`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
+  protected pageOfListApplications = (request: Readonly<ListApplicationsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListApplicationsResponse>(
       {
         method: 'GET',
@@ -632,6 +654,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['tag', request.tag],
         ),
+        signal: options?.signal,
       },
       unmarshalListApplicationsResponse,
     )
@@ -642,8 +665,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListApplicationsRequest}
    * @returns A Promise of ListApplicationsResponse
    */
-  listApplications = (request: Readonly<ListApplicationsRequest> = {}) =>
-    enrichForPagination('applications', this.pageOfListApplications, request)
+  listApplications = (request: Readonly<ListApplicationsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('applications', this.pageOfListApplications, request, options)
 
   
   /**
@@ -652,7 +675,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateApplicationRequest}
    * @returns A Promise of Application
    */
-  createApplication = (request: Readonly<CreateApplicationRequest>) =>
+  createApplication = (request: Readonly<CreateApplicationRequest>, options?: RequestOptions) =>
     this.client.fetch<Application>(
       {
         body: JSON.stringify(
@@ -661,6 +684,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/applications`,
+        signal: options?.signal,
       },
       unmarshalApplication,
     )
@@ -672,11 +696,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetApplicationRequest}
    * @returns A Promise of Application
    */
-  getApplication = (request: Readonly<GetApplicationRequest>) =>
+  getApplication = (request: Readonly<GetApplicationRequest>, options?: RequestOptions) =>
     this.client.fetch<Application>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
+        signal: options?.signal,
       },
       unmarshalApplication,
     )
@@ -688,7 +713,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateApplicationRequest}
    * @returns A Promise of Application
    */
-  updateApplication = (request: Readonly<UpdateApplicationRequest>) =>
+  updateApplication = (request: Readonly<UpdateApplicationRequest>, options?: RequestOptions) =>
     this.client.fetch<Application>(
       {
         body: JSON.stringify(
@@ -697,6 +722,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
+        signal: options?.signal,
       },
       unmarshalApplication,
     )
@@ -707,16 +733,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteApplicationRequest}
    */
-  deleteApplication = (request: Readonly<DeleteApplicationRequest>) =>
+  deleteApplication = (request: Readonly<DeleteApplicationRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListGroups = (request: Readonly<ListGroupsRequest> = {}) =>
+  protected pageOfListGroups = (request: Readonly<ListGroupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListGroupsResponse>(
       {
         method: 'GET',
@@ -732,6 +759,7 @@ export class API extends ParentAPI {
           ['tag', request.tag],
           ['user_ids', request.userIds],
         ),
+        signal: options?.signal,
       },
       unmarshalListGroupsResponse,
     )
@@ -742,8 +770,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListGroupsRequest}
    * @returns A Promise of ListGroupsResponse
    */
-  listGroups = (request: Readonly<ListGroupsRequest> = {}) =>
-    enrichForPagination('groups', this.pageOfListGroups, request)
+  listGroups = (request: Readonly<ListGroupsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('groups', this.pageOfListGroups, request, options)
 
   
   /**
@@ -752,7 +780,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateGroupRequest}
    * @returns A Promise of Group
    */
-  createGroup = (request: Readonly<CreateGroupRequest>) =>
+  createGroup = (request: Readonly<CreateGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: JSON.stringify(
@@ -761,6 +789,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/groups`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -772,11 +801,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetGroupRequest}
    * @returns A Promise of Group
    */
-  getGroup = (request: Readonly<GetGroupRequest>) =>
+  getGroup = (request: Readonly<GetGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -788,7 +818,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateGroupRequest}
    * @returns A Promise of Group
    */
-  updateGroup = (request: Readonly<UpdateGroupRequest>) =>
+  updateGroup = (request: Readonly<UpdateGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: JSON.stringify(
@@ -797,6 +827,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -808,7 +839,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetGroupMembersRequest}
    * @returns A Promise of Group
    */
-  setGroupMembers = (request: Readonly<SetGroupMembersRequest>) =>
+  setGroupMembers = (request: Readonly<SetGroupMembersRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: JSON.stringify(
@@ -817,6 +848,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/members`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -828,7 +860,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddGroupMemberRequest}
    * @returns A Promise of Group
    */
-  addGroupMember = (request: Readonly<AddGroupMemberRequest>) =>
+  addGroupMember = (request: Readonly<AddGroupMemberRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: JSON.stringify(
@@ -837,6 +869,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/add-member`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -848,7 +881,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddGroupMembersRequest}
    * @returns A Promise of Group
    */
-  addGroupMembers = (request: Readonly<AddGroupMembersRequest>) =>
+  addGroupMembers = (request: Readonly<AddGroupMembersRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: JSON.stringify(
@@ -857,6 +890,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/add-members`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -868,7 +902,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RemoveGroupMemberRequest}
    * @returns A Promise of Group
    */
-  removeGroupMember = (request: Readonly<RemoveGroupMemberRequest>) =>
+  removeGroupMember = (request: Readonly<RemoveGroupMemberRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: JSON.stringify(
@@ -877,6 +911,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/remove-member`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -887,16 +922,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteGroupRequest}
    */
-  deleteGroup = (request: Readonly<DeleteGroupRequest>) =>
+  deleteGroup = (request: Readonly<DeleteGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListPolicies = (request: Readonly<ListPoliciesRequest> = {}) =>
+  protected pageOfListPolicies = (request: Readonly<ListPoliciesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPoliciesResponse>(
       {
         method: 'GET',
@@ -915,6 +951,7 @@ export class API extends ParentAPI {
           ['tag', request.tag],
           ['user_ids', request.userIds],
         ),
+        signal: options?.signal,
       },
       unmarshalListPoliciesResponse,
     )
@@ -925,8 +962,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPoliciesRequest}
    * @returns A Promise of ListPoliciesResponse
    */
-  listPolicies = (request: Readonly<ListPoliciesRequest> = {}) =>
-    enrichForPagination('policies', this.pageOfListPolicies, request)
+  listPolicies = (request: Readonly<ListPoliciesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('policies', this.pageOfListPolicies, request, options)
 
   
   /**
@@ -935,7 +972,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePolicyRequest}
    * @returns A Promise of Policy
    */
-  createPolicy = (request: Readonly<CreatePolicyRequest>) =>
+  createPolicy = (request: Readonly<CreatePolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Policy>(
       {
         body: JSON.stringify(
@@ -944,6 +981,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/policies`,
+        signal: options?.signal,
       },
       unmarshalPolicy,
     )
@@ -955,11 +993,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPolicyRequest}
    * @returns A Promise of Policy
    */
-  getPolicy = (request: Readonly<GetPolicyRequest>) =>
+  getPolicy = (request: Readonly<GetPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Policy>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
+        signal: options?.signal,
       },
       unmarshalPolicy,
     )
@@ -971,7 +1010,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdatePolicyRequest}
    * @returns A Promise of Policy
    */
-  updatePolicy = (request: Readonly<UpdatePolicyRequest>) =>
+  updatePolicy = (request: Readonly<UpdatePolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Policy>(
       {
         body: JSON.stringify(
@@ -980,6 +1019,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
+        signal: options?.signal,
       },
       unmarshalPolicy,
     )
@@ -990,11 +1030,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeletePolicyRequest}
    */
-  deletePolicy = (request: Readonly<DeletePolicyRequest>) =>
+  deletePolicy = (request: Readonly<DeletePolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1005,13 +1046,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link ClonePolicyRequest}
    * @returns A Promise of Policy
    */
-  clonePolicy = (request: Readonly<ClonePolicyRequest>) =>
+  clonePolicy = (request: Readonly<ClonePolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Policy>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}/clone`,
+        signal: options?.signal,
       },
       unmarshalPolicy,
     )
@@ -1023,7 +1065,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetRulesRequest}
    * @returns A Promise of SetRulesResponse
    */
-  setRules = (request: Readonly<SetRulesRequest>) =>
+  setRules = (request: Readonly<SetRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<SetRulesResponse>(
       {
         body: JSON.stringify(
@@ -1032,12 +1074,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iam/v1alpha1/rules`,
+        signal: options?.signal,
       },
       unmarshalSetRulesResponse,
     )
 
   
-  protected pageOfListRules = (request: Readonly<ListRulesRequest>) =>
+  protected pageOfListRules = (request: Readonly<ListRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListRulesResponse>(
       {
         method: 'GET',
@@ -1047,6 +1090,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['policy_id', request.policyId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRulesResponse,
     )
@@ -1057,11 +1101,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRulesRequest}
    * @returns A Promise of ListRulesResponse
    */
-  listRules = (request: Readonly<ListRulesRequest>) =>
-    enrichForPagination('rules', this.pageOfListRules, request)
+  listRules = (request: Readonly<ListRulesRequest>, options?: RequestOptions) =>
+    enrichForPagination('rules', this.pageOfListRules, request, options)
 
   
-  protected pageOfListPermissionSets = (request: Readonly<ListPermissionSetsRequest> = {}) =>
+  protected pageOfListPermissionSets = (request: Readonly<ListPermissionSetsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPermissionSetsResponse>(
       {
         method: 'GET',
@@ -1072,6 +1116,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListPermissionSetsResponse,
     )
@@ -1082,11 +1127,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPermissionSetsRequest}
    * @returns A Promise of ListPermissionSetsResponse
    */
-  listPermissionSets = (request: Readonly<ListPermissionSetsRequest> = {}) =>
-    enrichForPagination('permissionSets', this.pageOfListPermissionSets, request)
+  listPermissionSets = (request: Readonly<ListPermissionSetsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('permissionSets', this.pageOfListPermissionSets, request, options)
 
   
-  protected pageOfListAPIKeys = (request: Readonly<ListAPIKeysRequest> = {}) =>
+  protected pageOfListAPIKeys = (request: Readonly<ListAPIKeysRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAPIKeysResponse>(
       {
         method: 'GET',
@@ -1112,6 +1157,7 @@ export class API extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListAPIKeysResponse,
     )
@@ -1122,8 +1168,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListAPIKeysRequest}
    * @returns A Promise of ListAPIKeysResponse
    */
-  listAPIKeys = (request: Readonly<ListAPIKeysRequest> = {}) =>
-    enrichForPagination('apiKeys', this.pageOfListAPIKeys, request)
+  listAPIKeys = (request: Readonly<ListAPIKeysRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('apiKeys', this.pageOfListAPIKeys, request, options)
 
   
   /**
@@ -1132,7 +1178,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateAPIKeyRequest}
    * @returns A Promise of APIKey
    */
-  createAPIKey = (request: Readonly<CreateAPIKeyRequest>) =>
+  createAPIKey = (request: Readonly<CreateAPIKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<APIKey>(
       {
         body: JSON.stringify(
@@ -1141,6 +1187,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/api-keys`,
+        signal: options?.signal,
       },
       unmarshalAPIKey,
     )
@@ -1152,11 +1199,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetAPIKeyRequest}
    * @returns A Promise of APIKey
    */
-  getAPIKey = (request: Readonly<GetAPIKeyRequest>) =>
+  getAPIKey = (request: Readonly<GetAPIKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<APIKey>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
+        signal: options?.signal,
       },
       unmarshalAPIKey,
     )
@@ -1168,7 +1216,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateAPIKeyRequest}
    * @returns A Promise of APIKey
    */
-  updateAPIKey = (request: Readonly<UpdateAPIKeyRequest>) =>
+  updateAPIKey = (request: Readonly<UpdateAPIKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<APIKey>(
       {
         body: JSON.stringify(
@@ -1177,6 +1225,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
+        signal: options?.signal,
       },
       unmarshalAPIKey,
     )
@@ -1187,16 +1236,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteAPIKeyRequest}
    */
-  deleteAPIKey = (request: Readonly<DeleteAPIKeyRequest>) =>
+  deleteAPIKey = (request: Readonly<DeleteAPIKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListQuota = (request: Readonly<ListQuotaRequest> = {}) =>
+  protected pageOfListQuota = (request: Readonly<ListQuotaRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListQuotaResponse>(
       {
         method: 'GET',
@@ -1208,6 +1258,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['quotum_names', request.quotumNames],
         ),
+        signal: options?.signal,
       },
       unmarshalListQuotaResponse,
     )
@@ -1218,8 +1269,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListQuotaRequest}
    * @returns A Promise of ListQuotaResponse
    */
-  listQuota = (request: Readonly<ListQuotaRequest> = {}) =>
-    enrichForPagination('quota', this.pageOfListQuota, request)
+  listQuota = (request: Readonly<ListQuotaRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('quota', this.pageOfListQuota, request, options)
 
   
   /**
@@ -1228,7 +1279,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetQuotumRequest}
    * @returns A Promise of Quotum
    */
-  getQuotum = (request: Readonly<GetQuotumRequest>) =>
+  getQuotum = (request: Readonly<GetQuotumRequest>, options?: RequestOptions) =>
     this.client.fetch<Quotum>(
       {
         method: 'GET',
@@ -1236,12 +1287,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
         ),
+        signal: options?.signal,
       },
       unmarshalQuotum,
     )
 
   
-  protected pageOfListJWTs = (request: Readonly<ListJWTsRequest>) =>
+  protected pageOfListJWTs = (request: Readonly<ListJWTsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListJWTsResponse>(
       {
         method: 'GET',
@@ -1253,6 +1305,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListJWTsResponse,
     )
@@ -1263,8 +1316,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJWTsRequest}
    * @returns A Promise of ListJWTsResponse
    */
-  listJWTs = (request: Readonly<ListJWTsRequest>) =>
-    enrichForPagination('jwts', this.pageOfListJWTs, request)
+  listJWTs = (request: Readonly<ListJWTsRequest>, options?: RequestOptions) =>
+    enrichForPagination('jwts', this.pageOfListJWTs, request, options)
 
   
   /**
@@ -1273,7 +1326,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateJWTRequest}
    * @returns A Promise of EncodedJWT
    */
-  createJWT = (request: Readonly<CreateJWTRequest>) =>
+  createJWT = (request: Readonly<CreateJWTRequest>, options?: RequestOptions) =>
     this.client.fetch<EncodedJWT>(
       {
         body: JSON.stringify(
@@ -1282,6 +1335,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/jwts`,
+        signal: options?.signal,
       },
       unmarshalEncodedJWT,
     )
@@ -1293,11 +1347,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetJWTRequest}
    * @returns A Promise of JWT
    */
-  getJWT = (request: Readonly<GetJWTRequest>) =>
+  getJWT = (request: Readonly<GetJWTRequest>, options?: RequestOptions) =>
     this.client.fetch<JWT>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/jwts/${validatePathParam('jti', request.jti)}`,
+        signal: options?.signal,
       },
       unmarshalJWT,
     )
@@ -1308,16 +1363,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteJWTRequest}
    */
-  deleteJWT = (request: Readonly<DeleteJWTRequest>) =>
+  deleteJWT = (request: Readonly<DeleteJWTRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/jwts/${validatePathParam('jti', request.jti)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListLogs = (request: Readonly<ListLogsRequest> = {}) =>
+  protected pageOfListLogs = (request: Readonly<ListLogsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListLogsResponse>(
       {
         method: 'GET',
@@ -1333,6 +1389,7 @@ export class API extends ParentAPI {
           ['resource_type', request.resourceType],
           ['search', request.search],
         ),
+        signal: options?.signal,
       },
       unmarshalListLogsResponse,
     )
@@ -1343,8 +1400,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
    */
-  listLogs = (request: Readonly<ListLogsRequest> = {}) =>
-    enrichForPagination('logs', this.pageOfListLogs, request)
+  listLogs = (request: Readonly<ListLogsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('logs', this.pageOfListLogs, request, options)
 
   
   /**
@@ -1353,11 +1410,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetLogRequest}
    * @returns A Promise of Log
    */
-  getLog = (request: Readonly<GetLogRequest>) =>
+  getLog = (request: Readonly<GetLogRequest>, options?: RequestOptions) =>
     this.client.fetch<Log>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/logs/${validatePathParam('logId', request.logId)}`,
+        signal: options?.signal,
       },
       unmarshalLog,
     )
@@ -1369,11 +1427,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetOrganizationSecuritySettingsRequest}
    * @returns A Promise of OrganizationSecuritySettings
    */
-  getOrganizationSecuritySettings = (request: Readonly<GetOrganizationSecuritySettingsRequest> = {}) =>
+  getOrganizationSecuritySettings = (request: Readonly<GetOrganizationSecuritySettingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<OrganizationSecuritySettings>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`,
+        signal: options?.signal,
       },
       unmarshalOrganizationSecuritySettings,
     )
@@ -1385,7 +1444,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateOrganizationSecuritySettingsRequest}
    * @returns A Promise of OrganizationSecuritySettings
    */
-  updateOrganizationSecuritySettings = (request: Readonly<UpdateOrganizationSecuritySettingsRequest> = {}) =>
+  updateOrganizationSecuritySettings = (request: Readonly<UpdateOrganizationSecuritySettingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<OrganizationSecuritySettings>(
       {
         body: JSON.stringify(
@@ -1394,6 +1453,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`,
+        signal: options?.signal,
       },
       unmarshalOrganizationSecuritySettings,
     )
@@ -1405,7 +1465,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetOrganizationAliasRequest}
    * @returns A Promise of Organization
    */
-  setOrganizationAlias = (request: Readonly<SetOrganizationAliasRequest>) =>
+  setOrganizationAlias = (request: Readonly<SetOrganizationAliasRequest>, options?: RequestOptions) =>
     this.client.fetch<Organization>(
       {
         body: JSON.stringify(
@@ -1414,6 +1474,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/alias`,
+        signal: options?.signal,
       },
       unmarshalOrganization,
     )
@@ -1425,11 +1486,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetOrganizationRequest}
    * @returns A Promise of Organization
    */
-  getOrganization = (request: Readonly<GetOrganizationRequest> = {}) =>
+  getOrganization = (request: Readonly<GetOrganizationRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Organization>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}`,
+        signal: options?.signal,
       },
       unmarshalOrganization,
     )
@@ -1441,7 +1503,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateOrganizationLoginMethodsRequest}
    * @returns A Promise of Organization
    */
-  updateOrganizationLoginMethods = (request: Readonly<UpdateOrganizationLoginMethodsRequest> = {}) =>
+  updateOrganizationLoginMethods = (request: Readonly<UpdateOrganizationLoginMethodsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Organization>(
       {
         body: JSON.stringify(
@@ -1450,6 +1512,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/login-methods`,
+        signal: options?.signal,
       },
       unmarshalOrganization,
     )
@@ -1461,11 +1524,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetOrganizationSamlRequest}
    * @returns A Promise of Saml
    */
-  getOrganizationSaml = (request: Readonly<GetOrganizationSamlRequest> = {}) =>
+  getOrganizationSaml = (request: Readonly<GetOrganizationSamlRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Saml>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/saml`,
+        signal: options?.signal,
       },
       unmarshalSaml,
     )
@@ -1477,13 +1541,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableOrganizationSamlRequest}
    * @returns A Promise of Saml
    */
-  enableOrganizationSaml = (request: Readonly<EnableOrganizationSamlRequest> = {}) =>
+  enableOrganizationSaml = (request: Readonly<EnableOrganizationSamlRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Saml>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/saml`,
+        signal: options?.signal,
       },
       unmarshalSaml,
     )
@@ -1495,7 +1560,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateSamlRequest}
    * @returns A Promise of Saml
    */
-  updateSaml = (request: Readonly<UpdateSamlRequest>) =>
+  updateSaml = (request: Readonly<UpdateSamlRequest>, options?: RequestOptions) =>
     this.client.fetch<Saml>(
       {
         body: JSON.stringify(
@@ -1504,6 +1569,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
+        signal: options?.signal,
       },
       unmarshalSaml,
     )
@@ -1514,11 +1580,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteSamlRequest}
    */
-  deleteSaml = (request: Readonly<DeleteSamlRequest>) =>
+  deleteSaml = (request: Readonly<DeleteSamlRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1529,7 +1596,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ParseSamlMetadataRequest}
    * @returns A Promise of ParseSamlMetadataResponse
    */
-  parseSamlMetadata = async (request: Readonly<ParseSamlMetadataRequest>) =>
+  parseSamlMetadata = async (request: Readonly<ParseSamlMetadataRequest>, options?: RequestOptions) =>
     this.client.fetch<ParseSamlMetadataResponse>(
       {
         body: JSON.stringify(
@@ -1538,6 +1605,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/parse-saml-metadata`,
+        signal: options?.signal,
       },
       unmarshalParseSamlMetadataResponse,
     )
@@ -1549,11 +1617,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSamlCertificatesRequest}
    * @returns A Promise of ListSamlCertificatesResponse
    */
-  listSamlCertificates = (request: Readonly<ListSamlCertificatesRequest>) =>
+  listSamlCertificates = (request: Readonly<ListSamlCertificatesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSamlCertificatesResponse>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}/certificates`,
+        signal: options?.signal,
       },
       unmarshalListSamlCertificatesResponse,
     )
@@ -1565,7 +1634,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddSamlCertificateRequest}
    * @returns A Promise of SamlCertificate
    */
-  addSamlCertificate = (request: Readonly<AddSamlCertificateRequest>) =>
+  addSamlCertificate = (request: Readonly<AddSamlCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<SamlCertificate>(
       {
         body: JSON.stringify(
@@ -1574,6 +1643,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}/certificates`,
+        signal: options?.signal,
       },
       unmarshalSamlCertificate,
     )
@@ -1585,11 +1655,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetSamlCertificateRequest}
    * @returns A Promise of SamlCertificate
    */
-  getSamlCertificate = (request: Readonly<GetSamlCertificateRequest>) =>
+  getSamlCertificate = (request: Readonly<GetSamlCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<SamlCertificate>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
       },
       unmarshalSamlCertificate,
     )
@@ -1600,11 +1671,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteSamlCertificateRequest}
    */
-  deleteSamlCertificate = (request: Readonly<DeleteSamlCertificateRequest>) =>
+  deleteSamlCertificate = (request: Readonly<DeleteSamlCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/saml-certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1615,11 +1687,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetOrganizationScimRequest}
    * @returns A Promise of Scim
    */
-  getOrganizationScim = (request: Readonly<GetOrganizationScimRequest> = {}) =>
+  getOrganizationScim = (request: Readonly<GetOrganizationScimRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Scim>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/scim`,
+        signal: options?.signal,
       },
       unmarshalScim,
     )
@@ -1631,13 +1704,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableOrganizationScimRequest}
    * @returns A Promise of Scim
    */
-  enableOrganizationScim = (request: Readonly<EnableOrganizationScimRequest> = {}) =>
+  enableOrganizationScim = (request: Readonly<EnableOrganizationScimRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Scim>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/scim`,
+        signal: options?.signal,
       },
       unmarshalScim,
     )
@@ -1648,16 +1722,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteScimRequest}
    */
-  deleteScim = (request: Readonly<DeleteScimRequest>) =>
+  deleteScim = (request: Readonly<DeleteScimRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListScimTokens = (request: Readonly<ListScimTokensRequest>) =>
+  protected pageOfListScimTokens = (request: Readonly<ListScimTokensRequest>, options?: RequestOptions) =>
     this.client.fetch<ListScimTokensResponse>(
       {
         method: 'GET',
@@ -1667,6 +1742,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListScimTokensResponse,
     )
@@ -1677,8 +1753,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListScimTokensRequest}
    * @returns A Promise of ListScimTokensResponse
    */
-  listScimTokens = (request: Readonly<ListScimTokensRequest>) =>
-    enrichForPagination('scimTokens', this.pageOfListScimTokens, request)
+  listScimTokens = (request: Readonly<ListScimTokensRequest>, options?: RequestOptions) =>
+    enrichForPagination('scimTokens', this.pageOfListScimTokens, request, options)
 
   
   /**
@@ -1687,11 +1763,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateScimTokenRequest}
    * @returns A Promise of CreateScimTokenResponse
    */
-  createScimToken = (request: Readonly<CreateScimTokenRequest>) =>
+  createScimToken = (request: Readonly<CreateScimTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateScimTokenResponse>(
       {
         method: 'POST',
         path: `/iam/v1alpha1/scim/${validatePathParam('scimId', request.scimId)}/tokens`,
+        signal: options?.signal,
       },
       unmarshalCreateScimTokenResponse,
     )
@@ -1702,20 +1779,22 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteScimTokenRequest}
    */
-  deleteScimToken = (request: Readonly<DeleteScimTokenRequest>) =>
+  deleteScimToken = (request: Readonly<DeleteScimTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iam/v1alpha1/scim-tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  getScimToken = (request: Readonly<GetScimTokenRequest>) =>
+  getScimToken = (request: Readonly<GetScimTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<ScimToken>(
       {
         method: 'GET',
         path: `/iam/v1alpha1/scim-tokens/${validatePathParam('scimTokenId', request.scimTokenId)}`,
+        signal: options?.signal,
       },
       unmarshalScimToken,
     )
@@ -1727,7 +1806,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link StartUserWebAuthnRegistrationRequest}
    * @returns A Promise of StartUserWebAuthnRegistrationResponse
    */
-  startUserWebAuthnRegistration = (request: Readonly<StartUserWebAuthnRegistrationRequest>) =>
+  startUserWebAuthnRegistration = (request: Readonly<StartUserWebAuthnRegistrationRequest>, options?: RequestOptions) =>
     this.client.fetch<StartUserWebAuthnRegistrationResponse>(
       {
         method: 'POST',
@@ -1735,6 +1814,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['origin', request.origin],
         ),
+        signal: options?.signal,
       },
       unmarshalStartUserWebAuthnRegistrationResponse,
     )
@@ -1746,7 +1826,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link FinishUserWebAuthnRegistrationRequest}
    * @returns A Promise of FinishUserWebAuthnRegistrationResponse
    */
-  finishUserWebAuthnRegistration = (request: Readonly<FinishUserWebAuthnRegistrationRequest>) =>
+  finishUserWebAuthnRegistration = (request: Readonly<FinishUserWebAuthnRegistrationRequest>, options?: RequestOptions) =>
     this.client.fetch<FinishUserWebAuthnRegistrationResponse>(
       {
         body: JSON.stringify(
@@ -1755,12 +1835,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/finish-webauthn-registration`,
+        signal: options?.signal,
       },
       unmarshalFinishUserWebAuthnRegistrationResponse,
     )
 
   
-  protected pageOfListUserWebAuthnAuthenticators = (request: Readonly<ListUserWebAuthnAuthenticatorsRequest>) =>
+  protected pageOfListUserWebAuthnAuthenticators = (request: Readonly<ListUserWebAuthnAuthenticatorsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListUserWebAuthnAuthenticatorsResponse>(
       {
         method: 'GET',
@@ -1770,6 +1851,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListUserWebAuthnAuthenticatorsResponse,
     )
@@ -1780,8 +1862,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListUserWebAuthnAuthenticatorsRequest}
    * @returns A Promise of ListUserWebAuthnAuthenticatorsResponse
    */
-  listUserWebAuthnAuthenticators = (request: Readonly<ListUserWebAuthnAuthenticatorsRequest>) =>
-    enrichForPagination('authenticators', this.pageOfListUserWebAuthnAuthenticators, request)
+  listUserWebAuthnAuthenticators = (request: Readonly<ListUserWebAuthnAuthenticatorsRequest>, options?: RequestOptions) =>
+    enrichForPagination('authenticators', this.pageOfListUserWebAuthnAuthenticators, request, options)
 
   
   /**
@@ -1790,7 +1872,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateWebAuthnAuthenticatorRequest}
    * @returns A Promise of WebAuthnAuthenticator
    */
-  updateWebAuthnAuthenticator = (request: Readonly<UpdateWebAuthnAuthenticatorRequest>) =>
+  updateWebAuthnAuthenticator = (request: Readonly<UpdateWebAuthnAuthenticatorRequest>, options?: RequestOptions) =>
     this.client.fetch<WebAuthnAuthenticator>(
       {
         body: JSON.stringify(
@@ -1799,6 +1881,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
+        signal: options?.signal,
       },
       unmarshalWebAuthnAuthenticator,
     )
@@ -1809,13 +1892,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteWebAuthnAuthenticatorRequest}
    */
-  deleteWebAuthnAuthenticator = (request: Readonly<DeleteWebAuthnAuthenticatorRequest>) =>
+  deleteWebAuthnAuthenticator = (request: Readonly<DeleteWebAuthnAuthenticatorRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
+        signal: options?.signal,
       },
     )
 

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {REFERENCE_TRANSIENT_STATUSES as REFERENCE_TRANSIENT_STATUSES_BLOCK,SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_BLOCK,VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_BLOCK,} from './content.gen.js'
 import {
   marshalCreateSnapshotRequest,
@@ -77,7 +77,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListVolumeTypes = (request: Readonly<ListVolumeTypesRequest> = {}) =>
+  protected pageOfListVolumeTypes = (request: Readonly<ListVolumeTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVolumeTypesResponse>(
       {
         method: 'GET',
@@ -86,6 +86,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListVolumeTypesResponse,
     )
@@ -96,11 +97,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVolumeTypesRequest}
    * @returns A Promise of ListVolumeTypesResponse
    */
-  listVolumeTypes = (request: Readonly<ListVolumeTypesRequest> = {}) =>
-    enrichForPagination('volumeTypes', this.pageOfListVolumeTypes, request)
+  listVolumeTypes = (request: Readonly<ListVolumeTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('volumeTypes', this.pageOfListVolumeTypes, request, options)
 
   
-  protected pageOfListVolumes = (request: Readonly<ListVolumesRequest>) =>
+  protected pageOfListVolumes = (request: Readonly<ListVolumesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListVolumesResponse>(
       {
         method: 'GET',
@@ -118,6 +119,7 @@ export class API extends ParentAPI {
           ['volume_ids', request.volumeIds],
           ['volume_type', request.volumeType],
         ),
+        signal: options?.signal,
       },
       unmarshalListVolumesResponse,
     )
@@ -128,8 +130,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
    */
-  listVolumes = (request: Readonly<ListVolumesRequest>) =>
-    enrichForPagination('volumes', this.pageOfListVolumes, request)
+  listVolumes = (request: Readonly<ListVolumesRequest>, options?: RequestOptions) =>
+    enrichForPagination('volumes', this.pageOfListVolumes, request, options)
 
   
   /**
@@ -139,7 +141,7 @@ To create a volume from an existing snapshot, specify `from_snapshot` and the `s
    * @param request - The request {@link CreateVolumeRequest}
    * @returns A Promise of Volume
    */
-  createVolume = (request: Readonly<CreateVolumeRequest> = {}) =>
+  createVolume = (request: Readonly<CreateVolumeRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Volume>(
       {
         body: JSON.stringify(
@@ -148,6 +150,7 @@ To create a volume from an existing snapshot, specify `from_snapshot` and the `s
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
+        signal: options?.signal,
       },
       unmarshalVolume,
     )
@@ -159,11 +162,12 @@ To create a volume from an existing snapshot, specify `from_snapshot` and the `s
    * @param request - The request {@link GetVolumeRequest}
    * @returns A Promise of Volume
    */
-  getVolume = (request: Readonly<GetVolumeRequest>) =>
+  getVolume = (request: Readonly<GetVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<Volume>(
       {
         method: 'GET',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
       unmarshalVolume,
     )
@@ -192,11 +196,12 @@ To create a volume from an existing snapshot, specify `from_snapshot` and the `s
    *
    * @param request - The request {@link DeleteVolumeRequest}
    */
-  deleteVolume = (request: Readonly<DeleteVolumeRequest>) =>
+  deleteVolume = (request: Readonly<DeleteVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -208,7 +213,7 @@ You can only resize a volume to a larger size. It is currently not possible to c
    * @param request - The request {@link UpdateVolumeRequest}
    * @returns A Promise of Volume
    */
-  updateVolume = (request: Readonly<UpdateVolumeRequest>) =>
+  updateVolume = (request: Readonly<UpdateVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<Volume>(
       {
         body: JSON.stringify(
@@ -217,12 +222,13 @@ You can only resize a volume to a larger size. It is currently not possible to c
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
       unmarshalVolume,
     )
 
   
-  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest>) =>
+  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
@@ -238,6 +244,7 @@ You can only resize a volume to a larger size. It is currently not possible to c
           ['tags', request.tags],
           ['volume_id', request.volumeId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSnapshotsResponse,
     )
@@ -248,8 +255,8 @@ You can only resize a volume to a larger size. It is currently not possible to c
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
    */
-  listSnapshots = (request: Readonly<ListSnapshotsRequest>) =>
-    enrichForPagination('snapshots', this.pageOfListSnapshots, request)
+  listSnapshots = (request: Readonly<ListSnapshotsRequest>, options?: RequestOptions) =>
+    enrichForPagination('snapshots', this.pageOfListSnapshots, request, options)
 
   
   /**
@@ -258,11 +265,12 @@ You can only resize a volume to a larger size. It is currently not possible to c
    * @param request - The request {@link GetSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  getSnapshot = (request: Readonly<GetSnapshotRequest>) =>
+  getSnapshot = (request: Readonly<GetSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         method: 'GET',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -293,7 +301,7 @@ If your volume is in a transient state, you need to wait until the end of the cu
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  createSnapshot = (request: Readonly<CreateSnapshotRequest>) =>
+  createSnapshot = (request: Readonly<CreateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -302,6 +310,7 @@ If your volume is in a transient state, you need to wait until the end of the cu
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -314,7 +323,7 @@ The bucket can be imported into any Availability Zone as long as it is in the sa
    * @param request - The request {@link ImportSnapshotFromObjectStorageRequest}
    * @returns A Promise of Snapshot
    */
-  importSnapshotFromObjectStorage = (request: Readonly<ImportSnapshotFromObjectStorageRequest>) =>
+  importSnapshotFromObjectStorage = (request: Readonly<ImportSnapshotFromObjectStorageRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -323,6 +332,7 @@ The bucket can be imported into any Availability Zone as long as it is in the sa
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -335,7 +345,7 @@ The snapshot must not be in transient state.
    * @param request - The request {@link ExportSnapshotToObjectStorageRequest}
    * @returns A Promise of Snapshot
    */
-  exportSnapshotToObjectStorage = (request: Readonly<ExportSnapshotToObjectStorageRequest>) =>
+  exportSnapshotToObjectStorage = (request: Readonly<ExportSnapshotToObjectStorageRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -344,6 +354,7 @@ The snapshot must not be in transient state.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export-to-object-storage`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -354,11 +365,12 @@ The snapshot must not be in transient state.
    *
    * @param request - The request {@link DeleteSnapshotRequest}
    */
-  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>) =>
+  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -369,7 +381,7 @@ The snapshot must not be in transient state.
    * @param request - The request {@link UpdateSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>) =>
+  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -378,6 +390,7 @@ The snapshot must not be in transient state.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )

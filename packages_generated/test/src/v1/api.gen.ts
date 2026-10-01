@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {HUMAN_TRANSIENT_STATUSES as HUMAN_TRANSIENT_STATUSES_TEST,} from './content.gen.js'
 import {
   marshalCreateHumanRequest,
@@ -52,7 +52,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param request - The request {@link RegisterRequest}
    * @returns A Promise of RegisterResponse
    */
-  register = (request: Readonly<RegisterRequest>) =>
+  register = (request: Readonly<RegisterRequest>, options?: RequestOptions) =>
     this.client.fetch<RegisterResponse>(
       {
         body: JSON.stringify(
@@ -61,12 +61,13 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/test/v1/register`,
+        signal: options?.signal,
       },
       unmarshalRegisterResponse,
     )
 
   
-  protected pageOfListHumans = (request: Readonly<ListHumansRequest> = {}) =>
+  protected pageOfListHumans = (request: Readonly<ListHumansRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListHumansResponse>(
       {
         method: 'GET',
@@ -78,6 +79,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListHumansResponse,
     )
@@ -88,8 +90,8 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param request - The request {@link ListHumansRequest}
    * @returns A Promise of ListHumansResponse
    */
-  listHumans = (request: Readonly<ListHumansRequest> = {}) =>
-    enrichForPagination('humans', this.pageOfListHumans, request)
+  listHumans = (request: Readonly<ListHumansRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('humans', this.pageOfListHumans, request, options)
 
   
   /**
@@ -98,11 +100,12 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param request - The request {@link GetHumanRequest}
    * @returns A Promise of Human
    */
-  getHuman = (request: Readonly<GetHumanRequest>) =>
+  getHuman = (request: Readonly<GetHumanRequest>, options?: RequestOptions) =>
     this.client.fetch<Human>(
       {
         method: 'GET',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}`,
+        signal: options?.signal,
       },
       unmarshalHuman,
     )
@@ -132,7 +135,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param request - The request {@link CreateHumanRequest}
    * @returns A Promise of Human
    */
-  createHuman = (request: Readonly<CreateHumanRequest>) =>
+  createHuman = (request: Readonly<CreateHumanRequest>, options?: RequestOptions) =>
     this.client.fetch<Human>(
       {
         body: JSON.stringify(
@@ -141,6 +144,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/test/v1/humans`,
+        signal: options?.signal,
       },
       unmarshalHuman,
     )
@@ -152,7 +156,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param request - The request {@link UpdateHumanRequest}
    * @returns A Promise of Human
    */
-  updateHuman = (request: Readonly<UpdateHumanRequest>) =>
+  updateHuman = (request: Readonly<UpdateHumanRequest>, options?: RequestOptions) =>
     this.client.fetch<Human>(
       {
         body: JSON.stringify(
@@ -161,6 +165,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}`,
+        signal: options?.signal,
       },
       unmarshalHuman,
     )
@@ -172,11 +177,12 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param request - The request {@link DeleteHumanRequest}
    * @returns A Promise of Human
    */
-  deleteHuman = (request: Readonly<DeleteHumanRequest>) =>
+  deleteHuman = (request: Readonly<DeleteHumanRequest>, options?: RequestOptions) =>
     this.client.fetch<Human>(
       {
         method: 'DELETE',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}`,
+        signal: options?.signal,
       },
       unmarshalHuman,
     )
@@ -188,13 +194,14 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param request - The request {@link RunHumanRequest}
    * @returns A Promise of Human
    */
-  runHuman = (request: Readonly<RunHumanRequest>) =>
+  runHuman = (request: Readonly<RunHumanRequest>, options?: RequestOptions) =>
     this.client.fetch<Human>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}/run`,
+        signal: options?.signal,
       },
       unmarshalHuman,
     )
@@ -207,13 +214,14 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
    * @param request - The request {@link SmokeHumanRequest}
    * @returns A Promise of Human
    */
-  smokeHuman = (request: Readonly<SmokeHumanRequest>) =>
+  smokeHuman = (request: Readonly<SmokeHumanRequest>, options?: RequestOptions) =>
     this.client.fetch<Human>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}/smoke`,
+        signal: options?.signal,
       },
       unmarshalHuman,
     )

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DATABASE_BACKUP_TRANSIENT_STATUSES as DATABASE_BACKUP_TRANSIENT_STATUSES_RDB,INSTANCE_LOG_TRANSIENT_STATUSES as INSTANCE_LOG_TRANSIENT_STATUSES_RDB,INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_RDB,MAINTENANCE_TRANSIENT_STATUSES as MAINTENANCE_TRANSIENT_STATUSES_RDB,READ_REPLICA_TRANSIENT_STATUSES as READ_REPLICA_TRANSIENT_STATUSES_RDB,SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_RDB,} from './content.gen.js'
 import {
   marshalAddInstanceACLRulesRequest,
@@ -182,7 +182,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListDatabaseEngines = (request: Readonly<ListDatabaseEnginesRequest> = {}) =>
+  protected pageOfListDatabaseEngines = (request: Readonly<ListDatabaseEnginesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDatabaseEnginesResponse>(
       {
         method: 'GET',
@@ -193,6 +193,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['version', request.version],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatabaseEnginesResponse,
     )
@@ -203,11 +204,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDatabaseEnginesRequest}
    * @returns A Promise of ListDatabaseEnginesResponse
    */
-  listDatabaseEngines = (request: Readonly<ListDatabaseEnginesRequest> = {}) =>
-    enrichForPagination('engines', this.pageOfListDatabaseEngines, request)
+  listDatabaseEngines = (request: Readonly<ListDatabaseEnginesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('engines', this.pageOfListDatabaseEngines, request, options)
 
   
-  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest>) =>
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -217,6 +218,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListNodeTypesResponse,
     )
@@ -227,11 +229,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
    */
-  listNodeTypes = (request: Readonly<ListNodeTypesRequest>) =>
-    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
+  listNodeTypes = (request: Readonly<ListNodeTypesRequest>, options?: RequestOptions) =>
+    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request, options)
 
   
-  protected pageOfListDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest> = {}) =>
+  protected pageOfListDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDatabaseBackupsResponse>(
       {
         method: 'GET',
@@ -245,6 +247,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatabaseBackupsResponse,
     )
@@ -255,8 +258,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDatabaseBackupsRequest}
    * @returns A Promise of ListDatabaseBackupsResponse
    */
-  listDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest> = {}) =>
-    enrichForPagination('databaseBackups', this.pageOfListDatabaseBackups, request)
+  listDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('databaseBackups', this.pageOfListDatabaseBackups, request, options)
 
   
   /**
@@ -265,7 +268,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
    */
-  createDatabaseBackup = (request: Readonly<CreateDatabaseBackupRequest>) =>
+  createDatabaseBackup = (request: Readonly<CreateDatabaseBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseBackup>(
       {
         body: JSON.stringify(
@@ -274,6 +277,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups`,
+        signal: options?.signal,
       },
       unmarshalDatabaseBackup,
     )
@@ -285,11 +289,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
    */
-  getDatabaseBackup = (request: Readonly<GetDatabaseBackupRequest>) =>
+  getDatabaseBackup = (request: Readonly<GetDatabaseBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseBackup>(
       {
         method: 'GET',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('databaseBackupId', request.databaseBackupId)}`,
+        signal: options?.signal,
       },
       unmarshalDatabaseBackup,
     )
@@ -319,7 +324,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
    */
-  updateDatabaseBackup = (request: Readonly<UpdateDatabaseBackupRequest>) =>
+  updateDatabaseBackup = (request: Readonly<UpdateDatabaseBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseBackup>(
       {
         body: JSON.stringify(
@@ -328,6 +333,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('databaseBackupId', request.databaseBackupId)}`,
+        signal: options?.signal,
       },
       unmarshalDatabaseBackup,
     )
@@ -339,11 +345,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
    */
-  deleteDatabaseBackup = (request: Readonly<DeleteDatabaseBackupRequest>) =>
+  deleteDatabaseBackup = (request: Readonly<DeleteDatabaseBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseBackup>(
       {
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('databaseBackupId', request.databaseBackupId)}`,
+        signal: options?.signal,
       },
       unmarshalDatabaseBackup,
     )
@@ -355,7 +362,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RestoreDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
    */
-  restoreDatabaseBackup = (request: Readonly<RestoreDatabaseBackupRequest>) =>
+  restoreDatabaseBackup = (request: Readonly<RestoreDatabaseBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseBackup>(
       {
         body: JSON.stringify(
@@ -364,6 +371,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('databaseBackupId', request.databaseBackupId)}/restore`,
+        signal: options?.signal,
       },
       unmarshalDatabaseBackup,
     )
@@ -375,13 +383,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link ExportDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
    */
-  exportDatabaseBackup = (request: Readonly<ExportDatabaseBackupRequest>) =>
+  exportDatabaseBackup = (request: Readonly<ExportDatabaseBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseBackup>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('databaseBackupId', request.databaseBackupId)}/export`,
+        signal: options?.signal,
       },
       unmarshalDatabaseBackup,
     )
@@ -393,7 +402,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpgradeInstanceRequest}
    * @returns A Promise of Instance
    */
-  upgradeInstance = (request: Readonly<UpgradeInstanceRequest>) =>
+  upgradeInstance = (request: Readonly<UpgradeInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -402,12 +411,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/upgrade`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
 
   
-  protected pageOfListInstances = (request: Readonly<ListInstancesRequest> = {}) =>
+  protected pageOfListInstances = (request: Readonly<ListInstancesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListInstancesResponse>(
       {
         method: 'GET',
@@ -422,6 +432,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListInstancesResponse,
     )
@@ -432,8 +443,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListInstancesRequest}
    * @returns A Promise of ListInstancesResponse
    */
-  listInstances = (request: Readonly<ListInstancesRequest> = {}) =>
-    enrichForPagination('instances', this.pageOfListInstances, request)
+  listInstances = (request: Readonly<ListInstancesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('instances', this.pageOfListInstances, request, options)
 
   
   /**
@@ -442,11 +453,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetInstanceRequest}
    * @returns A Promise of Instance
    */
-  getInstance = (request: Readonly<GetInstanceRequest>) =>
+  getInstance = (request: Readonly<GetInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         method: 'GET',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -476,7 +488,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateInstanceRequest}
    * @returns A Promise of Instance
    */
-  createInstance = (request: Readonly<CreateInstanceRequest>) =>
+  createInstance = (request: Readonly<CreateInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -485,6 +497,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -496,7 +509,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateInstanceRequest}
    * @returns A Promise of Instance
    */
-  updateInstance = (request: Readonly<UpdateInstanceRequest>) =>
+  updateInstance = (request: Readonly<UpdateInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -505,6 +518,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -516,11 +530,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteInstanceRequest}
    * @returns A Promise of Instance
    */
-  deleteInstance = (request: Readonly<DeleteInstanceRequest>) =>
+  deleteInstance = (request: Readonly<DeleteInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -532,7 +547,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CloneInstanceRequest}
    * @returns A Promise of Instance
    */
-  cloneInstance = (request: Readonly<CloneInstanceRequest>) =>
+  cloneInstance = (request: Readonly<CloneInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -541,6 +556,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/clone`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -552,13 +568,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RestartInstanceRequest}
    * @returns A Promise of Instance
    */
-  restartInstance = (request: Readonly<RestartInstanceRequest>) =>
+  restartInstance = (request: Readonly<RestartInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/restart`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -570,7 +587,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetInstanceCertificateRequest}
    * @returns A Promise of Blob
    */
-  getInstanceCertificate = (request: Readonly<GetInstanceCertificateRequest>) =>
+  getInstanceCertificate = (request: Readonly<GetInstanceCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -579,6 +596,7 @@ export class API extends ParentAPI {
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -588,13 +606,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link RenewInstanceCertificateRequest}
    */
-  renewInstanceCertificate = (request: Readonly<RenewInstanceCertificateRequest>) =>
+  renewInstanceCertificate = (request: Readonly<RenewInstanceCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/renew-certificate`,
+        signal: options?.signal,
       },
     )
 
@@ -606,7 +625,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetInstanceMetricsRequest}
    * @returns A Promise of InstanceMetrics
    */
-  getInstanceMetrics = (request: Readonly<GetInstanceMetricsRequest>) =>
+  getInstanceMetrics = (request: Readonly<GetInstanceMetricsRequest>, options?: RequestOptions) =>
     this.client.fetch<InstanceMetrics>(
       {
         method: 'GET',
@@ -616,6 +635,7 @@ export class API extends ParentAPI {
           ['metric_name', request.metricName],
           ['start_date', request.startDate],
         ),
+        signal: options?.signal,
       },
       unmarshalInstanceMetrics,
     )
@@ -627,7 +647,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateReadReplicaRequest}
    * @returns A Promise of ReadReplica
    */
-  createReadReplica = (request: Readonly<CreateReadReplicaRequest>) =>
+  createReadReplica = (request: Readonly<CreateReadReplicaRequest>, options?: RequestOptions) =>
     this.client.fetch<ReadReplica>(
       {
         body: JSON.stringify(
@@ -636,6 +656,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/read-replicas`,
+        signal: options?.signal,
       },
       unmarshalReadReplica,
     )
@@ -647,11 +668,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetReadReplicaRequest}
    * @returns A Promise of ReadReplica
    */
-  getReadReplica = (request: Readonly<GetReadReplicaRequest>) =>
+  getReadReplica = (request: Readonly<GetReadReplicaRequest>, options?: RequestOptions) =>
     this.client.fetch<ReadReplica>(
       {
         method: 'GET',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/read-replicas/${validatePathParam('readReplicaId', request.readReplicaId)}`,
+        signal: options?.signal,
       },
       unmarshalReadReplica,
     )
@@ -681,11 +703,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteReadReplicaRequest}
    * @returns A Promise of ReadReplica
    */
-  deleteReadReplica = (request: Readonly<DeleteReadReplicaRequest>) =>
+  deleteReadReplica = (request: Readonly<DeleteReadReplicaRequest>, options?: RequestOptions) =>
     this.client.fetch<ReadReplica>(
       {
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/read-replicas/${validatePathParam('readReplicaId', request.readReplicaId)}`,
+        signal: options?.signal,
       },
       unmarshalReadReplica,
     )
@@ -698,13 +721,14 @@ The configured endpoints do not change.
    * @param request - The request {@link ResetReadReplicaRequest}
    * @returns A Promise of ReadReplica
    */
-  resetReadReplica = (request: Readonly<ResetReadReplicaRequest>) =>
+  resetReadReplica = (request: Readonly<ResetReadReplicaRequest>, options?: RequestOptions) =>
     this.client.fetch<ReadReplica>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/read-replicas/${validatePathParam('readReplicaId', request.readReplicaId)}/reset`,
+        signal: options?.signal,
       },
       unmarshalReadReplica,
     )
@@ -716,13 +740,14 @@ The configured endpoints do not change.
    * @param request - The request {@link PromoteReadReplicaRequest}
    * @returns A Promise of Instance
    */
-  promoteReadReplica = (request: Readonly<PromoteReadReplicaRequest>) =>
+  promoteReadReplica = (request: Readonly<PromoteReadReplicaRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/read-replicas/${validatePathParam('readReplicaId', request.readReplicaId)}/promote`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -734,7 +759,7 @@ The configured endpoints do not change.
    * @param request - The request {@link CreateReadReplicaEndpointRequest}
    * @returns A Promise of ReadReplica
    */
-  createReadReplicaEndpoint = (request: Readonly<CreateReadReplicaEndpointRequest>) =>
+  createReadReplicaEndpoint = (request: Readonly<CreateReadReplicaEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<ReadReplica>(
       {
         body: JSON.stringify(
@@ -743,6 +768,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/read-replicas/${validatePathParam('readReplicaId', request.readReplicaId)}/endpoints`,
+        signal: options?.signal,
       },
       unmarshalReadReplica,
     )
@@ -754,7 +780,7 @@ The configured endpoints do not change.
    * @param request - The request {@link PrepareInstanceLogsRequest}
    * @returns A Promise of PrepareInstanceLogsResponse
    */
-  prepareInstanceLogs = (request: Readonly<PrepareInstanceLogsRequest>) =>
+  prepareInstanceLogs = (request: Readonly<PrepareInstanceLogsRequest>, options?: RequestOptions) =>
     this.client.fetch<PrepareInstanceLogsResponse>(
       {
         body: JSON.stringify(
@@ -763,6 +789,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/prepare-logs`,
+        signal: options?.signal,
       },
       unmarshalPrepareInstanceLogsResponse,
     )
@@ -774,7 +801,7 @@ The configured endpoints do not change.
    * @param request - The request {@link ListInstanceLogsRequest}
    * @returns A Promise of ListInstanceLogsResponse
    */
-  listInstanceLogs = (request: Readonly<ListInstanceLogsRequest>) =>
+  listInstanceLogs = (request: Readonly<ListInstanceLogsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListInstanceLogsResponse>(
       {
         method: 'GET',
@@ -782,6 +809,7 @@ The configured endpoints do not change.
         urlParams: urlParams(
           ['order_by', request.orderBy],
         ),
+        signal: options?.signal,
       },
       unmarshalListInstanceLogsResponse,
     )
@@ -793,11 +821,12 @@ The configured endpoints do not change.
    * @param request - The request {@link GetInstanceLogRequest}
    * @returns A Promise of InstanceLog
    */
-  getInstanceLog = (request: Readonly<GetInstanceLogRequest>) =>
+  getInstanceLog = (request: Readonly<GetInstanceLogRequest>, options?: RequestOptions) =>
     this.client.fetch<InstanceLog>(
       {
         method: 'GET',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/logs/${validatePathParam('instanceLogId', request.instanceLogId)}`,
+        signal: options?.signal,
       },
       unmarshalInstanceLog,
     )
@@ -826,7 +855,7 @@ The configured endpoints do not change.
    *
    * @param request - The request {@link PurgeInstanceLogsRequest}
    */
-  purgeInstanceLogs = (request: Readonly<PurgeInstanceLogsRequest>) =>
+  purgeInstanceLogs = (request: Readonly<PurgeInstanceLogsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -835,6 +864,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/purge-logs`,
+        signal: options?.signal,
       },
     )
 
@@ -845,11 +875,12 @@ The configured endpoints do not change.
    * @param request - The request {@link ListInstanceLogsDetailsRequest}
    * @returns A Promise of ListInstanceLogsDetailsResponse
    */
-  listInstanceLogsDetails = (request: Readonly<ListInstanceLogsDetailsRequest>) =>
+  listInstanceLogsDetails = (request: Readonly<ListInstanceLogsDetailsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListInstanceLogsDetailsResponse>(
       {
         method: 'GET',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/logs-details`,
+        signal: options?.signal,
       },
       unmarshalListInstanceLogsDetailsResponse,
     )
@@ -861,7 +892,7 @@ The configured endpoints do not change.
    * @param request - The request {@link AddInstanceSettingsRequest}
    * @returns A Promise of AddInstanceSettingsResponse
    */
-  addInstanceSettings = (request: Readonly<AddInstanceSettingsRequest>) =>
+  addInstanceSettings = (request: Readonly<AddInstanceSettingsRequest>, options?: RequestOptions) =>
     this.client.fetch<AddInstanceSettingsResponse>(
       {
         body: JSON.stringify(
@@ -870,6 +901,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/settings`,
+        signal: options?.signal,
       },
       unmarshalAddInstanceSettingsResponse,
     )
@@ -881,7 +913,7 @@ The configured endpoints do not change.
    * @param request - The request {@link DeleteInstanceSettingsRequest}
    * @returns A Promise of DeleteInstanceSettingsResponse
    */
-  deleteInstanceSettings = (request: Readonly<DeleteInstanceSettingsRequest>) =>
+  deleteInstanceSettings = (request: Readonly<DeleteInstanceSettingsRequest>, options?: RequestOptions) =>
     this.client.fetch<DeleteInstanceSettingsResponse>(
       {
         body: JSON.stringify(
@@ -890,6 +922,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/settings`,
+        signal: options?.signal,
       },
       unmarshalDeleteInstanceSettingsResponse,
     )
@@ -901,7 +934,7 @@ The configured endpoints do not change.
    * @param request - The request {@link SetInstanceSettingsRequest}
    * @returns A Promise of SetInstanceSettingsResponse
    */
-  setInstanceSettings = (request: Readonly<SetInstanceSettingsRequest>) =>
+  setInstanceSettings = (request: Readonly<SetInstanceSettingsRequest>, options?: RequestOptions) =>
     this.client.fetch<SetInstanceSettingsResponse>(
       {
         body: JSON.stringify(
@@ -910,12 +943,13 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/settings`,
+        signal: options?.signal,
       },
       unmarshalSetInstanceSettingsResponse,
     )
 
   
-  protected pageOfListInstanceACLRules = (request: Readonly<ListInstanceACLRulesRequest>) =>
+  protected pageOfListInstanceACLRules = (request: Readonly<ListInstanceACLRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListInstanceACLRulesResponse>(
       {
         method: 'GET',
@@ -924,6 +958,7 @@ The configured endpoints do not change.
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListInstanceACLRulesResponse,
     )
@@ -934,8 +969,8 @@ The configured endpoints do not change.
    * @param request - The request {@link ListInstanceACLRulesRequest}
    * @returns A Promise of ListInstanceACLRulesResponse
    */
-  listInstanceACLRules = (request: Readonly<ListInstanceACLRulesRequest>) =>
-    enrichForPagination('rules', this.pageOfListInstanceACLRules, request)
+  listInstanceACLRules = (request: Readonly<ListInstanceACLRulesRequest>, options?: RequestOptions) =>
+    enrichForPagination('rules', this.pageOfListInstanceACLRules, request, options)
 
   
   /**
@@ -944,7 +979,7 @@ The configured endpoints do not change.
    * @param request - The request {@link AddInstanceACLRulesRequest}
    * @returns A Promise of AddInstanceACLRulesResponse
    */
-  addInstanceACLRules = (request: Readonly<AddInstanceACLRulesRequest>) =>
+  addInstanceACLRules = (request: Readonly<AddInstanceACLRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<AddInstanceACLRulesResponse>(
       {
         body: JSON.stringify(
@@ -953,6 +988,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalAddInstanceACLRulesResponse,
     )
@@ -964,7 +1000,7 @@ The configured endpoints do not change.
    * @param request - The request {@link SetInstanceACLRulesRequest}
    * @returns A Promise of SetInstanceACLRulesResponse
    */
-  setInstanceACLRules = (request: Readonly<SetInstanceACLRulesRequest>) =>
+  setInstanceACLRules = (request: Readonly<SetInstanceACLRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<SetInstanceACLRulesResponse>(
       {
         body: JSON.stringify(
@@ -973,6 +1009,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalSetInstanceACLRulesResponse,
     )
@@ -984,7 +1021,7 @@ The configured endpoints do not change.
    * @param request - The request {@link DeleteInstanceACLRulesRequest}
    * @returns A Promise of DeleteInstanceACLRulesResponse
    */
-  deleteInstanceACLRules = (request: Readonly<DeleteInstanceACLRulesRequest>) =>
+  deleteInstanceACLRules = (request: Readonly<DeleteInstanceACLRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<DeleteInstanceACLRulesResponse>(
       {
         body: JSON.stringify(
@@ -993,12 +1030,13 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalDeleteInstanceACLRulesResponse,
     )
 
   
-  protected pageOfListUsers = (request: Readonly<ListUsersRequest>) =>
+  protected pageOfListUsers = (request: Readonly<ListUsersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListUsersResponse>(
       {
         method: 'GET',
@@ -1009,6 +1047,7 @@ The configured endpoints do not change.
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListUsersResponse,
     )
@@ -1019,8 +1058,8 @@ The configured endpoints do not change.
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
    */
-  listUsers = (request: Readonly<ListUsersRequest>) =>
-    enrichForPagination('users', this.pageOfListUsers, request)
+  listUsers = (request: Readonly<ListUsersRequest>, options?: RequestOptions) =>
+    enrichForPagination('users', this.pageOfListUsers, request, options)
 
   
   /**
@@ -1029,7 +1068,7 @@ The configured endpoints do not change.
    * @param request - The request {@link CreateUserRequest}
    * @returns A Promise of User
    */
-  createUser = (request: Readonly<CreateUserRequest>) =>
+  createUser = (request: Readonly<CreateUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -1038,6 +1077,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -1049,7 +1089,7 @@ The configured endpoints do not change.
    * @param request - The request {@link UpdateUserRequest}
    * @returns A Promise of User
    */
-  updateUser = (request: Readonly<UpdateUserRequest>) =>
+  updateUser = (request: Readonly<UpdateUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -1058,6 +1098,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -1068,16 +1109,17 @@ The configured endpoints do not change.
    *
    * @param request - The request {@link DeleteUserRequest}
    */
-  deleteUser = (request: Readonly<DeleteUserRequest>) =>
+  deleteUser = (request: Readonly<DeleteUserRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest>) =>
+  protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDatabasesResponse>(
       {
         method: 'GET',
@@ -1091,6 +1133,7 @@ The configured endpoints do not change.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['skip_size_retrieval', request.skipSizeRetrieval],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatabasesResponse,
     )
@@ -1101,8 +1144,8 @@ The configured endpoints do not change.
    * @param request - The request {@link ListDatabasesRequest}
    * @returns A Promise of ListDatabasesResponse
    */
-  listDatabases = (request: Readonly<ListDatabasesRequest>) =>
-    enrichForPagination('databases', this.pageOfListDatabases, request)
+  listDatabases = (request: Readonly<ListDatabasesRequest>, options?: RequestOptions) =>
+    enrichForPagination('databases', this.pageOfListDatabases, request, options)
 
   
   /**
@@ -1111,7 +1154,7 @@ The configured endpoints do not change.
    * @param request - The request {@link CreateDatabaseRequest}
    * @returns A Promise of Database
    */
-  createDatabase = (request: Readonly<CreateDatabaseRequest>) =>
+  createDatabase = (request: Readonly<CreateDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         body: JSON.stringify(
@@ -1120,6 +1163,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/databases`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
@@ -1130,16 +1174,17 @@ The configured endpoints do not change.
    *
    * @param request - The request {@link DeleteDatabaseRequest}
    */
-  deleteDatabase = (request: Readonly<DeleteDatabaseRequest>) =>
+  deleteDatabase = (request: Readonly<DeleteDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/databases/${validatePathParam('name', request.name)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListPrivileges = (request: Readonly<ListPrivilegesRequest>) =>
+  protected pageOfListPrivileges = (request: Readonly<ListPrivilegesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListPrivilegesResponse>(
       {
         method: 'GET',
@@ -1151,6 +1196,7 @@ The configured endpoints do not change.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['user_name', request.userName],
         ),
+        signal: options?.signal,
       },
       unmarshalListPrivilegesResponse,
     )
@@ -1161,8 +1207,8 @@ The configured endpoints do not change.
    * @param request - The request {@link ListPrivilegesRequest}
    * @returns A Promise of ListPrivilegesResponse
    */
-  listPrivileges = (request: Readonly<ListPrivilegesRequest>) =>
-    enrichForPagination('privileges', this.pageOfListPrivileges, request)
+  listPrivileges = (request: Readonly<ListPrivilegesRequest>, options?: RequestOptions) =>
+    enrichForPagination('privileges', this.pageOfListPrivileges, request, options)
 
   
   /**
@@ -1171,7 +1217,7 @@ The configured endpoints do not change.
    * @param request - The request {@link SetPrivilegeRequest}
    * @returns A Promise of Privilege
    */
-  setPrivilege = (request: Readonly<SetPrivilegeRequest>) =>
+  setPrivilege = (request: Readonly<SetPrivilegeRequest>, options?: RequestOptions) =>
     this.client.fetch<Privilege>(
       {
         body: JSON.stringify(
@@ -1180,12 +1226,13 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/privileges`,
+        signal: options?.signal,
       },
       unmarshalPrivilege,
     )
 
   
-  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
+  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
@@ -1199,6 +1246,7 @@ The configured endpoints do not change.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSnapshotsResponse,
     )
@@ -1209,8 +1257,8 @@ The configured endpoints do not change.
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
    */
-  listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
-    enrichForPagination('snapshots', this.pageOfListSnapshots, request)
+  listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('snapshots', this.pageOfListSnapshots, request, options)
 
   
   /**
@@ -1219,11 +1267,12 @@ The configured endpoints do not change.
    * @param request - The request {@link GetSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  getSnapshot = (request: Readonly<GetSnapshotRequest>) =>
+  getSnapshot = (request: Readonly<GetSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         method: 'GET',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -1253,7 +1302,7 @@ The configured endpoints do not change.
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  createSnapshot = (request: Readonly<CreateSnapshotRequest>) =>
+  createSnapshot = (request: Readonly<CreateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -1262,6 +1311,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/snapshots`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -1273,7 +1323,7 @@ The configured endpoints do not change.
    * @param request - The request {@link UpdateSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>) =>
+  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -1282,6 +1332,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -1293,11 +1344,12 @@ The configured endpoints do not change.
    * @param request - The request {@link DeleteSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>) =>
+  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -1309,7 +1361,7 @@ The configured endpoints do not change.
    * @param request - The request {@link CreateInstanceFromSnapshotRequest}
    * @returns A Promise of Instance
    */
-  createInstanceFromSnapshot = (request: Readonly<CreateInstanceFromSnapshotRequest>) =>
+  createInstanceFromSnapshot = (request: Readonly<CreateInstanceFromSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -1318,6 +1370,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/create-instance`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -1329,7 +1382,7 @@ The configured endpoints do not change.
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  createEndpoint = (request: Readonly<CreateEndpointRequest>) =>
+  createEndpoint = (request: Readonly<CreateEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         body: JSON.stringify(
@@ -1338,6 +1391,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/endpoints`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
@@ -1348,11 +1402,12 @@ The configured endpoints do not change.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
-  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
+  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1363,11 +1418,12 @@ The configured endpoints do not change.
    * @param request - The request {@link GetEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  getEndpoint = (request: Readonly<GetEndpointRequest>) =>
+  getEndpoint = (request: Readonly<GetEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         method: 'GET',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
@@ -1379,7 +1435,7 @@ The configured endpoints do not change.
    * @param request - The request {@link MigrateEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  migrateEndpoint = (request: Readonly<MigrateEndpointRequest>) =>
+  migrateEndpoint = (request: Readonly<MigrateEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         body: JSON.stringify(
@@ -1388,6 +1444,7 @@ The configured endpoints do not change.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}/migrate`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
@@ -1399,13 +1456,14 @@ The configured endpoints do not change.
    * @param request - The request {@link ApplyInstanceMaintenanceRequest}
    * @returns A Promise of Maintenance
    */
-  applyInstanceMaintenance = (request: Readonly<ApplyInstanceMaintenanceRequest>) =>
+  applyInstanceMaintenance = (request: Readonly<ApplyInstanceMaintenanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Maintenance>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/rdb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/apply-maintenance`,
+        signal: options?.signal,
       },
       unmarshalMaintenance,
     )

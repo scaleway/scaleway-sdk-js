@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   marshalAttachIPRequest,
   marshalBookIPRequest,
@@ -65,7 +65,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link BookIPRequest}
    * @returns A Promise of IP
    */
-  bookIP = (request: Readonly<BookIPRequest>) =>
+  bookIP = (request: Readonly<BookIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -74,6 +74,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -84,18 +85,19 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link ReleaseIPRequest}
    */
-  releaseIP = (request: Readonly<ReleaseIPRequest>) =>
+  releaseIP = (request: Readonly<ReleaseIPRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  releaseIPSet = (request: Readonly<ReleaseIPSetRequest> = {}) =>
+  releaseIPSet = (request: Readonly<ReleaseIPSetRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -104,6 +106,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ip-sets/release`,
+        signal: options?.signal,
       },
     )
 
@@ -114,11 +117,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetIPRequest}
    * @returns A Promise of IP
    */
-  getIP = (request: Readonly<GetIPRequest>) =>
+  getIP = (request: Readonly<GetIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         method: 'GET',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -130,7 +134,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateIPRequest}
    * @returns A Promise of IP
    */
-  updateIP = (request: Readonly<UpdateIPRequest>) =>
+  updateIP = (request: Readonly<UpdateIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -139,12 +143,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
 
   
-  protected pageOfListIPs = (request: Readonly<ListIPsRequest> = {}) =>
+  protected pageOfListIPs = (request: Readonly<ListIPsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListIPsResponse>(
       {
         method: 'GET',
@@ -184,6 +189,7 @@ export class API extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListIPsResponse,
     )
@@ -194,8 +200,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListIPsRequest}
    * @returns A Promise of ListIPsResponse
    */
-  listIPs = (request: Readonly<ListIPsRequest> = {}) =>
-    enrichForPagination('ips', this.pageOfListIPs, request)
+  listIPs = (request: Readonly<ListIPsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('ips', this.pageOfListIPs, request, options)
 
   
   /**
@@ -204,7 +210,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachIPRequest}
    * @returns A Promise of IP
    */
-  attachIP = (request: Readonly<AttachIPRequest>) =>
+  attachIP = (request: Readonly<AttachIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -213,6 +219,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/attach`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -224,7 +231,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachIPRequest}
    * @returns A Promise of IP
    */
-  detachIP = (request: Readonly<DetachIPRequest>) =>
+  detachIP = (request: Readonly<DetachIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -233,6 +240,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/detach`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -244,7 +252,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link MoveIPRequest}
    * @returns A Promise of IP
    */
-  moveIP = (request: Readonly<MoveIPRequest>) =>
+  moveIP = (request: Readonly<MoveIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -253,6 +261,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/move`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
