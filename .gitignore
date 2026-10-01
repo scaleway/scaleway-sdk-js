@@ -2,6 +2,7 @@
 node_modules/
 yarn.lock
 
+
 # misc
 .DS_Store
 /.vscode
@@ -24,6 +25,4 @@ coverage
 protobuf
 .bufcache
 
-
-# lerna
-lerna-debug.log
+.pnpm-store
