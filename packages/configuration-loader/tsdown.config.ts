@@ -5,5 +5,6 @@ export default mergeConfig(
   tsdownConfig,
   defineConfig({
     entry: ['src/**/*.ts', '!src/**/*.test.ts', '!src/**/__tests__/**'],
+    platform: 'node',
   }),
 )

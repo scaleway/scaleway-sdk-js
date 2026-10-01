@@ -4,6 +4,9 @@ packages:
   - 'tools/*'
 
 tasks:
+  build:
+    dependsOn:
+      - ^build
   typecheck:
     dependsOn:
       - build

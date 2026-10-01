@@ -26,3 +26,5 @@ protobuf
 .bufcache
 
 .pnpm-store
+# lerna
+lerna-debug.log
