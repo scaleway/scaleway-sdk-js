@@ -11,5 +11,5 @@ export const useInterlinkv1beta1APIGetLinkQuery = (
   const { interlinkv1beta1 } = useInterlinkv1beta1API()
   const key = ["interlinkv1beta1", "getLink", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => interlinkv1beta1.getLink(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => interlinkv1beta1.getLink(params, { signal }), dataloaderConfig)
 }

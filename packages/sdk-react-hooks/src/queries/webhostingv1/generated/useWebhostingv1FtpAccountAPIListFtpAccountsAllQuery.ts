@@ -11,5 +11,5 @@ export const useWebhostingv1FtpAccountAPIListFtpAccountsAllQuery = (
   const { webhostingv1FtpAccount } = useWebhostingv1FtpAccountAPI()
   const key = ["webhostingv1FtpAccount", "listFtpAccounts", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1FtpAccount.listFtpAccounts(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1FtpAccount.listFtpAccounts(params, { signal }).all(), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useIotv1APIGetDeviceMetricsQuery = (
   const { iotv1 } = useIotv1API()
   const key = ["iotv1", "getDeviceMetrics", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iotv1.getDeviceMetrics(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iotv1.getDeviceMetrics(params, { signal }), dataloaderConfig)
 }

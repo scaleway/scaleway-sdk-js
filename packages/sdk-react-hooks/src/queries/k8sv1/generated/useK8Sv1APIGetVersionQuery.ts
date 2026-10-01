@@ -11,5 +11,5 @@ export const useK8Sv1APIGetVersionQuery = (
   const { k8Sv1 } = useK8Sv1API()
   const key = ["k8Sv1", "getVersion", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => k8Sv1.getVersion(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => k8Sv1.getVersion(params, { signal }), dataloaderConfig)
 }

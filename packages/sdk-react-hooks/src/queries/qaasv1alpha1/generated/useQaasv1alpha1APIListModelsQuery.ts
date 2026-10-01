@@ -11,5 +11,5 @@ export const useQaasv1alpha1APIListModelsQuery = (
   const { qaasv1alpha1 } = useQaasv1alpha1API()
   const key = ["qaasv1alpha1", "listModels", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => qaasv1alpha1.listModels(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => qaasv1alpha1.listModels(params, { signal }), dataloaderConfig)
 }

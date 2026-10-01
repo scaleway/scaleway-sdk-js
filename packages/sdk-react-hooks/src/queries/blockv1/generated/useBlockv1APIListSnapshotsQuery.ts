@@ -11,5 +11,5 @@ export const useBlockv1APIListSnapshotsQuery = (
   const { blockv1 } = useBlockv1API()
   const key = ["blockv1", "listSnapshots", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => blockv1.listSnapshots(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => blockv1.listSnapshots(params, { signal }), dataloaderConfig)
 }

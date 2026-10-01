@@ -11,5 +11,5 @@ export const useIamv1alpha1APIGetOrganizationQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "getOrganization", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iamv1alpha1.getOrganization(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iamv1alpha1.getOrganization(params, { signal }), dataloaderConfig)
 }

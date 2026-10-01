@@ -11,5 +11,5 @@ export const useMongodbv1alpha1APIListUsersQuery = (
   const { mongodbv1alpha1 } = useMongodbv1alpha1API()
   const key = ["mongodbv1alpha1", "listUsers", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1alpha1.listUsers(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1alpha1.listUsers(params, { signal }), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useDatawarehousev1beta1APIListPresetsQuery = (
   const { datawarehousev1beta1 } = useDatawarehousev1beta1API()
   const key = ["datawarehousev1beta1", "listPresets", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => datawarehousev1beta1.listPresets(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => datawarehousev1beta1.listPresets(params, { signal }), dataloaderConfig)
 }

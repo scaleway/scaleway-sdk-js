@@ -11,5 +11,5 @@ export const useContainerv1beta1APIListNamespacesAllQuery = (
   const { containerv1beta1 } = useContainerv1beta1API()
   const key = ["containerv1beta1", "listNamespaces", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => containerv1beta1.listNamespaces(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => containerv1beta1.listNamespaces(params, { signal }).all(), dataloaderConfig)
 }

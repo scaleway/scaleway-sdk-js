@@ -12,5 +12,5 @@ export const useContainerv1APIListTriggersInfiniteQuery = (
   const { containerv1 } = useContainerv1API()
   const key = ["containerv1", "listTriggers", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => containerv1.listTriggers(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => containerv1.listTriggers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

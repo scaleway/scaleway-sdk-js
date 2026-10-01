@@ -11,5 +11,5 @@ export const useIotv1APIGetHubCAQuery = (
   const { iotv1 } = useIotv1API()
   const key = ["iotv1", "getHubCA", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iotv1.getHubCA(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iotv1.getHubCA(params, { signal }), dataloaderConfig)
 }

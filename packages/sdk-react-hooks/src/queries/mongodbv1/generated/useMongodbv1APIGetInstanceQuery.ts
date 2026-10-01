@@ -11,5 +11,5 @@ export const useMongodbv1APIGetInstanceQuery = (
   const { mongodbv1 } = useMongodbv1API()
   const key = ["mongodbv1", "getInstance", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1.getInstance(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1.getInstance(params, { signal }), dataloaderConfig)
 }

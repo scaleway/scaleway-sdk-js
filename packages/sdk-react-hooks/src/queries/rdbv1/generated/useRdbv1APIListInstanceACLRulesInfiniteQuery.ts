@@ -12,5 +12,5 @@ export const useRdbv1APIListInstanceACLRulesInfiniteQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listInstanceACLRules", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => rdbv1.listInstanceACLRules(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => rdbv1.listInstanceACLRules(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

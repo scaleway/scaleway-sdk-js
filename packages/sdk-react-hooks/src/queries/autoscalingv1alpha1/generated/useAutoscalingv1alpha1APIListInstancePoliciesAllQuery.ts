@@ -11,5 +11,5 @@ export const useAutoscalingv1alpha1APIListInstancePoliciesAllQuery = (
   const { autoscalingv1alpha1 } = useAutoscalingv1alpha1API()
   const key = ["autoscalingv1alpha1", "listInstancePolicies", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => autoscalingv1alpha1.listInstancePolicies(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => autoscalingv1alpha1.listInstancePolicies(params, { signal }).all(), dataloaderConfig)
 }

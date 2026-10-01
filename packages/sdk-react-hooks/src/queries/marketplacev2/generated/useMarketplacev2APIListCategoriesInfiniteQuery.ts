@@ -12,5 +12,5 @@ export const useMarketplacev2APIListCategoriesInfiniteQuery = (
   const { marketplacev2 } = useMarketplacev2API()
   const key = ["marketplacev2", "listCategories", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => marketplacev2.listCategories(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => marketplacev2.listCategories(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

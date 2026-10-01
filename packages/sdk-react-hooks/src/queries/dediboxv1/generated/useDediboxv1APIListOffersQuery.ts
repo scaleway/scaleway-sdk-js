@@ -11,5 +11,5 @@ export const useDediboxv1APIListOffersQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "listOffers", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.listOffers(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.listOffers(params, { signal }), dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useBaremetalv1APIListSettingsInfiniteQuery = (
   const { baremetalv1 } = useBaremetalv1API()
   const key = ["baremetalv1", "listSettings", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => baremetalv1.listSettings(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => baremetalv1.listSettings(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

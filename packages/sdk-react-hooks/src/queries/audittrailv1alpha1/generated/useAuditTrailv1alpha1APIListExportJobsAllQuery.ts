@@ -11,5 +11,5 @@ export const useAuditTrailv1alpha1APIListExportJobsAllQuery = (
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
   const key = ["auditTrailv1alpha1", "listExportJobs", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => auditTrailv1alpha1.listExportJobs(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => auditTrailv1alpha1.listExportJobs(params, { signal }).all(), dataloaderConfig)
 }

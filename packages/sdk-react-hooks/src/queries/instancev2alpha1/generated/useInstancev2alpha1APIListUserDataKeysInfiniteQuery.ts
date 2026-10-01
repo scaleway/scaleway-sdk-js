@@ -12,5 +12,5 @@ export const useInstancev2alpha1APIListUserDataKeysInfiniteQuery = (
   const { instancev2alpha1 } = useInstancev2alpha1API()
   const key = ["instancev2alpha1", "listUserDataKeys", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev2alpha1.listUserDataKeys(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev2alpha1.listUserDataKeys(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

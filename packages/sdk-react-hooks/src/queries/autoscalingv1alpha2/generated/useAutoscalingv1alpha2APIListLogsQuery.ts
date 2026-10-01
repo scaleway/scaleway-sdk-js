@@ -11,5 +11,5 @@ export const useAutoscalingv1alpha2APIListLogsQuery = (
   const { autoscalingv1alpha2 } = useAutoscalingv1alpha2API()
   const key = ["autoscalingv1alpha2", "listLogs", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => autoscalingv1alpha2.listLogs(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => autoscalingv1alpha2.listLogs(params, { signal }), dataloaderConfig)
 }

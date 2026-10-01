@@ -11,5 +11,5 @@ export const useLbv1ZonedAPIGetRouteQuery = (
   const { lbv1Zoned } = useLbv1ZonedAPI()
   const key = ["lbv1Zoned", "getRoute", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1Zoned.getRoute(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1Zoned.getRoute(params, { signal }), dataloaderConfig)
 }

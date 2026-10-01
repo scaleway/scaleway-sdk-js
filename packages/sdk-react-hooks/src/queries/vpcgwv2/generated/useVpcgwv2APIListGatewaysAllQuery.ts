@@ -11,5 +11,5 @@ export const useVpcgwv2APIListGatewaysAllQuery = (
   const { vpcgwv2 } = useVpcgwv2API()
   const key = ["vpcgwv2", "listGateways", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcgwv2.listGateways(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcgwv2.listGateways(params, { signal }).all(), dataloaderConfig)
 }

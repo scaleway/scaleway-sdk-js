@@ -11,5 +11,5 @@ export const useDomainv2beta1RegistrarAPIListDomainHostsAllQuery = (
   const { domainv2beta1Registrar } = useDomainv2beta1RegistrarAPI()
   const key = ["domainv2beta1Registrar", "listDomainHosts", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => domainv2beta1Registrar.listDomainHosts(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => domainv2beta1Registrar.listDomainHosts(params, { signal }).all(), dataloaderConfig)
 }

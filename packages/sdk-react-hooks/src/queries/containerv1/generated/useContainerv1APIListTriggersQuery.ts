@@ -11,5 +11,5 @@ export const useContainerv1APIListTriggersQuery = (
   const { containerv1 } = useContainerv1API()
   const key = ["containerv1", "listTriggers", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => containerv1.listTriggers(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => containerv1.listTriggers(params, { signal }), dataloaderConfig)
 }

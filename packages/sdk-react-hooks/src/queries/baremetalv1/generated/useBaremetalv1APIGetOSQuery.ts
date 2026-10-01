@@ -11,5 +11,5 @@ export const useBaremetalv1APIGetOSQuery = (
   const { baremetalv1 } = useBaremetalv1API()
   const key = ["baremetalv1", "getOS", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => baremetalv1.getOS(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => baremetalv1.getOS(params, { signal }), dataloaderConfig)
 }

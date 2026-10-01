@@ -11,5 +11,5 @@ export const useRegistryv1APIListNamespacesAllQuery = (
   const { registryv1 } = useRegistryv1API()
   const key = ["registryv1", "listNamespaces", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => registryv1.listNamespaces(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => registryv1.listNamespaces(params, { signal }).all(), dataloaderConfig)
 }

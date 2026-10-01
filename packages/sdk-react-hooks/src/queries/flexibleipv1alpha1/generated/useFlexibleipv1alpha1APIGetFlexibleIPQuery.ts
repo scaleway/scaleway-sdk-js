@@ -11,5 +11,5 @@ export const useFlexibleipv1alpha1APIGetFlexibleIPQuery = (
   const { flexibleipv1alpha1 } = useFlexibleipv1alpha1API()
   const key = ["flexibleipv1alpha1", "getFlexibleIP", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => flexibleipv1alpha1.getFlexibleIP(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => flexibleipv1alpha1.getFlexibleIP(params, { signal }), dataloaderConfig)
 }

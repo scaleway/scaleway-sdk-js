@@ -12,5 +12,5 @@ export const useAccountv3ContractAPIListContractSignaturesInfiniteQuery = (
   const { accountv3Contract } = useAccountv3ContractAPI()
   const key = ["accountv3Contract", "listContractSignatures", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => accountv3Contract.listContractSignatures(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => accountv3Contract.listContractSignatures(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useTemv1alpha1APIListWebhooksInfiniteQuery = (
   const { temv1alpha1 } = useTemv1alpha1API()
   const key = ["temv1alpha1", "listWebhooks", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => temv1alpha1.listWebhooks(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => temv1alpha1.listWebhooks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

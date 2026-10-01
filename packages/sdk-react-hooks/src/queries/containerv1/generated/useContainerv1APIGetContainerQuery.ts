@@ -11,5 +11,5 @@ export const useContainerv1APIGetContainerQuery = (
   const { containerv1 } = useContainerv1API()
   const key = ["containerv1", "getContainer", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => containerv1.getContainer(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => containerv1.getContainer(params, { signal }), dataloaderConfig)
 }

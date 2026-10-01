@@ -11,5 +11,5 @@ export const useDediboxv1BillingAPIGetRefundQuery = (
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
   const key = ["dediboxv1Billing", "getRefund", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1Billing.getRefund(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1Billing.getRefund(params, { signal }), dataloaderConfig)
 }

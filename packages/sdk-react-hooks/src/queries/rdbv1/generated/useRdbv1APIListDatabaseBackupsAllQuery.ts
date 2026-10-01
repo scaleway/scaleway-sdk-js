@@ -11,5 +11,5 @@ export const useRdbv1APIListDatabaseBackupsAllQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listDatabaseBackups", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.listDatabaseBackups(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.listDatabaseBackups(params, { signal }).all(), dataloaderConfig)
 }

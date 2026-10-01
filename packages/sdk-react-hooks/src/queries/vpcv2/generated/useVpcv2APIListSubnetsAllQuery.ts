@@ -11,5 +11,5 @@ export const useVpcv2APIListSubnetsAllQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "listSubnets", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcv2.listSubnets(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcv2.listSubnets(params, { signal }).all(), dataloaderConfig)
 }

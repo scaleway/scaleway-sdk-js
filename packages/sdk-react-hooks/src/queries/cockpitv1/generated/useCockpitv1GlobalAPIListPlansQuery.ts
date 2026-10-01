@@ -11,5 +11,5 @@ export const useCockpitv1GlobalAPIListPlansQuery = (
   const { cockpitv1Global } = useCockpitv1GlobalAPI()
   const key = ["cockpitv1Global", "listPlans", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Global.listPlans(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Global.listPlans(params, { signal }), dataloaderConfig)
 }

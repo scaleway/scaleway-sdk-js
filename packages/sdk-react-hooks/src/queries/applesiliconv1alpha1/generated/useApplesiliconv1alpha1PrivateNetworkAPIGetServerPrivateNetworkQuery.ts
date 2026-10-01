@@ -11,5 +11,5 @@ export const useApplesiliconv1alpha1PrivateNetworkAPIGetServerPrivateNetworkQuer
   const { applesiliconv1alpha1PrivateNetwork } = useApplesiliconv1alpha1PrivateNetworkAPI()
   const key = ["applesiliconv1alpha1PrivateNetwork", "getServerPrivateNetwork", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => applesiliconv1alpha1PrivateNetwork.getServerPrivateNetwork(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => applesiliconv1alpha1PrivateNetwork.getServerPrivateNetwork(params, { signal }), dataloaderConfig)
 }

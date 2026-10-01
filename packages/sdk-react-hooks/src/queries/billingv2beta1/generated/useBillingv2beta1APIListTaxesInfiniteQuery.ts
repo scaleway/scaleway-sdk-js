@@ -12,5 +12,5 @@ export const useBillingv2beta1APIListTaxesInfiniteQuery = (
   const { billingv2beta1 } = useBillingv2beta1API()
   const key = ["billingv2beta1", "listTaxes", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => billingv2beta1.listTaxes(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => billingv2beta1.listTaxes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

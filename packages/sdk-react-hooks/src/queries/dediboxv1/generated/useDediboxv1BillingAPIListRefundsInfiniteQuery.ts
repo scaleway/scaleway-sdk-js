@@ -12,5 +12,5 @@ export const useDediboxv1BillingAPIListRefundsInfiniteQuery = (
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
   const key = ["dediboxv1Billing", "listRefunds", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1Billing.listRefunds(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1Billing.listRefunds(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

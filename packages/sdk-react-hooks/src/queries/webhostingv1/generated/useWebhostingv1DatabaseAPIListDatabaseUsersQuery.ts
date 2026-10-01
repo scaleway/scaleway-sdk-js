@@ -11,5 +11,5 @@ export const useWebhostingv1DatabaseAPIListDatabaseUsersQuery = (
   const { webhostingv1Database } = useWebhostingv1DatabaseAPI()
   const key = ["webhostingv1Database", "listDatabaseUsers", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1Database.listDatabaseUsers(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1Database.listDatabaseUsers(params, { signal }), dataloaderConfig)
 }

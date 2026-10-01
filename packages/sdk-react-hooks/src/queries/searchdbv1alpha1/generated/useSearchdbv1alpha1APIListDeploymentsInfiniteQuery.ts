@@ -12,5 +12,5 @@ export const useSearchdbv1alpha1APIListDeploymentsInfiniteQuery = (
   const { searchdbv1alpha1 } = useSearchdbv1alpha1API()
   const key = ["searchdbv1alpha1", "listDeployments", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => searchdbv1alpha1.listDeployments(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => searchdbv1alpha1.listDeployments(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

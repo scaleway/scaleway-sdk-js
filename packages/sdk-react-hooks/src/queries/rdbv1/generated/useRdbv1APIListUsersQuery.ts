@@ -11,5 +11,5 @@ export const useRdbv1APIListUsersQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listUsers", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.listUsers(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.listUsers(params, { signal }), dataloaderConfig)
 }

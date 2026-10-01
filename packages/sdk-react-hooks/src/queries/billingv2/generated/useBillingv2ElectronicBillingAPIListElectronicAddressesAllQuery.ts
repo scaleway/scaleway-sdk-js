@@ -11,5 +11,5 @@ export const useBillingv2ElectronicBillingAPIListElectronicAddressesAllQuery = (
   const { billingv2ElectronicBilling } = useBillingv2ElectronicBillingAPI()
   const key = ["billingv2ElectronicBilling", "listElectronicAddresses", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => billingv2ElectronicBilling.listElectronicAddresses(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => billingv2ElectronicBilling.listElectronicAddresses(params, { signal }).all(), dataloaderConfig)
 }

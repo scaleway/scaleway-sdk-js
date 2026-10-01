@@ -11,5 +11,5 @@ export const useWebhostingv1FreeDomainAPIListFreeRootDomainsQuery = (
   const { webhostingv1FreeDomain } = useWebhostingv1FreeDomainAPI()
   const key = ["webhostingv1FreeDomain", "listFreeRootDomains", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1FreeDomain.listFreeRootDomains(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1FreeDomain.listFreeRootDomains(params, { signal }), dataloaderConfig)
 }

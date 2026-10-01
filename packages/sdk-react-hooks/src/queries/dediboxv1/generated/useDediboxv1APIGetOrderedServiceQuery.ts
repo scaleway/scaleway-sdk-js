@@ -11,5 +11,5 @@ export const useDediboxv1APIGetOrderedServiceQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getOrderedService", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getOrderedService(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getOrderedService(params, { signal }), dataloaderConfig)
 }

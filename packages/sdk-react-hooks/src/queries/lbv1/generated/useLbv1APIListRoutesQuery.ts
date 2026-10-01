@@ -11,5 +11,5 @@ export const useLbv1APIListRoutesQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listRoutes", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1.listRoutes(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1.listRoutes(params, { signal }), dataloaderConfig)
 }

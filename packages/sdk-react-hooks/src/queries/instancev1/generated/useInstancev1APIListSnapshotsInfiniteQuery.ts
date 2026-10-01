@@ -12,5 +12,5 @@ export const useInstancev1APIListSnapshotsInfiniteQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listSnapshots", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev1.listSnapshots(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev1.listSnapshots(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

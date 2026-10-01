@@ -12,5 +12,5 @@ export const useContainerv1APIListNamespacesInfiniteQuery = (
   const { containerv1 } = useContainerv1API()
   const key = ["containerv1", "listNamespaces", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => containerv1.listNamespaces(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => containerv1.listNamespaces(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

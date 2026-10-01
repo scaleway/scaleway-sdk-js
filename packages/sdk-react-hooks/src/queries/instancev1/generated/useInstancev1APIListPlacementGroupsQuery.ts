@@ -11,5 +11,5 @@ export const useInstancev1APIListPlacementGroupsQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listPlacementGroups", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev1.listPlacementGroups(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev1.listPlacementGroups(params, { signal }), dataloaderConfig)
 }

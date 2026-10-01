@@ -11,5 +11,5 @@ export const useCockpitv1GlobalAPIGetGrafanaProductDashboardQuery = (
   const { cockpitv1Global } = useCockpitv1GlobalAPI()
   const key = ["cockpitv1Global", "getGrafanaProductDashboard", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Global.getGrafanaProductDashboard(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Global.getGrafanaProductDashboard(params, { signal }), dataloaderConfig)
 }

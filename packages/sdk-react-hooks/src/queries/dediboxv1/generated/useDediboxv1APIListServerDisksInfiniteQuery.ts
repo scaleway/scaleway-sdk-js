@@ -12,5 +12,5 @@ export const useDediboxv1APIListServerDisksInfiniteQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "listServerDisks", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1.listServerDisks(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1.listServerDisks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

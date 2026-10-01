@@ -11,5 +11,5 @@ export const useDomainv2beta1RegistrarAPIListTasksQuery = (
   const { domainv2beta1Registrar } = useDomainv2beta1RegistrarAPI()
   const key = ["domainv2beta1Registrar", "listTasks", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => domainv2beta1Registrar.listTasks(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => domainv2beta1Registrar.listTasks(params, { signal }), dataloaderConfig)
 }

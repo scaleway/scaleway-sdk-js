@@ -12,5 +12,5 @@ export const useServerlessSqldbv1alpha1APIListDatabasesInfiniteQuery = (
   const { serverlessSqldbv1alpha1 } = useServerlessSqldbv1alpha1API()
   const key = ["serverlessSqldbv1alpha1", "listDatabases", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => serverlessSqldbv1alpha1.listDatabases(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => serverlessSqldbv1alpha1.listDatabases(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

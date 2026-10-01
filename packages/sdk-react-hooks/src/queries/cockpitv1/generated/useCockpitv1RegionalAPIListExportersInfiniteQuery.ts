@@ -12,5 +12,5 @@ export const useCockpitv1RegionalAPIListExportersInfiniteQuery = (
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
   const key = ["cockpitv1Regional", "listExporters", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => cockpitv1Regional.listExporters(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => cockpitv1Regional.listExporters(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

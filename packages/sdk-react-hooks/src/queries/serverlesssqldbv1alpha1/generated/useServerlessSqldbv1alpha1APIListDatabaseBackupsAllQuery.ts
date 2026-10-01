@@ -11,5 +11,5 @@ export const useServerlessSqldbv1alpha1APIListDatabaseBackupsAllQuery = (
   const { serverlessSqldbv1alpha1 } = useServerlessSqldbv1alpha1API()
   const key = ["serverlessSqldbv1alpha1", "listDatabaseBackups", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => serverlessSqldbv1alpha1.listDatabaseBackups(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => serverlessSqldbv1alpha1.listDatabaseBackups(params, { signal }).all(), dataloaderConfig)
 }

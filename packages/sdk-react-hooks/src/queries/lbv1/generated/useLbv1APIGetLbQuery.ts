@@ -11,5 +11,5 @@ export const useLbv1APIGetLbQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "getLb", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1.getLb(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1.getLb(params, { signal }), dataloaderConfig)
 }

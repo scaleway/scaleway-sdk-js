@@ -11,5 +11,5 @@ export const useInterlinkv1beta1APIListPopsAllQuery = (
   const { interlinkv1beta1 } = useInterlinkv1beta1API()
   const key = ["interlinkv1beta1", "listPops", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => interlinkv1beta1.listPops(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => interlinkv1beta1.listPops(params, { signal }).all(), dataloaderConfig)
 }

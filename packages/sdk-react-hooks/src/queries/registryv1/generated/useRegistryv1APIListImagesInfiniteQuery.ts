@@ -12,5 +12,5 @@ export const useRegistryv1APIListImagesInfiniteQuery = (
   const { registryv1 } = useRegistryv1API()
   const key = ["registryv1", "listImages", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => registryv1.listImages(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => registryv1.listImages(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

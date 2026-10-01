@@ -11,5 +11,5 @@ export const useIpamv1APIListIPsQuery = (
   const { ipamv1 } = useIpamv1API()
   const key = ["ipamv1", "listIPs", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => ipamv1.listIPs(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => ipamv1.listIPs(params, { signal }), dataloaderConfig)
 }

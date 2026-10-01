@@ -12,5 +12,5 @@ export const useK8Sv1APIListClustersInfiniteQuery = (
   const { k8Sv1 } = useK8Sv1API()
   const key = ["k8Sv1", "listClusters", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => k8Sv1.listClusters(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => k8Sv1.listClusters(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

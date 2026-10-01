@@ -11,5 +11,5 @@ export const useTemv1alpha1APIGetDomainQuery = (
   const { temv1alpha1 } = useTemv1alpha1API()
   const key = ["temv1alpha1", "getDomain", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => temv1alpha1.getDomain(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => temv1alpha1.getDomain(params, { signal }), dataloaderConfig)
 }

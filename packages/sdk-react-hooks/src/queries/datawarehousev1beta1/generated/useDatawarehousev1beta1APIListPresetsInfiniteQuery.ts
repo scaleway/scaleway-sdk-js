@@ -12,5 +12,5 @@ export const useDatawarehousev1beta1APIListPresetsInfiniteQuery = (
   const { datawarehousev1beta1 } = useDatawarehousev1beta1API()
   const key = ["datawarehousev1beta1", "listPresets", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => datawarehousev1beta1.listPresets(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => datawarehousev1beta1.listPresets(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

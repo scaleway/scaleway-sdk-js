@@ -12,5 +12,5 @@ export const useInstancev1APIListPlacementGroupsInfiniteQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listPlacementGroups", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev1.listPlacementGroups(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev1.listPlacementGroups(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

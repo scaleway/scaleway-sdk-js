@@ -11,5 +11,5 @@ export const useEdgeServicesv1beta1APISearchWafStagesQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "searchWafStages", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => edgeServicesv1beta1.searchWafStages(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.searchWafStages(params, { signal }), dataloaderConfig)
 }

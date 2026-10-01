@@ -11,5 +11,5 @@ export const useBillingv2beta1APIListTaxesAllQuery = (
   const { billingv2beta1 } = useBillingv2beta1API()
   const key = ["billingv2beta1", "listTaxes", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => billingv2beta1.listTaxes(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => billingv2beta1.listTaxes(params, { signal }).all(), dataloaderConfig)
 }

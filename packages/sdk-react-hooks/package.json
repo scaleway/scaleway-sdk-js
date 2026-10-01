@@ -323,14 +323,14 @@
     "@scaleway/sdk-vpc": "workspace:*",
     "@scaleway/sdk-vpcgw": "workspace:*",
     "@scaleway/sdk-webhosting": "workspace:*",
-    "@scaleway/use-dataloader": "7.1.2",
+    "@scaleway/use-dataloader": "catalog:",
     "@types/react": "catalog:",
     "react": "^19.3.0",
     "tinyglobby": "0.2.17"
   },
   "peerDependencies": {
-    "@scaleway/use-dataloader": "7.x",
-    "react": "18.x || 19.x"
+    "@scaleway/use-dataloader": "~7.2.0 || < 8.0.0",
+    "react": "~18.0.0 || ~19.0.0"
   },
   "optionalDependencies": {
     "@scaleway/sdk-account": "workspace:*",

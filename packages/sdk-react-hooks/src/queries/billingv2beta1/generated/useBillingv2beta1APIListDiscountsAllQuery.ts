@@ -11,5 +11,5 @@ export const useBillingv2beta1APIListDiscountsAllQuery = (
   const { billingv2beta1 } = useBillingv2beta1API()
   const key = ["billingv2beta1", "listDiscounts", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => billingv2beta1.listDiscounts(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => billingv2beta1.listDiscounts(params, { signal }).all(), dataloaderConfig)
 }

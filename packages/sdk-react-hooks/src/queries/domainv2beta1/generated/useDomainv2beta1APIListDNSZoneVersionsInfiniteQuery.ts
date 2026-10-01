@@ -12,5 +12,5 @@ export const useDomainv2beta1APIListDNSZoneVersionsInfiniteQuery = (
   const { domainv2beta1 } = useDomainv2beta1API()
   const key = ["domainv2beta1", "listDNSZoneVersions", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => domainv2beta1.listDNSZoneVersions(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => domainv2beta1.listDNSZoneVersions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useEdgeServicesv1beta1APIListBackendStagesAllQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "listBackendStages", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => edgeServicesv1beta1.listBackendStages(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.listBackendStages(params, { signal }).all(), dataloaderConfig)
 }

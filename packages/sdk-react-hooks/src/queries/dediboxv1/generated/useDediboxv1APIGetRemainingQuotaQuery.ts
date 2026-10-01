@@ -11,5 +11,5 @@ export const useDediboxv1APIGetRemainingQuotaQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getRemainingQuota", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getRemainingQuota(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getRemainingQuota(params, { signal }), dataloaderConfig)
 }

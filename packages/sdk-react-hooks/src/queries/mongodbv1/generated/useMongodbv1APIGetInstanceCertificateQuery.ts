@@ -11,5 +11,5 @@ export const useMongodbv1APIGetInstanceCertificateQuery = (
   const { mongodbv1 } = useMongodbv1API()
   const key = ["mongodbv1", "getInstanceCertificate", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mongodbv1.getInstanceCertificate(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mongodbv1.getInstanceCertificate(params, { signal }), dataloaderConfig)
 }

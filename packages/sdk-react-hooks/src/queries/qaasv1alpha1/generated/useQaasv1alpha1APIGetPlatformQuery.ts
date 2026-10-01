@@ -11,5 +11,5 @@ export const useQaasv1alpha1APIGetPlatformQuery = (
   const { qaasv1alpha1 } = useQaasv1alpha1API()
   const key = ["qaasv1alpha1", "getPlatform", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => qaasv1alpha1.getPlatform(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => qaasv1alpha1.getPlatform(params, { signal }), dataloaderConfig)
 }

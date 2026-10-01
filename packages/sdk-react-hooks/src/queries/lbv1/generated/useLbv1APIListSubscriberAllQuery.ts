@@ -11,5 +11,5 @@ export const useLbv1APIListSubscriberAllQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listSubscriber", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1.listSubscriber(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1.listSubscriber(params, { signal }).all(), dataloaderConfig)
 }

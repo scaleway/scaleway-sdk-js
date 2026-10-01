@@ -11,5 +11,5 @@ export const useIamv1alpha1APIListGracePeriodsQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listGracePeriods", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iamv1alpha1.listGracePeriods(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iamv1alpha1.listGracePeriods(params, { signal }), dataloaderConfig)
 }

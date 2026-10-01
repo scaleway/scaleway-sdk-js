@@ -11,5 +11,5 @@ export const useAutoscalingv1alpha1APIListInstanceGroupsAllQuery = (
   const { autoscalingv1alpha1 } = useAutoscalingv1alpha1API()
   const key = ["autoscalingv1alpha1", "listInstanceGroups", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => autoscalingv1alpha1.listInstanceGroups(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => autoscalingv1alpha1.listInstanceGroups(params, { signal }).all(), dataloaderConfig)
 }

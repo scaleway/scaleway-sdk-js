@@ -11,5 +11,5 @@ export const useInferencev1APIListNodeTypesAllQuery = (
   const { inferencev1 } = useInferencev1API()
   const key = ["inferencev1", "listNodeTypes", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => inferencev1.listNodeTypes(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => inferencev1.listNodeTypes(params, { signal }).all(), dataloaderConfig)
 }

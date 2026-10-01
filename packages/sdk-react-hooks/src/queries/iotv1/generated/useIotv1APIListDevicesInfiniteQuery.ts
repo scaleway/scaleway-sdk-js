@@ -12,5 +12,5 @@ export const useIotv1APIListDevicesInfiniteQuery = (
   const { iotv1 } = useIotv1API()
   const key = ["iotv1", "listDevices", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => iotv1.listDevices(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => iotv1.listDevices(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

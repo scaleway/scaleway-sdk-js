@@ -11,5 +11,5 @@ export const useBillingv2beta1APIListInvoicesQuery = (
   const { billingv2beta1 } = useBillingv2beta1API()
   const key = ["billingv2beta1", "listInvoices", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => billingv2beta1.listInvoices(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => billingv2beta1.listInvoices(params, { signal }), dataloaderConfig)
 }

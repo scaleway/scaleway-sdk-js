@@ -11,5 +11,5 @@ export const useAutoscalingv1alpha1APIListInstanceTemplatesQuery = (
   const { autoscalingv1alpha1 } = useAutoscalingv1alpha1API()
   const key = ["autoscalingv1alpha1", "listInstanceTemplates", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => autoscalingv1alpha1.listInstanceTemplates(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => autoscalingv1alpha1.listInstanceTemplates(params, { signal }), dataloaderConfig)
 }

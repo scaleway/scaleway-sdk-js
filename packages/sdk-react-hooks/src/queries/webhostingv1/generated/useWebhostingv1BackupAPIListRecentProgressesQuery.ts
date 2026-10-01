@@ -11,5 +11,5 @@ export const useWebhostingv1BackupAPIListRecentProgressesQuery = (
   const { webhostingv1Backup } = useWebhostingv1BackupAPI()
   const key = ["webhostingv1Backup", "listRecentProgresses", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1Backup.listRecentProgresses(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1Backup.listRecentProgresses(params, { signal }), dataloaderConfig)
 }

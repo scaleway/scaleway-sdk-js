@@ -11,5 +11,5 @@ export const useRedisv1APIGetAclRuleQuery = (
   const { redisv1 } = useRedisv1API()
   const key = ["redisv1", "getAclRule", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => redisv1.getAclRule(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => redisv1.getAclRule(params, { signal }), dataloaderConfig)
 }

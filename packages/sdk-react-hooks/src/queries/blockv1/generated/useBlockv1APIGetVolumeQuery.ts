@@ -11,5 +11,5 @@ export const useBlockv1APIGetVolumeQuery = (
   const { blockv1 } = useBlockv1API()
   const key = ["blockv1", "getVolume", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => blockv1.getVolume(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => blockv1.getVolume(params, { signal }), dataloaderConfig)
 }

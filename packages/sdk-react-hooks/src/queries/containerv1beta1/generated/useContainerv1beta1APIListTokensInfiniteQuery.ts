@@ -12,5 +12,5 @@ export const useContainerv1beta1APIListTokensInfiniteQuery = (
   const { containerv1beta1 } = useContainerv1beta1API()
   const key = ["containerv1beta1", "listTokens", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => containerv1beta1.listTokens(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => containerv1beta1.listTokens(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

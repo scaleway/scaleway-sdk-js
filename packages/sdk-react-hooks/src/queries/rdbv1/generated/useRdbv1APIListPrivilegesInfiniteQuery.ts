@@ -12,5 +12,5 @@ export const useRdbv1APIListPrivilegesInfiniteQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listPrivileges", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => rdbv1.listPrivileges(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => rdbv1.listPrivileges(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useInferencev1APIListDeploymentsInfiniteQuery = (
   const { inferencev1 } = useInferencev1API()
   const key = ["inferencev1", "listDeployments", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => inferencev1.listDeployments(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => inferencev1.listDeployments(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

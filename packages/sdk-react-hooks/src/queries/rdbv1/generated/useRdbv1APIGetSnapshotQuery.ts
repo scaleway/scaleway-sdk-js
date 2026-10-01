@@ -11,5 +11,5 @@ export const useRdbv1APIGetSnapshotQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "getSnapshot", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.getSnapshot(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.getSnapshot(params, { signal }), dataloaderConfig)
 }
