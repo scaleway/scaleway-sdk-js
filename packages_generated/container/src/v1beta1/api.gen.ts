@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {CONTAINER_TRANSIENT_STATUSES as CONTAINER_TRANSIENT_STATUSES_CONTAINER,CRON_TRANSIENT_STATUSES as CRON_TRANSIENT_STATUSES_CONTAINER,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_CONTAINER,NAMESPACE_TRANSIENT_STATUSES as NAMESPACE_TRANSIENT_STATUSES_CONTAINER,TOKEN_TRANSIENT_STATUSES as TOKEN_TRANSIENT_STATUSES_CONTAINER,TRIGGER_TRANSIENT_STATUSES as TRIGGER_TRANSIENT_STATUSES_CONTAINER,} from './content.gen.js'
 import {
   unmarshalContainer,
@@ -107,7 +107,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
+  protected pageOfListNamespaces = (request: Readonly<ListNamespacesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNamespacesResponse>(
       {
         method: 'GET',
@@ -120,6 +120,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListNamespacesResponse,
     )
@@ -131,8 +132,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNamespacesRequest}
    * @returns A Promise of ListNamespacesResponse
    */
-  listNamespaces = (request: Readonly<ListNamespacesRequest> = {}) =>
-    enrichForPagination('namespaces', this.pageOfListNamespaces, request)
+  listNamespaces = (request: Readonly<ListNamespacesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('namespaces', this.pageOfListNamespaces, request, options)
 
   
   /**
@@ -142,11 +143,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  getNamespace = (request: Readonly<GetNamespaceRequest>) =>
+  getNamespace = (request: Readonly<GetNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         method: 'GET',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -177,7 +179,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  createNamespace = (request: Readonly<CreateNamespaceRequest> = {}) =>
+  createNamespace = (request: Readonly<CreateNamespaceRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(
@@ -186,6 +188,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -198,7 +201,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  updateNamespace = (request: Readonly<UpdateNamespaceRequest>) =>
+  updateNamespace = (request: Readonly<UpdateNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         body: JSON.stringify(
@@ -207,6 +210,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
@@ -219,17 +223,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteNamespaceRequest}
    * @returns A Promise of Namespace
    */
-  deleteNamespace = (request: Readonly<DeleteNamespaceRequest>) =>
+  deleteNamespace = (request: Readonly<DeleteNamespaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Namespace>(
       {
         method: 'DELETE',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
+        signal: options?.signal,
       },
       unmarshalNamespace,
     )
 
   
-  protected pageOfListContainers = (request: Readonly<ListContainersRequest>) =>
+  protected pageOfListContainers = (request: Readonly<ListContainersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListContainersResponse>(
       {
         method: 'GET',
@@ -243,6 +248,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListContainersResponse,
     )
@@ -254,8 +260,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListContainersRequest}
    * @returns A Promise of ListContainersResponse
    */
-  listContainers = (request: Readonly<ListContainersRequest>) =>
-    enrichForPagination('containers', this.pageOfListContainers, request)
+  listContainers = (request: Readonly<ListContainersRequest>, options?: RequestOptions) =>
+    enrichForPagination('containers', this.pageOfListContainers, request, options)
 
   
   /**
@@ -265,11 +271,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetContainerRequest}
    * @returns A Promise of Container
    */
-  getContainer = (request: Readonly<GetContainerRequest>) =>
+  getContainer = (request: Readonly<GetContainerRequest>, options?: RequestOptions) =>
     this.client.fetch<Container>(
       {
         method: 'GET',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}`,
+        signal: options?.signal,
       },
       unmarshalContainer,
     )
@@ -303,7 +310,7 @@ and the status is set to `pending` accordingly.
    * @param request - The request {@link CreateContainerRequest}
    * @returns A Promise of Container
    */
-  createContainer = (request: Readonly<CreateContainerRequest>) =>
+  createContainer = (request: Readonly<CreateContainerRequest>, options?: RequestOptions) =>
     this.client.fetch<Container>(
       {
         body: JSON.stringify(
@@ -312,6 +319,7 @@ and the status is set to `pending` accordingly.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers`,
+        signal: options?.signal,
       },
       unmarshalContainer,
     )
@@ -328,7 +336,7 @@ Warning: The `redeploy` field has been deprecated. An update now always redeploy
    * @param request - The request {@link UpdateContainerRequest}
    * @returns A Promise of Container
    */
-  updateContainer = (request: Readonly<UpdateContainerRequest>) =>
+  updateContainer = (request: Readonly<UpdateContainerRequest>, options?: RequestOptions) =>
     this.client.fetch<Container>(
       {
         body: JSON.stringify(
@@ -337,6 +345,7 @@ Warning: The `redeploy` field has been deprecated. An update now always redeploy
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}`,
+        signal: options?.signal,
       },
       unmarshalContainer,
     )
@@ -349,11 +358,12 @@ Warning: The `redeploy` field has been deprecated. An update now always redeploy
    * @param request - The request {@link DeleteContainerRequest}
    * @returns A Promise of Container
    */
-  deleteContainer = (request: Readonly<DeleteContainerRequest>) =>
+  deleteContainer = (request: Readonly<DeleteContainerRequest>, options?: RequestOptions) =>
     this.client.fetch<Container>(
       {
         method: 'DELETE',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}`,
+        signal: options?.signal,
       },
       unmarshalContainer,
     )
@@ -370,19 +380,20 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link DeployContainerRequest}
    * @returns A Promise of Container
    */
-  deployContainer = (request: Readonly<DeployContainerRequest>) =>
+  deployContainer = (request: Readonly<DeployContainerRequest>, options?: RequestOptions) =>
     this.client.fetch<Container>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}/deploy`,
+        signal: options?.signal,
       },
       unmarshalContainer,
     )
 
   
-  protected pageOfListCrons = (request: Readonly<ListCronsRequest>) =>
+  protected pageOfListCrons = (request: Readonly<ListCronsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListCronsResponse>(
       {
         method: 'GET',
@@ -393,6 +404,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListCronsResponse,
     )
@@ -404,8 +416,8 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link ListCronsRequest}
    * @returns A Promise of ListCronsResponse
    */
-  listCrons = (request: Readonly<ListCronsRequest>) =>
-    enrichForPagination('crons', this.pageOfListCrons, request)
+  listCrons = (request: Readonly<ListCronsRequest>, options?: RequestOptions) =>
+    enrichForPagination('crons', this.pageOfListCrons, request, options)
 
   
   /**
@@ -415,11 +427,12 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link GetCronRequest}
    * @returns A Promise of Cron
    */
-  getCron = (request: Readonly<GetCronRequest>) =>
+  getCron = (request: Readonly<GetCronRequest>, options?: RequestOptions) =>
     this.client.fetch<Cron>(
       {
         method: 'GET',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
+        signal: options?.signal,
       },
       unmarshalCron,
     )
@@ -450,7 +463,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link CreateCronRequest}
    * @returns A Promise of Cron
    */
-  createCron = (request: Readonly<CreateCronRequest>) =>
+  createCron = (request: Readonly<CreateCronRequest>, options?: RequestOptions) =>
     this.client.fetch<Cron>(
       {
         body: JSON.stringify(
@@ -459,6 +472,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons`,
+        signal: options?.signal,
       },
       unmarshalCron,
     )
@@ -471,7 +485,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link UpdateCronRequest}
    * @returns A Promise of Cron
    */
-  updateCron = (request: Readonly<UpdateCronRequest>) =>
+  updateCron = (request: Readonly<UpdateCronRequest>, options?: RequestOptions) =>
     this.client.fetch<Cron>(
       {
         body: JSON.stringify(
@@ -480,6 +494,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
+        signal: options?.signal,
       },
       unmarshalCron,
     )
@@ -492,17 +507,18 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link DeleteCronRequest}
    * @returns A Promise of Cron
    */
-  deleteCron = (request: Readonly<DeleteCronRequest>) =>
+  deleteCron = (request: Readonly<DeleteCronRequest>, options?: RequestOptions) =>
     this.client.fetch<Cron>(
       {
         method: 'DELETE',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
+        signal: options?.signal,
       },
       unmarshalCron,
     )
 
   
-  protected pageOfListDomains = (request: Readonly<ListDomainsRequest>) =>
+  protected pageOfListDomains = (request: Readonly<ListDomainsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDomainsResponse>(
       {
         method: 'GET',
@@ -513,6 +529,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDomainsResponse,
     )
@@ -524,8 +541,8 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
    */
-  listDomains = (request: Readonly<ListDomainsRequest>) =>
-    enrichForPagination('domains', this.pageOfListDomains, request)
+  listDomains = (request: Readonly<ListDomainsRequest>, options?: RequestOptions) =>
+    enrichForPagination('domains', this.pageOfListDomains, request, options)
 
   
   /**
@@ -535,11 +552,12 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
    */
-  getDomain = (request: Readonly<GetDomainRequest>) =>
+  getDomain = (request: Readonly<GetDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'GET',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -570,7 +588,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
    */
-  createDomain = (request: Readonly<CreateDomainRequest>) =>
+  createDomain = (request: Readonly<CreateDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: JSON.stringify(
@@ -579,6 +597,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -591,11 +610,12 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link DeleteDomainRequest}
    * @returns A Promise of Domain
    */
-  deleteDomain = (request: Readonly<DeleteDomainRequest>) =>
+  deleteDomain = (request: Readonly<DeleteDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'DELETE',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -608,7 +628,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link CreateTokenRequest}
    * @returns A Promise of Token
    */
-  createToken = (request: Readonly<CreateTokenRequest> = {}) =>
+  createToken = (request: Readonly<CreateTokenRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Token>(
       {
         body: JSON.stringify(
@@ -617,6 +637,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
+        signal: options?.signal,
       },
       unmarshalToken,
     )
@@ -629,11 +650,12 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link GetTokenRequest}
    * @returns A Promise of Token
    */
-  getToken = (request: Readonly<GetTokenRequest>) =>
+  getToken = (request: Readonly<GetTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<Token>(
       {
         method: 'GET',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        signal: options?.signal,
       },
       unmarshalToken,
     )
@@ -657,7 +679,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
     )
 
   
-  protected pageOfListTokens = (request: Readonly<ListTokensRequest> = {}) =>
+  protected pageOfListTokens = (request: Readonly<ListTokensRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTokensResponse>(
       {
         method: 'GET',
@@ -669,6 +691,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListTokensResponse,
     )
@@ -680,8 +703,8 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link ListTokensRequest}
    * @returns A Promise of ListTokensResponse
    */
-  listTokens = (request: Readonly<ListTokensRequest> = {}) =>
-    enrichForPagination('tokens', this.pageOfListTokens, request)
+  listTokens = (request: Readonly<ListTokensRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('tokens', this.pageOfListTokens, request, options)
 
   
   /**
@@ -691,11 +714,12 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link DeleteTokenRequest}
    * @returns A Promise of Token
    */
-  deleteToken = (request: Readonly<DeleteTokenRequest>) =>
+  deleteToken = (request: Readonly<DeleteTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<Token>(
       {
         method: 'DELETE',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        signal: options?.signal,
       },
       unmarshalToken,
     )
@@ -708,7 +732,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link CreateTriggerRequest}
    * @returns A Promise of Trigger
    */
-  createTrigger = (request: Readonly<CreateTriggerRequest>) =>
+  createTrigger = (request: Readonly<CreateTriggerRequest>, options?: RequestOptions) =>
     this.client.fetch<Trigger>(
       {
         body: JSON.stringify(
@@ -717,6 +741,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
+        signal: options?.signal,
       },
       unmarshalTrigger,
     )
@@ -729,11 +754,12 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link GetTriggerRequest}
    * @returns A Promise of Trigger
    */
-  getTrigger = (request: Readonly<GetTriggerRequest>) =>
+  getTrigger = (request: Readonly<GetTriggerRequest>, options?: RequestOptions) =>
     this.client.fetch<Trigger>(
       {
         method: 'GET',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        signal: options?.signal,
       },
       unmarshalTrigger,
     )
@@ -757,7 +783,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
     )
 
   
-  protected pageOfListTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
+  protected pageOfListTriggers = (request: Readonly<ListTriggersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTriggersResponse>(
       {
         method: 'GET',
@@ -778,6 +804,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListTriggersResponse,
     )
@@ -789,8 +816,8 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link ListTriggersRequest}
    * @returns A Promise of ListTriggersResponse
    */
-  listTriggers = (request: Readonly<ListTriggersRequest> = {}) =>
-    enrichForPagination('triggers', this.pageOfListTriggers, request)
+  listTriggers = (request: Readonly<ListTriggersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('triggers', this.pageOfListTriggers, request, options)
 
   
   /**
@@ -800,7 +827,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link UpdateTriggerRequest}
    * @returns A Promise of Trigger
    */
-  updateTrigger = (request: Readonly<UpdateTriggerRequest>) =>
+  updateTrigger = (request: Readonly<UpdateTriggerRequest>, options?: RequestOptions) =>
     this.client.fetch<Trigger>(
       {
         body: JSON.stringify(
@@ -809,6 +836,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        signal: options?.signal,
       },
       unmarshalTrigger,
     )
@@ -821,11 +849,12 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
    * @param request - The request {@link DeleteTriggerRequest}
    * @returns A Promise of Trigger
    */
-  deleteTrigger = (request: Readonly<DeleteTriggerRequest>) =>
+  deleteTrigger = (request: Readonly<DeleteTriggerRequest>, options?: RequestOptions) =>
     this.client.fetch<Trigger>(
       {
         method: 'DELETE',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
+        signal: options?.signal,
       },
       unmarshalTrigger,
     )

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalBudget,
   unmarshalBudgetAlert,
@@ -62,7 +62,7 @@ const jsonContentHeaders = {
 This API allows you to query billing related objects.
  */
 export class API extends ParentAPI {
-  protected pageOfListBudgets = (request: Readonly<ListBudgetsRequest> = {}) =>
+  protected pageOfListBudgets = (request: Readonly<ListBudgetsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListBudgetsResponse>(
       {
         method: 'GET',
@@ -72,6 +72,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListBudgetsResponse,
     )
@@ -82,8 +83,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListBudgetsRequest}
    * @returns A Promise of ListBudgetsResponse
    */
-  listBudgets = (request: Readonly<ListBudgetsRequest> = {}) =>
-    enrichForPagination('budgets', this.pageOfListBudgets, request)
+  listBudgets = (request: Readonly<ListBudgetsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('budgets', this.pageOfListBudgets, request, options)
 
   
   /**
@@ -92,11 +93,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetBudgetRequest}
    * @returns A Promise of Budget
    */
-  getBudget = (request: Readonly<GetBudgetRequest>) =>
+  getBudget = (request: Readonly<GetBudgetRequest>, options?: RequestOptions) =>
     this.client.fetch<Budget>(
       {
         method: 'GET',
         path: `/billing/v2/budgets/${validatePathParam('budgetId', request.budgetId)}`,
+        signal: options?.signal,
       },
       unmarshalBudget,
     )
@@ -108,7 +110,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateBudgetRequest}
    * @returns A Promise of Budget
    */
-  createBudget = (request: Readonly<CreateBudgetRequest>) =>
+  createBudget = (request: Readonly<CreateBudgetRequest>, options?: RequestOptions) =>
     this.client.fetch<Budget>(
       {
         body: JSON.stringify(
@@ -117,6 +119,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/billing/v2/budgets`,
+        signal: options?.signal,
       },
       unmarshalBudget,
     )
@@ -128,7 +131,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateBudgetRequest}
    * @returns A Promise of Budget
    */
-  updateBudget = (request: Readonly<UpdateBudgetRequest>) =>
+  updateBudget = (request: Readonly<UpdateBudgetRequest>, options?: RequestOptions) =>
     this.client.fetch<Budget>(
       {
         body: JSON.stringify(
@@ -137,6 +140,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/billing/v2/budgets/${validatePathParam('budgetId', request.budgetId)}`,
+        signal: options?.signal,
       },
       unmarshalBudget,
     )
@@ -147,11 +151,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteBudgetRequest}
    */
-  deleteBudget = (request: Readonly<DeleteBudgetRequest>) =>
+  deleteBudget = (request: Readonly<DeleteBudgetRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/billing/v2/budgets/${validatePathParam('budgetId', request.budgetId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -162,7 +167,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateBudgetAlertRequest}
    * @returns A Promise of BudgetAlert
    */
-  createBudgetAlert = (request: Readonly<CreateBudgetAlertRequest>) =>
+  createBudgetAlert = (request: Readonly<CreateBudgetAlertRequest>, options?: RequestOptions) =>
     this.client.fetch<BudgetAlert>(
       {
         body: JSON.stringify(
@@ -171,6 +176,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/billing/v2/budget-alerts`,
+        signal: options?.signal,
       },
       unmarshalBudgetAlert,
     )
@@ -182,7 +188,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateBudgetAlertRequest}
    * @returns A Promise of BudgetAlert
    */
-  updateBudgetAlert = (request: Readonly<UpdateBudgetAlertRequest>) =>
+  updateBudgetAlert = (request: Readonly<UpdateBudgetAlertRequest>, options?: RequestOptions) =>
     this.client.fetch<BudgetAlert>(
       {
         body: JSON.stringify(
@@ -191,6 +197,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/billing/v2/budget-alerts/${validatePathParam('budgetAlertId', request.budgetAlertId)}`,
+        signal: options?.signal,
       },
       unmarshalBudgetAlert,
     )
@@ -201,11 +208,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteBudgetAlertRequest}
    */
-  deleteBudgetAlert = (request: Readonly<DeleteBudgetAlertRequest>) =>
+  deleteBudgetAlert = (request: Readonly<DeleteBudgetAlertRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/billing/v2/budget-alerts/${validatePathParam('budgetAlertId', request.budgetAlertId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -216,7 +224,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateBudgetAlertNotificationRequest}
    * @returns A Promise of BudgetAlertNotification
    */
-  createBudgetAlertNotification = (request: Readonly<CreateBudgetAlertNotificationRequest>) =>
+  createBudgetAlertNotification = (request: Readonly<CreateBudgetAlertNotificationRequest>, options?: RequestOptions) =>
     this.client.fetch<BudgetAlertNotification>(
       {
         body: JSON.stringify(
@@ -225,6 +233,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/billing/v2/budget-alert-notifications`,
+        signal: options?.signal,
       },
       unmarshalBudgetAlertNotification,
     )
@@ -236,7 +245,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateBudgetAlertNotificationRequest}
    * @returns A Promise of BudgetAlertNotification
    */
-  updateBudgetAlertNotification = (request: Readonly<UpdateBudgetAlertNotificationRequest>) =>
+  updateBudgetAlertNotification = (request: Readonly<UpdateBudgetAlertNotificationRequest>, options?: RequestOptions) =>
     this.client.fetch<BudgetAlertNotification>(
       {
         body: JSON.stringify(
@@ -245,6 +254,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/billing/v2/budget-alert-notifications/${validatePathParam('budgetAlertNotificationId', request.budgetAlertNotificationId)}`,
+        signal: options?.signal,
       },
       unmarshalBudgetAlertNotification,
     )
@@ -255,11 +265,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteBudgetAlertNotificationRequest}
    */
-  deleteBudgetAlertNotification = (request: Readonly<DeleteBudgetAlertNotificationRequest>) =>
+  deleteBudgetAlertNotification = (request: Readonly<DeleteBudgetAlertNotificationRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/billing/v2/budget-alert-notifications/${validatePathParam('budgetAlertNotificationId', request.budgetAlertNotificationId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -272,7 +283,7 @@ export class API extends ParentAPI {
 This API allows you to query electronic billing related objects.
  */
 export class ElectronicBillingAPI extends ParentAPI {
-  protected pageOfListElectronicAddresses = (request: Readonly<ElectronicBillingApiListElectronicAddressesRequest> = {}) =>
+  protected pageOfListElectronicAddresses = (request: Readonly<ElectronicBillingApiListElectronicAddressesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListElectronicAddressesResponse>(
       {
         method: 'GET',
@@ -285,6 +296,7 @@ export class ElectronicBillingAPI extends ParentAPI {
           ['starts_after', request.startsAfter],
           ['stops_before', request.stopsBefore],
         ),
+        signal: options?.signal,
       },
       unmarshalListElectronicAddressesResponse,
     )
@@ -295,8 +307,8 @@ export class ElectronicBillingAPI extends ParentAPI {
    * @param request - The request {@link ElectronicBillingApiListElectronicAddressesRequest}
    * @returns A Promise of ListElectronicAddressesResponse
    */
-  listElectronicAddresses = (request: Readonly<ElectronicBillingApiListElectronicAddressesRequest> = {}) =>
-    enrichForPagination('electronicAddresses', this.pageOfListElectronicAddresses, request)
+  listElectronicAddresses = (request: Readonly<ElectronicBillingApiListElectronicAddressesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('electronicAddresses', this.pageOfListElectronicAddresses, request, options)
 
   
   /**
@@ -305,11 +317,12 @@ export class ElectronicBillingAPI extends ParentAPI {
    * @param request - The request {@link ElectronicBillingApiGetElectronicAddressRequest}
    * @returns A Promise of ElectronicAddress
    */
-  getElectronicAddress = (request: Readonly<ElectronicBillingApiGetElectronicAddressRequest>) =>
+  getElectronicAddress = (request: Readonly<ElectronicBillingApiGetElectronicAddressRequest>, options?: RequestOptions) =>
     this.client.fetch<ElectronicAddress>(
       {
         method: 'GET',
         path: `/billing/v2/electronic-address/${validatePathParam('electronicAddressId', request.electronicAddressId)}`,
+        signal: options?.signal,
       },
       unmarshalElectronicAddress,
     )
@@ -321,7 +334,7 @@ export class ElectronicBillingAPI extends ParentAPI {
    * @param request - The request {@link ElectronicBillingApiCreateElectronicAddressRequest}
    * @returns A Promise of ElectronicAddress
    */
-  createElectronicAddress = (request: Readonly<ElectronicBillingApiCreateElectronicAddressRequest>) =>
+  createElectronicAddress = (request: Readonly<ElectronicBillingApiCreateElectronicAddressRequest>, options?: RequestOptions) =>
     this.client.fetch<ElectronicAddress>(
       {
         body: JSON.stringify(
@@ -330,6 +343,7 @@ export class ElectronicBillingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/billing/v2/electronic-address`,
+        signal: options?.signal,
       },
       unmarshalElectronicAddress,
     )
@@ -341,7 +355,7 @@ export class ElectronicBillingAPI extends ParentAPI {
    * @param request - The request {@link ElectronicBillingApiUpdateElectronicAddressRequest}
    * @returns A Promise of ElectronicAddress
    */
-  updateElectronicAddress = (request: Readonly<ElectronicBillingApiUpdateElectronicAddressRequest>) =>
+  updateElectronicAddress = (request: Readonly<ElectronicBillingApiUpdateElectronicAddressRequest>, options?: RequestOptions) =>
     this.client.fetch<ElectronicAddress>(
       {
         body: JSON.stringify(
@@ -350,6 +364,7 @@ export class ElectronicBillingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/billing/v2/electronic-address/${validatePathParam('electronicAddressId', request.electronicAddressId)}`,
+        signal: options?.signal,
       },
       unmarshalElectronicAddress,
     )
@@ -360,11 +375,12 @@ export class ElectronicBillingAPI extends ParentAPI {
    *
    * @param request - The request {@link ElectronicBillingApiDeleteElectronicAddressRequest}
    */
-  deleteElectronicAddress = (request: Readonly<ElectronicBillingApiDeleteElectronicAddressRequest>) =>
+  deleteElectronicAddress = (request: Readonly<ElectronicBillingApiDeleteElectronicAddressRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/billing/v2/electronic-address/${validatePathParam('electronicAddressId', request.electronicAddressId)}`,
+        signal: options?.signal,
       },
     )
 

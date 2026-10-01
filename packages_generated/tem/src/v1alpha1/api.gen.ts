@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_TEM,EMAIL_TRANSIENT_STATUSES as EMAIL_TRANSIENT_STATUSES_TEM,} from './content.gen.js'
 import {
   marshalBulkCreateBlocklistsRequest,
@@ -116,7 +116,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateEmailRequest}
    * @returns A Promise of CreateEmailResponse
    */
-  createEmail = (request: Readonly<CreateEmailRequest>) =>
+  createEmail = (request: Readonly<CreateEmailRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateEmailResponse>(
       {
         body: JSON.stringify(
@@ -125,6 +125,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails`,
+        signal: options?.signal,
       },
       unmarshalCreateEmailResponse,
     )
@@ -136,11 +137,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetEmailRequest}
    * @returns A Promise of Email
    */
-  getEmail = (request: Readonly<GetEmailRequest>) =>
+  getEmail = (request: Readonly<GetEmailRequest>, options?: RequestOptions) =>
     this.client.fetch<Email>(
       {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails/${validatePathParam('emailId', request.emailId)}`,
+        signal: options?.signal,
       },
       unmarshalEmail,
     )
@@ -164,7 +166,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListEmails = (request: Readonly<ListEmailsRequest> = {}) =>
+  protected pageOfListEmails = (request: Readonly<ListEmailsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListEmailsResponse>(
       {
         method: 'GET',
@@ -186,6 +188,7 @@ export class API extends ParentAPI {
           ['subject', request.subject],
           ['until', request.until],
         ),
+        signal: options?.signal,
       },
       unmarshalListEmailsResponse,
     )
@@ -196,8 +199,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListEmailsRequest}
    * @returns A Promise of ListEmailsResponse
    */
-  listEmails = (request: Readonly<ListEmailsRequest> = {}) =>
-    enrichForPagination('emails', this.pageOfListEmails, request)
+  listEmails = (request: Readonly<ListEmailsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('emails', this.pageOfListEmails, request, options)
 
   
   /**
@@ -206,7 +209,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetStatisticsRequest}
    * @returns A Promise of Statistics
    */
-  getStatistics = (request: Readonly<GetStatisticsRequest> = {}) =>
+  getStatistics = (request: Readonly<GetStatisticsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Statistics>(
       {
         method: 'GET',
@@ -218,6 +221,7 @@ export class API extends ParentAPI {
           ['since', request.since],
           ['until', request.until],
         ),
+        signal: options?.signal,
       },
       unmarshalStatistics,
     )
@@ -229,13 +233,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link CancelEmailRequest}
    * @returns A Promise of Email
    */
-  cancelEmail = (request: Readonly<CancelEmailRequest>) =>
+  cancelEmail = (request: Readonly<CancelEmailRequest>, options?: RequestOptions) =>
     this.client.fetch<Email>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails/${validatePathParam('emailId', request.emailId)}/cancel`,
+        signal: options?.signal,
       },
       unmarshalEmail,
     )
@@ -247,7 +252,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDomainRequest}
    * @returns A Promise of Domain
    */
-  createDomain = (request: Readonly<CreateDomainRequest>) =>
+  createDomain = (request: Readonly<CreateDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: JSON.stringify(
@@ -256,6 +261,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -267,11 +273,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDomainRequest}
    * @returns A Promise of Domain
    */
-  getDomain = (request: Readonly<GetDomainRequest>) =>
+  getDomain = (request: Readonly<GetDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -295,7 +302,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}) =>
+  protected pageOfListDomains = (request: Readonly<ListDomainsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDomainsResponse>(
       {
         method: 'GET',
@@ -308,6 +315,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListDomainsResponse,
     )
@@ -318,8 +326,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
    */
-  listDomains = (request: Readonly<ListDomainsRequest> = {}) =>
-    enrichForPagination('domains', this.pageOfListDomains, request)
+  listDomains = (request: Readonly<ListDomainsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('domains', this.pageOfListDomains, request, options)
 
   
   /**
@@ -328,13 +336,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RevokeDomainRequest}
    * @returns A Promise of Domain
    */
-  revokeDomain = (request: Readonly<RevokeDomainRequest>) =>
+  revokeDomain = (request: Readonly<RevokeDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/revoke`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -346,13 +355,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link CheckDomainRequest}
    * @returns A Promise of Domain
    */
-  checkDomain = (request: Readonly<CheckDomainRequest>) =>
+  checkDomain = (request: Readonly<CheckDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/check`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -364,11 +374,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDomainLastStatusRequest}
    * @returns A Promise of DomainLastStatus
    */
-  getDomainLastStatus = (request: Readonly<GetDomainLastStatusRequest>) =>
+  getDomainLastStatus = (request: Readonly<GetDomainLastStatusRequest>, options?: RequestOptions) =>
     this.client.fetch<DomainLastStatus>(
       {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/verification`,
+        signal: options?.signal,
       },
       unmarshalDomainLastStatus,
     )
@@ -380,7 +391,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDomainRequest}
    * @returns A Promise of Domain
    */
-  updateDomain = (request: Readonly<UpdateDomainRequest>) =>
+  updateDomain = (request: Readonly<UpdateDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: JSON.stringify(
@@ -389,6 +400,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -400,7 +412,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateWebhookRequest}
    * @returns A Promise of Webhook
    */
-  createWebhook = (request: Readonly<CreateWebhookRequest>) =>
+  createWebhook = (request: Readonly<CreateWebhookRequest>, options?: RequestOptions) =>
     this.client.fetch<Webhook>(
       {
         body: JSON.stringify(
@@ -409,12 +421,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks`,
+        signal: options?.signal,
       },
       unmarshalWebhook,
     )
 
   
-  protected pageOfListWebhooks = (request: Readonly<ListWebhooksRequest> = {}) =>
+  protected pageOfListWebhooks = (request: Readonly<ListWebhooksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListWebhooksResponse>(
       {
         method: 'GET',
@@ -427,6 +440,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListWebhooksResponse,
     )
@@ -437,8 +451,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListWebhooksRequest}
    * @returns A Promise of ListWebhooksResponse
    */
-  listWebhooks = (request: Readonly<ListWebhooksRequest> = {}) =>
-    enrichForPagination('webhooks', this.pageOfListWebhooks, request)
+  listWebhooks = (request: Readonly<ListWebhooksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('webhooks', this.pageOfListWebhooks, request, options)
 
   
   /**
@@ -447,11 +461,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetWebhookRequest}
    * @returns A Promise of Webhook
    */
-  getWebhook = (request: Readonly<GetWebhookRequest>) =>
+  getWebhook = (request: Readonly<GetWebhookRequest>, options?: RequestOptions) =>
     this.client.fetch<Webhook>(
       {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
+        signal: options?.signal,
       },
       unmarshalWebhook,
     )
@@ -463,7 +478,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateWebhookRequest}
    * @returns A Promise of Webhook
    */
-  updateWebhook = (request: Readonly<UpdateWebhookRequest>) =>
+  updateWebhook = (request: Readonly<UpdateWebhookRequest>, options?: RequestOptions) =>
     this.client.fetch<Webhook>(
       {
         body: JSON.stringify(
@@ -472,6 +487,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
+        signal: options?.signal,
       },
       unmarshalWebhook,
     )
@@ -482,16 +498,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteWebhookRequest}
    */
-  deleteWebhook = (request: Readonly<DeleteWebhookRequest>) =>
+  deleteWebhook = (request: Readonly<DeleteWebhookRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListWebhookEvents = (request: Readonly<ListWebhookEventsRequest>) =>
+  protected pageOfListWebhookEvents = (request: Readonly<ListWebhookEventsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListWebhookEventsResponse>(
       {
         method: 'GET',
@@ -507,6 +524,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['statuses', request.statuses],
         ),
+        signal: options?.signal,
       },
       unmarshalListWebhookEventsResponse,
     )
@@ -517,8 +535,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListWebhookEventsRequest}
    * @returns A Promise of ListWebhookEventsResponse
    */
-  listWebhookEvents = (request: Readonly<ListWebhookEventsRequest>) =>
-    enrichForPagination('webhookEvents', this.pageOfListWebhookEvents, request)
+  listWebhookEvents = (request: Readonly<ListWebhookEventsRequest>, options?: RequestOptions) =>
+    enrichForPagination('webhookEvents', this.pageOfListWebhookEvents, request, options)
 
   
   /**
@@ -527,11 +545,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetProjectSettingsRequest}
    * @returns A Promise of ProjectSettings
    */
-  getProjectSettings = (request: Readonly<GetProjectSettingsRequest> = {}) =>
+  getProjectSettings = (request: Readonly<GetProjectSettingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ProjectSettings>(
       {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/project/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/settings`,
+        signal: options?.signal,
       },
       unmarshalProjectSettings,
     )
@@ -543,7 +562,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateProjectSettingsRequest}
    * @returns A Promise of ProjectSettings
    */
-  updateProjectSettings = (request: Readonly<UpdateProjectSettingsRequest> = {}) =>
+  updateProjectSettings = (request: Readonly<UpdateProjectSettingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ProjectSettings>(
       {
         body: JSON.stringify(
@@ -552,12 +571,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/project/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/settings`,
+        signal: options?.signal,
       },
       unmarshalProjectSettings,
     )
 
   
-  protected pageOfListBlocklists = (request: Readonly<ListBlocklistsRequest>) =>
+  protected pageOfListBlocklists = (request: Readonly<ListBlocklistsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListBlocklistsResponse>(
       {
         method: 'GET',
@@ -571,6 +591,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['type', request.type],
         ),
+        signal: options?.signal,
       },
       unmarshalListBlocklistsResponse,
     )
@@ -581,8 +602,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListBlocklistsRequest}
    * @returns A Promise of ListBlocklistsResponse
    */
-  listBlocklists = (request: Readonly<ListBlocklistsRequest>) =>
-    enrichForPagination('blocklists', this.pageOfListBlocklists, request)
+  listBlocklists = (request: Readonly<ListBlocklistsRequest>, options?: RequestOptions) =>
+    enrichForPagination('blocklists', this.pageOfListBlocklists, request, options)
 
   
   /**
@@ -591,7 +612,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link BulkCreateBlocklistsRequest}
    * @returns A Promise of BulkCreateBlocklistsResponse
    */
-  bulkCreateBlocklists = (request: Readonly<BulkCreateBlocklistsRequest>) =>
+  bulkCreateBlocklists = (request: Readonly<BulkCreateBlocklistsRequest>, options?: RequestOptions) =>
     this.client.fetch<BulkCreateBlocklistsResponse>(
       {
         body: JSON.stringify(
@@ -600,6 +621,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists`,
+        signal: options?.signal,
       },
       unmarshalBulkCreateBlocklistsResponse,
     )
@@ -610,16 +632,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteBlocklistRequest}
    */
-  deleteBlocklist = (request: Readonly<DeleteBlocklistRequest>) =>
+  deleteBlocklist = (request: Readonly<DeleteBlocklistRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists/${validatePathParam('blocklistId', request.blocklistId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListOfferSubscriptions = (request: Readonly<ListOfferSubscriptionsRequest> = {}) =>
+  protected pageOfListOfferSubscriptions = (request: Readonly<ListOfferSubscriptionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOfferSubscriptionsResponse>(
       {
         method: 'GET',
@@ -637,6 +660,7 @@ export class API extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListOfferSubscriptionsResponse,
     )
@@ -647,8 +671,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListOfferSubscriptionsRequest}
    * @returns A Promise of ListOfferSubscriptionsResponse
    */
-  listOfferSubscriptions = (request: Readonly<ListOfferSubscriptionsRequest> = {}) =>
-    enrichForPagination('offerSubscriptions', this.pageOfListOfferSubscriptions, request)
+  listOfferSubscriptions = (request: Readonly<ListOfferSubscriptionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('offerSubscriptions', this.pageOfListOfferSubscriptions, request, options)
 
   
   /**
@@ -657,7 +681,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateOfferSubscriptionRequest}
    * @returns A Promise of OfferSubscription
    */
-  updateOfferSubscription = (request: Readonly<UpdateOfferSubscriptionRequest> = {}) =>
+  updateOfferSubscription = (request: Readonly<UpdateOfferSubscriptionRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<OfferSubscription>(
       {
         body: JSON.stringify(
@@ -666,6 +690,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`,
+        signal: options?.signal,
       },
       unmarshalOfferSubscription,
     )
@@ -677,17 +702,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListOffersRequest}
    * @returns A Promise of ListOffersResponse
    */
-  listOffers = (request: Readonly<ListOffersRequest> = {}) =>
+  listOffers = (request: Readonly<ListOffersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOffersResponse>(
       {
         method: 'GET',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offers`,
+        signal: options?.signal,
       },
       unmarshalListOffersResponse,
     )
 
   
-  protected pageOfListPools = (request: Readonly<ListPoolsRequest> = {}) =>
+  protected pageOfListPools = (request: Readonly<ListPoolsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPoolsResponse>(
       {
         method: 'GET',
@@ -697,6 +723,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListPoolsResponse,
     )
@@ -707,8 +734,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPoolsRequest}
    * @returns A Promise of ListPoolsResponse
    */
-  listPools = (request: Readonly<ListPoolsRequest> = {}) =>
-    enrichForPagination('pools', this.pageOfListPools, request)
+  listPools = (request: Readonly<ListPoolsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('pools', this.pageOfListPools, request, options)
 
   
   /**
@@ -717,7 +744,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetProjectConsumptionRequest}
    * @returns A Promise of ProjectConsumption
    */
-  getProjectConsumption = (request: Readonly<GetProjectConsumptionRequest> = {}) =>
+  getProjectConsumption = (request: Readonly<GetProjectConsumptionRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ProjectConsumption>(
       {
         method: 'GET',
@@ -725,6 +752,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalProjectConsumption,
     )

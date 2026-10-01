@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {BACKUP_TRANSIENT_STATUSES as BACKUP_TRANSIENT_STATUSES_WEBHOSTING,DOMAIN_AVAILABILITY_TRANSIENT_STATUSES as DOMAIN_AVAILABILITY_TRANSIENT_STATUSES_WEBHOSTING,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_WEBHOSTING,HOSTING_TRANSIENT_STATUSES as HOSTING_TRANSIENT_STATUSES_WEBHOSTING,} from './content.gen.js'
 import {
   unmarshalBackup,
@@ -177,7 +177,7 @@ export class BackupAPI extends ParentAPI {
       ],
     })
   
-  protected pageOfListBackups = (request: Readonly<BackupApiListBackupsRequest>) =>
+  protected pageOfListBackups = (request: Readonly<BackupApiListBackupsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListBackupsResponse>(
       {
         method: 'GET',
@@ -187,6 +187,7 @@ export class BackupAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListBackupsResponse,
     )
@@ -197,8 +198,8 @@ export class BackupAPI extends ParentAPI {
    * @param request - The request {@link BackupApiListBackupsRequest}
    * @returns A Promise of ListBackupsResponse
    */
-  listBackups = (request: Readonly<BackupApiListBackupsRequest>) =>
-    enrichForPagination('backups', this.pageOfListBackups, request)
+  listBackups = (request: Readonly<BackupApiListBackupsRequest>, options?: RequestOptions) =>
+    enrichForPagination('backups', this.pageOfListBackups, request, options)
 
   
   /**
@@ -207,11 +208,12 @@ export class BackupAPI extends ParentAPI {
    * @param request - The request {@link BackupApiGetBackupRequest}
    * @returns A Promise of Backup
    */
-  getBackup = (request: Readonly<BackupApiGetBackupRequest>) =>
+  getBackup = (request: Readonly<BackupApiGetBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<Backup>(
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/backups/${validatePathParam('backupId', request.backupId)}`,
+        signal: options?.signal,
       },
       unmarshalBackup,
     )
@@ -241,13 +243,14 @@ export class BackupAPI extends ParentAPI {
    * @param request - The request {@link BackupApiRestoreBackupRequest}
    * @returns A Promise of RestoreBackupResponse
    */
-  restoreBackup = (request: Readonly<BackupApiRestoreBackupRequest>) =>
+  restoreBackup = (request: Readonly<BackupApiRestoreBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<RestoreBackupResponse>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/backups/${validatePathParam('backupId', request.backupId)}/restore`,
+        signal: options?.signal,
       },
       unmarshalRestoreBackupResponse,
     )
@@ -259,7 +262,7 @@ export class BackupAPI extends ParentAPI {
    * @param request - The request {@link BackupApiListBackupItemsRequest}
    * @returns A Promise of ListBackupItemsResponse
    */
-  listBackupItems = (request: Readonly<BackupApiListBackupItemsRequest>) =>
+  listBackupItems = (request: Readonly<BackupApiListBackupItemsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListBackupItemsResponse>(
       {
         method: 'GET',
@@ -267,6 +270,7 @@ export class BackupAPI extends ParentAPI {
         urlParams: urlParams(
           ['backup_id', request.backupId],
         ),
+        signal: options?.signal,
       },
       unmarshalListBackupItemsResponse,
     )
@@ -278,7 +282,7 @@ export class BackupAPI extends ParentAPI {
    * @param request - The request {@link BackupApiRestoreBackupItemsRequest}
    * @returns A Promise of RestoreBackupItemsResponse
    */
-  restoreBackupItems = (request: Readonly<BackupApiRestoreBackupItemsRequest>) =>
+  restoreBackupItems = (request: Readonly<BackupApiRestoreBackupItemsRequest>, options?: RequestOptions) =>
     this.client.fetch<RestoreBackupItemsResponse>(
       {
         body: JSON.stringify(
@@ -287,6 +291,7 @@ export class BackupAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/restore-backup-items`,
+        signal: options?.signal,
       },
       unmarshalRestoreBackupItemsResponse,
     )
@@ -298,11 +303,12 @@ export class BackupAPI extends ParentAPI {
    * @param request - The request {@link BackupApiGetProgressRequest}
    * @returns A Promise of Progress
    */
-  getProgress = (request: Readonly<BackupApiGetProgressRequest>) =>
+  getProgress = (request: Readonly<BackupApiGetProgressRequest>, options?: RequestOptions) =>
     this.client.fetch<Progress>(
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/progresses/${validatePathParam('progressId', request.progressId)}`,
+        signal: options?.signal,
       },
       unmarshalProgress,
     )
@@ -314,11 +320,12 @@ export class BackupAPI extends ParentAPI {
    * @param request - The request {@link BackupApiListRecentProgressesRequest}
    * @returns A Promise of ListRecentProgressesResponse
    */
-  listRecentProgresses = (request: Readonly<BackupApiListRecentProgressesRequest>) =>
+  listRecentProgresses = (request: Readonly<BackupApiListRecentProgressesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListRecentProgressesResponse>(
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/progresses`,
+        signal: options?.signal,
       },
       unmarshalListRecentProgressesResponse,
     )
@@ -345,7 +352,7 @@ export class ControlPanelAPI extends ParentAPI {
       ],
     })
   
-  protected pageOfListControlPanels = (request: Readonly<ControlPanelApiListControlPanelsRequest> = {}) =>
+  protected pageOfListControlPanels = (request: Readonly<ControlPanelApiListControlPanelsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListControlPanelsResponse>(
       {
         method: 'GET',
@@ -354,6 +361,7 @@ export class ControlPanelAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListControlPanelsResponse,
     )
@@ -364,8 +372,8 @@ export class ControlPanelAPI extends ParentAPI {
    * @param request - The request {@link ControlPanelApiListControlPanelsRequest}
    * @returns A Promise of ListControlPanelsResponse
    */
-  listControlPanels = (request: Readonly<ControlPanelApiListControlPanelsRequest> = {}) =>
-    enrichForPagination('controlPanels', this.pageOfListControlPanels, request)
+  listControlPanels = (request: Readonly<ControlPanelApiListControlPanelsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('controlPanels', this.pageOfListControlPanels, request, options)
 
   
 }
@@ -395,7 +403,7 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiCreateDatabaseRequest}
    * @returns A Promise of Database
    */
-  createDatabase = (request: Readonly<DatabaseApiCreateDatabaseRequest>) =>
+  createDatabase = (request: Readonly<DatabaseApiCreateDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         body: JSON.stringify(
@@ -404,12 +412,13 @@ export class DatabaseAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
 
   
-  protected pageOfListDatabases = (request: Readonly<DatabaseApiListDatabasesRequest>) =>
+  protected pageOfListDatabases = (request: Readonly<DatabaseApiListDatabasesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDatabasesResponse>(
       {
         method: 'GET',
@@ -419,6 +428,7 @@ export class DatabaseAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatabasesResponse,
     )
@@ -429,8 +439,8 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiListDatabasesRequest}
    * @returns A Promise of ListDatabasesResponse
    */
-  listDatabases = (request: Readonly<DatabaseApiListDatabasesRequest>) =>
-    enrichForPagination('databases', this.pageOfListDatabases, request)
+  listDatabases = (request: Readonly<DatabaseApiListDatabasesRequest>, options?: RequestOptions) =>
+    enrichForPagination('databases', this.pageOfListDatabases, request, options)
 
   
   /**
@@ -439,11 +449,12 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiGetDatabaseRequest}
    * @returns A Promise of Database
    */
-  getDatabase = (request: Readonly<DatabaseApiGetDatabaseRequest>) =>
+  getDatabase = (request: Readonly<DatabaseApiGetDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
@@ -455,11 +466,12 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiDeleteDatabaseRequest}
    * @returns A Promise of Database
    */
-  deleteDatabase = (request: Readonly<DatabaseApiDeleteDatabaseRequest>) =>
+  deleteDatabase = (request: Readonly<DatabaseApiDeleteDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         method: 'DELETE',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
@@ -471,7 +483,7 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiCreateDatabaseUserRequest}
    * @returns A Promise of DatabaseUser
    */
-  createDatabaseUser = (request: Readonly<DatabaseApiCreateDatabaseUserRequest>) =>
+  createDatabaseUser = (request: Readonly<DatabaseApiCreateDatabaseUserRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseUser>(
       {
         body: JSON.stringify(
@@ -480,12 +492,13 @@ export class DatabaseAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users`,
+        signal: options?.signal,
       },
       unmarshalDatabaseUser,
     )
 
   
-  protected pageOfListDatabaseUsers = (request: Readonly<DatabaseApiListDatabaseUsersRequest>) =>
+  protected pageOfListDatabaseUsers = (request: Readonly<DatabaseApiListDatabaseUsersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDatabaseUsersResponse>(
       {
         method: 'GET',
@@ -495,6 +508,7 @@ export class DatabaseAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatabaseUsersResponse,
     )
@@ -505,8 +519,8 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiListDatabaseUsersRequest}
    * @returns A Promise of ListDatabaseUsersResponse
    */
-  listDatabaseUsers = (request: Readonly<DatabaseApiListDatabaseUsersRequest>) =>
-    enrichForPagination('users', this.pageOfListDatabaseUsers, request)
+  listDatabaseUsers = (request: Readonly<DatabaseApiListDatabaseUsersRequest>, options?: RequestOptions) =>
+    enrichForPagination('users', this.pageOfListDatabaseUsers, request, options)
 
   
   /**
@@ -515,11 +529,12 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiGetDatabaseUserRequest}
    * @returns A Promise of DatabaseUser
    */
-  getDatabaseUser = (request: Readonly<DatabaseApiGetDatabaseUserRequest>) =>
+  getDatabaseUser = (request: Readonly<DatabaseApiGetDatabaseUserRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseUser>(
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users/${validatePathParam('username', request.username)}`,
+        signal: options?.signal,
       },
       unmarshalDatabaseUser,
     )
@@ -531,11 +546,12 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiDeleteDatabaseUserRequest}
    * @returns A Promise of DatabaseUser
    */
-  deleteDatabaseUser = (request: Readonly<DatabaseApiDeleteDatabaseUserRequest>) =>
+  deleteDatabaseUser = (request: Readonly<DatabaseApiDeleteDatabaseUserRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseUser>(
       {
         method: 'DELETE',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/database-users/${validatePathParam('username', request.username)}`,
+        signal: options?.signal,
       },
       unmarshalDatabaseUser,
     )
@@ -547,7 +563,7 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiChangeDatabaseUserPasswordRequest}
    * @returns A Promise of DatabaseUser
    */
-  changeDatabaseUserPassword = (request: Readonly<DatabaseApiChangeDatabaseUserPasswordRequest>) =>
+  changeDatabaseUserPassword = (request: Readonly<DatabaseApiChangeDatabaseUserPasswordRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseUser>(
       {
         body: JSON.stringify(
@@ -556,6 +572,7 @@ export class DatabaseAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users/${validatePathParam('username', request.username)}/change-password`,
+        signal: options?.signal,
       },
       unmarshalDatabaseUser,
     )
@@ -567,7 +584,7 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiAssignDatabaseUserRequest}
    * @returns A Promise of DatabaseUser
    */
-  assignDatabaseUser = (request: Readonly<DatabaseApiAssignDatabaseUserRequest>) =>
+  assignDatabaseUser = (request: Readonly<DatabaseApiAssignDatabaseUserRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseUser>(
       {
         body: JSON.stringify(
@@ -576,6 +593,7 @@ export class DatabaseAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}/assign-user`,
+        signal: options?.signal,
       },
       unmarshalDatabaseUser,
     )
@@ -587,7 +605,7 @@ export class DatabaseAPI extends ParentAPI {
    * @param request - The request {@link DatabaseApiUnassignDatabaseUserRequest}
    * @returns A Promise of DatabaseUser
    */
-  unassignDatabaseUser = (request: Readonly<DatabaseApiUnassignDatabaseUserRequest>) =>
+  unassignDatabaseUser = (request: Readonly<DatabaseApiUnassignDatabaseUserRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseUser>(
       {
         body: JSON.stringify(
@@ -596,6 +614,7 @@ export class DatabaseAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}/unassign-user`,
+        signal: options?.signal,
       },
       unmarshalDatabaseUser,
     )
@@ -628,11 +647,12 @@ export class DnsAPI extends ParentAPI {
    * @param request - The request {@link DnsApiGetDomainDnsRecordsRequest}
    * @returns A Promise of DnsRecords
    */
-  getDomainDnsRecords = (request: Readonly<DnsApiGetDomainDnsRecordsRequest>) =>
+  getDomainDnsRecords = (request: Readonly<DnsApiGetDomainDnsRecordsRequest>, options?: RequestOptions) =>
     this.client.fetch<DnsRecords>(
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/dns-records`,
+        signal: options?.signal,
       },
       unmarshalDnsRecords,
     )
@@ -645,7 +665,7 @@ export class DnsAPI extends ParentAPI {
    * @param request - The request {@link DnsApiCheckUserOwnsDomainRequest}
    * @returns A Promise of CheckUserOwnsDomainResponse
    */
-  checkUserOwnsDomain = (request: Readonly<DnsApiCheckUserOwnsDomainRequest>) =>
+  checkUserOwnsDomain = (request: Readonly<DnsApiCheckUserOwnsDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<CheckUserOwnsDomainResponse>(
       {
         body: JSON.stringify(
@@ -654,6 +674,7 @@ export class DnsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/check-ownership`,
+        signal: options?.signal,
       },
       unmarshalCheckUserOwnsDomainResponse,
     )
@@ -665,7 +686,7 @@ export class DnsAPI extends ParentAPI {
    * @param request - The request {@link DnsApiSyncDomainDnsRecordsRequest}
    * @returns A Promise of DnsRecords
    */
-  syncDomainDnsRecords = (request: Readonly<DnsApiSyncDomainDnsRecordsRequest>) =>
+  syncDomainDnsRecords = (request: Readonly<DnsApiSyncDomainDnsRecordsRequest>, options?: RequestOptions) =>
     this.client.fetch<DnsRecords>(
       {
         body: JSON.stringify(
@@ -674,6 +695,7 @@ export class DnsAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/sync-domain-dns-records`,
+        signal: options?.signal,
       },
       unmarshalDnsRecords,
     )
@@ -685,7 +707,7 @@ export class DnsAPI extends ParentAPI {
    * @param request - The request {@link DnsApiSearchDomainsRequest}
    * @returns A Promise of SearchDomainsResponse
    */
-  searchDomains = (request: Readonly<DnsApiSearchDomainsRequest>) =>
+  searchDomains = (request: Readonly<DnsApiSearchDomainsRequest>, options?: RequestOptions) =>
     this.client.fetch<SearchDomainsResponse>(
       {
         method: 'GET',
@@ -694,6 +716,7 @@ export class DnsAPI extends ParentAPI {
           ['domain_name', request.domainName],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalSearchDomainsResponse,
     )
@@ -705,7 +728,7 @@ export class DnsAPI extends ParentAPI {
    * @param request - The request {@link DnsApiGetDomainRequest}
    * @returns A Promise of Domain
    */
-  getDomain = (request: Readonly<DnsApiGetDomainRequest>) =>
+  getDomain = (request: Readonly<DnsApiGetDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'GET',
@@ -713,6 +736,7 @@ export class DnsAPI extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -757,7 +781,7 @@ export class OfferAPI extends ParentAPI {
       ],
     })
   
-  protected pageOfListOffers = (request: Readonly<OfferApiListOffersRequest> = {}) =>
+  protected pageOfListOffers = (request: Readonly<OfferApiListOffersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOffersResponse>(
       {
         method: 'GET',
@@ -769,6 +793,7 @@ export class OfferAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListOffersResponse,
     )
@@ -779,8 +804,8 @@ export class OfferAPI extends ParentAPI {
    * @param request - The request {@link OfferApiListOffersRequest}
    * @returns A Promise of ListOffersResponse
    */
-  listOffers = (request: Readonly<OfferApiListOffersRequest> = {}) =>
-    enrichForPagination('offers', this.pageOfListOffers, request)
+  listOffers = (request: Readonly<OfferApiListOffersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('offers', this.pageOfListOffers, request, options)
 
   
 }
@@ -810,7 +835,7 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiCreateHostingRequest}
    * @returns A Promise of Hosting
    */
-  createHosting = (request: Readonly<HostingApiCreateHostingRequest>) =>
+  createHosting = (request: Readonly<HostingApiCreateHostingRequest>, options?: RequestOptions) =>
     this.client.fetch<Hosting>(
       {
         body: JSON.stringify(
@@ -819,12 +844,13 @@ export class HostingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings`,
+        signal: options?.signal,
       },
       unmarshalHosting,
     )
 
   
-  protected pageOfListHostings = (request: Readonly<HostingApiListHostingsRequest> = {}) =>
+  protected pageOfListHostings = (request: Readonly<HostingApiListHostingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListHostingsResponse>(
       {
         method: 'GET',
@@ -841,6 +867,7 @@ export class HostingAPI extends ParentAPI {
           ['subdomain', request.subdomain],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListHostingsResponse,
     )
@@ -851,8 +878,8 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiListHostingsRequest}
    * @returns A Promise of ListHostingsResponse
    */
-  listHostings = (request: Readonly<HostingApiListHostingsRequest> = {}) =>
-    enrichForPagination('hostings', this.pageOfListHostings, request)
+  listHostings = (request: Readonly<HostingApiListHostingsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('hostings', this.pageOfListHostings, request, options)
 
   
   /**
@@ -861,11 +888,12 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiGetHostingRequest}
    * @returns A Promise of Hosting
    */
-  getHosting = (request: Readonly<HostingApiGetHostingRequest>) =>
+  getHosting = (request: Readonly<HostingApiGetHostingRequest>, options?: RequestOptions) =>
     this.client.fetch<Hosting>(
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+        signal: options?.signal,
       },
       unmarshalHosting,
     )
@@ -895,7 +923,7 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiUpdateHostingRequest}
    * @returns A Promise of Hosting
    */
-  updateHosting = (request: Readonly<HostingApiUpdateHostingRequest>) =>
+  updateHosting = (request: Readonly<HostingApiUpdateHostingRequest>, options?: RequestOptions) =>
     this.client.fetch<Hosting>(
       {
         body: JSON.stringify(
@@ -904,6 +932,7 @@ export class HostingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+        signal: options?.signal,
       },
       unmarshalHosting,
     )
@@ -915,11 +944,12 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiDeleteHostingRequest}
    * @returns A Promise of Hosting
    */
-  deleteHosting = (request: Readonly<HostingApiDeleteHostingRequest>) =>
+  deleteHosting = (request: Readonly<HostingApiDeleteHostingRequest>, options?: RequestOptions) =>
     this.client.fetch<Hosting>(
       {
         method: 'DELETE',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
+        signal: options?.signal,
       },
       unmarshalHosting,
     )
@@ -931,13 +961,14 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiCreateSessionRequest}
    * @returns A Promise of Session
    */
-  createSession = (request: Readonly<HostingApiCreateSessionRequest>) =>
+  createSession = (request: Readonly<HostingApiCreateSessionRequest>, options?: RequestOptions) =>
     this.client.fetch<Session>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/sessions`,
+        signal: options?.signal,
       },
       unmarshalSession,
     )
@@ -949,13 +980,14 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiResetHostingPasswordRequest}
    * @returns A Promise of ResetHostingPasswordResponse
    */
-  resetHostingPassword = (request: Readonly<HostingApiResetHostingPasswordRequest>) =>
+  resetHostingPassword = (request: Readonly<HostingApiResetHostingPasswordRequest>, options?: RequestOptions) =>
     this.client.fetch<ResetHostingPasswordResponse>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/reset-password`,
+        signal: options?.signal,
       },
       unmarshalResetHostingPasswordResponse,
     )
@@ -967,11 +999,12 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiGetResourceSummaryRequest}
    * @returns A Promise of ResourceSummary
    */
-  getResourceSummary = (request: Readonly<HostingApiGetResourceSummaryRequest>) =>
+  getResourceSummary = (request: Readonly<HostingApiGetResourceSummaryRequest>, options?: RequestOptions) =>
     this.client.fetch<ResourceSummary>(
       {
         method: 'GET',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/resource-summary`,
+        signal: options?.signal,
       },
       unmarshalResourceSummary,
     )
@@ -983,7 +1016,7 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiAddCustomDomainRequest}
    * @returns A Promise of HostingSummary
    */
-  addCustomDomain = (request: Readonly<HostingApiAddCustomDomainRequest>) =>
+  addCustomDomain = (request: Readonly<HostingApiAddCustomDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<HostingSummary>(
       {
         body: JSON.stringify(
@@ -992,6 +1025,7 @@ export class HostingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/add-custom-domain`,
+        signal: options?.signal,
       },
       unmarshalHostingSummary,
     )
@@ -1003,7 +1037,7 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiRemoveCustomDomainRequest}
    * @returns A Promise of HostingSummary
    */
-  removeCustomDomain = (request: Readonly<HostingApiRemoveCustomDomainRequest>) =>
+  removeCustomDomain = (request: Readonly<HostingApiRemoveCustomDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<HostingSummary>(
       {
         body: JSON.stringify(
@@ -1012,6 +1046,7 @@ export class HostingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-custom-domain`,
+        signal: options?.signal,
       },
       unmarshalHostingSummary,
     )
@@ -1023,7 +1058,7 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiMigrateControlPanelRequest}
    * @returns A Promise of HostingSummary
    */
-  migrateControlPanel = (request: Readonly<HostingApiMigrateControlPanelRequest>) =>
+  migrateControlPanel = (request: Readonly<HostingApiMigrateControlPanelRequest>, options?: RequestOptions) =>
     this.client.fetch<HostingSummary>(
       {
         body: JSON.stringify(
@@ -1032,6 +1067,7 @@ export class HostingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/migrate-control-panel`,
+        signal: options?.signal,
       },
       unmarshalHostingSummary,
     )
@@ -1043,13 +1079,14 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiResetHostingRequest}
    * @returns A Promise of Hosting
    */
-  resetHosting = (request: Readonly<HostingApiResetHostingRequest>) =>
+  resetHosting = (request: Readonly<HostingApiResetHostingRequest>, options?: RequestOptions) =>
     this.client.fetch<Hosting>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/reset`,
+        signal: options?.signal,
       },
       unmarshalHosting,
     )
@@ -1061,7 +1098,7 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiDeleteHostingDomainsRequest}
    * @returns A Promise of Hosting
    */
-  deleteHostingDomains = (request: Readonly<HostingApiDeleteHostingDomainsRequest>) =>
+  deleteHostingDomains = (request: Readonly<HostingApiDeleteHostingDomainsRequest>, options?: RequestOptions) =>
     this.client.fetch<Hosting>(
       {
         body: JSON.stringify(
@@ -1070,6 +1107,7 @@ export class HostingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/delete-domains`,
+        signal: options?.signal,
       },
       unmarshalHosting,
     )
@@ -1081,7 +1119,7 @@ export class HostingAPI extends ParentAPI {
    * @param request - The request {@link HostingApiUpdateHostingFreeDomainRequest}
    * @returns A Promise of Hosting
    */
-  updateHostingFreeDomain = (request: Readonly<HostingApiUpdateHostingFreeDomainRequest>) =>
+  updateHostingFreeDomain = (request: Readonly<HostingApiUpdateHostingFreeDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Hosting>(
       {
         body: JSON.stringify(
@@ -1090,6 +1128,7 @@ export class HostingAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/update-free-domain`,
+        signal: options?.signal,
       },
       unmarshalHosting,
     )
@@ -1122,7 +1161,7 @@ export class FreeDomainAPI extends ParentAPI {
    * @param request - The request {@link FreeDomainApiCheckFreeDomainAvailabilityRequest}
    * @returns A Promise of CheckFreeDomainAvailabilityResponse
    */
-  checkFreeDomainAvailability = (request: Readonly<FreeDomainApiCheckFreeDomainAvailabilityRequest>) =>
+  checkFreeDomainAvailability = (request: Readonly<FreeDomainApiCheckFreeDomainAvailabilityRequest>, options?: RequestOptions) =>
     this.client.fetch<CheckFreeDomainAvailabilityResponse>(
       {
         body: JSON.stringify(
@@ -1131,12 +1170,13 @@ export class FreeDomainAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/free-domains/check-availability`,
+        signal: options?.signal,
       },
       unmarshalCheckFreeDomainAvailabilityResponse,
     )
 
   
-  protected pageOfListFreeRootDomains = (request: Readonly<FreeDomainApiListFreeRootDomainsRequest> = {}) =>
+  protected pageOfListFreeRootDomains = (request: Readonly<FreeDomainApiListFreeRootDomainsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListFreeRootDomainsResponse>(
       {
         method: 'GET',
@@ -1145,6 +1185,7 @@ export class FreeDomainAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListFreeRootDomainsResponse,
     )
@@ -1155,8 +1196,8 @@ export class FreeDomainAPI extends ParentAPI {
    * @param request - The request {@link FreeDomainApiListFreeRootDomainsRequest}
    * @returns A Promise of ListFreeRootDomainsResponse
    */
-  listFreeRootDomains = (request: Readonly<FreeDomainApiListFreeRootDomainsRequest> = {}) =>
-    enrichForPagination('rootDomains', this.pageOfListFreeRootDomains, request)
+  listFreeRootDomains = (request: Readonly<FreeDomainApiListFreeRootDomainsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('rootDomains', this.pageOfListFreeRootDomains, request, options)
 
   
 }
@@ -1186,7 +1227,7 @@ export class FtpAccountAPI extends ParentAPI {
    * @param request - The request {@link FtpAccountApiCreateFtpAccountRequest}
    * @returns A Promise of FtpAccount
    */
-  createFtpAccount = (request: Readonly<FtpAccountApiCreateFtpAccountRequest>) =>
+  createFtpAccount = (request: Readonly<FtpAccountApiCreateFtpAccountRequest>, options?: RequestOptions) =>
     this.client.fetch<FtpAccount>(
       {
         body: JSON.stringify(
@@ -1195,12 +1236,13 @@ export class FtpAccountAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts`,
+        signal: options?.signal,
       },
       unmarshalFtpAccount,
     )
 
   
-  protected pageOfListFtpAccounts = (request: Readonly<FtpAccountApiListFtpAccountsRequest>) =>
+  protected pageOfListFtpAccounts = (request: Readonly<FtpAccountApiListFtpAccountsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListFtpAccountsResponse>(
       {
         method: 'GET',
@@ -1211,6 +1253,7 @@ export class FtpAccountAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListFtpAccountsResponse,
     )
@@ -1221,8 +1264,8 @@ export class FtpAccountAPI extends ParentAPI {
    * @param request - The request {@link FtpAccountApiListFtpAccountsRequest}
    * @returns A Promise of ListFtpAccountsResponse
    */
-  listFtpAccounts = (request: Readonly<FtpAccountApiListFtpAccountsRequest>) =>
-    enrichForPagination('ftpAccounts', this.pageOfListFtpAccounts, request)
+  listFtpAccounts = (request: Readonly<FtpAccountApiListFtpAccountsRequest>, options?: RequestOptions) =>
+    enrichForPagination('ftpAccounts', this.pageOfListFtpAccounts, request, options)
 
   
   /**
@@ -1231,17 +1274,18 @@ export class FtpAccountAPI extends ParentAPI {
    * @param request - The request {@link FtpAccountApiRemoveFtpAccountRequest}
    * @returns A Promise of FtpAccount
    */
-  removeFtpAccount = (request: Readonly<FtpAccountApiRemoveFtpAccountRequest>) =>
+  removeFtpAccount = (request: Readonly<FtpAccountApiRemoveFtpAccountRequest>, options?: RequestOptions) =>
     this.client.fetch<FtpAccount>(
       {
         method: 'DELETE',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts/${validatePathParam('username', request.username)}`,
+        signal: options?.signal,
       },
       unmarshalFtpAccount,
     )
 
   
-  changeFtpAccountPassword = (request: Readonly<FtpAccountApiChangeFtpAccountPasswordRequest>) =>
+  changeFtpAccountPassword = (request: Readonly<FtpAccountApiChangeFtpAccountPasswordRequest>, options?: RequestOptions) =>
     this.client.fetch<FtpAccount>(
       {
         body: JSON.stringify(
@@ -1250,6 +1294,7 @@ export class FtpAccountAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts/${validatePathParam('username', request.username)}/change-password`,
+        signal: options?.signal,
       },
       unmarshalFtpAccount,
     )
@@ -1282,7 +1327,7 @@ export class MailAccountAPI extends ParentAPI {
    * @param request - The request {@link MailAccountApiCreateMailAccountRequest}
    * @returns A Promise of MailAccount
    */
-  createMailAccount = (request: Readonly<MailAccountApiCreateMailAccountRequest>) =>
+  createMailAccount = (request: Readonly<MailAccountApiCreateMailAccountRequest>, options?: RequestOptions) =>
     this.client.fetch<MailAccount>(
       {
         body: JSON.stringify(
@@ -1291,12 +1336,13 @@ export class MailAccountAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/mail-accounts`,
+        signal: options?.signal,
       },
       unmarshalMailAccount,
     )
 
   
-  protected pageOfListMailAccounts = (request: Readonly<MailAccountApiListMailAccountsRequest>) =>
+  protected pageOfListMailAccounts = (request: Readonly<MailAccountApiListMailAccountsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListMailAccountsResponse>(
       {
         method: 'GET',
@@ -1307,6 +1353,7 @@ export class MailAccountAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListMailAccountsResponse,
     )
@@ -1317,8 +1364,8 @@ export class MailAccountAPI extends ParentAPI {
    * @param request - The request {@link MailAccountApiListMailAccountsRequest}
    * @returns A Promise of ListMailAccountsResponse
    */
-  listMailAccounts = (request: Readonly<MailAccountApiListMailAccountsRequest>) =>
-    enrichForPagination('mailAccounts', this.pageOfListMailAccounts, request)
+  listMailAccounts = (request: Readonly<MailAccountApiListMailAccountsRequest>, options?: RequestOptions) =>
+    enrichForPagination('mailAccounts', this.pageOfListMailAccounts, request, options)
 
   
   /**
@@ -1327,7 +1374,7 @@ export class MailAccountAPI extends ParentAPI {
    * @param request - The request {@link MailAccountApiRemoveMailAccountRequest}
    * @returns A Promise of MailAccount
    */
-  removeMailAccount = (request: Readonly<MailAccountApiRemoveMailAccountRequest>) =>
+  removeMailAccount = (request: Readonly<MailAccountApiRemoveMailAccountRequest>, options?: RequestOptions) =>
     this.client.fetch<MailAccount>(
       {
         body: JSON.stringify(
@@ -1336,6 +1383,7 @@ export class MailAccountAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-mail-account`,
+        signal: options?.signal,
       },
       unmarshalMailAccount,
     )
@@ -1347,7 +1395,7 @@ export class MailAccountAPI extends ParentAPI {
    * @param request - The request {@link MailAccountApiChangeMailAccountPasswordRequest}
    * @returns A Promise of MailAccount
    */
-  changeMailAccountPassword = (request: Readonly<MailAccountApiChangeMailAccountPasswordRequest>) =>
+  changeMailAccountPassword = (request: Readonly<MailAccountApiChangeMailAccountPasswordRequest>, options?: RequestOptions) =>
     this.client.fetch<MailAccount>(
       {
         body: JSON.stringify(
@@ -1356,6 +1404,7 @@ export class MailAccountAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/change-mail-password`,
+        signal: options?.signal,
       },
       unmarshalMailAccount,
     )
@@ -1382,7 +1431,7 @@ export class WebsiteAPI extends ParentAPI {
       ],
     })
   
-  protected pageOfListWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>) =>
+  protected pageOfListWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListWebsitesResponse>(
       {
         method: 'GET',
@@ -1392,6 +1441,7 @@ export class WebsiteAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListWebsitesResponse,
     )
@@ -1402,8 +1452,8 @@ export class WebsiteAPI extends ParentAPI {
    * @param request - The request {@link WebsiteApiListWebsitesRequest}
    * @returns A Promise of ListWebsitesResponse
    */
-  listWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>) =>
-    enrichForPagination('websites', this.pageOfListWebsites, request)
+  listWebsites = (request: Readonly<WebsiteApiListWebsitesRequest>, options?: RequestOptions) =>
+    enrichForPagination('websites', this.pageOfListWebsites, request, options)
 
   
   /**
@@ -1412,7 +1462,7 @@ export class WebsiteAPI extends ParentAPI {
    * @param request - The request {@link WebsiteApiCreateWebsiteRequest}
    * @returns A Promise of Website
    */
-  createWebsite = (request: Readonly<WebsiteApiCreateWebsiteRequest>) =>
+  createWebsite = (request: Readonly<WebsiteApiCreateWebsiteRequest>, options?: RequestOptions) =>
     this.client.fetch<Website>(
       {
         body: JSON.stringify(
@@ -1421,6 +1471,7 @@ export class WebsiteAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites`,
+        signal: options?.signal,
       },
       unmarshalWebsite,
     )
@@ -1431,11 +1482,12 @@ export class WebsiteAPI extends ParentAPI {
    *
    * @param request - The request {@link WebsiteApiDeleteWebsiteRequest}
    */
-  deleteWebsite = (request: Readonly<WebsiteApiDeleteWebsiteRequest>) =>
+  deleteWebsite = (request: Readonly<WebsiteApiDeleteWebsiteRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1447,13 +1499,14 @@ website will display the default welcome page.
    * @param request - The request {@link WebsiteApiResetWebsiteRequest}
    * @returns A Promise of Website
    */
-  resetWebsite = (request: Readonly<WebsiteApiResetWebsiteRequest>) =>
+  resetWebsite = (request: Readonly<WebsiteApiResetWebsiteRequest>, options?: RequestOptions) =>
     this.client.fetch<Website>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}/reset`,
+        signal: options?.signal,
       },
       unmarshalWebsite,
     )

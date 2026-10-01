@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DNS_ZONE_TRANSIENT_STATUSES as DNS_ZONE_TRANSIENT_STATUSES_DOMAIN,DOMAIN_FEATURE_TRANSIENT_STATUSES as DOMAIN_FEATURE_TRANSIENT_STATUSES_DOMAIN,DOMAIN_REGISTRATION_STATUS_TRANSFER_TRANSIENT_STATUSES as DOMAIN_REGISTRATION_STATUS_TRANSFER_TRANSIENT_STATUSES_DOMAIN,DOMAIN_TRANSIENT_STATUSES as DOMAIN_TRANSIENT_STATUSES_DOMAIN,HOST_TRANSIENT_STATUSES as HOST_TRANSIENT_STATUSES_DOMAIN,SSL_CERTIFICATE_TRANSIENT_STATUSES as SSL_CERTIFICATE_TRANSIENT_STATUSES_DOMAIN,TASK_TRANSIENT_STATUSES as TASK_TRANSIENT_STATUSES_DOMAIN,} from './content.gen.js'
 import {
   unmarshalCheckContactsCompatibilityResponse,
@@ -179,7 +179,7 @@ const jsonContentHeaders = {
 This API allows you to manage your domains, DNS zones and records.
  */
 export class API extends ParentAPI {
-  protected pageOfListDNSZones = (request: Readonly<ListDNSZonesRequest>) =>
+  protected pageOfListDNSZones = (request: Readonly<ListDNSZonesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDNSZonesResponse>(
       {
         method: 'GET',
@@ -198,6 +198,7 @@ export class API extends ParentAPI {
           ['updated_after', request.updatedAfter],
           ['updated_before', request.updatedBefore],
         ),
+        signal: options?.signal,
       },
       unmarshalListDNSZonesResponse,
     )
@@ -208,8 +209,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDNSZonesRequest}
    * @returns A Promise of ListDNSZonesResponse
    */
-  listDNSZones = (request: Readonly<ListDNSZonesRequest>) =>
-    enrichForPagination('dnsZones', this.pageOfListDNSZones, request)
+  listDNSZones = (request: Readonly<ListDNSZonesRequest>, options?: RequestOptions) =>
+    enrichForPagination('dnsZones', this.pageOfListDNSZones, request, options)
 
   
   /**
@@ -218,7 +219,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDNSZoneRequest}
    * @returns A Promise of DNSZone
    */
-  createDNSZone = (request: Readonly<CreateDNSZoneRequest>) =>
+  createDNSZone = (request: Readonly<CreateDNSZoneRequest>, options?: RequestOptions) =>
     this.client.fetch<DNSZone>(
       {
         body: JSON.stringify(
@@ -227,6 +228,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones`,
+        signal: options?.signal,
       },
       unmarshalDNSZone,
     )
@@ -238,7 +240,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDNSZoneRequest}
    * @returns A Promise of DNSZone
    */
-  updateDNSZone = (request: Readonly<UpdateDNSZoneRequest>) =>
+  updateDNSZone = (request: Readonly<UpdateDNSZoneRequest>, options?: RequestOptions) =>
     this.client.fetch<DNSZone>(
       {
         body: JSON.stringify(
@@ -247,6 +249,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}`,
+        signal: options?.signal,
       },
       unmarshalDNSZone,
     )
@@ -258,7 +261,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CloneDNSZoneRequest}
    * @returns A Promise of DNSZone
    */
-  cloneDNSZone = (request: Readonly<CloneDNSZoneRequest>) =>
+  cloneDNSZone = (request: Readonly<CloneDNSZoneRequest>, options?: RequestOptions) =>
     this.client.fetch<DNSZone>(
       {
         body: JSON.stringify(
@@ -267,6 +270,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/clone`,
+        signal: options?.signal,
       },
       unmarshalDNSZone,
     )
@@ -278,7 +282,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDNSZoneRequest}
    * @returns A Promise of DeleteDNSZoneResponse
    */
-  deleteDNSZone = (request: Readonly<DeleteDNSZoneRequest>) =>
+  deleteDNSZone = (request: Readonly<DeleteDNSZoneRequest>, options?: RequestOptions) =>
     this.client.fetch<DeleteDNSZoneResponse>(
       {
         method: 'DELETE',
@@ -286,12 +290,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalDeleteDNSZoneResponse,
     )
 
   
-  protected pageOfListDNSZoneRecords = (request: Readonly<ListDNSZoneRecordsRequest>) =>
+  protected pageOfListDNSZoneRecords = (request: Readonly<ListDNSZoneRecordsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDNSZoneRecordsResponse>(
       {
         method: 'GET',
@@ -305,6 +310,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['type', request.type],
         ),
+        signal: options?.signal,
       },
       unmarshalListDNSZoneRecordsResponse,
     )
@@ -316,8 +322,8 @@ You can filter records by type and name.
    * @param request - The request {@link ListDNSZoneRecordsRequest}
    * @returns A Promise of ListDNSZoneRecordsResponse
    */
-  listDNSZoneRecords = (request: Readonly<ListDNSZoneRecordsRequest>) =>
-    enrichForPagination('records', this.pageOfListDNSZoneRecords, request)
+  listDNSZoneRecords = (request: Readonly<ListDNSZoneRecordsRequest>, options?: RequestOptions) =>
+    enrichForPagination('records', this.pageOfListDNSZoneRecords, request, options)
 
   
   /**
@@ -334,7 +340,7 @@ All edits will be versioned.
    * @param request - The request {@link UpdateDNSZoneRecordsRequest}
    * @returns A Promise of UpdateDNSZoneRecordsResponse
    */
-  updateDNSZoneRecords = (request: Readonly<UpdateDNSZoneRecordsRequest>) =>
+  updateDNSZoneRecords = (request: Readonly<UpdateDNSZoneRecordsRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateDNSZoneRecordsResponse>(
       {
         body: JSON.stringify(
@@ -343,6 +349,7 @@ All edits will be versioned.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/records`,
+        signal: options?.signal,
       },
       unmarshalUpdateDNSZoneRecordsResponse,
     )
@@ -354,7 +361,7 @@ All edits will be versioned.
    * @param request - The request {@link ListDNSZoneNameserversRequest}
    * @returns A Promise of ListDNSZoneNameserversResponse
    */
-  listDNSZoneNameservers = (request: Readonly<ListDNSZoneNameserversRequest>) =>
+  listDNSZoneNameservers = (request: Readonly<ListDNSZoneNameserversRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDNSZoneNameserversResponse>(
       {
         method: 'GET',
@@ -362,6 +369,7 @@ All edits will be versioned.
         urlParams: urlParams(
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListDNSZoneNameserversResponse,
     )
@@ -373,7 +381,7 @@ All edits will be versioned.
    * @param request - The request {@link UpdateDNSZoneNameserversRequest}
    * @returns A Promise of UpdateDNSZoneNameserversResponse
    */
-  updateDNSZoneNameservers = (request: Readonly<UpdateDNSZoneNameserversRequest>) =>
+  updateDNSZoneNameservers = (request: Readonly<UpdateDNSZoneNameserversRequest>, options?: RequestOptions) =>
     this.client.fetch<UpdateDNSZoneNameserversResponse>(
       {
         body: JSON.stringify(
@@ -382,6 +390,7 @@ All edits will be versioned.
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/nameservers`,
+        signal: options?.signal,
       },
       unmarshalUpdateDNSZoneNameserversResponse,
     )
@@ -394,11 +403,12 @@ All edits will be versioned.
    * @param request - The request {@link ClearDNSZoneRecordsRequest}
    * @returns A Promise of ClearDNSZoneRecordsResponse
    */
-  clearDNSZoneRecords = (request: Readonly<ClearDNSZoneRecordsRequest>) =>
+  clearDNSZoneRecords = (request: Readonly<ClearDNSZoneRecordsRequest>, options?: RequestOptions) =>
     this.client.fetch<ClearDNSZoneRecordsResponse>(
       {
         method: 'DELETE',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/records`,
+        signal: options?.signal,
       },
       unmarshalClearDNSZoneRecordsResponse,
     )
@@ -410,7 +420,7 @@ All edits will be versioned.
    * @param request - The request {@link ExportRawDNSZoneRequest}
    * @returns A Promise of Blob
    */
-  exportRawDNSZone = (request: Readonly<ExportRawDNSZoneRequest>) =>
+  exportRawDNSZone = (request: Readonly<ExportRawDNSZoneRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -420,6 +430,7 @@ All edits will be versioned.
           ['format', request.format],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -430,7 +441,7 @@ All edits will be versioned.
    * @param request - The request {@link ImportRawDNSZoneRequest}
    * @returns A Promise of ImportRawDNSZoneResponse
    */
-  importRawDNSZone = (request: Readonly<ImportRawDNSZoneRequest>) =>
+  importRawDNSZone = (request: Readonly<ImportRawDNSZoneRequest>, options?: RequestOptions) =>
     this.client.fetch<ImportRawDNSZoneResponse>(
       {
         body: JSON.stringify(
@@ -439,6 +450,7 @@ All edits will be versioned.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/raw`,
+        signal: options?.signal,
       },
       unmarshalImportRawDNSZoneResponse,
     )
@@ -450,7 +462,7 @@ All edits will be versioned.
    * @param request - The request {@link ImportProviderDNSZoneRequest}
    * @returns A Promise of ImportProviderDNSZoneResponse
    */
-  importProviderDNSZone = (request: Readonly<ImportProviderDNSZoneRequest>) =>
+  importProviderDNSZone = (request: Readonly<ImportProviderDNSZoneRequest>, options?: RequestOptions) =>
     this.client.fetch<ImportProviderDNSZoneResponse>(
       {
         body: JSON.stringify(
@@ -459,6 +471,7 @@ All edits will be versioned.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/import-provider`,
+        signal: options?.signal,
       },
       unmarshalImportProviderDNSZoneResponse,
     )
@@ -471,7 +484,7 @@ You can recreate the given DNS zone and its sub DNS zone if needed.
    * @param request - The request {@link RefreshDNSZoneRequest}
    * @returns A Promise of RefreshDNSZoneResponse
    */
-  refreshDNSZone = (request: Readonly<RefreshDNSZoneRequest>) =>
+  refreshDNSZone = (request: Readonly<RefreshDNSZoneRequest>, options?: RequestOptions) =>
     this.client.fetch<RefreshDNSZoneResponse>(
       {
         body: JSON.stringify(
@@ -480,12 +493,13 @@ You can recreate the given DNS zone and its sub DNS zone if needed.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/refresh`,
+        signal: options?.signal,
       },
       unmarshalRefreshDNSZoneResponse,
     )
 
   
-  protected pageOfListDNSZoneVersions = (request: Readonly<ListDNSZoneVersionsRequest>) =>
+  protected pageOfListDNSZoneVersions = (request: Readonly<ListDNSZoneVersionsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDNSZoneVersionsResponse>(
       {
         method: 'GET',
@@ -494,6 +508,7 @@ You can recreate the given DNS zone and its sub DNS zone if needed.
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDNSZoneVersionsResponse,
     )
@@ -505,11 +520,11 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link ListDNSZoneVersionsRequest}
    * @returns A Promise of ListDNSZoneVersionsResponse
    */
-  listDNSZoneVersions = (request: Readonly<ListDNSZoneVersionsRequest>) =>
-    enrichForPagination('versions', this.pageOfListDNSZoneVersions, request)
+  listDNSZoneVersions = (request: Readonly<ListDNSZoneVersionsRequest>, options?: RequestOptions) =>
+    enrichForPagination('versions', this.pageOfListDNSZoneVersions, request, options)
 
   
-  protected pageOfListDNSZoneVersionRecords = (request: Readonly<ListDNSZoneVersionRecordsRequest>) =>
+  protected pageOfListDNSZoneVersionRecords = (request: Readonly<ListDNSZoneVersionRecordsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDNSZoneVersionRecordsResponse>(
       {
         method: 'GET',
@@ -518,6 +533,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDNSZoneVersionRecordsResponse,
     )
@@ -528,8 +544,8 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link ListDNSZoneVersionRecordsRequest}
    * @returns A Promise of ListDNSZoneVersionRecordsResponse
    */
-  listDNSZoneVersionRecords = (request: Readonly<ListDNSZoneVersionRecordsRequest>) =>
-    enrichForPagination('records', this.pageOfListDNSZoneVersionRecords, request)
+  listDNSZoneVersionRecords = (request: Readonly<ListDNSZoneVersionRecordsRequest>, options?: RequestOptions) =>
+    enrichForPagination('records', this.pageOfListDNSZoneVersionRecords, request, options)
 
   
   /**
@@ -538,11 +554,12 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link GetDNSZoneVersionDiffRequest}
    * @returns A Promise of GetDNSZoneVersionDiffResponse
    */
-  getDNSZoneVersionDiff = (request: Readonly<GetDNSZoneVersionDiffRequest>) =>
+  getDNSZoneVersionDiff = (request: Readonly<GetDNSZoneVersionDiffRequest>, options?: RequestOptions) =>
     this.client.fetch<GetDNSZoneVersionDiffResponse>(
       {
         method: 'GET',
         path: `/domain/v2beta1/dns-zones/version/${validatePathParam('dnsZoneVersionId', request.dnsZoneVersionId)}/diff`,
+        signal: options?.signal,
       },
       unmarshalGetDNSZoneVersionDiffResponse,
     )
@@ -554,13 +571,14 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link RestoreDNSZoneVersionRequest}
    * @returns A Promise of RestoreDNSZoneVersionResponse
    */
-  restoreDNSZoneVersion = (request: Readonly<RestoreDNSZoneVersionRequest>) =>
+  restoreDNSZoneVersion = (request: Readonly<RestoreDNSZoneVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<RestoreDNSZoneVersionResponse>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/version/${validatePathParam('dnsZoneVersionId', request.dnsZoneVersionId)}/restore`,
+        signal: options?.signal,
       },
       unmarshalRestoreDNSZoneVersionResponse,
     )
@@ -572,11 +590,12 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link GetSSLCertificateRequest}
    * @returns A Promise of SSLCertificate
    */
-  getSSLCertificate = (request: Readonly<GetSSLCertificateRequest>) =>
+  getSSLCertificate = (request: Readonly<GetSSLCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<SSLCertificate>(
       {
         method: 'GET',
         path: `/domain/v2beta1/ssl-certificates/${validatePathParam('dnsZone', request.dnsZone)}`,
+        signal: options?.signal,
       },
       unmarshalSSLCertificate,
     )
@@ -606,7 +625,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link CreateSSLCertificateRequest}
    * @returns A Promise of SSLCertificate
    */
-  createSSLCertificate = (request: Readonly<CreateSSLCertificateRequest>) =>
+  createSSLCertificate = (request: Readonly<CreateSSLCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<SSLCertificate>(
       {
         body: JSON.stringify(
@@ -615,12 +634,13 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/ssl-certificates`,
+        signal: options?.signal,
       },
       unmarshalSSLCertificate,
     )
 
   
-  protected pageOfListSSLCertificates = (request: Readonly<ListSSLCertificatesRequest>) =>
+  protected pageOfListSSLCertificates = (request: Readonly<ListSSLCertificatesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSSLCertificatesResponse>(
       {
         method: 'GET',
@@ -631,6 +651,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSSLCertificatesResponse,
     )
@@ -641,8 +662,8 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link ListSSLCertificatesRequest}
    * @returns A Promise of ListSSLCertificatesResponse
    */
-  listSSLCertificates = (request: Readonly<ListSSLCertificatesRequest>) =>
-    enrichForPagination('certificates', this.pageOfListSSLCertificates, request)
+  listSSLCertificates = (request: Readonly<ListSSLCertificatesRequest>, options?: RequestOptions) =>
+    enrichForPagination('certificates', this.pageOfListSSLCertificates, request, options)
 
   
   /**
@@ -651,11 +672,12 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link DeleteSSLCertificateRequest}
    * @returns A Promise of DeleteSSLCertificateResponse
    */
-  deleteSSLCertificate = (request: Readonly<DeleteSSLCertificateRequest>) =>
+  deleteSSLCertificate = (request: Readonly<DeleteSSLCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<DeleteSSLCertificateResponse>(
       {
         method: 'DELETE',
         path: `/domain/v2beta1/ssl-certificates/${validatePathParam('dnsZone', request.dnsZone)}`,
+        signal: options?.signal,
       },
       unmarshalDeleteSSLCertificateResponse,
     )
@@ -667,11 +689,12 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    * @param request - The request {@link GetDNSZoneTsigKeyRequest}
    * @returns A Promise of GetDNSZoneTsigKeyResponse
    */
-  getDNSZoneTsigKey = (request: Readonly<GetDNSZoneTsigKeyRequest>) =>
+  getDNSZoneTsigKey = (request: Readonly<GetDNSZoneTsigKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<GetDNSZoneTsigKeyResponse>(
       {
         method: 'GET',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/tsig-key`,
+        signal: options?.signal,
       },
       unmarshalGetDNSZoneTsigKeyResponse,
     )
@@ -682,11 +705,12 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
    *
    * @param request - The request {@link DeleteDNSZoneTsigKeyRequest}
    */
-  deleteDNSZoneTsigKey = (request: Readonly<DeleteDNSZoneTsigKeyRequest>) =>
+  deleteDNSZoneTsigKey = (request: Readonly<DeleteDNSZoneTsigKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/tsig-key`,
+        signal: options?.signal,
       },
     )
 
@@ -699,7 +723,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
 Manage your domains and contacts.
  */
 export class RegistrarAPI extends ParentAPI {
-  protected pageOfListTasks = (request: Readonly<RegistrarApiListTasksRequest> = {}) =>
+  protected pageOfListTasks = (request: Readonly<RegistrarApiListTasksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTasksResponse>(
       {
         method: 'GET',
@@ -714,6 +738,7 @@ export class RegistrarAPI extends ParentAPI {
           ['statuses', request.statuses],
           ['types', request.types],
         ),
+        signal: options?.signal,
       },
       unmarshalListTasksResponse,
     )
@@ -725,11 +750,11 @@ You can filter the list of tasks by domain name.
    * @param request - The request {@link RegistrarApiListTasksRequest}
    * @returns A Promise of ListTasksResponse
    */
-  listTasks = (request: Readonly<RegistrarApiListTasksRequest> = {}) =>
-    enrichForPagination('tasks', this.pageOfListTasks, request)
+  listTasks = (request: Readonly<RegistrarApiListTasksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('tasks', this.pageOfListTasks, request, options)
 
   
-  protected pageOfListInboundTransfers = (request: Readonly<RegistrarApiListInboundTransfersRequest>) =>
+  protected pageOfListInboundTransfers = (request: Readonly<RegistrarApiListInboundTransfersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListInboundTransfersResponse>(
       {
         method: 'GET',
@@ -741,6 +766,7 @@ You can filter the list of tasks by domain name.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListInboundTransfersResponse,
     )
@@ -752,8 +778,8 @@ You can filter the list of inbound transfers by domain name.
    * @param request - The request {@link RegistrarApiListInboundTransfersRequest}
    * @returns A Promise of ListInboundTransfersResponse
    */
-  listInboundTransfers = (request: Readonly<RegistrarApiListInboundTransfersRequest>) =>
-    enrichForPagination('inboundTransfers', this.pageOfListInboundTransfers, request)
+  listInboundTransfers = (request: Readonly<RegistrarApiListInboundTransfersRequest>, options?: RequestOptions) =>
+    enrichForPagination('inboundTransfers', this.pageOfListInboundTransfers, request, options)
 
   
   /**
@@ -762,7 +788,7 @@ You can filter the list of inbound transfers by domain name.
    * @param request - The request {@link RegistrarApiRetryInboundTransferRequest}
    * @returns A Promise of RetryInboundTransferResponse
    */
-  retryInboundTransfer = (request: Readonly<RegistrarApiRetryInboundTransferRequest>) =>
+  retryInboundTransfer = (request: Readonly<RegistrarApiRetryInboundTransferRequest>, options?: RequestOptions) =>
     this.client.fetch<RetryInboundTransferResponse>(
       {
         body: JSON.stringify(
@@ -771,6 +797,7 @@ You can filter the list of inbound transfers by domain name.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/retry-inbound-transfer`,
+        signal: options?.signal,
       },
       unmarshalRetryInboundTransferResponse,
     )
@@ -783,7 +810,7 @@ You can provide a domain's already existing contact or a new contact.
    * @param request - The request {@link RegistrarApiBuyDomainsRequest}
    * @returns A Promise of OrderResponse
    */
-  buyDomains = (request: Readonly<RegistrarApiBuyDomainsRequest>) =>
+  buyDomains = (request: Readonly<RegistrarApiBuyDomainsRequest>, options?: RequestOptions) =>
     this.client.fetch<OrderResponse>(
       {
         body: JSON.stringify(
@@ -792,6 +819,7 @@ You can provide a domain's already existing contact or a new contact.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/buy-domains`,
+        signal: options?.signal,
       },
       unmarshalOrderResponse,
     )
@@ -803,7 +831,7 @@ You can provide a domain's already existing contact or a new contact.
    * @param request - The request {@link RegistrarApiRenewDomainsRequest}
    * @returns A Promise of OrderResponse
    */
-  renewDomains = (request: Readonly<RegistrarApiRenewDomainsRequest>) =>
+  renewDomains = (request: Readonly<RegistrarApiRenewDomainsRequest>, options?: RequestOptions) =>
     this.client.fetch<OrderResponse>(
       {
         body: JSON.stringify(
@@ -812,6 +840,7 @@ You can provide a domain's already existing contact or a new contact.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/renew-domains`,
+        signal: options?.signal,
       },
       unmarshalOrderResponse,
     )
@@ -823,7 +852,7 @@ You can provide a domain's already existing contact or a new contact.
    * @param request - The request {@link RegistrarApiTransferInDomainRequest}
    * @returns A Promise of OrderResponse
    */
-  transferInDomain = (request: Readonly<RegistrarApiTransferInDomainRequest>) =>
+  transferInDomain = (request: Readonly<RegistrarApiTransferInDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<OrderResponse>(
       {
         body: JSON.stringify(
@@ -832,6 +861,7 @@ You can provide a domain's already existing contact or a new contact.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/transfer-domains`,
+        signal: options?.signal,
       },
       unmarshalOrderResponse,
     )
@@ -846,7 +876,7 @@ If the new owner has never created a contact to register domains before, an erro
    * @param request - The request {@link RegistrarApiTradeDomainRequest}
    * @returns A Promise of OrderResponse
    */
-  tradeDomain = (request: Readonly<RegistrarApiTradeDomainRequest>) =>
+  tradeDomain = (request: Readonly<RegistrarApiTradeDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<OrderResponse>(
       {
         body: JSON.stringify(
@@ -855,6 +885,7 @@ If the new owner has never created a contact to register domains before, an erro
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/trade`,
+        signal: options?.signal,
       },
       unmarshalOrderResponse,
     )
@@ -866,7 +897,7 @@ If the new owner has never created a contact to register domains before, an erro
    * @param request - The request {@link RegistrarApiRegisterExternalDomainRequest}
    * @returns A Promise of RegisterExternalDomainResponse
    */
-  registerExternalDomain = (request: Readonly<RegistrarApiRegisterExternalDomainRequest>) =>
+  registerExternalDomain = (request: Readonly<RegistrarApiRegisterExternalDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<RegisterExternalDomainResponse>(
       {
         body: JSON.stringify(
@@ -875,6 +906,7 @@ If the new owner has never created a contact to register domains before, an erro
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/external-domains`,
+        signal: options?.signal,
       },
       unmarshalRegisterExternalDomainResponse,
     )
@@ -886,11 +918,12 @@ If the new owner has never created a contact to register domains before, an erro
    * @param request - The request {@link RegistrarApiDeleteExternalDomainRequest}
    * @returns A Promise of DeleteExternalDomainResponse
    */
-  deleteExternalDomain = (request: Readonly<RegistrarApiDeleteExternalDomainRequest>) =>
+  deleteExternalDomain = (request: Readonly<RegistrarApiDeleteExternalDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<DeleteExternalDomainResponse>(
       {
         method: 'DELETE',
         path: `/domain/v2beta1/external-domains/${validatePathParam('domain', request.domain)}`,
+        signal: options?.signal,
       },
       unmarshalDeleteExternalDomainResponse,
     )
@@ -903,7 +936,7 @@ If contacts are not compatible with either the domain or the TLD, the informatio
    * @param request - The request {@link RegistrarApiCheckContactsCompatibilityRequest}
    * @returns A Promise of CheckContactsCompatibilityResponse
    */
-  checkContactsCompatibility = (request: Readonly<RegistrarApiCheckContactsCompatibilityRequest> = {}) =>
+  checkContactsCompatibility = (request: Readonly<RegistrarApiCheckContactsCompatibilityRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<CheckContactsCompatibilityResponse>(
       {
         body: JSON.stringify(
@@ -912,12 +945,13 @@ If contacts are not compatible with either the domain or the TLD, the informatio
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/check-contacts-compatibility`,
+        signal: options?.signal,
       },
       unmarshalCheckContactsCompatibilityResponse,
     )
 
   
-  protected pageOfListContacts = (request: Readonly<RegistrarApiListContactsRequest> = {}) =>
+  protected pageOfListContacts = (request: Readonly<RegistrarApiListContactsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListContactsResponse>(
       {
         method: 'GET',
@@ -931,6 +965,7 @@ If contacts are not compatible with either the domain or the TLD, the informatio
           ['project_id', request.projectId],
           ['role', request.role],
         ),
+        signal: options?.signal,
       },
       unmarshalListContactsResponse,
     )
@@ -942,8 +977,8 @@ You can filter the list by domain name.
    * @param request - The request {@link RegistrarApiListContactsRequest}
    * @returns A Promise of ListContactsResponse
    */
-  listContacts = (request: Readonly<RegistrarApiListContactsRequest> = {}) =>
-    enrichForPagination('contacts', this.pageOfListContacts, request)
+  listContacts = (request: Readonly<RegistrarApiListContactsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('contacts', this.pageOfListContacts, request, options)
 
   
   /**
@@ -952,11 +987,12 @@ You can filter the list by domain name.
    * @param request - The request {@link RegistrarApiGetContactRequest}
    * @returns A Promise of Contact
    */
-  getContact = (request: Readonly<RegistrarApiGetContactRequest>) =>
+  getContact = (request: Readonly<RegistrarApiGetContactRequest>, options?: RequestOptions) =>
     this.client.fetch<Contact>(
       {
         method: 'GET',
         path: `/domain/v2beta1/contacts/${validatePathParam('contactId', request.contactId)}`,
+        signal: options?.signal,
       },
       unmarshalContact,
     )
@@ -968,7 +1004,7 @@ You can filter the list by domain name.
    * @param request - The request {@link RegistrarApiUpdateContactRequest}
    * @returns A Promise of Contact
    */
-  updateContact = (request: Readonly<RegistrarApiUpdateContactRequest>) =>
+  updateContact = (request: Readonly<RegistrarApiUpdateContactRequest>, options?: RequestOptions) =>
     this.client.fetch<Contact>(
       {
         body: JSON.stringify(
@@ -977,12 +1013,13 @@ You can filter the list by domain name.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/contacts/${validatePathParam('contactId', request.contactId)}`,
+        signal: options?.signal,
       },
       unmarshalContact,
     )
 
   
-  protected pageOfListDomains = (request: Readonly<RegistrarApiListDomainsRequest> = {}) =>
+  protected pageOfListDomains = (request: Readonly<RegistrarApiListDomainsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDomainsResponse>(
       {
         method: 'GET',
@@ -998,6 +1035,7 @@ You can filter the list by domain name.
           ['registrar', request.registrar],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListDomainsResponse,
     )
@@ -1008,11 +1046,11 @@ You can filter the list by domain name.
    * @param request - The request {@link RegistrarApiListDomainsRequest}
    * @returns A Promise of ListDomainsResponse
    */
-  listDomains = (request: Readonly<RegistrarApiListDomainsRequest> = {}) =>
-    enrichForPagination('domains', this.pageOfListDomains, request)
+  listDomains = (request: Readonly<RegistrarApiListDomainsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('domains', this.pageOfListDomains, request, options)
 
   
-  protected pageOfListRenewableDomains = (request: Readonly<RegistrarApiListRenewableDomainsRequest> = {}) =>
+  protected pageOfListRenewableDomains = (request: Readonly<RegistrarApiListRenewableDomainsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRenewableDomainsResponse>(
       {
         method: 'GET',
@@ -1024,6 +1062,7 @@ You can filter the list by domain name.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRenewableDomainsResponse,
     )
@@ -1034,8 +1073,8 @@ You can filter the list by domain name.
    * @param request - The request {@link RegistrarApiListRenewableDomainsRequest}
    * @returns A Promise of ListRenewableDomainsResponse
    */
-  listRenewableDomains = (request: Readonly<RegistrarApiListRenewableDomainsRequest> = {}) =>
-    enrichForPagination('domains', this.pageOfListRenewableDomains, request)
+  listRenewableDomains = (request: Readonly<RegistrarApiListRenewableDomainsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('domains', this.pageOfListRenewableDomains, request, options)
 
   
   /**
@@ -1044,11 +1083,12 @@ You can filter the list by domain name.
    * @param request - The request {@link RegistrarApiGetDomainRequest}
    * @returns A Promise of Domain
    */
-  getDomain = (request: Readonly<RegistrarApiGetDomainRequest>) =>
+  getDomain = (request: Readonly<RegistrarApiGetDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         method: 'GET',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -1079,7 +1119,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
    * @param request - The request {@link RegistrarApiUpdateDomainRequest}
    * @returns A Promise of Domain
    */
-  updateDomain = (request: Readonly<RegistrarApiUpdateDomainRequest>) =>
+  updateDomain = (request: Readonly<RegistrarApiUpdateDomainRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: JSON.stringify(
@@ -1088,6 +1128,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -1099,13 +1140,14 @@ If you add the same contact for multiple roles (owner, administrative, technical
    * @param request - The request {@link RegistrarApiLockDomainTransferRequest}
    * @returns A Promise of Domain
    */
-  lockDomainTransfer = (request: Readonly<RegistrarApiLockDomainTransferRequest>) =>
+  lockDomainTransfer = (request: Readonly<RegistrarApiLockDomainTransferRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/lock-transfer`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -1117,13 +1159,14 @@ If you add the same contact for multiple roles (owner, administrative, technical
    * @param request - The request {@link RegistrarApiUnlockDomainTransferRequest}
    * @returns A Promise of Domain
    */
-  unlockDomainTransfer = (request: Readonly<RegistrarApiUnlockDomainTransferRequest>) =>
+  unlockDomainTransfer = (request: Readonly<RegistrarApiUnlockDomainTransferRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/unlock-transfer`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -1135,13 +1178,14 @@ If you add the same contact for multiple roles (owner, administrative, technical
    * @param request - The request {@link RegistrarApiEnableDomainAutoRenewRequest}
    * @returns A Promise of Domain
    */
-  enableDomainAutoRenew = (request: Readonly<RegistrarApiEnableDomainAutoRenewRequest>) =>
+  enableDomainAutoRenew = (request: Readonly<RegistrarApiEnableDomainAutoRenewRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/enable-auto-renew`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -1153,13 +1197,14 @@ If you add the same contact for multiple roles (owner, administrative, technical
    * @param request - The request {@link RegistrarApiDisableDomainAutoRenewRequest}
    * @returns A Promise of Domain
    */
-  disableDomainAutoRenew = (request: Readonly<RegistrarApiDisableDomainAutoRenewRequest>) =>
+  disableDomainAutoRenew = (request: Readonly<RegistrarApiDisableDomainAutoRenewRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/disable-auto-renew`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -1172,11 +1217,12 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
    * @param request - The request {@link RegistrarApiGetDomainAuthCodeRequest}
    * @returns A Promise of GetDomainAuthCodeResponse
    */
-  getDomainAuthCode = (request: Readonly<RegistrarApiGetDomainAuthCodeRequest>) =>
+  getDomainAuthCode = (request: Readonly<RegistrarApiGetDomainAuthCodeRequest>, options?: RequestOptions) =>
     this.client.fetch<GetDomainAuthCodeResponse>(
       {
         method: 'GET',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/auth-code`,
+        signal: options?.signal,
       },
       unmarshalGetDomainAuthCodeResponse,
     )
@@ -1188,7 +1234,7 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
    * @param request - The request {@link RegistrarApiEnableDomainDNSSECRequest}
    * @returns A Promise of Domain
    */
-  enableDomainDNSSEC = (request: Readonly<RegistrarApiEnableDomainDNSSECRequest>) =>
+  enableDomainDNSSEC = (request: Readonly<RegistrarApiEnableDomainDNSSECRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: JSON.stringify(
@@ -1197,6 +1243,7 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/enable-dnssec`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -1208,13 +1255,14 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
    * @param request - The request {@link RegistrarApiDisableDomainDNSSECRequest}
    * @returns A Promise of Domain
    */
-  disableDomainDNSSEC = (request: Readonly<RegistrarApiDisableDomainDNSSECRequest>) =>
+  disableDomainDNSSEC = (request: Readonly<RegistrarApiDisableDomainDNSSECRequest>, options?: RequestOptions) =>
     this.client.fetch<Domain>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/disable-dnssec`,
+        signal: options?.signal,
       },
       unmarshalDomain,
     )
@@ -1228,7 +1276,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
    * @param request - The request {@link RegistrarApiSearchAvailableDomainsRequest}
    * @returns A Promise of SearchAvailableDomainsResponse
    */
-  searchAvailableDomains = (request: Readonly<RegistrarApiSearchAvailableDomainsRequest>) =>
+  searchAvailableDomains = (request: Readonly<RegistrarApiSearchAvailableDomainsRequest>, options?: RequestOptions) =>
     this.client.fetch<SearchAvailableDomainsResponse>(
       {
         method: 'GET',
@@ -1239,12 +1287,13 @@ If the TLD list is empty or not set, the search returns the results from the mos
           ['strict_search', request.strictSearch],
           ['tlds', request.tlds],
         ),
+        signal: options?.signal,
       },
       unmarshalSearchAvailableDomainsResponse,
     )
 
   
-  protected pageOfListTlds = (request: Readonly<RegistrarApiListTldsRequest> = {}) =>
+  protected pageOfListTlds = (request: Readonly<RegistrarApiListTldsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTldsResponse>(
       {
         method: 'GET',
@@ -1255,6 +1304,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['tlds', request.tlds],
         ),
+        signal: options?.signal,
       },
       unmarshalListTldsResponse,
     )
@@ -1265,8 +1315,8 @@ If the TLD list is empty or not set, the search returns the results from the mos
    * @param request - The request {@link RegistrarApiListTldsRequest}
    * @returns A Promise of ListTldsResponse
    */
-  listTlds = (request: Readonly<RegistrarApiListTldsRequest> = {}) =>
-    enrichForPagination('tlds', this.pageOfListTlds, request)
+  listTlds = (request: Readonly<RegistrarApiListTldsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('tlds', this.pageOfListTlds, request, options)
 
   
   /**
@@ -1275,7 +1325,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
    * @param request - The request {@link RegistrarApiCreateDomainHostRequest}
    * @returns A Promise of Host
    */
-  createDomainHost = (request: Readonly<RegistrarApiCreateDomainHostRequest>) =>
+  createDomainHost = (request: Readonly<RegistrarApiCreateDomainHostRequest>, options?: RequestOptions) =>
     this.client.fetch<Host>(
       {
         body: JSON.stringify(
@@ -1284,12 +1334,13 @@ If the TLD list is empty or not set, the search returns the results from the mos
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts`,
+        signal: options?.signal,
       },
       unmarshalHost,
     )
 
   
-  protected pageOfListDomainHosts = (request: Readonly<RegistrarApiListDomainHostsRequest>) =>
+  protected pageOfListDomainHosts = (request: Readonly<RegistrarApiListDomainHostsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDomainHostsResponse>(
       {
         method: 'GET',
@@ -1298,6 +1349,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDomainHostsResponse,
     )
@@ -1308,8 +1360,8 @@ If the TLD list is empty or not set, the search returns the results from the mos
    * @param request - The request {@link RegistrarApiListDomainHostsRequest}
    * @returns A Promise of ListDomainHostsResponse
    */
-  listDomainHosts = (request: Readonly<RegistrarApiListDomainHostsRequest>) =>
-    enrichForPagination('hosts', this.pageOfListDomainHosts, request)
+  listDomainHosts = (request: Readonly<RegistrarApiListDomainHostsRequest>, options?: RequestOptions) =>
+    enrichForPagination('hosts', this.pageOfListDomainHosts, request, options)
 
   
   /**
@@ -1318,7 +1370,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
    * @param request - The request {@link RegistrarApiUpdateDomainHostRequest}
    * @returns A Promise of Host
    */
-  updateDomainHost = (request: Readonly<RegistrarApiUpdateDomainHostRequest>) =>
+  updateDomainHost = (request: Readonly<RegistrarApiUpdateDomainHostRequest>, options?: RequestOptions) =>
     this.client.fetch<Host>(
       {
         body: JSON.stringify(
@@ -1327,6 +1379,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts/${validatePathParam('name', request.name)}`,
+        signal: options?.signal,
       },
       unmarshalHost,
     )
@@ -1338,11 +1391,12 @@ If the TLD list is empty or not set, the search returns the results from the mos
    * @param request - The request {@link RegistrarApiDeleteDomainHostRequest}
    * @returns A Promise of Host
    */
-  deleteDomainHost = (request: Readonly<RegistrarApiDeleteDomainHostRequest>) =>
+  deleteDomainHost = (request: Readonly<RegistrarApiDeleteDomainHostRequest>, options?: RequestOptions) =>
     this.client.fetch<Host>(
       {
         method: 'DELETE',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts/${validatePathParam('name', request.name)}`,
+        signal: options?.signal,
       },
       unmarshalHost,
     )
@@ -1354,17 +1408,18 @@ If the TLD list is empty or not set, the search returns the results from the mos
  * Unauthenticated Domain search API.
  */
 export class UnauthenticatedRegistrarAPI extends ParentAPI {
-  getServiceInfo = () =>
+  getServiceInfo = (options?: RequestOptions) =>
     this.client.fetch<ServiceInfo>(
       {
         method: 'GET',
         path: `/domain/v2beta1/search`,
+        signal: options?.signal,
       },
       unmarshalServiceInfo,
     )
 
   
-  searchAvailableDomainsConsole = (request: Readonly<UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest>) =>
+  searchAvailableDomainsConsole = (request: Readonly<UnauthenticatedRegistrarApiSearchAvailableDomainsConsoleRequest>, options?: RequestOptions) =>
     this.client.fetch<SearchAvailableDomainsConsoleResponse>(
       {
         method: 'GET',
@@ -1374,6 +1429,7 @@ export class UnauthenticatedRegistrarAPI extends ParentAPI {
           ['strict_search', request.strictSearch],
           ['tlds', request.tlds],
         ),
+        signal: options?.signal,
       },
       unmarshalSearchAvailableDomainsConsoleResponse,
     )

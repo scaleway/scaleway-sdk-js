@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalAccessSecretVersionResponse,
   marshalAddSecretOwnerRequest,
@@ -88,7 +88,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateSecretRequest}
    * @returns A Promise of Secret
    */
-  createSecret = (request: Readonly<CreateSecretRequest>) =>
+  createSecret = (request: Readonly<CreateSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<Secret>(
       {
         body: JSON.stringify(
@@ -97,6 +97,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets`,
+        signal: options?.signal,
       },
       unmarshalSecret,
     )
@@ -108,11 +109,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetSecretRequest}
    * @returns A Promise of Secret
    */
-  getSecret = (request: Readonly<GetSecretRequest>) =>
+  getSecret = (request: Readonly<GetSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<Secret>(
       {
         method: 'GET',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+        signal: options?.signal,
       },
       unmarshalSecret,
     )
@@ -124,7 +126,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateSecretRequest}
    * @returns A Promise of Secret
    */
-  updateSecret = (request: Readonly<UpdateSecretRequest>) =>
+  updateSecret = (request: Readonly<UpdateSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<Secret>(
       {
         body: JSON.stringify(
@@ -133,6 +135,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+        signal: options?.signal,
       },
       unmarshalSecret,
     )
@@ -143,16 +146,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteSecretRequest}
    */
-  deleteSecret = (request: Readonly<DeleteSecretRequest>) =>
+  deleteSecret = (request: Readonly<DeleteSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListSecrets = (request: Readonly<ListSecretsRequest>) =>
+  protected pageOfListSecrets = (request: Readonly<ListSecretsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSecretsResponse>(
       {
         method: 'GET',
@@ -170,6 +174,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['type', request.type],
         ),
+        signal: options?.signal,
       },
       unmarshalListSecretsResponse,
     )
@@ -183,8 +188,8 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link ListSecretsRequest}
    * @returns A Promise of ListSecretsResponse
    */
-  listSecrets = (request: Readonly<ListSecretsRequest>) =>
-    enrichForPagination('secrets', this.pageOfListSecrets, request)
+  listSecrets = (request: Readonly<ListSecretsRequest>, options?: RequestOptions) =>
+    enrichForPagination('secrets', this.pageOfListSecrets, request, options)
 
   
   /**
@@ -193,7 +198,7 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link BrowseSecretsRequest}
    * @returns A Promise of BrowseSecretsResponse
    */
-  browseSecrets = (request: Readonly<BrowseSecretsRequest>) =>
+  browseSecrets = (request: Readonly<BrowseSecretsRequest>, options?: RequestOptions) =>
     this.client.fetch<BrowseSecretsResponse>(
       {
         method: 'GET',
@@ -207,6 +212,7 @@ The `region` parameter in path is needed in both case.
           ['tags', request.tags],
           ['type', request.type],
         ),
+        signal: options?.signal,
       },
       unmarshalBrowseSecretsResponse,
     )
@@ -218,13 +224,14 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link ProtectSecretRequest}
    * @returns A Promise of Secret
    */
-  protectSecret = (request: Readonly<ProtectSecretRequest>) =>
+  protectSecret = (request: Readonly<ProtectSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<Secret>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/protect`,
+        signal: options?.signal,
       },
       unmarshalSecret,
     )
@@ -236,13 +243,14 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link UnprotectSecretRequest}
    * @returns A Promise of Secret
    */
-  unprotectSecret = (request: Readonly<UnprotectSecretRequest>) =>
+  unprotectSecret = (request: Readonly<UnprotectSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<Secret>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/unprotect`,
+        signal: options?.signal,
       },
       unmarshalSecret,
     )
@@ -253,7 +261,7 @@ The `region` parameter in path is needed in both case.
    *
    * @param request - The request {@link AddSecretOwnerRequest}
    */
-  addSecretOwner = (request: Readonly<AddSecretOwnerRequest>) =>
+  addSecretOwner = (request: Readonly<AddSecretOwnerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -262,6 +270,7 @@ The `region` parameter in path is needed in both case.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
+        signal: options?.signal,
       },
     )
 
@@ -272,7 +281,7 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link CreateSecretVersionRequest}
    * @returns A Promise of SecretVersion
    */
-  createSecretVersion = (request: Readonly<CreateSecretVersionRequest>) =>
+  createSecretVersion = (request: Readonly<CreateSecretVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<SecretVersion>(
       {
         body: JSON.stringify(
@@ -281,6 +290,7 @@ The `region` parameter in path is needed in both case.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions`,
+        signal: options?.signal,
       },
       unmarshalSecretVersion,
     )
@@ -292,11 +302,12 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link GetSecretVersionRequest}
    * @returns A Promise of SecretVersion
    */
-  getSecretVersion = (request: Readonly<GetSecretVersionRequest>) =>
+  getSecretVersion = (request: Readonly<GetSecretVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<SecretVersion>(
       {
         method: 'GET',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}`,
+        signal: options?.signal,
       },
       unmarshalSecretVersion,
     )
@@ -308,7 +319,7 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link UpdateSecretVersionRequest}
    * @returns A Promise of SecretVersion
    */
-  updateSecretVersion = (request: Readonly<UpdateSecretVersionRequest>) =>
+  updateSecretVersion = (request: Readonly<UpdateSecretVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<SecretVersion>(
       {
         body: JSON.stringify(
@@ -317,6 +328,7 @@ The `region` parameter in path is needed in both case.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}`,
+        signal: options?.signal,
       },
       unmarshalSecretVersion,
     )
@@ -327,16 +339,17 @@ The `region` parameter in path is needed in both case.
    *
    * @param request - The request {@link DeleteSecretVersionRequest}
    */
-  deleteSecretVersion = (request: Readonly<DeleteSecretVersionRequest>) =>
+  deleteSecretVersion = (request: Readonly<DeleteSecretVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListSecretVersions = (request: Readonly<ListSecretVersionsRequest>) =>
+  protected pageOfListSecretVersions = (request: Readonly<ListSecretVersionsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSecretVersionsResponse>(
       {
         method: 'GET',
@@ -346,6 +359,7 @@ The `region` parameter in path is needed in both case.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListSecretVersionsResponse,
     )
@@ -356,8 +370,8 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link ListSecretVersionsRequest}
    * @returns A Promise of ListSecretVersionsResponse
    */
-  listSecretVersions = (request: Readonly<ListSecretVersionsRequest>) =>
-    enrichForPagination('versions', this.pageOfListSecretVersions, request)
+  listSecretVersions = (request: Readonly<ListSecretVersionsRequest>, options?: RequestOptions) =>
+    enrichForPagination('versions', this.pageOfListSecretVersions, request, options)
 
   
   /**
@@ -366,11 +380,12 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link AccessSecretVersionRequest}
    * @returns A Promise of AccessSecretVersionResponse
    */
-  accessSecretVersion = (request: Readonly<AccessSecretVersionRequest>) =>
+  accessSecretVersion = (request: Readonly<AccessSecretVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<AccessSecretVersionResponse>(
       {
         method: 'GET',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/access`,
+        signal: options?.signal,
       },
       unmarshalAccessSecretVersionResponse,
     )
@@ -382,7 +397,7 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link AccessSecretVersionByPathRequest}
    * @returns A Promise of AccessSecretVersionResponse
    */
-  accessSecretVersionByPath = (request: Readonly<AccessSecretVersionByPathRequest>) =>
+  accessSecretVersionByPath = (request: Readonly<AccessSecretVersionByPathRequest>, options?: RequestOptions) =>
     this.client.fetch<AccessSecretVersionResponse>(
       {
         method: 'GET',
@@ -392,6 +407,7 @@ The `region` parameter in path is needed in both case.
           ['secret_name', request.secretName],
           ['secret_path', request.secretPath],
         ),
+        signal: options?.signal,
       },
       unmarshalAccessSecretVersionResponse,
     )
@@ -403,13 +419,14 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link EnableSecretVersionRequest}
    * @returns A Promise of SecretVersion
    */
-  enableSecretVersion = (request: Readonly<EnableSecretVersionRequest>) =>
+  enableSecretVersion = (request: Readonly<EnableSecretVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<SecretVersion>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/enable`,
+        signal: options?.signal,
       },
       unmarshalSecretVersion,
     )
@@ -421,19 +438,20 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link DisableSecretVersionRequest}
    * @returns A Promise of SecretVersion
    */
-  disableSecretVersion = (request: Readonly<DisableSecretVersionRequest>) =>
+  disableSecretVersion = (request: Readonly<DisableSecretVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<SecretVersion>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/disable`,
+        signal: options?.signal,
       },
       unmarshalSecretVersion,
     )
 
   
-  protected pageOfListTags = (request: Readonly<ListTagsRequest> = {}) =>
+  protected pageOfListTags = (request: Readonly<ListTagsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTagsResponse>(
       {
         method: 'GET',
@@ -443,6 +461,7 @@ The `region` parameter in path is needed in both case.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListTagsResponse,
     )
@@ -453,11 +472,11 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link ListTagsRequest}
    * @returns A Promise of ListTagsResponse
    */
-  listTags = (request: Readonly<ListTagsRequest> = {}) =>
-    enrichForPagination('tags', this.pageOfListTags, request)
+  listTags = (request: Readonly<ListTagsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('tags', this.pageOfListTags, request, options)
 
   
-  protected pageOfListSecretTypes = (request: Readonly<ListSecretTypesRequest> = {}) =>
+  protected pageOfListSecretTypes = (request: Readonly<ListSecretTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSecretTypesResponse>(
       {
         method: 'GET',
@@ -467,6 +486,7 @@ The `region` parameter in path is needed in both case.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSecretTypesResponse,
     )
@@ -477,8 +497,8 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link ListSecretTypesRequest}
    * @returns A Promise of ListSecretTypesResponse
    */
-  listSecretTypes = (request: Readonly<ListSecretTypesRequest> = {}) =>
-    enrichForPagination('types', this.pageOfListSecretTypes, request)
+  listSecretTypes = (request: Readonly<ListSecretTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('types', this.pageOfListSecretTypes, request, options)
 
   
   /**
@@ -487,13 +507,14 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link RestoreSecretVersionRequest}
    * @returns A Promise of SecretVersion
    */
-  restoreSecretVersion = (request: Readonly<RestoreSecretVersionRequest>) =>
+  restoreSecretVersion = (request: Readonly<RestoreSecretVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<SecretVersion>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/restore`,
+        signal: options?.signal,
       },
       unmarshalSecretVersion,
     )
@@ -505,13 +526,14 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link RestoreSecretRequest}
    * @returns A Promise of Secret
    */
-  restoreSecret = (request: Readonly<RestoreSecretRequest>) =>
+  restoreSecret = (request: Readonly<RestoreSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<Secret>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/restore`,
+        signal: options?.signal,
       },
       unmarshalSecret,
     )

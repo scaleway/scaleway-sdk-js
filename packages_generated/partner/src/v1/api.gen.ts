@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   marshalCreateOrganizationRequest,
   unmarshalListOrganizationsResponse,
@@ -45,7 +45,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link RequestAdminRoleRequest}
    */
-  requestAdminRole = (request: Readonly<RequestAdminRoleRequest>) =>
+  requestAdminRole = (request: Readonly<RequestAdminRoleRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -54,6 +54,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/request-admin-role`,
+        signal: options?.signal,
       },
     )
 
@@ -64,7 +65,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateOrganizationRequest}
    * @returns A Promise of Organization
    */
-  createOrganization = (request: Readonly<CreateOrganizationRequest>) =>
+  createOrganization = (request: Readonly<CreateOrganizationRequest>, options?: RequestOptions) =>
     this.client.fetch<Organization>(
       {
         body: JSON.stringify(
@@ -73,6 +74,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/partner/v1/organizations`,
+        signal: options?.signal,
       },
       unmarshalOrganization,
     )
@@ -84,17 +86,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetOrganizationRequest}
    * @returns A Promise of Organization
    */
-  getOrganization = (request: Readonly<GetOrganizationRequest> = {}) =>
+  getOrganization = (request: Readonly<GetOrganizationRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Organization>(
       {
         method: 'GET',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}`,
+        signal: options?.signal,
       },
       unmarshalOrganization,
     )
 
   
-  protected pageOfListOrganizations = (request: Readonly<ListOrganizationsRequest> = {}) =>
+  protected pageOfListOrganizations = (request: Readonly<ListOrganizationsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOrganizationsResponse>(
       {
         method: 'GET',
@@ -108,6 +111,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListOrganizationsResponse,
     )
@@ -118,8 +122,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListOrganizationsRequest}
    * @returns A Promise of ListOrganizationsResponse
    */
-  listOrganizations = (request: Readonly<ListOrganizationsRequest> = {}) =>
-    enrichForPagination('organizations', this.pageOfListOrganizations, request)
+  listOrganizations = (request: Readonly<ListOrganizationsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('organizations', this.pageOfListOrganizations, request, options)
 
   
   /**
@@ -128,13 +132,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link LockOrganizationRequest}
    * @returns A Promise of Organization
    */
-  lockOrganization = (request: Readonly<LockOrganizationRequest> = {}) =>
+  lockOrganization = (request: Readonly<LockOrganizationRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Organization>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/lock`,
+        signal: options?.signal,
       },
       unmarshalOrganization,
     )
@@ -146,13 +151,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link UnlockOrganizationRequest}
    * @returns A Promise of Organization
    */
-  unlockOrganization = (request: Readonly<UnlockOrganizationRequest> = {}) =>
+  unlockOrganization = (request: Readonly<UnlockOrganizationRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Organization>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/unlock`,
+        signal: options?.signal,
       },
       unmarshalOrganization,
     )
@@ -164,7 +170,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateOrganizationRequest}
    * @returns A Promise of Organization
    */
-  updateOrganization = (request: Readonly<UpdateOrganizationRequest> = {}) =>
+  updateOrganization = (request: Readonly<UpdateOrganizationRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Organization>(
       {
         body: JSON.stringify(
@@ -173,6 +179,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}`,
+        signal: options?.signal,
       },
       unmarshalOrganization,
     )

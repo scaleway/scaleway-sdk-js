@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {ALERT_RULE_TRANSIENT_STATUSES as ALERT_RULE_TRANSIENT_STATUSES_AUDIT_TRAIL,CUSTOM_ALERT_RULE_TRANSIENT_STATUSES as CUSTOM_ALERT_RULE_TRANSIENT_STATUSES_AUDIT_TRAIL,RUN_TRANSIENT_STATUSES as RUN_TRANSIENT_STATUSES_AUDIT_TRAIL,} from './content.gen.js'
 import {
   marshalCreateCustomAlertRuleRequest,
@@ -115,7 +115,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListEventsRequest}
    * @returns A Promise of ListEventsResponse
    */
-  listEvents = (request: Readonly<ListEventsRequest> = {}) =>
+  listEvents = (request: Readonly<ListEventsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListEventsResponse>(
       {
         method: 'GET',
@@ -137,6 +137,7 @@ export class API extends ParentAPI {
           ['source_ip', request.sourceIp],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListEventsResponse,
     )
@@ -148,7 +149,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListAuthenticationEventsRequest}
    * @returns A Promise of ListAuthenticationEventsResponse
    */
-  listAuthenticationEvents = (request: Readonly<ListAuthenticationEventsRequest> = {}) =>
+  listAuthenticationEvents = (request: Readonly<ListAuthenticationEventsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAuthenticationEventsResponse>(
       {
         method: 'GET',
@@ -161,6 +162,7 @@ export class API extends ParentAPI {
           ['recorded_after', request.recordedAfter],
           ['recorded_before', request.recordedBefore],
         ),
+        signal: options?.signal,
       },
       unmarshalListAuthenticationEventsResponse,
     )
@@ -172,7 +174,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSystemEventsRequest}
    * @returns A Promise of ListSystemEventsResponse
    */
-  listSystemEvents = (request: Readonly<ListSystemEventsRequest> = {}) =>
+  listSystemEvents = (request: Readonly<ListSystemEventsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSystemEventsResponse>(
       {
         method: 'GET',
@@ -185,12 +187,13 @@ export class API extends ParentAPI {
           ['recorded_after', request.recordedAfter],
           ['recorded_before', request.recordedBefore],
         ),
+        signal: options?.signal,
       },
       unmarshalListSystemEventsResponse,
     )
 
   
-  listCombinedEvents = (request: Readonly<ListCombinedEventsRequest> = {}) =>
+  listCombinedEvents = (request: Readonly<ListCombinedEventsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListCombinedEventsResponse>(
       {
         method: 'GET',
@@ -205,6 +208,7 @@ export class API extends ParentAPI {
           ['recorded_before', request.recordedBefore],
           ['resource_type', request.resourceType],
         ),
+        signal: options?.signal,
       },
       unmarshalListCombinedEventsResponse,
     )
@@ -216,7 +220,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListProductsRequest}
    * @returns A Promise of ListProductsResponse
    */
-  listProducts = (request: Readonly<ListProductsRequest> = {}) =>
+  listProducts = (request: Readonly<ListProductsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListProductsResponse>(
       {
         method: 'GET',
@@ -224,12 +228,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
         ),
+        signal: options?.signal,
       },
       unmarshalListProductsResponse,
     )
 
   
-  getLastEventsOverview = (request: Readonly<GetLastEventsOverviewRequest> = {}) =>
+  getLastEventsOverview = (request: Readonly<GetLastEventsOverviewRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<EventsOverview>(
       {
         method: 'GET',
@@ -238,6 +243,7 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalEventsOverview,
     )
@@ -249,7 +255,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateExportJobRequest}
    * @returns A Promise of ExportJob
    */
-  createExportJob = (request: Readonly<CreateExportJobRequest>) =>
+  createExportJob = (request: Readonly<CreateExportJobRequest>, options?: RequestOptions) =>
     this.client.fetch<ExportJob>(
       {
         body: JSON.stringify(
@@ -258,6 +264,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs`,
+        signal: options?.signal,
       },
       unmarshalExportJob,
     )
@@ -268,16 +275,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteExportJobRequest}
    */
-  deleteExportJob = (request: Readonly<DeleteExportJobRequest>) =>
+  deleteExportJob = (request: Readonly<DeleteExportJobRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs/${validatePathParam('exportJobId', request.exportJobId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListExportJobs = (request: Readonly<ListExportJobsRequest> = {}) =>
+  protected pageOfListExportJobs = (request: Readonly<ListExportJobsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListExportJobsResponse>(
       {
         method: 'GET',
@@ -290,15 +298,16 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListExportJobsResponse,
     )
   
-  listExportJobs = (request: Readonly<ListExportJobsRequest> = {}) =>
-    enrichForPagination('exportJobs', this.pageOfListExportJobs, request)
+  listExportJobs = (request: Readonly<ListExportJobsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('exportJobs', this.pageOfListExportJobs, request, options)
 
   
-  protected pageOfListAlertRules = (request: Readonly<ListAlertRulesRequest> = {}) =>
+  protected pageOfListAlertRules = (request: Readonly<ListAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAlertRulesResponse>(
       {
         method: 'GET',
@@ -309,6 +318,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListAlertRulesResponse,
     )
@@ -319,11 +329,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListAlertRulesRequest}
    * @returns A Promise of ListAlertRulesResponse
    */
-  listAlertRules = (request: Readonly<ListAlertRulesRequest> = {}) =>
-    enrichForPagination('alertRules', this.pageOfListAlertRules, request)
+  listAlertRules = (request: Readonly<ListAlertRulesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('alertRules', this.pageOfListAlertRules, request, options)
 
   
-  protected pageOfListCustomAlertRules = (request: Readonly<ListCustomAlertRulesRequest> = {}) =>
+  protected pageOfListCustomAlertRules = (request: Readonly<ListCustomAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListCustomAlertRulesResponse>(
       {
         method: 'GET',
@@ -334,6 +344,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListCustomAlertRulesResponse,
     )
@@ -344,8 +355,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListCustomAlertRulesRequest}
    * @returns A Promise of ListCustomAlertRulesResponse
    */
-  listCustomAlertRules = (request: Readonly<ListCustomAlertRulesRequest> = {}) =>
-    enrichForPagination('customAlertRules', this.pageOfListCustomAlertRules, request)
+  listCustomAlertRules = (request: Readonly<ListCustomAlertRulesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('customAlertRules', this.pageOfListCustomAlertRules, request, options)
 
   
   /**
@@ -354,7 +365,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableAlertRulesRequest}
    * @returns A Promise of EnableAlertRulesResponse
    */
-  enableAlertRules = (request: Readonly<EnableAlertRulesRequest> = {}) =>
+  enableAlertRules = (request: Readonly<EnableAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<EnableAlertRulesResponse>(
       {
         body: JSON.stringify(
@@ -363,6 +374,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/enable-alert-rules`,
+        signal: options?.signal,
       },
       unmarshalEnableAlertRulesResponse,
     )
@@ -374,7 +386,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableCustomAlertRulesRequest}
    * @returns A Promise of EnableCustomAlertRulesResponse
    */
-  enableCustomAlertRules = (request: Readonly<EnableCustomAlertRulesRequest> = {}) =>
+  enableCustomAlertRules = (request: Readonly<EnableCustomAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<EnableCustomAlertRulesResponse>(
       {
         body: JSON.stringify(
@@ -383,6 +395,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/enable-custom-alert-rules`,
+        signal: options?.signal,
       },
       unmarshalEnableCustomAlertRulesResponse,
     )
@@ -394,7 +407,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DisableAlertRulesRequest}
    * @returns A Promise of DisableAlertRulesResponse
    */
-  disableAlertRules = (request: Readonly<DisableAlertRulesRequest> = {}) =>
+  disableAlertRules = (request: Readonly<DisableAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<DisableAlertRulesResponse>(
       {
         body: JSON.stringify(
@@ -403,6 +416,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/disable-alert-rules`,
+        signal: options?.signal,
       },
       unmarshalDisableAlertRulesResponse,
     )
@@ -414,7 +428,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DisableCustomAlertRulesRequest}
    * @returns A Promise of DisableCustomAlertRulesResponse
    */
-  disableCustomAlertRules = (request: Readonly<DisableCustomAlertRulesRequest> = {}) =>
+  disableCustomAlertRules = (request: Readonly<DisableCustomAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<DisableCustomAlertRulesResponse>(
       {
         body: JSON.stringify(
@@ -423,6 +437,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/disable-custom-alert-rules`,
+        signal: options?.signal,
       },
       unmarshalDisableCustomAlertRulesResponse,
     )
@@ -434,7 +449,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetEnabledAlertRulesRequest}
    * @returns A Promise of SetEnabledAlertRulesResponse
    */
-  setEnabledAlertRules = (request: Readonly<SetEnabledAlertRulesRequest> = {}) =>
+  setEnabledAlertRules = (request: Readonly<SetEnabledAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SetEnabledAlertRulesResponse>(
       {
         body: JSON.stringify(
@@ -443,6 +458,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-rules`,
+        signal: options?.signal,
       },
       unmarshalSetEnabledAlertRulesResponse,
     )
@@ -454,7 +470,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetEnabledCustomAlertRulesRequest}
    * @returns A Promise of SetEnabledCustomAlertRulesResponse
    */
-  setEnabledCustomAlertRules = (request: Readonly<SetEnabledCustomAlertRulesRequest> = {}) =>
+  setEnabledCustomAlertRules = (request: Readonly<SetEnabledCustomAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<SetEnabledCustomAlertRulesResponse>(
       {
         body: JSON.stringify(
@@ -463,6 +479,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules`,
+        signal: options?.signal,
       },
       unmarshalSetEnabledCustomAlertRulesResponse,
     )
@@ -474,7 +491,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateCustomAlertRuleRequest}
    * @returns A Promise of CustomAlertRule
    */
-  createCustomAlertRule = (request: Readonly<CreateCustomAlertRuleRequest>) =>
+  createCustomAlertRule = (request: Readonly<CreateCustomAlertRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<CustomAlertRule>(
       {
         body: JSON.stringify(
@@ -483,6 +500,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules`,
+        signal: options?.signal,
       },
       unmarshalCustomAlertRule,
     )
@@ -494,7 +512,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateCustomAlertRuleRequest}
    * @returns A Promise of CustomAlertRule
    */
-  updateCustomAlertRule = (request: Readonly<UpdateCustomAlertRuleRequest>) =>
+  updateCustomAlertRule = (request: Readonly<UpdateCustomAlertRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<CustomAlertRule>(
       {
         body: JSON.stringify(
@@ -503,6 +521,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules/${validatePathParam('customAlertRuleId', request.customAlertRuleId)}`,
+        signal: options?.signal,
       },
       unmarshalCustomAlertRule,
     )
@@ -513,11 +532,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteCustomAlertRuleRequest}
    */
-  deleteCustomAlertRule = (request: Readonly<DeleteCustomAlertRuleRequest>) =>
+  deleteCustomAlertRule = (request: Readonly<DeleteCustomAlertRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules/${validatePathParam('customAlertRuleId', request.customAlertRuleId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -528,7 +548,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link TestCustomAlertRuleRequest}
    * @returns A Promise of TestCustomAlertRuleResponse
    */
-  testCustomAlertRule = (request: Readonly<TestCustomAlertRuleRequest>) =>
+  testCustomAlertRule = (request: Readonly<TestCustomAlertRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<TestCustomAlertRuleResponse>(
       {
         body: JSON.stringify(
@@ -537,6 +557,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/test-custom-alert-rule`,
+        signal: options?.signal,
       },
       unmarshalTestCustomAlertRuleResponse,
     )
@@ -548,7 +569,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RetrieveAvailableFieldsForCustomAlertRulesRequest}
    * @returns A Promise of RetrieveAvailableFieldsForCustomAlertRulesResponse
    */
-  retrieveAvailableFieldsForCustomAlertRules = (request: Readonly<RetrieveAvailableFieldsForCustomAlertRulesRequest> = {}) =>
+  retrieveAvailableFieldsForCustomAlertRules = (request: Readonly<RetrieveAvailableFieldsForCustomAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<RetrieveAvailableFieldsForCustomAlertRulesResponse>(
       {
         method: 'GET',
@@ -556,6 +577,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
         ),
+        signal: options?.signal,
       },
       unmarshalRetrieveAvailableFieldsForCustomAlertRulesResponse,
     )

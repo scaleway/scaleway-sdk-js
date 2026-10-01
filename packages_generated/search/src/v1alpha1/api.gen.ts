@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalSearchResourcesResponse,
 } from './marshalling.gen.js'
@@ -29,7 +29,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SearchResourcesRequest}
    * @returns A Promise of SearchResourcesResponse
    */
-  searchResources = (request: Readonly<SearchResourcesRequest>) =>
+  searchResources = (request: Readonly<SearchResourcesRequest>, options?: RequestOptions) =>
     this.client.fetch<SearchResourcesResponse>(
       {
         method: 'GET',
@@ -48,6 +48,7 @@ export class API extends ParentAPI {
           ['query', request.query],
           ['types', request.types],
         ),
+        signal: options?.signal,
       },
       unmarshalSearchResourcesResponse,
     )

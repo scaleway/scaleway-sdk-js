@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_SEARCHDB,} from './content.gen.js'
 import {
   marshalCreateDeploymentRequest,
@@ -79,7 +79,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  createDeployment = (request: Readonly<CreateDeploymentRequest>) =>
+  createDeployment = (request: Readonly<CreateDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         body: JSON.stringify(
@@ -88,6 +88,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
@@ -99,7 +100,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  updateDeployment = (request: Readonly<UpdateDeploymentRequest>) =>
+  updateDeployment = (request: Readonly<UpdateDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         body: JSON.stringify(
@@ -108,6 +109,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
@@ -119,7 +121,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpgradeDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  upgradeDeployment = (request: Readonly<UpgradeDeploymentRequest>) =>
+  upgradeDeployment = (request: Readonly<UpgradeDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         body: JSON.stringify(
@@ -128,6 +130,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/upgrade`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
@@ -139,11 +142,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  getDeployment = (request: Readonly<GetDeploymentRequest>) =>
+  getDeployment = (request: Readonly<GetDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         method: 'GET',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
@@ -173,17 +177,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  deleteDeployment = (request: Readonly<DeleteDeploymentRequest>) =>
+  deleteDeployment = (request: Readonly<DeleteDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         method: 'DELETE',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
 
   
-  protected pageOfListDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
+  protected pageOfListDeployments = (request: Readonly<ListDeploymentsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDeploymentsResponse>(
       {
         method: 'GET',
@@ -197,6 +202,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListDeploymentsResponse,
     )
@@ -207,11 +213,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDeploymentsRequest}
    * @returns A Promise of ListDeploymentsResponse
    */
-  listDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
-    enrichForPagination('deployments', this.pageOfListDeployments, request)
+  listDeployments = (request: Readonly<ListDeploymentsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('deployments', this.pageOfListDeployments, request, options)
 
   
-  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}) =>
+  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
@@ -222,6 +228,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['version', request.version],
         ),
+        signal: options?.signal,
       },
       unmarshalListVersionsResponse,
     )
@@ -232,11 +239,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
    */
-  listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
-    enrichForPagination('versions', this.pageOfListVersions, request)
+  listVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('versions', this.pageOfListVersions, request, options)
 
   
-  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -246,6 +253,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListNodeTypesResponse,
     )
@@ -256,8 +264,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
    */
-  listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
-    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
+  listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request, options)
 
   
   /**
@@ -266,7 +274,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  createEndpoint = (request: Readonly<CreateEndpointRequest>) =>
+  createEndpoint = (request: Readonly<CreateEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         body: JSON.stringify(
@@ -275,6 +283,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
@@ -285,16 +294,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
-  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
+  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListUsers = (request: Readonly<ListUsersRequest>) =>
+  protected pageOfListUsers = (request: Readonly<ListUsersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListUsersResponse>(
       {
         method: 'GET',
@@ -305,6 +315,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListUsersResponse,
     )
@@ -315,8 +326,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
    */
-  listUsers = (request: Readonly<ListUsersRequest>) =>
-    enrichForPagination('users', this.pageOfListUsers, request)
+  listUsers = (request: Readonly<ListUsersRequest>, options?: RequestOptions) =>
+    enrichForPagination('users', this.pageOfListUsers, request, options)
 
   
   /**
@@ -325,7 +336,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateUserRequest}
    * @returns A Promise of User
    */
-  createUser = (request: Readonly<CreateUserRequest>) =>
+  createUser = (request: Readonly<CreateUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -334,6 +345,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -345,7 +357,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateUserRequest}
    * @returns A Promise of User
    */
-  updateUser = (request: Readonly<UpdateUserRequest>) =>
+  updateUser = (request: Readonly<UpdateUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -354,6 +366,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -364,16 +377,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteUserRequest}
    */
-  deleteUser = (request: Readonly<DeleteUserRequest>) =>
+  deleteUser = (request: Readonly<DeleteUserRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/searchdb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
+        signal: options?.signal,
       },
     )
 
   
-  downloadDeploymentCertificateAuthority = (request: Readonly<DownloadDeploymentCertificateAuthorityRequest>) =>
+  downloadDeploymentCertificateAuthority = (request: Readonly<DownloadDeploymentCertificateAuthorityRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -382,6 +396,7 @@ export class API extends ParentAPI {
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 

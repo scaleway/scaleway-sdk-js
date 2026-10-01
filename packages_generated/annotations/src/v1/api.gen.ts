@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalBinding,
   marshalCreateBindingRequest,
@@ -72,7 +72,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateKeyRequest}
    * @returns A Promise of Key
    */
-  createKey = (request: Readonly<CreateKeyRequest>) =>
+  createKey = (request: Readonly<CreateKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: JSON.stringify(
@@ -81,12 +81,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/annotations/v1/keys`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
 
   
-  protected pageOfListKeys = (request: Readonly<ListKeysRequest> = {}) =>
+  protected pageOfListKeys = (request: Readonly<ListKeysRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListKeysResponse>(
       {
         method: 'GET',
@@ -96,6 +97,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListKeysResponse,
     )
@@ -106,8 +108,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListKeysRequest}
    * @returns A Promise of ListKeysResponse
    */
-  listKeys = (request: Readonly<ListKeysRequest> = {}) =>
-    enrichForPagination('keys', this.pageOfListKeys, request)
+  listKeys = (request: Readonly<ListKeysRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('keys', this.pageOfListKeys, request, options)
 
   
   /**
@@ -116,11 +118,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetKeyRequest}
    * @returns A Promise of Key
    */
-  getKey = (request: Readonly<GetKeyRequest>) =>
+  getKey = (request: Readonly<GetKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         method: 'GET',
         path: `/annotations/v1/keys/${validatePathParam('keyId', request.keyId)}`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -132,7 +135,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateKeyRequest}
    * @returns A Promise of Key
    */
-  updateKey = (request: Readonly<UpdateKeyRequest>) =>
+  updateKey = (request: Readonly<UpdateKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: JSON.stringify(
@@ -141,6 +144,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/annotations/v1/keys/${validatePathParam('keyId', request.keyId)}`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -151,11 +155,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteKeyRequest}
    */
-  deleteKey = (request: Readonly<DeleteKeyRequest>) =>
+  deleteKey = (request: Readonly<DeleteKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/annotations/v1/keys/${validatePathParam('keyId', request.keyId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -166,7 +171,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateValueRequest}
    * @returns A Promise of Value
    */
-  createValue = (request: Readonly<CreateValueRequest>) =>
+  createValue = (request: Readonly<CreateValueRequest>, options?: RequestOptions) =>
     this.client.fetch<Value>(
       {
         body: JSON.stringify(
@@ -175,12 +180,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/annotations/v1/values`,
+        signal: options?.signal,
       },
       unmarshalValue,
     )
 
   
-  protected pageOfListValues = (request: Readonly<ListValuesRequest> = {}) =>
+  protected pageOfListValues = (request: Readonly<ListValuesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListValuesResponse>(
       {
         method: 'GET',
@@ -191,6 +197,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListValuesResponse,
     )
@@ -201,8 +208,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListValuesRequest}
    * @returns A Promise of ListValuesResponse
    */
-  listValues = (request: Readonly<ListValuesRequest> = {}) =>
-    enrichForPagination('values', this.pageOfListValues, request)
+  listValues = (request: Readonly<ListValuesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('values', this.pageOfListValues, request, options)
 
   
   /**
@@ -211,11 +218,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetValueRequest}
    * @returns A Promise of Value
    */
-  getValue = (request: Readonly<GetValueRequest>) =>
+  getValue = (request: Readonly<GetValueRequest>, options?: RequestOptions) =>
     this.client.fetch<Value>(
       {
         method: 'GET',
         path: `/annotations/v1/values/${validatePathParam('valueId', request.valueId)}`,
+        signal: options?.signal,
       },
       unmarshalValue,
     )
@@ -227,7 +235,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateValueRequest}
    * @returns A Promise of Value
    */
-  updateValue = (request: Readonly<UpdateValueRequest>) =>
+  updateValue = (request: Readonly<UpdateValueRequest>, options?: RequestOptions) =>
     this.client.fetch<Value>(
       {
         body: JSON.stringify(
@@ -236,6 +244,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/annotations/v1/values/${validatePathParam('valueId', request.valueId)}`,
+        signal: options?.signal,
       },
       unmarshalValue,
     )
@@ -246,11 +255,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteValueRequest}
    */
-  deleteValue = (request: Readonly<DeleteValueRequest>) =>
+  deleteValue = (request: Readonly<DeleteValueRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/annotations/v1/values/${validatePathParam('valueId', request.valueId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -261,7 +271,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteAllValuesMatchingKeyRequest}
    * @returns A Promise of DeleteAllValuesMatchingKeyResponse
    */
-  deleteAllValuesMatchingKey = (request: Readonly<DeleteAllValuesMatchingKeyRequest>) =>
+  deleteAllValuesMatchingKey = (request: Readonly<DeleteAllValuesMatchingKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<DeleteAllValuesMatchingKeyResponse>(
       {
         method: 'DELETE',
@@ -269,6 +279,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['key_id', request.keyId],
         ),
+        signal: options?.signal,
       },
       unmarshalDeleteAllValuesMatchingKeyResponse,
     )
@@ -280,7 +291,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListAllKeysAndValuesRequest}
    * @returns A Promise of ListAllKeysAndValuesResponse
    */
-  listAllKeysAndValues = (request: Readonly<ListAllKeysAndValuesRequest> = {}) =>
+  listAllKeysAndValues = (request: Readonly<ListAllKeysAndValuesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAllKeysAndValuesResponse>(
       {
         method: 'GET',
@@ -288,6 +299,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
         ),
+        signal: options?.signal,
       },
       unmarshalListAllKeysAndValuesResponse,
     )
@@ -299,7 +311,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateBindingRequest}
    * @returns A Promise of Binding
    */
-  createBinding = (request: Readonly<CreateBindingRequest>) =>
+  createBinding = (request: Readonly<CreateBindingRequest>, options?: RequestOptions) =>
     this.client.fetch<Binding>(
       {
         body: JSON.stringify(
@@ -308,12 +320,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/annotations/v1/bindings`,
+        signal: options?.signal,
       },
       unmarshalBinding,
     )
 
   
-  protected pageOfListBindings = (request: Readonly<ListBindingsRequest> = {}) =>
+  protected pageOfListBindings = (request: Readonly<ListBindingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListBindingsResponse>(
       {
         method: 'GET',
@@ -322,9 +335,10 @@ export class API extends ParentAPI {
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
-          ['srn', request.srn],
+          ['target_srn', request.targetSrn],
           ['value_id', request.valueId],
         ),
+        signal: options?.signal,
       },
       unmarshalListBindingsResponse,
     )
@@ -335,8 +349,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListBindingsRequest}
    * @returns A Promise of ListBindingsResponse
    */
-  listBindings = (request: Readonly<ListBindingsRequest> = {}) =>
-    enrichForPagination('bindings', this.pageOfListBindings, request)
+  listBindings = (request: Readonly<ListBindingsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('bindings', this.pageOfListBindings, request, options)
 
   
   /**
@@ -344,11 +358,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteBindingRequest}
    */
-  deleteBinding = (request: Readonly<DeleteBindingRequest>) =>
+  deleteBinding = (request: Readonly<DeleteBindingRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/annotations/v1/bindings/${validatePathParam('bindingId', request.bindingId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -359,7 +374,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteAllBindingsMatchingValueRequest}
    * @returns A Promise of DeleteAllBindingsMatchingValueResponse
    */
-  deleteAllBindingsMatchingValue = (request: Readonly<DeleteAllBindingsMatchingValueRequest>) =>
+  deleteAllBindingsMatchingValue = (request: Readonly<DeleteAllBindingsMatchingValueRequest>, options?: RequestOptions) =>
     this.client.fetch<DeleteAllBindingsMatchingValueResponse>(
       {
         method: 'DELETE',
@@ -367,6 +382,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['value_id', request.valueId],
         ),
+        signal: options?.signal,
       },
       unmarshalDeleteAllBindingsMatchingValueResponse,
     )
@@ -378,15 +394,16 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteAllBindingsMatchingSRNRequest}
    * @returns A Promise of DeleteAllBindingsMatchingSRNResponse
    */
-  deleteAllBindingsMatchingSRN = (request: Readonly<DeleteAllBindingsMatchingSRNRequest>) =>
+  deleteAllBindingsMatchingSRN = (request: Readonly<DeleteAllBindingsMatchingSRNRequest>, options?: RequestOptions) =>
     this.client.fetch<DeleteAllBindingsMatchingSRNResponse>(
       {
         method: 'DELETE',
         path: `/annotations/v1/bindings/delete-all-matching-srn`,
         urlParams: urlParams(
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
-          ['srn', request.srn],
+          ['target_srn', request.targetSrn],
         ),
+        signal: options?.signal,
       },
       unmarshalDeleteAllBindingsMatchingSRNResponse,
     )

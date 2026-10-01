@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {VPN_GATEWAY_TRANSIENT_STATUSES as VPN_GATEWAY_TRANSIENT_STATUSES_S2S_VPN,} from './content.gen.js'
 import {
   marshalChangeConnectionPskRequest,
@@ -104,7 +104,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListVpnGatewayTypes = (request: Readonly<ListVpnGatewayTypesRequest> = {}) =>
+  protected pageOfListVpnGatewayTypes = (request: Readonly<ListVpnGatewayTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVpnGatewayTypesResponse>(
       {
         method: 'GET',
@@ -113,6 +113,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListVpnGatewayTypesResponse,
     )
@@ -123,11 +124,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVpnGatewayTypesRequest}
    * @returns A Promise of ListVpnGatewayTypesResponse
    */
-  listVpnGatewayTypes = (request: Readonly<ListVpnGatewayTypesRequest> = {}) =>
-    enrichForPagination('gatewayTypes', this.pageOfListVpnGatewayTypes, request)
+  listVpnGatewayTypes = (request: Readonly<ListVpnGatewayTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('gatewayTypes', this.pageOfListVpnGatewayTypes, request, options)
 
   
-  protected pageOfListVpnGateways = (request: Readonly<ListVpnGatewaysRequest> = {}) =>
+  protected pageOfListVpnGateways = (request: Readonly<ListVpnGatewaysRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVpnGatewaysResponse>(
       {
         method: 'GET',
@@ -144,6 +145,7 @@ export class API extends ParentAPI {
           ['statuses', request.statuses],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListVpnGatewaysResponse,
     )
@@ -154,8 +156,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVpnGatewaysRequest}
    * @returns A Promise of ListVpnGatewaysResponse
    */
-  listVpnGateways = (request: Readonly<ListVpnGatewaysRequest> = {}) =>
-    enrichForPagination('gateways', this.pageOfListVpnGateways, request)
+  listVpnGateways = (request: Readonly<ListVpnGatewaysRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('gateways', this.pageOfListVpnGateways, request, options)
 
   
   /**
@@ -164,11 +166,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetVpnGatewayRequest}
    * @returns A Promise of VpnGateway
    */
-  getVpnGateway = (request: Readonly<GetVpnGatewayRequest>) =>
+  getVpnGateway = (request: Readonly<GetVpnGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<VpnGateway>(
       {
         method: 'GET',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpn-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        signal: options?.signal,
       },
       unmarshalVpnGateway,
     )
@@ -198,7 +201,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateVpnGatewayRequest}
    * @returns A Promise of VpnGateway
    */
-  createVpnGateway = (request: Readonly<CreateVpnGatewayRequest>) =>
+  createVpnGateway = (request: Readonly<CreateVpnGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<VpnGateway>(
       {
         body: JSON.stringify(
@@ -207,6 +210,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpn-gateways`,
+        signal: options?.signal,
       },
       unmarshalVpnGateway,
     )
@@ -218,7 +222,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateVpnGatewayRequest}
    * @returns A Promise of VpnGateway
    */
-  updateVpnGateway = (request: Readonly<UpdateVpnGatewayRequest>) =>
+  updateVpnGateway = (request: Readonly<UpdateVpnGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<VpnGateway>(
       {
         body: JSON.stringify(
@@ -227,6 +231,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpn-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        signal: options?.signal,
       },
       unmarshalVpnGateway,
     )
@@ -238,17 +243,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteVpnGatewayRequest}
    * @returns A Promise of VpnGateway
    */
-  deleteVpnGateway = (request: Readonly<DeleteVpnGatewayRequest>) =>
+  deleteVpnGateway = (request: Readonly<DeleteVpnGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<VpnGateway>(
       {
         method: 'DELETE',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpn-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        signal: options?.signal,
       },
       unmarshalVpnGateway,
     )
 
   
-  protected pageOfListConnections = (request: Readonly<ListConnectionsRequest> = {}) =>
+  protected pageOfListConnections = (request: Readonly<ListConnectionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListConnectionsResponse>(
       {
         method: 'GET',
@@ -268,6 +274,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['vpn_gateway_ids', request.vpnGatewayIds],
         ),
+        signal: options?.signal,
       },
       unmarshalListConnectionsResponse,
     )
@@ -278,8 +285,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListConnectionsRequest}
    * @returns A Promise of ListConnectionsResponse
    */
-  listConnections = (request: Readonly<ListConnectionsRequest> = {}) =>
-    enrichForPagination('connections', this.pageOfListConnections, request)
+  listConnections = (request: Readonly<ListConnectionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('connections', this.pageOfListConnections, request, options)
 
   
   /**
@@ -288,11 +295,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetConnectionRequest}
    * @returns A Promise of Connection
    */
-  getConnection = (request: Readonly<GetConnectionRequest>) =>
+  getConnection = (request: Readonly<GetConnectionRequest>, options?: RequestOptions) =>
     this.client.fetch<Connection>(
       {
         method: 'GET',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}`,
+        signal: options?.signal,
       },
       unmarshalConnection,
     )
@@ -304,7 +312,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateConnectionRequest}
    * @returns A Promise of CreateConnectionResponse
    */
-  createConnection = (request: Readonly<CreateConnectionRequest>) =>
+  createConnection = (request: Readonly<CreateConnectionRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateConnectionResponse>(
       {
         body: JSON.stringify(
@@ -313,6 +321,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections`,
+        signal: options?.signal,
       },
       unmarshalCreateConnectionResponse,
     )
@@ -324,7 +333,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateConnectionRequest}
    * @returns A Promise of Connection
    */
-  updateConnection = (request: Readonly<UpdateConnectionRequest>) =>
+  updateConnection = (request: Readonly<UpdateConnectionRequest>, options?: RequestOptions) =>
     this.client.fetch<Connection>(
       {
         body: JSON.stringify(
@@ -333,6 +342,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}`,
+        signal: options?.signal,
       },
       unmarshalConnection,
     )
@@ -343,11 +353,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteConnectionRequest}
    */
-  deleteConnection = (request: Readonly<DeleteConnectionRequest>) =>
+  deleteConnection = (request: Readonly<DeleteConnectionRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -358,7 +369,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RenewConnectionPskRequest}
    * @returns A Promise of RenewConnectionPskResponse
    */
-  renewConnectionPsk = (request: Readonly<RenewConnectionPskRequest>) =>
+  renewConnectionPsk = (request: Readonly<RenewConnectionPskRequest>, options?: RequestOptions) =>
     this.client.fetch<RenewConnectionPskResponse>(
       {
         body: JSON.stringify(
@@ -367,6 +378,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/renew-psk`,
+        signal: options?.signal,
       },
       unmarshalRenewConnectionPskResponse,
     )
@@ -378,7 +390,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ChangeConnectionPskRequest}
    * @returns A Promise of ChangeConnectionPskResponse
    */
-  changeConnectionPsk = (request: Readonly<ChangeConnectionPskRequest>) =>
+  changeConnectionPsk = (request: Readonly<ChangeConnectionPskRequest>, options?: RequestOptions) =>
     this.client.fetch<ChangeConnectionPskResponse>(
       {
         body: JSON.stringify(
@@ -387,6 +399,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/change-psk`,
+        signal: options?.signal,
       },
       unmarshalChangeConnectionPskResponse,
     )
@@ -398,7 +411,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetRoutingPolicyRequest}
    * @returns A Promise of Connection
    */
-  setRoutingPolicy = (request: Readonly<SetRoutingPolicyRequest>) =>
+  setRoutingPolicy = (request: Readonly<SetRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Connection>(
       {
         body: JSON.stringify(
@@ -407,6 +420,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/set-routing-policy`,
+        signal: options?.signal,
       },
       unmarshalConnection,
     )
@@ -418,7 +432,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachRoutingPolicyRequest}
    * @returns A Promise of Connection
    */
-  detachRoutingPolicy = (request: Readonly<DetachRoutingPolicyRequest>) =>
+  detachRoutingPolicy = (request: Readonly<DetachRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<Connection>(
       {
         body: JSON.stringify(
@@ -427,6 +441,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/detach-routing-policy`,
+        signal: options?.signal,
       },
       unmarshalConnection,
     )
@@ -438,13 +453,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableRoutePropagationRequest}
    * @returns A Promise of Connection
    */
-  enableRoutePropagation = (request: Readonly<EnableRoutePropagationRequest>) =>
+  enableRoutePropagation = (request: Readonly<EnableRoutePropagationRequest>, options?: RequestOptions) =>
     this.client.fetch<Connection>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/enable-route-propagation`,
+        signal: options?.signal,
       },
       unmarshalConnection,
     )
@@ -456,19 +472,20 @@ export class API extends ParentAPI {
    * @param request - The request {@link DisableRoutePropagationRequest}
    * @returns A Promise of Connection
    */
-  disableRoutePropagation = (request: Readonly<DisableRoutePropagationRequest>) =>
+  disableRoutePropagation = (request: Readonly<DisableRoutePropagationRequest>, options?: RequestOptions) =>
     this.client.fetch<Connection>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/disable-route-propagation`,
+        signal: options?.signal,
       },
       unmarshalConnection,
     )
 
   
-  protected pageOfListCustomerGateways = (request: Readonly<ListCustomerGatewaysRequest> = {}) =>
+  protected pageOfListCustomerGateways = (request: Readonly<ListCustomerGatewaysRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListCustomerGatewaysResponse>(
       {
         method: 'GET',
@@ -482,6 +499,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListCustomerGatewaysResponse,
     )
@@ -492,8 +510,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListCustomerGatewaysRequest}
    * @returns A Promise of ListCustomerGatewaysResponse
    */
-  listCustomerGateways = (request: Readonly<ListCustomerGatewaysRequest> = {}) =>
-    enrichForPagination('gateways', this.pageOfListCustomerGateways, request)
+  listCustomerGateways = (request: Readonly<ListCustomerGatewaysRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('gateways', this.pageOfListCustomerGateways, request, options)
 
   
   /**
@@ -502,11 +520,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetCustomerGatewayRequest}
    * @returns A Promise of CustomerGateway
    */
-  getCustomerGateway = (request: Readonly<GetCustomerGatewayRequest>) =>
+  getCustomerGateway = (request: Readonly<GetCustomerGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<CustomerGateway>(
       {
         method: 'GET',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/customer-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        signal: options?.signal,
       },
       unmarshalCustomerGateway,
     )
@@ -518,7 +537,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateCustomerGatewayRequest}
    * @returns A Promise of CustomerGateway
    */
-  createCustomerGateway = (request: Readonly<CreateCustomerGatewayRequest>) =>
+  createCustomerGateway = (request: Readonly<CreateCustomerGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<CustomerGateway>(
       {
         body: JSON.stringify(
@@ -527,6 +546,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/customer-gateways`,
+        signal: options?.signal,
       },
       unmarshalCustomerGateway,
     )
@@ -538,7 +558,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateCustomerGatewayRequest}
    * @returns A Promise of CustomerGateway
    */
-  updateCustomerGateway = (request: Readonly<UpdateCustomerGatewayRequest>) =>
+  updateCustomerGateway = (request: Readonly<UpdateCustomerGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<CustomerGateway>(
       {
         body: JSON.stringify(
@@ -547,6 +567,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/customer-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        signal: options?.signal,
       },
       unmarshalCustomerGateway,
     )
@@ -557,16 +578,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteCustomerGatewayRequest}
    */
-  deleteCustomerGateway = (request: Readonly<DeleteCustomerGatewayRequest>) =>
+  deleteCustomerGateway = (request: Readonly<DeleteCustomerGatewayRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/customer-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}) =>
+  protected pageOfListRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRoutingPoliciesResponse>(
       {
         method: 'GET',
@@ -581,6 +603,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListRoutingPoliciesResponse,
     )
@@ -591,8 +614,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRoutingPoliciesRequest}
    * @returns A Promise of ListRoutingPoliciesResponse
    */
-  listRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}) =>
-    enrichForPagination('routingPolicies', this.pageOfListRoutingPolicies, request)
+  listRoutingPolicies = (request: Readonly<ListRoutingPoliciesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('routingPolicies', this.pageOfListRoutingPolicies, request, options)
 
   
   /**
@@ -601,11 +624,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
    */
-  getRoutingPolicy = (request: Readonly<GetRoutingPolicyRequest>) =>
+  getRoutingPolicy = (request: Readonly<GetRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<RoutingPolicy>(
       {
         method: 'GET',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
+        signal: options?.signal,
       },
       unmarshalRoutingPolicy,
     )
@@ -617,7 +641,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
    */
-  createRoutingPolicy = (request: Readonly<CreateRoutingPolicyRequest>) =>
+  createRoutingPolicy = (request: Readonly<CreateRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<RoutingPolicy>(
       {
         body: JSON.stringify(
@@ -626,6 +650,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies`,
+        signal: options?.signal,
       },
       unmarshalRoutingPolicy,
     )
@@ -637,7 +662,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateRoutingPolicyRequest}
    * @returns A Promise of RoutingPolicy
    */
-  updateRoutingPolicy = (request: Readonly<UpdateRoutingPolicyRequest>) =>
+  updateRoutingPolicy = (request: Readonly<UpdateRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<RoutingPolicy>(
       {
         body: JSON.stringify(
@@ -646,6 +671,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
+        signal: options?.signal,
       },
       unmarshalRoutingPolicy,
     )
@@ -656,11 +682,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteRoutingPolicyRequest}
    */
-  deleteRoutingPolicy = (request: Readonly<DeleteRoutingPolicyRequest>) =>
+  deleteRoutingPolicy = (request: Readonly<DeleteRoutingPolicyRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
+        signal: options?.signal,
       },
     )
 

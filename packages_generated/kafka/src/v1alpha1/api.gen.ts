@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_KAFKA,} from './content.gen.js'
 import {
   unmarshalCluster,
@@ -69,7 +69,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -79,6 +79,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListNodeTypesResponse,
     )
@@ -89,11 +90,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
    */
-  listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
-    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
+  listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request, options)
 
   
-  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}) =>
+  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
@@ -103,6 +104,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['version', request.version],
         ),
+        signal: options?.signal,
       },
       unmarshalListVersionsResponse,
     )
@@ -113,11 +115,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
    */
-  listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
-    enrichForPagination('versions', this.pageOfListVersions, request)
+  listVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('versions', this.pageOfListVersions, request, options)
 
   
-  protected pageOfListClusters = (request: Readonly<ListClustersRequest> = {}) =>
+  protected pageOfListClusters = (request: Readonly<ListClustersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListClustersResponse>(
       {
         method: 'GET',
@@ -131,6 +133,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListClustersResponse,
     )
@@ -141,8 +144,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListClustersRequest}
    * @returns A Promise of ListClustersResponse
    */
-  listClusters = (request: Readonly<ListClustersRequest> = {}) =>
-    enrichForPagination('clusters', this.pageOfListClusters, request)
+  listClusters = (request: Readonly<ListClustersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('clusters', this.pageOfListClusters, request, options)
 
   
   /**
@@ -151,11 +154,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetClusterRequest}
    * @returns A Promise of Cluster
    */
-  getCluster = (request: Readonly<GetClusterRequest>) =>
+  getCluster = (request: Readonly<GetClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'GET',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -185,7 +189,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateClusterRequest}
    * @returns A Promise of Cluster
    */
-  createCluster = (request: Readonly<CreateClusterRequest>) =>
+  createCluster = (request: Readonly<CreateClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -194,6 +198,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -205,7 +210,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateClusterRequest}
    * @returns A Promise of Cluster
    */
-  updateCluster = (request: Readonly<UpdateClusterRequest>) =>
+  updateCluster = (request: Readonly<UpdateClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -214,6 +219,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -225,11 +231,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteClusterRequest}
    * @returns A Promise of Cluster
    */
-  deleteCluster = (request: Readonly<DeleteClusterRequest>) =>
+  deleteCluster = (request: Readonly<DeleteClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -241,7 +248,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetClusterCertificateAuthorityRequest}
    * @returns A Promise of Blob
    */
-  getClusterCertificateAuthority = (request: Readonly<GetClusterCertificateAuthorityRequest>) =>
+  getClusterCertificateAuthority = (request: Readonly<GetClusterCertificateAuthorityRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -250,6 +257,7 @@ export class API extends ParentAPI {
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -259,13 +267,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link RenewClusterCertificateAuthorityRequest}
    */
-  renewClusterCertificateAuthority = (request: Readonly<RenewClusterCertificateAuthorityRequest>) =>
+  renewClusterCertificateAuthority = (request: Readonly<RenewClusterCertificateAuthorityRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/renew-certificate-authority`,
+        signal: options?.signal,
       },
     )
 
@@ -275,11 +284,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
-  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
+  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -290,7 +300,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  createEndpoint = (request: Readonly<CreateEndpointRequest>) =>
+  createEndpoint = (request: Readonly<CreateEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         body: JSON.stringify(
@@ -299,12 +309,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
 
   
-  protected pageOfListUsers = (request: Readonly<ListUsersRequest>) =>
+  protected pageOfListUsers = (request: Readonly<ListUsersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListUsersResponse>(
       {
         method: 'GET',
@@ -315,6 +326,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListUsersResponse,
     )
@@ -325,8 +337,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
    */
-  listUsers = (request: Readonly<ListUsersRequest>) =>
-    enrichForPagination('users', this.pageOfListUsers, request)
+  listUsers = (request: Readonly<ListUsersRequest>, options?: RequestOptions) =>
+    enrichForPagination('users', this.pageOfListUsers, request, options)
 
   
   /**
@@ -335,7 +347,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateUserRequest}
    * @returns A Promise of User
    */
-  updateUser = (request: Readonly<UpdateUserRequest>) =>
+  updateUser = (request: Readonly<UpdateUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -344,6 +356,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/users/${validatePathParam('username', request.username)}`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
