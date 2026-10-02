@@ -150,6 +150,10 @@ export interface Contract {
    * The last modification date of the contract.
    */
   updatedAt?: Date
+  /**
+   * The SRN of the contract.
+   */
+  srn: string
 }
 
 
@@ -268,7 +272,7 @@ export interface Project {
    */
   status: ProjectStatus
   /**
-   * The SRN of the project.
+   * The SRN of the Project.
    */
   srn: string
 }

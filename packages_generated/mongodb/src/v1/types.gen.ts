@@ -227,6 +227,14 @@ export interface Maintenance {
    * Reason of the maintenance.
    */
   reason: string
+  /**
+   * Region of the maintenance.
+   */
+  region: ScwRegion
+  /**
+   * SRN of the maintenance.
+   */
+  srn: string
 }
 
 
@@ -374,6 +382,10 @@ export interface Instance {
    * List of MongoDB® versions the Database Instance can be upgraded to.
    */
   upgradableVersions: string[]
+  /**
+   * Scaleway Resource Name of the Database Instance.
+   */
+  srn: string
 }
 
 
@@ -466,6 +478,10 @@ export interface Snapshot {
    * Region of the snapshot.
    */
   region: ScwRegion
+  /**
+   * Scaleway Resource Name of the snapshot.
+   */
+  srn: string
 }
 
 
