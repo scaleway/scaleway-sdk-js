@@ -527,7 +527,7 @@ export interface CreateClusterRequestPoolConfig {
    */
   privateNetworkId?: string
   /**
-   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   * Maximum amount of time in seconds before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
    */
   maxTerminationGracePeriod?: string
   /**
@@ -958,7 +958,7 @@ export interface Pool {
    */
   errorMessage?: string
   /**
-   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   * Maximum amount of time in seconds before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
    */
   maxTerminationGracePeriod?: string
   /**
@@ -1320,7 +1320,7 @@ export type CreatePoolRequest = {
    */
   userData?: Record<string, string>
   /**
-   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   * Maximum amount of time in seconds before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
    */
   maxTerminationGracePeriod?: string
 }
@@ -2007,7 +2007,7 @@ export type UpdatePoolRequest = {
    */
   securityGroupId?: string
   /**
-   * New maximum amount of time before the API forces the drain and deletion of a `deleting` node.
+   * New maximum amount of time in seconds before the API forces the drain and deletion of a `deleting` node.
    */
   maxTerminationGracePeriod?: string
 }
