@@ -40,6 +40,7 @@ const unmarshalContract = (data: unknown): Contract => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     name: data.name,
+    srn: data.srn,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
     version: data.version,
