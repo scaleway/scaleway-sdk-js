@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   authenticateWithSecrets,
   authenticateWithSessionToken,
+  authenticateWithTokenProvider,
   obfuscateAuthHeadersEntry,
   obfuscateToken,
   obfuscateUUID,
@@ -66,6 +67,25 @@ describe('authenticateWithSessionToken', () => {
     const expectedReq = sourceReq.clone()
     expectedReq.headers.append('x-session-token', 'dummy')
     expect(updatedReq).toMatchObject(expectedReq)
+  })
+
+  it('resolves the token provider on each call', async () => {
+    const sourceReq = new Request('https://api.scaleway.com/my/path')
+    let callCount = 0
+
+    // oxlint-disable-next-line typescript/promise-function-async -- test helper
+    const getToken = (): Promise<string> => {
+      callCount++
+      return Promise.resolve(`token-${callCount}`)
+    }
+
+    const interceptor = authenticateWithTokenProvider(getToken)
+    const updatedReq1 = await interceptor({ request: sourceReq })
+    const updatedReq2 = await interceptor({ request: sourceReq })
+
+    expect(updatedReq1.headers.get('x-auth-token')).toBe('token-1')
+    expect(updatedReq2.headers.get('x-auth-token')).toBe('token-2')
+    expect(callCount).toBe(2)
   })
 })
 

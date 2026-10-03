@@ -1,5 +1,6 @@
 import type { NetworkInterceptors } from '../index.js'
-import { authenticateWithSecrets } from './auth.js'
+import { authenticateWithSecrets, authenticateWithTokenProvider } from './auth.js'
+import type { TokenProvider } from './auth.js'
 import type { Profile } from './client-ini-profile.js'
 import { hasAuthenticationSecrets } from './client-ini-profile.js'
 import type { Settings } from './client-settings.js'
@@ -51,6 +52,37 @@ export const withProfile =
 
     return newSettings
   }
+
+/**
+ * Instantiates the SDK with an asynchronous token provider.
+ *
+ * @param getToken - The token provider, called on every request to set the `X-Auth-Token` header
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks This method should be used in conjunction with the initializer `createAdvancedClient`.
+ * Unlike `withProfile`, the token is not cached: it is resolved for each request,
+ * which makes it compatible with short-lived or rotating tokens without rebuilding the client.
+ *
+ * @example
+ * ```
+ * createAdvancedClient(
+ *   withTokenProvider(async () => myVault.getToken()),
+ * )
+ * ```
+ *
+ * @public
+ */
+export const withTokenProvider =
+  (getToken: TokenProvider) =>
+  (settings: Readonly<Settings>): Settings => ({
+    ...settings,
+    interceptors: [
+      {
+        request: authenticateWithTokenProvider(getToken),
+      },
+      ...settings.interceptors,
+    ],
+  })
 
 /**
  * Instantiates the SDK with a different HTTP client.
