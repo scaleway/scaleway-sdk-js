@@ -1,3 +1,5 @@
+import type { RetryOptions } from '../internal/async/http-retry.js'
+import { resolveRetryOptions } from '../internal/async/http-retry.js'
 import type { NetworkInterceptors } from '../index.js'
 import { authenticateWithSecrets } from './auth.js'
 import type { Profile } from './client-ini-profile.js'
@@ -94,6 +96,31 @@ export const withDefaultPageSize =
 export const withTimeout =
   (defaultTimeoutMs: number): ClientConfig =>
   (settings: Readonly<Settings>): Settings => ({ ...settings, defaultTimeoutMs })
+
+/**
+ * Instantiates the SDK with automatic retries on transient HTTP failures.
+ *
+ * By default retries up to 2 times on 429, 503 and network errors, using exponential
+ * backoff and honouring the `Retry-After` header when present (capped by `maxDelay`).
+ *
+ * @param options - Retry configuration
+ * @returns A factory {@link ClientConfig}
+ *
+ * @remarks
+ * This method should be used in conjunction with the initializer `createAdvancedClient`.
+ * Retries apply to every HTTP method, including non-idempotent ones (`POST`, `PATCH`):
+ * prefer enabling retry for read-heavy workloads, or pass a custom `isRetryable`, when
+ * duplicate side effects would be unsafe.
+ * A custom `isRetryable` fully replaces the default predicate (it does not merge with it).
+ *
+ * @public
+ */
+export const withRetry =
+  (options: RetryOptions = {}): ClientConfig =>
+  (settings: Readonly<Settings>): Settings => ({
+    ...settings,
+    retry: resolveRetryOptions(options),
+  })
 
 /**
  * Instantiates the SDK with a different default user agent.
