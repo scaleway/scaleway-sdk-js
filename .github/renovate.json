@@ -1,4 +1,5 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     ":combinePatchMinorReleases",
     ":separateMultipleMajorReleases",
@@ -10,7 +11,7 @@
   "lockFileMaintenance": {
     "enabled": false
   },
-  "enabledManagers": ["github-actions", "npm"],
+  "enabledManagers": ["github-actions", "npm", "nvm"],
   "prCreation": "not-pending",
   "prHourlyLimit": 5,
   "prConcurrentLimit": 10,
@@ -19,6 +20,10 @@
   "rebaseWhen": "auto",
   "dependencyDashboard": true,
   "packageRules": [
+    {
+      "matchDepTypes": ["engines", "peerDependencies"],
+      "rangeStrategy": "widen"
+    },
     {
       "matchPackageNames": ["@scaleway/sdk", "@scaleway/configuration-loader"],
       "enabled": false
@@ -30,55 +35,36 @@
       "matchPackageNames": ["/^@scaleway//"]
     },
     {
+      "extends": ["packages:linters"],
+      "matchPackageNames": ["/oxfmt/", "/oxlint/", "publint", "lint-staged"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "non-major linters devDependencies",
+      "groupSlug": "non-major-linters-dev-deps"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "non-major devDependencies",
+      "groupSlug": "non-major-dev-deps"
+    },
+    {
       "labels": ["UPDATE-MAJOR"],
       "minimumReleaseAge": "14 days",
-      "matchUpdateTypes": ["major"]
+      "matchUpdateTypes": ["major"],
+       "dependencyDashboardCategory": "🚨 Major"
     },
     {
       "labels": ["UPDATE-MINOR"],
       "minimumReleaseAge": "5 days",
-      "matchUpdateTypes": ["minor"]
+      "matchUpdateTypes": ["minor"],
+       "dependencyDashboardCategory": "Minor"
     },
     {
       "labels": ["UPDATE-PATCH"],
       "minimumReleaseAge": "1 day",
-      "matchUpdateTypes": ["patch"]
-    },
-    {
-      "automerge": true,
-      "automergeType": "branch",
-      "semanticCommitScope": "minor-deps",
-      "minimumReleaseAge": "3 days",
-      "matchUpdateTypes": ["minor"],
-      "matchPackageNames": [
-        "/^@babel//",
-        "/^@commitlint//",
-        "/^babel-/",
-        "/cz-conventional-changelog/",
-        "/eslint/",
-        "/husky/",
-        "/jest/",
-        "/lint-staged/"
-      ]
-    },
-    {
-      "automerge": true,
-      "automergeType": "branch",
-      "semanticCommitScope": "patch-deps",
-      "minimumReleaseAge": "1 day",
       "matchUpdateTypes": ["patch"],
-      "matchPackageNames": [
-        "/^@babel//",
-        "/^@commitlint//",
-        "/^@semantic-release//",
-        "/^@types//",
-        "/^babel-/",
-        "/^eslint/",
-        "/cz-conventional-changelog/",
-        "/husky/",
-        "/jest/",
-        "/lint-staged/"
-      ]
+       "dependencyDashboardCategory": "Patch"
     }
   ]
 }
