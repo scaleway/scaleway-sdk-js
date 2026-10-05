@@ -29,6 +29,7 @@ import type {
   CreateRouteRequest,
   CreateVPCConnectorRequest,
   CreateVPCRequest,
+  EnableObjectStoragePrivateAccessRequest,
   SetAclRequest,
   SetPrivateNetworksObjectStoragePrivateAccessRequest,
   UpdateIngressRuleRequest,
@@ -425,6 +426,13 @@ export const marshalCreateVPCRequest = (
   name: request.name || randomName('vpc'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   tags: request.tags,
+})
+
+export const marshalEnableObjectStoragePrivateAccessRequest = (
+  request: EnableObjectStoragePrivateAccessRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  private_network_ids: request.privateNetworkIds,
 })
 
 const marshalAclRule = (
