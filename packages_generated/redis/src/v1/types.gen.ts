@@ -302,6 +302,10 @@ export interface Cluster {
    * List of engine versions the Database Instance can upgrade to.
    */
   upgradableVersions: string[]
+  /**
+   * Scaleway Resource Name of the Database Instance.
+   */
+  srn: string
 }
 
 
