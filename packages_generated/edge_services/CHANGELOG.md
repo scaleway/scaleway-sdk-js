@@ -1,5 +1,265 @@
 # Change Log
 
+## 2.26.0
+
+### Minor Changes
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(edge_services): add wildcard domain option on dns stages (#2834)
+
+- chore(release): publish
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(edge_services): add route rule search endpoint (#2244)
+
+- fix: sdk client deps (#2056)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore: format generated files (#2659)
+
+- feat(edge_services): update VPC endpoint proto and several fixes (#3003)
+
+- feat: add extension .js for nodenext (#2492)
+
+- fix: change tabs into space (#2688)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(release): publish
+
+- feat(edge_services): add websocket limit error (#2776)
+
+- feat: add support for constants (#3286)
+
+- feat(edge_services): add multi-waf pipeline support (#2798)
+
+- chore: update index (#2247)
+
+- chore(release): publish
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(edge_services): add default_fqdn to dns_stage (#2504)
+
+- doc(edge_services): Add title for billing endpoint (#3374)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- feat(edge_services): add serverless container backend (#2622)
+
+- feat(edge_services): add tls caa malfunction error (#2464)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: reorganize import (#2520)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(edge_services): add VPCEndpoint support (#2966)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- feat(edge_services): add host filter (#2837)
+
+- docs(edge_services): update backends doc (#3114)
+
+- feat(edge_services): add status to stages (#2890)
+
+- feat(edge_services): add serverless function backend (#2698)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(edge_services): add websocket option to load balancer origin (#2543)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore: sync generated files after build (#2862)
+
+- feat(edge_services): add include_cookies to cache-stage (#2211)
+
+- feat(edge_services): display doc for wildcard domain feature (#2859)
+
+- feat(sdk): unify tools (#2903)
+
+- fix(edge_services): add body param for new rpc endpoint (#3070)
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- feat: update generated APIs (#2881)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(release): publish
+
+- chore: bump sdk (#2745)
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- chore: reformat tsconfig.build.json exclude arrays and reorder imports (#2973)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(edge_services): add support for `WafExclusionRule` (#3370)
+
+- feat(edge_services): add serverless container backend (#2608)
+
+- feat: enable formatting for generated files (#2690)
+
+- feat(audit_trail): add equal operator for string type (#3614)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(edge_services): add routing documentation (#2830)
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): publish
+
+- chore(lint): update generated files (#2594)
+
+- fix: format (#2683)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat(edge_services): add non-waf default path (#2799)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix: align edge_services tsconfig.build.json with generate-packages template (#3007)
+
+- chore(release): publish
+
+- feat(edge_services): add pipeline code for failed configuration (#3019)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore: new formating (#2667)
+
+- chore(release): publish
+
+- chore: fix formating (#2669)
+
+- feat: update generated APIs (#3369)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- feat(edge_services): add doc and cli for head stage (#2712)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
 ## 2.25.1
 
 ### Patch Changes

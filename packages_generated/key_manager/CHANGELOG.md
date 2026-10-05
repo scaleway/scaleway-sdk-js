@@ -1,5 +1,229 @@
 # Change Log
 
+## 2.19.0
+
+### Minor Changes
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- chore: remove post-generate updates (#3168)
+
+- fix: sdk client deps (#2056)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- feat(key_manager): add getpublickey endpoint (#2102)
+
+- fix: change tabs into space (#2688)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(release): publish
+
+- feat(key_manager): add secp256k1 algorithm (#3292)
+
+- chore(release): publish
+
+- feat: add support for constants (#3286)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- fix(apple_silicon): correct http url for user-configuration (#3510)
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- fix(key_manager): add scheduled_for_deletion state (#2246)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore: reorganize import (#2520)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(key_manager): add ml-dsa post quantum signature algorithm (#3031)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore: sync generated files after build (#2862)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- feat(key_manager): add support for `WrapKey` and `UnwrapKey` (#3272)
+
+- feat(sdk): generated packages (#2029)
+
+- feat: update generated APIs (#2881)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(engines): remove node engines (#3336)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): publish
+
+- refactor: make content.gen a .js file (#2491)
+
+- feat(key_manager): update doc with asymmetric usage (#2392)
+
+- chore(lint): update generated files (#2594)
+
+- feat(key_manager): hide protection level (#3105)
+
+- fix: format (#2683)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- feat(key_manager): add key_encapsulation usage filter for ListKeys (#3618)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- docs(key_manager): remove mention about key manager only supporting symmetric encryption (#2349)
+
+- feat(key_manager): add api to list algorithms (#2330)
+
+- feat(key_manager): add filtering and asymmetric algos (#2125)
+
+- chore: new formating (#2667)
+
+- chore: fix formating (#2669)
+
+- feat: update generated APIs (#3369)
+
+- feat(key_manager): add sign and verify methods (#2116)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- feat: add support for srn (#3524)
+
+- chore(key_manager): add better description for list keys (#3118)
+
+- feat(key_manager): add key protection_level (#3615)
+
+- feat(key_manager): add protection level in create key (#3030)
+
+- chore(release): publish
+
 ## 2.18.1
 
 ### Patch Changes
