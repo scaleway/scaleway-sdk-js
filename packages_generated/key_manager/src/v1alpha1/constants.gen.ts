@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type {
   DataKeyAlgorithmSymmetricEncryption,
+  GenerateKeyMaterialImportParametersRequestWrappingAlgorithm,
   KeyAlgorithmAsymmetricEncryption,
   KeyAlgorithmAsymmetricSigning,
   KeyAlgorithmKeyEncapsulation,
@@ -21,6 +22,17 @@ import type {
 export const DATA_KEY_ALGORITHM_SYMMETRIC_ENCRYPTIONS: DataKeyAlgorithmSymmetricEncryption[] = [
   'unknown_symmetric_encryption',
   'aes_256_gcm',
+]
+
+/** Lists all values of the enum {@link GenerateKeyMaterialImportParametersRequestWrappingAlgorithm}. */
+export const GENERATE_KEY_MATERIAL_IMPORT_PARAMETERS_REQUEST_WRAPPING_ALGORITHMS: GenerateKeyMaterialImportParametersRequestWrappingAlgorithm[] = [
+  'unknown_wrapping_algorithm',
+  'rsa_oaep_2048_sha256',
+  'rsa_oaep_3072_sha256',
+  'rsa_oaep_4096_sha256',
+  'rsa_aes_key_wrap_2048_sha256',
+  'rsa_aes_key_wrap_3072_sha256',
+  'rsa_aes_key_wrap_4096_sha256',
 ]
 
 /** Lists all values of the enum {@link KeyAlgorithmAsymmetricEncryption}. */

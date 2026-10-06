@@ -20,6 +20,8 @@ import {
   marshalEncryptRequest,
   unmarshalEncryptResponse,
   marshalGenerateDataKeyRequest,
+  marshalGenerateKeyMaterialImportParametersRequest,
+  unmarshalGenerateKeyMaterialImportParametersResponse,
   marshalImportKeyMaterialRequest,
   unmarshalKey,
   unmarshalListAlgorithmsResponse,
@@ -48,6 +50,8 @@ import type {
   EncryptRequest,
   EncryptResponse,
   GenerateDataKeyRequest,
+  GenerateKeyMaterialImportParametersRequest,
+  GenerateKeyMaterialImportParametersResponse,
   GetKeyRequest,
   GetPublicKeyRequest,
   ImportKeyMaterialRequest,
@@ -489,6 +493,27 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/delete-key-material`,
         signal: options?.signal,
       },
+    )
+
+  
+  /**
+   * Generate key material import parameters. Retrieve the cryptographic parameters (public key and import token) required to securely import key material into an existing key. The key's origin must be `external`.
+   *
+   * @param request - The request {@link GenerateKeyMaterialImportParametersRequest}
+   * @returns A Promise of GenerateKeyMaterialImportParametersResponse
+   */
+  generateKeyMaterialImportParameters = (request: Readonly<GenerateKeyMaterialImportParametersRequest>, options?: RequestOptions) =>
+    this.client.fetch<GenerateKeyMaterialImportParametersResponse>(
+      {
+        body: JSON.stringify(
+          marshalGenerateKeyMaterialImportParametersRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/import-parameters`,
+        signal: options?.signal,
+      },
+      unmarshalGenerateKeyMaterialImportParametersResponse,
     )
 
   

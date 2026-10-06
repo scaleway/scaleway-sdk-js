@@ -477,6 +477,7 @@ const unmarshalServerType = (data: unknown): ServerType => {
     limits: data.limits ? unmarshalServerTypeLimits(data.limits) : undefined,
     memory: data.memory,
     name: data.name,
+    sku: data.sku,
     spotInfo: data.spot_info ? unmarshalServerTypeSpotInfo(data.spot_info) : undefined,
     vcpuCount: data.vcpu_count,
   } as ServerType
