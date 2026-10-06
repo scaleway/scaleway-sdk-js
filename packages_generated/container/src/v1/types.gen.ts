@@ -329,6 +329,10 @@ export interface Container {
    */
   id: string
   /**
+   * Container SRN.
+   */
+  srn: string
+  /**
    * Container name.
    */
   name: string
@@ -475,6 +479,10 @@ export interface Domain {
    */
   id: string
   /**
+   * Domain SRN.
+   */
+  srn: string
+  /**
    * Unique ID of the container the domain is assigned to.
    */
   containerId: string
@@ -502,6 +510,10 @@ export interface Domain {
    * A list of arbitrary tags associated with the domain.
    */
   tags: string[]
+  /**
+   * Region in which the domain exists.
+   */
+  region: ScwRegion
 }
 
 
@@ -510,6 +522,10 @@ export interface Namespace {
    * Namespace unique ID.
    */
   id: string
+  /**
+   * Namespace SRN.
+   */
+  srn: string
   /**
    * Namespace name.
    */
@@ -566,6 +582,10 @@ export interface Trigger {
    * Trigger unique ID.
    */
   id: string
+  /**
+   * Trigger SRN.
+   */
+  srn: string
   /**
    * Name of the trigger.
    */
@@ -624,6 +644,10 @@ export interface Trigger {
    * Trigger last update date.
    */
   updatedAt?: Date
+  /**
+   * Region in which the trigger exists.
+   */
+  region: ScwRegion
 }
 
 

@@ -7,6 +7,15 @@ export type DataKeyAlgorithmSymmetricEncryption =
   | 'unknown_symmetric_encryption'
   | 'aes_256_gcm'
 
+export type GenerateKeyMaterialImportParametersRequestWrappingAlgorithm =
+  | 'unknown_wrapping_algorithm'
+  | 'rsa_oaep_2048_sha256'
+  | 'rsa_oaep_3072_sha256'
+  | 'rsa_oaep_4096_sha256'
+  | 'rsa_aes_key_wrap_2048_sha256'
+  | 'rsa_aes_key_wrap_3072_sha256'
+  | 'rsa_aes_key_wrap_4096_sha256'
+
 export type KeyAlgorithmAsymmetricEncryption =
   | 'unknown_asymmetric_encryption'
   | 'rsa_oaep_2048_sha256'
@@ -450,6 +459,39 @@ export type GenerateDataKeyRequest = {
 Set it to `true` if you do not wish the plaintext to be returned in the response object.
    */
   withoutPlaintext: boolean
+}
+
+
+export type GenerateKeyMaterialImportParametersRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the key into which to import the key material.
+   */
+  keyId: string
+  /**
+   * Supported values for direct RSA wrapping are: `rsa_oaep_2048_sha256`, `rsa_oaep_3072_sha256`, `rsa_oaep_4096_sha256`.
+Supported values for hybrid wrapping (RSA + AES Key Wrap) are: `rsa_aes_key_wrap_2048_sha256`, `rsa_aes_key_wrap_3072_sha256`, `rsa_aes_key_wrap_4096_sha256`.
+   */
+  wrappingAlgorithm?: GenerateKeyMaterialImportParametersRequestWrappingAlgorithm
+}
+
+
+export interface GenerateKeyMaterialImportParametersResponse {
+  /**
+   * ID of the target key.
+   */
+  keyId: string
+  /**
+   * The public key to wrap the key material.
+   */
+  publicKey: string
+  /**
+   * The token generated to authorize the import operation.
+   */
+  importToken: string
 }
 
 

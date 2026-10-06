@@ -82,6 +82,7 @@ export const unmarshalOS = (data: unknown): OS => {
     tags: data.tags,
     version: data.version,
     xcodeVersion: data.xcode_version,
+    zone: data.zone,
   } as OS
 }
 
@@ -331,6 +332,7 @@ export const unmarshalServerType = (data: unknown): ServerType => {
     network: data.network ? unmarshalServerTypeNetwork(data.network) : undefined,
     npu: data.npu ? unmarshalServerTypeNPU(data.npu) : undefined,
     stock: data.stock,
+    zone: data.zone,
   } as ServerType
 }
 

@@ -284,6 +284,10 @@ export interface Cron {
    */
   id: string
   /**
+   * SRN of the cron.
+   */
+  srn: string
+  /**
    * UUID of the function the cron applies to.
    */
   functionId: string
@@ -303,6 +307,10 @@ export interface Cron {
    * Name of the cron.
    */
   name: string
+  /**
+   * Region in which the cron is located.
+   */
+  region: ScwRegion
 }
 
 
@@ -311,6 +319,10 @@ export interface Domain {
    * UUID of the domain.
    */
   id: string
+  /**
+   * SRN of the domain.
+   */
+  srn: string
   /**
    * Hostname associated with the function.
    */
@@ -331,6 +343,10 @@ export interface Domain {
    * Error message if the domain is in "error" state.
    */
   errorMessage?: string
+  /**
+   * Region in which the domain is located.
+   */
+  region: ScwRegion
 }
 
 
@@ -353,6 +369,10 @@ export interface Function {
    * UUID of the function.
    */
   id: string
+  /**
+   * SRN of the function.
+   */
+  srn: string
   /**
    * Name of the function.
    */
@@ -465,6 +485,10 @@ export interface Namespace {
    */
   id: string
   /**
+   * SRN of the namespace.
+   */
+  srn: string
+  /**
    * Name of the namespace.
    */
   name: string
@@ -573,6 +597,10 @@ export interface Trigger {
    */
   id: string
   /**
+   * SRN of the trigger.
+   */
+  srn: string
+  /**
    * Name of the trigger.
    */
   name: string
@@ -614,6 +642,10 @@ export interface Trigger {
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
   sqsConfig?: TriggerSqsClientConfig
+  /**
+   * Region in which the trigger is located.
+   */
+  region: ScwRegion
 }
 
 
