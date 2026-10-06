@@ -829,6 +829,10 @@ export interface ServerType {
    * Availability status of the server type as a spot instance.
    */
   spotInfo?: ServerTypeSpotInfo
+  /**
+   * The billing SKU for this server type.
+   */
+  sku: string
 }
 
 

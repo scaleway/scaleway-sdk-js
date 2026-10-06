@@ -162,6 +162,10 @@ export interface OS {
    * List of server types which supports the OS configuration. Also gives information about immediate stock availability.
    */
   supportedServerTypes: OSSupportedServerType[]
+  /**
+   * Zone of OS.
+   */
+  zone: ScwZone
 }
 
 
@@ -468,6 +472,10 @@ export interface ServerType {
    * NPU description.
    */
   npu?: ServerTypeNPU
+  /**
+   * Zone of the server type.
+   */
+  zone: ScwZone
 }
 
 
