@@ -197,8 +197,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(oxlint@1.83.0(oxlint-tsgolint@7.0.2003))
       '@scaleway/pnpm-auto-release':
-        specifier: 0.0.1
-        version: 0.0.1
+        specifier: 0.0.2
+        version: 0.0.2
       '@scaleway/sync-peer-deps':
         specifier: 1.1.1
         version: 1.1.1
@@ -2397,8 +2397,8 @@ packages:
     peerDependencies:
       oxlint: '>=1.80.0'
 
-  '@scaleway/pnpm-auto-release@0.0.1':
-    resolution: {integrity: sha512-4O7W9Ig5wAMiEktIZG7PQrQOwhBzc1uPgDfhAqOxqS2OYTqgN7u3TsL4t61x+SUygqNsx+0HgPSBRnppKut1Zw==}
+  '@scaleway/pnpm-auto-release@0.0.2':
+    resolution: {integrity: sha512-xEm8fuXwVLt3xzOpubrLdGtIPQonscsFi6GgbAfVmjz8KFljAb8h1WqlkO5EWbHiWpCZwF2ujUd0O9azmCT+Mw==}
     engines: {node: 24.x || 25.x || 26.x, pnpm: '>=12.6'}
     hasBin: true
 
@@ -4308,7 +4308,7 @@ snapshots:
     dependencies:
       oxlint: 1.83.0(oxlint-tsgolint@7.0.2003)
 
-  '@scaleway/pnpm-auto-release@0.0.1': {}
+  '@scaleway/pnpm-auto-release@0.0.2': {}
 
   '@scaleway/random-name@6.0.2': {}
 
