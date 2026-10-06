@@ -64,6 +64,16 @@ describe('urlParams', () => {
     expect(urlParams(['key1', null], ['key2', undefined]).toString()).toStrictEqual('')
   })
 
+  it('filters empty string values', () => {
+    expect(urlParams(['name', ''], ['key1', 'myValue']).toString()).toStrictEqual('key1=myValue')
+  })
+
+  it('filters empty string inside arrays', () => {
+    expect(urlParams(['my_param', ['value-1', '', 'value-2']]).toString()).toStrictEqual(
+      'my_param=value-1&my_param=value-2',
+    )
+  })
+
   it('filters non-string keys', () => {
     expect(
       // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes invalid key types
