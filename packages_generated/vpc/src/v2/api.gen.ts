@@ -19,6 +19,7 @@ import {
   marshalCreateRouteRequest,
   marshalCreateVPCConnectorRequest,
   marshalCreateVPCRequest,
+  marshalEnableObjectStoragePrivateAccessRequest,
   unmarshalGetAclResponse,
   unmarshalIngressRule,
   unmarshalListIngressRulesResponse,
@@ -779,11 +780,12 @@ export class API extends ParentAPI {
   enableObjectStoragePrivateAccess = (request: Readonly<EnableObjectStoragePrivateAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<VPC>(
       {
+        body: JSON.stringify(
+          marshalEnableObjectStoragePrivateAccessRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/enable`,
-        urlParams: urlParams(
-          ['private_network_ids', request.privateNetworkIds],
-        ),
         signal: options?.signal,
       },
       unmarshalVPC,
