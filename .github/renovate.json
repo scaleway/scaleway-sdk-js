@@ -52,19 +52,19 @@
       "labels": ["UPDATE-MAJOR"],
       "minimumReleaseAge": "14 days",
       "matchUpdateTypes": ["major"],
-       "dependencyDashboardCategory": "🚨 Major"
+      "dependencyDashboardCategory": "🚨 Major"
     },
     {
       "labels": ["UPDATE-MINOR"],
       "minimumReleaseAge": "5 days",
       "matchUpdateTypes": ["minor"],
-       "dependencyDashboardCategory": "Minor"
+      "dependencyDashboardCategory": "Minor"
     },
     {
       "labels": ["UPDATE-PATCH"],
       "minimumReleaseAge": "1 day",
       "matchUpdateTypes": ["patch"],
-       "dependencyDashboardCategory": "Patch"
+      "dependencyDashboardCategory": "Patch"
     }
   ]
 }
