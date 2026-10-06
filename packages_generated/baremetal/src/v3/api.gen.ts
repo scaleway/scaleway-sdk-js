@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES_BAREMETAL,} from './content.gen.js'
 import {
   unmarshalListServerPrivateNetworksResponse,
@@ -59,7 +59,7 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
-  addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) =>
+  addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
         body: JSON.stringify(
@@ -68,6 +68,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalServerPrivateNetwork,
     )
@@ -79,7 +80,7 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
-  setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) =>
+  setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>, options?: RequestOptions) =>
     this.client.fetch<SetServerPrivateNetworksResponse>(
       {
         body: JSON.stringify(
@@ -88,12 +89,13 @@ export class PrivateNetworkAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalSetServerPrivateNetworksResponse,
     )
 
   
-  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
+  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServerPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -108,6 +110,7 @@ export class PrivateNetworkAPI extends ParentAPI {
           ['project_id', request.projectId],
           ['server_id', request.serverId],
         ),
+        signal: options?.signal,
       },
       unmarshalListServerPrivateNetworksResponse,
     )
@@ -118,8 +121,8 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
-  listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
-    enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request)
+  listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request, options)
 
   
   /**
@@ -127,11 +130,12 @@ export class PrivateNetworkAPI extends ParentAPI {
    *
    * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
-  deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) =>
+  deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        signal: options?.signal,
       },
     )
 

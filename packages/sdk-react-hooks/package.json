@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-react-hooks",
-  "version": "0.18.0",
+  "version": "0.20.1",
   "private": false,
   "description": "React hooks",
   "repository": {
@@ -255,6 +255,10 @@
     "./autoscalingv1alpha2": {
       "default": "./dist/queries/autoscalingv1alpha2/generated/index.js",
       "types": "./dist/queries/autoscalingv1alpha2/generated/index.d.ts"
+    },
+    "./mocks/*": {
+      "default": "./mocks/*/index.ts",
+      "types": "./mocks/*/index.ts"
     }
   },
   "scripts": {

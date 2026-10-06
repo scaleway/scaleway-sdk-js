@@ -9,6 +9,10 @@ export interface ListAllKeysAndValuesResponseValue {
    */
   id: string
   /**
+   * SRN of the value.
+   */
+  srn: string
+  /**
    * Name of the value.
    */
   name: string
@@ -25,6 +29,10 @@ export interface BindingKey {
    */
   id: string
   /**
+   * SRN of the key.
+   */
+  srn: string
+  /**
    * Name of the key.
    */
   name: string
@@ -37,6 +45,10 @@ export interface BindingValue {
    */
   id: string
   /**
+   * SRN of the value.
+   */
+  srn: string
+  /**
    * Name of the value.
    */
   name: string
@@ -48,6 +60,10 @@ export interface ListAllKeysAndValuesResponseKey {
    * ID of the key.
    */
   id: string
+  /**
+   * SRN of the key.
+   */
+  srn: string
   /**
    * Name of the key.
    */
@@ -69,9 +85,13 @@ export interface Binding {
    */
   id: string
   /**
-   * Scaleway Resource Name associated to the binding.
+   * SRN of the binding.
    */
   srn: string
+  /**
+   * SRN of the resource the binding is attached to.
+   */
+  targetSrn: string
   /**
    * Key associated to the binding.
    */
@@ -89,6 +109,10 @@ export interface Key {
    */
   id: string
   /**
+   * SRN of the annotation key.
+   */
+  srn: string
+  /**
    * Name of the annotation key.
    */
   name: string
@@ -104,6 +128,10 @@ export interface Value {
    * ID of the value.
    */
   id: string
+  /**
+   * SRN of the annotation value.
+   */
+  srn: string
   /**
    * ID of the key the value is associated to.
    */
@@ -121,9 +149,9 @@ export interface Value {
 
 export type CreateBindingRequest = {
   /**
-   * Scaleway Resource Name to associate.
+   * SRN of the resource to attach the value to.
    */
-  srn: string
+  targetSrn: string
   /**
    * ID of the value to associate.
    */
@@ -165,9 +193,9 @@ export type CreateValueRequest = {
 
 export type DeleteAllBindingsMatchingSRNRequest = {
   /**
-   * Scaleway Resource Name for which all bindings should be deleted.
+   * SRN of the resource for which all bindings should be deleted.
    */
-  srn: string
+  targetSrn: string
   /**
    * ID of the organization.
    */
@@ -285,9 +313,9 @@ export type ListBindingsRequest = {
    */
   organizationId?: string
   /**
-   * Scaleway Resource Name for which to list all bindings.
+   * SRN of the resource for which to list all bindings.
    */
-  srn?: string
+  targetSrn?: string
   /**
    * Value ID for which to list all bindings.
    */

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {JOB_RUN_TRANSIENT_STATUSES as JOB_RUN_TRANSIENT_STATUSES_JOBS,} from './content.gen.js'
 import {
   marshalCreateJobDefinitionRequest,
@@ -87,7 +87,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateJobDefinitionRequest}
    * @returns A Promise of JobDefinition
    */
-  createJobDefinition = (request: Readonly<CreateJobDefinitionRequest>) =>
+  createJobDefinition = (request: Readonly<CreateJobDefinitionRequest>, options?: RequestOptions) =>
     this.client.fetch<JobDefinition>(
       {
         body: JSON.stringify(
@@ -96,6 +96,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions`,
+        signal: options?.signal,
       },
       unmarshalJobDefinition,
     )
@@ -107,17 +108,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetJobDefinitionRequest}
    * @returns A Promise of JobDefinition
    */
-  getJobDefinition = (request: Readonly<GetJobDefinitionRequest>) =>
+  getJobDefinition = (request: Readonly<GetJobDefinitionRequest>, options?: RequestOptions) =>
     this.client.fetch<JobDefinition>(
       {
         method: 'GET',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
+        signal: options?.signal,
       },
       unmarshalJobDefinition,
     )
 
   
-  protected pageOfListJobDefinitions = (request: Readonly<ListJobDefinitionsRequest> = {}) =>
+  protected pageOfListJobDefinitions = (request: Readonly<ListJobDefinitionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListJobDefinitionsResponse>(
       {
         method: 'GET',
@@ -129,6 +131,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListJobDefinitionsResponse,
     )
@@ -139,8 +142,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJobDefinitionsRequest}
    * @returns A Promise of ListJobDefinitionsResponse
    */
-  listJobDefinitions = (request: Readonly<ListJobDefinitionsRequest> = {}) =>
-    enrichForPagination('jobDefinitions', this.pageOfListJobDefinitions, request)
+  listJobDefinitions = (request: Readonly<ListJobDefinitionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('jobDefinitions', this.pageOfListJobDefinitions, request, options)
 
   
   /**
@@ -149,7 +152,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateJobDefinitionRequest}
    * @returns A Promise of JobDefinition
    */
-  updateJobDefinition = (request: Readonly<UpdateJobDefinitionRequest>) =>
+  updateJobDefinition = (request: Readonly<UpdateJobDefinitionRequest>, options?: RequestOptions) =>
     this.client.fetch<JobDefinition>(
       {
         body: JSON.stringify(
@@ -158,6 +161,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
+        signal: options?.signal,
       },
       unmarshalJobDefinition,
     )
@@ -168,11 +172,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteJobDefinitionRequest}
    */
-  deleteJobDefinition = (request: Readonly<DeleteJobDefinitionRequest>) =>
+  deleteJobDefinition = (request: Readonly<DeleteJobDefinitionRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -183,7 +188,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link StartJobDefinitionRequest}
    * @returns A Promise of StartJobDefinitionResponse
    */
-  startJobDefinition = (request: Readonly<StartJobDefinitionRequest>) =>
+  startJobDefinition = (request: Readonly<StartJobDefinitionRequest>, options?: RequestOptions) =>
     this.client.fetch<StartJobDefinitionResponse>(
       {
         body: JSON.stringify(
@@ -192,6 +197,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/start`,
+        signal: options?.signal,
       },
       unmarshalStartJobDefinitionResponse,
     )
@@ -203,7 +209,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateJobDefinitionSecretsRequest}
    * @returns A Promise of CreateJobDefinitionSecretsResponse
    */
-  createJobDefinitionSecrets = (request: Readonly<CreateJobDefinitionSecretsRequest>) =>
+  createJobDefinitionSecrets = (request: Readonly<CreateJobDefinitionSecretsRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateJobDefinitionSecretsResponse>(
       {
         body: JSON.stringify(
@@ -212,6 +218,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets`,
+        signal: options?.signal,
       },
       unmarshalCreateJobDefinitionSecretsResponse,
     )
@@ -223,11 +230,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetJobDefinitionSecretRequest}
    * @returns A Promise of Secret
    */
-  getJobDefinitionSecret = (request: Readonly<GetJobDefinitionSecretRequest>) =>
+  getJobDefinitionSecret = (request: Readonly<GetJobDefinitionSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<Secret>(
       {
         method: 'GET',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+        signal: options?.signal,
       },
       unmarshalSecret,
     )
@@ -239,11 +247,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJobDefinitionSecretsRequest}
    * @returns A Promise of ListJobDefinitionSecretsResponse
    */
-  listJobDefinitionSecrets = (request: Readonly<ListJobDefinitionSecretsRequest>) =>
+  listJobDefinitionSecrets = (request: Readonly<ListJobDefinitionSecretsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListJobDefinitionSecretsResponse>(
       {
         method: 'GET',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets`,
+        signal: options?.signal,
       },
       unmarshalListJobDefinitionSecretsResponse,
     )
@@ -255,7 +264,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateJobDefinitionSecretRequest}
    * @returns A Promise of Secret
    */
-  updateJobDefinitionSecret = (request: Readonly<UpdateJobDefinitionSecretRequest>) =>
+  updateJobDefinitionSecret = (request: Readonly<UpdateJobDefinitionSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<Secret>(
       {
         body: JSON.stringify(
@@ -264,6 +273,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+        signal: options?.signal,
       },
       unmarshalSecret,
     )
@@ -274,11 +284,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteJobDefinitionSecretRequest}
    */
-  deleteJobDefinitionSecret = (request: Readonly<DeleteJobDefinitionSecretRequest>) =>
+  deleteJobDefinitionSecret = (request: Readonly<DeleteJobDefinitionSecretRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/secrets/${validatePathParam('secretId', request.secretId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -289,11 +300,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetJobRunRequest}
    * @returns A Promise of JobRun
    */
-  getJobRun = (request: Readonly<GetJobRunRequest>) =>
+  getJobRun = (request: Readonly<GetJobRunRequest>, options?: RequestOptions) =>
     this.client.fetch<JobRun>(
       {
         method: 'GET',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-runs/${validatePathParam('jobRunId', request.jobRunId)}`,
+        signal: options?.signal,
       },
       unmarshalJobRun,
     )
@@ -305,19 +317,20 @@ export class API extends ParentAPI {
    * @param request - The request {@link StopJobRunRequest}
    * @returns A Promise of JobRun
    */
-  stopJobRun = (request: Readonly<StopJobRunRequest>) =>
+  stopJobRun = (request: Readonly<StopJobRunRequest>, options?: RequestOptions) =>
     this.client.fetch<JobRun>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-runs/${validatePathParam('jobRunId', request.jobRunId)}/stop`,
+        signal: options?.signal,
       },
       unmarshalJobRun,
     )
 
   
-  protected pageOfListJobRuns = (request: Readonly<ListJobRunsRequest> = {}) =>
+  protected pageOfListJobRuns = (request: Readonly<ListJobRunsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListJobRunsResponse>(
       {
         method: 'GET',
@@ -332,6 +345,7 @@ export class API extends ParentAPI {
           ['state', request.state],
           ['states', request.states],
         ),
+        signal: options?.signal,
       },
       unmarshalListJobRunsResponse,
     )
@@ -342,8 +356,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJobRunsRequest}
    * @returns A Promise of ListJobRunsResponse
    */
-  listJobRuns = (request: Readonly<ListJobRunsRequest> = {}) =>
-    enrichForPagination('jobRuns', this.pageOfListJobRuns, request)
+  listJobRuns = (request: Readonly<ListJobRunsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('jobRuns', this.pageOfListJobRuns, request, options)
 
   
   /**
@@ -352,11 +366,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListJobsResourcesRequest}
    * @returns A Promise of ListJobsResourcesResponse
    */
-  listJobsResources = (request: Readonly<ListJobsResourcesRequest> = {}) =>
+  listJobsResources = (request: Readonly<ListJobsResourcesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListJobsResourcesResponse>(
       {
         method: 'GET',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/jobs-resources`,
+        signal: options?.signal,
       },
       unmarshalListJobsResourcesResponse,
     )
@@ -368,11 +383,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetJobsLimitsRequest}
    * @returns A Promise of JobsLimits
    */
-  getJobsLimits = (request: Readonly<GetJobsLimitsRequest> = {}) =>
+  getJobsLimits = (request: Readonly<GetJobsLimitsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<JobsLimits>(
       {
         method: 'GET',
         path: `/serverless-jobs/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/jobs-limits`,
+        signal: options?.signal,
       },
       unmarshalJobsLimits,
     )

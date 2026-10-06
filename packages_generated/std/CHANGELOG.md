@@ -1,5 +1,129 @@
 # Change Log
 
+## 2.9.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-client@2.12.1
+
+## 2.9.0
+
+### Minor Changes
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(audit_trail): add authentication events in public API (#2374)
+
+- chore(typescript): upgrade version (#2916)
+
+- feat: add support for constants (#3286)
+
+- chore: apply Biome formatting to generated files for consistency with pipeline (#2755)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- fix(sdk): remove old script (#2124)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- Clean up CHANGELOG by removing version 1.1.0 details
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(cockpit): add return object for enable/disable alert endpoints (#2045)
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-client@2.12.0
+
 ## 2.8.3
 
 ### Patch Changes

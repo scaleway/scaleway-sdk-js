@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {CERTIFICATE_TRANSIENT_STATUSES as CERTIFICATE_TRANSIENT_STATUSES_LB,INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_LB,LB_TRANSIENT_STATUSES as LB_TRANSIENT_STATUSES_LB,PRIVATE_NETWORK_TRANSIENT_STATUSES as PRIVATE_NETWORK_TRANSIENT_STATUSES_LB,} from './content.gen.js'
 import {
   unmarshalAcl,
@@ -246,7 +246,7 @@ export class ZonedAPI extends ParentAPI {
       ],
     })
   
-  protected pageOfListLbs = (request: Readonly<ZonedApiListLbsRequest> = {}) =>
+  protected pageOfListLbs = (request: Readonly<ZonedApiListLbsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListLbsResponse>(
       {
         method: 'GET',
@@ -261,6 +261,7 @@ export class ZonedAPI extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListLbsResponse,
     )
@@ -271,8 +272,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListLbsRequest}
    * @returns A Promise of ListLbsResponse
    */
-  listLbs = (request: Readonly<ZonedApiListLbsRequest> = {}) =>
-    enrichForPagination('lbs', this.pageOfListLbs, request)
+  listLbs = (request: Readonly<ZonedApiListLbsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('lbs', this.pageOfListLbs, request, options)
 
   
   /**
@@ -281,7 +282,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateLbRequest}
    * @returns A Promise of Lb
    */
-  createLb = (request: Readonly<ZonedApiCreateLbRequest>) =>
+  createLb = (request: Readonly<ZonedApiCreateLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         body: JSON.stringify(
@@ -290,6 +291,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
@@ -301,11 +303,12 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetLbRequest}
    * @returns A Promise of Lb
    */
-  getLb = (request: Readonly<ZonedApiGetLbRequest>) =>
+  getLb = (request: Readonly<ZonedApiGetLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
@@ -335,7 +338,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateLbRequest}
    * @returns A Promise of Lb
    */
-  updateLb = (request: Readonly<ZonedApiUpdateLbRequest>) =>
+  updateLb = (request: Readonly<ZonedApiUpdateLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         body: JSON.stringify(
@@ -344,6 +347,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
@@ -354,7 +358,7 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiDeleteLbRequest}
    */
-  deleteLb = (request: Readonly<ZonedApiDeleteLbRequest>) =>
+  deleteLb = (request: Readonly<ZonedApiDeleteLbRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
@@ -362,6 +366,7 @@ export class ZonedAPI extends ParentAPI {
         urlParams: urlParams(
           ['release_ip', request.releaseIp],
         ),
+        signal: options?.signal,
       },
     )
 
@@ -372,7 +377,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiMigrateLbRequest}
    * @returns A Promise of Lb
    */
-  migrateLb = (request: Readonly<ZonedApiMigrateLbRequest>) =>
+  migrateLb = (request: Readonly<ZonedApiMigrateLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         body: JSON.stringify(
@@ -381,12 +386,13 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/migrate`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
 
   
-  protected pageOfListIPs = (request: Readonly<ZonedApiListIPsRequest> = {}) =>
+  protected pageOfListIPs = (request: Readonly<ZonedApiListIPsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
@@ -400,6 +406,7 @@ export class ZonedAPI extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListIpsResponse,
     )
@@ -410,8 +417,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListIPsRequest}
    * @returns A Promise of ListIpsResponse
    */
-  listIPs = (request: Readonly<ZonedApiListIPsRequest> = {}) =>
-    enrichForPagination('ips', this.pageOfListIPs, request)
+  listIPs = (request: Readonly<ZonedApiListIPsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('ips', this.pageOfListIPs, request, options)
 
   
   /**
@@ -420,7 +427,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateIpRequest}
    * @returns A Promise of Ip
    */
-  createIp = (request: Readonly<ZonedApiCreateIpRequest>) =>
+  createIp = (request: Readonly<ZonedApiCreateIpRequest>, options?: RequestOptions) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
@@ -429,6 +436,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
+        signal: options?.signal,
       },
       unmarshalIp,
     )
@@ -440,11 +448,12 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetIpRequest}
    * @returns A Promise of Ip
    */
-  getIp = (request: Readonly<ZonedApiGetIpRequest>) =>
+  getIp = (request: Readonly<ZonedApiGetIpRequest>, options?: RequestOptions) =>
     this.client.fetch<Ip>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIp,
     )
@@ -455,11 +464,12 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiReleaseIpRequest}
    */
-  releaseIp = (request: Readonly<ZonedApiReleaseIpRequest>) =>
+  releaseIp = (request: Readonly<ZonedApiReleaseIpRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -470,7 +480,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateIpRequest}
    * @returns A Promise of Ip
    */
-  updateIp = (request: Readonly<ZonedApiUpdateIpRequest>) =>
+  updateIp = (request: Readonly<ZonedApiUpdateIpRequest>, options?: RequestOptions) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
@@ -479,12 +489,13 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIp,
     )
 
   
-  protected pageOfListBackends = (request: Readonly<ZonedApiListBackendsRequest>) =>
+  protected pageOfListBackends = (request: Readonly<ZonedApiListBackendsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListBackendsResponse>(
       {
         method: 'GET',
@@ -495,6 +506,7 @@ export class ZonedAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListBackendsResponse,
     )
@@ -505,8 +517,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListBackendsRequest}
    * @returns A Promise of ListBackendsResponse
    */
-  listBackends = (request: Readonly<ZonedApiListBackendsRequest>) =>
-    enrichForPagination('backends', this.pageOfListBackends, request)
+  listBackends = (request: Readonly<ZonedApiListBackendsRequest>, options?: RequestOptions) =>
+    enrichForPagination('backends', this.pageOfListBackends, request, options)
 
   
   /**
@@ -515,7 +527,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateBackendRequest}
    * @returns A Promise of Backend
    */
-  createBackend = (request: Readonly<ZonedApiCreateBackendRequest>) =>
+  createBackend = (request: Readonly<ZonedApiCreateBackendRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -524,6 +536,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -535,11 +548,12 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetBackendRequest}
    * @returns A Promise of Backend
    */
-  getBackend = (request: Readonly<ZonedApiGetBackendRequest>) =>
+  getBackend = (request: Readonly<ZonedApiGetBackendRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -551,7 +565,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateBackendRequest}
    * @returns A Promise of Backend
    */
-  updateBackend = (request: Readonly<ZonedApiUpdateBackendRequest>) =>
+  updateBackend = (request: Readonly<ZonedApiUpdateBackendRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -560,6 +574,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -570,11 +585,12 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiDeleteBackendRequest}
    */
-  deleteBackend = (request: Readonly<ZonedApiDeleteBackendRequest>) =>
+  deleteBackend = (request: Readonly<ZonedApiDeleteBackendRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -585,7 +601,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiAddBackendServersRequest}
    * @returns A Promise of Backend
    */
-  addBackendServers = (request: Readonly<ZonedApiAddBackendServersRequest>) =>
+  addBackendServers = (request: Readonly<ZonedApiAddBackendServersRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -594,6 +610,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -605,7 +622,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiRemoveBackendServersRequest}
    * @returns A Promise of Backend
    */
-  removeBackendServers = (request: Readonly<ZonedApiRemoveBackendServersRequest>) =>
+  removeBackendServers = (request: Readonly<ZonedApiRemoveBackendServersRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -614,6 +631,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -625,7 +643,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiSetBackendServersRequest}
    * @returns A Promise of Backend
    */
-  setBackendServers = (request: Readonly<ZonedApiSetBackendServersRequest>) =>
+  setBackendServers = (request: Readonly<ZonedApiSetBackendServersRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -634,6 +652,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -645,7 +664,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateHealthCheckRequest}
    * @returns A Promise of HealthCheck
    */
-  updateHealthCheck = (request: Readonly<ZonedApiUpdateHealthCheckRequest>) =>
+  updateHealthCheck = (request: Readonly<ZonedApiUpdateHealthCheckRequest>, options?: RequestOptions) =>
     this.client.fetch<HealthCheck>(
       {
         body: JSON.stringify(
@@ -654,12 +673,13 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/healthcheck`,
+        signal: options?.signal,
       },
       unmarshalHealthCheck,
     )
 
   
-  protected pageOfListFrontends = (request: Readonly<ZonedApiListFrontendsRequest>) =>
+  protected pageOfListFrontends = (request: Readonly<ZonedApiListFrontendsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListFrontendsResponse>(
       {
         method: 'GET',
@@ -670,6 +690,7 @@ export class ZonedAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListFrontendsResponse,
     )
@@ -680,8 +701,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListFrontendsRequest}
    * @returns A Promise of ListFrontendsResponse
    */
-  listFrontends = (request: Readonly<ZonedApiListFrontendsRequest>) =>
-    enrichForPagination('frontends', this.pageOfListFrontends, request)
+  listFrontends = (request: Readonly<ZonedApiListFrontendsRequest>, options?: RequestOptions) =>
+    enrichForPagination('frontends', this.pageOfListFrontends, request, options)
 
   
   /**
@@ -690,7 +711,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateFrontendRequest}
    * @returns A Promise of Frontend
    */
-  createFrontend = (request: Readonly<ZonedApiCreateFrontendRequest>) =>
+  createFrontend = (request: Readonly<ZonedApiCreateFrontendRequest>, options?: RequestOptions) =>
     this.client.fetch<Frontend>(
       {
         body: JSON.stringify(
@@ -699,6 +720,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
+        signal: options?.signal,
       },
       unmarshalFrontend,
     )
@@ -710,11 +732,12 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetFrontendRequest}
    * @returns A Promise of Frontend
    */
-  getFrontend = (request: Readonly<ZonedApiGetFrontendRequest>) =>
+  getFrontend = (request: Readonly<ZonedApiGetFrontendRequest>, options?: RequestOptions) =>
     this.client.fetch<Frontend>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        signal: options?.signal,
       },
       unmarshalFrontend,
     )
@@ -726,7 +749,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateFrontendRequest}
    * @returns A Promise of Frontend
    */
-  updateFrontend = (request: Readonly<ZonedApiUpdateFrontendRequest>) =>
+  updateFrontend = (request: Readonly<ZonedApiUpdateFrontendRequest>, options?: RequestOptions) =>
     this.client.fetch<Frontend>(
       {
         body: JSON.stringify(
@@ -735,6 +758,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        signal: options?.signal,
       },
       unmarshalFrontend,
     )
@@ -745,16 +769,17 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiDeleteFrontendRequest}
    */
-  deleteFrontend = (request: Readonly<ZonedApiDeleteFrontendRequest>) =>
+  deleteFrontend = (request: Readonly<ZonedApiDeleteFrontendRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListRoutes = (request: Readonly<ZonedApiListRoutesRequest> = {}) =>
+  protected pageOfListRoutes = (request: Readonly<ZonedApiListRoutesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRoutesResponse>(
       {
         method: 'GET',
@@ -765,6 +790,7 @@ export class ZonedAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListRoutesResponse,
     )
@@ -775,8 +801,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListRoutesRequest}
    * @returns A Promise of ListRoutesResponse
    */
-  listRoutes = (request: Readonly<ZonedApiListRoutesRequest> = {}) =>
-    enrichForPagination('routes', this.pageOfListRoutes, request)
+  listRoutes = (request: Readonly<ZonedApiListRoutesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('routes', this.pageOfListRoutes, request, options)
 
   
   /**
@@ -785,7 +811,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateRouteRequest}
    * @returns A Promise of Route
    */
-  createRoute = (request: Readonly<ZonedApiCreateRouteRequest>) =>
+  createRoute = (request: Readonly<ZonedApiCreateRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         body: JSON.stringify(
@@ -794,6 +820,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -805,11 +832,12 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetRouteRequest}
    * @returns A Promise of Route
    */
-  getRoute = (request: Readonly<ZonedApiGetRouteRequest>) =>
+  getRoute = (request: Readonly<ZonedApiGetRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -821,7 +849,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateRouteRequest}
    * @returns A Promise of Route
    */
-  updateRoute = (request: Readonly<ZonedApiUpdateRouteRequest>) =>
+  updateRoute = (request: Readonly<ZonedApiUpdateRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         body: JSON.stringify(
@@ -830,6 +858,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -840,11 +869,12 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiDeleteRouteRequest}
    */
-  deleteRoute = (request: Readonly<ZonedApiDeleteRouteRequest>) =>
+  deleteRoute = (request: Readonly<ZonedApiDeleteRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -856,7 +886,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetLbStatsRequest}
    * @returns A Promise of LbStats
    */
-  getLbStats = (request: Readonly<ZonedApiGetLbStatsRequest>) =>
+  getLbStats = (request: Readonly<ZonedApiGetLbStatsRequest>, options?: RequestOptions) =>
     this.client.fetch<LbStats>(
       {
         method: 'GET',
@@ -864,12 +894,13 @@ export class ZonedAPI extends ParentAPI {
         urlParams: urlParams(
           ['backend_id', request.backendId],
         ),
+        signal: options?.signal,
       },
       unmarshalLbStats,
     )
 
   
-  protected pageOfListBackendStats = (request: Readonly<ZonedApiListBackendStatsRequest>) =>
+  protected pageOfListBackendStats = (request: Readonly<ZonedApiListBackendStatsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListBackendStatsResponse>(
       {
         method: 'GET',
@@ -879,6 +910,7 @@ export class ZonedAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListBackendStatsResponse,
     )
@@ -889,11 +921,11 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListBackendStatsRequest}
    * @returns A Promise of ListBackendStatsResponse
    */
-  listBackendStats = (request: Readonly<ZonedApiListBackendStatsRequest>) =>
-    enrichForPagination('backendServersStats', this.pageOfListBackendStats, request)
+  listBackendStats = (request: Readonly<ZonedApiListBackendStatsRequest>, options?: RequestOptions) =>
+    enrichForPagination('backendServersStats', this.pageOfListBackendStats, request, options)
 
   
-  protected pageOfListAcls = (request: Readonly<ZonedApiListAclsRequest>) =>
+  protected pageOfListAcls = (request: Readonly<ZonedApiListAclsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListAclResponse>(
       {
         method: 'GET',
@@ -904,6 +936,7 @@ export class ZonedAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListAclResponse,
     )
@@ -914,8 +947,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListAclsRequest}
    * @returns A Promise of ListAclResponse
    */
-  listAcls = (request: Readonly<ZonedApiListAclsRequest>) =>
-    enrichForPagination('acls', this.pageOfListAcls, request)
+  listAcls = (request: Readonly<ZonedApiListAclsRequest>, options?: RequestOptions) =>
+    enrichForPagination('acls', this.pageOfListAcls, request, options)
 
   
   /**
@@ -924,7 +957,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateAclRequest}
    * @returns A Promise of Acl
    */
-  createAcl = (request: Readonly<ZonedApiCreateAclRequest>) =>
+  createAcl = (request: Readonly<ZonedApiCreateAclRequest>, options?: RequestOptions) =>
     this.client.fetch<Acl>(
       {
         body: JSON.stringify(
@@ -933,6 +966,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalAcl,
     )
@@ -944,11 +978,12 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetAclRequest}
    * @returns A Promise of Acl
    */
-  getAcl = (request: Readonly<ZonedApiGetAclRequest>) =>
+  getAcl = (request: Readonly<ZonedApiGetAclRequest>, options?: RequestOptions) =>
     this.client.fetch<Acl>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
       unmarshalAcl,
     )
@@ -960,7 +995,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateAclRequest}
    * @returns A Promise of Acl
    */
-  updateAcl = (request: Readonly<ZonedApiUpdateAclRequest>) =>
+  updateAcl = (request: Readonly<ZonedApiUpdateAclRequest>, options?: RequestOptions) =>
     this.client.fetch<Acl>(
       {
         body: JSON.stringify(
@@ -969,6 +1004,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
       unmarshalAcl,
     )
@@ -979,11 +1015,12 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiDeleteAclRequest}
    */
-  deleteAcl = (request: Readonly<ZonedApiDeleteAclRequest>) =>
+  deleteAcl = (request: Readonly<ZonedApiDeleteAclRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -994,7 +1031,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiSetAclsRequest}
    * @returns A Promise of SetAclsResponse
    */
-  setAcls = (request: Readonly<ZonedApiSetAclsRequest>) =>
+  setAcls = (request: Readonly<ZonedApiSetAclsRequest>, options?: RequestOptions) =>
     this.client.fetch<SetAclsResponse>(
       {
         body: JSON.stringify(
@@ -1003,6 +1040,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalSetAclsResponse,
     )
@@ -1014,7 +1052,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateCertificateRequest}
    * @returns A Promise of Certificate
    */
-  createCertificate = (request: Readonly<ZonedApiCreateCertificateRequest>) =>
+  createCertificate = (request: Readonly<ZonedApiCreateCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Certificate>(
       {
         body: JSON.stringify(
@@ -1023,12 +1061,13 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
+        signal: options?.signal,
       },
       unmarshalCertificate,
     )
 
   
-  protected pageOfListCertificates = (request: Readonly<ZonedApiListCertificatesRequest>) =>
+  protected pageOfListCertificates = (request: Readonly<ZonedApiListCertificatesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListCertificatesResponse>(
       {
         method: 'GET',
@@ -1039,6 +1078,7 @@ export class ZonedAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListCertificatesResponse,
     )
@@ -1049,8 +1089,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListCertificatesRequest}
    * @returns A Promise of ListCertificatesResponse
    */
-  listCertificates = (request: Readonly<ZonedApiListCertificatesRequest>) =>
-    enrichForPagination('certificates', this.pageOfListCertificates, request)
+  listCertificates = (request: Readonly<ZonedApiListCertificatesRequest>, options?: RequestOptions) =>
+    enrichForPagination('certificates', this.pageOfListCertificates, request, options)
 
   
   /**
@@ -1059,11 +1099,12 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetCertificateRequest}
    * @returns A Promise of Certificate
    */
-  getCertificate = (request: Readonly<ZonedApiGetCertificateRequest>) =>
+  getCertificate = (request: Readonly<ZonedApiGetCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Certificate>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
       },
       unmarshalCertificate,
     )
@@ -1093,7 +1134,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateCertificateRequest}
    * @returns A Promise of Certificate
    */
-  updateCertificate = (request: Readonly<ZonedApiUpdateCertificateRequest>) =>
+  updateCertificate = (request: Readonly<ZonedApiUpdateCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Certificate>(
       {
         body: JSON.stringify(
@@ -1102,6 +1143,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
       },
       unmarshalCertificate,
     )
@@ -1112,16 +1154,17 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiDeleteCertificateRequest}
    */
-  deleteCertificate = (request: Readonly<ZonedApiDeleteCertificateRequest>) =>
+  deleteCertificate = (request: Readonly<ZonedApiDeleteCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListLbTypes = (request: Readonly<ZonedApiListLbTypesRequest> = {}) =>
+  protected pageOfListLbTypes = (request: Readonly<ZonedApiListLbTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListLbTypesResponse>(
       {
         method: 'GET',
@@ -1130,6 +1173,7 @@ export class ZonedAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListLbTypesResponse,
     )
@@ -1140,8 +1184,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListLbTypesRequest}
    * @returns A Promise of ListLbTypesResponse
    */
-  listLbTypes = (request: Readonly<ZonedApiListLbTypesRequest> = {}) =>
-    enrichForPagination('lbTypes', this.pageOfListLbTypes, request)
+  listLbTypes = (request: Readonly<ZonedApiListLbTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('lbTypes', this.pageOfListLbTypes, request, options)
 
   
   /**
@@ -1150,7 +1194,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiCreateSubscriberRequest}
    * @returns A Promise of Subscriber
    */
-  createSubscriber = (request: Readonly<ZonedApiCreateSubscriberRequest>) =>
+  createSubscriber = (request: Readonly<ZonedApiCreateSubscriberRequest>, options?: RequestOptions) =>
     this.client.fetch<Subscriber>(
       {
         body: JSON.stringify(
@@ -1159,6 +1203,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers`,
+        signal: options?.signal,
       },
       unmarshalSubscriber,
     )
@@ -1170,17 +1215,18 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiGetSubscriberRequest}
    * @returns A Promise of Subscriber
    */
-  getSubscriber = (request: Readonly<ZonedApiGetSubscriberRequest>) =>
+  getSubscriber = (request: Readonly<ZonedApiGetSubscriberRequest>, options?: RequestOptions) =>
     this.client.fetch<Subscriber>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
+        signal: options?.signal,
       },
       unmarshalSubscriber,
     )
 
   
-  protected pageOfListSubscriber = (request: Readonly<ZonedApiListSubscriberRequest> = {}) =>
+  protected pageOfListSubscriber = (request: Readonly<ZonedApiListSubscriberRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSubscriberResponse>(
       {
         method: 'GET',
@@ -1193,6 +1239,7 @@ export class ZonedAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSubscriberResponse,
     )
@@ -1203,8 +1250,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListSubscriberRequest}
    * @returns A Promise of ListSubscriberResponse
    */
-  listSubscriber = (request: Readonly<ZonedApiListSubscriberRequest> = {}) =>
-    enrichForPagination('subscribers', this.pageOfListSubscriber, request)
+  listSubscriber = (request: Readonly<ZonedApiListSubscriberRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('subscribers', this.pageOfListSubscriber, request, options)
 
   
   /**
@@ -1213,7 +1260,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUpdateSubscriberRequest}
    * @returns A Promise of Subscriber
    */
-  updateSubscriber = (request: Readonly<ZonedApiUpdateSubscriberRequest>) =>
+  updateSubscriber = (request: Readonly<ZonedApiUpdateSubscriberRequest>, options?: RequestOptions) =>
     this.client.fetch<Subscriber>(
       {
         body: JSON.stringify(
@@ -1222,6 +1269,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
+        signal: options?.signal,
       },
       unmarshalSubscriber,
     )
@@ -1232,11 +1280,12 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiDeleteSubscriberRequest}
    */
-  deleteSubscriber = (request: Readonly<ZonedApiDeleteSubscriberRequest>) =>
+  deleteSubscriber = (request: Readonly<ZonedApiDeleteSubscriberRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/subscription/${validatePathParam('subscriberId', request.subscriberId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1247,7 +1296,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiSubscribeToLbRequest}
    * @returns A Promise of Lb
    */
-  subscribeToLb = (request: Readonly<ZonedApiSubscribeToLbRequest>) =>
+  subscribeToLb = (request: Readonly<ZonedApiSubscribeToLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         body: JSON.stringify(
@@ -1256,6 +1305,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/${validatePathParam('lbId', request.lbId)}/subscribe`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
@@ -1267,17 +1317,18 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiUnsubscribeFromLbRequest}
    * @returns A Promise of Lb
    */
-  unsubscribeFromLb = (request: Readonly<ZonedApiUnsubscribeFromLbRequest>) =>
+  unsubscribeFromLb = (request: Readonly<ZonedApiUnsubscribeFromLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/${validatePathParam('lbId', request.lbId)}/unsubscribe`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
 
   
-  protected pageOfListLbPrivateNetworks = (request: Readonly<ZonedApiListLbPrivateNetworksRequest>) =>
+  protected pageOfListLbPrivateNetworks = (request: Readonly<ZonedApiListLbPrivateNetworksRequest>, options?: RequestOptions) =>
     this.client.fetch<ListLbPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -1287,6 +1338,7 @@ export class ZonedAPI extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListLbPrivateNetworksResponse,
     )
@@ -1297,8 +1349,8 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiListLbPrivateNetworksRequest}
    * @returns A Promise of ListLbPrivateNetworksResponse
    */
-  listLbPrivateNetworks = (request: Readonly<ZonedApiListLbPrivateNetworksRequest>) =>
-    enrichForPagination('privateNetwork', this.pageOfListLbPrivateNetworks, request)
+  listLbPrivateNetworks = (request: Readonly<ZonedApiListLbPrivateNetworksRequest>, options?: RequestOptions) =>
+    enrichForPagination('privateNetwork', this.pageOfListLbPrivateNetworks, request, options)
 
   
   /**
@@ -1307,7 +1359,7 @@ export class ZonedAPI extends ParentAPI {
    * @param request - The request {@link ZonedApiAttachPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
    */
-  attachPrivateNetwork = (request: Readonly<ZonedApiAttachPrivateNetworkRequest>) =>
+  attachPrivateNetwork = (request: Readonly<ZonedApiAttachPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetwork>(
       {
         body: JSON.stringify(
@@ -1316,6 +1368,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/attach-private-network`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetwork,
     )
@@ -1326,7 +1379,7 @@ export class ZonedAPI extends ParentAPI {
    *
    * @param request - The request {@link ZonedApiDetachPrivateNetworkRequest}
    */
-  detachPrivateNetwork = (request: Readonly<ZonedApiDetachPrivateNetworkRequest>) =>
+  detachPrivateNetwork = (request: Readonly<ZonedApiDetachPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1335,6 +1388,7 @@ export class ZonedAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/detach-private-network`,
+        signal: options?.signal,
       },
     )
 
@@ -1360,7 +1414,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListLbs = (request: Readonly<ListLbsRequest> = {}) =>
+  protected pageOfListLbs = (request: Readonly<ListLbsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListLbsResponse>(
       {
         method: 'GET',
@@ -1375,6 +1429,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListLbsResponse,
     )
@@ -1385,8 +1440,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListLbsRequest}
    * @returns A Promise of ListLbsResponse
    */
-  listLbs = (request: Readonly<ListLbsRequest> = {}) =>
-    enrichForPagination('lbs', this.pageOfListLbs, request)
+  listLbs = (request: Readonly<ListLbsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('lbs', this.pageOfListLbs, request, options)
 
   
   /**
@@ -1395,7 +1450,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateLbRequest}
    * @returns A Promise of Lb
    */
-  createLb = (request: Readonly<CreateLbRequest>) =>
+  createLb = (request: Readonly<CreateLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         body: JSON.stringify(
@@ -1404,6 +1459,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
@@ -1415,11 +1471,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetLbRequest}
    * @returns A Promise of Lb
    */
-  getLb = (request: Readonly<GetLbRequest>) =>
+  getLb = (request: Readonly<GetLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
@@ -1449,7 +1506,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateLbRequest}
    * @returns A Promise of Lb
    */
-  updateLb = (request: Readonly<UpdateLbRequest>) =>
+  updateLb = (request: Readonly<UpdateLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         body: JSON.stringify(
@@ -1458,6 +1515,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
@@ -1468,7 +1526,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteLbRequest}
    */
-  deleteLb = (request: Readonly<DeleteLbRequest>) =>
+  deleteLb = (request: Readonly<DeleteLbRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
@@ -1476,6 +1534,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['release_ip', request.releaseIp],
         ),
+        signal: options?.signal,
       },
     )
 
@@ -1486,7 +1545,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link MigrateLbRequest}
    * @returns A Promise of Lb
    */
-  migrateLb = (request: Readonly<MigrateLbRequest>) =>
+  migrateLb = (request: Readonly<MigrateLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         body: JSON.stringify(
@@ -1495,12 +1554,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/migrate`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
 
   
-  protected pageOfListIPs = (request: Readonly<ListIPsRequest> = {}) =>
+  protected pageOfListIPs = (request: Readonly<ListIPsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
@@ -1514,6 +1574,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListIpsResponse,
     )
@@ -1524,8 +1585,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListIPsRequest}
    * @returns A Promise of ListIpsResponse
    */
-  listIPs = (request: Readonly<ListIPsRequest> = {}) =>
-    enrichForPagination('ips', this.pageOfListIPs, request)
+  listIPs = (request: Readonly<ListIPsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('ips', this.pageOfListIPs, request, options)
 
   
   /**
@@ -1534,7 +1595,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateIpRequest}
    * @returns A Promise of Ip
    */
-  createIp = (request: Readonly<CreateIpRequest>) =>
+  createIp = (request: Readonly<CreateIpRequest>, options?: RequestOptions) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
@@ -1543,6 +1604,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
+        signal: options?.signal,
       },
       unmarshalIp,
     )
@@ -1554,11 +1616,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetIpRequest}
    * @returns A Promise of Ip
    */
-  getIp = (request: Readonly<GetIpRequest>) =>
+  getIp = (request: Readonly<GetIpRequest>, options?: RequestOptions) =>
     this.client.fetch<Ip>(
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIp,
     )
@@ -1569,11 +1632,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link ReleaseIpRequest}
    */
-  releaseIp = (request: Readonly<ReleaseIpRequest>) =>
+  releaseIp = (request: Readonly<ReleaseIpRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1584,7 +1648,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateIpRequest}
    * @returns A Promise of Ip
    */
-  updateIp = (request: Readonly<UpdateIpRequest>) =>
+  updateIp = (request: Readonly<UpdateIpRequest>, options?: RequestOptions) =>
     this.client.fetch<Ip>(
       {
         body: JSON.stringify(
@@ -1593,12 +1657,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIp,
     )
 
   
-  protected pageOfListBackends = (request: Readonly<ListBackendsRequest>) =>
+  protected pageOfListBackends = (request: Readonly<ListBackendsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListBackendsResponse>(
       {
         method: 'GET',
@@ -1609,6 +1674,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListBackendsResponse,
     )
@@ -1619,8 +1685,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListBackendsRequest}
    * @returns A Promise of ListBackendsResponse
    */
-  listBackends = (request: Readonly<ListBackendsRequest>) =>
-    enrichForPagination('backends', this.pageOfListBackends, request)
+  listBackends = (request: Readonly<ListBackendsRequest>, options?: RequestOptions) =>
+    enrichForPagination('backends', this.pageOfListBackends, request, options)
 
   
   /**
@@ -1629,7 +1695,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateBackendRequest}
    * @returns A Promise of Backend
    */
-  createBackend = (request: Readonly<CreateBackendRequest>) =>
+  createBackend = (request: Readonly<CreateBackendRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -1638,6 +1704,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -1649,11 +1716,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetBackendRequest}
    * @returns A Promise of Backend
    */
-  getBackend = (request: Readonly<GetBackendRequest>) =>
+  getBackend = (request: Readonly<GetBackendRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -1665,7 +1733,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateBackendRequest}
    * @returns A Promise of Backend
    */
-  updateBackend = (request: Readonly<UpdateBackendRequest>) =>
+  updateBackend = (request: Readonly<UpdateBackendRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -1674,6 +1742,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -1684,11 +1753,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteBackendRequest}
    */
-  deleteBackend = (request: Readonly<DeleteBackendRequest>) =>
+  deleteBackend = (request: Readonly<DeleteBackendRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1699,7 +1769,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddBackendServersRequest}
    * @returns A Promise of Backend
    */
-  addBackendServers = (request: Readonly<AddBackendServersRequest>) =>
+  addBackendServers = (request: Readonly<AddBackendServersRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -1708,6 +1778,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -1719,7 +1790,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RemoveBackendServersRequest}
    * @returns A Promise of Backend
    */
-  removeBackendServers = (request: Readonly<RemoveBackendServersRequest>) =>
+  removeBackendServers = (request: Readonly<RemoveBackendServersRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -1728,6 +1799,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -1739,7 +1811,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetBackendServersRequest}
    * @returns A Promise of Backend
    */
-  setBackendServers = (request: Readonly<SetBackendServersRequest>) =>
+  setBackendServers = (request: Readonly<SetBackendServersRequest>, options?: RequestOptions) =>
     this.client.fetch<Backend>(
       {
         body: JSON.stringify(
@@ -1748,6 +1820,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
+        signal: options?.signal,
       },
       unmarshalBackend,
     )
@@ -1759,7 +1832,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateHealthCheckRequest}
    * @returns A Promise of HealthCheck
    */
-  updateHealthCheck = (request: Readonly<UpdateHealthCheckRequest>) =>
+  updateHealthCheck = (request: Readonly<UpdateHealthCheckRequest>, options?: RequestOptions) =>
     this.client.fetch<HealthCheck>(
       {
         body: JSON.stringify(
@@ -1768,12 +1841,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/healthcheck`,
+        signal: options?.signal,
       },
       unmarshalHealthCheck,
     )
 
   
-  protected pageOfListFrontends = (request: Readonly<ListFrontendsRequest>) =>
+  protected pageOfListFrontends = (request: Readonly<ListFrontendsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListFrontendsResponse>(
       {
         method: 'GET',
@@ -1784,6 +1858,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListFrontendsResponse,
     )
@@ -1794,8 +1869,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListFrontendsRequest}
    * @returns A Promise of ListFrontendsResponse
    */
-  listFrontends = (request: Readonly<ListFrontendsRequest>) =>
-    enrichForPagination('frontends', this.pageOfListFrontends, request)
+  listFrontends = (request: Readonly<ListFrontendsRequest>, options?: RequestOptions) =>
+    enrichForPagination('frontends', this.pageOfListFrontends, request, options)
 
   
   /**
@@ -1804,7 +1879,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateFrontendRequest}
    * @returns A Promise of Frontend
    */
-  createFrontend = (request: Readonly<CreateFrontendRequest>) =>
+  createFrontend = (request: Readonly<CreateFrontendRequest>, options?: RequestOptions) =>
     this.client.fetch<Frontend>(
       {
         body: JSON.stringify(
@@ -1813,6 +1888,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
+        signal: options?.signal,
       },
       unmarshalFrontend,
     )
@@ -1824,11 +1900,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetFrontendRequest}
    * @returns A Promise of Frontend
    */
-  getFrontend = (request: Readonly<GetFrontendRequest>) =>
+  getFrontend = (request: Readonly<GetFrontendRequest>, options?: RequestOptions) =>
     this.client.fetch<Frontend>(
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        signal: options?.signal,
       },
       unmarshalFrontend,
     )
@@ -1840,7 +1917,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateFrontendRequest}
    * @returns A Promise of Frontend
    */
-  updateFrontend = (request: Readonly<UpdateFrontendRequest>) =>
+  updateFrontend = (request: Readonly<UpdateFrontendRequest>, options?: RequestOptions) =>
     this.client.fetch<Frontend>(
       {
         body: JSON.stringify(
@@ -1849,6 +1926,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        signal: options?.signal,
       },
       unmarshalFrontend,
     )
@@ -1859,16 +1937,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteFrontendRequest}
    */
-  deleteFrontend = (request: Readonly<DeleteFrontendRequest>) =>
+  deleteFrontend = (request: Readonly<DeleteFrontendRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
+  protected pageOfListRoutes = (request: Readonly<ListRoutesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRoutesResponse>(
       {
         method: 'GET',
@@ -1879,6 +1958,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListRoutesResponse,
     )
@@ -1889,8 +1969,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRoutesRequest}
    * @returns A Promise of ListRoutesResponse
    */
-  listRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
-    enrichForPagination('routes', this.pageOfListRoutes, request)
+  listRoutes = (request: Readonly<ListRoutesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('routes', this.pageOfListRoutes, request, options)
 
   
   /**
@@ -1899,7 +1979,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateRouteRequest}
    * @returns A Promise of Route
    */
-  createRoute = (request: Readonly<CreateRouteRequest>) =>
+  createRoute = (request: Readonly<CreateRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         body: JSON.stringify(
@@ -1908,6 +1988,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -1919,11 +2000,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetRouteRequest}
    * @returns A Promise of Route
    */
-  getRoute = (request: Readonly<GetRouteRequest>) =>
+  getRoute = (request: Readonly<GetRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -1935,7 +2017,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateRouteRequest}
    * @returns A Promise of Route
    */
-  updateRoute = (request: Readonly<UpdateRouteRequest>) =>
+  updateRoute = (request: Readonly<UpdateRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         body: JSON.stringify(
@@ -1944,6 +2026,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -1954,11 +2037,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
-  deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
+  deleteRoute = (request: Readonly<DeleteRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1970,7 +2054,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetLbStatsRequest}
    * @returns A Promise of LbStats
    */
-  getLbStats = (request: Readonly<GetLbStatsRequest>) =>
+  getLbStats = (request: Readonly<GetLbStatsRequest>, options?: RequestOptions) =>
     this.client.fetch<LbStats>(
       {
         method: 'GET',
@@ -1978,12 +2062,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['backend_id', request.backendId],
         ),
+        signal: options?.signal,
       },
       unmarshalLbStats,
     )
 
   
-  protected pageOfListBackendStats = (request: Readonly<ListBackendStatsRequest>) =>
+  protected pageOfListBackendStats = (request: Readonly<ListBackendStatsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListBackendStatsResponse>(
       {
         method: 'GET',
@@ -1993,6 +2078,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListBackendStatsResponse,
     )
@@ -2003,11 +2089,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListBackendStatsRequest}
    * @returns A Promise of ListBackendStatsResponse
    */
-  listBackendStats = (request: Readonly<ListBackendStatsRequest>) =>
-    enrichForPagination('backendServersStats', this.pageOfListBackendStats, request)
+  listBackendStats = (request: Readonly<ListBackendStatsRequest>, options?: RequestOptions) =>
+    enrichForPagination('backendServersStats', this.pageOfListBackendStats, request, options)
 
   
-  protected pageOfListAcls = (request: Readonly<ListAclsRequest>) =>
+  protected pageOfListAcls = (request: Readonly<ListAclsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListAclResponse>(
       {
         method: 'GET',
@@ -2018,6 +2104,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListAclResponse,
     )
@@ -2028,8 +2115,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListAclsRequest}
    * @returns A Promise of ListAclResponse
    */
-  listAcls = (request: Readonly<ListAclsRequest>) =>
-    enrichForPagination('acls', this.pageOfListAcls, request)
+  listAcls = (request: Readonly<ListAclsRequest>, options?: RequestOptions) =>
+    enrichForPagination('acls', this.pageOfListAcls, request, options)
 
   
   /**
@@ -2038,7 +2125,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateAclRequest}
    * @returns A Promise of Acl
    */
-  createAcl = (request: Readonly<CreateAclRequest>) =>
+  createAcl = (request: Readonly<CreateAclRequest>, options?: RequestOptions) =>
     this.client.fetch<Acl>(
       {
         body: JSON.stringify(
@@ -2047,6 +2134,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalAcl,
     )
@@ -2058,11 +2146,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetAclRequest}
    * @returns A Promise of Acl
    */
-  getAcl = (request: Readonly<GetAclRequest>) =>
+  getAcl = (request: Readonly<GetAclRequest>, options?: RequestOptions) =>
     this.client.fetch<Acl>(
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
       unmarshalAcl,
     )
@@ -2074,7 +2163,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateAclRequest}
    * @returns A Promise of Acl
    */
-  updateAcl = (request: Readonly<UpdateAclRequest>) =>
+  updateAcl = (request: Readonly<UpdateAclRequest>, options?: RequestOptions) =>
     this.client.fetch<Acl>(
       {
         body: JSON.stringify(
@@ -2083,6 +2172,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
       unmarshalAcl,
     )
@@ -2093,11 +2183,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteAclRequest}
    */
-  deleteAcl = (request: Readonly<DeleteAclRequest>) =>
+  deleteAcl = (request: Readonly<DeleteAclRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -2108,7 +2199,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateCertificateRequest}
    * @returns A Promise of Certificate
    */
-  createCertificate = (request: Readonly<CreateCertificateRequest>) =>
+  createCertificate = (request: Readonly<CreateCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Certificate>(
       {
         body: JSON.stringify(
@@ -2117,12 +2208,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
+        signal: options?.signal,
       },
       unmarshalCertificate,
     )
 
   
-  protected pageOfListCertificates = (request: Readonly<ListCertificatesRequest>) =>
+  protected pageOfListCertificates = (request: Readonly<ListCertificatesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListCertificatesResponse>(
       {
         method: 'GET',
@@ -2133,6 +2225,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListCertificatesResponse,
     )
@@ -2143,8 +2236,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListCertificatesRequest}
    * @returns A Promise of ListCertificatesResponse
    */
-  listCertificates = (request: Readonly<ListCertificatesRequest>) =>
-    enrichForPagination('certificates', this.pageOfListCertificates, request)
+  listCertificates = (request: Readonly<ListCertificatesRequest>, options?: RequestOptions) =>
+    enrichForPagination('certificates', this.pageOfListCertificates, request, options)
 
   
   /**
@@ -2153,11 +2246,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetCertificateRequest}
    * @returns A Promise of Certificate
    */
-  getCertificate = (request: Readonly<GetCertificateRequest>) =>
+  getCertificate = (request: Readonly<GetCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Certificate>(
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
       },
       unmarshalCertificate,
     )
@@ -2187,7 +2281,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateCertificateRequest}
    * @returns A Promise of Certificate
    */
-  updateCertificate = (request: Readonly<UpdateCertificateRequest>) =>
+  updateCertificate = (request: Readonly<UpdateCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Certificate>(
       {
         body: JSON.stringify(
@@ -2196,6 +2290,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
       },
       unmarshalCertificate,
     )
@@ -2206,16 +2301,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteCertificateRequest}
    */
-  deleteCertificate = (request: Readonly<DeleteCertificateRequest>) =>
+  deleteCertificate = (request: Readonly<DeleteCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListLbTypes = (request: Readonly<ListLbTypesRequest> = {}) =>
+  protected pageOfListLbTypes = (request: Readonly<ListLbTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListLbTypesResponse>(
       {
         method: 'GET',
@@ -2224,6 +2320,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListLbTypesResponse,
     )
@@ -2234,8 +2331,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListLbTypesRequest}
    * @returns A Promise of ListLbTypesResponse
    */
-  listLbTypes = (request: Readonly<ListLbTypesRequest> = {}) =>
-    enrichForPagination('lbTypes', this.pageOfListLbTypes, request)
+  listLbTypes = (request: Readonly<ListLbTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('lbTypes', this.pageOfListLbTypes, request, options)
 
   
   /**
@@ -2244,7 +2341,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateSubscriberRequest}
    * @returns A Promise of Subscriber
    */
-  createSubscriber = (request: Readonly<CreateSubscriberRequest>) =>
+  createSubscriber = (request: Readonly<CreateSubscriberRequest>, options?: RequestOptions) =>
     this.client.fetch<Subscriber>(
       {
         body: JSON.stringify(
@@ -2253,6 +2350,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers`,
+        signal: options?.signal,
       },
       unmarshalSubscriber,
     )
@@ -2264,17 +2362,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetSubscriberRequest}
    * @returns A Promise of Subscriber
    */
-  getSubscriber = (request: Readonly<GetSubscriberRequest>) =>
+  getSubscriber = (request: Readonly<GetSubscriberRequest>, options?: RequestOptions) =>
     this.client.fetch<Subscriber>(
       {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
+        signal: options?.signal,
       },
       unmarshalSubscriber,
     )
 
   
-  protected pageOfListSubscriber = (request: Readonly<ListSubscriberRequest> = {}) =>
+  protected pageOfListSubscriber = (request: Readonly<ListSubscriberRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSubscriberResponse>(
       {
         method: 'GET',
@@ -2287,6 +2386,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSubscriberResponse,
     )
@@ -2297,8 +2397,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSubscriberRequest}
    * @returns A Promise of ListSubscriberResponse
    */
-  listSubscriber = (request: Readonly<ListSubscriberRequest> = {}) =>
-    enrichForPagination('subscribers', this.pageOfListSubscriber, request)
+  listSubscriber = (request: Readonly<ListSubscriberRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('subscribers', this.pageOfListSubscriber, request, options)
 
   
   /**
@@ -2307,7 +2407,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateSubscriberRequest}
    * @returns A Promise of Subscriber
    */
-  updateSubscriber = (request: Readonly<UpdateSubscriberRequest>) =>
+  updateSubscriber = (request: Readonly<UpdateSubscriberRequest>, options?: RequestOptions) =>
     this.client.fetch<Subscriber>(
       {
         body: JSON.stringify(
@@ -2316,6 +2416,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
+        signal: options?.signal,
       },
       unmarshalSubscriber,
     )
@@ -2326,11 +2427,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteSubscriberRequest}
    */
-  deleteSubscriber = (request: Readonly<DeleteSubscriberRequest>) =>
+  deleteSubscriber = (request: Readonly<DeleteSubscriberRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/subscriber/${validatePathParam('subscriberId', request.subscriberId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -2341,7 +2443,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SubscribeToLbRequest}
    * @returns A Promise of Lb
    */
-  subscribeToLb = (request: Readonly<SubscribeToLbRequest>) =>
+  subscribeToLb = (request: Readonly<SubscribeToLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         body: JSON.stringify(
@@ -2350,6 +2452,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/${validatePathParam('lbId', request.lbId)}/subscribe`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
@@ -2361,17 +2464,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link UnsubscribeFromLbRequest}
    * @returns A Promise of Lb
    */
-  unsubscribeFromLb = (request: Readonly<UnsubscribeFromLbRequest>) =>
+  unsubscribeFromLb = (request: Readonly<UnsubscribeFromLbRequest>, options?: RequestOptions) =>
     this.client.fetch<Lb>(
       {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/${validatePathParam('lbId', request.lbId)}/unsubscribe`,
+        signal: options?.signal,
       },
       unmarshalLb,
     )
 
   
-  protected pageOfListLbPrivateNetworks = (request: Readonly<ListLbPrivateNetworksRequest>) =>
+  protected pageOfListLbPrivateNetworks = (request: Readonly<ListLbPrivateNetworksRequest>, options?: RequestOptions) =>
     this.client.fetch<ListLbPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -2381,6 +2485,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListLbPrivateNetworksResponse,
     )
@@ -2391,8 +2496,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListLbPrivateNetworksRequest}
    * @returns A Promise of ListLbPrivateNetworksResponse
    */
-  listLbPrivateNetworks = (request: Readonly<ListLbPrivateNetworksRequest>) =>
-    enrichForPagination('privateNetwork', this.pageOfListLbPrivateNetworks, request)
+  listLbPrivateNetworks = (request: Readonly<ListLbPrivateNetworksRequest>, options?: RequestOptions) =>
+    enrichForPagination('privateNetwork', this.pageOfListLbPrivateNetworks, request, options)
 
   
   /**
@@ -2401,7 +2506,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
    */
-  attachPrivateNetwork = (request: Readonly<AttachPrivateNetworkRequest>) =>
+  attachPrivateNetwork = (request: Readonly<AttachPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetwork>(
       {
         body: JSON.stringify(
@@ -2410,6 +2515,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/attach`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetwork,
     )
@@ -2420,13 +2526,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DetachPrivateNetworkRequest}
    */
-  detachPrivateNetwork = (request: Readonly<DetachPrivateNetworkRequest>) =>
+  detachPrivateNetwork = (request: Readonly<DetachPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/detach`,
+        signal: options?.signal,
       },
     )
 

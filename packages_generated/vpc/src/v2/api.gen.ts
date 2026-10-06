@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   marshalAddPrivateNetworkObjectStoragePrivateAccessRequest,
   unmarshalAddPrivateNetworkObjectStoragePrivateAccessResponse,
@@ -19,6 +19,7 @@ import {
   marshalCreateRouteRequest,
   marshalCreateVPCConnectorRequest,
   marshalCreateVPCRequest,
+  marshalEnableObjectStoragePrivateAccessRequest,
   unmarshalGetAclResponse,
   unmarshalIngressRule,
   unmarshalListIngressRulesResponse,
@@ -119,7 +120,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListVPCs = (request: Readonly<ListVPCsRequest> = {}) =>
+  protected pageOfListVPCs = (request: Readonly<ListVPCsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVPCsResponse>(
       {
         method: 'GET',
@@ -136,6 +137,7 @@ export class API extends ParentAPI {
           ['routing_enabled', request.routingEnabled],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListVPCsResponse,
     )
@@ -146,8 +148,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVPCsRequest}
    * @returns A Promise of ListVPCsResponse
    */
-  listVPCs = (request: Readonly<ListVPCsRequest> = {}) =>
-    enrichForPagination('vpcs', this.pageOfListVPCs, request)
+  listVPCs = (request: Readonly<ListVPCsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('vpcs', this.pageOfListVPCs, request, options)
 
   
   /**
@@ -156,7 +158,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateVPCRequest}
    * @returns A Promise of VPC
    */
-  createVPC = (request: Readonly<CreateVPCRequest>) =>
+  createVPC = (request: Readonly<CreateVPCRequest>, options?: RequestOptions) =>
     this.client.fetch<VPC>(
       {
         body: JSON.stringify(
@@ -165,6 +167,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs`,
+        signal: options?.signal,
       },
       unmarshalVPC,
     )
@@ -176,11 +179,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetVPCRequest}
    * @returns A Promise of VPC
    */
-  getVPC = (request: Readonly<GetVPCRequest>) =>
+  getVPC = (request: Readonly<GetVPCRequest>, options?: RequestOptions) =>
     this.client.fetch<VPC>(
       {
         method: 'GET',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
+        signal: options?.signal,
       },
       unmarshalVPC,
     )
@@ -192,7 +196,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateVPCRequest}
    * @returns A Promise of VPC
    */
-  updateVPC = (request: Readonly<UpdateVPCRequest>) =>
+  updateVPC = (request: Readonly<UpdateVPCRequest>, options?: RequestOptions) =>
     this.client.fetch<VPC>(
       {
         body: JSON.stringify(
@@ -201,6 +205,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
+        signal: options?.signal,
       },
       unmarshalVPC,
     )
@@ -211,16 +216,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteVPCRequest}
    */
-  deleteVPC = (request: Readonly<DeleteVPCRequest>) =>
+  deleteVPC = (request: Readonly<DeleteVPCRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListPrivateNetworks = (request: Readonly<ListPrivateNetworksRequest> = {}) =>
+  protected pageOfListPrivateNetworks = (request: Readonly<ListPrivateNetworksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -238,6 +244,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['vpc_id', request.vpcId],
         ),
+        signal: options?.signal,
       },
       unmarshalListPrivateNetworksResponse,
     )
@@ -248,8 +255,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPrivateNetworksRequest}
    * @returns A Promise of ListPrivateNetworksResponse
    */
-  listPrivateNetworks = (request: Readonly<ListPrivateNetworksRequest> = {}) =>
-    enrichForPagination('privateNetworks', this.pageOfListPrivateNetworks, request)
+  listPrivateNetworks = (request: Readonly<ListPrivateNetworksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('privateNetworks', this.pageOfListPrivateNetworks, request, options)
 
   
   /**
@@ -258,7 +265,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
    */
-  createPrivateNetwork = (request: Readonly<CreatePrivateNetworkRequest>) =>
+  createPrivateNetwork = (request: Readonly<CreatePrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetwork>(
       {
         body: JSON.stringify(
@@ -267,6 +274,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetwork,
     )
@@ -278,11 +286,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
    */
-  getPrivateNetwork = (request: Readonly<GetPrivateNetworkRequest>) =>
+  getPrivateNetwork = (request: Readonly<GetPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetwork>(
       {
         method: 'GET',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetwork,
     )
@@ -294,7 +303,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdatePrivateNetworkRequest}
    * @returns A Promise of PrivateNetwork
    */
-  updatePrivateNetwork = (request: Readonly<UpdatePrivateNetworkRequest>) =>
+  updatePrivateNetwork = (request: Readonly<UpdatePrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetwork>(
       {
         body: JSON.stringify(
@@ -303,6 +312,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetwork,
     )
@@ -313,11 +323,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeletePrivateNetworkRequest}
    */
-  deletePrivateNetwork = (request: Readonly<DeletePrivateNetworkRequest>) =>
+  deletePrivateNetwork = (request: Readonly<DeletePrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -328,13 +339,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableDHCPRequest}
    * @returns A Promise of PrivateNetwork
    */
-  enableDHCP = (request: Readonly<EnableDHCPRequest>) =>
+  enableDHCP = (request: Readonly<EnableDHCPRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetwork>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/enable-dhcp`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetwork,
     )
@@ -346,13 +358,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableRoutingRequest}
    * @returns A Promise of VPC
    */
-  enableRouting = (request: Readonly<EnableRoutingRequest>) =>
+  enableRouting = (request: Readonly<EnableRoutingRequest>, options?: RequestOptions) =>
     this.client.fetch<VPC>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/enable-routing`,
+        signal: options?.signal,
       },
       unmarshalVPC,
     )
@@ -364,19 +377,20 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableCustomRoutesPropagationRequest}
    * @returns A Promise of VPC
    */
-  enableCustomRoutesPropagation = (request: Readonly<EnableCustomRoutesPropagationRequest>) =>
+  enableCustomRoutesPropagation = (request: Readonly<EnableCustomRoutesPropagationRequest>, options?: RequestOptions) =>
     this.client.fetch<VPC>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/enable-custom-routes-propagation`,
+        signal: options?.signal,
       },
       unmarshalVPC,
     )
 
   
-  protected pageOfListSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
+  protected pageOfListSubnets = (request: Readonly<ListSubnetsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSubnetsResponse>(
       {
         method: 'GET',
@@ -390,6 +404,7 @@ export class API extends ParentAPI {
           ['subnet_ids', request.subnetIds],
           ['vpc_id', request.vpcId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSubnetsResponse,
     )
@@ -400,8 +415,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSubnetsRequest}
    * @returns A Promise of ListSubnetsResponse
    */
-  listSubnets = (request: Readonly<ListSubnetsRequest> = {}) =>
-    enrichForPagination('subnets', this.pageOfListSubnets, request)
+  listSubnets = (request: Readonly<ListSubnetsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('subnets', this.pageOfListSubnets, request, options)
 
   
   /**
@@ -410,7 +425,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateRouteRequest}
    * @returns A Promise of Route
    */
-  createRoute = (request: Readonly<CreateRouteRequest>) =>
+  createRoute = (request: Readonly<CreateRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         body: JSON.stringify(
@@ -419,6 +434,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -430,11 +446,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetRouteRequest}
    * @returns A Promise of Route
    */
-  getRoute = (request: Readonly<GetRouteRequest>) =>
+  getRoute = (request: Readonly<GetRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         method: 'GET',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -446,7 +463,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateRouteRequest}
    * @returns A Promise of Route
    */
-  updateRoute = (request: Readonly<UpdateRouteRequest>) =>
+  updateRoute = (request: Readonly<UpdateRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         body: JSON.stringify(
@@ -455,6 +472,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -465,11 +483,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
-  deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
+  deleteRoute = (request: Readonly<DeleteRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -480,7 +499,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetAclRequest}
    * @returns A Promise of GetAclResponse
    */
-  getAcl = (request: Readonly<GetAclRequest>) =>
+  getAcl = (request: Readonly<GetAclRequest>, options?: RequestOptions) =>
     this.client.fetch<GetAclResponse>(
       {
         method: 'GET',
@@ -488,6 +507,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['is_ipv6', request.isIpv6],
         ),
+        signal: options?.signal,
       },
       unmarshalGetAclResponse,
     )
@@ -499,7 +519,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetAclRequest}
    * @returns A Promise of SetAclResponse
    */
-  setAcl = (request: Readonly<SetAclRequest>) =>
+  setAcl = (request: Readonly<SetAclRequest>, options?: RequestOptions) =>
     this.client.fetch<SetAclResponse>(
       {
         body: JSON.stringify(
@@ -508,12 +528,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
+        signal: options?.signal,
       },
       unmarshalSetAclResponse,
     )
 
   
-  protected pageOfListVPCConnectors = (request: Readonly<ListVPCConnectorsRequest> = {}) =>
+  protected pageOfListVPCConnectors = (request: Readonly<ListVPCConnectorsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVPCConnectorsResponse>(
       {
         method: 'GET',
@@ -530,6 +551,7 @@ export class API extends ParentAPI {
           ['target_vpc_id', request.targetVpcId],
           ['vpc_id', request.vpcId],
         ),
+        signal: options?.signal,
       },
       unmarshalListVPCConnectorsResponse,
     )
@@ -540,8 +562,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVPCConnectorsRequest}
    * @returns A Promise of ListVPCConnectorsResponse
    */
-  listVPCConnectors = (request: Readonly<ListVPCConnectorsRequest> = {}) =>
-    enrichForPagination('vpcConnectors', this.pageOfListVPCConnectors, request)
+  listVPCConnectors = (request: Readonly<ListVPCConnectorsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('vpcConnectors', this.pageOfListVPCConnectors, request, options)
 
   
   /**
@@ -550,7 +572,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateVPCConnectorRequest}
    * @returns A Promise of VPCConnector
    */
-  createVPCConnector = (request: Readonly<CreateVPCConnectorRequest>) =>
+  createVPCConnector = (request: Readonly<CreateVPCConnectorRequest>, options?: RequestOptions) =>
     this.client.fetch<VPCConnector>(
       {
         body: JSON.stringify(
@@ -559,6 +581,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors`,
+        signal: options?.signal,
       },
       unmarshalVPCConnector,
     )
@@ -570,11 +593,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetVPCConnectorRequest}
    * @returns A Promise of VPCConnector
    */
-  getVPCConnector = (request: Readonly<GetVPCConnectorRequest>) =>
+  getVPCConnector = (request: Readonly<GetVPCConnectorRequest>, options?: RequestOptions) =>
     this.client.fetch<VPCConnector>(
       {
         method: 'GET',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}`,
+        signal: options?.signal,
       },
       unmarshalVPCConnector,
     )
@@ -586,7 +610,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateVPCConnectorRequest}
    * @returns A Promise of VPCConnector
    */
-  updateVPCConnector = (request: Readonly<UpdateVPCConnectorRequest>) =>
+  updateVPCConnector = (request: Readonly<UpdateVPCConnectorRequest>, options?: RequestOptions) =>
     this.client.fetch<VPCConnector>(
       {
         body: JSON.stringify(
@@ -595,6 +619,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}`,
+        signal: options?.signal,
       },
       unmarshalVPCConnector,
     )
@@ -605,16 +630,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteVPCConnectorRequest}
    */
-  deleteVPCConnector = (request: Readonly<DeleteVPCConnectorRequest>) =>
+  deleteVPCConnector = (request: Readonly<DeleteVPCConnectorRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListSubnetOverlaps = (request: Readonly<ListSubnetOverlapsRequest>) =>
+  protected pageOfListSubnetOverlaps = (request: Readonly<ListSubnetOverlapsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSubnetOverlapsResponse>(
       {
         method: 'GET',
@@ -624,6 +650,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListSubnetOverlapsResponse,
     )
@@ -634,11 +661,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSubnetOverlapsRequest}
    * @returns A Promise of ListSubnetOverlapsResponse
    */
-  listSubnetOverlaps = (request: Readonly<ListSubnetOverlapsRequest>) =>
-    enrichForPagination('subnetOverlaps', this.pageOfListSubnetOverlaps, request)
+  listSubnetOverlaps = (request: Readonly<ListSubnetOverlapsRequest>, options?: RequestOptions) =>
+    enrichForPagination('subnetOverlaps', this.pageOfListSubnetOverlaps, request, options)
 
   
-  protected pageOfListIngressRules = (request: Readonly<ListIngressRulesRequest> = {}) =>
+  protected pageOfListIngressRules = (request: Readonly<ListIngressRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListIngressRulesResponse>(
       {
         method: 'GET',
@@ -655,6 +682,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['vpc_id', request.vpcId],
         ),
+        signal: options?.signal,
       },
       unmarshalListIngressRulesResponse,
     )
@@ -665,8 +693,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListIngressRulesRequest}
    * @returns A Promise of ListIngressRulesResponse
    */
-  listIngressRules = (request: Readonly<ListIngressRulesRequest> = {}) =>
-    enrichForPagination('rules', this.pageOfListIngressRules, request)
+  listIngressRules = (request: Readonly<ListIngressRulesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('rules', this.pageOfListIngressRules, request, options)
 
   
   /**
@@ -675,7 +703,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateIngressRuleRequest}
    * @returns A Promise of IngressRule
    */
-  createIngressRule = (request: Readonly<CreateIngressRuleRequest>) =>
+  createIngressRule = (request: Readonly<CreateIngressRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<IngressRule>(
       {
         body: JSON.stringify(
@@ -684,6 +712,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules`,
+        signal: options?.signal,
       },
       unmarshalIngressRule,
     )
@@ -695,11 +724,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetIngressRuleRequest}
    * @returns A Promise of IngressRule
    */
-  getIngressRule = (request: Readonly<GetIngressRuleRequest>) =>
+  getIngressRule = (request: Readonly<GetIngressRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<IngressRule>(
       {
         method: 'GET',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules/${validatePathParam('ruleId', request.ruleId)}`,
+        signal: options?.signal,
       },
       unmarshalIngressRule,
     )
@@ -711,7 +741,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateIngressRuleRequest}
    * @returns A Promise of IngressRule
    */
-  updateIngressRule = (request: Readonly<UpdateIngressRuleRequest>) =>
+  updateIngressRule = (request: Readonly<UpdateIngressRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<IngressRule>(
       {
         body: JSON.stringify(
@@ -720,6 +750,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules/${validatePathParam('ruleId', request.ruleId)}`,
+        signal: options?.signal,
       },
       unmarshalIngressRule,
     )
@@ -730,11 +761,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteIngressRuleRequest}
    */
-  deleteIngressRule = (request: Readonly<DeleteIngressRuleRequest>) =>
+  deleteIngressRule = (request: Readonly<DeleteIngressRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules/${validatePathParam('ruleId', request.ruleId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -745,14 +777,16 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableObjectStoragePrivateAccessRequest}
    * @returns A Promise of VPC
    */
-  enableObjectStoragePrivateAccess = (request: Readonly<EnableObjectStoragePrivateAccessRequest>) =>
+  enableObjectStoragePrivateAccess = (request: Readonly<EnableObjectStoragePrivateAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<VPC>(
       {
+        body: JSON.stringify(
+          marshalEnableObjectStoragePrivateAccessRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/enable`,
-        urlParams: urlParams(
-          ['private_network_ids', request.privateNetworkIds],
-        ),
+        signal: options?.signal,
       },
       unmarshalVPC,
     )
@@ -764,11 +798,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DisableObjectStoragePrivateAccessRequest}
    * @returns A Promise of VPC
    */
-  disableObjectStoragePrivateAccess = (request: Readonly<DisableObjectStoragePrivateAccessRequest>) =>
+  disableObjectStoragePrivateAccess = (request: Readonly<DisableObjectStoragePrivateAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<VPC>(
       {
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/disable`,
+        signal: options?.signal,
       },
       unmarshalVPC,
     )
@@ -780,7 +815,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddPrivateNetworkObjectStoragePrivateAccessRequest}
    * @returns A Promise of AddPrivateNetworkObjectStoragePrivateAccessResponse
    */
-  addPrivateNetworkObjectStoragePrivateAccess = (request: Readonly<AddPrivateNetworkObjectStoragePrivateAccessRequest>) =>
+  addPrivateNetworkObjectStoragePrivateAccess = (request: Readonly<AddPrivateNetworkObjectStoragePrivateAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<AddPrivateNetworkObjectStoragePrivateAccessResponse>(
       {
         body: JSON.stringify(
@@ -789,6 +824,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalAddPrivateNetworkObjectStoragePrivateAccessResponse,
     )
@@ -800,7 +836,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetPrivateNetworksObjectStoragePrivateAccessRequest}
    * @returns A Promise of SetPrivateNetworksObjectStoragePrivateAccessResponse
    */
-  setPrivateNetworksObjectStoragePrivateAccess = (request: Readonly<SetPrivateNetworksObjectStoragePrivateAccessRequest>) =>
+  setPrivateNetworksObjectStoragePrivateAccess = (request: Readonly<SetPrivateNetworksObjectStoragePrivateAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<SetPrivateNetworksObjectStoragePrivateAccessResponse>(
       {
         body: JSON.stringify(
@@ -809,6 +845,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalSetPrivateNetworksObjectStoragePrivateAccessResponse,
     )
@@ -819,11 +856,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeletePrivateNetworkObjectStoragePrivateAccessRequest}
    */
-  deletePrivateNetworkObjectStoragePrivateAccess = (request: Readonly<DeletePrivateNetworkObjectStoragePrivateAccessRequest>) =>
+  deletePrivateNetworkObjectStoragePrivateAccess = (request: Readonly<DeletePrivateNetworkObjectStoragePrivateAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        signal: options?.signal,
       },
     )
 

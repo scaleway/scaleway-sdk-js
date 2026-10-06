@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   marshalCreateKeyRequest,
   unmarshalDataKey,
@@ -103,7 +103,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateKeyRequest}
    * @returns A Promise of Key
    */
-  createKey = (request: Readonly<CreateKeyRequest>) =>
+  createKey = (request: Readonly<CreateKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: JSON.stringify(
@@ -112,6 +112,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -123,11 +124,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetKeyRequest}
    * @returns A Promise of Key
    */
-  getKey = (request: Readonly<GetKeyRequest>) =>
+  getKey = (request: Readonly<GetKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         method: 'GET',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -139,11 +141,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPublicKeyRequest}
    * @returns A Promise of PublicKey
    */
-  getPublicKey = (request: Readonly<GetPublicKeyRequest>) =>
+  getPublicKey = (request: Readonly<GetPublicKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<PublicKey>(
       {
         method: 'GET',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/public-key`,
+        signal: options?.signal,
       },
       unmarshalPublicKey,
     )
@@ -155,7 +158,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateKeyRequest}
    * @returns A Promise of Key
    */
-  updateKey = (request: Readonly<UpdateKeyRequest>) =>
+  updateKey = (request: Readonly<UpdateKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: JSON.stringify(
@@ -164,6 +167,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -174,11 +178,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteKeyRequest}
    */
-  deleteKey = (request: Readonly<DeleteKeyRequest>) =>
+  deleteKey = (request: Readonly<DeleteKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -189,13 +194,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RotateKeyRequest}
    * @returns A Promise of Key
    */
-  rotateKey = (request: Readonly<RotateKeyRequest>) =>
+  rotateKey = (request: Readonly<RotateKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/rotate`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -207,13 +213,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link ProtectKeyRequest}
    * @returns A Promise of Key
    */
-  protectKey = (request: Readonly<ProtectKeyRequest>) =>
+  protectKey = (request: Readonly<ProtectKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/protect`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -225,13 +232,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link UnprotectKeyRequest}
    * @returns A Promise of Key
    */
-  unprotectKey = (request: Readonly<UnprotectKeyRequest>) =>
+  unprotectKey = (request: Readonly<UnprotectKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/unprotect`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -243,13 +251,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableKeyRequest}
    * @returns A Promise of Key
    */
-  enableKey = (request: Readonly<EnableKeyRequest>) =>
+  enableKey = (request: Readonly<EnableKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/enable`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -261,19 +270,20 @@ export class API extends ParentAPI {
    * @param request - The request {@link DisableKeyRequest}
    * @returns A Promise of Key
    */
-  disableKey = (request: Readonly<DisableKeyRequest>) =>
+  disableKey = (request: Readonly<DisableKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/disable`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
 
   
-  protected pageOfListKeys = (request: Readonly<ListKeysRequest>) =>
+  protected pageOfListKeys = (request: Readonly<ListKeysRequest>, options?: RequestOptions) =>
     this.client.fetch<ListKeysResponse>(
       {
         method: 'GET',
@@ -290,6 +300,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['usage', request.usage],
         ),
+        signal: options?.signal,
       },
       unmarshalListKeysResponse,
     )
@@ -303,11 +314,11 @@ The `region` parameter in path is needed in both case.
    * @param request - The request {@link ListKeysRequest}
    * @returns A Promise of ListKeysResponse
    */
-  listKeys = (request: Readonly<ListKeysRequest>) =>
-    enrichForPagination('keys', this.pageOfListKeys, request)
+  listKeys = (request: Readonly<ListKeysRequest>, options?: RequestOptions) =>
+    enrichForPagination('keys', this.pageOfListKeys, request, options)
 
   
-  protected pageOfListKeyRotations = (request: Readonly<ListKeyRotationsRequest>) =>
+  protected pageOfListKeyRotations = (request: Readonly<ListKeyRotationsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListKeyRotationsResponse>(
       {
         method: 'GET',
@@ -318,6 +329,7 @@ The `region` parameter in path is needed in both case.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListKeyRotationsResponse,
     )
@@ -329,8 +341,8 @@ The `key_id` and `region` parameters in the path are required.
    * @param request - The request {@link ListKeyRotationsRequest}
    * @returns A Promise of ListKeyRotationsResponse
    */
-  listKeyRotations = (request: Readonly<ListKeyRotationsRequest>) =>
-    enrichForPagination('rotations', this.pageOfListKeyRotations, request)
+  listKeyRotations = (request: Readonly<ListKeyRotationsRequest>, options?: RequestOptions) =>
+    enrichForPagination('rotations', this.pageOfListKeyRotations, request, options)
 
   
   /**
@@ -341,7 +353,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link GenerateDataKeyRequest}
    * @returns A Promise of DataKey
    */
-  generateDataKey = (request: Readonly<GenerateDataKeyRequest>) =>
+  generateDataKey = (request: Readonly<GenerateDataKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<DataKey>(
       {
         body: JSON.stringify(
@@ -350,6 +362,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/generate-data-key`,
+        signal: options?.signal,
       },
       unmarshalDataKey,
     )
@@ -361,7 +374,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link EncryptRequest}
    * @returns A Promise of EncryptResponse
    */
-  encrypt = (request: Readonly<EncryptRequest>) =>
+  encrypt = (request: Readonly<EncryptRequest>, options?: RequestOptions) =>
     this.client.fetch<EncryptResponse>(
       {
         body: JSON.stringify(
@@ -370,6 +383,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/encrypt`,
+        signal: options?.signal,
       },
       unmarshalEncryptResponse,
     )
@@ -381,7 +395,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link DecryptRequest}
    * @returns A Promise of DecryptResponse
    */
-  decrypt = (request: Readonly<DecryptRequest>) =>
+  decrypt = (request: Readonly<DecryptRequest>, options?: RequestOptions) =>
     this.client.fetch<DecryptResponse>(
       {
         body: JSON.stringify(
@@ -390,6 +404,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/decrypt`,
+        signal: options?.signal,
       },
       unmarshalDecryptResponse,
     )
@@ -401,7 +416,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link SignRequest}
    * @returns A Promise of SignResponse
    */
-  sign = (request: Readonly<SignRequest>) =>
+  sign = (request: Readonly<SignRequest>, options?: RequestOptions) =>
     this.client.fetch<SignResponse>(
       {
         body: JSON.stringify(
@@ -410,6 +425,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/sign`,
+        signal: options?.signal,
       },
       unmarshalSignResponse,
     )
@@ -421,7 +437,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link VerifyRequest}
    * @returns A Promise of VerifyResponse
    */
-  verify = (request: Readonly<VerifyRequest>) =>
+  verify = (request: Readonly<VerifyRequest>, options?: RequestOptions) =>
     this.client.fetch<VerifyResponse>(
       {
         body: JSON.stringify(
@@ -430,6 +446,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/verify`,
+        signal: options?.signal,
       },
       unmarshalVerifyResponse,
     )
@@ -441,7 +458,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link ImportKeyMaterialRequest}
    * @returns A Promise of Key
    */
-  importKeyMaterial = (request: Readonly<ImportKeyMaterialRequest>) =>
+  importKeyMaterial = (request: Readonly<ImportKeyMaterialRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: JSON.stringify(
@@ -450,6 +467,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/import-key-material`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -460,7 +478,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    *
    * @param request - The request {@link DeleteKeyMaterialRequest}
    */
-  deleteKeyMaterial = (request: Readonly<DeleteKeyMaterialRequest>) =>
+  deleteKeyMaterial = (request: Readonly<DeleteKeyMaterialRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -469,6 +487,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/delete-key-material`,
+        signal: options?.signal,
       },
     )
 
@@ -479,13 +498,14 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link RestoreKeyRequest}
    * @returns A Promise of Key
    */
-  restoreKey = (request: Readonly<RestoreKeyRequest>) =>
+  restoreKey = (request: Readonly<RestoreKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<Key>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/restore`,
+        signal: options?.signal,
       },
       unmarshalKey,
     )
@@ -497,7 +517,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link ListAlgorithmsRequest}
    * @returns A Promise of ListAlgorithmsResponse
    */
-  listAlgorithms = (request: Readonly<ListAlgorithmsRequest> = {}) =>
+  listAlgorithms = (request: Readonly<ListAlgorithmsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAlgorithmsResponse>(
       {
         method: 'GET',
@@ -505,6 +525,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         urlParams: urlParams(
           ['usages', request.usages],
         ),
+        signal: options?.signal,
       },
       unmarshalListAlgorithmsResponse,
     )
@@ -516,7 +537,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link WrapKeyRequest}
    * @returns A Promise of WrapKeyResponse
    */
-  wrapKey = (request: Readonly<WrapKeyRequest>) =>
+  wrapKey = (request: Readonly<WrapKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<WrapKeyResponse>(
       {
         body: JSON.stringify(
@@ -525,6 +546,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/wrap`,
+        signal: options?.signal,
       },
       unmarshalWrapKeyResponse,
     )
@@ -536,7 +558,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
    * @param request - The request {@link UnwrapKeyRequest}
    * @returns A Promise of UnwrapKeyResponse
    */
-  unwrapKey = (request: Readonly<UnwrapKeyRequest>) =>
+  unwrapKey = (request: Readonly<UnwrapKeyRequest>, options?: RequestOptions) =>
     this.client.fetch<UnwrapKeyResponse>(
       {
         body: JSON.stringify(
@@ -545,6 +567,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/unwrap`,
+        signal: options?.signal,
       },
       unmarshalUnwrapKeyResponse,
     )

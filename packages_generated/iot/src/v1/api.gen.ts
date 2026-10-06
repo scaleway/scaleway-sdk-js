@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {HUB_TRANSIENT_STATUSES as HUB_TRANSIENT_STATUSES_IOT,} from './content.gen.js'
 import {
   marshalCreateDeviceRequest,
@@ -121,7 +121,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListHubs = (request: Readonly<ListHubsRequest> = {}) =>
+  protected pageOfListHubs = (request: Readonly<ListHubsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListHubsResponse>(
       {
         method: 'GET',
@@ -134,6 +134,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListHubsResponse,
     )
@@ -144,8 +145,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListHubsRequest}
    * @returns A Promise of ListHubsResponse
    */
-  listHubs = (request: Readonly<ListHubsRequest> = {}) =>
-    enrichForPagination('hubs', this.pageOfListHubs, request)
+  listHubs = (request: Readonly<ListHubsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('hubs', this.pageOfListHubs, request, options)
 
   
   /**
@@ -154,7 +155,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateHubRequest}
    * @returns A Promise of Hub
    */
-  createHub = (request: Readonly<CreateHubRequest>) =>
+  createHub = (request: Readonly<CreateHubRequest>, options?: RequestOptions) =>
     this.client.fetch<Hub>(
       {
         body: JSON.stringify(
@@ -163,6 +164,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs`,
+        signal: options?.signal,
       },
       unmarshalHub,
     )
@@ -174,11 +176,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetHubRequest}
    * @returns A Promise of Hub
    */
-  getHub = (request: Readonly<GetHubRequest>) =>
+  getHub = (request: Readonly<GetHubRequest>, options?: RequestOptions) =>
     this.client.fetch<Hub>(
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
+        signal: options?.signal,
       },
       unmarshalHub,
     )
@@ -208,7 +211,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateHubRequest}
    * @returns A Promise of Hub
    */
-  updateHub = (request: Readonly<UpdateHubRequest>) =>
+  updateHub = (request: Readonly<UpdateHubRequest>, options?: RequestOptions) =>
     this.client.fetch<Hub>(
       {
         body: JSON.stringify(
@@ -217,6 +220,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
+        signal: options?.signal,
       },
       unmarshalHub,
     )
@@ -228,13 +232,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableHubRequest}
    * @returns A Promise of Hub
    */
-  enableHub = (request: Readonly<EnableHubRequest>) =>
+  enableHub = (request: Readonly<EnableHubRequest>, options?: RequestOptions) =>
     this.client.fetch<Hub>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/enable`,
+        signal: options?.signal,
       },
       unmarshalHub,
     )
@@ -246,13 +251,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link DisableHubRequest}
    * @returns A Promise of Hub
    */
-  disableHub = (request: Readonly<DisableHubRequest>) =>
+  disableHub = (request: Readonly<DisableHubRequest>, options?: RequestOptions) =>
     this.client.fetch<Hub>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/disable`,
+        signal: options?.signal,
       },
       unmarshalHub,
     )
@@ -263,7 +269,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteHubRequest}
    */
-  deleteHub = (request: Readonly<DeleteHubRequest>) =>
+  deleteHub = (request: Readonly<DeleteHubRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
@@ -271,6 +277,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['delete_devices', request.deleteDevices],
         ),
+        signal: options?.signal,
       },
     )
 
@@ -282,7 +289,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetHubMetricsRequest}
    * @returns A Promise of GetHubMetricsResponse
    */
-  getHubMetrics = (request: Readonly<GetHubMetricsRequest>) =>
+  getHubMetrics = (request: Readonly<GetHubMetricsRequest>, options?: RequestOptions) =>
     this.client.fetch<GetHubMetricsResponse>(
       {
         method: 'GET',
@@ -290,6 +297,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['start_date', request.startDate],
         ),
+        signal: options?.signal,
       },
       unmarshalGetHubMetricsResponse,
     )
@@ -301,7 +309,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetHubCARequest}
    * @returns A Promise of Hub
    */
-  setHubCA = (request: Readonly<SetHubCARequest>) =>
+  setHubCA = (request: Readonly<SetHubCARequest>, options?: RequestOptions) =>
     this.client.fetch<Hub>(
       {
         body: JSON.stringify(
@@ -310,6 +318,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/ca`,
+        signal: options?.signal,
       },
       unmarshalHub,
     )
@@ -321,17 +330,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetHubCARequest}
    * @returns A Promise of GetHubCAResponse
    */
-  getHubCA = (request: Readonly<GetHubCARequest>) =>
+  getHubCA = (request: Readonly<GetHubCARequest>, options?: RequestOptions) =>
     this.client.fetch<GetHubCAResponse>(
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/ca`,
+        signal: options?.signal,
       },
       unmarshalGetHubCAResponse,
     )
 
   
-  protected pageOfListDevices = (request: Readonly<ListDevicesRequest> = {}) =>
+  protected pageOfListDevices = (request: Readonly<ListDevicesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDevicesResponse>(
       {
         method: 'GET',
@@ -345,6 +355,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListDevicesResponse,
     )
@@ -355,8 +366,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDevicesRequest}
    * @returns A Promise of ListDevicesResponse
    */
-  listDevices = (request: Readonly<ListDevicesRequest> = {}) =>
-    enrichForPagination('devices', this.pageOfListDevices, request)
+  listDevices = (request: Readonly<ListDevicesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('devices', this.pageOfListDevices, request, options)
 
   
   /**
@@ -365,7 +376,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDeviceRequest}
    * @returns A Promise of CreateDeviceResponse
    */
-  createDevice = (request: Readonly<CreateDeviceRequest>) =>
+  createDevice = (request: Readonly<CreateDeviceRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateDeviceResponse>(
       {
         body: JSON.stringify(
@@ -374,6 +385,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices`,
+        signal: options?.signal,
       },
       unmarshalCreateDeviceResponse,
     )
@@ -385,11 +397,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDeviceRequest}
    * @returns A Promise of Device
    */
-  getDevice = (request: Readonly<GetDeviceRequest>) =>
+  getDevice = (request: Readonly<GetDeviceRequest>, options?: RequestOptions) =>
     this.client.fetch<Device>(
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
+        signal: options?.signal,
       },
       unmarshalDevice,
     )
@@ -401,7 +414,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDeviceRequest}
    * @returns A Promise of Device
    */
-  updateDevice = (request: Readonly<UpdateDeviceRequest>) =>
+  updateDevice = (request: Readonly<UpdateDeviceRequest>, options?: RequestOptions) =>
     this.client.fetch<Device>(
       {
         body: JSON.stringify(
@@ -410,6 +423,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
+        signal: options?.signal,
       },
       unmarshalDevice,
     )
@@ -421,13 +435,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link EnableDeviceRequest}
    * @returns A Promise of Device
    */
-  enableDevice = (request: Readonly<EnableDeviceRequest>) =>
+  enableDevice = (request: Readonly<EnableDeviceRequest>, options?: RequestOptions) =>
     this.client.fetch<Device>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/enable`,
+        signal: options?.signal,
       },
       unmarshalDevice,
     )
@@ -439,13 +454,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link DisableDeviceRequest}
    * @returns A Promise of Device
    */
-  disableDevice = (request: Readonly<DisableDeviceRequest>) =>
+  disableDevice = (request: Readonly<DisableDeviceRequest>, options?: RequestOptions) =>
     this.client.fetch<Device>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/disable`,
+        signal: options?.signal,
       },
       unmarshalDevice,
     )
@@ -457,13 +473,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RenewDeviceCertificateRequest}
    * @returns A Promise of RenewDeviceCertificateResponse
    */
-  renewDeviceCertificate = (request: Readonly<RenewDeviceCertificateRequest>) =>
+  renewDeviceCertificate = (request: Readonly<RenewDeviceCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<RenewDeviceCertificateResponse>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/renew-certificate`,
+        signal: options?.signal,
       },
       unmarshalRenewDeviceCertificateResponse,
     )
@@ -475,7 +492,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetDeviceCertificateRequest}
    * @returns A Promise of SetDeviceCertificateResponse
    */
-  setDeviceCertificate = (request: Readonly<SetDeviceCertificateRequest>) =>
+  setDeviceCertificate = (request: Readonly<SetDeviceCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<SetDeviceCertificateResponse>(
       {
         body: JSON.stringify(
@@ -484,6 +501,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/certificate`,
+        signal: options?.signal,
       },
       unmarshalSetDeviceCertificateResponse,
     )
@@ -495,11 +513,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDeviceCertificateRequest}
    * @returns A Promise of GetDeviceCertificateResponse
    */
-  getDeviceCertificate = (request: Readonly<GetDeviceCertificateRequest>) =>
+  getDeviceCertificate = (request: Readonly<GetDeviceCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<GetDeviceCertificateResponse>(
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/certificate`,
+        signal: options?.signal,
       },
       unmarshalGetDeviceCertificateResponse,
     )
@@ -510,11 +529,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteDeviceRequest}
    */
-  deleteDevice = (request: Readonly<DeleteDeviceRequest>) =>
+  deleteDevice = (request: Readonly<DeleteDeviceRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -526,7 +546,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDeviceMetricsRequest}
    * @returns A Promise of GetDeviceMetricsResponse
    */
-  getDeviceMetrics = (request: Readonly<GetDeviceMetricsRequest>) =>
+  getDeviceMetrics = (request: Readonly<GetDeviceMetricsRequest>, options?: RequestOptions) =>
     this.client.fetch<GetDeviceMetricsResponse>(
       {
         method: 'GET',
@@ -534,12 +554,13 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['start_date', request.startDate],
         ),
+        signal: options?.signal,
       },
       unmarshalGetDeviceMetricsResponse,
     )
 
   
-  protected pageOfListRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
+  protected pageOfListRoutes = (request: Readonly<ListRoutesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRoutesResponse>(
       {
         method: 'GET',
@@ -551,6 +572,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListRoutesResponse,
     )
@@ -561,8 +583,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRoutesRequest}
    * @returns A Promise of ListRoutesResponse
    */
-  listRoutes = (request: Readonly<ListRoutesRequest> = {}) =>
-    enrichForPagination('routes', this.pageOfListRoutes, request)
+  listRoutes = (request: Readonly<ListRoutesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('routes', this.pageOfListRoutes, request, options)
 
   
   /**
@@ -580,7 +602,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateRouteRequest}
    * @returns A Promise of Route
    */
-  createRoute = (request: Readonly<CreateRouteRequest>) =>
+  createRoute = (request: Readonly<CreateRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         body: JSON.stringify(
@@ -589,6 +611,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -600,7 +623,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateRouteRequest}
    * @returns A Promise of Route
    */
-  updateRoute = (request: Readonly<UpdateRouteRequest>) =>
+  updateRoute = (request: Readonly<UpdateRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         body: JSON.stringify(
@@ -609,6 +632,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -620,11 +644,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetRouteRequest}
    * @returns A Promise of Route
    */
-  getRoute = (request: Readonly<GetRouteRequest>) =>
+  getRoute = (request: Readonly<GetRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<Route>(
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
       unmarshalRoute,
     )
@@ -635,16 +660,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteRouteRequest}
    */
-  deleteRoute = (request: Readonly<DeleteRouteRequest>) =>
+  deleteRoute = (request: Readonly<DeleteRouteRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListNetworks = (request: Readonly<ListNetworksRequest> = {}) =>
+  protected pageOfListNetworks = (request: Readonly<ListNetworksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNetworksResponse>(
       {
         method: 'GET',
@@ -657,6 +683,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['topic_prefix', request.topicPrefix],
         ),
+        signal: options?.signal,
       },
       unmarshalListNetworksResponse,
     )
@@ -667,8 +694,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNetworksRequest}
    * @returns A Promise of ListNetworksResponse
    */
-  listNetworks = (request: Readonly<ListNetworksRequest> = {}) =>
-    enrichForPagination('networks', this.pageOfListNetworks, request)
+  listNetworks = (request: Readonly<ListNetworksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('networks', this.pageOfListNetworks, request, options)
 
   
   /**
@@ -677,7 +704,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateNetworkRequest}
    * @returns A Promise of CreateNetworkResponse
    */
-  createNetwork = (request: Readonly<CreateNetworkRequest>) =>
+  createNetwork = (request: Readonly<CreateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateNetworkResponse>(
       {
         body: JSON.stringify(
@@ -686,6 +713,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks`,
+        signal: options?.signal,
       },
       unmarshalCreateNetworkResponse,
     )
@@ -697,11 +725,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetNetworkRequest}
    * @returns A Promise of Network
    */
-  getNetwork = (request: Readonly<GetNetworkRequest>) =>
+  getNetwork = (request: Readonly<GetNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<Network>(
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks/${validatePathParam('networkId', request.networkId)}`,
+        signal: options?.signal,
       },
       unmarshalNetwork,
     )
@@ -712,11 +741,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteNetworkRequest}
    */
-  deleteNetwork = (request: Readonly<DeleteNetworkRequest>) =>
+  deleteNetwork = (request: Readonly<DeleteNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks/${validatePathParam('networkId', request.networkId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -727,11 +757,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetTwinDocumentRequest}
    * @returns A Promise of TwinDocument
    */
-  getTwinDocument = (request: Readonly<GetTwinDocumentRequest>) =>
+  getTwinDocument = (request: Readonly<GetTwinDocumentRequest>, options?: RequestOptions) =>
     this.client.fetch<TwinDocument>(
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
+        signal: options?.signal,
       },
       unmarshalTwinDocument,
     )
@@ -743,7 +774,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link PutTwinDocumentRequest}
    * @returns A Promise of TwinDocument
    */
-  putTwinDocument = (request: Readonly<PutTwinDocumentRequest>) =>
+  putTwinDocument = (request: Readonly<PutTwinDocumentRequest>, options?: RequestOptions) =>
     this.client.fetch<TwinDocument>(
       {
         body: JSON.stringify(
@@ -752,6 +783,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
+        signal: options?.signal,
       },
       unmarshalTwinDocument,
     )
@@ -763,7 +795,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link PatchTwinDocumentRequest}
    * @returns A Promise of TwinDocument
    */
-  patchTwinDocument = (request: Readonly<PatchTwinDocumentRequest>) =>
+  patchTwinDocument = (request: Readonly<PatchTwinDocumentRequest>, options?: RequestOptions) =>
     this.client.fetch<TwinDocument>(
       {
         body: JSON.stringify(
@@ -772,6 +804,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
+        signal: options?.signal,
       },
       unmarshalTwinDocument,
     )
@@ -782,11 +815,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteTwinDocumentRequest}
    */
-  deleteTwinDocument = (request: Readonly<DeleteTwinDocumentRequest>) =>
+  deleteTwinDocument = (request: Readonly<DeleteTwinDocumentRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
+        signal: options?.signal,
       },
     )
 
@@ -797,11 +831,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListTwinDocumentsRequest}
    * @returns A Promise of ListTwinDocumentsResponse
    */
-  listTwinDocuments = (request: Readonly<ListTwinDocumentsRequest>) =>
+  listTwinDocuments = (request: Readonly<ListTwinDocumentsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListTwinDocumentsResponse>(
       {
         method: 'GET',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}`,
+        signal: options?.signal,
       },
       unmarshalListTwinDocumentsResponse,
     )
@@ -812,11 +847,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteTwinDocumentsRequest}
    */
-  deleteTwinDocuments = (request: Readonly<DeleteTwinDocumentsRequest>) =>
+  deleteTwinDocuments = (request: Readonly<DeleteTwinDocumentsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}`,
+        signal: options?.signal,
       },
     )
 

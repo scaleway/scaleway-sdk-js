@@ -527,7 +527,7 @@ export interface CreateClusterRequestPoolConfig {
    */
   privateNetworkId?: string
   /**
-   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   * Maximum amount of time in seconds before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
    */
   maxTerminationGracePeriod?: string
   /**
@@ -622,10 +622,6 @@ export interface Version {
    * Supported Container Network Interface (CNI) plugins for this version.
    */
   availableCnis: CNI[]
-  /**
-   * @deprecated Supported container runtimes for this version.
-   */
-  availableContainerRuntimes: Runtime[]
   /**
    * Supported feature gates for this version.
    */
@@ -766,6 +762,10 @@ export interface Cluster {
    * IAM group that nodes are members of (this field might be empty during early stage of cluster creation).
    */
   iamNodesGroupId: string
+  /**
+   * IAM application ID for the control plane (this field might be empty during early stage of cluster creation).
+   */
+  iamControlPlaneApplicationId: string
   /**
    * Subnet used for the Pod CIDR.
    */
@@ -958,7 +958,7 @@ export interface Pool {
    */
   errorMessage?: string
   /**
-   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   * Maximum amount of time in seconds before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
    */
   maxTerminationGracePeriod?: string
   /**
@@ -1320,7 +1320,7 @@ export type CreatePoolRequest = {
    */
   userData?: Record<string, string>
   /**
-   * Maximum amount of time before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
+   * Maximum amount of time in seconds before the API forces the drain and deletion of a `deleting` node. It overrides pods `PodDisruptionBudget` and `terminationGracePeriodSeconds`. Defaults to 15 minutes, up to 1 hour.
    */
   maxTerminationGracePeriod?: string
 }
@@ -2007,7 +2007,7 @@ export type UpdatePoolRequest = {
    */
   securityGroupId?: string
   /**
-   * New maximum amount of time before the API forces the drain and deletion of a `deleting` node.
+   * New maximum amount of time in seconds before the API forces the drain and deletion of a `deleting` node.
    */
   maxTerminationGracePeriod?: string
 }

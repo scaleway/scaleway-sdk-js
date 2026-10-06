@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_K8S,NODE_TRANSIENT_STATUSES as NODE_TRANSIENT_STATUSES_K8S,POOL_TRANSIENT_STATUSES as POOL_TRANSIENT_STATUSES_K8S,} from './content.gen.js'
 import {
   marshalAddClusterACLRulesRequest,
@@ -123,7 +123,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListClusters = (request: Readonly<ListClustersRequest> = {}) =>
+  protected pageOfListClusters = (request: Readonly<ListClustersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListClustersResponse>(
       {
         method: 'GET',
@@ -140,6 +140,7 @@ export class API extends ParentAPI {
           ['type', request.type],
           ['version', request.version],
         ),
+        signal: options?.signal,
       },
       unmarshalListClustersResponse,
     )
@@ -150,8 +151,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListClustersRequest}
    * @returns A Promise of ListClustersResponse
    */
-  listClusters = (request: Readonly<ListClustersRequest> = {}) =>
-    enrichForPagination('clusters', this.pageOfListClusters, request)
+  listClusters = (request: Readonly<ListClustersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('clusters', this.pageOfListClusters, request, options)
 
   
   /**
@@ -160,7 +161,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateClusterRequest}
    * @returns A Promise of Cluster
    */
-  createCluster = (request: Readonly<CreateClusterRequest>) =>
+  createCluster = (request: Readonly<CreateClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -169,6 +170,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -180,11 +182,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetClusterRequest}
    * @returns A Promise of Cluster
    */
-  getCluster = (request: Readonly<GetClusterRequest>) =>
+  getCluster = (request: Readonly<GetClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -214,7 +217,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateClusterRequest}
    * @returns A Promise of Cluster
    */
-  updateCluster = (request: Readonly<UpdateClusterRequest>) =>
+  updateCluster = (request: Readonly<UpdateClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -223,6 +226,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -234,7 +238,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteClusterRequest}
    * @returns A Promise of Cluster
    */
-  deleteCluster = (request: Readonly<DeleteClusterRequest>) =>
+  deleteCluster = (request: Readonly<DeleteClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
@@ -242,6 +246,7 @@ export class API extends ParentAPI {
         urlParams: urlParams(
           ['with_additional_resources', request.withAdditionalResources],
         ),
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -253,7 +258,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpgradeClusterRequest}
    * @returns A Promise of Cluster
    */
-  upgradeCluster = (request: Readonly<UpgradeClusterRequest>) =>
+  upgradeCluster = (request: Readonly<UpgradeClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -262,6 +267,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/upgrade`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -273,7 +279,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetClusterTypeRequest}
    * @returns A Promise of Cluster
    */
-  setClusterType = (request: Readonly<SetClusterTypeRequest>) =>
+  setClusterType = (request: Readonly<SetClusterTypeRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -282,6 +288,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/set-type`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -293,11 +300,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListClusterAvailableVersionsRequest}
    * @returns A Promise of ListClusterAvailableVersionsResponse
    */
-  listClusterAvailableVersions = (request: Readonly<ListClusterAvailableVersionsRequest>) =>
+  listClusterAvailableVersions = (request: Readonly<ListClusterAvailableVersionsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListClusterAvailableVersionsResponse>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/available-versions`,
+        signal: options?.signal,
       },
       unmarshalListClusterAvailableVersionsResponse,
     )
@@ -309,17 +317,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListClusterAvailableTypesRequest}
    * @returns A Promise of ListClusterAvailableTypesResponse
    */
-  listClusterAvailableTypes = (request: Readonly<ListClusterAvailableTypesRequest>) =>
+  listClusterAvailableTypes = (request: Readonly<ListClusterAvailableTypesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListClusterAvailableTypesResponse>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/available-types`,
+        signal: options?.signal,
       },
       unmarshalListClusterAvailableTypesResponse,
     )
 
   
-  protected _getClusterKubeConfig = (request: Readonly<GetClusterKubeConfigRequest>) =>
+  protected _getClusterKubeConfig = (request: Readonly<GetClusterKubeConfigRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -330,6 +339,7 @@ export class API extends ParentAPI {
           ['redacted', request.redacted],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -339,18 +349,19 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link ResetClusterAdminTokenRequest}
    */
-  resetClusterAdminToken = (request: Readonly<ResetClusterAdminTokenRequest>) =>
+  resetClusterAdminToken = (request: Readonly<ResetClusterAdminTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/reset-admin-token`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListClusterACLRules = (request: Readonly<ListClusterACLRulesRequest>) =>
+  protected pageOfListClusterACLRules = (request: Readonly<ListClusterACLRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListClusterACLRulesResponse>(
       {
         method: 'GET',
@@ -359,6 +370,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListClusterACLRulesResponse,
     )
@@ -369,8 +381,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListClusterACLRulesRequest}
    * @returns A Promise of ListClusterACLRulesResponse
    */
-  listClusterACLRules = (request: Readonly<ListClusterACLRulesRequest>) =>
-    enrichForPagination('rules', this.pageOfListClusterACLRules, request)
+  listClusterACLRules = (request: Readonly<ListClusterACLRulesRequest>, options?: RequestOptions) =>
+    enrichForPagination('rules', this.pageOfListClusterACLRules, request, options)
 
   
   /**
@@ -379,7 +391,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddClusterACLRulesRequest}
    * @returns A Promise of AddClusterACLRulesResponse
    */
-  addClusterACLRules = (request: Readonly<AddClusterACLRulesRequest>) =>
+  addClusterACLRules = (request: Readonly<AddClusterACLRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<AddClusterACLRulesResponse>(
       {
         body: JSON.stringify(
@@ -388,6 +400,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalAddClusterACLRulesResponse,
     )
@@ -399,7 +412,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetClusterACLRulesRequest}
    * @returns A Promise of SetClusterACLRulesResponse
    */
-  setClusterACLRules = (request: Readonly<SetClusterACLRulesRequest>) =>
+  setClusterACLRules = (request: Readonly<SetClusterACLRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<SetClusterACLRulesResponse>(
       {
         body: JSON.stringify(
@@ -408,6 +421,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalSetClusterACLRulesResponse,
     )
@@ -418,16 +432,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteACLRuleRequest}
    */
-  deleteACLRule = (request: Readonly<DeleteACLRuleRequest>) =>
+  deleteACLRule = (request: Readonly<DeleteACLRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListPools = (request: Readonly<ListPoolsRequest>) =>
+  protected pageOfListPools = (request: Readonly<ListPoolsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListPoolsResponse>(
       {
         method: 'GET',
@@ -439,6 +454,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListPoolsResponse,
     )
@@ -449,8 +465,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPoolsRequest}
    * @returns A Promise of ListPoolsResponse
    */
-  listPools = (request: Readonly<ListPoolsRequest>) =>
-    enrichForPagination('pools', this.pageOfListPools, request)
+  listPools = (request: Readonly<ListPoolsRequest>, options?: RequestOptions) =>
+    enrichForPagination('pools', this.pageOfListPools, request, options)
 
   
   /**
@@ -459,7 +475,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePoolRequest}
    * @returns A Promise of Pool
    */
-  createPool = (request: Readonly<CreatePoolRequest>) =>
+  createPool = (request: Readonly<CreatePoolRequest>, options?: RequestOptions) =>
     this.client.fetch<Pool>(
       {
         body: JSON.stringify(
@@ -468,6 +484,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/pools`,
+        signal: options?.signal,
       },
       unmarshalPool,
     )
@@ -479,11 +496,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPoolRequest}
    * @returns A Promise of Pool
    */
-  getPool = (request: Readonly<GetPoolRequest>) =>
+  getPool = (request: Readonly<GetPoolRequest>, options?: RequestOptions) =>
     this.client.fetch<Pool>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
+        signal: options?.signal,
       },
       unmarshalPool,
     )
@@ -514,7 +532,7 @@ This will drain and replace the nodes in that pool.
    * @param request - The request {@link UpgradePoolRequest}
    * @returns A Promise of Pool
    */
-  upgradePool = (request: Readonly<UpgradePoolRequest>) =>
+  upgradePool = (request: Readonly<UpgradePoolRequest>, options?: RequestOptions) =>
     this.client.fetch<Pool>(
       {
         body: JSON.stringify(
@@ -523,6 +541,7 @@ This will drain and replace the nodes in that pool.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/upgrade`,
+        signal: options?.signal,
       },
       unmarshalPool,
     )
@@ -534,7 +553,7 @@ This will drain and replace the nodes in that pool.
    * @param request - The request {@link UpdatePoolRequest}
    * @returns A Promise of Pool
    */
-  updatePool = (request: Readonly<UpdatePoolRequest>) =>
+  updatePool = (request: Readonly<UpdatePoolRequest>, options?: RequestOptions) =>
     this.client.fetch<Pool>(
       {
         body: JSON.stringify(
@@ -543,6 +562,7 @@ This will drain and replace the nodes in that pool.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
+        signal: options?.signal,
       },
       unmarshalPool,
     )
@@ -554,11 +574,12 @@ This will drain and replace the nodes in that pool.
    * @param request - The request {@link DeletePoolRequest}
    * @returns A Promise of Pool
    */
-  deletePool = (request: Readonly<DeletePoolRequest>) =>
+  deletePool = (request: Readonly<DeletePoolRequest>, options?: RequestOptions) =>
     this.client.fetch<Pool>(
       {
         method: 'DELETE',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
+        signal: options?.signal,
       },
       unmarshalPool,
     )
@@ -570,7 +591,7 @@ This will drain and replace the nodes in that pool.
    * @param request - The request {@link SetPoolTaintsRequest}
    * @returns A Promise of Pool
    */
-  setPoolTaints = (request: Readonly<SetPoolTaintsRequest>) =>
+  setPoolTaints = (request: Readonly<SetPoolTaintsRequest>, options?: RequestOptions) =>
     this.client.fetch<Pool>(
       {
         body: JSON.stringify(
@@ -579,6 +600,7 @@ This will drain and replace the nodes in that pool.
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-taints`,
+        signal: options?.signal,
       },
       unmarshalPool,
     )
@@ -590,7 +612,7 @@ This will drain and replace the nodes in that pool.
    * @param request - The request {@link SetPoolStartupTaintsRequest}
    * @returns A Promise of Pool
    */
-  setPoolStartupTaints = (request: Readonly<SetPoolStartupTaintsRequest>) =>
+  setPoolStartupTaints = (request: Readonly<SetPoolStartupTaintsRequest>, options?: RequestOptions) =>
     this.client.fetch<Pool>(
       {
         body: JSON.stringify(
@@ -599,6 +621,7 @@ This will drain and replace the nodes in that pool.
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-startup-taints`,
+        signal: options?.signal,
       },
       unmarshalPool,
     )
@@ -610,7 +633,7 @@ This will drain and replace the nodes in that pool.
    * @param request - The request {@link SetPoolLabelsRequest}
    * @returns A Promise of Pool
    */
-  setPoolLabels = (request: Readonly<SetPoolLabelsRequest>) =>
+  setPoolLabels = (request: Readonly<SetPoolLabelsRequest>, options?: RequestOptions) =>
     this.client.fetch<Pool>(
       {
         body: JSON.stringify(
@@ -619,6 +642,7 @@ This will drain and replace the nodes in that pool.
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-labels`,
+        signal: options?.signal,
       },
       unmarshalPool,
     )
@@ -631,7 +655,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link GetUserDataRequest}
    * @returns A Promise of Blob
    */
-  getUserData = (request: Readonly<GetUserDataRequest>) =>
+  getUserData = (request: Readonly<GetUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -640,6 +664,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -650,11 +675,12 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link ListUserDataRequest}
    * @returns A Promise of ListUserDataResponse
    */
-  listUserData = (request: Readonly<ListUserDataRequest>) =>
+  listUserData = (request: Readonly<ListUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<ListUserDataResponse>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/user-data`,
+        signal: options?.signal,
       },
       unmarshalListUserDataResponse,
     )
@@ -666,11 +692,12 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link GetNodeMetadataRequest}
    * @returns A Promise of NodeMetadata
    */
-  getNodeMetadata = (request: Readonly<GetNodeMetadataRequest> = {}) =>
+  getNodeMetadata = (request: Readonly<GetNodeMetadataRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<NodeMetadata>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/node-metadata`,
+        signal: options?.signal,
       },
       unmarshalNodeMetadata,
     )
@@ -682,19 +709,20 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link AuthExternalNodeRequest}
    * @returns A Promise of ExternalNodeAuth
    */
-  authExternalNode = (request: Readonly<AuthExternalNodeRequest>) =>
+  authExternalNode = (request: Readonly<AuthExternalNodeRequest>, options?: RequestOptions) =>
     this.client.fetch<ExternalNodeAuth>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/external-nodes/auth`,
+        signal: options?.signal,
       },
       unmarshalExternalNodeAuth,
     )
 
   
-  protected pageOfListNodes = (request: Readonly<ListNodesRequest>) =>
+  protected pageOfListNodes = (request: Readonly<ListNodesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListNodesResponse>(
       {
         method: 'GET',
@@ -707,6 +735,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
           ['pool_id', request.poolId],
           ['status', request.status],
         ),
+        signal: options?.signal,
       },
       unmarshalListNodesResponse,
     )
@@ -717,8 +746,8 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link ListNodesRequest}
    * @returns A Promise of ListNodesResponse
    */
-  listNodes = (request: Readonly<ListNodesRequest>) =>
-    enrichForPagination('nodes', this.pageOfListNodes, request)
+  listNodes = (request: Readonly<ListNodesRequest>, options?: RequestOptions) =>
+    enrichForPagination('nodes', this.pageOfListNodes, request, options)
 
   
   /**
@@ -727,11 +756,12 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link GetNodeRequest}
    * @returns A Promise of Node
    */
-  getNode = (request: Readonly<GetNodeRequest>) =>
+  getNode = (request: Readonly<GetNodeRequest>, options?: RequestOptions) =>
     this.client.fetch<Node>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}`,
+        signal: options?.signal,
       },
       unmarshalNode,
     )
@@ -761,13 +791,14 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link ReplaceNodeRequest}
    * @returns A Promise of Node
    */
-  replaceNode = (request: Readonly<ReplaceNodeRequest>) =>
+  replaceNode = (request: Readonly<ReplaceNodeRequest>, options?: RequestOptions) =>
     this.client.fetch<Node>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}/replace`,
+        signal: options?.signal,
       },
       unmarshalNode,
     )
@@ -779,13 +810,14 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link RebootNodeRequest}
    * @returns A Promise of Node
    */
-  rebootNode = (request: Readonly<RebootNodeRequest>) =>
+  rebootNode = (request: Readonly<RebootNodeRequest>, options?: RequestOptions) =>
     this.client.fetch<Node>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}/reboot`,
+        signal: options?.signal,
       },
       unmarshalNode,
     )
@@ -797,7 +829,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link DeleteNodeRequest}
    * @returns A Promise of Node
    */
-  deleteNode = (request: Readonly<DeleteNodeRequest>) =>
+  deleteNode = (request: Readonly<DeleteNodeRequest>, options?: RequestOptions) =>
     this.client.fetch<Node>(
       {
         method: 'DELETE',
@@ -805,6 +837,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
         urlParams: urlParams(
           ['skip_drain', request.skipDrain],
         ),
+        signal: options?.signal,
       },
       unmarshalNode,
     )
@@ -816,11 +849,12 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
    */
-  listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
+  listVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions`,
+        signal: options?.signal,
       },
       unmarshalListVersionsResponse,
     )
@@ -832,17 +866,18 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link GetVersionRequest}
    * @returns A Promise of Version
    */
-  getVersion = (request: Readonly<GetVersionRequest>) =>
+  getVersion = (request: Readonly<GetVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<Version>(
       {
         method: 'GET',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/versions/${validatePathParam('versionName', request.versionName)}`,
+        signal: options?.signal,
       },
       unmarshalVersion,
     )
 
   
-  protected pageOfListClusterTypes = (request: Readonly<ListClusterTypesRequest> = {}) =>
+  protected pageOfListClusterTypes = (request: Readonly<ListClusterTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListClusterTypesResponse>(
       {
         method: 'GET',
@@ -851,6 +886,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListClusterTypesResponse,
     )
@@ -861,8 +897,8 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
    * @param request - The request {@link ListClusterTypesRequest}
    * @returns A Promise of ListClusterTypesResponse
    */
-  listClusterTypes = (request: Readonly<ListClusterTypesRequest> = {}) =>
-    enrichForPagination('clusterTypes', this.pageOfListClusterTypes, request)
+  listClusterTypes = (request: Readonly<ListClusterTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('clusterTypes', this.pageOfListClusterTypes, request, options)
 
   
 }

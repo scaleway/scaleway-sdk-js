@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_INFERENCE,MODEL_TRANSIENT_STATUSES as MODEL_TRANSIENT_STATUSES_INFERENCE,} from './content.gen.js'
 import {
   marshalCreateDeploymentRequest,
@@ -69,7 +69,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
+  protected pageOfListDeployments = (request: Readonly<ListDeploymentsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDeploymentsResponse>(
       {
         method: 'GET',
@@ -83,6 +83,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListDeploymentsResponse,
     )
@@ -93,8 +94,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDeploymentsRequest}
    * @returns A Promise of ListDeploymentsResponse
    */
-  listDeployments = (request: Readonly<ListDeploymentsRequest> = {}) =>
-    enrichForPagination('deployments', this.pageOfListDeployments, request)
+  listDeployments = (request: Readonly<ListDeploymentsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('deployments', this.pageOfListDeployments, request, options)
 
   
   /**
@@ -103,11 +104,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  getDeployment = (request: Readonly<GetDeploymentRequest>) =>
+  getDeployment = (request: Readonly<GetDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         method: 'GET',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
@@ -137,7 +139,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  createDeployment = (request: Readonly<CreateDeploymentRequest>) =>
+  createDeployment = (request: Readonly<CreateDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         body: JSON.stringify(
@@ -146,6 +148,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
@@ -157,7 +160,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  updateDeployment = (request: Readonly<UpdateDeploymentRequest>) =>
+  updateDeployment = (request: Readonly<UpdateDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         body: JSON.stringify(
@@ -166,6 +169,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
@@ -177,11 +181,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDeploymentRequest}
    * @returns A Promise of Deployment
    */
-  deleteDeployment = (request: Readonly<DeleteDeploymentRequest>) =>
+  deleteDeployment = (request: Readonly<DeleteDeploymentRequest>, options?: RequestOptions) =>
     this.client.fetch<Deployment>(
       {
         method: 'DELETE',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
+        signal: options?.signal,
       },
       unmarshalDeployment,
     )
@@ -194,7 +199,7 @@ The CA certificate will be returned as a PEM file.
    * @param request - The request {@link GetDeploymentCertificateRequest}
    * @returns A Promise of Blob
    */
-  getDeploymentCertificate = (request: Readonly<GetDeploymentCertificateRequest>) =>
+  getDeploymentCertificate = (request: Readonly<GetDeploymentCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -203,6 +208,7 @@ The CA certificate will be returned as a PEM file.
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -213,7 +219,7 @@ The CA certificate will be returned as a PEM file.
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  createEndpoint = (request: Readonly<CreateEndpointRequest>) =>
+  createEndpoint = (request: Readonly<CreateEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         body: JSON.stringify(
@@ -222,6 +228,7 @@ The CA certificate will be returned as a PEM file.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
@@ -233,7 +240,7 @@ The CA certificate will be returned as a PEM file.
    * @param request - The request {@link UpdateEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  updateEndpoint = (request: Readonly<UpdateEndpointRequest>) =>
+  updateEndpoint = (request: Readonly<UpdateEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         body: JSON.stringify(
@@ -242,6 +249,7 @@ The CA certificate will be returned as a PEM file.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
@@ -252,16 +260,17 @@ The CA certificate will be returned as a PEM file.
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
-  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
+  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListModels = (request: Readonly<ListModelsRequest> = {}) =>
+  protected pageOfListModels = (request: Readonly<ListModelsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListModelsResponse>(
       {
         method: 'GET',
@@ -275,6 +284,7 @@ The CA certificate will be returned as a PEM file.
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListModelsResponse,
     )
@@ -285,8 +295,8 @@ The CA certificate will be returned as a PEM file.
    * @param request - The request {@link ListModelsRequest}
    * @returns A Promise of ListModelsResponse
    */
-  listModels = (request: Readonly<ListModelsRequest> = {}) =>
-    enrichForPagination('models', this.pageOfListModels, request)
+  listModels = (request: Readonly<ListModelsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('models', this.pageOfListModels, request, options)
 
   
   /**
@@ -295,11 +305,12 @@ The CA certificate will be returned as a PEM file.
    * @param request - The request {@link GetModelRequest}
    * @returns A Promise of Model
    */
-  getModel = (request: Readonly<GetModelRequest>) =>
+  getModel = (request: Readonly<GetModelRequest>, options?: RequestOptions) =>
     this.client.fetch<Model>(
       {
         method: 'GET',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/models/${validatePathParam('modelId', request.modelId)}`,
+        signal: options?.signal,
       },
       unmarshalModel,
     )
@@ -329,7 +340,7 @@ The CA certificate will be returned as a PEM file.
    * @param request - The request {@link CreateModelRequest}
    * @returns A Promise of Model
    */
-  createModel = (request: Readonly<CreateModelRequest>) =>
+  createModel = (request: Readonly<CreateModelRequest>, options?: RequestOptions) =>
     this.client.fetch<Model>(
       {
         body: JSON.stringify(
@@ -338,6 +349,7 @@ The CA certificate will be returned as a PEM file.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/models`,
+        signal: options?.signal,
       },
       unmarshalModel,
     )
@@ -348,16 +360,17 @@ The CA certificate will be returned as a PEM file.
    *
    * @param request - The request {@link DeleteModelRequest}
    */
-  deleteModel = (request: Readonly<DeleteModelRequest>) =>
+  deleteModel = (request: Readonly<DeleteModelRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/models/${validatePathParam('modelId', request.modelId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest>) =>
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -367,6 +380,7 @@ The CA certificate will be returned as a PEM file.
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListNodeTypesResponse,
     )
@@ -377,8 +391,8 @@ The CA certificate will be returned as a PEM file.
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
    */
-  listNodeTypes = (request: Readonly<ListNodeTypesRequest>) =>
-    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
+  listNodeTypes = (request: Readonly<ListNodeTypesRequest>, options?: RequestOptions) =>
+    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request, options)
 
   
 }

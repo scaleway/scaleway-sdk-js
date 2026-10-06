@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {SERVER_INSTALL_TRANSIENT_STATUSES as SERVER_INSTALL_TRANSIENT_STATUSES_BAREMETAL,SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES_BAREMETAL,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_BAREMETAL,} from './content.gen.js'
 import {
   marshalAddOptionServerRequest,
@@ -127,7 +127,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
+  protected pageOfListServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
@@ -143,6 +143,7 @@ export class API extends ParentAPI {
           ['status', request.status],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListServersResponse,
     )
@@ -153,8 +154,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
    */
-  listServers = (request: Readonly<ListServersRequest> = {}) =>
-    enrichForPagination('servers', this.pageOfListServers, request)
+  listServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('servers', this.pageOfListServers, request, options)
 
   
   /**
@@ -163,11 +164,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
    */
-  getServer = (request: Readonly<GetServerRequest>) =>
+  getServer = (request: Readonly<GetServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         method: 'GET',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -197,7 +199,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Server
    */
-  createServer = (request: Readonly<CreateServerRequest>) =>
+  createServer = (request: Readonly<CreateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -206,6 +208,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -217,7 +220,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link BatchCreateServersRequest}
    * @returns A Promise of BatchCreateServersResponse
    */
-  batchCreateServers = (request: Readonly<BatchCreateServersRequest> = {}) =>
+  batchCreateServers = (request: Readonly<BatchCreateServersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<BatchCreateServersResponse>(
       {
         body: JSON.stringify(
@@ -226,6 +229,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/batch-create-servers`,
+        signal: options?.signal,
       },
       unmarshalBatchCreateServersResponse,
     )
@@ -237,7 +241,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
    */
-  updateServer = (request: Readonly<UpdateServerRequest>) =>
+  updateServer = (request: Readonly<UpdateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -246,6 +250,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -257,7 +262,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link InstallServerRequest}
    * @returns A Promise of Server
    */
-  installServer = async (request: Readonly<InstallServerRequest>) =>
+  installServer = async (request: Readonly<InstallServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -266,6 +271,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/install`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -277,11 +283,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerMetricsRequest}
    * @returns A Promise of GetServerMetricsResponse
    */
-  getServerMetrics = (request: Readonly<GetServerMetricsRequest>) =>
+  getServerMetrics = (request: Readonly<GetServerMetricsRequest>, options?: RequestOptions) =>
     this.client.fetch<GetServerMetricsResponse>(
       {
         method: 'GET',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/metrics`,
+        signal: options?.signal,
       },
       unmarshalGetServerMetricsResponse,
     )
@@ -293,11 +300,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteServerRequest}
    * @returns A Promise of Server
    */
-  deleteServer = (request: Readonly<DeleteServerRequest>) =>
+  deleteServer = (request: Readonly<DeleteServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         method: 'DELETE',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -309,7 +317,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RebootServerRequest}
    * @returns A Promise of Server
    */
-  rebootServer = (request: Readonly<RebootServerRequest>) =>
+  rebootServer = (request: Readonly<RebootServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -318,6 +326,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -329,7 +338,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link StartServerRequest}
    * @returns A Promise of Server
    */
-  startServer = (request: Readonly<StartServerRequest>) =>
+  startServer = (request: Readonly<StartServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -338,6 +347,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -349,19 +359,20 @@ export class API extends ParentAPI {
    * @param request - The request {@link StopServerRequest}
    * @returns A Promise of Server
    */
-  stopServer = (request: Readonly<StopServerRequest>) =>
+  stopServer = (request: Readonly<StopServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
 
   
-  protected pageOfListServerEvents = (request: Readonly<ListServerEventsRequest>) =>
+  protected pageOfListServerEvents = (request: Readonly<ListServerEventsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListServerEventsResponse>(
       {
         method: 'GET',
@@ -371,6 +382,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListServerEventsResponse,
     )
@@ -381,8 +393,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServerEventsRequest}
    * @returns A Promise of ListServerEventsResponse
    */
-  listServerEvents = (request: Readonly<ListServerEventsRequest>) =>
-    enrichForPagination('events', this.pageOfListServerEvents, request)
+  listServerEvents = (request: Readonly<ListServerEventsRequest>, options?: RequestOptions) =>
+    enrichForPagination('events', this.pageOfListServerEvents, request, options)
 
   
   /**
@@ -391,7 +403,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDefaultPartitioningSchemaRequest}
    * @returns A Promise of Schema
    */
-  getDefaultPartitioningSchema = (request: Readonly<GetDefaultPartitioningSchemaRequest>) =>
+  getDefaultPartitioningSchema = (request: Readonly<GetDefaultPartitioningSchemaRequest>, options?: RequestOptions) =>
     this.client.fetch<Schema>(
       {
         method: 'GET',
@@ -400,6 +412,7 @@ export class API extends ParentAPI {
           ['offer_id', request.offerId],
           ['os_id', request.osId],
         ),
+        signal: options?.signal,
       },
       unmarshalSchema,
     )
@@ -410,7 +423,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link ValidatePartitioningSchemaRequest}
    */
-  validatePartitioningSchema = (request: Readonly<ValidatePartitioningSchemaRequest>) =>
+  validatePartitioningSchema = (request: Readonly<ValidatePartitioningSchemaRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -419,6 +432,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/validate`,
+        signal: options?.signal,
       },
     )
 
@@ -432,7 +446,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link StartBMCAccessRequest}
    * @returns A Promise of BMCAccess
    */
-  startBMCAccess = (request: Readonly<StartBMCAccessRequest>) =>
+  startBMCAccess = (request: Readonly<StartBMCAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<BMCAccess>(
       {
         body: JSON.stringify(
@@ -441,6 +455,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
+        signal: options?.signal,
       },
       unmarshalBMCAccess,
     )
@@ -452,11 +467,12 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link GetBMCAccessRequest}
    * @returns A Promise of BMCAccess
    */
-  getBMCAccess = (request: Readonly<GetBMCAccessRequest>) =>
+  getBMCAccess = (request: Readonly<GetBMCAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<BMCAccess>(
       {
         method: 'GET',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
+        signal: options?.signal,
       },
       unmarshalBMCAccess,
     )
@@ -467,11 +483,12 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    *
    * @param request - The request {@link StopBMCAccessRequest}
    */
-  stopBMCAccess = (request: Readonly<StopBMCAccessRequest>) =>
+  stopBMCAccess = (request: Readonly<StopBMCAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
+        signal: options?.signal,
       },
     )
 
@@ -482,7 +499,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link UpdateIPRequest}
    * @returns A Promise of IP
    */
-  updateIP = (request: Readonly<UpdateIPRequest>) =>
+  updateIP = (request: Readonly<UpdateIPRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -491,6 +508,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -502,7 +520,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link AddOptionServerRequest}
    * @returns A Promise of Server
    */
-  addOptionServer = (request: Readonly<AddOptionServerRequest>) =>
+  addOptionServer = (request: Readonly<AddOptionServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -511,6 +529,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/options/${validatePathParam('optionId', request.optionId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -522,11 +541,12 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link DeleteOptionServerRequest}
    * @returns A Promise of Server
    */
-  deleteOptionServer = (request: Readonly<DeleteOptionServerRequest>) =>
+  deleteOptionServer = (request: Readonly<DeleteOptionServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         method: 'DELETE',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/options/${validatePathParam('optionId', request.optionId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -538,17 +558,18 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link MigrateServerToMonthlyOfferRequest}
    * @returns A Promise of Server
    */
-  migrateServerToMonthlyOffer = (request: Readonly<MigrateServerToMonthlyOfferRequest>) =>
+  migrateServerToMonthlyOffer = (request: Readonly<MigrateServerToMonthlyOfferRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/migrate-offer-monthly`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
 
   
-  protected pageOfListOffers = (request: Readonly<ListOffersRequest> = {}) =>
+  protected pageOfListOffers = (request: Readonly<ListOffersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOffersResponse>(
       {
         method: 'GET',
@@ -559,6 +580,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['subscription_period', request.subscriptionPeriod],
         ),
+        signal: options?.signal,
       },
       unmarshalListOffersResponse,
     )
@@ -569,8 +591,8 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link ListOffersRequest}
    * @returns A Promise of ListOffersResponse
    */
-  listOffers = (request: Readonly<ListOffersRequest> = {}) =>
-    enrichForPagination('offers', this.pageOfListOffers, request)
+  listOffers = (request: Readonly<ListOffersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('offers', this.pageOfListOffers, request, options)
 
   
   /**
@@ -579,11 +601,12 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link GetOfferRequest}
    * @returns A Promise of Offer
    */
-  getOffer = (request: Readonly<GetOfferRequest>) =>
+  getOffer = (request: Readonly<GetOfferRequest>, options?: RequestOptions) =>
     this.client.fetch<Offer>(
       {
         method: 'GET',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/offers/${validatePathParam('offerId', request.offerId)}`,
+        signal: options?.signal,
       },
       unmarshalOffer,
     )
@@ -595,17 +618,18 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link GetOptionRequest}
    * @returns A Promise of Option
    */
-  getOption = (request: Readonly<GetOptionRequest>) =>
+  getOption = (request: Readonly<GetOptionRequest>, options?: RequestOptions) =>
     this.client.fetch<Option>(
       {
         method: 'GET',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/options/${validatePathParam('optionId', request.optionId)}`,
+        signal: options?.signal,
       },
       unmarshalOption,
     )
 
   
-  protected pageOfListOptions = (request: Readonly<ListOptionsRequest> = {}) =>
+  protected pageOfListOptions = (request: Readonly<ListOptionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOptionsResponse>(
       {
         method: 'GET',
@@ -616,6 +640,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListOptionsResponse,
     )
@@ -626,11 +651,11 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link ListOptionsRequest}
    * @returns A Promise of ListOptionsResponse
    */
-  listOptions = (request: Readonly<ListOptionsRequest> = {}) =>
-    enrichForPagination('options', this.pageOfListOptions, request)
+  listOptions = (request: Readonly<ListOptionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('options', this.pageOfListOptions, request, options)
 
   
-  protected pageOfListSettings = (request: Readonly<ListSettingsRequest> = {}) =>
+  protected pageOfListSettings = (request: Readonly<ListSettingsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSettingsResponse>(
       {
         method: 'GET',
@@ -641,6 +666,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSettingsResponse,
     )
@@ -651,8 +677,8 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link ListSettingsRequest}
    * @returns A Promise of ListSettingsResponse
    */
-  listSettings = (request: Readonly<ListSettingsRequest> = {}) =>
-    enrichForPagination('settings', this.pageOfListSettings, request)
+  listSettings = (request: Readonly<ListSettingsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('settings', this.pageOfListSettings, request, options)
 
   
   /**
@@ -661,7 +687,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link UpdateSettingRequest}
    * @returns A Promise of Setting
    */
-  updateSetting = (request: Readonly<UpdateSettingRequest>) =>
+  updateSetting = (request: Readonly<UpdateSettingRequest>, options?: RequestOptions) =>
     this.client.fetch<Setting>(
       {
         body: JSON.stringify(
@@ -670,12 +696,13 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/settings/${validatePathParam('settingId', request.settingId)}`,
+        signal: options?.signal,
       },
       unmarshalSetting,
     )
 
   
-  protected pageOfListOS = (request: Readonly<ListOSRequest> = {}) =>
+  protected pageOfListOS = (request: Readonly<ListOSRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOSResponse>(
       {
         method: 'GET',
@@ -685,6 +712,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListOSResponse,
     )
@@ -695,8 +723,8 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link ListOSRequest}
    * @returns A Promise of ListOSResponse
    */
-  listOS = (request: Readonly<ListOSRequest> = {}) =>
-    enrichForPagination('os', this.pageOfListOS, request)
+  listOS = (request: Readonly<ListOSRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('os', this.pageOfListOS, request, options)
 
   
   /**
@@ -705,11 +733,12 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
    * @param request - The request {@link GetOSRequest}
    * @returns A Promise of OS
    */
-  getOS = (request: Readonly<GetOSRequest>) =>
+  getOS = (request: Readonly<GetOSRequest>, options?: RequestOptions) =>
     this.client.fetch<OS>(
       {
         method: 'GET',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/os/${validatePathParam('osId', request.osId)}`,
+        signal: options?.signal,
       },
       unmarshalOS,
     )
@@ -738,7 +767,7 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
-  addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) =>
+  addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
         body: JSON.stringify(
@@ -747,6 +776,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalServerPrivateNetwork,
     )
@@ -758,7 +788,7 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
-  setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) =>
+  setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>, options?: RequestOptions) =>
     this.client.fetch<SetServerPrivateNetworksResponse>(
       {
         body: JSON.stringify(
@@ -767,12 +797,13 @@ export class PrivateNetworkAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalSetServerPrivateNetworksResponse,
     )
 
   
-  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
+  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServerPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -786,6 +817,7 @@ export class PrivateNetworkAPI extends ParentAPI {
           ['project_id', request.projectId],
           ['server_id', request.serverId],
         ),
+        signal: options?.signal,
       },
       unmarshalListServerPrivateNetworksResponse,
     )
@@ -796,8 +828,8 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
-  listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
-    enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request)
+  listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request, options)
 
   
   /**
@@ -805,11 +837,12 @@ export class PrivateNetworkAPI extends ParentAPI {
    *
    * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
-  deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) =>
+  deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        signal: options?.signal,
       },
     )
 

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalImpactDataResponse,
   unmarshalImpactReportAvailability,
@@ -40,7 +40,7 @@ export class UserAPI extends ParentAPI {
    * @param request - The request {@link UserApiGetImpactReportAvailabilityRequest}
    * @returns A Promise of ImpactReportAvailability
    */
-  getImpactReportAvailability = (request: Readonly<UserApiGetImpactReportAvailabilityRequest> = {}) =>
+  getImpactReportAvailability = (request: Readonly<UserApiGetImpactReportAvailabilityRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ImpactReportAvailability>(
       {
         method: 'GET',
@@ -50,6 +50,7 @@ export class UserAPI extends ParentAPI {
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
           ['start_date', request.startDate],
         ),
+        signal: options?.signal,
       },
       unmarshalImpactReportAvailability,
     )
@@ -61,7 +62,7 @@ export class UserAPI extends ParentAPI {
    * @param request - The request {@link UserApiDownloadImpactReportRequest}
    * @returns A Promise of Blob
    */
-  downloadImpactReport = (request: Readonly<UserApiDownloadImpactReportRequest> = {}) =>
+  downloadImpactReport = (request: Readonly<UserApiDownloadImpactReportRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         body: JSON.stringify(
@@ -77,6 +78,7 @@ export class UserAPI extends ParentAPI {
           ['type', request.type],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -87,7 +89,7 @@ export class UserAPI extends ParentAPI {
    * @param request - The request {@link UserApiGetImpactDataRequest}
    * @returns A Promise of ImpactDataResponse
    */
-  getImpactData = (request: Readonly<UserApiGetImpactDataRequest> = {}) =>
+  getImpactData = (request: Readonly<UserApiGetImpactDataRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ImpactDataResponse>(
       {
         method: 'GET',
@@ -102,6 +104,7 @@ export class UserAPI extends ParentAPI {
           ['start_date', request.startDate],
           ['zones', request.zones],
         ),
+        signal: options?.signal,
       },
       unmarshalImpactDataResponse,
     )

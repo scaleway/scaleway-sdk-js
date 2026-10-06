@@ -1,5 +1,475 @@
 # Change Log
 
+## 2.15.0
+
+### Minor Changes
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(cockpit): add datasource filter on listAlert endpoint (#2126)
+
+- feat(cockpit): add monthly usage (#2592)
+
+- fix: sdk client deps (#2056)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore: format generated files (#2659)
+
+- feat: add extension .js for nodenext (#2492)
+
+- fix: change tabs into space (#2688)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(release): publish
+
+- feat: add support for constants (#3286)
+
+- feat(cockpit): add new Data-exporter endpoints + types (#2577)
+
+- fix(cockpit): add small precisions in documentation (#2159)
+
+- chore: format generated files (#2652)
+
+- fix(cockpit): add return object for enable/disable alert endpoints (#2045)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(cockpit): release documentation for data-exporter (#2733)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- docs(cockpit): fix documentation string on preconfigured rules (#2072)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(cockpit): respect newline (#2556)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(cockpit): remove visibitiy none one managed alerts (#2596)
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- docs(cockpit): rework regional api (#2128)
+
+- chore(release): publish
+
+- feat(cockpit): add product and family fields in alert listing (#2152)
+
+- docs(cockpit): deprecate managed alerts routes (#2506)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: reorganize import (#2520)
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(cockpit): increase data-source max retention (#2041)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- chore(cockpit): change documentation order + required field + data-exporter rework (#2704)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore: sync generated files after build (#2862)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(cockpit): add getRulesCount endpoint (#2219)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- feat(cockpit): add new region field to exporter (#2848)
+
+- docs(cockpit): rephrase deprecation notes to fix lint error (#2557)
+
+- chore(engines): remove node engines (#3336)
+
+- docs(cockpit): add documentation for enable/disable alert rules requests (#2169)
+
+- feat: update generated APIs (#2568)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): publish
+
+- fix: format (#2683)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(cockpit): add rule status on ListAlert endpoint (#2236)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore: new formating (#2667)
+
+- chore: fix formating (#2669)
+
+- chore(cockpit): deprecate grafana users (#2560)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+## 2.14.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.1
+
+## 2.14.0
+
+### Minor Changes
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- docs(cockpit): rework regional api (#2128)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(typescript): upgrade version (#2916)
+
+- feat: add support for constants (#3286)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore: fix formating (#2669)
+
+- chore: format generated files (#2659)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore: new formating (#2667)
+
+- feat(cockpit): add datasource filter on listAlert endpoint (#2126)
+
+- docs(cockpit): rephrase deprecation notes to fix lint error (#2557)
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(cockpit): increase data-source max retention (#2041)
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: format (#2683)
+
+- fix(cockpit): add small precisions in documentation (#2159)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(cockpit): add new region field to exporter (#2848)
+
+- chore(release): publish
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- fix: change tabs into space (#2688)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- fix(cockpit): remove visibitiy none one managed alerts (#2596)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(release): publish
+
+- chore(lint): lint tsconfigs (#2968)
+
+- docs(cockpit): deprecate managed alerts routes (#2506)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#2568)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(cockpit): add monthly usage (#2592)
+
+- chore(release): publish
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- docs(cockpit): add documentation for enable/disable alert rules requests (#2169)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(cockpit): add new Data-exporter endpoints + types (#2577)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore: format generated files (#2652)
+
+- fix: export locality (#2200)
+
+- chore(release): publish
+
+- feat(cockpit): add product and family fields in alert listing (#2152)
+
+- fix(cockpit): respect newline (#2556)
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(cockpit): deprecate grafana users (#2560)
+
+- chore(cockpit): release documentation for data-exporter (#2733)
+
+- chore: reorganize import (#2520)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- docs(cockpit): fix documentation string on preconfigured rules (#2072)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- feat(cockpit): add getRulesCount endpoint (#2219)
+
+- feat: update generated APIs (#3600)
+
+- feat(cockpit): add rule status on ListAlert endpoint (#2236)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore(cockpit): change documentation order + required field + data-exporter rework (#2704)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(release): publish
+
+- fix(cockpit): add return object for enable/disable alert endpoints (#2045)
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.0
+
 ## 2.13.0
 
 ### Minor Changes

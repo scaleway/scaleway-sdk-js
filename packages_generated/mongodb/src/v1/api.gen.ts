@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {INSTANCE_TRANSIENT_STATUSES as INSTANCE_TRANSIENT_STATUSES_MONGODB,MAINTENANCE_TRANSIENT_STATUSES as MAINTENANCE_TRANSIENT_STATUSES_MONGODB,SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_MONGODB,} from './content.gen.js'
 import {
   marshalCreateEndpointRequest,
@@ -98,7 +98,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -108,6 +108,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListNodeTypesResponse,
     )
@@ -118,11 +119,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
    */
-  listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}) =>
-    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
+  listNodeTypes = (request: Readonly<ListNodeTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request, options)
 
   
-  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}) =>
+  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
@@ -132,6 +133,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['version', request.version],
         ),
+        signal: options?.signal,
       },
       unmarshalListVersionsResponse,
     )
@@ -142,11 +144,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
    */
-  listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
-    enrichForPagination('versions', this.pageOfListVersions, request)
+  listVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('versions', this.pageOfListVersions, request, options)
 
   
-  protected pageOfListInstances = (request: Readonly<ListInstancesRequest> = {}) =>
+  protected pageOfListInstances = (request: Readonly<ListInstancesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListInstancesResponse>(
       {
         method: 'GET',
@@ -161,6 +163,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListInstancesResponse,
     )
@@ -171,8 +174,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListInstancesRequest}
    * @returns A Promise of ListInstancesResponse
    */
-  listInstances = (request: Readonly<ListInstancesRequest> = {}) =>
-    enrichForPagination('instances', this.pageOfListInstances, request)
+  listInstances = (request: Readonly<ListInstancesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('instances', this.pageOfListInstances, request, options)
 
   
   /**
@@ -181,11 +184,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetInstanceRequest}
    * @returns A Promise of Instance
    */
-  getInstance = (request: Readonly<GetInstanceRequest>) =>
+  getInstance = (request: Readonly<GetInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         method: 'GET',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -215,7 +219,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateInstanceRequest}
    * @returns A Promise of Instance
    */
-  createInstance = (request: Readonly<CreateInstanceRequest>) =>
+  createInstance = (request: Readonly<CreateInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -224,6 +228,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -235,7 +240,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateInstanceRequest}
    * @returns A Promise of Instance
    */
-  updateInstance = (request: Readonly<UpdateInstanceRequest>) =>
+  updateInstance = (request: Readonly<UpdateInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -244,6 +249,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -255,11 +261,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteInstanceRequest}
    * @returns A Promise of Instance
    */
-  deleteInstance = (request: Readonly<DeleteInstanceRequest>) =>
+  deleteInstance = (request: Readonly<DeleteInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         method: 'DELETE',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -271,7 +278,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpgradeInstanceRequest}
    * @returns A Promise of Instance
    */
-  upgradeInstance = (request: Readonly<UpgradeInstanceRequest>) =>
+  upgradeInstance = (request: Readonly<UpgradeInstanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -280,6 +287,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/upgrade`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
@@ -291,7 +299,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetInstanceCertificateRequest}
    * @returns A Promise of Blob
    */
-  getInstanceCertificate = (request: Readonly<GetInstanceCertificateRequest>) =>
+  getInstanceCertificate = (request: Readonly<GetInstanceCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -300,6 +308,7 @@ export class API extends ParentAPI {
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -310,7 +319,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  createSnapshot = (request: Readonly<CreateSnapshotRequest>) =>
+  createSnapshot = (request: Readonly<CreateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -319,6 +328,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -330,11 +340,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  getSnapshot = (request: Readonly<GetSnapshotRequest>) =>
+  getSnapshot = (request: Readonly<GetSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         method: 'GET',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -364,7 +375,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>) =>
+  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -373,6 +384,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -384,7 +396,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RestoreSnapshotRequest}
    * @returns A Promise of Instance
    */
-  restoreSnapshot = (request: Readonly<RestoreSnapshotRequest>) =>
+  restoreSnapshot = (request: Readonly<RestoreSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Instance>(
       {
         body: JSON.stringify(
@@ -393,12 +405,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/restore`,
+        signal: options?.signal,
       },
       unmarshalInstance,
     )
 
   
-  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
+  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
@@ -412,6 +425,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListSnapshotsResponse,
     )
@@ -422,8 +436,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
    */
-  listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}) =>
-    enrichForPagination('snapshots', this.pageOfListSnapshots, request)
+  listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('snapshots', this.pageOfListSnapshots, request, options)
 
   
   /**
@@ -432,17 +446,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>) =>
+  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         method: 'DELETE',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
 
   
-  protected pageOfListUsers = (request: Readonly<ListUsersRequest>) =>
+  protected pageOfListUsers = (request: Readonly<ListUsersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListUsersResponse>(
       {
         method: 'GET',
@@ -453,6 +468,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListUsersResponse,
     )
@@ -463,8 +479,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListUsersRequest}
    * @returns A Promise of ListUsersResponse
    */
-  listUsers = (request: Readonly<ListUsersRequest>) =>
-    enrichForPagination('users', this.pageOfListUsers, request)
+  listUsers = (request: Readonly<ListUsersRequest>, options?: RequestOptions) =>
+    enrichForPagination('users', this.pageOfListUsers, request, options)
 
   
   /**
@@ -473,7 +489,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateUserRequest}
    * @returns A Promise of User
    */
-  createUser = (request: Readonly<CreateUserRequest>) =>
+  createUser = (request: Readonly<CreateUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -482,6 +498,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -493,7 +510,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateUserRequest}
    * @returns A Promise of User
    */
-  updateUser = (request: Readonly<UpdateUserRequest>) =>
+  updateUser = (request: Readonly<UpdateUserRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -502,6 +519,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
@@ -512,11 +530,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteUserRequest}
    */
-  deleteUser = (request: Readonly<DeleteUserRequest>) =>
+  deleteUser = (request: Readonly<DeleteUserRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
+        signal: options?.signal,
       },
     )
 
@@ -527,7 +546,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetUserRoleRequest}
    * @returns A Promise of User
    */
-  setUserRole = (request: Readonly<SetUserRoleRequest>) =>
+  setUserRole = (request: Readonly<SetUserRoleRequest>, options?: RequestOptions) =>
     this.client.fetch<User>(
       {
         body: JSON.stringify(
@@ -536,12 +555,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/set-user-roles`,
+        signal: options?.signal,
       },
       unmarshalUser,
     )
 
   
-  protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest>) =>
+  protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDatabasesResponse>(
       {
         method: 'GET',
@@ -551,6 +571,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatabasesResponse,
     )
@@ -561,8 +582,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDatabasesRequest}
    * @returns A Promise of ListDatabasesResponse
    */
-  listDatabases = (request: Readonly<ListDatabasesRequest>) =>
-    enrichForPagination('databases', this.pageOfListDatabases, request)
+  listDatabases = (request: Readonly<ListDatabasesRequest>, options?: RequestOptions) =>
+    enrichForPagination('databases', this.pageOfListDatabases, request, options)
 
   
   /**
@@ -570,11 +591,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteEndpointRequest}
    */
-  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
+  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -585,7 +607,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  createEndpoint = (request: Readonly<CreateEndpointRequest>) =>
+  createEndpoint = (request: Readonly<CreateEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         body: JSON.stringify(
@@ -594,12 +616,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
 
   
-  protected pageOfListMaintenances = (request: Readonly<ListMaintenancesRequest>) =>
+  protected pageOfListMaintenances = (request: Readonly<ListMaintenancesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListMaintenancesResponse>(
       {
         method: 'GET',
@@ -610,6 +633,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListMaintenancesResponse,
     )
@@ -620,8 +644,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListMaintenancesRequest}
    * @returns A Promise of ListMaintenancesResponse
    */
-  listMaintenances = (request: Readonly<ListMaintenancesRequest>) =>
-    enrichForPagination('maintenances', this.pageOfListMaintenances, request)
+  listMaintenances = (request: Readonly<ListMaintenancesRequest>, options?: RequestOptions) =>
+    enrichForPagination('maintenances', this.pageOfListMaintenances, request, options)
 
   
   /**
@@ -630,11 +654,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetMaintenanceRequest}
    * @returns A Promise of Maintenance
    */
-  getMaintenance = (request: Readonly<GetMaintenanceRequest>) =>
+  getMaintenance = (request: Readonly<GetMaintenanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Maintenance>(
       {
         method: 'GET',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/maintenances/${validatePathParam('maintenanceId', request.maintenanceId)}`,
+        signal: options?.signal,
       },
       unmarshalMaintenance,
     )
@@ -664,13 +689,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link ApplyMaintenanceRequest}
    * @returns A Promise of Maintenance
    */
-  applyMaintenance = (request: Readonly<ApplyMaintenanceRequest>) =>
+  applyMaintenance = (request: Readonly<ApplyMaintenanceRequest>, options?: RequestOptions) =>
     this.client.fetch<Maintenance>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/mongodb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/maintenances/${validatePathParam('maintenanceId', request.maintenanceId)}/apply`,
+        signal: options?.signal,
       },
       unmarshalMaintenance,
     )

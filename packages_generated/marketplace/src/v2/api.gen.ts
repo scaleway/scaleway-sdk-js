@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalCategory,
   unmarshalImage,
@@ -46,7 +46,7 @@ import type {
 This API allows you to find available images for use when launching a Scaleway Instance.
  */
 export class API extends ParentAPI {
-  protected pageOfListImages = (request: Readonly<ListImagesRequest>) =>
+  protected pageOfListImages = (request: Readonly<ListImagesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListImagesResponse>(
       {
         method: 'GET',
@@ -59,6 +59,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListImagesResponse,
     )
@@ -69,8 +70,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListImagesRequest}
    * @returns A Promise of ListImagesResponse
    */
-  listImages = (request: Readonly<ListImagesRequest>) =>
-    enrichForPagination('images', this.pageOfListImages, request)
+  listImages = (request: Readonly<ListImagesRequest>, options?: RequestOptions) =>
+    enrichForPagination('images', this.pageOfListImages, request, options)
 
   
   /**
@@ -79,17 +80,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetImageRequest}
    * @returns A Promise of Image
    */
-  getImage = (request: Readonly<GetImageRequest>) =>
+  getImage = (request: Readonly<GetImageRequest>, options?: RequestOptions) =>
     this.client.fetch<Image>(
       {
         method: 'GET',
         path: `/marketplace/v2/images/${validatePathParam('imageId', request.imageId)}`,
+        signal: options?.signal,
       },
       unmarshalImage,
     )
 
   
-  protected pageOfListVersions = (request: Readonly<ListVersionsRequest>) =>
+  protected pageOfListVersions = (request: Readonly<ListVersionsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
@@ -100,6 +102,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListVersionsResponse,
     )
@@ -110,8 +113,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
    */
-  listVersions = (request: Readonly<ListVersionsRequest>) =>
-    enrichForPagination('versions', this.pageOfListVersions, request)
+  listVersions = (request: Readonly<ListVersionsRequest>, options?: RequestOptions) =>
+    enrichForPagination('versions', this.pageOfListVersions, request, options)
 
   
   /**
@@ -120,17 +123,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetVersionRequest}
    * @returns A Promise of Version
    */
-  getVersion = (request: Readonly<GetVersionRequest>) =>
+  getVersion = (request: Readonly<GetVersionRequest>, options?: RequestOptions) =>
     this.client.fetch<Version>(
       {
         method: 'GET',
         path: `/marketplace/v2/versions/${validatePathParam('versionId', request.versionId)}`,
+        signal: options?.signal,
       },
       unmarshalVersion,
     )
 
   
-  protected pageOfListLocalImages = (request: Readonly<ListLocalImagesRequest> = {}) =>
+  protected pageOfListLocalImages = (request: Readonly<ListLocalImagesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListLocalImagesResponse>(
       {
         method: 'GET',
@@ -154,6 +158,7 @@ export class API extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListLocalImagesResponse,
     )
@@ -164,8 +169,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListLocalImagesRequest}
    * @returns A Promise of ListLocalImagesResponse
    */
-  listLocalImages = (request: Readonly<ListLocalImagesRequest> = {}) =>
-    enrichForPagination('localImages', this.pageOfListLocalImages, request)
+  listLocalImages = (request: Readonly<ListLocalImagesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('localImages', this.pageOfListLocalImages, request, options)
 
   
   /**
@@ -174,17 +179,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetLocalImageRequest}
    * @returns A Promise of LocalImage
    */
-  getLocalImage = (request: Readonly<GetLocalImageRequest>) =>
+  getLocalImage = (request: Readonly<GetLocalImageRequest>, options?: RequestOptions) =>
     this.client.fetch<LocalImage>(
       {
         method: 'GET',
         path: `/marketplace/v2/local-images/${validatePathParam('localImageId', request.localImageId)}`,
+        signal: options?.signal,
       },
       unmarshalLocalImage,
     )
 
   
-  protected pageOfListCategories = (request: Readonly<ListCategoriesRequest> = {}) =>
+  protected pageOfListCategories = (request: Readonly<ListCategoriesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListCategoriesResponse>(
       {
         method: 'GET',
@@ -193,6 +199,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListCategoriesResponse,
     )
@@ -203,8 +210,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListCategoriesRequest}
    * @returns A Promise of ListCategoriesResponse
    */
-  listCategories = (request: Readonly<ListCategoriesRequest> = {}) =>
-    enrichForPagination('categories', this.pageOfListCategories, request)
+  listCategories = (request: Readonly<ListCategoriesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('categories', this.pageOfListCategories, request, options)
 
   
   /**
@@ -213,11 +220,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetCategoryRequest}
    * @returns A Promise of Category
    */
-  getCategory = (request: Readonly<GetCategoryRequest>) =>
+  getCategory = (request: Readonly<GetCategoryRequest>, options?: RequestOptions) =>
     this.client.fetch<Category>(
       {
         method: 'GET',
         path: `/marketplace/v2/categories/${validatePathParam('categoryId', request.categoryId)}`,
+        signal: options?.signal,
       },
       unmarshalCategory,
     )

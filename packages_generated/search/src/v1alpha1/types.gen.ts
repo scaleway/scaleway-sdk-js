@@ -71,6 +71,8 @@ export type ResourceType =
   | 'kafk_cluster'
   | 'sedb_cluster'
   | 'autoscaling_group'
+  | 'wofl_definition'
+  | 'wofl_run'
 
 export type SearchResourcesRequestOrderBy =
   | 'relevance'

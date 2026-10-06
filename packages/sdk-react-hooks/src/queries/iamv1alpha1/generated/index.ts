@@ -53,6 +53,7 @@ export { useIamv1alpha1APIGetOrganizationScimQuery } from "./useIamv1alpha1APIGe
 export { useIamv1alpha1APIListScimTokensQuery } from "./useIamv1alpha1APIListScimTokensQuery"
 export { useIamv1alpha1APIListScimTokensInfiniteQuery } from "./useIamv1alpha1APIListScimTokensInfiniteQuery"
 export { useIamv1alpha1APIListScimTokensAllQuery } from "./useIamv1alpha1APIListScimTokensAllQuery"
+export { useIamv1alpha1APIGetScimTokenQuery } from "./useIamv1alpha1APIGetScimTokenQuery"
 export { useIamv1alpha1APIListUserWebAuthnAuthenticatorsQuery } from "./useIamv1alpha1APIListUserWebAuthnAuthenticatorsQuery"
 export { useIamv1alpha1APIListUserWebAuthnAuthenticatorsInfiniteQuery } from "./useIamv1alpha1APIListUserWebAuthnAuthenticatorsInfiniteQuery"
 export { useIamv1alpha1APIListUserWebAuthnAuthenticatorsAllQuery } from "./useIamv1alpha1APIListUserWebAuthnAuthenticatorsAllQuery"

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalDiscount,
   unmarshalInvoice,
@@ -45,7 +45,7 @@ import type {
 This API allows you to manage and query your Scaleway billing and consumption.
  */
 export class API extends ParentAPI {
-  protected pageOfListConsumptions = (request: Readonly<ListConsumptionsRequest> = {}) =>
+  protected pageOfListConsumptions = (request: Readonly<ListConsumptionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListConsumptionsResponse>(
       {
         method: 'GET',
@@ -65,6 +65,7 @@ export class API extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListConsumptionsResponse,
     )
@@ -75,11 +76,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListConsumptionsRequest}
    * @returns A Promise of ListConsumptionsResponse
    */
-  listConsumptions = (request: Readonly<ListConsumptionsRequest> = {}) =>
-    enrichForPagination('consumptions', this.pageOfListConsumptions, request)
+  listConsumptions = (request: Readonly<ListConsumptionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('consumptions', this.pageOfListConsumptions, request, options)
 
   
-  protected pageOfListTaxes = (request: Readonly<ListTaxesRequest> = {}) =>
+  protected pageOfListTaxes = (request: Readonly<ListTaxesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTaxesResponse>(
       {
         method: 'GET',
@@ -91,6 +92,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListTaxesResponse,
     )
@@ -101,11 +103,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListTaxesRequest}
    * @returns A Promise of ListTaxesResponse
    */
-  listTaxes = (request: Readonly<ListTaxesRequest> = {}) =>
-    enrichForPagination('taxes', this.pageOfListTaxes, request)
+  listTaxes = (request: Readonly<ListTaxesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('taxes', this.pageOfListTaxes, request, options)
 
   
-  protected pageOfListInvoices = (request: Readonly<ListInvoicesRequest> = {}) =>
+  protected pageOfListInvoices = (request: Readonly<ListInvoicesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListInvoicesResponse>(
       {
         method: 'GET',
@@ -119,6 +121,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListInvoicesResponse,
     )
@@ -129,8 +132,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListInvoicesRequest}
    * @returns A Promise of ListInvoicesResponse
    */
-  listInvoices = (request: Readonly<ListInvoicesRequest> = {}) =>
-    enrichForPagination('invoices', this.pageOfListInvoices, request)
+  listInvoices = (request: Readonly<ListInvoicesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('invoices', this.pageOfListInvoices, request, options)
 
   
   /**
@@ -139,7 +142,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ExportInvoicesRequest}
    * @returns A Promise of Blob
    */
-  exportInvoices = (request: Readonly<ExportInvoicesRequest> = {}) =>
+  exportInvoices = (request: Readonly<ExportInvoicesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -156,6 +159,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -166,11 +170,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetInvoiceRequest}
    * @returns A Promise of Invoice
    */
-  getInvoice = (request: Readonly<GetInvoiceRequest>) =>
+  getInvoice = (request: Readonly<GetInvoiceRequest>, options?: RequestOptions) =>
     this.client.fetch<Invoice>(
       {
         method: 'GET',
         path: `/billing/v2beta1/invoices/${validatePathParam('invoiceId', request.invoiceId)}`,
+        signal: options?.signal,
       },
       unmarshalInvoice,
     )
@@ -182,7 +187,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DownloadInvoiceRequest}
    * @returns A Promise of Blob
    */
-  downloadInvoice = (request: Readonly<DownloadInvoiceRequest>) =>
+  downloadInvoice = (request: Readonly<DownloadInvoiceRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -192,11 +197,12 @@ export class API extends ParentAPI {
           ['file_type', request.fileType],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListDiscounts = (request: Readonly<ListDiscountsRequest> = {}) =>
+  protected pageOfListDiscounts = (request: Readonly<ListDiscountsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDiscountsResponse>(
       {
         method: 'GET',
@@ -207,6 +213,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListDiscountsResponse,
     )
@@ -220,8 +227,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDiscountsRequest}
    * @returns A Promise of ListDiscountsResponse
    */
-  listDiscounts = (request: Readonly<ListDiscountsRequest> = {}) =>
-    enrichForPagination('discounts', this.pageOfListDiscounts, request)
+  listDiscounts = (request: Readonly<ListDiscountsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('discounts', this.pageOfListDiscounts, request, options)
 
   
   /**
@@ -230,7 +237,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RedeemCouponRequest}
    * @returns A Promise of Discount
    */
-  redeemCoupon = (request: Readonly<RedeemCouponRequest>) =>
+  redeemCoupon = (request: Readonly<RedeemCouponRequest>, options?: RequestOptions) =>
     this.client.fetch<Discount>(
       {
         method: 'POST',
@@ -239,6 +246,7 @@ export class API extends ParentAPI {
           ['code', request.code],
           ['organization_id', request.organizationId ?? this.client.settings.defaultOrganizationId],
         ),
+        signal: options?.signal,
       },
       unmarshalDiscount,
     )
@@ -256,7 +264,7 @@ export class FinOpsAPI extends ParentAPI {
    * @param request - The request {@link FinOpsApiListChargesRequest}
    * @returns A Promise of ListChargesResponse
    */
-  listCharges = (request: Readonly<FinOpsApiListChargesRequest> = {}) =>
+  listCharges = (request: Readonly<FinOpsApiListChargesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListChargesResponse>(
       {
         method: 'GET',
@@ -275,6 +283,7 @@ export class FinOpsAPI extends ParentAPI {
           ['skus', request.skus],
           ['start_date_after', request.startDateAfter],
         ),
+        signal: options?.signal,
       },
       unmarshalListChargesResponse,
     )

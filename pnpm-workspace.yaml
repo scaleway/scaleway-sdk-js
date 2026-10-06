@@ -4,6 +4,9 @@ packages:
   - 'tools/*'
 
 tasks:
+  build:
+    dependsOn:
+      - ^build
   typecheck:
     dependsOn:
       - build
@@ -18,7 +21,7 @@ catalog:
   vitest: 4.1.11
   tsdown: 0.23.0
   '@types/react': 19.3.0
-  '@types/node': 26.6.2
+  '@types/node': 26.6.3
   '@scaleway/random-name': 6.0.2
 
 overrides:

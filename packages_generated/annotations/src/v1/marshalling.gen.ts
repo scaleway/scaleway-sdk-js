@@ -35,6 +35,7 @@ const unmarshalBindingKey = (data: unknown): BindingKey => {
   return {
     id: data.id,
     name: data.name,
+    srn: data.srn,
   } as BindingKey
 }
 
@@ -48,6 +49,7 @@ const unmarshalBindingValue = (data: unknown): BindingValue => {
   return {
     id: data.id,
     name: data.name,
+    srn: data.srn,
   } as BindingValue
 }
 
@@ -62,6 +64,7 @@ export const unmarshalBinding = (data: unknown): Binding => {
     id: data.id,
     key: data.key ? unmarshalBindingKey(data.key) : undefined,
     srn: data.srn,
+    targetSrn: data.target_srn,
     value: data.value ? unmarshalBindingValue(data.value) : undefined,
   } as Binding
 }
@@ -77,6 +80,7 @@ export const unmarshalKey = (data: unknown): Key => {
     description: data.description,
     id: data.id,
     name: data.name,
+    srn: data.srn,
   } as Key
 }
 
@@ -92,6 +96,7 @@ export const unmarshalValue = (data: unknown): Value => {
     id: data.id,
     keyId: data.key_id,
     name: data.name,
+    srn: data.srn,
   } as Value
 }
 
@@ -142,6 +147,7 @@ const unmarshalListAllKeysAndValuesResponseValue = (data: unknown): ListAllKeysA
     description: data.description,
     id: data.id,
     name: data.name,
+    srn: data.srn,
   } as ListAllKeysAndValuesResponseValue
 }
 
@@ -156,6 +162,7 @@ const unmarshalListAllKeysAndValuesResponseKey = (data: unknown): ListAllKeysAnd
     description: data.description,
     id: data.id,
     name: data.name,
+    srn: data.srn,
     values: unmarshalArrayOfObject(data.values, unmarshalListAllKeysAndValuesResponseValue),
   } as ListAllKeysAndValuesResponseKey
 }
@@ -215,7 +222,7 @@ export const marshalCreateBindingRequest = (
   request: CreateBindingRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  srn: request.srn,
+  target_srn: request.targetSrn,
   value_id: request.valueId,
 })
 

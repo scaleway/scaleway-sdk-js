@@ -1124,6 +1124,10 @@ export interface ServerType {
    * True if this Instance type has reached end of service.
    */
   endOfService: boolean
+  /**
+   * The billing SKU for this server type.
+   */
+  sku: string
 }
 
 

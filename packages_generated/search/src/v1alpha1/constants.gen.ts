@@ -81,6 +81,8 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'kafk_cluster',
   'sedb_cluster',
   'autoscaling_group',
+  'wofl_definition',
+  'wofl_run',
 ]
 
 /** Lists all values of the enum {@link SearchResourcesRequestOrderBy}. */

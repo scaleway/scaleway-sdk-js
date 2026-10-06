@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {GROUP_GROUP_TRANSIENT_STATUSES as GROUP_GROUP_TRANSIENT_STATUSES_AUTOSCALING,} from './content.gen.js'
 import {
   marshalCreateGroupRequest,
@@ -71,7 +71,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListGroupsRequest}
    * @returns A Promise of ListGroupsResponse
    */
-  listGroups = (request: Readonly<ListGroupsRequest> = {}) =>
+  listGroups = (request: Readonly<ListGroupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListGroupsResponse>(
       {
         method: 'GET',
@@ -84,6 +84,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['template_id', request.templateId],
         ),
+        signal: options?.signal,
       },
       unmarshalListGroupsResponse,
     )
@@ -96,11 +97,12 @@ configuration, current size, and status.
    * @param request - The request {@link GetGroupRequest}
    * @returns A Promise of Group
    */
-  getGroup = (request: Readonly<GetGroupRequest>) =>
+  getGroup = (request: Readonly<GetGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         method: 'GET',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -132,7 +134,7 @@ settings.
    * @param request - The request {@link CreateGroupRequest}
    * @returns A Promise of Group
    */
-  createGroup = (request: Readonly<CreateGroupRequest>) =>
+  createGroup = (request: Readonly<CreateGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: JSON.stringify(
@@ -141,6 +143,7 @@ settings.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -153,13 +156,14 @@ Its main use case is applying changes if the instance template has been updated.
    * @param request - The request {@link RefreshGroupRequest}
    * @returns A Promise of Group
    */
-  refreshGroup = (request: Readonly<RefreshGroupRequest>) =>
+  refreshGroup = (request: Readonly<RefreshGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}/refresh`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -172,7 +176,7 @@ name, tags, template, scaling policy, and load balancer settings.
    * @param request - The request {@link UpdateGroupRequest}
    * @returns A Promise of Group
    */
-  updateGroup = (request: Readonly<UpdateGroupRequest>) =>
+  updateGroup = (request: Readonly<UpdateGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         body: JSON.stringify(
@@ -181,6 +185,7 @@ name, tags, template, scaling policy, and load balancer settings.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -193,11 +198,12 @@ resources.
    * @param request - The request {@link DeleteGroupRequest}
    * @returns A Promise of Group
    */
-  deleteGroup = (request: Readonly<DeleteGroupRequest>) =>
+  deleteGroup = (request: Readonly<DeleteGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<Group>(
       {
         method: 'DELETE',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalGroup,
     )
@@ -210,7 +216,7 @@ and activities.
    * @param request - The request {@link ListLogsRequest}
    * @returns A Promise of ListLogsResponse
    */
-  listLogs = (request: Readonly<ListLogsRequest>) =>
+  listLogs = (request: Readonly<ListLogsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListLogsResponse>(
       {
         method: 'GET',
@@ -222,6 +228,7 @@ and activities.
           ['page_token', request.pageToken],
           ['start_time', request.startTime],
         ),
+        signal: options?.signal,
       },
       unmarshalListLogsResponse,
     )
@@ -233,7 +240,7 @@ and activities.
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
    */
-  listServers = (request: Readonly<ListServersRequest>) =>
+  listServers = (request: Readonly<ListServersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
@@ -243,6 +250,7 @@ and activities.
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
+        signal: options?.signal,
       },
       unmarshalListServersResponse,
     )
@@ -254,7 +262,7 @@ and activities.
    * @param request - The request {@link ListAlertsRequest}
    * @returns A Promise of ListAlertsResponse
    */
-  listAlerts = (request: Readonly<ListAlertsRequest> = {}) =>
+  listAlerts = (request: Readonly<ListAlertsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAlertsResponse>(
       {
         method: 'GET',
@@ -271,6 +279,7 @@ and activities.
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListAlertsResponse,
     )

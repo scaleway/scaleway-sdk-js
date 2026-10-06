@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DATABASE_TRANSIENT_STATUSES as DATABASE_TRANSIENT_STATUSES_SERVERLESS_SQLDB,} from './content.gen.js'
 import {
   marshalCreateDatabaseRequest,
@@ -67,7 +67,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateDatabaseRequest}
    * @returns A Promise of Database
    */
-  createDatabase = (request: Readonly<CreateDatabaseRequest>) =>
+  createDatabase = (request: Readonly<CreateDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         body: JSON.stringify(
@@ -76,6 +76,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
@@ -87,11 +88,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDatabaseRequest}
    * @returns A Promise of Database
    */
-  getDatabase = (request: Readonly<GetDatabaseRequest>) =>
+  getDatabase = (request: Readonly<GetDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         method: 'GET',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
@@ -121,17 +123,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteDatabaseRequest}
    * @returns A Promise of Database
    */
-  deleteDatabase = (request: Readonly<DeleteDatabaseRequest>) =>
+  deleteDatabase = (request: Readonly<DeleteDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         method: 'DELETE',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
 
   
-  protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest> = {}) =>
+  protected pageOfListDatabases = (request: Readonly<ListDatabasesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDatabasesResponse>(
       {
         method: 'GET',
@@ -144,6 +147,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatabasesResponse,
     )
@@ -154,8 +158,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDatabasesRequest}
    * @returns A Promise of ListDatabasesResponse
    */
-  listDatabases = (request: Readonly<ListDatabasesRequest> = {}) =>
-    enrichForPagination('databases', this.pageOfListDatabases, request)
+  listDatabases = (request: Readonly<ListDatabasesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('databases', this.pageOfListDatabases, request, options)
 
   
   /**
@@ -164,7 +168,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDatabaseRequest}
    * @returns A Promise of Database
    */
-  updateDatabase = (request: Readonly<UpdateDatabaseRequest>) =>
+  updateDatabase = (request: Readonly<UpdateDatabaseRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         body: JSON.stringify(
@@ -173,6 +177,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
@@ -184,7 +189,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link RestoreDatabaseFromBackupRequest}
    * @returns A Promise of Database
    */
-  restoreDatabaseFromBackup = (request: Readonly<RestoreDatabaseFromBackupRequest>) =>
+  restoreDatabaseFromBackup = (request: Readonly<RestoreDatabaseFromBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<Database>(
       {
         body: JSON.stringify(
@@ -193,6 +198,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}/restore`,
+        signal: options?.signal,
       },
       unmarshalDatabase,
     )
@@ -204,17 +210,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
    */
-  getDatabaseBackup = (request: Readonly<GetDatabaseBackupRequest>) =>
+  getDatabaseBackup = (request: Readonly<GetDatabaseBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseBackup>(
       {
         method: 'GET',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('backupId', request.backupId)}`,
+        signal: options?.signal,
       },
       unmarshalDatabaseBackup,
     )
 
   
-  protected pageOfListDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest>) =>
+  protected pageOfListDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDatabaseBackupsResponse>(
       {
         method: 'GET',
@@ -227,6 +234,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListDatabaseBackupsResponse,
     )
@@ -237,8 +245,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDatabaseBackupsRequest}
    * @returns A Promise of ListDatabaseBackupsResponse
    */
-  listDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest>) =>
-    enrichForPagination('backups', this.pageOfListDatabaseBackups, request)
+  listDatabaseBackups = (request: Readonly<ListDatabaseBackupsRequest>, options?: RequestOptions) =>
+    enrichForPagination('backups', this.pageOfListDatabaseBackups, request, options)
 
   
   /**
@@ -247,19 +255,20 @@ export class API extends ParentAPI {
    * @param request - The request {@link ExportDatabaseBackupRequest}
    * @returns A Promise of DatabaseBackup
    */
-  exportDatabaseBackup = (request: Readonly<ExportDatabaseBackupRequest>) =>
+  exportDatabaseBackup = (request: Readonly<ExportDatabaseBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<DatabaseBackup>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('backupId', request.backupId)}/export`,
+        signal: options?.signal,
       },
       unmarshalDatabaseBackup,
     )
 
   
-  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}) =>
+  protected pageOfListVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVersionsResponse>(
       {
         method: 'GET',
@@ -269,6 +278,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['version', request.version],
         ),
+        signal: options?.signal,
       },
       unmarshalListVersionsResponse,
     )
@@ -279,8 +289,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListVersionsRequest}
    * @returns A Promise of ListVersionsResponse
    */
-  listVersions = (request: Readonly<ListVersionsRequest> = {}) =>
-    enrichForPagination('versions', this.pageOfListVersions, request)
+  listVersions = (request: Readonly<ListVersionsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('versions', this.pageOfListVersions, request, options)
 
   
 }

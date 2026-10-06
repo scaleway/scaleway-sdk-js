@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES as PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_FILESYSTEM_TRANSIENT_STATUSES as SERVER_FILESYSTEM_TRANSIENT_STATUSES_INSTANCE,SERVER_IP_TRANSIENT_STATUSES as SERVER_IP_TRANSIENT_STATUSES_INSTANCE,SERVER_PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_PUBLIC_NETWORK_INTERFACE_TRANSIENT_STATUSES as SERVER_PUBLIC_NETWORK_INTERFACE_TRANSIENT_STATUSES_INSTANCE,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_INSTANCE,SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_INSTANCE,VOLUME_TRANSIENT_STATUSES as VOLUME_TRANSIENT_STATUSES_INSTANCE,} from './content.gen.js'
 import {
   marshalAddSecurityGroupRulesRequest,
@@ -154,6 +154,7 @@ import type {
   SetUserDataRequest,
   Snapshot,
   StartServerRequest,
+  StartSpotServerRequest,
   StopAndDeleteServerRequest,
   StopServerRequest,
   Template,
@@ -217,7 +218,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetResourceCountsRequest}
    * @returns A Promise of ResourceCounts
    */
-  getResourceCounts = (request: Readonly<GetResourceCountsRequest> = {}) =>
+  getResourceCounts = (request: Readonly<GetResourceCountsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ResourceCounts>(
       {
         method: 'GET',
@@ -232,6 +233,7 @@ export class API extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalResourceCounts,
     )
@@ -243,7 +245,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
    */
-  listServers = (request: Readonly<ListServersRequest> = {}) =>
+  listServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
@@ -263,6 +265,7 @@ export class API extends ParentAPI {
           ['server_type', request.serverType],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListServersResponse,
     )
@@ -274,7 +277,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Server
    */
-  createServer = (request: Readonly<CreateServerRequest>) =>
+  createServer = (request: Readonly<CreateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -283,6 +286,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -294,11 +298,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
    */
-  getServer = (request: Readonly<GetServerRequest>) =>
+  getServer = (request: Readonly<GetServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -328,7 +333,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
    */
-  updateServer = (request: Readonly<UpdateServerRequest>) =>
+  updateServer = (request: Readonly<UpdateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -337,6 +342,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -347,7 +353,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteServerRequest}
    */
-  deleteServer = (request: Readonly<DeleteServerRequest>) =>
+  deleteServer = (request: Readonly<DeleteServerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
@@ -378,6 +384,7 @@ export class API extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
     )
 
@@ -388,7 +395,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServerCompatibleTypesRequest}
    * @returns A Promise of ListServerCompatibleTypesResponse
    */
-  listServerCompatibleTypes = (request: Readonly<ListServerCompatibleTypesRequest>) =>
+  listServerCompatibleTypes = (request: Readonly<ListServerCompatibleTypesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListServerCompatibleTypesResponse>(
       {
         method: 'GET',
@@ -397,6 +404,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
+        signal: options?.signal,
       },
       unmarshalListServerCompatibleTypesResponse,
     )
@@ -408,7 +416,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServerTypesRequest}
    * @returns A Promise of ListServerTypesResponse
    */
-  listServerTypes = (request: Readonly<ListServerTypesRequest> = {}) =>
+  listServerTypes = (request: Readonly<ListServerTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServerTypesResponse>(
       {
         method: 'GET',
@@ -417,6 +425,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
+        signal: options?.signal,
       },
       unmarshalListServerTypesResponse,
     )
@@ -428,13 +437,34 @@ export class API extends ParentAPI {
    * @param request - The request {@link StartServerRequest}
    * @returns A Promise of Server
    */
-  startServer = (request: Readonly<StartServerRequest>) =>
+  startServer = (request: Readonly<StartServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start`,
+        signal: options?.signal,
+      },
+      unmarshalServer,
+    )
+
+  
+  /**
+   * Start an Instance as Spot. Spot instances are billed at a discount compared to regular instances. However, they can be interrupted
+at any time.
+   *
+   * @param request - The request {@link StartSpotServerRequest}
+   * @returns A Promise of Server
+   */
+  startSpotServer = (request: Readonly<StartSpotServerRequest>, options?: RequestOptions) =>
+    this.client.fetch<Server>(
+      {
+        body: '{}',
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start-spot`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -446,13 +476,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RebootServerRequest}
    * @returns A Promise of Server
    */
-  rebootServer = (request: Readonly<RebootServerRequest>) =>
+  rebootServer = (request: Readonly<RebootServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -464,13 +495,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link PauseServerRequest}
    * @returns A Promise of Server
    */
-  pauseServer = (request: Readonly<PauseServerRequest>) =>
+  pauseServer = (request: Readonly<PauseServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/pause`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -482,13 +514,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link StopServerRequest}
    * @returns A Promise of Server
    */
-  stopServer = (request: Readonly<StopServerRequest>) =>
+  stopServer = (request: Readonly<StopServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -500,7 +533,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link StopAndDeleteServerRequest}
    * @returns A Promise of Server
    */
-  stopAndDeleteServer = (request: Readonly<StopAndDeleteServerRequest>) =>
+  stopAndDeleteServer = (request: Readonly<StopAndDeleteServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -509,6 +542,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop-and-delete`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -520,7 +554,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachServerVolumeRequest}
    * @returns A Promise of Server
    */
-  attachServerVolume = (request: Readonly<AttachServerVolumeRequest>) =>
+  attachServerVolume = (request: Readonly<AttachServerVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -529,6 +563,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-volume`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -540,7 +575,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachServerVolumeRequest}
    * @returns A Promise of Server
    */
-  detachServerVolume = (request: Readonly<DetachServerVolumeRequest>) =>
+  detachServerVolume = (request: Readonly<DetachServerVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -549,6 +584,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-volume`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -560,7 +596,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachServerFileSystemRequest}
    * @returns A Promise of Server
    */
-  attachServerFileSystem = (request: Readonly<AttachServerFileSystemRequest>) =>
+  attachServerFileSystem = (request: Readonly<AttachServerFileSystemRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -569,6 +605,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-filesystem`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -580,7 +617,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachServerFileSystemRequest}
    * @returns A Promise of Server
    */
-  detachServerFileSystem = (request: Readonly<DetachServerFileSystemRequest>) =>
+  detachServerFileSystem = (request: Readonly<DetachServerFileSystemRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -589,6 +626,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-filesystem`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -600,7 +638,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachServerIPRequest}
    * @returns A Promise of Server
    */
-  attachServerIP = (request: Readonly<AttachServerIPRequest>) =>
+  attachServerIP = (request: Readonly<AttachServerIPRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -609,6 +647,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-ip`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -620,7 +659,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachServerIPRequest}
    * @returns A Promise of Server
    */
-  detachServerIP = (request: Readonly<DetachServerIPRequest>) =>
+  detachServerIP = (request: Readonly<DetachServerIPRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -629,6 +668,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-ip`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -640,7 +680,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetServerDefaultIPRequest}
    * @returns A Promise of Server
    */
-  setServerDefaultIP = (request: Readonly<SetServerDefaultIPRequest>) =>
+  setServerDefaultIP = (request: Readonly<SetServerDefaultIPRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -649,6 +689,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/set-default-ip`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -660,7 +701,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachServerPrivateNetworkInterfaceRequest}
    * @returns A Promise of Server
    */
-  attachServerPrivateNetworkInterface = (request: Readonly<AttachServerPrivateNetworkInterfaceRequest>) =>
+  attachServerPrivateNetworkInterface = (request: Readonly<AttachServerPrivateNetworkInterfaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -669,6 +710,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-private-network-interface`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -680,7 +722,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachServerPrivateNetworkInterfaceRequest}
    * @returns A Promise of Server
    */
-  detachServerPrivateNetworkInterface = (request: Readonly<DetachServerPrivateNetworkInterfaceRequest>) =>
+  detachServerPrivateNetworkInterface = (request: Readonly<DetachServerPrivateNetworkInterfaceRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -689,6 +731,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-private-network-interface`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -700,7 +743,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPrivateNetworkInterfacesRequest}
    * @returns A Promise of ListPrivateNetworkInterfacesResponse
    */
-  listPrivateNetworkInterfaces = (request: Readonly<ListPrivateNetworkInterfacesRequest> = {}) =>
+  listPrivateNetworkInterfaces = (request: Readonly<ListPrivateNetworkInterfacesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPrivateNetworkInterfacesResponse>(
       {
         method: 'GET',
@@ -714,6 +757,7 @@ export class API extends ParentAPI {
           ['server_ids', request.serverIds],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListPrivateNetworkInterfacesResponse,
     )
@@ -725,7 +769,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePrivateNetworkInterfaceRequest}
    * @returns A Promise of PrivateNetworkInterface
    */
-  createPrivateNetworkInterface = (request: Readonly<CreatePrivateNetworkInterfaceRequest>) =>
+  createPrivateNetworkInterface = (request: Readonly<CreatePrivateNetworkInterfaceRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetworkInterface>(
       {
         body: JSON.stringify(
@@ -734,6 +778,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetworkInterface,
     )
@@ -745,11 +790,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPrivateNetworkInterfaceRequest}
    * @returns A Promise of PrivateNetworkInterface
    */
-  getPrivateNetworkInterface = (request: Readonly<GetPrivateNetworkInterfaceRequest>) =>
+  getPrivateNetworkInterface = (request: Readonly<GetPrivateNetworkInterfaceRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetworkInterface>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces/${validatePathParam('privateNetworkInterfaceId', request.privateNetworkInterfaceId)}`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetworkInterface,
     )
@@ -779,7 +825,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdatePrivateNetworkInterfaceRequest}
    * @returns A Promise of PrivateNetworkInterface
    */
-  updatePrivateNetworkInterface = (request: Readonly<UpdatePrivateNetworkInterfaceRequest>) =>
+  updatePrivateNetworkInterface = (request: Readonly<UpdatePrivateNetworkInterfaceRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetworkInterface>(
       {
         body: JSON.stringify(
@@ -788,6 +834,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces/${validatePathParam('privateNetworkInterfaceId', request.privateNetworkInterfaceId)}`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetworkInterface,
     )
@@ -798,22 +845,24 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeletePrivateNetworkInterfaceRequest}
    */
-  deletePrivateNetworkInterface = (request: Readonly<DeletePrivateNetworkInterfaceRequest>) =>
+  deletePrivateNetworkInterface = (request: Readonly<DeletePrivateNetworkInterfaceRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces/${validatePathParam('privateNetworkInterfaceId', request.privateNetworkInterfaceId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  detachAndDeletePrivateNetworkInterface = (request: Readonly<DetachAndDeletePrivateNetworkInterfaceRequest>) =>
+  detachAndDeletePrivateNetworkInterface = (request: Readonly<DetachAndDeletePrivateNetworkInterfaceRequest>, options?: RequestOptions) =>
     this.client.fetch<PrivateNetworkInterface>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces/${validatePathParam('privateNetworkInterfaceId', request.privateNetworkInterfaceId)}/detach-and-delete`,
+        signal: options?.signal,
       },
       unmarshalPrivateNetworkInterface,
     )
@@ -825,7 +874,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListPlacementGroupsRequest}
    * @returns A Promise of ListPlacementGroupsResponse
    */
-  listPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}) =>
+  listPlacementGroups = (request: Readonly<ListPlacementGroupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPlacementGroupsResponse>(
       {
         method: 'GET',
@@ -839,6 +888,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListPlacementGroupsResponse,
     )
@@ -850,7 +900,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreatePlacementGroupRequest}
    * @returns A Promise of PlacementGroup
    */
-  createPlacementGroup = (request: Readonly<CreatePlacementGroupRequest>) =>
+  createPlacementGroup = (request: Readonly<CreatePlacementGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<PlacementGroup>(
       {
         body: JSON.stringify(
@@ -859,6 +909,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement-groups`,
+        signal: options?.signal,
       },
       unmarshalPlacementGroup,
     )
@@ -870,11 +921,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetPlacementGroupRequest}
    * @returns A Promise of PlacementGroup
    */
-  getPlacementGroup = (request: Readonly<GetPlacementGroupRequest>) =>
+  getPlacementGroup = (request: Readonly<GetPlacementGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<PlacementGroup>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement-groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalPlacementGroup,
     )
@@ -886,7 +938,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdatePlacementGroupRequest}
    * @returns A Promise of PlacementGroup
    */
-  updatePlacementGroup = (request: Readonly<UpdatePlacementGroupRequest>) =>
+  updatePlacementGroup = (request: Readonly<UpdatePlacementGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<PlacementGroup>(
       {
         body: JSON.stringify(
@@ -895,6 +947,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement-groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalPlacementGroup,
     )
@@ -905,11 +958,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeletePlacementGroupRequest}
    */
-  deletePlacementGroup = (request: Readonly<DeletePlacementGroupRequest>) =>
+  deletePlacementGroup = (request: Readonly<DeletePlacementGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement-groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -920,7 +974,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSecurityGroupsRequest}
    * @returns A Promise of ListSecurityGroupsResponse
    */
-  listSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}) =>
+  listSecurityGroups = (request: Readonly<ListSecurityGroupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSecurityGroupsResponse>(
       {
         method: 'GET',
@@ -934,6 +988,7 @@ export class API extends ParentAPI {
           ['security_group_ids', request.securityGroupIds],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListSecurityGroupsResponse,
     )
@@ -945,7 +1000,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateSecurityGroupRequest}
    * @returns A Promise of SecurityGroup
    */
-  createSecurityGroup = (request: Readonly<CreateSecurityGroupRequest>) =>
+  createSecurityGroup = (request: Readonly<CreateSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<SecurityGroup>(
       {
         body: JSON.stringify(
@@ -954,6 +1009,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-groups`,
+        signal: options?.signal,
       },
       unmarshalSecurityGroup,
     )
@@ -965,11 +1021,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetSecurityGroupRequest}
    * @returns A Promise of SecurityGroup
    */
-  getSecurityGroup = (request: Readonly<GetSecurityGroupRequest>) =>
+  getSecurityGroup = (request: Readonly<GetSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<SecurityGroup>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalSecurityGroup,
     )
@@ -981,7 +1038,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateSecurityGroupRequest}
    * @returns A Promise of SecurityGroup
    */
-  updateSecurityGroup = (request: Readonly<UpdateSecurityGroupRequest>) =>
+  updateSecurityGroup = (request: Readonly<UpdateSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<SecurityGroup>(
       {
         body: JSON.stringify(
@@ -990,6 +1047,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
+        signal: options?.signal,
       },
       unmarshalSecurityGroup,
     )
@@ -1000,11 +1058,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteSecurityGroupRequest}
    */
-  deleteSecurityGroup = (request: Readonly<DeleteSecurityGroupRequest>) =>
+  deleteSecurityGroup = (request: Readonly<DeleteSecurityGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1015,7 +1074,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddSecurityGroupRulesRequest}
    * @returns A Promise of AddSecurityGroupRulesResponse
    */
-  addSecurityGroupRules = (request: Readonly<AddSecurityGroupRulesRequest>) =>
+  addSecurityGroupRules = (request: Readonly<AddSecurityGroupRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<AddSecurityGroupRulesResponse>(
       {
         body: JSON.stringify(
@@ -1024,6 +1083,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-group-rules`,
+        signal: options?.signal,
       },
       unmarshalAddSecurityGroupRulesResponse,
     )
@@ -1035,7 +1095,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetSecurityGroupRulesRequest}
    * @returns A Promise of SecurityGroup
    */
-  setSecurityGroupRules = (request: Readonly<SetSecurityGroupRulesRequest>) =>
+  setSecurityGroupRules = (request: Readonly<SetSecurityGroupRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<SecurityGroup>(
       {
         body: JSON.stringify(
@@ -1044,6 +1104,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-group-rules`,
+        signal: options?.signal,
       },
       unmarshalSecurityGroup,
     )
@@ -1055,7 +1116,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateSecurityGroupRuleRequest}
    * @returns A Promise of SecurityGroup
    */
-  updateSecurityGroupRule = (request: Readonly<UpdateSecurityGroupRuleRequest>) =>
+  updateSecurityGroupRule = (request: Readonly<UpdateSecurityGroupRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<SecurityGroup>(
       {
         body: JSON.stringify(
@@ -1064,6 +1125,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-group-rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
+        signal: options?.signal,
       },
       unmarshalSecurityGroup,
     )
@@ -1074,7 +1136,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteSecurityGroupRulesRequest}
    */
-  deleteSecurityGroupRules = (request: Readonly<DeleteSecurityGroupRulesRequest> = {}) =>
+  deleteSecurityGroupRules = (request: Readonly<DeleteSecurityGroupRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1083,6 +1145,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-group-rules`,
+        signal: options?.signal,
       },
     )
 
@@ -1093,7 +1156,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListUserDataKeysRequest}
    * @returns A Promise of ListUserDataKeysResponse
    */
-  listUserDataKeys = (request: Readonly<ListUserDataKeysRequest>) =>
+  listUserDataKeys = (request: Readonly<ListUserDataKeysRequest>, options?: RequestOptions) =>
     this.client.fetch<ListUserDataKeysResponse>(
       {
         method: 'GET',
@@ -1102,6 +1165,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
+        signal: options?.signal,
       },
       unmarshalListUserDataKeysResponse,
     )
@@ -1113,11 +1177,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetUserDataRequest}
    * @returns A Promise of UserData
    */
-  getUserData = (request: Readonly<GetUserDataRequest>) =>
+  getUserData = (request: Readonly<GetUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<UserData>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user-data/${validatePathParam('key', request.key)}`,
+        signal: options?.signal,
       },
       unmarshalUserData,
     )
@@ -1128,7 +1193,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link SetUserDataRequest}
    */
-  setUserData = (request: Readonly<SetUserDataRequest>) =>
+  setUserData = (request: Readonly<SetUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1137,6 +1202,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user-data/${validatePathParam('key', request.key)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1146,11 +1212,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteUserDataRequest}
    */
-  deleteUserData = (request: Readonly<DeleteUserDataRequest>) =>
+  deleteUserData = (request: Readonly<DeleteUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user-data/${validatePathParam('key', request.key)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1161,11 +1228,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerCloudInitRequest}
    * @returns A Promise of UserData
    */
-  getServerCloudInit = (request: Readonly<GetServerCloudInitRequest>) =>
+  getServerCloudInit = (request: Readonly<GetServerCloudInitRequest>, options?: RequestOptions) =>
     this.client.fetch<UserData>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user-data/cloud-init`,
+        signal: options?.signal,
       },
       unmarshalUserData,
     )
@@ -1176,7 +1244,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link SetServerCloudInitRequest}
    */
-  setServerCloudInit = (request: Readonly<SetServerCloudInitRequest>) =>
+  setServerCloudInit = (request: Readonly<SetServerCloudInitRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1185,6 +1253,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user-data/cloud-init`,
+        signal: options?.signal,
       },
     )
 
@@ -1195,7 +1264,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListTemplatesRequest}
    * @returns A Promise of ListTemplatesResponse
    */
-  listTemplates = (request: Readonly<ListTemplatesRequest> = {}) =>
+  listTemplates = (request: Readonly<ListTemplatesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTemplatesResponse>(
       {
         method: 'GET',
@@ -1212,6 +1281,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['template_ids', request.templateIds],
         ),
+        signal: options?.signal,
       },
       unmarshalListTemplatesResponse,
     )
@@ -1223,7 +1293,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateTemplateRequest}
    * @returns A Promise of Template
    */
-  createTemplate = (request: Readonly<CreateTemplateRequest>) =>
+  createTemplate = (request: Readonly<CreateTemplateRequest>, options?: RequestOptions) =>
     this.client.fetch<Template>(
       {
         body: JSON.stringify(
@@ -1232,6 +1302,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates`,
+        signal: options?.signal,
       },
       unmarshalTemplate,
     )
@@ -1243,11 +1314,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetTemplateRequest}
    * @returns A Promise of Template
    */
-  getTemplate = (request: Readonly<GetTemplateRequest>) =>
+  getTemplate = (request: Readonly<GetTemplateRequest>, options?: RequestOptions) =>
     this.client.fetch<Template>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}`,
+        signal: options?.signal,
       },
       unmarshalTemplate,
     )
@@ -1259,7 +1331,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateTemplateRequest}
    * @returns A Promise of Template
    */
-  updateTemplate = (request: Readonly<UpdateTemplateRequest>) =>
+  updateTemplate = (request: Readonly<UpdateTemplateRequest>, options?: RequestOptions) =>
     this.client.fetch<Template>(
       {
         body: JSON.stringify(
@@ -1268,6 +1340,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}`,
+        signal: options?.signal,
       },
       unmarshalTemplate,
     )
@@ -1278,13 +1351,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteTemplateRequest}
    */
-  deleteTemplate = (request: Readonly<DeleteTemplateRequest>) =>
+  deleteTemplate = (request: Readonly<DeleteTemplateRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1295,7 +1369,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListTemplateUserDataKeysRequest}
    * @returns A Promise of ListTemplateUserDataKeysResponse
    */
-  listTemplateUserDataKeys = (request: Readonly<ListTemplateUserDataKeysRequest>) =>
+  listTemplateUserDataKeys = (request: Readonly<ListTemplateUserDataKeysRequest>, options?: RequestOptions) =>
     this.client.fetch<ListTemplateUserDataKeysResponse>(
       {
         method: 'GET',
@@ -1304,6 +1378,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
+        signal: options?.signal,
       },
       unmarshalListTemplateUserDataKeysResponse,
     )
@@ -1315,11 +1390,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetTemplateUserDataRequest}
    * @returns A Promise of UserData
    */
-  getTemplateUserData = (request: Readonly<GetTemplateUserDataRequest>) =>
+  getTemplateUserData = (request: Readonly<GetTemplateUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<UserData>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/user-data/${validatePathParam('key', request.key)}`,
+        signal: options?.signal,
       },
       unmarshalUserData,
     )
@@ -1330,7 +1406,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link SetTemplateUserDataRequest}
    */
-  setTemplateUserData = (request: Readonly<SetTemplateUserDataRequest>) =>
+  setTemplateUserData = (request: Readonly<SetTemplateUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1339,6 +1415,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/user-data/${validatePathParam('key', request.key)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1348,11 +1425,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteTemplateUserDataRequest}
    */
-  deleteTemplateUserData = (request: Readonly<DeleteTemplateUserDataRequest>) =>
+  deleteTemplateUserData = (request: Readonly<DeleteTemplateUserDataRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/user-data/${validatePathParam('key', request.key)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1363,11 +1441,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetTemplateCloudInitRequest}
    * @returns A Promise of UserData
    */
-  getTemplateCloudInit = (request: Readonly<GetTemplateCloudInitRequest>) =>
+  getTemplateCloudInit = (request: Readonly<GetTemplateCloudInitRequest>, options?: RequestOptions) =>
     this.client.fetch<UserData>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/user-data/cloud-init`,
+        signal: options?.signal,
       },
       unmarshalUserData,
     )
@@ -1378,7 +1457,7 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link SetTemplateCloudInitRequest}
    */
-  setTemplateCloudInit = (request: Readonly<SetTemplateCloudInitRequest>) =>
+  setTemplateCloudInit = (request: Readonly<SetTemplateCloudInitRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1387,6 +1466,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/user-data/cloud-init`,
+        signal: options?.signal,
       },
     )
 
@@ -1396,11 +1476,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link CheckTemplateRequest}
    */
-  checkTemplate = (request: Readonly<CheckTemplateRequest>) =>
+  checkTemplate = (request: Readonly<CheckTemplateRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/check`,
+        signal: options?.signal,
       },
     )
 
@@ -1411,7 +1492,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateServerFromTemplateRequest}
    * @returns A Promise of Server
    */
-  createServerFromTemplate = (request: Readonly<CreateServerFromTemplateRequest>) =>
+  createServerFromTemplate = (request: Readonly<CreateServerFromTemplateRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -1420,6 +1501,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/create-server`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -1431,7 +1513,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDedicatedPoolsRequest}
    * @returns A Promise of ListDedicatedPoolsResponse
    */
-  listDedicatedPools = (request: Readonly<ListDedicatedPoolsRequest> = {}) =>
+  listDedicatedPools = (request: Readonly<ListDedicatedPoolsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDedicatedPoolsResponse>(
       {
         method: 'GET',
@@ -1442,6 +1524,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
+        signal: options?.signal,
       },
       unmarshalListDedicatedPoolsResponse,
     )
@@ -1453,11 +1536,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetDedicatedPoolRequest}
    * @returns A Promise of DedicatedPool
    */
-  getDedicatedPool = (request: Readonly<GetDedicatedPoolRequest>) =>
+  getDedicatedPool = (request: Readonly<GetDedicatedPoolRequest>, options?: RequestOptions) =>
     this.client.fetch<DedicatedPool>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dedicated-pools/${validatePathParam('dedicatedPoolId', request.dedicatedPoolId)}`,
+        signal: options?.signal,
       },
       unmarshalDedicatedPool,
     )
@@ -1469,7 +1553,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateDedicatedPoolRequest}
    * @returns A Promise of DedicatedPool
    */
-  updateDedicatedPool = (request: Readonly<UpdateDedicatedPoolRequest>) =>
+  updateDedicatedPool = (request: Readonly<UpdateDedicatedPoolRequest>, options?: RequestOptions) =>
     this.client.fetch<DedicatedPool>(
       {
         body: JSON.stringify(
@@ -1478,6 +1562,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dedicated-pools/${validatePathParam('dedicatedPoolId', request.dedicatedPoolId)}`,
+        signal: options?.signal,
       },
       unmarshalDedicatedPool,
     )
@@ -1489,7 +1574,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListDedicatedPoolServerTypesRequest}
    * @returns A Promise of ListDedicatedPoolServerTypesResponse
    */
-  listDedicatedPoolServerTypes = (request: Readonly<ListDedicatedPoolServerTypesRequest>) =>
+  listDedicatedPoolServerTypes = (request: Readonly<ListDedicatedPoolServerTypesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListDedicatedPoolServerTypesResponse>(
       {
         method: 'GET',
@@ -1498,6 +1583,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
+        signal: options?.signal,
       },
       unmarshalListDedicatedPoolServerTypesResponse,
     )
@@ -1537,7 +1623,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiListVolumeTypesRequest}
    * @returns A Promise of ListVolumeTypesResponse
    */
-  listVolumeTypes = (request: Readonly<VolumeApiListVolumeTypesRequest> = {}) =>
+  listVolumeTypes = (request: Readonly<VolumeApiListVolumeTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVolumeTypesResponse>(
       {
         method: 'GET',
@@ -1546,6 +1632,7 @@ export class VolumeAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['page_token', request.pageToken],
         ),
+        signal: options?.signal,
       },
       unmarshalListVolumeTypesResponse,
     )
@@ -1557,7 +1644,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiListVolumesRequest}
    * @returns A Promise of ListVolumesResponse
    */
-  listVolumes = (request: Readonly<VolumeApiListVolumesRequest> = {}) =>
+  listVolumes = (request: Readonly<VolumeApiListVolumesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListVolumesResponse>(
       {
         method: 'GET',
@@ -1572,6 +1659,7 @@ export class VolumeAPI extends ParentAPI {
           ['volume_ids', request.volumeIds],
           ['volume_type', request.volumeType],
         ),
+        signal: options?.signal,
       },
       unmarshalListVolumesResponse,
     )
@@ -1583,7 +1671,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiCreateVolumeRequest}
    * @returns A Promise of Volume
    */
-  createVolume = (request: Readonly<VolumeApiCreateVolumeRequest>) =>
+  createVolume = (request: Readonly<VolumeApiCreateVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<Volume>(
       {
         body: JSON.stringify(
@@ -1592,6 +1680,7 @@ export class VolumeAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
+        signal: options?.signal,
       },
       unmarshalVolume,
     )
@@ -1603,11 +1692,12 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiGetVolumeRequest}
    * @returns A Promise of Volume
    */
-  getVolume = (request: Readonly<VolumeApiGetVolumeRequest>) =>
+  getVolume = (request: Readonly<VolumeApiGetVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<Volume>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
       unmarshalVolume,
     )
@@ -1637,7 +1727,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiUpdateVolumeRequest}
    * @returns A Promise of Volume
    */
-  updateVolume = (request: Readonly<VolumeApiUpdateVolumeRequest>) =>
+  updateVolume = (request: Readonly<VolumeApiUpdateVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<Volume>(
       {
         body: JSON.stringify(
@@ -1646,6 +1736,7 @@ export class VolumeAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
       unmarshalVolume,
     )
@@ -1656,11 +1747,12 @@ export class VolumeAPI extends ParentAPI {
    *
    * @param request - The request {@link VolumeApiDeleteVolumeRequest}
    */
-  deleteVolume = (request: Readonly<VolumeApiDeleteVolumeRequest>) =>
+  deleteVolume = (request: Readonly<VolumeApiDeleteVolumeRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1671,7 +1763,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiListSnapshotsRequest}
    * @returns A Promise of ListSnapshotsResponse
    */
-  listSnapshots = (request: Readonly<VolumeApiListSnapshotsRequest> = {}) =>
+  listSnapshots = (request: Readonly<VolumeApiListSnapshotsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListSnapshotsResponse>(
       {
         method: 'GET',
@@ -1686,6 +1778,7 @@ export class VolumeAPI extends ParentAPI {
           ['snapshot_ids', request.snapshotIds],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListSnapshotsResponse,
     )
@@ -1697,7 +1790,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiCreateSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  createSnapshot = (request: Readonly<VolumeApiCreateSnapshotRequest>) =>
+  createSnapshot = (request: Readonly<VolumeApiCreateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -1706,6 +1799,7 @@ export class VolumeAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -1717,11 +1811,12 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiGetSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  getSnapshot = (request: Readonly<VolumeApiGetSnapshotRequest>) =>
+  getSnapshot = (request: Readonly<VolumeApiGetSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         method: 'GET',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -1751,7 +1846,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiUpdateSnapshotRequest}
    * @returns A Promise of Snapshot
    */
-  updateSnapshot = (request: Readonly<VolumeApiUpdateSnapshotRequest>) =>
+  updateSnapshot = (request: Readonly<VolumeApiUpdateSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -1760,6 +1855,7 @@ export class VolumeAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -1770,11 +1866,12 @@ export class VolumeAPI extends ParentAPI {
    *
    * @param request - The request {@link VolumeApiDeleteSnapshotRequest}
    */
-  deleteSnapshot = (request: Readonly<VolumeApiDeleteSnapshotRequest>) =>
+  deleteSnapshot = (request: Readonly<VolumeApiDeleteSnapshotRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1785,7 +1882,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiImportSnapshotFromObjectStorageRequest}
    * @returns A Promise of Snapshot
    */
-  importSnapshotFromObjectStorage = (request: Readonly<VolumeApiImportSnapshotFromObjectStorageRequest>) =>
+  importSnapshotFromObjectStorage = (request: Readonly<VolumeApiImportSnapshotFromObjectStorageRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -1794,6 +1891,7 @@ export class VolumeAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )
@@ -1805,7 +1903,7 @@ export class VolumeAPI extends ParentAPI {
    * @param request - The request {@link VolumeApiExportSnapshotToObjectStorageRequest}
    * @returns A Promise of Snapshot
    */
-  exportSnapshotToObjectStorage = (request: Readonly<VolumeApiExportSnapshotToObjectStorageRequest>) =>
+  exportSnapshotToObjectStorage = (request: Readonly<VolumeApiExportSnapshotToObjectStorageRequest>, options?: RequestOptions) =>
     this.client.fetch<Snapshot>(
       {
         body: JSON.stringify(
@@ -1814,6 +1912,7 @@ export class VolumeAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export-to-object-storage`,
+        signal: options?.signal,
       },
       unmarshalSnapshot,
     )

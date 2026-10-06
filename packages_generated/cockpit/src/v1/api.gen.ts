@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {EXPORTER_TRANSIENT_STATUSES as EXPORTER_TRANSIENT_STATUSES_COCKPIT,} from './content.gen.js'
 import {
   unmarshalAlertManager,
@@ -141,7 +141,7 @@ The output returned displays the URL to access your Cockpit's Grafana.
    * @param request - The request {@link GlobalApiGetGrafanaRequest}
    * @returns A Promise of Grafana
    */
-  getGrafana = (request: Readonly<GlobalApiGetGrafanaRequest> = {}) =>
+  getGrafana = (request: Readonly<GlobalApiGetGrafanaRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Grafana>(
       {
         method: 'GET',
@@ -149,6 +149,7 @@ The output returned displays the URL to access your Cockpit's Grafana.
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalGrafana,
     )
@@ -159,7 +160,7 @@ The output returned displays the URL to access your Cockpit's Grafana.
    *
    * @param request - The request {@link GlobalApiSyncGrafanaDataSourcesRequest}
    */
-  syncGrafanaDataSources = (request: Readonly<GlobalApiSyncGrafanaDataSourcesRequest> = {}) =>
+  syncGrafanaDataSources = (request: Readonly<GlobalApiSyncGrafanaDataSourcesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -168,6 +169,7 @@ The output returned displays the URL to access your Cockpit's Grafana.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/grafana/sync-data-sources`,
+        signal: options?.signal,
       },
     )
 
@@ -181,7 +183,7 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
    * @param request - The request {@link GlobalApiCreateGrafanaUserRequest}
    * @returns A Promise of GrafanaUser
    */
-  createGrafanaUser = (request: Readonly<GlobalApiCreateGrafanaUserRequest>) =>
+  createGrafanaUser = (request: Readonly<GlobalApiCreateGrafanaUserRequest>, options?: RequestOptions) =>
     this.client.fetch<GrafanaUser>(
       {
         body: JSON.stringify(
@@ -190,12 +192,13 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/grafana/users`,
+        signal: options?.signal,
       },
       unmarshalGrafanaUser,
     )
 
   
-  protected pageOfListGrafanaUsers = (request: Readonly<GlobalApiListGrafanaUsersRequest> = {}) =>
+  protected pageOfListGrafanaUsers = (request: Readonly<GlobalApiListGrafanaUsersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListGrafanaUsersResponse>(
       {
         method: 'GET',
@@ -206,6 +209,7 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListGrafanaUsersResponse,
     )
@@ -218,8 +222,8 @@ List all Grafana users created in your Cockpit's Grafana. By default, the Grafan
    * @param request - The request {@link GlobalApiListGrafanaUsersRequest}
    * @returns A Promise of ListGrafanaUsersResponse
    */
-  listGrafanaUsers = (request: Readonly<GlobalApiListGrafanaUsersRequest> = {}) =>
-    enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request)
+  listGrafanaUsers = (request: Readonly<GlobalApiListGrafanaUsersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('grafanaUsers', this.pageOfListGrafanaUsers, request, options)
 
   
   /**
@@ -229,7 +233,7 @@ Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Pr
    * @deprecated
    * @param request - The request {@link GlobalApiDeleteGrafanaUserRequest}
    */
-  deleteGrafanaUser = (request: Readonly<GlobalApiDeleteGrafanaUserRequest>) =>
+  deleteGrafanaUser = (request: Readonly<GlobalApiDeleteGrafanaUserRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
@@ -237,6 +241,7 @@ Delete a Grafana user from your Cockpit's Grafana, specified by the ID of the Pr
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
     )
 
@@ -250,7 +255,7 @@ A new password regenerates and only displays once. Make sure that you save it.
    * @param request - The request {@link GlobalApiResetGrafanaUserPasswordRequest}
    * @returns A Promise of GrafanaUser
    */
-  resetGrafanaUserPassword = (request: Readonly<GlobalApiResetGrafanaUserPasswordRequest>) =>
+  resetGrafanaUserPassword = (request: Readonly<GlobalApiResetGrafanaUserPasswordRequest>, options?: RequestOptions) =>
     this.client.fetch<GrafanaUser>(
       {
         body: JSON.stringify(
@@ -259,12 +264,13 @@ A new password regenerates and only displays once. Make sure that you save it.
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/grafana/users/${validatePathParam('grafanaUserId', request.grafanaUserId)}/reset-password`,
+        signal: options?.signal,
       },
       unmarshalGrafanaUser,
     )
 
   
-  protected pageOfListGrafanaProductDashboards = (request: Readonly<GlobalApiListGrafanaProductDashboardsRequest> = {}) =>
+  protected pageOfListGrafanaProductDashboards = (request: Readonly<GlobalApiListGrafanaProductDashboardsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListGrafanaProductDashboardsResponse>(
       {
         method: 'GET',
@@ -275,6 +281,7 @@ A new password regenerates and only displays once. Make sure that you save it.
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListGrafanaProductDashboardsResponse,
     )
@@ -285,8 +292,8 @@ A new password regenerates and only displays once. Make sure that you save it.
    * @param request - The request {@link GlobalApiListGrafanaProductDashboardsRequest}
    * @returns A Promise of ListGrafanaProductDashboardsResponse
    */
-  listGrafanaProductDashboards = (request: Readonly<GlobalApiListGrafanaProductDashboardsRequest> = {}) =>
-    enrichForPagination('dashboards', this.pageOfListGrafanaProductDashboards, request)
+  listGrafanaProductDashboards = (request: Readonly<GlobalApiListGrafanaProductDashboardsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('dashboards', this.pageOfListGrafanaProductDashboards, request, options)
 
   
   /**
@@ -295,7 +302,7 @@ A new password regenerates and only displays once. Make sure that you save it.
    * @param request - The request {@link GlobalApiGetGrafanaProductDashboardRequest}
    * @returns A Promise of GrafanaProductDashboard
    */
-  getGrafanaProductDashboard = (request: Readonly<GlobalApiGetGrafanaProductDashboardRequest>) =>
+  getGrafanaProductDashboard = (request: Readonly<GlobalApiGetGrafanaProductDashboardRequest>, options?: RequestOptions) =>
     this.client.fetch<GrafanaProductDashboard>(
       {
         method: 'GET',
@@ -303,12 +310,13 @@ A new password regenerates and only displays once. Make sure that you save it.
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalGrafanaProductDashboard,
     )
 
   
-  protected pageOfListPlans = (request: Readonly<GlobalApiListPlansRequest> = {}) =>
+  protected pageOfListPlans = (request: Readonly<GlobalApiListPlansRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPlansResponse>(
       {
         method: 'GET',
@@ -318,6 +326,7 @@ A new password regenerates and only displays once. Make sure that you save it.
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListPlansResponse,
     )
@@ -330,8 +339,8 @@ Deprecated due to retention now being managed at the data source level.
    * @param request - The request {@link GlobalApiListPlansRequest}
    * @returns A Promise of ListPlansResponse
    */
-  listPlans = (request: Readonly<GlobalApiListPlansRequest> = {}) =>
-    enrichForPagination('plans', this.pageOfListPlans, request)
+  listPlans = (request: Readonly<GlobalApiListPlansRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('plans', this.pageOfListPlans, request, options)
 
   
   /**
@@ -342,7 +351,7 @@ Deprecated due to retention now being managed at the data source level.
    * @param request - The request {@link GlobalApiSelectPlanRequest}
    * @returns A Promise of Plan
    */
-  selectPlan = (request: Readonly<GlobalApiSelectPlanRequest> = {}) =>
+  selectPlan = (request: Readonly<GlobalApiSelectPlanRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Plan>(
       {
         body: JSON.stringify(
@@ -351,6 +360,7 @@ Deprecated due to retention now being managed at the data source level.
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/cockpit/v1/plans`,
+        signal: options?.signal,
       },
       unmarshalPlan,
     )
@@ -364,7 +374,7 @@ Deprecated due to retention now being managed at the data source level.
    * @param request - The request {@link GlobalApiGetCurrentPlanRequest}
    * @returns A Promise of Plan
    */
-  getCurrentPlan = (request: Readonly<GlobalApiGetCurrentPlanRequest> = {}) =>
+  getCurrentPlan = (request: Readonly<GlobalApiGetCurrentPlanRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<Plan>(
       {
         method: 'GET',
@@ -372,6 +382,7 @@ Deprecated due to retention now being managed at the data source level.
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalPlan,
     )
@@ -404,11 +415,12 @@ export class RegionalAPI extends ParentAPI {
    * @param request - The request {@link RegionalApiGetConfigRequest}
    * @returns A Promise of GetConfigResponse
    */
-  getConfig = (request: Readonly<RegionalApiGetConfigRequest> = {}) =>
+  getConfig = (request: Readonly<RegionalApiGetConfigRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<GetConfigResponse>(
       {
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/config`,
+        signal: options?.signal,
       },
       unmarshalGetConfigResponse,
     )
@@ -422,7 +434,7 @@ This feature is in Beta phase. During Beta phase, exporter can take up to 30 min
    * @param request - The request {@link RegionalApiCreateExporterRequest}
    * @returns A Promise of Exporter
    */
-  createExporter = (request: Readonly<RegionalApiCreateExporterRequest>) =>
+  createExporter = (request: Readonly<RegionalApiCreateExporterRequest>, options?: RequestOptions) =>
     this.client.fetch<Exporter>(
       {
         body: JSON.stringify(
@@ -431,12 +443,13 @@ This feature is in Beta phase. During Beta phase, exporter can take up to 30 min
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters`,
+        signal: options?.signal,
       },
       unmarshalExporter,
     )
 
   
-  protected pageOfListExporters = (request: Readonly<RegionalApiListExportersRequest> = {}) =>
+  protected pageOfListExporters = (request: Readonly<RegionalApiListExportersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListExportersResponse>(
       {
         method: 'GET',
@@ -448,6 +461,7 @@ This feature is in Beta phase. During Beta phase, exporter can take up to 30 min
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListExportersResponse,
     )
@@ -459,8 +473,8 @@ Optionally, specify a Scaleway data source ID to retrieve only data exports asso
    * @param request - The request {@link RegionalApiListExportersRequest}
    * @returns A Promise of ListExportersResponse
    */
-  listExporters = (request: Readonly<RegionalApiListExportersRequest> = {}) =>
-    enrichForPagination('exporters', this.pageOfListExporters, request)
+  listExporters = (request: Readonly<RegionalApiListExportersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('exporters', this.pageOfListExporters, request, options)
 
   
   /**
@@ -469,11 +483,12 @@ Optionally, specify a Scaleway data source ID to retrieve only data exports asso
    * @param request - The request {@link RegionalApiGetExporterRequest}
    * @returns A Promise of Exporter
    */
-  getExporter = (request: Readonly<RegionalApiGetExporterRequest>) =>
+  getExporter = (request: Readonly<RegionalApiGetExporterRequest>, options?: RequestOptions) =>
     this.client.fetch<Exporter>(
       {
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters/${validatePathParam('exporterId', request.exporterId)}`,
+        signal: options?.signal,
       },
       unmarshalExporter,
     )
@@ -503,11 +518,12 @@ Note that this action will immediately and permanently delete this data exports.
    *
    * @param request - The request {@link RegionalApiDeleteExporterRequest}
    */
-  deleteExporter = (request: Readonly<RegionalApiDeleteExporterRequest>) =>
+  deleteExporter = (request: Readonly<RegionalApiDeleteExporterRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters/${validatePathParam('exporterId', request.exporterId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -519,7 +535,7 @@ Note that you can not change the data source linked to the export. If you need t
    * @param request - The request {@link RegionalApiUpdateExporterRequest}
    * @returns A Promise of Exporter
    */
-  updateExporter = (request: Readonly<RegionalApiUpdateExporterRequest>) =>
+  updateExporter = (request: Readonly<RegionalApiUpdateExporterRequest>, options?: RequestOptions) =>
     this.client.fetch<Exporter>(
       {
         body: JSON.stringify(
@@ -528,6 +544,7 @@ Note that you can not change the data source linked to the export. If you need t
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters/${validatePathParam('exporterId', request.exporterId)}`,
+        signal: options?.signal,
       },
       unmarshalExporter,
     )
@@ -540,7 +557,7 @@ The name of the data source will then be used as reference to name the associate
    * @param request - The request {@link RegionalApiCreateDataSourceRequest}
    * @returns A Promise of DataSource
    */
-  createDataSource = (request: Readonly<RegionalApiCreateDataSourceRequest>) =>
+  createDataSource = (request: Readonly<RegionalApiCreateDataSourceRequest>, options?: RequestOptions) =>
     this.client.fetch<DataSource>(
       {
         body: JSON.stringify(
@@ -549,6 +566,7 @@ The name of the data source will then be used as reference to name the associate
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources`,
+        signal: options?.signal,
       },
       unmarshalDataSource,
     )
@@ -560,11 +578,12 @@ The name of the data source will then be used as reference to name the associate
    * @param request - The request {@link RegionalApiGetDataSourceRequest}
    * @returns A Promise of DataSource
    */
-  getDataSource = (request: Readonly<RegionalApiGetDataSourceRequest>) =>
+  getDataSource = (request: Readonly<RegionalApiGetDataSourceRequest>, options?: RequestOptions) =>
     this.client.fetch<DataSource>(
       {
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources/${validatePathParam('dataSourceId', request.dataSourceId)}`,
+        signal: options?.signal,
       },
       unmarshalDataSource,
     )
@@ -575,16 +594,17 @@ The name of the data source will then be used as reference to name the associate
    *
    * @param request - The request {@link RegionalApiDeleteDataSourceRequest}
    */
-  deleteDataSource = (request: Readonly<RegionalApiDeleteDataSourceRequest>) =>
+  deleteDataSource = (request: Readonly<RegionalApiDeleteDataSourceRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources/${validatePathParam('dataSourceId', request.dataSourceId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListDataSources = (request: Readonly<RegionalApiListDataSourcesRequest> = {}) =>
+  protected pageOfListDataSources = (request: Readonly<RegionalApiListDataSourcesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListDataSourcesResponse>(
       {
         method: 'GET',
@@ -597,6 +617,7 @@ The name of the data source will then be used as reference to name the associate
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['types', request.types],
         ),
+        signal: options?.signal,
       },
       unmarshalListDataSourcesResponse,
     )
@@ -607,8 +628,8 @@ The name of the data source will then be used as reference to name the associate
    * @param request - The request {@link RegionalApiListDataSourcesRequest}
    * @returns A Promise of ListDataSourcesResponse
    */
-  listDataSources = (request: Readonly<RegionalApiListDataSourcesRequest> = {}) =>
-    enrichForPagination('dataSources', this.pageOfListDataSources, request)
+  listDataSources = (request: Readonly<RegionalApiListDataSourcesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('dataSources', this.pageOfListDataSources, request, options)
 
   
   /**
@@ -617,7 +638,7 @@ The name of the data source will then be used as reference to name the associate
    * @param request - The request {@link RegionalApiUpdateDataSourceRequest}
    * @returns A Promise of DataSource
    */
-  updateDataSource = (request: Readonly<RegionalApiUpdateDataSourceRequest>) =>
+  updateDataSource = (request: Readonly<RegionalApiUpdateDataSourceRequest>, options?: RequestOptions) =>
     this.client.fetch<DataSource>(
       {
         body: JSON.stringify(
@@ -626,6 +647,7 @@ The name of the data source will then be used as reference to name the associate
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources/${validatePathParam('dataSourceId', request.dataSourceId)}`,
+        signal: options?.signal,
       },
       unmarshalDataSource,
     )
@@ -637,7 +659,7 @@ The name of the data source will then be used as reference to name the associate
    * @param request - The request {@link RegionalApiGetUsageOverviewRequest}
    * @returns A Promise of UsageOverview
    */
-  getUsageOverview = (request: Readonly<RegionalApiGetUsageOverviewRequest> = {}) =>
+  getUsageOverview = (request: Readonly<RegionalApiGetUsageOverviewRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<UsageOverview>(
       {
         method: 'GET',
@@ -646,6 +668,7 @@ The name of the data source will then be used as reference to name the associate
           ['interval', request.interval],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalUsageOverview,
     )
@@ -658,7 +681,7 @@ Upon creation, your token's secret key display only once. Make sure that you sav
    * @param request - The request {@link RegionalApiCreateTokenRequest}
    * @returns A Promise of Token
    */
-  createToken = (request: Readonly<RegionalApiCreateTokenRequest>) =>
+  createToken = (request: Readonly<RegionalApiCreateTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<Token>(
       {
         body: JSON.stringify(
@@ -667,12 +690,13 @@ Upon creation, your token's secret key display only once. Make sure that you sav
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
+        signal: options?.signal,
       },
       unmarshalToken,
     )
 
   
-  protected pageOfListTokens = (request: Readonly<RegionalApiListTokensRequest> = {}) =>
+  protected pageOfListTokens = (request: Readonly<RegionalApiListTokensRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListTokensResponse>(
       {
         method: 'GET',
@@ -684,6 +708,7 @@ Upon creation, your token's secret key display only once. Make sure that you sav
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['token_scopes', request.tokenScopes],
         ),
+        signal: options?.signal,
       },
       unmarshalListTokensResponse,
     )
@@ -695,8 +720,8 @@ You can filter tokens by Project ID and token scopes.
    * @param request - The request {@link RegionalApiListTokensRequest}
    * @returns A Promise of ListTokensResponse
    */
-  listTokens = (request: Readonly<RegionalApiListTokensRequest> = {}) =>
-    enrichForPagination('tokens', this.pageOfListTokens, request)
+  listTokens = (request: Readonly<RegionalApiListTokensRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('tokens', this.pageOfListTokens, request, options)
 
   
   /**
@@ -705,11 +730,12 @@ You can filter tokens by Project ID and token scopes.
    * @param request - The request {@link RegionalApiGetTokenRequest}
    * @returns A Promise of Token
    */
-  getToken = (request: Readonly<RegionalApiGetTokenRequest>) =>
+  getToken = (request: Readonly<RegionalApiGetTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<Token>(
       {
         method: 'GET',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        signal: options?.signal,
       },
       unmarshalToken,
     )
@@ -720,16 +746,17 @@ You can filter tokens by Project ID and token scopes.
    *
    * @param request - The request {@link RegionalApiDeleteTokenRequest}
    */
-  deleteToken = (request: Readonly<RegionalApiDeleteTokenRequest>) =>
+  deleteToken = (request: Readonly<RegionalApiDeleteTokenRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens/${validatePathParam('tokenId', request.tokenId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListProducts = (request: Readonly<RegionalApiListProductsRequest> = {}) =>
+  protected pageOfListProducts = (request: Readonly<RegionalApiListProductsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListProductsResponse>(
       {
         method: 'GET',
@@ -739,6 +766,7 @@ You can filter tokens by Project ID and token scopes.
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListProductsResponse,
     )
@@ -751,8 +779,8 @@ For more information, see https://www.scaleway.com/en/docs/cockpit/reference-con
    * @param request - The request {@link RegionalApiListProductsRequest}
    * @returns A Promise of ListProductsResponse
    */
-  listProducts = (request: Readonly<RegionalApiListProductsRequest> = {}) =>
-    enrichForPagination('productsList', this.pageOfListProducts, request)
+  listProducts = (request: Readonly<RegionalApiListProductsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('productsList', this.pageOfListProducts, request, options)
 
   
   /**
@@ -762,7 +790,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
    * @param request - The request {@link RegionalApiGetAlertManagerRequest}
    * @returns A Promise of AlertManager
    */
-  getAlertManager = (request: Readonly<RegionalApiGetAlertManagerRequest> = {}) =>
+  getAlertManager = (request: Readonly<RegionalApiGetAlertManagerRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<AlertManager>(
       {
         method: 'GET',
@@ -770,6 +798,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalAlertManager,
     )
@@ -781,7 +810,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
    * @param request - The request {@link RegionalApiEnableAlertManagerRequest}
    * @returns A Promise of AlertManager
    */
-  enableAlertManager = (request: Readonly<RegionalApiEnableAlertManagerRequest> = {}) =>
+  enableAlertManager = (request: Readonly<RegionalApiEnableAlertManagerRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<AlertManager>(
       {
         body: JSON.stringify(
@@ -790,6 +819,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/enable`,
+        signal: options?.signal,
       },
       unmarshalAlertManager,
     )
@@ -801,7 +831,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
    * @param request - The request {@link RegionalApiDisableAlertManagerRequest}
    * @returns A Promise of AlertManager
    */
-  disableAlertManager = (request: Readonly<RegionalApiDisableAlertManagerRequest> = {}) =>
+  disableAlertManager = (request: Readonly<RegionalApiDisableAlertManagerRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<AlertManager>(
       {
         body: JSON.stringify(
@@ -810,6 +840,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/disable`,
+        signal: options?.signal,
       },
       unmarshalAlertManager,
     )
@@ -821,7 +852,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
    * @param request - The request {@link RegionalApiGetRulesCountRequest}
    * @returns A Promise of GetRulesCountResponse
    */
-  getRulesCount = (request: Readonly<RegionalApiGetRulesCountRequest> = {}) =>
+  getRulesCount = (request: Readonly<RegionalApiGetRulesCountRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<GetRulesCountResponse>(
       {
         method: 'GET',
@@ -829,6 +860,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalGetRulesCountResponse,
     )
@@ -842,7 +874,7 @@ If you need to receive alerts for other receivers, you can create additional con
    * @param request - The request {@link RegionalApiCreateContactPointRequest}
    * @returns A Promise of ContactPoint
    */
-  createContactPoint = (request: Readonly<RegionalApiCreateContactPointRequest> = {}) =>
+  createContactPoint = (request: Readonly<RegionalApiCreateContactPointRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ContactPoint>(
       {
         body: JSON.stringify(
@@ -851,12 +883,13 @@ If you need to receive alerts for other receivers, you can create additional con
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points`,
+        signal: options?.signal,
       },
       unmarshalContactPoint,
     )
 
   
-  protected pageOfListContactPoints = (request: Readonly<RegionalApiListContactPointsRequest> = {}) =>
+  protected pageOfListContactPoints = (request: Readonly<RegionalApiListContactPointsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListContactPointsResponse>(
       {
         method: 'GET',
@@ -866,6 +899,7 @@ If you need to receive alerts for other receivers, you can create additional con
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListContactPointsResponse,
     )
@@ -876,11 +910,11 @@ If you need to receive alerts for other receivers, you can create additional con
    * @param request - The request {@link RegionalApiListContactPointsRequest}
    * @returns A Promise of ListContactPointsResponse
    */
-  listContactPoints = (request: Readonly<RegionalApiListContactPointsRequest> = {}) =>
-    enrichForPagination('contactPoints', this.pageOfListContactPoints, request)
+  listContactPoints = (request: Readonly<RegionalApiListContactPointsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('contactPoints', this.pageOfListContactPoints, request, options)
 
   
-  updateContactPoint = (request: Readonly<RegionalApiUpdateContactPointRequest> = {}) =>
+  updateContactPoint = (request: Readonly<RegionalApiUpdateContactPointRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ContactPoint>(
       {
         body: JSON.stringify(
@@ -889,6 +923,7 @@ If you need to receive alerts for other receivers, you can create additional con
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points`,
+        signal: options?.signal,
       },
       unmarshalContactPoint,
     )
@@ -899,7 +934,7 @@ If you need to receive alerts for other receivers, you can create additional con
    *
    * @param request - The request {@link RegionalApiDeleteContactPointRequest}
    */
-  deleteContactPoint = (request: Readonly<RegionalApiDeleteContactPointRequest> = {}) =>
+  deleteContactPoint = (request: Readonly<RegionalApiDeleteContactPointRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -908,6 +943,7 @@ If you need to receive alerts for other receivers, you can create additional con
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points/delete`,
+        signal: options?.signal,
       },
     )
 
@@ -918,7 +954,7 @@ If you need to receive alerts for other receivers, you can create additional con
    * @param request - The request {@link RegionalApiListAlertsRequest}
    * @returns A Promise of ListAlertsResponse
    */
-  listAlerts = (request: Readonly<RegionalApiListAlertsRequest> = {}) =>
+  listAlerts = (request: Readonly<RegionalApiListAlertsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAlertsResponse>(
       {
         method: 'GET',
@@ -930,6 +966,7 @@ If you need to receive alerts for other receivers, you can create additional con
           ['rule_status', request.ruleStatus],
           ['state', request.state],
         ),
+        signal: options?.signal,
       },
       unmarshalListAlertsResponse,
     )
@@ -942,7 +979,7 @@ If you need to receive alerts for other receivers, you can create additional con
    * @param request - The request {@link RegionalApiEnableManagedAlertsRequest}
    * @returns A Promise of AlertManager
    */
-  enableManagedAlerts = (request: Readonly<RegionalApiEnableManagedAlertsRequest> = {}) =>
+  enableManagedAlerts = (request: Readonly<RegionalApiEnableManagedAlertsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<AlertManager>(
       {
         body: JSON.stringify(
@@ -951,6 +988,7 @@ If you need to receive alerts for other receivers, you can create additional con
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/enable`,
+        signal: options?.signal,
       },
       unmarshalAlertManager,
     )
@@ -963,7 +1001,7 @@ If you need to receive alerts for other receivers, you can create additional con
    * @param request - The request {@link RegionalApiDisableManagedAlertsRequest}
    * @returns A Promise of AlertManager
    */
-  disableManagedAlerts = (request: Readonly<RegionalApiDisableManagedAlertsRequest> = {}) =>
+  disableManagedAlerts = (request: Readonly<RegionalApiDisableManagedAlertsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<AlertManager>(
       {
         body: JSON.stringify(
@@ -972,6 +1010,7 @@ If you need to receive alerts for other receivers, you can create additional con
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/disable`,
+        signal: options?.signal,
       },
       unmarshalAlertManager,
     )
@@ -983,7 +1022,7 @@ If you need to receive alerts for other receivers, you can create additional con
    * @param request - The request {@link RegionalApiEnableAlertRulesRequest}
    * @returns A Promise of EnableAlertRulesResponse
    */
-  enableAlertRules = (request: Readonly<RegionalApiEnableAlertRulesRequest> = {}) =>
+  enableAlertRules = (request: Readonly<RegionalApiEnableAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<EnableAlertRulesResponse>(
       {
         body: JSON.stringify(
@@ -992,6 +1031,7 @@ If you need to receive alerts for other receivers, you can create additional con
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/enable-alert-rules`,
+        signal: options?.signal,
       },
       unmarshalEnableAlertRulesResponse,
     )
@@ -1003,7 +1043,7 @@ If you need to receive alerts for other receivers, you can create additional con
    * @param request - The request {@link RegionalApiDisableAlertRulesRequest}
    * @returns A Promise of DisableAlertRulesResponse
    */
-  disableAlertRules = (request: Readonly<RegionalApiDisableAlertRulesRequest> = {}) =>
+  disableAlertRules = (request: Readonly<RegionalApiDisableAlertRulesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<DisableAlertRulesResponse>(
       {
         body: JSON.stringify(
@@ -1012,6 +1052,7 @@ If you need to receive alerts for other receivers, you can create additional con
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/disable-alert-rules`,
+        signal: options?.signal,
       },
       unmarshalDisableAlertRulesResponse,
     )
@@ -1022,7 +1063,7 @@ If you need to receive alerts for other receivers, you can create additional con
    *
    * @param request - The request {@link RegionalApiTriggerTestAlertRequest}
    */
-  triggerTestAlert = (request: Readonly<RegionalApiTriggerTestAlertRequest> = {}) =>
+  triggerTestAlert = (request: Readonly<RegionalApiTriggerTestAlertRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1031,6 +1072,7 @@ If you need to receive alerts for other receivers, you can create additional con
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/trigger-test-alert`,
+        signal: options?.signal,
       },
     )
 

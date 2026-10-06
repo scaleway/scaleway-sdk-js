@@ -455,7 +455,7 @@ Possible check types:
    */
   publicEndpoint: string
   /**
-   * This endpoint is accessible from the Private Network the container is connected to, and can be used to access the container from other resources in the same Private Network.
+   * This endpoint is accessible from the Private Network the container is connected to, as well as from other Private Networks within the same VPC.
    */
   privateEndpoint?: string
   /**
@@ -828,7 +828,7 @@ Possible check types:
    */
   args?: string[]
   /**
-   * When enabled, the container can receive traffic from other resources in the same Private Network.
+   * When enabled, the container can receive traffic from resources connected to any Private Network within the same VPC.
    */
   enablePrivateEndpoint?: boolean
   /**
@@ -1244,7 +1244,7 @@ Possible check types:
    */
   args?: string[]
   /**
-   * When enabled, the container can receive traffic from other resources in the same Private Network.
+   * When enabled, the container can receive traffic from resources connected to any Private Network within the same VPC.
    */
   enablePrivateEndpoint?: boolean
   /**

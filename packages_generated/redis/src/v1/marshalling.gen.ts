@@ -125,6 +125,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     name: data.name,
     nodeType: data.node_type,
     projectId: data.project_id,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     tlsEnabled: data.tls_enabled,

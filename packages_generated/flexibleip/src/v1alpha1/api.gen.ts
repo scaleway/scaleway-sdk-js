@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {FLEXIBLE_IP_TRANSIENT_STATUSES as FLEXIBLE_IP_TRANSIENT_STATUSES_FLEXIBLEIP,MAC_ADDRESS_TRANSIENT_STATUSES as MAC_ADDRESS_TRANSIENT_STATUSES_FLEXIBLEIP,} from './content.gen.js'
 import {
   marshalAttachFlexibleIPRequest,
@@ -75,7 +75,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
    */
-  createFlexibleIP = (request: Readonly<CreateFlexibleIPRequest>) =>
+  createFlexibleIP = (request: Readonly<CreateFlexibleIPRequest>, options?: RequestOptions) =>
     this.client.fetch<FlexibleIP>(
       {
         body: JSON.stringify(
@@ -84,6 +84,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips`,
+        signal: options?.signal,
       },
       unmarshalFlexibleIP,
     )
@@ -95,11 +96,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
    */
-  getFlexibleIP = (request: Readonly<GetFlexibleIPRequest>) =>
+  getFlexibleIP = (request: Readonly<GetFlexibleIPRequest>, options?: RequestOptions) =>
     this.client.fetch<FlexibleIP>(
       {
         method: 'GET',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
+        signal: options?.signal,
       },
       unmarshalFlexibleIP,
     )
@@ -123,7 +125,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListFlexibleIPs = (request: Readonly<ListFlexibleIPsRequest> = {}) =>
+  protected pageOfListFlexibleIPs = (request: Readonly<ListFlexibleIPsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListFlexibleIPsResponse>(
       {
         method: 'GET',
@@ -138,6 +140,7 @@ export class API extends ParentAPI {
           ['status', request.status],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListFlexibleIPsResponse,
     )
@@ -148,8 +151,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListFlexibleIPsRequest}
    * @returns A Promise of ListFlexibleIPsResponse
    */
-  listFlexibleIPs = (request: Readonly<ListFlexibleIPsRequest> = {}) =>
-    enrichForPagination('flexibleIps', this.pageOfListFlexibleIPs, request)
+  listFlexibleIPs = (request: Readonly<ListFlexibleIPsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('flexibleIps', this.pageOfListFlexibleIPs, request, options)
 
   
   /**
@@ -158,7 +161,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateFlexibleIPRequest}
    * @returns A Promise of FlexibleIP
    */
-  updateFlexibleIP = (request: Readonly<UpdateFlexibleIPRequest>) =>
+  updateFlexibleIP = (request: Readonly<UpdateFlexibleIPRequest>, options?: RequestOptions) =>
     this.client.fetch<FlexibleIP>(
       {
         body: JSON.stringify(
@@ -167,6 +170,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
+        signal: options?.signal,
       },
       unmarshalFlexibleIP,
     )
@@ -177,11 +181,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteFlexibleIPRequest}
    */
-  deleteFlexibleIP = (request: Readonly<DeleteFlexibleIPRequest>) =>
+  deleteFlexibleIP = (request: Readonly<DeleteFlexibleIPRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -192,7 +197,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AttachFlexibleIPRequest}
    * @returns A Promise of AttachFlexibleIPsResponse
    */
-  attachFlexibleIP = (request: Readonly<AttachFlexibleIPRequest>) =>
+  attachFlexibleIP = (request: Readonly<AttachFlexibleIPRequest>, options?: RequestOptions) =>
     this.client.fetch<AttachFlexibleIPsResponse>(
       {
         body: JSON.stringify(
@@ -201,6 +206,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/attach`,
+        signal: options?.signal,
       },
       unmarshalAttachFlexibleIPsResponse,
     )
@@ -212,7 +218,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DetachFlexibleIPRequest}
    * @returns A Promise of DetachFlexibleIPsResponse
    */
-  detachFlexibleIP = (request: Readonly<DetachFlexibleIPRequest>) =>
+  detachFlexibleIP = (request: Readonly<DetachFlexibleIPRequest>, options?: RequestOptions) =>
     this.client.fetch<DetachFlexibleIPsResponse>(
       {
         body: JSON.stringify(
@@ -221,6 +227,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/detach`,
+        signal: options?.signal,
       },
       unmarshalDetachFlexibleIPsResponse,
     )
@@ -232,7 +239,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GenerateMACAddrRequest}
    * @returns A Promise of FlexibleIP
    */
-  generateMACAddr = (request: Readonly<GenerateMACAddrRequest>) =>
+  generateMACAddr = (request: Readonly<GenerateMACAddrRequest>, options?: RequestOptions) =>
     this.client.fetch<FlexibleIP>(
       {
         body: JSON.stringify(
@@ -241,6 +248,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
+        signal: options?.signal,
       },
       unmarshalFlexibleIP,
     )
@@ -252,7 +260,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link DuplicateMACAddrRequest}
    * @returns A Promise of FlexibleIP
    */
-  duplicateMACAddr = (request: Readonly<DuplicateMACAddrRequest>) =>
+  duplicateMACAddr = (request: Readonly<DuplicateMACAddrRequest>, options?: RequestOptions) =>
     this.client.fetch<FlexibleIP>(
       {
         body: JSON.stringify(
@@ -261,6 +269,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac/duplicate`,
+        signal: options?.signal,
       },
       unmarshalFlexibleIP,
     )
@@ -272,7 +281,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link MoveMACAddrRequest}
    * @returns A Promise of FlexibleIP
    */
-  moveMACAddr = (request: Readonly<MoveMACAddrRequest>) =>
+  moveMACAddr = (request: Readonly<MoveMACAddrRequest>, options?: RequestOptions) =>
     this.client.fetch<FlexibleIP>(
       {
         body: JSON.stringify(
@@ -281,6 +290,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac/move`,
+        signal: options?.signal,
       },
       unmarshalFlexibleIP,
     )
@@ -291,11 +301,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteMACAddrRequest}
    */
-  deleteMACAddr = (request: Readonly<DeleteMACAddrRequest>) =>
+  deleteMACAddr = (request: Readonly<DeleteMACAddrRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
+        signal: options?.signal,
       },
     )
 

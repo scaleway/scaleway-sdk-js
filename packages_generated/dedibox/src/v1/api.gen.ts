@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {BMC_ACCESS_TRANSIENT_STATUSES as BMC_ACCESS_TRANSIENT_STATUSES_DEDIBOX,I_PV6_BLOCK_DELEGATION_TRANSIENT_STATUSES as I_PV6_BLOCK_DELEGATION_TRANSIENT_STATUSES_DEDIBOX,RPN_GROUP_MEMBER_TRANSIENT_STATUSES as RPN_GROUP_MEMBER_TRANSIENT_STATUSES_DEDIBOX,RPN_SAN_TRANSIENT_STATUSES as RPN_SAN_TRANSIENT_STATUSES_DEDIBOX,RPN_V2_GROUP_TRANSIENT_STATUSES as RPN_V2_GROUP_TRANSIENT_STATUSES_DEDIBOX,RPN_V2_MEMBER_TRANSIENT_STATUSES as RPN_V2_MEMBER_TRANSIENT_STATUSES_DEDIBOX,SERVER_INSTALL_TRANSIENT_STATUSES as SERVER_INSTALL_TRANSIENT_STATUSES_DEDIBOX,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_DEDIBOX,SERVICE_PROVISIONING_TRANSIENT_STATUSES as SERVICE_PROVISIONING_TRANSIENT_STATUSES_DEDIBOX,} from './content.gen.js'
 import {
   marshalAttachFailoverIPToMacAddressRequest,
@@ -266,7 +266,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
+  protected pageOfListServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
@@ -278,6 +278,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['search', request.search],
         ),
+        signal: options?.signal,
       },
       unmarshalListServersResponse,
     )
@@ -288,8 +289,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
    */
-  listServers = (request: Readonly<ListServersRequest> = {}) =>
-    enrichForPagination('servers', this.pageOfListServers, request)
+  listServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('servers', this.pageOfListServers, request, options)
 
   
   /**
@@ -298,11 +299,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
    */
-  getServer = (request: Readonly<GetServerRequest>) =>
+  getServer = (request: Readonly<GetServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -326,17 +328,18 @@ export class API extends ParentAPI {
     )
 
   
-  getServerBackup = (request: Readonly<GetServerBackupRequest>) =>
+  getServerBackup = (request: Readonly<GetServerBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<Backup>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/backups`,
+        signal: options?.signal,
       },
       unmarshalBackup,
     )
 
   
-  updateServerBackup = (request: Readonly<UpdateServerBackupRequest>) =>
+  updateServerBackup = (request: Readonly<UpdateServerBackupRequest>, options?: RequestOptions) =>
     this.client.fetch<Backup>(
       {
         body: JSON.stringify(
@@ -345,12 +348,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/backups`,
+        signal: options?.signal,
       },
       unmarshalBackup,
     )
 
   
-  protected pageOfListSubscribableServerOptions = (request: Readonly<ListSubscribableServerOptionsRequest>) =>
+  protected pageOfListSubscribableServerOptions = (request: Readonly<ListSubscribableServerOptionsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListSubscribableServerOptionsResponse>(
       {
         method: 'GET',
@@ -359,6 +363,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListSubscribableServerOptionsResponse,
     )
@@ -369,8 +374,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListSubscribableServerOptionsRequest}
    * @returns A Promise of ListSubscribableServerOptionsResponse
    */
-  listSubscribableServerOptions = (request: Readonly<ListSubscribableServerOptionsRequest>) =>
-    enrichForPagination('serverOptions', this.pageOfListSubscribableServerOptions, request)
+  listSubscribableServerOptions = (request: Readonly<ListSubscribableServerOptionsRequest>, options?: RequestOptions) =>
+    enrichForPagination('serverOptions', this.pageOfListSubscribableServerOptions, request, options)
 
   
   /**
@@ -379,7 +384,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SubscribeServerOptionRequest}
    * @returns A Promise of Service
    */
-  subscribeServerOption = (request: Readonly<SubscribeServerOptionRequest>) =>
+  subscribeServerOption = (request: Readonly<SubscribeServerOptionRequest>, options?: RequestOptions) =>
     this.client.fetch<Service>(
       {
         body: JSON.stringify(
@@ -388,6 +393,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/subscribe-server-option`,
+        signal: options?.signal,
       },
       unmarshalService,
     )
@@ -399,7 +405,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Service
    */
-  createServer = (request: Readonly<CreateServerRequest>) =>
+  createServer = (request: Readonly<CreateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Service>(
       {
         body: JSON.stringify(
@@ -408,6 +414,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
+        signal: options?.signal,
       },
       unmarshalService,
     )
@@ -419,7 +426,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SubscribeStorageOptionsRequest}
    * @returns A Promise of SubscribeStorageOptionsResponse
    */
-  subscribeStorageOptions = (request: Readonly<SubscribeStorageOptionsRequest>) =>
+  subscribeStorageOptions = (request: Readonly<SubscribeStorageOptionsRequest>, options?: RequestOptions) =>
     this.client.fetch<SubscribeStorageOptionsResponse>(
       {
         body: JSON.stringify(
@@ -428,6 +435,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/subscribe-storage-options`,
+        signal: options?.signal,
       },
       unmarshalSubscribeStorageOptionsResponse,
     )
@@ -439,7 +447,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
    */
-  updateServer = (request: Readonly<UpdateServerRequest>) =>
+  updateServer = (request: Readonly<UpdateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -448,12 +456,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
 
   
-  updateServerTags = (request: Readonly<UpdateServerTagsRequest>) =>
+  updateServerTags = (request: Readonly<UpdateServerTagsRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -462,6 +471,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/tags`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -472,13 +482,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link RebootServerRequest}
    */
-  rebootServer = (request: Readonly<RebootServerRequest>) =>
+  rebootServer = (request: Readonly<RebootServerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
+        signal: options?.signal,
       },
     )
 
@@ -488,13 +499,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link StartServerRequest}
    */
-  startServer = (request: Readonly<StartServerRequest>) =>
+  startServer = (request: Readonly<StartServerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start`,
+        signal: options?.signal,
       },
     )
 
@@ -504,13 +516,14 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link StopServerRequest}
    */
-  stopServer = (request: Readonly<StopServerRequest>) =>
+  stopServer = (request: Readonly<StopServerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop`,
+        signal: options?.signal,
       },
     )
 
@@ -520,16 +533,17 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteServerRequest}
    */
-  deleteServer = (request: Readonly<DeleteServerRequest>) =>
+  deleteServer = (request: Readonly<DeleteServerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListServerEvents = (request: Readonly<ListServerEventsRequest>) =>
+  protected pageOfListServerEvents = (request: Readonly<ListServerEventsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListServerEventsResponse>(
       {
         method: 'GET',
@@ -539,6 +553,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListServerEventsResponse,
     )
@@ -549,11 +564,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServerEventsRequest}
    * @returns A Promise of ListServerEventsResponse
    */
-  listServerEvents = (request: Readonly<ListServerEventsRequest>) =>
-    enrichForPagination('events', this.pageOfListServerEvents, request)
+  listServerEvents = (request: Readonly<ListServerEventsRequest>, options?: RequestOptions) =>
+    enrichForPagination('events', this.pageOfListServerEvents, request, options)
 
   
-  protected pageOfListServerDisks = (request: Readonly<ListServerDisksRequest>) =>
+  protected pageOfListServerDisks = (request: Readonly<ListServerDisksRequest>, options?: RequestOptions) =>
     this.client.fetch<ListServerDisksResponse>(
       {
         method: 'GET',
@@ -563,6 +578,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListServerDisksResponse,
     )
@@ -573,15 +589,16 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServerDisksRequest}
    * @returns A Promise of ListServerDisksResponse
    */
-  listServerDisks = (request: Readonly<ListServerDisksRequest>) =>
-    enrichForPagination('disks', this.pageOfListServerDisks, request)
+  listServerDisks = (request: Readonly<ListServerDisksRequest>, options?: RequestOptions) =>
+    enrichForPagination('disks', this.pageOfListServerDisks, request, options)
 
   
-  getOrderedService = (request: Readonly<GetOrderedServiceRequest>) =>
+  getOrderedService = (request: Readonly<GetOrderedServiceRequest>, options?: RequestOptions) =>
     this.client.fetch<Service>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ordered-services/${validatePathParam('orderedServiceId', request.orderedServiceId)}`,
+        signal: options?.signal,
       },
       unmarshalService,
     )
@@ -593,13 +610,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServiceRequest}
    * @returns A Promise of Service
    */
-  getService = (request: Readonly<GetServiceRequest>) =>
+  getService = (request: Readonly<GetServiceRequest>, options?: RequestOptions) =>
     this.client.fetch<Service>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/services/${validatePathParam('serviceId', request.serviceId)}`,
+        signal: options?.signal,
       },
       unmarshalService,
     )
@@ -611,17 +629,18 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteServiceRequest}
    * @returns A Promise of Service
    */
-  deleteService = (request: Readonly<DeleteServiceRequest>) =>
+  deleteService = (request: Readonly<DeleteServiceRequest>, options?: RequestOptions) =>
     this.client.fetch<Service>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/services/${validatePathParam('serviceId', request.serviceId)}`,
+        signal: options?.signal,
       },
       unmarshalService,
     )
 
   
-  protected pageOfListServices = (request: Readonly<ListServicesRequest> = {}) =>
+  protected pageOfListServices = (request: Readonly<ListServicesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServicesResponse>(
       {
         method: 'GET',
@@ -632,6 +651,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListServicesResponse,
     )
@@ -642,8 +662,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServicesRequest}
    * @returns A Promise of ListServicesResponse
    */
-  listServices = (request: Readonly<ListServicesRequest> = {}) =>
-    enrichForPagination('services', this.pageOfListServices, request)
+  listServices = (request: Readonly<ListServicesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('services', this.pageOfListServices, request, options)
 
   
   /**
@@ -652,7 +672,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link InstallServerRequest}
    * @returns A Promise of ServerInstall
    */
-  installServer = (request: Readonly<InstallServerRequest>) =>
+  installServer = (request: Readonly<InstallServerRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerInstall>(
       {
         body: JSON.stringify(
@@ -661,6 +681,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/install`,
+        signal: options?.signal,
       },
       unmarshalServerInstall,
     )
@@ -672,11 +693,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerInstallRequest}
    * @returns A Promise of ServerInstall
    */
-  getServerInstall = (request: Readonly<GetServerInstallRequest>) =>
+  getServerInstall = (request: Readonly<GetServerInstallRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerInstall>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/install`,
+        signal: options?.signal,
       },
       unmarshalServerInstall,
     )
@@ -705,11 +727,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link CancelServerInstallRequest}
    */
-  cancelServerInstall = (request: Readonly<CancelServerInstallRequest>) =>
+  cancelServerInstall = (request: Readonly<CancelServerInstallRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/cancel-install`,
+        signal: options?.signal,
       },
     )
 
@@ -720,11 +743,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerDefaultPartitioningRequest}
    * @returns A Promise of ServerDefaultPartitioning
    */
-  getServerDefaultPartitioning = (request: Readonly<GetServerDefaultPartitioningRequest>) =>
+  getServerDefaultPartitioning = (request: Readonly<GetServerDefaultPartitioningRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerDefaultPartitioning>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/partitioning/${validatePathParam('osId', request.osId)}`,
+        signal: options?.signal,
       },
       unmarshalServerDefaultPartitioning,
     )
@@ -736,7 +760,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    *
    * @param request - The request {@link StartBMCAccessRequest}
    */
-  startBMCAccess = (request: Readonly<StartBMCAccessRequest>) =>
+  startBMCAccess = (request: Readonly<StartBMCAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -745,6 +769,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
+        signal: options?.signal,
       },
     )
 
@@ -755,11 +780,12 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link GetBMCAccessRequest}
    * @returns A Promise of BMCAccess
    */
-  getBMCAccess = (request: Readonly<GetBMCAccessRequest>) =>
+  getBMCAccess = (request: Readonly<GetBMCAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<BMCAccess>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
+        signal: options?.signal,
       },
       unmarshalBMCAccess,
     )
@@ -788,16 +814,17 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    *
    * @param request - The request {@link StopBMCAccessRequest}
    */
-  stopBMCAccess = (request: Readonly<StopBMCAccessRequest>) =>
+  stopBMCAccess = (request: Readonly<StopBMCAccessRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListOffers = (request: Readonly<ListOffersRequest> = {}) =>
+  protected pageOfListOffers = (request: Readonly<ListOffersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOffersResponse>(
       {
         method: 'GET',
@@ -816,6 +843,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
           ['sold_in', request.soldIn
           && request.soldIn.length > 0 ? request.soldIn.join(',') : undefined],
         ),
+        signal: options?.signal,
       },
       unmarshalListOffersResponse,
     )
@@ -826,8 +854,8 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link ListOffersRequest}
    * @returns A Promise of ListOffersResponse
    */
-  listOffers = (request: Readonly<ListOffersRequest> = {}) =>
-    enrichForPagination('offers', this.pageOfListOffers, request)
+  listOffers = (request: Readonly<ListOffersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('offers', this.pageOfListOffers, request, options)
 
   
   /**
@@ -836,7 +864,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link GetOfferRequest}
    * @returns A Promise of Offer
    */
-  getOffer = (request: Readonly<GetOfferRequest>) =>
+  getOffer = (request: Readonly<GetOfferRequest>, options?: RequestOptions) =>
     this.client.fetch<Offer>(
       {
         method: 'GET',
@@ -844,12 +872,13 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         urlParams: urlParams(
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalOffer,
     )
 
   
-  protected pageOfListOS = (request: Readonly<ListOSRequest> = {}) =>
+  protected pageOfListOS = (request: Readonly<ListOSRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOSResponse>(
       {
         method: 'GET',
@@ -869,6 +898,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListOSResponse,
     )
@@ -879,8 +909,8 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link ListOSRequest}
    * @returns A Promise of ListOSResponse
    */
-  listOS = (request: Readonly<ListOSRequest> = {}) =>
-    enrichForPagination('os', this.pageOfListOS, request)
+  listOS = (request: Readonly<ListOSRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('os', this.pageOfListOS, request, options)
 
   
   /**
@@ -889,7 +919,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link GetOSRequest}
    * @returns A Promise of OS
    */
-  getOS = (request: Readonly<GetOSRequest>) =>
+  getOS = (request: Readonly<GetOSRequest>, options?: RequestOptions) =>
     this.client.fetch<OS>(
       {
         method: 'GET',
@@ -898,6 +928,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
           ['project_id', request.projectId],
           ['server_id', request.serverId],
         ),
+        signal: options?.signal,
       },
       unmarshalOS,
     )
@@ -909,7 +940,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link UpdateReverseRequest}
    * @returns A Promise of IP
    */
-  updateReverse = (request: Readonly<UpdateReverseRequest>) =>
+  updateReverse = (request: Readonly<UpdateReverseRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -918,6 +949,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/reverses/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -929,7 +961,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link CreateFailoverIPsRequest}
    * @returns A Promise of CreateFailoverIPsResponse
    */
-  createFailoverIPs = (request: Readonly<CreateFailoverIPsRequest>) =>
+  createFailoverIPs = (request: Readonly<CreateFailoverIPsRequest>, options?: RequestOptions) =>
     this.client.fetch<CreateFailoverIPsResponse>(
       {
         body: JSON.stringify(
@@ -938,6 +970,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips`,
+        signal: options?.signal,
       },
       unmarshalCreateFailoverIPsResponse,
     )
@@ -948,7 +981,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    *
    * @param request - The request {@link AttachFailoverIPsRequest}
    */
-  attachFailoverIPs = (request: Readonly<AttachFailoverIPsRequest>) =>
+  attachFailoverIPs = (request: Readonly<AttachFailoverIPsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -957,6 +990,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/attach`,
+        signal: options?.signal,
       },
     )
 
@@ -966,7 +1000,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    *
    * @param request - The request {@link DetachFailoverIPsRequest}
    */
-  detachFailoverIPs = (request: Readonly<DetachFailoverIPsRequest>) =>
+  detachFailoverIPs = (request: Readonly<DetachFailoverIPsRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -975,6 +1009,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/detach`,
+        signal: options?.signal,
       },
     )
 
@@ -985,7 +1020,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link AttachFailoverIPToMacAddressRequest}
    * @returns A Promise of IP
    */
-  attachFailoverIPToMacAddress = (request: Readonly<AttachFailoverIPToMacAddressRequest>) =>
+  attachFailoverIPToMacAddress = (request: Readonly<AttachFailoverIPToMacAddressRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: JSON.stringify(
@@ -994,6 +1029,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/${validatePathParam('ipId', request.ipId)}/attach-to-mac-address`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -1005,13 +1041,14 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link DetachFailoverIPFromMacAddressRequest}
    * @returns A Promise of IP
    */
-  detachFailoverIPFromMacAddress = (request: Readonly<DetachFailoverIPFromMacAddressRequest>) =>
+  detachFailoverIPFromMacAddress = (request: Readonly<DetachFailoverIPFromMacAddressRequest>, options?: RequestOptions) =>
     this.client.fetch<IP>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/${validatePathParam('ipId', request.ipId)}/detach-from-mac-address`,
+        signal: options?.signal,
       },
       unmarshalIP,
     )
@@ -1022,16 +1059,17 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    *
    * @param request - The request {@link DeleteFailoverIPRequest}
    */
-  deleteFailoverIP = (request: Readonly<DeleteFailoverIPRequest>) =>
+  deleteFailoverIP = (request: Readonly<DeleteFailoverIPRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListFailoverIPs = (request: Readonly<ListFailoverIPsRequest> = {}) =>
+  protected pageOfListFailoverIPs = (request: Readonly<ListFailoverIPsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListFailoverIPsResponse>(
       {
         method: 'GET',
@@ -1044,6 +1082,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
           ['search', request.search],
         ),
+        signal: options?.signal,
       },
       unmarshalListFailoverIPsResponse,
     )
@@ -1054,8 +1093,8 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link ListFailoverIPsRequest}
    * @returns A Promise of ListFailoverIPsResponse
    */
-  listFailoverIPs = (request: Readonly<ListFailoverIPsRequest> = {}) =>
-    enrichForPagination('failoverIps', this.pageOfListFailoverIPs, request)
+  listFailoverIPs = (request: Readonly<ListFailoverIPsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('failoverIps', this.pageOfListFailoverIPs, request, options)
 
   
   /**
@@ -1064,11 +1103,12 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link GetFailoverIPRequest}
    * @returns A Promise of FailoverIP
    */
-  getFailoverIP = (request: Readonly<GetFailoverIPRequest>) =>
+  getFailoverIP = (request: Readonly<GetFailoverIPRequest>, options?: RequestOptions) =>
     this.client.fetch<FailoverIP>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/${validatePathParam('ipId', request.ipId)}`,
+        signal: options?.signal,
       },
       unmarshalFailoverIP,
     )
@@ -1080,7 +1120,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link GetRemainingQuotaRequest}
    * @returns A Promise of GetRemainingQuotaResponse
    */
-  getRemainingQuota = (request: Readonly<GetRemainingQuotaRequest> = {}) =>
+  getRemainingQuota = (request: Readonly<GetRemainingQuotaRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<GetRemainingQuotaResponse>(
       {
         method: 'GET',
@@ -1088,6 +1128,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         urlParams: urlParams(
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalGetRemainingQuotaResponse,
     )
@@ -1099,11 +1140,12 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link GetRaidRequest}
    * @returns A Promise of Raid
    */
-  getRaid = (request: Readonly<GetRaidRequest>) =>
+  getRaid = (request: Readonly<GetRaidRequest>, options?: RequestOptions) =>
     this.client.fetch<Raid>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/raid`,
+        signal: options?.signal,
       },
       unmarshalRaid,
     )
@@ -1114,7 +1156,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    *
    * @param request - The request {@link UpdateRaidRequest}
    */
-  updateRaid = (request: Readonly<UpdateRaidRequest>) =>
+  updateRaid = (request: Readonly<UpdateRaidRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1123,6 +1165,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/update-raid`,
+        signal: options?.signal,
       },
     )
 
@@ -1133,7 +1176,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link StartRescueRequest}
    * @returns A Promise of Rescue
    */
-  startRescue = (request: Readonly<StartRescueRequest>) =>
+  startRescue = (request: Readonly<StartRescueRequest>, options?: RequestOptions) =>
     this.client.fetch<Rescue>(
       {
         body: JSON.stringify(
@@ -1142,6 +1185,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/rescue`,
+        signal: options?.signal,
       },
       unmarshalRescue,
     )
@@ -1153,11 +1197,12 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    * @param request - The request {@link GetRescueRequest}
    * @returns A Promise of Rescue
    */
-  getRescue = (request: Readonly<GetRescueRequest>) =>
+  getRescue = (request: Readonly<GetRescueRequest>, options?: RequestOptions) =>
     this.client.fetch<Rescue>(
       {
         method: 'GET',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/rescue`,
+        signal: options?.signal,
       },
       unmarshalRescue,
     )
@@ -1168,11 +1213,12 @@ The BMC (Baseboard Management Controller) access is available one hour after the
    *
    * @param request - The request {@link StopRescueRequest}
    */
-  stopRescue = (request: Readonly<StopRescueRequest>) =>
+  stopRescue = (request: Readonly<StopRescueRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/rescue`,
+        signal: options?.signal,
       },
     )
 
@@ -1183,7 +1229,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
  * Dedibox Phoenix Billing API.
  */
 export class BillingAPI extends ParentAPI {
-  protected pageOfListInvoices = (request: Readonly<BillingApiListInvoicesRequest> = {}) =>
+  protected pageOfListInvoices = (request: Readonly<BillingApiListInvoicesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListInvoicesResponse>(
       {
         method: 'GET',
@@ -1194,25 +1240,27 @@ export class BillingAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListInvoicesResponse,
     )
   
-  listInvoices = (request: Readonly<BillingApiListInvoicesRequest> = {}) =>
-    enrichForPagination('invoices', this.pageOfListInvoices, request)
+  listInvoices = (request: Readonly<BillingApiListInvoicesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('invoices', this.pageOfListInvoices, request, options)
 
   
-  getInvoice = (request: Readonly<BillingApiGetInvoiceRequest>) =>
+  getInvoice = (request: Readonly<BillingApiGetInvoiceRequest>, options?: RequestOptions) =>
     this.client.fetch<Invoice>(
       {
         method: 'GET',
         path: `/dedibox/v1/invoices/${validatePathParam('invoiceId', request.invoiceId)}`,
+        signal: options?.signal,
       },
       unmarshalInvoice,
     )
 
   
-  downloadInvoice = (request: Readonly<BillingApiDownloadInvoiceRequest>) =>
+  downloadInvoice = (request: Readonly<BillingApiDownloadInvoiceRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -1221,11 +1269,12 @@ export class BillingAPI extends ParentAPI {
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListRefunds = (request: Readonly<BillingApiListRefundsRequest> = {}) =>
+  protected pageOfListRefunds = (request: Readonly<BillingApiListRefundsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRefundsResponse>(
       {
         method: 'GET',
@@ -1236,25 +1285,27 @@ export class BillingAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRefundsResponse,
     )
   
-  listRefunds = (request: Readonly<BillingApiListRefundsRequest> = {}) =>
-    enrichForPagination('refunds', this.pageOfListRefunds, request)
+  listRefunds = (request: Readonly<BillingApiListRefundsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('refunds', this.pageOfListRefunds, request, options)
 
   
-  getRefund = (request: Readonly<BillingApiGetRefundRequest>) =>
+  getRefund = (request: Readonly<BillingApiGetRefundRequest>, options?: RequestOptions) =>
     this.client.fetch<Refund>(
       {
         method: 'GET',
         path: `/dedibox/v1/refunds/${validatePathParam('refundId', request.refundId)}`,
+        signal: options?.signal,
       },
       unmarshalRefund,
     )
 
   
-  downloadRefund = (request: Readonly<BillingApiDownloadRefundRequest>) =>
+  downloadRefund = (request: Readonly<BillingApiDownloadRefundRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -1263,11 +1314,12 @@ export class BillingAPI extends ParentAPI {
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
   
-  canOrder = (request: Readonly<BillingApiCanOrderRequest> = {}) =>
+  canOrder = (request: Readonly<BillingApiCanOrderRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<CanOrderResponse>(
       {
         method: 'GET',
@@ -1275,6 +1327,7 @@ export class BillingAPI extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalCanOrderResponse,
     )
@@ -1295,7 +1348,7 @@ export class IPv6BlockAPI extends ParentAPI {
    * @param request - The request {@link IPv6BlockApiGetIPv6BlockQuotasRequest}
    * @returns A Promise of GetIPv6BlockQuotasResponse
    */
-  getIPv6BlockQuotas = (request: Readonly<IPv6BlockApiGetIPv6BlockQuotasRequest> = {}) =>
+  getIPv6BlockQuotas = (request: Readonly<IPv6BlockApiGetIPv6BlockQuotasRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<GetIPv6BlockQuotasResponse>(
       {
         method: 'GET',
@@ -1303,6 +1356,7 @@ export class IPv6BlockAPI extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalGetIPv6BlockQuotasResponse,
     )
@@ -1314,7 +1368,7 @@ export class IPv6BlockAPI extends ParentAPI {
    * @param request - The request {@link IPv6BlockApiCreateIPv6BlockRequest}
    * @returns A Promise of IPv6Block
    */
-  createIPv6Block = (request: Readonly<IPv6BlockApiCreateIPv6BlockRequest> = {}) =>
+  createIPv6Block = (request: Readonly<IPv6BlockApiCreateIPv6BlockRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<IPv6Block>(
       {
         body: JSON.stringify(
@@ -1323,6 +1377,7 @@ export class IPv6BlockAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/ipv6-block`,
+        signal: options?.signal,
       },
       unmarshalIPv6Block,
     )
@@ -1334,7 +1389,7 @@ export class IPv6BlockAPI extends ParentAPI {
    * @param request - The request {@link IPv6BlockApiListIPv6BlocksRequest}
    * @returns A Promise of ListIPv6BlocksResponse
    */
-  listIPv6Blocks = (request: Readonly<IPv6BlockApiListIPv6BlocksRequest> = {}) =>
+  listIPv6Blocks = (request: Readonly<IPv6BlockApiListIPv6BlocksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListIPv6BlocksResponse>(
       {
         method: 'GET',
@@ -1342,6 +1397,7 @@ export class IPv6BlockAPI extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListIPv6BlocksResponse,
     )
@@ -1353,7 +1409,7 @@ export class IPv6BlockAPI extends ParentAPI {
    * @param request - The request {@link IPv6BlockApiGetIPv6BlockRequest}
    * @returns A Promise of IPv6Block
    */
-  getIPv6Block = (request: Readonly<IPv6BlockApiGetIPv6BlockRequest> = {}) =>
+  getIPv6Block = (request: Readonly<IPv6BlockApiGetIPv6BlockRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<IPv6Block>(
       {
         method: 'GET',
@@ -1361,6 +1417,7 @@ export class IPv6BlockAPI extends ParentAPI {
         urlParams: urlParams(
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalIPv6Block,
     )
@@ -1373,7 +1430,7 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
    * @param request - The request {@link IPv6BlockApiUpdateIPv6BlockRequest}
    * @returns A Promise of IPv6Block
    */
-  updateIPv6Block = (request: Readonly<IPv6BlockApiUpdateIPv6BlockRequest>) =>
+  updateIPv6Block = (request: Readonly<IPv6BlockApiUpdateIPv6BlockRequest>, options?: RequestOptions) =>
     this.client.fetch<IPv6Block>(
       {
         body: JSON.stringify(
@@ -1382,6 +1439,7 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/ipv6-blocks/${validatePathParam('blockId', request.blockId)}`,
+        signal: options?.signal,
       },
       unmarshalIPv6Block,
     )
@@ -1392,11 +1450,12 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
    *
    * @param request - The request {@link IPv6BlockApiDeleteIPv6BlockRequest}
    */
-  deleteIPv6Block = (request: Readonly<IPv6BlockApiDeleteIPv6BlockRequest>) =>
+  deleteIPv6Block = (request: Readonly<IPv6BlockApiDeleteIPv6BlockRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/ipv6-blocks/${validatePathParam('blockId', request.blockId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -1409,7 +1468,7 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
    * @param request - The request {@link IPv6BlockApiCreateIPv6BlockSubnetRequest}
    * @returns A Promise of IPv6Block
    */
-  createIPv6BlockSubnet = (request: Readonly<IPv6BlockApiCreateIPv6BlockSubnetRequest>) =>
+  createIPv6BlockSubnet = (request: Readonly<IPv6BlockApiCreateIPv6BlockSubnetRequest>, options?: RequestOptions) =>
     this.client.fetch<IPv6Block>(
       {
         body: JSON.stringify(
@@ -1418,6 +1477,7 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/ipv6-blocks/${validatePathParam('blockId', request.blockId)}/subnets`,
+        signal: options?.signal,
       },
       unmarshalIPv6Block,
     )
@@ -1429,11 +1489,12 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
    * @param request - The request {@link IPv6BlockApiListIPv6BlockSubnetsAvailableRequest}
    * @returns A Promise of ListIPv6BlockSubnetsAvailableResponse
    */
-  listIPv6BlockSubnetsAvailable = (request: Readonly<IPv6BlockApiListIPv6BlockSubnetsAvailableRequest>) =>
+  listIPv6BlockSubnetsAvailable = (request: Readonly<IPv6BlockApiListIPv6BlockSubnetsAvailableRequest>, options?: RequestOptions) =>
     this.client.fetch<ListIPv6BlockSubnetsAvailableResponse>(
       {
         method: 'GET',
         path: `/dedibox/v1/ipv6-blocks/${validatePathParam('blockId', request.blockId)}/subnets`,
+        signal: options?.signal,
       },
       unmarshalListIPv6BlockSubnetsAvailableResponse,
     )
@@ -1445,7 +1506,7 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
  * Dedibox Phoenix RPN API.
  */
 export class RpnAPI extends ParentAPI {
-  protected pageOfListRpnServerCapabilities = (request: Readonly<RpnApiListRpnServerCapabilitiesRequest> = {}) =>
+  protected pageOfListRpnServerCapabilities = (request: Readonly<RpnApiListRpnServerCapabilitiesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRpnServerCapabilitiesResponse>(
       {
         method: 'GET',
@@ -1456,15 +1517,16 @@ export class RpnAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnServerCapabilitiesResponse,
     )
   
-  listRpnServerCapabilities = (request: Readonly<RpnApiListRpnServerCapabilitiesRequest> = {}) =>
-    enrichForPagination('servers', this.pageOfListRpnServerCapabilities, request)
+  listRpnServerCapabilities = (request: Readonly<RpnApiListRpnServerCapabilitiesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('servers', this.pageOfListRpnServerCapabilities, request, options)
 
   
-  getRpnStatus = (request: Readonly<RpnApiGetRpnStatusRequest> = {}) =>
+  getRpnStatus = (request: Readonly<RpnApiGetRpnStatusRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<GetRpnStatusResponse>(
       {
         method: 'GET',
@@ -1474,6 +1536,7 @@ export class RpnAPI extends ParentAPI {
           ['rpnv1_group_id', request.rpnv1GroupId],
           ['rpnv2_group_id', request.rpnv2GroupId],
         ),
+        signal: options?.signal,
       },
       unmarshalGetRpnStatusResponse,
     )
@@ -1485,7 +1548,7 @@ export class RpnAPI extends ParentAPI {
  * Dedibox Phoenix RPN SAN API.
  */
 export class RpnSanAPI extends ParentAPI {
-  protected pageOfListRpnSans = (request: Readonly<RpnSanApiListRpnSansRequest> = {}) =>
+  protected pageOfListRpnSans = (request: Readonly<RpnSanApiListRpnSansRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRpnSansResponse>(
       {
         method: 'GET',
@@ -1496,19 +1559,21 @@ export class RpnSanAPI extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnSansResponse,
     )
   
-  listRpnSans = (request: Readonly<RpnSanApiListRpnSansRequest> = {}) =>
-    enrichForPagination('rpnSans', this.pageOfListRpnSans, request)
+  listRpnSans = (request: Readonly<RpnSanApiListRpnSansRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('rpnSans', this.pageOfListRpnSans, request, options)
 
   
-  getRpnSan = (request: Readonly<RpnSanApiGetRpnSanRequest>) =>
+  getRpnSan = (request: Readonly<RpnSanApiGetRpnSanRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnSan>(
       {
         method: 'GET',
         path: `/dedibox/v1/rpn-sans/${validatePathParam('rpnSanId', request.rpnSanId)}`,
+        signal: options?.signal,
       },
       unmarshalRpnSan,
     )
@@ -1532,16 +1597,17 @@ export class RpnSanAPI extends ParentAPI {
     )
 
   
-  deleteRpnSan = (request: Readonly<RpnSanApiDeleteRpnSanRequest>) =>
+  deleteRpnSan = (request: Readonly<RpnSanApiDeleteRpnSanRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/rpn-sans/${validatePathParam('rpnSanId', request.rpnSanId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  createRpnSan = (request: Readonly<RpnSanApiCreateRpnSanRequest>) =>
+  createRpnSan = (request: Readonly<RpnSanApiCreateRpnSanRequest>, options?: RequestOptions) =>
     this.client.fetch<Service>(
       {
         body: JSON.stringify(
@@ -1550,12 +1616,13 @@ export class RpnSanAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpn-sans`,
+        signal: options?.signal,
       },
       unmarshalService,
     )
 
   
-  listIps = (request: Readonly<RpnSanApiListIpsRequest>) =>
+  listIps = (request: Readonly<RpnSanApiListIpsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
@@ -1563,12 +1630,13 @@ export class RpnSanAPI extends ParentAPI {
         urlParams: urlParams(
           ['type', request.type],
         ),
+        signal: options?.signal,
       },
       unmarshalListIpsResponse,
     )
 
   
-  addIp = (request: Readonly<RpnSanApiAddIpRequest>) =>
+  addIp = (request: Readonly<RpnSanApiAddIpRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1577,11 +1645,12 @@ export class RpnSanAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpn-sans/${validatePathParam('rpnSanId', request.rpnSanId)}/ips`,
+        signal: options?.signal,
       },
     )
 
   
-  removeIp = (request: Readonly<RpnSanApiRemoveIpRequest>) =>
+  removeIp = (request: Readonly<RpnSanApiRemoveIpRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1590,11 +1659,12 @@ export class RpnSanAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/dedibox/v1/rpn-sans/${validatePathParam('rpnSanId', request.rpnSanId)}/ips`,
+        signal: options?.signal,
       },
     )
 
   
-  listAvailableIps = (request: Readonly<RpnSanApiListAvailableIpsRequest>) =>
+  listAvailableIps = (request: Readonly<RpnSanApiListAvailableIpsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
@@ -1602,6 +1672,7 @@ export class RpnSanAPI extends ParentAPI {
         urlParams: urlParams(
           ['type', request.type],
         ),
+        signal: options?.signal,
       },
       unmarshalListIpsResponse,
     )
@@ -1613,7 +1684,7 @@ export class RpnSanAPI extends ParentAPI {
  * Dedibox Phoenix RPN v1 API.
  */
 export class RpnV1API extends ParentAPI {
-  protected pageOfListRpnGroups = (request: Readonly<RpnV1ApiListRpnGroupsRequest> = {}) =>
+  protected pageOfListRpnGroups = (request: Readonly<RpnV1ApiListRpnGroupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRpnGroupsResponse>(
       {
         method: 'GET',
@@ -1624,25 +1695,27 @@ export class RpnV1API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnGroupsResponse,
     )
   
-  listRpnGroups = (request: Readonly<RpnV1ApiListRpnGroupsRequest> = {}) =>
-    enrichForPagination('rpnGroups', this.pageOfListRpnGroups, request)
+  listRpnGroups = (request: Readonly<RpnV1ApiListRpnGroupsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('rpnGroups', this.pageOfListRpnGroups, request, options)
 
   
-  getRpnGroup = (request: Readonly<RpnV1ApiGetRpnGroupRequest>) =>
+  getRpnGroup = (request: Readonly<RpnV1ApiGetRpnGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnGroup>(
       {
         method: 'GET',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalRpnGroup,
     )
 
   
-  createRpnGroup = (request: Readonly<RpnV1ApiCreateRpnGroupRequest>) =>
+  createRpnGroup = (request: Readonly<RpnV1ApiCreateRpnGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnGroup>(
       {
         body: JSON.stringify(
@@ -1651,21 +1724,23 @@ export class RpnV1API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpnv1/groups`,
+        signal: options?.signal,
       },
       unmarshalRpnGroup,
     )
 
   
-  deleteRpnGroup = (request: Readonly<RpnV1ApiDeleteRpnGroupRequest>) =>
+  deleteRpnGroup = (request: Readonly<RpnV1ApiDeleteRpnGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  updateRpnGroupName = (request: Readonly<RpnV1ApiUpdateRpnGroupNameRequest>) =>
+  updateRpnGroupName = (request: Readonly<RpnV1ApiUpdateRpnGroupNameRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnGroup>(
       {
         body: JSON.stringify(
@@ -1674,12 +1749,13 @@ export class RpnV1API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalRpnGroup,
     )
 
   
-  protected pageOfListRpnGroupMembers = (request: Readonly<RpnV1ApiListRpnGroupMembersRequest>) =>
+  protected pageOfListRpnGroupMembers = (request: Readonly<RpnV1ApiListRpnGroupMembersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListRpnGroupMembersResponse>(
       {
         method: 'GET',
@@ -1690,15 +1766,16 @@ export class RpnV1API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnGroupMembersResponse,
     )
   
-  listRpnGroupMembers = (request: Readonly<RpnV1ApiListRpnGroupMembersRequest>) =>
-    enrichForPagination('members', this.pageOfListRpnGroupMembers, request)
+  listRpnGroupMembers = (request: Readonly<RpnV1ApiListRpnGroupMembersRequest>, options?: RequestOptions) =>
+    enrichForPagination('members', this.pageOfListRpnGroupMembers, request, options)
 
   
-  rpnGroupInvite = (request: Readonly<RpnV1ApiRpnGroupInviteRequest>) =>
+  rpnGroupInvite = (request: Readonly<RpnV1ApiRpnGroupInviteRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1707,11 +1784,12 @@ export class RpnV1API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}/invite`,
+        signal: options?.signal,
       },
     )
 
   
-  leaveRpnGroup = (request: Readonly<RpnV1ApiLeaveRpnGroupRequest>) =>
+  leaveRpnGroup = (request: Readonly<RpnV1ApiLeaveRpnGroupRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1720,11 +1798,12 @@ export class RpnV1API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}/leave`,
+        signal: options?.signal,
       },
     )
 
   
-  addRpnGroupMembers = (request: Readonly<RpnV1ApiAddRpnGroupMembersRequest>) =>
+  addRpnGroupMembers = (request: Readonly<RpnV1ApiAddRpnGroupMembersRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnGroup>(
       {
         body: JSON.stringify(
@@ -1733,12 +1812,13 @@ export class RpnV1API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}/members`,
+        signal: options?.signal,
       },
       unmarshalRpnGroup,
     )
 
   
-  deleteRpnGroupMembers = (request: Readonly<RpnV1ApiDeleteRpnGroupMembersRequest>) =>
+  deleteRpnGroupMembers = (request: Readonly<RpnV1ApiDeleteRpnGroupMembersRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnGroup>(
       {
         body: JSON.stringify(
@@ -1747,12 +1827,13 @@ export class RpnV1API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}/members`,
+        signal: options?.signal,
       },
       unmarshalRpnGroup,
     )
 
   
-  protected pageOfListRpnCapableServers = (request: Readonly<RpnV1ApiListRpnCapableServersRequest> = {}) =>
+  protected pageOfListRpnCapableServers = (request: Readonly<RpnV1ApiListRpnCapableServersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRpnCapableServersResponse>(
       {
         method: 'GET',
@@ -1763,15 +1844,16 @@ export class RpnV1API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnCapableServersResponse,
     )
   
-  listRpnCapableServers = (request: Readonly<RpnV1ApiListRpnCapableServersRequest> = {}) =>
-    enrichForPagination('servers', this.pageOfListRpnCapableServers, request)
+  listRpnCapableServers = (request: Readonly<RpnV1ApiListRpnCapableServersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('servers', this.pageOfListRpnCapableServers, request, options)
 
   
-  protected pageOfListRpnCapableSanServers = (request: Readonly<RpnV1ApiListRpnCapableSanServersRequest> = {}) =>
+  protected pageOfListRpnCapableSanServers = (request: Readonly<RpnV1ApiListRpnCapableSanServersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRpnCapableSanServersResponse>(
       {
         method: 'GET',
@@ -1782,15 +1864,16 @@ export class RpnV1API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnCapableSanServersResponse,
     )
   
-  listRpnCapableSanServers = (request: Readonly<RpnV1ApiListRpnCapableSanServersRequest> = {}) =>
-    enrichForPagination('sanServers', this.pageOfListRpnCapableSanServers, request)
+  listRpnCapableSanServers = (request: Readonly<RpnV1ApiListRpnCapableSanServersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('sanServers', this.pageOfListRpnCapableSanServers, request, options)
 
   
-  protected pageOfListRpnInvites = (request: Readonly<RpnV1ApiListRpnInvitesRequest> = {}) =>
+  protected pageOfListRpnInvites = (request: Readonly<RpnV1ApiListRpnInvitesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRpnInvitesResponse>(
       {
         method: 'GET',
@@ -1801,28 +1884,31 @@ export class RpnV1API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnInvitesResponse,
     )
   
-  listRpnInvites = (request: Readonly<RpnV1ApiListRpnInvitesRequest> = {}) =>
-    enrichForPagination('members', this.pageOfListRpnInvites, request)
+  listRpnInvites = (request: Readonly<RpnV1ApiListRpnInvitesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('members', this.pageOfListRpnInvites, request, options)
 
   
-  acceptRpnInvite = (request: Readonly<RpnV1ApiAcceptRpnInviteRequest>) =>
+  acceptRpnInvite = (request: Readonly<RpnV1ApiAcceptRpnInviteRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'POST',
         path: `/dedibox/v1/rpnv1/invites/${validatePathParam('memberId', request.memberId)}/accept`,
+        signal: options?.signal,
       },
     )
 
   
-  refuseRpnInvite = (request: Readonly<RpnV1ApiRefuseRpnInviteRequest>) =>
+  refuseRpnInvite = (request: Readonly<RpnV1ApiRefuseRpnInviteRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'POST',
         path: `/dedibox/v1/rpnv1/invites/${validatePathParam('memberId', request.memberId)}/refuse`,
+        signal: options?.signal,
       },
     )
 
@@ -1833,7 +1919,7 @@ export class RpnV1API extends ParentAPI {
  * Dedibox Phoenix RPN v2 API.
  */
 export class RpnV2API extends ParentAPI {
-  protected pageOfListRpnV2Groups = (request: Readonly<RpnV2ApiListRpnV2GroupsRequest> = {}) =>
+  protected pageOfListRpnV2Groups = (request: Readonly<RpnV2ApiListRpnV2GroupsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRpnV2GroupsResponse>(
       {
         method: 'GET',
@@ -1844,15 +1930,16 @@ export class RpnV2API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnV2GroupsResponse,
     )
   
-  listRpnV2Groups = (request: Readonly<RpnV2ApiListRpnV2GroupsRequest> = {}) =>
-    enrichForPagination('rpnGroups', this.pageOfListRpnV2Groups, request)
+  listRpnV2Groups = (request: Readonly<RpnV2ApiListRpnV2GroupsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('rpnGroups', this.pageOfListRpnV2Groups, request, options)
 
   
-  protected pageOfListRpnV2Members = (request: Readonly<RpnV2ApiListRpnV2MembersRequest>) =>
+  protected pageOfListRpnV2Members = (request: Readonly<RpnV2ApiListRpnV2MembersRequest>, options?: RequestOptions) =>
     this.client.fetch<ListRpnV2MembersResponse>(
       {
         method: 'GET',
@@ -1863,19 +1950,21 @@ export class RpnV2API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['type', request.type],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnV2MembersResponse,
     )
   
-  listRpnV2Members = (request: Readonly<RpnV2ApiListRpnV2MembersRequest>) =>
-    enrichForPagination('members', this.pageOfListRpnV2Members, request)
+  listRpnV2Members = (request: Readonly<RpnV2ApiListRpnV2MembersRequest>, options?: RequestOptions) =>
+    enrichForPagination('members', this.pageOfListRpnV2Members, request, options)
 
   
-  getRpnV2Group = (request: Readonly<RpnV2ApiGetRpnV2GroupRequest>) =>
+  getRpnV2Group = (request: Readonly<RpnV2ApiGetRpnV2GroupRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnV2Group>(
       {
         method: 'GET',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalRpnV2Group,
     )
@@ -1899,7 +1988,7 @@ export class RpnV2API extends ParentAPI {
     )
 
   
-  createRpnV2Group = (request: Readonly<RpnV2ApiCreateRpnV2GroupRequest>) =>
+  createRpnV2Group = (request: Readonly<RpnV2ApiCreateRpnV2GroupRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnV2Group>(
       {
         body: JSON.stringify(
@@ -1908,21 +1997,23 @@ export class RpnV2API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpnv2/groups`,
+        signal: options?.signal,
       },
       unmarshalRpnV2Group,
     )
 
   
-  deleteRpnV2Group = (request: Readonly<RpnV2ApiDeleteRpnV2GroupRequest>) =>
+  deleteRpnV2Group = (request: Readonly<RpnV2ApiDeleteRpnV2GroupRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  updateRpnV2GroupName = (request: Readonly<RpnV2ApiUpdateRpnV2GroupNameRequest>) =>
+  updateRpnV2GroupName = (request: Readonly<RpnV2ApiUpdateRpnV2GroupNameRequest>, options?: RequestOptions) =>
     this.client.fetch<RpnV2Group>(
       {
         body: JSON.stringify(
@@ -1931,12 +2022,13 @@ export class RpnV2API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}`,
+        signal: options?.signal,
       },
       unmarshalRpnV2Group,
     )
 
   
-  addRpnV2Members = (request: Readonly<RpnV2ApiAddRpnV2MembersRequest>) =>
+  addRpnV2Members = (request: Readonly<RpnV2ApiAddRpnV2MembersRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1945,11 +2037,12 @@ export class RpnV2API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/members`,
+        signal: options?.signal,
       },
     )
 
   
-  deleteRpnV2Members = (request: Readonly<RpnV2ApiDeleteRpnV2MembersRequest>) =>
+  deleteRpnV2Members = (request: Readonly<RpnV2ApiDeleteRpnV2MembersRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -1958,11 +2051,12 @@ export class RpnV2API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'DELETE',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/members`,
+        signal: options?.signal,
       },
     )
 
   
-  protected pageOfListRpnV2CapableResources = (request: Readonly<RpnV2ApiListRpnV2CapableResourcesRequest> = {}) =>
+  protected pageOfListRpnV2CapableResources = (request: Readonly<RpnV2ApiListRpnV2CapableResourcesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRpnV2CapableResourcesResponse>(
       {
         method: 'GET',
@@ -1973,15 +2067,16 @@ export class RpnV2API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnV2CapableResourcesResponse,
     )
   
-  listRpnV2CapableResources = (request: Readonly<RpnV2ApiListRpnV2CapableResourcesRequest> = {}) =>
-    enrichForPagination('servers', this.pageOfListRpnV2CapableResources, request)
+  listRpnV2CapableResources = (request: Readonly<RpnV2ApiListRpnV2CapableResourcesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('servers', this.pageOfListRpnV2CapableResources, request, options)
 
   
-  protected pageOfListRpnV2GroupLogs = (request: Readonly<RpnV2ApiListRpnV2GroupLogsRequest>) =>
+  protected pageOfListRpnV2GroupLogs = (request: Readonly<RpnV2ApiListRpnV2GroupLogsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListRpnV2GroupLogsResponse>(
       {
         method: 'GET',
@@ -1991,15 +2086,16 @@ export class RpnV2API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListRpnV2GroupLogsResponse,
     )
   
-  listRpnV2GroupLogs = (request: Readonly<RpnV2ApiListRpnV2GroupLogsRequest>) =>
-    enrichForPagination('logs', this.pageOfListRpnV2GroupLogs, request)
+  listRpnV2GroupLogs = (request: Readonly<RpnV2ApiListRpnV2GroupLogsRequest>, options?: RequestOptions) =>
+    enrichForPagination('logs', this.pageOfListRpnV2GroupLogs, request, options)
 
   
-  updateRpnV2VlanForMembers = (request: Readonly<RpnV2ApiUpdateRpnV2VlanForMembersRequest>) =>
+  updateRpnV2VlanForMembers = (request: Readonly<RpnV2ApiUpdateRpnV2VlanForMembersRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -2008,11 +2104,12 @@ export class RpnV2API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/vlan`,
+        signal: options?.signal,
       },
     )
 
   
-  enableRpnV2GroupCompatibility = (request: Readonly<RpnV2ApiEnableRpnV2GroupCompatibilityRequest>) =>
+  enableRpnV2GroupCompatibility = (request: Readonly<RpnV2ApiEnableRpnV2GroupCompatibilityRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: JSON.stringify(
@@ -2021,17 +2118,19 @@ export class RpnV2API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/enable-compatibility`,
+        signal: options?.signal,
       },
     )
 
   
-  disableRpnV2GroupCompatibility = (request: Readonly<RpnV2ApiDisableRpnV2GroupCompatibilityRequest>) =>
+  disableRpnV2GroupCompatibility = (request: Readonly<RpnV2ApiDisableRpnV2GroupCompatibilityRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/disable-compatibility`,
+        signal: options?.signal,
       },
     )
 

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {RUNNER_TRANSIENT_STATUSES as RUNNER_TRANSIENT_STATUSES_APPLESILICON,SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_SERVER_TRANSIENT_STATUSES_APPLESILICON,SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES as SERVER_PRIVATE_NETWORK_TRANSIENT_STATUSES_APPLESILICON,SERVER_TRANSIENT_STATUSES as SERVER_TRANSIENT_STATUSES_APPLESILICON,} from './content.gen.js'
 import {
   marshalBatchCreateServersRequest,
@@ -112,11 +112,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServerTypesRequest}
    * @returns A Promise of ListServerTypesResponse
    */
-  listServerTypes = (request: Readonly<ListServerTypesRequest> = {}) =>
+  listServerTypes = (request: Readonly<ListServerTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServerTypesResponse>(
       {
         method: 'GET',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/server-types`,
+        signal: options?.signal,
       },
       unmarshalListServerTypesResponse,
     )
@@ -128,11 +129,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerTypeRequest}
    * @returns A Promise of ServerType
    */
-  getServerType = (request: Readonly<GetServerTypeRequest>) =>
+  getServerType = (request: Readonly<GetServerTypeRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerType>(
       {
         method: 'GET',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/server-type/${validatePathParam('serverType', request.serverType)}`,
+        signal: options?.signal,
       },
       unmarshalServerType,
     )
@@ -144,7 +146,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateServerRequest}
    * @returns A Promise of Server
    */
-  createServer = (request: Readonly<CreateServerRequest>) =>
+  createServer = (request: Readonly<CreateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -153,6 +155,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -164,7 +167,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link BatchCreateServersRequest}
    * @returns A Promise of BatchCreateServersResponse
    */
-  batchCreateServers = (request: Readonly<BatchCreateServersRequest>) =>
+  batchCreateServers = (request: Readonly<BatchCreateServersRequest>, options?: RequestOptions) =>
     this.client.fetch<BatchCreateServersResponse>(
       {
         body: JSON.stringify(
@@ -173,12 +176,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/batch-create-servers`,
+        signal: options?.signal,
       },
       unmarshalBatchCreateServersResponse,
     )
 
   
-  protected pageOfListServers = (request: Readonly<ListServersRequest> = {}) =>
+  protected pageOfListServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServersResponse>(
       {
         method: 'GET',
@@ -190,6 +194,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['project_id', request.projectId],
         ),
+        signal: options?.signal,
       },
       unmarshalListServersResponse,
     )
@@ -200,11 +205,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListServersRequest}
    * @returns A Promise of ListServersResponse
    */
-  listServers = (request: Readonly<ListServersRequest> = {}) =>
-    enrichForPagination('servers', this.pageOfListServers, request)
+  listServers = (request: Readonly<ListServersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('servers', this.pageOfListServers, request, options)
 
   
-  protected pageOfListOS = (request: Readonly<ListOSRequest> = {}) =>
+  protected pageOfListOS = (request: Readonly<ListOSRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListOSResponse>(
       {
         method: 'GET',
@@ -215,6 +220,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['server_type', request.serverType],
         ),
+        signal: options?.signal,
       },
       unmarshalListOSResponse,
     )
@@ -225,8 +231,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListOSRequest}
    * @returns A Promise of ListOSResponse
    */
-  listOS = (request: Readonly<ListOSRequest> = {}) =>
-    enrichForPagination('os', this.pageOfListOS, request)
+  listOS = (request: Readonly<ListOSRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('os', this.pageOfListOS, request, options)
 
   
   /**
@@ -235,11 +241,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetOSRequest}
    * @returns A Promise of OS
    */
-  getOS = (request: Readonly<GetOSRequest>) =>
+  getOS = (request: Readonly<GetOSRequest>, options?: RequestOptions) =>
     this.client.fetch<OS>(
       {
         method: 'GET',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/os/${validatePathParam('osId', request.osId)}`,
+        signal: options?.signal,
       },
       unmarshalOS,
     )
@@ -251,11 +258,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetServerRequest}
    * @returns A Promise of Server
    */
-  getServer = (request: Readonly<GetServerRequest>) =>
+  getServer = (request: Readonly<GetServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         method: 'GET',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -285,7 +293,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateServerRequest}
    * @returns A Promise of Server
    */
-  updateServer = (request: Readonly<UpdateServerRequest>) =>
+  updateServer = (request: Readonly<UpdateServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -294,6 +302,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -304,11 +313,12 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteServerRequest}
    */
-  deleteServer = (request: Readonly<DeleteServerRequest>) =>
+  deleteServer = (request: Readonly<DeleteServerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -319,13 +329,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RebootServerRequest}
    * @returns A Promise of Server
    */
-  rebootServer = (request: Readonly<RebootServerRequest>) =>
+  rebootServer = (request: Readonly<RebootServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
@@ -337,7 +348,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link ReinstallServerRequest}
    * @returns A Promise of Server
    */
-  reinstallServer = (request: Readonly<ReinstallServerRequest>) =>
+  reinstallServer = (request: Readonly<ReinstallServerRequest>, options?: RequestOptions) =>
     this.client.fetch<Server>(
       {
         body: JSON.stringify(
@@ -346,12 +357,13 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reinstall`,
+        signal: options?.signal,
       },
       unmarshalServer,
     )
 
   
-  startConnectivityDiagnostic = (request: Readonly<StartConnectivityDiagnosticRequest>) =>
+  startConnectivityDiagnostic = (request: Readonly<StartConnectivityDiagnosticRequest>, options?: RequestOptions) =>
     this.client.fetch<StartConnectivityDiagnosticResponse>(
       {
         body: JSON.stringify(
@@ -360,16 +372,18 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/connectivity-diagnostics`,
+        signal: options?.signal,
       },
       unmarshalStartConnectivityDiagnosticResponse,
     )
 
   
-  getConnectivityDiagnostic = (request: Readonly<GetConnectivityDiagnosticRequest>) =>
+  getConnectivityDiagnostic = (request: Readonly<GetConnectivityDiagnosticRequest>, options?: RequestOptions) =>
     this.client.fetch<ConnectivityDiagnostic>(
       {
         method: 'GET',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/connectivity-diagnostics/${validatePathParam('diagnosticId', request.diagnosticId)}`,
+        signal: options?.signal,
       },
       unmarshalConnectivityDiagnostic,
     )
@@ -381,7 +395,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateRunnerRequest}
    * @returns A Promise of Runner
    */
-  createRunner = (request: Readonly<CreateRunnerRequest>) =>
+  createRunner = (request: Readonly<CreateRunnerRequest>, options?: RequestOptions) =>
     this.client.fetch<Runner>(
       {
         body: JSON.stringify(
@@ -390,6 +404,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners`,
+        signal: options?.signal,
       },
       unmarshalRunner,
     )
@@ -401,11 +416,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetRunnerRequest}
    * @returns A Promise of Runner
    */
-  getRunner = (request: Readonly<GetRunnerRequest>) =>
+  getRunner = (request: Readonly<GetRunnerRequest>, options?: RequestOptions) =>
     this.client.fetch<Runner>(
       {
         method: 'GET',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners/${validatePathParam('runnerId', request.runnerId)}`,
+        signal: options?.signal,
       },
       unmarshalRunner,
     )
@@ -429,7 +445,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListRunners = (request: Readonly<ListRunnersRequest> = {}) =>
+  protected pageOfListRunners = (request: Readonly<ListRunnersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListRunnersResponse>(
       {
         method: 'GET',
@@ -441,6 +457,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['server_id', request.serverId],
         ),
+        signal: options?.signal,
       },
       unmarshalListRunnersResponse,
     )
@@ -451,8 +468,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListRunnersRequest}
    * @returns A Promise of ListRunnersResponse
    */
-  listRunners = (request: Readonly<ListRunnersRequest> = {}) =>
-    enrichForPagination('runners', this.pageOfListRunners, request)
+  listRunners = (request: Readonly<ListRunnersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('runners', this.pageOfListRunners, request, options)
 
   
   /**
@@ -461,7 +478,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateRunnerRequest}
    * @returns A Promise of Runner
    */
-  updateRunner = (request: Readonly<UpdateRunnerRequest>) =>
+  updateRunner = (request: Readonly<UpdateRunnerRequest>, options?: RequestOptions) =>
     this.client.fetch<Runner>(
       {
         body: JSON.stringify(
@@ -470,6 +487,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners/${validatePathParam('runnerId', request.runnerId)}`,
+        signal: options?.signal,
       },
       unmarshalRunner,
     )
@@ -480,26 +498,28 @@ export class API extends ParentAPI {
    *
    * @param request - The request {@link DeleteRunnerRequest}
    */
-  deleteRunner = (request: Readonly<DeleteRunnerRequest>) =>
+  deleteRunner = (request: Readonly<DeleteRunnerRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners/${validatePathParam('runnerId', request.runnerId)}`,
+        signal: options?.signal,
       },
     )
 
   
-  getUserConfiguration = (request: Readonly<GetUserConfigurationRequest> = {}) =>
+  getUserConfiguration = (request: Readonly<GetUserConfigurationRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<UserConfiguration>(
       {
         method: 'GET',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/user-configuration`,
+        signal: options?.signal,
       },
       unmarshalUserConfiguration,
     )
 
   
-  updateRunnerConfigurationStatus = (request: Readonly<UpdateRunnerConfigurationStatusRequest> = {}) =>
+  updateRunnerConfigurationStatus = (request: Readonly<UpdateRunnerConfigurationStatusRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<UpdateRunnerConfigurationStatusResponse>(
       {
         body: JSON.stringify(
@@ -508,6 +528,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runner-configuration-status`,
+        signal: options?.signal,
       },
       unmarshalUpdateRunnerConfigurationStatusResponse,
     )
@@ -531,11 +552,12 @@ export class PrivateNetworkAPI extends ParentAPI {
       ],
     })
   
-  getServerPrivateNetwork = (request: Readonly<PrivateNetworkApiGetServerPrivateNetworkRequest>) =>
+  getServerPrivateNetwork = (request: Readonly<PrivateNetworkApiGetServerPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
         method: 'GET',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        signal: options?.signal,
       },
       unmarshalServerPrivateNetwork,
     )
@@ -565,7 +587,7 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiAddServerPrivateNetworkRequest}
    * @returns A Promise of ServerPrivateNetwork
    */
-  addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>) =>
+  addServerPrivateNetwork = (request: Readonly<PrivateNetworkApiAddServerPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<ServerPrivateNetwork>(
       {
         body: JSON.stringify(
@@ -574,6 +596,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalServerPrivateNetwork,
     )
@@ -585,7 +608,7 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiSetServerPrivateNetworksRequest}
    * @returns A Promise of SetServerPrivateNetworksResponse
    */
-  setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>) =>
+  setServerPrivateNetworks = (request: Readonly<PrivateNetworkApiSetServerPrivateNetworksRequest>, options?: RequestOptions) =>
     this.client.fetch<SetServerPrivateNetworksResponse>(
       {
         body: JSON.stringify(
@@ -594,12 +617,13 @@ export class PrivateNetworkAPI extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
+        signal: options?.signal,
       },
       unmarshalSetServerPrivateNetworksResponse,
     )
 
   
-  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
+  protected pageOfListServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListServerPrivateNetworksResponse>(
       {
         method: 'GET',
@@ -614,6 +638,7 @@ export class PrivateNetworkAPI extends ParentAPI {
           ['project_id', request.projectId],
           ['server_id', request.serverId],
         ),
+        signal: options?.signal,
       },
       unmarshalListServerPrivateNetworksResponse,
     )
@@ -624,8 +649,8 @@ export class PrivateNetworkAPI extends ParentAPI {
    * @param request - The request {@link PrivateNetworkApiListServerPrivateNetworksRequest}
    * @returns A Promise of ListServerPrivateNetworksResponse
    */
-  listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}) =>
-    enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request)
+  listServerPrivateNetworks = (request: Readonly<PrivateNetworkApiListServerPrivateNetworksRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('serverPrivateNetworks', this.pageOfListServerPrivateNetworks, request, options)
 
   
   /**
@@ -633,11 +658,12 @@ export class PrivateNetworkAPI extends ParentAPI {
    *
    * @param request - The request {@link PrivateNetworkApiDeleteServerPrivateNetworkRequest}
    */
-  deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>) =>
+  deleteServerPrivateNetwork = (request: Readonly<PrivateNetworkApiDeleteServerPrivateNetworkRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
+        signal: options?.signal,
       },
     )
 

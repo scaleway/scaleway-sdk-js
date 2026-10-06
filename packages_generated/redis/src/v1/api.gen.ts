@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {CLUSTER_TRANSIENT_STATUSES as CLUSTER_TRANSIENT_STATUSES_REDIS,} from './content.gen.js'
 import {
   unmarshalACLRule,
@@ -106,7 +106,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link CreateClusterRequest}
    * @returns A Promise of Cluster
    */
-  createCluster = (request: Readonly<CreateClusterRequest>) =>
+  createCluster = (request: Readonly<CreateClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -115,6 +115,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -126,7 +127,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateClusterRequest}
    * @returns A Promise of Cluster
    */
-  updateCluster = (request: Readonly<UpdateClusterRequest>) =>
+  updateCluster = (request: Readonly<UpdateClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -135,6 +136,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -146,11 +148,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetClusterRequest}
    * @returns A Promise of Cluster
    */
-  getCluster = (request: Readonly<GetClusterRequest>) =>
+  getCluster = (request: Readonly<GetClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'GET',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -174,7 +177,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListClusters = (request: Readonly<ListClustersRequest> = {}) =>
+  protected pageOfListClusters = (request: Readonly<ListClustersRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListClustersResponse>(
       {
         method: 'GET',
@@ -189,6 +192,7 @@ export class API extends ParentAPI {
           ['tags', request.tags],
           ['version', request.version],
         ),
+        signal: options?.signal,
       },
       unmarshalListClustersResponse,
     )
@@ -199,8 +203,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListClustersRequest}
    * @returns A Promise of ListClustersResponse
    */
-  listClusters = (request: Readonly<ListClustersRequest> = {}) =>
-    enrichForPagination('clusters', this.pageOfListClusters, request)
+  listClusters = (request: Readonly<ListClustersRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('clusters', this.pageOfListClusters, request, options)
 
   
   /**
@@ -209,7 +213,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link MigrateClusterRequest}
    * @returns A Promise of Cluster
    */
-  migrateCluster = (request: Readonly<MigrateClusterRequest>) =>
+  migrateCluster = (request: Readonly<MigrateClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: JSON.stringify(
@@ -218,6 +222,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -229,11 +234,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteClusterRequest}
    * @returns A Promise of Cluster
    */
-  deleteCluster = (request: Readonly<DeleteClusterRequest>) =>
+  deleteCluster = (request: Readonly<DeleteClusterRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -245,7 +251,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetClusterMetricsRequest}
    * @returns A Promise of ClusterMetricsResponse
    */
-  getClusterMetrics = (request: Readonly<GetClusterMetricsRequest>) =>
+  getClusterMetrics = (request: Readonly<GetClusterMetricsRequest>, options?: RequestOptions) =>
     this.client.fetch<ClusterMetricsResponse>(
       {
         method: 'GET',
@@ -255,12 +261,13 @@ export class API extends ParentAPI {
           ['metric_name', request.metricName],
           ['start_at', request.startAt],
         ),
+        signal: options?.signal,
       },
       unmarshalClusterMetricsResponse,
     )
 
   
-  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest>) =>
+  protected pageOfListNodeTypes = (request: Readonly<ListNodeTypesRequest>, options?: RequestOptions) =>
     this.client.fetch<ListNodeTypesResponse>(
       {
         method: 'GET',
@@ -270,6 +277,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListNodeTypesResponse,
     )
@@ -280,11 +288,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListNodeTypesRequest}
    * @returns A Promise of ListNodeTypesResponse
    */
-  listNodeTypes = (request: Readonly<ListNodeTypesRequest>) =>
-    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request)
+  listNodeTypes = (request: Readonly<ListNodeTypesRequest>, options?: RequestOptions) =>
+    enrichForPagination('nodeTypes', this.pageOfListNodeTypes, request, options)
 
   
-  protected pageOfListClusterVersions = (request: Readonly<ListClusterVersionsRequest>) =>
+  protected pageOfListClusterVersions = (request: Readonly<ListClusterVersionsRequest>, options?: RequestOptions) =>
     this.client.fetch<ListClusterVersionsResponse>(
       {
         method: 'GET',
@@ -297,6 +305,7 @@ export class API extends ParentAPI {
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
           ['version', request.version],
         ),
+        signal: options?.signal,
       },
       unmarshalListClusterVersionsResponse,
     )
@@ -307,8 +316,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListClusterVersionsRequest}
    * @returns A Promise of ListClusterVersionsResponse
    */
-  listClusterVersions = (request: Readonly<ListClusterVersionsRequest>) =>
-    enrichForPagination('versions', this.pageOfListClusterVersions, request)
+  listClusterVersions = (request: Readonly<ListClusterVersionsRequest>, options?: RequestOptions) =>
+    enrichForPagination('versions', this.pageOfListClusterVersions, request, options)
 
   
   /**
@@ -317,7 +326,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetClusterCertificateRequest}
    * @returns A Promise of Blob
    */
-  getClusterCertificate = (request: Readonly<GetClusterCertificateRequest>) =>
+  getClusterCertificate = (request: Readonly<GetClusterCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Blob>(
       {
         method: 'GET',
@@ -326,6 +335,7 @@ export class API extends ParentAPI {
           ['dl', 1],
         ),
         responseType: 'blob',
+        signal: options?.signal,
       },
     )
 
@@ -336,13 +346,14 @@ export class API extends ParentAPI {
    * @param request - The request {@link RenewClusterCertificateRequest}
    * @returns A Promise of Cluster
    */
-  renewClusterCertificate = (request: Readonly<RenewClusterCertificateRequest>) =>
+  renewClusterCertificate = (request: Readonly<RenewClusterCertificateRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         body: '{}',
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/renew-certificate`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -354,7 +365,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddClusterSettingsRequest}
    * @returns A Promise of ClusterSettingsResponse
    */
-  addClusterSettings = (request: Readonly<AddClusterSettingsRequest>) =>
+  addClusterSettings = (request: Readonly<AddClusterSettingsRequest>, options?: RequestOptions) =>
     this.client.fetch<ClusterSettingsResponse>(
       {
         body: JSON.stringify(
@@ -363,6 +374,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/settings`,
+        signal: options?.signal,
       },
       unmarshalClusterSettingsResponse,
     )
@@ -374,11 +386,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteClusterSettingRequest}
    * @returns A Promise of Cluster
    */
-  deleteClusterSetting = (request: Readonly<DeleteClusterSettingRequest>) =>
+  deleteClusterSetting = (request: Readonly<DeleteClusterSettingRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/settings/${validatePathParam('settingName', request.settingName)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -390,7 +403,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetClusterSettingsRequest}
    * @returns A Promise of ClusterSettingsResponse
    */
-  setClusterSettings = (request: Readonly<SetClusterSettingsRequest>) =>
+  setClusterSettings = (request: Readonly<SetClusterSettingsRequest>, options?: RequestOptions) =>
     this.client.fetch<ClusterSettingsResponse>(
       {
         body: JSON.stringify(
@@ -399,6 +412,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/settings`,
+        signal: options?.signal,
       },
       unmarshalClusterSettingsResponse,
     )
@@ -410,7 +424,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetAclRulesRequest}
    * @returns A Promise of SetAclRulesResponse
    */
-  setAclRules = (request: Readonly<SetAclRulesRequest>) =>
+  setAclRules = (request: Readonly<SetAclRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<SetAclRulesResponse>(
       {
         body: JSON.stringify(
@@ -419,6 +433,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalSetAclRulesResponse,
     )
@@ -430,7 +445,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddAclRulesRequest}
    * @returns A Promise of AddAclRulesResponse
    */
-  addAclRules = (request: Readonly<AddAclRulesRequest>) =>
+  addAclRules = (request: Readonly<AddAclRulesRequest>, options?: RequestOptions) =>
     this.client.fetch<AddAclRulesResponse>(
       {
         body: JSON.stringify(
@@ -439,6 +454,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
+        signal: options?.signal,
       },
       unmarshalAddAclRulesResponse,
     )
@@ -450,11 +466,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteAclRuleRequest}
    * @returns A Promise of Cluster
    */
-  deleteAclRule = (request: Readonly<DeleteAclRuleRequest>) =>
+  deleteAclRule = (request: Readonly<DeleteAclRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -466,11 +483,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetAclRuleRequest}
    * @returns A Promise of ACLRule
    */
-  getAclRule = (request: Readonly<GetAclRuleRequest>) =>
+  getAclRule = (request: Readonly<GetAclRuleRequest>, options?: RequestOptions) =>
     this.client.fetch<ACLRule>(
       {
         method: 'GET',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
+        signal: options?.signal,
       },
       unmarshalACLRule,
     )
@@ -482,7 +500,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link SetEndpointsRequest}
    * @returns A Promise of SetEndpointsResponse
    */
-  setEndpoints = (request: Readonly<SetEndpointsRequest>) =>
+  setEndpoints = (request: Readonly<SetEndpointsRequest>, options?: RequestOptions) =>
     this.client.fetch<SetEndpointsResponse>(
       {
         body: JSON.stringify(
@@ -491,6 +509,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PUT',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/endpoints`,
+        signal: options?.signal,
       },
       unmarshalSetEndpointsResponse,
     )
@@ -502,7 +521,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link AddEndpointsRequest}
    * @returns A Promise of AddEndpointsResponse
    */
-  addEndpoints = (request: Readonly<AddEndpointsRequest>) =>
+  addEndpoints = (request: Readonly<AddEndpointsRequest>, options?: RequestOptions) =>
     this.client.fetch<AddEndpointsResponse>(
       {
         body: JSON.stringify(
@@ -511,6 +530,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/endpoints`,
+        signal: options?.signal,
       },
       unmarshalAddEndpointsResponse,
     )
@@ -522,11 +542,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link DeleteEndpointRequest}
    * @returns A Promise of Cluster
    */
-  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>) =>
+  deleteEndpoint = (request: Readonly<DeleteEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Cluster>(
       {
         method: 'DELETE',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
       unmarshalCluster,
     )
@@ -538,11 +559,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  getEndpoint = (request: Readonly<GetEndpointRequest>) =>
+  getEndpoint = (request: Readonly<GetEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         method: 'GET',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )
@@ -554,7 +576,7 @@ export class API extends ParentAPI {
    * @param request - The request {@link UpdateEndpointRequest}
    * @returns A Promise of Endpoint
    */
-  updateEndpoint = (request: Readonly<UpdateEndpointRequest>) =>
+  updateEndpoint = (request: Readonly<UpdateEndpointRequest>, options?: RequestOptions) =>
     this.client.fetch<Endpoint>(
       {
         body: JSON.stringify(
@@ -563,6 +585,7 @@ export class API extends ParentAPI {
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
+        signal: options?.signal,
       },
       unmarshalEndpoint,
     )

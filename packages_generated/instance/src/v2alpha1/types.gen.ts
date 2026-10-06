@@ -159,6 +159,7 @@ export type ServerTypeAvailability =
   | 'available'
   | 'low_stock'
   | 'out_of_stock'
+  | 'unavailable'
 
 export type ServerVolumeVolumeType =
   | 'unknown_volume_type'
@@ -362,6 +363,11 @@ export interface ServerTypeLimits {
    * Maximum number of volumes.
    */
   volumeCount: number
+}
+
+
+export interface ServerTypeSpotInfo {
+  availability: ServerTypeAvailability
 }
 
 
@@ -819,6 +825,10 @@ export interface ServerType {
    * Whether the server type has reached end of service.
    */
   endOfService: boolean
+  /**
+   * Availability status of the server type as a spot instance.
+   */
+  spotInfo?: ServerTypeSpotInfo
 }
 
 
@@ -1098,6 +1108,14 @@ export interface ServerPublicNetworkInterface {
 export interface ServerRDPPassword {
   encryptedPassword: string
   rdpSshKeyId: string
+}
+
+
+export interface ServerRuntimeInfo {
+  /**
+   * True if the Instance is running as Spot.
+   */
+  spot: boolean
 }
 
 
@@ -2630,6 +2648,10 @@ export interface Server {
    * Zone in which the server is located.
    */
   zone: ScwZone
+  /**
+   * Runtime information of this server, only available only when it is running.
+   */
+  runtimeInfo?: ServerRuntimeInfo
 }
 
 
@@ -2744,6 +2766,18 @@ export type StartServerRequest = {
   zone?: ScwZone
   /**
    * ID of the server to start.
+   */
+  serverId: string
+}
+
+
+export type StartSpotServerRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * ID of the server to start as spot instance.
    */
   serverId: string
 }

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE,} from './content.gen.js'
 import {
   marshalCreateFileSystemRequest,
@@ -55,7 +55,7 @@ export class API extends ParentAPI {
       ],
     })
   
-  protected pageOfListFileSystemTypes = (request: Readonly<ListFileSystemTypesRequest> = {}) =>
+  protected pageOfListFileSystemTypes = (request: Readonly<ListFileSystemTypesRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListFileSystemTypesResponse>(
       {
         method: 'GET',
@@ -64,6 +64,7 @@ export class API extends ParentAPI {
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
         ),
+        signal: options?.signal,
       },
       unmarshalListFileSystemTypesResponse,
     )
@@ -74,8 +75,8 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListFileSystemTypesRequest}
    * @returns A Promise of ListFileSystemTypesResponse
    */
-  listFileSystemTypes = (request: Readonly<ListFileSystemTypesRequest> = {}) =>
-    enrichForPagination('filesystemTypes', this.pageOfListFileSystemTypes, request)
+  listFileSystemTypes = (request: Readonly<ListFileSystemTypesRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('filesystemTypes', this.pageOfListFileSystemTypes, request, options)
 
   
   /**
@@ -84,11 +85,12 @@ export class API extends ParentAPI {
    * @param request - The request {@link GetFileSystemRequest}
    * @returns A Promise of FileSystem
    */
-  getFileSystem = (request: Readonly<GetFileSystemRequest>) =>
+  getFileSystem = (request: Readonly<GetFileSystemRequest>, options?: RequestOptions) =>
     this.client.fetch<FileSystem>(
       {
         method: 'GET',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems/${validatePathParam('filesystemId', request.filesystemId)}`,
+        signal: options?.signal,
       },
       unmarshalFileSystem,
     )
@@ -112,7 +114,7 @@ export class API extends ParentAPI {
     )
 
   
-  protected pageOfListFileSystems = (request: Readonly<ListFileSystemsRequest> = {}) =>
+  protected pageOfListFileSystems = (request: Readonly<ListFileSystemsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListFileSystemsResponse>(
       {
         method: 'GET',
@@ -128,6 +130,7 @@ export class API extends ParentAPI {
           ['project_id', request.projectId],
           ['tags', request.tags],
         ),
+        signal: options?.signal,
       },
       unmarshalListFileSystemsResponse,
     )
@@ -138,11 +141,11 @@ export class API extends ParentAPI {
    * @param request - The request {@link ListFileSystemsRequest}
    * @returns A Promise of ListFileSystemsResponse
    */
-  listFileSystems = (request: Readonly<ListFileSystemsRequest> = {}) =>
-    enrichForPagination('filesystems', this.pageOfListFileSystems, request)
+  listFileSystems = (request: Readonly<ListFileSystemsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('filesystems', this.pageOfListFileSystems, request, options)
 
   
-  protected pageOfListAttachments = (request: Readonly<ListAttachmentsRequest> = {}) =>
+  protected pageOfListAttachments = (request: Readonly<ListAttachmentsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListAttachmentsResponse>(
       {
         method: 'GET',
@@ -155,6 +158,7 @@ export class API extends ParentAPI {
           ['resource_type', request.resourceType],
           ['zone', request.zone],
         ),
+        signal: options?.signal,
       },
       unmarshalListAttachmentsResponse,
     )
@@ -166,8 +170,8 @@ By default, the attachments listed are ordered by creation date in ascending ord
    * @param request - The request {@link ListAttachmentsRequest}
    * @returns A Promise of ListAttachmentsResponse
    */
-  listAttachments = (request: Readonly<ListAttachmentsRequest> = {}) =>
-    enrichForPagination('attachments', this.pageOfListAttachments, request)
+  listAttachments = (request: Readonly<ListAttachmentsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('attachments', this.pageOfListAttachments, request, options)
 
   
   /**
@@ -176,7 +180,7 @@ By default, the attachments listed are ordered by creation date in ascending ord
    * @param request - The request {@link CreateFileSystemRequest}
    * @returns A Promise of FileSystem
    */
-  createFileSystem = (request: Readonly<CreateFileSystemRequest>) =>
+  createFileSystem = (request: Readonly<CreateFileSystemRequest>, options?: RequestOptions) =>
     this.client.fetch<FileSystem>(
       {
         body: JSON.stringify(
@@ -185,6 +189,7 @@ By default, the attachments listed are ordered by creation date in ascending ord
         headers: jsonContentHeaders,
         method: 'POST',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems`,
+        signal: options?.signal,
       },
       unmarshalFileSystem,
     )
@@ -195,11 +200,12 @@ By default, the attachments listed are ordered by creation date in ascending ord
    *
    * @param request - The request {@link DeleteFileSystemRequest}
    */
-  deleteFileSystem = (request: Readonly<DeleteFileSystemRequest>) =>
+  deleteFileSystem = (request: Readonly<DeleteFileSystemRequest>, options?: RequestOptions) =>
     this.client.fetch<void>(
       {
         method: 'DELETE',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems/${validatePathParam('filesystemId', request.filesystemId)}`,
+        signal: options?.signal,
       },
     )
 
@@ -210,7 +216,7 @@ By default, the attachments listed are ordered by creation date in ascending ord
    * @param request - The request {@link UpdateFileSystemRequest}
    * @returns A Promise of FileSystem
    */
-  updateFileSystem = (request: Readonly<UpdateFileSystemRequest>) =>
+  updateFileSystem = (request: Readonly<UpdateFileSystemRequest>, options?: RequestOptions) =>
     this.client.fetch<FileSystem>(
       {
         body: JSON.stringify(
@@ -219,6 +225,7 @@ By default, the attachments listed are ordered by creation date in ascending ord
         headers: jsonContentHeaders,
         method: 'PATCH',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems/${validatePathParam('filesystemId', request.filesystemId)}`,
+        signal: options?.signal,
       },
       unmarshalFileSystem,
     )

@@ -10,7 +10,7 @@ import {
   waitForResource,
   toApiLocality,
 } from '@scaleway/sdk-client'
-import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality,} from '@scaleway/sdk-client'
+import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {
   unmarshalListPublicCatalogProductsResponse,
 } from './marshalling.gen.js'
@@ -23,7 +23,7 @@ import type {
  * Product Catalog API.
  */
 export class PublicCatalogAPI extends ParentAPI {
-  protected pageOfListPublicCatalogProducts = (request: Readonly<PublicCatalogApiListPublicCatalogProductsRequest> = {}) =>
+  protected pageOfListPublicCatalogProducts = (request: Readonly<PublicCatalogApiListPublicCatalogProductsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListPublicCatalogProductsResponse>(
       {
         method: 'GET',
@@ -49,6 +49,7 @@ export class PublicCatalogAPI extends ParentAPI {
             },
           ])),
         ),
+        signal: options?.signal,
       },
       unmarshalListPublicCatalogProductsResponse,
     )
@@ -59,8 +60,8 @@ export class PublicCatalogAPI extends ParentAPI {
    * @param request - The request {@link PublicCatalogApiListPublicCatalogProductsRequest}
    * @returns A Promise of ListPublicCatalogProductsResponse
    */
-  listPublicCatalogProducts = (request: Readonly<PublicCatalogApiListPublicCatalogProductsRequest> = {}) =>
-    enrichForPagination('products', this.pageOfListPublicCatalogProducts, request)
+  listPublicCatalogProducts = (request: Readonly<PublicCatalogApiListPublicCatalogProductsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('products', this.pageOfListPublicCatalogProducts, request, options)
 
   
 }

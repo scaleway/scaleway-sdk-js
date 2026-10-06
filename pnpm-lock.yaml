@@ -175,7 +175,7 @@ overrides:
   vite: 8.3.0
   vitest: 4.1.11
   '@types/react': 19.3.0
-  '@types/node': 26.6.2
+  '@types/node': 26.6.3
 
 importers:
 
@@ -190,15 +190,15 @@ importers:
       '@repo/generate-packages':
         specifier: workspace:*
         version: link:tools/generate-packages
-      '@repo/pnpm-auto-release':
-        specifier: workspace:*
-        version: link:tools/pnpm-auto-release
       '@scaleway/generate-react-sdk':
         specifier: workspace:*
         version: link:tools/generate-react-sdk
       '@scaleway/oxlint-config':
         specifier: 1.1.4
         version: 1.1.4(oxlint@1.83.0(oxlint-tsgolint@7.0.2002))
+      '@scaleway/pnpm-auto-release':
+        specifier: 0.0.1
+        version: 0.0.1
       '@scaleway/sync-peer-deps':
         specifier: 1.1.0
         version: 1.1.0
@@ -243,7 +243,7 @@ importers:
         version: 0.2.17
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.0(typescript@7.0.2)
+        version: 0.23.0(publint@0.3.24)(typescript@7.0.2)
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -260,8 +260,8 @@ importers:
         specifier: workspace:^
         version: link:../../tools/configs
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
 
   packages/configuration-loader:
     devDependencies:
@@ -269,8 +269,8 @@ importers:
         specifier: workspace:^
         version: link:../../tools/configs
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
 
   packages/sdk:
     dependencies:
@@ -1606,11 +1606,11 @@ importers:
   tools/configs:
     devDependencies:
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.0(typescript@7.0.2)
+        version: 0.23.0(publint@0.3.24)(typescript@7.0.2)
 
   tools/generate-packages:
     devDependencies:
@@ -1621,32 +1621,23 @@ importers:
         specifier: 1.1.6
         version: 1.1.6
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.0(typescript@7.0.2)
+        version: 0.23.0(publint@0.3.24)(typescript@7.0.2)
 
   tools/generate-react-queries:
     devDependencies:
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
 
   tools/generate-react-sdk:
     devDependencies:
       '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
-
-  tools/pnpm-auto-release:
-    devDependencies:
-      '@repo/configs':
-        specifier: workspace:*
-        version: link:../configs
-      '@types/node':
-        specifier: 26.6.2
-        version: 26.6.2
+        specifier: 26.6.3
+        version: 26.6.3
 
 packages:
 
@@ -2293,6 +2284,10 @@ packages:
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
+  '@publint/pack@0.1.7':
+    resolution: {integrity: sha512-4EDEmvxWtgsCnnVeBvtFIFZtUhPPt1+bA9JrSwU4Sa//6oKtzCSlGGXYJr44OD9aGISymbieJ4mCKHUygUDU+g==}
+    engines: {node: '>=18'}
+
   '@quansync/fs@1.1.0':
     resolution: {integrity: sha512-qAPG/t3HqML1TlN7sY/pTbEjzFVAKsMjNNMGheyDosro+kT4iw2KCUoHcVdmliwWjorm4elZbgNQyU2eD97eDg==}
 
@@ -2400,6 +2395,11 @@ packages:
     peerDependencies:
       oxlint: '>=1.80.0'
 
+  '@scaleway/pnpm-auto-release@0.0.1':
+    resolution: {integrity: sha512-4O7W9Ig5wAMiEktIZG7PQrQOwhBzc1uPgDfhAqOxqS2OYTqgN7u3TsL4t61x+SUygqNsx+0HgPSBRnppKut1Zw==}
+    engines: {node: 24.x || 25.x || 26.x, pnpm: '>=12.6'}
+    hasBin: true
+
   '@scaleway/random-name@6.0.2':
     resolution: {integrity: sha512-fhR2aCzxoZlOZcCM42srbALdpdqMy79LwOK5mVf4sGG1uknn095mr5PQ/0/zwfk/FX2KycZwbKJzr4zP6CG3Zg==}
     engines: {node: '>=24.x'}
@@ -2430,8 +2430,8 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
-  '@types/node@26.6.2':
-    resolution: {integrity: sha512-X1P21scMv4zGKLYqjdGjaKa7COa0RKVYYZZN/NfvLQ1JegxFhdhpZG/Lyn8AXx6CDUavKAd11v6BvfpkDByK8g==}
+  '@types/node@26.6.3':
+    resolution: {integrity: sha512-dsqMQQoeTLqu9wynDD00q573mNzso3IdQOAfHRJqLCcmCFPoGo9A1bDpUcv/9tnKpErQWv9uKeGfl37EIS02Yg==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -3164,6 +3164,10 @@ packages:
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
+  mri@1.2.0:
+    resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
+    engines: {node: '>=4'}
+
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
     engines: {node: '>=10'}
@@ -3256,6 +3260,9 @@ packages:
     resolution: {integrity: sha512-ua1L4OgXSBdsu1FPb7F3tYH0F48a6kxvod4pLUlGY9COeJAJQNX/sNH2IiEmsxw7lqYiAwrdHMjz1FctOsyDQg==}
     engines: {node: '>=18'}
 
+  package-manager-detector@1.8.0:
+    resolution: {integrity: sha512-yQA4H19AmPEoMUeavPMDIe1higySl/gH/yaQrkT/s07Qp+7pp2hYz30N3z2l5BkjVkF9Ow6o0wjJamm2y7Sn0A==}
+
   parse-github-url@1.0.3:
     resolution: {integrity: sha512-tfalY5/4SqGaV/GIGzWyHnFjlpTPTNpENR9Ea2lLldSJ8EWXMsvacWucqY3m3I4YPtas15IxTLQVQ5NSYXPrww==}
     engines: {node: '>= 0.10'}
@@ -3303,6 +3310,11 @@ packages:
 
   proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
+
+  publint@0.3.24:
+    resolution: {integrity: sha512-9zS56KrKBoqi5Qt8h92uMP8TTM9AYZSgnmCo4u2priMqkOZvQnTsziZ2p5LJ2ywbYkAjoCDp2jda9u4cgFefIw==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   pump@3.0.4:
     resolution: {integrity: sha512-VS7sjc6KR7e1ukRFhQSY5LM2uBWAUPiOPa/A3mkKmiMwSmRFUITt0xuj+/lesgnCv+dPIEYlkzrcyXgquIHMcA==}
@@ -3386,6 +3398,10 @@ packages:
 
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
+
+  sade@1.8.1:
+    resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
+    engines: {node: '>=6'}
 
   saxes@6.0.0:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
@@ -3671,7 +3687,7 @@ packages:
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@opentelemetry/api': ^1.9.0
-      '@types/node': 26.6.2
+      '@types/node': 26.6.3
       '@vitest/browser-playwright': 4.1.11
       '@vitest/browser-preview': 4.1.11
       '@vitest/browser-webdriverio': 4.1.11
@@ -4237,6 +4253,11 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
+  '@publint/pack@0.1.7':
+    dependencies:
+      tinyexec: 1.3.1
+    optional: true
+
   '@quansync/fs@1.1.0':
     dependencies:
       quansync: 1.0.0
@@ -4292,6 +4313,8 @@ snapshots:
     dependencies:
       oxlint: 1.83.0(oxlint-tsgolint@7.0.2002)
 
+  '@scaleway/pnpm-auto-release@0.0.1': {}
+
   '@scaleway/random-name@6.0.2': {}
 
   '@scaleway/sync-peer-deps@1.1.0':
@@ -4316,7 +4339,7 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
-  '@types/node@26.6.2':
+  '@types/node@26.6.3':
     dependencies:
       undici-types: 8.9.0
 
@@ -4937,6 +4960,9 @@ snapshots:
 
   minimist@1.2.8: {}
 
+  mri@1.2.0:
+    optional: true
+
   mrmime@2.0.1: {}
 
   ms@2.1.3:
@@ -5042,6 +5068,9 @@ snapshots:
       registry-url: 6.0.1
       semver: 7.7.2
 
+  package-manager-detector@1.8.0:
+    optional: true
+
   parse-github-url@1.0.3: {}
 
   parse-json@8.3.0:
@@ -5077,6 +5106,14 @@ snapshots:
       source-map-js: 1.2.1
 
   proto-list@1.2.4: {}
+
+  publint@0.3.24:
+    dependencies:
+      '@publint/pack': 0.1.7
+      package-manager-detector: 1.8.0
+      picocolors: 1.1.1
+      sade: 1.8.1
+    optional: true
 
   pump@3.0.4:
     dependencies:
@@ -5168,6 +5205,11 @@ snapshots:
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
+
+  sade@1.8.1:
+    dependencies:
+      mri: 1.2.0
+    optional: true
 
   saxes@6.0.0:
     dependencies:
@@ -5291,7 +5333,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  tsdown@0.23.0(typescript@7.0.2):
+  tsdown@0.23.0(publint@0.3.24)(typescript@7.0.2):
     dependencies:
       cac: 7.0.0
       defu: 6.1.7
@@ -5308,6 +5350,7 @@ snapshots:
       unconfig-core: 7.5.0
       verkit: 0.4.1
     optionalDependencies:
+      publint: 0.3.24
       typescript: 7.0.2
     transitivePeerDependencies:
       - '@typescript/native-preview'
