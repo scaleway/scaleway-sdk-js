@@ -12,6 +12,7 @@ export default defineConfig({
         'dist',
         '**/examples/**',
         '**/packages/clients/src/api/*',
+        '**/vendor/**',
         '**/*.d.ts',
       ],
     },
