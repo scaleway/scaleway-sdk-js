@@ -53,7 +53,9 @@ export const unmarshalCron = (data: unknown): Cron => {
     functionId: data.function_id,
     id: data.id,
     name: data.name,
+    region: data.region,
     schedule: data.schedule,
+    srn: data.srn,
     status: data.status,
   } as Cron
 }
@@ -70,6 +72,8 @@ export const unmarshalDomain = (data: unknown): Domain => {
     functionId: data.function_id,
     hostname: data.hostname,
     id: data.id,
+    region: data.region,
+    srn: data.srn,
     status: data.status,
     url: data.url,
   } as Domain
@@ -119,6 +123,7 @@ export const unmarshalFunction = (data: unknown): Function => {
     runtimeMessage: data.runtime_message,
     sandbox: data.sandbox,
     secretEnvironmentVariables: unmarshalArrayOfObject(data.secret_environment_variables, unmarshalSecretHashedValue),
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     timeout: data.timeout,
@@ -146,6 +151,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     registryEndpoint: data.registry_endpoint,
     registryNamespaceId: data.registry_namespace_id,
     secretEnvironmentVariables: unmarshalArrayOfObject(data.secret_environment_variables, unmarshalSecretHashedValue),
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -232,9 +238,11 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
     id: data.id,
     inputType: data.input_type,
     name: data.name,
+    region: data.region,
     scwNatsConfig: data.scw_nats_config ? unmarshalTriggerMnqNatsClientConfig(data.scw_nats_config) : undefined,
     scwSqsConfig: data.scw_sqs_config ? unmarshalTriggerMnqSqsClientConfig(data.scw_sqs_config) : undefined,
     sqsConfig: data.sqs_config ? unmarshalTriggerSqsClientConfig(data.sqs_config) : undefined,
+    srn: data.srn,
     status: data.status,
   } as Trigger
 }
