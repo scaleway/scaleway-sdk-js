@@ -10,6 +10,7 @@ import type {
   DataKey,
   DecryptResponse,
   EncryptResponse,
+  GenerateKeyMaterialImportParametersResponse,
   ListAlgorithmsResponseAlgorithm,
   ListAlgorithmsResponse,
   KeyRotation,
@@ -25,6 +26,7 @@ import type {
   DeleteKeyMaterialRequest,
   EncryptRequest,
   GenerateDataKeyRequest,
+  GenerateKeyMaterialImportParametersRequest,
   ImportKeyMaterialRequest,
   SignRequest,
   UnwrapKeyRequest,
@@ -132,6 +134,20 @@ export const unmarshalEncryptResponse = (data: unknown): EncryptResponse => {
     ciphertext: data.ciphertext,
     keyId: data.key_id,
   } as EncryptResponse
+}
+
+export const unmarshalGenerateKeyMaterialImportParametersResponse = (data: unknown): GenerateKeyMaterialImportParametersResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GenerateKeyMaterialImportParametersResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    importToken: data.import_token,
+    keyId: data.key_id,
+    publicKey: data.public_key,
+  } as GenerateKeyMaterialImportParametersResponse
 }
 
 const unmarshalListAlgorithmsResponseAlgorithm = (data: unknown): ListAlgorithmsResponseAlgorithm => {
@@ -340,6 +356,13 @@ export const marshalGenerateDataKeyRequest = (
 ): Record<string, unknown> => ({
   algorithm: request.algorithm,
   without_plaintext: request.withoutPlaintext,
+})
+
+export const marshalGenerateKeyMaterialImportParametersRequest = (
+  request: GenerateKeyMaterialImportParametersRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  wrapping_algorithm: request.wrappingAlgorithm,
 })
 
 export const marshalImportKeyMaterialRequest = (
