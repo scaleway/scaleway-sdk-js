@@ -1,5 +1,137 @@
 # Change Log
 
+## 1.17.0
+
+### Minor Changes
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(mailbox): add product (#2818)
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(mailbox): add project_id and organization_id (#3287)
+
+- feat: add support for constants (#3286)
+
+- feat(mailbox): add create alias endpoint (#3036)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(generate-react-queries): add reload hook codegen (#2814)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- feat(mailbox): add update alias (#3115)
+
+- fix(build): output (#2842)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore: sync generated files after build (#2862)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- feat: update generated APIs (#2881)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore: reorder function declaration (#3046)
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- docs(mailbox): add description to some endpoints (#3038)
+
+- chore(engines): remove node engines (#3336)
+
+- fix(mailbox): remove unused parameters before beta (#2861)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- feat(mailbox): add mailbox forwarding (#3635)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat(mailbox): add missing aliases endpoints (#3086)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
 ## 1.16.1
 
 ### Patch Changes
