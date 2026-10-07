@@ -153,11 +153,12 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
         return await resUnmarshaller(finalResponse)
       } catch (error) {
         lastError = error
+        // Abort/timeout are rejected by isRetryable; the loop also checks signal.aborted
+        // at the start of each attempt (TS cannot model AbortSignal mutating mid-iteration).
         const canRetry =
           retryOptions !== undefined &&
           backoff !== undefined &&
           attempt + 1 < maxAttempts &&
-          attemptRequest.signal?.aborted !== true &&
           retryOptions.isRetryable(error, { method: request.method })
 
         if (!canRetry) {
