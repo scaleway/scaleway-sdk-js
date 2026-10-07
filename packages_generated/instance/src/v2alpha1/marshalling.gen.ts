@@ -308,6 +308,7 @@ const unmarshalDedicatedPoolServerType = (data: unknown): DedicatedPoolServerTyp
     limits: data.limits ? unmarshalServerTypeLimits(data.limits) : undefined,
     memory: data.memory,
     name: data.name,
+    sku: data.sku,
     slotsAvailable: data.slots_available,
     vcpuCount: data.vcpu_count,
   } as DedicatedPoolServerType
