@@ -159,11 +159,13 @@ export const unmarshalGroup = (data: unknown): Group => {
     openAlerts: unmarshalArrayOfObject(data.open_alerts, unmarshalAlert),
     projectId: data.project_id,
     scalingPolicy: data.scaling_policy ? unmarshalGroupScalingPolicy(data.scaling_policy) : undefined,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     targetSize: data.target_size,
     templateId: data.template_id,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as Group
 }
 
@@ -199,6 +201,7 @@ const unmarshalGroupSummary = (data: unknown): GroupSummary => {
     name: data.name,
     projectId: data.project_id,
     scalingPolicyTargetType: data.scaling_policy_target_type,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     templateId: data.template_id,

@@ -223,6 +223,10 @@ export interface GroupScalingPolicy {
 
 export interface GroupSummary {
   /**
+   * SRN of the Autoscaling Group.
+   */
+  srn: string
+  /**
    * Project ID owning this group.
    */
   projectId: string
@@ -367,6 +371,10 @@ export type GetGroupRequest = {
 
 export interface Group {
   /**
+   * SRN of the Autoscaling Group.
+   */
+  srn: string
+  /**
    * Unique identifier of the autoscaling group.
    */
   id: string
@@ -426,6 +434,10 @@ export interface Group {
    * Optional load balancer configuration.
    */
   loadBalancerConfiguration?: GroupLoadBalancerConfiguration
+  /**
+   * Zone of the Autoscaling Group.
+   */
+  zone: ScwZone
 }
 
 
