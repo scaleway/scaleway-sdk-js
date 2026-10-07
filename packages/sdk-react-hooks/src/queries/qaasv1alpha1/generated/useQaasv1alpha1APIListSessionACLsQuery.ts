@@ -11,5 +11,5 @@ export const useQaasv1alpha1APIListSessionACLsQuery = (
   const { qaasv1alpha1 } = useQaasv1alpha1API()
   const key = ["qaasv1alpha1", "listSessionACLs", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => qaasv1alpha1.listSessionACLs(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => qaasv1alpha1.listSessionACLs(params, { signal }), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useKafkav1alpha1APIListVersionsAllQuery = (
   const { kafkav1alpha1 } = useKafkav1alpha1API()
   const key = ["kafkav1alpha1", "listVersions", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => kafkav1alpha1.listVersions(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => kafkav1alpha1.listVersions(params, { signal }).all(), dataloaderConfig)
 }

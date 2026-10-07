@@ -11,5 +11,5 @@ export const useEdgeServicesv1beta1APIListTLSStagesAllQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "listTLSStages", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => edgeServicesv1beta1.listTLSStages(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.listTLSStages(params, { signal }).all(), dataloaderConfig)
 }

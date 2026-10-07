@@ -12,5 +12,5 @@ export const useIamv1alpha1APIListRulesInfiniteQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listRules", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => iamv1alpha1.listRules(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => iamv1alpha1.listRules(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

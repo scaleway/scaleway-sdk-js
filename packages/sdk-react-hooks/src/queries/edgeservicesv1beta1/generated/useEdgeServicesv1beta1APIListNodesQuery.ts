@@ -10,5 +10,5 @@ export const useEdgeServicesv1beta1APIListNodesQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "listNodes"]
 
-  return useDataLoader(key, () => edgeServicesv1beta1.listNodes(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.listNodes({ signal }), dataloaderConfig)
 }

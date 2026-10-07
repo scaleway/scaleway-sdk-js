@@ -12,5 +12,5 @@ export const useInterlinkv1beta1APIListRoutingPoliciesInfiniteQuery = (
   const { interlinkv1beta1 } = useInterlinkv1beta1API()
   const key = ["interlinkv1beta1", "listRoutingPolicies", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => interlinkv1beta1.listRoutingPolicies(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => interlinkv1beta1.listRoutingPolicies(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

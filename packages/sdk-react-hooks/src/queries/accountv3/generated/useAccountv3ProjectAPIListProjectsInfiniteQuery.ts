@@ -12,5 +12,5 @@ export const useAccountv3ProjectAPIListProjectsInfiniteQuery = (
   const { accountv3Project } = useAccountv3ProjectAPI()
   const key = ["accountv3Project", "listProjects", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => accountv3Project.listProjects(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => accountv3Project.listProjects(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

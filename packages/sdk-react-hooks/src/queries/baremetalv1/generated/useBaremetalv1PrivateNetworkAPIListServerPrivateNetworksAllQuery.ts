@@ -11,5 +11,5 @@ export const useBaremetalv1PrivateNetworkAPIListServerPrivateNetworksAllQuery = 
   const { baremetalv1PrivateNetwork } = useBaremetalv1PrivateNetworkAPI()
   const key = ["baremetalv1PrivateNetwork", "listServerPrivateNetworks", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => baremetalv1PrivateNetwork.listServerPrivateNetworks(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => baremetalv1PrivateNetwork.listServerPrivateNetworks(params, { signal }).all(), dataloaderConfig)
 }

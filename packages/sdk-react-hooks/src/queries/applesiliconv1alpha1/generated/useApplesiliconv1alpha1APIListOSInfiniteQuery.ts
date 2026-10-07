@@ -12,5 +12,5 @@ export const useApplesiliconv1alpha1APIListOSInfiniteQuery = (
   const { applesiliconv1alpha1 } = useApplesiliconv1alpha1API()
   const key = ["applesiliconv1alpha1", "listOS", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => applesiliconv1alpha1.listOS(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => applesiliconv1alpha1.listOS(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

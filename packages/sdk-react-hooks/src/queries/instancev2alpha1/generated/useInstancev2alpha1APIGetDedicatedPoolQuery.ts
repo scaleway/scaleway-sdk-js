@@ -11,5 +11,5 @@ export const useInstancev2alpha1APIGetDedicatedPoolQuery = (
   const { instancev2alpha1 } = useInstancev2alpha1API()
   const key = ["instancev2alpha1", "getDedicatedPool", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev2alpha1.getDedicatedPool(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev2alpha1.getDedicatedPool(params, { signal }), dataloaderConfig)
 }

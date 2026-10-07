@@ -11,5 +11,5 @@ export const useDediboxv1APIListFailoverIPsQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "listFailoverIPs", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.listFailoverIPs(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.listFailoverIPs(params, { signal }), dataloaderConfig)
 }

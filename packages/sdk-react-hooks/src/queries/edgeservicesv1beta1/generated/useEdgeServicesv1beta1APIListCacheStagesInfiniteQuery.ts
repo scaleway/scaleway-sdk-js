@@ -12,5 +12,5 @@ export const useEdgeServicesv1beta1APIListCacheStagesInfiniteQuery = (
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
   const key = ["edgeServicesv1beta1", "listCacheStages", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => edgeServicesv1beta1.listCacheStages(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => edgeServicesv1beta1.listCacheStages(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

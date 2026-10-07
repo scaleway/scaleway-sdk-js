@@ -11,5 +11,5 @@ export const useVpcv2APIGetIngressRuleQuery = (
   const { vpcv2 } = useVpcv2API()
   const key = ["vpcv2", "getIngressRule", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => vpcv2.getIngressRule(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => vpcv2.getIngressRule(params, { signal }), dataloaderConfig)
 }

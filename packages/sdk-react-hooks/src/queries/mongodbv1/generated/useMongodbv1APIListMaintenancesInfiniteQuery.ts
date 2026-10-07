@@ -12,5 +12,5 @@ export const useMongodbv1APIListMaintenancesInfiniteQuery = (
   const { mongodbv1 } = useMongodbv1API()
   const key = ["mongodbv1", "listMaintenances", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => mongodbv1.listMaintenances(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => mongodbv1.listMaintenances(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

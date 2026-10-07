@@ -11,5 +11,5 @@ export const useIamv1alpha1APIListPermissionSetsAllQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listPermissionSets", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iamv1alpha1.listPermissionSets(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iamv1alpha1.listPermissionSets(params, { signal }).all(), dataloaderConfig)
 }

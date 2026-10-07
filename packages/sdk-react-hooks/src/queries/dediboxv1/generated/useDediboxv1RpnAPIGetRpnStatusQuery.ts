@@ -11,5 +11,5 @@ export const useDediboxv1RpnAPIGetRpnStatusQuery = (
   const { dediboxv1Rpn } = useDediboxv1RpnAPI()
   const key = ["dediboxv1Rpn", "getRpnStatus", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1Rpn.getRpnStatus(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1Rpn.getRpnStatus(params, { signal }), dataloaderConfig)
 }

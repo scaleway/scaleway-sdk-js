@@ -11,5 +11,5 @@ export const useRdbv1APIListDatabaseEnginesQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listDatabaseEngines", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.listDatabaseEngines(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.listDatabaseEngines(params, { signal }), dataloaderConfig)
 }

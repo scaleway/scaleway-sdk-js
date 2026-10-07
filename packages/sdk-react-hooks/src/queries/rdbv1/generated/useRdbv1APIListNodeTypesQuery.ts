@@ -11,5 +11,5 @@ export const useRdbv1APIListNodeTypesQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listNodeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.listNodeTypes(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.listNodeTypes(params, { signal }), dataloaderConfig)
 }

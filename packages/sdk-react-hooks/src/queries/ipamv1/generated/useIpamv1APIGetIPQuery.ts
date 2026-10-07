@@ -11,5 +11,5 @@ export const useIpamv1APIGetIPQuery = (
   const { ipamv1 } = useIpamv1API()
   const key = ["ipamv1", "getIP", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => ipamv1.getIP(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => ipamv1.getIP(params, { signal }), dataloaderConfig)
 }

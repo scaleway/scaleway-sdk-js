@@ -11,5 +11,5 @@ export const useDomainv2beta1UnauthenticatedRegistrarAPISearchAvailableDomainsCo
   const { domainv2beta1UnauthenticatedRegistrar } = useDomainv2beta1UnauthenticatedRegistrarAPI()
   const key = ["domainv2beta1UnauthenticatedRegistrar", "searchAvailableDomainsConsole", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => domainv2beta1UnauthenticatedRegistrar.searchAvailableDomainsConsole(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => domainv2beta1UnauthenticatedRegistrar.searchAvailableDomainsConsole(params, { signal }), dataloaderConfig)
 }

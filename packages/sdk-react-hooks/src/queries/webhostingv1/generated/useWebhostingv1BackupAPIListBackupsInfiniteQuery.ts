@@ -12,5 +12,5 @@ export const useWebhostingv1BackupAPIListBackupsInfiniteQuery = (
   const { webhostingv1Backup } = useWebhostingv1BackupAPI()
   const key = ["webhostingv1Backup", "listBackups", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => webhostingv1Backup.listBackups(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1Backup.listBackups(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

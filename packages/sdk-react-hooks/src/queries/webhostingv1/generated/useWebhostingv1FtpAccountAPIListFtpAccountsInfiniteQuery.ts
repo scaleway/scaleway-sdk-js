@@ -12,5 +12,5 @@ export const useWebhostingv1FtpAccountAPIListFtpAccountsInfiniteQuery = (
   const { webhostingv1FtpAccount } = useWebhostingv1FtpAccountAPI()
   const key = ["webhostingv1FtpAccount", "listFtpAccounts", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => webhostingv1FtpAccount.listFtpAccounts(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1FtpAccount.listFtpAccounts(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

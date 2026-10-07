@@ -12,5 +12,5 @@ export const useIamv1alpha1APIListJWTsInfiniteQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listJWTs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => iamv1alpha1.listJWTs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => iamv1alpha1.listJWTs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

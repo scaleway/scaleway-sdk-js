@@ -12,5 +12,5 @@ export const useKafkav1alpha1APIListUsersInfiniteQuery = (
   const { kafkav1alpha1 } = useKafkav1alpha1API()
   const key = ["kafkav1alpha1", "listUsers", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => kafkav1alpha1.listUsers(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => kafkav1alpha1.listUsers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

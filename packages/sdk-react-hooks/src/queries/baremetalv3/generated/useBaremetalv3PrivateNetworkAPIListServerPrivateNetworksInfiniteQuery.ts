@@ -12,5 +12,5 @@ export const useBaremetalv3PrivateNetworkAPIListServerPrivateNetworksInfiniteQue
   const { baremetalv3PrivateNetwork } = useBaremetalv3PrivateNetworkAPI()
   const key = ["baremetalv3PrivateNetwork", "listServerPrivateNetworks", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => baremetalv3PrivateNetwork.listServerPrivateNetworks(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => baremetalv3PrivateNetwork.listServerPrivateNetworks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

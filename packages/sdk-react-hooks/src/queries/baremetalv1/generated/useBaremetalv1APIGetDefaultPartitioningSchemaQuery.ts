@@ -11,5 +11,5 @@ export const useBaremetalv1APIGetDefaultPartitioningSchemaQuery = (
   const { baremetalv1 } = useBaremetalv1API()
   const key = ["baremetalv1", "getDefaultPartitioningSchema", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => baremetalv1.getDefaultPartitioningSchema(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => baremetalv1.getDefaultPartitioningSchema(params, { signal }), dataloaderConfig)
 }

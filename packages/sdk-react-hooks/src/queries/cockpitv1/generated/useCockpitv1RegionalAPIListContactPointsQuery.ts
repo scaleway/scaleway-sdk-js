@@ -11,5 +11,5 @@ export const useCockpitv1RegionalAPIListContactPointsQuery = (
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
   const key = ["cockpitv1Regional", "listContactPoints", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => cockpitv1Regional.listContactPoints(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => cockpitv1Regional.listContactPoints(params, { signal }), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useLbv1ZonedAPIGetLbStatsQuery = (
   const { lbv1Zoned } = useLbv1ZonedAPI()
   const key = ["lbv1Zoned", "getLbStats", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1Zoned.getLbStats(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1Zoned.getLbStats(params, { signal }), dataloaderConfig)
 }

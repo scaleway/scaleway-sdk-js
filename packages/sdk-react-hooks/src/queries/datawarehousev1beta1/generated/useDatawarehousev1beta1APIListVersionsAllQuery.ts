@@ -11,5 +11,5 @@ export const useDatawarehousev1beta1APIListVersionsAllQuery = (
   const { datawarehousev1beta1 } = useDatawarehousev1beta1API()
   const key = ["datawarehousev1beta1", "listVersions", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => datawarehousev1beta1.listVersions(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => datawarehousev1beta1.listVersions(params, { signal }).all(), dataloaderConfig)
 }

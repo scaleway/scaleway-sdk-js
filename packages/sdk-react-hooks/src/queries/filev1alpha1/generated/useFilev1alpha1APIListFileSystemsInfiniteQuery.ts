@@ -12,5 +12,5 @@ export const useFilev1alpha1APIListFileSystemsInfiniteQuery = (
   const { filev1alpha1 } = useFilev1alpha1API()
   const key = ["filev1alpha1", "listFileSystems", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => filev1alpha1.listFileSystems(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => filev1alpha1.listFileSystems(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

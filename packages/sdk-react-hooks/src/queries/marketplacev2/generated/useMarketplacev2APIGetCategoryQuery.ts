@@ -11,5 +11,5 @@ export const useMarketplacev2APIGetCategoryQuery = (
   const { marketplacev2 } = useMarketplacev2API()
   const key = ["marketplacev2", "getCategory", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => marketplacev2.getCategory(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => marketplacev2.getCategory(params, { signal }), dataloaderConfig)
 }

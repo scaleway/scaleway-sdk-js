@@ -11,5 +11,5 @@ export const useRdbv1APIListInstanceLogsQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "listInstanceLogs", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.listInstanceLogs(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.listInstanceLogs(params, { signal }), dataloaderConfig)
 }

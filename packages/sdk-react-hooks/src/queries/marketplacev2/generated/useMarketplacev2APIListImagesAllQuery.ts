@@ -11,5 +11,5 @@ export const useMarketplacev2APIListImagesAllQuery = (
   const { marketplacev2 } = useMarketplacev2API()
   const key = ["marketplacev2", "listImages", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => marketplacev2.listImages(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => marketplacev2.listImages(params, { signal }).all(), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useApplesiliconv1alpha1APIGetConnectivityDiagnosticQuery = (
   const { applesiliconv1alpha1 } = useApplesiliconv1alpha1API()
   const key = ["applesiliconv1alpha1", "getConnectivityDiagnostic", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => applesiliconv1alpha1.getConnectivityDiagnostic(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => applesiliconv1alpha1.getConnectivityDiagnostic(params, { signal }), dataloaderConfig)
 }

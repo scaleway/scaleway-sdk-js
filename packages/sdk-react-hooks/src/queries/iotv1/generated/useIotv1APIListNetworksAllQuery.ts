@@ -11,5 +11,5 @@ export const useIotv1APIListNetworksAllQuery = (
   const { iotv1 } = useIotv1API()
   const key = ["iotv1", "listNetworks", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iotv1.listNetworks(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iotv1.listNetworks(params, { signal }).all(), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useIotv1APIGetDeviceCertificateQuery = (
   const { iotv1 } = useIotv1API()
   const key = ["iotv1", "getDeviceCertificate", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iotv1.getDeviceCertificate(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iotv1.getDeviceCertificate(params, { signal }), dataloaderConfig)
 }

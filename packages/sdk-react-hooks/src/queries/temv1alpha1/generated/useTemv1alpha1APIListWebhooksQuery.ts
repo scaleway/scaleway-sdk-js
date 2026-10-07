@@ -11,5 +11,5 @@ export const useTemv1alpha1APIListWebhooksQuery = (
   const { temv1alpha1 } = useTemv1alpha1API()
   const key = ["temv1alpha1", "listWebhooks", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => temv1alpha1.listWebhooks(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => temv1alpha1.listWebhooks(params, { signal }), dataloaderConfig)
 }

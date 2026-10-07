@@ -11,5 +11,5 @@ export const useQaasv1alpha1APIListSessionsAllQuery = (
   const { qaasv1alpha1 } = useQaasv1alpha1API()
   const key = ["qaasv1alpha1", "listSessions", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => qaasv1alpha1.listSessions(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => qaasv1alpha1.listSessions(params, { signal }).all(), dataloaderConfig)
 }

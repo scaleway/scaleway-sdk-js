@@ -11,5 +11,5 @@ export const useAutoscalingv1alpha2APIGetGroupQuery = (
   const { autoscalingv1alpha2 } = useAutoscalingv1alpha2API()
   const key = ["autoscalingv1alpha2", "getGroup", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => autoscalingv1alpha2.getGroup(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => autoscalingv1alpha2.getGroup(params, { signal }), dataloaderConfig)
 }

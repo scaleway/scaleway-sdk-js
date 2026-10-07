@@ -12,5 +12,5 @@ export const useInstancev1APIListPrivateNICsInfiniteQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "listPrivateNICs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev1.listPrivateNICs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev1.listPrivateNICs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

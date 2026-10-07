@@ -11,5 +11,5 @@ export const useWebhostingv1WebsiteAPIListWebsitesAllQuery = (
   const { webhostingv1Website } = useWebhostingv1WebsiteAPI()
   const key = ["webhostingv1Website", "listWebsites", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1Website.listWebsites(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1Website.listWebsites(params, { signal }).all(), dataloaderConfig)
 }

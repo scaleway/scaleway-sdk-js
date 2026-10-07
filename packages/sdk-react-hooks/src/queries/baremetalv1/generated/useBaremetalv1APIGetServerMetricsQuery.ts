@@ -11,5 +11,5 @@ export const useBaremetalv1APIGetServerMetricsQuery = (
   const { baremetalv1 } = useBaremetalv1API()
   const key = ["baremetalv1", "getServerMetrics", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => baremetalv1.getServerMetrics(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => baremetalv1.getServerMetrics(params, { signal }), dataloaderConfig)
 }

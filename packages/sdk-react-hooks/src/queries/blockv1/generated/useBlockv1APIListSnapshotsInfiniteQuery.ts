@@ -12,5 +12,5 @@ export const useBlockv1APIListSnapshotsInfiniteQuery = (
   const { blockv1 } = useBlockv1API()
   const key = ["blockv1", "listSnapshots", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => blockv1.listSnapshots(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => blockv1.listSnapshots(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

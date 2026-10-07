@@ -11,5 +11,5 @@ export const useDatalabv1beta1APIListNodeTypesQuery = (
   const { datalabv1beta1 } = useDatalabv1beta1API()
   const key = ["datalabv1beta1", "listNodeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => datalabv1beta1.listNodeTypes(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => datalabv1beta1.listNodeTypes(params, { signal }), dataloaderConfig)
 }

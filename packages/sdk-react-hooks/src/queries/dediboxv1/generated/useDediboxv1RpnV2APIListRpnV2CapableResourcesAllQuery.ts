@@ -11,5 +11,5 @@ export const useDediboxv1RpnV2APIListRpnV2CapableResourcesAllQuery = (
   const { dediboxv1RpnV2 } = useDediboxv1RpnV2API()
   const key = ["dediboxv1RpnV2", "listRpnV2CapableResources", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1RpnV2.listRpnV2CapableResources(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1RpnV2.listRpnV2CapableResources(params, { signal }).all(), dataloaderConfig)
 }

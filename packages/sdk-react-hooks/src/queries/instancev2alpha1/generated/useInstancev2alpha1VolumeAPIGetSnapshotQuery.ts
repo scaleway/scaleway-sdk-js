@@ -11,5 +11,5 @@ export const useInstancev2alpha1VolumeAPIGetSnapshotQuery = (
   const { instancev2alpha1Volume } = useInstancev2alpha1VolumeAPI()
   const key = ["instancev2alpha1Volume", "getSnapshot", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev2alpha1Volume.getSnapshot(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev2alpha1Volume.getSnapshot(params, { signal }), dataloaderConfig)
 }

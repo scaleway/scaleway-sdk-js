@@ -11,5 +11,5 @@ export const useApplesiliconv1alpha1APIGetUserConfigurationQuery = (
   const { applesiliconv1alpha1 } = useApplesiliconv1alpha1API()
   const key = ["applesiliconv1alpha1", "getUserConfiguration", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => applesiliconv1alpha1.getUserConfiguration(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => applesiliconv1alpha1.getUserConfiguration(params, { signal }), dataloaderConfig)
 }

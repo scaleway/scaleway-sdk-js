@@ -11,5 +11,5 @@ export const useDediboxv1APIGetServerInstallQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getServerInstall", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getServerInstall(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getServerInstall(params, { signal }), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useInterlinkv1beta1APIListDedicatedConnectionsQuery = (
   const { interlinkv1beta1 } = useInterlinkv1beta1API()
   const key = ["interlinkv1beta1", "listDedicatedConnections", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => interlinkv1beta1.listDedicatedConnections(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => interlinkv1beta1.listDedicatedConnections(params, { signal }), dataloaderConfig)
 }

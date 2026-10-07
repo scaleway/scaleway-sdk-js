@@ -12,5 +12,5 @@ export const useDediboxv1RpnV1APIListRpnGroupMembersInfiniteQuery = (
   const { dediboxv1RpnV1 } = useDediboxv1RpnV1API()
   const key = ["dediboxv1RpnV1", "listRpnGroupMembers", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => dediboxv1RpnV1.listRpnGroupMembers(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1RpnV1.listRpnGroupMembers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

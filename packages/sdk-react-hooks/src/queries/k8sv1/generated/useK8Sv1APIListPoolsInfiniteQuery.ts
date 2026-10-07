@@ -12,5 +12,5 @@ export const useK8Sv1APIListPoolsInfiniteQuery = (
   const { k8Sv1 } = useK8Sv1API()
   const key = ["k8Sv1", "listPools", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => k8Sv1.listPools(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => k8Sv1.listPools(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

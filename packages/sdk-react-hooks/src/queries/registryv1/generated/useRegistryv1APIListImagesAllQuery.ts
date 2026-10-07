@@ -11,5 +11,5 @@ export const useRegistryv1APIListImagesAllQuery = (
   const { registryv1 } = useRegistryv1API()
   const key = ["registryv1", "listImages", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => registryv1.listImages(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => registryv1.listImages(params, { signal }).all(), dataloaderConfig)
 }

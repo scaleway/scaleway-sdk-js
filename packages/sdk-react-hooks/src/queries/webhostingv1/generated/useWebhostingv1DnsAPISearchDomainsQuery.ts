@@ -11,5 +11,5 @@ export const useWebhostingv1DnsAPISearchDomainsQuery = (
   const { webhostingv1Dns } = useWebhostingv1DnsAPI()
   const key = ["webhostingv1Dns", "searchDomains", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1Dns.searchDomains(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1Dns.searchDomains(params, { signal }), dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useIpamv1APIListIPsInfiniteQuery = (
   const { ipamv1 } = useIpamv1API()
   const key = ["ipamv1", "listIPs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => ipamv1.listIPs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => ipamv1.listIPs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useLbv1APIListRoutesInfiniteQuery = (
   const { lbv1 } = useLbv1API()
   const key = ["lbv1", "listRoutes", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => lbv1.listRoutes(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => lbv1.listRoutes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

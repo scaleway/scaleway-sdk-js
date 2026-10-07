@@ -11,5 +11,5 @@ export const useIamv1alpha1APIListGroupsQuery = (
   const { iamv1alpha1 } = useIamv1alpha1API()
   const key = ["iamv1alpha1", "listGroups", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => iamv1alpha1.listGroups(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iamv1alpha1.listGroups(params, { signal }), dataloaderConfig)
 }

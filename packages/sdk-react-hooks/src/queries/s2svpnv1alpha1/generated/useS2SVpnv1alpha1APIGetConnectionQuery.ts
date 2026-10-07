@@ -11,5 +11,5 @@ export const useS2SVpnv1alpha1APIGetConnectionQuery = (
   const { s2SVpnv1alpha1 } = useS2SVpnv1alpha1API()
   const key = ["s2SVpnv1alpha1", "getConnection", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => s2SVpnv1alpha1.getConnection(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => s2SVpnv1alpha1.getConnection(params, { signal }), dataloaderConfig)
 }

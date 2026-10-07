@@ -11,5 +11,5 @@ export const useDediboxv1IPv6BlockAPIGetIPv6BlockQuery = (
   const { dediboxv1IPv6Block } = useDediboxv1IPv6BlockAPI()
   const key = ["dediboxv1IPv6Block", "getIPv6Block", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1IPv6Block.getIPv6Block(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1IPv6Block.getIPv6Block(params, { signal }), dataloaderConfig)
 }

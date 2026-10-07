@@ -11,5 +11,5 @@ export const useRedisv1APIListNodeTypesAllQuery = (
   const { redisv1 } = useRedisv1API()
   const key = ["redisv1", "listNodeTypes", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => redisv1.listNodeTypes(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => redisv1.listNodeTypes(params, { signal }).all(), dataloaderConfig)
 }

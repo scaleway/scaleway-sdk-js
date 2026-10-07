@@ -11,5 +11,5 @@ export const usePartnerv1APIListOrganizationsQuery = (
   const { partnerv1 } = usePartnerv1API()
   const key = ["partnerv1", "listOrganizations", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => partnerv1.listOrganizations(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => partnerv1.listOrganizations(params, { signal }), dataloaderConfig)
 }

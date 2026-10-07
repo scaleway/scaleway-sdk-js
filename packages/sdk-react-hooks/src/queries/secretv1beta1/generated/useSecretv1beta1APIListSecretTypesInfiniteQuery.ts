@@ -12,5 +12,5 @@ export const useSecretv1beta1APIListSecretTypesInfiniteQuery = (
   const { secretv1beta1 } = useSecretv1beta1API()
   const key = ["secretv1beta1", "listSecretTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => secretv1beta1.listSecretTypes(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => secretv1beta1.listSecretTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -12,5 +12,5 @@ export const useAuditTrailv1alpha1APIListSystemEventsInfiniteQuery = (
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
   const key = ["auditTrailv1alpha1", "listSystemEvents", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => auditTrailv1alpha1.listSystemEvents(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => auditTrailv1alpha1.listSystemEvents(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

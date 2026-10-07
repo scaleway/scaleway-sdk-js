@@ -12,5 +12,5 @@ export const useFlexibleipv1alpha1APIListFlexibleIPsInfiniteQuery = (
   const { flexibleipv1alpha1 } = useFlexibleipv1alpha1API()
   const key = ["flexibleipv1alpha1", "listFlexibleIPs", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => flexibleipv1alpha1.listFlexibleIPs(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => flexibleipv1alpha1.listFlexibleIPs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

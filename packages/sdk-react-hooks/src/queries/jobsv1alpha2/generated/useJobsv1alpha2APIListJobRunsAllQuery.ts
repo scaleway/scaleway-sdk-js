@@ -11,5 +11,5 @@ export const useJobsv1alpha2APIListJobRunsAllQuery = (
   const { jobsv1alpha2 } = useJobsv1alpha2API()
   const key = ["jobsv1alpha2", "listJobRuns", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => jobsv1alpha2.listJobRuns(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => jobsv1alpha2.listJobRuns(params, { signal }).all(), dataloaderConfig)
 }

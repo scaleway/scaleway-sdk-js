@@ -11,5 +11,5 @@ export const useBaremetalv1APIListServerEventsAllQuery = (
   const { baremetalv1 } = useBaremetalv1API()
   const key = ["baremetalv1", "listServerEvents", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => baremetalv1.listServerEvents(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => baremetalv1.listServerEvents(params, { signal }).all(), dataloaderConfig)
 }

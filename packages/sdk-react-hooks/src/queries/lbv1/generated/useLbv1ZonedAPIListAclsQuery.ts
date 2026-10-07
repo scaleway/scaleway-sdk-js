@@ -11,5 +11,5 @@ export const useLbv1ZonedAPIListAclsQuery = (
   const { lbv1Zoned } = useLbv1ZonedAPI()
   const key = ["lbv1Zoned", "listAcls", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => lbv1Zoned.listAcls(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => lbv1Zoned.listAcls(params, { signal }), dataloaderConfig)
 }

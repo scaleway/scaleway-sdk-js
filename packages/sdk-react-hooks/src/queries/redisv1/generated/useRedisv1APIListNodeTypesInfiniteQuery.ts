@@ -12,5 +12,5 @@ export const useRedisv1APIListNodeTypesInfiniteQuery = (
   const { redisv1 } = useRedisv1API()
   const key = ["redisv1", "listNodeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => redisv1.listNodeTypes(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => redisv1.listNodeTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

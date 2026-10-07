@@ -11,5 +11,5 @@ export const useSearchdbv1alpha1APIListDeploymentsQuery = (
   const { searchdbv1alpha1 } = useSearchdbv1alpha1API()
   const key = ["searchdbv1alpha1", "listDeployments", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => searchdbv1alpha1.listDeployments(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => searchdbv1alpha1.listDeployments(params, { signal }), dataloaderConfig)
 }

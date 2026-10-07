@@ -11,5 +11,5 @@ export const useContainerv1APIGetNamespaceQuery = (
   const { containerv1 } = useContainerv1API()
   const key = ["containerv1", "getNamespace", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => containerv1.getNamespace(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => containerv1.getNamespace(params, { signal }), dataloaderConfig)
 }

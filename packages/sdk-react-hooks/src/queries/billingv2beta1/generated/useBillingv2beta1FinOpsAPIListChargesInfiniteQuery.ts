@@ -12,5 +12,5 @@ export const useBillingv2beta1FinOpsAPIListChargesInfiniteQuery = (
   const { billingv2beta1FinOps } = useBillingv2beta1FinOpsAPI()
   const key = ["billingv2beta1FinOps", "listCharges", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => billingv2beta1FinOps.listCharges(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => billingv2beta1FinOps.listCharges(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

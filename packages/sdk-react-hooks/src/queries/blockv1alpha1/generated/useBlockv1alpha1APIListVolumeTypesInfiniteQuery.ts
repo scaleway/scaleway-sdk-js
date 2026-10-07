@@ -12,5 +12,5 @@ export const useBlockv1alpha1APIListVolumeTypesInfiniteQuery = (
   const { blockv1alpha1 } = useBlockv1alpha1API()
   const key = ["blockv1alpha1", "listVolumeTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => blockv1alpha1.listVolumeTypes(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => blockv1alpha1.listVolumeTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

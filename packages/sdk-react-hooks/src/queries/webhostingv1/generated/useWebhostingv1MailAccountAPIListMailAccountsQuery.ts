@@ -11,5 +11,5 @@ export const useWebhostingv1MailAccountAPIListMailAccountsQuery = (
   const { webhostingv1MailAccount } = useWebhostingv1MailAccountAPI()
   const key = ["webhostingv1MailAccount", "listMailAccounts", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1MailAccount.listMailAccounts(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1MailAccount.listMailAccounts(params, { signal }), dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useInstancev1APIGetServerTypesAvailabilityQuery = (
   const { instancev1 } = useInstancev1API()
   const key = ["instancev1", "getServerTypesAvailability", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => instancev1.getServerTypesAvailability(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => instancev1.getServerTypesAvailability(params, { signal }), dataloaderConfig)
 }

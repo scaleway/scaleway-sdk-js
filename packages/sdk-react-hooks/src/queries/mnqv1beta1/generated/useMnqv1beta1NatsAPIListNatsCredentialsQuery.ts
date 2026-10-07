@@ -11,5 +11,5 @@ export const useMnqv1beta1NatsAPIListNatsCredentialsQuery = (
   const { mnqv1beta1Nats } = useMnqv1beta1NatsAPI()
   const key = ["mnqv1beta1Nats", "listNatsCredentials", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => mnqv1beta1Nats.listNatsCredentials(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => mnqv1beta1Nats.listNatsCredentials(params, { signal }), dataloaderConfig)
 }

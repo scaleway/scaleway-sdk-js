@@ -11,5 +11,5 @@ export const useKafkav1alpha1APIListUsersAllQuery = (
   const { kafkav1alpha1 } = useKafkav1alpha1API()
   const key = ["kafkav1alpha1", "listUsers", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => kafkav1alpha1.listUsers(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => kafkav1alpha1.listUsers(params, { signal }).all(), dataloaderConfig)
 }

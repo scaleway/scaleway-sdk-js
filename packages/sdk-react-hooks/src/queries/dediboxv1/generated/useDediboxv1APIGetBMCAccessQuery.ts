@@ -11,5 +11,5 @@ export const useDediboxv1APIGetBMCAccessQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getBMCAccess", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getBMCAccess(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getBMCAccess(params, { signal }), dataloaderConfig)
 }

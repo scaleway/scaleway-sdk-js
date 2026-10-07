@@ -12,5 +12,5 @@ export const useInstancev2alpha1APIListServerCompatibleTypesInfiniteQuery = (
   const { instancev2alpha1 } = useInstancev2alpha1API()
   const key = ["instancev2alpha1", "listServerCompatibleTypes", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => instancev2alpha1.listServerCompatibleTypes(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev2alpha1.listServerCompatibleTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

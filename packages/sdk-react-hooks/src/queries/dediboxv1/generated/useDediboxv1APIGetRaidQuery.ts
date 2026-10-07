@@ -11,5 +11,5 @@ export const useDediboxv1APIGetRaidQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getRaid", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getRaid(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getRaid(params, { signal }), dataloaderConfig)
 }

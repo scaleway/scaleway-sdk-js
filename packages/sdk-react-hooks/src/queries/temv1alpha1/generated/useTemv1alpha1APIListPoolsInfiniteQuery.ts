@@ -12,5 +12,5 @@ export const useTemv1alpha1APIListPoolsInfiniteQuery = (
   const { temv1alpha1 } = useTemv1alpha1API()
   const key = ["temv1alpha1", "listPools", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => temv1alpha1.listPools(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => temv1alpha1.listPools(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -11,5 +11,5 @@ export const useWebhostingv1ControlPanelAPIListControlPanelsAllQuery = (
   const { webhostingv1ControlPanel } = useWebhostingv1ControlPanelAPI()
   const key = ["webhostingv1ControlPanel", "listControlPanels", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => webhostingv1ControlPanel.listControlPanels(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => webhostingv1ControlPanel.listControlPanels(params, { signal }).all(), dataloaderConfig)
 }

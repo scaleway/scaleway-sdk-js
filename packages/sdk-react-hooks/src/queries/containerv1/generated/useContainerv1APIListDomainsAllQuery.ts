@@ -11,5 +11,5 @@ export const useContainerv1APIListDomainsAllQuery = (
   const { containerv1 } = useContainerv1API()
   const key = ["containerv1", "listDomains", "all", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => containerv1.listDomains(params).all(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => containerv1.listDomains(params, { signal }).all(), dataloaderConfig)
 }

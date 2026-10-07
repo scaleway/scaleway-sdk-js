@@ -12,5 +12,5 @@ export const useMarketplacev2APIListVersionsInfiniteQuery = (
   const { marketplacev2 } = useMarketplacev2API()
   const key = ["marketplacev2", "listVersions", ...Object.entries(params).flat(3).sort()]
 
-  return useInfiniteDataLoader(key, (requestParams) => marketplacev2.listVersions(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => marketplacev2.listVersions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

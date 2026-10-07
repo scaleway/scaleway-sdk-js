@@ -11,5 +11,5 @@ export const useFilev1alpha1APIListFileSystemsQuery = (
   const { filev1alpha1 } = useFilev1alpha1API()
   const key = ["filev1alpha1", "listFileSystems", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => filev1alpha1.listFileSystems(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => filev1alpha1.listFileSystems(params, { signal }), dataloaderConfig)
 }

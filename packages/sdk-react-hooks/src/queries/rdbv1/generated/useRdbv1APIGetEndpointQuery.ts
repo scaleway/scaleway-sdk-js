@@ -11,5 +11,5 @@ export const useRdbv1APIGetEndpointQuery = (
   const { rdbv1 } = useRdbv1API()
   const key = ["rdbv1", "getEndpoint", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => rdbv1.getEndpoint(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => rdbv1.getEndpoint(params, { signal }), dataloaderConfig)
 }

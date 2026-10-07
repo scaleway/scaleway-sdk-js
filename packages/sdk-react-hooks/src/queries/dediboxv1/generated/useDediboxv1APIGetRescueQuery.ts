@@ -11,5 +11,5 @@ export const useDediboxv1APIGetRescueQuery = (
   const { dediboxv1 } = useDediboxv1API()
   const key = ["dediboxv1", "getRescue", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => dediboxv1.getRescue(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => dediboxv1.getRescue(params, { signal }), dataloaderConfig)
 }

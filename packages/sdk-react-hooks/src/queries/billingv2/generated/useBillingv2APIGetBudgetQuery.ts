@@ -11,5 +11,5 @@ export const useBillingv2APIGetBudgetQuery = (
   const { billingv2 } = useBillingv2API()
   const key = ["billingv2", "getBudget", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => billingv2.getBudget(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => billingv2.getBudget(params, { signal }), dataloaderConfig)
 }

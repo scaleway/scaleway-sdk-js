@@ -11,5 +11,5 @@ export const useK8Sv1APIListClustersQuery = (
   const { k8Sv1 } = useK8Sv1API()
   const key = ["k8Sv1", "listClusters", ...Object.entries(params).flat(3).sort()]
 
-  return useDataLoader(key, () => k8Sv1.listClusters(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => k8Sv1.listClusters(params, { signal }), dataloaderConfig)
 }
