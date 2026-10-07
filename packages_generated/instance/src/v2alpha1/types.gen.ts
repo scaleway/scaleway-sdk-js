@@ -601,6 +601,10 @@ export interface DedicatedPoolServerType {
    * Number of additional Instances of this type that can currently be started in this Dedicated Pool.
    */
   slotsAvailable: number
+  /**
+   * The billing SKU for this server type.
+   */
+  sku: string
 }
 
 
