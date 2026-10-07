@@ -1,5 +1,212 @@
 # Change Log
 
+## 2.17.0
+
+### Minor Changes
+
+- chore: new formating (#2667)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(lb): add support for filtering with `lbIds` (#3147)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore: fix formating (#2669)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore: remove whitespaces (#3057)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(lint): update generated files (#2594)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat(autoscaling): enable v1alpha1 (#2104)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- fix(autoscaling): document group_id for Alert messages (#3137)
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(release): publish
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(autoscaling): add v1alpha2 (#3127)
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore: reorganize import (#2520)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- fix: change tabs into space (#2688)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(autoscaling): add the RefreshGroup method (#3617)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: enable formatting for generated files (#2690)
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(autoscaling): add zone in resources (#2449)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore(release): publish
+
+- feat(lb): enable devtools generation for path_begin new route feature (#2113)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(autoscaling): add support for `GroupSummaryScalingPolicyTargetType` (#3139)
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore: remove blank lines (#2535)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: format (#2683)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2111)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat: add support for constants (#3286)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.2
+
 ## 2.16.0
 
 ### Minor Changes

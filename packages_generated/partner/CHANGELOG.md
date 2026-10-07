@@ -1,5 +1,122 @@
 # Change Log
 
+## 1.14.0
+
+### Minor Changes
+
+- chore: remove post-generate updates (#3168)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- chore(engines): remove node engines (#3336)
+
+- feat: update generated APIs (#3576)
+
+- feat(partner): add comment field on organization creation (#3623)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- feat(partner): enable v1 (#2788)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore: sync generated files after build (#2862)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- feat: add support for constants (#3286)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.2
+
 ## 1.13.0
 
 ### Minor Changes

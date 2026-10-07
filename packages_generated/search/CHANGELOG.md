@@ -1,5 +1,134 @@
 # Change Log
 
+## 1.18.0
+
+### Minor Changes
+
+- chore: remove post-generate updates (#3168)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- feat(search): add support for instance_private_nic instance_snapshot and instance_placement_group (#3016)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(permission): declare gapi consumption_limit permission (#3626)
+
+- chore(release): publish
+
+- feat(search): add support for `autoscaling_group` (#3081)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(search): add relevance value to order_by enum (#3159)
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- docs: fix typos (#3221)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(search): add filters to search resources (#3028)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- feat(search): add sort/pagination and empty query possible (#3149)
+
+- chore(release): publish
+
+- feat(messageq): add generated messageq package (#2962)
+
+- feat(search): add new resource types (#2965)
+
+- feat(search): add support for `sedb_cluster` (#3068)
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix(searchdb): add ignore_empty to node fields to fix backward compatibility (#3053)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat(search): add support for `kafk_cluster` (#3051)
+
+- chore: reformat tsconfig.build.json exclude arrays and reorder imports (#2973)
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(search): add resource infos to yml (#3547)
+
+- feat(search): add support for CLI (#2931)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- feat(search/v1alpha1): add iam resources (#3052)
+
+- refactor(search): remove enum and use a string instead (#3216)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- feat(datawarehouse): allow max CPU field up to 30 DTWH-563 (#3220)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat(cockpit): add api search integration (#3018)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3643)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(search): add missing instance_template in Resource.Type (#3233)
+
+- feat(search): remove temporarily IAM from public search (#3265)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- feat: add support for constants (#3286)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.2
+
 ## 1.17.0
 
 ### Minor Changes

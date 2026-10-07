@@ -1,5 +1,155 @@
 # Change Log
 
+## 1.0.0
+
+### Major Changes
+
+- pass abort signal to query methods
+
+  Generated hooks now destructure `{ signal }` from the useDataLoader /
+  useInfiniteDataLoader method callback and forward it to the SDK API call as
+  `{ signal }` (a RequestOptions second argument). This requires the consuming
+  app to use a version of `@scaleway/use-dataloader` that passes an AbortSignal
+  to the method function (scaleway-lib #3915).
+
+### Minor Changes
+
+- fix(generate-queries): exports paths (#2812)
+
+- fix(oxlint): enable eslint/no-implicit-coercion as error (#3482)
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- chore(deps): update dependency oxlint-tsgolint to v7.0.2002 (#3599)
+
+- fix(oxlint): enable eslint/no-use-before-define as error (#3483)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix(oxlint): enable no-unsafe-type-assertion and no-unnecessary-condition as error (#3596)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(engines): remove node engines (#3336)
+
+- fix(bin): rename bin (#2815)
+
+- chore(release): publish
+
+- fix(oxlint): fix typescript/consistent-type-definitions violations (#3359)
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- fix(generate-react-queries): correct mock exports paths (#3641)
+
+- fix(oxlint): fix typescript/no-unsafe-member-access violations (#3354)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/require-unicode-regexp as error (#3424)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- fix(oxlint): enable no-shadow, prefer-destructuring, prefer-global-this, set-state-in-effect as error (#3592)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable unicorn/import-style as error (#3553)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(generate-queries): only custom ns (#2813)
+
+- fix(oxlint): fix eslint/no-continue violations (#3363)
+
+- fix(sdk-react-hooks): make reload sync (#2878)
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- fix(oxlint): enable eslint/prefer-destructuring as error (#3422)
+
+- feat(generate-react-queries): add reload hook codegen (#2814)
+
+- feat(generate-queries): sdk-react-queries (#2802)
+
+- fix(oxlint): enable typescript/strict-boolean-expressions as error (#3570)
+
+- chore(release): publish
+
+- fix(export): package.json rewrite (#2820)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- fix(oxlint): enable promise-function-async, no-unnecessary-type-parameters, no-await-in-loop as error (#3594)
+
+- fix(oxlint): fix eslint/max-statements violations (#3365)
+
+- feat(tools): add JSON config file support and skip filters (#3253)
+
+- fix: convert deprecated rmDirSync recursive to rmSync (#2888)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- fix(oxlint): enable eslint/prefer-named-capture-group as error (#3420)
+
+- fix(oxlint): fix typescript/no-unsafe-argument violations (#3355)
+
+- chore(packages): upgrade deps (#3157)
+
+- fix(oxlint): fix eslint/no-console violations (#3362)
+
+- fix(oxlint): enable unicorn/text-encoding-identifier-case as error (#3571)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable unicorn/no-array-sort as error (#3554)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- fix(oxlint): enable typescript/prefer-regexp-exec as error (#3520)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- fix(oxlint): fix unicorn/catch-error-name violations (#3366)
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- fix(generate-react-queries): resolve cross-package type namespaces correctly (#3301)
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
 ## 0.13.0
 
 ### Minor Changes

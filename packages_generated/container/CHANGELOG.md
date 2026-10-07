@@ -1,5 +1,266 @@
 # Change Log
 
+## 2.21.0
+
+### Minor Changes
+
+- chore: new formating (#2667)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- feat: update generated APIs (#3606)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(serverless): deprecate CreateToken (#2620)
+
+- feat: update generated APIs (#2568)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore: fix formating (#2669)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(containers): make private endpoint and get ca visible in sdk (#3490)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix(serverless): use correct memory limit max value on CreateContainer (#2775)
+
+- feat(containers): add VPC integration feature flag (#2146)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- docs(serverless): clarify UpdateContainer and UpdateFunction behavior (#2347)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat(containers): add missing statuses in v1beta1 + improve docs (#2701)
+
+- chore(containers): remove CLI exclusion for "enable_default_public_endpoint" (#3568)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- feat(serverless): add command and args to containers (#2155)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(serverless): deprecate activate_vpc_integration and update documentation (#2318)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(release): publish
+
+- chore: format generated files (#2652)
+
+- fix(containers): allow underscores in triggers names (#3075)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(serverless): exclude `GetServiceInfo` from Serverless Containers v1 (#3120)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore: reorganize import (#2520)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore: sync generated files after build (#2862)
+
+- feat: update generated APIs (#3261)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- fix: change tabs into space (#2688)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(serverless): deprecate `v1beta1` Serverless Containers API (#3121)
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: enable formatting for generated files (#2690)
+
+- docs(containers): update doc for CreateContainer to reflect internal changes (#2897)
+
+- fix(containers): validate triggers' names (#3061)
+
+- feat(generation): improve ts metadata (#3242)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore(release): publish
+
+- feat(serverless): add note on UpdateContainer and redeploy (#2898)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(containers): remove generation exclusion for "enable_default_public_endpoint" field (#3543)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- docs(serverless): clarify UpdateContainer and UpdateFunction behavior (#2353)
+
+- feat(serverless): modify memory limit and local storage names (#2584)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- docs(containers): clean v1 docs + generate SDKs (#2899)
+
+- chore(packages): upgrade deps (#3157)
+
+- docs(containers): document VPC integration fields (#2171)
+
+- feat(sdk): unify tools (#2903)
+
+- feat: update generated APIs (#2881)
+
+- chore(release): publish
+
+- feat(serverless): add support for tags (#2064)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(serverless): change containers v1 UpdateTriggerRequest http headers type (#2729)
+
+- fix: format (#2683)
+
+- chore(release): publish
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(serverless): allow empty string for privateNetworkID in create (#2223)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- docs(containers): change private endpoint documentation (#3642)
+
+- feat: update generated APIs (#3182)
+
+- feat(containers): add a filter to list triggers by type (#2920)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat: add support for constants (#3286)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.2
+
 ## 2.20.0
 
 ### Minor Changes
