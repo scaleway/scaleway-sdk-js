@@ -1,4 +1,4 @@
-import type { RetryOptions } from '../internal/async/http-retry.js'
+import type { ResolvedRetryOptions, RetryOptions } from '../internal/async/http-retry.js'
 import { assertValidRetryOptions } from '../internal/async/http-retry.js'
 import type { NetworkInterceptors, RequestInterceptor, ResponseInterceptor } from '../internal/interceptors/types.js'
 import { isOrganizationId, isProjectId, isRegion, isURL, isZone } from '../internal/validations/string-validation.js'
@@ -34,9 +34,9 @@ export type Settings = DefaultValues & {
   /**
    * Automatic retry configuration for transient HTTP failures.
    * When unset, requests are not retried.
-   * See {@link withRetry} for idempotency and `Retry-After` capping notes.
+   * Prefer setting this via {@link withRetry}, which stores a fully resolved object.
    */
-  retry?: RetryOptions
+  retry?: RetryOptions | ResolvedRetryOptions
   /**
    * HTTP Client doing the requests.
    */

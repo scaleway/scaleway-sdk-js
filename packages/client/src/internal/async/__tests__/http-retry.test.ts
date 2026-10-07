@@ -5,6 +5,7 @@ import { AbortError } from '../../../scw/fetch/abort-error.js'
 import {
   assertValidRetryOptions,
   isDefaultRetryableError,
+  isIdempotentMethod,
   isNetworkError,
   parseRetryAfterHeader,
   resolveRetryDelayMs,
@@ -13,37 +14,59 @@ import {
 
 const neverRetryable = (): boolean => false
 
-describe('isNetworkError', () => {
-  it('detects TypeError as network error', () => {
-    expect(isNetworkError(new TypeError('fetch failed'))).toBe(true)
+describe('isIdempotentMethod', () => {
+  it('treats GET PUT DELETE as idempotent', () => {
+    expect(isIdempotentMethod('GET')).toBe(true)
+    expect(isIdempotentMethod('PUT')).toBe(true)
+    expect(isIdempotentMethod('DELETE')).toBe(true)
   })
 
-  it('ignores other errors', () => {
+  it('treats POST and PATCH as non-idempotent', () => {
+    expect(isIdempotentMethod('POST')).toBe(false)
+    expect(isIdempotentMethod('PATCH')).toBe(false)
+  })
+})
+
+describe('isNetworkError', () => {
+  it('detects fetch TypeError as network error', () => {
+    expect(isNetworkError(new TypeError('fetch failed'))).toBe(true)
+    expect(isNetworkError(new TypeError('Failed to fetch'))).toBe(true)
+  })
+
+  it('ignores parser TypeError and other errors', () => {
+    expect(isNetworkError(new TypeError('Invalid response object'))).toBe(false)
     expect(isNetworkError(new Error('boom'))).toBe(false)
     expect(isNetworkError(new ScalewayError(500, 'err'))).toBe(false)
   })
 })
 
 describe('isDefaultRetryableError', () => {
-  it('retries 429 and 503', () => {
-    expect(isDefaultRetryableError(new ScalewayError(429, 'too many'))).toBe(true)
-    expect(isDefaultRetryableError(new ScalewayError(503, 'unavailable'))).toBe(true)
+  it('retries 429 for every method', () => {
+    expect(isDefaultRetryableError(new ScalewayError(429, 'too many'), { method: 'GET' })).toBe(true)
+    expect(isDefaultRetryableError(new ScalewayError(429, 'too many'), { method: 'POST' })).toBe(true)
   })
 
-  it('retries network errors', () => {
-    expect(isDefaultRetryableError(new TypeError('fetch failed'))).toBe(true)
+  it('retries 503 only for idempotent methods', () => {
+    expect(isDefaultRetryableError(new ScalewayError(503, 'unavailable'), { method: 'GET' })).toBe(true)
+    expect(isDefaultRetryableError(new ScalewayError(503, 'unavailable'), { method: 'POST' })).toBe(false)
+    expect(isDefaultRetryableError(new ScalewayError(503, 'unavailable'), { method: 'PATCH' })).toBe(false)
+  })
+
+  it('retries network errors only for idempotent methods', () => {
+    expect(isDefaultRetryableError(new TypeError('fetch failed'), { method: 'GET' })).toBe(true)
+    expect(isDefaultRetryableError(new TypeError('fetch failed'), { method: 'POST' })).toBe(false)
   })
 
   it('does not retry other status codes', () => {
-    expect(isDefaultRetryableError(new ScalewayError(400, 'bad'))).toBe(false)
-    expect(isDefaultRetryableError(new ScalewayError(500, 'err'))).toBe(false)
+    expect(isDefaultRetryableError(new ScalewayError(400, 'bad'), { method: 'GET' })).toBe(false)
+    expect(isDefaultRetryableError(new ScalewayError(500, 'err'), { method: 'GET' })).toBe(false)
   })
 
   it('does not retry abort or timeout errors', () => {
-    expect(isDefaultRetryableError(new AbortError())).toBe(false)
+    expect(isDefaultRetryableError(new AbortError(), { method: 'GET' })).toBe(false)
     const timeout = new Error('timeout')
     timeout.name = 'TimeoutError'
-    expect(isDefaultRetryableError(timeout)).toBe(false)
+    expect(isDefaultRetryableError(timeout, { method: 'GET' })).toBe(false)
   })
 })
 

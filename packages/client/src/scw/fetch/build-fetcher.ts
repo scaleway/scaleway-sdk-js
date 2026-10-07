@@ -6,6 +6,7 @@ import {
   resolveRetryDelayMs,
   resolveRetryOptions,
 } from '../../internal/async/http-retry.js'
+import type { ResolvedRetryOptions } from '../../internal/async/http-retry.js'
 import { sleep } from '../../internal/async/sleep.js'
 import {
   composeRequestInterceptors,
@@ -52,12 +53,38 @@ const asIs = <T>(response: unknown) => response as T
 
 export type Fetcher = <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>
 
+const toResolvedRetryOptions = (retry: NonNullable<Settings['retry']>): ResolvedRetryOptions => {
+  if (
+    typeof retry.maxRetries === 'number' &&
+    typeof retry.minDelay === 'number' &&
+    typeof retry.maxDelay === 'number' &&
+    typeof retry.isRetryable === 'function'
+  ) {
+    return {
+      isRetryable: retry.isRetryable,
+      maxDelay: retry.maxDelay,
+      maxRetries: retry.maxRetries,
+      minDelay: retry.minDelay,
+    }
+  }
+
+  return resolveRetryOptions(retry)
+}
+
 /**
  * Builds a resource fetcher.
  *
  * @param settings - The {@link Settings} object
  * @param httpClient - The HTTP client that should be used to call the API
  * @returns The fetcher
+ *
+ * @remarks
+ * When `settings.retry` is set:
+ * - `responseError` interceptors run only after retries are exhausted (not on each failed attempt).
+ * - request/response interceptors (including logs) run on every attempt.
+ * - A single `AbortSignal` covers the whole retry sequence when using `defaultTimeoutMs`
+ *   or a caller-supplied `signal` (total wall-clock is not `timeout × attempts`).
+ * - Request bodies must be reusable strings (SDK default). A `ReadableStream` body cannot be rebuilt.
  *
  * @internal
  */
@@ -78,7 +105,7 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       settings.interceptors.map(obj => obj.responseError).filter((x): x is ResponseErrorInterceptor => x !== undefined),
     )
 
-  const retryOptions = settings.retry !== undefined ? resolveRetryOptions(settings.retry) : undefined
+  const retryOptions = settings.retry !== undefined ? toResolvedRetryOptions(settings.retry) : undefined
 
   return async <T>(request: Readonly<ScwRequest>, unwrapper: ResponseUnmarshaller<T> = asIs): Promise<T> => {
     requestNumber += 1
@@ -89,12 +116,29 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     const backoff = retryOptions !== undefined ? createRetryBackoffStrategy(retryOptions) : undefined
     const maxAttempts = retryOptions !== undefined ? retryOptions.maxRetries + 1 : 1
 
+    // One signal for the whole retry sequence so defaultTimeoutMs is a total deadline,
+    // not multiplied by the number of attempts.
+    const attemptRequest: ScwRequest = {
+      ...request,
+      signal:
+        request.signal ??
+        (settings.defaultTimeoutMs !== undefined ? AbortSignal.timeout(settings.defaultTimeoutMs) : undefined),
+    }
+    // Avoid buildRequest creating a fresh AbortSignal.timeout per attempt.
+    const attemptSettings: Settings =
+      attemptRequest.signal !== undefined ? { ...settings, defaultTimeoutMs: undefined } : settings
+
     let lastRequest: Request | undefined = undefined
     let lastError: unknown = undefined
 
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      if (attemptRequest.signal?.aborted === true) {
+        lastError = attemptRequest.signal.reason ?? new Error('The operation was aborted')
+        break
+      }
+
       // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
-      lastRequest = await reqInterceptors(buildRequest(request, settings))
+      lastRequest = await reqInterceptors(buildRequest(attemptRequest, attemptSettings))
       let retryAfterMs: number | undefined = undefined
 
       try {
@@ -113,7 +157,8 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
           retryOptions !== undefined &&
           backoff !== undefined &&
           attempt + 1 < maxAttempts &&
-          retryOptions.isRetryable(error)
+          attemptRequest.signal?.aborted !== true &&
+          retryOptions.isRetryable(error, { method: request.method })
 
         if (!canRetry) {
           break
@@ -130,9 +175,13 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       }
     }
 
+    if (lastRequest === undefined) {
+      throw lastError instanceof Error ? lastError : new Error('request failed')
+    }
+
     const resErrorInterceptors = prepareResponseErrors()
     // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- error interceptor may transform the error into the response type expected by the unwrapper
-    const handledError = (await resErrorInterceptors(lastRequest ?? buildRequest(request, settings), lastError)) as T
+    const handledError = (await resErrorInterceptors(lastRequest, lastError)) as T
 
     return unwrapper(handledError)
   }

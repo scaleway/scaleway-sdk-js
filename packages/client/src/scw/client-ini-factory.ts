@@ -100,18 +100,21 @@ export const withTimeout =
 /**
  * Instantiates the SDK with automatic retries on transient HTTP failures.
  *
- * By default retries up to 2 times on 429, 503 and network errors, using exponential
- * backoff and honouring the `Retry-After` header when present (capped by `maxDelay`).
+ * By default retries up to 2 times using exponential backoff, honouring `Retry-After`
+ * when present (capped by `maxDelay`):
+ * - **429** on every method
+ * - **503** and network errors only on idempotent methods (`GET`, `PUT`, `DELETE`)
  *
  * @param options - Retry configuration
  * @returns A factory {@link ClientConfig}
  *
  * @remarks
  * This method should be used in conjunction with the initializer `createAdvancedClient`.
- * Retries apply to every HTTP method, including non-idempotent ones (`POST`, `PATCH`):
- * prefer enabling retry for read-heavy workloads, or pass a custom `isRetryable`, when
- * duplicate side effects would be unsafe.
  * A custom `isRetryable` fully replaces the default predicate (it does not merge with it).
+ * Combined with `withTimeout`, the timeout applies to the whole retry sequence (not per attempt).
+ * `responseError` interceptors run only after retries are exhausted.
+ * Request/response interceptors (and logs) run on every attempt.
+ * Only reusable string bodies are supported across retries (SDK default); `ReadableStream` bodies cannot be rebuilt.
  *
  * @public
  */

@@ -1,4 +1,4 @@
-import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser.js'
 import { addHeaderInterceptor } from '../../../internal/interceptors/helpers.js'
 import type { Settings } from '../../client-settings.js'
@@ -110,16 +110,12 @@ describe(`buildRequest`, () => {
 })
 
 describe(`buildFetcher (mock)`, () => {
-  afterAll(() => {
+  afterEach(() => {
     vi.restoreAllMocks()
   })
 
-  vi.spyOn(globalThis, 'fetch')
-  const mockedFetch = vi.mocked(fetch)
-  const fetcher = buildFetcher(DEFAULT_SETTINGS, globalThis.fetch)
-
   it(`gets a response without error for a simple request with unmarshaller`, async () => {
-    mockedFetch.mockResolvedValue(
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
       Response.json(
         {},
         {
@@ -128,8 +124,8 @@ describe(`buildFetcher (mock)`, () => {
       ),
     )
 
-    return expect(
-      fetcher(
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock }, fetchMock)(
         {
           method: 'POST',
           path: '/undefined',
@@ -140,7 +136,7 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   it('gets modified response', async () => {
-    mockedFetch.mockResolvedValue(
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
       Response.json(
         {},
         {
@@ -149,17 +145,18 @@ describe(`buildFetcher (mock)`, () => {
       ),
     )
 
-    return expect(
+    await expect(
       buildFetcher(
         {
           ...DEFAULT_SETTINGS,
+          httpClient: fetchMock,
           interceptors: [
             {
               response: () => Response.json('42'),
             },
           ],
         },
-        globalThis.fetch,
+        fetchMock,
       )({
         method: 'POST',
         path: '/undefined',
@@ -168,7 +165,7 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   it(`gets a response without error for a simple request without unmarshaller`, async () => {
-    mockedFetch.mockResolvedValue(
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
       Response.json(
         { any_parameter: 'any-value' },
         {
@@ -177,8 +174,8 @@ describe(`buildFetcher (mock)`, () => {
       ),
     )
 
-    return expect(
-      fetcher({
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock }, fetchMock)({
         method: 'POST',
         path: '/undefined',
       }),
@@ -186,19 +183,20 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   it('gets a response with response error interceptor despite the error', async () => {
-    mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
+    const fetchMock = vi.fn<typeof fetch>().mockRejectedValue(new TypeError('fetch failed'))
 
-    return expect(
+    await expect(
       buildFetcher(
         {
           ...DEFAULT_SETTINGS,
+          httpClient: fetchMock,
           interceptors: [
             {
               responseError: () => 42,
             },
           ],
         },
-        globalThis.fetch,
+        fetchMock,
       )({
         method: 'GET',
         path: '/will-trigger-an-error',
@@ -207,19 +205,20 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   it('gets the unmarshalled value of what responseError returns', async () => {
-    mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
+    const fetchMock = vi.fn<typeof fetch>().mockRejectedValue(new TypeError('fetch failed'))
 
-    return expect(
+    await expect(
       buildFetcher(
         {
           ...DEFAULT_SETTINGS,
+          httpClient: fetchMock,
           interceptors: [
             {
               responseError: () => 42,
             },
           ],
         },
-        globalThis.fetch,
+        fetchMock,
       )(
         {
           method: 'GET',
@@ -231,12 +230,13 @@ describe(`buildFetcher (mock)`, () => {
   })
 
   it('gets modified request in response error', async () => {
-    mockedFetch.mockRejectedValue(new TypeError('mock fetch error'))
+    const fetchMock = vi.fn<typeof fetch>().mockRejectedValue(new TypeError('fetch failed'))
 
-    return expect(
+    await expect(
       buildFetcher(
         {
           ...DEFAULT_SETTINGS,
+          httpClient: fetchMock,
           interceptors: [
             {
               request: addHeaderInterceptor('random-header', '42'),
@@ -244,7 +244,7 @@ describe(`buildFetcher (mock)`, () => {
             },
           ],
         },
-        globalThis.fetch,
+        fetchMock,
       )({
         method: 'GET',
         path: '/will-trigger-an-error',
@@ -278,7 +278,7 @@ describe('buildFetcher retry', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 
-  it('retries 503 then succeeds', async () => {
+  it('retries 503 on GET then succeeds', async () => {
     const fetchMock = vi
       .fn<typeof fetch>()
       .mockResolvedValueOnce(Response.json({ message: 'unavailable' }, { status: 503 }))
@@ -297,6 +297,52 @@ describe('buildFetcher retry', () => {
     )({
       method: 'GET',
       path: '/retry-503',
+    })
+    await vi.runAllTimersAsync()
+    await expect(resultPromise).resolves.toMatchObject({ ok: true })
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('does not retry 503 on POST', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
+
+    await expect(
+      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } }, fetchMock)({
+        method: 'POST',
+        path: '/no-retry-post',
+      }),
+    ).rejects.toThrow(ScalewayError)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('retries 429 on POST', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(
+        Response.json(
+          { help_message: 'slow down', type: 'too_many_requests' },
+          {
+            status: 429,
+          },
+        ),
+      )
+      .mockResolvedValueOnce(
+        Response.json(
+          { ok: true },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        ),
+      )
+
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 1 } },
+      fetchMock,
+    )({
+      method: 'POST',
+      path: '/retry-429-post',
     })
     await vi.runAllTimersAsync()
     await expect(resultPromise).resolves.toMatchObject({ ok: true })
@@ -370,7 +416,7 @@ describe('buildFetcher retry', () => {
     expect(globalThis.setTimeout).toHaveBeenCalledWith(expect.any(Function), 30_000)
   })
 
-  it('retries network errors', async () => {
+  it('retries network errors on GET', async () => {
     const fetchMock = vi
       .fn<typeof fetch>()
       .mockRejectedValueOnce(new TypeError('fetch failed'))
@@ -395,6 +441,33 @@ describe('buildFetcher retry', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
+  it('does not retry parser TypeError as network error', async () => {
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- force invalid response for parser TypeError
+      'not-a-response' as unknown as Response,
+    )
+
+    await expect(
+      buildFetcher(
+        {
+          ...DEFAULT_SETTINGS,
+          httpClient: fetchMock,
+          interceptors: [
+            {
+              response: () => 'not-a-response' as unknown as Response,
+            },
+          ],
+          retry: { maxRetries: 2 },
+        },
+        fetchMock,
+      )({
+        method: 'GET',
+        path: '/parser-typeerror',
+      }),
+    ).rejects.toThrow(TypeError)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+  })
+
   it('stops after maxRetries', async () => {
     const fetchMock = vi
       .fn<typeof fetch>()
@@ -411,5 +484,32 @@ describe('buildFetcher retry', () => {
     await vi.runAllTimersAsync()
     await expectation
     expect(fetchMock).toHaveBeenCalledTimes(3)
+  })
+
+  it('runs responseError interceptors only after retries are exhausted', async () => {
+    const responseError = vi.fn(() => {
+      throw new ScalewayError(503, 'unavailable')
+    })
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
+
+    const resultPromise = buildFetcher(
+      {
+        ...DEFAULT_SETTINGS,
+        httpClient: fetchMock,
+        interceptors: [{ responseError }],
+        retry: { maxRetries: 2 },
+      },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/interceptor-once',
+    })
+    const expectation = expect(resultPromise).rejects.toThrow(ScalewayError)
+    await vi.runAllTimersAsync()
+    await expectation
+    expect(fetchMock).toHaveBeenCalledTimes(3)
+    expect(responseError).toHaveBeenCalledTimes(1)
   })
 })

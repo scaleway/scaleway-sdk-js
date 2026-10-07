@@ -1,11 +1,24 @@
 import { ScalewayError } from '../../scw/errors/scw-error.js'
 import { TooManyRequestsError } from '../../scw/errors/standard/too-many-requests-error.js'
 import { isAbortError } from '../../scw/fetch/abort-error.js'
+import type { ScwRequest } from '../../scw/fetch/types.js'
 import { createExponentialBackoffStrategy } from './interval-retrier.js'
 
 const DEFAULT_MAX_RETRIES = 2
 const DEFAULT_MIN_DELAY_SECONDS = 1
 const DEFAULT_MAX_DELAY_SECONDS = 30
+
+const IDEMPOTENT_METHODS = new Set<ScwRequest['method']>(['GET', 'PUT', 'DELETE'])
+
+/**
+ * Context passed to {@link RetryOptions.isRetryable}.
+ *
+ * @public
+ */
+export type RetryContext = {
+  /** HTTP method of the request being retried. */
+  method: ScwRequest['method']
+}
 
 /**
  * Options controlling automatic retries on transient HTTP failures.
@@ -34,49 +47,76 @@ export type RetryOptions = {
   maxDelay?: number
   /**
    * Predicate deciding whether an error is retryable.
-   * Defaults to retrying 429, 503 and network errors.
+   * Defaults to {@link isDefaultRetryableError}.
    * When provided, fully replaces the default predicate (including abort/timeout guards).
    */
-  isRetryable?: (error: unknown) => boolean
+  isRetryable?: (error: unknown, context: RetryContext) => boolean
 }
 
 /**
  * Resolved retry settings with defaults applied.
  *
- * @internal
+ * @public
  */
 export type ResolvedRetryOptions = {
   maxRetries: number
   minDelay: number
   maxDelay: number
-  isRetryable: (error: unknown) => boolean
+  isRetryable: (error: unknown, context: RetryContext) => boolean
 }
 
 /**
- * Returns whether the error is a transient network failure (e.g. DNS, connection reset).
+ * Returns whether the HTTP method is safe to retry with side-effecting status codes (e.g. 503).
  *
  * @internal
  */
-export const isNetworkError = (error: unknown): boolean => error instanceof TypeError
+export const isIdempotentMethod = (method: ScwRequest['method']): boolean => IDEMPOTENT_METHODS.has(method)
 
 /**
- * Default retry predicate: 429, 503 and network errors.
- * Aborts and timeouts are never retried.
+ * Returns whether the error is a transient network failure from `fetch`
+ * (not a programming `TypeError` from response parsing/interceptors).
  *
  * @internal
  */
-export const isDefaultRetryableError = (error: unknown): boolean => {
+export const isNetworkError = (error: unknown): boolean => {
+  if (!(error instanceof TypeError)) {
+    return false
+  }
+  // responseParser throws TypeError('Invalid response object') — not a network failure.
+  if (error.message === 'Invalid response object') {
+    return false
+  }
+  const message = error.message.toLowerCase()
+
+  return message.includes('fetch') || message.includes('network')
+}
+
+/**
+ * Default retry predicate:
+ * - never retries abort / timeout errors
+ * - retries 429 for every method
+ * - retries 503 and network errors only for idempotent methods (`GET`, `PUT`, `DELETE`)
+ *
+ * @internal
+ */
+export const isDefaultRetryableError = (error: unknown, context: RetryContext): boolean => {
   if (isAbortError(error)) {
     return false
   }
   if (error instanceof Error && error.name === 'TimeoutError') {
     return false
   }
+  if (error instanceof ScalewayError && error.status === 429) {
+    return true
+  }
+  if (!isIdempotentMethod(context.method)) {
+    return false
+  }
   if (isNetworkError(error)) {
     return true
   }
   if (error instanceof ScalewayError) {
-    return error.status === 429 || error.status === 503
+    return error.status === 503
   }
 
   return false
@@ -175,15 +215,21 @@ export const assertValidRetryOptions = (options: RetryOptions): void => {
   }
   if (
     options.minDelay !== undefined &&
-    (typeof options.minDelay !== 'number' || Number.isNaN(options.minDelay) || options.minDelay < 1)
+    (typeof options.minDelay !== 'number' ||
+      Number.isNaN(options.minDelay) ||
+      options.minDelay < 1 ||
+      !Number.isFinite(options.minDelay))
   ) {
-    throw new Error(`Invalid retry.minDelay ${options.minDelay}: it should be a number >= 1`)
+    throw new Error(`Invalid retry.minDelay ${options.minDelay}: it should be a finite number >= 1`)
   }
   if (
     options.maxDelay !== undefined &&
-    (typeof options.maxDelay !== 'number' || Number.isNaN(options.maxDelay) || options.maxDelay < 1)
+    (typeof options.maxDelay !== 'number' ||
+      Number.isNaN(options.maxDelay) ||
+      options.maxDelay < 1 ||
+      !Number.isFinite(options.maxDelay))
   ) {
-    throw new Error(`Invalid retry.maxDelay ${options.maxDelay}: it should be a number >= 1`)
+    throw new Error(`Invalid retry.maxDelay ${options.maxDelay}: it should be a finite number >= 1`)
   }
   if (
     options.minDelay !== undefined &&
