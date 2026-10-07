@@ -73,7 +73,10 @@ const toParamString = (v: URLParameterValue): string | null => {
   if (v instanceof Date) {
     return v.toISOString()
   }
-  return v.toString()
+  const s = v.toString()
+  // Empty strings carry no filter semantics (e.g. a reset form field).
+  // Treat them as "no value", like null/undefined, so we never send `name=`.
+  return s === '' ? null : s
 }
 
 export const urlParams = (
