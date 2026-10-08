@@ -8,10 +8,13 @@ export const createSDKFactory =
   <K extends keyof APISdkCache>(SDKNamespace: new (client: Client) => APISdkCache[K], cacheKey: K) =>
   () => {
     const clientCtx = useContext(ClientContext)
-    const { sdkCache, setSdkInstance } = useSDKCache()
+    const { getSdkCache, setSdkInstance } = useSDKCache()
+
+    const sdkCache = getSdkCache()
 
     // Check if we already have this SDK instance cached
-    if (sdkCache?.[cacheKey] !== undefined) {
+    // oxlint-disable-next-line typescript/no-unnecessary-condition -- the cache is progressively populated at runtime; a key is undefined until its factory first runs
+    if (sdkCache[cacheKey] !== undefined) {
       // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- mapped-type return keyed by K cannot be expressed without a cast
       return { [cacheKey]: sdkCache[cacheKey] } as { [P in K]: APISdkCache[P] }
     }
@@ -42,10 +45,13 @@ export const createGenericSDKFactory =
   ) =>
   () => {
     const { client } = useClient()
-    const { sdkCache, setSdkInstance } = useSDKCache<TCustomAPIs>()
+    const { getSdkCache, setSdkInstance } = useSDKCache<TCustomAPIs>()
+
+    const sdkCache = getSdkCache()
 
     // Check if we already have this SDK instance cached
-    if (sdkCache?.[cacheKey] !== undefined) {
+    // oxlint-disable-next-line typescript/no-unnecessary-condition -- the cache is progressively populated at runtime; a key is undefined until its factory first runs
+    if (sdkCache[cacheKey] !== undefined) {
       // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- mapped-type return keyed by K cannot be expressed without a cast
       return { [cacheKey]: sdkCache[cacheKey] } as {
         [P in K]: ExtendedAPISdkCache<TCustomAPIs>[P]
