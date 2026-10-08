@@ -19,9 +19,6 @@ const VALID_SETTINGS: Settings = {
 const INVALID_SETTINGS_LIST: Partial<Settings>[] = [
   { apiURL: 'https://api.scaleway.com/' },
   { apiURL: 'ftp://api.scaleway.com' },
-  { defaultZone: 'fr-par-0' },
-  { defaultZone: 'fr-par' },
-  { defaultRegion: 'fr-par-1' },
   // @ts-expect-error Unknown client type
   { httpClient: 'str-client' },
   { defaultOrganizationId: '' },

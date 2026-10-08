@@ -1,4 +1,4 @@
-export type Region = 'fr-par' | 'nl-ams' | 'pl-waw' | 'it-mil' | (string & {})
+export type Region = 'fr-par' | 'nl-ams' | 'pl-waw' | 'it-mil'
 
 export type Zone =
   | 'fr-par-1'
@@ -13,7 +13,6 @@ export type Zone =
   | 'it-mil-1'
   | 'it-mil-2'
   | 'it-mil-3'
-  | (string & {})
 
 export type ApiLocality =
   | { type: 'zone'; zones: Zone[] }
