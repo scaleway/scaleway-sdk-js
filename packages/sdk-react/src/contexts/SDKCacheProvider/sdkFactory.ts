@@ -8,7 +8,9 @@ export const createSDKFactory =
   <K extends keyof APISdkCache>(SDKNamespace: new (client: Client) => APISdkCache[K], cacheKey: K) =>
   () => {
     const clientCtx = useContext(ClientContext)
-    const { sdkCache, setSdkInstance } = useSDKCache()
+    const { getSdkCache, setSdkInstance } = useSDKCache()
+
+    const sdkCache = getSdkCache()
 
     // Check if we already have this SDK instance cached
     if (sdkCache?.[cacheKey] !== undefined) {
@@ -42,7 +44,9 @@ export const createGenericSDKFactory =
   ) =>
   () => {
     const { client } = useClient()
-    const { sdkCache, setSdkInstance } = useSDKCache<TCustomAPIs>()
+    const { getSdkCache, setSdkInstance } = useSDKCache<TCustomAPIs>()
+
+    const sdkCache = getSdkCache()
 
     // Check if we already have this SDK instance cached
     if (sdkCache?.[cacheKey] !== undefined) {
