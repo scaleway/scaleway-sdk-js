@@ -11,7 +11,7 @@ export {
 } from './helpers/marshalling.js'
 export { addAsyncHeaderInterceptor } from './internal/interceptors/helpers.js'
 export { API } from './scw/api.js'
-export { authenticateWithSessionToken } from './scw/auth.js'
+export { authenticateWithSessionToken, authenticateWithTokenProvider } from './scw/auth.js'
 export type { DefaultValues } from './scw/client-settings.js'
 export {
   marshalBlobToScwFile,
