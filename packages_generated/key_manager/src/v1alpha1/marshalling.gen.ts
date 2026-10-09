@@ -27,6 +27,7 @@ import type {
   EncryptRequest,
   GenerateDataKeyRequest,
   GenerateKeyMaterialImportParametersRequest,
+  ImportKeyMaterialRequestEncryptedKeyMaterial,
   ImportKeyMaterialRequest,
   SignRequest,
   UnwrapKeyRequest,
@@ -365,12 +366,28 @@ export const marshalGenerateKeyMaterialImportParametersRequest = (
   wrapping_algorithm: request.wrappingAlgorithm,
 })
 
+const marshalImportKeyMaterialRequestEncryptedKeyMaterial = (
+  request: ImportKeyMaterialRequestEncryptedKeyMaterial,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  data: request.data,
+  import_token: request.importToken,
+})
+
 export const marshalImportKeyMaterialRequest = (
   request: ImportKeyMaterialRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  key_material: request.keyMaterial,
-  salt: request.salt,
+  salt: request.salt,  
+  ...resolveOneOf<string | Record<string, unknown>>([
+    {param: 'key_material',
+      value: request.keyMaterial,
+    },
+    {param: 'encrypted_key_material',
+      value: (request.encryptedKeyMaterial !== undefined) ? marshalImportKeyMaterialRequestEncryptedKeyMaterial(request.encryptedKeyMaterial, defaults)
+      : undefined,
+    },
+  ]),
 })
 
 export const marshalSignRequest = (

@@ -848,6 +848,10 @@ export type ListNodeTypesRequest = {
   includeDisabled?: boolean
   page?: number
   pageSize?: number
+  /**
+   * ID of a project to get a personalized view of the stock.
+   */
+  projectId?: string
 }
 
 
