@@ -1,5 +1,232 @@
 # Change Log
 
+## 0.20.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(deps): update react monorepo to v19.3.0 (#3539)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- chore(release): publish
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(autoscaling): add v1alpha2 (#3127)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: add range to react deps (#3581)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore: sync sdk-react release inputs (#2995)
+
+- fix(oxlint): enable no-shadow, prefer-destructuring, prefer-global-this, set-state-in-effect as error (#3592)
+
+- feat(generate-react-queries): pass abort signal to query methods (#3651)
+
+- chore(deps): update dependency lerna to v9.0.5 (#2806)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- chore: add a post_generate target for sdk-js pipeline post-generation (#3000)
+
+- fix(bin): rename bin (#2815)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generate-queries): sdk-react-queries (#2802)
+
+- chore(release): publish
+
+- fix(sdk): std release (#2797)
+
+- fix(sdk-react): expose factory (#2801)
+
+- chore(annotations): make it public (#3107)
+
+- feat(sdk-react): expose ClientContext (#3262)
+
+- chore(release): publish
+
+- fix(pnpm): optimisticRepeatInstall setting to false (#3167)
+
+- chore(release): publish
+
+- chore(deps): update dependency react to ^19.2.5 (#2908)
+
+- fix(oxlint): enable no-unsafe-type-assertion and no-unnecessary-condition as error (#3596)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- fix(oxlint): enable typescript/strict-boolean-expressions as error (#3570)
+
+- fix: release provenance (#3552)
+
+- feat(billing): set public visibility for budget API (#3056)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(vpcgw): remove v1 API export (#2972)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(inference): add support for react hooks (#3014)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency tinyglobby to v0.2.16 (#2957)
+
+- chore(release): publish
+
+- fix(release): run by commit and github release cli (#3185)
+
+- fix(sdk-react): remove duplicate condition (#3263)
+
+- fix(format): format package.json (#2817)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- chore(deps): update dependency typescript to v6 (#2914)
+
+- chore(release): publish
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574)
+
+- chore(release): publish
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+### Patch Changes
+
+- fix SDKCacheProvider cache not populating on first setSdkInstance call
+
+  The cache started as `null` and `setSdkInstance` was guarded by a null check,
+  so the first call was a no-op and SDK instances were recreated on every render.
+  Initialize the cache to an empty object instead.
+
+- Updated dependencies:
+  - @scaleway/sdk-account@2.16.1
+  - @scaleway/sdk-annotations@1.10.1
+  - @scaleway/sdk-applesilicon@2.18.1
+  - @scaleway/sdk-audit-trail@2.32.1
+  - @scaleway/sdk-autoscaling@2.17.1
+  - @scaleway/sdk-baremetal@2.17.1
+  - @scaleway/sdk-billing@2.20.1
+  - @scaleway/sdk-block@2.20.1
+  - @scaleway/sdk-cockpit@2.16.1
+  - @scaleway/sdk-container@2.21.1
+  - @scaleway/sdk-datalab@1.15.1
+  - @scaleway/sdk-datawarehouse@2.22.1
+  - @scaleway/sdk-dedibox@2.19.1
+  - @scaleway/sdk-domain@2.18.1
+  - @scaleway/sdk-edge-services@2.27.1
+  - @scaleway/sdk-environmental-footprint@2.22.1
+  - @scaleway/sdk-file@2.18.1
+  - @scaleway/sdk-flexibleip@2.16.1
+  - @scaleway/sdk-function@2.18.1
+  - @scaleway/sdk-iam@2.21.1
+  - @scaleway/sdk-inference@2.20.1
+  - @scaleway/sdk-instance@2.24.1
+  - @scaleway/sdk-interlink@2.17.1
+  - @scaleway/sdk-iot@2.16.1
+  - @scaleway/sdk-ipam@2.19.1
+  - @scaleway/sdk-jobs@2.18.1
+  - @scaleway/sdk-k8s@2.29.1
+  - @scaleway/sdk-kafka@2.18.1
+  - @scaleway/sdk-key-manager@2.21.0
+  - @scaleway/sdk-lb@2.19.1
+  - @scaleway/sdk-marketplace@2.14.1
+  - @scaleway/sdk-mnq@2.16.1
+  - @scaleway/sdk-mongodb@2.21.0
+  - @scaleway/sdk-partner@1.14.1
+  - @scaleway/sdk-product-catalog@2.31.1
+  - @scaleway/sdk-qaas@2.16.1
+  - @scaleway/sdk-rdb@2.19.1
+  - @scaleway/sdk-redis@2.17.1
+  - @scaleway/sdk-registry@2.16.1
+  - @scaleway/sdk-s2s-vpn@2.21.1
+  - @scaleway/sdk-searchdb@1.17.1
+  - @scaleway/sdk-secret@2.17.0
+  - @scaleway/sdk-serverless-sqldb@2.18.1
+  - @scaleway/sdk-tem@2.16.1
+  - @scaleway/sdk-vpc@2.21.1
+  - @scaleway/sdk-vpcgw@2.18.1
+  - @scaleway/sdk-webhosting@2.22.1
+
 ## 0.19.0
 
 ### Minor Changes

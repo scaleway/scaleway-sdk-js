@@ -1,5 +1,59 @@
 # Change Log
 
+## 0.21.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-account@2.16.1
+  - @scaleway/sdk-annotations@1.10.1
+  - @scaleway/sdk-applesilicon@2.18.1
+  - @scaleway/sdk-audit-trail@2.32.1
+  - @scaleway/sdk-autoscaling@2.17.1
+  - @scaleway/sdk-baremetal@2.17.1
+  - @scaleway/sdk-billing@2.20.1
+  - @scaleway/sdk-block@2.20.1
+  - @scaleway/sdk-cockpit@2.16.1
+  - @scaleway/sdk-container@2.21.1
+  - @scaleway/sdk-datalab@1.15.1
+  - @scaleway/sdk-datawarehouse@2.22.1
+  - @scaleway/sdk-dedibox@2.19.1
+  - @scaleway/sdk-domain@2.18.1
+  - @scaleway/sdk-edge-services@2.27.1
+  - @scaleway/sdk-environmental-footprint@2.22.1
+  - @scaleway/sdk-file@2.18.1
+  - @scaleway/sdk-flexibleip@2.16.1
+  - @scaleway/sdk-function@2.18.1
+  - @scaleway/sdk-iam@2.21.1
+  - @scaleway/sdk-inference@2.20.1
+  - @scaleway/sdk-instance@2.24.1
+  - @scaleway/sdk-interlink@2.17.1
+  - @scaleway/sdk-iot@2.16.1
+  - @scaleway/sdk-ipam@2.19.1
+  - @scaleway/sdk-jobs@2.18.1
+  - @scaleway/sdk-k8s@2.29.1
+  - @scaleway/sdk-kafka@2.18.1
+  - @scaleway/sdk-key-manager@2.21.0
+  - @scaleway/sdk-lb@2.19.1
+  - @scaleway/sdk-marketplace@2.14.1
+  - @scaleway/sdk-mnq@2.16.1
+  - @scaleway/sdk-mongodb@2.21.0
+  - @scaleway/sdk-partner@1.14.1
+  - @scaleway/sdk-product-catalog@2.31.1
+  - @scaleway/sdk-qaas@2.16.1
+  - @scaleway/sdk-rdb@2.19.1
+  - @scaleway/sdk-react@0.20.0
+  - @scaleway/sdk-redis@2.17.1
+  - @scaleway/sdk-registry@2.16.1
+  - @scaleway/sdk-s2s-vpn@2.21.1
+  - @scaleway/sdk-searchdb@1.17.1
+  - @scaleway/sdk-secret@2.17.0
+  - @scaleway/sdk-serverless-sqldb@2.18.1
+  - @scaleway/sdk-tem@2.16.1
+  - @scaleway/sdk-vpc@2.21.1
+  - @scaleway/sdk-vpcgw@2.18.1
+  - @scaleway/sdk-webhosting@2.22.1
+
 ## 0.21.0
 
 ### Minor Changes
