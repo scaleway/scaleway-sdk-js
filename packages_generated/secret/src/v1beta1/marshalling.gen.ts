@@ -254,7 +254,7 @@ export const marshalCreateSecretRequest = (
   description: request.description,
   ephemeral_policy: ((request.ephemeralPolicy !== undefined) ?  marshalEphemeralPolicy(request.ephemeralPolicy, defaults): undefined),
   key_id: request.keyId,
-  name: request.name,
+  name: request.name || randomName('secret'),
   path: request.path,
   project_id: request.projectId ?? defaults.defaultProjectId,
   protected: request.protected,
