@@ -47,14 +47,14 @@ export type ProfileDefaultValues = {
    *
    * Examples: fr-par, nl-ams.
    */
-  defaultRegion?: Region
+  defaultRegion?: Region | ''
   /**
    * A region can be split into many availability zones (AZ).
    * Latency between multiple AZ of the same region are low as they have a common network layer.
    *
    * Examples: fr-par-1, nl-ams-1
    */
-  defaultZone?: Zone
+  defaultZone?: Zone | ''
 }
 
 /**
