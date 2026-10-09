@@ -134,6 +134,18 @@ export interface KeyUsage {
 }
 
 
+export interface ImportKeyMaterialRequestEncryptedKeyMaterial {
+  /**
+   * This material must be encrypted using the public key and the exact wrapping algorithm returned by the `GetKeyMaterialImportParameters` method.
+   */
+  data: string
+  /**
+   * The secure import token returned by the `GetKeyMaterialImportParameters` method.
+   */
+  importToken: string
+}
+
+
 export interface ListAlgorithmsResponseAlgorithm {
   usage: string
   name: string
@@ -529,13 +541,21 @@ export type ImportKeyMaterialRequest = {
    */
   keyId: string
   /**
-   * The key material is a random sequence of bytes used to derive a cryptographic key.
+   * @deprecated Deprecated. Use `encrypted_key_material` instead. The key material is a random sequence of bytes used to derive a cryptographic key.
+   *
+   * One-of ('material'): at most one of 'keyMaterial', 'encryptedKeyMaterial' could be set.
    */
-  keyMaterial: string
+  keyMaterial?: string
   /**
    * A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy).
    */
   salt?: string
+  /**
+   * This material must be encrypted using the public key and the exact wrapping algorithm returned by the `GetKeyMaterialImportParameters` method.
+   *
+   * One-of ('material'): at most one of 'keyMaterial', 'encryptedKeyMaterial' could be set.
+   */
+  encryptedKeyMaterial?: ImportKeyMaterialRequestEncryptedKeyMaterial
 }
 
 

@@ -24,6 +24,7 @@ export type {
   GetKeyRequest,
   GetPublicKeyRequest,
   ImportKeyMaterialRequest,
+  ImportKeyMaterialRequestEncryptedKeyMaterial,
   Key,
   KeyAlgorithmAsymmetricEncryption,
   KeyAlgorithmAsymmetricSigning,

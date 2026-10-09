@@ -107,6 +107,7 @@ export class API extends ParentAPI {
           ['include_disabled', request.includeDisabled],
           ['page', request.page],
           ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['project_id', request.projectId],
         ),
         signal: options?.signal,
       },
