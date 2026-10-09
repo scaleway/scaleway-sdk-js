@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react'
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { useClient } from '../ClientProvider'
 import type { APISdkCache, DefaultTypeBaseAPI, ExtendedAPISdkCache } from '../types'
 
@@ -29,15 +29,13 @@ export const useSDKCache = <TCustomAPIs extends DefaultTypeBaseAPI = DefaultType
   }
 }
 
-const emptyObject = {}
-
 export const SDKCacheProvider = ({
   children,
   initialCache,
 }: PropsWithChildren<{ initialCache?: Partial<ExtendedAPISdkCache<DefaultTypeBaseAPI>> }>) => {
   const { client } = useClient()
 
-  const [sdkCache, setSdkCache] = useState(initialCache ?? emptyObject)
+  const [sdkCache, setSdkCache] = useState(initialCache ?? {})
 
   const setSdkInstance = useCallback(
     (sdkInstance: Partial<ExtendedAPISdkCache<DefaultTypeBaseAPI>>) => {
@@ -47,14 +45,19 @@ export const SDKCacheProvider = ({
     [sdkCache],
   )
 
-  // reset cache when client changes
+  // reset cache when client changes, but keep the initial cache on first mount
+  const isInitialRender = useRef(true)
   useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false
+      return
+    }
     // oxlint-disable-next-line typescript/no-unnecessary-condition -- client is typed as non-null but may be absent at runtime if ClientProvider is missing
     if (client !== undefined) {
       // oxlint-disable-next-line react/set-state-in-effect -- intentional cache reset on client change
-      setSdkCache(initialCache ?? emptyObject)
+      setSdkCache({})
     }
-  }, [client, initialCache])
+  }, [client])
 
   const value = useMemo(
     () => ({
