@@ -296,11 +296,13 @@ export interface UserRole {
 
 export interface EndpointSpec {
   /**
+   * Expose the Database Instance publicly (empty object).
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
   publicNetwork?: EndpointSpecPublicNetworkDetails
   /**
+   * Attach the Database Instance to a Private Network.
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
@@ -846,6 +848,10 @@ export type ListNodeTypesRequest = {
   includeDisabled?: boolean
   page?: number
   pageSize?: number
+  /**
+   * ID of a project to get a personalized view of the stock.
+   */
+  projectId?: string
 }
 
 
