@@ -1,17 +1,20 @@
 # These owners will be the default owners for everything in
 # the repo. Unless a later match takes precedence,
-* @remyleone
+* @scaleway/front-lead  @scaleway/devtools
 
-packages @philibea
-tools @philibea
-tsconfig.json             @philibea
-.oxlintrc.jsonc            @philibea
-oxfmt.config.ts            @philibea
-tsdown.config.ts            @philibea
-vitest.setup.ts            @philibea
-vitest.config.ts            @philibea
-pnpm-workspace.yaml      @philibea
+/packages/                @scaleway/front-lead
+/tools/                   @scaleway/front-lead
+tsconfig.json             @scaleway/front-lead
+.oxlintrc.jsonc           @scaleway/front-lead
+oxfmt.config.ts           @scaleway/front-lead
+tsdown.config.ts          @scaleway/front-lead
+vitest.setup.ts           @scaleway/front-lead
+vitest.config.ts          @scaleway/front-lead
+pnpm-workspace.yaml       @scaleway/front-lead
 
+
+
+/packages_generated/ @scaleway/devtools
 /packages_generated/account/ @scaleway/devtools-core
 /packages_generated/applesilicon/ @scaleway/devtools-compute-foundation
 /packages_generated/baremetal/ @scaleway/devtools-compute-foundation
