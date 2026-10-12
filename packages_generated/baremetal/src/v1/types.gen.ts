@@ -239,6 +239,14 @@ export interface CreateServerRequestInstall {
    * Partitioning schema.
    */
   partitioningSchema?: Schema
+  /**
+   * URL of the network service to which the server should forward its boot request.
+   */
+  networkBootUrl?: string
+  /**
+   * Defines whether the network boot forwarding should be applied at every reboot or only once.
+   */
+  networkBootPersistent?: boolean
 }
 
 
@@ -303,6 +311,14 @@ export interface ServerInstall {
    * Partitioning schema.
    */
   partitioningSchema?: Schema
+  /**
+   * URL of the network service to which the server should forward its boot request.
+   */
+  networkBootUrl: string
+  /**
+   * Defines whether the network boot forwarding should be applied at every reboot or only once.
+   */
+  networkBootPersistent: boolean
 }
 
 
@@ -744,6 +760,14 @@ export interface OS {
    * Defines the cloud-init API version used by this OS.
    */
   cloudInitVersion?: string
+  /**
+   * Object defining the network boot requirements for booting server.
+   */
+  networkBoot?: OSOSField
+  /**
+   * Defines if the network boot can be persisted or not.
+   */
+  networkBootPersistentEditable: boolean
   /**
    * Zone in which is the OS is available.
    */
@@ -1215,6 +1239,14 @@ export type InstallServerRequest = {
    * @deprecated Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
    */
   userData?: Blob
+  /**
+   * URL of the network service to which the server should forward its boot request.
+   */
+  networkBootUrl?: string
+  /**
+   * Defines whether the network boot forwarding should be applied at every reboot or only once.
+   */
+  networkBootPersistent?: boolean
 }
 
 
