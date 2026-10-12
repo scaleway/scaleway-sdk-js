@@ -637,6 +637,10 @@ export interface DedicatedPoolSummary {
    * Last update timestamp of the Dedicated Pool.
    */
   updatedAt?: Date
+  /**
+   * Zone of the Dedicated Pool.
+   */
+  zone: ScwZone
 }
 
 
@@ -1522,6 +1526,10 @@ export interface DedicatedPool {
    * Last update timestamp of the Dedicated Pool.
    */
   updatedAt?: Date
+  /**
+   * Zone of the Dedicated Pool.
+   */
+  zone: ScwZone
 }
 
 
