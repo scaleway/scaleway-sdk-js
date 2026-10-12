@@ -403,6 +403,30 @@ export interface OfferBandwidthInfo {
 }
 
 
+export interface OfferCommitment {
+  /**
+   * Unit used for discount.
+   */
+  unit: string
+  /**
+   * Value of the discount.
+   */
+  value: number
+  /**
+   * Is it free setup fees.
+   */
+  freeSetupFees: boolean
+  /**
+   * Commitment's required duration.
+   */
+  duration: string
+  /**
+   * Discounted price of the commitment.
+   */
+  discountedPrice?: Money
+}
+
+
 export interface OfferLicenseInfo {
   boundToIp: boolean
 }
@@ -572,6 +596,10 @@ export interface Offer {
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
   bandwidthInfo?: OfferBandwidthInfo
+  /**
+   * Commitment info if it is a commitment offer.
+   */
+  commitments: OfferCommitment[]
 }
 
 
@@ -684,6 +712,18 @@ export interface OS {
    * OS release date.
    */
   releasedAt?: Date
+  /**
+   * Is it a beta OS.
+   */
+  beta: string
+  /**
+   * Description of the OS.
+   */
+  description: string
+  /**
+   * URL to OS official website.
+   */
+  officialWebsite: string
 }
 
 
@@ -1609,6 +1649,10 @@ export interface CPU {
    * Frequency of the CPU.
    */
   frequency: number
+  /**
+   * Bench of the CPU.
+   */
+  bench: number
 }
 
 
@@ -1641,6 +1685,12 @@ export interface Memory {
    * True if the memory is an error-correcting code memory.
    */
   isEcc: boolean
+}
+
+
+export interface OfferServerInfoAvailability {
+  stock: OfferServerInfoStock
+  quantity: number
 }
 
 
@@ -2893,6 +2943,8 @@ export interface OfferServerInfo {
   connectivity: number
   onetimeFees?: Offer
   stockByDatacenter: Record<string, OfferServerInfoStock>
+  availabilityByDatacenter: Record<string, OfferServerInfoAvailability>
+  rpnSpeed: number
 }
 
 

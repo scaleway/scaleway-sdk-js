@@ -709,9 +709,25 @@ export type SignRequest = {
    */
   keyId: string
   /**
-   * The digest must be generated using the same algorithm defined in the key’s algorithm settings.
+   * For ECDSA and RSA keys, the digest generated using the key's hashing algorithm: 32 bytes (SHA-256) or 48 bytes (SHA-384).
+The 64-byte bound only exists for the ML-DSA backward-compatibility case below.
+Also accepted for ML-DSA for backward compatibility only; signatures may not conform to the ML-DSA spec, not recommended for new usage. Prefer `message` or `external_mu` for ML-DSA.
+   *
+   * One-of ('payload'): at most one of 'digest', 'msg', 'externalMu' could be set.
    */
-  digest: string
+  digest?: string
+  /**
+   * Only supported for ML-DSA keys (`raw` signing): the server computes the μ message representative internally before signing. Between 1 and 4096 bytes.
+   *
+   * One-of ('payload'): at most one of 'digest', 'msg', 'externalMu' could be set.
+   */
+  msg?: string
+  /**
+   * Must equal SHAKE256(tr ‖ 0x00 ‖ 0x00 ‖ message), where `tr` is the SHAKE256 of the key's public key. Signatures produced from other pre-hash computations (e.g. HashML-DSA) cannot be verified through this API.
+   *
+   * One-of ('payload'): at most one of 'digest', 'msg', 'externalMu' could be set.
+   */
+  externalMu?: string
 }
 
 
@@ -794,9 +810,17 @@ export type VerifyRequest = {
    */
   keyId: string
   /**
-   * Must be generated using the same algorithm specified in the key’s configuration.
+   * For ECDSA and RSA keys, the digest of the original message, generated using the key's hashing algorithm.
+   *
+   * One-of ('payload'): at most one of 'digest', 'msg' could be set.
    */
-  digest: string
+  digest?: string
+  /**
+   * For ML-DSA keys, the full original message. This also verifies signatures made with `raw` or `external_mu`: send the message whose μ was signed, not the μ itself (a μ payload always fails). Messages over 4096 bytes cannot be verified through this endpoint.
+   *
+   * One-of ('payload'): at most one of 'digest', 'msg' could be set.
+   */
+  msg?: string
   /**
    * The message signature to verify.
    */
