@@ -246,6 +246,8 @@ const unmarshalServerInstall = (data: unknown): ServerInstall => {
 
   return {
     hostname: data.hostname,
+    networkBootPersistent: data.network_boot_persistent,
+    networkBootUrl: data.network_boot_url,
     osId: data.os_id,
     partitioningSchema: data.partitioning_schema ? unmarshalSchema(data.partitioning_schema) : undefined,
     serviceUrl: data.service_url,
@@ -353,6 +355,8 @@ export const unmarshalOS = (data: unknown): OS => {
     licenseRequired: data.license_required,
     logoUrl: data.logo_url,
     name: data.name,
+    networkBoot: data.network_boot ? unmarshalOSOSField(data.network_boot) : undefined,
+    networkBootPersistentEditable: data.network_boot_persistent_editable,
     password: data.password ? unmarshalOSOSField(data.password) : undefined,
     servicePassword: data.service_password ? unmarshalOSOSField(data.service_password) : undefined,
     serviceUser: data.service_user ? unmarshalOSOSField(data.service_user) : undefined,
@@ -788,6 +792,8 @@ const marshalCreateServerRequestInstall = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   hostname: request.hostname,
+  network_boot_persistent: request.networkBootPersistent,
+  network_boot_url: request.networkBootUrl,
   os_id: request.osId,
   partitioning_schema: ((request.partitioningSchema !== undefined) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
   password: request.password,
@@ -848,6 +854,8 @@ export const marshalInstallServerRequest = async (
   defaults: DefaultValues,
 ): Promise<Record<string, unknown>> => ({
   hostname: request.hostname,
+  network_boot_persistent: request.networkBootPersistent,
+  network_boot_url: request.networkBootUrl,
   os_id: request.osId,
   partitioning_schema: ((request.partitioningSchema !== undefined) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
   password: request.password,
