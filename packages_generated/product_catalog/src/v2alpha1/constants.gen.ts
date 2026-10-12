@@ -103,7 +103,6 @@ export const PUBLIC_CATALOG_PRODUCT_PROPERTIES_GENERATIVE_APIS_TOKEN_TYPES: Publ
   'unknown_token_type',
   'input_token',
   'output_token',
-  'input_duration',
   'input_cached_token',
   'input_audio',
 ]

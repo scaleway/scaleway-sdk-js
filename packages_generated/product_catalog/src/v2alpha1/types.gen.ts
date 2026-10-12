@@ -73,7 +73,6 @@ export type PublicCatalogProductPropertiesGenerativeApisTokenType =
   | 'unknown_token_type'
   | 'input_token'
   | 'output_token'
-  | 'input_duration'
   | 'input_cached_token'
   | 'input_audio'
 
