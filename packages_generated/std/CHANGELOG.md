@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.9.3
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-client@2.14.0
+
 ## 2.9.2
 
 ### Patch Changes

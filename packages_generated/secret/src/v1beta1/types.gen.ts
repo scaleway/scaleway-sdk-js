@@ -403,7 +403,7 @@ export type CreateSecretRequest = {
   /**
    * Name of the secret.
    */
-  name: string
+  name?: string
   /**
    * List of the secret's tags.
    */
