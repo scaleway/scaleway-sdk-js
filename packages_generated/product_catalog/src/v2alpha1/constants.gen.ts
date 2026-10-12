@@ -96,6 +96,7 @@ export const PUBLIC_CATALOG_PRODUCT_PROPERTIES_GENERATIVE_APIS_TASKS: PublicCata
   'vision',
   'audio_transcription',
   'code',
+  'ocr',
 ]
 
 /** Lists all values of the enum {@link PublicCatalogProductPropertiesGenerativeApisTokenType}. */
