@@ -8,6 +8,7 @@ import type {
   EndpointPublicNetworkDetails,
   Endpoint,
   EngineUpgrade,
+  InfrastructureUpdate,
   ServiceUpdate,
   Workflow,
   Maintenance,
@@ -95,6 +96,18 @@ const unmarshalEngineUpgrade = (data: unknown): EngineUpgrade => {
   } as EngineUpgrade
 }
 
+const unmarshalInfrastructureUpdate = (data: unknown): InfrastructureUpdate => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InfrastructureUpdate' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    kubernetesVersionName: data.kubernetes_version_name,
+  } as InfrastructureUpdate
+}
+
 const unmarshalServiceUpdate = (data: unknown): ServiceUpdate => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -116,6 +129,7 @@ const unmarshalWorkflow = (data: unknown): Workflow => {
 
   return {
     engineUpgrade: data.engine_upgrade ? unmarshalEngineUpgrade(data.engine_upgrade) : undefined,
+    infrastructureUpdate: data.infrastructure_update ? unmarshalInfrastructureUpdate(data.infrastructure_update) : undefined,
     serviceUpdate: data.service_update ? unmarshalServiceUpdate(data.service_update) : undefined,
   } as Workflow
 }

@@ -254,6 +254,7 @@ export const unmarshalDedicatedPool = (data: unknown): DedicatedPool => {
     srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as DedicatedPool
 }
 
@@ -343,6 +344,7 @@ const unmarshalDedicatedPoolSummary = (data: unknown): DedicatedPoolSummary => {
     srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as DedicatedPoolSummary
 }
 
