@@ -204,6 +204,7 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'account_organization',
   'account_project',
   'account_contract_signature',
+  'instance_dedicated_pool',
   'instance_server',
   'instance_placement_group',
   'instance_security_group',
