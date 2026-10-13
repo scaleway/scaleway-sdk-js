@@ -8,11 +8,13 @@ import type {
   CPU,
   Disk,
   Memory,
+  OfferServerInfoAvailability,
   PersistentMemory,
   RaidController,
   OfferAntiDosInfo,
   OfferBackupInfo,
   OfferBandwidthInfo,
+  OfferCommitment,
   OfferFailoverBlockInfo,
   OfferFailoverIpInfo,
   OfferLicenseInfo,
@@ -157,6 +159,7 @@ const unmarshalCPU = (data: unknown): CPU => {
   }
 
   return {
+    bench: data.bench,
     coreCount: data.core_count,
     frequency: data.frequency,
     name: data.name,
@@ -190,6 +193,19 @@ const unmarshalMemory = (data: unknown): Memory => {
     isEcc: data.is_ecc,
     type: data.type,
   } as Memory
+}
+
+const unmarshalOfferServerInfoAvailability = (data: unknown): OfferServerInfoAvailability => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferServerInfoAvailability' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    quantity: data.quantity,
+    stock: data.stock,
+  } as OfferServerInfoAvailability
 }
 
 const unmarshalPersistentMemory = (data: unknown): PersistentMemory => {
@@ -253,6 +269,22 @@ const unmarshalOfferBandwidthInfo = (data: unknown): OfferBandwidthInfo => {
   return {
     speed: data.speed,
   } as OfferBandwidthInfo
+}
+
+const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferCommitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    discountedPrice: data.discounted_price ? unmarshalMoney(data.discounted_price) : undefined,
+    duration: data.duration,
+    freeSetupFees: data.free_setup_fees,
+    unit: data.unit,
+    value: data.value,
+  } as OfferCommitment
 }
 
 const unmarshalOfferFailoverBlockInfo = (data: unknown): OfferFailoverBlockInfo => {
@@ -325,6 +357,7 @@ const unmarshalOfferServerInfo = (data: unknown): OfferServerInfo => {
   }
 
   return {
+    availabilityByDatacenter: unmarshalMapOfObject(data.availability_by_datacenter, unmarshalOfferServerInfoAvailability),
     availableOptions: unmarshalArrayOfObject(data.available_options, unmarshalOffer),
     bandwidth: data.bandwidth,
     commercialRange: data.commercial_range,
@@ -335,6 +368,7 @@ const unmarshalOfferServerInfo = (data: unknown): OfferServerInfo => {
     onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : undefined,
     persistentMemories: unmarshalArrayOfObject(data.persistent_memories, unmarshalPersistentMemory),
     raidControllers: unmarshalArrayOfObject(data.raid_controllers, unmarshalRaidController),
+    rpnSpeed: data.rpn_speed,
     rpnVersion: data.rpn_version,
     stock: data.stock,
     stockByDatacenter: data.stock_by_datacenter,
@@ -388,6 +422,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     backupInfo: data.backup_info ? unmarshalOfferBackupInfo(data.backup_info) : undefined,
     bandwidthInfo: data.bandwidth_info ? unmarshalOfferBandwidthInfo(data.bandwidth_info) : undefined,
     catalog: data.catalog,
+    commitments: unmarshalArrayOfObject(data.commitments, unmarshalOfferCommitment),
     failoverBlockInfo: data.failover_block_info ? unmarshalOfferFailoverBlockInfo(data.failover_block_info) : undefined,
     failoverIpInfo: data.failover_ip_info ? unmarshalOfferFailoverIpInfo(data.failover_ip_info) : undefined,
     id: data.id,
@@ -417,6 +452,8 @@ export const unmarshalOS = (data: unknown): OS => {
     allowSshKeys: data.allow_ssh_keys,
     allowedFilesystems: data.allowed_filesystems,
     arch: data.arch,
+    beta: data.beta,
+    description: data.description,
     displayName: data.display_name,
     hostnameMaxLength: data.hostname_max_length,
     hostnameRegex: data.hostname_regex,
@@ -424,6 +461,7 @@ export const unmarshalOS = (data: unknown): OS => {
     licenseOffers: unmarshalArrayOfObject(data.license_offers, unmarshalOffer),
     maxPartitions: data.max_partitions,
     name: data.name,
+    officialWebsite: data.official_website,
     panelPasswordRegex: data.panel_password_regex,
     passwordRegex: data.password_regex,
     releasedAt: unmarshalDate(data.released_at),
