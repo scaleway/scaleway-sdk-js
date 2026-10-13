@@ -88,7 +88,7 @@
     "packageManager": {
       "name": "pnpm",
       "version": "12.9.1",
-      "onFail": "warn"
+      "onFail": "download"
     },
     "runtime": {
       "name": "node",

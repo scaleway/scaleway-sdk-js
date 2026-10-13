@@ -7,6 +7,7 @@ import {
 } from '../../internal/interceptors/composer.js'
 import { obfuscateAuthHeadersEntry } from '../auth.js'
 import type { Settings } from '../client-settings.js'
+import { ScalewayError } from '../errors/scw-error.js'
 import { logRequest, logResponse, obfuscateInterceptor } from './http-interceptors.js'
 import { responseParser } from './response-parser.js'
 import type { ResponseUnmarshaller, ScwRequest } from './types.js'
@@ -86,6 +87,14 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
 
       return unmarshaledResponse
     } catch (error) {
+      if (error instanceof ScalewayError) {
+        error.setRequestContext({
+          url: finalRequest.url,
+          method: finalRequest.method,
+          requestId,
+          requestHeaders: new Headers(Array.from(finalRequest.headers, obfuscateAuthHeadersEntry)),
+        })
+      }
       const resErrorInterceptors = prepareResponseErrors()
       // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- error interceptor may transform the error into the response type expected by the unwrapper
       const handledError = (await resErrorInterceptors(finalRequest, error)) as T

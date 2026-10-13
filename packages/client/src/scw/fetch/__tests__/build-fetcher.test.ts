@@ -2,6 +2,7 @@ import { afterAll, describe, expect, it, vi } from 'vitest'
 import { isBrowser } from '../../../helpers/is-browser.js'
 import { addHeaderInterceptor } from '../../../internal/interceptors/helpers.js'
 import type { Settings } from '../../client-settings.js'
+import { ScalewayError } from '../../errors/scw-error.js'
 import { buildFetcher, buildRequest } from '../build-fetcher.js'
 import type { ScwRequest } from '../types.js'
 
@@ -249,5 +250,61 @@ describe(`buildFetcher (mock)`, () => {
         path: '/will-trigger-an-error',
       }),
     ).resolves.toBe('42')
+  })
+
+  it('attaches request context to a thrown ScalewayError', async () => {
+    mockedFetch.mockResolvedValue(
+      Response.json(
+        { type: 'not_found', message: 'nope', resource: 'instance', resource_id: 'id' },
+        { status: 404, headers: { 'Content-Type': 'application/json' } },
+      ),
+    )
+
+    return buildFetcher(
+      DEFAULT_SETTINGS,
+      globalThis.fetch,
+    )({
+      method: 'GET',
+      path: '/unknown',
+    }).catch((error: unknown) => {
+      if (!(error instanceof ScalewayError)) {
+        throw new Error('expected a ScalewayError')
+      }
+      expect(error.url).toBe('https://api.scaleway.com/unknown')
+      expect(error.method).toBe('GET')
+      expect(error.requestId).toBe('1')
+      expect(error.requestHeaders).toBeInstanceOf(Headers)
+    })
+  })
+
+  it('obfuscates auth headers attached to a thrown ScalewayError', async () => {
+    const secret = 'very-secret-uuid-value'
+    mockedFetch.mockResolvedValue(
+      Response.json(
+        { type: 'not_found', message: 'nope', resource: 'instance', resource_id: 'id' },
+        { status: 404, headers: { 'Content-Type': 'application/json' } },
+      ),
+    )
+
+    return buildFetcher(
+      {
+        ...DEFAULT_SETTINGS,
+        interceptors: [
+          {
+            request: addHeaderInterceptor('x-auth-token', secret),
+          },
+        ],
+      },
+      globalThis.fetch,
+    )({
+      method: 'GET',
+      path: '/unknown',
+    }).catch((error: unknown) => {
+      if (!(error instanceof ScalewayError)) {
+        throw new Error('expected a ScalewayError')
+      }
+      expect(error.requestHeaders?.get('x-auth-token')).toBe('very-sec-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+      expect(error.requestHeaders?.get('x-auth-token')).not.toBe(secret)
+    })
   })
 })
