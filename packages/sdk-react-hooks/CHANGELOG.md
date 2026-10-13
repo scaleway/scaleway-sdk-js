@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.21.2
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-annotations@1.11.0
+  - @scaleway/sdk-baremetal@2.18.0
+  - @scaleway/sdk-product-catalog@2.32.0
+  - @scaleway/sdk-react@0.20.1
+
 ## 0.21.1
 
 ### Patch Changes

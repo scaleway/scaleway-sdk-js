@@ -1,5 +1,14 @@
 # Change Log
 
+## 4.2.5
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-annotations@1.11.0
+  - @scaleway/sdk-baremetal@2.18.0
+  - @scaleway/sdk-product-catalog@2.32.0
+
 ## 4.2.4
 
 ### Patch Changes

@@ -11,27 +11,38 @@ import {
   toApiLocality,
 } from '@scaleway/sdk-client'
 import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
-import {FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE,} from './content.gen.js'
+import {FILE_SYSTEM_TRANSIENT_STATUSES as FILE_SYSTEM_TRANSIENT_STATUSES_FILE,SNAPSHOT_TRANSIENT_STATUSES as SNAPSHOT_TRANSIENT_STATUSES_FILE,} from './content.gen.js'
 import {
   marshalCreateFileSystemRequest,
+  marshalCreateSnapshotRequest,
   unmarshalFileSystem,
   unmarshalListAttachmentsResponse,
   unmarshalListFileSystemTypesResponse,
   unmarshalListFileSystemsResponse,
+  unmarshalListSnapshotsResponse,
+  unmarshalSnapshot,
   marshalUpdateFileSystemRequest,
+  marshalUpdateSnapshotRequest,
 } from './marshalling.gen.js'
 import type {
   CreateFileSystemRequest,
+  CreateSnapshotRequest,
   DeleteFileSystemRequest,
+  DeleteSnapshotRequest,
   FileSystem,
   GetFileSystemRequest,
+  GetSnapshotRequest,
   ListAttachmentsRequest,
   ListAttachmentsResponse,
   ListFileSystemTypesRequest,
   ListFileSystemTypesResponse,
   ListFileSystemsRequest,
   ListFileSystemsResponse,
+  ListSnapshotsRequest,
+  ListSnapshotsResponse,
+  Snapshot,
   UpdateFileSystemRequest,
+  UpdateSnapshotRequest,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -228,6 +239,138 @@ By default, the attachments listed are ordered by creation date in ascending ord
         signal: options?.signal,
       },
       unmarshalFileSystem,
+    )
+
+  
+  /**
+   * Get snapshot details. Retrieve all properties and current status of a specific snapshot identified by its ID.
+   *
+   * @param request - The request {@link GetSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  getSnapshot = (request: Readonly<GetSnapshotRequest>, options?: RequestOptions) =>
+    this.client.fetch<Snapshot>(
+      {
+        method: 'GET',
+        path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
+      },
+      unmarshalSnapshot,
+    )
+  
+  /**
+   * Waits for {@link Snapshot} to be in a final state.
+   *
+   * @param request - The request {@link GetSnapshotRequest}
+   * @param options - The waiting options
+   * @returns A Promise of Snapshot
+   */
+  waitForSnapshot = (
+    request: Readonly<GetSnapshotRequest>,
+    options?: Readonly<WaitForOptions<Snapshot>>,
+  ) =>
+    waitForResource(
+      options?.stop ?? (res => Promise.resolve(!SNAPSHOT_TRANSIENT_STATUSES_FILE.includes(res.status))),
+      this.getSnapshot,
+      request,
+      options,
+    )
+
+  
+  protected pageOfListSnapshots = (request: Readonly<ListSnapshotsRequest> = {}, options?: RequestOptions) =>
+    this.client.fetch<ListSnapshotsResponse>(
+      {
+        method: 'GET',
+        path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots`,
+        urlParams: urlParams(
+          ['filesystem_id', request.filesystemId],
+          ['name', request.name],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+          ['snapshot_ids', request.snapshotIds],
+          ['tags', request.tags],  
+          ...Object.entries(resolveOneOf([
+            {default: this.client.settings.defaultProjectId,param: 'project_id',
+              value: request.projectId,
+            },
+            {default: this.client.settings.defaultOrganizationId,param: 'organization_id',
+              value: request.organizationId,
+            },
+          ])),
+        ),
+        signal: options?.signal,
+      },
+      unmarshalListSnapshotsResponse,
+    )
+  
+  /**
+   * List all snapshots. Retrieve all snapshots in the specified region. By default, the snapshots listed are ordered by creation date in ascending order. This can be modified using the `order_by` field.
+   *
+   * @param request - The request {@link ListSnapshotsRequest}
+   * @returns A Promise of ListSnapshotsResponse
+   */
+  listSnapshots = (request: Readonly<ListSnapshotsRequest> = {}, options?: RequestOptions) =>
+    enrichForPagination('snapshots', this.pageOfListSnapshots, request, options)
+
+  
+  /**
+   * Create a snapshot of a filesystem. To create a snapshot, the filesystem must be in the `available` status.
+If your filesystem is in a transient state, you need to wait until the end of the current operation.
+   *
+   * @param request - The request {@link CreateSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  createSnapshot = (request: Readonly<CreateSnapshotRequest>, options?: RequestOptions) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalCreateSnapshotRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'POST',
+        path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots`,
+        signal: options?.signal,
+      },
+      unmarshalSnapshot,
+    )
+
+  
+  /**
+   * Delete a snapshot. You must specify the `snapshot_id` of the snapshot you want to delete.
+   *
+   * @param request - The request {@link DeleteSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  deleteSnapshot = (request: Readonly<DeleteSnapshotRequest>, options?: RequestOptions) =>
+    this.client.fetch<Snapshot>(
+      {
+        method: 'DELETE',
+        path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
+      },
+      unmarshalSnapshot,
+    )
+
+  
+  /**
+   * Update snapshot properties. Update the name or tags of a snapshot.
+   *
+   * @param request - The request {@link UpdateSnapshotRequest}
+   * @returns A Promise of Snapshot
+   */
+  updateSnapshot = (request: Readonly<UpdateSnapshotRequest>, options?: RequestOptions) =>
+    this.client.fetch<Snapshot>(
+      {
+        body: JSON.stringify(
+          marshalUpdateSnapshotRequest(request, this.client.settings),
+        ),
+        headers: jsonContentHeaders,
+        method: 'PATCH',
+        path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
+        signal: options?.signal,
+      },
+      unmarshalSnapshot,
     )
 
   
