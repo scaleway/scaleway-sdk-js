@@ -30,9 +30,6 @@ export const GENERATE_KEY_MATERIAL_IMPORT_PARAMETERS_REQUEST_WRAPPING_ALGORITHMS
   'rsa_oaep_2048_sha256',
   'rsa_oaep_3072_sha256',
   'rsa_oaep_4096_sha256',
-  'rsa_aes_key_wrap_2048_sha256',
-  'rsa_aes_key_wrap_3072_sha256',
-  'rsa_aes_key_wrap_4096_sha256',
 ]
 
 /** Lists all values of the enum {@link KeyAlgorithmAsymmetricEncryption}. */

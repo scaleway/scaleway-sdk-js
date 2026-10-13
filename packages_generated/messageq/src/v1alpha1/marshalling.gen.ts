@@ -78,7 +78,9 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     id: data.id,
     privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
     public: data.public ? unmarshalEndpointPublicDetails(data.public) : undefined,
+    region: data.region,
     services: unmarshalArrayOfObject(data.services, unmarshalEndpointService),
+    srn: data.srn,
   } as Endpoint
 }
 
@@ -90,6 +92,7 @@ const unmarshalVolume = (data: unknown): Volume => {
   }
 
   return {
+    deploymentId: data.deployment_id,
     sizeBytes: data.size_bytes,
     type: data.type,
   } as Volume
@@ -112,6 +115,7 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -128,6 +132,9 @@ export const unmarshalUser = (data: unknown): User => {
   }
 
   return {
+    deploymentId: data.deployment_id,
+    region: data.region,
+    srn: data.srn,
     username: data.username,
   } as User
 }
@@ -176,6 +183,8 @@ const unmarshalNodeType = (data: unknown): NodeType => {
     instanceRange: data.instance_range,
     memoryBytes: data.memory_bytes,
     name: data.name,
+    region: data.region,
+    srn: data.srn,
     stockStatus: data.stock_status,
     vcpus: data.vcpus,
   } as NodeType
@@ -218,6 +227,8 @@ const unmarshalVersion = (data: unknown): Version => {
     beta: data.beta,
     disabled: data.disabled,
     endOfLife: unmarshalDate(data.end_of_life),
+    region: data.region,
+    srn: data.srn,
     version: data.version,
   } as Version
 }
@@ -268,6 +279,7 @@ const marshalVolume = (
   request: Volume,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  deployment_id: request.deploymentId,
   size_bytes: request.sizeBytes,
   type: request.type,
 })
