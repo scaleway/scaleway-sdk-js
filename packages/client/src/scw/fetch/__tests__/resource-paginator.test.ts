@@ -95,6 +95,36 @@ describe('fetchPaginated', () => {
       fetchPaginated('x', fetchPages([]) as unknown as PaginatedFetcher<PaginatedContent<'x'>>, { request: {} }).next(),
     ).rejects.toThrow(`Property x is not a list in paginated result`)
   })
+
+  it('stops walking pages and rejects with AbortError when the signal aborts mid-iteration', async () => {
+    const input = [[{ name: 'Alice' }], [{ name: 'Bob' }], [{ name: 'Julia' }], [{ name: 'Thomas' }]]
+    const controller = new AbortController()
+    const fetcher = vi.fn(fetchPages(input, 20))
+    const iterator = fetchPaginated('items', fetcher, { request: {}, options: { signal: controller.signal } })
+
+    const first = await iterator.next()
+    expect(first.value).toStrictEqual([{ name: 'Alice' }])
+
+    controller.abort()
+    await expect(iterator.next()).rejects.toThrow('The operation was aborted')
+    expect(fetcher).toHaveBeenCalledTimes(1)
+  })
+
+  it('rejects with AbortError when the signal is already aborted', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    const fetcher = vi.fn(fetchPages([[{ name: 'Alice' }], [{ name: 'Bob' }]]))
+    const firstPage = { items: [{ name: 'Alice' }], totalCount: 2 }
+
+    const iterator = fetchPaginated('items', fetcher, {
+      request: {},
+      initial: Promise.resolve(firstPage),
+      options: { signal: controller.signal },
+    })
+
+    await expect(iterator.next()).rejects.toThrow('The operation was aborted')
+    expect(fetcher).not.toHaveBeenCalled()
+  })
 })
 
 describe('fetchAll', () => {
@@ -125,6 +155,22 @@ describe('fetchAll', () => {
     expect(await fetchAll('items', fetchPages(input, 50), { request: {} })).toStrictEqual(input.flat())
     expect(Date.now() - startTime).toBeLessThanOrEqual(2 * delay + tolerance)
   })
+
+  it('rejects with AbortError when the signal is already aborted', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    const fetcher = vi.fn(fetchPages([[{ name: 'Alice' }], [{ name: 'Bob' }]]))
+    const firstPage = { items: [{ name: 'Alice' }], totalCount: 2 }
+
+    await expect(
+      fetchAll('items', fetcher, {
+        request: {},
+        initial: Promise.resolve(firstPage),
+        options: { signal: controller.signal },
+      }),
+    ).rejects.toThrow('The operation was aborted')
+    expect(fetcher).not.toHaveBeenCalled()
+  })
 })
 
 describe('enrichForPagination', () => {
@@ -141,6 +187,16 @@ describe('enrichForPagination', () => {
       expect(page).toStrictEqual(input[readIndex - 1])
       readIndex += 1
     }
+  })
+
+  it('rejects with AbortError when the signal is already aborted', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    const fetcher = vi.fn(fetchPages(input))
+
+    await expect(enrichForPagination('items', fetcher, {}, { signal: controller.signal }).all()).rejects.toThrow(
+      'The operation was aborted',
+    )
   })
 })
 
@@ -200,12 +256,57 @@ describe('fetchPaginatedByCursor', () => {
       ).next(),
     ).rejects.toThrow(`Property x is not a list in paginated result`)
   })
+
+  it('stops walking pages and rejects with AbortError when the signal aborts mid-iteration', async () => {
+    const input = [[{ name: 'Alice' }], [{ name: 'Bob' }], [{ name: 'Julia' }], [{ name: 'Thomas' }]]
+    const controller = new AbortController()
+    const fetcher = vi.fn(fetchCursorPages(input))
+    const iterator = fetchPaginatedByCursor('items', fetcher, {}, 'page', { signal: controller.signal })
+
+    const first = await iterator.next()
+    expect(first.value).toStrictEqual([{ name: 'Alice' }])
+
+    controller.abort()
+    await expect(iterator.next()).rejects.toThrow('The operation was aborted')
+    expect(fetcher).toHaveBeenCalledTimes(1)
+  })
+
+  it('rejects with AbortError when the signal is already aborted', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    const fetcher = vi.fn(fetchCursorPages([[{ name: 'Alice' }], [{ name: 'Bob' }]]))
+    const firstPage = { items: [{ name: 'Alice' }], nextPageToken: 'token' }
+
+    const iterator = fetchPaginatedByCursor(
+      'items',
+      fetcher,
+      {},
+      'page',
+      { signal: controller.signal },
+      Promise.resolve(firstPage),
+    )
+
+    await expect(iterator.next()).rejects.toThrow('The operation was aborted')
+    expect(fetcher).not.toHaveBeenCalled()
+  })
 })
 
 describe('fetchAllByCursor', () => {
   it('fetches all items', async () => {
     const input = [[{ name: 'Alice' }], [{ name: 'Bob' }], [{ name: 'Julia' }]]
     expect(await fetchAllByCursor('items', fetchCursorPages(input), {}, 'page')).toStrictEqual(input.flat())
+  })
+
+  it('rejects with AbortError when the signal is already aborted', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    const fetcher = vi.fn(fetchCursorPages([[{ name: 'Alice' }], [{ name: 'Bob' }]]))
+    const firstPage = { items: [{ name: 'Alice' }], nextPageToken: 'token' }
+
+    await expect(
+      fetchAllByCursor('items', fetcher, {}, 'page', { signal: controller.signal }, Promise.resolve(firstPage)),
+    ).rejects.toThrow('The operation was aborted')
+    expect(fetcher).not.toHaveBeenCalled()
   })
 })
 
@@ -223,5 +324,15 @@ describe('enrichForPaginationByCursor', () => {
       pages.push(page)
     }
     expect(pages).toStrictEqual(input)
+  })
+
+  it('rejects with AbortError when the signal is already aborted', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    const fetcher = vi.fn(fetchCursorPages(input))
+
+    await expect(
+      enrichForPaginationByCursor('items', fetcher, {}, 'page', { signal: controller.signal }).all(),
+    ).rejects.toThrow('The operation was aborted')
   })
 })
