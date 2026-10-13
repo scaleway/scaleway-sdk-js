@@ -393,8 +393,18 @@ export const marshalImportKeyMaterialRequest = (
 export const marshalSignRequest = (
   request: SignRequest,
   defaults: DefaultValues,
-): Record<string, unknown> => ({
-  digest: request.digest,
+): Record<string, unknown> => ({  
+  ...resolveOneOf([
+    {param: 'digest',
+      value: request.digest,
+    },
+    {param: 'msg',
+      value: request.msg,
+    },
+    {param: 'external_mu',
+      value: request.externalMu,
+    },
+  ]),
 })
 
 export const marshalUnwrapKeyRequest = (
@@ -419,8 +429,15 @@ export const marshalVerifyRequest = (
   request: VerifyRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  digest: request.digest,
-  signature: request.signature,
+  signature: request.signature,  
+  ...resolveOneOf([
+    {param: 'digest',
+      value: request.digest,
+    },
+    {param: 'msg',
+      value: request.msg,
+    },
+  ]),
 })
 
 export const marshalWrapKeyRequest = (
