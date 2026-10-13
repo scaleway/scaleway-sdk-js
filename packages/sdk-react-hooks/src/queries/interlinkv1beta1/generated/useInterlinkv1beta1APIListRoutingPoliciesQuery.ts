@@ -9,7 +9,7 @@ export const useInterlinkv1beta1APIListRoutingPoliciesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Interlinkv1beta1.ListRoutingPoliciesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Interlinkv1beta1.ListRoutingPoliciesResponse, Error>> => {
   const { interlinkv1beta1 } = useInterlinkv1beta1API()
-  const key = ["interlinkv1beta1", "listRoutingPolicies", ...Object.entries(params).flat(3).sort()]
+  const key = ["interlinkv1beta1", "listRoutingPolicies", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => interlinkv1beta1.listRoutingPolicies(params, { signal }), dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useWebhostingv1MailAccountAPIListMailAccountsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Webhostingv1.ListMailAccountsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Webhostingv1.ListMailAccountsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { webhostingv1MailAccount } = useWebhostingv1MailAccountAPI()
-  const key = ["webhostingv1MailAccount", "listMailAccounts", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1MailAccount", "listMailAccounts", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1MailAccount.listMailAccounts(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

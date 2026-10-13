@@ -9,7 +9,7 @@ export const useApplesiliconv1alpha1APIListServersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Applesiliconv1alpha1.ListServersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Applesiliconv1alpha1.ListServersResponse, Error>> => {
   const { applesiliconv1alpha1 } = useApplesiliconv1alpha1API()
-  const key = ["applesiliconv1alpha1", "listServers", ...Object.entries(params).flat(3).sort()]
+  const key = ["applesiliconv1alpha1", "listServers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => applesiliconv1alpha1.listServers(params, { signal }), dataloaderConfig)
 }

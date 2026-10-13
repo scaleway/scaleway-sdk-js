@@ -9,7 +9,7 @@ export const useKafkav1alpha1APIGetClusterCertificateAuthorityQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blob, Error>,
 ): ReturnType<typeof useDataLoader<Blob, Error>> => {
   const { kafkav1alpha1 } = useKafkav1alpha1API()
-  const key = ["kafkav1alpha1", "getClusterCertificateAuthority", ...Object.entries(params).flat(3).sort()]
+  const key = ["kafkav1alpha1", "getClusterCertificateAuthority", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => kafkav1alpha1.getClusterCertificateAuthority(params, { signal }), dataloaderConfig)
 }

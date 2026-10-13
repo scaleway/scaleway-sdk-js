@@ -9,7 +9,7 @@ export const useEdgeServicesv1beta1APIListVPCEndpointsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<EdgeServicesv1beta1.ListVPCEndpointsResponse, Error>,
 ): ReturnType<typeof useDataLoader<EdgeServicesv1beta1.ListVPCEndpointsResponse, Error>> => {
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
-  const key = ["edgeServicesv1beta1", "listVPCEndpoints", ...Object.entries(params).flat(3).sort()]
+  const key = ["edgeServicesv1beta1", "listVPCEndpoints", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.listVPCEndpoints(params, { signal }), dataloaderConfig)
 }

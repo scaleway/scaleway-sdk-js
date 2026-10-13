@@ -9,7 +9,7 @@ export const useWebhostingv1HostingAPIGetHostingQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.Hosting, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.Hosting, Error>> => {
   const { webhostingv1Hosting } = useWebhostingv1HostingAPI()
-  const key = ["webhostingv1Hosting", "getHosting", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Hosting", "getHosting", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Hosting.getHosting(params, { signal }), dataloaderConfig)
 }

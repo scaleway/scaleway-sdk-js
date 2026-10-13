@@ -9,7 +9,7 @@ export const useJobsv1alpha1APIGetJobsLimitsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Jobsv1alpha1.JobsLimits, Error>,
 ): ReturnType<typeof useDataLoader<Jobsv1alpha1.JobsLimits, Error>> => {
   const { jobsv1alpha1 } = useJobsv1alpha1API()
-  const key = ["jobsv1alpha1", "getJobsLimits", ...Object.entries(params).flat(3).sort()]
+  const key = ["jobsv1alpha1", "getJobsLimits", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => jobsv1alpha1.getJobsLimits(params, { signal }), dataloaderConfig)
 }

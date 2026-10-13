@@ -9,7 +9,7 @@ export const useCockpitv1RegionalAPIGetAlertManagerQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.AlertManager, Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.AlertManager, Error>> => {
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
-  const key = ["cockpitv1Regional", "getAlertManager", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Regional", "getAlertManager", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Regional.getAlertManager(params, { signal }), dataloaderConfig)
 }

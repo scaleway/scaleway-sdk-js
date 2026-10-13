@@ -9,7 +9,7 @@ export const useSecretv1beta1APIListSecretVersionsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Secretv1beta1.SecretVersion[], Error>,
 ): ReturnType<typeof useDataLoader<Secretv1beta1.SecretVersion[], Error>> => {
   const { secretv1beta1 } = useSecretv1beta1API()
-  const key = ["secretv1beta1", "listSecretVersions", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["secretv1beta1", "listSecretVersions", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => secretv1beta1.listSecretVersions(params, { signal }).all(), dataloaderConfig)
 }

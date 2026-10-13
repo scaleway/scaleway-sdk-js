@@ -9,7 +9,7 @@ export const useInstancev1APIListSecurityGroupsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev1.SecurityGroup[], Error>,
 ): ReturnType<typeof useDataLoader<Instancev1.SecurityGroup[], Error>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "listSecurityGroups", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "listSecurityGroups", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev1.listSecurityGroups(params, { signal }).all(), dataloaderConfig)
 }

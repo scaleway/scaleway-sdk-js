@@ -9,7 +9,7 @@ export const useLbv1APIGetFrontendQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.Frontend, Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.Frontend, Error>> => {
   const { lbv1 } = useLbv1API()
-  const key = ["lbv1", "getFrontend", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1", "getFrontend", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1.getFrontend(params, { signal }), dataloaderConfig)
 }

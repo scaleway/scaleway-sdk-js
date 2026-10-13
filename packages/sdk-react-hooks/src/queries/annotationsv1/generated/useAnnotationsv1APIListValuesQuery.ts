@@ -9,7 +9,7 @@ export const useAnnotationsv1APIListValuesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Annotationsv1.ListValuesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Annotationsv1.ListValuesResponse, Error>> => {
   const { annotationsv1 } = useAnnotationsv1API()
-  const key = ["annotationsv1", "listValues", ...Object.entries(params).flat(3).sort()]
+  const key = ["annotationsv1", "listValues", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => annotationsv1.listValues(params, { signal }), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useContainerv1beta1APIGetTokenQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Containerv1beta1.Token, Error>,
 ): ReturnType<typeof useDataLoader<Containerv1beta1.Token, Error>> => {
   const { containerv1beta1 } = useContainerv1beta1API()
-  const key = ["containerv1beta1", "getToken", ...Object.entries(params).flat(3).sort()]
+  const key = ["containerv1beta1", "getToken", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => containerv1beta1.getToken(params, { signal }), dataloaderConfig)
 }

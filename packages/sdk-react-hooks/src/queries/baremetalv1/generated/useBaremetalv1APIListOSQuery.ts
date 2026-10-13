@@ -9,7 +9,7 @@ export const useBaremetalv1APIListOSQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Baremetalv1.ListOSResponse, Error>,
 ): ReturnType<typeof useDataLoader<Baremetalv1.ListOSResponse, Error>> => {
   const { baremetalv1 } = useBaremetalv1API()
-  const key = ["baremetalv1", "listOS", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv1", "listOS", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => baremetalv1.listOS(params, { signal }), dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useBaremetalv1APIListOSInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Baremetalv1.ListOSResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Baremetalv1.ListOSResponse, Error, typeof params, typeof pageParamKey>> => {
   const { baremetalv1 } = useBaremetalv1API()
-  const key = ["baremetalv1", "listOS", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv1", "listOS", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => baremetalv1.listOS(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

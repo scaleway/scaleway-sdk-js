@@ -9,7 +9,7 @@ export const useProductCatalogv2alpha1PublicCatalogAPIListPublicCatalogProductsA
   dataloaderConfig?: UseDataLoaderConfig<ProductCatalogv2alpha1.PublicCatalogProduct[], Error>,
 ): ReturnType<typeof useDataLoader<ProductCatalogv2alpha1.PublicCatalogProduct[], Error>> => {
   const { productCatalogv2alpha1PublicCatalog } = useProductCatalogv2alpha1PublicCatalogAPI()
-  const key = ["productCatalogv2alpha1PublicCatalog", "listPublicCatalogProducts", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["productCatalogv2alpha1PublicCatalog", "listPublicCatalogProducts", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => productCatalogv2alpha1PublicCatalog.listPublicCatalogProducts(params, { signal }).all(), dataloaderConfig)
 }

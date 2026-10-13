@@ -9,7 +9,7 @@ export const useDatalabv1beta1APIListDatalabsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Datalabv1beta1.Datalab[], Error>,
 ): ReturnType<typeof useDataLoader<Datalabv1beta1.Datalab[], Error>> => {
   const { datalabv1beta1 } = useDatalabv1beta1API()
-  const key = ["datalabv1beta1", "listDatalabs", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["datalabv1beta1", "listDatalabs", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => datalabv1beta1.listDatalabs(params, { signal }).all(), dataloaderConfig)
 }

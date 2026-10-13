@@ -10,7 +10,7 @@ export const useProductCatalogv2alpha1PublicCatalogAPIListPublicCatalogProductsI
   dataloaderConfig?: UseInfiniteDataLoaderConfig<ProductCatalogv2alpha1.ListPublicCatalogProductsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<ProductCatalogv2alpha1.ListPublicCatalogProductsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { productCatalogv2alpha1PublicCatalog } = useProductCatalogv2alpha1PublicCatalogAPI()
-  const key = ["productCatalogv2alpha1PublicCatalog", "listPublicCatalogProducts", ...Object.entries(params).flat(3).sort()]
+  const key = ["productCatalogv2alpha1PublicCatalog", "listPublicCatalogProducts", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => productCatalogv2alpha1PublicCatalog.listPublicCatalogProducts(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

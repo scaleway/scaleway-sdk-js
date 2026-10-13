@@ -10,7 +10,7 @@ export const useLbv1APIListLbsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Lbv1.ListLbsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Lbv1.ListLbsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { lbv1 } = useLbv1API()
-  const key = ["lbv1", "listLbs", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1", "listLbs", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => lbv1.listLbs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

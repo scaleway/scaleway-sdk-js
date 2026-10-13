@@ -9,7 +9,7 @@ export const useWebhostingv1DnsAPISearchDomainsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.SearchDomainsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.SearchDomainsResponse, Error>> => {
   const { webhostingv1Dns } = useWebhostingv1DnsAPI()
-  const key = ["webhostingv1Dns", "searchDomains", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Dns", "searchDomains", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Dns.searchDomains(params, { signal }), dataloaderConfig)
 }

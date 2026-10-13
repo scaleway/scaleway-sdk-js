@@ -10,7 +10,7 @@ export const useRdbv1APIListPrivilegesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Rdbv1.ListPrivilegesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Rdbv1.ListPrivilegesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listPrivileges", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listPrivileges", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => rdbv1.listPrivileges(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

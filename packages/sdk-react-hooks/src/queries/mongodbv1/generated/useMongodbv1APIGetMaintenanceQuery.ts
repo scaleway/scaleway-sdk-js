@@ -9,7 +9,7 @@ export const useMongodbv1APIGetMaintenanceQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mongodbv1.Maintenance, Error>,
 ): ReturnType<typeof useDataLoader<Mongodbv1.Maintenance, Error>> => {
   const { mongodbv1 } = useMongodbv1API()
-  const key = ["mongodbv1", "getMaintenance", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1", "getMaintenance", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mongodbv1.getMaintenance(params, { signal }), dataloaderConfig)
 }

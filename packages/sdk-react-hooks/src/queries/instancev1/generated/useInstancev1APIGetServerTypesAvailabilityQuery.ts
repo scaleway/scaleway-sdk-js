@@ -9,7 +9,7 @@ export const useInstancev1APIGetServerTypesAvailabilityQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev1.GetServerTypesAvailabilityResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev1.GetServerTypesAvailabilityResponse, Error>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "getServerTypesAvailability", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "getServerTypesAvailability", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev1.getServerTypesAvailability(params, { signal }), dataloaderConfig)
 }

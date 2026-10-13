@@ -10,7 +10,7 @@ export const useDediboxv1RpnV1APIListRpnInvitesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Dediboxv1.ListRpnInvitesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Dediboxv1.ListRpnInvitesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { dediboxv1RpnV1 } = useDediboxv1RpnV1API()
-  const key = ["dediboxv1RpnV1", "listRpnInvites", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1RpnV1", "listRpnInvites", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1RpnV1.listRpnInvites(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

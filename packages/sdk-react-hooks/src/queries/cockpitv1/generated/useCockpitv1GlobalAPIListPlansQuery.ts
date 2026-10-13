@@ -9,7 +9,7 @@ export const useCockpitv1GlobalAPIListPlansQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.ListPlansResponse, Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.ListPlansResponse, Error>> => {
   const { cockpitv1Global } = useCockpitv1GlobalAPI()
-  const key = ["cockpitv1Global", "listPlans", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Global", "listPlans", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Global.listPlans(params, { signal }), dataloaderConfig)
 }

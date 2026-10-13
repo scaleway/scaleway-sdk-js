@@ -9,7 +9,7 @@ export const useJobsv1alpha2APIGetTriggerQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Jobsv1alpha2.Trigger, Error>,
 ): ReturnType<typeof useDataLoader<Jobsv1alpha2.Trigger, Error>> => {
   const { jobsv1alpha2 } = useJobsv1alpha2API()
-  const key = ["jobsv1alpha2", "getTrigger", ...Object.entries(params).flat(3).sort()]
+  const key = ["jobsv1alpha2", "getTrigger", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => jobsv1alpha2.getTrigger(params, { signal }), dataloaderConfig)
 }

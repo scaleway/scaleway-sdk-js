@@ -9,7 +9,7 @@ export const useSearchdbv1alpha1APIListNodeTypesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Searchdbv1alpha1.ListNodeTypesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Searchdbv1alpha1.ListNodeTypesResponse, Error>> => {
   const { searchdbv1alpha1 } = useSearchdbv1alpha1API()
-  const key = ["searchdbv1alpha1", "listNodeTypes", ...Object.entries(params).flat(3).sort()]
+  const key = ["searchdbv1alpha1", "listNodeTypes", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => searchdbv1alpha1.listNodeTypes(params, { signal }), dataloaderConfig)
 }

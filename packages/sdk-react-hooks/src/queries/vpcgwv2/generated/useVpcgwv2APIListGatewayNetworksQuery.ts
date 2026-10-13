@@ -9,7 +9,7 @@ export const useVpcgwv2APIListGatewayNetworksQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcgwv2.ListGatewayNetworksResponse, Error>,
 ): ReturnType<typeof useDataLoader<Vpcgwv2.ListGatewayNetworksResponse, Error>> => {
   const { vpcgwv2 } = useVpcgwv2API()
-  const key = ["vpcgwv2", "listGatewayNetworks", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcgwv2", "listGatewayNetworks", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcgwv2.listGatewayNetworks(params, { signal }), dataloaderConfig)
 }

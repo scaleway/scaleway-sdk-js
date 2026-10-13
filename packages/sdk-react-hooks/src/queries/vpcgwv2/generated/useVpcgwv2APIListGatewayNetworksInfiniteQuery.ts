@@ -10,7 +10,7 @@ export const useVpcgwv2APIListGatewayNetworksInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Vpcgwv2.ListGatewayNetworksResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Vpcgwv2.ListGatewayNetworksResponse, Error, typeof params, typeof pageParamKey>> => {
   const { vpcgwv2 } = useVpcgwv2API()
-  const key = ["vpcgwv2", "listGatewayNetworks", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcgwv2", "listGatewayNetworks", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcgwv2.listGatewayNetworks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

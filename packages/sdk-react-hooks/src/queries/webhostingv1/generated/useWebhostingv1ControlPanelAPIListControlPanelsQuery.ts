@@ -9,7 +9,7 @@ export const useWebhostingv1ControlPanelAPIListControlPanelsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.ListControlPanelsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.ListControlPanelsResponse, Error>> => {
   const { webhostingv1ControlPanel } = useWebhostingv1ControlPanelAPI()
-  const key = ["webhostingv1ControlPanel", "listControlPanels", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1ControlPanel", "listControlPanels", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1ControlPanel.listControlPanels(params, { signal }), dataloaderConfig)
 }

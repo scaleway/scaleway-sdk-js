@@ -9,7 +9,7 @@ export const useK8Sv1APIListPoolsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<K8Sv1.ListPoolsResponse, Error>,
 ): ReturnType<typeof useDataLoader<K8Sv1.ListPoolsResponse, Error>> => {
   const { k8Sv1 } = useK8Sv1API()
-  const key = ["k8Sv1", "listPools", ...Object.entries(params).flat(3).sort()]
+  const key = ["k8Sv1", "listPools", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => k8Sv1.listPools(params, { signal }), dataloaderConfig)
 }

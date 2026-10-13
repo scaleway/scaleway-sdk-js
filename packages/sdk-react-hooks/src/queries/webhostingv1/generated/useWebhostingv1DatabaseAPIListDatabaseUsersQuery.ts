@@ -9,7 +9,7 @@ export const useWebhostingv1DatabaseAPIListDatabaseUsersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.ListDatabaseUsersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.ListDatabaseUsersResponse, Error>> => {
   const { webhostingv1Database } = useWebhostingv1DatabaseAPI()
-  const key = ["webhostingv1Database", "listDatabaseUsers", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Database", "listDatabaseUsers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Database.listDatabaseUsers(params, { signal }), dataloaderConfig)
 }

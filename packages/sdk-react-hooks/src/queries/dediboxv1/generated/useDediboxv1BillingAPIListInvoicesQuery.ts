@@ -9,7 +9,7 @@ export const useDediboxv1BillingAPIListInvoicesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListInvoicesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListInvoicesResponse, Error>> => {
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
-  const key = ["dediboxv1Billing", "listInvoices", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1Billing", "listInvoices", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1Billing.listInvoices(params, { signal }), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useQaasv1alpha1APIListSessionsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Qaasv1alpha1.ListSessionsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Qaasv1alpha1.ListSessionsResponse, Error>> => {
   const { qaasv1alpha1 } = useQaasv1alpha1API()
-  const key = ["qaasv1alpha1", "listSessions", ...Object.entries(params).flat(3).sort()]
+  const key = ["qaasv1alpha1", "listSessions", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => qaasv1alpha1.listSessions(params, { signal }), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useInstancev1APIGetSecurityGroupQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev1.GetSecurityGroupResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev1.GetSecurityGroupResponse, Error>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "getSecurityGroup", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "getSecurityGroup", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev1.getSecurityGroup(params, { signal }), dataloaderConfig)
 }

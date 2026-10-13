@@ -9,7 +9,7 @@ export const useContainerv1APIGetTriggerQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Containerv1.Trigger, Error>,
 ): ReturnType<typeof useDataLoader<Containerv1.Trigger, Error>> => {
   const { containerv1 } = useContainerv1API()
-  const key = ["containerv1", "getTrigger", ...Object.entries(params).flat(3).sort()]
+  const key = ["containerv1", "getTrigger", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => containerv1.getTrigger(params, { signal }), dataloaderConfig)
 }

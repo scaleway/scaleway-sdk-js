@@ -9,7 +9,7 @@ export const useVpcgwv2APIGetPatRuleQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcgwv2.PatRule, Error>,
 ): ReturnType<typeof useDataLoader<Vpcgwv2.PatRule, Error>> => {
   const { vpcgwv2 } = useVpcgwv2API()
-  const key = ["vpcgwv2", "getPatRule", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcgwv2", "getPatRule", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcgwv2.getPatRule(params, { signal }), dataloaderConfig)
 }

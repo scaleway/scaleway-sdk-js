@@ -9,7 +9,7 @@ export const useWebhostingv1DnsAPIGetDomainDnsRecordsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.DnsRecords, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.DnsRecords, Error>> => {
   const { webhostingv1Dns } = useWebhostingv1DnsAPI()
-  const key = ["webhostingv1Dns", "getDomainDnsRecords", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Dns", "getDomainDnsRecords", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Dns.getDomainDnsRecords(params, { signal }), dataloaderConfig)
 }

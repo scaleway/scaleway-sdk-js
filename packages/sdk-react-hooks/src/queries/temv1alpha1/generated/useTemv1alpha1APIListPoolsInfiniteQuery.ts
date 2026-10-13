@@ -10,7 +10,7 @@ export const useTemv1alpha1APIListPoolsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Temv1alpha1.ListPoolsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Temv1alpha1.ListPoolsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { temv1alpha1 } = useTemv1alpha1API()
-  const key = ["temv1alpha1", "listPools", ...Object.entries(params).flat(3).sort()]
+  const key = ["temv1alpha1", "listPools", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => temv1alpha1.listPools(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

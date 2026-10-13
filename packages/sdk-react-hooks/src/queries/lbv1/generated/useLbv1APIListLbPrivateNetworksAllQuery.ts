@@ -9,7 +9,7 @@ export const useLbv1APIListLbPrivateNetworksAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.PrivateNetwork[], Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.PrivateNetwork[], Error>> => {
   const { lbv1 } = useLbv1API()
-  const key = ["lbv1", "listLbPrivateNetworks", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1", "listLbPrivateNetworks", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1.listLbPrivateNetworks(params, { signal }).all(), dataloaderConfig)
 }

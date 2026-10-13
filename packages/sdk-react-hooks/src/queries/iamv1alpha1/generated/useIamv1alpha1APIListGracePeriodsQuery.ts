@@ -9,7 +9,7 @@ export const useIamv1alpha1APIListGracePeriodsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iamv1alpha1.ListGracePeriodsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Iamv1alpha1.ListGracePeriodsResponse, Error>> => {
   const { iamv1alpha1 } = useIamv1alpha1API()
-  const key = ["iamv1alpha1", "listGracePeriods", ...Object.entries(params).flat(3).sort()]
+  const key = ["iamv1alpha1", "listGracePeriods", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => iamv1alpha1.listGracePeriods(params, { signal }), dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useBillingv2ElectronicBillingAPIListElectronicAddressesInfiniteQuer
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Billingv2.ListElectronicAddressesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Billingv2.ListElectronicAddressesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { billingv2ElectronicBilling } = useBillingv2ElectronicBillingAPI()
-  const key = ["billingv2ElectronicBilling", "listElectronicAddresses", ...Object.entries(params).flat(3).sort()]
+  const key = ["billingv2ElectronicBilling", "listElectronicAddresses", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => billingv2ElectronicBilling.listElectronicAddresses(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

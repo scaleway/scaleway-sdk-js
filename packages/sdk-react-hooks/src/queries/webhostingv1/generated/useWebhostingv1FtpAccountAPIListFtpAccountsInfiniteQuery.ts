@@ -10,7 +10,7 @@ export const useWebhostingv1FtpAccountAPIListFtpAccountsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Webhostingv1.ListFtpAccountsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Webhostingv1.ListFtpAccountsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { webhostingv1FtpAccount } = useWebhostingv1FtpAccountAPI()
-  const key = ["webhostingv1FtpAccount", "listFtpAccounts", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1FtpAccount", "listFtpAccounts", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1FtpAccount.listFtpAccounts(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

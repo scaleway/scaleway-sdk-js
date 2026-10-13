@@ -9,7 +9,7 @@ export const useWebhostingv1WebsiteAPIListWebsitesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.ListWebsitesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.ListWebsitesResponse, Error>> => {
   const { webhostingv1Website } = useWebhostingv1WebsiteAPI()
-  const key = ["webhostingv1Website", "listWebsites", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Website", "listWebsites", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Website.listWebsites(params, { signal }), dataloaderConfig)
 }

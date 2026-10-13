@@ -10,7 +10,7 @@ export const useServerlessSqldbv1alpha1APIListDatabasesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<ServerlessSqldbv1alpha1.ListDatabasesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<ServerlessSqldbv1alpha1.ListDatabasesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { serverlessSqldbv1alpha1 } = useServerlessSqldbv1alpha1API()
-  const key = ["serverlessSqldbv1alpha1", "listDatabases", ...Object.entries(params).flat(3).sort()]
+  const key = ["serverlessSqldbv1alpha1", "listDatabases", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => serverlessSqldbv1alpha1.listDatabases(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

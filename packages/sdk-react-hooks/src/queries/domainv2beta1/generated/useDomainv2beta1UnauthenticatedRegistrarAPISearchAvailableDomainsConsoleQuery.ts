@@ -9,7 +9,7 @@ export const useDomainv2beta1UnauthenticatedRegistrarAPISearchAvailableDomainsCo
   dataloaderConfig?: UseDataLoaderConfig<Domainv2beta1.SearchAvailableDomainsConsoleResponse, Error>,
 ): ReturnType<typeof useDataLoader<Domainv2beta1.SearchAvailableDomainsConsoleResponse, Error>> => {
   const { domainv2beta1UnauthenticatedRegistrar } = useDomainv2beta1UnauthenticatedRegistrarAPI()
-  const key = ["domainv2beta1UnauthenticatedRegistrar", "searchAvailableDomainsConsole", ...Object.entries(params).flat(3).sort()]
+  const key = ["domainv2beta1UnauthenticatedRegistrar", "searchAvailableDomainsConsole", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => domainv2beta1UnauthenticatedRegistrar.searchAvailableDomainsConsole(params, { signal }), dataloaderConfig)
 }

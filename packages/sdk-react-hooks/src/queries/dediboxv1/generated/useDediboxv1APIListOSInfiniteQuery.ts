@@ -10,7 +10,7 @@ export const useDediboxv1APIListOSInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Dediboxv1.ListOSResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Dediboxv1.ListOSResponse, Error, typeof params, typeof pageParamKey>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "listOS", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "listOS", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1.listOS(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

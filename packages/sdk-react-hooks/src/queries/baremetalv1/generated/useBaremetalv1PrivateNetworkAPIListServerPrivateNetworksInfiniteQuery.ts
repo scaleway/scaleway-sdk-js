@@ -10,7 +10,7 @@ export const useBaremetalv1PrivateNetworkAPIListServerPrivateNetworksInfiniteQue
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Baremetalv1.ListServerPrivateNetworksResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Baremetalv1.ListServerPrivateNetworksResponse, Error, typeof params, typeof pageParamKey>> => {
   const { baremetalv1PrivateNetwork } = useBaremetalv1PrivateNetworkAPI()
-  const key = ["baremetalv1PrivateNetwork", "listServerPrivateNetworks", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv1PrivateNetwork", "listServerPrivateNetworks", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => baremetalv1PrivateNetwork.listServerPrivateNetworks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

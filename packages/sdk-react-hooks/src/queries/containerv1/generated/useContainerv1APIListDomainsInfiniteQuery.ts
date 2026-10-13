@@ -10,7 +10,7 @@ export const useContainerv1APIListDomainsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Containerv1.ListDomainsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Containerv1.ListDomainsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { containerv1 } = useContainerv1API()
-  const key = ["containerv1", "listDomains", ...Object.entries(params).flat(3).sort()]
+  const key = ["containerv1", "listDomains", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => containerv1.listDomains(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

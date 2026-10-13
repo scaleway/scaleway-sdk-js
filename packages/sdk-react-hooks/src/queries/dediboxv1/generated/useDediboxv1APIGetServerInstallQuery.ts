@@ -9,7 +9,7 @@ export const useDediboxv1APIGetServerInstallQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ServerInstall, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ServerInstall, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "getServerInstall", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "getServerInstall", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.getServerInstall(params, { signal }), dataloaderConfig)
 }

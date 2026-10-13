@@ -9,7 +9,7 @@ export const useInstancev1APIGetPlacementGroupServersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev1.GetPlacementGroupServersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev1.GetPlacementGroupServersResponse, Error>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "getPlacementGroupServers", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "getPlacementGroupServers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev1.getPlacementGroupServers(params, { signal }), dataloaderConfig)
 }

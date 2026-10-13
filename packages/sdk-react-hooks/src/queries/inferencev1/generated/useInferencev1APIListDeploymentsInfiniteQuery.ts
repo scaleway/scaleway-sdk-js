@@ -10,7 +10,7 @@ export const useInferencev1APIListDeploymentsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Inferencev1.ListDeploymentsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Inferencev1.ListDeploymentsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { inferencev1 } = useInferencev1API()
-  const key = ["inferencev1", "listDeployments", ...Object.entries(params).flat(3).sort()]
+  const key = ["inferencev1", "listDeployments", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => inferencev1.listDeployments(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

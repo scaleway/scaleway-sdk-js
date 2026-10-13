@@ -9,7 +9,7 @@ export const useWebhostingv1HostingAPIGetResourceSummaryQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.ResourceSummary, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.ResourceSummary, Error>> => {
   const { webhostingv1Hosting } = useWebhostingv1HostingAPI()
-  const key = ["webhostingv1Hosting", "getResourceSummary", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Hosting", "getResourceSummary", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Hosting.getResourceSummary(params, { signal }), dataloaderConfig)
 }

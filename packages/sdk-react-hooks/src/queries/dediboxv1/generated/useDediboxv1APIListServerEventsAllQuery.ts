@@ -9,7 +9,7 @@ export const useDediboxv1APIListServerEventsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ServerEvent[], Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ServerEvent[], Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "listServerEvents", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "listServerEvents", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.listServerEvents(params, { signal }).all(), dataloaderConfig)
 }

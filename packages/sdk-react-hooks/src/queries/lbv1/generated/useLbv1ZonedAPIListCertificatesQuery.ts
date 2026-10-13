@@ -9,7 +9,7 @@ export const useLbv1ZonedAPIListCertificatesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.ListCertificatesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.ListCertificatesResponse, Error>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "listCertificates", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "listCertificates", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1Zoned.listCertificates(params, { signal }), dataloaderConfig)
 }

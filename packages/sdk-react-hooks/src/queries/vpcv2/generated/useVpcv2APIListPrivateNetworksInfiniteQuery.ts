@@ -10,7 +10,7 @@ export const useVpcv2APIListPrivateNetworksInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Vpcv2.ListPrivateNetworksResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Vpcv2.ListPrivateNetworksResponse, Error, typeof params, typeof pageParamKey>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "listPrivateNetworks", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "listPrivateNetworks", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcv2.listPrivateNetworks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useDediboxv1RpnSanAPIListRpnSansInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Dediboxv1.ListRpnSansResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Dediboxv1.ListRpnSansResponse, Error, typeof params, typeof pageParamKey>> => {
   const { dediboxv1RpnSan } = useDediboxv1RpnSanAPI()
-  const key = ["dediboxv1RpnSan", "listRpnSans", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1RpnSan", "listRpnSans", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1RpnSan.listRpnSans(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

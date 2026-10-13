@@ -9,7 +9,7 @@ export const useMongodbv1alpha1APIGetInstanceCertificateQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blob, Error>,
 ): ReturnType<typeof useDataLoader<Blob, Error>> => {
   const { mongodbv1alpha1 } = useMongodbv1alpha1API()
-  const key = ["mongodbv1alpha1", "getInstanceCertificate", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1alpha1", "getInstanceCertificate", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mongodbv1alpha1.getInstanceCertificate(params, { signal }), dataloaderConfig)
 }

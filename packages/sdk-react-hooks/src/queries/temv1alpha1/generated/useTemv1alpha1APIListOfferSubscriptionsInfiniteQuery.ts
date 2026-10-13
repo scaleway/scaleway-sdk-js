@@ -10,7 +10,7 @@ export const useTemv1alpha1APIListOfferSubscriptionsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Temv1alpha1.ListOfferSubscriptionsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Temv1alpha1.ListOfferSubscriptionsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { temv1alpha1 } = useTemv1alpha1API()
-  const key = ["temv1alpha1", "listOfferSubscriptions", ...Object.entries(params).flat(3).sort()]
+  const key = ["temv1alpha1", "listOfferSubscriptions", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => temv1alpha1.listOfferSubscriptions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

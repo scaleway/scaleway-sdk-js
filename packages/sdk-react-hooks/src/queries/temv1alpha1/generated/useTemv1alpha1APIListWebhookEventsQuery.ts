@@ -9,7 +9,7 @@ export const useTemv1alpha1APIListWebhookEventsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Temv1alpha1.ListWebhookEventsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Temv1alpha1.ListWebhookEventsResponse, Error>> => {
   const { temv1alpha1 } = useTemv1alpha1API()
-  const key = ["temv1alpha1", "listWebhookEvents", ...Object.entries(params).flat(3).sort()]
+  const key = ["temv1alpha1", "listWebhookEvents", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => temv1alpha1.listWebhookEvents(params, { signal }), dataloaderConfig)
 }

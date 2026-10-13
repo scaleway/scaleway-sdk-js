@@ -9,7 +9,7 @@ export const useContainerv1beta1APIListContainersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Containerv1beta1.ListContainersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Containerv1beta1.ListContainersResponse, Error>> => {
   const { containerv1beta1 } = useContainerv1beta1API()
-  const key = ["containerv1beta1", "listContainers", ...Object.entries(params).flat(3).sort()]
+  const key = ["containerv1beta1", "listContainers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => containerv1beta1.listContainers(params, { signal }), dataloaderConfig)
 }

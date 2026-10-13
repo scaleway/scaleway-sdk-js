@@ -9,7 +9,7 @@ export const useInstancev2alpha1APIListServerCompatibleTypesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev2alpha1.ListServerCompatibleTypesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev2alpha1.ListServerCompatibleTypesResponse, Error>> => {
   const { instancev2alpha1 } = useInstancev2alpha1API()
-  const key = ["instancev2alpha1", "listServerCompatibleTypes", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev2alpha1", "listServerCompatibleTypes", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev2alpha1.listServerCompatibleTypes(params, { signal }), dataloaderConfig)
 }

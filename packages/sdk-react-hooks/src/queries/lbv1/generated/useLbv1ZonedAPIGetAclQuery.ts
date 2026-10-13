@@ -9,7 +9,7 @@ export const useLbv1ZonedAPIGetAclQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.Acl, Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.Acl, Error>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "getAcl", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "getAcl", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1Zoned.getAcl(params, { signal }), dataloaderConfig)
 }

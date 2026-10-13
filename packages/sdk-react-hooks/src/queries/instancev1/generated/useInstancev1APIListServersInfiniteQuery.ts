@@ -10,7 +10,7 @@ export const useInstancev1APIListServersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Instancev1.ListServersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Instancev1.ListServersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "listServers", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "listServers", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev1.listServers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

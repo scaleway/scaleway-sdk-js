@@ -9,7 +9,7 @@ export const useContainerv1APIListDomainsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Containerv1.Domain[], Error>,
 ): ReturnType<typeof useDataLoader<Containerv1.Domain[], Error>> => {
   const { containerv1 } = useContainerv1API()
-  const key = ["containerv1", "listDomains", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["containerv1", "listDomains", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => containerv1.listDomains(params, { signal }).all(), dataloaderConfig)
 }

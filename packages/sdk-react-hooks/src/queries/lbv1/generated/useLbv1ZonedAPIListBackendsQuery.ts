@@ -9,7 +9,7 @@ export const useLbv1ZonedAPIListBackendsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.ListBackendsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.ListBackendsResponse, Error>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "listBackends", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "listBackends", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1Zoned.listBackends(params, { signal }), dataloaderConfig)
 }

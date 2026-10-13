@@ -10,7 +10,7 @@ export const useAutoscalingv1alpha2APIListLogsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Autoscalingv1alpha2.ListLogsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Autoscalingv1alpha2.ListLogsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { autoscalingv1alpha2 } = useAutoscalingv1alpha2API()
-  const key = ["autoscalingv1alpha2", "listLogs", ...Object.entries(params).flat(3).sort()]
+  const key = ["autoscalingv1alpha2", "listLogs", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => autoscalingv1alpha2.listLogs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

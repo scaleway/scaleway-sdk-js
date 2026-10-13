@@ -10,7 +10,7 @@ export const useBlockv1APIListVolumesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Blockv1.ListVolumesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Blockv1.ListVolumesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { blockv1 } = useBlockv1API()
-  const key = ["blockv1", "listVolumes", ...Object.entries(params).flat(3).sort()]
+  const key = ["blockv1", "listVolumes", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => blockv1.listVolumes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

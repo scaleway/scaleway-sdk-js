@@ -10,7 +10,7 @@ export const useDediboxv1APIListServerEventsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Dediboxv1.ListServerEventsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Dediboxv1.ListServerEventsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "listServerEvents", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "listServerEvents", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1.listServerEvents(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

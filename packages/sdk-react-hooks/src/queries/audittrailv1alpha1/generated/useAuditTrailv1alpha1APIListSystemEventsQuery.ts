@@ -9,7 +9,7 @@ export const useAuditTrailv1alpha1APIListSystemEventsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<AuditTrailv1alpha1.ListSystemEventsResponse, Error>,
 ): ReturnType<typeof useDataLoader<AuditTrailv1alpha1.ListSystemEventsResponse, Error>> => {
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
-  const key = ["auditTrailv1alpha1", "listSystemEvents", ...Object.entries(params).flat(3).sort()]
+  const key = ["auditTrailv1alpha1", "listSystemEvents", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => auditTrailv1alpha1.listSystemEvents(params, { signal }), dataloaderConfig)
 }

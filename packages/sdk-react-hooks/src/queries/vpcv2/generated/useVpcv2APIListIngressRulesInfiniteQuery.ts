@@ -10,7 +10,7 @@ export const useVpcv2APIListIngressRulesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Vpcv2.ListIngressRulesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Vpcv2.ListIngressRulesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "listIngressRules", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "listIngressRules", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcv2.listIngressRules(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useQaasv1alpha1APIListJobsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Qaasv1alpha1.Job[], Error>,
 ): ReturnType<typeof useDataLoader<Qaasv1alpha1.Job[], Error>> => {
   const { qaasv1alpha1 } = useQaasv1alpha1API()
-  const key = ["qaasv1alpha1", "listJobs", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["qaasv1alpha1", "listJobs", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => qaasv1alpha1.listJobs(params, { signal }).all(), dataloaderConfig)
 }

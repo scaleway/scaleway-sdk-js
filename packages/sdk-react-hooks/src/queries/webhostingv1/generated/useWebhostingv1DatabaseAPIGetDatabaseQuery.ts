@@ -9,7 +9,7 @@ export const useWebhostingv1DatabaseAPIGetDatabaseQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.Database, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.Database, Error>> => {
   const { webhostingv1Database } = useWebhostingv1DatabaseAPI()
-  const key = ["webhostingv1Database", "getDatabase", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Database", "getDatabase", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Database.getDatabase(params, { signal }), dataloaderConfig)
 }

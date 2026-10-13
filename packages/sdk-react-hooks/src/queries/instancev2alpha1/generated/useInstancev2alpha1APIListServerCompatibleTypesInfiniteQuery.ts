@@ -10,7 +10,7 @@ export const useInstancev2alpha1APIListServerCompatibleTypesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Instancev2alpha1.ListServerCompatibleTypesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Instancev2alpha1.ListServerCompatibleTypesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { instancev2alpha1 } = useInstancev2alpha1API()
-  const key = ["instancev2alpha1", "listServerCompatibleTypes", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev2alpha1", "listServerCompatibleTypes", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev2alpha1.listServerCompatibleTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useMnqv1beta1SnsAPIGetSnsInfoQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mnqv1beta1.SnsInfo, Error>,
 ): ReturnType<typeof useDataLoader<Mnqv1beta1.SnsInfo, Error>> => {
   const { mnqv1beta1Sns } = useMnqv1beta1SnsAPI()
-  const key = ["mnqv1beta1Sns", "getSnsInfo", ...Object.entries(params).flat(3).sort()]
+  const key = ["mnqv1beta1Sns", "getSnsInfo", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mnqv1beta1Sns.getSnsInfo(params, { signal }), dataloaderConfig)
 }

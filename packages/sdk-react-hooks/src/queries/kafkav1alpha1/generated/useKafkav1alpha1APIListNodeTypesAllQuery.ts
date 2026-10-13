@@ -9,7 +9,7 @@ export const useKafkav1alpha1APIListNodeTypesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Kafkav1alpha1.NodeType[], Error>,
 ): ReturnType<typeof useDataLoader<Kafkav1alpha1.NodeType[], Error>> => {
   const { kafkav1alpha1 } = useKafkav1alpha1API()
-  const key = ["kafkav1alpha1", "listNodeTypes", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["kafkav1alpha1", "listNodeTypes", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => kafkav1alpha1.listNodeTypes(params, { signal }).all(), dataloaderConfig)
 }

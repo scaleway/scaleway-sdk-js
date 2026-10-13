@@ -9,7 +9,7 @@ export const useMongodbv1APIListDatabasesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mongodbv1.Database[], Error>,
 ): ReturnType<typeof useDataLoader<Mongodbv1.Database[], Error>> => {
   const { mongodbv1 } = useMongodbv1API()
-  const key = ["mongodbv1", "listDatabases", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1", "listDatabases", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mongodbv1.listDatabases(params, { signal }).all(), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useIotv1APIGetDeviceCertificateQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iotv1.GetDeviceCertificateResponse, Error>,
 ): ReturnType<typeof useDataLoader<Iotv1.GetDeviceCertificateResponse, Error>> => {
   const { iotv1 } = useIotv1API()
-  const key = ["iotv1", "getDeviceCertificate", ...Object.entries(params).flat(3).sort()]
+  const key = ["iotv1", "getDeviceCertificate", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => iotv1.getDeviceCertificate(params, { signal }), dataloaderConfig)
 }

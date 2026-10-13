@@ -9,7 +9,7 @@ export const useSecretv1beta1APIListTagsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<string[], Error>,
 ): ReturnType<typeof useDataLoader<string[], Error>> => {
   const { secretv1beta1 } = useSecretv1beta1API()
-  const key = ["secretv1beta1", "listTags", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["secretv1beta1", "listTags", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => secretv1beta1.listTags(params, { signal }).all(), dataloaderConfig)
 }

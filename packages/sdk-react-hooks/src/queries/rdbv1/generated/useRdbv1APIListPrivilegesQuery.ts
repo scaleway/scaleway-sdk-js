@@ -9,7 +9,7 @@ export const useRdbv1APIListPrivilegesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.ListPrivilegesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.ListPrivilegesResponse, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listPrivileges", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listPrivileges", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.listPrivileges(params, { signal }), dataloaderConfig)
 }

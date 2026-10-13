@@ -10,7 +10,7 @@ export const useDatalabv1beta1APIListNotebookVersionsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Datalabv1beta1.ListNotebookVersionsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Datalabv1beta1.ListNotebookVersionsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { datalabv1beta1 } = useDatalabv1beta1API()
-  const key = ["datalabv1beta1", "listNotebookVersions", ...Object.entries(params).flat(3).sort()]
+  const key = ["datalabv1beta1", "listNotebookVersions", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => datalabv1beta1.listNotebookVersions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useIotv1APIGetDeviceMetricsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iotv1.GetDeviceMetricsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Iotv1.GetDeviceMetricsResponse, Error>> => {
   const { iotv1 } = useIotv1API()
-  const key = ["iotv1", "getDeviceMetrics", ...Object.entries(params).flat(3).sort()]
+  const key = ["iotv1", "getDeviceMetrics", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => iotv1.getDeviceMetrics(params, { signal }), dataloaderConfig)
 }

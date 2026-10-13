@@ -9,7 +9,7 @@ export const useCockpitv1RegionalAPIListTokensAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.Token[], Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.Token[], Error>> => {
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
-  const key = ["cockpitv1Regional", "listTokens", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Regional", "listTokens", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Regional.listTokens(params, { signal }).all(), dataloaderConfig)
 }

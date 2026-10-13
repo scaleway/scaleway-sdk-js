@@ -9,7 +9,7 @@ export const useWebhostingv1FtpAccountAPIListFtpAccountsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.ListFtpAccountsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.ListFtpAccountsResponse, Error>> => {
   const { webhostingv1FtpAccount } = useWebhostingv1FtpAccountAPI()
-  const key = ["webhostingv1FtpAccount", "listFtpAccounts", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1FtpAccount", "listFtpAccounts", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1FtpAccount.listFtpAccounts(params, { signal }), dataloaderConfig)
 }

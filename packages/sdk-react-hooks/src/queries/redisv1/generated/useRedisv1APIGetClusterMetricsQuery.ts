@@ -9,7 +9,7 @@ export const useRedisv1APIGetClusterMetricsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Redisv1.ClusterMetricsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Redisv1.ClusterMetricsResponse, Error>> => {
   const { redisv1 } = useRedisv1API()
-  const key = ["redisv1", "getClusterMetrics", ...Object.entries(params).flat(3).sort()]
+  const key = ["redisv1", "getClusterMetrics", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => redisv1.getClusterMetrics(params, { signal }), dataloaderConfig)
 }

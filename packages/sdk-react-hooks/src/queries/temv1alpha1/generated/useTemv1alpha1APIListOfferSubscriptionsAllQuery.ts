@@ -9,7 +9,7 @@ export const useTemv1alpha1APIListOfferSubscriptionsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Temv1alpha1.OfferSubscription[], Error>,
 ): ReturnType<typeof useDataLoader<Temv1alpha1.OfferSubscription[], Error>> => {
   const { temv1alpha1 } = useTemv1alpha1API()
-  const key = ["temv1alpha1", "listOfferSubscriptions", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["temv1alpha1", "listOfferSubscriptions", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => temv1alpha1.listOfferSubscriptions(params, { signal }).all(), dataloaderConfig)
 }

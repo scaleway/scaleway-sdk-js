@@ -9,7 +9,7 @@ export const useServerlessSqldbv1alpha1APIGetDatabaseQuery = (
   dataloaderConfig?: UseDataLoaderConfig<ServerlessSqldbv1alpha1.Database, Error>,
 ): ReturnType<typeof useDataLoader<ServerlessSqldbv1alpha1.Database, Error>> => {
   const { serverlessSqldbv1alpha1 } = useServerlessSqldbv1alpha1API()
-  const key = ["serverlessSqldbv1alpha1", "getDatabase", ...Object.entries(params).flat(3).sort()]
+  const key = ["serverlessSqldbv1alpha1", "getDatabase", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => serverlessSqldbv1alpha1.getDatabase(params, { signal }), dataloaderConfig)
 }

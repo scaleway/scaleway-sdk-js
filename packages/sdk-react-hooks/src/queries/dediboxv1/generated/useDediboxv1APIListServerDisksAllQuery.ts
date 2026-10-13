@@ -9,7 +9,7 @@ export const useDediboxv1APIListServerDisksAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ServerDisk[], Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ServerDisk[], Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "listServerDisks", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "listServerDisks", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.listServerDisks(params, { signal }).all(), dataloaderConfig)
 }

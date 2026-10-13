@@ -10,7 +10,7 @@ export const useS2SVpnv1alpha1APIListRoutingPoliciesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<S2SVpnv1alpha1.ListRoutingPoliciesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<S2SVpnv1alpha1.ListRoutingPoliciesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { s2SVpnv1alpha1 } = useS2SVpnv1alpha1API()
-  const key = ["s2SVpnv1alpha1", "listRoutingPolicies", ...Object.entries(params).flat(3).sort()]
+  const key = ["s2SVpnv1alpha1", "listRoutingPolicies", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => s2SVpnv1alpha1.listRoutingPolicies(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

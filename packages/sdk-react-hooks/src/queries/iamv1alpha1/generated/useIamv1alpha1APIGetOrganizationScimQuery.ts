@@ -9,7 +9,7 @@ export const useIamv1alpha1APIGetOrganizationScimQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iamv1alpha1.Scim, Error>,
 ): ReturnType<typeof useDataLoader<Iamv1alpha1.Scim, Error>> => {
   const { iamv1alpha1 } = useIamv1alpha1API()
-  const key = ["iamv1alpha1", "getOrganizationScim", ...Object.entries(params).flat(3).sort()]
+  const key = ["iamv1alpha1", "getOrganizationScim", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => iamv1alpha1.getOrganizationScim(params, { signal }), dataloaderConfig)
 }

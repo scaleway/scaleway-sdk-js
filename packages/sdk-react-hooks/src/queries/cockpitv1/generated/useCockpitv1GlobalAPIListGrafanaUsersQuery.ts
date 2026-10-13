@@ -9,7 +9,7 @@ export const useCockpitv1GlobalAPIListGrafanaUsersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.ListGrafanaUsersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.ListGrafanaUsersResponse, Error>> => {
   const { cockpitv1Global } = useCockpitv1GlobalAPI()
-  const key = ["cockpitv1Global", "listGrafanaUsers", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Global", "listGrafanaUsers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Global.listGrafanaUsers(params, { signal }), dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useMongodbv1alpha1APIListVersionsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Mongodbv1alpha1.ListVersionsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Mongodbv1alpha1.ListVersionsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { mongodbv1alpha1 } = useMongodbv1alpha1API()
-  const key = ["mongodbv1alpha1", "listVersions", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1alpha1", "listVersions", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => mongodbv1alpha1.listVersions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useFilev1alpha1APIListAttachmentsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Filev1alpha1.ListAttachmentsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Filev1alpha1.ListAttachmentsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { filev1alpha1 } = useFilev1alpha1API()
-  const key = ["filev1alpha1", "listAttachments", ...Object.entries(params).flat(3).sort()]
+  const key = ["filev1alpha1", "listAttachments", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => filev1alpha1.listAttachments(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

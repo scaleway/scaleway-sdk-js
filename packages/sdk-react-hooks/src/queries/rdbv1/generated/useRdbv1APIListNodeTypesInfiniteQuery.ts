@@ -10,7 +10,7 @@ export const useRdbv1APIListNodeTypesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Rdbv1.ListNodeTypesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Rdbv1.ListNodeTypesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listNodeTypes", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listNodeTypes", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => rdbv1.listNodeTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

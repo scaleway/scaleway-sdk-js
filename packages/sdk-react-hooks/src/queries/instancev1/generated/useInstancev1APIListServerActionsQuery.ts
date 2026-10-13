@@ -9,7 +9,7 @@ export const useInstancev1APIListServerActionsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev1.ListServerActionsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev1.ListServerActionsResponse, Error>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "listServerActions", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "listServerActions", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev1.listServerActions(params, { signal }), dataloaderConfig)
 }
