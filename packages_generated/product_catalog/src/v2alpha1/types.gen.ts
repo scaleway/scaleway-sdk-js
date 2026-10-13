@@ -68,6 +68,7 @@ export type PublicCatalogProductPropertiesGenerativeApisTask =
   | 'vision'
   | 'audio_transcription'
   | 'code'
+  | 'ocr'
 
 export type PublicCatalogProductPropertiesGenerativeApisTokenType =
   | 'unknown_token_type'
