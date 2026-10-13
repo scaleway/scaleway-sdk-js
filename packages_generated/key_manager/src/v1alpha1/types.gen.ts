@@ -12,9 +12,6 @@ export type GenerateKeyMaterialImportParametersRequestWrappingAlgorithm =
   | 'rsa_oaep_2048_sha256'
   | 'rsa_oaep_3072_sha256'
   | 'rsa_oaep_4096_sha256'
-  | 'rsa_aes_key_wrap_2048_sha256'
-  | 'rsa_aes_key_wrap_3072_sha256'
-  | 'rsa_aes_key_wrap_4096_sha256'
 
 export type KeyAlgorithmAsymmetricEncryption =
   | 'unknown_asymmetric_encryption'
@@ -484,8 +481,7 @@ export type GenerateKeyMaterialImportParametersRequest = {
    */
   keyId: string
   /**
-   * Supported values for direct RSA wrapping are: `rsa_oaep_2048_sha256`, `rsa_oaep_3072_sha256`, `rsa_oaep_4096_sha256`.
-Supported values for hybrid wrapping (RSA + AES Key Wrap) are: `rsa_aes_key_wrap_2048_sha256`, `rsa_aes_key_wrap_3072_sha256`, `rsa_aes_key_wrap_4096_sha256`.
+   * Supported values are: `rsa_oaep_2048_sha256`, `rsa_oaep_3072_sha256`, `rsa_oaep_4096_sha256`.
    */
   wrappingAlgorithm?: GenerateKeyMaterialImportParametersRequestWrappingAlgorithm
 }

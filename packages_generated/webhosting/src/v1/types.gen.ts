@@ -686,6 +686,10 @@ export interface HostingSummary {
    */
   id: string
   /**
+   * SRN of the Web Hosting plan.
+   */
+  srn: string
+  /**
    * ID of the Scaleway Project the Web Hosting plan belongs to.
    */
   projectId: string
@@ -1461,6 +1465,10 @@ export interface Hosting {
    * ID of the Web Hosting plan.
    */
   id: string
+  /**
+   * SRN of the Web Hosting plan.
+   */
+  srn: string
   /**
    * ID of the Scaleway Project the Web Hosting plan belongs to.
    */
