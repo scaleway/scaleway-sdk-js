@@ -1,4 +1,4 @@
-import { readFile, readFileSync, stat } from 'node:fs'
+import { readFile, readFileSync, stat, statSync } from 'node:fs'
 import { promisify } from 'node:util'
 import type { ConfigurationType } from './types.js'
 
@@ -8,6 +8,108 @@ const statAsync = promisify(stat)
 const STRIP_COMMENT_REGEX = /(?<prefix>^|\s)[;#]/v
 const DETECT_SECTION_REGEX = /^\s*(?<section>[\s\S]+?):\s*$/v
 const DETECT_ITEM_REGEX = /^\s*(?<key>.+?)\s*:\s*(?<value>.+?)\s*$/v
+
+/**
+ * Returns the part of a POSIX mode that grants access to group or others.
+ *
+ * @internal
+ */
+const getGroupOrOtherBits = (mode: number): number =>
+  // eslint-disable-next-line no-bitwise
+  mode & 0o077
+
+/**
+ * Emits a warning when a configuration file is readable by group or others.
+ *
+ * The Scaleway config file holds secret keys that grant full API access. When
+ * the file is more permissive than `0o600` the user is warned so they can
+ * tighten permissions.
+ *
+ * @param filePath - Path to the configuration file
+ * @param mode - Resolved POSIX mode bits of the file
+ *
+ * @internal
+ */
+const warnIfInsecurePermissions = (filePath: string, mode: number): void => {
+  if (getGroupOrOtherBits(mode) === 0) {
+    return
+  }
+  // eslint-disable-next-line no-bitwise
+  const formattedMode = (mode & 0o777).toString(8).padStart(3, '0')
+  // eslint-disable-next-line no-console
+  console.warn(
+    `Warning: Scaleway configuration file at ${filePath} has insecure permissions (mode 0o${formattedMode}). ` +
+      `Credentials are readable by group or others. ` +
+      `Run "chmod 600 ${filePath}" to restrict access.`,
+  )
+}
+
+/**
+ * Resolves the POSIX mode of a file synchronously, or `undefined` if it
+ * cannot be stat-ed. Failures are ignored: the loader's own read call will
+ * surface a real error if the file is unreachable.
+ *
+ * @internal
+ */
+const getModeSync = (filePath: string): number | undefined => {
+  try {
+    const { mode } = statSync(filePath)
+
+    return mode
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * Asynchronous counterpart to {@link getModeSync}.
+ *
+ * @internal
+ */
+const getModeAsync = async (filePath: string): Promise<number | undefined> => {
+  try {
+    const info = await statAsync(filePath)
+    const { mode } = info
+
+    return mode
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * Emits an insecure-permissions warning by stat-ing the file synchronously.
+ * No-op on Windows where POSIX permission bits are not meaningful.
+ *
+ * @internal
+ */
+const warnIfInsecurePermissionsIfNeededSync = (filePath: string): void => {
+  if (process.platform === 'win32') {
+    return
+  }
+  const mode = getModeSync(filePath)
+  if (mode === undefined) {
+    return
+  }
+  warnIfInsecurePermissions(filePath, mode)
+}
+
+/**
+ * Emits an insecure-permissions warning by stat-ing the file asynchronously.
+ * No-op on Windows where POSIX permission bits are not meaningful.
+ *
+ * @internal
+ */
+const warnIfInsecurePermissionsIfNeeded = async (filePath: string): Promise<void> => {
+  if (process.platform === 'win32') {
+    return
+  }
+  const mode = await getModeAsync(filePath)
+  if (mode === undefined) {
+    return
+  }
+  warnIfInsecurePermissions(filePath, mode)
+}
 
 /**
  * Converts YAML to configuration map.
@@ -65,6 +167,7 @@ export const convertYamlToConfiguration = (input: string | null): ConfigurationT
  * @internal
  */
 export const loadConfigurationFromFile = (filePath: string): ConfigurationType => {
+  warnIfInsecurePermissionsIfNeededSync(filePath)
   // `readFileSync` returns a string when encoding option is specified.
   // {@link https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options}
   const fileContent = readFileSync(filePath, 'utf8')
@@ -87,6 +190,7 @@ export const loadConfigurationFromFile = (filePath: string): ConfigurationType =
  * @public
  */
 export const loadConfigurationFromFileAsync = async (filePath: string): Promise<ConfigurationType> => {
+  await warnIfInsecurePermissionsIfNeeded(filePath)
   const fileContent = await readFileAsync(filePath, 'utf8')
 
   return convertYamlToConfiguration(fileContent)
@@ -111,8 +215,7 @@ export const hasSecureFilePermissions = async (filePath: string): Promise<boolea
   }
 
   const info = await statAsync(filePath)
-  // eslint-disable-next-line no-bitwise
-  const groupOrOtherBits = info.mode & 0o077
+  const { mode } = info
 
-  return groupOrOtherBits === 0
+  return getGroupOrOtherBits(mode) === 0
 }

@@ -1,5 +1,7 @@
+import { chmodSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   convertYamlToConfiguration,
   hasSecureFilePermissions,
@@ -33,6 +35,9 @@ describe('convertYamlToConfiguration', () => {
 
 describe('loadConfigurationFromFile', () => {
   it('loads config from a yaml file', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {
+      /* noop */
+    })
     const yamlPath = path.join(currentDir, 'data', 'scw-config.yaml')
     const loadedConfig = loadConfigurationFromFile(yamlPath)
     expect(loadedConfig).not.toBeNull()
@@ -44,6 +49,11 @@ describe('loadConfigurationFromFile', () => {
           prod: { prodKey1: 'value6' },
         }),
     ).toBe(true)
+    // The committed test fixture is 0o644 (git only tracks the exec bit),
+    // so loading it must emit the insecure-permissions warning.
+    expect(warnSpy).toHaveBeenCalledTimes(1)
+    expect(warnSpy.mock.calls[0]?.[0]).toMatch(/insecure permissions/iv)
+    warnSpy.mockRestore()
   })
 
   it('throws an error for an invalid path', () => {
@@ -55,6 +65,9 @@ describe('loadConfigurationFromFile', () => {
 
 describe('loadConfigurationFromFileAsync', () => {
   it('loads config from a yaml file asynchronously', async () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {
+      /* noop */
+    })
     const yamlPath = path.join(currentDir, 'data', 'scw-config.yaml')
     const loadedConfig = await loadConfigurationFromFileAsync(yamlPath)
     expect(loadedConfig).not.toBeNull()
@@ -63,6 +76,9 @@ describe('loadConfigurationFromFileAsync', () => {
       dev: { devKey1: 'value5' },
       prod: { prodKey1: 'value6' },
     })
+    expect(warnSpy).toHaveBeenCalledTimes(1)
+    expect(warnSpy.mock.calls[0]?.[0]).toMatch(/insecure permissions/iv)
+    warnSpy.mockRestore()
   })
 
   it('rejects for an invalid path', async () => {
@@ -86,5 +102,77 @@ describe('hasSecureFilePermissions', () => {
     const yamlPath = path.join(currentDir, 'data', 'scw-config.yaml')
     const result = await hasSecureFilePermissions(yamlPath)
     expect(typeof result).toBe('boolean')
+  })
+})
+
+const tempDirs: string[] = []
+
+afterEach(() => {
+  vi.restoreAllMocks()
+  for (const dir of tempDirs) {
+    rmSync(dir, { recursive: true, force: true })
+  }
+  tempDirs.length = 0
+})
+
+const writeConfig = (mode: number): string => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'scw-config-perms-'))
+  tempDirs.push(dir)
+  const filePath = path.join(dir, 'scw-config.yaml')
+  writeFileSync(filePath, 'access_key: SCWXXXXXXXXXXXXXXXXX\nsecret_key: deadbeef\n', { mode })
+  // `writeFileSync` honors the mode but umask may widen it; force the exact bits.
+  chmodSync(filePath, mode)
+  return filePath
+}
+
+describe('insecure permissions warning', () => {
+  if (process.platform === 'win32') {
+    return
+  }
+
+  describe('loadConfigurationFromFile', () => {
+    it('warns when the config file is world/group readable', () => {
+      const filePath = writeConfig(0o644)
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {
+        /* noop */
+      })
+      loadConfigurationFromFile(filePath)
+      expect(warnSpy).toHaveBeenCalledTimes(1)
+      expect(warnSpy.mock.calls[0]?.[0]).toMatch(/insecure permissions/iv)
+      expect(warnSpy.mock.calls[0]?.[0]).toContain(filePath)
+      expect(warnSpy.mock.calls[0]?.[0]).toMatch(/chmod 600/iv)
+    })
+
+    it('does not warn when the config file is 0o600', () => {
+      const filePath = writeConfig(0o600)
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {
+        /* noop */
+      })
+      loadConfigurationFromFile(filePath)
+      expect(warnSpy).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('loadConfigurationFromFileAsync', () => {
+    it('warns when the config file is world/group readable', async () => {
+      const filePath = writeConfig(0o644)
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {
+        /* noop */
+      })
+      await loadConfigurationFromFileAsync(filePath)
+      expect(warnSpy).toHaveBeenCalledTimes(1)
+      expect(warnSpy.mock.calls[0]?.[0]).toMatch(/insecure permissions/iv)
+      expect(warnSpy.mock.calls[0]?.[0]).toContain(filePath)
+      expect(warnSpy.mock.calls[0]?.[0]).toMatch(/chmod 600/iv)
+    })
+
+    it('does not warn when the config file is 0o600', async () => {
+      const filePath = writeConfig(0o600)
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {
+        /* noop */
+      })
+      await loadConfigurationFromFileAsync(filePath)
+      expect(warnSpy).not.toHaveBeenCalled()
+    })
   })
 })

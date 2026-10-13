@@ -1,4 +1,4 @@
-import { writeFileSync } from 'node:fs'
+import { chmodSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { env } from 'node:process'
@@ -40,6 +40,9 @@ default_region: ${newProfile.defaultRegion ?? ''}
 default_zone: ${newProfile.defaultZone ?? ''}
 secret_key: ${newProfile.secretKey ?? ''}`
   writeFileSync(filePath, yml)
+  // Keep the fixture at 0o600 so loading it does not trip the
+  // insecure-permissions warning (credentials files should be 0o600 anyway).
+  chmodSync(filePath, 0o600)
 }
 
 afterEach(() => {
