@@ -9,7 +9,7 @@ export const useK8Sv1APIGetUserDataQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blob, Error>,
 ): ReturnType<typeof useDataLoader<Blob, Error>> => {
   const { k8Sv1 } = useK8Sv1API()
-  const key = ["k8Sv1", "getUserData", ...Object.entries(params).flat(3).sort()]
+  const key = ["k8Sv1", "getUserData", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => k8Sv1.getUserData(params, { signal }), dataloaderConfig)
 }

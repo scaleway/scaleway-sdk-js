@@ -10,7 +10,7 @@ export const useVpcv2APIListSubnetsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Vpcv2.ListSubnetsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Vpcv2.ListSubnetsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "listSubnets", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "listSubnets", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcv2.listSubnets(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

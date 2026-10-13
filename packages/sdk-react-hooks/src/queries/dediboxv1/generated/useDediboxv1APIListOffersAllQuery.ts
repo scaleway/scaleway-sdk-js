@@ -9,7 +9,7 @@ export const useDediboxv1APIListOffersAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.Offer[], Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.Offer[], Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "listOffers", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "listOffers", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.listOffers(params, { signal }).all(), dataloaderConfig)
 }

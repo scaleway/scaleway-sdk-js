@@ -9,7 +9,7 @@ export const useInstancev2alpha1APIGetResourceCountsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev2alpha1.ResourceCounts, Error>,
 ): ReturnType<typeof useDataLoader<Instancev2alpha1.ResourceCounts, Error>> => {
   const { instancev2alpha1 } = useInstancev2alpha1API()
-  const key = ["instancev2alpha1", "getResourceCounts", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev2alpha1", "getResourceCounts", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev2alpha1.getResourceCounts(params, { signal }), dataloaderConfig)
 }

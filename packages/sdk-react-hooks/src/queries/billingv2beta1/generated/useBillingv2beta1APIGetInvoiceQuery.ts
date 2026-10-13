@@ -9,7 +9,7 @@ export const useBillingv2beta1APIGetInvoiceQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Billingv2beta1.Invoice, Error>,
 ): ReturnType<typeof useDataLoader<Billingv2beta1.Invoice, Error>> => {
   const { billingv2beta1 } = useBillingv2beta1API()
-  const key = ["billingv2beta1", "getInvoice", ...Object.entries(params).flat(3).sort()]
+  const key = ["billingv2beta1", "getInvoice", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => billingv2beta1.getInvoice(params, { signal }), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useContainerv1APIListNamespacesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Containerv1.Namespace[], Error>,
 ): ReturnType<typeof useDataLoader<Containerv1.Namespace[], Error>> => {
   const { containerv1 } = useContainerv1API()
-  const key = ["containerv1", "listNamespaces", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["containerv1", "listNamespaces", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => containerv1.listNamespaces(params, { signal }).all(), dataloaderConfig)
 }

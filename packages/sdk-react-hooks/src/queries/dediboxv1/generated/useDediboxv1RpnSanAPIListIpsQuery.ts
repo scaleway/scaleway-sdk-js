@@ -9,7 +9,7 @@ export const useDediboxv1RpnSanAPIListIpsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListIpsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListIpsResponse, Error>> => {
   const { dediboxv1RpnSan } = useDediboxv1RpnSanAPI()
-  const key = ["dediboxv1RpnSan", "listIps", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1RpnSan", "listIps", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1RpnSan.listIps(params, { signal }), dataloaderConfig)
 }

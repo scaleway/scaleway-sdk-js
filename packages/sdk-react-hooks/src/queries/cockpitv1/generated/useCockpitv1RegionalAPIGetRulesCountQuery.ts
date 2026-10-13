@@ -9,7 +9,7 @@ export const useCockpitv1RegionalAPIGetRulesCountQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.GetRulesCountResponse, Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.GetRulesCountResponse, Error>> => {
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
-  const key = ["cockpitv1Regional", "getRulesCount", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Regional", "getRulesCount", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Regional.getRulesCount(params, { signal }), dataloaderConfig)
 }

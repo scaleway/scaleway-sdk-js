@@ -10,7 +10,7 @@ export const useInstancev2alpha1VolumeAPIListVolumeTypesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Instancev2alpha1.ListVolumeTypesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Instancev2alpha1.ListVolumeTypesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { instancev2alpha1Volume } = useInstancev2alpha1VolumeAPI()
-  const key = ["instancev2alpha1Volume", "listVolumeTypes", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev2alpha1Volume", "listVolumeTypes", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev2alpha1Volume.listVolumeTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useBlockv1APIListVolumesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blockv1.Volume[], Error>,
 ): ReturnType<typeof useDataLoader<Blockv1.Volume[], Error>> => {
   const { blockv1 } = useBlockv1API()
-  const key = ["blockv1", "listVolumes", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["blockv1", "listVolumes", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => blockv1.listVolumes(params, { signal }).all(), dataloaderConfig)
 }

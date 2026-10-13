@@ -10,7 +10,7 @@ export const useFunctionv1beta1APIListFunctionsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Functionv1beta1.ListFunctionsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Functionv1beta1.ListFunctionsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { functionv1beta1 } = useFunctionv1beta1API()
-  const key = ["functionv1beta1", "listFunctions", ...Object.entries(params).flat(3).sort()]
+  const key = ["functionv1beta1", "listFunctions", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => functionv1beta1.listFunctions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

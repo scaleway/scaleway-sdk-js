@@ -9,7 +9,7 @@ export const useJobsv1alpha2APIGetJobRunQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Jobsv1alpha2.JobRun, Error>,
 ): ReturnType<typeof useDataLoader<Jobsv1alpha2.JobRun, Error>> => {
   const { jobsv1alpha2 } = useJobsv1alpha2API()
-  const key = ["jobsv1alpha2", "getJobRun", ...Object.entries(params).flat(3).sort()]
+  const key = ["jobsv1alpha2", "getJobRun", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => jobsv1alpha2.getJobRun(params, { signal }), dataloaderConfig)
 }

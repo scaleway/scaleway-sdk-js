@@ -9,7 +9,7 @@ export const useVpcv2APIGetAclQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcv2.GetAclResponse, Error>,
 ): ReturnType<typeof useDataLoader<Vpcv2.GetAclResponse, Error>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "getAcl", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "getAcl", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcv2.getAcl(params, { signal }), dataloaderConfig)
 }

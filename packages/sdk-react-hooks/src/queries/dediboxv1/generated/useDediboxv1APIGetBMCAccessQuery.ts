@@ -9,7 +9,7 @@ export const useDediboxv1APIGetBMCAccessQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.BMCAccess, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.BMCAccess, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "getBMCAccess", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "getBMCAccess", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.getBMCAccess(params, { signal }), dataloaderConfig)
 }

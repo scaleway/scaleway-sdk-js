@@ -9,7 +9,7 @@ export const useMongodbv1alpha1APIListVersionsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mongodbv1alpha1.ListVersionsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Mongodbv1alpha1.ListVersionsResponse, Error>> => {
   const { mongodbv1alpha1 } = useMongodbv1alpha1API()
-  const key = ["mongodbv1alpha1", "listVersions", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1alpha1", "listVersions", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mongodbv1alpha1.listVersions(params, { signal }), dataloaderConfig)
 }

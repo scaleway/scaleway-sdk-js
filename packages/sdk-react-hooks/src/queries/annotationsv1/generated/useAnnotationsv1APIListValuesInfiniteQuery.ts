@@ -10,7 +10,7 @@ export const useAnnotationsv1APIListValuesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Annotationsv1.ListValuesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Annotationsv1.ListValuesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { annotationsv1 } = useAnnotationsv1API()
-  const key = ["annotationsv1", "listValues", ...Object.entries(params).flat(3).sort()]
+  const key = ["annotationsv1", "listValues", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => annotationsv1.listValues(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

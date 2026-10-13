@@ -9,7 +9,7 @@ export const useCockpitv1RegionalAPIGetUsageOverviewQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.UsageOverview, Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.UsageOverview, Error>> => {
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
-  const key = ["cockpitv1Regional", "getUsageOverview", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Regional", "getUsageOverview", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Regional.getUsageOverview(params, { signal }), dataloaderConfig)
 }

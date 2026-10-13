@@ -10,7 +10,7 @@ export const useDediboxv1BillingAPIListRefundsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Dediboxv1.ListRefundsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Dediboxv1.ListRefundsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
-  const key = ["dediboxv1Billing", "listRefunds", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1Billing", "listRefunds", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1Billing.listRefunds(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

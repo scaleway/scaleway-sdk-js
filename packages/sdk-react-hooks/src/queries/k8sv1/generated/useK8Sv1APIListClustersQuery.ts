@@ -9,7 +9,7 @@ export const useK8Sv1APIListClustersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<K8Sv1.ListClustersResponse, Error>,
 ): ReturnType<typeof useDataLoader<K8Sv1.ListClustersResponse, Error>> => {
   const { k8Sv1 } = useK8Sv1API()
-  const key = ["k8Sv1", "listClusters", ...Object.entries(params).flat(3).sort()]
+  const key = ["k8Sv1", "listClusters", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => k8Sv1.listClusters(params, { signal }), dataloaderConfig)
 }

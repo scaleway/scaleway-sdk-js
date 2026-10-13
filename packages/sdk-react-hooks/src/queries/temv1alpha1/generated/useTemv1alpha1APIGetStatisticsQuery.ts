@@ -9,7 +9,7 @@ export const useTemv1alpha1APIGetStatisticsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Temv1alpha1.Statistics, Error>,
 ): ReturnType<typeof useDataLoader<Temv1alpha1.Statistics, Error>> => {
   const { temv1alpha1 } = useTemv1alpha1API()
-  const key = ["temv1alpha1", "getStatistics", ...Object.entries(params).flat(3).sort()]
+  const key = ["temv1alpha1", "getStatistics", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => temv1alpha1.getStatistics(params, { signal }), dataloaderConfig)
 }

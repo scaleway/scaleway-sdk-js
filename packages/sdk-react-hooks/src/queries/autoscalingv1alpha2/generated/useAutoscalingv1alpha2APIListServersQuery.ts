@@ -9,7 +9,7 @@ export const useAutoscalingv1alpha2APIListServersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Autoscalingv1alpha2.ListServersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Autoscalingv1alpha2.ListServersResponse, Error>> => {
   const { autoscalingv1alpha2 } = useAutoscalingv1alpha2API()
-  const key = ["autoscalingv1alpha2", "listServers", ...Object.entries(params).flat(3).sort()]
+  const key = ["autoscalingv1alpha2", "listServers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => autoscalingv1alpha2.listServers(params, { signal }), dataloaderConfig)
 }

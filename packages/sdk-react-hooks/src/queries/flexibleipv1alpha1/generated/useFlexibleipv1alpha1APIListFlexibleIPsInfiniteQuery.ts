@@ -10,7 +10,7 @@ export const useFlexibleipv1alpha1APIListFlexibleIPsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Flexibleipv1alpha1.ListFlexibleIPsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Flexibleipv1alpha1.ListFlexibleIPsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { flexibleipv1alpha1 } = useFlexibleipv1alpha1API()
-  const key = ["flexibleipv1alpha1", "listFlexibleIPs", ...Object.entries(params).flat(3).sort()]
+  const key = ["flexibleipv1alpha1", "listFlexibleIPs", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => flexibleipv1alpha1.listFlexibleIPs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

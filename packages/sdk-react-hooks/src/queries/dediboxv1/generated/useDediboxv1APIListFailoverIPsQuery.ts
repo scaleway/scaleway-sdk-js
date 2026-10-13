@@ -9,7 +9,7 @@ export const useDediboxv1APIListFailoverIPsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListFailoverIPsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListFailoverIPsResponse, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "listFailoverIPs", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "listFailoverIPs", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.listFailoverIPs(params, { signal }), dataloaderConfig)
 }

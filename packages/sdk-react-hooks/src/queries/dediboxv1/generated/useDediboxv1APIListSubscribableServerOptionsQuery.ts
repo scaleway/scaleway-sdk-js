@@ -9,7 +9,7 @@ export const useDediboxv1APIListSubscribableServerOptionsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListSubscribableServerOptionsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListSubscribableServerOptionsResponse, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "listSubscribableServerOptions", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "listSubscribableServerOptions", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.listSubscribableServerOptions(params, { signal }), dataloaderConfig)
 }

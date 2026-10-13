@@ -9,7 +9,7 @@ export const useVpcv2APIListSubnetOverlapsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcv2.ListSubnetOverlapsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Vpcv2.ListSubnetOverlapsResponse, Error>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "listSubnetOverlaps", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "listSubnetOverlaps", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcv2.listSubnetOverlaps(params, { signal }), dataloaderConfig)
 }

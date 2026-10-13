@@ -9,7 +9,7 @@ export const useDomainv2beta1RegistrarAPISearchAvailableDomainsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Domainv2beta1.SearchAvailableDomainsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Domainv2beta1.SearchAvailableDomainsResponse, Error>> => {
   const { domainv2beta1Registrar } = useDomainv2beta1RegistrarAPI()
-  const key = ["domainv2beta1Registrar", "searchAvailableDomains", ...Object.entries(params).flat(3).sort()]
+  const key = ["domainv2beta1Registrar", "searchAvailableDomains", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => domainv2beta1Registrar.searchAvailableDomains(params, { signal }), dataloaderConfig)
 }

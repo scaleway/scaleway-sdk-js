@@ -9,7 +9,7 @@ export const useMnqv1beta1NatsAPIListNatsCredentialsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mnqv1beta1.NatsCredentials[], Error>,
 ): ReturnType<typeof useDataLoader<Mnqv1beta1.NatsCredentials[], Error>> => {
   const { mnqv1beta1Nats } = useMnqv1beta1NatsAPI()
-  const key = ["mnqv1beta1Nats", "listNatsCredentials", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["mnqv1beta1Nats", "listNatsCredentials", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mnqv1beta1Nats.listNatsCredentials(params, { signal }).all(), dataloaderConfig)
 }

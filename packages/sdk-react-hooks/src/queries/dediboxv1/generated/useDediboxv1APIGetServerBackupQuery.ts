@@ -9,7 +9,7 @@ export const useDediboxv1APIGetServerBackupQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.Backup, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.Backup, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "getServerBackup", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "getServerBackup", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.getServerBackup(params, { signal }), dataloaderConfig)
 }

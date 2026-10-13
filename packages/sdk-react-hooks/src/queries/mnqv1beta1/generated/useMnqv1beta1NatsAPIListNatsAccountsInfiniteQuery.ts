@@ -10,7 +10,7 @@ export const useMnqv1beta1NatsAPIListNatsAccountsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Mnqv1beta1.ListNatsAccountsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Mnqv1beta1.ListNatsAccountsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { mnqv1beta1Nats } = useMnqv1beta1NatsAPI()
-  const key = ["mnqv1beta1Nats", "listNatsAccounts", ...Object.entries(params).flat(3).sort()]
+  const key = ["mnqv1beta1Nats", "listNatsAccounts", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => mnqv1beta1Nats.listNatsAccounts(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

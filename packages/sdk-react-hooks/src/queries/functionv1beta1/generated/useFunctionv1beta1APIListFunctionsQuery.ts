@@ -9,7 +9,7 @@ export const useFunctionv1beta1APIListFunctionsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Functionv1beta1.ListFunctionsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Functionv1beta1.ListFunctionsResponse, Error>> => {
   const { functionv1beta1 } = useFunctionv1beta1API()
-  const key = ["functionv1beta1", "listFunctions", ...Object.entries(params).flat(3).sort()]
+  const key = ["functionv1beta1", "listFunctions", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => functionv1beta1.listFunctions(params, { signal }), dataloaderConfig)
 }

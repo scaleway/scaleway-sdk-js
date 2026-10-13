@@ -9,7 +9,7 @@ export const useRdbv1APIListSnapshotsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.Snapshot[], Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.Snapshot[], Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listSnapshots", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listSnapshots", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.listSnapshots(params, { signal }).all(), dataloaderConfig)
 }

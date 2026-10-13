@@ -9,7 +9,7 @@ export const useDomainv2beta1APIGetDNSZoneVersionDiffQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Domainv2beta1.GetDNSZoneVersionDiffResponse, Error>,
 ): ReturnType<typeof useDataLoader<Domainv2beta1.GetDNSZoneVersionDiffResponse, Error>> => {
   const { domainv2beta1 } = useDomainv2beta1API()
-  const key = ["domainv2beta1", "getDNSZoneVersionDiff", ...Object.entries(params).flat(3).sort()]
+  const key = ["domainv2beta1", "getDNSZoneVersionDiff", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => domainv2beta1.getDNSZoneVersionDiff(params, { signal }), dataloaderConfig)
 }

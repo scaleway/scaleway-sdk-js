@@ -10,7 +10,7 @@ export const useFunctionv1beta1APIListCronsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Functionv1beta1.ListCronsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Functionv1beta1.ListCronsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { functionv1beta1 } = useFunctionv1beta1API()
-  const key = ["functionv1beta1", "listCrons", ...Object.entries(params).flat(3).sort()]
+  const key = ["functionv1beta1", "listCrons", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => functionv1beta1.listCrons(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useDomainv2beta1RegistrarAPIListInboundTransfersAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Domainv2beta1.InboundTransfer[], Error>,
 ): ReturnType<typeof useDataLoader<Domainv2beta1.InboundTransfer[], Error>> => {
   const { domainv2beta1Registrar } = useDomainv2beta1RegistrarAPI()
-  const key = ["domainv2beta1Registrar", "listInboundTransfers", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["domainv2beta1Registrar", "listInboundTransfers", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => domainv2beta1Registrar.listInboundTransfers(params, { signal }).all(), dataloaderConfig)
 }

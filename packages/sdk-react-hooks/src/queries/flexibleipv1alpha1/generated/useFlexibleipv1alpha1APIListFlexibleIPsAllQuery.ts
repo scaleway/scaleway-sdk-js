@@ -9,7 +9,7 @@ export const useFlexibleipv1alpha1APIListFlexibleIPsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Flexibleipv1alpha1.FlexibleIP[], Error>,
 ): ReturnType<typeof useDataLoader<Flexibleipv1alpha1.FlexibleIP[], Error>> => {
   const { flexibleipv1alpha1 } = useFlexibleipv1alpha1API()
-  const key = ["flexibleipv1alpha1", "listFlexibleIPs", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["flexibleipv1alpha1", "listFlexibleIPs", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => flexibleipv1alpha1.listFlexibleIPs(params, { signal }).all(), dataloaderConfig)
 }

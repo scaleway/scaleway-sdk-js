@@ -10,7 +10,7 @@ export const useCockpitv1GlobalAPIListPlansInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Cockpitv1.ListPlansResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Cockpitv1.ListPlansResponse, Error, typeof params, typeof pageParamKey>> => {
   const { cockpitv1Global } = useCockpitv1GlobalAPI()
-  const key = ["cockpitv1Global", "listPlans", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Global", "listPlans", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => cockpitv1Global.listPlans(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

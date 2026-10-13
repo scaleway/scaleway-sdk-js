@@ -9,7 +9,7 @@ export const useInstancev2alpha1VolumeAPIListVolumesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev2alpha1.ListVolumesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev2alpha1.ListVolumesResponse, Error>> => {
   const { instancev2alpha1Volume } = useInstancev2alpha1VolumeAPI()
-  const key = ["instancev2alpha1Volume", "listVolumes", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev2alpha1Volume", "listVolumes", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev2alpha1Volume.listVolumes(params, { signal }), dataloaderConfig)
 }

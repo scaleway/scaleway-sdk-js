@@ -9,7 +9,7 @@ export const useContainerv1APIGetPrivateEndpointCertificateAuthorityQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blob, Error>,
 ): ReturnType<typeof useDataLoader<Blob, Error>> => {
   const { containerv1 } = useContainerv1API()
-  const key = ["containerv1", "getPrivateEndpointCertificateAuthority", ...Object.entries(params).flat(3).sort()]
+  const key = ["containerv1", "getPrivateEndpointCertificateAuthority", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => containerv1.getPrivateEndpointCertificateAuthority(params, { signal }), dataloaderConfig)
 }

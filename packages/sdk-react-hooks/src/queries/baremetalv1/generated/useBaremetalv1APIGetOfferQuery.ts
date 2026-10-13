@@ -9,7 +9,7 @@ export const useBaremetalv1APIGetOfferQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Baremetalv1.Offer, Error>,
 ): ReturnType<typeof useDataLoader<Baremetalv1.Offer, Error>> => {
   const { baremetalv1 } = useBaremetalv1API()
-  const key = ["baremetalv1", "getOffer", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv1", "getOffer", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => baremetalv1.getOffer(params, { signal }), dataloaderConfig)
 }

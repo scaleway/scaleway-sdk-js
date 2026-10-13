@@ -10,7 +10,7 @@ export const useRdbv1APIListDatabaseBackupsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Rdbv1.ListDatabaseBackupsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Rdbv1.ListDatabaseBackupsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listDatabaseBackups", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listDatabaseBackups", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => rdbv1.listDatabaseBackups(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useWebhostingv1OfferAPIListOffersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Webhostingv1.ListOffersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Webhostingv1.ListOffersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { webhostingv1Offer } = useWebhostingv1OfferAPI()
-  const key = ["webhostingv1Offer", "listOffers", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Offer", "listOffers", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1Offer.listOffers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

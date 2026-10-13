@@ -9,7 +9,7 @@ export const useBaremetalv3PrivateNetworkAPIListServerPrivateNetworksQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Baremetalv3.ListServerPrivateNetworksResponse, Error>,
 ): ReturnType<typeof useDataLoader<Baremetalv3.ListServerPrivateNetworksResponse, Error>> => {
   const { baremetalv3PrivateNetwork } = useBaremetalv3PrivateNetworkAPI()
-  const key = ["baremetalv3PrivateNetwork", "listServerPrivateNetworks", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv3PrivateNetwork", "listServerPrivateNetworks", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => baremetalv3PrivateNetwork.listServerPrivateNetworks(params, { signal }), dataloaderConfig)
 }

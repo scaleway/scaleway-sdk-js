@@ -9,7 +9,7 @@ export const useMarketplacev2APIListLocalImagesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Marketplacev2.ListLocalImagesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Marketplacev2.ListLocalImagesResponse, Error>> => {
   const { marketplacev2 } = useMarketplacev2API()
-  const key = ["marketplacev2", "listLocalImages", ...Object.entries(params).flat(3).sort()]
+  const key = ["marketplacev2", "listLocalImages", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => marketplacev2.listLocalImages(params, { signal }), dataloaderConfig)
 }

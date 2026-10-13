@@ -9,7 +9,7 @@ export const useDediboxv1RpnSanAPIGetRpnSanQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.RpnSan, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.RpnSan, Error>> => {
   const { dediboxv1RpnSan } = useDediboxv1RpnSanAPI()
-  const key = ["dediboxv1RpnSan", "getRpnSan", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1RpnSan", "getRpnSan", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1RpnSan.getRpnSan(params, { signal }), dataloaderConfig)
 }

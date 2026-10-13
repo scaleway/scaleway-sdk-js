@@ -9,7 +9,7 @@ export const useInterlinkv1beta1APIListPartnersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Interlinkv1beta1.ListPartnersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Interlinkv1beta1.ListPartnersResponse, Error>> => {
   const { interlinkv1beta1 } = useInterlinkv1beta1API()
-  const key = ["interlinkv1beta1", "listPartners", ...Object.entries(params).flat(3).sort()]
+  const key = ["interlinkv1beta1", "listPartners", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => interlinkv1beta1.listPartners(params, { signal }), dataloaderConfig)
 }

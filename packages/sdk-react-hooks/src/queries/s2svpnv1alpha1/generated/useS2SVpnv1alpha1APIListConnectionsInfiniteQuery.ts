@@ -10,7 +10,7 @@ export const useS2SVpnv1alpha1APIListConnectionsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<S2SVpnv1alpha1.ListConnectionsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<S2SVpnv1alpha1.ListConnectionsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { s2SVpnv1alpha1 } = useS2SVpnv1alpha1API()
-  const key = ["s2SVpnv1alpha1", "listConnections", ...Object.entries(params).flat(3).sort()]
+  const key = ["s2SVpnv1alpha1", "listConnections", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => s2SVpnv1alpha1.listConnections(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

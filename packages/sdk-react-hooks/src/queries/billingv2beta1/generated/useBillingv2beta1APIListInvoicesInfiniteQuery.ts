@@ -10,7 +10,7 @@ export const useBillingv2beta1APIListInvoicesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Billingv2beta1.ListInvoicesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Billingv2beta1.ListInvoicesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { billingv2beta1 } = useBillingv2beta1API()
-  const key = ["billingv2beta1", "listInvoices", ...Object.entries(params).flat(3).sort()]
+  const key = ["billingv2beta1", "listInvoices", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => billingv2beta1.listInvoices(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

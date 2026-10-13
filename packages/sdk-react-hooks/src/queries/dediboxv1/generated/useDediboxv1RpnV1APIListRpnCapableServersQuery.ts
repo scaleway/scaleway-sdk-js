@@ -9,7 +9,7 @@ export const useDediboxv1RpnV1APIListRpnCapableServersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListRpnCapableServersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListRpnCapableServersResponse, Error>> => {
   const { dediboxv1RpnV1 } = useDediboxv1RpnV1API()
-  const key = ["dediboxv1RpnV1", "listRpnCapableServers", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1RpnV1", "listRpnCapableServers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1RpnV1.listRpnCapableServers(params, { signal }), dataloaderConfig)
 }

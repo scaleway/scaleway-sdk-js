@@ -10,7 +10,7 @@ export const useIpamv1APIListIPsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Ipamv1.ListIPsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Ipamv1.ListIPsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { ipamv1 } = useIpamv1API()
-  const key = ["ipamv1", "listIPs", ...Object.entries(params).flat(3).sort()]
+  const key = ["ipamv1", "listIPs", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => ipamv1.listIPs(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

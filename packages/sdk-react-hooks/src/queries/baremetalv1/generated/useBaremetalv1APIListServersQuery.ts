@@ -9,7 +9,7 @@ export const useBaremetalv1APIListServersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Baremetalv1.ListServersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Baremetalv1.ListServersResponse, Error>> => {
   const { baremetalv1 } = useBaremetalv1API()
-  const key = ["baremetalv1", "listServers", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv1", "listServers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => baremetalv1.listServers(params, { signal }), dataloaderConfig)
 }

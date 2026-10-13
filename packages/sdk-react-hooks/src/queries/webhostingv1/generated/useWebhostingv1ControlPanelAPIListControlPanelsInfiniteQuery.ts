@@ -10,7 +10,7 @@ export const useWebhostingv1ControlPanelAPIListControlPanelsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Webhostingv1.ListControlPanelsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Webhostingv1.ListControlPanelsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { webhostingv1ControlPanel } = useWebhostingv1ControlPanelAPI()
-  const key = ["webhostingv1ControlPanel", "listControlPanels", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1ControlPanel", "listControlPanels", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1ControlPanel.listControlPanels(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

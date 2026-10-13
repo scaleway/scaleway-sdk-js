@@ -9,7 +9,7 @@ export const useDediboxv1APIGetOfferQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.Offer, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.Offer, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "getOffer", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "getOffer", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.getOffer(params, { signal }), dataloaderConfig)
 }

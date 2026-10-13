@@ -9,7 +9,7 @@ export const useKeyManagerv1alpha1APIGetKeyQuery = (
   dataloaderConfig?: UseDataLoaderConfig<KeyManagerv1alpha1.Key, Error>,
 ): ReturnType<typeof useDataLoader<KeyManagerv1alpha1.Key, Error>> => {
   const { keyManagerv1alpha1 } = useKeyManagerv1alpha1API()
-  const key = ["keyManagerv1alpha1", "getKey", ...Object.entries(params).flat(3).sort()]
+  const key = ["keyManagerv1alpha1", "getKey", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => keyManagerv1alpha1.getKey(params, { signal }), dataloaderConfig)
 }

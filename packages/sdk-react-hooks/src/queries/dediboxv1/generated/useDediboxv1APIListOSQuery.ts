@@ -9,7 +9,7 @@ export const useDediboxv1APIListOSQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListOSResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListOSResponse, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "listOS", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "listOS", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.listOS(params, { signal }), dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useAuditTrailv1alpha1APIListSystemEventsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<AuditTrailv1alpha1.ListSystemEventsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<AuditTrailv1alpha1.ListSystemEventsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
-  const key = ["auditTrailv1alpha1", "listSystemEvents", ...Object.entries(params).flat(3).sort()]
+  const key = ["auditTrailv1alpha1", "listSystemEvents", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => auditTrailv1alpha1.listSystemEvents(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

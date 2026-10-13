@@ -9,7 +9,7 @@ export const useBillingv2ElectronicBillingAPIListElectronicAddressesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Billingv2.ElectronicAddress[], Error>,
 ): ReturnType<typeof useDataLoader<Billingv2.ElectronicAddress[], Error>> => {
   const { billingv2ElectronicBilling } = useBillingv2ElectronicBillingAPI()
-  const key = ["billingv2ElectronicBilling", "listElectronicAddresses", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["billingv2ElectronicBilling", "listElectronicAddresses", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => billingv2ElectronicBilling.listElectronicAddresses(params, { signal }).all(), dataloaderConfig)
 }

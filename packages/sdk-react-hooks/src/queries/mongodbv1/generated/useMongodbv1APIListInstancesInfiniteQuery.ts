@@ -10,7 +10,7 @@ export const useMongodbv1APIListInstancesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Mongodbv1.ListInstancesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Mongodbv1.ListInstancesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { mongodbv1 } = useMongodbv1API()
-  const key = ["mongodbv1", "listInstances", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1", "listInstances", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => mongodbv1.listInstances(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

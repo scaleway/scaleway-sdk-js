@@ -9,7 +9,7 @@ export const useBillingv2beta1APIListDiscountsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Billingv2beta1.Discount[], Error>,
 ): ReturnType<typeof useDataLoader<Billingv2beta1.Discount[], Error>> => {
   const { billingv2beta1 } = useBillingv2beta1API()
-  const key = ["billingv2beta1", "listDiscounts", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["billingv2beta1", "listDiscounts", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => billingv2beta1.listDiscounts(params, { signal }).all(), dataloaderConfig)
 }

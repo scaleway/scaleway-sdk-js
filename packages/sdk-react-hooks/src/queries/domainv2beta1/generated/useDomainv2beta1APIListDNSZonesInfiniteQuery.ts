@@ -10,7 +10,7 @@ export const useDomainv2beta1APIListDNSZonesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Domainv2beta1.ListDNSZonesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Domainv2beta1.ListDNSZonesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { domainv2beta1 } = useDomainv2beta1API()
-  const key = ["domainv2beta1", "listDNSZones", ...Object.entries(params).flat(3).sort()]
+  const key = ["domainv2beta1", "listDNSZones", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => domainv2beta1.listDNSZones(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

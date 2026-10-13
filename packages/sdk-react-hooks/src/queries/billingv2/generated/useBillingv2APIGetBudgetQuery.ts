@@ -9,7 +9,7 @@ export const useBillingv2APIGetBudgetQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Billingv2.Budget, Error>,
 ): ReturnType<typeof useDataLoader<Billingv2.Budget, Error>> => {
   const { billingv2 } = useBillingv2API()
-  const key = ["billingv2", "getBudget", ...Object.entries(params).flat(3).sort()]
+  const key = ["billingv2", "getBudget", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => billingv2.getBudget(params, { signal }), dataloaderConfig)
 }

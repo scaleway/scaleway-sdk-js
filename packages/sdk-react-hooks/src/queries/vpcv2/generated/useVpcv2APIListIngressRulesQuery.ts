@@ -9,7 +9,7 @@ export const useVpcv2APIListIngressRulesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcv2.ListIngressRulesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Vpcv2.ListIngressRulesResponse, Error>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "listIngressRules", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "listIngressRules", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcv2.listIngressRules(params, { signal }), dataloaderConfig)
 }

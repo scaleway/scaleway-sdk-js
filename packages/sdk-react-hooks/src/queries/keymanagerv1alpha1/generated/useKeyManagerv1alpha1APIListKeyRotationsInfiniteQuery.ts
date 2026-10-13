@@ -10,7 +10,7 @@ export const useKeyManagerv1alpha1APIListKeyRotationsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<KeyManagerv1alpha1.ListKeyRotationsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<KeyManagerv1alpha1.ListKeyRotationsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { keyManagerv1alpha1 } = useKeyManagerv1alpha1API()
-  const key = ["keyManagerv1alpha1", "listKeyRotations", ...Object.entries(params).flat(3).sort()]
+  const key = ["keyManagerv1alpha1", "listKeyRotations", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => keyManagerv1alpha1.listKeyRotations(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

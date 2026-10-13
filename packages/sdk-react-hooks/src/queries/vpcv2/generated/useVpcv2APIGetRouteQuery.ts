@@ -9,7 +9,7 @@ export const useVpcv2APIGetRouteQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcv2.Route, Error>,
 ): ReturnType<typeof useDataLoader<Vpcv2.Route, Error>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "getRoute", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "getRoute", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcv2.getRoute(params, { signal }), dataloaderConfig)
 }

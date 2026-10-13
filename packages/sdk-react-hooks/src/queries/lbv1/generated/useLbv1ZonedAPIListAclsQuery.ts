@@ -9,7 +9,7 @@ export const useLbv1ZonedAPIListAclsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.ListAclResponse, Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.ListAclResponse, Error>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "listAcls", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "listAcls", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1Zoned.listAcls(params, { signal }), dataloaderConfig)
 }

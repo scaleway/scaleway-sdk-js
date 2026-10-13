@@ -9,7 +9,7 @@ export const useRdbv1APIListInstanceLogsDetailsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.ListInstanceLogsDetailsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.ListInstanceLogsDetailsResponse, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listInstanceLogsDetails", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listInstanceLogsDetails", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.listInstanceLogsDetails(params, { signal }), dataloaderConfig)
 }

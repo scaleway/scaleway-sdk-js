@@ -9,7 +9,7 @@ export const useDediboxv1IPv6BlockAPIListIPv6BlockSubnetsAvailableQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListIPv6BlockSubnetsAvailableResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListIPv6BlockSubnetsAvailableResponse, Error>> => {
   const { dediboxv1IPv6Block } = useDediboxv1IPv6BlockAPI()
-  const key = ["dediboxv1IPv6Block", "listIPv6BlockSubnetsAvailable", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1IPv6Block", "listIPv6BlockSubnetsAvailable", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1IPv6Block.listIPv6BlockSubnetsAvailable(params, { signal }), dataloaderConfig)
 }

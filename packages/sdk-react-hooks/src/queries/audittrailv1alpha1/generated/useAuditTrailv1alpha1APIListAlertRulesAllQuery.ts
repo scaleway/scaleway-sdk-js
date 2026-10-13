@@ -9,7 +9,7 @@ export const useAuditTrailv1alpha1APIListAlertRulesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<AuditTrailv1alpha1.AlertRule[], Error>,
 ): ReturnType<typeof useDataLoader<AuditTrailv1alpha1.AlertRule[], Error>> => {
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
-  const key = ["auditTrailv1alpha1", "listAlertRules", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["auditTrailv1alpha1", "listAlertRules", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => auditTrailv1alpha1.listAlertRules(params, { signal }).all(), dataloaderConfig)
 }

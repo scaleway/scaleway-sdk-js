@@ -9,7 +9,7 @@ export const useMarketplacev2APIGetCategoryQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Marketplacev2.Category, Error>,
 ): ReturnType<typeof useDataLoader<Marketplacev2.Category, Error>> => {
   const { marketplacev2 } = useMarketplacev2API()
-  const key = ["marketplacev2", "getCategory", ...Object.entries(params).flat(3).sort()]
+  const key = ["marketplacev2", "getCategory", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => marketplacev2.getCategory(params, { signal }), dataloaderConfig)
 }

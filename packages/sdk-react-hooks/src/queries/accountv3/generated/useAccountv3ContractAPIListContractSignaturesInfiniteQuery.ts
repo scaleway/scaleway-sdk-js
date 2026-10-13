@@ -10,7 +10,7 @@ export const useAccountv3ContractAPIListContractSignaturesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Accountv3.ListContractSignaturesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Accountv3.ListContractSignaturesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { accountv3Contract } = useAccountv3ContractAPI()
-  const key = ["accountv3Contract", "listContractSignatures", ...Object.entries(params).flat(3).sort()]
+  const key = ["accountv3Contract", "listContractSignatures", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => accountv3Contract.listContractSignatures(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

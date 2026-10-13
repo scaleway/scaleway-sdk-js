@@ -9,7 +9,7 @@ export const useWebhostingv1FreeDomainAPIListFreeRootDomainsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<string[], Error>,
 ): ReturnType<typeof useDataLoader<string[], Error>> => {
   const { webhostingv1FreeDomain } = useWebhostingv1FreeDomainAPI()
-  const key = ["webhostingv1FreeDomain", "listFreeRootDomains", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1FreeDomain", "listFreeRootDomains", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1FreeDomain.listFreeRootDomains(params, { signal }).all(), dataloaderConfig)
 }

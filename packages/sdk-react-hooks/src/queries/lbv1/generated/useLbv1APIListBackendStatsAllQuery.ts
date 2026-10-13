@@ -9,7 +9,7 @@ export const useLbv1APIListBackendStatsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.BackendServerStats[], Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.BackendServerStats[], Error>> => {
   const { lbv1 } = useLbv1API()
-  const key = ["lbv1", "listBackendStats", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1", "listBackendStats", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1.listBackendStats(params, { signal }).all(), dataloaderConfig)
 }

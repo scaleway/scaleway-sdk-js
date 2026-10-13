@@ -9,7 +9,7 @@ export const useJobsv1alpha2APIGetSecretQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Jobsv1alpha2.Secret, Error>,
 ): ReturnType<typeof useDataLoader<Jobsv1alpha2.Secret, Error>> => {
   const { jobsv1alpha2 } = useJobsv1alpha2API()
-  const key = ["jobsv1alpha2", "getSecret", ...Object.entries(params).flat(3).sort()]
+  const key = ["jobsv1alpha2", "getSecret", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => jobsv1alpha2.getSecret(params, { signal }), dataloaderConfig)
 }

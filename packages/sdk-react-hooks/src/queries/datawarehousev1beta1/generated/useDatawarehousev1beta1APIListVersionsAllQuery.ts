@@ -9,7 +9,7 @@ export const useDatawarehousev1beta1APIListVersionsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Datawarehousev1beta1.Version[], Error>,
 ): ReturnType<typeof useDataLoader<Datawarehousev1beta1.Version[], Error>> => {
   const { datawarehousev1beta1 } = useDatawarehousev1beta1API()
-  const key = ["datawarehousev1beta1", "listVersions", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["datawarehousev1beta1", "listVersions", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => datawarehousev1beta1.listVersions(params, { signal }).all(), dataloaderConfig)
 }

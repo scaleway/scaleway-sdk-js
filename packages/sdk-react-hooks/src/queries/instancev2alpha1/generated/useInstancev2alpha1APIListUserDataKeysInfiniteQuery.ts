@@ -10,7 +10,7 @@ export const useInstancev2alpha1APIListUserDataKeysInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Instancev2alpha1.ListUserDataKeysResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Instancev2alpha1.ListUserDataKeysResponse, Error, typeof params, typeof pageParamKey>> => {
   const { instancev2alpha1 } = useInstancev2alpha1API()
-  const key = ["instancev2alpha1", "listUserDataKeys", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev2alpha1", "listUserDataKeys", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev2alpha1.listUserDataKeys(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

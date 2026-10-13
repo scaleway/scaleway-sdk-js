@@ -9,7 +9,7 @@ export const useAccountv3ContractAPIListContractSignaturesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Accountv3.ContractSignature[], Error>,
 ): ReturnType<typeof useDataLoader<Accountv3.ContractSignature[], Error>> => {
   const { accountv3Contract } = useAccountv3ContractAPI()
-  const key = ["accountv3Contract", "listContractSignatures", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["accountv3Contract", "listContractSignatures", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => accountv3Contract.listContractSignatures(params, { signal }).all(), dataloaderConfig)
 }

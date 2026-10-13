@@ -9,7 +9,7 @@ export const useVpcv2APIListVPCConnectorsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcv2.ListVPCConnectorsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Vpcv2.ListVPCConnectorsResponse, Error>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "listVPCConnectors", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "listVPCConnectors", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcv2.listVPCConnectors(params, { signal }), dataloaderConfig)
 }

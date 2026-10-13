@@ -10,7 +10,7 @@ export const useVpcgwv2APIListPatRulesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Vpcgwv2.ListPatRulesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Vpcgwv2.ListPatRulesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { vpcgwv2 } = useVpcgwv2API()
-  const key = ["vpcgwv2", "listPatRules", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcgwv2", "listPatRules", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => vpcgwv2.listPatRules(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

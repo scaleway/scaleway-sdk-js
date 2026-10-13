@@ -9,7 +9,7 @@ export const useRedisv1APIListClustersAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Redisv1.Cluster[], Error>,
 ): ReturnType<typeof useDataLoader<Redisv1.Cluster[], Error>> => {
   const { redisv1 } = useRedisv1API()
-  const key = ["redisv1", "listClusters", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["redisv1", "listClusters", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => redisv1.listClusters(params, { signal }).all(), dataloaderConfig)
 }

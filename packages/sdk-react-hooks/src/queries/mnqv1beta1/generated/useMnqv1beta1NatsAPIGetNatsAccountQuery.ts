@@ -9,7 +9,7 @@ export const useMnqv1beta1NatsAPIGetNatsAccountQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mnqv1beta1.NatsAccount, Error>,
 ): ReturnType<typeof useDataLoader<Mnqv1beta1.NatsAccount, Error>> => {
   const { mnqv1beta1Nats } = useMnqv1beta1NatsAPI()
-  const key = ["mnqv1beta1Nats", "getNatsAccount", ...Object.entries(params).flat(3).sort()]
+  const key = ["mnqv1beta1Nats", "getNatsAccount", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mnqv1beta1Nats.getNatsAccount(params, { signal }), dataloaderConfig)
 }

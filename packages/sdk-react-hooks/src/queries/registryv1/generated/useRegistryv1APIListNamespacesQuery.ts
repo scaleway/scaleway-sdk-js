@@ -9,7 +9,7 @@ export const useRegistryv1APIListNamespacesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Registryv1.ListNamespacesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Registryv1.ListNamespacesResponse, Error>> => {
   const { registryv1 } = useRegistryv1API()
-  const key = ["registryv1", "listNamespaces", ...Object.entries(params).flat(3).sort()]
+  const key = ["registryv1", "listNamespaces", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => registryv1.listNamespaces(params, { signal }), dataloaderConfig)
 }

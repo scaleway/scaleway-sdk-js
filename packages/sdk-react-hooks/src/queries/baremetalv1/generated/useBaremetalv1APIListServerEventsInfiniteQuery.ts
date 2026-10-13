@@ -10,7 +10,7 @@ export const useBaremetalv1APIListServerEventsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Baremetalv1.ListServerEventsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Baremetalv1.ListServerEventsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { baremetalv1 } = useBaremetalv1API()
-  const key = ["baremetalv1", "listServerEvents", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv1", "listServerEvents", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => baremetalv1.listServerEvents(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

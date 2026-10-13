@@ -10,7 +10,7 @@ export const useApplesiliconv1alpha1APIListServersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Applesiliconv1alpha1.ListServersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Applesiliconv1alpha1.ListServersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { applesiliconv1alpha1 } = useApplesiliconv1alpha1API()
-  const key = ["applesiliconv1alpha1", "listServers", ...Object.entries(params).flat(3).sort()]
+  const key = ["applesiliconv1alpha1", "listServers", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => applesiliconv1alpha1.listServers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

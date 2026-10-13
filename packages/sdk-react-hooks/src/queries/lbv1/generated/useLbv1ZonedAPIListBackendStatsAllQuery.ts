@@ -9,7 +9,7 @@ export const useLbv1ZonedAPIListBackendStatsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.BackendServerStats[], Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.BackendServerStats[], Error>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "listBackendStats", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "listBackendStats", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1Zoned.listBackendStats(params, { signal }).all(), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useDediboxv1APIGetRemainingQuotaQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.GetRemainingQuotaResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.GetRemainingQuotaResponse, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "getRemainingQuota", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "getRemainingQuota", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.getRemainingQuota(params, { signal }), dataloaderConfig)
 }

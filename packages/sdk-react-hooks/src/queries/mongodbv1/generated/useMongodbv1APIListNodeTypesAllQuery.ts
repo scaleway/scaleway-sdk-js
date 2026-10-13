@@ -9,7 +9,7 @@ export const useMongodbv1APIListNodeTypesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mongodbv1.NodeType[], Error>,
 ): ReturnType<typeof useDataLoader<Mongodbv1.NodeType[], Error>> => {
   const { mongodbv1 } = useMongodbv1API()
-  const key = ["mongodbv1", "listNodeTypes", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1", "listNodeTypes", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mongodbv1.listNodeTypes(params, { signal }).all(), dataloaderConfig)
 }

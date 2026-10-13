@@ -9,7 +9,7 @@ export const useIamv1alpha1APIGetGroupQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iamv1alpha1.Group, Error>,
 ): ReturnType<typeof useDataLoader<Iamv1alpha1.Group, Error>> => {
   const { iamv1alpha1 } = useIamv1alpha1API()
-  const key = ["iamv1alpha1", "getGroup", ...Object.entries(params).flat(3).sort()]
+  const key = ["iamv1alpha1", "getGroup", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => iamv1alpha1.getGroup(params, { signal }), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useAccountv3ProjectAPIGetProjectQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Accountv3.Project, Error>,
 ): ReturnType<typeof useDataLoader<Accountv3.Project, Error>> => {
   const { accountv3Project } = useAccountv3ProjectAPI()
-  const key = ["accountv3Project", "getProject", ...Object.entries(params).flat(3).sort()]
+  const key = ["accountv3Project", "getProject", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => accountv3Project.getProject(params, { signal }), dataloaderConfig)
 }

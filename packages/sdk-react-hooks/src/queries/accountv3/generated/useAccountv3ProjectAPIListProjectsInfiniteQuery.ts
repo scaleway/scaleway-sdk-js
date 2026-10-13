@@ -10,7 +10,7 @@ export const useAccountv3ProjectAPIListProjectsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Accountv3.ListProjectsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Accountv3.ListProjectsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { accountv3Project } = useAccountv3ProjectAPI()
-  const key = ["accountv3Project", "listProjects", ...Object.entries(params).flat(3).sort()]
+  const key = ["accountv3Project", "listProjects", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => accountv3Project.listProjects(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

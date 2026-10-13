@@ -9,7 +9,7 @@ export const useRdbv1APIListUsersQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.ListUsersResponse, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.ListUsersResponse, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listUsers", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listUsers", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.listUsers(params, { signal }), dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useLbv1ZonedAPIListSubscriberInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Lbv1.ListSubscriberResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Lbv1.ListSubscriberResponse, Error, typeof params, typeof pageParamKey>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "listSubscriber", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "listSubscriber", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => lbv1Zoned.listSubscriber(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

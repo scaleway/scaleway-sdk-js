@@ -10,7 +10,7 @@ export const useSecretv1beta1APIListSecretVersionsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Secretv1beta1.ListSecretVersionsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Secretv1beta1.ListSecretVersionsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { secretv1beta1 } = useSecretv1beta1API()
-  const key = ["secretv1beta1", "listSecretVersions", ...Object.entries(params).flat(3).sort()]
+  const key = ["secretv1beta1", "listSecretVersions", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => secretv1beta1.listSecretVersions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useInstancev1APIListDefaultSecurityGroupRulesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev1.ListSecurityGroupRulesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev1.ListSecurityGroupRulesResponse, Error>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "listDefaultSecurityGroupRules", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "listDefaultSecurityGroupRules", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev1.listDefaultSecurityGroupRules(params, { signal }), dataloaderConfig)
 }
