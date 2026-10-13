@@ -28,6 +28,7 @@ export type {
   GetInstanceRequest,
   GetMaintenanceRequest,
   GetSnapshotRequest,
+  InfrastructureUpdate,
   Instance,
   InstanceSetting,
   InstanceSnapshotSchedule,

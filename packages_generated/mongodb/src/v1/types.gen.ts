@@ -57,6 +57,7 @@ export type MaintenanceStatus =
   | 'done'
   | 'cancelled'
   | 'ongoing'
+  | 'error'
 
 export type NodeTypeStock =
   | 'unknown_stock'
@@ -90,6 +91,11 @@ export interface EngineUpgrade {
 }
 
 
+export interface InfrastructureUpdate {
+  kubernetesVersionName: string
+}
+
+
 export interface ServiceUpdate {
   serviceName: string
 }
@@ -116,14 +122,19 @@ export interface EndpointPublicNetworkDetails {
 export interface Workflow {
   /**
    *
-   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate' could be set.
+   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate', 'infrastructureUpdate' could be set.
    */
   engineUpgrade?: EngineUpgrade
   /**
    *
-   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate' could be set.
+   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate', 'infrastructureUpdate' could be set.
    */
   serviceUpdate?: ServiceUpdate
+  /**
+   *
+   * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate', 'infrastructureUpdate' could be set.
+   */
+  infrastructureUpdate?: InfrastructureUpdate
 }
 
 
