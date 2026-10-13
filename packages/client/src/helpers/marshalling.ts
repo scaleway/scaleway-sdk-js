@@ -42,7 +42,7 @@ export const resolveOneOf = <T>(
   }[],
   isRequired = false,
 ): Record<string, T> => {
-  const elt = list.find(obj => obj.value !== undefined) ?? list.find(obj => obj.default !== undefined)
+  const elt = list.find(obj => obj.value != null) ?? list.find(obj => obj.default != null)
   const value = elt?.value ?? elt?.default
   if (elt && value !== undefined) {
     return { [elt.param]: value }
@@ -109,13 +109,13 @@ export const urlParams = (
  *
  * @internal
  */
-export const unmarshalDate = (data: unknown): Date | undefined => {
+export const unmarshalDate = (data: unknown): Date | null => {
   if (typeof data !== 'string') {
-    return undefined
+    return null
   }
   const date = new Date(data)
   if (Number.isNaN(date.getTime())) {
-    return undefined
+    return null
   }
 
   return date
