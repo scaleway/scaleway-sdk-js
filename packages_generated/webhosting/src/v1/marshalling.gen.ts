@@ -199,6 +199,7 @@ export const unmarshalHostingSummary = (data: unknown): HostingSummary => {
     projectId: data.project_id,
     protected: data.protected,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as HostingSummary
@@ -507,6 +508,7 @@ export const unmarshalHosting = (data: unknown): Hosting => {
     protected: data.protected,
     provider: data.provider ? data.provider : undefined,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
