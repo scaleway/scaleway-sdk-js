@@ -286,6 +286,10 @@ export interface Server {
    */
   os?: OS
   /**
+   * Initially installed OS, this does not necessarily reflect the current OS version.
+   */
+  fullOsVersion: string
+  /**
    * Current status of the server.
    */
   status: ServerStatus

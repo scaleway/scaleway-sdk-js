@@ -132,6 +132,7 @@ export const unmarshalServer = (data: unknown): Server => {
     deletableAt: unmarshalDate(data.deletable_at),
     deletionScheduled: data.deletion_scheduled,
     delivered: data.delivered,
+    fullOsVersion: data.full_os_version,
     id: data.id,
     ip: data.ip,
     kextEnabled: data.kext_enabled,
