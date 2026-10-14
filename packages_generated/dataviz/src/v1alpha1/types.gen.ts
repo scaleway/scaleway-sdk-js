@@ -85,6 +85,14 @@ export interface Endpoint {
    */
   services: EndpointService[]
   /**
+   * Region of the endpoint.
+   */
+  region: ScwRegion
+  /**
+   * The SRN of the endpoint.
+   */
+  srn: string
+  /**
    *
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
@@ -106,6 +114,10 @@ export interface Volume {
    * Size of the Volume.
    */
   sizeBytes: number
+  /**
+   * ID of the deployment.
+   */
+  deploymentId: string
 }
 
 
@@ -189,6 +201,10 @@ export interface Deployment {
    * Region of the deployment.
    */
   region: ScwRegion
+  /**
+   * The SRN of the deployment.
+   */
+  srn: string
 }
 
 
@@ -229,11 +245,34 @@ export interface NodeType {
    * Available storage options for the node type.
    */
   availableVolumeTypes: NodeTypeVolumeType[]
+  /**
+   * Region of the node type.
+   */
+  region: ScwRegion
+  /**
+   * The SRN of the node type.
+   */
+  srn: string
 }
 
 
 export interface User {
+  /**
+   * Username of the deployment user.
+   */
   username: string
+  /**
+   * ID of the deployment.
+   */
+  deploymentId: string
+  /**
+   * Region of the user.
+   */
+  region: ScwRegion
+  /**
+   * The SRN of the user.
+   */
+  srn: string
 }
 
 
@@ -254,6 +293,14 @@ export interface Version {
    * Defines whether the version is in beta.
    */
   beta: boolean
+  /**
+   * Region of the version.
+   */
+  region: ScwRegion
+  /**
+   * The SRN of the version.
+   */
+  srn: string
 }
 
 
