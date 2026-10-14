@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { AbortError } from '../../../scw/errors/abort-error.js'
 import {
   createExponentialBackoffStrategy,
   createFibonacciIntervalStrategy,
@@ -124,16 +125,14 @@ describe('tryAtIntervals', () => {
   it('throws an AbortError when the signal is already aborted', async () => {
     const controller = new AbortController()
     controller.abort()
-    await expect(tryAtIntervals(mockLogic(3, 0), zeroIntervalStrat, 1, controller.signal)).rejects.toThrow(
-      'The operation was aborted',
-    )
+    await expect(tryAtIntervals(mockLogic(3, 0), zeroIntervalStrat, 1, controller.signal)).rejects.toThrow(AbortError)
   })
 
   it('throws an AbortError when the signal aborts mid-loop', async () => {
     const controller = new AbortController()
     const result = tryAtIntervals(mockLogic(10, 0), zeroIntervalStrat, 5, controller.signal)
     controller.abort()
-    await expect(result).rejects.toThrow('The operation was aborted')
+    await expect(result).rejects.toThrow(AbortError)
   })
 })
 
@@ -186,6 +185,6 @@ describe('waitForResource', () => {
       { maxDelay: 1, minDelay: 1, signal: controller.signal },
     )
 
-    await expect(result).rejects.toThrow('The operation was aborted')
+    await expect(result).rejects.toThrow(AbortError)
   })
 })

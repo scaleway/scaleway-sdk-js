@@ -1,6 +1,6 @@
 export { isJSONObject } from './helpers/json.js'
 export { createExponentialBackoffStrategy, tryAtIntervals, waitForResource } from './internal/async/interval-retrier.js'
-export { AbortError, isAbortError } from './scw/fetch/abort-error.js'
+export { AbortError, isAbortError } from './scw/errors/abort-error.js'
 export {
   resolveOneOf,
   unmarshalArrayOfObject,
