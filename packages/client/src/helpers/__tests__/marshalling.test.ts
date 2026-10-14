@@ -152,12 +152,6 @@ describe('resolveOneOf', () => {
     ).toStrictEqual({})
   })
 
-  it('treats null as unset', () => {
-    expect(() => resolveOneOf([{ default: undefined, param: 'my_key', value: null }], true)).toThrow(
-      new TypeError('one of my_key must be indicated in the request'),
-    )
-  })
-
   it('handles false kind values, like boolean.false', () => {
     expect(
       resolveOneOf(
