@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
+import { AbortError } from '../abort-error.js'
 import type {
   CursorPaginatedContent,
   CursorPaginatedFetcher,
@@ -106,7 +107,7 @@ describe('fetchPaginated', () => {
     expect(first.value).toStrictEqual([{ name: 'Alice' }])
 
     controller.abort()
-    await expect(iterator.next()).rejects.toThrow('The operation was aborted')
+    await expect(iterator.next()).rejects.toThrow(AbortError)
     expect(fetcher).toHaveBeenCalledTimes(1)
   })
 
@@ -122,7 +123,7 @@ describe('fetchPaginated', () => {
       options: { signal: controller.signal },
     })
 
-    await expect(iterator.next()).rejects.toThrow('The operation was aborted')
+    await expect(iterator.next()).rejects.toThrow(AbortError)
     expect(fetcher).not.toHaveBeenCalled()
   })
 })
@@ -168,7 +169,7 @@ describe('fetchAll', () => {
         initial: Promise.resolve(firstPage),
         options: { signal: controller.signal },
       }),
-    ).rejects.toThrow('The operation was aborted')
+    ).rejects.toThrow(AbortError)
     expect(fetcher).not.toHaveBeenCalled()
   })
 })
@@ -195,7 +196,7 @@ describe('enrichForPagination', () => {
     const fetcher = vi.fn(fetchPages(input))
 
     await expect(enrichForPagination('items', fetcher, {}, { signal: controller.signal }).all()).rejects.toThrow(
-      'The operation was aborted',
+      AbortError,
     )
   })
 })
@@ -267,7 +268,7 @@ describe('fetchPaginatedByCursor', () => {
     expect(first.value).toStrictEqual([{ name: 'Alice' }])
 
     controller.abort()
-    await expect(iterator.next()).rejects.toThrow('The operation was aborted')
+    await expect(iterator.next()).rejects.toThrow(AbortError)
     expect(fetcher).toHaveBeenCalledTimes(1)
   })
 
@@ -286,7 +287,7 @@ describe('fetchPaginatedByCursor', () => {
       Promise.resolve(firstPage),
     )
 
-    await expect(iterator.next()).rejects.toThrow('The operation was aborted')
+    await expect(iterator.next()).rejects.toThrow(AbortError)
     expect(fetcher).not.toHaveBeenCalled()
   })
 })
@@ -305,7 +306,7 @@ describe('fetchAllByCursor', () => {
 
     await expect(
       fetchAllByCursor('items', fetcher, {}, 'page', { signal: controller.signal }, Promise.resolve(firstPage)),
-    ).rejects.toThrow('The operation was aborted')
+    ).rejects.toThrow(AbortError)
     expect(fetcher).not.toHaveBeenCalled()
   })
 })
@@ -333,6 +334,6 @@ describe('enrichForPaginationByCursor', () => {
 
     await expect(
       enrichForPaginationByCursor('items', fetcher, {}, 'page', { signal: controller.signal }).all(),
-    ).rejects.toThrow('The operation was aborted')
+    ).rejects.toThrow(AbortError)
   })
 })

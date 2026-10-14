@@ -108,7 +108,7 @@ export const tryAtIntervals = async <T>(
   let retryCount = 0
   while (Date.now() <= timeoutTimestamp) {
     if (signal?.aborted === true) {
-      throw new AbortError()
+      throw new AbortError('Polling loop was cancelled')
     }
     retryCount += 1
     const delay = strategy.next(retryCount).value * 1000

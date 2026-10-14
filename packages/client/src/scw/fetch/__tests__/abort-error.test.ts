@@ -7,12 +7,32 @@ describe('AbortError', () => {
     expect(err).toBeInstanceOf(Error)
     expect(err.message).toBe('The operation was aborted')
     expect(err.name).toBe('AbortError')
+    expect(err.url).toBeUndefined()
+    expect(err.method).toBeUndefined()
+    expect(err.requestId).toBeUndefined()
+    expect(err.requestHeaders).toBeUndefined()
   })
 
   it('uses the provided message', () => {
     const err = new AbortError('custom reason')
     expect(err.message).toBe('custom reason')
     expect(err.name).toBe('AbortError')
+  })
+
+  it('attaches the request context', () => {
+    const err = new AbortError()
+    const requestHeaders = new Headers({ 'x-auth-token': 'secret' })
+    err.setRequestContext({
+      url: 'https://api.scaleway.com/unknown?region=fr-par',
+      method: 'GET',
+      requestId: '42',
+      requestHeaders,
+    })
+
+    expect(err.url).toBe('https://api.scaleway.com/unknown?region=fr-par')
+    expect(err.method).toBe('GET')
+    expect(err.requestId).toBe('42')
+    expect(err.requestHeaders).toBe(requestHeaders)
   })
 })
 
