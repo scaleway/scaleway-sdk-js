@@ -10,4 +10,8 @@ export { useFilev1alpha1APIListFileSystemsAllQuery } from "./useFilev1alpha1APIL
 export { useFilev1alpha1APIListAttachmentsQuery } from "./useFilev1alpha1APIListAttachmentsQuery"
 export { useFilev1alpha1APIListAttachmentsInfiniteQuery } from "./useFilev1alpha1APIListAttachmentsInfiniteQuery"
 export { useFilev1alpha1APIListAttachmentsAllQuery } from "./useFilev1alpha1APIListAttachmentsAllQuery"
+export { useFilev1alpha1APIGetSnapshotQuery } from "./useFilev1alpha1APIGetSnapshotQuery"
+export { useFilev1alpha1APIListSnapshotsQuery } from "./useFilev1alpha1APIListSnapshotsQuery"
+export { useFilev1alpha1APIListSnapshotsInfiniteQuery } from "./useFilev1alpha1APIListSnapshotsInfiniteQuery"
+export { useFilev1alpha1APIListSnapshotsAllQuery } from "./useFilev1alpha1APIListSnapshotsAllQuery"
 export { useFilev1alpha1APIReload } from "./useFilev1alpha1APIReload"

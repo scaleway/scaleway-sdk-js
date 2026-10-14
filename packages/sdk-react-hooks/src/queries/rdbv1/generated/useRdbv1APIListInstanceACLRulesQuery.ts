@@ -9,7 +9,7 @@ export const useRdbv1APIListInstanceACLRulesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.ListInstanceACLRulesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.ListInstanceACLRulesResponse, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listInstanceACLRules", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listInstanceACLRules", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.listInstanceACLRules(params, { signal }), dataloaderConfig)
 }

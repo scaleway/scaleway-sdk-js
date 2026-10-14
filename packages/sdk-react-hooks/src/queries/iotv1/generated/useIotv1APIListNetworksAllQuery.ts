@@ -9,7 +9,7 @@ export const useIotv1APIListNetworksAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iotv1.Network[], Error>,
 ): ReturnType<typeof useDataLoader<Iotv1.Network[], Error>> => {
   const { iotv1 } = useIotv1API()
-  const key = ["iotv1", "listNetworks", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["iotv1", "listNetworks", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => iotv1.listNetworks(params, { signal }).all(), dataloaderConfig)
 }

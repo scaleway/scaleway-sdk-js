@@ -10,7 +10,7 @@ export const useDediboxv1BillingAPIListInvoicesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Dediboxv1.ListInvoicesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Dediboxv1.ListInvoicesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
-  const key = ["dediboxv1Billing", "listInvoices", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1Billing", "listInvoices", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1Billing.listInvoices(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

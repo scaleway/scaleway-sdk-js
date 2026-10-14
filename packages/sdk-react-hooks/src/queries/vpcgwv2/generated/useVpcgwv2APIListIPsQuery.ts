@@ -9,7 +9,7 @@ export const useVpcgwv2APIListIPsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcgwv2.ListIPsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Vpcgwv2.ListIPsResponse, Error>> => {
   const { vpcgwv2 } = useVpcgwv2API()
-  const key = ["vpcgwv2", "listIPs", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcgwv2", "listIPs", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcgwv2.listIPs(params, { signal }), dataloaderConfig)
 }

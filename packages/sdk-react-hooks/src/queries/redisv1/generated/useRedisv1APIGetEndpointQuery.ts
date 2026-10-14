@@ -9,7 +9,7 @@ export const useRedisv1APIGetEndpointQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Redisv1.Endpoint, Error>,
 ): ReturnType<typeof useDataLoader<Redisv1.Endpoint, Error>> => {
   const { redisv1 } = useRedisv1API()
-  const key = ["redisv1", "getEndpoint", ...Object.entries(params).flat(3).sort()]
+  const key = ["redisv1", "getEndpoint", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => redisv1.getEndpoint(params, { signal }), dataloaderConfig)
 }

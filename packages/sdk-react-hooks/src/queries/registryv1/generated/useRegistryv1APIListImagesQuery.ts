@@ -9,7 +9,7 @@ export const useRegistryv1APIListImagesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Registryv1.ListImagesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Registryv1.ListImagesResponse, Error>> => {
   const { registryv1 } = useRegistryv1API()
-  const key = ["registryv1", "listImages", ...Object.entries(params).flat(3).sort()]
+  const key = ["registryv1", "listImages", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => registryv1.listImages(params, { signal }), dataloaderConfig)
 }

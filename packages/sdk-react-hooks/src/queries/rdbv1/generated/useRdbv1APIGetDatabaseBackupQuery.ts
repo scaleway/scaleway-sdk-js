@@ -9,7 +9,7 @@ export const useRdbv1APIGetDatabaseBackupQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.DatabaseBackup, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.DatabaseBackup, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "getDatabaseBackup", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "getDatabaseBackup", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.getDatabaseBackup(params, { signal }), dataloaderConfig)
 }

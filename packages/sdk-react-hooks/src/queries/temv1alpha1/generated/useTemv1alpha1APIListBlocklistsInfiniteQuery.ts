@@ -10,7 +10,7 @@ export const useTemv1alpha1APIListBlocklistsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Temv1alpha1.ListBlocklistsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Temv1alpha1.ListBlocklistsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { temv1alpha1 } = useTemv1alpha1API()
-  const key = ["temv1alpha1", "listBlocklists", ...Object.entries(params).flat(3).sort()]
+  const key = ["temv1alpha1", "listBlocklists", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => temv1alpha1.listBlocklists(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

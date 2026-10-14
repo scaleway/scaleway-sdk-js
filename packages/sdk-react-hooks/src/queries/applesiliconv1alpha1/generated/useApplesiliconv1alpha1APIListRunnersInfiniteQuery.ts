@@ -10,7 +10,7 @@ export const useApplesiliconv1alpha1APIListRunnersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Applesiliconv1alpha1.ListRunnersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Applesiliconv1alpha1.ListRunnersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { applesiliconv1alpha1 } = useApplesiliconv1alpha1API()
-  const key = ["applesiliconv1alpha1", "listRunners", ...Object.entries(params).flat(3).sort()]
+  const key = ["applesiliconv1alpha1", "listRunners", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => applesiliconv1alpha1.listRunners(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

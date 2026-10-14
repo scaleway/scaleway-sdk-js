@@ -9,7 +9,7 @@ export const useRdbv1APIListDatabaseEnginesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.ListDatabaseEnginesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.ListDatabaseEnginesResponse, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listDatabaseEngines", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listDatabaseEngines", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.listDatabaseEngines(params, { signal }), dataloaderConfig)
 }

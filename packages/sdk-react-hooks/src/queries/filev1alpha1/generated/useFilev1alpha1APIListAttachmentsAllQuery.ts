@@ -9,7 +9,7 @@ export const useFilev1alpha1APIListAttachmentsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Filev1alpha1.Attachment[], Error>,
 ): ReturnType<typeof useDataLoader<Filev1alpha1.Attachment[], Error>> => {
   const { filev1alpha1 } = useFilev1alpha1API()
-  const key = ["filev1alpha1", "listAttachments", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["filev1alpha1", "listAttachments", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => filev1alpha1.listAttachments(params, { signal }).all(), dataloaderConfig)
 }

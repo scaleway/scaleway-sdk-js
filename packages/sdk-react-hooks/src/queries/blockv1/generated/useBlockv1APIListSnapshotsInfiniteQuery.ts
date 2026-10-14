@@ -10,7 +10,7 @@ export const useBlockv1APIListSnapshotsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Blockv1.ListSnapshotsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Blockv1.ListSnapshotsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { blockv1 } = useBlockv1API()
-  const key = ["blockv1", "listSnapshots", ...Object.entries(params).flat(3).sort()]
+  const key = ["blockv1", "listSnapshots", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => blockv1.listSnapshots(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

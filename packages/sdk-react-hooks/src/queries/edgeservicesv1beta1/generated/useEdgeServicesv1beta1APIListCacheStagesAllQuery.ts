@@ -9,7 +9,7 @@ export const useEdgeServicesv1beta1APIListCacheStagesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<EdgeServicesv1beta1.CacheStage[], Error>,
 ): ReturnType<typeof useDataLoader<EdgeServicesv1beta1.CacheStage[], Error>> => {
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
-  const key = ["edgeServicesv1beta1", "listCacheStages", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["edgeServicesv1beta1", "listCacheStages", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.listCacheStages(params, { signal }).all(), dataloaderConfig)
 }

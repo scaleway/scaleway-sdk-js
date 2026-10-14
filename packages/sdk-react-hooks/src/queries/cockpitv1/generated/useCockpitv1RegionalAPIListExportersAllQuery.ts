@@ -9,7 +9,7 @@ export const useCockpitv1RegionalAPIListExportersAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.Exporter[], Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.Exporter[], Error>> => {
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
-  const key = ["cockpitv1Regional", "listExporters", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Regional", "listExporters", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Regional.listExporters(params, { signal }).all(), dataloaderConfig)
 }

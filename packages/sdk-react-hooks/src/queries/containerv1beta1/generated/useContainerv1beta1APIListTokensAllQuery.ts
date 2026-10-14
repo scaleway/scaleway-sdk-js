@@ -9,7 +9,7 @@ export const useContainerv1beta1APIListTokensAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Containerv1beta1.Token[], Error>,
 ): ReturnType<typeof useDataLoader<Containerv1beta1.Token[], Error>> => {
   const { containerv1beta1 } = useContainerv1beta1API()
-  const key = ["containerv1beta1", "listTokens", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["containerv1beta1", "listTokens", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => containerv1beta1.listTokens(params, { signal }).all(), dataloaderConfig)
 }

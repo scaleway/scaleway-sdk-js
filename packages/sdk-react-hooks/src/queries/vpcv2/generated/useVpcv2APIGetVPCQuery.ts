@@ -9,7 +9,7 @@ export const useVpcv2APIGetVPCQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcv2.VPC, Error>,
 ): ReturnType<typeof useDataLoader<Vpcv2.VPC, Error>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "getVPC", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "getVPC", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcv2.getVPC(params, { signal }), dataloaderConfig)
 }

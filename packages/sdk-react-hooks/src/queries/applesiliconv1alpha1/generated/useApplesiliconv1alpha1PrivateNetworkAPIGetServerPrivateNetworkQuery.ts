@@ -9,7 +9,7 @@ export const useApplesiliconv1alpha1PrivateNetworkAPIGetServerPrivateNetworkQuer
   dataloaderConfig?: UseDataLoaderConfig<Applesiliconv1alpha1.ServerPrivateNetwork, Error>,
 ): ReturnType<typeof useDataLoader<Applesiliconv1alpha1.ServerPrivateNetwork, Error>> => {
   const { applesiliconv1alpha1PrivateNetwork } = useApplesiliconv1alpha1PrivateNetworkAPI()
-  const key = ["applesiliconv1alpha1PrivateNetwork", "getServerPrivateNetwork", ...Object.entries(params).flat(3).sort()]
+  const key = ["applesiliconv1alpha1PrivateNetwork", "getServerPrivateNetwork", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => applesiliconv1alpha1PrivateNetwork.getServerPrivateNetwork(params, { signal }), dataloaderConfig)
 }

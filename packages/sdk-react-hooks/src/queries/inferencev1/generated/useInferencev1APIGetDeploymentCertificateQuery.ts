@@ -9,7 +9,7 @@ export const useInferencev1APIGetDeploymentCertificateQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blob, Error>,
 ): ReturnType<typeof useDataLoader<Blob, Error>> => {
   const { inferencev1 } = useInferencev1API()
-  const key = ["inferencev1", "getDeploymentCertificate", ...Object.entries(params).flat(3).sort()]
+  const key = ["inferencev1", "getDeploymentCertificate", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => inferencev1.getDeploymentCertificate(params, { signal }), dataloaderConfig)
 }

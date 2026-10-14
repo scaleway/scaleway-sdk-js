@@ -9,7 +9,7 @@ export const useDediboxv1APIGetRescueQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.Rescue, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.Rescue, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "getRescue", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "getRescue", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.getRescue(params, { signal }), dataloaderConfig)
 }

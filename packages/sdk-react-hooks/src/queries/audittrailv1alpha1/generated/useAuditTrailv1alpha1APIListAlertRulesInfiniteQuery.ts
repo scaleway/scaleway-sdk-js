@@ -10,7 +10,7 @@ export const useAuditTrailv1alpha1APIListAlertRulesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<AuditTrailv1alpha1.ListAlertRulesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<AuditTrailv1alpha1.ListAlertRulesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
-  const key = ["auditTrailv1alpha1", "listAlertRules", ...Object.entries(params).flat(3).sort()]
+  const key = ["auditTrailv1alpha1", "listAlertRules", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => auditTrailv1alpha1.listAlertRules(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

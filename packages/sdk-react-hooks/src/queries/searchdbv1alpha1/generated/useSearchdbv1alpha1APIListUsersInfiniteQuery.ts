@@ -10,7 +10,7 @@ export const useSearchdbv1alpha1APIListUsersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Searchdbv1alpha1.ListUsersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Searchdbv1alpha1.ListUsersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { searchdbv1alpha1 } = useSearchdbv1alpha1API()
-  const key = ["searchdbv1alpha1", "listUsers", ...Object.entries(params).flat(3).sort()]
+  const key = ["searchdbv1alpha1", "listUsers", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => searchdbv1alpha1.listUsers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

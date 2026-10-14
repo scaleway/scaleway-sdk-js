@@ -9,7 +9,7 @@ export const useServerlessSqldbv1alpha1APIListVersionsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<ServerlessSqldbv1alpha1.ListVersionsResponse, Error>,
 ): ReturnType<typeof useDataLoader<ServerlessSqldbv1alpha1.ListVersionsResponse, Error>> => {
   const { serverlessSqldbv1alpha1 } = useServerlessSqldbv1alpha1API()
-  const key = ["serverlessSqldbv1alpha1", "listVersions", ...Object.entries(params).flat(3).sort()]
+  const key = ["serverlessSqldbv1alpha1", "listVersions", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => serverlessSqldbv1alpha1.listVersions(params, { signal }), dataloaderConfig)
 }

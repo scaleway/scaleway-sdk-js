@@ -9,7 +9,7 @@ export const useBaremetalv1APIGetBMCAccessQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Baremetalv1.BMCAccess, Error>,
 ): ReturnType<typeof useDataLoader<Baremetalv1.BMCAccess, Error>> => {
   const { baremetalv1 } = useBaremetalv1API()
-  const key = ["baremetalv1", "getBMCAccess", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv1", "getBMCAccess", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => baremetalv1.getBMCAccess(params, { signal }), dataloaderConfig)
 }

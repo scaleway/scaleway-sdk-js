@@ -10,7 +10,7 @@ export const useDediboxv1RpnV2APIListRpnV2CapableResourcesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Dediboxv1.ListRpnV2CapableResourcesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Dediboxv1.ListRpnV2CapableResourcesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { dediboxv1RpnV2 } = useDediboxv1RpnV2API()
-  const key = ["dediboxv1RpnV2", "listRpnV2CapableResources", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1RpnV2", "listRpnV2CapableResources", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => dediboxv1RpnV2.listRpnV2CapableResources(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

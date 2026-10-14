@@ -9,7 +9,7 @@ export const useQaasv1alpha1APIListPlatformsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Qaasv1alpha1.Platform[], Error>,
 ): ReturnType<typeof useDataLoader<Qaasv1alpha1.Platform[], Error>> => {
   const { qaasv1alpha1 } = useQaasv1alpha1API()
-  const key = ["qaasv1alpha1", "listPlatforms", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["qaasv1alpha1", "listPlatforms", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => qaasv1alpha1.listPlatforms(params, { signal }).all(), dataloaderConfig)
 }

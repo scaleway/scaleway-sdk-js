@@ -10,7 +10,7 @@ export const useInstancev2alpha1APIListPrivateNetworkInterfacesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Instancev2alpha1.ListPrivateNetworkInterfacesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Instancev2alpha1.ListPrivateNetworkInterfacesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { instancev2alpha1 } = useInstancev2alpha1API()
-  const key = ["instancev2alpha1", "listPrivateNetworkInterfaces", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev2alpha1", "listPrivateNetworkInterfaces", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev2alpha1.listPrivateNetworkInterfaces(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

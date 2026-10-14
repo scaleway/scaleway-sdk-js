@@ -9,7 +9,7 @@ export const useDediboxv1RpnAPIGetRpnStatusQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.GetRpnStatusResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.GetRpnStatusResponse, Error>> => {
   const { dediboxv1Rpn } = useDediboxv1RpnAPI()
-  const key = ["dediboxv1Rpn", "getRpnStatus", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1Rpn", "getRpnStatus", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1Rpn.getRpnStatus(params, { signal }), dataloaderConfig)
 }

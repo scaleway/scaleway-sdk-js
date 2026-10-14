@@ -9,7 +9,7 @@ export const useDediboxv1BillingAPIListRefundsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListRefundsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListRefundsResponse, Error>> => {
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
-  const key = ["dediboxv1Billing", "listRefunds", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1Billing", "listRefunds", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1Billing.listRefunds(params, { signal }), dataloaderConfig)
 }

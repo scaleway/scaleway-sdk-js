@@ -9,7 +9,7 @@ export const useRdbv1APIGetInstanceMetricsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.InstanceMetrics, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.InstanceMetrics, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "getInstanceMetrics", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "getInstanceMetrics", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.getInstanceMetrics(params, { signal }), dataloaderConfig)
 }

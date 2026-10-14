@@ -9,7 +9,7 @@ export const useMarketplacev2APIListVersionsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Marketplacev2.Version[], Error>,
 ): ReturnType<typeof useDataLoader<Marketplacev2.Version[], Error>> => {
   const { marketplacev2 } = useMarketplacev2API()
-  const key = ["marketplacev2", "listVersions", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["marketplacev2", "listVersions", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => marketplacev2.listVersions(params, { signal }).all(), dataloaderConfig)
 }

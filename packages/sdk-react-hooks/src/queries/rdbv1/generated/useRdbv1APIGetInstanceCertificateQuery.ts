@@ -9,7 +9,7 @@ export const useRdbv1APIGetInstanceCertificateQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blob, Error>,
 ): ReturnType<typeof useDataLoader<Blob, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "getInstanceCertificate", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "getInstanceCertificate", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.getInstanceCertificate(params, { signal }), dataloaderConfig)
 }

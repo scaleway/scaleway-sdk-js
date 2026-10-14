@@ -9,7 +9,7 @@ export const useKafkav1alpha1APIGetClusterQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Kafkav1alpha1.Cluster, Error>,
 ): ReturnType<typeof useDataLoader<Kafkav1alpha1.Cluster, Error>> => {
   const { kafkav1alpha1 } = useKafkav1alpha1API()
-  const key = ["kafkav1alpha1", "getCluster", ...Object.entries(params).flat(3).sort()]
+  const key = ["kafkav1alpha1", "getCluster", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => kafkav1alpha1.getCluster(params, { signal }), dataloaderConfig)
 }

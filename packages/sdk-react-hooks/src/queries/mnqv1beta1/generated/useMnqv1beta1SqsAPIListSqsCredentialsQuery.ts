@@ -9,7 +9,7 @@ export const useMnqv1beta1SqsAPIListSqsCredentialsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mnqv1beta1.ListSqsCredentialsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Mnqv1beta1.ListSqsCredentialsResponse, Error>> => {
   const { mnqv1beta1Sqs } = useMnqv1beta1SqsAPI()
-  const key = ["mnqv1beta1Sqs", "listSqsCredentials", ...Object.entries(params).flat(3).sort()]
+  const key = ["mnqv1beta1Sqs", "listSqsCredentials", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mnqv1beta1Sqs.listSqsCredentials(params, { signal }), dataloaderConfig)
 }

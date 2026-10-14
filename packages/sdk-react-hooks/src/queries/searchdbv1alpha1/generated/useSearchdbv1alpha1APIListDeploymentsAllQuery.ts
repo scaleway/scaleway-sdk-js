@@ -9,7 +9,7 @@ export const useSearchdbv1alpha1APIListDeploymentsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Searchdbv1alpha1.Deployment[], Error>,
 ): ReturnType<typeof useDataLoader<Searchdbv1alpha1.Deployment[], Error>> => {
   const { searchdbv1alpha1 } = useSearchdbv1alpha1API()
-  const key = ["searchdbv1alpha1", "listDeployments", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["searchdbv1alpha1", "listDeployments", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => searchdbv1alpha1.listDeployments(params, { signal }).all(), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useAuditTrailv1alpha1APIListCustomAlertRulesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<AuditTrailv1alpha1.ListCustomAlertRulesResponse, Error>,
 ): ReturnType<typeof useDataLoader<AuditTrailv1alpha1.ListCustomAlertRulesResponse, Error>> => {
   const { auditTrailv1alpha1 } = useAuditTrailv1alpha1API()
-  const key = ["auditTrailv1alpha1", "listCustomAlertRules", ...Object.entries(params).flat(3).sort()]
+  const key = ["auditTrailv1alpha1", "listCustomAlertRules", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => auditTrailv1alpha1.listCustomAlertRules(params, { signal }), dataloaderConfig)
 }

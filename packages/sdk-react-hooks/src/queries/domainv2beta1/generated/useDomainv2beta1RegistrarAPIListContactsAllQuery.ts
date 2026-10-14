@@ -9,7 +9,7 @@ export const useDomainv2beta1RegistrarAPIListContactsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Domainv2beta1.ContactRoles[], Error>,
 ): ReturnType<typeof useDataLoader<Domainv2beta1.ContactRoles[], Error>> => {
   const { domainv2beta1Registrar } = useDomainv2beta1RegistrarAPI()
-  const key = ["domainv2beta1Registrar", "listContacts", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["domainv2beta1Registrar", "listContacts", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => domainv2beta1Registrar.listContacts(params, { signal }).all(), dataloaderConfig)
 }

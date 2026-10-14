@@ -9,7 +9,7 @@ export const useBlockv1APIGetSnapshotQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blockv1.Snapshot, Error>,
 ): ReturnType<typeof useDataLoader<Blockv1.Snapshot, Error>> => {
   const { blockv1 } = useBlockv1API()
-  const key = ["blockv1", "getSnapshot", ...Object.entries(params).flat(3).sort()]
+  const key = ["blockv1", "getSnapshot", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => blockv1.getSnapshot(params, { signal }), dataloaderConfig)
 }

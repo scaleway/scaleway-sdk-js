@@ -9,7 +9,7 @@ export const useAccountv3ProjectAPIListProjectsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Accountv3.Project[], Error>,
 ): ReturnType<typeof useDataLoader<Accountv3.Project[], Error>> => {
   const { accountv3Project } = useAccountv3ProjectAPI()
-  const key = ["accountv3Project", "listProjects", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["accountv3Project", "listProjects", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => accountv3Project.listProjects(params, { signal }).all(), dataloaderConfig)
 }

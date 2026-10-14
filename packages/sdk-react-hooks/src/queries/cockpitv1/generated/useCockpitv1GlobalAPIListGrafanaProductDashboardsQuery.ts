@@ -9,7 +9,7 @@ export const useCockpitv1GlobalAPIListGrafanaProductDashboardsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.ListGrafanaProductDashboardsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.ListGrafanaProductDashboardsResponse, Error>> => {
   const { cockpitv1Global } = useCockpitv1GlobalAPI()
-  const key = ["cockpitv1Global", "listGrafanaProductDashboards", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Global", "listGrafanaProductDashboards", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Global.listGrafanaProductDashboards(params, { signal }), dataloaderConfig)
 }

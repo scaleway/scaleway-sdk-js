@@ -10,7 +10,7 @@ export const useMarketplacev2APIListLocalImagesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Marketplacev2.ListLocalImagesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Marketplacev2.ListLocalImagesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { marketplacev2 } = useMarketplacev2API()
-  const key = ["marketplacev2", "listLocalImages", ...Object.entries(params).flat(3).sort()]
+  const key = ["marketplacev2", "listLocalImages", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => marketplacev2.listLocalImages(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useIpamv1APIListIPsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Ipamv1.ListIPsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Ipamv1.ListIPsResponse, Error>> => {
   const { ipamv1 } = useIpamv1API()
-  const key = ["ipamv1", "listIPs", ...Object.entries(params).flat(3).sort()]
+  const key = ["ipamv1", "listIPs", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => ipamv1.listIPs(params, { signal }), dataloaderConfig)
 }

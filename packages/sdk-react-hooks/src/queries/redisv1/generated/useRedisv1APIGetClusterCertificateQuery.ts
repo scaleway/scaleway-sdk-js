@@ -9,7 +9,7 @@ export const useRedisv1APIGetClusterCertificateQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blob, Error>,
 ): ReturnType<typeof useDataLoader<Blob, Error>> => {
   const { redisv1 } = useRedisv1API()
-  const key = ["redisv1", "getClusterCertificate", ...Object.entries(params).flat(3).sort()]
+  const key = ["redisv1", "getClusterCertificate", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => redisv1.getClusterCertificate(params, { signal }), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useFilev1alpha1APIListFileSystemsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Filev1alpha1.FileSystem[], Error>,
 ): ReturnType<typeof useDataLoader<Filev1alpha1.FileSystem[], Error>> => {
   const { filev1alpha1 } = useFilev1alpha1API()
-  const key = ["filev1alpha1", "listFileSystems", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["filev1alpha1", "listFileSystems", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => filev1alpha1.listFileSystems(params, { signal }).all(), dataloaderConfig)
 }

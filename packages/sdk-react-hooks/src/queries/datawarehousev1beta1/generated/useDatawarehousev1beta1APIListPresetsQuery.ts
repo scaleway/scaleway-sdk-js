@@ -9,7 +9,7 @@ export const useDatawarehousev1beta1APIListPresetsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Datawarehousev1beta1.ListPresetsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Datawarehousev1beta1.ListPresetsResponse, Error>> => {
   const { datawarehousev1beta1 } = useDatawarehousev1beta1API()
-  const key = ["datawarehousev1beta1", "listPresets", ...Object.entries(params).flat(3).sort()]
+  const key = ["datawarehousev1beta1", "listPresets", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => datawarehousev1beta1.listPresets(params, { signal }), dataloaderConfig)
 }

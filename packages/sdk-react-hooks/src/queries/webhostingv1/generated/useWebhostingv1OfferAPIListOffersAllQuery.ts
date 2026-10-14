@@ -9,7 +9,7 @@ export const useWebhostingv1OfferAPIListOffersAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.Offer[], Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.Offer[], Error>> => {
   const { webhostingv1Offer } = useWebhostingv1OfferAPI()
-  const key = ["webhostingv1Offer", "listOffers", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Offer", "listOffers", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Offer.listOffers(params, { signal }).all(), dataloaderConfig)
 }

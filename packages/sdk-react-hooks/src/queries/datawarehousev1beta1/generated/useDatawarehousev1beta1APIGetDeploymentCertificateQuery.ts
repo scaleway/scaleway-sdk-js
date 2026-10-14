@@ -9,7 +9,7 @@ export const useDatawarehousev1beta1APIGetDeploymentCertificateQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Blob, Error>,
 ): ReturnType<typeof useDataLoader<Blob, Error>> => {
   const { datawarehousev1beta1 } = useDatawarehousev1beta1API()
-  const key = ["datawarehousev1beta1", "getDeploymentCertificate", ...Object.entries(params).flat(3).sort()]
+  const key = ["datawarehousev1beta1", "getDeploymentCertificate", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => datawarehousev1beta1.getDeploymentCertificate(params, { signal }), dataloaderConfig)
 }

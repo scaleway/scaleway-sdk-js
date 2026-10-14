@@ -9,7 +9,7 @@ export const useDomainv2beta1APIListDNSZonesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Domainv2beta1.ListDNSZonesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Domainv2beta1.ListDNSZonesResponse, Error>> => {
   const { domainv2beta1 } = useDomainv2beta1API()
-  const key = ["domainv2beta1", "listDNSZones", ...Object.entries(params).flat(3).sort()]
+  const key = ["domainv2beta1", "listDNSZones", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => domainv2beta1.listDNSZones(params, { signal }), dataloaderConfig)
 }

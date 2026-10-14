@@ -9,7 +9,7 @@ export const useS2SVpnv1alpha1APIListRoutingPoliciesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<S2SVpnv1alpha1.ListRoutingPoliciesResponse, Error>,
 ): ReturnType<typeof useDataLoader<S2SVpnv1alpha1.ListRoutingPoliciesResponse, Error>> => {
   const { s2SVpnv1alpha1 } = useS2SVpnv1alpha1API()
-  const key = ["s2SVpnv1alpha1", "listRoutingPolicies", ...Object.entries(params).flat(3).sort()]
+  const key = ["s2SVpnv1alpha1", "listRoutingPolicies", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => s2SVpnv1alpha1.listRoutingPolicies(params, { signal }), dataloaderConfig)
 }

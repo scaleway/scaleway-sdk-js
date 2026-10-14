@@ -9,7 +9,7 @@ export const useRegistryv1APIListTagsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Registryv1.ListTagsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Registryv1.ListTagsResponse, Error>> => {
   const { registryv1 } = useRegistryv1API()
-  const key = ["registryv1", "listTags", ...Object.entries(params).flat(3).sort()]
+  const key = ["registryv1", "listTags", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => registryv1.listTags(params, { signal }), dataloaderConfig)
 }

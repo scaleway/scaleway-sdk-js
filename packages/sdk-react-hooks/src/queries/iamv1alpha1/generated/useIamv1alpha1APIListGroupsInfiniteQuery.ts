@@ -10,7 +10,7 @@ export const useIamv1alpha1APIListGroupsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Iamv1alpha1.ListGroupsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Iamv1alpha1.ListGroupsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { iamv1alpha1 } = useIamv1alpha1API()
-  const key = ["iamv1alpha1", "listGroups", ...Object.entries(params).flat(3).sort()]
+  const key = ["iamv1alpha1", "listGroups", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => iamv1alpha1.listGroups(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

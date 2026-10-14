@@ -9,7 +9,7 @@ export const useLbv1ZonedAPIGetRouteQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.Route, Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.Route, Error>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "getRoute", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "getRoute", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1Zoned.getRoute(params, { signal }), dataloaderConfig)
 }

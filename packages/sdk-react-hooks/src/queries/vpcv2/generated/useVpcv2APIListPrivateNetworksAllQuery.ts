@@ -9,7 +9,7 @@ export const useVpcv2APIListPrivateNetworksAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Vpcv2.PrivateNetwork[], Error>,
 ): ReturnType<typeof useDataLoader<Vpcv2.PrivateNetwork[], Error>> => {
   const { vpcv2 } = useVpcv2API()
-  const key = ["vpcv2", "listPrivateNetworks", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["vpcv2", "listPrivateNetworks", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => vpcv2.listPrivateNetworks(params, { signal }).all(), dataloaderConfig)
 }

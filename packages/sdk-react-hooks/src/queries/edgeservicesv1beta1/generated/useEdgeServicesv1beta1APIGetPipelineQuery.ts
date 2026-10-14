@@ -9,7 +9,7 @@ export const useEdgeServicesv1beta1APIGetPipelineQuery = (
   dataloaderConfig?: UseDataLoaderConfig<EdgeServicesv1beta1.Pipeline, Error>,
 ): ReturnType<typeof useDataLoader<EdgeServicesv1beta1.Pipeline, Error>> => {
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
-  const key = ["edgeServicesv1beta1", "getPipeline", ...Object.entries(params).flat(3).sort()]
+  const key = ["edgeServicesv1beta1", "getPipeline", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.getPipeline(params, { signal }), dataloaderConfig)
 }

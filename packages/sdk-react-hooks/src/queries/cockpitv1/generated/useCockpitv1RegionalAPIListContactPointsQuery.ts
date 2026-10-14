@@ -9,7 +9,7 @@ export const useCockpitv1RegionalAPIListContactPointsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.ListContactPointsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.ListContactPointsResponse, Error>> => {
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
-  const key = ["cockpitv1Regional", "listContactPoints", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Regional", "listContactPoints", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Regional.listContactPoints(params, { signal }), dataloaderConfig)
 }

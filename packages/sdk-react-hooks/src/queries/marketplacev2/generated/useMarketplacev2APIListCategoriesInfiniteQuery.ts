@@ -10,7 +10,7 @@ export const useMarketplacev2APIListCategoriesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Marketplacev2.ListCategoriesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Marketplacev2.ListCategoriesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { marketplacev2 } = useMarketplacev2API()
-  const key = ["marketplacev2", "listCategories", ...Object.entries(params).flat(3).sort()]
+  const key = ["marketplacev2", "listCategories", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => marketplacev2.listCategories(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

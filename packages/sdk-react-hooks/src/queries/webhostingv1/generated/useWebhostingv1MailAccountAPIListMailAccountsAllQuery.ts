@@ -9,7 +9,7 @@ export const useWebhostingv1MailAccountAPIListMailAccountsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.MailAccount[], Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.MailAccount[], Error>> => {
   const { webhostingv1MailAccount } = useWebhostingv1MailAccountAPI()
-  const key = ["webhostingv1MailAccount", "listMailAccounts", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1MailAccount", "listMailAccounts", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1MailAccount.listMailAccounts(params, { signal }).all(), dataloaderConfig)
 }

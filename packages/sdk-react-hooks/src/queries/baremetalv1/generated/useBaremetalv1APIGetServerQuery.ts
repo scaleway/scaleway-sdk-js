@@ -9,7 +9,7 @@ export const useBaremetalv1APIGetServerQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Baremetalv1.Server, Error>,
 ): ReturnType<typeof useDataLoader<Baremetalv1.Server, Error>> => {
   const { baremetalv1 } = useBaremetalv1API()
-  const key = ["baremetalv1", "getServer", ...Object.entries(params).flat(3).sort()]
+  const key = ["baremetalv1", "getServer", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => baremetalv1.getServer(params, { signal }), dataloaderConfig)
 }

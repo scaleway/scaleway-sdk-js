@@ -9,7 +9,7 @@ export const useDediboxv1BillingAPIGetRefundQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.Refund, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.Refund, Error>> => {
   const { dediboxv1Billing } = useDediboxv1BillingAPI()
-  const key = ["dediboxv1Billing", "getRefund", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1Billing", "getRefund", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1Billing.getRefund(params, { signal }), dataloaderConfig)
 }

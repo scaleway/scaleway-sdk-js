@@ -9,7 +9,7 @@ export const useEnvironmentalFootprintv1alpha1UserAPIGetImpactReportAvailability
   dataloaderConfig?: UseDataLoaderConfig<EnvironmentalFootprintv1alpha1.ImpactReportAvailability, Error>,
 ): ReturnType<typeof useDataLoader<EnvironmentalFootprintv1alpha1.ImpactReportAvailability, Error>> => {
   const { environmentalFootprintv1alpha1User } = useEnvironmentalFootprintv1alpha1UserAPI()
-  const key = ["environmentalFootprintv1alpha1User", "getImpactReportAvailability", ...Object.entries(params).flat(3).sort()]
+  const key = ["environmentalFootprintv1alpha1User", "getImpactReportAvailability", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => environmentalFootprintv1alpha1User.getImpactReportAvailability(params, { signal }), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useTemv1alpha1APIListBlocklistsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Temv1alpha1.Blocklist[], Error>,
 ): ReturnType<typeof useDataLoader<Temv1alpha1.Blocklist[], Error>> => {
   const { temv1alpha1 } = useTemv1alpha1API()
-  const key = ["temv1alpha1", "listBlocklists", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["temv1alpha1", "listBlocklists", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => temv1alpha1.listBlocklists(params, { signal }).all(), dataloaderConfig)
 }

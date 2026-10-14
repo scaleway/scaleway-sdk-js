@@ -10,7 +10,7 @@ export const useInterlinkv1beta1APIListPartnersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Interlinkv1beta1.ListPartnersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Interlinkv1beta1.ListPartnersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { interlinkv1beta1 } = useInterlinkv1beta1API()
-  const key = ["interlinkv1beta1", "listPartners", ...Object.entries(params).flat(3).sort()]
+  const key = ["interlinkv1beta1", "listPartners", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => interlinkv1beta1.listPartners(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useDediboxv1IPv6BlockAPIGetIPv6BlockQuotasQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.GetIPv6BlockQuotasResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.GetIPv6BlockQuotasResponse, Error>> => {
   const { dediboxv1IPv6Block } = useDediboxv1IPv6BlockAPI()
-  const key = ["dediboxv1IPv6Block", "getIPv6BlockQuotas", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1IPv6Block", "getIPv6BlockQuotas", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1IPv6Block.getIPv6BlockQuotas(params, { signal }), dataloaderConfig)
 }

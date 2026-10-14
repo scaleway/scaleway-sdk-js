@@ -9,7 +9,7 @@ export const useWebhostingv1BackupAPIListBackupsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.ListBackupsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.ListBackupsResponse, Error>> => {
   const { webhostingv1Backup } = useWebhostingv1BackupAPI()
-  const key = ["webhostingv1Backup", "listBackups", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Backup", "listBackups", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Backup.listBackups(params, { signal }), dataloaderConfig)
 }

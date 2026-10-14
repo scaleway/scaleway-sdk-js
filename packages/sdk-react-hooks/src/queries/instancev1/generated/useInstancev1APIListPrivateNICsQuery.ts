@@ -9,7 +9,7 @@ export const useInstancev1APIListPrivateNICsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev1.ListPrivateNICsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev1.ListPrivateNICsResponse, Error>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "listPrivateNICs", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "listPrivateNICs", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev1.listPrivateNICs(params, { signal }), dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useCockpitv1RegionalAPIListExportersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Cockpitv1.ListExportersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Cockpitv1.ListExportersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
-  const key = ["cockpitv1Regional", "listExporters", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Regional", "listExporters", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => cockpitv1Regional.listExporters(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useLbv1APIListAclsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.ListAclResponse, Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.ListAclResponse, Error>> => {
   const { lbv1 } = useLbv1API()
-  const key = ["lbv1", "listAcls", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1", "listAcls", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1.listAcls(params, { signal }), dataloaderConfig)
 }

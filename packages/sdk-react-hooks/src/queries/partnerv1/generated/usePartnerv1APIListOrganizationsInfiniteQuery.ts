@@ -10,7 +10,7 @@ export const usePartnerv1APIListOrganizationsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Partnerv1.ListOrganizationsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Partnerv1.ListOrganizationsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { partnerv1 } = usePartnerv1API()
-  const key = ["partnerv1", "listOrganizations", ...Object.entries(params).flat(3).sort()]
+  const key = ["partnerv1", "listOrganizations", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => partnerv1.listOrganizations(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

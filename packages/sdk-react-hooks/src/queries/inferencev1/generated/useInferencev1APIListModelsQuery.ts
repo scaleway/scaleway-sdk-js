@@ -9,7 +9,7 @@ export const useInferencev1APIListModelsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Inferencev1.ListModelsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Inferencev1.ListModelsResponse, Error>> => {
   const { inferencev1 } = useInferencev1API()
-  const key = ["inferencev1", "listModels", ...Object.entries(params).flat(3).sort()]
+  const key = ["inferencev1", "listModels", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => inferencev1.listModels(params, { signal }), dataloaderConfig)
 }

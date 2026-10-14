@@ -9,7 +9,7 @@ export const useDomainv2beta1RegistrarAPIGetDomainAuthCodeQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Domainv2beta1.GetDomainAuthCodeResponse, Error>,
 ): ReturnType<typeof useDataLoader<Domainv2beta1.GetDomainAuthCodeResponse, Error>> => {
   const { domainv2beta1Registrar } = useDomainv2beta1RegistrarAPI()
-  const key = ["domainv2beta1Registrar", "getDomainAuthCode", ...Object.entries(params).flat(3).sort()]
+  const key = ["domainv2beta1Registrar", "getDomainAuthCode", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => domainv2beta1Registrar.getDomainAuthCode(params, { signal }), dataloaderConfig)
 }

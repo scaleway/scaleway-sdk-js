@@ -9,7 +9,7 @@ export const useLbv1APIListRoutesAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.Route[], Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.Route[], Error>> => {
   const { lbv1 } = useLbv1API()
-  const key = ["lbv1", "listRoutes", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1", "listRoutes", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1.listRoutes(params, { signal }).all(), dataloaderConfig)
 }

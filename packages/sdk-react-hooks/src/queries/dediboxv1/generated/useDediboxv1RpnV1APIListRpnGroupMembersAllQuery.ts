@@ -9,7 +9,7 @@ export const useDediboxv1RpnV1APIListRpnGroupMembersAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.RpnGroupMember[], Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.RpnGroupMember[], Error>> => {
   const { dediboxv1RpnV1 } = useDediboxv1RpnV1API()
-  const key = ["dediboxv1RpnV1", "listRpnGroupMembers", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1RpnV1", "listRpnGroupMembers", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1RpnV1.listRpnGroupMembers(params, { signal }).all(), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useDediboxv1APIGetOrderedServiceQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.Service, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.Service, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "getOrderedService", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "getOrderedService", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.getOrderedService(params, { signal }), dataloaderConfig)
 }

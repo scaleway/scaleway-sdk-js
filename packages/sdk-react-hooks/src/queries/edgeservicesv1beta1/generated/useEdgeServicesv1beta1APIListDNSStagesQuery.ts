@@ -9,7 +9,7 @@ export const useEdgeServicesv1beta1APIListDNSStagesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<EdgeServicesv1beta1.ListDNSStagesResponse, Error>,
 ): ReturnType<typeof useDataLoader<EdgeServicesv1beta1.ListDNSStagesResponse, Error>> => {
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
-  const key = ["edgeServicesv1beta1", "listDNSStages", ...Object.entries(params).flat(3).sort()]
+  const key = ["edgeServicesv1beta1", "listDNSStages", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => edgeServicesv1beta1.listDNSStages(params, { signal }), dataloaderConfig)
 }

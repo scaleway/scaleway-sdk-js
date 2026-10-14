@@ -9,7 +9,7 @@ export const useS2SVpnv1alpha1APIGetConnectionQuery = (
   dataloaderConfig?: UseDataLoaderConfig<S2SVpnv1alpha1.Connection, Error>,
 ): ReturnType<typeof useDataLoader<S2SVpnv1alpha1.Connection, Error>> => {
   const { s2SVpnv1alpha1 } = useS2SVpnv1alpha1API()
-  const key = ["s2SVpnv1alpha1", "getConnection", ...Object.entries(params).flat(3).sort()]
+  const key = ["s2SVpnv1alpha1", "getConnection", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => s2SVpnv1alpha1.getConnection(params, { signal }), dataloaderConfig)
 }

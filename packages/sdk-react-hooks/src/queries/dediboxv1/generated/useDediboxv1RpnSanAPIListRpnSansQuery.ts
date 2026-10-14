@@ -9,7 +9,7 @@ export const useDediboxv1RpnSanAPIListRpnSansQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ListRpnSansResponse, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ListRpnSansResponse, Error>> => {
   const { dediboxv1RpnSan } = useDediboxv1RpnSanAPI()
-  const key = ["dediboxv1RpnSan", "listRpnSans", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1RpnSan", "listRpnSans", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1RpnSan.listRpnSans(params, { signal }), dataloaderConfig)
 }

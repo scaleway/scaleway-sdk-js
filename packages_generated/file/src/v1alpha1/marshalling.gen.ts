@@ -5,13 +5,18 @@ import { isJSONObject, marshalBlobToScwFile, marshalDecimal, marshalMoney, marsh
 import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scaleway/sdk-client'
 import type {
   FileSystem,
+  SnapshotParentFilesystem,
+  Snapshot,
   Attachment,
   ListAttachmentsResponse,
   FileSystemType,
   ListFileSystemTypesResponse,
   ListFileSystemsResponse,
+  ListSnapshotsResponse,
   CreateFileSystemRequest,
+  CreateSnapshotRequest,
   UpdateFileSystemRequest,
+  UpdateSnapshotRequest,
 } from './types.gen.js'
 
 export const unmarshalFileSystem = (data: unknown): FileSystem => {
@@ -36,6 +41,42 @@ export const unmarshalFileSystem = (data: unknown): FileSystem => {
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
   } as FileSystem
+}
+
+const unmarshalSnapshotParentFilesystem = (data: unknown): SnapshotParentFilesystem => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'SnapshotParentFilesystem' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    name: data.name,
+  } as SnapshotParentFilesystem
+}
+
+export const unmarshalSnapshot = (data: unknown): Snapshot => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Snapshot' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    createdAt: unmarshalDate(data.created_at),
+    id: data.id,
+    name: data.name,
+    organizationId: data.organization_id,
+    parentFilesystem: data.parent_filesystem ? unmarshalSnapshotParentFilesystem(data.parent_filesystem) : undefined,
+    projectId: data.project_id,
+    region: data.region,
+    size: data.size,
+    srn: data.srn,
+    status: data.status,
+    tags: data.tags,
+    updatedAt: unmarshalDate(data.updated_at),
+  } as Snapshot
 }
 
 const unmarshalAttachment = (data: unknown): Attachment => {
@@ -109,6 +150,19 @@ export const unmarshalListFileSystemsResponse = (data: unknown): ListFileSystems
   } as ListFileSystemsResponse
 }
 
+export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListSnapshotsResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    snapshots: unmarshalArrayOfObject(data.snapshots, unmarshalSnapshot),
+    totalCount: data.total_count,
+  } as ListSnapshotsResponse
+}
+
 export const marshalCreateFileSystemRequest = (
   request: CreateFileSystemRequest,
   defaults: DefaultValues,
@@ -120,11 +174,29 @@ export const marshalCreateFileSystemRequest = (
   type: request.type,
 })
 
+export const marshalCreateSnapshotRequest = (
+  request: CreateSnapshotRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  filesystem_id: request.filesystemId,
+  name: request.name,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  tags: request.tags,
+})
+
 export const marshalUpdateFileSystemRequest = (
   request: UpdateFileSystemRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
   size: request.size,
+  tags: request.tags,
+})
+
+export const marshalUpdateSnapshotRequest = (
+  request: UpdateSnapshotRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  name: request.name,
   tags: request.tags,
 })

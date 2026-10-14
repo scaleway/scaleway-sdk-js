@@ -9,7 +9,7 @@ export const useDediboxv1APIGetServerDefaultPartitioningQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Dediboxv1.ServerDefaultPartitioning, Error>,
 ): ReturnType<typeof useDataLoader<Dediboxv1.ServerDefaultPartitioning, Error>> => {
   const { dediboxv1 } = useDediboxv1API()
-  const key = ["dediboxv1", "getServerDefaultPartitioning", ...Object.entries(params).flat(3).sort()]
+  const key = ["dediboxv1", "getServerDefaultPartitioning", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => dediboxv1.getServerDefaultPartitioning(params, { signal }), dataloaderConfig)
 }

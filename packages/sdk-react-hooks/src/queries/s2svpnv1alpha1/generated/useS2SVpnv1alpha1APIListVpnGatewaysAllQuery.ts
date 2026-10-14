@@ -9,7 +9,7 @@ export const useS2SVpnv1alpha1APIListVpnGatewaysAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<S2SVpnv1alpha1.VpnGateway[], Error>,
 ): ReturnType<typeof useDataLoader<S2SVpnv1alpha1.VpnGateway[], Error>> => {
   const { s2SVpnv1alpha1 } = useS2SVpnv1alpha1API()
-  const key = ["s2SVpnv1alpha1", "listVpnGateways", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["s2SVpnv1alpha1", "listVpnGateways", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => s2SVpnv1alpha1.listVpnGateways(params, { signal }).all(), dataloaderConfig)
 }

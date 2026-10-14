@@ -10,7 +10,7 @@ export const useApplesiliconv1alpha1PrivateNetworkAPIListServerPrivateNetworksIn
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Applesiliconv1alpha1.ListServerPrivateNetworksResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Applesiliconv1alpha1.ListServerPrivateNetworksResponse, Error, typeof params, typeof pageParamKey>> => {
   const { applesiliconv1alpha1PrivateNetwork } = useApplesiliconv1alpha1PrivateNetworkAPI()
-  const key = ["applesiliconv1alpha1PrivateNetwork", "listServerPrivateNetworks", ...Object.entries(params).flat(3).sort()]
+  const key = ["applesiliconv1alpha1PrivateNetwork", "listServerPrivateNetworks", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => applesiliconv1alpha1PrivateNetwork.listServerPrivateNetworks(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

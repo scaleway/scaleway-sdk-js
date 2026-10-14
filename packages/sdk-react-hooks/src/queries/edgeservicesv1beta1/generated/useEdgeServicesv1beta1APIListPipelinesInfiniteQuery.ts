@@ -10,7 +10,7 @@ export const useEdgeServicesv1beta1APIListPipelinesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<EdgeServicesv1beta1.ListPipelinesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<EdgeServicesv1beta1.ListPipelinesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { edgeServicesv1beta1 } = useEdgeServicesv1beta1API()
-  const key = ["edgeServicesv1beta1", "listPipelines", ...Object.entries(params).flat(3).sort()]
+  const key = ["edgeServicesv1beta1", "listPipelines", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => edgeServicesv1beta1.listPipelines(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

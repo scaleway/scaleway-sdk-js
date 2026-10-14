@@ -9,7 +9,7 @@ export const useIotv1APIListTwinDocumentsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iotv1.ListTwinDocumentsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Iotv1.ListTwinDocumentsResponse, Error>> => {
   const { iotv1 } = useIotv1API()
-  const key = ["iotv1", "listTwinDocuments", ...Object.entries(params).flat(3).sort()]
+  const key = ["iotv1", "listTwinDocuments", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => iotv1.listTwinDocuments(params, { signal }), dataloaderConfig)
 }

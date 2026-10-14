@@ -9,7 +9,7 @@ export const useMarketplacev2APIGetLocalImageQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Marketplacev2.LocalImage, Error>,
 ): ReturnType<typeof useDataLoader<Marketplacev2.LocalImage, Error>> => {
   const { marketplacev2 } = useMarketplacev2API()
-  const key = ["marketplacev2", "getLocalImage", ...Object.entries(params).flat(3).sort()]
+  const key = ["marketplacev2", "getLocalImage", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => marketplacev2.getLocalImage(params, { signal }), dataloaderConfig)
 }

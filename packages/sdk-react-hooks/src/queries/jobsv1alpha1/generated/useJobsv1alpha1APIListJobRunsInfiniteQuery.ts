@@ -10,7 +10,7 @@ export const useJobsv1alpha1APIListJobRunsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Jobsv1alpha1.ListJobRunsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Jobsv1alpha1.ListJobRunsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { jobsv1alpha1 } = useJobsv1alpha1API()
-  const key = ["jobsv1alpha1", "listJobRuns", ...Object.entries(params).flat(3).sort()]
+  const key = ["jobsv1alpha1", "listJobRuns", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => jobsv1alpha1.listJobRuns(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

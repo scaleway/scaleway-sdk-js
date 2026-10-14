@@ -9,7 +9,7 @@ export const useTemv1alpha1APIGetEmailQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Temv1alpha1.Email, Error>,
 ): ReturnType<typeof useDataLoader<Temv1alpha1.Email, Error>> => {
   const { temv1alpha1 } = useTemv1alpha1API()
-  const key = ["temv1alpha1", "getEmail", ...Object.entries(params).flat(3).sort()]
+  const key = ["temv1alpha1", "getEmail", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => temv1alpha1.getEmail(params, { signal }), dataloaderConfig)
 }

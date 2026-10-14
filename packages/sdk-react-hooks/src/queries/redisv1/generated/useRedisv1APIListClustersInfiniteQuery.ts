@@ -10,7 +10,7 @@ export const useRedisv1APIListClustersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Redisv1.ListClustersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Redisv1.ListClustersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { redisv1 } = useRedisv1API()
-  const key = ["redisv1", "listClusters", ...Object.entries(params).flat(3).sort()]
+  const key = ["redisv1", "listClusters", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => redisv1.listClusters(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

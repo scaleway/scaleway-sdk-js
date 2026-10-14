@@ -9,7 +9,7 @@ export const useCockpitv1RegionalAPIGetDataSourceQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Cockpitv1.DataSource, Error>,
 ): ReturnType<typeof useDataLoader<Cockpitv1.DataSource, Error>> => {
   const { cockpitv1Regional } = useCockpitv1RegionalAPI()
-  const key = ["cockpitv1Regional", "getDataSource", ...Object.entries(params).flat(3).sort()]
+  const key = ["cockpitv1Regional", "getDataSource", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => cockpitv1Regional.getDataSource(params, { signal }), dataloaderConfig)
 }

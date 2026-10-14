@@ -10,7 +10,7 @@ export const useQaasv1alpha1APIListProcessesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Qaasv1alpha1.ListProcessesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Qaasv1alpha1.ListProcessesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { qaasv1alpha1 } = useQaasv1alpha1API()
-  const key = ["qaasv1alpha1", "listProcesses", ...Object.entries(params).flat(3).sort()]
+  const key = ["qaasv1alpha1", "listProcesses", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => qaasv1alpha1.listProcesses(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

@@ -10,7 +10,7 @@ export const useKafkav1alpha1APIListUsersInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Kafkav1alpha1.ListUsersResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Kafkav1alpha1.ListUsersResponse, Error, typeof params, typeof pageParamKey>> => {
   const { kafkav1alpha1 } = useKafkav1alpha1API()
-  const key = ["kafkav1alpha1", "listUsers", ...Object.entries(params).flat(3).sort()]
+  const key = ["kafkav1alpha1", "listUsers", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => kafkav1alpha1.listUsers(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

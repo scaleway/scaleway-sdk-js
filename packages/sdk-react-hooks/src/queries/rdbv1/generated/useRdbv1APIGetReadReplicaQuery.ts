@@ -9,7 +9,7 @@ export const useRdbv1APIGetReadReplicaQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.ReadReplica, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.ReadReplica, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "getReadReplica", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "getReadReplica", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.getReadReplica(params, { signal }), dataloaderConfig)
 }

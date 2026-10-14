@@ -9,7 +9,7 @@ export const usePartnerv1APIListOrganizationsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Partnerv1.ListOrganizationsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Partnerv1.ListOrganizationsResponse, Error>> => {
   const { partnerv1 } = usePartnerv1API()
-  const key = ["partnerv1", "listOrganizations", ...Object.entries(params).flat(3).sort()]
+  const key = ["partnerv1", "listOrganizations", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => partnerv1.listOrganizations(params, { signal }), dataloaderConfig)
 }

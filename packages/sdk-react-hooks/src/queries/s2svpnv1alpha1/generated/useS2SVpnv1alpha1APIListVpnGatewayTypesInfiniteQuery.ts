@@ -10,7 +10,7 @@ export const useS2SVpnv1alpha1APIListVpnGatewayTypesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<S2SVpnv1alpha1.ListVpnGatewayTypesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<S2SVpnv1alpha1.ListVpnGatewayTypesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { s2SVpnv1alpha1 } = useS2SVpnv1alpha1API()
-  const key = ["s2SVpnv1alpha1", "listVpnGatewayTypes", ...Object.entries(params).flat(3).sort()]
+  const key = ["s2SVpnv1alpha1", "listVpnGatewayTypes", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => s2SVpnv1alpha1.listVpnGatewayTypes(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

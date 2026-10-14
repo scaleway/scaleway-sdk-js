@@ -10,7 +10,7 @@ export const useWebhostingv1FreeDomainAPIListFreeRootDomainsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Webhostingv1.ListFreeRootDomainsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Webhostingv1.ListFreeRootDomainsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { webhostingv1FreeDomain } = useWebhostingv1FreeDomainAPI()
-  const key = ["webhostingv1FreeDomain", "listFreeRootDomains", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1FreeDomain", "listFreeRootDomains", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => webhostingv1FreeDomain.listFreeRootDomains(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

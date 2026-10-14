@@ -9,7 +9,7 @@ export const useRdbv1APIListDatabaseBackupsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Rdbv1.ListDatabaseBackupsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Rdbv1.ListDatabaseBackupsResponse, Error>> => {
   const { rdbv1 } = useRdbv1API()
-  const key = ["rdbv1", "listDatabaseBackups", ...Object.entries(params).flat(3).sort()]
+  const key = ["rdbv1", "listDatabaseBackups", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => rdbv1.listDatabaseBackups(params, { signal }), dataloaderConfig)
 }

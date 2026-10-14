@@ -9,7 +9,7 @@ export const useLbv1ZonedAPIGetLbStatsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.LbStats, Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.LbStats, Error>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "getLbStats", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "getLbStats", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1Zoned.getLbStats(params, { signal }), dataloaderConfig)
 }

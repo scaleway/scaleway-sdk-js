@@ -1,3 +1,4 @@
+import { AbortError } from './abort-error.js'
 import type { RequestOptions } from './types.js'
 
 type PaginationOptions = {
@@ -27,12 +28,30 @@ type PaginationCallOptions<K extends string, T extends PaginatedContent<K>, R ex
   options?: RequestOptions
 }
 
+/**
+ * Throws an {@link AbortError} when the given signal has been aborted.
+ *
+ * Kept as a function (not inlined) so callers can re-check the signal between generator
+ * yields without TypeScript narrowing the comparison away: in a generator, the signal
+ * may abort while the consumer awaits a yielded page, so `signal.aborted` can become
+ * `true` between two calls.
+ *
+ * @param signal - The optional abort signal to check
+ */
+const assertNotAborted = (signal?: AbortSignal) => {
+  if (signal?.aborted === true) {
+    throw new AbortError()
+  }
+}
+
 function* pages<K extends string, T extends PaginatedContent<K>, R extends PaginationOptions>(
   key: K,
   fetcher: PaginatedFetcher<T, R>,
   opts: { request: R; firstPage: T; options?: RequestOptions },
 ): Generator<Promise<T[K]>, void, void> {
   const { request, firstPage, options } = opts
+  const signal = options?.signal
+  assertNotAborted(signal)
   if (!Array.isArray(firstPage[key])) {
     throw new TypeError(`Property ${key} is not a list in paginated result`)
   }
@@ -48,6 +67,7 @@ function* pages<K extends string, T extends PaginatedContent<K>, R extends Pagin
   }
   const { totalCount } = firstPage
   while (page <= Math.floor((totalCount + length - 1) / length)) {
+    assertNotAborted(signal)
     yield fetcher({ ...request, page }, options).then(getList)
     page += 1
   }
@@ -132,12 +152,15 @@ async function* cursorPages<K extends string, T extends CursorPaginatedContent<K
   firstPage: T,
   options?: RequestOptions,
 ): AsyncGenerator<T[K], void, void> {
+  const signal = options?.signal
+  assertNotAborted(signal)
   if (!Array.isArray(firstPage[key])) {
     throw new TypeError(`Property ${key} is not a list in paginated result`)
   }
   let { nextPageToken } = firstPage
   yield firstPage[key]
   while (nextPageToken) {
+    assertNotAborted(signal)
     // eslint-disable-next-line no-await-in-loop -- intentional: cursor pagination is inherently sequential
     const page = await fetcher({ ...request, [tokenKey]: nextPageToken }, options)
     // oxlint-disable-next-line eslint/prefer-destructuring -- reassigning the loop guard from a different object than the destructuring source

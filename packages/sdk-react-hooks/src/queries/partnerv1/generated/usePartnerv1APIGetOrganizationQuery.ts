@@ -9,7 +9,7 @@ export const usePartnerv1APIGetOrganizationQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Partnerv1.Organization, Error>,
 ): ReturnType<typeof useDataLoader<Partnerv1.Organization, Error>> => {
   const { partnerv1 } = usePartnerv1API()
-  const key = ["partnerv1", "getOrganization", ...Object.entries(params).flat(3).sort()]
+  const key = ["partnerv1", "getOrganization", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => partnerv1.getOrganization(params, { signal }), dataloaderConfig)
 }

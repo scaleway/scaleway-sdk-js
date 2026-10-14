@@ -10,7 +10,7 @@ export const useMnqv1beta1SnsAPIListSnsCredentialsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Mnqv1beta1.ListSnsCredentialsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Mnqv1beta1.ListSnsCredentialsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { mnqv1beta1Sns } = useMnqv1beta1SnsAPI()
-  const key = ["mnqv1beta1Sns", "listSnsCredentials", ...Object.entries(params).flat(3).sort()]
+  const key = ["mnqv1beta1Sns", "listSnsCredentials", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => mnqv1beta1Sns.listSnsCredentials(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

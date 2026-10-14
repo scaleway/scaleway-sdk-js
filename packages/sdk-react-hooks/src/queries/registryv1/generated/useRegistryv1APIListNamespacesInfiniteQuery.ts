@@ -10,7 +10,7 @@ export const useRegistryv1APIListNamespacesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Registryv1.ListNamespacesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Registryv1.ListNamespacesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { registryv1 } = useRegistryv1API()
-  const key = ["registryv1", "listNamespaces", ...Object.entries(params).flat(3).sort()]
+  const key = ["registryv1", "listNamespaces", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => registryv1.listNamespaces(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

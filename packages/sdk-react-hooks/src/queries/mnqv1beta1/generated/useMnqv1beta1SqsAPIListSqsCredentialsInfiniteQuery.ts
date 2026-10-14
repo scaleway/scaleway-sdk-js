@@ -10,7 +10,7 @@ export const useMnqv1beta1SqsAPIListSqsCredentialsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Mnqv1beta1.ListSqsCredentialsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Mnqv1beta1.ListSqsCredentialsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { mnqv1beta1Sqs } = useMnqv1beta1SqsAPI()
-  const key = ["mnqv1beta1Sqs", "listSqsCredentials", ...Object.entries(params).flat(3).sort()]
+  const key = ["mnqv1beta1Sqs", "listSqsCredentials", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => mnqv1beta1Sqs.listSqsCredentials(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

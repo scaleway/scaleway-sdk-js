@@ -9,7 +9,7 @@ export const useWebhostingv1BackupAPIListRecentProgressesQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Webhostingv1.ListRecentProgressesResponse, Error>,
 ): ReturnType<typeof useDataLoader<Webhostingv1.ListRecentProgressesResponse, Error>> => {
   const { webhostingv1Backup } = useWebhostingv1BackupAPI()
-  const key = ["webhostingv1Backup", "listRecentProgresses", ...Object.entries(params).flat(3).sort()]
+  const key = ["webhostingv1Backup", "listRecentProgresses", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => webhostingv1Backup.listRecentProgresses(params, { signal }), dataloaderConfig)
 }

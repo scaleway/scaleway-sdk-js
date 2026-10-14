@@ -9,7 +9,7 @@ export const useMongodbv1APIListSnapshotsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mongodbv1.ListSnapshotsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Mongodbv1.ListSnapshotsResponse, Error>> => {
   const { mongodbv1 } = useMongodbv1API()
-  const key = ["mongodbv1", "listSnapshots", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1", "listSnapshots", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mongodbv1.listSnapshots(params, { signal }), dataloaderConfig)
 }

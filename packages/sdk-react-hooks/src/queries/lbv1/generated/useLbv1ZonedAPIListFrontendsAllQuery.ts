@@ -9,7 +9,7 @@ export const useLbv1ZonedAPIListFrontendsAllQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Lbv1.Frontend[], Error>,
 ): ReturnType<typeof useDataLoader<Lbv1.Frontend[], Error>> => {
   const { lbv1Zoned } = useLbv1ZonedAPI()
-  const key = ["lbv1Zoned", "listFrontends", "all", ...Object.entries(params).flat(3).sort()]
+  const key = ["lbv1Zoned", "listFrontends", "all", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => lbv1Zoned.listFrontends(params, { signal }).all(), dataloaderConfig)
 }

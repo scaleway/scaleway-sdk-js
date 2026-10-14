@@ -10,7 +10,7 @@ export const useInstancev1APIListSecurityGroupRulesInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Instancev1.ListSecurityGroupRulesResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Instancev1.ListSecurityGroupRulesResponse, Error, typeof params, typeof pageParamKey>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "listSecurityGroupRules", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "listSecurityGroupRules", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => instancev1.listSecurityGroupRules(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

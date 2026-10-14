@@ -9,7 +9,7 @@ export const useSearchdbv1alpha1APIListVersionsQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Searchdbv1alpha1.ListVersionsResponse, Error>,
 ): ReturnType<typeof useDataLoader<Searchdbv1alpha1.ListVersionsResponse, Error>> => {
   const { searchdbv1alpha1 } = useSearchdbv1alpha1API()
-  const key = ["searchdbv1alpha1", "listVersions", ...Object.entries(params).flat(3).sort()]
+  const key = ["searchdbv1alpha1", "listVersions", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => searchdbv1alpha1.listVersions(params, { signal }), dataloaderConfig)
 }

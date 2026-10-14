@@ -9,7 +9,7 @@ export const useInstancev1APIGetVolumeQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Instancev1.GetVolumeResponse, Error>,
 ): ReturnType<typeof useDataLoader<Instancev1.GetVolumeResponse, Error>> => {
   const { instancev1 } = useInstancev1API()
-  const key = ["instancev1", "getVolume", ...Object.entries(params).flat(3).sort()]
+  const key = ["instancev1", "getVolume", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => instancev1.getVolume(params, { signal }), dataloaderConfig)
 }

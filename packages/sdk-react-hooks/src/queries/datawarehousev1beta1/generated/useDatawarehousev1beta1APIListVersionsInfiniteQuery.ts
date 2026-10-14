@@ -10,7 +10,7 @@ export const useDatawarehousev1beta1APIListVersionsInfiniteQuery = (
   dataloaderConfig?: UseInfiniteDataLoaderConfig<Datawarehousev1beta1.ListVersionsResponse, Error, typeof params, typeof pageParamKey>,
 ): ReturnType<typeof useInfiniteDataLoader<Datawarehousev1beta1.ListVersionsResponse, Error, typeof params, typeof pageParamKey>> => {
   const { datawarehousev1beta1 } = useDatawarehousev1beta1API()
-  const key = ["datawarehousev1beta1", "listVersions", ...Object.entries(params).flat(3).sort()]
+  const key = ["datawarehousev1beta1", "listVersions", ...Object.entries(params).flat(3).toSorted()]
 
   return useInfiniteDataLoader(key, (requestParams, { signal }) => datawarehousev1beta1.listVersions(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }

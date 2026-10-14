@@ -9,7 +9,7 @@ export const useIamv1alpha1APIGetSamlCertificateQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iamv1alpha1.SamlCertificate, Error>,
 ): ReturnType<typeof useDataLoader<Iamv1alpha1.SamlCertificate, Error>> => {
   const { iamv1alpha1 } = useIamv1alpha1API()
-  const key = ["iamv1alpha1", "getSamlCertificate", ...Object.entries(params).flat(3).sort()]
+  const key = ["iamv1alpha1", "getSamlCertificate", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => iamv1alpha1.getSamlCertificate(params, { signal }), dataloaderConfig)
 }

@@ -9,7 +9,7 @@ export const useMongodbv1APIGetInstanceQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Mongodbv1.Instance, Error>,
 ): ReturnType<typeof useDataLoader<Mongodbv1.Instance, Error>> => {
   const { mongodbv1 } = useMongodbv1API()
-  const key = ["mongodbv1", "getInstance", ...Object.entries(params).flat(3).sort()]
+  const key = ["mongodbv1", "getInstance", ...Object.entries(params).flat(3).toSorted()]
 
   return useDataLoader(key, ({ signal }) => mongodbv1.getInstance(params, { signal }), dataloaderConfig)
 }
