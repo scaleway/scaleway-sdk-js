@@ -1,5 +1,334 @@
 # Change Log
 
+## 2.33.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- feat(audit_trail/v1alpha1): add iam saml resources (#2408)
+
+- feat(account): add audit trail resource type for contract api (#2623)
+
+- feat(audit_trail): add mongodb resources (#2774)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3609)
+
+- fix: format (#2683)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat(audit_trail): add instances resources for disk management (#2345)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(audit_trail): add vpc-gw resources info (#2717)
+
+- feat(audit_trail): add baremetal resources and account (#2268)
+
+- chore(release): publish
+
+- feat(audit_trail): add instance template resource (#2599)
+
+- feat(audit_trail): support system events (#2415)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(audit_trail): add IngressRule resource (#2980)
+
+- feat(audit_trail): remove deprecated resource field (#2235)
+
+- feat(audit_trail): add instance server resource type (#2213)
+
+- chore(release): publish
+
+- feat: update generated APIs (#2568)
+
+- feat(audit_trail): add support for `principalId` and `sourceIp` (#2377)
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat(audit_trail): add authentication events in public API (#2374)
+
+- feat(audit_trail): allow digits in product name filter (#2578)
+
+- feat: update generated APIs (#3600)
+
+- feat(audit_trail): add resource types for VPC (#2664)
+
+- chore(release): publish
+
+- feat(audit_trail): add alerting (#2769)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(functions): add audit trail annotations (#3249)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(audit_trail): add support for interlink resource types (#3022)
+
+- feat(audit_trail): add apple-silicon resources definition (#2241)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(audit_trail): add observability resource infos (#3026)
+
+- feat(audit_trail): add vpc resources info (#2697)
+
+- feat(audit_trail): add support for `observability_datasource`, `observability_token` and `observability_exporter` (#2994)
+
+- feat(audit-trail): add support for `srn` (#3640)
+
+- feat(audit_trail): add VpcConnector resource (#2809)
+
+- chore(release): publish
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- fix(audit_trail): add export tags as repeated string (#2516)
+
+- feat(sdk): generated packages (#2029)
+
+- chore: reorganize import (#2520)
+
+- feat(audit_trail): add resource types for S2S VPN (#2590)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- feat(containers): add audit trail annotations (#3224)
+
+- chore(release): publish
+
+- feat(audit_trail): add edge services VPC endpoint resource type (#3042)
+
+- feat(audit_trail): add a new sfs_filesystem resource (#2369)
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- chore(deps): remove all unused deps (#3165)
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- docs(audit_trail): update description file (#2471)
+
+- fix(build): output (#2842)
+
+- feat(audit_trail): add last status to export job (#2485)
+
+- chore(release): publish
+
+- feat(audit_trail): add instance_private_nic resource type (#2855)
+
+- fix: export locality (#2200)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat(audit-trail): add support for `autoscaling_group` (#3050)
+
+- chore: format generated files (#2652)
+
+- feat(audit_trail): add private network resource (#2376)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- feat(audit_trail): add instance resources (#2342)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(audit_trail): add custom alerts (#3155)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(typescript): upgrade version (#2916)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(audit_trail): add export removal (#2452)
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore: fix formating (#2669)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- feat(audit_trail): add apple-silicon runner resource definition (#2777)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- feat(audit_trail): add phone number to account user info (#2181)
+
+- chore(release): publish
+
+- feat(audit_trail): add equal operator for string type (#3614)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- feat(audit_trail): add action name field on event (#3229)
+
+- feat(audit_trail): add account user and organization resources (#2131)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat: update generated APIs (#2881)
+
+- feat(audit_trail): replace action string by enum (#3302)
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- feat: add support for constants (#3286)
+
+- feat(audit_trail): add support for `EventSystem` (#2278)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- feat(api): update generated apis (#2885)
+
+- feat(audit-trail): add support for `gapi_dedicated_deployment` and `gapi_dedicated_model` (#3065)
+
+- feat(audit_trail): add exports listing (#2458)
+
+- chore(release): publish
+
+- feat(audit_trail): add lb resources (#2364)
+
+- feat(audit_trail): add endpoint for overview of auditTrail Event (#3069)
+
+- feat(audit_trail): audit alerting endpoint (#2808)
+
+- feat(audit_trail): add list system events (#2773)
+
+- refactor(audit_trail): rename vpc_vpc_connector (#2841)
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- feat(audit_trail): add edge-services resources (#2553)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(audit_trail): add support for `AuditTrailExportJobInfo` (#2734)
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- feat(audit_trail): add event export (#2447)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- feat(serverless_sqldb): add audit-trail parameters in ServerlessDB (#2919)
+
+- feat(audit_trail): add support for `wofl_workflow_version` (#3607)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.4
+
 ## 2.32.1
 
 ### Patch Changes

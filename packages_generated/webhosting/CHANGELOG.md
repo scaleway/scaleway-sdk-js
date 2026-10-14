@@ -1,5 +1,254 @@
 # Change Log
 
+## 2.23.0
+
+### Minor Changes
+
+- feat(webhosting): deprecate CheckUserOwnsDomain endpoint (#2329)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- fix: format (#2683)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(webhosting): fix typo on the description of the field is_default in OfferCommitment (#3100)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(webhosting): add new endpoint to migrate control panel (#2653)
+
+- chore(release): publish
+
+- feat(webhosting): extends offer api with commitment (#2793)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- fix(webhosting): require domain_name on RemoveCustomDomainRequest (#2385)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(webhosting): add payment_pending and payment_failed hosting status (#3110)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: update index (#2247)
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(release): publish
+
+- feat(webhosting): add create hosting request offer commitment id (#2833)
+
+- feat(sdk): generated packages (#2029)
+
+- chore: reorganize import (#2520)
+
+- chore(lint): update generated files (#2594)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- feat(webhosting): add custom domain to hosting (#2312)
+
+- chore(deps): remove all unused deps (#3165)
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- fix: read real exports from packages instead of guessing names to fix TypeScript compilation errors (#2460)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore: format generated files (#2652)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(webhosting): add delete_hosting_at_end to UpdateHostingRequest to toggle auto-renew (#3150)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat(webhosting): add public backup api (#2307)
+
+- feat(webhosting): use password in base64 (#2097)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(webhosting): add fields to backup api (#2511)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(typescript): upgrade version (#2916)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(webhosting): add public offers control panels list (#2559)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(webhosting): implement FreeDomainAPI (#2373)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(webhosting): add parent zone domain name (#2243)
+
+- chore: fix formating (#2669)
+
+- feat(webhosting): add support for `resetWebsite` (#2768)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat: update generated APIs (#3182)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(webhosting): add hosting provider (#3054)
+
+- feat: update generated APIs (#2881)
+
+- feat(webhosting): add offer option (#2555)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- feat: add support for constants (#3286)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(webhosting): add the `CreateWebsite` and `DeleteWebsite` endpoints (#2538)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore: new formating (#2667)
+
+- feat(webhosting): expose the field default on offer commitment (#3096)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(release): publish
+
+- feat(webhosting): add free subdomain support (#2302)
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.4
+
 ## 2.22.1
 
 ### Patch Changes

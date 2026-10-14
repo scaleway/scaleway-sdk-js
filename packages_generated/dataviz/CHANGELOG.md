@@ -1,5 +1,84 @@
 # Change Log
 
+## 1.12.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- feat(dataviz): add superset (#3126)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat: add support for constants (#3286)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.4
+
 ## 1.11.1
 
 ### Patch Changes

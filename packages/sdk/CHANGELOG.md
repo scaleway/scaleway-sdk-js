@@ -1,5 +1,64 @@
 # Change Log
 
+## 4.2.6
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-account@2.16.2
+  - @scaleway/sdk-annotations@1.11.1
+  - @scaleway/sdk-applesilicon@2.18.2
+  - @scaleway/sdk-audit-trail@2.33.0
+  - @scaleway/sdk-autoscaling@2.17.2
+  - @scaleway/sdk-baremetal@2.18.1
+  - @scaleway/sdk-billing@2.20.2
+  - @scaleway/sdk-block@2.21.0
+  - @scaleway/sdk-cockpit@2.16.2
+  - @scaleway/sdk-container@2.21.2
+  - @scaleway/sdk-datalab@1.15.2
+  - @scaleway/sdk-dataviz@1.12.0
+  - @scaleway/sdk-datawarehouse@2.22.2
+  - @scaleway/sdk-dedibox@2.20.0
+  - @scaleway/sdk-domain@2.18.2
+  - @scaleway/sdk-edge-services@2.27.2
+  - @scaleway/sdk-environmental-footprint@2.22.2
+  - @scaleway/sdk-file@2.19.0
+  - @scaleway/sdk-flexibleip@2.16.2
+  - @scaleway/sdk-function@2.18.2
+  - @scaleway/sdk-iam@2.21.2
+  - @scaleway/sdk-inference@2.20.2
+  - @scaleway/sdk-instance@2.25.0
+  - @scaleway/sdk-interlink@2.17.2
+  - @scaleway/sdk-iot@2.16.2
+  - @scaleway/sdk-ipam@2.19.2
+  - @scaleway/sdk-jobs@2.18.2
+  - @scaleway/sdk-k8s@2.29.2
+  - @scaleway/sdk-kafka@2.18.2
+  - @scaleway/sdk-key-manager@2.22.0
+  - @scaleway/sdk-lb@2.19.2
+  - @scaleway/sdk-mailbox@1.18.2
+  - @scaleway/sdk-marketplace@2.14.2
+  - @scaleway/sdk-messageq@1.13.0
+  - @scaleway/sdk-mnq@2.16.2
+  - @scaleway/sdk-mongodb@2.22.0
+  - @scaleway/sdk-partner@1.14.2
+  - @scaleway/sdk-product-catalog@2.33.0
+  - @scaleway/sdk-qaas@2.16.2
+  - @scaleway/sdk-rdb@2.19.2
+  - @scaleway/sdk-redis@2.17.2
+  - @scaleway/sdk-registry@2.16.2
+  - @scaleway/sdk-s2s-vpn@2.21.2
+  - @scaleway/sdk-search@1.18.2
+  - @scaleway/sdk-searchdb@1.18.0
+  - @scaleway/sdk-secret@2.17.1
+  - @scaleway/sdk-serverless-sqldb@2.18.2
+  - @scaleway/sdk-std@2.9.4
+  - @scaleway/sdk-tem@2.16.2
+  - @scaleway/sdk-test@2.16.2
+  - @scaleway/sdk-vpc@2.21.2
+  - @scaleway/sdk-vpcgw@2.18.2
+  - @scaleway/sdk-webhosting@2.23.0
+
 ## 4.2.5
 
 ### Patch Changes

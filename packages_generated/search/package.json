@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-search",
-  "version": "1.18.1",
+  "version": "1.18.2",
   "description": "Scaleway SDK search",
   "license": "Apache-2.0",
   "repository": {
