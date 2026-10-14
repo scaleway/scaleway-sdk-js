@@ -1,4 +1,4 @@
-import { AbortError } from '../../scw/fetch/abort-error.js'
+import { AbortError } from '../../scw/errors/abort-error.js'
 import type { RequestOptions } from '../../scw/fetch/types.js'
 import { sleep } from './sleep.js'
 

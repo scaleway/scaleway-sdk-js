@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { AbortError } from '../abort-error.js'
+import { AbortError } from '../../errors/abort-error.js'
 import type {
   CursorPaginatedContent,
   CursorPaginatedFetcher,

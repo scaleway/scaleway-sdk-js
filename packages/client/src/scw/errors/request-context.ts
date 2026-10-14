@@ -1,9 +1,9 @@
 /**
- * Request context attached to an {@link AbortError}.
+ * Request context attached to an error by the fetcher.
  *
  * @public
  */
-export type AbortErrorContext = {
+export type RequestContext = {
   /** The request URL. */
   url: string
   /** The HTTP method used for the request. */
@@ -15,11 +15,12 @@ export type AbortErrorContext = {
 }
 
 /**
- * Error thrown when a request or a polling loop is cancelled via an {@link AbortSignal}.
+ * Base class for errors that can carry the request context attached by the fetcher.
  *
  * @public
  */
-export class AbortError extends Error {
+// oxlint-disable-next-line unicorn/custom-error-definition -- abstract base, never instantiated directly
+export abstract class ErrorWithRequestContext extends Error {
   /** The request URL, set when the fetcher attaches its context. */
   public url: string | undefined
   /** The HTTP method used for the request, set when the fetcher attaches its context. */
@@ -29,31 +30,15 @@ export class AbortError extends Error {
   /** The request headers with secrets obfuscated, set when the fetcher attaches its context. */
   public requestHeaders: Headers | undefined
 
-  public constructor(message = 'The operation was aborted') {
-    super(message)
-    this.name = 'AbortError'
-  }
-
   /**
    * Attaches the request context to the error.
    *
    * @param context - The request context
    */
-  public setRequestContext(context: AbortErrorContext): void {
+  public setRequestContext(context: RequestContext): void {
     this.url = context.url
     this.method = context.method
     this.requestId = context.requestId
     this.requestHeaders = context.requestHeaders
   }
 }
-
-/**
- * Returns whether the given error is an {@link AbortError}.
- *
- * @param err - The error to check
- * @returns True if the error is an abort error
- *
- * @public
- */
-export const isAbortError = (err: unknown): err is AbortError =>
-  err instanceof AbortError || (err instanceof Error && err.name === 'AbortError')

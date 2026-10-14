@@ -1,4 +1,4 @@
-import { AbortError } from './abort-error.js'
+import { AbortError } from '../errors/abort-error.js'
 import type { RequestOptions } from './types.js'
 
 type PaginationOptions = {

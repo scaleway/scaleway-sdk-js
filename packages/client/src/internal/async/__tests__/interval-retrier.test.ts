@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { AbortError } from '../../../scw/fetch/abort-error.js'
+import { AbortError } from '../../../scw/errors/abort-error.js'
 import {
   createExponentialBackoffStrategy,
   createFibonacciIntervalStrategy,
