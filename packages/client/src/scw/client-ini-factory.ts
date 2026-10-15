@@ -34,10 +34,10 @@ export const withProfile =
     if (typeof profile.defaultProjectId === 'string' && profile.defaultProjectId !== '') {
       newSettings.defaultProjectId = profile.defaultProjectId
     }
-    if (typeof profile.defaultRegion === 'string' && profile.defaultRegion !== '') {
+    if (typeof profile.defaultRegion === 'string') {
       newSettings.defaultRegion = profile.defaultRegion
     }
-    if (typeof profile.defaultZone === 'string' && profile.defaultZone !== '') {
+    if (typeof profile.defaultZone === 'string') {
       newSettings.defaultZone = profile.defaultZone
     }
     if (hasAuthenticationSecrets(profile)) {
