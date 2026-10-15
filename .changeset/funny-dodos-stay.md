@@ -1,5 +1,5 @@
 ---
-"@scaleway/sdk-client": patch
+'@scaleway/sdk-client': patch
 ---
 
 unmarshalDate never returns undefined- #3725
