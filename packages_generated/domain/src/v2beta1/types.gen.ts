@@ -278,6 +278,9 @@ export interface DomainRecordWeightedConfigWeightedIP {
 
 
 export interface DSRecordPublicKey {
+  /**
+   * The public key string.
+   */
   key: string
 }
 
@@ -335,8 +338,17 @@ export interface ContactExtensionFRTrademarkInfo {
 
 
 export interface DSRecordDigest {
+  /**
+   * The digest type of the DS record.
+   */
   type: DSRecordDigestType
+  /**
+   * The digest string of the DS record.
+   */
   digest: string
+  /**
+   * The public key associated with the digest.
+   */
   publicKey?: DSRecordPublicKey
 }
 
@@ -450,21 +462,38 @@ export interface ContactQuestion {
 
 
 export interface TldOffer {
+  /**
+   * The action of the offer (create, renew, transfer, etc.).
+   */
   action: string
+  /**
+   * The operation path of the offer.
+   */
   operationPath: string
+  /**
+   * The price of the offer.
+   */
   price?: Money
 }
 
 
 export interface DSRecord {
+  /**
+   * The key tag of the DS record.
+   */
   keyId: number
+  /**
+   * The cryptographic algorithm used for the DS record.
+   */
   algorithm: DSRecordAlgorithm
   /**
+   * The digest of the DS record.
    *
    * One-of ('type'): at most one of 'digest', 'publicKey' could be set.
    */
   digest?: DSRecordDigest
   /**
+   * The public key of the DS record.
    *
    * One-of ('type'): at most one of 'digest', 'publicKey' could be set.
    */
@@ -518,31 +547,109 @@ export interface ImportRawDNSZoneRequestTsigKey {
 
 
 export interface Contact {
+  /**
+   * The unique identifier of the contact.
+   */
   id: string
+  /**
+   * Legal form of the contact (individual, corporate, association, other).
+   */
   legalForm: ContactLegalForm
+  /**
+   * First name of the contact.
+   */
   firstname: string
+  /**
+   * Last name of the contact.
+   */
   lastname: string
+  /**
+   * Company name of the contact (required for corporate legal forms).
+   */
   companyName: string
+  /**
+   * Email address of the contact.
+   */
   email: string
+  /**
+   * Alternative email address of the contact.
+   */
   emailAlt: string
+  /**
+   * Phone number of the contact.
+   */
   phoneNumber: string
+  /**
+   * Fax number of the contact.
+   */
   faxNumber: string
+  /**
+   * First line of the contact's address.
+   */
   addressLine1: string
+  /**
+   * Second line of the contact's address.
+   */
   addressLine2: string
+  /**
+   * Postal code of the contact.
+   */
   zip: string
+  /**
+   * City of the contact.
+   */
   city: string
+  /**
+   * Country code of the contact (ISO 3166-1 alpha-2 format).
+   */
   country: string
+  /**
+   * VAT identification code of the contact.
+   */
   vatIdentificationCode: string
+  /**
+   * Company identification code (e.g. SIRET/SIREN) of the contact.
+   */
   companyIdentificationCode: string
+  /**
+   * Preferred language of the contact.
+   */
   lang: StdLanguageCode
+  /**
+   * Indicates whether the contact's information can be resold.
+   */
   resale: boolean
+  /**
+   * Additional information required for .fr domains.
+   */
   extensionFr?: ContactExtensionFR
+  /**
+   * Additional information required for .eu domains.
+   */
   extensionEu?: ContactExtensionEU
+  /**
+   * Indicates whether the contact's information is published in the WHOIS database.
+   */
   whoisOptIn: boolean
+  /**
+   * Email validation status of the contact.
+   */
   emailStatus: ContactEmailStatus
+  /**
+   * State or region of the contact.
+   */
   state: string
+  /**
+   * Additional information required for .nl domains.
+   */
   extensionNl?: ContactExtensionNL
+  /**
+   * Status of the contact.
+   */
   status: ContactStatus
+  /**
+   * Additional information required for .it domains.
+   */
   extensionIt?: ContactExtensionIT
   /**
    * @deprecated 
@@ -552,58 +659,169 @@ export interface Contact {
 
 
 export interface ContactRolesRoles {
+  /**
+   * Indicates whether the contact is the owner of the domain.
+   */
   isOwner: boolean
+  /**
+   * Indicates whether the contact is the administrative contact of the domain.
+   */
   isAdministrative: boolean
+  /**
+   * Indicates whether the contact is the technical contact of the domain.
+   */
   isTechnical: boolean
 }
 
 
 export interface DomainRegistrationStatusExternalDomain {
+  /**
+   * Validation token for the external domain registration.
+   */
   validationToken: string
 }
 
 
 export interface DomainRegistrationStatusTransfer {
+  /**
+   * Status of the domain transfer.
+   */
   status: DomainRegistrationStatusTransferStatus
+  /**
+   * Indicates whether the current owner has voted for the transfer.
+   */
   voteCurrentOwner: boolean
+  /**
+   * Indicates whether the new owner has voted for the transfer.
+   */
   voteNewOwner: boolean
 }
 
 
 export interface Tld {
+  /**
+   * The TLD name.
+   */
   name: string
+  /**
+   * Indicates whether the TLD supports DNSSEC.
+   */
   dnssecSupport: boolean
+  /**
+   * Minimum registration duration in years for the TLD.
+   */
   durationInYearsMin: number
+  /**
+   * Maximum registration duration in years for the TLD.
+   */
   durationInYearsMax: number
+  /**
+   * Indicates whether the TLD supports internationalized domain names (IDN).
+   */
   idnSupport: boolean
+  /**
+   * Available offers (create, renew, transfer, etc.) for the TLD.
+   */
   offers: Record<string, TldOffer>
+  /**
+   * Additional specifications of the TLD.
+   */
   specifications: Record<string, string>
 }
 
 
 export interface NewContact {
+  /**
+   * Legal form of the contact (individual, corporate, association, other).
+   */
   legalForm: ContactLegalForm
+  /**
+   * First name of the contact.
+   */
   firstname: string
+  /**
+   * Last name of the contact.
+   */
   lastname: string
+  /**
+   * Company name of the contact (required for corporate legal forms).
+   */
   companyName?: string
+  /**
+   * Email address of the contact.
+   */
   email: string
+  /**
+   * Alternative email address of the contact.
+   */
   emailAlt?: string
+  /**
+   * Phone number of the contact.
+   */
   phoneNumber: string
+  /**
+   * Fax number of the contact.
+   */
   faxNumber?: string
+  /**
+   * First line of the contact's address.
+   */
   addressLine1: string
+  /**
+   * Second line of the contact's address.
+   */
   addressLine2?: string
+  /**
+   * Postal code of the contact.
+   */
   zip: string
+  /**
+   * City of the contact.
+   */
   city: string
+  /**
+   * Country code of the contact (ISO 3166-1 alpha-2 format).
+   */
   country: string
+  /**
+   * VAT identification code of the contact.
+   */
   vatIdentificationCode?: string
+  /**
+   * Company identification code (e.g. SIRET/SIREN) of the contact.
+   */
   companyIdentificationCode?: string
+  /**
+   * Preferred language of the contact.
+   */
   lang: StdLanguageCode
+  /**
+   * Indicates whether the contact's information can be resold.
+   */
   resale: boolean
+  /**
+   * Additional information required for .fr domains.
+   */
   extensionFr?: ContactExtensionFR
+  /**
+   * Additional information required for .eu domains.
+   */
   extensionEu?: ContactExtensionEU
+  /**
+   * Indicates whether the contact's information is published in the WHOIS database.
+   */
   whoisOptIn: boolean
+  /**
+   * State or region of the contact.
+   */
   state?: string
+  /**
+   * Additional information required for .nl domains.
+   */
   extensionNl?: ContactExtensionNL
+  /**
+   * Additional information required for .it domains.
+   */
   extensionIt?: ContactExtensionIT
   /**
    * @deprecated 
@@ -633,7 +851,13 @@ export interface DNSZone {
 
 
 export interface DomainDNSSEC {
+  /**
+   * Status of the DNSSEC configuration of the domain.
+   */
   status: DomainFeatureStatus
+  /**
+   * List of the domain's DS records.
+   */
   dsRecords: DSRecord[]
 }
 
@@ -679,7 +903,13 @@ export interface ImportRawDNSZoneRequestBindSource {
 
 
 export interface ContactRoles {
+  /**
+   * The contact information.
+   */
   contact?: Contact
+  /**
+   * Map of domain names to the contact's roles on each domain.
+   */
   roles: Record<string, ContactRolesRoles>
 }
 
@@ -697,36 +927,89 @@ export interface DNSZoneVersion {
 
 
 export interface Host {
+  /**
+   * The domain name associated with the hostname.
+   */
   domain: string
+  /**
+   * The hostname.
+   */
   name: string
+  /**
+   * List of glue IP addresses associated with the hostname.
+   */
   ips: string[]
+  /**
+   * Status of the hostname.
+   */
   status: HostStatus
 }
 
 
 export interface DomainSummary {
+  /**
+   * The domain name.
+   */
   domain: string
+  /**
+   * The project ID associated with the domain.
+   */
   projectId: string
+  /**
+   * The organization ID associated with the domain.
+   */
+  organizationId: string
+  /**
+   * Status of the automatic renewal of the domain.
+   */
   autoRenewStatus: DomainFeatureStatus
+  /**
+   * Status of the DNSSEC configuration of the domain.
+   */
   dnssecStatus: DomainFeatureStatus
+  /**
+   * List of the domain's EPP codes.
+   */
   eppCode: string[]
+  /**
+   * Date of expiration of the domain.
+   */
   expiredAt?: Date
+  /**
+   * Domain's last modification date.
+   */
   updatedAt?: Date
+  /**
+   * Domain's creation date.
+   */
+  createdAt?: Date
+  /**
+   * The registrar managing the domain.
+   */
   registrar: string
+  /**
+   * Indicates whether Scaleway is the domain's registrar.
+   */
   isExternal: boolean
+  /**
+   * Status of the domain.
+   */
   status: DomainStatus
   /**
+   * Registration status of an external domain, if available.
    *
    * One-of ('registrationStatus'): at most one of 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
    */
   externalDomainRegistrationStatus?: DomainRegistrationStatusExternalDomain
   /**
+   * Status of a domain, when available for transfer.
    *
    * One-of ('registrationStatus'): at most one of 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
    */
   transferRegistrationStatus?: DomainRegistrationStatusTransfer
-  organizationId: string
-  createdAt?: Date
+  /**
+   * Indicates if a trade is ongoing.
+   */
   pendingTrade: boolean
 }
 
@@ -768,15 +1051,45 @@ export interface InboundTransfer {
 
 
 export interface RenewableDomain {
+  /**
+   * The domain name.
+   */
   domain: string
+  /**
+   * The project ID associated with the domain.
+   */
   projectId: string
+  /**
+   * The organization ID associated with the domain.
+   */
   organizationId: string
+  /**
+   * The renewal status of the domain.
+   */
   status: RenewableDomainStatus
+  /**
+   * Duration in years for which the domain can be renewed.
+   */
   renewableDurationInYears?: number
+  /**
+   * Date of expiration of the domain.
+   */
   expiredAt?: Date
+  /**
+   * Deadline to renew the domain before it enters the late renewal period.
+   */
   limitRenewAt?: Date
+  /**
+   * Deadline to renew the domain before it enters the redemption period.
+   */
   limitRedemptionAt?: Date
+  /**
+   * Estimated date at which the domain will be deleted.
+   */
   estimatedDeleteAt?: Date
+  /**
+   * TLD information of the domain.
+   */
   tld?: Tld
 }
 
@@ -849,16 +1162,37 @@ export interface UpdateContactRequestQuestion {
 
 
 export interface AvailableDomain {
+  /**
+   * The domain name.
+   */
   domain: string
+  /**
+   * Indicates whether the domain is available for registration.
+   */
   available: boolean
+  /**
+   * TLD information of the domain.
+   */
   tld?: Tld
 }
 
 
 export interface CheckContactsCompatibilityResponse {
+  /**
+   * Indicates whether all contacts are compatible with the domains or TLDs.
+   */
   compatible: boolean
+  /**
+   * Compatibility check result for the owner contact.
+   */
   ownerCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
+  /**
+   * Compatibility check result for the administrative contact.
+   */
   administrativeCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
+  /**
+   * Compatibility check result for the technical contact.
+   */
   technicalCheckResult?: CheckContactsCompatibilityResponseContactCheckResult
 }
 
@@ -952,8 +1286,17 @@ export interface DeleteSSLCertificateResponse {
 
 
 export interface Domain {
+  /**
+   * The domain name.
+   */
   domain: string
+  /**
+   * The organization ID associated with the domain.
+   */
   organizationId: string
+  /**
+   * The project ID associated with the domain.
+   */
   projectId: string
   /**
    * Status of the automatic renewal of the domain.
@@ -975,6 +1318,9 @@ export interface Domain {
    * Domain's last modification date.
    */
   updatedAt?: Date
+  /**
+   * The registrar managing the domain.
+   */
   registrar: string
   /**
    * Indicates whether Scaleway is the domain's registrar.
@@ -1062,6 +1408,9 @@ export interface GetDNSZoneVersionDiffResponse {
 
 
 export interface GetDomainAuthCodeResponse {
+  /**
+   * The authorization code to transfer the domain.
+   */
   authCode: string
 }
 
@@ -1121,7 +1470,13 @@ export interface ImportRawDNSZoneResponse {
 
 
 export interface ListContactsResponse {
+  /**
+   * Total count of contacts matching the request.
+   */
   totalCount: number
+  /**
+   * List of contacts with their associated roles.
+   */
   contacts: ContactRoles[]
 }
 
@@ -1303,25 +1658,49 @@ export interface ListDNSZonesResponse {
 
 
 export interface ListDomainHostsResponse {
+  /**
+   * Total count of hostnames matching the request.
+   */
   totalCount: number
+  /**
+   * List of hostnames matching the request.
+   */
   hosts: Host[]
 }
 
 
 export interface ListDomainsResponse {
+  /**
+   * Total count of domains matching the request.
+   */
   totalCount: number
+  /**
+   * List of domains matching the request.
+   */
   domains: DomainSummary[]
 }
 
 
 export interface ListInboundTransfersResponse {
+  /**
+   * Total count of inbound transfers matching the request.
+   */
   totalCount: number
+  /**
+   * List of inbound transfers matching the request.
+   */
   inboundTransfers: InboundTransfer[]
 }
 
 
 export interface ListRenewableDomainsResponse {
+  /**
+   * Total count of renewable domains matching the request.
+   */
   totalCount: number
+  /**
+   * List of renewable domains matching the request.
+   */
   domains: RenewableDomain[]
 }
 
@@ -1341,7 +1720,13 @@ export interface ListSSLCertificatesResponse {
 
 
 export interface ListTasksResponse {
+  /**
+   * Total count of tasks matching the request.
+   */
   totalCount: number
+  /**
+   * List of tasks matching the request.
+   */
   tasks: Task[]
 }
 
@@ -1359,10 +1744,25 @@ export interface ListTldsResponse {
 
 
 export interface OrderResponse {
+  /**
+   * List of domains in the order.
+   */
   domains: string[]
+  /**
+   * The organization ID associated with the order.
+   */
   organizationId: string
+  /**
+   * The project ID associated with the order.
+   */
   projectId: string
+  /**
+   * The unique identifier of the task associated with the order.
+   */
   taskId: string
+  /**
+   * The creation date of the order.
+   */
   createdAt?: Date
 }
 
@@ -1392,44 +1792,74 @@ export interface RefreshDNSZoneResponse {
 
 
 export interface RegisterExternalDomainResponse {
+  /**
+   * The external domain name registered.
+   */
   domain: string
+  /**
+   * The organization ID associated with the external domain.
+   */
   organizationId: string
-  validationToken: string
-  createdAt?: Date
+  /**
+   * The project ID associated with the external domain.
+   */
   projectId: string
+  /**
+   * The validation token to use to validate the external domain.
+   */
+  validationToken: string
+  /**
+   * The creation date of the external domain registration.
+   */
+  createdAt?: Date
 }
 
 
 export type RegistrarApiBuyDomainsRequest = {
+  /**
+   * List of domains to purchase.
+   */
   domains: string[]
+  /**
+   * Duration in years for the domain registration.
+   */
   durationInYears: number
+  /**
+   * Project ID to create the domains in.
+   */
   projectId?: string
   /**
+   * ID of the existing contact to use as the domain's owner.
    *
    * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
+   * New contact to create and use as the domain's owner.
    *
    * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
+   * ID of the existing contact to use as the domain's administrative contact.
    *
    * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
+   * New contact to create and use as the domain's administrative contact.
    *
    * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContact?: NewContact
   /**
+   * ID of the existing contact to use as the domain's technical contact.
    *
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
+   * New contact to create and use as the domain's technical contact.
    *
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
@@ -1442,34 +1872,46 @@ export type RegistrarApiBuyDomainsRequest = {
 
 
 export type RegistrarApiCheckContactsCompatibilityRequest = {
+  /**
+   * List of domains to check contacts compatibility against.
+   */
   domains?: string[]
+  /**
+   * List of TLDs to check contacts compatibility against.
+   */
   tlds?: string[]
   /**
+   * ID of the existing contact to check as the domain's owner.
    *
    * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
+   * New contact to check as the domain's owner.
    *
    * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
+   * ID of the existing contact to check as the domain's administrative contact.
    *
    * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
+   * New contact to check as the domain's administrative contact.
    *
    * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContact?: NewContact
   /**
+   * ID of the existing contact to check as the domain's technical contact.
    *
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
+   * New contact to check as the domain's technical contact.
    *
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
@@ -1478,116 +1920,269 @@ export type RegistrarApiCheckContactsCompatibilityRequest = {
 
 
 export type RegistrarApiCreateDomainHostRequest = {
+  /**
+   * The domain name to create the hostname for.
+   */
   domain: string
+  /**
+   * The hostname to create.
+   */
   name: string
+  /**
+   * List of glue IP addresses associated with the hostname.
+   */
   ips?: string[]
 }
 
 
 export type RegistrarApiDeleteDomainHostRequest = {
+  /**
+   * The domain name of the hostname to delete.
+   */
   domain: string
+  /**
+   * The hostname to delete.
+   */
   name: string
 }
 
 
 export type RegistrarApiDeleteExternalDomainRequest = {
+  /**
+   * The external domain name to delete.
+   */
   domain: string
 }
 
 
 export type RegistrarApiDisableDomainAutoRenewRequest = {
+  /**
+   * The domain name to disable auto renew for.
+   */
   domain: string
 }
 
 
 export type RegistrarApiDisableDomainDNSSECRequest = {
+  /**
+   * The domain name to disable DNSSEC for.
+   */
   domain: string
 }
 
 
 export type RegistrarApiEnableDomainAutoRenewRequest = {
+  /**
+   * The domain name to enable auto renew for.
+   */
   domain: string
 }
 
 
 export type RegistrarApiEnableDomainDNSSECRequest = {
+  /**
+   * The domain name to enable DNSSEC for.
+   */
   domain: string
+  /**
+   * The DS record to configure for DNSSEC. If omitted, the DS record will be automatically generated.
+   */
   dsRecord?: DSRecord
 }
 
 
 export type RegistrarApiGetContactRequest = {
+  /**
+   * ID of the contact to retrieve.
+   */
   contactId: string
 }
 
 
 export type RegistrarApiGetDomainAuthCodeRequest = {
+  /**
+   * The domain name to retrieve the authorization code for.
+   */
   domain: string
 }
 
 
 export type RegistrarApiGetDomainRequest = {
+  /**
+   * The domain name to retrieve.
+   */
   domain: string
 }
 
 
 export type RegistrarApiListContactsRequest = {
+  /**
+   * Page number for the returned contacts.
+   */
   page?: number
+  /**
+   * Maximum number of contacts per page.
+   */
   pageSize?: number
+  /**
+   * Filter contacts by domain name.
+   */
   domain?: string
+  /**
+   * Filter contacts by project ID.
+   */
   projectId?: string
+  /**
+   * Filter contacts by organization ID.
+   */
   organizationId?: string
+  /**
+   * Filter contacts by role (owner, administrative, technical).
+   */
   role?: ListContactsRequestRole
+  /**
+   * Filter contacts by email validation status.
+   */
   emailStatus?: ContactEmailStatus
 }
 
 
 export type RegistrarApiListDomainHostsRequest = {
+  /**
+   * The domain name to list hostnames for.
+   */
   domain: string
+  /**
+   * Page number for the returned hostnames.
+   */
   page?: number
+  /**
+   * Maximum number of hostnames per page.
+   */
   pageSize?: number
 }
 
 
 export type RegistrarApiListDomainsRequest = {
+  /**
+   * Page number for the returned domains.
+   */
   page?: number
+  /**
+   * Maximum number of domains per page.
+   */
   pageSize?: number
+  /**
+   * Sort order of the returned domains.
+   */
   orderBy?: ListDomainsRequestOrderBy
+  /**
+   * Filter domains by registrar.
+   */
   registrar?: string
+  /**
+   * Filter domains by status.
+   */
   status?: DomainStatus
+  /**
+   * Filter domains by project ID.
+   */
   projectId?: string
+  /**
+   * Filter domains by organization ID.
+   */
   organizationId?: string
+  /**
+   * Filter domains by external status.
+   */
   isExternal?: boolean
+  /**
+   * Filter domains by domain name.
+   */
   domain?: string
 }
 
 
 export type RegistrarApiListInboundTransfersRequest = {
+  /**
+   * Page number for the returned inbound transfers.
+   */
   page: number
+  /**
+   * Maximum number of inbound transfers per page.
+   */
   pageSize?: number
+  /**
+   * Filter inbound transfers by project ID.
+   */
   projectId?: string
+  /**
+   * Filter inbound transfers by organization ID.
+   */
   organizationId?: string
+  /**
+   * Filter inbound transfers by domain name.
+   */
   domain: string
 }
 
 
 export type RegistrarApiListRenewableDomainsRequest = {
+  /**
+   * Page number for the returned renewable domains.
+   */
   page?: number
+  /**
+   * Maximum number of renewable domains per page.
+   */
   pageSize?: number
+  /**
+   * Sort order of the returned renewable domains.
+   */
   orderBy?: ListRenewableDomainsRequestOrderBy
+  /**
+   * Filter renewable domains by project ID.
+   */
   projectId?: string
+  /**
+   * Filter renewable domains by organization ID.
+   */
   organizationId?: string
 }
 
 
 export type RegistrarApiListTasksRequest = {
+  /**
+   * Page number for the returned tasks.
+   */
   page?: number
+  /**
+   * Maximum number of tasks per page.
+   */
   pageSize?: number
+  /**
+   * Filter tasks by project ID.
+   */
   projectId?: string
+  /**
+   * Filter tasks by organization ID.
+   */
   organizationId?: string
+  /**
+   * Filter tasks by domain name.
+   */
   domain?: string
+  /**
+   * Filter tasks by type.
+   */
   types?: TaskType[]
+  /**
+   * Filter tasks by status.
+   */
   statuses?: TaskStatus[]
+  /**
+   * Sort order of the returned tasks.
+   */
   orderBy?: ListTasksRequestOrderBy
 }
 
@@ -1613,19 +2208,37 @@ export type RegistrarApiListTldsRequest = {
 
 
 export type RegistrarApiLockDomainTransferRequest = {
+  /**
+   * The domain name to lock for transfer.
+   */
   domain: string
 }
 
 
 export type RegistrarApiRegisterExternalDomainRequest = {
+  /**
+   * The external domain name to register.
+   */
   domain: string
+  /**
+   * Project ID to register the external domain in.
+   */
   projectId?: string
 }
 
 
 export type RegistrarApiRenewDomainsRequest = {
+  /**
+   * List of domains to renew.
+   */
   domains: string[]
+  /**
+   * Duration in years for the domain renewal.
+   */
   durationInYears: number
+  /**
+   * Force the renewal to be a late renewal.
+   */
   forceLateRenewal?: boolean
 }
 
@@ -1667,14 +2280,22 @@ export type RegistrarApiSearchAvailableDomainsRequest = {
 
 
 export type RegistrarApiTradeDomainRequest = {
+  /**
+   * The domain name to trade.
+   */
   domain: string
+  /**
+   * Project ID to associate with the domain after the trade.
+   */
   projectId?: string
   /**
+   * ID of the existing contact to use as the domain's new owner.
    *
    * One-of ('newOwnerContactType'): at most one of 'newOwnerContactId', 'newOwnerContact' could be set.
    */
   newOwnerContactId?: string
   /**
+   * New contact to create and use as the domain's new owner.
    *
    * One-of ('newOwnerContactType'): at most one of 'newOwnerContactId', 'newOwnerContact' could be set.
    */
@@ -1683,34 +2304,46 @@ export type RegistrarApiTradeDomainRequest = {
 
 
 export type RegistrarApiTransferInDomainRequest = {
+  /**
+   * List of domains to transfer in, each with its auth code.
+   */
   domains: TransferInDomainRequestTransferRequest[]
+  /**
+   * Project ID to transfer the domains into.
+   */
   projectId?: string
   /**
+   * ID of the existing contact to use as the domain's owner.
    *
    * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
+   * New contact to create and use as the domain's owner.
    *
    * One-of ('ownerContactType'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
+   * ID of the existing contact to use as the domain's administrative contact.
    *
    * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
+   * New contact to create and use as the domain's administrative contact.
    *
    * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContact?: NewContact
   /**
+   * ID of the existing contact to use as the domain's technical contact.
    *
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
+   * New contact to create and use as the domain's technical contact.
    *
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
@@ -1719,30 +2352,93 @@ export type RegistrarApiTransferInDomainRequest = {
 
 
 export type RegistrarApiUnlockDomainTransferRequest = {
+  /**
+   * The domain name to unlock for transfer.
+   */
   domain: string
 }
 
 
 export type RegistrarApiUpdateContactRequest = {
+  /**
+   * ID of the contact to update.
+   */
   contactId: string
+  /**
+   * Email address of the contact.
+   */
   email?: string
+  /**
+   * Alternative email address of the contact.
+   */
   emailAlt?: string
+  /**
+   * Phone number of the contact.
+   */
   phoneNumber?: string
+  /**
+   * Fax number of the contact.
+   */
   faxNumber?: string
+  /**
+   * First line of the contact's address.
+   */
   addressLine1?: string
+  /**
+   * Second line of the contact's address.
+   */
   addressLine2?: string
+  /**
+   * Postal code of the contact.
+   */
   zip?: string
+  /**
+   * City of the contact.
+   */
   city?: string
+  /**
+   * Country code of the contact (ISO 3166-1 alpha-2 format).
+   */
   country?: string
+  /**
+   * VAT identification code of the contact.
+   */
   vatIdentificationCode?: string
+  /**
+   * Company identification code (e.g. SIRET/SIREN) of the contact.
+   */
   companyIdentificationCode?: string
+  /**
+   * Preferred language of the contact.
+   */
   lang?: StdLanguageCode
+  /**
+   * Indicates whether the contact's information can be resold.
+   */
   resale?: boolean
+  /**
+   * Additional information required for .fr domains.
+   */
   extensionFr?: ContactExtensionFR
+  /**
+   * Additional information required for .eu domains.
+   */
   extensionEu?: ContactExtensionEU
+  /**
+   * Additional information required for .nl domains.
+   */
   extensionNl?: ContactExtensionNL
+  /**
+   * Additional information required for .it domains.
+   */
   extensionIt?: ContactExtensionIT
+  /**
+   * Indicates whether the contact's information is published in the WHOIS database.
+   */
   whoisOptIn?: boolean
+  /**
+   * State or region of the contact.
+   */
   state?: string
   /**
    * @deprecated 
@@ -1752,42 +2448,58 @@ export type RegistrarApiUpdateContactRequest = {
 
 
 export type RegistrarApiUpdateDomainHostRequest = {
+  /**
+   * The domain name of the hostname to update.
+   */
   domain: string
+  /**
+   * The hostname to update.
+   */
   name: string
+  /**
+   * New list of glue IP addresses associated with the hostname.
+   */
   ips?: string[]
 }
 
 
 export type RegistrarApiUpdateDomainRequest = {
+  /**
+   * The domain name to update.
+   */
   domain: string
   /**
+   * ID of the existing contact to use as the domain's technical contact.
    *
    * One-of ('technicalContactInfo'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
+   * New contact to create and use as the domain's technical contact.
    *
    * One-of ('technicalContactInfo'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContact?: NewContact
   /**
-   * @deprecated 
+   * @deprecated Deprecated. ID of the existing contact to use as the domain's owner.
    *
    * One-of ('ownerContactInfo'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContactId?: string
   /**
-   * @deprecated 
+   * @deprecated Deprecated. New contact to create and use as the domain's owner.
    *
    * One-of ('ownerContactInfo'): at most one of 'ownerContactId', 'ownerContact' could be set.
    */
   ownerContact?: NewContact
   /**
+   * ID of the existing contact to use as the domain's administrative contact.
    *
    * One-of ('administrativeContactInfo'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
+   * New contact to create and use as the domain's administrative contact.
    *
    * One-of ('administrativeContactInfo'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
