@@ -388,6 +388,106 @@ export type ServiceType =
   | 'service'
   | 'order'
 
+export interface OS {
+  /**
+   * ID of the OS.
+   */
+  id: number
+  /**
+   * Name of the OS.
+   */
+  name: string
+  /**
+   * Type of the OS.
+   */
+  type: OSType
+  /**
+   * Version of the OS.
+   */
+  version: string
+  /**
+   * Architecture of the OS.
+   */
+  arch: OSArch
+  /**
+   * True if the OS allow custom partitioning.
+   */
+  allowCustomPartitioning: boolean
+  /**
+   * True if the OS allow SSH Keys.
+   */
+  allowSshKeys: boolean
+  /**
+   * True if the OS requires user.
+   */
+  requiresUser: boolean
+  /**
+   * True if the OS requires admin password.
+   */
+  requiresAdminPassword: boolean
+  /**
+   * True if the OS requires panel password.
+   */
+  requiresPanelPassword: boolean
+  /**
+   * True if the OS allow file systems.
+   */
+  allowedFilesystems: PartitionFileSystem[]
+  /**
+   * True if the OS requires license.
+   */
+  requiresLicense: boolean
+  /**
+   * License offers available with the OS.
+   */
+  licenseOffers: Offer[]
+  /**
+   * Maximum number of partitions which can be created.
+   */
+  maxPartitions?: number
+  /**
+   * Display name of the OS.
+   */
+  displayName: string
+  /**
+   * Regex used to validate the installation passwords.
+   */
+  passwordRegex: string
+  /**
+   * Regex used to validate the panel installation password.
+   */
+  panelPasswordRegex?: string
+  /**
+   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
+   */
+  requiresValidHostname?: boolean
+  /**
+   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
+   */
+  hostnameRegex?: string
+  /**
+   * Hostname max length.
+   */
+  hostnameMaxLength: number
+  /**
+   * OS release date.
+   */
+  releasedAt?: Date
+  /**
+   * Is it a beta OS.
+   */
+  beta: string
+  /**
+   * Description of the OS.
+   */
+  description: string
+  /**
+   * URL to OS official website.
+   */
+  officialWebsite: string
+}
+
+
 export interface OfferAntiDosInfo {
   type: OfferAntiDosInfoType
 }
@@ -600,6 +700,10 @@ export interface Offer {
    * Commitment info if it is a commitment offer.
    */
   commitments: OfferCommitment[]
+  /**
+   * Available OS info if it is a available OS offer.
+   */
+  availableOs: OS[]
 }
 
 
@@ -624,106 +728,6 @@ export interface NetworkInterface {
    * IPs of the network interface.
    */
   ips: IP[]
-}
-
-
-export interface OS {
-  /**
-   * ID of the OS.
-   */
-  id: number
-  /**
-   * Name of the OS.
-   */
-  name: string
-  /**
-   * Type of the OS.
-   */
-  type: OSType
-  /**
-   * Version of the OS.
-   */
-  version: string
-  /**
-   * Architecture of the OS.
-   */
-  arch: OSArch
-  /**
-   * True if the OS allow custom partitioning.
-   */
-  allowCustomPartitioning: boolean
-  /**
-   * True if the OS allow SSH Keys.
-   */
-  allowSshKeys: boolean
-  /**
-   * True if the OS requires user.
-   */
-  requiresUser: boolean
-  /**
-   * True if the OS requires admin password.
-   */
-  requiresAdminPassword: boolean
-  /**
-   * True if the OS requires panel password.
-   */
-  requiresPanelPassword: boolean
-  /**
-   * True if the OS allow file systems.
-   */
-  allowedFilesystems: PartitionFileSystem[]
-  /**
-   * True if the OS requires license.
-   */
-  requiresLicense: boolean
-  /**
-   * License offers available with the OS.
-   */
-  licenseOffers: Offer[]
-  /**
-   * Maximum number of partitions which can be created.
-   */
-  maxPartitions?: number
-  /**
-   * Display name of the OS.
-   */
-  displayName: string
-  /**
-   * Regex used to validate the installation passwords.
-   */
-  passwordRegex: string
-  /**
-   * Regex used to validate the panel installation password.
-   */
-  panelPasswordRegex?: string
-  /**
-   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
-   */
-  requiresValidHostname?: boolean
-  /**
-   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
-   */
-  hostnameRegex?: string
-  /**
-   * Hostname max length.
-   */
-  hostnameMaxLength: number
-  /**
-   * OS release date.
-   */
-  releasedAt?: Date
-  /**
-   * Is it a beta OS.
-   */
-  beta: string
-  /**
-   * Description of the OS.
-   */
-  description: string
-  /**
-   * URL to OS official website.
-   */
-  officialWebsite: string
 }
 
 
