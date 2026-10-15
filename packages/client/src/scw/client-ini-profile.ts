@@ -1,4 +1,4 @@
-import { isAccessKey, isSecretKey } from '../internal/validations/string-validation.js'
+import { isAccessKey, isRegion, isSecretKey, isZone } from '../internal/validations/string-validation.js'
 import type { Region, Zone } from './locality.js'
 
 /**
@@ -47,14 +47,14 @@ export type ProfileDefaultValues = {
    *
    * Examples: fr-par, nl-ams.
    */
-  defaultRegion?: Region | ''
+  defaultRegion?: Region
   /**
    * A region can be split into many availability zones (AZ).
    * Latency between multiple AZ of the same region are low as they have a common network layer.
    *
    * Examples: fr-par-1, nl-ams-1
    */
-  defaultZone?: Zone | ''
+  defaultZone?: Zone
 }
 
 /**
@@ -74,6 +74,28 @@ export type Profile = Partial<ProfileDefaultValues & AuthenticationSecrets>
  */
 export const hasAuthenticationSecrets = (obj: Partial<AuthenticationSecrets>): obj is AuthenticationSecrets =>
   typeof obj.accessKey === 'string' && obj.accessKey !== '' && typeof obj.secretKey === 'string' && obj.secretKey !== ''
+
+/**
+ * Verifies that the profile defines a valid {@link Region}.
+ *
+ * @param profile - The profile
+ * @returns Whether `defaultRegion` is a valid region.
+ *
+ * @internal
+ */
+export const hasDefaultRegion = (profile: Readonly<Profile>): profile is Profile & { defaultRegion: Region } =>
+  typeof profile.defaultRegion === 'string' && isRegion(profile.defaultRegion)
+
+/**
+ * Verifies that the profile defines a valid {@link Zone}.
+ *
+ * @param profile - The profile
+ * @returns Whether `defaultZone` is a valid zone.
+ *
+ * @internal
+ */
+export const hasDefaultZone = (profile: Readonly<Profile>): profile is Profile & { defaultZone: Zone } =>
+  typeof profile.defaultZone === 'string' && isZone(profile.defaultZone)
 
 /**
  * Asserts the format of secrets.

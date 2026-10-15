@@ -37,6 +37,7 @@ export type ResourceType =
   | 'apple_silicon_private_nic'
   | 'serverless_container'
   | 'serverless_function'
+  | 'serverless_job'
   | 'vpn_gateway'
   | 'ddl_datalab'
   | 'kafka_cluster'
