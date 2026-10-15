@@ -17,6 +17,7 @@ import type {
   HostStatus,
   InboundTransferStatus,
   LinkedProduct,
+  ListContactsRequestOrderBy,
   ListContactsRequestRole,
   ListDNSZoneRecordsRequestOrderBy,
   ListDNSZonesRequestOrderBy,
@@ -223,6 +224,14 @@ export const INBOUND_TRANSFER_STATUSES: InboundTransferStatus[] = [
 export const LINKED_PRODUCTS: LinkedProduct[] = [
   'unknown_product',
   'vpc',
+]
+
+/** Lists all values of the enum {@link ListContactsRequestOrderBy}. */
+export const LIST_CONTACTS_REQUEST_ORDER_BIES: ListContactsRequestOrderBy[] = [
+  'created_at_asc',
+  'created_at_desc',
+  'email_asc',
+  'email_desc',
 ]
 
 /** Lists all values of the enum {@link ListContactsRequestRole}. */
