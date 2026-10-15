@@ -43,7 +43,7 @@ export type Money = {
 /** Represents a point in a TimeSeries. */
 export type TimeSeriesPoint = {
   /** Date of the point. */
-  timestamp?: Date
+  timestamp?: Date | null
   /** Value of the point. */
   value: number
 }

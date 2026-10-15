@@ -109,13 +109,13 @@ export const urlParams = (
  *
  * @internal
  */
-export const unmarshalDate = (data: unknown): Date | undefined => {
+export const unmarshalDate = (data: unknown): Date | null => {
   if (typeof data !== 'string') {
-    return undefined
+    return null
   }
   const date = new Date(data)
   if (Number.isNaN(date.getTime())) {
-    return undefined
+    return null
   }
 
   return date
