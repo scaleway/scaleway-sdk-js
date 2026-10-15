@@ -1,5 +1,234 @@
 # Change Log
 
+## 2.21.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- feat(dedibox): add a is_hds flag for ddx2elts servers (#2145)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: fix typos (#2570)
+
+- docs: fix typos (#3221)
+
+- feat: update generated APIs (#3182)
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(release): publish
+
+- chore: fix formating (#2669)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(release): publish
+
+- feat: update generated APIs (#2881)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(dedibox): expose original dedibox offer id (#2955)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- fix: format (#2683)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: add support for constants (#3286)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore: sync generated files after build (#2862)
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(lint): update generated files (#2594)
+
+- chore: format generated files (#2652)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore: update index (#2247)
+
+- feat(permission): add new permission name and service for MIAM (#3714)
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat(dedibox): provide ListIPv6Blocks endpoint (#2470)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore: remove whitespaces (#3057)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: new formating (#2667)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(dedibox): list available OS by offer_id (#3288)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- chore: reorganize import (#2520)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- fix(dedibox): remove project_id from LeaveRpnGroupRequest (#2444)
+
+- fix: change tabs into space (#2688)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- fix: sdk client deps (#2056)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- fix(build): output (#2842)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- feat(dedibox): add a is_hds flag for ddx2elts servers list (#2154)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.5
+
 ## 2.20.0
 
 ### Minor Changes

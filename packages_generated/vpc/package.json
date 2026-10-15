@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk-vpc",
-  "version": "2.21.2",
+  "version": "2.21.3",
   "description": "Scaleway SDK vpc",
   "license": "Apache-2.0",
   "repository": {
