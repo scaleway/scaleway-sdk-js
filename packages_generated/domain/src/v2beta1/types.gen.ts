@@ -165,6 +165,12 @@ export type LinkedProduct =
   | 'unknown_product'
   | 'vpc'
 
+export type ListContactsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'email_asc'
+  | 'email_desc'
+
 export type ListContactsRequestRole =
   | 'unknown_role'
   | 'owner'
@@ -2044,6 +2050,26 @@ export type RegistrarApiListContactsRequest = {
    * Filter contacts by email validation status.
    */
   emailStatus?: ContactEmailStatus
+  /**
+   * Sort order of the returned contacts.
+   */
+  orderBy?: ListContactsRequestOrderBy
+  /**
+   * Filter by contact status.
+   */
+  status?: ContactStatus
+  /**
+   * Filter by legal form.
+   */
+  legalForm?: ContactLegalForm
+  /**
+   * Filter by email address.
+   */
+  email?: string
+  /**
+   * Fuzzy search in firstname, lastname, email, and company_name.
+   */
+  search?: string
 }
 
 

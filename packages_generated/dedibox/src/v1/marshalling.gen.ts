@@ -4,7 +4,6 @@ import randomName from '@scaleway/random-name'
 import { isJSONObject, marshalBlobToScwFile, marshalDecimal, marshalMoney, marshalScwFile, marshalTimeSeries, resolveOneOf, unmarshalArrayOfObject, unmarshalDate, unmarshalDecimal, unmarshalMapOfObject, unmarshalMoney, unmarshalScwFile, unmarshalServiceInfo, unmarshalTimeSeries, unmarshalTimeSeriesPoint } from '@scaleway/sdk-client'
 import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scaleway/sdk-client'
 import type {
-  IP,
   CPU,
   Disk,
   Memory,
@@ -25,6 +24,7 @@ import type {
   OfferStorageInfo,
   Offer,
   OS,
+  IP,
   RpnSan,
   RpnGroup,
   NetworkInterface,
@@ -130,26 +130,6 @@ import type {
   UpdateServerRequest,
   UpdateServerTagsRequest,
 } from './types.gen.js'
-
-export const unmarshalIP = (data: unknown): IP => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'IP' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    address: data.address,
-    cidr: data.cidr,
-    gateway: data.gateway,
-    ipId: data.ip_id,
-    netmask: data.netmask,
-    reverse: data.reverse,
-    semantic: data.semantic,
-    status: data.status,
-    version: data.version,
-  } as IP
-}
 
 const unmarshalCPU = (data: unknown): CPU => {
   if (!isJSONObject(data)) {
@@ -419,6 +399,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
 
   return {
     antidosInfo: data.antidos_info ? unmarshalOfferAntiDosInfo(data.antidos_info) : undefined,
+    availableOs: unmarshalArrayOfObject(data.available_os, unmarshalOS),
     backupInfo: data.backup_info ? unmarshalOfferBackupInfo(data.backup_info) : undefined,
     bandwidthInfo: data.bandwidth_info ? unmarshalOfferBandwidthInfo(data.bandwidth_info) : undefined,
     catalog: data.catalog,
@@ -473,6 +454,26 @@ export const unmarshalOS = (data: unknown): OS => {
     type: data.type,
     version: data.version,
   } as OS
+}
+
+export const unmarshalIP = (data: unknown): IP => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IP' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    address: data.address,
+    cidr: data.cidr,
+    gateway: data.gateway,
+    ipId: data.ip_id,
+    netmask: data.netmask,
+    reverse: data.reverse,
+    semantic: data.semantic,
+    status: data.status,
+    version: data.version,
+  } as IP
 }
 
 export const unmarshalRpnSan = (data: unknown): RpnSan => {
