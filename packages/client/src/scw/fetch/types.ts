@@ -1,8 +1,12 @@
+type Headers = Record<string, string>
+
+type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
+
 /** Scaleway Request. */
 export type ScwRequest = {
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
+  method: Method
   path: string
-  headers?: Record<string, string>
+  headers?: Headers
   body?: string
   urlParams?: URLSearchParams
   responseType?: 'json' | 'text' | 'blob'
@@ -18,6 +22,7 @@ export type ScwRequest = {
 export type RequestOptions = {
   /** An {@link AbortSignal} to cancel the request. */
   signal?: AbortSignal
+  headers?: Headers
 }
 
 /**
