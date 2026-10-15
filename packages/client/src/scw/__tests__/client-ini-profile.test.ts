@@ -1,5 +1,34 @@
 import { describe, expect, it, test } from 'vitest'
-import { assertValidAuthenticationSecrets, hasAuthenticationSecrets } from '../client-ini-profile.js'
+import {
+  assertValidAuthenticationSecrets,
+  hasAuthenticationSecrets,
+  hasDefaultRegion,
+  hasDefaultZone,
+} from '../client-ini-profile.js'
+
+describe('hasDefaultRegion', () => {
+  it('confirms a valid region', () => {
+    expect(hasDefaultRegion({ defaultRegion: 'fr-par' })).toBeTruthy()
+    expect(hasDefaultRegion({ defaultRegion: 'nl-ams' })).toBeTruthy()
+  })
+
+  it('rejects a missing region', () => {
+    expect(hasDefaultRegion({})).toBeFalsy()
+    expect(hasDefaultRegion({ defaultRegion: undefined })).toBeFalsy()
+  })
+})
+
+describe('hasDefaultZone', () => {
+  it('confirms a valid zone', () => {
+    expect(hasDefaultZone({ defaultZone: 'fr-par-1' })).toBeTruthy()
+    expect(hasDefaultZone({ defaultZone: 'nl-ams-2' })).toBeTruthy()
+  })
+
+  it('rejects a missing zone', () => {
+    expect(hasDefaultZone({})).toBeFalsy()
+    expect(hasDefaultZone({ defaultZone: undefined })).toBeFalsy()
+  })
+})
 
 describe('hasAuthenticationSecrets', () => {
   it('confirms a non-empty payload', () => {
