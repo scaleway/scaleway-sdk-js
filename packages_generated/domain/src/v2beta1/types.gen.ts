@@ -353,7 +353,7 @@ export interface DSRecordDigest {
    */
   digest: string
   /**
-   * The public key associated with the digest.
+   * The DNSKEY the digest is derived from. Optional.
    */
   publicKey?: DSRecordPublicKey
 }
@@ -473,7 +473,7 @@ export interface TldOffer {
    */
   action: string
   /**
-   * The operation path of the offer.
+   * The billing SKU path of the offer (e.g. /network/domain/domains/fr/register).
    */
   operationPath: string
   /**
@@ -489,7 +489,7 @@ export interface DSRecord {
    */
   keyId: number
   /**
-   * The cryptographic algorithm used for the DS record.
+   * The cryptographic algorithm of the DNSKEY used for the DS record.
    */
   algorithm: DSRecordAlgorithm
   /**
@@ -582,11 +582,11 @@ export interface Contact {
    */
   emailAlt: string
   /**
-   * Phone number of the contact.
+   * Phone number of the contact, normalized to +CC.NationalNumber format.
    */
   phoneNumber: string
   /**
-   * Fax number of the contact.
+   * Fax number of the contact, normalized to +CC.NationalNumber format.
    */
   faxNumber: string
   /**
@@ -614,7 +614,7 @@ export interface Contact {
    */
   vatIdentificationCode: string
   /**
-   * Company identification code (e.g. SIRET/SIREN) of the contact.
+   * Company identification code of the contact (SIRET/SIREN for French contacts, any format for others).
    */
   companyIdentificationCode: string
   /**
@@ -626,11 +626,11 @@ export interface Contact {
    */
   resale: boolean
   /**
-   * Additional information required for .fr domains.
+   * Additional information required for AFNIC-managed TLDs (.fr, .re, .pm, .yt, .wf, .tf).
    */
   extensionFr?: ContactExtensionFR
   /**
-   * Additional information required for .eu domains.
+   * Additional information required for .eu domains. Conditionally required.
    */
   extensionEu?: ContactExtensionEU
   /**
@@ -646,7 +646,7 @@ export interface Contact {
    */
   state: string
   /**
-   * Additional information required for .nl domains.
+   * Additional information required for .nl domains. Auto-populated for individuals.
    */
   extensionNl?: ContactExtensionNL
   /**
@@ -654,7 +654,7 @@ export interface Contact {
    */
   status: ContactStatus
   /**
-   * Additional information required for .it domains.
+   * Additional information required for .it domains. Contains a PIN.
    */
   extensionIt?: ContactExtensionIT
   /**
@@ -726,7 +726,7 @@ export interface Tld {
    */
   idnSupport: boolean
   /**
-   * Available offers (create, renew, transfer, etc.) for the TLD.
+   * Map of available offers for the TLD, keyed by action string (create, renew, transfer, etc.).
    */
   offers: Record<string, TldOffer>
   /**
@@ -762,11 +762,11 @@ export interface NewContact {
    */
   emailAlt?: string
   /**
-   * Phone number of the contact.
+   * Phone number of the contact, normalized to +CC.NationalNumber format.
    */
   phoneNumber: string
   /**
-   * Fax number of the contact.
+   * Fax number of the contact, normalized to +CC.NationalNumber format.
    */
   faxNumber?: string
   /**
@@ -794,7 +794,7 @@ export interface NewContact {
    */
   vatIdentificationCode?: string
   /**
-   * Company identification code (e.g. SIRET/SIREN) of the contact.
+   * Company identification code of the contact (SIRET/SIREN for French contacts, any format for others).
    */
   companyIdentificationCode?: string
   /**
@@ -806,11 +806,11 @@ export interface NewContact {
    */
   resale: boolean
   /**
-   * Additional information required for .fr domains.
+   * Additional information required for AFNIC-managed TLDs (.fr, .re, .pm, .yt, .wf, .tf).
    */
   extensionFr?: ContactExtensionFR
   /**
-   * Additional information required for .eu domains.
+   * Additional information required for .eu domains. Conditionally required.
    */
   extensionEu?: ContactExtensionEU
   /**
@@ -822,11 +822,11 @@ export interface NewContact {
    */
   state?: string
   /**
-   * Additional information required for .nl domains.
+   * Additional information required for .nl domains. Auto-populated for individuals.
    */
   extensionNl?: ContactExtensionNL
   /**
-   * Additional information required for .it domains.
+   * Additional information required for .it domains. Contains a PIN.
    */
   extensionIt?: ContactExtensionIT
   /**
@@ -938,7 +938,7 @@ export interface Host {
    */
   domain: string
   /**
-   * The hostname.
+   * The hostname (FQDN, e.g. ns1.example.com).
    */
   name: string
   /**
@@ -966,15 +966,15 @@ export interface DomainSummary {
    */
   organizationId: string
   /**
-   * Status of the automatic renewal of the domain.
+   * Status of the automatic renewal of the domain (enabling, enabled, disabling, disabled).
    */
   autoRenewStatus: DomainFeatureStatus
   /**
-   * Status of the DNSSEC configuration of the domain.
+   * Status of the DNSSEC configuration of the domain (enabling, enabled, disabling, disabled).
    */
   dnssecStatus: DomainFeatureStatus
   /**
-   * List of the domain's EPP codes.
+   * List of the domain's EPP status codes (e.g. clientTransferProhibited, serverHold).
    */
   eppCode: string[]
   /**
@@ -994,7 +994,7 @@ export interface DomainSummary {
    */
   registrar: string
   /**
-   * Indicates whether Scaleway is the domain's registrar.
+   * Indicates whether the domain is external (not managed by Scaleway as registrar).
    */
   isExternal: boolean
   /**
@@ -1008,7 +1008,7 @@ export interface DomainSummary {
    */
   externalDomainRegistrationStatus?: DomainRegistrationStatusExternalDomain
   /**
-   * Status of a domain, when available for transfer.
+   * Status of an in-progress domain transfer.
    *
    * One-of ('registrationStatus'): at most one of 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
    */
@@ -1305,7 +1305,7 @@ export interface Domain {
    */
   projectId: string
   /**
-   * Status of the automatic renewal of the domain.
+   * Status of the automatic renewal of the domain (enabling, enabled, disabling, disabled).
    */
   autoRenewStatus: DomainFeatureStatus
   /**
@@ -1313,7 +1313,7 @@ export interface Domain {
    */
   dnssec?: DomainDNSSEC
   /**
-   * List of the domain's EPP codes.
+   * List of the domain's EPP status codes (e.g. clientTransferProhibited, serverHold).
    */
   eppCode: string[]
   /**
@@ -1329,7 +1329,7 @@ export interface Domain {
    */
   registrar: string
   /**
-   * Indicates whether Scaleway is the domain's registrar.
+   * Indicates whether the domain is external (not managed by Scaleway as registrar).
    */
   isExternal: boolean
   /**
@@ -1359,7 +1359,7 @@ export interface Domain {
    */
   externalDomainRegistrationStatus?: DomainRegistrationStatusExternalDomain
   /**
-   * Status of a domain, when available for transfer.
+   * Status of an in-progress domain transfer.
    *
    * One-of ('registrationStatus'): at most one of 'externalDomainRegistrationStatus', 'transferRegistrationStatus' could be set.
    */
@@ -1369,7 +1369,7 @@ export interface Domain {
    */
   tld?: Tld
   /**
-   * List of Scaleway resources linked to the domain.
+   * List of Scaleway product types linked to the domain (e.g. vpc).
    */
   linkedProducts: LinkedProduct[]
   /**
@@ -1669,7 +1669,7 @@ export interface ListDomainHostsResponse {
    */
   totalCount: number
   /**
-   * List of hostnames matching the request.
+   * List of host objects matching the request.
    */
   hosts: Host[]
 }
@@ -1681,7 +1681,7 @@ export interface ListDomainsResponse {
    */
   totalCount: number
   /**
-   * List of domains matching the request.
+   * List of domain summaries matching the request.
    */
   domains: DomainSummary[]
 }
@@ -1811,7 +1811,7 @@ export interface RegisterExternalDomainResponse {
    */
   projectId: string
   /**
-   * The validation token to use to validate the external domain.
+   * The validation token to set as a DNS TXT record at _scaleway-challenge.<domain> to validate the external domain.
    */
   validationToken: string
   /**
@@ -1827,7 +1827,7 @@ export type RegistrarApiBuyDomainsRequest = {
    */
   domains: string[]
   /**
-   * Duration in years for the domain registration.
+   * Duration in years for the domain registration. Subject to TLD-specific minimum and maximum constraints.
    */
   durationInYears: number
   /**
@@ -1847,25 +1847,25 @@ export type RegistrarApiBuyDomainsRequest = {
    */
   ownerContact?: NewContact
   /**
-   * ID of the existing contact to use as the domain's administrative contact.
+   * ID of the existing contact to use as the domain's administrative contact. Optional; falls back to the owner contact if omitted.
    *
    * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContactId?: string
   /**
-   * New contact to create and use as the domain's administrative contact.
+   * New contact to create and use as the domain's administrative contact. Optional; falls back to the owner contact if omitted.
    *
    * One-of ('administrativeContactType'): at most one of 'administrativeContactId', 'administrativeContact' could be set.
    */
   administrativeContact?: NewContact
   /**
-   * ID of the existing contact to use as the domain's technical contact.
+   * ID of the existing contact to use as the domain's technical contact. Optional; falls back to the owner contact if omitted.
    *
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
   technicalContactId?: string
   /**
-   * New contact to create and use as the domain's technical contact.
+   * New contact to create and use as the domain's technical contact. Optional; falls back to the owner contact if omitted.
    *
    * One-of ('technicalContactType'): at most one of 'technicalContactId', 'technicalContact' could be set.
    */
@@ -1991,7 +1991,7 @@ export type RegistrarApiEnableDomainDNSSECRequest = {
    */
   domain: string
   /**
-   * The DS record to configure for DNSSEC. If omitted, the DS record will be automatically generated.
+   * The DS record to configure for DNSSEC. Required for domains using non-Scaleway nameservers. For Scaleway nameservers, auto-generated and must be omitted.
    */
   dsRecord?: DSRecord
 }
@@ -2119,7 +2119,7 @@ export type RegistrarApiListDomainsRequest = {
    */
   organizationId?: string
   /**
-   * Filter domains by external status.
+   * Filter domains by whether they are external (not managed by Scaleway as registrar).
    */
   isExternal?: boolean
   /**
@@ -2259,11 +2259,11 @@ export type RegistrarApiRenewDomainsRequest = {
    */
   domains: string[]
   /**
-   * Duration in years for the domain renewal.
+   * Duration in years for the domain renewal. Subject to TLD-specific minimum and maximum constraints.
    */
   durationInYears: number
   /**
-   * Force the renewal to be a late renewal.
+   * Confirm the late renewal (incurs extra fees).
    */
   forceLateRenewal?: boolean
 }
@@ -2307,11 +2307,11 @@ export type RegistrarApiSearchAvailableDomainsRequest = {
 
 export type RegistrarApiTradeDomainRequest = {
   /**
-   * The domain name to trade.
+   * The domain name to trade (change of owner/registrant).
    */
   domain: string
   /**
-   * Project ID to associate with the domain after the trade.
+   * Project ID to associate with the domain after the trade. Also used to filter the new owner's contacts.
    */
   projectId?: string
   /**
@@ -2331,7 +2331,7 @@ export type RegistrarApiTradeDomainRequest = {
 
 export type RegistrarApiTransferInDomainRequest = {
   /**
-   * List of domains to transfer in, each with its auth code.
+   * List of domains to transfer in, each with its optional auth code.
    */
   domains: TransferInDomainRequestTransferRequest[]
   /**
@@ -2399,11 +2399,11 @@ export type RegistrarApiUpdateContactRequest = {
    */
   emailAlt?: string
   /**
-   * Phone number of the contact.
+   * Phone number of the contact, normalized to +CC.NationalNumber format.
    */
   phoneNumber?: string
   /**
-   * Fax number of the contact.
+   * Fax number of the contact, normalized to +CC.NationalNumber format.
    */
   faxNumber?: string
   /**
@@ -2423,7 +2423,7 @@ export type RegistrarApiUpdateContactRequest = {
    */
   city?: string
   /**
-   * Country code of the contact (ISO 3166-1 alpha-2 format).
+   * Country code of the contact (ISO 3166-1 alpha-2 format). Not updatable; returns an error if changed.
    */
   country?: string
   /**
@@ -2431,7 +2431,7 @@ export type RegistrarApiUpdateContactRequest = {
    */
   vatIdentificationCode?: string
   /**
-   * Company identification code (e.g. SIRET/SIREN) of the contact.
+   * Company identification code of the contact (SIRET/SIREN for French contacts, any format for others).
    */
   companyIdentificationCode?: string
   /**
@@ -2443,19 +2443,19 @@ export type RegistrarApiUpdateContactRequest = {
    */
   resale?: boolean
   /**
-   * Additional information required for .fr domains.
+   * Additional information required for AFNIC-managed TLDs (.fr, .re, .pm, .yt, .wf, .tf).
    */
   extensionFr?: ContactExtensionFR
   /**
-   * Additional information required for .eu domains.
+   * Additional information required for .eu domains. Conditionally required.
    */
   extensionEu?: ContactExtensionEU
   /**
-   * Additional information required for .nl domains.
+   * Additional information required for .nl domains. Auto-populated for individuals.
    */
   extensionNl?: ContactExtensionNL
   /**
-   * Additional information required for .it domains.
+   * Additional information required for .it domains. Contains a PIN.
    */
   extensionIt?: ContactExtensionIT
   /**
@@ -2483,7 +2483,7 @@ export type RegistrarApiUpdateDomainHostRequest = {
    */
   name: string
   /**
-   * New list of glue IP addresses associated with the hostname.
+   * New list of glue IP addresses associated with the hostname. Optional.
    */
   ips?: string[]
 }
