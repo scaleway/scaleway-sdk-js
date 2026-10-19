@@ -99,6 +99,7 @@ export const unmarshalDataSource = (data: unknown): DataSource => {
     projectId: data.project_id,
     region: data.region,
     retentionDays: data.retention_days,
+    srn: data.srn,
     synchronizedWithGrafana: data.synchronized_with_grafana,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
@@ -149,6 +150,7 @@ export const unmarshalExporter = (data: unknown): Exporter => {
     name: data.name,
     otlpDestination: data.otlp_destination ? unmarshalExporterOTLPDestination(data.otlp_destination) : undefined,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at),
   } as Exporter
@@ -233,8 +235,10 @@ export const unmarshalAlertManager = (data: unknown): AlertManager => {
   return {
     alertManagerEnabled: data.alert_manager_enabled,
     alertManagerUrl: data.alert_manager_url,
+    id: data.id,
     managedAlertsEnabled: data.managed_alerts_enabled,
     region: data.region,
+    srn: data.srn,
   } as AlertManager
 }
 
