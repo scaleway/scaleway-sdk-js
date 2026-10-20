@@ -197,7 +197,7 @@ By default, the attachments listed are ordered by creation date in ascending ord
         body: JSON.stringify(
           marshalCreateFileSystemRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems`,
         signal: options?.signal,
@@ -233,7 +233,7 @@ By default, the attachments listed are ordered by creation date in ascending ord
         body: JSON.stringify(
           marshalUpdateFileSystemRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/filesystems/${validatePathParam('filesystemId', request.filesystemId)}`,
         signal: options?.signal,
@@ -327,7 +327,7 @@ If your filesystem is in a transient state, you need to wait until the end of th
         body: JSON.stringify(
           marshalCreateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots`,
         signal: options?.signal,
@@ -365,7 +365,7 @@ If your filesystem is in a transient state, you need to wait until the end of th
         body: JSON.stringify(
           marshalUpdateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/file/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
         signal: options?.signal,

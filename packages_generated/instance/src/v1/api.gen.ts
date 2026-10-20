@@ -389,7 +389,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         signal: options?.signal,
@@ -436,7 +436,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('id', request.id)}`,
         signal: options?.signal,
@@ -451,7 +451,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
         signal: options?.signal,
@@ -504,7 +504,7 @@ The `backup` action can be done with:
         body: JSON.stringify(
           marshalServerActionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/action`,
         signal: options?.signal,
@@ -579,7 +579,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalAttachServerVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-volume`,
         signal: options?.signal,
@@ -600,7 +600,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalDetachServerVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-volume`,
         signal: options?.signal,
@@ -621,7 +621,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalAttachServerFileSystemRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-filesystem`,
         signal: options?.signal,
@@ -642,7 +642,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalDetachServerFileSystemRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-filesystem`,
         signal: options?.signal,
@@ -710,7 +710,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalCreateImageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images`,
         signal: options?.signal,
@@ -725,7 +725,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalSetImageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('id', request.id)}`,
         signal: options?.signal,
@@ -746,7 +746,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalUpdateImageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/images/${validatePathParam('imageId', request.imageId)}`,
         signal: options?.signal,
@@ -811,7 +811,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalCreateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
         signal: options?.signal,
@@ -843,7 +843,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalSetSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
         signal: options?.signal,
@@ -864,7 +864,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalUpdateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
         signal: options?.signal,
@@ -900,7 +900,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalExportSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export`,
         signal: options?.signal,
@@ -951,7 +951,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalCreateVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
         signal: options?.signal,
@@ -989,7 +989,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalUpdateVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
         signal: options?.signal,
@@ -1055,7 +1055,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalCreateSecurityGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups`,
         signal: options?.signal,
@@ -1102,7 +1102,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalSetSecurityGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('id', request.id)}`,
         signal: options?.signal,
@@ -1123,7 +1123,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalUpdateSecurityGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
         signal: options?.signal,
@@ -1185,7 +1185,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalCreateSecurityGroupRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules`,
         signal: options?.signal,
@@ -1206,7 +1206,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalSetSecurityGroupRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules`,
         signal: options?.signal,
@@ -1253,7 +1253,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalSetSecurityGroupRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
         signal: options?.signal,
@@ -1274,7 +1274,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalUpdateSecurityGroupRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security_groups/${validatePathParam('securityGroupId', request.securityGroupId)}/rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
         signal: options?.signal,
@@ -1324,7 +1324,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalCreatePlacementGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups`,
         signal: options?.signal,
@@ -1362,7 +1362,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalSetPlacementGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
         signal: options?.signal,
@@ -1383,7 +1383,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalUpdatePlacementGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
         signal: options?.signal,
@@ -1436,7 +1436,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalSetPlacementGroupServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}/servers`,
         signal: options?.signal,
@@ -1457,7 +1457,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalUpdatePlacementGroupServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement_groups/${validatePathParam('placementGroupId', request.placementGroupId)}/servers`,
         signal: options?.signal,
@@ -1508,7 +1508,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalCreateIpRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
         signal: options?.signal,
@@ -1546,7 +1546,7 @@ If the specified Instance offer is flagged as end of service, the best compatibl
         body: JSON.stringify(
           marshalUpdateIpRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ip', request.ip)}`,
         signal: options?.signal,
@@ -1615,7 +1615,7 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
         body: JSON.stringify(
           marshalCreatePrivateNICRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics`,
         signal: options?.signal,
@@ -1653,7 +1653,7 @@ We strongly recommend migrating to v2alpha1 to see all private NICs.
         body: JSON.stringify(
           marshalUpdatePrivateNICRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private_nics/${validatePathParam('privateNicId', request.privateNicId)}`,
         signal: options?.signal,
@@ -1708,7 +1708,7 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
         body: JSON.stringify(
           marshalPlanBlockMigrationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/plan`,
         signal: options?.signal,
@@ -1728,7 +1728,7 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
         body: JSON.stringify(
           marshalApplyBlockMigrationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/apply`,
         signal: options?.signal,
@@ -1742,7 +1742,7 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
         body: JSON.stringify(
           marshalCheckBlockMigrationOrganizationQuotasRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/block-migration/check-organization-quotas`,
         signal: options?.signal,
@@ -1759,7 +1759,7 @@ The endpoint also returns the validation_key, which must be provided to the [Mig
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}/release-to-ipam`,
         signal: options?.signal,

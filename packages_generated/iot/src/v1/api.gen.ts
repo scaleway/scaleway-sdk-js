@@ -161,7 +161,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateHubRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs`,
         signal: options?.signal,
@@ -217,7 +217,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateHubRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}`,
         signal: options?.signal,
@@ -236,7 +236,7 @@ export class API extends ParentAPI {
     this.client.fetch<Hub>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/enable`,
         signal: options?.signal,
@@ -255,7 +255,7 @@ export class API extends ParentAPI {
     this.client.fetch<Hub>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/disable`,
         signal: options?.signal,
@@ -315,7 +315,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetHubCARequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hubs/${validatePathParam('hubId', request.hubId)}/ca`,
         signal: options?.signal,
@@ -382,7 +382,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDeviceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices`,
         signal: options?.signal,
@@ -420,7 +420,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDeviceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}`,
         signal: options?.signal,
@@ -439,7 +439,7 @@ export class API extends ParentAPI {
     this.client.fetch<Device>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/enable`,
         signal: options?.signal,
@@ -458,7 +458,7 @@ export class API extends ParentAPI {
     this.client.fetch<Device>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/disable`,
         signal: options?.signal,
@@ -477,7 +477,7 @@ export class API extends ParentAPI {
     this.client.fetch<RenewDeviceCertificateResponse>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/renew-certificate`,
         signal: options?.signal,
@@ -498,7 +498,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetDeviceCertificateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/devices/${validatePathParam('deviceId', request.deviceId)}/certificate`,
         signal: options?.signal,
@@ -608,7 +608,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateRouteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
         signal: options?.signal,
@@ -629,7 +629,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateRouteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
         signal: options?.signal,
@@ -710,7 +710,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/networks`,
         signal: options?.signal,
@@ -780,7 +780,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalPutTwinDocumentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
         signal: options?.signal,
@@ -801,7 +801,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalPatchTwinDocumentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iot/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/twins/${validatePathParam('twinId', request.twinId)}/documents/${validatePathParam('documentName', request.documentName)}`,
         signal: options?.signal,

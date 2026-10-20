@@ -142,7 +142,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateNamespaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
         signal: options?.signal,
@@ -163,7 +163,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateNamespaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
         signal: options?.signal,
@@ -265,7 +265,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateImageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/registry/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/images/${validatePathParam('imageId', request.imageId)}`,
         signal: options?.signal,

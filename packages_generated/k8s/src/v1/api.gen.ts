@@ -167,7 +167,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateClusterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters`,
         signal: options?.signal,
@@ -223,7 +223,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateClusterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
         signal: options?.signal,
@@ -264,7 +264,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpgradeClusterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/upgrade`,
         signal: options?.signal,
@@ -285,7 +285,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetClusterTypeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/set-type`,
         signal: options?.signal,
@@ -353,7 +353,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/reset-admin-token`,
         signal: options?.signal,
@@ -397,7 +397,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddClusterACLRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
         signal: options?.signal,
@@ -418,7 +418,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetClusterACLRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
         signal: options?.signal,
@@ -481,7 +481,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreatePoolRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/pools`,
         signal: options?.signal,
@@ -538,7 +538,7 @@ This will drain and replace the nodes in that pool.
         body: JSON.stringify(
           marshalUpgradePoolRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/upgrade`,
         signal: options?.signal,
@@ -559,7 +559,7 @@ This will drain and replace the nodes in that pool.
         body: JSON.stringify(
           marshalUpdatePoolRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}`,
         signal: options?.signal,
@@ -597,7 +597,7 @@ This will drain and replace the nodes in that pool.
         body: JSON.stringify(
           marshalSetPoolTaintsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-taints`,
         signal: options?.signal,
@@ -618,7 +618,7 @@ This will drain and replace the nodes in that pool.
         body: JSON.stringify(
           marshalSetPoolStartupTaintsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-startup-taints`,
         signal: options?.signal,
@@ -639,7 +639,7 @@ This will drain and replace the nodes in that pool.
         body: JSON.stringify(
           marshalSetPoolLabelsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/set-labels`,
         signal: options?.signal,
@@ -713,7 +713,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
     this.client.fetch<ExternalNodeAuth>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/pools/${validatePathParam('poolId', request.poolId)}/external-nodes/auth`,
         signal: options?.signal,
@@ -795,7 +795,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
     this.client.fetch<Node>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}/replace`,
         signal: options?.signal,
@@ -814,7 +814,7 @@ Tip: add `?dl=1` at the end of the URL to directly retrieve the base64 decoded c
     this.client.fetch<Node>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/k8s/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nodes/${validatePathParam('nodeId', request.nodeId)}/reboot`,
         signal: options?.signal,

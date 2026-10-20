@@ -99,7 +99,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateNamespaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
         signal: options?.signal,
@@ -185,7 +185,7 @@ Additional parameters can be set in the query to filter, such as `organization_i
         body: JSON.stringify(
           marshalUpdateNamespaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
         signal: options?.signal,
@@ -225,7 +225,7 @@ This action **cannot** be undone.
         body: JSON.stringify(
           marshalCreateContainerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers`,
         signal: options?.signal,
@@ -312,7 +312,7 @@ Additional parameters can be set in the query to filter, such as `organization_i
         body: JSON.stringify(
           marshalUpdateContainerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}`,
         signal: options?.signal,
@@ -372,7 +372,7 @@ This action **cannot** be undone.
         body: JSON.stringify(
           marshalCreateDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
         signal: options?.signal,
@@ -459,7 +459,7 @@ Additional parameters can be set in the query to filter the output, such as `org
         body: JSON.stringify(
           marshalUpdateDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
         signal: options?.signal,
@@ -497,7 +497,7 @@ the most recent image version available in the registry.
     this.client.fetch<Container>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}/redeploy`,
         signal: options?.signal,
@@ -518,7 +518,7 @@ the most recent image version available in the registry.
         body: JSON.stringify(
           marshalCreateTriggerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
         signal: options?.signal,
@@ -607,7 +607,7 @@ Only fields present in the request are updated; others are left untouched.
         body: JSON.stringify(
           marshalUpdateTriggerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/containers/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
         signal: options?.signal,
