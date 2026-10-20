@@ -166,7 +166,7 @@ The output returned displays the URL to access your Cockpit's Grafana.
         body: JSON.stringify(
           marshalGlobalApiSyncGrafanaDataSourcesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/grafana/sync-data-sources`,
         signal: options?.signal,
@@ -189,7 +189,7 @@ Each Grafana user is associated with a role: viewer or editor. A viewer can only
         body: JSON.stringify(
           marshalGlobalApiCreateGrafanaUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/grafana/users`,
         signal: options?.signal,
@@ -261,7 +261,7 @@ A new password regenerates and only displays once. Make sure that you save it.
         body: JSON.stringify(
           marshalGlobalApiResetGrafanaUserPasswordRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/grafana/users/${validatePathParam('grafanaUserId', request.grafanaUserId)}/reset-password`,
         signal: options?.signal,
@@ -357,7 +357,7 @@ Deprecated due to retention now being managed at the data source level.
         body: JSON.stringify(
           marshalGlobalApiSelectPlanRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/cockpit/v1/plans`,
         signal: options?.signal,
@@ -440,7 +440,7 @@ This feature is in Beta phase. During Beta phase, exporter can take up to 30 min
         body: JSON.stringify(
           marshalRegionalApiCreateExporterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters`,
         signal: options?.signal,
@@ -541,7 +541,7 @@ Note that you can not change the data source linked to the export. If you need t
         body: JSON.stringify(
           marshalRegionalApiUpdateExporterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/exporters/${validatePathParam('exporterId', request.exporterId)}`,
         signal: options?.signal,
@@ -563,7 +563,7 @@ The name of the data source will then be used as reference to name the associate
         body: JSON.stringify(
           marshalRegionalApiCreateDataSourceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources`,
         signal: options?.signal,
@@ -644,7 +644,7 @@ The name of the data source will then be used as reference to name the associate
         body: JSON.stringify(
           marshalRegionalApiUpdateDataSourceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/data-sources/${validatePathParam('dataSourceId', request.dataSourceId)}`,
         signal: options?.signal,
@@ -687,7 +687,7 @@ Upon creation, your token's secret key display only once. Make sure that you sav
         body: JSON.stringify(
           marshalRegionalApiCreateTokenRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
         signal: options?.signal,
@@ -816,7 +816,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
         body: JSON.stringify(
           marshalRegionalApiEnableAlertManagerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/enable`,
         signal: options?.signal,
@@ -837,7 +837,7 @@ The output returned displays a URL to access the Alert manager, and whether the 
         body: JSON.stringify(
           marshalRegionalApiDisableAlertManagerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/disable`,
         signal: options?.signal,
@@ -880,7 +880,7 @@ If you need to receive alerts for other receivers, you can create additional con
         body: JSON.stringify(
           marshalRegionalApiCreateContactPointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points`,
         signal: options?.signal,
@@ -920,7 +920,7 @@ If you need to receive alerts for other receivers, you can create additional con
         body: JSON.stringify(
           marshalRegionalApiUpdateContactPointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points`,
         signal: options?.signal,
@@ -940,7 +940,7 @@ If you need to receive alerts for other receivers, you can create additional con
         body: JSON.stringify(
           marshalRegionalApiDeleteContactPointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/contact-points/delete`,
         signal: options?.signal,
@@ -985,7 +985,7 @@ If you need to receive alerts for other receivers, you can create additional con
         body: JSON.stringify(
           marshalRegionalApiEnableManagedAlertsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/enable`,
         signal: options?.signal,
@@ -1007,7 +1007,7 @@ If you need to receive alerts for other receivers, you can create additional con
         body: JSON.stringify(
           marshalRegionalApiDisableManagedAlertsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/managed-alerts/disable`,
         signal: options?.signal,
@@ -1028,7 +1028,7 @@ If you need to receive alerts for other receivers, you can create additional con
         body: JSON.stringify(
           marshalRegionalApiEnableAlertRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/enable-alert-rules`,
         signal: options?.signal,
@@ -1049,7 +1049,7 @@ If you need to receive alerts for other receivers, you can create additional con
         body: JSON.stringify(
           marshalRegionalApiDisableAlertRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/disable-alert-rules`,
         signal: options?.signal,
@@ -1069,7 +1069,7 @@ If you need to receive alerts for other receivers, you can create additional con
         body: JSON.stringify(
           marshalRegionalApiTriggerTestAlertRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/cockpit/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-manager/trigger-test-alert`,
         signal: options?.signal,

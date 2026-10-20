@@ -93,7 +93,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mailbox/v1alpha1/domains`,
         signal: options?.signal,
@@ -208,7 +208,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mailbox/v1alpha1/domains/${validatePathParam('domainId', request.domainId)}/validate-records`,
         signal: options?.signal,
@@ -228,7 +228,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalBatchCreateMailboxesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mailbox/v1alpha1/batch-create-mailboxes`,
         signal: options?.signal,
@@ -313,7 +313,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateMailboxRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}`,
         signal: options?.signal,
@@ -349,7 +349,7 @@ export class API extends ParentAPI {
     this.client.fetch<Mailbox>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/restore`,
         signal: options?.signal,
@@ -370,7 +370,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateAliasRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mailbox/v1alpha1/aliases`,
         signal: options?.signal,
@@ -454,7 +454,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateAliasRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mailbox/v1alpha1/aliases/${validatePathParam('aliasId', request.aliasId)}`,
         signal: options?.signal,
@@ -493,7 +493,7 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
         body: JSON.stringify(
           marshalCreateForwardingRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mailbox/v1alpha1/forwardings`,
         signal: options?.signal,
@@ -584,7 +584,7 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
         body: JSON.stringify(
           marshalUpdateForwardingRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mailbox/v1alpha1/forwardings/${validatePathParam('forwardingId', request.forwardingId)}`,
         signal: options?.signal,
@@ -627,7 +627,7 @@ A mailbox can have up to 5 forwarding rules. Forwarding to the mailbox's own ema
         body: JSON.stringify(
           marshalUpdateMailboxForwardingRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mailbox/v1alpha1/mailboxes/${validatePathParam('mailboxId', request.mailboxId)}/forwarding`,
         signal: options?.signal,

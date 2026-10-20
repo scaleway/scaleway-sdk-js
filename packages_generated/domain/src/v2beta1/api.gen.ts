@@ -225,7 +225,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDNSZoneRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/dns-zones`,
         signal: options?.signal,
@@ -246,7 +246,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDNSZoneRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}`,
         signal: options?.signal,
@@ -267,7 +267,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCloneDNSZoneRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/clone`,
         signal: options?.signal,
@@ -346,7 +346,7 @@ All edits will be versioned.
         body: JSON.stringify(
           marshalUpdateDNSZoneRecordsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/records`,
         signal: options?.signal,
@@ -387,7 +387,7 @@ All edits will be versioned.
         body: JSON.stringify(
           marshalUpdateDNSZoneNameserversRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/nameservers`,
         signal: options?.signal,
@@ -447,7 +447,7 @@ All edits will be versioned.
         body: JSON.stringify(
           marshalImportRawDNSZoneRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/raw`,
         signal: options?.signal,
@@ -468,7 +468,7 @@ All edits will be versioned.
         body: JSON.stringify(
           marshalImportProviderDNSZoneRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/import-provider`,
         signal: options?.signal,
@@ -490,7 +490,7 @@ You can recreate the given DNS zone and its sub DNS zone if needed.
         body: JSON.stringify(
           marshalRefreshDNSZoneRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/${validatePathParam('dnsZone', request.dnsZone)}/refresh`,
         signal: options?.signal,
@@ -575,7 +575,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
     this.client.fetch<RestoreDNSZoneVersionResponse>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/dns-zones/version/${validatePathParam('dnsZoneVersionId', request.dnsZoneVersionId)}/restore`,
         signal: options?.signal,
@@ -631,7 +631,7 @@ The maximum version count is 100. If the count reaches this limit, the oldest ve
         body: JSON.stringify(
           marshalCreateSSLCertificateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/ssl-certificates`,
         signal: options?.signal,
@@ -794,7 +794,7 @@ You can filter the list of inbound transfers by domain name.
         body: JSON.stringify(
           marshalRegistrarApiRetryInboundTransferRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/retry-inbound-transfer`,
         signal: options?.signal,
@@ -816,7 +816,7 @@ You can provide a domain's already existing contact or a new contact.
         body: JSON.stringify(
           marshalRegistrarApiBuyDomainsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/buy-domains`,
         signal: options?.signal,
@@ -837,7 +837,7 @@ You can provide a domain's already existing contact or a new contact.
         body: JSON.stringify(
           marshalRegistrarApiRenewDomainsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/renew-domains`,
         signal: options?.signal,
@@ -858,7 +858,7 @@ You can provide a domain's already existing contact or a new contact.
         body: JSON.stringify(
           marshalRegistrarApiTransferInDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/transfer-domains`,
         signal: options?.signal,
@@ -882,7 +882,7 @@ If the new owner has never created a contact to register domains before, an erro
         body: JSON.stringify(
           marshalRegistrarApiTradeDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/trade`,
         signal: options?.signal,
@@ -903,7 +903,7 @@ If the new owner has never created a contact to register domains before, an erro
         body: JSON.stringify(
           marshalRegistrarApiRegisterExternalDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/external-domains`,
         signal: options?.signal,
@@ -942,7 +942,7 @@ If contacts are not compatible with either the domain or the TLD, the informatio
         body: JSON.stringify(
           marshalRegistrarApiCheckContactsCompatibilityRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/check-contacts-compatibility`,
         signal: options?.signal,
@@ -1015,7 +1015,7 @@ You can filter the list by domain name.
         body: JSON.stringify(
           marshalRegistrarApiUpdateContactRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/domain/v2beta1/contacts/${validatePathParam('contactId', request.contactId)}`,
         signal: options?.signal,
@@ -1130,7 +1130,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
         body: JSON.stringify(
           marshalRegistrarApiUpdateDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}`,
         signal: options?.signal,
@@ -1149,7 +1149,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
     this.client.fetch<Domain>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/lock-transfer`,
         signal: options?.signal,
@@ -1168,7 +1168,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
     this.client.fetch<Domain>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/unlock-transfer`,
         signal: options?.signal,
@@ -1187,7 +1187,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
     this.client.fetch<Domain>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/enable-auto-renew`,
         signal: options?.signal,
@@ -1206,7 +1206,7 @@ If you add the same contact for multiple roles (owner, administrative, technical
     this.client.fetch<Domain>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/disable-auto-renew`,
         signal: options?.signal,
@@ -1245,7 +1245,7 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
         body: JSON.stringify(
           marshalRegistrarApiEnableDomainDNSSECRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/enable-dnssec`,
         signal: options?.signal,
@@ -1264,7 +1264,7 @@ Some TLDs may have a different procedure to retrieve the authorization code. In 
     this.client.fetch<Domain>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/disable-dnssec`,
         signal: options?.signal,
@@ -1336,7 +1336,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
         body: JSON.stringify(
           marshalRegistrarApiCreateDomainHostRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts`,
         signal: options?.signal,
@@ -1381,7 +1381,7 @@ If the TLD list is empty or not set, the search returns the results from the mos
         body: JSON.stringify(
           marshalRegistrarApiUpdateDomainHostRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/domain/v2beta1/domains/${validatePathParam('domain', request.domain)}/hosts/${validatePathParam('name', request.name)}`,
         signal: options?.signal,

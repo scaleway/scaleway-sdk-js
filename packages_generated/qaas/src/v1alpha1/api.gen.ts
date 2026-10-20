@@ -209,7 +209,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateJobRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/qaas/v1alpha1/jobs`,
         signal: options?.signal,
@@ -230,7 +230,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateJobRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}`,
         signal: options?.signal,
@@ -249,7 +249,7 @@ export class API extends ParentAPI {
     this.client.fetch<Job>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/qaas/v1alpha1/jobs/${validatePathParam('jobId', request.jobId)}/cancel`,
         signal: options?.signal,
@@ -412,7 +412,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateSessionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/qaas/v1alpha1/sessions`,
         signal: options?.signal,
@@ -433,7 +433,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateSessionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/qaas/v1alpha1/sessions/${validatePathParam('sessionId', request.sessionId)}`,
         signal: options?.signal,
@@ -452,7 +452,7 @@ export class API extends ParentAPI {
     this.client.fetch<Session>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/qaas/v1alpha1/sessions/${validatePathParam('sessionId', request.sessionId)}/terminate`,
         signal: options?.signal,
@@ -507,7 +507,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateProcessRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/qaas/v1alpha1/processes`,
         signal: options?.signal,
@@ -591,7 +591,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateProcessRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/qaas/v1alpha1/processes/${validatePathParam('processId', request.processId)}`,
         signal: options?.signal,
@@ -610,7 +610,7 @@ export class API extends ParentAPI {
     this.client.fetch<Process>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/qaas/v1alpha1/processes/${validatePathParam('processId', request.processId)}/cancel`,
         signal: options?.signal,
@@ -777,7 +777,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateBookingRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/qaas/v1alpha1/bookings/${validatePathParam('bookingId', request.bookingId)}`,
         signal: options?.signal,
@@ -798,7 +798,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateModelRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/qaas/v1alpha1/models`,
         signal: options?.signal,
