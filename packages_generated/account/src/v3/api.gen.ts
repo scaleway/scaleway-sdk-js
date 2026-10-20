@@ -90,7 +90,7 @@ export class ContractAPI extends ParentAPI {
         body: JSON.stringify(
           marshalContractApiCreateContractSignatureRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/account/v3/contract-signatures`,
         signal: options?.signal,
@@ -109,7 +109,7 @@ export class ContractAPI extends ParentAPI {
     this.client.fetch<ContractSignature>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/account/v3/contract-signatures/${validatePathParam('contractSignatureId', request.contractSignatureId)}/validate`,
         signal: options?.signal,
@@ -130,7 +130,7 @@ export class ContractAPI extends ParentAPI {
         body: JSON.stringify(
           marshalContractApiCheckContractSignatureRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/account/v3/contract-signatures/check`,
         signal: options?.signal,
@@ -185,7 +185,7 @@ export class ProjectAPI extends ParentAPI {
         body: JSON.stringify(
           marshalProjectApiCreateProjectRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/account/v3/projects`,
         signal: options?.signal,
@@ -284,7 +284,7 @@ export class ProjectAPI extends ParentAPI {
         body: JSON.stringify(
           marshalProjectApiDeleteProjectWithResourcesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/delete-with-resources`,
         signal: options?.signal,
@@ -305,7 +305,7 @@ export class ProjectAPI extends ParentAPI {
         body: JSON.stringify(
           marshalProjectApiUpdateProjectRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}`,
         signal: options?.signal,
@@ -326,7 +326,7 @@ export class ProjectAPI extends ParentAPI {
         body: JSON.stringify(
           marshalProjectApiSetProjectQualificationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/account/v3/projects/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/project-qualification`,
         signal: options?.signal,

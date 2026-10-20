@@ -78,7 +78,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/annotations/v1/keys`,
         signal: options?.signal,
@@ -141,7 +141,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/annotations/v1/keys/${validatePathParam('keyId', request.keyId)}`,
         signal: options?.signal,
@@ -177,7 +177,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateValueRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/annotations/v1/values`,
         signal: options?.signal,
@@ -241,7 +241,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateValueRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/annotations/v1/values/${validatePathParam('valueId', request.valueId)}`,
         signal: options?.signal,
@@ -317,7 +317,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateBindingRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/annotations/v1/bindings`,
         signal: options?.signal,

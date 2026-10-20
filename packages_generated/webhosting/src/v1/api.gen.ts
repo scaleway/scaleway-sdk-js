@@ -247,7 +247,7 @@ export class BackupAPI extends ParentAPI {
     this.client.fetch<RestoreBackupResponse>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/backups/${validatePathParam('backupId', request.backupId)}/restore`,
         signal: options?.signal,
@@ -288,7 +288,7 @@ export class BackupAPI extends ParentAPI {
         body: JSON.stringify(
           marshalBackupApiRestoreBackupItemsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/restore-backup-items`,
         signal: options?.signal,
@@ -409,7 +409,7 @@ export class DatabaseAPI extends ParentAPI {
         body: JSON.stringify(
           marshalDatabaseApiCreateDatabaseRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases`,
         signal: options?.signal,
@@ -489,7 +489,7 @@ export class DatabaseAPI extends ParentAPI {
         body: JSON.stringify(
           marshalDatabaseApiCreateDatabaseUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users`,
         signal: options?.signal,
@@ -569,7 +569,7 @@ export class DatabaseAPI extends ParentAPI {
         body: JSON.stringify(
           marshalDatabaseApiChangeDatabaseUserPasswordRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases-users/${validatePathParam('username', request.username)}/change-password`,
         signal: options?.signal,
@@ -590,7 +590,7 @@ export class DatabaseAPI extends ParentAPI {
         body: JSON.stringify(
           marshalDatabaseApiAssignDatabaseUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}/assign-user`,
         signal: options?.signal,
@@ -611,7 +611,7 @@ export class DatabaseAPI extends ParentAPI {
         body: JSON.stringify(
           marshalDatabaseApiUnassignDatabaseUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/databases/${validatePathParam('databaseName', request.databaseName)}/unassign-user`,
         signal: options?.signal,
@@ -671,7 +671,7 @@ export class DnsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalDnsApiCheckUserOwnsDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/check-ownership`,
         signal: options?.signal,
@@ -692,7 +692,7 @@ export class DnsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalDnsApiSyncDomainDnsRecordsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domain', request.domain)}/sync-domain-dns-records`,
         signal: options?.signal,
@@ -841,7 +841,7 @@ export class HostingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalHostingApiCreateHostingRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings`,
         signal: options?.signal,
@@ -929,7 +929,7 @@ export class HostingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalHostingApiUpdateHostingRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}`,
         signal: options?.signal,
@@ -965,7 +965,7 @@ export class HostingAPI extends ParentAPI {
     this.client.fetch<Session>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/sessions`,
         signal: options?.signal,
@@ -984,7 +984,7 @@ export class HostingAPI extends ParentAPI {
     this.client.fetch<ResetHostingPasswordResponse>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/reset-password`,
         signal: options?.signal,
@@ -1022,7 +1022,7 @@ export class HostingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalHostingApiAddCustomDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/add-custom-domain`,
         signal: options?.signal,
@@ -1043,7 +1043,7 @@ export class HostingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalHostingApiRemoveCustomDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-custom-domain`,
         signal: options?.signal,
@@ -1064,7 +1064,7 @@ export class HostingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalHostingApiMigrateControlPanelRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/migrate-control-panel`,
         signal: options?.signal,
@@ -1083,7 +1083,7 @@ export class HostingAPI extends ParentAPI {
     this.client.fetch<Hosting>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/reset`,
         signal: options?.signal,
@@ -1104,7 +1104,7 @@ export class HostingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalHostingApiDeleteHostingDomainsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/delete-domains`,
         signal: options?.signal,
@@ -1125,7 +1125,7 @@ export class HostingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalHostingApiUpdateHostingFreeDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/update-free-domain`,
         signal: options?.signal,
@@ -1167,7 +1167,7 @@ export class FreeDomainAPI extends ParentAPI {
         body: JSON.stringify(
           marshalFreeDomainApiCheckFreeDomainAvailabilityRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/free-domains/check-availability`,
         signal: options?.signal,
@@ -1233,7 +1233,7 @@ export class FtpAccountAPI extends ParentAPI {
         body: JSON.stringify(
           marshalFtpAccountApiCreateFtpAccountRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts`,
         signal: options?.signal,
@@ -1291,7 +1291,7 @@ export class FtpAccountAPI extends ParentAPI {
         body: JSON.stringify(
           marshalFtpAccountApiChangeFtpAccountPasswordRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/ftp-accounts/${validatePathParam('username', request.username)}/change-password`,
         signal: options?.signal,
@@ -1333,7 +1333,7 @@ export class MailAccountAPI extends ParentAPI {
         body: JSON.stringify(
           marshalMailAccountApiCreateMailAccountRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/mail-accounts`,
         signal: options?.signal,
@@ -1380,7 +1380,7 @@ export class MailAccountAPI extends ParentAPI {
         body: JSON.stringify(
           marshalMailAccountApiRemoveMailAccountRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/remove-mail-account`,
         signal: options?.signal,
@@ -1401,7 +1401,7 @@ export class MailAccountAPI extends ParentAPI {
         body: JSON.stringify(
           marshalMailAccountApiChangeMailAccountPasswordRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/change-mail-password`,
         signal: options?.signal,
@@ -1468,7 +1468,7 @@ export class WebsiteAPI extends ParentAPI {
         body: JSON.stringify(
           marshalWebsiteApiCreateWebsiteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites`,
         signal: options?.signal,
@@ -1503,7 +1503,7 @@ website will display the default welcome page.
     this.client.fetch<Website>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/webhosting/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/hostings/${validatePathParam('hostingId', request.hostingId)}/websites/${validatePathParam('domainName', request.domainName)}/reset`,
         signal: options?.signal,

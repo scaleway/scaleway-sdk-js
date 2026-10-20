@@ -94,7 +94,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateSecretRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets`,
         signal: options?.signal,
@@ -132,7 +132,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateSecretRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
         signal: options?.signal,
@@ -228,7 +228,7 @@ The `region` parameter in path is needed in both case.
     this.client.fetch<Secret>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/protect`,
         signal: options?.signal,
@@ -247,7 +247,7 @@ The `region` parameter in path is needed in both case.
     this.client.fetch<Secret>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/unprotect`,
         signal: options?.signal,
@@ -267,7 +267,7 @@ The `region` parameter in path is needed in both case.
         body: JSON.stringify(
           marshalAddSecretOwnerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/add-owner`,
         signal: options?.signal,
@@ -287,7 +287,7 @@ The `region` parameter in path is needed in both case.
         body: JSON.stringify(
           marshalCreateSecretVersionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions`,
         signal: options?.signal,
@@ -325,7 +325,7 @@ The `region` parameter in path is needed in both case.
         body: JSON.stringify(
           marshalUpdateSecretVersionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}`,
         signal: options?.signal,
@@ -423,7 +423,7 @@ The `region` parameter in path is needed in both case.
     this.client.fetch<SecretVersion>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/enable`,
         signal: options?.signal,
@@ -442,7 +442,7 @@ The `region` parameter in path is needed in both case.
     this.client.fetch<SecretVersion>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/disable`,
         signal: options?.signal,
@@ -511,7 +511,7 @@ The `region` parameter in path is needed in both case.
     this.client.fetch<SecretVersion>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/versions/${validatePathParam('revision', request.revision)}/restore`,
         signal: options?.signal,
@@ -530,7 +530,7 @@ The `region` parameter in path is needed in both case.
     this.client.fetch<Secret>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/secret-manager/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}/restore`,
         signal: options?.signal,

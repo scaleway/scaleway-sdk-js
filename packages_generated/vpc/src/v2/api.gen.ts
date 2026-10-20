@@ -164,7 +164,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateVPCRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs`,
         signal: options?.signal,
@@ -202,7 +202,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateVPCRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}`,
         signal: options?.signal,
@@ -271,7 +271,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreatePrivateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks`,
         signal: options?.signal,
@@ -309,7 +309,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdatePrivateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}`,
         signal: options?.signal,
@@ -343,7 +343,7 @@ export class API extends ParentAPI {
     this.client.fetch<PrivateNetwork>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/enable-dhcp`,
         signal: options?.signal,
@@ -362,7 +362,7 @@ export class API extends ParentAPI {
     this.client.fetch<VPC>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/enable-routing`,
         signal: options?.signal,
@@ -381,7 +381,7 @@ export class API extends ParentAPI {
     this.client.fetch<VPC>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/enable-custom-routes-propagation`,
         signal: options?.signal,
@@ -431,7 +431,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateRouteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
         signal: options?.signal,
@@ -469,7 +469,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateRouteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
         signal: options?.signal,
@@ -525,7 +525,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetAclRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpcs/${validatePathParam('vpcId', request.vpcId)}/acl-rules`,
         signal: options?.signal,
@@ -578,7 +578,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateVPCConnectorRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors`,
         signal: options?.signal,
@@ -616,7 +616,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateVPCConnectorRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpc-connectors/${validatePathParam('vpcConnectorId', request.vpcConnectorId)}`,
         signal: options?.signal,
@@ -709,7 +709,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateIngressRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules`,
         signal: options?.signal,
@@ -747,7 +747,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateIngressRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ingress-rules/${validatePathParam('ruleId', request.ruleId)}`,
         signal: options?.signal,
@@ -783,7 +783,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalEnableObjectStoragePrivateAccessRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/enable`,
         signal: options?.signal,
@@ -821,7 +821,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddPrivateNetworkObjectStoragePrivateAccessRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/private-networks`,
         signal: options?.signal,
@@ -842,7 +842,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetPrivateNetworksObjectStoragePrivateAccessRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/vpc/v2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/object-storage-private-access/${validatePathParam('vpcId', request.vpcId)}/private-networks`,
         signal: options?.signal,
