@@ -286,6 +286,10 @@ export interface DataSource {
    * Usage of the month in bytes.
    */
   currentMonthUsage?: number
+  /**
+   * The SRN of the data-source.
+   */
+  srn: string
 }
 
 
@@ -341,6 +345,10 @@ export interface Exporter {
    * The region in which the export is located.
    */
   region: ScwRegion
+  /**
+   * The SRN of the exporter.
+   */
+  srn: string
 }
 
 
@@ -524,6 +532,10 @@ export interface Usage {
  */
 export interface AlertManager {
   /**
+   * Alert manager id.
+   */
+  id: string
+  /**
    * Alert manager URL.
    */
   alertManagerUrl?: string
@@ -539,6 +551,10 @@ export interface AlertManager {
    * Regions where the Alert manager is enabled.
    */
   region: ScwRegion
+  /**
+   * The SRN of the alert-manager.
+   */
+  srn: string
 }
 
 
