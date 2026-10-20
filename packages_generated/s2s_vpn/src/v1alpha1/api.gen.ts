@@ -207,7 +207,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateVpnGatewayRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpn-gateways`,
         signal: options?.signal,
@@ -228,7 +228,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateVpnGatewayRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/vpn-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
         signal: options?.signal,
@@ -318,7 +318,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateConnectionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections`,
         signal: options?.signal,
@@ -339,7 +339,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateConnectionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}`,
         signal: options?.signal,
@@ -375,7 +375,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalRenewConnectionPskRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/renew-psk`,
         signal: options?.signal,
@@ -396,7 +396,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalChangeConnectionPskRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/change-psk`,
         signal: options?.signal,
@@ -417,7 +417,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/set-routing-policy`,
         signal: options?.signal,
@@ -438,7 +438,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalDetachRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/detach-routing-policy`,
         signal: options?.signal,
@@ -457,7 +457,7 @@ export class API extends ParentAPI {
     this.client.fetch<Connection>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/enable-route-propagation`,
         signal: options?.signal,
@@ -476,7 +476,7 @@ export class API extends ParentAPI {
     this.client.fetch<Connection>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/connections/${validatePathParam('connectionId', request.connectionId)}/disable-route-propagation`,
         signal: options?.signal,
@@ -543,7 +543,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateCustomerGatewayRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/customer-gateways`,
         signal: options?.signal,
@@ -564,7 +564,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateCustomerGatewayRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/customer-gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
         signal: options?.signal,
@@ -647,7 +647,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies`,
         signal: options?.signal,
@@ -668,7 +668,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/s2s-vpn/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
         signal: options?.signal,

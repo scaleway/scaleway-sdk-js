@@ -254,6 +254,10 @@ export interface RuleSpecs {
    * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be set.
    */
   organizationId?: string
+  /**
+   * Select whether the rule should remove the permissions instead of granting them.
+   */
+  deny: boolean
 }
 
 
@@ -715,6 +719,10 @@ export interface Rule {
    */
   id: string
   /**
+   * The SRN of the rule.
+   */
+  srn: string
+  /**
    * Names of permission sets bound to the rule.
    */
   permissionSetNames?: string[]
@@ -745,9 +753,9 @@ export interface Rule {
    */
   accountRootUserId?: string
   /**
-   * The SRN of the rule.
+   * Select whether the rule should remove the permissions instead of granting them.
    */
-  srn: string
+  deny: boolean
 }
 
 

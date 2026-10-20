@@ -104,7 +104,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateJobDefinitionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions`,
         signal: options?.signal,
@@ -169,7 +169,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateJobDefinitionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}`,
         signal: options?.signal,
@@ -205,7 +205,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalStartJobDefinitionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-definitions/${validatePathParam('jobDefinitionId', request.jobDefinitionId)}/start`,
         signal: options?.signal,
@@ -272,7 +272,7 @@ export class API extends ParentAPI {
     this.client.fetch<JobRun>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/job-runs/${validatePathParam('jobRunId', request.jobRunId)}/stop`,
         signal: options?.signal,
@@ -293,7 +293,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateSecretsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets`,
         signal: options?.signal,
@@ -351,7 +351,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateSecretRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/secrets/${validatePathParam('secretId', request.secretId)}`,
         signal: options?.signal,
@@ -387,7 +387,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateTriggerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
         signal: options?.signal,
@@ -451,7 +451,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateTriggerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/serverless-jobs/v1alpha2/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
         signal: options?.signal,

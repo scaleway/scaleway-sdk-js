@@ -116,7 +116,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateBudgetRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/billing/v2/budgets`,
         signal: options?.signal,
@@ -137,7 +137,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateBudgetRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/billing/v2/budgets/${validatePathParam('budgetId', request.budgetId)}`,
         signal: options?.signal,
@@ -173,7 +173,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateBudgetAlertRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/billing/v2/budget-alerts`,
         signal: options?.signal,
@@ -194,7 +194,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateBudgetAlertRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/billing/v2/budget-alerts/${validatePathParam('budgetAlertId', request.budgetAlertId)}`,
         signal: options?.signal,
@@ -230,7 +230,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateBudgetAlertNotificationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/billing/v2/budget-alert-notifications`,
         signal: options?.signal,
@@ -251,7 +251,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateBudgetAlertNotificationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/billing/v2/budget-alert-notifications/${validatePathParam('budgetAlertNotificationId', request.budgetAlertNotificationId)}`,
         signal: options?.signal,
@@ -340,7 +340,7 @@ export class ElectronicBillingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalElectronicBillingApiCreateElectronicAddressRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/billing/v2/electronic-address`,
         signal: options?.signal,
@@ -361,7 +361,7 @@ export class ElectronicBillingAPI extends ParentAPI {
         body: JSON.stringify(
           marshalElectronicBillingApiUpdateElectronicAddressRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/billing/v2/electronic-address/${validatePathParam('electronicAddressId', request.electronicAddressId)}`,
         signal: options?.signal,

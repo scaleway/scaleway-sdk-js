@@ -150,7 +150,7 @@ To create a volume from an existing snapshot, specify `from_snapshot` and the `s
         body: JSON.stringify(
           marshalCreateVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
         signal: options?.signal,
@@ -222,7 +222,7 @@ You can only resize a volume to a larger size. It is currently not possible to c
         body: JSON.stringify(
           marshalUpdateVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
         signal: options?.signal,
@@ -310,7 +310,7 @@ If your volume is in a transient state, you need to wait until the end of the cu
         body: JSON.stringify(
           marshalCreateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
         signal: options?.signal,
@@ -332,7 +332,7 @@ The bucket can be imported into any Availability Zone as long as it is in the sa
         body: JSON.stringify(
           marshalImportSnapshotFromObjectStorageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`,
         signal: options?.signal,
@@ -354,7 +354,7 @@ The snapshot must not be in transient state.
         body: JSON.stringify(
           marshalExportSnapshotToObjectStorageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export-to-object-storage`,
         signal: options?.signal,
@@ -390,7 +390,7 @@ The snapshot must not be in transient state.
         body: JSON.stringify(
           marshalUpdateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/block/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
         signal: options?.signal,
