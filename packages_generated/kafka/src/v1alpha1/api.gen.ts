@@ -195,7 +195,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateClusterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters`,
         signal: options?.signal,
@@ -216,7 +216,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateClusterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
         signal: options?.signal,
@@ -271,7 +271,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/renew-certificate-authority`,
         signal: options?.signal,
@@ -306,7 +306,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateEndpointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
         signal: options?.signal,
@@ -353,7 +353,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/kafka/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/clusters/${validatePathParam('clusterId', request.clusterId)}/users/${validatePathParam('username', request.username)}`,
         signal: options?.signal,

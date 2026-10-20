@@ -288,7 +288,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiCreateLbRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs`,
         signal: options?.signal,
@@ -344,7 +344,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateLbRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
         signal: options?.signal,
@@ -383,7 +383,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiMigrateLbRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/migrate`,
         signal: options?.signal,
@@ -433,7 +433,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiCreateIpRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
         signal: options?.signal,
@@ -486,7 +486,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateIpRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
         signal: options?.signal,
@@ -533,7 +533,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiCreateBackendRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
         signal: options?.signal,
@@ -571,7 +571,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateBackendRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}`,
         signal: options?.signal,
@@ -607,7 +607,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiAddBackendServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
         signal: options?.signal,
@@ -628,7 +628,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiRemoveBackendServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
         signal: options?.signal,
@@ -649,7 +649,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiSetBackendServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
         signal: options?.signal,
@@ -670,7 +670,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateHealthCheckRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/backends/${validatePathParam('backendId', request.backendId)}/healthcheck`,
         signal: options?.signal,
@@ -717,7 +717,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiCreateFrontendRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
         signal: options?.signal,
@@ -755,7 +755,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateFrontendRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
         signal: options?.signal,
@@ -817,7 +817,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiCreateRouteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes`,
         signal: options?.signal,
@@ -855,7 +855,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateRouteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/routes/${validatePathParam('routeId', request.routeId)}`,
         signal: options?.signal,
@@ -963,7 +963,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiCreateAclRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
         signal: options?.signal,
@@ -1001,7 +1001,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateAclRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/acls/${validatePathParam('aclId', request.aclId)}`,
         signal: options?.signal,
@@ -1037,7 +1037,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiSetAclsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
         signal: options?.signal,
@@ -1058,7 +1058,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiCreateCertificateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
         signal: options?.signal,
@@ -1140,7 +1140,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateCertificateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
         signal: options?.signal,
@@ -1200,7 +1200,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiCreateSubscriberRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers`,
         signal: options?.signal,
@@ -1266,7 +1266,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiUpdateSubscriberRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
         signal: options?.signal,
@@ -1302,7 +1302,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiSubscribeToLbRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lb/${validatePathParam('lbId', request.lbId)}/subscribe`,
         signal: options?.signal,
@@ -1365,7 +1365,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiAttachPrivateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/attach-private-network`,
         signal: options?.signal,
@@ -1385,7 +1385,7 @@ export class ZonedAPI extends ParentAPI {
         body: JSON.stringify(
           marshalZonedApiDetachPrivateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/detach-private-network`,
         signal: options?.signal,
@@ -1456,7 +1456,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateLbRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs`,
         signal: options?.signal,
@@ -1512,7 +1512,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateLbRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
         signal: options?.signal,
@@ -1551,7 +1551,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalMigrateLbRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/migrate`,
         signal: options?.signal,
@@ -1601,7 +1601,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateIpRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
         signal: options?.signal,
@@ -1654,7 +1654,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateIpRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
         signal: options?.signal,
@@ -1701,7 +1701,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateBackendRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/backends`,
         signal: options?.signal,
@@ -1739,7 +1739,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateBackendRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}`,
         signal: options?.signal,
@@ -1775,7 +1775,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddBackendServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
         signal: options?.signal,
@@ -1796,7 +1796,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalRemoveBackendServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
         signal: options?.signal,
@@ -1817,7 +1817,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetBackendServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/servers`,
         signal: options?.signal,
@@ -1838,7 +1838,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateHealthCheckRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backends/${validatePathParam('backendId', request.backendId)}/healthcheck`,
         signal: options?.signal,
@@ -1885,7 +1885,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateFrontendRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/frontends`,
         signal: options?.signal,
@@ -1923,7 +1923,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateFrontendRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}`,
         signal: options?.signal,
@@ -1985,7 +1985,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateRouteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes`,
         signal: options?.signal,
@@ -2023,7 +2023,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateRouteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routes/${validatePathParam('routeId', request.routeId)}`,
         signal: options?.signal,
@@ -2131,7 +2131,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateAclRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/frontends/${validatePathParam('frontendId', request.frontendId)}/acls`,
         signal: options?.signal,
@@ -2169,7 +2169,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateAclRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/acls/${validatePathParam('aclId', request.aclId)}`,
         signal: options?.signal,
@@ -2205,7 +2205,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateCertificateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/certificates`,
         signal: options?.signal,
@@ -2287,7 +2287,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateCertificateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
         signal: options?.signal,
@@ -2347,7 +2347,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateSubscriberRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers`,
         signal: options?.signal,
@@ -2413,7 +2413,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateSubscriberRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/subscribers/${validatePathParam('subscriberId', request.subscriberId)}`,
         signal: options?.signal,
@@ -2449,7 +2449,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSubscribeToLbRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lb/${validatePathParam('lbId', request.lbId)}/subscribe`,
         signal: options?.signal,
@@ -2512,7 +2512,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAttachPrivateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/attach`,
         signal: options?.signal,
@@ -2530,7 +2530,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}/private-networks/${validatePathParam('privateNetworkId', request.privateNetworkId)}/detach`,
         signal: options?.signal,

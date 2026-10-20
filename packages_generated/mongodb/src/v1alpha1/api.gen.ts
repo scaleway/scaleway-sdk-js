@@ -214,7 +214,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateInstanceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances`,
         signal: options?.signal,
@@ -235,7 +235,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateInstanceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}`,
         signal: options?.signal,
@@ -273,7 +273,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpgradeInstanceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/upgrade`,
         signal: options?.signal,
@@ -314,7 +314,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/snapshots`,
         signal: options?.signal,
@@ -370,7 +370,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
         signal: options?.signal,
@@ -391,7 +391,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalRestoreSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/restore`,
         signal: options?.signal,
@@ -484,7 +484,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users`,
         signal: options?.signal,
@@ -505,7 +505,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
         signal: options?.signal,
@@ -523,7 +523,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/users/${validatePathParam('name', request.name)}`,
         signal: options?.signal,
@@ -543,7 +543,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetUserRoleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/instances/${validatePathParam('instanceId', request.instanceId)}/roles`,
         signal: options?.signal,
@@ -579,7 +579,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateEndpointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mongodb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
         signal: options?.signal,

@@ -85,7 +85,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDeploymentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
         signal: options?.signal,
@@ -106,7 +106,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDeploymentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
         signal: options?.signal,
@@ -127,7 +127,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpgradeDeploymentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/upgrade`,
         signal: options?.signal,
@@ -280,7 +280,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateEndpointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
         signal: options?.signal,
@@ -342,7 +342,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users`,
         signal: options?.signal,
@@ -363,7 +363,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/messageq/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
         signal: options?.signal,

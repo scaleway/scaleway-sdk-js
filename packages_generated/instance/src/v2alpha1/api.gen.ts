@@ -283,7 +283,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         signal: options?.signal,
@@ -339,7 +339,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
         signal: options?.signal,
@@ -441,7 +441,7 @@ export class API extends ParentAPI {
     this.client.fetch<Server>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start`,
         signal: options?.signal,
@@ -461,7 +461,7 @@ at any time.
     this.client.fetch<Server>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start-spot`,
         signal: options?.signal,
@@ -480,7 +480,7 @@ at any time.
     this.client.fetch<Server>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
         signal: options?.signal,
@@ -499,7 +499,7 @@ at any time.
     this.client.fetch<Server>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/pause`,
         signal: options?.signal,
@@ -518,7 +518,7 @@ at any time.
     this.client.fetch<Server>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop`,
         signal: options?.signal,
@@ -539,7 +539,7 @@ at any time.
         body: JSON.stringify(
           marshalStopAndDeleteServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop-and-delete`,
         signal: options?.signal,
@@ -560,7 +560,7 @@ at any time.
         body: JSON.stringify(
           marshalAttachServerVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-volume`,
         signal: options?.signal,
@@ -581,7 +581,7 @@ at any time.
         body: JSON.stringify(
           marshalDetachServerVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-volume`,
         signal: options?.signal,
@@ -602,7 +602,7 @@ at any time.
         body: JSON.stringify(
           marshalAttachServerFileSystemRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-filesystem`,
         signal: options?.signal,
@@ -623,7 +623,7 @@ at any time.
         body: JSON.stringify(
           marshalDetachServerFileSystemRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-filesystem`,
         signal: options?.signal,
@@ -644,7 +644,7 @@ at any time.
         body: JSON.stringify(
           marshalAttachServerIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-ip`,
         signal: options?.signal,
@@ -665,7 +665,7 @@ at any time.
         body: JSON.stringify(
           marshalDetachServerIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-ip`,
         signal: options?.signal,
@@ -686,7 +686,7 @@ at any time.
         body: JSON.stringify(
           marshalSetServerDefaultIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/set-default-ip`,
         signal: options?.signal,
@@ -707,7 +707,7 @@ at any time.
         body: JSON.stringify(
           marshalAttachServerPrivateNetworkInterfaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/attach-private-network-interface`,
         signal: options?.signal,
@@ -728,7 +728,7 @@ at any time.
         body: JSON.stringify(
           marshalDetachServerPrivateNetworkInterfaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/detach-private-network-interface`,
         signal: options?.signal,
@@ -775,7 +775,7 @@ at any time.
         body: JSON.stringify(
           marshalCreatePrivateNetworkInterfaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces`,
         signal: options?.signal,
@@ -831,7 +831,7 @@ at any time.
         body: JSON.stringify(
           marshalUpdatePrivateNetworkInterfaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces/${validatePathParam('privateNetworkInterfaceId', request.privateNetworkInterfaceId)}`,
         signal: options?.signal,
@@ -859,7 +859,7 @@ at any time.
     this.client.fetch<PrivateNetworkInterface>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/private-network-interfaces/${validatePathParam('privateNetworkInterfaceId', request.privateNetworkInterfaceId)}/detach-and-delete`,
         signal: options?.signal,
@@ -906,7 +906,7 @@ at any time.
         body: JSON.stringify(
           marshalCreatePlacementGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement-groups`,
         signal: options?.signal,
@@ -944,7 +944,7 @@ at any time.
         body: JSON.stringify(
           marshalUpdatePlacementGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/placement-groups/${validatePathParam('placementGroupId', request.placementGroupId)}`,
         signal: options?.signal,
@@ -1006,7 +1006,7 @@ at any time.
         body: JSON.stringify(
           marshalCreateSecurityGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-groups`,
         signal: options?.signal,
@@ -1044,7 +1044,7 @@ at any time.
         body: JSON.stringify(
           marshalUpdateSecurityGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-groups/${validatePathParam('securityGroupId', request.securityGroupId)}`,
         signal: options?.signal,
@@ -1080,7 +1080,7 @@ at any time.
         body: JSON.stringify(
           marshalAddSecurityGroupRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-group-rules`,
         signal: options?.signal,
@@ -1101,7 +1101,7 @@ at any time.
         body: JSON.stringify(
           marshalSetSecurityGroupRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-group-rules`,
         signal: options?.signal,
@@ -1122,7 +1122,7 @@ at any time.
         body: JSON.stringify(
           marshalUpdateSecurityGroupRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-group-rules/${validatePathParam('securityGroupRuleId', request.securityGroupRuleId)}`,
         signal: options?.signal,
@@ -1142,7 +1142,7 @@ at any time.
         body: JSON.stringify(
           marshalDeleteSecurityGroupRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/security-group-rules`,
         signal: options?.signal,
@@ -1199,7 +1199,7 @@ at any time.
         body: JSON.stringify(
           marshalSetUserDataRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user-data/${validatePathParam('key', request.key)}`,
         signal: options?.signal,
@@ -1250,7 +1250,7 @@ at any time.
         body: JSON.stringify(
           marshalSetServerCloudInitRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/user-data/cloud-init`,
         signal: options?.signal,
@@ -1299,7 +1299,7 @@ at any time.
         body: JSON.stringify(
           marshalCreateTemplateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates`,
         signal: options?.signal,
@@ -1337,7 +1337,7 @@ at any time.
         body: JSON.stringify(
           marshalUpdateTemplateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}`,
         signal: options?.signal,
@@ -1355,7 +1355,7 @@ at any time.
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}`,
         signal: options?.signal,
@@ -1412,7 +1412,7 @@ at any time.
         body: JSON.stringify(
           marshalSetTemplateUserDataRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/user-data/${validatePathParam('key', request.key)}`,
         signal: options?.signal,
@@ -1463,7 +1463,7 @@ at any time.
         body: JSON.stringify(
           marshalSetTemplateCloudInitRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/user-data/cloud-init`,
         signal: options?.signal,
@@ -1498,7 +1498,7 @@ at any time.
         body: JSON.stringify(
           marshalCreateServerFromTemplateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/templates/${validatePathParam('templateId', request.templateId)}/create-server`,
         signal: options?.signal,
@@ -1559,7 +1559,7 @@ at any time.
         body: JSON.stringify(
           marshalUpdateDedicatedPoolRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/dedicated-pools/${validatePathParam('dedicatedPoolId', request.dedicatedPoolId)}`,
         signal: options?.signal,
@@ -1677,7 +1677,7 @@ export class VolumeAPI extends ParentAPI {
         body: JSON.stringify(
           marshalVolumeApiCreateVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes`,
         signal: options?.signal,
@@ -1733,7 +1733,7 @@ export class VolumeAPI extends ParentAPI {
         body: JSON.stringify(
           marshalVolumeApiUpdateVolumeRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/volumes/${validatePathParam('volumeId', request.volumeId)}`,
         signal: options?.signal,
@@ -1796,7 +1796,7 @@ export class VolumeAPI extends ParentAPI {
         body: JSON.stringify(
           marshalVolumeApiCreateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots`,
         signal: options?.signal,
@@ -1852,7 +1852,7 @@ export class VolumeAPI extends ParentAPI {
         body: JSON.stringify(
           marshalVolumeApiUpdateSnapshotRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}`,
         signal: options?.signal,
@@ -1888,7 +1888,7 @@ export class VolumeAPI extends ParentAPI {
         body: JSON.stringify(
           marshalVolumeApiImportSnapshotFromObjectStorageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/import-from-object-storage`,
         signal: options?.signal,
@@ -1909,7 +1909,7 @@ export class VolumeAPI extends ParentAPI {
         body: JSON.stringify(
           marshalVolumeApiExportSnapshotToObjectStorageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/instance/v2alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/snapshots/${validatePathParam('snapshotId', request.snapshotId)}/export-to-object-storage`,
         signal: options?.signal,

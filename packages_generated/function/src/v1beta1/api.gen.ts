@@ -187,7 +187,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateNamespaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
         signal: options?.signal,
@@ -208,7 +208,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateNamespaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
         signal: options?.signal,
@@ -310,7 +310,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateFunctionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions`,
         signal: options?.signal,
@@ -334,7 +334,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         body: JSON.stringify(
           marshalUpdateFunctionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}`,
         signal: options?.signal,
@@ -370,7 +370,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
     this.client.fetch<Function>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/functions/${validatePathParam('functionId', request.functionId)}/deploy`,
         signal: options?.signal,
@@ -506,7 +506,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         body: JSON.stringify(
           marshalCreateCronRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons`,
         signal: options?.signal,
@@ -527,7 +527,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         body: JSON.stringify(
           marshalUpdateCronRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
         signal: options?.signal,
@@ -626,7 +626,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         body: JSON.stringify(
           marshalCreateDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
         signal: options?.signal,
@@ -665,7 +665,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         body: JSON.stringify(
           marshalCreateTokenRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
         signal: options?.signal,
@@ -765,7 +765,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         body: JSON.stringify(
           marshalCreateTriggerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
         signal: options?.signal,
@@ -857,7 +857,7 @@ This behavior can be changed by setting the `redeploy` field to `false` in the r
         body: JSON.stringify(
           marshalUpdateTriggerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/functions/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
         signal: options?.signal,

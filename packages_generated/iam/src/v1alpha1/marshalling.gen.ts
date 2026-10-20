@@ -627,6 +627,7 @@ const unmarshalRule = (data: unknown): Rule => {
   return {
     accountRootUserId: data.account_root_user_id,
     condition: data.condition,
+    deny: data.deny,
     id: data.id,
     organizationId: data.organization_id,
     permissionSetNames: data.permission_set_names,
@@ -936,6 +937,7 @@ const marshalRuleSpecs = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   condition: request.condition,
+  deny: request.deny,
   permission_set_names: request.permissionSetNames,  
   ...resolveOneOf<string[] | string>([
     {param: 'project_ids',
