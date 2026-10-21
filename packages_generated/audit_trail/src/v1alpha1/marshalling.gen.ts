@@ -192,6 +192,8 @@ const unmarshalAlertRule = (data: unknown): AlertRule => {
     description: data.description,
     id: data.id,
     name: data.name,
+    region: data.region,
+    srn: data.srn,
     status: data.status,
   } as AlertRule
 }
