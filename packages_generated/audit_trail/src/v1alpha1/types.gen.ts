@@ -1487,6 +1487,18 @@ export interface EventsOverview {
 }
 
 
+export type GetCustomAlertRuleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the custom alert rule to retrieve.
+   */
+  customAlertRuleId: string
+}
+
+
 export type GetLastEventsOverviewRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
