@@ -209,6 +209,8 @@ export class API extends ParentAPI {
         'pl-waw-2',
         'pl-waw-3',
         'it-mil-1',
+        'it-mil-2',
+        'it-mil-3',
       ],
     })
   
