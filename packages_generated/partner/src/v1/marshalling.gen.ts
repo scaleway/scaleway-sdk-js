@@ -32,6 +32,7 @@ export const unmarshalOrganization = (data: unknown): Organization => {
     ownerLastname: data.owner_lastname,
     phoneNumber: data.phone_number,
     pictureLink: data.picture_link,
+    srn: data.srn,
     status: data.status,
   } as Organization
 }

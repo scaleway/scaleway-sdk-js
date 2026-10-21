@@ -687,6 +687,10 @@ export type UpdateClusterRequest = {
    * Version of Kafka.
    */
   version?: string
+  /**
+   * New volume size for each broker, can only increase.
+   */
+  volumeSizeBytes?: number
 }
 
 
