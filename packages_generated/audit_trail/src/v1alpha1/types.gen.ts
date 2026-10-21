@@ -1129,6 +1129,10 @@ export interface AlertRule {
    */
   id: string
   /**
+   * The SRN of the alert rule.
+   */
+  srn: string
+  /**
    * Name of the alert rule.
    */
   name: string
@@ -1140,6 +1144,10 @@ export interface AlertRule {
    * Current status of the alert rule.
    */
   status: AlertRuleStatus
+  /**
+   * Region of the alert rule.
+   */
+  region: ScwRegion
 }
 
 
@@ -1484,6 +1492,18 @@ export interface EnableCustomAlertRulesResponse {
 
 export interface EventsOverview {
   lastEvents: Event[]
+}
+
+
+export type GetCustomAlertRuleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion
+  /**
+   * ID of the custom alert rule to retrieve.
+   */
+  customAlertRuleId: string
 }
 
 

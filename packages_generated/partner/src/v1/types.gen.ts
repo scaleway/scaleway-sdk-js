@@ -75,6 +75,10 @@ export interface Organization {
    * A comment about the organization.
    */
   comment: string
+  /**
+   * The SRN of the organization.
+   */
+  srn: string
 }
 
 
