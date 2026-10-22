@@ -432,6 +432,7 @@ export const marshalUpdateClusterRequest = (
   name: request.name,
   tags: request.tags,
   version: request.version,
+  volume_size_bytes: request.volumeSizeBytes,
 })
 
 export const marshalUpdateUserRequest = (

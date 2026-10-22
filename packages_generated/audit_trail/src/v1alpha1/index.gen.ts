@@ -66,6 +66,7 @@ export type {
   ExportJobS3,
   ExportJobStatus,
   ExportJobStatusCode,
+  GetCustomAlertRuleRequest,
   GetLastEventsOverviewRequest,
   InstancePrivateNetworkInterfaceInfo,
   InstanceServerInfo,
