@@ -167,6 +167,9 @@ catalogs:
     '@scaleway/random-name':
       specifier: 6.0.2
       version: 6.0.2
+    '@scaleway/srn':
+      specifier: 0.0.3
+      version: 0.0.3
     '@scaleway/use-dataloader':
       specifier: 7.2.1
       version: 7.2.1
@@ -261,6 +264,10 @@ importers:
         version: 5.0.3(@types/node@26.6.4)(@vitest/coverage-v8@5.0.3)(@vitest/ui@5.0.3)(jsdom@30.1.2)(vite@8.3.4(@types/node@26.6.4)(yaml@2.9.1))
 
   packages/client:
+    dependencies:
+      '@scaleway/srn':
+        specifier: 'catalog:'
+        version: 0.0.3(@scaleway/sdk-client@2.16.0)
     devDependencies:
       '@repo/configs':
         specifier: workspace:^
@@ -2288,6 +2295,15 @@ packages:
     resolution: {integrity: sha512-fhR2aCzxoZlOZcCM42srbALdpdqMy79LwOK5mVf4sGG1uknn095mr5PQ/0/zwfk/FX2KycZwbKJzr4zP6CG3Zg==}
     engines: {node: '>=24.x'}
 
+  '@scaleway/sdk-client@2.16.0':
+    resolution: {integrity: sha512-ZUoMPWY8b0YVD8hCvKVhyjJQwkwHmTKJQaGC6fWjexu7JF2LnYnWlVamZlImbyrThskhUvFP2VGEaYKbVLmCiw==}
+
+  '@scaleway/srn@0.0.3':
+    resolution: {integrity: sha512-kLUq90To4iVBWQZDc6Es2Qh2DL4zYWWOc878nQpmC3L4bVaiWDOkoiLanHTOaEchPkc1UXU2axuy7dMsj+DvXg==}
+    engines: {node: 24.x || 25.x || 26.x}
+    peerDependencies:
+      '@scaleway/sdk-client': ^2.4.0
+
   '@scaleway/sync-peer-deps@1.1.3':
     resolution: {integrity: sha512-YsrMrw3V0OOkNyfa8Aceb/5t3LmZstnlnta6SXi6evHxRiy+r7wXJkB7JBkguCVJqOw/sAFMKrODhc0na673fg==}
     engines: {node: 24.x || 25.x || 26.x}
@@ -3892,6 +3908,12 @@ snapshots:
   '@scaleway/pnpm-auto-release@0.0.2': {}
 
   '@scaleway/random-name@6.0.2': {}
+
+  '@scaleway/sdk-client@2.16.0': {}
+
+  '@scaleway/srn@0.0.3(@scaleway/sdk-client@2.16.0)':
+    dependencies:
+      '@scaleway/sdk-client': 2.16.0
 
   '@scaleway/sync-peer-deps@1.1.3':
     dependencies:

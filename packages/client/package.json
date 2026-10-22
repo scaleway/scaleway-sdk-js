@@ -31,6 +31,9 @@
     "typecheck": "tsc --noEmit",
     "build": "tsdown --config tsdown.config.ts"
   },
+  "dependencies": {
+    "@scaleway/srn": "catalog:"
+  },
   "devDependencies": {
     "@repo/configs": "workspace:^",
     "@types/node": "catalog:"
