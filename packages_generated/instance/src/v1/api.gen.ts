@@ -1479,7 +1479,15 @@ If the specified Instance offer is flagged as end of service, the best compatibl
           ['project', request.project],
           ['tags', request.tags
           && request.tags.length > 0 ? request.tags.join(',') : undefined],
-          ['type', request.type],
+          ['type', request.type],  
+          ...Object.entries(resolveOneOf<string | boolean>([
+            {param: 'server',
+              value: request.server,
+            },
+            {param: 'detached',
+              value: request.detached,
+            },
+          ])),
         ),
         signal: options?.signal,
       },

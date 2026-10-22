@@ -532,9 +532,9 @@ export interface Usage {
  */
 export interface AlertManager {
   /**
-   * Alert manager id.
+   * ID of the project.
    */
-  id: string
+  projectId: string
   /**
    * Alert manager URL.
    */
@@ -805,6 +805,14 @@ export interface Grafana {
    * URL to access your Cockpit's Grafana.
    */
   grafanaUrl: string
+  /**
+   * ID of the project.
+   */
+  projectId: string
+  /**
+   * The SRN of the grafana.
+   */
+  srn: string
 }
 
 

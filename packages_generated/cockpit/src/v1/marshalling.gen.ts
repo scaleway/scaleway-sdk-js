@@ -235,8 +235,8 @@ export const unmarshalAlertManager = (data: unknown): AlertManager => {
   return {
     alertManagerEnabled: data.alert_manager_enabled,
     alertManagerUrl: data.alert_manager_url,
-    id: data.id,
     managedAlertsEnabled: data.managed_alerts_enabled,
+    projectId: data.project_id,
     region: data.region,
     srn: data.srn,
   } as AlertManager
@@ -333,6 +333,8 @@ export const unmarshalGrafana = (data: unknown): Grafana => {
 
   return {
     grafanaUrl: data.grafana_url,
+    projectId: data.project_id,
+    srn: data.srn,
   } as Grafana
 }
 
