@@ -35,6 +35,8 @@ overrides:
 minimumReleaseAge: 720
 minimumReleaseAgeExclude:
   - '@scaleway/*'
+  # Renovate security update: @vitest/ui@5.0.5
+  - "@vitest/ui@5.0.5"
 
 # Needed as we run a pnpm install after building packages
 optimisticRepeatInstall: false
