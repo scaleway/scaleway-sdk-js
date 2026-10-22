@@ -2195,6 +2195,16 @@ export type ListIpsRequest = {
    * Filter on the IP Mobility IP type (whose value should be either 'routed_ipv4' or 'routed_ipv6').
    */
   type?: string
+  /**
+   *
+   * One-of ('kind'): at most one of 'server', 'detached' could be set.
+   */
+  server?: string
+  /**
+   *
+   * One-of ('kind'): at most one of 'server', 'detached' could be set.
+   */
+  detached?: boolean
 }
 
 
