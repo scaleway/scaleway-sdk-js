@@ -114,6 +114,7 @@ export const unmarshalIp = (data: unknown): Ip => {
     projectId: data.project_id,
     region: data.region,
     reverse: data.reverse,
+    srn: data.srn,
     tags: data.tags,
     zone: data.zone,
   } as Ip
@@ -154,7 +155,9 @@ export const unmarshalSubscriber = (data: unknown): Subscriber => {
     emailConfig: data.email_config ? unmarshalSubscriberEmailConfig(data.email_config) : undefined,
     id: data.id,
     name: data.name,
+    srn: data.srn,
     webhookConfig: data.webhook_config ? unmarshalSubscriberWebhookConfig(data.webhook_config) : undefined,
+    zone: data.zone,
   } as Subscriber
 }
 
@@ -309,6 +312,7 @@ export const unmarshalLb = (data: unknown): Lb => {
     projectId: data.project_id,
     region: data.region,
     routeCount: data.route_count,
+    srn: data.srn,
     sslCompatibilityLevel: data.ssl_compatibility_level,
     status: data.status,
     subscriber: data.subscriber ? unmarshalSubscriber(data.subscriber) : undefined,
@@ -345,6 +349,7 @@ export const unmarshalBackend = (data: unknown): Backend => {
     proxyProtocol: data.proxy_protocol,
     redispatchAttemptCount: data.redispatch_attempt_count,
     sendProxyV2: data.send_proxy_v2,
+    srn: data.srn,
     sslBridging: data.ssl_bridging,
     stickySessions: data.sticky_sessions,
     stickySessionsCookieName: data.sticky_sessions_cookie_name,
@@ -353,6 +358,7 @@ export const unmarshalBackend = (data: unknown): Backend => {
     timeoutServer: data.timeout_server,
     timeoutTunnel: data.timeout_tunnel,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as Backend
 }
 
@@ -372,11 +378,13 @@ export const unmarshalCertificate = (data: unknown): Certificate => {
     name: data.name,
     notValidAfter: unmarshalDate(data.not_valid_after),
     notValidBefore: unmarshalDate(data.not_valid_before),
+    srn: data.srn,
     status: data.status,
     statusDetails: data.status_details,
     subjectAlternativeName: data.subject_alternative_name,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as Certificate
 }
 
@@ -399,8 +407,10 @@ export const unmarshalFrontend = (data: unknown): Frontend => {
     inboundPort: data.inbound_port,
     lb: data.lb ? unmarshalLb(data.lb) : undefined,
     name: data.name,
+    srn: data.srn,
     timeoutClient: data.timeout_client,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as Frontend
 }
 
@@ -464,7 +474,9 @@ export const unmarshalAcl = (data: unknown): Acl => {
     index: data.index,
     match: data.match ? unmarshalAclMatch(data.match) : undefined,
     name: data.name,
+    srn: data.srn,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as Acl
 }
 
@@ -551,7 +563,9 @@ export const unmarshalRoute = (data: unknown): Route => {
     frontendId: data.frontend_id,
     id: data.id,
     match: data.match ? unmarshalRouteMatch(data.match) : undefined,
+    srn: data.srn,
     updatedAt: unmarshalDate(data.updated_at),
+    zone: data.zone,
   } as Route
 }
 
@@ -688,6 +702,7 @@ const unmarshalLbType = (data: unknown): LbType => {
     multicloud: data.multicloud,
     name: data.name,
     region: data.region,
+    srn: data.srn,
     stockStatus: data.stock_status,
     zone: data.zone,
   } as LbType
