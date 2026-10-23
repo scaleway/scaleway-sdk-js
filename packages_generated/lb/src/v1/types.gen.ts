@@ -317,6 +317,10 @@ export interface Ip {
    * The zone the IP address is in.
    */
   zone: ScwZone
+  /**
+   * The SRN of the IP address.
+   */
+  srn: string
 }
 
 
@@ -344,6 +348,14 @@ export interface Subscriber {
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
   webhookConfig?: SubscriberWebhookConfig
+  /**
+   * The zone the subscriber is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the subscriber.
+   */
+  srn: string
 }
 
 
@@ -498,6 +510,10 @@ export interface Lb {
    * The zone the Load Balancer is in.
    */
   zone: ScwZone
+  /**
+   * The SRN of the Load Balancer.
+   */
+  srn: string
 }
 
 
@@ -622,6 +638,14 @@ export interface Backend {
    * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
    */
   host?: string
+  /**
+   * The zone the backend is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the backend.
+   */
+  srn: string
 }
 
 
@@ -678,6 +702,14 @@ export interface Certificate {
    * Additional information about the certificate status (useful in case of certificate generation failure, for example).
    */
   statusDetails?: string
+  /**
+   * The zone the certificate is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the certificate.
+   */
+  srn: string
 }
 
 
@@ -774,6 +806,14 @@ export interface Frontend {
    * Defines whether to enable access logs on the frontend.
    */
   enableAccessLogs: boolean
+  /**
+   * The zone the frontend is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the frontend.
+   */
+  srn: string
 }
 
 
@@ -908,6 +948,14 @@ export interface Acl {
    * ACL description.
    */
   description: string
+  /**
+   * The zone the ACL is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the ACL.
+   */
+  srn: string
 }
 
 
@@ -986,6 +1034,10 @@ export interface LbType {
    * The zone the Load Balancer stock is in.
    */
   zone: ScwZone
+  /**
+   * The SRN of the Load Balancer offer type.
+   */
+  srn: string
 }
 
 
@@ -1014,6 +1066,14 @@ export interface Route {
    * Date on which the route was last updated.
    */
   updatedAt?: Date
+  /**
+   * The zone the route is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the route.
+   */
+  srn: string
 }
 
 
