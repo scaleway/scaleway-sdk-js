@@ -756,6 +756,7 @@ at any time.
           ['page_token', request.pageToken],
           ['private_network_ids', request.privateNetworkIds],
           ['project_id', request.projectId ?? this.client.settings.defaultProjectId],
+          ['security_group_ids', request.securityGroupIds],
           ['server_ids', request.serverIds],
           ['tags', request.tags],
         ),

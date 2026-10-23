@@ -390,6 +390,7 @@ const unmarshalPrivateNetworkInterfaceSummary = (data: unknown): PrivateNetworkI
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
+    securityGroupId: data.security_group_id,
     serverId: data.server_id,
     srn: data.srn,
     status: data.status,
@@ -690,6 +691,7 @@ export const unmarshalPrivateNetworkInterface = (data: unknown): PrivateNetworkI
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
+    securityGroupId: data.security_group_id,
     serverId: data.server_id,
     srn: data.srn,
     status: data.status,
@@ -867,6 +869,7 @@ const unmarshalCreateTemplateRequestPrivateNetworkTemplate = (data: unknown): Cr
 
   return {
     privateNetworkId: data.private_network_id,
+    securityGroupId: data.security_group_id,
   } as CreateTemplateRequestPrivateNetworkTemplate
 }
 
@@ -1009,6 +1012,7 @@ export const marshalCreatePrivateNetworkInterfaceRequest = (
   ip_ids: request.ipIds,
   private_network_id: request.privateNetworkId,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  security_group_id: request.securityGroupId,
   server_id: request.serverId,
   tags: request.tags,
 })
@@ -1120,6 +1124,7 @@ const marshalCreateTemplateRequestPrivateNetworkTemplate = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
+  security_group_id: request.securityGroupId,
 })
 
 const marshalCreateTemplateRequestVolumeTemplate = (
@@ -1289,6 +1294,7 @@ export const marshalUpdatePrivateNetworkInterfaceRequest = (
   request: UpdatePrivateNetworkInterfaceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  security_group_id: request.securityGroupId,
   tags: request.tags,
 })
 

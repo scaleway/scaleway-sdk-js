@@ -385,6 +385,10 @@ export interface CreateTemplateRequestPrivateNetworkTemplate {
    * ID of the private network.
    */
   privateNetworkId: string
+  /**
+   * ID of the security group for the private network.
+   */
+  securityGroupId?: string
 }
 
 
@@ -705,6 +709,10 @@ export interface PrivateNetworkInterfaceSummary {
    * ID of the Instance this interface is attached to.
    */
   serverId: string
+  /**
+   * ID of the security group associated with this interface.
+   */
+  securityGroupId: string
   /**
    * MAC address of the private network interface.
    */
@@ -1322,6 +1330,10 @@ export type CreatePrivateNetworkInterfaceRequest = {
    * ID of the Instance to attach the interface to.
    */
   serverId?: string
+  /**
+   * ID of the security group to associate with the interface.
+   */
+  securityGroupId?: string
   /**
    * List of IP IDs to attach to the interface.
    */
@@ -2051,6 +2063,10 @@ export type ListPrivateNetworkInterfacesRequest = {
    */
   serverIds?: string[]
   /**
+   * Filter by security group IDs.
+   */
+  securityGroupIds?: string[]
+  /**
    * Filter by Private Network IDs.
    */
   privateNetworkIds?: string[]
@@ -2472,6 +2488,10 @@ export interface PrivateNetworkInterface {
    * ID of the Instance this interface is attached to.
    */
   serverId: string
+  /**
+   * ID of the security group associated with this interface.
+   */
+  securityGroupId: string
   /**
    * MAC address of the private network interface.
    */
@@ -2988,6 +3008,10 @@ export type UpdatePrivateNetworkInterfaceRequest = {
    * ID of the private network interface to update.
    */
   privateNetworkInterfaceId: string
+  /**
+   * New security group ID to associate with the interface.
+   */
+  securityGroupId?: string
   /**
    * New tags to assign to the private network interface.
    */
