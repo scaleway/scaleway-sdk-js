@@ -22,6 +22,7 @@ export type ResourceType =
   | 'instance_ip'
   | 'instance_private_nic'
   | 'lb_server'
+  | 'lb_ip'
   | 'fip_ip'
   | 'vpc_gateway'
   | 'vpc_gateway_network'
