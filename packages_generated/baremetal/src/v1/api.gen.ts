@@ -42,8 +42,10 @@ import {
   marshalStartBMCAccessRequest,
   marshalStartServerRequest,
   marshalUpdateIPRequest,
+  marshalUpdateServerCommitmentRequest,
   marshalUpdateServerRequest,
   marshalUpdateSettingRequest,
+  marshalUpgradeServerCommitmentRequest,
   marshalValidatePartitioningSchemaRequest,
 } from './marshalling.gen.js'
 import type {
@@ -96,8 +98,10 @@ import type {
   StopBMCAccessRequest,
   StopServerRequest,
   UpdateIPRequest,
+  UpdateServerCommitmentRequest,
   UpdateServerRequest,
   UpdateSettingRequest,
+  UpgradeServerCommitmentRequest,
   ValidatePartitioningSchemaRequest,
 } from './types.gen.js'
 
@@ -434,6 +438,48 @@ export class API extends ParentAPI {
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/validate`,
         signal: options?.signal,
       },
+    )
+
+  
+  /**
+   * Upgrade a commitment. Start a commitment or upgrade an existing commitment on a server.
+   *
+   * @param request - The request {@link UpgradeServerCommitmentRequest}
+   * @returns A Promise of Server
+   */
+  upgradeServerCommitment = (request: Readonly<UpgradeServerCommitmentRequest>, options?: RequestOptions) =>
+    this.client.fetch<Server>(
+      {
+        body: JSON.stringify(
+          marshalUpgradeServerCommitmentRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/upgrade-commitment`,
+        signal: options?.signal,
+      },
+      unmarshalServer,
+    )
+
+  
+  /**
+   * Update a commitment. Update an existing commitment on a server to enable/disable auto-renewal.
+   *
+   * @param request - The request {@link UpdateServerCommitmentRequest}
+   * @returns A Promise of Server
+   */
+  updateServerCommitment = (request: Readonly<UpdateServerCommitmentRequest>, options?: RequestOptions) =>
+    this.client.fetch<Server>(
+      {
+        body: JSON.stringify(
+          marshalUpdateServerCommitmentRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/update-commitment`,
+        signal: options?.signal,
+      },
+      unmarshalServer,
     )
 
   
