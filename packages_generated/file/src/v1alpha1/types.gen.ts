@@ -178,7 +178,7 @@ export interface Snapshot {
   /**
    * Snapshot size in bytes.
    */
-  size: number
+  size?: number
   /**
    * Current status of the snapshot (e.g. creating, available, ...).
    */
