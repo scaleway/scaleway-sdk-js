@@ -3,6 +3,14 @@
 import type { Decimal, Money, ServiceInfo, Region as ScwRegion, ScwFile, TimeSeries, Zone as ScwZone} from '@scaleway/sdk-client'
 
 
+export type CommitmentPeriod =
+  | 'unknown_period'
+  | 'one_month'
+  | 'six_months'
+  | 'one_year'
+  | 'two_years'
+  | 'three_years'
+
 export type IPReverseStatus =
   | 'unknown'
   | 'pending'
@@ -278,6 +286,34 @@ export interface IP {
 }
 
 
+export interface ServerCommitment {
+  /**
+   * Commitment period subscribed.
+   */
+  period: CommitmentPeriod
+  /**
+   * Start of commitment subscribed.
+   */
+  startedAt?: Date
+  /**
+   * Next renew of commitment subscribed.
+   */
+  renewAt?: Date
+  /**
+   * End of commitment subscribed.
+   */
+  endAt?: Date
+  /**
+   * Discount rate for the commitment period.
+   */
+  discountRatePercent: number
+  /**
+   * Flag for automatic renewal commitment.
+   */
+  autoRenewal: boolean
+}
+
+
 export interface ServerInstall {
   /**
    * ID of the OS.
@@ -467,6 +503,22 @@ export interface Memory {
 }
 
 
+export interface OfferCommitment {
+  /**
+   * Commitment period.
+   */
+  period: CommitmentPeriod
+  /**
+   * Discount rate for the commitment period.
+   */
+  discountRatePercent: number
+  /**
+   * Fee not mandatory.
+   */
+  noFee: boolean
+}
+
+
 export interface OfferOptionOffer {
   /**
    * ID of the option.
@@ -608,6 +660,10 @@ export type CreateServerRequest = {
    * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
    */
   userData?: string
+  /**
+   * Commitment period to subscribe.
+   */
+  commitmentPeriod?: CommitmentPeriod
 }
 
 
@@ -696,6 +752,18 @@ export interface Server {
    * Optional configuration data passed to cloud-init.
    */
   userData?: string
+  /**
+   * Commitment subscribed for the server.
+   */
+  commitment?: ServerCommitment
+  /**
+   * Date on which the server will be deleted.
+   */
+  scheduledDeletionAt?: Date
+  /**
+   * True if a deletion is scheduled.
+   */
+  scheduledDeletion: boolean
 }
 
 
@@ -876,6 +944,10 @@ export interface Offer {
    * Exist only for hourly offers, to migrate to the monthly offer.
    */
   monthlyOfferId?: string
+  /**
+   * List all available commitments on the offer.
+   */
+  commitmentsAvailable: OfferCommitment[]
   /**
    * Zone in which is the offer is available.
    */
@@ -1689,6 +1761,16 @@ export type UpdateIPRequest = {
 }
 
 
+export type UpdateServerCommitmentRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  serverId: string
+  autoRenewal: boolean
+}
+
+
 export type UpdateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -1718,6 +1800,10 @@ export type UpdateServerRequest = {
    * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
    */
   userData?: string
+  /**
+   * Set false to cancel the scheduled deletion of the server.
+   */
+  scheduledDeletion?: boolean
 }
 
 
@@ -1734,6 +1820,16 @@ export type UpdateSettingRequest = {
    * Defines whether the setting is enabled.
    */
   enabled?: boolean
+}
+
+
+export type UpgradeServerCommitmentRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  serverId: string
+  period?: CommitmentPeriod
 }
 
 

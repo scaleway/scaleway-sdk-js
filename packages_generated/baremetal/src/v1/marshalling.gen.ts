@@ -17,6 +17,7 @@ import type {
   PrivateNetworkOption,
   PublicBandwidthOption,
   RemoteAccessOption,
+  ServerCommitment,
   ServerInstall,
   ServerOption,
   ServerRescueServer,
@@ -27,6 +28,7 @@ import type {
   Disk,
   GPU,
   Memory,
+  OfferCommitment,
   OfferOptionOffer,
   PersistentMemory,
   RaidController,
@@ -58,8 +60,10 @@ import type {
   StartBMCAccessRequest,
   StartServerRequest,
   UpdateIPRequest,
+  UpdateServerCommitmentRequest,
   UpdateServerRequest,
   UpdateSettingRequest,
+  UpgradeServerCommitmentRequest,
   ValidatePartitioningSchemaRequest,
 } from './types.gen.js'
 
@@ -237,6 +241,23 @@ const unmarshalRemoteAccessOption = (data: unknown): RemoteAccessOption => {
   } as RemoteAccessOption
 }
 
+const unmarshalServerCommitment = (data: unknown): ServerCommitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerCommitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    autoRenewal: data.auto_renewal,
+    discountRatePercent: data.discount_rate_percent,
+    endAt: unmarshalDate(data.end_at),
+    period: data.period,
+    renewAt: unmarshalDate(data.renew_at),
+    startedAt: unmarshalDate(data.started_at),
+  } as ServerCommitment
+}
+
 const unmarshalServerInstall = (data: unknown): ServerInstall => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -301,6 +322,7 @@ export const unmarshalServer = (data: unknown): Server => {
 
   return {
     bootType: data.boot_type,
+    commitment: data.commitment ? unmarshalServerCommitment(data.commitment) : undefined,
     createdAt: unmarshalDate(data.created_at),
     description: data.description,
     domain: data.domain,
@@ -316,6 +338,8 @@ export const unmarshalServer = (data: unknown): Server => {
     projectId: data.project_id,
     protected: data.protected,
     rescueServer: data.rescue_server ? unmarshalServerRescueServer(data.rescue_server) : undefined,
+    scheduledDeletion: data.scheduled_deletion,
+    scheduledDeletionAt: unmarshalDate(data.scheduled_deletion_at),
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -425,6 +449,20 @@ const unmarshalMemory = (data: unknown): Memory => {
   } as Memory
 }
 
+const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferCommitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    discountRatePercent: data.discount_rate_percent,
+    noFee: data.no_fee,
+    period: data.period,
+  } as OfferCommitment
+}
+
 const unmarshalOfferOptionOffer = (data: unknown): OfferOptionOffer => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -485,6 +523,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
   return {
     bandwidth: data.bandwidth,
     commercialRange: data.commercial_range,
+    commitmentsAvailable: unmarshalArrayOfObject(data.commitments_available, unmarshalOfferCommitment),
     cpus: unmarshalArrayOfObject(data.cpus, unmarshalCPU),
     disks: unmarshalArrayOfObject(data.disks, unmarshalDisk),
     dualAttach: data.dual_attach,
@@ -807,6 +846,7 @@ export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  commitment_period: request.commitmentPeriod,
   description: request.description,
   install: ((request.install !== undefined) ?  marshalCreateServerRequestInstall(request.install, defaults): undefined),
   name: request.name,
@@ -910,6 +950,13 @@ export const marshalUpdateIPRequest = (
   reverse: request.reverse,
 })
 
+export const marshalUpdateServerCommitmentRequest = (
+  request: UpdateServerCommitmentRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  auto_renewal: request.autoRenewal,
+})
+
 export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
   defaults: DefaultValues,
@@ -917,6 +964,7 @@ export const marshalUpdateServerRequest = (
   description: request.description,
   name: request.name,
   protected: request.protected,
+  scheduled_deletion: request.scheduledDeletion,
   tags: request.tags,
   user_data: request.userData,
 })
@@ -926,6 +974,13 @@ export const marshalUpdateSettingRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enabled: request.enabled,
+})
+
+export const marshalUpgradeServerCommitmentRequest = (
+  request: UpgradeServerCommitmentRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  period: request.period,
 })
 
 export const marshalValidatePartitioningSchemaRequest = (
