@@ -72,9 +72,11 @@ export const unmarshalSecret = (data: unknown): Secret => {
     envVar: data.env_var ? unmarshalSecretEnvVar(data.env_var) : undefined,
     file: data.file ? unmarshalSecretFile(data.file) : undefined,
     jobDefinitionId: data.job_definition_id,
+    region: data.region,
     secretId: data.secret_id,
     secretManagerId: data.secret_manager_id,
     secretManagerVersion: data.secret_manager_version,
+    srn: data.srn,
   } as Secret
 }
 
@@ -127,6 +129,7 @@ export const unmarshalJobDefinition = (data: unknown): JobDefinition => {
     projectId: data.project_id,
     region: data.region,
     retryPolicy: data.retry_policy ? unmarshalRetryPolicy(data.retry_policy) : undefined,
+    srn: data.srn,
     startupCommand: data.startup_command,
     updatedAt: unmarshalDate(data.updated_at),
   } as JobDefinition
@@ -155,6 +158,7 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
     reason: data.reason ? data.reason : undefined,
     region: data.region,
     runDuration: data.run_duration,
+    srn: data.srn,
     startedAt: unmarshalDate(data.started_at),
     startupCommand: data.startup_command,
     state: data.state,
@@ -191,6 +195,8 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
     id: data.id,
     jobDefinitionId: data.job_definition_id,
     name: data.name,
+    region: data.region,
+    srn: data.srn,
     updatedAt: unmarshalDate(data.updated_at),
   } as Trigger
 }
