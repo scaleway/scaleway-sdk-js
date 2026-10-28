@@ -325,7 +325,7 @@
     "@scaleway/sdk-webhosting": "workspace:*",
     "@scaleway/use-dataloader": "catalog:",
     "@types/react": "catalog:",
-    "react": "^19.3.0",
+    "react": "^19.3.1",
     "tinyglobby": "0.2.17"
   },
   "peerDependencies": {
