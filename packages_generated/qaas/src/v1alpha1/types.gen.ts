@@ -253,6 +253,10 @@ export interface Application {
    * JSON format describing the expected input.
    */
   inputTemplate: string
+  /**
+   * SRN of the application.
+   */
+  srn: string
 }
 
 
@@ -293,6 +297,10 @@ export interface Booking {
    * Time zone for the booking schedule, in tz database format (e.g. 'Europe/Paris').
    */
   timeZone?: string
+  /**
+   * SRN of the booking.
+   */
+  srn: string
 }
 
 
@@ -369,6 +377,10 @@ export interface Job {
    * Execution parameters for this job.
    */
   parameters?: string
+  /**
+   * SRN of the job.
+   */
+  srn: string
 }
 
 
@@ -389,6 +401,10 @@ export interface Model {
    * Project ID in which the model has been created.
    */
   projectId: string
+  /**
+   * SRN of the model.
+   */
+  srn: string
 }
 
 
@@ -473,6 +489,10 @@ export interface Platform {
    * Specify if the platform is bookable.
    */
   isBookable: boolean
+  /**
+   * SRN of the platform.
+   */
+  srn: string
 }
 
 
@@ -553,6 +573,10 @@ export interface Process {
    * Input payload of the process as JSON string.
    */
   input?: string
+  /**
+   * SRN of the process.
+   */
+  srn: string
 }
 
 
@@ -641,6 +665,10 @@ export interface Session {
    * Platform configuration parameters applied to this session.
    */
   parameters?: string
+  /**
+   * SRN of the session.
+   */
+  srn: string
 }
 
 

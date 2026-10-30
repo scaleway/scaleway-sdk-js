@@ -62,6 +62,7 @@ export const unmarshalApplication = (data: unknown): Application => {
     id: data.id,
     inputTemplate: data.input_template,
     name: data.name,
+    srn: data.srn,
     type: data.type,
   } as Application
 }
@@ -79,6 +80,7 @@ export const unmarshalBooking = (data: unknown): Booking => {
     finishedAt: unmarshalDate(data.finished_at),
     id: data.id,
     progressMessage: data.progress_message,
+    srn: data.srn,
     startedAt: unmarshalDate(data.started_at),
     status: data.status,
     timeZone: data.time_zone,
@@ -103,6 +105,7 @@ export const unmarshalJob = (data: unknown): Job => {
     progressMessage: data.progress_message,
     resultDistribution: data.result_distribution,
     sessionId: data.session_id,
+    srn: data.srn,
     startedAt: unmarshalDate(data.started_at),
     status: data.status,
     tags: data.tags,
@@ -121,6 +124,7 @@ export const unmarshalModel = (data: unknown): Model => {
     createdAt: unmarshalDate(data.created_at),
     id: data.id,
     projectId: data.project_id,
+    srn: data.srn,
     url: data.url,
   } as Model
 }
@@ -185,6 +189,7 @@ export const unmarshalPlatform = (data: unknown): Platform => {
     pricePerHour: data.price_per_hour ? unmarshalMoney(data.price_per_hour) : undefined,
     pricePerShot: data.price_per_shot ? unmarshalMoney(data.price_per_shot) : undefined,
     providerName: data.provider_name,
+    srn: data.srn,
     technology: data.technology,
     type: data.type,
     version: data.version,
@@ -210,6 +215,7 @@ export const unmarshalProcess = (data: unknown): Process => {
     progress: data.progress,
     progressMessage: data.progress_message,
     projectId: data.project_id,
+    srn: data.srn,
     startedAt: unmarshalDate(data.started_at),
     status: data.status,
     tags: data.tags,
@@ -240,6 +246,7 @@ export const unmarshalSession = (data: unknown): Session => {
     platformId: data.platform_id,
     progressMessage: data.progress_message,
     projectId: data.project_id,
+    srn: data.srn,
     startedAt: unmarshalDate(data.started_at),
     status: data.status,
     tags: data.tags,
