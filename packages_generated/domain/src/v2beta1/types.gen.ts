@@ -661,6 +661,10 @@ export interface Contact {
    * @deprecated 
    */
   questions?: ContactQuestion[]
+  /**
+   * The SRN of the contact.
+   */
+  srn: string
 }
 
 
@@ -733,6 +737,10 @@ export interface Tld {
    * Additional specifications of the TLD.
    */
   specifications: Record<string, string>
+  /**
+   * The SRN of the TLD.
+   */
+  srn: string
 }
 
 
@@ -853,6 +861,8 @@ export interface DNSZone {
   updatedAt?: Date
   projectId: string
   linkedProducts: LinkedProduct[]
+  srn: string
+  dnsZone: string
 }
 
 
@@ -1017,6 +1027,10 @@ export interface DomainSummary {
    * Indicates if a trade is ongoing.
    */
   pendingTrade: boolean
+  /**
+   * The SRN of the domain.
+   */
+  srn: string
 }
 
 
@@ -1097,6 +1111,10 @@ export interface RenewableDomain {
    * TLD information of the domain.
    */
   tld?: Tld
+  /**
+   * The SRN of the domain.
+   */
+  srn: string
 }
 
 
@@ -1108,6 +1126,7 @@ export interface SSLCertificate {
   certificateChain: string
   createdAt?: Date
   expiredAt?: Date
+  srn: string
 }
 
 
@@ -1152,6 +1171,10 @@ export interface Task {
    * Human-friendly contact identifier used when the task concerns a contact.
    */
   contactIdentifier?: string
+  /**
+   * The SRN of the task.
+   */
+  srn: string
 }
 
 
@@ -1376,6 +1399,10 @@ export interface Domain {
    * Indicates if a trade is ongoing.
    */
   pendingTrade: boolean
+  /**
+   * The SRN of the domain.
+   */
+  srn: string
 }
 
 
