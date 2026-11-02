@@ -43,7 +43,7 @@ export const unmarshalFileSystem = (data: unknown): FileSystem => {
   } as FileSystem
 }
 
-const unmarshalSnapshotParentFilesystem = (data: unknown): SnapshotParentFilesystem => {
+export const unmarshalSnapshotParentFilesystem = (data: unknown): SnapshotParentFilesystem => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SnapshotParentFilesystem' failed as data isn't a dictionary.`,
