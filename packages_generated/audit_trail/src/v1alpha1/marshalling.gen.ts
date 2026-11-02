@@ -1141,7 +1141,7 @@ export const unmarshalListAlertRulesResponse = (data: unknown): ListAlertRulesRe
   } as ListAlertRulesResponse
 }
 
-const unmarshalAuthenticationEvent = (data: unknown): AuthenticationEvent => {
+export const unmarshalAuthenticationEvent = (data: unknown): AuthenticationEvent => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'AuthenticationEvent' failed as data isn't a dictionary.`,
@@ -1177,7 +1177,7 @@ export const unmarshalListAuthenticationEventsResponse = (data: unknown): ListAu
   } as ListAuthenticationEventsResponse
 }
 
-const unmarshalSystemEvent = (data: unknown): SystemEvent => {
+export const unmarshalSystemEvent = (data: unknown): SystemEvent => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SystemEvent' failed as data isn't a dictionary.`,

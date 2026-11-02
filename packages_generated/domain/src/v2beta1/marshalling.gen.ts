@@ -274,6 +274,7 @@ export const unmarshalContact = (data: unknown): Contact => {
     phoneNumber: data.phone_number,
     questions: data.questions ? unmarshalArrayOfObject(data.questions, unmarshalContactQuestion) : undefined,
     resale: data.resale,
+    srn: data.srn,
     state: data.state,
     status: data.status,
     vatIdentificationCode: data.vat_identification_code,
@@ -290,6 +291,7 @@ export const unmarshalDNSZone = (data: unknown): DNSZone => {
   }
 
   return {
+    dnsZone: data.dns_zone,
     domain: data.domain,
     linkedProducts: data.linked_products,
     message: data.message,
@@ -297,6 +299,7 @@ export const unmarshalDNSZone = (data: unknown): DNSZone => {
     nsDefault: data.ns_default,
     nsMaster: data.ns_master,
     projectId: data.project_id,
+    srn: data.srn,
     status: data.status,
     subdomain: data.subdomain,
     updatedAt: unmarshalDate(data.updated_at),
@@ -332,6 +335,7 @@ export const unmarshalSSLCertificate = (data: unknown): SSLCertificate => {
     dnsZone: data.dns_zone,
     expiredAt: unmarshalDate(data.expired_at),
     privateKey: data.private_key,
+    srn: data.srn,
     status: data.status,
   } as SSLCertificate
 }
@@ -350,6 +354,7 @@ export const unmarshalTask = (data: unknown): Task => {
     message: data.message,
     organizationId: data.organization_id,
     projectId: data.project_id,
+    srn: data.srn,
     startedAt: unmarshalDate(data.started_at),
     status: data.status,
     type: data.type,
@@ -538,6 +543,7 @@ const unmarshalTld = (data: unknown): Tld => {
     name: data.name,
     offers: unmarshalMapOfObject(data.offers, unmarshalTldOffer),
     specifications: data.specifications,
+    srn: data.srn,
   } as Tld
 }
 
@@ -564,6 +570,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
     pendingTrade: data.pending_trade,
     projectId: data.project_id,
     registrar: data.registrar,
+    srn: data.srn,
     status: data.status,
     technicalContact: data.technical_contact ? unmarshalContact(data.technical_contact) : undefined,
     tld: data.tld ? unmarshalTld(data.tld) : undefined,
@@ -993,6 +1000,7 @@ const unmarshalDomainSummary = (data: unknown): DomainSummary => {
     pendingTrade: data.pending_trade,
     projectId: data.project_id,
     registrar: data.registrar,
+    srn: data.srn,
     status: data.status,
     transferRegistrationStatus: data.transfer_registration_status ? unmarshalDomainRegistrationStatusTransfer(data.transfer_registration_status) : undefined,
     updatedAt: unmarshalDate(data.updated_at),
@@ -1060,6 +1068,7 @@ const unmarshalRenewableDomain = (data: unknown): RenewableDomain => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     renewableDurationInYears: data.renewable_duration_in_years,
+    srn: data.srn,
     status: data.status,
     tld: data.tld ? unmarshalTld(data.tld) : undefined,
   } as RenewableDomain
