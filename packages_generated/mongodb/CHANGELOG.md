@@ -1,5 +1,237 @@
 # Change Log
 
+## 2.23.0
+
+### Minor Changes
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(mongodb): add support for maintainances (#2728)
+
+- fix(mongodb): add the new SetUserRole endpoint on the documentation (#2142)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(mongodb): add version release date (#2991)
+
+- chore(release): publish
+
+- feat(mongodb): add support for srn in Maintenance, Snapshot and Instance (#3655)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- feat(mongodb): add audit trail annotations (#2836)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(mongodb): add project_id when listing node types (#3689)
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore: sync generated files after build (#2862)
+
+- chore(lint): update generated files (#2594)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- fix(build): output (#2842)
+
+- chore(release): publish
+
+- fix(mongodb): change UpgradeInstanceRequest.version to support (e.g., 8.0, 7.0, 8.2) (#3111)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: format (#2683)
+
+- chore: reorganize import (#2520)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- chore: fix formating (#2669)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- feat: add support for constants (#3286)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat(mongodb): export unmarshalInstanceSnapshotSchedule (#2218)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore: update index (#2247)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- feat(mongodb): add has_maintenance field to ListInstance (#2981)
+
+- feat(sdk): unify tools (#2903)
+
+- fix: change tabs into space (#2688)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(permission): add new permission name and service for MIAM (#3714)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore: format generated files (#2652)
+
+- chore: new formating (#2667)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#2881)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(mongodb): add list databases route (#2274)
+
+- fix: export locality (#2200)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- fix(mongodb): change Instance.upgradable_versions (#3113)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3261)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
 ## 2.22.1
 
 ### Patch Changes

@@ -1,5 +1,85 @@
 # Change Log
 
+## 1.13.0
+
+### Minor Changes
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(dataviz): add superset (#3126)
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat: add support for constants (#3286)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(generation): improve ts metadata (#3242)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(multiple_namespaces): add SRN integration (#3722)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
 ## 1.12.1
 
 ### Patch Changes
