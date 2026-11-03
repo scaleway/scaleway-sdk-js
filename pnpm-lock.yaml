@@ -280,9 +280,6 @@ importers:
 
   packages/sdk:
     dependencies:
-      '@scaleway-internal/sdk-dataorchestrator':
-        specifier: workspace:*
-        version: link:../../packages_generated/dataorchestrator
       '@scaleway/sdk-account':
         specifier: workspace:*
         version: link:../../packages_generated/account
@@ -957,22 +954,6 @@ importers:
     devDependencies:
       '@repo/configs':
         specifier: workspace:^
-        version: link:../../tools/configs
-      '@scaleway/sdk-client':
-        specifier: workspace:^
-        version: link:../../packages/client
-
-  packages_generated/dataorchestrator:
-    dependencies:
-      '@scaleway/random-name':
-        specifier: 'catalog:'
-        version: 6.0.2
-      '@scaleway/sdk-std':
-        specifier: workspace:^
-        version: link:../std
-    devDependencies:
-      '@repo/configs':
-        specifier: workspace:*
         version: link:../../tools/configs
       '@scaleway/sdk-client':
         specifier: workspace:^

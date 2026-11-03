@@ -24,7 +24,6 @@
     "build": "tsdown --config tsdown.config.ts"
   },
   "dependencies": {
-    "@scaleway-internal/sdk-dataorchestrator": "workspace:*",
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
