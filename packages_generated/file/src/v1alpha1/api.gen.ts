@@ -186,7 +186,7 @@ By default, the attachments listed are ordered by creation date in ascending ord
 
   
   /**
-   * Create a new filesystem. To create a new filesystem, you must specify a name, a size, and a project ID.
+   * Create a new filesystem. To create a new filesystem, you must specify a name, a project ID, and either a size (`from_empty`) or a source snapshot (`from_snapshot`).
    *
    * @param request - The request {@link CreateFileSystemRequest}
    * @returns A Promise of FileSystem
