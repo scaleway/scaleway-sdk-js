@@ -71,7 +71,6 @@ export type {
   InstancePrivateNetworkInterfaceInfo,
   InstanceServerInfo,
   IpamIpInfo,
-  KafkClusterInfo,
   KeyManagerKeyInfo,
   KubernetesACLInfo,
   KubernetesClusterInfo,
