@@ -49,6 +49,28 @@ export interface SnapshotParentFilesystem {
 }
 
 
+export interface CreateFileSystemRequestFromEmpty {
+  /**
+   * Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
+   */
+  size: number
+}
+
+
+export interface CreateFileSystemRequestFromSnapshot {
+  /**
+   * Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
+Size is optional. When not set, the current size of the parent filesystem is used.
+When set, it must be greater than or equal to the snapshot size.
+   */
+  size?: number
+  /**
+   * Source snapshot from which the filesystem will be created.
+   */
+  snapshotId: string
+}
+
+
 /**
  * Represents an attachment between a filesystem and a resource.
  */
@@ -231,9 +253,23 @@ export type CreateFileSystemRequest = {
    */
   projectId?: string
   /**
-   * Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
+   * @deprecated Filesystem size in bytes, with a granularity in GB (10^9 bytes).
+Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
+Must not be set along with `from_empty` or `from_snapshot`.
    */
   size: number
+  /**
+   * Specify the size of the new filesystem if creating a new one from scratch.
+   *
+   * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
+   */
+  fromEmpty?: CreateFileSystemRequestFromEmpty
+  /**
+   * Specify the snapshot ID of the original snapshot to create the filesystem from.
+   *
+   * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
+   */
+  fromSnapshot?: CreateFileSystemRequestFromSnapshot
   /**
    * Type of the filesystem.
    */
