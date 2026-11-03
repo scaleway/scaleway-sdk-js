@@ -38,7 +38,6 @@ import type {
   InstancePrivateNetworkInterfaceInfo,
   InstanceServerInfo,
   IpamIpInfo,
-  KafkClusterInfo,
   KeyManagerKeyInfo,
   KubernetesACLInfo,
   KubernetesClusterInfo,
@@ -556,21 +555,6 @@ const unmarshalIpamIpInfo = (data: unknown): IpamIpInfo => {
   } as IpamIpInfo
 }
 
-const unmarshalKafkClusterInfo = (data: unknown): KafkClusterInfo => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'KafkClusterInfo' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    endpoint: data.endpoint,
-    pnId: data.pn_id,
-    tags: data.tags,
-    version: data.version,
-  } as KafkClusterInfo
-}
-
 const unmarshalKeyManagerKeyInfo = (data: unknown): KeyManagerKeyInfo => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -1062,7 +1046,6 @@ export const unmarshalResource = (data: unknown): Resource => {
     instancePrivateNetworkInterfaceInfo: data.instance_private_network_interface_info ? unmarshalInstancePrivateNetworkInterfaceInfo(data.instance_private_network_interface_info) : undefined,
     instanceServerInfo: data.instance_server_info ? unmarshalInstanceServerInfo(data.instance_server_info) : undefined,
     ipamIpInfo: data.ipam_ip_info ? unmarshalIpamIpInfo(data.ipam_ip_info) : undefined,
-    kafkClusterInfo: data.kafk_cluster_info ? unmarshalKafkClusterInfo(data.kafk_cluster_info) : undefined,
     keyManagerKeyInfo: data.key_manager_key_info ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info) : undefined,
     keymKeyInfo: data.keym_key_info ? unmarshalKeyManagerKeyInfo(data.keym_key_info) : undefined,
     kubeAclInfo: data.kube_acl_info ? unmarshalKubernetesACLInfo(data.kube_acl_info) : undefined,
