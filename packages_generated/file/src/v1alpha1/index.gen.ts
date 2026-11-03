@@ -10,6 +10,8 @@ export type {
   Attachment,
   AttachmentResourceType,
   CreateFileSystemRequest,
+  CreateFileSystemRequestFromEmpty,
+  CreateFileSystemRequestFromSnapshot,
   CreateSnapshotRequest,
   DeleteFileSystemRequest,
   DeleteSnapshotRequest,
