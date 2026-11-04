@@ -437,7 +437,7 @@ This action **cannot** be undone.
   
   /**
    * List all custom domains the caller can access (read permission).. By default, the custom domains listed are ordered by creation date in ascending order. This can be modified via the `order_by` field.
-    
+
 Additional parameters can be set in the query to filter the output, such as `organization_id`, `project_id`, `namespace_id`, or `container_id`.
    *
    * @param request - The request {@link ListDomainsRequest}
