@@ -340,6 +340,7 @@ export const unmarshalServer = (data: unknown): Server => {
     rescueServer: data.rescue_server ? unmarshalServerRescueServer(data.rescue_server) : undefined,
     scheduledDeletion: data.scheduled_deletion,
     scheduledDeletionAt: unmarshalDate(data.scheduled_deletion_at),
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -384,6 +385,7 @@ export const unmarshalOS = (data: unknown): OS => {
     password: data.password ? unmarshalOSOSField(data.password) : undefined,
     servicePassword: data.service_password ? unmarshalOSOSField(data.service_password) : undefined,
     serviceUser: data.service_user ? unmarshalOSOSField(data.service_user) : undefined,
+    srn: data.srn,
     ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
     user: data.user ? unmarshalOSOSField(data.user) : undefined,
     version: data.version,
@@ -545,6 +547,7 @@ export const unmarshalOffer = (data: unknown): Offer => {
     quotaName: data.quota_name,
     raidControllers: unmarshalArrayOfObject(data.raid_controllers, unmarshalRaidController),
     sharedBandwidth: data.shared_bandwidth,
+    srn: data.srn,
     stock: data.stock,
     subscriptionPeriod: data.subscription_period,
     tags: data.tags,
@@ -568,6 +571,8 @@ export const unmarshalOption = (data: unknown): Option => {
     privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : undefined,
     publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : undefined,
     remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : undefined,
+    srn: data.srn,
+    zone: data.zone,
   } as Option
 }
 
@@ -601,7 +606,9 @@ export const unmarshalSetting = (data: unknown): Setting => {
     enabled: data.enabled,
     id: data.id,
     projectId: data.project_id,
+    srn: data.srn,
     type: data.type,
+    zone: data.zone,
   } as Setting
 }
 
@@ -616,7 +623,10 @@ export const unmarshalBMCAccess = (data: unknown): BMCAccess => {
     expiresAt: unmarshalDate(data.expires_at),
     login: data.login,
     password: data.password,
+    serverId: data.server_id,
+    srn: data.srn,
     url: data.url,
+    zone: data.zone,
   } as BMCAccess
 }
 
