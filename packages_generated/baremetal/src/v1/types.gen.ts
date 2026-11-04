@@ -764,6 +764,10 @@ export interface Server {
    * True if a deletion is scheduled.
    */
   scheduledDeletion: boolean
+  /**
+   * The SRN of the server.
+   */
+  srn: string
 }
 
 
@@ -840,6 +844,10 @@ export interface OS {
    * Zone in which is the OS is available.
    */
   zone: ScwZone
+  /**
+   * The SRN of the OS.
+   */
+  srn: string
 }
 
 
@@ -956,6 +964,10 @@ export interface Offer {
    * Describe the network topology of the offer.
    */
   dualAttach?: boolean
+  /**
+   * The SRN of the offer.
+   */
+  srn: string
 }
 
 
@@ -1002,6 +1014,14 @@ export interface Option {
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
   certification?: CertificationOption
+  /**
+   * Zone in which is the option is available.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the option.
+   */
+  srn: string
 }
 
 
@@ -1078,6 +1098,14 @@ export interface Setting {
    * Defines whether the setting is enabled.
    */
   enabled: boolean
+  /**
+   * Zone in which is the setting is located.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the setting.
+   */
+  srn: string
 }
 
 
@@ -1118,6 +1146,18 @@ export interface BMCAccess {
    * The date after which the BMC (Baseboard Management Controller) access will be closed.
    */
   expiresAt?: Date
+  /**
+   * ID of the server.
+   */
+  serverId: string
+  /**
+   * Zone in which the server is located.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the BMC access.
+   */
+  srn: string
 }
 
 
