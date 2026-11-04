@@ -121,6 +121,10 @@ export interface Secret {
    */
   secretId: string
   /**
+   * SRN of the secret reference.
+   */
+  srn: string
+  /**
    * UUID of the secret in Secret Manager.
    */
   secretManagerId: string
@@ -144,6 +148,10 @@ export interface Secret {
    * One-of ('secretConfig'): at most one of 'file', 'envVar' could be set.
    */
   envVar?: SecretEnvVar
+  /**
+   * Region in which the secret reference exists.
+   */
+  region: ScwRegion
 }
 
 
@@ -172,6 +180,10 @@ export interface JobDefinition {
    * UUID of the job definition.
    */
   id: string
+  /**
+   * SRN of the job definition.
+   */
+  srn: string
   /**
    * Name of the job definition.
    */
@@ -237,7 +249,7 @@ export interface JobDefinition {
    */
   retryPolicy?: RetryPolicy
   /**
-   * Region to target. If none is passed will use default region from the config.
+   * Region in which the job definition exists.
    */
   region: ScwRegion
 }
@@ -254,6 +266,10 @@ export interface JobRun {
    * UUID of the job run.
    */
   id: string
+  /**
+   * SRN of the job run.
+   */
+  srn: string
   /**
    * UUID of the job definition.
    */
@@ -327,7 +343,7 @@ export interface JobRun {
    */
   attempts?: number
   /**
-   * Region to target. If none is passed will use default region from the config.
+   * Region in which the job run exists.
    */
   region: ScwRegion
 }
@@ -338,6 +354,10 @@ export interface Trigger {
    * UUID of the trigger.
    */
   id: string
+  /**
+   * SRN of the trigger.
+   */
+  srn: string
   /**
    * UUID of the job definition.
    */
@@ -360,6 +380,10 @@ export interface Trigger {
    * One-of ('config'): at most one of 'cronConfig' could be set.
    */
   cronConfig?: TriggerCronConfig
+  /**
+   * Region in which the trigger exists.
+   */
+  region: ScwRegion
 }
 
 

@@ -83,6 +83,8 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'autoscaling_group',
   'wofl_definition',
   'wofl_run',
+  'kvdb_instance',
+  'kvdb_snapshot',
 ]
 
 /** Lists all values of the enum {@link SearchResourcesRequestOrderBy}. */

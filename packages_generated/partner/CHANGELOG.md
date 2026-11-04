@@ -1,5 +1,127 @@
 # Change Log
 
+## 1.15.0
+
+### Minor Changes
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore: sync generated files after build (#2862)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- feat(partner): enable v1 (#2788)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- fix(build): output (#2842)
+
+- chore(release): publish
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- feat: add support for constants (#3286)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- feat(sdk): unify tools (#2903)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(partner): add comment field on organization creation (#3623)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat: update generated APIs (#3576)
+
+- chore(release): publish
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat(generation): improve ts metadata (#3242)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
 ## 1.14.3
 
 ### Patch Changes

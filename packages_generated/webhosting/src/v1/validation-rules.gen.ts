@@ -21,6 +21,30 @@ export const ControlPanelApiListControlPanelsRequest = {
   },
 }
 
+export const CreateDatabaseRequestUser = {
+  username: {
+    maxLength: 32,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9_-]+$/,
+  },
+}
+
+export const DatabaseApiCreateDatabaseRequest = {
+  databaseName: {
+    maxLength: 63,
+    minLength: 1,
+    pattern: /^([A-Za-z0-9]+_)?[A-Za-z0-9-]+$/,
+  },
+}
+
+export const DatabaseApiCreateDatabaseUserRequest = {
+  username: {
+    maxLength: 32,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9_-]+$/,
+  },
+}
+
 export const DatabaseApiListDatabaseUsersRequest = {
   page: {
     greaterThan: 0,

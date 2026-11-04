@@ -32,6 +32,7 @@ export type {
   CreateTemplateRequestVolumeTemplate,
   CreateVolumeRequestVolumeType,
   DedicatedPool,
+  DedicatedPoolPhysicalHost,
   DedicatedPoolServerType,
   DedicatedPoolSummary,
   DeletePlacementGroupRequest,

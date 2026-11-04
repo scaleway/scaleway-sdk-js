@@ -91,7 +91,6 @@ const unmarshalVolume = (data: unknown): Volume => {
   }
 
   return {
-    deploymentId: data.deployment_id,
     sizeBytes: data.size_bytes,
     type: data.type,
   } as Volume
@@ -278,7 +277,6 @@ const marshalVolume = (
   request: Volume,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  deployment_id: request.deploymentId,
   size_bytes: request.sizeBytes,
   type: request.type,
 })

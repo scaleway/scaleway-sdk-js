@@ -124,10 +124,6 @@ export interface Volume {
    * Define the size of the Volume.
    */
   sizeBytes: number
-  /**
-   * ID of the Deployment.
-   */
-  deploymentId: string
 }
 
 

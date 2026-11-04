@@ -1,5 +1,101 @@
 # Change Log
 
+## 1.14.0
+
+### Minor Changes
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat: add support for constants (#3286)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(product_catalog): add support for `no_kvm` (#3015)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(messageq): align username regex validation (#3083)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(messageq): add DownloadDeploymentCertificateAuthority (#2978)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- feat(messageq): add generated messageq package (#2962)
+
+- feat(generation): improve ts metadata (#3242)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(multiple_namespaces): add SRN integration (#3722)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
 ## 1.13.1
 
 ### Patch Changes

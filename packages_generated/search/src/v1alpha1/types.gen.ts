@@ -73,6 +73,8 @@ export type ResourceType =
   | 'autoscaling_group'
   | 'wofl_definition'
   | 'wofl_run'
+  | 'kvdb_instance'
+  | 'kvdb_snapshot'
 
 export type SearchResourcesRequestOrderBy =
   | 'relevance'

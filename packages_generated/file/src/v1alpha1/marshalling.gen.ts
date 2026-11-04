@@ -13,6 +13,8 @@ import type {
   ListFileSystemTypesResponse,
   ListFileSystemsResponse,
   ListSnapshotsResponse,
+  CreateFileSystemRequestFromEmpty,
+  CreateFileSystemRequestFromSnapshot,
   CreateFileSystemRequest,
   CreateSnapshotRequest,
   UpdateFileSystemRequest,
@@ -43,7 +45,7 @@ export const unmarshalFileSystem = (data: unknown): FileSystem => {
   } as FileSystem
 }
 
-const unmarshalSnapshotParentFilesystem = (data: unknown): SnapshotParentFilesystem => {
+export const unmarshalSnapshotParentFilesystem = (data: unknown): SnapshotParentFilesystem => {
   if (!isJSONObject(data)) {
     throw new TypeError(
       `Unmarshalling the type 'SnapshotParentFilesystem' failed as data isn't a dictionary.`,
@@ -163,6 +165,21 @@ export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResp
   } as ListSnapshotsResponse
 }
 
+const marshalCreateFileSystemRequestFromEmpty = (
+  request: CreateFileSystemRequestFromEmpty,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  size: request.size,
+})
+
+const marshalCreateFileSystemRequestFromSnapshot = (
+  request: CreateFileSystemRequestFromSnapshot,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  size: request.size,
+  snapshot_id: request.snapshotId,
+})
+
 export const marshalCreateFileSystemRequest = (
   request: CreateFileSystemRequest,
   defaults: DefaultValues,
@@ -171,7 +188,17 @@ export const marshalCreateFileSystemRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,
   size: request.size,
   tags: request.tags,
-  type: request.type,
+  type: request.type,  
+  ...resolveOneOf([
+    {param: 'from_empty',
+      value: (request.fromEmpty !== undefined) ? marshalCreateFileSystemRequestFromEmpty(request.fromEmpty, defaults)
+      : undefined,
+    },
+    {param: 'from_snapshot',
+      value: (request.fromSnapshot !== undefined) ? marshalCreateFileSystemRequestFromSnapshot(request.fromSnapshot, defaults)
+      : undefined,
+    },
+  ]),
 })
 
 export const marshalCreateSnapshotRequest = (

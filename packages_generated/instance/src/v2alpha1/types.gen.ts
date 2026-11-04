@@ -564,6 +564,14 @@ export interface CreateServerRequestServerVolume {
 }
 
 
+export interface DedicatedPoolPhysicalHost {
+  /**
+   * The unique identifier of this physical host.
+   */
+  id: string
+}
+
+
 export interface DedicatedPoolServerType {
   /**
    * Name of the server type.
@@ -1136,6 +1144,10 @@ export interface ServerRuntimeInfo {
    * True if the Instance is running as Spot.
    */
   spot: boolean
+  /**
+   * The unique identifier of the physical server hosting this Instance.
+   */
+  physicalHostId: string
 }
 
 
@@ -1530,6 +1542,10 @@ export interface DedicatedPool {
    * Tags associated with the Dedicated Pool.
    */
   tags: string[]
+  /**
+   * Physical hosts associated with the Dedicated Pool.
+   */
+  physicalHosts: DedicatedPoolPhysicalHost[]
   /**
    * Creation timestamp of the Dedicated Pool.
    */

@@ -1018,11 +1018,11 @@ export type DatabaseApiCreateDatabaseRequest = {
    */
   hostingId: string
   /**
-   * Name of the database to be created.
+   * Name of the database to be created. If it is not already prefixed with the hosting's cPanel username followed by an underscore (e.g. `cpe1234_`), this prefix is automatically added. The resulting name must not exceed 64 characters.
    */
   databaseName: string
   /**
-   * (Optional) Username and password to create a user and link to the database.
+   * (Optional) Username and password to create a user and link to the database. The username is prefixed the same way as `database_name`.
    *
    * One-of ('user'): at most one of 'newUser', 'existingUsername' could be set.
    */
@@ -1046,7 +1046,7 @@ export type DatabaseApiCreateDatabaseUserRequest = {
    */
   hostingId: string
   /**
-   * Name of the user to create.
+   * Name of the user to create. If it is not already prefixed with the hosting's cPanel username followed by an underscore (e.g. `cpe1234_`), this prefix is automatically added. The resulting name must not exceed 32 characters.
    */
   username: string
   /**

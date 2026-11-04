@@ -406,6 +406,7 @@ export class RegionalAPI extends ParentAPI {
         'fr-par',
         'nl-ams',
         'pl-waw',
+        'it-mil',
       ],
     })
   

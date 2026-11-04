@@ -1,6 +1,6 @@
 {
   "name": "@scaleway/sdk",
-  "version": "4.2.7",
+  "version": "4.2.8",
   "description": "Scaleway SDK TS.",
   "license": "Apache-2.0",
   "repository": {
@@ -24,6 +24,7 @@
     "build": "tsdown --config tsdown.config.ts"
   },
   "dependencies": {
+    "@scaleway-internal/sdk-dataorchestrator": "workspace:*",
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",

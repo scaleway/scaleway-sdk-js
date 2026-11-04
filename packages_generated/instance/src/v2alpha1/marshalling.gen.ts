@@ -11,6 +11,7 @@ import type {
   Snapshot,
   Volume,
   AddSecurityGroupRulesResponse,
+  DedicatedPoolPhysicalHost,
   DedicatedPool,
   ServerTypeGpuInfo,
   ServerTypeLimits,
@@ -239,6 +240,18 @@ export const unmarshalAddSecurityGroupRulesResponse = (data: unknown): AddSecuri
   } as AddSecurityGroupRulesResponse
 }
 
+const unmarshalDedicatedPoolPhysicalHost = (data: unknown): DedicatedPoolPhysicalHost => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DedicatedPoolPhysicalHost' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+  } as DedicatedPoolPhysicalHost
+}
+
 export const unmarshalDedicatedPool = (data: unknown): DedicatedPool => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -251,6 +264,7 @@ export const unmarshalDedicatedPool = (data: unknown): DedicatedPool => {
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
+    physicalHosts: unmarshalArrayOfObject(data.physical_hosts, unmarshalDedicatedPoolPhysicalHost),
     srn: data.srn,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at),
@@ -810,6 +824,7 @@ const unmarshalServerRuntimeInfo = (data: unknown): ServerRuntimeInfo => {
   }
 
   return {
+    physicalHostId: data.physical_host_id,
     spot: data.spot,
   } as ServerRuntimeInfo
 }
