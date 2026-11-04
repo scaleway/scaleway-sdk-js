@@ -5,6 +5,15 @@ export const CreateFileSystemRequest = {
   name: {
     minLength: 1,
   },
+}
+
+export const CreateFileSystemRequestFromEmpty = {
+  size: {
+    greaterThan: 0,
+  },
+}
+
+export const CreateFileSystemRequestFromSnapshot = {
   size: {
     greaterThan: 0,
   },
