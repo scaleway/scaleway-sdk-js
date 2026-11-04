@@ -131,6 +131,43 @@ export interface ContactPointEmail {
 }
 
 
+/**
+ * Limits of a logs data source.
+ */
+export interface DataSourceLogsLimits {
+  /**
+   * Maximum number of bytes ingested per second.
+   */
+  ingestionRateLimitBytesPerSecond?: number
+}
+
+
+/**
+ * Limits of a metrics data source.
+ */
+export interface DataSourceMetricsLimits {
+  /**
+   * Maximum number of samples ingested per second.
+   */
+  ingestionRateLimitSamplesPerSecond?: number
+  /**
+   * Maximum number of active series.
+   */
+  maxSeries?: number
+}
+
+
+/**
+ * Limits of a traces data source.
+ */
+export interface DataSourceTracesLimits {
+  /**
+   * Maximum number of bytes ingested per second.
+   */
+  ingestionRateLimitBytesPerSecond?: number
+}
+
+
 export interface ExporterDatadogDestination {
   apiKey?: string
   endpoint?: string
@@ -140,6 +177,25 @@ export interface ExporterDatadogDestination {
 export interface ExporterOTLPDestination {
   endpoint: string
   headers: Record<string, string>
+}
+
+
+/**
+ * Allowed range and default value of a data source limit.
+ */
+export interface GetConfigResponseBounds {
+  /**
+   * Minimum allowed value.
+   */
+  minValue: number
+  /**
+   * Maximum allowed value.
+   */
+  maxValue: number
+  /**
+   * Value applied to a data source that does not set the limit.
+   */
+  defaultValue: number
 }
 
 
@@ -290,6 +346,24 @@ export interface DataSource {
    * The SRN of the data-source.
    */
   srn: string
+  /**
+   * Limits applied to the metrics data source, including the default values of the limits not set.
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  metricsLimits?: DataSourceMetricsLimits
+  /**
+   * Limits applied to the logs data source, including the default values of the limits not set.
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  logsLimits?: DataSourceLogsLimits
+  /**
+   * Limits applied to the traces data source, including the default values of the limits not set.
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  tracesLimits?: DataSourceTracesLimits
 }
 
 
@@ -604,6 +678,22 @@ export interface GetConfigResponse {
    * Scaleway logs retention configuration.
    */
   productLogsRetention?: GetConfigResponseRetention
+  /**
+   * Bounds of the custom metrics ingestion rate limit, in samples per second.
+   */
+  customMetricsIngestionRateLimitSamplesPerSecond?: GetConfigResponseBounds
+  /**
+   * Bounds of the custom metrics maximum number of active series.
+   */
+  customMetricsMaxSeries?: GetConfigResponseBounds
+  /**
+   * Bounds of the custom logs ingestion rate limit, in bytes per second.
+   */
+  customLogsIngestionRateLimitBytesPerSecond?: GetConfigResponseBounds
+  /**
+   * Bounds of the custom traces ingestion rate limit, in bytes per second.
+   */
+  customTracesIngestionRateLimitBytesPerSecond?: GetConfigResponseBounds
 }
 
 
@@ -999,6 +1089,24 @@ export type RegionalApiCreateDataSourceRequest = {
    * Default values are 31 days for metrics, 7 days for logs and traces.
    */
   retentionDays?: number
+  /**
+   * Limits of the data source. Only allowed for a metrics data source. A limit not set gets its default value (see GetConfig).
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  metricsLimits?: DataSourceMetricsLimits
+  /**
+   * Limits of the data source. Only allowed for a logs data source. A limit not set gets its default value (see GetConfig).
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  logsLimits?: DataSourceLogsLimits
+  /**
+   * Limits of the data source. Only allowed for a traces data source. A limit not set gets its default value (see GetConfig).
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  tracesLimits?: DataSourceTracesLimits
 }
 
 
@@ -1550,6 +1658,24 @@ export type RegionalApiUpdateDataSourceRequest = {
    * Duration for which the data will be retained in the data source.
    */
   retentionDays?: number
+  /**
+   * Updated limits of the data source. Only allowed on a metrics data source. A limit not set keeps its current value.
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  metricsLimits?: DataSourceMetricsLimits
+  /**
+   * Updated limits of the data source. Only allowed on a logs data source. A limit not set keeps its current value.
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  logsLimits?: DataSourceLogsLimits
+  /**
+   * Updated limits of the data source. Only allowed on a traces data source. A limit not set keeps its current value.
+   *
+   * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
+   */
+  tracesLimits?: DataSourceTracesLimits
 }
 
 
