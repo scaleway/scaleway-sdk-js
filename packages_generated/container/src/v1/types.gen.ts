@@ -397,7 +397,7 @@ export interface Container {
    */
   privacy: ContainerPrivacy
   /**
-   * Image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag").
+   * Image reference (e.g. with sample image: "rg.fr-par.scw.cloud/serverless-catalog/sample-website:latest").
    */
   image: string
   /**
@@ -790,7 +790,7 @@ export type CreateContainerRequest = {
    */
   description?: string
   /**
-   * Image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag").
+   * Image reference (e.g. with sample image: "rg.fr-par.scw.cloud/serverless-catalog/sample-website:latest").
    */
   image: string
   /**
@@ -1206,7 +1206,7 @@ export type UpdateContainerRequest = {
    */
   description?: string
   /**
-   * Image reference (e.g. "rg.fr-par.scw.cloud/my-registry-namespace/image:tag").
+   * Image reference (e.g. with sample image: "rg.fr-par.scw.cloud/serverless-catalog/sample-website:latest").
    */
   image?: string
   /**
