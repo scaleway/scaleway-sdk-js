@@ -634,7 +634,7 @@ The name of the data source will then be used as reference to name the associate
 
   
   /**
-   * Update a data source. Update a given data source attributes (name, retention_days and/or limits).
+   * Update a data source. Update a given data source attributes (name and/or retention_days).
    *
    * @param request - The request {@link RegionalApiUpdateDataSourceRequest}
    * @returns A Promise of DataSource

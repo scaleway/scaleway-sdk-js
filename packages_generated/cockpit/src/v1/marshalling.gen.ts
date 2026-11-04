@@ -6,9 +6,6 @@ import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scale
 import type {
   ContactPointEmail,
   ContactPoint,
-  DataSourceLogsLimits,
-  DataSourceMetricsLimits,
-  DataSourceTracesLimits,
   DataSource,
   ExporterDatadogDestination,
   ExporterOTLPDestination,
@@ -20,7 +17,6 @@ import type {
   AlertManager,
   DisableAlertRulesResponse,
   EnableAlertRulesResponse,
-  GetConfigResponseBounds,
   GetConfigResponseRetention,
   GetConfigResponse,
   RulesCount,
@@ -87,43 +83,6 @@ export const unmarshalContactPoint = (data: unknown): ContactPoint => {
   } as ContactPoint
 }
 
-const unmarshalDataSourceLogsLimits = (data: unknown): DataSourceLogsLimits => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DataSourceLogsLimits' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    ingestionRateLimitBytesPerSecond: data.ingestion_rate_limit_bytes_per_second,
-  } as DataSourceLogsLimits
-}
-
-const unmarshalDataSourceMetricsLimits = (data: unknown): DataSourceMetricsLimits => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DataSourceMetricsLimits' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    ingestionRateLimitSamplesPerSecond: data.ingestion_rate_limit_samples_per_second,
-    maxSeries: data.max_series,
-  } as DataSourceMetricsLimits
-}
-
-const unmarshalDataSourceTracesLimits = (data: unknown): DataSourceTracesLimits => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'DataSourceTracesLimits' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    ingestionRateLimitBytesPerSecond: data.ingestion_rate_limit_bytes_per_second,
-  } as DataSourceTracesLimits
-}
-
 export const unmarshalDataSource = (data: unknown): DataSource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -135,8 +94,6 @@ export const unmarshalDataSource = (data: unknown): DataSource => {
     createdAt: unmarshalDate(data.created_at),
     currentMonthUsage: data.current_month_usage,
     id: data.id,
-    logsLimits: data.logs_limits ? unmarshalDataSourceLogsLimits(data.logs_limits) : undefined,
-    metricsLimits: data.metrics_limits ? unmarshalDataSourceMetricsLimits(data.metrics_limits) : undefined,
     name: data.name,
     origin: data.origin,
     projectId: data.project_id,
@@ -144,7 +101,6 @@ export const unmarshalDataSource = (data: unknown): DataSource => {
     retentionDays: data.retention_days,
     srn: data.srn,
     synchronizedWithGrafana: data.synchronized_with_grafana,
-    tracesLimits: data.traces_limits ? unmarshalDataSourceTracesLimits(data.traces_limits) : undefined,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
     url: data.url,
@@ -310,20 +266,6 @@ export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRul
   } as EnableAlertRulesResponse
 }
 
-const unmarshalGetConfigResponseBounds = (data: unknown): GetConfigResponseBounds => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'GetConfigResponseBounds' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    defaultValue: data.default_value,
-    maxValue: data.max_value,
-    minValue: data.min_value,
-  } as GetConfigResponseBounds
-}
-
 const unmarshalGetConfigResponseRetention = (data: unknown): GetConfigResponseRetention => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -346,12 +288,8 @@ export const unmarshalGetConfigResponse = (data: unknown): GetConfigResponse => 
   }
 
   return {
-    customLogsIngestionRateLimitBytesPerSecond: data.custom_logs_ingestion_rate_limit_bytes_per_second ? unmarshalGetConfigResponseBounds(data.custom_logs_ingestion_rate_limit_bytes_per_second) : undefined,
     customLogsRetention: data.custom_logs_retention ? unmarshalGetConfigResponseRetention(data.custom_logs_retention) : undefined,
-    customMetricsIngestionRateLimitSamplesPerSecond: data.custom_metrics_ingestion_rate_limit_samples_per_second ? unmarshalGetConfigResponseBounds(data.custom_metrics_ingestion_rate_limit_samples_per_second) : undefined,
-    customMetricsMaxSeries: data.custom_metrics_max_series ? unmarshalGetConfigResponseBounds(data.custom_metrics_max_series) : undefined,
     customMetricsRetention: data.custom_metrics_retention ? unmarshalGetConfigResponseRetention(data.custom_metrics_retention) : undefined,
-    customTracesIngestionRateLimitBytesPerSecond: data.custom_traces_ingestion_rate_limit_bytes_per_second ? unmarshalGetConfigResponseBounds(data.custom_traces_ingestion_rate_limit_bytes_per_second) : undefined,
     customTracesRetention: data.custom_traces_retention ? unmarshalGetConfigResponseRetention(data.custom_traces_retention) : undefined,
     productLogsRetention: data.product_logs_retention ? unmarshalGetConfigResponseRetention(data.product_logs_retention) : undefined,
     productMetricsRetention: data.product_metrics_retention ? unmarshalGetConfigResponseRetention(data.product_metrics_retention) : undefined,
@@ -658,28 +596,6 @@ export const marshalRegionalApiCreateContactPointRequest = (
   ]),
 })
 
-const marshalDataSourceLogsLimits = (
-  request: DataSourceLogsLimits,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ingestion_rate_limit_bytes_per_second: request.ingestionRateLimitBytesPerSecond,
-})
-
-const marshalDataSourceMetricsLimits = (
-  request: DataSourceMetricsLimits,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ingestion_rate_limit_samples_per_second: request.ingestionRateLimitSamplesPerSecond,
-  max_series: request.maxSeries,
-})
-
-const marshalDataSourceTracesLimits = (
-  request: DataSourceTracesLimits,
-  defaults: DefaultValues,
-): Record<string, unknown> => ({
-  ingestion_rate_limit_bytes_per_second: request.ingestionRateLimitBytesPerSecond,
-})
-
 export const marshalRegionalApiCreateDataSourceRequest = (
   request: RegionalApiCreateDataSourceRequest,
   defaults: DefaultValues,
@@ -687,21 +603,7 @@ export const marshalRegionalApiCreateDataSourceRequest = (
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   retention_days: request.retentionDays,
-  type: request.type,  
-  ...resolveOneOf([
-    {param: 'metrics_limits',
-      value: (request.metricsLimits !== undefined) ? marshalDataSourceMetricsLimits(request.metricsLimits, defaults)
-      : undefined,
-    },
-    {param: 'logs_limits',
-      value: (request.logsLimits !== undefined) ? marshalDataSourceLogsLimits(request.logsLimits, defaults)
-      : undefined,
-    },
-    {param: 'traces_limits',
-      value: (request.tracesLimits !== undefined) ? marshalDataSourceTracesLimits(request.tracesLimits, defaults)
-      : undefined,
-    },
-  ]),
+  type: request.type,
 })
 
 const marshalExporterDatadogDestination = (
@@ -832,21 +734,7 @@ export const marshalRegionalApiUpdateDataSourceRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  retention_days: request.retentionDays,  
-  ...resolveOneOf([
-    {param: 'metrics_limits',
-      value: (request.metricsLimits !== undefined) ? marshalDataSourceMetricsLimits(request.metricsLimits, defaults)
-      : undefined,
-    },
-    {param: 'logs_limits',
-      value: (request.logsLimits !== undefined) ? marshalDataSourceLogsLimits(request.logsLimits, defaults)
-      : undefined,
-    },
-    {param: 'traces_limits',
-      value: (request.tracesLimits !== undefined) ? marshalDataSourceTracesLimits(request.tracesLimits, defaults)
-      : undefined,
-    },
-  ]),
+  retention_days: request.retentionDays,
 })
 
 export const marshalRegionalApiUpdateExporterRequest = (

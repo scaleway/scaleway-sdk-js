@@ -1,31 +1,6 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
-export const DataSourceLogsLimits = {
-  ingestionRateLimitBytesPerSecond: {
-    greaterThanOrEqual: 1000000,
-    lessThanOrEqual: 64000000,
-  },
-}
-
-export const DataSourceMetricsLimits = {
-  ingestionRateLimitSamplesPerSecond: {
-    greaterThanOrEqual: 10000,
-    lessThanOrEqual: 1000000,
-  },
-  maxSeries: {
-    greaterThanOrEqual: 100000,
-    lessThanOrEqual: 10000000,
-  },
-}
-
-export const DataSourceTracesLimits = {
-  ingestionRateLimitBytesPerSecond: {
-    greaterThanOrEqual: 1000000,
-    lessThanOrEqual: 64000000,
-  },
-}
-
 export const RegionalApiCreateDataSourceRequest = {
   name: {
     maxLength: 50,
