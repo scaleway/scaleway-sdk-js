@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@scaleway-internal/sdk-dataorchestrator": "workspace:*",
+    "@scaleway-internal/sdk-vps": "workspace:*",
     "@scaleway/sdk-account": "workspace:*",
     "@scaleway/sdk-annotations": "workspace:*",
     "@scaleway/sdk-applesilicon": "workspace:*",
