@@ -421,7 +421,7 @@ export interface Container {
    */
   scalingOption?: ContainerScalingOption
   /**
-   * If the liveness probe fails, the container will be restarted.
+   * If the liveness probe fails, the container will be marked as unhealthy, and won't receive traffic anymore.
 It is performed periodically during the container's lifetime. The liveness probe is not executed until the startup probe (if defined) is successful.
 
 Possible check types:
@@ -818,7 +818,7 @@ export type CreateContainerRequest = {
    */
   scalingOption?: ContainerScalingOption
   /**
-   * If the liveness probe fails, the container will be restarted.
+   * If the liveness probe fails, the container will be marked as unhealthy, and won't receive traffic anymore.
 It is performed periodically during the container's lifetime. The liveness probe is not executed until the startup probe (if defined) is successful.
 
 Possible check types:
@@ -1234,7 +1234,7 @@ export type UpdateContainerRequest = {
    */
   scalingOption?: ContainerScalingOption
   /**
-   * If the liveness probe fails, the container will be restarted.
+   * If the liveness probe fails, the container will be marked as unhealthy, and won't receive traffic anymore.
 It is performed periodically during the container's lifetime. The liveness probe is not executed until the startup probe (if defined) is successful.
 
 Possible check types:
