@@ -29,6 +29,7 @@ import {
   unmarshalFrontend,
   unmarshalHealthCheck,
   unmarshalIp,
+  unmarshalIpamIP,
   unmarshalLb,
   unmarshalLbStats,
   unmarshalListAclResponse,
@@ -60,6 +61,7 @@ import {
   marshalUpdateRouteRequest,
   marshalUpdateSubscriberRequest,
   marshalZonedApiAddBackendServersRequest,
+  marshalZonedApiAttachIpamIPRequest,
   marshalZonedApiAttachPrivateNetworkRequest,
   marshalZonedApiCreateAclRequest,
   marshalZonedApiCreateBackendRequest,
@@ -119,6 +121,7 @@ import type {
   GetSubscriberRequest,
   HealthCheck,
   Ip,
+  IpamIP,
   Lb,
   LbStats,
   ListAclResponse,
@@ -163,6 +166,7 @@ import type {
   UpdateRouteRequest,
   UpdateSubscriberRequest,
   ZonedApiAddBackendServersRequest,
+  ZonedApiAttachIpamIPRequest,
   ZonedApiAttachPrivateNetworkRequest,
   ZonedApiCreateAclRequest,
   ZonedApiCreateBackendRequest,
@@ -206,6 +210,7 @@ import type {
   ZonedApiSetAclsRequest,
   ZonedApiSetBackendServersRequest,
   ZonedApiSubscribeToLbRequest,
+  ZonedApiTransferToIpamRequest,
   ZonedApiUnsubscribeFromLbRequest,
   ZonedApiUpdateAclRequest,
   ZonedApiUpdateBackendRequest,
@@ -364,6 +369,7 @@ export class ZonedAPI extends ParentAPI {
         method: 'DELETE',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}`,
         urlParams: urlParams(
+          ['migrate_flexip_to_ipam', request.migrateFlexipToIpam],
           ['release_ip', request.releaseIp],
         ),
         signal: options?.signal,
@@ -392,12 +398,34 @@ export class ZonedAPI extends ParentAPI {
     )
 
   
+  /**
+   * Attach a public IPAM IP address to a Load Balancer. Attach one or several public IPAM IP addresses to a given Load Balancer, specified by its Load Balancer ID. The attached IPAM IP addresses are used for the public traffic of the Load Balancer.
+   *
+   * @param request - The request {@link ZonedApiAttachIpamIPRequest}
+   * @returns A Promise of Lb
+   */
+  attachIpamIP = (request: Readonly<ZonedApiAttachIpamIPRequest>, options?: RequestOptions) =>
+    this.client.fetch<Lb>(
+      {
+        body: JSON.stringify(
+          marshalZonedApiAttachIpamIPRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/lbs/${validatePathParam('lbId', request.lbId)}/attach-ipam-ip`,
+        signal: options?.signal,
+      },
+      unmarshalLb,
+    )
+
+  
   protected pageOfListIPs = (request: Readonly<ZonedApiListIPsRequest> = {}, options?: RequestOptions) =>
     this.client.fetch<ListIpsResponse>(
       {
         method: 'GET',
         path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
         urlParams: urlParams(
+          ['attached', request.attached],
           ['ip_address', request.ipAddress],
           ['ip_type', request.ipType],
           ['organization_id', request.organizationId],
@@ -492,6 +520,25 @@ export class ZonedAPI extends ParentAPI {
         signal: options?.signal,
       },
       unmarshalIp,
+    )
+
+  
+  /**
+   * Transfer a LB Flexible IP to IPAM. Cannot be undone.. Transfer a legacy Load Balancer flexible IP address to an IPAM-managed IP address, so it can be used in other Scaleway products. Returns the resulting IPAM IP. This action cannot be undone.
+   *
+   * @param request - The request {@link ZonedApiTransferToIpamRequest}
+   * @returns A Promise of IpamIP
+   */
+  transferToIpam = (request: Readonly<ZonedApiTransferToIpamRequest>, options?: RequestOptions) =>
+    this.client.fetch<IpamIP>(
+      {
+        body: '{}',
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/lb/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}/transfer-to-ipam`,
+        signal: options?.signal,
+      },
+      unmarshalIpamIP,
     )
 
   
@@ -1532,6 +1579,7 @@ export class API extends ParentAPI {
         method: 'DELETE',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/lbs/${validatePathParam('lbId', request.lbId)}`,
         urlParams: urlParams(
+          ['migrate_flexip_to_ipam', request.migrateFlexipToIpam],
           ['release_ip', request.releaseIp],
         ),
         signal: options?.signal,
@@ -1566,6 +1614,7 @@ export class API extends ParentAPI {
         method: 'GET',
         path: `/lb/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
         urlParams: urlParams(
+          ['attached', request.attached],
           ['ip_address', request.ipAddress],
           ['ip_type', request.ipType],
           ['organization_id', request.organizationId],

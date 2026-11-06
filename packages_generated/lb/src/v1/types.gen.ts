@@ -310,6 +310,10 @@ export interface Ip {
    */
   tags: string[]
   /**
+   * ID of the IPAM IP address associated with the flexible IP.
+   */
+  ipamIpId?: string
+  /**
    * @deprecated The region the IP address is in.
    */
   region?: ScwRegion
@@ -321,6 +325,18 @@ export interface Ip {
    * The SRN of the IP address.
    */
   srn: string
+}
+
+
+export interface IpamIP {
+  /**
+   * IPAM IP ID.
+   */
+  id: string
+  /**
+   * Actual IP address.
+   */
+  ipAddress: string
 }
 
 
@@ -462,6 +478,10 @@ export interface Lb {
    * List of IP addresses attached to the Load Balancer.
    */
   ip: Ip[]
+  /**
+   * List of public IPAM IP addresses attached to the Load Balancer.
+   */
+  ipamIps: IpamIP[]
   /**
    * Load Balancer tags.
    */
@@ -1440,6 +1460,10 @@ export type CreateLbRequest = {
    */
   ipIds?: string[]
   /**
+   * List of IPAM IP IDs to attach to the Load Balancer.
+   */
+  ipamIpIds?: string[]
+  /**
    * List of tags for the Load Balancer.
    */
   tags?: string[]
@@ -1574,6 +1598,10 @@ export type DeleteLbRequest = {
    * Defines whether the Load Balancer's flexible IP should be deleted. Set to true to release the flexible IP, or false to keep it available in your account for future Load Balancers.
    */
   releaseIp: boolean
+  /**
+   * If true and one or several ips of the LB are legacy flexible IP, they will be migrated to IPAM, free to use in other Scaleway products.
+   */
+  migrateFlexipToIpam?: boolean
 }
 
 
@@ -1969,6 +1997,10 @@ export type ListIPsRequest = {
    * Tag to filter for, only IPs with one or more matching tags will be returned.
    */
   tags?: string[]
+  /**
+   * Defines whether to filter only for Flexible IPs which are attached to a Load Balancer.
+   */
+  attached?: boolean
 }
 
 
@@ -2662,6 +2694,22 @@ export type ZonedApiAddBackendServersRequest = {
 }
 
 
+export type ZonedApiAttachIpamIPRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * Load Balancer ID.
+   */
+  lbId: string
+  /**
+   * ID of an IPAM IP address to attach to the Load Balancer.
+   */
+  ipamIpIds: string[]
+}
+
+
 export type ZonedApiAttachPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
@@ -2985,6 +3033,10 @@ export type ZonedApiCreateLbRequest = {
    */
   ipIds?: string[]
   /**
+   * List of IPAM IP IDs to attach to the Load Balancer.
+   */
+  ipamIpIds?: string[]
+  /**
    * List of tags for the Load Balancer.
    */
   tags?: string[]
@@ -3119,6 +3171,10 @@ export type ZonedApiDeleteLbRequest = {
    * Defines whether the Load Balancer's flexible IP should be deleted. Set to true to release the flexible IP, or false to keep it available in your account for future Load Balancers.
    */
   releaseIp: boolean
+  /**
+   * If true and one or several ips of the LB are legacy flexible IP, they will be migrated to IPAM, free to use in other Scaleway products.
+   */
+  migrateFlexipToIpam?: boolean
 }
 
 
@@ -3446,6 +3502,10 @@ export type ZonedApiListIPsRequest = {
    * Tag to filter for, only IPs with one or more matching tags will be returned.
    */
   tags?: string[]
+  /**
+   * Defines whether to filter only for Flexible IPs which are attached to a Load Balancer.
+   */
+  attached?: boolean
 }
 
 
@@ -3674,6 +3734,18 @@ export type ZonedApiSubscribeToLbRequest = {
    * Subscriber ID.
    */
   subscriberId: string
+}
+
+
+export type ZonedApiTransferToIpamRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone
+  /**
+   * ID of the LB Flexible IP to transfer to IPAM.
+   */
+  ipId: string
 }
 
 

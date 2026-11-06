@@ -5,6 +5,7 @@ import { isJSONObject, marshalBlobToScwFile, marshalDecimal, marshalMoney, marsh
 import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scaleway/sdk-client'
 import type {
   Ip,
+  IpamIP,
   SubscriberEmailConfig,
   SubscriberWebhookConfig,
   Subscriber,
@@ -72,6 +73,7 @@ import type {
   UpdateRouteRequest,
   UpdateSubscriberRequest,
   ZonedApiAddBackendServersRequest,
+  ZonedApiAttachIpamIPRequest,
   ZonedApiAttachPrivateNetworkRequest,
   ZonedApiCreateAclRequest,
   ZonedApiCreateBackendRequest,
@@ -109,6 +111,7 @@ export const unmarshalIp = (data: unknown): Ip => {
   return {
     id: data.id,
     ipAddress: data.ip_address,
+    ipamIpId: data.ipam_ip_id,
     lbId: data.lb_id,
     organizationId: data.organization_id,
     projectId: data.project_id,
@@ -118,6 +121,19 @@ export const unmarshalIp = (data: unknown): Ip => {
     tags: data.tags,
     zone: data.zone,
   } as Ip
+}
+
+export const unmarshalIpamIP = (data: unknown): IpamIP => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'IpamIP' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    ipAddress: data.ip_address,
+  } as IpamIP
 }
 
 const unmarshalSubscriberEmailConfig = (data: unknown): SubscriberEmailConfig => {
@@ -306,6 +322,7 @@ export const unmarshalLb = (data: unknown): Lb => {
     id: data.id,
     instances: unmarshalArrayOfObject(data.instances, unmarshalInstance),
     ip: unmarshalArrayOfObject(data.ip, unmarshalIp),
+    ipamIps: unmarshalArrayOfObject(data.ipam_ips, unmarshalIpamIP),
     name: data.name,
     organizationId: data.organization_id,
     privateNetworkCount: data.private_network_count,
@@ -1057,6 +1074,7 @@ export const marshalCreateLbRequest = (
   description: request.description,
   ip_id: request.ipId,
   ip_ids: request.ipIds,
+  ipam_ip_ids: request.ipamIpIds,
   name: request.name || randomName('lb'),
   ssl_compatibility_level: request.sslCompatibilityLevel,
   tags: request.tags,
@@ -1317,6 +1335,13 @@ export const marshalZonedApiAddBackendServersRequest = (
   server_ip: request.serverIp,
 })
 
+export const marshalZonedApiAttachIpamIPRequest = (
+  request: ZonedApiAttachIpamIPRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ipam_ip_ids: request.ipamIpIds,
+})
+
 export const marshalZonedApiAttachPrivateNetworkRequest = (
   request: ZonedApiAttachPrivateNetworkRequest,
   defaults: DefaultValues,
@@ -1436,6 +1461,7 @@ export const marshalZonedApiCreateLbRequest = (
   description: request.description,
   ip_id: request.ipId,
   ip_ids: request.ipIds,
+  ipam_ip_ids: request.ipamIpIds,
   name: request.name || randomName('lb'),
   ssl_compatibility_level: request.sslCompatibilityLevel,
   tags: request.tags,
