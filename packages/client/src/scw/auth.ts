@@ -14,6 +14,15 @@ import { AUTH_HEADER_KEY, SESSION_HEADER_KEY } from './constants.js'
 
 type TokenAccessor = () => Promise<string | undefined>
 
+/**
+ * Resolves the authentication token used to set the `X-Auth-Token` header.
+ * It is called for each request, which makes it compatible with short-lived
+ * or rotating tokens.
+ *
+ * @public
+ */
+export type TokenProvider = () => Promise<string>
+
 type AddSessionHeader = {
   request: Request
   getAsyncToken: () => Promise<string | undefined>
@@ -41,6 +50,17 @@ export const addSessionHeader = async ({ request, getAsyncToken }: AddSessionHea
  */
 export const authenticateWithSessionToken = (getToken: TokenAccessor): RequestInterceptor =>
   addAsyncHeaderInterceptor(SESSION_HEADER_KEY, getToken)
+
+/**
+ * Authenticates with an asynchronous token provider.
+ *
+ * @param getToken - The token provider, resolved on every request
+ * @returns The request interceptor
+ *
+ * @internal
+ */
+export const authenticateWithTokenProvider = (getToken: TokenProvider): RequestInterceptor =>
+  addAsyncHeaderInterceptor(AUTH_HEADER_KEY, getToken)
 
 /**
  * Authenticates with a secrets.
