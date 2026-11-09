@@ -47,6 +47,7 @@ export const LIST_PUBLIC_CATALOG_PRODUCTS_REQUEST_PRODUCT_TYPES: ListPublicCatal
   'instance_local_ssd_storage',
   'file_storage',
   'serverless_sql_database',
+  'cockpit',
 ]
 
 /** Lists all values of the enum {@link ListPublicCatalogProductsRequestStatus}. */
