@@ -15,6 +15,8 @@ export type {
   Action,
   AlertRule,
   AlertRuleStatus,
+  AnnotationsBindingInfo,
+  AnnotationsValueInfo,
   AppleSiliconRunnerInfo,
   AppleSiliconServerInfo,
   AuditTrailAlertRuleInfo,
