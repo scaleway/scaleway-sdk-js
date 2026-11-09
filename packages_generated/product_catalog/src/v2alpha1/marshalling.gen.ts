@@ -45,6 +45,7 @@ import type {
   PublicCatalogProductPropertiesApacheKafka,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
+  PublicCatalogProductPropertiesCockpit,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesFileStorage,
@@ -587,6 +588,17 @@ const unmarshalPublicCatalogProductPropertiesBlockStorage = (data: unknown): Pub
   } as PublicCatalogProductPropertiesBlockStorage
 }
 
+const unmarshalPublicCatalogProductPropertiesCockpit = (data: unknown): PublicCatalogProductPropertiesCockpit => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesCockpit' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesCockpit
+}
+
 const unmarshalPublicCatalogProductPropertiesDedibox = (data: unknown): PublicCatalogProductPropertiesDedibox => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -930,6 +942,7 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
     apacheKafka: data.apache_kafka ? unmarshalPublicCatalogProductPropertiesApacheKafka(data.apache_kafka) : undefined,
     appleSilicon: data.apple_silicon ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon) : undefined,
     blockStorage: data.block_storage ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage) : undefined,
+    cockpit: data.cockpit ? unmarshalPublicCatalogProductPropertiesCockpit(data.cockpit) : undefined,
     dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : undefined,
     elasticMetal: data.elastic_metal ? unmarshalPublicCatalogProductPropertiesElasticMetal(data.elastic_metal) : undefined,
     fileStorage: data.file_storage ? unmarshalPublicCatalogProductPropertiesFileStorage(data.file_storage) : undefined,
