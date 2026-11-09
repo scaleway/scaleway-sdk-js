@@ -143,6 +143,16 @@ export interface VpcPrivateNetworkInfo {
 }
 
 
+export interface WoflDefinitionInfo {
+  workflowId: string
+}
+
+
+export interface WoflRunInfo {
+  workflowId: string
+}
+
+
 export interface Resource {
   /**
    * ID of the resource.
@@ -185,43 +195,43 @@ export interface Resource {
   /**
    * Additional information for a VPC Private Network.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
   vpcPrivateNetworkInfo?: VpcPrivateNetworkInfo
   /**
    * Additional information for a Serverless Function.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
   serverlessFunctionsFunctionInfo?: ServerlessFunctionsFunctionInfo
   /**
    * Additional information for a Serverless Container.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
   serverlessContainersContainerInfo?: ServerlessContainersContainerInfo
   /**
    * Additional information for a Serverless SQL database backup.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
   serverlessSqldbBackupInfo?: ServerlessSqldbBackupInfo
   /**
    * Additional information for a Baremetal server.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
   baremetalServerInfo?: BrmServerInfo
   /**
    * Additional information for an OBS datasource.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
   obsDatasourceInfo?: ObsDatasourceInfo
   /**
    * Additional information for an OBS exporter.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
   obsExporterInfo?: ObsExporterInfo
   /**
@@ -232,6 +242,16 @@ export interface Resource {
    * Last update date.
    */
   updatedAt?: Date
+  /**
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
+   */
+  woflDefinitionInfo?: WoflDefinitionInfo
+  /**
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
+   */
+  woflRunInfo?: WoflRunInfo
 }
 
 

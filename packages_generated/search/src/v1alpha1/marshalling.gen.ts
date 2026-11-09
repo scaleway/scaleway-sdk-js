@@ -11,6 +11,8 @@ import type {
   ServerlessFunctionsFunctionInfo,
   ServerlessSqldbBackupInfo,
   VpcPrivateNetworkInfo,
+  WoflDefinitionInfo,
+  WoflRunInfo,
   Resource,
   SearchResourcesResponse,
 } from './types.gen.js'
@@ -99,6 +101,30 @@ const unmarshalVpcPrivateNetworkInfo = (data: unknown): VpcPrivateNetworkInfo =>
   } as VpcPrivateNetworkInfo
 }
 
+const unmarshalWoflDefinitionInfo = (data: unknown): WoflDefinitionInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WoflDefinitionInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    workflowId: data.workflow_id,
+  } as WoflDefinitionInfo
+}
+
+const unmarshalWoflRunInfo = (data: unknown): WoflRunInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WoflRunInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    workflowId: data.workflow_id,
+  } as WoflRunInfo
+}
+
 const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -123,6 +149,8 @@ const unmarshalResource = (data: unknown): Resource => {
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at),
     vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : undefined,
+    woflDefinitionInfo: data.wofl_definition_info ? unmarshalWoflDefinitionInfo(data.wofl_definition_info) : undefined,
+    woflRunInfo: data.wofl_run_info ? unmarshalWoflRunInfo(data.wofl_run_info) : undefined,
     zone: data.zone,
   } as Resource
 }

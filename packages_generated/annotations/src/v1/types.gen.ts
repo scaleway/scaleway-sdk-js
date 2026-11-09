@@ -165,11 +165,11 @@ export type CreateKeyRequest = {
    */
   organizationId?: string
   /**
-   * Name of the annotation key.
+   * Name of the annotation key. Never use a secret as a name, as it is shown in the audit trail.
    */
   name: string
   /**
-   * Description of the annotation key.
+   * Description of the annotation key. Never put a secret in the description, as it is shown in the audit trail.
    */
   description: string
 }
@@ -181,11 +181,11 @@ export type CreateValueRequest = {
    */
   keyId: string
   /**
-   * Name of the value.
+   * Name of the value. Never use a secret as a name, as it is shown in the audit trail.
    */
   name: string
   /**
-   * Description of the value.
+   * Description of the value. Never put a secret in the description, as it is shown in the audit trail.
    */
   description: string
 }
@@ -401,11 +401,11 @@ export type UpdateKeyRequest = {
    */
   keyId: string
   /**
-   * New name of the key.
+   * New name of the key. Never use a secret as a name, as it is shown in the audit trail.
    */
   name?: string
   /**
-   * New description of the key.
+   * New description of the key. Never put a secret in the description, as it is shown in the audit trail.
    */
   description?: string
 }
@@ -417,11 +417,11 @@ export type UpdateValueRequest = {
    */
   valueId: string
   /**
-   * New name of the value.
+   * New name of the value. Never use a secret as a name, as it is shown in the audit trail.
    */
   name?: string
   /**
-   * New description of the value.
+   * New description of the value. Never put a secret in the description, as it is shown in the audit trail.
    */
   description?: string
 }
