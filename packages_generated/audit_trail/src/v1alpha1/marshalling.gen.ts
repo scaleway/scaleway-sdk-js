@@ -18,6 +18,8 @@ import type {
   AccountOrganizationInfo,
   AccountProjectInfo,
   AccountUserInfo,
+  AnnotationsBindingInfo,
+  AnnotationsValueInfo,
   AppleSiliconRunnerInfo,
   AppleSiliconServerInfo,
   AuditTrailAlertRuleInfo,
@@ -313,6 +315,35 @@ const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
     email: data.email,
     phoneNumber: data.phone_number,
   } as AccountUserInfo
+}
+
+const unmarshalAnnotationsBindingInfo = (data: unknown): AnnotationsBindingInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AnnotationsBindingInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    keyId: data.key_id,
+    keyName: data.key_name,
+    targetSrn: data.target_srn,
+    valueId: data.value_id,
+    valueName: data.value_name,
+  } as AnnotationsBindingInfo
+}
+
+const unmarshalAnnotationsValueInfo = (data: unknown): AnnotationsValueInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AnnotationsValueInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    keyId: data.key_id,
+    keyName: data.key_name,
+  } as AnnotationsValueInfo
 }
 
 const unmarshalAppleSiliconRunnerInfo = (data: unknown): AppleSiliconRunnerInfo => {
@@ -1039,6 +1070,8 @@ export const unmarshalResource = (data: unknown): Resource => {
     accountProjectInfo: data.account_project_info ? unmarshalAccountProjectInfo(data.account_project_info) : undefined,
     accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : undefined,
     action: data.action ? data.action : undefined,
+    annotationsBindingInfo: data.annotations_binding_info ? unmarshalAnnotationsBindingInfo(data.annotations_binding_info) : undefined,
+    annotationsValueInfo: data.annotations_value_info ? unmarshalAnnotationsValueInfo(data.annotations_value_info) : undefined,
     appleSiliconRunnerInfo: data.apple_silicon_runner_info ? unmarshalAppleSiliconRunnerInfo(data.apple_silicon_runner_info) : undefined,
     appleSiliconServerInfo: data.apple_silicon_server_info ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info) : undefined,
     auditTrailAlertRuleInfo: data.audit_trail_alert_rule_info ? unmarshalAuditTrailAlertRuleInfo(data.audit_trail_alert_rule_info) : undefined,
