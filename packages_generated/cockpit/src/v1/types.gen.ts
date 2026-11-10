@@ -138,7 +138,7 @@ export interface DataSourceLogsLimits {
   /**
    * Maximum number of bytes ingested per second.
    */
-  ingestionRateLimitBytesPerSecond?: number
+  ingestionRateLimitBytesPerSecond?: number | null
 }
 
 
@@ -149,11 +149,11 @@ export interface DataSourceMetricsLimits {
   /**
    * Maximum number of samples ingested per second.
    */
-  ingestionRateLimitSamplesPerSecond?: number
+  ingestionRateLimitSamplesPerSecond?: number | null
   /**
    * Maximum number of active series.
    */
-  maxSeries?: number
+  maxSeries?: number | null
 }
 
 
@@ -164,13 +164,13 @@ export interface DataSourceTracesLimits {
   /**
    * Maximum number of bytes ingested per second.
    */
-  ingestionRateLimitBytesPerSecond?: number
+  ingestionRateLimitBytesPerSecond?: number | null
 }
 
 
 export interface ExporterDatadogDestination {
-  apiKey?: string
-  endpoint?: string
+  apiKey?: string | null
+  endpoint?: string | null
 }
 
 
@@ -253,7 +253,7 @@ export interface Alert {
   /**
    * Current state of the alert. Possible states are `inactive`, `pending`, and `firing`.
    */
-  state?: AlertState
+  state?: AlertState | null
   /**
    * Annotations for the alert, used to provide additional information about the alert.
    */
@@ -261,7 +261,7 @@ export interface Alert {
   /**
    * Contains additional data for preconfigured alerts, such as the rule ID, display name, and description. Only present if the alert is preconfigured.
    */
-  preconfiguredData?: PreconfiguredAlertData
+  preconfiguredData?: PreconfiguredAlertData | null
   /**
    * ID of the data source containing the alert rule.
    */
@@ -278,7 +278,7 @@ export interface ContactPoint {
    *
    * One-of ('configuration'): at most one of 'email' could be set.
    */
-  email?: ContactPointEmail
+  email?: ContactPointEmail | null
   /**
    * Region.
    */
@@ -321,11 +321,11 @@ export interface DataSource {
   /**
    * Date the data source was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the data source was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Indicates whether the data source is synchronized with Grafana.
    */
@@ -341,7 +341,7 @@ export interface DataSource {
   /**
    * Usage of the month in bytes.
    */
-  currentMonthUsage?: number
+  currentMonthUsage?: number | null
   /**
    * The SRN of the data-source.
    */
@@ -351,19 +351,19 @@ export interface DataSource {
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  metricsLimits?: DataSourceMetricsLimits
+  metricsLimits?: DataSourceMetricsLimits | null
   /**
    * Limits applied to the logs data source, including the default values of the limits not set.
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  logsLimits?: DataSourceLogsLimits
+  logsLimits?: DataSourceLogsLimits | null
   /**
    * Limits applied to the traces data source, including the default values of the limits not set.
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  tracesLimits?: DataSourceTracesLimits
+  tracesLimits?: DataSourceTracesLimits | null
 }
 
 
@@ -392,13 +392,13 @@ export interface Exporter {
    *
    * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
    */
-  datadogDestination?: ExporterDatadogDestination
+  datadogDestination?: ExporterDatadogDestination | null
   /**
    * OTLP destination configuration for the data export.
    *
    * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
    */
-  otlpDestination?: ExporterOTLPDestination
+  otlpDestination?: ExporterOTLPDestination | null
   /**
    * Status of the data export.
    */
@@ -410,11 +410,11 @@ export interface Exporter {
   /**
    * A timestamp of the creation date of the data export.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * A timestamp of the last update date of the data export.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * The region in which the export is located.
    */
@@ -472,7 +472,7 @@ export interface GrafanaUser {
   /**
    * Grafana user's password.
    */
-  password?: string
+  password?: string | null
 }
 
 
@@ -487,15 +487,15 @@ export interface Plan {
   /**
    * Interval of time during which Scaleway's Cockpit keeps your metrics.
    */
-  retentionMetricsInterval?: string
+  retentionMetricsInterval?: string | null
   /**
    * Interval of time during which Scaleway's Cockpit keeps your logs.
    */
-  retentionLogsInterval?: string
+  retentionLogsInterval?: string | null
   /**
    * Interval of time during which Scaleway's Cockpit keeps your traces.
    */
-  retentionTracesInterval?: string
+  retentionTracesInterval?: string | null
   /**
    * Ingestion price in cents for 1 million samples.
    */
@@ -542,11 +542,11 @@ export interface Token {
   /**
    * Token creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Token last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Token permission scopes.
    */
@@ -554,7 +554,7 @@ export interface Token {
   /**
    * Token secret key.
    */
-  secretKey?: string
+  secretKey?: string | null
   /**
    * Regions where the token is located.
    */
@@ -569,7 +569,7 @@ export interface Usage {
   /**
    * ID of the data source.
    */
-  dataSourceId?: string
+  dataSourceId?: string | null
   /**
    * ID of the Project the data source belongs to.
    */
@@ -589,7 +589,7 @@ export interface Usage {
   /**
    * Interval for the data source usage.
    */
-  interval?: string
+  interval?: string | null
   /**
    * Data source usage for the given interval.
    */
@@ -612,7 +612,7 @@ export interface AlertManager {
   /**
    * Alert manager URL.
    */
-  alertManagerUrl?: string
+  alertManagerUrl?: string | null
   /**
    * The Alert manager is enabled.
    */
@@ -661,39 +661,39 @@ export interface GetConfigResponse {
   /**
    * Custom metrics retention configuration.
    */
-  customMetricsRetention?: GetConfigResponseRetention
+  customMetricsRetention?: GetConfigResponseRetention | null
   /**
    * Custom logs retention configuration.
    */
-  customLogsRetention?: GetConfigResponseRetention
+  customLogsRetention?: GetConfigResponseRetention | null
   /**
    * Custom traces retention configuration.
    */
-  customTracesRetention?: GetConfigResponseRetention
+  customTracesRetention?: GetConfigResponseRetention | null
   /**
    * Scaleway metrics retention configuration.
    */
-  productMetricsRetention?: GetConfigResponseRetention
+  productMetricsRetention?: GetConfigResponseRetention | null
   /**
    * Scaleway logs retention configuration.
    */
-  productLogsRetention?: GetConfigResponseRetention
+  productLogsRetention?: GetConfigResponseRetention | null
   /**
    * Bounds of the custom metrics ingestion rate limit, in samples per second.
    */
-  customMetricsIngestionRateLimitSamplesPerSecond?: GetConfigResponseBounds
+  customMetricsIngestionRateLimitSamplesPerSecond?: GetConfigResponseBounds | null
   /**
    * Bounds of the custom metrics maximum number of active series.
    */
-  customMetricsMaxSeries?: GetConfigResponseBounds
+  customMetricsMaxSeries?: GetConfigResponseBounds | null
   /**
    * Bounds of the custom logs ingestion rate limit, in bytes per second.
    */
-  customLogsIngestionRateLimitBytesPerSecond?: GetConfigResponseBounds
+  customLogsIngestionRateLimitBytesPerSecond?: GetConfigResponseBounds | null
   /**
    * Bounds of the custom traces ingestion rate limit, in bytes per second.
    */
-  customTracesIngestionRateLimitBytesPerSecond?: GetConfigResponseBounds
+  customTracesIngestionRateLimitBytesPerSecond?: GetConfigResponseBounds | null
 }
 
 
@@ -720,7 +720,7 @@ export type GlobalApiCreateGrafanaUserRequest = {
   /**
    * ID of the Project in which to create the Grafana user.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Username of the Grafana user. Note that the `admin` username is not available for creation.
    */
@@ -728,7 +728,7 @@ export type GlobalApiCreateGrafanaUserRequest = {
   /**
    * Role assigned to the Grafana user.
    */
-  role?: GrafanaUserRole
+  role?: GrafanaUserRole | null
 }
 
 
@@ -743,7 +743,7 @@ export type GlobalApiDeleteGrafanaUserRequest = {
   /**
    * ID of the Project to target.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -754,7 +754,7 @@ export type GlobalApiGetCurrentPlanRequest = {
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -769,7 +769,7 @@ export type GlobalApiGetGrafanaProductDashboardRequest = {
   /**
    * ID of the Project the dashboard belongs to.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -780,7 +780,7 @@ export type GlobalApiGetGrafanaRequest = {
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -791,19 +791,19 @@ export type GlobalApiListGrafanaProductDashboardsRequest = {
   /**
    * ID of the Project to target.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Page size.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -814,19 +814,19 @@ export type GlobalApiListGrafanaUsersRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Page size.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the Grafana users.
    */
-  orderBy?: ListGrafanaUsersRequestOrderBy
+  orderBy?: ListGrafanaUsersRequestOrderBy | null
   /**
    * ID of the Project to target.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -837,12 +837,12 @@ export type GlobalApiListPlansRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Page size.
    */
-  pageSize?: number
-  orderBy?: ListPlansRequestOrderBy
+  pageSize?: number | null
+  orderBy?: ListPlansRequestOrderBy | null
 }
 
 
@@ -857,7 +857,7 @@ export type GlobalApiResetGrafanaUserPasswordRequest = {
   /**
    * ID of the Project to target.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -868,11 +868,11 @@ export type GlobalApiSelectPlanRequest = {
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the pricing plan.
    */
-  planName?: PlanName
+  planName?: PlanName | null
 }
 
 
@@ -883,7 +883,7 @@ export type GlobalApiSyncGrafanaDataSourcesRequest = {
   /**
    * ID of the Project to target.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1047,21 +1047,21 @@ export type RegionalApiCreateContactPointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to create the contact point in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Email address of the contact point to create.
    *
    * One-of ('configuration'): at most one of 'email' could be set.
    */
-  email?: ContactPointEmail
+  email?: ContactPointEmail | null
   /**
    * Send an email notification when an alert is marked as resolved.
    */
-  sendResolvedNotifications?: boolean
+  sendResolvedNotifications?: boolean | null
 }
 
 
@@ -1072,11 +1072,11 @@ export type RegionalApiCreateDataSourceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project the data source belongs to.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Data source name.
    */
@@ -1088,25 +1088,25 @@ export type RegionalApiCreateDataSourceRequest = {
   /**
    * Default values are 31 days for metrics, 7 days for logs and traces.
    */
-  retentionDays?: number
+  retentionDays?: number | null
   /**
    * Limits of the data source. Only allowed for a metrics data source. A limit not set gets its default value (see GetConfig).
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  metricsLimits?: DataSourceMetricsLimits
+  metricsLimits?: DataSourceMetricsLimits | null
   /**
    * Limits of the data source. Only allowed for a logs data source. A limit not set gets its default value (see GetConfig).
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  logsLimits?: DataSourceLogsLimits
+  logsLimits?: DataSourceLogsLimits | null
   /**
    * Limits of the data source. Only allowed for a traces data source. A limit not set gets its default value (see GetConfig).
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  tracesLimits?: DataSourceTracesLimits
+  tracesLimits?: DataSourceTracesLimits | null
 }
 
 
@@ -1117,7 +1117,7 @@ export type RegionalApiCreateExporterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the data source linked to the data export.
    */
@@ -1127,13 +1127,13 @@ export type RegionalApiCreateExporterRequest = {
    *
    * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
    */
-  datadogDestination?: ExporterDatadogDestination
+  datadogDestination?: ExporterDatadogDestination | null
   /**
    * OTLP destination configuration for the data export.
    *
    * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
    */
-  otlpDestination?: ExporterOTLPDestination
+  otlpDestination?: ExporterOTLPDestination | null
   /**
    * To include all products in your data export, you can use an array containing "all"
 You can retrieve the complete list of product names using the `ListProducts` endpoint.
@@ -1146,7 +1146,7 @@ You can retrieve the complete list of product names using the `ListProducts` end
   /**
    * Description of the data export.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -1157,11 +1157,11 @@ export type RegionalApiCreateTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project the token belongs to.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the token.
    */
@@ -1169,7 +1169,7 @@ export type RegionalApiCreateTokenRequest = {
   /**
    * Token permission scopes.
    */
-  tokenScopes?: TokenScope[]
+  tokenScopes?: TokenScope[] | null
 }
 
 
@@ -1180,17 +1180,17 @@ export type RegionalApiDeleteContactPointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project containing the contact point to delete.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Email address of the contact point to delete.
    *
    * One-of ('configuration'): at most one of 'email' could be set.
    */
-  email?: ContactPointEmail
+  email?: ContactPointEmail | null
 }
 
 
@@ -1201,7 +1201,7 @@ export type RegionalApiDeleteDataSourceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the data source to delete.
    */
@@ -1216,7 +1216,7 @@ export type RegionalApiDeleteExporterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the data export to update.
    */
@@ -1231,7 +1231,7 @@ export type RegionalApiDeleteTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the token to delete.
    */
@@ -1246,11 +1246,11 @@ export type RegionalApiDisableAlertManagerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to disable the Alert manager in.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1258,15 +1258,15 @@ export type RegionalApiDisableAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * List of IDs of the rules to enable. If empty, disables all preconfigured rules.
    */
-  ruleIds?: string[]
+  ruleIds?: string[] | null
 }
 
 
@@ -1277,11 +1277,11 @@ export type RegionalApiDisableManagedAlertsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1292,11 +1292,11 @@ export type RegionalApiEnableAlertManagerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to enable the Alert manager in.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1304,15 +1304,15 @@ export type RegionalApiEnableAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * List of IDs of the rules to enable. If empty, enables all preconfigured rules.
    */
-  ruleIds?: string[]
+  ruleIds?: string[] | null
 }
 
 
@@ -1323,11 +1323,11 @@ export type RegionalApiEnableManagedAlertsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1338,11 +1338,11 @@ export type RegionalApiGetAlertManagerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Project ID of the requested Alert manager.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1353,7 +1353,7 @@ export type RegionalApiGetConfigRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
 }
 
 
@@ -1364,7 +1364,7 @@ export type RegionalApiGetDataSourceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the relevant data source.
    */
@@ -1379,7 +1379,7 @@ export type RegionalApiGetExporterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the data export to retrieve.
    */
@@ -1391,11 +1391,11 @@ export type RegionalApiGetRulesCountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to retrieve the rule count for.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1406,7 +1406,7 @@ export type RegionalApiGetTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Token ID.
    */
@@ -1418,9 +1418,9 @@ export type RegionalApiGetUsageOverviewRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  projectId?: string
-  interval?: string
+  region?: ScwRegion | null
+  projectId?: string | null
+  interval?: string | null
 }
 
 
@@ -1431,27 +1431,27 @@ export type RegionalApiListAlertsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Project ID to filter for, only alerts from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Returns only alerts with the given activation status. If omitted, no alert filtering is applied. Other filters may still apply.
    */
-  ruleStatus?: AlertStatus
+  ruleStatus?: AlertStatus | null
   /**
    * True returns only preconfigured alerts. False returns only custom alerts. If omitted, no filtering is applied on alert types. Other filters may still apply.
    */
-  isPreconfigured?: boolean
+  isPreconfigured?: boolean | null
   /**
    * Valid values to filter on are `inactive`, `pending` and `firing`. If omitted, no filtering is applied on alert states. Other filters may still apply.
    */
-  state?: AlertState
+  state?: AlertState | null
   /**
    * If omitted, only alerts from the default Scaleway metrics data source will be listed.
    */
-  dataSourceId?: string
+  dataSourceId?: string | null
 }
 
 
@@ -1462,19 +1462,19 @@ export type RegionalApiListContactPointsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project containing the contact points to list.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Total count of contact points to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1485,31 +1485,31 @@ export type RegionalApiListDataSourcesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Project ID to filter for, only data sources from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Origin to filter for, only data sources with matching origin will be returned. If omitted, all types will be returned.
    */
-  origin?: DataSourceOrigin
+  origin?: DataSourceOrigin | null
   /**
    * Types to filter for (metrics, logs, traces), only data sources with matching types will be returned. If omitted, all types will be returned.
    */
-  types?: DataSourceType[]
+  types?: DataSourceType[] | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of data sources to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order for data sources in the response.
    */
-  orderBy?: ListDataSourcesRequestOrderBy
+  orderBy?: ListDataSourcesRequestOrderBy | null
 }
 
 
@@ -1520,27 +1520,27 @@ export type RegionalApiListExportersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Project ID to filter for. Only data exports from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Data source ID to filter for. Only data exports linked to this data source will be returned.
    */
-  datasourceId?: string
+  datasourceId?: string | null
   /**
    * Page number to return from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of data exports to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order for data exports in the response.
    */
-  orderBy?: ListExportersRequestOrderBy
+  orderBy?: ListExportersRequestOrderBy | null
 }
 
 
@@ -1551,19 +1551,19 @@ export type RegionalApiListProductsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of products to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order for products in the response.
    */
-  orderBy?: ListProductsRequestOrderBy
+  orderBy?: ListProductsRequestOrderBy | null
 }
 
 
@@ -1574,27 +1574,27 @@ export type RegionalApiListTokensRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project the tokens belong to.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Token scopes to filter for.
    */
-  tokenScopes?: TokenScope[]
+  tokenScopes?: TokenScope[] | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of tokens to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListTokensRequestOrderBy
+  orderBy?: ListTokensRequestOrderBy | null
 }
 
 
@@ -1605,11 +1605,11 @@ export type RegionalApiTriggerTestAlertRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1620,21 +1620,21 @@ export type RegionalApiUpdateContactPointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project containing the contact point to update.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Email address of the contact point to update.
    *
    * One-of ('configuration'): at most one of 'email' could be set.
    */
-  email?: ContactPointEmail
+  email?: ContactPointEmail | null
   /**
    * Enable or disable notifications when alert is resolved.
    */
-  sendResolvedNotifications?: boolean
+  sendResolvedNotifications?: boolean | null
 }
 
 
@@ -1645,7 +1645,7 @@ export type RegionalApiUpdateDataSourceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the data source to update.
    */
@@ -1653,29 +1653,29 @@ export type RegionalApiUpdateDataSourceRequest = {
   /**
    * Updated name of the data source.
    */
-  name?: string
+  name?: string | null
   /**
    * Duration for which the data will be retained in the data source.
    */
-  retentionDays?: number
+  retentionDays?: number | null
   /**
    * Updated limits of the data source. Only allowed on a metrics data source. A limit not set keeps its current value.
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  metricsLimits?: DataSourceMetricsLimits
+  metricsLimits?: DataSourceMetricsLimits | null
   /**
    * Updated limits of the data source. Only allowed on a logs data source. A limit not set keeps its current value.
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  logsLimits?: DataSourceLogsLimits
+  logsLimits?: DataSourceLogsLimits | null
   /**
    * Updated limits of the data source. Only allowed on a traces data source. A limit not set keeps its current value.
    *
    * One-of ('limits'): at most one of 'metricsLimits', 'logsLimits', 'tracesLimits' could be set.
    */
-  tracesLimits?: DataSourceTracesLimits
+  tracesLimits?: DataSourceTracesLimits | null
 }
 
 
@@ -1686,7 +1686,7 @@ export type RegionalApiUpdateExporterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the data export to update.
    */
@@ -1696,35 +1696,35 @@ export type RegionalApiUpdateExporterRequest = {
    *
    * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
    */
-  datadogDestination?: ExporterDatadogDestination
+  datadogDestination?: ExporterDatadogDestination | null
   /**
    * Updated OTLP destination configuration for the data export.
    *
    * One-of ('destination'): at most one of 'datadogDestination', 'otlpDestination' could be set.
    */
-  otlpDestination?: ExporterOTLPDestination
+  otlpDestination?: ExporterOTLPDestination | null
   /**
    * Updated name of the data export.
    */
-  name?: string
+  name?: string | null
   /**
    * Updated description of the data export.
    */
-  description?: string
+  description?: string | null
   /**
    * To include all products in your data export, you can use an array containing "all"
 You can retrieve the complete list of product names using the `ListProducts` endpoint.
    */
-  exportedProducts?: string[]
+  exportedProducts?: string[] | null
 }
 
 
 export interface UsageOverview {
-  scalewayMetricsUsage?: Usage
-  scalewayLogsUsage?: Usage
-  externalMetricsUsage?: Usage
-  externalLogsUsage?: Usage
-  externalTracesUsage?: Usage
+  scalewayMetricsUsage?: Usage | null
+  scalewayLogsUsage?: Usage | null
+  externalMetricsUsage?: Usage | null
+  externalLogsUsage?: Usage | null
+  externalTracesUsage?: Usage | null
 }
 
 

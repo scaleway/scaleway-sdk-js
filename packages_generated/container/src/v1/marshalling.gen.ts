@@ -73,10 +73,10 @@ const unmarshalContainerProbe = (data: unknown): ContainerProbe => {
 
   return {
     failureThreshold: data.failure_threshold,
-    http: data.http ? unmarshalContainerProbeHTTPProbe(data.http) : undefined,
-    interval: data.interval,
-    tcp: data.tcp ? unmarshalContainerProbeTCPProbe(data.tcp) : undefined,
-    timeout: data.timeout,
+    http: data.http ? unmarshalContainerProbeHTTPProbe(data.http) : null,
+    interval: data.interval ?? null,
+    tcp: data.tcp ? unmarshalContainerProbeTCPProbe(data.tcp) : null,
+    timeout: data.timeout ?? null,
   } as ContainerProbe
 }
 
@@ -88,9 +88,9 @@ const unmarshalContainerScalingOption = (data: unknown): ContainerScalingOption 
   }
 
   return {
-    concurrentRequestsThreshold: data.concurrent_requests_threshold,
-    cpuUsageThreshold: data.cpu_usage_threshold,
-    memoryUsageThreshold: data.memory_usage_threshold,
+    concurrentRequestsThreshold: data.concurrent_requests_threshold ?? null,
+    cpuUsageThreshold: data.cpu_usage_threshold ?? null,
+    memoryUsageThreshold: data.memory_usage_threshold ?? null,
   } as ContainerScalingOption
 }
 
@@ -104,15 +104,15 @@ export const unmarshalContainer = (data: unknown): Container => {
   return {
     args: data.args,
     command: data.command,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     defaultPublicEndpointEnabled: data.default_public_endpoint_enabled,
     description: data.description,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     httpsConnectionsOnly: data.https_connections_only,
     id: data.id,
     image: data.image,
-    livenessProbe: data.liveness_probe ? unmarshalContainerProbe(data.liveness_probe) : undefined,
+    livenessProbe: data.liveness_probe ? unmarshalContainerProbe(data.liveness_probe) : null,
     localStorageLimitBytes: data.local_storage_limit_bytes,
     maxScale: data.max_scale,
     memoryLimitBytes: data.memory_limit_bytes,
@@ -122,20 +122,20 @@ export const unmarshalContainer = (data: unknown): Container => {
     namespaceId: data.namespace_id,
     port: data.port,
     privacy: data.privacy,
-    privateEndpoint: data.private_endpoint,
-    privateNetworkId: data.private_network_id,
+    privateEndpoint: data.private_endpoint ?? null,
+    privateNetworkId: data.private_network_id ?? null,
     protocol: data.protocol,
     publicEndpoint: data.public_endpoint,
     region: data.region,
     sandbox: data.sandbox,
-    scalingOption: data.scaling_option ? unmarshalContainerScalingOption(data.scaling_option) : undefined,
+    scalingOption: data.scaling_option ? unmarshalContainerScalingOption(data.scaling_option) : null,
     secretEnvironmentVariables: data.secret_environment_variables,
     srn: data.srn,
-    startupProbe: data.startup_probe ? unmarshalContainerProbe(data.startup_probe) : undefined,
+    startupProbe: data.startup_probe ? unmarshalContainerProbe(data.startup_probe) : null,
     status: data.status,
     tags: data.tags,
-    timeout: data.timeout,
-    updatedAt: unmarshalDate(data.updated_at),
+    timeout: data.timeout ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Container
 }
 
@@ -148,15 +148,15 @@ export const unmarshalDomain = (data: unknown): Domain => {
 
   return {
     containerId: data.container_id,
-    createdAt: unmarshalDate(data.created_at),
-    errorMessage: data.error_message,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    errorMessage: data.error_message ?? null,
     hostname: data.hostname,
     id: data.id,
     region: data.region,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Domain
 }
 
@@ -168,10 +168,10 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -181,7 +181,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Namespace
 }
 
@@ -250,21 +250,21 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
 
   return {
     containerId: data.container_id,
-    createdAt: unmarshalDate(data.created_at),
-    cronConfig: data.cron_config ? unmarshalTriggerCronConfig(data.cron_config) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    cronConfig: data.cron_config ? unmarshalTriggerCronConfig(data.cron_config) : null,
     description: data.description,
-    destinationConfig: data.destination_config ? unmarshalTriggerDestinationConfig(data.destination_config) : undefined,
-    errorMessage: data.error_message,
+    destinationConfig: data.destination_config ? unmarshalTriggerDestinationConfig(data.destination_config) : null,
+    errorMessage: data.error_message ?? null,
     id: data.id,
     name: data.name,
-    natsConfig: data.nats_config ? unmarshalTriggerNATSConfig(data.nats_config) : undefined,
+    natsConfig: data.nats_config ? unmarshalTriggerNATSConfig(data.nats_config) : null,
     region: data.region,
     sourceType: data.source_type,
-    sqsConfig: data.sqs_config ? unmarshalTriggerSQSConfig(data.sqs_config) : undefined,
+    sqsConfig: data.sqs_config ? unmarshalTriggerSQSConfig(data.sqs_config) : null,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Trigger
 }
 
@@ -342,11 +342,11 @@ const marshalContainerProbe = (
   timeout: request.timeout,  
   ...resolveOneOf([
     {param: 'tcp',
-      value: (request.tcp !== undefined) ? marshalContainerProbeTCPProbe(request.tcp, defaults)
+      value: (request.tcp != null) ? marshalContainerProbeTCPProbe(request.tcp, defaults)
       : undefined,
     },
     {param: 'http',
-      value: (request.http !== undefined) ? marshalContainerProbeHTTPProbe(request.http, defaults)
+      value: (request.http != null) ? marshalContainerProbeHTTPProbe(request.http, defaults)
       : undefined,
     },
   ]),
@@ -378,10 +378,10 @@ export const marshalCreateContainerRequest = (
   description: request.description,
   enable_default_public_endpoint: request.enableDefaultPublicEndpoint,
   enable_private_endpoint: request.enablePrivateEndpoint,
-  environment_variables: ((request.environmentVariables !== undefined) ?  request.environmentVariables: undefined),
+  environment_variables: ((request.environmentVariables != null) ?  request.environmentVariables: undefined),
   https_connections_only: request.httpsConnectionsOnly,
   image: request.image,
-  liveness_probe: ((request.livenessProbe !== undefined) ?  marshalContainerProbe(request.livenessProbe, defaults): undefined),
+  liveness_probe: ((request.livenessProbe != null) ?  marshalContainerProbe(request.livenessProbe, defaults): undefined),
   local_storage_limit_bytes: request.localStorageLimitBytes,
   max_scale: request.maxScale,
   memory_limit_bytes: request.memoryLimitBytes,
@@ -394,9 +394,9 @@ export const marshalCreateContainerRequest = (
   private_network_id: request.privateNetworkId,
   protocol: request.protocol,
   sandbox: request.sandbox,
-  scaling_option: ((request.scalingOption !== undefined) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables: undefined),
-  startup_probe: ((request.startupProbe !== undefined) ?  marshalContainerProbe(request.startupProbe, defaults): undefined),
+  scaling_option: ((request.scalingOption != null) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables: undefined),
+  startup_probe: ((request.startupProbe != null) ?  marshalContainerProbe(request.startupProbe, defaults): undefined),
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -415,10 +415,10 @@ export const marshalCreateNamespaceRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  environment_variables: ((request.environmentVariables !== undefined) ?  request.environmentVariables: undefined),
+  environment_variables: ((request.environmentVariables != null) ?  request.environmentVariables: undefined),
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables: undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables: undefined),
   tags: request.tags,
 })
 
@@ -466,20 +466,20 @@ export const marshalCreateTriggerRequest = (
 ): Record<string, unknown> => ({
   container_id: request.containerId,
   description: request.description,
-  destination_config: ((request.destinationConfig !== undefined) ?  marshalCreateTriggerRequestDestinationConfig(request.destinationConfig, defaults): undefined),
+  destination_config: ((request.destinationConfig != null) ?  marshalCreateTriggerRequestDestinationConfig(request.destinationConfig, defaults): undefined),
   name: request.name,
   tags: request.tags,  
   ...resolveOneOf([
     {param: 'cron_config',
-      value: (request.cronConfig !== undefined) ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
+      value: (request.cronConfig != null) ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
       : undefined,
     },
     {param: 'sqs_config',
-      value: (request.sqsConfig !== undefined) ? marshalCreateTriggerRequestSQSConfig(request.sqsConfig, defaults)
+      value: (request.sqsConfig != null) ? marshalCreateTriggerRequestSQSConfig(request.sqsConfig, defaults)
       : undefined,
     },
     {param: 'nats_config',
-      value: (request.natsConfig !== undefined) ? marshalCreateTriggerRequestNATSConfig(request.natsConfig, defaults)
+      value: (request.natsConfig != null) ? marshalCreateTriggerRequestNATSConfig(request.natsConfig, defaults)
       : undefined,
     },
   ]),
@@ -507,11 +507,11 @@ const marshalUpdateContainerRequestProbe = (
   timeout: request.timeout,  
   ...resolveOneOf([
     {param: 'http',
-      value: (request.http !== undefined) ? marshalUpdateContainerRequestProbeHTTPProbe(request.http, defaults)
+      value: (request.http != null) ? marshalUpdateContainerRequestProbeHTTPProbe(request.http, defaults)
       : undefined,
     },
     {param: 'tcp',
-      value: (request.tcp !== undefined) ? marshalUpdateContainerRequestProbeTCPProbe(request.tcp, defaults)
+      value: (request.tcp != null) ? marshalUpdateContainerRequestProbeTCPProbe(request.tcp, defaults)
       : undefined,
     },
   ]),
@@ -529,7 +529,7 @@ export const marshalUpdateContainerRequest = (
   environment_variables: request.environmentVariables,
   https_connection_only: request.httpsConnectionOnly,
   image: request.image,
-  liveness_probe: ((request.livenessProbe !== undefined) ?  marshalContainerProbe(request.livenessProbe, defaults): undefined),
+  liveness_probe: ((request.livenessProbe != null) ?  marshalContainerProbe(request.livenessProbe, defaults): undefined),
   local_storage_limit_bytes: request.localStorageLimitBytes,
   max_scale: request.maxScale,
   memory_limit_bytes: request.memoryLimitBytes,
@@ -540,9 +540,9 @@ export const marshalUpdateContainerRequest = (
   private_network_id: request.privateNetworkId,
   protocol: request.protocol,
   sandbox: request.sandbox,
-  scaling_option: ((request.scalingOption !== undefined) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
+  scaling_option: ((request.scalingOption != null) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
   secret_environment_variables: request.secretEnvironmentVariables,
-  startup_probe: ((request.startupProbe !== undefined) ?  marshalUpdateContainerRequestProbe(request.startupProbe, defaults): undefined),
+  startup_probe: ((request.startupProbe != null) ?  marshalUpdateContainerRequestProbe(request.startupProbe, defaults): undefined),
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -607,20 +607,20 @@ export const marshalUpdateTriggerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  destination_config: ((request.destinationConfig !== undefined) ?  marshalUpdateTriggerRequestDestinationConfig(request.destinationConfig, defaults): undefined),
+  destination_config: ((request.destinationConfig != null) ?  marshalUpdateTriggerRequestDestinationConfig(request.destinationConfig, defaults): undefined),
   name: request.name,
   tags: request.tags,  
   ...resolveOneOf([
     {param: 'cron_config',
-      value: (request.cronConfig !== undefined) ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
+      value: (request.cronConfig != null) ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
       : undefined,
     },
     {param: 'sqs_config',
-      value: (request.sqsConfig !== undefined) ? marshalUpdateTriggerRequestSQSConfig(request.sqsConfig, defaults)
+      value: (request.sqsConfig != null) ? marshalUpdateTriggerRequestSQSConfig(request.sqsConfig, defaults)
       : undefined,
     },
     {param: 'nats_config',
-      value: (request.natsConfig !== undefined) ? marshalUpdateTriggerRequestNATSConfig(request.natsConfig, defaults)
+      value: (request.natsConfig != null) ? marshalUpdateTriggerRequestNATSConfig(request.natsConfig, defaults)
       : undefined,
     },
   ]),

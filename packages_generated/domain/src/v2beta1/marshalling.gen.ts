@@ -121,7 +121,7 @@ const unmarshalContactExtensionFRAssociationInfo = (data: unknown): ContactExten
   }
 
   return {
-    publicationJo: unmarshalDate(data.publication_jo),
+    publicationJo: unmarshalDate(data.publication_jo) ?? null,
     publicationJoPage: data.publication_jo_page,
   } as ContactExtensionFRAssociationInfo
 }
@@ -195,12 +195,12 @@ const unmarshalContactExtensionFR = (data: unknown): ContactExtensionFR => {
   }
 
   return {
-    associationInfo: data.association_info ? unmarshalContactExtensionFRAssociationInfo(data.association_info) : undefined,
-    codeAuthAfnicInfo: data.code_auth_afnic_info ? unmarshalContactExtensionFRCodeAuthAfnicInfo(data.code_auth_afnic_info) : undefined,
-    dunsInfo: data.duns_info ? unmarshalContactExtensionFRDunsInfo(data.duns_info) : undefined,
-    individualInfo: data.individual_info ? unmarshalContactExtensionFRIndividualInfo(data.individual_info) : undefined,
+    associationInfo: data.association_info ? unmarshalContactExtensionFRAssociationInfo(data.association_info) : null,
+    codeAuthAfnicInfo: data.code_auth_afnic_info ? unmarshalContactExtensionFRCodeAuthAfnicInfo(data.code_auth_afnic_info) : null,
+    dunsInfo: data.duns_info ? unmarshalContactExtensionFRDunsInfo(data.duns_info) : null,
+    individualInfo: data.individual_info ? unmarshalContactExtensionFRIndividualInfo(data.individual_info) : null,
     mode: data.mode,
-    trademarkInfo: data.trademark_info ? unmarshalContactExtensionFRTrademarkInfo(data.trademark_info) : undefined,
+    trademarkInfo: data.trademark_info ? unmarshalContactExtensionFRTrademarkInfo(data.trademark_info) : null,
   } as ContactExtensionFR
 }
 
@@ -212,9 +212,9 @@ const unmarshalContactExtensionIT = (data: unknown): ContactExtensionIT => {
   }
 
   return {
-    europeanCitizenship: data.european_citizenship,
+    europeanCitizenship: data.european_citizenship ?? null,
     pin: data.pin,
-    taxCode: data.tax_code,
+    taxCode: data.tax_code ?? null,
   } as ContactExtensionIT
 }
 
@@ -261,10 +261,10 @@ export const unmarshalContact = (data: unknown): Contact => {
     email: data.email,
     emailAlt: data.email_alt,
     emailStatus: data.email_status,
-    extensionEu: data.extension_eu ? unmarshalContactExtensionEU(data.extension_eu) : undefined,
-    extensionFr: data.extension_fr ? unmarshalContactExtensionFR(data.extension_fr) : undefined,
-    extensionIt: data.extension_it ? unmarshalContactExtensionIT(data.extension_it) : undefined,
-    extensionNl: data.extension_nl ? unmarshalContactExtensionNL(data.extension_nl) : undefined,
+    extensionEu: data.extension_eu ? unmarshalContactExtensionEU(data.extension_eu) : null,
+    extensionFr: data.extension_fr ? unmarshalContactExtensionFR(data.extension_fr) : null,
+    extensionIt: data.extension_it ? unmarshalContactExtensionIT(data.extension_it) : null,
+    extensionNl: data.extension_nl ? unmarshalContactExtensionNL(data.extension_nl) : null,
     faxNumber: data.fax_number,
     firstname: data.firstname,
     id: data.id,
@@ -272,7 +272,7 @@ export const unmarshalContact = (data: unknown): Contact => {
     lastname: data.lastname,
     legalForm: data.legal_form,
     phoneNumber: data.phone_number,
-    questions: data.questions ? unmarshalArrayOfObject(data.questions, unmarshalContactQuestion) : undefined,
+    questions: data.questions ? unmarshalArrayOfObject(data.questions, unmarshalContactQuestion) : null,
     resale: data.resale,
     srn: data.srn,
     state: data.state,
@@ -294,7 +294,7 @@ export const unmarshalDNSZone = (data: unknown): DNSZone => {
     dnsZone: data.dns_zone,
     domain: data.domain,
     linkedProducts: data.linked_products,
-    message: data.message,
+    message: data.message ?? null,
     ns: data.ns,
     nsDefault: data.ns_default,
     nsMaster: data.ns_master,
@@ -302,7 +302,7 @@ export const unmarshalDNSZone = (data: unknown): DNSZone => {
     srn: data.srn,
     status: data.status,
     subdomain: data.subdomain,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as DNSZone
 }
 
@@ -331,9 +331,9 @@ export const unmarshalSSLCertificate = (data: unknown): SSLCertificate => {
   return {
     alternativeDnsZones: data.alternative_dns_zones,
     certificateChain: data.certificate_chain,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     dnsZone: data.dns_zone,
-    expiredAt: unmarshalDate(data.expired_at),
+    expiredAt: unmarshalDate(data.expired_at) ?? null,
     privateKey: data.private_key,
     srn: data.srn,
     status: data.status,
@@ -348,17 +348,17 @@ export const unmarshalTask = (data: unknown): Task => {
   }
 
   return {
-    contactIdentifier: data.contact_identifier,
-    domain: data.domain,
+    contactIdentifier: data.contact_identifier ?? null,
+    domain: data.domain ?? null,
     id: data.id,
-    message: data.message,
+    message: data.message ?? null,
     organizationId: data.organization_id,
     projectId: data.project_id,
     srn: data.srn,
-    startedAt: unmarshalDate(data.started_at),
+    startedAt: unmarshalDate(data.started_at) ?? null,
     status: data.status,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Task
 }
 
@@ -371,7 +371,7 @@ const unmarshalCheckContactsCompatibilityResponseContactCheckResult = (data: unk
 
   return {
     compatible: data.compatible,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
   } as CheckContactsCompatibilityResponseContactCheckResult
 }
 
@@ -383,10 +383,10 @@ export const unmarshalCheckContactsCompatibilityResponse = (data: unknown): Chec
   }
 
   return {
-    administrativeCheckResult: data.administrative_check_result ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(data.administrative_check_result) : undefined,
+    administrativeCheckResult: data.administrative_check_result ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(data.administrative_check_result) : null,
     compatible: data.compatible,
-    ownerCheckResult: data.owner_check_result ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(data.owner_check_result) : undefined,
-    technicalCheckResult: data.technical_check_result ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(data.technical_check_result) : undefined,
+    ownerCheckResult: data.owner_check_result ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(data.owner_check_result) : null,
+    technicalCheckResult: data.technical_check_result ? unmarshalCheckContactsCompatibilityResponseContactCheckResult(data.technical_check_result) : null,
   } as CheckContactsCompatibilityResponse
 }
 
@@ -455,7 +455,7 @@ const unmarshalDSRecordDigest = (data: unknown): DSRecordDigest => {
 
   return {
     digest: data.digest,
-    publicKey: data.public_key ? unmarshalDSRecordPublicKey(data.public_key) : undefined,
+    publicKey: data.public_key ? unmarshalDSRecordPublicKey(data.public_key) : null,
     type: data.type,
   } as DSRecordDigest
 }
@@ -469,9 +469,9 @@ export const unmarshalDSRecord = (data: unknown): DSRecord => {
 
   return {
     algorithm: data.algorithm,
-    digest: data.digest ? unmarshalDSRecordDigest(data.digest) : undefined,
+    digest: data.digest ? unmarshalDSRecordDigest(data.digest) : null,
     keyId: data.key_id,
-    publicKey: data.public_key ? unmarshalDSRecordPublicKey(data.public_key) : undefined,
+    publicKey: data.public_key ? unmarshalDSRecordPublicKey(data.public_key) : null,
   } as DSRecord
 }
 
@@ -485,7 +485,7 @@ const unmarshalTldOffer = (data: unknown): TldOffer => {
   return {
     action: data.action,
     operationPath: data.operation_path,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
+    price: data.price ? unmarshalMoney(data.price) : null,
   } as TldOffer
 }
 
@@ -555,27 +555,27 @@ export const unmarshalDomain = (data: unknown): Domain => {
   }
 
   return {
-    administrativeContact: data.administrative_contact ? unmarshalContact(data.administrative_contact) : undefined,
+    administrativeContact: data.administrative_contact ? unmarshalContact(data.administrative_contact) : null,
     autoRenewStatus: data.auto_renew_status,
     dnsZones: unmarshalArrayOfObject(data.dns_zones, unmarshalDNSZone),
-    dnssec: data.dnssec ? unmarshalDomainDNSSEC(data.dnssec) : undefined,
+    dnssec: data.dnssec ? unmarshalDomainDNSSEC(data.dnssec) : null,
     domain: data.domain,
     eppCode: data.epp_code,
-    expiredAt: unmarshalDate(data.expired_at),
-    externalDomainRegistrationStatus: data.external_domain_registration_status ? unmarshalDomainRegistrationStatusExternalDomain(data.external_domain_registration_status) : undefined,
+    expiredAt: unmarshalDate(data.expired_at) ?? null,
+    externalDomainRegistrationStatus: data.external_domain_registration_status ? unmarshalDomainRegistrationStatusExternalDomain(data.external_domain_registration_status) : null,
     isExternal: data.is_external,
     linkedProducts: data.linked_products,
     organizationId: data.organization_id,
-    ownerContact: data.owner_contact ? unmarshalContact(data.owner_contact) : undefined,
+    ownerContact: data.owner_contact ? unmarshalContact(data.owner_contact) : null,
     pendingTrade: data.pending_trade,
     projectId: data.project_id,
     registrar: data.registrar,
     srn: data.srn,
     status: data.status,
-    technicalContact: data.technical_contact ? unmarshalContact(data.technical_contact) : undefined,
-    tld: data.tld ? unmarshalTld(data.tld) : undefined,
-    transferRegistrationStatus: data.transfer_registration_status ? unmarshalDomainRegistrationStatusTransfer(data.transfer_registration_status) : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
+    technicalContact: data.technical_contact ? unmarshalContact(data.technical_contact) : null,
+    tld: data.tld ? unmarshalTld(data.tld) : null,
+    transferRegistrationStatus: data.transfer_registration_status ? unmarshalDomainRegistrationStatusTransfer(data.transfer_registration_status) : null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Domain
 }
 
@@ -655,10 +655,10 @@ const unmarshalDomainRecordHTTPServiceConfig = (data: unknown): DomainRecordHTTP
 
   return {
     ips: data.ips,
-    mustContain: data.must_contain,
+    mustContain: data.must_contain ?? null,
     strategy: data.strategy,
     url: data.url,
-    userAgent: data.user_agent,
+    userAgent: data.user_agent ?? null,
   } as DomainRecordHTTPServiceConfig
 }
 
@@ -694,18 +694,18 @@ const unmarshalDomainRecord = (data: unknown): DomainRecord => {
   }
 
   return {
-    comment: data.comment,
+    comment: data.comment ?? null,
     data: data.data,
-    geoIpConfig: data.geo_ip_config ? unmarshalDomainRecordGeoIPConfig(data.geo_ip_config) : undefined,
-    httpServiceConfig: data.http_service_config ? unmarshalDomainRecordHTTPServiceConfig(data.http_service_config) : undefined,
+    geoIpConfig: data.geo_ip_config ? unmarshalDomainRecordGeoIPConfig(data.geo_ip_config) : null,
+    httpServiceConfig: data.http_service_config ? unmarshalDomainRecordHTTPServiceConfig(data.http_service_config) : null,
     id: data.id,
     name: data.name,
     priority: data.priority,
     ttl: data.ttl,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
-    viewConfig: data.view_config ? unmarshalDomainRecordViewConfig(data.view_config) : undefined,
-    weightedConfig: data.weighted_config ? unmarshalDomainRecordWeightedConfig(data.weighted_config) : undefined,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    viewConfig: data.view_config ? unmarshalDomainRecordViewConfig(data.view_config) : null,
+    weightedConfig: data.weighted_config ? unmarshalDomainRecordWeightedConfig(data.weighted_config) : null,
   } as DomainRecord
 }
 
@@ -717,9 +717,9 @@ const unmarshalRecordIdentifier = (data: unknown): RecordIdentifier => {
   }
 
   return {
-    data: data.data,
+    data: data.data ?? null,
     name: data.name,
-    ttl: data.ttl,
+    ttl: data.ttl ?? null,
     type: data.type,
   } as RecordIdentifier
 }
@@ -755,8 +755,8 @@ const unmarshalRecordChangeDelete = (data: unknown): RecordChangeDelete => {
   }
 
   return {
-    id: data.id,
-    idFields: data.id_fields ? unmarshalRecordIdentifier(data.id_fields) : undefined,
+    id: data.id ?? null,
+    idFields: data.id_fields ? unmarshalRecordIdentifier(data.id_fields) : null,
   } as RecordChangeDelete
 }
 
@@ -768,8 +768,8 @@ const unmarshalRecordChangeSet = (data: unknown): RecordChangeSet => {
   }
 
   return {
-    id: data.id,
-    idFields: data.id_fields ? unmarshalRecordIdentifier(data.id_fields) : undefined,
+    id: data.id ?? null,
+    idFields: data.id_fields ? unmarshalRecordIdentifier(data.id_fields) : null,
     records: unmarshalArrayOfObject(data.records, unmarshalDomainRecord),
   } as RecordChangeSet
 }
@@ -782,10 +782,10 @@ const unmarshalRecordChange = (data: unknown): RecordChange => {
   }
 
   return {
-    add: data.add ? unmarshalRecordChangeAdd(data.add) : undefined,
-    clear: data.clear ? unmarshalRecordChangeClear(data.clear) : undefined,
-    delete: data.delete ? unmarshalRecordChangeDelete(data.delete) : undefined,
-    set: data.set ? unmarshalRecordChangeSet(data.set) : undefined,
+    add: data.add ? unmarshalRecordChangeAdd(data.add) : null,
+    clear: data.clear ? unmarshalRecordChangeClear(data.clear) : null,
+    delete: data.delete ? unmarshalRecordChangeDelete(data.delete) : null,
+    set: data.set ? unmarshalRecordChangeSet(data.set) : null,
   } as RecordChange
 }
 
@@ -859,7 +859,7 @@ const unmarshalContactRoles = (data: unknown): ContactRoles => {
   }
 
   return {
-    contact: data.contact ? unmarshalContact(data.contact) : undefined,
+    contact: data.contact ? unmarshalContact(data.contact) : null,
     roles: unmarshalMapOfObject(data.roles, unmarshalContactRolesRoles),
   } as ContactRoles
 }
@@ -936,7 +936,7 @@ const unmarshalDNSZoneVersion = (data: unknown): DNSZoneVersion => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
   } as DNSZoneVersion
 }
@@ -989,12 +989,12 @@ const unmarshalDomainSummary = (data: unknown): DomainSummary => {
 
   return {
     autoRenewStatus: data.auto_renew_status,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     dnssecStatus: data.dnssec_status,
     domain: data.domain,
     eppCode: data.epp_code,
-    expiredAt: unmarshalDate(data.expired_at),
-    externalDomainRegistrationStatus: data.external_domain_registration_status ? unmarshalDomainRegistrationStatusExternalDomain(data.external_domain_registration_status) : undefined,
+    expiredAt: unmarshalDate(data.expired_at) ?? null,
+    externalDomainRegistrationStatus: data.external_domain_registration_status ? unmarshalDomainRegistrationStatusExternalDomain(data.external_domain_registration_status) : null,
     isExternal: data.is_external,
     organizationId: data.organization_id,
     pendingTrade: data.pending_trade,
@@ -1002,8 +1002,8 @@ const unmarshalDomainSummary = (data: unknown): DomainSummary => {
     registrar: data.registrar,
     srn: data.srn,
     status: data.status,
-    transferRegistrationStatus: data.transfer_registration_status ? unmarshalDomainRegistrationStatusTransfer(data.transfer_registration_status) : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
+    transferRegistrationStatus: data.transfer_registration_status ? unmarshalDomainRegistrationStatusTransfer(data.transfer_registration_status) : null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as DomainSummary
 }
 
@@ -1028,10 +1028,10 @@ const unmarshalInboundTransfer = (data: unknown): InboundTransfer => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     domain: data.domain,
     id: data.id,
-    lastUpdatedAt: unmarshalDate(data.last_updated_at),
+    lastUpdatedAt: unmarshalDate(data.last_updated_at) ?? null,
     message: data.message,
     projectId: data.project_id,
     status: data.status,
@@ -1061,16 +1061,16 @@ const unmarshalRenewableDomain = (data: unknown): RenewableDomain => {
 
   return {
     domain: data.domain,
-    estimatedDeleteAt: unmarshalDate(data.estimated_delete_at),
-    expiredAt: unmarshalDate(data.expired_at),
-    limitRedemptionAt: unmarshalDate(data.limit_redemption_at),
-    limitRenewAt: unmarshalDate(data.limit_renew_at),
+    estimatedDeleteAt: unmarshalDate(data.estimated_delete_at) ?? null,
+    expiredAt: unmarshalDate(data.expired_at) ?? null,
+    limitRedemptionAt: unmarshalDate(data.limit_redemption_at) ?? null,
+    limitRenewAt: unmarshalDate(data.limit_renew_at) ?? null,
     organizationId: data.organization_id,
     projectId: data.project_id,
-    renewableDurationInYears: data.renewable_duration_in_years,
+    renewableDurationInYears: data.renewable_duration_in_years ?? null,
     srn: data.srn,
     status: data.status,
-    tld: data.tld ? unmarshalTld(data.tld) : undefined,
+    tld: data.tld ? unmarshalTld(data.tld) : null,
   } as RenewableDomain
 }
 
@@ -1134,7 +1134,7 @@ export const unmarshalOrderResponse = (data: unknown): OrderResponse => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     domains: data.domains,
     organizationId: data.organization_id,
     projectId: data.project_id,
@@ -1162,7 +1162,7 @@ export const unmarshalRegisterExternalDomainResponse = (data: unknown): Register
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     domain: data.domain,
     organizationId: data.organization_id,
     projectId: data.project_id,
@@ -1202,7 +1202,7 @@ const unmarshalAvailableDomain = (data: unknown): AvailableDomain => {
   return {
     available: data.available,
     domain: data.domain,
-    tld: data.tld ? unmarshalTld(data.tld) : undefined,
+    tld: data.tld ? unmarshalTld(data.tld) : null,
   } as AvailableDomain
 }
 
@@ -1215,7 +1215,7 @@ export const unmarshalSearchAvailableDomainsConsoleResponse = (data: unknown): S
 
   return {
     availableDomains: unmarshalArrayOfObject(data.available_domains, unmarshalAvailableDomain),
-    exactMatchDomain: data.exact_match_domain ? unmarshalAvailableDomain(data.exact_match_domain) : undefined,
+    exactMatchDomain: data.exact_match_domain ? unmarshalAvailableDomain(data.exact_match_domain) : null,
   } as SearchAvailableDomainsConsoleResponse
 }
 
@@ -1228,7 +1228,7 @@ export const unmarshalSearchAvailableDomainsResponse = (data: unknown): SearchAv
 
   return {
     availableDomains: unmarshalArrayOfObject(data.available_domains, unmarshalAvailableDomain),
-    exactMatchDomain: data.exact_match_domain ? unmarshalAvailableDomain(data.exact_match_domain) : undefined,
+    exactMatchDomain: data.exact_match_domain ? unmarshalAvailableDomain(data.exact_match_domain) : null,
   } as SearchAvailableDomainsResponse
 }
 
@@ -1295,7 +1295,7 @@ export const marshalImportProviderDNSZoneRequest = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'online_v1',
-      value: (request.onlineV1 !== undefined) ? marshalImportProviderDNSZoneRequestOnlineV1(request.onlineV1, defaults)
+      value: (request.onlineV1 != null) ? marshalImportProviderDNSZoneRequestOnlineV1(request.onlineV1, defaults)
       : undefined,
     },
   ]),
@@ -1315,7 +1315,7 @@ const marshalImportRawDNSZoneRequestAXFRSource = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name_server: request.nameServer,
-  tsig_key: ((request.tsigKey !== undefined) ?  marshalImportRawDNSZoneRequestTsigKey(request.tsigKey, defaults): undefined),
+  tsig_key: ((request.tsigKey != null) ?  marshalImportRawDNSZoneRequestTsigKey(request.tsigKey, defaults): undefined),
 })
 
 const marshalImportRawDNSZoneRequestBindSource = (
@@ -1334,11 +1334,11 @@ export const marshalImportRawDNSZoneRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,  
   ...resolveOneOf([
     {param: 'bind_source',
-      value: (request.bindSource !== undefined) ? marshalImportRawDNSZoneRequestBindSource(request.bindSource, defaults)
+      value: (request.bindSource != null) ? marshalImportRawDNSZoneRequestBindSource(request.bindSource, defaults)
       : undefined,
     },
     {param: 'axfr_source',
-      value: (request.axfrSource !== undefined) ? marshalImportRawDNSZoneRequestAXFRSource(request.axfrSource, defaults)
+      value: (request.axfrSource != null) ? marshalImportRawDNSZoneRequestAXFRSource(request.axfrSource, defaults)
       : undefined,
     },
   ]),
@@ -1403,23 +1403,23 @@ const marshalContactExtensionFR = (
   mode: request.mode,  
   ...resolveOneOf([
     {param: 'individual_info',
-      value: (request.individualInfo !== undefined) ? marshalContactExtensionFRIndividualInfo(request.individualInfo, defaults)
+      value: (request.individualInfo != null) ? marshalContactExtensionFRIndividualInfo(request.individualInfo, defaults)
       : undefined,
     },
     {param: 'duns_info',
-      value: (request.dunsInfo !== undefined) ? marshalContactExtensionFRDunsInfo(request.dunsInfo, defaults)
+      value: (request.dunsInfo != null) ? marshalContactExtensionFRDunsInfo(request.dunsInfo, defaults)
       : undefined,
     },
     {param: 'association_info',
-      value: (request.associationInfo !== undefined) ? marshalContactExtensionFRAssociationInfo(request.associationInfo, defaults)
+      value: (request.associationInfo != null) ? marshalContactExtensionFRAssociationInfo(request.associationInfo, defaults)
       : undefined,
     },
     {param: 'trademark_info',
-      value: (request.trademarkInfo !== undefined) ? marshalContactExtensionFRTrademarkInfo(request.trademarkInfo, defaults)
+      value: (request.trademarkInfo != null) ? marshalContactExtensionFRTrademarkInfo(request.trademarkInfo, defaults)
       : undefined,
     },
     {param: 'code_auth_afnic_info',
-      value: (request.codeAuthAfnicInfo !== undefined) ? marshalContactExtensionFRCodeAuthAfnicInfo(request.codeAuthAfnicInfo, defaults)
+      value: (request.codeAuthAfnicInfo != null) ? marshalContactExtensionFRCodeAuthAfnicInfo(request.codeAuthAfnicInfo, defaults)
       : undefined,
     },
   ]),
@@ -1462,17 +1462,17 @@ const marshalNewContact = (
   country: request.country,
   email: request.email,
   email_alt: request.emailAlt,
-  extension_eu: ((request.extensionEu !== undefined) ?  marshalContactExtensionEU(request.extensionEu, defaults): undefined),
-  extension_fr: ((request.extensionFr !== undefined) ?  marshalContactExtensionFR(request.extensionFr, defaults): undefined),
-  extension_it: ((request.extensionIt !== undefined) ?  marshalContactExtensionIT(request.extensionIt, defaults): undefined),
-  extension_nl: ((request.extensionNl !== undefined) ?  marshalContactExtensionNL(request.extensionNl, defaults): undefined),
+  extension_eu: ((request.extensionEu != null) ?  marshalContactExtensionEU(request.extensionEu, defaults): undefined),
+  extension_fr: ((request.extensionFr != null) ?  marshalContactExtensionFR(request.extensionFr, defaults): undefined),
+  extension_it: ((request.extensionIt != null) ?  marshalContactExtensionIT(request.extensionIt, defaults): undefined),
+  extension_nl: ((request.extensionNl != null) ?  marshalContactExtensionNL(request.extensionNl, defaults): undefined),
   fax_number: request.faxNumber,
   firstname: request.firstname,
   lang: request.lang,
   lastname: request.lastname,
   legal_form: request.legalForm,
   phone_number: request.phoneNumber,
-  questions: ((request.questions !== undefined) ?  request.questions.map(elt => marshalContactQuestion(elt, defaults)): undefined),
+  questions: ((request.questions != null) ?  request.questions.map(elt => marshalContactQuestion(elt, defaults)): undefined),
   resale: request.resale,
   state: request.state,
   vat_identification_code: request.vatIdentificationCode,
@@ -1493,7 +1493,7 @@ export const marshalRegistrarApiBuyDomainsRequest = (
       value: request.ownerContactId,
     },
     {param: 'owner_contact',
-      value: (request.ownerContact !== undefined) ? marshalNewContact(request.ownerContact, defaults)
+      value: (request.ownerContact != null) ? marshalNewContact(request.ownerContact, defaults)
       : undefined,
     },
   ]),  
@@ -1502,7 +1502,7 @@ export const marshalRegistrarApiBuyDomainsRequest = (
       value: request.administrativeContactId,
     },
     {param: 'administrative_contact',
-      value: (request.administrativeContact !== undefined) ? marshalNewContact(request.administrativeContact, defaults)
+      value: (request.administrativeContact != null) ? marshalNewContact(request.administrativeContact, defaults)
       : undefined,
     },
   ]),  
@@ -1511,7 +1511,7 @@ export const marshalRegistrarApiBuyDomainsRequest = (
       value: request.technicalContactId,
     },
     {param: 'technical_contact',
-      value: (request.technicalContact !== undefined) ? marshalNewContact(request.technicalContact, defaults)
+      value: (request.technicalContact != null) ? marshalNewContact(request.technicalContact, defaults)
       : undefined,
     },
   ]),
@@ -1528,7 +1528,7 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
       value: request.ownerContactId,
     },
     {param: 'owner_contact',
-      value: (request.ownerContact !== undefined) ? marshalNewContact(request.ownerContact, defaults)
+      value: (request.ownerContact != null) ? marshalNewContact(request.ownerContact, defaults)
       : undefined,
     },
   ]),  
@@ -1537,7 +1537,7 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
       value: request.administrativeContactId,
     },
     {param: 'administrative_contact',
-      value: (request.administrativeContact !== undefined) ? marshalNewContact(request.administrativeContact, defaults)
+      value: (request.administrativeContact != null) ? marshalNewContact(request.administrativeContact, defaults)
       : undefined,
     },
   ]),  
@@ -1546,7 +1546,7 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
       value: request.technicalContactId,
     },
     {param: 'technical_contact',
-      value: (request.technicalContact !== undefined) ? marshalNewContact(request.technicalContact, defaults)
+      value: (request.technicalContact != null) ? marshalNewContact(request.technicalContact, defaults)
       : undefined,
     },
   ]),
@@ -1572,7 +1572,7 @@ const marshalDSRecordDigest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   digest: request.digest,
-  public_key: ((request.publicKey !== undefined) ?  marshalDSRecordPublicKey(request.publicKey, defaults): undefined),
+  public_key: ((request.publicKey != null) ?  marshalDSRecordPublicKey(request.publicKey, defaults): undefined),
   type: request.type,
 })
 
@@ -1584,11 +1584,11 @@ export const marshalDSRecord = (
   key_id: request.keyId,  
   ...resolveOneOf([
     {param: 'digest',
-      value: (request.digest !== undefined) ? marshalDSRecordDigest(request.digest, defaults)
+      value: (request.digest != null) ? marshalDSRecordDigest(request.digest, defaults)
       : undefined,
     },
     {param: 'public_key',
-      value: (request.publicKey !== undefined) ? marshalDSRecordPublicKey(request.publicKey, defaults)
+      value: (request.publicKey != null) ? marshalDSRecordPublicKey(request.publicKey, defaults)
       : undefined,
     },
   ]),
@@ -1598,7 +1598,7 @@ export const marshalRegistrarApiEnableDomainDNSSECRequest = (
   request: RegistrarApiEnableDomainDNSSECRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  ds_record: ((request.dsRecord !== undefined) ?  marshalDSRecord(request.dsRecord, defaults): undefined),
+  ds_record: ((request.dsRecord != null) ?  marshalDSRecord(request.dsRecord, defaults): undefined),
 })
 
 export const marshalRegistrarApiRegisterExternalDomainRequest = (
@@ -1637,7 +1637,7 @@ export const marshalRegistrarApiTradeDomainRequest = (
       value: request.newOwnerContactId,
     },
     {param: 'new_owner_contact',
-      value: (request.newOwnerContact !== undefined) ? marshalNewContact(request.newOwnerContact, defaults)
+      value: (request.newOwnerContact != null) ? marshalNewContact(request.newOwnerContact, defaults)
       : undefined,
     },
   ]),
@@ -1662,7 +1662,7 @@ export const marshalRegistrarApiTransferInDomainRequest = (
       value: request.ownerContactId,
     },
     {param: 'owner_contact',
-      value: (request.ownerContact !== undefined) ? marshalNewContact(request.ownerContact, defaults)
+      value: (request.ownerContact != null) ? marshalNewContact(request.ownerContact, defaults)
       : undefined,
     },
   ]),  
@@ -1671,7 +1671,7 @@ export const marshalRegistrarApiTransferInDomainRequest = (
       value: request.administrativeContactId,
     },
     {param: 'administrative_contact',
-      value: (request.administrativeContact !== undefined) ? marshalNewContact(request.administrativeContact, defaults)
+      value: (request.administrativeContact != null) ? marshalNewContact(request.administrativeContact, defaults)
       : undefined,
     },
   ]),  
@@ -1680,7 +1680,7 @@ export const marshalRegistrarApiTransferInDomainRequest = (
       value: request.technicalContactId,
     },
     {param: 'technical_contact',
-      value: (request.technicalContact !== undefined) ? marshalNewContact(request.technicalContact, defaults)
+      value: (request.technicalContact != null) ? marshalNewContact(request.technicalContact, defaults)
       : undefined,
     },
   ]),
@@ -1705,14 +1705,14 @@ export const marshalRegistrarApiUpdateContactRequest = (
   country: request.country,
   email: request.email,
   email_alt: request.emailAlt,
-  extension_eu: ((request.extensionEu !== undefined) ?  marshalContactExtensionEU(request.extensionEu, defaults): undefined),
-  extension_fr: ((request.extensionFr !== undefined) ?  marshalContactExtensionFR(request.extensionFr, defaults): undefined),
-  extension_it: ((request.extensionIt !== undefined) ?  marshalContactExtensionIT(request.extensionIt, defaults): undefined),
-  extension_nl: ((request.extensionNl !== undefined) ?  marshalContactExtensionNL(request.extensionNl, defaults): undefined),
+  extension_eu: ((request.extensionEu != null) ?  marshalContactExtensionEU(request.extensionEu, defaults): undefined),
+  extension_fr: ((request.extensionFr != null) ?  marshalContactExtensionFR(request.extensionFr, defaults): undefined),
+  extension_it: ((request.extensionIt != null) ?  marshalContactExtensionIT(request.extensionIt, defaults): undefined),
+  extension_nl: ((request.extensionNl != null) ?  marshalContactExtensionNL(request.extensionNl, defaults): undefined),
   fax_number: request.faxNumber,
   lang: request.lang,
   phone_number: request.phoneNumber,
-  questions: ((request.questions !== undefined) ?  request.questions.map(elt => marshalUpdateContactRequestQuestion(elt, defaults)): undefined),
+  questions: ((request.questions != null) ?  request.questions.map(elt => marshalUpdateContactRequestQuestion(elt, defaults)): undefined),
   resale: request.resale,
   state: request.state,
   vat_identification_code: request.vatIdentificationCode,
@@ -1736,7 +1736,7 @@ export const marshalRegistrarApiUpdateDomainRequest = (
       value: request.technicalContactId,
     },
     {param: 'technical_contact',
-      value: (request.technicalContact !== undefined) ? marshalNewContact(request.technicalContact, defaults)
+      value: (request.technicalContact != null) ? marshalNewContact(request.technicalContact, defaults)
       : undefined,
     },
   ]),  
@@ -1745,7 +1745,7 @@ export const marshalRegistrarApiUpdateDomainRequest = (
       value: request.ownerContactId,
     },
     {param: 'owner_contact',
-      value: (request.ownerContact !== undefined) ? marshalNewContact(request.ownerContact, defaults)
+      value: (request.ownerContact != null) ? marshalNewContact(request.ownerContact, defaults)
       : undefined,
     },
   ]),  
@@ -1754,7 +1754,7 @@ export const marshalRegistrarApiUpdateDomainRequest = (
       value: request.administrativeContactId,
     },
     {param: 'administrative_contact',
-      value: (request.administrativeContact !== undefined) ? marshalNewContact(request.administrativeContact, defaults)
+      value: (request.administrativeContact != null) ? marshalNewContact(request.administrativeContact, defaults)
       : undefined,
     },
   ]),
@@ -1847,19 +1847,19 @@ const marshalDomainRecord = (
   updated_at: request.updatedAt,  
   ...resolveOneOf([
     {param: 'geo_ip_config',
-      value: (request.geoIpConfig !== undefined) ? marshalDomainRecordGeoIPConfig(request.geoIpConfig, defaults)
+      value: (request.geoIpConfig != null) ? marshalDomainRecordGeoIPConfig(request.geoIpConfig, defaults)
       : undefined,
     },
     {param: 'http_service_config',
-      value: (request.httpServiceConfig !== undefined) ? marshalDomainRecordHTTPServiceConfig(request.httpServiceConfig, defaults)
+      value: (request.httpServiceConfig != null) ? marshalDomainRecordHTTPServiceConfig(request.httpServiceConfig, defaults)
       : undefined,
     },
     {param: 'weighted_config',
-      value: (request.weightedConfig !== undefined) ? marshalDomainRecordWeightedConfig(request.weightedConfig, defaults)
+      value: (request.weightedConfig != null) ? marshalDomainRecordWeightedConfig(request.weightedConfig, defaults)
       : undefined,
     },
     {param: 'view_config',
-      value: (request.viewConfig !== undefined) ? marshalDomainRecordViewConfig(request.viewConfig, defaults)
+      value: (request.viewConfig != null) ? marshalDomainRecordViewConfig(request.viewConfig, defaults)
       : undefined,
     },
   ]),
@@ -1897,7 +1897,7 @@ const marshalRecordChangeDelete = (
       value: request.id,
     },
     {param: 'id_fields',
-      value: (request.idFields !== undefined) ? marshalRecordIdentifier(request.idFields, defaults)
+      value: (request.idFields != null) ? marshalRecordIdentifier(request.idFields, defaults)
       : undefined,
     },
   ]),
@@ -1913,7 +1913,7 @@ const marshalRecordChangeSet = (
       value: request.id,
     },
     {param: 'id_fields',
-      value: (request.idFields !== undefined) ? marshalRecordIdentifier(request.idFields, defaults)
+      value: (request.idFields != null) ? marshalRecordIdentifier(request.idFields, defaults)
       : undefined,
     },
   ]),
@@ -1925,19 +1925,19 @@ const marshalRecordChange = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'add',
-      value: (request.add !== undefined) ? marshalRecordChangeAdd(request.add, defaults)
+      value: (request.add != null) ? marshalRecordChangeAdd(request.add, defaults)
       : undefined,
     },
     {param: 'set',
-      value: (request.set !== undefined) ? marshalRecordChangeSet(request.set, defaults)
+      value: (request.set != null) ? marshalRecordChangeSet(request.set, defaults)
       : undefined,
     },
     {param: 'delete',
-      value: (request.delete !== undefined) ? marshalRecordChangeDelete(request.delete, defaults)
+      value: (request.delete != null) ? marshalRecordChangeDelete(request.delete, defaults)
       : undefined,
     },
     {param: 'clear',
-      value: (request.clear !== undefined) ? marshalRecordChangeClear(request.clear, defaults)
+      value: (request.clear != null) ? marshalRecordChangeClear(request.clear, defaults)
       : undefined,
     },
   ]),

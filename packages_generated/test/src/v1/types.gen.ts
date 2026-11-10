@@ -30,8 +30,8 @@ export type ListHumansRequestOrderBy =
 export interface Human {
   id: string
   organizationId: string
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt?: Date | null
+  updatedAt?: Date | null
   height: number
   shoeSize: number
   altitudeInMeter: number
@@ -54,19 +54,19 @@ export type CreateHumanRequest = {
   fingersCount: number
   hairCount: number
   isHappy: boolean
-  eyesColor?: EyeColors
+  eyesColor?: EyeColors | null
   /**
    * @deprecated 
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   name: string
   /**
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -87,11 +87,11 @@ export type GetHumanRequest = {
 
 
 export type ListHumansRequest = {
-  page?: number
-  pageSize?: number
-  orderBy?: ListHumansRequestOrderBy
-  organizationId?: string
-  projectId?: string
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListHumansRequestOrderBy | null
+  organizationId?: string | null
+  projectId?: string | null
 }
 
 
@@ -136,15 +136,15 @@ export type UpdateHumanRequest = {
   /**
    * Height of the human in meters.
    */
-  height?: number
-  shoeSize?: number
-  altitudeInMeter?: number
-  altitudeInMillimeter?: number
-  fingersCount?: number
-  hairCount?: number
-  isHappy?: boolean
-  eyesColor?: EyeColors
-  name?: string
+  height?: number | null
+  shoeSize?: number | null
+  altitudeInMeter?: number | null
+  altitudeInMillimeter?: number | null
+  fingersCount?: number | null
+  hairCount?: number | null
+  isHappy?: boolean | null
+  eyesColor?: EyeColors | null
+  name?: string | null
 }
 
 

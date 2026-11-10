@@ -47,9 +47,9 @@ export const unmarshalACLRule = (data: unknown): ACLRule => {
   }
 
   return {
-    description: data.description,
+    description: data.description ?? null,
     id: data.id,
-    ipCidr: data.ip_cidr,
+    ipCidr: data.ip_cidr ?? null,
   } as ACLRule
 }
 
@@ -90,8 +90,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     id: data.id,
     ips: data.ips,
     port: data.port,
-    privateNetwork: data.private_network ? unmarshalPrivateNetwork(data.private_network) : undefined,
-    publicNetwork: data.public_network ? unmarshalPublicNetwork(data.public_network) : undefined,
+    privateNetwork: data.private_network ? unmarshalPrivateNetwork(data.private_network) : null,
+    publicNetwork: data.public_network ? unmarshalPublicNetwork(data.public_network) : null,
   } as Endpoint
 }
 
@@ -119,7 +119,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     aclRules: unmarshalArrayOfObject(data.acl_rules, unmarshalACLRule),
     clusterSettings: unmarshalArrayOfObject(data.cluster_settings, unmarshalClusterSetting),
     clusterSize: data.cluster_size,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
     name: data.name,
@@ -129,7 +129,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     status: data.status,
     tags: data.tags,
     tlsEnabled: data.tls_enabled,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     upgradableVersions: data.upgradable_versions,
     userName: data.user_name,
     version: data.version,
@@ -195,13 +195,13 @@ const unmarshalAvailableClusterSetting = (data: unknown): AvailableClusterSettin
   }
 
   return {
-    defaultValue: data.default_value,
+    defaultValue: data.default_value ?? null,
     deprecated: data.deprecated,
     description: data.description,
-    maxValue: data.max_value,
-    minValue: data.min_value,
+    maxValue: data.max_value ?? null,
+    minValue: data.min_value ?? null,
     name: data.name,
-    regex: data.regex,
+    regex: data.regex ?? null,
     type: data.type,
   } as AvailableClusterSetting
 }
@@ -215,9 +215,9 @@ const unmarshalClusterVersion = (data: unknown): ClusterVersion => {
 
   return {
     availableSettings: unmarshalArrayOfObject(data.available_settings, unmarshalAvailableClusterSetting),
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
     logoUrl: data.logo_url,
-    releasedAt: unmarshalDate(data.released_at),
+    releasedAt: unmarshalDate(data.released_at) ?? null,
     version: data.version,
     zone: data.zone,
   } as ClusterVersion
@@ -346,7 +346,7 @@ const marshalEndpointSpecPrivateNetworkSpec = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   id: request.id,
-  ipam_config: ((request.ipamConfig !== undefined) ?  marshalEndpointSpecPrivateNetworkSpecIpamConfig(request.ipamConfig, defaults): undefined),
+  ipam_config: ((request.ipamConfig != null) ?  marshalEndpointSpecPrivateNetworkSpecIpamConfig(request.ipamConfig, defaults): undefined),
   service_ips: request.serviceIps,
 })
 
@@ -362,11 +362,11 @@ const marshalEndpointSpec = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkSpec(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalEndpointSpecPrivateNetworkSpec(request.privateNetwork, defaults)
       : undefined,
     },
     {param: 'public_network',
-      value: (request.publicNetwork !== undefined) ? marshalEndpointSpecPublicNetworkSpec(request.publicNetwork, defaults)
+      value: (request.publicNetwork != null) ? marshalEndpointSpecPublicNetworkSpec(request.publicNetwork, defaults)
       : undefined,
     },
   ]),
@@ -383,10 +383,10 @@ export const marshalCreateClusterRequest = (
   request: CreateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acl_rules: ((request.aclRules !== undefined) ?  request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)): undefined),
-  cluster_settings: ((request.clusterSettings !== undefined) ?  request.clusterSettings.map(elt => marshalClusterSetting(elt, defaults)): undefined),
+  acl_rules: ((request.aclRules != null) ?  request.aclRules.map(elt => marshalACLRuleSpec(elt, defaults)): undefined),
+  cluster_settings: ((request.clusterSettings != null) ?  request.clusterSettings.map(elt => marshalClusterSetting(elt, defaults)): undefined),
   cluster_size: request.clusterSize,
-  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  endpoints: ((request.endpoints != null) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
   name: request.name || randomName('ins'),
   node_type: request.nodeType,
   password: request.password,
@@ -451,11 +451,11 @@ export const marshalUpdateEndpointRequest = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkSpec(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalEndpointSpecPrivateNetworkSpec(request.privateNetwork, defaults)
       : undefined,
     },
     {param: 'public_network',
-      value: (request.publicNetwork !== undefined) ? marshalEndpointSpecPublicNetworkSpec(request.publicNetwork, defaults)
+      value: (request.publicNetwork != null) ? marshalEndpointSpecPublicNetworkSpec(request.publicNetwork, defaults)
       : undefined,
     },
   ]),

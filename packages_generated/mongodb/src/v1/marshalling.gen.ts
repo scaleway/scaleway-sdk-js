@@ -79,8 +79,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     dnsRecord: data.dns_record,
     id: data.id,
     port: data.port,
-    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
-    publicNetwork: data.public_network ? unmarshalEndpointPublicNetworkDetails(data.public_network) : undefined,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : null,
+    publicNetwork: data.public_network ? unmarshalEndpointPublicNetworkDetails(data.public_network) : null,
   } as Endpoint
 }
 
@@ -128,9 +128,9 @@ const unmarshalWorkflow = (data: unknown): Workflow => {
   }
 
   return {
-    engineUpgrade: data.engine_upgrade ? unmarshalEngineUpgrade(data.engine_upgrade) : undefined,
-    infrastructureUpdate: data.infrastructure_update ? unmarshalInfrastructureUpdate(data.infrastructure_update) : undefined,
-    serviceUpdate: data.service_update ? unmarshalServiceUpdate(data.service_update) : undefined,
+    engineUpgrade: data.engine_upgrade ? unmarshalEngineUpgrade(data.engine_upgrade) : null,
+    infrastructureUpdate: data.infrastructure_update ? unmarshalInfrastructureUpdate(data.infrastructure_update) : null,
+    serviceUpdate: data.service_update ? unmarshalServiceUpdate(data.service_update) : null,
   } as Workflow
 }
 
@@ -142,19 +142,19 @@ export const unmarshalMaintenance = (data: unknown): Maintenance => {
   }
 
   return {
-    appliedAt: unmarshalDate(data.applied_at),
+    appliedAt: unmarshalDate(data.applied_at) ?? null,
     appliedBy: data.applied_by,
-    createdAt: unmarshalDate(data.created_at),
-    forcedAt: unmarshalDate(data.forced_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    forcedAt: unmarshalDate(data.forced_at) ?? null,
     id: data.id,
     instanceId: data.instance_id,
     reason: data.reason,
     region: data.region,
     srn: data.srn,
-    startsAt: unmarshalDate(data.starts_at),
+    startsAt: unmarshalDate(data.starts_at) ?? null,
     status: data.status,
-    stopsAt: unmarshalDate(data.stops_at),
-    workflow: data.workflow ? unmarshalWorkflow(data.workflow) : undefined,
+    stopsAt: unmarshalDate(data.stops_at) ?? null,
+    workflow: data.workflow ? unmarshalWorkflow(data.workflow) : null,
   } as Maintenance
 }
 
@@ -181,8 +181,8 @@ const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSched
   return {
     enabled: data.enabled,
     frequencyHours: data.frequency_hours,
-    lastRun: unmarshalDate(data.last_run),
-    nextUpdate: unmarshalDate(data.next_update),
+    lastRun: unmarshalDate(data.last_run) ?? null,
+    nextUpdate: unmarshalDate(data.next_update) ?? null,
     retentionDays: data.retention_days,
   } as InstanceSnapshotSchedule
 }
@@ -208,7 +208,7 @@ export const unmarshalInstance = (data: unknown): Instance => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
     maintenances: unmarshalArrayOfObject(data.maintenances, unmarshalMaintenance),
@@ -219,13 +219,13 @@ export const unmarshalInstance = (data: unknown): Instance => {
     projectId: data.project_id,
     region: data.region,
     settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
-    snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : undefined,
+    snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : null,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
     upgradableVersions: data.upgradable_versions,
     version: data.version,
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: data.volume ? unmarshalVolume(data.volume) : null,
   } as Instance
 }
 
@@ -237,10 +237,10 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
-    instanceId: data.instance_id,
+    instanceId: data.instance_id ?? null,
     instanceName: data.instance_name,
     name: data.name,
     nodeType: data.node_type,
@@ -248,7 +248,7 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     sizeBytes: data.size_bytes,
     srn: data.srn,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     volumeType: data.volume_type,
   } as Snapshot
 }
@@ -261,8 +261,8 @@ const unmarshalUserRole = (data: unknown): UserRole => {
   }
 
   return {
-    anyDatabase: data.any_database,
-    databaseName: data.database_name,
+    anyDatabase: data.any_database ?? null,
+    databaseName: data.database_name ?? null,
     role: data.role,
   } as UserRole
 }
@@ -414,8 +414,8 @@ const unmarshalVersion = (data: unknown): Version => {
   }
 
   return {
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
-    releasedAt: unmarshalDate(data.released_at),
+    endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
+    releasedAt: unmarshalDate(data.released_at) ?? null,
     version: data.version,
   } as Version
 }
@@ -452,11 +452,11 @@ const marshalEndpointSpec = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'public_network',
-      value: (request.publicNetwork !== undefined) ? marshalEndpointSpecPublicNetworkDetails(request.publicNetwork, defaults)
+      value: (request.publicNetwork != null) ? marshalEndpointSpecPublicNetworkDetails(request.publicNetwork, defaults)
       : undefined,
     },
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
       : undefined,
     },
   ]),
@@ -482,7 +482,7 @@ export const marshalCreateInstanceRequest = (
   request: CreateInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  endpoints: ((request.endpoints != null) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
   name: request.name || randomName('mgdb'),
   node_amount: request.nodeAmount,
   node_type: request.nodeType,
@@ -491,7 +491,7 @@ export const marshalCreateInstanceRequest = (
   tags: request.tags,
   user_name: request.userName,
   version: request.version,
-  volume: ((request.volume !== undefined) ?  marshalVolume(request.volume, defaults): undefined),
+  volume: ((request.volume != null) ?  marshalVolume(request.volume, defaults): undefined),
 })
 
 export const marshalCreateSnapshotRequest = (
@@ -540,7 +540,7 @@ export const marshalSetUserRoleRequest = (
   request: SetUserRoleRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  roles: ((request.roles !== undefined) ?  request.roles.map(elt => marshalUserRole(elt, defaults)): undefined),
+  roles: ((request.roles != null) ?  request.roles.map(elt => marshalUserRole(elt, defaults)): undefined),
   user_name: request.userName,
 })
 

@@ -77,7 +77,7 @@ export interface EndpointSpecPrivateNetworkSpec {
   /**
    * Automated configuration of your Private Network endpoint with Scaleway IPAM service.
    */
-  ipamConfig?: EndpointSpecPrivateNetworkSpecIpamConfig
+  ipamConfig?: EndpointSpecPrivateNetworkSpecIpamConfig | null
 }
 
 
@@ -93,7 +93,7 @@ export interface AvailableClusterSetting {
   /**
    * Default value of the setting.
    */
-  defaultValue?: string
+  defaultValue?: string | null
   /**
    * Type of setting.
    */
@@ -105,15 +105,15 @@ export interface AvailableClusterSetting {
   /**
    * Optional maximum value of the setting.
    */
-  maxValue?: number
+  maxValue?: number | null
   /**
    * Optional minimum value of the setting.
    */
-  minValue?: number
+  minValue?: number | null
   /**
    * Optional validation rule of the setting.
    */
-  regex?: string
+  regex?: string | null
   /**
    * Defines whether or not the setting is deprecated.
    */
@@ -129,11 +129,11 @@ export interface ACLRule {
   /**
    * IPv4 network address of the rule.
    */
-  ipCidr?: string
+  ipCidr?: string | null
   /**
    * Description of the rule.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -159,13 +159,13 @@ export interface Endpoint {
    *
    * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  privateNetwork?: PrivateNetwork
+  privateNetwork?: PrivateNetwork | null
   /**
    * Public network details.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  publicNetwork?: PublicNetwork
+  publicNetwork?: PublicNetwork | null
   /**
    * List of IPv4 addresses of the endpoint.
    */
@@ -195,13 +195,13 @@ export interface EndpointSpec {
    *
    * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  privateNetwork?: EndpointSpecPrivateNetworkSpec
+  privateNetwork?: EndpointSpecPrivateNetworkSpec | null
   /**
    * Public network specification details.
    *
    * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  publicNetwork?: EndpointSpecPublicNetworkSpec
+  publicNetwork?: EndpointSpecPublicNetworkSpec | null
 }
 
 
@@ -213,7 +213,7 @@ export interface ClusterVersion {
   /**
    * Date of End of Life.
    */
-  endOfLifeAt?: Date
+  endOfLifeAt?: Date | null
   /**
    * Cluster settings available to be updated.
    */
@@ -225,7 +225,7 @@ export interface ClusterVersion {
   /**
    * Date of Release.
    */
-  releasedAt?: Date
+  releasedAt?: Date | null
   /**
    * Zone of the Redis™ Database Instance.
    */
@@ -269,11 +269,11 @@ export interface Cluster {
   /**
    * Creation date (Format ISO 8601).
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Update date (Format ISO 8601).
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Defines whether or not TLS is enabled.
    */
@@ -349,7 +349,7 @@ export type AddAclRulesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance you want to add ACL rules to.
    */
@@ -377,7 +377,7 @@ export type AddClusterSettingsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance you want to add settings to.
    */
@@ -393,7 +393,7 @@ export type AddEndpointsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance you want to add endpoints to.
    */
@@ -437,15 +437,15 @@ export type CreateClusterRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID in which to create the Database Instance.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the Database Instance.
    */
-  name?: string
+  name?: string | null
   /**
    * Redis™ engine version of the Database Instance.
    */
@@ -453,7 +453,7 @@ export type CreateClusterRequest = {
   /**
    * Tags to apply to the Database Instance.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Type of node to use for the Database Instance.
    */
@@ -469,15 +469,15 @@ export type CreateClusterRequest = {
   /**
    * Number of nodes in the Redis™ cluster.
    */
-  clusterSize?: number
+  clusterSize?: number | null
   /**
    * List of ACLRuleSpec used to secure your publicly exposed cluster.
    */
-  aclRules?: ACLRuleSpec[]
+  aclRules?: ACLRuleSpec[] | null
   /**
    * Zero or multiple EndpointSpec used to expose your cluster publicly and inside private networks. If no EndpoindSpec is given the cluster will be publicly exposed by default.
    */
-  endpoints?: EndpointSpec[]
+  endpoints?: EndpointSpec[] | null
   /**
    * Defines whether or not TLS is enabled.
    */
@@ -485,7 +485,7 @@ export type CreateClusterRequest = {
   /**
    * List of advanced settings to be set upon Database Instance initialization.
    */
-  clusterSettings?: ClusterSetting[]
+  clusterSettings?: ClusterSetting[] | null
 }
 
 
@@ -493,7 +493,7 @@ export type DeleteAclRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the ACL rule you want to delete.
    */
@@ -505,7 +505,7 @@ export type DeleteClusterRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance to delete.
    */
@@ -517,7 +517,7 @@ export type DeleteClusterSettingRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance where the settings must be set.
    */
@@ -533,7 +533,7 @@ export type DeleteEndpointRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the endpoint you want to delete.
    */
@@ -545,7 +545,7 @@ export type GetAclRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the ACL rule you want to get.
    */
@@ -557,7 +557,7 @@ export type GetClusterCertificateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the cluster.
    */
@@ -569,7 +569,7 @@ export type GetClusterMetricsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the cluster.
    */
@@ -577,15 +577,15 @@ export type GetClusterMetricsRequest = {
   /**
    * Start date.
    */
-  startAt?: Date
+  startAt?: Date | null
   /**
    * End date.
    */
-  endAt?: Date
+  endAt?: Date | null
   /**
    * Name of the metric to gather.
    */
-  metricName?: string
+  metricName?: string | null
 }
 
 
@@ -593,7 +593,7 @@ export type GetClusterRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the cluster.
    */
@@ -605,7 +605,7 @@ export type GetEndpointRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the endpoint you want to get.
    */
@@ -617,7 +617,7 @@ export type ListClusterVersionsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Defines whether or not to include disabled Redis™ engine versions.
    */
@@ -633,9 +633,9 @@ export type ListClusterVersionsRequest = {
   /**
    * List Redis™ engine versions that match a given name pattern.
    */
-  version?: string
-  page?: number
-  pageSize?: number
+  version?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -655,33 +655,33 @@ export type ListClustersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Filter by Database Instance tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by Database Instance names.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering the list.
    */
-  orderBy?: ListClustersRequestOrderBy
+  orderBy?: ListClustersRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by Redis™ engine version.
    */
-  version?: string
-  page?: number
-  pageSize?: number
+  version?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -701,13 +701,13 @@ export type ListNodeTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Defines whether or not to include disabled types.
    */
   includeDisabledTypes: boolean
-  page?: number
-  pageSize?: number
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -727,7 +727,7 @@ export type MigrateClusterRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance to update.
    */
@@ -737,19 +737,19 @@ export type MigrateClusterRequest = {
    *
    * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize' could be set.
    */
-  version?: string
+  version?: string | null
   /**
    * Type of node to use for the Database Instance.
    *
    * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize' could be set.
    */
-  nodeType?: string
+  nodeType?: string | null
   /**
    * Number of nodes for the Database Instance.
    *
    * One-of ('action'): at most one of 'version', 'nodeType', 'clusterSize' could be set.
    */
-  clusterSize?: number
+  clusterSize?: number | null
 }
 
 
@@ -757,7 +757,7 @@ export type RenewClusterCertificateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the cluster.
    */
@@ -769,7 +769,7 @@ export type SetAclRulesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance where the ACL rules have to be set.
    */
@@ -793,7 +793,7 @@ export type SetClusterSettingsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance where the settings must be set.
    */
@@ -809,7 +809,7 @@ export type SetEndpointsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance where the endpoints have to be set.
    */
@@ -833,7 +833,7 @@ export type UpdateClusterRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the Database Instance to update.
    */
@@ -841,19 +841,19 @@ export type UpdateClusterRequest = {
   /**
    * Name of the Database Instance.
    */
-  name?: string
+  name?: string | null
   /**
    * Database Instance tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Name of the Database Instance user.
    */
-  userName?: string
+  userName?: string | null
   /**
    * Password of the Database Instance user.
    */
-  password?: string
+  password?: string | null
 }
 
 
@@ -861,7 +861,7 @@ export type UpdateEndpointRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the endpoint you want to get.
    */
@@ -871,13 +871,13 @@ export type UpdateEndpointRequest = {
    *
    * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  privateNetwork?: EndpointSpecPrivateNetworkSpec
+  privateNetwork?: EndpointSpecPrivateNetworkSpec | null
   /**
    * Public network details.
    *
    * One-of ('endpointType'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  publicNetwork?: EndpointSpecPublicNetworkSpec
+  publicNetwork?: EndpointSpecPublicNetworkSpec | null
 }
 
 

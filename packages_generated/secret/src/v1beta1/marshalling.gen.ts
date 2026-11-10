@@ -33,8 +33,8 @@ const unmarshalEphemeralProperties = (data: unknown): EphemeralProperties => {
 
   return {
     action: data.action,
-    expiresAt: unmarshalDate(data.expires_at),
-    expiresOnceAccessed: data.expires_once_accessed,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
+    expiresOnceAccessed: data.expires_once_accessed ?? null,
   } as EphemeralProperties
 }
 
@@ -46,18 +46,18 @@ export const unmarshalSecretVersion = (data: unknown): SecretVersion => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    deletedAt: unmarshalDate(data.deleted_at),
-    deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
-    description: data.description,
-    ephemeralProperties: data.ephemeral_properties ? unmarshalEphemeralProperties(data.ephemeral_properties) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deletedAt: unmarshalDate(data.deleted_at) ?? null,
+    deletionRequestedAt: unmarshalDate(data.deletion_requested_at) ?? null,
+    description: data.description ?? null,
+    ephemeralProperties: data.ephemeral_properties ? unmarshalEphemeralProperties(data.ephemeral_properties) : null,
     latest: data.latest,
     region: data.region,
     revision: data.revision,
     secretId: data.secret_id,
     srn: data.srn,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as SecretVersion
 }
 
@@ -70,8 +70,8 @@ const unmarshalEphemeralPolicy = (data: unknown): EphemeralPolicy => {
 
   return {
     action: data.action,
-    expiresOnceAccessed: data.expires_once_accessed,
-    timeToLive: data.time_to_live,
+    expiresOnceAccessed: data.expires_once_accessed ?? null,
+    timeToLive: data.time_to_live ?? null,
   } as EphemeralPolicy
 }
 
@@ -83,12 +83,12 @@ export const unmarshalSecret = (data: unknown): Secret => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
-    description: data.description,
-    ephemeralPolicy: data.ephemeral_policy ? unmarshalEphemeralPolicy(data.ephemeral_policy) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deletionRequestedAt: unmarshalDate(data.deletion_requested_at) ?? null,
+    description: data.description ?? null,
+    ephemeralPolicy: data.ephemeral_policy ? unmarshalEphemeralPolicy(data.ephemeral_policy) : null,
     id: data.id,
-    keyId: data.key_id,
+    keyId: data.key_id ?? null,
     managed: data.managed,
     name: data.name,
     path: data.path,
@@ -99,7 +99,7 @@ export const unmarshalSecret = (data: unknown): Secret => {
     status: data.status,
     tags: data.tags,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     usedBy: data.used_by,
     versionCount: data.version_count,
   } as Secret
@@ -114,7 +114,7 @@ export const unmarshalAccessSecretVersionResponse = (data: unknown): AccessSecre
 
   return {
     data: data.data,
-    dataCrc32: data.data_crc32,
+    dataCrc32: data.data_crc32 ?? null,
     revision: data.revision,
     secretId: data.secret_id,
     type: data.type,
@@ -140,7 +140,7 @@ const unmarshalBrowseSecretsResponseItemSecretDetails = (data: unknown): BrowseS
   }
 
   return {
-    ephemeralPolicy: data.ephemeral_policy ? unmarshalEphemeralPolicy(data.ephemeral_policy) : undefined,
+    ephemeralPolicy: data.ephemeral_policy ? unmarshalEphemeralPolicy(data.ephemeral_policy) : null,
     id: data.id,
     protected: data.protected,
     tags: data.tags,
@@ -157,11 +157,11 @@ const unmarshalBrowseSecretsResponseItem = (data: unknown): BrowseSecretsRespons
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    folder: data.folder ? unmarshalBrowseSecretsResponseItemFolderDetails(data.folder) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    folder: data.folder ? unmarshalBrowseSecretsResponseItemFolderDetails(data.folder) : null,
     name: data.name,
-    secret: data.secret ? unmarshalBrowseSecretsResponseItemSecretDetails(data.secret) : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
+    secret: data.secret ? unmarshalBrowseSecretsResponseItemSecretDetails(data.secret) : null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as BrowseSecretsResponseItem
 }
 
@@ -252,7 +252,7 @@ export const marshalCreateSecretRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  ephemeral_policy: ((request.ephemeralPolicy !== undefined) ?  marshalEphemeralPolicy(request.ephemeralPolicy, defaults): undefined),
+  ephemeral_policy: ((request.ephemeralPolicy != null) ?  marshalEphemeralPolicy(request.ephemeralPolicy, defaults): undefined),
   key_id: request.keyId,
   name: request.name || randomName('secret'),
   path: request.path,
@@ -277,7 +277,7 @@ export const marshalUpdateSecretRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  ephemeral_policy: ((request.ephemeralPolicy !== undefined) ?  marshalEphemeralPolicy(request.ephemeralPolicy, defaults): undefined),
+  ephemeral_policy: ((request.ephemeralPolicy != null) ?  marshalEphemeralPolicy(request.ephemeralPolicy, defaults): undefined),
   name: request.name,
   path: request.path,
   tags: request.tags,
@@ -297,5 +297,5 @@ export const marshalUpdateSecretVersionRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   description: request.description,
-  ephemeral_properties: ((request.ephemeralProperties !== undefined) ?  marshalEphemeralProperties(request.ephemeralProperties, defaults): undefined),
+  ephemeral_properties: ((request.ephemeralProperties != null) ?  marshalEphemeralProperties(request.ephemeralProperties, defaults): undefined),
 })

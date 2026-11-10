@@ -51,11 +51,11 @@ export interface LoadBalancerConfigurationSpecAutoHealing {
   /**
    * Whether auto-healing is enabled.
    */
-  enabled?: boolean
+  enabled?: boolean | null
   /**
    * Grace period for health checks.
    */
-  gracePeriod?: string
+  gracePeriod?: string | null
 }
 
 
@@ -71,7 +71,7 @@ export interface LoadBalancerConfigurationSpecBackend {
   /**
    * Optional private network ID.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
 }
 
 
@@ -92,14 +92,14 @@ export interface GroupScalingPolicyScalingPolicyMemoryTarget {
 
 export interface GroupLoadBalancerConfigurationAutoHealing {
   enabled: boolean
-  gracePeriod?: string
+  gracePeriod?: string | null
 }
 
 
 export interface GroupLoadBalancerConfigurationBackend {
   backendId: string
   addressFamily: GroupLoadBalancerConfigurationBackendAddressFamily
-  privateNetworkId?: string
+  privateNetworkId?: string | null
 }
 
 
@@ -111,11 +111,11 @@ export interface Alert {
   /**
    * Timestamp when the alert was opened.
    */
-  openedAt?: Date
+  openedAt?: Date | null
   /**
    * Optional timestamp when the alert was closed.
    */
-  closedAt?: Date
+  closedAt?: Date | null
   /**
    * ID of the group.
    */
@@ -131,7 +131,7 @@ export interface LoadBalancerConfigurationSpec {
   /**
    * ID of the load balancer (set to empty to disable).
    */
-  loadBalancerId?: string
+  loadBalancerId?: string | null
   /**
    * List of load balancer backend configurations.
    */
@@ -139,7 +139,7 @@ export interface LoadBalancerConfigurationSpec {
   /**
    * Auto-healing configuration.
    */
-  autoHealing?: LoadBalancerConfigurationSpecAutoHealing
+  autoHealing?: LoadBalancerConfigurationSpecAutoHealing | null
 }
 
 
@@ -147,77 +147,77 @@ export interface ScalingPolicySpec {
   /**
    * Minimum number of instances in the group.
    */
-  minimumSize?: number
+  minimumSize?: number | null
   /**
    * Maximum number of instances in the group.
    */
-  maximumSize?: number
+  maximumSize?: number | null
   /**
    * Cooldown period after a scale out event.
    */
-  scaleOutCooldown?: string
+  scaleOutCooldown?: string | null
   /**
    * Cooldown period after a scale in event.
    */
-  scaleInCooldown?: string
+  scaleInCooldown?: string | null
   /**
    * Number of instances to remove in a single scale in event.
    */
-  scaleInStep?: number
+  scaleInStep?: number | null
   /**
    * Number of instances to add in a single scale out event.
    */
-  scaleOutStep?: number
+  scaleOutStep?: number | null
   /**
    * Fixed size scaling policy configuration.
    *
    * One-of ('target'): at most one of 'fixedSize', 'cpuTarget', 'memoryTarget' could be set.
    */
-  fixedSize?: GroupScalingPolicyScalingPolicyFixedSize
+  fixedSize?: GroupScalingPolicyScalingPolicyFixedSize | null
   /**
    * CPU target scaling policy configuration.
    *
    * One-of ('target'): at most one of 'fixedSize', 'cpuTarget', 'memoryTarget' could be set.
    */
-  cpuTarget?: GroupScalingPolicyScalingPolicyCpuTarget
+  cpuTarget?: GroupScalingPolicyScalingPolicyCpuTarget | null
   /**
    * Memory target scaling policy configuration.
    *
    * One-of ('target'): at most one of 'fixedSize', 'cpuTarget', 'memoryTarget' could be set.
    */
-  memoryTarget?: GroupScalingPolicyScalingPolicyMemoryTarget
+  memoryTarget?: GroupScalingPolicyScalingPolicyMemoryTarget | null
 }
 
 
 export interface GroupLoadBalancerConfiguration {
   loadBalancerId: string
   backends: GroupLoadBalancerConfigurationBackend[]
-  autoHealing?: GroupLoadBalancerConfigurationAutoHealing
+  autoHealing?: GroupLoadBalancerConfigurationAutoHealing | null
 }
 
 
 export interface GroupScalingPolicy {
   minimumSize: number
   maximumSize: number
-  scaleOutCooldown?: string
-  scaleInCooldown?: string
+  scaleOutCooldown?: string | null
+  scaleInCooldown?: string | null
   scaleInStep: number
   scaleOutStep: number
   /**
    *
    * One-of ('target'): at most one of 'fixedSize', 'cpuTarget', 'memoryTarget' could be set.
    */
-  fixedSize?: GroupScalingPolicyScalingPolicyFixedSize
+  fixedSize?: GroupScalingPolicyScalingPolicyFixedSize | null
   /**
    *
    * One-of ('target'): at most one of 'fixedSize', 'cpuTarget', 'memoryTarget' could be set.
    */
-  cpuTarget?: GroupScalingPolicyScalingPolicyCpuTarget
+  cpuTarget?: GroupScalingPolicyScalingPolicyCpuTarget | null
   /**
    *
    * One-of ('target'): at most one of 'fixedSize', 'cpuTarget', 'memoryTarget' could be set.
    */
-  memoryTarget?: GroupScalingPolicyScalingPolicyMemoryTarget
+  memoryTarget?: GroupScalingPolicyScalingPolicyMemoryTarget | null
 }
 
 
@@ -249,11 +249,11 @@ export interface GroupSummary {
   /**
    * Creation timestamp of the group.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the group.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * The Instance template ID used to create instances in this group.
    */
@@ -261,7 +261,7 @@ export interface GroupSummary {
   /**
    * Optional load balancer ID.
    */
-  loadBalancerId?: string
+  loadBalancerId?: string | null
   /**
    * Current number of instances in the group.
    */
@@ -269,7 +269,7 @@ export interface GroupSummary {
   /**
    * Most recent active alert if any.
    */
-  latestOpenAlert?: Alert
+  latestOpenAlert?: Alert | null
   /**
    * The minimum number of instances in the group.
    */
@@ -293,7 +293,7 @@ export interface Log {
   /**
    * Timestamp of the log entry.
    */
-  timestamp?: Date
+  timestamp?: Date | null
   /**
    * Log level (info, warning, error).
    */
@@ -317,11 +317,11 @@ export type CreateGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID to create the group in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the autoscaling group.
    */
@@ -329,7 +329,7 @@ export type CreateGroupRequest = {
   /**
    * Tags associated with the group.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Template ID for instances in this group.
    */
@@ -337,11 +337,11 @@ export type CreateGroupRequest = {
   /**
    * Scaling policy configuration.
    */
-  scalingPolicySpec?: ScalingPolicySpec
+  scalingPolicySpec?: ScalingPolicySpec | null
   /**
    * Optional load balancer configuration.
    */
-  loadBalancerConfigurationSpec?: LoadBalancerConfigurationSpec
+  loadBalancerConfigurationSpec?: LoadBalancerConfigurationSpec | null
 }
 
 
@@ -349,7 +349,7 @@ export type DeleteGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the group to delete.
    */
@@ -361,7 +361,7 @@ export type GetGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the group to get.
    */
@@ -393,11 +393,11 @@ export interface Group {
   /**
    * Creation timestamp of the group.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the group.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Current status of the autoscaling group.
    */
@@ -417,11 +417,11 @@ export interface Group {
   /**
    * Timestamp of the last scale out event.
    */
-  lastScaleOutAt?: Date
+  lastScaleOutAt?: Date | null
   /**
    * Timestamp of the last scale in event.
    */
-  lastScaleInAt?: Date
+  lastScaleInAt?: Date | null
   /**
    * The Instance template ID used to create instances in this group.
    */
@@ -429,11 +429,11 @@ export interface Group {
   /**
    * Scaling policy configuration.
    */
-  scalingPolicy?: GroupScalingPolicy
+  scalingPolicy?: GroupScalingPolicy | null
   /**
    * Optional load balancer configuration.
    */
-  loadBalancerConfiguration?: GroupLoadBalancerConfiguration
+  loadBalancerConfiguration?: GroupLoadBalancerConfiguration | null
   /**
    * Zone of the Autoscaling Group.
    */
@@ -445,19 +445,19 @@ export type ListAlertsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    *
    * One-of ('scope'): at most one of 'groupId', 'projectId' could be set.
    */
-  groupId?: string
-  pageToken?: string
-  pageSize?: number
+  groupId?: string | null
+  pageToken?: string | null
+  pageSize?: number | null
   /**
    *
    * One-of ('scope'): at most one of 'groupId', 'projectId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -469,7 +469,7 @@ export interface ListAlertsResponse {
   /**
    * Token for the next page of results.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of alerts.
    */
@@ -481,31 +481,31 @@ export type ListGroupsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Order criteria for listing groups.
    */
-  orderBy?: ListGroupsRequestOrderBy
+  orderBy?: ListGroupsRequestOrderBy | null
   /**
    * Page size for pagination.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Project ID to filter groups.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Template ID to filter groups.
    */
-  templateId?: string
+  templateId?: string | null
   /**
    * Load balancer ID to filter groups.
    */
-  loadBalancerId?: string
+  loadBalancerId?: string | null
 }
 
 
@@ -517,7 +517,7 @@ export interface ListGroupsResponse {
   /**
    * Token for the next page of results.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of groups.
    */
@@ -529,12 +529,12 @@ export type ListLogsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   groupId: string
-  pageToken?: string
-  pageSize?: number
-  startTime?: Date
-  endTime?: Date
+  pageToken?: string | null
+  pageSize?: number | null
+  startTime?: Date | null
+  endTime?: Date | null
 }
 
 
@@ -546,7 +546,7 @@ export interface ListLogsResponse {
   /**
    * Token for the next page of results.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of logs.
    */
@@ -558,10 +558,10 @@ export type ListServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   groupId: string
-  pageToken?: string
-  pageSize?: number
+  pageToken?: string | null
+  pageSize?: number | null
 }
 
 
@@ -573,7 +573,7 @@ export interface ListServersResponse {
   /**
    * Token for the next page of results.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of servers.
    */
@@ -585,7 +585,7 @@ export type RefreshGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   groupId: string
 }
 
@@ -594,7 +594,7 @@ export type UpdateGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the group to update.
    */
@@ -602,23 +602,23 @@ export type UpdateGroupRequest = {
   /**
    * New name for the group.
    */
-  name?: string
+  name?: string | null
   /**
    * New tags for the group.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * New template ID for instances.
    */
-  templateId?: string
+  templateId?: string | null
   /**
    * New scaling policy configuration.
    */
-  scalingPolicySpec?: ScalingPolicySpec
+  scalingPolicySpec?: ScalingPolicySpec | null
   /**
    * New load balancer configuration.
    */
-  loadBalancerConfigurationSpec?: LoadBalancerConfigurationSpec
+  loadBalancerConfigurationSpec?: LoadBalancerConfigurationSpec | null
 }
 
 

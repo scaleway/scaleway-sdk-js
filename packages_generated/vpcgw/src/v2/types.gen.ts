@@ -70,11 +70,11 @@ export interface GatewayNetwork {
   /**
    * Connection creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Connection last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ID of the connected Public Gateway.
    */
@@ -86,7 +86,7 @@ export interface GatewayNetwork {
   /**
    * MAC address of the gateway in the Private Network (if the gateway is up and running).
    */
-  macAddress?: string
+  macAddress?: string | null
   /**
    * Defines whether the gateway masquerades traffic for this Private Network (Dynamic NAT).
    */
@@ -130,11 +130,11 @@ export interface IP {
   /**
    * IP address creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * IP address last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Tags associated with the IP address.
    */
@@ -146,11 +146,11 @@ export interface IP {
   /**
    * Reverse domain name for the IP address.
    */
-  reverse?: string
+  reverse?: string | null
   /**
    * Public Gateway associated with the IP address.
    */
-  gatewayId?: string
+  gatewayId?: string | null
   /**
    * Zone of the IP address.
    */
@@ -194,11 +194,11 @@ export interface Gateway {
   /**
    * Gateway creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Gateway last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Gateway type name (commercial offer).
    */
@@ -222,7 +222,7 @@ export interface Gateway {
   /**
    * Public IPv4 address of the gateway.
    */
-  ipv4?: IP
+  ipv4?: IP | null
   /**
    * GatewayNetwork objects attached to the gateway (each one represents a connection to a Private Network).
    */
@@ -230,11 +230,11 @@ export interface Gateway {
   /**
    * Version of the running gateway software.
    */
-  version?: string
+  version?: string | null
   /**
    * Newly available gateway software version that can be updated to.
    */
-  canUpgradeTo?: string
+  canUpgradeTo?: string | null
   /**
    * Defines whether SSH bastion is enabled on the gateway.
    */
@@ -278,11 +278,11 @@ export interface PatRule {
   /**
    * PAT rule creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * PAT rule last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Public port to listen on.
    */
@@ -330,7 +330,7 @@ export type AddBastionAllowedIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway to add the allowed IP range to.
    */
@@ -354,7 +354,7 @@ export type CreateGatewayNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Public Gateway to connect.
    */
@@ -374,7 +374,7 @@ export type CreateGatewayNetworkRequest = {
   /**
    * Use this IPAM-booked IP ID as the Gateway's IP in this Private Network.
    */
-  ipamIpId?: string
+  ipamIpId?: string | null
 }
 
 
@@ -382,19 +382,19 @@ export type CreateGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Scaleway Project to create the gateway in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name for the gateway.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags for the gateway.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Gateway type (commercial offer type).
    */
@@ -402,7 +402,7 @@ export type CreateGatewayRequest = {
   /**
    * Existing IP address to attach to the gateway.
    */
-  ipId?: string
+  ipId?: string | null
   /**
    * Defines whether SMTP traffic should be allowed pass through the gateway.
    */
@@ -414,7 +414,7 @@ export type CreateGatewayRequest = {
   /**
    * Port of the SSH bastion.
    */
-  bastionPort?: number
+  bastionPort?: number | null
 }
 
 
@@ -422,15 +422,15 @@ export type CreateIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project to create the IP address in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Tags to give to the IP address.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -438,7 +438,7 @@ export type CreatePatRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the Gateway on which to create the rule.
    */
@@ -458,7 +458,7 @@ export type CreatePatRuleRequest = {
   /**
    * Protocol the rule should apply to.
    */
-  protocol?: PatRuleProtocol
+  protocol?: PatRuleProtocol | null
 }
 
 
@@ -466,7 +466,7 @@ export type DeleteBastionAllowedIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway on which to delete the allowed IP range.
    */
@@ -482,7 +482,7 @@ export type DeleteGatewayNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the GatewayNetwork to delete.
    */
@@ -494,7 +494,7 @@ export type DeleteGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway to delete.
    */
@@ -510,7 +510,7 @@ export type DeleteIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the IP address to delete.
    */
@@ -522,7 +522,7 @@ export type DeletePatRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the PAT rule to delete.
    */
@@ -534,7 +534,7 @@ export type GetGatewayNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the GatewayNetwork to fetch.
    */
@@ -546,7 +546,7 @@ export type GetGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway to fetch.
    */
@@ -558,7 +558,7 @@ export type GetIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the IP address to get.
    */
@@ -570,7 +570,7 @@ export type GetPatRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the PAT rule to get.
    */
@@ -582,35 +582,35 @@ export type ListGatewayNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListGatewayNetworksRequestOrderBy
+  orderBy?: ListGatewayNetworksRequestOrderBy | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * GatewayNetworks per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter for GatewayNetworks with these status. Use `unknown` to include all statuses.
    */
-  status?: GatewayNetworkStatus[]
+  status?: GatewayNetworkStatus[] | null
   /**
    * Filter for GatewayNetworks connected to these gateways.
    */
-  gatewayIds?: string[]
+  gatewayIds?: string[] | null
   /**
    * Filter for GatewayNetworks connected to these Private Networks.
    */
-  privateNetworkIds?: string[]
+  privateNetworkIds?: string[] | null
   /**
    * Filter for GatewayNetworks with this `enable_masquerade` setting.
    */
-  masqueradeEnabled?: boolean
+  masqueradeEnabled?: boolean | null
 }
 
 
@@ -630,7 +630,7 @@ export type ListGatewayTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
 }
 
 
@@ -646,51 +646,51 @@ export type ListGatewaysRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListGatewaysRequestOrderBy
+  orderBy?: ListGatewaysRequestOrderBy | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Gateways per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Include only gateways in this Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Include only gateways in this Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter for gateways which have this search term in their name.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter for gateways with these tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter for gateways of these types.
    */
-  types?: string[]
+  types?: string[] | null
   /**
    * Filter for gateways with these status. Use `unknown` to include all statuses.
    */
-  status?: GatewayStatus[]
+  status?: GatewayStatus[] | null
   /**
    * Filter for gateways attached to these Private Networks.
    */
-  privateNetworkIds?: string[]
+  privateNetworkIds?: string[] | null
   /**
    * Include also legacy gateways.
    */
-  includeLegacy?: boolean
+  includeLegacy?: boolean | null
 }
 
 
@@ -710,39 +710,39 @@ export type ListIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListIPsRequestOrderBy
+  orderBy?: ListIPsRequestOrderBy | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * IP addresses per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Include only gateways in this Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter for IP addresses in this Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter for IP addresses with these tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter for IP addresses that have a reverse containing this string.
    */
-  reverse?: string
+  reverse?: string | null
   /**
    * Filter based on whether the IP is attached to a gateway or not.
    */
-  isFree?: boolean
+  isFree?: boolean | null
 }
 
 
@@ -762,31 +762,31 @@ export type ListPatRulesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListPatRulesRequestOrderBy
+  orderBy?: ListPatRulesRequestOrderBy | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * PAT rules per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter for PAT rules on these gateways.
    */
-  gatewayIds?: string[]
+  gatewayIds?: string[] | null
   /**
    * Filter for PAT rules targeting these private ips.
    */
-  privateIps?: string[]
+  privateIps?: string[] | null
   /**
    * Filter for PAT rules with this protocol.
    */
-  protocol?: PatRuleProtocol
+  protocol?: PatRuleProtocol | null
 }
 
 
@@ -806,7 +806,7 @@ export type RefreshSSHKeysRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway to refresh SSH keys on.
    */
@@ -818,7 +818,7 @@ export type SetBastionAllowedIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway on which to set the allowed IP range.
    */
@@ -826,7 +826,7 @@ export type SetBastionAllowedIPsRequest = {
   /**
    * New list of IP ranges (each range in CIDR notation) allowed to connect to the SSH bastion.
    */
-  ipRanges?: string[]
+  ipRanges?: string[] | null
 }
 
 
@@ -842,7 +842,7 @@ export type SetPatRulesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway on which to set the PAT rules.
    */
@@ -866,7 +866,7 @@ export type UpdateGatewayNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the GatewayNetwork to update.
    */
@@ -874,15 +874,15 @@ export type UpdateGatewayNetworkRequest = {
   /**
    * Defines whether to enable masquerade (dynamic NAT) on the GatewayNetwork.
    */
-  enableMasquerade?: boolean
+  enableMasquerade?: boolean | null
   /**
    * Enabling the default route also enables masquerading.
    */
-  pushDefaultRoute?: boolean
+  pushDefaultRoute?: boolean | null
   /**
    * Use this IPAM-booked IP ID as the Gateway's IP in this Private Network.
    */
-  ipamIpId?: string
+  ipamIpId?: string | null
 }
 
 
@@ -890,7 +890,7 @@ export type UpdateGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway to update.
    */
@@ -898,23 +898,23 @@ export type UpdateGatewayRequest = {
   /**
    * Name for the gateway.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags for the gateway.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Defines whether SSH bastion should be enabled the gateway.
    */
-  enableBastion?: boolean
+  enableBastion?: boolean | null
   /**
    * Port of the SSH bastion.
    */
-  bastionPort?: number
+  bastionPort?: number | null
   /**
    * Defines whether SMTP traffic should be allowed to pass through the gateway.
    */
-  enableSmtp?: boolean
+  enableSmtp?: boolean | null
 }
 
 
@@ -922,7 +922,7 @@ export type UpdateIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the IP address to update.
    */
@@ -930,15 +930,15 @@ export type UpdateIPRequest = {
   /**
    * Tags to give to the IP address.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Reverse to set on the address. Empty string to unset.
    */
-  reverse?: string
+  reverse?: string | null
   /**
    * Gateway to attach the IP address to. Empty string to detach.
    */
-  gatewayId?: string
+  gatewayId?: string | null
 }
 
 
@@ -946,7 +946,7 @@ export type UpdatePatRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the PAT rule to update.
    */
@@ -954,19 +954,19 @@ export type UpdatePatRuleRequest = {
   /**
    * Public port to listen on.
    */
-  publicPort?: number
+  publicPort?: number | null
   /**
    * Private IP to forward data to.
    */
-  privateIp?: string
+  privateIp?: string | null
   /**
    * Private port to translate to.
    */
-  privatePort?: number
+  privatePort?: number | null
   /**
    * Protocol the rule should apply to.
    */
-  protocol?: PatRuleProtocol
+  protocol?: PatRuleProtocol | null
 }
 
 
@@ -974,7 +974,7 @@ export type UpgradeGatewayRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the gateway to upgrade.
    */
@@ -982,7 +982,7 @@ export type UpgradeGatewayRequest = {
   /**
    * Gateway type (commercial offer).
    */
-  type?: string
+  type?: string | null
 }
 
 

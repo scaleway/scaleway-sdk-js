@@ -92,8 +92,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   return {
     dnsRecord: data.dns_record,
     id: data.id,
-    privateNetwork: data.private_network ? unmarshalPrivateNetworkDetails(data.private_network) : undefined,
-    public: data.public ? unmarshalEndpointPublicDetails(data.public) : undefined,
+    privateNetwork: data.private_network ? unmarshalPrivateNetworkDetails(data.private_network) : null,
+    public: data.public ? unmarshalEndpointPublicDetails(data.public) : null,
     region: data.region,
     services: unmarshalArrayOfObject(data.services, unmarshalEndpointService),
     srn: data.srn,
@@ -126,7 +126,7 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
   return {
     cpuMax: data.cpu_max,
     cpuMin: data.cpu_min,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
     moveFactor: data.move_factor,
@@ -140,7 +140,7 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     version: data.version,
   } as Deployment
 }
@@ -239,7 +239,7 @@ const unmarshalVersion = (data: unknown): Version => {
   }
 
   return {
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
     version: data.version,
   } as Version
 }
@@ -283,11 +283,11 @@ const marshalEndpointSpec = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'public',
-      value: (request.public !== undefined) ? marshalEndpointSpecPublicDetails(request.public, defaults)
+      value: (request.public != null) ? marshalEndpointSpecPublicDetails(request.public, defaults)
       : undefined,
     },
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkSummary(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalEndpointSpecPrivateNetworkSummary(request.privateNetwork, defaults)
       : undefined,
     },
   ]),
@@ -299,7 +299,7 @@ export const marshalCreateDeploymentRequest = (
 ): Record<string, unknown> => ({
   cpu_max: request.cpuMax,
   cpu_min: request.cpuMin,
-  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  endpoints: ((request.endpoints != null) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
   move_factor: request.moveFactor,
   name: request.name,
   password: request.password,
@@ -316,7 +316,7 @@ export const marshalCreateEndpointRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   deployment_id: request.deploymentId,
-  endpoint: ((request.endpoint !== undefined) ?  marshalEndpointSpec(request.endpoint, defaults): undefined),
+  endpoint: ((request.endpoint != null) ?  marshalEndpointSpec(request.endpoint, defaults): undefined),
 })
 
 export const marshalCreateUserRequest = (

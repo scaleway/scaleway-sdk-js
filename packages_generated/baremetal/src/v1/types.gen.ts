@@ -187,7 +187,7 @@ export interface Schema {
   disks: SchemaDisk[]
   raids: SchemaRAID[]
   filesystems: SchemaFilesystem[]
-  zfs?: SchemaZFS
+  zfs?: SchemaZFS | null
 }
 
 
@@ -230,31 +230,31 @@ export interface CreateServerRequestInstall {
   /**
    * User for the installation.
    */
-  user?: string
+  user?: string | null
   /**
    * Password for the installation.
    */
-  password?: string
+  password?: string | null
   /**
    * Regular user that runs the service to be installed on the server.
    */
-  serviceUser?: string
+  serviceUser?: string | null
   /**
    * Password used for the service to install.
    */
-  servicePassword?: string
+  servicePassword?: string | null
   /**
    * Partitioning schema.
    */
-  partitioningSchema?: Schema
+  partitioningSchema?: Schema | null
   /**
    * URL of the network service to which the server should forward its boot request.
    */
-  networkBootUrl?: string
+  networkBootUrl?: string | null
   /**
    * Defines whether the network boot forwarding should be applied at every reboot or only once.
    */
-  networkBootPersistent?: boolean
+  networkBootPersistent?: boolean | null
 }
 
 
@@ -294,15 +294,15 @@ export interface ServerCommitment {
   /**
    * Start of commitment subscribed.
    */
-  startedAt?: Date
+  startedAt?: Date | null
   /**
    * Next renew of commitment subscribed.
    */
-  renewAt?: Date
+  renewAt?: Date | null
   /**
    * End of commitment subscribed.
    */
-  endAt?: Date
+  endAt?: Date | null
   /**
    * Discount rate for the commitment period.
    */
@@ -346,7 +346,7 @@ export interface ServerInstall {
   /**
    * Partitioning schema.
    */
-  partitioningSchema?: Schema
+  partitioningSchema?: Schema | null
   /**
    * URL of the network service to which the server should forward its boot request.
    */
@@ -378,37 +378,37 @@ export interface ServerOption {
   /**
    * Auto expiration date for compatible options.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * License option, contains the ID of the OS linked to the option.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  license?: LicenseOption
+  license?: LicenseOption | null
   /**
    * Public_bandwidth option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  publicBandwidth?: PublicBandwidthOption
+  publicBandwidth?: PublicBandwidthOption | null
   /**
    * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  privateNetwork?: PrivateNetworkOption
+  privateNetwork?: PrivateNetworkOption | null
   /**
    * Remote_access option.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  remoteAccess?: RemoteAccessOption
+  remoteAccess?: RemoteAccessOption | null
   /**
    * Certification option.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  certification?: CertificationOption
+  certification?: CertificationOption | null
 }
 
 
@@ -427,7 +427,7 @@ export interface ServerRescueServer {
 export interface OSOSField {
   editable: boolean
   required: boolean
-  defaultValue?: string
+  defaultValue?: string | null
 }
 
 
@@ -540,7 +540,7 @@ If false the option is available for the offer but not included by default.
   /**
    * Price of the option.
    */
-  price?: Money
+  price?: Money | null
   /**
    * Boolean to know if option could be managed.
    */
@@ -548,37 +548,37 @@ If false the option is available for the offer but not included by default.
   /**
    * @deprecated Deprecated, use LicenseOptionVars.os_id instead.
    */
-  osId?: string
+  osId?: string | null
   /**
    * License option, contains the ID of the OS linked to the option.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  license?: LicenseOption
+  license?: LicenseOption | null
   /**
    * Public_bandwidth option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  publicBandwidth?: PublicBandwidthOption
+  publicBandwidth?: PublicBandwidthOption | null
   /**
    * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  privateNetwork?: PrivateNetworkOption
+  privateNetwork?: PrivateNetworkOption | null
   /**
    * Remote_access option.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  remoteAccess?: RemoteAccessOption
+  remoteAccess?: RemoteAccessOption | null
   /**
    * Certification option.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  certification?: CertificationOption
+  certification?: CertificationOption | null
 }
 
 
@@ -615,7 +615,7 @@ export type CreateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Offer ID of the new server.
    */
@@ -625,13 +625,13 @@ export type CreateServerRequest = {
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID with which the server will be created.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the server (≠hostname).
    */
@@ -643,15 +643,15 @@ export type CreateServerRequest = {
   /**
    * Tags to associate to the server.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Object describing the configuration details of the OS installation on the server.
    */
-  install?: CreateServerRequestInstall
+  install?: CreateServerRequestInstall | null
   /**
    * IDs of options to enable on server.
    */
-  optionIds?: string[]
+  optionIds?: string[] | null
   /**
    * If enabled, the server can not be deleted.
    */
@@ -659,11 +659,11 @@ export type CreateServerRequest = {
   /**
    * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
    */
-  userData?: string
+  userData?: string | null
   /**
    * Commitment period to subscribe.
    */
-  commitmentPeriod?: CommitmentPeriod
+  commitmentPeriod?: CommitmentPeriod | null
 }
 
 
@@ -691,11 +691,11 @@ export interface Server {
   /**
    * Last modification date of the server.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Creation date of the server.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Status of the server.
    */
@@ -731,7 +731,7 @@ export interface Server {
   /**
    * Configuration of the installation.
    */
-  install?: ServerInstall
+  install?: ServerInstall | null
   /**
    * Status of server ping.
    */
@@ -743,7 +743,7 @@ export interface Server {
   /**
    * Configuration of rescue boot.
    */
-  rescueServer?: ServerRescueServer
+  rescueServer?: ServerRescueServer | null
   /**
    * If enabled, the server can not be deleted.
    */
@@ -751,15 +751,15 @@ export interface Server {
   /**
    * Optional configuration data passed to cloud-init.
    */
-  userData?: string
+  userData?: string | null
   /**
    * Commitment subscribed for the server.
    */
-  commitment?: ServerCommitment
+  commitment?: ServerCommitment | null
   /**
    * Date on which the server will be deleted.
    */
-  scheduledDeletionAt?: Date
+  scheduledDeletionAt?: Date | null
   /**
    * True if a deletion is scheduled.
    */
@@ -791,23 +791,23 @@ export interface OS {
   /**
    * Object defining the SSH requirements to install the OS.
    */
-  ssh?: OSOSField
+  ssh?: OSOSField | null
   /**
    * Object defining the username requirements to install the OS.
    */
-  user?: OSOSField
+  user?: OSOSField | null
   /**
    * Object defining the password requirements to install the OS.
    */
-  password?: OSOSField
+  password?: OSOSField | null
   /**
    * Object defining the username requirements to install the service.
    */
-  serviceUser?: OSOSField
+  serviceUser?: OSOSField | null
   /**
    * Object defining the password requirements to install the service.
    */
-  servicePassword?: OSOSField
+  servicePassword?: OSOSField | null
   /**
    * Defines if the operating system is enabled or not.
    */
@@ -831,11 +831,11 @@ export interface OS {
   /**
    * Defines the cloud-init API version used by this OS.
    */
-  cloudInitVersion?: string
+  cloudInitVersion?: string | null
   /**
    * Object defining the network boot requirements for booting server.
    */
-  networkBoot?: OSOSField
+  networkBoot?: OSOSField | null
   /**
    * Defines if the network boot can be persisted or not.
    */
@@ -879,11 +879,11 @@ export interface Offer {
   /**
    * Price of the offer for the next 60 minutes (a server order at 11h32 will be paid until 12h32).
    */
-  pricePerHour?: Money
+  pricePerHour?: Money | null
   /**
    * Monthly price of the offer, if subscribing on a monthly basis.
    */
-  pricePerMonth?: Money
+  pricePerMonth?: Money | null
   /**
    * Disks specifications of the offer.
    */
@@ -927,7 +927,7 @@ export interface Offer {
   /**
    * One time fee invoiced by Scaleway for the setup and activation of the server.
    */
-  fee?: Money
+  fee?: Money | null
   /**
    * Available options for customization of the server.
    */
@@ -951,7 +951,7 @@ export interface Offer {
   /**
    * Exist only for hourly offers, to migrate to the monthly offer.
    */
-  monthlyOfferId?: string
+  monthlyOfferId?: string | null
   /**
    * List all available commitments on the offer.
    */
@@ -963,7 +963,7 @@ export interface Offer {
   /**
    * Describe the network topology of the offer.
    */
-  dualAttach?: boolean
+  dualAttach?: boolean | null
   /**
    * The SRN of the offer.
    */
@@ -989,31 +989,31 @@ export interface Option {
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  license?: LicenseOption
+  license?: LicenseOption | null
   /**
    * Public_bandwidth option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  publicBandwidth?: PublicBandwidthOption
+  publicBandwidth?: PublicBandwidthOption | null
   /**
    * Private_network option, contains the bandwidth_in_bps.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  privateNetwork?: PrivateNetworkOption
+  privateNetwork?: PrivateNetworkOption | null
   /**
    * Remote_access option.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  remoteAccess?: RemoteAccessOption
+  remoteAccess?: RemoteAccessOption | null
   /**
    * Certification option.
    *
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
-  certification?: CertificationOption
+  certification?: CertificationOption | null
   /**
    * Zone in which is the option is available.
    */
@@ -1037,11 +1037,11 @@ export interface ServerEvent {
   /**
    * Date of last modification of the action.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date of creation of the action.
    */
-  createdAt?: Date
+  createdAt?: Date | null
 }
 
 
@@ -1065,7 +1065,7 @@ export interface ServerPrivateNetwork {
   /**
    * The VLAN ID associated to the Private Network.
    */
-  vlan?: number
+  vlan?: number | null
   /**
    * The configuration status of the Private Network.
    */
@@ -1073,11 +1073,11 @@ export interface ServerPrivateNetwork {
   /**
    * The Private Network creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The date the Private Network was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -1113,7 +1113,7 @@ export type AddOptionServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1125,7 +1125,7 @@ export type AddOptionServerRequest = {
   /**
    * Auto expire the option after this date.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -1145,7 +1145,7 @@ export interface BMCAccess {
   /**
    * The date after which the BMC (Baseboard Management Controller) access will be closed.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * ID of the server.
    */
@@ -1165,15 +1165,15 @@ export type BatchCreateServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Configuration wanted for the servers to create.
    */
-  commonConfiguration?: CreateServerRequest
+  commonConfiguration?: CreateServerRequest | null
   /**
    * List of servers to create.
    */
-  servers?: BatchCreateServersRequestServerConfig[]
+  servers?: BatchCreateServersRequestServerConfig[] | null
 }
 
 
@@ -1186,7 +1186,7 @@ export type DeleteOptionServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1202,7 +1202,7 @@ export type DeleteServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to delete.
    */
@@ -1214,7 +1214,7 @@ export type GetBMCAccessRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1226,7 +1226,7 @@ export type GetDefaultPartitioningSchemaRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the offer.
    */
@@ -1242,7 +1242,7 @@ export type GetOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the OS.
    */
@@ -1254,7 +1254,7 @@ export type GetOfferRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the researched Offer.
    */
@@ -1266,7 +1266,7 @@ export type GetOptionRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the option.
    */
@@ -1278,7 +1278,7 @@ export type GetServerMetricsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to get the metrics.
    */
@@ -1290,7 +1290,7 @@ export interface GetServerMetricsResponse {
   /**
    * Timeseries object representing pings on the server.
    */
-  pings?: TimeSeries
+  pings?: TimeSeries | null
 }
 
 
@@ -1298,7 +1298,7 @@ export type GetServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1310,7 +1310,7 @@ export type InstallServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to install.
    */
@@ -1330,35 +1330,35 @@ export type InstallServerRequest = {
   /**
    * User used for the installation.
    */
-  user?: string
+  user?: string | null
   /**
    * Password used for the installation.
    */
-  password?: string
+  password?: string | null
   /**
    * User used for the service to install.
    */
-  serviceUser?: string
+  serviceUser?: string | null
   /**
    * Password used for the service to install.
    */
-  servicePassword?: string
+  servicePassword?: string | null
   /**
    * Partitioning schema.
    */
-  partitioningSchema?: Schema
+  partitioningSchema?: Schema | null
   /**
    * @deprecated Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
    */
-  userData?: Blob
+  userData?: Blob | null
   /**
    * URL of the network service to which the server should forward its boot request.
    */
-  networkBootUrl?: string
+  networkBootUrl?: string | null
   /**
    * Defines whether the network boot forwarding should be applied at every reboot or only once.
    */
-  networkBootPersistent?: boolean
+  networkBootPersistent?: boolean | null
 }
 
 
@@ -1366,19 +1366,19 @@ export type ListOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of OS per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Offer IDs to filter OSes for.
    */
-  offerId?: string
+  offerId?: string | null
 }
 
 
@@ -1398,23 +1398,23 @@ export type ListOffersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of offers per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Subscription period type to filter offers by.
    */
-  subscriptionPeriod?: OfferSubscriptionPeriod
+  subscriptionPeriod?: OfferSubscriptionPeriod | null
   /**
    * Offer name to filter offers by.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1434,23 +1434,23 @@ export type ListOptionsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of options per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Offer ID to filter options for.
    */
-  offerId?: string
+  offerId?: string | null
   /**
    * Name to filter options for.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1470,7 +1470,7 @@ export type ListServerEventsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server events searched.
    */
@@ -1478,15 +1478,15 @@ export type ListServerEventsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of server events per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the server events.
    */
-  orderBy?: ListServerEventsRequestOrderBy
+  orderBy?: ListServerEventsRequestOrderBy | null
 }
 
 
@@ -1512,43 +1512,43 @@ export type ListServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of servers per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the servers.
    */
-  orderBy?: ListServersRequestOrderBy
+  orderBy?: ListServersRequestOrderBy | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Status to filter for.
    */
-  status?: string[]
+  status?: string[] | null
   /**
    * Names to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Organization ID to filter for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Option ID to filter for.
    */
-  optionId?: string
+  optionId?: string | null
 }
 
 
@@ -1568,23 +1568,23 @@ export type ListSettingsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Set the maximum list size.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order for items in the response.
    */
-  orderBy?: ListSettingsRequestOrderBy
+  orderBy?: ListSettingsRequestOrderBy | null
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1604,7 +1604,7 @@ export type MigrateServerToMonthlyOfferRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1616,7 +1616,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -1632,7 +1632,7 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -1648,35 +1648,35 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The sort order for the returned Private Networks.
    */
-  orderBy?: ListServerPrivateNetworksRequestOrderBy
+  orderBy?: ListServerPrivateNetworksRequestOrderBy | null
   /**
    * The page number for the returned Private Networks.
    */
-  page?: number
+  page?: number | null
   /**
    * The maximum number of Private Networks per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter Private Networks by server ID.
    */
-  serverId?: string
+  serverId?: string | null
   /**
    * Filter Private Networks by Private Network ID.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
   /**
    * Filter Private Networks by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter Private Networks by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1684,7 +1684,7 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -1700,7 +1700,7 @@ export type RebootServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to reboot.
    */
@@ -1708,11 +1708,11 @@ export type RebootServerRequest = {
   /**
    * The type of boot.
    */
-  bootType?: ServerBootType
+  bootType?: ServerBootType | null
   /**
    * Additional SSH public key IDs to configure on rescue image.
    */
-  sshKeyIds?: string[]
+  sshKeyIds?: string[] | null
 }
 
 
@@ -1725,7 +1725,7 @@ export type StartBMCAccessRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1741,7 +1741,7 @@ export type StartServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to start.
    */
@@ -1749,11 +1749,11 @@ export type StartServerRequest = {
   /**
    * The type of boot.
    */
-  bootType?: ServerBootType
+  bootType?: ServerBootType | null
   /**
    * Additional SSH public key IDs to configure on rescue image.
    */
-  sshKeyIds?: string[]
+  sshKeyIds?: string[] | null
 }
 
 
@@ -1761,7 +1761,7 @@ export type StopBMCAccessRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1773,7 +1773,7 @@ export type StopServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to stop.
    */
@@ -1785,7 +1785,7 @@ export type UpdateIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1797,7 +1797,7 @@ export type UpdateIPRequest = {
   /**
    * New reverse IP to update, not updated if null.
    */
-  reverse?: string
+  reverse?: string | null
 }
 
 
@@ -1805,7 +1805,7 @@ export type UpdateServerCommitmentRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   serverId: string
   autoRenewal: boolean
 }
@@ -1815,7 +1815,7 @@ export type UpdateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to update.
    */
@@ -1823,27 +1823,27 @@ export type UpdateServerRequest = {
   /**
    * Name of the server (≠hostname), not updated if null.
    */
-  name?: string
+  name?: string | null
   /**
    * Description associated with the server, max 255 characters, not updated if null.
    */
-  description?: string
+  description?: string | null
   /**
    * Tags associated with the server, not updated if null.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * If enabled, the server can not be deleted.
    */
-  protected?: boolean
+  protected?: boolean | null
   /**
    * Configuration data to pass to cloud-init such as a YAML cloud config data or a user-data script.
    */
-  userData?: string
+  userData?: string | null
   /**
    * Set false to cancel the scheduled deletion of the server.
    */
-  scheduledDeletion?: boolean
+  scheduledDeletion?: boolean | null
 }
 
 
@@ -1851,7 +1851,7 @@ export type UpdateSettingRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the setting.
    */
@@ -1859,7 +1859,7 @@ export type UpdateSettingRequest = {
   /**
    * Defines whether the setting is enabled.
    */
-  enabled?: boolean
+  enabled?: boolean | null
 }
 
 
@@ -1867,9 +1867,9 @@ export type UpgradeServerCommitmentRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   serverId: string
-  period?: CommitmentPeriod
+  period?: CommitmentPeriod | null
 }
 
 
@@ -1877,11 +1877,11 @@ export type ValidatePartitioningSchemaRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Partitioning schema.
    */
-  partitioningSchema?: Schema
+  partitioningSchema?: Schema | null
   /**
    * Offer ID of the server.
    */

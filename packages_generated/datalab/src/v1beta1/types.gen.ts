@@ -78,15 +78,15 @@ export interface ClusterVersion {
   /**
    * The end of life date of the cluster version.
    */
-  endOfLife?: Date
+  endOfLife?: Date | null
   /**
    * The creation date of the cluster version.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last update date of the cluster version.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Whether the cluster version is disabled.
    */
@@ -102,14 +102,14 @@ export interface DatalabSparkMain {
   nodeType: string
   sparkUiUrl: string
   sparkMasterUrl: string
-  rootVolume?: Volume
+  rootVolume?: Volume | null
 }
 
 
 export interface DatalabSparkWorker {
   nodeType: string
   nodeCount: number
-  rootVolume?: Volume
+  rootVolume?: Volume | null
 }
 
 
@@ -124,15 +124,15 @@ export interface NotebookVersion {
   /**
    * The end of life date of the notebook version.
    */
-  endOfLife?: Date
+  endOfLife?: Date | null
   /**
    * The creation date of the notebook version.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last update date of the notebook version.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Whether the notebook version is disabled.
    */
@@ -201,11 +201,11 @@ export interface Datalab {
   /**
    * The Apache Spark™ Main node specification of cluster. It holds the parameters `node_type`, `spark_ui_url` (available to reach Apache Spark™ UI), `spark_master_url` (used to reach the cluster within a VPC), `root_volume` (size of the volume assigned to the cluster).
    */
-  main?: DatalabSparkMain
+  main?: DatalabSparkMain | null
   /**
    * The cluster worker nodes specification. It holds the parameters `node_type`, `node_count`, `root_volume` (size of the volume assigned to the cluster).
    */
-  worker?: DatalabSparkWorker
+  worker?: DatalabSparkWorker | null
   /**
    * The status of the cluster. For a working cluster the status is marked as `ready`.
    */
@@ -213,11 +213,11 @@ export interface Datalab {
   /**
    * The creation timestamp of the cluster.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last update date of the cluster.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * The region of the cluster.
    */
@@ -229,7 +229,7 @@ export interface Datalab {
   /**
    * The URL of the notebook if available.
    */
-  notebookUrl?: string
+  notebookUrl?: string | null
   /**
    * The version of Apache Spark™ running inside the cluster.
    */
@@ -237,7 +237,7 @@ export interface Datalab {
   /**
    * The total persistent volume storage selected to run Apache Spark™.
    */
-  totalStorage?: Volume
+  totalStorage?: Volume | null
   /**
    * The unique identifier of the private network to which the cluster is attached to.
    */
@@ -245,7 +245,7 @@ export interface Datalab {
   /**
    * The URL that is used to reach the cluster from the notebook when available. This URL cannot be used to reach the cluster from a server.
    */
-  notebookMasterUrl?: string
+  notebookMasterUrl?: string | null
 }
 
 
@@ -292,11 +292,11 @@ export interface NodeType {
   /**
    * The creation date of the node type.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last update date of the node type.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * The targets of the node type.
    */
@@ -330,11 +330,11 @@ export type CreateDatalabRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The unique identifier of the project where the cluster will be created.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * The name of the cluster.
    */
@@ -346,15 +346,15 @@ export type CreateDatalabRequest = {
   /**
    * The tags of the cluster.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * The cluster main node specification. It holds the parameters `node_type` which specifies the node type of the main node. See ListNodeTypes for available options. See ListNodeTypes for available options.
    */
-  main?: CreateDatalabRequestSparkMain
+  main?: CreateDatalabRequestSparkMain | null
   /**
    * The cluster worker node specification. It holds the parameters `node_type` which specifies the node type of the worker node and `node_count` for specifying the amount of nodes.
    */
-  worker?: CreateDatalabRequestSparkWorker
+  worker?: CreateDatalabRequestSparkWorker | null
   /**
    * Select this option to include a notebook as part of the cluster.
    */
@@ -366,7 +366,7 @@ export type CreateDatalabRequest = {
   /**
    * The maximum persistent volume storage that will be available during workload.
    */
-  totalStorage?: Volume
+  totalStorage?: Volume | null
   /**
    * The unique identifier of the private network the cluster will be attached to.
    */
@@ -381,7 +381,7 @@ export type DeleteDatalabRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The unique identifier of the cluster.
    */
@@ -396,7 +396,7 @@ export type GetDatalabRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The unique identifier of the cluster.
    */
@@ -411,19 +411,19 @@ export type ListClusterVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The page number.
    */
-  page?: number
+  page?: number | null
   /**
    * The page size.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The order by field.
    */
-  orderBy?: ListClusterVersionsRequestOrderBy
+  orderBy?: ListClusterVersionsRequestOrderBy | null
 }
 
 
@@ -449,35 +449,35 @@ export type ListDatalabsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The unique identifier of the organization whose clusters you want to list.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * The unique identifier of the project whose clusters you want to list.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * The name of the cluster you want to list.
    */
-  name?: string
+  name?: string | null
   /**
    * The tags associated with the cluster you want to list.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * The page number for pagination.
    */
-  page?: number
+  page?: number | null
   /**
    * The page size for pagination.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The order by field, available options are `name_asc`, `name_desc`, `created_at_asc`, `created_at_desc`, `updated_at_asc`, `updated_at_desc`.
    */
-  orderBy?: ListDatalabsRequestOrderBy
+  orderBy?: ListDatalabsRequestOrderBy | null
 }
 
 
@@ -503,27 +503,27 @@ export type ListNodeTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The page number.
    */
-  page?: number
+  page?: number | null
   /**
    * The page size.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The order by field. Available fields are `name_asc`, `name_desc`, `vcpus_asc`, `vcpus_desc`, `memory_gigabytes_asc`, `memory_gigabytes_desc`, `vram_bytes_asc`, `vram_bytes_desc`, `gpus_asc`, `gpus_desc`.
    */
-  orderBy?: ListNodeTypesRequestOrderBy
+  orderBy?: ListNodeTypesRequestOrderBy | null
   /**
    * Filter based on the target of the nodes. Allows to filter the nodes based on their purpose which can be main or worker node.
    */
-  targets?: NodeTypeTarget[]
+  targets?: NodeTypeTarget[] | null
   /**
    * Filter based on node type ( `cpu`/`gpu`/`all` ).
    */
-  resourceType?: ListNodeTypesRequestResourceType
+  resourceType?: ListNodeTypesRequestResourceType | null
 }
 
 
@@ -549,19 +549,19 @@ export type ListNotebookVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The page number.
    */
-  page?: number
+  page?: number | null
   /**
    * The page size.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The order by field. Available options are `name_asc` and `name_desc`.
    */
-  orderBy?: ListNotebookVersionsRequestOrderBy
+  orderBy?: ListNotebookVersionsRequestOrderBy | null
 }
 
 
@@ -587,7 +587,7 @@ export type UpdateDatalabRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The unique identifier of the cluster.
    */
@@ -595,19 +595,19 @@ export type UpdateDatalabRequest = {
   /**
    * The updated name of the cluster.
    */
-  name?: string
+  name?: string | null
   /**
    * The updated description of the cluster.
    */
-  description?: string
+  description?: string | null
   /**
    * The updated tags of the cluster.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * The updated node count of the cluster. Scale up or down the number of worker nodes.
    */
-  nodeCount?: number
+  nodeCount?: number | null
 }
 
 

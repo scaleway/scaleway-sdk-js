@@ -59,7 +59,7 @@ const unmarshalDeviceMessageFiltersRule = (data: unknown): DeviceMessageFiltersR
 
   return {
     policy: data.policy,
-    topics: data.topics,
+    topics: data.topics ?? null,
   } as DeviceMessageFiltersRule
 }
 
@@ -71,8 +71,8 @@ const unmarshalDeviceMessageFilters = (data: unknown): DeviceMessageFilters => {
   }
 
   return {
-    publish: data.publish ? unmarshalDeviceMessageFiltersRule(data.publish) : undefined,
-    subscribe: data.subscribe ? unmarshalDeviceMessageFiltersRule(data.subscribe) : undefined,
+    publish: data.publish ? unmarshalDeviceMessageFiltersRule(data.publish) : null,
+    subscribe: data.subscribe ? unmarshalDeviceMessageFiltersRule(data.subscribe) : null,
   } as DeviceMessageFilters
 }
 
@@ -86,18 +86,18 @@ export const unmarshalDevice = (data: unknown): Device => {
   return {
     allowInsecure: data.allow_insecure,
     allowMultipleConnections: data.allow_multiple_connections,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     hasCustomCertificate: data.has_custom_certificate,
     hubId: data.hub_id,
     id: data.id,
     isConnected: data.is_connected,
-    lastActivityAt: unmarshalDate(data.last_activity_at),
-    messageFilters: data.message_filters ? unmarshalDeviceMessageFilters(data.message_filters) : undefined,
+    lastActivityAt: unmarshalDate(data.last_activity_at) ?? null,
+    messageFilters: data.message_filters ? unmarshalDeviceMessageFilters(data.message_filters) : null,
     name: data.name,
     region: data.region,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Device
 }
 
@@ -109,7 +109,7 @@ export const unmarshalNetwork = (data: unknown): Network => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoint: data.endpoint,
     hubId: data.hub_id,
     id: data.id,
@@ -141,7 +141,7 @@ export const unmarshalHub = (data: unknown): Hub => {
 
   return {
     connectedDeviceCount: data.connected_device_count,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     deviceCount: data.device_count,
     disableEvents: data.disable_events,
     enableDeviceAutoProvisioning: data.enable_device_auto_provisioning,
@@ -156,8 +156,8 @@ export const unmarshalHub = (data: unknown): Hub => {
     projectId: data.project_id,
     region: data.region,
     status: data.status,
-    twinsGraphiteConfig: data.twins_graphite_config ? unmarshalHubTwinsGraphiteConfig(data.twins_graphite_config) : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
+    twinsGraphiteConfig: data.twins_graphite_config ? unmarshalHubTwinsGraphiteConfig(data.twins_graphite_config) : null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Hub
 }
 
@@ -182,8 +182,8 @@ export const unmarshalCreateDeviceResponse = (data: unknown): CreateDeviceRespon
   }
 
   return {
-    certificate: data.certificate ? unmarshalCertificate(data.certificate) : undefined,
-    device: data.device ? unmarshalDevice(data.device) : undefined,
+    certificate: data.certificate ? unmarshalCertificate(data.certificate) : null,
+    device: data.device ? unmarshalDevice(data.device) : null,
   } as CreateDeviceResponse
 }
 
@@ -195,7 +195,7 @@ export const unmarshalCreateNetworkResponse = (data: unknown): CreateNetworkResp
   }
 
   return {
-    network: data.network ? unmarshalNetwork(data.network) : undefined,
+    network: data.network ? unmarshalNetwork(data.network) : null,
     secret: data.secret,
   } as CreateNetworkResponse
 }
@@ -209,7 +209,7 @@ export const unmarshalGetDeviceCertificateResponse = (data: unknown): GetDeviceC
 
   return {
     certificatePem: data.certificate_pem,
-    device: data.device ? unmarshalDevice(data.device) : undefined,
+    device: data.device ? unmarshalDevice(data.device) : null,
   } as GetDeviceCertificateResponse
 }
 
@@ -296,14 +296,14 @@ const unmarshalRouteSummary = (data: unknown): RouteSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     hubId: data.hub_id,
     id: data.id,
     name: data.name,
     region: data.region,
     topic: data.topic,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as RouteSummary
 }
 
@@ -352,8 +352,8 @@ export const unmarshalRenewDeviceCertificateResponse = (data: unknown): RenewDev
   }
 
   return {
-    certificate: data.certificate ? unmarshalCertificate(data.certificate) : undefined,
-    device: data.device ? unmarshalDevice(data.device) : undefined,
+    certificate: data.certificate ? unmarshalCertificate(data.certificate) : null,
+    device: data.device ? unmarshalDevice(data.device) : null,
   } as RenewDeviceCertificateResponse
 }
 
@@ -412,17 +412,17 @@ export const unmarshalRoute = (data: unknown): Route => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    dbConfig: data.db_config ? unmarshalRouteDatabaseConfig(data.db_config) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    dbConfig: data.db_config ? unmarshalRouteDatabaseConfig(data.db_config) : null,
     hubId: data.hub_id,
     id: data.id,
     name: data.name,
     region: data.region,
-    restConfig: data.rest_config ? unmarshalRouteRestConfig(data.rest_config) : undefined,
-    s3Config: data.s3_config ? unmarshalRouteS3Config(data.s3_config) : undefined,
+    restConfig: data.rest_config ? unmarshalRouteRestConfig(data.rest_config) : null,
+    s3Config: data.s3_config ? unmarshalRouteS3Config(data.s3_config) : null,
     topic: data.topic,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Route
 }
 
@@ -435,7 +435,7 @@ export const unmarshalSetDeviceCertificateResponse = (data: unknown): SetDeviceC
 
   return {
     certificatePem: data.certificate_pem,
-    device: data.device ? unmarshalDevice(data.device) : undefined,
+    device: data.device ? unmarshalDevice(data.device) : null,
   } as SetDeviceCertificateResponse
 }
 
@@ -447,7 +447,7 @@ export const unmarshalTwinDocument = (data: unknown): TwinDocument => {
   }
 
   return {
-    data: data.data,
+    data: data.data ?? null,
     documentName: data.document_name,
     twinId: data.twin_id,
     version: data.version,
@@ -466,8 +466,8 @@ const marshalDeviceMessageFilters = (
   request: DeviceMessageFilters,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  publish: ((request.publish !== undefined) ?  marshalDeviceMessageFiltersRule(request.publish, defaults): undefined),
-  subscribe: ((request.subscribe !== undefined) ?  marshalDeviceMessageFiltersRule(request.subscribe, defaults): undefined),
+  publish: ((request.publish != null) ?  marshalDeviceMessageFiltersRule(request.publish, defaults): undefined),
+  subscribe: ((request.subscribe != null) ?  marshalDeviceMessageFiltersRule(request.subscribe, defaults): undefined),
 })
 
 export const marshalCreateDeviceRequest = (
@@ -478,7 +478,7 @@ export const marshalCreateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: ((request.messageFilters !== undefined) ?  marshalDeviceMessageFilters(request.messageFilters, defaults): undefined),
+  message_filters: ((request.messageFilters != null) ?  marshalDeviceMessageFilters(request.messageFilters, defaults): undefined),
   name: request.name || randomName('device'),
 })
 
@@ -500,7 +500,7 @@ export const marshalCreateHubRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,  
   ...resolveOneOf([
     {param: 'twins_graphite_config',
-      value: (request.twinsGraphiteConfig !== undefined) ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
+      value: (request.twinsGraphiteConfig != null) ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
       : undefined,
     },
   ]),
@@ -557,15 +557,15 @@ export const marshalCreateRouteRequest = (
   topic: request.topic,  
   ...resolveOneOf([
     {param: 's3_config',
-      value: (request.s3Config !== undefined) ? marshalCreateRouteRequestS3Config(request.s3Config, defaults)
+      value: (request.s3Config != null) ? marshalCreateRouteRequestS3Config(request.s3Config, defaults)
       : undefined,
     },
     {param: 'db_config',
-      value: (request.dbConfig !== undefined) ? marshalCreateRouteRequestDatabaseConfig(request.dbConfig, defaults)
+      value: (request.dbConfig != null) ? marshalCreateRouteRequestDatabaseConfig(request.dbConfig, defaults)
       : undefined,
     },
     {param: 'rest_config',
-      value: (request.restConfig !== undefined) ? marshalCreateRouteRequestRestConfig(request.restConfig, defaults)
+      value: (request.restConfig != null) ? marshalCreateRouteRequestRestConfig(request.restConfig, defaults)
       : undefined,
     },
   ]),
@@ -610,7 +610,7 @@ export const marshalUpdateDeviceRequest = (
   allow_multiple_connections: request.allowMultipleConnections,
   description: request.description,
   hub_id: request.hubId,
-  message_filters: ((request.messageFilters !== undefined) ?  marshalDeviceMessageFilters(request.messageFilters, defaults): undefined),
+  message_filters: ((request.messageFilters != null) ?  marshalDeviceMessageFilters(request.messageFilters, defaults): undefined),
 })
 
 export const marshalUpdateHubRequest = (
@@ -624,7 +624,7 @@ export const marshalUpdateHubRequest = (
   product_plan: request.productPlan,  
   ...resolveOneOf([
     {param: 'twins_graphite_config',
-      value: (request.twinsGraphiteConfig !== undefined) ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
+      value: (request.twinsGraphiteConfig != null) ? marshalHubTwinsGraphiteConfig(request.twinsGraphiteConfig, defaults)
       : undefined,
     },
   ]),
@@ -670,15 +670,15 @@ export const marshalUpdateRouteRequest = (
   topic: request.topic,  
   ...resolveOneOf([
     {param: 's3_config',
-      value: (request.s3Config !== undefined) ? marshalUpdateRouteRequestS3Config(request.s3Config, defaults)
+      value: (request.s3Config != null) ? marshalUpdateRouteRequestS3Config(request.s3Config, defaults)
       : undefined,
     },
     {param: 'db_config',
-      value: (request.dbConfig !== undefined) ? marshalUpdateRouteRequestDatabaseConfig(request.dbConfig, defaults)
+      value: (request.dbConfig != null) ? marshalUpdateRouteRequestDatabaseConfig(request.dbConfig, defaults)
       : undefined,
     },
     {param: 'rest_config',
-      value: (request.restConfig !== undefined) ? marshalUpdateRouteRequestRestConfig(request.restConfig, defaults)
+      value: (request.restConfig != null) ? marshalUpdateRouteRequestRestConfig(request.restConfig, defaults)
       : undefined,
     },
   ]),

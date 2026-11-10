@@ -26,7 +26,7 @@ const unmarshalDiscountCoupon = (data: unknown): DiscountCoupon => {
   }
 
   return {
-    description: data.description,
+    description: data.description ?? null,
   } as DiscountCoupon
 }
 
@@ -52,15 +52,15 @@ export const unmarshalDiscount = (data: unknown): Discount => {
   }
 
   return {
-    coupon: data.coupon ? unmarshalDiscountCoupon(data.coupon) : undefined,
-    creationDate: unmarshalDate(data.creation_date),
+    coupon: data.coupon ? unmarshalDiscountCoupon(data.coupon) : null,
+    creationDate: unmarshalDate(data.creation_date) ?? null,
     description: data.description,
     filters: unmarshalArrayOfObject(data.filters, unmarshalDiscountFilter),
     id: data.id,
     mode: data.mode,
     organizationId: data.organization_id,
-    startDate: unmarshalDate(data.start_date),
-    stopDate: unmarshalDate(data.stop_date),
+    startDate: unmarshalDate(data.start_date) ?? null,
+    stopDate: unmarshalDate(data.stop_date) ?? null,
     value: data.value,
     valueRemaining: data.value_remaining,
     valueUsed: data.value_used,
@@ -75,22 +75,22 @@ export const unmarshalInvoice = (data: unknown): Invoice => {
   }
 
   return {
-    billingPeriod: unmarshalDate(data.billing_period),
-    dueDate: unmarshalDate(data.due_date),
+    billingPeriod: unmarshalDate(data.billing_period) ?? null,
+    dueDate: unmarshalDate(data.due_date) ?? null,
     id: data.id,
-    issuedDate: unmarshalDate(data.issued_date),
+    issuedDate: unmarshalDate(data.issued_date) ?? null,
     number: data.number,
     organizationId: data.organization_id,
     organizationName: data.organization_name,
     sellerName: data.seller_name,
-    startDate: unmarshalDate(data.start_date),
+    startDate: unmarshalDate(data.start_date) ?? null,
     state: data.state,
-    stopDate: unmarshalDate(data.stop_date),
-    totalDiscount: data.total_discount ? unmarshalMoney(data.total_discount) : undefined,
-    totalTax: data.total_tax ? unmarshalMoney(data.total_tax) : undefined,
-    totalTaxed: data.total_taxed ? unmarshalMoney(data.total_taxed) : undefined,
-    totalUndiscount: data.total_undiscount ? unmarshalMoney(data.total_undiscount) : undefined,
-    totalUntaxed: data.total_untaxed ? unmarshalMoney(data.total_untaxed) : undefined,
+    stopDate: unmarshalDate(data.stop_date) ?? null,
+    totalDiscount: data.total_discount ? unmarshalMoney(data.total_discount) : null,
+    totalTax: data.total_tax ? unmarshalMoney(data.total_tax) : null,
+    totalTaxed: data.total_taxed ? unmarshalMoney(data.total_taxed) : null,
+    totalUndiscount: data.total_undiscount ? unmarshalMoney(data.total_undiscount) : null,
+    totalUntaxed: data.total_untaxed ? unmarshalMoney(data.total_untaxed) : null,
     type: data.type,
   } as Invoice
 }
@@ -103,18 +103,18 @@ const unmarshalCharge = (data: unknown): Charge => {
   }
 
   return {
-    endDate: unmarshalDate(data.end_date),
+    endDate: unmarshalDate(data.end_date) ?? null,
     invoiceId: data.invoice_id,
     organizationId: data.organization_id,
     organizationName: data.organization_name,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
+    price: data.price ? unmarshalMoney(data.price) : null,
     projectId: data.project_id,
     projectName: data.project_name,
     resourceId: data.resource_id,
-    resourceName: data.resource_name,
+    resourceName: data.resource_name ?? null,
     sku: data.sku,
-    startDate: unmarshalDate(data.start_date),
-    updatedAt: unmarshalDate(data.updated_at),
+    startDate: unmarshalDate(data.start_date) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Charge
 }
 
@@ -127,7 +127,7 @@ export const unmarshalListChargesResponse = (data: unknown): ListChargesResponse
 
   return {
     charges: unmarshalArrayOfObject(data.charges, unmarshalCharge),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
   } as ListChargesResponse
 }
 
@@ -149,7 +149,7 @@ const unmarshalListConsumptionsResponseConsumption = (data: unknown): ListConsum
     resourceName: data.resource_name,
     sku: data.sku,
     unit: data.unit,
-    value: data.value ? unmarshalMoney(data.value) : undefined,
+    value: data.value ? unmarshalMoney(data.value) : null,
   } as ListConsumptionsResponseConsumption
 }
 
@@ -164,7 +164,7 @@ export const unmarshalListConsumptionsResponse = (data: unknown): ListConsumptio
     consumptions: unmarshalArrayOfObject(data.consumptions, unmarshalListConsumptionsResponseConsumption),
     totalCount: data.total_count,
     totalDiscountUntaxedValue: data.total_discount_untaxed_value,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as ListConsumptionsResponse
 }
 
@@ -204,8 +204,8 @@ const unmarshalListTaxesResponseTax = (data: unknown): ListTaxesResponseTax => {
   return {
     currency: data.currency,
     description: data.description,
-    rate: data.rate,
-    totalTaxValue: data.total_tax_value,
+    rate: data.rate ?? null,
+    totalTaxValue: data.total_tax_value ?? null,
   } as ListTaxesResponseTax
 }
 
@@ -219,6 +219,6 @@ export const unmarshalListTaxesResponse = (data: unknown): ListTaxesResponse => 
   return {
     taxes: unmarshalArrayOfObject(data.taxes, unmarshalListTaxesResponseTax),
     totalCount: data.total_count,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as ListTaxesResponse
 }

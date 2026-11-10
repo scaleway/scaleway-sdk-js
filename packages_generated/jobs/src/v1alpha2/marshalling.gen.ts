@@ -69,8 +69,8 @@ export const unmarshalSecret = (data: unknown): Secret => {
   }
 
   return {
-    envVar: data.env_var ? unmarshalSecretEnvVar(data.env_var) : undefined,
-    file: data.file ? unmarshalSecretFile(data.file) : undefined,
+    envVar: data.env_var ? unmarshalSecretEnvVar(data.env_var) : null,
+    file: data.file ? unmarshalSecretFile(data.file) : null,
     jobDefinitionId: data.job_definition_id,
     region: data.region,
     secretId: data.secret_id,
@@ -114,24 +114,24 @@ export const unmarshalJobDefinition = (data: unknown): JobDefinition => {
 
   return {
     args: data.args,
-    command: data.command,
+    command: data.command ?? null,
     cpuLimit: data.cpu_limit,
-    createdAt: unmarshalDate(data.created_at),
-    cronSchedule: data.cron_schedule ? unmarshalCronSchedule(data.cron_schedule) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    cronSchedule: data.cron_schedule ? unmarshalCronSchedule(data.cron_schedule) : null,
     description: data.description,
     environmentVariables: data.environment_variables,
     id: data.id,
     imageUri: data.image_uri,
-    jobTimeout: data.job_timeout,
+    jobTimeout: data.job_timeout ?? null,
     localStorageCapacity: data.local_storage_capacity,
     memoryLimit: data.memory_limit,
     name: data.name,
     projectId: data.project_id,
     region: data.region,
-    retryPolicy: data.retry_policy ? unmarshalRetryPolicy(data.retry_policy) : undefined,
+    retryPolicy: data.retry_policy ? unmarshalRetryPolicy(data.retry_policy) : null,
     srn: data.srn,
     startupCommand: data.startup_command,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as JobDefinition
 }
 
@@ -144,26 +144,26 @@ export const unmarshalJobRun = (data: unknown): JobRun => {
 
   return {
     args: data.args,
-    attempts: data.attempts,
-    command: data.command,
+    attempts: data.attempts ?? null,
+    command: data.command ?? null,
     cpuLimit: data.cpu_limit,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
-    exitCode: data.exit_code,
+    errorMessage: data.error_message ?? null,
+    exitCode: data.exit_code ?? null,
     id: data.id,
     jobDefinitionId: data.job_definition_id,
     localStorageCapacity: data.local_storage_capacity,
     memoryLimit: data.memory_limit,
-    reason: data.reason ? data.reason : undefined,
+    reason: data.reason ? data.reason : null,
     region: data.region,
-    runDuration: data.run_duration,
+    runDuration: data.run_duration ?? null,
     srn: data.srn,
-    startedAt: unmarshalDate(data.started_at),
+    startedAt: unmarshalDate(data.started_at) ?? null,
     startupCommand: data.startup_command,
     state: data.state,
-    terminatedAt: unmarshalDate(data.terminated_at),
-    updatedAt: unmarshalDate(data.updated_at),
+    terminatedAt: unmarshalDate(data.terminated_at) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as JobRun
 }
 
@@ -190,14 +190,14 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    cronConfig: data.cron_config ? unmarshalTriggerCronConfig(data.cron_config) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    cronConfig: data.cron_config ? unmarshalTriggerCronConfig(data.cron_config) : null,
     id: data.id,
     jobDefinitionId: data.job_definition_id,
     name: data.name,
     region: data.region,
     srn: data.srn,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Trigger
 }
 
@@ -336,16 +336,16 @@ export const marshalCreateJobDefinitionRequest = (
   args: request.args,
   command: request.command,
   cpu_limit: request.cpuLimit,
-  cron_schedule: ((request.cronSchedule !== undefined) ?  marshalCreateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
+  cron_schedule: ((request.cronSchedule != null) ?  marshalCreateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
   description: request.description,
-  environment_variables: ((request.environmentVariables !== undefined) ?  request.environmentVariables: undefined),
+  environment_variables: ((request.environmentVariables != null) ?  request.environmentVariables: undefined),
   image_uri: request.imageUri,
   job_timeout: request.jobTimeout,
   local_storage_capacity: request.localStorageCapacity,
   memory_limit: request.memoryLimit,
   name: request.name || randomName('job'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  retry_policy: ((request.retryPolicy !== undefined) ?  marshalRetryPolicy(request.retryPolicy, defaults): undefined),
+  retry_policy: ((request.retryPolicy != null) ?  marshalRetryPolicy(request.retryPolicy, defaults): undefined),
   startup_command: request.startupCommand,
 })
 
@@ -391,7 +391,7 @@ export const marshalCreateTriggerRequest = (
   name: request.name,  
   ...resolveOneOf([
     {param: 'cron_config',
-      value: (request.cronConfig !== undefined) ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
+      value: (request.cronConfig != null) ? marshalCreateTriggerRequestCronConfig(request.cronConfig, defaults)
       : undefined,
     },
   ]),
@@ -430,7 +430,7 @@ export const marshalUpdateJobDefinitionRequest = (
   args: request.args,
   command: request.command,
   cpu_limit: request.cpuLimit,
-  cron_schedule: ((request.cronSchedule !== undefined) ?  marshalUpdateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
+  cron_schedule: ((request.cronSchedule != null) ?  marshalUpdateJobDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
   description: request.description,
   environment_variables: request.environmentVariables,
   image_uri: request.imageUri,
@@ -438,7 +438,7 @@ export const marshalUpdateJobDefinitionRequest = (
   local_storage_capacity: request.localStorageCapacity,
   memory_limit: request.memoryLimit,
   name: request.name,
-  retry_policy: ((request.retryPolicy !== undefined) ?  marshalUpdateJobDefinitionRequestUpdateRetryPolicy(request.retryPolicy, defaults): undefined),
+  retry_policy: ((request.retryPolicy != null) ?  marshalUpdateJobDefinitionRequestUpdateRetryPolicy(request.retryPolicy, defaults): undefined),
   startup_command: request.startupCommand,
 })
 
@@ -474,7 +474,7 @@ export const marshalUpdateTriggerRequest = (
   name: request.name,  
   ...resolveOneOf([
     {param: 'cron_config',
-      value: (request.cronConfig !== undefined) ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
+      value: (request.cronConfig != null) ? marshalUpdateTriggerRequestCronConfig(request.cronConfig, defaults)
       : undefined,
     },
   ]),

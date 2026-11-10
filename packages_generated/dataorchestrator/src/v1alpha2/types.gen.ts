@@ -112,11 +112,11 @@ export interface DefaultTask {
   /**
    * Current reason of the task run.
    */
-  reason?: DefaultTaskDefaultRunReason
+  reason?: DefaultTaskDefaultRunReason | null
   /**
    * Error message of the task run.
    */
-  errorMessage?: string
+  errorMessage?: string | null
 }
 
 
@@ -140,18 +140,18 @@ export interface RunServerlessContainersTask {
   /**
    * Current reason of the task run.
    */
-  reason?: RunServerlessContainersTaskReason
+  reason?: RunServerlessContainersTaskReason | null
   /**
    * Error message of the task run.
    */
-  errorMessage?: string
+  errorMessage?: string | null
 }
 
 
 export interface S3Task {
   action: string
-  reason?: S3TaskReason
-  errorMessage?: string
+  reason?: S3TaskReason | null
+  errorMessage?: string | null
 }
 
 
@@ -167,15 +167,15 @@ export interface ServerlessJobsTask {
   /**
    * Terminated reason of the serverless-job run.
    */
-  reason?: ServerlessJobsTaskServerlessJobRunReason
+  reason?: ServerlessJobsTaskServerlessJobRunReason | null
   /**
    * Exit code of the serverless-job run.
    */
-  exitCode?: number
+  exitCode?: number | null
   /**
    * Error message of the serverless-job run.
    */
-  errorMessage?: string
+  errorMessage?: string | null
 }
 
 
@@ -207,7 +207,7 @@ export interface WorkflowRunInfo {
   /**
    * Workflow run reason.
    */
-  reason?: WorkflowRunReason
+  reason?: WorkflowRunReason | null
 }
 
 
@@ -227,15 +227,15 @@ export interface WorkflowVersion {
   /**
    * Creation date of the workflow version.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the workflow version.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Deleted date of the workflow version.
    */
-  deletedAt?: Date
+  deletedAt?: Date | null
   /**
    * DSL of workflow in YAML format based from https://open-workflow-specification.org/schemas/1.0.3/workflow.yaml.
    */
@@ -259,19 +259,19 @@ export interface TaskRun {
   /**
    * Creation date of the task run.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the task run.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Terminated date of the task run.
    */
-  terminatedAt?: Date
+  terminatedAt?: Date | null
   /**
    * Run duration of the task run.
    */
-  duration?: string
+  duration?: string | null
   /**
    * Status of the task run.
    */
@@ -279,85 +279,85 @@ export interface TaskRun {
   /**
    * Output of the task run.
    */
-  output?: string
+  output?: string | null
   /**
    * Task run details for a serverless-job task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  serverlessJobTaskRunDetails?: ServerlessJobsTask
+  serverlessJobTaskRunDetails?: ServerlessJobsTask | null
   /**
    * Task run details for a raise task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  raiseTaskRunDetails?: DefaultTask
+  raiseTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a set task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  setTaskRunDetails?: DefaultTask
+  setTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a call http task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  callHttpTaskRunDetails?: DefaultTask
+  callHttpTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a wait task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  waitTaskRunDetails?: DefaultTask
+  waitTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a serverless-function task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  serverlessFunctionTaskRunDetails?: DefaultTask
+  serverlessFunctionTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a run-serverless-container task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  runServerlessContainerTaskRunDetails?: RunServerlessContainersTask
+  runServerlessContainerTaskRunDetails?: RunServerlessContainersTask | null
   /**
    * Task run details for a call-serverless-container task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  callServerlessContainerTaskRunDetails?: DefaultTask
+  callServerlessContainerTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a S3 task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  s3TaskRunDetails?: S3Task
+  s3TaskRunDetails?: S3Task | null
   /**
    * Task run details for a generative-api task.
    *
    * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  generativeApiTaskRunDetails?: DefaultTask
+  generativeApiTaskRunDetails?: DefaultTask | null
   /**
    * Run iteration of the task (in loop or retry).
    */
-  runIteration?: number
+  runIteration?: number | null
 }
 
 
 export interface CreateWorkflowDefinitionRequestCronScheduleConfig {
   schedule: string
   timezoneIdentifier: string
-  overlap?: ScheduleOverlapPolicy
+  overlap?: ScheduleOverlapPolicy | null
 }
 
 
 export interface CreateWorkflowDefinitionRequestWorkflowVersionConfig {
   name: string
   description: string
-  workflowDsl?: string
+  workflowDsl?: string | null
 }
 
 
@@ -381,11 +381,11 @@ export interface WorkflowDefinition {
   /**
    * Creation date of the workflow definition.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the workflow definition.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Versions of workflow.
    */
@@ -393,7 +393,7 @@ export interface WorkflowDefinition {
   /**
    * Configure a cron for the workflow.
    */
-  cronSchedule?: CronSchedule
+  cronSchedule?: CronSchedule | null
   /**
    * Environment variables of the workflow.
    */
@@ -401,11 +401,11 @@ export interface WorkflowDefinition {
   /**
    * Timeout of the workflow in seconds.
    */
-  workflowTimeout?: string
+  workflowTimeout?: string | null
   /**
    * Last workflow run information.
    */
-  lastRun?: WorkflowRunInfo
+  lastRun?: WorkflowRunInfo | null
   /**
    * Region of the workflow.
    */
@@ -445,19 +445,19 @@ export interface WorkflowRun {
   /**
    * Creation date of the workflow run.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the workflow run.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Terminated date of the workflow run.
    */
-  terminatedAt?: Date
+  terminatedAt?: Date | null
   /**
    * Run duration of the workflow run.
    */
-  duration?: string
+  duration?: string | null
   /**
    * Current status of the workflow run.
    */
@@ -465,7 +465,7 @@ export interface WorkflowRun {
   /**
    * Current reason of the workflow run.
    */
-  reason?: WorkflowRunReason
+  reason?: WorkflowRunReason | null
   /**
    * Task runs of the workflow run.
    */
@@ -481,11 +481,11 @@ export interface WorkflowRun {
   /**
    * Output of the workflow run.
    */
-  output?: string
+  output?: string | null
   /**
    * Error message of the workflow run.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Region of the workflow run.
    */
@@ -498,9 +498,9 @@ export interface WorkflowRun {
 
 
 export interface UpdateWorkflowDefinitionRequestCronScheduleConfig {
-  schedule?: string
-  timezoneIdentifier?: string
-  overlap?: ScheduleOverlapPolicy
+  schedule?: string | null
+  timezoneIdentifier?: string | null
+  overlap?: ScheduleOverlapPolicy | null
 }
 
 
@@ -508,11 +508,11 @@ export type CreateWorkflowDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the workflow definition.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the workflow.
    */
@@ -520,19 +520,19 @@ export type CreateWorkflowDefinitionRequest = {
   /**
    * UUID of the Scaleway Project containing the workflow.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Environment variables of the workflow.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Timeout of the workflow in seconds.
    */
-  workflowTimeout?: string
+  workflowTimeout?: string | null
   /**
    * Configure a cron for the workflow.
    */
-  cronSchedule?: CreateWorkflowDefinitionRequestCronScheduleConfig
+  cronSchedule?: CreateWorkflowDefinitionRequestCronScheduleConfig | null
   /**
    * Version of the workflow definition.
    */
@@ -544,7 +544,7 @@ export type DeleteWorkflowDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow definition to delete.
    */
@@ -556,7 +556,7 @@ export type DeleteWorkflowRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow run to delete.
    */
@@ -568,7 +568,7 @@ export type GetWorkflowDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow definition to get.
    */
@@ -580,7 +580,7 @@ export type GetWorkflowRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow run to get.
    */
@@ -592,25 +592,25 @@ export type ListWorkflowDefinitionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  page?: number
-  pageSize?: number
-  orderBy?: ListWorkflowDefinitionsRequestOrderBy
-  name?: string
+  region?: ScwRegion | null
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListWorkflowDefinitionsRequestOrderBy | null
+  name?: string | null
   /**
    *
    * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    *
    * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
-  statuses?: RunStatus[]
-  createdAfter?: Date
-  createdBefore?: Date
-  triggerTypes?: TriggerType[]
+  organizationId?: string | null
+  statuses?: RunStatus[] | null
+  createdAfter?: Date | null
+  createdBefore?: Date | null
+  triggerTypes?: TriggerType[] | null
 }
 
 
@@ -624,26 +624,26 @@ export type ListWorkflowRunsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  page?: number
-  pageSize?: number
-  orderBy?: ListWorkflowRunsRequestOrderBy
-  workflowDefinitionId?: string
+  region?: ScwRegion | null
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListWorkflowRunsRequestOrderBy | null
+  workflowDefinitionId?: string | null
   /**
    *
    * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    *
    * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
-  statuses?: RunStatus[]
-  createdAfter?: Date
-  createdBefore?: Date
-  triggerTypes?: TriggerType[]
-  workflowDefinitionName?: string
+  organizationId?: string | null
+  statuses?: RunStatus[] | null
+  createdAfter?: Date | null
+  createdBefore?: Date | null
+  triggerTypes?: TriggerType[] | null
+  workflowDefinitionName?: string | null
 }
 
 
@@ -663,7 +663,7 @@ export type PauseWorkflowRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow run to pause.
    */
@@ -675,7 +675,7 @@ export type ResumeWorkflowRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow run to resume.
    */
@@ -687,7 +687,7 @@ export type StartWorkflowDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow definition to start.
    */
@@ -695,7 +695,7 @@ export type StartWorkflowDefinitionRequest = {
   /**
    * Contextual environment variables for this specific workflow run.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
 }
 
 
@@ -703,7 +703,7 @@ export type TerminateWorkflowRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow run to terminate.
    */
@@ -715,7 +715,7 @@ export type UpdateWorkflowDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow definition to update.
    */
@@ -723,23 +723,23 @@ export type UpdateWorkflowDefinitionRequest = {
   /**
    * Name of the workflow definition.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the workflow.
    */
-  description?: string
+  description?: string | null
   /**
    * Environment variables of the workflow.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Timeout of the workflow in seconds.
    */
-  workflowTimeout?: string
+  workflowTimeout?: string | null
   /**
    * Configure a cron for the workflow.
    */
-  cronSchedule?: UpdateWorkflowDefinitionRequestCronScheduleConfig
+  cronSchedule?: UpdateWorkflowDefinitionRequestCronScheduleConfig | null
 }
 
 
@@ -747,7 +747,7 @@ export type UpdateWorkflowVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the workflow version to update.
    */
@@ -755,15 +755,15 @@ export type UpdateWorkflowVersionRequest = {
   /**
    * Name of the workflow version.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the workflow version.
    */
-  description?: string
+  description?: string | null
   /**
    * DSL of workflow in YAML format based from https://open-workflow-specification.org/schemas/1.0.3/workflow.yaml.
    */
-  workflowDsl?: string
+  workflowDsl?: string | null
 }
 
 

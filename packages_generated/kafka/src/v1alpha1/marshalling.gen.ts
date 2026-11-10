@@ -69,8 +69,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     dnsRecords: data.dns_records,
     id: data.id,
     port: data.port,
-    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
-    publicNetwork: data.public_network ? unmarshalEndpointPublicDetails(data.public_network) : undefined,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : null,
+    publicNetwork: data.public_network ? unmarshalEndpointPublicDetails(data.public_network) : null,
   } as Endpoint
 }
 
@@ -82,7 +82,7 @@ const unmarshalClusterMonoAZDetails = (data: unknown): ClusterMonoAZDetails => {
   }
 
   return {
-    zone: data.zone,
+    zone: data.zone ?? null,
   } as ClusterMonoAZDetails
 }
 
@@ -105,11 +105,11 @@ const unmarshalClusterSetting = (data: unknown): ClusterSetting => {
   }
 
   return {
-    boolValue: data.bool_value,
-    floatValue: data.float_value,
-    intValue: data.int_value,
+    boolValue: data.bool_value ?? null,
+    floatValue: data.float_value ?? null,
+    intValue: data.int_value ?? null,
     name: data.name,
-    stringValue: data.string_value,
+    stringValue: data.string_value ?? null,
   } as ClusterSetting
 }
 
@@ -134,11 +134,11 @@ export const unmarshalCluster = (data: unknown): Cluster => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
-    monoAz: data.mono_az ? unmarshalClusterMonoAZDetails(data.mono_az) : undefined,
-    multiAz: data.multi_az ? unmarshalClusterMultiAZDetails(data.multi_az) : undefined,
+    monoAz: data.mono_az ? unmarshalClusterMonoAZDetails(data.mono_az) : null,
+    multiAz: data.multi_az ? unmarshalClusterMultiAZDetails(data.multi_az) : null,
     name: data.name,
     nodeAmount: data.node_amount,
     nodeType: data.node_type,
@@ -148,9 +148,9 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     settings: unmarshalArrayOfObject(data.settings, unmarshalClusterSetting),
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     version: data.version,
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: data.volume ? unmarshalVolume(data.volume) : null,
   } as Cluster
 }
 
@@ -264,7 +264,7 @@ const unmarshalVersionAvailableSettingFloatProperty = (data: unknown): VersionAv
     defaultValue: data.default_value,
     max: data.max,
     min: data.min,
-    unit: data.unit,
+    unit: data.unit ?? null,
   } as VersionAvailableSettingFloatProperty
 }
 
@@ -279,7 +279,7 @@ const unmarshalVersionAvailableSettingIntegerProperty = (data: unknown): Version
     defaultValue: data.default_value,
     max: data.max,
     min: data.min,
-    unit: data.unit,
+    unit: data.unit ?? null,
   } as VersionAvailableSettingIntegerProperty
 }
 
@@ -292,7 +292,7 @@ const unmarshalVersionAvailableSettingStringProperty = (data: unknown): VersionA
 
   return {
     defaultValue: data.default_value,
-    stringConstraint: data.string_constraint,
+    stringConstraint: data.string_constraint ?? null,
   } as VersionAvailableSettingStringProperty
 }
 
@@ -304,13 +304,13 @@ const unmarshalVersionAvailableSetting = (data: unknown): VersionAvailableSettin
   }
 
   return {
-    boolProperty: data.bool_property ? unmarshalVersionAvailableSettingBooleanProperty(data.bool_property) : undefined,
+    boolProperty: data.bool_property ? unmarshalVersionAvailableSettingBooleanProperty(data.bool_property) : null,
     description: data.description,
-    floatProperty: data.float_property ? unmarshalVersionAvailableSettingFloatProperty(data.float_property) : undefined,
+    floatProperty: data.float_property ? unmarshalVersionAvailableSettingFloatProperty(data.float_property) : null,
     hotConfigurable: data.hot_configurable,
-    intProperty: data.int_property ? unmarshalVersionAvailableSettingIntegerProperty(data.int_property) : undefined,
+    intProperty: data.int_property ? unmarshalVersionAvailableSettingIntegerProperty(data.int_property) : null,
     name: data.name,
-    stringProperty: data.string_property ? unmarshalVersionAvailableSettingStringProperty(data.string_property) : undefined,
+    stringProperty: data.string_property ? unmarshalVersionAvailableSettingStringProperty(data.string_property) : null,
   } as VersionAvailableSetting
 }
 
@@ -323,7 +323,7 @@ const unmarshalVersion = (data: unknown): Version => {
 
   return {
     availableSettings: unmarshalArrayOfObject(data.available_settings, unmarshalVersionAvailableSetting),
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
     version: data.version,
   } as Version
 }
@@ -381,11 +381,11 @@ const marshalEndpointSpec = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'public_network',
-      value: (request.publicNetwork !== undefined) ? marshalEndpointSpecPublicDetails(request.publicNetwork, defaults)
+      value: (request.publicNetwork != null) ? marshalEndpointSpecPublicDetails(request.publicNetwork, defaults)
       : undefined,
     },
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
       : undefined,
     },
   ]),
@@ -395,7 +395,7 @@ export const marshalCreateClusterRequest = (
   request: CreateClusterRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  endpoints: ((request.endpoints != null) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
   name: request.name || randomName('kafk'),
   node_amount: request.nodeAmount,
   node_type: request.nodeType,
@@ -404,14 +404,14 @@ export const marshalCreateClusterRequest = (
   tags: request.tags,
   user_name: request.userName,
   version: request.version,
-  volume: ((request.volume !== undefined) ?  marshalCreateClusterRequestVolumeSpec(request.volume, defaults): undefined),  
+  volume: ((request.volume != null) ?  marshalCreateClusterRequestVolumeSpec(request.volume, defaults): undefined),  
   ...resolveOneOf([
     {param: 'multi_az',
-      value: (request.multiAz !== undefined) ? marshalClusterMultiAZDetails(request.multiAz, defaults)
+      value: (request.multiAz != null) ? marshalClusterMultiAZDetails(request.multiAz, defaults)
       : undefined,
     },
     {param: 'mono_az',
-      value: (request.monoAz !== undefined) ? marshalClusterMonoAZDetails(request.monoAz, defaults)
+      value: (request.monoAz != null) ? marshalClusterMonoAZDetails(request.monoAz, defaults)
       : undefined,
     },
   ]),

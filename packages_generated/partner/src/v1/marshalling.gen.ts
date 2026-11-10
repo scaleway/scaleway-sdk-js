@@ -20,18 +20,18 @@ export const unmarshalOrganization = (data: unknown): Organization => {
 
   return {
     comment: data.comment,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     customerId: data.customer_id,
     email: data.email,
     id: data.id,
     lockReasonMessage: data.lock_reason_message,
-    lockedAt: unmarshalDate(data.locked_at),
+    lockedAt: unmarshalDate(data.locked_at) ?? null,
     lockedBy: data.locked_by,
     name: data.name,
     ownerFirstname: data.owner_firstname,
     ownerLastname: data.owner_lastname,
-    phoneNumber: data.phone_number,
-    pictureLink: data.picture_link,
+    phoneNumber: data.phone_number ?? null,
+    pictureLink: data.picture_link ?? null,
     srn: data.srn,
     status: data.status,
   } as Organization

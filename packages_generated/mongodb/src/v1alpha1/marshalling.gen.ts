@@ -76,8 +76,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     id: data.id,
     ips: data.ips,
     port: data.port,
-    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
-    public: data.public ? unmarshalEndpointPublicDetails(data.public) : undefined,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : null,
+    public: data.public ? unmarshalEndpointPublicDetails(data.public) : null,
   } as Endpoint
 }
 
@@ -104,8 +104,8 @@ const unmarshalInstanceSnapshotSchedule = (data: unknown): InstanceSnapshotSched
   return {
     enabled: data.enabled,
     frequencyHours: data.frequency_hours,
-    lastRun: unmarshalDate(data.last_run),
-    nextUpdate: unmarshalDate(data.next_update),
+    lastRun: unmarshalDate(data.last_run) ?? null,
+    nextUpdate: unmarshalDate(data.next_update) ?? null,
     retentionDays: data.retention_days,
   } as InstanceSnapshotSchedule
 }
@@ -131,7 +131,7 @@ export const unmarshalInstance = (data: unknown): Instance => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     id: data.id,
     name: data.name,
@@ -140,11 +140,11 @@ export const unmarshalInstance = (data: unknown): Instance => {
     projectId: data.project_id,
     region: data.region,
     settings: unmarshalArrayOfObject(data.settings, unmarshalInstanceSetting),
-    snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : undefined,
+    snapshotSchedule: data.snapshot_schedule ? unmarshalInstanceSnapshotSchedule(data.snapshot_schedule) : null,
     status: data.status,
     tags: data.tags,
     version: data.version,
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: data.volume ? unmarshalVolume(data.volume) : null,
   } as Instance
 }
 
@@ -168,8 +168,8 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     instanceId: data.instance_id,
     instanceName: data.instance_name,
@@ -178,8 +178,8 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     region: data.region,
     size: data.size,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-    volumeType: data.volume_type ? unmarshalSnapshotVolumeType(data.volume_type) : undefined,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    volumeType: data.volume_type ? unmarshalSnapshotVolumeType(data.volume_type) : null,
   } as Snapshot
 }
 
@@ -191,8 +191,8 @@ const unmarshalUserRole = (data: unknown): UserRole => {
   }
 
   return {
-    anyDatabase: data.any_database,
-    database: data.database,
+    anyDatabase: data.any_database ?? null,
+    database: data.database ?? null,
     role: data.role,
   } as UserRole
 }
@@ -308,15 +308,15 @@ const unmarshalSetting = (data: unknown): Setting => {
   return {
     defaultValue: data.default_value,
     description: data.description,
-    floatMax: data.float_max,
-    floatMin: data.float_min,
+    floatMax: data.float_max ?? null,
+    floatMin: data.float_min ?? null,
     hotConfigurable: data.hot_configurable,
-    intMax: data.int_max,
-    intMin: data.int_min,
+    intMax: data.int_max ?? null,
+    intMin: data.int_min ?? null,
     name: data.name,
     propertyType: data.property_type,
-    stringConstraint: data.string_constraint,
-    unit: data.unit,
+    stringConstraint: data.string_constraint ?? null,
+    unit: data.unit ?? null,
   } as Setting
 }
 
@@ -329,7 +329,7 @@ const unmarshalVersion = (data: unknown): Version => {
 
   return {
     availableSettings: unmarshalArrayOfObject(data.available_settings, unmarshalSetting),
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
     version: data.version,
   } as Version
 }
@@ -366,11 +366,11 @@ const marshalEndpointSpec = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'public',
-      value: (request.public !== undefined) ? marshalEndpointSpecPublicDetails(request.public, defaults)
+      value: (request.public != null) ? marshalEndpointSpecPublicDetails(request.public, defaults)
       : undefined,
     },
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalEndpointSpecPrivateNetworkDetails(request.privateNetwork, defaults)
       : undefined,
     },
   ]),
@@ -396,7 +396,7 @@ export const marshalCreateInstanceRequest = (
   request: CreateInstanceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoints: ((request.endpoints !== undefined) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  endpoints: ((request.endpoints != null) ?  request.endpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
   name: request.name || randomName('mgdb'),
   node_number: request.nodeNumber,
   node_type: request.nodeType,
@@ -405,7 +405,7 @@ export const marshalCreateInstanceRequest = (
   tags: request.tags,
   user_name: request.userName,
   version: request.version,
-  volume: ((request.volume !== undefined) ?  marshalCreateInstanceRequestVolumeDetails(request.volume, defaults): undefined),
+  volume: ((request.volume != null) ?  marshalCreateInstanceRequestVolumeDetails(request.volume, defaults): undefined),
 })
 
 export const marshalCreateSnapshotRequest = (
@@ -460,7 +460,7 @@ export const marshalSetUserRoleRequest = (
   request: SetUserRoleRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  roles: ((request.roles !== undefined) ?  request.roles.map(elt => marshalUserRole(elt, defaults)): undefined),
+  roles: ((request.roles != null) ?  request.roles.map(elt => marshalUserRole(elt, defaults)): undefined),
   user_name: request.userName,
 })
 

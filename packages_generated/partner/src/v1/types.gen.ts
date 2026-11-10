@@ -46,11 +46,11 @@ export interface Organization {
   /**
    * Date of organization creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Organization owner's phone number.
    */
-  phoneNumber?: string
+  phoneNumber?: string | null
   /**
    * Customer ID associated with this organization.
    */
@@ -66,11 +66,11 @@ export interface Organization {
   /**
    * Date of lock.
    */
-  lockedAt?: Date
+  lockedAt?: Date | null
   /**
    * Link to the Organization's picture.
    */
-  pictureLink?: string
+  pictureLink?: string | null
   /**
    * A comment about the organization.
    */
@@ -106,7 +106,7 @@ export type CreateOrganizationRequest = {
   /**
    * The phone number of the new organization owner.
    */
-  phoneNumber?: string
+  phoneNumber?: string | null
   /**
    * A custom ID for the customer in your own infrastructure.
    */
@@ -114,7 +114,7 @@ export type CreateOrganizationRequest = {
   /**
    * A comment about the organization.
    */
-  comment?: string
+  comment?: string | null
 }
 
 
@@ -122,31 +122,31 @@ export type GetOrganizationRequest = {
   /**
    * The ID of the organization you want to GET.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
 export type ListOrganizationsRequest = {
-  pageSize?: number
-  page?: number
-  orderBy?: ListOrganizationsRequestOrderBy
+  pageSize?: number | null
+  page?: number | null
+  orderBy?: ListOrganizationsRequestOrderBy | null
   /**
    * Only list organizations with this status.
    */
-  status?: OrganizationStatus
+  status?: OrganizationStatus | null
   /**
    * Only list organizations created with this email.
    */
-  email?: string
+  email?: string | null
   /**
    * Only list organizations attached to this Customer ID.
 If the customer ID was changed only the last one can be used.
    */
-  customerId?: string
+  customerId?: string | null
   /**
    * Only list organizations locked by a certain entity.
    */
-  lockedBy?: OrganizationLockedBy
+  lockedBy?: OrganizationLockedBy | null
 }
 
 
@@ -166,7 +166,7 @@ export type LockOrganizationRequest = {
   /**
    * The ID of the organization you want to lock.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -174,7 +174,7 @@ export type RequestAdminRoleRequest = {
   /**
    * The ID of the organization you want to be invited to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * The member username.
    */
@@ -194,7 +194,7 @@ export type UnlockOrganizationRequest = {
   /**
    * The ID of the organization you want to unlock.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -202,37 +202,37 @@ export type UpdateOrganizationRequest = {
   /**
    * The ID of the organization you want to update.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * The new email.
    */
-  email?: string
+  email?: string | null
   /**
    * The new name.
    */
-  name?: string
+  name?: string | null
   /**
    * The first name of the new owner.
    */
-  ownerFirstname?: string
+  ownerFirstname?: string | null
   /**
    * The last name of the new owner.
    */
-  ownerLastname?: string
+  ownerLastname?: string | null
   /**
    * The phone number of the new owner.
    */
-  phoneNumber?: string
+  phoneNumber?: string | null
   /**
    * Customer ID associated with this organization.
 Warning: Changing this value will only affect future invoices.
 If you try to change this value after the 25th of the month, we cannot guarantee that this will take effect on the invoice issued for the current month.
    */
-  customerId?: string
+  customerId?: string | null
   /**
    * A comment about the organization.
    */
-  comment?: string
+  comment?: string | null
 }
 
 

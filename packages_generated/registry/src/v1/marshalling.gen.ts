@@ -23,15 +23,15 @@ export const unmarshalImage = (data: unknown): Image => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     namespaceId: data.namespace_id,
     size: data.size,
     status: data.status,
-    statusMessage: data.status_message,
+    statusMessage: data.status_message ?? null,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     visibility: data.visibility,
   } as Image
 }
@@ -44,7 +44,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     endpoint: data.endpoint,
     id: data.id,
@@ -57,7 +57,7 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     size: data.size,
     status: data.status,
     statusMessage: data.status_message,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Namespace
 }
 
@@ -69,13 +69,13 @@ export const unmarshalTag = (data: unknown): Tag => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     digest: data.digest,
     id: data.id,
     imageId: data.image_id,
     name: data.name,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Tag
 }
 

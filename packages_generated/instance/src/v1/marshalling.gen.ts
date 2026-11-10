@@ -151,7 +151,7 @@ export const unmarshalPrivateNIC = (data: unknown): PrivateNIC => {
   }
 
   return {
-    creationDate: unmarshalDate(data.creation_date),
+    creationDate: unmarshalDate(data.creation_date) ?? null,
     id: data.id,
     ipamIpIds: data.ipam_ip_ids,
     macAddress: data.mac_address,
@@ -207,14 +207,14 @@ const unmarshalVolume = (data: unknown): Volume => {
   }
 
   return {
-    creationDate: unmarshalDate(data.creation_date),
-    exportUri: data.export_uri,
+    creationDate: unmarshalDate(data.creation_date) ?? null,
+    exportUri: data.export_uri ?? null,
     id: data.id,
-    modificationDate: unmarshalDate(data.modification_date),
+    modificationDate: unmarshalDate(data.modification_date) ?? null,
     name: data.name,
     organization: data.organization,
     project: data.project,
-    server: data.server ? unmarshalServerSummary(data.server) : undefined,
+    server: data.server ? unmarshalServerSummary(data.server) : null,
     size: data.size,
     state: data.state,
     tags: data.tags,
@@ -247,17 +247,17 @@ const unmarshalImage = (data: unknown): Image => {
 
   return {
     arch: data.arch,
-    creationDate: unmarshalDate(data.creation_date),
-    defaultBootscript: data.default_bootscript ? unmarshalBootscript(data.default_bootscript) : undefined,
+    creationDate: unmarshalDate(data.creation_date) ?? null,
+    defaultBootscript: data.default_bootscript ? unmarshalBootscript(data.default_bootscript) : null,
     extraVolumes: unmarshalMapOfObject(data.extra_volumes, unmarshalVolume),
     fromServer: data.from_server,
     id: data.id,
-    modificationDate: unmarshalDate(data.modification_date),
+    modificationDate: unmarshalDate(data.modification_date) ?? null,
     name: data.name,
     organization: data.organization,
     project: data.project,
     public: data.public,
-    rootVolume: data.root_volume ? unmarshalVolumeSummary(data.root_volume) : undefined,
+    rootVolume: data.root_volume ? unmarshalVolumeSummary(data.root_volume) : null,
     state: data.state,
     tags: data.tags,
     zone: data.zone,
@@ -370,7 +370,7 @@ const unmarshalServerMaintenance = (data: unknown): ServerMaintenance => {
 
   return {
     reason: data.reason,
-    startDate: unmarshalDate(data.start_date),
+    startDate: unmarshalDate(data.start_date) ?? null,
   } as ServerMaintenance
 }
 
@@ -383,16 +383,16 @@ const unmarshalVolumeServer = (data: unknown): VolumeServer => {
 
   return {
     boot: data.boot,
-    creationDate: unmarshalDate(data.creation_date),
-    exportUri: data.export_uri,
+    creationDate: unmarshalDate(data.creation_date) ?? null,
+    exportUri: data.export_uri ?? null,
     id: data.id,
-    modificationDate: unmarshalDate(data.modification_date),
-    name: data.name,
-    organization: data.organization,
-    project: data.project,
-    server: data.server ? unmarshalServerSummary(data.server) : undefined,
-    size: data.size,
-    state: data.state ? data.state : undefined,
+    modificationDate: unmarshalDate(data.modification_date) ?? null,
+    name: data.name ?? null,
+    organization: data.organization ?? null,
+    project: data.project ?? null,
+    server: data.server ? unmarshalServerSummary(data.server) : null,
+    size: data.size ?? null,
+    state: data.state ? data.state : null,
     volumeType: data.volume_type,
     zone: data.zone,
   } as VolumeServer
@@ -406,37 +406,37 @@ const unmarshalServer = (data: unknown): Server => {
   }
 
   return {
-    adminPasswordEncryptedValue: data.admin_password_encrypted_value,
-    adminPasswordEncryptionSshKeyId: data.admin_password_encryption_ssh_key_id,
+    adminPasswordEncryptedValue: data.admin_password_encrypted_value ?? null,
+    adminPasswordEncryptionSshKeyId: data.admin_password_encryption_ssh_key_id ?? null,
     allowedActions: data.allowed_actions,
     arch: data.arch,
     bootType: data.boot_type,
     commercialType: data.commercial_type,
-    creationDate: unmarshalDate(data.creation_date),
-    dns: data.dns,
+    creationDate: unmarshalDate(data.creation_date) ?? null,
+    dns: data.dns ?? null,
     dynamicIpRequired: data.dynamic_ip_required,
-    enableIpv6: data.enable_ipv6,
+    enableIpv6: data.enable_ipv6 ?? null,
     endOfService: data.end_of_service,
     filesystems: unmarshalArrayOfObject(data.filesystems, unmarshalServerFilesystem),
     hostname: data.hostname,
     id: data.id,
-    image: data.image ? unmarshalImage(data.image) : undefined,
-    ipv6: data.ipv6 ? unmarshalServerIpv6(data.ipv6) : undefined,
-    location: data.location ? unmarshalServerLocation(data.location) : undefined,
+    image: data.image ? unmarshalImage(data.image) : null,
+    ipv6: data.ipv6 ? unmarshalServerIpv6(data.ipv6) : null,
+    location: data.location ? unmarshalServerLocation(data.location) : null,
     macAddress: data.mac_address,
     maintenances: unmarshalArrayOfObject(data.maintenances, unmarshalServerMaintenance),
-    modificationDate: unmarshalDate(data.modification_date),
+    modificationDate: unmarshalDate(data.modification_date) ?? null,
     name: data.name,
     organization: data.organization,
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
-    privateIp: data.private_ip,
+    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : null,
+    privateIp: data.private_ip ?? null,
     privateNics: unmarshalArrayOfObject(data.private_nics, unmarshalPrivateNIC),
     project: data.project,
     protected: data.protected,
-    publicIp: data.public_ip ? unmarshalServerIp(data.public_ip) : undefined,
+    publicIp: data.public_ip ? unmarshalServerIp(data.public_ip) : null,
     publicIps: unmarshalArrayOfObject(data.public_ips, unmarshalServerIp),
-    routedIpEnabled: data.routed_ip_enabled,
-    securityGroup: data.security_group ? unmarshalSecurityGroupSummary(data.security_group) : undefined,
+    routedIpEnabled: data.routed_ip_enabled ?? null,
+    securityGroup: data.security_group ? unmarshalSecurityGroupSummary(data.security_group) : null,
     state: data.state,
     stateDetail: data.state_detail,
     tags: data.tags,
@@ -453,7 +453,7 @@ export const unmarshalAttachServerFileSystemResponse = (data: unknown): AttachSe
   }
 
   return {
-    server: data.server ? unmarshalServer(data.server) : undefined,
+    server: data.server ? unmarshalServer(data.server) : null,
   } as AttachServerFileSystemResponse
 }
 
@@ -465,7 +465,7 @@ export const unmarshalAttachServerVolumeResponse = (data: unknown): AttachServer
   }
 
   return {
-    server: data.server ? unmarshalServer(data.server) : undefined,
+    server: data.server ? unmarshalServer(data.server) : null,
   } as AttachServerVolumeResponse
 }
 
@@ -477,7 +477,7 @@ export const unmarshalCreateImageResponse = (data: unknown): CreateImageResponse
   }
 
   return {
-    image: data.image ? unmarshalImage(data.image) : undefined,
+    image: data.image ? unmarshalImage(data.image) : null,
   } as CreateImageResponse
 }
 
@@ -495,8 +495,8 @@ const unmarshalIp = (data: unknown): Ip => {
     organization: data.organization,
     prefix: data.prefix,
     project: data.project,
-    reverse: data.reverse,
-    server: data.server ? unmarshalServerSummary(data.server) : undefined,
+    reverse: data.reverse ?? null,
+    server: data.server ? unmarshalServerSummary(data.server) : null,
     state: data.state,
     tags: data.tags,
     type: data.type,
@@ -512,7 +512,7 @@ export const unmarshalCreateIpResponse = (data: unknown): CreateIpResponse => {
   }
 
   return {
-    ip: data.ip ? unmarshalIp(data.ip) : undefined,
+    ip: data.ip ? unmarshalIp(data.ip) : null,
   } as CreateIpResponse
 }
 
@@ -524,7 +524,7 @@ export const unmarshalCreatePlacementGroupResponse = (data: unknown): CreatePlac
   }
 
   return {
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : null,
   } as CreatePlacementGroupResponse
 }
 
@@ -536,7 +536,7 @@ export const unmarshalCreatePrivateNICResponse = (data: unknown): CreatePrivateN
   }
 
   return {
-    privateNic: data.private_nic ? unmarshalPrivateNIC(data.private_nic) : undefined,
+    privateNic: data.private_nic ? unmarshalPrivateNIC(data.private_nic) : null,
   } as CreatePrivateNICResponse
 }
 
@@ -548,15 +548,15 @@ const unmarshalSecurityGroup = (data: unknown): SecurityGroup => {
   }
 
   return {
-    creationDate: unmarshalDate(data.creation_date),
+    creationDate: unmarshalDate(data.creation_date) ?? null,
     description: data.description,
     enableDefaultSecurity: data.enable_default_security,
     id: data.id,
     inboundDefaultPolicy: data.inbound_default_policy,
-    modificationDate: unmarshalDate(data.modification_date),
+    modificationDate: unmarshalDate(data.modification_date) ?? null,
     name: data.name,
     organization: data.organization,
-    organizationDefault: data.organization_default,
+    organizationDefault: data.organization_default ?? null,
     outboundDefaultPolicy: data.outbound_default_policy,
     project: data.project,
     projectDefault: data.project_default,
@@ -576,7 +576,7 @@ export const unmarshalCreateSecurityGroupResponse = (data: unknown): CreateSecur
   }
 
   return {
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : null,
   } as CreateSecurityGroupResponse
 }
 
@@ -589,8 +589,8 @@ const unmarshalSecurityGroupRule = (data: unknown): SecurityGroupRule => {
 
   return {
     action: data.action,
-    destPortFrom: data.dest_port_from,
-    destPortTo: data.dest_port_to,
+    destPortFrom: data.dest_port_from ?? null,
+    destPortTo: data.dest_port_to ?? null,
     direction: data.direction,
     editable: data.editable,
     id: data.id,
@@ -609,7 +609,7 @@ export const unmarshalCreateSecurityGroupRuleResponse = (data: unknown): CreateS
   }
 
   return {
-    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : undefined,
+    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : null,
   } as CreateSecurityGroupRuleResponse
 }
 
@@ -621,7 +621,7 @@ export const unmarshalCreateServerResponse = (data: unknown): CreateServerRespon
   }
 
   return {
-    server: data.server ? unmarshalServer(data.server) : undefined,
+    server: data.server ? unmarshalServer(data.server) : null,
   } as CreateServerResponse
 }
 
@@ -646,11 +646,11 @@ const unmarshalSnapshot = (data: unknown): Snapshot => {
   }
 
   return {
-    baseVolume: data.base_volume ? unmarshalSnapshotBaseVolume(data.base_volume) : undefined,
-    creationDate: unmarshalDate(data.creation_date),
-    errorReason: data.error_reason,
+    baseVolume: data.base_volume ? unmarshalSnapshotBaseVolume(data.base_volume) : null,
+    creationDate: unmarshalDate(data.creation_date) ?? null,
+    errorReason: data.error_reason ?? null,
     id: data.id,
-    modificationDate: unmarshalDate(data.modification_date),
+    modificationDate: unmarshalDate(data.modification_date) ?? null,
     name: data.name,
     organization: data.organization,
     project: data.project,
@@ -675,9 +675,9 @@ const unmarshalTask = (data: unknown): Task => {
     hrefResult: data.href_result,
     id: data.id,
     progress: data.progress,
-    startedAt: unmarshalDate(data.started_at),
+    startedAt: unmarshalDate(data.started_at) ?? null,
     status: data.status,
-    terminatedAt: unmarshalDate(data.terminated_at),
+    terminatedAt: unmarshalDate(data.terminated_at) ?? null,
     zone: data.zone,
   } as Task
 }
@@ -690,8 +690,8 @@ export const unmarshalCreateSnapshotResponse = (data: unknown): CreateSnapshotRe
   }
 
   return {
-    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : undefined,
-    task: data.task ? unmarshalTask(data.task) : undefined,
+    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : null,
+    task: data.task ? unmarshalTask(data.task) : null,
   } as CreateSnapshotResponse
 }
 
@@ -703,7 +703,7 @@ export const unmarshalCreateVolumeResponse = (data: unknown): CreateVolumeRespon
   }
 
   return {
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: data.volume ? unmarshalVolume(data.volume) : null,
   } as CreateVolumeResponse
 }
 
@@ -715,7 +715,7 @@ export const unmarshalDetachServerFileSystemResponse = (data: unknown): DetachSe
   }
 
   return {
-    server: data.server ? unmarshalServer(data.server) : undefined,
+    server: data.server ? unmarshalServer(data.server) : null,
   } as DetachServerFileSystemResponse
 }
 
@@ -727,7 +727,7 @@ export const unmarshalDetachServerVolumeResponse = (data: unknown): DetachServer
   }
 
   return {
-    server: data.server ? unmarshalServer(data.server) : undefined,
+    server: data.server ? unmarshalServer(data.server) : null,
   } as DetachServerVolumeResponse
 }
 
@@ -739,7 +739,7 @@ export const unmarshalExportSnapshotResponse = (data: unknown): ExportSnapshotRe
   }
 
   return {
-    task: data.task ? unmarshalTask(data.task) : undefined,
+    task: data.task ? unmarshalTask(data.task) : null,
   } as ExportSnapshotResponse
 }
 
@@ -761,8 +761,8 @@ const unmarshalDashboard = (data: unknown): Dashboard => {
     serversByTypes: data.servers_by_types,
     serversCount: data.servers_count,
     snapshotsCount: data.snapshots_count,
-    volumesBSsdCount: data.volumes_b_ssd_count,
-    volumesBSsdTotalSize: data.volumes_b_ssd_total_size,
+    volumesBSsdCount: data.volumes_b_ssd_count ?? null,
+    volumesBSsdTotalSize: data.volumes_b_ssd_total_size ?? null,
     volumesCount: data.volumes_count,
     volumesLSsdCount: data.volumes_l_ssd_count,
     volumesLSsdTotalSize: data.volumes_l_ssd_total_size,
@@ -778,7 +778,7 @@ export const unmarshalGetDashboardResponse = (data: unknown): GetDashboardRespon
   }
 
   return {
-    dashboard: data.dashboard ? unmarshalDashboard(data.dashboard) : undefined,
+    dashboard: data.dashboard ? unmarshalDashboard(data.dashboard) : null,
   } as GetDashboardResponse
 }
 
@@ -790,7 +790,7 @@ export const unmarshalGetImageResponse = (data: unknown): GetImageResponse => {
   }
 
   return {
-    image: data.image ? unmarshalImage(data.image) : undefined,
+    image: data.image ? unmarshalImage(data.image) : null,
   } as GetImageResponse
 }
 
@@ -802,7 +802,7 @@ export const unmarshalGetIpResponse = (data: unknown): GetIpResponse => {
   }
 
   return {
-    ip: data.ip ? unmarshalIp(data.ip) : undefined,
+    ip: data.ip ? unmarshalIp(data.ip) : null,
   } as GetIpResponse
 }
 
@@ -814,7 +814,7 @@ export const unmarshalGetPlacementGroupResponse = (data: unknown): GetPlacementG
   }
 
   return {
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : null,
   } as GetPlacementGroupResponse
 }
 
@@ -852,7 +852,7 @@ export const unmarshalGetPrivateNICResponse = (data: unknown): GetPrivateNICResp
   }
 
   return {
-    privateNic: data.private_nic ? unmarshalPrivateNIC(data.private_nic) : undefined,
+    privateNic: data.private_nic ? unmarshalPrivateNIC(data.private_nic) : null,
   } as GetPrivateNICResponse
 }
 
@@ -864,7 +864,7 @@ export const unmarshalGetSecurityGroupResponse = (data: unknown): GetSecurityGro
   }
 
   return {
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : null,
   } as GetSecurityGroupResponse
 }
 
@@ -876,7 +876,7 @@ export const unmarshalGetSecurityGroupRuleResponse = (data: unknown): GetSecurit
   }
 
   return {
-    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : undefined,
+    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : null,
   } as GetSecurityGroupRuleResponse
 }
 
@@ -888,7 +888,7 @@ export const unmarshalGetServerResponse = (data: unknown): GetServerResponse => 
   }
 
   return {
-    server: data.server ? unmarshalServer(data.server) : undefined,
+    server: data.server ? unmarshalServer(data.server) : null,
   } as GetServerResponse
 }
 
@@ -925,7 +925,7 @@ export const unmarshalGetSnapshotResponse = (data: unknown): GetSnapshotResponse
   }
 
   return {
-    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : undefined,
+    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : null,
   } as GetSnapshotResponse
 }
 
@@ -937,7 +937,7 @@ export const unmarshalGetVolumeResponse = (data: unknown): GetVolumeResponse => 
   }
 
   return {
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: data.volume ? unmarshalVolume(data.volume) : null,
   } as GetVolumeResponse
 }
 
@@ -1064,8 +1064,8 @@ const unmarshalServerTypeNetworkInterface = (data: unknown): ServerTypeNetworkIn
   }
 
   return {
-    internalBandwidth: data.internal_bandwidth,
-    internetBandwidth: data.internet_bandwidth,
+    internalBandwidth: data.internal_bandwidth ?? null,
+    internetBandwidth: data.internet_bandwidth ?? null,
   } as ServerTypeNetworkInterface
 }
 
@@ -1090,7 +1090,7 @@ const unmarshalServerTypeCapabilities = (data: unknown): ServerTypeCapabilities 
   }
 
   return {
-    blockStorage: data.block_storage,
+    blockStorage: data.block_storage ?? null,
     bootTypes: data.boot_types,
     maxFileSystems: data.max_file_systems,
   } as ServerTypeCapabilities
@@ -1120,8 +1120,8 @@ const unmarshalServerTypeNetwork = (data: unknown): ServerTypeNetwork => {
   return {
     interfaces: unmarshalArrayOfObject(data.interfaces, unmarshalServerTypeNetworkInterface),
     ipv6Support: data.ipv6_support,
-    sumInternalBandwidth: data.sum_internal_bandwidth,
-    sumInternetBandwidth: data.sum_internet_bandwidth,
+    sumInternalBandwidth: data.sum_internal_bandwidth ?? null,
+    sumInternetBandwidth: data.sum_internet_bandwidth ?? null,
   } as ServerTypeNetwork
 }
 
@@ -1133,7 +1133,7 @@ const unmarshalServerTypeVolumeConstraintsByType = (data: unknown): ServerTypeVo
   }
 
   return {
-    lSsd: data.l_ssd ? unmarshalServerTypeVolumeConstraintSizes(data.l_ssd) : undefined,
+    lSsd: data.l_ssd ? unmarshalServerTypeVolumeConstraintSizes(data.l_ssd) : null,
   } as ServerTypeVolumeConstraintsByType
 }
 
@@ -1147,21 +1147,21 @@ const unmarshalServerType = (data: unknown): ServerType => {
   return {
     altNames: data.alt_names,
     arch: data.arch,
-    blockBandwidth: data.block_bandwidth,
-    capabilities: data.capabilities ? unmarshalServerTypeCapabilities(data.capabilities) : undefined,
+    blockBandwidth: data.block_bandwidth ?? null,
+    capabilities: data.capabilities ? unmarshalServerTypeCapabilities(data.capabilities) : null,
     endOfService: data.end_of_service,
-    gpu: data.gpu,
-    gpuInfo: data.gpu_info ? unmarshalServerTypeGPUInfo(data.gpu_info) : undefined,
+    gpu: data.gpu ?? null,
+    gpuInfo: data.gpu_info ? unmarshalServerTypeGPUInfo(data.gpu_info) : null,
     hourlyPrice: data.hourly_price,
-    monthlyPrice: data.monthly_price,
+    monthlyPrice: data.monthly_price ?? null,
     ncpus: data.ncpus,
-    network: data.network ? unmarshalServerTypeNetwork(data.network) : undefined,
-    perVolumeConstraint: data.per_volume_constraint ? unmarshalServerTypeVolumeConstraintsByType(data.per_volume_constraint) : undefined,
+    network: data.network ? unmarshalServerTypeNetwork(data.network) : null,
+    perVolumeConstraint: data.per_volume_constraint ? unmarshalServerTypeVolumeConstraintsByType(data.per_volume_constraint) : null,
     ram: data.ram,
-    scratchStorageMaxSize: data.scratch_storage_max_size,
+    scratchStorageMaxSize: data.scratch_storage_max_size ?? null,
     scratchStorageMaxVolumesCount: data.scratch_storage_max_volumes_count,
     sku: data.sku,
-    volumesConstraint: data.volumes_constraint ? unmarshalServerTypeVolumeConstraintSizes(data.volumes_constraint) : undefined,
+    volumesConstraint: data.volumes_constraint ? unmarshalServerTypeVolumeConstraintSizes(data.volumes_constraint) : null,
   } as ServerType
 }
 
@@ -1237,8 +1237,8 @@ const unmarshalVolumeType = (data: unknown): VolumeType => {
   }
 
   return {
-    capabilities: data.capabilities ? unmarshalVolumeTypeCapabilities(data.capabilities) : undefined,
-    constraints: data.constraints ? unmarshalVolumeTypeConstraints(data.constraints) : undefined,
+    capabilities: data.capabilities ? unmarshalVolumeTypeCapabilities(data.capabilities) : null,
+    constraints: data.constraints ? unmarshalVolumeTypeConstraints(data.constraints) : null,
     displayName: data.display_name,
   } as VolumeType
 }
@@ -1266,7 +1266,7 @@ export const unmarshalMigrationPlan = (data: unknown): MigrationPlan => {
   return {
     snapshots: unmarshalArrayOfObject(data.snapshots, unmarshalSnapshot),
     validationKey: data.validation_key,
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: data.volume ? unmarshalVolume(data.volume) : null,
   } as MigrationPlan
 }
 
@@ -1278,7 +1278,7 @@ export const unmarshalServerActionResponse = (data: unknown): ServerActionRespon
   }
 
   return {
-    task: data.task ? unmarshalTask(data.task) : undefined,
+    task: data.task ? unmarshalTask(data.task) : null,
   } as ServerActionResponse
 }
 
@@ -1302,7 +1302,7 @@ export const unmarshalSetImageResponse = (data: unknown): SetImageResponse => {
   }
 
   return {
-    image: data.image ? unmarshalImage(data.image) : undefined,
+    image: data.image ? unmarshalImage(data.image) : null,
   } as SetImageResponse
 }
 
@@ -1314,7 +1314,7 @@ export const unmarshalSetPlacementGroupResponse = (data: unknown): SetPlacementG
   }
 
   return {
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : null,
   } as SetPlacementGroupResponse
 }
 
@@ -1338,7 +1338,7 @@ export const unmarshalSetSecurityGroupResponse = (data: unknown): SetSecurityGro
   }
 
   return {
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : null,
   } as SetSecurityGroupResponse
 }
 
@@ -1350,7 +1350,7 @@ export const unmarshalSetSecurityGroupRuleResponse = (data: unknown): SetSecurit
   }
 
   return {
-    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : undefined,
+    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : null,
   } as SetSecurityGroupRuleResponse
 }
 
@@ -1374,7 +1374,7 @@ export const unmarshalSetServerResponse = (data: unknown): SetServerResponse => 
   }
 
   return {
-    server: data.server ? unmarshalServer(data.server) : undefined,
+    server: data.server ? unmarshalServer(data.server) : null,
   } as SetServerResponse
 }
 
@@ -1386,7 +1386,7 @@ export const unmarshalSetSnapshotResponse = (data: unknown): SetSnapshotResponse
   }
 
   return {
-    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : undefined,
+    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : null,
   } as SetSnapshotResponse
 }
 
@@ -1398,7 +1398,7 @@ export const unmarshalUpdateImageResponse = (data: unknown): UpdateImageResponse
   }
 
   return {
-    image: data.image ? unmarshalImage(data.image) : undefined,
+    image: data.image ? unmarshalImage(data.image) : null,
   } as UpdateImageResponse
 }
 
@@ -1410,7 +1410,7 @@ export const unmarshalUpdateIpResponse = (data: unknown): UpdateIpResponse => {
   }
 
   return {
-    ip: data.ip ? unmarshalIp(data.ip) : undefined,
+    ip: data.ip ? unmarshalIp(data.ip) : null,
   } as UpdateIpResponse
 }
 
@@ -1422,7 +1422,7 @@ export const unmarshalUpdatePlacementGroupResponse = (data: unknown): UpdatePlac
   }
 
   return {
-    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : undefined,
+    placementGroup: data.placement_group ? unmarshalPlacementGroup(data.placement_group) : null,
   } as UpdatePlacementGroupResponse
 }
 
@@ -1446,7 +1446,7 @@ export const unmarshalUpdateSecurityGroupResponse = (data: unknown): UpdateSecur
   }
 
   return {
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : null,
   } as UpdateSecurityGroupResponse
 }
 
@@ -1458,7 +1458,7 @@ export const unmarshalUpdateSecurityGroupRuleResponse = (data: unknown): UpdateS
   }
 
   return {
-    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : undefined,
+    rule: data.rule ? unmarshalSecurityGroupRule(data.rule) : null,
   } as UpdateSecurityGroupRuleResponse
 }
 
@@ -1470,7 +1470,7 @@ export const unmarshalUpdateServerResponse = (data: unknown): UpdateServerRespon
   }
 
   return {
-    server: data.server ? unmarshalServer(data.server) : undefined,
+    server: data.server ? unmarshalServer(data.server) : null,
   } as UpdateServerResponse
 }
 
@@ -1482,7 +1482,7 @@ export const unmarshalUpdateSnapshotResponse = (data: unknown): UpdateSnapshotRe
   }
 
   return {
-    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : undefined,
+    snapshot: data.snapshot ? unmarshalSnapshot(data.snapshot) : null,
   } as UpdateSnapshotResponse
 }
 
@@ -1494,7 +1494,7 @@ export const unmarshalUpdateVolumeResponse = (data: unknown): UpdateVolumeRespon
   }
 
   return {
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: data.volume ? unmarshalVolume(data.volume) : null,
   } as UpdateVolumeResponse
 }
 
@@ -1559,7 +1559,7 @@ export const marshalCreateImageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   arch: request.arch,
-  extra_volumes: ((request.extraVolumes !== undefined) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeTemplate(value, defaults) }), {}): undefined),
+  extra_volumes: ((request.extraVolumes != null) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeTemplate(value, defaults) }), {}): undefined),
   name: request.name || randomName('img'),
   public: request.public,
   root_volume: request.rootVolume,
@@ -1694,7 +1694,7 @@ export const marshalCreateServerRequest = (
   routed_ip_enabled: request.routedIpEnabled,
   security_group: request.securityGroup,
   tags: request.tags,
-  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeServerTemplate(value, defaults) }), {}): undefined),  
+  volumes: ((request.volumes != null) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeServerTemplate(value, defaults) }), {}): undefined),  
   ...resolveOneOf([
     {default: defaults.defaultProjectId,param: 'project',
       value: request.project,
@@ -1801,7 +1801,7 @@ export const marshalServerActionRequest = (
   action: request.action,
   disable_ipv6: request.disableIpv6,
   name: request.name,
-  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalServerActionRequestVolumeBackupTemplate(value, defaults) }), {}): undefined),
+  volumes: ((request.volumes != null) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalServerActionRequestVolumeBackupTemplate(value, defaults) }), {}): undefined),
 })
 
 const marshalServerSummary = (
@@ -1841,7 +1841,7 @@ const marshalVolume = (
   name: request.name,
   organization: request.organization,
   project: request.project,
-  server: ((request.server !== undefined) ?  marshalServerSummary(request.server, defaults): undefined),
+  server: ((request.server != null) ?  marshalServerSummary(request.server, defaults): undefined),
   size: request.size,
   state: request.state,
   tags: request.tags,
@@ -1865,15 +1865,15 @@ export const marshalSetImageRequest = (
 ): Record<string, unknown> => ({
   arch: request.arch,
   creation_date: request.creationDate,
-  default_bootscript: ((request.defaultBootscript !== undefined) ?  marshalBootscript(request.defaultBootscript, defaults): undefined),
-  extra_volumes: ((request.extraVolumes !== undefined) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }), {}): undefined),
+  default_bootscript: ((request.defaultBootscript != null) ?  marshalBootscript(request.defaultBootscript, defaults): undefined),
+  extra_volumes: ((request.extraVolumes != null) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }), {}): undefined),
   from_server: request.fromServer,
   modification_date: request.modificationDate,
   name: request.name,
   organization: request.organization ?? defaults.defaultOrganizationId,
   project: request.project ?? defaults.defaultProjectId,
   public: request.public,
-  root_volume: ((request.rootVolume !== undefined) ?  marshalVolumeSummary(request.rootVolume, defaults): undefined),
+  root_volume: ((request.rootVolume != null) ?  marshalVolumeSummary(request.rootVolume, defaults): undefined),
   state: request.state,
   tags: request.tags,
 })
@@ -1912,7 +1912,7 @@ export const marshalSetSecurityGroupRequest = (
   outbound_default_policy: request.outboundDefaultPolicy,
   project: request.project ?? defaults.defaultProjectId,
   project_default: request.projectDefault,
-  servers: ((request.servers !== undefined) ?  request.servers.map(elt => marshalServerSummary(elt, defaults)): undefined),
+  servers: ((request.servers != null) ?  request.servers.map(elt => marshalServerSummary(elt, defaults)): undefined),
   stateful: request.stateful,
   tags: request.tags,
 })
@@ -1952,7 +1952,7 @@ export const marshalSetSecurityGroupRulesRequest = (
   request: SetSecurityGroupRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  rules: ((request.rules !== undefined) ?  request.rules.map(elt => marshalSetSecurityGroupRulesRequestRule(elt, defaults)): undefined),
+  rules: ((request.rules != null) ?  request.rules.map(elt => marshalSetSecurityGroupRulesRequestRule(elt, defaults)): undefined),
 })
 
 const marshalImage = (
@@ -1961,7 +1961,7 @@ const marshalImage = (
 ): Record<string, unknown> => ({
   arch: request.arch,
   creation_date: request.creationDate,
-  default_bootscript: ((request.defaultBootscript !== undefined) ?  marshalBootscript(request.defaultBootscript, defaults): undefined),
+  default_bootscript: ((request.defaultBootscript != null) ?  marshalBootscript(request.defaultBootscript, defaults): undefined),
   extra_volumes:  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }), {}),
   from_server: request.fromServer,
   id: request.id,
@@ -1970,7 +1970,7 @@ const marshalImage = (
   organization: request.organization,
   project: request.project,
   public: request.public,
-  root_volume: ((request.rootVolume !== undefined) ?  marshalVolumeSummary(request.rootVolume, defaults): undefined),
+  root_volume: ((request.rootVolume != null) ?  marshalVolumeSummary(request.rootVolume, defaults): undefined),
   state: request.state,
   tags: request.tags,
   zone: request.zone,
@@ -2063,7 +2063,7 @@ export const marshalSetServerRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   admin_password_encryption_ssh_key_id: request.adminPasswordEncryptionSshKeyId,
-  allowed_actions: ((request.allowedActions !== undefined) ?  request.allowedActions: undefined),
+  allowed_actions: ((request.allowedActions != null) ?  request.allowedActions: undefined),
   arch: request.arch,
   boot_type: request.bootType,
   commercial_type: request.commercialType,
@@ -2071,26 +2071,26 @@ export const marshalSetServerRequest = (
   dynamic_ip_required: request.dynamicIpRequired,
   enable_ipv6: request.enableIpv6,
   hostname: request.hostname,
-  image: ((request.image !== undefined) ?  marshalImage(request.image, defaults): undefined),
-  ipv6: ((request.ipv6 !== undefined) ?  marshalServerIpv6(request.ipv6, defaults): undefined),
-  location: ((request.location !== undefined) ?  marshalServerLocation(request.location, defaults): undefined),
-  maintenances: ((request.maintenances !== undefined) ?  request.maintenances.map(elt => marshalServerMaintenance(elt, defaults)): undefined),
+  image: ((request.image != null) ?  marshalImage(request.image, defaults): undefined),
+  ipv6: ((request.ipv6 != null) ?  marshalServerIpv6(request.ipv6, defaults): undefined),
+  location: ((request.location != null) ?  marshalServerLocation(request.location, defaults): undefined),
+  maintenances: ((request.maintenances != null) ?  request.maintenances.map(elt => marshalServerMaintenance(elt, defaults)): undefined),
   modification_date: request.modificationDate,
   name: request.name,
   organization: request.organization ?? defaults.defaultOrganizationId,
-  placement_group: ((request.placementGroup !== undefined) ?  marshalPlacementGroup(request.placementGroup, defaults): undefined),
+  placement_group: ((request.placementGroup != null) ?  marshalPlacementGroup(request.placementGroup, defaults): undefined),
   private_ip: request.privateIp,
-  private_nics: ((request.privateNics !== undefined) ?  request.privateNics.map(elt => marshalPrivateNIC(elt, defaults)): undefined),
+  private_nics: ((request.privateNics != null) ?  request.privateNics.map(elt => marshalPrivateNIC(elt, defaults)): undefined),
   project: request.project ?? defaults.defaultProjectId,
   protected: request.protected,
-  public_ip: ((request.publicIp !== undefined) ?  marshalServerIp(request.publicIp, defaults): undefined),
-  public_ips: ((request.publicIps !== undefined) ?  request.publicIps.map(elt => marshalServerIp(elt, defaults)): undefined),
+  public_ip: ((request.publicIp != null) ?  marshalServerIp(request.publicIp, defaults): undefined),
+  public_ips: ((request.publicIps != null) ?  request.publicIps.map(elt => marshalServerIp(elt, defaults)): undefined),
   routed_ip_enabled: request.routedIpEnabled,
-  security_group: ((request.securityGroup !== undefined) ?  marshalSecurityGroupSummary(request.securityGroup, defaults): undefined),
+  security_group: ((request.securityGroup != null) ?  marshalSecurityGroupSummary(request.securityGroup, defaults): undefined),
   state: request.state,
   state_detail: request.stateDetail,
   tags: request.tags,
-  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }), {}): undefined),
+  volumes: ((request.volumes != null) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolume(value, defaults) }), {}): undefined),
 })
 
 const marshalSnapshotBaseVolume = (
@@ -2105,7 +2105,7 @@ export const marshalSetSnapshotRequest = (
   request: SetSnapshotRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  base_volume: ((request.baseVolume !== undefined) ?  marshalSnapshotBaseVolume(request.baseVolume, defaults): undefined),
+  base_volume: ((request.baseVolume != null) ?  marshalSnapshotBaseVolume(request.baseVolume, defaults): undefined),
   creation_date: request.creationDate,
   id: request.id,
   modification_date: request.modificationDate,
@@ -2130,7 +2130,7 @@ export const marshalUpdateImageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   arch: request.arch,
-  extra_volumes: ((request.extraVolumes !== undefined) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeImageUpdateTemplate(value, defaults) }), {}): undefined),
+  extra_volumes: ((request.extraVolumes != null) ?  Object.entries(request.extraVolumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeImageUpdateTemplate(value, defaults) }), {}): undefined),
   name: request.name,
   public: request.public,
   tags: request.tags,
@@ -2221,9 +2221,9 @@ export const marshalUpdateServerRequest = (
   protected: request.protected,
   public_ips: request.publicIps,
   routed_ip_enabled: request.routedIpEnabled,
-  security_group: ((request.securityGroup !== undefined) ?  marshalSecurityGroupTemplate(request.securityGroup, defaults): undefined),
+  security_group: ((request.securityGroup != null) ?  marshalSecurityGroupTemplate(request.securityGroup, defaults): undefined),
   tags: request.tags,
-  volumes: ((request.volumes !== undefined) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeServerTemplate(value, defaults) }), {}): undefined),
+  volumes: ((request.volumes != null) ?  Object.entries(request.volumes).reduce((acc, [key, value]) => ({ ...acc, [key]: marshalVolumeServerTemplate(value, defaults) }), {}): undefined),
 })
 
 export const marshalUpdateSnapshotRequest = (

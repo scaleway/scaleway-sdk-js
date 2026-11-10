@@ -124,17 +124,17 @@ export interface Workflow {
    *
    * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate', 'infrastructureUpdate' could be set.
    */
-  engineUpgrade?: EngineUpgrade
+  engineUpgrade?: EngineUpgrade | null
   /**
    *
    * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate', 'infrastructureUpdate' could be set.
    */
-  serviceUpdate?: ServiceUpdate
+  serviceUpdate?: ServiceUpdate | null
   /**
    *
    * One-of ('workflowType'): at most one of 'engineUpgrade', 'serviceUpdate', 'infrastructureUpdate' could be set.
    */
-  infrastructureUpdate?: InfrastructureUpdate
+  infrastructureUpdate?: InfrastructureUpdate | null
 }
 
 
@@ -168,13 +168,13 @@ export interface Endpoint {
    *
    * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  privateNetwork?: EndpointPrivateNetworkDetails
+  privateNetwork?: EndpointPrivateNetworkDetails | null
   /**
    * Public Network endpoint details.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  publicNetwork?: EndpointPublicNetworkDetails
+  publicNetwork?: EndpointPublicNetworkDetails | null
 }
 
 
@@ -188,8 +188,8 @@ export interface InstanceSnapshotSchedule {
   frequencyHours: number
   retentionDays: number
   enabled: boolean
-  nextUpdate?: Date
-  lastRun?: Date
+  nextUpdate?: Date | null
+  lastRun?: Date | null
 }
 
 
@@ -205,15 +205,15 @@ export interface Maintenance {
   /**
    * Creation date of the maintenance.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Start date of the maintenance.
    */
-  startsAt?: Date
+  startsAt?: Date | null
   /**
    * Stop date of the maintenance.
    */
-  stopsAt?: Date
+  stopsAt?: Date | null
   /**
    * Current status of the maintenance.
    */
@@ -221,11 +221,11 @@ export interface Maintenance {
   /**
    * Forced application date of the maintenance.
    */
-  forcedAt?: Date
+  forcedAt?: Date | null
   /**
    * Application date of the maintenance.
    */
-  appliedAt?: Date
+  appliedAt?: Date | null
   /**
    * Usertype who launched the maintenance.
    */
@@ -233,7 +233,7 @@ export interface Maintenance {
   /**
    * Workflow to be applied during maintenance.
    */
-  workflow?: Workflow
+  workflow?: Workflow | null
   /**
    * Reason of the maintenance.
    */
@@ -295,13 +295,13 @@ export interface UserRole {
    *
    * One-of ('scope'): at most one of 'databaseName', 'anyDatabase' could be set.
    */
-  databaseName?: string
+  databaseName?: string | null
   /**
    * Flag to enable the preset role in all databases.
    *
    * One-of ('scope'): at most one of 'databaseName', 'anyDatabase' could be set.
    */
-  anyDatabase?: boolean
+  anyDatabase?: boolean | null
 }
 
 
@@ -311,13 +311,13 @@ export interface EndpointSpec {
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  publicNetwork?: EndpointSpecPublicNetworkDetails
+  publicNetwork?: EndpointSpecPublicNetworkDetails | null
   /**
    * Attach the Database Instance to a Private Network.
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointSpecPrivateNetworkDetails
+  privateNetwork?: EndpointSpecPrivateNetworkDetails | null
 }
 
 
@@ -366,7 +366,7 @@ export interface Instance {
   /**
    * Volumes of the Database Instance.
    */
-  volume?: Volume
+  volume?: Volume | null
   /**
    * List of Database Instance endpoints.
    */
@@ -374,7 +374,7 @@ export interface Instance {
   /**
    * Creation date (must follow the ISO 8601 format).
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Region the Database Instance is in.
    */
@@ -382,7 +382,7 @@ export interface Instance {
   /**
    * Snapshot schedule configuration of the Database Instance.
    */
-  snapshotSchedule?: InstanceSnapshotSchedule
+  snapshotSchedule?: InstanceSnapshotSchedule | null
   /**
    * List of settings applied to the Database Instance.
    */
@@ -450,7 +450,7 @@ export interface Snapshot {
   /**
    * UUID of the Database Instance.
    */
-  instanceId?: string
+  instanceId?: string | null
   /**
    * Name of the snapshot.
    */
@@ -466,15 +466,15 @@ export interface Snapshot {
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Creation date (must follow the ISO 8601 format).
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Updated date (must follow the ISO 8601 format).
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Name of the Database Instance of the snapshot.
    */
@@ -518,11 +518,11 @@ export interface Version {
   /**
    * Date of End of Life.
    */
-  endOfLifeAt?: Date
+  endOfLifeAt?: Date | null
   /**
    * Date of Release.
    */
-  releasedAt?: Date
+  releasedAt?: Date | null
 }
 
 
@@ -530,7 +530,7 @@ export type ApplyMaintenanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the maintenance.
    */
@@ -542,7 +542,7 @@ export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -558,15 +558,15 @@ export type CreateInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The Project ID on which the Database Instance will be created.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the Database Instance.
    */
-  name?: string
+  name?: string | null
   /**
    * Major version of the MongoDB® engine.
    */
@@ -574,7 +574,7 @@ export type CreateInstanceRequest = {
   /**
    * Tags to apply to the Database Instance.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Number of node to use for the Database Instance.
    */
@@ -594,11 +594,11 @@ export type CreateInstanceRequest = {
   /**
    * Instance volume information.
    */
-  volume?: Volume
+  volume?: Volume | null
   /**
    * One or multiple EndpointSpec used to expose your Database Instance.
    */
-  endpoints?: EndpointSpec[]
+  endpoints?: EndpointSpec[] | null
 }
 
 
@@ -606,7 +606,7 @@ export type CreateSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance to snapshot.
    */
@@ -618,7 +618,7 @@ export type CreateSnapshotRequest = {
   /**
    * Expiration date of the snapshot (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -626,7 +626,7 @@ export type CreateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance the user belongs to.
    */
@@ -646,7 +646,7 @@ export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Endpoint to delete.
    */
@@ -658,7 +658,7 @@ export type DeleteInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance to delete.
    */
@@ -670,7 +670,7 @@ export type DeleteSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the snapshot.
    */
@@ -682,7 +682,7 @@ export type DeleteUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance the user belongs to.
    */
@@ -698,7 +698,7 @@ export type GetInstanceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -710,7 +710,7 @@ export type GetInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -722,7 +722,7 @@ export type GetMaintenanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the maintenance.
    */
@@ -734,7 +734,7 @@ export type GetSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the snapshot.
    */
@@ -746,7 +746,7 @@ export type ListDatabasesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -754,9 +754,9 @@ export type ListDatabasesRequest = {
   /**
    * Criteria to use when requesting user listing.
    */
-  orderBy?: ListDatabasesRequestOrderBy
-  page?: number
-  pageSize?: number
+  orderBy?: ListDatabasesRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -776,33 +776,33 @@ export type ListInstancesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * List Database Instances that have a given tag.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Lists Database Instances that match a name pattern.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering Database Instance listings.
    */
-  orderBy?: ListInstancesRequestOrderBy
+  orderBy?: ListInstancesRequestOrderBy | null
   /**
    * Organization ID of the Database Instance.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to list the instances of.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Retrieve pending maintenances for the database instances if given.
    */
-  hasMaintenance?: boolean
-  page?: number
-  pageSize?: number
+  hasMaintenance?: boolean | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -822,7 +822,7 @@ export type ListMaintenancesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the instance.
    */
@@ -830,9 +830,9 @@ export type ListMaintenancesRequest = {
   /**
    * Criteria to use when requesting user listing.
    */
-  orderBy?: ListMaintenancesRequestOrderBy
-  page?: number
-  pageSize?: number
+  orderBy?: ListMaintenancesRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -852,17 +852,17 @@ export type ListNodeTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Defines whether or not to include disabled types.
    */
-  includeDisabled?: boolean
-  page?: number
-  pageSize?: number
+  includeDisabled?: boolean | null
+  page?: number | null
+  pageSize?: number | null
   /**
    * ID of a project to get a personalized view of the stock.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -882,29 +882,29 @@ export type ListSnapshotsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Instance ID the snapshots belongs to.
    */
-  instanceId?: string
+  instanceId?: string | null
   /**
    * Lists database snapshots that match a name pattern.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering snapshot listings.
    */
-  orderBy?: ListSnapshotsRequestOrderBy
+  orderBy?: ListSnapshotsRequestOrderBy | null
   /**
    * Organization ID the snapshots belongs to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to list the snapshots of.
    */
-  projectId?: string
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -924,7 +924,7 @@ export type ListUsersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -932,13 +932,13 @@ export type ListUsersRequest = {
   /**
    * Name of the user.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when requesting user listing.
    */
-  orderBy?: ListUsersRequestOrderBy
-  page?: number
-  pageSize?: number
+  orderBy?: ListUsersRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -958,10 +958,10 @@ export type ListVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  version?: string
-  page?: number
-  pageSize?: number
+  region?: ScwRegion | null
+  version?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -981,7 +981,7 @@ export type RestoreSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the snapshot.
    */
@@ -1009,7 +1009,7 @@ export type SetUserRoleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance the user belongs to.
    */
@@ -1021,7 +1021,7 @@ export type SetUserRoleRequest = {
   /**
    * List of roles assigned to the user, along with the corresponding database where each role is granted.
    */
-  roles?: UserRole[]
+  roles?: UserRole[] | null
 }
 
 
@@ -1029,7 +1029,7 @@ export type UpdateInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance to update.
    */
@@ -1037,23 +1037,23 @@ export type UpdateInstanceRequest = {
   /**
    * Name of the Database Instance.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags of a Database Instance.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * In hours.
    */
-  snapshotScheduleFrequencyHours?: number
+  snapshotScheduleFrequencyHours?: number | null
   /**
    * In days.
    */
-  snapshotScheduleRetentionDays?: number
+  snapshotScheduleRetentionDays?: number | null
   /**
    * Defines whether or not the snapshot schedule is enabled.
    */
-  isSnapshotScheduleEnabled?: boolean
+  isSnapshotScheduleEnabled?: boolean | null
 }
 
 
@@ -1061,7 +1061,7 @@ export type UpdateSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Snapshot.
    */
@@ -1069,11 +1069,11 @@ export type UpdateSnapshotRequest = {
   /**
    * Name of the snapshot.
    */
-  name?: string
+  name?: string | null
   /**
    * Expiration date of the snapshot (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -1081,7 +1081,7 @@ export type UpdateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance the user belongs to.
    */
@@ -1093,7 +1093,7 @@ export type UpdateUserRequest = {
   /**
    * Password of the database user.
    */
-  password?: string
+  password?: string | null
 }
 
 
@@ -1101,7 +1101,7 @@ export type UpgradeInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to upgrade.
    */
@@ -1111,13 +1111,13 @@ export type UpgradeInstanceRequest = {
    *
    * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'version' could be set.
    */
-  volumeSizeBytes?: number
+  volumeSizeBytes?: number | null
   /**
    * MongoDB version to upgrade to (e.g., `8.0`, `7.0`, `8.2`).
    *
    * One-of ('upgradeTarget'): at most one of 'volumeSizeBytes', 'version' could be set.
    */
-  version?: string
+  version?: string | null
 }
 
 

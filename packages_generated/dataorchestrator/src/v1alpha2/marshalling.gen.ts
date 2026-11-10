@@ -33,13 +33,13 @@ export const unmarshalWorkflowVersion = (data: unknown): WorkflowVersion => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    deletedAt: unmarshalDate(data.deleted_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deletedAt: unmarshalDate(data.deleted_at) ?? null,
     description: data.description,
     id: data.id,
     isCurrent: data.is_current,
     name: data.name,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     workflowDsl: data.workflow_dsl,
   } as WorkflowVersion
 }
@@ -66,7 +66,7 @@ const unmarshalWorkflowRunInfo = (data: unknown): WorkflowRunInfo => {
   }
 
   return {
-    reason: data.reason ? data.reason : undefined,
+    reason: data.reason ? data.reason : null,
     status: data.status,
     workflowRunId: data.workflow_run_id,
   } as WorkflowRunInfo
@@ -80,19 +80,19 @@ export const unmarshalWorkflowDefinition = (data: unknown): WorkflowDefinition =
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    cronSchedule: data.cron_schedule ? unmarshalCronSchedule(data.cron_schedule) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    cronSchedule: data.cron_schedule ? unmarshalCronSchedule(data.cron_schedule) : null,
     description: data.description,
     environmentVariables: data.environment_variables,
     id: data.id,
-    lastRun: data.last_run ? unmarshalWorkflowRunInfo(data.last_run) : undefined,
+    lastRun: data.last_run ? unmarshalWorkflowRunInfo(data.last_run) : null,
     name: data.name,
     projectId: data.project_id,
     region: data.region,
     srn: data.srn,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     versions: unmarshalArrayOfObject(data.versions, unmarshalWorkflowVersion),
-    workflowTimeout: data.workflow_timeout,
+    workflowTimeout: data.workflow_timeout ?? null,
   } as WorkflowDefinition
 }
 
@@ -104,8 +104,8 @@ const unmarshalDefaultTask = (data: unknown): DefaultTask => {
   }
 
   return {
-    errorMessage: data.error_message,
-    reason: data.reason ? data.reason : undefined,
+    errorMessage: data.error_message ?? null,
+    reason: data.reason ? data.reason : null,
   } as DefaultTask
 }
 
@@ -119,9 +119,9 @@ const unmarshalRunServerlessContainersTask = (data: unknown): RunServerlessConta
   return {
     action: data.action,
     containerId: data.container_id,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     imageUrl: data.image_url,
-    reason: data.reason ? data.reason : undefined,
+    reason: data.reason ? data.reason : null,
     status: data.status,
   } as RunServerlessContainersTask
 }
@@ -135,8 +135,8 @@ const unmarshalS3Task = (data: unknown): S3Task => {
 
   return {
     action: data.action,
-    errorMessage: data.error_message,
-    reason: data.reason ? data.reason : undefined,
+    errorMessage: data.error_message ?? null,
+    reason: data.reason ? data.reason : null,
   } as S3Task
 }
 
@@ -148,11 +148,11 @@ const unmarshalServerlessJobsTask = (data: unknown): ServerlessJobsTask => {
   }
 
   return {
-    errorMessage: data.error_message,
-    exitCode: data.exit_code,
+    errorMessage: data.error_message ?? null,
+    exitCode: data.exit_code ?? null,
     jobDefinitionId: data.job_definition_id,
     jobRunId: data.job_run_id,
-    reason: data.reason ? data.reason : undefined,
+    reason: data.reason ? data.reason : null,
   } as ServerlessJobsTask
 }
 
@@ -164,25 +164,25 @@ const unmarshalTaskRun = (data: unknown): TaskRun => {
   }
 
   return {
-    callHttpTaskRunDetails: data.call_http_task_run_details ? unmarshalDefaultTask(data.call_http_task_run_details) : undefined,
-    callServerlessContainerTaskRunDetails: data.call_serverless_container_task_run_details ? unmarshalDefaultTask(data.call_serverless_container_task_run_details) : undefined,
-    createdAt: unmarshalDate(data.created_at),
-    duration: data.duration,
-    generativeApiTaskRunDetails: data.generative_api_task_run_details ? unmarshalDefaultTask(data.generative_api_task_run_details) : undefined,
+    callHttpTaskRunDetails: data.call_http_task_run_details ? unmarshalDefaultTask(data.call_http_task_run_details) : null,
+    callServerlessContainerTaskRunDetails: data.call_serverless_container_task_run_details ? unmarshalDefaultTask(data.call_serverless_container_task_run_details) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    duration: data.duration ?? null,
+    generativeApiTaskRunDetails: data.generative_api_task_run_details ? unmarshalDefaultTask(data.generative_api_task_run_details) : null,
     id: data.id,
-    output: data.output,
-    raiseTaskRunDetails: data.raise_task_run_details ? unmarshalDefaultTask(data.raise_task_run_details) : undefined,
-    runIteration: data.run_iteration,
-    runServerlessContainerTaskRunDetails: data.run_serverless_container_task_run_details ? unmarshalRunServerlessContainersTask(data.run_serverless_container_task_run_details) : undefined,
-    s3TaskRunDetails: data.s3_task_run_details ? unmarshalS3Task(data.s3_task_run_details) : undefined,
-    serverlessFunctionTaskRunDetails: data.serverless_function_task_run_details ? unmarshalDefaultTask(data.serverless_function_task_run_details) : undefined,
-    serverlessJobTaskRunDetails: data.serverless_job_task_run_details ? unmarshalServerlessJobsTask(data.serverless_job_task_run_details) : undefined,
-    setTaskRunDetails: data.set_task_run_details ? unmarshalDefaultTask(data.set_task_run_details) : undefined,
+    output: data.output ?? null,
+    raiseTaskRunDetails: data.raise_task_run_details ? unmarshalDefaultTask(data.raise_task_run_details) : null,
+    runIteration: data.run_iteration ?? null,
+    runServerlessContainerTaskRunDetails: data.run_serverless_container_task_run_details ? unmarshalRunServerlessContainersTask(data.run_serverless_container_task_run_details) : null,
+    s3TaskRunDetails: data.s3_task_run_details ? unmarshalS3Task(data.s3_task_run_details) : null,
+    serverlessFunctionTaskRunDetails: data.serverless_function_task_run_details ? unmarshalDefaultTask(data.serverless_function_task_run_details) : null,
+    serverlessJobTaskRunDetails: data.serverless_job_task_run_details ? unmarshalServerlessJobsTask(data.serverless_job_task_run_details) : null,
+    setTaskRunDetails: data.set_task_run_details ? unmarshalDefaultTask(data.set_task_run_details) : null,
     status: data.status,
     taskName: data.task_name,
-    terminatedAt: unmarshalDate(data.terminated_at),
-    updatedAt: unmarshalDate(data.updated_at),
-    waitTaskRunDetails: data.wait_task_run_details ? unmarshalDefaultTask(data.wait_task_run_details) : undefined,
+    terminatedAt: unmarshalDate(data.terminated_at) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    waitTaskRunDetails: data.wait_task_run_details ? unmarshalDefaultTask(data.wait_task_run_details) : null,
   } as TaskRun
 }
 
@@ -194,21 +194,21 @@ export const unmarshalWorkflowRun = (data: unknown): WorkflowRun => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    duration: data.duration,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    duration: data.duration ?? null,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     id: data.id,
-    output: data.output,
+    output: data.output ?? null,
     projectId: data.project_id,
-    reason: data.reason ? data.reason : undefined,
+    reason: data.reason ? data.reason : null,
     region: data.region,
     srn: data.srn,
     status: data.status,
     taskRuns: unmarshalArrayOfObject(data.task_runs, unmarshalTaskRun),
-    terminatedAt: unmarshalDate(data.terminated_at),
+    terminatedAt: unmarshalDate(data.terminated_at) ?? null,
     triggerType: data.trigger_type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     workflowDefinitionId: data.workflow_definition_id,
     workflowDefinitionName: data.workflow_definition_name,
     workflowDsl: data.workflow_dsl,
@@ -264,9 +264,9 @@ export const marshalCreateWorkflowDefinitionRequest = (
   request: CreateWorkflowDefinitionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  cron_schedule: ((request.cronSchedule !== undefined) ?  marshalCreateWorkflowDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
+  cron_schedule: ((request.cronSchedule != null) ?  marshalCreateWorkflowDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
   description: request.description,
-  environment_variables: ((request.environmentVariables !== undefined) ?  request.environmentVariables: undefined),
+  environment_variables: ((request.environmentVariables != null) ?  request.environmentVariables: undefined),
   name: request.name || randomName('workflow'),
   project_id: request.projectId ?? defaults.defaultProjectId,
   workflow_timeout: request.workflowTimeout,
@@ -293,7 +293,7 @@ export const marshalUpdateWorkflowDefinitionRequest = (
   request: UpdateWorkflowDefinitionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  cron_schedule: ((request.cronSchedule !== undefined) ?  marshalUpdateWorkflowDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
+  cron_schedule: ((request.cronSchedule != null) ?  marshalUpdateWorkflowDefinitionRequestCronScheduleConfig(request.cronSchedule, defaults): undefined),
   description: request.description,
   environment_variables: request.environmentVariables,
   name: request.name,

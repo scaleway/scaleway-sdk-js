@@ -57,10 +57,10 @@ export const unmarshalOffer = (data: unknown): Offer => {
 
   return {
     available: data.available,
-    hardwareSpecs: data.hardware_specs ? unmarshalHardwareSpecs(data.hardware_specs) : undefined,
+    hardwareSpecs: data.hardware_specs ? unmarshalHardwareSpecs(data.hardware_specs) : null,
     id: data.id,
     name: data.name,
-    networkSpecs: data.network_specs ? unmarshalNetworkSpecs(data.network_specs) : undefined,
+    networkSpecs: data.network_specs ? unmarshalNetworkSpecs(data.network_specs) : null,
     srn: data.srn,
   } as Offer
 }
@@ -124,7 +124,7 @@ const unmarshalOS = (data: unknown): OS => {
   }
 
   return {
-    description: data.description,
+    description: data.description ?? null,
     id: data.id,
     mainOs: data.main_os,
     name: data.name,

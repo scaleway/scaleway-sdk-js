@@ -145,7 +145,7 @@ export interface OS {
   /**
    * @deprecated List of compatible server types. Deprecated.
    */
-  compatibleServerTypes?: string[]
+  compatibleServerTypes?: string[] | null
   /**
    * Url of the release notes for the OS image or software pre-installed.
    */
@@ -188,12 +188,12 @@ export interface RunnerConfigurationV2 {
    *
    * One-of ('configuration'): at most one of 'githubConfiguration', 'gitlabConfiguration' could be set.
    */
-  githubConfiguration?: GithubRunnerConfiguration
+  githubConfiguration?: GithubRunnerConfiguration | null
   /**
    *
    * One-of ('configuration'): at most one of 'githubConfiguration', 'gitlabConfiguration' could be set.
    */
-  gitlabConfiguration?: GitlabRunnerConfiguration
+  gitlabConfiguration?: GitlabRunnerConfiguration | null
 }
 
 
@@ -284,7 +284,7 @@ export interface Server {
   /**
    * Initially installed OS, this does not necessarily reflect the current OS version.
    */
-  os?: OS
+  os?: OS | null
   /**
    * Initially installed OS, this does not necessarily reflect the current OS version.
    */
@@ -296,15 +296,15 @@ export interface Server {
   /**
    * Date on which the server was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the server was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date from which the server can be deleted.
    */
-  deletableAt?: Date
+  deletableAt?: Date | null
   /**
    * Set to true to mark the server for automatic deletion depending on `deletable_at` date. Set to false to cancel an existing deletion schedule. Leave unset otherwise.
    */
@@ -328,7 +328,7 @@ export interface Server {
   /**
    * Commitment scheme applied to this server.
    */
-  commitment?: Commitment
+  commitment?: Commitment | null
   /**
    * Public bandwidth configured for this server. Expressed in bits per second.
    */
@@ -336,7 +336,7 @@ export interface Server {
   /**
    * @deprecated Current runner configuration, empty if none is installed.
    */
-  runnerConfiguration?: RunnerConfiguration
+  runnerConfiguration?: RunnerConfiguration | null
   /**
    * A list of tags attached to the server.
    */
@@ -353,7 +353,7 @@ export interface Server {
 
 
 export interface ConnectivityDiagnosticServerHealth {
-  lastCheckinDate?: Date
+  lastCheckinDate?: Date | null
   isServerAlive: boolean
   isAgentAlive: boolean
   isMdmAlive: boolean
@@ -375,7 +375,7 @@ export interface Runner {
   /**
    * Configuration of the runner.
    */
-  configuration?: RunnerConfigurationV2
+  configuration?: RunnerConfigurationV2 | null
   /**
    * Status of the runner.
    */
@@ -415,7 +415,7 @@ export interface ServerPrivateNetwork {
   /**
    * ID of the VLAN associated with the Private Network.
    */
-  vlan?: number
+  vlan?: number | null
   /**
    * Configuration status of the Private Network.
    */
@@ -423,11 +423,11 @@ export interface ServerPrivateNetwork {
   /**
    * Private Network creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the Private Network was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * IPAM IP IDs of the server, if it has any.
    */
@@ -439,11 +439,11 @@ export interface ServerType {
   /**
    * CPU description.
    */
-  cpu?: ServerTypeCPU
+  cpu?: ServerTypeCPU | null
   /**
    * Size of the local disk of the server.
    */
-  disk?: ServerTypeDisk
+  disk?: ServerTypeDisk | null
   /**
    * Name of the type.
    */
@@ -451,7 +451,7 @@ export interface ServerType {
   /**
    * Size of memory available.
    */
-  memory?: ServerTypeMemory
+  memory?: ServerTypeMemory | null
   /**
    * Current stock.
    */
@@ -459,23 +459,23 @@ export interface ServerType {
   /**
    * Minimum duration of the lease in seconds (example. 3.4s).
    */
-  minimumLeaseDuration?: string
+  minimumLeaseDuration?: string | null
   /**
    * GPU description.
    */
-  gpu?: ServerTypeGPU
+  gpu?: ServerTypeGPU | null
   /**
    * Network description.
    */
-  network?: ServerTypeNetwork
+  network?: ServerTypeNetwork | null
   /**
    * The default OS for this server type.
    */
-  defaultOs?: OS
+  defaultOs?: OS | null
   /**
    * NPU description.
    */
-  npu?: ServerTypeNPU
+  npu?: ServerTypeNPU | null
   /**
    * Zone of the server type.
    */
@@ -492,11 +492,11 @@ export type BatchCreateServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Create servers in the given project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Create servers of the given type.
    */
@@ -504,7 +504,7 @@ export type BatchCreateServersRequest = {
   /**
    * Create servers & install the given os_id, when no os_id provided the default OS for this server type is chosen. Requesting a non-default OS will induce an extended delivery time.
    */
-  osId?: string
+  osId?: string | null
   /**
    * Activate the Private Network feature for these servers. This feature is configured through the Apple Silicon - Private Networks API.
    */
@@ -512,7 +512,7 @@ export type BatchCreateServersRequest = {
   /**
    * Activate commitment for these servers. If not specified, there is a 24h commitment due to Apple licensing (commitment_type `duration_24h`). It can be updated with the Update Server request. Available commitment depends on server type.
    */
-  commitmentType?: CommitmentType
+  commitmentType?: CommitmentType | null
   /**
    * Public bandwidth to configure for these servers. This defaults to the minimum bandwidth for the corresponding server type. For compatible server types, the bandwidth can be increased which incurs additional costs.
    */
@@ -520,7 +520,7 @@ export type BatchCreateServersRequest = {
   /**
    * List of servers to create.
    */
-  requests?: BatchCreateServersRequestBatchInnerCreateServerRequest[]
+  requests?: BatchCreateServersRequestBatchInnerCreateServerRequest[] | null
   /**
    * Enable kernel extensions in this install of mac OS.
    */
@@ -540,7 +540,7 @@ export interface ConnectivityDiagnostic {
   id: string
   status: ConnectivityDiagnosticDiagnosticStatus
   isHealthy: boolean
-  healthDetails?: ConnectivityDiagnosticServerHealth
+  healthDetails?: ConnectivityDiagnosticServerHealth | null
   supportedActions: ConnectivityDiagnosticActionType[]
   errorMessage: string
   /**
@@ -555,11 +555,11 @@ export type CreateRunnerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Creates a runner in the given project_id.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Configuration details for the runner.
    */
@@ -571,15 +571,15 @@ export type CreateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Create a server with this given name.
    */
-  name?: string
+  name?: string | null
   /**
    * Create a server in the given project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Create a server of the given type.
    */
@@ -587,7 +587,7 @@ export type CreateServerRequest = {
   /**
    * Create a server & install the given os_id, when no os_id provided the default OS for this server type is chosen. Requesting a non-default OS will induce an extended delivery time.
    */
-  osId?: string
+  osId?: string | null
   /**
    * Activate the Private Network feature for this server. This feature is configured through the Apple Silicon - Private Networks API.
    */
@@ -595,7 +595,7 @@ export type CreateServerRequest = {
   /**
    * Activate commitment for this server. If not specified, there is a 24h commitment due to Apple licensing (commitment_type `duration_24h`). It can be updated with the Update Server request. Available commitment depends on server type.
    */
-  commitmentType?: CommitmentType
+  commitmentType?: CommitmentType | null
   /**
    * Public bandwidth to configure for this server. This defaults to the minimum bandwidth for this server type. For compatible server types, the bandwidth can be increased which incurs additional costs.
    */
@@ -603,11 +603,11 @@ export type CreateServerRequest = {
   /**
    * @deprecated Specify the configuration to install an optional CICD runner on the server during installation.
    */
-  runnerConfiguration?: RunnerConfiguration
+  runnerConfiguration?: RunnerConfiguration | null
   /**
    * Runner configurations to apply on the server, existing ones missing from the specified configuration will be removed from the server.
    */
-  appliedRunnerConfigurations?: AppliedRunnerConfigurations
+  appliedRunnerConfigurations?: AppliedRunnerConfigurations | null
   /**
    * Enable kernel extensions in this install of mac OS.
    */
@@ -619,7 +619,7 @@ export type DeleteRunnerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the runner configuration to delete.
    */
@@ -631,7 +631,7 @@ export type DeleteServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the server you want to delete.
    */
@@ -643,7 +643,7 @@ export type GetConnectivityDiagnosticRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   diagnosticId: string
 }
 
@@ -652,7 +652,7 @@ export type GetOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the OS you want to get.
    */
@@ -664,7 +664,7 @@ export type GetRunnerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the runner configuration to get.
    */
@@ -676,7 +676,7 @@ export type GetServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the server you want to get.
    */
@@ -688,7 +688,7 @@ export type GetServerTypeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server type identifier.
    */
@@ -700,7 +700,7 @@ export type GetUserConfigurationRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
 }
 
 
@@ -708,23 +708,23 @@ export type ListOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Positive integer to choose the page to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer lower or equal to 100 to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * List of compatible server types.
    */
-  serverType?: string
+  serverType?: string | null
   /**
    * Filter OS by name (note that "11.1" will return "11.1.2" and "11.1" but not "12")).
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -744,27 +744,27 @@ export type ListRunnersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server for which to list applied runner configurations.
    */
-  serverId?: string
+  serverId?: string | null
   /**
    * Only list servers of this project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Only list servers of this Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Positive integer to choose the page to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer lower or equal to 100 to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -784,7 +784,7 @@ export type ListServerTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
 }
 
 
@@ -800,27 +800,27 @@ export type ListServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Sort order of the returned servers.
    */
-  orderBy?: ListServersRequestOrderBy
+  orderBy?: ListServersRequestOrderBy | null
   /**
    * Only list servers of this project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Only list servers of this Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Positive integer to choose the page to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer lower or equal to 100 to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -840,7 +840,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -852,7 +852,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /**
    * IPAM IDs of IPs to attach to the server.
    */
-  ipamIpIds?: string[]
+  ipamIpIds?: string[] | null
 }
 
 
@@ -860,7 +860,7 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -876,7 +876,7 @@ export type PrivateNetworkApiGetServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   serverId: string
   privateNetworkId: string
 }
@@ -886,39 +886,39 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Sort order for the returned Private Networks.
    */
-  orderBy?: ListServerPrivateNetworksRequestOrderBy
+  orderBy?: ListServerPrivateNetworksRequestOrderBy | null
   /**
    * Page number for the returned Private Networks.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of Private Networks per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter Private Networks by server ID.
    */
-  serverId?: string
+  serverId?: string | null
   /**
    * Filter Private Networks by Private Network ID.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
   /**
    * Filter Private Networks by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter Private Networks by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter Private Networks by IPAM IP IDs.
    */
-  ipamIpIds?: string[]
+  ipamIpIds?: string[] | null
 }
 
 
@@ -926,7 +926,7 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -942,7 +942,7 @@ export type RebootServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the server you want to reboot.
    */
@@ -954,7 +954,7 @@ export type ReinstallServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the server you want to reinstall.
    */
@@ -962,7 +962,7 @@ export type ReinstallServerRequest = {
   /**
    * Reinstall the server with the target OS, when no os_id provided the default OS for the server type is used.
    */
-  osId?: string
+  osId?: string | null
   /**
    * Enable kernel extensions in this install of mac OS.
    */
@@ -979,7 +979,7 @@ export type StartConnectivityDiagnosticRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   serverId: string
 }
 
@@ -993,8 +993,8 @@ export type UpdateRunnerConfigurationStatusRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
-  runnerErrors?: Record<string, string>
+  zone?: ScwZone | null
+  runnerErrors?: Record<string, string> | null
 }
 
 
@@ -1006,7 +1006,7 @@ export type UpdateRunnerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the runner configuration to update.
    */
@@ -1022,7 +1022,7 @@ export type UpdateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the server you want to update.
    */
@@ -1030,27 +1030,27 @@ export type UpdateServerRequest = {
   /**
    * Updated name for your server.
    */
-  name?: string
+  name?: string | null
   /**
    * Specify whether the server should be flagged for automatic deletion.
    */
-  scheduleDeletion?: boolean
+  scheduleDeletion?: boolean | null
   /**
    * Activate or deactivate Private Network support for this server.
    */
-  enableVpc?: boolean
+  enableVpc?: boolean | null
   /**
    * Change commitment. Use 'none' to automatically cancel a renewing commitment.
    */
-  commitmentType?: CommitmentTypeValue
+  commitmentType?: CommitmentTypeValue | null
   /**
    * Public bandwidth to configure for this server. Setting an higher bandwidth incurs additional costs. Supported bandwidth levels depends on server type and can be queried using the `/server-types` endpoint.
    */
-  publicBandwidthBps?: number
+  publicBandwidthBps?: number | null
   /**
    * Runner configurations to apply on the server, existing ones missing from the specified configuration will be removed from the server.
    */
-  appliedRunnerConfigurations?: AppliedRunnerConfigurations
+  appliedRunnerConfigurations?: AppliedRunnerConfigurations | null
 }
 
 

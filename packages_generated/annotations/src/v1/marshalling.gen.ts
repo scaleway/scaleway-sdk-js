@@ -62,10 +62,10 @@ export const unmarshalBinding = (data: unknown): Binding => {
 
   return {
     id: data.id,
-    key: data.key ? unmarshalBindingKey(data.key) : undefined,
+    key: data.key ? unmarshalBindingKey(data.key) : null,
     srn: data.srn,
     targetSrn: data.target_srn,
-    value: data.value ? unmarshalBindingValue(data.value) : undefined,
+    value: data.value ? unmarshalBindingValue(data.value) : null,
   } as Binding
 }
 

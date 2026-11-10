@@ -93,7 +93,7 @@ export interface OS {
   /**
    * Description.
    */
-  description?: string
+  description?: string | null
   /**
    * SRN of the OS.
    */
@@ -117,11 +117,11 @@ export interface Offer {
   /**
    * Hardware specifications.
    */
-  hardwareSpecs?: HardwareSpecs
+  hardwareSpecs?: HardwareSpecs | null
   /**
    * Network specifications.
    */
-  networkSpecs?: NetworkSpecs
+  networkSpecs?: NetworkSpecs | null
   /**
    * SRN of the offer.
    */
@@ -249,7 +249,7 @@ export type VpsApiCreateServerRequest = {
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Offer ID of the server.
    */
@@ -269,7 +269,7 @@ export type VpsApiCreateServerRequest = {
   /**
    * SSH key to install on the server.
    */
-  sshKeyId?: string
+  sshKeyId?: string | null
 }
 
 
@@ -301,11 +301,11 @@ export type VpsApiListLocationsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of locations per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -313,11 +313,11 @@ export type VpsApiListOSRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of OS per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -325,11 +325,11 @@ export type VpsApiListOffersRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of offers per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -339,21 +339,21 @@ export type VpsApiListServersRequest = {
    *
    * One-of ('scope'): at most one of 'organizationId', 'projectId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID.
    *
    * One-of ('scope'): at most one of 'organizationId', 'projectId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of servers per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -381,7 +381,7 @@ export type VpsApiReinstallServerRequest = {
   /**
    * SSH key to install on the server.
    */
-  sshKeyId?: string
+  sshKeyId?: string | null
 }
 
 

@@ -145,11 +145,11 @@ export interface Contract {
   /**
    * The creation date of the contract.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last modification date of the contract.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * The SRN of the contract.
    */
@@ -166,47 +166,47 @@ export interface Qualification {
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  hostWebsite?: QualificationHostWebsite
+  hostWebsite?: QualificationHostWebsite | null
   /**
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  hostApplication?: QualificationHostApplication
+  hostApplication?: QualificationHostApplication | null
   /**
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  deploySoftware?: QualificationDeploySoftware
+  deploySoftware?: QualificationDeploySoftware | null
   /**
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  setScalewayEnvironment?: QualificationSetScalewayEnvironment
+  setScalewayEnvironment?: QualificationSetScalewayEnvironment | null
   /**
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  aiMachine?: QualificationAiMachine
+  aiMachine?: QualificationAiMachine | null
   /**
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  container?: QualificationContainer
+  container?: QualificationContainer | null
   /**
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  archiveData?: QualificationArchiveData
+  archiveData?: QualificationArchiveData | null
   /**
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  shareData?: QualificationShareData
+  shareData?: QualificationShareData | null
   /**
    *
    * One-of ('useCase'): at most one of 'hostWebsite', 'hostApplication', 'deploySoftware', 'setScalewayEnvironment', 'aiMachine', 'container', 'archiveData', 'shareData', 'otherUseCase' could be set.
    */
-  otherUseCase?: QualificationOtherUseCase
+  otherUseCase?: QualificationOtherUseCase | null
 }
 
 
@@ -222,19 +222,19 @@ export interface ContractSignature {
   /**
    * The creation date of the contract signature.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The signing date of the contract signature.
    */
-  signedAt?: Date
+  signedAt?: Date | null
   /**
    * The expiration date of the contract signature.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * The contract signed.
    */
-  contract?: Contract
+  contract?: Contract | null
 }
 
 
@@ -254,11 +254,11 @@ export interface Project {
   /**
    * Creation date of the Project.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Update date of the Project.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Description of the Project.
    */
@@ -266,7 +266,7 @@ export interface Project {
   /**
    * Qualification of the Project.
    */
-  qualification?: Qualification
+  qualification?: Qualification | null
   /**
    * Status of the Project.
    */
@@ -294,11 +294,11 @@ export type ContractApiCheckContractSignatureRequest = {
   /**
    * ID of the Organization to check the contract signature for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter on contract type.
    */
-  contractType?: ContractType
+  contractType?: ContractType | null
   /**
    * Filter on contract name.
    */
@@ -310,7 +310,7 @@ export type ContractApiCreateContractSignatureRequest = {
   /**
    * The type of the contract.
    */
-  contractType?: ContractType
+  contractType?: ContractType | null
   /**
    * The name of the contract.
    */
@@ -322,7 +322,7 @@ export type ContractApiCreateContractSignatureRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -334,7 +334,7 @@ export type ContractApiDownloadContractSignatureRequest = {
   /**
    * The locale requested for the content of the contract.
    */
-  locale?: StdLanguageCode
+  locale?: StdLanguageCode | null
 }
 
 
@@ -342,19 +342,19 @@ export type ContractApiListContractSignaturesRequest = {
   /**
    * The page number for the returned contracts.
    */
-  page?: number
+  page?: number | null
   /**
    * The maximum number of contracts per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * How the contracts are ordered in the response.
    */
-  orderBy?: ListContractSignaturesRequestOrderBy
+  orderBy?: ListContractSignaturesRequestOrderBy | null
   /**
    * Filter on Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -394,11 +394,11 @@ export type ProjectApiCreateProjectRequest = {
   /**
    * Name of the Project.
    */
-  name?: string
+  name?: string | null
   /**
    * Organization ID of the Project.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Description of the Project.
    */
@@ -410,7 +410,7 @@ export type ProjectApiDeleteProjectRequest = {
   /**
    * Project ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -418,7 +418,7 @@ export type ProjectApiDeleteProjectWithResourcesRequest = {
   /**
    * Project ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the Project to delete. This is used as a safeguard confirmation.
    */
@@ -430,7 +430,7 @@ export type ProjectApiGetProjectRequest = {
   /**
    * Project ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -438,27 +438,27 @@ export type ProjectApiListProjectsRequest = {
   /**
    * Organization ID of the Project.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Name of the Project.
    */
-  name?: string
+  name?: string | null
   /**
    * Page number for the returned Projects.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of Project per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order of the returned Projects.
    */
-  orderBy?: ListProjectsRequestOrderBy
+  orderBy?: ListProjectsRequestOrderBy | null
   /**
    * Project IDs to filter for. The results will be limited to any Projects with an ID in this array.
    */
-  projectIds?: string[]
+  projectIds?: string[] | null
 }
 
 
@@ -466,11 +466,11 @@ export type ProjectApiSetProjectQualificationRequest = {
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Use case chosen for the Project.
    */
-  qualification?: Qualification
+  qualification?: Qualification | null
 }
 
 
@@ -478,15 +478,15 @@ export type ProjectApiUpdateProjectRequest = {
   /**
    * Project ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the Project.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the Project.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -498,7 +498,7 @@ export interface ProjectQualification {
   /**
    * Qualification of the Project.
    */
-  qualification?: Qualification
+  qualification?: Qualification | null
 }
 
 

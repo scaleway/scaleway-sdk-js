@@ -49,7 +49,7 @@ export const unmarshalCron = (data: unknown): Cron => {
   }
 
   return {
-    args: data.args,
+    args: data.args ?? null,
     functionId: data.function_id,
     id: data.id,
     name: data.name,
@@ -68,7 +68,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
   }
 
   return {
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     functionId: data.function_id,
     hostname: data.hostname,
     id: data.id,
@@ -100,13 +100,13 @@ export const unmarshalFunction = (data: unknown): Function => {
   }
 
   return {
-    buildMessage: data.build_message,
+    buildMessage: data.build_message ?? null,
     cpuLimit: data.cpu_limit,
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    description: data.description ?? null,
     domainName: data.domain_name,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     handler: data.handler,
     httpOption: data.http_option,
     id: data.id,
@@ -116,8 +116,8 @@ export const unmarshalFunction = (data: unknown): Function => {
     name: data.name,
     namespaceId: data.namespace_id,
     privacy: data.privacy,
-    privateNetworkId: data.private_network_id,
-    readyAt: unmarshalDate(data.ready_at),
+    privateNetworkId: data.private_network_id ?? null,
+    readyAt: unmarshalDate(data.ready_at) ?? null,
     region: data.region,
     runtime: data.runtime,
     runtimeMessage: data.runtime_message,
@@ -126,8 +126,8 @@ export const unmarshalFunction = (data: unknown): Function => {
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    timeout: data.timeout,
-    updatedAt: unmarshalDate(data.updated_at),
+    timeout: data.timeout ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Function
 }
 
@@ -139,10 +139,10 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    description: data.description ?? null,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -154,8 +154,8 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    vpcIntegrationActivated: data.vpc_integration_activated,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    vpcIntegrationActivated: data.vpc_integration_activated ?? null,
   } as Namespace
 }
 
@@ -167,12 +167,12 @@ export const unmarshalToken = (data: unknown): Token => {
   }
 
   return {
-    description: data.description,
-    expiresAt: unmarshalDate(data.expires_at),
-    functionId: data.function_id,
+    description: data.description ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
+    functionId: data.function_id ?? null,
     id: data.id,
-    namespaceId: data.namespace_id,
-    publicKey: data.public_key,
+    namespaceId: data.namespace_id ?? null,
+    publicKey: data.public_key ?? null,
     status: data.status,
     token: data.token,
   } as Token
@@ -186,7 +186,7 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown): TriggerMnqNatsClien
   }
 
   return {
-    mnqCredentialId: data.mnq_credential_id,
+    mnqCredentialId: data.mnq_credential_id ?? null,
     mnqNatsAccountId: data.mnq_nats_account_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
@@ -202,7 +202,7 @@ const unmarshalTriggerMnqSqsClientConfig = (data: unknown): TriggerMnqSqsClientC
   }
 
   return {
-    mnqCredentialId: data.mnq_credential_id,
+    mnqCredentialId: data.mnq_credential_id ?? null,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
     queue: data.queue,
@@ -233,15 +233,15 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
 
   return {
     description: data.description,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     functionId: data.function_id,
     id: data.id,
     inputType: data.input_type,
     name: data.name,
     region: data.region,
-    scwNatsConfig: data.scw_nats_config ? unmarshalTriggerMnqNatsClientConfig(data.scw_nats_config) : undefined,
-    scwSqsConfig: data.scw_sqs_config ? unmarshalTriggerMnqSqsClientConfig(data.scw_sqs_config) : undefined,
-    sqsConfig: data.sqs_config ? unmarshalTriggerSqsClientConfig(data.sqs_config) : undefined,
+    scwNatsConfig: data.scw_nats_config ? unmarshalTriggerMnqNatsClientConfig(data.scw_nats_config) : null,
+    scwSqsConfig: data.scw_sqs_config ? unmarshalTriggerMnqSqsClientConfig(data.scw_sqs_config) : null,
+    sqsConfig: data.sqs_config ? unmarshalTriggerSqsClientConfig(data.sqs_config) : null,
     srn: data.srn,
     status: data.status,
   } as Trigger
@@ -428,7 +428,7 @@ export const marshalCreateFunctionRequest = (
   private_network_id: request.privateNetworkId,
   runtime: request.runtime,
   sandbox: request.sandbox,
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -442,7 +442,7 @@ export const marshalCreateNamespaceRequest = (
   environment_variables: request.environmentVariables,
   name: request.name || randomName('ns'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
 })
 
@@ -500,15 +500,15 @@ export const marshalCreateTriggerRequest = (
   name: request.name,  
   ...resolveOneOf([
     {param: 'scw_sqs_config',
-      value: (request.scwSqsConfig !== undefined) ? marshalCreateTriggerRequestMnqSqsClientConfig(request.scwSqsConfig, defaults)
+      value: (request.scwSqsConfig != null) ? marshalCreateTriggerRequestMnqSqsClientConfig(request.scwSqsConfig, defaults)
       : undefined,
     },
     {param: 'scw_nats_config',
-      value: (request.scwNatsConfig !== undefined) ? marshalCreateTriggerRequestMnqNatsClientConfig(request.scwNatsConfig, defaults)
+      value: (request.scwNatsConfig != null) ? marshalCreateTriggerRequestMnqNatsClientConfig(request.scwNatsConfig, defaults)
       : undefined,
     },
     {param: 'sqs_config',
-      value: (request.sqsConfig !== undefined) ? marshalCreateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
+      value: (request.sqsConfig != null) ? marshalCreateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
       : undefined,
     },
   ]),
@@ -540,7 +540,7 @@ export const marshalUpdateFunctionRequest = (
   redeploy: request.redeploy,
   runtime: request.runtime,
   sandbox: request.sandbox,
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -551,7 +551,7 @@ export const marshalUpdateNamespaceRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   environment_variables: request.environmentVariables,
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
 })
 
@@ -571,7 +571,7 @@ export const marshalUpdateTriggerRequest = (
   name: request.name,  
   ...resolveOneOf([
     {param: 'sqs_config',
-      value: (request.sqsConfig !== undefined) ? marshalUpdateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
+      value: (request.sqsConfig != null) ? marshalUpdateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
       : undefined,
     },
   ]),

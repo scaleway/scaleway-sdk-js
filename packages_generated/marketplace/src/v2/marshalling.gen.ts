@@ -37,14 +37,14 @@ export const unmarshalImage = (data: unknown): Image => {
 
   return {
     categories: data.categories,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     id: data.id,
     label: data.label,
     logo: data.logo,
     name: data.name,
-    updatedAt: unmarshalDate(data.updated_at),
-    validUntil: unmarshalDate(data.valid_until),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    validUntil: unmarshalDate(data.valid_until) ?? null,
   } as Image
 }
 
@@ -73,11 +73,11 @@ export const unmarshalVersion = (data: unknown): Version => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
-    publishedAt: unmarshalDate(data.published_at),
-    updatedAt: unmarshalDate(data.updated_at),
+    publishedAt: unmarshalDate(data.published_at) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Version
 }
 
