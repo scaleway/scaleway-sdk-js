@@ -64,7 +64,7 @@ export interface VersionAvailableSettingFloatProperty {
   min: number
   max: number
   defaultValue: number
-  unit?: string
+  unit?: string | null
 }
 
 
@@ -72,12 +72,12 @@ export interface VersionAvailableSettingIntegerProperty {
   min: number
   max: number
   defaultValue: number
-  unit?: string
+  unit?: string | null
 }
 
 
 export interface VersionAvailableSettingStringProperty {
-  stringConstraint?: string
+  stringConstraint?: string | null
   defaultValue: string
 }
 
@@ -101,7 +101,7 @@ export interface ClusterMonoAZDetails {
   /**
    * Zone is the zone on which the cluster nodes are deployed.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
 }
 
 
@@ -122,25 +122,25 @@ export interface ClusterSetting {
    *
    * One-of ('value'): at most one of 'boolValue', 'stringValue', 'intValue', 'floatValue' could be set.
    */
-  boolValue?: boolean
+  boolValue?: boolean | null
   /**
    * String value of the setting.
    *
    * One-of ('value'): at most one of 'boolValue', 'stringValue', 'intValue', 'floatValue' could be set.
    */
-  stringValue?: string
+  stringValue?: string | null
   /**
    * Integer value of the setting.
    *
    * One-of ('value'): at most one of 'boolValue', 'stringValue', 'intValue', 'floatValue' could be set.
    */
-  intValue?: number
+  intValue?: number | null
   /**
    * Float value of the setting.
    *
    * One-of ('value'): at most one of 'boolValue', 'stringValue', 'intValue', 'floatValue' could be set.
    */
-  floatValue?: number
+  floatValue?: number | null
 }
 
 
@@ -162,13 +162,13 @@ export interface Endpoint {
    *
    * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  privateNetwork?: EndpointPrivateNetworkDetails
+  privateNetwork?: EndpointPrivateNetworkDetails | null
   /**
    * Public endpoint details.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
-  publicNetwork?: EndpointPublicDetails
+  publicNetwork?: EndpointPublicDetails | null
 }
 
 
@@ -226,25 +226,25 @@ export interface VersionAvailableSetting {
    *
    * One-of ('property'): at most one of 'boolProperty', 'stringProperty', 'intProperty', 'floatProperty' could be set.
    */
-  boolProperty?: VersionAvailableSettingBooleanProperty
+  boolProperty?: VersionAvailableSettingBooleanProperty | null
   /**
    * String property, if the setting is a string.
    *
    * One-of ('property'): at most one of 'boolProperty', 'stringProperty', 'intProperty', 'floatProperty' could be set.
    */
-  stringProperty?: VersionAvailableSettingStringProperty
+  stringProperty?: VersionAvailableSettingStringProperty | null
   /**
    * Integer property, if the setting is an integer.
    *
    * One-of ('property'): at most one of 'boolProperty', 'stringProperty', 'intProperty', 'floatProperty' could be set.
    */
-  intProperty?: VersionAvailableSettingIntegerProperty
+  intProperty?: VersionAvailableSettingIntegerProperty | null
   /**
    * Float property, if the setting is a float.
    *
    * One-of ('property'): at most one of 'boolProperty', 'stringProperty', 'intProperty', 'floatProperty' could be set.
    */
-  floatProperty?: VersionAvailableSettingFloatProperty
+  floatProperty?: VersionAvailableSettingFloatProperty | null
 }
 
 
@@ -265,12 +265,12 @@ export interface EndpointSpec {
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  publicNetwork?: EndpointSpecPublicDetails
+  publicNetwork?: EndpointSpecPublicDetails | null
   /**
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointSpecPrivateNetworkDetails
+  privateNetwork?: EndpointSpecPrivateNetworkDetails | null
 }
 
 
@@ -318,7 +318,7 @@ export interface Cluster {
   /**
    * Volumes of the Kafka cluster.
    */
-  volume?: Volume
+  volume?: Volume | null
   /**
    * List of Kafka cluster endpoints.
    */
@@ -326,11 +326,11 @@ export interface Cluster {
   /**
    * Creation date (must follow the ISO 8601 format).
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date (must follow the ISO 8601 format).
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Region the Kafka cluster is in.
    */
@@ -340,13 +340,13 @@ export interface Cluster {
    *
    * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
    */
-  multiAz?: ClusterMultiAZDetails
+  multiAz?: ClusterMultiAZDetails | null
   /**
    * MonoAZ details.
    *
    * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
    */
-  monoAz?: ClusterMonoAZDetails
+  monoAz?: ClusterMonoAZDetails | null
 }
 
 
@@ -403,7 +403,7 @@ export interface Version {
   /**
    * Date of End of Life for the version.
    */
-  endOfLifeAt?: Date
+  endOfLifeAt?: Date | null
   /**
    * Cluster configuration settings you are able to change for clusters running this version. Each item in `available_settings` describes one configurable cluster setting.
    */
@@ -415,15 +415,15 @@ export type CreateClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The ID of the Project in which the Kafka cluster will be created.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the Kafka cluster.
    */
-  name?: string
+  name?: string | null
   /**
    * Version of Kafka.
    */
@@ -431,7 +431,7 @@ export type CreateClusterRequest = {
   /**
    * Tags to apply to the Kafka cluster.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Number of nodes to use for the Kafka cluster.
    */
@@ -443,31 +443,31 @@ export type CreateClusterRequest = {
   /**
    * Kafka volume information.
    */
-  volume?: CreateClusterRequestVolumeSpec
+  volume?: CreateClusterRequestVolumeSpec | null
   /**
    * One or multiple EndpointSpec used to expose your Kafka cluster.
    */
-  endpoints?: EndpointSpec[]
+  endpoints?: EndpointSpec[] | null
   /**
    * Username for the kafka user.
    */
-  userName?: string
+  userName?: string | null
   /**
    * Password for the kafka user.
    */
-  password?: string
+  password?: string | null
   /**
    * MultiAZ tell the cluster is deployed on multiple availability zones in the region.
    *
    * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
    */
-  multiAz?: ClusterMultiAZDetails
+  multiAz?: ClusterMultiAZDetails | null
   /**
    * MonoAZ details.
    *
    * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
    */
-  monoAz?: ClusterMonoAZDetails
+  monoAz?: ClusterMonoAZDetails | null
 }
 
 
@@ -475,7 +475,7 @@ export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Kafka Cluster.
    */
@@ -491,7 +491,7 @@ export type DeleteClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Kafka Cluster to delete.
    */
@@ -503,7 +503,7 @@ export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the endpoint to delete.
    */
@@ -515,7 +515,7 @@ export type GetClusterCertificateAuthorityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Kafka Cluster.
    */
@@ -527,7 +527,7 @@ export type GetClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Kafka Cluster.
    */
@@ -539,29 +539,29 @@ export type ListClustersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * List Kafka cluster with a given tag.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Lists Kafka clusters that match a name pattern.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering Kafka cluster listings.
    */
-  orderBy?: ListClustersRequestOrderBy
+  orderBy?: ListClustersRequestOrderBy | null
   /**
    * Organization ID of the Kafka cluster.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID.
    */
-  projectId?: string
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -581,13 +581,13 @@ export type ListNodeTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Defines whether or not to include disabled types.
    */
-  includeDisabledTypes?: boolean
-  page?: number
-  pageSize?: number
+  includeDisabledTypes?: boolean | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -607,12 +607,12 @@ export type ListUsersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   clusterId: string
-  page?: number
-  pageSize?: number
-  orderBy?: ListUsersRequestOrderBy
-  name?: string
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListUsersRequestOrderBy | null
+  name?: string | null
 }
 
 
@@ -626,19 +626,19 @@ export type ListVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Kafka version to filter for.
    */
-  version?: string
+  version?: string | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * The number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -658,7 +658,7 @@ export type RenewClusterCertificateAuthorityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Kafka Cluster.
    */
@@ -670,7 +670,7 @@ export type UpdateClusterRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Kafka Clusters to update.
    */
@@ -678,19 +678,19 @@ export type UpdateClusterRequest = {
   /**
    * Name of the Kafka Cluster.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags of a Kafka Cluster.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Version of Kafka.
    */
-  version?: string
+  version?: string | null
   /**
    * New volume size for each broker, can only increase.
    */
-  volumeSizeBytes?: number
+  volumeSizeBytes?: number | null
 }
 
 
@@ -701,7 +701,7 @@ export type UpdateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the cluster in which to update the user's password.
    */
@@ -713,7 +713,7 @@ export type UpdateUserRequest = {
   /**
    * New password for the Kafka cluster user.
    */
-  password?: string
+  password?: string | null
 }
 
 

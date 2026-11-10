@@ -95,11 +95,11 @@ export interface Binding {
   /**
    * Key associated to the binding.
    */
-  key?: BindingKey
+  key?: BindingKey | null
   /**
    * Value associated to the binding.
    */
-  value?: BindingValue
+  value?: BindingValue | null
 }
 
 
@@ -163,13 +163,13 @@ export type CreateKeyRequest = {
   /**
    * ID of the organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
-   * Name of the annotation key.
+   * Name of the annotation key. Never use a secret as a name, as it is shown in the audit trail.
    */
   name: string
   /**
-   * Description of the annotation key.
+   * Description of the annotation key. Never put a secret in the description, as it is shown in the audit trail.
    */
   description: string
 }
@@ -181,11 +181,11 @@ export type CreateValueRequest = {
    */
   keyId: string
   /**
-   * Name of the value.
+   * Name of the value. Never use a secret as a name, as it is shown in the audit trail.
    */
   name: string
   /**
-   * Description of the value.
+   * Description of the value. Never put a secret in the description, as it is shown in the audit trail.
    */
   description: string
 }
@@ -199,7 +199,7 @@ export type DeleteAllBindingsMatchingSRNRequest = {
   /**
    * ID of the organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -287,7 +287,7 @@ export type ListAllKeysAndValuesRequest = {
   /**
    * ID of the organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -303,23 +303,23 @@ export type ListBindingsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of bindings on the page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * SRN of the resource for which to list all bindings.
    */
-  targetSrn?: string
+  targetSrn?: string | null
   /**
    * Value ID for which to list all bindings.
    */
-  valueId?: string
+  valueId?: string | null
 }
 
 
@@ -339,15 +339,15 @@ export type ListKeysRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of keys on the page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -367,19 +367,19 @@ export type ListValuesRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of values on the page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * ID of the key to list the values for.
    */
-  keyId?: string
+  keyId?: string | null
 }
 
 
@@ -401,13 +401,13 @@ export type UpdateKeyRequest = {
    */
   keyId: string
   /**
-   * New name of the key.
+   * New name of the key. Never use a secret as a name, as it is shown in the audit trail.
    */
-  name?: string
+  name?: string | null
   /**
-   * New description of the key.
+   * New description of the key. Never put a secret in the description, as it is shown in the audit trail.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -417,13 +417,13 @@ export type UpdateValueRequest = {
    */
   valueId: string
   /**
-   * New name of the value.
+   * New name of the value. Never use a secret as a name, as it is shown in the audit trail.
    */
-  name?: string
+  name?: string | null
   /**
-   * New description of the value.
+   * New description of the value. Never put a secret in the description, as it is shown in the audit trail.
    */
-  description?: string
+  description?: string | null
 }
 
 

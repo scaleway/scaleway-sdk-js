@@ -56,12 +56,12 @@ export interface CreateJobDefinitionSecretsRequestSecretConfig {
    *
    * One-of ('pathOrEnvVar'): at most one of 'path', 'envVarName' could be set.
    */
-  path?: string
+  path?: string | null
   /**
    *
    * One-of ('pathOrEnvVar'): at most one of 'path', 'envVarName' could be set.
    */
-  envVarName?: string
+  envVarName?: string | null
 }
 
 
@@ -83,21 +83,21 @@ export interface Secret {
    *
    * One-of ('secretConfig'): at most one of 'file', 'envVar' could be set.
    */
-  file?: SecretFile
+  file?: SecretFile | null
   /**
    * Environment variable used to expose the secret.
    *
    * One-of ('secretConfig'): at most one of 'file', 'envVar' could be set.
    */
-  envVar?: SecretEnvVar
+  envVar?: SecretEnvVar | null
 }
 
 
 export interface JobDefinition {
   id: string
   name: string
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt?: Date | null
+  updatedAt?: Date | null
   cpuLimit: number
   memoryLimit: number
   imageUri: string
@@ -105,8 +105,8 @@ export interface JobDefinition {
   projectId: string
   environmentVariables: Record<string, string>
   description: string
-  jobTimeout?: string
-  cronSchedule?: CronSchedule
+  jobTimeout?: string | null
+  cronSchedule?: CronSchedule | null
   localStorageCapacity: number
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -119,18 +119,18 @@ export interface JobRun {
   id: string
   jobDefinitionId: string
   state: JobRunState
-  createdAt?: Date
-  updatedAt?: Date
-  terminatedAt?: Date
-  exitCode?: number
-  runDuration?: string
+  createdAt?: Date | null
+  updatedAt?: Date | null
+  terminatedAt?: Date | null
+  exitCode?: number | null
+  runDuration?: string | null
   errorMessage: string
   cpuLimit: number
   memoryLimit: number
   command: string
   environmentVariables: Record<string, string>
   localStorageCapacity: number
-  startedAt?: Date
+  startedAt?: Date | null
   /**
    * Region to target. If none is passed will use default region from the config.
    */
@@ -145,8 +145,8 @@ export interface Resource {
 
 
 export interface UpdateJobDefinitionRequestCronScheduleConfig {
-  schedule?: string
-  timezone?: string
+  schedule?: string | null
+  timezone?: string | null
 }
 
 
@@ -154,11 +154,11 @@ export type CreateJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the job definition.
    */
-  name?: string
+  name?: string | null
   /**
    * CPU limit of the job.
    */
@@ -170,7 +170,7 @@ export type CreateJobDefinitionRequest = {
   /**
    * Local storage capacity of the job (in MiB).
    */
-  localStorageCapacity?: number
+  localStorageCapacity?: number | null
   /**
    * Image to use for the job.
    */
@@ -182,11 +182,11 @@ export type CreateJobDefinitionRequest = {
   /**
    * UUID of the Scaleway Project containing the job.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Environment variables of the job.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Description of the job.
    */
@@ -194,11 +194,11 @@ export type CreateJobDefinitionRequest = {
   /**
    * Timeout of the job in seconds.
    */
-  jobTimeout?: string
+  jobTimeout?: string | null
   /**
    * Configure a cron for the job.
    */
-  cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
+  cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig | null
 }
 
 
@@ -206,7 +206,7 @@ export type CreateJobDefinitionSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -230,7 +230,7 @@ export type DeleteJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition to delete.
    */
@@ -242,7 +242,7 @@ export type DeleteJobDefinitionSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -258,7 +258,7 @@ export type GetJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition to get.
    */
@@ -270,7 +270,7 @@ export type GetJobDefinitionSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -286,7 +286,7 @@ export type GetJobRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job run to get.
    */
@@ -298,7 +298,7 @@ export type GetJobsLimitsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
 }
 
 
@@ -311,7 +311,7 @@ export type ListJobDefinitionSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -335,12 +335,12 @@ export type ListJobDefinitionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  page?: number
-  pageSize?: number
-  orderBy?: ListJobDefinitionsRequestOrderBy
-  projectId?: string
-  organizationId?: string
+  region?: ScwRegion | null
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListJobDefinitionsRequestOrderBy | null
+  projectId?: string | null
+  organizationId?: string | null
 }
 
 
@@ -354,15 +354,15 @@ export type ListJobRunsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  page?: number
-  pageSize?: number
-  orderBy?: ListJobRunsRequestOrderBy
-  jobDefinitionId?: string
-  projectId?: string
-  organizationId?: string
-  state?: JobRunState
-  states?: JobRunState[]
+  region?: ScwRegion | null
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListJobRunsRequestOrderBy | null
+  jobDefinitionId?: string | null
+  projectId?: string | null
+  organizationId?: string | null
+  state?: JobRunState | null
+  states?: JobRunState[] | null
 }
 
 
@@ -376,7 +376,7 @@ export type ListJobsResourcesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
 }
 
 
@@ -389,7 +389,7 @@ export type StartJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition to start.
    */
@@ -397,15 +397,15 @@ export type StartJobDefinitionRequest = {
   /**
    * Contextual startup command for this specific job run.
    */
-  command?: string
+  command?: string | null
   /**
    * Contextual environment variables for this specific job run.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Number of jobs to run.
    */
-  replicas?: number
+  replicas?: number | null
 }
 
 
@@ -418,7 +418,7 @@ export type StopJobRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job run to stop.
    */
@@ -430,7 +430,7 @@ export type UpdateJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition to update.
    */
@@ -438,40 +438,40 @@ export type UpdateJobDefinitionRequest = {
   /**
    * Name of the job definition.
    */
-  name?: string
+  name?: string | null
   /**
    * CPU limit of the job.
    */
-  cpuLimit?: number
+  cpuLimit?: number | null
   /**
    * Memory limit of the job (in MiB).
    */
-  memoryLimit?: number
+  memoryLimit?: number | null
   /**
    * Local storage capacity of the job (in MiB).
    */
-  localStorageCapacity?: number
+  localStorageCapacity?: number | null
   /**
    * Image to use for the job.
    */
-  imageUri?: string
+  imageUri?: string | null
   /**
    * Startup command.
    */
-  command?: string
+  command?: string | null
   /**
    * Environment variables of the job.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Description of the job.
    */
-  description?: string
+  description?: string | null
   /**
    * Timeout of the job in seconds.
    */
-  jobTimeout?: string
-  cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig
+  jobTimeout?: string | null
+  cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig | null
 }
 
 
@@ -479,7 +479,7 @@ export type UpdateJobDefinitionSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -491,19 +491,19 @@ export type UpdateJobDefinitionSecretRequest = {
   /**
    * Version of the secret in Secret Manager.
    */
-  secretManagerVersion?: string
+  secretManagerVersion?: string | null
   /**
    * Path of the secret to mount inside the job (either `path` or `env_var_name` must be set).
    *
    * One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set.
    */
-  path?: string
+  path?: string | null
   /**
    * Environment variable name used to expose the secret inside the job (either `path` or `env_var_name` must be set).
    *
    * One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set.
    */
-  envVarName?: string
+  envVarName?: string | null
 }
 
 

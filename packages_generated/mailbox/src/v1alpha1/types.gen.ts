@@ -137,7 +137,7 @@ export interface Mailbox {
   /**
    * Date and time of subscription period start.
    */
-  subscriptionPeriodStartedAt?: Date
+  subscriptionPeriodStartedAt?: Date | null
   /**
    * Next subscription renewal period, it can be monthly or yearly or canceled if the subscription has been canceled.
    */
@@ -145,19 +145,19 @@ export interface Mailbox {
   /**
    * Date and time when the next subscription period starts.
    */
-  nextSubscriptionPeriodStartsAt?: Date
+  nextSubscriptionPeriodStartsAt?: Date | null
   /**
    * Date and time of mailbox creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time when the mailbox was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date and time of the unrecoverable mailbox deletion.
    */
-  deletionScheduledAt?: Date
+  deletionScheduledAt?: Date | null
 }
 
 
@@ -193,15 +193,15 @@ export interface DomainRecord {
   /**
    * Error associated in case the record is not valid.
    */
-  error?: string
+  error?: string | null
   /**
    * Date and time of record creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of record last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -229,11 +229,11 @@ export interface Alias {
   /**
    * Date and time of alias creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time when the alias was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -265,11 +265,11 @@ export interface Domain {
   /**
    * Date and time of domain creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of the domain's last update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * URL of the domain's webmail.
    */
@@ -297,11 +297,11 @@ export interface Forwarding {
   /**
    * Date and time of forwarding rule creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time when the forwarding rule was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ID of the mailbox to which the forwarding rule belongs.
    */
@@ -321,7 +321,7 @@ export type BatchCreateMailboxesRequest = {
   /**
    * Parameters for the mailboxes to create.
    */
-  mailboxes?: BatchCreateMailboxesRequestMailboxParameters[]
+  mailboxes?: BatchCreateMailboxesRequestMailboxParameters[] | null
   /**
    * ID of the domain in which to create the mailboxes.
    */
@@ -329,7 +329,7 @@ export type BatchCreateMailboxesRequest = {
   /**
    * Subscription renewal period, it can be monthly or yearly.
    */
-  subscriptionPeriod?: MailboxSubscriptionPeriod
+  subscriptionPeriod?: MailboxSubscriptionPeriod | null
 }
 
 
@@ -353,7 +353,7 @@ export type CreateAliasRequest = {
   /**
    * (Optional) Description of the alias.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -361,7 +361,7 @@ export type CreateDomainRequest = {
   /**
    * ID of the project to which the domain belongs.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Fully qualified domain name.
    */
@@ -433,51 +433,51 @@ export interface GetDomainRecordsResponse {
   /**
    * Record designed to automatically configure an email client with the appropriate mail server settings using a standardized XML file format.
    */
-  autoconfig?: DomainRecord
+  autoconfig?: DomainRecord | null
   /**
    * Record designed to automate the discovery of server settings to configure email clients like Outlook.
    */
-  autodiscover?: DomainRecord
+  autodiscover?: DomainRecord | null
   /**
    * Record that allows clients to interact with calendar data stored on a server.
    */
-  caldav?: DomainRecord
+  caldav?: DomainRecord | null
   /**
    * Record that allows clients to interact with contact data stored on a server.
    */
-  carddav?: DomainRecord
+  carddav?: DomainRecord | null
   /**
    * Record that allows the DKIM email authentication method to be employed to verify the authenticity of an email message.
    */
-  dkim?: DomainRecord
+  dkim?: DomainRecord | null
   /**
    * Record that provides a mechanism for email receivers to determine if incoming messages are legitimate and were sent from authorized sources.
    */
-  dmarc?: DomainRecord
+  dmarc?: DomainRecord | null
   /**
    * Record that provides a unique token to validate a domain ownership.
    */
-  domainValidation?: DomainRecord
+  domainValidation?: DomainRecord | null
   /**
    * Record that allows accessing the mailbox with the IMAP protocol.
    */
-  imap?: DomainRecord
+  imap?: DomainRecord | null
   /**
    * Record that directs emails to a mail server.
    */
-  mx?: DomainRecord
+  mx?: DomainRecord | null
   /**
    * Record that allows accessing the mailbox with the POP3 protocol.
    */
-  pop3?: DomainRecord
+  pop3?: DomainRecord | null
   /**
    * Record that lists all the servers authorized to send emails from a particular domain.
    */
-  spf?: DomainRecord
+  spf?: DomainRecord | null
   /**
    * Record that allows the use of the SMTP submission mechanism.
    */
-  submission?: DomainRecord
+  submission?: DomainRecord | null
 }
 
 
@@ -517,27 +517,27 @@ export type ListAliasesRequest = {
   /**
    * Order aliases by specific criteria.
    */
-  orderBy?: ListAliasesRequestOrderBy
+  orderBy?: ListAliasesRequestOrderBy | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Requested page size. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the mailbox for which to list aliases.
    */
-  mailboxId?: string
+  mailboxId?: string | null
   /**
    * (Optional) Filter aliases by their status.
    */
-  status?: AliasStatus
+  status?: AliasStatus | null
   /**
    * Project ID to filter on.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -554,12 +554,12 @@ export interface ListAliasesResponse {
 
 
 export type ListDomainsRequest = {
-  orderBy?: ListDomainsRequestOrderBy
-  page?: number
-  pageSize?: number
-  projectId?: string
-  statuses?: DomainStatus[]
-  search?: string
+  orderBy?: ListDomainsRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
+  projectId?: string | null
+  statuses?: DomainStatus[] | null
+  search?: string | null
 }
 
 
@@ -579,35 +579,35 @@ export type ListForwardingsRequest = {
   /**
    * Order forwardings by specific criteria.
    */
-  orderBy?: ListForwardingsRequestOrderBy
+  orderBy?: ListForwardingsRequestOrderBy | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Requested page size. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * (Optional) ID of the mailbox for which to list forwarding rules.
    */
-  mailboxId?: string
+  mailboxId?: string | null
   /**
    * (Optional) Filter forwarding rules by their status.
    */
-  status?: ForwardingStatus
+  status?: ForwardingStatus | null
   /**
    * ID of the Project to filter on.
    *
    * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * ID of the Organization to filter on.
    *
    * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -627,31 +627,31 @@ export type ListMailboxesRequest = {
   /**
    * Order matching mailbox by different criteria.
    */
-  orderBy?: ListMailboxesRequestOrderBy
+  orderBy?: ListMailboxesRequestOrderBy | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Requested page size. Value must be between 1 and 1000.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * (Optional) ID of the domain in which to list the mailboxes.
    */
-  domainId?: string
+  domainId?: string | null
   /**
    * (Optional) Filter mailboxes by their statuses.
    */
-  statuses?: MailboxStatus[]
+  statuses?: MailboxStatus[] | null
   /**
    * (Optional) Search term to filter mailboxes on name and local_part.
    */
-  search?: string
+  search?: string | null
   /**
    * (Optional) Project ID to filter mailboxes on.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -683,11 +683,11 @@ export interface MailboxForwarding {
   /**
    * Date and time of the forwarding settings creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time when the forwarding settings were last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -707,7 +707,7 @@ export type UpdateAliasRequest = {
   /**
    * (Optional) Description of the alias.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -719,7 +719,7 @@ export type UpdateForwardingRequest = {
   /**
    * (Optional) New destination email address for the forwarding rule. Must not be the same as the mailbox's own email address.
    */
-  email?: string
+  email?: string | null
 }
 
 
@@ -731,11 +731,11 @@ export type UpdateMailboxForwardingRequest = {
   /**
    * (Optional) Whether to keep a copy of forwarded emails in the local mailbox.
    */
-  keepCopy?: boolean
+  keepCopy?: boolean | null
   /**
    * (Optional) Enable or disable forwarding for the mailbox.
    */
-  enabled?: boolean
+  enabled?: boolean | null
 }
 
 
@@ -747,11 +747,11 @@ export type UpdateMailboxRequest = {
   /**
    * (Optional) New subscription period for the mailbox.
    */
-  subscriptionPeriod?: MailboxSubscriptionPeriod
+  subscriptionPeriod?: MailboxSubscriptionPeriod | null
   /**
    * (Optional) New password of the mailbox.
    */
-  newPassword?: string
+  newPassword?: string | null
 }
 
 

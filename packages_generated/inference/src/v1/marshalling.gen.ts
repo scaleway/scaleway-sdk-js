@@ -59,8 +59,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   return {
     disableAuth: data.disable_auth,
     id: data.id,
-    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
-    publicNetwork: data.public_network ? unmarshalEndpointPublicNetworkDetails(data.public_network) : undefined,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : null,
+    publicNetwork: data.public_network ? unmarshalEndpointPublicNetworkDetails(data.public_network) : null,
     url: data.url,
   } as Endpoint
 }
@@ -85,9 +85,9 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     id: data.id,
     maxSize: data.max_size,
     minSize: data.min_size,
@@ -96,12 +96,12 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     name: data.name,
     nodeTypeName: data.node_type_name,
     projectId: data.project_id,
-    quantization: data.quantization ? unmarshalDeploymentQuantization(data.quantization) : undefined,
+    quantization: data.quantization ? unmarshalDeploymentQuantization(data.quantization) : null,
     region: data.region,
     size: data.size,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Deployment
 }
 
@@ -152,9 +152,9 @@ export const unmarshalModel = (data: unknown): Model => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     hasEula: data.has_eula,
     id: data.id,
     name: data.name,
@@ -165,7 +165,7 @@ export const unmarshalModel = (data: unknown): Model => {
     sizeBytes: data.size_bytes,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Model
 }
 
@@ -204,7 +204,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
 
   return {
     beta: data.beta,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     disabled: data.disabled,
     gpus: data.gpus,
@@ -212,7 +212,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
     name: data.name,
     region: data.region,
     stockStatus: data.stock_status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vcpus: data.vcpus,
     vram: data.vram,
   } as NodeType
@@ -258,11 +258,11 @@ const marshalEndpointSpec = (
   disable_auth: request.disableAuth,  
   ...resolveOneOf([
     {param: 'public_network',
-      value: (request.publicNetwork !== undefined) ? marshalEndpointPublicNetworkDetails(request.publicNetwork, defaults)
+      value: (request.publicNetwork != null) ? marshalEndpointPublicNetworkDetails(request.publicNetwork, defaults)
       : undefined,
     },
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointPrivateNetworkDetails(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalEndpointPrivateNetworkDetails(request.privateNetwork, defaults)
       : undefined,
     },
   ]),
@@ -280,7 +280,7 @@ export const marshalCreateDeploymentRequest = (
   name: request.name || randomName('inference'),
   node_type_name: request.nodeTypeName,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  quantization: ((request.quantization !== undefined) ?  marshalDeploymentQuantization(request.quantization, defaults): undefined),
+  quantization: ((request.quantization != null) ?  marshalDeploymentQuantization(request.quantization, defaults): undefined),
   tags: request.tags,
 })
 
@@ -321,7 +321,7 @@ export const marshalUpdateDeploymentRequest = (
   min_size: request.minSize,
   model_id: request.modelId,
   name: request.name,
-  quantization: ((request.quantization !== undefined) ?  marshalDeploymentQuantization(request.quantization, defaults): undefined),
+  quantization: ((request.quantization != null) ?  marshalDeploymentQuantization(request.quantization, defaults): undefined),
   tags: request.tags,
 })
 

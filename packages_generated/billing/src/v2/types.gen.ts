@@ -21,11 +21,11 @@ export interface BudgetAlertNotification {
   /**
    * The creation date of the alert notification.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last modification date of the alert notification.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Kind of notification.
    */
@@ -45,11 +45,11 @@ export interface BudgetAlert {
   /**
    * The creation date of the alert.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last modification date of the alert.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Percentage threshold of the budget's limit for which the alert is triggered.
    */
@@ -69,11 +69,11 @@ export interface Budget {
   /**
    * The creation date of the budget.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last modification date of the budget.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * The organization ID of the budget.
    */
@@ -85,7 +85,7 @@ export interface Budget {
   /**
    * Cost limit for this budget expressed in the embedded currency code.
    */
-  consumptionLimit?: Money
+  consumptionLimit?: Money | null
   /**
    * Alerts defined for this budget.
    */
@@ -101,19 +101,19 @@ export interface ElectronicAddress {
   /**
    * The start date of the electronic address.
    */
-  startsAt?: Date
+  startsAt?: Date | null
   /**
    * The stop date of the electronic address.
    */
-  stopsAt?: Date
+  stopsAt?: Date | null
   /**
    * The creation date of the electronic address.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The last modification date of the electronic address.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * The organization ID of the electronic address.
    */
@@ -135,19 +135,19 @@ export type CreateBudgetAlertNotificationRequest = {
    *
    * One-of ('recipientType'): at most one of 'smsPhoneNumbers', 'emailAddresses', 'webhookUrls' could be set.
    */
-  smsPhoneNumbers?: string[]
+  smsPhoneNumbers?: string[] | null
   /**
    * List of email addresses to receive email notifications.
    *
    * One-of ('recipientType'): at most one of 'smsPhoneNumbers', 'emailAddresses', 'webhookUrls' could be set.
    */
-  emailAddresses?: string[]
+  emailAddresses?: string[] | null
   /**
    * List of webhook url to receive webhook notifications.
    *
    * One-of ('recipientType'): at most one of 'smsPhoneNumbers', 'emailAddresses', 'webhookUrls' could be set.
    */
-  webhookUrls?: string[]
+  webhookUrls?: string[] | null
 }
 
 
@@ -167,7 +167,7 @@ export type CreateBudgetRequest = {
   /**
    * The Organization ID of the budget.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Cost limit for the budget expressed in the invoiced currency (no cents allowed).
    */
@@ -207,7 +207,7 @@ export type ElectronicBillingApiCreateElectronicAddressRequest = {
   /**
    * The Organization ID to set electronic address.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Electronic address to set.
    */
@@ -215,11 +215,11 @@ export type ElectronicBillingApiCreateElectronicAddressRequest = {
   /**
    * When electronic address should be active.
    */
-  startsAt?: Date
+  startsAt?: Date | null
   /**
    * When electronic address should stop being active.
    */
-  stopsAt?: Date
+  stopsAt?: Date | null
 }
 
 
@@ -243,27 +243,27 @@ export type ElectronicBillingApiListElectronicAddressesRequest = {
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of Electronic Address to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order of Electronic address in the response.
    */
-  orderBy?: ListElectronicAddressesRequestOrderBy
+  orderBy?: ListElectronicAddressesRequestOrderBy | null
   /**
    * The Organization ID to set electronic address.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter services where electronic address start_date is greater or equal to starts_after.
    */
-  startsAfter?: Date
+  startsAfter?: Date | null
   /**
    * Filter services where electronic address stop_date is before stops_before.
    */
-  stopsBefore?: Date
+  stopsBefore?: Date | null
 }
 
 
@@ -275,11 +275,11 @@ export type ElectronicBillingApiUpdateElectronicAddressRequest = {
   /**
    * Electronic address to set.
    */
-  value?: string
+  value?: string | null
   /**
    * When electronic address should stop being active.
    */
-  stopsAt?: Date
+  stopsAt?: Date | null
 }
 
 
@@ -295,15 +295,15 @@ export type ListBudgetsRequest = {
   /**
    * Filter by organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -341,19 +341,19 @@ export type UpdateBudgetAlertNotificationRequest = {
    *
    * One-of ('recipientType'): at most one of 'smsPhoneNumbers', 'emailAddresses', 'webhookUrls' could be set.
    */
-  smsPhoneNumbers?: string[]
+  smsPhoneNumbers?: string[] | null
   /**
    * List of email addresses to receive email notifications.
    *
    * One-of ('recipientType'): at most one of 'smsPhoneNumbers', 'emailAddresses', 'webhookUrls' could be set.
    */
-  emailAddresses?: string[]
+  emailAddresses?: string[] | null
   /**
    * List of webhook url to receive webhook notifications.
    *
    * One-of ('recipientType'): at most one of 'smsPhoneNumbers', 'emailAddresses', 'webhookUrls' could be set.
    */
-  webhookUrls?: string[]
+  webhookUrls?: string[] | null
 }
 
 
@@ -377,11 +377,11 @@ export type UpdateBudgetRequest = {
   /**
    * Cost limit for the budget expressed in the invoiced currency (no cents allowed).
    */
-  consumptionLimit?: number
+  consumptionLimit?: number | null
   /**
    * Whether the budget will be enabled or not.
    */
-  enabled?: boolean
+  enabled?: boolean | null
 }
 
 

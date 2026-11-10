@@ -44,8 +44,8 @@ const unmarshalKeyRotationPolicy = (data: unknown): KeyRotationPolicy => {
   }
 
   return {
-    nextRotationAt: unmarshalDate(data.next_rotation_at),
-    rotationPeriod: data.rotation_period,
+    nextRotationAt: unmarshalDate(data.next_rotation_at) ?? null,
+    rotationPeriod: data.rotation_period ?? null,
   } as KeyRotationPolicy
 }
 
@@ -57,10 +57,10 @@ const unmarshalKeyUsage = (data: unknown): KeyUsage => {
   }
 
   return {
-    asymmetricEncryption: data.asymmetric_encryption ? data.asymmetric_encryption : undefined,
-    asymmetricSigning: data.asymmetric_signing ? data.asymmetric_signing : undefined,
-    keyEncapsulation: data.key_encapsulation ? data.key_encapsulation : undefined,
-    symmetricEncryption: data.symmetric_encryption ? data.symmetric_encryption : undefined,
+    asymmetricEncryption: data.asymmetric_encryption ? data.asymmetric_encryption : null,
+    asymmetricSigning: data.asymmetric_signing ? data.asymmetric_signing : null,
+    keyEncapsulation: data.key_encapsulation ? data.key_encapsulation : null,
+    symmetricEncryption: data.symmetric_encryption ? data.symmetric_encryption : null,
   } as KeyUsage
 }
 
@@ -72,9 +72,9 @@ export const unmarshalKey = (data: unknown): Key => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    deletionRequestedAt: unmarshalDate(data.deletion_requested_at),
-    description: data.description,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deletionRequestedAt: unmarshalDate(data.deletion_requested_at) ?? null,
+    description: data.description ?? null,
     id: data.id,
     locked: data.locked,
     name: data.name,
@@ -83,14 +83,14 @@ export const unmarshalKey = (data: unknown): Key => {
     protected: data.protected,
     protectionLevel: data.protection_level,
     region: data.region,
-    rotatedAt: unmarshalDate(data.rotated_at),
+    rotatedAt: unmarshalDate(data.rotated_at) ?? null,
     rotationCount: data.rotation_count,
-    rotationPolicy: data.rotation_policy ? unmarshalKeyRotationPolicy(data.rotation_policy) : undefined,
+    rotationPolicy: data.rotation_policy ? unmarshalKeyRotationPolicy(data.rotation_policy) : null,
     srn: data.srn,
     state: data.state,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    usage: data.usage ? unmarshalKeyUsage(data.usage) : undefined,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    usage: data.usage ? unmarshalKeyUsage(data.usage) : null,
   } as Key
 }
 
@@ -104,9 +104,9 @@ export const unmarshalDataKey = (data: unknown): DataKey => {
   return {
     algorithm: data.algorithm,
     ciphertext: data.ciphertext,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     keyId: data.key_id,
-    plaintext: data.plaintext,
+    plaintext: data.plaintext ?? null,
   } as DataKey
 }
 
@@ -118,7 +118,7 @@ export const unmarshalDecryptResponse = (data: unknown): DecryptResponse => {
   }
 
   return {
-    ciphertext: data.ciphertext,
+    ciphertext: data.ciphertext ?? null,
     keyId: data.key_id,
     plaintext: data.plaintext,
   } as DecryptResponse
@@ -185,13 +185,13 @@ const unmarshalKeyRotation = (data: unknown): KeyRotation => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    deletedAt: unmarshalDate(data.deleted_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deletedAt: unmarshalDate(data.deleted_at) ?? null,
     index: data.index,
     keyId: data.key_id,
     manuallyRotated: data.manually_rotated,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as KeyRotation
 }
 
@@ -322,10 +322,10 @@ export const marshalCreateKeyRequest = (
   origin: request.origin,
   project_id: request.projectId ?? defaults.defaultProjectId,
   protection_level: request.protectionLevel,
-  rotation_policy: ((request.rotationPolicy !== undefined) ?  marshalKeyRotationPolicy(request.rotationPolicy, defaults): undefined),
+  rotation_policy: ((request.rotationPolicy != null) ?  marshalKeyRotationPolicy(request.rotationPolicy, defaults): undefined),
   tags: request.tags,
   unprotected: request.unprotected,
-  usage: ((request.usage !== undefined) ?  marshalKeyUsage(request.usage, defaults): undefined),
+  usage: ((request.usage != null) ?  marshalKeyUsage(request.usage, defaults): undefined),
 })
 
 export const marshalDecryptRequest = (
@@ -384,7 +384,7 @@ export const marshalImportKeyMaterialRequest = (
       value: request.keyMaterial,
     },
     {param: 'encrypted_key_material',
-      value: (request.encryptedKeyMaterial !== undefined) ? marshalImportKeyMaterialRequestEncryptedKeyMaterial(request.encryptedKeyMaterial, defaults)
+      value: (request.encryptedKeyMaterial != null) ? marshalImportKeyMaterialRequestEncryptedKeyMaterial(request.encryptedKeyMaterial, defaults)
       : undefined,
     },
   ]),
@@ -421,7 +421,7 @@ export const marshalUpdateKeyRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
-  rotation_policy: ((request.rotationPolicy !== undefined) ?  marshalKeyRotationPolicy(request.rotationPolicy, defaults): undefined),
+  rotation_policy: ((request.rotationPolicy != null) ?  marshalKeyRotationPolicy(request.rotationPolicy, defaults): undefined),
   tags: request.tags,
 })
 

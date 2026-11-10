@@ -45,8 +45,8 @@ export const unmarshalJobCircuit = (data: unknown): JobCircuit => {
   }
 
   return {
-    percevalCircuit: data.perceval_circuit,
-    qiskitCircuit: data.qiskit_circuit,
+    percevalCircuit: data.perceval_circuit ?? null,
+    qiskitCircuit: data.qiskit_circuit ?? null,
   } as JobCircuit
 }
 
@@ -75,16 +75,16 @@ export const unmarshalBooking = (data: unknown): Booking => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
-    finishedAt: unmarshalDate(data.finished_at),
+    finishedAt: unmarshalDate(data.finished_at) ?? null,
     id: data.id,
     progressMessage: data.progress_message,
     srn: data.srn,
-    startedAt: unmarshalDate(data.started_at),
+    startedAt: unmarshalDate(data.started_at) ?? null,
     status: data.status,
-    timeZone: data.time_zone,
-    updatedAt: unmarshalDate(data.updated_at),
+    timeZone: data.time_zone ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Booking
 }
 
@@ -96,20 +96,20 @@ export const unmarshalJob = (data: unknown): Job => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
-    jobDuration: data.job_duration,
-    modelId: data.model_id,
+    jobDuration: data.job_duration ?? null,
+    modelId: data.model_id ?? null,
     name: data.name,
-    parameters: data.parameters,
-    progressMessage: data.progress_message,
-    resultDistribution: data.result_distribution,
+    parameters: data.parameters ?? null,
+    progressMessage: data.progress_message ?? null,
+    resultDistribution: data.result_distribution ?? null,
     sessionId: data.session_id,
     srn: data.srn,
-    startedAt: unmarshalDate(data.started_at),
+    startedAt: unmarshalDate(data.started_at) ?? null,
     status: data.status,
-    tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    tags: data.tags ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Job
 }
 
@@ -121,11 +121,11 @@ export const unmarshalModel = (data: unknown): Model => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     projectId: data.project_id,
     srn: data.srn,
-    url: data.url,
+    url: data.url ?? null,
   } as Model
 }
 
@@ -139,11 +139,11 @@ const unmarshalPlatformBookingRequirement = (data: unknown): PlatformBookingRequ
   return {
     maxBookingPerDay: data.max_booking_per_day,
     maxBookingPerWeek: data.max_booking_per_week,
-    maxCancellationDuration: data.max_cancellation_duration,
-    maxDuration: data.max_duration,
-    maxPlanificationDuration: data.max_planification_duration,
-    minDuration: data.min_duration,
-    minPlanificationDuration: data.min_planification_duration,
+    maxCancellationDuration: data.max_cancellation_duration ?? null,
+    maxDuration: data.max_duration ?? null,
+    maxPlanificationDuration: data.max_planification_duration ?? null,
+    minDuration: data.min_duration ?? null,
+    minPlanificationDuration: data.min_planification_duration ?? null,
   } as PlatformBookingRequirement
 }
 
@@ -174,10 +174,10 @@ export const unmarshalPlatform = (data: unknown): Platform => {
   return {
     availability: data.availability,
     backendName: data.backend_name,
-    bookingRequirement: data.booking_requirement ? unmarshalPlatformBookingRequirement(data.booking_requirement) : undefined,
+    bookingRequirement: data.booking_requirement ? unmarshalPlatformBookingRequirement(data.booking_requirement) : null,
     description: data.description,
     documentationUrl: data.documentation_url,
-    hardware: data.hardware ? unmarshalPlatformHardware(data.hardware) : undefined,
+    hardware: data.hardware ? unmarshalPlatformHardware(data.hardware) : null,
     id: data.id,
     isBookable: data.is_bookable,
     maxCircuitCount: data.max_circuit_count,
@@ -185,9 +185,9 @@ export const unmarshalPlatform = (data: unknown): Platform => {
     maxShotCount: data.max_shot_count,
     metadata: data.metadata,
     name: data.name,
-    pricePerCircuit: data.price_per_circuit ? unmarshalMoney(data.price_per_circuit) : undefined,
-    pricePerHour: data.price_per_hour ? unmarshalMoney(data.price_per_hour) : undefined,
-    pricePerShot: data.price_per_shot ? unmarshalMoney(data.price_per_shot) : undefined,
+    pricePerCircuit: data.price_per_circuit ? unmarshalMoney(data.price_per_circuit) : null,
+    pricePerHour: data.price_per_hour ? unmarshalMoney(data.price_per_hour) : null,
+    pricePerShot: data.price_per_shot ? unmarshalMoney(data.price_per_shot) : null,
     providerName: data.provider_name,
     srn: data.srn,
     technology: data.technology,
@@ -204,22 +204,22 @@ export const unmarshalProcess = (data: unknown): Process => {
   }
 
   return {
-    applicationId: data.application_id,
+    applicationId: data.application_id ?? null,
     attachedSessionIds: data.attached_session_ids,
-    createdAt: unmarshalDate(data.created_at),
-    finishedAt: unmarshalDate(data.finished_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    finishedAt: unmarshalDate(data.finished_at) ?? null,
     id: data.id,
-    input: data.input,
+    input: data.input ?? null,
     name: data.name,
-    platformId: data.platform_id,
-    progress: data.progress,
-    progressMessage: data.progress_message,
+    platformId: data.platform_id ?? null,
+    progress: data.progress ?? null,
+    progressMessage: data.progress_message ?? null,
     projectId: data.project_id,
     srn: data.srn,
-    startedAt: unmarshalDate(data.started_at),
+    startedAt: unmarshalDate(data.started_at) ?? null,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Process
 }
 
@@ -231,27 +231,27 @@ export const unmarshalSession = (data: unknown): Session => {
   }
 
   return {
-    bookingId: data.booking_id,
-    createdAt: unmarshalDate(data.created_at),
+    bookingId: data.booking_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     deduplicationId: data.deduplication_id,
     finishedJobCount: data.finished_job_count,
     id: data.id,
-    maxDuration: data.max_duration,
-    maxIdleDuration: data.max_idle_duration,
-    modelId: data.model_id,
+    maxDuration: data.max_duration ?? null,
+    maxIdleDuration: data.max_idle_duration ?? null,
+    modelId: data.model_id ?? null,
     name: data.name,
-    originId: data.origin_id,
+    originId: data.origin_id ?? null,
     originType: data.origin_type,
-    parameters: data.parameters,
+    parameters: data.parameters ?? null,
     platformId: data.platform_id,
-    progressMessage: data.progress_message,
+    progressMessage: data.progress_message ?? null,
     projectId: data.project_id,
     srn: data.srn,
-    startedAt: unmarshalDate(data.started_at),
+    startedAt: unmarshalDate(data.started_at) ?? null,
     status: data.status,
-    tags: data.tags,
-    terminatedAt: unmarshalDate(data.terminated_at),
-    updatedAt: unmarshalDate(data.updated_at),
+    tags: data.tags ?? null,
+    terminatedAt: unmarshalDate(data.terminated_at) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     waitingJobCount: data.waiting_job_count,
   } as Session
 }
@@ -290,10 +290,10 @@ const unmarshalJobResult = (data: unknown): JobResult => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     jobId: data.job_id,
-    result: data.result,
-    url: data.url,
+    result: data.result ?? null,
+    url: data.url ?? null,
   } as JobResult
 }
 
@@ -357,7 +357,7 @@ const unmarshalProcessResult = (data: unknown): ProcessResult => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     processId: data.process_id,
     result: data.result,
   } as ProcessResult
@@ -476,7 +476,7 @@ export const marshalCreateSessionRequest = (
   request: CreateSessionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  booking_demand: ((request.bookingDemand !== undefined) ?  marshalCreateSessionRequestBookingDemand(request.bookingDemand, defaults): undefined),
+  booking_demand: ((request.bookingDemand != null) ?  marshalCreateSessionRequestBookingDemand(request.bookingDemand, defaults): undefined),
   deduplication_id: request.deduplicationId,
   max_duration: request.maxDuration,
   max_idle_duration: request.maxIdleDuration,

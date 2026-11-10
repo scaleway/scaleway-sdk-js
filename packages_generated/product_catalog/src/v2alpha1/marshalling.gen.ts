@@ -45,6 +45,7 @@ import type {
   PublicCatalogProductPropertiesApacheKafka,
   PublicCatalogProductPropertiesAppleSilicon,
   PublicCatalogProductPropertiesBlockStorage,
+  PublicCatalogProductPropertiesCockpit,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesFileStorage,
@@ -168,11 +169,11 @@ const unmarshalPublicCatalogProductPropertiesHardwareCPU = (data: unknown): Publ
   return {
     arch: data.arch,
     description: data.description,
-    physical: data.physical ? unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical(data.physical) : undefined,
+    physical: data.physical ? unmarshalPublicCatalogProductPropertiesHardwareCPUPhysical(data.physical) : null,
     shared: data.shared,
     threads: data.threads,
     type: data.type,
-    virtual: data.virtual ? unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual(data.virtual) : undefined,
+    virtual: data.virtual ? unmarshalPublicCatalogProductPropertiesHardwareCPUVirtual(data.virtual) : null,
   } as PublicCatalogProductPropertiesHardwareCPU
 }
 
@@ -214,7 +215,7 @@ const unmarshalPublicCatalogProductPropertiesHardwareRAM = (data: unknown): Publ
 
   return {
     description: data.description,
-    eccType: data.ecc_type ? data.ecc_type : undefined,
+    eccType: data.ecc_type ? data.ecc_type : null,
     size: data.size,
     type: data.type,
   } as PublicCatalogProductPropertiesHardwareRAM
@@ -554,8 +555,8 @@ const unmarshalPublicCatalogProductPropertiesApacheKafka = (data: unknown): Publ
   }
 
   return {
-    node: data.node ? unmarshalPublicCatalogProductPropertiesApacheKafkaNodeType(data.node) : undefined,
-    storage: data.storage ? unmarshalPublicCatalogProductPropertiesApacheKafkaStorageType(data.storage) : undefined,
+    node: data.node ? unmarshalPublicCatalogProductPropertiesApacheKafkaNodeType(data.node) : null,
+    storage: data.storage ? unmarshalPublicCatalogProductPropertiesApacheKafkaStorageType(data.storage) : null,
   } as PublicCatalogProductPropertiesApacheKafka
 }
 
@@ -580,11 +581,22 @@ const unmarshalPublicCatalogProductPropertiesBlockStorage = (data: unknown): Pub
   }
 
   return {
-    maxVolumeSize: data.max_volume_size,
-    minVolumeSize: data.min_volume_size,
-    snapshot: data.snapshot ? unmarshalPublicCatalogProductPropertiesBlockStorageSnapshotType(data.snapshot) : undefined,
-    volume: data.volume ? unmarshalPublicCatalogProductPropertiesBlockStorageVolumeType(data.volume) : undefined,
+    maxVolumeSize: data.max_volume_size ?? null,
+    minVolumeSize: data.min_volume_size ?? null,
+    snapshot: data.snapshot ? unmarshalPublicCatalogProductPropertiesBlockStorageSnapshotType(data.snapshot) : null,
+    volume: data.volume ? unmarshalPublicCatalogProductPropertiesBlockStorageVolumeType(data.volume) : null,
   } as PublicCatalogProductPropertiesBlockStorage
+}
+
+const unmarshalPublicCatalogProductPropertiesCockpit = (data: unknown): PublicCatalogProductPropertiesCockpit => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'PublicCatalogProductPropertiesCockpit' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+  } as PublicCatalogProductPropertiesCockpit
 }
 
 const unmarshalPublicCatalogProductPropertiesDedibox = (data: unknown): PublicCatalogProductPropertiesDedibox => {
@@ -635,7 +647,7 @@ const unmarshalPublicCatalogProductPropertiesGenerativeApis = (data: unknown): P
 
   return {
     consumptionMode: data.consumption_mode,
-    defaultReasoningValue: data.default_reasoning_value,
+    defaultReasoningValue: data.default_reasoning_value ?? null,
     providerName: data.provider_name,
     reasoning: data.reasoning,
     supportedApis: data.supported_apis,
@@ -653,11 +665,11 @@ const unmarshalPublicCatalogProductPropertiesHardware = (data: unknown): PublicC
   }
 
   return {
-    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesHardwareCPU(data.cpu) : undefined,
-    gpu: data.gpu ? unmarshalPublicCatalogProductPropertiesHardwareGPU(data.gpu) : undefined,
-    network: data.network ? unmarshalPublicCatalogProductPropertiesHardwareNetwork(data.network) : undefined,
-    ram: data.ram ? unmarshalPublicCatalogProductPropertiesHardwareRAM(data.ram) : undefined,
-    storage: data.storage ? unmarshalPublicCatalogProductPropertiesHardwareStorage(data.storage) : undefined,
+    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesHardwareCPU(data.cpu) : null,
+    gpu: data.gpu ? unmarshalPublicCatalogProductPropertiesHardwareGPU(data.gpu) : null,
+    network: data.network ? unmarshalPublicCatalogProductPropertiesHardwareNetwork(data.network) : null,
+    ram: data.ram ? unmarshalPublicCatalogProductPropertiesHardwareRAM(data.ram) : null,
+    storage: data.storage ? unmarshalPublicCatalogProductPropertiesHardwareStorage(data.storage) : null,
   } as PublicCatalogProductPropertiesHardware
 }
 
@@ -716,9 +728,9 @@ const unmarshalPublicCatalogProductPropertiesKubernetes = (data: unknown): Publi
   }
 
   return {
-    kapsuleControlPlane: data.kapsule_control_plane ? unmarshalPublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType(data.kapsule_control_plane) : undefined,
-    kosmosControlPlane: data.kosmos_control_plane ? unmarshalPublicCatalogProductPropertiesKubernetesKosmosControlPlaneType(data.kosmos_control_plane) : undefined,
-    kosmosNode: data.kosmos_node ? unmarshalPublicCatalogProductPropertiesKubernetesKosmosNodeType(data.kosmos_node) : undefined,
+    kapsuleControlPlane: data.kapsule_control_plane ? unmarshalPublicCatalogProductPropertiesKubernetesKapsuleControlPlaneType(data.kapsule_control_plane) : null,
+    kosmosControlPlane: data.kosmos_control_plane ? unmarshalPublicCatalogProductPropertiesKubernetesKosmosControlPlaneType(data.kosmos_control_plane) : null,
+    kosmosNode: data.kosmos_node ? unmarshalPublicCatalogProductPropertiesKubernetesKosmosNodeType(data.kosmos_node) : null,
   } as PublicCatalogProductPropertiesKubernetes
 }
 
@@ -730,8 +742,8 @@ const unmarshalPublicCatalogProductPropertiesLoadBalancer = (data: unknown): Pub
   }
 
   return {
-    ipv4: data.ipv4 ? unmarshalPublicCatalogProductPropertiesLoadBalancerIPV4Type(data.ipv4) : undefined,
-    node: data.node ? unmarshalPublicCatalogProductPropertiesLoadBalancerNodeType(data.node) : undefined,
+    ipv4: data.ipv4 ? unmarshalPublicCatalogProductPropertiesLoadBalancerIPV4Type(data.ipv4) : null,
+    node: data.node ? unmarshalPublicCatalogProductPropertiesLoadBalancerNodeType(data.node) : null,
   } as PublicCatalogProductPropertiesLoadBalancer
 }
 
@@ -743,8 +755,8 @@ const unmarshalPublicCatalogProductPropertiesManagedInference = (data: unknown):
   }
 
   return {
-    customModelStorage: data.custom_model_storage ? unmarshalPublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage(data.custom_model_storage) : undefined,
-    deployment: data.deployment ? unmarshalPublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment(data.deployment) : undefined,
+    customModelStorage: data.custom_model_storage ? unmarshalPublicCatalogProductPropertiesManagedInferenceManagedInferenceCustomModelStorage(data.custom_model_storage) : null,
+    deployment: data.deployment ? unmarshalPublicCatalogProductPropertiesManagedInferenceManagedInferenceDeployment(data.deployment) : null,
     instanceGpuName: data.instance_gpu_name,
   } as PublicCatalogProductPropertiesManagedInference
 }
@@ -757,9 +769,9 @@ const unmarshalPublicCatalogProductPropertiesManagedMongoDB = (data: unknown): P
   }
 
   return {
-    management: data.management ? unmarshalPublicCatalogProductPropertiesManagedMongoDBManagementType(data.management) : undefined,
-    node: data.node ? unmarshalPublicCatalogProductPropertiesManagedMongoDBNodeType(data.node) : undefined,
-    storage: data.storage ? unmarshalPublicCatalogProductPropertiesManagedMongoDBStorageType(data.storage) : undefined,
+    management: data.management ? unmarshalPublicCatalogProductPropertiesManagedMongoDBManagementType(data.management) : null,
+    node: data.node ? unmarshalPublicCatalogProductPropertiesManagedMongoDBNodeType(data.node) : null,
+    storage: data.storage ? unmarshalPublicCatalogProductPropertiesManagedMongoDBStorageType(data.storage) : null,
   } as PublicCatalogProductPropertiesManagedMongoDB
 }
 
@@ -782,10 +794,10 @@ const unmarshalPublicCatalogProductPropertiesManagedRelationalDatabase = (data: 
   }
 
   return {
-    management: data.management ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseManagementType(data.management) : undefined,
-    multiAz: data.multi_az ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseMultiAzType(data.multi_az) : undefined,
-    node: data.node ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseNodeType(data.node) : undefined,
-    storage: data.storage ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseStorageType(data.storage) : undefined,
+    management: data.management ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseManagementType(data.management) : null,
+    multiAz: data.multi_az ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseMultiAzType(data.multi_az) : null,
+    node: data.node ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseNodeType(data.node) : null,
+    storage: data.storage ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabaseStorageType(data.storage) : null,
   } as PublicCatalogProductPropertiesManagedRelationalDatabase
 }
 
@@ -797,10 +809,10 @@ const unmarshalPublicCatalogProductPropertiesObjectStorage = (data: unknown): Pu
   }
 
   return {
-    class: data.class ? unmarshalPublicCatalogProductPropertiesObjectStorageClassType(data.class) : undefined,
-    internetTraffic: data.internet_traffic ? unmarshalPublicCatalogProductPropertiesObjectStorageInternetTrafficType(data.internet_traffic) : undefined,
-    regionTraffic: data.region_traffic ? unmarshalPublicCatalogProductPropertiesObjectStorageRegionTrafficType(data.region_traffic) : undefined,
-    restore: data.restore ? unmarshalPublicCatalogProductPropertiesObjectStorageRestoreType(data.restore) : undefined,
+    class: data.class ? unmarshalPublicCatalogProductPropertiesObjectStorageClassType(data.class) : null,
+    internetTraffic: data.internet_traffic ? unmarshalPublicCatalogProductPropertiesObjectStorageInternetTrafficType(data.internet_traffic) : null,
+    regionTraffic: data.region_traffic ? unmarshalPublicCatalogProductPropertiesObjectStorageRegionTrafficType(data.region_traffic) : null,
+    restore: data.restore ? unmarshalPublicCatalogProductPropertiesObjectStorageRestoreType(data.restore) : null,
   } as PublicCatalogProductPropertiesObjectStorage
 }
 
@@ -834,8 +846,8 @@ const unmarshalPublicCatalogProductPropertiesServerlessContainers = (data: unkno
   }
 
   return {
-    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesServerlessContainersCPUType(data.cpu) : undefined,
-    memory: data.memory ? unmarshalPublicCatalogProductPropertiesServerlessContainersMemoryType(data.memory) : undefined,
+    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesServerlessContainersCPUType(data.cpu) : null,
+    memory: data.memory ? unmarshalPublicCatalogProductPropertiesServerlessContainersMemoryType(data.memory) : null,
   } as PublicCatalogProductPropertiesServerlessContainers
 }
 
@@ -847,10 +859,10 @@ const unmarshalPublicCatalogProductPropertiesServerlessFunctions = (data: unknow
   }
 
   return {
-    consumption: data.consumption ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsConsumptionType(data.consumption) : undefined,
-    freeTier: data.free_tier ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsFreeTierType(data.free_tier) : undefined,
-    provision: data.provision ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsProvisionType(data.provision) : undefined,
-    request: data.request ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsRequestType(data.request) : undefined,
+    consumption: data.consumption ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsConsumptionType(data.consumption) : null,
+    freeTier: data.free_tier ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsFreeTierType(data.free_tier) : null,
+    provision: data.provision ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsProvisionType(data.provision) : null,
+    request: data.request ? unmarshalPublicCatalogProductPropertiesServerlessFunctionsRequestType(data.request) : null,
     resources: unmarshalArrayOfObject(data.resources, unmarshalPublicCatalogProductPropertiesServerlessFunctionsRuntimeResource),
   } as PublicCatalogProductPropertiesServerlessFunctions
 }
@@ -863,8 +875,8 @@ const unmarshalPublicCatalogProductPropertiesServerlessJobs = (data: unknown): P
   }
 
   return {
-    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesServerlessJobsCPUType(data.cpu) : undefined,
-    memory: data.memory ? unmarshalPublicCatalogProductPropertiesServerlessJobsMemoryType(data.memory) : undefined,
+    cpu: data.cpu ? unmarshalPublicCatalogProductPropertiesServerlessJobsCPUType(data.cpu) : null,
+    memory: data.memory ? unmarshalPublicCatalogProductPropertiesServerlessJobsMemoryType(data.memory) : null,
   } as PublicCatalogProductPropertiesServerlessJobs
 }
 
@@ -887,8 +899,8 @@ const unmarshalPublicCatalogProductEnvironmentalImpactEstimation = (data: unknow
   }
 
   return {
-    kgCo2Equivalent: data.kg_co2_equivalent,
-    m3WaterUsage: data.m3_water_usage,
+    kgCo2Equivalent: data.kg_co2_equivalent ?? null,
+    m3WaterUsage: data.m3_water_usage ?? null,
   } as PublicCatalogProductEnvironmentalImpactEstimation
 }
 
@@ -900,10 +912,10 @@ const unmarshalPublicCatalogProductLocality = (data: unknown): PublicCatalogProd
   }
 
   return {
-    datacenter: data.datacenter,
-    global: data.global,
-    region: data.region,
-    zone: data.zone,
+    datacenter: data.datacenter ?? null,
+    global: data.global ?? null,
+    region: data.region ?? null,
+    zone: data.zone ?? null,
   } as PublicCatalogProductLocality
 }
 
@@ -915,7 +927,7 @@ const unmarshalPublicCatalogProductPrice = (data: unknown): PublicCatalogProduct
   }
 
   return {
-    retailPrice: data.retail_price ? unmarshalMoney(data.retail_price) : undefined,
+    retailPrice: data.retail_price ? unmarshalMoney(data.retail_price) : null,
   } as PublicCatalogProductPrice
 }
 
@@ -927,31 +939,32 @@ const unmarshalPublicCatalogProductProperties = (data: unknown): PublicCatalogPr
   }
 
   return {
-    apacheKafka: data.apache_kafka ? unmarshalPublicCatalogProductPropertiesApacheKafka(data.apache_kafka) : undefined,
-    appleSilicon: data.apple_silicon ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon) : undefined,
-    blockStorage: data.block_storage ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage) : undefined,
-    dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : undefined,
-    elasticMetal: data.elastic_metal ? unmarshalPublicCatalogProductPropertiesElasticMetal(data.elastic_metal) : undefined,
-    fileStorage: data.file_storage ? unmarshalPublicCatalogProductPropertiesFileStorage(data.file_storage) : undefined,
-    generativeApis: data.generative_apis ? unmarshalPublicCatalogProductPropertiesGenerativeApis(data.generative_apis) : undefined,
-    hardware: data.hardware ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware) : undefined,
-    instance: data.instance ? unmarshalPublicCatalogProductPropertiesInstance(data.instance) : undefined,
-    instanceLocalSsdSnapshot: data.instance_local_ssd_snapshot ? unmarshalPublicCatalogProductPropertiesInstanceLocalSSDSnapshot(data.instance_local_ssd_snapshot) : undefined,
-    instanceLocalSsdStorage: data.instance_local_ssd_storage ? unmarshalPublicCatalogProductPropertiesInstanceLocalSSDStorage(data.instance_local_ssd_storage) : undefined,
-    keyManager: data.key_manager ? unmarshalPublicCatalogProductPropertiesKeyManager(data.key_manager) : undefined,
-    kubernetes: data.kubernetes ? unmarshalPublicCatalogProductPropertiesKubernetes(data.kubernetes) : undefined,
-    loadBalancer: data.load_balancer ? unmarshalPublicCatalogProductPropertiesLoadBalancer(data.load_balancer) : undefined,
-    managedInference: data.managed_inference ? unmarshalPublicCatalogProductPropertiesManagedInference(data.managed_inference) : undefined,
-    managedMongodb: data.managed_mongodb ? unmarshalPublicCatalogProductPropertiesManagedMongoDB(data.managed_mongodb) : undefined,
-    managedRedisDatabase: data.managed_redis_database ? unmarshalPublicCatalogProductPropertiesManagedRedisDatabase(data.managed_redis_database) : undefined,
-    managedRelationalDatabase: data.managed_relational_database ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabase(data.managed_relational_database) : undefined,
-    objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : undefined,
-    openSearch: data.open_search ? unmarshalPublicCatalogProductPropertiesOpenSearch(data.open_search) : undefined,
-    secretManager: data.secret_manager ? unmarshalPublicCatalogProductPropertiesSecretManager(data.secret_manager) : undefined,
-    serverlessContainers: data.serverless_containers ? unmarshalPublicCatalogProductPropertiesServerlessContainers(data.serverless_containers) : undefined,
-    serverlessFunctions: data.serverless_functions ? unmarshalPublicCatalogProductPropertiesServerlessFunctions(data.serverless_functions) : undefined,
-    serverlessJobs: data.serverless_jobs ? unmarshalPublicCatalogProductPropertiesServerlessJobs(data.serverless_jobs) : undefined,
-    serverlessSqlDatabase: data.serverless_sql_database ? unmarshalPublicCatalogProductPropertiesServerlessSqlDatabase(data.serverless_sql_database) : undefined,
+    apacheKafka: data.apache_kafka ? unmarshalPublicCatalogProductPropertiesApacheKafka(data.apache_kafka) : null,
+    appleSilicon: data.apple_silicon ? unmarshalPublicCatalogProductPropertiesAppleSilicon(data.apple_silicon) : null,
+    blockStorage: data.block_storage ? unmarshalPublicCatalogProductPropertiesBlockStorage(data.block_storage) : null,
+    cockpit: data.cockpit ? unmarshalPublicCatalogProductPropertiesCockpit(data.cockpit) : null,
+    dedibox: data.dedibox ? unmarshalPublicCatalogProductPropertiesDedibox(data.dedibox) : null,
+    elasticMetal: data.elastic_metal ? unmarshalPublicCatalogProductPropertiesElasticMetal(data.elastic_metal) : null,
+    fileStorage: data.file_storage ? unmarshalPublicCatalogProductPropertiesFileStorage(data.file_storage) : null,
+    generativeApis: data.generative_apis ? unmarshalPublicCatalogProductPropertiesGenerativeApis(data.generative_apis) : null,
+    hardware: data.hardware ? unmarshalPublicCatalogProductPropertiesHardware(data.hardware) : null,
+    instance: data.instance ? unmarshalPublicCatalogProductPropertiesInstance(data.instance) : null,
+    instanceLocalSsdSnapshot: data.instance_local_ssd_snapshot ? unmarshalPublicCatalogProductPropertiesInstanceLocalSSDSnapshot(data.instance_local_ssd_snapshot) : null,
+    instanceLocalSsdStorage: data.instance_local_ssd_storage ? unmarshalPublicCatalogProductPropertiesInstanceLocalSSDStorage(data.instance_local_ssd_storage) : null,
+    keyManager: data.key_manager ? unmarshalPublicCatalogProductPropertiesKeyManager(data.key_manager) : null,
+    kubernetes: data.kubernetes ? unmarshalPublicCatalogProductPropertiesKubernetes(data.kubernetes) : null,
+    loadBalancer: data.load_balancer ? unmarshalPublicCatalogProductPropertiesLoadBalancer(data.load_balancer) : null,
+    managedInference: data.managed_inference ? unmarshalPublicCatalogProductPropertiesManagedInference(data.managed_inference) : null,
+    managedMongodb: data.managed_mongodb ? unmarshalPublicCatalogProductPropertiesManagedMongoDB(data.managed_mongodb) : null,
+    managedRedisDatabase: data.managed_redis_database ? unmarshalPublicCatalogProductPropertiesManagedRedisDatabase(data.managed_redis_database) : null,
+    managedRelationalDatabase: data.managed_relational_database ? unmarshalPublicCatalogProductPropertiesManagedRelationalDatabase(data.managed_relational_database) : null,
+    objectStorage: data.object_storage ? unmarshalPublicCatalogProductPropertiesObjectStorage(data.object_storage) : null,
+    openSearch: data.open_search ? unmarshalPublicCatalogProductPropertiesOpenSearch(data.open_search) : null,
+    secretManager: data.secret_manager ? unmarshalPublicCatalogProductPropertiesSecretManager(data.secret_manager) : null,
+    serverlessContainers: data.serverless_containers ? unmarshalPublicCatalogProductPropertiesServerlessContainers(data.serverless_containers) : null,
+    serverlessFunctions: data.serverless_functions ? unmarshalPublicCatalogProductPropertiesServerlessFunctions(data.serverless_functions) : null,
+    serverlessJobs: data.serverless_jobs ? unmarshalPublicCatalogProductPropertiesServerlessJobs(data.serverless_jobs) : null,
+    serverlessSqlDatabase: data.serverless_sql_database ? unmarshalPublicCatalogProductPropertiesServerlessSqlDatabase(data.serverless_sql_database) : null,
   } as PublicCatalogProductProperties
 }
 
@@ -978,19 +991,19 @@ const unmarshalPublicCatalogProduct = (data: unknown): PublicCatalogProduct => {
   return {
     badges: data.badges,
     description: data.description,
-    endOfGrowthAt: unmarshalDate(data.end_of_growth_at),
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
-    endOfSaleAt: unmarshalDate(data.end_of_sale_at),
-    environmentalImpactEstimation: data.environmental_impact_estimation ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(data.environmental_impact_estimation) : undefined,
-    locality: data.locality ? unmarshalPublicCatalogProductLocality(data.locality) : undefined,
-    price: data.price ? unmarshalPublicCatalogProductPrice(data.price) : undefined,
+    endOfGrowthAt: unmarshalDate(data.end_of_growth_at) ?? null,
+    endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
+    endOfSaleAt: unmarshalDate(data.end_of_sale_at) ?? null,
+    environmentalImpactEstimation: data.environmental_impact_estimation ? unmarshalPublicCatalogProductEnvironmentalImpactEstimation(data.environmental_impact_estimation) : null,
+    locality: data.locality ? unmarshalPublicCatalogProductLocality(data.locality) : null,
+    price: data.price ? unmarshalPublicCatalogProductPrice(data.price) : null,
     product: data.product,
     productCategory: data.product_category,
-    properties: data.properties ? unmarshalPublicCatalogProductProperties(data.properties) : undefined,
+    properties: data.properties ? unmarshalPublicCatalogProductProperties(data.properties) : null,
     serviceCategory: data.service_category,
     sku: data.sku,
     status: data.status,
-    unitOfMeasure: data.unit_of_measure ? unmarshalPublicCatalogProductUnitOfMeasure(data.unit_of_measure) : undefined,
+    unitOfMeasure: data.unit_of_measure ? unmarshalPublicCatalogProductUnitOfMeasure(data.unit_of_measure) : null,
     variant: data.variant,
   } as PublicCatalogProduct
 }

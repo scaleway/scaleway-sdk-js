@@ -228,27 +228,27 @@ export interface EngineSetting {
   /**
    * Setting base unit.
    */
-  unit?: string
+  unit?: string | null
   /**
    * Validation regex for string type settings.
    */
-  stringConstraint?: string
+  stringConstraint?: string | null
   /**
    * Minimum value for int types.
    */
-  intMin?: number
+  intMin?: number | null
   /**
    * Maximum value for int types.
    */
-  intMax?: number
+  intMax?: number | null
   /**
    * Minimum value for float types.
    */
-  floatMin?: number
+  floatMin?: number | null
   /**
    * Maximum value for float types.
    */
-  floatMax?: number
+  floatMax?: number | null
 }
 
 
@@ -262,7 +262,7 @@ export interface Endpoint {
    *
    * One-of ('address'): at most one of 'ip', 'hostname' could be set.
    */
-  ip?: string
+  ip?: string | null
   /**
    * TCP port of the endpoint.
    */
@@ -270,31 +270,31 @@ export interface Endpoint {
   /**
    * Name of the endpoint.
    */
-  name?: string
+  name?: string | null
   /**
    * Private Network details. One maximum per Database Instance or Read Replica (a Database Instance and its Read Replica can have different Private Networks). Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer', 'directAccess' could be set.
    */
-  privateNetwork?: EndpointPrivateNetworkDetails
+  privateNetwork?: EndpointPrivateNetworkDetails | null
   /**
    * Load balancer details. Public endpoint for Database Instance which is systematically present. One per Database Instance.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer', 'directAccess' could be set.
    */
-  loadBalancer?: EndpointLoadBalancerDetails
+  loadBalancer?: EndpointLoadBalancerDetails | null
   /**
    * Direct access details. Public endpoint reserved for Read Replicas. One per Read Replica.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'loadBalancer', 'directAccess' could be set.
    */
-  directAccess?: EndpointDirectAccessDetails
+  directAccess?: EndpointDirectAccessDetails | null
   /**
    * Hostname of the endpoint.
    *
    * One-of ('address'): at most one of 'ip', 'hostname' could be set.
    */
-  hostname?: string
+  hostname?: string | null
 }
 
 
@@ -312,13 +312,13 @@ export interface EndpointSpecPrivateNetwork {
    *
    * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
-  serviceIp?: string
+  serviceIp?: string | null
   /**
    * Automated configuration of your Private Network endpoint with Scaleway IPAM service. One at the most per Database Instance or Read Replica (a Database Instance and its Read Replica can have different Private Networks). Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
-  ipamConfig?: EndpointSpecPrivateNetworkIpamConfig
+  ipamConfig?: EndpointSpecPrivateNetworkIpamConfig | null
 }
 
 
@@ -336,13 +336,13 @@ export interface ReadReplicaEndpointSpecPrivateNetwork {
    *
    * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
-  serviceIp?: string
+  serviceIp?: string | null
   /**
    * Automated configuration of your Private Network endpoint with Scaleway IPAM service. One at the most per Database Instance or Read Replica (a Database Instance and its Read Replica can have different private networks). Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('config'): at most one of 'serviceIp', 'ipamConfig' could be set.
    */
-  ipamConfig?: ReadReplicaEndpointSpecPrivateNetworkIpamConfig
+  ipamConfig?: ReadReplicaEndpointSpecPrivateNetworkIpamConfig | null
 }
 
 
@@ -358,7 +358,7 @@ export interface EngineVersion {
   /**
    * End of life date.
    */
-  endOfLife?: Date
+  endOfLife?: Date | null
   /**
    * Engine settings available to be set.
    */
@@ -378,7 +378,7 @@ export interface EngineVersion {
   /**
    * Version release date.
    */
-  releaseDate?: Date
+  releaseDate?: Date | null
 }
 
 
@@ -398,7 +398,7 @@ export interface BackupSchedule {
   /**
    * Next run of the backup schedule (accurate to 10 minutes).
    */
-  nextRunAt?: Date
+  nextRunAt?: Date | null
 }
 
 
@@ -417,11 +417,11 @@ export interface LogsPolicy {
   /**
    * Max age (in days) of remote logs to keep on the Database Instance.
    */
-  maxAgeRetention?: number
+  maxAgeRetention?: number | null
   /**
    * Max disk size of remote logs to keep on the Database Instance.
    */
-  totalDiskRetention?: number
+  totalDiskRetention?: number | null
 }
 
 
@@ -429,15 +429,15 @@ export interface Maintenance {
   /**
    * Start date of the maintenance window.
    */
-  startsAt?: Date
+  startsAt?: Date | null
   /**
    * End date of the maintenance window.
    */
-  stopsAt?: Date
+  stopsAt?: Date | null
   /**
    * Closed maintenance date.
    */
-  closedAt?: Date
+  closedAt?: Date | null
   /**
    * Maintenance information message.
    */
@@ -449,7 +449,7 @@ export interface Maintenance {
   /**
    * Time when Scaleway-side maintenance will be applied.
    */
-  forcedAt?: Date
+  forcedAt?: Date | null
   /**
    * Indicate if the maintenance can be applied by the user.
    */
@@ -561,7 +561,7 @@ export interface ACLRule {
   /**
    * @deprecated 
    */
-  port?: number
+  port?: number | null
 }
 
 
@@ -571,13 +571,13 @@ export interface EndpointSpec {
    *
    * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be set.
    */
-  loadBalancer?: EndpointSpecLoadBalancer
+  loadBalancer?: EndpointSpecLoadBalancer | null
   /**
    * Private Network endpoint specifications. One maximum per Database Instance or Read Replica (a Database Instance and its Read Replica can have different Private Networks). Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('spec'): at most one of 'loadBalancer', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointSpecPrivateNetwork
+  privateNetwork?: EndpointSpecPrivateNetwork | null
 }
 
 
@@ -587,13 +587,13 @@ export interface ReadReplicaEndpointSpec {
    *
    * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be set.
    */
-  directAccess?: ReadReplicaEndpointSpecDirectAccess
+  directAccess?: ReadReplicaEndpointSpecDirectAccess | null
   /**
    * Private Network endpoint specifications. One at the most per Read Replica. Cannot be updated (has to be deleted and recreated).
    *
    * One-of ('spec'): at most one of 'directAccess', 'privateNetwork' could be set.
    */
-  privateNetwork?: ReadReplicaEndpointSpecPrivateNetwork
+  privateNetwork?: ReadReplicaEndpointSpecPrivateNetwork | null
 }
 
 
@@ -621,19 +621,19 @@ export interface DatabaseBackup {
   /**
    * Size of the database backup.
    */
-  size?: number
+  size?: number | null
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Creation date (must follow the ISO 8601 format).
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Updated date (must follow the ISO 8601 format).
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Name of the Database Instance of the backup.
    */
@@ -641,11 +641,11 @@ export interface DatabaseBackup {
   /**
    * URL you can download the backup from.
    */
-  downloadUrl?: string
+  downloadUrl?: string | null
   /**
    * Expiration date of the download link.
    */
-  downloadUrlExpiresAt?: Date
+  downloadUrlExpiresAt?: Date | null
   /**
    * Region of the database backup.
    */
@@ -707,7 +707,7 @@ export interface InstanceLog {
   /**
    * Presigned Object Storage URL to download your log file.
    */
-  downloadUrl?: string
+  downloadUrl?: string | null
   /**
    * UUID of the Database Instance log.
    */
@@ -723,11 +723,11 @@ export interface InstanceLog {
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Creation date (must follow the ISO 8601 format).
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Region the Database Instance is in.
    */
@@ -739,11 +739,11 @@ export interface Instance {
   /**
    * Creation date (must follow the ISO 8601 format).
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Volumes of the Database Instance.
    */
-  volume?: Volume
+  volume?: Volume | null
   /**
    * Region the Database Instance is in.
    */
@@ -779,7 +779,7 @@ export interface Instance {
   /**
    * @deprecated Endpoint of the Database Instance.
    */
-  endpoint?: Endpoint
+  endpoint?: Endpoint | null
   /**
    * List of tags applied to the Database Instance.
    */
@@ -791,7 +791,7 @@ export interface Instance {
   /**
    * Backup schedule of the Database Instance.
    */
-  backupSchedule?: BackupSchedule
+  backupSchedule?: BackupSchedule | null
   /**
    * Defines whether or not High-Availability is enabled.
    */
@@ -819,7 +819,7 @@ export interface Instance {
   /**
    * Logs policy of the Database Instance.
    */
-  logsPolicy?: LogsPolicy
+  logsPolicy?: LogsPolicy | null
   /**
    * Store logical backups in the same region as the Database Instance.
    */
@@ -831,7 +831,7 @@ export interface Instance {
   /**
    * Encryption at rest settings for your Database Instance.
    */
-  encryption?: EncryptionAtRest
+  encryption?: EncryptionAtRest | null
 }
 
 
@@ -859,11 +859,11 @@ export interface NodeType {
   /**
    * @deprecated [deprecated] Node Type volume constraints.
    */
-  volumeConstraint?: NodeTypeVolumeConstraintSizes
+  volumeConstraint?: NodeTypeVolumeConstraintSizes | null
   /**
    * @deprecated The Node Type is compliant with Block Storage.
    */
-  isBssdCompatible?: boolean
+  isBssdCompatible?: boolean | null
   /**
    * The Node Type is currently disabled.
    */
@@ -931,19 +931,19 @@ export interface Snapshot {
   /**
    * Size of the snapshot.
    */
-  size?: number
+  size?: number | null
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Creation date (must follow the ISO 8601 format).
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Updated date (must follow the ISO 8601 format).
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Name of the Database Instance of the snapshot.
    */
@@ -955,7 +955,7 @@ export interface Snapshot {
   /**
    * Type of volume where data is stored (lssd, bssd or sbs).
    */
-  volumeType?: SnapshotVolumeType
+  volumeType?: SnapshotVolumeType | null
   /**
    * Region of this snapshot.
    */
@@ -991,7 +991,7 @@ export type AddInstanceACLRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to add ACL rules to.
    */
@@ -1015,7 +1015,7 @@ export type AddInstanceSettingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to add settings to.
    */
@@ -1039,7 +1039,7 @@ export type ApplyInstanceMaintenanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to apply maintenance.
    */
@@ -1051,7 +1051,7 @@ export type CloneInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to clone.
    */
@@ -1063,7 +1063,7 @@ export type CloneInstanceRequest = {
   /**
    * Node type of the clone.
    */
-  nodeType?: string
+  nodeType?: string | null
 }
 
 
@@ -1071,7 +1071,7 @@ export type CreateDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -1083,11 +1083,11 @@ export type CreateDatabaseBackupRequest = {
   /**
    * Name of the backup.
    */
-  name?: string
+  name?: string | null
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -1095,7 +1095,7 @@ export type CreateDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance where to create the database.
    */
@@ -1111,7 +1111,7 @@ export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you to which you want to add an endpoint.
    */
@@ -1119,7 +1119,7 @@ export type CreateEndpointRequest = {
   /**
    * Specification of the endpoint you want to create.
    */
-  endpointSpec?: EndpointSpec
+  endpointSpec?: EndpointSpec | null
 }
 
 
@@ -1127,7 +1127,7 @@ export type CreateInstanceFromSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Block snapshot of the Database Instance.
    */
@@ -1139,15 +1139,15 @@ export type CreateInstanceFromSnapshotRequest = {
   /**
    * @deprecated Defines whether or not High-Availability is enabled on the new Database Instance.
    */
-  isHaCluster?: boolean
+  isHaCluster?: boolean | null
   /**
    * Defines the High-Availability mode of the instance.
    */
-  highAvailabilityMode?: HighAvailabilityMode
+  highAvailabilityMode?: HighAvailabilityMode | null
   /**
    * The node type used to restore the snapshot.
    */
-  nodeType?: string
+  nodeType?: string | null
 }
 
 
@@ -1155,23 +1155,23 @@ export type CreateInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * @deprecated Please use project_id instead.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * The Project ID on which the Database Instance will be created.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the Database Instance.
    */
-  name?: string
+  name?: string | null
   /**
    * Database engine of the Database Instance (PostgreSQL, MySQL, ...).
    */
@@ -1195,7 +1195,7 @@ export type CreateInstanceRequest = {
   /**
    * Defines the High-Availability mode of the instance.
    */
-  highAvailabilityMode?: HighAvailabilityMode
+  highAvailabilityMode?: HighAvailabilityMode | null
   /**
    * Defines whether or not backups are disabled.
    */
@@ -1203,15 +1203,15 @@ export type CreateInstanceRequest = {
   /**
    * Tags to apply to the Database Instance.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * List of engine settings to be set upon Database Instance initialization.
    */
-  initSettings?: InstanceSetting[]
+  initSettings?: InstanceSetting[] | null
   /**
    * Type of volume where data is stored (lssd, bssd, ...).
    */
-  volumeType?: VolumeType
+  volumeType?: VolumeType | null
   /**
    * Volume size when volume_type is not lssd.
    */
@@ -1219,7 +1219,7 @@ export type CreateInstanceRequest = {
   /**
    * One or multiple EndpointSpec used to expose your Database Instance. A load_balancer public endpoint is systematically created.
    */
-  initEndpoints?: EndpointSpec[]
+  initEndpoints?: EndpointSpec[] | null
   /**
    * Defines whether to or not to store logical backups in the same region as the Database Instance.
    */
@@ -1227,7 +1227,7 @@ export type CreateInstanceRequest = {
   /**
    * Encryption at rest settings for your Database Instance.
    */
-  encryption?: EncryptionAtRest
+  encryption?: EncryptionAtRest | null
 }
 
 
@@ -1235,7 +1235,7 @@ export type CreateReadReplicaEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Read Replica.
    */
@@ -1251,7 +1251,7 @@ export type CreateReadReplicaRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to create a Read Replica from.
    */
@@ -1259,11 +1259,11 @@ export type CreateReadReplicaRequest = {
   /**
    * Specification of the endpoint you want to create.
    */
-  endpointSpec?: ReadReplicaEndpointSpec[]
+  endpointSpec?: ReadReplicaEndpointSpec[] | null
   /**
    * Defines whether to create the replica in the same availability zone as the main instance nodes or not.
    */
-  sameZone?: boolean
+  sameZone?: boolean | null
 }
 
 
@@ -1271,7 +1271,7 @@ export type CreateSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -1279,11 +1279,11 @@ export type CreateSnapshotRequest = {
   /**
    * Name of the snapshot.
    */
-  name?: string
+  name?: string | null
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -1291,7 +1291,7 @@ export type CreateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance in which you want to create a user.
    */
@@ -1315,7 +1315,7 @@ export type DeleteDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the database backup to delete.
    */
@@ -1327,7 +1327,7 @@ export type DeleteDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance where to delete the database.
    */
@@ -1343,7 +1343,7 @@ export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * This endpoint can also be used to delete a Read Replica endpoint.
    */
@@ -1355,7 +1355,7 @@ export type DeleteInstanceACLRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to delete an ACL rule from.
    */
@@ -1379,7 +1379,7 @@ export type DeleteInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance to delete.
    */
@@ -1391,7 +1391,7 @@ export type DeleteInstanceSettingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance to delete settings from.
    */
@@ -1415,7 +1415,7 @@ export type DeleteReadReplicaRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Read Replica.
    */
@@ -1427,7 +1427,7 @@ export type DeleteSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the snapshot to delete.
    */
@@ -1439,7 +1439,7 @@ export type DeleteUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance to delete the user from.
    */
@@ -1455,7 +1455,7 @@ export type ExportDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the database backup you want to export.
    */
@@ -1467,7 +1467,7 @@ export type GetDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the database backup.
    */
@@ -1479,7 +1479,7 @@ export type GetEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the endpoint you want to get.
    */
@@ -1491,7 +1491,7 @@ export type GetInstanceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -1503,7 +1503,7 @@ export type GetInstanceLogRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the instance_log you want.
    */
@@ -1515,7 +1515,7 @@ export type GetInstanceMetricsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -1523,15 +1523,15 @@ export type GetInstanceMetricsRequest = {
   /**
    * Start date to gather metrics from.
    */
-  startDate?: Date
+  startDate?: Date | null
   /**
    * End date to gather metrics from.
    */
-  endDate?: Date
+  endDate?: Date | null
   /**
    * Name of the metric to gather.
    */
-  metricName?: string
+  metricName?: string | null
 }
 
 
@@ -1539,7 +1539,7 @@ export type GetInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -1551,7 +1551,7 @@ export type GetReadReplicaRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Read Replica.
    */
@@ -1563,7 +1563,7 @@ export type GetSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the snapshot.
    */
@@ -1583,29 +1583,29 @@ export type ListDatabaseBackupsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the database backups.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering database backups listing.
    */
-  orderBy?: ListDatabaseBackupsRequestOrderBy
+  orderBy?: ListDatabaseBackupsRequestOrderBy | null
   /**
    * UUID of the Database Instance.
    */
-  instanceId?: string
+  instanceId?: string | null
   /**
    * Organization ID of the Organization the database backups belong to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID of the Project the database backups belong to.
    */
-  projectId?: string
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1625,17 +1625,17 @@ export type ListDatabaseEnginesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the database engine.
    */
-  name?: string
+  name?: string | null
   /**
    * Version of the database engine.
    */
-  version?: string
-  page?: number
-  pageSize?: number
+  version?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1655,7 +1655,7 @@ export type ListDatabasesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance to list the databases of.
    */
@@ -1663,25 +1663,25 @@ export type ListDatabasesRequest = {
   /**
    * Name of the database.
    */
-  name?: string
+  name?: string | null
   /**
    * Defines whether or not the database is managed.
    */
-  managed?: boolean
+  managed?: boolean | null
   /**
    * User that owns this database.
    */
-  owner?: string
+  owner?: string | null
   /**
    * Criteria to use when ordering database listing.
    */
-  orderBy?: ListDatabasesRequestOrderBy
+  orderBy?: ListDatabasesRequestOrderBy | null
   /**
    * Whether to skip the retrieval of each database size. If true, the size of each returned database will be set to 0.
    */
-  skipSizeRetrieval?: boolean
-  page?: number
-  pageSize?: number
+  skipSizeRetrieval?: boolean | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1701,13 +1701,13 @@ export type ListInstanceACLRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
   instanceId: string
-  page?: number
-  pageSize?: number
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1727,7 +1727,7 @@ export type ListInstanceLogsDetailsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want logs of.
    */
@@ -1747,7 +1747,7 @@ export type ListInstanceLogsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want logs of.
    */
@@ -1755,7 +1755,7 @@ export type ListInstanceLogsRequest = {
   /**
    * Criteria to use when ordering Database Instance logs listing.
    */
-  orderBy?: ListInstanceLogsRequestOrderBy
+  orderBy?: ListInstanceLogsRequestOrderBy | null
 }
 
 
@@ -1771,33 +1771,33 @@ export type ListInstancesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * List Database Instances that have a given tag.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Lists Database Instances that match a name pattern.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering Database Instance listings.
    */
-  orderBy?: ListInstancesRequestOrderBy
+  orderBy?: ListInstancesRequestOrderBy | null
   /**
    * Please use project_id instead.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to list the Database Instance of.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter to only list instances with a scheduled maintenance.
    */
-  hasMaintenances?: boolean
-  page?: number
-  pageSize?: number
+  hasMaintenances?: boolean | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1817,13 +1817,13 @@ export type ListNodeTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Defines whether or not to include disabled types.
    */
   includeDisabledTypes: boolean
-  page?: number
-  pageSize?: number
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1843,7 +1843,7 @@ export type ListPrivilegesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -1851,17 +1851,17 @@ export type ListPrivilegesRequest = {
   /**
    * Criteria to use when ordering privileges listing.
    */
-  orderBy?: ListPrivilegesRequestOrderBy
-  page?: number
-  pageSize?: number
+  orderBy?: ListPrivilegesRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
   /**
    * Name of the database.
    */
-  databaseName?: string
+  databaseName?: string | null
   /**
    * Name of the user.
    */
-  userName?: string
+  userName?: string | null
 }
 
 
@@ -1881,29 +1881,29 @@ export type ListSnapshotsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the snapshot.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering snapshot listing.
    */
-  orderBy?: ListSnapshotsRequestOrderBy
+  orderBy?: ListSnapshotsRequestOrderBy | null
   /**
    * UUID of the Database Instance.
    */
-  instanceId?: string
+  instanceId?: string | null
   /**
    * Organization ID the snapshots belongs to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID the snapshots belongs to.
    */
-  projectId?: string
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1923,7 +1923,7 @@ export type ListUsersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -1931,13 +1931,13 @@ export type ListUsersRequest = {
   /**
    * Name of the user.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when requesting user listing.
    */
-  orderBy?: ListUsersRequestOrderBy
-  page?: number
-  pageSize?: number
+  orderBy?: ListUsersRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1957,7 +1957,7 @@ export type MigrateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the endpoint you want to migrate.
    */
@@ -1973,7 +1973,7 @@ export type PrepareInstanceLogsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want logs of.
    */
@@ -1981,11 +1981,11 @@ export type PrepareInstanceLogsRequest = {
   /**
    * Start datetime of your log. (RFC 3339 format).
    */
-  startDate?: Date
+  startDate?: Date | null
   /**
    * End datetime of your log. (RFC 3339 format).
    */
-  endDate?: Date
+  endDate?: Date | null
 }
 
 
@@ -2001,7 +2001,7 @@ export type PromoteReadReplicaRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Read Replica.
    */
@@ -2013,7 +2013,7 @@ export type PurgeInstanceLogsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want logs of.
    */
@@ -2021,7 +2021,7 @@ export type PurgeInstanceLogsRequest = {
   /**
    * Given log name to purge.
    */
-  logName?: string
+  logName?: string | null
 }
 
 
@@ -2029,7 +2029,7 @@ export type RenewInstanceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want logs of.
    */
@@ -2041,7 +2041,7 @@ export type ResetReadReplicaRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Read Replica.
    */
@@ -2053,7 +2053,7 @@ export type RestartInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to restart.
    */
@@ -2065,7 +2065,7 @@ export type RestoreDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Backup of a logical database.
    */
@@ -2073,7 +2073,7 @@ export type RestoreDatabaseBackupRequest = {
   /**
    * Defines the destination database to restore into a specified database (the default destination is set to the origin database of the backup).
    */
-  databaseName?: string
+  databaseName?: string | null
   /**
    * Defines the Database Instance where the backup has to be restored.
    */
@@ -2085,7 +2085,7 @@ export type SetInstanceACLRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance where the ACL rules must be set.
    */
@@ -2109,7 +2109,7 @@ export type SetInstanceSettingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance where the settings must be set.
    */
@@ -2133,7 +2133,7 @@ export type SetPrivilegeRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance.
    */
@@ -2149,7 +2149,7 @@ export type SetPrivilegeRequest = {
   /**
    * Permission to set (Read, Read/Write, All, Custom).
    */
-  permission?: Permission
+  permission?: Permission | null
 }
 
 
@@ -2157,7 +2157,7 @@ export type UpdateDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the database backup to update.
    */
@@ -2165,11 +2165,11 @@ export type UpdateDatabaseBackupRequest = {
   /**
    * Name of the Database Backup.
    */
-  name?: string
+  name?: string | null
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -2177,7 +2177,7 @@ export type UpdateInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance to update.
    */
@@ -2185,35 +2185,35 @@ export type UpdateInstanceRequest = {
   /**
    * In hours.
    */
-  backupScheduleFrequency?: number
+  backupScheduleFrequency?: number | null
   /**
    * In days.
    */
-  backupScheduleRetention?: number
+  backupScheduleRetention?: number | null
   /**
    * Defines whether or not the backup schedule is disabled.
    */
-  isBackupScheduleDisabled?: boolean
+  isBackupScheduleDisabled?: boolean | null
   /**
    * Name of the Database Instance.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags of a Database Instance.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Logs policy of the Database Instance.
    */
-  logsPolicy?: LogsPolicy
+  logsPolicy?: LogsPolicy | null
   /**
    * Store logical backups in the same region as the Database Instance.
    */
-  backupSameRegion?: boolean
+  backupSameRegion?: boolean | null
   /**
    * Defines the start time of the autobackup.
    */
-  backupScheduleStartHour?: number
+  backupScheduleStartHour?: number | null
 }
 
 
@@ -2221,7 +2221,7 @@ export type UpdateSnapshotRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the snapshot to update.
    */
@@ -2229,11 +2229,11 @@ export type UpdateSnapshotRequest = {
   /**
    * Name of the snapshot.
    */
-  name?: string
+  name?: string | null
   /**
    * Expiration date (must follow the ISO 8601 format).
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -2241,7 +2241,7 @@ export type UpdateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance the user belongs to.
    */
@@ -2253,11 +2253,11 @@ export type UpdateUserRequest = {
   /**
    * Password of the database user. Password must be between 8 and 128 characters, contain at least one digit, one uppercase, one lowercase and one special character.
    */
-  password?: string
+  password?: string | null
   /**
    * Defines whether or not this user got administrative privileges.
    */
-  isAdmin?: boolean
+  isAdmin?: boolean | null
 }
 
 
@@ -2265,7 +2265,7 @@ export type UpgradeInstanceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Database Instance you want to upgrade.
    */
@@ -2275,49 +2275,49 @@ export type UpgradeInstanceRequest = {
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
-  nodeType?: string
+  nodeType?: string | null
   /**
    * @deprecated Defines whether or not high availability should be enabled on the Database Instance.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
-  enableHa?: boolean
+  enableHa?: boolean | null
   /**
    * Defines the High-Availability mode of the instance.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
-  highAvailabilityMode?: HighAvailabilityMode
+  highAvailabilityMode?: HighAvailabilityMode | null
   /**
    * Increase your block storage volume size.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
-  volumeSize?: number
+  volumeSize?: number | null
   /**
    * Change your Database Instance storage type.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
-  volumeType?: VolumeType
+  volumeType?: VolumeType | null
   /**
    * This will create a new Database Instance with same specifications as the current one and perform a Database Engine upgrade.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
-  upgradableVersionId?: string
+  upgradableVersionId?: string | null
   /**
    * Upgrade your database engine to a new major version including instance endpoints.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
-  majorUpgradeWorkflow?: UpgradeInstanceRequestMajorUpgradeWorkflow
+  majorUpgradeWorkflow?: UpgradeInstanceRequestMajorUpgradeWorkflow | null
   /**
    * Defines whether or not encryption should be enabled on the Database Instance.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeType', 'enableHa', 'highAvailabilityMode', 'volumeSize', 'volumeType', 'upgradableVersionId', 'majorUpgradeWorkflow', 'enableEncryption' could be set.
    */
-  enableEncryption?: boolean
+  enableEncryption?: boolean | null
 }
 
 

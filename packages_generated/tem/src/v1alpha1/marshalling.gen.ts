@@ -65,7 +65,7 @@ const unmarshalEmailTry = (data: unknown): EmailTry => {
     code: data.code,
     message: data.message,
     rank: data.rank,
-    triedAt: unmarshalDate(data.tried_at),
+    triedAt: unmarshalDate(data.tried_at) ?? null,
   } as EmailTry
 }
 
@@ -77,7 +77,7 @@ export const unmarshalEmail = (data: unknown): Email => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     flags: data.flags,
     id: data.id,
     lastTries: unmarshalArrayOfObject(data.last_tries, unmarshalEmailTry),
@@ -85,13 +85,13 @@ export const unmarshalEmail = (data: unknown): Email => {
     mailRcpt: data.mail_rcpt,
     messageId: data.message_id,
     projectId: data.project_id,
-    rcptTo: data.rcpt_to,
+    rcptTo: data.rcpt_to ?? null,
     rcptType: data.rcpt_type,
     status: data.status,
-    statusDetails: data.status_details,
+    statusDetails: data.status_details ?? null,
     subject: data.subject,
     tryCount: data.try_count,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Email
 }
 
@@ -155,10 +155,10 @@ const unmarshalDomainRecords = (data: unknown): DomainRecords => {
   }
 
   return {
-    dkim: data.dkim ? unmarshalDomainRecordsDKIM(data.dkim) : undefined,
-    dmarc: data.dmarc ? unmarshalDomainRecordsDMARC(data.dmarc) : undefined,
-    mx: data.mx ? unmarshalDomainRecordsMX(data.mx) : undefined,
-    spf: data.spf ? unmarshalDomainRecordsSPF(data.spf) : undefined,
+    dkim: data.dkim ? unmarshalDomainRecordsDKIM(data.dkim) : null,
+    dmarc: data.dmarc ? unmarshalDomainRecordsDMARC(data.dmarc) : null,
+    mx: data.mx ? unmarshalDomainRecordsMX(data.mx) : null,
+    spf: data.spf ? unmarshalDomainRecordsSPF(data.spf) : null,
   } as DomainRecords
 }
 
@@ -170,10 +170,10 @@ const unmarshalDomainReputation = (data: unknown): DomainReputation => {
   }
 
   return {
-    previousScore: data.previous_score,
-    previousScoredAt: unmarshalDate(data.previous_scored_at),
+    previousScore: data.previous_score ?? null,
+    previousScoredAt: unmarshalDate(data.previous_scored_at) ?? null,
     score: data.score,
-    scoredAt: unmarshalDate(data.scored_at),
+    scoredAt: unmarshalDate(data.scored_at) ?? null,
     status: data.status,
   } as DomainReputation
 }
@@ -202,21 +202,21 @@ export const unmarshalDomain = (data: unknown): Domain => {
 
   return {
     autoconfig: data.autoconfig,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     dkimConfig: data.dkim_config,
     id: data.id,
-    lastError: data.last_error,
-    lastValidAt: unmarshalDate(data.last_valid_at),
+    lastError: data.last_error ?? null,
+    lastValidAt: unmarshalDate(data.last_valid_at) ?? null,
     name: data.name,
-    nextCheckAt: unmarshalDate(data.next_check_at),
+    nextCheckAt: unmarshalDate(data.next_check_at) ?? null,
     organizationId: data.organization_id,
     projectId: data.project_id,
-    records: data.records ? unmarshalDomainRecords(data.records) : undefined,
+    records: data.records ? unmarshalDomainRecords(data.records) : null,
     region: data.region,
-    reputation: data.reputation ? unmarshalDomainReputation(data.reputation) : undefined,
-    revokedAt: unmarshalDate(data.revoked_at),
+    reputation: data.reputation ? unmarshalDomainReputation(data.reputation) : null,
+    revokedAt: unmarshalDate(data.revoked_at) ?? null,
     spfConfig: data.spf_config,
-    statistics: data.statistics ? unmarshalDomainStatistics(data.statistics) : undefined,
+    statistics: data.statistics ? unmarshalDomainStatistics(data.statistics) : null,
     status: data.status,
   } as Domain
 }
@@ -229,7 +229,7 @@ export const unmarshalOfferSubscription = (data: unknown): OfferSubscription => 
   }
 
   return {
-    cancellationAvailableAt: unmarshalDate(data.cancellation_available_at),
+    cancellationAvailableAt: unmarshalDate(data.cancellation_available_at) ?? null,
     includedMonthlyEmails: data.included_monthly_emails,
     maxCustomBlocklistsPerDomain: data.max_custom_blocklists_per_domain,
     maxDedicatedIps: data.max_dedicated_ips,
@@ -239,7 +239,7 @@ export const unmarshalOfferSubscription = (data: unknown): OfferSubscription => 
     organizationId: data.organization_id,
     projectId: data.project_id,
     sla: data.sla,
-    subscribedAt: unmarshalDate(data.subscribed_at),
+    subscribedAt: unmarshalDate(data.subscribed_at) ?? null,
   } as OfferSubscription
 }
 
@@ -251,7 +251,7 @@ export const unmarshalWebhook = (data: unknown): Webhook => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     domainId: data.domain_id,
     eventTypes: data.event_types,
     id: data.id,
@@ -259,7 +259,7 @@ export const unmarshalWebhook = (data: unknown): Webhook => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     snsArn: data.sns_arn,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Webhook
 }
 
@@ -271,15 +271,15 @@ const unmarshalBlocklist = (data: unknown): Blocklist => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     custom: data.custom,
     domainId: data.domain_id,
     email: data.email,
-    endsAt: unmarshalDate(data.ends_at),
+    endsAt: unmarshalDate(data.ends_at) ?? null,
     id: data.id,
     reason: data.reason,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Blocklist
 }
 
@@ -317,7 +317,7 @@ const unmarshalDomainLastStatusAutoconfigState = (data: unknown): DomainLastStat
   return {
     autoconfigurable: data.autoconfigurable,
     enabled: data.enabled,
-    reason: data.reason ? data.reason : undefined,
+    reason: data.reason ? data.reason : null,
   } as DomainLastStatusAutoconfigState
 }
 
@@ -329,8 +329,8 @@ const unmarshalDomainLastStatusDkimRecord = (data: unknown): DomainLastStatusDki
   }
 
   return {
-    error: data.error,
-    lastValidAt: unmarshalDate(data.last_valid_at),
+    error: data.error ?? null,
+    lastValidAt: unmarshalDate(data.last_valid_at) ?? null,
     status: data.status,
   } as DomainLastStatusDkimRecord
 }
@@ -343,8 +343,8 @@ const unmarshalDomainLastStatusDmarcRecord = (data: unknown): DomainLastStatusDm
   }
 
   return {
-    error: data.error,
-    lastValidAt: unmarshalDate(data.last_valid_at),
+    error: data.error ?? null,
+    lastValidAt: unmarshalDate(data.last_valid_at) ?? null,
     status: data.status,
   } as DomainLastStatusDmarcRecord
 }
@@ -357,8 +357,8 @@ const unmarshalDomainLastStatusMXRecord = (data: unknown): DomainLastStatusMXRec
   }
 
   return {
-    error: data.error,
-    lastValidAt: unmarshalDate(data.last_valid_at),
+    error: data.error ?? null,
+    lastValidAt: unmarshalDate(data.last_valid_at) ?? null,
     status: data.status,
   } as DomainLastStatusMXRecord
 }
@@ -371,8 +371,8 @@ const unmarshalDomainLastStatusSpfRecord = (data: unknown): DomainLastStatusSpfR
   }
 
   return {
-    error: data.error,
-    lastValidAt: unmarshalDate(data.last_valid_at),
+    error: data.error ?? null,
+    lastValidAt: unmarshalDate(data.last_valid_at) ?? null,
     status: data.status,
   } as DomainLastStatusSpfRecord
 }
@@ -385,13 +385,13 @@ export const unmarshalDomainLastStatus = (data: unknown): DomainLastStatus => {
   }
 
   return {
-    autoconfigState: data.autoconfig_state ? unmarshalDomainLastStatusAutoconfigState(data.autoconfig_state) : undefined,
-    dkimRecord: data.dkim_record ? unmarshalDomainLastStatusDkimRecord(data.dkim_record) : undefined,
-    dmarcRecord: data.dmarc_record ? unmarshalDomainLastStatusDmarcRecord(data.dmarc_record) : undefined,
+    autoconfigState: data.autoconfig_state ? unmarshalDomainLastStatusAutoconfigState(data.autoconfig_state) : null,
+    dkimRecord: data.dkim_record ? unmarshalDomainLastStatusDkimRecord(data.dkim_record) : null,
+    dmarcRecord: data.dmarc_record ? unmarshalDomainLastStatusDmarcRecord(data.dmarc_record) : null,
     domainId: data.domain_id,
     domainName: data.domain_name,
-    mxRecord: data.mx_record ? unmarshalDomainLastStatusMXRecord(data.mx_record) : undefined,
-    spfRecord: data.spf_record ? unmarshalDomainLastStatusSpfRecord(data.spf_record) : undefined,
+    mxRecord: data.mx_record ? unmarshalDomainLastStatusMXRecord(data.mx_record) : null,
+    spfRecord: data.spf_record ? unmarshalDomainLastStatusSpfRecord(data.spf_record) : null,
   } as DomainLastStatus
 }
 
@@ -455,8 +455,8 @@ const unmarshalOffer = (data: unknown): Offer => {
   }
 
   return {
-    commitmentPeriod: data.commitment_period,
-    createdAt: unmarshalDate(data.created_at),
+    commitmentPeriod: data.commitment_period ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     includedMonthlyEmails: data.included_monthly_emails,
     maxCustomBlocklistsPerDomain: data.max_custom_blocklists_per_domain,
     maxDedicatedIps: data.max_dedicated_ips,
@@ -488,12 +488,12 @@ const unmarshalPool = (data: unknown): Pool => {
   }
 
   return {
-    details: data.details,
+    details: data.details ?? null,
     ips: data.ips,
     projectId: data.project_id,
-    reverse: data.reverse,
+    reverse: data.reverse ?? null,
     status: data.status,
-    zone: data.zone,
+    zone: data.zone ?? null,
   } as Pool
 }
 
@@ -518,16 +518,16 @@ const unmarshalWebhookEvent = (data: unknown): WebhookEvent => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     data: data.data,
     domainId: data.domain_id,
-    emailId: data.email_id,
+    emailId: data.email_id ?? null,
     id: data.id,
     organizationId: data.organization_id,
     projectId: data.project_id,
     status: data.status,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     webhookId: data.webhook_id,
   } as WebhookEvent
 }
@@ -598,7 +598,7 @@ export const unmarshalProjectSettings = (data: unknown): ProjectSettings => {
   }
 
   return {
-    periodicReport: data.periodic_report ? unmarshalProjectSettingsPeriodicReport(data.periodic_report) : undefined,
+    periodicReport: data.periodic_report ? unmarshalProjectSettingsPeriodicReport(data.periodic_report) : null,
   } as ProjectSettings
 }
 
@@ -668,17 +668,17 @@ export const marshalCreateEmailRequest = (
   request: CreateEmailRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  additional_headers: ((request.additionalHeaders !== undefined) ?  request.additionalHeaders.map(elt => marshalCreateEmailRequestHeader(elt, defaults)): undefined),
-  attachments: ((request.attachments !== undefined) ?  request.attachments.map(elt => marshalCreateEmailRequestAttachment(elt, defaults)): undefined),
-  bcc: ((request.bcc !== undefined) ?  request.bcc.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
-  cc: ((request.cc !== undefined) ?  request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
+  additional_headers: ((request.additionalHeaders != null) ?  request.additionalHeaders.map(elt => marshalCreateEmailRequestHeader(elt, defaults)): undefined),
+  attachments: ((request.attachments != null) ?  request.attachments.map(elt => marshalCreateEmailRequestAttachment(elt, defaults)): undefined),
+  bcc: ((request.bcc != null) ?  request.bcc.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
+  cc: ((request.cc != null) ?  request.cc.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
   from:  marshalCreateEmailRequestAddress(request.from, defaults),
   html: request.html,
   project_id: request.projectId ?? defaults.defaultProjectId,
   send_before: request.sendBefore,
   subject: request.subject,
   text: request.text,
-  to: ((request.to !== undefined) ?  request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
+  to: ((request.to != null) ?  request.to.map(elt => marshalCreateEmailRequestAddress(elt, defaults)): undefined),
 })
 
 export const marshalCreateWebhookRequest = (
@@ -686,7 +686,7 @@ export const marshalCreateWebhookRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain_id: request.domainId,
-  event_types: ((request.eventTypes !== undefined) ?  request.eventTypes: undefined),
+  event_types: ((request.eventTypes != null) ?  request.eventTypes: undefined),
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   sns_arn: request.snsArn,
@@ -721,14 +721,14 @@ export const marshalUpdateProjectSettingsRequest = (
   request: UpdateProjectSettingsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  periodic_report: ((request.periodicReport !== undefined) ?  marshalUpdateProjectSettingsRequestUpdatePeriodicReport(request.periodicReport, defaults): undefined),
+  periodic_report: ((request.periodicReport != null) ?  marshalUpdateProjectSettingsRequestUpdatePeriodicReport(request.periodicReport, defaults): undefined),
 })
 
 export const marshalUpdateWebhookRequest = (
   request: UpdateWebhookRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  event_types: ((request.eventTypes !== undefined) ?  request.eventTypes: undefined),
+  event_types: ((request.eventTypes != null) ?  request.eventTypes: undefined),
   name: request.name,
   sns_arn: request.snsArn,
 })

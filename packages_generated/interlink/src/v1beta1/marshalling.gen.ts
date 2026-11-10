@@ -51,8 +51,8 @@ export const unmarshalDedicatedConnection = (data: unknown): DedicatedConnection
   return {
     availableLinkBandwidths: data.available_link_bandwidths,
     bandwidthMbps: data.bandwidth_mbps,
-    createdAt: unmarshalDate(data.created_at),
-    demarcationInfo: data.demarcation_info,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    demarcationInfo: data.demarcation_info ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -62,8 +62,8 @@ export const unmarshalDedicatedConnection = (data: unknown): DedicatedConnection
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    vlanRange: data.vlan_range ? unmarshalRange(data.vlan_range) : undefined,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    vlanRange: data.vlan_range ? unmarshalRange(data.vlan_range) : null,
   } as DedicatedConnection
 }
 
@@ -89,7 +89,7 @@ const unmarshalPartnerHost = (data: unknown): PartnerHost => {
   }
 
   return {
-    disapprovedReason: data.disapproved_reason,
+    disapprovedReason: data.disapproved_reason ?? null,
     l3Connectivity: data.l3_connectivity,
     pairingKey: data.pairing_key,
     partnerId: data.partner_id,
@@ -119,27 +119,27 @@ export const unmarshalLink = (data: unknown): Link => {
     bandwidthMbps: data.bandwidth_mbps,
     bgpV4Status: data.bgp_v4_status,
     bgpV6Status: data.bgp_v6_status,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     enableRoutePropagation: data.enable_route_propagation,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
-    partner: data.partner ? unmarshalPartnerHost(data.partner) : undefined,
-    peerBgpConfig: data.peer_bgp_config ? unmarshalBgpConfig(data.peer_bgp_config) : undefined,
+    partner: data.partner ? unmarshalPartnerHost(data.partner) : null,
+    peerBgpConfig: data.peer_bgp_config ? unmarshalBgpConfig(data.peer_bgp_config) : null,
     popId: data.pop_id,
     projectId: data.project_id,
     region: data.region,
-    routingPolicyId: data.routing_policy_id,
-    routingPolicyV4Id: data.routing_policy_v4_id,
-    routingPolicyV6Id: data.routing_policy_v6_id,
-    scwBgpConfig: data.scw_bgp_config ? unmarshalBgpConfig(data.scw_bgp_config) : undefined,
-    self: data.self ? unmarshalSelfHost(data.self) : undefined,
+    routingPolicyId: data.routing_policy_id ?? null,
+    routingPolicyV4Id: data.routing_policy_v4_id ?? null,
+    routingPolicyV6Id: data.routing_policy_v6_id ?? null,
+    scwBgpConfig: data.scw_bgp_config ? unmarshalBgpConfig(data.scw_bgp_config) : null,
+    self: data.self ? unmarshalSelfHost(data.self) : null,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vlan: data.vlan,
-    vpcId: data.vpc_id,
+    vpcId: data.vpc_id ?? null,
   } as Link
 }
 
@@ -152,7 +152,7 @@ export const unmarshalPartner = (data: unknown): Partner => {
 
   return {
     contactEmail: data.contact_email,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     l3Connectivity: data.l3_connectivity,
     logoUrl: data.logo_url,
@@ -160,7 +160,7 @@ export const unmarshalPartner = (data: unknown): Partner => {
     portalUrl: data.portal_url,
     region: data.region,
     srn: data.srn,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Partner
 }
 
@@ -193,7 +193,7 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     isIpv6: data.is_ipv6,
     name: data.name,
@@ -204,7 +204,7 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
     region: data.region,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as RoutingPolicy
 }
 

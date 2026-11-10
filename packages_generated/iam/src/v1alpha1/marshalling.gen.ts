@@ -97,13 +97,13 @@ export const unmarshalJWT = (data: unknown): JWT => {
 
   return {
     audienceId: data.audience_id,
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     ip: data.ip,
     issuerId: data.issuer_id,
     jti: data.jti,
     srn: data.srn,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     userAgent: data.user_agent,
   } as JWT
 }
@@ -116,8 +116,8 @@ export const unmarshalScimToken = (data: unknown): ScimToken => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     scimId: data.scim_id,
   } as ScimToken
@@ -132,19 +132,19 @@ export const unmarshalAPIKey = (data: unknown): APIKey => {
 
   return {
     accessKey: data.access_key,
-    applicationId: data.application_id,
-    createdAt: unmarshalDate(data.created_at),
+    applicationId: data.application_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     creationIp: data.creation_ip,
     defaultProjectId: data.default_project_id,
     deletable: data.deletable,
     description: data.description,
     editable: data.editable,
-    expiresAt: unmarshalDate(data.expires_at),
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     managed: data.managed,
-    secretKey: data.secret_key,
+    secretKey: data.secret_key ?? null,
     srn: data.srn,
-    updatedAt: unmarshalDate(data.updated_at),
-    userId: data.user_id,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    userId: data.user_id ?? null,
   } as APIKey
 }
 
@@ -156,7 +156,7 @@ export const unmarshalApplication = (data: unknown): Application => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     deletable: data.deletable,
     description: data.description,
     editable: data.editable,
@@ -167,7 +167,7 @@ export const unmarshalApplication = (data: unknown): Application => {
     organizationId: data.organization_id,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Application
 }
 
@@ -182,7 +182,7 @@ export const unmarshalGroup = (data: unknown): Group => {
     allApplications: data.all_applications,
     allUsers: data.all_users,
     applicationIds: data.application_ids,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     deletable: data.deletable,
     description: data.description,
     editable: data.editable,
@@ -192,7 +192,7 @@ export const unmarshalGroup = (data: unknown): Group => {
     organizationId: data.organization_id,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     userIds: data.user_ids,
   } as Group
 }
@@ -207,7 +207,7 @@ export const unmarshalLog = (data: unknown): Log => {
   return {
     action: data.action,
     bearerId: data.bearer_id,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     ip: data.ip,
     organizationId: data.organization_id,
@@ -226,24 +226,24 @@ export const unmarshalPolicy = (data: unknown): Policy => {
   }
 
   return {
-    applicationId: data.application_id,
-    createdAt: unmarshalDate(data.created_at),
+    applicationId: data.application_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     deletable: data.deletable,
     description: data.description,
     editable: data.editable,
-    groupId: data.group_id,
+    groupId: data.group_id ?? null,
     id: data.id,
     managed: data.managed,
     name: data.name,
     nbPermissionSets: data.nb_permission_sets,
     nbRules: data.nb_rules,
     nbScopes: data.nb_scopes,
-    noPrincipal: data.no_principal,
+    noPrincipal: data.no_principal ?? null,
     organizationId: data.organization_id,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    userId: data.user_id,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    userId: data.user_id ?? null,
   } as Policy
 }
 
@@ -255,11 +255,11 @@ const unmarshalQuotumLimit = (data: unknown): QuotumLimit => {
   }
 
   return {
-    global: data.global,
-    limit: data.limit,
-    region: data.region,
-    unlimited: data.unlimited,
-    zone: data.zone,
+    global: data.global ?? null,
+    limit: data.limit ?? null,
+    region: data.region ?? null,
+    unlimited: data.unlimited ?? null,
+    zone: data.zone ?? null,
   } as QuotumLimit
 }
 
@@ -272,14 +272,14 @@ export const unmarshalQuotum = (data: unknown): Quotum => {
 
   return {
     description: data.description,
-    limit: data.limit,
+    limit: data.limit ?? null,
     limits: unmarshalArrayOfObject(data.limits, unmarshalQuotumLimit),
     localityType: data.locality_type,
     name: data.name,
     prettyName: data.pretty_name,
     srn: data.srn,
     unit: data.unit,
-    unlimited: data.unlimited,
+    unlimited: data.unlimited ?? null,
   } as Quotum
 }
 
@@ -291,7 +291,7 @@ export const unmarshalSSHKey = (data: unknown): SSHKey => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     disabled: data.disabled,
     fingerprint: data.fingerprint,
     id: data.id,
@@ -300,7 +300,7 @@ export const unmarshalSSHKey = (data: unknown): SSHKey => {
     projectId: data.project_id,
     publicKey: data.public_key,
     srn: data.srn,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as SSHKey
 }
 
@@ -313,7 +313,7 @@ export const unmarshalSamlCertificate = (data: unknown): SamlCertificate => {
 
   return {
     content: data.content,
-    expiresAt: unmarshalDate(data.expires_at),
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     origin: data.origin,
     srn: data.srn,
@@ -329,9 +329,9 @@ export const unmarshalWebAuthnAuthenticator = (data: unknown): WebAuthnAuthentic
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
-    lastLoginAt: unmarshalDate(data.last_login_at),
+    lastLoginAt: unmarshalDate(data.last_login_at) ?? null,
     name: data.name,
   } as WebAuthnAuthenticator
 }
@@ -345,12 +345,12 @@ export const unmarshalUser = (data: unknown): User => {
 
   return {
     accountRootUserId: data.account_root_user_id,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     deletable: data.deletable,
     email: data.email,
     firstName: data.first_name,
     id: data.id,
-    lastLoginAt: unmarshalDate(data.last_login_at),
+    lastLoginAt: unmarshalDate(data.last_login_at) ?? null,
     lastName: data.last_name,
     locale: data.locale,
     locked: data.locked,
@@ -358,11 +358,11 @@ export const unmarshalUser = (data: unknown): User => {
     organizationId: data.organization_id,
     phoneNumber: data.phone_number,
     srn: data.srn,
-    status: data.status ? data.status : undefined,
+    status: data.status ? data.status : null,
     tags: data.tags,
-    twoFactorEnabled: data.two_factor_enabled,
+    twoFactorEnabled: data.two_factor_enabled ?? null,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     username: data.username,
   } as User
 }
@@ -376,7 +376,7 @@ export const unmarshalCreateScimTokenResponse = (data: unknown): CreateScimToken
 
   return {
     bearerToken: data.bearer_token,
-    token: data.token ? unmarshalScimToken(data.token) : undefined,
+    token: data.token ? unmarshalScimToken(data.token) : null,
   } as CreateScimTokenResponse
 }
 
@@ -388,7 +388,7 @@ export const unmarshalEncodedJWT = (data: unknown): EncodedJWT => {
   }
 
   return {
-    jwt: data.jwt ? unmarshalJWT(data.jwt) : undefined,
+    jwt: data.jwt ? unmarshalJWT(data.jwt) : null,
     renewToken: data.renew_token,
     token: data.token,
   } as EncodedJWT
@@ -442,8 +442,8 @@ const unmarshalConnection = (data: unknown): Connection => {
   }
 
   return {
-    organization: data.organization ? unmarshalConnectionConnectedOrganization(data.organization) : undefined,
-    user: data.user ? unmarshalConnectionConnectedUser(data.user) : undefined,
+    organization: data.organization ? unmarshalConnectionConnectedOrganization(data.organization) : null,
+    user: data.user ? unmarshalConnectionConnectedUser(data.user) : null,
   } as Connection
 }
 
@@ -505,8 +505,8 @@ const unmarshalGracePeriod = (data: unknown): GracePeriod => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     type: data.type,
   } as GracePeriod
 }
@@ -570,7 +570,7 @@ const unmarshalPermissionSet = (data: unknown): PermissionSet => {
   }
 
   return {
-    categories: data.categories,
+    categories: data.categories ?? null,
     description: data.description,
     id: data.id,
     name: data.name,
@@ -625,14 +625,14 @@ const unmarshalRule = (data: unknown): Rule => {
   }
 
   return {
-    accountRootUserId: data.account_root_user_id,
+    accountRootUserId: data.account_root_user_id ?? null,
     condition: data.condition,
     deny: data.deny,
     id: data.id,
-    organizationId: data.organization_id,
-    permissionSetNames: data.permission_set_names,
+    organizationId: data.organization_id ?? null,
+    permissionSetNames: data.permission_set_names ?? null,
     permissionSetsScopeType: data.permission_sets_scope_type,
-    projectIds: data.project_ids,
+    projectIds: data.project_ids ?? null,
     srn: data.srn,
   } as Rule
 }
@@ -753,10 +753,10 @@ export const unmarshalOrganizationSecuritySettings = (data: unknown): Organizati
 
   return {
     enforcePasswordRenewal: data.enforce_password_renewal,
-    gracePeriodDuration: data.grace_period_duration,
+    gracePeriodDuration: data.grace_period_duration ?? null,
     loginAttemptsBeforeLocked: data.login_attempts_before_locked,
-    maxApiKeyExpirationDuration: data.max_api_key_expiration_duration,
-    maxLoginSessionDuration: data.max_login_session_duration,
+    maxApiKeyExpirationDuration: data.max_api_key_expiration_duration ?? null,
+    maxLoginSessionDuration: data.max_login_session_duration ?? null,
   } as OrganizationSecuritySettings
 }
 
@@ -797,7 +797,7 @@ export const unmarshalSaml = (data: unknown): Saml => {
   return {
     entityId: data.entity_id,
     id: data.id,
-    serviceProvider: data.service_provider ? unmarshalSamlServiceProvider(data.service_provider) : undefined,
+    serviceProvider: data.service_provider ? unmarshalSamlServiceProvider(data.service_provider) : null,
     singleSignOnUrl: data.single_sign_on_url,
     srn: data.srn,
     status: data.status,
@@ -812,7 +812,7 @@ export const unmarshalScim = (data: unknown): Scim => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
   } as Scim
 }
@@ -841,7 +841,7 @@ export const unmarshalStartUserWebAuthnRegistrationResponse = (data: unknown): S
     challenge: data.challenge,
     excludeCredentials: data.exclude_credentials,
     publicKeyAlgorithms: data.public_key_algorithms,
-    timeout: data.timeout,
+    timeout: data.timeout ?? null,
   } as StartUserWebAuthnRegistrationResponse
 }
 
@@ -956,7 +956,7 @@ export const marshalCreatePolicyRequest = (
   description: request.description,
   name: request.name || randomName('pol'),
   organization_id: request.organizationId ?? defaults.defaultOrganizationId,
-  rules: ((request.rules !== undefined) ?  request.rules.map(elt => marshalRuleSpecs(elt, defaults)): undefined),
+  rules: ((request.rules != null) ?  request.rules.map(elt => marshalRuleSpecs(elt, defaults)): undefined),
   tags: request.tags,  
   ...resolveOneOf<string | boolean>([
     {param: 'user_id',
@@ -1009,7 +1009,7 @@ export const marshalCreateUserRequest = (
       value: request.email,
     },
     {param: 'member',
-      value: (request.member !== undefined) ? marshalCreateUserRequestMember(request.member, defaults)
+      value: (request.member != null) ? marshalCreateUserRequestMember(request.member, defaults)
       : undefined,
     },
   ]),

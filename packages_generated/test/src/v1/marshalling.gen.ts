@@ -22,7 +22,7 @@ export const unmarshalHuman = (data: unknown): Human => {
   return {
     altitudeInMeter: data.altitude_in_meter,
     altitudeInMillimeter: data.altitude_in_millimeter,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     eyesColor: data.eyes_color,
     fingersCount: data.fingers_count,
     hairCount: data.hair_count,
@@ -34,7 +34,7 @@ export const unmarshalHuman = (data: unknown): Human => {
     projectId: data.project_id,
     shoeSize: data.shoe_size,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Human
 }
 

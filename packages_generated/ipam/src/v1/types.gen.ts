@@ -63,11 +63,11 @@ export interface Resource {
   /**
    * MAC of the resource the IP is attached to.
    */
-  macAddress?: string
+  macAddress?: string | null
   /**
    * When the IP is in a Private Network, then a DNS record is available to resolve the resource name to this IP.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -79,7 +79,7 @@ export interface Reverse {
   /**
    * IP corresponding to the hostname.
    */
-  address?: string
+  address?: string | null
 }
 
 
@@ -89,30 +89,30 @@ export interface Source {
    *
    * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId', 'regional' could be set.
    */
-  zonal?: string
+  zonal?: string | null
   /**
    * This source is specific.
    *
    * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId', 'regional' could be set.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
   /**
    * This source is specific.
    *
    * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId', 'regional' could be set.
    */
-  subnetId?: string
+  subnetId?: string | null
   /**
    *
    * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId', 'regional' could be set.
    */
-  vpcId?: string
+  vpcId?: string | null
   /**
    * This source is global.
    *
    * One-of ('source'): at most one of 'zonal', 'privateNetworkId', 'subnetId', 'vpcId', 'regional' could be set.
    */
-  regional?: boolean
+  regional?: boolean | null
 }
 
 
@@ -124,7 +124,7 @@ export interface CustomResource {
   /**
    * When the resource is in a Private Network, a DNS record is available to resolve the resource name.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -152,19 +152,19 @@ export interface IP {
   /**
    * Date the IP was reserved.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the IP was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Source pool where the IP was reserved in.
    */
-  source?: Source
+  source?: Source | null
   /**
    * Resource which the IP is attached to.
    */
-  resource?: Resource
+  resource?: Resource | null
   /**
    * Tags for the IP.
    */
@@ -180,7 +180,7 @@ export interface IP {
   /**
    * Zone of the IP, if zonal.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
 }
 
 
@@ -188,7 +188,7 @@ export type AttachIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP ID.
    */
@@ -204,11 +204,11 @@ export type BookIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * When creating an IP in a Private Network, the Project must match the Private Network's Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Source in which to reserve the IP. Not all sources are available for reservation.
    */
@@ -220,15 +220,15 @@ export type BookIPRequest = {
   /**
    * The requested address should not include the subnet mask (/suffix). Note that only the Private Network source allows you to pick a specific IP. If the requested IP is already reserved, then the call will fail.
    */
-  address?: string
+  address?: string | null
   /**
    * Tags for the IP.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Custom resource to attach to the IP being reserved. An example of a custom resource is a virtual machine hosted on an Elastic Metal server. Do not use this for attaching IP addresses to standard Scaleway resources, as it will fail - instead, see the relevant product API for an equivalent method.
    */
-  resource?: CustomResource
+  resource?: CustomResource | null
 }
 
 
@@ -236,7 +236,7 @@ export type DetachIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP ID.
    */
@@ -252,7 +252,7 @@ export type GetIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP ID.
    */
@@ -264,100 +264,100 @@ export type ListIPsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of the returned IPs.
    */
-  orderBy?: ListIPsRequestOrderBy
+  orderBy?: ListIPsRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of IPs to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Project ID to filter for. Only IPs belonging to this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Zone to filter for. Only IPs that are zonal, and in this zone, will be returned.
    *
    * One-of ('source'): at most one of 'zonal', 'regional', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
    */
-  zonal?: string
+  zonal?: string | null
   /**
    * Filter on regional IPs only.
    *
    * One-of ('source'): at most one of 'zonal', 'regional', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
    */
-  regional?: boolean
+  regional?: boolean | null
   /**
    * Only IPs that are private, and in this Private Network, will be returned.
    *
    * One-of ('source'): at most one of 'zonal', 'regional', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
   /**
    * Only IPs inside this exact subnet will be returned.
    *
    * One-of ('source'): at most one of 'zonal', 'regional', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
    */
-  subnetId?: string
+  subnetId?: string | null
   /**
    * Only IPs owned by resources in this VPC will be returned.
    */
-  vpcId?: string
+  vpcId?: string | null
   /**
    * Defines whether to filter only for IPs which are attached to a resource.
    */
-  attached?: boolean
+  attached?: boolean | null
   /**
    * Attached resource name to filter for, only IPs attached to a resource with this string within their name will be returned.
    */
-  resourceName?: string
+  resourceName?: string | null
   /**
    * Resource ID to filter for. Only IPs attached to this resource will be returned.
    */
-  resourceId?: string
+  resourceId?: string | null
   /**
    * Resource IDs to filter for. Only IPs attached to at least one of these resources will be returned.
    */
-  resourceIds?: string[]
+  resourceIds?: string[] | null
   /**
    * Resource type to filter for. Only IPs attached to this type of resource will be returned.
    */
-  resourceType?: ResourceType
+  resourceType?: ResourceType | null
   /**
    * Resource types to filter for. Only IPs attached to these types of resources will be returned.
    */
-  resourceTypes?: ResourceType[]
+  resourceTypes?: ResourceType[] | null
   /**
    * MAC address to filter for. Only IPs attached to a resource with this MAC address will be returned.
    */
-  macAddress?: string
+  macAddress?: string | null
   /**
    * Tags to filter for, only IPs with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Organization ID to filter for. Only IPs belonging to this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Defines whether to filter only for IPv4s or IPv6s.
    */
-  isIpv6?: boolean
+  isIpv6?: boolean | null
   /**
    * IP IDs to filter for. Only IPs with these UUIDs will be returned.
    */
-  ipIds?: string[]
+  ipIds?: string[] | null
   /**
    *
    * One-of ('source'): at most one of 'zonal', 'regional', 'privateNetworkId', 'subnetId', 'sourceVpcId' could be set.
    */
-  sourceVpcId?: string
+  sourceVpcId?: string | null
 }
 
 
@@ -371,7 +371,7 @@ export type MoveIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP ID.
    */
@@ -383,7 +383,7 @@ export type MoveIPRequest = {
   /**
    * Custom resource to be attached to the IP.
    */
-  toResource?: CustomResource
+  toResource?: CustomResource | null
 }
 
 
@@ -391,7 +391,7 @@ export type ReleaseIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP ID.
    */
@@ -403,8 +403,8 @@ export type ReleaseIPSetRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  ipIds?: string[]
+  region?: ScwRegion | null
+  ipIds?: string[] | null
 }
 
 
@@ -412,7 +412,7 @@ export type UpdateIPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP ID.
    */
@@ -420,11 +420,11 @@ export type UpdateIPRequest = {
   /**
    * Tags for the IP.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Array of reverse domain names associated with an IP in the subnet of the current IP.
    */
-  reverses?: Reverse[]
+  reverses?: Reverse[] | null
 }
 
 

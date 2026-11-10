@@ -90,7 +90,7 @@ export const unmarshalBackup = (data: unknown): Backup => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     size: data.size,
     status: data.status,
@@ -161,7 +161,7 @@ const unmarshalHostingDomainCustomDomain = (data: unknown): HostingDomainCustomD
   }
 
   return {
-    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
+    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : null,
     dnsStatus: data.dns_status,
     domain: data.domain,
     domainStatus: data.domain_status,
@@ -176,7 +176,7 @@ const unmarshalHostingDomain = (data: unknown): HostingDomain => {
   }
 
   return {
-    customDomain: data.custom_domain ? unmarshalHostingDomainCustomDomain(data.custom_domain) : undefined,
+    customDomain: data.custom_domain ? unmarshalHostingDomainCustomDomain(data.custom_domain) : null,
     subdomain: data.subdomain,
   } as HostingDomain
 }
@@ -189,11 +189,11 @@ export const unmarshalHostingSummary = (data: unknown): HostingSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status ? data.dns_status : undefined,
-    domain: data.domain,
-    domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : undefined,
-    domainStatus: data.domain_status ? data.domain_status : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    dnsStatus: data.dns_status ? data.dns_status : null,
+    domain: data.domain ?? null,
+    domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : null,
+    domainStatus: data.domain_status ? data.domain_status : null,
     id: data.id,
     offerName: data.offer_name,
     projectId: data.project_id,
@@ -201,7 +201,7 @@ export const unmarshalHostingSummary = (data: unknown): HostingSummary => {
     region: data.region,
     srn: data.srn,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as HostingSummary
 }
 
@@ -253,9 +253,9 @@ export const unmarshalCheckFreeDomainAvailabilityResponse = (data: unknown): Che
   }
 
   return {
-    freeDomain: data.free_domain ? unmarshalFreeDomain(data.free_domain) : undefined,
+    freeDomain: data.free_domain ? unmarshalFreeDomain(data.free_domain) : null,
     isAvailable: data.is_available,
-    reason: data.reason ? data.reason : undefined,
+    reason: data.reason ? data.reason : null,
   } as CheckFreeDomainAvailabilityResponse
 }
 
@@ -280,7 +280,7 @@ const unmarshalDnsRecord = (data: unknown): DnsRecord => {
 
   return {
     name: data.name,
-    priority: data.priority,
+    priority: data.priority ?? null,
     rawData: data.raw_data,
     status: data.status,
     ttl: data.ttl,
@@ -311,8 +311,8 @@ export const unmarshalDnsRecords = (data: unknown): DnsRecords => {
   }
 
   return {
-    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
-    dnsConfig: data.dns_config ? data.dns_config : undefined,
+    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : null,
+    dnsConfig: data.dns_config ? data.dns_config : null,
     nameServers: unmarshalArrayOfObject(data.name_servers, unmarshalNameserver),
     records: unmarshalArrayOfObject(data.records, unmarshalDnsRecord),
     status: data.status,
@@ -327,9 +327,9 @@ export const unmarshalDomain = (data: unknown): Domain => {
   }
 
   return {
-    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : undefined,
+    autoConfigDomainDns: data.auto_config_domain_dns ? unmarshalAutoConfigDomainDns(data.auto_config_domain_dns) : null,
     availableActions: data.available_actions,
-    availableDnsActions: data.available_dns_actions ? data.available_dns_actions : undefined,
+    availableDnsActions: data.available_dns_actions ? data.available_dns_actions : null,
     name: data.name,
     owner: data.owner,
     status: data.status,
@@ -363,8 +363,8 @@ const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
     durationInMonth: data.duration_in_month,
     id: data.id,
     isDefault: data.is_default,
-    next: data.next ? unmarshalOfferCommitment(data.next) : undefined,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
+    next: data.next ? unmarshalOfferCommitment(data.next) : null,
+    price: data.price ? unmarshalMoney(data.price) : null,
     type: data.type,
   } as OfferCommitment
 }
@@ -398,7 +398,7 @@ const unmarshalOfferOption = (data: unknown): OfferOption => {
     maxValue: data.max_value,
     minValue: data.min_value,
     name: data.name,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
+    price: data.price ? unmarshalMoney(data.price) : null,
     quotaWarning: data.quota_warning,
   } as OfferOption
 }
@@ -412,7 +412,7 @@ const unmarshalPlatformControlPanel = (data: unknown): PlatformControlPanel => {
 
   return {
     name: data.name,
-    urls: data.urls ? unmarshalPlatformControlPanelUrls(data.urls) : undefined,
+    urls: data.urls ? unmarshalPlatformControlPanelUrls(data.urls) : null,
   } as PlatformControlPanel
 }
 
@@ -425,9 +425,9 @@ const unmarshalHostingCommitment = (data: unknown): HostingCommitment => {
 
   return {
     deleteHostingAtEnd: data.delete_hosting_at_end,
-    endAt: unmarshalDate(data.end_at),
-    offerCommitment: data.offer_commitment ? unmarshalOfferCommitment(data.offer_commitment) : undefined,
-    startAt: unmarshalDate(data.start_at),
+    endAt: unmarshalDate(data.end_at) ?? null,
+    offerCommitment: data.offer_commitment ? unmarshalOfferCommitment(data.offer_commitment) : null,
+    startAt: unmarshalDate(data.start_at) ?? null,
   } as HostingCommitment
 }
 
@@ -440,8 +440,8 @@ const unmarshalHostingUser = (data: unknown): HostingUser => {
 
   return {
     contactEmail: data.contact_email,
-    oneTimePassword: data.one_time_password,
-    oneTimePasswordB64: data.one_time_password_b64,
+    oneTimePassword: data.one_time_password ?? null,
+    oneTimePasswordB64: data.one_time_password_b64 ?? null,
     username: data.username,
   } as HostingUser
 }
@@ -463,7 +463,7 @@ const unmarshalOffer = (data: unknown): Offer => {
     id: data.id,
     name: data.name,
     options: unmarshalArrayOfObject(data.options, unmarshalOfferOption),
-    price: data.price ? unmarshalMoney(data.price) : undefined,
+    price: data.price ? unmarshalMoney(data.price) : null,
     quotaWarning: data.quota_warning,
     region: data.region,
   } as Offer
@@ -477,7 +477,7 @@ const unmarshalPlatform = (data: unknown): Platform => {
   }
 
   return {
-    controlPanel: data.control_panel ? unmarshalPlatformControlPanel(data.control_panel) : undefined,
+    controlPanel: data.control_panel ? unmarshalPlatformControlPanel(data.control_panel) : null,
     groupName: data.group_name,
     hostname: data.hostname,
     ipv4: data.ipv4,
@@ -494,25 +494,25 @@ export const unmarshalHosting = (data: unknown): Hosting => {
   }
 
   return {
-    commitment: data.commitment ? unmarshalHostingCommitment(data.commitment) : undefined,
-    createdAt: unmarshalDate(data.created_at),
-    dnsStatus: data.dns_status ? data.dns_status : undefined,
-    domain: data.domain,
-    domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : undefined,
-    domainStatus: data.domain_status ? data.domain_status : undefined,
+    commitment: data.commitment ? unmarshalHostingCommitment(data.commitment) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    dnsStatus: data.dns_status ? data.dns_status : null,
+    domain: data.domain ?? null,
+    domainInfo: data.domain_info ? unmarshalHostingDomain(data.domain_info) : null,
+    domainStatus: data.domain_status ? data.domain_status : null,
     id: data.id,
     ipv4: data.ipv4,
-    offer: data.offer ? unmarshalOffer(data.offer) : undefined,
-    platform: data.platform ? unmarshalPlatform(data.platform) : undefined,
+    offer: data.offer ? unmarshalOffer(data.offer) : null,
+    platform: data.platform ? unmarshalPlatform(data.platform) : null,
     projectId: data.project_id,
     protected: data.protected,
-    provider: data.provider ? data.provider : undefined,
+    provider: data.provider ? data.provider : null,
     region: data.region,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    user: data.user ? unmarshalHostingUser(data.user) : undefined,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    user: data.user ? unmarshalHostingUser(data.user) : null,
   } as Hosting
 }
 
@@ -524,7 +524,7 @@ const unmarshalBackupItem = (data: unknown): BackupItem => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     size: data.size,
@@ -739,7 +739,7 @@ export const unmarshalResetHostingPasswordResponse = (data: unknown): ResetHosti
   }
 
   return {
-    oneTimePassword: data.one_time_password,
+    oneTimePassword: data.one_time_password ?? null,
     oneTimePasswordB64: data.one_time_password_b64,
   } as ResetHostingPasswordResponse
 }
@@ -794,7 +794,7 @@ const unmarshalDomainAvailability = (data: unknown): DomainAvailability => {
     availableActions: data.available_actions,
     canCreateHosting: data.can_create_hosting,
     name: data.name,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
+    price: data.price ? unmarshalMoney(data.price) : null,
     status: data.status,
     zoneName: data.zone_name,
   } as DomainAvailability
@@ -860,7 +860,7 @@ export const marshalDatabaseApiCreateDatabaseRequest = (
   database_name: request.databaseName,  
   ...resolveOneOf<Record<string, unknown> | string>([
     {param: 'new_user',
-      value: (request.newUser !== undefined) ? marshalCreateDatabaseRequestUser(request.newUser, defaults)
+      value: (request.newUser != null) ? marshalCreateDatabaseRequestUser(request.newUser, defaults)
       : undefined,
     },
     {param: 'existing_username',
@@ -914,8 +914,8 @@ export const marshalDnsApiSyncDomainDnsRecordsRequest = (
   request: DnsApiSyncDomainDnsRecordsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  auto_config_domain_dns: ((request.autoConfigDomainDns !== undefined) ?  marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults): undefined),
-  custom_records: ((request.customRecords !== undefined) ?  request.customRecords.map(elt => marshalSyncDomainDnsRecordsRequestRecord(elt, defaults)): undefined),
+  auto_config_domain_dns: ((request.autoConfigDomainDns != null) ?  marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults): undefined),
+  custom_records: ((request.customRecords != null) ?  request.customRecords.map(elt => marshalSyncDomainDnsRecordsRequestRecord(elt, defaults)): undefined),
   update_all_records: request.updateAllRecords,
   update_mail_records: request.updateMailRecords,
   update_nameservers: request.updateNameservers,
@@ -975,14 +975,14 @@ export const marshalHostingApiCreateHostingRequest = (
   request: HostingApiCreateHostingRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  auto_config_domain_dns: ((request.autoConfigDomainDns !== undefined) ?  marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults): undefined),
+  auto_config_domain_dns: ((request.autoConfigDomainDns != null) ?  marshalAutoConfigDomainDns(request.autoConfigDomainDns, defaults): undefined),
   domain: request.domain,
-  domain_configuration: ((request.domainConfiguration !== undefined) ?  marshalCreateHostingRequestDomainConfiguration(request.domainConfiguration, defaults): undefined),
+  domain_configuration: ((request.domainConfiguration != null) ?  marshalCreateHostingRequestDomainConfiguration(request.domainConfiguration, defaults): undefined),
   email: request.email,
   language: request.language,
   offer_commitment_id: request.offerCommitmentId,
   offer_id: request.offerId,
-  offer_options: ((request.offerOptions !== undefined) ?  request.offerOptions.map(elt => marshalOfferOptionRequest(elt, defaults)): undefined),
+  offer_options: ((request.offerOptions != null) ?  request.offerOptions.map(elt => marshalOfferOptionRequest(elt, defaults)): undefined),
   project_id: request.projectId ?? defaults.defaultProjectId,
   skip_welcome_email: request.skipWelcomeEmail,
   subdomain: request.subdomain,
@@ -1025,7 +1025,7 @@ export const marshalHostingApiUpdateHostingRequest = (
   delete_hosting_after_commitment: request.deleteHostingAfterCommitment,
   email: request.email,
   offer_id: request.offerId,
-  offer_options: ((request.offerOptions !== undefined) ?  request.offerOptions.map(elt => marshalOfferOptionRequest(elt, defaults)): undefined),
+  offer_options: ((request.offerOptions != null) ?  request.offerOptions.map(elt => marshalOfferOptionRequest(elt, defaults)): undefined),
   protected: request.protected,
   tags: request.tags,
 })

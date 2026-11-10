@@ -297,6 +297,9 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'wofl_workflow_run',
   'wofl_workflow_version',
   'kafk_cluster',
+  'annotations_key',
+  'annotations_value',
+  'annotations_binding',
 ]
 
 /** Lists all values of the enum {@link RunStatus}. */

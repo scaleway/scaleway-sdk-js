@@ -165,31 +165,31 @@ export interface QuotumLimit {
    *
    * One-of ('locality'): at most one of 'global', 'region', 'zone' could be set.
    */
-  global?: boolean
+  global?: boolean | null
   /**
    * The region on which the limit is applied.
    *
    * One-of ('locality'): at most one of 'global', 'region', 'zone' could be set.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The zone on which the limit is applied.
    *
    * One-of ('locality'): at most one of 'global', 'region', 'zone' could be set.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Maximum locality limit.
    *
    * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
-  limit?: number
+  limit?: number | null
   /**
    * Whether or not the quota per locality is unlimited.
    *
    * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
-  unlimited?: boolean
+  unlimited?: boolean | null
 }
 
 
@@ -209,15 +209,15 @@ export interface JWT {
   /**
    * Creation date of the JWT.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the JWT.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Expiration date of the JWT.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * IP address used during the creation of the JWT.
    */
@@ -237,7 +237,7 @@ export interface RuleSpecs {
   /**
    * Names of permission sets bound to the rule.
    */
-  permissionSetNames?: string[]
+  permissionSetNames?: string[] | null
   /**
    * Condition expression to evaluate.
    */
@@ -247,13 +247,13 @@ export interface RuleSpecs {
    *
    * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be set.
    */
-  projectIds?: string[]
+  projectIds?: string[] | null
   /**
    * ID of Organization the rule is scoped to.
    *
    * One-of ('scope'): at most one of 'projectIds', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Select whether the rule should remove the permissions instead of granting them.
    */
@@ -264,8 +264,8 @@ export interface RuleSpecs {
 export interface ScimToken {
   id: string
   scimId: string
-  createdAt?: Date
-  expiresAt?: Date
+  createdAt?: Date | null
+  expiresAt?: Date | null
 }
 
 
@@ -313,11 +313,11 @@ export interface Connection {
   /**
    * Information about the connected organization.
    */
-  organization?: ConnectionConnectedOrganization
+  organization?: ConnectionConnectedOrganization | null
   /**
    * Information about the connected user.
    */
-  user?: ConnectionConnectedUser
+  user?: ConnectionConnectedUser | null
 }
 
 
@@ -329,19 +329,19 @@ export interface APIKey {
   /**
    * Secret key of the API Key.
    */
-  secretKey?: string
+  secretKey?: string | null
   /**
    * ID of application that bears the API key.
    *
    * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
-  applicationId?: string
+  applicationId?: string | null
   /**
    * ID of user that bears the API key.
    *
    * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
-  userId?: string
+  userId?: string | null
   /**
    * Description of API key.
    */
@@ -349,15 +349,15 @@ export interface APIKey {
   /**
    * Date and time of API key creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last API key update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date and time of API key expiration.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Default Project ID specified for this API key.
    */
@@ -401,11 +401,11 @@ export interface Application {
   /**
    * Date and time application was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last application update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ID of the Organization.
    */
@@ -445,11 +445,11 @@ export interface GracePeriod {
   /**
    * Date and time the grace period was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time the grace period expires.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -461,11 +461,11 @@ export interface Group {
   /**
    * Date and time of group creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last group update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ID of Organization linked to the group.
    */
@@ -525,7 +525,7 @@ export interface Log {
   /**
    * Creation date of the log.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * IP address of the HTTP request linked to the log.
    */
@@ -581,7 +581,7 @@ export interface PermissionSet {
   /**
    * Categories of the permission set.
    */
-  categories?: string[]
+  categories?: string[] | null
 }
 
 
@@ -605,11 +605,11 @@ export interface Policy {
   /**
    * Date and time of policy creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last policy update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Defines whether or not a policy is editable.
    */
@@ -643,25 +643,25 @@ export interface Policy {
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  userId?: string
+  userId?: string | null
   /**
    * ID of the group attributed to the policy.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  groupId?: string
+  groupId?: string | null
   /**
    * ID of the application attributed to the policy.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  applicationId?: string
+  applicationId?: string | null
   /**
    * Defines whether or not a policy is attributed to a principal.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  noPrincipal?: boolean
+  noPrincipal?: boolean | null
   /**
    * The SRN of the policy.
    */
@@ -679,13 +679,13 @@ export interface Quotum {
    *
    * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
-  limit?: number
+  limit?: number | null
   /**
    * @deprecated Defines whether or not the quota is unlimited.
    *
    * One-of ('value'): at most one of 'limit', 'unlimited' could be set.
    */
-  unlimited?: boolean
+  unlimited?: boolean | null
   /**
    * A human-readable name for the quota.
    */
@@ -725,7 +725,7 @@ export interface Rule {
   /**
    * Names of permission sets bound to the rule.
    */
-  permissionSetNames?: string[]
+  permissionSetNames?: string[] | null
   /**
    * Permission_set_names have the same scope_type.
    */
@@ -739,19 +739,19 @@ export interface Rule {
    *
    * One-of ('scope'): at most one of 'projectIds', 'organizationId', 'accountRootUserId' could be set.
    */
-  projectIds?: string[]
+  projectIds?: string[] | null
   /**
    * ID of Organization the rule is scoped to.
    *
    * One-of ('scope'): at most one of 'projectIds', 'organizationId', 'accountRootUserId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * ID of account root user the rule is scoped to.
    *
    * One-of ('scope'): at most one of 'projectIds', 'organizationId', 'accountRootUserId' could be set.
    */
-  accountRootUserId?: string
+  accountRootUserId?: string | null
   /**
    * Select whether the rule should remove the permissions instead of granting them.
    */
@@ -779,11 +779,11 @@ export interface SSHKey {
   /**
    * Creation date of SSH key.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of SSH key.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ID of Organization linked to the SSH key.
    */
@@ -823,7 +823,7 @@ export interface SamlCertificate {
   /**
    * Date and time of the SAML certificate expiration.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * The SRN of the SAML certificate.
    */
@@ -843,11 +843,11 @@ export interface WebAuthnAuthenticator {
   /**
    * The creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The timestamp of the last successful login using the authenticator.
    */
-  lastLoginAt?: Date
+  lastLoginAt?: Date | null
 }
 
 
@@ -883,11 +883,11 @@ export interface User {
   /**
    * Date user was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date of last user update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ID of the Organization.
    */
@@ -899,7 +899,7 @@ export interface User {
   /**
    * Date of the last login.
    */
-  lastLoginAt?: Date
+  lastLoginAt?: Date | null
   /**
    * Type of user.
    */
@@ -907,11 +907,11 @@ export interface User {
   /**
    * @deprecated Deprecated, use "mfa" instead.
    */
-  twoFactorEnabled?: boolean
+  twoFactorEnabled?: boolean | null
   /**
    * @deprecated Status of user invitation.
    */
-  status?: UserStatus
+  status?: UserStatus | null
   /**
    * Defines whether MFA is enabled.
    */
@@ -951,13 +951,13 @@ export type AddGroupMemberRequest = {
    *
    * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
-  userId?: string
+  userId?: string | null
   /**
    * ID of the application to add.
    *
    * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
-  applicationId?: string
+  applicationId?: string | null
 }
 
 
@@ -969,11 +969,11 @@ export type AddGroupMembersRequest = {
   /**
    * IDs of the users to add.
    */
-  userIds?: string[]
+  userIds?: string[] | null
   /**
    * IDs of the applications to add.
    */
-  applicationIds?: string[]
+  applicationIds?: string[] | null
 }
 
 
@@ -1004,21 +1004,21 @@ export type CreateAPIKeyRequest = {
    *
    * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
-  applicationId?: string
+  applicationId?: string | null
   /**
    * ID of the user.
    *
    * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
-  userId?: string
+  userId?: string | null
   /**
    * Expiration date of the API key.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Default Project ID to use with Object Storage.
    */
-  defaultProjectId?: string
+  defaultProjectId?: string | null
   /**
    * Description of the API key (max length is 200 characters).
    */
@@ -1030,11 +1030,11 @@ export type CreateApplicationRequest = {
   /**
    * Name of the application to create (max length is 64 characters).
    */
-  name?: string
+  name?: string | null
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Description of the application (max length is 200 characters).
    */
@@ -1042,7 +1042,7 @@ export type CreateApplicationRequest = {
   /**
    * Tags associated with the application (maximum of 10 tags).
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1050,11 +1050,11 @@ export type CreateGroupRequest = {
   /**
    * ID of Organization linked to the group.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Name of the group to create (max length is 64 chars). MUST be unique inside an Organization.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the group to create (max length is 200 chars).
    */
@@ -1062,7 +1062,7 @@ export type CreateGroupRequest = {
   /**
    * Tags associated with the group (maximum of 10 tags).
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1082,7 +1082,7 @@ export type CreatePolicyRequest = {
   /**
    * Name of the policy to create (max length is 64 characters).
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the policy to create (max length is 200 characters).
    */
@@ -1090,39 +1090,39 @@ export type CreatePolicyRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Rules of the policy to create.
    */
-  rules?: RuleSpecs[]
+  rules?: RuleSpecs[] | null
   /**
    * Tags associated with the policy (maximum of 10 tags).
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * ID of user attributed to the policy.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  userId?: string
+  userId?: string | null
   /**
    * ID of group attributed to the policy.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  groupId?: string
+  groupId?: string | null
   /**
    * ID of application attributed to the policy.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  applicationId?: string
+  applicationId?: string | null
   /**
    * Defines whether or not a policy is attributed to a principal.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  noPrincipal?: boolean
+  noPrincipal?: boolean | null
 }
 
 
@@ -1130,7 +1130,7 @@ export type CreateSSHKeyRequest = {
   /**
    * Name of the SSH key. Max length is 1000.
    */
-  name?: string
+  name?: string | null
   /**
    * SSH public key. Currently only the ssh-rsa, ssh-dss (DSA), ssh-ed25519 and ecdsa keys with NIST curves are supported. Max length is 65000.
    */
@@ -1138,7 +1138,7 @@ export type CreateSSHKeyRequest = {
   /**
    * Project the resource is attributed to.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1154,7 +1154,7 @@ export interface CreateScimTokenResponse {
   /**
    * The SCIM token metadata.
    */
-  token?: ScimToken
+  token?: ScimToken | null
   /**
    * The Bearer Token to use to authenticate to SCIM endpoints.
    */
@@ -1174,23 +1174,23 @@ export type CreateUserRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Email of the user.
    *
    * One-of ('type'): at most one of 'email', 'member' could be set.
    */
-  email?: string
+  email?: string | null
   /**
    * Tags associated with the user.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Details of IAM member.
    *
    * One-of ('type'): at most one of 'email', 'member' could be set.
    */
-  member?: CreateUserRequestMember
+  member?: CreateUserRequestMember | null
 }
 
 
@@ -1296,7 +1296,7 @@ export type EnableOrganizationSamlRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1304,7 +1304,7 @@ export type EnableOrganizationScimRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1312,7 +1312,7 @@ export interface EncodedJWT {
   /**
    * The renewed JWT.
    */
-  jwt?: JWT
+  jwt?: JWT | null
   /**
    * The encoded token of the renewed JWT.
    */
@@ -1420,7 +1420,7 @@ export type GetOrganizationRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1428,12 +1428,12 @@ export type GetOrganizationSamlRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
 export type GetOrganizationScimRequest = {
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1441,7 +1441,7 @@ export type GetOrganizationSecuritySettingsRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1461,7 +1461,7 @@ export type GetQuotumRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1542,59 +1542,59 @@ export type ListAPIKeysRequest = {
   /**
    * Criteria for sorting results.
    */
-  orderBy?: ListAPIKeysRequestOrderBy
+  orderBy?: ListAPIKeysRequestOrderBy | null
   /**
    * Page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * @deprecated ID of application that bears the API key.
    *
    * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
-  applicationId?: string
+  applicationId?: string | null
   /**
    * @deprecated ID of user that bears the API key.
    *
    * One-of ('bearer'): at most one of 'applicationId', 'userId' could be set.
    */
-  userId?: string
+  userId?: string | null
   /**
    * Defines whether to filter out editable API keys or not.
    */
-  editable?: boolean
+  editable?: boolean | null
   /**
    * Defines whether to filter out expired API keys or not.
    */
-  expired?: boolean
+  expired?: boolean | null
   /**
    * @deprecated Filter by access key (deprecated in favor of `access_keys`).
    */
-  accessKey?: string
+  accessKey?: string | null
   /**
    * Filter by description.
    */
-  description?: string
+  description?: string | null
   /**
    * Filter by bearer ID.
    */
-  bearerId?: string
+  bearerId?: string | null
   /**
    * Filter by type of bearer.
    */
-  bearerType?: BearerType
+  bearerType?: BearerType | null
   /**
    * Filter by a list of access keys.
    */
-  accessKeys?: string[]
+  accessKeys?: string[] | null
 }
 
 
@@ -1614,35 +1614,35 @@ export type ListApplicationsRequest = {
   /**
    * Criteria for sorting results.
    */
-  orderBy?: ListApplicationsRequestOrderBy
+  orderBy?: ListApplicationsRequestOrderBy | null
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number. Value must be greater than 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Name of the application to filter.
    */
-  name?: string
+  name?: string | null
   /**
    * ID of the Organization to filter.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Defines whether to filter out editable applications or not.
    */
-  editable?: boolean
+  editable?: boolean | null
   /**
    * Filter by list of IDs.
    */
-  applicationIds?: string[]
+  applicationIds?: string[] | null
   /**
    * Filter by tags containing a given string.
    */
-  tag?: string
+  tag?: string | null
 }
 
 
@@ -1662,7 +1662,7 @@ export type ListGracePeriodsRequest = {
   /**
    * ID of the user to list grace periods for.
    */
-  userId?: string
+  userId?: string | null
 }
 
 
@@ -1678,39 +1678,39 @@ export type ListGroupsRequest = {
   /**
    * Sort order of groups.
    */
-  orderBy?: ListGroupsRequestOrderBy
+  orderBy?: ListGroupsRequestOrderBy | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of items per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Name of group to find.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by a list of application IDs.
    */
-  applicationIds?: string[]
+  applicationIds?: string[] | null
   /**
    * Filter by a list of user IDs.
    */
-  userIds?: string[]
+  userIds?: string[] | null
   /**
    * Filter by a list of group IDs.
    */
-  groupIds?: string[]
+  groupIds?: string[] | null
   /**
    * Filter by tags containing a given string.
    */
-  tag?: string
+  tag?: string | null
 }
 
 
@@ -1730,7 +1730,7 @@ export type ListJWTsRequest = {
   /**
    * Criteria for sorting results.
    */
-  orderBy?: ListJWTsRequestOrderBy
+  orderBy?: ListJWTsRequestOrderBy | null
   /**
    * ID of the user to search.
    */
@@ -1738,15 +1738,15 @@ export type ListJWTsRequest = {
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number. Value must be greater to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Filter out expired JWTs or not.
    */
-  expired?: boolean
+  expired?: boolean | null
 }
 
 
@@ -1760,39 +1760,39 @@ export type ListLogsRequest = {
   /**
    * Criteria for sorting results.
    */
-  orderBy?: ListLogsRequestOrderBy
+  orderBy?: ListLogsRequestOrderBy | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number. Value must be greater to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Defined whether or not to filter out logs created after this timestamp.
    */
-  createdAfter?: Date
+  createdAfter?: Date | null
   /**
    * Defined whether or not to filter out logs created before this timestamp.
    */
-  createdBefore?: Date
+  createdBefore?: Date | null
   /**
    * Defined whether or not to filter out by a specific action.
    */
-  action?: LogAction
+  action?: LogAction | null
   /**
    * Defined whether or not to filter out by a specific type of resource.
    */
-  resourceType?: LogResourceType
+  resourceType?: LogResourceType | null
   /**
    * Defined whether or not to filter out log by bearer ID or resource ID.
    */
-  search?: string
+  search?: string | null
 }
 
 
@@ -1812,19 +1812,19 @@ export type ListPermissionSetsRequest = {
   /**
    * Criteria for sorting results.
    */
-  orderBy?: ListPermissionSetsRequestOrderBy
+  orderBy?: ListPermissionSetsRequestOrderBy | null
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number. Value must be greater than 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1844,51 +1844,51 @@ export type ListPoliciesRequest = {
   /**
    * Criteria for sorting results.
    */
-  orderBy?: ListPoliciesRequestOrderBy
+  orderBy?: ListPoliciesRequestOrderBy | null
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number. Value must be greater than 1.
    */
-  page?: number
+  page?: number | null
   /**
    * ID of the Organization to filter.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Defines whether or not filter out editable policies.
    */
-  editable?: boolean
+  editable?: boolean | null
   /**
    * Defines whether or not to filter by list of user IDs.
    */
-  userIds?: string[]
+  userIds?: string[] | null
   /**
    * Defines whether or not to filter by list of group IDs.
    */
-  groupIds?: string[]
+  groupIds?: string[] | null
   /**
    * Filter by a list of application IDs.
    */
-  applicationIds?: string[]
+  applicationIds?: string[] | null
   /**
    * Defines whether or not the policy is attributed to a principal.
    */
-  noPrincipal?: boolean
+  noPrincipal?: boolean | null
   /**
    * Name of the policy to fetch.
    */
-  policyName?: string
+  policyName?: string | null
   /**
    * Filter by tags containing a given string.
    */
-  tag?: string
+  tag?: string | null
   /**
    * Filter by a list of IDs.
    */
-  policyIds?: string[]
+  policyIds?: string[] | null
 }
 
 
@@ -1908,23 +1908,23 @@ export type ListQuotaRequest = {
   /**
    * Criteria for sorting results.
    */
-  orderBy?: ListQuotaRequestOrderBy
+  orderBy?: ListQuotaRequestOrderBy | null
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number. Value must be greater than 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * List of quotum names to filter from.
    */
-  quotumNames?: string[]
+  quotumNames?: string[] | null
 }
 
 
@@ -1948,11 +1948,11 @@ export type ListRulesRequest = {
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number. Value must be greater than 1.
    */
-  page?: number
+  page?: number | null
 }
 
 
@@ -1972,31 +1972,31 @@ export type ListSSHKeysRequest = {
   /**
    * Sort order of the SSH keys.
    */
-  orderBy?: ListSSHKeysRequestOrderBy
+  orderBy?: ListSSHKeysRequestOrderBy | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of items per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Name of group to find.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Defines whether to include disabled SSH keys or not.
    */
-  disabled?: boolean
+  disabled?: boolean | null
 }
 
 
@@ -2036,15 +2036,15 @@ export type ListScimTokensRequest = {
   /**
    * Sort order of SCIM tokens.
    */
-  orderBy?: ListScimTokensRequestOrderBy
+  orderBy?: ListScimTokensRequestOrderBy | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of items per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -2068,15 +2068,15 @@ export type ListUserWebAuthnAuthenticatorsRequest = {
   /**
    * Sort order of the Authenticators.
    */
-  orderBy?: ListUserWebAuthnAuthenticatorsRequestOrderBy
+  orderBy?: ListUserWebAuthnAuthenticatorsRequestOrderBy | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of items per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -2096,35 +2096,35 @@ export type ListUsersRequest = {
   /**
    * Criteria for sorting results.
    */
-  orderBy?: ListUsersRequestOrderBy
+  orderBy?: ListUsersRequestOrderBy | null
   /**
    * Number of results per page. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * ID of the Organization to filter.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by list of IDs.
    */
-  userIds?: string[]
+  userIds?: string[] | null
   /**
    * Filter by MFA status.
    */
-  mfa?: boolean
+  mfa?: boolean | null
   /**
    * Filter by tags containing a given string.
    */
-  tag?: string
+  tag?: string | null
   /**
    * Filter by user type.
    */
-  type?: UserType
+  type?: UserType | null
 }
 
 
@@ -2193,7 +2193,7 @@ export interface OrganizationSecuritySettings {
   /**
    * Duration of the grace period to renew password or enable MFA.
    */
-  gracePeriodDuration?: string
+  gracePeriodDuration?: string | null
   /**
    * Number of login attempts before the account is locked.
    */
@@ -2201,11 +2201,11 @@ export interface OrganizationSecuritySettings {
   /**
    * Maximum duration a login session will stay active before needing to relogin.
    */
-  maxLoginSessionDuration?: string
+  maxLoginSessionDuration?: string | null
   /**
    * Maximum duration the `expires_at` field of an API key can represent. A value of 0 means there is no maximum duration.
    */
-  maxApiKeyExpirationDuration?: string
+  maxApiKeyExpirationDuration?: string | null
 }
 
 
@@ -2231,13 +2231,13 @@ export type RemoveGroupMemberRequest = {
    *
    * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
-  userId?: string
+  userId?: string | null
   /**
    * ID of the application to remove.
    *
    * One-of ('member'): at most one of 'userId', 'applicationId' could be set.
    */
-  applicationId?: string
+  applicationId?: string | null
 }
 
 
@@ -2265,7 +2265,7 @@ export interface Saml {
   /**
    * Service Provider information.
    */
-  serviceProvider?: SamlServiceProvider
+  serviceProvider?: SamlServiceProvider | null
   /**
    * Entity ID of the SAML Identity Provider.
    */
@@ -2289,7 +2289,7 @@ export interface Scim {
   /**
    * Date and time of SCIM configuration creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
 }
 
 
@@ -2304,7 +2304,7 @@ export type SetOrganizationAliasRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Alias of the Organization.
    */
@@ -2360,7 +2360,7 @@ export interface StartUserWebAuthnRegistrationResponse {
   /**
    * Maximum duration of the registration ceremony, in milliseconds.
    */
-  timeout?: string
+  timeout?: string | null
   /**
    * List of credentials that cannot be used to fulfill the ceremony.
    */
@@ -2384,15 +2384,15 @@ export type UpdateAPIKeyRequest = {
   /**
    * New default Project ID to set.
    */
-  defaultProjectId?: string
+  defaultProjectId?: string | null
   /**
    * New description to update.
    */
-  description?: string
+  description?: string | null
   /**
    * New expiration date of the API key.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -2404,15 +2404,15 @@ export type UpdateApplicationRequest = {
   /**
    * New name for the application (max length is 64 chars).
    */
-  name?: string
+  name?: string | null
   /**
    * New description for the application (max length is 200 chars).
    */
-  description?: string
+  description?: string | null
   /**
    * New tags for the application (maximum of 10 tags).
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2424,15 +2424,15 @@ export type UpdateGroupRequest = {
   /**
    * New name for the group (max length is 64 chars). MUST be unique inside an Organization.
    */
-  name?: string
+  name?: string | null
   /**
    * New description for the group (max length is 200 chars).
    */
-  description?: string
+  description?: string | null
   /**
    * New tags for the group (maximum of 10 tags).
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2440,23 +2440,23 @@ export type UpdateOrganizationLoginMethodsRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Defines whether login with a password is enabled for the Organization.
    */
-  loginPasswordEnabled?: boolean
+  loginPasswordEnabled?: boolean | null
   /**
    * Defines whether login through OAuth2 is enabled for the Organization.
    */
-  loginOauth2Enabled?: boolean
+  loginOauth2Enabled?: boolean | null
   /**
    * Defines whether login with an authentication code is enabled for the Organization.
    */
-  loginMagicCodeEnabled?: boolean
+  loginMagicCodeEnabled?: boolean | null
   /**
    * Defines whether login through SAML is enabled for the Organization.
    */
-  loginSamlEnabled?: boolean
+  loginSamlEnabled?: boolean | null
 }
 
 
@@ -2464,27 +2464,27 @@ export type UpdateOrganizationSecuritySettingsRequest = {
   /**
    * ID of the Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Defines whether password renewal is enforced during first login.
    */
-  enforcePasswordRenewal?: boolean
+  enforcePasswordRenewal?: boolean | null
   /**
    * Duration of the grace period to renew password or enable MFA.
    */
-  gracePeriodDuration?: string
+  gracePeriodDuration?: string | null
   /**
    * Number of login attempts before the account is locked.
    */
-  loginAttemptsBeforeLocked?: number
+  loginAttemptsBeforeLocked?: number | null
   /**
    * Maximum duration a login session will stay active before needing to relogin.
    */
-  maxLoginSessionDuration?: string
+  maxLoginSessionDuration?: string | null
   /**
    * Maximum duration the `expires_at` field of an API key can represent. A value of 0 means there is no maximum duration.
    */
-  maxApiKeyExpirationDuration?: string
+  maxApiKeyExpirationDuration?: string | null
 }
 
 
@@ -2496,39 +2496,39 @@ export type UpdatePolicyRequest = {
   /**
    * New name for the policy (max length is 64 characters).
    */
-  name?: string
+  name?: string | null
   /**
    * New description of policy (max length is 200 characters).
    */
-  description?: string
+  description?: string | null
   /**
    * New tags for the policy (maximum of 10 tags).
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * New ID of user attributed to the policy.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  userId?: string
+  userId?: string | null
   /**
    * New ID of group attributed to the policy.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  groupId?: string
+  groupId?: string | null
   /**
    * New ID of application attributed to the policy.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  applicationId?: string
+  applicationId?: string | null
   /**
    * Defines whether or not the policy is attributed to a principal.
    *
    * One-of ('principal'): at most one of 'userId', 'groupId', 'applicationId', 'noPrincipal' could be set.
    */
-  noPrincipal?: boolean
+  noPrincipal?: boolean | null
 }
 
 
@@ -2537,11 +2537,11 @@ export type UpdateSSHKeyRequest = {
   /**
    * Name of the SSH key. Max length is 1000.
    */
-  name?: string
+  name?: string | null
   /**
    * Enable or disable the SSH key.
    */
-  disabled?: boolean
+  disabled?: boolean | null
 }
 
 
@@ -2553,11 +2553,11 @@ export type UpdateSamlRequest = {
   /**
    * Entity ID of the SAML Identity Provider.
    */
-  entityId?: string
+  entityId?: string | null
   /**
    * Single Sign-On URL of the SAML Identity Provider.
    */
-  singleSignOnUrl?: string
+  singleSignOnUrl?: string | null
 }
 
 
@@ -2581,27 +2581,27 @@ export type UpdateUserRequest = {
   /**
    * New tags for the user (maximum of 10 tags).
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * IAM member email.
    */
-  email?: string
+  email?: string | null
   /**
    * IAM member first name.
    */
-  firstName?: string
+  firstName?: string | null
   /**
    * IAM member last name.
    */
-  lastName?: string
+  lastName?: string | null
   /**
    * IAM member phone number.
    */
-  phoneNumber?: string
+  phoneNumber?: string | null
   /**
    * IAM member locale.
    */
-  locale?: string
+  locale?: string | null
 }
 
 
@@ -2625,7 +2625,7 @@ export type UpdateWebAuthnAuthenticatorRequest = {
   /**
    * A new name for this authenticator.
    */
-  authenticatorName?: string
+  authenticatorName?: string | null
 }
 
 

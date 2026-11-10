@@ -57,15 +57,15 @@ export interface Image {
   /**
    * Creation date of this image.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date of the last modification of this image.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Expiration date of this image.
    */
-  validUntil?: Date
+  validUntil?: Date | null
   /**
    * Typically an identifier for a distribution (ex. "ubuntu_focal").
 This label can be used in the image field of the server creation request.
@@ -114,15 +114,15 @@ export interface Version {
   /**
    * Creation date of this image version.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date of the last modification of this version.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date this version was officially published.
    */
-  publishedAt?: Date
+  publishedAt?: Date | null
 }
 
 
@@ -150,8 +150,8 @@ export type GetVersionRequest = {
 
 
 export type ListCategoriesRequest = {
-  pageSize?: number
-  page?: number
+  pageSize?: number | null
+  page?: number | null
 }
 
 
@@ -165,23 +165,23 @@ export type ListImagesRequest = {
   /**
    * A positive integer lower or equal to 100 to select the number of items to display.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * A positive integer to choose the page to display.
    */
-  page?: number
+  page?: number | null
   /**
    * Ordering to use.
    */
-  orderBy?: ListImagesRequestOrderBy
+  orderBy?: ListImagesRequestOrderBy | null
   /**
    * Choose for which machine architecture to return images.
    */
-  arch?: string
+  arch?: string | null
   /**
    * Choose the category of images to get.
    */
-  category?: string
+  category?: string | null
   /**
    * Choose to include end-of-life images.
    */
@@ -199,45 +199,45 @@ export type ListLocalImagesRequest = {
   /**
    * A positive integer lower or equal to 100 to select the number of items to display.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * A positive integer to choose the page to display.
    */
-  page?: number
+  page?: number | null
   /**
    * Ordering to use.
    */
-  orderBy?: ListLocalImagesRequestOrderBy
+  orderBy?: ListLocalImagesRequestOrderBy | null
   /**
    * Filter local images available on this Availability Zone.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Filter local images available for this machine architecture.
    */
-  arch?: string
+  arch?: string | null
   /**
    * Filter by image id.
    *
    * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could be set.
    */
-  imageId?: string
+  imageId?: string | null
   /**
    * Filter by version id.
    *
    * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could be set.
    */
-  versionId?: string
+  versionId?: string | null
   /**
    * Filter by image label.
    *
    * One-of ('scope'): at most one of 'imageId', 'versionId', 'imageLabel' could be set.
    */
-  imageLabel?: string
+  imageLabel?: string | null
   /**
    * Filter by type.
    */
-  type?: LocalImageType
+  type?: LocalImageType | null
 }
 
 
@@ -249,9 +249,9 @@ export interface ListLocalImagesResponse {
 
 export type ListVersionsRequest = {
   imageId: string
-  pageSize?: number
-  page?: number
-  orderBy?: ListVersionsRequestOrderBy
+  pageSize?: number | null
+  page?: number | null
+  orderBy?: ListVersionsRequestOrderBy | null
 }
 
 

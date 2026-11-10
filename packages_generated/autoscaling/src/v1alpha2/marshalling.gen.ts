@@ -37,7 +37,7 @@ const unmarshalGroupLoadBalancerConfigurationAutoHealing = (data: unknown): Grou
 
   return {
     enabled: data.enabled,
-    gracePeriod: data.grace_period,
+    gracePeriod: data.grace_period ?? null,
   } as GroupLoadBalancerConfigurationAutoHealing
 }
 
@@ -51,7 +51,7 @@ const unmarshalGroupLoadBalancerConfigurationBackend = (data: unknown): GroupLoa
   return {
     addressFamily: data.address_family,
     backendId: data.backend_id,
-    privateNetworkId: data.private_network_id,
+    privateNetworkId: data.private_network_id ?? null,
   } as GroupLoadBalancerConfigurationBackend
 }
 
@@ -99,10 +99,10 @@ const unmarshalAlert = (data: unknown): Alert => {
   }
 
   return {
-    closedAt: unmarshalDate(data.closed_at),
+    closedAt: unmarshalDate(data.closed_at) ?? null,
     failingQuotas: data.failing_quotas,
     groupId: data.group_id,
-    openedAt: unmarshalDate(data.opened_at),
+    openedAt: unmarshalDate(data.opened_at) ?? null,
     type: data.type,
   } as Alert
 }
@@ -115,7 +115,7 @@ const unmarshalGroupLoadBalancerConfiguration = (data: unknown): GroupLoadBalanc
   }
 
   return {
-    autoHealing: data.auto_healing ? unmarshalGroupLoadBalancerConfigurationAutoHealing(data.auto_healing) : undefined,
+    autoHealing: data.auto_healing ? unmarshalGroupLoadBalancerConfigurationAutoHealing(data.auto_healing) : null,
     backends: unmarshalArrayOfObject(data.backends, unmarshalGroupLoadBalancerConfigurationBackend),
     loadBalancerId: data.load_balancer_id,
   } as GroupLoadBalancerConfiguration
@@ -129,14 +129,14 @@ const unmarshalGroupScalingPolicy = (data: unknown): GroupScalingPolicy => {
   }
 
   return {
-    cpuTarget: data.cpu_target ? unmarshalGroupScalingPolicyScalingPolicyCpuTarget(data.cpu_target) : undefined,
-    fixedSize: data.fixed_size ? unmarshalGroupScalingPolicyScalingPolicyFixedSize(data.fixed_size) : undefined,
+    cpuTarget: data.cpu_target ? unmarshalGroupScalingPolicyScalingPolicyCpuTarget(data.cpu_target) : null,
+    fixedSize: data.fixed_size ? unmarshalGroupScalingPolicyScalingPolicyFixedSize(data.fixed_size) : null,
     maximumSize: data.maximum_size,
-    memoryTarget: data.memory_target ? unmarshalGroupScalingPolicyScalingPolicyMemoryTarget(data.memory_target) : undefined,
+    memoryTarget: data.memory_target ? unmarshalGroupScalingPolicyScalingPolicyMemoryTarget(data.memory_target) : null,
     minimumSize: data.minimum_size,
-    scaleInCooldown: data.scale_in_cooldown,
+    scaleInCooldown: data.scale_in_cooldown ?? null,
     scaleInStep: data.scale_in_step,
-    scaleOutCooldown: data.scale_out_cooldown,
+    scaleOutCooldown: data.scale_out_cooldown ?? null,
     scaleOutStep: data.scale_out_step,
   } as GroupScalingPolicy
 }
@@ -149,22 +149,22 @@ export const unmarshalGroup = (data: unknown): Group => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     currentSize: data.current_size,
     id: data.id,
-    lastScaleInAt: unmarshalDate(data.last_scale_in_at),
-    lastScaleOutAt: unmarshalDate(data.last_scale_out_at),
-    loadBalancerConfiguration: data.load_balancer_configuration ? unmarshalGroupLoadBalancerConfiguration(data.load_balancer_configuration) : undefined,
+    lastScaleInAt: unmarshalDate(data.last_scale_in_at) ?? null,
+    lastScaleOutAt: unmarshalDate(data.last_scale_out_at) ?? null,
+    loadBalancerConfiguration: data.load_balancer_configuration ? unmarshalGroupLoadBalancerConfiguration(data.load_balancer_configuration) : null,
     name: data.name,
     openAlerts: unmarshalArrayOfObject(data.open_alerts, unmarshalAlert),
     projectId: data.project_id,
-    scalingPolicy: data.scaling_policy ? unmarshalGroupScalingPolicy(data.scaling_policy) : undefined,
+    scalingPolicy: data.scaling_policy ? unmarshalGroupScalingPolicy(data.scaling_policy) : null,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
     targetSize: data.target_size,
     templateId: data.template_id,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as Group
 }
@@ -178,7 +178,7 @@ export const unmarshalListAlertsResponse = (data: unknown): ListAlertsResponse =
 
   return {
     alerts: unmarshalArrayOfObject(data.alerts, unmarshalAlert),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     totalCount: data.total_count,
   } as ListAlertsResponse
 }
@@ -191,11 +191,11 @@ const unmarshalGroupSummary = (data: unknown): GroupSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     currentSize: data.current_size,
     id: data.id,
-    latestOpenAlert: data.latest_open_alert ? unmarshalAlert(data.latest_open_alert) : undefined,
-    loadBalancerId: data.load_balancer_id,
+    latestOpenAlert: data.latest_open_alert ? unmarshalAlert(data.latest_open_alert) : null,
+    loadBalancerId: data.load_balancer_id ?? null,
     maximumSize: data.maximum_size,
     minimumSize: data.minimum_size,
     name: data.name,
@@ -205,7 +205,7 @@ const unmarshalGroupSummary = (data: unknown): GroupSummary => {
     status: data.status,
     tags: data.tags,
     templateId: data.template_id,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as GroupSummary
 }
@@ -219,7 +219,7 @@ export const unmarshalListGroupsResponse = (data: unknown): ListGroupsResponse =
 
   return {
     groupSummaries: unmarshalArrayOfObject(data.group_summaries, unmarshalGroupSummary),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     totalCount: data.total_count,
   } as ListGroupsResponse
 }
@@ -234,7 +234,7 @@ const unmarshalLog = (data: unknown): Log => {
   return {
     level: data.level,
     message: data.message,
-    timestamp: unmarshalDate(data.timestamp),
+    timestamp: unmarshalDate(data.timestamp) ?? null,
   } as Log
 }
 
@@ -247,7 +247,7 @@ export const unmarshalListLogsResponse = (data: unknown): ListLogsResponse => {
 
   return {
     logs: unmarshalArrayOfObject(data.logs, unmarshalLog),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     totalCount: data.total_count,
   } as ListLogsResponse
 }
@@ -272,7 +272,7 @@ export const unmarshalListServersResponse = (data: unknown): ListServersResponse
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     servers: unmarshalArrayOfObject(data.servers, unmarshalServer),
     totalCount: data.total_count,
   } as ListServersResponse
@@ -320,7 +320,7 @@ const marshalLoadBalancerConfigurationSpec = (
   request: LoadBalancerConfigurationSpec,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  auto_healing: ((request.autoHealing !== undefined) ?  marshalLoadBalancerConfigurationSpecAutoHealing(request.autoHealing, defaults): undefined),
+  auto_healing: ((request.autoHealing != null) ?  marshalLoadBalancerConfigurationSpecAutoHealing(request.autoHealing, defaults): undefined),
   backends:  request.backends.map(elt => marshalLoadBalancerConfigurationSpecBackend(elt, defaults)),
   load_balancer_id: request.loadBalancerId,
 })
@@ -337,15 +337,15 @@ const marshalScalingPolicySpec = (
   scale_out_step: request.scaleOutStep,  
   ...resolveOneOf([
     {param: 'fixed_size',
-      value: (request.fixedSize !== undefined) ? marshalGroupScalingPolicyScalingPolicyFixedSize(request.fixedSize, defaults)
+      value: (request.fixedSize != null) ? marshalGroupScalingPolicyScalingPolicyFixedSize(request.fixedSize, defaults)
       : undefined,
     },
     {param: 'cpu_target',
-      value: (request.cpuTarget !== undefined) ? marshalGroupScalingPolicyScalingPolicyCpuTarget(request.cpuTarget, defaults)
+      value: (request.cpuTarget != null) ? marshalGroupScalingPolicyScalingPolicyCpuTarget(request.cpuTarget, defaults)
       : undefined,
     },
     {param: 'memory_target',
-      value: (request.memoryTarget !== undefined) ? marshalGroupScalingPolicyScalingPolicyMemoryTarget(request.memoryTarget, defaults)
+      value: (request.memoryTarget != null) ? marshalGroupScalingPolicyScalingPolicyMemoryTarget(request.memoryTarget, defaults)
       : undefined,
     },
   ]),
@@ -355,10 +355,10 @@ export const marshalCreateGroupRequest = (
   request: CreateGroupRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  load_balancer_configuration_spec: ((request.loadBalancerConfigurationSpec !== undefined) ?  marshalLoadBalancerConfigurationSpec(request.loadBalancerConfigurationSpec, defaults): undefined),
+  load_balancer_configuration_spec: ((request.loadBalancerConfigurationSpec != null) ?  marshalLoadBalancerConfigurationSpec(request.loadBalancerConfigurationSpec, defaults): undefined),
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  scaling_policy_spec: ((request.scalingPolicySpec !== undefined) ?  marshalScalingPolicySpec(request.scalingPolicySpec, defaults): undefined),
+  scaling_policy_spec: ((request.scalingPolicySpec != null) ?  marshalScalingPolicySpec(request.scalingPolicySpec, defaults): undefined),
   tags: request.tags,
   template_id: request.templateId,
 })
@@ -367,9 +367,9 @@ export const marshalUpdateGroupRequest = (
   request: UpdateGroupRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  load_balancer_configuration_spec: ((request.loadBalancerConfigurationSpec !== undefined) ?  marshalLoadBalancerConfigurationSpec(request.loadBalancerConfigurationSpec, defaults): undefined),
+  load_balancer_configuration_spec: ((request.loadBalancerConfigurationSpec != null) ?  marshalLoadBalancerConfigurationSpec(request.loadBalancerConfigurationSpec, defaults): undefined),
   name: request.name,
-  scaling_policy_spec: ((request.scalingPolicySpec !== undefined) ?  marshalScalingPolicySpec(request.scalingPolicySpec, defaults): undefined),
+  scaling_policy_spec: ((request.scalingPolicySpec != null) ?  marshalScalingPolicySpec(request.scalingPolicySpec, defaults): undefined),
   tags: request.tags,
   template_id: request.templateId,
 })

@@ -18,6 +18,8 @@ import type {
   AccountOrganizationInfo,
   AccountProjectInfo,
   AccountUserInfo,
+  AnnotationsBindingInfo,
+  AnnotationsValueInfo,
   AppleSiliconRunnerInfo,
   AppleSiliconServerInfo,
   AuditTrailAlertRuleInfo,
@@ -118,9 +120,9 @@ export const unmarshalCustomAlertRule = (data: unknown): CustomAlertRule => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
-    evaluationWindow: data.evaluation_window,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    description: data.description ?? null,
+    evaluationWindow: data.evaluation_window ?? null,
     id: data.id,
     name: data.name,
     occurrences: data.occurrences,
@@ -129,7 +131,7 @@ export const unmarshalCustomAlertRule = (data: unknown): CustomAlertRule => {
     severity: data.severity,
     srn: data.srn,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as CustomAlertRule
 }
 
@@ -142,8 +144,8 @@ const unmarshalExportJobS3 = (data: unknown): ExportJobS3 => {
 
   return {
     bucket: data.bucket,
-    prefix: data.prefix,
-    projectId: data.project_id,
+    prefix: data.prefix ?? null,
+    projectId: data.project_id ?? null,
     region: data.region,
   } as ExportJobS3
 }
@@ -157,7 +159,7 @@ const unmarshalExportJobStatus = (data: unknown): ExportJobStatus => {
 
   return {
     code: data.code,
-    message: data.message,
+    message: data.message ?? null,
   } as ExportJobStatus
 }
 
@@ -169,14 +171,14 @@ export const unmarshalExportJob = (data: unknown): ExportJob => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
-    lastRunAt: unmarshalDate(data.last_run_at),
-    lastStatus: data.last_status ? unmarshalExportJobStatus(data.last_status) : undefined,
+    lastRunAt: unmarshalDate(data.last_run_at) ?? null,
+    lastStatus: data.last_status ? unmarshalExportJobStatus(data.last_status) : null,
     name: data.name,
     organizationId: data.organization_id,
     region: data.region,
-    s3: data.s3 ? unmarshalExportJobS3(data.s3) : undefined,
+    s3: data.s3 ? unmarshalExportJobS3(data.s3) : null,
     srn: data.srn,
     tags: data.tags,
   } as ExportJob
@@ -255,11 +257,11 @@ const unmarshalAccountContractSignatureInfoAccountContractInfo = (data: unknown)
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     version: data.version,
   } as AccountContractSignatureInfoAccountContractInfo
 }
@@ -272,9 +274,9 @@ const unmarshalAccountContractSignatureInfo = (data: unknown): AccountContractSi
   }
 
   return {
-    contract: data.contract ? unmarshalAccountContractSignatureInfoAccountContractInfo(data.contract) : undefined,
-    expiresAt: unmarshalDate(data.expires_at),
-    signedAt: unmarshalDate(data.signed_at),
+    contract: data.contract ? unmarshalAccountContractSignatureInfoAccountContractInfo(data.contract) : null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
+    signedAt: unmarshalDate(data.signed_at) ?? null,
     signedByAccountRootUserId: data.signed_by_account_root_user_id,
   } as AccountContractSignatureInfo
 }
@@ -311,8 +313,37 @@ const unmarshalAccountUserInfo = (data: unknown): AccountUserInfo => {
 
   return {
     email: data.email,
-    phoneNumber: data.phone_number,
+    phoneNumber: data.phone_number ?? null,
   } as AccountUserInfo
+}
+
+const unmarshalAnnotationsBindingInfo = (data: unknown): AnnotationsBindingInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AnnotationsBindingInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    keyId: data.key_id,
+    keyName: data.key_name,
+    targetSrn: data.target_srn,
+    valueId: data.value_id,
+    valueName: data.value_name,
+  } as AnnotationsBindingInfo
+}
+
+const unmarshalAnnotationsValueInfo = (data: unknown): AnnotationsValueInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'AnnotationsValueInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    keyId: data.key_id,
+    keyName: data.key_name,
+  } as AnnotationsValueInfo
 }
 
 const unmarshalAppleSiliconRunnerInfo = (data: unknown): AppleSiliconRunnerInfo => {
@@ -407,7 +438,7 @@ const unmarshalEdgeServicesBackendStageInfo = (data: unknown): EdgeServicesBacke
   }
 
   return {
-    pipelineId: data.pipeline_id,
+    pipelineId: data.pipeline_id ?? null,
   } as EdgeServicesBackendStageInfo
 }
 
@@ -419,7 +450,7 @@ const unmarshalEdgeServicesCacheStageInfo = (data: unknown): EdgeServicesCacheSt
   }
 
   return {
-    pipelineId: data.pipeline_id,
+    pipelineId: data.pipeline_id ?? null,
   } as EdgeServicesCacheStageInfo
 }
 
@@ -431,7 +462,7 @@ const unmarshalEdgeServicesDNSStageInfo = (data: unknown): EdgeServicesDNSStageI
   }
 
   return {
-    pipelineId: data.pipeline_id,
+    pipelineId: data.pipeline_id ?? null,
   } as EdgeServicesDNSStageInfo
 }
 
@@ -478,7 +509,7 @@ const unmarshalEdgeServicesRouteStageInfo = (data: unknown): EdgeServicesRouteSt
   }
 
   return {
-    pipelineId: data.pipeline_id,
+    pipelineId: data.pipeline_id ?? null,
   } as EdgeServicesRouteStageInfo
 }
 
@@ -490,7 +521,7 @@ const unmarshalEdgeServicesTLSStageInfo = (data: unknown): EdgeServicesTLSStageI
   }
 
   return {
-    pipelineId: data.pipeline_id,
+    pipelineId: data.pipeline_id ?? null,
   } as EdgeServicesTLSStageInfo
 }
 
@@ -514,7 +545,7 @@ const unmarshalEdgeServicesWAFStageInfo = (data: unknown): EdgeServicesWAFStageI
   }
 
   return {
-    pipelineId: data.pipeline_id,
+    pipelineId: data.pipeline_id ?? null,
   } as EdgeServicesWAFStageInfo
 }
 
@@ -527,8 +558,8 @@ const unmarshalInstancePrivateNetworkInterfaceInfo = (data: unknown): InstancePr
 
   return {
     privateNetworkId: data.private_network_id,
-    securityGroupId: data.security_group_id,
-    serverId: data.server_id,
+    securityGroupId: data.security_group_id ?? null,
+    serverId: data.server_id ?? null,
   } as InstancePrivateNetworkInterfaceInfo
 }
 
@@ -690,7 +721,7 @@ const unmarshalLoadBalancerIpInfo = (data: unknown): LoadBalancerIpInfo => {
 
   return {
     ipAddress: data.ip_address,
-    lbId: data.lb_id,
+    lbId: data.lb_id ?? null,
   } as LoadBalancerIpInfo
 }
 
@@ -751,7 +782,7 @@ const unmarshalSecretManagerSecretInfo = (data: unknown): SecretManagerSecretInf
   }
 
   return {
-    keyId: data.key_id,
+    keyId: data.key_id ?? null,
     path: data.path,
   } as SecretManagerSecretInfo
 }
@@ -898,8 +929,8 @@ const unmarshalVpcGwGatewayInfo = (data: unknown): VpcGwGatewayInfo => {
 
   return {
     gatewayTypeId: data.gateway_type_id,
-    publicIpId: data.public_ip_id,
-    vpcId: data.vpc_id,
+    publicIpId: data.public_ip_id ?? null,
+    vpcId: data.vpc_id ?? null,
   } as VpcGwGatewayInfo
 }
 
@@ -911,7 +942,7 @@ const unmarshalVpcGwGatewayNetworkInfo = (data: unknown): VpcGwGatewayNetworkInf
   }
 
   return {
-    address: data.address,
+    address: data.address ?? null,
     gatewayId: data.gateway_id,
     pnId: data.pn_id,
   } as VpcGwGatewayNetworkInfo
@@ -954,8 +985,8 @@ const unmarshalVpcRouteInfo = (data: unknown): VpcRouteInfo => {
 
   return {
     destination: data.destination,
-    nexthopPrivateNetworkKey: data.nexthop_private_network_key,
-    nexthopResourceKey: data.nexthop_resource_key,
+    nexthopPrivateNetworkKey: data.nexthop_private_network_key ?? null,
+    nexthopResourceKey: data.nexthop_resource_key ?? null,
     vpcId: data.vpc_id,
   } as VpcRouteInfo
 }
@@ -981,7 +1012,7 @@ const unmarshalWoflWorkflowDefinitionInfo = (data: unknown): WoflWorkflowDefinit
   }
 
   return {
-    description: data.description,
+    description: data.description ?? null,
     name: data.name,
   } as WoflWorkflowDefinitionInfo
 }
@@ -996,7 +1027,7 @@ const unmarshalWoflWorkflowRunInfo = (data: unknown): WoflWorkflowRunInfo => {
   return {
     status: data.status,
     workflowDefinitionId: data.workflow_definition_id,
-    workflowDefinitionName: data.workflow_definition_name,
+    workflowDefinitionName: data.workflow_definition_name ?? null,
   } as WoflWorkflowRunInfo
 }
 
@@ -1010,7 +1041,7 @@ const unmarshalWoflWorkflowVersionInfo = (data: unknown): WoflWorkflowVersionInf
   return {
     name: data.name,
     workflowDefinitionId: data.workflow_definition_id,
-    workflowDefinitionName: data.workflow_definition_name,
+    workflowDefinitionName: data.workflow_definition_name ?? null,
   } as WoflWorkflowVersionInfo
 }
 
@@ -1034,76 +1065,78 @@ export const unmarshalResource = (data: unknown): Resource => {
   }
 
   return {
-    accountContractSignatureInfo: data.account_contract_signature_info ? unmarshalAccountContractSignatureInfo(data.account_contract_signature_info) : undefined,
-    accountOrganizationInfo: data.account_organization_info ? unmarshalAccountOrganizationInfo(data.account_organization_info) : undefined,
-    accountProjectInfo: data.account_project_info ? unmarshalAccountProjectInfo(data.account_project_info) : undefined,
-    accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : undefined,
-    action: data.action ? data.action : undefined,
-    appleSiliconRunnerInfo: data.apple_silicon_runner_info ? unmarshalAppleSiliconRunnerInfo(data.apple_silicon_runner_info) : undefined,
-    appleSiliconServerInfo: data.apple_silicon_server_info ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info) : undefined,
-    auditTrailAlertRuleInfo: data.audit_trail_alert_rule_info ? unmarshalAuditTrailAlertRuleInfo(data.audit_trail_alert_rule_info) : undefined,
-    auditTrailCustomAlertRuleInfo: data.audit_trail_custom_alert_rule_info ? unmarshalAuditTrailCustomAlertRuleInfo(data.audit_trail_custom_alert_rule_info) : undefined,
-    auditTrailExportJobInfo: data.audit_trail_export_job_info ? unmarshalAuditTrailExportJobInfo(data.audit_trail_export_job_info) : undefined,
-    baremetalServerInfo: data.baremetal_server_info ? unmarshalBaremetalServerInfo(data.baremetal_server_info) : undefined,
-    baremetalSettingInfo: data.baremetal_setting_info ? unmarshalBaremetalSettingInfo(data.baremetal_setting_info) : undefined,
-    createdAt: unmarshalDate(data.created_at),
-    deletedAt: unmarshalDate(data.deleted_at),
-    edgeServicesBackendStageInfo: data.edge_services_backend_stage_info ? unmarshalEdgeServicesBackendStageInfo(data.edge_services_backend_stage_info) : undefined,
-    edgeServicesCacheStageInfo: data.edge_services_cache_stage_info ? unmarshalEdgeServicesCacheStageInfo(data.edge_services_cache_stage_info) : undefined,
-    edgeServicesDnsStageInfo: data.edge_services_dns_stage_info ? unmarshalEdgeServicesDNSStageInfo(data.edge_services_dns_stage_info) : undefined,
-    edgeServicesPipelineInfo: data.edge_services_pipeline_info ? unmarshalEdgeServicesPipelineInfo(data.edge_services_pipeline_info) : undefined,
-    edgeServicesPlanInfo: data.edge_services_plan_info ? unmarshalEdgeServicesPlanInfo(data.edge_services_plan_info) : undefined,
-    edgeServicesRouteRulesInfo: data.edge_services_route_rules_info ? unmarshalEdgeServicesRouteRulesInfo(data.edge_services_route_rules_info) : undefined,
-    edgeServicesRouteStageInfo: data.edge_services_route_stage_info ? unmarshalEdgeServicesRouteStageInfo(data.edge_services_route_stage_info) : undefined,
-    edgeServicesTlsStageInfo: data.edge_services_tls_stage_info ? unmarshalEdgeServicesTLSStageInfo(data.edge_services_tls_stage_info) : undefined,
-    edgeServicesVpcEndpointInfo: data.edge_services_vpc_endpoint_info ? unmarshalEdgeServicesVPCEndpointInfo(data.edge_services_vpc_endpoint_info) : undefined,
-    edgeServicesWafStageInfo: data.edge_services_waf_stage_info ? unmarshalEdgeServicesWAFStageInfo(data.edge_services_waf_stage_info) : undefined,
+    accountContractSignatureInfo: data.account_contract_signature_info ? unmarshalAccountContractSignatureInfo(data.account_contract_signature_info) : null,
+    accountOrganizationInfo: data.account_organization_info ? unmarshalAccountOrganizationInfo(data.account_organization_info) : null,
+    accountProjectInfo: data.account_project_info ? unmarshalAccountProjectInfo(data.account_project_info) : null,
+    accountUserInfo: data.account_user_info ? unmarshalAccountUserInfo(data.account_user_info) : null,
+    action: data.action ? data.action : null,
+    annotationsBindingInfo: data.annotations_binding_info ? unmarshalAnnotationsBindingInfo(data.annotations_binding_info) : null,
+    annotationsValueInfo: data.annotations_value_info ? unmarshalAnnotationsValueInfo(data.annotations_value_info) : null,
+    appleSiliconRunnerInfo: data.apple_silicon_runner_info ? unmarshalAppleSiliconRunnerInfo(data.apple_silicon_runner_info) : null,
+    appleSiliconServerInfo: data.apple_silicon_server_info ? unmarshalAppleSiliconServerInfo(data.apple_silicon_server_info) : null,
+    auditTrailAlertRuleInfo: data.audit_trail_alert_rule_info ? unmarshalAuditTrailAlertRuleInfo(data.audit_trail_alert_rule_info) : null,
+    auditTrailCustomAlertRuleInfo: data.audit_trail_custom_alert_rule_info ? unmarshalAuditTrailCustomAlertRuleInfo(data.audit_trail_custom_alert_rule_info) : null,
+    auditTrailExportJobInfo: data.audit_trail_export_job_info ? unmarshalAuditTrailExportJobInfo(data.audit_trail_export_job_info) : null,
+    baremetalServerInfo: data.baremetal_server_info ? unmarshalBaremetalServerInfo(data.baremetal_server_info) : null,
+    baremetalSettingInfo: data.baremetal_setting_info ? unmarshalBaremetalSettingInfo(data.baremetal_setting_info) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deletedAt: unmarshalDate(data.deleted_at) ?? null,
+    edgeServicesBackendStageInfo: data.edge_services_backend_stage_info ? unmarshalEdgeServicesBackendStageInfo(data.edge_services_backend_stage_info) : null,
+    edgeServicesCacheStageInfo: data.edge_services_cache_stage_info ? unmarshalEdgeServicesCacheStageInfo(data.edge_services_cache_stage_info) : null,
+    edgeServicesDnsStageInfo: data.edge_services_dns_stage_info ? unmarshalEdgeServicesDNSStageInfo(data.edge_services_dns_stage_info) : null,
+    edgeServicesPipelineInfo: data.edge_services_pipeline_info ? unmarshalEdgeServicesPipelineInfo(data.edge_services_pipeline_info) : null,
+    edgeServicesPlanInfo: data.edge_services_plan_info ? unmarshalEdgeServicesPlanInfo(data.edge_services_plan_info) : null,
+    edgeServicesRouteRulesInfo: data.edge_services_route_rules_info ? unmarshalEdgeServicesRouteRulesInfo(data.edge_services_route_rules_info) : null,
+    edgeServicesRouteStageInfo: data.edge_services_route_stage_info ? unmarshalEdgeServicesRouteStageInfo(data.edge_services_route_stage_info) : null,
+    edgeServicesTlsStageInfo: data.edge_services_tls_stage_info ? unmarshalEdgeServicesTLSStageInfo(data.edge_services_tls_stage_info) : null,
+    edgeServicesVpcEndpointInfo: data.edge_services_vpc_endpoint_info ? unmarshalEdgeServicesVPCEndpointInfo(data.edge_services_vpc_endpoint_info) : null,
+    edgeServicesWafStageInfo: data.edge_services_waf_stage_info ? unmarshalEdgeServicesWAFStageInfo(data.edge_services_waf_stage_info) : null,
     id: data.id,
-    instancePrivateNetworkInterfaceInfo: data.instance_private_network_interface_info ? unmarshalInstancePrivateNetworkInterfaceInfo(data.instance_private_network_interface_info) : undefined,
-    instanceServerInfo: data.instance_server_info ? unmarshalInstanceServerInfo(data.instance_server_info) : undefined,
-    ipamIpInfo: data.ipam_ip_info ? unmarshalIpamIpInfo(data.ipam_ip_info) : undefined,
-    kafkClusterInfo: data.kafk_cluster_info ? unmarshalKafkClusterInfo(data.kafk_cluster_info) : undefined,
-    keyManagerKeyInfo: data.key_manager_key_info ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info) : undefined,
-    keymKeyInfo: data.keym_key_info ? unmarshalKeyManagerKeyInfo(data.keym_key_info) : undefined,
-    kubeAclInfo: data.kube_acl_info ? unmarshalKubernetesACLInfo(data.kube_acl_info) : undefined,
-    kubeClusterInfo: data.kube_cluster_info ? unmarshalKubernetesClusterInfo(data.kube_cluster_info) : undefined,
-    kubeNodeInfo: data.kube_node_info ? unmarshalKubernetesNodeInfo(data.kube_node_info) : undefined,
-    kubePoolInfo: data.kube_pool_info ? unmarshalKubernetesPoolInfo(data.kube_pool_info) : undefined,
-    loadBalancerAclInfo: data.load_balancer_acl_info ? unmarshalLoadBalancerAclInfo(data.load_balancer_acl_info) : undefined,
-    loadBalancerBackendInfo: data.load_balancer_backend_info ? unmarshalLoadBalancerBackendInfo(data.load_balancer_backend_info) : undefined,
-    loadBalancerCertificateInfo: data.load_balancer_certificate_info ? unmarshalLoadBalancerCertificateInfo(data.load_balancer_certificate_info) : undefined,
-    loadBalancerFrontendInfo: data.load_balancer_frontend_info ? unmarshalLoadBalancerFrontendInfo(data.load_balancer_frontend_info) : undefined,
-    loadBalancerIpInfo: data.load_balancer_ip_info ? unmarshalLoadBalancerIpInfo(data.load_balancer_ip_info) : undefined,
-    loadBalancerLbInfo: data.load_balancer_lb_info ? unmarshalLoadBalancerLbInfo(data.load_balancer_lb_info) : undefined,
-    loadBalancerRouteInfo: data.load_balancer_route_info ? unmarshalLoadBalancerRouteInfo(data.load_balancer_route_info) : undefined,
-    name: data.name,
-    observabilityAlertRuleInfo: data.observability_alert_rule_info ? unmarshalObservabilityAlertRuleInfo(data.observability_alert_rule_info) : undefined,
-    observabilityContactPointInfo: data.observability_contact_point_info ? unmarshalObservabilityContactPointInfo(data.observability_contact_point_info) : undefined,
-    secmSecretInfo: data.secm_secret_info ? unmarshalSecretManagerSecretInfo(data.secm_secret_info) : undefined,
-    secmSecretVersionInfo: data.secm_secret_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info) : undefined,
-    secretManagerSecretInfo: data.secret_manager_secret_info ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info) : undefined,
-    secretManagerVersionInfo: data.secret_manager_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secret_manager_version_info) : undefined,
-    serverlessContainersContainerInfo: data.serverless_containers_container_info ? unmarshalServerlessContainersContainerInfo(data.serverless_containers_container_info) : undefined,
-    serverlessContainersDomainInfo: data.serverless_containers_domain_info ? unmarshalServerlessContainersDomainInfo(data.serverless_containers_domain_info) : undefined,
-    serverlessContainersNamespaceInfo: data.serverless_containers_namespace_info ? unmarshalServerlessContainersNamespaceInfo(data.serverless_containers_namespace_info) : undefined,
-    serverlessContainersTriggerInfo: data.serverless_containers_trigger_info ? unmarshalServerlessContainersTriggerInfo(data.serverless_containers_trigger_info) : undefined,
-    serverlessFunctionsCronInfo: data.serverless_functions_cron_info ? unmarshalServerlessFunctionsCronInfo(data.serverless_functions_cron_info) : undefined,
-    serverlessFunctionsDomainInfo: data.serverless_functions_domain_info ? unmarshalServerlessFunctionsDomainInfo(data.serverless_functions_domain_info) : undefined,
-    serverlessFunctionsFunctionInfo: data.serverless_functions_function_info ? unmarshalServerlessFunctionsFunctionInfo(data.serverless_functions_function_info) : undefined,
-    serverlessFunctionsNamespaceInfo: data.serverless_functions_namespace_info ? unmarshalServerlessFunctionsNamespaceInfo(data.serverless_functions_namespace_info) : undefined,
-    serverlessFunctionsTriggerInfo: data.serverless_functions_trigger_info ? unmarshalServerlessFunctionsTriggerInfo(data.serverless_functions_trigger_info) : undefined,
+    instancePrivateNetworkInterfaceInfo: data.instance_private_network_interface_info ? unmarshalInstancePrivateNetworkInterfaceInfo(data.instance_private_network_interface_info) : null,
+    instanceServerInfo: data.instance_server_info ? unmarshalInstanceServerInfo(data.instance_server_info) : null,
+    ipamIpInfo: data.ipam_ip_info ? unmarshalIpamIpInfo(data.ipam_ip_info) : null,
+    kafkClusterInfo: data.kafk_cluster_info ? unmarshalKafkClusterInfo(data.kafk_cluster_info) : null,
+    keyManagerKeyInfo: data.key_manager_key_info ? unmarshalKeyManagerKeyInfo(data.key_manager_key_info) : null,
+    keymKeyInfo: data.keym_key_info ? unmarshalKeyManagerKeyInfo(data.keym_key_info) : null,
+    kubeAclInfo: data.kube_acl_info ? unmarshalKubernetesACLInfo(data.kube_acl_info) : null,
+    kubeClusterInfo: data.kube_cluster_info ? unmarshalKubernetesClusterInfo(data.kube_cluster_info) : null,
+    kubeNodeInfo: data.kube_node_info ? unmarshalKubernetesNodeInfo(data.kube_node_info) : null,
+    kubePoolInfo: data.kube_pool_info ? unmarshalKubernetesPoolInfo(data.kube_pool_info) : null,
+    loadBalancerAclInfo: data.load_balancer_acl_info ? unmarshalLoadBalancerAclInfo(data.load_balancer_acl_info) : null,
+    loadBalancerBackendInfo: data.load_balancer_backend_info ? unmarshalLoadBalancerBackendInfo(data.load_balancer_backend_info) : null,
+    loadBalancerCertificateInfo: data.load_balancer_certificate_info ? unmarshalLoadBalancerCertificateInfo(data.load_balancer_certificate_info) : null,
+    loadBalancerFrontendInfo: data.load_balancer_frontend_info ? unmarshalLoadBalancerFrontendInfo(data.load_balancer_frontend_info) : null,
+    loadBalancerIpInfo: data.load_balancer_ip_info ? unmarshalLoadBalancerIpInfo(data.load_balancer_ip_info) : null,
+    loadBalancerLbInfo: data.load_balancer_lb_info ? unmarshalLoadBalancerLbInfo(data.load_balancer_lb_info) : null,
+    loadBalancerRouteInfo: data.load_balancer_route_info ? unmarshalLoadBalancerRouteInfo(data.load_balancer_route_info) : null,
+    name: data.name ?? null,
+    observabilityAlertRuleInfo: data.observability_alert_rule_info ? unmarshalObservabilityAlertRuleInfo(data.observability_alert_rule_info) : null,
+    observabilityContactPointInfo: data.observability_contact_point_info ? unmarshalObservabilityContactPointInfo(data.observability_contact_point_info) : null,
+    secmSecretInfo: data.secm_secret_info ? unmarshalSecretManagerSecretInfo(data.secm_secret_info) : null,
+    secmSecretVersionInfo: data.secm_secret_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secm_secret_version_info) : null,
+    secretManagerSecretInfo: data.secret_manager_secret_info ? unmarshalSecretManagerSecretInfo(data.secret_manager_secret_info) : null,
+    secretManagerVersionInfo: data.secret_manager_version_info ? unmarshalSecretManagerSecretVersionInfo(data.secret_manager_version_info) : null,
+    serverlessContainersContainerInfo: data.serverless_containers_container_info ? unmarshalServerlessContainersContainerInfo(data.serverless_containers_container_info) : null,
+    serverlessContainersDomainInfo: data.serverless_containers_domain_info ? unmarshalServerlessContainersDomainInfo(data.serverless_containers_domain_info) : null,
+    serverlessContainersNamespaceInfo: data.serverless_containers_namespace_info ? unmarshalServerlessContainersNamespaceInfo(data.serverless_containers_namespace_info) : null,
+    serverlessContainersTriggerInfo: data.serverless_containers_trigger_info ? unmarshalServerlessContainersTriggerInfo(data.serverless_containers_trigger_info) : null,
+    serverlessFunctionsCronInfo: data.serverless_functions_cron_info ? unmarshalServerlessFunctionsCronInfo(data.serverless_functions_cron_info) : null,
+    serverlessFunctionsDomainInfo: data.serverless_functions_domain_info ? unmarshalServerlessFunctionsDomainInfo(data.serverless_functions_domain_info) : null,
+    serverlessFunctionsFunctionInfo: data.serverless_functions_function_info ? unmarshalServerlessFunctionsFunctionInfo(data.serverless_functions_function_info) : null,
+    serverlessFunctionsNamespaceInfo: data.serverless_functions_namespace_info ? unmarshalServerlessFunctionsNamespaceInfo(data.serverless_functions_namespace_info) : null,
+    serverlessFunctionsTriggerInfo: data.serverless_functions_trigger_info ? unmarshalServerlessFunctionsTriggerInfo(data.serverless_functions_trigger_info) : null,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
-    vpcConnectorInfo: data.vpc_connector_info ? unmarshalVpcConnectorInfo(data.vpc_connector_info) : undefined,
-    vpcGwGatewayInfo: data.vpc_gw_gateway_info ? unmarshalVpcGwGatewayInfo(data.vpc_gw_gateway_info) : undefined,
-    vpcGwGatewayNetworkInfo: data.vpc_gw_gateway_network_info ? unmarshalVpcGwGatewayNetworkInfo(data.vpc_gw_gateway_network_info) : undefined,
-    vpcIngressRuleInfo: data.vpc_ingress_rule_info ? unmarshalVpcIngressRuleInfo(data.vpc_ingress_rule_info) : undefined,
-    vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : undefined,
-    vpcRouteInfo: data.vpc_route_info ? unmarshalVpcRouteInfo(data.vpc_route_info) : undefined,
-    vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : undefined,
-    woflWorkflowDefinitionInfo: data.wofl_workflow_definition_info ? unmarshalWoflWorkflowDefinitionInfo(data.wofl_workflow_definition_info) : undefined,
-    woflWorkflowRunInfo: data.wofl_workflow_run_info ? unmarshalWoflWorkflowRunInfo(data.wofl_workflow_run_info) : undefined,
-    woflWorkflowVersionInfo: data.wofl_workflow_version_info ? unmarshalWoflWorkflowVersionInfo(data.wofl_workflow_version_info) : undefined,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    vpcConnectorInfo: data.vpc_connector_info ? unmarshalVpcConnectorInfo(data.vpc_connector_info) : null,
+    vpcGwGatewayInfo: data.vpc_gw_gateway_info ? unmarshalVpcGwGatewayInfo(data.vpc_gw_gateway_info) : null,
+    vpcGwGatewayNetworkInfo: data.vpc_gw_gateway_network_info ? unmarshalVpcGwGatewayNetworkInfo(data.vpc_gw_gateway_network_info) : null,
+    vpcIngressRuleInfo: data.vpc_ingress_rule_info ? unmarshalVpcIngressRuleInfo(data.vpc_ingress_rule_info) : null,
+    vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : null,
+    vpcRouteInfo: data.vpc_route_info ? unmarshalVpcRouteInfo(data.vpc_route_info) : null,
+    vpcSubnetInfo: data.vpc_subnet_info ? unmarshalVpcSubnetInfo(data.vpc_subnet_info) : null,
+    woflWorkflowDefinitionInfo: data.wofl_workflow_definition_info ? unmarshalWoflWorkflowDefinitionInfo(data.wofl_workflow_definition_info) : null,
+    woflWorkflowRunInfo: data.wofl_workflow_run_info ? unmarshalWoflWorkflowRunInfo(data.wofl_workflow_run_info) : null,
+    woflWorkflowVersionInfo: data.wofl_workflow_version_info ? unmarshalWoflWorkflowVersionInfo(data.wofl_workflow_version_info) : null,
   } as Resource
 }
 
@@ -1119,17 +1152,17 @@ export const unmarshalEvent = (data: unknown): Event => {
     locality: data.locality,
     methodName: data.method_name,
     organizationId: data.organization_id,
-    principal: data.principal ? unmarshalEventPrincipal(data.principal) : undefined,
+    principal: data.principal ? unmarshalEventPrincipal(data.principal) : null,
     productName: data.product_name,
-    projectId: data.project_id,
-    recordedAt: unmarshalDate(data.recorded_at),
-    requestBody: data.request_body,
+    projectId: data.project_id ?? null,
+    recordedAt: unmarshalDate(data.recorded_at) ?? null,
+    requestBody: data.request_body ?? null,
     requestId: data.request_id,
     resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
     serviceName: data.service_name,
     sourceIp: data.source_ip,
     statusCode: data.status_code,
-    userAgent: data.user_agent,
+    userAgent: data.user_agent ?? null,
   } as Event
 }
 
@@ -1166,18 +1199,18 @@ export const unmarshalAuthenticationEvent = (data: unknown): AuthenticationEvent
   }
 
   return {
-    countryCode: data.country_code ? data.country_code : undefined,
-    failureReason: data.failure_reason ? data.failure_reason : undefined,
+    countryCode: data.country_code ? data.country_code : null,
+    failureReason: data.failure_reason ? data.failure_reason : null,
     id: data.id,
     method: data.method,
-    mfaType: data.mfa_type ? data.mfa_type : undefined,
+    mfaType: data.mfa_type ? data.mfa_type : null,
     organizationId: data.organization_id,
     origin: data.origin,
-    recordedAt: unmarshalDate(data.recorded_at),
+    recordedAt: unmarshalDate(data.recorded_at) ?? null,
     resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
     result: data.result,
     sourceIp: data.source_ip,
-    userAgent: data.user_agent,
+    userAgent: data.user_agent ?? null,
   } as AuthenticationEvent
 }
 
@@ -1190,7 +1223,7 @@ export const unmarshalListAuthenticationEventsResponse = (data: unknown): ListAu
 
   return {
     events: unmarshalArrayOfObject(data.events, unmarshalAuthenticationEvent),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
   } as ListAuthenticationEventsResponse
 }
 
@@ -1207,8 +1240,8 @@ export const unmarshalSystemEvent = (data: unknown): SystemEvent => {
     locality: data.locality,
     organizationId: data.organization_id,
     productName: data.product_name,
-    projectId: data.project_id,
-    recordedAt: unmarshalDate(data.recorded_at),
+    projectId: data.project_id ?? null,
+    recordedAt: unmarshalDate(data.recorded_at) ?? null,
     resources: unmarshalArrayOfObject(data.resources, unmarshalResource),
     source: data.source,
     systemName: data.system_name,
@@ -1223,9 +1256,9 @@ const unmarshalListCombinedEventsResponseCombinedEvent = (data: unknown): ListCo
   }
 
   return {
-    api: data.api ? unmarshalEvent(data.api) : undefined,
-    auth: data.auth ? unmarshalAuthenticationEvent(data.auth) : undefined,
-    system: data.system ? unmarshalSystemEvent(data.system) : undefined,
+    api: data.api ? unmarshalEvent(data.api) : null,
+    auth: data.auth ? unmarshalAuthenticationEvent(data.auth) : null,
+    system: data.system ? unmarshalSystemEvent(data.system) : null,
   } as ListCombinedEventsResponseCombinedEvent
 }
 
@@ -1238,7 +1271,7 @@ export const unmarshalListCombinedEventsResponse = (data: unknown): ListCombined
 
   return {
     events: unmarshalArrayOfObject(data.events, unmarshalListCombinedEventsResponseCombinedEvent),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
   } as ListCombinedEventsResponse
 }
 
@@ -1264,7 +1297,7 @@ export const unmarshalListEventsResponse = (data: unknown): ListEventsResponse =
 
   return {
     events: unmarshalArrayOfObject(data.events, unmarshalEvent),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
   } as ListEventsResponse
 }
 
@@ -1330,7 +1363,7 @@ export const unmarshalListSystemEventsResponse = (data: unknown): ListSystemEven
 
   return {
     events: unmarshalArrayOfObject(data.events, unmarshalSystemEvent),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
   } as ListSystemEventsResponse
 }
 
@@ -1366,9 +1399,9 @@ const unmarshalCustomAlertRuleField = (data: unknown): CustomAlertRuleField => {
   }
 
   return {
-    intOperators: data.int_operators ? unmarshalCustomAlertRuleFieldIntOperators(data.int_operators) : undefined,
+    intOperators: data.int_operators ? unmarshalCustomAlertRuleFieldIntOperators(data.int_operators) : null,
     name: data.name,
-    stringOperators: data.string_operators ? unmarshalCustomAlertRuleFieldStringOperators(data.string_operators) : undefined,
+    stringOperators: data.string_operators ? unmarshalCustomAlertRuleFieldStringOperators(data.string_operators) : null,
     type: data.type,
   } as CustomAlertRuleField
 }
@@ -1454,7 +1487,7 @@ export const marshalCreateExportJobRequest = (
   tags: request.tags,  
   ...resolveOneOf([
     {param: 's3',
-      value: (request.s3 !== undefined) ? marshalExportJobS3(request.s3, defaults)
+      value: (request.s3 != null) ? marshalExportJobS3(request.s3, defaults)
       : undefined,
     },
   ]),

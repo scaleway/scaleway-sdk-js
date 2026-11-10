@@ -246,7 +246,7 @@ export interface HostingDomainCustomDomain {
   /**
    * Indicates whether to auto-configure DNS for this domain.
    */
-  autoConfigDomainDns?: AutoConfigDomainDns
+  autoConfigDomainDns?: AutoConfigDomainDns | null
 }
 
 
@@ -274,7 +274,7 @@ export interface OfferCommitment {
   /**
    * Price of the offer commitment.
    */
-  price?: Money
+  price?: Money | null
   /**
    * Duration of the offer commitment in months.
    */
@@ -282,7 +282,7 @@ export interface OfferCommitment {
   /**
    * Next offer commitment.
    */
-  next?: OfferCommitment
+  next?: OfferCommitment | null
 }
 
 
@@ -338,7 +338,7 @@ export interface OfferOption {
   /**
    * Price of the option for 1 value.
    */
-  price?: Money
+  price?: Money | null
 }
 
 
@@ -350,7 +350,7 @@ export interface PlatformControlPanel {
   /**
    * URL to connect to control panel dashboard and to Webmail interface.
    */
-  urls?: PlatformControlPanelUrls
+  urls?: PlatformControlPanelUrls | null
 }
 
 
@@ -378,7 +378,7 @@ export interface BackupItem {
   /**
    * Date and time at which this item was backed up.
    */
-  createdAt?: Date
+  createdAt?: Date | null
 }
 
 
@@ -390,7 +390,7 @@ export interface HostingDomain {
   /**
    * Optional custom domain linked to the Web Hosting plan.
    */
-  customDomain?: HostingDomainCustomDomain
+  customDomain?: HostingDomainCustomDomain | null
 }
 
 
@@ -458,7 +458,7 @@ export interface DnsRecord {
   /**
    * Record priority level.
    */
-  priority?: number
+  priority?: number | null
   /**
    * Record status.
    */
@@ -490,15 +490,15 @@ export interface HostingCommitment {
   /**
    * Offer commitment for the specified hosting.
    */
-  offerCommitment?: OfferCommitment
+  offerCommitment?: OfferCommitment | null
   /**
    * Date and time the commitment started.
    */
-  startAt?: Date
+  startAt?: Date | null
   /**
    * Date and time the commitment ends.
    */
-  endAt?: Date
+  endAt?: Date | null
   /**
    * The hosting may be deleted, automatically renewed, or switched to
 its configured post-commitment offer, which may have a different 
@@ -516,7 +516,7 @@ export interface HostingUser {
   /**
    * @deprecated One-time-password used for the first login to the control panel, cleared after first use (deprecated, use password_b64 instead).
    */
-  oneTimePassword?: string
+  oneTimePassword?: string | null
   /**
    * Contact email used for the hosting.
    */
@@ -524,7 +524,7 @@ export interface HostingUser {
   /**
    * One-time-password used for the first login to the control panel, cleared after first use, encoded in base64.
    */
-  oneTimePasswordB64?: string
+  oneTimePasswordB64?: string | null
 }
 
 
@@ -548,7 +548,7 @@ export interface Offer {
   /**
    * Price of the offer.
    */
-  price?: Money
+  price?: Money | null
   /**
    * If a hosting_id was specified in the call, defines whether the offer is available for a specified hosting plan to migrate (update) to.
    */
@@ -604,7 +604,7 @@ export interface Platform {
   /**
    * Details of the platform control panel.
    */
-  controlPanel?: PlatformControlPanel
+  controlPanel?: PlatformControlPanel | null
 }
 
 
@@ -632,7 +632,7 @@ export interface Backup {
   /**
    * Creation date of the backup.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Status of the backup. Available values are `active`, `locked`, and `restoring`.
    */
@@ -696,11 +696,11 @@ export interface HostingSummary {
   /**
    * Date on which the Web Hosting plan was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the Web Hosting plan was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Status of the Web Hosting plan.
    */
@@ -708,7 +708,7 @@ export interface HostingSummary {
   /**
    * @deprecated Main domain associated with the Web Hosting plan (deprecated, use domain_info).
    */
-  domain?: string
+  domain?: string | null
   /**
    * Whether the hosting is protected or not.
    */
@@ -716,7 +716,7 @@ export interface HostingSummary {
   /**
    * @deprecated DNS status of the Web Hosting plan.
    */
-  dnsStatus?: DnsRecordsStatus
+  dnsStatus?: DnsRecordsStatus | null
   /**
    * Name of the active offer for the Web Hosting plan.
    */
@@ -724,7 +724,7 @@ export interface HostingSummary {
   /**
    * @deprecated Main domain status of the Web Hosting plan.
    */
-  domainStatus?: DomainStatus
+  domainStatus?: DomainStatus | null
   /**
    * Region where the Web Hosting plan is hosted.
    */
@@ -732,7 +732,7 @@ export interface HostingSummary {
   /**
    * Domain configuration block (subdomain, optional custom domain, and DNS settings).
    */
-  domainInfo?: HostingDomain
+  domainInfo?: HostingDomain | null
 }
 
 
@@ -808,7 +808,7 @@ export interface DomainAvailability {
   /**
    * Price for registering the domain.
    */
-  price?: Money
+  price?: Money | null
 }
 
 
@@ -816,7 +816,7 @@ export type BackupApiGetBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting account.
    */
@@ -832,7 +832,7 @@ export type BackupApiGetProgressRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the hosting associated with the progress.
    */
@@ -848,7 +848,7 @@ export type BackupApiListBackupItemsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting account.
    */
@@ -864,7 +864,7 @@ export type BackupApiListBackupsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting account.
    */
@@ -872,15 +872,15 @@ export type BackupApiListBackupsRequest = {
   /**
    * Page number to retrieve.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of backups to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return the list of backups.
    */
-  orderBy?: ListBackupsRequestOrderBy
+  orderBy?: ListBackupsRequestOrderBy | null
 }
 
 
@@ -888,7 +888,7 @@ export type BackupApiListRecentProgressesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the hosting linked to the progress.
    */
@@ -900,7 +900,7 @@ export type BackupApiRestoreBackupItemsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting account.
    */
@@ -908,7 +908,7 @@ export type BackupApiRestoreBackupItemsRequest = {
   /**
    * List of backup item IDs to restore individually.
    */
-  itemIds?: string[]
+  itemIds?: string[] | null
 }
 
 
@@ -916,7 +916,7 @@ export type BackupApiRestoreBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting account.
    */
@@ -932,7 +932,7 @@ export interface CheckFreeDomainAvailabilityResponse {
   /**
    * The free domain that was checked.
    */
-  freeDomain?: FreeDomain
+  freeDomain?: FreeDomain | null
   /**
    * Whether the free domain is available.
    */
@@ -940,7 +940,7 @@ export interface CheckFreeDomainAvailabilityResponse {
   /**
    * Reason the domain is unavailable, if applicable.
    */
-  reason?: CheckFreeDomainAvailabilityResponseUnavailableReason
+  reason?: CheckFreeDomainAvailabilityResponseUnavailableReason | null
 }
 
 
@@ -956,15 +956,15 @@ export type ControlPanelApiListControlPanelsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of control panels to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -972,7 +972,7 @@ export type DatabaseApiAssignDatabaseUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -992,7 +992,7 @@ export type DatabaseApiChangeDatabaseUserPasswordRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1012,7 +1012,7 @@ export type DatabaseApiCreateDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan where the database will be created.
    */
@@ -1026,13 +1026,13 @@ export type DatabaseApiCreateDatabaseRequest = {
    *
    * One-of ('user'): at most one of 'newUser', 'existingUsername' could be set.
    */
-  newUser?: CreateDatabaseRequestUser
+  newUser?: CreateDatabaseRequestUser | null
   /**
    * (Optional) Username to link an existing user to the database.
    *
    * One-of ('user'): at most one of 'newUser', 'existingUsername' could be set.
    */
-  existingUsername?: string
+  existingUsername?: string | null
 }
 
 
@@ -1040,7 +1040,7 @@ export type DatabaseApiCreateDatabaseUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1060,7 +1060,7 @@ export type DatabaseApiDeleteDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1076,7 +1076,7 @@ export type DatabaseApiDeleteDatabaseUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1092,7 +1092,7 @@ export type DatabaseApiGetDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1108,7 +1108,7 @@ export type DatabaseApiGetDatabaseUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1124,7 +1124,7 @@ export type DatabaseApiListDatabaseUsersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1132,15 +1132,15 @@ export type DatabaseApiListDatabaseUsersRequest = {
   /**
    * Page number (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of database users to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order of database users in the response.
    */
-  orderBy?: ListDatabaseUsersRequestOrderBy
+  orderBy?: ListDatabaseUsersRequestOrderBy | null
 }
 
 
@@ -1148,7 +1148,7 @@ export type DatabaseApiListDatabasesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1156,15 +1156,15 @@ export type DatabaseApiListDatabasesRequest = {
   /**
    * Page number (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of databases to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order of databases in the response.
    */
-  orderBy?: ListDatabasesRequestOrderBy
+  orderBy?: ListDatabasesRequestOrderBy | null
 }
 
 
@@ -1172,7 +1172,7 @@ export type DatabaseApiUnassignDatabaseUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1192,7 +1192,7 @@ export type DnsApiCheckUserOwnsDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Domain for which ownership is to be verified.
    */
@@ -1200,7 +1200,7 @@ export type DnsApiCheckUserOwnsDomainRequest = {
   /**
    * ID of the project currently in use.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1208,7 +1208,7 @@ export type DnsApiGetDomainDnsRecordsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Domain associated with the DNS records.
    */
@@ -1220,7 +1220,7 @@ export type DnsApiGetDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Domain name to get.
    */
@@ -1228,7 +1228,7 @@ export type DnsApiGetDomainRequest = {
   /**
    * ID of the Scaleway Project in which to get the domain to create the Web Hosting plan.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1236,7 +1236,7 @@ export type DnsApiSearchDomainsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Domain name to search.
    */
@@ -1244,7 +1244,7 @@ export type DnsApiSearchDomainsRequest = {
   /**
    * ID of the Scaleway Project in which to search the domain to create the Web Hosting plan.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1252,7 +1252,7 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Domain for which the DNS records will be synchronized.
    */
@@ -1260,27 +1260,27 @@ export type DnsApiSyncDomainDnsRecordsRequest = {
   /**
    * @deprecated Whether or not to synchronize the web records (deprecated, use auto_config_domain_dns).
    */
-  updateWebRecords?: boolean
+  updateWebRecords?: boolean | null
   /**
    * @deprecated Whether or not to synchronize the mail records (deprecated, use auto_config_domain_dns).
    */
-  updateMailRecords?: boolean
+  updateMailRecords?: boolean | null
   /**
    * @deprecated Whether or not to synchronize all types of records. This one has priority (deprecated, use auto_config_domain_dns).
    */
-  updateAllRecords?: boolean
+  updateAllRecords?: boolean | null
   /**
    * @deprecated Whether or not to synchronize domain nameservers (deprecated, use auto_config_domain_dns).
    */
-  updateNameservers?: boolean
+  updateNameservers?: boolean | null
   /**
    * @deprecated Custom records to synchronize.
    */
-  customRecords?: SyncDomainDnsRecordsRequestRecord[]
+  customRecords?: SyncDomainDnsRecordsRequestRecord[] | null
   /**
    * Whether or not to synchronize each types of records.
    */
-  autoConfigDomainDns?: AutoConfigDomainDns
+  autoConfigDomainDns?: AutoConfigDomainDns | null
 }
 
 
@@ -1300,11 +1300,11 @@ export interface DnsRecords {
   /**
    * @deprecated Records dns auto configuration settings (deprecated, use auto_config_domain_dns).
    */
-  dnsConfig?: DomainDnsAction[]
+  dnsConfig?: DomainDnsAction[] | null
   /**
    * Whether or not to synchronize each types of records.
    */
-  autoConfigDomainDns?: AutoConfigDomainDns
+  autoConfigDomainDns?: AutoConfigDomainDns | null
 }
 
 
@@ -1332,11 +1332,11 @@ export interface Domain {
   /**
    * @deprecated A list of DNS-related actions that can be auto configured for the domain (deprecated, use auto_config_domain_dns instead).
    */
-  availableDnsActions?: DomainDnsAction[]
+  availableDnsActions?: DomainDnsAction[] | null
   /**
    * Whether or not to synchronize each type of record.
    */
-  autoConfigDomainDns?: AutoConfigDomainDns
+  autoConfigDomainDns?: AutoConfigDomainDns | null
 }
 
 
@@ -1344,7 +1344,7 @@ export type FreeDomainApiCheckFreeDomainAvailabilityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Custom prefix used for the free domain.
    */
@@ -1360,15 +1360,15 @@ export type FreeDomainApiListFreeRootDomainsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return, from the paginated results (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of free root domains to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1376,7 +1376,7 @@ export type FtpAccountApiChangeFtpAccountPasswordRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1396,7 +1396,7 @@ export type FtpAccountApiCreateFtpAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1420,7 +1420,7 @@ export type FtpAccountApiListFtpAccountsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1428,19 +1428,19 @@ export type FtpAccountApiListFtpAccountsRequest = {
   /**
    * Page number (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of FTP accounts to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order of FTP accounts in the response.
    */
-  orderBy?: ListFtpAccountsRequestOrderBy
+  orderBy?: ListFtpAccountsRequestOrderBy | null
   /**
    * Domain to filter the FTP accounts.
    */
-  domain?: string
+  domain?: string | null
 }
 
 
@@ -1448,7 +1448,7 @@ export type FtpAccountApiRemoveFtpAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -1476,11 +1476,11 @@ export interface Hosting {
   /**
    * Date on which the Web Hosting plan was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date on which the Web Hosting plan was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Status of the Web Hosting plan.
    */
@@ -1488,15 +1488,15 @@ export interface Hosting {
   /**
    * @deprecated Main domain associated with the Web Hosting plan (deprecated, use domain_info).
    */
-  domain?: string
+  domain?: string | null
   /**
    * Details of the Web Hosting plan offer and options.
    */
-  offer?: Offer
+  offer?: Offer | null
   /**
    * Details of the hosting platform.
    */
-  platform?: Platform
+  platform?: Platform | null
   /**
    * List of tags associated with the Web Hosting plan.
    */
@@ -1504,7 +1504,7 @@ export interface Hosting {
   /**
    * @deprecated DNS status of the Web Hosting plan (deprecated, use domain_info).
    */
-  dnsStatus?: DnsRecordsStatus
+  dnsStatus?: DnsRecordsStatus | null
   /**
    * Current IPv4 address of the hosting.
    */
@@ -1516,11 +1516,11 @@ export interface Hosting {
   /**
    * Details of the hosting user.
    */
-  user?: HostingUser
+  user?: HostingUser | null
   /**
    * @deprecated Main domain status of the Web Hosting plan (deprecated, use domain_info).
    */
-  domainStatus?: DomainStatus
+  domainStatus?: DomainStatus | null
   /**
    * Region where the Web Hosting plan is hosted.
    */
@@ -1528,15 +1528,15 @@ export interface Hosting {
   /**
    * Domain configuration block (subdomain, optional custom domain, and DNS settings).
    */
-  domainInfo?: HostingDomain
+  domainInfo?: HostingDomain | null
   /**
    * Commitment details to which the hosting is engaged.
    */
-  commitment?: HostingCommitment
+  commitment?: HostingCommitment | null
   /**
    * Provider where the Web Hosting plan is managed (elements, dedibox).
    */
-  provider?: HostingProvider
+  provider?: HostingProvider | null
 }
 
 
@@ -1544,7 +1544,7 @@ export type HostingApiAddCustomDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID to which the custom domain is attached to.
    */
@@ -1560,7 +1560,7 @@ export type HostingApiCreateHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the selected offer for the Web Hosting plan.
    */
@@ -1568,7 +1568,7 @@ export type HostingApiCreateHostingRequest = {
   /**
    * ID of the Scaleway Project in which to create the Web Hosting plan.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Contact email for the Web Hosting client.
    */
@@ -1576,7 +1576,7 @@ export type HostingApiCreateHostingRequest = {
   /**
    * List of tags for the Web Hosting plan.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Domain name to link to the Web Hosting plan. You must already own this domain name, and have completed the DNS validation process beforehand.
    */
@@ -1584,31 +1584,31 @@ export type HostingApiCreateHostingRequest = {
   /**
    * The name prefix to use as a free subdomain (for example, `mysite`) assigned to the Web Hosting plan. The full domain will be automatically created by adding it to the fixed base domain (e.g. `mysite.scw.site`). You do not need to include the base domain yourself.
    */
-  subdomain?: string
+  subdomain?: string | null
   /**
    * List of the Web Hosting plan options IDs with their quantities.
    */
-  offerOptions?: OfferOptionRequest[]
+  offerOptions?: OfferOptionRequest[] | null
   /**
    * Default language for the control panel interface.
    */
-  language?: StdLanguageCode
+  language?: StdLanguageCode | null
   /**
    * @deprecated Indicates whether to update hosting domain name servers and DNS records for domains managed by Scaleway Elements (deprecated, use auto_config_domain_dns instead).
    */
-  domainConfiguration?: CreateHostingRequestDomainConfiguration
+  domainConfiguration?: CreateHostingRequestDomainConfiguration | null
   /**
    * Indicates whether to skip a welcome email to the contact email containing hosting info.
    */
-  skipWelcomeEmail?: boolean
+  skipWelcomeEmail?: boolean | null
   /**
    * Indicates whether to update hosting domain name servers and DNS records for domains managed by Scaleway Elements (deprecated, use auto_update_* fields instead).
    */
-  autoConfigDomainDns?: AutoConfigDomainDns
+  autoConfigDomainDns?: AutoConfigDomainDns | null
   /**
    * Offer commitment ID to which the hosting will be engaged.
    */
-  offerCommitmentId?: string
+  offerCommitmentId?: string | null
 }
 
 
@@ -1616,7 +1616,7 @@ export type HostingApiCreateSessionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID.
    */
@@ -1628,7 +1628,7 @@ export type HostingApiDeleteHostingDomainsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID of the Web Hosting plan from which to delete domains.
    */
@@ -1636,7 +1636,7 @@ export type HostingApiDeleteHostingDomainsRequest = {
   /**
    * List of domains to delete from the Web Hosting plan.
    */
-  domains?: string[]
+  domains?: string[] | null
 }
 
 
@@ -1644,7 +1644,7 @@ export type HostingApiDeleteHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID.
    */
@@ -1656,7 +1656,7 @@ export type HostingApiGetHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID.
    */
@@ -1668,7 +1668,7 @@ export type HostingApiGetResourceSummaryRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID.
    */
@@ -1680,47 +1680,47 @@ export type HostingApiListHostingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return, from the paginated results (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of Web Hosting plans to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order for Web Hosting plans in the response.
    */
-  orderBy?: ListHostingsRequestOrderBy
+  orderBy?: ListHostingsRequestOrderBy | null
   /**
    * Tags to filter for, only Web Hosting plans with matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Statuses to filter for, only Web Hosting plans with matching statuses will be returned.
    */
-  statuses?: HostingStatus[]
+  statuses?: HostingStatus[] | null
   /**
    * Domain to filter for, only Web Hosting plans associated with this domain will be returned.
    */
-  domain?: string
+  domain?: string | null
   /**
    * Project ID to filter for, only Web Hosting plans from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for, only Web Hosting plans from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Name of the control panel to filter for, only Web Hosting plans from this control panel will be returned.
    */
-  controlPanels?: string[]
+  controlPanels?: string[] | null
   /**
    * Optional free subdomain linked to the Web Hosting plan.
    */
-  subdomain?: string
+  subdomain?: string | null
 }
 
 
@@ -1728,7 +1728,7 @@ export type HostingApiMigrateControlPanelRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID to migrate to a new control panel.
    */
@@ -1748,7 +1748,7 @@ export type HostingApiRemoveCustomDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID to which the custom domain is detached from.
    */
@@ -1764,7 +1764,7 @@ export type HostingApiResetHostingPasswordRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting.
    */
@@ -1776,7 +1776,7 @@ export type HostingApiResetHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID of the Web Hosting plan to reset.
    */
@@ -1788,7 +1788,7 @@ export type HostingApiUpdateHostingFreeDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID of the Web Hosting plan to update.
    */
@@ -1804,7 +1804,7 @@ export type HostingApiUpdateHostingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID.
    */
@@ -1812,27 +1812,27 @@ export type HostingApiUpdateHostingRequest = {
   /**
    * New contact email for the Web Hosting plan.
    */
-  email?: string
+  email?: string | null
   /**
    * New tags for the Web Hosting plan.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * List of the Web Hosting plan options IDs with their quantities.
    */
-  offerOptions?: OfferOptionRequest[]
+  offerOptions?: OfferOptionRequest[] | null
   /**
    * ID of the new offer for the Web Hosting plan.
    */
-  offerId?: string
+  offerId?: string | null
   /**
    * Whether the hosting is protected or not.
    */
-  protected?: boolean
+  protected?: boolean | null
   /**
    * Whether the hosting is deleted at the end of the commitment period.
    */
-  deleteHostingAfterCommitment?: boolean
+  deleteHostingAfterCommitment?: boolean | null
 }
 
 
@@ -1980,7 +1980,7 @@ export type MailAccountApiChangeMailAccountPasswordRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -2004,7 +2004,7 @@ export type MailAccountApiCreateMailAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -2028,7 +2028,7 @@ export type MailAccountApiListMailAccountsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -2036,19 +2036,19 @@ export type MailAccountApiListMailAccountsRequest = {
   /**
    * Page number (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of mail accounts to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order of mail accounts in the response.
    */
-  orderBy?: ListMailAccountsRequestOrderBy
+  orderBy?: ListMailAccountsRequestOrderBy | null
   /**
    * Domain to filter the mail accounts.
    */
-  domain?: string
+  domain?: string | null
 }
 
 
@@ -2056,7 +2056,7 @@ export type MailAccountApiRemoveMailAccountRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -2076,27 +2076,27 @@ export type OfferApiListOffersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of websites to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order for Web Hosting offers in the response.
    */
-  orderBy?: ListOffersRequestOrderBy
+  orderBy?: ListOffersRequestOrderBy | null
   /**
    * UUID of the hosting plan.
    */
-  hostingId?: string
+  hostingId?: string | null
   /**
    * Name of the control panel(s) to filter for.
    */
-  controlPanels?: string[]
+  controlPanels?: string[] | null
 }
 
 
@@ -2124,7 +2124,7 @@ export interface ResetHostingPasswordResponse {
   /**
    * @deprecated New temporary password (deprecated, use password_b64 instead).
    */
-  oneTimePassword?: string
+  oneTimePassword?: string | null
   /**
    * New temporary password, encoded in base64.
    */
@@ -2188,7 +2188,7 @@ export type WebsiteApiCreateWebsiteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID to which the website is attached to.
    */
@@ -2204,7 +2204,7 @@ export type WebsiteApiDeleteWebsiteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID to which the website is detached from.
    */
@@ -2220,7 +2220,7 @@ export type WebsiteApiListWebsitesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the hosting plan.
    */
@@ -2228,15 +2228,15 @@ export type WebsiteApiListWebsitesRequest = {
   /**
    * Page number (must be a positive integer).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of websites to return (must be a positive integer lower or equal to 100).
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order for Web Hosting websites in the response.
    */
-  orderBy?: ListWebsitesRequestOrderBy
+  orderBy?: ListWebsitesRequestOrderBy | null
 }
 
 
@@ -2244,7 +2244,7 @@ export type WebsiteApiResetWebsiteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hosting ID to which the website is attached to.
    */

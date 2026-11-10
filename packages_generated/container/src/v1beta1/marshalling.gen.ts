@@ -73,9 +73,9 @@ const unmarshalContainerHealthCheckSpec = (data: unknown): ContainerHealthCheckS
 
   return {
     failureThreshold: data.failure_threshold,
-    http: data.http ? unmarshalContainerHealthCheckSpecHTTPProbe(data.http) : undefined,
-    interval: data.interval,
-    tcp: data.tcp ? unmarshalContainerHealthCheckSpecTCPProbe(data.tcp) : undefined,
+    http: data.http ? unmarshalContainerHealthCheckSpecHTTPProbe(data.http) : null,
+    interval: data.interval ?? null,
+    tcp: data.tcp ? unmarshalContainerHealthCheckSpecTCPProbe(data.tcp) : null,
   } as ContainerHealthCheckSpec
 }
 
@@ -87,9 +87,9 @@ const unmarshalContainerScalingOption = (data: unknown): ContainerScalingOption 
   }
 
   return {
-    concurrentRequestsThreshold: data.concurrent_requests_threshold,
-    cpuUsageThreshold: data.cpu_usage_threshold,
-    memoryUsageThreshold: data.memory_usage_threshold,
+    concurrentRequestsThreshold: data.concurrent_requests_threshold ?? null,
+    cpuUsageThreshold: data.cpu_usage_threshold ?? null,
+    memoryUsageThreshold: data.memory_usage_threshold ?? null,
   } as ContainerScalingOption
 }
 
@@ -117,12 +117,12 @@ export const unmarshalContainer = (data: unknown): Container => {
     args: data.args,
     command: data.command,
     cpuLimit: data.cpu_limit,
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    description: data.description ?? null,
     domainName: data.domain_name,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
-    healthCheck: data.health_check ? unmarshalContainerHealthCheckSpec(data.health_check) : undefined,
+    errorMessage: data.error_message ?? null,
+    healthCheck: data.health_check ? unmarshalContainerHealthCheckSpec(data.health_check) : null,
     httpOption: data.http_option,
     id: data.id,
     localStorageLimit: data.local_storage_limit,
@@ -134,18 +134,18 @@ export const unmarshalContainer = (data: unknown): Container => {
     namespaceId: data.namespace_id,
     port: data.port,
     privacy: data.privacy,
-    privateNetworkId: data.private_network_id,
+    privateNetworkId: data.private_network_id ?? null,
     protocol: data.protocol,
-    readyAt: unmarshalDate(data.ready_at),
+    readyAt: unmarshalDate(data.ready_at) ?? null,
     region: data.region,
     registryImage: data.registry_image,
     sandbox: data.sandbox,
-    scalingOption: data.scaling_option ? unmarshalContainerScalingOption(data.scaling_option) : undefined,
+    scalingOption: data.scaling_option ? unmarshalContainerScalingOption(data.scaling_option) : null,
     secretEnvironmentVariables: unmarshalArrayOfObject(data.secret_environment_variables, unmarshalSecretHashedValue),
     status: data.status,
     tags: data.tags,
-    timeout: data.timeout,
-    updatedAt: unmarshalDate(data.updated_at),
+    timeout: data.timeout ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Container
 }
 
@@ -157,7 +157,7 @@ export const unmarshalCron = (data: unknown): Cron => {
   }
 
   return {
-    args: data.args,
+    args: data.args ?? null,
     containerId: data.container_id,
     id: data.id,
     name: data.name,
@@ -175,7 +175,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
 
   return {
     containerId: data.container_id,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     hostname: data.hostname,
     id: data.id,
     status: data.status,
@@ -191,10 +191,10 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    description: data.description ?? null,
     environmentVariables: data.environment_variables,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -205,8 +205,8 @@ export const unmarshalNamespace = (data: unknown): Namespace => {
     secretEnvironmentVariables: unmarshalArrayOfObject(data.secret_environment_variables, unmarshalSecretHashedValue),
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    vpcIntegrationActivated: data.vpc_integration_activated,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    vpcIntegrationActivated: data.vpc_integration_activated ?? null,
   } as Namespace
 }
 
@@ -218,12 +218,12 @@ export const unmarshalToken = (data: unknown): Token => {
   }
 
   return {
-    containerId: data.container_id,
-    description: data.description,
-    expiresAt: unmarshalDate(data.expires_at),
+    containerId: data.container_id ?? null,
+    description: data.description ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
-    namespaceId: data.namespace_id,
-    publicKey: data.public_key,
+    namespaceId: data.namespace_id ?? null,
+    publicKey: data.public_key ?? null,
     status: data.status,
     token: data.token,
   } as Token
@@ -237,7 +237,7 @@ const unmarshalTriggerMnqNatsClientConfig = (data: unknown): TriggerMnqNatsClien
   }
 
   return {
-    mnqCredentialId: data.mnq_credential_id,
+    mnqCredentialId: data.mnq_credential_id ?? null,
     mnqNatsAccountId: data.mnq_nats_account_id,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
@@ -253,7 +253,7 @@ const unmarshalTriggerMnqSqsClientConfig = (data: unknown): TriggerMnqSqsClientC
   }
 
   return {
-    mnqCredentialId: data.mnq_credential_id,
+    mnqCredentialId: data.mnq_credential_id ?? null,
     mnqProjectId: data.mnq_project_id,
     mnqRegion: data.mnq_region,
     queue: data.queue,
@@ -285,13 +285,13 @@ export const unmarshalTrigger = (data: unknown): Trigger => {
   return {
     containerId: data.container_id,
     description: data.description,
-    errorMessage: data.error_message,
+    errorMessage: data.error_message ?? null,
     id: data.id,
     inputType: data.input_type,
     name: data.name,
-    scwNatsConfig: data.scw_nats_config ? unmarshalTriggerMnqNatsClientConfig(data.scw_nats_config) : undefined,
-    scwSqsConfig: data.scw_sqs_config ? unmarshalTriggerMnqSqsClientConfig(data.scw_sqs_config) : undefined,
-    sqsConfig: data.sqs_config ? unmarshalTriggerSqsClientConfig(data.sqs_config) : undefined,
+    scwNatsConfig: data.scw_nats_config ? unmarshalTriggerMnqNatsClientConfig(data.scw_nats_config) : null,
+    scwSqsConfig: data.scw_sqs_config ? unmarshalTriggerMnqSqsClientConfig(data.scw_sqs_config) : null,
+    sqsConfig: data.sqs_config ? unmarshalTriggerSqsClientConfig(data.sqs_config) : null,
     status: data.status,
   } as Trigger
 }
@@ -395,11 +395,11 @@ const marshalContainerHealthCheckSpec = (
   interval: request.interval,  
   ...resolveOneOf([
     {param: 'http',
-      value: (request.http !== undefined) ? marshalContainerHealthCheckSpecHTTPProbe(request.http, defaults)
+      value: (request.http != null) ? marshalContainerHealthCheckSpecHTTPProbe(request.http, defaults)
       : undefined,
     },
     {param: 'tcp',
-      value: (request.tcp !== undefined) ? marshalContainerHealthCheckSpecTCPProbe(request.tcp, defaults)
+      value: (request.tcp != null) ? marshalContainerHealthCheckSpecTCPProbe(request.tcp, defaults)
       : undefined,
     },
   ]),
@@ -439,7 +439,7 @@ export const marshalCreateContainerRequest = (
   cpu_limit: request.cpuLimit,
   description: request.description,
   environment_variables: request.environmentVariables,
-  health_check: ((request.healthCheck !== undefined) ?  marshalContainerHealthCheckSpec(request.healthCheck, defaults): undefined),
+  health_check: ((request.healthCheck != null) ?  marshalContainerHealthCheckSpec(request.healthCheck, defaults): undefined),
   http_option: request.httpOption,
   local_storage_limit: request.localStorageLimit,
   max_concurrency: request.maxConcurrency,
@@ -454,8 +454,8 @@ export const marshalCreateContainerRequest = (
   protocol: request.protocol,
   registry_image: request.registryImage,
   sandbox: request.sandbox,
-  scaling_option: ((request.scalingOption !== undefined) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
+  scaling_option: ((request.scalingOption != null) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -487,7 +487,7 @@ export const marshalCreateNamespaceRequest = (
   environment_variables: request.environmentVariables,
   name: request.name || randomName('cns'),
   project_id: request.projectId ?? defaults.defaultProjectId,
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
 })
 
@@ -545,15 +545,15 @@ export const marshalCreateTriggerRequest = (
   name: request.name,  
   ...resolveOneOf([
     {param: 'scw_sqs_config',
-      value: (request.scwSqsConfig !== undefined) ? marshalCreateTriggerRequestMnqSqsClientConfig(request.scwSqsConfig, defaults)
+      value: (request.scwSqsConfig != null) ? marshalCreateTriggerRequestMnqSqsClientConfig(request.scwSqsConfig, defaults)
       : undefined,
     },
     {param: 'scw_nats_config',
-      value: (request.scwNatsConfig !== undefined) ? marshalCreateTriggerRequestMnqNatsClientConfig(request.scwNatsConfig, defaults)
+      value: (request.scwNatsConfig != null) ? marshalCreateTriggerRequestMnqNatsClientConfig(request.scwNatsConfig, defaults)
       : undefined,
     },
     {param: 'sqs_config',
-      value: (request.sqsConfig !== undefined) ? marshalCreateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
+      value: (request.sqsConfig != null) ? marshalCreateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
       : undefined,
     },
   ]),
@@ -568,7 +568,7 @@ export const marshalUpdateContainerRequest = (
   cpu_limit: request.cpuLimit,
   description: request.description,
   environment_variables: request.environmentVariables,
-  health_check: ((request.healthCheck !== undefined) ?  marshalContainerHealthCheckSpec(request.healthCheck, defaults): undefined),
+  health_check: ((request.healthCheck != null) ?  marshalContainerHealthCheckSpec(request.healthCheck, defaults): undefined),
   http_option: request.httpOption,
   local_storage_limit: request.localStorageLimit,
   max_concurrency: request.maxConcurrency,
@@ -582,8 +582,8 @@ export const marshalUpdateContainerRequest = (
   redeploy: request.redeploy,
   registry_image: request.registryImage,
   sandbox: request.sandbox,
-  scaling_option: ((request.scalingOption !== undefined) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
+  scaling_option: ((request.scalingOption != null) ?  marshalContainerScalingOption(request.scalingOption, defaults): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
   timeout: request.timeout,
 })
@@ -604,7 +604,7 @@ export const marshalUpdateNamespaceRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   environment_variables: request.environmentVariables,
-  secret_environment_variables: ((request.secretEnvironmentVariables !== undefined) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
+  secret_environment_variables: ((request.secretEnvironmentVariables != null) ?  request.secretEnvironmentVariables.map(elt => marshalSecret(elt, defaults)): undefined),
   tags: request.tags,
 })
 
@@ -624,7 +624,7 @@ export const marshalUpdateTriggerRequest = (
   name: request.name,  
   ...resolveOneOf([
     {param: 'sqs_config',
-      value: (request.sqsConfig !== undefined) ? marshalUpdateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
+      value: (request.sqsConfig != null) ? marshalUpdateTriggerRequestSqsClientConfig(request.sqsConfig, defaults)
       : undefined,
     },
   ]),

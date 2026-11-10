@@ -191,16 +191,16 @@ export interface ScalewayLb {
   /**
    * Defines whether the Load Balancer's frontend handles SSL connections.
    */
-  isSsl?: boolean
+  isSsl?: boolean | null
   /**
    * Fully Qualified Domain Name (in the format subdomain.example.com) to use in HTTP requests sent towards your Load Balancer.
    */
-  domainName?: string
+  domainName?: string | null
   /**
    * Defines whether to forward websocket requests to the load balancer.
    */
-  hasWebsocket?: boolean
-  privateNetworkId?: string
+  hasWebsocket?: boolean | null
+  privateNetworkId?: string | null
 }
 
 
@@ -234,15 +234,15 @@ export interface ScalewayS3BackendConfig {
   /**
    * Name of the Bucket.
    */
-  bucketName?: string
+  bucketName?: string | null
   /**
    * Region of the Bucket.
    */
-  bucketRegion?: string
+  bucketRegion?: string | null
   /**
    * Defines whether the bucket website feature is enabled.
    */
-  isWebsite?: boolean
+  isWebsite?: boolean | null
 }
 
 
@@ -298,11 +298,11 @@ export interface RuleHttpMatch {
   /**
    * HTTP URL path to filter for. A request whose path matches the given filter will be considered to match the rule. All paths will match if none is provided.
    */
-  pathFilter?: RuleHttpMatchPathFilter
+  pathFilter?: RuleHttpMatchPathFilter | null
   /**
    * Host to filter for. A request whose host matches the given filter will be considered to match the rule. All hosts will match if none is provided.
    */
-  hostFilter?: RuleHttpMatchHostFilter
+  hostFilter?: RuleHttpMatchHostFilter | null
 }
 
 
@@ -322,35 +322,35 @@ export interface BackendStage {
   /**
    * Date the backend stage was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the backend stage was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Scaleway Object Storage origin bucket (S3) linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayS3?: ScalewayS3BackendConfig
+  scalewayS3?: ScalewayS3BackendConfig | null
   /**
    * Scaleway Load Balancer origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayLb?: ScalewayLbBackendConfig
+  scalewayLb?: ScalewayLbBackendConfig | null
   /**
    * Scaleway Serverless container origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
+  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig | null
   /**
    * Scaleway Serverless function origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig
+  scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig | null
 }
 
 
@@ -366,7 +366,7 @@ export interface CacheStage {
   /**
    * Time To Live (TTL) in seconds. Defines how long content is cached.
    */
-  fallbackTtl?: string
+  fallbackTtl?: string | null
   /**
    * Defines whether responses to requests with cookies must be stored in the cache.
    */
@@ -378,27 +378,27 @@ export interface CacheStage {
   /**
    * Date the cache stage was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the cache stage was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId', 'routeStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
   /**
    * Backend stage ID the cache stage is linked to.
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId', 'routeStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId', 'routeStageId' could be set.
    */
-  routeStageId?: string
+  routeStageId?: string | null
 }
 
 
@@ -431,29 +431,29 @@ export interface DNSStage {
   /**
    * Date the DNS stage was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the DNS stage was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * TLS stage ID the DNS stage is linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  tlsStageId?: string
+  tlsStageId?: string | null
   /**
    * Cache stage ID the DNS stage is linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  cacheStageId?: string
+  cacheStageId?: string | null
   /**
    * Backend stage ID the DNS stage is linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
    */
@@ -497,11 +497,11 @@ export interface Pipeline {
   /**
    * Date the pipeline was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the pipeline was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   vpcEndpointIds: string[]
 }
 
@@ -520,13 +520,13 @@ export interface RouteStage {
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
   /**
    * ID of the backend stage HTTP requests should be forwarded to when no rules are matched.
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    * Current status of the stage.
    */
@@ -534,11 +534,11 @@ export interface RouteStage {
   /**
    * Date the route stage was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the route stage was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -562,7 +562,7 @@ export interface TLSStage {
   /**
    * Expiration date of the certificate.
    */
-  certificateExpiresAt?: Date
+  certificateExpiresAt?: Date | null
   /**
    * Current status of the stage.
    */
@@ -570,33 +570,33 @@ export interface TLSStage {
   /**
    * Date the TLS stage was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the TLS stage was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Cache stage ID the TLS stage is linked to.
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  cacheStageId?: string
+  cacheStageId?: string | null
   /**
    * Backend stage ID the TLS stage is linked to.
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  routeStageId?: string
+  routeStageId?: string | null
 }
 
 
@@ -624,17 +624,17 @@ export interface WafStage {
   /**
    * Date the WAF stage was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the WAF stage was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ID of the backend stage to forward requests to after the WAF stage.
    *
    * One-of ('next'): at most one of 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    * List of OWASP® CRS rule IDs excluded from WAF.
    */
@@ -648,19 +648,19 @@ export interface SetRouteRulesRequestRouteRule {
    *
    * One-of ('match'): at most one of 'ruleHttpMatch' could be set.
    */
-  ruleHttpMatch?: RuleHttpMatch
+  ruleHttpMatch?: RuleHttpMatch | null
   /**
    * ID of the backend stage that requests matching the rule should be forwarded to.
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    * ID of the WAF stage that requests matching the rule should be forwarded to.
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
 }
 
 
@@ -670,13 +670,13 @@ export interface RouteRule {
    *
    * One-of ('match'): at most one of 'ruleHttpMatch' could be set.
    */
-  ruleHttpMatch?: RuleHttpMatch
+  ruleHttpMatch?: RuleHttpMatch | null
   /**
    * ID of the backend stage that requests matching the rule should be forwarded to.
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    * Position of the rule which determines the order of processing within the route stage.
    */
@@ -690,7 +690,7 @@ export interface RouteRule {
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
 }
 
 
@@ -737,7 +737,7 @@ export interface PlanUsageDetails {
   /**
    * Cost to date (this month) for the corresponding Edge Services subscription plan.
    */
-  planCost?: Money
+  planCost?: Money | null
 }
 
 
@@ -746,7 +746,7 @@ export interface HeadStageResponseHeadStage {
    *
    * One-of ('head'): at most one of 'dnsStageId' could be set.
    */
-  dnsStageId?: string
+  dnsStageId?: string | null
 }
 
 
@@ -755,7 +755,7 @@ export interface ListHeadStagesResponseHeadStage {
    *
    * One-of ('head'): at most one of 'dnsStageId' could be set.
    */
-  dnsStageId?: string
+  dnsStageId?: string | null
 }
 
 
@@ -765,7 +765,7 @@ export interface Node {
 
 
 export interface PipelineStages {
-  pipeline?: Pipeline
+  pipeline?: Pipeline | null
   dnsStages: DNSStage[]
   tlsStages: TLSStage[]
   cacheStages: CacheStage[]
@@ -793,21 +793,21 @@ export interface PurgeRequest {
    *
    * One-of ('target'): at most one of 'assets', 'all' could be set.
    */
-  assets?: string[]
+  assets?: string[] | null
   /**
    * Defines whether to purge all content.
    *
    * One-of ('target'): at most one of 'assets', 'all' could be set.
    */
-  all?: boolean
+  all?: boolean | null
   /**
    * Date the purge request was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the purge request was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -831,11 +831,11 @@ export interface VPCEndpoint {
   /**
    * Date the VPC Endpoint was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the VPC Endpoint was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -871,19 +871,19 @@ export type AddRouteRulesRequest = {
   /**
    * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
    */
-  routeRules?: SetRouteRulesRequestRouteRule[]
+  routeRules?: SetRouteRulesRequestRouteRule[] | null
   /**
    * Add rules after the given position.
    *
    * One-of ('position'): at most one of 'afterPosition', 'beforePosition' could be set.
    */
-  afterPosition?: number
+  afterPosition?: number | null
   /**
    * Add rules before the given position.
    *
    * One-of ('position'): at most one of 'afterPosition', 'beforePosition' could be set.
    */
-  beforePosition?: number
+  beforePosition?: number | null
 }
 
 
@@ -896,7 +896,7 @@ export interface AddRouteRulesResponse {
 
 
 export type CheckDomainRequest = {
-  projectId?: string
+  projectId?: string | null
   fqdn: string
   cname: string
 }
@@ -908,7 +908,7 @@ export interface CheckDomainResponse {
 
 
 export type CheckLbOriginRequest = {
-  lb?: ScalewayLb
+  lb?: ScalewayLb | null
 }
 
 
@@ -919,18 +919,18 @@ export interface CheckLbOriginResponse {
 
 
 export type CheckPEMChainRequest = {
-  projectId?: string
+  projectId?: string | null
   fqdn: string
   /**
    *
    * One-of ('chain'): at most one of 'secret', 'raw' could be set.
    */
-  secret?: CheckPEMChainRequestSecretChain
+  secret?: CheckPEMChainRequestSecretChain | null
   /**
    *
    * One-of ('chain'): at most one of 'secret', 'raw' could be set.
    */
-  raw?: string
+  raw?: string | null
 }
 
 
@@ -949,25 +949,25 @@ export type CreateBackendStageRequest = {
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayS3?: ScalewayS3BackendConfig
+  scalewayS3?: ScalewayS3BackendConfig | null
   /**
    * Scaleway Load Balancer origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayLb?: ScalewayLbBackendConfig
+  scalewayLb?: ScalewayLbBackendConfig | null
   /**
    * Scaleway Serverless container origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
+  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig | null
   /**
    * Scaleway Serverless function origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig
+  scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig | null
 }
 
 
@@ -979,27 +979,27 @@ export type CreateCacheStageRequest = {
   /**
    * Time To Live (TTL) in seconds. Defines how long content is cached.
    */
-  fallbackTtl?: string
+  fallbackTtl?: string | null
   /**
    * Defines whether responses to requests with cookies must be stored in the cache.
    */
-  includeCookies?: boolean
+  includeCookies?: boolean | null
   /**
    * Backend stage ID the cache stage will be linked to.
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  routeStageId?: string
+  routeStageId?: string | null
 }
 
 
@@ -1011,33 +1011,33 @@ export type CreateDNSStageRequest = {
   /**
    * Custom Fully Qualified Domain Name to be configured (only 1 FQDN can be setup for now).
    */
-  fqdns?: string[]
+  fqdns?: string[] | null
   /**
    * TLS stage ID the DNS stage will be linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  tlsStageId?: string
+  tlsStageId?: string | null
   /**
    * Cache stage ID the DNS stage will be linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  cacheStageId?: string
+  cacheStageId?: string | null
   /**
    * Backend stage ID the DNS stage will be linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
    */
-  wildcardDomain?: boolean
+  wildcardDomain?: boolean | null
   /**
    * When true, Fully Qualified Domain Names are accessible exclusively within the VPC.
    */
-  fullPrivate?: boolean
+  fullPrivate?: boolean | null
 }
 
 
@@ -1045,7 +1045,7 @@ export type CreatePipelineRequest = {
   /**
    * Project ID in which the pipeline will be created.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the pipeline.
    */
@@ -1067,13 +1067,13 @@ export type CreatePurgeRequestRequest = {
    *
    * One-of ('target'): at most one of 'assets', 'all' could be set.
    */
-  assets?: string[]
+  assets?: string[] | null
   /**
    * Defines whether to purge all content.
    *
    * One-of ('target'): at most one of 'assets', 'all' could be set.
    */
-  all?: boolean
+  all?: boolean | null
 }
 
 
@@ -1087,13 +1087,13 @@ export type CreateRouteStageRequest = {
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
   /**
    * ID of the backend stage HTTP requests should be forwarded to when no rules are matched.
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
 }
 
 
@@ -1105,33 +1105,33 @@ export type CreateTLSStageRequest = {
   /**
    * Secret (from Scaleway Secret Manager) containing your custom certificate.
    */
-  secrets?: TLSSecret[]
+  secrets?: TLSSecret[] | null
   /**
    * True when Scaleway generates and manages a Let's Encrypt certificate for the TLS stage/custom endpoint.
    */
-  managedCertificate?: boolean
+  managedCertificate?: boolean | null
   /**
    * Cache stage ID the TLS stage will be linked to.
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'routeStageId', 'wafStageId' could be set.
    */
-  cacheStageId?: string
+  cacheStageId?: string | null
   /**
    * Backend stage ID the TLS stage will be linked to.
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'routeStageId', 'wafStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'routeStageId', 'wafStageId' could be set.
    */
-  routeStageId?: string
+  routeStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'routeStageId', 'wafStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
 }
 
 
@@ -1139,11 +1139,11 @@ export type CreateVPCEndpointRequest = {
   /**
    * Project ID of the VPC Endpoint.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Zone of the VPC Endpoint.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Private Network ID of the VPC Endpoint.
    */
@@ -1159,7 +1159,7 @@ export type CreateWafStageRequest = {
   /**
    * Mode defining WAF behavior (`disable`/`log_only`/`enable`).
    */
-  mode?: WafStageMode
+  mode?: WafStageMode | null
   /**
    * Sensitivity level (`1`,`2`,`3`,`4`) to use when classifying requests as malicious. With a high level, requests are more likely to be classed as malicious, and false positives are expected. With a lower level, requests are more likely to be classed as benign.
    */
@@ -1167,13 +1167,13 @@ export type CreateWafStageRequest = {
   /**
    * List of OWASP® CRS rule IDs excluded from WAF.
    */
-  exclusionRules?: WafExclusionRules
+  exclusionRules?: WafExclusionRules | null
   /**
    * ID of the backend stage to forward requests to after the WAF stage.
    *
    * One-of ('next'): at most one of 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
 }
 
 
@@ -1194,7 +1194,7 @@ export type DeleteCacheStageRequest = {
 
 
 export type DeleteCurrentPlanRequest = {
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1255,7 +1255,7 @@ export type GetBackendStageRequest = {
 
 
 export type GetBillingRequest = {
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1263,11 +1263,11 @@ export interface GetBillingResponse {
   /**
    * Information on the currently-selected, active Edge Services subscription plan.
    */
-  currentPlan?: PlanDetails
+  currentPlan?: PlanDetails | null
   /**
    * Cost to date (this month) for Edge Service subscription plans. This comprises the pro-rata cost of the current subscription plan, and any previous subscription plans that were active earlier in the month.
    */
-  planCost?: Money
+  planCost?: Money | null
   /**
    * Total number of pipelines currently configured.
    */
@@ -1275,7 +1275,7 @@ export interface GetBillingResponse {
   /**
    * Cost to date (this month) of pipelines not included in the subscription plans.
    */
-  extraPipelinesCost?: Money
+  extraPipelinesCost?: Money | null
   /**
    * Total amount of data egressed from the cache in gigabytes from the beginning of the month, for the active subscription plan.
    */
@@ -1287,7 +1287,7 @@ export interface GetBillingResponse {
   /**
    * Cost to date (this month) of the data egressed from the cache that is not included in the subscription plans.
    */
-  extraCacheCost?: Money
+  extraCacheCost?: Money | null
   /**
    * Total number of requests processed by the WAF since the beginning of the current month, for the active subscription plan.
    */
@@ -1299,11 +1299,11 @@ export interface GetBillingResponse {
   /**
    * Cost to date (this month) of the extra requests processed by the WAF that were not included in the subscription plans.
    */
-  extraWafCost?: Money
+  extraWafCost?: Money | null
   /**
    * Cost of activating WAF add-on (where subscription plan does not include WAF).
    */
-  wafAddOn?: Money
+  wafAddOn?: Money | null
   /**
    * Detailed costs and usage for all Edge Services subscription plans that were activated during the month.
    */
@@ -1311,7 +1311,7 @@ export interface GetBillingResponse {
   /**
    * Total cost to date (this month) of all Edge Services resources including active subscription plan, previously active plans, extra pipelines and extra egress cache data.
    */
-  totalCost?: Money
+  totalCost?: Money | null
 }
 
 
@@ -1324,7 +1324,7 @@ export type GetCacheStageRequest = {
 
 
 export type GetCurrentPlanRequest = {
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1388,7 +1388,7 @@ export interface HeadStageResponse {
   /**
    * Modified or created head stage.
    */
-  headStage?: HeadStageResponseHeadStage
+  headStage?: HeadStageResponseHeadStage | null
 }
 
 
@@ -1400,27 +1400,27 @@ export type ListBackendStagesRequest = {
   /**
    * Sort order of backend stages in the response.
    */
-  orderBy?: ListBackendStagesRequestOrderBy
+  orderBy?: ListBackendStagesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of backend stages to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Bucket name to filter for. Only backend stages from this Bucket will be returned.
    */
-  bucketName?: string
+  bucketName?: string | null
   /**
    * Bucket region to filter for. Only backend stages with buckets in this region will be returned.
    */
-  bucketRegion?: string
+  bucketRegion?: string | null
   /**
    * Load Balancer ID to filter for. Only backend stages with this Load Balancer will be returned.
    */
-  lbId?: string
+  lbId?: string | null
 }
 
 
@@ -1444,15 +1444,15 @@ export type ListCacheStagesRequest = {
   /**
    * Sort order of cache stages in the response.
    */
-  orderBy?: ListCacheStagesRequestOrderBy
+  orderBy?: ListCacheStagesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of cache stages to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1476,19 +1476,19 @@ export type ListDNSStagesRequest = {
   /**
    * Sort order of DNS stages in the response.
    */
-  orderBy?: ListDNSStagesRequestOrderBy
+  orderBy?: ListDNSStagesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of DNS stages to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Fully Qualified Domain Name to filter for (in the format subdomain.example.com). Only DNS stages with this FQDN will be returned.
    */
-  fqdn?: string
+  fqdn?: string | null
 }
 
 
@@ -1512,11 +1512,11 @@ export type ListHeadStagesRequest = {
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of head stages to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1542,31 +1542,31 @@ export type ListPipelinesRequest = {
   /**
    * Sort order of pipelines in the response.
    */
-  orderBy?: ListPipelinesRequestOrderBy
+  orderBy?: ListPipelinesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of pipelines to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Pipeline name to filter for. Only pipelines with this string within their name will be returned.
    */
-  name?: string
+  name?: string | null
   /**
    * Organization ID to filter for. Only pipelines from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for. Only pipelines from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter on backend stage. Only pipelines with a Load Balancer origin will be returned.
    */
-  hasBackendStageLb?: boolean
+  hasBackendStageLb?: boolean | null
 }
 
 
@@ -1583,12 +1583,12 @@ export interface ListPipelinesResponse {
 
 
 export type ListPipelinesWithStagesRequest = {
-  orderBy?: ListPipelinesWithStagesRequestOrderBy
-  page?: number
-  pageSize?: number
-  name?: string
-  organizationId?: string
-  projectId?: string
+  orderBy?: ListPipelinesWithStagesRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
+  name?: string | null
+  organizationId?: string | null
+  projectId?: string | null
 }
 
 
@@ -1608,27 +1608,27 @@ export type ListPurgeRequestsRequest = {
   /**
    * Sort order of purge requests in the response.
    */
-  orderBy?: ListPurgeRequestsRequestOrderBy
+  orderBy?: ListPurgeRequestsRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of purge requests to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Organization ID to filter for. Only purge requests from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for. Only purge requests from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Pipeline ID to filter for. Only purge requests from this pipeline will be returned.
    */
-  pipelineId?: string
+  pipelineId?: string | null
 }
 
 
@@ -1672,15 +1672,15 @@ export type ListRouteStagesRequest = {
   /**
    * Sort order of route stages in the response.
    */
-  orderBy?: ListRouteStagesRequestOrderBy
+  orderBy?: ListRouteStagesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of route stages to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1704,23 +1704,23 @@ export type ListTLSStagesRequest = {
   /**
    * Sort order of TLS stages in the response.
    */
-  orderBy?: ListTLSStagesRequestOrderBy
+  orderBy?: ListTLSStagesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of TLS stages to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Secret ID to filter for. Only TLS stages with this Secret ID will be returned.
    */
-  secretId?: string
+  secretId?: string | null
   /**
    * Secret region to filter for. Only TLS stages with a Secret in this region will be returned.
    */
-  secretRegion?: string
+  secretRegion?: string | null
 }
 
 
@@ -1740,23 +1740,23 @@ export type ListVPCEndpointsRequest = {
   /**
    * Sort order of VPC Endpoints in the response.
    */
-  orderBy?: ListVPCEndpointsRequestOrderBy
+  orderBy?: ListVPCEndpointsRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of VPC Endpoints to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Project ID to filter for. Only VPC Endpoints from this project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for. Only VPC Endpoints from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1780,15 +1780,15 @@ export type ListWafStagesRequest = {
   /**
    * Sort order of WAF stages in the response.
    */
-  orderBy?: ListWafStagesRequestOrderBy
+  orderBy?: ListWafStagesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of WAF stages to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1810,36 +1810,36 @@ export interface Plan {
 
 
 export type SearchBackendStagesRequest = {
-  orderBy?: SearchBackendStagesRequestOrderBy
-  page?: number
-  pageSize?: number
-  projectId?: string
-  bucketName?: string
-  bucketRegion?: string
-  lbId?: string
+  orderBy?: SearchBackendStagesRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
+  projectId?: string | null
+  bucketName?: string | null
+  bucketRegion?: string | null
+  lbId?: string | null
 }
 
 
 export type SearchRouteRulesRequest = {
-  orderBy?: SearchRouteRulesRequestOrderBy
-  page?: number
-  pageSize?: number
-  organizationId?: string
-  projectId?: string
+  orderBy?: SearchRouteRulesRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
+  organizationId?: string | null
+  projectId?: string | null
 }
 
 
 export type SearchWafStagesRequest = {
-  orderBy?: SearchWafStagesRequestOrderBy
-  page?: number
-  pageSize?: number
-  projectId?: string
+  orderBy?: SearchWafStagesRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
+  projectId?: string | null
 }
 
 
 export type SelectPlanRequest = {
-  projectId?: string
-  planName?: PlanName
+  projectId?: string | null
+  planName?: PlanName | null
 }
 
 
@@ -1853,19 +1853,19 @@ export type SetHeadStageRequest = {
    *
    * One-of ('action'): at most one of 'addNewHeadStage', 'removeHeadStage', 'swapHeadStage' could be set.
    */
-  addNewHeadStage?: SetHeadStageRequestAddNewHeadStage
+  addNewHeadStage?: SetHeadStageRequestAddNewHeadStage | null
   /**
    * Remove a head stage.
    *
    * One-of ('action'): at most one of 'addNewHeadStage', 'removeHeadStage', 'swapHeadStage' could be set.
    */
-  removeHeadStage?: SetHeadStageRequestRemoveHeadStage
+  removeHeadStage?: SetHeadStageRequestRemoveHeadStage | null
   /**
    * Replace a head stage with a new one.
    *
    * One-of ('action'): at most one of 'addNewHeadStage', 'removeHeadStage', 'swapHeadStage' could be set.
    */
-  swapHeadStage?: SetHeadStageRequestSwapHeadStage
+  swapHeadStage?: SetHeadStageRequestSwapHeadStage | null
 }
 
 
@@ -1877,7 +1877,7 @@ export type SetPipelineVPCEndpointsRequest = {
   /**
    * List of VPC Endpoints to attach.
    */
-  vpcEndpointIds?: string[]
+  vpcEndpointIds?: string[] | null
 }
 
 
@@ -1905,7 +1905,7 @@ export type SetRouteRulesRequest = {
   /**
    * List of rules to be checked against every HTTP request. The first matching rule will forward the request to its specified backend stage. If no rules are matched, the request is forwarded to the stage defined by `waf_stage_id` or `backend_stage_id`.
    */
-  routeRules?: SetRouteRulesRequestRouteRule[]
+  routeRules?: SetRouteRulesRequestRouteRule[] | null
 }
 
 
@@ -1927,25 +1927,25 @@ export type UpdateBackendStageRequest = {
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayS3?: ScalewayS3BackendConfig
+  scalewayS3?: ScalewayS3BackendConfig | null
   /**
    * Scaleway Load Balancer origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayLb?: ScalewayLbBackendConfig
+  scalewayLb?: ScalewayLbBackendConfig | null
   /**
    * Scaleway Serverless container origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig
+  scalewayServerlessContainer?: ScalewayServerlessContainerBackendConfig | null
   /**
    * Scaleway Serverless function origin linked to the backend stage.
    *
    * One-of ('backendConfig'): at most one of 'scalewayS3', 'scalewayLb', 'scalewayServerlessContainer', 'scalewayServerlessFunction' could be set.
    */
-  scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig
+  scalewayServerlessFunction?: ScalewayServerlessFunctionBackendConfig | null
   /**
    * Pipeline ID the Backend stage belongs to.
    */
@@ -1961,27 +1961,27 @@ export type UpdateCacheStageRequest = {
   /**
    * Time To Live (TTL) in seconds. Defines how long content is cached.
    */
-  fallbackTtl?: string
+  fallbackTtl?: string | null
   /**
    * Defines whether responses to requests with cookies must be stored in the cache.
    */
-  includeCookies?: boolean
+  includeCookies?: boolean | null
   /**
    * Backend stage ID the cache stage will be linked to.
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'backendStageId', 'wafStageId', 'routeStageId' could be set.
    */
-  routeStageId?: string
+  routeStageId?: string | null
 }
 
 
@@ -1993,33 +1993,33 @@ export type UpdateDNSStageRequest = {
   /**
    * Custom Fully Qualified Domain Name to be configured (only 1 FQDN can be setup for now).
    */
-  fqdns?: string[]
+  fqdns?: string[] | null
   /**
    * TLS stage ID the DNS stage will be linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  tlsStageId?: string
+  tlsStageId?: string | null
   /**
    * Cache stage ID the DNS stage will be linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  cacheStageId?: string
+  cacheStageId?: string | null
   /**
    * Backend stage ID the DNS stage will be linked to.
    *
    * One-of ('next'): at most one of 'tlsStageId', 'cacheStageId', 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    * Support of wildcard (subdomains) for the given domain (a wildcard certificate is required to make it work).
    */
-  wildcardDomain?: boolean
+  wildcardDomain?: boolean | null
   /**
    * When true, Fully Qualified Domain Names are accessible exclusively within the VPC.
    */
-  fullPrivate?: boolean
+  fullPrivate?: boolean | null
 }
 
 
@@ -2031,11 +2031,11 @@ export type UpdatePipelineRequest = {
   /**
    * Name of the pipeline.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the pipeline.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -2049,13 +2049,13 @@ export type UpdateRouteStageRequest = {
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
   /**
    * ID of the backend stage HTTP requests should be forwarded to when no rules are matched.
    *
    * One-of ('next'): at most one of 'wafStageId', 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
 }
 
 
@@ -2067,33 +2067,33 @@ export type UpdateTLSStageRequest = {
   /**
    * Secret (from Scaleway Secret-Manager) containing your custom certificate.
    */
-  tlsSecretsConfig?: TLSSecretsConfig
+  tlsSecretsConfig?: TLSSecretsConfig | null
   /**
    * True when Scaleway generates and manages a Let's Encrypt certificate for the TLS stage/custom endpoint.
    */
-  managedCertificate?: boolean
+  managedCertificate?: boolean | null
   /**
    * Cache stage ID the TLS stage will be linked to.
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'routeStageId', 'wafStageId' could be set.
    */
-  cacheStageId?: string
+  cacheStageId?: string | null
   /**
    * Backend stage ID the TLS stage will be linked to.
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'routeStageId', 'wafStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'routeStageId', 'wafStageId' could be set.
    */
-  routeStageId?: string
+  routeStageId?: string | null
   /**
    *
    * One-of ('next'): at most one of 'cacheStageId', 'backendStageId', 'routeStageId', 'wafStageId' could be set.
    */
-  wafStageId?: string
+  wafStageId?: string | null
 }
 
 
@@ -2105,21 +2105,21 @@ export type UpdateWafStageRequest = {
   /**
    * Mode defining WAF behavior (`disable`/`log_only`/`enable`).
    */
-  mode?: WafStageMode
+  mode?: WafStageMode | null
   /**
    * Sensitivity level (`1`,`2`,`3`,`4`) to use when classifying requests as malicious. With a high level, requests are more likely to be classed as malicious, and false positives are expected. With a lower level, requests are more likely to be classed as benign.
    */
-  paranoiaLevel?: number
+  paranoiaLevel?: number | null
   /**
    * List of OWASP® CRS rule IDs excluded from WAF.
    */
-  exclusionRules?: WafExclusionRules
+  exclusionRules?: WafExclusionRules | null
   /**
    * ID of the backend stage to forward requests to after the WAF stage.
    *
    * One-of ('next'): at most one of 'backendStageId' could be set.
    */
-  backendStageId?: string
+  backendStageId?: string | null
 }
 
 

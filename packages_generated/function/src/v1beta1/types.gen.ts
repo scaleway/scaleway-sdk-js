@@ -184,7 +184,7 @@ export interface TriggerMnqNatsClientConfig {
   /**
    * ID of the Messaging and Queuing credentials used to subscribe to the NATS subject.
    */
-  mnqCredentialId?: string
+  mnqCredentialId?: string | null
 }
 
 
@@ -204,7 +204,7 @@ export interface TriggerMnqSqsClientConfig {
   /**
    * ID of the Messaging and Queuing credentials used to read from the SQS queue.
    */
-  mnqCredentialId?: string
+  mnqCredentialId?: string | null
 }
 
 
@@ -218,7 +218,7 @@ export interface TriggerSqsClientConfig {
 
 export interface Secret {
   key: string
-  value?: string
+  value?: string | null
 }
 
 
@@ -298,7 +298,7 @@ export interface Cron {
   /**
    * Arguments to pass with the cron.
    */
-  args?: Record<string, unknown>
+  args?: Record<string, unknown> | null
   /**
    * Status of the cron.
    */
@@ -342,7 +342,7 @@ export interface Domain {
   /**
    * Error message if the domain is in "error" state.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Region in which the domain is located.
    */
@@ -412,7 +412,7 @@ export interface Function {
   /**
    * Request processing time limit for the function.
    */
-  timeout?: string
+  timeout?: string | null
   /**
    * Handler to use for the function.
    */
@@ -420,11 +420,11 @@ export interface Function {
   /**
    * Error message if the function is in "error" state.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Description of the current build step.
    */
-  buildMessage?: string
+  buildMessage?: string | null
   /**
    * Privacy setting of the function.
    */
@@ -432,7 +432,7 @@ export interface Function {
   /**
    * Description of the function.
    */
-  description?: string
+  description?: string | null
   /**
    * Domain name associated with the function.
    */
@@ -459,15 +459,15 @@ export interface Function {
   /**
    * Creation date of the function.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the function.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Last date when the function was successfully deployed and set to ready.
    */
-  readyAt?: Date
+  readyAt?: Date | null
   /**
    * List of tags applied to the Serverless Function.
    */
@@ -475,7 +475,7 @@ export interface Function {
   /**
    * When connected to a Private Network, the function can access other Scaleway resources in this Private Network.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
 }
 
 
@@ -515,7 +515,7 @@ export interface Namespace {
   /**
    * Error message if the namespace is in "error" state.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Registry endpoint of the namespace.
    */
@@ -523,7 +523,7 @@ export interface Namespace {
   /**
    * Description of the namespace.
    */
-  description?: string
+  description?: string | null
   /**
    * Secret environment variables of the namespace.
    */
@@ -539,15 +539,15 @@ export interface Namespace {
   /**
    * Creation date of the namespace.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the namespace.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * @deprecated The value of this field doesn't matter anymore, and will be removed in a near future.
    */
-  vpcIntegrationActivated?: boolean
+  vpcIntegrationActivated?: boolean | null
 }
 
 
@@ -565,17 +565,17 @@ export interface Token {
    *
    * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
-  functionId?: string
+  functionId?: string | null
   /**
    * UUID of the namespace the token is associated with.
    *
    * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
-  namespaceId?: string
+  namespaceId?: string | null
   /**
    * @deprecated Public key of the token.
    */
-  publicKey?: string
+  publicKey?: string | null
   /**
    * Status of the token.
    */
@@ -583,11 +583,11 @@ export interface Token {
   /**
    * Description of the token.
    */
-  description?: string
+  description?: string | null
   /**
    * Date on which the token expires.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -623,25 +623,25 @@ export interface Trigger {
   /**
    * Error message of the trigger.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Configuration for a Scaleway Messaging and Queuing SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  scwSqsConfig?: TriggerMnqSqsClientConfig
+  scwSqsConfig?: TriggerMnqSqsClientConfig | null
   /**
    * Configuration for a Scaleway Messaging and Queuing NATS subject.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  scwNatsConfig?: TriggerMnqNatsClientConfig
+  scwNatsConfig?: TriggerMnqNatsClientConfig | null
   /**
    * Configuration for an AWS SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  sqsConfig?: TriggerSqsClientConfig
+  sqsConfig?: TriggerSqsClientConfig | null
   /**
    * Region in which the trigger is located.
    */
@@ -653,11 +653,11 @@ export interface UpdateTriggerRequestSqsClientConfig {
   /**
    * @deprecated 
    */
-  accessKey?: string
+  accessKey?: string | null
   /**
    * @deprecated 
    */
-  secretKey?: string
+  secretKey?: string | null
 }
 
 
@@ -665,7 +665,7 @@ export type CreateCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the function to use the cron with.
    */
@@ -677,11 +677,11 @@ export type CreateCronRequest = {
   /**
    * Arguments to use with the cron.
    */
-  args?: Record<string, unknown>
+  args?: Record<string, unknown> | null
   /**
    * Name of the cron.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -689,7 +689,7 @@ export type CreateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hostname to create.
    */
@@ -705,11 +705,11 @@ export type CreateFunctionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the function to create.
    */
-  name?: string
+  name?: string | null
   /**
    * UUID of the namespace the function will be created in.
    */
@@ -717,58 +717,58 @@ export type CreateFunctionRequest = {
   /**
    * Environment variables of the function.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Minimum number of instances to scale the function to.
    */
-  minScale?: number
+  minScale?: number | null
   /**
    * Maximum number of instances to scale the function to.
    */
-  maxScale?: number
+  maxScale?: number | null
   /**
    * Runtime to use with the function.
    */
-  runtime?: FunctionRuntime
+  runtime?: FunctionRuntime | null
   /**
    * Memory limit of the function in MB.
    */
-  memoryLimit?: number
+  memoryLimit?: number | null
   /**
    * Request processing time limit for the function.
    */
-  timeout?: string
+  timeout?: string | null
   /**
    * Handler to use with the function.
    */
-  handler?: string
+  handler?: string | null
   /**
    * Privacy setting of the function.
    */
-  privacy?: FunctionPrivacy
+  privacy?: FunctionPrivacy | null
   /**
    * Description of the function.
    */
-  description?: string
-  secretEnvironmentVariables?: Secret[]
+  description?: string | null
+  secretEnvironmentVariables?: Secret[] | null
   /**
    * Possible values:
  - redirected: Responds to HTTP request with a 301 redirect to ask the clients to use HTTPS.
  - enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: FunctionHttpOption
+  httpOption?: FunctionHttpOption | null
   /**
    * Execution environment of the function.
    */
-  sandbox?: FunctionSandbox
+  sandbox?: FunctionSandbox | null
   /**
    * Tags of the Serverless Function.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * When connected to a Private Network, the function can access other Scaleway resources in this Private Network.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
 }
 
 
@@ -776,32 +776,32 @@ export type CreateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  name?: string
+  region?: ScwRegion | null
+  name?: string | null
   /**
    * Environment variables of the namespace.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * UUID of the project in which the namespace will be created.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Description of the namespace.
    */
-  description?: string
+  description?: string | null
   /**
    * Secret environment variables of the namespace.
    */
-  secretEnvironmentVariables?: Secret[]
+  secretEnvironmentVariables?: Secret[] | null
   /**
    * Tags of the Serverless Function Namespace.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * @deprecated Setting this field to true doesn't matter anymore. It will be removed in a near future.
    */
-  activateVpcIntegration?: boolean
+  activateVpcIntegration?: boolean | null
 }
 
 
@@ -809,27 +809,27 @@ export type CreateTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the function to associate the token with.
    *
    * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
-  functionId?: string
+  functionId?: string | null
   /**
    * UUID of the namespace to associate the token with.
    *
    * One-of ('scope'): at most one of 'functionId', 'namespaceId' could be set.
    */
-  namespaceId?: string
+  namespaceId?: string | null
   /**
    * Description of the token.
    */
-  description?: string
+  description?: string | null
   /**
    * Date on which the token expires.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -837,7 +837,7 @@ export type CreateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the trigger.
    */
@@ -849,25 +849,25 @@ export type CreateTriggerRequest = {
   /**
    * Description of the trigger.
    */
-  description?: string
+  description?: string | null
   /**
    * Configuration for a Scaleway Messaging and Queuing SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig
+  scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig | null
   /**
    * Configuration for a Scaleway Messaging and Queuing NATS subject.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig
+  scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig | null
   /**
    * @deprecated Configuration for an AWS SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  sqsConfig?: CreateTriggerRequestSqsClientConfig
+  sqsConfig?: CreateTriggerRequestSqsClientConfig | null
 }
 
 
@@ -875,7 +875,7 @@ export type DeleteCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the cron to delete.
    */
@@ -887,7 +887,7 @@ export type DeleteDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the domain to delete.
    */
@@ -899,7 +899,7 @@ export type DeleteFunctionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the function to delete.
    */
@@ -911,7 +911,7 @@ export type DeleteNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespace.
    */
@@ -923,7 +923,7 @@ export type DeleteTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the token to delete.
    */
@@ -935,7 +935,7 @@ export type DeleteTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the trigger to delete.
    */
@@ -947,7 +947,7 @@ export type DeployFunctionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the function to deploy.
    */
@@ -965,7 +965,7 @@ export type GetCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the cron to get.
    */
@@ -977,7 +977,7 @@ export type GetDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the domain to get.
    */
@@ -989,7 +989,7 @@ export type GetFunctionDownloadURLRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the function to get the download URL for.
    */
@@ -1001,7 +1001,7 @@ export type GetFunctionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the function.
    */
@@ -1013,7 +1013,7 @@ export type GetFunctionUploadURLRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the function to get the upload URL for.
    */
@@ -1029,7 +1029,7 @@ export type GetNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespace.
    */
@@ -1041,7 +1041,7 @@ export type GetTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the token to get.
    */
@@ -1053,7 +1053,7 @@ export type GetTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the trigger to get.
    */
@@ -1065,19 +1065,19 @@ export type ListCronsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of crons per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the crons.
    */
-  orderBy?: ListCronsRequestOrderBy
+  orderBy?: ListCronsRequestOrderBy | null
   /**
    * UUID of the function.
    */
@@ -1101,19 +1101,19 @@ export type ListDomainsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of domains per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the domains.
    */
-  orderBy?: ListDomainsRequestOrderBy
+  orderBy?: ListDomainsRequestOrderBy | null
   /**
    * UUID of the function the domain is associated with.
    */
@@ -1137,7 +1137,7 @@ export type ListFunctionRuntimesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
 }
 
 
@@ -1157,19 +1157,19 @@ export type ListFunctionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of functions per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the functions.
    */
-  orderBy?: ListFunctionsRequestOrderBy
+  orderBy?: ListFunctionsRequestOrderBy | null
   /**
    * UUID of the namespace the function belongs to.
    */
@@ -1177,15 +1177,15 @@ export type ListFunctionsRequest = {
   /**
    * Name of the function.
    */
-  name?: string
+  name?: string | null
   /**
    * UUID of the Organization the function belongs to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * UUID of the Project the function belongs to.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1205,31 +1205,31 @@ export type ListNamespacesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of namespaces per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the namespaces.
    */
-  orderBy?: ListNamespacesRequestOrderBy
+  orderBy?: ListNamespacesRequestOrderBy | null
   /**
    * Name of the namespace.
    */
-  name?: string
+  name?: string | null
   /**
    * UUID of the Organization the namespace belongs to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * UUID of the Project the namespace belongs to.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1246,27 +1246,27 @@ export type ListTokensRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of tokens per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order for the tokens.
    */
-  orderBy?: ListTokensRequestOrderBy
+  orderBy?: ListTokensRequestOrderBy | null
   /**
    * UUID of the function the token is associated with.
    */
-  functionId?: string
+  functionId?: string | null
   /**
    * UUID of the namespace the token is associated with.
    */
-  namespaceId?: string
+  namespaceId?: string | null
 }
 
 
@@ -1280,37 +1280,37 @@ export type ListTriggersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of triggers to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListTriggersRequestOrderBy
+  orderBy?: ListTriggersRequestOrderBy | null
   /**
    * ID of the function the triggers belongs to.
    *
    * One-of ('scope'): at most one of 'functionId', 'namespaceId', 'projectId' could be set.
    */
-  functionId?: string
+  functionId?: string | null
   /**
    * ID of the namespace the triggers belongs to.
    *
    * One-of ('scope'): at most one of 'functionId', 'namespaceId', 'projectId' could be set.
    */
-  namespaceId?: string
+  namespaceId?: string | null
   /**
    * ID of the project the triggers belongs to.
    *
    * One-of ('scope'): at most one of 'functionId', 'namespaceId', 'projectId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1330,7 +1330,7 @@ export type UpdateCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the cron to update.
    */
@@ -1338,19 +1338,19 @@ export type UpdateCronRequest = {
   /**
    * UUID of the function to use the cron with.
    */
-  functionId?: string
+  functionId?: string | null
   /**
    * Schedule of the cron in UNIX cron format.
    */
-  schedule?: string
+  schedule?: string | null
   /**
    * Arguments to use with the cron.
    */
-  args?: Record<string, unknown>
+  args?: Record<string, unknown> | null
   /**
    * Name of the cron.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1358,7 +1358,7 @@ export type UpdateFunctionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the function to update.
    */
@@ -1366,43 +1366,43 @@ export type UpdateFunctionRequest = {
   /**
    * Environment variables of the function to update.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Minimum number of instances to scale the function to.
    */
-  minScale?: number
+  minScale?: number | null
   /**
    * Maximum number of instances to scale the function to.
    */
-  maxScale?: number
+  maxScale?: number | null
   /**
    * Runtime to use with the function.
    */
-  runtime?: FunctionRuntime
+  runtime?: FunctionRuntime | null
   /**
    * Memory limit of the function in MB.
    */
-  memoryLimit?: number
+  memoryLimit?: number | null
   /**
    * Processing time limit for the function.
    */
-  timeout?: string
+  timeout?: string | null
   /**
    * Redeploy failed function.
    */
-  redeploy?: boolean
+  redeploy?: boolean | null
   /**
    * Handler to use with the function.
    */
-  handler?: string
+  handler?: string | null
   /**
    * Privacy setting of the function.
    */
-  privacy?: FunctionPrivacy
+  privacy?: FunctionPrivacy | null
   /**
    * Description of the function.
    */
-  description?: string
+  description?: string | null
   /**
    * During an update, secret environment variables that are not specified in this field will be kept unchanged.
 
@@ -1417,25 +1417,25 @@ For example, the following payload will delete the `TO_DELETE` secret environmen
 }
 ```.
    */
-  secretEnvironmentVariables?: Secret[]
+  secretEnvironmentVariables?: Secret[] | null
   /**
    * Possible values:
  - redirected: Responds to HTTP request with a 301 redirect to ask the clients to use HTTPS.
  - enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: FunctionHttpOption
+  httpOption?: FunctionHttpOption | null
   /**
    * Execution environment of the function.
    */
-  sandbox?: FunctionSandbox
+  sandbox?: FunctionSandbox | null
   /**
    * Tags of the Serverless Function.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * When connected to a Private Network, the function can access other Scaleway resources in this Private Network.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
 }
 
 
@@ -1443,7 +1443,7 @@ export type UpdateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespapce.
    */
@@ -1451,19 +1451,19 @@ export type UpdateNamespaceRequest = {
   /**
    * Environment variables of the namespace.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Description of the namespace.
    */
-  description?: string
+  description?: string | null
   /**
    * Secret environment variables of the namespace.
    */
-  secretEnvironmentVariables?: Secret[]
+  secretEnvironmentVariables?: Secret[] | null
   /**
    * Tags of the Serverless Function Namespace.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1471,7 +1471,7 @@ export type UpdateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the trigger to update.
    */
@@ -1479,17 +1479,17 @@ export type UpdateTriggerRequest = {
   /**
    * Name of the trigger.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the trigger.
    */
-  description?: string
+  description?: string | null
   /**
    * @deprecated Configuration for an AWS SQS queue.
    *
    * One-of ('config'): at most one of 'sqsConfig' could be set.
    */
-  sqsConfig?: UpdateTriggerRequestSqsClientConfig
+  sqsConfig?: UpdateTriggerRequestSqsClientConfig | null
 }
 
 

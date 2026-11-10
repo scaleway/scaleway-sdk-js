@@ -29,7 +29,7 @@ export const unmarshalFileSystem = (data: unknown): FileSystem => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     filesystemTypeId: data.filesystem_type_id,
     id: data.id,
     name: data.name,
@@ -41,7 +41,7 @@ export const unmarshalFileSystem = (data: unknown): FileSystem => {
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as FileSystem
 }
 
@@ -66,18 +66,18 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
-    parentFilesystem: data.parent_filesystem ? unmarshalSnapshotParentFilesystem(data.parent_filesystem) : undefined,
+    parentFilesystem: data.parent_filesystem ? unmarshalSnapshotParentFilesystem(data.parent_filesystem) : null,
     projectId: data.project_id,
     region: data.region,
-    size: data.size,
+    size: data.size ?? null,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Snapshot
 }
 
@@ -95,7 +95,7 @@ const unmarshalAttachment = (data: unknown): Attachment => {
     resourceId: data.resource_id,
     resourceType: data.resource_type,
     srn: data.srn,
-    zone: data.zone,
+    zone: data.zone ?? null,
   } as Attachment
 }
 
@@ -120,9 +120,9 @@ const unmarshalFileSystemType = (data: unknown): FileSystemType => {
   }
 
   return {
-    filesystemPriceGbPerHour: data.filesystem_price_gb_per_hour ? unmarshalMoney(data.filesystem_price_gb_per_hour) : undefined,
+    filesystemPriceGbPerHour: data.filesystem_price_gb_per_hour ? unmarshalMoney(data.filesystem_price_gb_per_hour) : null,
     name: data.name,
-    snapshotPriceGbPerHour: data.snapshot_price_gb_per_hour ? unmarshalMoney(data.snapshot_price_gb_per_hour) : undefined,
+    snapshotPriceGbPerHour: data.snapshot_price_gb_per_hour ? unmarshalMoney(data.snapshot_price_gb_per_hour) : null,
   } as FileSystemType
 }
 
@@ -191,11 +191,11 @@ export const marshalCreateFileSystemRequest = (
   type: request.type,  
   ...resolveOneOf([
     {param: 'from_empty',
-      value: (request.fromEmpty !== undefined) ? marshalCreateFileSystemRequestFromEmpty(request.fromEmpty, defaults)
+      value: (request.fromEmpty != null) ? marshalCreateFileSystemRequestFromEmpty(request.fromEmpty, defaults)
       : undefined,
     },
     {param: 'from_snapshot',
-      value: (request.fromSnapshot !== undefined) ? marshalCreateFileSystemRequestFromSnapshot(request.fromSnapshot, defaults)
+      value: (request.fromSnapshot != null) ? marshalCreateFileSystemRequestFromSnapshot(request.fromSnapshot, defaults)
       : undefined,
     },
   ]),

@@ -106,12 +106,12 @@ export interface CreateSecretsRequestSecretConfig {
    *
    * One-of ('pathOrEnvVar'): at most one of 'path', 'envVarName' could be set.
    */
-  path?: string
+  path?: string | null
   /**
    *
    * One-of ('pathOrEnvVar'): at most one of 'path', 'envVarName' could be set.
    */
-  envVarName?: string
+  envVarName?: string | null
 }
 
 
@@ -141,13 +141,13 @@ export interface Secret {
    *
    * One-of ('secretConfig'): at most one of 'file', 'envVar' could be set.
    */
-  file?: SecretFile
+  file?: SecretFile | null
   /**
    * Environment variable used to expose the secret.
    *
    * One-of ('secretConfig'): at most one of 'file', 'envVar' could be set.
    */
-  envVar?: SecretEnvVar
+  envVar?: SecretEnvVar | null
   /**
    * Region in which the secret reference exists.
    */
@@ -195,11 +195,11 @@ export interface JobDefinition {
   /**
    * Creation date of the job definition.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the job definition.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * CPU limit of the job (in mvCPU).
    */
@@ -219,7 +219,7 @@ export interface JobDefinition {
   /**
    * @deprecated Deprecated, please use startup_command instead.
    */
-  command?: string
+  command?: string | null
   /**
    * Environment variables of the job.
    */
@@ -227,7 +227,7 @@ export interface JobDefinition {
   /**
    * Timeout of the job in seconds.
    */
-  jobTimeout?: string
+  jobTimeout?: string | null
   /**
    * Description of the job.
    */
@@ -235,7 +235,7 @@ export interface JobDefinition {
   /**
    * Configure a cron for the job.
    */
-  cronSchedule?: CronSchedule
+  cronSchedule?: CronSchedule | null
   /**
    * Job startup command.
    */
@@ -247,7 +247,7 @@ export interface JobDefinition {
   /**
    * Retry behaviour in case of job failure.
    */
-  retryPolicy?: RetryPolicy
+  retryPolicy?: RetryPolicy | null
   /**
    * Region in which the job definition exists.
    */
@@ -277,23 +277,23 @@ export interface JobRun {
   /**
    * Creation date of the job run.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the job run.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Start date of the job run.
    */
-  startedAt?: Date
+  startedAt?: Date | null
   /**
    * Termination date of the job run.
    */
-  terminatedAt?: Date
+  terminatedAt?: Date | null
   /**
    * Duration of the job run.
    */
-  runDuration?: string
+  runDuration?: string | null
   /**
    * State of the job run.
    */
@@ -301,15 +301,15 @@ export interface JobRun {
   /**
    * Reason for failure if the job failed.
    */
-  reason?: JobRunReason
+  reason?: JobRunReason | null
   /**
    * Exit code of the job.
    */
-  exitCode?: number
+  exitCode?: number | null
   /**
    * Error message if the job failed.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * CPU limit of the job (in mvCPU).
    */
@@ -325,7 +325,7 @@ export interface JobRun {
   /**
    * @deprecated Deprecated, please use startup_command instead.
    */
-  command?: string
+  command?: string | null
   /**
    * Environment variables of the job run.
    */
@@ -341,7 +341,7 @@ export interface JobRun {
   /**
    * Number of run attempts.
    */
-  attempts?: number
+  attempts?: number | null
   /**
    * Region in which the job run exists.
    */
@@ -369,17 +369,17 @@ export interface Trigger {
   /**
    * Creation time of the trigger.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update time of the trigger.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Configuration of the CRON trigger.
    *
    * One-of ('config'): at most one of 'cronConfig' could be set.
    */
-  cronConfig?: TriggerCronConfig
+  cronConfig?: TriggerCronConfig | null
   /**
    * Region in which the trigger exists.
    */
@@ -388,13 +388,13 @@ export interface Trigger {
 
 
 export interface UpdateJobDefinitionRequestCronScheduleConfig {
-  schedule?: string
-  timezone?: string
+  schedule?: string | null
+  timezone?: string | null
 }
 
 
 export interface UpdateJobDefinitionRequestUpdateRetryPolicy {
-  maxRetries?: number
+  maxRetries?: number | null
 }
 
 
@@ -402,19 +402,19 @@ export interface UpdateTriggerRequestCronConfig {
   /**
    * CRON schedule in UNIX format.
    */
-  schedule?: string
+  schedule?: string | null
   /**
    * Time zone for the CRON schedule.
    */
-  timezone?: string
+  timezone?: string | null
   /**
    * Startup command that will be used by the triggered job.
    */
-  startupCommand?: string[]
+  startupCommand?: string[] | null
   /**
    * Arguments passed to the startup command used by the triggered job.
    */
-  args?: string[]
+  args?: string[] | null
 }
 
 
@@ -422,11 +422,11 @@ export type CreateJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the job definition.
    */
-  name?: string
+  name?: string | null
   /**
    * CPU limit of the job (in mvCPU).
    */
@@ -446,25 +446,25 @@ export type CreateJobDefinitionRequest = {
   /**
    * @deprecated Deprecated: please use startup_command instead.
    */
-  command?: string
+  command?: string | null
   /**
    * The main executable or entrypoint script to run.
 If both command and startup_command are provided, only startup_command will be used.
    */
-  startupCommand?: string[]
+  startupCommand?: string[] | null
   /**
    * Passed to the startup command at runtime.
 Environment variables and secrets can be included, and will be expanded before the arguments are used.
    */
-  args?: string[]
+  args?: string[] | null
   /**
    * UUID of the Scaleway Project containing the job.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Environment variables of the job.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Description of the job.
    */
@@ -472,15 +472,15 @@ Environment variables and secrets can be included, and will be expanded before t
   /**
    * Timeout of the job in seconds.
    */
-  jobTimeout?: string
+  jobTimeout?: string | null
   /**
    * Configure a cron for the job.
    */
-  cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig
+  cronSchedule?: CreateJobDefinitionRequestCronScheduleConfig | null
   /**
    * Retry policy upon a job failure.
    */
-  retryPolicy?: RetryPolicy
+  retryPolicy?: RetryPolicy | null
 }
 
 
@@ -488,7 +488,7 @@ export type CreateSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -512,7 +512,7 @@ export type CreateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -526,7 +526,7 @@ export type CreateTriggerRequest = {
    *
    * One-of ('config'): at most one of 'cronConfig' could be set.
    */
-  cronConfig?: CreateTriggerRequestCronConfig
+  cronConfig?: CreateTriggerRequestCronConfig | null
 }
 
 
@@ -534,7 +534,7 @@ export type DeleteJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition to delete.
    */
@@ -546,7 +546,7 @@ export type DeleteSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the secret reference within the job.
    */
@@ -558,7 +558,7 @@ export type DeleteTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the trigger.
    */
@@ -570,7 +570,7 @@ export type GetJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition to get.
    */
@@ -582,7 +582,7 @@ export type GetJobLimitsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
 }
 
 
@@ -590,7 +590,7 @@ export type GetJobRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job run to get.
    */
@@ -602,7 +602,7 @@ export type GetSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the secret reference within the job.
    */
@@ -614,7 +614,7 @@ export type GetTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the trigger.
    */
@@ -631,12 +631,12 @@ export type ListJobDefinitionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  page?: number
-  pageSize?: number
-  orderBy?: ListJobDefinitionsRequestOrderBy
-  projectId?: string
-  organizationId?: string
+  region?: ScwRegion | null
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListJobDefinitionsRequestOrderBy | null
+  projectId?: string | null
+  organizationId?: string | null
 }
 
 
@@ -650,7 +650,7 @@ export type ListJobResourcesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
 }
 
 
@@ -663,16 +663,16 @@ export type ListJobRunsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  page?: number
-  pageSize?: number
-  orderBy?: ListJobRunsRequestOrderBy
-  jobDefinitionId?: string
-  projectId?: string
-  organizationId?: string
-  state?: JobRunState
-  states?: JobRunState[]
-  reasons?: JobRunReason[]
+  region?: ScwRegion | null
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListJobRunsRequestOrderBy | null
+  jobDefinitionId?: string | null
+  projectId?: string | null
+  organizationId?: string | null
+  state?: JobRunState | null
+  states?: JobRunState[] | null
+  reasons?: JobRunReason[] | null
 }
 
 
@@ -686,7 +686,7 @@ export type ListSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -710,7 +710,7 @@ export type ListTriggersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition.
    */
@@ -718,15 +718,15 @@ export type ListTriggersRequest = {
   /**
    * Page number from paginated list of triggers.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of triggers per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sorting order of triggers.
    */
-  orderBy?: ListTriggersRequestOrderBy
+  orderBy?: ListTriggersRequestOrderBy | null
 }
 
 
@@ -746,7 +746,7 @@ export type StartJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition to start.
    */
@@ -755,27 +755,27 @@ export type StartJobDefinitionRequest = {
    * @deprecated If empty or not defined, the image's default command is used.
 Deprecated: please use startup_command instead.
    */
-  command?: string
+  command?: string | null
   /**
    * Overrides the default defined in the job image.
 The main executable or entrypoint script to run.
 If both command and startup_command are provided, only startup_command will be used.
    */
-  startupCommand?: string[]
+  startupCommand?: string[] | null
   /**
    * Overrides the default arguments defined in the job image.
 Passed to the contextual startup command at runtime.
 Environment variables and secrets can be included, and will be expanded before the arguments are used.
    */
-  args?: string[]
+  args?: string[] | null
   /**
    * Contextual environment variables for this specific job run.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Number of jobs to run.
    */
-  replicas?: number
+  replicas?: number | null
 }
 
 
@@ -791,7 +791,7 @@ export type StopJobRunRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job run to stop.
    */
@@ -803,7 +803,7 @@ export type UpdateJobDefinitionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the job definition to update.
    */
@@ -811,57 +811,57 @@ export type UpdateJobDefinitionRequest = {
   /**
    * Name of the job definition.
    */
-  name?: string
+  name?: string | null
   /**
    * CPU limit of the job (in mvCPU).
    */
-  cpuLimit?: number
+  cpuLimit?: number | null
   /**
    * Memory limit of the job (in MiB).
    */
-  memoryLimit?: number
+  memoryLimit?: number | null
   /**
    * Local storage capacity of the job (in MiB).
    */
-  localStorageCapacity?: number
+  localStorageCapacity?: number | null
   /**
    * Image to use for the job.
    */
-  imageUri?: string
+  imageUri?: string | null
   /**
    * @deprecated Deprecated: please use startup_command instead.
    */
-  command?: string
+  command?: string | null
   /**
    * The main executable or entrypoint script to run.
 If both command and startup_command are provided, only startup_command will be used.
    */
-  startupCommand?: string[]
+  startupCommand?: string[] | null
   /**
    * Passed to the startup command at runtime.
 Environment variables and secrets can be included, and will be expanded before the arguments are used.
    */
-  args?: string[]
+  args?: string[] | null
   /**
    * Environment variables of the job.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Description of the job.
    */
-  description?: string
+  description?: string | null
   /**
    * Timeout of the job in seconds.
    */
-  jobTimeout?: string
+  jobTimeout?: string | null
   /**
    * Configure a cron for the job.
    */
-  cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig
+  cronSchedule?: UpdateJobDefinitionRequestCronScheduleConfig | null
   /**
    * Retry policy upon a job failure.
    */
-  retryPolicy?: UpdateJobDefinitionRequestUpdateRetryPolicy
+  retryPolicy?: UpdateJobDefinitionRequestUpdateRetryPolicy | null
 }
 
 
@@ -869,7 +869,7 @@ export type UpdateSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the secret reference within the job.
    */
@@ -877,19 +877,19 @@ export type UpdateSecretRequest = {
   /**
    * Version of the secret in Secret Manager.
    */
-  secretManagerVersion?: string
+  secretManagerVersion?: string | null
   /**
    * Path of the secret to mount inside the job (either `path` or `env_var_name` must be set).
    *
    * One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set.
    */
-  path?: string
+  path?: string | null
   /**
    * Environment variable name used to expose the secret inside the job (either `path` or `env_var_name` must be set).
    *
    * One-of ('secretConfig'): at most one of 'path', 'envVarName' could be set.
    */
-  envVarName?: string
+  envVarName?: string | null
 }
 
 
@@ -897,7 +897,7 @@ export type UpdateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the trigger.
    */
@@ -905,13 +905,13 @@ export type UpdateTriggerRequest = {
   /**
    * Name of the trigger.
    */
-  name?: string
+  name?: string | null
   /**
    * Configuration of the CRON trigger.
    *
    * One-of ('config'): at most one of 'cronConfig' could be set.
    */
-  cronConfig?: UpdateTriggerRequestCronConfig
+  cronConfig?: UpdateTriggerRequestCronConfig | null
 }
 
 

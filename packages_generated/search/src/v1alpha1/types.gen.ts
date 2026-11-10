@@ -143,6 +143,16 @@ export interface VpcPrivateNetworkInfo {
 }
 
 
+export interface WoflDefinitionInfo {
+  workflowId: string
+}
+
+
+export interface WoflRunInfo {
+  workflowId: string
+}
+
+
 export interface Resource {
   /**
    * ID of the resource.
@@ -151,11 +161,11 @@ export interface Resource {
   /**
    * Name of the resource.
    */
-  name?: string
+  name?: string | null
   /**
    * ID of the Project the resource belongs to.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * ID of the Organization the resource belongs to.
    */
@@ -169,69 +179,79 @@ export interface Resource {
    *
    * One-of ('locality'): at most one of 'global', 'zone', 'region' could be set.
    */
-  global?: boolean
+  global?: boolean | null
   /**
    * Locality the resource is in if this is a zonal resource.
    *
    * One-of ('locality'): at most one of 'global', 'zone', 'region' could be set.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Locality the resource is in if this is a regional resource.
    *
    * One-of ('locality'): at most one of 'global', 'zone', 'region' could be set.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Additional information for a VPC Private Network.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
-  vpcPrivateNetworkInfo?: VpcPrivateNetworkInfo
+  vpcPrivateNetworkInfo?: VpcPrivateNetworkInfo | null
   /**
    * Additional information for a Serverless Function.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
-  serverlessFunctionsFunctionInfo?: ServerlessFunctionsFunctionInfo
+  serverlessFunctionsFunctionInfo?: ServerlessFunctionsFunctionInfo | null
   /**
    * Additional information for a Serverless Container.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
-  serverlessContainersContainerInfo?: ServerlessContainersContainerInfo
+  serverlessContainersContainerInfo?: ServerlessContainersContainerInfo | null
   /**
    * Additional information for a Serverless SQL database backup.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
-  serverlessSqldbBackupInfo?: ServerlessSqldbBackupInfo
+  serverlessSqldbBackupInfo?: ServerlessSqldbBackupInfo | null
   /**
    * Additional information for a Baremetal server.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
-  baremetalServerInfo?: BrmServerInfo
+  baremetalServerInfo?: BrmServerInfo | null
   /**
    * Additional information for an OBS datasource.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
-  obsDatasourceInfo?: ObsDatasourceInfo
+  obsDatasourceInfo?: ObsDatasourceInfo | null
   /**
    * Additional information for an OBS exporter.
    *
-   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo' could be set.
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
    */
-  obsExporterInfo?: ObsExporterInfo
+  obsExporterInfo?: ObsExporterInfo | null
   /**
    * Creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
+  /**
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
+   */
+  woflDefinitionInfo?: WoflDefinitionInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'vpcPrivateNetworkInfo', 'serverlessFunctionsFunctionInfo', 'serverlessContainersContainerInfo', 'serverlessSqldbBackupInfo', 'baremetalServerInfo', 'obsDatasourceInfo', 'obsExporterInfo', 'woflDefinitionInfo', 'woflRunInfo' could be set.
+   */
+  woflRunInfo?: WoflRunInfo | null
 }
 
 
@@ -243,47 +263,47 @@ export type SearchResourcesRequest = {
   /**
    * ID of the Organization to search in.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * List of Project IDs to filter the resources by.
    */
-  projectIds?: string[]
+  projectIds?: string[] | null
   /**
    * List of resource types to filter the resources by.
    */
-  types?: ResourceType[]
+  types?: ResourceType[] | null
   /**
    * List of scopes (zones, regions, or global) to filter the resources by.
    */
-  localities?: string[]
+  localities?: string[] | null
   /**
    * Filter resources created after this timestamp.
    */
-  createdAfter?: Date
+  createdAfter?: Date | null
   /**
    * Filter resources created before this timestamp.
    */
-  createdBefore?: Date
+  createdBefore?: Date | null
   /**
    * Filter resources modified after this timestamp.
    */
-  modifiedAfter?: Date
+  modifiedAfter?: Date | null
   /**
    * Filter resources modified before this timestamp.
    */
-  modifiedBefore?: Date
+  modifiedBefore?: Date | null
   /**
    * Leave empty or omit to fetch the first page.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of resources to retrieve per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order in the response.
    */
-  orderBy?: SearchResourcesRequestOrderBy
+  orderBy?: SearchResourcesRequestOrderBy | null
 }
 
 

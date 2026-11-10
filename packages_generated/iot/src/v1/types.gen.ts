@@ -110,7 +110,7 @@ If set to `reject`, all topics in the topics list will be denied, with all other
   /**
    * List of topics to accept or reject. It must be valid MQTT topics and up to 65535 characters.
    */
-  topics?: string[]
+  topics?: string[] | null
 }
 
 
@@ -118,11 +118,11 @@ export interface DeviceMessageFilters {
   /**
    * Filtering rule to restrict topics the device can publish to.
    */
-  publish?: DeviceMessageFiltersRule
+  publish?: DeviceMessageFiltersRule | null
   /**
    * Filtering rule to restrict topics the device can subscribe to.
    */
-  subscribe?: DeviceMessageFiltersRule
+  subscribe?: DeviceMessageFiltersRule | null
 }
 
 
@@ -161,7 +161,7 @@ export interface Device {
   /**
    * Last connection/activity date of a device.
    */
-  lastActivityAt?: Date
+  lastActivityAt?: Date | null
   /**
    * Defines whether the device is connected to the Hub.
    */
@@ -177,7 +177,7 @@ export interface Device {
   /**
    * Filter-sets to restrict the topics the device can publish/subscribe to.
    */
-  messageFilters?: DeviceMessageFilters
+  messageFilters?: DeviceMessageFilters | null
   /**
    * Assigning a custom certificate allows a device to authenticate using that specific certificate without checking the Hub's CA certificate.
    */
@@ -185,11 +185,11 @@ export interface Device {
   /**
    * Date at which the device was added.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date at which the device was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Region of the device.
    */
@@ -221,7 +221,7 @@ export interface Network {
   /**
    * Date at which the network was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * This prefix will be prepended to all topics for this Network.
    */
@@ -307,11 +307,11 @@ export interface Hub {
   /**
    * Hub creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Hub last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Project owning the resource.
    */
@@ -333,7 +333,7 @@ export interface Hub {
    *
    * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be set.
    */
-  twinsGraphiteConfig?: HubTwinsGraphiteConfig
+  twinsGraphiteConfig?: HubTwinsGraphiteConfig | null
 }
 
 
@@ -361,11 +361,11 @@ export interface RouteSummary {
   /**
    * Date at which the route was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date at which the route was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Region of the route.
    */
@@ -450,27 +450,27 @@ export interface RouteS3Config {
 
 
 export interface UpdateRouteRequestDatabaseConfig {
-  host?: string
-  port?: number
-  dbname?: string
-  username?: string
-  password?: string
-  query?: string
+  host?: string | null
+  port?: number | null
+  dbname?: string | null
+  username?: string | null
+  password?: string | null
+  query?: string | null
   engine: RouteDatabaseConfigEngine
 }
 
 
 export interface UpdateRouteRequestRestConfig {
   verb: RouteRestConfigHttpVerb
-  uri?: string
-  headers?: Record<string, string>
+  uri?: string | null
+  headers?: Record<string, string> | null
 }
 
 
 export interface UpdateRouteRequestS3Config {
-  bucketRegion?: string
-  bucketName?: string
-  objectPrefix?: string
+  bucketRegion?: string | null
+  bucketName?: string | null
+  objectPrefix?: string | null
   strategy: RouteS3ConfigS3Strategy
 }
 
@@ -479,11 +479,11 @@ export type CreateDeviceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device name.
    */
-  name?: string
+  name?: string | null
   /**
    * Hub ID of the device.
    */
@@ -499,11 +499,11 @@ export type CreateDeviceRequest = {
   /**
    * Filter-sets to authorize or deny the device to publish/subscribe to specific topics.
    */
-  messageFilters?: DeviceMessageFilters
+  messageFilters?: DeviceMessageFilters | null
   /**
    * Device description.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -511,11 +511,11 @@ export interface CreateDeviceResponse {
   /**
    * Information related to the created device.
    */
-  device?: Device
+  device?: Device | null
   /**
    * Device certificate.
    */
-  certificate?: Certificate
+  certificate?: Certificate | null
 }
 
 
@@ -523,15 +523,15 @@ export type CreateHubRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hub name (up to 255 characters).
    */
-  name?: string
+  name?: string | null
   /**
    * Project/Organization ID to filter for, only Hubs from this Project/Organization will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Hub product plan.
    */
@@ -539,17 +539,17 @@ export type CreateHubRequest = {
   /**
    * Disable Hub events.
    */
-  disableEvents?: boolean
+  disableEvents?: boolean | null
   /**
    * Topic prefix (default '$SCW/events') of Hub events.
    */
-  eventsTopicPrefix?: string
+  eventsTopicPrefix?: string | null
   /**
    * BETA - not implemented yet.
    *
    * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be set.
    */
-  twinsGraphiteConfig?: HubTwinsGraphiteConfig
+  twinsGraphiteConfig?: HubTwinsGraphiteConfig | null
 }
 
 
@@ -557,11 +557,11 @@ export type CreateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Network name.
    */
-  name?: string
+  name?: string | null
   /**
    * Type of network to connect with.
    */
@@ -581,7 +581,7 @@ export interface CreateNetworkResponse {
   /**
    * Information related to the created network.
    */
-  network?: Network
+  network?: Network | null
   /**
    * Endpoint Key to keep secret. This cannot be retrieved later.
    */
@@ -593,11 +593,11 @@ export type CreateRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route name.
    */
-  name?: string
+  name?: string | null
   /**
    * Hub ID of the route.
    */
@@ -611,19 +611,19 @@ export type CreateRouteRequest = {
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  s3Config?: CreateRouteRequestS3Config
+  s3Config?: CreateRouteRequestS3Config | null
   /**
    * If creating Database Route, DB-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  dbConfig?: CreateRouteRequestDatabaseConfig
+  dbConfig?: CreateRouteRequestDatabaseConfig | null
   /**
    * If creating Rest Route, Rest-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  restConfig?: CreateRouteRequestRestConfig
+  restConfig?: CreateRouteRequestRestConfig | null
 }
 
 
@@ -631,7 +631,7 @@ export type DeleteDeviceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -643,7 +643,7 @@ export type DeleteHubRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hub ID.
    */
@@ -651,7 +651,7 @@ export type DeleteHubRequest = {
   /**
    * Defines whether to force the deletion of devices added to this Hub or reject the operation.
    */
-  deleteDevices?: boolean
+  deleteDevices?: boolean | null
 }
 
 
@@ -659,7 +659,7 @@ export type DeleteNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Network ID.
    */
@@ -671,7 +671,7 @@ export type DeleteRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route ID.
    */
@@ -683,7 +683,7 @@ export type DeleteTwinDocumentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Twin ID.
    */
@@ -699,7 +699,7 @@ export type DeleteTwinDocumentsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Twin ID.
    */
@@ -711,7 +711,7 @@ export type DisableDeviceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -723,7 +723,7 @@ export type DisableHubRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hub ID.
    */
@@ -735,7 +735,7 @@ export type EnableDeviceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -747,7 +747,7 @@ export type EnableHubRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hub ID.
    */
@@ -759,7 +759,7 @@ export type GetDeviceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -771,7 +771,7 @@ export interface GetDeviceCertificateResponse {
   /**
    * Information related to the created device.
    */
-  device?: Device
+  device?: Device | null
   /**
    * Device certificate.
    */
@@ -783,7 +783,7 @@ export type GetDeviceMetricsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -791,7 +791,7 @@ export type GetDeviceMetricsRequest = {
   /**
    * Start date used to compute the best scale for the returned metrics.
    */
-  startDate?: Date
+  startDate?: Date | null
 }
 
 
@@ -807,7 +807,7 @@ export type GetDeviceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -819,7 +819,7 @@ export type GetHubCARequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   hubId: string
 }
 
@@ -833,7 +833,7 @@ export type GetHubMetricsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hub ID.
    */
@@ -841,7 +841,7 @@ export type GetHubMetricsRequest = {
   /**
    * Start date used to compute the best scale for returned metrics.
    */
-  startDate?: Date
+  startDate?: Date | null
 }
 
 
@@ -857,7 +857,7 @@ export type GetHubRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hub ID.
    */
@@ -869,7 +869,7 @@ export type GetNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Network ID.
    */
@@ -881,7 +881,7 @@ export type GetRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route ID.
    */
@@ -893,7 +893,7 @@ export type GetTwinDocumentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Twin ID.
    */
@@ -909,35 +909,35 @@ export type ListDevicesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of devices to return within a page. Maximum value is 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Ordering of requested devices.
    */
-  orderBy?: ListDevicesRequestOrderBy
+  orderBy?: ListDevicesRequestOrderBy | null
   /**
    * Name to filter for, only devices with this name will be returned.
    */
-  name?: string
+  name?: string | null
   /**
    * Hub ID to filter for, only devices attached to this Hub will be returned.
    */
-  hubId?: string
+  hubId?: string | null
   /**
    * Defines whether to filter the allow_insecure flag.
    */
-  allowInsecure?: boolean
+  allowInsecure?: boolean | null
   /**
    * Device status (enabled, disabled, etc.).
    */
-  status?: DeviceStatus
+  status?: DeviceStatus | null
 }
 
 
@@ -957,31 +957,31 @@ export type ListHubsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of Hubs to return within a page. Maximum value is 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sort order of Hubs in the response.
    */
-  orderBy?: ListHubsRequestOrderBy
+  orderBy?: ListHubsRequestOrderBy | null
   /**
    * Only list Hubs of this Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Only list Hubs of this Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Hub name.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1001,31 +1001,31 @@ export type ListNetworksRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of networks to return. The maximum value is 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Ordering of requested routes.
    */
-  orderBy?: ListNetworksRequestOrderBy
+  orderBy?: ListNetworksRequestOrderBy | null
   /**
    * Network name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Hub ID to filter for.
    */
-  hubId?: string
+  hubId?: string | null
   /**
    * Topic prefix to filter for.
    */
-  topicPrefix?: string
+  topicPrefix?: string | null
 }
 
 
@@ -1045,27 +1045,27 @@ export type ListRoutesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of routes to return within a page. Maximum value is 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Ordering of requested routes.
    */
-  orderBy?: ListRoutesRequestOrderBy
+  orderBy?: ListRoutesRequestOrderBy | null
   /**
    * Hub ID to filter for.
    */
-  hubId?: string
+  hubId?: string | null
   /**
    * Route name to filter for.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1085,7 +1085,7 @@ export type ListTwinDocumentsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Twin ID.
    */
@@ -1105,7 +1105,7 @@ export type PatchTwinDocumentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Twin ID.
    */
@@ -1117,7 +1117,7 @@ export type PatchTwinDocumentRequest = {
   /**
    * If set, ensures that the current version of the document matches before persisting the update.
    */
-  version?: number
+  version?: number | null
   /**
    * A json data that will be applied on the document's current data.
 Patching rules:
@@ -1126,7 +1126,7 @@ Patching rules:
 * If the patch object property is a value (number, strings, bool, arrays), it is replaced.
 * If the patch object property is an object, the previous rules will be applied recursively on it.
    */
-  data?: Record<string, unknown>
+  data?: Record<string, unknown> | null
 }
 
 
@@ -1134,7 +1134,7 @@ export type PutTwinDocumentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Twin ID.
    */
@@ -1146,11 +1146,11 @@ export type PutTwinDocumentRequest = {
   /**
    * If set, ensures that the current version of the document matches before persisting the update.
    */
-  version?: number
+  version?: number | null
   /**
    * New data that will replace the contents of the document.
    */
-  data?: Record<string, unknown>
+  data?: Record<string, unknown> | null
 }
 
 
@@ -1158,7 +1158,7 @@ export type RenewDeviceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -1170,11 +1170,11 @@ export interface RenewDeviceCertificateResponse {
   /**
    * Information related to the created device.
    */
-  device?: Device
+  device?: Device | null
   /**
    * Device certificate.
    */
-  certificate?: Certificate
+  certificate?: Certificate | null
 }
 
 
@@ -1202,29 +1202,29 @@ export interface Route {
   /**
    * Date at which the route was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * When using Amazon S3 Routes, Amazon S3-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  s3Config?: RouteS3Config
+  s3Config?: RouteS3Config | null
   /**
    * When using Database Route, DB-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  dbConfig?: RouteDatabaseConfig
+  dbConfig?: RouteDatabaseConfig | null
   /**
    * When using Rest Route, Rest-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  restConfig?: RouteRestConfig
+  restConfig?: RouteRestConfig | null
   /**
    * Date at which the route was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Region of the route.
    */
@@ -1236,7 +1236,7 @@ export type SetDeviceCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -1249,7 +1249,7 @@ export type SetDeviceCertificateRequest = {
 
 
 export interface SetDeviceCertificateResponse {
-  device?: Device
+  device?: Device | null
   certificatePem: string
 }
 
@@ -1258,7 +1258,7 @@ export type SetHubCARequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Hub ID.
    */
@@ -1290,7 +1290,7 @@ export interface TwinDocument {
   /**
    * New data related to the document.
    */
-  data?: Record<string, unknown>
+  data?: Record<string, unknown> | null
 }
 
 
@@ -1298,7 +1298,7 @@ export type UpdateDeviceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Device ID.
    */
@@ -1306,23 +1306,23 @@ export type UpdateDeviceRequest = {
   /**
    * Description for the device.
    */
-  description?: string
+  description?: string | null
   /**
    * Defines whether to allow plain and server-authenticated SSL connections in addition to mutually-authenticated ones.
    */
-  allowInsecure?: boolean
+  allowInsecure?: boolean | null
   /**
    * Defines whether to allow multiple physical devices to connect with this device's credentials.
    */
-  allowMultipleConnections?: boolean
+  allowMultipleConnections?: boolean | null
   /**
    * Filter-sets to restrict the topics the device can publish/subscribe to.
    */
-  messageFilters?: DeviceMessageFilters
+  messageFilters?: DeviceMessageFilters | null
   /**
    * Change Hub for this device, additional fees may apply, see IoT Hub pricing.
    */
-  hubId?: string
+  hubId?: string | null
 }
 
 
@@ -1330,7 +1330,7 @@ export type UpdateHubRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Hub you want to update.
    */
@@ -1338,29 +1338,29 @@ export type UpdateHubRequest = {
   /**
    * Hub name (up to 255 characters).
    */
-  name?: string
+  name?: string | null
   /**
    * Hub product plan.
    */
-  productPlan?: HubProductPlan
+  productPlan?: HubProductPlan | null
   /**
    * Disable Hub events.
    */
-  disableEvents?: boolean
+  disableEvents?: boolean | null
   /**
    * Topic prefix of Hub events.
    */
-  eventsTopicPrefix?: string
+  eventsTopicPrefix?: string | null
   /**
    * Enable device auto provisioning.
    */
-  enableDeviceAutoProvisioning?: boolean
+  enableDeviceAutoProvisioning?: boolean | null
   /**
    * BETA - not implemented yet.
    *
    * One-of ('twinsDbConfig'): at most one of 'twinsGraphiteConfig' could be set.
    */
-  twinsGraphiteConfig?: HubTwinsGraphiteConfig
+  twinsGraphiteConfig?: HubTwinsGraphiteConfig | null
 }
 
 
@@ -1368,7 +1368,7 @@ export type UpdateRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route id.
    */
@@ -1376,29 +1376,29 @@ export type UpdateRouteRequest = {
   /**
    * Route name.
    */
-  name?: string
+  name?: string | null
   /**
    * Topic the route subscribes to. It must be a valid MQTT topic and up to 65535 characters.
    */
-  topic?: string
+  topic?: string | null
   /**
    * When updating Amazon S3 Route, Amazon S3-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  s3Config?: UpdateRouteRequestS3Config
+  s3Config?: UpdateRouteRequestS3Config | null
   /**
    * When updating Database Route, DB-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  dbConfig?: UpdateRouteRequestDatabaseConfig
+  dbConfig?: UpdateRouteRequestDatabaseConfig | null
   /**
    * When updating Rest Route, Rest-specific configuration fields.
    *
    * One-of ('config'): at most one of 's3Config', 'dbConfig', 'restConfig' could be set.
    */
-  restConfig?: UpdateRouteRequestRestConfig
+  restConfig?: UpdateRouteRequestRestConfig | null
 }
 
 

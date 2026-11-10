@@ -95,12 +95,12 @@ const unmarshalScalewayLb = (data: unknown): ScalewayLb => {
   }
 
   return {
-    domainName: data.domain_name,
+    domainName: data.domain_name ?? null,
     frontendId: data.frontend_id,
-    hasWebsocket: data.has_websocket,
+    hasWebsocket: data.has_websocket ?? null,
     id: data.id,
-    isSsl: data.is_ssl,
-    privateNetworkId: data.private_network_id,
+    isSsl: data.is_ssl ?? null,
+    privateNetworkId: data.private_network_id ?? null,
     zone: data.zone,
   } as ScalewayLb
 }
@@ -125,9 +125,9 @@ const unmarshalScalewayS3BackendConfig = (data: unknown): ScalewayS3BackendConfi
   }
 
   return {
-    bucketName: data.bucket_name,
-    bucketRegion: data.bucket_region,
-    isWebsite: data.is_website,
+    bucketName: data.bucket_name ?? null,
+    bucketRegion: data.bucket_region ?? null,
+    isWebsite: data.is_website ?? null,
   } as ScalewayS3BackendConfig
 }
 
@@ -165,15 +165,15 @@ export const unmarshalBackendStage = (data: unknown): BackendStage => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     pipelineId: data.pipeline_id,
-    scalewayLb: data.scaleway_lb ? unmarshalScalewayLbBackendConfig(data.scaleway_lb) : undefined,
-    scalewayS3: data.scaleway_s3 ? unmarshalScalewayS3BackendConfig(data.scaleway_s3) : undefined,
-    scalewayServerlessContainer: data.scaleway_serverless_container ? unmarshalScalewayServerlessContainerBackendConfig(data.scaleway_serverless_container) : undefined,
-    scalewayServerlessFunction: data.scaleway_serverless_function ? unmarshalScalewayServerlessFunctionBackendConfig(data.scaleway_serverless_function) : undefined,
+    scalewayLb: data.scaleway_lb ? unmarshalScalewayLbBackendConfig(data.scaleway_lb) : null,
+    scalewayS3: data.scaleway_s3 ? unmarshalScalewayS3BackendConfig(data.scaleway_s3) : null,
+    scalewayServerlessContainer: data.scaleway_serverless_container ? unmarshalScalewayServerlessContainerBackendConfig(data.scaleway_serverless_container) : null,
+    scalewayServerlessFunction: data.scaleway_serverless_function ? unmarshalScalewayServerlessFunctionBackendConfig(data.scaleway_serverless_function) : null,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as BackendStage
 }
 
@@ -185,16 +185,16 @@ export const unmarshalCacheStage = (data: unknown): CacheStage => {
   }
 
   return {
-    backendStageId: data.backend_stage_id,
-    createdAt: unmarshalDate(data.created_at),
-    fallbackTtl: data.fallback_ttl,
+    backendStageId: data.backend_stage_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    fallbackTtl: data.fallback_ttl ?? null,
     id: data.id,
     includeCookies: data.include_cookies,
     pipelineId: data.pipeline_id,
-    routeStageId: data.route_stage_id,
+    routeStageId: data.route_stage_id ?? null,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-    wafStageId: data.waf_stage_id,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    wafStageId: data.waf_stage_id ?? null,
   } as CacheStage
 }
 
@@ -206,9 +206,9 @@ export const unmarshalDNSStage = (data: unknown): DNSStage => {
   }
 
   return {
-    backendStageId: data.backend_stage_id,
-    cacheStageId: data.cache_stage_id,
-    createdAt: unmarshalDate(data.created_at),
+    backendStageId: data.backend_stage_id ?? null,
+    cacheStageId: data.cache_stage_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     defaultFqdn: data.default_fqdn,
     defaultPrivateFqdn: data.default_private_fqdn,
     fqdns: data.fqdns,
@@ -216,9 +216,9 @@ export const unmarshalDNSStage = (data: unknown): DNSStage => {
     id: data.id,
     pipelineId: data.pipeline_id,
     status: data.status,
-    tlsStageId: data.tls_stage_id,
+    tlsStageId: data.tls_stage_id ?? null,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     wildcardDomain: data.wildcard_domain,
   } as DNSStage
 }
@@ -247,7 +247,7 @@ export const unmarshalPipeline = (data: unknown): Pipeline => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     errors: unmarshalArrayOfObject(data.errors, unmarshalPipelineError),
     id: data.id,
@@ -255,7 +255,7 @@ export const unmarshalPipeline = (data: unknown): Pipeline => {
     organizationId: data.organization_id,
     projectId: data.project_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vpcEndpointIds: data.vpc_endpoint_ids,
   } as Pipeline
 }
@@ -268,13 +268,13 @@ export const unmarshalRouteStage = (data: unknown): RouteStage => {
   }
 
   return {
-    backendStageId: data.backend_stage_id,
-    createdAt: unmarshalDate(data.created_at),
+    backendStageId: data.backend_stage_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     pipelineId: data.pipeline_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-    wafStageId: data.waf_stage_id,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    wafStageId: data.waf_stage_id ?? null,
   } as RouteStage
 }
 
@@ -299,18 +299,18 @@ export const unmarshalTLSStage = (data: unknown): TLSStage => {
   }
 
   return {
-    backendStageId: data.backend_stage_id,
-    cacheStageId: data.cache_stage_id,
-    certificateExpiresAt: unmarshalDate(data.certificate_expires_at),
-    createdAt: unmarshalDate(data.created_at),
+    backendStageId: data.backend_stage_id ?? null,
+    cacheStageId: data.cache_stage_id ?? null,
+    certificateExpiresAt: unmarshalDate(data.certificate_expires_at) ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     managedCertificate: data.managed_certificate,
     pipelineId: data.pipeline_id,
-    routeStageId: data.route_stage_id,
+    routeStageId: data.route_stage_id ?? null,
     secrets: unmarshalArrayOfObject(data.secrets, unmarshalTLSSecret),
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-    wafStageId: data.waf_stage_id,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    wafStageId: data.waf_stage_id ?? null,
   } as TLSStage
 }
 
@@ -334,15 +334,15 @@ export const unmarshalWafStage = (data: unknown): WafStage => {
   }
 
   return {
-    backendStageId: data.backend_stage_id,
-    createdAt: unmarshalDate(data.created_at),
+    backendStageId: data.backend_stage_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     exclusionRules: unmarshalArrayOfObject(data.exclusion_rules, unmarshalWafExclusionRule),
     id: data.id,
     mode: data.mode,
     paranoiaLevel: data.paranoia_level,
     pipelineId: data.pipeline_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as WafStage
 }
 
@@ -357,7 +357,7 @@ export const unmarshalPipelineStages = (data: unknown): PipelineStages => {
     backendStages: unmarshalArrayOfObject(data.backend_stages, unmarshalBackendStage),
     cacheStages: unmarshalArrayOfObject(data.cache_stages, unmarshalCacheStage),
     dnsStages: unmarshalArrayOfObject(data.dns_stages, unmarshalDNSStage),
-    pipeline: data.pipeline ? unmarshalPipeline(data.pipeline) : undefined,
+    pipeline: data.pipeline ? unmarshalPipeline(data.pipeline) : null,
     routeStages: unmarshalArrayOfObject(data.route_stages, unmarshalRouteStage),
     tlsStages: unmarshalArrayOfObject(data.tls_stages, unmarshalTLSStage),
     wafStages: unmarshalArrayOfObject(data.waf_stages, unmarshalWafStage),
@@ -372,13 +372,13 @@ export const unmarshalPurgeRequest = (data: unknown): PurgeRequest => {
   }
 
   return {
-    all: data.all,
-    assets: data.assets,
-    createdAt: unmarshalDate(data.created_at),
+    all: data.all ?? null,
+    assets: data.assets ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     pipelineId: data.pipeline_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as PurgeRequest
 }
 
@@ -390,12 +390,12 @@ export const unmarshalVPCEndpoint = (data: unknown): VPCEndpoint => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     region: data.region,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as VPCEndpoint
 }
 
@@ -433,9 +433,9 @@ const unmarshalRuleHttpMatch = (data: unknown): RuleHttpMatch => {
   }
 
   return {
-    hostFilter: data.host_filter ? unmarshalRuleHttpMatchHostFilter(data.host_filter) : undefined,
+    hostFilter: data.host_filter ? unmarshalRuleHttpMatchHostFilter(data.host_filter) : null,
     methodFilters: data.method_filters,
-    pathFilter: data.path_filter ? unmarshalRuleHttpMatchPathFilter(data.path_filter) : undefined,
+    pathFilter: data.path_filter ? unmarshalRuleHttpMatchPathFilter(data.path_filter) : null,
   } as RuleHttpMatch
 }
 
@@ -447,11 +447,11 @@ const unmarshalRouteRule = (data: unknown): RouteRule => {
   }
 
   return {
-    backendStageId: data.backend_stage_id,
+    backendStageId: data.backend_stage_id ?? null,
     position: data.position,
     routeStageId: data.route_stage_id,
-    ruleHttpMatch: data.rule_http_match ? unmarshalRuleHttpMatch(data.rule_http_match) : undefined,
-    wafStageId: data.waf_stage_id,
+    ruleHttpMatch: data.rule_http_match ? unmarshalRuleHttpMatch(data.rule_http_match) : null,
+    wafStageId: data.waf_stage_id ?? null,
   } as RouteRule
 }
 
@@ -529,7 +529,7 @@ const unmarshalPlanUsageDetails = (data: unknown): PlanUsageDetails => {
   }
 
   return {
-    planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : undefined,
+    planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : null,
   } as PlanUsageDetails
 }
 
@@ -541,19 +541,19 @@ export const unmarshalGetBillingResponse = (data: unknown): GetBillingResponse =
   }
 
   return {
-    currentPlan: data.current_plan ? unmarshalPlanDetails(data.current_plan) : undefined,
+    currentPlan: data.current_plan ? unmarshalPlanDetails(data.current_plan) : null,
     currentPlanCacheUsage: data.current_plan_cache_usage,
     currentPlanWafUsage: data.current_plan_waf_usage,
-    extraCacheCost: data.extra_cache_cost ? unmarshalMoney(data.extra_cache_cost) : undefined,
+    extraCacheCost: data.extra_cache_cost ? unmarshalMoney(data.extra_cache_cost) : null,
     extraCacheUsage: data.extra_cache_usage,
-    extraPipelinesCost: data.extra_pipelines_cost ? unmarshalMoney(data.extra_pipelines_cost) : undefined,
-    extraWafCost: data.extra_waf_cost ? unmarshalMoney(data.extra_waf_cost) : undefined,
+    extraPipelinesCost: data.extra_pipelines_cost ? unmarshalMoney(data.extra_pipelines_cost) : null,
+    extraWafCost: data.extra_waf_cost ? unmarshalMoney(data.extra_waf_cost) : null,
     extraWafUsage: data.extra_waf_usage,
     pipelineNumber: data.pipeline_number,
-    planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : undefined,
+    planCost: data.plan_cost ? unmarshalMoney(data.plan_cost) : null,
     plansUsageDetails: unmarshalMapOfObject(data.plans_usage_details, unmarshalPlanUsageDetails),
-    totalCost: data.total_cost ? unmarshalMoney(data.total_cost) : undefined,
-    wafAddOn: data.waf_add_on ? unmarshalMoney(data.waf_add_on) : undefined,
+    totalCost: data.total_cost ? unmarshalMoney(data.total_cost) : null,
+    wafAddOn: data.waf_add_on ? unmarshalMoney(data.waf_add_on) : null,
   } as GetBillingResponse
 }
 
@@ -565,7 +565,7 @@ const unmarshalHeadStageResponseHeadStage = (data: unknown): HeadStageResponseHe
   }
 
   return {
-    dnsStageId: data.dns_stage_id,
+    dnsStageId: data.dns_stage_id ?? null,
   } as HeadStageResponseHeadStage
 }
 
@@ -577,7 +577,7 @@ export const unmarshalHeadStageResponse = (data: unknown): HeadStageResponse => 
   }
 
   return {
-    headStage: data.head_stage ? unmarshalHeadStageResponseHeadStage(data.head_stage) : undefined,
+    headStage: data.head_stage ? unmarshalHeadStageResponseHeadStage(data.head_stage) : null,
   } as HeadStageResponse
 }
 
@@ -628,7 +628,7 @@ const unmarshalListHeadStagesResponseHeadStage = (data: unknown): ListHeadStages
   }
 
   return {
-    dnsStageId: data.dns_stage_id,
+    dnsStageId: data.dns_stage_id ?? null,
   } as ListHeadStagesResponseHeadStage
 }
 
@@ -845,9 +845,9 @@ const marshalRuleHttpMatch = (
   request: RuleHttpMatch,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  host_filter: ((request.hostFilter !== undefined) ?  marshalRuleHttpMatchHostFilter(request.hostFilter, defaults): undefined),
+  host_filter: ((request.hostFilter != null) ?  marshalRuleHttpMatchHostFilter(request.hostFilter, defaults): undefined),
   method_filters:  request.methodFilters,
-  path_filter: ((request.pathFilter !== undefined) ?  marshalRuleHttpMatchPathFilter(request.pathFilter, defaults): undefined),
+  path_filter: ((request.pathFilter != null) ?  marshalRuleHttpMatchPathFilter(request.pathFilter, defaults): undefined),
 })
 
 export const marshalSetRouteRulesRequestRouteRule = (
@@ -856,7 +856,7 @@ export const marshalSetRouteRulesRequestRouteRule = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'rule_http_match',
-      value: (request.ruleHttpMatch !== undefined) ? marshalRuleHttpMatch(request.ruleHttpMatch, defaults)
+      value: (request.ruleHttpMatch != null) ? marshalRuleHttpMatch(request.ruleHttpMatch, defaults)
       : undefined,
     },
   ]),  
@@ -874,7 +874,7 @@ export const marshalAddRouteRulesRequest = (
   request: AddRouteRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  route_rules: ((request.routeRules !== undefined) ?  request.routeRules.map(elt => marshalSetRouteRulesRequestRouteRule(elt, defaults)): undefined),  
+  route_rules: ((request.routeRules != null) ?  request.routeRules.map(elt => marshalSetRouteRulesRequestRouteRule(elt, defaults)): undefined),  
   ...resolveOneOf([
     {param: 'after_position',
       value: request.afterPosition,
@@ -911,7 +911,7 @@ export const marshalCheckLbOriginRequest = (
   request: CheckLbOriginRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  lb: ((request.lb !== undefined) ?  marshalScalewayLb(request.lb, defaults): undefined),
+  lb: ((request.lb != null) ?  marshalScalewayLb(request.lb, defaults): undefined),
 })
 
 const marshalCheckPEMChainRequestSecretChain = (
@@ -930,7 +930,7 @@ export const marshalCheckPEMChainRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,  
   ...resolveOneOf<Record<string, unknown> | string>([
     {param: 'secret',
-      value: (request.secret !== undefined) ? marshalCheckPEMChainRequestSecretChain(request.secret, defaults)
+      value: (request.secret != null) ? marshalCheckPEMChainRequestSecretChain(request.secret, defaults)
       : undefined,
     },
     {param: 'raw',
@@ -977,19 +977,19 @@ export const marshalCreateBackendStageRequest = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'scaleway_s3',
-      value: (request.scalewayS3 !== undefined) ? marshalScalewayS3BackendConfig(request.scalewayS3, defaults)
+      value: (request.scalewayS3 != null) ? marshalScalewayS3BackendConfig(request.scalewayS3, defaults)
       : undefined,
     },
     {param: 'scaleway_lb',
-      value: (request.scalewayLb !== undefined) ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults)
+      value: (request.scalewayLb != null) ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults)
       : undefined,
     },
     {param: 'scaleway_serverless_container',
-      value: (request.scalewayServerlessContainer !== undefined) ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
+      value: (request.scalewayServerlessContainer != null) ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
       : undefined,
     },
     {param: 'scaleway_serverless_function',
-      value: (request.scalewayServerlessFunction !== undefined) ? marshalScalewayServerlessFunctionBackendConfig(request.scalewayServerlessFunction, defaults)
+      value: (request.scalewayServerlessFunction != null) ? marshalScalewayServerlessFunctionBackendConfig(request.scalewayServerlessFunction, defaults)
       : undefined,
     },
   ]),
@@ -1085,7 +1085,7 @@ export const marshalCreateTLSStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   managed_certificate: request.managedCertificate,
-  secrets: ((request.secrets !== undefined) ?  request.secrets.map(elt => marshalTLSSecret(elt, defaults)): undefined),  
+  secrets: ((request.secrets != null) ?  request.secrets.map(elt => marshalTLSSecret(elt, defaults)): undefined),  
   ...resolveOneOf([
     {param: 'cache_stage_id',
       value: request.cacheStageId,
@@ -1129,7 +1129,7 @@ export const marshalCreateWafStageRequest = (
   request: CreateWafStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  exclusion_rules: ((request.exclusionRules !== undefined) ?  marshalWafExclusionRules(request.exclusionRules, defaults): undefined),
+  exclusion_rules: ((request.exclusionRules != null) ?  marshalWafExclusionRules(request.exclusionRules, defaults): undefined),
   mode: request.mode,
   paranoia_level: request.paranoiaLevel,  
   ...resolveOneOf([
@@ -1175,15 +1175,15 @@ export const marshalSetHeadStageRequest = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'add_new_head_stage',
-      value: (request.addNewHeadStage !== undefined) ? marshalSetHeadStageRequestAddNewHeadStage(request.addNewHeadStage, defaults)
+      value: (request.addNewHeadStage != null) ? marshalSetHeadStageRequestAddNewHeadStage(request.addNewHeadStage, defaults)
       : undefined,
     },
     {param: 'remove_head_stage',
-      value: (request.removeHeadStage !== undefined) ? marshalSetHeadStageRequestRemoveHeadStage(request.removeHeadStage, defaults)
+      value: (request.removeHeadStage != null) ? marshalSetHeadStageRequestRemoveHeadStage(request.removeHeadStage, defaults)
       : undefined,
     },
     {param: 'swap_head_stage',
-      value: (request.swapHeadStage !== undefined) ? marshalSetHeadStageRequestSwapHeadStage(request.swapHeadStage, defaults)
+      value: (request.swapHeadStage != null) ? marshalSetHeadStageRequestSwapHeadStage(request.swapHeadStage, defaults)
       : undefined,
     },
   ]),
@@ -1200,7 +1200,7 @@ export const marshalSetRouteRulesRequest = (
   request: SetRouteRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  route_rules: ((request.routeRules !== undefined) ?  request.routeRules.map(elt => marshalSetRouteRulesRequestRouteRule(elt, defaults)): undefined),
+  route_rules: ((request.routeRules != null) ?  request.routeRules.map(elt => marshalSetRouteRulesRequestRouteRule(elt, defaults)): undefined),
 })
 
 export const marshalUpdateBackendStageRequest = (
@@ -1210,19 +1210,19 @@ export const marshalUpdateBackendStageRequest = (
   pipeline_id: request.pipelineId,  
   ...resolveOneOf([
     {param: 'scaleway_s3',
-      value: (request.scalewayS3 !== undefined) ? marshalScalewayS3BackendConfig(request.scalewayS3, defaults)
+      value: (request.scalewayS3 != null) ? marshalScalewayS3BackendConfig(request.scalewayS3, defaults)
       : undefined,
     },
     {param: 'scaleway_lb',
-      value: (request.scalewayLb !== undefined) ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults)
+      value: (request.scalewayLb != null) ? marshalScalewayLbBackendConfig(request.scalewayLb, defaults)
       : undefined,
     },
     {param: 'scaleway_serverless_container',
-      value: (request.scalewayServerlessContainer !== undefined) ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
+      value: (request.scalewayServerlessContainer != null) ? marshalScalewayServerlessContainerBackendConfig(request.scalewayServerlessContainer, defaults)
       : undefined,
     },
     {param: 'scaleway_serverless_function',
-      value: (request.scalewayServerlessFunction !== undefined) ? marshalScalewayServerlessFunctionBackendConfig(request.scalewayServerlessFunction, defaults)
+      value: (request.scalewayServerlessFunction != null) ? marshalScalewayServerlessFunctionBackendConfig(request.scalewayServerlessFunction, defaults)
       : undefined,
     },
   ]),
@@ -1301,7 +1301,7 @@ export const marshalUpdateTLSStageRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   managed_certificate: request.managedCertificate,
-  tls_secrets_config: ((request.tlsSecretsConfig !== undefined) ?  marshalTLSSecretsConfig(request.tlsSecretsConfig, defaults): undefined),  
+  tls_secrets_config: ((request.tlsSecretsConfig != null) ?  marshalTLSSecretsConfig(request.tlsSecretsConfig, defaults): undefined),  
   ...resolveOneOf([
     {param: 'cache_stage_id',
       value: request.cacheStageId,
@@ -1322,7 +1322,7 @@ export const marshalUpdateWafStageRequest = (
   request: UpdateWafStageRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  exclusion_rules: ((request.exclusionRules !== undefined) ?  marshalWafExclusionRules(request.exclusionRules, defaults): undefined),
+  exclusion_rules: ((request.exclusionRules != null) ?  marshalWafExclusionRules(request.exclusionRules, defaults): undefined),
   mode: request.mode,
   paranoia_level: request.paranoiaLevel,  
   ...resolveOneOf([

@@ -54,11 +54,11 @@ export interface EphemeralPolicy {
   /**
    * Time frame, from one second and up to one year, during which the secret's versions are valid.
    */
-  timeToLive?: string
+  timeToLive?: string | null
   /**
    * Returns `true` if the version expires after a single user access.
    */
-  expiresOnceAccessed?: boolean
+  expiresOnceAccessed?: boolean | null
   /**
    * See the `EphemeralPolicy.Action` enum for a description of values.
    */
@@ -75,7 +75,7 @@ export interface BrowseSecretsResponseItemSecretDetails {
   tags: string[]
   versionCount: number
   protected: boolean
-  ephemeralPolicy?: EphemeralPolicy
+  ephemeralPolicy?: EphemeralPolicy | null
   type: SecretType
 }
 
@@ -84,11 +84,11 @@ export interface EphemeralProperties {
   /**
    * (Optional.) If not specified, the version does not have an expiration date.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * (Optional.) If not specified, the version can be accessed an unlimited amount of times.
    */
-  expiresOnceAccessed?: boolean
+  expiresOnceAccessed?: boolean | null
   /**
    * See `EphemeralPolicy.Action` enum for a description of values.
    */
@@ -98,18 +98,18 @@ export interface EphemeralProperties {
 
 export interface BrowseSecretsResponseItem {
   name: string
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt?: Date | null
+  updatedAt?: Date | null
   /**
    *
    * One-of ('details'): at most one of 'secret', 'folder' could be set.
    */
-  secret?: BrowseSecretsResponseItemSecretDetails
+  secret?: BrowseSecretsResponseItemSecretDetails | null
   /**
    *
    * One-of ('details'): at most one of 'secret', 'folder' could be set.
    */
-  folder?: BrowseSecretsResponseItemFolderDetails
+  folder?: BrowseSecretsResponseItemFolderDetails | null
 }
 
 
@@ -137,19 +137,19 @@ export interface SecretVersion {
   /**
    * Date and time of the version's creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update of the version.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date and time of the version's deletion.
    */
-  deletedAt?: Date
+  deletedAt?: Date | null
   /**
    * Description of the version.
    */
-  description?: string
+  description?: string | null
   /**
    * Returns `true` if the version is the latest.
    */
@@ -157,11 +157,11 @@ export interface SecretVersion {
   /**
    * Returns the version's expiration date, whether it expires after being accessed once, and the action to perform (disable or delete) once the version expires.
    */
-  ephemeralProperties?: EphemeralProperties
+  ephemeralProperties?: EphemeralProperties | null
   /**
    * Returns the time at which deletion was requested.
    */
-  deletionRequestedAt?: Date
+  deletionRequestedAt?: Date | null
   /**
    * Region of the version.
    */
@@ -194,11 +194,11 @@ export interface Secret {
   /**
    * Date and time of the secret's creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update of the secret.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * List of the secret's tags.
    */
@@ -210,7 +210,7 @@ export interface Secret {
   /**
    * Updated description of the secret.
    */
-  description?: string
+  description?: string | null
   /**
    * Returns `true` for secrets that are managed by another product.
    */
@@ -230,7 +230,7 @@ export interface Secret {
   /**
    * (Optional.) Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
    */
-  ephemeralPolicy?: EphemeralPolicy
+  ephemeralPolicy?: EphemeralPolicy | null
   /**
    * List of Scaleway resources that can access and manage the secret.
    */
@@ -238,11 +238,11 @@ export interface Secret {
   /**
    * Returns the time at which deletion was requested.
    */
-  deletionRequestedAt?: Date
+  deletionRequestedAt?: Date | null
   /**
    * (Optional.) The Scaleway Key Manager key ID used to encrypt and decrypt secret versions.
    */
-  keyId?: string
+  keyId?: string | null
   /**
    * Region of the secret.
    */
@@ -254,7 +254,7 @@ export type AccessSecretVersionByPathRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The first version of the secret is numbered 1, and all subsequent revisions augment by 1. Value can be either:
 - an integer (the revision number)
@@ -273,7 +273,7 @@ export type AccessSecretVersionByPathRequest = {
   /**
    * ID of the Project to target.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -281,7 +281,7 @@ export type AccessSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -312,7 +312,7 @@ export interface AccessSecretVersionResponse {
   /**
    * This field is only available if a CRC32 was supplied during the creation of the version.
    */
-  dataCrc32?: number
+  dataCrc32?: number | null
   /**
    * See the `Secret.Type` enum for a description of values.
    */
@@ -324,7 +324,7 @@ export type AddSecretOwnerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -332,7 +332,7 @@ export type AddSecretOwnerRequest = {
   /**
    * See `Product` enum for description of values.
    */
-  product?: Product
+  product?: Product | null
 }
 
 
@@ -352,26 +352,26 @@ export type BrowseSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Filter by Project ID (optional).
    */
-  projectId?: string
-  orderBy?: BrowseSecretsRequestOrderBy
+  projectId?: string | null
+  orderBy?: BrowseSecretsRequestOrderBy | null
   /**
    * Filter secrets and folders for a given prefix (default /).
    */
   prefix: string
-  page?: number
-  pageSize?: number
+  page?: number | null
+  pageSize?: number | null
   /**
    * Filter secrets by tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by secret type (optional).
    */
-  type?: SecretType
+  type?: SecretType | null
 }
 
 
@@ -395,35 +395,35 @@ export type CreateSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project containing the secret.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the secret.
    */
-  name?: string
+  name?: string | null
   /**
    * List of the secret's tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Description of the secret.
    */
-  description?: string
+  description?: string | null
   /**
    * (Optional.) See the `Secret.Type` enum for a description of values. If not specified, the type is `Opaque`.
    */
-  type?: SecretType
+  type?: SecretType | null
   /**
    * (Optional.) Location of the secret in the directory structure. If not specified, the path is `/`.
    */
-  path?: string
+  path?: string | null
   /**
    * (Optional.) Policy that defines whether/when a secret's versions expire. By default, the policy is applied to all the secret's versions.
    */
-  ephemeralPolicy?: EphemeralPolicy
+  ephemeralPolicy?: EphemeralPolicy | null
   /**
    * A protected secret cannot be deleted.
    */
@@ -431,7 +431,7 @@ export type CreateSecretRequest = {
   /**
    * (Optional.) The Scaleway Key Manager key ID will be used to encrypt and decrypt secret versions. If not specified, Secret Manager will use a Key Manager internal key.
    */
-  keyId?: string
+  keyId?: string | null
 }
 
 
@@ -439,7 +439,7 @@ export type CreateSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -451,15 +451,15 @@ export type CreateSecretVersionRequest = {
   /**
    * Description of the version.
    */
-  description?: string
+  description?: string | null
   /**
    * (Optional.) If there is no previous version or if the previous version was already disabled, does nothing.
    */
-  disablePrevious?: boolean
+  disablePrevious?: boolean | null
   /**
    * If specified, Secret Manager will verify the integrity of the data received against the given CRC32 checksum. An error is returned if the CRC32 does not match. If, however, the CRC32 matches, it will be stored and returned along with the SecretVersion on future access requests.
    */
-  dataCrc32?: number
+  dataCrc32?: number | null
 }
 
 
@@ -495,7 +495,7 @@ export type DeleteSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -507,7 +507,7 @@ export type DeleteSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -526,7 +526,7 @@ export type DisableSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -545,7 +545,7 @@ export type EnableSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -564,7 +564,7 @@ export type GetSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -576,7 +576,7 @@ export type GetSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -595,13 +595,13 @@ export type ListSecretTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to target.
    */
-  projectId?: string
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -621,17 +621,17 @@ export type ListSecretVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
   secretId: string
-  page?: number
-  pageSize?: number
+  page?: number | null
+  pageSize?: number | null
   /**
    * Filter results by status.
    */
-  status?: SecretVersionStatus[]
+  status?: SecretVersionStatus[] | null
 }
 
 
@@ -651,38 +651,38 @@ export type ListSecretsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Filter by Organization ID (optional).
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by Project ID (optional).
    */
-  projectId?: string
-  orderBy?: ListSecretsRequestOrderBy
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  orderBy?: ListSecretsRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
   /**
    * List of tags to filter on (optional).
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by secret name (optional).
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by exact path (optional).
    */
-  path?: string
+  path?: string | null
   /**
    * Filter by ephemeral / not ephemeral (optional).
    */
-  ephemeral?: boolean
+  ephemeral?: boolean | null
   /**
    * Filter by secret type (optional).
    */
-  type?: SecretType
+  type?: SecretType | null
   /**
    * Filter by whether the secret was scheduled for deletion / not scheduled for deletion. By default, it will display only not scheduled for deletion secrets.
    */
@@ -706,13 +706,13 @@ export type ListTagsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to target.
    */
-  projectId?: string
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -732,7 +732,7 @@ export type ProtectSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret to enable secret protection for.
    */
@@ -744,7 +744,7 @@ export type RestoreSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   secretId: string
 }
 
@@ -753,7 +753,7 @@ export type RestoreSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   secretId: string
   revision: string
 }
@@ -771,7 +771,7 @@ export type UnprotectSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret to disable secret protection for.
    */
@@ -783,7 +783,7 @@ export type UpdateSecretRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -791,23 +791,23 @@ export type UpdateSecretRequest = {
   /**
    * Secret's updated name (optional).
    */
-  name?: string
+  name?: string | null
   /**
    * Secret's updated list of tags (optional).
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Description of the secret.
    */
-  description?: string
+  description?: string | null
   /**
    * (Optional.) Location of the folder in the directory structure. If not specified, the path is `/`.
    */
-  path?: string
+  path?: string | null
   /**
    * (Optional.) Policy that defines whether/when a secret's versions expire.
    */
-  ephemeralPolicy?: EphemeralPolicy
+  ephemeralPolicy?: EphemeralPolicy | null
 }
 
 
@@ -815,7 +815,7 @@ export type UpdateSecretVersionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the secret.
    */
@@ -830,11 +830,11 @@ export type UpdateSecretVersionRequest = {
   /**
    * Description of the version.
    */
-  description?: string
+  description?: string | null
   /**
    * (Optional.) Properties that defines the version's expiration date, whether it expires after being accessed once, and the action to perform (disable or delete) once the version expires.
    */
-  ephemeralProperties?: EphemeralProperties
+  ephemeralProperties?: EphemeralProperties | null
 }
 
 

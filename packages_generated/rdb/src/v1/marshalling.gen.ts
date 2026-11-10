@@ -134,14 +134,14 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   }
 
   return {
-    directAccess: data.direct_access ? unmarshalEndpointDirectAccessDetails(data.direct_access) : undefined,
-    hostname: data.hostname,
+    directAccess: data.direct_access ? unmarshalEndpointDirectAccessDetails(data.direct_access) : null,
+    hostname: data.hostname ?? null,
     id: data.id,
-    ip: data.ip,
-    loadBalancer: data.load_balancer ? unmarshalEndpointLoadBalancerDetails(data.load_balancer) : undefined,
-    name: data.name,
+    ip: data.ip ?? null,
+    loadBalancer: data.load_balancer ? unmarshalEndpointLoadBalancerDetails(data.load_balancer) : null,
+    name: data.name ?? null,
     port: data.port,
-    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : undefined,
+    privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : null,
   } as Endpoint
 }
 
@@ -153,13 +153,13 @@ export const unmarshalMaintenance = (data: unknown): Maintenance => {
   }
 
   return {
-    closedAt: unmarshalDate(data.closed_at),
-    forcedAt: unmarshalDate(data.forced_at),
+    closedAt: unmarshalDate(data.closed_at) ?? null,
+    forcedAt: unmarshalDate(data.forced_at) ?? null,
     isApplicable: data.is_applicable,
     reason: data.reason,
-    startsAt: unmarshalDate(data.starts_at),
+    startsAt: unmarshalDate(data.starts_at) ?? null,
     status: data.status,
-    stopsAt: unmarshalDate(data.stops_at),
+    stopsAt: unmarshalDate(data.stops_at) ?? null,
   } as Maintenance
 }
 
@@ -188,20 +188,20 @@ export const unmarshalDatabaseBackup = (data: unknown): DatabaseBackup => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     databaseName: data.database_name,
-    downloadUrl: data.download_url,
-    downloadUrlExpiresAt: unmarshalDate(data.download_url_expires_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    downloadUrl: data.download_url ?? null,
+    downloadUrlExpiresAt: unmarshalDate(data.download_url_expires_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     instanceId: data.instance_id,
     instanceName: data.instance_name,
     name: data.name,
     region: data.region,
     sameRegion: data.same_region,
-    size: data.size,
+    size: data.size ?? null,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as DatabaseBackup
 }
 
@@ -228,9 +228,9 @@ export const unmarshalInstanceLog = (data: unknown): InstanceLog => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    downloadUrl: data.download_url,
-    expiresAt: unmarshalDate(data.expires_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    downloadUrl: data.download_url ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     nodeName: data.node_name,
     region: data.region,
@@ -248,7 +248,7 @@ export const unmarshalBackupSchedule = (data: unknown): BackupSchedule => {
   return {
     disabled: data.disabled,
     frequency: data.frequency,
-    nextRunAt: unmarshalDate(data.next_run_at),
+    nextRunAt: unmarshalDate(data.next_run_at) ?? null,
     retention: data.retention,
   } as BackupSchedule
 }
@@ -286,8 +286,8 @@ const unmarshalLogsPolicy = (data: unknown): LogsPolicy => {
   }
 
   return {
-    maxAgeRetention: data.max_age_retention,
-    totalDiskRetention: data.total_disk_retention,
+    maxAgeRetention: data.max_age_retention ?? null,
+    totalDiskRetention: data.total_disk_retention ?? null,
   } as LogsPolicy
 }
 
@@ -329,17 +329,17 @@ export const unmarshalInstance = (data: unknown): Instance => {
 
   return {
     backupSameRegion: data.backup_same_region,
-    backupSchedule: data.backup_schedule ? unmarshalBackupSchedule(data.backup_schedule) : undefined,
-    createdAt: unmarshalDate(data.created_at),
-    encryption: data.encryption ? unmarshalEncryptionAtRest(data.encryption) : undefined,
-    endpoint: data.endpoint ? unmarshalEndpoint(data.endpoint) : undefined,
+    backupSchedule: data.backup_schedule ? unmarshalBackupSchedule(data.backup_schedule) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    encryption: data.encryption ? unmarshalEncryptionAtRest(data.encryption) : null,
+    endpoint: data.endpoint ? unmarshalEndpoint(data.endpoint) : null,
     endpoints: unmarshalArrayOfObject(data.endpoints, unmarshalEndpoint),
     engine: data.engine,
     highAvailabilityMode: data.high_availability_mode,
     id: data.id,
     initSettings: unmarshalArrayOfObject(data.init_settings, unmarshalInstanceSetting),
     isHaCluster: data.is_ha_cluster,
-    logsPolicy: data.logs_policy ? unmarshalLogsPolicy(data.logs_policy) : undefined,
+    logsPolicy: data.logs_policy ? unmarshalLogsPolicy(data.logs_policy) : null,
     maintenances: unmarshalArrayOfObject(data.maintenances, unmarshalMaintenance),
     name: data.name,
     nodeType: data.node_type,
@@ -351,7 +351,7 @@ export const unmarshalInstance = (data: unknown): Instance => {
     status: data.status,
     tags: data.tags,
     upgradableVersion: unmarshalArrayOfObject(data.upgradable_version, unmarshalUpgradableVersion),
-    volume: data.volume ? unmarshalVolume(data.volume) : undefined,
+    volume: data.volume ? unmarshalVolume(data.volume) : null,
   } as Instance
 }
 
@@ -390,18 +390,18 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     instanceId: data.instance_id,
     instanceName: data.instance_name,
     name: data.name,
     nodeType: data.node_type,
     region: data.region,
-    size: data.size,
+    size: data.size ?? null,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-    volumeType: data.volume_type ? unmarshalSnapshotVolumeType(data.volume_type) : undefined,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    volumeType: data.volume_type ? unmarshalSnapshotVolumeType(data.volume_type) : null,
   } as Snapshot
 }
 
@@ -430,7 +430,7 @@ export const unmarshalACLRule = (data: unknown): ACLRule => {
     description: data.description,
     direction: data.direction,
     ip: data.ip,
-    port: data.port,
+    port: data.port ?? null,
     protocol: data.protocol,
   } as ACLRule
 }
@@ -518,15 +518,15 @@ const unmarshalEngineSetting = (data: unknown): EngineSetting => {
   return {
     defaultValue: data.default_value,
     description: data.description,
-    floatMax: data.float_max,
-    floatMin: data.float_min,
+    floatMax: data.float_max ?? null,
+    floatMin: data.float_min ?? null,
     hotConfigurable: data.hot_configurable,
-    intMax: data.int_max,
-    intMin: data.int_min,
+    intMax: data.int_max ?? null,
+    intMin: data.int_min ?? null,
     name: data.name,
     propertyType: data.property_type,
-    stringConstraint: data.string_constraint,
-    unit: data.unit,
+    stringConstraint: data.string_constraint ?? null,
+    unit: data.unit ?? null,
   } as EngineSetting
 }
 
@@ -542,9 +542,9 @@ const unmarshalEngineVersion = (data: unknown): EngineVersion => {
     availableSettings: unmarshalArrayOfObject(data.available_settings, unmarshalEngineSetting),
     beta: data.beta,
     disabled: data.disabled,
-    endOfLife: unmarshalDate(data.end_of_life),
+    endOfLife: unmarshalDate(data.end_of_life) ?? null,
     name: data.name,
-    releaseDate: unmarshalDate(data.release_date),
+    releaseDate: unmarshalDate(data.release_date) ?? null,
     version: data.version,
   } as EngineVersion
 }
@@ -697,14 +697,14 @@ const unmarshalNodeType = (data: unknown): NodeType => {
     disabled: data.disabled,
     generation: data.generation,
     instanceRange: data.instance_range,
-    isBssdCompatible: data.is_bssd_compatible,
+    isBssdCompatible: data.is_bssd_compatible ?? null,
     isHaRequired: data.is_ha_required,
     memory: data.memory,
     name: data.name,
     region: data.region,
     stockStatus: data.stock_status,
     vcpus: data.vcpus,
-    volumeConstraint: data.volume_constraint ? unmarshalNodeTypeVolumeConstraintSizes(data.volume_constraint) : undefined,
+    volumeConstraint: data.volume_constraint ? unmarshalNodeTypeVolumeConstraintSizes(data.volume_constraint) : null,
   } as NodeType
 }
 
@@ -873,7 +873,7 @@ const marshalEndpointSpecPrivateNetwork = (
       value: request.serviceIp,
     },
     {param: 'ipam_config',
-      value: (request.ipamConfig !== undefined) ? marshalEndpointSpecPrivateNetworkIpamConfig(request.ipamConfig, defaults)
+      value: (request.ipamConfig != null) ? marshalEndpointSpecPrivateNetworkIpamConfig(request.ipamConfig, defaults)
       : undefined,
     },
   ]),
@@ -885,11 +885,11 @@ const marshalEndpointSpec = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'load_balancer',
-      value: (request.loadBalancer !== undefined) ? marshalEndpointSpecLoadBalancer(request.loadBalancer, defaults)
+      value: (request.loadBalancer != null) ? marshalEndpointSpecLoadBalancer(request.loadBalancer, defaults)
       : undefined,
     },
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalEndpointSpecPrivateNetwork(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalEndpointSpecPrivateNetwork(request.privateNetwork, defaults)
       : undefined,
     },
   ]),
@@ -899,7 +899,7 @@ export const marshalCreateEndpointRequest = (
   request: CreateEndpointRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec: ((request.endpointSpec !== undefined) ?  marshalEndpointSpec(request.endpointSpec, defaults): undefined),
+  endpoint_spec: ((request.endpointSpec != null) ?  marshalEndpointSpec(request.endpointSpec, defaults): undefined),
 })
 
 export const marshalCreateInstanceFromSnapshotRequest = (
@@ -925,11 +925,11 @@ export const marshalCreateInstanceRequest = (
 ): Record<string, unknown> => ({
   backup_same_region: request.backupSameRegion,
   disable_backup: request.disableBackup,
-  encryption: ((request.encryption !== undefined) ?  marshalEncryptionAtRest(request.encryption, defaults): undefined),
+  encryption: ((request.encryption != null) ?  marshalEncryptionAtRest(request.encryption, defaults): undefined),
   engine: request.engine,
   high_availability_mode: request.highAvailabilityMode,
-  init_endpoints: ((request.initEndpoints !== undefined) ?  request.initEndpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
-  init_settings: ((request.initSettings !== undefined) ?  request.initSettings.map(elt => marshalInstanceSetting(elt, defaults)): undefined),
+  init_endpoints: ((request.initEndpoints != null) ?  request.initEndpoints.map(elt => marshalEndpointSpec(elt, defaults)): undefined),
+  init_settings: ((request.initSettings != null) ?  request.initSettings.map(elt => marshalInstanceSetting(elt, defaults)): undefined),
   is_ha_cluster: request.isHaCluster,
   name: request.name || randomName('ins'),
   node_type: request.nodeType,
@@ -970,7 +970,7 @@ const marshalReadReplicaEndpointSpecPrivateNetwork = (
       value: request.serviceIp,
     },
     {param: 'ipam_config',
-      value: (request.ipamConfig !== undefined) ? marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig(request.ipamConfig, defaults)
+      value: (request.ipamConfig != null) ? marshalReadReplicaEndpointSpecPrivateNetworkIpamConfig(request.ipamConfig, defaults)
       : undefined,
     },
   ]),
@@ -982,11 +982,11 @@ const marshalReadReplicaEndpointSpec = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'direct_access',
-      value: (request.directAccess !== undefined) ? marshalReadReplicaEndpointSpecDirectAccess(request.directAccess, defaults)
+      value: (request.directAccess != null) ? marshalReadReplicaEndpointSpecDirectAccess(request.directAccess, defaults)
       : undefined,
     },
     {param: 'private_network',
-      value: (request.privateNetwork !== undefined) ? marshalReadReplicaEndpointSpecPrivateNetwork(request.privateNetwork, defaults)
+      value: (request.privateNetwork != null) ? marshalReadReplicaEndpointSpecPrivateNetwork(request.privateNetwork, defaults)
       : undefined,
     },
   ]),
@@ -1003,7 +1003,7 @@ export const marshalCreateReadReplicaRequest = (
   request: CreateReadReplicaRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  endpoint_spec: ((request.endpointSpec !== undefined) ?  request.endpointSpec.map(elt => marshalReadReplicaEndpointSpec(elt, defaults)): undefined),
+  endpoint_spec: ((request.endpointSpec != null) ?  request.endpointSpec.map(elt => marshalReadReplicaEndpointSpec(elt, defaults)): undefined),
   instance_id: request.instanceId,
   same_zone: request.sameZone,
 })
@@ -1117,7 +1117,7 @@ export const marshalUpdateInstanceRequest = (
   backup_schedule_retention: request.backupScheduleRetention,
   backup_schedule_start_hour: request.backupScheduleStartHour,
   is_backup_schedule_disabled: request.isBackupScheduleDisabled,
-  logs_policy: ((request.logsPolicy !== undefined) ?  marshalLogsPolicy(request.logsPolicy, defaults): undefined),
+  logs_policy: ((request.logsPolicy != null) ?  marshalLogsPolicy(request.logsPolicy, defaults): undefined),
   name: request.name,
   tags: request.tags,
 })
@@ -1170,7 +1170,7 @@ export const marshalUpgradeInstanceRequest = (
       value: request.upgradableVersionId,
     },
     {param: 'major_upgrade_workflow',
-      value: (request.majorUpgradeWorkflow !== undefined) ? marshalUpgradeInstanceRequestMajorUpgradeWorkflow(request.majorUpgradeWorkflow, defaults)
+      value: (request.majorUpgradeWorkflow != null) ? marshalUpgradeInstanceRequestMajorUpgradeWorkflow(request.majorUpgradeWorkflow, defaults)
       : undefined,
     },
     {param: 'enable_encryption',

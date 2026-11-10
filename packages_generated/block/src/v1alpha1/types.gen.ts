@@ -76,7 +76,7 @@ export interface Reference {
   /**
    * Creation date of the reference.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Type of reference (link, exclusive, read_only).
    */
@@ -112,7 +112,7 @@ export interface VolumeSpecifications {
   /**
    * The maximum IO/s expected, according to the different options available in stock (`5000 | 15000`).
    */
-  perfIops?: number
+  perfIops?: number | null
   /**
    * The storage class of the volume.
    */
@@ -133,7 +133,7 @@ export interface CreateVolumeRequestFromSnapshot {
    * Must be compliant with the minimum (1 GB) and maximum (10 TB) allowed size.
 Size is optional and is used only if a resize of the volume is requested, otherwise original snapshot size will be used.
    */
-  size?: number
+  size?: number | null
   /**
    * Source snapshot from which volume will be created.
    */
@@ -153,7 +153,7 @@ export interface Snapshot {
   /**
    * If the parent volume was deleted, value is null.
    */
-  parentVolume?: SnapshotParentVolume
+  parentVolume?: SnapshotParentVolume | null
   /**
    * Size in bytes of the snapshot.
    */
@@ -165,11 +165,11 @@ export interface Snapshot {
   /**
    * Creation date of the snapshot.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the properties of a snapshot.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * List of the references to the snapshot.
    */
@@ -201,15 +201,15 @@ export interface VolumeType {
   /**
    * Price of the volume billed in GB/hour.
    */
-  pricing?: Money
+  pricing?: Money | null
   /**
    * Price of the snapshot billed in GB/hour.
    */
-  snapshotPricing?: Money
+  snapshotPricing?: Money | null
   /**
    * Volume specifications of the volume type.
    */
-  specs?: VolumeSpecifications
+  specs?: VolumeSpecifications | null
 }
 
 
@@ -237,11 +237,11 @@ export interface Volume {
   /**
    * Creation date of the volume.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update of the properties of a volume.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * List of the references to the volume.
    */
@@ -249,7 +249,7 @@ export interface Volume {
   /**
    * When a volume is created from a snapshot, is the UUID of the snapshot from which the volume has been created.
    */
-  parentSnapshotId?: string
+  parentSnapshotId?: string | null
   /**
    * Current status of the volume (available, in_use, ...).
    */
@@ -265,11 +265,11 @@ export interface Volume {
   /**
    * Specifications of the volume.
    */
-  specs?: VolumeSpecifications
+  specs?: VolumeSpecifications | null
   /**
    * Last time the volume was detached.
    */
-  lastDetachedAt?: Date
+  lastDetachedAt?: Date | null
 }
 
 
@@ -277,7 +277,7 @@ export type CreateSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the volume to snapshot.
    */
@@ -285,15 +285,15 @@ export type CreateSnapshotRequest = {
   /**
    * Name of the snapshot.
    */
-  name?: string
+  name?: string | null
   /**
    * UUID of the project to which the volume and the snapshot belong.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * List of tags assigned to the snapshot.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -301,37 +301,37 @@ export type CreateVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Name of the volume.
    */
-  name?: string
+  name?: string | null
   /**
    * The maximum IO/s expected, according to the different options available in stock (`5000 | 15000`).
    *
    * One-of ('requirements'): at most one of 'perfIops' could be set.
    */
-  perfIops?: number
+  perfIops?: number | null
   /**
    * UUID of the project the volume belongs to.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Specify the size of the new volume if creating a new one from scratch.
    *
    * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
    */
-  fromEmpty?: CreateVolumeRequestFromEmpty
+  fromEmpty?: CreateVolumeRequestFromEmpty | null
   /**
    * Specify the snapshot ID of the original snapshot.
    *
    * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
    */
-  fromSnapshot?: CreateVolumeRequestFromSnapshot
+  fromSnapshot?: CreateVolumeRequestFromSnapshot | null
   /**
    * List of tags assigned to the volume.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -339,7 +339,7 @@ export type DeleteSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the snapshot.
    */
@@ -351,7 +351,7 @@ export type DeleteVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the volume.
    */
@@ -363,7 +363,7 @@ export type ExportSnapshotToObjectStorageRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the snapshot.
    */
@@ -383,7 +383,7 @@ export type GetSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the snapshot.
    */
@@ -395,7 +395,7 @@ export type GetVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the volume.
    */
@@ -407,7 +407,7 @@ export type ImportSnapshotFromObjectStorageRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Scaleway Object Storage bucket where the object is stored.
    */
@@ -423,15 +423,15 @@ export type ImportSnapshotFromObjectStorageRequest = {
   /**
    * UUID of the Project to which the volume and the snapshot belong.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * List of tags assigned to the snapshot.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Size of the snapshot.
    */
-  size?: number
+  size?: number | null
 }
 
 
@@ -439,7 +439,7 @@ export type ImportSnapshotFromS3Request = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Scaleway Object Storage bucket where the object is stored.
    */
@@ -455,15 +455,15 @@ export type ImportSnapshotFromS3Request = {
   /**
    * UUID of the Project to which the volume and the snapshot belong.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * List of tags assigned to the snapshot.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Size of the snapshot.
    */
-  size?: number
+  size?: number | null
 }
 
 
@@ -471,39 +471,39 @@ export type ListSnapshotsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Criteria to use when ordering the list.
    */
-  orderBy?: ListSnapshotsRequestOrderBy
+  orderBy?: ListSnapshotsRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Page size, defines how many entries are returned in one page, must be lower or equal to 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter snapshots by the ID of the original volume.
    */
-  volumeId?: string
+  volumeId?: string | null
   /**
    * Filter snapshots by their names.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by tags. Only snapshots with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -523,15 +523,15 @@ export type ListVolumeTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Page size, defines how many entries are returned in one page, must be lower or equal to 100.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -551,39 +551,39 @@ export type ListVolumesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Criteria to use when ordering the list.
    */
-  orderBy?: ListVolumesRequestOrderBy
+  orderBy?: ListVolumesRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Page size, defines how many entries are returned in one page, must be lower or equal to 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter the return volumes by their names.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by a product resource ID linked to this volume (such as an Instance ID).
    */
-  productResourceId?: string
+  productResourceId?: string | null
   /**
    * Filter by tags. Only volumes with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -603,7 +603,7 @@ export type UpdateSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the snapshot.
    */
@@ -611,11 +611,11 @@ export type UpdateSnapshotRequest = {
   /**
    * When defined, is the name of the snapshot.
    */
-  name?: string
+  name?: string | null
   /**
    * List of tags assigned to the snapshot.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -623,7 +623,7 @@ export type UpdateVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the volume.
    */
@@ -631,19 +631,19 @@ export type UpdateVolumeRequest = {
   /**
    * When defined, is the new name of the volume.
    */
-  name?: string
+  name?: string | null
   /**
    * Size in bytes of the volume, with a granularity of 1 GB (10^9 bytes).
    */
-  size?: number
+  size?: number | null
   /**
    * List of tags assigned to the volume.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * The selected value must be available for the volume's current storage class.
    */
-  perfIops?: number
+  perfIops?: number | null
 }
 
 

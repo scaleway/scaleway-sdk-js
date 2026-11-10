@@ -95,11 +95,11 @@ export interface KeyRotationPolicy {
   /**
    * Time interval between two key rotations. The minimum duration is 24 hours and the maximum duration is 1 year (876000 hours).
    */
-  rotationPeriod?: string
+  rotationPeriod?: string | null
   /**
    * Timestamp indicating the next scheduled rotation.
    */
-  nextRotationAt?: Date
+  nextRotationAt?: Date | null
 }
 
 
@@ -109,25 +109,25 @@ export interface KeyUsage {
    *
    * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
    */
-  symmetricEncryption?: KeyAlgorithmSymmetricEncryption
+  symmetricEncryption?: KeyAlgorithmSymmetricEncryption | null
   /**
    * See the `Key.Algorithm.AsymmetricEncryption` enum for a description of values.
    *
    * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
    */
-  asymmetricEncryption?: KeyAlgorithmAsymmetricEncryption
+  asymmetricEncryption?: KeyAlgorithmAsymmetricEncryption | null
   /**
    * See the `Key.Algorithm.AsymmetricSigning` enum for a description of values.
    *
    * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
    */
-  asymmetricSigning?: KeyAlgorithmAsymmetricSigning
+  asymmetricSigning?: KeyAlgorithmAsymmetricSigning | null
   /**
    * See the `Key.Algorithm.KeyEncapulation` enum for a description of values.
    *
    * One-of ('usage'): at most one of 'symmetricEncryption', 'asymmetricEncryption', 'asymmetricSigning', 'keyEncapsulation' could be set.
    */
-  keyEncapsulation?: KeyAlgorithmKeyEncapsulation
+  keyEncapsulation?: KeyAlgorithmKeyEncapsulation | null
 }
 
 
@@ -170,15 +170,15 @@ export interface KeyRotation {
   /**
    * Key rotation creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Key rotation last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Key rotation deletion date.
    */
-  deletedAt?: Date
+  deletedAt?: Date | null
 }
 
 
@@ -202,7 +202,7 @@ export interface Key {
   /**
    * See the `Key.Usage` enum for a description of possible values.
    */
-  usage?: KeyUsage
+  usage?: KeyUsage | null
   /**
    * See the `Key.State` enum for a description of possible values.
    */
@@ -214,11 +214,11 @@ export interface Key {
   /**
    * Key creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Key last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Returns `true` if key protection is applied to the key.
    */
@@ -230,7 +230,7 @@ export interface Key {
   /**
    * Description of the key.
    */
-  description?: string
+  description?: string | null
   /**
    * List of the key's tags.
    */
@@ -238,11 +238,11 @@ export interface Key {
   /**
    * Key last rotation date.
    */
-  rotatedAt?: Date
+  rotatedAt?: Date | null
   /**
    * Key rotation policy.
    */
-  rotationPolicy?: KeyRotationPolicy
+  rotationPolicy?: KeyRotationPolicy | null
   /**
    * Refer to the `Key.Origin` enum for a description of values.
    */
@@ -250,7 +250,7 @@ export interface Key {
   /**
    * Returns the time at which deletion was requested.
    */
-  deletionRequestedAt?: Date
+  deletionRequestedAt?: Date | null
   /**
    * Refer to the `Key.ProtectionLevel` enum for a description of values.
    */
@@ -266,31 +266,31 @@ export type CreateKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project containing the key.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * (Optional) Name of the key.
    */
-  name?: string
+  name?: string | null
   /**
    * See the `Key.Usage` enum for a description of possible values.
    */
-  usage?: KeyUsage
+  usage?: KeyUsage | null
   /**
    * (Optional) Description of the key.
    */
-  description?: string
+  description?: string | null
   /**
    * (Optional) List of the key's tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * If not specified, no rotation policy will be applied to the key.
    */
-  rotationPolicy?: KeyRotationPolicy
+  rotationPolicy?: KeyRotationPolicy | null
   /**
    * Default value is `false`.
    */
@@ -298,11 +298,11 @@ export type CreateKeyRequest = {
   /**
    * Refer to the `Key.Origin` enum for a description of values.
    */
-  origin?: KeyOrigin
+  origin?: KeyOrigin | null
   /**
    * Refer to the `Key.Protection` enum for a description of values.
    */
-  protectionLevel?: KeyProtectionLevel
+  protectionLevel?: KeyProtectionLevel | null
 }
 
 
@@ -322,11 +322,11 @@ export interface DataKey {
   /**
    * (Optional) Your data encryption key's plaintext allows you to use the key immediately upon creation. It must neither be stored or shared.
    */
-  plaintext?: string
+  plaintext?: string | null
   /**
    * Data encryption key creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
 }
 
 
@@ -334,7 +334,7 @@ export type DecryptRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The key must have an usage set to `symmetric_encryption` or `asymmetric_encryption`.
    */
@@ -346,7 +346,7 @@ export type DecryptRequest = {
   /**
    * The additional data must match the value passed in the encryption request. Only supported by keys with a usage set to `symmetric_encryption`.
    */
-  associatedData?: string
+  associatedData?: string | null
 }
 
 
@@ -362,7 +362,7 @@ export interface DecryptResponse {
   /**
    * If the data was already encrypted with the latest key rotation, no output will be returned in the response object.
    */
-  ciphertext?: string
+  ciphertext?: string | null
 }
 
 
@@ -370,7 +370,7 @@ export type DeleteKeyMaterialRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key of which to delete the key material.
    */
@@ -378,7 +378,7 @@ export type DeleteKeyMaterialRequest = {
   /**
    * Default to latest rotation if not set.
    */
-  keyRotationIndex?: number
+  keyRotationIndex?: number | null
 }
 
 
@@ -386,7 +386,7 @@ export type DeleteKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to delete.
    */
@@ -398,7 +398,7 @@ export type DisableKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to disable.
    */
@@ -410,7 +410,7 @@ export type EnableKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to enable.
    */
@@ -422,7 +422,7 @@ export type EncryptRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The key must have an usage set to `symmetric_encryption` or `asymmetric_encryption`.
    */
@@ -434,7 +434,7 @@ export type EncryptRequest = {
   /**
    * Additional data which will not be encrypted, but authenticated and appended to the encrypted payload. Only supported by keys with a usage set to `symmetric_encryption`.
    */
-  associatedData?: string
+  associatedData?: string | null
 }
 
 
@@ -454,7 +454,7 @@ export type GenerateDataKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key.
    */
@@ -462,7 +462,7 @@ export type GenerateDataKeyRequest = {
   /**
    * See the `DataKey.Algorithm.SymmetricEncryption` enum for a description of values.
    */
-  algorithm?: DataKeyAlgorithmSymmetricEncryption
+  algorithm?: DataKeyAlgorithmSymmetricEncryption | null
   /**
    * Default value is `false`, meaning that the plaintext is returned.
 Set it to `true` if you do not wish the plaintext to be returned in the response object.
@@ -475,7 +475,7 @@ export type GenerateKeyMaterialImportParametersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key into which to import the key material.
    */
@@ -483,7 +483,7 @@ export type GenerateKeyMaterialImportParametersRequest = {
   /**
    * Supported values are: `rsa_oaep_2048_sha256`, `rsa_oaep_3072_sha256`, `rsa_oaep_4096_sha256`.
    */
-  wrappingAlgorithm?: GenerateKeyMaterialImportParametersRequestWrappingAlgorithm
+  wrappingAlgorithm?: GenerateKeyMaterialImportParametersRequestWrappingAlgorithm | null
 }
 
 
@@ -507,7 +507,7 @@ export type GetKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to target.
    */
@@ -519,7 +519,7 @@ export type GetPublicKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key.
    */
@@ -531,7 +531,7 @@ export type ImportKeyMaterialRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The key's origin must be `external`.
    */
@@ -541,17 +541,17 @@ export type ImportKeyMaterialRequest = {
    *
    * One-of ('material'): at most one of 'keyMaterial', 'encryptedKeyMaterial' could be set.
    */
-  keyMaterial?: string
+  keyMaterial?: string | null
   /**
    * A salt is random data added to key material to ensure unique derived keys, even if the input is similar. It helps strengthen security when the key material has low randomness (low entropy).
    */
-  salt?: string
+  salt?: string | null
   /**
    * This material must be encrypted using the public key and the exact wrapping algorithm returned by the `GetKeyMaterialImportParameters` method.
    *
    * One-of ('material'): at most one of 'keyMaterial', 'encryptedKeyMaterial' could be set.
    */
-  encryptedKeyMaterial?: ImportKeyMaterialRequestEncryptedKeyMaterial
+  encryptedKeyMaterial?: ImportKeyMaterialRequestEncryptedKeyMaterial | null
 }
 
 
@@ -559,11 +559,11 @@ export type ListAlgorithmsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Filter by key usage.
    */
-  usages?: ListAlgorithmsRequestUsage[]
+  usages?: ListAlgorithmsRequestUsage[] | null
 }
 
 
@@ -579,18 +579,18 @@ export type ListKeyRotationsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to list rotations for.
    */
   keyId: string
-  orderBy?: ListKeyRotationsRequestOrderBy
-  page?: number
-  pageSize?: number
+  orderBy?: ListKeyRotationsRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
   /**
    * See the `KeyRotation.Status` enum for a description of possible values.
    */
-  status?: KeyRotationStatus[]
+  status?: KeyRotationStatus[] | null
 }
 
 
@@ -610,30 +610,30 @@ export type ListKeysRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * (Optional) Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) Filter by Project ID.
    */
-  projectId?: string
-  orderBy?: ListKeysRequestOrderBy
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  orderBy?: ListKeysRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
   /**
    * (Optional) List of tags to filter on.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * (Optional) Filter by key name.
    */
-  name?: string
+  name?: string | null
   /**
    * Select from symmetric encryption, asymmetric encryption, asymmetric signing or key_encapsulation.
    */
-  usage?: ListKeysRequestUsage
+  usage?: ListKeysRequestUsage | null
   /**
    * Filter keys based on their deletion status. By default, only keys not scheduled for deletion are returned in the output.
    */
@@ -641,7 +641,7 @@ export type ListKeysRequest = {
   /**
    * Select from software or hsm.
    */
-  protectionLevel?: KeyProtectionLevel
+  protectionLevel?: KeyProtectionLevel | null
 }
 
 
@@ -661,7 +661,7 @@ export type ProtectKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to apply key protection to.
    */
@@ -678,7 +678,7 @@ export type RestoreKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   keyId: string
 }
 
@@ -687,7 +687,7 @@ export type RotateKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to rotate.
    */
@@ -699,7 +699,7 @@ export type SignRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to use for signing.
    */
@@ -711,19 +711,19 @@ Also accepted for ML-DSA for backward compatibility only; signatures may not con
    *
    * One-of ('payload'): at most one of 'digest', 'msg', 'externalMu' could be set.
    */
-  digest?: string
+  digest?: string | null
   /**
    * Only supported for ML-DSA keys (`raw` signing): the server computes the μ message representative internally before signing. Between 1 and 4096 bytes.
    *
    * One-of ('payload'): at most one of 'digest', 'msg', 'externalMu' could be set.
    */
-  msg?: string
+  msg?: string | null
   /**
    * Must equal SHAKE256(tr ‖ 0x00 ‖ 0x00 ‖ message), where `tr` is the SHAKE256 of the key's public key. Signatures produced from other pre-hash computations (e.g. HashML-DSA) cannot be verified through this API.
    *
    * One-of ('payload'): at most one of 'digest', 'msg', 'externalMu' could be set.
    */
-  externalMu?: string
+  externalMu?: string | null
 }
 
 
@@ -743,7 +743,7 @@ export type UnprotectKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to remove key protection from.
    */
@@ -755,10 +755,10 @@ export type UnwrapKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   keyId: string
   ciphertext: string
-  associatedData?: string
+  associatedData?: string | null
 }
 
 
@@ -772,7 +772,7 @@ export type UpdateKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to update.
    */
@@ -780,19 +780,19 @@ export type UpdateKeyRequest = {
   /**
    * (Optional) Updated name of the key.
    */
-  name?: string
+  name?: string | null
   /**
    * (Optional) Updated description of the key.
    */
-  description?: string
+  description?: string | null
   /**
    * (Optional) Updated list of the key's tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * If not specified, the key's existing rotation policy applies.
    */
-  rotationPolicy?: KeyRotationPolicy
+  rotationPolicy?: KeyRotationPolicy | null
 }
 
 
@@ -800,7 +800,7 @@ export type VerifyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the key to use for signature verification.
    */
@@ -810,13 +810,13 @@ export type VerifyRequest = {
    *
    * One-of ('payload'): at most one of 'digest', 'msg' could be set.
    */
-  digest?: string
+  digest?: string | null
   /**
    * For ML-DSA keys, the full original message. This also verifies signatures made with `raw` or `external_mu`: send the message whose μ was signed, not the μ itself (a μ payload always fails). Messages over 4096 bytes cannot be verified through this endpoint.
    *
    * One-of ('payload'): at most one of 'digest', 'msg' could be set.
    */
-  msg?: string
+  msg?: string | null
   /**
    * The message signature to verify.
    */
@@ -840,10 +840,10 @@ export type WrapKeyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   keyId: string
   plaintext: string
-  associatedData?: string
+  associatedData?: string | null
 }
 
 

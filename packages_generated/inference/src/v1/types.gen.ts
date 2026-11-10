@@ -101,13 +101,13 @@ This CA certificate can be retrieved using the `GetDeploymentCertificate` API ca
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  publicNetwork?: EndpointPublicNetworkDetails
+  publicNetwork?: EndpointPublicNetworkDetails | null
   /**
    * Details of the Private Network.
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointPrivateNetworkDetails
+  privateNetwork?: EndpointPrivateNetworkDetails | null
   /**
    * Defines whether the authentication is disabled.
    */
@@ -129,13 +129,13 @@ export interface EndpointSpec {
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  publicNetwork?: EndpointPublicNetworkDetails
+  publicNetwork?: EndpointPublicNetworkDetails | null
   /**
    * Private endpoints are only accessible from the Private Network.
    *
    * One-of ('details'): at most one of 'publicNetwork', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointPrivateNetworkDetails
+  privateNetwork?: EndpointPrivateNetworkDetails | null
   /**
    * By default, deployments are protected by IAM authentication.
 When setting this field to true, the authentication will be disabled.
@@ -150,7 +150,7 @@ export interface ModelSource {
    *
    * One-of ('credentials'): at most one of 'secret' could be set.
    */
-  secret?: string
+  secret?: string | null
 }
 
 
@@ -198,7 +198,7 @@ export interface Deployment {
   /**
    * Displays information if your deployment is in error state.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * ID of the model used for the deployment.
    */
@@ -206,7 +206,7 @@ export interface Deployment {
   /**
    * Quantization parameters for this deployment.
    */
-  quantization?: DeploymentQuantization
+  quantization?: DeploymentQuantization | null
   /**
    * Name of the deployed model.
    */
@@ -214,11 +214,11 @@ export interface Deployment {
   /**
    * Creation date of the deployment.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the deployment.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Region of the deployment.
    */
@@ -254,7 +254,7 @@ export interface Model {
   /**
    * Displays information if your model is in error state.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Defines whether the model has an end user license agreement.
    */
@@ -262,11 +262,11 @@ export interface Model {
   /**
    * Creation date of the model.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the model.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Region of the model.
    */
@@ -322,11 +322,11 @@ export interface NodeType {
   /**
    * Creation date of the node type.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the node type.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Number of GPUs.
    */
@@ -342,15 +342,15 @@ export type CreateDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the deployment.
    */
-  name?: string
+  name?: string | null
   /**
    * ID of the Project to create the deployment in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * ID of the model to use.
    */
@@ -359,7 +359,7 @@ export type CreateDeploymentRequest = {
    * If the model has an EULA, you must accept it before proceeding.
 The terms of the EULA can be retrieved using the `GetModelEula` API call.
    */
-  acceptEula?: boolean
+  acceptEula?: boolean | null
   /**
    * Name of the node type to use.
    */
@@ -367,15 +367,15 @@ The terms of the EULA can be retrieved using the `GetModelEula` API call.
   /**
    * List of tags to apply to the deployment.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Defines the minimum size of the pool.
    */
-  minSize?: number
+  minSize?: number | null
   /**
    * Defines the maximum size of the pool. Currently, autoscaling is not yet supported, and this value must be equal to `min_size`.
    */
-  maxSize?: number
+  maxSize?: number | null
   /**
    * List of endpoints to create.
    */
@@ -383,7 +383,7 @@ The terms of the EULA can be retrieved using the `GetModelEula` API call.
   /**
    * Quantization settings to apply to this deployment.
    */
-  quantization?: DeploymentQuantization
+  quantization?: DeploymentQuantization | null
 }
 
 
@@ -391,7 +391,7 @@ export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment to create the endpoint for.
    */
@@ -407,15 +407,15 @@ export type CreateModelRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the model.
    */
-  name?: string
+  name?: string | null
   /**
    * ID of the Project to import the model in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Where to import the model from.
    */
@@ -427,7 +427,7 @@ export type DeleteDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment to delete.
    */
@@ -439,7 +439,7 @@ export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the endpoint to delete.
    */
@@ -451,7 +451,7 @@ export type DeleteModelRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the model to delete.
    */
@@ -463,7 +463,7 @@ export type GetDeploymentCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   deploymentId: string
 }
 
@@ -472,7 +472,7 @@ export type GetDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment to get.
    */
@@ -484,7 +484,7 @@ export type GetModelRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the model to get.
    */
@@ -496,35 +496,35 @@ export type ListDeploymentsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of deployments to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListDeploymentsRequestOrderBy
+  orderBy?: ListDeploymentsRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by deployment name.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by tags.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -544,35 +544,35 @@ export type ListModelsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListModelsRequestOrderBy
+  orderBy?: ListModelsRequestOrderBy | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of models to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by model name.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by tags.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -592,15 +592,15 @@ export type ListNodeTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of node types to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Include disabled node types in the response.
    */
@@ -624,7 +624,7 @@ export type UpdateDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment to update.
    */
@@ -632,27 +632,27 @@ export type UpdateDeploymentRequest = {
   /**
    * Name of the deployment.
    */
-  name?: string
+  name?: string | null
   /**
    * List of tags to apply to the deployment.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Defines the new minimum size of the pool.
    */
-  minSize?: number
+  minSize?: number | null
   /**
    * Defines the maximum size of the pool. Currently, autoscaling is not yet supported, and this value must be equal to `min_size`.
    */
-  maxSize?: number
+  maxSize?: number | null
   /**
    * Id of the model to set to the deployment.
    */
-  modelId?: string
+  modelId?: string | null
   /**
    * Quantization to use to the deployment.
    */
-  quantization?: DeploymentQuantization
+  quantization?: DeploymentQuantization | null
 }
 
 
@@ -660,7 +660,7 @@ export type UpdateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the endpoint to update.
    */
@@ -669,7 +669,7 @@ export type UpdateEndpointRequest = {
    * By default, deployments are protected by IAM authentication.
 When setting this field to true, the authentication will be disabled.
    */
-  disableAuth?: boolean
+  disableAuth?: boolean | null
 }
 
 

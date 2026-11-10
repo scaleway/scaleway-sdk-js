@@ -50,11 +50,11 @@ export interface MACAddress {
   /**
    * Date on which the virtual MAC was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date on which the virtual MAC was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * MAC address IP Availability Zone.
    */
@@ -86,11 +86,11 @@ export interface FlexibleIP {
   /**
    * Date on which the flexible IP was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date on which the flexible IP was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * - ready : flexible IP is created and ready to be attached to a server or to be associated with a virtual MAC.
 - updating: flexible IP is being attached to a server or a virtual MAC operation is ongoing
@@ -107,11 +107,11 @@ export interface FlexibleIP {
   /**
    * MAC address of the flexible IP.
    */
-  macAddress?: MACAddress
+  macAddress?: MACAddress | null
   /**
    * ID of the server linked to the flexible IP.
    */
-  serverId?: string
+  serverId?: string | null
   /**
    * Reverse DNS value.
    */
@@ -131,7 +131,7 @@ export type AttachFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Multiple IDs can be provided, but note that flexible IPs must belong to the same MAC group (see details about MAC groups).
    */
@@ -159,11 +159,11 @@ export type CreateFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the project to associate with the Flexible IP.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Flexible IP description (max. of 255 characters).
    */
@@ -171,15 +171,15 @@ export type CreateFlexibleIPRequest = {
   /**
    * Tags to associate to the flexible IP.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * ID of the server to which the newly created flexible IP will be attached.
    */
-  serverId?: string
+  serverId?: string | null
   /**
    * Value of the reverse DNS.
    */
-  reverse?: string
+  reverse?: string | null
   /**
    * Defines whether the flexible IP has an IPv6 address.
    */
@@ -191,7 +191,7 @@ export type DeleteFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the flexible IP to delete.
    */
@@ -203,7 +203,7 @@ export type DeleteMACAddrRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * If the flexible IP belongs to a MAC group, the MAC will be removed from both the MAC group and flexible IP.
    */
@@ -215,7 +215,7 @@ export type DetachFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * List of flexible IP IDs to detach from a server. Multiple IDs can be provided. Note that flexible IPs must belong to the same MAC group.
    */
@@ -239,7 +239,7 @@ export type DuplicateMACAddrRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Note that the flexible IPs need to be attached to the same server.
    */
@@ -255,7 +255,7 @@ export type GenerateMACAddrRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the flexible IP for which to generate a virtual MAC.
    */
@@ -271,7 +271,7 @@ export type GetFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the flexible IP.
    */
@@ -283,39 +283,39 @@ export type ListFlexibleIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Sort order of the returned flexible IPs.
    */
-  orderBy?: ListFlexibleIPsRequestOrderBy
+  orderBy?: ListFlexibleIPsRequestOrderBy | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of flexible IPs per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by tag, only flexible IPs with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by status, only flexible IPs with this status will be returned.
    */
-  status?: FlexibleIPStatus[]
+  status?: FlexibleIPStatus[] | null
   /**
    * Filter by server IDs, only flexible IPs with these server IDs will be returned.
    */
-  serverIds?: string[]
+  serverIds?: string[] | null
   /**
    * Filter by Organization ID, only flexible IPs from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by Project ID, only flexible IPs from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -335,7 +335,7 @@ export type MoveMACAddrRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   fipId: string
   dstFipId: string
 }
@@ -345,7 +345,7 @@ export type UpdateFlexibleIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the flexible IP to update.
    */
@@ -353,15 +353,15 @@ export type UpdateFlexibleIPRequest = {
   /**
    * Flexible IP description (max. 255 characters).
    */
-  description?: string
+  description?: string | null
   /**
    * Tags associated with the flexible IP.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Value of the reverse DNS.
    */
-  reverse?: string
+  reverse?: string | null
 }
 
 

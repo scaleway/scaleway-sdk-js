@@ -5,7 +5,7 @@ import type {Arch,AttachServerVolumeRequestVolumeType,BootType,ImageState,IpStat
 
 
 export interface SetImageResponse {
-  image?: Image
+  image?: Image | null
 }
 
 
@@ -13,7 +13,7 @@ export type SetSecurityGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the security group.
    */
@@ -25,15 +25,15 @@ export type SetSecurityGroupRequest = {
   /**
    * Tags of the security group.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Creation date of the security group (will be ignored).
    */
-  creationDate?: Date
+  creationDate?: Date | null
   /**
    * Modification date of the security group (will be ignored).
    */
-  modificationDate?: Date
+  modificationDate?: Date | null
   /**
    * Description of the security group.
    */
@@ -45,23 +45,23 @@ export type SetSecurityGroupRequest = {
   /**
    * Default inbound policy.
    */
-  inboundDefaultPolicy?: SecurityGroupPolicy
+  inboundDefaultPolicy?: SecurityGroupPolicy | null
   /**
    * Default outbound policy.
    */
-  outboundDefaultPolicy?: SecurityGroupPolicy
+  outboundDefaultPolicy?: SecurityGroupPolicy | null
   /**
    * Security groups Organization ID.
    */
-  organization?: string
+  organization?: string | null
   /**
    * Security group Project ID.
    */
-  project?: string
+  project?: string | null
   /**
    * @deprecated Please use project_default instead.
    */
-  organizationDefault?: boolean
+  organizationDefault?: boolean | null
   /**
    * True use this security group for future Instances created in this project.
    */
@@ -69,7 +69,7 @@ export type SetSecurityGroupRequest = {
   /**
    * Instances attached to this security group.
    */
-  servers?: ServerSummary[]
+  servers?: ServerSummary[] | null
   /**
    * True to set the security group as stateful.
    */
@@ -78,7 +78,7 @@ export type SetSecurityGroupRequest = {
 
 
 export interface SetSecurityGroupResponse {
-  securityGroup?: SecurityGroup
+  securityGroup?: SecurityGroup | null
 }
 
 
@@ -86,23 +86,23 @@ export type SetSecurityGroupRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   securityGroupId: string
   securityGroupRuleId: string
   id: string
-  protocol?: SecurityGroupRuleProtocol
-  direction?: SecurityGroupRuleDirection
-  action?: SecurityGroupRuleAction
+  protocol?: SecurityGroupRuleProtocol | null
+  direction?: SecurityGroupRuleDirection | null
+  action?: SecurityGroupRuleAction | null
   ipRange: string
-  destPortFrom?: number
-  destPortTo?: number
+  destPortFrom?: number | null
+  destPortTo?: number | null
   position: number
   editable: boolean
 }
 
 
 export interface SetSecurityGroupRuleResponse {
-  rule?: SecurityGroupRule
+  rule?: SecurityGroupRule | null
 }
 
 
@@ -110,7 +110,7 @@ export type SetServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Instance unique ID.
    */
@@ -122,19 +122,19 @@ export type SetServerRequest = {
   /**
    * Instance Organization ID.
    */
-  organization?: string
+  organization?: string | null
   /**
    * Instance Project ID.
    */
-  project?: string
+  project?: string | null
   /**
    * Provide a list of allowed actions on the server.
    */
-  allowedActions?: ServerAction[]
+  allowedActions?: ServerAction[] | null
   /**
    * Tags associated with the Instance.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Instance commercial type (eg. GP1-M).
    */
@@ -142,7 +142,7 @@ export type SetServerRequest = {
   /**
    * Instance creation date.
    */
-  creationDate?: Date
+  creationDate?: Date | null
   /**
    * True if a dynamic IPv4 is required.
    */
@@ -150,11 +150,11 @@ export type SetServerRequest = {
   /**
    * @deprecated True to configure the instance so it uses the new routed IP mode (once this is set to True you cannot set it back to False).
    */
-  routedIpEnabled?: boolean
+  routedIpEnabled?: boolean | null
   /**
    * @deprecated True if IPv6 is enabled (deprecated and always `False` when `routed_ip_enabled` is `True`).
    */
-  enableIpv6?: boolean
+  enableIpv6?: boolean | null
   /**
    * Instance host name.
    */
@@ -162,7 +162,7 @@ export type SetServerRequest = {
   /**
    * Provide information on the Instance image.
    */
-  image?: Image
+  image?: Image | null
   /**
    * Instance protection option is activated.
    */
@@ -170,47 +170,47 @@ export type SetServerRequest = {
   /**
    * @deprecated Instance private IP address (deprecated and always `null` when `routed_ip_enabled` is `True`).
    */
-  privateIp?: string
+  privateIp?: string | null
   /**
    * @deprecated Information about the public IP (deprecated in favor of `public_ips`).
    */
-  publicIp?: ServerIp
+  publicIp?: ServerIp | null
   /**
    * Information about all the public IPs attached to the server.
    */
-  publicIps?: ServerIp[]
+  publicIps?: ServerIp[] | null
   /**
    * Instance modification date.
    */
-  modificationDate?: Date
+  modificationDate?: Date | null
   /**
    * Instance state.
    */
-  state?: ServerState
+  state?: ServerState | null
   /**
    * Instance location.
    */
-  location?: ServerLocation
+  location?: ServerLocation | null
   /**
    * @deprecated Instance IPv6 address (deprecated when `routed_ip_enabled` is `True`).
    */
-  ipv6?: ServerIpv6
+  ipv6?: ServerIpv6 | null
   /**
    * Instance boot type.
    */
-  bootType?: BootType
+  bootType?: BootType | null
   /**
    * Instance volumes.
    */
-  volumes?: Record<string, Volume>
+  volumes?: Record<string, Volume> | null
   /**
    * Instance security group.
    */
-  securityGroup?: SecurityGroupSummary
+  securityGroup?: SecurityGroupSummary | null
   /**
    * Instance planned maintenances.
    */
-  maintenances?: ServerMaintenance[]
+  maintenances?: ServerMaintenance[] | null
   /**
    * Instance state_detail.
    */
@@ -218,24 +218,24 @@ export type SetServerRequest = {
   /**
    * Instance architecture (refers to the CPU architecture used for the Instance, e.g. x86_64, arm64).
    */
-  arch?: Arch
+  arch?: Arch | null
   /**
    * Instance placement group.
    */
-  placementGroup?: PlacementGroup
+  placementGroup?: PlacementGroup | null
   /**
    * Instance private NICs.
    */
-  privateNics?: PrivateNIC[]
+  privateNics?: PrivateNIC[] | null
   /**
    * The public_key value of this key is used to encrypt the admin password. When set to an empty string, reset this value and admin_password_encrypted_value to an empty string so a new password may be generated.
    */
-  adminPasswordEncryptionSshKeyId?: string
+  adminPasswordEncryptionSshKeyId?: string | null
 }
 
 
 export interface SetServerResponse {
-  server?: Server
+  server?: Server | null
 }
 
 
@@ -243,24 +243,24 @@ export type SetSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   snapshotId: string
   id: string
   name: string
-  organization?: string
-  volumeType?: VolumeVolumeType
+  organization?: string | null
+  volumeType?: VolumeVolumeType | null
   size: number
-  state?: SnapshotState
-  baseVolume?: SnapshotBaseVolume
-  creationDate?: Date
-  modificationDate?: Date
-  project?: string
-  tags?: string[]
+  state?: SnapshotState | null
+  baseVolume?: SnapshotBaseVolume | null
+  creationDate?: Date | null
+  modificationDate?: Date | null
+  project?: string | null
+  tags?: string[] | null
 }
 
 
 export interface SetSnapshotResponse {
-  snapshot?: Snapshot
+  snapshot?: Snapshot | null
 }
 
 

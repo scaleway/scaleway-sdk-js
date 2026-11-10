@@ -259,7 +259,7 @@ const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
   }
 
   return {
-    discountedPrice: data.discounted_price ? unmarshalMoney(data.discounted_price) : undefined,
+    discountedPrice: data.discounted_price ? unmarshalMoney(data.discounted_price) : null,
     duration: data.duration,
     freeSetupFees: data.free_setup_fees,
     unit: data.unit,
@@ -275,7 +275,7 @@ const unmarshalOfferFailoverBlockInfo = (data: unknown): OfferFailoverBlockInfo 
   }
 
   return {
-    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : undefined,
+    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : null,
   } as OfferFailoverBlockInfo
 }
 
@@ -287,7 +287,7 @@ const unmarshalOfferFailoverIpInfo = (data: unknown): OfferFailoverIpInfo => {
   }
 
   return {
-    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : undefined,
+    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : null,
   } as OfferFailoverIpInfo
 }
 
@@ -345,11 +345,11 @@ const unmarshalOfferServerInfo = (data: unknown): OfferServerInfo => {
     cpus: unmarshalArrayOfObject(data.cpus, unmarshalCPU),
     disks: unmarshalArrayOfObject(data.disks, unmarshalDisk),
     memories: unmarshalArrayOfObject(data.memories, unmarshalMemory),
-    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : undefined,
+    onetimeFees: data.onetime_fees ? unmarshalOffer(data.onetime_fees) : null,
     persistentMemories: unmarshalArrayOfObject(data.persistent_memories, unmarshalPersistentMemory),
     raidControllers: unmarshalArrayOfObject(data.raid_controllers, unmarshalRaidController),
     rpnSpeed: data.rpn_speed,
-    rpnVersion: data.rpn_version,
+    rpnVersion: data.rpn_version ?? null,
     stock: data.stock,
     stockByDatacenter: data.stock_by_datacenter,
   } as OfferServerInfo
@@ -398,26 +398,26 @@ export const unmarshalOffer = (data: unknown): Offer => {
   }
 
   return {
-    antidosInfo: data.antidos_info ? unmarshalOfferAntiDosInfo(data.antidos_info) : undefined,
+    antidosInfo: data.antidos_info ? unmarshalOfferAntiDosInfo(data.antidos_info) : null,
     availableOs: unmarshalArrayOfObject(data.available_os, unmarshalOS),
-    backupInfo: data.backup_info ? unmarshalOfferBackupInfo(data.backup_info) : undefined,
-    bandwidthInfo: data.bandwidth_info ? unmarshalOfferBandwidthInfo(data.bandwidth_info) : undefined,
+    backupInfo: data.backup_info ? unmarshalOfferBackupInfo(data.backup_info) : null,
+    bandwidthInfo: data.bandwidth_info ? unmarshalOfferBandwidthInfo(data.bandwidth_info) : null,
     catalog: data.catalog,
     commitments: unmarshalArrayOfObject(data.commitments, unmarshalOfferCommitment),
-    failoverBlockInfo: data.failover_block_info ? unmarshalOfferFailoverBlockInfo(data.failover_block_info) : undefined,
-    failoverIpInfo: data.failover_ip_info ? unmarshalOfferFailoverIpInfo(data.failover_ip_info) : undefined,
+    failoverBlockInfo: data.failover_block_info ? unmarshalOfferFailoverBlockInfo(data.failover_block_info) : null,
+    failoverIpInfo: data.failover_ip_info ? unmarshalOfferFailoverIpInfo(data.failover_ip_info) : null,
     id: data.id,
-    licenseInfo: data.license_info ? unmarshalOfferLicenseInfo(data.license_info) : undefined,
+    licenseInfo: data.license_info ? unmarshalOfferLicenseInfo(data.license_info) : null,
     name: data.name,
-    offerId: data.offer_id,
+    offerId: data.offer_id ?? null,
     paymentFrequency: data.payment_frequency,
-    pricing: data.pricing ? unmarshalMoney(data.pricing) : undefined,
-    rpnInfo: data.rpn_info ? unmarshalOfferRPNInfo(data.rpn_info) : undefined,
-    sanInfo: data.san_info ? unmarshalOfferSANInfo(data.san_info) : undefined,
-    serverInfo: data.server_info ? unmarshalOfferServerInfo(data.server_info) : undefined,
-    serviceLevelInfo: data.service_level_info ? unmarshalOfferServiceLevelInfo(data.service_level_info) : undefined,
-    storageInfo: data.storage_info ? unmarshalOfferStorageInfo(data.storage_info) : undefined,
-    usbStorageInfo: data.usb_storage_info ? unmarshalOfferStorageInfo(data.usb_storage_info) : undefined,
+    pricing: data.pricing ? unmarshalMoney(data.pricing) : null,
+    rpnInfo: data.rpn_info ? unmarshalOfferRPNInfo(data.rpn_info) : null,
+    sanInfo: data.san_info ? unmarshalOfferSANInfo(data.san_info) : null,
+    serverInfo: data.server_info ? unmarshalOfferServerInfo(data.server_info) : null,
+    serviceLevelInfo: data.service_level_info ? unmarshalOfferServiceLevelInfo(data.service_level_info) : null,
+    storageInfo: data.storage_info ? unmarshalOfferStorageInfo(data.storage_info) : null,
+    usbStorageInfo: data.usb_storage_info ? unmarshalOfferStorageInfo(data.usb_storage_info) : null,
   } as Offer
 }
 
@@ -437,20 +437,20 @@ export const unmarshalOS = (data: unknown): OS => {
     description: data.description,
     displayName: data.display_name,
     hostnameMaxLength: data.hostname_max_length,
-    hostnameRegex: data.hostname_regex,
+    hostnameRegex: data.hostname_regex ?? null,
     id: data.id,
     licenseOffers: unmarshalArrayOfObject(data.license_offers, unmarshalOffer),
-    maxPartitions: data.max_partitions,
+    maxPartitions: data.max_partitions ?? null,
     name: data.name,
     officialWebsite: data.official_website,
-    panelPasswordRegex: data.panel_password_regex,
+    panelPasswordRegex: data.panel_password_regex ?? null,
     passwordRegex: data.password_regex,
-    releasedAt: unmarshalDate(data.released_at),
+    releasedAt: unmarshalDate(data.released_at) ?? null,
     requiresAdminPassword: data.requires_admin_password,
     requiresLicense: data.requires_license,
     requiresPanelPassword: data.requires_panel_password,
     requiresUser: data.requires_user,
-    requiresValidHostname: data.requires_valid_hostname,
+    requiresValidHostname: data.requires_valid_hostname ?? null,
     type: data.type,
     version: data.version,
   } as OS
@@ -484,14 +484,14 @@ export const unmarshalRpnSan = (data: unknown): RpnSan => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     datacenterName: data.datacenter_name,
-    deliveredAt: unmarshalDate(data.delivered_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    deliveredAt: unmarshalDate(data.delivered_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     iqn: data.iqn,
     iqnSuffix: data.iqn_suffix,
-    offer: data.offer ? unmarshalOffer(data.offer) : undefined,
+    offer: data.offer ? unmarshalOffer(data.offer) : null,
     offerId: data.offer_id,
     offerName: data.offer_name,
     organizationId: data.organization_id,
@@ -501,7 +501,7 @@ export const unmarshalRpnSan = (data: unknown): RpnSan => {
     serverHostname: data.server_hostname,
     status: data.status,
     storageSize: data.storage_size,
-    terminatedAt: unmarshalDate(data.terminated_at),
+    terminatedAt: unmarshalDate(data.terminated_at) ?? null,
   } as RpnSan
 }
 
@@ -514,7 +514,7 @@ export const unmarshalRpnGroup = (data: unknown): RpnGroup => {
 
   return {
     active: data.active,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     membersCount: data.members_count,
     name: data.name,
@@ -563,11 +563,11 @@ const unmarshalServerOption = (data: unknown): ServerOption => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    expiredAt: unmarshalDate(data.expired_at),
-    offer: data.offer ? unmarshalOffer(data.offer) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiredAt: unmarshalDate(data.expired_at) ?? null,
+    offer: data.offer ? unmarshalOffer(data.offer) : null,
     options: unmarshalArrayOfObject(data.options, unmarshalServerOption),
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as ServerOption
 }
 
@@ -593,8 +593,8 @@ export const unmarshalServer = (data: unknown): Server => {
 
   return {
     abuseContact: data.abuse_contact,
-    createdAt: unmarshalDate(data.created_at),
-    expiredAt: unmarshalDate(data.expired_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiredAt: unmarshalDate(data.expired_at) ?? null,
     hasBmc: data.has_bmc,
     hostname: data.hostname,
     id: data.id,
@@ -603,19 +603,19 @@ export const unmarshalServer = (data: unknown): Server => {
     isHds: data.is_hds,
     isOutsourced: data.is_outsourced,
     isRpnv2Member: data.is_rpnv2_member,
-    level: data.level ? unmarshalServiceLevel(data.level) : undefined,
-    location: data.location ? unmarshalServerLocation(data.location) : undefined,
-    offer: data.offer ? unmarshalOffer(data.offer) : undefined,
+    level: data.level ? unmarshalServiceLevel(data.level) : null,
+    location: data.location ? unmarshalServerLocation(data.location) : null,
+    offer: data.offer ? unmarshalOffer(data.offer) : null,
     options: unmarshalArrayOfObject(data.options, unmarshalServerOption),
     organizationId: data.organization_id,
-    os: data.os ? unmarshalOS(data.os) : undefined,
+    os: data.os ? unmarshalOS(data.os) : null,
     projectId: data.project_id,
     qinq: data.qinq,
-    rebootedAt: unmarshalDate(data.rebooted_at),
-    rescueOs: data.rescue_os ? unmarshalOS(data.rescue_os) : undefined,
+    rebootedAt: unmarshalDate(data.rebooted_at) ?? null,
+    rescueOs: data.rescue_os ? unmarshalOS(data.rescue_os) : null,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as Server
 }
@@ -649,9 +649,9 @@ export const unmarshalRpnV2Group = (data: unknown): RpnV2Group => {
     organizationId: data.organization_id,
     owner: data.owner,
     projectId: data.project_id,
-    rpnv1Group: data.rpnv1_group ? unmarshalRpnGroup(data.rpnv1_group) : undefined,
+    rpnv1Group: data.rpnv1_group ? unmarshalRpnGroup(data.rpnv1_group) : null,
     status: data.status,
-    subnet: data.subnet ? unmarshalRpnV2GroupSubnet(data.subnet) : undefined,
+    subnet: data.subnet ? unmarshalRpnV2GroupSubnet(data.subnet) : null,
     type: data.type,
   } as RpnV2Group
 }
@@ -664,14 +664,14 @@ export const unmarshalService = (data: unknown): Service => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    deliveredAt: unmarshalDate(data.delivered_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deliveredAt: unmarshalDate(data.delivered_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
-    offer: data.offer ? unmarshalOffer(data.offer) : undefined,
+    offer: data.offer ? unmarshalOffer(data.offer) : null,
     provisioningStatus: data.provisioning_status,
-    resourceId: data.resource_id,
-    terminatedAt: unmarshalDate(data.terminated_at),
+    resourceId: data.resource_id ?? null,
+    terminatedAt: unmarshalDate(data.terminated_at) ?? null,
     type: data.type,
   } as Service
 }
@@ -703,16 +703,16 @@ export const unmarshalFailoverIP = (data: unknown): FailoverIP => {
 
   return {
     address: data.address,
-    block: data.block ? unmarshalFailoverBlock(data.block) : undefined,
+    block: data.block ? unmarshalFailoverBlock(data.block) : null,
     cidr: data.cidr,
     gatewayIp: data.gateway_ip,
     id: data.id,
     ipVersion: data.ip_version,
-    mac: data.mac,
+    mac: data.mac ?? null,
     netmask: data.netmask,
     reverse: data.reverse,
-    serverId: data.server_id,
-    serverZone: data.server_zone,
+    serverId: data.server_id ?? null,
+    serverZone: data.server_zone ?? null,
     status: data.status,
     type: data.type,
   } as FailoverIP
@@ -744,7 +744,7 @@ export const unmarshalBMCAccess = (data: unknown): BMCAccess => {
   }
 
   return {
-    expiresAt: unmarshalDate(data.expires_at),
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     login: data.login,
     password: data.password,
     status: data.status,
@@ -784,7 +784,7 @@ export const unmarshalCanOrderResponse = (data: unknown): CanOrderResponse => {
     billingOk: data.billing_ok,
     canOrder: data.can_order,
     emailConfirmed: data.email_confirmed,
-    message: data.message,
+    message: data.message ?? null,
     paymentMode: data.payment_mode,
     phoneConfirmed: data.phone_confirmed,
     quotaOk: data.quota_ok,
@@ -854,7 +854,7 @@ export const unmarshalGetRpnStatusResponse = (data: unknown): GetRpnStatusRespon
   }
 
   return {
-    operationsLeft: data.operations_left,
+    operationsLeft: data.operations_left ?? null,
     status: data.status,
   } as GetRpnStatusResponse
 }
@@ -868,13 +868,13 @@ export const unmarshalInvoice = (data: unknown): Invoice => {
 
   return {
     content: data.content,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
-    paidAt: unmarshalDate(data.paid_at),
+    paidAt: unmarshalDate(data.paid_at) ?? null,
     paymentMethod: data.payment_method,
     status: data.status,
-    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : undefined,
-    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : undefined,
+    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : null,
+    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : null,
     transactionId: data.transaction_id,
   } as Invoice
 }
@@ -939,13 +939,13 @@ const unmarshalInvoiceSummary = (data: unknown): InvoiceSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
-    paidAt: unmarshalDate(data.paid_at),
+    paidAt: unmarshalDate(data.paid_at) ?? null,
     paymentMethod: data.payment_method,
     status: data.status,
-    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : undefined,
-    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : undefined,
+    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : null,
+    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : null,
     transactionId: data.transaction_id,
   } as InvoiceSummary
 }
@@ -998,9 +998,9 @@ const unmarshalRpnSanIp = (data: unknown): RpnSanIp => {
   }
 
   return {
-    ip: data.ip ? unmarshalIP(data.ip) : undefined,
-    rpnv2Group: data.rpnv2_group ? unmarshalRpnSanIpRpnV2Group(data.rpnv2_group) : undefined,
-    server: data.server ? unmarshalRpnSanIpServer(data.server) : undefined,
+    ip: data.ip ? unmarshalIP(data.ip) : null,
+    rpnv2Group: data.rpnv2_group ? unmarshalRpnSanIpRpnV2Group(data.rpnv2_group) : null,
+    server: data.server ? unmarshalRpnSanIpServer(data.server) : null,
     type: data.type,
   } as RpnSanIp
 }
@@ -1052,13 +1052,13 @@ const unmarshalRefundSummary = (data: unknown): RefundSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     method: data.method,
-    refundedAt: unmarshalDate(data.refunded_at),
+    refundedAt: unmarshalDate(data.refunded_at) ?? null,
     status: data.status,
-    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : undefined,
-    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : undefined,
+    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : null,
+    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : null,
   } as RefundSummary
 }
 
@@ -1130,9 +1130,9 @@ const unmarshalRpnGroupMember = (data: unknown): RpnGroupMember => {
     groupOwner: data.group_owner,
     id: data.id,
     owner: data.owner,
-    sanServer: data.san_server ? unmarshalRpnSanServer(data.san_server) : undefined,
-    server: data.server ? unmarshalServer(data.server) : undefined,
-    speed: data.speed,
+    sanServer: data.san_server ? unmarshalRpnSanServer(data.san_server) : null,
+    server: data.server ? unmarshalServer(data.server) : null,
+    speed: data.speed ?? null,
     status: data.status,
   } as RpnGroupMember
 }
@@ -1184,10 +1184,10 @@ const unmarshalRpnSanSummary = (data: unknown): RpnSanSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     datacenterName: data.datacenter_name,
-    deliveredAt: unmarshalDate(data.delivered_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    deliveredAt: unmarshalDate(data.delivered_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     iqnSuffix: data.iqn_suffix,
     offerId: data.offer_id,
@@ -1199,7 +1199,7 @@ const unmarshalRpnSanSummary = (data: unknown): RpnSanSummary => {
     serverHostname: data.server_hostname,
     status: data.status,
     storageSize: data.storage_size,
-    terminatedAt: unmarshalDate(data.terminated_at),
+    terminatedAt: unmarshalDate(data.terminated_at) ?? null,
   } as RpnSanSummary
 }
 
@@ -1230,8 +1230,8 @@ const unmarshalRpnServerCapability = (data: unknown): RpnServerCapability => {
     datacenterName: data.datacenter_name,
     hostname: data.hostname,
     id: data.id,
-    ipAddress: data.ip_address,
-    rpnVersion: data.rpn_version,
+    ipAddress: data.ip_address ?? null,
+    rpnVersion: data.rpn_version ?? null,
     rpnv1GroupCount: data.rpnv1_group_count,
     rpnv2GroupCount: data.rpnv2_group_count,
     zone: data.zone,
@@ -1273,9 +1273,9 @@ const unmarshalRpnV2Member = (data: unknown): RpnV2Member => {
 
   return {
     id: data.id,
-    rpnv1Group: data.rpnv1_group ? unmarshalRpnGroup(data.rpnv1_group) : undefined,
-    server: data.server ? unmarshalServer(data.server) : undefined,
-    speed: data.speed,
+    rpnv1Group: data.rpnv1_group ? unmarshalRpnGroup(data.rpnv1_group) : null,
+    server: data.server ? unmarshalServer(data.server) : null,
+    speed: data.speed ?? null,
     status: data.status,
     vlan: data.vlan,
   } as RpnV2Member
@@ -1290,11 +1290,11 @@ const unmarshalLog = (data: unknown): Log => {
 
   return {
     action: data.action,
-    createdAt: unmarshalDate(data.created_at),
-    finishedAt: unmarshalDate(data.finished_at),
-    group: data.group ? unmarshalRpnV2Group(data.group) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    finishedAt: unmarshalDate(data.finished_at) ?? null,
+    group: data.group ? unmarshalRpnV2Group(data.group) : null,
     id: data.id,
-    member: data.member ? unmarshalRpnV2Member(data.member) : undefined,
+    member: data.member ? unmarshalRpnV2Member(data.member) : null,
     status: data.status,
   } as Log
 }
@@ -1375,7 +1375,7 @@ const unmarshalServerEvent = (data: unknown): ServerEvent => {
   }
 
   return {
-    date: unmarshalDate(data.date),
+    date: unmarshalDate(data.date) ?? null,
     description: data.description,
     eventId: data.event_id,
   } as ServerEvent
@@ -1402,24 +1402,24 @@ const unmarshalServerSummary = (data: unknown): ServerSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     datacenterName: data.datacenter_name,
-    expiredAt: unmarshalDate(data.expired_at),
+    expiredAt: unmarshalDate(data.expired_at) ?? null,
     hostname: data.hostname,
     id: data.id,
     interfaces: unmarshalArrayOfObject(data.interfaces, unmarshalNetworkInterface),
     isHds: data.is_hds,
     isOutsourced: data.is_outsourced,
-    level: data.level ? unmarshalServiceLevel(data.level) : undefined,
+    level: data.level ? unmarshalServiceLevel(data.level) : null,
     offerId: data.offer_id,
     offerName: data.offer_name,
     organizationId: data.organization_id,
-    osId: data.os_id,
+    osId: data.os_id ?? null,
     projectId: data.project_id,
     qinq: data.qinq,
-    rpnVersion: data.rpn_version,
+    rpnVersion: data.rpn_version ?? null,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as ServerSummary
 }
@@ -1497,13 +1497,13 @@ export const unmarshalRefund = (data: unknown): Refund => {
 
   return {
     content: data.content,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     method: data.method,
-    refundedAt: unmarshalDate(data.refunded_at),
+    refundedAt: unmarshalDate(data.refunded_at) ?? null,
     status: data.status,
-    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : undefined,
-    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : undefined,
+    totalWithTaxes: data.total_with_taxes ? unmarshalMoney(data.total_with_taxes) : null,
+    totalWithoutTaxes: data.total_without_taxes ? unmarshalMoney(data.total_without_taxes) : null,
   } as Refund
 }
 
@@ -1533,7 +1533,7 @@ const unmarshalPartition = (data: unknown): Partition => {
     capacity: data.capacity,
     connectors: data.connectors,
     fileSystem: data.file_system,
-    mountPoint: data.mount_point,
+    mountPoint: data.mount_point ?? null,
     raidLevel: data.raid_level,
     type: data.type,
   } as Partition
@@ -1561,11 +1561,11 @@ export const unmarshalServerInstall = (data: unknown): ServerInstall => {
   return {
     hostname: data.hostname,
     osId: data.os_id,
-    panelUrl: data.panel_url,
+    panelUrl: data.panel_url ?? null,
     partitions: unmarshalArrayOfObject(data.partitions, unmarshalPartition),
     sshKeyIds: data.ssh_key_ids,
     status: data.status,
-    userLogin: data.user_login,
+    userLogin: data.user_login ?? null,
   } as ServerInstall
 }
 
@@ -1665,7 +1665,7 @@ export const marshalInstallServerRequest = (
   license_offer_id: request.licenseOfferId,
   os_id: request.osId,
   panel_password: request.panelPassword,
-  partitions: ((request.partitions !== undefined) ?  request.partitions.map(elt => marshalInstallPartition(elt, defaults)): undefined),
+  partitions: ((request.partitions != null) ?  request.partitions.map(elt => marshalInstallPartition(elt, defaults)): undefined),
   root_password: request.rootPassword,
   ssh_key_ids: request.sshKeyIds,
   user_login: request.userLogin,

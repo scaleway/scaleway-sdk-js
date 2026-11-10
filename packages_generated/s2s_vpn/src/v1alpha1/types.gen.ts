@@ -107,19 +107,19 @@ export interface BgpSession {
 
 export interface ConnectionCipher {
   encryption: ConnectionEncryption
-  integrity?: ConnectionIntegrity
-  dhGroup?: ConnectionDhGroup
+  integrity?: ConnectionIntegrity | null
+  dhGroup?: ConnectionDhGroup | null
 }
 
 
 export interface CreateVpnGatewayRequestDualIpTunnel {
-  ipamIpv4Id?: string
-  ipamIpv6Id?: string
+  ipamIpv4Id?: string | null
+  ipamIpv6Id?: string | null
 }
 
 
 export interface CreateVpnGatewayRequestSingleIpTunnel {
-  ipamId?: string
+  ipamId?: string | null
 }
 
 
@@ -128,14 +128,14 @@ export interface VpnGatewayPrivateConfig {
 
 
 export interface VpnGatewayPublicConfig {
-  ipamIpv4Id?: string
-  ipamIpv6Id?: string
+  ipamIpv4Id?: string | null
+  ipamIpv6Id?: string | null
 }
 
 
 export interface ChangeConnectionPskRequestSecret {
   id: string
-  revision?: number
+  revision?: number | null
 }
 
 
@@ -167,11 +167,11 @@ export interface Connection {
   /**
    * Creation date of the connection.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the connection.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Status of the connection.
    */
@@ -219,11 +219,11 @@ export interface Connection {
   /**
    * @deprecated Status of the IPv4 IPsec tunnel.
    */
-  tunnelStatusIpv4?: TunnelStatus
+  tunnelStatusIpv4?: TunnelStatus | null
   /**
    * @deprecated Status of the IPv6 IPsec tunnel.
    */
-  tunnelStatusIpv6?: TunnelStatus
+  tunnelStatusIpv6?: TunnelStatus | null
   /**
    * Status of the BGP IPv4 session.
    */
@@ -235,11 +235,11 @@ export interface Connection {
   /**
    * BGP IPv4 session, including status, interco private IPv4 subnet and attached routing policy.
    */
-  bgpSessionIpv4?: BgpSession
+  bgpSessionIpv4?: BgpSession | null
   /**
    * BGP IPv6 session, including status, interco private IPv6 subnet and attached routing policy.
    */
-  bgpSessionIpv6?: BgpSession
+  bgpSessionIpv6?: BgpSession | null
   /**
    * Region of the connection.
    */
@@ -249,20 +249,20 @@ export interface Connection {
 
 export interface CreateConnectionRequestBgpConfig {
   routingPolicyId: string
-  privateIp?: string
-  peerPrivateIp?: string
+  privateIp?: string | null
+  peerPrivateIp?: string | null
 }
 
 
 export interface CreateConnectionRequestSecret {
   id: string
-  revision?: number
+  revision?: number | null
 }
 
 
 export interface CreateVpnGatewayRequestPublicConfig {
-  ipamIpv4Id?: string
-  ipamIpv6Id?: string
+  ipamIpv4Id?: string | null
+  ipamIpv6Id?: string | null
 }
 
 
@@ -271,17 +271,17 @@ export interface CreateVpnGatewayRequestPublicTunnelConfig {
    *
    * One-of ('config'): at most one of 'singleIpv4Tunnel', 'singleIpv6Tunnel', 'dualIpv4V6Tunnel' could be set.
    */
-  singleIpv4Tunnel?: CreateVpnGatewayRequestSingleIpTunnel
+  singleIpv4Tunnel?: CreateVpnGatewayRequestSingleIpTunnel | null
   /**
    *
    * One-of ('config'): at most one of 'singleIpv4Tunnel', 'singleIpv6Tunnel', 'dualIpv4V6Tunnel' could be set.
    */
-  singleIpv6Tunnel?: CreateVpnGatewayRequestSingleIpTunnel
+  singleIpv6Tunnel?: CreateVpnGatewayRequestSingleIpTunnel | null
   /**
    *
    * One-of ('config'): at most one of 'singleIpv4Tunnel', 'singleIpv6Tunnel', 'dualIpv4V6Tunnel' could be set.
    */
-  dualIpv4V6Tunnel?: CreateVpnGatewayRequestDualIpTunnel
+  dualIpv4V6Tunnel?: CreateVpnGatewayRequestDualIpTunnel | null
 }
 
 
@@ -313,19 +313,19 @@ export interface CustomerGateway {
   /**
    * Creation date of the customer gateway.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the customer gateway.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Public IPv4 address of the customer gateway.
    */
-  publicIpv4?: string
+  publicIpv4?: string | null
   /**
    * Public IPv6 address of the customer gateway.
    */
-  publicIpv6?: string
+  publicIpv6?: string | null
   /**
    * AS Number of the customer gateway.
    */
@@ -369,11 +369,11 @@ export interface RoutingPolicy {
   /**
    * Creation date of the routing policy.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the routing policy.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * IP prefixes version of the routing policy.
    */
@@ -433,11 +433,11 @@ export interface VpnGateway {
   /**
    * Creation date of the VPN gateway.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the VPN gateway.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Status of the VPN gateway.
    */
@@ -451,12 +451,12 @@ export interface VpnGateway {
    *
    * One-of ('endpoint'): at most one of 'publicConfig', 'privateConfig' could be set.
    */
-  publicConfig?: VpnGatewayPublicConfig
+  publicConfig?: VpnGatewayPublicConfig | null
   /**
    *
    * One-of ('endpoint'): at most one of 'publicConfig', 'privateConfig' could be set.
    */
-  privateConfig?: VpnGatewayPrivateConfig
+  privateConfig?: VpnGatewayPrivateConfig | null
   /**
    * ID of the Private Network attached to the VPN gateway.
    */
@@ -492,7 +492,7 @@ export type ChangeConnectionPskRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the connection to renew the PSK.
    */
@@ -508,7 +508,7 @@ export interface ChangeConnectionPskResponse {
   /**
    * This connection.
    */
-  connection?: Connection
+  connection?: Connection | null
 }
 
 
@@ -516,11 +516,11 @@ export type CreateConnectionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to create the connection in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the connection.
    */
@@ -528,7 +528,7 @@ export type CreateConnectionRequest = {
   /**
    * List of tags to apply to the connection.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Defines IP version of the IPSec Tunnel.
    */
@@ -553,7 +553,7 @@ export type CreateConnectionRequest = {
    * If no secret is given, S2S VPN will create one automatically in Secret Manager, reference its secret_id and version in the connection and use the generated PSK.
 Secret version is also optional and maybe used to refer to a previous version. If no version is given, "latest" is used.
    */
-  secret?: CreateConnectionRequestSecret
+  secret?: CreateConnectionRequestSecret | null
   /**
    * ID of the VPN gateway to attach to the connection.
    */
@@ -565,11 +565,11 @@ Secret version is also optional and maybe used to refer to a previous version. I
   /**
    * BGP config of IPv4 session, including interco private IPv4 subnet (first IP assigned to the VPN Gateway, second IP to the Customer Gateway) and attached routing policy.
    */
-  bgpConfigIpv4?: CreateConnectionRequestBgpConfig
+  bgpConfigIpv4?: CreateConnectionRequestBgpConfig | null
   /**
    * BGP config of IPv6 session, including interco private IPv6 subnet (first IP assigned to the VPN Gateway, second IP to the Customer Gateway) and attached routing policy.
    */
-  bgpConfigIpv6?: CreateConnectionRequestBgpConfig
+  bgpConfigIpv6?: CreateConnectionRequestBgpConfig | null
 }
 
 
@@ -577,11 +577,11 @@ export interface CreateConnectionResponse {
   /**
    * This connection.
    */
-  connection?: Connection
+  connection?: Connection | null
   /**
    * @deprecated Deprecated, use secret_id & secret_revision fields.
    */
-  preSharedKey?: string
+  preSharedKey?: string | null
 }
 
 
@@ -589,11 +589,11 @@ export type CreateCustomerGatewayRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to create the customer gateway in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the customer gateway.
    */
@@ -601,15 +601,15 @@ export type CreateCustomerGatewayRequest = {
   /**
    * List of tags to apply to the customer gateway.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Public IPv4 address of the customer gateway.
    */
-  ipv4Public?: string
+  ipv4Public?: string | null
   /**
    * Public IPv6 address of the customer gateway.
    */
-  ipv6Public?: string
+  ipv6Public?: string | null
   /**
    * AS Number of the customer gateway.
    */
@@ -621,11 +621,11 @@ export type CreateRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to create the routing policy in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the routing policy.
    */
@@ -633,7 +633,7 @@ export type CreateRoutingPolicyRequest = {
   /**
    * List of tags to apply to the routing policy.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * IP prefixes version of the routing policy.
    */
@@ -641,11 +641,11 @@ export type CreateRoutingPolicyRequest = {
   /**
    * IP prefixes to accept from the peer (ranges of route announcements to accept).
    */
-  prefixFilterIn?: string[]
+  prefixFilterIn?: string[] | null
   /**
    * IP prefix filters to advertise to the peer (ranges of routes to advertise).
    */
-  prefixFilterOut?: string[]
+  prefixFilterOut?: string[] | null
 }
 
 
@@ -653,11 +653,11 @@ export type CreateVpnGatewayRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to create the VPN gateway in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the VPN gateway.
    */
@@ -665,7 +665,7 @@ export type CreateVpnGatewayRequest = {
   /**
    * List of tags to apply to the VPN gateway.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * VPN gateway type (commercial offer type).
    */
@@ -675,7 +675,7 @@ export type CreateVpnGatewayRequest = {
    *
    * One-of ('endpoint'): at most one of 'publicConfig', 'publicTunnelConfig' could be set.
    */
-  publicConfig?: CreateVpnGatewayRequestPublicConfig
+  publicConfig?: CreateVpnGatewayRequestPublicConfig | null
   /**
    * ID of the Private Network to attach to the VPN gateway.
    */
@@ -684,19 +684,19 @@ export type CreateVpnGatewayRequest = {
    *
    * One-of ('endpoint'): at most one of 'publicConfig', 'publicTunnelConfig' could be set.
    */
-  publicTunnelConfig?: CreateVpnGatewayRequestPublicTunnelConfig
+  publicTunnelConfig?: CreateVpnGatewayRequestPublicTunnelConfig | null
   /**
    * ID of the IPAM private IPv4 address to attach to the VPN gateway.
    */
-  ipamPrivateIpv4Id?: string
+  ipamPrivateIpv4Id?: string | null
   /**
    * ID of the IPAM private IPv6 address to attach to the VPN gateway.
    */
-  ipamPrivateIpv6Id?: string
+  ipamPrivateIpv6Id?: string | null
   /**
    * Availability Zone where the VPN gateway should be provisioned. If no zone is specified, the VPN gateway will be automatically placed.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
 }
 
 
@@ -704,7 +704,7 @@ export type DeleteConnectionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the connection to delete.
    */
@@ -716,7 +716,7 @@ export type DeleteCustomerGatewayRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the customer gateway to delete.
    */
@@ -728,7 +728,7 @@ export type DeleteRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the routing policy to delete.
    */
@@ -740,7 +740,7 @@ export type DeleteVpnGatewayRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the VPN gateway to delete.
    */
@@ -752,7 +752,7 @@ export type DetachRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the connection from which routing policy is being detached.
    */
@@ -762,13 +762,13 @@ export type DetachRoutingPolicyRequest = {
    *
    * One-of ('routingPolicy'): at most one of 'routingPolicyV4', 'routingPolicyV6' could be set.
    */
-  routingPolicyV4?: string
+  routingPolicyV4?: string | null
   /**
    * ID of the routing policy to detach from the BGP IPv6 session.
    *
    * One-of ('routingPolicy'): at most one of 'routingPolicyV4', 'routingPolicyV6' could be set.
    */
-  routingPolicyV6?: string
+  routingPolicyV6?: string | null
 }
 
 
@@ -776,7 +776,7 @@ export type DisableRoutePropagationRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the connection on which to disable route propagation.
    */
@@ -788,7 +788,7 @@ export type EnableRoutePropagationRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the connection on which to enable route propagation.
    */
@@ -800,7 +800,7 @@ export type GetConnectionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the requested connection.
    */
@@ -812,7 +812,7 @@ export type GetCustomerGatewayRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the requested customer gateway.
    */
@@ -824,7 +824,7 @@ export type GetRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the routing policy to get.
    */
@@ -836,7 +836,7 @@ export type GetVpnGatewayRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the requested VPN gateway.
    */
@@ -848,59 +848,59 @@ export type ListConnectionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of connections to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListConnectionsRequestOrderBy
+  orderBy?: ListConnectionsRequestOrderBy | null
   /**
    * Project ID to filter for.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Connection name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Connection statuses to filter for.
    */
-  statuses?: ConnectionStatus[]
+  statuses?: ConnectionStatus[] | null
   /**
    * Filter connections with IP version of IPSec tunnel.
    */
-  isIpv6?: boolean
+  isIpv6?: boolean | null
   /**
    * Filter for connections using these routing policies.
    */
-  routingPolicyIds?: string[]
+  routingPolicyIds?: string[] | null
   /**
    * Filter for connections with route propagation enabled.
    */
-  routePropagationEnabled?: boolean
+  routePropagationEnabled?: boolean | null
   /**
    * Filter for connections attached to these VPN gateways.
    */
-  vpnGatewayIds?: string[]
+  vpnGatewayIds?: string[] | null
   /**
    * Filter for connections attached to these customer gateways.
    */
-  customerGatewayIds?: string[]
+  customerGatewayIds?: string[] | null
 }
 
 
@@ -920,35 +920,35 @@ export type ListCustomerGatewaysRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of customer gateways to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListCustomerGatewaysRequestOrderBy
+  orderBy?: ListCustomerGatewaysRequestOrderBy | null
   /**
    * Project ID to filter for.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Customer gateway name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -968,39 +968,39 @@ export type ListRoutingPoliciesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of routing policies to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListRoutingPoliciesRequestOrderBy
+  orderBy?: ListRoutingPoliciesRequestOrderBy | null
   /**
    * Project ID to filter for.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Routing policy name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter for the routing policies based on IP prefixes version.
    */
-  ipv6?: boolean
+  ipv6?: boolean | null
 }
 
 
@@ -1014,15 +1014,15 @@ export type ListVpnGatewayTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of VPN gateway types to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1042,47 +1042,47 @@ export type ListVpnGatewaysRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of VPN gateways to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListVpnGatewaysRequestOrderBy
+  orderBy?: ListVpnGatewaysRequestOrderBy | null
   /**
    * Project ID to filter for.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * VPN gateway name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * VPN gateway statuses to filter for.
    */
-  statuses?: VpnGatewayStatus[]
+  statuses?: VpnGatewayStatus[] | null
   /**
    * Filter for VPN gateways of these types.
    */
-  gatewayTypes?: string[]
+  gatewayTypes?: string[] | null
   /**
    * Filter for VPN gateways attached to these private networks.
    */
-  privateNetworkIds?: string[]
+  privateNetworkIds?: string[] | null
 }
 
 
@@ -1102,7 +1102,7 @@ export type RenewConnectionPskRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the connection to renew the PSK.
    */
@@ -1110,7 +1110,7 @@ export type RenewConnectionPskRequest = {
   /**
    * Generate a new version or update to the latest existing one.
    */
-  generateRevision?: boolean
+  generateRevision?: boolean | null
 }
 
 
@@ -1118,11 +1118,11 @@ export interface RenewConnectionPskResponse {
   /**
    * This connection.
    */
-  connection?: Connection
+  connection?: Connection | null
   /**
    * @deprecated Deprecated, use secret_id & secret_revision fields.
    */
-  preSharedKey?: string
+  preSharedKey?: string | null
 }
 
 
@@ -1130,7 +1130,7 @@ export type SetRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the connection whose routing policy is being updated.
    */
@@ -1140,13 +1140,13 @@ export type SetRoutingPolicyRequest = {
    *
    * One-of ('routingPolicy'): at most one of 'routingPolicyV4', 'routingPolicyV6' could be set.
    */
-  routingPolicyV4?: string
+  routingPolicyV4?: string | null
   /**
    * ID of the routing policy to set for the BGP IPv6 session.
    *
    * One-of ('routingPolicy'): at most one of 'routingPolicyV4', 'routingPolicyV6' could be set.
    */
-  routingPolicyV6?: string
+  routingPolicyV6?: string | null
 }
 
 
@@ -1154,7 +1154,7 @@ export type UpdateConnectionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the connection to update.
    */
@@ -1162,31 +1162,31 @@ export type UpdateConnectionRequest = {
   /**
    * Name of the connection.
    */
-  name?: string
+  name?: string | null
   /**
    * List of tags to apply to the connection.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Who initiates the IPsec tunnel.
    */
-  initiationPolicy?: CreateConnectionRequestInitiationPolicy
+  initiationPolicy?: CreateConnectionRequestInitiationPolicy | null
   /**
    * List of IKE v2 ciphers proposed for the IPsec tunnel.
    */
-  ikev2Ciphers?: ConnectionCipher[]
+  ikev2Ciphers?: ConnectionCipher[] | null
   /**
    * List of ESP ciphers proposed for the IPsec tunnel.
    */
-  espCiphers?: ConnectionCipher[]
+  espCiphers?: ConnectionCipher[] | null
   /**
    * Secret ID in the client's project containing the PSK.
    */
-  secretId?: string
+  secretId?: string | null
   /**
    * If not given it will not change. If secret_id is updated, secret_revision should be set accordingly.
    */
-  secretRevision?: number
+  secretRevision?: number | null
 }
 
 
@@ -1194,7 +1194,7 @@ export type UpdateCustomerGatewayRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the customer gateway to update.
    */
@@ -1202,23 +1202,23 @@ export type UpdateCustomerGatewayRequest = {
   /**
    * Name of the customer gateway.
    */
-  name?: string
+  name?: string | null
   /**
    * List of tags to apply to the customer gateway.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Public IPv4 address of the customer gateway.
    */
-  ipv4Public?: string
+  ipv4Public?: string | null
   /**
    * Public IPv6 address of the customer gateway.
    */
-  ipv6Public?: string
+  ipv6Public?: string | null
   /**
    * AS Number of the customer gateway.
    */
-  asn?: number
+  asn?: number | null
 }
 
 
@@ -1226,7 +1226,7 @@ export type UpdateRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the routing policy to update.
    */
@@ -1234,19 +1234,19 @@ export type UpdateRoutingPolicyRequest = {
   /**
    * Name of the routing policy.
    */
-  name?: string
+  name?: string | null
   /**
    * List of tags to apply to the routing policy.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * IP prefixes to accept from the peer (ranges of route announcements to accept).
    */
-  prefixFilterIn?: string[]
+  prefixFilterIn?: string[] | null
   /**
    * IP prefix filters for routes to advertise to the peer (ranges of routes to advertise).
    */
-  prefixFilterOut?: string[]
+  prefixFilterOut?: string[] | null
 }
 
 
@@ -1254,7 +1254,7 @@ export type UpdateVpnGatewayRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the VPN gateway to update.
    */
@@ -1262,11 +1262,11 @@ export type UpdateVpnGatewayRequest = {
   /**
    * Name of the VPN gateway.
    */
-  name?: string
+  name?: string | null
   /**
    * List of tags to apply to the VPN Gateway.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
