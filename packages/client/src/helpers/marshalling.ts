@@ -37,7 +37,7 @@ export function validatePathParam(name: string, param: string | number | undefin
 export const resolveOneOf = <T>(
   list: {
     param: string
-    value: T | undefined
+    value: T | undefined | null
     default?: T | undefined
   }[],
   isRequired = false,

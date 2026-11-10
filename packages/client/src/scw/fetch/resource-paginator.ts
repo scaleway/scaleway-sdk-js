@@ -2,8 +2,8 @@ import { AbortError } from '../errors/abort-error.js'
 import type { RequestOptions } from './types.js'
 
 type PaginationOptions = {
-  page?: number
-  pageSize?: number
+  page?: number | null
+  pageSize?: number | null
 }
 
 type PaginatedResponse = {
