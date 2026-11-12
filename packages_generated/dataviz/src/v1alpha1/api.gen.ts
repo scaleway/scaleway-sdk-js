@@ -13,6 +13,8 @@ import {
 import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAVIZ,} from './content.gen.js'
 import {
+  unmarshalCertificate,
+  marshalCreateCertificateRequest,
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
   marshalCreateUserRequest,
@@ -28,6 +30,8 @@ import {
   unmarshalUser,
 } from './marshalling.gen.js'
 import type {
+  Certificate,
+  CreateCertificateRequest,
   CreateDeploymentRequest,
   CreateEndpointRequest,
   CreateUserRequest,
@@ -398,6 +402,21 @@ export class API extends ParentAPI {
         responseType: 'blob',
         signal: options?.signal,
       },
+    )
+
+  
+  createCertificate = (request: Readonly<CreateCertificateRequest>, options?: RequestOptions) =>
+    this.client.fetch<Certificate>(
+      {
+        body: JSON.stringify(
+          marshalCreateCertificateRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificates`,
+        signal: options?.signal,
+      },
+      unmarshalCertificate,
     )
 
   
