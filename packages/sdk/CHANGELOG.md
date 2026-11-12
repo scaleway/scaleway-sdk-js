@@ -1,5 +1,318 @@
 # Change Log
 
+## 4.3.0
+
+### Minor Changes
+
+- fix: sdk deps (#2055)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(k8s): allow patching security_group_id on existing pools (#2720)
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- feat(generate-react-queries): add reload hook codegen (#2814)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(search): add support for CLI (#2931)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): prebuild (#2796)
+
+- fix(s2s_vpn): add packages (#2400)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore(serverless_jobs): add console endpoint v1alpha2 (#2724)
+
+- feat(kafka): add v1alpha1 (#2546)
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- chore: add extension for nodenext (#2265)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat: sdk export createclient (#2425)
+
+- feat(datalab): add support for datalab (#2738)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(autoscaling): enable v1alpha1 (#2104)
+
+- feat(partner): enable v1 (#2788)
+
+- fix(scripts): move writeFileSync outside loop in generateAlias to fix EUNCOMMIT error in CI (#2526)
+
+- feat(vpcgw): remove v1 API export (#2972)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(annotations): make it public (#3107)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add support for `no_kvm` (#3015)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(chore): export alias for bc (#2048)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: read real exports from packages instead of guessing names to fix TypeScript compilation errors (#2460)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(dataviz): add superset (#3126)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(deps): update dependency typescript to v6 (#2914)
+
+- fix(release): run by commit and github release cli (#3185)
+
+- fix(account): add organization_id to CompanyAdministrativeDataApi requests to... (#2934)
+
+- feat(sdk): generated packages (#2029)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+- chore(release): publish
+
+- feat(datawarehouse): update the visibility to public (#2406)
+
+- chore(release): publish
+
+- chore: add locality type (#2206)
+
+- chore(release): publish
+
+- feat(billing): set public visibility for budget API (#3056)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: fix deploy (#2123)
+
+- chore(deps): update dependency lerna to v9.0.5 (#2806)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(searchdb): enable opensearch cli (#2725)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore: bump sdk (#2745)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(autoscaling): add v1alpha2 (#3127)
+
+- chore(release): publish
+
+- feat(environmental_footprint): enable v1alpha1 (#2441)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(mailbox): add product (#2818)
+
+- feat: publish packages as ESM only (#2624)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-account@2.18.0
+  - @scaleway/sdk-annotations@1.13.0
+  - @scaleway/sdk-applesilicon@2.21.0
+  - @scaleway/sdk-audit-trail@2.35.0
+  - @scaleway/sdk-autoscaling@2.19.0
+  - @scaleway/sdk-baremetal@2.20.0
+  - @scaleway/sdk-billing@2.22.0
+  - @scaleway/sdk-block@2.23.0
+  - @scaleway/sdk-cockpit@2.18.0
+  - @scaleway/sdk-container@2.23.0
+  - @scaleway/sdk-datalab@1.17.0
+  - @scaleway/sdk-dataviz@1.14.0
+  - @scaleway/sdk-datawarehouse@2.24.0
+  - @scaleway/sdk-dedibox@2.23.0
+  - @scaleway/sdk-domain@2.21.0
+  - @scaleway/sdk-edge-services@2.29.0
+  - @scaleway/sdk-environmental-footprint@2.24.0
+  - @scaleway/sdk-file@2.21.0
+  - @scaleway/sdk-flexibleip@2.18.0
+  - @scaleway/sdk-function@2.20.0
+  - @scaleway/sdk-iam@2.23.0
+  - @scaleway/sdk-inference@2.22.0
+  - @scaleway/sdk-instance@2.28.0
+  - @scaleway/sdk-interlink@2.19.0
+  - @scaleway/sdk-iot@2.18.0
+  - @scaleway/sdk-ipam@2.22.0
+  - @scaleway/sdk-jobs@2.20.0
+  - @scaleway/sdk-k8s@2.31.0
+  - @scaleway/sdk-kafka@2.20.0
+  - @scaleway/sdk-key-manager@2.24.0
+  - @scaleway/sdk-lb@2.21.0
+  - @scaleway/sdk-mailbox@1.20.0
+  - @scaleway/sdk-marketplace@2.15.0
+  - @scaleway/sdk-messageq@1.15.0
+  - @scaleway/sdk-mnq@2.18.0
+  - @scaleway/sdk-mongodb@2.24.0
+  - @scaleway/sdk-partner@1.16.0
+  - @scaleway/sdk-product-catalog@2.34.0
+  - @scaleway/sdk-qaas@2.18.0
+  - @scaleway/sdk-rdb@2.21.0
+  - @scaleway/sdk-redis@2.19.0
+  - @scaleway/sdk-registry@2.18.0
+  - @scaleway/sdk-s2s-vpn@2.23.0
+  - @scaleway/sdk-search@1.20.0
+  - @scaleway/sdk-searchdb@1.20.0
+  - @scaleway/sdk-secret@2.19.0
+  - @scaleway/sdk-serverless-sqldb@2.20.0
+  - @scaleway/sdk-std@2.9.6
+  - @scaleway/sdk-tem@2.18.0
+  - @scaleway/sdk-test@2.18.0
+  - @scaleway/sdk-vpc@2.23.0
+  - @scaleway/sdk-vpcgw@2.20.0
+  - @scaleway/sdk-webhosting@2.25.0
+
 ## 4.2.8
 
 ### Patch Changes

@@ -1,5 +1,253 @@
 # Change Log
 
+## 0.24.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- chore(deps): update non-major devdependencies (#3749)
+
+- feat(generate-react-queries): add reload hook codegen (#2814)
+
+- fix(pnpm): optimisticRepeatInstall setting to false (#3167)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk-react-hooks): ✨ add file system types query hooks (#2887)
+
+- chore(release): publish
+
+- chore(deps): update dependency react to ^19.2.5 (#2908)
+
+- chore(release): publish
+
+- fix(bin): rename bin (#2815)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update react monorepo to v19.3.0 (#3539)
+
+- chore(deps): update dependency @scaleway/sync-peer-deps to v1.0.5 (#3378)
+
+- fix: release provenance (#3552)
+
+- chore(release): publish
+
+- chore: linter (#3578)
+
+- feat(generate-react-queries): pass abort signal to query methods (#3651)
+
+- feat(vpcgw): remove v1 API export (#2972)
+
+- feat(audit_trail): add endpoint for overview of auditTrail Event (#3069)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore: add a post_generate target for sdk-js pipeline post-generation (#3000)
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- chore(annotations): make it public (#3107)
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(deps): update dependency @scaleway/use-dataloader to v6.1.2 (#2959)
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- fix: deps (#3644)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/use-dataloader to v7.1.1 (#3563)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: sync sdk-react release inputs (#2995)
+
+- chore(release): publish
+
+- fix(sdk-react-hooks): codegen (#2827)
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(deps): update dependency @scaleway/use-dataloader to v7.1.2 (#3672)
+
+- chore(deps): update dependency typescript to v6 (#2914)
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- fix(release): run by commit and github release cli (#3185)
+
+- chore(deps): update dependency tinyglobby to v0.2.16 (#2957)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+- chore(release): publish
+
+- chore(deps): upgrade (#3588)
+
+- chore(release): publish
+
+- feat(billing): set public visibility for budget API (#3056)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3680)
+
+- chore: sync generated files after build (#2862)
+
+- feat(generate-react-queries): favor toSorted instead of sort (#3716)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(format): format package.json (#2817)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- feat(sdk): add metadata of the package (#2902)
+
+- fix: add range to react deps (#3581)
+
+- chore(release): publish
+
+- chore: bump ts lib to es2023 (#3717)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: commit generated files for release (#2876)
+
+- feat(inference): add support for react hooks (#3014)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(audit_trail): add custom alerts (#3155)
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(autoscaling): add v1alpha2 (#3127)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk-react-hooks): make reload sync (#2878)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-account@2.18.0
+  - @scaleway/sdk-annotations@1.13.0
+  - @scaleway/sdk-applesilicon@2.21.0
+  - @scaleway/sdk-audit-trail@2.35.0
+  - @scaleway/sdk-autoscaling@2.19.0
+  - @scaleway/sdk-baremetal@2.20.0
+  - @scaleway/sdk-billing@2.22.0
+  - @scaleway/sdk-block@2.23.0
+  - @scaleway/sdk-cockpit@2.18.0
+  - @scaleway/sdk-container@2.23.0
+  - @scaleway/sdk-datalab@1.17.0
+  - @scaleway/sdk-datawarehouse@2.24.0
+  - @scaleway/sdk-dedibox@2.23.0
+  - @scaleway/sdk-domain@2.21.0
+  - @scaleway/sdk-edge-services@2.29.0
+  - @scaleway/sdk-environmental-footprint@2.24.0
+  - @scaleway/sdk-file@2.21.0
+  - @scaleway/sdk-flexibleip@2.18.0
+  - @scaleway/sdk-function@2.20.0
+  - @scaleway/sdk-iam@2.23.0
+  - @scaleway/sdk-inference@2.22.0
+  - @scaleway/sdk-instance@2.28.0
+  - @scaleway/sdk-interlink@2.19.0
+  - @scaleway/sdk-iot@2.18.0
+  - @scaleway/sdk-ipam@2.22.0
+  - @scaleway/sdk-jobs@2.20.0
+  - @scaleway/sdk-k8s@2.31.0
+  - @scaleway/sdk-kafka@2.20.0
+  - @scaleway/sdk-key-manager@2.24.0
+  - @scaleway/sdk-lb@2.21.0
+  - @scaleway/sdk-marketplace@2.15.0
+  - @scaleway/sdk-mnq@2.18.0
+  - @scaleway/sdk-mongodb@2.24.0
+  - @scaleway/sdk-partner@1.16.0
+  - @scaleway/sdk-product-catalog@2.34.0
+  - @scaleway/sdk-qaas@2.18.0
+  - @scaleway/sdk-rdb@2.21.0
+  - @scaleway/sdk-react@0.22.1
+  - @scaleway/sdk-redis@2.19.0
+  - @scaleway/sdk-registry@2.18.0
+  - @scaleway/sdk-s2s-vpn@2.23.0
+  - @scaleway/sdk-searchdb@1.20.0
+  - @scaleway/sdk-secret@2.19.0
+  - @scaleway/sdk-serverless-sqldb@2.20.0
+  - @scaleway/sdk-tem@2.18.0
+  - @scaleway/sdk-vpc@2.23.0
+  - @scaleway/sdk-vpcgw@2.20.0
+  - @scaleway/sdk-webhosting@2.25.0
+
 ## 0.23.0
 
 ### Minor Changes

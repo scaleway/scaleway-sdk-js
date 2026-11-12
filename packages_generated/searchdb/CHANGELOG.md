@@ -1,5 +1,174 @@
 # Change Log
 
+## 1.20.0
+
+### Minor Changes
+
+- fix(searchdb): add ignore_empty to node fields to fix backward compatibility (#3053)
+
+- chore: reformat tsconfig.build.json exclude arrays and reorder imports (#2973)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- feat(searchdb): remove version field from ListDeploymentsRequest (#2970)
+
+- chore(release): publish
+
+- chore(desc): update generated APIs (#2726)
+
+- feat(searchdb): remove node_amount field (#3048)
+
+- chore(typescript): upgrade version (#2916)
+
+- fix: remove unrequired volume deployment_id (#3784)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- fix(build): output (#2842)
+
+- fix(searchdb): remove validation rule from deprecated node_amount (#3023)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- Update generated APIs (#3745)
+
+- feat: update generated APIs (#2881)
+
+- feat: update generated APIs (#3650)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- refactor(searchdb): deprecate node_amount and introduce node_count - SCBL-453 (#3021)
+
+- chore(release): publish
+
+- fix(searchdb): fix DeleteUser validation regexp (#3074)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- feat(multiple_namespaces): add SRN integration (#3722)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- fix(searchdb): mark node_amount and node_count tags as optional for TS compatibility (#3078)
+
+- feat(messageq): add DownloadDeploymentCertificateAuthority (#2978)
+
+- feat: add support for constants (#3286)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(searchdb): enable opensearch cli (#2725)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: bump sdk (#2745)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(searchdb): increase node_amount to 99 (#2937)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.6
+
 ## 1.19.0
 
 ### Minor Changes

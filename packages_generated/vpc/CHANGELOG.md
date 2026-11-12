@@ -1,5 +1,246 @@
 # Change Log
 
+## 2.23.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- fix: export locality (#2200)
+
+- chore: format generated files (#2652)
+
+- feat(vpc): support defaultRoutePropagationEnabled (#2140)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(vpc): use body params in POST vpc-s3 enable with PN instead of query_params (#3663)
+
+- chore(release): publish
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(vpc): add support for `enableTransitivity` (#3077)
+
+- chore(release): publish
+
+- feat(vpc): add project/org filter to ingress rule list (#3024)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(vpc): remove vpc connector (#2780)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- fix(build): output (#2842)
+
+- Update generated APIs (#3745)
+
+- chore(vpc): edit region description (#3025)
+
+- feat: update generated APIs (#2881)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat: add support for srn (#3524)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- chore: format generated files (#2659)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- feat(vpc): add route type (#2589)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: new formating (#2667)
+
+- feat(vpc): enable call to enable vpc custom routes and pn default route propagation as unlisted (#2162)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore: reorganize import (#2520)
+
+- fix: format (#2683)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- chore(vpc): generate SDK and documentation for VPC Peering (#2847)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat(vpc): add v2 API (#2969)
+
+- feat: add support for constants (#3286)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore: fix formating (#2669)
+
+- feat(sdk): generated packages (#2029)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(vpc): remove not implemented subnet methods (#3080)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(vpc): add ingress rule documentation and cli (#3101)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- fix(vpc): add required to privateNetworkWithNics (#2867)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(vpc): rename s3-integration endpoints to object-storage-private-access (#3251)
+
+- feat: publish packages as ESM only (#2624)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.6
+
 ## 2.22.0
 
 ### Minor Changes

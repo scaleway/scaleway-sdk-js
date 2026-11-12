@@ -1,5 +1,150 @@
 # Change Log
 
+## 1.20.0
+
+### Minor Changes
+
+- fix(searchdb): add ignore_empty to node fields to fix backward compatibility (#3053)
+
+- chore: reformat tsconfig.build.json exclude arrays and reorder imports (#2973)
+
+- feat(search): add support for `kafk_cluster` (#3051)
+
+- feat: update generated APIs (#3600)
+
+- feat(search/v1alpha1): add iam resources (#3052)
+
+- feat(search): add support for CLI (#2931)
+
+- chore(release): publish
+
+- feat(search): add support for `sedb_cluster` (#3068)
+
+- feat(search): add new resource types (#2965)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(search): add support for `autoscaling_group` (#3081)
+
+- feat(search): remove temporarily IAM from public search (#3265)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat(search): add filters to search resources (#3028)
+
+- feat(cockpit): add api search integration (#3018)
+
+- feat(search): add support for instance_private_nic instance_snapshot and instance_placement_group (#3016)
+
+- feat: update generated APIs (#3650)
+
+- feat(search): add sort/pagination and empty query possible (#3149)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- feat(messageq): add generated messageq package (#2962)
+
+- chore(release): publish
+
+- refactor(search): remove enum and use a string instead (#3216)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(search): add relevance value to order_by enum (#3159)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix(search): add missing instance_template in Resource.Type (#3233)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(permission): declare gapi consumption_limit permission (#3626)
+
+- docs: fix typos (#3221)
+
+- feat: add support for constants (#3286)
+
+- chore(packages): upgrade deps (#3157)
+
+- fix(search): rename resource type datalab (#3681)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(search): add resource infos to yml (#3547)
+
+- chore(release): publish
+
+- feat(datawarehouse): allow max CPU field up to 30 DTWH-563 (#3220)
+
+- feat: update generated APIs (#3643)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(search): add kvdb types (#3799)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.6
+
 ## 1.19.0
 
 ### Minor Changes

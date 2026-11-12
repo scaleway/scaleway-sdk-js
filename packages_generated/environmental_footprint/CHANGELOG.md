@@ -1,5 +1,208 @@
 # Change Log
 
+## 2.24.0
+
+### Minor Changes
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2598)
+
+- feat: update generated APIs (#3600)
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- fix: unify biome config with spaces (#2684)
+
+- chore(deps): update node.js (#2630)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(environmental_footprint): add serverless products to EFP user API (#3133)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- feat(environmental_footprint): add kubernetes environmental usage for the User API (#2736)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(environmental_footprint): add generative API's to EFP user api (#3055)
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- fix(build): output (#2842)
+
+- feat(environmental_impact): add yearly_summary_reports field to impact report availability messages (#2695)
+
+- Update generated APIs (#3745)
+
+- feat(environmental_footprint): add databases filters for user api (#2835)
+
+- feat: update generated APIs (#3650)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): realign git versions with npm (#3356)
+
+- docs(environmental_footprint): update fields descriptions (#2454)
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- feat(environmental_footprint): add ai and managed inference in user_api (#2985)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- chore: format generated files (#2659)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: new formating (#2667)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore: reorganize import (#2520)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: add support for constants (#3286)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore: fix formating (#2669)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- chore: remove blank lines (#2535)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(environmental_footprint): add network and load balancer categories to enums (#2677)
+
+- chore(lint): update generated files (#2594)
+
+- feat(environmental_footprint): move impact multi-az to region-level (#2921)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(environmental_footprint): enable v1alpha1 (#2441)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.6
+
 ## 2.23.0
 
 ### Minor Changes
