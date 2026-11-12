@@ -300,6 +300,31 @@ export interface Version {
 }
 
 
+export interface Certificate {
+  id: string
+  name: string
+  deploymentId: string
+  content: string
+  createdAt?: Date | null
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region: ScwRegion
+  srn: string
+}
+
+
+export type CreateCertificateRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  deploymentId: string
+  name: string
+  content: string
+}
+
+
 /**
  * Request to create a new deployment.
  */
