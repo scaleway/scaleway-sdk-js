@@ -18,6 +18,15 @@ export type DiscountFilterType =
   | 'region'
   | 'zone'
 
+export type DiscountLineOrigin =
+  | 'unknown_origin'
+  | 'discount'
+  | 'contractual_commitment_range'
+  | 'savings_plan_activation'
+  | 'credit_note_rebate'
+  | 'reserved_resource_activation'
+  | 'offer_included'
+
 export type DownloadInvoiceRequestFileType =
   | 'pdf'
 
@@ -210,6 +219,26 @@ export interface ListConsumptionsResponseConsumption {
 }
 
 
+export interface DiscountLine {
+  /**
+   * Discount line ID.
+   */
+  id: string
+  /**
+   * ID of the invoice line the discount applies to.
+   */
+  invoiceLineId: string
+  /**
+   * The origin of the discount line.
+   */
+  origin: DiscountLineOrigin
+  /**
+   * The value of the discount.
+   */
+  value?: Money | null
+}
+
+
 export interface Discount {
   /**
    * The ID of the discount.
@@ -259,6 +288,82 @@ export interface Discount {
    * List of the discount scopes.
    */
   filters: DiscountFilter[]
+}
+
+
+export interface InvoiceLine {
+  /**
+   * Invoice line ID.
+   */
+  id: string
+  /**
+   * ID of the invoice the line belongs to.
+   */
+  invoiceId: string
+  /**
+   * Organization ID of the consumer for this line.
+   */
+  organizationId: string
+  /**
+   * Organization name of the consumer for this line.
+   */
+  organizationName: string
+  /**
+   * Project ID of the line.
+   */
+  projectId: string
+  /**
+   * Project name of the line.
+   */
+  projectName: string
+  /**
+   * Unique identifier of the product.
+   */
+  sku: string
+  /**
+   * Name of consumption category.
+   */
+  categoryName: string
+  /**
+   * The product name.
+   */
+  productName: string
+  /**
+   * Identifies the reference based on the category.
+   */
+  resourceName: string
+  /**
+   * Start date of the line.
+   */
+  startDate?: Date | null
+  /**
+   * Stop date of the line.
+   */
+  stopDate?: Date | null
+  /**
+   * Unit price of the reference.
+   */
+  unitPrice?: Money | null
+  /**
+   * Untaxed value of the line.
+   */
+  untaxedValue?: Money | null
+  /**
+   * Unit of consumed quantity.
+   */
+  unit: string
+  /**
+   * Quantity per unit.
+   */
+  unitQuantity: string
+  /**
+   * Billed quantity.
+   */
+  billedQuantity: string
+  /**
+   * Number of unique resources billed on this line.
+   */
+  resourceCount: number
 }
 
 
@@ -521,6 +626,34 @@ export interface ListConsumptionsResponse {
 }
 
 
+export type ListDiscountLinesRequest = {
+  /**
+   * Invoice ID.
+   */
+  invoiceId: string
+  /**
+   * Positive integer to choose the page to return.
+   */
+  page?: number | null
+  /**
+   * Positive integer lower or equal to 1000 to select the number of items to return.
+   */
+  pageSize?: number | null
+}
+
+
+export interface ListDiscountLinesResponse {
+  /**
+   * Total number of discount lines.
+   */
+  totalCount: number
+  /**
+   * Paginated returned discount lines.
+   */
+  discountLines: DiscountLine[]
+}
+
+
 export type ListDiscountsRequest = {
   /**
    * Order discounts in the response by their description.
@@ -550,6 +683,34 @@ export interface ListDiscountsResponse {
    * Paginated returned discounts.
    */
   discounts: Discount[]
+}
+
+
+export type ListInvoiceLinesRequest = {
+  /**
+   * Invoice ID.
+   */
+  invoiceId: string
+  /**
+   * Positive integer to choose the page to return.
+   */
+  page?: number | null
+  /**
+   * Positive integer lower or equal to 1000 to select the number of items to return.
+   */
+  pageSize?: number | null
+}
+
+
+export interface ListInvoiceLinesResponse {
+  /**
+   * Total number of invoice lines.
+   */
+  totalCount: number
+  /**
+   * Paginated returned invoice lines.
+   */
+  invoiceLines: InvoiceLine[]
 }
 
 
