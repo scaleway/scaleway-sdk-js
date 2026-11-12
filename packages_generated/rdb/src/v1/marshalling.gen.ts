@@ -262,6 +262,7 @@ const unmarshalEncryptionAtRest = (data: unknown): EncryptionAtRest => {
 
   return {
     enabled: data.enabled,
+    kmsKeyId: data.kms_key_id ?? null,
   } as EncryptionAtRest
 }
 
@@ -917,6 +918,7 @@ const marshalEncryptionAtRest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enabled: request.enabled,
+  kms_key_id: request.kmsKeyId,
 })
 
 export const marshalCreateInstanceRequest = (
