@@ -268,6 +268,7 @@ export class API extends ParentAPI {
   /**
    * Delete ALL values associated with a key. Fails if any of these values are currently bound to any resource.. Delete ALL values associated with a key. Fails if any of these values are currently bound to any resource.
    *
+   * @deprecated
    * @param request - The request {@link DeleteAllValuesMatchingKeyRequest}
    * @returns A Promise of DeleteAllValuesMatchingKeyResponse
    */
@@ -371,6 +372,7 @@ export class API extends ParentAPI {
   /**
    * Delete ALL bindings associated with a value.. Delete ALL bindings associated with a value.
    *
+   * @deprecated
    * @param request - The request {@link DeleteAllBindingsMatchingValueRequest}
    * @returns A Promise of DeleteAllBindingsMatchingValueResponse
    */
@@ -391,6 +393,7 @@ export class API extends ParentAPI {
   /**
    * Delete ALL bindings associated with a Scaleway Resource Name.. Delete ALL bindings associated with a Scaleway Resource Name.
    *
+   * @deprecated
    * @param request - The request {@link DeleteAllBindingsMatchingSRNRequest}
    * @returns A Promise of DeleteAllBindingsMatchingSRNResponse
    */

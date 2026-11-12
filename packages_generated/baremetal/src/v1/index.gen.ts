@@ -63,6 +63,7 @@ export type {
   OfferStock,
   OfferSubscriptionPeriod,
   Option,
+  OptionType,
   PersistentMemory,
   PrivateNetworkApiAddServerPrivateNetworkRequest,
   PrivateNetworkApiDeleteServerPrivateNetworkRequest,
