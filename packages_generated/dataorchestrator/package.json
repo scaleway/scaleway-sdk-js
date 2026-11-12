@@ -1,5 +1,5 @@
 {
-  "name": "@scaleway-internal/sdk-dataorchestrator",
+  "name": "@scaleway/sdk-dataorchestrator",
   "version": "1.0.0",
   "description": "Scaleway SDK dataorchestrator",
   "repository": {
