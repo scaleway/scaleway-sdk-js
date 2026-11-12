@@ -223,6 +223,14 @@ export interface Deployment {
    * Region of the deployment.
    */
   region: ScwRegion
+  /**
+   * SRN of the deployment.
+   */
+  srn: string
+  /**
+   * Zone of the deployment.
+   */
+  zone: ScwZone
 }
 
 
@@ -283,6 +291,14 @@ export interface Model {
    * Total size, in bytes, of the model files.
    */
   sizeBytes: number
+  /**
+   * SRN of the model.
+   */
+  srn: string
+  /**
+   * Zone of the model.
+   */
+  zone: ScwZone
 }
 
 

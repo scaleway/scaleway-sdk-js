@@ -11,6 +11,7 @@ import type {
   Volume,
   Deployment,
   User,
+  Certificate,
   ListDeploymentsResponse,
   NodeTypeVolumeType,
   NodeType,
@@ -18,6 +19,7 @@ import type {
   ListUsersResponse,
   Version,
   ListVersionsResponse,
+  CreateCertificateRequest,
   EndpointSpecPrivateNetworkDetails,
   EndpointSpecPublicDetails,
   EndpointSpec,
@@ -137,6 +139,24 @@ export const unmarshalUser = (data: unknown): User => {
   } as User
 }
 
+export const unmarshalCertificate = (data: unknown): Certificate => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    content: data.content,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deploymentId: data.deployment_id,
+    id: data.id,
+    name: data.name,
+    region: data.region,
+    srn: data.srn,
+  } as Certificate
+}
+
 export const unmarshalListDeploymentsResponse = (data: unknown): ListDeploymentsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -243,6 +263,14 @@ export const unmarshalListVersionsResponse = (data: unknown): ListVersionsRespon
     versions: unmarshalArrayOfObject(data.versions, unmarshalVersion),
   } as ListVersionsResponse
 }
+
+export const marshalCreateCertificateRequest = (
+  request: CreateCertificateRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  content: request.content,
+  name: request.name,
+})
 
 const marshalEndpointSpecPrivateNetworkDetails = (
   request: EndpointSpecPrivateNetworkDetails,
