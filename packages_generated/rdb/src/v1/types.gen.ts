@@ -404,6 +404,7 @@ export interface BackupSchedule {
 
 export interface EncryptionAtRest {
   enabled: boolean
+  kmsKeyId?: string | null
 }
 
 
