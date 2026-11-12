@@ -55,6 +55,14 @@ export type OfferSubscriptionPeriod =
   | 'hourly'
   | 'monthly'
 
+export type OptionType =
+  | 'option_type_unknown'
+  | 'private_network'
+  | 'license'
+  | 'remote_access'
+  | 'public_bandwidth'
+  | 'certification'
+
 export type SchemaFilesystemFormat =
   | 'unknown_format'
   | 'fat32'
@@ -409,6 +417,10 @@ export interface ServerOption {
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
   certification?: CertificationOption | null
+  /**
+   * Type of the option on this server.
+   */
+  type: OptionType
 }
 
 
@@ -579,6 +591,10 @@ If false the option is available for the offer but not included by default.
    * One-of ('option'): at most one of 'license', 'publicBandwidth', 'privateNetwork', 'remoteAccess', 'certification' could be set.
    */
   certification?: CertificationOption | null
+  /**
+   * Type of the option offered.
+   */
+  type: OptionType
 }
 
 
@@ -984,6 +1000,10 @@ export interface Option {
    * Defines whether the option is manageable (could be added or removed).
    */
   manageable: boolean
+  /**
+   * Type of the option.
+   */
+  type: OptionType
   /**
    * License option, contains the ID of the OS linked to the option.
    *

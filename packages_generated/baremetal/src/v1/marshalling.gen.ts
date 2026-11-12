@@ -297,6 +297,7 @@ const unmarshalServerOption = (data: unknown): ServerOption => {
     publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : null,
     remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : null,
     status: data.status,
+    type: data.type,
   } as ServerOption
 }
 
@@ -485,6 +486,7 @@ const unmarshalOfferOptionOffer = (data: unknown): OfferOptionOffer => {
     publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : null,
     remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : null,
     subscriptionPeriod: data.subscription_period,
+    type: data.type,
   } as OfferOptionOffer
 }
 
@@ -572,6 +574,7 @@ export const unmarshalOption = (data: unknown): Option => {
     publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : null,
     remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : null,
     srn: data.srn,
+    type: data.type,
     zone: data.zone,
   } as Option
 }
