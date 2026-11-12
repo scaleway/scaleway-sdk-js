@@ -11,6 +11,7 @@ import type {
   MemoryEccType,
   OfferStock,
   OfferSubscriptionPeriod,
+  OptionType,
   SchemaFilesystemFormat,
   SchemaPartitionLabel,
   SchemaPoolType,
@@ -95,6 +96,16 @@ export const OFFER_SUBSCRIPTION_PERIODS: OfferSubscriptionPeriod[] = [
   'unknown_subscription_period',
   'hourly',
   'monthly',
+]
+
+/** Lists all values of the enum {@link OptionType}. */
+export const OPTION_TYPES: OptionType[] = [
+  'option_type_unknown',
+  'private_network',
+  'license',
+  'remote_access',
+  'public_bandwidth',
+  'certification',
 ]
 
 /** Lists all values of the enum {@link SchemaFilesystemFormat}. */
