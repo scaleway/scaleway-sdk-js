@@ -1,5 +1,5 @@
 {
-  "name": "@scaleway-internal/sdk-vps",
+  "name": "@scaleway/sdk-vps",
   "version": "1.0.0",
   "description": "Scaleway SDK vps",
   "repository": {

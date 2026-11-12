@@ -29,6 +29,7 @@
     "@repo/configs": "workspace:^",
     "@repo/generate-packages": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
+    "@scaleway/npm-trust": "1.0.0",
     "@scaleway/oxlint-config": "1.1.5",
     "@scaleway/pnpm-auto-release": "0.0.2",
     "@scaleway/sync-peer-deps": "1.1.3",

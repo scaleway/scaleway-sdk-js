@@ -196,6 +196,9 @@ importers:
       '@scaleway/generate-react-sdk':
         specifier: workspace:*
         version: link:tools/generate-react-sdk
+      '@scaleway/npm-trust':
+        specifier: 1.0.0
+        version: 1.0.0
       '@scaleway/oxlint-config':
         specifier: 1.1.5
         version: 1.1.5(oxlint@1.88.0(oxlint-tsgolint@7.0.2004))
@@ -280,12 +283,6 @@ importers:
 
   packages/sdk:
     dependencies:
-      '@scaleway-internal/sdk-dataorchestrator':
-        specifier: workspace:*
-        version: link:../../packages_generated/dataorchestrator
-      '@scaleway-internal/sdk-vps':
-        specifier: workspace:*
-        version: link:../../packages_generated/vps
       '@scaleway/sdk-account':
         specifier: workspace:*
         version: link:../../packages_generated/account
@@ -319,6 +316,9 @@ importers:
       '@scaleway/sdk-datalab':
         specifier: workspace:*
         version: link:../../packages_generated/datalab
+      '@scaleway/sdk-dataorchestrator':
+        specifier: workspace:*
+        version: link:../../packages_generated/dataorchestrator
       '@scaleway/sdk-dataviz':
         specifier: workspace:*
         version: link:../../packages_generated/dataviz
@@ -442,6 +442,9 @@ importers:
       '@scaleway/sdk-vpcgw':
         specifier: workspace:*
         version: link:../../packages_generated/vpcgw
+      '@scaleway/sdk-vps':
+        specifier: workspace:*
+        version: link:../../packages_generated/vps
       '@scaleway/sdk-webhosting':
         specifier: workspace:*
         version: link:../../packages_generated/webhosting
@@ -2312,6 +2315,11 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
+  '@scaleway/npm-trust@1.0.0':
+    resolution: {integrity: sha512-cIKnf01qCsGaja8GbqTcy+Zn9rVe8XUIgbVTLWaualkrkpVO3Tc+CK9AWFn95wFxqTZRfGej/+yF0H/4djtgyg==}
+    engines: {node: 24.x || 25.x || 26.x}
+    hasBin: true
+
   '@scaleway/oxlint-config@1.1.5':
     resolution: {integrity: sha512-RH1tkbWHikQto61L6wUfnpZo1nLUWbwFyOPfogcUveTed3oZ6FMuS9U5hK9n9TqnV/4AjTd7iV1H4mS2zTj0Ug==}
     peerDependencies:
@@ -3921,6 +3929,8 @@ snapshots:
     optional: true
 
   '@rolldown/pluginutils@1.0.1': {}
+
+  '@scaleway/npm-trust@1.0.0': {}
 
   '@scaleway/oxlint-config@1.1.5(oxlint@1.88.0(oxlint-tsgolint@7.0.2004))':
     dependencies:
