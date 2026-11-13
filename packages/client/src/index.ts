@@ -17,10 +17,12 @@ export {
   withHTTPClient,
   withProfile,
   withTimeout,
+  withTokenProvider,
   withUserAgent,
   withUserAgentSuffix,
 } from './scw/client-ini-factory.js'
 export type { Profile } from './scw/client-ini-profile.js'
+export type { TokenProvider } from './scw/auth.js'
 export type { Settings } from './scw/client-settings.js'
 export { AUTH_HEADER_KEY, SESSION_HEADER_KEY } from './scw/constants.js'
 export type { Money, ScwFile, TimeSeries } from './scw/custom-types.js'
