@@ -99,9 +99,11 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     quantization: data.quantization ? unmarshalDeploymentQuantization(data.quantization) : null,
     region: data.region,
     size: data.size,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at) ?? null,
+    zone: data.zone,
   } as Deployment
 }
 
@@ -163,9 +165,11 @@ export const unmarshalModel = (data: unknown): Model => {
     projectId: data.project_id,
     region: data.region,
     sizeBytes: data.size_bytes,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at) ?? null,
+    zone: data.zone,
   } as Model
 }
 
