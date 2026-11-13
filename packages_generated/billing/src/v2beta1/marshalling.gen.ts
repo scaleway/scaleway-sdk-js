@@ -12,7 +12,11 @@ import type {
   ListChargesResponse,
   ListConsumptionsResponseConsumption,
   ListConsumptionsResponse,
+  DiscountLine,
+  ListDiscountLinesResponse,
   ListDiscountsResponse,
+  InvoiceLine,
+  ListInvoiceLinesResponse,
   ListInvoicesResponse,
   ListTaxesResponseTax,
   ListTaxesResponse,
@@ -168,6 +172,34 @@ export const unmarshalListConsumptionsResponse = (data: unknown): ListConsumptio
   } as ListConsumptionsResponse
 }
 
+const unmarshalDiscountLine = (data: unknown): DiscountLine => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DiscountLine' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+    invoiceLineId: data.invoice_line_id,
+    origin: data.origin,
+    value: data.value ? unmarshalMoney(data.value) : null,
+  } as DiscountLine
+}
+
+export const unmarshalListDiscountLinesResponse = (data: unknown): ListDiscountLinesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListDiscountLinesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    discountLines: unmarshalArrayOfObject(data.discount_lines, unmarshalDiscountLine),
+    totalCount: data.total_count,
+  } as ListDiscountLinesResponse
+}
+
 export const unmarshalListDiscountsResponse = (data: unknown): ListDiscountsResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -179,6 +211,48 @@ export const unmarshalListDiscountsResponse = (data: unknown): ListDiscountsResp
     discounts: unmarshalArrayOfObject(data.discounts, unmarshalDiscount),
     totalCount: data.total_count,
   } as ListDiscountsResponse
+}
+
+const unmarshalInvoiceLine = (data: unknown): InvoiceLine => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'InvoiceLine' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    billedQuantity: data.billed_quantity,
+    categoryName: data.category_name,
+    id: data.id,
+    invoiceId: data.invoice_id,
+    organizationId: data.organization_id,
+    organizationName: data.organization_name,
+    productName: data.product_name,
+    projectId: data.project_id,
+    projectName: data.project_name,
+    resourceCount: data.resource_count,
+    resourceName: data.resource_name,
+    sku: data.sku,
+    startDate: unmarshalDate(data.start_date) ?? null,
+    stopDate: unmarshalDate(data.stop_date) ?? null,
+    unit: data.unit,
+    unitPrice: data.unit_price ? unmarshalMoney(data.unit_price) : null,
+    unitQuantity: data.unit_quantity,
+    untaxedValue: data.untaxed_value ? unmarshalMoney(data.untaxed_value) : null,
+  } as InvoiceLine
+}
+
+export const unmarshalListInvoiceLinesResponse = (data: unknown): ListInvoiceLinesResponse => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ListInvoiceLinesResponse' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    invoiceLines: unmarshalArrayOfObject(data.invoice_lines, unmarshalInvoiceLine),
+    totalCount: data.total_count,
+  } as ListInvoiceLinesResponse
 }
 
 export const unmarshalListInvoicesResponse = (data: unknown): ListInvoicesResponse => {
