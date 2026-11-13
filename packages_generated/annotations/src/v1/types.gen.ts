@@ -100,6 +100,14 @@ export interface Binding {
    * Value associated to the binding.
    */
   value?: BindingValue | null
+  /**
+   * Timestamp of creation of the binding.
+   */
+  createdAt?: Date | null
+  /**
+   * Timestamp of the last update of the binding.
+   */
+  updatedAt?: Date | null
 }
 
 
@@ -120,6 +128,14 @@ export interface Key {
    * Description of the annotation key.
    */
   description: string
+  /**
+   * Timestamp of creation of the annotation key.
+   */
+  createdAt?: Date | null
+  /**
+   * Timestamp of the last update of the annotation key.
+   */
+  updatedAt?: Date | null
 }
 
 
@@ -144,6 +160,14 @@ export interface Value {
    * Description of the value.
    */
   description: string
+  /**
+   * Timestamp of creation of the value.
+   */
+  createdAt?: Date | null
+  /**
+   * Timestamp of the last update of the value.
+   */
+  updatedAt?: Date | null
 }
 
 

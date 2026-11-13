@@ -61,10 +61,12 @@ export const unmarshalBinding = (data: unknown): Binding => {
   }
 
   return {
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     key: data.key ? unmarshalBindingKey(data.key) : null,
     srn: data.srn,
     targetSrn: data.target_srn,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     value: data.value ? unmarshalBindingValue(data.value) : null,
   } as Binding
 }
@@ -77,10 +79,12 @@ export const unmarshalKey = (data: unknown): Key => {
   }
 
   return {
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     id: data.id,
     name: data.name,
     srn: data.srn,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Key
 }
 
@@ -92,11 +96,13 @@ export const unmarshalValue = (data: unknown): Value => {
   }
 
   return {
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     id: data.id,
     keyId: data.key_id,
     name: data.name,
     srn: data.srn,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Value
 }
 
