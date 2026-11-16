@@ -1,5 +1,95 @@
 # Change Log
 
+## 1.14.0
+
+### Minor Changes
+
+- chore(annotations): make it public (#3107)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(annotations): add a min_len=1 validation rule on target_srn (#3703)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore: remove post-generate updates (#3168)
+
+- feat: update generated APIs (#3182)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- Update generated APIs (#3845)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- Update generated APIs (#3745)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- docs(annotations): improve documentation (#3289)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- Update generated APIs (#3853)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
 ## 1.13.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.22.2
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-annotations@1.14.0
+  - @scaleway/sdk-billing@2.23.0
+  - @scaleway/sdk-inference@2.23.0
+  - @scaleway/sdk-rdb@2.22.0
+
 ## 0.22.1
 
 ### Patch Changes
