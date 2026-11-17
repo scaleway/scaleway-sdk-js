@@ -22,6 +22,8 @@ export function validatePathParam(name: string, param: string | number | undefin
   throw new TypeError(`param ${name} cannot be empty in request`)
 }
 
+ const isDefined =  <U>(x: U): x is NonNullable<U> => x !== null && x!== undefined
+
 /**
  * Resolves the ideal parameter and value amongst an optional list.
  *
@@ -42,9 +44,17 @@ export const resolveOneOf = <T>(
   }[],
   isRequired = false,
 ): Record<string, T> => {
-  const elt = list.find(obj => obj.value !== undefined) ?? list.find(obj => obj.default !== undefined)
+
+
+  // A `null` value is treated as "not set", exactly like `undefined`,
+  // so the key is never emitted with a null value (e.g. `"key": null` in a JSON body).
+  const elt =
+    list.find(obj => isDefined(obj.value)) ??
+    list.find(obj => isDefined(obj.default))
+
   const value = elt?.value ?? elt?.default
-  if (elt && value !== undefined) {
+
+  if (elt && isDefined(value)) {
     return { [elt.param]: value }
   }
 

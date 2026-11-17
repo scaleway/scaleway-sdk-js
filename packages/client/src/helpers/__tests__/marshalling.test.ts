@@ -163,6 +163,52 @@ describe('resolveOneOf', () => {
       ),
     ).toStrictEqual({ my_key_1: false })
   })
+
+  it('skips null values and resolves the next defined one', () => {
+    expect(
+      resolveOneOf(
+        [
+          { default: undefined, param: 'my_key_1', value: null },
+          { default: undefined, param: 'my_key_2', value: '42' },
+        ],
+        true,
+      ),
+    ).toStrictEqual({ my_key_2: '42' })
+  })
+
+  it('falls back to the default value when the value is null', () => {
+    expect(
+      resolveOneOf(
+        [
+          { default: 'default-value', param: 'my_key_1', value: null },
+          { default: undefined, param: 'my_key_2', value: undefined },
+        ],
+        true,
+      ),
+    ).toStrictEqual({ my_key_1: 'default-value' })
+  })
+
+  it('falls back to another entry default value when the value is null', () => {
+    expect(
+      resolveOneOf(
+        [
+          { default: undefined, param: 'my_key_1', value: null },
+          { default: '42', param: 'my_key_2', value: undefined },
+        ],
+        true,
+      ),
+    ).toStrictEqual({ my_key_2: '42' })
+  })
+
+  it('returns an empty record when all values are null and the resolve is optional', () => {
+    expect(resolveOneOf([{ default: undefined, param: 'my_key_1', value: null }], false)).toStrictEqual({})
+  })
+
+  it('throws an error when a required one-of only has null values', () => {
+    expect(() => {
+      resolveOneOf([{ default: undefined, param: 'my_key_1', value: null }], true)
+    }).toThrow(new TypeError(`one of my_key_1 must be indicated in the request`))
+  })
 })
 
 describe('unmarshalDate', () => {
