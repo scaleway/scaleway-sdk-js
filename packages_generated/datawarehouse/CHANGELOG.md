@@ -1,5 +1,236 @@
 # Change Log
 
+## 2.25.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(datawarehouse): allow min CPU field up to 30 in create and update DTWH-563 (#3236)
+
+- chore: sync generated files after build (#2862)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat(datawarehouse): add shard_count params (#2764)
+
+- feat(datawarehouse): add data warehouse to doc website (#2540)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- feat(datawarehouse): add start and stop deployment endpoints DTWH-320 (#2730)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2598)
+
+- fix(datawarehouse): add NodePrivateNetworkDetails message (#3130)
+
+- chore: reorganize import (#2520)
+
+- chore: new formating (#2667)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat: add support for constants (#3286)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(datawarehouse): update the visibility to public (#2406)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: add support for srn (#3524)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(deps): update node.js (#2630)
+
+- chore: fix formating (#2669)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- fix: format (#2683)
+
+- feat: update generated APIs (#2881)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- Update generated APIs (#3745)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- fix(datawarehouse): limit deployment cpu_max to be gte 2 (end with object Deployment) DTWH-401 (#2849)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- feat(datawarehouse): add deployment statuses for start/stop routes (#2731)
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(datawarehouse):  add move_factor field to CreateDeploymentRequest and UpdateDeploymentRequest (#3063)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(lint): update generated files (#2594)
+
+- fix(build): output (#2842)
+
+- fix(datawarehouse): require move_factor to be greater than or equal to 0.1 (#3079)
+
+- chore: format generated files (#2652)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(datawarehouse): add support for `deploymentId` and `region` (#3138)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(datawarehouse): add Deployment.Status.deploying (#2618)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore(release): publish
+
+- feat(datawarehouse): allow max CPU field up to 30 DTWH-563 (#3220)
+
+- Update generated APIs (#3845)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- fix(datawarehouse): limit deployment cpu_max to be gte 2 DTWH-399 (#2822)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- fix(datawarehouse): update validate.rules of field Deployment.cpu_min (#3230)
+
+- chore(release): publish
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.7
+
 ## 2.24.0
 
 ### Minor Changes
