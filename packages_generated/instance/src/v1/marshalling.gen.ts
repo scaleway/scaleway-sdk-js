@@ -1152,7 +1152,7 @@ const unmarshalServerType = (data: unknown): ServerType => {
     endOfService: data.end_of_service,
     gpu: data.gpu ?? null,
     gpuInfo: data.gpu_info ? unmarshalServerTypeGPUInfo(data.gpu_info) : null,
-    hourlyPrice: data.hourly_price,
+    hourlyPrice: data.hourly_price ?? null,
     monthlyPrice: data.monthly_price ?? null,
     ncpus: data.ncpus,
     network: data.network ? unmarshalServerTypeNetwork(data.network) : null,

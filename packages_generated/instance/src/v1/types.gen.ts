@@ -1065,9 +1065,9 @@ export interface ServerType {
    */
   monthlyPrice?: number | null
   /**
-   * Hourly price in Euro.
+   * @deprecated Hourly price in Euro.
    */
-  hourlyPrice: number
+  hourlyPrice?: number | null
   /**
    * Alternative Instance name, if any.
    */
