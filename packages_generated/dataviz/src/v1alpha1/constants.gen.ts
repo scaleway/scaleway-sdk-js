@@ -2,6 +2,7 @@
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type {
   DeploymentStatus,
+  ListCertificatesRequestOrderBy,
   ListDeploymentsRequestOrderBy,
   ListNodeTypesRequestOrderBy,
   ListUsersRequestOrderBy,
@@ -23,6 +24,14 @@ export const DEPLOYMENT_STATUSES: DeploymentStatus[] = [
   'locked',
   'locking',
   'unlocking',
+]
+
+/** Lists all values of the enum {@link ListCertificatesRequestOrderBy}. */
+export const LIST_CERTIFICATES_REQUEST_ORDER_BIES: ListCertificatesRequestOrderBy[] = [
+  'name_asc',
+  'name_desc',
+  'created_at_asc',
+  'created_at_desc',
 ]
 
 /** Lists all values of the enum {@link ListDeploymentsRequestOrderBy}. */
