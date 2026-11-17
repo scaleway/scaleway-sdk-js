@@ -51,7 +51,7 @@ const jsonContentHeaders = {
 /**
  * Managed DATA ORCHESTRATOR API.
 
-This API is a boilerplate for products.
+This API allows you to manage your Data Orchestrator.
  */
 export class API extends ParentAPI {
   /**
