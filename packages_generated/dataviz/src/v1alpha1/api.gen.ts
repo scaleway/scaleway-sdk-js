@@ -20,6 +20,7 @@ import {
   marshalCreateUserRequest,
   unmarshalDeployment,
   unmarshalEndpoint,
+  unmarshalListCertificatesResponse,
   unmarshalListDeploymentsResponse,
   unmarshalListNodeTypesResponse,
   unmarshalListUsersResponse,
@@ -42,6 +43,8 @@ import type {
   DownloadDeploymentCertificateAuthorityRequest,
   Endpoint,
   GetDeploymentRequest,
+  ListCertificatesRequest,
+  ListCertificatesResponse,
   ListDeploymentsRequest,
   ListDeploymentsResponse,
   ListNodeTypesRequest,
@@ -418,6 +421,26 @@ export class API extends ParentAPI {
       },
       unmarshalCertificate,
     )
+
+  
+  protected pageOfListCertificates = (request: Readonly<ListCertificatesRequest>, options?: RequestOptions) =>
+    this.client.fetch<ListCertificatesResponse>(
+      {
+        method: 'GET',
+        path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificates`,
+        urlParams: urlParams(
+          ['name', request.name],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+        ),
+        signal: options?.signal,
+      },
+      unmarshalListCertificatesResponse,
+    )
+  
+  listCertificates = (request: Readonly<ListCertificatesRequest>, options?: RequestOptions) =>
+    enrichForPagination('certificates', this.pageOfListCertificates, request, options)
 
   
 }
