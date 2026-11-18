@@ -59,6 +59,21 @@ export const DeleteUserRequest = {
   },
 }
 
+export const ListCertificatesRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]*$/,
+  },
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const ListDeploymentsRequest = {
   name: {
     maxLength: 255,

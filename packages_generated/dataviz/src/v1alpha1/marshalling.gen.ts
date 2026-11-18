@@ -8,10 +8,11 @@ import type {
   EndpointPublicDetails,
   EndpointService,
   Endpoint,
+  Certificate,
   Volume,
   Deployment,
   User,
-  Certificate,
+  ListCertificatesResponse,
   ListDeploymentsResponse,
   NodeTypeVolumeType,
   NodeType,
@@ -85,6 +86,24 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
   } as Endpoint
 }
 
+export const unmarshalCertificate = (data: unknown): Certificate => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    content: data.content,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deploymentId: data.deployment_id,
+    id: data.id,
+    name: data.name,
+    region: data.region,
+    srn: data.srn,
+  } as Certificate
+}
+
 const unmarshalVolume = (data: unknown): Volume => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -139,22 +158,17 @@ export const unmarshalUser = (data: unknown): User => {
   } as User
 }
 
-export const unmarshalCertificate = (data: unknown): Certificate => {
+export const unmarshalListCertificatesResponse = (data: unknown): ListCertificatesResponse => {
   if (!isJSONObject(data)) {
     throw new TypeError(
-      `Unmarshalling the type 'Certificate' failed as data isn't a dictionary.`,
+      `Unmarshalling the type 'ListCertificatesResponse' failed as data isn't a dictionary.`,
     )
   }
 
   return {
-    content: data.content,
-    createdAt: unmarshalDate(data.created_at) ?? null,
-    deploymentId: data.deployment_id,
-    id: data.id,
-    name: data.name,
-    region: data.region,
-    srn: data.srn,
-  } as Certificate
+    certificates: unmarshalArrayOfObject(data.certificates, unmarshalCertificate),
+    totalCount: data.total_count,
+  } as ListCertificatesResponse
 }
 
 export const unmarshalListDeploymentsResponse = (data: unknown): ListDeploymentsResponse => {
