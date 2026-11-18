@@ -1019,8 +1019,14 @@ export interface Dashboard {
   imagesCount: number
   snapshotsCount: number
   serversCount: number
+  /**
+   * @deprecated 
+   */
   ipsCount: number
   securityGroupsCount: number
+  /**
+   * @deprecated 
+   */
   ipsUnused: number
   volumesLSsdCount: number
   volumesLSsdTotalSize: number

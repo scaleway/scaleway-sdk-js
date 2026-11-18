@@ -15,6 +15,12 @@ export type DeploymentStatus =
   | 'locking'
   | 'unlocking'
 
+export type ListCertificatesRequestOrderBy =
+  | 'name_asc'
+  | 'name_desc'
+  | 'created_at_asc'
+  | 'created_at_desc'
+
 export type ListDeploymentsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
@@ -137,6 +143,20 @@ export interface EndpointSpec {
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
   privateNetwork?: EndpointSpecPrivateNetworkDetails | null
+}
+
+
+export interface Certificate {
+  id: string
+  name: string
+  deploymentId: string
+  content: string
+  createdAt?: Date | null
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region: ScwRegion
+  srn: string
 }
 
 
@@ -296,20 +316,6 @@ export interface Version {
   /**
    * The SRN of the version.
    */
-  srn: string
-}
-
-
-export interface Certificate {
-  id: string
-  name: string
-  deploymentId: string
-  content: string
-  createdAt?: Date | null
-  /**
-   * Region to target. If none is passed will use default region from the config.
-   */
-  region: ScwRegion
   srn: string
 }
 
@@ -476,6 +482,16 @@ export type DownloadDeploymentCertificateAuthorityRequest = {
 }
 
 
+export type GetCertificateRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  deploymentId: string
+  certificateId: string
+}
+
+
 /**
  * Retrieve a deployment specified by the ID.
  */
@@ -488,6 +504,25 @@ export type GetDeploymentRequest = {
    * ID of the deployment.
    */
   deploymentId: string
+}
+
+
+export type ListCertificatesRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  deploymentId: string
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListCertificatesRequestOrderBy | null
+  name?: string | null
+}
+
+
+export interface ListCertificatesResponse {
+  certificates: Certificate[]
+  totalCount: number
 }
 
 
