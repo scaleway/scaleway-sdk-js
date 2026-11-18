@@ -2601,11 +2601,11 @@ export interface ResourceCounts {
    */
   templates: number
   /**
-   * Number of flexible IPs.
+   * @deprecated Number of flexible IPs.
    */
   flexibleIps: number
   /**
-   * Number of flexible IPs not attached to any server.
+   * @deprecated Number of flexible IPs not attached to any server.
    */
   unusedFlexibleIps: number
   /**
