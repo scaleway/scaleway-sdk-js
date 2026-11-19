@@ -29,6 +29,7 @@ export type AuthenticationEventFailureReason =
   | 'expired_session'
   | 'authentication_code_required'
   | 'mfa_required'
+  | 'invalid_magic_link'
 
 export type AuthenticationEventMFAType =
   | 'unknown_mfa_type'
@@ -42,6 +43,7 @@ export type AuthenticationEventMethod =
   | 'oauth2'
   | 'saml'
   | 'passkey'
+  | 'magic_link'
 
 export type AuthenticationEventOrigin =
   | 'unknown_origin'
