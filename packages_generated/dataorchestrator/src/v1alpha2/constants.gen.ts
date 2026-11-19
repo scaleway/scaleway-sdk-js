@@ -4,11 +4,11 @@ import type {
   DefaultTaskDefaultRunReason,
   ListWorkflowDefinitionsRequestOrderBy,
   ListWorkflowRunsRequestOrderBy,
+  ObjectStorageTaskReason,
   RunServerlessContainersTaskAction,
   RunServerlessContainersTaskReason,
   RunServerlessContainersTaskStatus,
   RunStatus,
-  S3TaskReason,
   ScheduleOverlapPolicy,
   ServerlessJobsTaskServerlessJobRunReason,
   TriggerType,
@@ -45,6 +45,15 @@ export const LIST_WORKFLOW_RUNS_REQUEST_ORDER_BIES: ListWorkflowRunsRequestOrder
   'duration_desc',
   'workflow_definition_name_asc',
   'workflow_definition_name_desc',
+]
+
+/** Lists all values of the enum {@link ObjectStorageTaskReason}. */
+export const OBJECT_STORAGE_TASK_REASONS: ObjectStorageTaskReason[] = [
+  'unknown_default_run_reason',
+  'timeout',
+  'cancellation',
+  'technical_error',
+  'functional_error',
 ]
 
 /** Lists all values of the enum {@link RunServerlessContainersTaskAction}. */
@@ -91,15 +100,6 @@ export const RUN_STATUSES: RunStatus[] = [
   'interrupted',
   'pausing',
   'paused',
-]
-
-/** Lists all values of the enum {@link S3TaskReason}. */
-export const S3_TASK_REASONS: S3TaskReason[] = [
-  'unknown_default_run_reason',
-  'timeout',
-  'cancellation',
-  'technical_error',
-  'functional_error',
 ]
 
 /** Lists all values of the enum {@link ScheduleOverlapPolicy}. */
