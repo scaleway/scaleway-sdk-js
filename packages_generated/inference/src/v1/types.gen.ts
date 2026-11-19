@@ -227,10 +227,6 @@ export interface Deployment {
    * SRN of the deployment.
    */
   srn: string
-  /**
-   * Zone of the deployment.
-   */
-  zone: ScwZone
 }
 
 
@@ -295,10 +291,6 @@ export interface Model {
    * SRN of the model.
    */
   srn: string
-  /**
-   * Zone of the model.
-   */
-  zone: ScwZone
 }
 
 
