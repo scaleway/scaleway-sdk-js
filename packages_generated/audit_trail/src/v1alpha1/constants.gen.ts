@@ -57,6 +57,7 @@ export const AUTHENTICATION_EVENT_FAILURE_REASONS: AuthenticationEventFailureRea
   'expired_session',
   'authentication_code_required',
   'mfa_required',
+  'invalid_magic_link',
 ]
 
 /** Lists all values of the enum {@link AuthenticationEventMFAType}. */
@@ -74,6 +75,7 @@ export const AUTHENTICATION_EVENT_METHODS: AuthenticationEventMethod[] = [
   'oauth2',
   'saml',
   'passkey',
+  'magic_link',
 ]
 
 /** Lists all values of the enum {@link AuthenticationEventOrigin}. */
