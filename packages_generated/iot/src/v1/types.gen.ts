@@ -143,6 +143,10 @@ export interface Device {
    */
   id: string
   /**
+   * Device SRN.
+   */
+  srn: string
+  /**
    * Device name.
    */
   name: string
@@ -202,6 +206,10 @@ export interface Network {
    * Network ID.
    */
   id: string
+  /**
+   * Network SRN.
+   */
+  srn: string
   /**
    * Network name.
    */
@@ -264,6 +272,10 @@ export interface Hub {
    * Hub ID.
    */
   id: string
+  /**
+   * Hub SRN.
+   */
+  srn: string
   /**
    * Hub name.
    */
@@ -1225,6 +1237,10 @@ export interface Route {
    * Date at which the route was last updated.
    */
   updatedAt?: Date | null
+  /**
+   * Route SRN.
+   */
+  srn: string
   /**
    * Region of the route.
    */

@@ -103,7 +103,6 @@ export const unmarshalDeployment = (data: unknown): Deployment => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at) ?? null,
-    zone: data.zone,
   } as Deployment
 }
 
@@ -169,7 +168,6 @@ export const unmarshalModel = (data: unknown): Model => {
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at) ?? null,
-    zone: data.zone,
   } as Model
 }
 

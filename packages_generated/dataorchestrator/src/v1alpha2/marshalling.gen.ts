@@ -9,8 +9,8 @@ import type {
   WorkflowRunInfo,
   WorkflowDefinition,
   DefaultTask,
+  ObjectStorageTask,
   RunServerlessContainersTask,
-  S3Task,
   ServerlessJobsTask,
   TaskRun,
   WorkflowRun,
@@ -109,6 +109,20 @@ const unmarshalDefaultTask = (data: unknown): DefaultTask => {
   } as DefaultTask
 }
 
+const unmarshalObjectStorageTask = (data: unknown): ObjectStorageTask => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ObjectStorageTask' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    action: data.action,
+    errorMessage: data.error_message ?? null,
+    reason: data.reason ? data.reason : null,
+  } as ObjectStorageTask
+}
+
 const unmarshalRunServerlessContainersTask = (data: unknown): RunServerlessContainersTask => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -124,20 +138,6 @@ const unmarshalRunServerlessContainersTask = (data: unknown): RunServerlessConta
     reason: data.reason ? data.reason : null,
     status: data.status,
   } as RunServerlessContainersTask
-}
-
-const unmarshalS3Task = (data: unknown): S3Task => {
-  if (!isJSONObject(data)) {
-    throw new TypeError(
-      `Unmarshalling the type 'S3Task' failed as data isn't a dictionary.`,
-    )
-  }
-
-  return {
-    action: data.action,
-    errorMessage: data.error_message ?? null,
-    reason: data.reason ? data.reason : null,
-  } as S3Task
 }
 
 const unmarshalServerlessJobsTask = (data: unknown): ServerlessJobsTask => {
@@ -170,11 +170,11 @@ const unmarshalTaskRun = (data: unknown): TaskRun => {
     duration: data.duration ?? null,
     generativeApiTaskRunDetails: data.generative_api_task_run_details ? unmarshalDefaultTask(data.generative_api_task_run_details) : null,
     id: data.id,
+    objectStorageTaskRunDetails: data.object_storage_task_run_details ? unmarshalObjectStorageTask(data.object_storage_task_run_details) : null,
     output: data.output ?? null,
     raiseTaskRunDetails: data.raise_task_run_details ? unmarshalDefaultTask(data.raise_task_run_details) : null,
     runIteration: data.run_iteration ?? null,
     runServerlessContainerTaskRunDetails: data.run_serverless_container_task_run_details ? unmarshalRunServerlessContainersTask(data.run_serverless_container_task_run_details) : null,
-    s3TaskRunDetails: data.s3_task_run_details ? unmarshalS3Task(data.s3_task_run_details) : null,
     serverlessFunctionTaskRunDetails: data.serverless_function_task_run_details ? unmarshalDefaultTask(data.serverless_function_task_run_details) : null,
     serverlessJobTaskRunDetails: data.serverless_job_task_run_details ? unmarshalServerlessJobsTask(data.serverless_job_task_run_details) : null,
     setTaskRunDetails: data.set_task_run_details ? unmarshalDefaultTask(data.set_task_run_details) : null,
