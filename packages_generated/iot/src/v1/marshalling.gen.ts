@@ -96,6 +96,7 @@ export const unmarshalDevice = (data: unknown): Device => {
     messageFilters: data.message_filters ? unmarshalDeviceMessageFilters(data.message_filters) : null,
     name: data.name,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Device
@@ -115,6 +116,7 @@ export const unmarshalNetwork = (data: unknown): Network => {
     id: data.id,
     name: data.name,
     region: data.region,
+    srn: data.srn,
     topicPrefix: data.topic_prefix,
     type: data.type,
   } as Network
@@ -155,6 +157,7 @@ export const unmarshalHub = (data: unknown): Hub => {
     productPlan: data.product_plan,
     projectId: data.project_id,
     region: data.region,
+    srn: data.srn,
     status: data.status,
     twinsGraphiteConfig: data.twins_graphite_config ? unmarshalHubTwinsGraphiteConfig(data.twins_graphite_config) : null,
     updatedAt: unmarshalDate(data.updated_at) ?? null,
@@ -420,6 +423,7 @@ export const unmarshalRoute = (data: unknown): Route => {
     region: data.region,
     restConfig: data.rest_config ? unmarshalRouteRestConfig(data.rest_config) : null,
     s3Config: data.s3_config ? unmarshalRouteS3Config(data.s3_config) : null,
+    srn: data.srn,
     topic: data.topic,
     type: data.type,
     updatedAt: unmarshalDate(data.updated_at) ?? null,
