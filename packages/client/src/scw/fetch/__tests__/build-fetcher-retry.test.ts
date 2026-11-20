@@ -1,7 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { Settings } from '../../client-settings.js'
 import { ScalewayError } from '../../errors/scw-error.js'
+import { AbortError } from '../abort-error.js'
 import { buildFetcher } from '../build-fetcher.js'
+import { InvalidResponseError } from '../invalid-response-error.js'
 
 const DEFAULT_SETTINGS: Settings = {
   apiURL: 'https://api.scaleway.com',
@@ -202,7 +204,7 @@ describe('buildFetcher retry', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
-  it('does not retry parser TypeError as network error', async () => {
+  it('does not retry InvalidResponseError as network error', async () => {
     const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(Response.json({}))
 
     await expect(
@@ -213,7 +215,7 @@ describe('buildFetcher retry', () => {
           interceptors: [
             {
               response: () => {
-                throw new TypeError('Invalid response object')
+                throw new InvalidResponseError()
               },
             },
           ],
@@ -222,9 +224,9 @@ describe('buildFetcher retry', () => {
         fetchMock,
       )({
         method: 'GET',
-        path: '/parser-typeerror',
+        path: '/parser-invalid-response',
       }),
-    ).rejects.toThrow(TypeError)
+    ).rejects.toThrow(InvalidResponseError)
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 
@@ -244,6 +246,51 @@ describe('buildFetcher retry', () => {
     await vi.runAllTimersAsync()
     await expectation
     expect(fetchMock).toHaveBeenCalledTimes(3)
+  })
+
+  it('aborts during backoff without waiting for the full delay', async () => {
+    const controller = new AbortController()
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
+
+    const resultPromise = buildFetcher(
+      { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2, minDelay: 30, maxDelay: 30 } },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/abort-backoff',
+      signal: controller.signal,
+    })
+    await vi.advanceTimersByTimeAsync(0)
+    controller.abort()
+    await expect(resultPromise).rejects.toBeInstanceOf(AbortError)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('applies defaultTimeoutMs to the whole retry sequence including backoff', async () => {
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
+
+    const resultPromise = buildFetcher(
+      {
+        ...DEFAULT_SETTINGS,
+        defaultTimeoutMs: 2_000,
+        httpClient: fetchMock,
+        // Backoff alone would wait 30s; overall timeout must win first.
+        retry: { maxRetries: 5, minDelay: 30, maxDelay: 30 },
+      },
+      fetchMock,
+    )({
+      method: 'GET',
+      path: '/timeout-covers-backoff',
+    })
+    const expectation = expect(resultPromise).rejects.toBeInstanceOf(AbortError)
+    await vi.advanceTimersByTimeAsync(0)
+    await vi.advanceTimersByTimeAsync(2_000)
+    await expectation
+    expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 
   it('runs responseError interceptors only after retries are exhausted', async () => {

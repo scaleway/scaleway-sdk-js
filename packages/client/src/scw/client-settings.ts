@@ -1,4 +1,4 @@
-import type { ResolvedRetryOptions, RetryOptions } from '../internal/async/http-retry.js'
+import type { RetryOptions } from '../internal/async/http-retry.js'
 import { assertValidRetryOptions } from '../internal/async/http-retry.js'
 import type { NetworkInterceptors, RequestInterceptor, ResponseInterceptor } from '../internal/interceptors/types.js'
 import { isOrganizationId, isProjectId, isRegion, isURL, isZone } from '../internal/validations/string-validation.js'
@@ -36,7 +36,7 @@ export type Settings = DefaultValues & {
    * When unset, requests are not retried.
    * Prefer setting this via {@link withRetry}, which stores a fully resolved object.
    */
-  retry?: RetryOptions | ResolvedRetryOptions
+  retry?: RetryOptions
   /**
    * HTTP Client doing the requests.
    */

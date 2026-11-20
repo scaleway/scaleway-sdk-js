@@ -257,12 +257,13 @@ describe('withRetry', () => {
     const settings = withRetry({ maxRetries: 5, minDelay: 2, maxDelay: 8, isRetryable: alwaysRetryable })(
       DEFAULT_SETTINGS,
     )
-    expect(settings.retry).toStrictEqual({
+    expect(settings.retry).toMatchObject({
       maxRetries: 5,
       minDelay: 2,
       maxDelay: 8,
-      isRetryable: alwaysRetryable,
     })
+    expect(typeof settings.retry?.isRetryable).toBe('function')
+    expect(settings.retry?.isRetryable(new Error('retry me'), { method: 'GET' })).toBe(true)
   })
 })
 

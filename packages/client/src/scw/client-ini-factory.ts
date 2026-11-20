@@ -110,7 +110,8 @@ export const withTimeout =
  *
  * @remarks
  * This method should be used in conjunction with the initializer `createAdvancedClient`.
- * A custom `isRetryable` fully replaces the default predicate (it does not merge with it).
+ * A custom `isRetryable` replaces the default retry classification (it does not merge with it);
+ * abort/timeout are always excluded by the framework.
  * Combined with `withTimeout`, the timeout applies to the whole retry sequence (not per attempt).
  * `responseError` interceptors run only after retries are exhausted.
  * Request/response interceptors (and logs) run on every attempt.

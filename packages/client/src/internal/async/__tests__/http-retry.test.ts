@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { ScalewayError } from '../../../scw/errors/scw-error.js'
 import { TooManyRequestsError } from '../../../scw/errors/standard/too-many-requests-error.js'
 import { AbortError } from '../../../scw/fetch/abort-error.js'
+import { InvalidResponseError } from '../../../scw/fetch/invalid-response-error.js'
 import {
   assertValidRetryOptions,
   isDefaultRetryableError,
@@ -33,8 +34,8 @@ describe('isNetworkError', () => {
     expect(isNetworkError(new TypeError('Failed to fetch'))).toBe(true)
   })
 
-  it('ignores parser TypeError and other errors', () => {
-    expect(isNetworkError(new TypeError('Invalid response object'))).toBe(false)
+  it('ignores parser InvalidResponseError and other errors', () => {
+    expect(isNetworkError(new InvalidResponseError())).toBe(false)
     expect(isNetworkError(new Error('boom'))).toBe(false)
     expect(isNetworkError(new ScalewayError(500, 'err'))).toBe(false)
   })
@@ -160,14 +161,23 @@ describe('resolveRetryOptions', () => {
   })
 
   it('keeps caller overrides', () => {
-    expect(
-      resolveRetryOptions({ maxRetries: 5, minDelay: 2, maxDelay: 10, isRetryable: neverRetryable }),
-    ).toStrictEqual({
+    const resolved = resolveRetryOptions({
       maxRetries: 5,
       minDelay: 2,
       maxDelay: 10,
       isRetryable: neverRetryable,
     })
+    expect(resolved).toMatchObject({ maxRetries: 5, minDelay: 2, maxDelay: 10 })
+    expect(resolved.isRetryable(new Error('x'), { method: 'GET' })).toBe(false)
+  })
+
+  it('never retries abort or timeout even with always-true custom predicate', () => {
+    const resolved = resolveRetryOptions({ isRetryable: () => true })
+    expect(resolved.isRetryable(new AbortError(), { method: 'GET' })).toBe(false)
+    const timeout = new Error('timeout')
+    timeout.name = 'TimeoutError'
+    expect(resolved.isRetryable(timeout, { method: 'GET' })).toBe(false)
+    expect(resolved.isRetryable(new ScalewayError(503, 'unavailable'), { method: 'GET' })).toBe(true)
   })
 })
 

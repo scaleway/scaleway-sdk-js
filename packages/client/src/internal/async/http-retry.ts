@@ -1,6 +1,7 @@
 import { ScalewayError } from '../../scw/errors/scw-error.js'
 import { TooManyRequestsError } from '../../scw/errors/standard/too-many-requests-error.js'
 import { isAbortError } from '../../scw/fetch/abort-error.js'
+import { InvalidResponseError } from '../../scw/fetch/invalid-response-error.js'
 import type { ScwRequest } from '../../scw/fetch/types.js'
 import { createExponentialBackoffStrategy } from './interval-retrier.js'
 
@@ -48,7 +49,8 @@ export type RetryOptions = {
   /**
    * Predicate deciding whether an error is retryable.
    * Defaults to {@link isDefaultRetryableError}.
-   * When provided, fully replaces the default predicate (including abort/timeout guards).
+   * When provided, replaces the default retry classification; abort/timeout are
+   * always excluded by the framework and never reach this predicate's result.
    */
   isRetryable?: (error: unknown, context: RetryContext) => boolean
 }
@@ -74,22 +76,24 @@ export const isIdempotentMethod = (method: ScwRequest['method']): boolean => IDE
 
 /**
  * Returns whether the error is a transient network failure from `fetch`
- * (not a programming `TypeError` from response parsing/interceptors).
+ * (not a programming error from response parsing/interceptors).
+ *
+ * Fetch failures are still detected via message text (undici/Chrome/Firefox);
+ * parser failures use {@link InvalidResponseError} and are never treated as network.
  *
  * @internal
  */
 export const isNetworkError = (error: unknown): boolean => {
-  if (!(error instanceof TypeError)) {
-    return false
-  }
-  // responseParser throws TypeError('Invalid response object') — not a network failure.
-  if (error.message === 'Invalid response object') {
+  if (error instanceof InvalidResponseError || !(error instanceof TypeError)) {
     return false
   }
   const message = error.message.toLowerCase()
 
   return message.includes('fetch') || message.includes('network')
 }
+
+const isAbortOrTimeoutError = (error: unknown): boolean =>
+  isAbortError(error) || (error instanceof Error && error.name === 'TimeoutError')
 
 /**
  * Default retry predicate:
@@ -100,10 +104,7 @@ export const isNetworkError = (error: unknown): boolean => {
  * @internal
  */
 export const isDefaultRetryableError = (error: unknown, context: RetryContext): boolean => {
-  if (isAbortError(error)) {
-    return false
-  }
-  if (error instanceof Error && error.name === 'TimeoutError') {
+  if (isAbortOrTimeoutError(error)) {
     return false
   }
   if (error instanceof ScalewayError && error.status === 429) {
@@ -178,15 +179,20 @@ export const resolveRetryDelayMs = ({
 
 /**
  * Applies defaults to {@link RetryOptions}.
+ * Always excludes abort/timeout before calling the (custom or default) predicate.
  *
  * @internal
  */
-export const resolveRetryOptions = (options: RetryOptions = {}): ResolvedRetryOptions => ({
-  maxRetries: options.maxRetries ?? DEFAULT_MAX_RETRIES,
-  minDelay: options.minDelay ?? DEFAULT_MIN_DELAY_SECONDS,
-  maxDelay: options.maxDelay ?? DEFAULT_MAX_DELAY_SECONDS,
-  isRetryable: options.isRetryable ?? isDefaultRetryableError,
-})
+export const resolveRetryOptions = (options: RetryOptions = {}): ResolvedRetryOptions => {
+  const predicate = options.isRetryable ?? isDefaultRetryableError
+
+  return {
+    maxRetries: options.maxRetries ?? DEFAULT_MAX_RETRIES,
+    minDelay: options.minDelay ?? DEFAULT_MIN_DELAY_SECONDS,
+    maxDelay: options.maxDelay ?? DEFAULT_MAX_DELAY_SECONDS,
+    isRetryable: (error, context) => !isAbortOrTimeoutError(error) && predicate(error, context),
+  }
+}
 
 /**
  * Creates an exponential backoff iterator for HTTP retries.

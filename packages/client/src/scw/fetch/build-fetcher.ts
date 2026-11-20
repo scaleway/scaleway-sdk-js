@@ -53,24 +53,6 @@ const asIs = <T>(response: unknown) => response as T
 
 export type Fetcher = <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>
 
-const toResolvedRetryOptions = (retry: NonNullable<Settings['retry']>): ResolvedRetryOptions => {
-  if (
-    typeof retry.maxRetries === 'number' &&
-    typeof retry.minDelay === 'number' &&
-    typeof retry.maxDelay === 'number' &&
-    typeof retry.isRetryable === 'function'
-  ) {
-    return {
-      isRetryable: retry.isRetryable,
-      maxDelay: retry.maxDelay,
-      maxRetries: retry.maxRetries,
-      minDelay: retry.minDelay,
-    }
-  }
-
-  return resolveRetryOptions(retry)
-}
-
 /**
  * Builds a resource fetcher.
  *
@@ -105,16 +87,49 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       settings.interceptors.map(obj => obj.responseError).filter((x): x is ResponseErrorInterceptor => x !== undefined),
     )
 
-  const retryOptions = settings.retry !== undefined ? toResolvedRetryOptions(settings.retry) : undefined
+  // withRetry already resolves; only resolve again for a partial hand-written `settings.retry`.
+  const { retry } = settings
+  let retryOptions: ResolvedRetryOptions | undefined = undefined
+  if (retry !== undefined) {
+    retryOptions =
+      typeof retry.maxRetries === 'number' &&
+      typeof retry.minDelay === 'number' &&
+      typeof retry.maxDelay === 'number' &&
+      typeof retry.isRetryable === 'function'
+        ? {
+            isRetryable: retry.isRetryable,
+            maxDelay: retry.maxDelay,
+            maxRetries: retry.maxRetries,
+            minDelay: retry.minDelay,
+          }
+        : resolveRetryOptions(retry)
+  }
 
   return async <T>(request: Readonly<ScwRequest>, unwrapper: ResponseUnmarshaller<T> = asIs): Promise<T> => {
     requestNumber += 1
     const requestId = `${requestNumber}`
     const reqInterceptors = prepareRequest(requestId)
-    const resInterceptors = prepareResponse(requestId)
     const resUnmarshaller = responseParser<T>(unwrapper, request.responseType ?? 'json')
-    const backoff = retryOptions !== undefined ? createRetryBackoffStrategy(retryOptions) : undefined
-    const maxAttempts = retryOptions !== undefined ? retryOptions.maxRetries + 1 : 1
+
+    // No retry configured: keep the original single-attempt path (zero retry overhead).
+    if (retryOptions === undefined) {
+      const finalRequest = await reqInterceptors(buildRequest(request, settings))
+      try {
+        const response = await httpClient(finalRequest)
+        const finalResponse = await prepareResponse(requestId)(response)
+
+        return await resUnmarshaller(finalResponse)
+      } catch (error) {
+        // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- error interceptor may transform the error into the response type expected by the unwrapper
+        const handledError = (await prepareResponseErrors()(finalRequest, error)) as T
+
+        return unwrapper(handledError)
+      }
+    }
+
+    const resInterceptors = prepareResponse(requestId)
+    const backoff = createRetryBackoffStrategy(retryOptions)
+    const maxAttempts = retryOptions.maxRetries + 1
 
     // One signal for the whole retry sequence so defaultTimeoutMs is a total deadline,
     // not multiplied by the number of attempts.
@@ -155,11 +170,7 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
         lastError = error
         // Abort/timeout are rejected by isRetryable; the loop also checks signal.aborted
         // at the start of each attempt (TS cannot model AbortSignal mutating mid-iteration).
-        const canRetry =
-          retryOptions !== undefined &&
-          backoff !== undefined &&
-          attempt + 1 < maxAttempts &&
-          retryOptions.isRetryable(error, { method: request.method })
+        const canRetry = attempt + 1 < maxAttempts && retryOptions.isRetryable(error, { method: request.method })
 
         if (!canRetry) {
           break
@@ -171,8 +182,13 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
           maxDelaySeconds: retryOptions.maxDelay,
           retryAfterMs,
         })
-        // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry with delay
-        await sleep(delayMs)
+        try {
+          // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry with delay
+          await sleep(delayMs, attemptRequest.signal)
+        } catch (sleepError) {
+          lastError = sleepError
+          break
+        }
       }
     }
 
@@ -180,9 +196,8 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       throw lastError instanceof Error ? lastError : new Error('request failed')
     }
 
-    const resErrorInterceptors = prepareResponseErrors()
     // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- error interceptor may transform the error into the response type expected by the unwrapper
-    const handledError = (await resErrorInterceptors(lastRequest, lastError)) as T
+    const handledError = (await prepareResponseErrors()(lastRequest, lastError)) as T
 
     return unwrapper(handledError)
   }
