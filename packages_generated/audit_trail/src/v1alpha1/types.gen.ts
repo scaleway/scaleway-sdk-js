@@ -1352,6 +1352,14 @@ export interface CustomAlertRuleField {
 }
 
 
+export interface TrailCockpit {
+  /**
+   * ID of the Project under which the Organization's Audit Trail events are pushed to Cockpit.
+   */
+  targetProjectId: string
+}
+
+
 export type CreateCustomAlertRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1558,6 +1566,18 @@ export type GetLastEventsOverviewRequest = {
   region?: ScwRegion | null
   organizationId?: string | null
   projectId?: string | null
+}
+
+
+export type GetTrailRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  /**
+   * ID of the Organization whose trail is to be retrieved.
+   */
+  organizationId?: string | null
 }
 
 
@@ -1932,6 +1952,18 @@ export interface TestCustomAlertRuleResponse {
 }
 
 
+export interface Trail {
+  /**
+   * ID of the Organization the trail belongs to.
+   */
+  organizationId: string
+  /**
+   * The Cockpit destination of the trail. When set, Audit Trail events are pushed to the targeted Cockpit project. When null, forwarding is disabled.
+   */
+  cockpit?: TrailCockpit | null
+}
+
+
 export type UpdateCustomAlertRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
@@ -1949,6 +1981,22 @@ export type UpdateCustomAlertRuleRequest = {
    * (Optional) New description for the custom alert rule.
    */
   description?: string | null
+}
+
+
+export type UpdateTrailRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  /**
+   * ID of the Organization whose trail is to be updated.
+   */
+  organizationId?: string | null
+  /**
+   * An omitted or `null` `cockpit` clears the destination and disables forwarding.
+   */
+  cockpit?: TrailCockpit | null
 }
 
 
