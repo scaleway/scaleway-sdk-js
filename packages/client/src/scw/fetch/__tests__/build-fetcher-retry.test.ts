@@ -254,6 +254,22 @@ describe('buildFetcher retry', () => {
     expect(fetchMock).toHaveBeenCalledTimes(3)
   })
 
+  it.each(['AbortError', 'TimeoutError'])('stops on %s before calling a predicate set directly', async name => {
+    const error = new DOMException('request stopped', name)
+    const fetchMock = vi.fn<typeof fetch>().mockRejectedValue(error)
+    const isRetryable = vi.fn(() => true)
+    const result = buildFetcher(
+      { ...DEFAULT_SETTINGS, retry: { maxRetries: 1, minDelay: 1, maxDelay: 1, isRetryable } },
+      fetchMock,
+    )({ method: 'GET', path: '/transport-stopped' })
+
+    const expectation = expect(result).rejects.toBe(error)
+    await vi.runAllTimersAsync()
+    await expectation
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect(isRetryable).not.toHaveBeenCalled()
+  })
+
   it('aborts during backoff without waiting for the full delay', async () => {
     const controller = new AbortController()
     const fetchMock = vi

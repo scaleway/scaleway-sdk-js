@@ -2,6 +2,7 @@ import { isBrowser } from '../../helpers/is-browser.js'
 import type { RequestInterceptor, ResponseErrorInterceptor, ResponseInterceptor } from '../../index.js'
 import {
   createRetryBackoffStrategy,
+  isAbortOrTimeoutError,
   parseRetryAfterHeader,
   resolveRetryDelayMs,
   resolveRetryOptions,
@@ -50,6 +51,8 @@ export const buildRequest = (request: Readonly<ScwRequest>, settings: Readonly<S
 
 // oxlint-disable-next-line typescript/no-unnecessary-type-parameters, typescript/no-unsafe-type-assertion -- generic passthrough unwrapper; T is caller-controlled and the response shape is unknown at this layer
 const asIs = <T>(response: unknown) => response as T
+
+const isAborted = (signal?: AbortSignal): boolean => signal?.aborted === true
 
 export type Fetcher = <T>(request: Readonly<ScwRequest>, unwrapper?: ResponseUnmarshaller<T>) => Promise<T>
 
@@ -147,8 +150,8 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
     let lastError: unknown = undefined
 
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-      if (attemptRequest.signal?.aborted === true) {
-        lastError = attemptRequest.signal.reason ?? new Error('The operation was aborted')
+      if (isAborted(attemptRequest.signal)) {
+        lastError = attemptRequest.signal?.reason ?? new Error('The operation was aborted')
         break
       }
 
@@ -170,10 +173,11 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
         return await resUnmarshaller(finalResponse)
       } catch (error) {
         lastError = error
-        // Abort/timeout are rejected by isRetryable; the loop also checks signal.aborted
-        // at the start of each attempt (TS cannot model AbortSignal mutating mid-iteration).
         const canRetry =
-          attempt + 1 < maxAttempts && retryOptions.isRetryable(error, { method: request.method }, fromTransport)
+          attempt + 1 < maxAttempts &&
+          !isAborted(attemptRequest.signal) &&
+          !isAbortOrTimeoutError(error) &&
+          retryOptions.isRetryable(error, { method: request.method }, fromTransport)
 
         if (!canRetry) {
           break

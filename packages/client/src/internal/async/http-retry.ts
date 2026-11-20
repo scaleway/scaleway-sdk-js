@@ -92,7 +92,7 @@ export const isNetworkError = (error: unknown): boolean => {
   return message.includes('fetch') || message.includes('network')
 }
 
-const isAbortOrTimeoutError = (error: unknown): boolean =>
+export const isAbortOrTimeoutError = (error: unknown): boolean =>
   isAbortError(error) || (error instanceof Error && error.name === 'TimeoutError')
 
 /**
