@@ -263,7 +263,7 @@ describe('withRetry', () => {
       maxDelay: 8,
     })
     expect(typeof settings.retry?.isRetryable).toBe('function')
-    expect(settings.retry?.isRetryable(new Error('retry me'), { method: 'GET' })).toBe(true)
+    expect(settings.retry?.isRetryable?.(new Error('retry me'), { method: 'GET' })).toBe(true)
   })
 })
 

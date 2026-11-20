@@ -58,7 +58,7 @@ export type RetryOptions = {
 /**
  * Resolved retry settings with defaults applied.
  *
- * @public
+ * @internal
  */
 export type ResolvedRetryOptions = {
   maxRetries: number
