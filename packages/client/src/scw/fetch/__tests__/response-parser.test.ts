@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { JSONObject } from '../../../helpers/json.js'
 import { isJSONObject } from '../../../helpers/json.js'
 import { ScalewayError } from '../../errors/scw-error.js'
+import { InvalidResponseError } from '../invalid-response-error.js'
 import { fixLegacyTotalCount, responseParser } from '../response-parser.js'
 
 const SIMPLE_REQ_BODY = { 'what-is-life': 42 }
@@ -46,11 +47,11 @@ describe(`responseParser`, () => {
   // oxlint-disable-next-line typescript/no-unnecessary-type-parameters, typescript/no-unsafe-type-assertion -- test passthrough unwrapper; T is caller-controlled
   const parseBlob = responseParser(<T>(response: unknown) => response as T, 'blob')
 
-  it(`triggers a type error for non 'Response' object`, async () =>
+  it(`triggers an invalid-response error for non 'Response' object`, async () =>
     expect(
       // @ts-expect-error Different type
       parseJson('not-a-response'),
-    ).rejects.toThrow(new TypeError('Invalid response object')))
+    ).rejects.toThrow(InvalidResponseError))
 
   it(`triggers an error for invalid status code`, async () => {
     const invalidResponse = new Response(new Uint8Array(convertObjToBuffer(SIMPLE_REQ_BODY)), {
