@@ -93,7 +93,9 @@ export const isNetworkError = (error: unknown): boolean => {
 }
 
 export const isAbortOrTimeoutError = (error: unknown): boolean =>
-  isAbortError(error) || (error instanceof Error && error.name === 'TimeoutError')
+  isAbortError(error) ||
+  (error instanceof Error && error.name === 'TimeoutError') ||
+  (error instanceof DOMException && (error.name === 'AbortError' || error.name === 'TimeoutError'))
 
 /**
  * Default retry predicate:
