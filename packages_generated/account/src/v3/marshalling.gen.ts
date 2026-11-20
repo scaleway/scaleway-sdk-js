@@ -37,12 +37,12 @@ const unmarshalContract = (data: unknown): Contract => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     srn: data.srn,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     version: data.version,
   } as Contract
 }
@@ -55,12 +55,12 @@ export const unmarshalContractSignature = (data: unknown): ContractSignature => 
   }
 
   return {
-    contract: data.contract ? unmarshalContract(data.contract) : undefined,
-    createdAt: unmarshalDate(data.created_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    contract: data.contract ? unmarshalContract(data.contract) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     organizationId: data.organization_id,
-    signedAt: unmarshalDate(data.signed_at),
+    signedAt: unmarshalDate(data.signed_at) ?? null,
   } as ContractSignature
 }
 
@@ -180,16 +180,16 @@ const unmarshalQualification = (data: unknown): Qualification => {
   }
 
   return {
-    aiMachine: data.ai_machine ? unmarshalQualificationAiMachine(data.ai_machine) : undefined,
+    aiMachine: data.ai_machine ? unmarshalQualificationAiMachine(data.ai_machine) : null,
     architectureType: data.architecture_type,
-    archiveData: data.archive_data ? unmarshalQualificationArchiveData(data.archive_data) : undefined,
-    container: data.container ? unmarshalQualificationContainer(data.container) : undefined,
-    deploySoftware: data.deploy_software ? unmarshalQualificationDeploySoftware(data.deploy_software) : undefined,
-    hostApplication: data.host_application ? unmarshalQualificationHostApplication(data.host_application) : undefined,
-    hostWebsite: data.host_website ? unmarshalQualificationHostWebsite(data.host_website) : undefined,
-    otherUseCase: data.other_use_case ? unmarshalQualificationOtherUseCase(data.other_use_case) : undefined,
-    setScalewayEnvironment: data.set_scaleway_environment ? unmarshalQualificationSetScalewayEnvironment(data.set_scaleway_environment) : undefined,
-    shareData: data.share_data ? unmarshalQualificationShareData(data.share_data) : undefined,
+    archiveData: data.archive_data ? unmarshalQualificationArchiveData(data.archive_data) : null,
+    container: data.container ? unmarshalQualificationContainer(data.container) : null,
+    deploySoftware: data.deploy_software ? unmarshalQualificationDeploySoftware(data.deploy_software) : null,
+    hostApplication: data.host_application ? unmarshalQualificationHostApplication(data.host_application) : null,
+    hostWebsite: data.host_website ? unmarshalQualificationHostWebsite(data.host_website) : null,
+    otherUseCase: data.other_use_case ? unmarshalQualificationOtherUseCase(data.other_use_case) : null,
+    setScalewayEnvironment: data.set_scaleway_environment ? unmarshalQualificationSetScalewayEnvironment(data.set_scaleway_environment) : null,
+    shareData: data.share_data ? unmarshalQualificationShareData(data.share_data) : null,
   } as Qualification
 }
 
@@ -201,15 +201,15 @@ export const unmarshalProject = (data: unknown): Project => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
-    qualification: data.qualification ? unmarshalQualification(data.qualification) : undefined,
+    qualification: data.qualification ? unmarshalQualification(data.qualification) : null,
     srn: data.srn,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Project
 }
 
@@ -261,7 +261,7 @@ export const unmarshalProjectQualification = (data: unknown): ProjectQualificati
 
   return {
     projectId: data.project_id,
-    qualification: data.qualification ? unmarshalQualification(data.qualification) : undefined,
+    qualification: data.qualification ? unmarshalQualification(data.qualification) : null,
   } as ProjectQualification
 }
 
@@ -370,39 +370,39 @@ const marshalQualification = (
   architecture_type: request.architectureType,  
   ...resolveOneOf([
     {param: 'host_website',
-      value: (request.hostWebsite !== undefined) ? marshalQualificationHostWebsite(request.hostWebsite, defaults)
+      value: (request.hostWebsite != null) ? marshalQualificationHostWebsite(request.hostWebsite, defaults)
       : undefined,
     },
     {param: 'host_application',
-      value: (request.hostApplication !== undefined) ? marshalQualificationHostApplication(request.hostApplication, defaults)
+      value: (request.hostApplication != null) ? marshalQualificationHostApplication(request.hostApplication, defaults)
       : undefined,
     },
     {param: 'deploy_software',
-      value: (request.deploySoftware !== undefined) ? marshalQualificationDeploySoftware(request.deploySoftware, defaults)
+      value: (request.deploySoftware != null) ? marshalQualificationDeploySoftware(request.deploySoftware, defaults)
       : undefined,
     },
     {param: 'set_scaleway_environment',
-      value: (request.setScalewayEnvironment !== undefined) ? marshalQualificationSetScalewayEnvironment(request.setScalewayEnvironment, defaults)
+      value: (request.setScalewayEnvironment != null) ? marshalQualificationSetScalewayEnvironment(request.setScalewayEnvironment, defaults)
       : undefined,
     },
     {param: 'ai_machine',
-      value: (request.aiMachine !== undefined) ? marshalQualificationAiMachine(request.aiMachine, defaults)
+      value: (request.aiMachine != null) ? marshalQualificationAiMachine(request.aiMachine, defaults)
       : undefined,
     },
     {param: 'container',
-      value: (request.container !== undefined) ? marshalQualificationContainer(request.container, defaults)
+      value: (request.container != null) ? marshalQualificationContainer(request.container, defaults)
       : undefined,
     },
     {param: 'archive_data',
-      value: (request.archiveData !== undefined) ? marshalQualificationArchiveData(request.archiveData, defaults)
+      value: (request.archiveData != null) ? marshalQualificationArchiveData(request.archiveData, defaults)
       : undefined,
     },
     {param: 'share_data',
-      value: (request.shareData !== undefined) ? marshalQualificationShareData(request.shareData, defaults)
+      value: (request.shareData != null) ? marshalQualificationShareData(request.shareData, defaults)
       : undefined,
     },
     {param: 'other_use_case',
-      value: (request.otherUseCase !== undefined) ? marshalQualificationOtherUseCase(request.otherUseCase, defaults)
+      value: (request.otherUseCase != null) ? marshalQualificationOtherUseCase(request.otherUseCase, defaults)
       : undefined,
     },
   ]),
@@ -412,7 +412,7 @@ export const marshalProjectApiSetProjectQualificationRequest = (
   request: ProjectApiSetProjectQualificationRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  qualification: ((request.qualification !== undefined) ?  marshalQualification(request.qualification, defaults): undefined),
+  qualification: ((request.qualification != null) ?  marshalQualification(request.qualification, defaults): undefined),
 })
 
 export const marshalProjectApiUpdateProjectRequest = (

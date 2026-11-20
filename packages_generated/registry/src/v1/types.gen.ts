@@ -70,7 +70,7 @@ export interface Image {
   /**
    * Details of the image status.
    */
-  statusMessage?: string
+  statusMessage?: string | null
   /**
    * Set to `public` to allow the image to be pulled without authentication. Else, set to `private`. Set to `inherit` to keep the same visibility configuration as the namespace.
    */
@@ -82,11 +82,11 @@ export interface Image {
   /**
    * Date and time of image creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * List of docker tags of the image.
    */
@@ -138,11 +138,11 @@ export interface Namespace {
   /**
    * Date and time of creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Number of images in the namespace.
    */
@@ -178,11 +178,11 @@ export interface Tag {
   /**
    * Date and time of creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -190,11 +190,11 @@ export type CreateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the namespace.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the namespace.
    */
@@ -204,13 +204,13 @@ export type CreateNamespaceRequest = {
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID on which the namespace will be created.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Defines whether or not namespace is public.
    */
@@ -222,7 +222,7 @@ export type DeleteImageRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the image.
    */
@@ -234,7 +234,7 @@ export type DeleteNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespace.
    */
@@ -246,7 +246,7 @@ export type DeleteTagRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the tag.
    */
@@ -254,7 +254,7 @@ export type DeleteTagRequest = {
   /**
    * @deprecated If two tags share the same digest the deletion will fail unless this parameter is set to true (deprecated).
    */
-  force?: boolean
+  force?: boolean | null
 }
 
 
@@ -262,7 +262,7 @@ export type GetImageRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the image.
    */
@@ -274,7 +274,7 @@ export type GetNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespace.
    */
@@ -286,7 +286,7 @@ export type GetTagRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the tag.
    */
@@ -298,35 +298,35 @@ export type ListImagesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * A positive integer to choose the page to display.
    */
-  page?: number
+  page?: number | null
   /**
    * A positive integer lower or equal to 100 to select the number of items to display.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Criteria to use when ordering image listings. Possible values are `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`, `region`, `status_asc` and `status_desc`. The default value is `created_at_asc`.
    */
-  orderBy?: ListImagesRequestOrderBy
+  orderBy?: ListImagesRequestOrderBy | null
   /**
    * Filter by the namespace ID.
    */
-  namespaceId?: string
+  namespaceId?: string | null
   /**
    * Filter by the image name (exact match).
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -346,31 +346,31 @@ export type ListNamespacesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * A positive integer to choose the page to display.
    */
-  page?: number
+  page?: number | null
   /**
    * A positive integer lower or equal to 100 to select the number of items to display.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Criteria to use when ordering namespace listings. Possible values are `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`, `region`, `status_asc` and `status_desc`. The default value is `created_at_asc`.
    */
-  orderBy?: ListNamespacesRequestOrderBy
+  orderBy?: ListNamespacesRequestOrderBy | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by the namespace name (exact match).
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -390,7 +390,7 @@ export type ListTagsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the image.
    */
@@ -398,19 +398,19 @@ export type ListTagsRequest = {
   /**
    * A positive integer to choose the page to display.
    */
-  page?: number
+  page?: number | null
   /**
    * A positive integer lower or equal to 100 to select the number of items to display.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Criteria to use when ordering tag listings. Possible values are `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`, `region`, `status_asc` and `status_desc`. The default value is `created_at_asc`.
    */
-  orderBy?: ListTagsRequestOrderBy
+  orderBy?: ListTagsRequestOrderBy | null
   /**
    * Filter by the tag name (exact match).
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -430,7 +430,7 @@ export type UpdateImageRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the image to update.
    */
@@ -438,7 +438,7 @@ export type UpdateImageRequest = {
   /**
    * Set to `public` to allow the image to be pulled without authentication. Else, set to `private`. Set to `inherit` to keep the same visibility configuration as the namespace.
    */
-  visibility?: ImageVisibility
+  visibility?: ImageVisibility | null
 }
 
 
@@ -446,7 +446,7 @@ export type UpdateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the namespace to update.
    */
@@ -454,11 +454,11 @@ export type UpdateNamespaceRequest = {
   /**
    * Namespace description.
    */
-  description?: string
+  description?: string | null
   /**
    * Defines whether or not the namespace is public.
    */
-  isPublic?: boolean
+  isPublic?: boolean | null
 }
 
 

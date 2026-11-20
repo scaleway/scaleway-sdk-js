@@ -102,7 +102,7 @@ export function generateQueryHook(
   }
 
   const keyArray = hasParams
-    ? `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`
+    ? `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).toSorted()`
     : `"${n.apiVarName}", "${method.methodName}"`
 
   return renderHook({
@@ -182,7 +182,7 @@ export function generateAllQueryHook(
     hasParams: true,
     isAll: true,
     isInfinite: false,
-    keyArray: `"${n.apiVarName}", "${method.methodName}", "${config.naming.allKeySuffix}", ...Object.entries(params).flat(3).sort()`,
+    keyArray: `"${n.apiVarName}", "${method.methodName}", "${config.naming.allKeySuffix}", ...Object.entries(params).flat(3).toSorted()`,
   })
 }
 
@@ -218,7 +218,7 @@ export function generateInfiniteQueryHook(
     hasParams: true,
     isAll: false,
     isInfinite: true,
-    keyArray: `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).sort()`,
+    keyArray: `"${n.apiVarName}", "${method.methodName}", ...Object.entries(params).flat(3).toSorted()`,
   })
 }
 

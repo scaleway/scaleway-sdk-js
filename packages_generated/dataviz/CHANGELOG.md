@@ -1,5 +1,439 @@
 # Change Log
 
+## 1.15.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.7
+
+## 1.15.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(multiple_namespaces): add SRN integration (#3722)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- feat: add support for constants (#3286)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore: remove post-generate updates (#3168)
+
+- feat: update generated APIs (#3182)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- Update generated APIs (#3845)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- Update generated APIs (#3745)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat(dataviz): add superset (#3126)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- fix: remove unrequired volume deployment_id (#3784)
+
+## 1.14.0
+
+### Minor Changes
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- fix: remove unrequired volume deployment_id (#3784)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- Update generated APIs (#3745)
+
+- feat: update generated APIs (#3650)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(multiple_namespaces): add SRN integration (#3722)
+
+- feat(dataviz): add superset (#3126)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat: add support for constants (#3286)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.6
+
+## 1.13.0
+
+### Minor Changes
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat(dataviz): add superset (#3126)
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat: add support for constants (#3286)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(generation): improve ts metadata (#3242)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(multiple_namespaces): add SRN integration (#3722)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+## 1.12.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.5
+
+## 1.12.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- feat(dataviz): add superset (#3126)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat: add support for constants (#3286)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.4
+
+## 1.11.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.3
+
+## 1.11.0
+
+### Minor Changes
+
+- chore: remove post-generate updates (#3168)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(dataviz): add superset (#3126)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#3339)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- feat: add support for constants (#3286)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.2
+
 ## 1.10.0
 
 ### Minor Changes

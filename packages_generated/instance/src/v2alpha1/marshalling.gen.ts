@@ -11,6 +11,7 @@ import type {
   Snapshot,
   Volume,
   AddSecurityGroupRulesResponse,
+  DedicatedPoolPhysicalHost,
   DedicatedPool,
   ServerTypeGpuInfo,
   ServerTypeLimits,
@@ -121,13 +122,13 @@ const unmarshalSecurityGroupRule = (data: unknown): SecurityGroupRule => {
   return {
     action: data.action,
     destinationIpRange: data.destination_ip_range,
-    destinationPorts: data.destination_ports ? unmarshalSecurityGroupRulePortRange(data.destination_ports) : undefined,
+    destinationPorts: data.destination_ports ? unmarshalSecurityGroupRulePortRange(data.destination_ports) : null,
     direction: data.direction,
     id: data.id,
     position: data.position,
     protocol: data.protocol,
     sourceIpRange: data.source_ip_range,
-    sourcePorts: data.source_ports ? unmarshalSecurityGroupRulePortRange(data.source_ports) : undefined,
+    sourcePorts: data.source_ports ? unmarshalSecurityGroupRulePortRange(data.source_ports) : null,
   } as SecurityGroupRule
 }
 
@@ -139,7 +140,7 @@ export const unmarshalSecurityGroup = (data: unknown): SecurityGroup => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     defaultRules: unmarshalArrayOfObject(data.default_rules, unmarshalSecurityGroupRule),
     description: data.description,
     disableDefaultRules: data.disable_default_rules,
@@ -153,7 +154,7 @@ export const unmarshalSecurityGroup = (data: unknown): SecurityGroup => {
     srn: data.srn,
     stateless: data.stateless,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as SecurityGroup
 }
@@ -166,14 +167,14 @@ export const unmarshalPlacementGroup = (data: unknown): PlacementGroup => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     policyType: data.policy_type,
     projectId: data.project_id,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as PlacementGroup
 }
@@ -186,8 +187,8 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
   }
 
   return {
-    baseVolumeId: data.base_volume_id,
-    createdAt: unmarshalDate(data.created_at),
+    baseVolumeId: data.base_volume_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     projectId: data.project_id,
@@ -196,7 +197,7 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     volumeType: data.volume_type,
     zone: data.zone,
   } as Snapshot
@@ -210,17 +211,17 @@ export const unmarshalVolume = (data: unknown): Volume => {
   }
 
   return {
-    baseSnapshotId: data.base_snapshot_id,
-    createdAt: unmarshalDate(data.created_at),
+    baseSnapshotId: data.base_snapshot_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     projectId: data.project_id,
-    serverId: data.server_id,
+    serverId: data.server_id ?? null,
     size: data.size,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     volumeType: data.volume_type,
     zone: data.zone,
   } as Volume
@@ -235,8 +236,20 @@ export const unmarshalAddSecurityGroupRulesResponse = (data: unknown): AddSecuri
 
   return {
     addedRules: unmarshalArrayOfObject(data.added_rules, unmarshalSecurityGroupRule),
-    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : undefined,
+    securityGroup: data.security_group ? unmarshalSecurityGroup(data.security_group) : null,
   } as AddSecurityGroupRulesResponse
+}
+
+const unmarshalDedicatedPoolPhysicalHost = (data: unknown): DedicatedPoolPhysicalHost => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DedicatedPoolPhysicalHost' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    id: data.id,
+  } as DedicatedPoolPhysicalHost
 }
 
 export const unmarshalDedicatedPool = (data: unknown): DedicatedPool => {
@@ -247,13 +260,15 @@ export const unmarshalDedicatedPool = (data: unknown): DedicatedPool => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
+    physicalHosts: unmarshalArrayOfObject(data.physical_hosts, unmarshalDedicatedPoolPhysicalHost),
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    zone: data.zone,
   } as DedicatedPool
 }
 
@@ -304,10 +319,11 @@ const unmarshalDedicatedPoolServerType = (data: unknown): DedicatedPoolServerTyp
     availability: data.availability,
     endOfService: data.end_of_service,
     gpuCount: data.gpu_count,
-    gpuInfo: data.gpu_info ? unmarshalServerTypeGpuInfo(data.gpu_info) : undefined,
-    limits: data.limits ? unmarshalServerTypeLimits(data.limits) : undefined,
+    gpuInfo: data.gpu_info ? unmarshalServerTypeGpuInfo(data.gpu_info) : null,
+    limits: data.limits ? unmarshalServerTypeLimits(data.limits) : null,
     memory: data.memory,
     name: data.name,
+    sku: data.sku,
     slotsAvailable: data.slots_available,
     vcpuCount: data.vcpu_count,
   } as DedicatedPoolServerType
@@ -321,7 +337,7 @@ export const unmarshalListDedicatedPoolServerTypesResponse = (data: unknown): Li
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     serverTypes: unmarshalArrayOfObject(data.server_types, unmarshalDedicatedPoolServerType),
     totalCount: data.total_count,
   } as ListDedicatedPoolServerTypesResponse
@@ -335,13 +351,14 @@ const unmarshalDedicatedPoolSummary = (data: unknown): DedicatedPoolSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    zone: data.zone,
   } as DedicatedPoolSummary
 }
 
@@ -354,7 +371,7 @@ export const unmarshalListDedicatedPoolsResponse = (data: unknown): ListDedicate
 
   return {
     dedicatedPools: unmarshalArrayOfObject(data.dedicated_pools, unmarshalDedicatedPoolSummary),
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     totalCount: data.total_count,
   } as ListDedicatedPoolsResponse
 }
@@ -367,7 +384,7 @@ export const unmarshalListPlacementGroupsResponse = (data: unknown): ListPlaceme
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     placementGroups: unmarshalArrayOfObject(data.placement_groups, unmarshalPlacementGroup),
     totalCount: data.total_count,
   } as ListPlacementGroupsResponse
@@ -381,17 +398,18 @@ const unmarshalPrivateNetworkInterfaceSummary = (data: unknown): PrivateNetworkI
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     ipIds: data.ip_ids,
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
+    securityGroupId: data.security_group_id,
     serverId: data.server_id,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as PrivateNetworkInterfaceSummary
 }
@@ -404,7 +422,7 @@ export const unmarshalListPrivateNetworkInterfacesResponse = (data: unknown): Li
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     privateNetworkInterfaces: unmarshalArrayOfObject(data.private_network_interfaces, unmarshalPrivateNetworkInterfaceSummary),
     totalCount: data.total_count,
   } as ListPrivateNetworkInterfacesResponse
@@ -418,7 +436,7 @@ const unmarshalSecurityGroupSummary = (data: unknown): SecurityGroupSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     disableDefaultRules: data.disable_default_rules,
     id: data.id,
@@ -430,7 +448,7 @@ const unmarshalSecurityGroupSummary = (data: unknown): SecurityGroupSummary => {
     srn: data.srn,
     stateless: data.stateless,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as SecurityGroupSummary
 }
@@ -443,7 +461,7 @@ export const unmarshalListSecurityGroupsResponse = (data: unknown): ListSecurity
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     securityGroups: unmarshalArrayOfObject(data.security_groups, unmarshalSecurityGroupSummary),
     totalCount: data.total_count,
   } as ListSecurityGroupsResponse
@@ -473,11 +491,12 @@ const unmarshalServerType = (data: unknown): ServerType => {
     availability: data.availability,
     endOfService: data.end_of_service,
     gpuCount: data.gpu_count,
-    gpuInfo: data.gpu_info ? unmarshalServerTypeGpuInfo(data.gpu_info) : undefined,
-    limits: data.limits ? unmarshalServerTypeLimits(data.limits) : undefined,
+    gpuInfo: data.gpu_info ? unmarshalServerTypeGpuInfo(data.gpu_info) : null,
+    limits: data.limits ? unmarshalServerTypeLimits(data.limits) : null,
     memory: data.memory,
     name: data.name,
-    spotInfo: data.spot_info ? unmarshalServerTypeSpotInfo(data.spot_info) : undefined,
+    sku: data.sku,
+    spotInfo: data.spot_info ? unmarshalServerTypeSpotInfo(data.spot_info) : null,
     vcpuCount: data.vcpu_count,
   } as ServerType
 }
@@ -490,7 +509,7 @@ export const unmarshalListServerCompatibleTypesResponse = (data: unknown): ListS
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     serverTypes: unmarshalArrayOfObject(data.server_types, unmarshalServerType),
     totalCount: data.total_count,
   } as ListServerCompatibleTypesResponse
@@ -504,7 +523,7 @@ export const unmarshalListServerTypesResponse = (data: unknown): ListServerTypes
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     serverTypes: unmarshalArrayOfObject(data.server_types, unmarshalServerType),
     totalCount: data.total_count,
   } as ListServerTypesResponse
@@ -519,17 +538,17 @@ const unmarshalServerSummary = (data: unknown): ServerSummary => {
 
   return {
     architecture: data.architecture,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
-    placementGroupId: data.placement_group_id,
+    placementGroupId: data.placement_group_id ?? null,
     projectId: data.project_id,
     rescueMode: data.rescue_mode,
     serverType: data.server_type,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as ServerSummary
 }
@@ -542,7 +561,7 @@ export const unmarshalListServersResponse = (data: unknown): ListServersResponse
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     servers: unmarshalArrayOfObject(data.servers, unmarshalServerSummary),
     totalCount: data.total_count,
   } as ListServersResponse
@@ -556,7 +575,7 @@ export const unmarshalListSnapshotsResponse = (data: unknown): ListSnapshotsResp
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     snapshots: unmarshalArrayOfObject(data.snapshots, unmarshalSnapshot),
     totalCount: data.total_count,
   } as ListSnapshotsResponse
@@ -571,7 +590,7 @@ export const unmarshalListTemplateUserDataKeysResponse = (data: unknown): ListTe
 
   return {
     keys: data.keys,
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     totalCount: data.total_count,
   } as ListTemplateUserDataKeysResponse
 }
@@ -584,20 +603,20 @@ const unmarshalTemplateSummary = (data: unknown): TemplateSummary => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     filesystemIds: data.filesystem_ids,
     id: data.id,
     name: data.name,
-    placementGroupId: data.placement_group_id,
+    placementGroupId: data.placement_group_id ?? null,
     projectId: data.project_id,
     publicIpV4Count: data.public_ip_v4_count,
     publicIpV6Count: data.public_ip_v6_count,
-    securityGroupId: data.security_group_id,
+    securityGroupId: data.security_group_id ?? null,
     serverTags: data.server_tags,
     serverType: data.server_type,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as TemplateSummary
 }
@@ -610,7 +629,7 @@ export const unmarshalListTemplatesResponse = (data: unknown): ListTemplatesResp
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     templates: unmarshalArrayOfObject(data.templates, unmarshalTemplateSummary),
     totalCount: data.total_count,
   } as ListTemplatesResponse
@@ -625,7 +644,7 @@ export const unmarshalListUserDataKeysResponse = (data: unknown): ListUserDataKe
 
   return {
     keys: data.keys,
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     totalCount: data.total_count,
   } as ListUserDataKeysResponse
 }
@@ -652,7 +671,7 @@ export const unmarshalListVolumeTypesResponse = (data: unknown): ListVolumeTypes
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     totalCount: data.total_count,
     volumeTypes: unmarshalArrayOfObject(data.volume_types, unmarshalVolumeType),
   } as ListVolumeTypesResponse
@@ -666,7 +685,7 @@ export const unmarshalListVolumesResponse = (data: unknown): ListVolumesResponse
   }
 
   return {
-    nextPageToken: data.next_page_token,
+    nextPageToken: data.next_page_token ?? null,
     totalCount: data.total_count,
     volumes: unmarshalArrayOfObject(data.volumes, unmarshalVolume),
   } as ListVolumesResponse
@@ -680,17 +699,18 @@ export const unmarshalPrivateNetworkInterface = (data: unknown): PrivateNetworkI
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     ipIds: data.ip_ids,
     macAddress: data.mac_address,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
+    securityGroupId: data.security_group_id,
     serverId: data.server_id,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as PrivateNetworkInterface
 }
@@ -804,6 +824,7 @@ const unmarshalServerRuntimeInfo = (data: unknown): ServerRuntimeInfo => {
   }
 
   return {
+    physicalHostId: data.physical_host_id,
     spot: data.spot,
   } as ServerRuntimeInfo
 }
@@ -830,26 +851,26 @@ export const unmarshalServer = (data: unknown): Server => {
 
   return {
     architecture: data.architecture,
-    bootVolumeId: data.boot_volume_id,
-    createdAt: unmarshalDate(data.created_at),
-    dedicatedPoolId: data.dedicated_pool_id,
+    bootVolumeId: data.boot_volume_id ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    dedicatedPoolId: data.dedicated_pool_id ?? null,
     filesystems: unmarshalArrayOfObject(data.filesystems, unmarshalServerFilesystem),
     id: data.id,
     name: data.name,
-    placementGroupId: data.placement_group_id,
+    placementGroupId: data.placement_group_id ?? null,
     privateNetworkInterfaces: unmarshalArrayOfObject(data.private_network_interfaces, unmarshalServerPrivateNetworkInterface),
     projectId: data.project_id,
-    publicNetworkInterface: data.public_network_interface ? unmarshalServerPublicNetworkInterface(data.public_network_interface) : undefined,
+    publicNetworkInterface: data.public_network_interface ? unmarshalServerPublicNetworkInterface(data.public_network_interface) : null,
     rescueMode: data.rescue_mode,
-    runtimeInfo: data.runtime_info ? unmarshalServerRuntimeInfo(data.runtime_info) : undefined,
+    runtimeInfo: data.runtime_info ? unmarshalServerRuntimeInfo(data.runtime_info) : null,
     serverType: data.server_type,
     srn: data.srn,
     status: data.status,
     statusDetail: data.status_detail,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     volumes: unmarshalArrayOfObject(data.volumes, unmarshalServerVolume),
-    windowsRdpPassword: data.windows_rdp_password ? unmarshalServerRDPPassword(data.windows_rdp_password) : undefined,
+    windowsRdpPassword: data.windows_rdp_password ? unmarshalServerRDPPassword(data.windows_rdp_password) : null,
     zone: data.zone,
   } as Server
 }
@@ -863,6 +884,7 @@ const unmarshalCreateTemplateRequestPrivateNetworkTemplate = (data: unknown): Cr
 
   return {
     privateNetworkId: data.private_network_id,
+    securityGroupId: data.security_group_id ?? null,
   } as CreateTemplateRequestPrivateNetworkTemplate
 }
 
@@ -874,11 +896,11 @@ const unmarshalCreateTemplateRequestVolumeTemplate = (data: unknown): CreateTemp
   }
 
   return {
-    baseSnapshotId: data.base_snapshot_id,
-    imageLabel: data.image_label,
+    baseSnapshotId: data.base_snapshot_id ?? null,
+    imageLabel: data.image_label ?? null,
     name: data.name,
-    perfIops: data.perf_iops,
-    size: data.size,
+    perfIops: data.perf_iops ?? null,
+    size: data.size ?? null,
     tags: data.tags,
     volumeType: data.volume_type,
   } as CreateTemplateRequestVolumeTemplate
@@ -892,23 +914,23 @@ export const unmarshalTemplate = (data: unknown): Template => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     filesystemIds: data.filesystem_ids,
     id: data.id,
     name: data.name,
-    placementGroupId: data.placement_group_id,
+    placementGroupId: data.placement_group_id ?? null,
     privateNetworks: unmarshalArrayOfObject(data.private_networks, unmarshalCreateTemplateRequestPrivateNetworkTemplate),
     projectId: data.project_id,
     publicIpV4Count: data.public_ip_v4_count,
     publicIpV6Count: data.public_ip_v6_count,
-    securityGroupId: data.security_group_id,
+    securityGroupId: data.security_group_id ?? null,
     serverTags: data.server_tags,
     serverType: data.server_type,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     volumes: unmarshalArrayOfObject(data.volumes, unmarshalCreateTemplateRequestVolumeTemplate),
-    windowsRdpSshKeyId: data.windows_rdp_ssh_key_id,
+    windowsRdpSshKeyId: data.windows_rdp_ssh_key_id ?? null,
     zone: data.zone,
   } as Template
 }
@@ -940,12 +962,12 @@ const marshalSecurityGroupRuleConfig = (
 ): Record<string, unknown> => ({
   action: request.action,
   destination_ip_range: request.destinationIpRange,
-  destination_ports: ((request.destinationPorts !== undefined) ?  marshalSecurityGroupRulePortRange(request.destinationPorts, defaults): undefined),
+  destination_ports: ((request.destinationPorts != null) ?  marshalSecurityGroupRulePortRange(request.destinationPorts, defaults): undefined),
   direction: request.direction,
   position: request.position,
   protocol: request.protocol,
   source_ip_range: request.sourceIpRange,
-  source_ports: ((request.sourcePorts !== undefined) ?  marshalSecurityGroupRulePortRange(request.sourcePorts, defaults): undefined),
+  source_ports: ((request.sourcePorts != null) ?  marshalSecurityGroupRulePortRange(request.sourcePorts, defaults): undefined),
 })
 
 export const marshalAddSecurityGroupRulesRequest = (
@@ -953,7 +975,7 @@ export const marshalAddSecurityGroupRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   security_group_id: request.securityGroupId,
-  security_group_rules: ((request.securityGroupRules !== undefined) ?  request.securityGroupRules.map(elt => marshalSecurityGroupRuleConfig(elt, defaults)): undefined),
+  security_group_rules: ((request.securityGroupRules != null) ?  request.securityGroupRules.map(elt => marshalSecurityGroupRuleConfig(elt, defaults)): undefined),
 })
 
 export const marshalAttachServerFileSystemRequest = (
@@ -1005,6 +1027,7 @@ export const marshalCreatePrivateNetworkInterfaceRequest = (
   ip_ids: request.ipIds,
   private_network_id: request.privateNetworkId,
   project_id: request.projectId ?? defaults.defaultProjectId,
+  security_group_id: request.securityGroupId,
   server_id: request.serverId,
   tags: request.tags,
 })
@@ -1048,7 +1071,7 @@ const marshalCreateServerRequestServerIP = (
       value: request.ipamIpId,
     },
     {param: 'new_ip',
-      value: (request.newIp !== undefined) ? marshalCreateServerRequestBookIP(request.newIp, defaults)
+      value: (request.newIp != null) ? marshalCreateServerRequestBookIP(request.newIp, defaults)
       : undefined,
     },
   ]),
@@ -1090,7 +1113,7 @@ const marshalCreateServerRequestServerVolume = (
       value: request.volumeId,
     },
     {param: 'new_volume',
-      value: (request.newVolume !== undefined) ? marshalCreateServerRequestCreateVolume(request.newVolume, defaults)
+      value: (request.newVolume != null) ? marshalCreateServerRequestCreateVolume(request.newVolume, defaults)
       : undefined,
     },
   ]),
@@ -1104,10 +1127,10 @@ export const marshalCreateServerRequest = (
   name: request.name,
   placement_group_id: request.placementGroupId,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  public_network_interface: ((request.publicNetworkInterface !== undefined) ?  marshalCreateServerRequestPublicNetworkInterface(request.publicNetworkInterface, defaults): undefined),
+  public_network_interface: ((request.publicNetworkInterface != null) ?  marshalCreateServerRequestPublicNetworkInterface(request.publicNetworkInterface, defaults): undefined),
   server_type: request.serverType,
   tags: request.tags,
-  volumes: ((request.volumes !== undefined) ?  request.volumes.map(elt => marshalCreateServerRequestServerVolume(elt, defaults)): undefined),
+  volumes: ((request.volumes != null) ?  request.volumes.map(elt => marshalCreateServerRequestServerVolume(elt, defaults)): undefined),
   windows_rdp_ssh_key_id: request.windowsRdpSshKeyId,
 })
 
@@ -1116,6 +1139,7 @@ const marshalCreateTemplateRequestPrivateNetworkTemplate = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   private_network_id: request.privateNetworkId,
+  security_group_id: request.securityGroupId,
 })
 
 const marshalCreateTemplateRequestVolumeTemplate = (
@@ -1144,7 +1168,7 @@ export const marshalCreateTemplateRequest = (
   filesystem_ids: request.filesystemIds,
   name: request.name,
   placement_group_id: request.placementGroupId,
-  private_networks: ((request.privateNetworks !== undefined) ?  request.privateNetworks.map(elt => marshalCreateTemplateRequestPrivateNetworkTemplate(elt, defaults)): undefined),
+  private_networks: ((request.privateNetworks != null) ?  request.privateNetworks.map(elt => marshalCreateTemplateRequestPrivateNetworkTemplate(elt, defaults)): undefined),
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_ip_v4_count: request.publicIpV4Count,
   public_ip_v6_count: request.publicIpV6Count,
@@ -1152,7 +1176,7 @@ export const marshalCreateTemplateRequest = (
   server_tags: request.serverTags,
   server_type: request.serverType,
   tags: request.tags,
-  volumes: ((request.volumes !== undefined) ?  request.volumes.map(elt => marshalCreateTemplateRequestVolumeTemplate(elt, defaults)): undefined),
+  volumes: ((request.volumes != null) ?  request.volumes.map(elt => marshalCreateTemplateRequestVolumeTemplate(elt, defaults)): undefined),
   windows_rdp_ssh_key_id: request.windowsRdpSshKeyId,
 })
 
@@ -1196,7 +1220,7 @@ export const marshalSetSecurityGroupRulesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   security_group_id: request.securityGroupId,
-  security_group_rules: ((request.securityGroupRules !== undefined) ?  request.securityGroupRules.map(elt => marshalSecurityGroupRuleConfig(elt, defaults)): undefined),
+  security_group_rules: ((request.securityGroupRules != null) ?  request.securityGroupRules.map(elt => marshalSecurityGroupRuleConfig(elt, defaults)): undefined),
 })
 
 export const marshalSetServerCloudInitRequest = (
@@ -1285,6 +1309,7 @@ export const marshalUpdatePrivateNetworkInterfaceRequest = (
   request: UpdatePrivateNetworkInterfaceRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  security_group_id: request.securityGroupId,
   tags: request.tags,
 })
 
@@ -1308,12 +1333,12 @@ export const marshalUpdateSecurityGroupRuleRequest = (
 ): Record<string, unknown> => ({
   action: request.action,
   destination_ip_range: request.destinationIpRange,
-  destination_ports: ((request.destinationPorts !== undefined) ?  marshalSecurityGroupRulePortRange(request.destinationPorts, defaults): undefined),
+  destination_ports: ((request.destinationPorts != null) ?  marshalSecurityGroupRulePortRange(request.destinationPorts, defaults): undefined),
   direction: request.direction,
   position: request.position,
   protocol: request.protocol,
   source_ip_range: request.sourceIpRange,
-  source_ports: ((request.sourcePorts !== undefined) ?  marshalSecurityGroupRulePortRange(request.sourcePorts, defaults): undefined),
+  source_ports: ((request.sourcePorts != null) ?  marshalSecurityGroupRulePortRange(request.sourcePorts, defaults): undefined),
 })
 
 const marshalUpdateServerRequestPublicNetworkInterface = (
@@ -1332,7 +1357,7 @@ export const marshalUpdateServerRequest = (
   name: request.name,
   placement_group_id: request.placementGroupId,
   protected: request.protected,
-  public_network_interface: ((request.publicNetworkInterface !== undefined) ?  marshalUpdateServerRequestPublicNetworkInterface(request.publicNetworkInterface, defaults): undefined),
+  public_network_interface: ((request.publicNetworkInterface != null) ?  marshalUpdateServerRequestPublicNetworkInterface(request.publicNetworkInterface, defaults): undefined),
   rescue_mode: request.rescueMode,
   server_type: request.serverType,
   tags: request.tags,
@@ -1366,8 +1391,8 @@ export const marshalUpdateTemplateRequest = (
   server_tags: request.serverTags,
   server_type: request.serverType,
   tags: request.tags,
-  update_private_networks: ((request.updatePrivateNetworks !== undefined) ?  marshalUpdateTemplateRequestUpdatePrivateNetworks(request.updatePrivateNetworks, defaults): undefined),
-  update_volumes: ((request.updateVolumes !== undefined) ?  marshalUpdateTemplateRequestUpdateVolumes(request.updateVolumes, defaults): undefined),
+  update_private_networks: ((request.updatePrivateNetworks != null) ?  marshalUpdateTemplateRequestUpdatePrivateNetworks(request.updatePrivateNetworks, defaults): undefined),
+  update_volumes: ((request.updateVolumes != null) ?  marshalUpdateTemplateRequestUpdateVolumes(request.updateVolumes, defaults): undefined),
   windows_rdp_ssh_key_id: request.windowsRdpSshKeyId,
 })
 

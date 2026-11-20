@@ -7,6 +7,8 @@ export * from './content.gen.js'
 export * from './constants.gen.js'
 export * from './marshalling.gen.js'
 export type {
+  Certificate,
+  CreateCertificateRequest,
   CreateDeploymentRequest,
   CreateEndpointRequest,
   CreateUserRequest,
@@ -23,7 +25,11 @@ export type {
   EndpointSpec,
   EndpointSpecPrivateNetworkDetails,
   EndpointSpecPublicDetails,
+  GetCertificateRequest,
   GetDeploymentRequest,
+  ListCertificatesRequest,
+  ListCertificatesRequestOrderBy,
+  ListCertificatesResponse,
   ListDeploymentsRequest,
   ListDeploymentsRequestOrderBy,
   ListDeploymentsResponse,

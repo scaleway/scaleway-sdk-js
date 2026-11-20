@@ -18,6 +18,15 @@ export type DiscountFilterType =
   | 'region'
   | 'zone'
 
+export type DiscountLineOrigin =
+  | 'unknown_origin'
+  | 'discount'
+  | 'contractual_commitment_range'
+  | 'savings_plan_activation'
+  | 'credit_note_rebate'
+  | 'reserved_resource_activation'
+  | 'offer_included'
+
 export type DownloadInvoiceRequestFileType =
   | 'pdf'
 
@@ -90,7 +99,7 @@ export interface DiscountCoupon {
   /**
    * The description of the coupon.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -142,23 +151,23 @@ export interface Charge {
   /**
    * Optional display name assigned to the resource that incurs the charge.
    */
-  resourceName?: string
+  resourceName?: string | null
   /**
    * Price of the charge.
    */
-  price?: Money
+  price?: Money | null
   /**
    * Start date of the charge.
    */
-  startDate?: Date
+  startDate?: Date | null
   /**
    * End date of the charge, included.
    */
-  endDate?: Date
+  endDate?: Date | null
   /**
    * Date the charge was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -166,7 +175,7 @@ export interface ListConsumptionsResponseConsumption {
   /**
    * Monetary value of the consumption.
    */
-  value?: Money
+  value?: Money | null
   /**
    * The product name. For example, "VPC Public Gateway S", "VPC Public Gateway M" for the VPC product.
    */
@@ -210,6 +219,26 @@ export interface ListConsumptionsResponseConsumption {
 }
 
 
+export interface DiscountLine {
+  /**
+   * Discount line ID.
+   */
+  id: string
+  /**
+   * ID of the invoice line the discount applies to.
+   */
+  invoiceLineId: string
+  /**
+   * The origin of the discount line.
+   */
+  origin: DiscountLineOrigin
+  /**
+   * The value of the discount.
+   */
+  value?: Money | null
+}
+
+
 export interface Discount {
   /**
    * The ID of the discount.
@@ -218,7 +247,7 @@ export interface Discount {
   /**
    * The creation date of the discount.
    */
-  creationDate?: Date
+  creationDate?: Date | null
   /**
    * The Organization ID of the discount.
    */
@@ -246,19 +275,95 @@ export interface Discount {
   /**
    * The start date of the discount.
    */
-  startDate?: Date
+  startDate?: Date | null
   /**
    * The stop date of the discount.
    */
-  stopDate?: Date
+  stopDate?: Date | null
   /**
    * The description of the coupon.
    */
-  coupon?: DiscountCoupon
+  coupon?: DiscountCoupon | null
   /**
    * List of the discount scopes.
    */
   filters: DiscountFilter[]
+}
+
+
+export interface InvoiceLine {
+  /**
+   * Invoice line ID.
+   */
+  id: string
+  /**
+   * ID of the invoice the line belongs to.
+   */
+  invoiceId: string
+  /**
+   * Organization ID of the consumer for this line.
+   */
+  organizationId: string
+  /**
+   * Organization name of the consumer for this line.
+   */
+  organizationName: string
+  /**
+   * Project ID of the line.
+   */
+  projectId: string
+  /**
+   * Project name of the line.
+   */
+  projectName: string
+  /**
+   * Unique identifier of the product.
+   */
+  sku: string
+  /**
+   * Name of consumption category.
+   */
+  categoryName: string
+  /**
+   * The product name.
+   */
+  productName: string
+  /**
+   * Identifies the reference based on the category.
+   */
+  resourceName: string
+  /**
+   * Start date of the line.
+   */
+  startDate?: Date | null
+  /**
+   * Stop date of the line.
+   */
+  stopDate?: Date | null
+  /**
+   * Unit price of the reference.
+   */
+  unitPrice?: Money | null
+  /**
+   * Untaxed value of the line.
+   */
+  untaxedValue?: Money | null
+  /**
+   * Unit of consumed quantity.
+   */
+  unit: string
+  /**
+   * Quantity per unit.
+   */
+  unitQuantity: string
+  /**
+   * Billed quantity.
+   */
+  billedQuantity: string
+  /**
+   * Number of unique resources billed on this line.
+   */
+  resourceCount: number
 }
 
 
@@ -272,40 +377,40 @@ export interface Invoice {
   /**
    * Start date of the billing period.
    */
-  startDate?: Date
-  stopDate?: Date
+  startDate?: Date | null
+  stopDate?: Date | null
   /**
    * The billing period of the invoice in the YYYY-MM format.
    */
-  billingPeriod?: Date
+  billingPeriod?: Date | null
   /**
    * Date when the invoice was sent to the customer.
    */
-  issuedDate?: Date
+  issuedDate?: Date | null
   /**
    * Payment time limit, set according to the Organization's payment conditions.
    */
-  dueDate?: Date
+  dueDate?: Date | null
   /**
    * Total amount, untaxed.
    */
-  totalUntaxed?: Money
+  totalUntaxed?: Money | null
   /**
    * Total amount, taxed.
    */
-  totalTaxed?: Money
+  totalTaxed?: Money | null
   /**
    * The total tax amount of the invoice.
    */
-  totalTax?: Money
+  totalTax?: Money | null
   /**
    * The total discount amount of the invoice.
    */
-  totalDiscount?: Money
+  totalDiscount?: Money | null
   /**
    * The total amount of the invoice before applying the discount.
    */
-  totalUndiscount?: Money
+  totalUndiscount?: Money | null
   /**
    * Type of invoice, either periodic or purchase.
    */
@@ -337,11 +442,11 @@ export interface ListTaxesResponseTax {
   /**
    * Applied tax rate (0.2 means a VAT of 20%).
    */
-  rate?: number
+  rate?: number | null
   /**
    * The total tax value of the consumption.
    */
-  totalTaxValue?: number
+  totalTaxValue?: number | null
 }
 
 
@@ -353,7 +458,7 @@ export type DownloadInvoiceRequest = {
   /**
    * File type. PDF by default.
    */
-  fileType?: DownloadInvoiceRequestFileType
+  fileType?: DownloadInvoiceRequestFileType | null
 }
 
 
@@ -361,35 +466,35 @@ export type ExportInvoicesRequest = {
   /**
    * Organization ID. If specified, only invoices from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Return only invoice with start date greater than billing_period_start.
    */
-  billingPeriodStartAfter?: Date
+  billingPeriodStartAfter?: Date | null
   /**
    * Return only invoice with start date less than billing_period_start.
    */
-  billingPeriodStartBefore?: Date
+  billingPeriodStartBefore?: Date | null
   /**
    * Invoice type. It can either be `periodic`, `purchase` or `credit_note`.
    */
-  invoiceType?: InvoiceType
+  invoiceType?: InvoiceType | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer lower or equal to 100 to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * How invoices are ordered in the response.
    */
-  orderBy?: ExportInvoicesRequestOrderBy
+  orderBy?: ExportInvoicesRequestOrderBy | null
   /**
    * File format for exporting the invoice list.
    */
-  fileType?: ExportInvoicesRequestFileType
+  fileType?: ExportInvoicesRequestFileType | null
 }
 
 
@@ -397,51 +502,51 @@ export type FinOpsApiListChargesRequest = {
   /**
    * Sort order of charges in the response.
    */
-  orderBy?: ListChargesRequestOrderBy
+  orderBy?: ListChargesRequestOrderBy | null
   /**
    * Token returned by previous call to list next paginated charges, omitted for first page.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of charges to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Minimum start date of charges to filter for, defaults to the start of the billing period.
    */
-  startDateAfter?: Date
+  startDateAfter?: Date | null
   /**
    * Maximum end date of charges to filter for, defaults to the end of the billing period.
    */
-  endDateBefore?: Date
+  endDateBefore?: Date | null
   /**
    * Invoice IDs to filter for, only charges from these invoices will be returned.
    */
-  invoiceIds?: string[]
+  invoiceIds?: string[] | null
   /**
    * Organization ID to filter for, only charges for this organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project IDs to filter for, only charges for these projects will be returned.
    */
-  projectIds?: string[]
+  projectIds?: string[] | null
   /**
    * Resource IDs to filter for, only charges for these resources will be returned.
    */
-  resourceIds?: string[]
+  resourceIds?: string[] | null
   /**
    * Resource display names to filter for, only charges for these resources will be returned.
    */
-  resourceNames?: string[]
+  resourceNames?: string[] | null
   /**
    * SKU IDs to filter for, only charges for these SKUs will be returned.
    */
-  skus?: string[]
+  skus?: string[] | null
   /**
    * Clamp charges to the requested time range.
    */
-  clampToTimeRange?: boolean
+  clampToTimeRange?: boolean | null
 }
 
 
@@ -461,7 +566,7 @@ export interface ListChargesResponse {
   /**
    * Page token to use with following call to keep listing charges if there are more.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
 }
 
 
@@ -469,35 +574,35 @@ export type ListConsumptionsRequest = {
   /**
    * Order consumptions list in the response by their update date.
    */
-  orderBy?: ListConsumptionsRequestOrderBy
+  orderBy?: ListConsumptionsRequestOrderBy | null
   /**
    * Positive integer to choose the page to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer lower or equal to 100 to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by Organization ID.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by Project ID.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by name of a Category as they are shown in the invoice (Compute, Network, Observability).
    */
-  categoryName?: string
+  categoryName?: string | null
   /**
    * Filter by the billing period in the YYYY-MM format. If it is empty the current billing period will be used as default.
    */
-  billingPeriod?: string
+  billingPeriod?: string | null
 }
 
 
@@ -517,7 +622,35 @@ export interface ListConsumptionsResponse {
   /**
    * Last consumption update date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
+}
+
+
+export type ListDiscountLinesRequest = {
+  /**
+   * Invoice ID.
+   */
+  invoiceId: string
+  /**
+   * Positive integer to choose the page to return.
+   */
+  page?: number | null
+  /**
+   * Positive integer lower or equal to 1000 to select the number of items to return.
+   */
+  pageSize?: number | null
+}
+
+
+export interface ListDiscountLinesResponse {
+  /**
+   * Total number of discount lines.
+   */
+  totalCount: number
+  /**
+   * Paginated returned discount lines.
+   */
+  discountLines: DiscountLine[]
 }
 
 
@@ -525,19 +658,19 @@ export type ListDiscountsRequest = {
   /**
    * Order discounts in the response by their description.
    */
-  orderBy?: ListDiscountsRequestOrderBy
+  orderBy?: ListDiscountsRequestOrderBy | null
   /**
    * Positive integer to choose the page to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer lower or equal to 100 to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the organization.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -553,35 +686,63 @@ export interface ListDiscountsResponse {
 }
 
 
+export type ListInvoiceLinesRequest = {
+  /**
+   * Invoice ID.
+   */
+  invoiceId: string
+  /**
+   * Positive integer to choose the page to return.
+   */
+  page?: number | null
+  /**
+   * Positive integer lower or equal to 1000 to select the number of items to return.
+   */
+  pageSize?: number | null
+}
+
+
+export interface ListInvoiceLinesResponse {
+  /**
+   * Total number of invoice lines.
+   */
+  totalCount: number
+  /**
+   * Paginated returned invoice lines.
+   */
+  invoiceLines: InvoiceLine[]
+}
+
+
 export type ListInvoicesRequest = {
   /**
    * Organization ID. If specified, only invoices from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Return only invoice with start date greater than billing_period_start.
    */
-  billingPeriodStartAfter?: Date
+  billingPeriodStartAfter?: Date | null
   /**
    * Return only invoice with start date less than billing_period_start.
    */
-  billingPeriodStartBefore?: Date
+  billingPeriodStartBefore?: Date | null
   /**
    * Invoice type. It can either be `periodic`, `purchase` or `credit_note`.
    */
-  invoiceType?: InvoiceType
+  invoiceType?: InvoiceType | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer lower or equal to 100 to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * How invoices are ordered in the response.
    */
-  orderBy?: ListInvoicesRequestOrderBy
+  orderBy?: ListInvoicesRequestOrderBy | null
 }
 
 
@@ -601,23 +762,23 @@ export type ListTaxesRequest = {
   /**
    * Order consumed taxes list in the response by their update date.
    */
-  orderBy?: ListTaxesRequestOrderBy
+  orderBy?: ListTaxesRequestOrderBy | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Positive integer lower or equal to 100 to select the number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by the billing period in the YYYY-MM format. If it is empty the current billing period will be used as default.
    */
-  billingPeriod?: string
+  billingPeriod?: string | null
 }
 
 
@@ -633,7 +794,7 @@ export interface ListTaxesResponse {
   /**
    * Last consumption update date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -641,7 +802,7 @@ export type RedeemCouponRequest = {
   /**
    * The Organization ID of the discount.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * The code of the coupon to redeem.
    */

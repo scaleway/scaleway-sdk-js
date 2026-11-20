@@ -22,6 +22,8 @@ export function validatePathParam(name: string, param: string | number | undefin
   throw new TypeError(`param ${name} cannot be empty in request`)
 }
 
+const isDefined = <U>(x: U): x is NonNullable<U> => x !== null && x !== undefined
+
 /**
  * Resolves the ideal parameter and value amongst an optional list.
  *
@@ -37,14 +39,18 @@ export function validatePathParam(name: string, param: string | number | undefin
 export const resolveOneOf = <T>(
   list: {
     param: string
-    value: T | undefined
+    value: T | undefined | null
     default?: T | undefined
   }[],
   isRequired = false,
 ): Record<string, T> => {
-  const elt = list.find(obj => obj.value !== undefined) ?? list.find(obj => obj.default !== undefined)
+  // A `null` value is treated as "not set", exactly like `undefined`,
+  // so the key is never emitted with a null value (e.g. `"key": null` in a JSON body).
+  const elt = list.find(obj => isDefined(obj.value)) ?? list.find(obj => isDefined(obj.default))
+
   const value = elt?.value ?? elt?.default
-  if (elt && value !== undefined) {
+
+  if (elt && isDefined(value)) {
     return { [elt.param]: value }
   }
 
@@ -73,7 +79,10 @@ const toParamString = (v: URLParameterValue): string | null => {
   if (v instanceof Date) {
     return v.toISOString()
   }
-  return v.toString()
+  const s = v.toString()
+  // Empty strings carry no filter semantics (e.g. a reset form field).
+  // Treat them as "no value", like null/undefined, so we never send `name=`.
+  return s === '' ? null : s
 }
 
 export const urlParams = (
@@ -106,13 +115,13 @@ export const urlParams = (
  *
  * @internal
  */
-export const unmarshalDate = (data: unknown): Date | undefined => {
+export const unmarshalDate = (data: unknown): Date | null => {
   if (typeof data !== 'string') {
-    return undefined
+    return null
   }
   const date = new Date(data)
   if (Number.isNaN(date.getTime())) {
-    return undefined
+    return null
   }
 
   return date

@@ -56,8 +56,8 @@ const api = new Searchdb.v1.API(client)
 For a simpler setup, you can load credentials from the configuration file or environment variables:
 
 ```typescript
-import { createClient } from '@scaleway/sdk-client'
 import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
+import { createClient } from '@scaleway/sdk-client'
 import { Searchdb } from '@scaleway/sdk-searchdb'
 
 const profile = loadProfileFromConfigurationFile()

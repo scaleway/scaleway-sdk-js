@@ -145,7 +145,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDeploymentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
         signal: options?.signal,
@@ -166,7 +166,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDeploymentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
         signal: options?.signal,
@@ -225,7 +225,7 @@ The CA certificate will be returned as a PEM file.
         body: JSON.stringify(
           marshalCreateEndpointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
         signal: options?.signal,
@@ -246,7 +246,7 @@ The CA certificate will be returned as a PEM file.
         body: JSON.stringify(
           marshalUpdateEndpointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
         signal: options?.signal,
@@ -346,7 +346,7 @@ The CA certificate will be returned as a PEM file.
         body: JSON.stringify(
           marshalCreateModelRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/inference/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/models`,
         signal: options?.signal,

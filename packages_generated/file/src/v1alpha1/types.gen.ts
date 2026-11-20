@@ -13,12 +13,63 @@ export type FileSystemStatus =
   | 'error'
   | 'creating'
   | 'updating'
+  | 'snapshotting'
 
 export type ListFileSystemsRequestOrderBy =
   | 'created_at_asc'
   | 'created_at_desc'
   | 'name_asc'
   | 'name_desc'
+
+export type ListSnapshotsRequestOrderBy =
+  | 'created_at_asc'
+  | 'created_at_desc'
+  | 'name_asc'
+  | 'name_desc'
+
+export type SnapshotStatus =
+  | 'unknown_status'
+  | 'available'
+  | 'error'
+  | 'creating'
+  | 'deleting'
+  | 'deleted'
+  | 'locked'
+  | 'cloning'
+
+export interface SnapshotParentFilesystem {
+  /**
+   * Parent filesystem UUID (filesystem from which the snapshot originates).
+   */
+  id: string
+  /**
+   * Name of the parent filesystem.
+   */
+  name: string
+}
+
+
+export interface CreateFileSystemRequestFromEmpty {
+  /**
+   * Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
+   */
+  size: number
+}
+
+
+export interface CreateFileSystemRequestFromSnapshot {
+  /**
+   * Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
+Size is optional. When not set, the current size of the parent filesystem is used.
+When set, it must be greater than or equal to the snapshot size.
+   */
+  size?: number | null
+  /**
+   * Source snapshot from which the filesystem will be created.
+   */
+  snapshotId: string
+}
+
 
 /**
  * Represents an attachment between a filesystem and a resource.
@@ -43,7 +94,7 @@ export interface Attachment {
   /**
    * The zone where the resource is located.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The region where the attachment is located.
    */
@@ -63,11 +114,11 @@ export interface FileSystemType {
   /**
    * Price of the filesystem billed in GB/hour.
    */
-  filesystemPriceGbPerHour?: Money
+  filesystemPriceGbPerHour?: Money | null
   /**
    * Price of the snapshot billed in GB/hour.
    */
-  snapshotPriceGbPerHour?: Money
+  snapshotPriceGbPerHour?: Money | null
 }
 
 
@@ -114,11 +165,11 @@ export interface FileSystem {
   /**
    * Creation date of the filesystem.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the properties of the filesystem.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * UUID of the filesystem type.
    */
@@ -131,13 +182,68 @@ export interface FileSystem {
 
 
 /**
+ * Represents a snapshot of a filesystem and its properties.
+ */
+export interface Snapshot {
+  /**
+   * UUID of the snapshot.
+   */
+  id: string
+  /**
+   * Name of the snapshot.
+   */
+  name: string
+  /**
+   * If the parent filesystem was deleted, value is null.
+   */
+  parentFilesystem?: SnapshotParentFilesystem | null
+  /**
+   * Snapshot size in bytes.
+   */
+  size?: number | null
+  /**
+   * Current status of the snapshot (e.g. creating, available, ...).
+   */
+  status: SnapshotStatus
+  /**
+   * UUID of the project to which the snapshot belongs.
+   */
+  projectId: string
+  /**
+   * UUID of the organization to which the snapshot belongs.
+   */
+  organizationId: string
+  /**
+   * List of tags assigned to the snapshot.
+   */
+  tags: string[]
+  /**
+   * Creation date of the snapshot.
+   */
+  createdAt?: Date | null
+  /**
+   * Last update date of the properties of the snapshot.
+   */
+  updatedAt?: Date | null
+  /**
+   * Region where the snapshot is located.
+   */
+  region: ScwRegion
+  /**
+   * The SRN of the snapshot.
+   */
+  srn: string
+}
+
+
+/**
  * Request to create a new filesystem.
  */
 export type CreateFileSystemRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the filesystem.
    */
@@ -145,19 +251,60 @@ export type CreateFileSystemRequest = {
   /**
    * UUID of the project the filesystem belongs to.
    */
-  projectId?: string
+  projectId?: string | null
   /**
-   * Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
+   * @deprecated Filesystem size in bytes, with a granularity in GB (10^9 bytes).
+Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
+Must not be set along with `from_empty` or `from_snapshot`.
    */
   size: number
   /**
+   * Specify the size of the new filesystem if creating a new one from scratch.
+   *
+   * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
+   */
+  fromEmpty?: CreateFileSystemRequestFromEmpty | null
+  /**
+   * Specify the snapshot ID of the original snapshot to create the filesystem from.
+   *
+   * One-of ('from'): at most one of 'fromEmpty', 'fromSnapshot' could be set.
+   */
+  fromSnapshot?: CreateFileSystemRequestFromSnapshot | null
+  /**
    * Type of the filesystem.
    */
-  type?: string
+  type?: string | null
   /**
    * List of tags assigned to the filesystem.
    */
-  tags?: string[]
+  tags?: string[] | null
+}
+
+
+/**
+ * Request to create a new snapshot of a filesystem.
+ */
+export type CreateSnapshotRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  /**
+   * UUID of the filesystem to snapshot.
+   */
+  filesystemId: string
+  /**
+   * Name of the snapshot.
+   */
+  name: string
+  /**
+   * UUID of the project to which the filesystem and the snapshot belong.
+   */
+  projectId?: string | null
+  /**
+   * List of tags assigned to the snapshot.
+   */
+  tags?: string[] | null
 }
 
 
@@ -168,11 +315,26 @@ export type DeleteFileSystemRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the filesystem.
    */
   filesystemId: string
+}
+
+
+/**
+ * Request to delete a specific snapshot.
+ */
+export type DeleteSnapshotRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  /**
+   * UUID of the snapshot.
+   */
+  snapshotId: string
 }
 
 
@@ -183,11 +345,26 @@ export type GetFileSystemRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the filesystem.
    */
   filesystemId: string
+}
+
+
+/**
+ * Request to retrieve a specific snapshot.
+ */
+export type GetSnapshotRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  /**
+   * UUID of the snapshot.
+   */
+  snapshotId: string
 }
 
 
@@ -198,31 +375,31 @@ export type ListAttachmentsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the File Storage volume.
    */
-  filesystemId?: string
+  filesystemId?: string | null
   /**
    * Filter by resource ID.
    */
-  resourceId?: string
+  resourceId?: string | null
   /**
    * Filter by resource type.
    */
-  resourceType?: AttachmentResourceType
+  resourceType?: AttachmentResourceType | null
   /**
    * Filter by resource zone.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number (starting at 1).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of entries per page (default: 20, max: 100).
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -248,15 +425,15 @@ export type ListFileSystemTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number (starts at 1).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of entries per page (default: 50, max: 100).
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -279,43 +456,43 @@ export type ListFileSystemsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Criteria to use when ordering the list.
    */
-  orderBy?: ListFileSystemsRequestOrderBy
+  orderBy?: ListFileSystemsRequestOrderBy | null
   /**
    * Filter by project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Page number (starting at 1).
    */
-  page?: number
+  page?: number | null
   /**
    * Number of entries per page (default: 20, max: 100).
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter the returned filesystems by their names.
    */
-  name?: string
+  name?: string | null
   /**
    * Type of the filesystem.
    */
-  filesystemType?: string
+  filesystemType?: string | null
   /**
    * Filter by tags. Only filesystems with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by filesystem IDs. Only filesystems with one or more matching IDs will be returned.
    */
-  filesystemIds?: string[]
+  filesystemIds?: string[] | null
 }
 
 
@@ -335,13 +512,79 @@ export interface ListFileSystemsResponse {
 
 
 /**
+ * Request to list snapshots with filtering and pagination options.
+ */
+export type ListSnapshotsRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  /**
+   * Criteria to use when ordering the list.
+   */
+  orderBy?: ListSnapshotsRequestOrderBy | null
+  /**
+   * Filter by project ID.
+   *
+   * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
+   */
+  projectId?: string | null
+  /**
+   * Filter by organization ID.
+   *
+   * One-of ('scope'): at most one of 'projectId', 'organizationId' could be set.
+   */
+  organizationId?: string | null
+  /**
+   * Page number (starting at 1).
+   */
+  page?: number | null
+  /**
+   * Number of entries per page (default: 20, max: 100).
+   */
+  pageSize?: number | null
+  /**
+   * Filter the returned snapshots by their names.
+   */
+  name?: string | null
+  /**
+   * Filter by tags. Only snapshots with one or more matching tags will be returned.
+   */
+  tags?: string[] | null
+  /**
+   * Filter the returned snapshots by the ID of the original filesystem.
+   */
+  filesystemId?: string | null
+  /**
+   * Filter by snapshot IDs. Only snapshots with one or more matching IDs will be returned.
+   */
+  snapshotIds?: string[] | null
+}
+
+
+/**
+ * Response containing a list of snapshots and total count.
+ */
+export interface ListSnapshotsResponse {
+  /**
+   * List of snapshots matching the request criteria.
+   */
+  snapshots: Snapshot[]
+  /**
+   * Total number of snapshots matching the criteria.
+   */
+  totalCount: number
+}
+
+
+/**
  * Request to update a specific filesystem.
  */
 export type UpdateFileSystemRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the filesystem.
    */
@@ -349,16 +592,39 @@ export type UpdateFileSystemRequest = {
   /**
    * When defined, is the new name of the filesystem.
    */
-  name?: string
+  name?: string | null
   /**
    * Size in bytes, with a granularity in GB (10^9 bytes).
 Must be compliant with the minimum (25 GB) and maximum (50 TB) allowed size.
    */
-  size?: number
+  size?: number | null
   /**
    * List of tags assigned to the filesystem.
    */
-  tags?: string[]
+  tags?: string[] | null
+}
+
+
+/**
+ * Request to update a specific snapshot.
+ */
+export type UpdateSnapshotRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  /**
+   * UUID of the snapshot.
+   */
+  snapshotId: string
+  /**
+   * When defined, is the new name of the snapshot.
+   */
+  name?: string | null
+  /**
+   * List of tags assigned to the snapshot.
+   */
+  tags?: string[] | null
 }
 
 

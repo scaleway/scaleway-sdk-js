@@ -76,11 +76,11 @@ export interface Subnet {
   /**
    * Subnet creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Subnet last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Subnet CIDR.
    */
@@ -136,11 +136,11 @@ export interface PrivateNetwork {
   /**
    * Date the Private Network was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the Private Network was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Private Network subnets.
    */
@@ -192,23 +192,23 @@ export interface Route {
   /**
    * ID of the nexthop resource.
    */
-  nexthopResourceId?: string
+  nexthopResourceId?: string | null
   /**
    * ID of the nexthop private network.
    */
-  nexthopPrivateNetworkId?: string
+  nexthopPrivateNetworkId?: string | null
   /**
    * ID of the nexthop VPC connector.
    */
-  nexthopVpcConnectorId?: string
+  nexthopVpcConnectorId?: string | null
   /**
    * Date the Route was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the Route was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Defines whether the route can be modified or deleted by the user.
    */
@@ -216,7 +216,7 @@ export interface Route {
   /**
    * Type of the Route.
    */
-  type?: RouteType
+  type?: RouteType | null
   /**
    * Region of the Route.
    */
@@ -267,7 +267,7 @@ export interface AclRule {
   /**
    * Rule description.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -287,11 +287,11 @@ export interface IngressRule {
   /**
    * Date the ingress rule was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the ingress rule was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Whether this rule applies to IPv4 or IPv6 traffic.
    */
@@ -311,7 +311,7 @@ export interface IngressRule {
   /**
    * Description of this ingress rule.
    */
-  description?: string
+  description?: string | null
   /**
    * Tags of this ingress rule.
    */
@@ -375,7 +375,7 @@ export interface VPCConnector {
   /**
    * Peer info of target VPC. Available when status is Peered.
    */
-  peerInfo?: VPCConnectorPeerInfo
+  peerInfo?: VPCConnectorPeerInfo | null
   /**
    * Region of the VPC connector.
    */
@@ -387,11 +387,11 @@ export interface VPCConnector {
   /**
    * Date the VPC connector was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the VPC connector was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -431,11 +431,11 @@ export interface VPC {
   /**
    * Date the VPC was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the VPC was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Number of Private Networks within this VPC.
    */
@@ -463,7 +463,7 @@ export type AddPrivateNetworkObjectStoragePrivateAccessRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the VPC containing the Object Storage private access.
    */
@@ -491,7 +491,7 @@ export type CreateIngressRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the VPC this rule will belong to.
    */
@@ -511,11 +511,11 @@ export type CreateIngressRuleRequest = {
   /**
    * Description for this ingress rule.
    */
-  description?: string
+  description?: string | null
   /**
    * Tags for this ingress rule.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -523,27 +523,27 @@ export type CreatePrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name for the Private Network.
    */
-  name?: string
+  name?: string | null
   /**
    * Scaleway Project in which to create the Private Network.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Tags for the Private Network.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Private Network subnets CIDR.
    */
-  subnets?: string[]
+  subnets?: string[] | null
   /**
    * VPC in which to create the Private Network.
    */
-  vpcId?: string
+  vpcId?: string | null
   /**
    * Defines whether default v4 and v6 routes are propagated for this Private Network.
    */
@@ -555,7 +555,7 @@ export type CreateRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route description.
    */
@@ -563,7 +563,7 @@ export type CreateRouteRequest = {
   /**
    * Tags of the Route.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * VPC the Route belongs to.
    */
@@ -575,15 +575,15 @@ export type CreateRouteRequest = {
   /**
    * ID of the nexthop resource.
    */
-  nexthopResourceId?: string
+  nexthopResourceId?: string | null
   /**
    * ID of the nexthop private network.
    */
-  nexthopPrivateNetworkId?: string
+  nexthopPrivateNetworkId?: string | null
   /**
    * ID of the nexthop VPC Connector.
    */
-  nexthopVpcConnectorId?: string
+  nexthopVpcConnectorId?: string | null
 }
 
 
@@ -591,15 +591,15 @@ export type CreateVPCConnectorRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name for the VPC connector.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags for the VPC connector.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * VPC ID to filter for. Only connectors belonging to this VPC will be returned.
    */
@@ -615,19 +615,19 @@ export type CreateVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name for the VPC.
    */
-  name?: string
+  name?: string | null
   /**
    * Scaleway Project in which to create the VPC.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Tags for the VPC.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Enable routing between Private Networks in the VPC.
    */
@@ -643,7 +643,7 @@ export type DeleteIngressRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the ingress rule to delete.
    */
@@ -655,7 +655,7 @@ export type DeletePrivateNetworkObjectStoragePrivateAccessRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the VPC containing the Object Storage private access.
    */
@@ -671,7 +671,7 @@ export type DeletePrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Private Network ID.
    */
@@ -683,7 +683,7 @@ export type DeleteRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route ID.
    */
@@ -695,7 +695,7 @@ export type DeleteVPCConnectorRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC connector ID.
    */
@@ -707,7 +707,7 @@ export type DeleteVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC ID.
    */
@@ -719,7 +719,7 @@ export type DisableObjectStoragePrivateAccessRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the VPC for which to disable Object Storage private access.
    */
@@ -731,7 +731,7 @@ export type EnableCustomRoutesPropagationRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC ID.
    */
@@ -743,7 +743,7 @@ export type EnableDHCPRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Private Network ID.
    */
@@ -755,7 +755,7 @@ export type EnableObjectStoragePrivateAccessRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the VPC for which to enable Object Storage private access.
    */
@@ -763,7 +763,7 @@ export type EnableObjectStoragePrivateAccessRequest = {
   /**
    * IDs of the Private Networks for which to enable Object Storage private access.
    */
-  privateNetworkIds?: string[]
+  privateNetworkIds?: string[] | null
 }
 
 
@@ -771,7 +771,7 @@ export type EnableRoutingRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC ID.
    */
@@ -783,7 +783,7 @@ export type GetAclRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Network ACL's VPC.
    */
@@ -805,7 +805,7 @@ export type GetIngressRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the ingress rule to return.
    */
@@ -817,7 +817,7 @@ export type GetPrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Private Network ID.
    */
@@ -829,7 +829,7 @@ export type GetRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route ID.
    */
@@ -841,7 +841,7 @@ export type GetVPCConnectorRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC connector ID.
    */
@@ -853,7 +853,7 @@ export type GetVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC ID.
    */
@@ -865,47 +865,47 @@ export type ListIngressRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of the returned ingress rules.
    */
-  orderBy?: ListIngressRulesRequestOrderBy
+  orderBy?: ListIngressRulesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of ingress rules to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the VPC to filter for.
    */
-  vpcId?: string
+  vpcId?: string | null
   /**
    * Next hop IP to filter for.
    */
-  nexthopResourceIp?: string
+  nexthopResourceIp?: string | null
   /**
    * Next hop Private Network ID to filter for. Only ingress rules with this Private Network as next hop will be returned.
    */
-  nexthopPrivateNetworkId?: string
+  nexthopPrivateNetworkId?: string | null
   /**
    * Whether to return only IPv4 or IPv6 ingress rules.
    */
-  isIpv6?: boolean
+  isIpv6?: boolean | null
   /**
    * Tags to filter for. Only ingress rules with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Organization ID to filter for. Only ingress rules belonging to this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for. Only ingress rules belonging to this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -919,51 +919,51 @@ export type ListPrivateNetworksRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of the returned Private Networks.
    */
-  orderBy?: ListPrivateNetworksRequestOrderBy
+  orderBy?: ListPrivateNetworksRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of Private Networks to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Name to filter for. Only Private Networks with names containing this string will be returned.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for. Only Private Networks with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Organization ID to filter for. Only Private Networks belonging to this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for. Only Private Networks belonging to this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Private Network IDs to filter for. Only Private Networks with one of these IDs will be returned.
    */
-  privateNetworkIds?: string[]
+  privateNetworkIds?: string[] | null
   /**
    * VPC ID to filter for. Only Private Networks belonging to this VPC will be returned.
    */
-  vpcId?: string
+  vpcId?: string | null
   /**
    * DHCP status to filter for. When true, only Private Networks with managed DHCP enabled will be returned.
    */
-  dhcpEnabled?: boolean
+  dhcpEnabled?: boolean | null
   /**
    * Filter by whether Object Storage private access is enabled. When set, only matching Private Networks will be returned.
    */
-  objectStoragePrivateAccessEnabled?: boolean
+  objectStoragePrivateAccessEnabled?: boolean | null
 }
 
 
@@ -977,7 +977,7 @@ export type ListSubnetOverlapsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC Peering connector ID.
    */
@@ -985,15 +985,15 @@ export type ListSubnetOverlapsRequest = {
   /**
    * Sort order of the returned Subnet overlaps.
    */
-  orderBy?: ListSubnetOverlapsRequestOrderBy
+  orderBy?: ListSubnetOverlapsRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of Subnet overlaps to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1007,35 +1007,35 @@ export type ListSubnetsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of the returned subnets.
    */
-  orderBy?: ListSubnetsRequestOrderBy
+  orderBy?: ListSubnetsRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of Private Networks to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Organization ID to filter for. Only subnets belonging to this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for. Only subnets belonging to this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Subnet IDs to filter for. Only subnets matching the specified IDs will be returned.
    */
-  subnetIds?: string[]
+  subnetIds?: string[] | null
   /**
    * VPC ID to filter for. Only subnets belonging to this VPC will be returned.
    */
-  vpcId?: string
+  vpcId?: string | null
 }
 
 
@@ -1049,47 +1049,47 @@ export type ListVPCConnectorsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of the returned VPC connectors.
    */
-  orderBy?: ListVPCConnectorsRequestOrderBy
+  orderBy?: ListVPCConnectorsRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of VPC connectors to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Name to filter for. Only connectors with names containing this string will be returned.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for. Only connectors with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Organization ID to filter for. Only connectors belonging to this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for. Only connectors belonging to this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * VPC ID to filter for. Only connectors belonging to this VPC will be returned.
    */
-  vpcId?: string
+  vpcId?: string | null
   /**
    * Target VPC ID to filter for. Only connectors belonging to this target VPC will be returned.
    */
-  targetVpcId?: string
+  targetVpcId?: string | null
   /**
    * Status of the VPC connector.
    */
-  status?: VPCConnectorStatus
+  status?: VPCConnectorStatus | null
 }
 
 
@@ -1103,47 +1103,47 @@ export type ListVPCsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of the returned VPCs.
    */
-  orderBy?: ListVPCsRequestOrderBy
+  orderBy?: ListVPCsRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of VPCs to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Name to filter for. Only VPCs with names containing this string will be returned.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for. Only VPCs with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Organization ID to filter for. Only VPCs belonging to this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for. Only VPCs belonging to this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Defines whether to filter only for VPCs which are the default one for their Project.
    */
-  isDefault?: boolean
+  isDefault?: boolean | null
   /**
    * Defines whether to filter only for VPCs which route traffic between their Private Networks.
    */
-  routingEnabled?: boolean
+  routingEnabled?: boolean | null
   /**
    * Defines whether to filter only for VPCs with Object Storage private access enabled.
    */
-  objectStoragePrivateAccessEnabled?: boolean
+  objectStoragePrivateAccessEnabled?: boolean | null
 }
 
 
@@ -1157,7 +1157,7 @@ export type SetAclRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Network ACL's VPC.
    */
@@ -1187,7 +1187,7 @@ export type SetPrivateNetworksObjectStoragePrivateAccessRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the VPC containing the Object Storage private access.
    */
@@ -1215,7 +1215,7 @@ export type UpdateIngressRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the ingress rule to update.
    */
@@ -1223,23 +1223,23 @@ export type UpdateIngressRuleRequest = {
   /**
    * Source network to match ingress traffic on. Can be IPv4 or IPv6.
    */
-  source?: string
+  source?: string | null
   /**
    * IP of the local resource to redirect ingress traffic to. IP version must be consistent with the source network.
    */
-  nexthopResourceIp?: string
+  nexthopResourceIp?: string | null
   /**
    * ID of the Private Network the destination resource is in.
    */
-  nexthopPrivateNetworkId?: string
+  nexthopPrivateNetworkId?: string | null
   /**
    * Description to set for this ingress rule.
    */
-  description?: string
+  description?: string | null
   /**
    * Tags to set for this ingress rule.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1247,7 +1247,7 @@ export type UpdatePrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Private Network ID.
    */
@@ -1255,15 +1255,15 @@ export type UpdatePrivateNetworkRequest = {
   /**
    * Name for the Private Network.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags for the Private Network.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Defines whether default v4 and v6 routes are propagated for this Private Network.
    */
-  defaultRoutePropagationEnabled?: boolean
+  defaultRoutePropagationEnabled?: boolean | null
 }
 
 
@@ -1271,7 +1271,7 @@ export type UpdateRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route ID.
    */
@@ -1279,27 +1279,27 @@ export type UpdateRouteRequest = {
   /**
    * Route description.
    */
-  description?: string
+  description?: string | null
   /**
    * Tags of the Route.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Destination of the Route.
    */
-  destination?: string
+  destination?: string | null
   /**
    * ID of the nexthop resource.
    */
-  nexthopResourceId?: string
+  nexthopResourceId?: string | null
   /**
    * ID of the nexthop private network.
    */
-  nexthopPrivateNetworkId?: string
+  nexthopPrivateNetworkId?: string | null
   /**
    * ID of the nexthop VPC connector.
    */
-  nexthopVpcConnectorId?: string
+  nexthopVpcConnectorId?: string | null
 }
 
 
@@ -1307,7 +1307,7 @@ export type UpdateVPCConnectorRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC connector ID.
    */
@@ -1315,11 +1315,11 @@ export type UpdateVPCConnectorRequest = {
   /**
    * Name for the VPC connector.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags for the VPC connector.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1327,7 +1327,7 @@ export type UpdateVPCRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * VPC ID.
    */
@@ -1335,11 +1335,11 @@ export type UpdateVPCRequest = {
   /**
    * Name for the VPC.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags for the VPC.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 

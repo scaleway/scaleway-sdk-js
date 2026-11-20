@@ -13,11 +13,14 @@ import {
 import type { Zone as ScwZone, Region as ScwRegion, ServiceInfo, WaitForOptions, ApiLocality, RequestOptions,} from '@scaleway/sdk-client'
 import {DEPLOYMENT_TRANSIENT_STATUSES as DEPLOYMENT_TRANSIENT_STATUSES_DATAVIZ,} from './content.gen.js'
 import {
+  unmarshalCertificate,
+  marshalCreateCertificateRequest,
   marshalCreateDeploymentRequest,
   marshalCreateEndpointRequest,
   marshalCreateUserRequest,
   unmarshalDeployment,
   unmarshalEndpoint,
+  unmarshalListCertificatesResponse,
   unmarshalListDeploymentsResponse,
   unmarshalListNodeTypesResponse,
   unmarshalListUsersResponse,
@@ -28,6 +31,8 @@ import {
   unmarshalUser,
 } from './marshalling.gen.js'
 import type {
+  Certificate,
+  CreateCertificateRequest,
   CreateDeploymentRequest,
   CreateEndpointRequest,
   CreateUserRequest,
@@ -37,7 +42,10 @@ import type {
   Deployment,
   DownloadDeploymentCertificateAuthorityRequest,
   Endpoint,
+  GetCertificateRequest,
   GetDeploymentRequest,
+  ListCertificatesRequest,
+  ListCertificatesResponse,
   ListDeploymentsRequest,
   ListDeploymentsResponse,
   ListNodeTypesRequest,
@@ -85,7 +93,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDeploymentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments`,
         signal: options?.signal,
@@ -106,7 +114,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDeploymentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}`,
         signal: options?.signal,
@@ -127,7 +135,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpgradeDeploymentRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/upgrade`,
         signal: options?.signal,
@@ -280,7 +288,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateEndpointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/endpoints`,
         signal: options?.signal,
@@ -342,7 +350,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users`,
         signal: options?.signal,
@@ -363,7 +371,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/users/${validatePathParam('username', request.username)}`,
         signal: options?.signal,
@@ -398,6 +406,52 @@ export class API extends ParentAPI {
         responseType: 'blob',
         signal: options?.signal,
       },
+    )
+
+  
+  createCertificate = (request: Readonly<CreateCertificateRequest>, options?: RequestOptions) =>
+    this.client.fetch<Certificate>(
+      {
+        body: JSON.stringify(
+          marshalCreateCertificateRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificates`,
+        signal: options?.signal,
+      },
+      unmarshalCertificate,
+    )
+
+  
+  protected pageOfListCertificates = (request: Readonly<ListCertificatesRequest>, options?: RequestOptions) =>
+    this.client.fetch<ListCertificatesResponse>(
+      {
+        method: 'GET',
+        path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificates`,
+        urlParams: urlParams(
+          ['name', request.name],
+          ['order_by', request.orderBy],
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+        ),
+        signal: options?.signal,
+      },
+      unmarshalListCertificatesResponse,
+    )
+  
+  listCertificates = (request: Readonly<ListCertificatesRequest>, options?: RequestOptions) =>
+    enrichForPagination('certificates', this.pageOfListCertificates, request, options)
+
+  
+  getCertificate = (request: Readonly<GetCertificateRequest>, options?: RequestOptions) =>
+    this.client.fetch<Certificate>(
+      {
+        method: 'GET',
+        path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
+      },
+      unmarshalCertificate,
     )
 
   

@@ -189,7 +189,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateGatewayRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways`,
         signal: options?.signal,
@@ -210,7 +210,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateGatewayRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}`,
         signal: options?.signal,
@@ -251,7 +251,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpgradeGatewayRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/upgrade`,
         signal: options?.signal,
@@ -336,7 +336,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateGatewayNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks`,
         signal: options?.signal,
@@ -357,7 +357,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateGatewayNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateway-networks/${validatePathParam('gatewayNetworkId', request.gatewayNetworkId)}`,
         signal: options?.signal,
@@ -440,7 +440,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreatePatRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules`,
         signal: options?.signal,
@@ -461,7 +461,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdatePatRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules/${validatePathParam('patRuleId', request.patRuleId)}`,
         signal: options?.signal,
@@ -482,7 +482,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetPatRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/pat-rules`,
         signal: options?.signal,
@@ -582,7 +582,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips`,
         signal: options?.signal,
@@ -603,7 +603,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/ips/${validatePathParam('ipId', request.ipId)}`,
         signal: options?.signal,
@@ -637,7 +637,7 @@ export class API extends ParentAPI {
     this.client.fetch<Gateway>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/refresh-ssh-keys`,
         signal: options?.signal,
@@ -658,7 +658,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddBastionAllowedIPsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/bastion-allowed-ips`,
         signal: options?.signal,
@@ -679,7 +679,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetBastionAllowedIPsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/vpc-gw/v2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/gateways/${validatePathParam('gatewayId', request.gatewayId)}/bastion-allowed-ips`,
         signal: options?.signal,

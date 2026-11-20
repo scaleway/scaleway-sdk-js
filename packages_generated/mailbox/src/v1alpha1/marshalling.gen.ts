@@ -35,19 +35,19 @@ export const unmarshalMailbox = (data: unknown): Mailbox => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    deletionScheduledAt: unmarshalDate(data.deletion_scheduled_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deletionScheduledAt: unmarshalDate(data.deletion_scheduled_at) ?? null,
     domainId: data.domain_id,
     email: data.email,
     id: data.id,
     nextSubscriptionPeriod: data.next_subscription_period,
-    nextSubscriptionPeriodStartsAt: unmarshalDate(data.next_subscription_period_starts_at),
+    nextSubscriptionPeriodStartsAt: unmarshalDate(data.next_subscription_period_starts_at) ?? null,
     organizationId: data.organization_id,
     projectId: data.project_id,
     status: data.status,
     subscriptionPeriod: data.subscription_period,
-    subscriptionPeriodStartedAt: unmarshalDate(data.subscription_period_started_at),
-    updatedAt: unmarshalDate(data.updated_at),
+    subscriptionPeriodStartedAt: unmarshalDate(data.subscription_period_started_at) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Mailbox
 }
 
@@ -59,13 +59,13 @@ export const unmarshalAlias = (data: unknown): Alias => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     email: data.email,
     id: data.id,
     mailboxId: data.mailbox_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Alias
 }
 
@@ -77,7 +77,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     imapUrl: data.imap_url,
     mailboxTotalCount: data.mailbox_total_count,
@@ -87,7 +87,7 @@ export const unmarshalDomain = (data: unknown): Domain => {
     projectId: data.project_id,
     smtpUrl: data.smtp_url,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     webmailUrl: data.webmail_url,
   } as Domain
 }
@@ -100,12 +100,12 @@ export const unmarshalForwarding = (data: unknown): Forwarding => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     email: data.email,
     id: data.id,
     mailboxId: data.mailbox_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Forwarding
 }
 
@@ -129,16 +129,16 @@ const unmarshalDomainRecord = (data: unknown): DomainRecord => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     dnsName: data.dns_name,
     dnsType: data.dns_type,
     dnsValue: data.dns_value,
     domainId: data.domain_id,
-    error: data.error,
+    error: data.error ?? null,
     id: data.id,
     level: data.level,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as DomainRecord
 }
 
@@ -150,18 +150,18 @@ export const unmarshalGetDomainRecordsResponse = (data: unknown): GetDomainRecor
   }
 
   return {
-    autoconfig: data.autoconfig ? unmarshalDomainRecord(data.autoconfig) : undefined,
-    autodiscover: data.autodiscover ? unmarshalDomainRecord(data.autodiscover) : undefined,
-    caldav: data.caldav ? unmarshalDomainRecord(data.caldav) : undefined,
-    carddav: data.carddav ? unmarshalDomainRecord(data.carddav) : undefined,
-    dkim: data.dkim ? unmarshalDomainRecord(data.dkim) : undefined,
-    dmarc: data.dmarc ? unmarshalDomainRecord(data.dmarc) : undefined,
-    domainValidation: data.domain_validation ? unmarshalDomainRecord(data.domain_validation) : undefined,
-    imap: data.imap ? unmarshalDomainRecord(data.imap) : undefined,
-    mx: data.mx ? unmarshalDomainRecord(data.mx) : undefined,
-    pop3: data.pop3 ? unmarshalDomainRecord(data.pop3) : undefined,
-    spf: data.spf ? unmarshalDomainRecord(data.spf) : undefined,
-    submission: data.submission ? unmarshalDomainRecord(data.submission) : undefined,
+    autoconfig: data.autoconfig ? unmarshalDomainRecord(data.autoconfig) : null,
+    autodiscover: data.autodiscover ? unmarshalDomainRecord(data.autodiscover) : null,
+    caldav: data.caldav ? unmarshalDomainRecord(data.caldav) : null,
+    carddav: data.carddav ? unmarshalDomainRecord(data.carddav) : null,
+    dkim: data.dkim ? unmarshalDomainRecord(data.dkim) : null,
+    dmarc: data.dmarc ? unmarshalDomainRecord(data.dmarc) : null,
+    domainValidation: data.domain_validation ? unmarshalDomainRecord(data.domain_validation) : null,
+    imap: data.imap ? unmarshalDomainRecord(data.imap) : null,
+    mx: data.mx ? unmarshalDomainRecord(data.mx) : null,
+    pop3: data.pop3 ? unmarshalDomainRecord(data.pop3) : null,
+    spf: data.spf ? unmarshalDomainRecord(data.spf) : null,
+    submission: data.submission ? unmarshalDomainRecord(data.submission) : null,
   } as GetDomainRecordsResponse
 }
 
@@ -225,11 +225,11 @@ export const unmarshalMailboxForwarding = (data: unknown): MailboxForwarding => 
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     enabled: data.enabled,
     keepCopy: data.keep_copy,
     mailboxId: data.mailbox_id,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as MailboxForwarding
 }
 
@@ -246,7 +246,7 @@ export const marshalBatchCreateMailboxesRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   domain_id: request.domainId,
-  mailboxes: ((request.mailboxes !== undefined) ?  request.mailboxes.map(elt => marshalBatchCreateMailboxesRequestMailboxParameters(elt, defaults)): undefined),
+  mailboxes: ((request.mailboxes != null) ?  request.mailboxes.map(elt => marshalBatchCreateMailboxesRequestMailboxParameters(elt, defaults)): undefined),
   subscription_period: request.subscriptionPeriod,
 })
 

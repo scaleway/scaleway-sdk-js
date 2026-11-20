@@ -86,21 +86,29 @@ export interface Endpoint {
   /**
    * @deprecated DNS entry to access to the service. Now deprecated. Use the `url` field from `services` field instead.
    */
-  dnsRecord?: string
+  dnsRecord?: string | null
   /**
    * List of available services, their ports and URLs.
    */
   services: EndpointService[]
   /**
-   *
-   * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
+   * Region of the Endpoint.
    */
-  public?: EndpointPublicDetails
+  region: ScwRegion
+  /**
+   * The SRN of the Endpoint.
+   */
+  srn: string
   /**
    *
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointPrivateNetworkDetails
+  public?: EndpointPublicDetails | null
+  /**
+   *
+   * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
+   */
+  privateNetwork?: EndpointPrivateNetworkDetails | null
 }
 
 
@@ -133,12 +141,12 @@ export interface EndpointSpec {
    *
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
-  public?: EndpointSpecPublicDetails
+  public?: EndpointSpecPublicDetails | null
   /**
    *
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointSpecPrivateNetworkDetails
+  privateNetwork?: EndpointSpecPrivateNetworkDetails | null
 }
 
 
@@ -185,7 +193,7 @@ export interface Deployment {
   /**
    * Volume type and size.
    */
-  volume?: Volume
+  volume?: Volume | null
   /**
    * Exposed endpoints.
    */
@@ -193,11 +201,11 @@ export interface Deployment {
   /**
    * Creation date of the Deployment.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date when last update was done to the Deployment.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Opensearch version of the Deployment.
    */
@@ -206,6 +214,10 @@ export interface Deployment {
    * Region the Deployment is located.
    */
   region: ScwRegion
+  /**
+   * The SRN of the Deployment.
+   */
+  srn: string
 }
 
 
@@ -249,11 +261,37 @@ export interface NodeType {
    * Available storage options for the Node Type.
    */
   availableVolumeTypes: NodeTypeVolumeType[]
+  /**
+   * Region of the node type.
+   */
+  region: ScwRegion
+  /**
+   * The SRN of the node type.
+   */
+  srn: string
 }
 
 
+/**
+ * User.
+ */
 export interface User {
+  /**
+   * Username of the Deployment user.
+   */
   username: string
+  /**
+   * ID of the Deployment.
+   */
+  deploymentId: string
+  /**
+   * Region of the user.
+   */
+  region: ScwRegion
+  /**
+   * The SRN of the user.
+   */
+  srn: string
 }
 
 
@@ -268,7 +306,7 @@ export interface Version {
   /**
    * End of life date of the version.
    */
-  endOfLife?: Date
+  endOfLife?: Date | null
   /**
    * Parameter that tell if the version is disabled.
    */
@@ -277,6 +315,14 @@ export interface Version {
    * Parameter that tell if the version is in beta.
    */
   beta: boolean
+  /**
+   * Region of the version.
+   */
+  region: ScwRegion
+  /**
+   * The SRN of the version.
+   */
+  srn: string
 }
 
 
@@ -287,11 +333,11 @@ export type CreateDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Project ID in which to create the deployment.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the deployment.
    */
@@ -299,15 +345,15 @@ export type CreateDeploymentRequest = {
   /**
    * Tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * @deprecated DEPRECATED: Use node_count instead. Number of nodes.
    */
-  nodeAmount?: number
+  nodeAmount?: number | null
   /**
    * Number of nodes.
    */
-  nodeCount?: number
+  nodeCount?: number | null
   /**
    * Node type.
    */
@@ -315,19 +361,19 @@ export type CreateDeploymentRequest = {
   /**
    * Username for the deployment user.
    */
-  userName?: string
+  userName?: string | null
   /**
    * Password for the deployment user.
    */
-  password?: string
+  password?: string | null
   /**
    * Volume.
    */
-  volume?: Volume
+  volume?: Volume | null
   /**
    * Endpoints to access the deployment.
    */
-  endpoints?: EndpointSpec[]
+  endpoints?: EndpointSpec[] | null
   /**
    * The Opensearch version to use.
    */
@@ -342,7 +388,7 @@ export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment for which to create an endpoint.
    */
@@ -350,7 +396,7 @@ export type CreateEndpointRequest = {
   /**
    * Specification of the endpoint you want to create.
    */
-  endpointSpec?: EndpointSpec
+  endpointSpec?: EndpointSpec | null
 }
 
 
@@ -361,7 +407,7 @@ export type CreateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment in which to create the user.
    */
@@ -384,7 +430,7 @@ export type DeleteDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment.
    */
@@ -399,7 +445,7 @@ export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the endpoint to delete.
    */
@@ -414,7 +460,7 @@ export type DeleteUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment in which to create the user.
    */
@@ -430,7 +476,7 @@ export type DownloadDeploymentCertificateAuthorityRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   deploymentId: string
 }
 
@@ -442,7 +488,7 @@ export type GetDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment.
    */
@@ -457,35 +503,35 @@ export type ListDeploymentsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization containing the deployments.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * ID of the Project containing the deployments.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Define the order of the returned deployments.
    */
-  orderBy?: ListDeploymentsRequestOrderBy
+  orderBy?: ListDeploymentsRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of deployments to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by tag, only deployments with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Deployment name to filter for.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -511,19 +557,19 @@ export type ListNodeTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of nodes in the response (name, vcpus or memory).
    */
-  orderBy?: ListNodeTypesRequestOrderBy
+  orderBy?: ListNodeTypesRequestOrderBy | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of node types to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -546,12 +592,12 @@ export type ListUsersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   deploymentId: string
-  page?: number
-  pageSize?: number
-  orderBy?: ListUsersRequestOrderBy
-  name?: string
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListUsersRequestOrderBy | null
+  name?: string | null
 }
 
 
@@ -568,23 +614,23 @@ export type ListVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Define the order of the returned version.
    */
-  orderBy?: ListVersionsRequestOrderBy
+  orderBy?: ListVersionsRequestOrderBy | null
   /**
    * The page number to return, form the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of version to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by version.
    */
-  version?: string
+  version?: string | null
 }
 
 
@@ -607,7 +653,7 @@ export type UpdateDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment to update.
    */
@@ -615,11 +661,11 @@ export type UpdateDeploymentRequest = {
   /**
    * Name of the deployment.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags of a deployment.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -630,7 +676,7 @@ export type UpdateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the deployment in which to create the user.
    */
@@ -642,7 +688,7 @@ export type UpdateUserRequest = {
   /**
    * Password of the deployment user.
    */
-  password?: string
+  password?: string | null
 }
 
 
@@ -650,7 +696,7 @@ export type UpgradeDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Deployment to upgrade.
    */
@@ -660,19 +706,19 @@ export type UpgradeDeploymentRequest = {
    *
    * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'nodeCount', 'volumeSizeBytes' could be set.
    */
-  nodeAmount?: number
+  nodeAmount?: number | null
   /**
    * The target number of nodes for the upgrade.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'nodeCount', 'volumeSizeBytes' could be set.
    */
-  nodeCount?: number
+  nodeCount?: number | null
   /**
    * Volume size upgrade target.
    *
    * One-of ('upgradeTarget'): at most one of 'nodeAmount', 'nodeCount', 'volumeSizeBytes' could be set.
    */
-  volumeSizeBytes?: number
+  volumeSizeBytes?: number | null
 }
 
 

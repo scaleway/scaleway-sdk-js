@@ -246,11 +246,11 @@ export interface SecurityGroupRule {
   /**
    * Source port range for the rule.
    */
-  sourcePorts?: SecurityGroupRulePortRange
+  sourcePorts?: SecurityGroupRulePortRange | null
   /**
    * Destination port range for the rule.
    */
-  destinationPorts?: SecurityGroupRulePortRange
+  destinationPorts?: SecurityGroupRulePortRange | null
   /**
    * Position of the rule in the list.
    */
@@ -264,13 +264,13 @@ export interface CreateServerRequestServerIP {
    *
    * One-of ('serverIp'): at most one of 'ipamIpId', 'newIp' could be set.
    */
-  ipamIpId?: string
+  ipamIpId?: string | null
   /**
    * Configuration for a new IP to book.
    *
    * One-of ('serverIp'): at most one of 'ipamIpId', 'newIp' could be set.
    */
-  newIp?: CreateServerRequestBookIP
+  newIp?: CreateServerRequestBookIP | null
 }
 
 
@@ -286,23 +286,23 @@ export interface CreateServerRequestCreateVolume {
   /**
    * Size of the volume.
    */
-  size?: number
+  size?: number | null
   /**
    * ID of the base snapshot for the volume.
    *
    * One-of ('from'): at most one of 'baseSnapshotId', 'imageLabel' could be set.
    */
-  baseSnapshotId?: string
+  baseSnapshotId?: string | null
   /**
    * Label of the image to use for the volume.
    *
    * One-of ('from'): at most one of 'baseSnapshotId', 'imageLabel' could be set.
    */
-  imageLabel?: string
+  imageLabel?: string | null
   /**
    * Performance IOPS for the volume.
    */
-  perfIops?: number
+  perfIops?: number | null
 }
 
 
@@ -385,6 +385,10 @@ export interface CreateTemplateRequestPrivateNetworkTemplate {
    * ID of the private network.
    */
   privateNetworkId: string
+  /**
+   * ID of the security group for the private network.
+   */
+  securityGroupId?: string | null
 }
 
 
@@ -404,23 +408,23 @@ export interface CreateTemplateRequestVolumeTemplate {
   /**
    * Size of the volume in bytes.
    */
-  size?: number
+  size?: number | null
   /**
    * ID of the base snapshot for the volume.
    *
    * One-of ('from'): at most one of 'baseSnapshotId', 'imageLabel' could be set.
    */
-  baseSnapshotId?: string
+  baseSnapshotId?: string | null
   /**
    * Label of the image used as base for the volume.
    *
    * One-of ('from'): at most one of 'baseSnapshotId', 'imageLabel' could be set.
    */
-  imageLabel?: string
+  imageLabel?: string | null
   /**
    * Performance IOPS for the volume.
    */
-  perfIops?: number
+  perfIops?: number | null
 }
 
 
@@ -448,11 +452,11 @@ export interface SecurityGroupRuleConfig {
   /**
    * Source port range for the rule.
    */
-  sourcePorts?: SecurityGroupRulePortRange
+  sourcePorts?: SecurityGroupRulePortRange | null
   /**
    * Destination port range for the rule.
    */
-  destinationPorts?: SecurityGroupRulePortRange
+  destinationPorts?: SecurityGroupRulePortRange | null
   /**
    * Position of this rule in the rule list, starting at 1.
    */
@@ -508,11 +512,11 @@ export interface SecurityGroup {
   /**
    * Creation timestamp of the security group.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the security group.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * List of default rules applied to the security group.
    */
@@ -532,7 +536,7 @@ export interface CreateServerRequestPublicNetworkInterface {
   /**
    * ID of the security group for the interface.
    */
-  securityGroupId?: string
+  securityGroupId?: string | null
   /**
    * List of IPs to attach to the interface.
    */
@@ -550,13 +554,21 @@ export interface CreateServerRequestServerVolume {
    *
    * One-of ('serverVolume'): at most one of 'volumeId', 'newVolume' could be set.
    */
-  volumeId?: string
+  volumeId?: string | null
   /**
    * Configuration for a new volume to create.
    *
    * One-of ('serverVolume'): at most one of 'volumeId', 'newVolume' could be set.
    */
-  newVolume?: CreateServerRequestCreateVolume
+  newVolume?: CreateServerRequestCreateVolume | null
+}
+
+
+export interface DedicatedPoolPhysicalHost {
+  /**
+   * The unique identifier of this physical host.
+   */
+  id: string
 }
 
 
@@ -588,11 +600,11 @@ export interface DedicatedPoolServerType {
   /**
    * Limits for the server type.
    */
-  limits?: ServerTypeLimits
+  limits?: ServerTypeLimits | null
   /**
    * GPU information for the server type.
    */
-  gpuInfo?: ServerTypeGpuInfo
+  gpuInfo?: ServerTypeGpuInfo | null
   /**
    * Whether the server type has reached end of service.
    */
@@ -601,6 +613,10 @@ export interface DedicatedPoolServerType {
    * Number of additional Instances of this type that can currently be started in this Dedicated Pool.
    */
   slotsAvailable: number
+  /**
+   * The billing SKU for this server type.
+   */
+  sku: string
 }
 
 
@@ -628,11 +644,15 @@ export interface DedicatedPoolSummary {
   /**
    * Creation timestamp of the Dedicated Pool.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the Dedicated Pool.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
+  /**
+   * Zone of the Dedicated Pool.
+   */
+  zone: ScwZone
 }
 
 
@@ -664,11 +684,11 @@ export interface PlacementGroup {
   /**
    * Placement group creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Placement group modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Zone in which the placement group is located.
    */
@@ -698,6 +718,10 @@ export interface PrivateNetworkInterfaceSummary {
    */
   serverId: string
   /**
+   * ID of the security group associated with this interface.
+   */
+  securityGroupId: string
+  /**
    * MAC address of the private network interface.
    */
   macAddress: string
@@ -716,11 +740,11 @@ export interface PrivateNetworkInterfaceSummary {
   /**
    * Creation timestamp of the private network interface.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the private network interface.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Zone in which the network interface is located.
    */
@@ -776,11 +800,11 @@ export interface SecurityGroupSummary {
   /**
    * Creation timestamp of the security group.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the security group.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Zone in which the security group is located.
    */
@@ -816,11 +840,11 @@ export interface ServerType {
   /**
    * Limits for the server type.
    */
-  limits?: ServerTypeLimits
+  limits?: ServerTypeLimits | null
   /**
    * GPU information for the server type.
    */
-  gpuInfo?: ServerTypeGpuInfo
+  gpuInfo?: ServerTypeGpuInfo | null
   /**
    * Whether the server type has reached end of service.
    */
@@ -828,7 +852,11 @@ export interface ServerType {
   /**
    * Availability status of the server type as a spot instance.
    */
-  spotInfo?: ServerTypeSpotInfo
+  spotInfo?: ServerTypeSpotInfo | null
+  /**
+   * The billing SKU for this server type.
+   */
+  sku: string
 }
 
 
@@ -860,7 +888,7 @@ export interface ServerSummary {
   /**
    * ID of the placement group the server belongs to.
    */
-  placementGroupId?: string
+  placementGroupId?: string | null
   /**
    * Current status of the server.
    */
@@ -872,11 +900,11 @@ export interface ServerSummary {
   /**
    * Creation timestamp of the server.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the server.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Whether the server is in rescue mode.
    */
@@ -920,7 +948,7 @@ export interface Snapshot {
   /**
    * ID of the base volume.
    */
-  baseVolumeId?: string
+  baseVolumeId?: string | null
   /**
    * Type of the volume.
    */
@@ -928,11 +956,11 @@ export interface Snapshot {
   /**
    * Creation date of the snapshot.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the snapshot.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Zone in which the snapshot is located.
    */
@@ -976,11 +1004,11 @@ export interface TemplateSummary {
   /**
    * Security group ID associated with the template.
    */
-  securityGroupId?: string
+  securityGroupId?: string | null
   /**
    * Placement group ID associated with the template.
    */
-  placementGroupId?: string
+  placementGroupId?: string | null
   /**
    * Number of IPv4 public IPs to attach to servers created from this template.
    */
@@ -996,11 +1024,11 @@ export interface TemplateSummary {
   /**
    * Creation timestamp of the template.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the template.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Zone in which the template is located.
    */
@@ -1052,7 +1080,7 @@ export interface Volume {
   /**
    * ID of the base snapshot used for this volume.
    */
-  baseSnapshotId?: string
+  baseSnapshotId?: string | null
   /**
    * Current status of the volume.
    */
@@ -1064,15 +1092,15 @@ export interface Volume {
   /**
    * Creation date of the volume.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the volume.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ID of the Instance to which the volume is attached.
    */
-  serverId?: string
+  serverId?: string | null
   /**
    * Zone in which the volume is located.
    */
@@ -1116,6 +1144,10 @@ export interface ServerRuntimeInfo {
    * True if the Instance is running as Spot.
    */
   spot: boolean
+  /**
+   * The unique identifier of the physical server hosting this Instance.
+   */
+  physicalHostId: string
 }
 
 
@@ -1129,7 +1161,7 @@ export interface UpdateServerRequestPublicNetworkInterface {
   /**
    * ID of the security group for the interface.
    */
-  securityGroupId?: string
+  securityGroupId?: string | null
 }
 
 
@@ -1153,7 +1185,7 @@ export type AddSecurityGroupRulesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the security group to add rules to.
    */
@@ -1161,7 +1193,7 @@ export type AddSecurityGroupRulesRequest = {
   /**
    * List of rules to add.
    */
-  securityGroupRules?: SecurityGroupRuleConfig[]
+  securityGroupRules?: SecurityGroupRuleConfig[] | null
 }
 
 
@@ -1169,7 +1201,7 @@ export interface AddSecurityGroupRulesResponse {
   /**
    * Updated security group.
    */
-  securityGroup?: SecurityGroup
+  securityGroup?: SecurityGroup | null
   /**
    * List of rules that were added.
    */
@@ -1181,7 +1213,7 @@ export type AttachServerFileSystemRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to attach the filesystem to.
    */
@@ -1197,7 +1229,7 @@ export type AttachServerIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to attach the IP to.
    */
@@ -1221,7 +1253,7 @@ export type AttachServerPrivateNetworkInterfaceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to attach the private network interface to.
    */
@@ -1237,7 +1269,7 @@ export type AttachServerVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to attach the volume to.
    */
@@ -1249,7 +1281,7 @@ export type AttachServerVolumeRequest = {
   /**
    * Type of the volume.
    */
-  volumeType?: ServerVolumeVolumeType
+  volumeType?: ServerVolumeVolumeType | null
   /**
    * Whether the volume should be used as the boot volume.
    */
@@ -1261,7 +1293,7 @@ export type CheckTemplateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template to check.
    */
@@ -1273,11 +1305,11 @@ export type CreatePlacementGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID of the placement group.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the placement group.
    */
@@ -1285,11 +1317,11 @@ export type CreatePlacementGroupRequest = {
   /**
    * Policy type of the placement group.
    */
-  policyType?: PlacementGroupPolicyType
+  policyType?: PlacementGroupPolicyType | null
   /**
    * Tags of the placement group.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1297,7 +1329,7 @@ export type CreatePrivateNetworkInterfaceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the Private Network to attach to.
    */
@@ -1305,19 +1337,23 @@ export type CreatePrivateNetworkInterfaceRequest = {
   /**
    * Project ID for the private network interface.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * ID of the Instance to attach the interface to.
    */
-  serverId?: string
+  serverId?: string | null
+  /**
+   * ID of the security group to associate with the interface.
+   */
+  securityGroupId?: string | null
   /**
    * List of IP IDs to attach to the interface.
    */
-  ipIds?: string[]
+  ipIds?: string[] | null
   /**
    * Tags to assign to the private network interface.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1325,7 +1361,7 @@ export type CreateSecurityGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Name of the security group.
    */
@@ -1341,11 +1377,11 @@ export type CreateSecurityGroupRequest = {
   /**
    * Project ID the security group belongs to.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Tags for the security group.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Whether this should be the default security group for the project.
    */
@@ -1353,11 +1389,11 @@ export type CreateSecurityGroupRequest = {
   /**
    * Default action for inbound rules.
    */
-  inboundDefaultAction?: SecurityGroupAction
+  inboundDefaultAction?: SecurityGroupAction | null
   /**
    * Default action for outbound rules.
    */
-  outboundDefaultAction?: SecurityGroupAction
+  outboundDefaultAction?: SecurityGroupAction | null
   /**
    * Whether the security group should be stateless.
    */
@@ -1369,7 +1405,7 @@ export type CreateServerFromTemplateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template to use.
    */
@@ -1385,11 +1421,11 @@ export type CreateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID for the server.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the server.
    */
@@ -1397,7 +1433,7 @@ export type CreateServerRequest = {
   /**
    * Tags to associate with the server.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Type of the server.
    */
@@ -1405,23 +1441,23 @@ export type CreateServerRequest = {
   /**
    * ID of the placement group the server belongs to.
    */
-  placementGroupId?: string
+  placementGroupId?: string | null
   /**
    * ID of the Dedicated Pool this server belongs to.
    */
-  dedicatedPoolId?: string
+  dedicatedPoolId?: string | null
   /**
    * Volumes to attach to the server.
    */
-  volumes?: CreateServerRequestServerVolume[]
+  volumes?: CreateServerRequestServerVolume[] | null
   /**
    * IAM ID of the SSH key used to encrypt the Windows `Administrator` password for RDP use.
    */
-  windowsRdpSshKeyId?: string
+  windowsRdpSshKeyId?: string | null
   /**
    * Public network interface configuration.
    */
-  publicNetworkInterface?: CreateServerRequestPublicNetworkInterface
+  publicNetworkInterface?: CreateServerRequestPublicNetworkInterface | null
 }
 
 
@@ -1429,11 +1465,11 @@ export type CreateTemplateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID for the template.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the template.
    */
@@ -1441,11 +1477,11 @@ export type CreateTemplateRequest = {
   /**
    * Tags to associate with the template.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Tags to associate with servers created from the template.
    */
-  serverTags?: string[]
+  serverTags?: string[] | null
   /**
    * Commercial type of the server defined by the template.
    */
@@ -1453,23 +1489,23 @@ export type CreateTemplateRequest = {
   /**
    * Security group ID for the template.
    */
-  securityGroupId?: string
+  securityGroupId?: string | null
   /**
    * Placement group ID for the template.
    */
-  placementGroupId?: string
+  placementGroupId?: string | null
   /**
    * List of volume templates to define volumes for servers.
    */
-  volumes?: CreateTemplateRequestVolumeTemplate[]
+  volumes?: CreateTemplateRequestVolumeTemplate[] | null
   /**
    * List of private networks to associate with the template.
    */
-  privateNetworks?: CreateTemplateRequestPrivateNetworkTemplate[]
+  privateNetworks?: CreateTemplateRequestPrivateNetworkTemplate[] | null
   /**
    * List of filesystem IDs to associate with the template.
    */
-  filesystemIds?: string[]
+  filesystemIds?: string[] | null
   /**
    * Number of IPv4 public IPs to attach to servers created from this template.
    */
@@ -1481,7 +1517,7 @@ export type CreateTemplateRequest = {
   /**
    * IAM ID of the SSH key used to encrypt the Windows `Administrator` password for RDP use.
    */
-  windowsRdpSshKeyId?: string
+  windowsRdpSshKeyId?: string | null
 }
 
 
@@ -1507,13 +1543,21 @@ export interface DedicatedPool {
    */
   tags: string[]
   /**
+   * Physical hosts associated with the Dedicated Pool.
+   */
+  physicalHosts: DedicatedPoolPhysicalHost[]
+  /**
    * Creation timestamp of the Dedicated Pool.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the Dedicated Pool.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
+  /**
+   * Zone of the Dedicated Pool.
+   */
+  zone: ScwZone
 }
 
 
@@ -1521,7 +1565,7 @@ export type DeletePlacementGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the placement group you want to delete.
    */
@@ -1533,7 +1577,7 @@ export type DeletePrivateNetworkInterfaceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the private network interface to delete.
    */
@@ -1545,7 +1589,7 @@ export type DeleteSecurityGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the security group to delete.
    */
@@ -1557,11 +1601,11 @@ export type DeleteSecurityGroupRulesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * List of rule IDs to delete.
    */
-  securityGroupRuleIds?: string[]
+  securityGroupRuleIds?: string[] | null
 }
 
 
@@ -1569,7 +1613,7 @@ export type DeleteServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to delete.
    */
@@ -1579,37 +1623,37 @@ export type DeleteServerRequest = {
    *
    * One-of ('ips'): at most one of 'deleteAllIps', 'deleteIpIds' could be set.
    */
-  deleteAllIps?: boolean
+  deleteAllIps?: boolean | null
   /**
    * List of IP IDs to delete.
    *
    * One-of ('ips'): at most one of 'deleteAllIps', 'deleteIpIds' could be set.
    */
-  deleteIpIds?: string[]
+  deleteIpIds?: string[] | null
   /**
    * Whether to delete all volumes attached to the server. Deletion of SBS volumes is not supported yet.
    *
    * One-of ('volumes'): at most one of 'deleteAllVolumes', 'deleteVolumeIds' could be set.
    */
-  deleteAllVolumes?: boolean
+  deleteAllVolumes?: boolean | null
   /**
    * List of volume IDs to delete. Deletion of SBS volumes is not supported yet.
    *
    * One-of ('volumes'): at most one of 'deleteAllVolumes', 'deleteVolumeIds' could be set.
    */
-  deleteVolumeIds?: string[]
+  deleteVolumeIds?: string[] | null
   /**
    * Whether to keep all private network interfaces.
    *
    * One-of ('privateNics'): at most one of 'keepAllPrivateNics', 'deletePrivateNicIds' could be set.
    */
-  keepAllPrivateNics?: boolean
+  keepAllPrivateNics?: boolean | null
   /**
    * List of private network interface IDs to delete.
    *
    * One-of ('privateNics'): at most one of 'keepAllPrivateNics', 'deletePrivateNicIds' could be set.
    */
-  deletePrivateNicIds?: string[]
+  deletePrivateNicIds?: string[] | null
 }
 
 
@@ -1617,7 +1661,7 @@ export type DeleteTemplateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template to delete.
    */
@@ -1629,7 +1673,7 @@ export type DeleteTemplateUserDataRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template.
    */
@@ -1645,7 +1689,7 @@ export type DeleteUserDataRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -1661,7 +1705,7 @@ export type DetachAndDeletePrivateNetworkInterfaceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the private network interface to detach and delete.
    */
@@ -1673,7 +1717,7 @@ export type DetachServerFileSystemRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to detach the filesystem from.
    */
@@ -1689,7 +1733,7 @@ export type DetachServerIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to detach the IP from.
    */
@@ -1705,7 +1749,7 @@ export type DetachServerPrivateNetworkInterfaceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to detach the private network interface from.
    */
@@ -1721,7 +1765,7 @@ export type DetachServerVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to detach the volume from.
    */
@@ -1737,7 +1781,7 @@ export type GetDedicatedPoolRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the Dedicated Pool to retrieve.
    */
@@ -1749,7 +1793,7 @@ export type GetPlacementGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the placement group you want to get.
    */
@@ -1761,7 +1805,7 @@ export type GetPrivateNetworkInterfaceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the private network interface to retrieve.
    */
@@ -1773,19 +1817,19 @@ export type GetResourceCountsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Organization ID to filter resource counts.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter resource counts.
    *
    * One-of ('projectIdentifier'): at most one of 'organizationId', 'projectId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1793,7 +1837,7 @@ export type GetSecurityGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the security group to retrieve.
    */
@@ -1805,7 +1849,7 @@ export type GetServerCloudInitRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -1817,7 +1861,7 @@ export type GetServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to retrieve.
    */
@@ -1829,7 +1873,7 @@ export type GetTemplateCloudInitRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template.
    */
@@ -1841,7 +1885,7 @@ export type GetTemplateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template to retrieve.
    */
@@ -1853,7 +1897,7 @@ export type GetTemplateUserDataRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template.
    */
@@ -1869,7 +1913,7 @@ export type GetUserDataRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -1885,7 +1929,7 @@ export type ListDedicatedPoolServerTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the Dedicated Pool to list Instance types for.
    */
@@ -1893,11 +1937,11 @@ export type ListDedicatedPoolServerTypesRequest = {
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of Instance types to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1909,7 +1953,7 @@ export interface ListDedicatedPoolServerTypesResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of Instance types.
    */
@@ -1921,23 +1965,23 @@ export type ListDedicatedPoolsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of Dedicated Pools to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return Dedicated Pools.
    */
-  orderBy?: ListDedicatedPoolsRequestOrderBy
+  orderBy?: ListDedicatedPoolsRequestOrderBy | null
   /**
    * Organization ID to filter Dedicated Pools by.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1949,7 +1993,7 @@ export interface ListDedicatedPoolsResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of Dedicated Pools.
    */
@@ -1961,35 +2005,35 @@ export type ListPlacementGroupsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The initial pagination token to start from.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * The maximum number of placement groups to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The field by which to order the result list.
    */
-  orderBy?: ListPlacementGroupsRequestOrderBy
+  orderBy?: ListPlacementGroupsRequestOrderBy | null
   /**
    * List only placement groups of this Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * List only placement groups with these IDs.
    */
-  placementGroupIds?: string[]
+  placementGroupIds?: string[] | null
   /**
    * Filter placement groups by name.
    */
-  name?: string
+  name?: string | null
   /**
    * List placement groups with these exact tags.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2001,7 +2045,7 @@ export interface ListPlacementGroupsResponse {
   /**
    * The pagination token, use it to get the next page of results.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of placement groups.
    */
@@ -2013,35 +2057,39 @@ export type ListPrivateNetworkInterfacesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of items to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Field to order results by.
    */
-  orderBy?: ListPrivateNetworkInterfacesRequestOrderBy
+  orderBy?: ListPrivateNetworkInterfacesRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by server IDs.
    */
-  serverIds?: string[]
+  serverIds?: string[] | null
+  /**
+   * Filter by security group IDs.
+   */
+  securityGroupIds?: string[] | null
   /**
    * Filter by Private Network IDs.
    */
-  privateNetworkIds?: string[]
+  privateNetworkIds?: string[] | null
   /**
    * Filter by tags.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2053,7 +2101,7 @@ export interface ListPrivateNetworkInterfacesResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of items.
    */
@@ -2065,35 +2113,35 @@ export type ListSecurityGroupsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of items to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Field and direction to sort by.
    */
-  orderBy?: ListSecurityGroupsRequestOrderBy
+  orderBy?: ListSecurityGroupsRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by name.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by specific security group IDs.
    */
-  securityGroupIds?: string[]
+  securityGroupIds?: string[] | null
 }
 
 
@@ -2105,7 +2153,7 @@ export interface ListSecurityGroupsResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of items.
    */
@@ -2117,16 +2165,16 @@ export type ListServerCompatibleTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   serverId: string
-  pageToken?: string
-  pageSize?: number
+  pageToken?: string | null
+  pageSize?: number | null
 }
 
 
 export interface ListServerCompatibleTypesResponse {
   serverTypes: ServerType[]
-  nextPageToken?: string
+  nextPageToken?: string | null
   totalCount: number
 }
 
@@ -2135,15 +2183,15 @@ export type ListServerTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of server types to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -2155,7 +2203,7 @@ export interface ListServerTypesResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of server types.
    */
@@ -2167,59 +2215,59 @@ export type ListServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of servers to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the returned servers.
    */
-  orderBy?: ListServersRequestOrderBy
+  orderBy?: ListServersRequestOrderBy | null
   /**
    * Project ID to filter servers.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * List of server IDs to filter.
    */
-  serverIds?: string[]
+  serverIds?: string[] | null
   /**
    * Name to filter servers.
    */
-  name?: string
+  name?: string | null
   /**
    * Server type to filter.
    */
-  serverType?: string
+  serverType?: string | null
   /**
    * Tags to filter servers.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Security group IDs to filter servers.
    */
-  securityGroupIds?: string[]
+  securityGroupIds?: string[] | null
   /**
    * Placement group IDs to filter servers.
    */
-  placementGroupIds?: string[]
+  placementGroupIds?: string[] | null
   /**
    * Filter servers associated with these Dedicated Pools.
    */
-  dedicatedPoolIds?: string[]
+  dedicatedPoolIds?: string[] | null
   /**
    * Private Network IDs to filter servers.
    */
-  privateNetworkIds?: string[]
+  privateNetworkIds?: string[] | null
   /**
    * MAC addresses to filter servers.
    */
-  macAddresses?: string[]
+  macAddresses?: string[] | null
 }
 
 
@@ -2231,7 +2279,7 @@ export interface ListServersResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of servers.
    */
@@ -2247,7 +2295,7 @@ export interface ListSnapshotsResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of items.
    */
@@ -2259,7 +2307,7 @@ export type ListTemplateUserDataKeysRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template.
    */
@@ -2267,11 +2315,11 @@ export type ListTemplateUserDataKeysRequest = {
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of items to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -2283,7 +2331,7 @@ export interface ListTemplateUserDataKeysResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of items.
    */
@@ -2295,47 +2343,47 @@ export type ListTemplatesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of items to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Field to sort results by.
    */
-  orderBy?: ListTemplatesRequestOrderBy
+  orderBy?: ListTemplatesRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by specific template IDs.
    */
-  templateIds?: string[]
+  templateIds?: string[] | null
   /**
    * Filter by template name.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by server tags.
    */
-  serverTags?: string[]
+  serverTags?: string[] | null
   /**
    * Filter by security group IDs.
    */
-  securityGroupIds?: string[]
+  securityGroupIds?: string[] | null
   /**
    * Filter by placement group IDs.
    */
-  placementGroupIds?: string[]
+  placementGroupIds?: string[] | null
 }
 
 
@@ -2347,7 +2395,7 @@ export interface ListTemplatesResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of items.
    */
@@ -2359,7 +2407,7 @@ export type ListUserDataKeysRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -2367,11 +2415,11 @@ export type ListUserDataKeysRequest = {
   /**
    * Page token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of items to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -2383,7 +2431,7 @@ export interface ListUserDataKeysResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of items.
    */
@@ -2399,7 +2447,7 @@ export interface ListVolumeTypesResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of items.
    */
@@ -2415,7 +2463,7 @@ export interface ListVolumesResponse {
   /**
    * Token for the next page.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
   /**
    * Total number of items.
    */
@@ -2427,7 +2475,7 @@ export type PauseServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to pause.
    */
@@ -2457,6 +2505,10 @@ export interface PrivateNetworkInterface {
    */
   serverId: string
   /**
+   * ID of the security group associated with this interface.
+   */
+  securityGroupId: string
+  /**
    * MAC address of the private network interface.
    */
   macAddress: string
@@ -2475,11 +2527,11 @@ export interface PrivateNetworkInterface {
   /**
    * Creation timestamp of the private network interface.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the private network interface.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Zone in which the network interface is located.
    */
@@ -2491,7 +2543,7 @@ export type RebootServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to reboot.
    */
@@ -2549,11 +2601,11 @@ export interface ResourceCounts {
    */
   templates: number
   /**
-   * Number of flexible IPs.
+   * @deprecated Number of flexible IPs.
    */
   flexibleIps: number
   /**
-   * Number of flexible IPs not attached to any server.
+   * @deprecated Number of flexible IPs not attached to any server.
    */
   unusedFlexibleIps: number
   /**
@@ -2591,11 +2643,11 @@ export interface Server {
   /**
    * ID of the placement group the server belongs to.
    */
-  placementGroupId?: string
+  placementGroupId?: string | null
   /**
    * ID of the Dedicated Pool the server belongs to.
    */
-  dedicatedPoolId?: string
+  dedicatedPoolId?: string | null
   /**
    * Current status of the server.
    */
@@ -2615,11 +2667,11 @@ export interface Server {
   /**
    * Creation timestamp of the server.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the server.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * List of private network interfaces attached to the server.
    */
@@ -2631,7 +2683,7 @@ export interface Server {
   /**
    * ID of the boot volume.
    */
-  bootVolumeId?: string
+  bootVolumeId?: string | null
   /**
    * Detailed status information of the server.
    */
@@ -2639,11 +2691,11 @@ export interface Server {
   /**
    * Encrypted RDP password for Windows servers. The encryption scheme is RSA-PKCS1-v1_5, using the public part of the SSH key supplied in `windows_rdp_ssh_key_id`.
    */
-  windowsRdpPassword?: ServerRDPPassword
+  windowsRdpPassword?: ServerRDPPassword | null
   /**
    * Public network interface of the server.
    */
-  publicNetworkInterface?: ServerPublicNetworkInterface
+  publicNetworkInterface?: ServerPublicNetworkInterface | null
   /**
    * Zone in which the server is located.
    */
@@ -2651,7 +2703,7 @@ export interface Server {
   /**
    * Runtime information of this server, only available only when it is running.
    */
-  runtimeInfo?: ServerRuntimeInfo
+  runtimeInfo?: ServerRuntimeInfo | null
 }
 
 
@@ -2659,7 +2711,7 @@ export type SetSecurityGroupRulesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the security group to set rules for.
    */
@@ -2667,7 +2719,7 @@ export type SetSecurityGroupRulesRequest = {
   /**
    * List of rules to set.
    */
-  securityGroupRules?: SecurityGroupRuleConfig[]
+  securityGroupRules?: SecurityGroupRuleConfig[] | null
 }
 
 
@@ -2675,7 +2727,7 @@ export type SetServerCloudInitRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -2691,7 +2743,7 @@ export type SetServerDefaultIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to set the default IP for.
    */
@@ -2707,7 +2759,7 @@ export type SetTemplateCloudInitRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template.
    */
@@ -2723,7 +2775,7 @@ export type SetTemplateUserDataRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template.
    */
@@ -2743,7 +2795,7 @@ export type SetUserDataRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The ID of the server.
    */
@@ -2763,7 +2815,7 @@ export type StartServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to start.
    */
@@ -2775,7 +2827,7 @@ export type StartSpotServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to start as spot instance.
    */
@@ -2787,7 +2839,7 @@ export type StopAndDeleteServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to stop and delete.
    */
@@ -2797,37 +2849,37 @@ export type StopAndDeleteServerRequest = {
    *
    * One-of ('ips'): at most one of 'deleteAllIps', 'deleteIpIds' could be set.
    */
-  deleteAllIps?: boolean
+  deleteAllIps?: boolean | null
   /**
    * List of IP IDs to delete.
    *
    * One-of ('ips'): at most one of 'deleteAllIps', 'deleteIpIds' could be set.
    */
-  deleteIpIds?: string[]
+  deleteIpIds?: string[] | null
   /**
    * Whether to delete all volumes attached to the server.
    *
    * One-of ('volumes'): at most one of 'deleteAllVolumes', 'deleteVolumeIds' could be set.
    */
-  deleteAllVolumes?: boolean
+  deleteAllVolumes?: boolean | null
   /**
    * List of volume IDs to delete.
    *
    * One-of ('volumes'): at most one of 'deleteAllVolumes', 'deleteVolumeIds' could be set.
    */
-  deleteVolumeIds?: string[]
+  deleteVolumeIds?: string[] | null
   /**
    * Whether to keep all private network interfaces.
    *
    * One-of ('privateNics'): at most one of 'keepAllPrivateNics', 'deletePrivateNicIds' could be set.
    */
-  keepAllPrivateNics?: boolean
+  keepAllPrivateNics?: boolean | null
   /**
    * List of private network interface IDs to delete.
    *
    * One-of ('privateNics'): at most one of 'keepAllPrivateNics', 'deletePrivateNicIds' could be set.
    */
-  deletePrivateNicIds?: string[]
+  deletePrivateNicIds?: string[] | null
 }
 
 
@@ -2835,7 +2887,7 @@ export type StopServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to stop.
    */
@@ -2875,11 +2927,11 @@ export interface Template {
   /**
    * Security group ID associated with the template.
    */
-  securityGroupId?: string
+  securityGroupId?: string | null
   /**
    * Placement group ID associated with the template.
    */
-  placementGroupId?: string
+  placementGroupId?: string | null
   /**
    * Number of IPv4 public IPs to attach to servers created from this template.
    */
@@ -2903,15 +2955,15 @@ export interface Template {
   /**
    * Creation timestamp of the template.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update timestamp of the template.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * IAM ID of the SSH key used to encrypt the Windows `Administrator` password for RDP use.
    */
-  windowsRdpSshKeyId?: string
+  windowsRdpSshKeyId?: string | null
   /**
    * Zone in which the template is located.
    */
@@ -2923,7 +2975,7 @@ export type UpdateDedicatedPoolRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the Dedicated Pool to update.
    */
@@ -2931,11 +2983,11 @@ export type UpdateDedicatedPoolRequest = {
   /**
    * New name for the Dedicated Pool.
    */
-  name?: string
+  name?: string | null
   /**
    * New tags for the Dedicated Pool.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2943,7 +2995,7 @@ export type UpdatePlacementGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the placement group.
    */
@@ -2951,15 +3003,15 @@ export type UpdatePlacementGroupRequest = {
   /**
    * Name of the placement group.
    */
-  name?: string
+  name?: string | null
   /**
    * Policy type of the placement group.
    */
-  policyType?: PlacementGroupPolicyType
+  policyType?: PlacementGroupPolicyType | null
   /**
    * Tags of the placement group.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2967,15 +3019,19 @@ export type UpdatePrivateNetworkInterfaceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the private network interface to update.
    */
   privateNetworkInterfaceId: string
   /**
+   * New security group ID to associate with the interface.
+   */
+  securityGroupId?: string | null
+  /**
    * New tags to assign to the private network interface.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2983,7 +3039,7 @@ export type UpdateSecurityGroupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the security group to update.
    */
@@ -2991,35 +3047,35 @@ export type UpdateSecurityGroupRequest = {
   /**
    * New name for the security group.
    */
-  name?: string
+  name?: string | null
   /**
    * New description for the security group.
    */
-  description?: string
+  description?: string | null
   /**
    * Whether to disable default rules.
    */
-  disableDefaultRules?: boolean
+  disableDefaultRules?: boolean | null
   /**
    * New tags for the security group.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Whether this should be the default security group for the project.
    */
-  projectDefault?: boolean
+  projectDefault?: boolean | null
   /**
    * New default action for inbound rules.
    */
-  inboundDefaultAction?: SecurityGroupAction
+  inboundDefaultAction?: SecurityGroupAction | null
   /**
    * New default action for outbound rules.
    */
-  outboundDefaultAction?: SecurityGroupAction
+  outboundDefaultAction?: SecurityGroupAction | null
   /**
    * Whether the security group should be stateless.
    */
-  stateless?: boolean
+  stateless?: boolean | null
 }
 
 
@@ -3027,7 +3083,7 @@ export type UpdateSecurityGroupRuleRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the rule to update.
    */
@@ -3035,35 +3091,35 @@ export type UpdateSecurityGroupRuleRequest = {
   /**
    * New protocol for the rule.
    */
-  protocol?: SecurityGroupRuleProtocol
+  protocol?: SecurityGroupRuleProtocol | null
   /**
    * New direction for the rule.
    */
-  direction?: SecurityGroupRuleDirection
+  direction?: SecurityGroupRuleDirection | null
   /**
    * New action for the rule.
    */
-  action?: SecurityGroupRuleAction
+  action?: SecurityGroupRuleAction | null
   /**
    * New source IP range for the rule.
    */
-  sourceIpRange?: string
+  sourceIpRange?: string | null
   /**
    * New destination IP range for the rule.
    */
-  destinationIpRange?: string
+  destinationIpRange?: string | null
   /**
    * New source port range for the rule.
    */
-  sourcePorts?: SecurityGroupRulePortRange
+  sourcePorts?: SecurityGroupRulePortRange | null
   /**
    * New destination port range for the rule.
    */
-  destinationPorts?: SecurityGroupRulePortRange
+  destinationPorts?: SecurityGroupRulePortRange | null
   /**
    * New position for the rule.
    */
-  position?: number
+  position?: number | null
 }
 
 
@@ -3071,7 +3127,7 @@ export type UpdateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to update.
    */
@@ -3079,43 +3135,43 @@ export type UpdateServerRequest = {
   /**
    * New name for the server.
    */
-  name?: string
+  name?: string | null
   /**
    * New tags for the server.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * New server type.
    */
-  serverType?: string
+  serverType?: string | null
   /**
    * New placement group ID.
    */
-  placementGroupId?: string
+  placementGroupId?: string | null
   /**
    * New Dedicated Pool ID.
    */
-  dedicatedPoolId?: string
+  dedicatedPoolId?: string | null
   /**
    * New rescue mode setting.
    */
-  rescueMode?: boolean
+  rescueMode?: boolean | null
   /**
    * New boot volume ID.
    */
-  bootVolumeId?: string
+  bootVolumeId?: string | null
   /**
    * New IAM ID of the SSH key used to encrypt the Windows `Administrator` password for RDP use.
    */
-  windowsRdpSshKeyId?: string
+  windowsRdpSshKeyId?: string | null
   /**
    * Protection status of the server.
    */
-  protected?: boolean
+  protected?: boolean | null
   /**
    * New public network interface configuration.
    */
-  publicNetworkInterface?: UpdateServerRequestPublicNetworkInterface
+  publicNetworkInterface?: UpdateServerRequestPublicNetworkInterface | null
 }
 
 
@@ -3123,7 +3179,7 @@ export type UpdateTemplateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Unique ID of the template to update.
    */
@@ -3131,51 +3187,51 @@ export type UpdateTemplateRequest = {
   /**
    * New name for the template.
    */
-  name?: string
+  name?: string | null
   /**
    * New tags for the template.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * New server tags for the template.
    */
-  serverTags?: string[]
+  serverTags?: string[] | null
   /**
    * New server type for the template.
    */
-  serverType?: string
+  serverType?: string | null
   /**
    * New security group ID for the template.
    */
-  securityGroupId?: string
+  securityGroupId?: string | null
   /**
    * New placement group ID for the template.
    */
-  placementGroupId?: string
+  placementGroupId?: string | null
   /**
    * Updated volume templates for the template.
    */
-  updateVolumes?: UpdateTemplateRequestUpdateVolumes
+  updateVolumes?: UpdateTemplateRequestUpdateVolumes | null
   /**
    * Updated private networks list for the template.
    */
-  updatePrivateNetworks?: UpdateTemplateRequestUpdatePrivateNetworks
+  updatePrivateNetworks?: UpdateTemplateRequestUpdatePrivateNetworks | null
   /**
    * New list of filesystem IDs for the template.
    */
-  filesystemIds?: string[]
+  filesystemIds?: string[] | null
   /**
    * New number of IPv4 public IPs to attach to servers.
    */
-  publicIpV4Count?: number
+  publicIpV4Count?: number | null
   /**
    * New number of IPv6 public IPs to attach to servers.
    */
-  publicIpV6Count?: number
+  publicIpV6Count?: number | null
   /**
    * New IAM ID of the SSH key used to encrypt the Windows `Administrator` password for RDP use.
    */
-  windowsRdpSshKeyId?: string
+  windowsRdpSshKeyId?: string | null
 }
 
 
@@ -3195,11 +3251,11 @@ export type VolumeApiCreateSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID of the snapshot.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the snapshot.
    */
@@ -3207,7 +3263,7 @@ export type VolumeApiCreateSnapshotRequest = {
   /**
    * Tags associated with the snapshot.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * ID of the base volume.
    */
@@ -3223,11 +3279,11 @@ export type VolumeApiCreateVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID to which the volume belongs.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Volume name.
    */
@@ -3235,19 +3291,19 @@ export type VolumeApiCreateVolumeRequest = {
   /**
    * Tags associated with the volume.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Volume size in bytes.
    */
-  size?: number
+  size?: number | null
   /**
    * ID of the base snapshot used for this volume.
    */
-  baseSnapshotId?: string
+  baseSnapshotId?: string | null
   /**
    * Type of the volume.
    */
-  volumeType?: CreateVolumeRequestVolumeType
+  volumeType?: CreateVolumeRequestVolumeType | null
 }
 
 
@@ -3255,7 +3311,7 @@ export type VolumeApiDeleteSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the snapshot to delete.
    */
@@ -3267,7 +3323,7 @@ export type VolumeApiDeleteVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the volume to delete.
    */
@@ -3279,7 +3335,7 @@ export type VolumeApiExportSnapshotToObjectStorageRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the snapshot to export.
    */
@@ -3299,7 +3355,7 @@ export type VolumeApiGetSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the snapshot to retrieve.
    */
@@ -3311,7 +3367,7 @@ export type VolumeApiGetVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the volume to retrieve.
    */
@@ -3323,11 +3379,11 @@ export type VolumeApiImportSnapshotFromObjectStorageRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID of the snapshot.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the snapshot.
    */
@@ -3335,7 +3391,7 @@ export type VolumeApiImportSnapshotFromObjectStorageRequest = {
   /**
    * Tags associated with the snapshot.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Object Storage bucket name.
    */
@@ -3347,11 +3403,11 @@ export type VolumeApiImportSnapshotFromObjectStorageRequest = {
   /**
    * Size of the imported snapshot in bytes.
    */
-  size?: number
+  size?: number | null
   /**
    * Volume type of the snapshot.
    */
-  volumeType?: SnapshotVolumeType
+  volumeType?: SnapshotVolumeType | null
 }
 
 
@@ -3359,39 +3415,39 @@ export type VolumeApiListSnapshotsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of snapshots to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Field to sort by.
    */
-  orderBy?: ListSnapshotsRequestOrderBy
+  orderBy?: ListSnapshotsRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by specific snapshot IDs.
    */
-  snapshotIds?: string[]
+  snapshotIds?: string[] | null
   /**
    * Filter by name.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by base volume ID.
    */
-  baseVolumeId?: string
+  baseVolumeId?: string | null
 }
 
 
@@ -3399,15 +3455,15 @@ export type VolumeApiListVolumeTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of items to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -3415,39 +3471,39 @@ export type VolumeApiListVolumesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Token for pagination.
    */
-  pageToken?: string
+  pageToken?: string | null
   /**
    * Number of items to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Field to order the results by.
    */
-  orderBy?: ListVolumesRequestOrderBy
+  orderBy?: ListVolumesRequestOrderBy | null
   /**
    * Filter by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by specific volume IDs.
    */
-  volumeIds?: string[]
+  volumeIds?: string[] | null
   /**
    * Filter by volume name.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter by tags.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by volume type.
    */
-  volumeType?: VolumeVolumeType
+  volumeType?: VolumeVolumeType | null
 }
 
 
@@ -3455,7 +3511,7 @@ export type VolumeApiUpdateSnapshotRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the snapshot to update.
    */
@@ -3463,15 +3519,15 @@ export type VolumeApiUpdateSnapshotRequest = {
   /**
    * New name for the snapshot.
    */
-  name?: string
+  name?: string | null
   /**
    * New tags for the snapshot.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Whether the snapshot should be public.
    */
-  public?: boolean
+  public?: boolean | null
 }
 
 
@@ -3479,7 +3535,7 @@ export type VolumeApiUpdateVolumeRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the volume to update.
    */
@@ -3487,15 +3543,15 @@ export type VolumeApiUpdateVolumeRequest = {
   /**
    * New name for the volume.
    */
-  name?: string
+  name?: string | null
   /**
    * New tags for the volume.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * New size for the volume.
    */
-  size?: number
+  size?: number | null
 }
 
 

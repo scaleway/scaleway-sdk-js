@@ -71,7 +71,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalBookIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips`,
         signal: options?.signal,
@@ -89,7 +89,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
         signal: options?.signal,
@@ -103,7 +103,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalReleaseIPSetRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ip-sets/release`,
         signal: options?.signal,
@@ -140,7 +140,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}`,
         signal: options?.signal,
@@ -216,7 +216,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAttachIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/attach`,
         signal: options?.signal,
@@ -237,7 +237,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalDetachIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/detach`,
         signal: options?.signal,
@@ -258,7 +258,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalMoveIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/ipam/v1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/ips/${validatePathParam('ipId', request.ipId)}/move`,
         signal: options?.signal,

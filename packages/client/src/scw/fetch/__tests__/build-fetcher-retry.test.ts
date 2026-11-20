@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { withRetry } from '../../client-ini-factory.js'
 import type { Settings } from '../../client-settings.js'
+import { AbortError } from '../../errors/abort-error.js'
 import { ScalewayError } from '../../errors/scw-error.js'
-import { AbortError } from '../abort-error.js'
 import { buildFetcher } from '../build-fetcher.js'
 import { InvalidResponseError } from '../invalid-response-error.js'
 
@@ -248,7 +248,12 @@ describe('buildFetcher retry', () => {
       method: 'GET',
       path: '/exhausted',
     })
-    const expectation = expect(resultPromise).rejects.toThrow(ScalewayError)
+    const expectation = expect(resultPromise).rejects.toMatchObject({
+      status: 503,
+      method: 'GET',
+      url: `${DEFAULT_SETTINGS.apiURL}/exhausted`,
+      requestId: '1',
+    })
     await vi.runAllTimersAsync()
     await expectation
     expect(fetchMock).toHaveBeenCalledTimes(3)

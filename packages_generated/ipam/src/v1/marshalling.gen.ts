@@ -27,8 +27,8 @@ const unmarshalResource = (data: unknown): Resource => {
 
   return {
     id: data.id,
-    macAddress: data.mac_address,
-    name: data.name,
+    macAddress: data.mac_address ?? null,
+    name: data.name ?? null,
     type: data.type,
   } as Resource
 }
@@ -41,7 +41,7 @@ const unmarshalReverse = (data: unknown): Reverse => {
   }
 
   return {
-    address: data.address,
+    address: data.address ?? null,
     hostname: data.hostname,
   } as Reverse
 }
@@ -54,11 +54,11 @@ const unmarshalSource = (data: unknown): Source => {
   }
 
   return {
-    privateNetworkId: data.private_network_id,
-    regional: data.regional,
-    subnetId: data.subnet_id,
-    vpcId: data.vpc_id,
-    zonal: data.zonal,
+    privateNetworkId: data.private_network_id ?? null,
+    regional: data.regional ?? null,
+    subnetId: data.subnet_id ?? null,
+    vpcId: data.vpc_id ?? null,
+    zonal: data.zonal ?? null,
   } as Source
 }
 
@@ -71,18 +71,18 @@ export const unmarshalIP = (data: unknown): IP => {
 
   return {
     address: data.address,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     isIpv6: data.is_ipv6,
     projectId: data.project_id,
     region: data.region,
-    resource: data.resource ? unmarshalResource(data.resource) : undefined,
+    resource: data.resource ? unmarshalResource(data.resource) : null,
     reverses: unmarshalArrayOfObject(data.reverses, unmarshalReverse),
-    source: data.source ? unmarshalSource(data.source) : undefined,
+    source: data.source ? unmarshalSource(data.source) : null,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    zone: data.zone,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    zone: data.zone ?? null,
   } as IP
 }
 
@@ -144,7 +144,7 @@ export const marshalBookIPRequest = (
   address: request.address,
   is_ipv6: request.isIpv6,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  resource: ((request.resource !== undefined) ?  marshalCustomResource(request.resource, defaults): undefined),
+  resource: ((request.resource != null) ?  marshalCustomResource(request.resource, defaults): undefined),
   source:  marshalSource(request.source, defaults),
   tags: request.tags,
 })
@@ -161,7 +161,7 @@ export const marshalMoveIPRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   from_resource:  marshalCustomResource(request.fromResource, defaults),
-  to_resource: ((request.toResource !== undefined) ?  marshalCustomResource(request.toResource, defaults): undefined),
+  to_resource: ((request.toResource != null) ?  marshalCustomResource(request.toResource, defaults): undefined),
 })
 
 export const marshalReleaseIPSetRequest = (
@@ -183,6 +183,6 @@ export const marshalUpdateIPRequest = (
   request: UpdateIPRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  reverses: ((request.reverses !== undefined) ?  request.reverses.map(elt => marshalReverse(elt, defaults)): undefined),
+  reverses: ((request.reverses != null) ?  request.reverses.map(elt => marshalReverse(elt, defaults)): undefined),
   tags: request.tags,
 })

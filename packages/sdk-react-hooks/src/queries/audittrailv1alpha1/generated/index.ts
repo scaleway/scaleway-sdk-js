@@ -19,4 +19,5 @@ export { useAuditTrailv1alpha1APIListAlertRulesAllQuery } from "./useAuditTrailv
 export { useAuditTrailv1alpha1APIListCustomAlertRulesQuery } from "./useAuditTrailv1alpha1APIListCustomAlertRulesQuery"
 export { useAuditTrailv1alpha1APIListCustomAlertRulesInfiniteQuery } from "./useAuditTrailv1alpha1APIListCustomAlertRulesInfiniteQuery"
 export { useAuditTrailv1alpha1APIListCustomAlertRulesAllQuery } from "./useAuditTrailv1alpha1APIListCustomAlertRulesAllQuery"
+export { useAuditTrailv1alpha1APIGetCustomAlertRuleQuery } from "./useAuditTrailv1alpha1APIGetCustomAlertRuleQuery"
 export { useAuditTrailv1alpha1APIReload } from "./useAuditTrailv1alpha1APIReload"

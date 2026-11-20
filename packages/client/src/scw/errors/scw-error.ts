@@ -1,5 +1,7 @@
 import type { JSONObject } from '../../helpers/json.js'
 import { isJSONObject } from '../../helpers/json.js'
+import { ErrorWithRequestContext } from './request-context.js'
+import type { RequestContext } from './request-context.js'
 import { isRecordOfStringArray } from './types.js'
 
 /**
@@ -35,11 +37,18 @@ const buildDefaultMessage = (status: number, body: unknown): string => {
 }
 
 /**
+ * Request context attached to a {@link ScalewayError}.
+ *
+ * @public
+ */
+export type ScalewayErrorRequestContext = RequestContext
+
+/**
  * Scaleway error.
  *
  * @public
  */
-export class ScalewayError extends Error {
+export class ScalewayError extends ErrorWithRequestContext {
   /** The message originating from the payload. */
   public rawMessage: string | undefined
 

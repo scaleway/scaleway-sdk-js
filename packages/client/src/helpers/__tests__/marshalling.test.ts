@@ -64,6 +64,16 @@ describe('urlParams', () => {
     expect(urlParams(['key1', null], ['key2', undefined]).toString()).toStrictEqual('')
   })
 
+  it('filters empty string values', () => {
+    expect(urlParams(['name', ''], ['key1', 'myValue']).toString()).toStrictEqual('key1=myValue')
+  })
+
+  it('filters empty string inside arrays', () => {
+    expect(urlParams(['my_param', ['value-1', '', 'value-2']]).toString()).toStrictEqual(
+      'my_param=value-1&my_param=value-2',
+    )
+  })
+
   it('filters non-string keys', () => {
     expect(
       // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- test deliberately passes invalid key types
@@ -153,6 +163,52 @@ describe('resolveOneOf', () => {
       ),
     ).toStrictEqual({ my_key_1: false })
   })
+
+  it('skips null values and resolves the next defined one', () => {
+    expect(
+      resolveOneOf(
+        [
+          { default: undefined, param: 'my_key_1', value: null },
+          { default: undefined, param: 'my_key_2', value: '42' },
+        ],
+        true,
+      ),
+    ).toStrictEqual({ my_key_2: '42' })
+  })
+
+  it('falls back to the default value when the value is null', () => {
+    expect(
+      resolveOneOf(
+        [
+          { default: 'default-value', param: 'my_key_1', value: null },
+          { default: undefined, param: 'my_key_2', value: undefined },
+        ],
+        true,
+      ),
+    ).toStrictEqual({ my_key_1: 'default-value' })
+  })
+
+  it('falls back to another entry default value when the value is null', () => {
+    expect(
+      resolveOneOf(
+        [
+          { default: undefined, param: 'my_key_1', value: null },
+          { default: '42', param: 'my_key_2', value: undefined },
+        ],
+        true,
+      ),
+    ).toStrictEqual({ my_key_2: '42' })
+  })
+
+  it('returns an empty record when all values are null and the resolve is optional', () => {
+    expect(resolveOneOf([{ default: undefined, param: 'my_key_1', value: null }], false)).toStrictEqual({})
+  })
+
+  it('throws an error when a required one-of only has null values', () => {
+    expect(() => {
+      resolveOneOf([{ default: undefined, param: 'my_key_1', value: null }], true)
+    }).toThrow(new TypeError(`one of my_key_1 must be indicated in the request`))
+  })
 })
 
 describe('unmarshalDate', () => {
@@ -161,11 +217,11 @@ describe('unmarshalDate', () => {
   })
 
   it(`doesn't unmarshal invalid input type`, () => {
-    expect(unmarshalDate(42)).toBeUndefined()
+    expect(unmarshalDate(42)).toBeNull()
   })
 
   it(`doesn't unmarshal invalid string format`, () => {
-    expect(unmarshalDate('not a date')).toBeUndefined()
+    expect(unmarshalDate('not a date')).toBeNull()
   })
 })
 

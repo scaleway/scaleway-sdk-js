@@ -5,8 +5,23 @@ export const CreateFileSystemRequest = {
   name: {
     minLength: 1,
   },
+}
+
+export const CreateFileSystemRequestFromEmpty = {
   size: {
     greaterThan: 0,
+  },
+}
+
+export const CreateFileSystemRequestFromSnapshot = {
+  size: {
+    greaterThan: 0,
+  },
+}
+
+export const CreateSnapshotRequest = {
+  name: {
+    minLength: 1,
   },
 }
 
@@ -40,11 +55,27 @@ export const ListFileSystemsRequest = {
   },
 }
 
+export const ListSnapshotsRequest = {
+  page: {
+    greaterThan: 0,
+  },
+  pageSize: {
+    greaterThan: 0,
+    lessThanOrEqual: 100,
+  },
+}
+
 export const UpdateFileSystemRequest = {
   name: {
     minLength: 1,
   },
   size: {
     greaterThan: 0,
+  },
+}
+
+export const UpdateSnapshotRequest = {
+  name: {
+    minLength: 1,
   },
 }

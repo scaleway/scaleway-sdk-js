@@ -40,17 +40,17 @@ export const unmarshalGatewayNetwork = (data: unknown): GatewayNetwork => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     gatewayId: data.gateway_id,
     id: data.id,
     ipamIpId: data.ipam_ip_id,
-    macAddress: data.mac_address,
+    macAddress: data.mac_address ?? null,
     masqueradeEnabled: data.masquerade_enabled,
     privateNetworkId: data.private_network_id,
     pushDefaultRoute: data.push_default_route,
     srn: data.srn,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as GatewayNetwork
 }
@@ -64,15 +64,15 @@ export const unmarshalIP = (data: unknown): IP => {
 
   return {
     address: data.address,
-    createdAt: unmarshalDate(data.created_at),
-    gatewayId: data.gateway_id,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    gatewayId: data.gateway_id ?? null,
     id: data.id,
     organizationId: data.organization_id,
     projectId: data.project_id,
-    reverse: data.reverse,
+    reverse: data.reverse ?? null,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as IP
 }
@@ -89,11 +89,11 @@ export const unmarshalGateway = (data: unknown): Gateway => {
     bastionAllowedIps: data.bastion_allowed_ips,
     bastionEnabled: data.bastion_enabled,
     bastionPort: data.bastion_port,
-    canUpgradeTo: data.can_upgrade_to,
-    createdAt: unmarshalDate(data.created_at),
+    canUpgradeTo: data.can_upgrade_to ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     gatewayNetworks: unmarshalArrayOfObject(data.gateway_networks, unmarshalGatewayNetwork),
     id: data.id,
-    ipv4: data.ipv4 ? unmarshalIP(data.ipv4) : undefined,
+    ipv4: data.ipv4 ? unmarshalIP(data.ipv4) : null,
     isLegacy: data.is_legacy,
     name: data.name,
     organizationId: data.organization_id,
@@ -103,8 +103,8 @@ export const unmarshalGateway = (data: unknown): Gateway => {
     status: data.status,
     tags: data.tags,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
-    version: data.version,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    version: data.version ?? null,
     zone: data.zone,
   } as Gateway
 }
@@ -117,7 +117,7 @@ export const unmarshalPatRule = (data: unknown): PatRule => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     gatewayId: data.gateway_id,
     id: data.id,
     privateIp: data.private_ip,
@@ -125,7 +125,7 @@ export const unmarshalPatRule = (data: unknown): PatRule => {
     protocol: data.protocol,
     publicPort: data.public_port,
     srn: data.srn,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as PatRule
 }

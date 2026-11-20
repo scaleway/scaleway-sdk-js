@@ -122,7 +122,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateEmailRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails`,
         signal: options?.signal,
@@ -237,7 +237,7 @@ export class API extends ParentAPI {
     this.client.fetch<Email>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/emails/${validatePathParam('emailId', request.emailId)}/cancel`,
         signal: options?.signal,
@@ -258,7 +258,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
         signal: options?.signal,
@@ -340,7 +340,7 @@ export class API extends ParentAPI {
     this.client.fetch<Domain>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/revoke`,
         signal: options?.signal,
@@ -359,7 +359,7 @@ export class API extends ParentAPI {
     this.client.fetch<Domain>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}/check`,
         signal: options?.signal,
@@ -397,7 +397,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains/${validatePathParam('domainId', request.domainId)}`,
         signal: options?.signal,
@@ -418,7 +418,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateWebhookRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks`,
         signal: options?.signal,
@@ -484,7 +484,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateWebhookRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/webhooks/${validatePathParam('webhookId', request.webhookId)}`,
         signal: options?.signal,
@@ -568,7 +568,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateProjectSettingsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/project/${validatePathParam('projectId', request.projectId ?? this.client.settings.defaultProjectId)}/settings`,
         signal: options?.signal,
@@ -618,7 +618,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalBulkCreateBlocklistsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/blocklists`,
         signal: options?.signal,
@@ -687,7 +687,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateOfferSubscriptionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/transactional-email/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/offer-subscriptions`,
         signal: options?.signal,

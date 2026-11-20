@@ -38,13 +38,13 @@ export const unmarshalNatsAccount = (data: unknown): NatsAccount => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoint: data.endpoint,
     id: data.id,
     name: data.name,
     projectId: data.project_id,
     region: data.region,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as NatsAccount
 }
 
@@ -70,13 +70,13 @@ export const unmarshalNatsCredentials = (data: unknown): NatsCredentials => {
 
   return {
     checksum: data.checksum,
-    createdAt: unmarshalDate(data.created_at),
-    credentials: data.credentials ? unmarshalFile(data.credentials) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    credentials: data.credentials ? unmarshalFile(data.credentials) : null,
     id: data.id,
     name: data.name,
     natsAccountId: data.nats_account_id,
     region: data.region,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as NatsCredentials
 }
 
@@ -88,9 +88,9 @@ const unmarshalSnsPermissions = (data: unknown): SnsPermissions => {
   }
 
   return {
-    canManage: data.can_manage,
-    canPublish: data.can_publish,
-    canReceive: data.can_receive,
+    canManage: data.can_manage ?? null,
+    canPublish: data.can_publish ?? null,
+    canReceive: data.can_receive ?? null,
   } as SnsPermissions
 }
 
@@ -103,15 +103,15 @@ export const unmarshalSnsCredentials = (data: unknown): SnsCredentials => {
 
   return {
     accessKey: data.access_key,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
-    permissions: data.permissions ? unmarshalSnsPermissions(data.permissions) : undefined,
+    permissions: data.permissions ? unmarshalSnsPermissions(data.permissions) : null,
     projectId: data.project_id,
     region: data.region,
     secretChecksum: data.secret_checksum,
     secretKey: data.secret_key,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as SnsCredentials
 }
 
@@ -123,9 +123,9 @@ const unmarshalSqsPermissions = (data: unknown): SqsPermissions => {
   }
 
   return {
-    canManage: data.can_manage,
-    canPublish: data.can_publish,
-    canReceive: data.can_receive,
+    canManage: data.can_manage ?? null,
+    canPublish: data.can_publish ?? null,
+    canReceive: data.can_receive ?? null,
   } as SqsPermissions
 }
 
@@ -138,15 +138,15 @@ export const unmarshalSqsCredentials = (data: unknown): SqsCredentials => {
 
   return {
     accessKey: data.access_key,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
-    permissions: data.permissions ? unmarshalSqsPermissions(data.permissions) : undefined,
+    permissions: data.permissions ? unmarshalSqsPermissions(data.permissions) : null,
     projectId: data.project_id,
     region: data.region,
     secretChecksum: data.secret_checksum,
     secretKey: data.secret_key,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as SqsCredentials
 }
 
@@ -210,12 +210,12 @@ export const unmarshalSnsInfo = (data: unknown): SnsInfo => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     projectId: data.project_id,
     region: data.region,
     snsEndpointUrl: data.sns_endpoint_url,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as SnsInfo
 }
 
@@ -227,12 +227,12 @@ export const unmarshalSqsInfo = (data: unknown): SqsInfo => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     projectId: data.project_id,
     region: data.region,
     sqsEndpointUrl: data.sqs_endpoint_url,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as SqsInfo
 }
 
@@ -280,7 +280,7 @@ export const marshalSnsApiCreateSnsCredentialsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('mnq_sns'),
-  permissions: ((request.permissions !== undefined) ?  marshalSnsPermissions(request.permissions, defaults): undefined),
+  permissions: ((request.permissions != null) ?  marshalSnsPermissions(request.permissions, defaults): undefined),
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
@@ -296,7 +296,7 @@ export const marshalSnsApiUpdateSnsCredentialsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  permissions: ((request.permissions !== undefined) ?  marshalSnsPermissions(request.permissions, defaults): undefined),
+  permissions: ((request.permissions != null) ?  marshalSnsPermissions(request.permissions, defaults): undefined),
 })
 
 export const marshalSqsApiActivateSqsRequest = (
@@ -320,7 +320,7 @@ export const marshalSqsApiCreateSqsCredentialsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name || randomName('mnq_sqs'),
-  permissions: ((request.permissions !== undefined) ?  marshalSqsPermissions(request.permissions, defaults): undefined),
+  permissions: ((request.permissions != null) ?  marshalSqsPermissions(request.permissions, defaults): undefined),
   project_id: request.projectId ?? defaults.defaultProjectId,
 })
 
@@ -336,5 +336,5 @@ export const marshalSqsApiUpdateSqsCredentialsRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  permissions: ((request.permissions !== undefined) ?  marshalSqsPermissions(request.permissions, defaults): undefined),
+  permissions: ((request.permissions != null) ?  marshalSqsPermissions(request.permissions, defaults): undefined),
 })

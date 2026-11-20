@@ -20,5 +20,7 @@ export type {
   ServerlessFunctionsFunctionInfo,
   ServerlessSqldbBackupInfo,
   VpcPrivateNetworkInfo,
+  WoflDefinitionInfo,
+  WoflRunInfo,
 } from './types.gen.js'
 export * as ValidationRules from './validation-rules.gen.js'

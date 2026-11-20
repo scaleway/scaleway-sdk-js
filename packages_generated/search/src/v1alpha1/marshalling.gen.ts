@@ -11,6 +11,8 @@ import type {
   ServerlessFunctionsFunctionInfo,
   ServerlessSqldbBackupInfo,
   VpcPrivateNetworkInfo,
+  WoflDefinitionInfo,
+  WoflRunInfo,
   Resource,
   SearchResourcesResponse,
 } from './types.gen.js'
@@ -99,6 +101,30 @@ const unmarshalVpcPrivateNetworkInfo = (data: unknown): VpcPrivateNetworkInfo =>
   } as VpcPrivateNetworkInfo
 }
 
+const unmarshalWoflDefinitionInfo = (data: unknown): WoflDefinitionInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WoflDefinitionInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    workflowId: data.workflow_id,
+  } as WoflDefinitionInfo
+}
+
+const unmarshalWoflRunInfo = (data: unknown): WoflRunInfo => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'WoflRunInfo' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    workflowId: data.workflow_id,
+  } as WoflRunInfo
+}
+
 const unmarshalResource = (data: unknown): Resource => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -107,23 +133,25 @@ const unmarshalResource = (data: unknown): Resource => {
   }
 
   return {
-    baremetalServerInfo: data.baremetal_server_info ? unmarshalBrmServerInfo(data.baremetal_server_info) : undefined,
-    createdAt: unmarshalDate(data.created_at),
-    global: data.global,
+    baremetalServerInfo: data.baremetal_server_info ? unmarshalBrmServerInfo(data.baremetal_server_info) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    global: data.global ?? null,
     id: data.id,
-    name: data.name,
-    obsDatasourceInfo: data.obs_datasource_info ? unmarshalObsDatasourceInfo(data.obs_datasource_info) : undefined,
-    obsExporterInfo: data.obs_exporter_info ? unmarshalObsExporterInfo(data.obs_exporter_info) : undefined,
+    name: data.name ?? null,
+    obsDatasourceInfo: data.obs_datasource_info ? unmarshalObsDatasourceInfo(data.obs_datasource_info) : null,
+    obsExporterInfo: data.obs_exporter_info ? unmarshalObsExporterInfo(data.obs_exporter_info) : null,
     organizationId: data.organization_id,
-    projectId: data.project_id,
-    region: data.region,
-    serverlessContainersContainerInfo: data.serverless_containers_container_info ? unmarshalServerlessContainersContainerInfo(data.serverless_containers_container_info) : undefined,
-    serverlessFunctionsFunctionInfo: data.serverless_functions_function_info ? unmarshalServerlessFunctionsFunctionInfo(data.serverless_functions_function_info) : undefined,
-    serverlessSqldbBackupInfo: data.serverless_sqldb_backup_info ? unmarshalServerlessSqldbBackupInfo(data.serverless_sqldb_backup_info) : undefined,
+    projectId: data.project_id ?? null,
+    region: data.region ?? null,
+    serverlessContainersContainerInfo: data.serverless_containers_container_info ? unmarshalServerlessContainersContainerInfo(data.serverless_containers_container_info) : null,
+    serverlessFunctionsFunctionInfo: data.serverless_functions_function_info ? unmarshalServerlessFunctionsFunctionInfo(data.serverless_functions_function_info) : null,
+    serverlessSqldbBackupInfo: data.serverless_sqldb_backup_info ? unmarshalServerlessSqldbBackupInfo(data.serverless_sqldb_backup_info) : null,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
-    vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : undefined,
-    zone: data.zone,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    vpcPrivateNetworkInfo: data.vpc_private_network_info ? unmarshalVpcPrivateNetworkInfo(data.vpc_private_network_info) : null,
+    woflDefinitionInfo: data.wofl_definition_info ? unmarshalWoflDefinitionInfo(data.wofl_definition_info) : null,
+    woflRunInfo: data.wofl_run_info ? unmarshalWoflRunInfo(data.wofl_run_info) : null,
+    zone: data.zone ?? null,
   } as Resource
 }
 

@@ -55,7 +55,7 @@ import { useDataLoader } from "${v.dataLoaderPackage}"`,
   const { ${v.apiVarName} } = ${v.apiHookName}()
   const key = [${v.keyArray}]
 
-  return useDataLoader(key, () => ${v.apiVarName}.${v.methodName}(), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => ${v.apiVarName}.${v.methodName}({ signal }), dataloaderConfig)
 }`
 
   if (v.isInfinite) {
@@ -67,7 +67,7 @@ import { useDataLoader } from "${v.dataLoaderPackage}"`,
   const { ${v.apiVarName} } = ${v.apiHookName}()
   const key = [${v.keyArray}]
 
-  return useInfiniteDataLoader(key, (requestParams) => ${v.apiVarName}.${v.methodName}(requestParams), params, pageParamKey, dataloaderConfig)
+  return useInfiniteDataLoader(key, (requestParams, { signal }) => ${v.apiVarName}.${v.methodName}(requestParams, { signal }), params, pageParamKey, dataloaderConfig)
 }`
   } else if (v.hasParams) {
     body = `export const ${v.hookName} = (
@@ -77,7 +77,7 @@ import { useDataLoader } from "${v.dataLoaderPackage}"`,
   const { ${v.apiVarName} } = ${v.apiHookName}()
   const key = [${v.keyArray}]
 
-  return useDataLoader(key, () => ${v.apiVarName}.${v.methodName}(params)${v.isAll ? '.all()' : ''}, dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => ${v.apiVarName}.${v.methodName}(params, { signal })${v.isAll ? '.all()' : ''}, dataloaderConfig)
 }`
   }
 

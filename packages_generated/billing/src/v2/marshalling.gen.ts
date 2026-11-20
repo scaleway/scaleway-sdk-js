@@ -28,11 +28,11 @@ export const unmarshalBudgetAlertNotification = (data: unknown): BudgetAlertNoti
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     recipients: data.recipients,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as BudgetAlertNotification
 }
 
@@ -44,11 +44,11 @@ export const unmarshalBudgetAlert = (data: unknown): BudgetAlert => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     notifications: unmarshalArrayOfObject(data.notifications, unmarshalBudgetAlertNotification),
     threshold: data.threshold,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as BudgetAlert
 }
 
@@ -61,12 +61,12 @@ export const unmarshalBudget = (data: unknown): Budget => {
 
   return {
     alerts: unmarshalArrayOfObject(data.alerts, unmarshalBudgetAlert),
-    consumptionLimit: data.consumption_limit ? unmarshalMoney(data.consumption_limit) : undefined,
-    createdAt: unmarshalDate(data.created_at),
+    consumptionLimit: data.consumption_limit ? unmarshalMoney(data.consumption_limit) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     enabled: data.enabled,
     id: data.id,
     organizationId: data.organization_id,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Budget
 }
 
@@ -78,12 +78,12 @@ export const unmarshalElectronicAddress = (data: unknown): ElectronicAddress => 
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     organizationId: data.organization_id,
-    startsAt: unmarshalDate(data.starts_at),
-    stopsAt: unmarshalDate(data.stops_at),
-    updatedAt: unmarshalDate(data.updated_at),
+    startsAt: unmarshalDate(data.starts_at) ?? null,
+    stopsAt: unmarshalDate(data.stops_at) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     value: data.value,
   } as ElectronicAddress
 }

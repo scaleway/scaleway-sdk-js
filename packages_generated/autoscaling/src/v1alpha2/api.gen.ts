@@ -62,6 +62,9 @@ export class API extends ParentAPI {
         'pl-waw-1',
         'pl-waw-2',
         'pl-waw-3',
+        'it-mil-1',
+        'it-mil-2',
+        'it-mil-3',
       ],
     })
   
@@ -140,7 +143,7 @@ settings.
         body: JSON.stringify(
           marshalCreateGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups`,
         signal: options?.signal,
@@ -160,7 +163,7 @@ Its main use case is applying changes if the instance template has been updated.
     this.client.fetch<Group>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}/refresh`,
         signal: options?.signal,
@@ -182,7 +185,7 @@ name, tags, template, scaling policy, and load balancer settings.
         body: JSON.stringify(
           marshalUpdateGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/autoscaling/v1alpha2/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/groups/${validatePathParam('groupId', request.groupId)}`,
         signal: options?.signal,

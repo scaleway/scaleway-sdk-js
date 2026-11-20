@@ -3,6 +3,7 @@
 import type {
   DiscountDiscountMode,
   DiscountFilterType,
+  DiscountLineOrigin,
   DownloadInvoiceRequestFileType,
   ExportInvoicesRequestFileType,
   ExportInvoicesRequestOrderBy,
@@ -32,6 +33,17 @@ export const DISCOUNT_FILTER_TYPES: DiscountFilterType[] = [
   'resource_name',
   'region',
   'zone',
+]
+
+/** Lists all values of the enum {@link DiscountLineOrigin}. */
+export const DISCOUNT_LINE_ORIGINS: DiscountLineOrigin[] = [
+  'unknown_origin',
+  'discount',
+  'contractual_commitment_range',
+  'savings_plan_activation',
+  'credit_note_rebate',
+  'reserved_resource_activation',
+  'offer_included',
 ]
 
 /** Lists all values of the enum {@link DownloadInvoiceRequestFileType}. */

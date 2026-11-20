@@ -17,6 +17,7 @@ import type {
   PrivateNetworkOption,
   PublicBandwidthOption,
   RemoteAccessOption,
+  ServerCommitment,
   ServerInstall,
   ServerOption,
   ServerRescueServer,
@@ -27,6 +28,7 @@ import type {
   Disk,
   GPU,
   Memory,
+  OfferCommitment,
   OfferOptionOffer,
   PersistentMemory,
   RaidController,
@@ -58,8 +60,10 @@ import type {
   StartBMCAccessRequest,
   StartServerRequest,
   UpdateIPRequest,
+  UpdateServerCommitmentRequest,
   UpdateServerRequest,
   UpdateSettingRequest,
+  UpgradeServerCommitmentRequest,
   ValidatePartitioningSchemaRequest,
 } from './types.gen.js'
 
@@ -158,7 +162,7 @@ export const unmarshalSchema = (data: unknown): Schema => {
     disks: unmarshalArrayOfObject(data.disks, unmarshalSchemaDisk),
     filesystems: unmarshalArrayOfObject(data.filesystems, unmarshalSchemaFilesystem),
     raids: unmarshalArrayOfObject(data.raids, unmarshalSchemaRAID),
-    zfs: data.zfs ? unmarshalSchemaZFS(data.zfs) : undefined,
+    zfs: data.zfs ? unmarshalSchemaZFS(data.zfs) : null,
   } as Schema
 }
 
@@ -237,6 +241,23 @@ const unmarshalRemoteAccessOption = (data: unknown): RemoteAccessOption => {
   } as RemoteAccessOption
 }
 
+const unmarshalServerCommitment = (data: unknown): ServerCommitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'ServerCommitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    autoRenewal: data.auto_renewal,
+    discountRatePercent: data.discount_rate_percent,
+    endAt: unmarshalDate(data.end_at) ?? null,
+    period: data.period,
+    renewAt: unmarshalDate(data.renew_at) ?? null,
+    startedAt: unmarshalDate(data.started_at) ?? null,
+  } as ServerCommitment
+}
+
 const unmarshalServerInstall = (data: unknown): ServerInstall => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -246,8 +267,10 @@ const unmarshalServerInstall = (data: unknown): ServerInstall => {
 
   return {
     hostname: data.hostname,
+    networkBootPersistent: data.network_boot_persistent,
+    networkBootUrl: data.network_boot_url,
     osId: data.os_id,
-    partitioningSchema: data.partitioning_schema ? unmarshalSchema(data.partitioning_schema) : undefined,
+    partitioningSchema: data.partitioning_schema ? unmarshalSchema(data.partitioning_schema) : null,
     serviceUrl: data.service_url,
     serviceUser: data.service_user,
     sshKeyIds: data.ssh_key_ids,
@@ -264,16 +287,17 @@ const unmarshalServerOption = (data: unknown): ServerOption => {
   }
 
   return {
-    certification: data.certification ? unmarshalCertificationOption(data.certification) : undefined,
-    expiresAt: unmarshalDate(data.expires_at),
+    certification: data.certification ? unmarshalCertificationOption(data.certification) : null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
-    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
+    license: data.license ? unmarshalLicenseOption(data.license) : null,
     manageable: data.manageable,
     name: data.name,
-    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : undefined,
-    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : undefined,
-    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : undefined,
+    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : null,
+    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : null,
+    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : null,
     status: data.status,
+    type: data.type,
   } as ServerOption
 }
 
@@ -299,11 +323,12 @@ export const unmarshalServer = (data: unknown): Server => {
 
   return {
     bootType: data.boot_type,
-    createdAt: unmarshalDate(data.created_at),
+    commitment: data.commitment ? unmarshalServerCommitment(data.commitment) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     domain: data.domain,
     id: data.id,
-    install: data.install ? unmarshalServerInstall(data.install) : undefined,
+    install: data.install ? unmarshalServerInstall(data.install) : null,
     ips: unmarshalArrayOfObject(data.ips, unmarshalIP),
     name: data.name,
     offerId: data.offer_id,
@@ -313,11 +338,14 @@ export const unmarshalServer = (data: unknown): Server => {
     pingStatus: data.ping_status,
     projectId: data.project_id,
     protected: data.protected,
-    rescueServer: data.rescue_server ? unmarshalServerRescueServer(data.rescue_server) : undefined,
+    rescueServer: data.rescue_server ? unmarshalServerRescueServer(data.rescue_server) : null,
+    scheduledDeletion: data.scheduled_deletion,
+    scheduledDeletionAt: unmarshalDate(data.scheduled_deletion_at) ?? null,
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
-    userData: data.user_data,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    userData: data.user_data ?? null,
     zone: data.zone,
   } as Server
 }
@@ -330,7 +358,7 @@ const unmarshalOSOSField = (data: unknown): OSOSField => {
   }
 
   return {
-    defaultValue: data.default_value,
+    defaultValue: data.default_value ?? null,
     editable: data.editable,
     required: data.required,
   } as OSOSField
@@ -346,18 +374,21 @@ export const unmarshalOS = (data: unknown): OS => {
   return {
     allowed: data.allowed,
     cloudInitSupported: data.cloud_init_supported,
-    cloudInitVersion: data.cloud_init_version,
+    cloudInitVersion: data.cloud_init_version ?? null,
     customPartitioningSupported: data.custom_partitioning_supported,
     enabled: data.enabled,
     id: data.id,
     licenseRequired: data.license_required,
     logoUrl: data.logo_url,
     name: data.name,
-    password: data.password ? unmarshalOSOSField(data.password) : undefined,
-    servicePassword: data.service_password ? unmarshalOSOSField(data.service_password) : undefined,
-    serviceUser: data.service_user ? unmarshalOSOSField(data.service_user) : undefined,
-    ssh: data.ssh ? unmarshalOSOSField(data.ssh) : undefined,
-    user: data.user ? unmarshalOSOSField(data.user) : undefined,
+    networkBoot: data.network_boot ? unmarshalOSOSField(data.network_boot) : null,
+    networkBootPersistentEditable: data.network_boot_persistent_editable,
+    password: data.password ? unmarshalOSOSField(data.password) : null,
+    servicePassword: data.service_password ? unmarshalOSOSField(data.service_password) : null,
+    serviceUser: data.service_user ? unmarshalOSOSField(data.service_user) : null,
+    srn: data.srn,
+    ssh: data.ssh ? unmarshalOSOSField(data.ssh) : null,
+    user: data.user ? unmarshalOSOSField(data.user) : null,
     version: data.version,
     zone: data.zone,
   } as OS
@@ -421,6 +452,20 @@ const unmarshalMemory = (data: unknown): Memory => {
   } as Memory
 }
 
+const unmarshalOfferCommitment = (data: unknown): OfferCommitment => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'OfferCommitment' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    discountRatePercent: data.discount_rate_percent,
+    noFee: data.no_fee,
+    period: data.period,
+  } as OfferCommitment
+}
+
 const unmarshalOfferOptionOffer = (data: unknown): OfferOptionOffer => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -429,18 +474,19 @@ const unmarshalOfferOptionOffer = (data: unknown): OfferOptionOffer => {
   }
 
   return {
-    certification: data.certification ? unmarshalCertificationOption(data.certification) : undefined,
+    certification: data.certification ? unmarshalCertificationOption(data.certification) : null,
     enabled: data.enabled,
     id: data.id,
-    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
+    license: data.license ? unmarshalLicenseOption(data.license) : null,
     manageable: data.manageable,
     name: data.name,
-    osId: data.os_id,
-    price: data.price ? unmarshalMoney(data.price) : undefined,
-    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : undefined,
-    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : undefined,
-    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : undefined,
+    osId: data.os_id ?? null,
+    price: data.price ? unmarshalMoney(data.price) : null,
+    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : null,
+    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : null,
+    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : null,
     subscriptionPeriod: data.subscription_period,
+    type: data.type,
   } as OfferOptionOffer
 }
 
@@ -481,27 +527,29 @@ export const unmarshalOffer = (data: unknown): Offer => {
   return {
     bandwidth: data.bandwidth,
     commercialRange: data.commercial_range,
+    commitmentsAvailable: unmarshalArrayOfObject(data.commitments_available, unmarshalOfferCommitment),
     cpus: unmarshalArrayOfObject(data.cpus, unmarshalCPU),
     disks: unmarshalArrayOfObject(data.disks, unmarshalDisk),
-    dualAttach: data.dual_attach,
+    dualAttach: data.dual_attach ?? null,
     enable: data.enable,
-    fee: data.fee ? unmarshalMoney(data.fee) : undefined,
+    fee: data.fee ? unmarshalMoney(data.fee) : null,
     gpus: unmarshalArrayOfObject(data.gpus, unmarshalGPU),
     id: data.id,
     incompatibleOsIds: data.incompatible_os_ids,
     maxBandwidth: data.max_bandwidth,
     memories: unmarshalArrayOfObject(data.memories, unmarshalMemory),
-    monthlyOfferId: data.monthly_offer_id,
+    monthlyOfferId: data.monthly_offer_id ?? null,
     name: data.name,
     operationPath: data.operation_path,
     options: unmarshalArrayOfObject(data.options, unmarshalOfferOptionOffer),
     persistentMemories: unmarshalArrayOfObject(data.persistent_memories, unmarshalPersistentMemory),
-    pricePerHour: data.price_per_hour ? unmarshalMoney(data.price_per_hour) : undefined,
-    pricePerMonth: data.price_per_month ? unmarshalMoney(data.price_per_month) : undefined,
+    pricePerHour: data.price_per_hour ? unmarshalMoney(data.price_per_hour) : null,
+    pricePerMonth: data.price_per_month ? unmarshalMoney(data.price_per_month) : null,
     privateBandwidth: data.private_bandwidth,
     quotaName: data.quota_name,
     raidControllers: unmarshalArrayOfObject(data.raid_controllers, unmarshalRaidController),
     sharedBandwidth: data.shared_bandwidth,
+    srn: data.srn,
     stock: data.stock,
     subscriptionPeriod: data.subscription_period,
     tags: data.tags,
@@ -517,14 +565,17 @@ export const unmarshalOption = (data: unknown): Option => {
   }
 
   return {
-    certification: data.certification ? unmarshalCertificationOption(data.certification) : undefined,
+    certification: data.certification ? unmarshalCertificationOption(data.certification) : null,
     id: data.id,
-    license: data.license ? unmarshalLicenseOption(data.license) : undefined,
+    license: data.license ? unmarshalLicenseOption(data.license) : null,
     manageable: data.manageable,
     name: data.name,
-    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : undefined,
-    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : undefined,
-    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : undefined,
+    privateNetwork: data.private_network ? unmarshalPrivateNetworkOption(data.private_network) : null,
+    publicBandwidth: data.public_bandwidth ? unmarshalPublicBandwidthOption(data.public_bandwidth) : null,
+    remoteAccess: data.remote_access ? unmarshalRemoteAccessOption(data.remote_access) : null,
+    srn: data.srn,
+    type: data.type,
+    zone: data.zone,
   } as Option
 }
 
@@ -536,14 +587,14 @@ export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwo
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     serverId: data.server_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-    vlan: data.vlan,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    vlan: data.vlan ?? null,
   } as ServerPrivateNetwork
 }
 
@@ -558,7 +609,9 @@ export const unmarshalSetting = (data: unknown): Setting => {
     enabled: data.enabled,
     id: data.id,
     projectId: data.project_id,
+    srn: data.srn,
     type: data.type,
+    zone: data.zone,
   } as Setting
 }
 
@@ -570,10 +623,13 @@ export const unmarshalBMCAccess = (data: unknown): BMCAccess => {
   }
 
   return {
-    expiresAt: unmarshalDate(data.expires_at),
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     login: data.login,
     password: data.password,
+    serverId: data.server_id,
+    srn: data.srn,
     url: data.url,
+    zone: data.zone,
   } as BMCAccess
 }
 
@@ -597,7 +653,7 @@ export const unmarshalGetServerMetricsResponse = (data: unknown): GetServerMetri
   }
 
   return {
-    pings: data.pings ? unmarshalTimeSeries(data.pings) : undefined,
+    pings: data.pings ? unmarshalTimeSeries(data.pings) : null,
   } as GetServerMetricsResponse
 }
 
@@ -649,9 +705,9 @@ const unmarshalServerEvent = (data: unknown): ServerEvent => {
 
   return {
     action: data.action,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as ServerEvent
 }
 
@@ -780,7 +836,7 @@ export const marshalSchema = (
   disks:  request.disks.map(elt => marshalSchemaDisk(elt, defaults)),
   filesystems:  request.filesystems.map(elt => marshalSchemaFilesystem(elt, defaults)),
   raids:  request.raids.map(elt => marshalSchemaRAID(elt, defaults)),
-  zfs: ((request.zfs !== undefined) ?  marshalSchemaZFS(request.zfs, defaults): undefined),
+  zfs: ((request.zfs != null) ?  marshalSchemaZFS(request.zfs, defaults): undefined),
 })
 
 const marshalCreateServerRequestInstall = (
@@ -788,8 +844,10 @@ const marshalCreateServerRequestInstall = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   hostname: request.hostname,
+  network_boot_persistent: request.networkBootPersistent,
+  network_boot_url: request.networkBootUrl,
   os_id: request.osId,
-  partitioning_schema: ((request.partitioningSchema !== undefined) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
+  partitioning_schema: ((request.partitioningSchema != null) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
   password: request.password,
   service_password: request.servicePassword,
   service_user: request.serviceUser,
@@ -801,8 +859,9 @@ export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
+  commitment_period: request.commitmentPeriod,
   description: request.description,
-  install: ((request.install !== undefined) ?  marshalCreateServerRequestInstall(request.install, defaults): undefined),
+  install: ((request.install != null) ?  marshalCreateServerRequestInstall(request.install, defaults): undefined),
   name: request.name,
   offer_id: request.offerId,
   option_ids: request.optionIds,
@@ -839,8 +898,8 @@ export const marshalBatchCreateServersRequest = (
   request: BatchCreateServersRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  common_configuration: ((request.commonConfiguration !== undefined) ?  marshalCreateServerRequest(request.commonConfiguration, defaults): undefined),
-  servers: ((request.servers !== undefined) ?  request.servers.map(elt => marshalBatchCreateServersRequestServerConfig(elt, defaults)): undefined),
+  common_configuration: ((request.commonConfiguration != null) ?  marshalCreateServerRequest(request.commonConfiguration, defaults): undefined),
+  servers: ((request.servers != null) ?  request.servers.map(elt => marshalBatchCreateServersRequestServerConfig(elt, defaults)): undefined),
 })
 
 export const marshalInstallServerRequest = async (
@@ -848,14 +907,16 @@ export const marshalInstallServerRequest = async (
   defaults: DefaultValues,
 ): Promise<Record<string, unknown>> => ({
   hostname: request.hostname,
+  network_boot_persistent: request.networkBootPersistent,
+  network_boot_url: request.networkBootUrl,
   os_id: request.osId,
-  partitioning_schema: ((request.partitioningSchema !== undefined) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
+  partitioning_schema: ((request.partitioningSchema != null) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
   password: request.password,
   service_password: request.servicePassword,
   service_user: request.serviceUser,
   ssh_key_ids: request.sshKeyIds,
   user: request.user,
-  user_data: ((request.userData !== undefined) ?  await marshalBlobToScwFile(request.userData): undefined),
+  user_data: ((request.userData != null) ?  await marshalBlobToScwFile(request.userData): undefined),
 })
 
 export const marshalPrivateNetworkApiAddServerPrivateNetworkRequest = (
@@ -902,6 +963,13 @@ export const marshalUpdateIPRequest = (
   reverse: request.reverse,
 })
 
+export const marshalUpdateServerCommitmentRequest = (
+  request: UpdateServerCommitmentRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  auto_renewal: request.autoRenewal,
+})
+
 export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
   defaults: DefaultValues,
@@ -909,6 +977,7 @@ export const marshalUpdateServerRequest = (
   description: request.description,
   name: request.name,
   protected: request.protected,
+  scheduled_deletion: request.scheduledDeletion,
   tags: request.tags,
   user_data: request.userData,
 })
@@ -920,11 +989,18 @@ export const marshalUpdateSettingRequest = (
   enabled: request.enabled,
 })
 
+export const marshalUpgradeServerCommitmentRequest = (
+  request: UpgradeServerCommitmentRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  period: request.period,
+})
+
 export const marshalValidatePartitioningSchemaRequest = (
   request: ValidatePartitioningSchemaRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   offer_id: request.offerId,
   os_id: request.osId,
-  partitioning_schema: ((request.partitioningSchema !== undefined) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
+  partitioning_schema: ((request.partitioningSchema != null) ?  marshalSchema(request.partitioningSchema, defaults): undefined),
 })

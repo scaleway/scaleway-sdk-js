@@ -6,6 +6,9 @@ import type { Zone as ScwZone, Region as ScwRegion, DefaultValues } from '@scale
 import type {
   ContactPointEmail,
   ContactPoint,
+  DataSourceLogsLimits,
+  DataSourceMetricsLimits,
+  DataSourceTracesLimits,
   DataSource,
   ExporterDatadogDestination,
   ExporterOTLPDestination,
@@ -17,6 +20,7 @@ import type {
   AlertManager,
   DisableAlertRulesResponse,
   EnableAlertRulesResponse,
+  GetConfigResponseBounds,
   GetConfigResponseRetention,
   GetConfigResponse,
   RulesCount,
@@ -77,10 +81,47 @@ export const unmarshalContactPoint = (data: unknown): ContactPoint => {
   }
 
   return {
-    email: data.email ? unmarshalContactPointEmail(data.email) : undefined,
+    email: data.email ? unmarshalContactPointEmail(data.email) : null,
     region: data.region,
     sendResolvedNotifications: data.send_resolved_notifications,
   } as ContactPoint
+}
+
+const unmarshalDataSourceLogsLimits = (data: unknown): DataSourceLogsLimits => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DataSourceLogsLimits' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ingestionRateLimitBytesPerSecond: data.ingestion_rate_limit_bytes_per_second ?? null,
+  } as DataSourceLogsLimits
+}
+
+const unmarshalDataSourceMetricsLimits = (data: unknown): DataSourceMetricsLimits => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DataSourceMetricsLimits' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ingestionRateLimitSamplesPerSecond: data.ingestion_rate_limit_samples_per_second ?? null,
+    maxSeries: data.max_series ?? null,
+  } as DataSourceMetricsLimits
+}
+
+const unmarshalDataSourceTracesLimits = (data: unknown): DataSourceTracesLimits => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'DataSourceTracesLimits' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    ingestionRateLimitBytesPerSecond: data.ingestion_rate_limit_bytes_per_second ?? null,
+  } as DataSourceTracesLimits
 }
 
 export const unmarshalDataSource = (data: unknown): DataSource => {
@@ -91,17 +132,21 @@ export const unmarshalDataSource = (data: unknown): DataSource => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    currentMonthUsage: data.current_month_usage,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    currentMonthUsage: data.current_month_usage ?? null,
     id: data.id,
+    logsLimits: data.logs_limits ? unmarshalDataSourceLogsLimits(data.logs_limits) : null,
+    metricsLimits: data.metrics_limits ? unmarshalDataSourceMetricsLimits(data.metrics_limits) : null,
     name: data.name,
     origin: data.origin,
     projectId: data.project_id,
     region: data.region,
     retentionDays: data.retention_days,
+    srn: data.srn,
     synchronizedWithGrafana: data.synchronized_with_grafana,
+    tracesLimits: data.traces_limits ? unmarshalDataSourceTracesLimits(data.traces_limits) : null,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     url: data.url,
   } as DataSource
 }
@@ -114,8 +159,8 @@ const unmarshalExporterDatadogDestination = (data: unknown): ExporterDatadogDest
   }
 
   return {
-    apiKey: data.api_key,
-    endpoint: data.endpoint,
+    apiKey: data.api_key ?? null,
+    endpoint: data.endpoint ?? null,
   } as ExporterDatadogDestination
 }
 
@@ -140,17 +185,18 @@ export const unmarshalExporter = (data: unknown): Exporter => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    datadogDestination: data.datadog_destination ? unmarshalExporterDatadogDestination(data.datadog_destination) : undefined,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    datadogDestination: data.datadog_destination ? unmarshalExporterDatadogDestination(data.datadog_destination) : null,
     datasourceId: data.datasource_id,
     description: data.description,
     exportedProducts: data.exported_products,
     id: data.id,
     name: data.name,
-    otlpDestination: data.otlp_destination ? unmarshalExporterOTLPDestination(data.otlp_destination) : undefined,
+    otlpDestination: data.otlp_destination ? unmarshalExporterOTLPDestination(data.otlp_destination) : null,
     region: data.region,
+    srn: data.srn,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Exporter
 }
 
@@ -180,7 +226,7 @@ export const unmarshalGrafanaUser = (data: unknown): GrafanaUser => {
   return {
     id: data.id,
     login: data.login,
-    password: data.password,
+    password: data.password ?? null,
     role: data.role,
   } as GrafanaUser
 }
@@ -196,9 +242,9 @@ export const unmarshalPlan = (data: unknown): Plan => {
     logsIngestionPrice: data.logs_ingestion_price,
     monthlyPrice: data.monthly_price,
     name: data.name,
-    retentionLogsInterval: data.retention_logs_interval,
-    retentionMetricsInterval: data.retention_metrics_interval,
-    retentionTracesInterval: data.retention_traces_interval,
+    retentionLogsInterval: data.retention_logs_interval ?? null,
+    retentionMetricsInterval: data.retention_metrics_interval ?? null,
+    retentionTracesInterval: data.retention_traces_interval ?? null,
     sampleIngestionPrice: data.sample_ingestion_price,
     tracesIngestionPrice: data.traces_ingestion_price,
   } as Plan
@@ -212,14 +258,14 @@ export const unmarshalToken = (data: unknown): Token => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     projectId: data.project_id,
     region: data.region,
     scopes: data.scopes,
-    secretKey: data.secret_key,
-    updatedAt: unmarshalDate(data.updated_at),
+    secretKey: data.secret_key ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Token
 }
 
@@ -232,9 +278,11 @@ export const unmarshalAlertManager = (data: unknown): AlertManager => {
 
   return {
     alertManagerEnabled: data.alert_manager_enabled,
-    alertManagerUrl: data.alert_manager_url,
+    alertManagerUrl: data.alert_manager_url ?? null,
     managedAlertsEnabled: data.managed_alerts_enabled,
+    projectId: data.project_id,
     region: data.region,
+    srn: data.srn,
   } as AlertManager
 }
 
@@ -262,6 +310,20 @@ export const unmarshalEnableAlertRulesResponse = (data: unknown): EnableAlertRul
   } as EnableAlertRulesResponse
 }
 
+const unmarshalGetConfigResponseBounds = (data: unknown): GetConfigResponseBounds => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'GetConfigResponseBounds' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    defaultValue: data.default_value,
+    maxValue: data.max_value,
+    minValue: data.min_value,
+  } as GetConfigResponseBounds
+}
+
 const unmarshalGetConfigResponseRetention = (data: unknown): GetConfigResponseRetention => {
   if (!isJSONObject(data)) {
     throw new TypeError(
@@ -284,11 +346,15 @@ export const unmarshalGetConfigResponse = (data: unknown): GetConfigResponse => 
   }
 
   return {
-    customLogsRetention: data.custom_logs_retention ? unmarshalGetConfigResponseRetention(data.custom_logs_retention) : undefined,
-    customMetricsRetention: data.custom_metrics_retention ? unmarshalGetConfigResponseRetention(data.custom_metrics_retention) : undefined,
-    customTracesRetention: data.custom_traces_retention ? unmarshalGetConfigResponseRetention(data.custom_traces_retention) : undefined,
-    productLogsRetention: data.product_logs_retention ? unmarshalGetConfigResponseRetention(data.product_logs_retention) : undefined,
-    productMetricsRetention: data.product_metrics_retention ? unmarshalGetConfigResponseRetention(data.product_metrics_retention) : undefined,
+    customLogsIngestionRateLimitBytesPerSecond: data.custom_logs_ingestion_rate_limit_bytes_per_second ? unmarshalGetConfigResponseBounds(data.custom_logs_ingestion_rate_limit_bytes_per_second) : null,
+    customLogsRetention: data.custom_logs_retention ? unmarshalGetConfigResponseRetention(data.custom_logs_retention) : null,
+    customMetricsIngestionRateLimitSamplesPerSecond: data.custom_metrics_ingestion_rate_limit_samples_per_second ? unmarshalGetConfigResponseBounds(data.custom_metrics_ingestion_rate_limit_samples_per_second) : null,
+    customMetricsMaxSeries: data.custom_metrics_max_series ? unmarshalGetConfigResponseBounds(data.custom_metrics_max_series) : null,
+    customMetricsRetention: data.custom_metrics_retention ? unmarshalGetConfigResponseRetention(data.custom_metrics_retention) : null,
+    customTracesIngestionRateLimitBytesPerSecond: data.custom_traces_ingestion_rate_limit_bytes_per_second ? unmarshalGetConfigResponseBounds(data.custom_traces_ingestion_rate_limit_bytes_per_second) : null,
+    customTracesRetention: data.custom_traces_retention ? unmarshalGetConfigResponseRetention(data.custom_traces_retention) : null,
+    productLogsRetention: data.product_logs_retention ? unmarshalGetConfigResponseRetention(data.product_logs_retention) : null,
+    productMetricsRetention: data.product_metrics_retention ? unmarshalGetConfigResponseRetention(data.product_metrics_retention) : null,
   } as GetConfigResponse
 }
 
@@ -329,6 +395,8 @@ export const unmarshalGrafana = (data: unknown): Grafana => {
 
   return {
     grafanaUrl: data.grafana_url,
+    projectId: data.project_id,
+    srn: data.srn,
   } as Grafana
 }
 
@@ -361,11 +429,11 @@ const unmarshalAlert = (data: unknown): Alert => {
     duration: data.duration,
     name: data.name,
     preconfigured: data.preconfigured,
-    preconfiguredData: data.preconfigured_data ? unmarshalPreconfiguredAlertData(data.preconfigured_data) : undefined,
+    preconfiguredData: data.preconfigured_data ? unmarshalPreconfiguredAlertData(data.preconfigured_data) : null,
     region: data.region,
     rule: data.rule,
     ruleStatus: data.rule_status,
-    state: data.state ? data.state : undefined,
+    state: data.state ? data.state : null,
   } as Alert
 }
 
@@ -511,10 +579,10 @@ const unmarshalUsage = (data: unknown): Usage => {
   }
 
   return {
-    dataSourceId: data.data_source_id,
+    dataSourceId: data.data_source_id ?? null,
     dataSourceOrigin: data.data_source_origin,
     dataSourceType: data.data_source_type,
-    interval: data.interval,
+    interval: data.interval ?? null,
     projectId: data.project_id,
     quantityOverInterval: data.quantity_over_interval,
     region: data.region,
@@ -530,11 +598,11 @@ export const unmarshalUsageOverview = (data: unknown): UsageOverview => {
   }
 
   return {
-    externalLogsUsage: data.external_logs_usage ? unmarshalUsage(data.external_logs_usage) : undefined,
-    externalMetricsUsage: data.external_metrics_usage ? unmarshalUsage(data.external_metrics_usage) : undefined,
-    externalTracesUsage: data.external_traces_usage ? unmarshalUsage(data.external_traces_usage) : undefined,
-    scalewayLogsUsage: data.scaleway_logs_usage ? unmarshalUsage(data.scaleway_logs_usage) : undefined,
-    scalewayMetricsUsage: data.scaleway_metrics_usage ? unmarshalUsage(data.scaleway_metrics_usage) : undefined,
+    externalLogsUsage: data.external_logs_usage ? unmarshalUsage(data.external_logs_usage) : null,
+    externalMetricsUsage: data.external_metrics_usage ? unmarshalUsage(data.external_metrics_usage) : null,
+    externalTracesUsage: data.external_traces_usage ? unmarshalUsage(data.external_traces_usage) : null,
+    scalewayLogsUsage: data.scaleway_logs_usage ? unmarshalUsage(data.scaleway_logs_usage) : null,
+    scalewayMetricsUsage: data.scaleway_metrics_usage ? unmarshalUsage(data.scaleway_metrics_usage) : null,
   } as UsageOverview
 }
 
@@ -584,10 +652,32 @@ export const marshalRegionalApiCreateContactPointRequest = (
   send_resolved_notifications: request.sendResolvedNotifications,  
   ...resolveOneOf([
     {param: 'email',
-      value: (request.email !== undefined) ? marshalContactPointEmail(request.email, defaults)
+      value: (request.email != null) ? marshalContactPointEmail(request.email, defaults)
       : undefined,
     },
   ]),
+})
+
+const marshalDataSourceLogsLimits = (
+  request: DataSourceLogsLimits,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ingestion_rate_limit_bytes_per_second: request.ingestionRateLimitBytesPerSecond,
+})
+
+const marshalDataSourceMetricsLimits = (
+  request: DataSourceMetricsLimits,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ingestion_rate_limit_samples_per_second: request.ingestionRateLimitSamplesPerSecond,
+  max_series: request.maxSeries,
+})
+
+const marshalDataSourceTracesLimits = (
+  request: DataSourceTracesLimits,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  ingestion_rate_limit_bytes_per_second: request.ingestionRateLimitBytesPerSecond,
 })
 
 export const marshalRegionalApiCreateDataSourceRequest = (
@@ -597,7 +687,21 @@ export const marshalRegionalApiCreateDataSourceRequest = (
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
   retention_days: request.retentionDays,
-  type: request.type,
+  type: request.type,  
+  ...resolveOneOf([
+    {param: 'metrics_limits',
+      value: (request.metricsLimits != null) ? marshalDataSourceMetricsLimits(request.metricsLimits, defaults)
+      : undefined,
+    },
+    {param: 'logs_limits',
+      value: (request.logsLimits != null) ? marshalDataSourceLogsLimits(request.logsLimits, defaults)
+      : undefined,
+    },
+    {param: 'traces_limits',
+      value: (request.tracesLimits != null) ? marshalDataSourceTracesLimits(request.tracesLimits, defaults)
+      : undefined,
+    },
+  ]),
 })
 
 const marshalExporterDatadogDestination = (
@@ -626,11 +730,11 @@ export const marshalRegionalApiCreateExporterRequest = (
   name: request.name,  
   ...resolveOneOf([
     {param: 'datadog_destination',
-      value: (request.datadogDestination !== undefined) ? marshalExporterDatadogDestination(request.datadogDestination, defaults)
+      value: (request.datadogDestination != null) ? marshalExporterDatadogDestination(request.datadogDestination, defaults)
       : undefined,
     },
     {param: 'otlp_destination',
-      value: (request.otlpDestination !== undefined) ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
+      value: (request.otlpDestination != null) ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
       : undefined,
     },
   ]),
@@ -642,7 +746,7 @@ export const marshalRegionalApiCreateTokenRequest = (
 ): Record<string, unknown> => ({
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  token_scopes: ((request.tokenScopes !== undefined) ?  request.tokenScopes: undefined),
+  token_scopes: ((request.tokenScopes != null) ?  request.tokenScopes: undefined),
 })
 
 export const marshalRegionalApiDeleteContactPointRequest = (
@@ -652,7 +756,7 @@ export const marshalRegionalApiDeleteContactPointRequest = (
   project_id: request.projectId ?? defaults.defaultProjectId,  
   ...resolveOneOf([
     {param: 'email',
-      value: (request.email !== undefined) ? marshalContactPointEmail(request.email, defaults)
+      value: (request.email != null) ? marshalContactPointEmail(request.email, defaults)
       : undefined,
     },
   ]),
@@ -717,7 +821,7 @@ export const marshalRegionalApiUpdateContactPointRequest = (
   send_resolved_notifications: request.sendResolvedNotifications,  
   ...resolveOneOf([
     {param: 'email',
-      value: (request.email !== undefined) ? marshalContactPointEmail(request.email, defaults)
+      value: (request.email != null) ? marshalContactPointEmail(request.email, defaults)
       : undefined,
     },
   ]),
@@ -728,7 +832,21 @@ export const marshalRegionalApiUpdateDataSourceRequest = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   name: request.name,
-  retention_days: request.retentionDays,
+  retention_days: request.retentionDays,  
+  ...resolveOneOf([
+    {param: 'metrics_limits',
+      value: (request.metricsLimits != null) ? marshalDataSourceMetricsLimits(request.metricsLimits, defaults)
+      : undefined,
+    },
+    {param: 'logs_limits',
+      value: (request.logsLimits != null) ? marshalDataSourceLogsLimits(request.logsLimits, defaults)
+      : undefined,
+    },
+    {param: 'traces_limits',
+      value: (request.tracesLimits != null) ? marshalDataSourceTracesLimits(request.tracesLimits, defaults)
+      : undefined,
+    },
+  ]),
 })
 
 export const marshalRegionalApiUpdateExporterRequest = (
@@ -740,11 +858,11 @@ export const marshalRegionalApiUpdateExporterRequest = (
   name: request.name,  
   ...resolveOneOf([
     {param: 'datadog_destination',
-      value: (request.datadogDestination !== undefined) ? marshalExporterDatadogDestination(request.datadogDestination, defaults)
+      value: (request.datadogDestination != null) ? marshalExporterDatadogDestination(request.datadogDestination, defaults)
       : undefined,
     },
     {param: 'otlp_destination',
-      value: (request.otlpDestination !== undefined) ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
+      value: (request.otlpDestination != null) ? marshalExporterOTLPDestination(request.otlpDestination, defaults)
       : undefined,
     },
   ]),

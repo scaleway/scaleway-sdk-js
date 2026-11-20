@@ -47,14 +47,14 @@ const unmarshalSubnet = (data: unknown): Subnet => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     region: data.region,
     srn: data.srn,
     subnet: data.subnet,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vpcId: data.vpc_id,
   } as Subnet
 }
@@ -67,7 +67,7 @@ export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     defaultRoutePropagationEnabled: data.default_route_propagation_enabled,
     dhcpEnabled: data.dhcp_enabled,
     hasObjectStoragePrivateAccess: data.has_object_storage_private_access,
@@ -79,7 +79,7 @@ export const unmarshalPrivateNetwork = (data: unknown): PrivateNetwork => {
     srn: data.srn,
     subnets: unmarshalArrayOfObject(data.subnets, unmarshalSubnet),
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vpcId: data.vpc_id,
   } as PrivateNetwork
 }
@@ -92,19 +92,19 @@ export const unmarshalRoute = (data: unknown): Route => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     destination: data.destination,
     id: data.id,
     isReadOnly: data.is_read_only,
-    nexthopPrivateNetworkId: data.nexthop_private_network_id,
-    nexthopResourceId: data.nexthop_resource_id,
-    nexthopVpcConnectorId: data.nexthop_vpc_connector_id,
+    nexthopPrivateNetworkId: data.nexthop_private_network_id ?? null,
+    nexthopResourceId: data.nexthop_resource_id ?? null,
+    nexthopVpcConnectorId: data.nexthop_vpc_connector_id ?? null,
     region: data.region,
     srn: data.srn,
     tags: data.tags,
-    type: data.type ? data.type : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
+    type: data.type ? data.type : null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vpcId: data.vpc_id,
   } as Route
 }
@@ -117,8 +117,8 @@ export const unmarshalIngressRule = (data: unknown): IngressRule => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
-    description: data.description,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    description: data.description ?? null,
     id: data.id,
     isIpv6: data.is_ipv6,
     nexthopPrivateNetworkId: data.nexthop_private_network_id,
@@ -129,7 +129,7 @@ export const unmarshalIngressRule = (data: unknown): IngressRule => {
     source: data.source,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vpcId: data.vpc_id,
   } as IngressRule
 }
@@ -156,18 +156,18 @@ export const unmarshalVPCConnector = (data: unknown): VPCConnector => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
-    peerInfo: data.peer_info ? unmarshalVPCConnectorPeerInfo(data.peer_info) : undefined,
+    peerInfo: data.peer_info ? unmarshalVPCConnectorPeerInfo(data.peer_info) : null,
     projectId: data.project_id,
     region: data.region,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
     targetVpcId: data.target_vpc_id,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vpcId: data.vpc_id,
   } as VPCConnector
 }
@@ -180,7 +180,7 @@ export const unmarshalVPC = (data: unknown): VPC => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     customRoutesPropagationEnabled: data.custom_routes_propagation_enabled,
     id: data.id,
     isDefault: data.is_default,
@@ -194,7 +194,7 @@ export const unmarshalVPC = (data: unknown): VPC => {
     srn: data.srn,
     tags: data.tags,
     transitivityEnabled: data.transitivity_enabled,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as VPC
 }
 
@@ -220,7 +220,7 @@ const unmarshalAclRule = (data: unknown): AclRule => {
 
   return {
     action: data.action,
-    description: data.description,
+    description: data.description ?? null,
     destination: data.destination,
     dstPortHigh: data.dst_port_high,
     dstPortLow: data.dst_port_low,

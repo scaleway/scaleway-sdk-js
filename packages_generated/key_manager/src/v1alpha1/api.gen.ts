@@ -20,6 +20,8 @@ import {
   marshalEncryptRequest,
   unmarshalEncryptResponse,
   marshalGenerateDataKeyRequest,
+  marshalGenerateKeyMaterialImportParametersRequest,
+  unmarshalGenerateKeyMaterialImportParametersResponse,
   marshalImportKeyMaterialRequest,
   unmarshalKey,
   unmarshalListAlgorithmsResponse,
@@ -48,6 +50,8 @@ import type {
   EncryptRequest,
   EncryptResponse,
   GenerateDataKeyRequest,
+  GenerateKeyMaterialImportParametersRequest,
+  GenerateKeyMaterialImportParametersResponse,
   GetKeyRequest,
   GetPublicKeyRequest,
   ImportKeyMaterialRequest,
@@ -109,7 +113,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys`,
         signal: options?.signal,
@@ -164,7 +168,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}`,
         signal: options?.signal,
@@ -198,7 +202,7 @@ export class API extends ParentAPI {
     this.client.fetch<Key>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/rotate`,
         signal: options?.signal,
@@ -217,7 +221,7 @@ export class API extends ParentAPI {
     this.client.fetch<Key>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/protect`,
         signal: options?.signal,
@@ -236,7 +240,7 @@ export class API extends ParentAPI {
     this.client.fetch<Key>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/unprotect`,
         signal: options?.signal,
@@ -255,7 +259,7 @@ export class API extends ParentAPI {
     this.client.fetch<Key>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/enable`,
         signal: options?.signal,
@@ -274,7 +278,7 @@ export class API extends ParentAPI {
     this.client.fetch<Key>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/disable`,
         signal: options?.signal,
@@ -359,7 +363,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalGenerateDataKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/generate-data-key`,
         signal: options?.signal,
@@ -380,7 +384,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalEncryptRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/encrypt`,
         signal: options?.signal,
@@ -401,7 +405,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalDecryptRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/decrypt`,
         signal: options?.signal,
@@ -422,7 +426,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalSignRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/sign`,
         signal: options?.signal,
@@ -443,7 +447,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalVerifyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/verify`,
         signal: options?.signal,
@@ -464,7 +468,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalImportKeyMaterialRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/import-key-material`,
         signal: options?.signal,
@@ -484,11 +488,32 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalDeleteKeyMaterialRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/delete-key-material`,
         signal: options?.signal,
       },
+    )
+
+  
+  /**
+   * Generate key material import parameters. Retrieve the cryptographic parameters (public key and import token) required to securely import key material into an existing key. The key's origin must be `external`.
+   *
+   * @param request - The request {@link GenerateKeyMaterialImportParametersRequest}
+   * @returns A Promise of GenerateKeyMaterialImportParametersResponse
+   */
+  generateKeyMaterialImportParameters = (request: Readonly<GenerateKeyMaterialImportParametersRequest>, options?: RequestOptions) =>
+    this.client.fetch<GenerateKeyMaterialImportParametersResponse>(
+      {
+        body: JSON.stringify(
+          marshalGenerateKeyMaterialImportParametersRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/import-parameters`,
+        signal: options?.signal,
+      },
+      unmarshalGenerateKeyMaterialImportParametersResponse,
     )
 
   
@@ -502,7 +527,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
     this.client.fetch<Key>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/restore`,
         signal: options?.signal,
@@ -543,7 +568,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalWrapKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/wrap`,
         signal: options?.signal,
@@ -564,7 +589,7 @@ The data encryption key is returned in plaintext and ciphertext but it should on
         body: JSON.stringify(
           marshalUnwrapKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/key-manager/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/keys/${validatePathParam('keyId', request.keyId)}/unwrap`,
         signal: options?.signal,

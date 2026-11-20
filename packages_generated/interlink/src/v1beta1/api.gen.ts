@@ -338,7 +338,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateLinkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links`,
         signal: options?.signal,
@@ -359,7 +359,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateLinkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}`,
         signal: options?.signal,
@@ -397,7 +397,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAttachVpcRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/attach-vpc`,
         signal: options?.signal,
@@ -416,7 +416,7 @@ export class API extends ParentAPI {
     this.client.fetch<Link>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/detach-vpc`,
         signal: options?.signal,
@@ -437,7 +437,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAttachRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/attach-routing-policy`,
         signal: options?.signal,
@@ -458,7 +458,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalDetachRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/detach-routing-policy`,
         signal: options?.signal,
@@ -479,7 +479,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/set-routing-policy`,
         signal: options?.signal,
@@ -498,7 +498,7 @@ export class API extends ParentAPI {
     this.client.fetch<Link>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/enable-route-propagation`,
         signal: options?.signal,
@@ -517,7 +517,7 @@ export class API extends ParentAPI {
     this.client.fetch<Link>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/links/${validatePathParam('linkId', request.linkId)}/disable-route-propagation`,
         signal: options?.signal,
@@ -585,7 +585,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies`,
         signal: options?.signal,
@@ -606,7 +606,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateRoutingPolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/interlink/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/routing-policies/${validatePathParam('routingPolicyId', request.routingPolicyId)}`,
         signal: options?.signal,

@@ -185,7 +185,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateNamespaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces`,
         signal: options?.signal,
@@ -207,7 +207,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateNamespaceRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/namespaces/${validatePathParam('namespaceId', request.namespaceId)}`,
         signal: options?.signal,
@@ -316,7 +316,7 @@ and the status is set to `pending` accordingly.
         body: JSON.stringify(
           marshalCreateContainerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers`,
         signal: options?.signal,
@@ -342,7 +342,7 @@ Warning: The `redeploy` field has been deprecated. An update now always redeploy
         body: JSON.stringify(
           marshalUpdateContainerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}`,
         signal: options?.signal,
@@ -384,7 +384,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
     this.client.fetch<Container>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/containers/${validatePathParam('containerId', request.containerId)}/deploy`,
         signal: options?.signal,
@@ -469,7 +469,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         body: JSON.stringify(
           marshalCreateCronRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons`,
         signal: options?.signal,
@@ -491,7 +491,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         body: JSON.stringify(
           marshalUpdateCronRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/crons/${validatePathParam('cronId', request.cronId)}`,
         signal: options?.signal,
@@ -594,7 +594,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         body: JSON.stringify(
           marshalCreateDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/domains`,
         signal: options?.signal,
@@ -634,7 +634,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         body: JSON.stringify(
           marshalCreateTokenRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/tokens`,
         signal: options?.signal,
@@ -738,7 +738,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         body: JSON.stringify(
           marshalCreateTriggerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers`,
         signal: options?.signal,
@@ -833,7 +833,7 @@ Moreover, calling `DeployContainer` immediately after `UpdateContainer` can caus
         body: JSON.stringify(
           marshalUpdateTriggerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/containers/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/triggers/${validatePathParam('triggerId', request.triggerId)}`,
         signal: options?.signal,

@@ -1,6 +1,7 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 import type {
+  CommitmentPeriod,
   IPReverseStatus,
   IPVersion,
   ListServerEventsRequestOrderBy,
@@ -10,6 +11,7 @@ import type {
   MemoryEccType,
   OfferStock,
   OfferSubscriptionPeriod,
+  OptionType,
   SchemaFilesystemFormat,
   SchemaPartitionLabel,
   SchemaPoolType,
@@ -23,6 +25,16 @@ import type {
   SettingType,
 } from './types.gen.js'
 
+
+/** Lists all values of the enum {@link CommitmentPeriod}. */
+export const COMMITMENT_PERIODS: CommitmentPeriod[] = [
+  'unknown_period',
+  'one_month',
+  'six_months',
+  'one_year',
+  'two_years',
+  'three_years',
+]
 
 /** Lists all values of the enum {@link IPReverseStatus}. */
 export const IP_REVERSE_STATUSES: IPReverseStatus[] = [
@@ -84,6 +96,16 @@ export const OFFER_SUBSCRIPTION_PERIODS: OfferSubscriptionPeriod[] = [
   'unknown_subscription_period',
   'hourly',
   'monthly',
+]
+
+/** Lists all values of the enum {@link OptionType}. */
+export const OPTION_TYPES: OptionType[] = [
+  'option_type_unknown',
+  'private_network',
+  'license',
+  'remote_access',
+  'public_bandwidth',
+  'certification',
 ]
 
 /** Lists all values of the enum {@link SchemaFilesystemFormat}. */

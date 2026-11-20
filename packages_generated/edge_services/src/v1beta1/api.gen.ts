@@ -226,7 +226,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreatePipelineRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines`,
         signal: options?.signal,
@@ -304,7 +304,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdatePipelineRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}`,
         signal: options?.signal,
@@ -384,7 +384,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateVPCEndpointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/vpc-endpoints`,
         signal: options?.signal,
@@ -420,7 +420,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetPipelineVPCEndpointsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/vpc-endpoints`,
         signal: options?.signal,
@@ -465,7 +465,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetHeadStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/set-head-stage`,
         signal: options?.signal,
@@ -512,7 +512,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDNSStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/dns-stages`,
         signal: options?.signal,
@@ -550,7 +550,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDNSStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/edge-services/v1beta1/dns-stages/${validatePathParam('dnsStageId', request.dnsStageId)}`,
         signal: options?.signal,
@@ -613,7 +613,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateTLSStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/tls-stages`,
         signal: options?.signal,
@@ -651,7 +651,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateTLSStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/edge-services/v1beta1/tls-stages/${validatePathParam('tlsStageId', request.tlsStageId)}`,
         signal: options?.signal,
@@ -712,7 +712,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateCacheStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/cache-stages`,
         signal: options?.signal,
@@ -750,7 +750,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateCacheStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/edge-services/v1beta1/cache-stages/${validatePathParam('cacheStageId', request.cacheStageId)}`,
         signal: options?.signal,
@@ -814,7 +814,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateBackendStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/backend-stages`,
         signal: options?.signal,
@@ -852,7 +852,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateBackendStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/edge-services/v1beta1/backend-stages/${validatePathParam('backendStageId', request.backendStageId)}`,
         signal: options?.signal,
@@ -933,7 +933,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateWafStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/waf-stages`,
         signal: options?.signal,
@@ -971,7 +971,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateWafStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/edge-services/v1beta1/waf-stages/${validatePathParam('wafStageId', request.wafStageId)}`,
         signal: options?.signal,
@@ -1049,7 +1049,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateRouteStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/pipelines/${validatePathParam('pipelineId', request.pipelineId)}/route-stages`,
         signal: options?.signal,
@@ -1087,7 +1087,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateRouteStageRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}`,
         signal: options?.signal,
@@ -1140,7 +1140,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetRouteRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}/route-rules`,
         signal: options?.signal,
@@ -1161,7 +1161,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddRouteRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/route-stages/${validatePathParam('routeStageId', request.routeStageId)}/route-rules`,
         signal: options?.signal,
@@ -1200,7 +1200,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCheckDomainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/check-domain`,
         signal: options?.signal,
@@ -1215,7 +1215,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCheckPEMChainRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/check-pem-chain`,
         signal: options?.signal,
@@ -1264,7 +1264,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreatePurgeRequestRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/purge-requests`,
         signal: options?.signal,
@@ -1314,7 +1314,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCheckLbOriginRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/edge-services/v1beta1/check-lb-origin`,
         signal: options?.signal,
@@ -1351,7 +1351,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSelectPlanRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/edge-services/v1beta1/current-plan`,
         signal: options?.signal,

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
+  addSessionHeader,
   authenticateWithSecrets,
   authenticateWithSessionToken,
   obfuscateAuthHeadersEntry,
@@ -66,6 +67,34 @@ describe('authenticateWithSessionToken', () => {
     const expectedReq = sourceReq.clone()
     expectedReq.headers.append('x-session-token', 'dummy')
     expect(updatedReq).toMatchObject(expectedReq)
+  })
+})
+
+describe('addSessionHeader', () => {
+  it('adds the resolved async token to the session header', async () => {
+    const sourceReq = new Request('https://api.scaleway.com/my/path')
+
+    const updatedReq = await addSessionHeader({
+      request: sourceReq,
+      // oxlint-disable-next-line typescript/promise-function-async -- test helper
+      getAsyncToken: () => Promise.resolve('jwt-token'),
+    })
+
+    const expectedReq = sourceReq.clone()
+    expectedReq.headers.append('x-session-token', 'jwt-token')
+    expect(updatedReq).toMatchObject(expectedReq)
+  })
+
+  it('does not set the header when the token resolves to undefined', async () => {
+    const sourceReq = new Request('https://api.scaleway.com/my/path')
+
+    const updatedReq = await addSessionHeader({
+      request: sourceReq,
+      // oxlint-disable-next-line typescript/promise-function-async -- test helper
+      getAsyncToken: () => Promise.resolve(undefined),
+    })
+
+    expect(updatedReq.headers.get('x-session-token')).toBeNull()
   })
 })
 

@@ -1,6 +1,17 @@
 // This file was automatically generated. DO NOT EDIT.
 // If you have any remark or suggestion do not hesitate to open an issue.
 
+export const CreateCertificateRequest = {
+  content: {
+    minLength: 1,
+  },
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]+$/,
+  },
+}
+
 export const CreateDeploymentRequest = {
   name: {
     maxLength: 255,
@@ -45,6 +56,21 @@ export const DeleteUserRequest = {
     maxLength: 63,
     minLength: 1,
     pattern: /^[a-zA-Z0-9_$-]*$/,
+  },
+}
+
+export const ListCertificatesRequest = {
+  name: {
+    maxLength: 255,
+    minLength: 1,
+    pattern: /^[A-Za-z0-9\-_]*$/,
+  },
+  page: {
+    greaterThanOrEqual: 1,
+  },
+  pageSize: {
+    greaterThanOrEqual: 1,
+    lessThanOrEqual: 100,
   },
 }
 

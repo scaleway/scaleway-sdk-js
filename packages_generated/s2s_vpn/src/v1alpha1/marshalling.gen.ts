@@ -64,9 +64,9 @@ const unmarshalConnectionCipher = (data: unknown): ConnectionCipher => {
   }
 
   return {
-    dhGroup: data.dh_group ? data.dh_group : undefined,
+    dhGroup: data.dh_group ? data.dh_group : null,
     encryption: data.encryption,
-    integrity: data.integrity ? data.integrity : undefined,
+    integrity: data.integrity ? data.integrity : null,
   } as ConnectionCipher
 }
 
@@ -78,11 +78,11 @@ export const unmarshalConnection = (data: unknown): Connection => {
   }
 
   return {
-    bgpSessionIpv4: data.bgp_session_ipv4 ? unmarshalBgpSession(data.bgp_session_ipv4) : undefined,
-    bgpSessionIpv6: data.bgp_session_ipv6 ? unmarshalBgpSession(data.bgp_session_ipv6) : undefined,
+    bgpSessionIpv4: data.bgp_session_ipv4 ? unmarshalBgpSession(data.bgp_session_ipv4) : null,
+    bgpSessionIpv6: data.bgp_session_ipv6 ? unmarshalBgpSession(data.bgp_session_ipv6) : null,
     bgpStatusIpv4: data.bgp_status_ipv4,
     bgpStatusIpv6: data.bgp_status_ipv6,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     customerGatewayId: data.customer_gateway_id,
     espCiphers: unmarshalArrayOfObject(data.esp_ciphers, unmarshalConnectionCipher),
     id: data.id,
@@ -100,9 +100,9 @@ export const unmarshalConnection = (data: unknown): Connection => {
     status: data.status,
     tags: data.tags,
     tunnelStatus: data.tunnel_status,
-    tunnelStatusIpv4: data.tunnel_status_ipv4 ? data.tunnel_status_ipv4 : undefined,
-    tunnelStatusIpv6: data.tunnel_status_ipv6 ? data.tunnel_status_ipv6 : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
+    tunnelStatusIpv4: data.tunnel_status_ipv4 ? data.tunnel_status_ipv4 : null,
+    tunnelStatusIpv6: data.tunnel_status_ipv6 ? data.tunnel_status_ipv6 : null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vpnGatewayId: data.vpn_gateway_id,
   } as Connection
 }
@@ -117,17 +117,17 @@ export const unmarshalCustomerGateway = (data: unknown): CustomerGateway => {
   return {
     asn: data.asn,
     connectionIds: data.connection_ids,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
     projectId: data.project_id,
-    publicIpv4: data.public_ipv4,
-    publicIpv6: data.public_ipv6,
+    publicIpv4: data.public_ipv4 ?? null,
+    publicIpv6: data.public_ipv6 ?? null,
     region: data.region,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as CustomerGateway
 }
 
@@ -139,7 +139,7 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     isIpv6: data.is_ipv6,
     name: data.name,
@@ -150,7 +150,7 @@ export const unmarshalRoutingPolicy = (data: unknown): RoutingPolicy => {
     region: data.region,
     srn: data.srn,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as RoutingPolicy
 }
 
@@ -173,8 +173,8 @@ const unmarshalVpnGatewayPublicConfig = (data: unknown): VpnGatewayPublicConfig 
   }
 
   return {
-    ipamIpv4Id: data.ipam_ipv4_id,
-    ipamIpv6Id: data.ipam_ipv6_id,
+    ipamIpv4Id: data.ipam_ipv4_id ?? null,
+    ipamIpv6Id: data.ipam_ipv6_id ?? null,
   } as VpnGatewayPublicConfig
 }
 
@@ -188,22 +188,22 @@ export const unmarshalVpnGateway = (data: unknown): VpnGateway => {
   return {
     asn: data.asn,
     connectionIds: data.connection_ids,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     gatewayType: data.gateway_type,
     id: data.id,
     ipamPrivateIpv4Id: data.ipam_private_ipv4_id,
     ipamPrivateIpv6Id: data.ipam_private_ipv6_id,
     name: data.name,
     organizationId: data.organization_id,
-    privateConfig: data.private_config ? unmarshalVpnGatewayPrivateConfig(data.private_config) : undefined,
+    privateConfig: data.private_config ? unmarshalVpnGatewayPrivateConfig(data.private_config) : null,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
-    publicConfig: data.public_config ? unmarshalVpnGatewayPublicConfig(data.public_config) : undefined,
+    publicConfig: data.public_config ? unmarshalVpnGatewayPublicConfig(data.public_config) : null,
     region: data.region,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as VpnGateway
 }
@@ -216,7 +216,7 @@ export const unmarshalChangeConnectionPskResponse = (data: unknown): ChangeConne
   }
 
   return {
-    connection: data.connection ? unmarshalConnection(data.connection) : undefined,
+    connection: data.connection ? unmarshalConnection(data.connection) : null,
   } as ChangeConnectionPskResponse
 }
 
@@ -228,8 +228,8 @@ export const unmarshalCreateConnectionResponse = (data: unknown): CreateConnecti
   }
 
   return {
-    connection: data.connection ? unmarshalConnection(data.connection) : undefined,
-    preSharedKey: data.pre_shared_key,
+    connection: data.connection ? unmarshalConnection(data.connection) : null,
+    preSharedKey: data.pre_shared_key ?? null,
   } as CreateConnectionResponse
 }
 
@@ -322,8 +322,8 @@ export const unmarshalRenewConnectionPskResponse = (data: unknown): RenewConnect
   }
 
   return {
-    connection: data.connection ? unmarshalConnection(data.connection) : undefined,
-    preSharedKey: data.pre_shared_key,
+    connection: data.connection ? unmarshalConnection(data.connection) : null,
+    preSharedKey: data.pre_shared_key ?? null,
   } as RenewConnectionPskResponse
 }
 
@@ -372,8 +372,8 @@ export const marshalCreateConnectionRequest = (
   request: CreateConnectionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  bgp_config_ipv4: ((request.bgpConfigIpv4 !== undefined) ?  marshalCreateConnectionRequestBgpConfig(request.bgpConfigIpv4, defaults): undefined),
-  bgp_config_ipv6: ((request.bgpConfigIpv6 !== undefined) ?  marshalCreateConnectionRequestBgpConfig(request.bgpConfigIpv6, defaults): undefined),
+  bgp_config_ipv4: ((request.bgpConfigIpv4 != null) ?  marshalCreateConnectionRequestBgpConfig(request.bgpConfigIpv4, defaults): undefined),
+  bgp_config_ipv6: ((request.bgpConfigIpv6 != null) ?  marshalCreateConnectionRequestBgpConfig(request.bgpConfigIpv6, defaults): undefined),
   customer_gateway_id: request.customerGatewayId,
   enable_route_propagation: request.enableRoutePropagation,
   esp_ciphers:  request.espCiphers.map(elt => marshalConnectionCipher(elt, defaults)),
@@ -382,7 +382,7 @@ export const marshalCreateConnectionRequest = (
   is_ipv6: request.isIpv6,
   name: request.name,
   project_id: request.projectId ?? defaults.defaultProjectId,
-  secret: ((request.secret !== undefined) ?  marshalCreateConnectionRequestSecret(request.secret, defaults): undefined),
+  secret: ((request.secret != null) ?  marshalCreateConnectionRequestSecret(request.secret, defaults): undefined),
   tags: request.tags,
   vpn_gateway_id: request.vpnGatewayId,
 })
@@ -440,15 +440,15 @@ const marshalCreateVpnGatewayRequestPublicTunnelConfig = (
 ): Record<string, unknown> => ({  
   ...resolveOneOf([
     {param: 'single_ipv4_tunnel',
-      value: (request.singleIpv4Tunnel !== undefined) ? marshalCreateVpnGatewayRequestSingleIpTunnel(request.singleIpv4Tunnel, defaults)
+      value: (request.singleIpv4Tunnel != null) ? marshalCreateVpnGatewayRequestSingleIpTunnel(request.singleIpv4Tunnel, defaults)
       : undefined,
     },
     {param: 'single_ipv6_tunnel',
-      value: (request.singleIpv6Tunnel !== undefined) ? marshalCreateVpnGatewayRequestSingleIpTunnel(request.singleIpv6Tunnel, defaults)
+      value: (request.singleIpv6Tunnel != null) ? marshalCreateVpnGatewayRequestSingleIpTunnel(request.singleIpv6Tunnel, defaults)
       : undefined,
     },
     {param: 'dual_ipv4v6_tunnel',
-      value: (request.dualIpv4V6Tunnel !== undefined) ? marshalCreateVpnGatewayRequestDualIpTunnel(request.dualIpv4V6Tunnel, defaults)
+      value: (request.dualIpv4V6Tunnel != null) ? marshalCreateVpnGatewayRequestDualIpTunnel(request.dualIpv4V6Tunnel, defaults)
       : undefined,
     },
   ]),
@@ -468,11 +468,11 @@ export const marshalCreateVpnGatewayRequest = (
   zone: request.zone ?? defaults.defaultZone,  
   ...resolveOneOf([
     {param: 'public_config',
-      value: (request.publicConfig !== undefined) ? marshalCreateVpnGatewayRequestPublicConfig(request.publicConfig, defaults)
+      value: (request.publicConfig != null) ? marshalCreateVpnGatewayRequestPublicConfig(request.publicConfig, defaults)
       : undefined,
     },
     {param: 'public_tunnel_config',
-      value: (request.publicTunnelConfig !== undefined) ? marshalCreateVpnGatewayRequestPublicTunnelConfig(request.publicTunnelConfig, defaults)
+      value: (request.publicTunnelConfig != null) ? marshalCreateVpnGatewayRequestPublicTunnelConfig(request.publicTunnelConfig, defaults)
       : undefined,
     },
   ]),
@@ -517,8 +517,8 @@ export const marshalUpdateConnectionRequest = (
   request: UpdateConnectionRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  esp_ciphers: ((request.espCiphers !== undefined) ?  request.espCiphers.map(elt => marshalConnectionCipher(elt, defaults)): undefined),
-  ikev2_ciphers: ((request.ikev2Ciphers !== undefined) ?  request.ikev2Ciphers.map(elt => marshalConnectionCipher(elt, defaults)): undefined),
+  esp_ciphers: ((request.espCiphers != null) ?  request.espCiphers.map(elt => marshalConnectionCipher(elt, defaults)): undefined),
+  ikev2_ciphers: ((request.ikev2Ciphers != null) ?  request.ikev2Ciphers.map(elt => marshalConnectionCipher(elt, defaults)): undefined),
   initiation_policy: request.initiationPolicy,
   name: request.name,
   secret_id: request.secretId,

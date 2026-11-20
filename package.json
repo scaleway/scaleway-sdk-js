@@ -1,5 +1,6 @@
 {
   "name": "root",
+  "version": "0.0.1",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -28,19 +29,21 @@
     "@repo/configs": "workspace:^",
     "@repo/generate-packages": "workspace:*",
     "@scaleway/generate-react-sdk": "workspace:*",
-    "@scaleway/oxlint-config": "1.1.4",
-    "@scaleway/pnpm-auto-release": "0.0.1",
-    "@scaleway/sync-peer-deps": "1.1.0",
+    "@scaleway/npm-trust": "1.0.0",
+    "@scaleway/oxlint-config": "1.1.5",
+    "@scaleway/pnpm-auto-release": "0.0.2",
+    "@scaleway/sync-peer-deps": "1.1.3",
     "@scaleway/tsconfig": "1.1.6",
-    "@vitest/coverage-v8": "4.1.11",
-    "@vitest/ui": "4.1.11",
+    "@vitest/coverage-v8": "5.0.5",
+    "@vitest/ui": "5.0.5",
     "cross-env": "10.1.0",
-    "jsdom": "30.1.0",
+    "jsdom": "30.1.3",
     "nano-staged": "1.0.2",
-    "oxfmt": "0.68.0",
-    "oxlint": "1.83.0",
-    "oxlint-tsgolint": "7.0.2002",
-    "react": "^19.3.0",
+    "oxfmt": "0.73.0",
+    "oxlint": "1.88.0",
+    "oxlint-tsgolint": "7.0.2004",
+    "pkg-pr-new": "0.0.91",
+    "react": "^19.3.1",
     "read-pkg": "10.1.0",
     "shx": "0.4.0",
     "tinyglobby": "0.2.17",
@@ -85,8 +88,8 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.4.1",
-      "onFail": "warn"
+      "version": "12.16.1",
+      "onFail": "download"
     },
     "runtime": {
       "name": "node",

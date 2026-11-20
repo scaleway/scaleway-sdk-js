@@ -40,7 +40,7 @@ export interface Version {
   /**
    * Date of End Of Life.
    */
-  endOfLifeAt?: Date
+  endOfLifeAt?: Date | null
   /**
    * Region to target. If none is passed will use default region from the config.
    */
@@ -76,27 +76,27 @@ export interface DatabaseBackup {
   /**
    * Creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Expiration date.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Size (in bytes) of the database backup file.
    */
-  size?: number
+  size?: number | null
   /**
    * Size (in bytes) of the database when backup has been done.
    */
-  dbSize?: number
+  dbSize?: number | null
   /**
    * Download URL of the exported database backup.
    */
-  downloadUrl?: string
+  downloadUrl?: string | null
   /**
    * Expiration date of the download URL.
    */
-  downloadUrlExpiresAt?: Date
+  downloadUrlExpiresAt?: Date | null
   /**
    * Region of the database backup.
    */
@@ -140,7 +140,7 @@ export interface Database {
   /**
    * Creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * The minimum number of CPU units for your Serverless SQL Database.
    */
@@ -160,11 +160,11 @@ export interface Database {
   /**
    * @deprecated The major version of the underlying database engine. (deprecated in favor of `version`).
    */
-  engineMajorVersion?: number
+  engineMajorVersion?: number | null
   /**
    * The major version of the underlying database engine.
    */
-  version?: Version
+  version?: Version | null
 }
 
 
@@ -172,11 +172,11 @@ export type CreateDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The ID of your Scaleway project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * The name of the Serverless SQL Database to be created.
    */
@@ -192,7 +192,7 @@ export type CreateDatabaseRequest = {
   /**
    * The ID of the backup to create the database from.
    */
-  fromBackupId?: string
+  fromBackupId?: string | null
   /**
    * The major version of the postgreSQL requested.
    */
@@ -204,7 +204,7 @@ export type DeleteDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Serverless SQL Database.
    */
@@ -216,7 +216,7 @@ export type ExportDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Serverless SQL Database backup.
    */
@@ -228,7 +228,7 @@ export type GetDatabaseBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Serverless SQL Database backup.
    */
@@ -240,7 +240,7 @@ export type GetDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Serverless SQL DB database.
    */
@@ -252,15 +252,15 @@ export type ListDatabaseBackupsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Filter by the UUID of the Scaleway organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter by the UUID of the Scaleway project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by the UUID of the Serverless SQL Database.
    */
@@ -268,15 +268,15 @@ export type ListDatabaseBackupsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Page size.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Sorting criteria. One of `created_at_asc`, `created_at_desc`.
    */
-  orderBy?: ListDatabaseBackupsRequestOrderBy
+  orderBy?: ListDatabaseBackupsRequestOrderBy | null
 }
 
 
@@ -296,31 +296,31 @@ export type ListDatabasesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Filter by the UUID of the Scaleway organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * UUID of the Scaleway project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Page size.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter by the name of the database.
    */
-  name?: string
+  name?: string | null
   /**
    * Sorting criteria. One of `created_at_asc`, `created_at_desc`, `name_asc`, `name_desc`.
    */
-  orderBy?: ListDatabasesRequestOrderBy
+  orderBy?: ListDatabasesRequestOrderBy | null
 }
 
 
@@ -340,10 +340,10 @@ export type ListVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  version?: string
-  page?: number
-  pageSize?: number
+  region?: ScwRegion | null
+  version?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -363,7 +363,7 @@ export type RestoreDatabaseFromBackupRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Serverless SQL Database.
    */
@@ -379,7 +379,7 @@ export type UpdateDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Serverless SQL Database.
    */
@@ -387,11 +387,11 @@ export type UpdateDatabaseRequest = {
   /**
    * The minimum number of CPU units for your Serverless SQL Database.
    */
-  cpuMin?: number
+  cpuMin?: number | null
   /**
    * The maximum number of CPU units for your Serverless SQL Database.
    */
-  cpuMax?: number
+  cpuMax?: number | null
 }
 
 

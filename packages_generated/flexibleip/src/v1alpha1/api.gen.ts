@@ -81,7 +81,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateFlexibleIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips`,
         signal: options?.signal,
@@ -167,7 +167,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateFlexibleIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}`,
         signal: options?.signal,
@@ -203,7 +203,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAttachFlexibleIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/attach`,
         signal: options?.signal,
@@ -224,7 +224,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalDetachFlexibleIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/detach`,
         signal: options?.signal,
@@ -245,7 +245,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalGenerateMACAddrRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac`,
         signal: options?.signal,
@@ -266,7 +266,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalDuplicateMACAddrRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac/duplicate`,
         signal: options?.signal,
@@ -287,7 +287,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalMoveMACAddrRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/flexible-ip/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/fips/${validatePathParam('fipId', request.fipId)}/mac/move`,
         signal: options?.signal,

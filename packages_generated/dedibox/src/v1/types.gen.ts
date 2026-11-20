@@ -388,6 +388,106 @@ export type ServiceType =
   | 'service'
   | 'order'
 
+export interface OS {
+  /**
+   * ID of the OS.
+   */
+  id: number
+  /**
+   * Name of the OS.
+   */
+  name: string
+  /**
+   * Type of the OS.
+   */
+  type: OSType
+  /**
+   * Version of the OS.
+   */
+  version: string
+  /**
+   * Architecture of the OS.
+   */
+  arch: OSArch
+  /**
+   * True if the OS allow custom partitioning.
+   */
+  allowCustomPartitioning: boolean
+  /**
+   * True if the OS allow SSH Keys.
+   */
+  allowSshKeys: boolean
+  /**
+   * True if the OS requires user.
+   */
+  requiresUser: boolean
+  /**
+   * True if the OS requires admin password.
+   */
+  requiresAdminPassword: boolean
+  /**
+   * True if the OS requires panel password.
+   */
+  requiresPanelPassword: boolean
+  /**
+   * True if the OS allow file systems.
+   */
+  allowedFilesystems: PartitionFileSystem[]
+  /**
+   * True if the OS requires license.
+   */
+  requiresLicense: boolean
+  /**
+   * License offers available with the OS.
+   */
+  licenseOffers: Offer[]
+  /**
+   * Maximum number of partitions which can be created.
+   */
+  maxPartitions?: number | null
+  /**
+   * Display name of the OS.
+   */
+  displayName: string
+  /**
+   * Regex used to validate the installation passwords.
+   */
+  passwordRegex: string
+  /**
+   * Regex used to validate the panel installation password.
+   */
+  panelPasswordRegex?: string | null
+  /**
+   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
+   */
+  requiresValidHostname?: boolean | null
+  /**
+   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
+   */
+  hostnameRegex?: string | null
+  /**
+   * Hostname max length.
+   */
+  hostnameMaxLength: number
+  /**
+   * OS release date.
+   */
+  releasedAt?: Date | null
+  /**
+   * Is it a beta OS.
+   */
+  beta: string
+  /**
+   * Description of the OS.
+   */
+  description: string
+  /**
+   * URL to OS official website.
+   */
+  officialWebsite: string
+}
+
+
 export interface OfferAntiDosInfo {
   type: OfferAntiDosInfoType
 }
@@ -400,6 +500,30 @@ export interface OfferBackupInfo {
 
 export interface OfferBandwidthInfo {
   speed: number
+}
+
+
+export interface OfferCommitment {
+  /**
+   * Unit used for discount.
+   */
+  unit: string
+  /**
+   * Value of the discount.
+   */
+  value: number
+  /**
+   * Is it free setup fees.
+   */
+  freeSetupFees: boolean
+  /**
+   * Commitment's required duration.
+   */
+  duration: string
+  /**
+   * Discounted price of the commitment.
+   */
+  discountedPrice?: Money | null
 }
 
 
@@ -495,83 +619,91 @@ export interface Offer {
   /**
    * Price of the offer.
    */
-  pricing?: Money
+  pricing?: Money | null
   /**
    * Original Dedibox ID of the offer.
    */
-  offerId?: number
+  offerId?: number | null
   /**
    * Server info if it is a server offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  serverInfo?: OfferServerInfo
+  serverInfo?: OfferServerInfo | null
   /**
    * Service level info if it is a service level offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  serviceLevelInfo?: OfferServiceLevelInfo
+  serviceLevelInfo?: OfferServiceLevelInfo | null
   /**
    * RPN info if it is a RPN offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  rpnInfo?: OfferRPNInfo
+  rpnInfo?: OfferRPNInfo | null
   /**
    * SAN info if it is a SAN offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  sanInfo?: OfferSANInfo
+  sanInfo?: OfferSANInfo | null
   /**
    * AntiDOS info if it is a antiDOS offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  antidosInfo?: OfferAntiDosInfo
+  antidosInfo?: OfferAntiDosInfo | null
   /**
    * Backup info if it is a backup offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  backupInfo?: OfferBackupInfo
+  backupInfo?: OfferBackupInfo | null
   /**
    * USB storage info if it is a USB storage offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  usbStorageInfo?: OfferStorageInfo
+  usbStorageInfo?: OfferStorageInfo | null
   /**
    * Storage info if it is a storage offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  storageInfo?: OfferStorageInfo
+  storageInfo?: OfferStorageInfo | null
   /**
    * License info if it is a license offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  licenseInfo?: OfferLicenseInfo
+  licenseInfo?: OfferLicenseInfo | null
   /**
    * Failover IP info if it is a failover IP offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  failoverIpInfo?: OfferFailoverIpInfo
+  failoverIpInfo?: OfferFailoverIpInfo | null
   /**
    * Failover block info if it is a failover block offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  failoverBlockInfo?: OfferFailoverBlockInfo
+  failoverBlockInfo?: OfferFailoverBlockInfo | null
   /**
    * Bandwidth info if it is a bandwidth offer.
    *
    * One-of ('offerInfo'): at most one of 'serverInfo', 'serviceLevelInfo', 'rpnInfo', 'sanInfo', 'antidosInfo', 'backupInfo', 'usbStorageInfo', 'storageInfo', 'licenseInfo', 'failoverIpInfo', 'failoverBlockInfo', 'bandwidthInfo' could be set.
    */
-  bandwidthInfo?: OfferBandwidthInfo
+  bandwidthInfo?: OfferBandwidthInfo | null
+  /**
+   * Commitment info if it is a commitment offer.
+   */
+  commitments: OfferCommitment[]
+  /**
+   * Available OS info if it is a available OS offer.
+   */
+  availableOs: OS[]
 }
 
 
@@ -599,94 +731,6 @@ export interface NetworkInterface {
 }
 
 
-export interface OS {
-  /**
-   * ID of the OS.
-   */
-  id: number
-  /**
-   * Name of the OS.
-   */
-  name: string
-  /**
-   * Type of the OS.
-   */
-  type: OSType
-  /**
-   * Version of the OS.
-   */
-  version: string
-  /**
-   * Architecture of the OS.
-   */
-  arch: OSArch
-  /**
-   * True if the OS allow custom partitioning.
-   */
-  allowCustomPartitioning: boolean
-  /**
-   * True if the OS allow SSH Keys.
-   */
-  allowSshKeys: boolean
-  /**
-   * True if the OS requires user.
-   */
-  requiresUser: boolean
-  /**
-   * True if the OS requires admin password.
-   */
-  requiresAdminPassword: boolean
-  /**
-   * True if the OS requires panel password.
-   */
-  requiresPanelPassword: boolean
-  /**
-   * True if the OS allow file systems.
-   */
-  allowedFilesystems: PartitionFileSystem[]
-  /**
-   * True if the OS requires license.
-   */
-  requiresLicense: boolean
-  /**
-   * License offers available with the OS.
-   */
-  licenseOffers: Offer[]
-  /**
-   * Maximum number of partitions which can be created.
-   */
-  maxPartitions?: number
-  /**
-   * Display name of the OS.
-   */
-  displayName: string
-  /**
-   * Regex used to validate the installation passwords.
-   */
-  passwordRegex: string
-  /**
-   * Regex used to validate the panel installation password.
-   */
-  panelPasswordRegex?: string
-  /**
-   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
-   */
-  requiresValidHostname?: boolean
-  /**
-   * If both requires_valid_hostname & hostname_regex are set, it means that at least one of the criteria must be valid.
-   */
-  hostnameRegex?: string
-  /**
-   * Hostname max length.
-   */
-  hostnameMaxLength: number
-  /**
-   * OS release date.
-   */
-  releasedAt?: Date
-}
-
-
 export interface ServerLocation {
   rack: string
   room: string
@@ -695,10 +739,10 @@ export interface ServerLocation {
 
 
 export interface ServerOption {
-  offer?: Offer
-  createdAt?: Date
-  updatedAt?: Date
-  expiredAt?: Date
+  offer?: Offer | null
+  createdAt?: Date | null
+  updatedAt?: Date | null
+  expiredAt?: Date | null
   options: ServerOption[]
 }
 
@@ -743,7 +787,7 @@ export interface RpnSan {
   /**
    * Date of creation of the RPN SAN.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Offer ID.
    */
@@ -761,7 +805,7 @@ export interface RpnSan {
    */
   storageSize: number
   iqn: string
-  offer?: Offer
+  offer?: Offer | null
   /**
    * True if the SAN is compatible with the RPNv1 technology.
    */
@@ -773,15 +817,15 @@ export interface RpnSan {
   /**
    * RPN SAN delivery date.
    */
-  deliveredAt?: Date
+  deliveredAt?: Date | null
   /**
    * RPN SAN termination date.
    */
-  terminatedAt?: Date
+  terminatedAt?: Date | null
   /**
    * RPN SAN expiration date.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -805,7 +849,7 @@ export interface RpnGroup {
   /**
    * Rpn group creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * RPN group owner.
    */
@@ -851,23 +895,23 @@ export interface Server {
   /**
    * Date of last reboot of the server.
    */
-  rebootedAt?: Date
+  rebootedAt?: Date | null
   /**
    * Date of creation of the server.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date of last modification of the server.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date of release of the server.
    */
-  expiredAt?: Date
+  expiredAt?: Date | null
   /**
    * Offer of the server.
    */
-  offer?: Offer
+  offer?: Offer | null
   /**
    * Status of the server.
    */
@@ -875,7 +919,7 @@ export interface Server {
   /**
    * Location of the server.
    */
-  location?: ServerLocation
+  location?: ServerLocation | null
   /**
    * Abuse contact of the server.
    */
@@ -883,7 +927,7 @@ export interface Server {
   /**
    * OS installed on the server.
    */
-  os?: OS
+  os?: OS | null
   /**
    * Network interfaces of the server.
    */
@@ -899,7 +943,7 @@ export interface Server {
   /**
    * Service level of the server.
    */
-  level?: ServiceLevel
+  level?: ServiceLevel | null
   /**
    * Boolean if the server has a BMC.
    */
@@ -907,7 +951,7 @@ export interface Server {
   /**
    * Rescue OS of the server.
    */
-  rescueOs?: OS
+  rescueOs?: OS | null
   /**
    * Array of customs tags attached to the server.
    */
@@ -1044,7 +1088,7 @@ export interface RpnV2Group {
   /**
    * RPN V2 subnet.
    */
-  subnet?: RpnV2GroupSubnet
+  subnet?: RpnV2GroupSubnet | null
   /**
    * RPN V2 gateway.
    */
@@ -1052,7 +1096,7 @@ export interface RpnV2Group {
   /**
    * The RPNv1 group (if the compatibility was enabled).
    */
-  rpnv1Group?: RpnGroup
+  rpnv1Group?: RpnGroup | null
 }
 
 
@@ -1074,17 +1118,17 @@ export interface RpnV2Member {
    *
    * One-of ('resource'): at most one of 'server', 'rpnv1Group' could be set.
    */
-  server?: Server
+  server?: Server | null
   /**
    * RPN V1 group member.
    *
    * One-of ('resource'): at most one of 'server', 'rpnv1Group' could be set.
    */
-  rpnv1Group?: RpnGroup
+  rpnv1Group?: RpnGroup | null
   /**
    * RPN speed.
    */
-  speed?: number
+  speed?: number | null
 }
 
 
@@ -1105,7 +1149,7 @@ export interface Service {
   /**
    * Resource ID of the service.
    */
-  resourceId?: number
+  resourceId?: number | null
   /**
    * Provisioning status of the service.
    */
@@ -1113,23 +1157,23 @@ export interface Service {
   /**
    * Offer of the service.
    */
-  offer?: Offer
+  offer?: Offer | null
   /**
    * Creation date of the service.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Delivery date of the service.
    */
-  deliveredAt?: Date
+  deliveredAt?: Date | null
   /**
    * Terminatation date of the service.
    */
-  terminatedAt?: Date
+  terminatedAt?: Date | null
   /**
    * Expiration date of the service.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Service type, either order or service.
    */
@@ -1151,7 +1195,7 @@ export interface InstallPartition {
   /**
    * Mount point of the installation partition.
    */
-  mountPoint?: string
+  mountPoint?: string | null
   /**
    * RAID level of the installation partition.
    */
@@ -1199,11 +1243,11 @@ export interface FailoverIP {
   /**
    * MAC address of the IP failover.
    */
-  mac?: string
+  mac?: string | null
   /**
    * Server ID linked to the IP failover.
    */
-  serverId?: number
+  serverId?: number | null
   /**
    * Status of the IP failover.
    */
@@ -1211,7 +1255,7 @@ export interface FailoverIP {
   /**
    * Block of the IP failover.
    */
-  block?: FailoverBlock
+  block?: FailoverBlock | null
   /**
    * The interface type.
    */
@@ -1219,7 +1263,7 @@ export interface FailoverIP {
   /**
    * The server zone (if assigned).
    */
-  serverZone?: string
+  serverZone?: string | null
 }
 
 
@@ -1263,10 +1307,10 @@ export interface IPv6Block {
 
 export interface InvoiceSummary {
   id: number
-  totalWithTaxes?: Money
-  totalWithoutTaxes?: Money
-  createdAt?: Date
-  paidAt?: Date
+  totalWithTaxes?: Money | null
+  totalWithoutTaxes?: Money | null
+  createdAt?: Date | null
+  paidAt?: Date | null
   status: InvoiceStatus
   paymentMethod: InvoicePaymentMethod
   transactionId: number
@@ -1279,17 +1323,17 @@ export interface RpnSanIp {
    *
    * One-of ('rpnSanIp'): at most one of 'server', 'rpnv2Group' could be set.
    */
-  server?: RpnSanIpServer
+  server?: RpnSanIpServer | null
   /**
    * Basic RPNv2 group information behind the IP.
    *
    * One-of ('rpnSanIp'): at most one of 'server', 'rpnv2Group' could be set.
    */
-  rpnv2Group?: RpnSanIpRpnV2Group
+  rpnv2Group?: RpnSanIpRpnV2Group | null
   /**
    * An IP object.
    */
-  ip?: IP
+  ip?: IP | null
   /**
    * IP type (server | rpnv2_subnet).
    */
@@ -1299,10 +1343,10 @@ export interface RpnSanIp {
 
 export interface RefundSummary {
   id: number
-  totalWithTaxes?: Money
-  totalWithoutTaxes?: Money
-  createdAt?: Date
-  refundedAt?: Date
+  totalWithTaxes?: Money | null
+  totalWithoutTaxes?: Money | null
+  createdAt?: Date | null
+  refundedAt?: Date | null
   status: RefundStatus
   method: RefundMethod
 }
@@ -1320,11 +1364,11 @@ export interface RpnGroupMember {
   /**
    * Authorized RPN SAN server.
    */
-  sanServer?: RpnSanServer
+  sanServer?: RpnSanServer | null
   /**
    * Authorized rpn v1 capable server.
    */
-  server?: Server
+  server?: Server | null
   /**
    * RPN group ID.
    */
@@ -1340,7 +1384,7 @@ export interface RpnGroupMember {
   /**
    * RPN speed.
    */
-  speed?: number
+  speed?: number | null
   /**
    * RPN member owner.
    */
@@ -1376,7 +1420,7 @@ export interface RpnSanSummary {
   /**
    * Date of creation of the RPN SAN.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Offer ID.
    */
@@ -1404,15 +1448,15 @@ export interface RpnSanSummary {
   /**
    * RPN SAN delivery date.
    */
-  deliveredAt?: Date
+  deliveredAt?: Date | null
   /**
    * RPN SAN termination date.
    */
-  terminatedAt?: Date
+  terminatedAt?: Date | null
   /**
    * RPN SAN expiration date.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -1436,11 +1480,11 @@ export interface RpnServerCapability {
   /**
    * Private IP address (if rpn compatiblle).
    */
-  ipAddress?: string
+  ipAddress?: string | null
   /**
    * Supported rpn version.
    */
-  rpnVersion?: number
+  rpnVersion?: number | null
   /**
    * True if server is compatible with QinQ protocol (rpn v2).
    */
@@ -1472,11 +1516,11 @@ export interface Log {
   /**
    * RPN V2 group.
    */
-  group?: RpnV2Group
+  group?: RpnV2Group | null
   /**
    * RPN V2 member (if applicable).
    */
-  member?: RpnV2Member
+  member?: RpnV2Member | null
   /**
    * Which action was performed.
    */
@@ -1488,11 +1532,11 @@ export interface Log {
   /**
    * Creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Completion date.
    */
-  finishedAt?: Date
+  finishedAt?: Date | null
 }
 
 
@@ -1508,7 +1552,7 @@ export interface ServerEvent {
   /**
    * Date of the event.
    */
-  date?: Date
+  date?: Date | null
 }
 
 
@@ -1536,15 +1580,15 @@ export interface ServerSummary {
   /**
    * Date of creation of the server.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date of last modification of the server.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date of release of the server.
    */
-  expiredAt?: Date
+  expiredAt?: Date | null
   /**
    * Offer ID of the server.
    */
@@ -1560,7 +1604,7 @@ export interface ServerSummary {
   /**
    * OS ID installed on server.
    */
-  osId?: number
+  osId?: number | null
   /**
    * Network interfaces of the server.
    */
@@ -1572,7 +1616,7 @@ export interface ServerSummary {
   /**
    * Service level of the server.
    */
-  level?: ServiceLevel
+  level?: ServiceLevel | null
   /**
    * Whether the server is outsourced or not.
    */
@@ -1584,7 +1628,7 @@ export interface ServerSummary {
   /**
    * Supported RPN version.
    */
-  rpnVersion?: number
+  rpnVersion?: number | null
   /**
    * Whether or not the server is HDS.
    */
@@ -1609,6 +1653,10 @@ export interface CPU {
    * Frequency of the CPU.
    */
   frequency: number
+  /**
+   * Bench of the CPU.
+   */
+  bench: number
 }
 
 
@@ -1641,6 +1689,12 @@ export interface Memory {
    * True if the memory is an error-correcting code memory.
    */
   isEcc: boolean
+}
+
+
+export interface OfferServerInfoAvailability {
+  stock: OfferServerInfoStock
+  quantity: number
 }
 
 
@@ -1696,7 +1750,7 @@ export interface Partition {
   /**
    * Mount point of the partition.
    */
-  mountPoint?: string
+  mountPoint?: string | null
   /**
    * Raid level of the partition.
    */
@@ -1728,7 +1782,7 @@ export type AttachFailoverIPToMacAddressRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the failover IP.
    */
@@ -1736,11 +1790,11 @@ export type AttachFailoverIPToMacAddressRequest = {
   /**
    * A mac type.
    */
-  type?: AttachFailoverIPToMacAddressRequestMacType
+  type?: AttachFailoverIPToMacAddressRequestMacType | null
   /**
    * A valid mac address (existing or not).
    */
-  mac?: string
+  mac?: string | null
 }
 
 
@@ -1748,7 +1802,7 @@ export type AttachFailoverIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -1776,7 +1830,7 @@ export interface BMCAccess {
   /**
    * The date after which the BMC (Baseboard Management Controller) access will be closed.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
   /**
    * Status of the connection.
    */
@@ -1829,7 +1883,7 @@ export interface Backup {
 
 
 export type BillingApiCanOrderRequest = {
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1854,24 +1908,24 @@ export type BillingApiGetRefundRequest = {
 
 
 export type BillingApiListInvoicesRequest = {
-  page?: number
-  pageSize?: number
-  orderBy?: ListInvoicesRequestOrderBy
-  projectId?: string
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListInvoicesRequestOrderBy | null
+  projectId?: string | null
 }
 
 
 export type BillingApiListRefundsRequest = {
-  page?: number
-  pageSize?: number
-  orderBy?: ListRefundsRequestOrderBy
-  projectId?: string
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListRefundsRequestOrderBy | null
+  projectId?: string | null
 }
 
 
 export interface CanOrderResponse {
   canOrder: boolean
-  message?: string
+  message?: string | null
   quotaOk: boolean
   phoneConfirmed: boolean
   emailConfirmed: boolean
@@ -1885,7 +1939,7 @@ export type CancelServerInstallRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID of the server to cancel install.
    */
@@ -1897,7 +1951,7 @@ export type CreateFailoverIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Failover IP offer ID.
    */
@@ -1905,7 +1959,7 @@ export type CreateFailoverIPsRequest = {
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Quantity.
    */
@@ -1923,7 +1977,7 @@ export type CreateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Offer ID of the new server.
    */
@@ -1935,11 +1989,11 @@ export type CreateServerRequest = {
   /**
    * Project ID of the new server.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Datacenter name of the new server.
    */
-  datacenterName?: string
+  datacenterName?: string | null
 }
 
 
@@ -1947,7 +2001,7 @@ export type DeleteFailoverIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the failover IP to delete.
    */
@@ -1959,7 +2013,7 @@ export type DeleteServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to delete.
    */
@@ -1971,7 +2025,7 @@ export type DeleteServiceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the service.
    */
@@ -1983,7 +2037,7 @@ export type DetachFailoverIPFromMacAddressRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the failover IP.
    */
@@ -1995,7 +2049,7 @@ export type DetachFailoverIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * List of IDs of failovers IP to detach.
    */
@@ -2007,7 +2061,7 @@ export type GetBMCAccessRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to get BMC access.
    */
@@ -2019,7 +2073,7 @@ export type GetFailoverIPRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the failover IP.
    */
@@ -2043,7 +2097,7 @@ export type GetOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the OS.
    */
@@ -2055,7 +2109,7 @@ export type GetOSRequest = {
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2063,7 +2117,7 @@ export type GetOfferRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of offer.
    */
@@ -2071,7 +2125,7 @@ export type GetOfferRequest = {
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2079,7 +2133,7 @@ export type GetOrderedServiceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   orderedServiceId: number
 }
 
@@ -2088,7 +2142,7 @@ export type GetRaidRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -2100,11 +2154,11 @@ export type GetRemainingQuotaRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2132,7 +2186,7 @@ export type GetRescueRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to get rescue.
    */
@@ -2148,7 +2202,7 @@ export interface GetRpnStatusResponse {
   /**
    * Number of operations left to perform before being operational.
    */
-  operationsLeft?: number
+  operationsLeft?: number | null
 }
 
 
@@ -2156,7 +2210,7 @@ export type GetServerBackupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID of the backup.
    */
@@ -2168,7 +2222,7 @@ export type GetServerDefaultPartitioningRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -2184,7 +2238,7 @@ export type GetServerInstallRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID of the server to install.
    */
@@ -2196,7 +2250,7 @@ export type GetServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -2208,7 +2262,7 @@ export type GetServiceRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the service.
    */
@@ -2220,7 +2274,7 @@ export type IPv6BlockApiCreateIPv6BlockRequest = {
   /**
    * ID of the project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2252,7 +2306,7 @@ export type IPv6BlockApiGetIPv6BlockQuotasRequest = {
   /**
    * ID of the project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2260,7 +2314,7 @@ export type IPv6BlockApiGetIPv6BlockRequest = {
   /**
    * ID of the project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2273,7 +2327,7 @@ export type IPv6BlockApiListIPv6BlockSubnetsAvailableRequest = {
 
 
 export type IPv6BlockApiListIPv6BlocksRequest = {
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2285,7 +2339,7 @@ export type IPv6BlockApiUpdateIPv6BlockRequest = {
   /**
    * DNS to link to the IPv6.
    */
-  nameservers?: string[]
+  nameservers?: string[] | null
 }
 
 
@@ -2293,7 +2347,7 @@ export type InstallServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to install.
    */
@@ -2309,44 +2363,44 @@ export type InstallServerRequest = {
   /**
    * User to install on the server.
    */
-  userLogin?: string
+  userLogin?: string | null
   /**
    * User password to install on the server.
    */
-  userPassword?: string
+  userPassword?: string | null
   /**
    * Panel password to install on the server.
    */
-  panelPassword?: string
+  panelPassword?: string | null
   /**
    * Root password to install on the server.
    */
-  rootPassword?: string
+  rootPassword?: string | null
   /**
    * Partitions to install on the server.
    */
-  partitions?: InstallPartition[]
+  partitions?: InstallPartition[] | null
   /**
    * SSH key IDs authorized on the server.
    */
-  sshKeyIds?: string[]
+  sshKeyIds?: string[] | null
   /**
    * Offer ID of license to install on server.
    */
-  licenseOfferId?: number
+  licenseOfferId?: number | null
   /**
    * IP to link at the license to install on server.
    */
-  ipId?: number
+  ipId?: number | null
 }
 
 
 export interface Invoice {
   id: number
-  totalWithTaxes?: Money
-  totalWithoutTaxes?: Money
-  createdAt?: Date
-  paidAt?: Date
+  totalWithTaxes?: Money | null
+  totalWithoutTaxes?: Money | null
+  createdAt?: Date | null
+  paidAt?: Date | null
   status: InvoiceStatus
   paymentMethod: InvoicePaymentMethod
   content: string
@@ -2358,32 +2412,32 @@ export type ListFailoverIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of failovers IP per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the failovers IP.
    */
-  orderBy?: ListFailoverIPsRequestOrderBy
+  orderBy?: ListFailoverIPsRequestOrderBy | null
   /**
    * Filter failovers IP by project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter failovers IP which matching with this field.
    */
-  search?: string
+  search?: string | null
   /**
    * True: return all failovers IP not attached on server
 false: return all failovers IP attached on server.
    */
-  onlyAvailable?: boolean
+  onlyAvailable?: boolean | null
 }
 
 
@@ -2439,39 +2493,39 @@ export type ListOSRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of OS per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the OS.
    */
-  orderBy?: ListOSRequestOrderBy
+  orderBy?: ListOSRequestOrderBy | null
   /**
    * Type of the OS.
    */
-  type?: OSType
+  type?: OSType | null
   /**
    * Filter OS by compatible server ID.
    *
    * One-of ('offer'): at most one of 'serverId', 'offerId' could be set.
    */
-  serverId?: number
+  serverId?: number | null
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter OS by compatible offer ID.
    *
    * One-of ('offer'): at most one of 'serverId', 'offerId' could be set.
    */
-  offerId?: number
+  offerId?: number | null
 }
 
 
@@ -2491,51 +2545,51 @@ export type ListOffersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of offer per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the offers.
    */
-  orderBy?: ListOffersRequestOrderBy
+  orderBy?: ListOffersRequestOrderBy | null
   /**
    * Filter on commercial range.
    */
-  commercialRange?: string
+  commercialRange?: string | null
   /**
    * Filter on catalog.
    */
-  catalog?: OfferCatalog
+  catalog?: OfferCatalog | null
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Get the current failover IP offer.
    */
-  isFailoverIp?: boolean
+  isFailoverIp?: boolean | null
   /**
    * Get the current failover IP block offer.
    */
-  isFailoverBlock?: boolean
+  isFailoverBlock?: boolean | null
   /**
    * Filter offers depending on their datacenter.
    */
-  soldIn?: string[]
+  soldIn?: string[] | null
   /**
    * Set this filter to true to only return available offers.
    */
-  availableOnly?: boolean
+  availableOnly?: boolean | null
   /**
    * Get the RPN SAN offers.
    */
-  isRpnSan?: boolean
+  isRpnSan?: boolean | null
 }
 
 
@@ -2693,7 +2747,7 @@ export type ListServerDisksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID of the server disks.
    */
@@ -2701,15 +2755,15 @@ export type ListServerDisksRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of server disk per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the server disks.
    */
-  orderBy?: ListServerDisksRequestOrderBy
+  orderBy?: ListServerDisksRequestOrderBy | null
 }
 
 
@@ -2729,7 +2783,7 @@ export type ListServerEventsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID of the server events.
    */
@@ -2737,15 +2791,15 @@ export type ListServerEventsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of server event per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the server events.
    */
-  orderBy?: ListServerEventsRequestOrderBy
+  orderBy?: ListServerEventsRequestOrderBy | null
 }
 
 
@@ -2765,27 +2819,27 @@ export type ListServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of server per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the servers.
    */
-  orderBy?: ListServersRequestOrderBy
+  orderBy?: ListServersRequestOrderBy | null
   /**
    * Filter servers by project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter servers by hostname.
    */
-  search?: string
+  search?: string | null
 }
 
 
@@ -2805,23 +2859,23 @@ export type ListServicesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of service per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the services.
    */
-  orderBy?: ListServicesRequestOrderBy
+  orderBy?: ListServicesRequestOrderBy | null
   /**
    * Project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2841,7 +2895,7 @@ export type ListSubscribableServerOptionsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID of the subscribable server options.
    */
@@ -2849,11 +2903,11 @@ export type ListSubscribableServerOptionsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of subscribable server option per page.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -2870,12 +2924,12 @@ export interface ListSubscribableServerOptionsResponse {
 
 
 export interface OfferFailoverBlockInfo {
-  onetimeFees?: Offer
+  onetimeFees?: Offer | null
 }
 
 
 export interface OfferFailoverIpInfo {
-  onetimeFees?: Offer
+  onetimeFees?: Offer | null
 }
 
 
@@ -2889,10 +2943,12 @@ export interface OfferServerInfo {
   persistentMemories: PersistentMemory[]
   raidControllers: RaidController[]
   availableOptions: Offer[]
-  rpnVersion?: number
+  rpnVersion?: number | null
   connectivity: number
-  onetimeFees?: Offer
+  onetimeFees?: Offer | null
   stockByDatacenter: Record<string, OfferServerInfoStock>
+  availabilityByDatacenter: Record<string, OfferServerInfoAvailability>
+  rpnSpeed: number
 }
 
 
@@ -2923,7 +2979,7 @@ export type RebootServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to reboot.
    */
@@ -2933,10 +2989,10 @@ export type RebootServerRequest = {
 
 export interface Refund {
   id: number
-  totalWithTaxes?: Money
-  totalWithoutTaxes?: Money
-  createdAt?: Date
-  refundedAt?: Date
+  totalWithTaxes?: Money | null
+  totalWithoutTaxes?: Money | null
+  createdAt?: Date | null
+  refundedAt?: Date | null
   status: RefundStatus
   method: RefundMethod
   content: string
@@ -2967,15 +3023,15 @@ export type RpnApiGetRpnStatusRequest = {
   /**
    * A project ID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * An RPN v1 group ID.
    */
-  rpnv1GroupId?: number
+  rpnv1GroupId?: number | null
   /**
    * An RPN v2 group ID.
    */
-  rpnv2GroupId?: number
+  rpnv2GroupId?: number | null
 }
 
 
@@ -2983,19 +3039,19 @@ export type RpnApiListRpnServerCapabilitiesRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of servers per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the servers.
    */
-  orderBy?: ListRpnServerCapabilitiesRequestOrderBy
+  orderBy?: ListRpnServerCapabilitiesRequestOrderBy | null
   /**
    * Filter servers by project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3019,7 +3075,7 @@ export type RpnSanApiCreateRpnSanRequest = {
   /**
    * Your project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3047,7 +3103,7 @@ export type RpnSanApiListAvailableIpsRequest = {
   /**
    * Filter by IP type (server | rpnv2_subnet).
    */
-  type?: RpnSanIpType
+  type?: RpnSanIpType | null
 }
 
 
@@ -3059,7 +3115,7 @@ export type RpnSanApiListIpsRequest = {
   /**
    * Filter by IP type (server | rpnv2_subnet).
    */
-  type?: RpnSanIpType
+  type?: RpnSanIpType | null
 }
 
 
@@ -3067,19 +3123,19 @@ export type RpnSanApiListRpnSansRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of RPN SANs per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the RPN SANs.
    */
-  orderBy?: ListRpnSansRequestOrderBy
+  orderBy?: ListRpnSansRequestOrderBy | null
   /**
    * Filter RPN SANs by project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3111,11 +3167,11 @@ export type RpnV1ApiAddRpnGroupMembersRequest = {
   /**
    * A collection of rpn v1 capable server IDs.
    */
-  serverIds?: number[]
+  serverIds?: number[] | null
   /**
    * A collection of rpn v1 capable RPN SAN server IDs.
    */
-  sanServerIds?: number[]
+  sanServerIds?: number[] | null
 }
 
 
@@ -3127,15 +3183,15 @@ export type RpnV1ApiCreateRpnGroupRequest = {
   /**
    * A collection of rpn v1 capable servers.
    */
-  serverIds?: number[]
+  serverIds?: number[] | null
   /**
    * A collection of rpn v1 capable rpn sans servers.
    */
-  sanServerIds?: number[]
+  sanServerIds?: number[] | null
   /**
    * A project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3183,19 +3239,19 @@ export type RpnV1ApiListRpnCapableSanServersRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn capable resources per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn capable resources.
    */
-  orderBy?: ListRpnCapableSanServersRequestOrderBy
+  orderBy?: ListRpnCapableSanServersRequestOrderBy | null
   /**
    * Filter rpn capable resources by project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3203,19 +3259,19 @@ export type RpnV1ApiListRpnCapableServersRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn capable resources per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn capable resources.
    */
-  orderBy?: ListRpnCapableServersRequestOrderBy
+  orderBy?: ListRpnCapableServersRequestOrderBy | null
   /**
    * Filter rpn capable resources by project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3227,19 +3283,19 @@ export type RpnV1ApiListRpnGroupMembersRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn v1 group members per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn v1 group members.
    */
-  orderBy?: ListRpnGroupMembersRequestOrderBy
+  orderBy?: ListRpnGroupMembersRequestOrderBy | null
   /**
    * A project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3247,19 +3303,19 @@ export type RpnV1ApiListRpnGroupsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn v1 groups per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn v1 groups.
    */
-  orderBy?: ListRpnGroupsRequestOrderBy
+  orderBy?: ListRpnGroupsRequestOrderBy | null
   /**
    * Filter rpn v1 groups by project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3267,19 +3323,19 @@ export type RpnV1ApiListRpnInvitesRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn capable resources per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn capable resources.
    */
-  orderBy?: ListRpnInvitesRequestOrderBy
+  orderBy?: ListRpnInvitesRequestOrderBy | null
   /**
    * Filter rpn capable resources by project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3303,7 +3359,7 @@ export type RpnV1ApiRpnGroupInviteRequest = {
   /**
    * A project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3315,7 +3371,7 @@ export type RpnV1ApiUpdateRpnGroupNameRequest = {
   /**
    * New rpn v1 group name.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -3335,11 +3391,11 @@ export type RpnV2ApiCreateRpnV2GroupRequest = {
   /**
    * Project ID of the RPN V2 group.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * RPN V2 group type (qing / standard).
    */
-  type?: RpnV2GroupType
+  type?: RpnV2GroupType | null
   /**
    * RPN V2 group name.
    */
@@ -3403,19 +3459,19 @@ export type RpnV2ApiListRpnV2CapableResourcesRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn v2 capable resources per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn v2 capable resources.
    */
-  orderBy?: ListRpnV2CapableResourcesRequestOrderBy
+  orderBy?: ListRpnV2CapableResourcesRequestOrderBy | null
   /**
    * Filter rpn v2 capable resources by project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3427,15 +3483,15 @@ export type RpnV2ApiListRpnV2GroupLogsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn v2 group logs per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn v2 group logs.
    */
-  orderBy?: ListRpnV2GroupLogsRequestOrderBy
+  orderBy?: ListRpnV2GroupLogsRequestOrderBy | null
 }
 
 
@@ -3443,19 +3499,19 @@ export type RpnV2ApiListRpnV2GroupsRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn v2 groups per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn v2 groups.
    */
-  orderBy?: ListRpnV2GroupsRequestOrderBy
+  orderBy?: ListRpnV2GroupsRequestOrderBy | null
   /**
    * Filter rpn v2 groups by project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3467,19 +3523,19 @@ export type RpnV2ApiListRpnV2MembersRequest = {
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of rpn v2 group members per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the rpn v2 group members.
    */
-  orderBy?: ListRpnV2MembersRequestOrderBy
+  orderBy?: ListRpnV2MembersRequestOrderBy | null
   /**
    * Filter members by type.
    */
-  type?: ListRpnV2MembersRequestType
+  type?: ListRpnV2MembersRequestType | null
 }
 
 
@@ -3491,7 +3547,7 @@ export type RpnV2ApiUpdateRpnV2GroupNameRequest = {
   /**
    * RPN V2 group name.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -3508,7 +3564,7 @@ export type RpnV2ApiUpdateRpnV2VlanForMembersRequest = {
    * Min: 0.
 Max: 3967.
    */
-  vlan?: number
+  vlan?: number | null
 }
 
 
@@ -3523,11 +3579,11 @@ export interface ServerDefaultPartitioning {
 export interface ServerInstall {
   osId: number
   hostname: string
-  userLogin?: string
+  userLogin?: string | null
   partitions: Partition[]
   sshKeyIds: string[]
   status: ServerInstallStatus
-  panelUrl?: string
+  panelUrl?: string | null
 }
 
 
@@ -3535,7 +3591,7 @@ export type StartBMCAccessRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to start the BMC access.
    */
@@ -3551,7 +3607,7 @@ export type StartRescueRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to start rescue.
    */
@@ -3567,7 +3623,7 @@ export type StartServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to start.
    */
@@ -3579,7 +3635,7 @@ export type StopBMCAccessRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to stop BMC access.
    */
@@ -3591,7 +3647,7 @@ export type StopRescueRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server to stop rescue.
    */
@@ -3603,7 +3659,7 @@ export type StopServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to stop.
    */
@@ -3615,7 +3671,7 @@ export type SubscribeServerOptionRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to subscribe server option.
    */
@@ -3631,7 +3687,7 @@ export type SubscribeStorageOptionsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID of the storage options to subscribe.
    */
@@ -3655,7 +3711,7 @@ export type UpdateRaidRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the server.
    */
@@ -3671,7 +3727,7 @@ export type UpdateReverseRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the IP.
    */
@@ -3687,7 +3743,7 @@ export type UpdateServerBackupRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to update backup.
    */
@@ -3695,15 +3751,15 @@ export type UpdateServerBackupRequest = {
   /**
    * Password of the server backup.
    */
-  password?: string
+  password?: string | null
   /**
    * Autologin of the server backup.
    */
-  autologin?: boolean
+  autologin?: boolean | null
   /**
    * Boolean to enable or disable ACL.
    */
-  aclEnabled?: boolean
+  aclEnabled?: boolean | null
 }
 
 
@@ -3711,7 +3767,7 @@ export type UpdateServerRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to update.
    */
@@ -3719,11 +3775,11 @@ export type UpdateServerRequest = {
   /**
    * Hostname of the server to update.
    */
-  hostname?: string
+  hostname?: string | null
   /**
    * Flag to enable or not the IPv6 of server.
    */
-  enableIpv6?: boolean
+  enableIpv6?: boolean | null
 }
 
 
@@ -3731,7 +3787,7 @@ export type UpdateServerTagsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Server ID to update the tags.
    */
@@ -3739,7 +3795,7 @@ export type UpdateServerTagsRequest = {
   /**
    * Tags of server to update.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 

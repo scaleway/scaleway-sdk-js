@@ -16,7 +16,9 @@ import {
   unmarshalInvoice,
   unmarshalListChargesResponse,
   unmarshalListConsumptionsResponse,
+  unmarshalListDiscountLinesResponse,
   unmarshalListDiscountsResponse,
+  unmarshalListInvoiceLinesResponse,
   unmarshalListInvoicesResponse,
   unmarshalListTaxesResponse,
 } from './marshalling.gen.js'
@@ -30,8 +32,12 @@ import type {
   ListChargesResponse,
   ListConsumptionsRequest,
   ListConsumptionsResponse,
+  ListDiscountLinesRequest,
+  ListDiscountLinesResponse,
   ListDiscountsRequest,
   ListDiscountsResponse,
+  ListInvoiceLinesRequest,
+  ListInvoiceLinesResponse,
   ListInvoicesRequest,
   ListInvoicesResponse,
   ListTaxesRequest,
@@ -250,6 +256,54 @@ export class API extends ParentAPI {
       },
       unmarshalDiscount,
     )
+
+  
+  protected pageOfListInvoiceLines = (request: Readonly<ListInvoiceLinesRequest>, options?: RequestOptions) =>
+    this.client.fetch<ListInvoiceLinesResponse>(
+      {
+        method: 'GET',
+        path: `/billing/v2beta1/invoices/${validatePathParam('invoiceId', request.invoiceId)}/lines`,
+        urlParams: urlParams(
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+        ),
+        signal: options?.signal,
+      },
+      unmarshalListInvoiceLinesResponse,
+    )
+  
+  /**
+   * List invoice lines. List all lines of a given invoice, specified by its ID.
+   *
+   * @param request - The request {@link ListInvoiceLinesRequest}
+   * @returns A Promise of ListInvoiceLinesResponse
+   */
+  listInvoiceLines = (request: Readonly<ListInvoiceLinesRequest>, options?: RequestOptions) =>
+    enrichForPagination('invoiceLines', this.pageOfListInvoiceLines, request, options)
+
+  
+  protected pageOfListDiscountLines = (request: Readonly<ListDiscountLinesRequest>, options?: RequestOptions) =>
+    this.client.fetch<ListDiscountLinesResponse>(
+      {
+        method: 'GET',
+        path: `/billing/v2beta1/invoices/${validatePathParam('invoiceId', request.invoiceId)}/discount-lines`,
+        urlParams: urlParams(
+          ['page', request.page],
+          ['page_size', request.pageSize ?? this.client.settings.defaultPageSize],
+        ),
+        signal: options?.signal,
+      },
+      unmarshalListDiscountLinesResponse,
+    )
+  
+  /**
+   * List discount lines. List all discount lines of a given invoice, specified by its ID.
+   *
+   * @param request - The request {@link ListDiscountLinesRequest}
+   * @returns A Promise of ListDiscountLinesResponse
+   */
+  listDiscountLines = (request: Readonly<ListDiscountLinesRequest>, options?: RequestOptions) =>
+    enrichForPagination('discountLines', this.pageOfListDiscountLines, request, options)
 
   
 }

@@ -34,8 +34,8 @@ You'll need a pair of access and secret keys to connect to Scaleway API. Please 
 ### Basic Usage
 
 ```typescript
-import { createClient } from '@scaleway/sdk-client'
 import { Billing } from '@scaleway/sdk-billing'
+import { createClient } from '@scaleway/sdk-client'
 
 const client = createClient({
   accessKey: 'SCWXXXXXXXXXXXXXXXXX',
@@ -56,9 +56,9 @@ const api = new Billing.v1.API(client)
 For a simpler setup, you can load credentials from the configuration file or environment variables:
 
 ```typescript
-import { createClient } from '@scaleway/sdk-client'
 import { loadProfileFromConfigurationFile } from '@scaleway/configuration-loader'
 import { Billing } from '@scaleway/sdk-billing'
+import { createClient } from '@scaleway/sdk-client'
 
 const profile = loadProfileFromConfigurationFile()
 const client = createClient(profile)

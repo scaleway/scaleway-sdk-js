@@ -23,17 +23,17 @@ export const unmarshalDatabaseBackup = (data: unknown): DatabaseBackup => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     databaseId: data.database_id,
-    dbSize: data.db_size,
-    downloadUrl: data.download_url,
-    downloadUrlExpiresAt: unmarshalDate(data.download_url_expires_at),
-    expiresAt: unmarshalDate(data.expires_at),
+    dbSize: data.db_size ?? null,
+    downloadUrl: data.download_url ?? null,
+    downloadUrlExpiresAt: unmarshalDate(data.download_url_expires_at) ?? null,
+    expiresAt: unmarshalDate(data.expires_at) ?? null,
     id: data.id,
     organizationId: data.organization_id,
     projectId: data.project_id,
     region: data.region,
-    size: data.size,
+    size: data.size ?? null,
     srn: data.srn,
     status: data.status,
   } as DatabaseBackup
@@ -47,7 +47,7 @@ const unmarshalVersion = (data: unknown): Version => {
   }
 
   return {
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
     name: data.name,
     region: data.region,
     srn: data.srn,
@@ -65,9 +65,9 @@ export const unmarshalDatabase = (data: unknown): Database => {
     cpuCurrent: data.cpu_current,
     cpuMax: data.cpu_max,
     cpuMin: data.cpu_min,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     endpoint: data.endpoint,
-    engineMajorVersion: data.engine_major_version,
+    engineMajorVersion: data.engine_major_version ?? null,
     id: data.id,
     name: data.name,
     organizationId: data.organization_id,
@@ -76,7 +76,7 @@ export const unmarshalDatabase = (data: unknown): Database => {
     srn: data.srn,
     started: data.started,
     status: data.status,
-    version: data.version ? unmarshalVersion(data.version) : undefined,
+    version: data.version ? unmarshalVersion(data.version) : null,
   } as Database
 }
 

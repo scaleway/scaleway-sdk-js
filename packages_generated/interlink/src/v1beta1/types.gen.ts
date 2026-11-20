@@ -107,7 +107,7 @@ export interface PartnerHost {
   /**
    * Reason given by partner to explain why they did not approve the request for a hosted link.
    */
-  disapprovedReason?: string
+  disapprovedReason?: string | null
   /**
    * Whether or not the partner supports L3 connectivity.
    */
@@ -167,19 +167,19 @@ export interface DedicatedConnection {
   /**
    * Creation date of the dedicated connection.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the dedicated connection.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Demarcation details required by the data center to set up the supporting Cross Connect. This generally includes the physical space in the facility, the cabinet or rack the connection should land in, the patch panel to go in, the port designation, and the media type.
    */
-  demarcationInfo?: string
+  demarcationInfo?: string | null
   /**
    * Range in which to pick vlan for self-hosted links on this dedicated connection. Both start & end are included. Any range defined here must be itself included in the greater allowed range of vlans from 1500 to 3899 (this range is hardware dependent and can change over time, but actual range will be enforced).
    */
-  vlanRange?: Range
+  vlanRange?: Range | null
   /**
    * Region of the dedicated connection.
    */
@@ -235,11 +235,11 @@ export interface Link {
   /**
    * ID of the Scaleway VPC attached to the link.
    */
-  vpcId?: string
+  vpcId?: string | null
   /**
    * @deprecated Deprecated. Use routing_policy_v4_id or routing_policy_v6_id instead.
    */
-  routingPolicyId?: string
+  routingPolicyId?: string | null
   /**
    * Defines whether route propagation is enabled or not. To enable or disable route propagation, use the dedicated endpoint.
    */
@@ -247,23 +247,23 @@ export interface Link {
   /**
    * Creation date of the link.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the link.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Partner host information.
    *
    * One-of ('hostInfo'): at most one of 'partner', 'self' could be set.
    */
-  partner?: PartnerHost
+  partner?: PartnerHost | null
   /**
    * Self-host information.
    *
    * One-of ('hostInfo'): at most one of 'partner', 'self' could be set.
    */
-  self?: SelfHost
+  self?: SelfHost | null
   /**
    * VLAN of the link.
    */
@@ -271,19 +271,19 @@ export interface Link {
   /**
    * BGP configuration on Scaleway's side.
    */
-  scwBgpConfig?: BgpConfig
+  scwBgpConfig?: BgpConfig | null
   /**
    * BGP configuration on peer's side (on-premises or other hosting provider).
    */
-  peerBgpConfig?: BgpConfig
+  peerBgpConfig?: BgpConfig | null
   /**
    * ID of the routing policy IPv4 attached to the link.
    */
-  routingPolicyV4Id?: string
+  routingPolicyV4Id?: string | null
   /**
    * ID of the routing policy IPv6 attached to the link.
    */
-  routingPolicyV6Id?: string
+  routingPolicyV6Id?: string | null
   /**
    * Region of the link.
    */
@@ -319,11 +319,11 @@ export interface Partner {
   /**
    * Creation date of the partner.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the partner.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Whether or not the partner supports L3 connectivity.
    */
@@ -415,11 +415,11 @@ export interface RoutingPolicy {
   /**
    * Creation date of the routing policy.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the routing policy.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * IP prefixes version of the routing policy.
    */
@@ -435,7 +435,7 @@ export type AttachRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link to attach a routing policy to.
    */
@@ -451,7 +451,7 @@ export type AttachVpcRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link to attach VPC to.
    */
@@ -467,11 +467,11 @@ export type CreateLinkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to create the link in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the link.
    */
@@ -479,7 +479,7 @@ export type CreateLinkRequest = {
   /**
    * List of tags to apply to the link.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * PoP (location) where the link will be created.
    */
@@ -493,29 +493,29 @@ export type CreateLinkRequest = {
    *
    * One-of ('host'): at most one of 'connectionId', 'partnerId' could be set.
    */
-  connectionId?: string
+  connectionId?: string | null
   /**
    * If set, creates a hosted link on a partner's connection. Specify the ID of the chosen partner, who already has a shared connection with available bandwidth.
    *
    * One-of ('host'): at most one of 'connectionId', 'partnerId' could be set.
    */
-  partnerId?: string
+  partnerId?: string | null
   /**
    * For self-hosted links we need the peer AS Number to establish BGP session. If not given, a default one will be assigned.
    */
-  peerAsn?: number
+  peerAsn?: number | null
   /**
    * For self-hosted links only, it is possible to choose the VLAN ID. If the VLAN is not available (ie already taken or out of range), an error is returned.
    */
-  vlan?: number
+  vlan?: number | null
   /**
    * If set, attaches this routing policy containing IPv4 prefixes to the Link. Hence, a BGP IPv4 session will be created.
    */
-  routingPolicyV4Id?: string
+  routingPolicyV4Id?: string | null
   /**
    * If set, attaches this routing policy containing IPv6 prefixes to the Link. Hence, a BGP IPv6 session will be created.
    */
-  routingPolicyV6Id?: string
+  routingPolicyV6Id?: string | null
 }
 
 
@@ -523,11 +523,11 @@ export type CreateRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project to create the routing policy in.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the routing policy.
    */
@@ -535,15 +535,15 @@ export type CreateRoutingPolicyRequest = {
   /**
    * List of tags to apply to the routing policy.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * IP prefixes to accept from the peer (ranges of route announcements to accept).
    */
-  prefixFilterIn?: string[]
+  prefixFilterIn?: string[] | null
   /**
    * IP prefix filters to advertise to the peer (ranges of routes to advertise).
    */
-  prefixFilterOut?: string[]
+  prefixFilterOut?: string[] | null
   /**
    * IP prefixes version of the routing policy.
    */
@@ -555,7 +555,7 @@ export type DeleteLinkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link to delete.
    */
@@ -567,7 +567,7 @@ export type DeleteRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the routing policy to delete.
    */
@@ -579,7 +579,7 @@ export type DetachRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link to detach a routing policy from.
    */
@@ -595,7 +595,7 @@ export type DetachVpcRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link to detach the VPC from.
    */
@@ -607,7 +607,7 @@ export type DisableRoutePropagationRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link on which to disable route propagation.
    */
@@ -619,7 +619,7 @@ export type EnableRoutePropagationRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link on which to enable route propagation.
    */
@@ -631,7 +631,7 @@ export type GetDedicatedConnectionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of connection to get.
    */
@@ -643,7 +643,7 @@ export type GetLinkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link to get.
    */
@@ -655,7 +655,7 @@ export type GetPartnerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of partner to get.
    */
@@ -667,7 +667,7 @@ export type GetPopRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of PoP to get.
    */
@@ -679,7 +679,7 @@ export type GetRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the routing policy to get.
    */
@@ -691,47 +691,47 @@ export type ListDedicatedConnectionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListDedicatedConnectionsRequestOrderBy
+  orderBy?: ListDedicatedConnectionsRequestOrderBy | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of connections to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Project ID to filter for.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Link name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Connection status to filter for.
    */
-  status?: DedicatedConnectionStatus
+  status?: DedicatedConnectionStatus | null
   /**
    * Filter for dedicated connections with this bandwidth size.
    */
-  bandwidthMbps?: number
+  bandwidthMbps?: number | null
   /**
    * Filter for dedicated connections present in this PoP.
    */
-  popId?: string
+  popId?: string | null
 }
 
 
@@ -751,79 +751,79 @@ export type ListLinksRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListLinksRequestOrderBy
+  orderBy?: ListLinksRequestOrderBy | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of links to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Project ID to filter for.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Link name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Link status to filter for.
    */
-  status?: LinkStatus
+  status?: LinkStatus | null
   /**
    * BGP IPv4 status to filter for.
    */
-  bgpV4Status?: BgpStatus
+  bgpV4Status?: BgpStatus | null
   /**
    * BGP IPv6 status to filter for.
    */
-  bgpV6Status?: BgpStatus
+  bgpV6Status?: BgpStatus | null
   /**
    * Filter for links attached to this PoP (via connections).
    */
-  popId?: string
+  popId?: string | null
   /**
    * Filter for link bandwidth (in Mbps).
    */
-  bandwidthMbps?: number
+  bandwidthMbps?: number | null
   /**
    * Filter for links hosted by this partner.
    */
-  partnerId?: string
+  partnerId?: string | null
   /**
    * Filter for links attached to this VPC.
    */
-  vpcId?: string
+  vpcId?: string | null
   /**
    * Filter for links using this routing policy.
    */
-  routingPolicyId?: string
+  routingPolicyId?: string | null
   /**
    * Filter for the link with this pairing_key.
    */
-  pairingKey?: string
+  pairingKey?: string | null
   /**
    * Filter for hosted or self-hosted links.
    */
-  kind?: LinkKind
+  kind?: LinkKind | null
   /**
    * Filter for links self-hosted on this connection.
    */
-  connectionId?: string
+  connectionId?: string | null
 }
 
 
@@ -843,27 +843,27 @@ export type ListPartnersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListPartnersRequestOrderBy
+  orderBy?: ListPartnersRequestOrderBy | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of partners to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter for partners present (offering a connection) in one of these PoPs.
    */
-  popIds?: string[]
+  popIds?: string[] | null
   /**
    * Filter for partners supporting L3 connectivity.
    */
-  l3Connectivity?: boolean
+  l3Connectivity?: boolean | null
 }
 
 
@@ -883,43 +883,43 @@ export type ListPopsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListPopsRequestOrderBy
+  orderBy?: ListPopsRequestOrderBy | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of PoPs to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * PoP name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Hosting provider name to filter for.
    */
-  hostingProviderName?: string
+  hostingProviderName?: string | null
   /**
    * Filter for PoPs hosting an available shared connection from this partner.
    */
-  partnerId?: string
+  partnerId?: string | null
   /**
    * Filter for PoPs with a connection allowing this bandwidth size. Note that we cannot guarantee that PoPs returned will have available capacity.
    */
-  linkBandwidthMbps?: number
+  linkBandwidthMbps?: number | null
   /**
    * Filter for PoPs with a dedicated connection available for self-hosted links.
    */
-  dedicatedAvailable?: boolean
+  dedicatedAvailable?: boolean | null
   /**
    * Filter for PoPs with a shared connection available from a partner supporting L3 connectivity.
    */
-  l3ConnectivityPartners?: boolean
+  l3ConnectivityPartners?: boolean | null
 }
 
 
@@ -939,39 +939,39 @@ export type ListRoutingPoliciesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListRoutingPoliciesRequestOrderBy
+  orderBy?: ListRoutingPoliciesRequestOrderBy | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of routing policies to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Project ID to filter for.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Organization ID to filter for.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Routing policy name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags to filter for.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter for the routing policies based on IP prefixes version.
    */
-  ipv6?: boolean
+  ipv6?: boolean | null
 }
 
 
@@ -985,7 +985,7 @@ export type SetRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link to set a routing policy from.
    */
@@ -1001,7 +1001,7 @@ export type UpdateLinkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the link to update.
    */
@@ -1009,15 +1009,15 @@ export type UpdateLinkRequest = {
   /**
    * Name of the link.
    */
-  name?: string
+  name?: string | null
   /**
    * List of tags to apply to the link.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * For self-hosted links, AS Number to establish BGP session.
    */
-  peerAsn?: number
+  peerAsn?: number | null
 }
 
 
@@ -1025,7 +1025,7 @@ export type UpdateRoutingPolicyRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the routing policy to update.
    */
@@ -1033,19 +1033,19 @@ export type UpdateRoutingPolicyRequest = {
   /**
    * Name of the routing policy.
    */
-  name?: string
+  name?: string | null
   /**
    * List of tags to apply to the routing policy.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * IP prefixes to accept from the peer (ranges of route announcements to accept).
    */
-  prefixFilterIn?: string[]
+  prefixFilterIn?: string[] | null
   /**
    * IP prefix filters for routes to advertise to the peer (ranges of routes to advertise).
    */
-  prefixFilterOut?: string[]
+  prefixFilterOut?: string[] | null
 }
 
 

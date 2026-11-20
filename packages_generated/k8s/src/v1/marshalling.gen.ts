@@ -82,12 +82,12 @@ export const unmarshalVersion = (data: unknown): Version => {
     availableCnis: data.available_cnis,
     availableFeatureGates: data.available_feature_gates,
     availableKubeletArgs: data.available_kubelet_args,
-    deprecatedAt: unmarshalDate(data.deprecated_at),
-    endOfLifeAt: unmarshalDate(data.end_of_life_at),
+    deprecatedAt: unmarshalDate(data.deprecated_at) ?? null,
+    endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
     label: data.label,
     name: data.name,
     region: data.region,
-    releasedAt: unmarshalDate(data.released_at),
+    releasedAt: unmarshalDate(data.released_at) ?? null,
     srn: data.srn,
   } as Version
 }
@@ -114,7 +114,7 @@ const unmarshalClusterAutoUpgrade = (data: unknown): ClusterAutoUpgrade => {
 
   return {
     enabled: data.enabled,
-    maintenanceWindow: data.maintenance_window ? unmarshalMaintenanceWindow(data.maintenance_window) : undefined,
+    maintenanceWindow: data.maintenance_window ? unmarshalMaintenanceWindow(data.maintenance_window) : null,
   } as ClusterAutoUpgrade
 }
 
@@ -167,15 +167,15 @@ export const unmarshalCluster = (data: unknown): Cluster => {
   }
 
   return {
-    aclAvailable: data.acl_available,
+    aclAvailable: data.acl_available ?? null,
     admissionPlugins: data.admission_plugins,
     apiserverCertSans: data.apiserver_cert_sans,
-    autoUpgrade: data.auto_upgrade ? unmarshalClusterAutoUpgrade(data.auto_upgrade) : undefined,
-    autoscalerConfig: data.autoscaler_config ? unmarshalClusterAutoscalerConfig(data.autoscaler_config) : undefined,
+    autoUpgrade: data.auto_upgrade ? unmarshalClusterAutoUpgrade(data.auto_upgrade) : null,
+    autoscalerConfig: data.autoscaler_config ? unmarshalClusterAutoscalerConfig(data.autoscaler_config) : null,
     clusterUrl: data.cluster_url,
     cni: data.cni,
-    commitmentEndsAt: unmarshalDate(data.commitment_ends_at),
-    createdAt: unmarshalDate(data.created_at),
+    commitmentEndsAt: unmarshalDate(data.commitment_ends_at) ?? null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     dnsWildcard: data.dns_wildcard,
     featureGates: data.feature_gates,
@@ -183,10 +183,10 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     iamNodesGroupId: data.iam_nodes_group_id,
     id: data.id,
     name: data.name,
-    openIdConnectConfig: data.open_id_connect_config ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config) : undefined,
+    openIdConnectConfig: data.open_id_connect_config ? unmarshalClusterOpenIDConnectConfig(data.open_id_connect_config) : null,
     organizationId: data.organization_id,
     podCidr: data.pod_cidr,
-    privateNetworkId: data.private_network_id,
+    privateNetworkId: data.private_network_id ?? null,
     projectId: data.project_id,
     region: data.region,
     serviceCidr: data.service_cidr,
@@ -195,7 +195,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     status: data.status,
     tags: data.tags,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     upgradeAvailable: data.upgrade_available,
     version: data.version,
   } as Cluster
@@ -211,18 +211,18 @@ export const unmarshalNode = (data: unknown): Node => {
   return {
     clusterId: data.cluster_id,
     conditions: data.conditions,
-    createdAt: unmarshalDate(data.created_at),
-    errorMessage: data.error_message,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    errorMessage: data.error_message ?? null,
     id: data.id,
     name: data.name,
     poolId: data.pool_id,
     providerId: data.provider_id,
-    publicIpV4: data.public_ip_v4,
-    publicIpV6: data.public_ip_v6,
+    publicIpV4: data.public_ip_v4 ?? null,
+    publicIpV6: data.public_ip_v6 ?? null,
     region: data.region,
     srn: data.srn,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
   } as Node
 }
 
@@ -265,21 +265,21 @@ export const unmarshalPool = (data: unknown): Pool => {
     autoscaling: data.autoscaling,
     clusterId: data.cluster_id,
     containerRuntime: data.container_runtime,
-    createdAt: unmarshalDate(data.created_at),
-    errorMessage: data.error_message,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    errorMessage: data.error_message ?? null,
     id: data.id,
     kubeletArgs: data.kubelet_args,
     labels: data.labels,
     maxSize: data.max_size,
-    maxTerminationGracePeriod: data.max_termination_grace_period,
+    maxTerminationGracePeriod: data.max_termination_grace_period ?? null,
     minSize: data.min_size,
     name: data.name,
     nodeType: data.node_type,
-    placementGroupId: data.placement_group_id,
-    privateNetworkId: data.private_network_id,
+    placementGroupId: data.placement_group_id ?? null,
+    privateNetworkId: data.private_network_id ?? null,
     publicIpDisabled: data.public_ip_disabled,
     region: data.region,
-    rootVolumeSize: data.root_volume_size,
+    rootVolumeSize: data.root_volume_size ?? null,
     rootVolumeType: data.root_volume_type,
     securityGroupId: data.security_group_id,
     size: data.size,
@@ -288,8 +288,8 @@ export const unmarshalPool = (data: unknown): Pool => {
     status: data.status,
     tags: data.tags,
     taints: unmarshalArrayOfObject(data.taints, unmarshalCoreV1Taint),
-    updatedAt: unmarshalDate(data.updated_at),
-    upgradePolicy: data.upgrade_policy ? unmarshalPoolUpgradePolicy(data.upgrade_policy) : undefined,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    upgradePolicy: data.upgrade_policy ? unmarshalPoolUpgradePolicy(data.upgrade_policy) : null,
     version: data.version,
     zone: data.zone,
   } as Pool
@@ -305,9 +305,9 @@ const unmarshalACLRule = (data: unknown): ACLRule => {
   return {
     description: data.description,
     id: data.id,
-    ip: data.ip,
+    ip: data.ip ?? null,
     region: data.region,
-    scalewayRanges: data.scaleway_ranges,
+    scalewayRanges: data.scaleway_ranges ?? null,
     srn: data.srn,
   } as ACLRule
 }
@@ -360,7 +360,7 @@ const unmarshalClusterType = (data: unknown): ClusterType => {
   return {
     auditLogsSupported: data.audit_logs_supported,
     availability: data.availability,
-    commitmentDelay: data.commitment_delay,
+    commitmentDelay: data.commitment_delay ?? null,
     dedicated: data.dedicated,
     maxEtcdSize: data.max_etcd_size,
     maxNodes: data.max_nodes,
@@ -561,7 +561,7 @@ export const marshalAddClusterACLRulesRequest = (
   request: AddClusterACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acls: ((request.acls !== undefined) ?  request.acls.map(elt => marshalACLRuleRequest(elt, defaults)): undefined),
+  acls: ((request.acls != null) ?  request.acls.map(elt => marshalACLRuleRequest(elt, defaults)): undefined),
 })
 
 const marshalMaintenanceWindow = (
@@ -594,7 +594,7 @@ const marshalCreateClusterRequestAutoUpgrade = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable: request.enable,
-  maintenance_window: ((request.maintenanceWindow !== undefined) ?  marshalMaintenanceWindow(request.maintenanceWindow, defaults): undefined),
+  maintenance_window: ((request.maintenanceWindow != null) ?  marshalMaintenanceWindow(request.maintenanceWindow, defaults): undefined),
 })
 
 const marshalCreateClusterRequestAutoscalerConfig = (
@@ -652,7 +652,7 @@ const marshalCreateClusterRequestPoolConfig = (
   startup_taints:  request.startupTaints.map(elt => marshalCoreV1Taint(elt, defaults)),
   tags: request.tags,
   taints:  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)),
-  upgrade_policy: ((request.upgradePolicy !== undefined) ?  marshalCreateClusterRequestPoolConfigUpgradePolicy(request.upgradePolicy, defaults): undefined),
+  upgrade_policy: ((request.upgradePolicy != null) ?  marshalCreateClusterRequestPoolConfigUpgradePolicy(request.upgradePolicy, defaults): undefined),
   user_data:  request.userData,
   zone: request.zone,
 })
@@ -663,15 +663,15 @@ export const marshalCreateClusterRequest = (
 ): Record<string, unknown> => ({
   admission_plugins: request.admissionPlugins,
   apiserver_cert_sans: request.apiserverCertSans,
-  auto_upgrade: ((request.autoUpgrade !== undefined) ?  marshalCreateClusterRequestAutoUpgrade(request.autoUpgrade, defaults): undefined),
-  autoscaler_config: ((request.autoscalerConfig !== undefined) ?  marshalCreateClusterRequestAutoscalerConfig(request.autoscalerConfig, defaults): undefined),
+  auto_upgrade: ((request.autoUpgrade != null) ?  marshalCreateClusterRequestAutoUpgrade(request.autoUpgrade, defaults): undefined),
+  autoscaler_config: ((request.autoscalerConfig != null) ?  marshalCreateClusterRequestAutoscalerConfig(request.autoscalerConfig, defaults): undefined),
   cni: request.cni,
   description: request.description,
   feature_gates: request.featureGates,
   name: request.name || randomName('k8s'),
-  open_id_connect_config: ((request.openIdConnectConfig !== undefined) ?  marshalCreateClusterRequestOpenIDConnectConfig(request.openIdConnectConfig, defaults): undefined),
+  open_id_connect_config: ((request.openIdConnectConfig != null) ?  marshalCreateClusterRequestOpenIDConnectConfig(request.openIdConnectConfig, defaults): undefined),
   pod_cidr: request.podCidr,
-  pools: ((request.pools !== undefined) ?  request.pools.map(elt => marshalCreateClusterRequestPoolConfig(elt, defaults)): undefined),
+  pools: ((request.pools != null) ?  request.pools.map(elt => marshalCreateClusterRequestPoolConfig(elt, defaults)): undefined),
   private_network_id: request.privateNetworkId,
   service_cidr: request.serviceCidr,
   service_dns_ip: request.serviceDnsIp,
@@ -703,8 +703,8 @@ export const marshalCreatePoolRequest = (
   autohealing: request.autohealing,
   autoscaling: request.autoscaling,
   container_runtime: request.containerRuntime,
-  kubelet_args: ((request.kubeletArgs !== undefined) ?  request.kubeletArgs: undefined),
-  labels: ((request.labels !== undefined) ?  request.labels: undefined),
+  kubelet_args: ((request.kubeletArgs != null) ?  request.kubeletArgs: undefined),
+  labels: ((request.labels != null) ?  request.labels: undefined),
   max_size: request.maxSize,
   max_termination_grace_period: request.maxTerminationGracePeriod,
   min_size: request.minSize,
@@ -717,11 +717,11 @@ export const marshalCreatePoolRequest = (
   root_volume_type: request.rootVolumeType,
   security_group_id: request.securityGroupId,
   size: request.size,
-  startup_taints: ((request.startupTaints !== undefined) ?  request.startupTaints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
+  startup_taints: ((request.startupTaints != null) ?  request.startupTaints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
   tags: request.tags,
-  taints: ((request.taints !== undefined) ?  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
-  upgrade_policy: ((request.upgradePolicy !== undefined) ?  marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults): undefined),
-  user_data: ((request.userData !== undefined) ?  request.userData: undefined),
+  taints: ((request.taints != null) ?  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
+  upgrade_policy: ((request.upgradePolicy != null) ?  marshalCreatePoolRequestUpgradePolicy(request.upgradePolicy, defaults): undefined),
+  user_data: ((request.userData != null) ?  request.userData: undefined),
   zone: request.zone ?? defaults.defaultZone,
 })
 
@@ -729,7 +729,7 @@ export const marshalSetClusterACLRulesRequest = (
   request: SetClusterACLRulesRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  acls: ((request.acls !== undefined) ?  request.acls.map(elt => marshalACLRuleRequest(elt, defaults)): undefined),
+  acls: ((request.acls != null) ?  request.acls.map(elt => marshalACLRuleRequest(elt, defaults)): undefined),
 })
 
 export const marshalSetClusterTypeRequest = (
@@ -743,21 +743,21 @@ export const marshalSetPoolLabelsRequest = (
   request: SetPoolLabelsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  labels: ((request.labels !== undefined) ?  request.labels: undefined),
+  labels: ((request.labels != null) ?  request.labels: undefined),
 })
 
 export const marshalSetPoolStartupTaintsRequest = (
   request: SetPoolStartupTaintsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  startup_taints: ((request.startupTaints !== undefined) ?  request.startupTaints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
+  startup_taints: ((request.startupTaints != null) ?  request.startupTaints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
 })
 
 export const marshalSetPoolTaintsRequest = (
   request: SetPoolTaintsRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  taints: ((request.taints !== undefined) ?  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
+  taints: ((request.taints != null) ?  request.taints.map(elt => marshalCoreV1Taint(elt, defaults)): undefined),
 })
 
 const marshalUpdateClusterRequestAutoUpgrade = (
@@ -765,7 +765,7 @@ const marshalUpdateClusterRequestAutoUpgrade = (
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
   enable: request.enable,
-  maintenance_window: ((request.maintenanceWindow !== undefined) ?  marshalMaintenanceWindow(request.maintenanceWindow, defaults): undefined),
+  maintenance_window: ((request.maintenanceWindow != null) ?  marshalMaintenanceWindow(request.maintenanceWindow, defaults): undefined),
 })
 
 const marshalUpdateClusterRequestAutoscalerConfig = (
@@ -805,12 +805,12 @@ export const marshalUpdateClusterRequest = (
 ): Record<string, unknown> => ({
   admission_plugins: request.admissionPlugins,
   apiserver_cert_sans: request.apiserverCertSans,
-  auto_upgrade: ((request.autoUpgrade !== undefined) ?  marshalUpdateClusterRequestAutoUpgrade(request.autoUpgrade, defaults): undefined),
-  autoscaler_config: ((request.autoscalerConfig !== undefined) ?  marshalUpdateClusterRequestAutoscalerConfig(request.autoscalerConfig, defaults): undefined),
+  auto_upgrade: ((request.autoUpgrade != null) ?  marshalUpdateClusterRequestAutoUpgrade(request.autoUpgrade, defaults): undefined),
+  autoscaler_config: ((request.autoscalerConfig != null) ?  marshalUpdateClusterRequestAutoscalerConfig(request.autoscalerConfig, defaults): undefined),
   description: request.description,
   feature_gates: request.featureGates,
   name: request.name,
-  open_id_connect_config: ((request.openIdConnectConfig !== undefined) ?  marshalUpdateClusterRequestOpenIDConnectConfig(request.openIdConnectConfig, defaults): undefined),
+  open_id_connect_config: ((request.openIdConnectConfig != null) ?  marshalUpdateClusterRequestOpenIDConnectConfig(request.openIdConnectConfig, defaults): undefined),
   tags: request.tags,
 })
 
@@ -835,7 +835,7 @@ export const marshalUpdatePoolRequest = (
   security_group_id: request.securityGroupId,
   size: request.size,
   tags: request.tags,
-  upgrade_policy: ((request.upgradePolicy !== undefined) ?  marshalUpdatePoolRequestUpgradePolicy(request.upgradePolicy, defaults): undefined),
+  upgrade_policy: ((request.upgradePolicy != null) ?  marshalUpdatePoolRequestUpgradePolicy(request.upgradePolicy, defaults): undefined),
 })
 
 export const marshalUpgradeClusterRequest = (

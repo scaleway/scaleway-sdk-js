@@ -9,7 +9,7 @@ export const useIotv1APIGetHubCAQuery = (
   dataloaderConfig?: UseDataLoaderConfig<Iotv1.GetHubCAResponse, Error>,
 ): ReturnType<typeof useDataLoader<Iotv1.GetHubCAResponse, Error>> => {
   const { iotv1 } = useIotv1API()
-  const key = ["iotv1", "getHubCA", ...Object.entries(params).flat(3).sort()]
+  const key = ["iotv1", "getHubCA", ...Object.entries(params).flat(3).toSorted()]
 
-  return useDataLoader(key, () => iotv1.getHubCA(params), dataloaderConfig)
+  return useDataLoader(key, ({ signal }) => iotv1.getHubCA(params, { signal }), dataloaderConfig)
 }

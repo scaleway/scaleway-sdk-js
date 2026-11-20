@@ -264,7 +264,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateSSHKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/ssh-keys`,
         signal: options?.signal,
@@ -302,7 +302,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateSSHKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/ssh-keys/${validatePathParam('sshKeyId', request.sshKeyId)}`,
         signal: options?.signal,
@@ -385,7 +385,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}`,
         signal: options?.signal,
@@ -421,7 +421,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateUserRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users`,
         signal: options?.signal,
@@ -442,7 +442,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateUserUsernameRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-username`,
         signal: options?.signal,
@@ -463,7 +463,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateUserPasswordRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/update-password`,
         signal: options?.signal,
@@ -482,7 +482,7 @@ export class API extends ParentAPI {
     this.client.fetch<MFAOTP>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/mfa-otp`,
         signal: options?.signal,
@@ -503,7 +503,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalValidateUserMFAOTPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/validate-mfa-otp`,
         signal: options?.signal,
@@ -521,7 +521,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/mfa-otp`,
         signal: options?.signal,
@@ -539,7 +539,7 @@ export class API extends ParentAPI {
     this.client.fetch<User>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/lock`,
         signal: options?.signal,
@@ -558,7 +558,7 @@ export class API extends ParentAPI {
     this.client.fetch<User>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/unlock`,
         signal: options?.signal,
@@ -602,7 +602,7 @@ export class API extends ParentAPI {
     this.client.fetch<InitiateUserConnectionResponse>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/initiate-connection`,
         signal: options?.signal,
@@ -617,7 +617,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalJoinUserConnectionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/join-connection`,
         signal: options?.signal,
@@ -631,7 +631,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalRemoveUserConnectionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/remove-connection`,
         signal: options?.signal,
@@ -681,7 +681,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateApplicationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/applications`,
         signal: options?.signal,
@@ -719,7 +719,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateApplicationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/applications/${validatePathParam('applicationId', request.applicationId)}`,
         signal: options?.signal,
@@ -786,7 +786,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/groups`,
         signal: options?.signal,
@@ -824,7 +824,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}`,
         signal: options?.signal,
@@ -845,7 +845,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetGroupMembersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/members`,
         signal: options?.signal,
@@ -866,7 +866,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddGroupMemberRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/add-member`,
         signal: options?.signal,
@@ -887,7 +887,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddGroupMembersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/add-members`,
         signal: options?.signal,
@@ -908,7 +908,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalRemoveGroupMemberRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/groups/${validatePathParam('groupId', request.groupId)}/remove-member`,
         signal: options?.signal,
@@ -978,7 +978,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreatePolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/policies`,
         signal: options?.signal,
@@ -1016,7 +1016,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdatePolicyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}`,
         signal: options?.signal,
@@ -1050,7 +1050,7 @@ export class API extends ParentAPI {
     this.client.fetch<Policy>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/policies/${validatePathParam('policyId', request.policyId)}/clone`,
         signal: options?.signal,
@@ -1071,7 +1071,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/iam/v1alpha1/rules`,
         signal: options?.signal,
@@ -1184,7 +1184,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateAPIKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/api-keys`,
         signal: options?.signal,
@@ -1222,7 +1222,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateAPIKeyRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/api-keys/${validatePathParam('accessKey', request.accessKey)}`,
         signal: options?.signal,
@@ -1332,7 +1332,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateJWTRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/jwts`,
         signal: options?.signal,
@@ -1450,7 +1450,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateOrganizationSecuritySettingsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/security-settings`,
         signal: options?.signal,
@@ -1471,7 +1471,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetOrganizationAliasRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/alias`,
         signal: options?.signal,
@@ -1509,7 +1509,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateOrganizationLoginMethodsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/login-methods`,
         signal: options?.signal,
@@ -1545,7 +1545,7 @@ export class API extends ParentAPI {
     this.client.fetch<Saml>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/saml`,
         signal: options?.signal,
@@ -1566,7 +1566,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateSamlRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}`,
         signal: options?.signal,
@@ -1602,7 +1602,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           await marshalParseSamlMetadataRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/parse-saml-metadata`,
         signal: options?.signal,
@@ -1640,7 +1640,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddSamlCertificateRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/saml/${validatePathParam('samlId', request.samlId)}/certificates`,
         signal: options?.signal,
@@ -1708,7 +1708,7 @@ export class API extends ParentAPI {
     this.client.fetch<Scim>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/scim`,
         signal: options?.signal,
@@ -1832,7 +1832,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalFinishUserWebAuthnRegistrationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/iam/v1alpha1/users/${validatePathParam('userId', request.userId)}/finish-webauthn-registration`,
         signal: options?.signal,
@@ -1878,7 +1878,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateWebAuthnAuthenticatorRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
         signal: options?.signal,
@@ -1896,7 +1896,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/iam/v1alpha1/webauthn-authenticator/${validatePathParam('authenticatorId', request.authenticatorId)}`,
         signal: options?.signal,

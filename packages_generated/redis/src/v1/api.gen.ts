@@ -112,7 +112,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateClusterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters`,
         signal: options?.signal,
@@ -133,7 +133,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateClusterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}`,
         signal: options?.signal,
@@ -219,7 +219,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalMigrateClusterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/migrate`,
         signal: options?.signal,
@@ -350,7 +350,7 @@ export class API extends ParentAPI {
     this.client.fetch<Cluster>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/renew-certificate`,
         signal: options?.signal,
@@ -371,7 +371,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddClusterSettingsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/settings`,
         signal: options?.signal,
@@ -409,7 +409,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetClusterSettingsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/settings`,
         signal: options?.signal,
@@ -430,7 +430,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetAclRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
         signal: options?.signal,
@@ -451,7 +451,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddAclRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/acls`,
         signal: options?.signal,
@@ -506,7 +506,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetEndpointsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/endpoints`,
         signal: options?.signal,
@@ -527,7 +527,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalAddEndpointsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/clusters/${validatePathParam('clusterId', request.clusterId)}/endpoints`,
         signal: options?.signal,
@@ -582,7 +582,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateEndpointRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/redis/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/endpoints/${validatePathParam('endpointId', request.endpointId)}`,
         signal: options?.signal,

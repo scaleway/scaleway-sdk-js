@@ -31,7 +31,7 @@ export const unmarshalReference = (data: unknown): Reference => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     productResourceId: data.product_resource_id,
     productResourceType: data.product_resource_type,
@@ -64,11 +64,11 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
 
   return {
     class: data.class,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
-    kmsKeyId: data.kms_key_id,
+    kmsKeyId: data.kms_key_id ?? null,
     name: data.name,
-    parentVolume: data.parent_volume ? unmarshalSnapshotParentVolume(data.parent_volume) : undefined,
+    parentVolume: data.parent_volume ? unmarshalSnapshotParentVolume(data.parent_volume) : null,
     projectId: data.project_id,
     public: data.public,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
@@ -76,7 +76,7 @@ export const unmarshalSnapshot = (data: unknown): Snapshot => {
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as Snapshot
 }
@@ -90,7 +90,7 @@ const unmarshalVolumeSpecifications = (data: unknown): VolumeSpecifications => {
 
   return {
     class: data.class,
-    perfIops: data.perf_iops,
+    perfIops: data.perf_iops ?? null,
   } as VolumeSpecifications
 }
 
@@ -102,21 +102,21 @@ export const unmarshalVolume = (data: unknown): Volume => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
-    kmsKeyId: data.kms_key_id,
-    lastDetachedAt: unmarshalDate(data.last_detached_at),
+    kmsKeyId: data.kms_key_id ?? null,
+    lastDetachedAt: unmarshalDate(data.last_detached_at) ?? null,
     name: data.name,
-    parentSnapshotId: data.parent_snapshot_id,
+    parentSnapshotId: data.parent_snapshot_id ?? null,
     projectId: data.project_id,
     references: unmarshalArrayOfObject(data.references, unmarshalReference),
     size: data.size,
-    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
+    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : null,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as Volume
 }
@@ -142,9 +142,9 @@ const unmarshalVolumeType = (data: unknown): VolumeType => {
   }
 
   return {
-    pricing: data.pricing ? unmarshalMoney(data.pricing) : undefined,
-    snapshotPricing: data.snapshot_pricing ? unmarshalMoney(data.snapshot_pricing) : undefined,
-    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : undefined,
+    pricing: data.pricing ? unmarshalMoney(data.pricing) : null,
+    snapshotPricing: data.snapshot_pricing ? unmarshalMoney(data.snapshot_pricing) : null,
+    specs: data.specs ? unmarshalVolumeSpecifications(data.specs) : null,
     srn: data.srn,
     type: data.type,
     zone: data.zone,
@@ -213,11 +213,11 @@ export const marshalCreateVolumeRequest = (
   tags: request.tags,  
   ...resolveOneOf([
     {param: 'from_empty',
-      value: (request.fromEmpty !== undefined) ? marshalCreateVolumeRequestFromEmpty(request.fromEmpty, defaults)
+      value: (request.fromEmpty != null) ? marshalCreateVolumeRequestFromEmpty(request.fromEmpty, defaults)
       : undefined,
     },
     {param: 'from_snapshot',
-      value: (request.fromSnapshot !== undefined) ? marshalCreateVolumeRequestFromSnapshot(request.fromSnapshot, defaults)
+      value: (request.fromSnapshot != null) ? marshalCreateVolumeRequestFromSnapshot(request.fromSnapshot, defaults)
       : undefined,
     },
   ]),  

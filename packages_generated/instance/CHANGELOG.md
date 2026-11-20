@@ -1,5 +1,1811 @@
 # Change Log
 
+## 2.29.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- feat(resource): add annotations resources for search API (#3773)
+
+- feat(instance): add release IP to IPAM endpoint (#2394)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): add support for `PrivateNetworkInterface` (#3170)
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(instance): update the name of volume states (#2391)
+
+- chore(release): publish
+
+- chore: sync generated files after build (#2862)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore: update index (#2247)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- feat(permission): add new permission name and service for MIAM (#3714)
+
+- fix(instance/v1): revert "remove field export_uri on the Instance API" (#2673)
+
+- fix(instance): add private_nic's ipam ip ids (#2997)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- docs(instance): fix terminate action documentation and remove b_ssd volumes documentation (#2182)
+
+- feat: update generated APIs (#3727)
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- chore(packages): upgrade deps (#3157)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore: reorganize import (#2520)
+
+- chore: new formating (#2667)
+
+- feat(instance): add server dns (#2676)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- feat: update generated APIs (#3650)
+
+- feat: add support for constants (#3286)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(instance): expose the provisioned_address field (#3546)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- Update generated APIs (#3770)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+- chore(release): publish
+
+- feat: add support for srn (#3524)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(instance): set doc for removed and added fields straight (#2929)
+
+- fix: export locality (#2200)
+
+- chore: fix formating (#2669)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: update generated APIs (#3667)
+
+- feat: update generated APIs (#2881)
+
+- feat(instance): add 'ListServerCompatibleTypes' RPC (#3567)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- Update generated APIs (#3745)
+
+- feat(sdk): generated packages (#2029)
+
+- chore(instance): add it-mil-1 in instance (#2767)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- feat: update generated APIs (#3683)
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat(instance): include SG in PrivateNics definition of Template (#3108)
+
+- chore(release): publish
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(instance): add doc for the security-group 'syncing' state (#3239)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- fix(instance): activate attach/detach filesystems in the sdk (#2035)
+
+- chore(release): publish
+
+- chore(instance): document minimal position for security rule (#3569)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(instance): add support `zone` (#3308)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(instance/v1): deprecate most fields of the Task message (#3091)
+
+- feat(instance/v2alpha1): expose the number of templates in the dashboard counter (#3223)
+
+- Update generated APIs (#3765)
+
+- fix: unify biome config with spaces (#2684)
+
+- feat(instance): add field zone for PrivateNIC/PrivateNetwork (#2521)
+
+- chore(instance): follow the guidelines for the VolumeAPI (#2588)
+
+- feat(instance): add support for `StartSpotServerRequest` (#3637)
+
+- chore(release): publish
+
+- fix(instance): expose the attaching state to help the Console team (#2412)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(instance): add cloud-init support on templates (#2713)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(instance): change deprecated order (#2790)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: remove whitespaces (#3057)
+
+- feat(instance): add dedicated pools (#3549)
+
+- fix(build): output (#2842)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore: format generated files (#2652)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(instance): remove field export_uri on the Instance API (#2554)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(instance): expose the scratch volume count in the API (#2719)
+
+- feat: update generated APIs (#3649)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore(release): publish
+
+- Update generated APIs (#3845)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): create MigrateVolume method (#2257)
+
+- feat: enable formatting for generated files (#2690)
+
+- feat(instance): expose host_id on Server and Dedicated Pool (#3787)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(instance): add support for filesystems (#2176)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): updated data field and new RPC (#2411)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.7
+
+## 2.28.0
+
+### Minor Changes
+
+- feat(resource): add annotations resources for search API (#3773)
+
+- chore(instance): expose the scratch volume count in the API (#2719)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- fix: export locality (#2200)
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- fix: unify biome config with spaces (#2684)
+
+- feat(instance): add 'ListServerCompatibleTypes' RPC (#3567)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- chore(release): publish
+
+- chore(instance): document minimal position for security rule (#3569)
+
+- Update generated APIs (#3770)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- chore: update index (#2247)
+
+- chore(instance): expose the provisioned_address field (#3546)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat: update generated APIs (#3683)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): include SG in PrivateNics definition of Template (#3108)
+
+- feat(instance): add field zone for PrivateNIC/PrivateNetwork (#2521)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- docs(instance): fix terminate action documentation and remove b_ssd volumes documentation (#2182)
+
+- fix(build): output (#2842)
+
+- chore(instance): change deprecated order (#2790)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- Update generated APIs (#3745)
+
+- feat: update generated APIs (#2881)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat: add support for srn (#3524)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3667)
+
+- fix: change tabs into space (#2688)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- feat(instance): add server dns (#2676)
+
+- chore(release): publish
+
+- feat(instance): add doc for the security-group 'syncing' state (#3239)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(instance): update the name of volume states (#2391)
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- feat(instance): updated data field and new RPC (#2411)
+
+- chore: format generated files (#2659)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- feat(sdk): unify tools (#2903)
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+- chore(release): publish
+
+- fix(instance): expose the attaching state to help the Console team (#2412)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(instance): add it-mil-1 in instance (#2767)
+
+- chore(release): publish
+
+- chore: new formating (#2667)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- feat(instance): add dedicated pools (#3549)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- fix(instance): activate attach/detach filesystems in the sdk (#2035)
+
+- feat(instance): add release IP to IPAM endpoint (#2394)
+
+- chore: reorganize import (#2520)
+
+- chore(release): publish
+
+- feat(instance): add support for `StartSpotServerRequest` (#3637)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(instance/v2alpha1): expose the number of templates in the dashboard counter (#3223)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: add support for constants (#3286)
+
+- chore(instance): set doc for removed and added fields straight (#2929)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore: fix formating (#2669)
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- feat(permission): add new permission name and service for MIAM (#3714)
+
+- feat(sdk): generated packages (#2029)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat(instance): expose host_id on Server and Dedicated Pool (#3787)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(instance): remove field export_uri on the Instance API (#2554)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): remove all unused deps (#3165)
+
+- fix(instance/v1): revert "remove field export_uri on the Instance API" (#2673)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore: remove whitespaces (#3057)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3649)
+
+- feat(instance): add support for `PrivateNetworkInterface` (#3170)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- feat(instance): add support `zone` (#3308)
+
+- feat(instance): add support for filesystems (#2176)
+
+- chore(release): publish
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- feat(instance): create MigrateVolume method (#2257)
+
+- fix(instance): add private_nic's ipam ip ids (#2997)
+
+- feat(instance): add cloud-init support on templates (#2713)
+
+- feat: update generated APIs (#3727)
+
+- chore(instance): follow the guidelines for the VolumeAPI (#2588)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(instance/v1): deprecate most fields of the Task message (#3091)
+
+- Update generated APIs (#3765)
+
+- feat: publish packages as ESM only (#2624)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.6
+
+## 2.27.0
+
+### Minor Changes
+
+- feat(instance): add doc for the security-group 'syncing' state (#3239)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(instance): expose the provisioned_address field (#3546)
+
+- chore(instance/v1): deprecate most fields of the Task message (#3091)
+
+- chore(instance): update the name of volume states (#2391)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(instance): add support `zone` (#3308)
+
+- feat: update generated APIs (#3649)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): add support for `PrivateNetworkInterface` (#3170)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(instance): remove field export_uri on the Instance API (#2554)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(instance): change deprecated order (#2790)
+
+- feat: update generated APIs (#3727)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- fix(instance): activate attach/detach filesystems in the sdk (#2035)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- feat(instance): add support for `StartSpotServerRequest` (#3637)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(instance): follow the guidelines for the VolumeAPI (#2588)
+
+- chore(release): publish
+
+- feat(instance): add support for filesystems (#2176)
+
+- feat: update generated APIs (#3182)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- chore(instance): set doc for removed and added fields straight (#2929)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- fix(build): output (#2842)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): include SG in PrivateNics definition of Template (#3108)
+
+- chore(release): publish
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- feat(instance): add release IP to IPAM endpoint (#2394)
+
+- chore: reorganize import (#2520)
+
+- fix(instance/v1): revert "remove field export_uri on the Instance API" (#2673)
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- chore: fix formating (#2669)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- feat: add support for constants (#3286)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- feat(instance): add 'ListServerCompatibleTypes' RPC (#3567)
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- feat(instance/v2alpha1): expose the number of templates in the dashboard counter (#3223)
+
+- feat: update generated APIs (#3600)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore: update index (#2247)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- feat(sdk): unify tools (#2903)
+
+- fix: change tabs into space (#2688)
+
+- fix(instance): add private_nic's ipam ip ids (#2997)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(permission): add new permission name and service for MIAM (#3714)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore: format generated files (#2652)
+
+- chore: new formating (#2667)
+
+- feat(instance): add cloud-init support on templates (#2713)
+
+- feat: add support for srn (#3524)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(instance): document minimal position for security rule (#3569)
+
+- feat(instance): updated data field and new RPC (#2411)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#2881)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3667)
+
+- chore(release): publish
+
+- docs(instance): fix terminate action documentation and remove b_ssd volumes documentation (#2182)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): add field zone for PrivateNIC/PrivateNetwork (#2521)
+
+- fix: export locality (#2200)
+
+- chore(release): publish
+
+- feat(instance): create MigrateVolume method (#2257)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(release): publish
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- chore(release): publish
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore: remove whitespaces (#3057)
+
+- feat: update generated APIs (#3683)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- fix: unify biome config with spaces (#2684)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore(instance): add it-mil-1 in instance (#2767)
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- fix(instance): expose the attaching state to help the Console team (#2412)
+
+- feat(instance): add dedicated pools (#3549)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): add server dns (#2676)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- chore(instance): expose the scratch volume count in the API (#2719)
+
+## 2.26.0
+
+### Minor Changes
+
+- chore(instance): remove field export_uri on the Instance API (#2554)
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(instance): follow the guidelines for the VolumeAPI (#2588)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(instance): change deprecated order (#2790)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- feat(instance): add support for filesystems (#2176)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3667)
+
+- feat(instance): add support for `StartSpotServerRequest` (#3637)
+
+- feat(instance): add doc for the security-group 'syncing' state (#3239)
+
+- chore: fix formating (#2669)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- feat(instance): include SG in PrivateNics definition of Template (#3108)
+
+- chore(release): publish
+
+- chore(instance): document minimal position for security rule (#3569)
+
+- feat: update generated APIs (#2881)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(instance): add support for `PrivateNetworkInterface` (#3170)
+
+- feat(instance): add release IP to IPAM endpoint (#2394)
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(instance): set doc for removed and added fields straight (#2929)
+
+- chore(release): publish
+
+- docs(instance): fix terminate action documentation and remove b_ssd volumes documentation (#2182)
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: add support for srn (#3524)
+
+- feat: add support for constants (#3286)
+
+- fix: unify biome config with spaces (#2684)
+
+- feat(instance): create MigrateVolume method (#2257)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore: sync generated files after build (#2862)
+
+- chore: format generated files (#2659)
+
+- chore(release): publish
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(instance): activate attach/detach filesystems in the sdk (#2035)
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(release): publish
+
+- feat(instance): add dedicated pools (#3549)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore: format generated files (#2652)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): generated packages (#2029)
+
+- chore: update index (#2247)
+
+- feat(permission): add new permission name and service for MIAM (#3714)
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat(instance/v2alpha1): expose the number of templates in the dashboard counter (#3223)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore: remove whitespaces (#3057)
+
+- feat(instance): updated data field and new RPC (#2411)
+
+- fix(instance/v1): revert "remove field export_uri on the Instance API" (#2673)
+
+- chore: new formating (#2667)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- feat: update generated APIs (#3649)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat(generation): improve ts metadata (#3242)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(instance): expose the provisioned_address field (#3546)
+
+- fix(instance): add private_nic's ipam ip ids (#2997)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(release): publish
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- feat(instance): add support `zone` (#3308)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- feat: update generated APIs (#3683)
+
+- chore(release): publish
+
+- chore(instance/v1): deprecate most fields of the Task message (#3091)
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- chore: reorganize import (#2520)
+
+- feat(instance): add server dns (#2676)
+
+- chore(instance): expose the scratch volume count in the API (#2719)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- fix: change tabs into space (#2688)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): add cloud-init support on templates (#2713)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- fix: sdk client deps (#2056)
+
+- fix(instance): expose the attaching state to help the Console team (#2412)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- fix(build): output (#2842)
+
+- chore(instance): add it-mil-1 in instance (#2767)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- chore(instance): update the name of volume states (#2391)
+
+- feat(sdk): unify tools (#2903)
+
+- feat(instance): add field zone for PrivateNIC/PrivateNetwork (#2521)
+
+- feat(instance): add 'ListServerCompatibleTypes' RPC (#3567)
+
+- chore(release): publish
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.5
+
+## 2.25.0
+
+### Minor Changes
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3683)
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat: add support for srn (#3524)
+
+- fix(instance): activate attach/detach filesystems in the sdk (#2035)
+
+- feat: update generated APIs (#3600)
+
+- feat(instance): add support for `PrivateNetworkInterface` (#3170)
+
+- chore(release): publish
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(instance): add field zone for PrivateNIC/PrivateNetwork (#2521)
+
+- feat: update generated APIs (#3667)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: update index (#2247)
+
+- feat(instance): add cloud-init support on templates (#2713)
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat(instance): updated data field and new RPC (#2411)
+
+- chore(instance): set doc for removed and added fields straight (#2929)
+
+- chore(release): publish
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- feat(instance): add release IP to IPAM endpoint (#2394)
+
+- feat(sdk): generated packages (#2029)
+
+- chore: reorganize import (#2520)
+
+- fix(instance): add private_nic's ipam ip ids (#2997)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): add dedicated pools (#3549)
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- chore(deps): remove all unused deps (#3165)
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- chore(release): publish
+
+- feat(instance): add support `zone` (#3308)
+
+- fix: export locality (#2200)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+- chore: format generated files (#2652)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- feat(instance): add support for `StartSpotServerRequest` (#3637)
+
+- chore(release): publish
+
+- fix(instance): expose the attaching state to help the Console team (#2412)
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(release): publish
+
+- chore(instance): expose the provisioned_address field (#3546)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(instance/v2alpha1): expose the number of templates in the dashboard counter (#3223)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(instance): follow the guidelines for the VolumeAPI (#2588)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- fix: unify biome config with spaces (#2684)
+
+- chore(instance): expose the scratch volume count in the API (#2719)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(instance): add 'ListServerCompatibleTypes' RPC (#3567)
+
+- chore: fix formating (#2669)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- fix(instance/v1): revert "remove field export_uri on the Instance API" (#2673)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(instance): document minimal position for security rule (#3569)
+
+- feat: update generated APIs (#3182)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore: remove whitespaces (#3057)
+
+- chore(release): publish
+
+- chore(instance/v1): deprecate most fields of the Task message (#3091)
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): create MigrateVolume method (#2257)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat: update generated APIs (#3649)
+
+- docs(instance): fix terminate action documentation and remove b_ssd volumes documentation (#2182)
+
+- feat: update generated APIs (#2881)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- feat: add support for constants (#3286)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(instance): add it-mil-1 in instance (#2767)
+
+- feat(instance): include SG in PrivateNics definition of Template (#3108)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(instance): add doc for the security-group 'syncing' state (#3239)
+
+- chore: new formating (#2667)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(instance): add server dns (#2676)
+
+- chore(release): publish
+
+- chore(instance): change deprecated order (#2790)
+
+- chore(release): publish
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(release): publish
+
+- chore(instance): update the name of volume states (#2391)
+
+- chore(instance): remove field export_uri on the Instance API (#2554)
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- feat(instance): add support for filesystems (#2176)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.4
+
+## 2.24.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.3
+
+## 2.24.0
+
+### Minor Changes
+
+- chore: new formating (#2667)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(fmt): apply biome import reordering to generated packages (#2954)
+
+- chore: reorder imports/exports in generated files (#2267)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(instance): add support for `PrivateNetworkInterface` (#3170)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- feat(key_manager): split asymmetric Encryption and key encapsulation (#3299)
+
+- chore: fix formating (#2669)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore: remove whitespaces (#3057)
+
+- feat(instance): include SG in PrivateNics definition of Template (#3108)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(instance): updated data field and new RPC (#2411)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- fix(instance/v1): revert "remove field export_uri on the Instance API" (#2673)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- chore(instance): follow the guidelines for the VolumeAPI (#2588)
+
+- feat(instance): enable SDK generation for instance api v2 (#3099)
+
+- chore(instance): add it-mil-1 in instance (#2767)
+
+- feat(support): add metadata field to ticket message (#3178)
+
+- feat(instance/v2alpha1): expose the number of templates in the dashboard counter (#3223)
+
+- chore(typescript): upgrade version (#2916)
+
+- feat(instance): add support `zone` (#3308)
+
+- fix(instance): expose the attaching state to help the Console team (#2412)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- feat(instance): add support for `StartSpotServerRequest` (#3637)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- chore(instance): expose the scratch volume count in the API (#2719)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat: add support for srn (#3524)
+
+- chore(release): publish
+
+- fix(instance): move instance.v2alpha volume api documentation to volume_api.yml (#3163)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(release): publish
+
+- feat(instance): add release IP to IPAM endpoint (#2394)
+
+- feat(instance): add 'ListServerCompatibleTypes' RPC (#3567)
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(instance): add private_nic's ipam ip ids (#2997)
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(generate-react-queries): rewrite generator to use metadata instead of ts-morph (#2865)
+
+- feat(instance): add support for filesystems (#2176)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore: reorganize import (#2520)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore: sync generated files after build (#2862)
+
+- docs(instance): fix terminate action documentation and remove b_ssd volumes documentation (#2182)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- fix: change tabs into space (#2688)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(instance): set doc for removed and added fields straight (#2929)
+
+- feat(generation): improve ts metadata (#3242)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(instance): remove field export_uri on the Instance API (#2554)
+
+- chore(release): publish
+
+- chore(instance): document minimal position for security rule (#3569)
+
+- feat(sdk): generated packages (#2029)
+
+- feat(instance): add cloud-init support on templates (#2713)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- feat(instance): add doc for the security-group 'syncing' state (#3239)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- feat: update generated APIs (#2881)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3649)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(instance): activate attach/detach filesystems in the sdk (#2035)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- feat(instance): add server dns (#2676)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore: update index (#2247)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3182)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- feat(instance): add dedicated pools (#3549)
+
+- chore(instance/v1): deprecate most fields of the Task message (#3091)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(instance): change deprecated order (#2790)
+
+- chore(release): publish
+
+- feat(instance): create MigrateVolume method (#2257)
+
+- chore(instance): update the name of volume states (#2391)
+
+- feat(instance): add field zone for PrivateNIC/PrivateNetwork (#2521)
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat: add support for constants (#3286)
+
+- chore(instance): expose the provisioned_address field (#3546)
+
+- fix: unify biome config with spaces (#2684)
+
+- docs(instance): document non-support of SBS volumes in StopAndDeleteServer (#3293)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.2
+
 ## 2.23.0
 
 ### Minor Changes

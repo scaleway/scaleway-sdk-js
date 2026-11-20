@@ -65,7 +65,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         body: JSON.stringify(
           marshalPrivateNetworkApiAddServerPrivateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
         signal: options?.signal,
@@ -86,7 +86,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         body: JSON.stringify(
           marshalPrivateNetworkApiSetServerPrivateNetworksRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/baremetal/v3/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
         signal: options?.signal,

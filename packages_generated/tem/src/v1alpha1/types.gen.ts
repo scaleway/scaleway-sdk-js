@@ -180,7 +180,7 @@ export interface EmailTry {
   /**
    * Date of the attempt to send the email.
    */
-  triedAt?: Date
+  triedAt?: Date | null
   /**
    * The SMTP status code received after the attempt. 0 if the attempt did not reach an SMTP server.
    */
@@ -196,19 +196,19 @@ export interface DomainRecords {
   /**
    * DMARC TXT record specification.
    */
-  dmarc?: DomainRecordsDMARC
+  dmarc?: DomainRecordsDMARC | null
   /**
    * DKIM TXT record specification.
    */
-  dkim?: DomainRecordsDKIM
+  dkim?: DomainRecordsDKIM | null
   /**
    * SPF TXT record specification.
    */
-  spf?: DomainRecordsSPF
+  spf?: DomainRecordsSPF | null
   /**
    * MX record specification.
    */
-  mx?: DomainRecordsMX
+  mx?: DomainRecordsMX | null
 }
 
 
@@ -224,15 +224,15 @@ export interface DomainReputation {
   /**
    * Time and date the score was calculated.
    */
-  scoredAt?: Date
+  scoredAt?: Date | null
   /**
    * The previously-calculated domain's reputation score.
    */
-  previousScore?: number
+  previousScore?: number | null
   /**
    * Time and date the previous reputation score was calculated.
    */
-  previousScoredAt?: Date
+  previousScoredAt?: Date | null
 }
 
 
@@ -256,15 +256,15 @@ export interface Blocklist {
   /**
    * Date and time of the blocklist creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of the blocklist's last update.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Date and time when the blocklist ends. Empty if the blocklist has no end.
    */
-  endsAt?: Date
+  endsAt?: Date | null
   /**
    * Email blocked by the blocklist.
    */
@@ -292,7 +292,7 @@ export interface CreateEmailRequestAddress {
   /**
    * (Optional) Name displayed.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -344,7 +344,7 @@ export interface Email {
   /**
    * @deprecated Deprecated. Email address of the recipient.
    */
-  rcptTo?: string
+  rcptTo?: string | null
   /**
    * Email address of the recipient.
    */
@@ -360,11 +360,11 @@ export interface Email {
   /**
    * Creation date of the email object.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update of the email object.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Status of the email.
    */
@@ -372,7 +372,7 @@ export interface Email {
   /**
    * Additional status information.
    */
-  statusDetails?: string
+  statusDetails?: string | null
   /**
    * Number of attempts to send the email.
    */
@@ -400,7 +400,7 @@ export interface DomainLastStatusAutoconfigState {
   /**
    * The reason that the domain cannot be auto-configurable.
    */
-  reason?: DomainLastStatusAutoconfigStateReason
+  reason?: DomainLastStatusAutoconfigStateReason | null
 }
 
 
@@ -412,11 +412,11 @@ export interface DomainLastStatusDkimRecord {
   /**
    * Time and date the DKIM record was last valid.
    */
-  lastValidAt?: Date
+  lastValidAt?: Date | null
   /**
    * An error text displays in case the record is not valid.
    */
-  error?: string
+  error?: string | null
 }
 
 
@@ -428,11 +428,11 @@ export interface DomainLastStatusDmarcRecord {
   /**
    * Time and date the DMARC record was last valid.
    */
-  lastValidAt?: Date
+  lastValidAt?: Date | null
   /**
    * An error text displays in case the record is not valid.
    */
-  error?: string
+  error?: string | null
 }
 
 
@@ -444,11 +444,11 @@ export interface DomainLastStatusMXRecord {
   /**
    * Time and date the MX record was last valid.
    */
-  lastValidAt?: Date
+  lastValidAt?: Date | null
   /**
    * An error text displays in case the record is not valid.
    */
-  error?: string
+  error?: string | null
 }
 
 
@@ -460,11 +460,11 @@ export interface DomainLastStatusSpfRecord {
   /**
    * Time and date the SPF record was last valid.
    */
-  lastValidAt?: Date
+  lastValidAt?: Date | null
   /**
    * An error text displays in case the record is not valid.
    */
-  error?: string
+  error?: string | null
 }
 
 
@@ -492,23 +492,23 @@ export interface Domain {
   /**
    * Date and time of domain creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of the next scheduled check.
    */
-  nextCheckAt?: Date
+  nextCheckAt?: Date | null
   /**
    * Date and time the domain was last valid.
    */
-  lastValidAt?: Date
+  lastValidAt?: Date | null
   /**
    * Date and time of the domain's deletion.
    */
-  revokedAt?: Date
+  revokedAt?: Date | null
   /**
    * @deprecated Deprecated. Error message returned if the last check failed.
    */
-  lastError?: string
+  lastError?: string | null
   /**
    * Snippet of the SPF record to register in the DNS zone.
    */
@@ -520,15 +520,15 @@ export interface Domain {
   /**
    * Domain's statistics.
    */
-  statistics?: DomainStatistics
+  statistics?: DomainStatistics | null
   /**
    * The domain's reputation is available when your domain is checked and has sent enough emails.
    */
-  reputation?: DomainReputation
+  reputation?: DomainReputation | null
   /**
    * List of records to configure to validate a domain.
    */
-  records?: DomainRecords
+  records?: DomainRecords | null
   /**
    * Status of auto-configuration for the domain's DNS zone.
    */
@@ -556,11 +556,11 @@ export interface OfferSubscription {
   /**
    * Date and time of the subscription.
    */
-  subscribedAt?: Date
+  subscribedAt?: Date | null
   /**
    * Date and time of the end of the offer-subscription commitment.
    */
-  cancellationAvailableAt?: Date
+  cancellationAvailableAt?: Date | null
   /**
    * Service Level Agreement percentage of the offer-subscription.
    */
@@ -596,11 +596,11 @@ export interface Offer {
   /**
    * Date and time of the offer creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Period of commitment.
    */
-  commitmentPeriod?: string
+  commitmentPeriod?: string | null
   /**
    * Service Level Agreement percentage of the offer.
    */
@@ -640,11 +640,11 @@ export interface Pool {
   /**
    * Details of the pool.
    */
-  details?: string
+  details?: string | null
   /**
    * Zone of the pool.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * IPs of the pool.
    */
@@ -652,7 +652,7 @@ export interface Pool {
   /**
    * Reverse hostname of all IPs of the pool.
    */
-  reverse?: string
+  reverse?: string | null
 }
 
 
@@ -692,15 +692,15 @@ export interface WebhookEvent {
   /**
    * Date and time of the Webhook Event creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last Webhook Event updates.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Optional Email ID if the event is triggered by an Email resource.
    */
-  emailId?: string
+  emailId?: string | null
 }
 
 
@@ -736,11 +736,11 @@ export interface Webhook {
   /**
    * Date and time of the Webhook creation.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date and time of last Webhook updates.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -768,19 +768,19 @@ export interface UpdateProjectSettingsRequestUpdatePeriodicReport {
   /**
    * (Optional) Enable or disable periodic report notifications.
    */
-  enabled?: boolean
+  enabled?: boolean | null
   /**
    * (Optional) Frequency at which you receive periodic report notifications.
    */
-  frequency?: ProjectSettingsPeriodicReportFrequency
+  frequency?: ProjectSettingsPeriodicReportFrequency | null
   /**
    * (Optional) Hour at which you receive periodic report notifications.
    */
-  sendingHour?: number
+  sendingHour?: number | null
   /**
    * (Optional) On which day you receive periodic report notifications (1-7 weekly, 1-28 monthly).
    */
-  sendingDay?: number
+  sendingDay?: number | null
 }
 
 
@@ -788,7 +788,7 @@ export type BulkCreateBlocklistsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Domain ID linked to the blocklist.
    */
@@ -796,15 +796,15 @@ export type BulkCreateBlocklistsRequest = {
   /**
    * Email blocked by the blocklist.
    */
-  emails?: string[]
+  emails?: string[] | null
   /**
    * Type of blocklist.
    */
-  type?: BlocklistType
+  type?: BlocklistType | null
   /**
    * Reason to block the email.
    */
-  reason?: string
+  reason?: string | null
 }
 
 
@@ -820,7 +820,7 @@ export type CancelEmailRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the email to cancel.
    */
@@ -832,7 +832,7 @@ export type CheckDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the domain to check.
    */
@@ -844,11 +844,11 @@ export type CreateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the project to which the domain belongs.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Fully qualified domain dame.
    */
@@ -856,7 +856,7 @@ export type CreateDomainRequest = {
   /**
    * @deprecated Deprecated. Accept Scaleway's Terms of Service.
    */
-  acceptTos?: boolean
+  acceptTos?: boolean | null
   /**
    * Activate auto-configuration of the domain's DNS zone.
    */
@@ -868,7 +868,7 @@ export type CreateEmailRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sender information. Must be from a checked domain declared in the Project.
    */
@@ -876,15 +876,15 @@ export type CreateEmailRequest = {
   /**
    * An array of the primary recipient's information.
    */
-  to?: CreateEmailRequestAddress[]
+  to?: CreateEmailRequestAddress[] | null
   /**
    * An array of the carbon copy recipient's information.
    */
-  cc?: CreateEmailRequestAddress[]
+  cc?: CreateEmailRequestAddress[] | null
   /**
    * An array of the blind carbon copy recipient's information.
    */
-  bcc?: CreateEmailRequestAddress[]
+  bcc?: CreateEmailRequestAddress[] | null
   /**
    * Subject of the email.
    */
@@ -900,19 +900,19 @@ export type CreateEmailRequest = {
   /**
    * ID of the Project in which to create the email.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Array of attachments.
    */
-  attachments?: CreateEmailRequestAttachment[]
+  attachments?: CreateEmailRequestAttachment[] | null
   /**
    * Maximum date to deliver the email.
    */
-  sendBefore?: Date
+  sendBefore?: Date | null
   /**
    * Array of additional headers as key-value.
    */
-  additionalHeaders?: CreateEmailRequestHeader[]
+  additionalHeaders?: CreateEmailRequestHeader[] | null
 }
 
 
@@ -928,7 +928,7 @@ export type CreateWebhookRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Domain to watch for triggering events.
    */
@@ -936,7 +936,7 @@ export type CreateWebhookRequest = {
   /**
    * ID of the project to which the Webhook belongs.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the Webhook.
    */
@@ -944,7 +944,7 @@ export type CreateWebhookRequest = {
   /**
    * List of event types that will trigger an event.
    */
-  eventTypes?: WebhookEventType[]
+  eventTypes?: WebhookEventType[] | null
   /**
    * Scaleway SNS ARN topic to push the events to.
    */
@@ -956,7 +956,7 @@ export type DeleteBlocklistRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the blocklist to delete.
    */
@@ -968,7 +968,7 @@ export type DeleteWebhookRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Webhook to delete.
    */
@@ -988,23 +988,23 @@ export interface DomainLastStatus {
   /**
    * The SPF record verification data.
    */
-  spfRecord?: DomainLastStatusSpfRecord
+  spfRecord?: DomainLastStatusSpfRecord | null
   /**
    * The DKIM record verification data.
    */
-  dkimRecord?: DomainLastStatusDkimRecord
+  dkimRecord?: DomainLastStatusDkimRecord | null
   /**
    * The DMARC record verification data.
    */
-  dmarcRecord?: DomainLastStatusDmarcRecord
+  dmarcRecord?: DomainLastStatusDmarcRecord | null
   /**
    * The MX record verification data.
    */
-  mxRecord?: DomainLastStatusMXRecord
+  mxRecord?: DomainLastStatusMXRecord | null
   /**
    * The verification state of domain auto-configuration.
    */
-  autoconfigState?: DomainLastStatusAutoconfigState
+  autoconfigState?: DomainLastStatusAutoconfigState | null
 }
 
 
@@ -1012,7 +1012,7 @@ export type GetDomainLastStatusRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the domain to get records status.
    */
@@ -1024,7 +1024,7 @@ export type GetDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the domain.
    */
@@ -1036,7 +1036,7 @@ export type GetEmailRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the email to retrieve.
    */
@@ -1048,11 +1048,11 @@ export type GetProjectConsumptionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1060,11 +1060,11 @@ export type GetProjectSettingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1072,27 +1072,27 @@ export type GetStatisticsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * (Optional) Number of emails for this Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * (Optional) Number of emails sent from this domain (must be coherent with the `project_id` and the `organization_id`).
    */
-  domainId?: string
+  domainId?: string | null
   /**
    * (Optional) Number of emails created after this date.
    */
-  since?: Date
+  since?: Date | null
   /**
    * (Optional) Number of emails created before this date.
    */
-  until?: Date
+  until?: Date | null
   /**
    * (Optional) Number of emails sent with this sender's email address.
    */
-  mailFrom?: string
+  mailFrom?: string | null
 }
 
 
@@ -1100,7 +1100,7 @@ export type GetWebhookRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Webhook to check.
    */
@@ -1112,19 +1112,19 @@ export type ListBlocklistsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * (Optional) List blocklist corresponding to specific criteria.
    */
-  orderBy?: ListBlocklistsRequestOrderBy
+  orderBy?: ListBlocklistsRequestOrderBy | null
   /**
    * (Optional) Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * (Optional) Requested page size. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * (Optional) Filter by a domain ID.
    */
@@ -1132,15 +1132,15 @@ export type ListBlocklistsRequest = {
   /**
    * (Optional) Filter by an email address.
    */
-  email?: string
+  email?: string | null
   /**
    * (Optional) Filter by a blocklist type.
    */
-  type?: BlocklistType
+  type?: BlocklistType | null
   /**
    * (Optional) Filter by custom blocklist (true) or automatic Transactional Email blocklist (false).
    */
-  custom?: boolean
+  custom?: boolean | null
 }
 
 
@@ -1160,31 +1160,31 @@ export type ListDomainsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Requested page size. Value must be between 1 and 1000.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * (Optional) ID of the Project in which to list the domains.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * (Optional) List domains under specific statuses.
    */
-  status?: DomainStatus[]
+  status?: DomainStatus[] | null
   /**
    * (Optional) ID of the Organization in which to list the domains.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) Names of the domains to list.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1204,61 +1204,61 @@ export type ListEmailsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  page?: number
-  pageSize?: number
+  region?: ScwRegion | null
+  page?: number | null
+  pageSize?: number | null
   /**
    * (Optional) ID of the Project in which to list the emails.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * (Optional) ID of the domain for which to list the emails.
    */
-  domainId?: string
+  domainId?: string | null
   /**
    * (Optional) ID of the message for which to list the emails.
    */
-  messageId?: string
+  messageId?: string | null
   /**
    * (Optional) List emails created after this date.
    */
-  since?: Date
+  since?: Date | null
   /**
    * (Optional) List emails created before this date.
    */
-  until?: Date
+  until?: Date | null
   /**
    * (Optional) List emails sent with this sender's email address.
    */
-  mailFrom?: string
+  mailFrom?: string | null
   /**
    * @deprecated Deprecated. List emails sent to this recipient's email address.
    */
-  mailTo?: string
+  mailTo?: string | null
   /**
    * (Optional) List emails sent to this recipient's email address.
    */
-  mailRcpt?: string
+  mailRcpt?: string | null
   /**
    * (Optional) List emails with any of these statuses.
    */
-  statuses?: EmailStatus[]
+  statuses?: EmailStatus[] | null
   /**
    * (Optional) List emails with this subject.
    */
-  subject?: string
+  subject?: string | null
   /**
    * (Optional) List emails by searching to all fields.
    */
-  search?: string
+  search?: string | null
   /**
    * (Optional) List emails corresponding to specific criteria.
    */
-  orderBy?: ListEmailsRequestOrderBy
+  orderBy?: ListEmailsRequestOrderBy | null
   /**
    * (Optional) List emails containing only specific flags.
    */
-  flags?: EmailFlag[]
+  flags?: EmailFlag[] | null
 }
 
 
@@ -1278,31 +1278,31 @@ export type ListOfferSubscriptionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * (Optional) Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * (Optional) Requested page size. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * (Optional) ID of the Organization.
    *
    * One-of ('scope'): at most one of 'organizationId', 'projectId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) ID of the Project.
    *
    * One-of ('scope'): at most one of 'organizationId', 'projectId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * (Optional) Name of the offer associated with the Project.
    */
-  offerName?: OfferName
+  offerName?: OfferName | null
 }
 
 
@@ -1322,7 +1322,7 @@ export type ListOffersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
 }
 
 
@@ -1342,19 +1342,19 @@ export type ListPoolsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Requested page size. Value must be between 1 and 1000.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1374,7 +1374,7 @@ export type ListWebhookEventsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Webhook linked to the events.
    */
@@ -1382,39 +1382,39 @@ export type ListWebhookEventsRequest = {
   /**
    * (Optional) List Webhook events corresponding to specific criteria.
    */
-  orderBy?: ListWebhookEventsRequestOrderBy
+  orderBy?: ListWebhookEventsRequestOrderBy | null
   /**
    * Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * Requested page size. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the email linked to the events.
    */
-  emailId?: string
+  emailId?: string | null
   /**
    * List of event types linked to the events.
    */
-  eventTypes?: WebhookEventType[]
+  eventTypes?: WebhookEventType[] | null
   /**
    * List of event statuses.
    */
-  statuses?: WebhookEventStatus[]
+  statuses?: WebhookEventStatus[] | null
   /**
    * ID of the webhook Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * ID of the webhook Organization.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * ID of the domain to watch for triggering events.
    */
-  domainId?: string
+  domainId?: string | null
 }
 
 
@@ -1434,31 +1434,31 @@ export type ListWebhooksRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * (Optional) List Webhooks corresponding to specific criteria.
    */
-  orderBy?: ListWebhooksRequestOrderBy
+  orderBy?: ListWebhooksRequestOrderBy | null
   /**
    * (Optional) Requested page number. Value must be greater or equal to 1.
    */
-  page?: number
+  page?: number | null
   /**
    * (Optional) Requested page size. Value must be between 1 and 100.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * (Optional) ID of the Project for which to list the Webhooks.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * (Optional) ID of the Organization for which to list the Webhooks.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) ID of the Domain for which to list the Webhooks.
    */
-  domainId?: string
+  domainId?: string | null
 }
 
 
@@ -1506,7 +1506,7 @@ export interface ProjectSettings {
   /**
    * Information about your periodic report.
    */
-  periodicReport?: ProjectSettingsPeriodicReport
+  periodicReport?: ProjectSettingsPeriodicReport | null
 }
 
 
@@ -1514,7 +1514,7 @@ export type RevokeDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the domain to delete.
    */
@@ -1554,7 +1554,7 @@ export type UpdateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the domain to update.
    */
@@ -1562,7 +1562,7 @@ export type UpdateDomainRequest = {
   /**
    * (Optional) If set to true, activate auto-configuration of the domain's DNS zone.
    */
-  autoconfig?: boolean
+  autoconfig?: boolean | null
 }
 
 
@@ -1570,15 +1570,15 @@ export type UpdateOfferSubscriptionRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the offer-subscription.
    */
-  name?: OfferName
+  name?: OfferName | null
 }
 
 
@@ -1586,15 +1586,15 @@ export type UpdateProjectSettingsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the project.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Periodic report update details - all fields are optional.
    */
-  periodicReport?: UpdateProjectSettingsRequestUpdatePeriodicReport
+  periodicReport?: UpdateProjectSettingsRequestUpdatePeriodicReport | null
 }
 
 
@@ -1602,7 +1602,7 @@ export type UpdateWebhookRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Webhook to update.
    */
@@ -1610,15 +1610,15 @@ export type UpdateWebhookRequest = {
   /**
    * Name of the Webhook to update.
    */
-  name?: string
+  name?: string | null
   /**
    * List of event types to update.
    */
-  eventTypes?: WebhookEventType[]
+  eventTypes?: WebhookEventType[] | null
   /**
    * Scaleway SNS ARN topic to update.
    */
-  snsArn?: string
+  snsArn?: string | null
 }
 
 

@@ -188,7 +188,7 @@ export interface HealthCheckHttpConfig {
   /**
    * The HTTP response code that should be returned for a health check to be considered successful.
    */
-  code?: number
+  code?: number | null
   /**
    * The HTTP host header used when performing a health check on backend servers.
    */
@@ -208,7 +208,7 @@ export interface HealthCheckHttpsConfig {
   /**
    * The HTTP response code that should be returned for a health check to be considered successful.
    */
-  code?: number
+  code?: number | null
   /**
    * The HTTP host header used when performing a health check on backend servers.
    */
@@ -264,15 +264,15 @@ export interface Instance {
   /**
    * Date on which the Instance was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the Instance was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * @deprecated The region the Instance is in.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The zone the Instance is in.
    */
@@ -300,7 +300,7 @@ export interface Ip {
   /**
    * Load Balancer ID.
    */
-  lbId?: string
+  lbId?: string | null
   /**
    * Reverse DNS (domain name) of the IP address.
    */
@@ -310,13 +310,33 @@ export interface Ip {
    */
   tags: string[]
   /**
+   * ID of the IPAM IP address associated with the flexible IP.
+   */
+  ipamIpId?: string | null
+  /**
    * @deprecated The region the IP address is in.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The zone the IP address is in.
    */
   zone: ScwZone
+  /**
+   * The SRN of the IP address.
+   */
+  srn: string
+}
+
+
+export interface IpamIP {
+  /**
+   * IPAM IP ID.
+   */
+  id: string
+  /**
+   * Actual IP address.
+   */
+  ipAddress: string
 }
 
 
@@ -337,13 +357,21 @@ export interface Subscriber {
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  emailConfig?: SubscriberEmailConfig
+  emailConfig?: SubscriberEmailConfig | null
   /**
    * Webhook URI of subscriber.
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  webhookConfig?: SubscriberWebhookConfig
+  webhookConfig?: SubscriberWebhookConfig | null
+  /**
+   * The zone the subscriber is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the subscriber.
+   */
+  srn: string
 }
 
 
@@ -355,11 +383,11 @@ export interface HealthCheck {
   /**
    * Time to wait between two consecutive health checks.
    */
-  checkDelay?: string
+  checkDelay?: string | null
   /**
    * Maximum time a backend server has to reply to the health check.
    */
-  checkTimeout?: string
+  checkTimeout?: string | null
   /**
    * Number of consecutive unsuccessful health checks after which the server will be considered dead.
    */
@@ -369,43 +397,43 @@ export interface HealthCheck {
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  tcpConfig?: HealthCheckTcpConfig
+  tcpConfig?: HealthCheckTcpConfig | null
   /**
    * Object to configure a MySQL health check. The check requires MySQL >=3.22 or <9.0. For older or newer versions, use a TCP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  mysqlConfig?: HealthCheckMysqlConfig
+  mysqlConfig?: HealthCheckMysqlConfig | null
   /**
    * Object to configure a PostgreSQL health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  pgsqlConfig?: HealthCheckPgsqlConfig
+  pgsqlConfig?: HealthCheckPgsqlConfig | null
   /**
    * Object to configure an LDAP health check. The response is analyzed to find the LDAPv3 response message.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  ldapConfig?: HealthCheckLdapConfig
+  ldapConfig?: HealthCheckLdapConfig | null
   /**
    * Object to configure a Redis health check. The response is analyzed to find the +PONG response message.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  redisConfig?: HealthCheckRedisConfig
+  redisConfig?: HealthCheckRedisConfig | null
   /**
    * Object to configure an HTTP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  httpConfig?: HealthCheckHttpConfig
+  httpConfig?: HealthCheckHttpConfig | null
   /**
    * Object to configure an HTTPS health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  httpsConfig?: HealthCheckHttpsConfig
+  httpsConfig?: HealthCheckHttpsConfig | null
   /**
    * Defines whether proxy protocol should be activated for the health check.
    */
@@ -413,7 +441,7 @@ export interface HealthCheck {
   /**
    * Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
    */
-  transientCheckDelay?: string
+  transientCheckDelay?: string | null
 }
 
 
@@ -451,6 +479,10 @@ export interface Lb {
    */
   ip: Ip[]
   /**
+   * List of public IPAM IP addresses attached to the Load Balancer.
+   */
+  ipamIps: IpamIP[]
+  /**
    * Load Balancer tags.
    */
   tags: string[]
@@ -469,7 +501,7 @@ export interface Lb {
   /**
    * Subscriber information.
    */
-  subscriber?: Subscriber
+  subscriber?: Subscriber | null
   /**
    * Determines the minimal SSL version which needs to be supported on client side.
    */
@@ -477,11 +509,11 @@ export interface Lb {
   /**
    * Date on which the Load Balancer was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the Load Balancer was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Number of Private Networks attached to the Load Balancer.
    */
@@ -493,11 +525,15 @@ export interface Lb {
   /**
    * @deprecated The region the Load Balancer is in.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The zone the Load Balancer is in.
    */
   zone: ScwZone
+  /**
+   * The SRN of the Load Balancer.
+   */
+  srn: string
 }
 
 
@@ -513,7 +549,7 @@ export interface AclActionRedirect {
   /**
    * HTTP redirect code to use. Valid values are 301, 302, 303, 307 and 308. Default value is 302.
    */
-  code?: number
+  code?: number | null
 }
 
 
@@ -549,7 +585,7 @@ export interface Backend {
   /**
    * Object defining the health check to be carried out by the backend when checking the status and health of backend servers.
    */
-  healthCheck?: HealthCheck
+  healthCheck?: HealthCheck | null
   /**
    * List of IP addresses of backend servers attached to this backend.
    */
@@ -557,23 +593,23 @@ export interface Backend {
   /**
    * Load Balancer the backend is attached to.
    */
-  lb?: Lb
+  lb?: Lb | null
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2?: boolean | null
   /**
    * Maximum allowed time for a backend server to process a request.
    */
-  timeoutServer?: string
+  timeoutServer?: string | null
   /**
    * Maximum allowed time for establishing a connection to a backend server.
    */
-  timeoutConnect?: string
+  timeoutConnect?: string | null
   /**
    * Maximum allowed tunnel inactivity time after Websocket is established (takes precedence over client and server timeout).
    */
-  timeoutTunnel?: string
+  timeoutTunnel?: string | null
   /**
    * Action to take when a backend server is marked as down.
    */
@@ -585,43 +621,51 @@ export interface Backend {
   /**
    * Date at which the backend was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date at which the backend was updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Scaleway Object Storage bucket website to be served as failover if all backend servers are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
-  failoverHost?: string
+  failoverHost?: string | null
   /**
    * Defines whether to enable SSL bridging between the Load Balancer and backend servers.
    */
-  sslBridging?: boolean
+  sslBridging?: boolean | null
   /**
    * Defines whether the server certificate verification should be ignored.
    */
-  ignoreSslServerVerify?: boolean
+  ignoreSslServerVerify?: boolean | null
   /**
    * Whether to use another backend server on each attempt.
    */
-  redispatchAttemptCount?: number
+  redispatchAttemptCount?: number | null
   /**
    * Number of retries when a backend server connection failed.
    */
-  maxRetries?: number
+  maxRetries?: number | null
   /**
    * Maximum number of connections allowed per backend server.
    */
-  maxConnections?: number
+  maxConnections?: number | null
   /**
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
-  timeoutQueue?: string
+  timeoutQueue?: string | null
   /**
    * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
    */
-  host?: string
+  host?: string | null
+  /**
+   * The zone the backend is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the backend.
+   */
+  srn: string
 }
 
 
@@ -649,11 +693,11 @@ export interface Certificate {
   /**
    * Lower validity bound.
    */
-  notValidBefore?: Date
+  notValidBefore?: Date | null
   /**
    * Upper validity bound.
    */
-  notValidAfter?: Date
+  notValidAfter?: Date | null
   /**
    * Certificate status.
    */
@@ -661,7 +705,7 @@ export interface Certificate {
   /**
    * Load Balancer object the certificate is attached to.
    */
-  lb?: Lb
+  lb?: Lb | null
   /**
    * Certificate name.
    */
@@ -669,15 +713,23 @@ export interface Certificate {
   /**
    * Date on which the certificate was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the certificate was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Additional information about the certificate status (useful in case of certificate generation failure, for example).
    */
-  statusDetails?: string
+  statusDetails?: string | null
+  /**
+   * The zone the certificate is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the certificate.
+   */
+  srn: string
 }
 
 
@@ -689,7 +741,7 @@ export interface AclAction {
   /**
    * Redirection parameters when using an ACL with a `redirect` action.
    */
-  redirect?: AclActionRedirect
+  redirect?: AclActionRedirect | null
 }
 
 
@@ -713,7 +765,7 @@ export interface AclMatch {
   /**
    * Name of the HTTP header to filter on if `http_header_match` was selected in `http_filter`.
    */
-  httpFilterOption?: string
+  httpFilterOption?: string | null
   /**
    * Defines whether to invert the match condition. If set to `true`, the ACL carries out its action when the condition DOES NOT match.
    */
@@ -737,19 +789,19 @@ export interface Frontend {
   /**
    * Backend object the frontend is attached to.
    */
-  backend?: Backend
+  backend?: Backend | null
   /**
    * Load Balancer object the frontend is attached to.
    */
-  lb?: Lb
+  lb?: Lb | null
   /**
    * Maximum allowed inactivity time on the client side.
    */
-  timeoutClient?: string
+  timeoutClient?: string | null
   /**
    * @deprecated Certificate, deprecated in favor of certificate_ids array.
    */
-  certificate?: Certificate
+  certificate?: Certificate | null
   /**
    * List of SSL/TLS certificate IDs to bind to the frontend.
    */
@@ -757,11 +809,11 @@ export interface Frontend {
   /**
    * Date on which the frontend was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the frontend was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Defines whether to enable HTTP/3 protocol on the frontend.
    */
@@ -769,11 +821,19 @@ export interface Frontend {
   /**
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
-  connectionRateLimit?: number
+  connectionRateLimit?: number | null
   /**
    * Defines whether to enable access logs on the frontend.
    */
   enableAccessLogs: boolean
+  /**
+   * The zone the frontend is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the frontend.
+   */
+  srn: string
 }
 
 
@@ -781,7 +841,7 @@ export interface PrivateNetworkDHCPConfig {
   /**
    * @deprecated 
    */
-  ipId?: string
+  ipId?: string | null
 }
 
 
@@ -793,7 +853,7 @@ export interface PrivateNetworkStaticConfig {
   /**
    * @deprecated Array of a local IP address for the Load Balancer on this Private Network.
    */
-  ipAddress?: string[]
+  ipAddress?: string[] | null
 }
 
 
@@ -803,13 +863,13 @@ export interface RouteMatch {
    *
    * One-of ('matchType'): at most one of 'sni', 'hostHeader', 'pathBegin' could be set.
    */
-  sni?: string
+  sni?: string | null
   /**
    * Value to match in the HTTP Host request header from an incoming request. This field should be set for routes on HTTP Load Balancers.
    *
    * One-of ('matchType'): at most one of 'sni', 'hostHeader', 'pathBegin' could be set.
    */
-  hostHeader?: string
+  hostHeader?: string | null
   /**
    * If true, all subdomains will match.
    */
@@ -819,7 +879,7 @@ export interface RouteMatch {
    *
    * One-of ('matchType'): at most one of 'sni', 'hostHeader', 'pathBegin' could be set.
    */
-  pathBegin?: string
+  pathBegin?: string | null
 }
 
 
@@ -863,7 +923,7 @@ export interface BackendServerStats {
   /**
    * Time since last operational change.
    */
-  serverStateChangedAt?: Date
+  serverStateChangedAt?: Date | null
   /**
    * Last health check status (unknown/neutral/failed/passed/condpass).
    */
@@ -883,15 +943,15 @@ export interface Acl {
   /**
    * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
-  match?: AclMatch
+  match?: AclMatch | null
   /**
    * Action to take when incoming traffic matches an ACL filter.
    */
-  action?: AclAction
+  action?: AclAction | null
   /**
    * ACL is attached to this frontend object.
    */
-  frontend?: Frontend
+  frontend?: Frontend | null
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first ACL executed).
    */
@@ -899,15 +959,23 @@ export interface Acl {
   /**
    * Date on which the ACL was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the ACL was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ACL description.
    */
   description: string
+  /**
+   * The zone the ACL is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the ACL.
+   */
+  srn: string
 }
 
 
@@ -915,7 +983,7 @@ export interface PrivateNetwork {
   /**
    * Load Balancer object which is attached to the Private Network.
    */
-  lb?: Lb
+  lb?: Lb | null
   /**
    * IPAM IDs of the booked IP addresses.
    */
@@ -925,19 +993,19 @@ export interface PrivateNetwork {
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  staticConfig?: PrivateNetworkStaticConfig
+  staticConfig?: PrivateNetworkStaticConfig | null
   /**
    * @deprecated Object containing DHCP-assigned IP addresses.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  dhcpConfig?: PrivateNetworkDHCPConfig
+  dhcpConfig?: PrivateNetworkDHCPConfig | null
   /**
    * @deprecated For internal use only.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  ipamConfig?: PrivateNetworkIpamConfig
+  ipamConfig?: PrivateNetworkIpamConfig | null
   /**
    * Private Network ID.
    */
@@ -949,11 +1017,11 @@ export interface PrivateNetwork {
   /**
    * Date on which the Private Network was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the PN was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 
@@ -981,11 +1049,15 @@ export interface LbType {
   /**
    * @deprecated The region the Load Balancer stock is in.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The zone the Load Balancer stock is in.
    */
   zone: ScwZone
+  /**
+   * The SRN of the Load Balancer offer type.
+   */
+  srn: string
 }
 
 
@@ -1005,15 +1077,23 @@ export interface Route {
   /**
    * Object defining the match condition for a route to be applied. If an incoming client session matches the specified condition (i.e. it has a matching SNI value or HTTP Host header value), it will be passed to the target backend.
    */
-  match?: RouteMatch
+  match?: RouteMatch | null
   /**
    * Date on which the route was created.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date on which the route was last updated.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
+  /**
+   * The zone the route is in.
+   */
+  zone: ScwZone
+  /**
+   * The SRN of the route.
+   */
+  srn: string
 }
 
 
@@ -1029,7 +1109,7 @@ export interface AclSpec {
   /**
    * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` and `http_filter_value` are required.
    */
-  match?: AclMatch
+  match?: AclMatch | null
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first ACL executed).
    */
@@ -1045,7 +1125,7 @@ export type AddBackendServersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Backend ID.
    */
@@ -1061,7 +1141,7 @@ export type AttachPrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1075,23 +1155,23 @@ export type AttachPrivateNetworkRequest = {
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  staticConfig?: PrivateNetworkStaticConfig
+  staticConfig?: PrivateNetworkStaticConfig | null
   /**
    * @deprecated Defines whether to let DHCP assign IP addresses.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  dhcpConfig?: PrivateNetworkDHCPConfig
+  dhcpConfig?: PrivateNetworkDHCPConfig | null
   /**
    * @deprecated For internal use only.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  ipamConfig?: PrivateNetworkIpamConfig
+  ipamConfig?: PrivateNetworkIpamConfig | null
   /**
    * IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this Private Network. In the future, it will be possible to specify multiple IPs in this field (IPv4 and IPv6), for now only one ID of an IPv4 address is expected. When null, a new private IP address is created for the Load Balancer on this Private Network.
    */
-  ipamIds?: string[]
+  ipamIds?: string[] | null
 }
 
 
@@ -1102,7 +1182,7 @@ export type CreateAclRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Frontend ID to attach the ACL to.
    */
@@ -1110,7 +1190,7 @@ export type CreateAclRequest = {
   /**
    * ACL name.
    */
-  name?: string
+  name?: string | null
   /**
    * Action to take when incoming traffic matches an ACL filter.
    */
@@ -1118,7 +1198,7 @@ export type CreateAclRequest = {
   /**
    * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
-  match?: AclMatch
+  match?: AclMatch | null
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first ACL executed).
    */
@@ -1134,7 +1214,7 @@ export type CreateBackendRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1142,7 +1222,7 @@ export type CreateBackendRequest = {
   /**
    * Name for the backend.
    */
-  name?: string
+  name?: string | null
   /**
    * Protocol to be used by the backend when forwarding traffic to backend servers.
    */
@@ -1174,59 +1254,59 @@ export type CreateBackendRequest = {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2?: boolean | null
   /**
    * Maximum allowed time for a backend server to process a request.
    */
-  timeoutServer?: string
+  timeoutServer?: string | null
   /**
    * Maximum allowed time for establishing a connection to a backend server.
    */
-  timeoutConnect?: string
+  timeoutConnect?: string | null
   /**
    * Maximum allowed tunnel inactivity time after Websocket is established (takes precedence over client and server timeout).
    */
-  timeoutTunnel?: string
+  timeoutTunnel?: string | null
   /**
    * Action to take when a backend server is marked as down.
    */
-  onMarkedDownAction?: OnMarkedDownAction
+  onMarkedDownAction?: OnMarkedDownAction | null
   /**
    * Protocol to use between the Load Balancer and backend servers. Allows the backend servers to be informed of the client's real IP address. The PROXY protocol must be supported by the backend servers' software.
    */
-  proxyProtocol?: ProxyProtocol
+  proxyProtocol?: ProxyProtocol | null
   /**
    * Scaleway Object Storage bucket website to be served as failover if all backend servers are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
-  failoverHost?: string
+  failoverHost?: string | null
   /**
    * Defines whether to enable SSL bridging between the Load Balancer and backend servers.
    */
-  sslBridging?: boolean
+  sslBridging?: boolean | null
   /**
    * Defines whether the server certificate verification should be ignored.
    */
-  ignoreSslServerVerify?: boolean
+  ignoreSslServerVerify?: boolean | null
   /**
    * Whether to use another backend server on each attempt.
    */
-  redispatchAttemptCount?: number
+  redispatchAttemptCount?: number | null
   /**
    * Number of retries when a backend server connection failed.
    */
-  maxRetries?: number
+  maxRetries?: number | null
   /**
    * Maximum number of connections allowed per backend server.
    */
-  maxConnections?: number
+  maxConnections?: number | null
   /**
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
-  timeoutQueue?: string
+  timeoutQueue?: string | null
   /**
    * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
    */
-  host?: string
+  host?: string | null
 }
 
 
@@ -1234,7 +1314,7 @@ export type CreateCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1242,19 +1322,19 @@ export type CreateCertificateRequest = {
   /**
    * Name for the certificate.
    */
-  name?: string
+  name?: string | null
   /**
    * Object to define a new Let's Encrypt certificate to be generated.
    *
    * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be set.
    */
-  letsencrypt?: CreateCertificateRequestLetsencryptConfig
+  letsencrypt?: CreateCertificateRequestLetsencryptConfig | null
   /**
    * Object to define an existing custom certificate to be imported.
    *
    * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be set.
    */
-  customCertificate?: CreateCertificateRequestCustomCertificate
+  customCertificate?: CreateCertificateRequestCustomCertificate | null
 }
 
 
@@ -1262,7 +1342,7 @@ export type CreateFrontendRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID (ID of the Load Balancer to attach the frontend to).
    */
@@ -1270,7 +1350,7 @@ export type CreateFrontendRequest = {
   /**
    * Name for the frontend.
    */
-  name?: string
+  name?: string | null
   /**
    * Port the frontend should listen on.
    */
@@ -1282,15 +1362,15 @@ export type CreateFrontendRequest = {
   /**
    * Maximum allowed inactivity time on the client side.
    */
-  timeoutClient?: string
+  timeoutClient?: string | null
   /**
    * @deprecated Certificate ID, deprecated in favor of certificate_ids array.
    */
-  certificateId?: string
+  certificateId?: string | null
   /**
    * List of SSL/TLS certificate IDs to bind to the frontend.
    */
-  certificateIds?: string[]
+  certificateIds?: string[] | null
   /**
    * Defines whether to enable HTTP/3 protocol on the frontend.
    */
@@ -1298,7 +1378,7 @@ export type CreateFrontendRequest = {
   /**
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
-  connectionRateLimit?: number
+  connectionRateLimit?: number | null
   /**
    * Defines whether to enable access logs on the frontend.
    */
@@ -1310,23 +1390,23 @@ export type CreateIpRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * @deprecated Organization ID of the Organization where the IP address should be created.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID of the Project where the IP address should be created.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Reverse DNS (domain name) for the IP address.
    */
-  reverse?: string
+  reverse?: string | null
   /**
    * If true, creates a Flexible IP with an ipv6 address.
    */
@@ -1334,7 +1414,7 @@ export type CreateIpRequest = {
   /**
    * List of tags for the IP.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1342,23 +1422,23 @@ export type CreateLbRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * @deprecated Scaleway Organization to create the Load Balancer in.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Scaleway Project to create the Load Balancer in.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name for the Load Balancer.
    */
-  name?: string
+  name?: string | null
   /**
    * Description for the Load Balancer.
    */
@@ -1366,23 +1446,27 @@ export type CreateLbRequest = {
   /**
    * @deprecated ID of an existing flexible IP address to attach to the Load Balancer.
    */
-  ipId?: string
+  ipId?: string | null
   /**
    * Defines whether to automatically assign a flexible public IP to the Load Balancer. Default value is `true` (assign).
    */
-  assignFlexibleIp?: boolean
+  assignFlexibleIp?: boolean | null
   /**
    * Defines whether to automatically assign a flexible public IPv6 to the Load Balancer. Default value is `false` (do not assign).
    */
-  assignFlexibleIpv6?: boolean
+  assignFlexibleIpv6?: boolean | null
   /**
    * List of IP IDs to attach to the Load Balancer.
    */
-  ipIds?: string[]
+  ipIds?: string[] | null
+  /**
+   * List of IPAM IP IDs to attach to the Load Balancer.
+   */
+  ipamIpIds?: string[] | null
   /**
    * List of tags for the Load Balancer.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Load Balancer commercial offer type. Use the Load Balancer types endpoint to retrieve a list of available offer types.
    */
@@ -1390,7 +1474,7 @@ export type CreateLbRequest = {
   /**
    * Determines the minimal SSL version which needs to be supported on the client side, in an SSL/TLS offloading context. Intermediate is suitable for general-purpose servers with a variety of clients, recommended for almost all systems (>= TLS1.2). Modern is suitable for services with clients that support TLS 1.3 and do not need backward compatibility (= TLS1.3). Old is compatible with a small number of very old clients and should be used only as a last resort (>= TLS1.0).
    */
-  sslCompatibilityLevel?: SSLCompatibilityLevel
+  sslCompatibilityLevel?: SSLCompatibilityLevel | null
 }
 
 
@@ -1398,7 +1482,7 @@ export type CreateRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the source frontend to create the route on.
    */
@@ -1410,7 +1494,7 @@ export type CreateRouteRequest = {
   /**
    * Object defining the match condition for a route to be applied. If an incoming client session matches the specified condition (i.e. it has a matching SNI value or HTTP Host header value), it will be passed to the target backend.
    */
-  match?: RouteMatch
+  match?: RouteMatch | null
 }
 
 
@@ -1421,7 +1505,7 @@ export type CreateSubscriberRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Subscriber name.
    */
@@ -1431,25 +1515,25 @@ export type CreateSubscriberRequest = {
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  emailConfig?: SubscriberEmailConfig
+  emailConfig?: SubscriberEmailConfig | null
   /**
    * WebHook URI configuration.
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  webhookConfig?: SubscriberWebhookConfig
+  webhookConfig?: SubscriberWebhookConfig | null
   /**
    * @deprecated Organization ID to create the subscriber in.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to create the subscriber in.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1457,7 +1541,7 @@ export type DeleteAclRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ACL ID.
    */
@@ -1469,7 +1553,7 @@ export type DeleteBackendRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the backend to delete.
    */
@@ -1481,7 +1565,7 @@ export type DeleteCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Certificate ID.
    */
@@ -1493,7 +1577,7 @@ export type DeleteFrontendRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the frontend to delete.
    */
@@ -1505,7 +1589,7 @@ export type DeleteLbRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Load Balancer to delete.
    */
@@ -1514,6 +1598,10 @@ export type DeleteLbRequest = {
    * Defines whether the Load Balancer's flexible IP should be deleted. Set to true to release the flexible IP, or false to keep it available in your account for future Load Balancers.
    */
   releaseIp: boolean
+  /**
+   * If true and one or several ips of the LB are legacy flexible IP, they will be migrated to IPAM, free to use in other Scaleway products.
+   */
+  migrateFlexipToIpam?: boolean | null
 }
 
 
@@ -1521,7 +1609,7 @@ export type DeleteRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route ID.
    */
@@ -1533,7 +1621,7 @@ export type DeleteSubscriberRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Subscriber ID.
    */
@@ -1545,7 +1633,7 @@ export type DetachPrivateNetworkRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load balancer ID.
    */
@@ -1561,7 +1649,7 @@ export type GetAclRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ACL ID.
    */
@@ -1573,7 +1661,7 @@ export type GetBackendRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Backend ID.
    */
@@ -1585,7 +1673,7 @@ export type GetCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Certificate ID.
    */
@@ -1597,7 +1685,7 @@ export type GetFrontendRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Frontend ID.
    */
@@ -1609,7 +1697,7 @@ export type GetIpRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP address ID.
    */
@@ -1621,7 +1709,7 @@ export type GetLbRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1636,7 +1724,7 @@ export type GetLbStatsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1644,7 +1732,7 @@ export type GetLbStatsRequest = {
   /**
    * ID of the backend.
    */
-  backendId?: string
+  backendId?: string | null
 }
 
 
@@ -1652,7 +1740,7 @@ export type GetRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route ID.
    */
@@ -1664,7 +1752,7 @@ export type GetSubscriberRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Subscriber ID.
    */
@@ -1696,7 +1784,7 @@ export type ListAclsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Frontend ID (ACLs attached to this frontend will be returned in the response).
    */
@@ -1704,19 +1792,19 @@ export type ListAclsRequest = {
   /**
    * Sort order of ACLs in the response.
    */
-  orderBy?: ListAclRequestOrderBy
+  orderBy?: ListAclRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * The number of ACLs to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ACL name to filter for.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1724,7 +1812,7 @@ export type ListBackendStatsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1732,15 +1820,15 @@ export type ListBackendStatsRequest = {
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the backend.
    */
-  backendId?: string
+  backendId?: string | null
 }
 
 
@@ -1760,7 +1848,7 @@ export type ListBackendsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1768,19 +1856,19 @@ export type ListBackendsRequest = {
   /**
    * Name of the backend to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Sort order of backends in the response.
    */
-  orderBy?: ListBackendsRequestOrderBy
+  orderBy?: ListBackendsRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of backends to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1800,7 +1888,7 @@ export type ListCertificatesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1808,19 +1896,19 @@ export type ListCertificatesRequest = {
   /**
    * Sort order of certificates in the response.
    */
-  orderBy?: ListCertificatesRequestOrderBy
+  orderBy?: ListCertificatesRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of certificates to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Certificate name to filter for, only certificates of this name will be returned.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1840,7 +1928,7 @@ export type ListFrontendsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1848,19 +1936,19 @@ export type ListFrontendsRequest = {
   /**
    * Name of the frontend to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Sort order of frontends in the response.
    */
-  orderBy?: ListFrontendsRequestOrderBy
+  orderBy?: ListFrontendsRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of frontends to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1880,35 +1968,39 @@ export type ListIPsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of IP addresses to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * IP address to filter for.
    */
-  ipAddress?: string
+  ipAddress?: string | null
   /**
    * Organization ID to filter for, only Load Balancer IP addresses from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for, only Load Balancer IP addresses from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * IP type to filter for.
    */
-  ipType?: ListIpsRequestIpType
+  ipType?: ListIpsRequestIpType | null
   /**
    * Tag to filter for, only IPs with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
+  /**
+   * Defines whether to filter only for Flexible IPs which are attached to a Load Balancer.
+   */
+  attached?: boolean | null
 }
 
 
@@ -1928,7 +2020,7 @@ export type ListLbPrivateNetworksRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -1936,15 +2028,15 @@ export type ListLbPrivateNetworksRequest = {
   /**
    * Sort order of Private Network objects in the response.
    */
-  orderBy?: ListPrivateNetworksRequestOrderBy
+  orderBy?: ListPrivateNetworksRequestOrderBy | null
   /**
    * Number of objects to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
 }
 
 
@@ -1964,15 +2056,15 @@ export type ListLbTypesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * The number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -1992,39 +2084,39 @@ export type ListLbsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Sort order of Load Balancers in the response.
    */
-  orderBy?: ListLbsRequestOrderBy
+  orderBy?: ListLbsRequestOrderBy | null
   /**
    * Number of Load Balancers to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Organization ID to filter for, only Load Balancers from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for, only Load Balancers from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by tag, only Load Balancers with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by lb_ids, only Load Balancers with these IDs will be returned.
    */
-  lbIds?: string[]
+  lbIds?: string[] | null
 }
 
 
@@ -2044,23 +2136,23 @@ export type ListRoutesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of routes in the response.
    */
-  orderBy?: ListRoutesRequestOrderBy
+  orderBy?: ListRoutesRequestOrderBy | null
   /**
    * The number of route objects to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Frontend ID to filter for, only Routes from this Frontend will be returned.
    */
-  frontendId?: string
+  frontendId?: string | null
 }
 
 
@@ -2080,31 +2172,31 @@ export type ListSubscriberRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Sort order of subscribers in the response.
    */
-  orderBy?: ListSubscriberRequestOrderBy
+  orderBy?: ListSubscriberRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * The number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Subscriber name to search for.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter subscribers by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter subscribers by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -2124,7 +2216,7 @@ export type MigrateLbRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -2140,7 +2232,7 @@ export type ReleaseIpRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP address ID.
    */
@@ -2152,7 +2244,7 @@ export type RemoveBackendServersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Backend ID.
    */
@@ -2180,7 +2272,7 @@ export type SetBackendServersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Backend ID.
    */
@@ -2196,7 +2288,7 @@ export type SubscribeToLbRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -2212,7 +2304,7 @@ export type UnsubscribeFromLbRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -2224,7 +2316,7 @@ export type UpdateAclRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ACL ID.
    */
@@ -2240,7 +2332,7 @@ export type UpdateAclRequest = {
   /**
    * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
-  match?: AclMatch
+  match?: AclMatch | null
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first ACL executed).
    */
@@ -2248,7 +2340,7 @@ export type UpdateAclRequest = {
   /**
    * ACL description.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -2256,7 +2348,7 @@ export type UpdateBackendRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Backend ID.
    */
@@ -2288,59 +2380,59 @@ export type UpdateBackendRequest = {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2?: boolean | null
   /**
    * Maximum allowed time for a backend server to process a request.
    */
-  timeoutServer?: string
+  timeoutServer?: string | null
   /**
    * Maximum allowed time for establishing a connection to a backend server.
    */
-  timeoutConnect?: string
+  timeoutConnect?: string | null
   /**
    * Maximum allowed tunnel inactivity time after Websocket is established (takes precedence over client and server timeout).
    */
-  timeoutTunnel?: string
+  timeoutTunnel?: string | null
   /**
    * Action to take when a backend server is marked as down.
    */
-  onMarkedDownAction?: OnMarkedDownAction
+  onMarkedDownAction?: OnMarkedDownAction | null
   /**
    * Protocol to use between the Load Balancer and backend servers. Allows the backend servers to be informed of the client's real IP address. The PROXY protocol must be supported by the backend servers' software.
    */
-  proxyProtocol?: ProxyProtocol
+  proxyProtocol?: ProxyProtocol | null
   /**
    * Scaleway Object Storage bucket website to be served as failover if all backend servers are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
-  failoverHost?: string
+  failoverHost?: string | null
   /**
    * Defines whether to enable SSL bridging between the Load Balancer and backend servers.
    */
-  sslBridging?: boolean
+  sslBridging?: boolean | null
   /**
    * Defines whether the server certificate verification should be ignored.
    */
-  ignoreSslServerVerify?: boolean
+  ignoreSslServerVerify?: boolean | null
   /**
    * Whether to use another backend server on each attempt.
    */
-  redispatchAttemptCount?: number
+  redispatchAttemptCount?: number | null
   /**
    * Number of retries when a backend server connection failed.
    */
-  maxRetries?: number
+  maxRetries?: number | null
   /**
    * Maximum number of connections allowed per backend server.
    */
-  maxConnections?: number
+  maxConnections?: number | null
   /**
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
-  timeoutQueue?: string
+  timeoutQueue?: string | null
   /**
    * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
    */
-  host?: string
+  host?: string | null
 }
 
 
@@ -2348,7 +2440,7 @@ export type UpdateCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Certificate ID.
    */
@@ -2364,7 +2456,7 @@ export type UpdateFrontendRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Frontend ID.
    */
@@ -2384,15 +2476,15 @@ export type UpdateFrontendRequest = {
   /**
    * Maximum allowed inactivity time on the client side.
    */
-  timeoutClient?: string
+  timeoutClient?: string | null
   /**
    * @deprecated Certificate ID, deprecated in favor of certificate_ids array.
    */
-  certificateId?: string
+  certificateId?: string | null
   /**
    * List of SSL/TLS certificate IDs to bind to the frontend.
    */
-  certificateIds?: string[]
+  certificateIds?: string[] | null
   /**
    * Defines whether to enable HTTP/3 protocol on the frontend.
    */
@@ -2400,11 +2492,11 @@ export type UpdateFrontendRequest = {
   /**
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
-  connectionRateLimit?: number
+  connectionRateLimit?: number | null
   /**
    * Defines whether to enable access logs on the frontend.
    */
-  enableAccessLogs?: boolean
+  enableAccessLogs?: boolean | null
 }
 
 
@@ -2412,7 +2504,7 @@ export type UpdateHealthCheckRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Backend ID.
    */
@@ -2424,11 +2516,11 @@ export type UpdateHealthCheckRequest = {
   /**
    * Time to wait between two consecutive health checks.
    */
-  checkDelay?: string
+  checkDelay?: string | null
   /**
    * Maximum time a backend server has to reply to the health check.
    */
-  checkTimeout?: string
+  checkTimeout?: string | null
   /**
    * Number of consecutive unsuccessful health checks after which the server will be considered dead.
    */
@@ -2442,47 +2534,47 @@ export type UpdateHealthCheckRequest = {
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  tcpConfig?: HealthCheckTcpConfig
+  tcpConfig?: HealthCheckTcpConfig | null
   /**
    * Object to configure a MySQL health check. The check requires MySQL >=3.22 or <9.0. For older or newer versions, use a TCP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  mysqlConfig?: HealthCheckMysqlConfig
+  mysqlConfig?: HealthCheckMysqlConfig | null
   /**
    * Object to configure a PostgreSQL health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  pgsqlConfig?: HealthCheckPgsqlConfig
+  pgsqlConfig?: HealthCheckPgsqlConfig | null
   /**
    * Object to configure an LDAP health check. The response is analyzed to find the LDAPv3 response message.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  ldapConfig?: HealthCheckLdapConfig
+  ldapConfig?: HealthCheckLdapConfig | null
   /**
    * Object to configure a Redis health check. The response is analyzed to find the +PONG response message.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  redisConfig?: HealthCheckRedisConfig
+  redisConfig?: HealthCheckRedisConfig | null
   /**
    * Object to configure an HTTP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  httpConfig?: HealthCheckHttpConfig
+  httpConfig?: HealthCheckHttpConfig | null
   /**
    * Object to configure an HTTPS health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  httpsConfig?: HealthCheckHttpsConfig
+  httpsConfig?: HealthCheckHttpsConfig | null
   /**
    * Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
    */
-  transientCheckDelay?: string
+  transientCheckDelay?: string | null
 }
 
 
@@ -2490,7 +2582,7 @@ export type UpdateIpRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * IP address ID.
    */
@@ -2498,15 +2590,15 @@ export type UpdateIpRequest = {
   /**
    * Reverse DNS (domain name) for the IP address.
    */
-  reverse?: string
+  reverse?: string | null
   /**
    * ID of the server on which to attach the flexible IP.
    */
-  lbId?: string
+  lbId?: string | null
   /**
    * List of tags for the IP.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2514,7 +2606,7 @@ export type UpdateLbRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Load Balancer ID.
    */
@@ -2530,11 +2622,11 @@ export type UpdateLbRequest = {
   /**
    * List of tags for the Load Balancer.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Determines the minimal SSL version which needs to be supported on the client side, in an SSL/TLS offloading context. Intermediate is suitable for general-purpose servers with a variety of clients, recommended for almost all systems (>= TLS1.2). Modern is suitable for services with clients that support TLS 1.3 and do not need backward compatibility (= TLS1.3). Old is compatible with a small number of very old clients and should be used only as a last resort (>= TLS1.0).
    */
-  sslCompatibilityLevel?: SSLCompatibilityLevel
+  sslCompatibilityLevel?: SSLCompatibilityLevel | null
 }
 
 
@@ -2542,7 +2634,7 @@ export type UpdateRouteRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Route ID.
    */
@@ -2554,7 +2646,7 @@ export type UpdateRouteRequest = {
   /**
    * Object defining the match condition for a route to be applied. If an incoming client session matches the specified condition (i.e. it has a matching SNI value or HTTP Host header value), it will be passed to the target backend.
    */
-  match?: RouteMatch
+  match?: RouteMatch | null
 }
 
 
@@ -2562,7 +2654,7 @@ export type UpdateSubscriberRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Subscriber ID.
    */
@@ -2576,13 +2668,13 @@ export type UpdateSubscriberRequest = {
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  emailConfig?: SubscriberEmailConfig
+  emailConfig?: SubscriberEmailConfig | null
   /**
    * Webhook URI configuration.
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  webhookConfig?: SubscriberWebhookConfig
+  webhookConfig?: SubscriberWebhookConfig | null
 }
 
 
@@ -2590,7 +2682,7 @@ export type ZonedApiAddBackendServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Backend ID.
    */
@@ -2602,11 +2694,27 @@ export type ZonedApiAddBackendServersRequest = {
 }
 
 
+export type ZonedApiAttachIpamIPRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone | null
+  /**
+   * Load Balancer ID.
+   */
+  lbId: string
+  /**
+   * ID of an IPAM IP address to attach to the Load Balancer.
+   */
+  ipamIpIds: string[]
+}
+
+
 export type ZonedApiAttachPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -2620,23 +2728,23 @@ export type ZonedApiAttachPrivateNetworkRequest = {
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  staticConfig?: PrivateNetworkStaticConfig
+  staticConfig?: PrivateNetworkStaticConfig | null
   /**
    * @deprecated Defines whether to let DHCP assign IP addresses.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  dhcpConfig?: PrivateNetworkDHCPConfig
+  dhcpConfig?: PrivateNetworkDHCPConfig | null
   /**
    * @deprecated For internal use only.
    *
    * One-of ('config'): at most one of 'staticConfig', 'dhcpConfig', 'ipamConfig' could be set.
    */
-  ipamConfig?: PrivateNetworkIpamConfig
+  ipamConfig?: PrivateNetworkIpamConfig | null
   /**
    * IPAM ID of a pre-reserved IP address to assign to the Load Balancer on this Private Network. In the future, it will be possible to specify multiple IPs in this field (IPv4 and IPv6), for now only one ID of an IPv4 address is expected. When null, a new private IP address is created for the Load Balancer on this Private Network.
    */
-  ipamIds?: string[]
+  ipamIds?: string[] | null
 }
 
 
@@ -2647,7 +2755,7 @@ export type ZonedApiCreateAclRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Frontend ID to attach the ACL to.
    */
@@ -2655,7 +2763,7 @@ export type ZonedApiCreateAclRequest = {
   /**
    * ACL name.
    */
-  name?: string
+  name?: string | null
   /**
    * Action to take when incoming traffic matches an ACL filter.
    */
@@ -2663,7 +2771,7 @@ export type ZonedApiCreateAclRequest = {
   /**
    * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
-  match?: AclMatch
+  match?: AclMatch | null
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first ACL executed).
    */
@@ -2679,7 +2787,7 @@ export type ZonedApiCreateBackendRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -2687,7 +2795,7 @@ export type ZonedApiCreateBackendRequest = {
   /**
    * Name for the backend.
    */
-  name?: string
+  name?: string | null
   /**
    * Protocol to be used by the backend when forwarding traffic to backend servers.
    */
@@ -2719,59 +2827,59 @@ export type ZonedApiCreateBackendRequest = {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2?: boolean | null
   /**
    * Maximum allowed time for a backend server to process a request.
    */
-  timeoutServer?: string
+  timeoutServer?: string | null
   /**
    * Maximum allowed time for establishing a connection to a backend server.
    */
-  timeoutConnect?: string
+  timeoutConnect?: string | null
   /**
    * Maximum allowed tunnel inactivity time after Websocket is established (takes precedence over client and server timeout).
    */
-  timeoutTunnel?: string
+  timeoutTunnel?: string | null
   /**
    * Action to take when a backend server is marked as down.
    */
-  onMarkedDownAction?: OnMarkedDownAction
+  onMarkedDownAction?: OnMarkedDownAction | null
   /**
    * Protocol to use between the Load Balancer and backend servers. Allows the backend servers to be informed of the client's real IP address. The PROXY protocol must be supported by the backend servers' software.
    */
-  proxyProtocol?: ProxyProtocol
+  proxyProtocol?: ProxyProtocol | null
   /**
    * Scaleway Object Storage bucket website to be served as failover if all backend servers are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
-  failoverHost?: string
+  failoverHost?: string | null
   /**
    * Defines whether to enable SSL bridging between the Load Balancer and backend servers.
    */
-  sslBridging?: boolean
+  sslBridging?: boolean | null
   /**
    * Defines whether the server certificate verification should be ignored.
    */
-  ignoreSslServerVerify?: boolean
+  ignoreSslServerVerify?: boolean | null
   /**
    * Whether to use another backend server on each attempt.
    */
-  redispatchAttemptCount?: number
+  redispatchAttemptCount?: number | null
   /**
    * Number of retries when a backend server connection failed.
    */
-  maxRetries?: number
+  maxRetries?: number | null
   /**
    * Maximum number of connections allowed per backend server.
    */
-  maxConnections?: number
+  maxConnections?: number | null
   /**
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
-  timeoutQueue?: string
+  timeoutQueue?: string | null
   /**
    * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
    */
-  host?: string
+  host?: string | null
 }
 
 
@@ -2779,7 +2887,7 @@ export type ZonedApiCreateCertificateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -2787,19 +2895,19 @@ export type ZonedApiCreateCertificateRequest = {
   /**
    * Name for the certificate.
    */
-  name?: string
+  name?: string | null
   /**
    * Object to define a new Let's Encrypt certificate to be generated.
    *
    * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be set.
    */
-  letsencrypt?: CreateCertificateRequestLetsencryptConfig
+  letsencrypt?: CreateCertificateRequestLetsencryptConfig | null
   /**
    * Object to define an existing custom certificate to be imported.
    *
    * One-of ('type'): at most one of 'letsencrypt', 'customCertificate' could be set.
    */
-  customCertificate?: CreateCertificateRequestCustomCertificate
+  customCertificate?: CreateCertificateRequestCustomCertificate | null
 }
 
 
@@ -2807,7 +2915,7 @@ export type ZonedApiCreateFrontendRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID (ID of the Load Balancer to attach the frontend to).
    */
@@ -2815,7 +2923,7 @@ export type ZonedApiCreateFrontendRequest = {
   /**
    * Name for the frontend.
    */
-  name?: string
+  name?: string | null
   /**
    * Port the frontend should listen on.
    */
@@ -2827,15 +2935,15 @@ export type ZonedApiCreateFrontendRequest = {
   /**
    * Maximum allowed inactivity time on the client side.
    */
-  timeoutClient?: string
+  timeoutClient?: string | null
   /**
    * @deprecated Certificate ID, deprecated in favor of certificate_ids array.
    */
-  certificateId?: string
+  certificateId?: string | null
   /**
    * List of SSL/TLS certificate IDs to bind to the frontend.
    */
-  certificateIds?: string[]
+  certificateIds?: string[] | null
   /**
    * Defines whether to enable HTTP/3 protocol on the frontend.
    */
@@ -2843,7 +2951,7 @@ export type ZonedApiCreateFrontendRequest = {
   /**
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
-  connectionRateLimit?: number
+  connectionRateLimit?: number | null
   /**
    * Defines whether to enable access logs on the frontend.
    */
@@ -2855,23 +2963,23 @@ export type ZonedApiCreateIpRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * @deprecated Organization ID of the Organization where the IP address should be created.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID of the Project where the IP address should be created.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Reverse DNS (domain name) for the IP address.
    */
-  reverse?: string
+  reverse?: string | null
   /**
    * If true, creates a Flexible IP with an ipv6 address.
    */
@@ -2879,7 +2987,7 @@ export type ZonedApiCreateIpRequest = {
   /**
    * List of tags for the IP.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -2887,23 +2995,23 @@ export type ZonedApiCreateLbRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * @deprecated Scaleway Organization to create the Load Balancer in.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Scaleway Project to create the Load Balancer in.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name for the Load Balancer.
    */
-  name?: string
+  name?: string | null
   /**
    * Description for the Load Balancer.
    */
@@ -2911,23 +3019,27 @@ export type ZonedApiCreateLbRequest = {
   /**
    * @deprecated ID of an existing flexible IP address to attach to the Load Balancer.
    */
-  ipId?: string
+  ipId?: string | null
   /**
    * Defines whether to automatically assign a flexible public IP to the Load Balancer. Default value is `true` (assign).
    */
-  assignFlexibleIp?: boolean
+  assignFlexibleIp?: boolean | null
   /**
    * Defines whether to automatically assign a flexible public IPv6 to the Load Balancer. Default value is `false` (do not assign).
    */
-  assignFlexibleIpv6?: boolean
+  assignFlexibleIpv6?: boolean | null
   /**
    * List of IP IDs to attach to the Load Balancer.
    */
-  ipIds?: string[]
+  ipIds?: string[] | null
+  /**
+   * List of IPAM IP IDs to attach to the Load Balancer.
+   */
+  ipamIpIds?: string[] | null
   /**
    * List of tags for the Load Balancer.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Load Balancer commercial offer type. Use the Load Balancer types endpoint to retrieve a list of available offer types.
    */
@@ -2935,7 +3047,7 @@ export type ZonedApiCreateLbRequest = {
   /**
    * Determines the minimal SSL version which needs to be supported on the client side, in an SSL/TLS offloading context. Intermediate is suitable for general-purpose servers with a variety of clients, recommended for almost all systems (>= TLS1.2). Modern is suitable for services with clients that support TLS 1.3 and do not need backward compatibility (= TLS1.3). Old is compatible with a small number of very old clients and should be used only as a last resort (>= TLS1.0).
    */
-  sslCompatibilityLevel?: SSLCompatibilityLevel
+  sslCompatibilityLevel?: SSLCompatibilityLevel | null
 }
 
 
@@ -2943,7 +3055,7 @@ export type ZonedApiCreateRouteRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the source frontend to create the route on.
    */
@@ -2955,7 +3067,7 @@ export type ZonedApiCreateRouteRequest = {
   /**
    * Object defining the match condition for a route to be applied. If an incoming client session matches the specified condition (i.e. it has a matching SNI value or HTTP Host header value), it will be passed to the target backend.
    */
-  match?: RouteMatch
+  match?: RouteMatch | null
 }
 
 
@@ -2966,7 +3078,7 @@ export type ZonedApiCreateSubscriberRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Subscriber name.
    */
@@ -2976,25 +3088,25 @@ export type ZonedApiCreateSubscriberRequest = {
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  emailConfig?: SubscriberEmailConfig
+  emailConfig?: SubscriberEmailConfig | null
   /**
    * WebHook URI configuration.
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  webhookConfig?: SubscriberWebhookConfig
+  webhookConfig?: SubscriberWebhookConfig | null
   /**
    * @deprecated Organization ID to create the subscriber in.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to create the subscriber in.
    *
    * One-of ('projectIdentifier'): at most one of 'projectId', 'organizationId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3002,7 +3114,7 @@ export type ZonedApiDeleteAclRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ACL ID.
    */
@@ -3014,7 +3126,7 @@ export type ZonedApiDeleteBackendRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the backend to delete.
    */
@@ -3026,7 +3138,7 @@ export type ZonedApiDeleteCertificateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Certificate ID.
    */
@@ -3038,7 +3150,7 @@ export type ZonedApiDeleteFrontendRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the frontend to delete.
    */
@@ -3050,7 +3162,7 @@ export type ZonedApiDeleteLbRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ID of the Load Balancer to delete.
    */
@@ -3059,6 +3171,10 @@ export type ZonedApiDeleteLbRequest = {
    * Defines whether the Load Balancer's flexible IP should be deleted. Set to true to release the flexible IP, or false to keep it available in your account for future Load Balancers.
    */
   releaseIp: boolean
+  /**
+   * If true and one or several ips of the LB are legacy flexible IP, they will be migrated to IPAM, free to use in other Scaleway products.
+   */
+  migrateFlexipToIpam?: boolean | null
 }
 
 
@@ -3066,7 +3182,7 @@ export type ZonedApiDeleteRouteRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Route ID.
    */
@@ -3078,7 +3194,7 @@ export type ZonedApiDeleteSubscriberRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Subscriber ID.
    */
@@ -3090,7 +3206,7 @@ export type ZonedApiDetachPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load balancer ID.
    */
@@ -3106,7 +3222,7 @@ export type ZonedApiGetAclRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ACL ID.
    */
@@ -3118,7 +3234,7 @@ export type ZonedApiGetBackendRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Backend ID.
    */
@@ -3130,7 +3246,7 @@ export type ZonedApiGetCertificateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Certificate ID.
    */
@@ -3142,7 +3258,7 @@ export type ZonedApiGetFrontendRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Frontend ID.
    */
@@ -3154,7 +3270,7 @@ export type ZonedApiGetIpRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * IP address ID.
    */
@@ -3166,7 +3282,7 @@ export type ZonedApiGetLbRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3181,7 +3297,7 @@ export type ZonedApiGetLbStatsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3189,7 +3305,7 @@ export type ZonedApiGetLbStatsRequest = {
   /**
    * ID of the backend.
    */
-  backendId?: string
+  backendId?: string | null
 }
 
 
@@ -3197,7 +3313,7 @@ export type ZonedApiGetRouteRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Route ID.
    */
@@ -3209,7 +3325,7 @@ export type ZonedApiGetSubscriberRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Subscriber ID.
    */
@@ -3221,7 +3337,7 @@ export type ZonedApiListAclsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Frontend ID (ACLs attached to this frontend will be returned in the response).
    */
@@ -3229,19 +3345,19 @@ export type ZonedApiListAclsRequest = {
   /**
    * Sort order of ACLs in the response.
    */
-  orderBy?: ListAclRequestOrderBy
+  orderBy?: ListAclRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * The number of ACLs to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ACL name to filter for.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -3249,7 +3365,7 @@ export type ZonedApiListBackendStatsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3257,15 +3373,15 @@ export type ZonedApiListBackendStatsRequest = {
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * ID of the backend.
    */
-  backendId?: string
+  backendId?: string | null
 }
 
 
@@ -3273,7 +3389,7 @@ export type ZonedApiListBackendsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3281,19 +3397,19 @@ export type ZonedApiListBackendsRequest = {
   /**
    * Name of the backend to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Sort order of backends in the response.
    */
-  orderBy?: ListBackendsRequestOrderBy
+  orderBy?: ListBackendsRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of backends to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -3301,7 +3417,7 @@ export type ZonedApiListCertificatesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3309,19 +3425,19 @@ export type ZonedApiListCertificatesRequest = {
   /**
    * Sort order of certificates in the response.
    */
-  orderBy?: ListCertificatesRequestOrderBy
+  orderBy?: ListCertificatesRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of certificates to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Certificate name to filter for, only certificates of this name will be returned.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -3329,7 +3445,7 @@ export type ZonedApiListFrontendsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3337,19 +3453,19 @@ export type ZonedApiListFrontendsRequest = {
   /**
    * Name of the frontend to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Sort order of frontends in the response.
    */
-  orderBy?: ListFrontendsRequestOrderBy
+  orderBy?: ListFrontendsRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of frontends to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -3357,35 +3473,39 @@ export type ZonedApiListIPsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of IP addresses to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * IP address to filter for.
    */
-  ipAddress?: string
+  ipAddress?: string | null
   /**
    * Organization ID to filter for, only Load Balancer IP addresses from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for, only Load Balancer IP addresses from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * IP type to filter for.
    */
-  ipType?: ListIpsRequestIpType
+  ipType?: ListIpsRequestIpType | null
   /**
    * Tag to filter for, only IPs with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
+  /**
+   * Defines whether to filter only for Flexible IPs which are attached to a Load Balancer.
+   */
+  attached?: boolean | null
 }
 
 
@@ -3393,7 +3513,7 @@ export type ZonedApiListLbPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3401,15 +3521,15 @@ export type ZonedApiListLbPrivateNetworksRequest = {
   /**
    * Sort order of Private Network objects in the response.
    */
-  orderBy?: ListPrivateNetworksRequestOrderBy
+  orderBy?: ListPrivateNetworksRequestOrderBy | null
   /**
    * Number of objects to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
 }
 
 
@@ -3417,15 +3537,15 @@ export type ZonedApiListLbTypesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * The number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
 }
 
 
@@ -3433,39 +3553,39 @@ export type ZonedApiListLbsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer name to filter for.
    */
-  name?: string
+  name?: string | null
   /**
    * Sort order of Load Balancers in the response.
    */
-  orderBy?: ListLbsRequestOrderBy
+  orderBy?: ListLbsRequestOrderBy | null
   /**
    * Number of Load Balancers to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Organization ID to filter for, only Load Balancers from this Organization will be returned.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID to filter for, only Load Balancers from this Project will be returned.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter by tag, only Load Balancers with one or more matching tags will be returned.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Filter by lb_ids, only Load Balancers with these IDs will be returned.
    */
-  lbIds?: string[]
+  lbIds?: string[] | null
 }
 
 
@@ -3473,23 +3593,23 @@ export type ZonedApiListRoutesRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Sort order of routes in the response.
    */
-  orderBy?: ListRoutesRequestOrderBy
+  orderBy?: ListRoutesRequestOrderBy | null
   /**
    * The number of route objects to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * Frontend ID to filter for, only Routes from this Frontend will be returned.
    */
-  frontendId?: string
+  frontendId?: string | null
 }
 
 
@@ -3497,31 +3617,31 @@ export type ZonedApiListSubscriberRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Sort order of subscribers in the response.
    */
-  orderBy?: ListSubscriberRequestOrderBy
+  orderBy?: ListSubscriberRequestOrderBy | null
   /**
    * The page number to return, from the paginated results.
    */
-  page?: number
+  page?: number | null
   /**
    * The number of items to return.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Subscriber name to search for.
    */
-  name?: string
+  name?: string | null
   /**
    * Filter subscribers by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter subscribers by Project ID.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -3529,7 +3649,7 @@ export type ZonedApiMigrateLbRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3545,7 +3665,7 @@ export type ZonedApiReleaseIpRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * IP address ID.
    */
@@ -3557,7 +3677,7 @@ export type ZonedApiRemoveBackendServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Backend ID.
    */
@@ -3573,7 +3693,7 @@ export type ZonedApiSetAclsRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Frontend ID.
    */
@@ -3589,7 +3709,7 @@ export type ZonedApiSetBackendServersRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Backend ID.
    */
@@ -3605,7 +3725,7 @@ export type ZonedApiSubscribeToLbRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3617,11 +3737,23 @@ export type ZonedApiSubscribeToLbRequest = {
 }
 
 
+export type ZonedApiTransferToIpamRequest = {
+  /**
+   * Zone to target. If none is passed will use default zone from the config.
+   */
+  zone?: ScwZone | null
+  /**
+   * ID of the LB Flexible IP to transfer to IPAM.
+   */
+  ipId: string
+}
+
+
 export type ZonedApiUnsubscribeFromLbRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3633,7 +3765,7 @@ export type ZonedApiUpdateAclRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * ACL ID.
    */
@@ -3649,7 +3781,7 @@ export type ZonedApiUpdateAclRequest = {
   /**
    * ACL match filter object. One of `ip_subnet`, `ips_edge_services` or `http_filter` & `http_filter_value` are required.
    */
-  match?: AclMatch
+  match?: AclMatch | null
   /**
    * Priority of this ACL (ACLs are applied in ascending order, 0 is the first ACL executed).
    */
@@ -3657,7 +3789,7 @@ export type ZonedApiUpdateAclRequest = {
   /**
    * ACL description.
    */
-  description?: string
+  description?: string | null
 }
 
 
@@ -3665,7 +3797,7 @@ export type ZonedApiUpdateBackendRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Backend ID.
    */
@@ -3697,59 +3829,59 @@ export type ZonedApiUpdateBackendRequest = {
   /**
    * @deprecated Deprecated in favor of proxy_protocol field.
    */
-  sendProxyV2?: boolean
+  sendProxyV2?: boolean | null
   /**
    * Maximum allowed time for a backend server to process a request.
    */
-  timeoutServer?: string
+  timeoutServer?: string | null
   /**
    * Maximum allowed time for establishing a connection to a backend server.
    */
-  timeoutConnect?: string
+  timeoutConnect?: string | null
   /**
    * Maximum allowed tunnel inactivity time after Websocket is established (takes precedence over client and server timeout).
    */
-  timeoutTunnel?: string
+  timeoutTunnel?: string | null
   /**
    * Action to take when a backend server is marked as down.
    */
-  onMarkedDownAction?: OnMarkedDownAction
+  onMarkedDownAction?: OnMarkedDownAction | null
   /**
    * Protocol to use between the Load Balancer and backend servers. Allows the backend servers to be informed of the client's real IP address. The PROXY protocol must be supported by the backend servers' software.
    */
-  proxyProtocol?: ProxyProtocol
+  proxyProtocol?: ProxyProtocol | null
   /**
    * Scaleway Object Storage bucket website to be served as failover if all backend servers are down, e.g. failover-website.s3-website.fr-par.scw.cloud.
    */
-  failoverHost?: string
+  failoverHost?: string | null
   /**
    * Defines whether to enable SSL bridging between the Load Balancer and backend servers.
    */
-  sslBridging?: boolean
+  sslBridging?: boolean | null
   /**
    * Defines whether the server certificate verification should be ignored.
    */
-  ignoreSslServerVerify?: boolean
+  ignoreSslServerVerify?: boolean | null
   /**
    * Whether to use another backend server on each attempt.
    */
-  redispatchAttemptCount?: number
+  redispatchAttemptCount?: number | null
   /**
    * Number of retries when a backend server connection failed.
    */
-  maxRetries?: number
+  maxRetries?: number | null
   /**
    * Maximum number of connections allowed per backend server.
    */
-  maxConnections?: number
+  maxConnections?: number | null
   /**
    * Maximum time for a request to be left pending in queue when `max_connections` is reached.
    */
-  timeoutQueue?: string
+  timeoutQueue?: string | null
   /**
    * When connecting to backend servers, use this value as the HTTP Host header or TLS SNI. This allows routing to specific services on the backend server that are configured to respond to particular hostnames.
    */
-  host?: string
+  host?: string | null
 }
 
 
@@ -3757,7 +3889,7 @@ export type ZonedApiUpdateCertificateRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Certificate ID.
    */
@@ -3773,7 +3905,7 @@ export type ZonedApiUpdateFrontendRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Frontend ID.
    */
@@ -3793,15 +3925,15 @@ export type ZonedApiUpdateFrontendRequest = {
   /**
    * Maximum allowed inactivity time on the client side.
    */
-  timeoutClient?: string
+  timeoutClient?: string | null
   /**
    * @deprecated Certificate ID, deprecated in favor of certificate_ids array.
    */
-  certificateId?: string
+  certificateId?: string | null
   /**
    * List of SSL/TLS certificate IDs to bind to the frontend.
    */
-  certificateIds?: string[]
+  certificateIds?: string[] | null
   /**
    * Defines whether to enable HTTP/3 protocol on the frontend.
    */
@@ -3809,11 +3941,11 @@ export type ZonedApiUpdateFrontendRequest = {
   /**
    * Rate limit for new connections established on this frontend. Use 0 value to disable, else value is connections per second.
    */
-  connectionRateLimit?: number
+  connectionRateLimit?: number | null
   /**
    * Defines whether to enable access logs on the frontend.
    */
-  enableAccessLogs?: boolean
+  enableAccessLogs?: boolean | null
 }
 
 
@@ -3821,7 +3953,7 @@ export type ZonedApiUpdateHealthCheckRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Backend ID.
    */
@@ -3833,11 +3965,11 @@ export type ZonedApiUpdateHealthCheckRequest = {
   /**
    * Time to wait between two consecutive health checks.
    */
-  checkDelay?: string
+  checkDelay?: string | null
   /**
    * Maximum time a backend server has to reply to the health check.
    */
-  checkTimeout?: string
+  checkTimeout?: string | null
   /**
    * Number of consecutive unsuccessful health checks after which the server will be considered dead.
    */
@@ -3851,47 +3983,47 @@ export type ZonedApiUpdateHealthCheckRequest = {
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  tcpConfig?: HealthCheckTcpConfig
+  tcpConfig?: HealthCheckTcpConfig | null
   /**
    * Object to configure a MySQL health check. The check requires MySQL >=3.22 or <9.0. For older or newer versions, use a TCP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  mysqlConfig?: HealthCheckMysqlConfig
+  mysqlConfig?: HealthCheckMysqlConfig | null
   /**
    * Object to configure a PostgreSQL health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  pgsqlConfig?: HealthCheckPgsqlConfig
+  pgsqlConfig?: HealthCheckPgsqlConfig | null
   /**
    * Object to configure an LDAP health check. The response is analyzed to find the LDAPv3 response message.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  ldapConfig?: HealthCheckLdapConfig
+  ldapConfig?: HealthCheckLdapConfig | null
   /**
    * Object to configure a Redis health check. The response is analyzed to find the +PONG response message.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  redisConfig?: HealthCheckRedisConfig
+  redisConfig?: HealthCheckRedisConfig | null
   /**
    * Object to configure an HTTP health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  httpConfig?: HealthCheckHttpConfig
+  httpConfig?: HealthCheckHttpConfig | null
   /**
    * Object to configure an HTTPS health check.
    *
    * One-of ('config'): at most one of 'tcpConfig', 'mysqlConfig', 'pgsqlConfig', 'ldapConfig', 'redisConfig', 'httpConfig', 'httpsConfig' could be set.
    */
-  httpsConfig?: HealthCheckHttpsConfig
+  httpsConfig?: HealthCheckHttpsConfig | null
   /**
    * Time to wait between two consecutive health checks when a backend server is in a transient state (going UP or DOWN).
    */
-  transientCheckDelay?: string
+  transientCheckDelay?: string | null
 }
 
 
@@ -3899,7 +4031,7 @@ export type ZonedApiUpdateIpRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * IP address ID.
    */
@@ -3907,15 +4039,15 @@ export type ZonedApiUpdateIpRequest = {
   /**
    * Reverse DNS (domain name) for the IP address.
    */
-  reverse?: string
+  reverse?: string | null
   /**
    * ID of the server on which to attach the flexible IP.
    */
-  lbId?: string
+  lbId?: string | null
   /**
    * List of tags for the IP.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -3923,7 +4055,7 @@ export type ZonedApiUpdateLbRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Load Balancer ID.
    */
@@ -3939,11 +4071,11 @@ export type ZonedApiUpdateLbRequest = {
   /**
    * List of tags for the Load Balancer.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Determines the minimal SSL version which needs to be supported on the client side, in an SSL/TLS offloading context. Intermediate is suitable for general-purpose servers with a variety of clients, recommended for almost all systems (>= TLS1.2). Modern is suitable for services with clients that support TLS 1.3 and do not need backward compatibility (= TLS1.3). Old is compatible with a small number of very old clients and should be used only as a last resort (>= TLS1.0).
    */
-  sslCompatibilityLevel?: SSLCompatibilityLevel
+  sslCompatibilityLevel?: SSLCompatibilityLevel | null
 }
 
 
@@ -3951,7 +4083,7 @@ export type ZonedApiUpdateRouteRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Route ID.
    */
@@ -3963,7 +4095,7 @@ export type ZonedApiUpdateRouteRequest = {
   /**
    * Object defining the match condition for a route to be applied. If an incoming client session matches the specified condition (i.e. it has a matching SNI value or HTTP Host header value), it will be passed to the target backend.
    */
-  match?: RouteMatch
+  match?: RouteMatch | null
 }
 
 
@@ -3971,7 +4103,7 @@ export type ZonedApiUpdateSubscriberRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Subscriber ID.
    */
@@ -3985,13 +4117,13 @@ export type ZonedApiUpdateSubscriberRequest = {
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  emailConfig?: SubscriberEmailConfig
+  emailConfig?: SubscriberEmailConfig | null
   /**
    * Webhook URI configuration.
    *
    * One-of ('config'): at most one of 'emailConfig', 'webhookConfig' could be set.
    */
-  webhookConfig?: SubscriberWebhookConfig
+  webhookConfig?: SubscriberWebhookConfig | null
 }
 
 

@@ -345,7 +345,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateServerBackupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/backups`,
         signal: options?.signal,
@@ -390,7 +390,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSubscribeServerOptionRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/subscribe-server-option`,
         signal: options?.signal,
@@ -411,7 +411,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         signal: options?.signal,
@@ -432,7 +432,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSubscribeStorageOptionsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/subscribe-storage-options`,
         signal: options?.signal,
@@ -453,7 +453,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
         signal: options?.signal,
@@ -468,7 +468,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateServerTagsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/tags`,
         signal: options?.signal,
@@ -486,7 +486,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
         signal: options?.signal,
@@ -503,7 +503,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start`,
         signal: options?.signal,
@@ -520,7 +520,7 @@ export class API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop`,
         signal: options?.signal,
@@ -614,7 +614,7 @@ export class API extends ParentAPI {
     this.client.fetch<Service>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/services/${validatePathParam('serviceId', request.serviceId)}`,
         signal: options?.signal,
@@ -678,7 +678,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalInstallServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/install`,
         signal: options?.signal,
@@ -766,7 +766,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         body: JSON.stringify(
           marshalStartBMCAccessRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
         signal: options?.signal,
@@ -946,7 +946,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         body: JSON.stringify(
           marshalUpdateReverseRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/reverses/${validatePathParam('ipId', request.ipId)}`,
         signal: options?.signal,
@@ -967,7 +967,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         body: JSON.stringify(
           marshalCreateFailoverIPsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips`,
         signal: options?.signal,
@@ -987,7 +987,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         body: JSON.stringify(
           marshalAttachFailoverIPsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/attach`,
         signal: options?.signal,
@@ -1006,7 +1006,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         body: JSON.stringify(
           marshalDetachFailoverIPsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/detach`,
         signal: options?.signal,
@@ -1026,7 +1026,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         body: JSON.stringify(
           marshalAttachFailoverIPToMacAddressRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/${validatePathParam('ipId', request.ipId)}/attach-to-mac-address`,
         signal: options?.signal,
@@ -1045,7 +1045,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
     this.client.fetch<IP>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/failover-ips/${validatePathParam('ipId', request.ipId)}/detach-from-mac-address`,
         signal: options?.signal,
@@ -1162,7 +1162,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         body: JSON.stringify(
           marshalUpdateRaidRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/update-raid`,
         signal: options?.signal,
@@ -1182,7 +1182,7 @@ The BMC (Baseboard Management Controller) access is available one hour after the
         body: JSON.stringify(
           marshalStartRescueRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/rescue`,
         signal: options?.signal,
@@ -1374,7 +1374,7 @@ export class IPv6BlockAPI extends ParentAPI {
         body: JSON.stringify(
           marshalIPv6BlockApiCreateIPv6BlockRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/ipv6-block`,
         signal: options?.signal,
@@ -1436,7 +1436,7 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
         body: JSON.stringify(
           marshalIPv6BlockApiUpdateIPv6BlockRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/ipv6-blocks/${validatePathParam('blockId', request.blockId)}`,
         signal: options?.signal,
@@ -1474,7 +1474,7 @@ If DNS is used, minimum of 2 is necessary and maximum of 5 (no duplicate).
         body: JSON.stringify(
           marshalIPv6BlockApiCreateIPv6BlockSubnetRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/ipv6-blocks/${validatePathParam('blockId', request.blockId)}/subnets`,
         signal: options?.signal,
@@ -1613,7 +1613,7 @@ export class RpnSanAPI extends ParentAPI {
         body: JSON.stringify(
           marshalRpnSanApiCreateRpnSanRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpn-sans`,
         signal: options?.signal,
@@ -1642,7 +1642,7 @@ export class RpnSanAPI extends ParentAPI {
         body: JSON.stringify(
           marshalRpnSanApiAddIpRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpn-sans/${validatePathParam('rpnSanId', request.rpnSanId)}/ips`,
         signal: options?.signal,
@@ -1656,7 +1656,7 @@ export class RpnSanAPI extends ParentAPI {
         body: JSON.stringify(
           marshalRpnSanApiRemoveIpRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/dedibox/v1/rpn-sans/${validatePathParam('rpnSanId', request.rpnSanId)}/ips`,
         signal: options?.signal,
@@ -1721,7 +1721,7 @@ export class RpnV1API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV1ApiCreateRpnGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpnv1/groups`,
         signal: options?.signal,
@@ -1746,7 +1746,7 @@ export class RpnV1API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV1ApiUpdateRpnGroupNameRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}`,
         signal: options?.signal,
@@ -1781,7 +1781,7 @@ export class RpnV1API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV1ApiRpnGroupInviteRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}/invite`,
         signal: options?.signal,
@@ -1795,7 +1795,7 @@ export class RpnV1API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV1ApiLeaveRpnGroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}/leave`,
         signal: options?.signal,
@@ -1809,7 +1809,7 @@ export class RpnV1API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV1ApiAddRpnGroupMembersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}/members`,
         signal: options?.signal,
@@ -1824,7 +1824,7 @@ export class RpnV1API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV1ApiDeleteRpnGroupMembersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/dedibox/v1/rpnv1/groups/${validatePathParam('groupId', request.groupId)}/members`,
         signal: options?.signal,
@@ -1994,7 +1994,7 @@ export class RpnV2API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV2ApiCreateRpnV2GroupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpnv2/groups`,
         signal: options?.signal,
@@ -2019,7 +2019,7 @@ export class RpnV2API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV2ApiUpdateRpnV2GroupNameRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}`,
         signal: options?.signal,
@@ -2034,7 +2034,7 @@ export class RpnV2API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV2ApiAddRpnV2MembersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/members`,
         signal: options?.signal,
@@ -2048,7 +2048,7 @@ export class RpnV2API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV2ApiDeleteRpnV2MembersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'DELETE',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/members`,
         signal: options?.signal,
@@ -2101,7 +2101,7 @@ export class RpnV2API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV2ApiUpdateRpnV2VlanForMembersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/vlan`,
         signal: options?.signal,
@@ -2115,7 +2115,7 @@ export class RpnV2API extends ParentAPI {
         body: JSON.stringify(
           marshalRpnV2ApiEnableRpnV2GroupCompatibilityRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/enable-compatibility`,
         signal: options?.signal,
@@ -2127,7 +2127,7 @@ export class RpnV2API extends ParentAPI {
     this.client.fetch<void>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/dedibox/v1/rpnv2/groups/${validatePathParam('groupId', request.groupId)}/disable-compatibility`,
         signal: options?.signal,

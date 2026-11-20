@@ -152,7 +152,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         signal: options?.signal,
@@ -173,7 +173,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalBatchCreateServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/batch-create-servers`,
         signal: options?.signal,
@@ -299,7 +299,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
         signal: options?.signal,
@@ -333,7 +333,7 @@ export class API extends ParentAPI {
     this.client.fetch<Server>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
         signal: options?.signal,
@@ -354,7 +354,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalReinstallServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reinstall`,
         signal: options?.signal,
@@ -369,7 +369,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalStartConnectivityDiagnosticRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/connectivity-diagnostics`,
         signal: options?.signal,
@@ -401,7 +401,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateRunnerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners`,
         signal: options?.signal,
@@ -484,7 +484,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateRunnerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runners/${validatePathParam('runnerId', request.runnerId)}`,
         signal: options?.signal,
@@ -525,7 +525,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateRunnerConfigurationStatusRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/runner-configuration-status`,
         signal: options?.signal,
@@ -593,7 +593,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         body: JSON.stringify(
           marshalPrivateNetworkApiAddServerPrivateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
         signal: options?.signal,
@@ -614,7 +614,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         body: JSON.stringify(
           marshalPrivateNetworkApiSetServerPrivateNetworksRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/apple-silicon/v1alpha1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
         signal: options?.signal,

@@ -24,6 +24,7 @@ export type {
   PublicCatalogProductPropertiesBlockStorage,
   PublicCatalogProductPropertiesBlockStorageSnapshotType,
   PublicCatalogProductPropertiesBlockStorageVolumeType,
+  PublicCatalogProductPropertiesCockpit,
   PublicCatalogProductPropertiesDedibox,
   PublicCatalogProductPropertiesElasticMetal,
   PublicCatalogProductPropertiesFileStorage,

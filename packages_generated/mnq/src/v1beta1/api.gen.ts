@@ -106,7 +106,7 @@ export class NatsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalNatsApiCreateNatsAccountRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts`,
         signal: options?.signal,
@@ -142,7 +142,7 @@ export class NatsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalNatsApiUpdateNatsAccountRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-accounts/${validatePathParam('natsAccountId', request.natsAccountId)}`,
         signal: options?.signal,
@@ -206,7 +206,7 @@ export class NatsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalNatsApiCreateNatsCredentialsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/nats-credentials`,
         signal: options?.signal,
@@ -306,7 +306,7 @@ export class SnsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalSnsApiActivateSnsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/activate-sns`,
         signal: options?.signal,
@@ -347,7 +347,7 @@ export class SnsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalSnsApiDeactivateSnsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deactivate-sns`,
         signal: options?.signal,
@@ -368,7 +368,7 @@ export class SnsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalSnsApiCreateSnsCredentialsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials`,
         signal: options?.signal,
@@ -404,7 +404,7 @@ export class SnsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalSnsApiUpdateSnsCredentialsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sns-credentials/${validatePathParam('snsCredentialsId', request.snsCredentialsId)}`,
         signal: options?.signal,
@@ -488,7 +488,7 @@ export class SqsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalSqsApiActivateSqsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/activate-sqs`,
         signal: options?.signal,
@@ -529,7 +529,7 @@ export class SqsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalSqsApiDeactivateSqsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deactivate-sqs`,
         signal: options?.signal,
@@ -550,7 +550,7 @@ export class SqsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalSqsApiCreateSqsCredentialsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials`,
         signal: options?.signal,
@@ -586,7 +586,7 @@ export class SqsAPI extends ParentAPI {
         body: JSON.stringify(
           marshalSqsApiUpdateSqsCredentialsRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/mnq/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/sqs-credentials/${validatePathParam('sqsCredentialsId', request.sqsCredentialsId)}`,
         signal: options?.signal,

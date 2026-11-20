@@ -57,6 +57,7 @@ export const AUTHENTICATION_EVENT_FAILURE_REASONS: AuthenticationEventFailureRea
   'expired_session',
   'authentication_code_required',
   'mfa_required',
+  'invalid_magic_link',
 ]
 
 /** Lists all values of the enum {@link AuthenticationEventMFAType}. */
@@ -74,6 +75,7 @@ export const AUTHENTICATION_EVENT_METHODS: AuthenticationEventMethod[] = [
   'oauth2',
   'saml',
   'passkey',
+  'magic_link',
 ]
 
 /** Lists all values of the enum {@link AuthenticationEventOrigin}. */
@@ -204,6 +206,7 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'account_organization',
   'account_project',
   'account_contract_signature',
+  'instance_dedicated_pool',
   'instance_server',
   'instance_placement_group',
   'instance_security_group',
@@ -295,6 +298,10 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'wofl_workflow_definition',
   'wofl_workflow_run',
   'wofl_workflow_version',
+  'kafk_cluster',
+  'annotations_key',
+  'annotations_value',
+  'annotations_binding',
 ]
 
 /** Lists all values of the enum {@link RunStatus}. */

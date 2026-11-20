@@ -87,6 +87,7 @@ export type {
   InboundTransfer,
   InboundTransferStatus,
   LinkedProduct,
+  ListContactsRequestOrderBy,
   ListContactsRequestRole,
   ListContactsResponse,
   ListDNSZoneNameserversRequest,

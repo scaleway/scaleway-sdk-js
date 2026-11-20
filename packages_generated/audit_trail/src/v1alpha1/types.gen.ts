@@ -29,6 +29,7 @@ export type AuthenticationEventFailureReason =
   | 'expired_session'
   | 'authentication_code_required'
   | 'mfa_required'
+  | 'invalid_magic_link'
 
 export type AuthenticationEventMFAType =
   | 'unknown_mfa_type'
@@ -42,6 +43,7 @@ export type AuthenticationEventMethod =
   | 'oauth2'
   | 'saml'
   | 'passkey'
+  | 'magic_link'
 
 export type AuthenticationEventOrigin =
   | 'unknown_origin'
@@ -144,6 +146,7 @@ export type ResourceType =
   | 'account_organization'
   | 'account_project'
   | 'account_contract_signature'
+  | 'instance_dedicated_pool'
   | 'instance_server'
   | 'instance_placement_group'
   | 'instance_security_group'
@@ -235,6 +238,10 @@ export type ResourceType =
   | 'wofl_workflow_definition'
   | 'wofl_workflow_run'
   | 'wofl_workflow_version'
+  | 'kafk_cluster'
+  | 'annotations_key'
+  | 'annotations_value'
+  | 'annotations_binding'
 
 export type RunStatus =
   | 'unknown_run_status'
@@ -270,16 +277,16 @@ export interface AccountContractSignatureInfoAccountContractInfo {
   type: string
   name: string
   version: number
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt?: Date | null
+  updatedAt?: Date | null
 }
 
 
 export interface AccountContractSignatureInfo {
-  signedAt?: Date
+  signedAt?: Date | null
   signedByAccountRootUserId: string
-  expiresAt?: Date
-  contract?: AccountContractSignatureInfoAccountContractInfo
+  expiresAt?: Date | null
+  contract?: AccountContractSignatureInfoAccountContractInfo | null
 }
 
 
@@ -294,7 +301,22 @@ export interface AccountProjectInfo {
 
 export interface AccountUserInfo {
   email: string
-  phoneNumber?: string
+  phoneNumber?: string | null
+}
+
+
+export interface AnnotationsBindingInfo {
+  targetSrn: string
+  valueId: string
+  valueName: string
+  keyId: string
+  keyName: string
+}
+
+
+export interface AnnotationsValueInfo {
+  keyId: string
+  keyName: string
 }
 
 
@@ -334,17 +356,17 @@ export interface BaremetalSettingInfo {
 
 
 export interface EdgeServicesBackendStageInfo {
-  pipelineId?: string
+  pipelineId?: string | null
 }
 
 
 export interface EdgeServicesCacheStageInfo {
-  pipelineId?: string
+  pipelineId?: string | null
 }
 
 
 export interface EdgeServicesDNSStageInfo {
-  pipelineId?: string
+  pipelineId?: string | null
 }
 
 
@@ -363,12 +385,12 @@ export interface EdgeServicesRouteRulesInfo {
 
 
 export interface EdgeServicesRouteStageInfo {
-  pipelineId?: string
+  pipelineId?: string | null
 }
 
 
 export interface EdgeServicesTLSStageInfo {
-  pipelineId?: string
+  pipelineId?: string | null
 }
 
 
@@ -378,14 +400,14 @@ export interface EdgeServicesVPCEndpointInfo {
 
 
 export interface EdgeServicesWAFStageInfo {
-  pipelineId?: string
+  pipelineId?: string | null
 }
 
 
 export interface InstancePrivateNetworkInterfaceInfo {
   privateNetworkId: string
-  serverId?: string
-  securityGroupId?: string
+  serverId?: string | null
+  securityGroupId?: string | null
 }
 
 
@@ -396,6 +418,14 @@ export interface InstanceServerInfo {
 
 export interface IpamIpInfo {
   address: string
+}
+
+
+export interface KafkClusterInfo {
+  version: string
+  tags: string[]
+  endpoint: string
+  pnId: string
 }
 
 
@@ -448,7 +478,7 @@ export interface LoadBalancerFrontendInfo {
 
 export interface LoadBalancerIpInfo {
   ipAddress: string
-  lbId?: string
+  lbId?: string | null
 }
 
 
@@ -475,7 +505,7 @@ export interface ObservabilityContactPointInfo {
 
 export interface SecretManagerSecretInfo {
   path: string
-  keyId?: string
+  keyId?: string | null
 }
 
 
@@ -536,16 +566,16 @@ export interface VpcConnectorInfo {
 
 
 export interface VpcGwGatewayInfo {
-  vpcId?: string
+  vpcId?: string | null
   gatewayTypeId: string
-  publicIpId?: string
+  publicIpId?: string | null
 }
 
 
 export interface VpcGwGatewayNetworkInfo {
   gatewayId: string
   pnId: string
-  address?: string
+  address?: string | null
 }
 
 
@@ -566,8 +596,8 @@ export interface VpcPrivateNetworkInfo {
 export interface VpcRouteInfo {
   vpcId: string
   destination: string
-  nexthopResourceKey?: string
-  nexthopPrivateNetworkKey?: string
+  nexthopResourceKey?: string | null
+  nexthopPrivateNetworkKey?: string | null
 }
 
 
@@ -579,20 +609,20 @@ export interface VpcSubnetInfo {
 
 export interface WoflWorkflowDefinitionInfo {
   name: string
-  description?: string
+  description?: string | null
 }
 
 
 export interface WoflWorkflowRunInfo {
   workflowDefinitionId: string
-  workflowDefinitionName?: string
+  workflowDefinitionName?: string | null
   status: RunStatus
 }
 
 
 export interface WoflWorkflowVersionInfo {
   workflowDefinitionId: string
-  workflowDefinitionName?: string
+  workflowDefinitionName?: string | null
   name: string
 }
 
@@ -600,325 +630,340 @@ export interface WoflWorkflowVersionInfo {
 export interface Resource {
   id: string
   type: ResourceType
-  createdAt?: Date
-  updatedAt?: Date
-  deletedAt?: Date
-  name?: string
-  action?: Action
+  createdAt?: Date | null
+  updatedAt?: Date | null
+  deletedAt?: Date | null
+  name?: string | null
+  action?: Action | null
   /**
    * @deprecated 
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  secmSecretInfo?: SecretManagerSecretInfo
+  secmSecretInfo?: SecretManagerSecretInfo | null
   /**
    * @deprecated 
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  secmSecretVersionInfo?: SecretManagerSecretVersionInfo
+  secmSecretVersionInfo?: SecretManagerSecretVersionInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  kubeClusterInfo?: KubernetesClusterInfo
+  kubeClusterInfo?: KubernetesClusterInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  kubePoolInfo?: KubernetesPoolInfo
+  kubePoolInfo?: KubernetesPoolInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  kubeNodeInfo?: KubernetesNodeInfo
+  kubeNodeInfo?: KubernetesNodeInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  kubeAclInfo?: KubernetesACLInfo
-  /**
-   * @deprecated 
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
-   */
-  keymKeyInfo?: KeyManagerKeyInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
-   */
-  secretManagerSecretInfo?: SecretManagerSecretInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
-   */
-  secretManagerVersionInfo?: SecretManagerSecretVersionInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
-   */
-  keyManagerKeyInfo?: KeyManagerKeyInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
-   */
-  accountUserInfo?: AccountUserInfo
-  /**
-   *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
-   */
-  accountOrganizationInfo?: AccountOrganizationInfo
+  kubeAclInfo?: KubernetesACLInfo | null
   /**
    * @deprecated 
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  instanceServerInfo?: InstanceServerInfo
+  keymKeyInfo?: KeyManagerKeyInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  appleSiliconServerInfo?: AppleSiliconServerInfo
+  secretManagerSecretInfo?: SecretManagerSecretInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  accountProjectInfo?: AccountProjectInfo
+  secretManagerVersionInfo?: SecretManagerSecretVersionInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  baremetalServerInfo?: BaremetalServerInfo
+  keyManagerKeyInfo?: KeyManagerKeyInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  baremetalSettingInfo?: BaremetalSettingInfo
+  accountUserInfo?: AccountUserInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  ipamIpInfo?: IpamIpInfo
+  accountOrganizationInfo?: AccountOrganizationInfo | null
+  /**
+   * @deprecated 
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  instanceServerInfo?: InstanceServerInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  loadBalancerLbInfo?: LoadBalancerLbInfo
+  appleSiliconServerInfo?: AppleSiliconServerInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  loadBalancerIpInfo?: LoadBalancerIpInfo
+  accountProjectInfo?: AccountProjectInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  loadBalancerFrontendInfo?: LoadBalancerFrontendInfo
+  baremetalServerInfo?: BaremetalServerInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  loadBalancerBackendInfo?: LoadBalancerBackendInfo
+  baremetalSettingInfo?: BaremetalSettingInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  loadBalancerRouteInfo?: LoadBalancerRouteInfo
+  ipamIpInfo?: IpamIpInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  loadBalancerAclInfo?: LoadBalancerAclInfo
+  loadBalancerLbInfo?: LoadBalancerLbInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  loadBalancerCertificateInfo?: LoadBalancerCertificateInfo
+  loadBalancerIpInfo?: LoadBalancerIpInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesPlanInfo?: EdgeServicesPlanInfo
+  loadBalancerFrontendInfo?: LoadBalancerFrontendInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesPipelineInfo?: EdgeServicesPipelineInfo
+  loadBalancerBackendInfo?: LoadBalancerBackendInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesDnsStageInfo?: EdgeServicesDNSStageInfo
+  loadBalancerRouteInfo?: LoadBalancerRouteInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesTlsStageInfo?: EdgeServicesTLSStageInfo
+  loadBalancerAclInfo?: LoadBalancerAclInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesCacheStageInfo?: EdgeServicesCacheStageInfo
+  loadBalancerCertificateInfo?: LoadBalancerCertificateInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesRouteStageInfo?: EdgeServicesRouteStageInfo
+  edgeServicesPlanInfo?: EdgeServicesPlanInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesRouteRulesInfo?: EdgeServicesRouteRulesInfo
+  edgeServicesPipelineInfo?: EdgeServicesPipelineInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesWafStageInfo?: EdgeServicesWAFStageInfo
+  edgeServicesDnsStageInfo?: EdgeServicesDNSStageInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesBackendStageInfo?: EdgeServicesBackendStageInfo
+  edgeServicesTlsStageInfo?: EdgeServicesTLSStageInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  accountContractSignatureInfo?: AccountContractSignatureInfo
+  edgeServicesCacheStageInfo?: EdgeServicesCacheStageInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  vpcSubnetInfo?: VpcSubnetInfo
+  edgeServicesRouteStageInfo?: EdgeServicesRouteStageInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  vpcRouteInfo?: VpcRouteInfo
+  edgeServicesRouteRulesInfo?: EdgeServicesRouteRulesInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  vpcPrivateNetworkInfo?: VpcPrivateNetworkInfo
+  edgeServicesWafStageInfo?: EdgeServicesWAFStageInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  auditTrailExportJobInfo?: AuditTrailExportJobInfo
+  edgeServicesBackendStageInfo?: EdgeServicesBackendStageInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  vpcGwGatewayInfo?: VpcGwGatewayInfo
+  accountContractSignatureInfo?: AccountContractSignatureInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  vpcGwGatewayNetworkInfo?: VpcGwGatewayNetworkInfo
+  vpcSubnetInfo?: VpcSubnetInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  appleSiliconRunnerInfo?: AppleSiliconRunnerInfo
+  vpcRouteInfo?: VpcRouteInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  auditTrailAlertRuleInfo?: AuditTrailAlertRuleInfo
+  vpcPrivateNetworkInfo?: VpcPrivateNetworkInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  vpcConnectorInfo?: VpcConnectorInfo
+  auditTrailExportJobInfo?: AuditTrailExportJobInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  instancePrivateNetworkInterfaceInfo?: InstancePrivateNetworkInterfaceInfo
+  vpcGwGatewayInfo?: VpcGwGatewayInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  vpcIngressRuleInfo?: VpcIngressRuleInfo
+  vpcGwGatewayNetworkInfo?: VpcGwGatewayNetworkInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  observabilityContactPointInfo?: ObservabilityContactPointInfo
+  appleSiliconRunnerInfo?: AppleSiliconRunnerInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  observabilityAlertRuleInfo?: ObservabilityAlertRuleInfo
+  auditTrailAlertRuleInfo?: AuditTrailAlertRuleInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  edgeServicesVpcEndpointInfo?: EdgeServicesVPCEndpointInfo
+  vpcConnectorInfo?: VpcConnectorInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  auditTrailCustomAlertRuleInfo?: AuditTrailCustomAlertRuleInfo
+  instancePrivateNetworkInterfaceInfo?: InstancePrivateNetworkInterfaceInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessContainersNamespaceInfo?: ServerlessContainersNamespaceInfo
+  vpcIngressRuleInfo?: VpcIngressRuleInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessContainersContainerInfo?: ServerlessContainersContainerInfo
+  observabilityContactPointInfo?: ObservabilityContactPointInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessContainersDomainInfo?: ServerlessContainersDomainInfo
+  observabilityAlertRuleInfo?: ObservabilityAlertRuleInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessContainersTriggerInfo?: ServerlessContainersTriggerInfo
+  edgeServicesVpcEndpointInfo?: EdgeServicesVPCEndpointInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessFunctionsNamespaceInfo?: ServerlessFunctionsNamespaceInfo
+  auditTrailCustomAlertRuleInfo?: AuditTrailCustomAlertRuleInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessFunctionsFunctionInfo?: ServerlessFunctionsFunctionInfo
+  serverlessContainersNamespaceInfo?: ServerlessContainersNamespaceInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessFunctionsDomainInfo?: ServerlessFunctionsDomainInfo
+  serverlessContainersContainerInfo?: ServerlessContainersContainerInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessFunctionsCronInfo?: ServerlessFunctionsCronInfo
+  serverlessContainersDomainInfo?: ServerlessContainersDomainInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  serverlessFunctionsTriggerInfo?: ServerlessFunctionsTriggerInfo
+  serverlessContainersTriggerInfo?: ServerlessContainersTriggerInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  woflWorkflowDefinitionInfo?: WoflWorkflowDefinitionInfo
+  serverlessFunctionsNamespaceInfo?: ServerlessFunctionsNamespaceInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  woflWorkflowRunInfo?: WoflWorkflowRunInfo
+  serverlessFunctionsFunctionInfo?: ServerlessFunctionsFunctionInfo | null
   /**
    *
-   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo' could be set.
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
    */
-  woflWorkflowVersionInfo?: WoflWorkflowVersionInfo
+  serverlessFunctionsDomainInfo?: ServerlessFunctionsDomainInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  serverlessFunctionsCronInfo?: ServerlessFunctionsCronInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  serverlessFunctionsTriggerInfo?: ServerlessFunctionsTriggerInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  annotationsValueInfo?: AnnotationsValueInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  annotationsBindingInfo?: AnnotationsBindingInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  woflWorkflowDefinitionInfo?: WoflWorkflowDefinitionInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  woflWorkflowRunInfo?: WoflWorkflowRunInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  woflWorkflowVersionInfo?: WoflWorkflowVersionInfo | null
+  /**
+   *
+   * One-of ('info'): at most one of 'secmSecretInfo', 'secmSecretVersionInfo', 'kubeClusterInfo', 'kubePoolInfo', 'kubeNodeInfo', 'kubeAclInfo', 'keymKeyInfo', 'secretManagerSecretInfo', 'secretManagerVersionInfo', 'keyManagerKeyInfo', 'accountUserInfo', 'accountOrganizationInfo', 'instanceServerInfo', 'appleSiliconServerInfo', 'accountProjectInfo', 'baremetalServerInfo', 'baremetalSettingInfo', 'ipamIpInfo', 'loadBalancerLbInfo', 'loadBalancerIpInfo', 'loadBalancerFrontendInfo', 'loadBalancerBackendInfo', 'loadBalancerRouteInfo', 'loadBalancerAclInfo', 'loadBalancerCertificateInfo', 'edgeServicesPlanInfo', 'edgeServicesPipelineInfo', 'edgeServicesDnsStageInfo', 'edgeServicesTlsStageInfo', 'edgeServicesCacheStageInfo', 'edgeServicesRouteStageInfo', 'edgeServicesRouteRulesInfo', 'edgeServicesWafStageInfo', 'edgeServicesBackendStageInfo', 'accountContractSignatureInfo', 'vpcSubnetInfo', 'vpcRouteInfo', 'vpcPrivateNetworkInfo', 'auditTrailExportJobInfo', 'vpcGwGatewayInfo', 'vpcGwGatewayNetworkInfo', 'appleSiliconRunnerInfo', 'auditTrailAlertRuleInfo', 'vpcConnectorInfo', 'instancePrivateNetworkInterfaceInfo', 'vpcIngressRuleInfo', 'observabilityContactPointInfo', 'observabilityAlertRuleInfo', 'edgeServicesVpcEndpointInfo', 'auditTrailCustomAlertRuleInfo', 'serverlessContainersNamespaceInfo', 'serverlessContainersContainerInfo', 'serverlessContainersDomainInfo', 'serverlessContainersTriggerInfo', 'serverlessFunctionsNamespaceInfo', 'serverlessFunctionsFunctionInfo', 'serverlessFunctionsDomainInfo', 'serverlessFunctionsCronInfo', 'serverlessFunctionsTriggerInfo', 'annotationsValueInfo', 'annotationsBindingInfo', 'woflWorkflowDefinitionInfo', 'woflWorkflowRunInfo', 'woflWorkflowVersionInfo', 'kafkClusterInfo' could be set.
+   */
+  kafkClusterInfo?: KafkClusterInfo | null
 }
 
 
@@ -935,7 +980,7 @@ export interface AuthenticationEvent {
   /**
    * Timestamp of the event.
    */
-  recordedAt?: Date
+  recordedAt?: Date | null
   /**
    * Organization ID containing the event.
    */
@@ -947,7 +992,7 @@ export interface AuthenticationEvent {
   /**
    * User Agent at the origin of the event.
    */
-  userAgent?: string
+  userAgent?: string | null
   /**
    * Resources attached to the event.
    */
@@ -959,11 +1004,11 @@ export interface AuthenticationEvent {
   /**
    * (Optional) Reason for authentication failure.
    */
-  failureReason?: AuthenticationEventFailureReason
+  failureReason?: AuthenticationEventFailureReason | null
   /**
    * (Optional) ISO 3166-1 alpha-2 country code of the source IP.
    */
-  countryCode?: StdCountryCode
+  countryCode?: StdCountryCode | null
   /**
    * Authentication method used.
    */
@@ -975,7 +1020,7 @@ export interface AuthenticationEvent {
   /**
    * (Optional) MFA type used for the authentication attempt.
    */
-  mfaType?: AuthenticationEventMFAType
+  mfaType?: AuthenticationEventMFAType | null
 }
 
 
@@ -987,7 +1032,7 @@ export interface Event {
   /**
    * Timestamp of the event.
    */
-  recordedAt?: Date
+  recordedAt?: Date | null
   /**
    * Locality of the resource attached to the event.
    */
@@ -997,7 +1042,7 @@ export interface Event {
    *
    * One-of ('source'): at most one of 'principal' could be set.
    */
-  principal?: EventPrincipal
+  principal?: EventPrincipal | null
   /**
    * Organization ID containing the event.
    */
@@ -1005,7 +1050,7 @@ export interface Event {
   /**
    * (Optional) Project of the resource attached to the event.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * IP address at the origin of the event.
    */
@@ -1013,7 +1058,7 @@ export interface Event {
   /**
    * User Agent at the origin of the event.
    */
-  userAgent?: string
+  userAgent?: string | null
   /**
    * Product name of the resource attached to the event.
    */
@@ -1037,7 +1082,7 @@ export interface Event {
   /**
    * Request at the origin of the event.
    */
-  requestBody?: Record<string, unknown>
+  requestBody?: Record<string, unknown> | null
   /**
    * HTTP status code resulting of the API call.
    */
@@ -1053,7 +1098,7 @@ export interface SystemEvent {
   /**
    * Timestamp of the system event.
    */
-  recordedAt?: Date
+  recordedAt?: Date | null
   /**
    * Locality of the system event.
    */
@@ -1065,7 +1110,7 @@ export interface SystemEvent {
   /**
    * Project of the resource attached to the system event.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the Scaleway product in a hyphenated format.
    */
@@ -1095,14 +1140,14 @@ export interface ExportJobS3 {
    * Region to target. If none is passed will use default region from the config.
    */
   region: ScwRegion
-  prefix?: string
-  projectId?: string
+  prefix?: string | null
+  projectId?: string | null
 }
 
 
 export interface ExportJobStatus {
   code: ExportJobStatusCode
-  message?: string
+  message?: string | null
 }
 
 
@@ -1128,6 +1173,10 @@ export interface AlertRule {
    */
   id: string
   /**
+   * The SRN of the alert rule.
+   */
+  srn: string
+  /**
    * Name of the alert rule.
    */
   name: string
@@ -1139,6 +1188,10 @@ export interface AlertRule {
    * Current status of the alert rule.
    */
   status: AlertRuleStatus
+  /**
+   * Region of the alert rule.
+   */
+  region: ScwRegion
 }
 
 
@@ -1158,7 +1211,7 @@ export interface CustomAlertRule {
   /**
    * (Optional) Description of the alert rule.
    */
-  description?: string
+  description?: string | null
   /**
    * Current status of the alert rule.
    */
@@ -1170,7 +1223,7 @@ export interface CustomAlertRule {
   /**
    * The duration of time over which to evaluate the rule (how far back to look for matching events).
    */
-  evaluationWindow?: string
+  evaluationWindow?: string | null
   /**
    * The minimum number of matched occurrences required within the evaluation window to trigger the alert.
    */
@@ -1182,11 +1235,11 @@ export interface CustomAlertRule {
   /**
    * Custom alert rule creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Custom alert rule last modification date.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Region of the alert rule.
    */
@@ -1199,17 +1252,17 @@ export interface ListCombinedEventsResponseCombinedEvent {
    *
    * One-of ('event'): at most one of 'api', 'auth', 'system' could be set.
    */
-  api?: Event
+  api?: Event | null
   /**
    *
    * One-of ('event'): at most one of 'api', 'auth', 'system' could be set.
    */
-  auth?: AuthenticationEvent
+  auth?: AuthenticationEvent | null
   /**
    *
    * One-of ('event'): at most one of 'api', 'auth', 'system' could be set.
    */
-  system?: SystemEvent
+  system?: SystemEvent | null
 }
 
 
@@ -1235,15 +1288,15 @@ export interface ExportJob {
    *
    * One-of ('destination'): at most one of 's3' could be set.
    */
-  s3?: ExportJobS3
+  s3?: ExportJobS3 | null
   /**
    * Export job creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last run of export job.
    */
-  lastRunAt?: Date
+  lastRunAt?: Date | null
   /**
    * Tags of the export job.
    */
@@ -1251,7 +1304,7 @@ export interface ExportJob {
   /**
    * Status of last export job.
    */
-  lastStatus?: ExportJobStatus
+  lastStatus?: ExportJobStatus | null
   /**
    * Region of the export job.
    */
@@ -1289,13 +1342,13 @@ export interface CustomAlertRuleField {
    *
    * One-of ('availableOperators'): at most one of 'stringOperators', 'intOperators' could be set.
    */
-  stringOperators?: CustomAlertRuleFieldStringOperators
+  stringOperators?: CustomAlertRuleFieldStringOperators | null
   /**
    * A list of int CEL operators that are supported and valid for this field.
    *
    * One-of ('availableOperators'): at most one of 'stringOperators', 'intOperators' could be set.
    */
-  intOperators?: CustomAlertRuleFieldIntOperators
+  intOperators?: CustomAlertRuleFieldIntOperators | null
 }
 
 
@@ -1303,11 +1356,11 @@ export type CreateCustomAlertRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Name of the custom alert rule.
    */
@@ -1315,7 +1368,7 @@ export type CreateCustomAlertRuleRequest = {
   /**
    * (Optional) Description of the custom alert rule.
    */
-  description?: string
+  description?: string | null
   /**
    * The Common Expression Language (CEL) string defining the logic for the alert rule.
    */
@@ -1323,7 +1376,7 @@ export type CreateCustomAlertRuleRequest = {
   /**
    * The duration of time over which to evaluate the rule (how far back to look for matching events).
    */
-  evaluationWindow?: string
+  evaluationWindow?: string | null
   /**
    * The minimum number of matched occurrences required within the evaluation window to trigger the alert.
    */
@@ -1331,7 +1384,7 @@ export type CreateCustomAlertRuleRequest = {
   /**
    * (Optional) The severity level assigned to the custom alert rule. By default, the severity will be set to info.
    */
-  severity?: CustomAlertRuleSeverity
+  severity?: CustomAlertRuleSeverity | null
 }
 
 
@@ -1339,11 +1392,11 @@ export type CreateExportJobRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Name of the export.
    */
@@ -1353,11 +1406,11 @@ export type CreateExportJobRequest = {
    *
    * One-of ('destination'): at most one of 's3' could be set.
    */
-  s3?: ExportJobS3
+  s3?: ExportJobS3 | null
   /**
    * Tags of the export.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1365,7 +1418,7 @@ export type DeleteCustomAlertRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the custom alert rule to delete.
    */
@@ -1377,7 +1430,7 @@ export type DeleteExportJobRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the export job.
    */
@@ -1389,15 +1442,15 @@ export type DisableAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * List of IDs of the rules to disable.
    */
-  alertRuleIds?: string[]
+  alertRuleIds?: string[] | null
 }
 
 
@@ -1413,15 +1466,15 @@ export type DisableCustomAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * List of IDs of the custom rules to disable.
    */
-  customAlertRuleIds?: string[]
+  customAlertRuleIds?: string[] | null
 }
 
 
@@ -1437,15 +1490,15 @@ export type EnableAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * List of IDs of the rules to enable.
    */
-  alertRuleIds?: string[]
+  alertRuleIds?: string[] | null
 }
 
 
@@ -1461,15 +1514,15 @@ export type EnableCustomAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * List of IDs of the custom rules to enable.
    */
-  customAlertRuleIds?: string[]
+  customAlertRuleIds?: string[] | null
 }
 
 
@@ -1486,13 +1539,25 @@ export interface EventsOverview {
 }
 
 
+export type GetCustomAlertRuleRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  /**
+   * ID of the custom alert rule to retrieve.
+   */
+  customAlertRuleId: string
+}
+
+
 export type GetLastEventsOverviewRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  organizationId?: string
-  projectId?: string
+  region?: ScwRegion | null
+  organizationId?: string | null
+  projectId?: string | null
 }
 
 
@@ -1500,17 +1565,17 @@ export type ListAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) Status of the alert rule.
    */
-  status?: AlertRuleStatus
-  page?: number
-  pageSize?: number
+  status?: AlertRuleStatus | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1530,19 +1595,19 @@ export type ListAuthenticationEventsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  organizationId?: string
-  recordedAfter?: Date
-  recordedBefore?: Date
-  orderBy?: ListAuthenticationEventsRequestOrderBy
-  pageSize?: number
-  pageToken?: string
+  region?: ScwRegion | null
+  organizationId?: string | null
+  recordedAfter?: Date | null
+  recordedBefore?: Date | null
+  orderBy?: ListAuthenticationEventsRequestOrderBy | null
+  pageSize?: number | null
+  pageToken?: string | null
 }
 
 
 export interface ListAuthenticationEventsResponse {
   events: AuthenticationEvent[]
-  nextPageToken?: string
+  nextPageToken?: string | null
 }
 
 
@@ -1550,21 +1615,21 @@ export type ListCombinedEventsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  organizationId?: string
-  projectId?: string
-  resourceType?: ResourceType
-  recordedAfter?: Date
-  recordedBefore?: Date
-  orderBy?: ListCombinedEventsRequestOrderBy
-  pageSize?: number
-  pageToken?: string
+  region?: ScwRegion | null
+  organizationId?: string | null
+  projectId?: string | null
+  resourceType?: ResourceType | null
+  recordedAfter?: Date | null
+  recordedBefore?: Date | null
+  orderBy?: ListCombinedEventsRequestOrderBy | null
+  pageSize?: number | null
+  pageToken?: string | null
 }
 
 
 export interface ListCombinedEventsResponse {
   events: ListCombinedEventsResponseCombinedEvent[]
-  nextPageToken?: string
+  nextPageToken?: string | null
 }
 
 
@@ -1572,17 +1637,17 @@ export type ListCustomAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) Status of the custom alert rule.
    */
-  status?: CustomAlertRuleStatus
-  page?: number
-  pageSize?: number
+  status?: CustomAlertRuleStatus | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -1602,58 +1667,58 @@ export type ListEventsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * (Optional) ID of the Project containing the Audit Trail events.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * ID of the Organization containing the Audit Trail events.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) Type of the Scaleway resource.
    */
-  resourceType?: ResourceType
+  resourceType?: ResourceType | null
   /**
    * (Optional) Name of the method of the API call performed.
    */
-  methodName?: string
+  methodName?: string | null
   /**
    * (Optional) HTTP status code of the request. Returns either `200` if the request was successful or `403` if the permission was denied.
    */
-  status?: number
+  status?: number | null
   /**
    * (Optional) The `recorded_after` parameter defines the earliest timestamp from which Audit Trail events are retrieved. Returns `one hour ago` by default.
    */
-  recordedAfter?: Date
+  recordedAfter?: Date | null
   /**
    * (Optional) The `recorded_before` parameter defines the latest timestamp up to which Audit Trail events are retrieved. Returns `now` by default.
    */
-  recordedBefore?: Date
-  orderBy?: ListEventsRequestOrderBy
-  pageSize?: number
-  pageToken?: string
+  recordedBefore?: Date | null
+  orderBy?: ListEventsRequestOrderBy | null
+  pageSize?: number | null
+  pageToken?: string | null
   /**
    * (Optional) Name of the Scaleway product in a hyphenated format.
    */
-  productName?: string
+  productName?: string | null
   /**
    * (Optional) Name of the service of the API call performed.
    */
-  serviceName?: string
+  serviceName?: string | null
   /**
    * (Optional) ID of the Scaleway resource.
    */
-  resourceId?: string
+  resourceId?: string | null
   /**
    * (Optional) ID of the User or IAM application at the origin of the event.
    */
-  principalId?: string
+  principalId?: string | null
   /**
    * (Optional) IP address at the origin of the event.
    */
-  sourceIp?: string
+  sourceIp?: string | null
 }
 
 
@@ -1665,7 +1730,7 @@ export interface ListEventsResponse {
   /**
    * Page token to use in following calls to keep listing.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
 }
 
 
@@ -1673,22 +1738,22 @@ export type ListExportJobsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Filter by Organization ID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) Filter by export name.
    */
-  name?: string
+  name?: string | null
   /**
    * (Optional) List of tags to filter on.
    */
-  tags?: string[]
-  page?: number
-  pageSize?: number
-  orderBy?: ListExportJobsRequestOrderBy
+  tags?: string[] | null
+  page?: number | null
+  pageSize?: number | null
+  orderBy?: ListExportJobsRequestOrderBy | null
 }
 
 
@@ -1708,11 +1773,11 @@ export type ListProductsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization containing the Audit Trail events.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1732,22 +1797,22 @@ export type ListSystemEventsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization containing the Audit Trail system events.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * (Optional) The `recorded_after` parameter defines the earliest timestamp from which Audit Trail system events are retrieved. Returns `one hour ago` by default.
    */
-  recordedAfter?: Date
+  recordedAfter?: Date | null
   /**
    * (Optional) The `recorded_before` parameter defines the latest timestamp up to which Audit Trail system events are retrieved. Returns `now` by default.
    */
-  recordedBefore?: Date
-  orderBy?: ListSystemEventsRequestOrderBy
-  pageSize?: number
-  pageToken?: string
+  recordedBefore?: Date | null
+  orderBy?: ListSystemEventsRequestOrderBy | null
+  pageSize?: number | null
+  pageToken?: string | null
 }
 
 
@@ -1759,7 +1824,7 @@ export interface ListSystemEventsResponse {
   /**
    * Page token to use in following calls to keep listing.
    */
-  nextPageToken?: string
+  nextPageToken?: string | null
 }
 
 
@@ -1767,11 +1832,11 @@ export type RetrieveAvailableFieldsForCustomAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  organizationId?: string
+  organizationId?: string | null
 }
 
 
@@ -1791,15 +1856,15 @@ export type SetEnabledAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * List of IDs of the rules that must be enabled after the update.
    */
-  enabledAlertRuleIds?: string[]
+  enabledAlertRuleIds?: string[] | null
 }
 
 
@@ -1815,15 +1880,15 @@ export type SetEnabledCustomAlertRulesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * List of IDs of the custom rules that must be enabled after the update.
    */
-  enabledCustomAlertRuleIds?: string[]
+  enabledCustomAlertRuleIds?: string[] | null
 }
 
 
@@ -1839,11 +1904,11 @@ export type TestCustomAlertRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the Organization to target.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * The Common Expression Language (CEL) string defining the logic for the alert rule.
    */
@@ -1851,7 +1916,7 @@ export type TestCustomAlertRuleRequest = {
   /**
    * The duration of time over which to evaluate the rule (how far back to look for matching events).
    */
-  evaluationWindow?: string
+  evaluationWindow?: string | null
   /**
    * The minimum number of matched occurrences required within the evaluation window to trigger the alert.
    */
@@ -1871,7 +1936,7 @@ export type UpdateCustomAlertRuleRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the custom alert rule to update.
    */
@@ -1879,11 +1944,11 @@ export type UpdateCustomAlertRuleRequest = {
   /**
    * (Optional) New name for the custom alert rule.
    */
-  name?: string
+  name?: string | null
   /**
    * (Optional) New description for the custom alert rule.
    */
-  description?: string
+  description?: string | null
 }
 
 

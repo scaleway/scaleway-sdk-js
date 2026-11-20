@@ -58,7 +58,7 @@ export interface SkuImpact {
   /**
    * The total estimated impact for this SKU during the given period.
    */
-  totalSkuImpact?: Impact
+  totalSkuImpact?: Impact | null
   /**
    * The service category associated with this SKU.
    */
@@ -78,7 +78,7 @@ export interface ZoneImpact {
   /**
    * The total estimated impact for this zone across all given service categories, and product categories during the given period.
    */
-  totalZoneImpact?: Impact
+  totalZoneImpact?: Impact | null
   /**
    * List of estimated impact values per SKU for this zone.
    */
@@ -94,7 +94,7 @@ export interface RegionImpact {
   /**
    * The total estimated impact for this region across all given zones, service categories, and product categories during the given period.
    */
-  totalRegionImpact?: Impact
+  totalRegionImpact?: Impact | null
   /**
    * List of estimated impact values per zone.
    */
@@ -114,7 +114,7 @@ export interface ProjectImpact {
   /**
    * The total estimated impact for this Project across all given regions, zones, service categories, and product categories during the given period.
    */
-  totalProjectImpact?: Impact
+  totalProjectImpact?: Impact | null
   /**
    * List of estimated impact values per region.
    */
@@ -126,15 +126,15 @@ export interface ImpactDataResponse {
   /**
    * Start date of the impact data period (inclusive).
    */
-  startDate?: Date
+  startDate?: Date | null
   /**
    * End date of the impact data period (exclusive).
    */
-  endDate?: Date
+  endDate?: Date | null
   /**
    * The total estimated impact across all given Projects, regions, zones, service categories, and product categories during the given period.
    */
-  totalImpact?: Impact
+  totalImpact?: Impact | null
   /**
    * List of estimated impact values per Project.
    */
@@ -158,15 +158,15 @@ export type UserApiDownloadImpactReportRequest = {
   /**
    * The UUID of the Organization for which you want to download a report.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * The start date of the period for which you want to download a report (ISO 8601 format, e.g. 2025-05-01T00:00:00Z).
    */
-  date?: Date
+  date?: Date | null
   /**
    * Type of report to download (e.g. `monthly`).
    */
-  type?: ReportType
+  type?: ReportType | null
 }
 
 
@@ -174,35 +174,35 @@ export type UserApiGetImpactDataRequest = {
   /**
    * The UUID of the Organization for which you want to download a report.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Start date (inclusive) of the period for which you want to retrieve impact data (ISO 8601 format, e.g. 2025-05-01T00:00:00Z).
    */
-  startDate?: Date
+  startDate?: Date | null
   /**
    * End date (exclusive) of the period for which you want to retrieve impact data (ISO 8601 format, with time in UTC, `YYYY-MM-DDTHH:MM:SSZ`). Defaults to today's date.
    */
-  endDate?: Date
+  endDate?: Date | null
   /**
    * List of regions to filter by (e.g. `fr-par`). Defaults to all regions.
    */
-  regions?: string[]
+  regions?: string[] | null
   /**
    * List of zones to filter by (e.g. `fr-par-1`). Defaults to all zones.
    */
-  zones?: string[]
+  zones?: string[] | null
   /**
    * List of Project IDs to filter by. Defaults to all Projects in the Organization.
    */
-  projectIds?: string[]
+  projectIds?: string[] | null
   /**
    * List of service categories to filter by. Defaults to all service categories.
    */
-  serviceCategories?: ServiceCategory[]
+  serviceCategories?: ServiceCategory[] | null
   /**
    * List of product categories to filter by. Defaults to all product categories.
    */
-  productCategories?: ProductCategory[]
+  productCategories?: ProductCategory[] | null
 }
 
 
@@ -210,15 +210,15 @@ export type UserApiGetImpactReportAvailabilityRequest = {
   /**
    * The UUID of the Organization for which you want to download a report.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Start date of the search period (ISO 8601 format, with time in UTC, `YYYY-MM-DDTHH:MM:SSZ`). The date is inclusive.
    */
-  startDate?: Date
+  startDate?: Date | null
   /**
    * End date of the search period (ISO 8601 format, with time in UTC, `YYYY-MM-DDTHH:MM:SSZ`). The date is inclusive. Defaults to today's date.
    */
-  endDate?: Date
+  endDate?: Date | null
 }
 
 

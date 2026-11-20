@@ -59,6 +59,7 @@ import type {
   EnableCustomAlertRulesResponse,
   EventsOverview,
   ExportJob,
+  GetCustomAlertRuleRequest,
   GetLastEventsOverviewRequest,
   ListAlertRulesRequest,
   ListAlertRulesResponse,
@@ -261,7 +262,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateExportJobRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/export-jobs`,
         signal: options?.signal,
@@ -360,6 +361,41 @@ export class API extends ParentAPI {
 
   
   /**
+   * Get custom alert rule metadata. Retrieve metadata for a specified custom alert rule using the `region` and `custom_alert_rule_id` parameters.
+   *
+   * @param request - The request {@link GetCustomAlertRuleRequest}
+   * @returns A Promise of CustomAlertRule
+   */
+  getCustomAlertRule = (request: Readonly<GetCustomAlertRuleRequest>, options?: RequestOptions) =>
+    this.client.fetch<CustomAlertRule>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules/${validatePathParam('customAlertRuleId', request.customAlertRuleId)}`,
+        signal: options?.signal,
+      },
+      unmarshalCustomAlertRule,
+    )
+  
+  /**
+   * Waits for {@link CustomAlertRule} to be in a final state.
+   *
+   * @param request - The request {@link GetCustomAlertRuleRequest}
+   * @param options - The waiting options
+   * @returns A Promise of CustomAlertRule
+   */
+  waitForCustomAlertRule = (
+    request: Readonly<GetCustomAlertRuleRequest>,
+    options?: Readonly<WaitForOptions<CustomAlertRule>>,
+  ) =>
+    waitForResource(
+      options?.stop ?? (res => Promise.resolve(!CUSTOM_ALERT_RULE_TRANSIENT_STATUSES_AUDIT_TRAIL.includes(res.status))),
+      this.getCustomAlertRule,
+      request,
+      options,
+    )
+
+  
+  /**
    * Enable alert rules. Enable alert rules for a specified organization. Enabled rules will trigger alerts when matching events occur.
    *
    * @param request - The request {@link EnableAlertRulesRequest}
@@ -371,7 +407,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalEnableAlertRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/enable-alert-rules`,
         signal: options?.signal,
@@ -392,7 +428,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalEnableCustomAlertRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/enable-custom-alert-rules`,
         signal: options?.signal,
@@ -413,7 +449,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalDisableAlertRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/disable-alert-rules`,
         signal: options?.signal,
@@ -434,7 +470,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalDisableCustomAlertRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/disable-custom-alert-rules`,
         signal: options?.signal,
@@ -455,7 +491,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetEnabledAlertRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/alert-rules`,
         signal: options?.signal,
@@ -476,7 +512,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalSetEnabledCustomAlertRulesRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules`,
         signal: options?.signal,
@@ -497,7 +533,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateCustomAlertRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules`,
         signal: options?.signal,
@@ -518,7 +554,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateCustomAlertRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/custom-alert-rules/${validatePathParam('customAlertRuleId', request.customAlertRuleId)}`,
         signal: options?.signal,
@@ -554,7 +590,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalTestCustomAlertRuleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/test-custom-alert-rule`,
         signal: options?.signal,

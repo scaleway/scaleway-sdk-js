@@ -69,7 +69,7 @@ export const unmarshalOS = (data: unknown): OS => {
   }
 
   return {
-    compatibleServerTypes: data.compatible_server_types ? data.compatible_server_types : undefined,
+    compatibleServerTypes: data.compatible_server_types ? data.compatible_server_types : null,
     description: data.description,
     family: data.family,
     id: data.id,
@@ -82,6 +82,7 @@ export const unmarshalOS = (data: unknown): OS => {
     tags: data.tags,
     version: data.version,
     xcodeVersion: data.xcode_version,
+    zone: data.zone,
   } as OS
 }
 
@@ -126,27 +127,28 @@ export const unmarshalServer = (data: unknown): Server => {
 
   return {
     appliedRunnerConfigurationIds: data.applied_runner_configuration_ids,
-    commitment: data.commitment ? unmarshalCommitment(data.commitment) : undefined,
-    createdAt: unmarshalDate(data.created_at),
-    deletableAt: unmarshalDate(data.deletable_at),
+    commitment: data.commitment ? unmarshalCommitment(data.commitment) : null,
+    createdAt: unmarshalDate(data.created_at) ?? null,
+    deletableAt: unmarshalDate(data.deletable_at) ?? null,
     deletionScheduled: data.deletion_scheduled,
     delivered: data.delivered,
+    fullOsVersion: data.full_os_version,
     id: data.id,
     ip: data.ip,
     kextEnabled: data.kext_enabled,
     name: data.name,
     organizationId: data.organization_id,
-    os: data.os ? unmarshalOS(data.os) : undefined,
+    os: data.os ? unmarshalOS(data.os) : null,
     projectId: data.project_id,
     publicBandwidthBps: data.public_bandwidth_bps,
-    runnerConfiguration: data.runner_configuration ? unmarshalRunnerConfiguration(data.runner_configuration) : undefined,
+    runnerConfiguration: data.runner_configuration ? unmarshalRunnerConfiguration(data.runner_configuration) : null,
     srn: data.srn,
     sshUsername: data.ssh_username,
     status: data.status,
     sudoPassword: data.sudo_password,
     tags: data.tags,
     type: data.type,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vncPort: data.vnc_port,
     vncUrl: data.vnc_url,
     vpcStatus: data.vpc_status,
@@ -189,8 +191,8 @@ const unmarshalRunnerConfigurationV2 = (data: unknown): RunnerConfigurationV2 =>
   }
 
   return {
-    githubConfiguration: data.github_configuration ? unmarshalGithubRunnerConfiguration(data.github_configuration) : undefined,
-    gitlabConfiguration: data.gitlab_configuration ? unmarshalGitlabRunnerConfiguration(data.gitlab_configuration) : undefined,
+    githubConfiguration: data.github_configuration ? unmarshalGithubRunnerConfiguration(data.github_configuration) : null,
+    gitlabConfiguration: data.gitlab_configuration ? unmarshalGitlabRunnerConfiguration(data.gitlab_configuration) : null,
     name: data.name,
     provider: data.provider,
   } as RunnerConfigurationV2
@@ -204,7 +206,7 @@ export const unmarshalRunner = (data: unknown): Runner => {
   }
 
   return {
-    configuration: data.configuration ? unmarshalRunnerConfigurationV2(data.configuration) : undefined,
+    configuration: data.configuration ? unmarshalRunnerConfigurationV2(data.configuration) : null,
     errorMessage: data.error_message,
     id: data.id,
     srn: data.srn,
@@ -221,15 +223,15 @@ export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwo
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     ipamIpIds: data.ipam_ip_ids,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     serverId: data.server_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-    vlan: data.vlan,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    vlan: data.vlan ?? null,
   } as ServerPrivateNetwork
 }
 
@@ -321,16 +323,17 @@ export const unmarshalServerType = (data: unknown): ServerType => {
   }
 
   return {
-    cpu: data.cpu ? unmarshalServerTypeCPU(data.cpu) : undefined,
-    defaultOs: data.default_os ? unmarshalOS(data.default_os) : undefined,
-    disk: data.disk ? unmarshalServerTypeDisk(data.disk) : undefined,
-    gpu: data.gpu ? unmarshalServerTypeGPU(data.gpu) : undefined,
-    memory: data.memory ? unmarshalServerTypeMemory(data.memory) : undefined,
-    minimumLeaseDuration: data.minimum_lease_duration,
+    cpu: data.cpu ? unmarshalServerTypeCPU(data.cpu) : null,
+    defaultOs: data.default_os ? unmarshalOS(data.default_os) : null,
+    disk: data.disk ? unmarshalServerTypeDisk(data.disk) : null,
+    gpu: data.gpu ? unmarshalServerTypeGPU(data.gpu) : null,
+    memory: data.memory ? unmarshalServerTypeMemory(data.memory) : null,
+    minimumLeaseDuration: data.minimum_lease_duration ?? null,
     name: data.name,
-    network: data.network ? unmarshalServerTypeNetwork(data.network) : undefined,
-    npu: data.npu ? unmarshalServerTypeNPU(data.npu) : undefined,
+    network: data.network ? unmarshalServerTypeNetwork(data.network) : null,
+    npu: data.npu ? unmarshalServerTypeNPU(data.npu) : null,
     stock: data.stock,
+    zone: data.zone,
   } as ServerType
 }
 
@@ -359,7 +362,7 @@ const unmarshalConnectivityDiagnosticServerHealth = (data: unknown): Connectivit
     isServerAlive: data.is_server_alive,
     isSshPortUp: data.is_ssh_port_up,
     isVncPortUp: data.is_vnc_port_up,
-    lastCheckinDate: unmarshalDate(data.last_checkin_date),
+    lastCheckinDate: unmarshalDate(data.last_checkin_date) ?? null,
   } as ConnectivityDiagnosticServerHealth
 }
 
@@ -372,7 +375,7 @@ export const unmarshalConnectivityDiagnostic = (data: unknown): ConnectivityDiag
 
   return {
     errorMessage: data.error_message,
-    healthDetails: data.health_details ? unmarshalConnectivityDiagnosticServerHealth(data.health_details) : undefined,
+    healthDetails: data.health_details ? unmarshalConnectivityDiagnosticServerHealth(data.health_details) : null,
     id: data.id,
     isHealthy: data.is_healthy,
     srn: data.srn,
@@ -512,7 +515,7 @@ export const marshalBatchCreateServersRequest = (
   os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_bandwidth_bps: request.publicBandwidthBps,
-  requests: ((request.requests !== undefined) ?  request.requests.map(elt => marshalBatchCreateServersRequestBatchInnerCreateServerRequest(elt, defaults)): undefined),
+  requests: ((request.requests != null) ?  request.requests.map(elt => marshalBatchCreateServersRequestBatchInnerCreateServerRequest(elt, defaults)): undefined),
   type: request.type,
 })
 
@@ -541,11 +544,11 @@ const marshalRunnerConfigurationV2 = (
   provider: request.provider,  
   ...resolveOneOf([
     {param: 'github_configuration',
-      value: (request.githubConfiguration !== undefined) ? marshalGithubRunnerConfiguration(request.githubConfiguration, defaults)
+      value: (request.githubConfiguration != null) ? marshalGithubRunnerConfiguration(request.githubConfiguration, defaults)
       : undefined,
     },
     {param: 'gitlab_configuration',
-      value: (request.gitlabConfiguration !== undefined) ? marshalGitlabRunnerConfiguration(request.gitlabConfiguration, defaults)
+      value: (request.gitlabConfiguration != null) ? marshalGitlabRunnerConfiguration(request.gitlabConfiguration, defaults)
       : undefined,
     },
   ]),
@@ -584,7 +587,7 @@ export const marshalCreateServerRequest = (
   request: CreateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  applied_runner_configurations: ((request.appliedRunnerConfigurations !== undefined) ?  marshalAppliedRunnerConfigurations(request.appliedRunnerConfigurations, defaults): undefined),
+  applied_runner_configurations: ((request.appliedRunnerConfigurations != null) ?  marshalAppliedRunnerConfigurations(request.appliedRunnerConfigurations, defaults): undefined),
   commitment_type: request.commitmentType,
   enable_kext: request.enableKext,
   enable_vpc: request.enableVpc,
@@ -592,7 +595,7 @@ export const marshalCreateServerRequest = (
   os_id: request.osId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   public_bandwidth_bps: request.publicBandwidthBps,
-  runner_configuration: ((request.runnerConfiguration !== undefined) ?  marshalRunnerConfiguration(request.runnerConfiguration, defaults): undefined),
+  runner_configuration: ((request.runnerConfiguration != null) ?  marshalRunnerConfiguration(request.runnerConfiguration, defaults): undefined),
   type: request.type,
 })
 
@@ -630,7 +633,7 @@ export const marshalUpdateRunnerConfigurationStatusRequest = (
   request: UpdateRunnerConfigurationStatusRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  runner_errors: ((request.runnerErrors !== undefined) ?  request.runnerErrors: undefined),
+  runner_errors: ((request.runnerErrors != null) ?  request.runnerErrors: undefined),
 })
 
 export const marshalUpdateRunnerRequest = (
@@ -651,8 +654,8 @@ export const marshalUpdateServerRequest = (
   request: UpdateServerRequest,
   defaults: DefaultValues,
 ): Record<string, unknown> => ({
-  applied_runner_configurations: ((request.appliedRunnerConfigurations !== undefined) ?  marshalAppliedRunnerConfigurations(request.appliedRunnerConfigurations, defaults): undefined),
-  commitment_type: ((request.commitmentType !== undefined) ?  marshalCommitmentTypeValue(request.commitmentType, defaults): undefined),
+  applied_runner_configurations: ((request.appliedRunnerConfigurations != null) ?  marshalAppliedRunnerConfigurations(request.appliedRunnerConfigurations, defaults): undefined),
+  commitment_type: ((request.commitmentType != null) ?  marshalCommitmentTypeValue(request.commitmentType, defaults): undefined),
   enable_vpc: request.enableVpc,
   name: request.name,
   public_bandwidth_bps: request.publicBandwidthBps,

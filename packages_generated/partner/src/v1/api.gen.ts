@@ -51,7 +51,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalRequestAdminRoleRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/request-admin-role`,
         signal: options?.signal,
@@ -71,7 +71,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateOrganizationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/partner/v1/organizations`,
         signal: options?.signal,
@@ -136,7 +136,7 @@ export class API extends ParentAPI {
     this.client.fetch<Organization>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/lock`,
         signal: options?.signal,
@@ -155,7 +155,7 @@ export class API extends ParentAPI {
     this.client.fetch<Organization>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}/unlock`,
         signal: options?.signal,
@@ -176,7 +176,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateOrganizationRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/partner/v1/organizations/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}`,
         signal: options?.signal,

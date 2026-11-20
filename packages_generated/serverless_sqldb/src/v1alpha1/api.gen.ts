@@ -73,7 +73,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDatabaseRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases`,
         signal: options?.signal,
@@ -174,7 +174,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDatabaseRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}`,
         signal: options?.signal,
@@ -195,7 +195,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalRestoreDatabaseFromBackupRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/databases/${validatePathParam('databaseId', request.databaseId)}/restore`,
         signal: options?.signal,
@@ -259,7 +259,7 @@ export class API extends ParentAPI {
     this.client.fetch<DatabaseBackup>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/serverless-sqldb/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/backups/${validatePathParam('backupId', request.backupId)}/export`,
         signal: options?.signal,

@@ -1,5 +1,1375 @@
 # Change Log
 
+## 2.18.0
+
+### Minor Changes
+
+- fix(oxlint): enable unicorn/switch-case-braces as error (#3561)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- feat(marshalling): add any marshalling (#2054)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(client): clean up client usage inside sdk (#1952)
+
+- chore(deps): update dependency oxlint-tsgolint to v7.0.2002 (#3599)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- chore(release): publish
+
+- feat(permission): declare gapi consumption_limit permission (#3626)
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- fix(oxlint): enable no-shadow, prefer-destructuring, prefer-global-this, set-state-in-effect as error (#3592)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+- chore: migrate from ESLint to Biome for linting and formatting (#2551)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat(client): add RequestOptions type and thread AbortSignal through helpers (#3624)
+
+- fix(oxlint): enable error-message, only-throw-error, prefer-type-error as error (#3591)
+
+- chore(release): publish
+
+- chore: add locality type (#2206)
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- feat(client): add cursor-based pagination support (#3488)
+
+- fix: client headers options (#3738)
+
+- fix(release): run by commit and github release cli (#3185)
+
+- fix(oxlint): enable no-unsafe-type-assertion and no-unnecessary-condition as error (#3596)
+
+- fix(oxlint): enable typescript/strict-boolean-expressions as error (#3570)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable eqeqeq, no-eq-null, prefer-template, vars-on-top as error (#3572)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- fix(deps): upgrade and remove unused deps (#3202)
+
+- fix: sdk client deps (#2056)
+
+- fix: types null possibility (#3846)
+
+- feat(client): add optional per-request HTTP timeout via withTimeout. (#3622)
+
+- fix(oxlint): enable explicit-member-accessibility and parameter-properties as error (#3595)
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/no-confusing-void-expression as error (#3498)
+
+- chore(deps): update dependency lerna to v9.0.5 (#2806)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- feat(client): stop pagination loop on aborted signal (#3715)
+
+- feat(sdk): unify tools (#2903)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574)
+
+- chore(release): publish
+
+- feat(client): attach request context to ScalewayError (#3724)
+
+- chore(release): publish
+
+- feat(sdk): add client package (#1943)
+
+- fix(oxlint): enable prefer-spread, prefer-response-static-json, consistent-function-scoping as error (#3593)
+
+- fix(oxlint): enable promise-function-async, no-unnecessary-type-parameters, no-await-in-loop as error (#3594)
+
+- feat(sdk-client): add it-mil zone (#3684)
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- chore(release): publish
+
+- feat(sdk-client): remove implicite string casting for zone/region (#3685)
+
+- fix: exclude generated config files from biome formatting (#2661)
+
+- fix(oxlint): enable typescript/consistent-indexed-object-style as error (#3497)
+
+- feat(client): add AbortSignal / request cancellation support (#3319)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- test: add node 22, 24 and remove 18 in CI (#2293)
+
+- chore(release): publish
+
+- fix: abort error with context (#3728)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency typescript to v5.9.3 (#2616)
+
+- chore(deps): update dependency @typescript/native-preview to v7.0.0-dev.20260420.1 (#2906)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- fix(client): skip empty string query params in urlParams (#3668)
+
+- fix(client): flexible type for waiter (#2851)
+
+- fix(oxlint): fix no-useless-assignment violations breaking lint (#3528)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(client): add it-mil region and zone (#2948)
+
+- feat(peer): fix peer deps range (#3579)
+
+- chore(release): publish
+
+- chore: add extension for nodenext (#2265)
+
+- fix(release): versioning client (#1948)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix(oxlint): enable eslint/require-unicode-regexp as error (#3424)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(client): add pl-waw-3 zone, add headers, add sessionheader (#2016)
+
+- test(client): bump coverage and exclude vendor from coverage (#3679)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(biome): use biome to format instead of prettier (#1947)
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/prefer-nullish-coalescing as error (#3519)
+
+- chore(release): publish
+
+- chore: fix eslint biome conflicts (#2380)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- chore(release): publish
+
+- fix(release): versioning client (#1949)
+
+- chore(release): publish
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- feat(sdk-js): add new locality type (#2157)
+
+- chore: linter (#3578)
+
+- fix(sdk-client): unmarshalDate never returns undefined (#3725)
+
+- chore(release): publish
+
+### Patch Changes
+
+- handle null value inside oneOf
+
+## 2.17.0
+
+### Minor Changes
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- feat(sdk): add client package (#1943)
+
+- fix: export locality (#2200)
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- feat(client): add optional per-request HTTP timeout via withTimeout. (#3622)
+
+- chore(release): publish
+
+- feat(sdk-js): add new locality type (#2157)
+
+- fix(oxlint): enable error-message, only-throw-error, prefer-type-error as error (#3591)
+
+- fix(oxlint): enable typescript/consistent-indexed-object-style as error (#3497)
+
+- chore(release): publish
+
+- fix(client): skip empty string query params in urlParams (#3668)
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/strict-boolean-expressions as error (#3570)
+
+- chore(release): publish
+
+- fix(client): flexible type for waiter (#2851)
+
+- feat(client): attach request context to ScalewayError (#3724)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- fix: exclude generated config files from biome formatting (#2661)
+
+- chore: migrate from ESLint to Biome for linting and formatting (#2551)
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore: add extension for nodenext (#2265)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(marshalling): add any marshalling (#2054)
+
+- feat(sdk-client): add it-mil zone (#3684)
+
+- fix: abort error with context (#3728)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
+- feat(client): add it-mil region and zone (#2948)
+
+- fix(sdk-client): unmarshalDate never returns undefined (#3725)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- fix(deps): upgrade and remove unused deps (#3202)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore: linter (#3578)
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- feat(client): add cursor-based pagination support (#3488)
+
+- fix(release): versioning client (#1949)
+
+- feat(client): stop pagination loop on aborted signal (#3715)
+
+- chore(biome): use biome to format instead of prettier (#1947)
+
+- fix(release): versioning client (#1948)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- feat(client): add pl-waw-3 zone, add headers, add sessionheader (#2016)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- feat(sdk-client): remove implicite string casting for zone/region (#3685)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable unicorn/switch-case-braces as error (#3561)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- fix: client headers options (#3738)
+
+- fix(oxlint): enable prefer-spread, prefer-response-static-json, consistent-function-scoping as error (#3593)
+
+- fix(oxlint): fix no-useless-assignment violations breaking lint (#3528)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/no-confusing-void-expression as error (#3498)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+- fix(oxlint): enable typescript/prefer-nullish-coalescing as error (#3519)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore(client): clean up client usage inside sdk (#1952)
+
+- fix(oxlint): enable explicit-member-accessibility and parameter-properties as error (#3595)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(permission): declare gapi consumption_limit permission (#3626)
+
+- fix(oxlint): enable eslint/require-unicode-regexp as error (#3424)
+
+- test(client): bump coverage and exclude vendor from coverage (#3679)
+
+- chore(release): publish
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- fix(oxlint): enable no-unsafe-type-assertion and no-unnecessary-condition as error (#3596)
+
+- fix(release): run by commit and github release cli (#3185)
+
+- fix(oxlint): enable no-shadow, prefer-destructuring, prefer-global-this, set-state-in-effect as error (#3592)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- chore(release): publish
+
+- feat(client): add RequestOptions type and thread AbortSignal through helpers (#3624)
+
+- chore(release): publish
+
+- fix(oxlint): enable promise-function-async, no-unnecessary-type-parameters, no-await-in-loop as error (#3594)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- chore: add locality type (#2206)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(deps): update dependency lerna to v9.0.5 (#2806)
+
+- test: add node 22, 24 and remove 18 in CI (#2293)
+
+- chore(release): publish
+
+- feat(peer): fix peer deps range (#3579)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(deps): update dependency oxlint-tsgolint to v7.0.2002 (#3599)
+
+- fix(oxlint): enable eqeqeq, no-eq-null, prefer-template, vars-on-top as error (#3572)
+
+- chore: fix eslint biome conflicts (#2380)
+
+- chore(release): publish
+
+- chore(deps): update dependency @typescript/native-preview to v7.0.0-dev.20260420.1 (#2906)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- chore(deps): update dependency typescript to v5.9.3 (#2616)
+
+- chore(release): publish
+
+- feat(client): add AbortSignal / request cancellation support (#3319)
+
+- feat: publish packages as ESM only (#2624)
+
+### Patch Changes
+
+- add null to paginated option, resolveOneOf
+
+## 2.16.0
+
+### Minor Changes
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- fix(oxlint): enable prefer-spread, prefer-response-static-json, consistent-function-scoping as error (#3593)
+
+- fix(oxlint): enable eslint/require-unicode-regexp as error (#3424)
+
+- fix(oxlint): enable explicit-member-accessibility and parameter-properties as error (#3595)
+
+- chore(release): publish
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- chore(release): publish
+
+- chore(deps): update dependency typescript to v5.9.3 (#2616)
+
+- feat(peer): fix peer deps range (#3579)
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- chore: fix eslint biome conflicts (#2380)
+
+- chore(release): publish
+
+- chore(biome): use biome to format instead of prettier (#1947)
+
+- fix(oxlint): enable typescript/prefer-nullish-coalescing as error (#3519)
+
+- fix(oxlint): enable promise-function-async, no-unnecessary-type-parameters, no-await-in-loop as error (#3594)
+
+- feat(sdk-client): add it-mil zone (#3684)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix(release): run by commit and github release cli (#3185)
+
+- feat(client): add RequestOptions type and thread AbortSignal through helpers (#3624)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(client): skip empty string query params in urlParams (#3668)
+
+- feat(sdk-client): remove implicite string casting for zone/region (#3685)
+
+- chore(release): publish
+
+- feat(marshalling): add any marshalling (#2054)
+
+- chore(release): publish
+
+- fix(oxlint): enable no-shadow, prefer-destructuring, prefer-global-this, set-state-in-effect as error (#3592)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- fix: exclude generated config files from biome formatting (#2661)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(client): stop pagination loop on aborted signal (#3715)
+
+- fix(oxlint): enable typescript/strict-boolean-expressions as error (#3570)
+
+- chore: migrate from ESLint to Biome for linting and formatting (#2551)
+
+- chore: add locality type (#2206)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(client): add pl-waw-3 zone, add headers, add sessionheader (#2016)
+
+- feat(client): add cursor-based pagination support (#3488)
+
+- chore: add extension for nodenext (#2265)
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+- feat(permission): declare gapi consumption_limit permission (#3626)
+
+- fix(oxlint): enable no-unsafe-type-assertion and no-unnecessary-condition as error (#3596)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore(release): publish
+
+- feat(sdk): add client package (#1943)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency lerna to v9.0.5 (#2806)
+
+- fix(deps): upgrade and remove unused deps (#3202)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- feat(client): add optional per-request HTTP timeout via withTimeout. (#3622)
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: linter (#3578)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- fix: abort error with context (#3728)
+
+- feat(client): attach request context to ScalewayError (#3724)
+
+- chore(release): publish
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- feat(sdk-js): add new locality type (#2157)
+
+- fix(client): flexible type for waiter (#2851)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- fix(oxlint): enable typescript/no-confusing-void-expression as error (#3498)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(typescript): upgrade version (#2916)
+
+- fix(oxlint): enable typescript/consistent-indexed-object-style as error (#3497)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(client): clean up client usage inside sdk (#1952)
+
+- chore(deps): update dependency oxlint-tsgolint to v7.0.2002 (#3599)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(release): publish
+
+- test: add node 22, 24 and remove 18 in CI (#2293)
+
+- chore(release): publish
+
+- chore(deps): update dependency @typescript/native-preview to v7.0.0-dev.20260420.1 (#2906)
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix(oxlint): fix no-useless-assignment violations breaking lint (#3528)
+
+- fix(oxlint): enable error-message, only-throw-error, prefer-type-error as error (#3591)
+
+- fix: export locality (#2200)
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- feat(client): add AbortSignal / request cancellation support (#3319)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
+- fix(oxlint): enable eqeqeq, no-eq-null, prefer-template, vars-on-top as error (#3572)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- chore(release): publish
+
+- fix(oxlint): enable unicorn/switch-case-braces as error (#3561)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- feat(client): add it-mil region and zone (#2948)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- fix: sdk client deps (#2056)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- test(client): bump coverage and exclude vendor from coverage (#3679)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574)
+
+- fix(release): versioning client (#1949)
+
+- fix(release): versioning client (#1948)
+
+- chore(release): publish
+
+### Patch Changes
+
+- unmarshalDate never returns undefined- #3725
+
+- add headers options
+
+## 2.15.0
+
+### Minor Changes
+
+- chore: fix eslint biome conflicts (#2380)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- Stop pagination loops on aborted signal
+
+  `fetchAll`, `fetchPaginated` and the cursor-based equivalents now check
+  `signal.aborted` between pages and reject with `AbortError` when cancelled,
+  instead of walking (or dispatching) every remaining page. Pass `{ signal }`
+  as request options.
+
+- chore(release): publish
+
+- feat(sdk): add client package (#1943)
+
+- chore: add extension for nodenext (#2265)
+
+- chore(release): publish
+
+- feat(marshalling): add any marshalling (#2054)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- fix(oxlint): enable error-message, only-throw-error, prefer-type-error as error (#3591)
+
+- chore(deps): update dependency typescript to v5.9.3 (#2616)
+
+- fix(oxlint): enable typescript/no-confusing-void-expression as error (#3498)
+
+- fix: exclude generated config files from biome formatting (#2661)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(client): add AbortSignal / request cancellation support (#3319)
+
+- feat(client): add pl-waw-3 zone, add headers, add sessionheader (#2016)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(permission): declare gapi consumption_limit permission (#3626)
+
+- chore(release): publish
+
+- feat(client): add it-mil region and zone (#2948)
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- feat(client): add cursor-based pagination support (#3488)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- fix(oxlint): enable no-shadow, prefer-destructuring, prefer-global-this, set-state-in-effect as error (#3592)
+
+- chore(release): publish
+
+- chore(deps): update dependency @typescript/native-preview to v7.0.0-dev.20260420.1 (#2906)
+
+- fix: export locality (#2200)
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+- fix(oxlint): fix no-useless-assignment violations breaking lint (#3528)
+
+- fix(release): run by commit and github release cli (#3185)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore: add locality type (#2206)
+
+- fix(release): versioning client (#1948)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(typescript): upgrade version (#2916)
+
+- fix(deps): upgrade and remove unused deps (#3202)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(client): add RequestOptions type and thread AbortSignal through helpers (#3624)
+
+- chore: migrate from ESLint to Biome for linting and formatting (#2551)
+
+- fix(oxlint): enable eqeqeq, no-eq-null, prefer-template, vars-on-top as error (#3572)
+
+- fix(oxlint): enable typescript/prefer-nullish-coalescing as error (#3519)
+
+- fix(oxlint): enable typescript/strict-boolean-expressions as error (#3570)
+
+- chore(client): clean up client usage inside sdk (#1952)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- fix(oxlint): enable eslint/require-unicode-regexp as error (#3424)
+
+- chore: linter (#3578)
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(biome): use biome to format instead of prettier (#1947)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- feat(client): add optional per-request HTTP timeout via withTimeout. (#3622)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(client): skip empty string query params in urlParams (#3668)
+
+- chore(release): publish
+
+- feat(sdk-js): add new locality type (#2157)
+
+- test: add node 22, 24 and remove 18 in CI (#2293)
+
+- fix(oxlint): enable no-unsafe-type-assertion and no-unnecessary-condition as error (#3596)
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- feat(peer): fix peer deps range (#3579)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- fix(oxlint): enable prefer-spread, prefer-response-static-json, consistent-function-scoping as error (#3593)
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
+- fix(release): versioning client (#1949)
+
+- fix(client): flexible type for waiter (#2851)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- fix(oxlint): enable unicorn/switch-case-braces as error (#3561)
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- chore(release): publish
+
+- chore(deps): update dependency oxlint-tsgolint to v7.0.2002 (#3599)
+
+- test(client): bump coverage and exclude vendor from coverage (#3679)
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- fix(oxlint): enable typescript/consistent-indexed-object-style as error (#3497)
+
+- feat(sdk-client): add it-mil zone (#3684)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- chore(release): publish
+
+- fix(oxlint): enable promise-function-async, no-unnecessary-type-parameters, no-await-in-loop as error (#3594)
+
+- chore(deps): update dependency lerna to v9.0.5 (#2806)
+
+- feat(sdk-client): remove implicite string casting for zone/region (#3685)
+
+- chore(release): publish
+
+- fix(oxlint): enable explicit-member-accessibility and parameter-properties as error (#3595)
+
+### Patch Changes
+
+- Add request context to AbortError
+
+  Aborts thrown or propagated by the fetcher now carry the request context
+  (`url`, `method`, `requestId`, and obfuscated `requestHeaders` via
+  `setRequestContext`), so error reporters such as Sentry can distinguish a
+  cancelled request from a real failure instead of seeing a bare
+  "signal is aborted without reason". Pagination and polling aborts also use a
+  descriptive message rather than the generic default.
+
+- add error context scw-error
+
+## 2.14.0
+
+### Minor Changes
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/prefer-nullish-coalescing as error (#3519)
+
+- fix(oxlint): enable promise-function-async, no-unnecessary-type-parameters, no-await-in-loop as error (#3594)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore: fix eslint biome conflicts (#2380)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- feat(peer): fix peer deps range (#3579)
+
+- feat(sdk): add client package (#1943)
+
+- fix(oxlint): fix no-useless-assignment violations breaking lint (#3528)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- feat(client): add optional per-request HTTP timeout via withTimeout. (#3622)
+
+- chore(release): publish
+
+- test: add node 22, 24 and remove 18 in CI (#2293)
+
+- fix(oxlint): enable unicorn/switch-case-braces as error (#3561)
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(release): publish
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore(release): publish
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- chore(biome): use biome to format instead of prettier (#1947)
+
+- chore(release): publish
+
+- feat(client): add pl-waw-3 zone, add headers, add sessionheader (#2016)
+
+- chore(release): publish
+
+- chore(client): clean up client usage inside sdk (#1952)
+
+- chore: migrate from ESLint to Biome for linting and formatting (#2551)
+
+- fix(release): versioning client (#1949)
+
+- fix(release): versioning client (#1948)
+
+- chore(deps): update dependency oxlint-tsgolint to v7.0.2002 (#3599)
+
+- fix(oxlint): enable eslint/require-unicode-regexp as error (#3424)
+
+- fix(deps): upgrade and remove unused deps (#3202)
+
+- chore(release): publish
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- fix(oxlint): enable eqeqeq, no-eq-null, prefer-template, vars-on-top as error (#3572)
+
+- chore(packages): upgrade deps (#3157)
+
+- fix(oxlint): enable prefer-spread, prefer-response-static-json, consistent-function-scoping as error (#3593)
+
+- fix(oxlint): enable no-shadow, prefer-destructuring, prefer-global-this, set-state-in-effect as error (#3592)
+
+- chore(deps): update dependency lerna to v9.0.5 (#2806)
+
+- fix(oxlint): enable error-message, only-throw-error, prefer-type-error as error (#3591)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- chore(release): publish
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(marshalling): add any marshalling (#2054)
+
+- feat(permission): declare gapi consumption_limit permission (#3626)
+
+- feat(sdk): unify tools (#2903)
+
+- feat(client): add AbortSignal / request cancellation support (#3319)
+
+- chore(deps): update dependency @typescript/native-preview to v7.0.0-dev.20260420.1 (#2906)
+
+- fix(oxlint): enable explicit-member-accessibility and parameter-properties as error (#3595)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- fix: export locality (#2200)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(engines): remove node engines (#3336)
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- chore(release): publish
+
+- feat(client): add RequestOptions type and thread AbortSignal through helpers (#3624)
+
+- chore(release): publish
+
+- fix(oxlint): enable no-unsafe-type-assertion and no-unnecessary-condition as error (#3596)
+
+- chore(release): publish
+
+- feat(sdk-js): add new locality type (#2157)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(client): add it-mil region and zone (#2948)
+
+- fix(oxlint): enable typescript/strict-boolean-expressions as error (#3570)
+
+- test(client): bump coverage and exclude vendor from coverage (#3679)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- chore(deps): update dependency typescript to v5.9.3 (#2616)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- fix(client): skip empty string query params in urlParams (#3668)
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/consistent-indexed-object-style as error (#3497)
+
+- chore(release): publish
+
+- fix(release): run by commit and github release cli (#3185)
+
+- chore: add extension for nodenext (#2265)
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+- chore: linter (#3578)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- fix(client): flexible type for waiter (#2851)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574)
+
+- fix: exclude generated config files from biome formatting (#2661)
+
+- chore: add locality type (#2206)
+
+- feat(client): add cursor-based pagination support (#3488)
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/no-confusing-void-expression as error (#3498)
+
+### Patch Changes
+
+- add it mil zone
+
+- remove implicite string casting for Zone/Region types
+
+## 2.13.0
+
+### Minor Changes
+
+- fix: exclude generated config files from biome formatting (#2661)
+
+- fix: sdk client deps (#2056)
+
+- fix(oxlint): enable error-message, only-throw-error, prefer-type-error as error (#3591)
+
+- fix(oxlint): enable typescript/consistent-indexed-object-style as error (#3497)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-depth as error (#3514)
+
+- chore(deps): update dependency oxlint-tsgolint to v7.0.2002 (#3599)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore: fix eslint biome conflicts (#2380)
+
+- feat(client): add optional per-request HTTP timeout via withTimeout. (#3622)
+
+- chore(deps): update dependency @typescript/native-preview to v7.0.0-dev.20260420.1 (#2906)
+
+- chore(release): publish
+
+- feat(client): add pl-waw-3 zone, add headers, add sessionheader (#2016)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- fix(oxlint): enable 12 tiny unicorn rules as error (#3573)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore: linter (#3578)
+
+- feat(permission): declare gapi consumption_limit permission (#3626)
+
+- fix(oxlint): enable no-unsafe-type-assertion and no-unnecessary-condition as error (#3596)
+
+- chore(release): publish
+
+- fix(oxlint): enable eslint/max-params as error (#3492)
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat(marshalling): add any marshalling (#2054)
+
+- chore(deps): update dependency lerna to v9.0.5 (#2806)
+
+- chore(patch-deps): update dependency @types/node to v20.19.43 (#3094)
+
+- fix(oxlint): enable eslint/require-unicode-regexp as error (#3424)
+
+- fix(release): run by commit and github release cli (#3185)
+
+- chore(biome): use biome to format instead of prettier (#1947)
+
+- feat(client): add RequestOptions type and thread AbortSignal through helpers (#3624)
+
+- fix(oxlint): enable no-shadow, prefer-destructuring, prefer-global-this, set-state-in-effect as error (#3592)
+
+- chore(typescript): upgrade version (#2916)
+
+- fix(oxlint): enable typescript/restrict-template-expressions as error (#3536)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(release): publish
+
+- feat(peer): fix peer deps range (#3579)
+
+- fix(client): restore waitForResource to 4-parameter signature (#3517)
+
+- fix(oxlint): enable explicit-member-accessibility and parameter-properties as error (#3595)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- test: add node 22, 24 and remove 18 in CI (#2293)
+
+- chore(release): publish
+
+- feat(client): add AbortSignal / request cancellation support (#3319)
+
+- chore(lerna): remove lerna and use pnpm auto release repo pkg (#3174)
+
+- fix(oxlint): fix no-useless-assignment violations breaking lint (#3528)
+
+- fix(client): prevent logRequest from consuming the request body (#3290)
+
+- fix(oxlint): enable typescript/strict-boolean-expressions as error (#3570)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(oxlint): enable typescript/no-confusing-void-expression as error (#3498)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency typescript to v5.9.3 (#2616)
+
+- fix(oxlint): enable promise-function-async, no-unnecessary-type-parameters, no-await-in-loop as error (#3594)
+
+- chore(release): publish
+
+- chore: add extension for nodenext (#2265)
+
+- feat(client): add cursor-based pagination support (#3488)
+
+- fix(release): versioning client (#1948)
+
+- chore(client): clean up client usage inside sdk (#1952)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574)
+
+- chore(release): publish
+
+- fix(oxlint): enable prefer-spread, prefer-response-static-json, consistent-function-scoping as error (#3593)
+
+- fix(oxlint): enable 12 fully-fixed rules as error (#3574) (#3575)
+
+- feat(client): add it-mil region and zone (#2948)
+
+- fix(client): flexible type for waiter (#2851)
+
+- chore(release): publish
+
+- feat(sdk): add client package (#1943)
+
+- chore(release): publish
+
+- fix: export locality (#2200)
+
+- chore: add locality type (#2206)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore: migrate from ESLint to Biome for linting and formatting (#2551)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat(sdk): unify tools (#2903)
+
+- fix(oxlint): enable unicorn/switch-case-braces as error (#3561)
+
+- fix(oxlint): enable eqeqeq, no-eq-null, prefer-template, vars-on-top as error (#3572)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(deps): upgrade and remove unused deps (#3202)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(release): versioning client (#1949)
+
+- fix(oxlint): enable typescript/prefer-nullish-coalescing as error (#3519)
+
+- fix(oxlint): enable eslint/init-declarations as error (#3513)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- fix(oxlint): enable eslint/curly as error (#3511)
+
+- feat(sdk-js): add new locality type (#2157)
+
+- fix(oxlint): enable unicorn/prefer-string-replace-all as error (#3560)
+
+- Fix empty-string filter values were sent on the wire as name=, breaking list calls.
+
 ## 2.12.1
 
 ### Patch Changes

@@ -85,6 +85,7 @@ export const MAINTENANCE_STATUSES: MaintenanceStatus[] = [
   'done',
   'cancelled',
   'ongoing',
+  'error',
 ]
 
 /** Lists all values of the enum {@link NodeTypeStock}. */

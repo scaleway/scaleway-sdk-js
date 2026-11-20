@@ -68,7 +68,7 @@ export class UserAPI extends ParentAPI {
         body: JSON.stringify(
           marshalUserApiDownloadImpactReportRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/environmental-footprint/v1alpha1/reports/download`,
         urlParams: urlParams(

@@ -26,12 +26,12 @@ const unmarshalMACAddress = (data: unknown): MACAddress => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     macAddress: data.mac_address,
     macType: data.mac_type,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as MACAddress
 }
@@ -44,19 +44,19 @@ export const unmarshalFlexibleIP = (data: unknown): FlexibleIP => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     id: data.id,
     ipAddress: data.ip_address,
-    macAddress: data.mac_address ? unmarshalMACAddress(data.mac_address) : undefined,
+    macAddress: data.mac_address ? unmarshalMACAddress(data.mac_address) : null,
     organizationId: data.organization_id,
     projectId: data.project_id,
     reverse: data.reverse,
-    serverId: data.server_id,
+    serverId: data.server_id ?? null,
     srn: data.srn,
     status: data.status,
     tags: data.tags,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     zone: data.zone,
   } as FlexibleIP
 }

@@ -58,7 +58,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
         body: JSON.stringify(
           marshalRegisterRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/test/v1/register`,
         signal: options?.signal,
@@ -141,7 +141,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
         body: JSON.stringify(
           marshalCreateHumanRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/test/v1/humans`,
         signal: options?.signal,
@@ -162,7 +162,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
         body: JSON.stringify(
           marshalUpdateHumanRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}`,
         signal: options?.signal,
@@ -198,7 +198,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
     this.client.fetch<Human>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}/run`,
         signal: options?.signal,
@@ -218,7 +218,7 @@ Hint: you can use other test commands by setting the SCW_SECRET_KEY env variable
     this.client.fetch<Human>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/test/v1/humans/${validatePathParam('humanId', request.humanId)}/smoke`,
         signal: options?.signal,

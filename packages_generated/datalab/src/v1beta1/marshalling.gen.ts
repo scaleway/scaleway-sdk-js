@@ -45,7 +45,7 @@ const unmarshalDatalabSparkMain = (data: unknown): DatalabSparkMain => {
 
   return {
     nodeType: data.node_type,
-    rootVolume: data.root_volume ? unmarshalVolume(data.root_volume) : undefined,
+    rootVolume: data.root_volume ? unmarshalVolume(data.root_volume) : null,
     sparkMasterUrl: data.spark_master_url,
     sparkUiUrl: data.spark_ui_url,
   } as DatalabSparkMain
@@ -61,7 +61,7 @@ const unmarshalDatalabSparkWorker = (data: unknown): DatalabSparkWorker => {
   return {
     nodeCount: data.node_count,
     nodeType: data.node_type,
-    rootVolume: data.root_volume ? unmarshalVolume(data.root_volume) : undefined,
+    rootVolume: data.root_volume ? unmarshalVolume(data.root_volume) : null,
   } as DatalabSparkWorker
 }
 
@@ -73,23 +73,23 @@ export const unmarshalDatalab = (data: unknown): Datalab => {
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     hasNotebook: data.has_notebook,
     id: data.id,
-    main: data.main ? unmarshalDatalabSparkMain(data.main) : undefined,
+    main: data.main ? unmarshalDatalabSparkMain(data.main) : null,
     name: data.name,
-    notebookMasterUrl: data.notebook_master_url,
-    notebookUrl: data.notebook_url,
+    notebookMasterUrl: data.notebook_master_url ?? null,
+    notebookUrl: data.notebook_url ?? null,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     region: data.region,
     sparkVersion: data.spark_version,
     status: data.status,
     tags: data.tags,
-    totalStorage: data.total_storage ? unmarshalVolume(data.total_storage) : undefined,
-    updatedAt: unmarshalDate(data.updated_at),
-    worker: data.worker ? unmarshalDatalabSparkWorker(data.worker) : undefined,
+    totalStorage: data.total_storage ? unmarshalVolume(data.total_storage) : null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    worker: data.worker ? unmarshalDatalabSparkWorker(data.worker) : null,
   } as Datalab
 }
 
@@ -102,10 +102,10 @@ const unmarshalClusterVersion = (data: unknown): ClusterVersion => {
 
   return {
     beta: data.beta,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     disabled: data.disabled,
-    endOfLife: unmarshalDate(data.end_of_life),
-    updatedAt: unmarshalDate(data.updated_at),
+    endOfLife: unmarshalDate(data.end_of_life) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     version: data.version,
   } as ClusterVersion
 }
@@ -159,7 +159,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
 
   return {
     beta: data.beta,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     description: data.description,
     disabled: data.disabled,
     gpus: data.gpus,
@@ -167,7 +167,7 @@ const unmarshalNodeType = (data: unknown): NodeType => {
     name: data.name,
     stockStatus: data.stock_status,
     targets: data.targets,
-    updatedAt: unmarshalDate(data.updated_at),
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     vcpus: data.vcpus,
     vramGigabytes: data.vram_gigabytes,
   } as NodeType
@@ -195,10 +195,10 @@ const unmarshalNotebookVersion = (data: unknown): NotebookVersion => {
 
   return {
     beta: data.beta,
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     disabled: data.disabled,
-    endOfLife: unmarshalDate(data.end_of_life),
-    updatedAt: unmarshalDate(data.updated_at),
+    endOfLife: unmarshalDate(data.end_of_life) ?? null,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
     version: data.version,
   } as NotebookVersion
 }
@@ -259,14 +259,14 @@ export const marshalCreateDatalabRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   has_notebook: request.hasNotebook,
-  main: ((request.main !== undefined) ?  marshalCreateDatalabRequestSparkMain(request.main, defaults): undefined),
+  main: ((request.main != null) ?  marshalCreateDatalabRequestSparkMain(request.main, defaults): undefined),
   name: request.name,
   private_network_id: request.privateNetworkId,
   project_id: request.projectId ?? defaults.defaultProjectId,
   spark_version: request.sparkVersion,
   tags: request.tags,
-  total_storage: ((request.totalStorage !== undefined) ?  marshalVolume(request.totalStorage, defaults): undefined),
-  worker: ((request.worker !== undefined) ?  marshalCreateDatalabRequestSparkWorker(request.worker, defaults): undefined),
+  total_storage: ((request.totalStorage != null) ?  marshalVolume(request.totalStorage, defaults): undefined),
+  worker: ((request.worker != null) ?  marshalCreateDatalabRequestSparkWorker(request.worker, defaults): undefined),
 })
 
 export const marshalUpdateDatalabRequest = (

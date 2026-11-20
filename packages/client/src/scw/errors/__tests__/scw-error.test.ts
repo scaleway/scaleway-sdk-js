@@ -62,4 +62,29 @@ describe('ScalewayError', () => {
       }).message,
     ).toBe(`http error 400: organization_id (project_id is already specified), project_id (value is required)`)
   })
+
+  it(`has undefined request context by default`, () => {
+    const error = new ScalewayError(400, {})
+
+    expect(error.url).toBeUndefined()
+    expect(error.method).toBeUndefined()
+    expect(error.requestId).toBeUndefined()
+    expect(error.requestHeaders).toBeUndefined()
+  })
+
+  it(`attaches the request context`, () => {
+    const error = new ScalewayError(400, {})
+    const requestHeaders = new Headers({ 'x-auth-token': 'secret' })
+    error.setRequestContext({
+      url: 'https://api.scaleway.com/unknown',
+      method: 'GET',
+      requestId: '42',
+      requestHeaders,
+    })
+
+    expect(error.url).toBe('https://api.scaleway.com/unknown')
+    expect(error.method).toBe('GET')
+    expect(error.requestId).toBe('42')
+    expect(error.requestHeaders).toBe(requestHeaders)
+  })
 })

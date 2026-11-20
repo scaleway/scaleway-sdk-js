@@ -59,14 +59,14 @@ export const ListServersRequest = {
 
 export const ListTemplateUserDataKeysRequest = {
   pageSize: {
-    greaterThanOrEqual: 1,
+    greaterThanOrEqual: 0,
     lessThanOrEqual: 100,
   },
 }
 
 export const ListTemplatesRequest = {
   pageSize: {
-    greaterThanOrEqual: 1,
+    greaterThanOrEqual: 0,
     lessThanOrEqual: 100,
   },
 }

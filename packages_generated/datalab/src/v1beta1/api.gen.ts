@@ -71,7 +71,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateDatalabRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/datalab/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/datalabs`,
         signal: options?.signal,
@@ -156,7 +156,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateDatalabRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/datalab/v1beta1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/datalabs/${validatePathParam('datalabId', request.datalabId)}`,
         signal: options?.signal,

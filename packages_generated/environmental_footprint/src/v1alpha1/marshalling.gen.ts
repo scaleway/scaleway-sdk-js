@@ -38,7 +38,7 @@ const unmarshalSkuImpact = (data: unknown): SkuImpact => {
     productCategory: data.product_category,
     serviceCategory: data.service_category,
     sku: data.sku,
-    totalSkuImpact: data.total_sku_impact ? unmarshalImpact(data.total_sku_impact) : undefined,
+    totalSkuImpact: data.total_sku_impact ? unmarshalImpact(data.total_sku_impact) : null,
   } as SkuImpact
 }
 
@@ -51,7 +51,7 @@ const unmarshalZoneImpact = (data: unknown): ZoneImpact => {
 
   return {
     skus: unmarshalArrayOfObject(data.skus, unmarshalSkuImpact),
-    totalZoneImpact: data.total_zone_impact ? unmarshalImpact(data.total_zone_impact) : undefined,
+    totalZoneImpact: data.total_zone_impact ? unmarshalImpact(data.total_zone_impact) : null,
     zone: data.zone,
   } as ZoneImpact
 }
@@ -66,7 +66,7 @@ const unmarshalRegionImpact = (data: unknown): RegionImpact => {
   return {
     region: data.region,
     skus: unmarshalArrayOfObject(data.skus, unmarshalSkuImpact),
-    totalRegionImpact: data.total_region_impact ? unmarshalImpact(data.total_region_impact) : undefined,
+    totalRegionImpact: data.total_region_impact ? unmarshalImpact(data.total_region_impact) : null,
     zones: unmarshalArrayOfObject(data.zones, unmarshalZoneImpact),
   } as RegionImpact
 }
@@ -81,7 +81,7 @@ const unmarshalProjectImpact = (data: unknown): ProjectImpact => {
   return {
     projectId: data.project_id,
     regions: unmarshalArrayOfObject(data.regions, unmarshalRegionImpact),
-    totalProjectImpact: data.total_project_impact ? unmarshalImpact(data.total_project_impact) : undefined,
+    totalProjectImpact: data.total_project_impact ? unmarshalImpact(data.total_project_impact) : null,
   } as ProjectImpact
 }
 
@@ -93,10 +93,10 @@ export const unmarshalImpactDataResponse = (data: unknown): ImpactDataResponse =
   }
 
   return {
-    endDate: unmarshalDate(data.end_date),
+    endDate: unmarshalDate(data.end_date) ?? null,
     projects: unmarshalArrayOfObject(data.projects, unmarshalProjectImpact),
-    startDate: unmarshalDate(data.start_date),
-    totalImpact: data.total_impact ? unmarshalImpact(data.total_impact) : undefined,
+    startDate: unmarshalDate(data.start_date) ?? null,
+    totalImpact: data.total_impact ? unmarshalImpact(data.total_impact) : null,
   } as ImpactDataResponse
 }
 

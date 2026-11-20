@@ -1,5 +1,1313 @@
 # Change Log
 
+## 2.34.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.7
+
+## 2.34.0
+
+### Minor Changes
+
+- feat(product_catalog): add support for input cached tokens for generative APIs models (#3119)
+
+- feat(product_catalog): add PublicCatalogProductPropertiesServerlessFunctions (#2971)
+
+- feat(pcu): add support for `PublicCatalogProductPropertiesInstanceLocalSSDSnapshot` and `PublicCatalogProductPropertiesInstanceLocalSSDStorage` (#3148)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- feat(product_catalog): restructure managed inference and deprecate instance_gpu_name (#2989)
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(product_catalog): remove duplicate interface (#2656)
+
+- chore(release): publish
+
+- feat(product_catalog): add serverless jobs products to catalog APIs (#3032)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add secret and key manager to GetCatalog API (#2650)
+
+- feat(product_catalog): add filter by API ID in the catalog API (#2889)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3206)
+
+- feat(product_catalog): remove "alliance" Object Storage traffic (#2689)
+
+- feat(product-catalog): add support for OpenSearch (#3085)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- feat(product_catalog): object storage to estimation api (#2316)
+
+- feat(baremetal): expose zone for offers and os (#2496)
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(release): publish
+
+- feat(product_catalog): handle new countable units in catalog APIs (#2383)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add generative apis to catalog api (#2593)
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(product_catalog): add Object Storage (#2655)
+
+- feat(product_catalog): add Load Balancer (#2858)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(product_catalog): add all serverless sub types in public and admin APIs (#3122)
+
+- fix(build): output (#2842)
+
+- feat(product_catalog): add block storage properties to admin and public api (#2225)
+
+- feat(product_catalog): add new boolean to ignore unsupported variants (#2253)
+
+- feat(product_catalog): add enum to filter by product type in the public catalog API (#2150)
+
+- chore(release): publish
+
+- chore(product_catalog): add file storage (#3231)
+
+- feat(product_catalog): add cloud-init badge in getCatalog (#2718)
+
+- feat: update generated APIs (#3650)
+
+- feat(product_catalog): add load balancer to public and admin catalog api (#2634)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat: update generated APIs (#3182)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore(release): publish
+
+- feat(product-catalog): add support for `apacheKafka` (#3071)
+
+- fix: change tabs into space (#2688)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(release): publish
+
+- fix(product_catalog): update environmental impact (#2032)
+
+- chore(release): publish
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- chore: format generated files (#2659)
+
+- feat(product_catalog): add support for `no_kvm` (#3015)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3533)
+
+- chore(product_catalog): get rid of input_duration (deprecated) (#3701)
+
+- feat(product_catalog): add RAM ECC type (#3097)
+
+- chore(release): publish
+
+- feat(product_catalog): add default reasoning value for generative models in our APIs (#3136)
+
+- chore: new formating (#2667)
+
+- feat(search): add relevance value to order_by enum (#3159)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(product_catalog): add new fields to generative apis (#3044)
+
+- feat(product_catalog): update product status list (#2626)
+
+- chore: reorganize import (#2520)
+
+- fix: format (#2683)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(product_catalog): add productCategory (#2350)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add managed mongoDB information to admin and public API (#2823)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- feat(product_catalog): add new product status end of sale (#2306)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- feat: add support for constants (#3286)
+
+- feat(product_catalog): add product type block storage (#2203)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore: fix formating (#2669)
+
+- feat(product_catalog): add serverless containers products to catalog APIs (#3017)
+
+- feat(sdk): generated packages (#2029)
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(release): publish
+
+- feat(product_catalog): add Managed Redis Database information to catalog APIs (#2657)
+
+- feat(product_catalog): add support for `ListPublicCatalogProductsRequestStatus` (#2572)
+
+- feat(product_catalog): add support for `ServerlessSqlDatabase` (#3266)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add offer ID in the public/admin catalog API (#2337)
+
+- chore(release): publish
+
+- feat(product_catalog): add reasoning and badges fields to generative_api (#2583)
+
+- feat(product_catalog): add new value for enum Generative API Task (#3705)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): remove deprecated fields (#2065)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(product_catalog): add shared CPU (#3106)
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- chore: remove blank lines (#2535)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- feat(product_catalog): add new instance properties + status (#2118)
+
+- feat(product_catalog): filter by locality (#2209)
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add managed inference to public catalog api (#2579)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(product_catalog): add support for `kafka` VolumeType, NodeType and StorageType (#3217)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add support for `second` as a countable unit (#2375)
+
+- feat(product_catalog): add embedding dimension ranges for Generative APIs products (#2621)
+
+- feat: publish packages as ESM only (#2624)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.6
+
+## 2.33.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.5
+
+## 2.33.0
+
+### Minor Changes
+
+- feat(product_catalog): add reasoning and badges fields to generative_api (#2583)
+
+- feat(product_catalog): add embedding dimension ranges for Generative APIs products (#2621)
+
+- feat(product_catalog): add new boolean to ignore unsupported variants (#2253)
+
+- feat(product_catalog): add support for input cached tokens for generative APIs models (#3119)
+
+- chore(release): publish
+
+- feat(product_catalog): add enum to filter by product type in the public catalog API (#2150)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- feat(product_catalog): add PublicCatalogProductPropertiesServerlessFunctions (#2971)
+
+- fix: format (#2683)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add support for `kafka` VolumeType, NodeType and StorageType (#3217)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- chore(release): publish
+
+- feat(product_catalog): add new instance properties + status (#2118)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- feat(product_catalog): add block storage properties to admin and public api (#2225)
+
+- chore(release): publish
+
+- chore(release): realign git versions with npm (#3356)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- fix(product_catalog): remove duplicate interface (#2656)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3533)
+
+- chore(release): publish
+
+- feat(product_catalog): restructure managed inference and deprecate instance_gpu_name (#2989)
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat(product_catalog): add serverless jobs products to catalog APIs (#3032)
+
+- chore(release): publish
+
+- feat(product_catalog): update product status list (#2626)
+
+- feat(baremetal): expose zone for offers and os (#2496)
+
+- feat(sdk): generated packages (#2029)
+
+- chore: reorganize import (#2520)
+
+- feat(product_catalog): add support for `no_kvm` (#3015)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(release): publish
+
+- feat(product_catalog): add productCategory (#2350)
+
+- chore(release): publish
+
+- feat(product_catalog): add cloud-init badge in getCatalog (#2718)
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- chore(deps): remove all unused deps (#3165)
+
+- fix: sdk client deps (#2056)
+
+- chore(release): publish
+
+- feat(product_catalog): add Managed Redis Database information to catalog APIs (#2657)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- feat(product_catalog): add support for `ListPublicCatalogProductsRequestStatus` (#2572)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- chore(release): publish
+
+- feat(product_catalog): add secret and key manager to GetCatalog API (#2650)
+
+- chore(release): publish
+
+- feat(product_catalog): filter by locality (#2209)
+
+- feat(product_catalog): add Load Balancer (#2858)
+
+- fix(build): output (#2842)
+
+- feat(product_catalog): add product type block storage (#2203)
+
+- chore(release): publish
+
+- feat(product-catalog): add support for `apacheKafka` (#3071)
+
+- feat(product_catalog): add new fields to generative apis (#3044)
+
+- feat(product_catalog): add generative apis to catalog api (#2593)
+
+- feat(product_catalog): add RAM ECC type (#3097)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- chore: remove blank lines (#2535)
+
+- chore: format generated files (#2652)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat: update generated APIs (#3206)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(typescript): upgrade version (#2916)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- feat(product_catalog): handle new countable units in catalog APIs (#2383)
+
+- feat(product_catalog): add load balancer to public and admin catalog api (#2634)
+
+- chore(release): publish
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- chore: fix formating (#2669)
+
+- feat(product_catalog): add filter by API ID in the catalog API (#2889)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(product_catalog): add Object Storage (#2655)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- feat(product_catalog): object storage to estimation api (#2316)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add managed inference to public catalog api (#2579)
+
+- chore: format generated files (#2659)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(packages): upgrade deps (#3157)
+
+- feat: update generated APIs (#3182)
+
+- feat(product_catalog): add serverless containers products to catalog APIs (#3017)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- feat(search): add relevance value to order_by enum (#3159)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product-catalog): add support for OpenSearch (#3085)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- fix(product_catalog): update environmental impact (#2032)
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(product_catalog): add support for `ServerlessSqlDatabase` (#3266)
+
+- feat(product_catalog): remove "alliance" Object Storage traffic (#2689)
+
+- feat(product_catalog): add offer ID in the public/admin catalog API (#2337)
+
+- chore(release): publish
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- feat: add support for constants (#3286)
+
+- chore(product_catalog): add file storage (#3231)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): unify tools (#2903)
+
+- feat(product_catalog): add all serverless sub types in public and admin APIs (#3122)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add managed mongoDB information to admin and public API (#2823)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(release): publish
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(product_catalog): add new product status end of sale (#2306)
+
+- feat(product_catalog): add shared CPU (#3106)
+
+- chore: new formating (#2667)
+
+- chore(product_catalog): get rid of input_duration (deprecated) (#3701)
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(pcu): add support for `PublicCatalogProductPropertiesInstanceLocalSSDSnapshot` and `PublicCatalogProductPropertiesInstanceLocalSSDStorage` (#3148)
+
+- chore(release): publish
+
+- feat(product_catalog): add default reasoning value for generative models in our APIs (#3136)
+
+- chore(release): publish
+
+- feat: enable formatting for generated files (#2690)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add support for `second` as a countable unit (#2375)
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- feat(product_catalog): remove deprecated fields (#2065)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.4
+
+## 2.32.0
+
+### Minor Changes
+
+- chore(deps): update vitest monorepo to v5 (#3673)
+
+- feat(product_catalog): add new product status end of sale (#2306)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add all serverless sub types in public and admin APIs (#3122)
+
+- feat: update generated APIs (#3533)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore(release): publish
+
+- feat(product_catalog): add product type block storage (#2203)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- feat(product_catalog): add productCategory (#2350)
+
+- chore: format generated files (#2659)
+
+- feat(search): add relevance value to order_by enum (#3159)
+
+- chore(release): publish
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(product_catalog): add generative apis to catalog api (#2593)
+
+- chore(release): publish
+
+- feat(generation): improve ts metadata (#3242)
+
+- feat(product_catalog): add support for `no_kvm` (#3015)
+
+- feat: enable formatting for generated files (#2690)
+
+- feat(product-catalog): add support for `apacheKafka` (#3071)
+
+- feat(product_catalog): handle new countable units in catalog APIs (#2383)
+
+- chore: remove post-generate updates (#3168)
+
+- chore(release): publish
+
+- feat(product_catalog): add support for input cached tokens for generative APIs models (#3119)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore(release): publish
+
+- feat(product_catalog): add support for `ServerlessSqlDatabase` (#3266)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat(product_catalog): add support for `second` as a countable unit (#2375)
+
+- chore(release): publish
+
+- feat(pcu): add support for `PublicCatalogProductPropertiesInstanceLocalSSDSnapshot` and `PublicCatalogProductPropertiesInstanceLocalSSDStorage` (#3148)
+
+- chore(release): realign git versions with npm (#3356)
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore(release): publish
+
+- chore(engines): remove node engines (#3336)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat: update generated APIs (#3650)
+
+- chore(release): publish
+
+- feat(product_catalog): add Load Balancer (#2858)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- fix(product_catalog): remove duplicate interface (#2656)
+
+- feat(product_catalog): add new fields to generative apis (#3044)
+
+- fix: sdk client deps (#2056)
+
+- chore: format generated files (#2652)
+
+- feat: update generated APIs (#3182)
+
+- chore: fix formating (#2669)
+
+- fix(product_catalog): update environmental impact (#2032)
+
+- feat(product_catalog): add support for `kafka` VolumeType, NodeType and StorageType (#3217)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat(product_catalog): add shared CPU (#3106)
+
+- feat(product_catalog): add offer ID in the public/admin catalog API (#2337)
+
+- chore(release): publish
+
+- feat(product_catalog): remove deprecated fields (#2065)
+
+- feat(product_catalog): add new boolean to ignore unsupported variants (#2253)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- chore(release): publish
+
+- feat(product_catalog): add default reasoning value for generative models in our APIs (#3136)
+
+- chore: remove blank lines (#2535)
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- feat: update generated APIs (#3206)
+
+- feat(product_catalog): add RAM ECC type (#3097)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore: reorganize import (#2520)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): remove "alliance" Object Storage traffic (#2689)
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- feat(product_catalog): add Object Storage (#2655)
+
+- chore(release): publish
+
+- feat(product_catalog): update product status list (#2626)
+
+- chore(release): publish
+
+- feat(baremetal): expose zone for offers and os (#2496)
+
+- feat: publish packages as ESM only (#2624)
+
+- feat(product_catalog): object storage to estimation api (#2316)
+
+- chore(release): publish
+
+- feat(product_catalog): add reasoning and badges fields to generative_api (#2583)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore(release): publish
+
+- feat(product_catalog): add enum to filter by product type in the public catalog API (#2150)
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add block storage properties to admin and public api (#2225)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- feat(product_catalog): add serverless jobs products to catalog APIs (#3032)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add serverless containers products to catalog APIs (#3017)
+
+- feat(product_catalog): add Managed Redis Database information to catalog APIs (#2657)
+
+- chore(release): publish
+
+- feat(product_catalog): add new instance properties + status (#2118)
+
+- chore(release): publish
+
+- chore(typescript): upgrade version (#2916)
+
+- chore(release): publish
+
+- chore: add cursor pagination metadata support (#2879)
+
+- feat: add extension .js for nodenext (#2492)
+
+- chore(release): publish
+
+- chore(product_catalog): add file storage (#3231)
+
+- chore: new formating (#2667)
+
+- feat(product_catalog): add embedding dimension ranges for Generative APIs products (#2621)
+
+- chore(release): publish
+
+- feat(product_catalog): add managed mongoDB information to admin and public API (#2823)
+
+- chore(release): publish
+
+- chore: sync generated files after build (#2862)
+
+- chore(release): publish
+
+- feat(product_catalog): add PublicCatalogProductPropertiesServerlessFunctions (#2971)
+
+- feat: add support for constants (#3286)
+
+- feat(sdk): unify tools (#2903)
+
+- feat(sdk): generated packages (#2029)
+
+- feat(product_catalog): add filter by API ID in the catalog API (#2889)
+
+- chore(release): publish
+
+- feat(product_catalog): add cloud-init badge in getCatalog (#2718)
+
+- feat(product_catalog): add load balancer to public and admin catalog api (#2634)
+
+- feat(product_catalog): add secret and key manager to GetCatalog API (#2650)
+
+- feat(product-catalog): add support for OpenSearch (#3085)
+
+- feat(product_catalog): filter by locality (#2209)
+
+- chore(release): publish
+
+- fix: change tabs into space (#2688)
+
+- feat(product_catalog): add managed inference to public catalog api (#2579)
+
+- chore(release): publish
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: format (#2683)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(product_catalog): restructure managed inference and deprecate instance_gpu_name (#2989)
+
+- feat(product_catalog): add support for `ListPublicCatalogProductsRequestStatus` (#2572)
+
+## 2.31.1
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.3
+
+## 2.31.0
+
+### Minor Changes
+
+- chore: new formating (#2667)
+
+- chore: remove post-generate updates (#3168)
+
+- feat(product_catalog): add embedding dimension ranges for Generative APIs products (#2621)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: sdk client deps (#2056)
+
+- feat(product_catalog): add support for `no_kvm` (#3015)
+
+- chore: align packages_generated scaffolding with generate-packages template and oxfmt (#2999)
+
+- build: migrate from vite to tsdown for library builds (#3616)
+
+- feat(product_catalog): add managed inference to public catalog api (#2579)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add shared CPU (#3106)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.1 (#2094)
+
+- feat(product_catalog): add Load Balancer (#2858)
+
+- feat: publish packages as ESM only (#2624)
+
+- chore(deps): update dependency @scaleway/random-name to v5.1.2 (#2297)
+
+- chore: fix formating (#2669)
+
+- feat(cli): add new cli to manage sdk monorepo (#3186)
+
+- chore(deps): update node.js to >=20.20.2 (#2960)
+
+- feat(product_catalog): update product status list (#2626)
+
+- feat(sdk-react): add react sdk (#2794)
+
+- feat(product_catalog): add cloud-init badge in getCatalog (#2718)
+
+- feat(product_catalog): object storage to estimation api (#2316)
+
+- feat(product_catalog): add product type block storage (#2203)
+
+- chore(release): publish
+
+- fix(build): output (#2842)
+
+- feat(product_catalog): filter by locality (#2209)
+
+- chore(engines): remove node engines (#3336)
+
+- feat(search): add relevance value to order_by enum (#3159)
+
+- chore(release): publish
+
+- feat(product_catalog): add generative apis to catalog api (#2593)
+
+- feat: update generated APIs (#3650)
+
+- feat(product_catalog): add Managed Redis Database information to catalog APIs (#2657)
+
+- chore(release): publish
+
+- feat(product_catalog): add new fields to generative apis (#3044)
+
+- feat(product_catalog): add default reasoning value for generative models in our APIs (#3136)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix(sdk): missing git url inside package.json (#3179)
+
+- feat(product_catalog): add PublicCatalogProductPropertiesServerlessFunctions (#2971)
+
+- feat(product_catalog): add all serverless sub types in public and admin APIs (#3122)
+
+- feat(product_catalog): remove "alliance" Object Storage traffic (#2689)
+
+- feat(product_catalog): add new boolean to ignore unsupported variants (#2253)
+
+- fix(product_catalog): update environmental impact (#2032)
+
+- chore(typescript): upgrade version (#2916)
+
+- feat(product_catalog): add offer ID in the public/admin catalog API (#2337)
+
+- feat(product_catalog): add filter by API ID in the catalog API (#2889)
+
+- chore(release): publish
+
+- chore(deps): update node.js to >=20.19.4 (#2280)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat: update generated APIs (#3600)
+
+- chore(release): publish
+
+- feat(product_catalog): add enum to filter by product type in the public catalog API (#2150)
+
+- chore(generate-api): use metadata instead of ts-morph (#2901)
+
+- chore(packages): add licence field, use exports field everywhere (#2147)
+
+- chore(release): publish
+
+- feat(product_catalog): add RAM ECC type (#3097)
+
+- chore: format generated files (#2652)
+
+- chore(release): publish
+
+- feat(product-catalog): add support for `apacheKafka` (#3071)
+
+- fix(product_catalog): remove duplicate interface (#2656)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: format generated files (#2659)
+
+- feat(product_catalog): add support for input cached tokens for generative APIs models (#3119)
+
+- chore(deps): update dependency vite to v8.2.0 (#3205)
+
+- feat(product_catalog): add serverless jobs products to catalog APIs (#3032)
+
+- feat(product_catalog): add new product status end of sale (#2306)
+
+- chore(release): publish
+
+- feat(product_catalog): restructure managed inference and deprecate instance_gpu_name (#2989)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): handle new countable units in catalog APIs (#2383)
+
+- chore(release): realign git versions with npm (#3356)
+
+- feat(product_catalog): add reasoning and badges fields to generative_api (#2583)
+
+- chore: reorganize import (#2520)
+
+- fix(bundled): remove bundled as it's buggy with deps inside pack with… (#2096)
+
+- chore: sync generated files after build (#2862)
+
+- feat(product_catalog): add load balancer to public and admin catalog api (#2634)
+
+- chore(release): publish
+
+- feat(chore): add automatic README generation for npm packages (#2541)
+
+- fix: change tabs into space (#2688)
+
+- chore: fix metadata.gen.ts for returnTypeNamespace (#3360)
+
+- chore(release): publish
+
+- feat(product_catalog): add support for `kafka` VolumeType, NodeType and StorageType (#3217)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(deps): remove all unused deps (#3165)
+
+- chore(deps): update pnpm to v10.33.0 (#2905)
+
+- feat: enable formatting for generated files (#2690)
+
+- feat: update generated APIs (#3206)
+
+- feat(product-catalog): add support for OpenSearch (#3085)
+
+- feat(product_catalog): add managed mongoDB information to admin and public API (#2823)
+
+- feat(generation): improve ts metadata (#3242)
+
+- fix: improve config formatting and exclude sdk index (#2675)
+
+- feat(product_catalog): add block storage properties to admin and public api (#2225)
+
+- chore(release): publish
+
+- feat(product_catalog): add serverless containers products to catalog APIs (#3017)
+
+- chore(release): publish
+
+- feat(pcu): add support for `PublicCatalogProductPropertiesInstanceLocalSSDSnapshot` and `PublicCatalogProductPropertiesInstanceLocalSSDStorage` (#3148)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add support for `ListPublicCatalogProductsRequestStatus` (#2572)
+
+- feat(product_catalog): remove deprecated fields (#2065)
+
+- feat(partner): remove siren_number from CreateOrganization and Organization (#3530)
+
+- chore(release): publish
+
+- chore(deps): update dependency prettier to v3.8.3 (#2907)
+
+- feat(product_catalog): add new instance properties + status (#2118)
+
+- chore(release): publish
+
+- chore(product_catalog): add file storage (#3231)
+
+- feat(sdk): generated packages (#2029)
+
+- chore(lint): lint tsconfigs (#2968)
+
+- chore(packages): upgrade deps (#3157)
+
+- chore: remove blank lines (#2535)
+
+- feat(product_catalog): add support for `second` as a countable unit (#2375)
+
+- feat(sdk): unify tools (#2903)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- fix: format (#2683)
+
+- feat(sdk): add metadata of the package (#2902)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore(release): publish
+
+- feat(product_catalog): add secret and key manager to GetCatalog API (#2650)
+
+- chore(release): publish
+
+- chore(release): publish
+
+- chore: add extension .js for nodenext in generated files (#2472)
+
+- feat: update generated APIs (#3533)
+
+- chore(release): publish
+
+- feat(baremetal): expose zone for offers and os (#2496)
+
+- feat: update generated APIs (#3182)
+
+- feat(product_catalog): add productCategory (#2350)
+
+- chore: apply Biome formatting to generated files (#2757)
+
+- chore: add cursor pagination metadata support (#2879)
+
+- feat(product_catalog): add Object Storage (#2655)
+
+- chore(deps): update node.js to >=20.19.6 (#2604)
+
+- chore(release): publish
+
+- feat: add extension .js for nodenext (#2492)
+
+- feat: add support for constants (#3286)
+
+- feat(product_catalog): add support for `ServerlessSqlDatabase` (#3266)
+
+### Patch Changes
+
+- Updated dependencies:
+  - @scaleway/sdk-std@2.9.2
+
 ## 2.30.0
 
 ### Minor Changes

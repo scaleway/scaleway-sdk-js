@@ -4,7 +4,6 @@ import type { Accountv3 } from '@scaleway/sdk-account'
 import type { Annotationsv1 } from '@scaleway/sdk-annotations'
 import type { Applesiliconv1alpha1 } from '@scaleway/sdk-applesilicon'
 import type { AuditTrailv1alpha1 } from '@scaleway/sdk-audit-trail'
-import type { Autoscalingv1alpha1 } from '@scaleway/sdk-autoscaling'
 import type { Autoscalingv1alpha2 } from '@scaleway/sdk-autoscaling'
 import type { Baremetalv1 } from '@scaleway/sdk-baremetal'
 import type { Baremetalv3 } from '@scaleway/sdk-baremetal'
@@ -26,7 +25,6 @@ import type { Flexibleipv1alpha1 } from '@scaleway/sdk-flexibleip'
 import type { Functionv1beta1 } from '@scaleway/sdk-function'
 import type { Iamv1alpha1 } from '@scaleway/sdk-iam'
 import type { Inferencev1 } from '@scaleway/sdk-inference'
-import type { Inferencev1beta1 } from '@scaleway/sdk-inference'
 import type { Instancev1 } from '@scaleway/sdk-instance'
 import type { Instancev2alpha1 } from '@scaleway/sdk-instance'
 import type { Interlinkv1beta1 } from '@scaleway/sdk-interlink'
@@ -65,7 +63,6 @@ export type APISdk = {
   applesiliconv1alpha1: Applesiliconv1alpha1.API
   applesiliconv1alpha1PrivateNetwork: Applesiliconv1alpha1.PrivateNetworkAPI
   auditTrailv1alpha1: AuditTrailv1alpha1.API
-  autoscalingv1alpha1: Autoscalingv1alpha1.API
   autoscalingv1alpha2: Autoscalingv1alpha2.API
   baremetalv1: Baremetalv1.API
   baremetalv1PrivateNetwork: Baremetalv1.PrivateNetworkAPI
@@ -99,7 +96,6 @@ export type APISdk = {
   functionv1beta1: Functionv1beta1.API
   iamv1alpha1: Iamv1alpha1.API
   inferencev1: Inferencev1.API
-  inferencev1beta1: Inferencev1beta1.API
   instancev1: Instancev1.API
   instancev2alpha1: Instancev2alpha1.API
   instancev2alpha1Volume: Instancev2alpha1.VolumeAPI

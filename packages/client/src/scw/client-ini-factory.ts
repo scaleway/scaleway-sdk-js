@@ -3,7 +3,7 @@ import { resolveRetryOptions } from '../internal/async/http-retry.js'
 import type { NetworkInterceptors } from '../index.js'
 import { authenticateWithSecrets } from './auth.js'
 import type { Profile } from './client-ini-profile.js'
-import { hasAuthenticationSecrets } from './client-ini-profile.js'
+import { hasAuthenticationSecrets, hasDefaultRegion, hasDefaultZone } from './client-ini-profile.js'
 import type { Settings } from './client-settings.js'
 
 /**
@@ -36,10 +36,10 @@ export const withProfile =
     if (typeof profile.defaultProjectId === 'string' && profile.defaultProjectId !== '') {
       newSettings.defaultProjectId = profile.defaultProjectId
     }
-    if (typeof profile.defaultRegion === 'string' && profile.defaultRegion !== '') {
+    if (hasDefaultRegion(profile)) {
       newSettings.defaultRegion = profile.defaultRegion
     }
-    if (typeof profile.defaultZone === 'string' && profile.defaultZone !== '') {
+    if (hasDefaultZone(profile)) {
       newSettings.defaultZone = profile.defaultZone
     }
     if (hasAuthenticationSecrets(profile)) {

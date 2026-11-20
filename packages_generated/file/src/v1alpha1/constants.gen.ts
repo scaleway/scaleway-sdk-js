@@ -4,6 +4,8 @@ import type {
   AttachmentResourceType,
   FileSystemStatus,
   ListFileSystemsRequestOrderBy,
+  ListSnapshotsRequestOrderBy,
+  SnapshotStatus,
 } from './types.gen.js'
 
 
@@ -20,6 +22,7 @@ export const FILE_SYSTEM_STATUSES: FileSystemStatus[] = [
   'error',
   'creating',
   'updating',
+  'snapshotting',
 ]
 
 /** Lists all values of the enum {@link ListFileSystemsRequestOrderBy}. */
@@ -28,5 +31,25 @@ export const LIST_FILE_SYSTEMS_REQUEST_ORDER_BIES: ListFileSystemsRequestOrderBy
   'created_at_desc',
   'name_asc',
   'name_desc',
+]
+
+/** Lists all values of the enum {@link ListSnapshotsRequestOrderBy}. */
+export const LIST_SNAPSHOTS_REQUEST_ORDER_BIES: ListSnapshotsRequestOrderBy[] = [
+  'created_at_asc',
+  'created_at_desc',
+  'name_asc',
+  'name_desc',
+]
+
+/** Lists all values of the enum {@link SnapshotStatus}. */
+export const SNAPSHOT_STATUSES: SnapshotStatus[] = [
+  'unknown_status',
+  'available',
+  'error',
+  'creating',
+  'deleting',
+  'deleted',
+  'locked',
+  'cloning',
 ]
 

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import { AbortError } from '../../../scw/errors/abort-error.js'
 import { ScalewayError } from '../../../scw/errors/scw-error.js'
 import { TooManyRequestsError } from '../../../scw/errors/standard/too-many-requests-error.js'
-import { AbortError } from '../../../scw/fetch/abort-error.js'
 import { InvalidResponseError } from '../../../scw/fetch/invalid-response-error.js'
 import {
   assertValidRetryOptions,

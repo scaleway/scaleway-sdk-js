@@ -37,7 +37,7 @@ export interface ServerPrivateNetwork {
   /**
    * VLAN UUID associated with the Private Network.
    */
-  vlan?: number
+  vlan?: number | null
   /**
    * Configuration status of the Private Network.
    */
@@ -45,11 +45,11 @@ export interface ServerPrivateNetwork {
   /**
    * Private Network creation date.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Date the Private Network was last modified.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * IPAM IP IDs of the server, if it has any.
    */
@@ -67,7 +67,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the server.
    */
@@ -79,7 +79,7 @@ export type PrivateNetworkApiAddServerPrivateNetworkRequest = {
   /**
    * IPAM IDs of an IPs to attach to the server.
    */
-  ipamIpIds?: string[]
+  ipamIpIds?: string[] | null
 }
 
 
@@ -87,7 +87,7 @@ export type PrivateNetworkApiDeleteServerPrivateNetworkRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the server.
    */
@@ -103,39 +103,39 @@ export type PrivateNetworkApiListServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * Sort order for the returned Private Networks.
    */
-  orderBy?: ListServerPrivateNetworksRequestOrderBy
+  orderBy?: ListServerPrivateNetworksRequestOrderBy | null
   /**
    * Page number for the returned Private Networks.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of Private Networks per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Filter Private Networks by server UUID.
    */
-  serverId?: string
+  serverId?: string | null
   /**
    * Filter Private Networks by Private Network UUID.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
   /**
    * Filter Private Networks by organization UUID.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Filter Private Networks by project UUID.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Filter Private Networks by IPAM IP UUIDs.
    */
-  ipamIpIds?: string[]
+  ipamIpIds?: string[] | null
 }
 
 
@@ -143,7 +143,7 @@ export type PrivateNetworkApiSetServerPrivateNetworksRequest = {
   /**
    * Zone to target. If none is passed will use default zone from the config.
    */
-  zone?: ScwZone
+  zone?: ScwZone | null
   /**
    * UUID of the server.
    */

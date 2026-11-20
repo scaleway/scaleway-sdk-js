@@ -1,6 +1,6 @@
+import { isAbortError } from '../../scw/errors/abort-error.js'
 import { ScalewayError } from '../../scw/errors/scw-error.js'
 import { TooManyRequestsError } from '../../scw/errors/standard/too-many-requests-error.js'
-import { isAbortError } from '../../scw/fetch/abort-error.js'
 import { InvalidResponseError } from '../../scw/fetch/invalid-response-error.js'
 import type { ScwRequest } from '../../scw/fetch/types.js'
 import { createExponentialBackoffStrategy } from './interval-retrier.js'

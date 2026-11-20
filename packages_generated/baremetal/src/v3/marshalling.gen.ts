@@ -19,15 +19,15 @@ export const unmarshalServerPrivateNetwork = (data: unknown): ServerPrivateNetwo
   }
 
   return {
-    createdAt: unmarshalDate(data.created_at),
+    createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     ipamIpIds: data.ipam_ip_ids,
     privateNetworkId: data.private_network_id,
     projectId: data.project_id,
     serverId: data.server_id,
     status: data.status,
-    updatedAt: unmarshalDate(data.updated_at),
-    vlan: data.vlan,
+    updatedAt: unmarshalDate(data.updated_at) ?? null,
+    vlan: data.vlan ?? null,
   } as ServerPrivateNetwork
 }
 

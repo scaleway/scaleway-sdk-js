@@ -142,13 +142,13 @@ export interface ContainerHealthCheckSpec {
    *
    * One-of ('probe'): at most one of 'http', 'tcp' could be set.
    */
-  http?: ContainerHealthCheckSpecHTTPProbe
+  http?: ContainerHealthCheckSpecHTTPProbe | null
   /**
    * TCP health check configuration.
    *
    * One-of ('probe'): at most one of 'http', 'tcp' could be set.
    */
-  tcp?: ContainerHealthCheckSpecTCPProbe
+  tcp?: ContainerHealthCheckSpecTCPProbe | null
   /**
    * During a deployment, if a newly created container fails to pass the health check, the deployment is aborted. 
 As a result, lowering this value can help to reduce the time it takes to detect a failed deployment.
@@ -157,7 +157,7 @@ As a result, lowering this value can help to reduce the time it takes to detect 
   /**
    * Period between health checks.
    */
-  interval?: string
+  interval?: string | null
 }
 
 
@@ -166,17 +166,17 @@ export interface ContainerScalingOption {
    *
    * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold', 'cpuUsageThreshold', 'memoryUsageThreshold' could be set.
    */
-  concurrentRequestsThreshold?: number
+  concurrentRequestsThreshold?: number | null
   /**
    *
    * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold', 'cpuUsageThreshold', 'memoryUsageThreshold' could be set.
    */
-  cpuUsageThreshold?: number
+  cpuUsageThreshold?: number | null
   /**
    *
    * One-of ('scalingRule'): at most one of 'concurrentRequestsThreshold', 'cpuUsageThreshold', 'memoryUsageThreshold' could be set.
    */
-  memoryUsageThreshold?: number
+  memoryUsageThreshold?: number | null
 }
 
 
@@ -206,7 +206,7 @@ export interface TriggerMnqNatsClientConfig {
   /**
    * ID of the Messaging and Queuing credentials used to subscribe to the NATS subject.
    */
-  mnqCredentialId?: string
+  mnqCredentialId?: string | null
 }
 
 
@@ -226,7 +226,7 @@ export interface TriggerMnqSqsClientConfig {
   /**
    * ID of the Messaging and Queuing credentials used to read from the SQS queue.
    */
-  mnqCredentialId?: string
+  mnqCredentialId?: string | null
 }
 
 
@@ -240,7 +240,7 @@ export interface TriggerSqsClientConfig {
 
 export interface Secret {
   key: string
-  value?: string
+  value?: string | null
 }
 
 
@@ -328,11 +328,11 @@ export interface Container {
   /**
    * Processing time limit for the container.
    */
-  timeout?: string
+  timeout?: string | null
   /**
    * Last error message of the container.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Privacy setting of the container.
    */
@@ -340,7 +340,7 @@ export interface Container {
   /**
    * Description of the container.
    */
-  description?: string
+  description?: string | null
   /**
    * Name of the registry image (e.g. "rg.fr-par.scw.cloud/something/image:tag").
    */
@@ -385,23 +385,23 @@ export interface Container {
 - cpu_usage_threshold: Scale depending on the CPU usage of a container instance.
 - memory_usage_threshold: Scale depending on the memory usage of a container instance.
    */
-  scalingOption?: ContainerScalingOption
+  scalingOption?: ContainerScalingOption | null
   /**
    * Health check configuration of the container.
    */
-  healthCheck?: ContainerHealthCheckSpec
+  healthCheck?: ContainerHealthCheckSpec | null
   /**
    * Creation date of the container.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the container.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * Last date when the container was successfully deployed and set to ready.
    */
-  readyAt?: Date
+  readyAt?: Date | null
   /**
    * Region in which the container will be deployed.
    */
@@ -413,7 +413,7 @@ export interface Container {
   /**
    * When connected to a Private Network, the container can access other Scaleway resources in this Private Network.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
   /**
    * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
    */
@@ -441,7 +441,7 @@ export interface Cron {
   /**
    * Arguments to pass with the cron.
    */
-  args?: Record<string, unknown>
+  args?: Record<string, unknown> | null
   /**
    * Status of the cron.
    */
@@ -477,7 +477,7 @@ export interface Domain {
   /**
    * Last error message of the domain.
    */
-  errorMessage?: string
+  errorMessage?: string | null
 }
 
 
@@ -513,7 +513,7 @@ export interface Namespace {
   /**
    * Last error message of the namespace.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Registry endpoint of the namespace.
    */
@@ -521,7 +521,7 @@ export interface Namespace {
   /**
    * Description of the endpoint.
    */
-  description?: string
+  description?: string | null
   /**
    * Secret environment variables of the namespace.
    */
@@ -537,15 +537,15 @@ export interface Namespace {
   /**
    * Creation date of the namespace.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last update date of the namespace.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * @deprecated The value of this field doesn't matter anymore, and will be removed in a near future.
    */
-  vpcIntegrationActivated?: boolean
+  vpcIntegrationActivated?: boolean | null
 }
 
 
@@ -563,17 +563,17 @@ export interface Token {
    *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
    */
-  containerId?: string
+  containerId?: string | null
   /**
    * UUID of the namespace the token belongs to.
    *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
    */
-  namespaceId?: string
+  namespaceId?: string | null
   /**
    * @deprecated Public key of the token.
    */
-  publicKey?: string
+  publicKey?: string | null
   /**
    * Status of the token.
    */
@@ -581,11 +581,11 @@ export interface Token {
   /**
    * Description of the token.
    */
-  description?: string
+  description?: string | null
   /**
    * Expiry date of the token.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -617,31 +617,31 @@ export interface Trigger {
   /**
    * Error message of the trigger.
    */
-  errorMessage?: string
+  errorMessage?: string | null
   /**
    * Configuration for a Scaleway Messaging and Queuing SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  scwSqsConfig?: TriggerMnqSqsClientConfig
+  scwSqsConfig?: TriggerMnqSqsClientConfig | null
   /**
    * Configuration for a Scaleway Messaging and Queuing NATS subject.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  scwNatsConfig?: TriggerMnqNatsClientConfig
+  scwNatsConfig?: TriggerMnqNatsClientConfig | null
   /**
    * Configuration for an AWS SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  sqsConfig?: TriggerSqsClientConfig
+  sqsConfig?: TriggerSqsClientConfig | null
 }
 
 
 export interface UpdateTriggerRequestSqsClientConfig {
-  accessKey?: string
-  secretKey?: string
+  accessKey?: string | null
+  secretKey?: string | null
 }
 
 
@@ -649,7 +649,7 @@ export type CreateContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespace the container belongs to.
    */
@@ -661,96 +661,96 @@ export type CreateContainerRequest = {
   /**
    * Environment variables of the container.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Minimum number of instances to scale the container to.
    */
-  minScale?: number
+  minScale?: number | null
   /**
    * Maximum number of instances to scale the container to.
    */
-  maxScale?: number
+  maxScale?: number | null
   /**
    * Memory limit of the container in MB.
    */
-  memoryLimit?: number
+  memoryLimit?: number | null
   /**
    * CPU limit of the container in mvCPU.
    */
-  cpuLimit?: number
+  cpuLimit?: number | null
   /**
    * Processing time limit for the container.
    */
-  timeout?: string
+  timeout?: string | null
   /**
    * Privacy setting of the container.
    */
-  privacy?: ContainerPrivacy
+  privacy?: ContainerPrivacy | null
   /**
    * Description of the container.
    */
-  description?: string
+  description?: string | null
   /**
    * Name of the registry image (e.g. "rg.fr-par.scw.cloud/something/image:tag").
    */
-  registryImage?: string
+  registryImage?: string | null
   /**
    * @deprecated Number of maximum concurrent executions of the container.
    */
-  maxConcurrency?: number
+  maxConcurrency?: number | null
   /**
    * Protocol the container uses.
    */
-  protocol?: ContainerProtocol
+  protocol?: ContainerProtocol | null
   /**
    * Port the container listens on.
    */
-  port?: number
+  port?: number | null
   /**
    * Secret environment variables of the container.
    */
-  secretEnvironmentVariables?: Secret[]
+  secretEnvironmentVariables?: Secret[] | null
   /**
    * Possible values:
  - redirected: Responds to HTTP request with a 301 redirect to ask the clients to use HTTPS.
  - enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: ContainerHttpOption
+  httpOption?: ContainerHttpOption | null
   /**
    * Execution environment of the container.
    */
-  sandbox?: ContainerSandbox
+  sandbox?: ContainerSandbox | null
   /**
    * Local storage limit of the container (in MB).
    */
-  localStorageLimit?: number
+  localStorageLimit?: number | null
   /**
    * Possible values:
 - concurrent_requests_threshold: Scale depending on the number of concurrent requests being processed per container instance.
 - cpu_usage_threshold: Scale depending on the CPU usage of a container instance.
 - memory_usage_threshold: Scale depending on the memory usage of a container instance.
    */
-  scalingOption?: ContainerScalingOption
+  scalingOption?: ContainerScalingOption | null
   /**
    * Health check configuration of the container.
    */
-  healthCheck?: ContainerHealthCheckSpec
+  healthCheck?: ContainerHealthCheckSpec | null
   /**
    * Tags of the Serverless Container.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * When connected to a Private Network, the container can access other Scaleway resources in this Private Network.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
   /**
    * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
    */
-  command?: string[]
+  command?: string[] | null
   /**
    * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
    */
-  args?: string[]
+  args?: string[] | null
 }
 
 
@@ -758,7 +758,7 @@ export type CreateCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the container to invoke by the cron.
    */
@@ -770,11 +770,11 @@ export type CreateCronRequest = {
   /**
    * Arguments to pass with the cron.
    */
-  args?: Record<string, unknown>
+  args?: Record<string, unknown> | null
   /**
    * Name of the cron to create.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -782,7 +782,7 @@ export type CreateDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Domain to assign.
    */
@@ -798,35 +798,35 @@ export type CreateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the namespace to create.
    */
-  name?: string
+  name?: string | null
   /**
    * Environment variables of the namespace to create.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * UUID of the Project in which the namespace will be created.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Description of the namespace to create.
    */
-  description?: string
+  description?: string | null
   /**
    * Secret environment variables of the namespace to create.
    */
-  secretEnvironmentVariables?: Secret[]
+  secretEnvironmentVariables?: Secret[] | null
   /**
    * Tags of the Serverless Container Namespace.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * @deprecated Setting this field to true doesn't matter anymore. It will be removed in a near future.
    */
-  activateVpcIntegration?: boolean
+  activateVpcIntegration?: boolean | null
 }
 
 
@@ -834,27 +834,27 @@ export type CreateTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the container to create the token for.
    *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
    */
-  containerId?: string
+  containerId?: string | null
   /**
    * UUID of the namespace to create the token for.
    *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId' could be set.
    */
-  namespaceId?: string
+  namespaceId?: string | null
   /**
    * Description of the token.
    */
-  description?: string
+  description?: string | null
   /**
    * Expiry date of the token.
    */
-  expiresAt?: Date
+  expiresAt?: Date | null
 }
 
 
@@ -862,7 +862,7 @@ export type CreateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Name of the trigger.
    */
@@ -874,25 +874,25 @@ export type CreateTriggerRequest = {
   /**
    * Description of the trigger.
    */
-  description?: string
+  description?: string | null
   /**
    * Configuration for a Scaleway Messaging and Queuing SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig
+  scwSqsConfig?: CreateTriggerRequestMnqSqsClientConfig | null
   /**
    * Configuration for a Scaleway Messaging and Queuing NATS subject.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig
+  scwNatsConfig?: CreateTriggerRequestMnqNatsClientConfig | null
   /**
    * Configuration for an AWS SQS queue.
    *
    * One-of ('config'): at most one of 'scwSqsConfig', 'scwNatsConfig', 'sqsConfig' could be set.
    */
-  sqsConfig?: CreateTriggerRequestSqsClientConfig
+  sqsConfig?: CreateTriggerRequestSqsClientConfig | null
 }
 
 
@@ -900,7 +900,7 @@ export type DeleteContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the container to delete.
    */
@@ -912,7 +912,7 @@ export type DeleteCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the cron to delete.
    */
@@ -924,7 +924,7 @@ export type DeleteDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the domain to delete.
    */
@@ -936,7 +936,7 @@ export type DeleteNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespace to delete.
    */
@@ -948,7 +948,7 @@ export type DeleteTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the token to delete.
    */
@@ -960,7 +960,7 @@ export type DeleteTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the trigger to delete.
    */
@@ -972,7 +972,7 @@ export type DeployContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the container to deploy.
    */
@@ -984,7 +984,7 @@ export type GetContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the container to get.
    */
@@ -996,7 +996,7 @@ export type GetCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the cron to get.
    */
@@ -1008,7 +1008,7 @@ export type GetDomainRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the domain to get.
    */
@@ -1020,7 +1020,7 @@ export type GetNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespace to get.
    */
@@ -1032,7 +1032,7 @@ export type GetTokenRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the token to get.
    */
@@ -1044,7 +1044,7 @@ export type GetTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the trigger to get.
    */
@@ -1056,19 +1056,19 @@ export type ListContainersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of containers per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the containers.
    */
-  orderBy?: ListContainersRequestOrderBy
+  orderBy?: ListContainersRequestOrderBy | null
   /**
    * UUID of the namespace the container belongs to.
    */
@@ -1076,15 +1076,15 @@ export type ListContainersRequest = {
   /**
    * Name of the container.
    */
-  name?: string
+  name?: string | null
   /**
    * UUID of the Organization the container belongs to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * UUID of the Project the container belongs to.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1104,19 +1104,19 @@ export type ListCronsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of crons per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the crons.
    */
-  orderBy?: ListCronsRequestOrderBy
+  orderBy?: ListCronsRequestOrderBy | null
   /**
    * UUID of the container invoked by the cron.
    */
@@ -1140,19 +1140,19 @@ export type ListDomainsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of domains per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the domains.
    */
-  orderBy?: ListDomainsRequestOrderBy
+  orderBy?: ListDomainsRequestOrderBy | null
   /**
    * UUID of the container the domain belongs to.
    */
@@ -1176,31 +1176,31 @@ export type ListNamespacesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of namespaces per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the namespaces.
    */
-  orderBy?: ListNamespacesRequestOrderBy
+  orderBy?: ListNamespacesRequestOrderBy | null
   /**
    * Name of the namespaces.
    */
-  name?: string
+  name?: string | null
   /**
    * UUID of the Organization the namespace belongs to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * UUID of the Project the namespace belongs to.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1220,27 +1220,27 @@ export type ListTokensRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number.
    */
-  page?: number
+  page?: number | null
   /**
    * Number of tokens per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order of the tokens.
    */
-  orderBy?: ListTokensRequestOrderBy
+  orderBy?: ListTokensRequestOrderBy | null
   /**
    * UUID of the container the token belongs to.
    */
-  containerId?: string
+  containerId?: string | null
   /**
    * UUID of the namespace the token belongs to.
    */
-  namespaceId?: string
+  namespaceId?: string | null
 }
 
 
@@ -1254,37 +1254,37 @@ export type ListTriggersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * Page number to return.
    */
-  page?: number
+  page?: number | null
   /**
    * Maximum number of triggers to return per page.
    */
-  pageSize?: number
+  pageSize?: number | null
   /**
    * Order in which to return results.
    */
-  orderBy?: ListTriggersRequestOrderBy
+  orderBy?: ListTriggersRequestOrderBy | null
   /**
    * ID of the container the triggers belongs to.
    *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId' could be set.
    */
-  containerId?: string
+  containerId?: string | null
   /**
    * ID of the namespace the triggers belongs to.
    *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId' could be set.
    */
-  namespaceId?: string
+  namespaceId?: string | null
   /**
    * ID of the project the triggers belongs to.
    *
    * One-of ('scope'): at most one of 'containerId', 'namespaceId', 'projectId' could be set.
    */
-  projectId?: string
+  projectId?: string | null
 }
 
 
@@ -1304,7 +1304,7 @@ export type UpdateContainerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the container to update.
    */
@@ -1312,58 +1312,58 @@ export type UpdateContainerRequest = {
   /**
    * Environment variables of the container.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Minimum number of instances to scale the container to.
    */
-  minScale?: number
+  minScale?: number | null
   /**
    * Maximum number of instances to scale the container to.
    */
-  maxScale?: number
+  maxScale?: number | null
   /**
    * Memory limit of the container in MB.
    */
-  memoryLimit?: number
+  memoryLimit?: number | null
   /**
    * CPU limit of the container in mvCPU.
    */
-  cpuLimit?: number
+  cpuLimit?: number | null
   /**
    * Processing time limit for the container.
    */
-  timeout?: string
+  timeout?: string | null
   /**
    * @deprecated Deprecated: future versions of this API will systematically redeploy containers when needed. As such,
 passing `redeploy: false` will be ignored. Relying on this field is discouraged.
 
 To force the redeployment of a container, even if no configuration has changed, use the `DeployContainer` method instead.
    */
-  redeploy?: boolean
+  redeploy?: boolean | null
   /**
    * Privacy settings of the container.
    */
-  privacy?: ContainerPrivacy
+  privacy?: ContainerPrivacy | null
   /**
    * Description of the container.
    */
-  description?: string
+  description?: string | null
   /**
    * Name of the registry image (e.g. "rg.fr-par.scw.cloud/something/image:tag").
    */
-  registryImage?: string
+  registryImage?: string | null
   /**
    * @deprecated Number of maximum concurrent executions of the container.
    */
-  maxConcurrency?: number
+  maxConcurrency?: number | null
   /**
    * Protocol the container uses.
    */
-  protocol?: ContainerProtocol
+  protocol?: ContainerProtocol | null
   /**
    * Port the container listens on.
    */
-  port?: number
+  port?: number | null
   /**
    * During an update, secret environment variables that are not specified in this field will be kept unchanged.
 
@@ -1378,48 +1378,48 @@ For example, the following payload will delete the `TO_DELETE` secret environmen
 }
 ```.
    */
-  secretEnvironmentVariables?: Secret[]
+  secretEnvironmentVariables?: Secret[] | null
   /**
    * Possible values:
  - redirected: Responds to HTTP request with a 301 redirect to ask the clients to use HTTPS.
  - enabled: Serve both HTTP and HTTPS traffic.
    */
-  httpOption?: ContainerHttpOption
+  httpOption?: ContainerHttpOption | null
   /**
    * Execution environment of the container.
    */
-  sandbox?: ContainerSandbox
+  sandbox?: ContainerSandbox | null
   /**
    * Local storage limit of the container (in MB).
    */
-  localStorageLimit?: number
+  localStorageLimit?: number | null
   /**
    * Possible values:
 - concurrent_requests_threshold: Scale depending on the number of concurrent requests being processed per container instance.
 - cpu_usage_threshold: Scale depending on the CPU usage of a container instance.
 - memory_usage_threshold: Scale depending on the memory usage of a container instance.
    */
-  scalingOption?: ContainerScalingOption
+  scalingOption?: ContainerScalingOption | null
   /**
    * Health check configuration of the container.
    */
-  healthCheck?: ContainerHealthCheckSpec
+  healthCheck?: ContainerHealthCheckSpec | null
   /**
    * Tags of the Serverless Container.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * When connected to a Private Network, the container can access other Scaleway resources in this Private Network.
    */
-  privateNetworkId?: string
+  privateNetworkId?: string | null
   /**
    * Command executed when the container starts. This overrides the default command defined in the container image. This is usually the main executable, or entry point script to run.
    */
-  command?: string[]
+  command?: string[] | null
   /**
    * Arguments passed to the command specified in the "command" field. These override the default arguments from the container image, and behave like command-line parameters.
    */
-  args?: string[]
+  args?: string[] | null
 }
 
 
@@ -1427,7 +1427,7 @@ export type UpdateCronRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the cron to update.
    */
@@ -1435,19 +1435,19 @@ export type UpdateCronRequest = {
   /**
    * UUID of the container invoked by the cron.
    */
-  containerId?: string
+  containerId?: string | null
   /**
    * UNIX cron schedule.
    */
-  schedule?: string
+  schedule?: string | null
   /**
    * Arguments to pass with the cron.
    */
-  args?: Record<string, unknown>
+  args?: Record<string, unknown> | null
   /**
    * Name of the cron.
    */
-  name?: string
+  name?: string | null
 }
 
 
@@ -1455,7 +1455,7 @@ export type UpdateNamespaceRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the namespace to update.
    */
@@ -1463,19 +1463,19 @@ export type UpdateNamespaceRequest = {
   /**
    * Environment variables of the namespace to update.
    */
-  environmentVariables?: Record<string, string>
+  environmentVariables?: Record<string, string> | null
   /**
    * Description of the namespace to update.
    */
-  description?: string
+  description?: string | null
   /**
    * Secret environment variables of the namespace to update.
    */
-  secretEnvironmentVariables?: Secret[]
+  secretEnvironmentVariables?: Secret[] | null
   /**
    * Tags of the Serverless Container Namespace.
    */
-  tags?: string[]
+  tags?: string[] | null
 }
 
 
@@ -1483,7 +1483,7 @@ export type UpdateTriggerRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * ID of the trigger to update.
    */
@@ -1491,17 +1491,17 @@ export type UpdateTriggerRequest = {
   /**
    * Name of the trigger.
    */
-  name?: string
+  name?: string | null
   /**
    * Description of the trigger.
    */
-  description?: string
+  description?: string | null
   /**
    * Configuration for an AWS SQS queue.
    *
    * One-of ('config'): at most one of 'sqsConfig' could be set.
    */
-  sqsConfig?: UpdateTriggerRequestSqsClientConfig
+  sqsConfig?: UpdateTriggerRequestSqsClientConfig | null
 }
 
 

@@ -42,8 +42,10 @@ import {
   marshalStartBMCAccessRequest,
   marshalStartServerRequest,
   marshalUpdateIPRequest,
+  marshalUpdateServerCommitmentRequest,
   marshalUpdateServerRequest,
   marshalUpdateSettingRequest,
+  marshalUpgradeServerCommitmentRequest,
   marshalValidatePartitioningSchemaRequest,
 } from './marshalling.gen.js'
 import type {
@@ -96,8 +98,10 @@ import type {
   StopBMCAccessRequest,
   StopServerRequest,
   UpdateIPRequest,
+  UpdateServerCommitmentRequest,
   UpdateServerRequest,
   UpdateSettingRequest,
+  UpgradeServerCommitmentRequest,
   ValidatePartitioningSchemaRequest,
 } from './types.gen.js'
 
@@ -205,7 +209,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalCreateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers`,
         signal: options?.signal,
@@ -226,7 +230,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalBatchCreateServersRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/batch-create-servers`,
         signal: options?.signal,
@@ -247,7 +251,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalUpdateServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}`,
         signal: options?.signal,
@@ -268,7 +272,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           await marshalInstallServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/install`,
         signal: options?.signal,
@@ -323,7 +327,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalRebootServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/reboot`,
         signal: options?.signal,
@@ -344,7 +348,7 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalStartServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/start`,
         signal: options?.signal,
@@ -363,7 +367,7 @@ export class API extends ParentAPI {
     this.client.fetch<Server>(
       {
         body: '{}',
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/stop`,
         signal: options?.signal,
@@ -429,11 +433,53 @@ export class API extends ParentAPI {
         body: JSON.stringify(
           marshalValidatePartitioningSchemaRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/partitioning-schemas/validate`,
         signal: options?.signal,
       },
+    )
+
+  
+  /**
+   * Upgrade a commitment. Start a commitment or upgrade an existing commitment on a server.
+   *
+   * @param request - The request {@link UpgradeServerCommitmentRequest}
+   * @returns A Promise of Server
+   */
+  upgradeServerCommitment = (request: Readonly<UpgradeServerCommitmentRequest>, options?: RequestOptions) =>
+    this.client.fetch<Server>(
+      {
+        body: JSON.stringify(
+          marshalUpgradeServerCommitmentRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/upgrade-commitment`,
+        signal: options?.signal,
+      },
+      unmarshalServer,
+    )
+
+  
+  /**
+   * Update a commitment. Update an existing commitment on a server to enable/disable auto-renewal.
+   *
+   * @param request - The request {@link UpdateServerCommitmentRequest}
+   * @returns A Promise of Server
+   */
+  updateServerCommitment = (request: Readonly<UpdateServerCommitmentRequest>, options?: RequestOptions) =>
+    this.client.fetch<Server>(
+      {
+        body: JSON.stringify(
+          marshalUpdateServerCommitmentRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/update-commitment`,
+        signal: options?.signal,
+      },
+      unmarshalServer,
     )
 
   
@@ -452,7 +498,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         body: JSON.stringify(
           marshalStartBMCAccessRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/bmc-access`,
         signal: options?.signal,
@@ -505,7 +551,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         body: JSON.stringify(
           marshalUpdateIPRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/ips/${validatePathParam('ipId', request.ipId)}`,
         signal: options?.signal,
@@ -526,7 +572,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         body: JSON.stringify(
           marshalAddOptionServerRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/options/${validatePathParam('optionId', request.optionId)}`,
         signal: options?.signal,
@@ -693,7 +739,7 @@ After adding the BMC option, you need to Get Remote Access to get the login/pass
         body: JSON.stringify(
           marshalUpdateSettingRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/settings/${validatePathParam('settingId', request.settingId)}`,
         signal: options?.signal,
@@ -773,7 +819,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         body: JSON.stringify(
           marshalPrivateNetworkApiAddServerPrivateNetworkRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'POST',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
         signal: options?.signal,
@@ -794,7 +840,7 @@ export class PrivateNetworkAPI extends ParentAPI {
         body: JSON.stringify(
           marshalPrivateNetworkApiSetServerPrivateNetworksRequest(request, this.client.settings),
         ),
-        headers: jsonContentHeaders,
+        headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PUT',
         path: `/baremetal/v1/zones/${validatePathParam('zone', request.zone ?? this.client.settings.defaultZone)}/servers/${validatePathParam('serverId', request.serverId)}/private-networks`,
         signal: options?.signal,

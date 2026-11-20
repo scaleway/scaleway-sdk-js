@@ -17,12 +17,13 @@ autoInstallPeers: true
 engineStrict: true
 
 catalog:
-  vite: 8.3.0
-  vitest: 4.1.11
-  tsdown: 0.23.0
+  vite: 8.3.4
+  vitest: 5.0.5
+  tsdown: 0.23.1
   '@types/react': 19.3.0
-  '@types/node': 26.6.3
+  '@types/node': 26.6.5
   '@scaleway/random-name': 6.0.2
+  '@scaleway/use-dataloader': 7.2.2
 
 overrides:
   vite: 'catalog:'

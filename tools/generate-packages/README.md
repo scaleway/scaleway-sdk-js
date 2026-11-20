@@ -57,8 +57,8 @@ Create a `generate-packages.config.ts` at the repo root:
 import type { Config } from './tools/generate-packages/src/config.ts'
 
 export default {
-  scope: '@scaleway-internal',
-  sdkPackagePrefix: '@scaleway-internal/sdk-',
+  scope: '@scaleway',
+  sdkPackagePrefix: '@scaleway/sdk-',
   sdks: [
     {
       path: 'packages/sdk/package.json',

@@ -9,7 +9,7 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: ./.github/actions/setup
@@ -18,7 +18,7 @@ jobs:
       - run: pnpm lint
 
   test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       matrix:
         test-environment:
@@ -34,7 +34,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: pnpm build
       - run: pnpm run test:coverage --environment ${{ matrix.test-environment }}
-      - uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
       - run: pnpm run test:junit
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}

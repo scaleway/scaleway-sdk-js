@@ -112,13 +112,13 @@ export interface Endpoint {
    *
    * One-of ('details'): at most one of 'privateNetwork', 'public' could be set.
    */
-  privateNetwork?: PrivateNetworkDetails
+  privateNetwork?: PrivateNetworkDetails | null
   /**
    * Public endpoint details.
    *
    * One-of ('details'): at most one of 'privateNetwork', 'public' could be set.
    */
-  public?: EndpointPublicDetails
+  public?: EndpointPublicDetails | null
   /**
    * Region of the deployment.
    */
@@ -135,12 +135,12 @@ export interface EndpointSpec {
    *
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
-  public?: EndpointSpecPublicDetails
+  public?: EndpointSpecPublicDetails | null
   /**
    *
    * One-of ('details'): at most one of 'public', 'privateNetwork' could be set.
    */
-  privateNetwork?: EndpointSpecPrivateNetworkSummary
+  privateNetwork?: EndpointSpecPrivateNetworkSummary | null
 }
 
 
@@ -196,11 +196,11 @@ export interface Deployment {
   /**
    * Creation date of the deployment.
    */
-  createdAt?: Date
+  createdAt?: Date | null
   /**
    * Last modification date of the deployment.
    */
-  updatedAt?: Date
+  updatedAt?: Date | null
   /**
    * ClickHouse® version.
    */
@@ -233,6 +233,10 @@ export interface Deployment {
    * For the `tiered` storage policy, controls when data is moved from the hot volume (Block Storage) to the cold volume (Object Storage). Data is moved once free space on the hot volume drops below this fraction of its capacity. Value between 0 and 1 (default 0.1, i.e. data is moved when the hot volume is 90% full).
    */
   moveFactor: number
+  /**
+   * ID of the Key Manager key encrypting the deployment data at rest. Empty if the deployment is not encrypted.
+   */
+  kmsKeyId?: string | null
   /**
    * Region of the deployment.
    */
@@ -308,7 +312,7 @@ export interface Version {
   /**
    * Date of End of Life.
    */
-  endOfLifeAt?: Date
+  endOfLifeAt?: Date | null
 }
 
 
@@ -316,7 +320,7 @@ export type CreateDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -332,11 +336,11 @@ export type CreateDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * The Project ID on which the deployment will be created.
    */
-  projectId?: string
+  projectId?: string | null
   /**
    * Name of the deployment.
    */
@@ -344,7 +348,7 @@ export type CreateDeploymentRequest = {
   /**
    * Tags to apply to the deployment.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * ClickHouse® version to use for the deployment.
    */
@@ -356,7 +360,7 @@ export type CreateDeploymentRequest = {
   /**
    * Number of shard for the deployment.
    */
-  shardCount?: number
+  shardCount?: number | null
   /**
    * Password for the initial user.
    */
@@ -372,7 +376,7 @@ export type CreateDeploymentRequest = {
   /**
    * Endpoints to associate with the deployment.
    */
-  endpoints?: EndpointSpec[]
+  endpoints?: EndpointSpec[] | null
   /**
    * RAM per CPU count for the deployment (in GB).
    */
@@ -380,7 +384,11 @@ export type CreateDeploymentRequest = {
   /**
    * For the `tiered` storage policy, controls when data is moved from the hot volume (Block Storage) to the cold volume (Object Storage). Data is moved once free space on the hot volume drops below this fraction of its capacity. Value between 0 and 1 (default 0.1, i.e. data is moved when the hot volume is 90% full).
    */
-  moveFactor?: number
+  moveFactor?: number | null
+  /**
+   * ID of a Key Manager key of the Project, used to encrypt the deployment data at rest. The key must be enabled, with a symmetric encryption usage. Encryption can only be chosen at creation, it cannot be enabled, disabled or changed afterwards.
+   */
+  kmsKeyId?: string | null
 }
 
 
@@ -388,7 +396,7 @@ export type CreateEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -396,7 +404,7 @@ export type CreateEndpointRequest = {
   /**
    * Endpoint specification.
    */
-  endpoint?: EndpointSpec
+  endpoint?: EndpointSpec | null
 }
 
 
@@ -404,7 +412,7 @@ export type CreateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -428,7 +436,7 @@ export type DeleteDatabaseRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -444,7 +452,7 @@ export type DeleteDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment to delete.
    */
@@ -456,7 +464,7 @@ export type DeleteEndpointRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the Endpoint to delete.
    */
@@ -468,7 +476,7 @@ export type DeleteUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -484,7 +492,7 @@ export type GetDeploymentCertificateRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -496,7 +504,7 @@ export type GetDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -508,7 +516,7 @@ export type ListDatabasesRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -516,13 +524,13 @@ export type ListDatabasesRequest = {
   /**
    * Name of the database to filter by.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering database listings.
    */
-  orderBy?: ListDatabasesRequestOrderBy
-  page?: number
-  pageSize?: number
+  orderBy?: ListDatabasesRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -542,29 +550,29 @@ export type ListDeploymentsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * List deployments with a given tag.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Lists deployments that match a name pattern.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering deployment listings.
    */
-  orderBy?: ListDeploymentsRequestOrderBy
+  orderBy?: ListDeploymentsRequestOrderBy | null
   /**
    * Organization ID the deployment belongs to.
    */
-  organizationId?: string
+  organizationId?: string | null
   /**
    * Project ID the deployment belongs to.
    */
-  projectId?: string
-  page?: number
-  pageSize?: number
+  projectId?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -584,9 +592,9 @@ export type ListPresetsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  page?: number
-  pageSize?: number
+  region?: ScwRegion | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -606,7 +614,7 @@ export type ListUsersRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -614,13 +622,13 @@ export type ListUsersRequest = {
   /**
    * Name of the user to filter by.
    */
-  name?: string
+  name?: string | null
   /**
    * Criteria to use when ordering user listings.
    */
-  orderBy?: ListUsersRequestOrderBy
-  page?: number
-  pageSize?: number
+  orderBy?: ListUsersRequestOrderBy | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -640,10 +648,10 @@ export type ListVersionsRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
-  version?: string
-  page?: number
-  pageSize?: number
+  region?: ScwRegion | null
+  version?: string | null
+  page?: number | null
+  pageSize?: number | null
 }
 
 
@@ -663,7 +671,7 @@ export type StartDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -675,7 +683,7 @@ export type StopDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -687,7 +695,7 @@ export type UpdateDeploymentRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment to update.
    */
@@ -695,27 +703,27 @@ export type UpdateDeploymentRequest = {
   /**
    * Name of the deployment.
    */
-  name?: string
+  name?: string | null
   /**
    * Tags of a deployment.
    */
-  tags?: string[]
+  tags?: string[] | null
   /**
    * Minimum CPU count for the deployment.
    */
-  cpuMin?: number
+  cpuMin?: number | null
   /**
    * Maximum CPU count for the deployment.
    */
-  cpuMax?: number
+  cpuMax?: number | null
   /**
    * Number of replicas for the deployment.
    */
-  replicaCount?: number
+  replicaCount?: number | null
   /**
    * For the `tiered` storage policy, controls when data is moved from the hot volume (Block Storage) to the cold volume (Object Storage). Data is moved once free space on the hot volume drops below this fraction of its capacity. Value between 0 and 1 (default 0.1, i.e. data is moved when the hot volume is 90% full).
    */
-  moveFactor?: number
+  moveFactor?: number | null
 }
 
 
@@ -723,7 +731,7 @@ export type UpdateUserRequest = {
   /**
    * Region to target. If none is passed will use default region from the config.
    */
-  region?: ScwRegion
+  region?: ScwRegion | null
   /**
    * UUID of the deployment.
    */
@@ -735,11 +743,11 @@ export type UpdateUserRequest = {
   /**
    * New password for the user.
    */
-  password?: string
+  password?: string | null
   /**
    * Updates the user administrator permissions.
    */
-  isAdmin?: boolean
+  isAdmin?: boolean | null
 }
 
 
