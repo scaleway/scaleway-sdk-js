@@ -41,7 +41,9 @@ import {
   unmarshalSetEnabledCustomAlertRulesResponse,
   marshalTestCustomAlertRuleRequest,
   unmarshalTestCustomAlertRuleResponse,
+  unmarshalTrail,
   marshalUpdateCustomAlertRuleRequest,
+  marshalUpdateTrailRequest,
 } from './marshalling.gen.js'
 import type {
   CreateCustomAlertRuleRequest,
@@ -61,6 +63,7 @@ import type {
   ExportJob,
   GetCustomAlertRuleRequest,
   GetLastEventsOverviewRequest,
+  GetTrailRequest,
   ListAlertRulesRequest,
   ListAlertRulesResponse,
   ListAuthenticationEventsRequest,
@@ -85,7 +88,9 @@ import type {
   SetEnabledCustomAlertRulesResponse,
   TestCustomAlertRuleRequest,
   TestCustomAlertRuleResponse,
+  Trail,
   UpdateCustomAlertRuleRequest,
+  UpdateTrailRequest,
 } from './types.gen.js'
 
 const jsonContentHeaders = {
@@ -616,6 +621,44 @@ export class API extends ParentAPI {
         signal: options?.signal,
       },
       unmarshalRetrieveAvailableFieldsForCustomAlertRulesResponse,
+    )
+
+  
+  /**
+   * Get a trail. Retrieve the trail of a specified Organization, including Cockpit's target Project ID to which Audit Trail events are pushed. You must specify the `organization_id`.
+   *
+   * @param request - The request {@link GetTrailRequest}
+   * @returns A Promise of Trail
+   */
+  getTrail = (request: Readonly<GetTrailRequest> = {}, options?: RequestOptions) =>
+    this.client.fetch<Trail>(
+      {
+        method: 'GET',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/trails/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}`,
+        signal: options?.signal,
+      },
+      unmarshalTrail,
+    )
+
+  
+  /**
+   * Update a trail. Update the destination of the trail of a specified Organization. Set the `cockpit` destination to change the `target_project_id` to which Audit Trail events are pushed. An omitted or `null` `cockpit` clears the destination and disables forwarding.
+   *
+   * @param request - The request {@link UpdateTrailRequest}
+   * @returns A Promise of Trail
+   */
+  updateTrail = (request: Readonly<UpdateTrailRequest> = {}, options?: RequestOptions) =>
+    this.client.fetch<Trail>(
+      {
+        body: JSON.stringify(
+          marshalUpdateTrailRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'PATCH',
+        path: `/audit-trail/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/trails/${validatePathParam('organizationId', request.organizationId ?? this.client.settings.defaultOrganizationId)}`,
+        signal: options?.signal,
+      },
+      unmarshalTrail,
     )
 
   
