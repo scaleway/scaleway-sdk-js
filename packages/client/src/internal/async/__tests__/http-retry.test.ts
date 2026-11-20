@@ -54,8 +54,10 @@ describe('isDefaultRetryableError', () => {
   })
 
   it('retries network errors only for idempotent methods', () => {
-    expect(isDefaultRetryableError(new TypeError('fetch failed'), { method: 'GET' })).toBe(true)
-    expect(isDefaultRetryableError(new TypeError('fetch failed'), { method: 'POST' })).toBe(false)
+    const error = new TypeError('fetch failed')
+    expect(isDefaultRetryableError(error, { method: 'GET' }, true)).toBe(true)
+    expect(isDefaultRetryableError(error, { method: 'POST' }, true)).toBe(false)
+    expect(isDefaultRetryableError(error, { method: 'GET' }, false)).toBe(false)
   })
 
   it('does not retry other status codes', () => {

@@ -64,7 +64,7 @@ export type ResolvedRetryOptions = {
   maxRetries: number
   minDelay: number
   maxDelay: number
-  isRetryable: (error: unknown, context: RetryContext) => boolean
+  isRetryable: (error: unknown, context: RetryContext, fromTransport?: boolean) => boolean
 }
 
 /**
@@ -103,7 +103,7 @@ const isAbortOrTimeoutError = (error: unknown): boolean =>
  *
  * @internal
  */
-export const isDefaultRetryableError = (error: unknown, context: RetryContext): boolean => {
+export const isDefaultRetryableError = (error: unknown, context: RetryContext, fromTransport = false): boolean => {
   if (isAbortOrTimeoutError(error)) {
     return false
   }
@@ -113,7 +113,7 @@ export const isDefaultRetryableError = (error: unknown, context: RetryContext): 
   if (!isIdempotentMethod(context.method)) {
     return false
   }
-  if (isNetworkError(error)) {
+  if (fromTransport && isNetworkError(error)) {
     return true
   }
   if (error instanceof ScalewayError) {
@@ -184,13 +184,17 @@ export const resolveRetryDelayMs = ({
  * @internal
  */
 export const resolveRetryOptions = (options: RetryOptions = {}): ResolvedRetryOptions => {
-  const predicate = options.isRetryable ?? isDefaultRetryableError
+  const { isRetryable } = options
 
   return {
     maxRetries: options.maxRetries ?? DEFAULT_MAX_RETRIES,
     minDelay: options.minDelay ?? DEFAULT_MIN_DELAY_SECONDS,
     maxDelay: options.maxDelay ?? DEFAULT_MAX_DELAY_SECONDS,
-    isRetryable: (error, context) => !isAbortOrTimeoutError(error) && predicate(error, context),
+    isRetryable: (error, context, fromTransport) =>
+      !isAbortOrTimeoutError(error) &&
+      (isRetryable === undefined
+        ? isDefaultRetryableError(error, context, fromTransport)
+        : isRetryable(error, context)),
   }
 }
 
@@ -237,11 +241,7 @@ export const assertValidRetryOptions = (options: RetryOptions): void => {
   ) {
     throw new Error(`Invalid retry.maxDelay ${options.maxDelay}: it should be a finite number >= 1`)
   }
-  if (
-    options.minDelay !== undefined &&
-    options.maxDelay !== undefined &&
-    options.minDelay > options.maxDelay
-  ) {
+  if (options.minDelay !== undefined && options.maxDelay !== undefined && options.minDelay > options.maxDelay) {
     throw new Error(`Invalid retry delays: minDelay must be <= maxDelay`)
   }
   if (options.isRetryable !== undefined && typeof options.isRetryable !== 'function') {

@@ -155,10 +155,12 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
       // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
       lastRequest = await reqInterceptors(buildRequest(attemptRequest, attemptSettings))
       let retryAfterMs: number | undefined = undefined
+      let fromTransport = true
 
       try {
         // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
         const response = await httpClient(lastRequest)
+        fromTransport = false
         // oxlint-disable-next-line eslint/no-await-in-loop -- sequential retry attempts
         const finalResponse = await resInterceptors(response)
         if (!finalResponse.ok) {
@@ -170,7 +172,8 @@ export const buildFetcher = (settings: Settings, httpClient: typeof fetch) => {
         lastError = error
         // Abort/timeout are rejected by isRetryable; the loop also checks signal.aborted
         // at the start of each attempt (TS cannot model AbortSignal mutating mid-iteration).
-        const canRetry = attempt + 1 < maxAttempts && retryOptions.isRetryable(error, { method: request.method })
+        const canRetry =
+          attempt + 1 < maxAttempts && retryOptions.isRetryable(error, { method: request.method }, fromTransport)
 
         if (!canRetry) {
           break

@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { withRetry } from '../../client-ini-factory.js'
 import type { Settings } from '../../client-settings.js'
 import { ScalewayError } from '../../errors/scw-error.js'
 import { AbortError } from '../abort-error.js'
@@ -33,7 +34,10 @@ describe('buildFetcher retry', () => {
       .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
 
     await expect(
-      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock }, fetchMock)({
+      buildFetcher(
+        { ...DEFAULT_SETTINGS, httpClient: fetchMock },
+        fetchMock,
+      )({
         method: 'GET',
         path: '/no-retry',
       }),
@@ -72,7 +76,10 @@ describe('buildFetcher retry', () => {
       .mockResolvedValue(Response.json({ message: 'unavailable' }, { status: 503 }))
 
     await expect(
-      buildFetcher({ ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } }, fetchMock)({
+      buildFetcher(
+        { ...DEFAULT_SETTINGS, httpClient: fetchMock, retry: { maxRetries: 2 } },
+        fetchMock,
+      )({
         method: 'POST',
         path: '/no-retry-post',
       }),
@@ -204,31 +211,30 @@ describe('buildFetcher retry', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
-  it('does not retry InvalidResponseError as network error', async () => {
-    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(Response.json({}))
-
-    await expect(
-      buildFetcher(
-        {
+  it.each([new InvalidResponseError(), new TypeError('network metadata missing')])(
+    'does not retry response interceptor error %s',
+    async error => {
+      const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(Response.json({}))
+      const result = buildFetcher(
+        withRetry({ maxRetries: 2 })({
           ...DEFAULT_SETTINGS,
           httpClient: fetchMock,
           interceptors: [
             {
               response: () => {
-                throw new InvalidResponseError()
+                throw error
               },
             },
           ],
-          retry: { maxRetries: 2 },
-        },
+        }),
         fetchMock,
-      )({
-        method: 'GET',
-        path: '/parser-invalid-response',
-      }),
-    ).rejects.toThrow(InvalidResponseError)
-    expect(fetchMock).toHaveBeenCalledTimes(1)
-  })
+      )({ method: 'GET', path: '/response-interceptor-error' })
+      const expectation = expect(result).rejects.toBe(error)
+      await vi.runAllTimersAsync()
+      await expectation
+      expect(fetchMock).toHaveBeenCalledTimes(1)
+    },
+  )
 
   it('stops after maxRetries', async () => {
     const fetchMock = vi
@@ -276,7 +282,7 @@ describe('buildFetcher retry', () => {
     const resultPromise = buildFetcher(
       {
         ...DEFAULT_SETTINGS,
-        defaultTimeoutMs: 2_000,
+        defaultTimeoutMs: 2000,
         httpClient: fetchMock,
         // Backoff alone would wait 30s; overall timeout must win first.
         retry: { maxRetries: 5, minDelay: 30, maxDelay: 30 },
@@ -288,7 +294,7 @@ describe('buildFetcher retry', () => {
     })
     const expectation = expect(resultPromise).rejects.toBeInstanceOf(AbortError)
     await vi.advanceTimersByTimeAsync(0)
-    await vi.advanceTimersByTimeAsync(2_000)
+    await vi.advanceTimersByTimeAsync(2000)
     await expectation
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
