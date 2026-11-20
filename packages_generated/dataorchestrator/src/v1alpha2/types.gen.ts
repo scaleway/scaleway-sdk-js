@@ -28,6 +28,13 @@ export type ListWorkflowRunsRequestOrderBy =
   | 'workflow_definition_name_asc'
   | 'workflow_definition_name_desc'
 
+export type ObjectStorageTaskReason =
+  | 'unknown_default_run_reason'
+  | 'timeout'
+  | 'cancellation'
+  | 'technical_error'
+  | 'functional_error'
+
 export type RunServerlessContainersTaskAction =
   | 'unknown_action'
   | 'deploy'
@@ -65,13 +72,6 @@ export type RunStatus =
   | 'interrupted'
   | 'pausing'
   | 'paused'
-
-export type S3TaskReason =
-  | 'unknown_default_run_reason'
-  | 'timeout'
-  | 'cancellation'
-  | 'technical_error'
-  | 'functional_error'
 
 export type ScheduleOverlapPolicy =
   | 'unknown_schedule_overlap_policy'
@@ -120,6 +120,13 @@ export interface DefaultTask {
 }
 
 
+export interface ObjectStorageTask {
+  action: string
+  reason?: ObjectStorageTaskReason | null
+  errorMessage?: string | null
+}
+
+
 export interface RunServerlessContainersTask {
   /**
    * Unique identifier of the serverless-container deployment.
@@ -144,13 +151,6 @@ export interface RunServerlessContainersTask {
   /**
    * Error message of the task run.
    */
-  errorMessage?: string | null
-}
-
-
-export interface S3Task {
-  action: string
-  reason?: S3TaskReason | null
   errorMessage?: string | null
 }
 
@@ -283,61 +283,61 @@ export interface TaskRun {
   /**
    * Task run details for a serverless-job task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   serverlessJobTaskRunDetails?: ServerlessJobsTask | null
   /**
    * Task run details for a raise task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   raiseTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a set task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   setTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a call http task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   callHttpTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a wait task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   waitTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a serverless-function task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   serverlessFunctionTaskRunDetails?: DefaultTask | null
   /**
    * Task run details for a run-serverless-container task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   runServerlessContainerTaskRunDetails?: RunServerlessContainersTask | null
   /**
    * Task run details for a call-serverless-container task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   callServerlessContainerTaskRunDetails?: DefaultTask | null
   /**
-   * Task run details for a S3 task.
+   * Task run details for a Object Storage task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
-  s3TaskRunDetails?: S3Task | null
+  objectStorageTaskRunDetails?: ObjectStorageTask | null
   /**
    * Task run details for a generative-api task.
    *
-   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 's3TaskRunDetails', 'generativeApiTaskRunDetails' could be set.
+   * One-of ('taskRunDetails'): at most one of 'serverlessJobTaskRunDetails', 'raiseTaskRunDetails', 'setTaskRunDetails', 'callHttpTaskRunDetails', 'waitTaskRunDetails', 'serverlessFunctionTaskRunDetails', 'runServerlessContainerTaskRunDetails', 'callServerlessContainerTaskRunDetails', 'objectStorageTaskRunDetails', 'generativeApiTaskRunDetails' could be set.
    */
   generativeApiTaskRunDetails?: DefaultTask | null
   /**
