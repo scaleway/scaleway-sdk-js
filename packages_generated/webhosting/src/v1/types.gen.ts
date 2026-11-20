@@ -501,7 +501,7 @@ export interface HostingCommitment {
   endAt?: Date | null
   /**
    * The hosting may be deleted, automatically renewed, or switched to
-its configured post-commitment offer, which may have a different 
+its configured post-commitment offer, which may have a different
 price and billing period.
    */
   deleteHostingAtEnd: boolean
