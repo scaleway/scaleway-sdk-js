@@ -36,6 +36,7 @@ import type {
   CreateDeploymentRequest,
   CreateEndpointRequest,
   CreateUserRequest,
+  DeleteCertificateRequest,
   DeleteDeploymentRequest,
   DeleteEndpointRequest,
   DeleteUserRequest,
@@ -452,6 +453,16 @@ export class API extends ParentAPI {
         signal: options?.signal,
       },
       unmarshalCertificate,
+    )
+
+  
+  deleteCertificate = (request: Readonly<DeleteCertificateRequest>, options?: RequestOptions) =>
+    this.client.fetch<void>(
+      {
+        method: 'DELETE',
+        path: `/dataviz/v1alpha1/regions/${validatePathParam('region', request.region ?? this.client.settings.defaultRegion)}/deployments/${validatePathParam('deploymentId', request.deploymentId)}/certificates/${validatePathParam('certificateId', request.certificateId)}`,
+        signal: options?.signal,
+      },
     )
 
   
