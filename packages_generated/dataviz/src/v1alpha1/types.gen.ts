@@ -424,6 +424,16 @@ export type CreateUserRequest = {
 }
 
 
+export type DeleteCertificateRequest = {
+  /**
+   * Region to target. If none is passed will use default region from the config.
+   */
+  region?: ScwRegion | null
+  deploymentId: string
+  certificateId: string
+}
+
+
 /**
  * Delete a deployment specified by the ID.
  */

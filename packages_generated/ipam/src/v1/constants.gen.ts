@@ -56,5 +56,6 @@ export const RESOURCE_TYPES: ResourceType[] = [
   'edge_vpc_endpoint',
   'dviz_cluster',
   'nats_cluster',
+  'kvdb_instance',
 ]
 
