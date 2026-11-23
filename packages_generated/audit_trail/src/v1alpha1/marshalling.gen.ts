@@ -100,6 +100,8 @@ import type {
   SetEnabledAlertRulesResponse,
   SetEnabledCustomAlertRulesResponse,
   TestCustomAlertRuleResponse,
+  TrailCockpit,
+  Trail,
   CreateCustomAlertRuleRequest,
   CreateExportJobRequest,
   DisableAlertRulesRequest,
@@ -110,6 +112,7 @@ import type {
   SetEnabledCustomAlertRulesRequest,
   TestCustomAlertRuleRequest,
   UpdateCustomAlertRuleRequest,
+  UpdateTrailRequest,
 } from './types.gen.js'
 
 export const unmarshalCustomAlertRule = (data: unknown): CustomAlertRule => {
@@ -1455,6 +1458,31 @@ export const unmarshalTestCustomAlertRuleResponse = (data: unknown): TestCustomA
   } as TestCustomAlertRuleResponse
 }
 
+const unmarshalTrailCockpit = (data: unknown): TrailCockpit => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'TrailCockpit' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    targetProjectId: data.target_project_id,
+  } as TrailCockpit
+}
+
+export const unmarshalTrail = (data: unknown): Trail => {
+  if (!isJSONObject(data)) {
+    throw new TypeError(
+      `Unmarshalling the type 'Trail' failed as data isn't a dictionary.`,
+    )
+  }
+
+  return {
+    cockpit: data.cockpit ? unmarshalTrailCockpit(data.cockpit) : null,
+    organizationId: data.organization_id,
+  } as Trail
+}
+
 export const marshalCreateCustomAlertRuleRequest = (
   request: CreateCustomAlertRuleRequest,
   defaults: DefaultValues,
@@ -1557,4 +1585,18 @@ export const marshalUpdateCustomAlertRuleRequest = (
 ): Record<string, unknown> => ({
   description: request.description,
   name: request.name,
+})
+
+const marshalTrailCockpit = (
+  request: TrailCockpit,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  target_project_id: request.targetProjectId,
+})
+
+export const marshalUpdateTrailRequest = (
+  request: UpdateTrailRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  cockpit: ((request.cockpit != null) ?  marshalTrailCockpit(request.cockpit, defaults): undefined),
 })

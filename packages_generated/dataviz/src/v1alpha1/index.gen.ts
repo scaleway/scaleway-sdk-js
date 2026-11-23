@@ -12,6 +12,7 @@ export type {
   CreateDeploymentRequest,
   CreateEndpointRequest,
   CreateUserRequest,
+  DeleteCertificateRequest,
   DeleteDeploymentRequest,
   DeleteEndpointRequest,
   DeleteUserRequest,
