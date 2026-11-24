@@ -191,8 +191,18 @@ describe('ResourceExpiredError', () => {
 describe('PermissionsDeniedError', () => {
   const body: JSONObject = {
     details: [
-      { action: 'read', resource: 'instance_volume', service:'compute', srn: 'srn://instance.scw.eu/zones/fr-par-1/servers'  },
-      { action: 'read', wrong_key: 'instance_volume', service:'compute', srn: 'srn://instance.scw.eu/zones/fr-par-1/servers' },
+      {
+        action: 'read',
+        resource: 'instance_volume',
+        service: 'compute',
+        srn: 'srn://instance.scw.eu/zones/fr-par-1/servers',
+      },
+      {
+        action: 'read',
+        wrong_key: 'instance_volume',
+        service: 'compute',
+        srn: 'srn://instance.scw.eu/zones/fr-par-1/servers',
+      },
     ],
     type: 'permissions_denied',
   }
