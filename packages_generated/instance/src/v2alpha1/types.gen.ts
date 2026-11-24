@@ -1243,7 +1243,7 @@ export type AttachServerIPRequest = {
    */
   default: boolean
   /**
-   * Whether moving the IP is allowed.
+   * When enabled, allows attaching the IP even if it is already attached to another server.
    */
   moveAllowed: boolean
 }

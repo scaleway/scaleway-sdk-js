@@ -1952,6 +1952,106 @@ export type RegistrarApiCheckContactsCompatibilityRequest = {
 }
 
 
+export type RegistrarApiCreateContactRequest = {
+  /**
+   * Project ID to create the contact in.
+   */
+  projectId?: string | null
+  /**
+   * Legal form of the contact (individual, corporate, association, other).
+   */
+  legalForm?: ContactLegalForm | null
+  /**
+   * First name of the contact.
+   */
+  firstname: string
+  /**
+   * Last name of the contact.
+   */
+  lastname: string
+  /**
+   * Company name of the contact (required for corporate legal forms).
+   */
+  companyName?: string | null
+  /**
+   * Email address of the contact.
+   */
+  email: string
+  /**
+   * Alternative email address of the contact.
+   */
+  emailAlt?: string | null
+  /**
+   * Phone number of the contact, normalized to +CC.NationalNumber format.
+   */
+  phoneNumber: string
+  /**
+   * Fax number of the contact, normalized to +CC.NationalNumber format.
+   */
+  faxNumber?: string | null
+  /**
+   * First line of the contact's address.
+   */
+  addressLine1: string
+  /**
+   * Second line of the contact's address.
+   */
+  addressLine2?: string | null
+  /**
+   * Postal code of the contact.
+   */
+  zip: string
+  /**
+   * City of the contact.
+   */
+  city: string
+  /**
+   * State or region of the contact.
+   */
+  state?: string | null
+  /**
+   * Country code of the contact (ISO 3166-1 alpha-2 format).
+   */
+  country: string
+  /**
+   * VAT identification code of the contact.
+   */
+  vatIdentificationCode?: string | null
+  /**
+   * Company identification code of the contact (SIRET/SIREN for French contacts, any format for others).
+   */
+  companyIdentificationCode?: string | null
+  /**
+   * Preferred language of the contact.
+   */
+  lang?: StdLanguageCode | null
+  /**
+   * Indicates whether the contact's information can be resold.
+   */
+  resale: boolean
+  /**
+   * Indicates whether the contact's information is published in the WHOIS database.
+   */
+  whoisOptIn: boolean
+  /**
+   * Additional information required for AFNIC-managed TLDs (.fr, .re, .pm, .yt, .wf, .tf).
+   */
+  extensionFr?: ContactExtensionFR | null
+  /**
+   * Additional information required for .eu domains. Conditionally required.
+   */
+  extensionEu?: ContactExtensionEU | null
+  /**
+   * Additional information required for .nl domains. Auto-populated for individuals.
+   */
+  extensionNl?: ContactExtensionNL | null
+  /**
+   * Additional information required for .it domains. Contains a PIN.
+   */
+  extensionIt?: ContactExtensionIT | null
+}
+
+
 export type RegistrarApiCreateDomainHostRequest = {
   /**
    * The domain name to create the hostname for.
