@@ -191,15 +191,15 @@ describe('ResourceExpiredError', () => {
 describe('PermissionsDeniedError', () => {
   const body: JSONObject = {
     details: [
-      { action: 'read', resource: 'instance_volume' },
-      { action: 'read', wrong_key: 'instance_volume' },
+      { action: 'read', resource: 'instance_volume', service:'compute', srn: 'srn://instance.scw.eu/zones/fr-par-1/servers'  },
+      { action: 'read', wrong_key: 'instance_volume', service:'compute', srn: 'srn://instance.scw.eu/zones/fr-par-1/servers' },
     ],
     type: 'permissions_denied',
   }
 
   it(`parses a valid input`, () => {
     expect(parseScalewayError(503, body).toString()).toBe(
-      'PermissionsDeniedError: insufficient permissions: read instance_volume',
+      'PermissionsDeniedError: insufficient permissions: compute:instance_volume:read on srn://instance.scw.eu/zones/fr-par-1/servers ; compute::read on srn://instance.scw.eu/zones/fr-par-1/servers ',
     )
   })
 
