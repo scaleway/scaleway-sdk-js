@@ -51,6 +51,7 @@ import {
   unmarshalRegisterExternalDomainResponse,
   marshalRegistrarApiBuyDomainsRequest,
   marshalRegistrarApiCheckContactsCompatibilityRequest,
+  marshalRegistrarApiCreateContactRequest,
   marshalRegistrarApiCreateDomainHostRequest,
   marshalRegistrarApiEnableDomainDNSSECRequest,
   marshalRegistrarApiRegisterExternalDomainRequest,
@@ -126,6 +127,7 @@ import type {
   RegisterExternalDomainResponse,
   RegistrarApiBuyDomainsRequest,
   RegistrarApiCheckContactsCompatibilityRequest,
+  RegistrarApiCreateContactRequest,
   RegistrarApiCreateDomainHostRequest,
   RegistrarApiDeleteDomainHostRequest,
   RegistrarApiDeleteExternalDomainRequest,
@@ -1018,6 +1020,27 @@ You can filter the list by domain name.
         headers: { ...jsonContentHeaders, ...options?.headers },
         method: 'PATCH',
         path: `/domain/v2beta1/contacts/${validatePathParam('contactId', request.contactId)}`,
+        signal: options?.signal,
+      },
+      unmarshalContact,
+    )
+
+  
+  /**
+   * Create contact. Create a new contact with the provided information.
+   *
+   * @param request - The request {@link RegistrarApiCreateContactRequest}
+   * @returns A Promise of Contact
+   */
+  createContact = (request: Readonly<RegistrarApiCreateContactRequest>, options?: RequestOptions) =>
+    this.client.fetch<Contact>(
+      {
+        body: JSON.stringify(
+          marshalRegistrarApiCreateContactRequest(request, this.client.settings),
+        ),
+        headers: { ...jsonContentHeaders, ...options?.headers },
+        method: 'POST',
+        path: `/domain/v2beta1/contacts`,
         signal: options?.signal,
       },
       unmarshalContact,
