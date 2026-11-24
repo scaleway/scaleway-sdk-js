@@ -96,6 +96,7 @@ import type {
   NewContact,
   RegistrarApiBuyDomainsRequest,
   RegistrarApiCheckContactsCompatibilityRequest,
+  RegistrarApiCreateContactRequest,
   RegistrarApiCreateDomainHostRequest,
   RegistrarApiEnableDomainDNSSECRequest,
   RegistrarApiRegisterExternalDomainRequest,
@@ -1550,6 +1551,36 @@ export const marshalRegistrarApiCheckContactsCompatibilityRequest = (
       : undefined,
     },
   ]),
+})
+
+export const marshalRegistrarApiCreateContactRequest = (
+  request: RegistrarApiCreateContactRequest,
+  defaults: DefaultValues,
+): Record<string, unknown> => ({
+  address_line_1: request.addressLine1,
+  address_line_2: request.addressLine2,
+  city: request.city,
+  company_identification_code: request.companyIdentificationCode,
+  company_name: request.companyName,
+  country: request.country,
+  email: request.email,
+  email_alt: request.emailAlt,
+  extension_eu: ((request.extensionEu != null) ?  marshalContactExtensionEU(request.extensionEu, defaults): undefined),
+  extension_fr: ((request.extensionFr != null) ?  marshalContactExtensionFR(request.extensionFr, defaults): undefined),
+  extension_it: ((request.extensionIt != null) ?  marshalContactExtensionIT(request.extensionIt, defaults): undefined),
+  extension_nl: ((request.extensionNl != null) ?  marshalContactExtensionNL(request.extensionNl, defaults): undefined),
+  fax_number: request.faxNumber,
+  firstname: request.firstname,
+  lang: request.lang,
+  lastname: request.lastname,
+  legal_form: request.legalForm,
+  phone_number: request.phoneNumber,
+  project_id: request.projectId ?? defaults.defaultProjectId,
+  resale: request.resale,
+  state: request.state,
+  vat_identification_code: request.vatIdentificationCode,
+  whois_opt_in: request.whoisOptIn,
+  zip: request.zip,
 })
 
 export const marshalRegistrarApiCreateDomainHostRequest = (
