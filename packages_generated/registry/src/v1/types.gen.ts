@@ -52,6 +52,14 @@ export type TagStatus =
 
 export interface Image {
   /**
+   * SRN of the image.
+   */
+  srn: string
+  /**
+   * Region where the image is located.
+   */
+  region: ScwRegion
+  /**
    * UUID of the image.
    */
   id: string
@@ -95,6 +103,10 @@ export interface Image {
 
 
 export interface Namespace {
+  /**
+   * SRN of the namespace.
+   */
+  srn: string
   /**
    * UUID of the namespace.
    */
@@ -155,6 +167,14 @@ export interface Namespace {
 
 
 export interface Tag {
+  /**
+   * SRN of the tag.
+   */
+  srn: string
+  /**
+   * Region where the tag is located.
+   */
+  region: ScwRegion
   /**
    * UUID of the tag.
    */
