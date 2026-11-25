@@ -125,6 +125,7 @@ export const PLACEMENT_GROUP_POLICY_TYPES: PlacementGroupPolicyType[] = [
   'unknown_policy_type',
   'low_latency',
   'max_availability',
+  'max_availability_enforced',
 ]
 
 /** Lists all values of the enum {@link PrivateNetworkInterfaceStatus}. */
