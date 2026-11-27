@@ -2,6 +2,7 @@ import { isResponse } from '../../helpers/is-response.js'
 import { isJSONObject } from '../../helpers/json.js'
 import { parseScalewayError } from '../errors/error-parser.js'
 import { ScalewayError } from '../errors/scw-error.js'
+import { InvalidResponseError } from './invalid-response-error.js'
 import type { ResponseUnmarshaller } from './types.js'
 
 const X_TOTAL_COUNT_HEADER_KEY = 'x-total-count'
@@ -37,7 +38,7 @@ export const fixLegacyTotalCount = <T>(obj: T, headers: Headers): T => {
  * @throws {@link ScalewayError}
  * Thrown by the API if the request couldn't be completed.
  *
- * @throws TypeError
+ * @throws {@link InvalidResponseError}
  * Thrown if the response parameter isn't of the expected type.
  *
  * @throws Error
@@ -49,7 +50,7 @@ export const responseParser =
   <T>(unmarshaller: ResponseUnmarshaller<T>, responseType: 'json' | 'text' | 'blob') =>
   async (response: Response): Promise<T> => {
     if (!isResponse(response)) {
-      throw new TypeError('Invalid response object')
+      throw new InvalidResponseError()
     }
 
     if (response.ok) {
