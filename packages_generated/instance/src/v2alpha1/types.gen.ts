@@ -71,6 +71,7 @@ export type PlacementGroupPolicyType =
   | 'unknown_policy_type'
   | 'low_latency'
   | 'max_availability'
+  | 'max_availability_enforced'
 
 export type PrivateNetworkInterfaceStatus =
   | 'unknown_status'
@@ -674,9 +675,22 @@ export interface PlacementGroup {
    */
   name: string
   /**
-   * Select the behavior of the placement group, either low_latency (group) or max_availability (spread).
+   * The type determines how servers within the Placement Group (members) will be allocated, by constraining their location.
+
+With `low_latency`, the members are allocated as close to each other as possible.
+
+With `max_availability` or `max_availability_enforced`, the members are spread across different physical hosts to maximize availability.
+The difference between `max_availability` and `max_availability_enforced` is the behavior when the policy cannot be satisfied:
+
+- with `max_availability`, the member is allowed to start on a physical node that already holds another member;
+
+- with `max_availability_enforced`, the member will fail to start after a short amount of time.
    */
   policyType: PlacementGroupPolicyType
+  /**
+   * Indicates if the constraints of the Placement Group are respected by all its members.
+   */
+  policyRespected: boolean
   /**
    * Placement group tags.
    */
@@ -1243,7 +1257,7 @@ export type AttachServerIPRequest = {
    */
   default: boolean
   /**
-   * Whether moving the IP is allowed.
+   * When enabled, allows attaching the IP even if it is already attached to another server.
    */
   moveAllowed: boolean
 }

@@ -2,6 +2,8 @@ import type { JSONObject } from '../../../helpers/json.js'
 import { isJSONObject } from '../../../helpers/json.js'
 import { ScalewayError } from '../scw-error.js'
 
+const isString = (str: unknown): str is string => typeof str === 'string'
+
 /**
  * Details of an {@link PermissionsDeniedError} error.
  *
@@ -10,6 +12,8 @@ import { ScalewayError } from '../scw-error.js'
 export type PermissionsDeniedErrorDetails = {
   readonly resource: string
   readonly action: string
+  readonly service: string
+  readonly srn: string
 }
 
 /**
@@ -21,7 +25,7 @@ export type PermissionsDeniedErrorDetails = {
  * @internal
  */
 const buildMessage = (list: PermissionsDeniedErrorDetails[]): string =>
-  `insufficient permissions: ${list.map(({ action, resource }) => `${action} ${resource}`).join('; ')}`
+  `insufficient permissions: ${list.map(({ service, action, resource, srn }) => `${service}:${resource}:${action} on ${srn} `).join('; ')}`
 
 /**
  * PermissionsDenied error happens when one or many permissions are not accorded to the user making the request.
@@ -50,10 +54,12 @@ export class PermissionsDeniedError extends ScalewayError {
       status,
       obj,
       obj.details.reduce<PermissionsDeniedErrorDetails[]>((list, detail) => {
-        if (isJSONObject(detail) && typeof detail.resource === 'string' && typeof detail.action === 'string') {
+        if (isJSONObject(detail)) {
           list.push({
-            action: detail.action,
-            resource: detail.resource,
+            service: isString(detail.service) ? detail.service : '',
+            srn: isString(detail.srn) ? detail.srn : '',
+            action: isString(detail.action) ? detail.action : '',
+            resource: isString(detail.resource) ? detail.resource : '',
           })
         }
         return list

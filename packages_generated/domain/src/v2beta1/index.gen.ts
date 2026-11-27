@@ -129,6 +129,7 @@ export type {
   RegisterExternalDomainResponse,
   RegistrarApiBuyDomainsRequest,
   RegistrarApiCheckContactsCompatibilityRequest,
+  RegistrarApiCreateContactRequest,
   RegistrarApiCreateDomainHostRequest,
   RegistrarApiDeleteDomainHostRequest,
   RegistrarApiDeleteExternalDomainRequest,
@@ -180,3 +181,4 @@ export type {
   UpdateDNSZoneRecordsResponse,
   UpdateDNSZoneRequest,
 } from './types.gen.js'
+export * as ValidationRules from './validation-rules.gen.js'

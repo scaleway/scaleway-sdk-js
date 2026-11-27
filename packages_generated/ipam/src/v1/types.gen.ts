@@ -50,6 +50,7 @@ export type ResourceType =
   | 'edge_vpc_endpoint'
   | 'dviz_cluster'
   | 'nats_cluster'
+  | 'kvdb_instance'
 
 export interface Resource {
   /**

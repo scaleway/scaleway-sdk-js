@@ -170,6 +170,7 @@ export const unmarshalPlacementGroup = (data: unknown): PlacementGroup => {
     createdAt: unmarshalDate(data.created_at) ?? null,
     id: data.id,
     name: data.name,
+    policyRespected: data.policy_respected,
     policyType: data.policy_type,
     projectId: data.project_id,
     srn: data.srn,

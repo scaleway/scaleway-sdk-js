@@ -169,6 +169,14 @@ export interface Endpoint {
    * One-of ('details'): at most one of 'privateNetwork', 'publicNetwork' could be set.
    */
   publicNetwork?: EndpointPublicDetails | null
+  /**
+   * SRN of the endpoint.
+   */
+  srn: string
+  /**
+   * Region of the endpoint.
+   */
+  region: ScwRegion
 }
 
 
@@ -347,6 +355,10 @@ export interface Cluster {
    * One-of ('availability'): at most one of 'multiAz', 'monoAz' could be set.
    */
   monoAz?: ClusterMonoAZDetails | null
+  /**
+   * SRN of the cluster.
+   */
+  srn: string
 }
 
 
@@ -387,11 +399,34 @@ export interface NodeType {
    * Cluster range associated with the node type offer.
    */
   clusterRange: string
+  /**
+   * SRN of the node type.
+   */
+  srn: string
+  /**
+   * Region on which the node type is available.
+   */
+  region: ScwRegion
 }
 
 
 export interface User {
+  /**
+   * Name of the user.
+   */
   username: string
+  /**
+   * ID of the user's cluster.
+   */
+  clusterId: string
+  /**
+   * Region of the cluster associated with the user.
+   */
+  region: ScwRegion
+  /**
+   * SRN of the user.
+   */
+  srn: string
 }
 
 
@@ -408,6 +443,14 @@ export interface Version {
    * Cluster configuration settings you are able to change for clusters running this version. Each item in `available_settings` describes one configurable cluster setting.
    */
   availableSettings: VersionAvailableSetting[]
+  /**
+   * SRN of the version.
+   */
+  srn: string
+  /**
+   * Region of the version.
+   */
+  region: ScwRegion
 }
 
 

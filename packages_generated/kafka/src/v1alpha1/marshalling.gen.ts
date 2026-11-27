@@ -71,6 +71,8 @@ export const unmarshalEndpoint = (data: unknown): Endpoint => {
     port: data.port,
     privateNetwork: data.private_network ? unmarshalEndpointPrivateNetworkDetails(data.private_network) : null,
     publicNetwork: data.public_network ? unmarshalEndpointPublicDetails(data.public_network) : null,
+    region: data.region,
+    srn: data.srn,
   } as Endpoint
 }
 
@@ -146,6 +148,7 @@ export const unmarshalCluster = (data: unknown): Cluster => {
     projectId: data.project_id,
     region: data.region,
     settings: unmarshalArrayOfObject(data.settings, unmarshalClusterSetting),
+    srn: data.srn,
     status: data.status,
     tags: data.tags,
     updatedAt: unmarshalDate(data.updated_at) ?? null,
@@ -162,6 +165,9 @@ export const unmarshalUser = (data: unknown): User => {
   }
 
   return {
+    clusterId: data.cluster_id,
+    region: data.region,
+    srn: data.srn,
     username: data.username,
   } as User
 }
@@ -210,6 +216,8 @@ const unmarshalNodeType = (data: unknown): NodeType => {
     disabled: data.disabled,
     memoryBytes: data.memory_bytes,
     name: data.name,
+    region: data.region,
+    srn: data.srn,
     stockStatus: data.stock_status,
     vcpus: data.vcpus,
   } as NodeType
@@ -324,6 +332,8 @@ const unmarshalVersion = (data: unknown): Version => {
   return {
     availableSettings: unmarshalArrayOfObject(data.available_settings, unmarshalVersionAvailableSetting),
     endOfLifeAt: unmarshalDate(data.end_of_life_at) ?? null,
+    region: data.region,
+    srn: data.srn,
     version: data.version,
   } as Version
 }
