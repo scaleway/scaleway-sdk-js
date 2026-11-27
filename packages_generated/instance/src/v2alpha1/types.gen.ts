@@ -2180,8 +2180,17 @@ export type ListServerCompatibleTypesRequest = {
    * Zone to target. If none is passed will use default zone from the config.
    */
   zone?: ScwZone | null
+  /**
+   * ID of the server.
+   */
   serverId: string
+  /**
+   * Token for pagination.
+   */
   pageToken?: string | null
+  /**
+   * Number of server types to return per page.
+   */
   pageSize?: number | null
 }
 
