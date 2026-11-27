@@ -7,6 +7,7 @@ import {
   withLegacyInterceptors,
   withProfile,
   withTimeout,
+  withTokenProvider,
   withUserAgent,
   withUserAgentSuffix,
 } from '../client-ini-factory.js'
@@ -210,6 +211,38 @@ describe('withProfile', () => {
       const { headers } = await reqInterceptor({ request })
       expect(headers.get('x-auth-token')).toStrictEqual(FILLED_PROFILE.secretKey)
     }
+  })
+})
+
+describe('withTokenProvider', () => {
+  it('adds a token provider interceptor to settings', () => {
+    // oxlint-disable-next-line typescript/promise-function-async -- test helper
+    const getToken = (): Promise<string> => Promise.resolve('provider-token')
+    const settings = withTokenProvider(getToken)(DEFAULT_SETTINGS)
+
+    expect(settings.interceptors.length).toBe(1)
+    expect(settings.interceptors[0].request).toBeDefined()
+  })
+
+  it('resolves the token provider on each request', async () => {
+    // oxlint-disable-next-line typescript/promise-function-async -- test helper
+    const getToken = (): Promise<string> => Promise.resolve('from-provider')
+    const settings = withTokenProvider(getToken)(DEFAULT_SETTINGS)
+    const interceptor = settings.interceptors[0].request
+
+    if (interceptor) {
+      const { headers } = await interceptor({ request: new Request(DEFAULT_SETTINGS.apiURL!) })
+      expect(headers.get('x-auth-token')).toStrictEqual('from-provider')
+    }
+  })
+
+  it('does not modify original settings object', () => {
+    // oxlint-disable-next-line typescript/promise-function-async -- test helper
+    const getToken = (): Promise<string> => Promise.resolve('token')
+    const settings = withTokenProvider(getToken)(DEFAULT_SETTINGS)
+
+    expect(settings).not.toBe(DEFAULT_SETTINGS)
+    expect(settings.interceptors).not.toBe(DEFAULT_SETTINGS.interceptors)
   })
 })
 
